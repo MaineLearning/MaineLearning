@@ -1,23 +1,29 @@
 ## Installation process (for new dev or staging installs)
 
 1) Create a new database on the local machine.
+
 2) Download the latest database dump from the production site (~/dbdumps/)
+
 3) Import the database dump to your newly created database
 
     mysql -u yourusername -p yourdatabasename < ~/path/to/the/downloaded/sqldump
 
 4) Create a new Apache-accessible directory
+
 5) Clone the Git repository into that directory:
 
     git clone git@github.com:MaineLearning/MaineLearning.git /path/to/your/local/directory/
     
 6) Once the clone is finished, copy env-sample.php to a new file env.php. Enter the approprate DB-specific config data into this new file.
+
 7) From the production site, download wp-content/blogs.dir and wp-content/uploads to the corresponding directories in your local installation.
+
 8) Create a new directive in your /etc/hosts file:
 
     127.0.0.1   mainelearning.net
 
 9) Create a new Apache virtual host on your local machine for mainelearning.net. Instructions for MAMP: http://foundationphp.com/tutorials/vhosts_mamp.php (google for other setups). Restart Apache when you're done for the changes to take effect.
+
 10) Visit http://mainelearning.net. You should see the site, with the Local Environment flag in the lower right.
 
 ## Development workflow
@@ -86,15 +92,15 @@ If you get a message that Git has prevented your push because it can't fast-forw
 
 WordPress keeps a lot of configuration data in the database rather than the file system, making it more difficult to track. If you commit a change that requires a change to the database - for instance, if you add a theme that needs to be enabled, or a plugin that needs to be activated, or you change settings somewhere - make sure to do both of the following:
 
-    - Mention this change in the commit message, using the flag ACTION_REQUIRED. For example,
+- Mention this change in the commit message, using the flag ACTION_REQUIRED. For example,
     
-        git commit -m "Adds the WordPress plugin BuddyPress Awesometown. Fixes #33; see also #18. ACTION_REQUIRED: Network activate the plugin."
+    git commit -m "Adds the WordPress plugin BuddyPress Awesometown. Fixes #33; see also #18. ACTION_REQUIRED: Network activate the plugin."
 
-    - Record the change under the appropriate release header in actions_required.md. For example,
+- Record the change under the appropriate release header in actions_required.md. For example,
     
-        ### 1.3.7
+    ### 1.3.7
         
-        - Network activate the plugin BuddyPress Awesometown
+    - Network activate the plugin BuddyPress Awesometown
         
 #### The short version
 
