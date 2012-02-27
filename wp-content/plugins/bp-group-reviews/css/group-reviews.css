@@ -1,0 +1,59 @@
+div.star-holder {
+	position: relative;
+}
+
+div.star-holder div.star {
+	float: left;
+	width: 16px;
+}
+
+
+.already-rated p {
+	margin-left: 76px;
+}
+
+.already-rated blockquote {
+	position: relative;
+	margin-left: 76px;
+	font-style: italic;
+	padding: 10px 100px 10px 10px;
+	background: #edeee6;
+}
+
+.already-rated .rest-stars {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+.widget span.rating-num {
+	display: block;
+	font-size: 8pt;
+	clear: both;
+}
+
+#group-reviews div.pagination {
+	margin: 0 0 30px 0;
+}
+
+#group-reviews #whats-new-options {
+	overflow: inherit;
+	min-height: 30px;
+}
+
+#group-reviews form#whats-new-form div#whats-new-submit {
+	margin-top: 0px;
+	height: 30px;
+}
+
+#group-reviews form#whats-new-form input#whats-new-submit {
+	margin-top: 8px;
+	float: none;
+}
+
+#review-rating {
+	margin-top: 8px;
+	vertical-align: top;
+	width: 200px;
+	float: left;
+}

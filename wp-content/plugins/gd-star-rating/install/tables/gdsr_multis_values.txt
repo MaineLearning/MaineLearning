@@ -1,0 +1,11 @@
+CREATE TABLE `%sgdsr_multis_values` (
+  `id` bigint(20) unsigned NOT NULL,
+  `source` varchar(3) NOT NULL DEFAULT 'dta',
+  `item_id` int(11) NOT NULL,
+  `user_voters` int(11) DEFAULT '0',
+  `user_votes` decimal(11,1) DEFAULT '0.0',
+  `visitor_voters` int(11) DEFAULT '0',
+  `visitor_votes` decimal(11,1) DEFAULT '0.0',
+  KEY `id` (`id`),
+  KEY `item_id` (`item_id`),
+  KEY `source` (`source`))%COLLATE%;

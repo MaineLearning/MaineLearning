@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-reviews\n"
+"POT-Creation-Date: 2010-11-19 15:30+0000\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/classes.php:10
+#: templates/index.php:16
+#@ bpgr
+msgid "Reviews"
+msgstr "نقدها"
+
+#: includes/classes.php:29
+#@ bpgr
+msgid "Please make sure you fill in the review, and don't forget to provide a rating!"
+msgstr "لطفا نقد خود را بنویسید و امتیازدهی را هم فراموش نکنید!"
+
+#: includes/classes.php:83
+#, php-format
+#@ bpgr
+msgid "%s reviewed %s:"
+msgstr "%s گروه %s را نقد کرد:"
+
+#: includes/templatetags.php:42
+#: includes/templatetags.php:81
+#, php-format
+#@ default
+msgid "(based on %s rating)"
+msgid_plural "(based on %s ratings)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/templatetags.php:44
+#: includes/templatetags.php:51
+#: includes/templatetags.php:53
+#: includes/templatetags.php:90
+#: includes/templatetags.php:97
+#@ default
+#@ bpgr
+msgid "1 star"
+msgstr "یک ستاره"
+
+#: includes/templatetags.php:45
+#: includes/templatetags.php:56
+#: includes/templatetags.php:58
+#: includes/templatetags.php:91
+#: includes/templatetags.php:100
+#: templates/post.php:21
+#@ default
+#@ bpgr
+msgid "2 stars"
+msgstr "دو ستاره"
+
+#: includes/templatetags.php:46
+#: includes/templatetags.php:61
+#: includes/templatetags.php:63
+#: includes/templatetags.php:92
+#: includes/templatetags.php:103
+#: templates/post.php:21
+#@ default
+#@ bpgr
+msgid "3 stars"
+msgstr "سه ستاره"
+
+#: includes/templatetags.php:47
+#: includes/templatetags.php:66
+#: includes/templatetags.php:68
+#: includes/templatetags.php:93
+#: includes/templatetags.php:106
+#: templates/post.php:21
+#@ default
+#@ bpgr
+msgid "4 stars"
+msgstr "چهار ستاره"
+
+#: includes/templatetags.php:48
+#: includes/templatetags.php:71
+#: includes/templatetags.php:73
+#: includes/templatetags.php:94
+#: includes/templatetags.php:109
+#: templates/post.php:21
+#@ default
+#@ bpgr
+msgid "5 stars"
+msgstr "پنج ستاره"
+
+#: templates/post.php:21
+#@ default
+msgid "1 stars"
+msgstr ""
+
+#: templates/entry.php:15
+#, php-format
+#@ bpgr
+msgid "By %s"
+msgstr "توسط %s"
+
+#: templates/entry.php:15
+#, php-format
+#@ bpgr
+msgid "%s ago"
+msgstr "%s پیش"
+
+#: templates/entry.php:15
+#@ bpgr
+msgid "#"
+msgstr "ببینید"
+
+#: templates/entry.php:28
+#@ buddypress
+msgid "Comment"
+msgstr ""
+
+#: templates/entry.php:48
+#@ buddypress
+msgid "Post"
+msgstr ""
+
+#: templates/entry.php:48
+#@ buddypress
+msgid "or press esc to cancel."
+msgstr ""
+
+#: templates/index.php:39
+#, php-format
+#@ bpgr
+msgid "There are no reviews yet. Why not <a href=\"%s\">be the first to write one</a>?"
+msgstr "هنوز از این گروه نقدی نشده است. آیا مایلید <a href=\"%s\">اولین نفری باشید که این گروه را نقد می کند</a>؟"
+
+#: templates/post.php:11
+#, php-format
+#@ bpgr
+msgid "What are your thoughts on %s, %s?"
+msgstr "نظرتان راجع به گروه %s چیست، %s؟"
+
+#: templates/post.php:21
+#@ bpgr
+msgid "Rate it:"
+msgstr "امتیاز دهید:"
+
+#: templates/post.php:27
+#@ bpgr
+msgid "Post My Review"
+msgstr "نقد مرا منتشر کن"
+

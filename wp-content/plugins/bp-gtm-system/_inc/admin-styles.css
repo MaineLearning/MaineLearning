@@ -1,0 +1,38 @@
+div.def_roles{display:block;width:98%}
+div.def_roles ul.def_roles_list{display:block;margin:0 0 0 10px}
+    div.def_roles ul.def_roles_list li.one{float:left;width:100%}
+        div.def_roles ul.def_roles_list li.one span.actions{float:right;margin: 5px 0 0;}
+    div.def_roles ul.def_roles_list div#toggler{margin-left:15px;padding-bottom:15px}
+        div.def_roles ul.def_roles_list div#toggler div.box{display:none}
+            ul.def_roles_list div#toggler div.left_block{float:left;width:48%}
+            ul.def_roles_list div#toggler div.right_block{float:right;width:48%}
+        div.def_roles ul.def_roles_list div#toggler div.box p.role_title{font-weight:bold}
+            div.def_roles ul.def_roles_list div#toggler div.box ul li{margin-left:10px;width:100%}
+
+div.new_role{margin-top:15px}
+div.def_roles input#new_role{margin-left:10px;width:300px}
+div.def_roles a#add_new_role{float:right}
+
+table.admin_labels td{padding: 2px 0;}
+
+table#bp-gtm-admin-table td.own_roles{text-align:center;width:100px}
+
+#bp-gtm-form #side-info-column .save-button{
+    text-align:center;
+    margin:0 0 15px 0;
+}
+#bp-gtm-form #side-info-column .button-primary{
+    padding:4px 30px;
+}
+#bp-gtm-form .admin-temes{
+    width: 95%;
+}
+#bp-gtm-form .center{
+    text-align: center;
+}
+#bp-gtm-form .own_roles{
+    display: none;
+}
+#bp-gtm-form .center{
+    
+}

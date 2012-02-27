@@ -1,0 +1,47 @@
+.blockleft { float: left; padding: 10px; }
+.blockright { float: right; padding: 10px; }
+
+/* BLUE */
+.tableblue { border: 1px dashed #87ceeb; }
+.tableblue tr.mtrow { background-color: #f5fffa; }
+.tableblue tr.mtrow.alternate { background-color: #f0f8ff; }
+
+.textblue { color: navy; }
+.textblue strong { color: #8b0000; }
+.textblue.voted { color: #1e90ff; }
+.textblue.voted strong { color: #ff4500; }
+
+.buttonblue.gdinactive { border-color: #708090; background-color: #e6e6fa; }
+.buttonblue.gdactive { border-color: #00008b; background-color: #add8e6; }
+.buttonblue.gdinactive a { color: gray; }
+.buttonblue.gdactive a { color: #0000cd; }
+
+/* RED */
+.tablered { border: 1px dashed #ffd700; }
+.tablered tr.mtrow { background-color: #ffffe0; }
+.tablered tr.mtrow.alternate { background-color: #fffacd; }
+
+.textred { color: maroon; }
+.textred strong { color: black; }
+.textred.voted { color: #ff6347; }
+.textred.voted strong { color: #dc143c; }
+
+.buttonred.gdinactive { border-color: #708090; background-color: #e6e6fa; }
+.buttonred.gdactive { border-color: maroon; background-color: #ffd700; }
+.buttonred.gdinactive a { color: gray; }
+.buttonred.gdactive a { color: red; }
+
+/* GREEN */
+.tablegreen { border: 1px dashed #228b22; }
+.tablegreen tr.mtrow { background-color: #fffff0; }
+.tablegreen tr.mtrow.alternate { background-color: #f0fff0; }
+
+.textgreen { color: #006400; }
+.textgreen strong { color: #191970; }
+.textgreen.voted { color: #3cb371; }
+.textgreen.voted strong { color: #a52a2a; }
+
+.buttongreen.gdinactive { border-color: #708090; background-color: #90ee90; }
+.buttongreen.gdactive { border-color: #32cd32; background-color: #228b22; }
+.buttongreen.gdinactive a { color: gray; }
+.buttongreen.gdactive a { color: #00fa9a; }

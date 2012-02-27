@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PS Taxonomy Expander\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-03 11:00+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Hitoshi Omagari <jim912@nifty.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:5
+msgid "PS Taxonomy Expander makes easy to use categories, tags and custom taxonomies on editing posts."
+msgstr "PS Taxonomy Expanderは、カテゴリー・タグ、そしてカスタム分類の記事編集時における使い勝手を向上させます。"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:167
+#, php-format
+msgid "Default %s %s"
+msgstr "%s用%sの初期設定"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:177
+#, php-format
+msgid "Default Media %s"
+msgstr "メディア用%sの初期設定"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:181
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:497
+msgid "Option to register taxonomies"
+msgstr "タクソノミー登録方法"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:192
+msgid "unset"
+msgstr "設定しない"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:199
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:367
+#, php-format
+msgid "%s is not registerd."
+msgstr "%sが登録されていません。"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:212
+msgid "check the taxonomy box to turn into single selection."
+msgstr "単一選択にするタクソノミーにチェックを入れて下さい。"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:457
+msgid "Add taxonomies on Right Now"
+msgstr "現在の状況にタクソノミーを追加"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:462
+msgid "Display taxonomies on Right Now in the Dashboard."
+msgstr "ダッシュボードの現在の状況にカスタム分類を表示する。"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:484
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:494
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:547
+msgid "Term order"
+msgstr "Term order"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:526
+msgid "Non Updated"
+msgstr "更新されませんでした"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:528
+msgid "Updated successfully."
+msgstr "正しく更新されました"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:565
+#, php-format
+msgid "Sub %s"
+msgstr "サブ%s"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:572
+#, php-format
+msgid "Move to child %s"
+msgstr "子%sに移動"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:575
+#, php-format
+msgid "Back to top %s"
+msgstr "トップ%sに戻る"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:578
+#, php-format
+msgid "Back to parent %s"
+msgstr "親%sに戻る"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:580
+#, php-format
+msgid "%s order"
+msgstr "%s順序"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:769
+#, php-format
+msgid "No %s"
+msgstr "%sなし"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:800
+#, php-format
+msgid "Display on the list of %s"
+msgstr "%s一覧に表示"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:848
+#, php-format
+msgid "View all %s"
+msgstr "%s指定なし"
+

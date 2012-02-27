@@ -1,0 +1,2092 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-table-reloaded\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-table-reloaded\n"
+"POT-Creation-Date: 2010-01-04 18:55+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ashish <ashish@outshinesolutions.com>\n"
+"Language-Team: OutshineSolutions <pratyush.krishna@outshinesolutions.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: hindi\n"
+"X-Poedit-Country: india\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural=n>=2 && n<=4 ? 1 : n==1 ? 0 : 2;\n"
+
+#: classes/export.class.php:28
+#: classes/import.class.php:36
+msgid "CSV - Character-Separated Values"
+msgstr "सीएसवी - अक्षर से अलग किए गए मान"
+
+#: classes/export.class.php:29
+#: classes/import.class.php:37
+msgid "HTML - Hypertext Markup Language"
+msgstr "HTML -  Hypertext Markup भाषा"
+
+#: classes/export.class.php:30
+#: classes/import.class.php:38
+msgid "XML - eXtended Markup Language"
+msgstr "XML - eXtended Markup भाषा"
+
+#: classes/export.class.php:33
+msgid "; (semicolon)"
+msgstr "; (सेमीकोलन)"
+
+#: classes/export.class.php:34
+msgid ", (comma)"
+msgstr ", (अल्पविराम)"
+
+#: classes/export.class.php:35
+msgid ": (colon)"
+msgstr ": (कोलन )"
+
+#: classes/export.class.php:36
+msgid ". (dot)"
+msgstr ". (डोट )"
+
+#: classes/export.class.php:37
+msgid "| (pipe)"
+msgstr "| (pipe)"
+
+#: classes/helper.class.php:40
+#: views/view-about.php:22
+#, php-format
+msgid "More information about WP-Table Reloaded can be found on the <a href=\"%s\">plugin's website</a> or on its page in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "WP के बारे में अधिक जानकारी के टैबिल रीलोडेड पर पाया जा सकता है <a href=\"%s\">plugin's website</a> या अपने पृष्ठ पर <a href=\"%s\">WordPress Plugin Directory</a>."
+
+#: classes/helper.class.php:41
+#: views/view-about.php:22
+#, php-format
+msgid "For technical information, see the <a href=\"%s\">documentation</a>."
+msgstr "तकनीकी जानकारी के लिए,  see the <a href=\"%s\">documentation</a>."
+
+#: classes/helper.class.php:42
+#: views/view-about.php:29
+#, php-format
+msgid "<a href=\"%s\">Support</a> is provided through the <a href=\"%s\">WordPress Support Forums</a>."
+msgstr "<a href=\"%s\">Support</a> के माध्यम से प्रदान की जाती है  <a href=\"%s\">WordPress Support Forums</a>."
+
+#: classes/helper.class.php:43
+#: views/view-about.php:29
+#, php-format
+msgid "Before asking for support, please carefully read the <a href=\"%s\">Frequently Asked Questions</a> where you will find answered to the most common questions, and search through the forums."
+msgstr "समर्थन के लिए  पहले से पूछ रहा, कृपया ध्यान से पढ़ें <a href=\"%s\">Frequently Asked Questions</a> आप सबसे आम सवालों के जवाब कहाँ मिलेगा, मंचों के माध्यम से और खोज. "
+
+#: classes/helper.class.php:44
+#: views/view-about.php:36
+#, php-format
+msgid "If you like the plugin, <a href=\"%s\"><strong>a donation</strong></a> is recommended."
+msgstr "तुम अगर प्लगइन की तरह, <a href=\"%s\"><strong>a donation</strong></a>सिफारिश की है."
+
+#: classes/helper.class.php:74
+msgid "Thank you for using <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>."
+msgstr "आप का उपयोग करने के लिए धन्यवाद  <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>. "
+
+#: classes/helper.class.php:74
+#, php-format
+msgid "Support the plugin with your <a href=\"%s\">donation</a>!"
+msgstr "प्लगइन समर्थन तुम्हारे साथ <a href=\"%s\">donation</a>!"
+
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Table cells can span across more than one column or row."
+msgstr "टेबल cells को एक से अधिक cells या coloumn में विस्तार कर सकते हैं."
+
+#: classes/helper.class.php:104
+msgid "Combining consecutive cells within the same row is called \"colspanning\"."
+msgstr "लगातार cells को एक ही row में जोरने को \"colspanning\" कहते हैं"
+
+#: classes/helper.class.php:104
+msgid "To combine cells, add the keyword #colspan# to the cell to the right of the one with the content for the combined cell by using the corresponding button."
+msgstr "cells को गठबंधन के लिए, इसी बटन का उपयोग करके कीवर्ड #colspan# संयुक्त सेल के लिए सामग्री के साथ एक के अधिकार के लिए सेल के लिए जोड़ें."
+
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Repeat this to add the keyword to all cells that shall be connected."
+msgstr "इस क्रिया को सभी cells कि जुड़े जाएगा खोजशब्द जोड़ने के लिए."
+
+#: classes/helper.class.php:109
+msgid "Combining consecutive cells within the same column is called \"rowspanning\"."
+msgstr "लगातार cells को एक ही column में जोरने को \"rowspanning\" कहते हैं"
+
+#: classes/helper.class.php:109
+msgid "To combine cells, add the keyword #rowspan# to the cell below the one with the content for the combined cell by using the corresponding button."
+msgstr "cells को गठबंधन के लिए, इसी बटन का उपयोग करके कीवर्ड #rowspan# संयुक्त सेल के लिए सामग्री के साथ एक के अधिकार के लिए सेल के लिए जोड़ें."
+
+#: classes/helper.class.php:118
+msgid "Help"
+msgstr "सहायता"
+
+#: classes/render.class.php:140
+#: views/view-list.php:60
+msgid "Edit"
+msgstr "संपादित करें"
+
+#: controllers/controller-admin.php:292
+msgid "Czech"
+msgstr "Czech"
+
+#: controllers/controller-admin.php:293
+msgid "German"
+msgstr "German"
+
+#: controllers/controller-admin.php:294
+msgid "English"
+msgstr "English"
+
+#: controllers/controller-admin.php:295
+msgid "Hindi"
+msgstr "Hindi"
+
+#: controllers/controller-admin.php:296
+msgid "Japanese"
+msgstr "Japanese"
+
+#: controllers/controller-admin.php:297
+msgid "Brazilian Portuguese"
+msgstr "Brazilian Portuguese"
+
+#: controllers/controller-admin.php:298
+msgid "Slovak"
+msgstr "Slovak"
+
+#: controllers/controller-admin.php:299
+msgid "Swedish"
+msgstr "Swedish"
+
+#: controllers/controller-admin.php:301
+msgid "Albanian"
+msgstr "Albanian"
+
+#: controllers/controller-admin.php:302
+msgid "Belorussian"
+msgstr "Belorussian"
+
+#: controllers/controller-admin.php:303
+msgid "Estonian"
+msgstr "Estonian"
+
+#: controllers/controller-admin.php:304
+msgid "Finnish"
+msgstr "Finnish"
+
+#: controllers/controller-admin.php:305
+msgid "French"
+msgstr "French"
+
+#: controllers/controller-admin.php:306
+msgid "Italian"
+msgstr "Italian"
+
+#: controllers/controller-admin.php:307
+msgid "Polish"
+msgstr "Polish"
+
+#: controllers/controller-admin.php:308
+msgid "Russian"
+msgstr "Russian"
+
+#: controllers/controller-admin.php:309
+msgid "Spanish"
+msgstr "Spanish"
+
+#: controllers/controller-admin.php:310
+msgid "Turkish"
+msgstr "Turkish"
+
+#: controllers/controller-admin.php:336
+#, php-format
+msgid "Welcome to WP-Table Reloaded %s. If you encounter any questions or problems, please refer to the <a href=\"%s\">FAQ</a>, the <a href=\"%s\">documentation</a>, and the <a href=\"%s\">support</a> section."
+msgstr "WP में आपका स्वागत है टैबिल रीलोडेड %s.यदि आपके पास कोई प्रश्न या समस्याओं है, कृपया देखे <a href=\"%s\">FAQ</a>, the <a href=\"%s\">documentation</a>, and the <a href=\"%s\">  support</a> section"
+
+#: controllers/controller-admin.php:337
+#, php-format
+msgid "Thank you for upgrading to WP-Table Reloaded %s."
+msgstr "तुम WP के उन्नयन टैबिल रीलोडेड के लिए धन्यवाद %s."
+
+#: controllers/controller-admin.php:337
+msgid "Among other things, this version adds support for \"colspan\" and \"rowspan\" of table cells and enables the WP Search to search through tables."
+msgstr "अन्य बातों के अलावा, इस संस्करण टेबल के  \"colspan  \" और  \"rowspan\"  के लिए समर्थन और WP खोज को तब्लेस में खोजने की सुविदा के लिए समर्थन करता है ."
+
+#: controllers/controller-admin.php:337
+#, php-format
+msgid "Please read the <a href=\"%s\">release announcement</a> for more information."
+msgstr "अधिक जानकारी के लिए कृपया  <a href=\"%s\">जारी घोषणा</a>  पढ़ें."
+
+#: controllers/controller-admin.php:337
+#, php-format
+msgid "If you like the new features and enhancements, I would appreciate a small <a href=\"%s\">donation</a>. Thank you."
+msgstr "यदि आपको नई सुविधाओं और वृद्धि पसंद है मुझे अच्छा होगा एक छोटा सा, <a href=\"%s\">donation</a>. धन्यवाद."
+
+#: controllers/controller-admin.php:342
+msgid "Hide this message"
+msgstr "इस संदेश को छिपाएँ"
+
+#: controllers/controller-admin.php:350
+msgid "Thanks for using this plugin! You've installed WP-Table Reloaded over a month ago."
+msgstr "इस प्लगइन का उपयोग करने के लिए धन्यवाद! आपने WP टैबिल रीलोडेड एक महीने से पहले स्थापितकिया था ."
+
+#: controllers/controller-admin.php:350
+#, php-format
+msgid "If it works and you are satisfied with the results of managing your %s table, isn't it worth at least one dollar or euro?"
+msgid_plural "If it works and you are satisfied with the results of managing your %s tables, isn't it worth at least one dollar or euro?"
+msgstr[0] "अगर यह काम करता है और आप अपने %s प्रबंध के परिणामों से संतुष्ट  हैं, क्या ये कम से कम एक डॉलर या यूरो के बराबर भी नहीं है? "
+msgstr[1] "अगर यह काम करता है और आप अपने %s प्रबंध के परिणामों से संतुष्ट  हैं, क्या ये कम से कम एक डॉलर या यूरो के बराबर भी नहीं है? "
+msgstr[2] "अगर यह काम करता है और आप अपने %s प्रबंध के परिणामों से संतुष्ट  हैं, क्या ये कम से कम एक डॉलर या यूरो के बराबर भी नहीं है? "
+
+#: controllers/controller-admin.php:351
+#, php-format
+msgid "<a href=\"%s\">Donations</a> help me to continue support and development of this <i>free</i> software - things for which I spend countless hours of my free time! Thank you!"
+msgstr "<a href=\"%s\">Donations</a> मेरी मदद करो समर्थन और इस का विकास जारी रखने के लिए <i>free</i> सॉफ्टवेयर - कुछ है जिसके लिए मैं अपने खाली समय के अनगिनत घंटे खर्च करता हु! धन्यवाद!"
+
+#: controllers/controller-admin.php:352
+msgid "Sure, no problem!"
+msgstr "बेशक, कोई समस्या नहीं है!"
+
+#: controllers/controller-admin.php:353
+msgid "I already donated."
+msgstr "मैं पहले से ही दान की."
+
+#: controllers/controller-admin.php:354
+msgid "No, thanks. Don't ask again."
+msgstr "नहीं, धन्यवाद. फिर मत पूछो."
+
+#: controllers/controller-admin.php:382
+#, php-format
+msgid "Table &quot;%s&quot; added successfully."
+msgstr "टेबल &quot; %s &quot;  सफलतापूर्वक जोड़ दिया."
+
+#: controllers/controller-admin.php:413
+#, php-format
+msgid "Table edited successfully. This Table now has the ID %s. You'll need to adjust existing shortcodes accordingly."
+msgstr "टेबल सफलतापूर्वक संपादित किया. इस तालिका के पास अब आईडी %s है. आप मौजूदा shortcodes तदनुसार समायोजित करने की आवश्यकता होगी."
+
+#: controllers/controller-admin.php:415
+#, php-format
+msgid "The ID could not be changed from %s to %s, because there already is a Table with that ID."
+msgstr "आईडी %s  से %s नहीं बदला जा सकता है , क्योंकि वहाँ पहले से ही है कि पहचान पत्र के साथ एक टेबल है. "
+
+#: controllers/controller-admin.php:418
+msgid "Table edited successfully."
+msgstr "टेबल सफलतापूर्वक संपादित किया."
+
+#: controllers/controller-admin.php:464
+msgid "Rows swapped successfully."
+msgstr "पंक्तियों को सफलतापूर्वक बदली गयी . "
+
+#: controllers/controller-admin.php:485
+msgid "Columns swapped successfully."
+msgstr "कॉलम सफलतापूर्वक बदली गयी ."
+
+#: controllers/controller-admin.php:514
+msgid "Table sorted successfully."
+msgstr "टेबल सफलतापूर्वक हल."
+
+#: controllers/controller-admin.php:535
+msgid "Row moved successfully."
+msgstr "पंक्ति सफलतापूर्वक चला गया."
+
+#: controllers/controller-admin.php:560
+msgid "Column moved successfully."
+msgstr "कॉलम सफलतापूर्वक चला गया."
+
+#: controllers/controller-admin.php:568
+msgid "Row could not be deleted."
+msgid_plural "Rows could not be deleted."
+msgstr[0] "पंक्ति को नष्ट नहीं किया जा सका."
+msgstr[1] "पंक्ति को नष्ट नहीं किया जा सका."
+msgstr[2] "पंक्ति को नष्ट नहीं किया जा सका."
+
+#: controllers/controller-admin.php:577
+msgid "Row deleted successfully."
+msgid_plural "Rows deleted successfully."
+msgstr[0] "पंक्ति को सफलतापूर्वक नष्ट कर दिया."
+msgstr[1] "पंक्ति को सफलतापूर्वक नष्ट कर दिया."
+msgstr[2] "पंक्ति को सफलतापूर्वक नष्ट कर दिया."
+
+#: controllers/controller-admin.php:587
+msgid "Column could not be deleted."
+msgid_plural "Columns could not be deleted."
+msgstr[0] "कॉलम नष्ट नहीं किया जा सका."
+msgstr[1] "कॉलम नष्ट नहीं किया जा सका."
+msgstr[2] "कॉलम नष्ट नहीं किया जा सका."
+
+#: controllers/controller-admin.php:600
+msgid "Column deleted successfully."
+msgid_plural "Columns deleted successfully."
+msgstr[0] "कॉलम सफलतापूर्वक नष्ट कर दिया."
+msgstr[1] "कॉलम सफलतापूर्वक नष्ट कर दिया."
+msgstr[2] "कॉलम सफलतापूर्वक नष्ट कर दिया."
+
+#: controllers/controller-admin.php:623
+msgid "Row inserted successfully."
+msgid_plural "Rows inserted successfully."
+msgstr[0] "पंक्ति को सफलतापूर्वक डाला."
+msgstr[1] "पंक्ति को सफलतापूर्वक डाला."
+msgstr[2] "पंक्ति को सफलतापूर्वक डाला."
+
+#: controllers/controller-admin.php:650
+msgid "Column inserted successfully."
+msgid_plural "Columns inserted successfully."
+msgstr[0] "कॉलम को सफलतापूर्वक डाला."
+msgstr[1] "कॉलम को सफलतापूर्वक डाला."
+msgstr[2] "कॉलम को सफलतापूर्वक डाला."
+
+#: controllers/controller-admin.php:665
+msgid "Row added successfully."
+msgid_plural "Rows added successfully."
+msgstr[0] "पंक्ति को सफलतापूर्वक जोड़ दिया."
+msgstr[1] "पंक्ति को सफलतापूर्वक जोड़ दिया."
+msgstr[2] "पंक्ति को सफलतापूर्वक जोड़ दिया."
+
+#: controllers/controller-admin.php:679
+msgid "Column added successfully."
+msgid_plural "Columns added successfully."
+msgstr[0] "कॉलम को सफलतापूर्वक जोड़ दिया."
+msgstr[1] "कॉलम को सफलतापूर्वक जोड़ दिया."
+msgstr[2] "कॉलम को सफलतापूर्वक जोड़ दिया."
+
+#: controllers/controller-admin.php:686
+msgid "Could not add Custom Data Field, because you did not enter a name."
+msgstr " कस्टम डेटा फील्ड नहीं जोड़ा जा सका, क्योंकि तुमने  एक नाम दर्ज नहीं किया."
+
+#: controllers/controller-admin.php:691
+msgid "Could not add Custom Data Field, because the name you entered is reserved for other table data."
+msgstr "कस्टम डेटा फील्ड नहीं जोड़ा जा सका, क्योंकि आपके द्वारा दर्ज नाम अन्य तालिका डेटा के लिए आरक्षित है."
+
+#: controllers/controller-admin.php:697
+msgid "Could not add Custom Data Field, because the name contained illegal characters."
+msgstr " कस्टम डेटा फील्ड नहीं जोड़ा जा सका, क्योंकि नाम में अवैध अक्षर शामिल हैं."
+
+#: controllers/controller-admin.php:701
+msgid "Could not add Custom Data Field, because a Field with that name already exists."
+msgstr " कस्टम डेटा फील्ड नहीं जोड़ा जा सका, क्योंकि उस नाम के साथ एक फील्ड पहले से ही मौजूद है."
+
+#: controllers/controller-admin.php:707
+msgid "Custom Data Field added successfully."
+msgstr "कस्टम डेटा फील्ड सफलतापूर्वक जोड़ दिया."
+
+#: controllers/controller-admin.php:747
+#: controllers/controller-admin.php:803
+msgid "Copy of"
+msgstr "कॉपी के "
+
+#: controllers/controller-admin.php:751
+msgid "Table copied successfully."
+msgid_plural "Tables copied successfully."
+msgstr[0] "टेबल की सफलतापूर्वक  नकल की."
+msgstr[1] "टेबल की सफलतापूर्वक  नकल की."
+msgstr[2] "टेबल की सफलतापूर्वक  नकल की."
+
+#: controllers/controller-admin.php:757
+msgid "Table deleted successfully."
+msgid_plural "Tables deleted successfully."
+msgstr[0] "टेबल सफलतापूर्वक नष्ट कर दिया."
+msgstr[1] "टेबल सफलतापूर्वक नष्ट कर दिया."
+msgstr[2] "टेबल सफलतापूर्वक नष्ट कर दिया."
+
+#: controllers/controller-admin.php:778
+#: controllers/controller-admin.php:916
+#: controllers/controller-admin.php:954
+msgid "Table imported successfully."
+msgid_plural "Tables imported successfully."
+msgstr[0] "तालिका आयातित सफलतापूर्वक."
+msgstr[1] "तालिका आयातित सफलतापूर्वक."
+msgstr[2] "तालिका आयातित सफलतापूर्वक."
+
+#: controllers/controller-admin.php:785
+msgid "You did not select any tables!"
+msgstr "आप किसी भी तालिका का चयन नहीं किया!"
+
+#: controllers/controller-admin.php:808
+#, php-format
+msgid "Table &quot;%s&quot; copied successfully."
+msgstr "तालिका &quot;%s&quot; सफलतापूर्वक नकल हैं."
+
+#: controllers/controller-admin.php:826
+#, php-format
+msgid "Table &quot;%s&quot; deleted successfully."
+msgstr "तालिका  &quot;%s&quot;  सफलतापूर्वक नष्ट कर दिया."
+
+#: controllers/controller-admin.php:834
+msgid "Custom Data Field deleted successfully."
+msgstr "कस्टम डेटा फील्ड सफलतापूर्वक नष्ट कर दिया."
+
+#: controllers/controller-admin.php:836
+msgid "Custom Data Field could not be deleted."
+msgstr "कस्टम डेटा फील्ड नष्ट नहीं किया जा सका."
+
+#: controllers/controller-admin.php:842
+msgid "Delete failed."
+msgstr "हटाएँ विफल रहे."
+
+#: controllers/controller-admin.php:870
+#: controllers/controller-admin.php:879
+#: controllers/controller-admin.php:889
+msgid "Imported Table"
+msgstr "आयातित तालिका"
+
+#: controllers/controller-admin.php:871
+#: controllers/controller-admin.php:890
+#, php-format
+msgid "from %s"
+msgstr "from %s"
+
+#: controllers/controller-admin.php:880
+msgid "via form"
+msgstr "फ़ॉर्म के द्वारा"
+
+#: controllers/controller-admin.php:900
+#: controllers/controller-admin.php:932
+msgid "Table could not be imported."
+msgstr "तालिका का आयात नहीं किया जा सका."
+
+#: controllers/controller-admin.php:912
+#, php-format
+msgid "Table %s (%s) replaced successfully."
+msgstr "टेबल %s (%s) को सफलतापूर्वक हटाई गयी. "
+
+#: controllers/controller-admin.php:962
+#: controllers/controller-admin.php:1148
+msgid "You do not have sufficient rights to perform this action."
+msgstr "आपके पास यह कार्य करने के लिए पर्याप्त अधिकारों नहीं है."
+
+#: controllers/controller-admin.php:969
+msgid "You did not upload a WP-Table Reloaded dump file."
+msgstr "आपने एक WP-तालिका रीलोडेड डंप फाइल अपलोड नहीं किया."
+
+#: controllers/controller-admin.php:978
+msgid "The uploaded dump file is empty. Please upload a valid dump file."
+msgstr "अपलोड की गई डंप फाइल खाली है. कृपया एक वैध डंप फाइल अपलोड करें."
+
+#: controllers/controller-admin.php:1007
+msgid "All Tables, Settings and Options were successfully imported."
+msgstr "सभी टेबल्स, सेटिंग्स और विकल्प को सफलतापूर्वक आयात किया गया."
+
+#: controllers/controller-admin.php:1036
+#, php-format
+msgid "Table &quot;%s&quot; exported successfully."
+msgstr "टेबल  &quot;%s&quot;  सफलतापूर्वक निर्यात किया."
+
+#: controllers/controller-admin.php:1081
+#: views/view-options.php:223
+msgid "You do not have sufficient rights to access the Plugin Options."
+msgstr "आपके पास पर्याप्त प्लगइन विकल्प के उपयोग अधिकार नहीं है."
+
+#: controllers/controller-admin.php:1135
+msgid "Options saved successfully."
+msgstr "विकल्प सफलतापूर्वक बचाया."
+
+#: controllers/controller-admin.php:1198
+msgid "There is no table with this ID!"
+msgstr "इस आईडी के साथ कोई टेबल है!"
+
+#: controllers/controller-admin.php:1235
+msgid "Thank you very much! Your donation is highly appreciated. You just contributed to the further development of WP-Table Reloaded!"
+msgstr "बहुत बहुत धन्यवाद!  आपका दान अत्यधिक सराहनीय  है. तुम बस WP के आगे विकास तालिका रीलोडेड में योगदान करो!"
+
+#: controllers/controller-admin.php:1237
+#, php-format
+msgid "No problem! I still hope you enjoy the benefits that WP-Table Reloaded brings to you. If you should want to change your mind, you'll always find the &quot;%s&quot; button on the <a href=\"%s\">WP-Table Reloaded website</a>."
+msgstr "कोई बात नहीं!  अभी भी आशा है कि आप WP-तालिका रीलोडेड का आनंद लेंगे. यदि आप अपने मन बदलना चाहते हैं,आपको हमेशा मिलेगा &quot;%s&quot; पर बटन <a href=\"%s\">WP-Table रीलोडेड वेबसाइट</a>.     "
+
+#: controllers/controller-admin.php:1237
+#: controllers/controller-admin.php:1655
+msgid "Donate"
+msgstr "दान"
+
+#: controllers/controller-admin.php:1264
+#: controllers/controller-admin.php:1272
+msgid "List of Tables"
+msgstr "सारणी की सूची"
+
+#. #-#-#-#-#  plugin.pot (WP-Table Reloaded 1.6-RC1)  #-#-#-#-#
+#. Plugin Name of an extension
+#: controllers/controller-admin.php:1264
+#: controllers/controller-admin.php:1269
+#: controllers/controller-admin.php:1271
+msgid "WP-Table Reloaded"
+msgstr "WP-Table रीलोडेड"
+
+#: controllers/controller-admin.php:1265
+#: controllers/controller-admin.php:1295
+msgid "Add new Table"
+msgstr "नई तालिका जोड़ें"
+
+#: controllers/controller-admin.php:1266
+#, php-format
+msgid "Edit Table &quot;%s&quot; (ID %s)"
+msgstr "संपादित करें तालिका &quot;%s&quot; (ID %s)"
+
+#: controllers/controller-admin.php:1267
+#: controllers/controller-admin.php:1296
+msgid "Import a Table"
+msgstr "आयात एक मेज़"
+
+#: controllers/controller-admin.php:1268
+#: controllers/controller-admin.php:1297
+msgid "Export a Table"
+msgstr "निर्यात एक मेज़"
+
+#: controllers/controller-admin.php:1269
+#: controllers/controller-admin.php:1303
+#: views/view-edit.php:338
+#: views/view-edit.php:353
+#: views/view-export.php:10
+msgid "Plugin Options"
+msgstr "प्लगइन विकल्प"
+
+#: controllers/controller-admin.php:1270
+msgid "About WP-Table Reloaded"
+msgstr "WP टैबिल रीलोडेड के बारे में "
+
+#: controllers/controller-admin.php:1273
+#, php-format
+msgid "Preview of Table &quot;%s&quot; (ID %s)"
+msgstr "तालिका के पूर्वावलोकन &quot;%s&quot; (ID %s)"
+
+#: controllers/controller-admin.php:1294
+msgid "List Tables"
+msgstr "सूची टेबल्स"
+
+#: controllers/controller-admin.php:1304
+msgid "About the plugin"
+msgstr "बारे में प्लगइन"
+
+#: controllers/controller-admin.php:1651
+msgid "WP-Table Reloaded Plugin Page"
+msgstr "WP-Table रीलोडेड प्लगइन पेज"
+
+#: controllers/controller-admin.php:1651
+msgid "Plugin Page"
+msgstr "प्लगइन पेज"
+
+#: controllers/controller-admin.php:1652
+msgid "Frequently Asked Questions"
+msgstr "सवाल जवाब"
+
+#: controllers/controller-admin.php:1652
+msgid "FAQ"
+msgstr "FAQ"
+
+#: controllers/controller-admin.php:1653
+msgid "Support"
+msgstr "सहायता"
+
+#: controllers/controller-admin.php:1654
+msgid "Plugin Documentation"
+msgstr "प्लगइन दस्तावेज़ीकरण"
+
+#: controllers/controller-admin.php:1654
+msgid "Documentation"
+msgstr "प्रलेखन"
+
+#: controllers/controller-admin.php:1655
+msgid "Support WP-Table Reloaded with your donation!"
+msgstr "समर्थन WP टैबिल अपने दान के साथ रीलोडेड!"
+
+#: controllers/controller-admin.php:1694
+msgid "Do you really want to activate this? You should only do that right before uninstallation!"
+msgstr "क्या आप वास्तव में चाहते हैं कि इस सक्रिय? तुम सिर्फ स्थापना रद्द करने से पहले कि ठीक करना चाहिए!"
+
+#: controllers/controller-admin.php:1695
+msgid "URL of link to insert"
+msgstr "कड़ी का यूआरएल डालने के लिए"
+
+#: controllers/controller-admin.php:1696
+msgid "Text of link"
+msgstr "लिंक का पाठ"
+
+#: controllers/controller-admin.php:1697
+msgid "To insert the following HTML code for a link into a cell, just click the cell after closing this dialog."
+msgstr "एक सेल में एक कड़ी के लिए निम्न HTML कोड डालने, बस इस संवाद को बंद करने के बाद सेल क्लिक करें."
+
+#: controllers/controller-admin.php:1698
+msgid "To insert an image, click the cell into which you want to insert the image."
+msgstr "एक छवि डालें,सेल पर क्लिक करें जिसमें आप छवि डालने के चाहता हूँ."
+
+#: controllers/controller-admin.php:1698
+msgid "The Media Library will open, from which you can select the desired image or insert the image URL."
+msgstr "मीडिया लाइब्रेरी खुल जाएगा,जहां से आप इच्छित छवि का चयन करें या छवि यूआरएल डाल सकते."
+
+#: controllers/controller-admin.php:1698
+#, php-format
+msgid "Click the &quot;%s&quot; button to insert the image."
+msgstr "क्लिक करें  &quot;%s&quot; बटन छवि डालने के लिए."
+
+#: controllers/controller-admin.php:1698
+msgid "Insert into Post"
+msgstr "पोस्ट में डालें"
+
+#: controllers/controller-admin.php:1699
+msgid "To combine cells within a row, click into the cell to the right of the cell that has the content the combined cells shall have."
+msgstr "एक पंक्ति के भीतर सेल सेल कि सामग्री संयुक्त कोशिकाओं होगा है के अधिकार के लिए सेल में, क्लिक करें गठबंधन."
+
+#: controllers/controller-admin.php:1700
+msgid "To combine cells within a column, click into the cell below the cell that has the content the combined cells shall have."
+msgstr "एक कॉलम पर क्लिक करें भीतर सेल कि सामग्री संयुक्त कोशिकाओं होगा है नीचे सेल में कोशिकाओं गठबंधन."
+
+#: controllers/controller-admin.php:1701
+msgid "Do you want to copy the selected tables?"
+msgstr "क्या आप चयनित टेबल की नकल करना चाहते हैं?"
+
+#: controllers/controller-admin.php:1702
+msgid "The selected tables and all content will be erased. Do you really want to delete them?"
+msgstr "चयनित मेज और सभी सामग्री मिट जाएगा. क्या तुम सच में उन्हें हटाना चाहते हैं?"
+
+#: controllers/controller-admin.php:1703
+msgid "Do you really want to import the selected tables from the wp-Table plugin?"
+msgstr "क्या तुम सच में WP-प्लगइन तालिका से तालिका चयनित आयात करना चाहते हैं?"
+
+#: controllers/controller-admin.php:1704
+msgid "Do you want to copy this table?"
+msgstr "क्या आप इस मेज की नकल करना चाहते हैं?"
+
+#: controllers/controller-admin.php:1705
+msgid "The complete table and all content will be erased. Do you really want to delete it?"
+msgstr "पूरा मेज और सभी सामग्री मिट जाएगा. पूरा मेज और सभी सामग्री मिट जाएगा."
+
+#: controllers/controller-admin.php:1706
+msgid "Do you really want to delete the selected rows?"
+msgstr "क्या आप वास्तव में चयनित पंक्तियाँ हटाना चाहते हैं?"
+
+#: controllers/controller-admin.php:1707
+msgid "Do you really want to delete the selected columns?"
+msgstr "क्या आप वास्तव में चयनित स्तंभ हटाना चाहते हैं?"
+
+#: controllers/controller-admin.php:1708
+#: controllers/controller-admin.php:1712
+#: controllers/controller-admin.php:1714
+msgid "You have not selected any rows."
+msgstr "आप किसी भी पंक्तियों का चयन नहीं किया है."
+
+#: controllers/controller-admin.php:1709
+#: controllers/controller-admin.php:1713
+#: controllers/controller-admin.php:1715
+msgid "You have not selected any columns."
+msgstr "आप किसी भी स्तंभ का चयन नहीं किया है."
+
+#: controllers/controller-admin.php:1710
+msgid "You can not delete all rows of the table at once!"
+msgstr "आप तालिका की सभी पंक्तियाँ एक बार में नहीं हटा सकते हैं!"
+
+#: controllers/controller-admin.php:1711
+msgid "You can not delete all columns of the table at once!"
+msgstr "तुम टेबल के सभी कॉलम एक बार में नहीं हटा सकते हैं!"
+
+#: controllers/controller-admin.php:1716
+msgid "Do you really want to import this table from the wp-Table plugin?"
+msgstr "क्या तुम सच में WP-प्लगइन तालिका से यह टेबल आयात करना चाहते हैं?"
+
+#: controllers/controller-admin.php:1717
+msgid "Do you really want to uninstall the plugin and delete ALL data?"
+msgstr "क्या तुम सच में प्लगइन स्थापना हटाने और सभी डेटा हटाना चाहते हैं?"
+
+#: controllers/controller-admin.php:1718
+msgid "Are you really sure?"
+msgstr "क्या तुम सच में यकीन है?"
+
+#: controllers/controller-admin.php:1719
+msgid "Do you really want to change the ID of the table?"
+msgstr "क्या तुम सच में तालिका के आईडी बदलना चाहते हैं?"
+
+#: controllers/controller-admin.php:1720
+msgid "To show this Custom Data Field, use this shortcode:"
+msgstr "इस कस्टम डेटा फील्ड, दिखाने के इस shortcode का उपयोग करें:"
+
+#: controllers/controller-admin.php:1721
+msgid "To show this table, use this shortcode:"
+msgstr "इस तालिका दिखाने के लिए, इस shortcode का उपयोग करें:"
+
+#: controllers/controller-admin.php:1722
+msgid "Warning: You will lose all current Tables and Settings! You should create a backup first. Be warned!"
+msgstr "चेतावनी:आप सभी मौजूदा टेबल्स और सेटिंग्स खो देंगे! आप एक बैकअप पहले पैदा करना चाहिए. सावधान!"
+
+#: controllers/controller-admin.php:1723
+msgid "You have made changes to the content of this table and not yet saved them."
+msgstr "आप इस तालिका के सामग्री और उन्हें अभी तक सहेजा नहीं में परिवर्तन कर दिया है."
+
+#: controllers/controller-admin.php:1723
+#, php-format
+msgid "You should first click &quot;%s&quot; or they will be lost if you navigate away from this page."
+msgstr "पहले तुम चाहिए क्लिक करें&quot;%s&quot;या वे खो यदि आप इस पृष्ठ से दूर नेविगेट जाएगा."
+
+#: controllers/controller-admin.php:1723
+#: views/view-edit.php:41
+#: views/view-edit.php:253
+#: views/view-edit.php:392
+#: views/view-edit.php:443
+msgid "Update Changes"
+msgstr "अद्यतन परिवर्तन"
+
+#: controllers/controller-admin.php:1765
+#: views/view-about.php:14
+#: views/view-list.php:2
+msgid "Table"
+msgstr "टेबल "
+
+#: controllers/controller-admin.php:1795
+msgid "Please wait..."
+msgstr "कृपया प्रतीक्षा करें ..."
+
+#: controllers/controller-admin.php:1796
+msgid "Show _MENU_ Tables"
+msgstr "दिखाएँ _ MENU _ टेबल्स"
+
+#: controllers/controller-admin.php:1797
+#: views/view-ajax_list.php:53
+#: views/view-export.php:71
+#: views/view-list.php:88
+msgid "No tables were found."
+msgstr "कोई टेबल नहीं  पाए गए."
+
+#: controllers/controller-admin.php:1798
+msgid "_START_ to _END_ of _TOTAL_ Tables"
+msgstr "_TOTAL_ टेबल्स के _END_ को _START_"
+
+#: controllers/controller-admin.php:1799
+msgid "(filtered from _MAX_ Tables)"
+msgstr "(_MAX_ टेबल्स से छान)"
+
+#: controllers/controller-admin.php:1800
+msgid "Filter:"
+msgstr "फ़िल्टर करें:"
+
+#: controllers/controller-admin.php:1801
+msgid "First"
+msgstr "प्रथम"
+
+#: controllers/controller-admin.php:1802
+msgid "Back"
+msgstr "पीछे"
+
+#: controllers/controller-admin.php:1803
+msgid "Next"
+msgstr "अगला"
+
+#: controllers/controller-admin.php:1804
+msgid "Last"
+msgstr "अंतिम"
+
+#: views/view-about.php:5
+msgid "Plugin Purpose"
+msgstr "प्लगइन प्रयोजन"
+
+#: views/view-about.php:7
+msgid "WP-Table Reloaded allows you to create and manage tables in the admin-area of WordPress."
+msgstr "WP-Table रीलोडेड आपको और बनाने के लिए प्रबंधन व्यवस्थापक में टेबल-WordPress के क्षेत्र अनुमति देता है."
+
+#: views/view-about.php:7
+msgid "Those tables may contain strings, numbers and even HTML (e.g. to include images or links)."
+msgstr "उन टेबल पर तार, संख्या और  HTML भी  शामिल कर सकते हैं (जैसे या छवियाँ शामिल करने के लिए लिंक)."
+
+#: views/view-about.php:7
+msgid "You can then show the tables in your posts, on your pages or in text-widgets by using a shortcode."
+msgstr "तब आप अपनी पोस्ट में टेबल दिखा सकते हैं, एक shortcode का उपयोग करके पर अपने पृष्ठों या पाठ में widgets."
+
+#: views/view-about.php:7
+msgid "If you want to show your tables anywhere else in your theme, you can use a template tag function."
+msgstr "यदि आप अपने विषय में आपकी कहीं और टेबल दिखाना चाहते हैं, तुम एक टैग समारोह टेम्पलेट का उपयोग कर सकते हैं."
+
+#: views/view-about.php:12
+msgid "Usage"
+msgstr "उपयोग"
+
+#: views/view-about.php:14
+msgid "At first you should add or import a table."
+msgstr "सबसे पहले आप को जोड़ने या एक मेज आयात करना चाहिए. "
+
+#: views/view-about.php:14
+msgid "This means that you either let the plugin create an empty table for you or that you load an existing table from either a CSV, XML or HTML file."
+msgstr "इसका मतलब यह है कि या तो आप जाने प्लगइन आप के लिए एक खाली टेबल बनाना या तो आप एक मौजूदा तालिका से लोड एक csv, XML या HTML फ़ाइल."
+
+#: views/view-about.php:14
+msgid "Then you can edit your data or change the structure of your table (e.g. by inserting or deleting rows or columns, swaping rows or columns or sorting them) and select specific table options like alternating row colors or whether to print the name or description, if you want."
+msgstr "आप अपने डेटा को संपादित या अपने तालिका की संरचना बदल सकते हैं (उदा   डालने या पंक्तियाँ या कॉलम को हटाने, पंक्तियाँ या कॉलम या उन्हें छँटाई swaping द्वारा )और रंग चुनें विशिष्ट पंक्ति बारी या नाम या विवरण मुद्रित करने जैसे कि टेबल विकल्प है, अगर तुम चाहते हो."
+
+#: views/view-about.php:14
+msgid "To easily add a link or an image to a cell, use the provided buttons. Those will ask you for the URL and a title. Then you can click into a cell and the corresponding HTML will be added to it for you."
+msgstr "आसानी से एक लिंक या एक छवि को एक सेल से जोड़ने के लिए, प्रदान बटन का उपयोग करें. तुम यूआरएल और एक शीर्षक के लिए पूछेंगे. फिर एक सेल में आप क्लिक करें और HTML  आप के लिए यह वृद्धि हो जाएगी"
+
+#: views/view-about.php:14
+#: views/view-ajax_preview.php:5
+#: views/view-edit.php:9
+#: views/view-list.php:2
+#, php-format
+msgid "To insert the table into a page, post or text-widget, copy the shortcode <strong>[table id=%s /]</strong> and paste it into the corresponding place in the editor."
+msgstr "एक पृष्ठ, पद या पाठ विजेट में तालिका डालें, shortcode की नकल <strong>[table id=%s /]</strong>और संपादक में इसी स्थान में पेस्ट करें."
+
+#: views/view-about.php:14
+#, php-format
+msgid "You can also select the desired table from a list (after clicking the button &quot;%s&quot; in the editor toolbar) and the corresponding shortcode will be added for you."
+msgstr "तुम भी एक सूची से इच्छित तालिका का चयन कर सकते हैं (बटन पर क्लिक करने के बाद &quot;%s&quot;संपादक उपकरण पट्टी में)और इसी shortcode आप के लिए कहा जाएगा."
+
+#: views/view-about.php:14
+msgid "Tables can be styled by changing and adding CSS commands."
+msgstr "टेबल बदलकर स्टाइल जा सकता है और जोड़ने सीएसएस हासिल है."
+
+#: views/view-about.php:14
+msgid "The plugin ships with default CSS Stylesheets, which can be customized with own code or replaced with other Stylesheets."
+msgstr "डिफ़ॉल्ट सीएसएस Stylesheets है, जो खुद के कोड या अन्य Stylesheets की जगह के साथ अनुकूलित किया जा सकता है के साथ जहाज प्लगइन."
+
+#: views/view-about.php:14
+msgid "For this, each table is given certain CSS classes that can be used as CSS selectors."
+msgstr "इस के लिए, एक मेज कुछ सीएसएस वर्गों कि सीएसएस चयनकर्ता के रूप में इस्तेमाल किया जा सकता दिया जाता है."
+
+#: views/view-about.php:14
+#, php-format
+msgid "Please see the <a href=\"%s\">documentation</a> for a list of these selectors and for styling examples."
+msgstr "कृपया देखें <a href=\"%s\">documentation</a> इन चयनकर्ताओं की सूची के लिए और उदाहरण हैं स्टाइल के लिए."
+
+#: views/view-about.php:20
+msgid "More Information and Documentation"
+msgstr "अधिक सूचना और प्रलेखन"
+
+#: views/view-about.php:27
+msgid "Help and Support"
+msgstr "सहायता और समर्थन"
+
+#: views/view-about.php:29
+#, php-format
+msgid "If you do not find an answer there, please <a href=\"%s\">open a new thread</a> in the WordPress Support Forums with the tag &quot;wp-table-reloaded&quot;."
+msgstr "यदि आप एक जवाब वहाँ नहीं मिल रहा है, कृपया<a href=\"%s\">open a new thread</a> WordPress सहयोग मंच के साथ  &quot;wp-table-reloaded&quot;."
+
+#: views/view-about.php:34
+msgid "Author and License"
+msgstr "लेखक और लाइसेंस"
+
+#: views/view-about.php:36
+#, php-format
+msgid "This plugin was written by <a href=\"%s\">Tobias B&auml;thge</a>."
+msgstr "इस प्लगइन का लिखा हुआ था  <a href=\"%s\">Tobias B&auml;thge</a>."
+
+#: views/view-about.php:36
+msgid "It is licensed as Free Software under GPL 2."
+msgstr "यह मुफ्त सॉफ्टवेयर के रूप में 2 GPL के अंतर्गत लाइसेंस प्राप्त है."
+
+#: views/view-about.php:36
+#, php-format
+msgid "Please rate the plugin in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "कृपया प्लगइन में दर<a href=\"%s\">WordPress Plugin Directory</a>."
+
+#: views/view-about.php:36
+msgid "Donations and good ratings encourage me to further develop the plugin and to provide countless hours of support. Any amount is appreciated! Thanks!"
+msgstr "दान और अच्छे रेटिंग मुझे आगे प्लगइन के विकास को बढ़ावा और समर्थन के अनगिनत घंटे उपलब्ध कराने के लिए. किसी भी राशि की सराहना की है! धन्यवाद!"
+
+#: views/view-about.php:41
+msgid "Credits and Thanks"
+msgstr "क्रेडिट और धन्यवाद"
+
+#: views/view-about.php:44
+msgid "Thanks go to <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> for the original wp-Table plugin,"
+msgstr "धन्यवाद जाने के लिए <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a>मूल WP के लिए तालिका प्लगइन,"
+
+#: views/view-about.php:45
+msgid "Allan Jardine for the <a href=\"http://www.datatables.net/\">DataTables jQuery plugin</a>,"
+msgstr "एलन जार्डाइन  के लिए<a href=\"http://www.datatables.net/\">DataTables jQuery plugin</a>,"
+
+#: views/view-about.php:46
+msgid "Christian Bach for the <a href=\"http://www.tablesorter.com/\">Tablesorter jQuery plugin</a>,"
+msgstr "ईसाई बाख के लिए <a href=\"http://www.tablesorter.com/\">Tablesorter jQuery plugin</a>,"
+
+#: views/view-about.php:47
+msgid "Soeren Krings for its extension <a href=\"http://tablesorter.openwerk.de/\">Tablesorter Extended</a>,"
+msgstr " इसके विस्तार के लिए Krings <a href=\"http://tablesorter.openwerk.de/\">Tablesorter Extended</a>,"
+
+#: views/view-about.php:48
+msgid "the submitters of translations:"
+msgstr "अनुवाद के submitters:"
+
+#: views/view-about.php:70
+#, php-format
+msgid "%s (thanks to %s)"
+msgstr "% s  (%s  को धन्यवाद)"
+
+#: views/view-about.php:73
+msgid "and to all donors, contributors, supporters, reviewers and users of the plugin!"
+msgstr "और सब दाताओं के लिए, योगदानकर्ताओं, समर्थकों, समीक्षक और प्लगइन के उपयोगकर्ताओं!"
+
+#: views/view-about.php:79
+msgid "Debug and Version Information"
+msgstr "डीबग और संस्करणः सूचना"
+
+#: views/view-about.php:79
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:349
+#: views/view-edit.php:401
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:87
+#: views/view-options.php:175
+#: views/view-options.php:186
+msgctxt "expand"
+msgid "Hide"
+msgstr "छिपना"
+
+#: views/view-about.php:79
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:349
+#: views/view-edit.php:401
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:87
+#: views/view-options.php:175
+#: views/view-options.php:186
+msgid "Expand"
+msgstr "विस्तार"
+
+#: views/view-about.php:82
+msgid "You are using the following versions of the software."
+msgstr "आप सॉफ्टवेयर के निम्नलिखित संस्करणों का उपयोग कर रहे हैं."
+
+#: views/view-about.php:82
+msgid "Please provide this information in bug reports."
+msgstr "कृपया बग रिपोर्ट में यह जानकारी प्रदान करते हैं."
+
+#: views/view-about.php:85
+msgid "Plugin installed"
+msgstr "प्लगइन स्थापित"
+
+#: views/view-add.php:4
+msgid "To add a new table, enter its name, a description (optional) and the number of rows and columns."
+msgstr "एक नई तालिका जोड़ने के लिए, उसका नाम, एक विवरण (वैकल्पिक) और पंक्तियों और स्तंभों की संख्या दर्ज करें."
+
+#: views/view-add.php:4
+msgid "You may also add, insert or delete rows and columns later."
+msgstr "तुम भी जोड़ने के लिए, डालने या पंक्तियाँ और स्तंभ बाद में हटा सकते हो "
+
+#: views/view-add.php:13
+#: views/view-ajax_list.php:14
+#: views/view-ajax_list.php:22
+#: views/view-edit.php:23
+#: views/view-edit.php:283
+#: views/view-import.php:99
+#: views/view-import.php:108
+#: views/view-list.php:15
+#: views/view-list.php:25
+msgid "Table Name"
+msgstr "तालिका का नाम"
+
+#: views/view-add.php:14
+msgid "Enter Table Name"
+msgstr "तालिका का नाम दर्ज करें"
+
+#: views/view-add.php:17
+#: views/view-ajax_list.php:15
+#: views/view-ajax_list.php:23
+#: views/view-edit.php:27
+#: views/view-import.php:100
+#: views/view-import.php:109
+#: views/view-list.php:16
+#: views/view-list.php:26
+msgid "Description"
+msgstr "विवरण"
+
+#: views/view-add.php:18
+msgid "Enter Description"
+msgstr "विवरण दर्ज करें"
+
+#: views/view-add.php:21
+msgid "Number of Rows"
+msgstr "पंक्तियों की संख्या"
+
+#: views/view-add.php:25
+msgid "Number of Columns"
+msgstr "कॉलम की संख्या"
+
+#: views/view-add.php:32
+msgid "Add Table"
+msgstr "तालिका जोड़ें"
+
+#: views/view-ajax_list.php:3
+#: views/view-list.php:2
+msgid "This is a list of all available tables."
+msgstr "यह सभी उपलब्ध सारणी की एक सूची है."
+
+#: views/view-ajax_list.php:3
+msgid "You may insert a table into a post or page here."
+msgstr "तुम एक पद या पृष्ठ यहाँ एक टेबल डाल सकते हो ."
+
+#: views/view-ajax_list.php:4
+#, php-format
+msgid "Click the &quot;%s&quot; link after the desired table and the corresponding shortcode will be inserted into the editor (<strong>[table id=&lt;ID&gt; /]</strong>)."
+msgstr "क्लिक करें  &quot;%s&quot; लिंक इच्छित तालिका के बाद और इसी shortcode संपादक में डाला जाएगा (<strong>[table id=&lt;ID&gt; /]</strong>)."
+
+#: views/view-ajax_list.php:4
+#: views/view-ajax_list.php:44
+msgid "Insert"
+msgstr "डालें"
+
+#: views/view-ajax_list.php:13
+#: views/view-ajax_list.php:21
+#: views/view-import.php:98
+#: views/view-import.php:107
+#: views/view-list.php:13
+#: views/view-list.php:23
+msgid "ID"
+msgstr "आईडी"
+
+#: views/view-ajax_list.php:16
+#: views/view-ajax_list.php:24
+#: views/view-edit.php:413
+#: views/view-import.php:101
+#: views/view-import.php:110
+msgid "Action"
+msgstr "कार्रवाई"
+
+#: views/view-ajax_preview.php:3
+msgid "This is a preview of your table."
+msgstr "यह आपकी टेबल के एक पूर्वावलोकन है."
+
+#: views/view-ajax_preview.php:4
+msgid "Because of CSS styling, the table might look different on your page!"
+msgstr "क्योंकि सीएसएस स्टाइल की, टेबल अलग अपने पृष्ठ पर देख सकते हैं!"
+
+#: views/view-ajax_preview.php:4
+msgid "The JavaScript libraries are also not available in this preview."
+msgstr "जावास्क्रिप्ट पुस्तकालयों इस पूर्वावलोकन में भी उपलब्ध नहीं हैं."
+
+#: views/view-edit.php:8
+msgid "On this page, you can edit the content of the table."
+msgstr "इस पृष्ठ पर, आप तालिका की सामग्री संपादित कर सकते हैं."
+
+#: views/view-edit.php:8
+msgid "It is also possible to change the table structure by inserting, deleting, moving, and swapping columns and rows."
+msgstr "यह भी मेज संरचना को हटाने, चलाने, और कॉलम और पंक्तियाँ को बदलने में सहायता कर सकता है "
+
+#: views/view-edit.php:15
+msgid "Table Information"
+msgstr "टेबल सूचना"
+
+#: views/view-edit.php:19
+msgid "Table ID"
+msgstr "टेबल आईडी"
+
+#: views/view-edit.php:32
+#: views/view-list.php:17
+#: views/view-list.php:27
+msgid "Last Modified"
+msgstr "अंतिम बार संशोधित"
+
+#: views/view-edit.php:33
+#: views/view-list.php:44
+msgid "by"
+msgstr "के द्वारा"
+
+#: views/view-edit.php:42
+#: views/view-edit.php:254
+#: views/view-edit.php:393
+#: views/view-edit.php:444
+msgid "Save and go back"
+msgstr "सहेजें और वापस जाओ"
+
+#: views/view-edit.php:45
+#: views/view-edit.php:257
+#: views/view-edit.php:396
+#: views/view-edit.php:447
+#: views/view-options.php:65
+#: views/view-options.php:162
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: views/view-edit.php:51
+msgid "Table Contents"
+msgstr "सामग्री तालिका"
+
+#: views/view-edit.php:104
+msgid "Data Manipulation"
+msgstr "डेटा हेरफेर"
+
+#: views/view-edit.php:114
+#: views/view-options.php:55
+msgid "Insert Link"
+msgstr "लिंक डालें"
+
+#: views/view-edit.php:115
+msgid "Insert Image"
+msgstr "छवि डालें"
+
+#: views/view-edit.php:124
+msgid "ascending"
+msgstr "आरोही"
+
+#: views/view-edit.php:125
+msgid "descending"
+msgstr "अवरोही"
+
+#: views/view-edit.php:128
+#, php-format
+msgid "Sort table by column %s in %s order"
+msgstr "कॉलम द्वारा क्रमबद्ध करें %s in %s  "
+
+#: views/view-edit.php:130
+msgid "Sort"
+msgstr "क्रमबद्ध करें"
+
+#: views/view-edit.php:135
+#: views/view-edit.php:139
+msgctxt "item"
+msgid "Hide"
+msgstr "छिपना"
+
+#: views/view-edit.php:136
+#: views/view-edit.php:140
+msgctxt "item"
+msgid "Unhide"
+msgstr "दिखाएँ"
+
+#: views/view-edit.php:137
+#, php-format
+msgctxt "hide_unhide"
+msgid "Selected rows: %s %s"
+msgstr "चयनित पंक्तियाँ: %s %s"
+
+#: views/view-edit.php:141
+#, php-format
+msgctxt "hide_unhide"
+msgid "Selected columns: %s %s"
+msgstr "चयनित कॉलम: %s %s"
+
+#: views/view-edit.php:144
+msgid "Combine cells in a row:"
+msgstr "cells को row में जोरें "
+
+#: views/view-edit.php:145
+msgid "Add colspan"
+msgstr "Colspan जोड़ें"
+
+#: views/view-edit.php:148
+msgid "Combine cells in a column:"
+msgstr "cells को coloumn में जोरें "
+
+#: views/view-edit.php:149
+msgid "Add rowspan"
+msgstr "Rowspan जोड़ें"
+
+#: views/view-edit.php:155
+msgid "Insert row"
+msgstr "पंक्ति डालें"
+
+#: views/view-edit.php:156
+#: views/view-edit.php:160
+#: views/view-list.php:65
+msgid "Delete"
+msgstr "मिटाना"
+
+#: views/view-edit.php:157
+#, php-format
+msgctxt "insert_delete"
+msgid "Selected rows: %s %s"
+msgstr "चयनित पंक्तियाँ: %s %s"
+
+#: views/view-edit.php:159
+msgid "Insert column"
+msgstr "कॉलम डालें"
+
+#: views/view-edit.php:161
+#, php-format
+msgctxt "insert_delete"
+msgid "Selected columns: %s %s"
+msgstr "चयनित कॉलम: %s %s"
+
+#: views/view-edit.php:171
+#, php-format
+msgid "Add %s row(s)"
+msgstr "जोड़ें %s पंक्ति(s)"
+
+#: views/view-edit.php:172
+#: views/view-edit.php:175
+#: views/view-edit.php:438
+msgid "Add"
+msgstr "जोड़ें"
+
+#: views/view-edit.php:174
+#, php-format
+msgid "Add %s column(s)"
+msgstr "जोड़ें %s कॉलम(s)"
+
+#: views/view-edit.php:189
+#, php-format
+msgid "Swap rows %s and %s"
+msgstr "स्वैप पंक्तियाँ %s और %s"
+
+#: views/view-edit.php:191
+#: views/view-edit.php:206
+msgid "Swap"
+msgstr "विनिमय"
+
+#: views/view-edit.php:204
+#, php-format
+msgid "Swap columns %s and %s"
+msgstr "स्वैप कॉलम %s और %s"
+
+#: views/view-edit.php:219
+#: views/view-edit.php:239
+msgid "before"
+msgstr "पहले"
+
+#: views/view-edit.php:220
+#: views/view-edit.php:240
+msgid "after"
+msgstr "बाद में"
+
+#: views/view-edit.php:223
+#, php-format
+msgid "Move row %s %s row %s"
+msgstr "पंक्ति स्थानांतरित  %s %sपंक्ति %s"
+
+#: views/view-edit.php:225
+#: views/view-edit.php:245
+msgid "Move"
+msgstr "स्थानांतरित"
+
+#: views/view-edit.php:243
+#, php-format
+msgid "Move column %s %s column %s"
+msgstr "कॉलम स्थानांतरित  %s %sकॉलम %s"
+
+#: views/view-edit.php:262
+msgid "Table Styling Options"
+msgstr "टेबल स्टाइलिंग विकल्प"
+
+#: views/view-edit.php:264
+msgid "These settings will only be used for this table."
+msgstr "इन सेटिंग्स केवल इस तालिका के लिए उपयोग किया जाएगा."
+
+#: views/view-edit.php:267
+msgid "Alternating row colors"
+msgstr "पंक्ति रंग बारी"
+
+#: views/view-edit.php:268
+msgid "Every second row has an alternating background color."
+msgstr "हर दूसरी पंक्ति एक बारी पृष्ठभूमि का रंग है."
+
+#: views/view-edit.php:271
+msgid "Row Highlighting"
+msgstr "पंक्ति पर प्रकाश डालते"
+
+#: views/view-edit.php:272
+msgid "Highlight a row by changing its background color while the mouse cursor hovers above it."
+msgstr "अपनी पृष्ठभूमि का रंग बदल कर पंक्ति को  हाइलाइट करें जब भी उसके  ऊपर माउस कर्सर ले जाया जाता है तोह ."
+
+#: views/view-edit.php:275
+msgid "Table head"
+msgstr "टेबल सिर"
+
+#: views/view-edit.php:276
+msgid "The first row of your table is the table head (HTML tag &lt;th&gt;)."
+msgstr "अपनी मेज की पहली पंक्ति है टेबल सिर  (HTML tag &lt;th&gt;)."
+
+#: views/view-edit.php:279
+msgid "Table footer"
+msgstr "टेबल पाद लेख"
+
+#: views/view-edit.php:280
+msgid "The last row of your table is the table footer (HTML tag &lt;th&gt;)."
+msgstr "अपनी तालिका के अंतिम पंक्ति है टेबल पाद लेख (HTML tag &lt;th&gt;)."
+
+#: views/view-edit.php:289
+#: views/view-edit.php:304
+msgid "above"
+msgstr "ऊपर"
+
+#: views/view-edit.php:291
+#: views/view-edit.php:306
+msgid "below"
+msgstr "नीचे"
+
+#: views/view-edit.php:293
+#, php-format
+msgid "The Table Name shall be written %s the table (HTML tag &lt;h2&gt;)."
+msgstr "टेबल का नाम %s टेबल लिखा जाएगा (HTML tag &lt;h2&gt;)."
+
+#: views/view-edit.php:298
+msgid "Table Description"
+msgstr "तालिका विवरण"
+
+#: views/view-edit.php:308
+#, php-format
+msgid "The Table Description shall be written %s the table."
+msgstr "तालिका विवरण %s लिखा जाएगा हैं."
+
+#: views/view-edit.php:313
+msgid "Use JavaScript library"
+msgstr "जावास्क्रिप्ट पुस्तकालय का प्रयोग करें"
+
+#: views/view-edit.php:319
+#: views/view-edit.php:323
+#: views/view-edit.php:335
+msgid "You can change further settings for this library below."
+msgstr "आप नीचे इस पुस्तकालय के लिए और अधिक सेटिंग्स बदल सकते हैं."
+
+#: views/view-edit.php:327
+#: views/view-edit.php:331
+msgid "The table will then be sortable by the visitor."
+msgstr "टेबल आगंतुक से  sortable  किया  जाएगा."
+
+#: views/view-edit.php:338
+#, php-format
+msgid "Yes, use the &quot;%s&quot; JavaScript library with this table."
+msgstr "हाँ, उपयोग करें   &quot;%s&quot; जावास्क्रिप्ट पुस्तकालय का, इस तालिका के साथ "
+
+#: views/view-edit.php:338
+#, php-format
+msgid "You must enable the use of a JavaScript library on the &quot;%s&quot; screen first."
+msgstr "तुम एक जावास्क्रिप्ट पुस्तकालय के प्रयोग को सक्षम करना होगा   &quot;%s&quot;  स्क्रीन पहले."
+
+#: views/view-edit.php:349
+msgid "DataTables JavaScript Features"
+msgstr "DataTables जावास्क्रिप्ट रूप"
+
+#: views/view-edit.php:351
+msgid "You can enable certain features for the DataTables JavaScript library here."
+msgstr "आप सक्षम कर सकते हैं DataTables जावास्क्रिप्ट पुस्तकालय के लिए यहाँ "
+
+#: views/view-edit.php:351
+msgid "More information on these features can be found on the <a href=\"http://www.datatables.net/\">DataTables website</a>."
+msgstr "इन सुविधाओं के बारे में अधिक जानकारी पाया जा सकता है पर, <a href=\"http://www.datatables.net/\">DataTables वेबसाइट</a>."
+
+#: views/view-edit.php:353
+#, php-format
+msgid "You can currently not change these options, because you have not enabled the &quot;DataTables&quot; or the &quot;DataTables+TableTools&quot; JavaScript library on the &quot;%s&quot; screen."
+msgstr "अभी आप इन विकल्पों को बदल नहीं सकते, क्योंकि आप सक्षम नहीं है &quot;DataTables&quot; या &quot;DataTables+TableTools&quot; जावास्क्रिप्ट पुस्तकालय पर &quot;%s&quot; परदा.  "
+
+#: views/view-edit.php:353
+msgid "It is not possible to use these features with the &quot;Tablesorter&quot; or &quot;Tablesorter Extended&quot; libraries."
+msgstr "यह संभव है कि इन सुविधाओं के उपयोग के साथ नहीं है  &quot;Tablesorter&quot; or &quot;Tablesorter Extended&quot; libraries."
+
+#: views/view-edit.php:357
+msgid "Sorting"
+msgstr "छँटाई"
+
+#: views/view-edit.php:358
+msgid "Yes, enable sorting of table data by the visitor."
+msgstr "हाँ, आगंतुक द्वारा तालिका डेटा की छँटाई कर सके."
+
+#: views/view-edit.php:361
+msgid "Pagination"
+msgstr "पृष्ठ पर अंक लगाना"
+
+#: views/view-edit.php:362
+msgid "Yes, enable pagination of the table (showing only a certain number of rows) by the visitor."
+msgstr "हाँ, तालिका के पृष्ठ पर अंक लगाना सक्षम (पंक्तियों का केवल एक निश्चित संख्या प्रदर्शित) आगंतुक द्वारा."
+
+#: views/view-edit.php:365
+msgid "Length Change"
+msgstr "लंबाई बदलें"
+
+#: views/view-edit.php:366
+msgid "Yes, allow visitor to change the number of rows shown when using pagination."
+msgstr "हाँ, आगंतुक जब पन्ने पर नंबर डालना प्रयोग पंक्तियों की संख्या में बदलने के लिए अनुमति देते हैं."
+
+#: views/view-edit.php:369
+msgid "Filtering"
+msgstr "फ़िल्टर"
+
+#: views/view-edit.php:370
+msgid "Yes, enable the visitor to filter or search the table. Only rows with the search word in them are shown."
+msgstr "हाँ, फ़िल्टर या खोज मेज पर आगंतुक  को सक्षम करे. उन में खोज शब्द के साथ केवल पंक्तियाँ दिखाई जाती हैं."
+
+#: views/view-edit.php:373
+msgid "Info Bar"
+msgstr "जानकारी बार"
+
+#: views/view-edit.php:374
+msgid "Yes, show the table information display. This shows information and statistics about the currently visible data, including filtering."
+msgstr "हाँ, सारणी की जानकारी प्रदर्शित दिखाओ. इस जानकारी से पता चलता है और फ़िल्टरिंग सहित वर्तमान में दृश्य डेटा, के बारे में आंकड़े."
+
+#: views/view-edit.php:377
+msgid "TableTools"
+msgstr "TableTools"
+
+#: views/view-edit.php:379
+msgid "Yes, activate the TableTools functions (Copy to Clipboard, Save to CSV, Save to XLS, Print Table) for this table."
+msgstr "हाँ,TableTools कार्यों को सक्रिय करे इस टेवल के लिए (प्रतिलिपि csv, संचय के लिए क्लिपबोर्ड, सहेजें xls, प्रिंट तालिका करने के लिए)"
+
+#: views/view-edit.php:380
+msgid "This option can only be used with the &quot;DataTables+TableTools&quot; JavaScript library."
+msgstr "इस विकल्प के साथ ही इस्तेमाल किया जा सकता है,  &quot;DataTables+TableTools&quot; JavaScript library. जावास्क्रिप्ट पुस्तकालय."
+
+#: views/view-edit.php:384
+msgid "Custom Commands"
+msgstr "कस्टम कमानों"
+
+#: views/view-edit.php:385
+msgid "Enter additional DataTables JavaScript parameters that will be included with the script call here."
+msgstr " जावास्क्रिप्ट स्क्रिप्ट पैरामीटर है कि  यहाँ फोन के साथ शामिल किया जाएगा  अतिरिक्त DataTables दर्ज करें."
+
+#: views/view-edit.php:385
+msgid "For advanced use only. Read the <a href=\"http://www.datatables.net/\">DataTables documentation</a> before."
+msgstr " केवल उन्नत उपयोग के लिए पढ़ें <a href=\"http://www.datatables.net/\"> DataTables प्रलेखन </a> पहले."
+
+#: views/view-edit.php:401
+msgid "Custom Data Fields"
+msgstr "कस्टम डेटा फ़ील्ड"
+
+#: views/view-edit.php:403
+msgid "Custom Data Fields can be used to add extra metadata to a table."
+msgstr "कस्टम डेटा फ़ील्ड के लिए  अतिरिक्त Metadata जोड़ने के लिए प्रयोग  किया जा सकता."
+
+#: views/view-edit.php:403
+msgid "For example, this could be information about the source or the creator of the data."
+msgstr "उदाहरण के लिए, इस स्रोत या डेटा के निर्माता के बारे में जानकारी हो सकती है."
+
+#: views/view-edit.php:405
+#, php-format
+msgid "You can show this data in the same way as tables by using the shortcode <strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+msgstr "तुम टेबल के रूप में shortcode का उपयोग करके उसी तरह इस डाटा दिखा सकते हैं <strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+
+#: views/view-edit.php:411
+msgid "Field Name"
+msgstr "क्षेत्र का नाम"
+
+#: views/view-edit.php:412
+msgid "Value"
+msgstr "मूल्य"
+
+#: views/view-edit.php:426
+msgid "Delete Field"
+msgstr "हटाएँ फील्ड"
+
+#: views/view-edit.php:428
+msgid "View shortcode"
+msgstr "देखें shortcode"
+
+#: views/view-edit.php:437
+msgid "To add a new Custom Data Field, enter its name (only lowercase letters, numbers, _ and -)."
+msgstr "एक नया कस्टम डेटा फ़ील्ड जोड़ने के लिए, अपना नाम दर्ज करें (केवल छोटे अक्षरों, संख्या, _ और -)."
+
+#: views/view-edit.php:438
+msgid "Custom Data Field Name"
+msgstr "कस्टम डेटा फ़ील्ड का नाम"
+
+#: views/view-edit.php:452
+msgid "Other actions"
+msgstr "अन्य कार्रवाई"
+
+#: views/view-edit.php:455
+msgid "Delete Table"
+msgstr "तालिका हटाएँ"
+
+#: views/view-edit.php:456
+#: views/view-export.php:59
+msgid "Export Table"
+msgstr "निर्यात तालिका"
+
+#: views/view-export.php:10
+msgid "It is recommended to export and backup the data of important tables regularly."
+msgstr "महत्वपूर्ण तालिका के डेटा को नियमित रूप से निर्यात और बैकअप के लिए सिफारिश की है."
+
+#: views/view-export.php:10
+msgid "Select the table, the desired export format and (for CSV only) a delimiter."
+msgstr "तालिका का चयन करें, इच्छित निर्यात और प्रारूप (सीएसवी के लिए केवल) एक परिसीमक."
+
+#: views/view-export.php:10
+msgid "You may choose to download the export file. Otherwise it will be shown on this page."
+msgstr "आप निर्यात फ़ाइल को डाउनलोड कर  सकते हैं. वरना इस पृष्ठ पर दिखाई देगा. "
+
+#: views/view-export.php:10
+msgid "Be aware that only the table data, but no options or settings are exported."
+msgstr "ध्यान रखें कि केवल डेटा तालिका, लेकिन कोई विकल्प या सेटिंग निर्यात किया जाता है."
+
+#: views/view-export.php:10
+#, php-format
+msgid "To backup all tables, including their settings, at once use the &quot;%s&quot; button in the &quot;%s&quot;."
+msgstr "बैकअप करने के लिए अपनी सेटिंग्स सहित सभी टेबल, पर एक बार प्रयोग  &quot;%s&quot;  में बटन  &quot;%s&quot;."
+
+#: views/view-export.php:10
+#: views/view-options.php:180
+msgid "Create and Download Dump File"
+msgstr "बनाएँ और डाउनलोड करे dump फाइल"
+
+#: views/view-export.php:18
+msgid "Select Table to Export"
+msgstr "चुनें निर्यात के लिए तालिका"
+
+#: views/view-export.php:33
+msgid "Select Export Format"
+msgstr "चुनें निर्यात प्रारूप"
+
+#: views/view-export.php:43
+msgid "Select Delimiter to use"
+msgstr "चुनें सीमान्तक का उपयोग"
+
+#: views/view-export.php:50
+msgid "Only needed for CSV export."
+msgstr "केवल सीएसवी निर्यात की जरूरत है."
+
+#: views/view-export.php:53
+msgid "Download file"
+msgstr "डाउनलोड संचिका"
+
+#: views/view-export.php:54
+msgid "Yes, I want to download the export file."
+msgstr "हाँ, मैं निर्यात फ़ाइल डाउनलोड करना चाहते हैं."
+
+#: views/view-export.php:71
+#: views/view-list.php:88
+#, php-format
+msgid "You should <a href=\"%s\">add</a> or <a href=\"%s\">import</a> a table to get started!"
+msgstr "तुम चाहिए <a href=\"%s\">add</a> or <a href=\"%s\">import</a> टेबल शुरू करने के लिए!"
+
+#: views/view-import.php:3
+msgid "WP-Table Reloaded can import tables from existing data."
+msgstr "WP-Table रीलोडेड मौजूदा डेटा तालिका से आयात कर सकते हैं."
+
+#: views/view-import.php:3
+msgid "This may be a CSV, XML or HTML file, each with a certain structure."
+msgstr "यह एक csv, XML या HTML फाइल हो सकता है, एक निश्चित संरचना के साथ."
+
+#: views/view-import.php:3
+msgid "To import an existing table, please select its format and the source for the import."
+msgstr "एक मौजूदा तालिका आयात, कृपया अपने स्वरूप का चयन करें और आयात के लिए स्रोत हैं."
+
+#: views/view-import.php:3
+msgid "You can also decide, if you want to import it as a new table or replace an existing table."
+msgstr "आप यह भी तय कर सकते हैं, यदि आप इसे एक नया तालिका के रूप में आयात या किसी मौजूदा तालिका बदलना चाहते हैं."
+
+#: views/view-import.php:10
+msgid "Select Import Format"
+msgstr "चुनें आयात प्रारूप"
+
+#: views/view-import.php:21
+msgid "Add or Replace Table?"
+msgstr "जोड़ें या बदलें तालिका?"
+
+#: views/view-import.php:23
+msgid "Add as new Table"
+msgstr "नई तालिका के रूप में जोड़ें"
+
+#: views/view-import.php:24
+msgid "Replace existing Table"
+msgstr "बदलें मौजूदा तालिका"
+
+#: views/view-import.php:28
+msgid "Select existing Table to Replace"
+msgstr "वर्तमान तालिका चुनें  बदलें के लिए"
+
+#: views/view-import.php:44
+msgid "Select source for Import"
+msgstr "आयात के लिए स्रोत का चयन करें"
+
+#: views/view-import.php:46
+msgid "File upload"
+msgstr "फ़ाइल अपलोड करें"
+
+#: views/view-import.php:47
+msgid "URL"
+msgstr "यूआरएल"
+
+#: views/view-import.php:48
+msgid "Manual input"
+msgstr "मैनुअल इनपुट"
+
+#: views/view-import.php:49
+msgid "File on server"
+msgstr "फ़ाइल सर्वर पर"
+
+#: views/view-import.php:53
+msgid "Select File with Table to Import"
+msgstr "चुनें आयात के लिए तालिका के साथ फाइल"
+
+#: views/view-import.php:57
+msgid "URL to Import Table from"
+msgstr "यूआरएल आयात तालिका से"
+
+#: views/view-import.php:61
+msgid "Path to file on server"
+msgstr "पथ सर्वर पर फ़ाइल"
+
+#: views/view-import.php:65
+msgid "Paste data with Table to Import"
+msgstr "आयात के लिए तालिका के साथ चस्पा डेटा"
+
+#: views/view-import.php:71
+msgid "Import Table"
+msgstr "आयात तालिका"
+
+#: views/view-import.php:85
+msgid "Import from original wp-Table plugin"
+msgstr "मूल WP से आयात टैबिल प्लगइन"
+
+#: views/view-import.php:131
+msgid "Import"
+msgstr "आयात"
+
+#: views/view-import.php:139
+#: views/view-list.php:79
+msgid "Bulk actions:"
+msgstr "थोक क्रिया:"
+
+#: views/view-import.php:139
+msgid "Import Tables"
+msgstr "आयात टेबल्स"
+
+#: views/view-import.php:145
+msgid "wp-Table by Alex Rabe seems to be installed, but no tables were found."
+msgstr "WP-एलेक्स Rabe द्वारा मेज़ से स्थापित हो रहा है, लेकिन कोई टेबल पाए गए."
+
+#: views/view-list.php:2
+msgid "You may add, edit, copy, delete or preview tables here."
+msgstr "आप जोड़ने के लिए, संपादित करें, प्रतिलिपि, हटाना या पूर्वावलोकन यहाँ टेबल कर सकते हैं."
+
+#: views/view-list.php:2
+msgid "Each table has a unique ID that needs to be adjusted in that shortcode."
+msgstr "हर तालिका एक अद्वितीय ID की जरूरत है. कि उस shortcode में समायोजित की जरूरत है.  "
+
+#: views/view-list.php:2
+#, php-format
+msgid "You can also click the button &quot;%s&quot; in the editor toolbar to select and insert a table."
+msgstr "तुम भी बटन क्लिक कर सकते हैं &quot;%s&quot; संपादक उपकरण पट्टी में और चुनने के लिए एक टेबल डालें."
+
+#: views/view-list.php:39
+msgid "(no name)"
+msgstr "(कोई नाम )"
+
+#: views/view-list.php:40
+msgid "(no description)"
+msgstr "(कोई विवरण नहीं)"
+
+#: views/view-list.php:58
+#, php-format
+msgid "Edit %s"
+msgstr "संपादित करें %s"
+
+#: views/view-list.php:62
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: views/view-list.php:63
+msgid "Copy"
+msgstr "प्रतिलिपि"
+
+#: views/view-list.php:64
+msgid "Export"
+msgstr "निर्यात"
+
+#: views/view-list.php:66
+#, php-format
+msgid "Preview of Table %s"
+msgstr "तालिका के पूर्वावलोकन  %s"
+
+#: views/view-list.php:67
+msgid "Preview"
+msgstr "तालिका के पूर्वावलोकन"
+
+#: views/view-list.php:79
+msgid "Copy Tables"
+msgstr "कॉपी टेबल्स"
+
+#: views/view-list.php:79
+msgid "Delete Tables"
+msgstr "हटाएँ टेबल्स"
+
+#: views/view-options.php:3
+msgid "WP-Table Reloaded has several options which affect the plugin behavior in different areas."
+msgstr "WP-Table रीलोडेड कई विकल्प है जो विभिन्न क्षेत्रों में प्लगइन व्यवहार को प्रभावित करते है "
+
+#: views/view-options.php:4
+msgid "Frontend Options influence the output and used features of tables in pages, posts or text-widgets."
+msgstr "दृश्यपटल विकल्प उत्पादन को प्रभावित करते है और टेबल की विशेषताएँ  पन्नों, पद या पाठ-widgets में इस्तेमाल करते है    "
+
+#: views/view-options.php:4
+#, php-format
+msgid "The Backend Options control the plugin's admin area, e.g. the &quot;%s&quot; screen."
+msgstr "बैकएण्ड विकल्प है प्लगइन व्यवस्थापक क्षेत्र पर नियंत्रण, e.g. the &quot;%s&quot; देखे "
+
+#: views/view-options.php:4
+#: views/view-options.php:55
+#: views/view-options.php:75
+#: views/view-options.php:79
+msgid "Edit Table"
+msgstr "संपादित करें तालिका"
+
+#: views/view-options.php:4
+msgid "Administrators have access to further Admin Options."
+msgstr "प्रशासक और व्यवस्थापक के विकल्प का उपयोग किया है"
+
+#: views/view-options.php:19
+msgid "Frontend Options"
+msgstr "दृश्यपटल विकल्प"
+
+#: views/view-options.php:23
+msgid "JavaScript library"
+msgstr "जावास्क्रिप्ट पुस्तकालय"
+
+#: views/view-options.php:24
+msgid "Yes, enable the use of a JavaScript library."
+msgstr "हाँ, एक जावास्क्रिप्ट पुस्तकालय का उपयोग कर सकें."
+
+#: views/view-options.php:24
+msgid "WP-Table Reloaded includes three JavaScript libraries that can add useful features, like sorting, pagination, and filtering, to a table."
+msgstr "WP-Table रीलोडेड तीन जावास्क्रिप्ट पुस्तकालयों को उपयोगी सुविधाओं को जोड़ सकते हैं शामिल हैं, छँटाई, पन्ने पर नंबर डालना पसंद है, और फ़िल्टरिंग, एक मेज पर."
+
+#: views/view-options.php:28
+msgid "Select the library to use:"
+msgstr "चुनें उपयोग पुस्तकालय:"
+
+#: views/view-options.php:29
+#: views/view-options.php:127
+msgid "recommended"
+msgstr "की सिफारिश की"
+
+#: views/view-options.php:33
+#, php-format
+msgid "(You can read more about each library's features on the <a href=\"%s\">plugin's website</a>.)"
+msgstr "(आप एक पुस्तकालय सुविधाओं के बारे में और अधिक पढ़ें पर कर सकते हैं <a href=\"%s\">plugin's website</a>.)"
+
+#: views/view-options.php:36
+msgid "Default CSS"
+msgstr "डिफ़ॉल्ट सीएसएस"
+
+#: views/view-options.php:38
+msgid "Yes, include and load the plugin's default CSS Stylesheets. This is highly recommended, if you use one of the JavaScript libraries!"
+msgstr "हाँ, शामिल है,  और है प्लगइन डिफ़ॉल्ट सीएसएस Stylesheets लोड. यह अत्यधिक की सिफारिश की है, अगर आप जावास्क्रिप्ट पुस्तकालयों में से एक प्रयोग है!"
+
+#: views/view-options.php:42
+msgid "Custom CSS"
+msgstr "कस्टम सीएसएस"
+
+#: views/view-options.php:44
+msgid "Yes, include and load the following custom CSS commands."
+msgstr " हाँ, और निम्नलिखित कस्टम सीएसएस कमांड लोड शामिल है,."
+
+#: views/view-options.php:44
+msgid "This should be used to change the table layout and styling."
+msgstr "तालिका का  लेआउट और स्टाइल परिवर्तन किया जाना चाहिए."
+
+#: views/view-options.php:50
+#, php-format
+msgid "You can get styling examples from the <a href=\"%s\">plugin's website</a>."
+msgstr "तुम उदाहरण स्टाइल से प्राप्त कर सकते हैं <a href=\"%s\">plugin's website</a>."
+
+#: views/view-options.php:50
+#, php-format
+msgid "Information on available CSS selectors can be found in the <a href=\"%s\">documentation</a>."
+msgstr "सीएसएस चयनकर्ताओं पर उपलब्ध जानकारी में पाया जा सकता है <a href=\"%s\">प्रलेखन</a>."
+
+#: views/view-options.php:54
+msgid "Links in new window"
+msgstr "नई विंडो में लिंक"
+
+#: views/view-options.php:55
+#, php-format
+msgid "Yes, open links that are inserted with the &quot;%s&quot; button on the &quot;%s&quot; screen in a new browser window <strong>from now on</strong>."
+msgstr "हाँ,  खुला लिंक है कि के साथ डाला है &quot;%s&quot; पर बटन %s&quot; एक नई ब्राउज़र विंडो में स्क्रीन <strong>from now on</strong>."
+
+#: views/view-options.php:62
+#: views/view-options.php:159
+msgid "Save Options"
+msgstr "सहेजें विकल्प"
+
+#: views/view-options.php:70
+msgid "Backend Options"
+msgstr "बैकेंड विकल्प"
+
+#: views/view-options.php:74
+msgid "Exit warning"
+msgstr "बाहर निकलें चेतावनी"
+
+#: views/view-options.php:75
+#, php-format
+msgid "Yes, show a warning message, if I leave the &quot;%s&quot; screen and have not yet saved my changes."
+msgstr "हाँ, एक चेतावनी संदेश दिखाने के लिए, अगर मैं छुट्टी  &quot;%s&quot;  स्क्रीन है और अपने परिवर्तनों को अभी तक सहेजा नहीं है."
+
+#: views/view-options.php:78
+msgid "Growing textareas"
+msgstr "बढ़ती textareas"
+
+#: views/view-options.php:79
+#, php-format
+msgid "Yes, enlarge the textareas on the &quot;%s&quot; screen when they are focussed."
+msgstr "हाँ, textareas विस्तार पर  &quot;%s&quot;जब वे परदे पर ध्यान केंद्रित कर रहे हैं.  "
+
+#: views/view-options.php:87
+msgid "Admin Options"
+msgstr "व्यवस्थापक विकल्प"
+
+#: views/view-options.php:89
+#: views/view-options.php:200
+#: views/view-options.php:214
+msgid "This area are only available to site administrators!"
+msgstr "क्षेत्र केवल साइट प्रशासकों के लिए उपलब्ध हैं!"
+
+#: views/view-options.php:89
+msgid "You can therefore not change these options."
+msgstr "इसलिए आप इन विकल्पों को बदल नहीं सकते."
+
+#: views/view-options.php:94
+msgid "Plugin Access"
+msgstr "प्लगइन प्रवेश"
+
+#: views/view-options.php:95
+msgid "To access WP-Table Reloaded, a user needs to be:"
+msgstr "WP का उपयोग करने के लिए, एक उपयोगकर्ता तालिका रीलोडेड के लिए जरूरत है:"
+
+#: views/view-options.php:96
+#: views/view-options.php:107
+msgctxt "User role"
+msgid "Administrator"
+msgstr "व्यवस्थापक "
+
+#: views/view-options.php:97
+#: views/view-options.php:108
+msgctxt "User role"
+msgid "Editor"
+msgstr "संपादक "
+
+#: views/view-options.php:98
+#: views/view-options.php:109
+msgctxt "User role"
+msgid "Author"
+msgstr "लेखक"
+
+#: views/view-options.php:99
+msgctxt "User role"
+msgid "Contributor"
+msgstr "योगदानकर्ता"
+
+#: views/view-options.php:105
+msgid "Plugin Options Access"
+msgstr "प्लगइन विकल्प प्रवेश"
+
+#: views/view-options.php:106
+msgid "To access the Plugin Options of WP-Table Reloaded, a user needs to be:"
+msgstr " WP प्लगइन के लिए  विकल्प टैबिल रीलोडेड का उपयोग, एक उपयोगकर्ता के लिए की जरूरत है:"
+
+#: views/view-options.php:110
+msgid "Admin Options, Dump file Import, and Manual Plugin Uninstall are always accessible by Administrators only, regardless of this setting."
+msgstr "व्यवस्थापक विकल्प, डाल दो फ़ाइल आयात, और मैनुअल प्लगइन स्थापना प्रशासक के द्वारा रद्द करें  हमेशा उपलब्ध हैं ,चाहे इस सेटिंग के."
+
+#: views/view-options.php:114
+msgid "Plugin Language"
+msgstr "प्लगइन भाषा"
+
+#: views/view-options.php:115
+msgid "WP-Table Reloaded shall be shown in this language:"
+msgstr "WP-Table रीलोडेड इस भाषा में प्रदर्शित किया जाएगा:"
+
+#: views/view-options.php:116
+#, php-format
+msgid "WordPress Default (currently %s)"
+msgstr "WordPress डिफ़ॉल्ट (वर्तमान में% s)"
+
+#: views/view-options.php:125
+msgid "Admin menu entry"
+msgstr "व्यवस्थापक मेनू प्रविष्टि"
+
+#: views/view-options.php:126
+msgid "WP-Table Reloaded shall be shown in this section of the admin menu:"
+msgstr "WP-Table रीलोडेड व्यवस्थापक मेनू इस खंड में दिखाया जाएगा:"
+
+#: views/view-options.php:127
+msgid "Tools"
+msgstr "उपकरण"
+
+#: views/view-options.php:128
+msgid "Posts"
+msgstr "डाक"
+
+#: views/view-options.php:129
+msgid "Pages"
+msgstr "पन्ने"
+
+#: views/view-options.php:130
+msgid "Plugins"
+msgstr "Plugins"
+
+#: views/view-options.php:131
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: views/view-options.php:132
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: views/view-options.php:133
+msgid "Top-Level"
+msgstr "शीर्ष स्तर"
+
+#: views/view-options.php:138
+msgid "Frontend Edit Link"
+msgstr "दृश्यपटल संपादित करें लिंक"
+
+#: views/view-options.php:139
+msgid "Yes, show an \"Edit\" link to users with sufficient rights near every table on the frontend."
+msgstr "शो हाँ, एक \"संपादित करें \"  हर टेबल के पास दृश्यपटल पर पर्याप्त अधिकार के साथ उपयोगकर्ताओं के लिए लिंक."
+
+#: views/view-options.php:143
+msgid "WordPress Search"
+msgstr "WordPress खोज"
+
+#: views/view-options.php:144
+msgid "Yes, the WordPress Search shall also find posts and pages that contain the search term inside a table."
+msgstr "हाँ, WordPress खोज पोस्ट और पृष्ठों को भी खोजेगा यदि खोज सब्द टेबल के अंदर है तब भी "
+
+#: views/view-options.php:148
+msgid "Remove upon Deactivation"
+msgstr "क्रियाशीलता छोड़ना पर निकालें"
+
+#: views/view-options.php:149
+msgid "Yes, remove all plugin related data from the database when the plugin is deactivated."
+msgstr "हाँ, जब प्लगइन निष्क्रिय है डेटाबेस से सभी संबंधित डेटा प्लगइन हटा दें."
+
+#: views/view-options.php:149
+msgid "Should be activated directly before deactivation only!"
+msgstr "सीधे क्रियाशीलता छोड़ना के पहले ही सक्रिय होना चाहिए!"
+
+#: views/view-options.php:169
+msgid "WP-Table Reloaded Data Export and Backup"
+msgstr "WP-Table रीलोडेड डेटा निर्यात करें और बैकअप"
+
+#: views/view-options.php:172
+msgid "WP-Table Reloaded can export and import a so-called dump file that contains all tables, their settings and the plugin's options."
+msgstr "WP-Table रीलोडेड निर्यात और आयात के एक तथाकथित फ़ाइल है कि सभी टेबल शामिल डंप कहा जा सकता, अपनी सेटिंग्स और प्लगइन का विकल्प है."
+
+#: views/view-options.php:172
+msgid "This file can be used as a backup or to move all data to another WordPress site."
+msgstr "इस फ़ाइल को एक बैकअप के रूप में इस्तेमाल किया जा सकता या सभी डेटा को एक WordPress साइट पर ले जाये "
+
+#: views/view-options.php:175
+msgid "Export a dump file"
+msgstr "निर्यात एक डंप फाइल"
+
+#: views/view-options.php:177
+msgid "To export all Tables and their settings, click the button below to generate and download a dump file."
+msgstr "सभी टेबल्स और उनके निर्यात सेटिंग्स, बटन के नीचे क्लिक करें उत्पन्न करने के लिए और एक डंप फाइल डाउनलोड करें."
+
+#: views/view-options.php:177
+msgid "<strong>Warning</strong>: Do <strong>not</strong> edit the content of that file under any circumstances as you will destroy the file!"
+msgstr "<strong>Warning</strong>: Do <strong>not</strong> किसी भी हालत में फाइल की सामग्री को संपादित करे  की आपने फ़ाइल को नष्ट कर दिया है "
+
+#: views/view-options.php:186
+msgid "Import a dump file"
+msgstr "आयात एक डंप फाइल"
+
+#: views/view-options.php:188
+msgid "To import a WP-Table Reloaded dump file and restore the included data, upload the file from your computer."
+msgstr "एक WP आयात टैबिल रीलोडेड डंप फाइल और शामिल डेटा बहाल करने, अपने कंप्यूटर से फ़ाइल अपलोड करे."
+
+#: views/view-options.php:188
+msgid "All current data of this WP-Table Reloaded installation (Tables, Options, Settings) <strong>WILL BE OVERWRITTEN</strong> with the data from the file!"
+msgstr "इस WP के सभी वर्तमान डाटा टैबिल फ़ाइल से डेटा के साथ रीलोडेड (Tables, Options, Settings) <strong>WILL BE OVERWRITTEN</strong>  अधिष्ठापन!"
+
+#: views/view-options.php:188
+msgid "Do not proceed, if you do not understand this!"
+msgstr "नहीं आगे क्या,  अगर आपको  यह समझ में नहीं आता!"
+
+#: views/view-options.php:188
+msgid "It is highly recommended to export and backup the data of this installation before importing another dump file (see above)."
+msgstr "निर्यात  और बैकअप के लिए  अधिष्ठापन  से पहले इस के डेटा डंप फाइल आयात करने की सिफारिश की है(ऊपर देखें)."
+
+#: views/view-options.php:194
+msgid "Select Dump File"
+msgstr "चुनें डंप फाइल"
+
+#: views/view-options.php:196
+msgid "Import Dump File"
+msgstr "आयात  डंप फाइल"
+
+#: views/view-options.php:206
+msgid "Manually Uninstall WP-Table Reloaded"
+msgstr "मैन्युअल रूप से स्थापना रद्द करें WP-तालिका रीलोडेड"
+
+#: views/view-options.php:208
+msgid "Uninstalling <strong>will permanently delete</strong> all tables, data, and options, that belong to WP-Table Reloaded from the database, including all tables you added or imported."
+msgstr "Uninstalling  <strong> स्थायी रूप से हटा दिए जाएँगे  </strong> सभी तालिकाओं को, और विकल्प, डेटाबेस से तालिका रीलोडेड,सब जोड़ या आयात भी शामिल है"
+
+#: views/view-options.php:208
+msgid "You will manually need to remove the plugin's files from the plugin folder afterwards."
+msgstr "बाद में आपको मैन्युअल रूप से प्लगइन फ़ोल्डर से प्लगइन फ़ाइलों को हटाने की आवश्यकता होगी."
+
+#: views/view-options.php:208
+msgid "Be very careful with this and only click the button if you know what you are doing!"
+msgstr " बहुत सावधानी  बरते   और  बटन क्लिक करे अगर तुम्हें पता है कि तुम क्या कर रहे हैं! "
+
+#: views/view-options.php:212
+msgid "Uninstall Plugin WP-Table Reloaded"
+msgstr "WP-तालिका रीलोडेड प्लगइन   स्थापना रद्द करे "
+
+#: views/view-uninstall.php:3
+msgid "Plugin deactivated successfully."
+msgstr "प्लगइन सफलतापूर्वक निष्क्रिय."
+
+#: views/view-uninstall.php:4
+msgid "All tables, data and options were deleted. You may now manually remove the plugin's subfolder from your WordPress plugin folder or use the \"Delete\" link on the Plugins page."
+msgstr "सभी सारणियाँ, डेटा और विकल्प नष्ट कर दिया गया. अब आप अपने WordPress प्लगइन फ़ोल्डर से प्लगइन subfolder निकाल सकते हैं या प्लगइन पेज से \"delete\" लिंक का प्रोयोग करें ."
+
+#. Plugin URI of an extension
+msgid "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+msgstr "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+
+#. Description of an extension
+msgid "This plugin allows you to create and easily manage tables in the admin-area of WordPress. A comfortable backend allows an easy manipulation of table data. You can then include the tables into your posts, on your pages or in text widgets by using a shortcode or a template tag function. Tables can be imported and exported from/to CSV, XML and HTML."
+msgstr "इस प्लगइन आपको आसानी से बनाने के लिए और  टेवल प्रबंधन के लिए  WordPress के व्यवस्थापक क्षेत्र अनुमति में  देता है. डेटा तालिका का एक आसान हेरफेर. एक आरामदायक बैकेंड की अनुमति देता है तब आप अपनी पोस्ट में टेबल अपने पृष्ठों या पाठ में widgets पर, एक या shortcode एक टैग समारोह टेम्पलेट का उपयोग करके शामिल कर सकते हैं.टेबल और आयात किया जा सकता से निर्यात / CSV, HTML और XML के लिए."
+
+#. Author of an extension
+msgid "Tobias B&auml;thge"
+msgstr "Tobias B&auml;thge"
+
+#. Author URI of an extension
+msgid "http://tobias.baethge.com/"
+msgstr "http://tobias.baethge.com/"
+
+#~ msgid "This is the &quot;%s&quot; screen."
+#~ msgstr "यह  &quot;%s&quot; परदा है."
+#~ msgid ""
+#~ "This version adds support for the DataTables JavaScript library (with "
+#~ "features like sorting, pagination, and filtering) and includes a lot more "
+#~ "enhancements."
+#~ msgstr ""
+#~ "इस संस्करण DataTables जावास्क्रिप्ट पुस्तकालय के लिए समर्थन कहते हैं (छँटाई, पृष्ठ पर अंक "
+#~ "लगाना पसंद सुविधाओं के साथ, और फ़िल्टरिंग) और एक बहुत अधिक वृद्धि भी शामिल है."
+#~ msgid "Hide|expand"
+#~ msgstr "छिपाएँ | विस्तार"
+#~ msgid "Hide|item"
+#~ msgstr "छिपाएँ | मद"
+#~ msgid "Unhide|item"
+#~ msgstr "दिखाएँ | मद"
+#~ msgid "Selected rows: %s %s|hide_unhide"
+#~ msgstr "चयनित पंक्तियाँ: %s %s| छिपाने_ दिखाएँ"
+#~ msgid "Selected rows:"
+#~ msgstr "चयनित पंक्तियाँ:"
+#~ msgid "Selected columns: %s %s|hide_unhide"
+#~ msgstr "चयनित कॉलम:%s %s| छिपाने_ दिखाएँ"
+#~ msgid "Selected columns:"
+#~ msgstr "चयनित कॉलम:"
+#~ msgid "Selected rows: %s %s|insert_delete"
+#~ msgstr "चयनित पंक्तियाँ: %s %s| छिपाने_ दिखाएँ"
+#~ msgid "Selected columns: %s %s|insert_delete"
+#~ msgstr "चयनित कॉलम:%s %s| छिपाने_ दिखाएँ"
+#~ msgid "Administrator|User role"
+#~ msgstr "व्यवस्थापक | प्रयोक्ता की भूमिका"
+#~ msgid "Editor|User role"
+#~ msgstr "संपादक | प्रयोक्ता की भूमिका"
+#~ msgid "Author|User role"
+#~ msgstr "लेखक | प्रयोक्ता की भूमिका"
+#~ msgid "Contributor|User role"
+#~ msgstr "योगदानकर्ता | प्रयोक्ता की भूमिका"
+#~ msgid "Change will take effect after another page load after saving."
+#~ msgstr "परिवर्तन सहेजने के बाद एक पृष्ठ लोड करने के बाद लागू होगा."
+#~ msgid ""
+#~ "Brazilian Portugues (thanks to <a href=\"http://www.pensarics.com/"
+#~ "\">Rics</a>)"
+#~ msgstr ""
+#~ "ब्राजील Português (धन्यवाद <a href=\"http://www.pensarics.com/\">Rics</a>)"
+#~ msgid ""
+#~ "Czech (thanks to <a href=\"http://separatista.net/\">Separatista</a>)"
+#~ msgstr "चेक (धन्यवाद <a href=\"http://separatista.net/\">Separatista</a>)"
+#~ msgid "Japanese (thanks to <a href=\"http://www.u-1.net/\">Yuuichi</a>)"
+#~ msgstr "जापानी (धन्यवाद  <a href=\"http://www.u-1.net/\">Yuuichi</a>)"
+#~ msgid "Slovak (thanks to <a href=\"http://lukas.cerro.sk/\">55.lukas</a>)"
+#~ msgstr "स्लोवाक्(धन्यवाद<a href=\"http://lukas.cerro.sk/\">55.lukas</a>)"
+#~ msgid "Swedish (thanks to <a href=\"http://www.zuperzed.se/\">ZuperZed</a>)"
+#~ msgstr "स्विडिश(धन्यवाद <a href=\"http://www.zuperzed.se/\">ZuperZed</a>)"
+

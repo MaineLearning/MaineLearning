@@ -1,0 +1,12 @@
+CREATE TABLE `%sgdsr_multis_trend` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `multi_id` int(11) NOT NULL,
+  `vote_date` varchar(10) DEFAULT NULL,
+  `average_rating_users` decimal(3,1) NOT NULL DEFAULT '0.0',
+  `average_rating_visitors` decimal(3,1) NOT NULL DEFAULT '0.0',
+  `total_votes_users` int(11) NOT NULL DEFAULT '0',
+  `total_votes_visitors` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY idx_post_mtt (post_id),
+  KEY idx_multi_mtt (multi_id))%COLLATE%;

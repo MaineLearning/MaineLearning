@@ -1,0 +1,137 @@
+# Copyright (C) 2010 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-reviews\n"
+"POT-Creation-Date: 2011-02-04 12:24:39+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/settings.php:28
+msgid "Enable group reviews"
+msgstr ""
+
+#: includes/classes.php:10 templates/index.php:16
+msgid "Reviews"
+msgstr ""
+
+#: includes/classes.php:31
+msgid ""
+"Please make sure you fill in the review, and don't forget to provide a "
+"rating!"
+msgstr ""
+
+#: includes/classes.php:87
+msgid "%s reviewed %s:"
+msgstr ""
+
+#: includes/templatetags.php:42 includes/templatetags.php:81
+msgid "(based on %s rating)"
+msgid_plural "(based on %s ratings)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/templatetags.php:44 includes/templatetags.php:51
+#: includes/templatetags.php:53 includes/templatetags.php:88
+#: includes/templatetags.php:95
+msgid "1 star"
+msgstr ""
+
+#: includes/templatetags.php:45 includes/templatetags.php:56
+#: includes/templatetags.php:58 includes/templatetags.php:89
+#: includes/templatetags.php:98 templates/post.php:43
+msgid "2 stars"
+msgstr ""
+
+#: includes/templatetags.php:46 includes/templatetags.php:61
+#: includes/templatetags.php:63 includes/templatetags.php:90
+#: includes/templatetags.php:101 templates/post.php:43
+msgid "3 stars"
+msgstr ""
+
+#: includes/templatetags.php:47 includes/templatetags.php:66
+#: includes/templatetags.php:68 includes/templatetags.php:91
+#: includes/templatetags.php:104 templates/post.php:43
+msgid "4 stars"
+msgstr ""
+
+#: includes/templatetags.php:48 includes/templatetags.php:71
+#: includes/templatetags.php:73 includes/templatetags.php:92
+#: includes/templatetags.php:107 templates/post.php:43
+msgid "5 stars"
+msgstr ""
+
+#: includes/widgets.php:18
+msgid "BP Group Ratings"
+msgstr ""
+
+#: includes/widgets.php:68
+msgid "Highest Rated Groups"
+msgstr ""
+
+#: includes/widgets.php:72
+msgid "Title:"
+msgstr ""
+
+#: includes/widgets.php:74
+msgid "Number of groups to display:"
+msgstr ""
+
+#: templates/index.php:39
+msgid ""
+"There are no reviews yet. Why not <a href=\"%s\">be the first to write one</"
+"a>?"
+msgstr ""
+
+#: templates/entry.php:15
+msgid "By %s"
+msgstr ""
+
+#: templates/entry.php:15
+msgid "%s ago"
+msgstr ""
+
+#: templates/entry.php:15
+msgid "#"
+msgstr ""
+
+#: templates/entry.php:28
+msgid "Comment"
+msgstr ""
+
+#: templates/entry.php:48
+msgid "Post"
+msgstr ""
+
+#: templates/entry.php:48
+msgid "or press esc to cancel."
+msgstr ""
+
+#: templates/post.php:16
+msgid "You rated %s on %s."
+msgstr ""
+
+#: templates/post.php:26
+msgid "To leave another review, you must delete your existing review."
+msgstr ""
+
+#: templates/post.php:33
+msgid "What are your thoughts on %s, %s?"
+msgstr ""
+
+#: templates/post.php:43
+msgid "Rate it:"
+msgstr ""
+
+#: templates/post.php:43
+msgid "1 stars"
+msgstr ""
+
+#: templates/post.php:49
+msgid "Post My Review"
+msgstr ""

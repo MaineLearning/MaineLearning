@@ -1,0 +1,102 @@
+# External Links pot file.
+# Copyright (C) 2010 Mesoconcepts <http://www.mesoconcepts.com>
+# This file is distributed under the same license as the External Links package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 4.0.5\n"
+"Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
+"POT-Creation-Date: 2010-05-13 16:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: sem-external-links-admin.php:29
+msgid "Settings saved."
+msgstr ""
+
+#: sem-external-links-admin.php:53
+msgid ""
+"Note: Your rel=nofollow preferences is being ignored because the dofollow "
+"plugin is enabled on your site."
+msgstr ""
+
+#: sem-external-links-admin.php:60
+msgid "External Links Settings"
+msgstr ""
+
+#: sem-external-links-admin.php:66
+msgid "Apply Globally"
+msgstr ""
+
+#: sem-external-links-admin.php:74
+msgid ""
+"Apply these settings to all outbound links, including those in sidebars, "
+"rather than to those in posts and comments."
+msgstr ""
+
+#: sem-external-links-admin.php:81
+msgid "Add Icons"
+msgstr ""
+
+#: sem-external-links-admin.php:89
+msgid "Mark outbound links with an icon."
+msgstr ""
+
+#: sem-external-links-admin.php:92
+msgid ""
+"Note: You can override this behavior by adding a class=\"no_icon\" to "
+"individual links."
+msgstr ""
+
+#: sem-external-links-admin.php:98
+msgid "Add No Follow"
+msgstr ""
+
+#: sem-external-links-admin.php:106
+msgid "Add a rel=nofollow attribute to outbound links."
+msgstr ""
+
+#: sem-external-links-admin.php:109
+msgid ""
+"Note: You can override this behavior by adding a rel=\"follow\" to "
+"individual links."
+msgstr ""
+
+#: sem-external-links-admin.php:115
+msgid "Open in New Windows"
+msgstr ""
+
+#: sem-external-links-admin.php:123
+msgid "Open outbound links in new windows."
+msgstr ""
+
+#: sem-external-links-admin.php:126
+msgid ""
+"Note: Some usability experts discourage this, claiming that <a href=\"http://"
+"www.useit.com/alertbox/9605.html\">this can damage your visitors' trust</a> "
+"towards your site. Others highlight that computer-illiterate users do not "
+"always know how to use the back button, and encourage the practice for that "
+"reason."
+msgstr ""
+
+#: sem-external-links-admin.php:134
+msgid "Save Changes"
+msgstr ""
+
+#: sem-external-links-info.php:2 sem-external-links.php:216
+#: sem-external-links.php:217
+msgid "External Links"
+msgstr ""
+
+#: sem-external-links-info.php:3
+msgid ""
+"Marks outbound links as such, with various effects that are configurable "
+"under <a href=\"options-general.php?page=external-links\">Settings / "
+"External Links</a>."
+msgstr ""

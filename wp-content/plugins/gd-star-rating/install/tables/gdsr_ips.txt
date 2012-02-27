@@ -1,0 +1,6 @@
+CREATE TABLE `%sgdsr_ips` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `status` varchar(1) default 'B',
+  `mode` varchar(1) default 'S',
+  `ip` varchar(128) default NULL,
+  PRIMARY KEY  (`id`))%COLLATE%;

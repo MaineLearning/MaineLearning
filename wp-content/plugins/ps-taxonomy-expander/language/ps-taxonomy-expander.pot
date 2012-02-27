@@ -1,0 +1,92 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PS Taxonomy Expander\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-30 13:43+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: odyssey <odysseygate+poedit@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: \n"
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:5
+msgid "PS Taxonomy Expander makes easy to use categories, tags and custom taxonomies on editing posts."
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:153
+#, php-format
+msgid "Default %s %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:163
+#, php-format
+msgid "Default Media %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:167
+msgid "Option to register taxonomies"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:178
+msgid "unset"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:186
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:352
+#, php-format
+msgid "%s is not registerd."
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:200
+msgid "check the taxonomy box to turn into single selection."
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:442
+msgid "Add taxonomies on Right Now"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:446
+msgid "Display taxonomies on Right Now in the Dashboard."
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:496
+msgid "Non Updated"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:498
+msgid "Updated successfully."
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:468
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:519
+msgid "Term order"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:537
+#, php-format
+msgid "Sub %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:543
+#, php-format
+msgid "Move to child %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:546
+#, php-format
+msgid "Back to top %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:548
+#, php-format
+msgid "Back to parent %s"
+msgstr ""
+
+#: ps-taxonomy-expander/ps-taxonomy-expander.php:550
+#, php-format
+msgid "%s order"
+msgstr ""

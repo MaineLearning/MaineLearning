@@ -1,0 +1,18 @@
+CREATE TABLE `%sgdsr_multis_data` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `multi_id` int(11) NOT NULL,
+  `average_rating_users` decimal(3,1) NOT NULL DEFAULT '0.0',
+  `average_rating_visitors` decimal(3,1) NOT NULL DEFAULT '0.0',
+  `total_votes_users` int(11) NOT NULL DEFAULT '0',
+  `total_votes_visitors` int(11) NOT NULL DEFAULT '0',
+  `average_review` decimal(3,1) NOT NULL DEFAULT '0.0',
+  `last_voted` timestamp NULL DEFAULT NULL,
+  `rules` char(1) DEFAULT 'A',
+  `moderate` char(1) DEFAULT 'N',
+  `expiry_type` char(1) NOT NULL DEFAULT 'N',
+  `expiry_value` varchar(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY post_id (post_id),
+  KEY idx_post_mdt (post_id),
+  KEY idx_multi_mdt (multi_id))%COLLATE%;

@@ -1,0 +1,4265 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Studio-XL.com <webmaster@studio-xl.com>\n"
+"Language-Team: k|torz <vlag@free.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: charts/chart_pie_votes_summary.php:35
+msgid "Chart with votes distribution"
+msgstr "Чарт с распределением голосов"
+
+#: code/db/main.php:1181
+msgid "Show all dates"
+msgstr "Показать все даты"
+
+#: code/db/main.php:1209
+msgid "All users and visitors"
+msgstr "Все пользователи и посетители"
+
+#: code/db/main.php:1210
+#: tinymce3/panels/blograting.php:22
+#: tinymce3/panels/commentsaggr.php:17
+#: tinymce3/panels/filter.php:17
+#: widgets/comments/part_basic.php:17
+#: widgets/comments/part_filter.php:17
+#: widgets/comments_28/part_basic.php:17
+#: widgets/comments_28/part_filter.php:17
+#: widgets/rating/part_basic.php:17
+#: widgets/rating/part_filter.php:28
+#: widgets/rating_28/part_basic.php:17
+#: widgets/rating_28/part_filter.php:28
+#: widgets/top/part_basic.php:17
+#: widgets/top/part_filter.php:28
+#: widgets/top_28/part_basic.php:17
+#: widgets/top_28/part_filter.php:28
+msgid "Visitors Only"
+msgstr "Только посетители"
+
+#: code/db/main.php:1211
+msgid "All Users"
+msgstr "Все пользователи"
+
+#: code/db/main.php:1227
+msgid "All categories"
+msgstr "Все категории"
+
+#: code/db/operations.php:117
+#: code/db/operations.php:120
+#: code/db/operations.php:123
+#: code/db/operations.php:126
+#: code/db/operations.php:130
+#: code/db/operations.php:153
+#: code/db/operations.php:156
+#: code/db/operations.php:159
+#: code/db/operations.php:162
+#: code/db/operations.php:165
+#: code/db/operations.php:168
+#: code/db/operations.php:260
+#: code/db/operations.php:263
+#: code/db/operations.php:266
+#: code/db/operations.php:269
+#: code/db/operations.php:273
+#: code/db/operations.php:296
+#: code/db/operations.php:299
+#: code/db/operations.php:302
+#: code/db/operations.php:305
+#: code/db/operations.php:308
+#: code/db/operations.php:312
+msgid "articles"
+msgstr "статьи"
+
+#: code/db/operations.php:117
+#: code/db/operations.php:135
+#: code/db/operations.php:153
+#: code/db/operations.php:173
+msgid "inherited"
+msgstr "унаследовано"
+
+#: code/db/operations.php:120
+#: code/db/operations.php:138
+#: code/db/operations.php:263
+#: code/db/operations.php:281
+msgid "all"
+msgstr "все"
+
+#: code/db/operations.php:123
+#: code/db/operations.php:141
+#: code/db/operations.php:162
+#: code/db/operations.php:182
+#: code/db/operations.php:249
+#: code/db/operations.php:250
+#: code/db/operations.php:266
+#: code/db/operations.php:284
+#: code/db/operations.php:305
+#: code/db/operations.php:326
+#: code/db/operations.php:403
+#: code/db/operations.php:404
+#: integrate/dash_latest.php:41
+#: options/multis/results_post.php:159
+#: options/multis/results_post.php:160
+msgid "visitors"
+msgstr "посетители"
+
+#: code/db/operations.php:126
+#: code/db/operations.php:144
+#: code/db/operations.php:165
+#: code/db/operations.php:185
+#: code/db/operations.php:249
+#: code/db/operations.php:250
+#: code/db/operations.php:269
+#: code/db/operations.php:287
+#: code/db/operations.php:308
+#: code/db/operations.php:329
+#: code/db/operations.php:403
+#: code/db/operations.php:404
+#: options/multis/results_post.php:161
+#: options/multis/results_post.php:162
+msgid "users"
+msgstr "пользователи"
+
+#: code/db/operations.php:130
+#: code/db/operations.php:148
+#: code/db/operations.php:273
+#: code/db/operations.php:291
+msgid "free"
+msgstr "free"
+
+#: code/db/operations.php:135
+#: code/db/operations.php:138
+#: code/db/operations.php:141
+#: code/db/operations.php:144
+#: code/db/operations.php:148
+#: code/db/operations.php:173
+#: code/db/operations.php:176
+#: code/db/operations.php:179
+#: code/db/operations.php:182
+#: code/db/operations.php:185
+#: code/db/operations.php:188
+#: code/db/operations.php:278
+#: code/db/operations.php:281
+#: code/db/operations.php:284
+#: code/db/operations.php:287
+#: code/db/operations.php:291
+#: code/db/operations.php:317
+#: code/db/operations.php:320
+#: code/db/operations.php:323
+#: code/db/operations.php:326
+#: code/db/operations.php:329
+#: code/db/operations.php:333
+msgid "comments"
+msgstr "комментарии"
+
+#: code/db/operations.php:156
+#: code/db/operations.php:176
+#: code/db/operations.php:299
+#: code/db/operations.php:320
+msgid "hidden"
+msgstr "спрятано"
+
+#: code/db/operations.php:159
+#: code/db/operations.php:179
+#: code/db/operations.php:302
+#: code/db/operations.php:323
+msgid "locked"
+msgstr "закрыто"
+
+#: code/db/operations.php:168
+#: code/db/operations.php:188
+#: code/db/operations.php:312
+#: code/db/operations.php:333
+msgid "everyone"
+msgstr "каждый"
+
+#: code/db/operations.php:248
+#: options/multis/results_post.php:165
+#: options/multis/results_post.php:166
+#: options/users.php:110
+#: options/users.php:115
+#: options/users.php:120
+#: options/users.php:125
+msgid "rating"
+msgstr "рейтинг"
+
+#: code/db/operations.php:248
+#: code/db/operations.php:402
+msgid "thumbs"
+msgstr "большой палец"
+
+#: code/db/operations.php:260
+#: code/db/operations.php:278
+#: code/db/operations.php:296
+#: code/db/operations.php:317
+msgid "parent"
+msgstr "родитель"
+
+#: code/db/operations.php:402
+#: options/users.php:109
+#: options/users.php:114
+#: options/users.php:119
+#: options/users.php:124
+msgid "votes"
+msgstr "голосов"
+
+#: code/t2/render.php:781
+msgid "(no title)"
+msgstr "(без названия)"
+
+#: code/t2/templates.php:4
+msgid "Element Word Votes"
+msgstr "Element Word Votes"
+
+#: code/t2/templates.php:5
+msgid "Singular"
+msgstr "одиночный"
+
+#: code/t2/templates.php:6
+msgid "Plural"
+msgstr "словесный"
+
+#: code/t2/templates.php:9
+msgid "Element For Alternating Table Rows"
+msgstr "Элементы настройки столбцов таблицы"
+
+#: code/t2/templates.php:10
+msgid "Odd"
+msgstr "нечетный"
+
+#: code/t2/templates.php:11
+msgid "Even"
+msgstr "четный"
+
+#: code/t2/templates.php:14
+msgid "Standard Ratings Text"
+msgstr "Стандартный текст рейтинга"
+
+#: code/t2/templates.php:16
+#: code/t2/templates.php:41
+#: code/t2/templates.php:81
+#: code/t2/templates.php:103
+#: code/t2/templates.php:178
+#: code/t2/templates.php:206
+#: code/t2/templates.php:297
+#: code/t2/templates.php:336
+msgid "article rating"
+msgstr "рейтинг статей"
+
+#: code/t2/templates.php:17
+#: code/t2/templates.php:42
+#: code/t2/templates.php:82
+#: code/t2/templates.php:104
+#: code/t2/templates.php:179
+#: code/t2/templates.php:207
+#: code/t2/templates.php:220
+#: code/t2/templates.php:288
+msgid "maximum rating value"
+msgstr "Максимальное значение рейтинга"
+
+#: code/t2/templates.php:18
+#: code/t2/templates.php:45
+#: code/t2/templates.php:83
+#: code/t2/templates.php:105
+#: code/t2/templates.php:182
+#: code/t2/templates.php:209
+#: code/t2/templates.php:298
+#: code/t2/templates.php:337
+msgid "total votes for article"
+msgstr "всего голосов"
+
+#: code/t2/templates.php:19
+#: code/t2/templates.php:55
+#: code/t2/templates.php:84
+#: code/t2/templates.php:106
+#: code/t2/templates.php:192
+#: code/t2/templates.php:287
+#: code/t2/templates.php:296
+#: code/t2/templates.php:335
+msgid "post/page id"
+msgstr "ID страницы / статьи"
+
+#: code/t2/templates.php:20
+#: code/t2/templates.php:60
+#: code/t2/templates.php:72
+#: code/t2/templates.php:86
+#: code/t2/templates.php:97
+#: code/t2/templates.php:107
+#: code/t2/templates.php:197
+#: code/t2/templates.php:212
+#: code/t2/templates.php:230
+#: code/t2/templates.php:268
+#: code/t2/templates.php:301
+#: code/t2/templates.php:340
+msgid "singular/plural word votes"
+msgstr "singular/plural word votes"
+
+#: code/t2/templates.php:21
+#: code/t2/templates.php:108
+#: code/t2/templates.php:302
+msgid "remaining years"
+msgstr "осталось лет"
+
+#: code/t2/templates.php:22
+#: code/t2/templates.php:109
+#: code/t2/templates.php:303
+msgid "remaining months"
+msgstr "осталось месяцев"
+
+#: code/t2/templates.php:23
+#: code/t2/templates.php:110
+#: code/t2/templates.php:304
+msgid "remaining days"
+msgstr "осталось дней"
+
+#: code/t2/templates.php:24
+#: code/t2/templates.php:111
+#: code/t2/templates.php:305
+msgid "remaining hours"
+msgstr "осталось часов"
+
+#: code/t2/templates.php:25
+#: code/t2/templates.php:112
+#: code/t2/templates.php:306
+msgid "remaining minutes"
+msgstr "осталось минут"
+
+#: code/t2/templates.php:26
+#: code/t2/templates.php:113
+#: code/t2/templates.php:307
+msgid "remaining seconds"
+msgstr "осталось секунд"
+
+#: code/t2/templates.php:27
+#: code/t2/templates.php:114
+#: code/t2/templates.php:308
+msgid "end voting date"
+msgstr "конечная дата для голосований"
+
+#: code/t2/templates.php:28
+#: code/t2/templates.php:115
+#: code/t2/templates.php:309
+msgid "total remaining days"
+msgstr "всего осталось дней "
+
+#: code/t2/templates.php:29
+#: code/t2/templates.php:116
+#: code/t2/templates.php:310
+msgid "total remaining hours"
+msgstr "всего осталось часов"
+
+#: code/t2/templates.php:30
+#: code/t2/templates.php:117
+#: code/t2/templates.php:311
+msgid "total remaining minutes"
+msgstr "всего осталось минут"
+
+#: code/t2/templates.php:31
+#: code/t2/templates.php:73
+#: code/t2/templates.php:118
+#: code/t2/templates.php:312
+#: code/t2/templates.php:341
+msgid "saved vote value"
+msgstr "сохраненное значение голосования"
+
+#: code/t2/templates.php:32
+#: code/t2/templates.php:74
+#: code/t2/templates.php:87
+#: code/t2/templates.php:98
+#: code/t2/templates.php:119
+#: code/t2/templates.php:148
+#: code/t2/templates.php:160
+#: code/t2/templates.php:172
+#: code/t2/templates.php:213
+#: code/t2/templates.php:243
+#: code/t2/templates.php:250
+#: code/t2/templates.php:259
+#: code/t2/templates.php:269
+#: code/t2/templates.php:276
+#: code/t2/templates.php:283
+#: code/t2/templates.php:291
+#: code/t2/templates.php:313
+#: code/t2/templates.php:342
+msgid "Normal"
+msgstr "Обычный"
+
+#: code/t2/templates.php:33
+#: code/t2/templates.php:120
+#: code/t2/templates.php:314
+msgid "Time Restricted Active"
+msgstr "Ограниченный по времени - Активный"
+
+#: code/t2/templates.php:34
+#: code/t2/templates.php:121
+#: code/t2/templates.php:315
+msgid "Time Restricted Closed"
+msgstr "Ограниченный по времени - Закрытый"
+
+#: code/t2/templates.php:35
+#: code/t2/templates.php:75
+#: code/t2/templates.php:122
+#: code/t2/templates.php:316
+#: code/t2/templates.php:343
+msgid "Vote Saved"
+msgstr "Голос сохранен"
+
+#: code/t2/templates.php:38
+msgid "Standard Ratings Results"
+msgstr "Стандартные результаты рейтинга"
+
+#: code/t2/templates.php:43
+#: code/t2/templates.php:180
+msgid "article review"
+msgstr "отзыв о статье"
+
+#: code/t2/templates.php:44
+#: code/t2/templates.php:181
+msgid "maximum review value"
+msgstr "максимальное значение оценки"
+
+#: code/t2/templates.php:46
+#: code/t2/templates.php:183
+msgid "post/page title"
+msgstr "Заголовок статьи / страницы"
+
+#: code/t2/templates.php:47
+#: code/t2/templates.php:184
+msgid "url to post/page"
+msgstr "Ссылка на страницу / статью"
+
+#: code/t2/templates.php:48
+#: code/t2/templates.php:80
+#: code/t2/templates.php:154
+#: code/t2/templates.php:166
+#: code/t2/templates.php:185
+#: code/t2/templates.php:224
+#: code/t2/templates.php:240
+#: code/t2/templates.php:241
+#: code/t2/templates.php:242
+msgid "rating stars"
+msgstr "рейтинг звездами"
+
+#: code/t2/templates.php:49
+#: code/t2/templates.php:186
+#: code/t2/templates.php:208
+msgid "bayesian estimate mean rating"
+msgstr "bayesian estimate mean rating"
+
+#: code/t2/templates.php:50
+#: code/t2/templates.php:187
+msgid "bayesian estimate mean rating stars"
+msgstr "bayesian estimate mean rating stars"
+
+#: code/t2/templates.php:51
+#: code/t2/templates.php:188
+msgid "article rating trend"
+msgstr "article rating trend"
+
+#: code/t2/templates.php:52
+#: code/t2/templates.php:189
+msgid "article voting trend"
+msgstr "article voting trend"
+
+#: code/t2/templates.php:53
+#: code/t2/templates.php:190
+msgid "article review stars"
+msgstr "article review stars"
+
+#: code/t2/templates.php:54
+#: code/t2/templates.php:191
+#: code/t2/templates.php:210
+msgid "number of posts/pages"
+msgstr "количесивр страниц / статей"
+
+#: code/t2/templates.php:56
+#: code/t2/templates.php:193
+msgid "image for the post/page"
+msgstr "Изображения для статьи / страницы"
+
+#: code/t2/templates.php:57
+#: code/t2/templates.php:194
+msgid "short post/page excerpt"
+msgstr "Короткая цитата страницы / статьи"
+
+#: code/t2/templates.php:58
+#: code/t2/templates.php:195
+msgid "name of the post/page author"
+msgstr "Имя автора страницы / статьи"
+
+#: code/t2/templates.php:59
+#: code/t2/templates.php:196
+msgid "url to authors archive"
+msgstr "Ссылка на архивы автора"
+
+#: code/t2/templates.php:61
+#: code/t2/templates.php:131
+#: code/t2/templates.php:198
+#: code/t2/templates.php:231
+msgid "class for alternating row class"
+msgstr "Класс для настройки строк"
+
+#: code/t2/templates.php:62
+#: code/t2/templates.php:199
+#: code/t2/templates.php:232
+msgid "Header"
+msgstr "Шапка"
+
+#: code/t2/templates.php:63
+#: code/t2/templates.php:132
+#: code/t2/templates.php:200
+#: code/t2/templates.php:233
+msgid "Item"
+msgstr "Единица"
+
+#: code/t2/templates.php:64
+#: code/t2/templates.php:201
+#: code/t2/templates.php:234
+msgid "Footer"
+msgstr "Подвал"
+
+#: code/t2/templates.php:67
+msgid "Comments Ratings Text"
+msgstr "Текст рейтинга комментариев"
+
+#: code/t2/templates.php:69
+#: code/t2/templates.php:92
+#: code/t2/templates.php:219
+#: code/t2/templates.php:248
+#: code/t2/templates.php:264
+msgid "comment rating"
+msgstr "рейтинг комментария"
+
+#: code/t2/templates.php:70
+#: code/t2/templates.php:93
+#: code/t2/templates.php:249
+#: code/t2/templates.php:256
+#: code/t2/templates.php:265
+msgid "maximum comment rating value"
+msgstr "Максимальное значение рейтинга комментария"
+
+#: code/t2/templates.php:71
+#: code/t2/templates.php:221
+msgid "total votes for comment"
+msgstr "всего голосов"
+
+#: code/t2/templates.php:78
+msgid "Standard RSS Rating Block"
+msgstr "Стандартный блок рейтинга RSS"
+
+#: code/t2/templates.php:85
+#: code/t2/templates.php:153
+#: code/t2/templates.php:165
+#: code/t2/templates.php:238
+#: code/t2/templates.php:239
+#: code/t2/templates.php:323
+#: code/t2/templates.php:351
+msgid "rating header text"
+msgstr "заглавный текст рейтинга"
+
+#: code/t2/templates.php:90
+msgid "Comments Aggregated Rating"
+msgstr "сгенерированный ретинг коментариев"
+
+#: code/t2/templates.php:94
+msgid "total comments"
+msgstr "всего комментариев"
+
+#: code/t2/templates.php:95
+#: code/t2/templates.php:266
+msgid "total votes for all comment"
+msgstr "всего голосов для всех комментариев"
+
+#: code/t2/templates.php:96
+#: code/t2/templates.php:247
+#: code/t2/templates.php:267
+msgid "comment rating stars"
+msgstr "рейтинг звездами комментариев"
+
+#: code/t2/templates.php:101
+msgid "Multi Ratings Text"
+msgstr "Текст для Мульти-Рейтинга"
+
+#: code/t2/templates.php:125
+msgid "Multi Ratings Stars"
+msgstr "Звезды Мульти-Рейтинга"
+
+#: code/t2/templates.php:127
+msgid "single element name"
+msgstr "Название одиночного элемента"
+
+#: code/t2/templates.php:128
+msgid "single element id"
+msgstr "ID одиночного элемента"
+
+#: code/t2/templates.php:129
+msgid "single element stars"
+msgstr "Звезды одиночного элемента"
+
+#: code/t2/templates.php:130
+msgid "single element value"
+msgstr "Значение одиночного элемента"
+
+#: code/t2/templates.php:135
+msgid "Multi Ratings Block"
+msgstr "Блок Мульти-Рейтинга"
+
+#: code/t2/templates.php:138
+msgid "mulit rating header text"
+msgstr "заглавный текст мульти-рейтинга"
+
+#: code/t2/templates.php:139
+msgid "multi rating text"
+msgstr "текст мульти-рейтинга"
+
+#: code/t2/templates.php:140
+#: code/t2/templates.php:255
+#: code/t2/templates.php:274
+#: code/t2/templates.php:281
+msgid "multi rating stars"
+msgstr "звезды мультирейтинга"
+
+#: code/t2/templates.php:141
+#: code/t2/templates.php:156
+#: code/t2/templates.php:168
+#: code/t2/templates.php:275
+#: code/t2/templates.php:282
+#: code/t2/templates.php:325
+#: code/t2/templates.php:352
+msgid "css class for whole block"
+msgstr "Класс CSS для всего блока"
+
+#: code/t2/templates.php:142
+#: code/t2/templates.php:157
+#: code/t2/templates.php:169
+#: code/t2/templates.php:326
+#: code/t2/templates.php:353
+msgid "css class for header"
+msgstr "CSS класс для заголовка"
+
+#: code/t2/templates.php:143
+#: code/t2/templates.php:144
+#: code/t2/templates.php:159
+#: code/t2/templates.php:171
+#: code/t2/templates.php:328
+#: code/t2/templates.php:355
+msgid "css class for rating text"
+msgstr "CSS класс для текста рейтинга"
+
+#: code/t2/templates.php:145
+msgid "rating button"
+msgstr "кнопка рейтинга"
+
+#: code/t2/templates.php:146
+#: code/t2/templates.php:257
+#: code/t2/templates.php:289
+msgid "average rating"
+msgstr "средний рейтинг"
+
+#: code/t2/templates.php:147
+#: code/t2/templates.php:258
+#: code/t2/templates.php:290
+msgid "average rating stars"
+msgstr "звезды среднего рейтинга"
+
+#: code/t2/templates.php:151
+msgid "Standard Ratings Block"
+msgstr "Блок Стандартного Рейтинга"
+
+#: code/t2/templates.php:155
+#: code/t2/templates.php:167
+#: code/t2/templates.php:324
+#: code/t2/templates.php:350
+msgid "rating text"
+msgstr "текст рейтинга"
+
+#: code/t2/templates.php:158
+#: code/t2/templates.php:170
+#: code/t2/templates.php:327
+#: code/t2/templates.php:354
+msgid "css class for stars"
+msgstr "CSS класс для звезд"
+
+#: code/t2/templates.php:163
+msgid "Comments Ratings Block"
+msgstr "Блок рейтинга комментариев"
+
+#: code/t2/templates.php:175
+msgid "Widget Star Rating"
+msgstr "Виджет рейтинга звездами"
+
+#: code/t2/templates.php:204
+msgid "Widget Blog Rating"
+msgstr "Виджет рейтинга блога"
+
+#: code/t2/templates.php:211
+msgid "article percentage rating"
+msgstr "процент рейтинга статьи"
+
+#: code/t2/templates.php:216
+msgid "Widget Comments Rating"
+msgstr "Виджет рейтинга комментариев"
+
+#: code/t2/templates.php:222
+msgid "comment contents"
+msgstr "содержание комментария"
+
+#: code/t2/templates.php:223
+msgid "url to comment"
+msgstr "ссылка на коментарий"
+
+#: code/t2/templates.php:225
+msgid "post id"
+msgstr "ID статьи"
+
+#: code/t2/templates.php:226
+msgid "comment id"
+msgstr "ID коментария"
+
+#: code/t2/templates.php:227
+msgid "name of the comments author"
+msgstr "Имя автора комментария"
+
+#: code/t2/templates.php:228
+msgid "authors url"
+msgstr "Ссылка автора"
+
+#: code/t2/templates.php:229
+msgid "authors avatar"
+msgstr "Аватар автора"
+
+#: code/t2/templates.php:237
+msgid "Standard Review Rating Block"
+msgstr "Блок стандартной оценки и рейтинга"
+
+#: code/t2/templates.php:246
+msgid "Comments Review Rating Block"
+msgstr "Блок рейтинга оценки комментариев"
+
+#: code/t2/templates.php:253
+msgid "Multi Review Rating Block"
+msgstr "Блок мультирейтинга оценки"
+
+#: code/t2/templates.php:262
+msgid "Aggregated Comments Review Rating"
+msgstr "Сгенерированый рейтинг оценок комментариев"
+
+#: code/t2/templates.php:272
+msgid "Multi Review Editor"
+msgstr "Редактор Мульти-Оценок"
+
+#: code/t2/templates.php:279
+msgid "Multi Rating Comment Integration"
+msgstr "Интеграция мульти-рейтинга в комментарии"
+
+#: code/t2/templates.php:286
+msgid "Multi Rating Comment Integration Result"
+msgstr "Результат интеграции мульти-рейтинга в комментариях"
+
+#: code/t2/templates.php:294
+msgid "Thumbs Article Ratings Text"
+msgstr "Текст рейтинга статей для Больших Пальцев"
+
+#: code/t2/templates.php:299
+#: code/t2/templates.php:338
+msgid "total up votes for article"
+msgstr "Всего позитивных отзывов о статье"
+
+#: code/t2/templates.php:300
+#: code/t2/templates.php:339
+msgid "total down votes for article"
+msgstr "всего негативных отзывов о статье"
+
+#: code/t2/templates.php:319
+msgid "Thumbs Article Rating Block"
+msgstr "Блок рейтинга статей - Большой Палец"
+
+#: code/t2/templates.php:321
+#: code/t2/templates.php:348
+msgid "thumb down image style"
+msgstr "Изображение - Палец Вниз"
+
+#: code/t2/templates.php:322
+#: code/t2/templates.php:349
+msgid "thumb up image style"
+msgstr "Изображение - Палец Вверх"
+
+#: code/t2/templates.php:329
+#: code/t2/templates.php:356
+msgid "Inactive"
+msgstr "Деактивирован"
+
+#: code/t2/templates.php:330
+#: code/t2/templates.php:357
+msgid "Active"
+msgstr "Активен"
+
+#: code/t2/templates.php:333
+msgid "Thumbs Comment Ratings Text"
+msgstr "Текст для рейтинга комментариев - Большой Палец"
+
+#: code/t2/templates.php:346
+msgid "Thumbs Comment Rating Block"
+msgstr "Блок рейтинга комментариев  - Большой Палец"
+
+#: code/helpers.php:229
+msgid "No moderation"
+msgstr "Без модерирования"
+
+#: code/helpers.php:230
+msgid "Moderate visitors"
+msgstr "Модерировать посетителей"
+
+#: code/helpers.php:231
+msgid "Moderate users"
+msgstr "Модерировать пользователей"
+
+#: code/helpers.php:232
+msgid "Moderate all"
+msgstr "Модерировать всех"
+
+#: code/helpers.php:233
+#: code/helpers.php:248
+#: code/helpers.php:262
+#: code/helpers.php:285
+msgid "Inherit from Category"
+msgstr "Унаследовать от категории"
+
+#: code/helpers.php:234
+#: code/helpers.php:249
+#: code/helpers.php:263
+#: options/categories.php:209
+msgid "Inherit from Parent"
+msgstr "Унаследовать от 'родителя'"
+
+#: code/helpers.php:243
+msgid "Everyone can vote"
+msgstr "Все могут голосовать"
+
+#: code/helpers.php:244
+msgid "Only visitors"
+msgstr "Только посетители"
+
+#: code/helpers.php:245
+msgid "Only users"
+msgstr "Только пользователи"
+
+#: code/helpers.php:246
+msgid "Locked"
+msgstr "Закрыто"
+
+#: code/helpers.php:247
+msgid "Locked and hidden"
+msgstr "Закрыто и спрятано"
+
+#: code/helpers.php:259
+msgid "No timer"
+msgstr "Без таймера"
+
+#: code/helpers.php:260
+msgid "Countdown timer"
+msgstr "Таймер обратного отсчета"
+
+#: code/helpers.php:261
+msgid "Date limited"
+msgstr "Лимит по дате"
+
+#: code/helpers.php:271
+#: code/helpers.php:369
+#: options/multis/editor.php:67
+#: options/multis/sets.php:109
+msgid "Bottom"
+msgstr "Нижний"
+
+#: code/helpers.php:272
+#: code/helpers.php:367
+#: options/multis/editor.php:68
+#: options/multis/sets.php:106
+msgid "Top"
+msgstr "Верхний"
+
+#: code/helpers.php:273
+msgid "Top and Bottom"
+msgstr "Верхний и нижний"
+
+#: code/helpers.php:282
+#: options/articles.php:203
+#: options/categories.php:123
+msgid "Hours"
+msgstr "Часы"
+
+#: code/helpers.php:283
+#: options/articles.php:206
+#: options/categories.php:126
+msgid "Days"
+msgstr "Дни"
+
+#: code/helpers.php:284
+#: options/articles.php:209
+#: options/categories.php:129
+msgid "Months"
+msgstr "Месяцы"
+
+#: code/helpers.php:293
+#: code/helpers.php:306
+msgid "Mini"
+msgstr "Мини"
+
+#: code/helpers.php:294
+#: code/helpers.php:307
+msgid "Icon"
+msgstr "Иконка"
+
+#: code/helpers.php:295
+#: code/helpers.php:308
+msgid "Small"
+msgstr "Маленький"
+
+#: code/helpers.php:296
+#: code/helpers.php:309
+#: options/tools/tools_bulk.php:22
+msgid "Standard"
+msgstr "Стандартный"
+
+#: code/helpers.php:297
+#: code/helpers.php:310
+msgid "Medium"
+msgstr "Средний"
+
+#: code/helpers.php:298
+#: code/helpers.php:311
+msgid "Big"
+msgstr "Большой"
+
+#: code/helpers.php:323
+msgid "Stars and text"
+msgstr "Звезды и текст"
+
+#: code/helpers.php:324
+msgid "Stars only"
+msgstr "Только звезды"
+
+#: code/helpers.php:325
+msgid "Text only"
+msgstr "Только текст"
+
+#: code/helpers.php:333
+msgid "No alignment"
+msgstr "Не выравнивать"
+
+#: code/helpers.php:334
+#: code/helpers.php:371
+msgid "Left"
+msgstr "Влево"
+
+#: code/helpers.php:335
+msgid "Center"
+msgstr "Центр"
+
+#: code/helpers.php:336
+#: code/helpers.php:373
+msgid "Right"
+msgstr "Вправо"
+
+#: code/helpers.php:344
+msgid "No Animation"
+msgstr "Без анимации"
+
+#: code/helpers.php:366
+msgid "Always hide"
+msgstr "всегда прятать"
+
+#: code/helpers.php:368
+msgid "Top (hide if empty)"
+msgstr "Верхний (не показывать если недоступен)"
+
+#: code/helpers.php:370
+msgid "Bottom (hide if empty)"
+msgstr "Нижний (не показывать если недоступен)"
+
+#: code/helpers.php:372
+msgid "Left (hide if empty)"
+msgstr "Левый (не показывать если недоступен)"
+
+#: code/helpers.php:374
+msgid "Right (hide if empty)"
+msgstr "Правый (не показывать если недоступен)"
+
+#: code/import.php:5
+msgid "Data not imported."
+msgstr "Данные не импортированы"
+
+#: code/import.php:9
+msgid "Plugin not available for import."
+msgstr "Плагин недоступен для импорта"
+
+#: code/import.php:55
+#: code/import.php:74
+#: code/import.php:134
+msgid "Data imported."
+msgstr "Данные импортированы"
+
+#: code/widgets_wp28.php:5
+msgid "Customized rating results list."
+msgstr "Кастомизированые результаты рейтинга"
+
+#: code/widgets_wp28.php:100
+msgid "Overall blog rating results."
+msgstr "Общие результаты рейтинга блога"
+
+#: code/widgets_wp28.php:141
+msgid "Current post comments rating."
+msgstr "Рейтинг комментариев для данного поста"
+
+#: gdt2/form_defaults.php:0
+msgid "Default Templates"
+msgstr "Дефолтные шаблоны"
+
+#: gdt2/form_defaults.php:7
+#: gdt2/form_list.php:46
+#: options/multis/sets.php:61
+#: options/users.php:61
+#: options/voters.php:142
+#: tinymce3/panels/filter.php:45
+#: widgets/rating/part_filter.php:64
+#: widgets/rating_28/part_filter.php:64
+msgid "ID"
+msgstr "ID"
+
+#: gdt2/form_defaults.php:8
+#: gdt2/form_list.php:48
+msgid "Section / Type"
+msgstr "Раздел / Тип"
+
+#: gdt2/form_defaults.php:9
+#: gdt2/form_editor.php:51
+#: tinymce3/panels/articlesrater.php:6
+#: tinymce3/panels/articlesreview.php:6
+#: tinymce3/panels/blograting.php:1
+#: tinymce3/panels/commentsaggr.php:6
+#: tinymce3/panels/multis.php:1
+#: tinymce3/panels/multisreview.php:1
+#: tinymce3/panels/styles.php:1
+#: tinymce3/panels/thumbsrating.php:6
+#: widgets/comments/part_basic.php:8
+#: widgets/comments_28/part_basic.php:8
+#: widgets/rating/part_basic.php:9
+#: widgets/rating_28/part_basic.php:8
+#: widgets/top/part_basic.php:8
+#: widgets/top_28/part_basic.php:8
+msgid "Template"
+msgstr "Шаблон"
+
+#: gdt2/form_defaults.php:10
+#: gdt2/form_list.php:50
+msgid "Options"
+msgstr "Опции"
+
+#: gdt2/form_defaults.php:40
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: gdt2/form_editor.php:21
+msgid "Template Editor"
+msgstr "Редактор шаблона"
+
+#: gdt2/form_editor.php:29
+msgid "Editor"
+msgstr "Редактор"
+
+#: gdt2/form_editor.php:31
+#: options/multis/editor.php:87
+msgid "Elements"
+msgstr "Элементы"
+
+#: gdt2/form_editor.php:36
+#: options/front/front_right.php:4
+msgid "Info"
+msgstr "Информация"
+
+#: gdt2/form_editor.php:43
+#: options/builder/settings.php:2
+#: tinymce3/window.php:30
+msgid "General"
+msgstr "Общее"
+
+#: gdt2/form_editor.php:45
+#: gdt2/form_list.php:47
+#: options/multis/editor.php:27
+#: options/multis/editor.php:93
+#: options/multis/sets.php:62
+#: options/users.php:60
+#: options/voters.php:143
+msgid "Name"
+msgstr "Имя"
+
+#: gdt2/form_editor.php:47
+#: gdt2/form_editor.php:60
+#: options/multis/editor.php:32
+msgid "Description"
+msgstr "Описание"
+
+#: gdt2/form_editor.php:69
+msgid "All tag elements"
+msgstr "Элементы всех тегов"
+
+#: gdt2/form_editor.php:70
+msgid "No tag elements allowed"
+msgstr "Теги не разрешены"
+
+#: gdt2/form_editor.php:82
+msgid "Save Template"
+msgstr "Сохранить шаблон"
+
+#: gdt2/form_editor.php:92
+msgid "Select template to use for this element:"
+msgstr "Выберите шаблон для использования с элементом:"
+
+#: gdt2/form_editor.php:40
+msgid "Creating new template"
+msgstr "Создание нового шаблона"
+
+#: gdt2/form_editor.php:61
+msgid "Allowed elements"
+msgstr "Разрешенные элементы"
+
+#: gdt2/form_list.php:29
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: gdt2/form_list.php:36
+#: gdt2/form_list.php:15
+#: options/multis/results_post.php:115
+#: options/multis/results_post.php:26
+#: options/multis/results_set.php:22
+#: options/articles.php:132
+#: options/articles.php:23
+#: options/users_log.php:109
+#: options/users_log.php:23
+#: options/voters.php:117
+#: options/voters.php:32
+#: tinymce3/panels/blograting.php:6
+#: tinymce3/panels/commentsaggr.php:11
+#: tinymce3/window.php:31
+#: widgets/comments/part_filter.php:4
+#: widgets/comments/part_filter.php:12
+#: widgets/comments_28/part_filter.php:4
+#: widgets/comments_28/part_filter.php:12
+#: widgets/rating/part_filter.php:4
+#: widgets/rating/part_filter.php:12
+#: widgets/rating_28/part_filter.php:4
+#: widgets/rating_28/part_filter.php:12
+#: widgets/top/part_filter.php:4
+#: widgets/top/part_filter.php:12
+#: widgets/top_28/part_filter.php:4
+#: widgets/top_28/part_filter.php:12
+msgid "Filter"
+msgstr "Фильтр"
+
+#: gdt2/form_list.php:49
+msgid "Tag"
+msgstr "Тег"
+
+#: gdt2/form_list.php:90
+msgid "Set Default Templates"
+msgstr "Установить дефолтные шаблоны"
+
+#: gdt2/form_list.php:96
+msgid "New template for:"
+msgstr "Новый шаблон для:"
+
+#: gdt2/form_list.php:98
+msgid "Create"
+msgstr "Создать"
+
+#: gdt2/form_list.php:107
+msgid "Click to open post with T2 templates map with dependencies for templates"
+msgstr "Кликай для просмотра карты зависимостей шаблонов Т2"
+
+#: gdt2/form_list.php:108
+msgid "T2 Templates Map"
+msgstr "Карта шаблонов T2 "
+
+#: gdt2/form_list.php:70
+msgid "delete"
+msgstr "удалить"
+
+#: gdt2/form_list.php:71
+msgid "edit"
+msgstr "редактировать"
+
+#: gdt2/form_list.php:73
+msgid "duplicate"
+msgstr "создать дубликат"
+
+#: integrate/dash_latest.php:51
+msgid "from"
+msgstr "из"
+
+#: integrate/dash_latest.php:51
+msgid "on"
+msgstr "на"
+
+#: integrate/dash_latest.php:53
+msgid "ip"
+msgstr "ip"
+
+#: integrate/dash_latest.php:53
+msgid "log"
+msgstr "лог"
+
+#: integrate/dash_latest.php:65
+msgid "Articles Log"
+msgstr "Лог статей"
+
+#: integrate/dash_latest.php:66
+msgid "Users Log"
+msgstr "Лог Пользователей"
+
+#: integrate/dash_latest.php:7
+msgid "visitor"
+msgstr "посетитель"
+
+#: integrate/dash_latest.php:11
+msgid "Thumb"
+msgstr "Большой палец"
+
+#: integrate/dash_latest.php:18
+msgid "Multi Vote"
+msgstr "Мульти-Голосование"
+
+#: integrate/dash_latest.php:20
+#: options/moderation.php:116
+#: options/users_log.php:123
+#: options/users_log.php:107
+#: options/voters.php:144
+#: options/voters.php:115
+msgid "Vote"
+msgstr "Голос"
+
+#: integrate/dash_latest.php:27
+#: integrate/dash_latest.php:36
+msgid "post"
+msgstr "post"
+
+#: integrate/dash_latest.php:31
+#: integrate/dash_latest.php:33
+msgid "comment"
+msgstr "комментарий"
+
+#: integrate/dash_latest.php:31
+msgid "for"
+msgstr "для"
+
+#: integrate/dash_latest.php:44
+msgid "user"
+msgstr "пользователь"
+
+#: integrate/edit.php:1
+msgid "Post Review"
+msgstr "Оценка сообщения"
+
+#: integrate/edit.php:3
+msgid "Value"
+msgstr "Значение"
+
+#: integrate/edit.php:15
+msgid "Post Rating"
+msgstr "Рейтинг статьи"
+
+#: integrate/edit.php:17
+#: integrate/edit.php:33
+msgid "Vote Rule"
+msgstr "Правила голосования"
+
+#: integrate/edit.php:23
+#: integrate/edit.php:39
+msgid "Moderate"
+msgstr "Модерирование"
+
+#: integrate/edit.php:31
+msgid "Comments Rating"
+msgstr "Рейтинг комментариев"
+
+#: integrate/edit.php:48
+msgid "Time Restriction"
+msgstr "Ограничение по времени"
+
+#: integrate/edit.php:50
+#: options/multis/results_post.php:235
+#: options/articles.php:307
+#: options/categories.php:219
+msgid "Restriction"
+msgstr "Ограничения"
+
+#: integrate/edit.php:57
+#: options/multis/results_post.php:242
+#: options/articles.php:314
+#: options/categories.php:226
+#: tinymce3/panels/filter.php:77
+msgid "Date"
+msgstr "Дата"
+
+#: integrate/edit.php:65
+#: options/multis/results_post.php:241
+#: options/articles.php:313
+#: options/categories.php:225
+msgid "Countdown"
+msgstr "Обратный отсчет"
+
+#: integrate/edit_multi.php:1
+msgid "You don't have any multi rating sets defined. Create at least one set."
+msgstr "Не создан ни один сет мульти-рейтинга. Создайте хотя бы один сет."
+
+#: integrate/edit_multi.php:10
+#: options/tools/tools_bulk.php:77
+#: tinymce3/panels/multis.php:9
+#: tinymce3/panels/multis.php:28
+#: tinymce3/panels/multis.php:48
+#: tinymce3/panels/multisreview.php:9
+#: tinymce3/panels/multisreview.php:24
+#: tinymce3/panels/multisreview.php:44
+#: tinymce3/panels/styles.php:41
+#: tinymce3/panels/styles.php:61
+#: widgets/comments/part_stars.php:13
+#: widgets/comments_28/part_stars.php:13
+#: widgets/rating_28/part_stars.php:13
+#: widgets/rating_28/part_stars.php:23
+msgid "Set"
+msgstr "Сет"
+
+#: integrate/edit_multi.php:17
+msgid "To change the active set, you need to select the set you want from the list on the left, and save this article to accept the change."
+msgstr "Чтобы изменить активный сет, выберите новый сет с колонки слева и сохраните статью для применения изменений"
+
+#: integrate/edit_multi.php:19
+msgid "All values for all sets will be saved in the database. This allows different multi rating sets reviews."
+msgstr "Все значения всех сетов будут храниться в базе данных. Это позволяет содержать несколько разных сетов мульти-рейтинга."
+
+#: integrate/edit_multi.php:30
+msgid "Clear"
+msgstr "Очистить"
+
+#: integrate/edit_multi.php:31
+msgid "Revert"
+msgstr "Вернуть обратно"
+
+#: integrate/edit_multi.php:26
+msgid "Set ID"
+msgstr "ID сета"
+
+#: integrate/edit_multi.php:27
+#: options/multis/results_post.php:97
+msgid "Set Name"
+msgstr "Название сета"
+
+#: options/builder/settings.php:3
+msgid "Filter    "
+msgstr "Фильтер"
+
+#: options/builder/settings.php:4
+#: options/gfx.php:57
+#: options/tools.php:9
+#: tinymce3/window.php:32
+#: gd-star-rating.php:626
+msgid "Graphics"
+msgstr "Графика"
+
+#: options/builder/settings.php:5
+#: tinymce3/panels/general.php:26
+#: tinymce3/window.php:33
+#: widgets/rating/part_basic.php:39
+#: widgets/rating_28/part_basic.php:38
+msgid "Multi Rating"
+msgstr "Мульти-рейтинг"
+
+#: options/builder/settings.php:6
+#: tinymce3/window.php:34
+msgid "Multi Review"
+msgstr "Мульти-Оценка"
+
+#: options/builder/settings.php:7
+#: tinymce3/window.php:35
+msgid "Articles Review"
+msgstr "Оценка статей"
+
+#: options/builder/settings.php:8
+#: tinymce3/panels/articlesrater.php:1
+#: tinymce3/window.php:36
+msgid "Articles Rating Block"
+msgstr "Блок рейтинга статей"
+
+#: options/builder/settings.php:9
+#: tinymce3/window.php:37
+msgid "Aggregated Comments"
+msgstr "Созданные комментарии"
+
+#: options/builder/settings.php:10
+#: tinymce3/window.php:38
+msgid "Blog Rating"
+msgstr "Рейтинг блога"
+
+#: options/builder/settings.php:11
+#: tinymce3/window.php:39
+msgid "Thumbs Rating"
+msgstr "Рейтинг 'Большрой Палец'"
+
+#: options/builder/shortcode.php:2
+msgid "Select code:"
+msgstr "Выбери код:"
+
+#: options/builder/shortcode.php:5
+#: options/builder/shortcode.php:6
+#: tinymce3/window.php:53
+#: tinymce3/window.php:54
+msgid "Results"
+msgstr "Результат"
+
+#: options/builder/shortcode.php:8
+#: options/builder/shortcode.php:9
+#: tinymce3/window.php:56
+#: tinymce3/window.php:57
+msgid "Multi"
+msgstr "Мульти"
+
+#: options/builder/shortcode.php:11
+#: options/builder/shortcode.php:12
+#: options/builder/shortcode.php:13
+#: options/multis/results_post.php:194
+#: options/articles.php:114
+#: options/articles.php:258
+#: options/categories.php:173
+#: tinymce3/window.php:59
+#: tinymce3/window.php:60
+#: tinymce3/window.php:61
+#: gd-star-rating.php:619
+msgid "Articles"
+msgstr "Статьи"
+
+#: options/builder/shortcode.php:15
+#: options/settings/settings_thumbs.php:65
+#: options/tools/tools_bulk.php:60
+#: options/articles.php:328
+#: options/categories.php:241
+#: options/charts.php:7
+#: options/comments.php:44
+#: options/settings.php:47
+#: tinymce3/window.php:63
+msgid "Comments"
+msgstr "Комментарии"
+
+#: options/builder/shortcode.php:23
+msgid "Shortcode:"
+msgstr "Shortcode:"
+
+#: options/builder/shortcode.php:32
+msgid "Function:"
+msgstr "Функция:"
+
+#: options/builder/shortcode.php:38
+msgid "Rebuild"
+msgstr "Перестроить"
+
+#: options/builder/shortcode.php:40
+msgid "List of all functions with additional parameters"
+msgstr "список всех функций с дополнительными параметрами"
+
+#: options/builder/shortcode.php:41
+msgid "Functions"
+msgstr "Функции"
+
+#: options/export/export_t2.php:1
+msgid "Export Templates"
+msgstr "Экспорт таблиц"
+
+#: options/export/export_t2.php:3
+msgid "This will export all templates you created into a file."
+msgstr "Эта процедура экспорта всех созданных Вами шаблонов - в файл"
+
+#: options/export/export_t2.php:4
+#: options/export/export_users.php:53
+#: options/export/export_users.php:56
+#: gd-star-rating.php:633
+msgid "Export"
+msgstr "Экспорт"
+
+#: options/export/export_t2.php:6
+msgid "Exported file will contain names, descriptions and contents of templates. File will be in CSV format."
+msgstr "экспортированый файл будет содержать названия, описания и содержимое шаблонов. Файл предоставлен в формате CSV"
+
+#: options/export/export_users.php:29
+msgid "User Info"
+msgstr "Информация о пользователе"
+
+#: options/export/export_users.php:31
+msgid "Minimal: only user id is exported"
+msgstr "Минимум: экспортируется только id пользователя и email"
+
+#: options/export/export_users.php:32
+msgid "Normal: user id, name and email are exported"
+msgstr "Нормаль.: экспортируется id пользователя, имя и мейл"
+
+#: options/export/export_users.php:35
+msgid "Data"
+msgstr "Данные"
+
+#: options/export/export_users.php:37
+msgid "Post / Page votes"
+msgstr "голоса за страницу / статьи"
+
+#: options/export/export_users.php:38
+msgid "Comments votes"
+msgstr "голоса за комментарии"
+
+#: options/export/export_users.php:41
+msgid "Additional Columns"
+msgstr "Дополнительные колонки"
+
+#: options/export/export_users.php:43
+#: options/ips/ips_list.php:55
+#: options/moderation.php:117
+#: options/users_log.php:120
+#: options/voters.php:146
+msgid "IP"
+msgstr "IP"
+
+#: options/export/export_users.php:44
+#: options/moderation.php:118
+#: options/voters.php:147
+msgid "User Agent"
+msgstr "Браузер"
+
+#: options/export/export_users.php:46
+msgid "Post/Page title"
+msgstr "Заголовок статьи / страницы"
+
+#: options/export/export_users.php:47
+msgid "Post/Page date"
+msgstr " статьи / страницы"
+
+#: options/export/export_users.php:49
+msgid "Comment author"
+msgstr "Автор комментария"
+
+#: options/export/export_users.php:50
+msgid "Comment date"
+msgstr "Дата комментария"
+
+#: options/export/export_users.php:55
+msgid "This will export voters data file."
+msgstr "Это экспорт файла данных голосующих"
+
+#: options/export/export_users.php:58
+msgid "Exported file will contain all the users ratings. File will be in CSV format."
+msgstr "Файл экспорта будет содержать все пользовательские рейтинги в CSV формате"
+
+#: options/front/front_left.php:20
+msgid "Quick Rating Facts"
+msgstr "Факты по быстрому рейтингу"
+
+#: options/front/front_left.php:45
+msgid "See All"
+msgstr "Смотреть все"
+
+#: options/front/front_left.php:47
+msgid "Latest News"
+msgstr "Свежие новости"
+
+#: options/front/front_left.php:81
+msgid "Newsfeed update is disabled. You can enable it on settings page."
+msgstr "Обновление канала новостей отменено. Вы модете включить его на странице настроек."
+
+#: options/front/front_left.php:24
+msgid "Registered users rated %s articles with average rating of %s and %s comments with average rating of %s. Visitors rated %s articles with average rating of %s and %s comments with average rating of %s."
+msgstr "Зарегистрированные пользователи голосовали в %s статьях со средним рейтингом в %s и %s комментариев со средним рейтингом  %s. Посетители голосовали в  %s статьях со средним рейтингом в %s и %s комментариев со средним рейтингом %s."
+
+#: options/front/front_left.php:35
+msgid " There are %s article and %s comments ratings waiting in moderation queue."
+msgstr "Всего %s рейтингов статей и %s рейтингов комментариев ожидают модерации"
+
+#: options/front/front_left.php:75
+msgid "An error occured while loading newsfeed. Go to the %sfront page%s to check for updates."
+msgstr "Произошла ошибка получения канала новостей. Проверьте обновления на %sглавной странице%s"
+
+#: options/front/front_right.php:8
+msgid "Version"
+msgstr "Версия"
+
+#: options/front/front_right.php:9
+msgid "release date"
+msgstr "дата релиза"
+
+#: options/front/front_right.php:13
+msgid "Change Log"
+msgstr "Change Log"
+
+#: options/front/front_right.php:14
+msgid "detailed list of changes"
+msgstr "детальный список изменений"
+
+#: options/front/front_right.php:15
+msgid "show"
+msgstr "показать"
+
+#: options/front/front_right.php:19
+msgid "Links"
+msgstr "Ссылки"
+
+#: options/front/front_right.php:24
+#: options/front/front_right.php:73
+msgid "official plugin page"
+msgstr "оффсайт плагина"
+
+#: options/front/front_right.php:25
+#: options/front/front_right.php:30
+#: options/front/front_right.php:35
+#: options/front/front_right.php:40
+#: options/front/front_right.php:55
+#: options/front/front_right.php:60
+#: options/front/front_right.php:74
+#: options/front/front_right.php:79
+#: options/front/front_right.php:84
+#: options/front/front_right.php:89
+#: options/front/front_right.php:103
+#: options/front/front_right.php:108
+#: options/front/front_right.php:113
+#: options/front/front_right.php:118
+msgid "visit"
+msgstr "посетить"
+
+#: options/front/front_right.php:29
+msgid "development home with svn"
+msgstr "SVN разработчиков"
+
+#: options/front/front_right.php:34
+msgid "discussions group"
+msgstr "обсуждение"
+
+#: options/front/front_right.php:39
+msgid "wordpress plugin page"
+msgstr "Страница плагина на WordPress"
+
+#: options/front/front_right.php:44
+msgid "development progress"
+msgstr "процесс разработки"
+
+#: options/front/front_right.php:45
+msgid "follow"
+msgstr "отслеживать"
+
+#: options/front/front_right.php:49
+msgid "Extra"
+msgstr "Экстра"
+
+#: options/front/front_right.php:53
+msgid "Premium Support"
+msgstr "Поддержка Премиум"
+
+#: options/front/front_right.php:54
+msgid "special plugin customizations"
+msgstr "особые настройки плагина"
+
+#: options/front/front_right.php:58
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: options/front/front_right.php:59
+msgid "help further development"
+msgstr "помочь продолжению разработок"
+
+#: options/front/front_right.php:67
+msgid "GD WordPress Plugins"
+msgstr "GD WordPress Plugins"
+
+#: options/front/front_right.php:78
+msgid "collection of widgets"
+msgstr "Коллекция виджетов"
+
+#: options/front/front_right.php:83
+msgid "advanced pages widget"
+msgstr "виджеты продвинутых страниц"
+
+#: options/front/front_right.php:88
+msgid "widget to add linkedin badge"
+msgstr "виджет для добавления иконки LinkedIn"
+
+#: options/front/front_right.php:101
+msgid "Official Website"
+msgstr "Официальный сайт"
+
+#: options/front/front_right.php:102
+msgid "golden dragon official web portal"
+msgstr "Golden Dragon официальный портал"
+
+#: options/front/front_right.php:106
+msgid "Support Forum"
+msgstr "Форум Поддержки"
+
+#: options/front/front_right.php:107
+msgid "development discussion forum"
+msgstr "форум разработчиков"
+
+#: options/front/front_right.php:112
+msgid "wordpress development"
+msgstr "разработки wordpress"
+
+#: options/front/front_right.php:117
+msgid "announcements and theme demo"
+msgstr "анонсы и демо тем"
+
+#: options/gfx/gfx_preview.php:1
+msgid "Stars Preview"
+msgstr "Предосмотр Звезд"
+
+#: options/gfx/gfx_preview.php:5
+#: options/multis/sets.php:65
+#: options/settings/settings_articles.php:14
+#: options/settings/settings_articles.php:188
+#: options/settings/settings_comments.php:14
+#: options/settings/settings_comments.php:133
+#: options/settings/settings_comments.php:202
+#: options/settings/settings_integration.php:74
+#: options/settings/settings_multis.php:14
+#: options/gfx.php:61
+#: widgets/comments/part_stars.php:4
+#: widgets/comments/part_stars.php:12
+#: widgets/comments_28/part_stars.php:4
+#: widgets/comments_28/part_stars.php:12
+#: widgets/rating/part_stars.php:4
+#: widgets/rating/part_stars.php:12
+#: widgets/rating_28/part_stars.php:4
+#: widgets/rating_28/part_stars.php:12
+msgid "Stars"
+msgstr "Звезды"
+
+#: options/gfx/gfx_preview.php:35
+#: options/gfx/gfx_preview.php:85
+#: tinymce3/panels/multis.php:36
+#: tinymce3/panels/multis.php:56
+#: tinymce3/panels/multisreview.php:32
+#: tinymce3/panels/multisreview.php:52
+#: tinymce3/panels/styles.php:49
+#: tinymce3/panels/styles.php:69
+#: widgets/comments/part_image.php:13
+#: widgets/comments/part_stars.php:18
+#: widgets/comments_28/part_image.php:13
+#: widgets/comments_28/part_stars.php:18
+#: widgets/rating_28/part_stars.php:18
+#: widgets/rating_28/part_stars.php:28
+msgid "Size"
+msgstr "Размер"
+
+#: options/gfx/gfx_preview.php:41
+#: options/gfx/gfx_preview.php:91
+msgid "Author"
+msgstr "Автор"
+
+#: options/gfx/gfx_preview.php:51
+msgid "Thumbs Preview"
+msgstr "Предосмотр Большой Палец"
+
+#: options/gfx/gfx_preview.php:55
+#: options/articles.php:159
+#: options/comments.php:94
+#: options/gfx.php:62
+msgid "Thumbs"
+msgstr "Большой палец"
+
+#: options/gfx/gfx_preview.php:101
+msgid "Trends Preview"
+msgstr "просмотр трендов"
+
+#: options/gfx/gfx_preview.php:105
+msgid "Trends"
+msgstr "Тренды"
+
+#: options/gfx/gfx_stars.php:1
+msgid "Stars Sizes"
+msgstr "Размеры звезд"
+
+#: options/gfx/gfx_stars.php:24
+#: options/gfx/gfx_thumbs.php:24
+msgid "Only sizes checked here will be included in the css file for the active rating blocks."
+msgstr "Только размеры помеченные тут будут включены в файл CSS для активных блоков рейтинга"
+
+#: options/gfx/gfx_stars.php:27
+#: options/gfx/gfx_thumbs.php:27
+msgid "Stars Sets"
+msgstr "Сеты Звезд"
+
+#: options/gfx/gfx_stars.php:54
+msgid "Only stars set checked here will be included in the css file for the active rating blocks."
+msgstr "Только сеты звезд отмеченные тут будут включены в файл CSS для активных блоков рейтинга"
+
+#: options/gfx/gfx_thumbs.php:1
+msgid "Thumbs Sizes"
+msgstr "Размер превьюшек"
+
+#: options/gfx/gfx_thumbs.php:54
+msgid "Only thumbs set checked here will be included in the css file for the active rating blocks."
+msgstr "Только превьюшки отмеченные тут будут включены в файл CSS для активных блоков рейтинга."
+
+#: options/ips/ips_list.php:53
+msgid "Record Id"
+msgstr "Записать ID"
+
+#: options/ips/ips_list.php:54
+msgid "Type"
+msgstr "Тип"
+
+#: options/ips/ips_list.php:95
+msgid "Unban Selected"
+msgstr "Выбрано снятие бана"
+
+#: options/ips/ips_options.php:1
+msgid "Ban Single IP's"
+msgstr "Забанить конкретный IP"
+
+#: options/ips/ips_options.php:8
+msgid "Add IP addresses"
+msgstr "Добавить адрес IP"
+
+#: options/ips/ips_options.php:9
+msgid "One IP address per line."
+msgstr "1 адрес на каждой строке"
+
+#: options/ips/ips_options.php:15
+#: options/ips/ips_options.php:41
+#: options/ips/ips_options.php:57
+msgid "Add"
+msgstr "Добавить"
+
+#: options/ips/ips_options.php:19
+msgid "Ban IP Range"
+msgstr "Забанить по сети IP"
+
+#: options/ips/ips_options.php:25
+msgid "From"
+msgstr "От"
+
+#: options/ips/ips_options.php:35
+msgid "To"
+msgstr "До"
+
+#: options/ips/ips_options.php:45
+msgid "Ban IP Masked"
+msgstr "Забанить по маске IP"
+
+#: options/ips/ips_options.php:51
+msgid "Mask"
+msgstr "Подсеть (маска)"
+
+#: options/ips/ips_options.php:55
+msgid "Use XXX as a part of IP or leave empty to mask."
+msgstr "Используйте XXX или оставьте пустой часть IP для 'маски'."
+
+#: options/multis/editor.php:24
+msgid "Multi Sets Editor"
+msgstr "Редактор мульти-сетов"
+
+#: options/multis/editor.php:37
+msgid "Number Of Stars"
+msgstr "Количество звезд"
+
+#: options/multis/editor.php:44
+#: options/multis/sets.php:64
+#: options/settings/settings_articles.php:74
+#: options/settings/settings_comments.php:78
+#: options/settings/settings_multis.php:39
+msgid "Defaults"
+msgstr "Дефолты"
+
+#: options/multis/editor.php:48
+msgid "Auto Insertion"
+msgstr "Вставлять автоматически"
+
+#: options/multis/editor.php:52
+msgid "Insertion"
+msgstr "Вставлять"
+
+#: options/multis/editor.php:55
+#: options/multis/sets.php:87
+msgid "No"
+msgstr "Нет"
+
+#: options/multis/editor.php:56
+#: options/multis/sets.php:90
+msgid "Category Based"
+msgstr "По Категориям"
+
+#: options/multis/editor.php:57
+#: options/multis/sets.php:93
+msgid "All Posts"
+msgstr "Все статьи"
+
+#: options/multis/editor.php:58
+#: options/multis/sets.php:96
+msgid "All Pages"
+msgstr "Все страницы"
+
+#: options/multis/editor.php:59
+#: options/multis/sets.php:99
+msgid "All Posts &amp; Pages"
+msgstr "Все Статьи  &amp; Страницы"
+
+#: options/multis/editor.php:64
+msgid "Location"
+msgstr "Местонахождение"
+
+#: options/multis/editor.php:77
+#: options/multis/results_post.php:135
+#: options/categories.php:79
+#: gd-star-rating.php:620
+msgid "Categories"
+msgstr "Категории"
+
+#: options/multis/editor.php:96
+msgid "Weight"
+msgstr "Вес"
+
+#: options/multis/editor.php:103
+msgid "Important Notice"
+msgstr "Важное сообщение"
+
+#: options/multis/editor.php:105
+msgid "Once the set is created, you can't change number of elements in the set or number of stars! You can edit names and weight of the elements, name and description of the set."
+msgstr "Как только этот сет будет создан, вы не сможете изменить количество элементов в сете, или количество звезд! Вы сможете редактировать имена и вес элементов, названия и описания сета."
+
+#: options/multis/editor.php:110
+msgid "Save Multi Set"
+msgstr "Сохранить мульти-сет"
+
+#: options/multis/results_post.php:96
+#: options/multis/results_set.php:17
+msgid "Multi Set Results"
+msgstr "Результаты мульт-сета"
+
+#: options/multis/results_post.php:107
+#: options/multis/results_post.php:109
+#: options/multis/results_post.php:31
+#: options/articles.php:124
+#: options/articles.php:126
+#: options/articles.php:29
+msgid "Search Posts"
+msgstr "Искать в статьях"
+
+#: options/multis/results_post.php:133
+#: options/articles.php:149
+#: tinymce3/panels/filter.php:46
+#: widgets/comments/part_basic.php:2
+#: widgets/comments_28/part_basic.php:2
+#: widgets/rating/part_basic.php:2
+#: widgets/rating/part_filter.php:65
+#: widgets/rating_28/part_basic.php:2
+#: widgets/rating_28/part_filter.php:65
+#: widgets/top/part_basic.php:2
+#: widgets/top_28/part_basic.php:2
+msgid "Title"
+msgstr "Заголовок"
+
+#: options/multis/results_post.php:134
+#: options/articles.php:150
+msgid "View"
+msgstr "Просмотр"
+
+#: options/multis/results_post.php:136
+#: options/multis/sets.php:66
+#: options/articles.php:160
+msgid "Ratings"
+msgstr "Рейтинги"
+
+#: options/multis/results_post.php:137
+#: options/articles.php:161
+#: options/comments.php:96
+msgid "Total"
+msgstr "Всего"
+
+#: options/multis/results_post.php:139
+#: options/multis/sets.php:67
+#: options/settings/settings_articles.php:184
+#: options/settings/settings_comments.php:198
+#: options/articles.php:166
+#: options/articles.php:293
+#: options/comments.php:97
+#: tinymce3/panels/filter.php:47
+#: widgets/rating/part_filter.php:66
+#: widgets/rating_28/part_filter.php:66
+msgid "Review"
+msgstr "Оценки"
+
+#: options/multis/results_post.php:197
+#: options/articles.php:261
+#: options/articles.php:331
+#: options/categories.php:176
+#: options/categories.php:244
+#: options/comments.php:138
+#: options/moderation.php:151
+#: options/users_log.php:206
+#: options/voters.php:187
+msgid "Delete"
+msgstr "Стереть"
+
+#: options/multis/results_post.php:202
+#: options/articles.php:266
+#: options/articles.php:336
+#: options/categories.php:181
+#: options/categories.php:249
+#: options/comments.php:141
+msgid "Visitors"
+msgstr "Посетители"
+
+#: options/multis/results_post.php:203
+#: options/settings/settings_administration.php:37
+#: options/articles.php:267
+#: options/articles.php:337
+#: options/categories.php:182
+#: options/categories.php:250
+#: options/comments.php:142
+#: options/users.php:47
+#: gd-star-rating.php:622
+msgid "Users"
+msgstr "Пользователи"
+
+#: options/multis/results_post.php:204
+#: options/articles.php:268
+#: options/articles.php:338
+#: options/categories.php:183
+#: options/categories.php:251
+#: options/comments.php:143
+msgid "All"
+msgstr "Все"
+
+#: options/multis/results_post.php:209
+#: options/tools/tools_bulk.php:25
+#: options/tools/tools_bulk.php:44
+#: options/tools/tools_bulk.php:63
+#: options/articles.php:153
+#: options/articles.php:273
+#: options/articles.php:343
+#: options/categories.php:95
+#: options/categories.php:188
+#: options/categories.php:256
+#: options/moderation.php:34
+msgid "Moderation"
+msgstr "Модерация"
+
+#: options/multis/results_post.php:216
+#: options/tools/tools_bulk.php:32
+#: options/tools/tools_bulk.php:51
+#: options/tools/tools_bulk.php:70
+#: options/articles.php:158
+#: options/articles.php:280
+#: options/articles.php:350
+#: options/categories.php:100
+#: options/categories.php:195
+#: options/categories.php:263
+msgid "Vote Rules"
+msgstr "Правила голосования"
+
+#: options/multis/results_post.php:226
+#: options/tools/tools_bulk.php:109
+#: options/articles.php:361
+#: options/articles.php:34
+#: options/categories.php:273
+#: options/categories.php:14
+#: options/comments.php:147
+#: options/comments.php:17
+#: options/users_log.php:221
+#: options/users_log.php:28
+#: options/voters.php:195
+#: options/voters.php:38
+msgid "Update"
+msgstr "Обновления"
+
+#: options/multis/results_set.php:17
+#: options/multis/sets.php:144
+msgid "Voters"
+msgstr "Голосующие"
+
+#: options/multis/sets.php:45
+#: gd-star-rating.php:624
+msgid "Multi Sets"
+msgstr "Мульти-Сеты"
+
+#: options/multis/sets.php:49
+msgid "Add New Multi Rating Set"
+msgstr "Добавить новый сет мульти-рейтинга"
+
+#: options/multis/sets.php:63
+msgid "Auto Insert"
+msgstr "Автоматически вставлять"
+
+#: options/multis/sets.php:68
+#: options/settings.php:50
+msgid "Statistics"
+msgstr "Статистика"
+
+#: options/multis/sets.php:162
+#: options/multis/sets.php:4
+msgid "Delete Selected"
+msgstr "Удалить выбранное"
+
+#: options/multis/sets.php:134
+#: options/multis/sets.php:143
+#: options/categories.php:102
+msgid "Posts"
+msgstr "Статьи"
+
+#: options/settings/settings_administration.php:0
+msgid "Admin Display"
+msgstr "Интерфейс администратора"
+
+#: options/settings/settings_administration.php:4
+msgid "Maximum screen width"
+msgstr "Максимальная ширина экрана"
+
+#: options/settings/settings_administration.php:15
+msgid "Rows for display"
+msgstr "Строчек для показа"
+
+#: options/settings/settings_administration.php:27
+msgid "Show column with number of views on the plugins articles panel."
+msgstr "Показывать колонки с количеством просмотров в панели статей плагина"
+
+#: options/settings/settings_administration.php:29
+msgid "Maximum screen width is used only on WP version older than 2.7."
+msgstr "Максимальная ширина экрана используется только для версий старее 2.7."
+
+#: options/settings/settings_administration.php:32
+msgid "Plugin Panels"
+msgstr "Панели плагина"
+
+#: options/settings/settings_administration.php:37
+msgid "Users rating managment."
+msgstr "Администрирование пользовательских рейтингов"
+
+#: options/settings/settings_administration.php:39
+#: options/setup.php:42
+#: gd-star-rating.php:636
+msgid "Setup"
+msgstr "Установка"
+
+#: options/settings/settings_administration.php:39
+msgid "Uninstall and maintenance."
+msgstr "Снятие и техподдержка"
+
+#: options/settings/settings_administration.php:43
+#: options/tools/tools_t2.php:6
+#: gd-star-rating.php:632
+msgid "Import"
+msgstr "Импорт"
+
+#: options/settings/settings_administration.php:43
+msgid "Importing data for other rating plugins."
+msgstr "Импортировать данные для остальных плагинов рейтинга."
+
+#: options/settings/settings_administration.php:45
+#: options/ips.php:67
+#: options/users_log.php:195
+#: gd-star-rating.php:630
+msgid "IP's"
+msgstr "адреса IP"
+
+#: options/settings/settings_administration.php:45
+msgid "IP addresses managment."
+msgstr "Администрация адресов IP"
+
+#: options/settings/settings_administration.php:51
+msgid "Other Settings"
+msgstr "Другие настройки"
+
+#: options/settings/settings_administration.php:53
+msgid "Update front page latest news feed."
+msgstr "Обновлять канал последних новостей на главной странице"
+
+#: options/settings/settings_advanced.php:3
+msgid "PHP is working in the safe mode. Plugin can't create folders for caching. You need to do it manually if you want to use cache."
+msgstr "PHP работает в safe mode. Плагин не может создавать папки для кеширования. Вам надо сделать это вручную если Вы хотите использовать кэш."
+
+#: options/settings/settings_advanced.php:4
+msgid "For cache to work, plugin must be able to access cache folder. Plugin has tried to create folders needed and failed. Until you resolved this issue cache feature can't be used."
+msgstr "Для того чтобы кэширование работало, плагин должен иметь доступ до папки кеширования. Плагин пытался создать требуемые папки и не смог. Кеширование не может быть использованно пока Вы самостоятельно не решите эту проблему"
+
+#: options/settings/settings_advanced.php:5
+msgid "Either make <strong>wp-content</strong> folder writeable or create <strong>gd-star-rating</strong> folder in <strong>wp-content</strong> and make it writeable. Use 0755 chmod setting."
+msgstr "Сделайте папку <strong>wp-content</strong> доступной для записывания, либо создайте папку <strong>gd-star-rating</strong> в папке <strong>wp-content</strong> и сделайте ее доступной для записи. Используйте CHMOD 0755."
+
+#: options/settings/settings_advanced.php:10
+msgid "Cache Activation"
+msgstr "Активация кеширования"
+
+#: options/settings/settings_advanced.php:12
+msgid "Cache enabled."
+msgstr "Кеш включен"
+
+#: options/settings/settings_advanced.php:15
+msgid "Cache Cleanup"
+msgstr "Очистка кеша"
+
+#: options/settings/settings_advanced.php:19
+msgid "Auto cleanup cache"
+msgstr "Автоочистка кеша"
+
+#: options/settings/settings_advanced.php:20
+msgid "Enabled."
+msgstr "Включено."
+
+#: options/settings/settings_advanced.php:23
+msgid "Cleanup cache every"
+msgstr "Очищать кеш каждые"
+
+#: options/settings/settings_advanced.php:29
+msgid "Inline Debug Info"
+msgstr "построчная информация дебаггера"
+
+#: options/settings/settings_advanced.php:31
+msgid "Add small block with essential debug info into each rating block."
+msgstr "Добавить небольшой блок с важной информацией дебаггера в каждый блокрейтинга"
+
+#: options/settings/settings_advanced.php:33
+#: options/settings/settings_advanced.php:42
+msgid "Important"
+msgstr "Важно"
+
+#: options/settings/settings_advanced.php:36
+msgid "Log Into File"
+msgstr "Сохранять в файл"
+
+#: options/settings/settings_advanced.php:38
+msgid "Log into file various debug information."
+msgstr "Сохранять в файле различную информацию дебаггера."
+
+#: options/settings/settings_advanced.php:40
+msgid "Save into debug file each WP Query executed."
+msgstr "Сохранять в файл дебага каждую исполняемую WP Query."
+
+#: options/settings/settings_articles.php:10
+#: options/settings/settings_comments.php:10
+#: options/settings/settings_multis.php:10
+#: tinymce3/panels/filter.php:43
+#: widgets/comments/part_filter.php:46
+#: widgets/comments_28/part_filter.php:46
+#: widgets/rating/part_filter.php:62
+#: widgets/rating_28/part_filter.php:62
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: options/settings/settings_articles.php:25
+#: options/settings/settings_articles.php:199
+#: options/settings/settings_comments.php:25
+#: options/settings/settings_comments.php:213
+msgid "Number of stars"
+msgstr "Количество звезд"
+
+#: options/settings/settings_articles.php:42
+#: options/settings/settings_articles.php:218
+#: options/settings/settings_comments.php:42
+#: options/settings/settings_multis.php:33
+#: options/settings/settings_thumbs.php:26
+#: options/settings/settings_thumbs.php:90
+msgid "Rating header"
+msgstr "Шапка рейтинга"
+
+#: options/settings/settings_articles.php:49
+#: options/settings/settings_comments.php:49
+#: options/settings/settings_thumbs.php:33
+#: options/settings/settings_thumbs.php:97
+msgid "Auto insert rating code"
+msgstr "Авто вставление кода рейтинга"
+
+#: options/settings/settings_articles.php:51
+#: options/settings/settings_thumbs.php:35
+msgid "For individual posts."
+msgstr "Для отдельных  постов."
+
+#: options/settings/settings_articles.php:53
+#: options/settings/settings_thumbs.php:37
+msgid "For individual pages."
+msgstr "Для отдельных страниц"
+
+#: options/settings/settings_articles.php:57
+#: options/settings/settings_thumbs.php:41
+msgid "For posts displayed in Archives."
+msgstr "Для статей опубликованных в Архивах"
+
+#: options/settings/settings_articles.php:59
+#: options/settings/settings_thumbs.php:43
+msgid "For posts displayed on Front Page."
+msgstr "Для статей опубликованных на главной странице"
+
+#: options/settings/settings_articles.php:61
+#: options/settings/settings_thumbs.php:45
+msgid "For posts displayed on Search results."
+msgstr "Для статей опубликованных в страницах поиска и результатах поиска"
+
+#: options/settings/settings_articles.php:68
+#: options/settings/settings_comments.php:69
+#: options/settings/settings_thumbs.php:52
+#: options/settings/settings_thumbs.php:117
+msgid "Auto insert location"
+msgstr "Автоматическое место для вставления"
+
+#: options/settings/settings_articles.php:78
+#: options/settings/settings_comments.php:82
+#: options/settings/settings_multis.php:43
+msgid "Vote rule"
+msgstr "Правила голосования"
+
+#: options/settings/settings_articles.php:84
+#: options/settings/settings_comments.php:88
+#: options/settings/settings_multis.php:49
+msgid "Moderation rule"
+msgstr "Правила модерации"
+
+#: options/settings/settings_articles.php:94
+#: options/settings/settings_multis.php:59
+msgid "Time restriction"
+msgstr "Ограничение по времени"
+
+#: options/settings/settings_articles.php:99
+#: options/settings/settings_multis.php:64
+msgid "Countdown value"
+msgstr "Значение для обратного отсчета"
+
+#: options/settings/settings_articles.php:110
+#: options/settings/settings_articles.php:223
+#: options/settings/settings_comments.php:72
+#: options/settings/settings_comments.php:98
+#: options/settings/settings_multis.php:75
+msgid "Rating block CSS class"
+msgstr " CSS класс блока рейтинга"
+
+#: options/settings/settings_articles.php:115
+#: options/settings/settings_comments.php:103
+#: options/settings/settings_multis.php:80
+msgid "Rating text CSS class"
+msgstr "CSS класс текста рейтинга"
+
+#: options/settings/settings_articles.php:121
+#: options/settings/settings_comments.php:109
+#: options/settings/settings_multis.php:86
+msgid "Rating header CSS class"
+msgstr "CSS класс заголовка рейтинга"
+
+#: options/settings/settings_articles.php:126
+#: options/settings/settings_comments.php:114
+msgid "Rating stars CSS class"
+msgstr "CSS класс звезд рейтинга"
+
+#: options/settings/settings_articles.php:135
+#: options/settings/settings_comments.php:123
+#: options/settings/settings_integration.php:93
+#: options/settings/settings_multis.php:100
+#: options/settings/settings_thumbs.php:59
+#: options/settings/settings_thumbs.php:124
+msgid "Rating Template"
+msgstr "Шаблон рейтинга"
+
+#: options/settings/settings_articles.php:141
+#: options/settings/settings_comments.php:155
+msgid "Restrict"
+msgstr "Ограничить"
+
+#: options/settings/settings_articles.php:143
+msgid "Prevent article author to vote."
+msgstr "Не позволять автору статьи голосовать в статье"
+
+#: options/settings/settings_articles.php:143
+msgid "This is only for registered users."
+msgstr "Только для зарегистрированных пользователей."
+
+#: options/settings/settings_articles.php:145
+#: options/settings/settings_comments.php:159
+msgid "Use logged data (IP) to prevent duplicate voting."
+msgstr "Использовать данные с логов (IP) для избежания повторных голосований."
+
+#: options/settings/settings_articles.php:147
+#: options/settings/settings_comments.php:161
+msgid "Use cookies to prevent duplicate voting."
+msgstr "Использовать куки для избежания повторных голосований"
+
+#: options/settings/settings_articles.php:149
+#: options/settings/settings_comments.php:163
+msgid "Allow votes from user and visitor coming from same IP address."
+msgstr "Позволить голосования пользователям и посетителям пришедшим с одного и того же адреса IP"
+
+#: options/settings/settings_articles.php:152
+#: options/settings/settings_comments.php:166
+#: options/settings/settings_multis.php:120
+msgid "Vote Waiting Message"
+msgstr "Сообщение об ожидании"
+
+#: options/settings/settings_articles.php:156
+#: options/settings/settings_comments.php:170
+#: options/settings/settings_multis.php:124
+msgid "Animation indicator"
+msgstr "Анимационный индикатор"
+
+#: options/settings/settings_articles.php:159
+#: options/settings/settings_comments.php:173
+#: options/settings/settings_multis.php:127
+#: options/gfx.php:63
+msgid "Preview"
+msgstr "Предосмотр"
+
+#: options/settings/settings_articles.php:169
+#: options/settings/settings_comments.php:183
+#: options/settings/settings_multis.php:137
+msgid "Text to display"
+msgstr "Текст для показа"
+
+#: options/settings/settings_articles.php:174
+#: options/settings/settings_comments.php:188
+#: options/settings/settings_multis.php:142
+msgid "Additional CSS class"
+msgstr "Дополнительный класс CSS"
+
+#: options/settings/settings_articles.php:180
+#: options/settings/settings_comments.php:194
+#: options/settings/settings_multis.php:148
+msgid "Hide text and show only animation image."
+msgstr "Спрятать текст, показывать только страницу анимации"
+
+#: options/settings/settings_bots.php:0
+msgid "Spider BOT's"
+msgstr "Боты пауков"
+
+#: options/settings/settings_bots.php:8
+msgid "Each line must contain only one BOT name to ensure proper detection of search engines."
+msgstr "Каждая строка должна содержать только одно название Бота чтобы гарантировать правильное нахождение поисковыми машинами"
+
+#: options/settings/settings_comments.php:51
+#: options/settings/settings_thumbs.php:99
+msgid "For comments for posts."
+msgstr "Для комментариев статей"
+
+#: options/settings/settings_comments.php:55
+#: options/settings/settings_thumbs.php:103
+msgid "For comments for pages."
+msgstr "Для комментариев страниц"
+
+#: options/settings/settings_comments.php:62
+#: options/settings/settings_thumbs.php:110
+msgid "Enable auto insert regardless of the single page or post."
+msgstr "Автовставление в страницы, независимо отдельная страница или статья."
+
+#: options/settings/settings_comments.php:129
+msgid "Aggregated Rating"
+msgstr "Агрегированый рейтинг"
+
+#: options/settings/settings_comments.php:157
+msgid "Prevent comment author to vote."
+msgstr "Не позволять голосовать автору комментария."
+
+#: options/settings/settings_features.php:1
+msgid "Voting"
+msgstr "Голосование"
+
+#: options/settings/settings_features.php:3
+msgid "Use Nonce with AJAX for improved security."
+msgstr "Использовать  Nonce и AJAX для улучшеной безопасности."
+
+#: options/settings/settings_features.php:5
+msgid "Use AJAX cross-domain calls. Enable only if your website URL is different from actual URL."
+msgstr "Использовать AJAX cross-domain calls. Включить если адрес Вашего сайта отличается от самого адреса."
+
+#: options/settings/settings_features.php:7
+msgid "Use banned IP's lists to filter out visitors."
+msgstr "Использовать списки забаненных IP для фильтрации пользователей"
+
+#: options/settings/settings_features.php:9
+msgid "Don't even show rating stars to visitors comming from banned IP's."
+msgstr "Даже не показывать звезды рейтинга для пользователей с забаненым IP"
+
+#: options/settings/settings_features.php:11
+msgid "Hide comment integrated rating block if the comment is in reply mode (WP 2.7 or newer only)."
+msgstr "Прятать блок рейтинга для комментариев со статусом reply mode (ответ на коммент), только для WP 2.7 и новее"
+
+#: options/settings/settings_features.php:14
+msgid "Plugin Features"
+msgstr "Описание плагина"
+
+#: options/settings/settings_features.php:19
+msgid "Time restriction for rating."
+msgstr "Ограничение времени для рейтига"
+
+#: options/settings/settings_features.php:21
+msgid "Moderation options and handling."
+msgstr "Опции модерации и управления"
+
+#: options/settings/settings_features.php:23
+msgid "Multiple rating support."
+msgstr "Поддержка мульти-рейтинга"
+
+#: options/settings/settings_features.php:25
+msgid "Thumbs up/down rating support."
+msgstr "Поддержка рейтинга 'Большие пальцы'"
+
+#: options/settings/settings_features.php:29
+msgid "Post And Page Review Rating."
+msgstr "Рейтинг оценок постов и страниц"
+
+#: options/settings/settings_features.php:31
+msgid "Comments Rating."
+msgstr "Рейтинг Комментариев."
+
+#: options/settings/settings_features.php:33
+msgid "Comments Review Rating."
+msgstr "Рейтинг оценок комментариев"
+
+#: options/settings/settings_features.php:38
+msgid "Use graphics generator to generate and display static stars images."
+msgstr "Использовать графический генератор для генерирования и показа статических изображений звезд"
+
+#: options/settings/settings_features.php:40
+msgid "Prevent outside access to graphics generator. Graphics integrated into RSS is not affected."
+msgstr "Предотвращать наружний доступ до графического генератора. Графика интегрированная в RSS не пострадает"
+
+#: options/settings/settings_features.php:42
+msgid "This leeching prevention will only work if a referer is sent and your server is set up correctly with proper server name variable."
+msgstr "Антилич будет работать только если известен реферал и Ваш сервер правильно настроен с правильными переменными сервера"
+
+#: options/settings/settings_features.php:45
+msgid "JS and CSS files"
+msgstr "Файлы JS и CSS"
+
+#: options/settings/settings_features.php:47
+msgid "Link external javascript rating code, instead of embeding it into the page."
+msgstr "Ссылка на наружний код Javascript вместо embed"
+
+#: options/settings/settings_features.php:49
+msgid "Link external CSS rating code, uncheck to embed all the CSS into the page."
+msgstr "Ссылаться на наружний CSS файл, снять отметку чтобы вписать все CSS в саму страницу"
+
+#: options/settings/settings_features.php:51
+msgid "Link additional CSS file"
+msgstr "Ссылка на дополнительный CSS файл"
+
+#: options/settings/settings_features.php:53
+msgid "Auto cache of the main CSS file enabled."
+msgstr "Авто-кеширование основного CSS файла включено"
+
+#: options/settings/settings_features.php:56
+msgid "Charset"
+msgstr "Кодировка"
+
+#: options/settings/settings_features.php:60
+msgid "Character encoding"
+msgstr "Кодировка знаков"
+
+#: options/settings/settings_features.php:64
+msgid "For list of supported charsets visit: "
+msgstr "Для просмотра списка поддерживаемых кодировок, посетите:"
+
+#: options/settings/settings_features.php:67
+msgid "Rating Log"
+msgstr "Лог рейтинга"
+
+#: options/settings/settings_features.php:69
+msgid "Log user agent (browser) information."
+msgstr "Лог информации браузеров"
+
+#: options/settings/settings_features.php:71
+msgid "Save cookies with ratings."
+msgstr "Сохранять куки с рейтингом"
+
+#: options/settings/settings_features.php:74
+msgid "Internet Explorer"
+msgstr "Internet Explorer"
+
+#: options/settings/settings_features.php:76
+msgid "Use IE opacity fix for multi ratings."
+msgstr "Использовать IE opacity fix для мульти-рейтингов"
+
+#: options/settings/settings_features.php:78
+msgid "Disable checking for IE6 and IE6 specific settings."
+msgstr "Отменить проверку на IE6 и проверку на специфические настройки IE6"
+
+#: options/settings/settings_integration.php:1
+msgid "WP Query Object"
+msgstr "Объект WP Query"
+
+#: options/settings/settings_integration.php:3
+msgid "Expand WP Query with new rating specific sorting and filtering."
+msgstr "Расширить WP Query с новым функционалом фильтрации и сортировки по рейтингу"
+
+#: options/settings/settings_integration.php:6
+msgid "Dashboard"
+msgstr "Консоль"
+
+#: options/settings/settings_integration.php:8
+msgid "Add widgets to the administration dashboard."
+msgstr "Добавлять виджеты на консоль администратора"
+
+#: options/settings/settings_integration.php:10
+msgid "Add chart summary rating widget."
+msgstr "Добавить виджет с общей диаграммой"
+
+#: options/settings/settings_integration.php:15
+msgid "Add widget with list of latest votes."
+msgstr "Добавить виджет со списком последних голосов"
+
+#: options/settings/settings_integration.php:18
+msgid "Votes to display:"
+msgstr "Показывать голоса:"
+
+#: options/settings/settings_integration.php:26
+msgid "Show thumbs for posts."
+msgstr "Показывать 'Большие Пальцы' для статей"
+
+#: options/settings/settings_integration.php:28
+msgid "Show stars for posts."
+msgstr "Показывать 'Звезды' для статей"
+
+#: options/settings/settings_integration.php:30
+msgid "Show multis for posts."
+msgstr "Показывать мультирейтинги для постов"
+
+#: options/settings/settings_integration.php:33
+msgid "Show thumbs for comments."
+msgstr "Показывать превьюшки для комментариев."
+
+#: options/settings/settings_integration.php:35
+msgid "Show stars for comments."
+msgstr "Показывать звезды для комментариев"
+
+#: options/settings/settings_integration.php:41
+msgid "Widgets"
+msgstr "Виджеты"
+
+#: options/settings/settings_integration.php:43
+msgid "GD Star Rating: Post/Page rating widget."
+msgstr "GD Рейтинг Звезд: Виджет Рейтинга Страницы/Статьи"
+
+#: options/settings/settings_integration.php:45
+msgid "GD Blog Rating: Blog average rating."
+msgstr "GD Рейтинг Блога: Средний рейтинг блога"
+
+#: options/settings/settings_integration.php:47
+msgid "GD Comments Rating: Per post comments rating."
+msgstr "GD Рейтинг Комментариев: Рейтинг комментариев для статей"
+
+#: options/settings/settings_integration.php:49
+msgid "Don't render the widget if there are no results to display."
+msgstr "Не выводить виджет если нет данных для показа"
+
+#: options/settings/settings_integration.php:52
+msgid "Post Edit"
+msgstr "Редактирование Сообщения"
+
+#: options/settings/settings_integration.php:54
+msgid "Add standard rating box in the post/page edit sidebar area."
+msgstr "Добавить блок мультирейтинга в редактировании страниц/статей"
+
+#: options/settings/settings_integration.php:56
+msgid "Add multi ratings box in the post/page edit."
+msgstr "Добавлять блок мульти-рейтинга в редактирование страниц/статей"
+
+#: options/settings/settings_integration.php:58
+msgid "Add rating shortcode plugin into tinyMCE visual editor."
+msgstr "Добавлять кнопку плагина рейтинга в визуальный редактор tinyMCE "
+
+#: options/settings/settings_integration.php:61
+msgid "Comment Edit"
+msgstr "Редактирование комментариев"
+
+#: options/settings/settings_integration.php:63
+msgid "Add rating box on the comment edit page."
+msgstr "Добавить блок рейтинга на редактирование комментариев"
+
+#: options/settings/settings_integration.php:66
+msgid "RSS Feeds"
+msgstr "RSS Фиды"
+
+#: options/settings/settings_integration.php:68
+msgid "Add small 80x15 badge to posts in RSS feed."
+msgstr "Добавить небольшую 80x15 S иконку в статьи в фид RSS."
+
+#: options/settings/settings_integration.php:70
+msgid "Add ratings to posts in RSS feeds."
+msgstr "Добавлять рейтинг в статьи в RSS фиде."
+
+#: options/settings/settings_integration.php:89
+msgid "Rating Header"
+msgstr "Заголовок рейтинга"
+
+#: options/settings/settings_multis.php:91
+msgid "Rating button CSS class"
+msgstr "CSS класс кнопки рейтинга"
+
+#: options/settings/settings_multis.php:106
+msgid "Submit Button"
+msgstr "Кнопка Submit"
+
+#: options/settings/settings_multis.php:110
+msgid "Button text"
+msgstr "Текст кнопки"
+
+#: options/settings/settings_multis.php:117
+msgid "Use submit button to send votes. If disabled, votes will be send once all block elements are rated."
+msgstr "Используйте кнопку submit для отсылки голосов. Если отменена, голоса будут посылаться как только все элементы блока будут оценены"
+
+#: options/settings/settings_statistics.php:1
+msgid "Trend Calculations"
+msgstr "Калькуляции трендов"
+
+#: options/settings/settings_statistics.php:5
+msgid "Calculate for last number of days"
+msgstr "Подсчитать за последние несколько дней"
+
+#: options/settings/settings_statistics.php:9
+msgid "Calculate over how many days before"
+msgstr "Посчитать на кол-во дней назад"
+
+#: options/settings/settings_statistics.php:15
+msgid "Bayesian Estimate Mean"
+msgstr "Bayesian Estimate Mean"
+
+#: options/settings/settings_statistics.php:19
+msgid "Minimum votes required"
+msgstr "Требуется минимум голосов"
+
+#: options/settings/settings_statistics.php:23
+msgid "Mean vote rating across the whole report"
+msgstr "Mean vote rating across the whole report"
+
+#: options/settings/settings_thumbs.php:1
+msgid "Posts &amp; Pages"
+msgstr "Статьи и Страницы"
+
+#: options/settings/settings_thumbs.php:5
+#: options/settings/settings_thumbs.php:69
+msgid "Thumbs Set"
+msgstr "Сет Большых Пальцев"
+
+#: options/setup/setup_database.php:1
+#: options/setup/setup_database.php:5
+#: options/setup/setup_database.php:15
+#: options/setup.php:2
+#: options/setup.php:8
+msgid "Reinstall"
+msgstr "Переустановить"
+
+#: options/setup/setup_database.php:4
+msgid "All database tables will be deleted, and installed again."
+msgstr "Все таблицы базы данных будут стерты и созданы заново."
+
+#: options/setup/setup_database.php:7
+#: options/setup/setup_database.php:17
+#: options/setup/setup_database.php:27
+#: options/setup/setup_global.php:7
+#: options/setup/setup_uninstall.php:7
+msgid "This operation is not reversable. Backup your data if you want to be able to restore it later."
+msgstr "Операция необратима. Сохраните ваши данные если Вы хотите восстановить их позже."
+
+#: options/setup/setup_database.php:11
+msgid "Reinstall Multi Ratings"
+msgstr "Переустановить мульти-рейтинги"
+
+#: options/setup/setup_database.php:14
+msgid "Only multi ratings tables will be deleted, and installed again."
+msgstr "Только таблицы мультирейтигов будут стерты с базы данных, и установлены заново."
+
+#: options/setup/setup_database.php:21
+#: options/setup/setup_database.php:25
+#: options/setup.php:23
+msgid "Reinstall Templates"
+msgstr "Переустановить шаблоны"
+
+#: options/setup/setup_database.php:24
+msgid "This will remove all saved templates for the plugin. Templates will be reseted to their default values."
+msgstr "Эта операция сотрет все сохраненные шаблоны для плагина. Шаблоны будут сброшены на дефолтные значения."
+
+#: options/setup/setup_global.php:1
+#: options/setup/setup_global.php:5
+#: options/setup.php:17
+msgid "Remove Settings"
+msgstr "Удалить настройки"
+
+#: options/setup/setup_global.php:4
+msgid "This will remove all plugin settings and all the saved widgets."
+msgstr "Это удалит все настройки плагина и все сохраненные виджеты"
+
+#: options/setup/setup_global.php:11
+#: options/setup/setup_global.php:15
+#: options/setup.php:30
+msgid "Reset Imports"
+msgstr "Сброс импортов"
+
+#: options/setup/setup_global.php:14
+msgid "This will reset all import flags for import data modules and will allow you to import again allready imported data."
+msgstr "Это сбросит все импорт-флаги для модулей иморта данных и Вы сможете снова имортировать уже импортированные данные"
+
+#: options/setup/setup_uninstall.php:1
+msgid "Uninstall"
+msgstr "Удаление"
+
+#: options/setup/setup_uninstall.php:4
+msgid "After removal, plugin will be disabled. All data recorded by the plugin will be lost"
+msgstr "После удаления плагин будет отключен. Все данные записанные плагином будут потеряны."
+
+#: options/setup/setup_uninstall.php:5
+#: gd-star-rating.php:1404
+msgid "UNINSTALL"
+msgstr "УДАЛИТЬ"
+
+#: options/tools/tools_bulk.php:2
+msgid "Date Based Post Locking"
+msgstr "Закрыть доступ до статьи по датам"
+
+#: options/tools/tools_bulk.php:7
+msgid "Lock posts older than"
+msgstr "Закрыть доступ до статей старше чем"
+
+#: options/tools/tools_bulk.php:11
+msgid "Lock"
+msgstr "Закрыть"
+
+#: options/tools/tools_bulk.php:13
+msgid "Previous Lock Date"
+msgstr "Предыдущая дата закрытия"
+
+#: options/tools/tools_bulk.php:17
+msgid "Global Voting Rules Update"
+msgstr "Обновление Глобальных Правил Голосования"
+
+#: options/tools/tools_bulk.php:41
+#: options/settings.php:48
+msgid "Multis"
+msgstr "Multis"
+
+#: options/tools/tools_bulk.php:79
+msgid "This will update all posts and comments with previously saved ratings."
+msgstr "Это обновит все статьи и комментарии с прежде сохраненными рейтингами"
+
+#: options/tools/tools_bulk.php:83
+msgid "Recalculate Multi Ratings Averages"
+msgstr "Пересчитать средние значения Мульти-Рейтинга"
+
+#: options/tools/tools_bulk.php:86
+msgid "If you change multi rating sets weight for the elements you can execute recaluculation of all average ratings saved. Select the set you want to recalculate for, or select all sets."
+msgstr "Если Вы измените вес элементов в сетах мультирейтинга, Вы можете выполнить перерасчет всех средних значений рейтингов, сохраненных плагином. Выберите сет для перерасчета или выберите все сеты сразу"
+
+#: options/tools/tools_bulk.php:87
+msgid "Use this also if you update from versions before 1.2.0 and you had problems with saving multi rating results."
+msgstr "Используйте это так же для обновления версий старее 1.2.0 и если у Вас были проблемы с сохранением результатов мульти-рейтинга."
+
+#: options/tools/tools_bulk.php:90
+msgid "Select multi set"
+msgstr "Выбрать мульти-сет"
+
+#: options/tools/tools_bulk.php:93
+msgid "All Sets"
+msgstr "Все сеты"
+
+#: options/tools/tools_bulk.php:99
+msgid "Recalculate"
+msgstr "Пересчитать"
+
+#: options/tools/tools_bulk.php:101
+msgid "Depending on the number of posts, this operation can take a while to complete. Be patient."
+msgstr "Наберитесь терпения, эта операция может занять некоторое время, в зависимости от количества статей на сайте."
+
+#: options/tools/tools_bulk.php:105
+msgid "Update Multi Rating Votes Log"
+msgstr "Обновлять лог голосов Мульти-Рейтинга"
+
+#: options/tools/tools_bulk.php:108
+msgid "This tool will update votes log and recalculate average value for each multi ratings votes."
+msgstr "Этот скрипт обновит лог голосов и пересчитает средние значения для каждого из голосов мульти-рейтинга"
+
+#: options/tools/tools_bulk.php:111
+msgid "You need to do only once."
+msgstr "Требуется сделать 1 раз"
+
+#: options/tools/tools_cleanup.php:1
+msgid "Cache"
+msgstr "Кэш"
+
+#: options/tools/tools_cleanup.php:4
+msgid "Delete all cached files from folder"
+msgstr "Стирать все кешируемые файлы с папки"
+
+#: options/tools/tools_cleanup.php:5
+#: options/tools/tools_cleanup.php:18
+#: options/tools/tools_db.php:22
+msgid "Clean"
+msgstr "Очистить"
+
+#: options/tools/tools_cleanup.php:7
+#: options/tools/tools_db.php:7
+#: options/tools/tools_db.php:24
+msgid "Last cleanup was executed on"
+msgstr "Последняя чистка проводилась в:"
+
+#: options/tools/tools_cleanup.php:9
+msgid "Total files cached"
+msgstr "Всего кешировано файлов"
+
+#: options/tools/tools_cleanup.php:11
+msgid "Total size of cached files"
+msgstr "Общий размер кешированых файлов"
+
+#: options/tools/tools_cleanup.php:14
+msgid "Debug"
+msgstr "Дебаг"
+
+#: options/tools/tools_cleanup.php:17
+msgid "Empty the debug file"
+msgstr "Очистить файл дебага"
+
+#: options/tools/tools_cleanup.php:21
+msgid "Total size of debug file"
+msgstr "Общий размер дебаг-файла"
+
+#: options/tools/tools_db.php:1
+#: options/tools/tools_db.php:5
+msgid "Upgrade"
+msgstr "Апгрейд"
+
+#: options/tools/tools_db.php:4
+msgid "Try to upgrade plugin tables. This is performed automatically after each plugin upgrade, but you can use this tool also."
+msgstr "Попробуйте обновить таблицы плагина. Это происходит автоматически после каждого обновления плагина, но Вы можете использовать этот скрипт самостоятельно."
+
+#: options/tools/tools_db.php:11
+#: options/tools.php:7
+msgid "Cleanup"
+msgstr "Чистка"
+
+#: options/tools/tools_db.php:14
+msgid "Remove all invalid votes from votes log."
+msgstr "Удалить все не-валидные голоса с лога голосований"
+
+#: options/tools/tools_db.php:16
+msgid "Remove all invalid votes from trends log."
+msgstr "Удалить все не-валидные голоса с лога трендов"
+
+#: options/tools/tools_db.php:18
+msgid "Remove data for old and deleted posts and comments."
+msgstr "Удалить данные для старых и стертых сообщений и комментариев"
+
+#: options/tools/tools_db.php:20
+msgid "Remove data for old and deleted multi ratings."
+msgstr "Удалить данные для старых и удаленных мульти-рейтингов."
+
+#: options/tools/tools_db.php:25
+msgid "Cleanup summary"
+msgstr "Отчет об очистке"
+
+#: options/tools/tools_editcss.php:21
+msgid "Save"
+msgstr "Сохранить"
+
+#: options/tools/tools_editcss.php:6
+msgid "File is not writeable and can't be saved through this form."
+msgstr "Файл не доступен для записи и не может быть сохранен этой формой"
+
+#: options/tools/tools_editcss.php:11
+msgid "Additional CSS file not found"
+msgstr "Дополнительный CSS файл не найдет"
+
+#: options/tools/tools_gfx.php:1
+msgid "Stars and Trends Graphics"
+msgstr "Графика трендов и звезд"
+
+#: options/tools/tools_gfx.php:4
+msgid "Rescan graphics folders for new stars and trends images."
+msgstr "Просканировать заново папку графики на предмет новых изображений звезд и трендов"
+
+#: options/tools/tools_gfx.php:5
+msgid "Rescan"
+msgstr "Сканировать заново"
+
+#: options/tools/tools_gfx.php:7
+msgid "Last scan was executed on."
+msgstr "Последнее сканирование проводилось в: "
+
+#: options/tools/tools_t2.php:1
+msgid "Import Templates"
+msgstr "Импортировать шаблоны"
+
+#: options/tools/tools_t2.php:4
+msgid "This will import templates from alternative location:"
+msgstr "Это импортирует шаблоны из альтернативных источников: "
+
+#: options/tools/tools_t2.php:8
+msgid "Templates with same name as the templates already in database will be skipped."
+msgstr "Шаблоны с одинаковым названием как шаблоны уже в базе - не будут добавлены."
+
+#: options/articles.php:156
+msgid "Time"
+msgstr "Время"
+
+#: options/articles.php:163
+msgid "Views"
+msgstr "Просмотры"
+
+#: options/articles.php:196
+#: options/categories.php:115
+msgid "date limit"
+msgstr "лимит по дате"
+
+#: options/articles.php:199
+#: options/categories.php:119
+msgid "countdown"
+msgstr "обратный отсчет"
+
+#: options/articles.php:212
+#: options/categories.php:133
+msgid "no limit"
+msgstr "без лимита"
+
+#: options/articles.php:224
+#: options/charts.php:1
+msgid "Charts"
+msgstr "Диаграмы"
+
+#: options/builder.php:2
+#: gd-star-rating.php:618
+msgid "Builder"
+msgstr "Конструктор"
+
+#: options/builder.php:6
+msgid "Shortcode/Functions"
+msgstr "Теги/Функции"
+
+#: options/builder.php:7
+#: options/settings.php:39
+#: tinymce3/panels/articlesrater.php:11
+#: tinymce3/panels/multis.php:20
+#: tinymce3/panels/thumbsrating.php:11
+#: gd-star-rating.php:625
+#: gd-star-rating.php:842
+msgid "Settings"
+msgstr "Настройки"
+
+#: options/categories.php:92
+#: tinymce3/panels/filter.php:22
+msgid "Category"
+msgstr "Категории"
+
+#: options/categories.php:98
+msgid "Time Restrictions"
+msgstr "Ограничения по времени"
+
+#: options/categories.php:101
+#: options/settings.php:45
+msgid "Integration"
+msgstr "Интеграция"
+
+#: options/categories.php:204
+#: tinymce3/panels/general.php:34
+#: widgets/rating/part_basic.php:48
+#: widgets/rating_28/part_basic.php:46
+msgid "Multi Set"
+msgstr "Мультисет"
+
+#: options/categories.php:214
+msgid "(this multi set is used for comment integration)"
+msgstr "(этот мультисет используется для интеграции в комментарии)"
+
+#: options/categories.php:148
+msgid "multi set"
+msgstr "мульти-сет"
+
+#: options/categories.php:149
+msgid "inhert from parent"
+msgstr "унаследовать от родителя"
+
+#: options/charts.php:6
+msgid "Articles (Posts And Pages)"
+msgstr "Статьи (Посты и Страницы)"
+
+#: options/comments.php:46
+msgid "Comments for post"
+msgstr "Комментарии для постов"
+
+#: options/comments.php:91
+msgid "Comment"
+msgstr "Комментарий"
+
+#: options/comments.php:92
+#: options/moderation.php:115
+msgid "User"
+msgstr "Пользователь"
+
+#: options/comments.php:93
+#: options/moderation.php:114
+msgid "Date And Time"
+msgstr "Дата и время"
+
+#: options/comments.php:95
+#: options/users_log.php:203
+msgid "Votes"
+msgstr "Голоса"
+
+#: options/comments.php:135
+#: options/voters.php:184
+msgid "With selected"
+msgstr "С выбранным"
+
+#: options/export.php:1
+msgid "Export Data"
+msgstr "Экспортировать данные"
+
+#: options/export.php:6
+msgid "Users Data"
+msgstr "Данные пользователей"
+
+#: options/export.php:7
+#: options/tools.php:8
+#: gd-star-rating.php:628
+msgid "T2 Templates"
+msgstr "Шаблоны T2"
+
+#: options/gfx.php:1
+#: options/settings.php:30
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+#: options/gfx.php:77
+#: options/settings.php:81
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: options/import.php:28
+#: options/import.php:60
+#: options/import.php:85
+#: options/import.php:144
+#: options/import.php:4
+#: options/import.php:11
+#: options/import.php:18
+msgid "Import Data"
+msgstr "Импортировать данные"
+
+#: options/import.php:43
+#: options/import.php:68
+#: options/import.php:93
+#: options/import.php:151
+msgid "Plugin URL"
+msgstr "Ссылка на плагин"
+
+#: options/import.php:48
+#: options/import.php:73
+#: options/import.php:98
+#: options/import.php:156
+msgid "Author URL"
+msgstr "Ссылка автора"
+
+#: options/import.php:53
+#: options/import.php:78
+#: options/import.php:137
+#: options/users_log.php:121
+msgid "Status"
+msgstr "Статус"
+
+#: options/import.php:103
+msgid "Instructions"
+msgstr "Инструкции"
+
+#: options/import.php:106
+msgid "For each value you have a name of the variable from plugin file in square brackets."
+msgstr "Для каждого значения имеется название в файле плагина, в квадратных скобках"
+
+#: options/import.php:107
+msgid "Plugin could save data in post meta table or only in the post using shortcodes. Import can try both, but if you are usre that ratings are stored in post meta table, use that option."
+msgstr "Плагин может может сохранять данные в мета-таблице сообщения, или же только в теле сообщения используя shortcodes. Импорт может попробовать оба способа, но если вы УВЕРЕНЫ что данные рейтингов содержатся в мета таблице статьи - используйте эту опцию."
+
+#: options/import.php:110
+msgid "Import Settings"
+msgstr "Настройки импорта"
+
+#: options/import.php:114
+msgid "Maximum review value"
+msgstr "Максимальное значение оценки"
+
+#: options/import.php:120
+msgid "Meta Key"
+msgstr "Ключ Мета"
+
+#: options/import.php:126
+msgid "Try Importing from"
+msgstr "Пробовать импортировать из "
+
+#: options/import.php:129
+msgid "Posts meta table"
+msgstr "Мета таблица публикации"
+
+#: options/import.php:130
+msgid "Posts contents only"
+msgstr "Только содержимое статьи"
+
+#: options/import.php:131
+msgid "Both contents and meta"
+msgstr "И содержимое и мета данные вместе"
+
+#: options/import.php:166
+msgid "To avoid rating data import problems, please don't use GD Star Rating in the same time as the plugins above, to avoid potential import problems and false data. I can't guarantee that data will be transfered without problems."
+msgstr "Во избежание проблем импорта данных рейтинга, пожалуйста не используйте GD Star Rating одновременно с плагинами выше. Мы не гарантируем перенос данных без проблем в таком случае. "
+
+#: options/import.php:105
+msgid "You need to enter few settings for this plugin. This can be found in the plugin's main and only PHP file: %s"
+msgstr "Следует ввести настройки для этого плагина, это можно сделать в главном и единственном PHP файле плагинеа: %s"
+
+#: options/ips.php:71
+msgid "Ban New"
+msgstr "Забанить нового"
+
+#: options/ips.php:72
+msgid "Banned"
+msgstr "Забанен"
+
+#: options/moderation.php:147
+msgid "With Selected"
+msgstr "С выделеным"
+
+#: options/moderation.php:150
+msgid "Approve"
+msgstr "Одобрить"
+
+#: options/settings.php:43
+msgid "Features"
+msgstr "Свойства"
+
+#: options/settings.php:44
+msgid "Advanced"
+msgstr "Продвинутые настройки"
+
+#: options/settings.php:46
+#: tinymce3/panels/blograting.php:12
+#: tinymce3/panels/filter.php:7
+msgid "Posts And Pages"
+msgstr "Публикации и страницы"
+
+#: options/settings.php:49
+msgid "Thumbs Up/Down"
+msgstr "Большие Пальцы"
+
+#: options/setup.php:6
+msgid "Database tables reinstalled."
+msgstr "Таблицы базы данных переустановлены"
+
+#: options/setup.php:15
+msgid "Multi rating tables reinstalled."
+msgstr "Таблицы Мульти рейтинга переустановлены"
+
+#: options/setup.php:21
+msgid "Settings are removed from WordPress installation."
+msgstr "Настройки удалены из установки WordPress"
+
+#: options/setup.php:28
+msgid "Plugins default templates are reinstalled."
+msgstr "Дефолтные шаблоны плагина переустановлены"
+
+#: options/setup.php:32
+msgid "Import Information is reseted."
+msgstr "Информация импорта сброшена"
+
+#: options/setup.php:38
+msgid "Are you sure? Operation is not reversible."
+msgstr "Вы уверены? Операция необратима."
+
+#: options/setup.php:45
+msgid "Database Maintenance"
+msgstr "Менеджмент базы данных"
+
+#: options/setup.php:46
+msgid "Global Maintenance"
+msgstr "Глобальные настройки"
+
+#: options/setup.php:47
+msgid "Full Uninstall"
+msgstr "Полное удаление"
+
+#: options/tools.php:0
+#: gd-star-rating.php:627
+msgid "Tools"
+msgstr "Инструменты"
+
+#: options/tools.php:5
+msgid "Bulk"
+msgstr "Одновременно"
+
+#: options/tools.php:6
+msgid "Database"
+msgstr "База Данных"
+
+#: options/tools.php:10
+msgid "Edit CSS"
+msgstr "Редактировать CSS"
+
+#: options/users.php:62
+msgid "Email"
+msgstr "Email"
+
+#: options/users.php:63
+msgid "Thumbs Articles"
+msgstr "Статьи с Большыми Пальцами"
+
+#: options/users.php:64
+msgid "Thumbs Comments"
+msgstr "Комментарии с Большими Пальцами"
+
+#: options/users.php:65
+msgid "Ratings Articles"
+msgstr "Статьи с рейтингами"
+
+#: options/users.php:66
+msgid "Ratings Comments"
+msgstr "Комментарии с рейтингами"
+
+#: options/users.php:33
+msgid "Visitor"
+msgstr "Посетители"
+
+#: options/users.php:111
+#: options/users.php:116
+#: options/users.php:121
+#: options/users.php:126
+msgid "unique ip's"
+msgstr "уникальные ip"
+
+#: options/users_log.php:94
+msgid "User Vote Log"
+msgstr "Лог голосований пользователей"
+
+#: options/users_log.php:97
+msgid "Votes log for user"
+msgstr "Лог голосов для пользователей"
+
+#: options/users_log.php:100
+msgid "Votes log for visitors"
+msgstr "Лог голосов для посетителей"
+
+#: options/users_log.php:106
+#: options/voters.php:114
+msgid "All Votes"
+msgstr "Все голоса"
+
+#: options/users_log.php:122
+#: options/voters.php:145
+msgid "Vote Date"
+msgstr "Дата голосования"
+
+#: options/users_log.php:124
+msgid "Post"
+msgstr "Публикации"
+
+#: options/users_log.php:126
+msgid "Comment Author"
+msgstr "Автор комментариев"
+
+#: options/users_log.php:127
+msgid "Comment Excerpt"
+msgstr "Цитата комментария"
+
+#: options/users_log.php:198
+msgid "Add selected IP's to ban IP's list."
+msgstr "Добавить выбранные IP's в список забанненых"
+
+#: options/users_log.php:211
+msgid "Only Invalid"
+msgstr "Только не-валидные"
+
+#: options/users_log.php:212
+#: options/voters.php:191
+msgid "From Log Only"
+msgstr "Только из лога"
+
+#: options/users_log.php:213
+#: options/voters.php:190
+msgid "Full Delete"
+msgstr "Полное удаление"
+
+#: options/voters.php:99
+msgid "Vote log for post"
+msgstr "Лог голосований для публикации"
+
+#: tinymce3/panels/articlesrater.php:2
+#: tinymce3/panels/thumbsrating.php:2
+msgid "StarRater will render actual rating block if you choose not to have it automatically inserted. This way you can position it wherever you want in the contnents."
+msgstr "StarRater автоматически выводит актуальный блок рейтинга, если Вы выбрали добавлять его автоматически. Таким образом Вы можете разместить его где хотите среди контента."
+
+#: tinymce3/panels/articlesrater.php:12
+#: tinymce3/panels/multis.php:21
+#: tinymce3/panels/thumbsrating.php:12
+msgid "Display rating block as read only."
+msgstr "Показывать блок рейтинга только для просмотра"
+
+#: tinymce3/panels/articlesreview.php:1
+msgid "Articles Review Rating"
+msgstr "Рейтинг оценок статей"
+
+#: tinymce3/panels/articlesreview.php:2
+msgid "StarReview will render stars representing review value assigned to the post or page."
+msgstr "StarReview выводит оценку основанную на значении рейтинга звезд, для определенной страницы или поста."
+
+#: tinymce3/panels/blograting.php:9
+#: tinymce3/panels/filter.php:4
+#: widgets/rating/part_filter.php:13
+#: widgets/rating_28/part_filter.php:13
+#: widgets/top/part_filter.php:13
+#: widgets/top_28/part_filter.php:13
+msgid "Include Articles"
+msgstr "Включить Статьи"
+
+#: tinymce3/panels/blograting.php:13
+#: tinymce3/panels/filter.php:8
+#: widgets/rating/part_filter.php:17
+#: widgets/rating_28/part_filter.php:17
+#: widgets/top/part_filter.php:17
+#: widgets/top_28/part_filter.php:17
+msgid "Posts Only"
+msgstr "Только Посты."
+
+#: tinymce3/panels/blograting.php:14
+#: tinymce3/panels/filter.php:9
+#: widgets/rating/part_filter.php:18
+#: widgets/rating_28/part_filter.php:18
+#: widgets/top/part_filter.php:18
+#: widgets/top_28/part_filter.php:18
+msgid "Pages Only"
+msgstr "Только страницы"
+
+#: tinymce3/panels/blograting.php:19
+#: tinymce3/panels/filter.php:14
+#: widgets/comments/part_filter.php:13
+#: widgets/comments_28/part_filter.php:13
+#: widgets/rating/part_filter.php:24
+#: widgets/rating_28/part_filter.php:24
+#: widgets/top/part_filter.php:24
+#: widgets/top_28/part_filter.php:24
+msgid "Display Votes From"
+msgstr "Показывать голоса из"
+
+#: tinymce3/panels/blograting.php:21
+#: tinymce3/panels/commentsaggr.php:16
+#: tinymce3/panels/filter.php:16
+#: widgets/comments/part_basic.php:16
+#: widgets/comments/part_filter.php:16
+#: widgets/comments_28/part_basic.php:16
+#: widgets/comments_28/part_filter.php:16
+#: widgets/rating/part_basic.php:16
+#: widgets/rating/part_filter.php:27
+#: widgets/rating_28/part_basic.php:16
+#: widgets/rating_28/part_filter.php:27
+#: widgets/top/part_basic.php:16
+#: widgets/top/part_filter.php:27
+#: widgets/top_28/part_basic.php:16
+#: widgets/top_28/part_filter.php:27
+msgid "Everyone"
+msgstr "Все"
+
+#: tinymce3/panels/blograting.php:23
+#: tinymce3/panels/commentsaggr.php:18
+#: tinymce3/panels/filter.php:18
+#: widgets/comments/part_basic.php:18
+#: widgets/comments/part_filter.php:18
+#: widgets/comments_28/part_basic.php:18
+#: widgets/comments_28/part_filter.php:18
+#: widgets/rating/part_basic.php:18
+#: widgets/rating/part_filter.php:29
+#: widgets/rating_28/part_basic.php:18
+#: widgets/rating_28/part_filter.php:29
+#: widgets/top/part_basic.php:18
+#: widgets/top/part_filter.php:29
+#: widgets/top_28/part_basic.php:18
+#: widgets/top_28/part_filter.php:29
+msgid "Users Only"
+msgstr "Только пользователи"
+
+#: tinymce3/panels/commentsaggr.php:1
+msgid "Aggregated Comments Ratings"
+msgstr "Агрегированый рейтинг комментариев"
+
+#: tinymce3/panels/commentsaggr.php:2
+msgid "This will render aggregated comments rating for the post."
+msgstr "Это выводит агрегировные рейтинги коментариев для постов."
+
+#: tinymce3/panels/commentsaggr.php:14
+msgid "Calculate Votes From"
+msgstr "Подсчитать голоса от"
+
+#: tinymce3/panels/filter.php:1
+msgid "Basic"
+msgstr "Базовый"
+
+#: tinymce3/panels/filter.php:26
+#: widgets/comments/part_filter.php:36
+#: widgets/comments_28/part_filter.php:36
+#: widgets/rating/part_filter.php:52
+#: widgets/rating_28/part_filter.php:52
+msgid "Minimum Votes"
+msgstr "Минимум голосов"
+
+#: tinymce3/panels/filter.php:30
+msgid "Excerpt words"
+msgstr "Слова цитаты"
+
+#: tinymce3/panels/filter.php:37
+msgid "Sorting"
+msgstr "Сортировка"
+
+#: tinymce3/panels/filter.php:40
+msgid "Column"
+msgstr "Колонка"
+
+#: tinymce3/panels/filter.php:44
+#: widgets/comments/part_filter.php:47
+#: widgets/comments_28/part_filter.php:47
+#: widgets/rating/part_filter.php:63
+#: widgets/rating_28/part_filter.php:63
+msgid "Total Votes"
+msgstr "Всего голосов"
+
+#: tinymce3/panels/filter.php:48
+#: widgets/rating/part_filter.php:67
+#: widgets/rating_28/part_filter.php:67
+msgid "Count"
+msgstr "Подсчет"
+
+#: tinymce3/panels/filter.php:49
+#: widgets/rating/part_filter.php:68
+#: widgets/rating_28/part_filter.php:68
+msgid "Bayesian Rating"
+msgstr "Bayesian Rating"
+
+#: tinymce3/panels/filter.php:54
+msgid "Order"
+msgstr "Порядок"
+
+#: tinymce3/panels/filter.php:57
+#: widgets/comments/part_filter.php:57
+#: widgets/comments_28/part_filter.php:57
+#: widgets/rating/part_filter.php:77
+#: widgets/rating_28/part_filter.php:77
+msgid "Descending"
+msgstr "В - "
+
+#: tinymce3/panels/filter.php:58
+#: widgets/comments/part_filter.php:58
+#: widgets/comments_28/part_filter.php:58
+#: widgets/rating/part_filter.php:78
+#: widgets/rating_28/part_filter.php:78
+msgid "Ascending"
+msgstr "В +"
+
+#: tinymce3/panels/filter.php:66
+msgid "Last Voted"
+msgstr "Последний голос"
+
+#: tinymce3/panels/filter.php:67
+#: widgets/rating/part_filter.php:123
+#: widgets/rating_28/part_filter.php:123
+msgid "Use only articles voted for in last # days."
+msgstr "Использовать только статьи с голосами за последние # дней."
+
+#: tinymce3/panels/filter.php:70
+#: widgets/comments/part_filter.php:77
+#: widgets/comments_28/part_filter.php:77
+#: widgets/rating/part_filter.php:128
+#: widgets/rating_28/part_filter.php:128
+msgid "Enter 0 for all"
+msgstr "Ввести 0 для всех"
+
+#: tinymce3/panels/filter.php:80
+msgid "Publish Date"
+msgstr "Дата публикации"
+
+#: tinymce3/panels/filter.php:83
+#: widgets/rating/part_filter.php:145
+#: widgets/rating_28/part_filter.php:145
+msgid "Last # days"
+msgstr "Последние # дней"
+
+#: tinymce3/panels/filter.php:84
+#: widgets/rating/part_filter.php:146
+#: widgets/rating_28/part_filter.php:146
+msgid "Exact month"
+msgstr "Точный месяц"
+
+#: tinymce3/panels/filter.php:85
+#: widgets/rating/part_filter.php:147
+#: widgets/rating_28/part_filter.php:147
+msgid "Date range"
+msgstr "В период между датами"
+
+#: tinymce3/panels/filter.php:93
+#: widgets/rating/part_filter.php:156
+#: widgets/rating_28/part_filter.php:156
+msgid "Number Of Days"
+msgstr "Количество дней"
+
+#: tinymce3/panels/filter.php:103
+#: widgets/rating/part_filter.php:167
+#: widgets/rating_28/part_filter.php:167
+msgid "Month"
+msgstr "Месяц"
+
+#: tinymce3/panels/filter.php:113
+#: widgets/rating/part_filter.php:178
+#: widgets/rating_28/part_filter.php:178
+msgid "Range"
+msgstr "спектр дат"
+
+#: tinymce3/panels/general.php:1
+msgid "Display"
+msgstr "Показ"
+
+#: tinymce3/panels/general.php:4
+#: widgets/rating/part_filter.php:35
+#: widgets/rating_28/part_filter.php:35
+msgid "Number Of Posts"
+msgstr "Количество публикаций"
+
+#: tinymce3/panels/general.php:8
+#: widgets/rating/part_basic.php:24
+#: widgets/rating_28/part_basic.php:24
+msgid "Items Grouping"
+msgstr "Групирование"
+
+#: tinymce3/panels/general.php:10
+#: widgets/rating/part_basic.php:27
+#: widgets/rating_28/part_basic.php:27
+msgid "No grouping"
+msgstr "Не группировать"
+
+#: tinymce3/panels/general.php:11
+#: widgets/rating/part_basic.php:28
+#: widgets/rating_28/part_basic.php:28
+msgid "User based"
+msgstr "По пользователям"
+
+#: tinymce3/panels/general.php:12
+#: widgets/rating/part_basic.php:29
+#: widgets/rating_28/part_basic.php:29
+msgid "Category based"
+msgstr "По категориям"
+
+#: tinymce3/panels/general.php:19
+msgid "Source"
+msgstr "Источник"
+
+#: tinymce3/panels/general.php:22
+#: widgets/rating/part_basic.php:34
+#: widgets/rating_28/part_basic.php:34
+msgid "Data Source"
+msgstr "Источник данных"
+
+#: tinymce3/panels/general.php:25
+#: widgets/rating/part_basic.php:37
+#: widgets/rating_28/part_basic.php:37
+msgid "Standard Rating"
+msgstr "Стандартный рейтинг"
+
+#: tinymce3/panels/general.php:42
+#: widgets/rating/part_trend.php:4
+#: widgets/rating/part_trend.php:12
+#: widgets/rating_28/part_trend.php:4
+#: widgets/rating_28/part_trend.php:12
+msgid "Trend"
+msgstr "Trend"
+
+#: tinymce3/panels/general.php:45
+#: widgets/rating/part_trend.php:13
+#: widgets/rating_28/part_trend.php:13
+msgid "Rating trend display as"
+msgstr "Показывать тренд как"
+
+#: tinymce3/panels/general.php:48
+#: tinymce3/panels/general.php:85
+#: widgets/rating/part_trend.php:16
+#: widgets/rating/part_trend.php:54
+#: widgets/rating_28/part_trend.php:16
+#: widgets/rating_28/part_trend.php:54
+msgid "Text"
+msgstr "Текст"
+
+#: tinymce3/panels/general.php:49
+#: tinymce3/panels/general.php:86
+#: widgets/rating/part_image.php:4
+#: widgets/rating/part_image.php:12
+#: widgets/rating/part_trend.php:17
+#: widgets/rating/part_trend.php:55
+#: widgets/rating_28/part_image.php:4
+#: widgets/rating_28/part_image.php:12
+#: widgets/rating_28/part_trend.php:17
+#: widgets/rating_28/part_trend.php:55
+msgid "Image"
+msgstr "Изображение"
+
+#: tinymce3/panels/general.php:57
+#: tinymce3/panels/general.php:94
+#: widgets/rating/part_trend.php:26
+#: widgets/rating/part_trend.php:64
+#: widgets/rating_28/part_trend.php:26
+#: widgets/rating_28/part_trend.php:64
+msgid "Up"
+msgstr "Вверх"
+
+#: tinymce3/panels/general.php:60
+#: tinymce3/panels/general.php:97
+#: widgets/rating/part_trend.php:28
+#: widgets/rating/part_trend.php:66
+#: widgets/rating_28/part_trend.php:28
+#: widgets/rating_28/part_trend.php:66
+msgid "Equal"
+msgstr "Равно"
+
+#: tinymce3/panels/general.php:63
+#: tinymce3/panels/general.php:100
+#: widgets/rating/part_trend.php:30
+#: widgets/rating/part_trend.php:68
+#: widgets/rating_28/part_trend.php:30
+#: widgets/rating_28/part_trend.php:68
+msgid "Down"
+msgstr "Вниз"
+
+#: tinymce3/panels/general.php:71
+#: tinymce3/panels/general.php:108
+#: widgets/rating/part_trend.php:39
+#: widgets/rating/part_trend.php:77
+#: widgets/rating_28/part_trend.php:39
+#: widgets/rating_28/part_trend.php:77
+msgid "Image set"
+msgstr "Сет изображений"
+
+#: tinymce3/panels/general.php:82
+#: widgets/rating/part_trend.php:51
+#: widgets/rating_28/part_trend.php:51
+msgid "Voting trend display as"
+msgstr "Показывать тренд голосов как"
+
+#: tinymce3/panels/general.php:120
+msgid "Hiding"
+msgstr "Прятать"
+
+#: tinymce3/panels/general.php:121
+#: widgets/rating/part_filter.php:85
+#: widgets/rating_28/part_filter.php:85
+msgid "Bayesian minumum votes required."
+msgstr "Bayesian - требуется минимум голосов"
+
+#: tinymce3/panels/general.php:122
+#: widgets/comments_28/part_filter.php:65
+#: widgets/rating/part_filter.php:91
+#: widgets/rating_28/part_filter.php:91
+msgid "Hide articles with no recorded votes."
+msgstr "Прятать статьи без записанных голосов."
+
+#: tinymce3/panels/general.php:123
+#: widgets/rating/part_filter.php:97
+#: widgets/rating_28/part_filter.php:97
+msgid "Hide articles with no review values."
+msgstr "Прятать статьи без данных оценок"
+
+#: tinymce3/panels/multis.php:6
+msgid "Multi Ratings"
+msgstr "Мульти-рейтинг"
+
+#: tinymce3/panels/multis.php:25
+#: tinymce3/panels/multisreview.php:21
+msgid "Elements Stars"
+msgstr "Звезды элементов"
+
+#: tinymce3/panels/multis.php:45
+#: tinymce3/panels/multisreview.php:41
+msgid "Average Stars"
+msgstr "Средние звезды"
+
+#: tinymce3/panels/multisreview.php:6
+msgid "Multi Reviews"
+msgstr "Мульти-оценки"
+
+#: tinymce3/panels/multisreview.php:12
+msgid "Default"
+msgstr "Дефолт"
+
+#: tinymce3/panels/styles.php:6
+msgid "Post Image"
+msgstr "Изображение поста"
+
+#: tinymce3/panels/styles.php:9
+#: widgets/rating/part_image.php:13
+#: widgets/rating_28/part_image.php:13
+msgid "Get Image From"
+msgstr "Взять картинку из"
+
+#: tinymce3/panels/styles.php:12
+#: widgets/rating/part_image.php:16
+#: widgets/rating_28/part_image.php:16
+msgid "No image"
+msgstr "Без изображения"
+
+#: tinymce3/panels/styles.php:13
+#: widgets/rating/part_image.php:17
+#: widgets/rating_28/part_image.php:17
+msgid "Custom field"
+msgstr "Дополнительное поле"
+
+#: tinymce3/panels/styles.php:14
+#: widgets/rating/part_image.php:18
+#: widgets/rating_28/part_image.php:18
+msgid "Post content"
+msgstr "Контент поста"
+
+#: tinymce3/panels/styles.php:20
+#: widgets/rating/part_image.php:27
+#: widgets/rating_28/part_image.php:27
+msgid "If you use %IMAGE% tag in template and this option is selected, image will not be rendered."
+msgstr "Если вы используете тег %IMAGE% в шаблоне, и эта опция выбрана, картинка не будет выводиться."
+
+#: tinymce3/panels/styles.php:25
+#: widgets/rating/part_image.php:35
+#: widgets/rating_28/part_image.php:35
+msgid "Custom Field"
+msgstr "Дополнительное Поле"
+
+#: tinymce3/panels/styles.php:33
+#: widgets/rating/part_image.php:44
+#: widgets/rating_28/part_image.php:44
+msgid "First image from post content will be used for %IMAGE% tag."
+msgstr "Первая картинка из текста сообщения будет использована для тега %IMAGE%."
+
+#: tinymce3/panels/styles.php:38
+msgid "Rating Stars"
+msgstr "Звезды рейтинга"
+
+#: tinymce3/panels/styles.php:58
+msgid "Review Stars"
+msgstr "Звезды оценок"
+
+#: tinymce3/panels/thumbsrating.php:1
+msgid "Thumbs Rating Block"
+msgstr "Блок рейтинга Большими Пальцами"
+
+#: tinymce3/window.php:29
+#: tinymce3/window.php:120
+msgid "Insert"
+msgstr "Вставить"
+
+#: tinymce3/window.php:47
+msgid "Shortcode"
+msgstr "Короткий код"
+
+#: tinymce3/window.php:71
+msgid "Shortcode Info"
+msgstr "Информация о коротком коде"
+
+#: tinymce3/window.php:72
+msgid "Change shortcode to see additional options you can set."
+msgstr "Изменить короткий код чтобы увидеть дополнительные настройки доступные для вас."
+
+#: tinymce3/window.php:116
+msgid "Cancel"
+msgstr "Отмена."
+
+#: widgets/comments/part_basic.php:13
+#: widgets/comments_28/part_basic.php:13
+#: widgets/rating/part_basic.php:13
+#: widgets/rating_28/part_basic.php:13
+#: widgets/top/part_basic.php:13
+#: widgets/top_28/part_basic.php:13
+msgid "Show Widget To"
+msgstr "Показывать виджет"
+
+#: widgets/comments/part_basic.php:19
+#: widgets/comments_28/part_basic.php:19
+#: widgets/rating/part_basic.php:19
+#: widgets/rating_28/part_basic.php:19
+#: widgets/top/part_basic.php:19
+#: widgets/top_28/part_basic.php:19
+msgid "Hide Widget"
+msgstr "Прятать виджет"
+
+#: widgets/comments/part_filter.php:5
+#: widgets/comments/part_image.php:5
+#: widgets/comments/part_stars.php:5
+#: widgets/comments_28/part_filter.php:5
+#: widgets/comments_28/part_image.php:5
+#: widgets/comments_28/part_stars.php:5
+#: widgets/rating/part_filter.php:5
+#: widgets/rating/part_image.php:5
+#: widgets/rating/part_stars.php:5
+#: widgets/rating/part_trend.php:5
+#: widgets/rating_28/part_filter.php:5
+#: widgets/rating_28/part_image.php:5
+#: widgets/rating_28/part_stars.php:5
+#: widgets/rating_28/part_trend.php:5
+#: widgets/top/part_filter.php:5
+#: widgets/top_28/part_filter.php:5
+msgid "Click on the header title to display the options."
+msgstr "Нажмите на заголовок чтобы увидеть опции."
+
+#: widgets/comments/part_filter.php:24
+#: widgets/comments_28/part_filter.php:24
+msgid "Number Of Comments"
+msgstr "Количество комментариев"
+
+#: widgets/comments/part_filter.php:31
+#: widgets/comments_28/part_filter.php:31
+msgid "Maximal length of comment text"
+msgstr "Максимальная длина текста комментария"
+
+#: widgets/comments/part_filter.php:43
+#: widgets/comments_28/part_filter.php:43
+#: widgets/rating/part_filter.php:59
+#: widgets/rating_28/part_filter.php:59
+msgid "Sorting Column"
+msgstr "Сортировка колонки"
+
+#: widgets/comments/part_filter.php:48
+#: widgets/comments_28/part_filter.php:48
+msgid "Comment ID"
+msgstr "ID комментария"
+
+#: widgets/comments/part_filter.php:54
+#: widgets/comments_28/part_filter.php:54
+#: widgets/rating/part_filter.php:74
+#: widgets/rating_28/part_filter.php:74
+msgid "Sorting Order"
+msgstr "Порядок сортировки"
+
+#: widgets/comments/part_filter.php:65
+msgid "Hide comments with no recorded votes."
+msgstr "Прятать комментарии без записаных голосований."
+
+#: widgets/comments/part_filter.php:72
+#: widgets/comments_28/part_filter.php:72
+msgid "Use only comments voted for in last # days."
+msgstr "Использовать только комментарии за которые голосовали последние # дней"
+
+#: widgets/comments/part_image.php:4
+#: widgets/comments/part_image.php:12
+#: widgets/comments_28/part_image.php:4
+#: widgets/comments_28/part_image.php:12
+msgid "Avatar"
+msgstr "Аватар"
+
+#: widgets/rating/part_filter.php:16
+#: widgets/rating_28/part_filter.php:16
+#: widgets/top/part_filter.php:16
+#: widgets/top_28/part_filter.php:16
+msgid "Posts & Pages"
+msgstr "Посты & Страницы"
+
+#: widgets/rating/part_filter.php:42
+#: widgets/rating_28/part_filter.php:42
+msgid "Maximal character length for title"
+msgstr "Максимальная длина заголовка в знаках"
+
+#: widgets/rating/part_filter.php:47
+#: widgets/rating_28/part_filter.php:47
+msgid "Number of words for excerpt"
+msgstr "Количествослов для цитаты"
+
+#: widgets/rating/part_filter.php:108
+#: widgets/rating_28/part_filter.php:108
+msgid "Article Category"
+msgstr "Категория статьи"
+
+#: widgets/rating/part_filter.php:116
+#: widgets/rating_28/part_filter.php:116
+msgid "Only selected category, no subcategories."
+msgstr "Только выбранная категория, без под-категорий."
+
+#: widgets/rating/part_filter.php:141
+#: widgets/rating_28/part_filter.php:141
+msgid "Article Publish Date"
+msgstr "Дата публикации статьи"
+
+#: widgets/rating/part_filter.php:144
+#: widgets/rating_28/part_filter.php:144
+msgid "Any date"
+msgstr "Любая дата"
+
+#: widgets/rating/part_stars.php:13
+msgid "Rating Set"
+msgstr "Сет рейтинга"
+
+#: widgets/rating/part_stars.php:18
+msgid "Rating Size"
+msgstr "Размер рейтинга"
+
+#: widgets/rating/part_stars.php:23
+msgid "Review Set"
+msgstr "Сет оценок"
+
+#: widgets/rating/part_stars.php:28
+msgid "Review Size"
+msgstr "Размер оценок"
+
+#: gd-star-rating.php:598
+#: gd-star-rating.php:599
+#: gd-star-rating.php:609
+#: gd-star-rating.php:610
+msgid "Multi Ratings Review"
+msgstr "Оценки мульти-рейтинга"
+
+#: gd-star-rating.php:617
+msgid "Front Page"
+msgstr "Главная страница"
+
+#: gd-star-rating.php:894
+#: gd-star-rating.php:897
+msgid "Latest"
+msgstr "Самое последнее"
+
+#: gd-star-rating.php:895
+#: gd-star-rating.php:898
+msgid "Chart"
+msgstr "Диаграмма"
+
+#: gd-star-rating.php:1504
+msgid "articles records from log table removed."
+msgstr "данные статей с таблицы логов удалены."
+
+#: gd-star-rating.php:1506
+msgid "comments records from log table removed."
+msgstr "данные лога комментариев с таблицы лога удалены"
+
+#: gd-star-rating.php:1510
+msgid "articles records from trends log table removed."
+msgstr "данные статей удалены из таблицы лога трендов."
+
+#: gd-star-rating.php:1512
+msgid "comments records from trends log table removed."
+msgstr "данные комментариев стерты с таблицы логов"
+
+#: gd-star-rating.php:1516
+msgid "dead articles records from articles table."
+msgstr "мертвые записи статей с таблицы статей"
+
+#: gd-star-rating.php:1518
+msgid "post revisions records from articles table."
+msgstr "прошлые ревизии с таблицы статей"
+
+#: gd-star-rating.php:1520
+msgid "dead comments records from comments table."
+msgstr "мертвые записи комментариев с таблицы комментариев"
+
+#: gd-star-rating.php:1524
+msgid "dead articles records from multi ratings tables."
+msgstr "мертвые данные с таблиц мульти-рейтинга"
+
+#: gd-star-rating.php:1526
+msgid "post revisions records from multi ratings tables."
+msgstr "прошедшие ревизии с таблиц мульти-рейтинга"
+
+#~ msgid "views"
+#~ msgstr "Angesehen"
+#~ msgid "thumb down text style"
+#~ msgstr "Daumen runter Textstil"
+#~ msgid "thumb up text style"
+#~ msgstr "Daumen hoch Textstil"
+#~ msgid "URL"
+#~ msgstr "URL"
+#~ msgid "Panels"
+#~ msgstr "Flächen"
+#~ msgid "Administration"
+#~ msgstr "Administration"
+#~ msgid "Fixing"
+#~ msgstr "Reparieren"
+#~ msgid "Web Key"
+#~ msgstr "Webschlüssel"
+#~ msgid "Managment for default settings."
+#~ msgstr "Managemet für Standard Einstelungen."
+#~ msgid "Plugin Info"
+#~ msgstr "Info Plugin"
+#~ msgid "wordpress ratings system"
+#~ msgstr "systèm de votes pour wordpress"
+#~ msgid "basic plugin class and wizard"
+#~ msgstr "classe de style basique et assistant"
+#~ msgid "Delete Selected Sets"
+#~ msgstr "Effacer la configuration sélectionnée"
+#~ msgid "BOT List"
+#~ msgstr "Liste des BOT"
+#~ msgid "Exporting rating data."
+#~ msgstr "Exporter les données d'évaluation."
+#~ msgid "Posts Data"
+#~ msgstr "Données des articles"
+#~ msgid "Comments Data"
+#~ msgstr "Données des commentaires"
+#~ msgid "Display custom rating CSS settings."
+#~ msgstr "Afficher la configuration du CSS de vote personnalisé."
+#~ msgid "Display rating placement settings."
+#~ msgstr "Afficher la configuration du placement de l'évaluation."
+#~ msgid "Display rating defaults settings."
+#~ msgstr "Afficher la configuration des évaluations par défaut."
+#~ msgid "Rating alignment"
+#~ msgstr "Alignement de l'évaluation"
+#~ msgid "Rating text placement"
+#~ msgstr "Placement du texte de l'évaluation"
+#~ msgid "Display header text."
+#~ msgstr "Afficher le texte de l'entête."
+#~ msgid "Render"
+#~ msgstr "Rendu"
+#~ msgid "Important Links"
+#~ msgstr "Liens Importants"
+#~ msgid "various administration tools"
+#~ msgstr "plusieurs outils d'administration"
+#~ msgid "RSS"
+#~ msgstr "RSS"
+#~ msgid "Standard Elements"
+#~ msgstr "Eléments Standards"
+#~ msgid "Custom Elements"
+#~ msgstr "Eléments personnalisés"
+#~ msgid "Rating Text For Time Restricted Voting"
+#~ msgstr "Texte d'estimation pour le vote limité par le temps"
+#~ msgid "and time restriction elements"
+#~ msgstr "et des éléments de restriction de temps"
+#~ msgid "Voting Closed"
+#~ msgstr "Votes Clos"
+#~ msgid "no template elements allowed"
+#~ msgstr "Pas d'éléments de template autorisés"
+#~ msgid "all articles and custom templates elements"
+#~ msgstr "tous les articles et les éléments de template personnalisés"
+#~ msgid "Words"
+#~ msgstr "Mots"
+#~ msgid "singular"
+#~ msgstr "singulier"
+#~ msgid "plural"
+#~ msgstr "pluriel"
+#~ msgid ""
+#~ "this can be used to replace word 'votes', and you need to set both "
+#~ "singular and plural form of this word"
+#~ msgstr ""
+#~ "ceci peut être utilisé pour remplacer le mot 'votes', et vous devez "
+#~ "ajouter un mot pour le singulier et un autre pour le pluriel"
+#~ msgid "CSS Classes"
+#~ msgstr "Classes CSS"
+#~ msgid "even row"
+#~ msgstr "même rangée"
+#~ msgid "odd row"
+#~ msgstr "rangée impaire"
+#~ msgid ""
+#~ "this can be used to render table rows used in templates with different "
+#~ "classes"
+#~ msgstr ""
+#~ "ceci peut être employé pour rendre des rangées de tables utilisées dans "
+#~ "les templates avec différentes classes"
+#~ msgid "Post Rating Text"
+#~ msgstr "Texte pour l'évaluation des articles"
+#~ msgid "item id"
+#~ msgstr "id de l'élément"
+#~ msgid "comment rating trend"
+#~ msgstr "tendance des évaluations de commentaire"
+#~ msgid "comment voting trend"
+#~ msgstr "tendance des votes de commentaire"
+#~ msgid "Standard RSS Text"
+#~ msgstr "Texte pour le flux RSS Standard"
+#~ msgid "Additional Style"
+#~ msgstr "Style additionnel"
+#~ msgid "Style Class"
+#~ msgstr "Class de style"
+#~ msgid "Don't Add"
+#~ msgstr "Ne pas ajouter"
+#~ msgid "Built In"
+#~ msgstr "Créé en"
+#~ msgid "Built In Class"
+#~ msgstr "Intégré dans la classe"
+#~ msgid "External Class"
+#~ msgstr "Classe externe"
+#~ msgid ""
+#~ "There are no settings for this shortcode yet. This will be updated soon."
+#~ msgstr ""
+#~ "Il n'y a pas encore de configuration pour ce shortcode. Celui-ci sera mis "
+#~ "à jour prochainement."
+#~ msgid "bayesian article rating"
+#~ msgstr "évaluation bayésienne de l'article"
+#~ msgid "item title"
+#~ msgstr "titre de l'élément"
+#~ msgid "rating trend"
+#~ msgstr "évaluation de la tendance"
+#~ msgid "voting trend"
+#~ msgstr "vote de la tendance"
+#~ msgid "item url"
+#~ msgstr "url de l'élément"
+#~ msgid "singular/plural word vote"
+#~ msgstr "mot singulier/pluriel pour vote"
+#~ msgid "T2"
+#~ msgstr "T2"
+#~ msgid ""
+#~ "You first need to select which multi set you want to use for review "
+#~ "rating."
+#~ msgstr ""
+#~ "Vous devez tout d'abord sélectionner quelle configuration multiple vous "
+#~ "souhaitez utiliser pour les résumés d'évaluations."
+#~ msgid ""
+#~ "Use this set for post/page review. Only one set at the time can be used "
+#~ "for review feature."
+#~ msgstr ""
+#~ "Utilisez cette configuration pour le résumé article/page. Seulement une "
+#~ "configuration à la fois peut être utilisée pour la fonction résumé."
+#~ msgid "AJAX enabled rating."
+#~ msgstr "Vote AJAX autorisé."
+#~ msgid "Use IE6 PNG transparency fix."
+#~ msgstr "Utiliser le Fix de transparance PNG pour IE6."
+#~ msgid "T2 / Alpha"
+#~ msgstr "T2 / Alpha"
+#~ msgid "Submit"
+#~ msgstr "Soumettre"
+#~ msgid ""
+#~ "Use this options to reinstall or uninstall the plugin. This will remove "
+#~ "all existing data recorded by the plugin."
+#~ msgstr ""
+#~ "Utiliser cette option pour réinstaller le plugin. Ceci va supprimer toute "
+#~ "donnée existante enregistrée par le plugin."
+#~ msgid "REINSTALL"
+#~ msgstr "Réinstaller"
+#~ msgid "These are various maintenace options."
+#~ msgstr "Il y a plusieurs options de maintenance."
+#~ msgid "REMOVE SETTINGS"
+#~ msgstr "Supprimer la configuration"
+#~ msgid "REMOVE TEMPLATES"
+#~ msgstr "Supprimer les templates"
+#~ msgid "RESET IMPORTS"
+#~ msgstr "Remettre à zéro les importations"
+#~ msgid ""
+#~ "This will remove all database tables created by plugin, all settings, "
+#~ "templates and import settings."
+#~ msgstr ""
+#~ "Ceci va supprimer toutes les tables de la base de donnée du plugin, toute "
+#~ "la configuration, les templates ainsi que les changements importés."
+#~ msgid "FULL UNINSTALL"
+#~ msgstr "Désinstallation totale"
+#~ msgid "Simple"
+#~ msgstr "Simple"
+#~ msgid "plugins, user guides and more"
+#~ msgstr "plugins, guides utilisateurs et plus encore"
+#~ msgid "different versions and user guide"
+#~ msgstr "différentes versions et guide utilisateur"
+#~ msgid "Administration Settings"
+#~ msgstr "Configuration de l'Administration"
+#~ msgid "Template Elements"
+#~ msgstr "Eléments de template"
+#~ msgid "Default Vote Rule"
+#~ msgstr "Règle de Vote par Défaut"
+#~ msgid "Default Moderation Rule"
+#~ msgstr "Règle de Modération par Défaut"
+#~ msgid "Default time restriction"
+#~ msgstr "Restriction de temps par défaut"
+#~ msgid "Default countdown value"
+#~ msgstr "Valeur de compte à rebours par défaut"
+#~ msgid ""
+#~ "All the options in this options panel are for the StarRating panel. "
+#~ "StarReview and StarRater don't have any options."
+#~ msgstr ""
+#~ "Toutes les options de ce panel d'options sont réservées au panel "
+#~ "StarRating. StarReview et StarRater n'ont pas d'options."
+#~ msgid "Database Cleanup"
+#~ msgstr "Nettoyage de la Base de Donnée"
+#~ msgid "Click on this section header title to show preview panel."
+#~ msgstr ""
+#~ "Cliquez sur le titre de cet entête de section pour visualiser le panel."
+#~ msgid "Insert Shortcode"
+#~ msgstr "Insérer un Shortcode"
+#~ msgid "IP Status"
+#~ msgstr "Statut de l'IP"
+#~ msgid "User ID"
+#~ msgstr "Id utilisateur"
+

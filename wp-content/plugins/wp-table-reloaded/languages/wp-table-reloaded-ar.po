@@ -1,0 +1,2040 @@
+# Copyright (C) 2009-2011 WP-Table Reloaded
+# This file is distributed under the same license as the WP-Table Reloaded package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Table Reloaded 1.9.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-table-reloaded\n"
+"POT-Creation-Date: 2011-09-16 17:55:21+00:00\n"
+"PO-Revision-Date: 2011-09-18 17:12+0200\n"
+"Last-Translator: Mohammed Kashmiry <mohammed.kashmiry@gmail.com>\n"
+"Language-Team: mohammed kashmiry <mohammed.kashmiry@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: SAUDI ARABIA\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: views/view-export.php:10
+msgid "It is recommended to export and backup the data of important tables regularly."
+msgstr "ينصح بتصدير وأخذ النسخ الاحتياطية للبيانات من الجداول الهامة بشكل منتظم (متكرر)."
+
+#: views/view-export.php:10
+msgid "Select the table, the desired export format and (for CSV only) a delimiter."
+msgstr "حدد الجدول، والصيغة المطلوب تصديره (الاقتراضي CSV) محدد."
+
+#: views/view-export.php:10
+msgid "You may choose to download the export file. Otherwise it will be shown on this page."
+msgstr "يمكنك اختيار تحميل ملف التصدير. وإلا سيظهر على هذه الصفحة."
+
+#: views/view-export.php:10
+msgid "Be aware that only the table data, but no options or settings are exported."
+msgstr "اعلم أن فقط بيانات الجدول هي التي سوف يتم تصديرها, وليس الاعدادات والخيارات."
+
+#: views/view-export.php:10
+msgid "To backup all tables, including their settings, at once use the &quot;%s&quot; button in the &quot;%s&quot;."
+msgstr "لأخذ نسخة احتياطية لجميع الجداول, بلإضافة الى اعداداتها, في مرة واحدة استخدم زر &quot;%s&quot; في &quot;%s&quot;."
+
+#: views/view-export.php:10
+#: views/view-options.php:190
+msgid "Create and Download Dump File"
+msgstr "إنشاء وتحميل ملف تفريغ"
+
+#: views/view-export.php:10
+#: views/view-edit.php:350
+#: views/view-edit.php:365
+#: controllers/controller-admin.php:1266
+#: controllers/controller-admin.php:1308
+msgid "Plugin Options"
+msgstr "خيارات الإضافة"
+
+#: views/view-export.php:18
+msgid "Select Table to Export"
+msgstr "حدد جدول لتصديره"
+
+#: views/view-export.php:34
+msgid "Select Export Format"
+msgstr "حدد صيغة التصدير "
+
+#: views/view-export.php:44
+msgid "Select Delimiter to use"
+msgstr "حدد محدد لاستخدام"
+
+#: views/view-export.php:51
+msgid "Only needed for CSV export."
+msgstr "يحتاج فقط للتصدير CSV."
+
+#: views/view-export.php:54
+msgid "Download file"
+msgstr "تحميل الملف"
+
+#: views/view-export.php:55
+msgid "Yes, I want to download the export file."
+msgstr "نعم، أريد تحميل ملف التصدير."
+
+#: views/view-export.php:60
+#: views/view-edit.php:477
+msgid "Export Table"
+msgstr "تصدير الجدول"
+
+#: views/view-export.php:72
+#: views/view-ajax_list.php:53
+#: views/view-list.php:87
+#: controllers/controller-admin.php:1856
+msgid "No tables were found."
+msgstr "لم يتم العثور على الجداول."
+
+#: views/view-export.php:72
+#: views/view-list.php:87
+msgid "You should <a href=\"%s\">add</a> or <a href=\"%s\">import</a> a table to get started!"
+msgstr "يجب عليك <a href=\"%s\">إضافة</a> أو <a href=\"%s\">إستيراد</a> جدول للبدأ !"
+
+#: views/view-edit.php:8
+msgid "On this page, you can edit the content of the table."
+msgstr "في هذه الصفحة ,يمكنك تعديل محتويات الجدول."
+
+#: views/view-edit.php:8
+msgid "It is also possible to change the table structure by inserting, deleting, moving, and swapping columns and rows."
+msgstr "وأيضاً من الممكن تغير هيكلة الجدول عن طريق إدراج, حذف, نقل, تبديل الصفوف والأعمدة."
+
+#: views/view-edit.php:9
+#: views/view-about.php:14
+#: views/view-list.php:2
+#: views/view-ajax_preview.php:5
+msgid "To insert the table into a page, post or text-widget, copy the shortcode <strong>[table id=%s /]</strong> and paste it into the corresponding place in the editor."
+msgstr "لإدراج الجدول في صفحة أو موضوع أو في القائمة الجانبية إنسخ الكود القصير <strong>[table id=%s /]</strong> وضعه في حقل المحرر."
+
+#: views/view-edit.php:15
+msgid "Table Information"
+msgstr "معلومات الجدول "
+
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:361
+#: views/view-edit.php:422
+#: views/view-about.php:89
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:91
+#: views/view-options.php:185
+#: views/view-options.php:196
+msgctxt "expand"
+msgid "Hide"
+msgstr "إخفاء"
+
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:361
+#: views/view-edit.php:422
+#: views/view-about.php:89
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:91
+#: views/view-options.php:185
+#: views/view-options.php:196
+msgid "Expand"
+msgstr "تكبير"
+
+#: views/view-edit.php:19
+msgid "Table ID"
+msgstr "ID الجدول "
+
+#: views/view-edit.php:23
+#: views/view-edit.php:283
+#: views/view-ajax_list.php:14
+#: views/view-ajax_list.php:22
+#: views/view-import.php:100
+#: views/view-import.php:109
+#: views/view-list.php:15
+#: views/view-list.php:25
+#: views/view-add.php:13
+msgid "Table Name"
+msgstr "اسم الجدول"
+
+#: views/view-edit.php:27
+#: views/view-ajax_list.php:15
+#: views/view-ajax_list.php:23
+#: views/view-import.php:101
+#: views/view-import.php:110
+#: views/view-list.php:16
+#: views/view-list.php:26
+#: views/view-add.php:17
+msgid "Description"
+msgstr "الوصف"
+
+#: views/view-edit.php:32
+#: views/view-list.php:17
+#: views/view-list.php:27
+msgid "Last Modified"
+msgstr "آخر تعديل"
+
+#: views/view-edit.php:33
+#: views/view-list.php:44
+msgid "by"
+msgstr "من قبل"
+
+#: views/view-edit.php:41
+#: views/view-edit.php:253
+#: views/view-edit.php:413
+#: views/view-edit.php:464
+#: controllers/controller-admin.php:1746
+msgid "Update Changes"
+msgstr "حفظ التغيرات "
+
+#: views/view-edit.php:42
+#: views/view-edit.php:254
+#: views/view-edit.php:414
+#: views/view-edit.php:465
+msgid "Save and go back"
+msgstr "حفظ والعودة"
+
+#: views/view-edit.php:45
+#: views/view-edit.php:257
+#: views/view-edit.php:417
+#: views/view-edit.php:468
+#: views/view-options.php:65
+#: views/view-options.php:172
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: views/view-edit.php:51
+msgid "Table Contents"
+msgstr "محتويات الجدول"
+
+#: views/view-edit.php:104
+msgid "Data Manipulation"
+msgstr "معالجة البيانات"
+
+#: views/view-edit.php:114
+#: views/view-options.php:55
+msgid "Insert Link"
+msgstr "إدراج رابط"
+
+#: views/view-edit.php:115
+msgid "Insert Image"
+msgstr "إدراج صورة "
+
+#: views/view-edit.php:124
+msgid "ascending"
+msgstr "تصاعدي"
+
+#: views/view-edit.php:125
+msgid "descending"
+msgstr "تنازلي"
+
+#: views/view-edit.php:128
+msgid "Sort table by column %s in %s order"
+msgstr "ترتيب الجدول في العمود %sوفق الترتيب %s"
+
+#: views/view-edit.php:130
+msgid "Sort"
+msgstr "ترتيب"
+
+#: views/view-edit.php:135
+#: views/view-edit.php:139
+msgctxt "item"
+msgid "Hide"
+msgstr "إخفاء"
+
+#: views/view-edit.php:136
+#: views/view-edit.php:140
+msgctxt "item"
+msgid "Unhide"
+msgstr "إظهار"
+
+#: views/view-edit.php:137
+msgctxt "hide_unhide"
+msgid "Selected rows: %s %s"
+msgstr "الصفوف المحددة %s %s"
+
+#: views/view-edit.php:141
+msgctxt "hide_unhide"
+msgid "Selected columns: %s %s"
+msgstr "الأعمدة المحددة %s %s"
+
+#: views/view-edit.php:144
+msgid "Combine cells in a row:"
+msgstr "دمج خانة في صف:"
+
+#: views/view-edit.php:145
+msgid "Add colspan"
+msgstr "أضف تمدد لصف"
+
+#: views/view-edit.php:148
+msgid "Combine cells in a column:"
+msgstr "دمج خانة في عامود:"
+
+#: views/view-edit.php:149
+msgid "Add rowspan"
+msgstr "أضف تمدد للعامود"
+
+#: views/view-edit.php:155
+msgid "Insert row"
+msgstr "أدرج صف"
+
+#: views/view-edit.php:156
+#: views/view-edit.php:160
+#: views/view-list.php:65
+msgid "Delete"
+msgstr "حذف"
+
+#: views/view-edit.php:157
+msgctxt "insert_delete"
+msgid "Selected rows: %s %s"
+msgstr "الصفوف المحددة %s %s"
+
+#: views/view-edit.php:159
+msgid "Insert column"
+msgstr "أدرج عامود"
+
+#: views/view-edit.php:161
+msgctxt "insert_delete"
+msgid "Selected columns: %s %s"
+msgstr "الأعمدة المحددة %s %s"
+
+#: views/view-edit.php:171
+msgid "Add %s row(s)"
+msgstr "أضف %sصف"
+
+#: views/view-edit.php:172
+#: views/view-edit.php:175
+#: views/view-edit.php:459
+msgid "Add"
+msgstr "أضف"
+
+#: views/view-edit.php:174
+msgid "Add %s column(s)"
+msgstr "أضف %s عامود "
+
+#: views/view-edit.php:189
+msgid "Swap rows %s and %s"
+msgstr "تبديل الصف %s و %s"
+
+#: views/view-edit.php:191
+#: views/view-edit.php:206
+msgid "Swap"
+msgstr "تبديل"
+
+#: views/view-edit.php:204
+msgid "Swap columns %s and %s"
+msgstr "بدل العواميد  %s و %s"
+
+#: views/view-edit.php:219
+#: views/view-edit.php:239
+msgid "before"
+msgstr "قبل "
+
+#: views/view-edit.php:220
+#: views/view-edit.php:240
+msgid "after"
+msgstr "بعد"
+
+#: views/view-edit.php:223
+msgid "Move row %s %s row %s"
+msgstr "إنقل الصف %s %s الصف %s"
+
+#: views/view-edit.php:225
+#: views/view-edit.php:245
+msgid "Move"
+msgstr "أنقل "
+
+#: views/view-edit.php:243
+msgid "Move column %s %s column %s"
+msgstr "أنقل العامود %s %s العامود %s"
+
+#: views/view-edit.php:262
+msgid "Table Styling Options"
+msgstr "خيارات  تنسيق الجدول "
+
+#: views/view-edit.php:264
+msgid "These settings will only be used for this table."
+msgstr "هذة الإعدادات سوف تستخدم فقط لهذا الجدول."
+
+#: views/view-edit.php:267
+msgid "Alternating row colors"
+msgstr "تناوب ألوان الصف "
+
+#: views/view-edit.php:268
+msgid "Every second row has an alternating background color."
+msgstr "كل صف له لون خلفية بالتناوب."
+
+#: views/view-edit.php:271
+msgid "Row Highlighting"
+msgstr "تسليط الضوء "
+
+#: views/view-edit.php:272
+msgid "Highlight a row by changing its background color while the mouse cursor hovers above it."
+msgstr "تسليط الضوء عن طريق تغيير لون الصف عند مرور مؤشر الماوس فوق الصف."
+
+#: views/view-edit.php:275
+msgid "Table head"
+msgstr "ترويسة الجدول "
+
+#: views/view-edit.php:276
+msgid "The first row of your table is the table head (HTML tags &lt;thead&gt; and &lt;th&gt;)."
+msgstr "اول صف من الجدول هو ترويسة الجدول  (HTML tags &lt;thead&gt; and &lt;th&gt;)."
+
+#: views/view-edit.php:279
+msgid "Table footer"
+msgstr "حاشية الجدول"
+
+#: views/view-edit.php:280
+msgid "The last row of your table is the table footer (HTML tags &lt;tfoot&gt; and &lt;th&gt;)."
+msgstr "أخر صف من الجدول هو حاشية الجدول  (HTML tags &lt;tfoot&gt; and &lt;th&gt;)."
+
+#: views/view-edit.php:289
+#: views/view-edit.php:306
+msgid "above"
+msgstr "أعلى"
+
+#: views/view-edit.php:291
+#: views/view-edit.php:308
+msgid "below"
+msgstr "أسفل"
+
+#: views/view-edit.php:294
+msgid "The Table Name shall be written %s the table (HTML tag &lt;h2&gt;)."
+msgstr "عنوان الجدول يجب ان يظهر في %s الجدول (HTML tag &lt;h2&gt;)."
+
+#: views/view-edit.php:300
+msgid "Table Description"
+msgstr "وصف الجدول"
+
+#: views/view-edit.php:311
+msgid "The Table Description shall be written %s the table."
+msgstr "وصف الجدول يجب أن يظهر في %s الجدول."
+
+#: views/view-edit.php:317
+msgid "Cache Table Output"
+msgstr "تخزين جدول الإخراج"
+
+#: views/view-edit.php:318
+msgid "The resulting HTML output of the table shall be cached in the WordPress database cache for faster page generation."
+msgstr "الإخراج الناتج من HTML الخاص بالجدول يجب أن يخزن في قاعدة بيانات ووردبريس لتوليد سرعة تصفح أسرع."
+
+#: views/view-edit.php:321
+msgid "Extra CSS Class"
+msgstr "Custom CSS Class"
+
+#: views/view-edit.php:322
+msgid "Enter a string that will be given to the table as an additional class for styling with CSS."
+msgstr "أدخل السلسلة التي ستعطى الجدول كفائة إضافية لـ  styling with CSS."
+
+#: views/view-edit.php:322
+msgid "This is not the place to enter \"Custom CSS\" code!"
+msgstr " هذا المكان ليس لإدخال \"Custom CSS\" كود !"
+
+#: views/view-edit.php:325
+msgid "Use JavaScript library"
+msgstr "إستخدم مكتبة JavaScript "
+
+#: views/view-edit.php:331
+#: views/view-edit.php:335
+#: views/view-edit.php:347
+msgid "You can change further settings for this library below."
+msgstr "يمكنك تغيير إعدادات أخرى لهذه المكتبة بلأسفل."
+
+#: views/view-edit.php:339
+#: views/view-edit.php:343
+msgid "The table will then be sortable by the visitor."
+msgstr "الزائر سوف يسمح له بتصغير وتكبير الجدول."
+
+#: views/view-edit.php:350
+msgid "Yes, use the &quot;%s&quot; JavaScript library with this table."
+msgstr "نعم, إستخدم &quot;%s&quot; مكتبة JavaScript مع هذا الجدول."
+
+#: views/view-edit.php:350
+msgid "You must enable the use of a JavaScript library on the &quot;%s&quot; screen first."
+msgstr "يجب عليك تمكين مكتبة JavaScript  في &quot;%s&quot; الشاشة اولاً."
+
+#: views/view-edit.php:361
+msgid "DataTables JavaScript Features"
+msgstr "ميزات DataTables JavaScript "
+
+#: views/view-edit.php:363
+msgid "You can enable certain features for the DataTables JavaScript library here."
+msgstr "يمكنك تمكين ميزات DataTables لمكتبة JavaScript من هنا "
+
+#: views/view-edit.php:363
+msgid "More information on these features can be found on the <a href=\"http://www.datatables.net/\">DataTables website</a>."
+msgstr "مزيد من المعلومات حول هذه الميزات تجدها في <a href=\"http://www.datatables.net/\">DataTables موقع </a>."
+
+#: views/view-edit.php:365
+msgid "You can currently not change these options, because you have not enabled the &quot;DataTables&quot; or the &quot;DataTables+TableTools&quot; JavaScript library on the &quot;%s&quot; screen."
+msgstr "يمكنك في الوقت الراهن عدم تغيير هذه الخيارات، لأنك لم تمكن &quot;DataTables&quot; أو  &quot;DataTables+TableTools&quot; مكتبة جافا سكربت &quot;%s&quot; في صفحة خيارات الإضافة."
+
+#: views/view-edit.php:365
+msgid "It is not possible to use these features with the &quot;Tablesorter&quot; or &quot;Tablesorter Extended&quot; libraries."
+msgstr "ليس من الممكن استخدام هذه الميزات مع &quot;Tablesorter&quot; أو &quot;Tablesorter Extended&quot; libraries."
+
+#: views/view-edit.php:369
+msgid "Sorting"
+msgstr "فرز"
+
+#: views/view-edit.php:370
+msgid "Yes, enable sorting of table data by the visitor."
+msgstr "نعم,إسمح لزائر بفرز الجدول."
+
+#: views/view-edit.php:373
+msgid "Pagination"
+msgstr "ترقيم الصفحات"
+
+#: views/view-edit.php:378
+msgid "Yes, enable pagination (showing only a certain number of rows) of the table by the visitor."
+msgstr "نعم, تمكين ترقيم الصفحات (عرض فقط عدد معين من الصفحات) للجدول من قبل الزائر."
+
+#: views/view-edit.php:380
+msgid "Show %1$s rows of the table per page."
+msgstr "عرض %1$s صفوف من الجدول في كل صفحة."
+
+#: views/view-edit.php:386
+msgid "Length Change"
+msgstr "تغيير الطول"
+
+#: views/view-edit.php:387
+msgid "Yes, allow the visitor to change the number of rows shown when using pagination."
+msgstr "نعم, السماح لزائر بتغيير عدد الصفوف التي تظهر عند استخدام ترقيم الصفحات."
+
+#: views/view-edit.php:390
+msgid "Filtering"
+msgstr "البحث"
+
+#: views/view-edit.php:391
+msgid "Yes, enable the visitor to filter or search the table. Only rows with the search word in them are shown."
+msgstr "نعم, اسمح لزائر بتصفية أو البحث في الجدول. لن تظهر سوى الصفوف مع كلمة البحث فيها."
+
+#: views/view-edit.php:394
+msgid "Info Bar"
+msgstr "شريط المعلومات"
+
+#: views/view-edit.php:395
+msgid "Yes, show the table information display. This shows information and statistics about the currently visible data, including filtering."
+msgstr "نعم، تظهر معلومات الجدول. وهذا يظهر المعلومات والإحصاءات حول البيانات المرئية حاليا، بما في ذلك التصفية (filtering)."
+
+#: views/view-edit.php:398
+msgid "TableTools"
+msgstr "TableTools"
+
+#: views/view-edit.php:400
+msgid "Yes, activate the TableTools functions (Copy to Clipboard, Save to CSV, Save to XLS, Print Table) for this table."
+msgstr "نعم ، فعل وظائف TableTools (نسخ الجدول، حفظ كـ ملف CSV، حفظ كـ ملف Excel، إطبع الجدول) ."
+
+#: views/view-edit.php:401
+msgid "This option can only be used with the &quot;DataTables+TableTools&quot; JavaScript library."
+msgstr "هذه الخيارات يمكن إستخدامها فقط مع &quot;DataTables+TableTools&quot; JavaScript library."
+
+#: views/view-edit.php:405
+msgid "Custom Commands"
+msgstr "أوامر مخصصة"
+
+#: views/view-edit.php:406
+msgid "Enter additional DataTables JavaScript parameters that will be included with the script call here."
+msgstr "أدخل إضافات DataTables JavaScript إضافية المرخصة التي سيتم تضمينها مع السيكربت ."
+
+#: views/view-edit.php:406
+msgid "For advanced use only. Read the <a href=\"http://www.datatables.net/\">DataTables documentation</a> before."
+msgstr "للإستخدام المتطور فقط. إقراء <a href=\"http://www.datatables.net/\">DataTables الوثائق</a> أولاً."
+
+#: views/view-edit.php:422
+msgid "Custom Data Fields"
+msgstr "حقول البيانات المخصصة "
+
+#: views/view-edit.php:424
+msgid "Custom Data Fields can be used to add extra metadata to a table."
+msgstr "حقول البيانات المخصصة يمكن استخدامها لإضافة المزيد من يانات التعريف (metadata) إلى جدول."
+
+#: views/view-edit.php:424
+msgid "For example, this could be information about the source or the creator of the data."
+msgstr "على سبيل المثال، قد تكون هذه المعلومات عن المصدر أو من مبتكر البيانات."
+
+#: views/view-edit.php:426
+msgid "You can show this data in the same way as tables by using the shortcode <strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+msgstr "يمكنك عرض هذه البيانات في الجداول بنفس الطريقة باستخدام الكود القصير <strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+
+#: views/view-edit.php:432
+msgid "Field Name"
+msgstr "حقل الاسم"
+
+#: views/view-edit.php:433
+msgid "Value"
+msgstr "قيمة"
+
+#: views/view-edit.php:434
+#: views/view-ajax_list.php:16
+#: views/view-ajax_list.php:24
+#: views/view-import.php:102
+#: views/view-import.php:111
+msgid "Action"
+msgstr "اوامر"
+
+#: views/view-edit.php:447
+msgid "Delete Field"
+msgstr "حذف الحقل"
+
+#: views/view-edit.php:449
+msgid "View shortcode"
+msgstr "عرض الكود القصير"
+
+#: views/view-edit.php:458
+msgid "To add a new Custom Data Field, enter its name (only lowercase letters, numbers, _ and -)."
+msgstr "لإضافة حقل بيانات مخصصة جديد، أدخل فقط   (الأحرف الصغيرة , أرقام , _ و  -)."
+
+#: views/view-edit.php:459
+msgid "Custom Data Field Name"
+msgstr "حقل اسم البيانات المخصصة"
+
+#: views/view-edit.php:473
+msgid "Other actions"
+msgstr "الإجراءات الأخرى"
+
+#: views/view-edit.php:476
+msgid "Delete Table"
+msgstr "حذف الجدول"
+
+#: views/view-ajax_list.php:3
+#: views/view-list.php:2
+msgid "This is a list of all available tables."
+msgstr "هذه قائمة لجميع الجداول المتاحة."
+
+#: views/view-ajax_list.php:3
+msgid "You may insert a table into a post or page here."
+msgstr "يمكنك إدراج جدول في صفحة أو موضوع هنا."
+
+#: views/view-ajax_list.php:4
+msgid "Click the &quot;%s&quot; link after the desired table and the corresponding shortcode will be inserted into the editor (<strong>[table id=&lt;ID&gt; /]</strong>)."
+msgstr "إضغط على &quot;%s&quot; بعدها سيتم إدراج الكود القصير الخاص بالجدول المحدد في محرر الموضوع (<strong>[table id=&lt;ID&gt; /]</strong>)."
+
+#: views/view-ajax_list.php:4
+#: views/view-ajax_list.php:44
+msgid "Insert"
+msgstr "أدرج"
+
+#: views/view-ajax_list.php:13
+#: views/view-ajax_list.php:21
+#: views/view-import.php:99
+#: views/view-import.php:108
+#: views/view-list.php:13
+#: views/view-list.php:23
+msgid "ID"
+msgstr "ID"
+
+#: views/view-import.php:3
+msgid "WP-Table Reloaded can import tables from existing data."
+msgstr "WP-Table Reloaded يستطيع إستيراد جداول من بيانات جاهزة."
+
+#: views/view-import.php:3
+msgid "This may be a CSV, XML or HTML file, each with a certain structure."
+msgstr "قد تكون CSV, XML أو ملف HTML, كل ضيغة لها بنية معينة."
+
+#: views/view-import.php:3
+msgid "To import an existing table, please select its format and the source for the import."
+msgstr "لإستيراد جدول موجود، يرجى تحديد صيغته ومصدره للإستيراده."
+
+#: views/view-import.php:3
+msgid "You can also decide, if you want to import it as a new table or replace an existing table."
+msgstr "يمكنك أيضاً أن تقرر, إذا كنت تريد أن تستورده كجدول جديد أو أن تستبدله بجدول موجود حالياً."
+
+#: views/view-import.php:10
+msgid "Select Import Format"
+msgstr "حدد صيغة الإستيراد. "
+
+#: views/view-import.php:21
+msgid "Add or Replace Table?"
+msgstr "أضف أو إستبدل جدول؟"
+
+#: views/view-import.php:23
+msgid "Add as new Table"
+msgstr "أضف كجدول جديد"
+
+#: views/view-import.php:24
+msgid "Replace existing Table"
+msgstr "استبدل جدول موجود حالياً"
+
+#: views/view-import.php:28
+msgid "Select existing Table to Replace"
+msgstr "حدد جدول موجود حالياً لإستبداله"
+
+#: views/view-import.php:45
+msgid "Select source for Import"
+msgstr "حدد مصدر الإستيراد"
+
+#: views/view-import.php:47
+msgid "File upload"
+msgstr "رفع ملف"
+
+#: views/view-import.php:48
+msgid "URL"
+msgstr "من رابط"
+
+#: views/view-import.php:49
+msgid "Manual input"
+msgstr "إدخال يدوياً"
+
+#: views/view-import.php:50
+msgid "File on server"
+msgstr "ملف على السيرفر"
+
+#: views/view-import.php:54
+msgid "Select File with Table to Import"
+msgstr "حدد ملف الجدول لإستيراده"
+
+#: views/view-import.php:58
+msgid "URL to Import Table from"
+msgstr "رابط لإستيراد الجدول منه"
+
+#: views/view-import.php:62
+msgid "Path to file on server"
+msgstr "مسار الملف على السيرفر"
+
+#: views/view-import.php:66
+msgid "Paste data with Table to Import"
+msgstr "ألصق البيانات مع الجدول لإستيراده"
+
+#: views/view-import.php:72
+msgid "Import Table"
+msgstr "إستيراد جدول"
+
+#: views/view-import.php:86
+msgid "Import from original wp-Table plugin"
+msgstr "إسيراد من إضافة wp-Table الأصلية"
+
+#: views/view-import.php:132
+msgid "Import"
+msgstr "إستيراد"
+
+#: views/view-import.php:140
+#: views/view-list.php:78
+msgid "Bulk actions:"
+msgstr "إجراءات:"
+
+#: views/view-import.php:140
+msgid "Import Tables"
+msgstr "إستيراد جداول"
+
+#: views/view-import.php:146
+msgid "wp-Table by Alex Rabe seems to be installed, but no tables were found."
+msgstr "wp-Table عن طريق Alex Rabe يظهر انها ثبتت, لاكن لم يتم العثور على اي جداول."
+
+#: views/view-about.php:5
+msgid "Plugin Purpose"
+msgstr "هدف الإضافة "
+
+#: views/view-about.php:7
+msgid "WP-Table Reloaded allows you to create and manage tables in the admin-area of WordPress."
+msgstr "WP-Table Reloaded تمكنك من إنشاء والتحكم بالجداول في منطقة الإدارة بـ لوحة تحكم الموقع بووردبريس."
+
+#: views/view-about.php:7
+msgid "Those tables may contain strings, numbers and even HTML (e.g. to include images or links)."
+msgstr "ويمكن لهذه الجداول أن تحتوي على الأحرف والأرقام وحتى HTML (مثل الصور أو الروابط)."
+
+#: views/view-about.php:7
+msgid "You can then show the tables in your posts, on your pages or in text-widgets by using a shortcode."
+msgstr "يمكنك بعد ذالك عرض الجداول في مواضيعك، وفي الصفحات او في مربعات القائمة الجانبية عن طريق إضافة الكود القصير."
+
+#: views/view-about.php:7
+msgid "If you want to show your tables anywhere else in your theme, you can use a template tag function."
+msgstr "إذا كنت ترغب في عرض الجداول الخاصة بك في أي مكان آخر في القالب الخاص بك، يمكنك إستخدام  template tag function."
+
+#: views/view-about.php:12
+msgid "Usage"
+msgstr "الاستخدام"
+
+#: views/view-about.php:14
+msgid "At first you should add or import a table."
+msgstr "في البداية يجب عليك إضافة أو إستيراد جدول."
+
+#: views/view-about.php:14
+msgid "This means that you either let the plugin create an empty table for you or that you load an existing table from either a CSV, XML or HTML file."
+msgstr "وهذا يعني أنك إما أن تترك الإضافة تنشئ جدول جديد لك أو تقوم بتحميل ملف جدول جاهز من الصيغ التالية CSV, XML or HTML "
+
+#: views/view-about.php:14
+msgid "Then you can edit your data or change the structure of your table (e.g. by inserting or deleting rows or columns, swaping rows or columns or sorting them) and select specific table options like alternating row colors or whether to print the name or description, if you want."
+msgstr "ثم يمكنك تحرير البيانات أو تغيير بنية الجدول الخاص بك (على سبيل المثال عن طريق إدراج أو حذف صفوف أو أعمدة، تبديل الأعمدة أو فرزهم) وتحديد خيارات معينة للجدول مثل تناوب الألوان على الصفوف أو ما إذا كان كتابة الاسم أو الوصف."
+
+#: views/view-about.php:14
+msgid "To easily add a link or an image to a cell, use the provided buttons. Those will ask you for the URL and a title. Then you can click into a cell and the corresponding HTML will be added to it for you."
+msgstr "بسهولة أضف رابط أو صورة إلى خانة، باستخدام أزرار المقدمة. سيطلب منك الرابط وعنوان. ثم يمكنك النقر على خانة وادخل البيانات الصحيحة HTML كود سيتم إضافته لك."
+
+#: views/view-about.php:14
+msgid "You can also select the desired table from a list (after clicking the button &quot;%s&quot; in the editor toolbar) and the corresponding shortcode will be added for you."
+msgstr "يمكنك أيضا تحديد الجدول المطلوب من قائمة (بعد النقر على زر &quot;%s&quot; في شريط أدوات المحرر) وسيتم إضافت الكود القصير."
+
+#: views/view-about.php:14
+#: views/view-list.php:2
+#: controllers/controller-admin.php:1795
+msgid "Table"
+msgstr "جدول"
+
+#: views/view-about.php:14
+msgid "Tables can be styled by changing and adding CSS commands."
+msgstr "الجداول يمكن أن تنسق عن طريق تغيير وإضافة الأوامر CSS."
+
+#: views/view-about.php:14
+msgid "The plugin ships with default CSS Stylesheets, which can be customized with own code or replaced with other Stylesheets."
+msgstr "الإضافة تأتي معها  CSS Stylesheets إفتراضي، والتي يمكن تعديلها بـ كود (code) خاص بك أو استبداله مع Stylesheets آخر."
+
+#: views/view-about.php:14
+msgid "For this, each table is given certain CSS classes that can be used as CSS selectors."
+msgstr "لهذا ، كل جدول يتم منحه CSS classes خاصة به والتي يمكن استخدامها كـ CSS محددة ."
+
+#: views/view-about.php:14
+msgid "Please see the <a href=\"%s\">documentation</a> for a list of these selectors and for styling examples."
+msgstr "من فضلك شاهد <a href=\"%s\">الوثائق</a>لعرض قائمة لهذه المختارات ونماذج لـ التنسيق ."
+
+#: views/view-about.php:19
+msgid "More Information and Documentation"
+msgstr "مزيد من المعلومات والوثائق"
+
+#: views/view-about.php:21
+#: classes/helper.class.php:40
+msgid "More information about WP-Table Reloaded can be found on the <a href=\"%s\">plugin's website</a> or on its page in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "مزيد من المعلومات عن الإضافة WP-Table Reloaded تستطيع أن تجدها في <a href=\"%s\">موقع الإضافة</a> أو في صفحة الووردبريس <a href=\"%s\">WordPress Plugin Directory</a>."
+
+#: views/view-about.php:21
+#: classes/helper.class.php:41
+msgid "For technical information, see the <a href=\"%s\">documentation</a>."
+msgstr "للمعلومات التقنية ,شاهد <a href=\"%s\">الوثائق</a>."
+
+#: views/view-about.php:26
+msgid "Help and Support"
+msgstr "المساعدة والدعم "
+
+#: views/view-about.php:28
+#: classes/helper.class.php:42
+msgid "<a href=\"%s\">Support</a> is provided through the <a href=\"%s\">WordPress Support Forums</a>."
+msgstr "<a href=\"%s\">المساعدة</a> تجدها في <a href=\"%s\">منتديات دعم ووردبريس</a>."
+
+#: views/view-about.php:28
+#: classes/helper.class.php:43
+msgid "Before asking for support, please carefully read the <a href=\"%s\">Frequently Asked Questions</a> where you will find answered to the most common questions, and search through the forums."
+msgstr "قبل ما تسأل عن المساعدة, الرجاء قراءة <a href=\"%s\">الاسئلة والأجوبة </a>جيداً حيث ستجد الأسئلة الأكثر شيوعاً, وابحث في المنتديات."
+
+#: views/view-about.php:28
+msgid "If you do not find an answer there, please <a href=\"%s\">open a new thread</a> in the WordPress Support Forums with the tag &quot;wp-table-reloaded&quot;."
+msgstr "إذا لم تجد إجابه لإستفسارك، يرجى <a href=\"%s\">فتح موضوع جديد</a> في منتديات ووردبريس مع وسم  &quot;wp-table-reloaded&quot"
+
+#: views/view-about.php:33
+msgid "Author and License"
+msgstr "المطور و الترخيص"
+
+#: views/view-about.php:35
+msgid "This plugin was written by <a href=\"%s\">Tobias B&auml;thge</a>."
+msgstr "طور هذه الإضافة <a href=\"%s\">Tobias B&auml;thge</a>."
+
+#: views/view-about.php:35
+msgid "It is licensed as Free Software under GPL 2."
+msgstr "الأضافة مرخصة كإضافة مجانية تحت GPL 2"
+
+#: views/view-about.php:35
+#: classes/helper.class.php:44
+msgid "If you like the plugin, <a href=\"%s\"><strong>a donation</strong></a> is recommended."
+msgstr "إذا عجبتك هذه الإضافة, <a href=\"%s\"><strong>تبرع</strong></a> لدعمنا."
+
+#: views/view-about.php:35
+msgid "Please rate the plugin in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "من فضلك قيم الإضافة في <a href=\"%s\">موقع الإضافة على ووردبريس</a>."
+
+#: views/view-about.php:35
+msgid "Donations and good ratings encourage me to further develop the plugin and to provide countless hours of support. Any amount is appreciated! Thanks!"
+msgstr "التبرع والتقييمات الجيدة تشجعني على مواصلة تطوير الإضافة والمساعد لتوفير ساعات لا تحصى من الدعم. ويقدر أي مبلغ! شكرا!"
+
+#: views/view-about.php:40
+msgid "Credits and Thanks"
+msgstr "الائتمانات وشكرا"
+
+#: views/view-about.php:43
+msgid "Thanks go to <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> for the original wp-Table plugin,"
+msgstr "الشكر يذهب الى <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> لـ إضافة wp-Table الأصلية,"
+
+#: views/view-about.php:44
+msgid "Allan Jardine for the <a href=\"http://www.datatables.net/\">DataTables jQuery plugin</a>,"
+msgstr "Allan Jardine لـ <a href=\"http://www.datatables.net/\">إضافة DataTables jQuery</a>,"
+
+#: views/view-about.php:45
+msgid "Christian Bach for the <a href=\"http://www.tablesorter.com/\">Tablesorter jQuery plugin</a>,"
+msgstr "Christian Bach لـ <a href=\"http://www.tablesorter.com/\">إضافة فرز الجدول jQuery</a>,"
+
+#: views/view-about.php:46
+msgid "Soeren Krings for its extension <a href=\"http://tablesorter.openwerk.de/\">Tablesorter Extended</a>,"
+msgstr "Soeren Krings لإضافته <a href=\"http://tablesorter.openwerk.de/\">تمديد فرز الجدول (Tablesorter Extended)</a>,"
+
+#: views/view-about.php:47
+msgid "the submitters of translations:"
+msgstr "تقديم المترجمين:"
+
+#: views/view-about.php:80
+msgid "%s (thanks to %s)"
+msgstr "%s ( شكراً لـ  %s)"
+
+#: views/view-about.php:83
+msgid "and to all donors, contributors, supporters, reviewers and users of the plugin!"
+msgstr "وإلى جميع المانحين والمساهمين والمراجعين، ومستخدمين الإضافة!"
+
+#: views/view-about.php:89
+msgid "Debug and Version Information"
+msgstr "معلومات الإصدار و Debug "
+
+#: views/view-about.php:92
+msgid "You are using the following versions of the software."
+msgstr "انت تستخدم الإصدارات التالية من البرنامج."
+
+#: views/view-about.php:92
+msgid "Please provide this information in bug reports."
+msgstr "يرجى تقديم هذه المعلومات في تقارير المشاكل (bug)."
+
+#: views/view-about.php:95
+msgid "Plugin installed"
+msgstr "الإضافة ثبتت"
+
+#: views/view-options.php:3
+msgid "WP-Table Reloaded has several options which affect the plugin behavior in different areas."
+msgstr "WP-Table Reloaded لديه عدة خيارات التي تؤثر على الإضافة في مختلف المجالات."
+
+#: views/view-options.php:4
+msgid "Frontend Options influence the output and used features of tables in pages, posts or text-widgets."
+msgstr "خيارات الواجهة تؤثر على التنسيق والميزات الخاصة بالجداول في الصفحات, المواضيع أو مربعات القائمة الجانبية."
+
+#: views/view-options.php:4
+msgid "The Backend Options control the plugin's admin area, e.g. the &quot;%s&quot; screen."
+msgstr "خيارات الخلفية تتحكم بمنطقة الإدارة الخاصة بالإضافة, على سبيل المثال شاشة &quot;%s&quot;"
+
+#: views/view-options.php:4
+#: views/view-options.php:55
+#: views/view-options.php:75
+#: views/view-options.php:79
+msgid "Edit Table"
+msgstr "تحرير الجدول"
+
+#: views/view-options.php:4
+msgid "Administrators have access to further Admin Options."
+msgstr "الإداريين لديهم الصلاحيات للوصول الى مزيد من الخيارات الإدارية."
+
+#: views/view-options.php:19
+msgid "Frontend Options"
+msgstr "خيارات الواجهة"
+
+#: views/view-options.php:23
+msgid "JavaScript library"
+msgstr "مكتبة JavaScript"
+
+#: views/view-options.php:24
+msgid "Yes, enable the use of a JavaScript library."
+msgstr "نعم, فعل مكتبة الجافا سكربت."
+
+#: views/view-options.php:24
+msgid "WP-Table Reloaded includes three JavaScript libraries that can add useful features, like sorting, pagination, and filtering, to a table."
+msgstr "WP-Table Reloaded يتضمن ثلاث مكاتب JavaScript التي يمكن أن تضيف الميزات المفيدة، مثل ترقيم الصفحات ،والفرز ،والتصفية إلى جدول."
+
+#: views/view-options.php:28
+msgid "Select the library to use:"
+msgstr "حدد مكتبة JavaScript لإستخدامها:"
+
+#: views/view-options.php:29
+#: views/view-options.php:131
+msgid "recommended"
+msgstr "موصى به"
+
+#: views/view-options.php:33
+msgid "(You can read more about each library's features on the <a href=\"%s\">plugin's website</a>.)"
+msgstr "(يمكنك القراءة أكثر عن ميزات كل مكتبة في <a href=\"%s\">موقع الإضافة</a>.)"
+
+#: views/view-options.php:36
+msgid "Default CSS"
+msgstr "CSS الافتراضي"
+
+#: views/view-options.php:38
+msgid "Yes, include and load the plugin's default CSS Stylesheets. This is highly recommended, if you use one of the JavaScript libraries!"
+msgstr "نعم،تحميل CSS Stylesheets الافتراضي. ينصح بشدة، إذا كنت تستخدم واحدة من مكاتب JavaScript!"
+
+#: views/view-options.php:42
+msgid "Custom CSS"
+msgstr "Custom CSS"
+
+#: views/view-options.php:44
+msgid "Yes, include and load the following custom CSS commands."
+msgstr "نعم، تحميل أوامر custom CSS التالية."
+
+#: views/view-options.php:44
+msgid "This should be used to change the table layout and styling."
+msgstr "هذا يجب أن يستخدم لتغيير تخطيط الجدول وتصميمه."
+
+#: views/view-options.php:50
+msgid "You can get styling examples from the <a href=\"%s\">FAQ</a>."
+msgstr "تستطيع الحصول على أمثلة التصاميم من صفحة <a href=\"%s\">أسئلة شائعة</a>."
+
+#: views/view-options.php:50
+msgid "Information on available CSS selectors can be found in the <a href=\"%s\">documentation</a>."
+msgstr "ويمكن الإطلاع على المعلومات المتوفرة حول CSS في صفحة <a href=\"%s\">الوثائق</a>."
+
+#: views/view-options.php:54
+msgid "Links in new window"
+msgstr "الروابط في نافذة جديدة"
+
+#: views/view-options.php:55
+msgid "Yes, open links that are inserted with the &quot;%s&quot; button on the &quot;%s&quot; screen in a new browser window <strong>from now on</strong>."
+msgstr "نعم, إفتح الروابط التي إضيفت في عن طريق زر &quot;%s&quot; في  &quot;%s&quot; في نافذة جديدة <strong>من الأن فصاعداً</strong>."
+
+#: views/view-options.php:62
+#: views/view-options.php:169
+msgid "Save Options"
+msgstr "حفظ الخيارات"
+
+#: views/view-options.php:70
+msgid "Backend Options"
+msgstr "خيارات الخلفية"
+
+#: views/view-options.php:74
+msgid "Exit warning"
+msgstr "تحذير الخروج"
+
+#: views/view-options.php:75
+msgid "Yes, show a warning message, if I leave the &quot;%s&quot; screen and have not yet saved my changes."
+msgstr "نعم, أظهر رسالة تحذيرية ,إذا خرجت من صفحة &quot;%s&quot; ولم أحفظ التغيرات."
+
+#: views/view-options.php:78
+msgid "Growing textareas"
+msgstr "توسيع حقول الكتابة"
+
+#: views/view-options.php:79
+msgid "Yes, enlarge the textareas on the &quot;%s&quot; screen when they are focussed."
+msgstr "نعم, وسع منطقة الكتابة  &quot;%s&quot;عندما تمتلئ."
+
+#: views/view-options.php:82
+msgid "List of Tables features"
+msgstr "قائمة ميزات الجداول "
+
+#: views/view-options.php:83
+msgid "Yes, use the DataTables JavaScript features (sorting, pagination, filtering) on the &quot;%s&quot; screen."
+msgstr "نعم، إستخدم ميزات JavaScript DataTables (الفرز ،ترقيم الصفحات ،والتصفية) على &quot;%s&quot; الشاشة."
+
+#: views/view-options.php:83
+#: controllers/controller-admin.php:1298
+msgid "List Tables"
+msgstr "قائمة الجداول "
+
+#: views/view-options.php:91
+msgid "Admin Options"
+msgstr "خيارات المدير"
+
+#: views/view-options.php:93
+#: views/view-options.php:210
+#: views/view-options.php:224
+msgid "This area are only available to site administrators!"
+msgstr "هذه المنطقة متاحة فقط الإداريين الموقع!"
+
+#: views/view-options.php:93
+msgid "You can therefore not change these options."
+msgstr "ولذلك لا يمكنك تغيير هذه الخيارات."
+
+#: views/view-options.php:98
+msgid "Plugin Access"
+msgstr "الوصول للإضافة"
+
+#: views/view-options.php:99
+msgid "To access WP-Table Reloaded, a user needs to be:"
+msgstr "لتستطيع الوصول الى WP-Table Reloaded العضوية يجب أن تكون:"
+
+#: views/view-options.php:100
+#: views/view-options.php:111
+msgctxt "User role"
+msgid "Administrator"
+msgstr "مدير"
+
+#: views/view-options.php:101
+#: views/view-options.php:112
+msgctxt "User role"
+msgid "Editor"
+msgstr "محرر"
+
+#: views/view-options.php:102
+#: views/view-options.php:113
+msgctxt "User role"
+msgid "Author"
+msgstr "الكاتب"
+
+#: views/view-options.php:103
+msgctxt "User role"
+msgid "Contributor"
+msgstr "مساهم"
+
+#: views/view-options.php:109
+msgid "Plugin Options Access"
+msgstr "خيارات الوصول للإضافة "
+
+#: views/view-options.php:110
+msgid "To access the Plugin Options of WP-Table Reloaded, a user needs to be:"
+msgstr "لتصل الى إعدادات WP-Table Reloaded العضوية يجب أن تكون:"
+
+#: views/view-options.php:114
+msgid "Admin Options, Dump file Import, and Manual Plugin Uninstall are always accessible by Administrators only, regardless of this setting."
+msgstr "خيارات المدير ،تفريغ إستيراد ملف ،إلغاء تثبيت الإضافة ,دائما تتم من قبل المديرين فقط بغض النظر عن هذه الإعدادات."
+
+#: views/view-options.php:118
+msgid "Plugin Language"
+msgstr "لغة الإضافة "
+
+#: views/view-options.php:119
+msgid "WP-Table Reloaded shall be shown in this language:"
+msgstr "أختر اللغة التي تريد أن تظهر بها الإضافة:"
+
+#: views/view-options.php:120
+msgid "WordPress Default (currently %s)"
+msgstr "ووردبريس الافتراضي (حاليا %s)"
+
+#: views/view-options.php:129
+msgid "Admin menu entry"
+msgstr "قائمة دخول المدير "
+
+#: views/view-options.php:130
+msgid "WP-Table Reloaded shall be shown in this section of the admin menu:"
+msgstr "في اي قسم  تفضل أن تظهر قائمة دخول المدير:"
+
+#: views/view-options.php:131
+msgid "Tools"
+msgstr "أدوات"
+
+#: views/view-options.php:132
+msgid "Posts"
+msgstr "تدوينات"
+
+#: views/view-options.php:139
+msgid "Pages"
+msgstr "صفحات"
+
+#: views/view-options.php:140
+msgid "Plugins"
+msgstr "الإضافات"
+
+#: views/view-options.php:141
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: views/view-options.php:142
+msgid "Dashboard"
+msgstr "الصفحة الرئيسية"
+
+#: views/view-options.php:143
+msgid "Top-Level"
+msgstr "قائمة مستقلة"
+
+#: views/view-options.php:148
+msgid "Frontend Edit Link"
+msgstr "تحرير الجدول "
+
+#: views/view-options.php:149
+msgid "Yes, show an \"Edit\" link to users with sufficient rights near every table on the frontend."
+msgstr "نعم, أظهر كلمة \"تحرير\" بقرب الجدول يظهر للأعضاء المسموح لهم بتعديل الجدول."
+
+#: views/view-options.php:153
+msgid "WordPress Search"
+msgstr "بحث ووردبريس"
+
+#: views/view-options.php:154
+msgid "Yes, the WordPress Search shall also find posts and pages that contain the search term inside a table."
+msgstr "نعم ، يستطيع محرك بحث ووردبريس أن يجد المواضيع والصفحات التي تحتوي مصطلح البحث داخل الجدول."
+
+#: views/view-options.php:158
+msgid "Remove upon Deactivation"
+msgstr "إزالة و تعطيل"
+
+#: views/view-options.php:159
+msgid "Yes, remove all plugin related data from the database when the plugin is deactivated."
+msgstr "نعم, إحذف جميع بيانات الإضافة من قاعدة البيانات عندما يتم تعطيل الإضافة."
+
+#: views/view-options.php:159
+msgid "Should be activated directly before deactivation only!"
+msgstr "يجب تفعيلها مباشرة قبل التعطيل فقط!"
+
+#: views/view-options.php:179
+msgid "WP-Table Reloaded Data Export and Backup"
+msgstr "تصدير وأخذ نسخة احتياطية من بيانات WP-Table Reloaded "
+
+#: views/view-options.php:182
+msgid "WP-Table Reloaded can export and import a so-called dump file that contains all tables, their settings and the plugin's options."
+msgstr "WP-Table Reloaded يستطيع التصدير ولإستيراد ما يسمى ملف تفريغ (dump) الذي يحتوي على جميع الجداول، وإعداداتها وخيارات الإضافة."
+
+#: views/view-options.php:182
+msgid "This file can be used as a backup or to move all data to another WordPress site."
+msgstr "ويمكن إستخدام هذا الملف كنسخة احتياطية أو لنقل كافة البيانات إلى موقع ووردبريس آخر."
+
+#: views/view-options.php:185
+msgid "Export a dump file"
+msgstr "تصدير ملف تفريغ"
+
+#: views/view-options.php:187
+msgid "To export all Tables and their settings, click the button below to generate and download a dump file."
+msgstr "لتصدير كافة الجداول وإعداداتها، إضغط على الزر ادناه لتوليد وتحميل ملف تفريغ (dump)."
+
+#: views/view-options.php:187
+msgid "<strong>Warning</strong>: Do <strong>not</strong> edit the content of that file under any circumstances as you will destroy the file!"
+msgstr "<strong>تحذير</strong>: لا <strong>تحرر</strong> محتويات الملف تحت أي ظرف لأنك سوف تتلف الملف !"
+
+#: views/view-options.php:196
+msgid "Import a dump file"
+msgstr "استيراد ملف تفريغ (dump)"
+
+#: views/view-options.php:198
+msgid "To import a WP-Table Reloaded dump file and restore the included data, upload the file from your computer."
+msgstr "لإستيراد ملف تفريغ WP-Table Reloaded وإستعادة البيانات، قم برفع الملف من جهاز الكمبيوتر الخاص بك."
+
+#: views/view-options.php:198
+msgid "All current data of this WP-Table Reloaded installation (Tables, Options, Settings) <strong>WILL BE OVERWRITTEN</strong> with the data from the file!"
+msgstr "جميع بيانات WP-Table Reloaded المثبت حالياً (جداول, خيارات, إعدادات) <strong>سوف يتم إستبدالها</strong> بالبيانات الموجودة في الملف!"
+
+#: views/view-options.php:198
+msgid "Do not proceed, if you do not understand this!"
+msgstr "لا تمضي قدما ، إذا كنت لا تفهم ما هذا!"
+
+#: views/view-options.php:198
+msgid "It is highly recommended to export and backup the data of this installation before importing another dump file (see above)."
+msgstr "من المستحسن بشدة أن تصدر وتأخذ نسخة إحتياطية للبيانات من النسخة الحالية قبل استيراد ملف تفريغ (dump) آخر (انظر بالأعلى)."
+
+#: views/view-options.php:204
+msgid "Select Dump File"
+msgstr "أختر ملف تفريغ"
+
+#: views/view-options.php:206
+msgid "Import Dump File"
+msgstr "إستيراد ملف تفريغ"
+
+#: views/view-options.php:216
+msgid "Manually Uninstall WP-Table Reloaded"
+msgstr "يدويا إلغاء تثبيت WP-Table Reloaded"
+
+#: views/view-options.php:218
+msgid "Uninstalling <strong>will permanently delete</strong> all tables, data, and options, that belong to WP-Table Reloaded from the database, including all tables you added or imported."
+msgstr "إلغاء التثبيت <strong>سوف يحذف</strong> كافة الجداول, البيانات, والخيارات, التي تنتمي الى WP-Table Reloaded من قاعدة البيانات ,بلإضافة الى كافة الجداول التي أضفتها أو إستوردتها."
+
+#: views/view-options.php:218
+msgid "You will manually need to remove the plugin's files from the plugin folder afterwards."
+msgstr "بعد ذالك يجب عليك يدوياً إزالة ملف الإضافة من مجلد الإضافات بموقعك."
+
+#: views/view-options.php:218
+msgid "Be very careful with this and only click the button if you know what you are doing!"
+msgstr "كن حذراً جداً مع هذا و فقط إضغط الزر إذا كنت تعلم مالذي تفعله!"
+
+#: views/view-options.php:222
+msgid "Uninstall Plugin WP-Table Reloaded"
+msgstr "إلغاء تثبيت الإضافة WP-Table Reloaded"
+
+#: views/view-options.php:233
+#: controllers/controller-admin.php:1085
+msgid "You do not have sufficient rights to access the Plugin Options."
+msgstr "ليس لديك الصلاحيات الكافية للوصول إلى خيارات الإضافة."
+
+#: views/view-uninstall.php:3
+msgid "Plugin deactivated successfully."
+msgstr "تم تعطيل الإضافة بنجاح."
+
+#: views/view-uninstall.php:4
+msgid "All tables, data and options were deleted. You may now manually remove the plugin's subfolder from your WordPress plugin folder or use the \"Delete\" link on the Plugins page."
+msgstr "جميع الجداول,البيانات والخيارات تم حذفها. يمكنك الآن يدوياً إزالة الإضافة من المجلد الفرعي لإضافات وردبريس أو استخدام رابط \"Delete\" الموجود في صفحة الإضافات بـ لوحة تحكم ووردبريس."
+
+#: views/view-list.php:2
+msgid "You may add, edit, copy, delete or preview tables here."
+msgstr "يمكنك إضافة, تعديل, نسخ, حذف أو عرض الجداول هنا."
+
+#: views/view-list.php:2
+msgid "Each table has a unique ID that needs to be adjusted in that shortcode."
+msgstr "كل جدول يملك ID خاص به والذي يجب اضافته في الكود القصير."
+
+#: views/view-list.php:2
+msgid "You can also click the button &quot;%s&quot; in the editor toolbar to select and insert a table."
+msgstr "يمكنك ايضاً الضغظ على الزر &quot;%s&quot; الذي يوجد في شريط الأدوات لتحديد وإدراج جدول."
+
+#: views/view-list.php:39
+msgid "(no name)"
+msgstr "(لايوجد اسم)"
+
+#: views/view-list.php:40
+msgid "(no description)"
+msgstr "(لايوجد وصف)"
+
+#: views/view-list.php:58
+msgid "Edit %s"
+msgstr "تحرير %s"
+
+#: views/view-list.php:60
+#: classes/render.class.php:141
+msgid "Edit"
+msgstr "تحرير "
+
+#: views/view-list.php:62
+msgid "Shortcode"
+msgstr "الكود القصير"
+
+#: views/view-list.php:63
+msgid "Copy"
+msgstr "نسخ"
+
+#: views/view-list.php:64
+msgid "Export"
+msgstr "تصدير"
+
+#: views/view-list.php:66
+msgid "Preview of Table %s"
+msgstr "معاينة الجدول %s"
+
+#: views/view-list.php:67
+msgid "Preview"
+msgstr "معاينة "
+
+#: views/view-list.php:78
+msgid "Copy Tables"
+msgstr "نسخ الجداول"
+
+#: views/view-list.php:78
+msgid "Delete Tables"
+msgstr "حذف الجداول "
+
+#: views/view-ajax_preview.php:3
+msgid "This is a preview of your table."
+msgstr "هذه معاينة من الجدول الخاص بك."
+
+#: views/view-ajax_preview.php:4
+msgid "Because of CSS styling, the table might look different on your page!"
+msgstr "بسبب CSS styling ,الجدول ربما يظهر بشكل مختلف في صفحتك!"
+
+#: views/view-ajax_preview.php:4
+msgid "The JavaScript libraries are also not available in this preview."
+msgstr "مكتبة JavaScript أيضاً لاتظهر في هذه المعاينة."
+
+#: views/view-add.php:4
+msgid "To add a new table, enter its name, a description (optional) and the number of rows and columns."
+msgstr "لإضافة جدول جديد، أدخل اسمه ، والوصف (اختياري) وعدد الصفوف والأعمدة."
+
+#: views/view-add.php:4
+msgid "You may also add, insert or delete rows and columns later."
+msgstr "تستطيع أيضا إضافة، حذف أو إدراج الصفوف والأعمدة لاحقاً."
+
+#: views/view-add.php:14
+msgid "Enter Table Name"
+msgstr "أدخل اسم الجدول"
+
+#: views/view-add.php:18
+msgid "Enter Description"
+msgstr "أدخل الوصف"
+
+#: views/view-add.php:21
+msgid "Number of Rows"
+msgstr "عدد الصفوف"
+
+#: views/view-add.php:25
+msgid "Number of Columns"
+msgstr "عدد الأعمدة"
+
+#: views/view-add.php:32
+msgid "Add Table"
+msgstr "أضف جدول"
+
+#: controllers/controller-admin.php:255
+msgid "Arabic"
+msgstr "العربية"
+
+#: controllers/controller-admin.php:256
+msgid "Belarusian"
+msgstr "بيلاروس"
+
+#: controllers/controller-admin.php:257
+msgid "Czech"
+msgstr "التشيكية"
+
+#: controllers/controller-admin.php:258
+msgid "German"
+msgstr "الألمانية"
+
+#: controllers/controller-admin.php:259
+msgid "English"
+msgstr "الإنجليزية"
+
+#: controllers/controller-admin.php:260
+msgid "Spanish"
+msgstr "الاسبانية"
+
+#: controllers/controller-admin.php:261
+msgid "Finnish"
+msgstr "فنلندية"
+
+#: controllers/controller-admin.php:262
+msgid "French"
+msgstr "الفرنسية"
+
+#: controllers/controller-admin.php:263
+msgid "Hindi"
+msgstr "هندي"
+
+#: controllers/controller-admin.php:264
+msgid "Indonesian"
+msgstr "الأندونيسية"
+
+#: controllers/controller-admin.php:265
+msgid "Italian"
+msgstr "الايطالية"
+
+#: controllers/controller-admin.php:266
+msgid "Japanese"
+msgstr "اليابانية"
+
+#: controllers/controller-admin.php:267
+msgid "Dutch"
+msgstr "الهولندية"
+
+#: controllers/controller-admin.php:268
+msgid "Polish"
+msgstr "البولندية"
+
+#: controllers/controller-admin.php:269
+msgid "Brazilian Portuguese"
+msgstr "البرتغالية البرازيلية"
+
+#: controllers/controller-admin.php:270
+msgid "Portuguese (Portugal)"
+msgstr "البرتغالية (البرتغال)"
+
+#: controllers/controller-admin.php:271
+msgid "Russian"
+msgstr "الروسي"
+
+#: controllers/controller-admin.php:272
+msgid "Slovak"
+msgstr "السلوفاكية"
+
+#: controllers/controller-admin.php:273
+msgid "Swedish"
+msgstr "السويدية"
+
+#: controllers/controller-admin.php:274
+msgid "Ukrainian"
+msgstr "الأوكراني"
+
+#: controllers/controller-admin.php:275
+msgid "Chinese (Simplified)"
+msgstr "الصينية (المبسطة)"
+
+#: controllers/controller-admin.php:305
+msgid "Welcome to WP-Table Reloaded %s. If you encounter any questions or problems, please refer to the <a href=\"%s\">FAQ</a>, the <a href=\"%s\">documentation</a>, and the <a href=\"%s\">support</a> section."
+msgstr "مرحباً بك في WP-Table Reloaded %s. إذا واجهتك أي أسئلة أو مشاكل, يرجى الرجوع إلى <a href=\"%s\">الأسئلة الشائعة</a> ,<a href=\"%s\">الوثائق</a>وأيضاً قسم <a href=\"%s\">الدعم</a> ."
+
+#: controllers/controller-admin.php:306
+msgid "Thank you for upgrading to WP-Table Reloaded %s."
+msgstr "شكراً لك لترقية إلى WP-Table Reloaded %s ."
+
+#: controllers/controller-admin.php:306
+msgid "This version includes several bugfixes and a few enhancements."
+msgstr "هذه النسخة تحتوي عدة اصلاحات وبعض التحسينات."
+
+#: controllers/controller-admin.php:306
+msgid "Please read the <a href=\"%s\">release announcement</a> for more information."
+msgstr "من فضلك إقرأ صفحة <a href=\"%s\">release announcement</a> لمزيد من المعلومات."
+
+#: controllers/controller-admin.php:306
+msgid "If you like the new features and enhancements, I would appreciate a small <a href=\"%s\">donation</a>. Thank you."
+msgstr "إذا أعجبتك الميزات الجديدة والتحسينات, سأكون ممتناً لتبرع صغير <a href=\"%s\">تبرع</a> شكراً لك."
+
+#: controllers/controller-admin.php:311
+msgid "Hide this message"
+msgstr "إخفاء هذه الرسالة"
+
+#: controllers/controller-admin.php:319
+msgid "Thanks for using this plugin! You've installed WP-Table Reloaded over a month ago."
+msgstr "شكراً لإستخدام هذه الإضافة! لقد قمت بتثبيت WP-Table Reloaded منذ اكثر من شهر."
+
+#: controllers/controller-admin.php:319
+msgid "If it works and you are satisfied with the results of managing your %s table, isn't it worth at least one dollar or euro?"
+msgid_plural "If it works and you are satisfied with the results of managing your %s tables, isn't it worth at least one dollar or euro?"
+msgstr[0] "إذا عملت معك وأنت راضي عن النتائج إدارة %s جدولك, ألا يستحق على الأقل دولار واحد أو يورو؟"
+msgstr[1] "إذا عملت معك وأنت راضي عن النتائج إدارة %s جداولك, ألا يستحق على الأقل دولار واحد أو يورو؟"
+
+#: controllers/controller-admin.php:320
+msgid "<a href=\"%s\">Donations</a> help me to continue support and development of this <i>free</i> software - things for which I spend countless hours of my free time! Thank you!"
+msgstr "<a href=\"%s\">التبرعات</a> تساعدني على مواصلة دعم وتطوير هذه الإضافة <i>مجاناً</i> لأشياء التي قضيت ساعات لا تحصى من وقت فراغي! شكراً!"
+
+#: controllers/controller-admin.php:321
+msgid "Sure, no problem!"
+msgstr "بالتأكيد، لا مشكلة!"
+
+#: controllers/controller-admin.php:322
+msgid "I already donated."
+msgstr "أنا تبرعت بالفعل."
+
+#: controllers/controller-admin.php:323
+msgid "No, thanks. Don't ask again."
+msgstr "لا، شكراً. لا تسأل مرة أخرى."
+
+#: controllers/controller-admin.php:351
+msgid "Table &quot;%s&quot; added successfully."
+msgstr "الجدول &quot;%s&quot; أضيف بنجاح."
+
+#: controllers/controller-admin.php:382
+msgid "Table edited successfully. This Table now has the ID %s. You'll need to adjust existing shortcodes accordingly."
+msgstr "تم تحرير الجدول بنجاح. هذا الجدول لديه الآن المعرف ID  %s سوف تحتاج إلى ضبط الكود القصير وفقا لذلك."
+
+#: controllers/controller-admin.php:384
+msgid "The ID could not be changed from %s to %s, because there already is a Table with that ID."
+msgstr "لايمكن تغير ID %s الى %s لأن هناك جدول يحمل نفس ID."
+
+#: controllers/controller-admin.php:387
+msgid "Table edited successfully."
+msgstr "تم تحرير الجدول بنجاح."
+
+#: controllers/controller-admin.php:436
+msgid "Rows swapped successfully."
+msgstr "تم تبديل الصفوف بنجاح."
+
+#: controllers/controller-admin.php:457
+msgid "Columns swapped successfully."
+msgstr "تم تبديل الأعمدة بنجاح."
+
+#: controllers/controller-admin.php:498
+msgid "Table sorted successfully."
+msgstr "تم فرز الجدول بنجاح."
+
+#: controllers/controller-admin.php:521
+msgid "Row moved successfully."
+msgstr "تم نقل الصف بنجاح."
+
+#: controllers/controller-admin.php:548
+msgid "Column moved successfully."
+msgstr "تم نقل العامود بنجاح."
+
+#: controllers/controller-admin.php:556
+msgid "Row could not be deleted."
+msgid_plural "Rows could not be deleted."
+msgstr[0] "لايمكن حذف الصف."
+msgstr[1] "لايمكن حذف الصفوف."
+
+#: controllers/controller-admin.php:565
+msgid "Row deleted successfully."
+msgid_plural "Rows deleted successfully."
+msgstr[0] "تم حذف الصف بنجاح."
+msgstr[1] "تم حذف الصفوف بنجاح."
+
+#: controllers/controller-admin.php:575
+msgid "Column could not be deleted."
+msgid_plural "Columns could not be deleted."
+msgstr[0] "لايمكن حذف العامود."
+msgstr[1] "لايمكن حذف العواميد."
+
+#: controllers/controller-admin.php:588
+msgid "Column deleted successfully."
+msgid_plural "Columns deleted successfully."
+msgstr[0] "تم حذف العامود بنجاح."
+msgstr[1] "تم حذف العواميد بنجاح."
+
+#: controllers/controller-admin.php:611
+msgid "Row inserted successfully."
+msgid_plural "Rows inserted successfully."
+msgstr[0] "تم إدراج الصف بنجاح."
+msgstr[1] "تم إدراج الصفوف بنجاح."
+
+#: controllers/controller-admin.php:638
+msgid "Column inserted successfully."
+msgid_plural "Columns inserted successfully."
+msgstr[0] "تم إدراج العامود بنجاح."
+msgstr[1] "تم إدراج العواميد بنجاح."
+
+#: controllers/controller-admin.php:653
+msgid "Row added successfully."
+msgid_plural "Rows added successfully."
+msgstr[0] "تم إضافة الصف بنجاح."
+msgstr[1] "تم إضافة الصفوف بنجاح."
+
+#: controllers/controller-admin.php:667
+msgid "Column added successfully."
+msgid_plural "Columns added successfully."
+msgstr[0] "تم إضافة العامود بنجاح."
+msgstr[1] "تم إضافة العواميد بنجاح."
+
+#: controllers/controller-admin.php:674
+msgid "Could not add Custom Data Field, because you did not enter a name."
+msgstr "لايمكن إضافة حقل Custom Data لأنك لم تدخل أسم."
+
+#: controllers/controller-admin.php:679
+msgid "Could not add Custom Data Field, because the name you entered is reserved for other table data."
+msgstr "لايمكن إضافة حقل Custom Data لأن الأسم التي أدخلتها يعود الى بيانات جدول آخر."
+
+#: controllers/controller-admin.php:685
+msgid "Could not add Custom Data Field, because the name contained illegal characters."
+msgstr "لايمكن وضع حقل Custom Data لأن الأسم المدخل يحتوي على حروف غير مسموحة."
+
+#: controllers/controller-admin.php:689
+msgid "Could not add Custom Data Field, because a Field with that name already exists."
+msgstr "لايمكن إضافة حقل Custom Data لأن هناك حقل بنفس هذه الأسم موجود."
+
+#: controllers/controller-admin.php:695
+msgid "Custom Data Field added successfully."
+msgstr "حقل Custom Data إضيف بنجاح."
+
+#: controllers/controller-admin.php:735
+#: controllers/controller-admin.php:791
+msgid "Copy of"
+msgstr "نسخة من"
+
+#: controllers/controller-admin.php:739
+msgid "Table copied successfully."
+msgid_plural "Tables copied successfully."
+msgstr[0] "تم نسخ الجدول بنجاح."
+msgstr[1] "تم نسخ الجداول بنجاح."
+
+#: controllers/controller-admin.php:745
+msgid "Table deleted successfully."
+msgid_plural "Tables deleted successfully."
+msgstr[0] "تم حذف الجدول بنجاح."
+msgstr[1] "تم حذف الجداول بنجاح."
+
+#: controllers/controller-admin.php:766
+#: controllers/controller-admin.php:921
+#: controllers/controller-admin.php:959
+msgid "Table imported successfully."
+msgid_plural "Tables imported successfully."
+msgstr[0] "تم إستيراد الجدول بنجاح."
+msgstr[1] "تم إستيراد الجداول بنجاح."
+
+#: controllers/controller-admin.php:773
+msgid "You did not select any tables!"
+msgstr "لم تحدد أي جداول !"
+
+#: controllers/controller-admin.php:796
+msgid "Table &quot;%s&quot; copied successfully."
+msgstr "الجدول &quot;%s&quot; نسخ بنجاح."
+
+#: controllers/controller-admin.php:814
+msgid "Table &quot;%s&quot; deleted successfully."
+msgstr "الجدول &quot;%s&quot; حذف بنجاح."
+
+#: controllers/controller-admin.php:822
+msgid "Custom Data Field deleted successfully."
+msgstr "حقل Custom Data حذف بنجاح."
+
+#: controllers/controller-admin.php:824
+msgid "Custom Data Field could not be deleted."
+msgstr "حقل Custom Data لايمكن حذفه."
+
+#: controllers/controller-admin.php:830
+msgid "Delete failed."
+msgstr "فشل الحذف."
+
+#: controllers/controller-admin.php:862
+#: controllers/controller-admin.php:872
+#: controllers/controller-admin.php:883
+msgid "Imported Table"
+msgstr "الجداول المستوردة"
+
+#: controllers/controller-admin.php:863
+#: controllers/controller-admin.php:884
+msgid "from %s"
+msgstr "من %s"
+
+#: controllers/controller-admin.php:873
+msgid "via form"
+msgstr "من خلال نموذج"
+
+#: controllers/controller-admin.php:900
+#: controllers/controller-admin.php:937
+msgid "Table could not be imported."
+msgstr "لايمكن إستيراد الجدول."
+
+#: controllers/controller-admin.php:917
+msgid "Table %s (%s) replaced successfully."
+msgstr "الجدول %s (%s) استبدل بنجاح."
+
+#: controllers/controller-admin.php:967
+#: controllers/controller-admin.php:1160
+msgid "You do not have sufficient rights to perform this action."
+msgstr "ليس لديك الحقوق الكافية لتنفيذ هذا الإجراء."
+
+#: controllers/controller-admin.php:974
+msgid "You did not upload a WP-Table Reloaded dump file."
+msgstr "لم تقم برفع ملف تفريغ WP-Table Reloaded."
+
+#: controllers/controller-admin.php:983
+msgid "The uploaded dump file is empty. Please upload a valid dump file."
+msgstr "ملف التفريغ الذي تم رفعه فارغ. يرجى تحميل ملف تفريغ صالح."
+
+#: controllers/controller-admin.php:1011
+msgid "All Tables, Settings and Options were successfully imported."
+msgstr "جميع الجداول, الإعدادات والخيارات تم إستيرادها بنجاح."
+
+#: controllers/controller-admin.php:1040
+msgid "Table &quot;%s&quot; exported successfully."
+msgstr "الجدول &quot;%s&quot; صدر بنجاح."
+
+#: controllers/controller-admin.php:1141
+msgid "Options saved successfully."
+msgstr "تم حفظ الخيارات بنجاح."
+
+#: controllers/controller-admin.php:1144
+msgid "<a href=\"%s\">Click here to Proceed.</a>"
+msgstr "<a href=\"%s\">انقر هنا للمتابعة.</a>"
+
+#: controllers/controller-admin.php:1210
+msgid "There is no table with this ID!"
+msgstr "لايوجد جدول بهذا ID !"
+
+#: controllers/controller-admin.php:1237
+msgid "Thank you very much! Your donation is highly appreciated. You just contributed to the further development of WP-Table Reloaded!"
+msgstr "شكرا جزيلا لكم! تبرعك هو محل تقدير كبير. أنت ساهمت في استمرار تطوير WP-Table Reloaded!"
+
+#: controllers/controller-admin.php:1239
+msgid "No problem! I still hope you enjoy the benefits that WP-Table Reloaded brings to you. If you should want to change your mind, you'll always find the &quot;%s&quot; button on the <a href=\"%s\">WP-Table Reloaded website</a>."
+msgstr "لا مشكلة! أنا مازلت آتمنى أن تستمتع بالفوائد التي تقدمها لك WP-Table Reloaded. إذا كنت تريد تغير رأيك, سوف تجد دائماً الزر &quot;%s&quot; في <a href=\"%s\">موقع الإضافة WP-Table Reloaded</a>."
+
+#: controllers/controller-admin.php:1239
+#: controllers/controller-admin.php:1678
+msgid "Donate"
+msgstr "تبرع"
+
+#: controllers/controller-admin.php:1262
+#: controllers/controller-admin.php:1269
+msgid "List of Tables"
+msgstr "قائمة الجداول"
+
+#. #-#-#-#-#  plugin.pot (WP-Table Reloaded 1.9.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: controllers/controller-admin.php:1262
+#: controllers/controller-admin.php:1266
+#: controllers/controller-admin.php:1268
+msgid "WP-Table Reloaded"
+msgstr "WP-Table Reloaded"
+
+#: controllers/controller-admin.php:1263
+#: controllers/controller-admin.php:1299
+msgid "Add new Table"
+msgstr "أضف جدول جديد"
+
+#: controllers/controller-admin.php:1264
+#: controllers/controller-admin.php:1300
+msgid "Import a Table"
+msgstr "استيراد جدول"
+
+#: controllers/controller-admin.php:1265
+#: controllers/controller-admin.php:1301
+msgid "Export a Table"
+msgstr "تصدير جدول"
+
+#: controllers/controller-admin.php:1267
+msgid "About WP-Table Reloaded"
+msgstr "عن WP-Table Reloaded"
+
+#: controllers/controller-admin.php:1275
+msgid "Edit Table &quot;%s&quot; (ID %s)"
+msgstr "تحرير &quot;%s&quot; (ID %s)"
+
+#: controllers/controller-admin.php:1276
+msgid "Preview of Table &quot;%s&quot; (ID %s)"
+msgstr "معاينة الجدول &quot;%s&quot; (ID %s)"
+
+#: controllers/controller-admin.php:1309
+msgid "About the plugin"
+msgstr "عن الإضافة"
+
+#: controllers/controller-admin.php:1674
+msgid "WP-Table Reloaded Plugin Page"
+msgstr " صفحة الإضافة WP-Table Reloaded"
+
+#: controllers/controller-admin.php:1674
+msgid "Plugin Page"
+msgstr "صفحة الإضافة"
+
+#: controllers/controller-admin.php:1675
+msgid "Frequently Asked Questions"
+msgstr "أسئلة وأجوبة"
+
+#: controllers/controller-admin.php:1675
+msgid "FAQ"
+msgstr "أسئلة شائعة"
+
+#: controllers/controller-admin.php:1676
+msgid "Support"
+msgstr "الدعم"
+
+#: controllers/controller-admin.php:1677
+msgid "Plugin Documentation"
+msgstr "توثيق الإضافة"
+
+#: controllers/controller-admin.php:1677
+msgid "Documentation"
+msgstr "وثائق"
+
+#: controllers/controller-admin.php:1678
+msgid "Support WP-Table Reloaded with your donation!"
+msgstr "إدعم WP-Table Reloaded بتبرعك!"
+
+#: controllers/controller-admin.php:1717
+msgid "Do you really want to activate this? You should only do that right before uninstallation!"
+msgstr "هل حقاً تريد تفعيل هذا؟ يجب عليك القيام بهذه العملية قبل إزالة تثبيت الإضافة"
+
+#: controllers/controller-admin.php:1718
+msgid "URL of link to insert"
+msgstr "الرابط الذي تريد إدراجه "
+
+#: controllers/controller-admin.php:1719
+msgid "Text of link"
+msgstr "نص الرابط"
+
+#: controllers/controller-admin.php:1720
+msgid "To insert the following HTML code for a link into a cell, just click the cell after closing this dialog."
+msgstr "لإدراج كود HTML التالي لرابط في خانة، انقر فوق الخانة المرادة بعد إغلاق هذه الرسالة."
+
+#: controllers/controller-admin.php:1721
+msgid "To insert an image, click &quot;OK&quot; and then click into the cell into which you want to insert the image."
+msgstr "لإدراج صورة, انقر فوق &quot;OK&quot; ومن ثم انقر فوق الخانة التي تريد إدراج الصورة بها."
+
+#: controllers/controller-admin.php:1721
+msgid "The Media Library will open, from which you can select the desired image or insert the image URL."
+msgstr "سوف تفتح مكتبة الوسائط، التي يمكنك من خلالها تحديد الصورة المطلوبة أو إدراج رابط الصورة."
+
+#: controllers/controller-admin.php:1721
+msgid "Click the &quot;%s&quot; button to insert the image."
+msgstr "إضغط &quot;%s&quot; الزر لإضافة الصورة."
+
+#: controllers/controller-admin.php:1721
+msgid "Insert into Post"
+msgstr "إدراج في صفحة"
+
+#: controllers/controller-admin.php:1722
+msgid "To combine cells within a row, click into the cell to the right of the cell that has the content the combined cells shall have."
+msgstr "الجمع بين الخانات داخل صف، انقر فوق الخانة والخانة التي بجانبها ويجب أن تحتوي على نفس المحتوى والأن يجب أن تظهر الخانات مجتمعة."
+
+#: controllers/controller-admin.php:1723
+msgid "To combine cells within a column, click into the cell below the cell that has the content the combined cells shall have."
+msgstr "الجمع بين الخانات داخل عامود، انقر فوق الخانة والخانة التي بأسفلها ويجب أن تحتوي على نفس المحتوى والأن يجب أن تظهر الخانات مجتمعة."
+
+#: controllers/controller-admin.php:1724
+msgid "Do you want to copy the selected tables?"
+msgstr "هل تريد نسخ الجداول المحددة ؟"
+
+#: controllers/controller-admin.php:1725
+msgid "The selected tables and all content will be erased. Do you really want to delete them?"
+msgstr "سوف يتم حذف الجداول المحددة وجميع بياناتها.  هل انت متأكد أنك تريد حذفها؟"
+
+#: controllers/controller-admin.php:1726
+msgid "Do you really want to import the selected tables from the wp-Table plugin?"
+msgstr "هل حقاً تريد إستيراد الجداول المحددة من إضافة wp-Table؟"
+
+#: controllers/controller-admin.php:1727
+msgid "Do you want to copy this table?"
+msgstr "هل تريد نسخ هذه الجدول؟"
+
+#: controllers/controller-admin.php:1728
+msgid "The complete table and all content will be erased. Do you really want to delete it?"
+msgstr "الجدول وجميع محتوياته سوف تحذف. هل حقاً تريد حذفه؟"
+
+#: controllers/controller-admin.php:1729
+msgid "Do you really want to delete the selected rows?"
+msgstr "هل تريد حقاً حذف الصفوف المحددة؟"
+
+#: controllers/controller-admin.php:1730
+msgid "Do you really want to delete the selected columns?"
+msgstr "هل تريد حقاً حذف العواميد المحددة؟"
+
+#: controllers/controller-admin.php:1731
+#: controllers/controller-admin.php:1735
+#: controllers/controller-admin.php:1737
+msgid "You have not selected any rows."
+msgstr "لم تقم بتحديد أي الصفوف."
+
+#: controllers/controller-admin.php:1732
+#: controllers/controller-admin.php:1736
+#: controllers/controller-admin.php:1738
+msgid "You have not selected any columns."
+msgstr "لم تقم بتحديد أي أعمدة."
+
+#: controllers/controller-admin.php:1733
+msgid "You can not delete all rows of the table at once!"
+msgstr "لا يمكنك حذف كافة الصفوف من الجدول في وقت واحد!"
+
+#: controllers/controller-admin.php:1734
+msgid "You can not delete all columns of the table at once!"
+msgstr "لا يمكنك حذف كافة الأعمدة من الجدول في وقت واحد!"
+
+#: controllers/controller-admin.php:1739
+msgid "Do you really want to import this table from the wp-Table plugin?"
+msgstr "هل تريد حقا إستيراد هذا الجدول من إضافة wp-Table؟"
+
+#: controllers/controller-admin.php:1740
+msgid "Do you really want to uninstall the plugin and delete ALL data?"
+msgstr "هل تريد حقاً إلغاء تثبيت الإضافة وحذف كافة البيانات؟"
+
+#: controllers/controller-admin.php:1741
+msgid "Are you really sure?"
+msgstr "هل أنت متأكد حقاً؟"
+
+#: controllers/controller-admin.php:1742
+msgid "Do you really want to change the ID of the table?"
+msgstr "هل تريد حقاً تغيير ID الجدول؟"
+
+#: controllers/controller-admin.php:1743
+msgid "To show this Custom Data Field, use this shortcode:"
+msgstr "لإظهار حقل Custom Data، إستخدم هذا الكود القصير:"
+
+#: controllers/controller-admin.php:1744
+msgid "To show this table, use this shortcode:"
+msgstr "لإظهار هذا الجدول، إستخدم هذا الكود القصير:"
+
+#: controllers/controller-admin.php:1745
+msgid "Warning: You will lose all current Tables and Settings! You should create a backup first. Be warned!"
+msgstr "تحذير!: ستفقد جميع الجداول الحالية والإعدادات! يجب أن تنشئ نسخة إحتياطية أولاً. كن حذراً"
+
+#: controllers/controller-admin.php:1746
+msgid "You have made changes to the content of this table and not yet saved them."
+msgstr "لقد قمت بعمل تغييرات على محتوى هذا الجدول ولم تقم بحفظها بعد."
+
+#: controllers/controller-admin.php:1746
+msgid "You should first click &quot;%s&quot; or they will be lost if you navigate away from this page."
+msgstr "يجب عليك أولا النقر فوق &quot;%s&quot; أو أن التغييرات سوف تفقد إذا إنتقلت عن هذه الصفحة."
+
+#: controllers/controller-admin.php:1796
+msgid "Insert a Table"
+msgstr "إدراج جدول"
+
+#: controllers/controller-admin.php:1853
+msgid "Please wait..."
+msgstr "الرجاء الانتظار..."
+
+#: controllers/controller-admin.php:1854
+msgid "Show _MENU_ Tables"
+msgstr "عرض _MENU_ جداول"
+
+#: controllers/controller-admin.php:1855
+msgid "All"
+msgstr "جميع"
+
+#: controllers/controller-admin.php:1857
+msgid "_START_ to _END_ of _TOTAL_ Tables"
+msgstr "_START_ الى  _END_ من  _TOTAL_  جداول"
+
+#: controllers/controller-admin.php:1858
+msgid "(filtered from _MAX_ Tables)"
+msgstr "(تمت تصفيتها من _MAX_ الجداول)"
+
+#: controllers/controller-admin.php:1859
+msgid "Filter:"
+msgstr "البحث:"
+
+#: controllers/controller-admin.php:1860
+msgid "First"
+msgstr "الأول"
+
+#: controllers/controller-admin.php:1861
+msgid "Back"
+msgstr "العودة"
+
+#: controllers/controller-admin.php:1862
+msgid "Next"
+msgstr "القادم"
+
+#: controllers/controller-admin.php:1863
+msgid "Last"
+msgstr "السابق"
+
+#: classes/import.class.php:36
+#: classes/export.class.php:28
+msgid "CSV - Character-Separated Values"
+msgstr "CSV - Character-Separated Values"
+
+#: classes/import.class.php:37
+#: classes/export.class.php:29
+msgid "HTML - Hypertext Markup Language"
+msgstr "HTML - Hypertext Markup Language"
+
+#: classes/import.class.php:38
+#: classes/export.class.php:30
+msgid "XML - eXtended Markup Language"
+msgstr "XML - eXtended Markup Language"
+
+#: classes/helper.class.php:74
+msgid "Thank you for using <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>."
+msgstr "شكراً لك لإستخدام <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>."
+
+#: classes/helper.class.php:74
+msgid "Support the plugin with your <a href=\"%s\">donation</a>!"
+msgstr "إدعم الإضافة <a href=\"%s\">بتبرعك</a>!"
+
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Table cells can span across more than one column or row."
+msgstr "يمكن لخانات الجدول أن تمتد لأكثر من عامود أو صف واحد."
+
+#: classes/helper.class.php:104
+msgid "Combining consecutive cells within the same row is called \"colspanning\"."
+msgstr "الجمع بين الخانات داخل نفس الصف يسمى \"colspanning\"."
+
+#: classes/helper.class.php:104
+msgid "To combine cells, add the keyword #colspan# to the cell to the right of the one with the content for the combined cell by using the corresponding button."
+msgstr "لجمع الخانات, أضف الكلمة المفتاحية #colspan# للخانة إلى جانب واحدة تحتوي محتوى الخانة مجتمعة باستخدام زر المطابقة."
+
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Repeat this to add the keyword to all cells that shall be connected."
+msgstr "كرر هذه الخطوة لإضافة الكلمة المفتاحية لإضافة إلى كافة الخانات التي يجب أن تكون متصلة."
+
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Be aware that the JavaScript libraries will not work on tables which have combined cells."
+msgstr "يجب أن تعلم أن JavaScript libraries لن تعمل على الجداول التي تحتوي خانات مجتمعة."
+
+#: classes/helper.class.php:109
+msgid "Combining consecutive cells within the same column is called \"rowspanning\"."
+msgstr "الجمع بين الخانات داخل نفس العامود يسمى \"rowspanning\"."
+
+#: classes/helper.class.php:109
+msgid "To combine cells, add the keyword #rowspan# to the cell below the one with the content for the combined cell by using the corresponding button."
+msgstr "لجمع الخانات, أضف الكلمة المفتاحية #rowspan# للخانة أدناه للواحدة التي تحتوي المحتوى لجمع الخانات عن طريق إستخدام الزر المطابق."
+
+#: classes/helper.class.php:118
+msgid "Help"
+msgstr "مساعدة"
+
+#: classes/export.class.php:33
+msgid "; (semicolon)"
+msgstr "؛ (المنقوطة)"
+
+#: classes/export.class.php:34
+msgid ", (comma)"
+msgstr "، (فاصلة)"
+
+#: classes/export.class.php:35
+msgid ": (colon)"
+msgstr ": (نقطتان رأسيتان)"
+
+#: classes/export.class.php:36
+msgid ". (dot)"
+msgstr ". (نقطة)"
+
+#: classes/export.class.php:37
+msgid "| (pipe)"
+msgstr "| (pipe)"
+
+#. Plugin URI of the plugin/theme
+msgid "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+msgstr "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+
+#. Description of the plugin/theme
+msgid "This plugin allows you to create and easily manage tables in the admin-area of WordPress. A comfortable backend allows an easy manipulation of table data. You can then include the tables into your posts, on your pages or in text widgets by using a shortcode or a template tag function. Tables can be imported and exported from/to CSV, XML and HTML."
+msgstr "هذه الإضافة تسمح لك بإنشاء وإدارة الجداول بسهولة في لوحة تحكم الإدارة ووردبريس. والخلفية مريحة تسمح بالتعديل السهل لبيانات الجدول. ثم يمكنك تضمين الجداول في مشاركاتك، على صفحات موقعك أو مربعات القائمة الجانبية عن طريق إستخدام الكود القصير أو template tag function. الجداول يمكن إستيرادها وتصديرها من CSV, XML و HTML."
+
+#. Author of the plugin/theme
+msgid "Tobias B&auml;thge"
+msgstr "Tobias B&auml;thge"
+
+#. Author URI of the plugin/theme
+msgid "http://tobias.baethge.com/"
+msgstr "http://tobias.baethge.com/"
+
+#~ msgid "Albanian"
+#~ msgstr "الألبانية"
+
+#~ msgid "Turkish"
+#~ msgstr "التركية"
+
+#~ msgid ""
+#~ "This version includes a few new features, like output caching and a "
+#~ "custom table CSS class, and several enhancements."
+#~ msgstr ""
+#~ "يتضمن هذا الإصدار بعض الميزات الجديدة، مثل تخزين الملفات المؤقتة (output "
+#~ "caching) و custom table CSS class والعديد من التحسينات."

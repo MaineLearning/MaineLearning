@@ -1,0 +1,13 @@
+CREATE TABLE `%sgdsr_multis` (
+  `multi_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `description` text NOT NULL,
+  `stars` int(11) NOT NULL DEFAULT '10',
+  `object` text NOT NULL,
+  `weight` text NOT NULL,
+  `auto_insert` varchar(4) NOT NULL DEFAULT 'no',
+  `auto_location` varchar(8) NOT NULL DEFAULT 'bottom',
+  `auto_categories` text NOT NULL,
+  `rules` char(1) DEFAULT 'A',
+  `moderate` char(1) DEFAULT 'N',
+  PRIMARY KEY (`multi_id`))%COLLATE%;

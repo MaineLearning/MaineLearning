@@ -1,0 +1,9 @@
+h2 { padding-top: 7px; height: 36px; }
+
+.contents { margin-top: 0; }
+
+.title { height: 83px; position: static; width: 100%; }
+
+#content { margin-left: 0; }
+
+#sidebar { position: static; }

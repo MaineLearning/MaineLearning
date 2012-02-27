@@ -1,0 +1,4582 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gd-star-ratings FARSI\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Farsipress <arash@farsipress.ir>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: code/adm/db.php:1192
+msgid "Show all dates"
+msgstr "نمایش همه زمان ها"
+
+#: code/adm/db.php:1220
+msgid "All users and visitors"
+msgstr "همه کاربران و بازدید کننده ها"
+
+#: code/adm/db.php:1221
+#: tinymce3/panels/blograting.php:22
+#: tinymce3/panels/commentsaggr.php:17
+#: tinymce3/panels/filter.php:17
+#: widgets/comments/part_basic.php:17
+#: widgets/comments/part_filter.php:17
+#: widgets/comments_28/part_basic.php:17
+#: widgets/comments_28/part_filter.php:17
+#: widgets/rating/part_basic.php:16
+#: widgets/rating/part_filter.php:28
+#: widgets/rating_28/part_basic.php:17
+#: widgets/rating_28/part_filter.php:28
+#: widgets/top/part_basic.php:17
+#: widgets/top/part_filter.php:28
+#: widgets/top_28/part_basic.php:17
+#: widgets/top_28/part_filter.php:28
+msgid "Visitors Only"
+msgstr "فقط بازدید کننده ها"
+
+#: code/adm/db.php:1222
+#: code/class.php:662
+msgid "All Users"
+msgstr "همه کاربران"
+
+#: code/adm/db.php:722
+#: code/adm/db.php:725
+#: code/adm/db.php:728
+#: code/adm/db.php:731
+#: code/adm/db.php:735
+#: code/adm/db.php:758
+#: code/adm/db.php:761
+#: code/adm/db.php:764
+#: code/adm/db.php:767
+#: code/adm/db.php:770
+#: code/adm/db.php:773
+#: code/adm/db.php:798
+#: code/adm/db.php:801
+#: code/adm/db.php:804
+#: code/adm/db.php:807
+#: code/adm/db.php:811
+#: code/adm/db.php:834
+#: code/adm/db.php:837
+#: code/adm/db.php:840
+#: code/adm/db.php:843
+#: code/adm/db.php:846
+#: code/adm/db.php:849
+#: code/adm/db.php:969
+#: code/adm/db.php:972
+#: code/adm/db.php:975
+#: code/adm/db.php:978
+#: code/adm/db.php:982
+#: code/adm/db.php:1005
+#: code/adm/db.php:1008
+#: code/adm/db.php:1011
+#: code/adm/db.php:1014
+#: code/adm/db.php:1017
+#: code/adm/db.php:1021
+msgid "articles"
+msgstr "مقالات"
+
+#: code/adm/db.php:722
+#: code/adm/db.php:740
+#: code/adm/db.php:758
+#: code/adm/db.php:778
+#: code/adm/db.php:798
+#: code/adm/db.php:816
+#: code/adm/db.php:834
+#: code/adm/db.php:854
+msgid "inherited"
+msgstr "ارثی"
+
+#: code/adm/db.php:725
+#: code/adm/db.php:743
+#: code/adm/db.php:801
+#: code/adm/db.php:819
+#: code/adm/db.php:972
+#: code/adm/db.php:990
+msgid "all"
+msgstr "همه"
+
+#: code/adm/db.php:728
+#: code/adm/db.php:746
+#: code/adm/db.php:767
+#: code/adm/db.php:787
+#: code/adm/db.php:804
+#: code/adm/db.php:822
+#: code/adm/db.php:843
+#: code/adm/db.php:863
+#: code/adm/db.php:953
+#: code/adm/db.php:954
+#: code/adm/db.php:975
+#: code/adm/db.php:993
+#: code/adm/db.php:1014
+#: code/adm/db.php:1035
+#: code/adm/db.php:1112
+#: code/adm/db.php:1113
+#: code/adm/elements.php:364
+#: options/multis/results_post.php:140
+#: options/multis/results_post.php:141
+msgid "visitors"
+msgstr "بازدید کننده ها"
+
+#: code/adm/db.php:731
+#: code/adm/db.php:749
+#: code/adm/db.php:770
+#: code/adm/db.php:790
+#: code/adm/db.php:807
+#: code/adm/db.php:825
+#: code/adm/db.php:846
+#: code/adm/db.php:866
+#: code/adm/db.php:953
+#: code/adm/db.php:954
+#: code/adm/db.php:978
+#: code/adm/db.php:996
+#: code/adm/db.php:1017
+#: code/adm/db.php:1038
+#: code/adm/db.php:1112
+#: code/adm/db.php:1113
+#: options/multis/results_post.php:142
+#: options/multis/results_post.php:143
+msgid "users"
+msgstr "کاربران"
+
+#: code/adm/db.php:735
+#: code/adm/db.php:753
+#: code/adm/db.php:811
+#: code/adm/db.php:829
+#: code/adm/db.php:982
+#: code/adm/db.php:1000
+msgid "free"
+msgstr "مجانی"
+
+#: code/adm/db.php:740
+#: code/adm/db.php:743
+#: code/adm/db.php:746
+#: code/adm/db.php:749
+#: code/adm/db.php:753
+#: code/adm/db.php:778
+#: code/adm/db.php:781
+#: code/adm/db.php:784
+#: code/adm/db.php:787
+#: code/adm/db.php:790
+#: code/adm/db.php:793
+#: code/adm/db.php:816
+#: code/adm/db.php:819
+#: code/adm/db.php:822
+#: code/adm/db.php:825
+#: code/adm/db.php:829
+#: code/adm/db.php:854
+#: code/adm/db.php:857
+#: code/adm/db.php:860
+#: code/adm/db.php:863
+#: code/adm/db.php:866
+#: code/adm/db.php:869
+#: code/adm/db.php:987
+#: code/adm/db.php:990
+#: code/adm/db.php:993
+#: code/adm/db.php:996
+#: code/adm/db.php:1000
+#: code/adm/db.php:1026
+#: code/adm/db.php:1029
+#: code/adm/db.php:1032
+#: code/adm/db.php:1035
+#: code/adm/db.php:1038
+#: code/adm/db.php:1042
+msgid "comments"
+msgstr "دیدگاه ها"
+
+#: code/adm/db.php:761
+#: code/adm/db.php:781
+#: code/adm/db.php:837
+#: code/adm/db.php:857
+#: code/adm/db.php:1008
+#: code/adm/db.php:1029
+msgid "hidden"
+msgstr "مخفی"
+
+#: code/adm/db.php:764
+#: code/adm/db.php:784
+#: code/adm/db.php:840
+#: code/adm/db.php:860
+#: code/adm/db.php:1011
+#: code/adm/db.php:1032
+msgid "locked"
+msgstr "قفل شده"
+
+#: code/adm/db.php:773
+#: code/adm/db.php:793
+#: code/adm/db.php:849
+#: code/adm/db.php:869
+#: code/adm/db.php:1021
+#: code/adm/db.php:1042
+msgid "everyone"
+msgstr "همه"
+
+#: code/adm/db.php:875
+#: code/adm/db.php:887
+msgid "inherit from category"
+msgstr "از دسته ارث رسیده"
+
+#: code/adm/db.php:878
+#: code/adm/db.php:890
+msgid "force hidden"
+msgstr "حتما مخفی باشد"
+
+#: code/adm/db.php:881
+#: code/adm/db.php:893
+msgid "normal activity"
+msgstr "فعالیت معمولی"
+
+#: code/adm/db.php:915
+msgid "review"
+msgstr "بازبینی"
+
+#: code/adm/db.php:950
+#: code/adm/db.php:952
+#: options/multis/results_post.php:146
+#: options/multis/results_post.php:147
+#: options/users.php:108
+#: options/users.php:113
+#: options/users.php:118
+#: options/users.php:123
+msgid "rating"
+msgstr "رتبه"
+
+#: code/adm/db.php:957
+#: options/categories.php:120
+msgid "no multi set assigned"
+msgstr "چند مجموعه ای تعریف نشده است"
+
+#: code/adm/db.php:957
+#: options/categories.php:118
+msgid "multi set"
+msgstr "چند مجموعه ای"
+
+#: code/adm/db.php:969
+#: code/adm/db.php:987
+#: code/adm/db.php:1005
+#: code/adm/db.php:1026
+msgid "parent"
+msgstr "اصلی"
+
+#: code/adm/db.php:1111
+#: options/users.php:107
+#: options/users.php:112
+#: options/users.php:117
+#: options/users.php:122
+msgid "votes"
+msgstr "رای"
+
+#: code/adm/db.php:1111
+msgid "thumbs"
+msgstr "ای ول"
+
+#: code/adm/db.php:1236
+msgid "All categories"
+msgstr "همه دسته ها"
+
+#: code/adm/db.php:1369
+#: options/setup/setup_uninstall.php:5
+msgid "UNINSTALL"
+msgstr "حذف برنامه"
+
+#: code/adm/elements.php:168
+msgid "No moderation"
+msgstr "بدون مدیریت"
+
+#: code/adm/elements.php:169
+msgid "Moderate visitors"
+msgstr "مدیریت بازدید کننده ها"
+
+#: code/adm/elements.php:170
+msgid "Moderate users"
+msgstr "مدیریت کاربران"
+
+#: code/adm/elements.php:171
+msgid "Moderate all"
+msgstr "مدیریت همه"
+
+#: code/adm/elements.php:172
+#: code/adm/elements.php:187
+#: code/adm/elements.php:201
+#: code/adm/elements.php:224
+#: options/elements/articles_options.php:248
+#: options/elements/articles_options.php:260
+#: options/elements/articles_options.php:274
+msgid "Inherit from Category"
+msgstr "ار دسته به ارث رسیده"
+
+#: code/adm/elements.php:173
+#: code/adm/elements.php:188
+#: code/adm/elements.php:202
+#: options/categories.php:234
+msgid "Inherit from Parent"
+msgstr "از شاخه اصلی به ارث رسیده"
+
+#: code/adm/elements.php:182
+msgid "Everyone can vote"
+msgstr "همه می توانند رای دهند"
+
+#: code/adm/elements.php:183
+msgid "Only visitors"
+msgstr "فقط بازدید کننده ها"
+
+#: code/adm/elements.php:184
+msgid "Only users"
+msgstr "فقط کاربران"
+
+#: code/adm/elements.php:185
+msgid "Locked"
+msgstr "قفل شده"
+
+#: code/adm/elements.php:186
+msgid "Locked and hidden"
+msgstr "قفل و مخفی شده"
+
+#: code/adm/elements.php:198
+msgid "No timer"
+msgstr "بدون تایمر"
+
+#: code/adm/elements.php:199
+msgid "Countdown timer"
+msgstr "تایمر شمارش معکوس"
+
+#: code/adm/elements.php:200
+msgid "Date limited"
+msgstr "تاریخ محدود شده"
+
+#: code/adm/elements.php:210
+#: code/adm/elements.php:312
+#: options/multis/editor.php:67
+#: options/multis/sets.php:107
+msgid "Bottom"
+msgstr "پایین"
+
+#: code/adm/elements.php:211
+#: code/adm/elements.php:310
+#: options/multis/editor.php:68
+#: options/multis/sets.php:104
+msgid "Top"
+msgstr "بالا"
+
+#: code/adm/elements.php:212
+msgid "Top and Bottom"
+msgstr "بالا و پایین"
+
+#: code/adm/elements.php:221
+#: options/articles.php:194
+#: options/articles.php:215
+#: options/categories.php:93
+msgid "Hours"
+msgstr "ساعت"
+
+#: code/adm/elements.php:222
+#: options/articles.php:197
+#: options/articles.php:218
+#: options/categories.php:96
+msgid "Days"
+msgstr "روز"
+
+#: code/adm/elements.php:223
+#: options/articles.php:200
+#: options/articles.php:221
+#: options/categories.php:99
+msgid "Months"
+msgstr "ماه"
+
+#: code/adm/elements.php:232
+#: code/adm/elements.php:245
+msgid "Mini"
+msgstr "کوچک"
+
+#: code/adm/elements.php:233
+#: code/adm/elements.php:246
+msgid "Icon"
+msgstr "آیکون"
+
+#: code/adm/elements.php:234
+#: code/adm/elements.php:247
+msgid "Small"
+msgstr "کوچک"
+
+#: code/adm/elements.php:235
+#: code/adm/elements.php:248
+#: options/elements/articles_options.php:253
+#: options/categories.php:213
+msgid "Standard"
+msgstr "استاندارد"
+
+#: code/adm/elements.php:236
+#: code/adm/elements.php:249
+msgid "Medium"
+msgstr "متوسط"
+
+#: code/adm/elements.php:237
+#: code/adm/elements.php:250
+msgid "Big"
+msgstr "بزرگ"
+
+#: code/adm/elements.php:266
+msgid "Stars and text"
+msgstr "ستاره و متن"
+
+#: code/adm/elements.php:267
+msgid "Stars only"
+msgstr "فقط ستاره"
+
+#: code/adm/elements.php:268
+msgid "Text only"
+msgstr "فقط متن"
+
+#: code/adm/elements.php:276
+msgid "No alignment"
+msgstr "بدون چینش"
+
+#: code/adm/elements.php:277
+#: code/adm/elements.php:314
+msgid "Left"
+msgstr "چپ"
+
+#: code/adm/elements.php:278
+msgid "Center"
+msgstr "وسط"
+
+#: code/adm/elements.php:279
+#: code/adm/elements.php:316
+msgid "Right"
+msgstr "راست"
+
+#: code/adm/elements.php:287
+msgid "No Animation"
+msgstr "بدون پویا نمایی"
+
+#: code/adm/elements.php:309
+msgid "Always hide"
+msgstr "همیشه پنهان"
+
+#: code/adm/elements.php:311
+msgid "Top (hide if empty)"
+msgstr "بالا ( اگر خالی بود ، پنهان شود)"
+
+#: code/adm/elements.php:313
+msgid "Bottom (hide if empty)"
+msgstr "پایین ( اگر خالی بود ، پنهان شود)"
+
+#: code/adm/elements.php:315
+msgid "Left (hide if empty)"
+msgstr "چپ ( اگر خالی بود ، پنهان شود)"
+
+#: code/adm/elements.php:317
+msgid "Right (hide if empty)"
+msgstr "راست ( اگر خالی بود ، پنهان شود)"
+
+#: code/adm/elements.php:374
+msgid "from"
+msgstr "از طرف"
+
+#: code/adm/elements.php:374
+msgid "on"
+msgstr "در مطلب"
+
+#: code/adm/elements.php:378
+msgid "ip"
+msgstr "آی پی"
+
+#: code/adm/elements.php:380
+msgid "log"
+msgstr "اطلاعات"
+
+#: code/adm/elements.php:330
+msgid "visitor"
+msgstr "بازدید کننده"
+
+#: code/adm/elements.php:334
+msgid "Thumb"
+msgstr "ای ول"
+
+#: code/adm/elements.php:341
+msgid "Multi Vote"
+msgstr "چند رای ای"
+
+#: code/adm/elements.php:343
+#: options/moderation.php:103
+#: options/users_log.php:111
+#: options/users_log.php:95
+#: options/voters.php:131
+#: options/voters.php:102
+msgid "Vote"
+msgstr "رای"
+
+#: code/adm/elements.php:350
+#: code/adm/elements.php:359
+msgid "post"
+msgstr "مطلب"
+
+#: code/adm/elements.php:354
+#: code/adm/elements.php:356
+msgid "comment"
+msgstr "دیدگاه"
+
+#: code/adm/elements.php:354
+msgid "for"
+msgstr "برای"
+
+#: code/adm/elements.php:367
+msgid "user"
+msgstr "کاربر"
+
+#: code/cls/import.php:11
+msgid "Data not imported."
+msgstr "اطلاعات وارد نشد"
+
+#: code/cls/import.php:15
+msgid "Plugin not available for import."
+msgstr "افزونه برای درون ریزی در دسترس نمی باشد."
+
+#: code/cls/import.php:61
+#: code/cls/import.php:80
+#: code/cls/import.php:140
+msgid "Data imported."
+msgstr "اطلاعات وارد شد."
+
+#: code/cls/render.php:32
+msgid "loading"
+msgstr "در حال بارگذاری"
+
+#: code/t2/render.php:1236
+msgid "(no title)"
+msgstr "(بدون عنوان)"
+
+#: code/t2/templates.php:4
+msgid "Element Word Votes"
+msgstr ""
+
+#: code/t2/templates.php:5
+msgid "Singular"
+msgstr "ساده"
+
+#: code/t2/templates.php:6
+msgid "Plural"
+msgstr "جمع"
+
+#: code/t2/templates.php:9
+msgid "Element For Alternating Table Rows"
+msgstr ""
+
+#: code/t2/templates.php:10
+msgid "Odd"
+msgstr ""
+
+#: code/t2/templates.php:11
+msgid "Even"
+msgstr ""
+
+#: code/t2/templates.php:14
+msgid "Standard Ratings Results"
+msgstr "نتایج آراء استاندارد"
+
+#: code/t2/templates.php:17
+#: code/t2/templates.php:51
+#: code/t2/templates.php:73
+#: code/t2/templates.php:110
+#: code/t2/templates.php:130
+#: code/t2/templates.php:155
+#: code/t2/templates.php:198
+#: code/t2/templates.php:231
+#: code/t2/templates.php:324
+#: code/t2/templates.php:355
+msgid "article rating"
+msgstr "رتبه دهی مقاله"
+
+#: code/t2/templates.php:18
+#: code/t2/templates.php:52
+#: code/t2/templates.php:76
+#: code/t2/templates.php:129
+#: code/t2/templates.php:199
+#: code/t2/templates.php:232
+#: code/t2/templates.php:245
+#: code/t2/templates.php:315
+msgid "maximum rating value"
+msgstr "بیشترین مقدار امتیاز"
+
+#: code/t2/templates.php:19
+#: code/t2/templates.php:200
+msgid "article review"
+msgstr "بازبینی مقاله"
+
+#: code/t2/templates.php:20
+#: code/t2/templates.php:201
+msgid "maximum review value"
+msgstr "بیشترین مقدار بازبینی"
+
+#: code/t2/templates.php:21
+#: code/t2/templates.php:53
+#: code/t2/templates.php:74
+#: code/t2/templates.php:111
+#: code/t2/templates.php:131
+#: code/t2/templates.php:156
+#: code/t2/templates.php:202
+#: code/t2/templates.php:234
+#: code/t2/templates.php:326
+#: code/t2/templates.php:357
+#: code/t2/templates.php:375
+#: code/t2/templates.php:392
+msgid "total votes for article"
+msgstr "کل آراء مقاله"
+
+#: code/t2/templates.php:22
+#: code/t2/templates.php:203
+msgid "title"
+msgstr "عنوان"
+
+#: code/t2/templates.php:23
+#: code/t2/templates.php:204
+msgid "clean name"
+msgstr "نام"
+
+#: code/t2/templates.php:24
+#: code/t2/templates.php:205
+msgid "taxonomy"
+msgstr "رده بندی"
+
+#: code/t2/templates.php:25
+#: code/t2/templates.php:109
+#: code/t2/templates.php:154
+#: code/t2/templates.php:206
+msgid "url to post/page"
+msgstr "آدرس مطلب/برگه"
+
+#: code/t2/templates.php:26
+#: code/t2/templates.php:50
+#: code/t2/templates.php:159
+#: code/t2/templates.php:185
+#: code/t2/templates.php:207
+#: code/t2/templates.php:249
+#: code/t2/templates.php:267
+#: code/t2/templates.php:268
+#: code/t2/templates.php:269
+msgid "rating stars"
+msgstr "ستاره های امتیاز"
+
+#: code/t2/templates.php:27
+#: code/t2/templates.php:208
+msgid "rating thumb"
+msgstr "امتیاز ای ول"
+
+#: code/t2/templates.php:28
+#: code/t2/templates.php:209
+#: code/t2/templates.php:233
+msgid "bayesian estimate mean rating"
+msgstr "میزان امتیاز پیش بینی شده"
+
+#: code/t2/templates.php:29
+#: code/t2/templates.php:210
+msgid "bayesian estimate mean rating stars"
+msgstr "تعداد ستاره های پیش بینی شده"
+
+#: code/t2/templates.php:30
+#: code/t2/templates.php:211
+msgid "article rating trend"
+msgstr "روند رتبه دهی مقاله"
+
+#: code/t2/templates.php:31
+#: code/t2/templates.php:212
+msgid "article voting trend"
+msgstr "روند رای گیری مقاله"
+
+#: code/t2/templates.php:32
+#: code/t2/templates.php:213
+msgid "article review stars"
+msgstr "ستاره های مقاله"
+
+#: code/t2/templates.php:33
+#: code/t2/templates.php:214
+#: code/t2/templates.php:235
+msgid "number of posts/pages"
+msgstr "تعداد مطالب/برگه ها"
+
+#: code/t2/templates.php:34
+#: code/t2/templates.php:215
+#: code/t2/templates.php:251
+msgid "results rank id"
+msgstr "شناسه رتبه نتایج"
+
+#: code/t2/templates.php:35
+#: code/t2/templates.php:54
+#: code/t2/templates.php:75
+#: code/t2/templates.php:112
+#: code/t2/templates.php:132
+#: code/t2/templates.php:157
+#: code/t2/templates.php:216
+#: code/t2/templates.php:314
+#: code/t2/templates.php:323
+#: code/t2/templates.php:354
+#: code/t2/templates.php:372
+#: code/t2/templates.php:389
+msgid "post/page id"
+msgstr "شناسه مطلب/برگه"
+
+#: code/t2/templates.php:36
+#: code/t2/templates.php:217
+msgid "image for the post/page"
+msgstr "تصویر مطلب/برگه"
+
+#: code/t2/templates.php:37
+#: code/t2/templates.php:218
+msgid "short post/page excerpt"
+msgstr "خلاصه کوتاهی از مطلب/برگه"
+
+#: code/t2/templates.php:38
+#: code/t2/templates.php:219
+msgid "name of the post/page author"
+msgstr "نام نویسنده مطلب/برگه"
+
+#: code/t2/templates.php:39
+#: code/t2/templates.php:220
+msgid "url to authors archive"
+msgstr "آدرس بایگانی نویسنده ها"
+
+#: code/t2/templates.php:40
+#: code/t2/templates.php:56
+#: code/t2/templates.php:67
+#: code/t2/templates.php:77
+#: code/t2/templates.php:133
+#: code/t2/templates.php:174
+#: code/t2/templates.php:221
+#: code/t2/templates.php:237
+#: code/t2/templates.php:256
+#: code/t2/templates.php:295
+#: code/t2/templates.php:330
+#: code/t2/templates.php:379
+msgid "singular/plural word votes"
+msgstr "آراء کلمات ساده/جمع"
+
+#: code/t2/templates.php:41
+#: code/t2/templates.php:101
+#: code/t2/templates.php:222
+#: code/t2/templates.php:257
+msgid "class for alternating row class"
+msgstr "کلاس تغییر کلاس ردیف"
+
+#: code/t2/templates.php:42
+#: code/t2/templates.php:223
+#: code/t2/templates.php:258
+msgid "auto generated row classes"
+msgstr "کلاس های ردیف خودکار تولید شده"
+
+#: code/t2/templates.php:43
+#: code/t2/templates.php:224
+#: code/t2/templates.php:259
+msgid "Header"
+msgstr "سربرگ"
+
+#: code/t2/templates.php:44
+#: code/t2/templates.php:102
+#: code/t2/templates.php:225
+#: code/t2/templates.php:260
+msgid "Item"
+msgstr "گزینه"
+
+#: code/t2/templates.php:45
+#: code/t2/templates.php:226
+#: code/t2/templates.php:261
+msgid "Footer"
+msgstr "پانویس"
+
+#: code/t2/templates.php:48
+msgid "Standard RSS Rating Block"
+msgstr "بلوک رتبه دهی استاندارد خوراک"
+
+#: code/t2/templates.php:55
+#: code/t2/templates.php:158
+#: code/t2/templates.php:184
+#: code/t2/templates.php:265
+#: code/t2/templates.php:266
+#: code/t2/templates.php:352
+#: code/t2/templates.php:397
+msgid "rating header text"
+msgstr "متن رتبه دهی سربرگ"
+
+#: code/t2/templates.php:57
+#: code/t2/templates.php:68
+#: code/t2/templates.php:89
+#: code/t2/templates.php:124
+#: code/t2/templates.php:145
+#: code/t2/templates.php:166
+#: code/t2/templates.php:176
+#: code/t2/templates.php:192
+#: code/t2/templates.php:238
+#: code/t2/templates.php:270
+#: code/t2/templates.php:277
+#: code/t2/templates.php:286
+#: code/t2/templates.php:296
+#: code/t2/templates.php:303
+#: code/t2/templates.php:310
+#: code/t2/templates.php:318
+#: code/t2/templates.php:342
+#: code/t2/templates.php:381
+msgid "Normal"
+msgstr "معمولی"
+
+#: code/t2/templates.php:60
+msgid "Comments Aggregated Rating"
+msgstr "امتیازات دیدگاه های دریافت شده"
+
+#: code/t2/templates.php:62
+#: code/t2/templates.php:171
+#: code/t2/templates.php:182
+#: code/t2/templates.php:244
+#: code/t2/templates.php:275
+#: code/t2/templates.php:291
+#: code/t2/templates.php:373
+#: code/t2/templates.php:390
+msgid "comment rating"
+msgstr "رتبه دهی دیدگاه"
+
+#: code/t2/templates.php:63
+#: code/t2/templates.php:172
+#: code/t2/templates.php:276
+#: code/t2/templates.php:283
+#: code/t2/templates.php:292
+msgid "maximum comment rating value"
+msgstr "بیشترین مقدار رتبه دهی دیدگاه"
+
+#: code/t2/templates.php:64
+msgid "total comments"
+msgstr "کل دیدگاه ها"
+
+#: code/t2/templates.php:65
+#: code/t2/templates.php:293
+msgid "total votes for all comment"
+msgstr "کل آراء برای همه دیدگاه ها"
+
+#: code/t2/templates.php:66
+#: code/t2/templates.php:274
+#: code/t2/templates.php:294
+msgid "comment rating stars"
+msgstr "ستاره های رتبه دهی دیدگاه"
+
+#: code/t2/templates.php:71
+msgid "Multi Ratings Text"
+msgstr "متن چند رای دهی"
+
+#: code/t2/templates.php:78
+#: code/t2/templates.php:134
+#: code/t2/templates.php:331
+msgid "remaining years"
+msgstr "سال های باقی مانده"
+
+#: code/t2/templates.php:79
+#: code/t2/templates.php:135
+#: code/t2/templates.php:332
+msgid "remaining months"
+msgstr "ماه های باقی مانده"
+
+#: code/t2/templates.php:80
+#: code/t2/templates.php:136
+#: code/t2/templates.php:333
+msgid "remaining days"
+msgstr "روز های باقی مانده"
+
+#: code/t2/templates.php:81
+#: code/t2/templates.php:137
+#: code/t2/templates.php:334
+msgid "remaining hours"
+msgstr "ساعات باقی مانده"
+
+#: code/t2/templates.php:82
+#: code/t2/templates.php:138
+#: code/t2/templates.php:335
+msgid "remaining minutes"
+msgstr "دقایق باقی مانده"
+
+#: code/t2/templates.php:83
+#: code/t2/templates.php:139
+#: code/t2/templates.php:336
+msgid "remaining seconds"
+msgstr "ثانیه های باقی مانده"
+
+#: code/t2/templates.php:84
+#: code/t2/templates.php:140
+#: code/t2/templates.php:337
+msgid "end voting date"
+msgstr "تاریخ پایان رای گیری"
+
+#: code/t2/templates.php:85
+#: code/t2/templates.php:141
+#: code/t2/templates.php:338
+msgid "total remaining days"
+msgstr "کل روز های باقی مانده"
+
+#: code/t2/templates.php:86
+#: code/t2/templates.php:142
+#: code/t2/templates.php:339
+msgid "total remaining hours"
+msgstr "کل ساعات باقی مانده"
+
+#: code/t2/templates.php:87
+#: code/t2/templates.php:143
+#: code/t2/templates.php:340
+msgid "total remaining minutes"
+msgstr "کل دقایق باقی مانده"
+
+#: code/t2/templates.php:88
+#: code/t2/templates.php:144
+#: code/t2/templates.php:175
+#: code/t2/templates.php:329
+#: code/t2/templates.php:360
+#: code/t2/templates.php:378
+#: code/t2/templates.php:395
+msgid "saved vote value"
+msgstr "مقدار رای ذخیره شده"
+
+#: code/t2/templates.php:90
+#: code/t2/templates.php:146
+#: code/t2/templates.php:343
+msgid "Time Restricted Active"
+msgstr ""
+
+#: code/t2/templates.php:91
+#: code/t2/templates.php:147
+#: code/t2/templates.php:344
+msgid "Time Restricted Closed"
+msgstr ""
+
+#: code/t2/templates.php:92
+#: code/t2/templates.php:148
+#: code/t2/templates.php:177
+#: code/t2/templates.php:345
+#: code/t2/templates.php:382
+msgid "Vote Saved"
+msgstr "رای شما ذخیره شد"
+
+#: code/t2/templates.php:95
+msgid "Multi Ratings Stars"
+msgstr "ستاره های چند رایی"
+
+#: code/t2/templates.php:97
+msgid "single element name"
+msgstr ""
+
+#: code/t2/templates.php:98
+msgid "single element id"
+msgstr ""
+
+#: code/t2/templates.php:99
+msgid "single element stars"
+msgstr ""
+
+#: code/t2/templates.php:100
+msgid "single element value"
+msgstr "مقدار عنصر تکی"
+
+#: code/t2/templates.php:105
+msgid "Multi Ratings Block"
+msgstr "بلوک رتبه دهی چندتایی"
+
+#: code/t2/templates.php:108
+#: code/t2/templates.php:153
+msgid "post/page title"
+msgstr "عنوان مطلب/برگه"
+
+#: code/t2/templates.php:113
+msgid "multi rating header text"
+msgstr "متن سربرگ چندرایی"
+
+#: code/t2/templates.php:114
+msgid "multi rating text"
+msgstr "متن چند رای ای"
+
+#: code/t2/templates.php:115
+#: code/t2/templates.php:282
+#: code/t2/templates.php:301
+#: code/t2/templates.php:308
+msgid "multi rating stars"
+msgstr "ستاره های چند رایی"
+
+#: code/t2/templates.php:116
+#: code/t2/templates.php:161
+#: code/t2/templates.php:187
+#: code/t2/templates.php:302
+#: code/t2/templates.php:309
+#: code/t2/templates.php:361
+#: code/t2/templates.php:398
+msgid "css class for whole block"
+msgstr "کلاس css برای کل بلوک"
+
+#: code/t2/templates.php:117
+#: code/t2/templates.php:162
+#: code/t2/templates.php:188
+#: code/t2/templates.php:362
+#: code/t2/templates.php:399
+msgid "css class for header"
+msgstr "کلاس css برای سربرگ"
+
+#: code/t2/templates.php:118
+#: code/t2/templates.php:119
+#: code/t2/templates.php:164
+#: code/t2/templates.php:190
+#: code/t2/templates.php:364
+#: code/t2/templates.php:401
+msgid "css class for rating text"
+msgstr "کلاس css برای متن رتبه دهی"
+
+#: code/t2/templates.php:120
+msgid "rating button"
+msgstr "دکمه رتبه دهی"
+
+#: code/t2/templates.php:121
+#: code/t2/templates.php:284
+#: code/t2/templates.php:316
+msgid "average rating"
+msgstr "رتبه میانگین"
+
+#: code/t2/templates.php:122
+#: code/t2/templates.php:285
+#: code/t2/templates.php:317
+msgid "average rating stars"
+msgstr "ستاره های رتبه میانگین"
+
+#: code/t2/templates.php:123
+#: code/t2/templates.php:165
+#: code/t2/templates.php:191
+#: code/t2/templates.php:341
+#: code/t2/templates.php:365
+#: code/t2/templates.php:380
+#: code/t2/templates.php:402
+msgid "auto generated css"
+msgstr "CSS تولید شده خودکار"
+
+#: code/t2/templates.php:127
+msgid "Standard Ratings Text"
+msgstr "متن استاندارد رتبه دهی"
+
+#: code/t2/templates.php:151
+msgid "Standard Ratings Block"
+msgstr "بلوک استاندارد رتبه دهی"
+
+#: code/t2/templates.php:160
+#: code/t2/templates.php:186
+#: code/t2/templates.php:353
+#: code/t2/templates.php:396
+msgid "rating text"
+msgstr "متن رتبه دهی"
+
+#: code/t2/templates.php:163
+#: code/t2/templates.php:189
+#: code/t2/templates.php:363
+#: code/t2/templates.php:400
+msgid "css class for stars"
+msgstr "کلاس css برای ستاره ها"
+
+#: code/t2/templates.php:169
+msgid "Comments Ratings Text"
+msgstr "متن رتبه دهی دیدگاه ها"
+
+#: code/t2/templates.php:173
+#: code/t2/templates.php:183
+#: code/t2/templates.php:246
+msgid "total votes for comment"
+msgstr "کل آراء دیدگاه"
+
+#: code/t2/templates.php:180
+msgid "Comments Ratings Block"
+msgstr "بلوک رتبه دهی دیدگاه"
+
+#: code/t2/templates.php:195
+msgid "Widget Star Rating"
+msgstr "ستاره ابزارک رتبه دهی"
+
+#: code/t2/templates.php:229
+msgid "Widget Blog Rating"
+msgstr "رتبه دهی ابزارک وبلاگ"
+
+#: code/t2/templates.php:236
+#: code/t2/templates.php:325
+#: code/t2/templates.php:356
+msgid "article percentage rating"
+msgstr "رتبه دهی درصدی مقاله"
+
+#: code/t2/templates.php:241
+msgid "Widget Comments Rating"
+msgstr "ابزارک رتبه دهی دیدگاه ها"
+
+#: code/t2/templates.php:247
+msgid "comment contents"
+msgstr "محتویات دیدگاه"
+
+#: code/t2/templates.php:248
+msgid "url to comment"
+msgstr "آدرس دیدگاه"
+
+#: code/t2/templates.php:250
+msgid "post id"
+msgstr "شناسه مطلب"
+
+#: code/t2/templates.php:252
+msgid "comment id"
+msgstr "شناسه دیدگاه"
+
+#: code/t2/templates.php:253
+msgid "name of the comments author"
+msgstr "نام نویسنده دیدگاه"
+
+#: code/t2/templates.php:254
+msgid "authors url"
+msgstr "آدرس نویسندگان"
+
+#: code/t2/templates.php:255
+msgid "authors avatar"
+msgstr "شکلک نویسندگان"
+
+#: code/t2/templates.php:264
+msgid "Standard Review Rating Block"
+msgstr "بلوک استاندارد رتبه دهی بازبینی"
+
+#: code/t2/templates.php:273
+msgid "Comments Review Rating Block"
+msgstr "بلوک استاندارد رتبه دهی دیدگاه ها"
+
+#: code/t2/templates.php:280
+msgid "Multi Review Rating Block"
+msgstr "بلوک چند رتبه دهی بازبینی"
+
+#: code/t2/templates.php:289
+msgid "Aggregated Comments Review Rating"
+msgstr "رتبه دهی بازبینی دیدگاه های دریافتی"
+
+#: code/t2/templates.php:299
+msgid "Multi Review Editor"
+msgstr "ویرایشگر چند بازبینی"
+
+#: code/t2/templates.php:306
+msgid "Multi Rating Comment Integration"
+msgstr ""
+
+#: code/t2/templates.php:313
+msgid "Multi Rating Comment Integration Result"
+msgstr ""
+
+#: code/t2/templates.php:321
+msgid "Thumbs Article Ratings Text"
+msgstr "متن ایول  رتبه مقاله"
+
+#: code/t2/templates.php:327
+#: code/t2/templates.php:358
+#: code/t2/templates.php:376
+#: code/t2/templates.php:393
+msgid "total up votes for article"
+msgstr "کل آراء مثبت به مقاله"
+
+#: code/t2/templates.php:328
+#: code/t2/templates.php:359
+#: code/t2/templates.php:377
+#: code/t2/templates.php:394
+msgid "total down votes for article"
+msgstr "کل آراء منفی مقاله"
+
+#: code/t2/templates.php:348
+msgid "Thumbs Article Rating Block"
+msgstr "بلوک رتبه دهی ایول مقالات"
+
+#: code/t2/templates.php:350
+#: code/t2/templates.php:387
+msgid "thumb down image style"
+msgstr "استایل تصویر رای منفی"
+
+#: code/t2/templates.php:351
+#: code/t2/templates.php:388
+msgid "thumb up image style"
+msgstr "استایل تصویر رای مثبت"
+
+#: code/t2/templates.php:366
+#: code/t2/templates.php:403
+msgid "Inactive"
+msgstr "غیرفعال"
+
+#: code/t2/templates.php:367
+#: code/t2/templates.php:404
+msgid "Active"
+msgstr "فعال"
+
+#: code/t2/templates.php:370
+msgid "Thumbs Comment Ratings Text"
+msgstr "متن ایول رتبه دیدگاه"
+
+#: code/t2/templates.php:374
+#: code/t2/templates.php:391
+msgid "comment percentage rating"
+msgstr ""
+
+#: code/t2/templates.php:385
+msgid "Thumbs Comment Rating Block"
+msgstr ""
+
+#: code/wdg/widgets_wp28.php:5
+msgid "Customized rating results list."
+msgstr ""
+
+#: code/wdg/widgets_wp28.php:107
+msgid "Overall blog rating results."
+msgstr ""
+
+#: code/wdg/widgets_wp28.php:149
+msgid "Current post comments rating."
+msgstr ""
+
+#: code/class.php:648
+#: code/class.php:649
+msgid "Multi Ratings Review"
+msgstr ""
+
+#: code/class.php:652
+msgid "Front Page"
+msgstr "صفحه اصلی"
+
+#: code/class.php:654
+#: code/class.php:656
+#: options/my.php:12
+msgid "My Ratings"
+msgstr "رتبه های من"
+
+#: code/class.php:658
+#: options/builder.php:2
+msgid "Builder"
+msgstr "سازنده"
+
+#: code/class.php:660
+#: options/builder/shortcode.php:11
+#: options/builder/shortcode.php:12
+#: options/builder/shortcode.php:13
+#: options/multis/results_post.php:175
+#: options/articles.php:104
+#: options/categories.php:148
+#: options/settings.php:45
+#: options/settings.php:48
+#: tinymce3/window.php:63
+#: tinymce3/window.php:64
+#: tinymce3/window.php:65
+msgid "Articles"
+msgstr "مقالات"
+
+#: code/class.php:661
+#: options/multis/editor.php:77
+#: options/multis/results_post.php:116
+#: options/categories.php:49
+msgid "Categories"
+msgstr "دسته ها"
+
+#: code/class.php:665
+#: options/multis/sets.php:43
+msgid "Multi Sets"
+msgstr "بسته های چندتایی"
+
+#: code/class.php:667
+#: code/class.php:897
+#: options/builder.php:7
+#: options/settings.php:37
+#: tinymce3/panels/articlesrater.php:11
+#: tinymce3/panels/multis.php:20
+#: tinymce3/panels/thumbsrating.php:11
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: code/class.php:668
+#: options/builder/settings.php:4
+#: options/gfx.php:55
+#: tinymce3/window.php:36
+#: widgets/rating/part_stars.php:4
+#: widgets/rating/part_stars.php:12
+#: widgets/rating_28/part_stars.php:4
+#: widgets/rating_28/part_stars.php:12
+msgid "Graphics"
+msgstr "گرافیک"
+
+#: code/class.php:669
+#: options/templates.php:20
+msgid "T2 Templates"
+msgstr "قالب های T2"
+
+#: code/class.php:672
+#: options/settings/settings_administration.php:13
+#: options/ips.php:69
+#: options/users_log.php:183
+msgid "IP's"
+msgstr "آی پی ها"
+
+#: code/class.php:674
+#: gdt2/form_files.php:22
+#: gdt2/form_files.php:33
+#: options/settings/settings_administration.php:5
+msgid "Import"
+msgstr "درون ریزی"
+
+#: code/class.php:676
+#: gdt2/form_files.php:4
+#: gdt2/form_files.php:12
+#: options/export/export_users.php:53
+#: options/export/export_users.php:56
+#: options/settings/settings_administration.php:11
+msgid "Export"
+msgstr "برون ریزی"
+
+#: code/class.php:680
+#: options/gfx.php:62
+#: options/templates.php:28
+#: options/tools.php:0
+msgid "Tools"
+msgstr "ابزارات"
+
+#: code/class.php:681
+#: options/settings/settings_administration.php:7
+#: options/setup.php:48
+msgid "Setup"
+msgstr "تنظیم"
+
+#: code/class.php:969
+#: code/class.php:972
+msgid "Latest"
+msgstr "آخرین ها"
+
+#: code/class.php:1531
+msgid "articles records from log table removed."
+msgstr "اطلاعات مقالات از جدول اطلاعات حذف شده است."
+
+#: code/class.php:1533
+msgid "comments records from log table removed."
+msgstr "اطلاعات دیدگاه ها از جدول اطلاعات حذف شده است."
+
+#: code/class.php:1537
+msgid "articles records from trends log table removed."
+msgstr "اطلاعات مقالات از جدول اطلاعات حذف شده است."
+
+#: code/class.php:1539
+msgid "comments records from trends log table removed."
+msgstr "اطلاعات دیدگاه ها از جدول اطلاعات حذف شده است."
+
+#: code/class.php:1543
+msgid "dead articles records from articles table."
+msgstr "اطلاعات مقالات حذف شده از جدول مقالات حذف شده است."
+
+#: code/class.php:1545
+msgid "post revisions records from articles table."
+msgstr "اطلاعات بازبینی مطلب از جدول مقالات حذف شده است."
+
+#: code/class.php:1547
+msgid "dead comments records from comments table."
+msgstr "اطلاعات دیدگاه های حذف شده از جدول دیدگاه ها حذف شده است."
+
+#: code/class.php:1551
+msgid "dead articles records from multi ratings tables."
+msgstr "اطلاعات مقالات حذف شده از جداول چندرای یی ها"
+
+#: code/class.php:1553
+msgid "post revisions records from multi ratings tables."
+msgstr "اطلاعات بازبینی مطلب از جداول چند رای یی ها "
+
+#: gdt2/classes.php:183
+msgid "All Sections"
+msgstr "همه بخش ها"
+
+#: gdt2/form_defaults.php:4
+#: gdt2/form_dependencies.php:10
+#: gdt2/form_list.php:43
+#: options/multis/sets.php:59
+#: options/articles.php:139
+#: options/users.php:59
+#: options/voters.php:129
+#: tinymce3/panels/filter.php:55
+#: widgets/rating/part_filter.php:87
+#: widgets/rating_28/part_filter.php:87
+msgid "ID"
+msgstr "شناسه"
+
+#: gdt2/form_defaults.php:5
+#: gdt2/form_list.php:45
+msgid "Section / Type"
+msgstr "بخش / نوع"
+
+#: gdt2/form_defaults.php:6
+#: gdt2/form_editor.php:60
+#: tinymce3/panels/articlesrater.php:6
+#: tinymce3/panels/articlesreview.php:6
+#: tinymce3/panels/blograting.php:1
+#: tinymce3/panels/commentsaggr.php:6
+#: tinymce3/panels/multis.php:1
+#: tinymce3/panels/multisreview.php:1
+#: tinymce3/panels/styles.php:1
+#: tinymce3/panels/thumbsrating.php:6
+#: widgets/comments/part_basic.php:8
+#: widgets/comments_28/part_basic.php:8
+#: widgets/rating/part_basic.php:9
+#: widgets/rating_28/part_basic.php:8
+#: widgets/top/part_basic.php:8
+#: widgets/top_28/part_basic.php:8
+msgid "Template"
+msgstr "قالب"
+
+#: gdt2/form_defaults.php:7
+#: gdt2/form_editor.php:43
+#: gdt2/form_list.php:47
+msgid "Options"
+msgstr "تنظیمات"
+
+#: gdt2/form_defaults.php:37
+#: gdt2/form_dependencies.php:47
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#: gdt2/form_dependencies.php:11
+#: options/ips/ips_list.php:40
+msgid "Type"
+msgstr "نوع"
+
+#: gdt2/form_dependencies.php:12
+#: gdt2/form_editor.php:54
+#: gdt2/form_list.php:44
+#: options/multis/editor.php:27
+#: options/multis/editor.php:93
+#: options/multis/sets.php:60
+#: options/users.php:58
+#: options/voters.php:130
+msgid "Name"
+msgstr "نام"
+
+#: gdt2/form_dependencies.php:13
+#: options/templates.php:26
+msgid "Dependencies"
+msgstr "تبعات"
+
+#: gdt2/form_editor.php:21
+msgid "Template Editor"
+msgstr "ویرایشگر قالب"
+
+#: gdt2/form_editor.php:29
+msgid "Editor"
+msgstr "ویرایشگر"
+
+#: gdt2/form_editor.php:31
+#: options/multis/editor.php:87
+msgid "Elements"
+msgstr "عناصر"
+
+#: gdt2/form_editor.php:36
+#: options/front/front_right.php:4
+msgid "Info"
+msgstr "اطلاعات"
+
+#: gdt2/form_editor.php:45
+msgid "Set this template as default for this type of templates."
+msgstr "این قالب را به عنوان پیش فرض این نوع قالب ها قرار بده."
+
+#: gdt2/form_editor.php:48
+msgid "Set this template as a dependency for all other templates that use it."
+msgstr "این قالب را تبعه همه قالب هایی قرار بده که از آن استفاده می کنند."
+
+#: gdt2/form_editor.php:52
+#: options/builder/settings.php:2
+#: tinymce3/window.php:34
+msgid "General"
+msgstr "عمومی"
+
+#: gdt2/form_editor.php:56
+#: gdt2/form_editor.php:69
+#: options/multis/editor.php:32
+msgid "Description"
+msgstr "توضیح"
+
+#: gdt2/form_editor.php:78
+msgid "All tag elements"
+msgstr "همه عناصر برچسب"
+
+#: gdt2/form_editor.php:79
+msgid "No tag elements allowed"
+msgstr "هیچ عنصر برچسبی مجاز نیست."
+
+#: gdt2/form_editor.php:91
+msgid "Save Template"
+msgstr "ذخیره قالب"
+
+#: gdt2/form_editor.php:101
+msgid "Select template to use for this element:"
+msgstr "قالبی را برای این عنصر برگزینید:"
+
+#: gdt2/form_editor.php:40
+msgid "Creating new template"
+msgstr "درحال ایجاد قالب جدید"
+
+#: gdt2/form_editor.php:70
+msgid "Allowed elements"
+msgstr "عناصر مجاز"
+
+#: gdt2/form_files.php:1
+msgid "Export Own Templates"
+msgstr "برون دهی قالب های خود"
+
+#: gdt2/form_files.php:3
+msgid "This will export all templates you created into a file."
+msgstr "این کار باعث برون دهی همه قالب های شما در یک فایل می شود."
+
+#: gdt2/form_files.php:6
+msgid "Exported file will contain names, descriptions and contents of templates. File will be in CSV format."
+msgstr "فایل برون دهی شده شامل نام، توضیح و خود قالب می شود.فایل به فرمت CSV است."
+
+#: gdt2/form_files.php:9
+msgid "Export All Templates"
+msgstr "برون دهی همه قالب ها"
+
+#: gdt2/form_files.php:11
+msgid "This will export all templates and their dependencies."
+msgstr "این کار باعث برون دهی قالب و وابسته هایش می شود."
+
+#: gdt2/form_files.php:14
+msgid "Exported file will contain full structure of the database table. File will be in CSV format. This is useful if you need to transfer everything the way it is to another website."
+msgstr "فایل برون دهی شده شامل ساختار کامل بانک اطلاعاتی میشود. فایل در فرمت CSV است و مفید برای انتقال کامل به سایت دیگر است."
+
+#: gdt2/form_files.php:17
+msgid "Import Own Templates"
+msgstr "درون ریزی قالب های خود"
+
+#: gdt2/form_files.php:19
+msgid "Use this to import templates you made. File must be generated with first export tool."
+msgstr "از این ابزار برای درون ریزی قالب های ساخت خود استفاده کنید. فایل باید با ابزار برون ریزی ساخته شده باشد."
+
+#: gdt2/form_files.php:25
+msgid "Once imported, these templates will use default dependencies."
+msgstr "بعد از درون ریزی ، این قالب ها پیش فرض می شوند."
+
+#: gdt2/form_files.php:28
+msgid "Import All Templates"
+msgstr "درون ریزی همه قالب ها"
+
+#: gdt2/form_files.php:30
+msgid "Use this to import all templates. File must be generated with second export tool."
+msgstr "از این ابزار برای درون ریزی همه قالب ها استفاده کنید. فایل باید با ابزار برون ریزی ساخته شده باشد."
+
+#: gdt2/form_files.php:36
+msgid "Before import, all existing templates will be deleted. All dependencies from the file will be preserved."
+msgstr "قبل از درون ریزی، همه قالب های فعلی حذف می شوند . همه وابسته ها حفظ می شوند."
+
+#: gdt2/form_list.php:33
+#: gdt2/form_list.php:15
+#: options/multis/results_post.php:96
+#: options/multis/results_post.php:26
+#: options/multis/results_set.php:22
+#: options/articles.php:122
+#: options/articles.php:23
+#: options/users_log.php:97
+#: options/users_log.php:23
+#: options/voters.php:104
+#: options/voters.php:32
+#: tinymce3/panels/blograting.php:6
+#: tinymce3/panels/commentsaggr.php:11
+#: tinymce3/window.php:35
+#: widgets/comments/part_filter.php:4
+#: widgets/comments/part_filter.php:12
+#: widgets/comments_28/part_filter.php:4
+#: widgets/comments_28/part_filter.php:12
+#: widgets/rating/part_filter.php:4
+#: widgets/rating/part_filter.php:12
+#: widgets/rating_28/part_filter.php:4
+#: widgets/rating_28/part_filter.php:12
+#: widgets/top/part_filter.php:4
+#: widgets/top/part_filter.php:12
+#: widgets/top_28/part_filter.php:4
+#: widgets/top_28/part_filter.php:12
+msgid "Filter"
+msgstr "فیلتر"
+
+#: gdt2/form_list.php:46
+msgid "Tag"
+msgstr "برچسب"
+
+#: gdt2/form_list.php:86
+msgid "Map with dependencies for templates"
+msgstr "ترسیم کردن همه تبعات قالب"
+
+#: gdt2/form_list.php:87
+msgid "T2 Templates Map"
+msgstr "ترسیم قالب های T2"
+
+#: gdt2/form_list.php:92
+msgid "New template for:"
+msgstr "قالب های جدید برای:"
+
+#: gdt2/form_list.php:94
+msgid "Create"
+msgstr "ایجاد"
+
+#: gdt2/form_list.php:67
+msgid "delete"
+msgstr "حذف"
+
+#: gdt2/form_list.php:68
+msgid "edit"
+msgstr "ویرایش"
+
+#: gdt2/form_list.php:70
+msgid "duplicate"
+msgstr "ساخت نسخه دوم"
+
+#: integrate/dash_latest.php:7
+msgid "Articles Log"
+msgstr "اطلاعات مقالات"
+
+#: integrate/dash_latest.php:8
+msgid "Users Log"
+msgstr "اطلاعات کاربران"
+
+#: integrate/edit.php:2
+msgid "Standard Post Review"
+msgstr "بازبینی استاندارد مطلب"
+
+#: integrate/edit.php:7
+msgid "Value"
+msgstr "مقدار"
+
+#: integrate/edit.php:22
+msgid "Post Stars Rating"
+msgstr "رتبه دهی ستاره ای مطلب"
+
+#: integrate/edit.php:27
+#: integrate/edit.php:78
+#: integrate/edit.php:130
+#: integrate/edit.php:150
+msgid "Vote Rule"
+msgstr "قوانین رای دهی"
+
+#: integrate/edit.php:33
+#: integrate/edit.php:84
+#: integrate/edit.php:136
+#: integrate/edit.php:156
+msgid "Moderate"
+msgstr "مدیریت"
+
+#: integrate/edit.php:43
+#: integrate/edit.php:94
+#: options/elements/articles_options.php:60
+#: options/elements/articles_options.php:123
+#: options/multis/results_post.php:216
+#: options/categories.php:179
+msgid "Restriction"
+msgstr "محدودیت"
+
+#: integrate/edit.php:52
+#: integrate/edit.php:103
+#: options/elements/articles_options.php:67
+#: options/elements/articles_options.php:131
+#: options/multis/results_post.php:223
+#: options/categories.php:186
+#: tinymce3/panels/filter.php:87
+msgid "Date"
+msgstr "تاریخ"
+
+#: integrate/edit.php:62
+#: integrate/edit.php:113
+#: options/elements/articles_options.php:66
+#: options/elements/articles_options.php:130
+#: options/multis/results_post.php:222
+#: options/categories.php:185
+msgid "Countdown"
+msgstr "شمارش معکوس"
+
+#: integrate/edit.php:73
+msgid "Post Thumbs Rating"
+msgstr "رتبه ایول مطلب"
+
+#: integrate/edit.php:125
+msgid "Comment Stars Rating"
+msgstr "رتبه دهی ستاره ای دیدگاه"
+
+#: integrate/edit.php:145
+msgid "Comment Thumbs Rating"
+msgstr "رتبه دهی ایول دیدگاه"
+
+#: integrate/edit.php:166
+msgid "Comment Integration Ratings"
+msgstr "رتبه دهی همسان سازی دیدگاه"
+
+#: integrate/edit_multi.php:1
+msgid "You don't have any multi rating sets defined. Create at least one set."
+msgstr "چند رای یی برای خود تنظیم نکرده اید، حداقل یک مجموعه برای خود ایجاد کنید."
+
+#: integrate/edit_multi.php:11
+#: options/tools/tools_bulk.php:96
+#: tinymce3/panels/articlesrater.php:19
+#: tinymce3/panels/articlesreview.php:24
+#: tinymce3/panels/multis.php:9
+#: tinymce3/panels/multis.php:28
+#: tinymce3/panels/multis.php:48
+#: tinymce3/panels/multisreview.php:9
+#: tinymce3/panels/multisreview.php:34
+#: tinymce3/panels/multisreview.php:54
+#: tinymce3/panels/styles.php:60
+#: tinymce3/panels/styles.php:80
+#: tinymce3/panels/styles.php:100
+#: widgets/comments/part_stars.php:13
+#: widgets/comments_28/part_stars.php:13
+msgid "Set"
+msgstr "مجموعه"
+
+#: integrate/edit_multi.php:18
+msgid "To change the active set, you need to select the set you want from the list on the left, and save this article to accept the change."
+msgstr ""
+
+#: integrate/edit_multi.php:20
+msgid "All values for all sets will be saved in the database. This allows different multi rating sets reviews."
+msgstr "کل مقادیر برای همه دسته ها در بانک اطلاعاتی ذخیره می شوند. تا مجاز به استفاده از چند دسته بازبینی باشید."
+
+#: integrate/edit_multi.php:31
+msgid "Clear"
+msgstr "ازنو"
+
+#: integrate/edit_multi.php:32
+msgid "Revert"
+msgstr "معکوس"
+
+#: integrate/edit_multi.php:27
+msgid "Set ID"
+msgstr "تنظیم شناسه"
+
+#: integrate/edit_multi.php:28
+#: options/multis/results_post.php:78
+msgid "Set Name"
+msgstr "تنظیم نام"
+
+#: options/builder/settings.php:3
+msgid "Filter    "
+msgstr "فیلتر"
+
+#: options/builder/settings.php:5
+#: options/settings/settings_special.php:12
+#: options/settings/settings_special.php:45
+#: tinymce3/panels/general.php:37
+#: tinymce3/window.php:37
+#: widgets/rating/part_basic.php:49
+#: widgets/rating_28/part_basic.php:49
+msgid "Multi Rating"
+msgstr "چند رتبه ای"
+
+#: options/builder/settings.php:6
+#: options/settings/settings_special.php:13
+#: tinymce3/window.php:38
+msgid "Multi Review"
+msgstr "چند بررسی"
+
+#: options/builder/settings.php:7
+#: tinymce3/window.php:39
+msgid "Articles Review"
+msgstr "خلاصه مطلب"
+
+#: options/builder/settings.php:8
+#: tinymce3/panels/articlesrater.php:1
+#: tinymce3/window.php:40
+msgid "Articles Rating Block"
+msgstr "بلوک رتبه دهی مقالات"
+
+#: options/builder/settings.php:9
+#: tinymce3/window.php:41
+msgid "Aggregated Comments"
+msgstr "دیدگاه های دریافتی"
+
+#: options/builder/settings.php:10
+#: tinymce3/window.php:42
+msgid "Blog Rating"
+msgstr "رتبه دهی وبلاگ"
+
+#: options/builder/settings.php:11
+#: options/settings/settings_special.php:14
+#: options/settings/settings_special.php:46
+#: tinymce3/panels/general.php:38
+#: tinymce3/window.php:43
+#: widgets/rating/part_basic.php:51
+#: widgets/rating_28/part_basic.php:50
+#: widgets/top/part_basic.php:28
+#: widgets/top_28/part_basic.php:28
+msgid "Thumbs Rating"
+msgstr "رتبه دهی ایول"
+
+#: options/builder/shortcode.php:2
+msgid "Select code:"
+msgstr "انتخاب کد:"
+
+#: options/builder/shortcode.php:5
+#: options/builder/shortcode.php:6
+#: tinymce3/window.php:57
+#: tinymce3/window.php:58
+msgid "Results"
+msgstr "نتایج"
+
+#: options/builder/shortcode.php:8
+#: options/builder/shortcode.php:9
+#: tinymce3/window.php:60
+#: tinymce3/window.php:61
+msgid "Multi"
+msgstr "چندتایی"
+
+#: options/builder/shortcode.php:15
+#: options/my/my_general.php:27
+#: options/articles.php:237
+#: options/categories.php:246
+#: options/charts.php:7
+#: options/comments.php:30
+#: options/settings.php:46
+#: options/settings.php:49
+#: tinymce3/window.php:67
+msgid "Comments"
+msgstr "دیدگاه ها"
+
+#: options/builder/shortcode.php:23
+msgid "Shortcode:"
+msgstr "کدهای کوتاه"
+
+#: options/builder/shortcode.php:32
+msgid "Function:"
+msgstr "عملگر"
+
+#: options/builder/shortcode.php:38
+msgid "Rebuild"
+msgstr "ساخت مجدد"
+
+#: options/builder/shortcode.php:40
+msgid "List of all functions with additional parameters"
+msgstr "لیست همه عملگر ها با پارامتر های اضافی"
+
+#: options/builder/shortcode.php:41
+msgid "Functions"
+msgstr "عملگر ها"
+
+#: options/charts/post_charts.php:48
+#: options/comments.php:80
+#: options/users_log.php:191
+msgid "Votes"
+msgstr "آراء"
+
+#: options/charts/post_charts.php:49
+#: options/settings/settings_articles.php:10
+#: options/settings/settings_comments.php:10
+#: options/settings/settings_multis.php:10
+#: options/settings/settings_thumbs_articles.php:1
+#: options/settings/settings_thumbs_comments.php:1
+#: tinymce3/panels/filter.php:53
+#: widgets/comments/part_filter.php:46
+#: widgets/comments_28/part_filter.php:46
+#: widgets/rating/part_filter.php:85
+#: widgets/rating_28/part_filter.php:85
+msgid "Rating"
+msgstr "میانگین رتبه"
+
+#: options/elements/articles_options.php:7
+msgid "Stars for Articles"
+msgstr "ستاره های مقالات"
+
+#: options/elements/articles_options.php:14
+#: options/elements/articles_options.php:89
+#: options/elements/articles_options.php:154
+#: options/elements/articles_options.php:197
+#: options/multis/results_post.php:178
+#: options/categories.php:151
+#: options/categories.php:249
+#: options/comments.php:123
+#: options/moderation.php:138
+#: options/users_log.php:194
+#: options/voters.php:174
+msgid "Delete"
+msgstr "حذف"
+
+#: options/elements/articles_options.php:19
+#: options/elements/articles_options.php:94
+#: options/elements/articles_options.php:159
+#: options/elements/articles_options.php:202
+#: options/multis/results_post.php:183
+#: options/categories.php:156
+#: options/categories.php:254
+#: options/comments.php:126
+msgid "Visitors"
+msgstr "بازدید کننده ها"
+
+#: options/elements/articles_options.php:20
+#: options/elements/articles_options.php:95
+#: options/elements/articles_options.php:160
+#: options/elements/articles_options.php:203
+#: options/multis/results_post.php:184
+#: options/categories.php:157
+#: options/categories.php:255
+#: options/comments.php:127
+#: options/users.php:45
+msgid "Users"
+msgstr "کاربران"
+
+#: options/elements/articles_options.php:21
+#: options/elements/articles_options.php:96
+#: options/elements/articles_options.php:161
+#: options/elements/articles_options.php:204
+#: options/multis/results_post.php:185
+#: options/categories.php:158
+#: options/categories.php:256
+#: options/comments.php:128
+msgid "All"
+msgstr "همه"
+
+#: options/elements/articles_options.php:26
+#: options/multis/results_post.php:120
+#: options/multis/sets.php:65
+#: options/settings/settings_articles.php:184
+#: options/settings/settings_comments.php:198
+#: options/comments.php:82
+#: tinymce3/panels/filter.php:57
+#: widgets/rating/part_filter.php:89
+#: widgets/rating_28/part_filter.php:89
+msgid "Review"
+msgstr "خلاصه"
+
+#: options/elements/articles_options.php:43
+#: options/elements/articles_options.php:105
+#: options/elements/articles_options.php:170
+#: options/elements/articles_options.php:213
+#: options/multis/results_post.php:190
+#: options/tools/tools_bulk.php:25
+#: options/tools/tools_bulk.php:44
+#: options/tools/tools_bulk.php:63
+#: options/tools/tools_bulk.php:82
+#: options/articles.php:147
+#: options/categories.php:65
+#: options/categories.php:163
+#: options/categories.php:261
+#: options/moderation.php:22
+msgid "Moderation"
+msgstr "مدیریت"
+
+#: options/elements/articles_options.php:50
+#: options/elements/articles_options.php:113
+#: options/elements/articles_options.php:177
+#: options/elements/articles_options.php:220
+#: options/multis/results_post.php:197
+#: options/tools/tools_bulk.php:32
+#: options/tools/tools_bulk.php:51
+#: options/tools/tools_bulk.php:70
+#: options/tools/tools_bulk.php:89
+#: options/articles.php:142
+#: options/categories.php:70
+#: options/categories.php:170
+#: options/categories.php:268
+msgid "Vote Rules"
+msgstr "قوانین رای"
+
+#: options/elements/articles_options.php:82
+msgid "Thumbs for Articles"
+msgstr "ایول های مقالات"
+
+#: options/elements/articles_options.php:147
+msgid "Stars for Comments"
+msgstr "ستاره های دیدگاه ها"
+
+#: options/elements/articles_options.php:190
+msgid "Thumbs for Commnets"
+msgstr "ایول های دیدگاه ها"
+
+#: options/elements/articles_options.php:234
+msgid "Comments Integration"
+msgstr "همسان سازی دیدگاه ها"
+
+#: options/elements/articles_options.php:241
+#: options/categories.php:203
+#: options/settings.php:47
+msgid "Multis"
+msgstr "چندتایی ها"
+
+#: options/elements/articles_options.php:246
+#: options/elements/articles_options.php:258
+#: options/categories.php:208
+#: options/categories.php:218
+msgid "Normal activity"
+msgstr "فعالیت معمول"
+
+#: options/elements/articles_options.php:247
+#: options/elements/articles_options.php:259
+#: options/categories.php:209
+#: options/categories.php:219
+msgid "Force hidden"
+msgstr "مخفی باشد"
+
+#: options/elements/articles_options.php:269
+#: options/categories.php:229
+#: tinymce3/panels/general.php:46
+#: widgets/rating/part_basic.php:59
+#: widgets/rating_28/part_basic.php:58
+msgid "Multi Set"
+msgstr "بسته چندتایی"
+
+#: options/elements/articles_options.php:288
+#: options/multis/results_post.php:207
+#: options/multis/results_post.php:35
+#: options/tools/tools_bulk.php:128
+#: options/articles.php:34
+#: options/categories.php:278
+#: options/categories.php:14
+#: options/comments.php:132
+#: options/comments.php:17
+#: options/users_log.php:209
+#: options/users_log.php:30
+#: options/voters.php:182
+#: options/voters.php:40
+msgid "Update"
+msgstr "به روز رسانی"
+
+#: options/export/export_users.php:29
+msgid "User Info"
+msgstr "اطلاعات کاربری"
+
+#: options/export/export_users.php:31
+msgid "Minimal: only user id is exported"
+msgstr "کوچک: فقط شناسه کاربر برون دهی می شود"
+
+#: options/export/export_users.php:32
+msgid "Normal: user id, name and email are exported"
+msgstr "معمولی: شناسه کاربر، نام و ایمیل برون دهی میشود"
+
+#: options/export/export_users.php:35
+msgid "Data"
+msgstr "اطلاعات"
+
+#: options/export/export_users.php:37
+msgid "Post / Page votes"
+msgstr "آراء مطلب /  برگه"
+
+#: options/export/export_users.php:38
+msgid "Comments votes"
+msgstr "آراء دیدگاه ها"
+
+#: options/export/export_users.php:41
+msgid "Additional Columns"
+msgstr "ستون های اضافی"
+
+#: options/export/export_users.php:43
+#: options/ips/ips_list.php:41
+#: options/moderation.php:104
+#: options/users_log.php:108
+#: options/voters.php:133
+msgid "IP"
+msgstr "آی پی"
+
+#: options/export/export_users.php:44
+#: options/moderation.php:105
+#: options/voters.php:134
+msgid "User Agent"
+msgstr "نام مرورگر"
+
+#: options/export/export_users.php:46
+msgid "Post/Page title"
+msgstr "عنوان مطلب/برگه"
+
+#: options/export/export_users.php:47
+msgid "Post/Page date"
+msgstr "تاریخ مطلب/برگه"
+
+#: options/export/export_users.php:49
+msgid "Comment author"
+msgstr "نویسنده دیدگاه"
+
+#: options/export/export_users.php:50
+msgid "Comment date"
+msgstr "تاریخ دیدگاه"
+
+#: options/export/export_users.php:55
+msgid "This will export voters data file."
+msgstr "این کار باعث برون دهی اطلاعات رای دهندگان می شود."
+
+#: options/export/export_users.php:58
+msgid "Exported file will contain all the users ratings. File will be in CSV format."
+msgstr "فایل برون دهی شده شامل رای کاربران است و ساختار اش CSV است."
+
+#: options/front/front_left.php:2
+msgid "See All"
+msgstr "نمایش همه"
+
+#: options/front/front_left.php:4
+msgid "Latest News"
+msgstr "آخرین خبر ها"
+
+#: options/front/front_left.php:38
+msgid "Newsfeed update is disabled. You can enable it on settings page."
+msgstr "به روزرسانی اخبار خوراک غیرفعال است. در برگه تنظیمات می توانید آنرا فعال کنید."
+
+#: options/front/front_left.php:32
+msgid "An error occured while loading newsfeed. Go to the %sfront page%s to check for updates."
+msgstr "مشکلی در نمایش آخرین خبر ها رخ داده است.لطفا به %sسایت ما%s بروید و آخرین خبر ها را مطالعه کنید."
+
+#: options/front/front_right.php:8
+msgid "Version"
+msgstr "نگارش"
+
+#: options/front/front_right.php:9
+msgid "release date"
+msgstr "تاریخ انتشار"
+
+#: options/front/front_right.php:13
+msgid "Code Name"
+msgstr "نام این نگارش"
+
+#: options/front/front_right.php:14
+msgid "current major release"
+msgstr "نسخه خفن کنونی"
+
+#: options/front/front_right.php:19
+msgid "Change Log"
+msgstr "تغییرات این نسخه"
+
+#: options/front/front_right.php:20
+msgid "detailed list of changes"
+msgstr "تغییرات اساسی"
+
+#: options/front/front_right.php:21
+msgid "show"
+msgstr "نمایش"
+
+#: options/front/front_right.php:26
+msgid "Links"
+msgstr "پیوند ها"
+
+#: options/front/front_right.php:31
+#: options/front/front_right.php:75
+msgid "official plugin page"
+msgstr "صفحه رسمی افزونه"
+
+#: options/front/front_right.php:32
+#: options/front/front_right.php:37
+#: options/front/front_right.php:42
+#: options/front/front_right.php:47
+#: options/front/front_right.php:62
+#: options/front/front_right.php:76
+#: options/front/front_right.php:81
+#: options/front/front_right.php:86
+#: options/front/front_right.php:91
+#: options/front/front_right.php:96
+#: options/front/front_right.php:110
+#: options/front/front_right.php:115
+#: options/front/front_right.php:120
+#: options/front/front_right.php:125
+msgid "visit"
+msgstr "بازدید"
+
+#: options/front/front_right.php:36
+msgid "development home with svn"
+msgstr "صفحه گسترش به همراه svn"
+
+#: options/front/front_right.php:41
+msgid "discussions group"
+msgstr "گروه بحث"
+
+#: options/front/front_right.php:46
+msgid "wordpress plugin page"
+msgstr "صفحه افزونه در وردپرس"
+
+#: options/front/front_right.php:51
+msgid "development progress"
+msgstr "میزان پیشرفت توسعه"
+
+#: options/front/front_right.php:52
+msgid "follow"
+msgstr "دنبال کن"
+
+#: options/front/front_right.php:56
+msgid "Support"
+msgstr "پشتیبانی"
+
+#: options/front/front_right.php:60
+msgid "Premium Support"
+msgstr "پشتیبانی حرفه ای"
+
+#: options/front/front_right.php:61
+msgid "special plugin customizations"
+msgstr "طراحی های حرفه ای این افزونه"
+
+#: options/front/front_right.php:69
+msgid "GD WordPress Plugins"
+msgstr "افزونه های وردپرس GD"
+
+#: options/front/front_right.php:80
+msgid "custom taxonomies managment"
+msgstr "مدیریت رده بندی دلخواه"
+
+#: options/front/front_right.php:85
+msgid "collection of widgets"
+msgstr "مجموعه ابزارک ها"
+
+#: options/front/front_right.php:90
+msgid "advanced pages widget"
+msgstr "صفحات ابزارک پیشرفته"
+
+#: options/front/front_right.php:95
+msgid "widget to add linkedin badge"
+msgstr "ابزارک افزودن به linkedin"
+
+#: options/front/front_right.php:109
+msgid "premium wordpress plugins and themes"
+msgstr "افزونه و قالب های حرفه ای"
+
+#: options/front/front_right.php:114
+msgid "tv shows reviews and news"
+msgstr "اخبار و مصاحبه های تلویزیونی"
+
+#: options/front/front_right.php:119
+msgid "announcements and theme demo"
+msgstr "اطلاعیه ها و پیش نمایش قالب"
+
+#: options/front/front_right.php:123
+msgid "Official Website"
+msgstr "سایت رسمی"
+
+#: options/front/front_right.php:124
+msgid "golden dragon official web portal"
+msgstr "پورتال حرفه ای اژدهای طلایی"
+
+#: options/gfx/gfx_preview.php:1
+msgid "Stars Preview"
+msgstr "پیش نمایش ستاره ها"
+
+#: options/gfx/gfx_preview.php:5
+#: options/multis/sets.php:63
+#: options/settings/settings_articles.php:14
+#: options/settings/settings_articles.php:188
+#: options/settings/settings_comments.php:14
+#: options/settings/settings_comments.php:133
+#: options/settings/settings_comments.php:202
+#: options/settings/settings_multis.php:14
+#: options/settings/settings_special.php:54
+#: options/gfx.php:59
+#: widgets/comments/part_stars.php:4
+#: widgets/comments/part_stars.php:12
+#: widgets/comments_28/part_stars.php:4
+#: widgets/comments_28/part_stars.php:12
+msgid "Stars"
+msgstr "ستاره ها"
+
+#: options/gfx/gfx_preview.php:35
+#: options/gfx/gfx_preview.php:85
+#: tinymce3/panels/articlesrater.php:27
+#: tinymce3/panels/articlesreview.php:32
+#: tinymce3/panels/multis.php:36
+#: tinymce3/panels/multis.php:56
+#: tinymce3/panels/multisreview.php:42
+#: tinymce3/panels/multisreview.php:62
+#: tinymce3/panels/styles.php:68
+#: tinymce3/panels/styles.php:88
+#: tinymce3/panels/styles.php:108
+#: widgets/comments/part_image.php:13
+#: widgets/comments/part_stars.php:18
+#: widgets/comments_28/part_image.php:13
+#: widgets/comments_28/part_stars.php:18
+msgid "Size"
+msgstr "اندازه"
+
+#: options/gfx/gfx_preview.php:41
+#: options/gfx/gfx_preview.php:91
+msgid "Author"
+msgstr "طراح"
+
+#: options/gfx/gfx_preview.php:51
+msgid "Thumbs Preview"
+msgstr "پیش نمایش ای ول ها"
+
+#: options/gfx/gfx_preview.php:55
+#: options/settings/settings_special.php:66
+#: options/comments.php:79
+#: options/gfx.php:60
+#: tinymce3/panels/styles.php:97
+msgid "Thumbs"
+msgstr "ای ول ها"
+
+#: options/gfx/gfx_preview.php:101
+msgid "Trends Preview"
+msgstr "پیش نمایش کار ها"
+
+#: options/gfx/gfx_preview.php:105
+msgid "Trends"
+msgstr "کارها"
+
+#: options/gfx/gfx_stars.php:1
+msgid "Stars Sizes"
+msgstr "اندازه ستاره ها"
+
+#: options/gfx/gfx_stars.php:24
+#: options/gfx/gfx_thumbs.php:24
+msgid "Only sizes checked here will be included in the css file for the active rating blocks."
+msgstr ""
+
+#: options/gfx/gfx_stars.php:27
+#: options/gfx/gfx_thumbs.php:27
+msgid "Stars Sets"
+msgstr "مجموعه ستاره ها"
+
+#: options/gfx/gfx_stars.php:54
+msgid "Only stars set checked here will be included in the css file for the active rating blocks."
+msgstr ""
+
+#: options/gfx/gfx_thumbs.php:1
+msgid "Thumbs Sizes"
+msgstr "اندازه ایول ها"
+
+#: options/gfx/gfx_thumbs.php:54
+msgid "Only thumbs set checked here will be included in the css file for the active rating blocks."
+msgstr ""
+
+#: options/gfx/gfx_tools.php:1
+msgid "Rescan graphics"
+msgstr "بررسی مجدد گرافیک ها"
+
+#: options/gfx/gfx_tools.php:3
+msgid "Rescan graphics folders for new stars and trends images."
+msgstr "بررسی مجدد پوشه گرافیک برای ستاره ها و تصاویر جدید."
+
+#: options/gfx/gfx_tools.php:4
+msgid "Rescan"
+msgstr "بررسی دوباره"
+
+#: options/gfx/gfx_tools.php:6
+msgid "Last scan was executed on."
+msgstr "تاریخ آخرین بررسی."
+
+#: options/ips/ips_list.php:39
+msgid "Record Id"
+msgstr "شناسه ضبط"
+
+#: options/ips/ips_list.php:81
+msgid "Unban Selected"
+msgstr "ازمحدودیت در آوردن انتخاب شده ها"
+
+#: options/ips/ips_options.php:1
+msgid "Ban Single IP's"
+msgstr "محدود کردن آدرس آی پی"
+
+#: options/ips/ips_options.php:8
+msgid "Add IP addresses"
+msgstr "افزودن آدرس های آی پی"
+
+#: options/ips/ips_options.php:9
+msgid "One IP address per line."
+msgstr "در هر سطر یک آدرس آی پی"
+
+#: options/ips/ips_options.php:15
+#: options/ips/ips_options.php:41
+#: options/ips/ips_options.php:57
+msgid "Add"
+msgstr "افزودن"
+
+#: options/ips/ips_options.php:19
+msgid "Ban IP Range"
+msgstr "محدود کردن یک محدوده آی پی"
+
+#: options/ips/ips_options.php:25
+msgid "From"
+msgstr "از"
+
+#: options/ips/ips_options.php:35
+msgid "To"
+msgstr "تا"
+
+#: options/ips/ips_options.php:45
+msgid "Ban IP Masked"
+msgstr "محدود کردن تقریبی آی پی"
+
+#: options/ips/ips_options.php:51
+msgid "Mask"
+msgstr "تقریبی"
+
+#: options/ips/ips_options.php:55
+msgid "Use XXX as a part of IP or leave empty to mask."
+msgstr "از XXX در بخشی از آی پی استفاده کنید و یا خالی بگذارید تا تقریبی محدود شود."
+
+#: options/multis/editor.php:24
+msgid "Multi Sets Editor"
+msgstr "ویرایشگر دسته های چندتایی"
+
+#: options/multis/editor.php:37
+msgid "Number Of Stars"
+msgstr "تعداد ستاره ها"
+
+#: options/multis/editor.php:44
+#: options/multis/sets.php:62
+#: options/settings/settings_articles.php:74
+#: options/settings/settings_comments.php:78
+#: options/settings/settings_multis.php:39
+#: options/settings/settings_thumbs_articles.php:58
+#: options/settings/settings_thumbs_comments.php:59
+#: options/templates.php:27
+msgid "Defaults"
+msgstr "پیش فرض"
+
+#: options/multis/editor.php:48
+msgid "Auto Insertion"
+msgstr "وارد کردن خودکار"
+
+#: options/multis/editor.php:52
+msgid "Insertion"
+msgstr "وارد شدن"
+
+#: options/multis/editor.php:55
+#: options/multis/sets.php:85
+msgid "No"
+msgstr "خیر"
+
+#: options/multis/editor.php:56
+#: options/multis/sets.php:88
+msgid "Category Based"
+msgstr "براساس دسته"
+
+#: options/multis/editor.php:57
+#: options/multis/sets.php:91
+msgid "All Posts"
+msgstr "همه مطالب"
+
+#: options/multis/editor.php:58
+#: options/multis/sets.php:94
+msgid "All Pages"
+msgstr "همه برگه ها"
+
+#: options/multis/editor.php:59
+#: options/multis/sets.php:97
+msgid "All Posts &amp; Pages"
+msgstr "همه مطالب و برگه ها"
+
+#: options/multis/editor.php:64
+msgid "Location"
+msgstr "موقعیت"
+
+#: options/multis/editor.php:96
+msgid "Weight"
+msgstr "وزن"
+
+#: options/multis/editor.php:103
+msgid "Important Notice"
+msgstr "نکته مهم"
+
+#: options/multis/editor.php:105
+msgid "Once the set is created, you can't change number of elements in the set or number of stars! You can edit names and weight of the elements, name and description of the set."
+msgstr "به محض ایجاد بسته، تعداد عناصر داخل بسته و یا تعداد ستاره ها را نمی توانید تغییر دهید. میتوانید نام و وزن عناصر و توضیحات را تغییر دهید"
+
+#: options/multis/editor.php:110
+msgid "Save Multi Set"
+msgstr "ذخیره چند بسته ای"
+
+#: options/multis/results_post.php:77
+#: options/multis/results_set.php:17
+msgid "Multi Set Results"
+msgstr "نتایج چند بسته ای"
+
+#: options/multis/results_post.php:88
+#: options/multis/results_post.php:90
+#: options/multis/results_post.php:31
+#: options/articles.php:114
+#: options/articles.php:116
+#: options/articles.php:29
+msgid "Search Posts"
+msgstr "جستجوی مطالب"
+
+#: options/multis/results_post.php:114
+#: tinymce3/panels/filter.php:56
+#: widgets/comments/part_basic.php:2
+#: widgets/comments_28/part_basic.php:2
+#: widgets/rating/part_basic.php:2
+#: widgets/rating/part_filter.php:88
+#: widgets/rating_28/part_basic.php:2
+#: widgets/rating_28/part_filter.php:88
+#: widgets/top/part_basic.php:2
+#: widgets/top_28/part_basic.php:2
+msgid "Title"
+msgstr "عنوان"
+
+#: options/multis/results_post.php:115
+#: options/articles.php:240
+msgid "View"
+msgstr "نمایش"
+
+#: options/multis/results_post.php:117
+#: options/multis/sets.php:64
+#: options/articles.php:149
+msgid "Ratings"
+msgstr "رتبه"
+
+#: options/multis/results_post.php:118
+#: options/articles.php:150
+#: options/comments.php:81
+msgid "Total"
+msgstr "در مجموع"
+
+#: options/multis/results_set.php:17
+#: options/multis/sets.php:142
+msgid "Voters"
+msgstr "رای دهنده"
+
+#: options/multis/sets.php:47
+msgid "Add New Multi Rating Set"
+msgstr "افزودن مجموعه رای گیری چندتایی"
+
+#: options/multis/sets.php:61
+msgid "Auto Insert"
+msgstr "وارد کردن خودکار"
+
+#: options/multis/sets.php:66
+msgid "Statistics"
+msgstr "آمار"
+
+#: options/multis/sets.php:160
+#: options/multis/sets.php:4
+msgid "Delete Selected"
+msgstr "حذف انتخاب شده ها"
+
+#: options/multis/sets.php:132
+#: options/multis/sets.php:141
+#: options/my/my_general.php:23
+#: options/categories.php:72
+msgid "Posts"
+msgstr "مطالب"
+
+#: options/my/my_comments.php:1
+msgid "Votes for my comments"
+msgstr "آراء دیدگاه های من"
+
+#: options/my/my_general.php:16
+msgid "General Statistics"
+msgstr "آمار عمومی"
+
+#: options/my/my_general.php:19
+msgid "My votes overview"
+msgstr "خلاصه رتبه های من"
+
+#: options/my/my_posts.php:1
+msgid "Votes for my posts"
+msgstr "آراء مطالب من"
+
+#: options/my/my_voted.php:1
+msgid "My Latest 100 Votes"
+msgstr "صد رای اخیر من"
+
+#: options/settings/settings_administration.php:0
+msgid "Plugin Panels"
+msgstr "پنل های افزونه"
+
+#: options/settings/settings_administration.php:5
+msgid "Importing data for other rating plugins."
+msgstr "درون ریزی اطلاعات برای سایر افزونه های رتبه دهی"
+
+#: options/settings/settings_administration.php:7
+msgid "Uninstall and maintenance."
+msgstr "حذف برنامه و تعمیرات"
+
+#: options/settings/settings_administration.php:11
+msgid "Export data and custom templates."
+msgstr "برون دهی اطلاعات و قالب های دلخواه"
+
+#: options/settings/settings_administration.php:13
+msgid "IP addresses managment."
+msgstr "مدیریت آدرس های آی پی"
+
+#: options/settings/settings_administration.php:19
+msgid "Other Settings"
+msgstr "سایر تنظیمات"
+
+#: options/settings/settings_administration.php:23
+msgid "Rows to display on plugin admin grids"
+msgstr "ردیف های قابل نمایش در بخش مدیریت افزونه"
+
+#: options/settings/settings_administration.php:36
+msgid "Update front page latest news feed."
+msgstr "به روز رسانی آخرین اخبار صفحه نخست"
+
+#: options/settings/settings_advanced.php:3
+msgid "PHP is working in the safe mode. Plugin can't create folders for caching. You need to do it manually if you want to use cache."
+msgstr "برنامه PHP شما در حالت safe mod درحال اجرا است، افزونه قادر به ایجاد پوشه برای کش اطلاعات نمی باشد. اگر مایل به استفاده از کش کردن هستید ، باید این پوشه را دستی ایجاد کنید."
+
+#: options/settings/settings_advanced.php:4
+msgid "For cache to work, plugin must be able to access cache folder. Plugin has tried to create folders needed and failed. Until you resolved this issue cache feature can't be used."
+msgstr "برای استفاده از حالت کش، افزونه باید به پوشه کش دسترسی داشته باشد. افزونه سعی در ایجاد پوشه داشت و ناموفق بود. تا زمانیکه این مسئله حل نشود، نمی توانید از حالت کش استفاده کنید."
+
+#: options/settings/settings_advanced.php:5
+msgid "Either make <strong>wp-content</strong> folder writeable or create <strong>gd-star-rating</strong> folder in <strong>wp-content</strong> and make it writeable. Use 0755 chmod setting."
+msgstr "یا پوشه <strong>wp-content</strong> را قابل نوشتن کنید و یا پوشه ای با نام <strong>gd-star-rating</strong> در <strong>wp-content</strong> ایجاد نمایید و آنرا قابل نوشتن نمایید. از chmod ، 0755 استفاده کنید."
+
+#: options/settings/settings_advanced.php:10
+#: options/tools/tools_cleanup.php:1
+msgid "Cache"
+msgstr "کش"
+
+#: options/settings/settings_advanced.php:12
+msgid "Cache enabled."
+msgstr "کش فعال شد."
+
+#: options/settings/settings_advanced.php:14
+msgid "Force using of cache. This is usefull in some rare cases when PHP can't report writeability correct."
+msgstr "از کش حتما استفاده شود. در بعضی موارد نادر PHP کاربرد دارد."
+
+#: options/settings/settings_advanced.php:16
+msgid "Enable auto cache cleanup."
+msgstr "حذف خودکار کش فعال باشد."
+
+#: options/settings/settings_advanced.php:19
+msgid "Cleanup cache every"
+msgstr "کش را هر چند روز پاک کنیم:"
+
+#: options/settings/settings_advanced.php:25
+msgid "Inline Debug Info"
+msgstr "اطلاعات رفع خطا"
+
+#: options/settings/settings_advanced.php:27
+msgid "Add small block with essential debug info into each rating block."
+msgstr "در هر بلوک رتبه دهی، یک بلوک کوچک با اطلاعات ضروری رفع خطا قرار گیرد."
+
+#: options/settings/settings_advanced.php:29
+#: options/settings/settings_advanced.php:38
+msgid "Important"
+msgstr "مهم"
+
+#: options/settings/settings_advanced.php:29
+msgid "I strongly recommend leaving this option active. It doesn't disrupt the page, it's hidden and very small."
+msgstr "به شما تاکید می کنم که این گزینه را فعال نگه دارید. برگه را خراب نمی کند. به صورت مخفی است و خیلی کوچک است."
+
+#: options/settings/settings_advanced.php:32
+msgid "Log Into File"
+msgstr "ثبت در یک فایل"
+
+#: options/settings/settings_advanced.php:34
+msgid "Log into file various debug information."
+msgstr "اطلاعات مختلف رفع خطا را در یک فایل ثبت کن."
+
+#: options/settings/settings_advanced.php:36
+msgid "Save into debug file each WP Query executed."
+msgstr "هر عملی که در وردپرس اجرا میشود را در فایل رفع خطا ذخیره کن."
+
+#: options/settings/settings_advanced.php:41
+msgid "Trend Calculations"
+msgstr "محاسبات روند"
+
+#: options/settings/settings_advanced.php:45
+msgid "Calculate for last number of days"
+msgstr "محاسبه برای روز های اخیر"
+
+#: options/settings/settings_advanced.php:49
+msgid "Calculate over how many days before"
+msgstr "محاسبه برای هرچند روز قبل"
+
+#: options/settings/settings_advanced.php:55
+msgid "Bayesian Estimate Mean"
+msgstr "معنی تقریبی بایسین"
+
+#: options/settings/settings_advanced.php:59
+msgid "Minimum votes required"
+msgstr "کمترین آراء لازم"
+
+#: options/settings/settings_advanced.php:63
+msgid "Mean vote rating across the whole report"
+msgstr "رتبه دهی اصلی در گزارش کلی اصلی"
+
+#: options/settings/settings_advanced.php:38
+msgid "Plugin must have write access to a text file. Path to this file needs to be set in %s file."
+msgstr "افزونه باید دسترسی نوشتن به فایل متنی را داشته باشد.مسیر این فایل باید در فایل %s مشخص شود."
+
+#: options/settings/settings_articles.php:25
+#: options/settings/settings_articles.php:199
+#: options/settings/settings_comments.php:25
+#: options/settings/settings_comments.php:213
+msgid "Number of stars"
+msgstr "تعداد ستاره ها"
+
+#: options/settings/settings_articles.php:42
+#: options/settings/settings_articles.php:218
+#: options/settings/settings_comments.php:42
+#: options/settings/settings_multis.php:33
+#: options/settings/settings_thumbs_articles.php:26
+#: options/settings/settings_thumbs_comments.php:26
+msgid "Rating header"
+msgstr "سربرگ رتبه دهی"
+
+#: options/settings/settings_articles.php:49
+#: options/settings/settings_comments.php:49
+#: options/settings/settings_thumbs_articles.php:33
+#: options/settings/settings_thumbs_comments.php:33
+msgid "Auto insert rating code"
+msgstr "کد وارد کردن خودکار رای"
+
+#: options/settings/settings_articles.php:51
+#: options/settings/settings_thumbs_articles.php:35
+msgid "For individual posts."
+msgstr "برای مطالب اختصاصی"
+
+#: options/settings/settings_articles.php:53
+#: options/settings/settings_thumbs_articles.php:37
+msgid "For individual pages."
+msgstr "برای برگه های اختصاصی"
+
+#: options/settings/settings_articles.php:57
+#: options/settings/settings_thumbs_articles.php:41
+msgid "For posts displayed in Archives."
+msgstr "برای مطالبی که در بایگانی نمایش داده می شوند."
+
+#: options/settings/settings_articles.php:59
+#: options/settings/settings_thumbs_articles.php:43
+msgid "For posts displayed on Front Page."
+msgstr "برای مطالبی که در صفحه اصلی نمایش داده می شوند."
+
+#: options/settings/settings_articles.php:61
+#: options/settings/settings_thumbs_articles.php:45
+msgid "For posts displayed on Search results."
+msgstr "برای مطالبی که در نتایج جستجو نمایش داده می شوند."
+
+#: options/settings/settings_articles.php:68
+#: options/settings/settings_comments.php:69
+#: options/settings/settings_thumbs_articles.php:52
+#: options/settings/settings_thumbs_comments.php:53
+msgid "Auto insert location"
+msgstr "موقعیت وارد شدن خودکار"
+
+#: options/settings/settings_articles.php:78
+#: options/settings/settings_comments.php:82
+#: options/settings/settings_multis.php:43
+#: options/settings/settings_thumbs_articles.php:62
+#: options/settings/settings_thumbs_comments.php:63
+msgid "Vote rule"
+msgstr "قوانین رای دادن"
+
+#: options/settings/settings_articles.php:84
+#: options/settings/settings_comments.php:88
+#: options/settings/settings_multis.php:49
+#: options/settings/settings_thumbs_articles.php:68
+#: options/settings/settings_thumbs_comments.php:69
+msgid "Moderation rule"
+msgstr "قوانین مدیریت"
+
+#: options/settings/settings_articles.php:94
+#: options/settings/settings_multis.php:59
+msgid "Time restriction"
+msgstr "محدودیت زمانی"
+
+#: options/settings/settings_articles.php:99
+#: options/settings/settings_multis.php:64
+msgid "Countdown value"
+msgstr "مقدار شمارش معکوس"
+
+#: options/settings/settings_articles.php:110
+#: options/settings/settings_articles.php:223
+#: options/settings/settings_comments.php:72
+#: options/settings/settings_comments.php:98
+#: options/settings/settings_multis.php:75
+msgid "Rating block CSS class"
+msgstr "کلاس CSS بلوک رتبه دهی"
+
+#: options/settings/settings_articles.php:115
+#: options/settings/settings_comments.php:103
+#: options/settings/settings_multis.php:80
+msgid "Rating text CSS class"
+msgstr "کلاس css متن رتبه دهی"
+
+#: options/settings/settings_articles.php:121
+#: options/settings/settings_comments.php:109
+#: options/settings/settings_multis.php:86
+msgid "Rating header CSS class"
+msgstr "کلاس CSS سربرگ رتبه دهی"
+
+#: options/settings/settings_articles.php:126
+#: options/settings/settings_comments.php:114
+msgid "Rating stars CSS class"
+msgstr "کلاس CSS ستاره های رتبه دهی"
+
+#: options/settings/settings_articles.php:135
+#: options/settings/settings_comments.php:123
+#: options/settings/settings_multis.php:100
+#: options/settings/settings_special.php:85
+#: options/settings/settings_thumbs_articles.php:78
+#: options/settings/settings_thumbs_comments.php:79
+msgid "Rating Template"
+msgstr "قالب رتبه دهی"
+
+#: options/settings/settings_articles.php:141
+#: options/settings/settings_comments.php:155
+msgid "Restrict"
+msgstr "محدود کردن"
+
+#: options/settings/settings_articles.php:143
+msgid "Prevent article author to vote."
+msgstr "جلوگیری از رای دادن نویسنده مطلب"
+
+#: options/settings/settings_articles.php:143
+msgid "This is only for registered users."
+msgstr "این گزینه فقط برای کاربران ثبت نام شده است."
+
+#: options/settings/settings_articles.php:145
+#: options/settings/settings_comments.php:159
+msgid "Use logged data (IP) to prevent duplicate voting."
+msgstr "استفاده از اطلاعات ثبت شده (آی پی) برای جلوگیری از چندبار رای دادن"
+
+#: options/settings/settings_articles.php:147
+#: options/settings/settings_comments.php:161
+msgid "Use cookies to prevent duplicate voting."
+msgstr "استفاده از کوکی های برای جلوگیری از چندبار رای دادن."
+
+#: options/settings/settings_articles.php:149
+#: options/settings/settings_comments.php:163
+msgid "Allow votes from user and visitor coming from same IP address."
+msgstr "همه آراء به دست آمده از کاربران و بازدیدکننده هایی که آی پی یکسان دارند."
+
+#: options/settings/settings_articles.php:152
+#: options/settings/settings_comments.php:166
+#: options/settings/settings_multis.php:120
+msgid "Vote Waiting Message"
+msgstr "پیغام درحال ارسال رای"
+
+#: options/settings/settings_articles.php:156
+#: options/settings/settings_comments.php:170
+#: options/settings/settings_multis.php:124
+#: options/settings/settings_thumbs_articles.php:82
+#: options/settings/settings_thumbs_comments.php:83
+msgid "Animation indicator"
+msgstr "نشانگر انیمیشن"
+
+#: options/settings/settings_articles.php:159
+#: options/settings/settings_comments.php:173
+#: options/settings/settings_multis.php:127
+#: options/gfx.php:61
+msgid "Preview"
+msgstr "پیش نمایش"
+
+#: options/settings/settings_articles.php:169
+#: options/settings/settings_comments.php:183
+#: options/settings/settings_multis.php:137
+msgid "Text to display"
+msgstr "متنی که باید نمایش داده شود"
+
+#: options/settings/settings_articles.php:174
+#: options/settings/settings_comments.php:188
+#: options/settings/settings_multis.php:142
+msgid "Additional CSS class"
+msgstr "کلاس های CSS اضافی"
+
+#: options/settings/settings_articles.php:180
+#: options/settings/settings_comments.php:194
+#: options/settings/settings_multis.php:148
+msgid "Hide text and show only animation image."
+msgstr "متن مخفی شود و فقط انیمیشن نمایش داده شود."
+
+#: options/settings/settings_comments.php:51
+#: options/settings/settings_thumbs_comments.php:35
+msgid "For comments for posts."
+msgstr "برای دیدگاه های مطالب"
+
+#: options/settings/settings_comments.php:55
+#: options/settings/settings_thumbs_comments.php:39
+msgid "For comments for pages."
+msgstr "برای دیدگاه های برگه ها."
+
+#: options/settings/settings_comments.php:62
+#: options/settings/settings_thumbs_comments.php:46
+msgid "Enable auto insert regardless of the single page or post."
+msgstr "فعال سازی وارد کردن خودکار بدون توجه به تک برگی یا تک مطلبی بودن."
+
+#: options/settings/settings_comments.php:129
+msgid "Aggregated Rating"
+msgstr "رتبه های دریافتی"
+
+#: options/settings/settings_comments.php:157
+msgid "Prevent comment author to vote."
+msgstr "جلوگیری نویسنده دیدگاه از رای دادن"
+
+#: options/settings/settings_features.php:1
+msgid "Cache Support"
+msgstr "پشتیبانی از کش"
+
+#: options/settings/settings_features.php:3
+msgid "Activate support for cache plugins and dynamic loading of data."
+msgstr "فعالسازی پشتیبانی کش  و بارگذاری دینامیکی اطلاعات."
+
+#: options/settings/settings_features.php:5
+msgid "This options is designed for use with cache plugins, but it can be activated regardless of that. Ratings will be loaded dynamically using ajax."
+msgstr "این گزینه ها برای افزونه های کش طراحی شده اند. ولی باز هم بدون توجه به اینها می توان از آنها استفاده کرد. رتبه ها به صورت دینامیکی و با ایجکس بارگذاری می شوند."
+
+#: options/settings/settings_features.php:8
+msgid "Plugin Features"
+msgstr "خصوصیات افزونه"
+
+#: options/settings/settings_features.php:13
+msgid "Time restriction for rating."
+msgstr "محدودیت زمانی برای رتبه دهی"
+
+#: options/settings/settings_features.php:15
+msgid "Moderation options and handling."
+msgstr "تنظیمات مدیریتی و کنترل کردن"
+
+#: options/settings/settings_features.php:17
+msgid "Multiple rating support."
+msgstr "پشتیبانی از رای دهی چندتایی"
+
+#: options/settings/settings_features.php:19
+msgid "Thumbs up/down rating support."
+msgstr "پشتیبانی از ایول"
+
+#: options/settings/settings_features.php:23
+msgid "Post And Page Review Rating."
+msgstr "رتبه دهی به خلاصه برگه و مطلب."
+
+#: options/settings/settings_features.php:25
+msgid "Comments Rating."
+msgstr "رتبه دهی دیدگاه ها."
+
+#: options/settings/settings_features.php:27
+msgid "Comments Review Rating."
+msgstr "رتبه دهی خلاصه دیدگاه ها."
+
+#: options/settings/settings_features.php:29
+msgid "Show comments integration ratings on articles panel."
+msgstr "نمایش رتبه دهی همسان سازی دیدگاه ها در پنل مقالات"
+
+#: options/settings/settings_features.php:34
+msgid "Expand WP Query with new rating specific sorting and filtering."
+msgstr ""
+
+#: options/settings/settings_features.php:36
+msgid "Use graphics generator to generate and display static stars images."
+msgstr ""
+
+#: options/settings/settings_features.php:38
+msgid "Prevent outside access to graphics generator. Graphics integrated into RSS is not affected."
+msgstr "دسترسی خارجی به سازنده گرافیکی محدود شود. گرافیک های گنجانده شده در RSS تحت تاثیر قرار نمی گیرند."
+
+#: options/settings/settings_features.php:40
+msgid "This leeching prevention will only work if a referer is sent and your server is set up correctly with proper server name variable."
+msgstr "گزینه بازدارنده دسترسی خارجی فقط در صورت داشتن ارجا از سایت دیگر کار می کند و اینکه تنظیمات نام سرور به درستی وارد شده باشد."
+
+#: options/settings/settings_features.php:43
+msgid "JS and CSS files"
+msgstr "فایل های JS و CSS"
+
+#: options/settings/settings_features.php:45
+msgid "Link external CSS rating code, uncheck to embed all the CSS into the page."
+msgstr "کد رتبه دهی در یک فایل css خارجی گنجانده شود. تیک را بردارید اگر مایلید که کد css در برگه قرار گیرد."
+
+#: options/settings/settings_features.php:47
+msgid "Link additional CSS file"
+msgstr ""
+
+#: options/settings/settings_features.php:49
+msgid "Include opacity for some styles. If activated, it will break CSS 2.1 validation."
+msgstr ""
+
+#: options/settings/settings_features.php:51
+msgid "Auto cache of the main CSS file enabled."
+msgstr "کش شدن خودکار فایل CSS اصلی فعال است."
+
+#: options/settings/settings_features.php:54
+msgid "Percentages"
+msgstr "درصد ها"
+
+#: options/settings/settings_features.php:58
+msgid "No votes value"
+msgstr "مقدار بدون رای"
+
+#: options/settings/settings_features.php:63
+msgid "If you use percentage tag in templates, and there are not votes recorded, default percentage would be 0. Here you can set that to any other value between 0 and 100."
+msgstr ""
+
+#: options/settings/settings_features.php:66
+msgid "Charset"
+msgstr "نوع دسته حروف (charset)"
+
+#: options/settings/settings_features.php:70
+msgid "Character encoding"
+msgstr "انکدینگ"
+
+#: options/settings/settings_features.php:75
+msgid "For list of supported charsets visit: "
+msgstr ""
+
+#: options/settings/settings_features.php:78
+msgid "Search engines"
+msgstr "موتور های جستجو"
+
+#: options/settings/settings_features.php:82
+msgid "Display this"
+msgstr "نمایش این"
+
+#: options/settings/settings_features.php:85
+msgid "Plugin website URL block"
+msgstr ""
+
+#: options/settings/settings_features.php:86
+msgid "Plugin name and description"
+msgstr ""
+
+#: options/settings/settings_features.php:87
+msgid "Don't render rating block"
+msgstr "بلوک رتبه دهی ساخته نشود"
+
+#: options/settings/settings_features.php:88
+msgid "Render normal rating block"
+msgstr "بلوک معمولی رتبه دهی ساخته شود"
+
+#: options/settings/settings_features.php:94
+msgid "Plugin detects search engine BOT's and to save on the resources, there is no need to render whole rating block since it doesn't mean much to the search engine. You can select what plugin should do for BOT visits. Last option is not reccomended."
+msgstr "افزونه روبات های جستجوگر را تشخیص داده و منبع آنها را ذخیره می کند.کل بلوک رتبه دهی لازم به ساخته شدن نیست، چون برای موتورهای جستجو قابل فهم نیست.می توانید تعیین کنید که افزونه با روبوت ها چه کند.آخرین گزینه پیشنهاد نمی شود."
+
+#: options/settings/settings_features.php:97
+msgid "Internet Explorer"
+msgstr "اینترنت اکسپلورر"
+
+#: options/settings/settings_features.php:99
+msgid "Use IE opacity fix for multi ratings."
+msgstr "ازحالت تعمیرشده تاری تصویر در مرورگر IE برای چند رتبه دهی ها استفاده کنید."
+
+#: options/settings/settings_features.php:101
+msgid "Disable checking for IE6 and IE6 specific settings."
+msgstr "بررسی برای IE6 و تنظیمات خاص IE6 غیرفعال شود."
+
+#: options/settings/settings_integration.php:1
+#: options/articles.php:152
+#: options/categories.php:71
+#: options/categories.php:200
+msgid "Comment Integration"
+msgstr "همسان سازی دیدگاه"
+
+#: options/settings/settings_integration.php:3
+msgid "Hide comment integrated rating block if the comment is in reply mode (WP 2.7 or newer only)."
+msgstr "بلوک همسان سازی شده دیدگاه را مخفی کن اگر دیدگاه در پاسخ به دیدگاهی دیگر ارسال شده است  (فقط برای وردپرس 2.7 و بالاتر)."
+
+#: options/settings/settings_integration.php:5
+msgid "Prevent saving more than one rating per user or visitor."
+msgstr "هرکاربر یا بازدید کننده می تواند فقط یکبار رای دهد."
+
+#: options/settings/settings_integration.php:7
+msgid "Allow rating zero for standard rating vote from comment integration."
+msgstr ""
+
+#: options/settings/settings_integration.php:9
+msgid "Allow rating zero for multis ratings vote from comment integration."
+msgstr ""
+
+#: options/settings/settings_integration.php:11
+msgid "Be careful with zero's settings. This can break some other things, and is not recommended or supported."
+msgstr ""
+
+#: options/settings/settings_integration.php:14
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: options/settings/settings_integration.php:16
+msgid "Add widgets to the administration dashboard."
+msgstr "افزودن ابزارک ها به بخش مدیریت"
+
+#: options/settings/settings_integration.php:21
+msgid "Add widget with list of latest votes."
+msgstr "افزودن ابزارکی با لیستی از آخرین آراء."
+
+#: options/settings/settings_integration.php:24
+msgid "Votes to display:"
+msgstr "آرای قابل نمایش:"
+
+#: options/settings/settings_integration.php:32
+msgid "Show thumbs for posts."
+msgstr "نمایش ایول های مطالب"
+
+#: options/settings/settings_integration.php:34
+msgid "Show stars for posts."
+msgstr "نمایش ستاره های مطالب."
+
+#: options/settings/settings_integration.php:36
+msgid "Show multis for posts."
+msgstr "نمایش آراء چندتایی مطالب."
+
+#: options/settings/settings_integration.php:39
+msgid "Show thumbs for comments."
+msgstr "نمایش ایول های دیدگاه ها."
+
+#: options/settings/settings_integration.php:41
+msgid "Show stars for comments."
+msgstr "نمایش ستاره های دیدگاه ها."
+
+#: options/settings/settings_integration.php:47
+msgid "Widgets"
+msgstr "ابزارک ها"
+
+#: options/settings/settings_integration.php:49
+msgid "GD Star Rating: Post/Page rating widget."
+msgstr "رتبه دهی ستاره ای اژدهای طلایی: ابزارک رتبه دهی مطلب/برگه"
+
+#: options/settings/settings_integration.php:51
+msgid "GD Blog Rating: Blog average rating."
+msgstr "رتبه دهی وبلاگ اژدهای طلایی: رتبه میانگین بلاگ."
+
+#: options/settings/settings_integration.php:53
+msgid "GD Comments Rating: Per post comments rating."
+msgstr "رتبه دهی دیدگاه های اژدهای طلایی: رتبه دهی بر اساس دیدگاه های مطلب."
+
+#: options/settings/settings_integration.php:55
+msgid "Don't render the widget if there are no results to display."
+msgstr "اگر نتیجه ای برای نمایش وجود ندارد ، ابزارک را نشان نده."
+
+#: options/settings/settings_integration.php:58
+msgid "Post Edit"
+msgstr "ویرایش مطلب"
+
+#: options/settings/settings_integration.php:60
+msgid "Add standard rating box in the post/page edit sidebar area."
+msgstr ""
+
+#: options/settings/settings_integration.php:62
+msgid "Add multi ratings box in the post/page edit."
+msgstr ""
+
+#: options/settings/settings_integration.php:64
+msgid "Add rating shortcode plugin into tinyMCE visual editor."
+msgstr ""
+
+#: options/settings/settings_multis.php:91
+msgid "Rating button CSS class"
+msgstr "کلاس CSS دکمه رتبه دهی"
+
+#: options/settings/settings_multis.php:106
+msgid "Submit Button"
+msgstr "دکمه ارسال"
+
+#: options/settings/settings_multis.php:110
+msgid "Button text"
+msgstr "متن دکمه"
+
+#: options/settings/settings_multis.php:117
+msgid "Use submit button to send votes. If disabled, votes will be send once all block elements are rated."
+msgstr "از دکمه ارسال برای فرستادن رای استفاده کنید.اگر غیرفعال باشد،آراء فقط یکبار ارسال می شوند."
+
+#: options/settings/settings_security.php:1
+msgid "Voting"
+msgstr "درحال دادن رای"
+
+#: options/settings/settings_security.php:3
+msgid "Use Nonce with AJAX for improved security."
+msgstr "استفاده از نانس با ایجکس برای امنیت بیشتر."
+
+#: options/settings/settings_security.php:5
+msgid "Use AJAX cross-domain calls. Enable only if your website URL is different from actual URL."
+msgstr "استفاده از فراخوانی دامنه ای ایجکس، فقط در صورتی فعال شود که آدرس سایت شما با آدرس واقعی فرق بکند."
+
+#: options/settings/settings_security.php:7
+msgid "Use banned IP's lists to filter out visitors."
+msgstr "استفاده از لیست آی پی های ممنوع شده برای فیلتر کردن بازدید ها."
+
+#: options/settings/settings_security.php:9
+msgid "Don't even show rating stars to visitors comming from banned IP's."
+msgstr ""
+
+#: options/settings/settings_security.php:12
+msgid "User Levels"
+msgstr "سطح کاربران"
+
+#: options/settings/settings_security.php:16
+msgid "Required to show the dashboard widgets"
+msgstr ""
+
+#: options/settings/settings_security.php:20
+msgid "Required to show IP's in widgets and my ratings"
+msgstr ""
+
+#: options/settings/settings_security.php:26
+msgid "Rating Log"
+msgstr "اطلاعات ثبت شده رتبه"
+
+#: options/settings/settings_security.php:28
+msgid "Log user agent (browser) information."
+msgstr "اطلاعات مرورگر کاربر ثبت شود."
+
+#: options/settings/settings_security.php:30
+msgid "Save cookies with ratings."
+msgstr "کوکی ها را به همراه رای ذخیره کن."
+
+#: options/settings/settings_security.php:33
+msgid "Spider BOT's"
+msgstr "آقایون عنکبوت"
+
+#: options/settings/settings_security.php:41
+msgid "Each line must contain only one BOT name to ensure proper detection of search engines."
+msgstr ""
+
+#: options/settings/settings_security.php:47
+msgid "Plugin Update"
+msgstr "به روز رسانی افزونه"
+
+#: options/settings/settings_security.php:49
+msgid "Report basic usage data that will be used for statistical purposes only."
+msgstr ""
+
+#: options/settings/settings_security.php:51
+msgid "This report will include your WordPress version and website URL. Report will be sent only when plugin needs to be updated."
+msgstr ""
+
+#: options/settings/settings_special.php:1
+msgid "Google Rich Snippets"
+msgstr "خرده ریز های مهم گوگل"
+
+#: options/settings/settings_special.php:3
+msgid "Embed Google Rich Snippets."
+msgstr "قرار دادن خرده ریز های مهم گوگل."
+
+#: options/settings/settings_special.php:7
+#: options/settings/settings_special.php:41
+msgid "Data source"
+msgstr "منبع اطلاعات"
+
+#: options/settings/settings_special.php:10
+#: options/settings/settings_special.php:44
+#: tinymce3/panels/general.php:36
+#: widgets/rating/part_basic.php:47
+#: widgets/rating_28/part_basic.php:48
+#: widgets/top/part_basic.php:27
+#: widgets/top_28/part_basic.php:27
+msgid "Standard Rating"
+msgstr "رتبه دهی استاندارد"
+
+#: options/settings/settings_special.php:11
+msgid "Standard Review"
+msgstr "خلاصه استاندارد"
+
+#: options/settings/settings_special.php:19
+msgid "Embed format"
+msgstr "ساختار وارد شدن"
+
+#: options/settings/settings_special.php:22
+msgid "Microformat"
+msgstr "ریزساختار"
+
+#: options/settings/settings_special.php:23
+msgid "RDF"
+msgstr "RDF"
+
+#: options/settings/settings_special.php:29
+msgid "Thumbs ratings will be embeded as percentage ratings."
+msgstr ""
+
+#: options/settings/settings_special.php:30
+msgid "If the post or page has no valid rating set, snippet code will not be embeded for that post or page."
+msgstr ""
+
+#: options/settings/settings_special.php:33
+msgid "RSS Feeds"
+msgstr "خوراک های RSS"
+
+#: options/settings/settings_special.php:35
+msgid "Add small 80x15 badge to posts in RSS feed."
+msgstr ""
+
+#: options/settings/settings_special.php:37
+msgid "Add ratings to posts in RSS feeds."
+msgstr ""
+
+#: options/settings/settings_special.php:81
+msgid "Rating Header"
+msgstr "سربرگ رتبه دهی"
+
+#: options/settings/settings_thumbs_articles.php:5
+#: options/settings/settings_thumbs_comments.php:5
+#: widgets/rating/part_stars.php:33
+#: widgets/rating_28/part_stars.php:33
+msgid "Thumbs Set"
+msgstr "بسته ایول ها"
+
+#: options/setup/setup_database.php:1
+#: options/setup/setup_database.php:5
+#: options/setup/setup_database.php:15
+#: options/setup.php:4
+#: options/setup.php:11
+msgid "Reinstall"
+msgstr "نصب مجدد"
+
+#: options/setup/setup_database.php:4
+msgid "All database tables will be deleted, and installed again."
+msgstr "کلیه جداول بانک اطلاعاتی حذف شده و مجددا ایجاد می شوند."
+
+#: options/setup/setup_database.php:7
+#: options/setup/setup_database.php:17
+#: options/setup/setup_database.php:27
+#: options/setup/setup_global.php:7
+#: options/setup/setup_uninstall.php:7
+msgid "This operation is not reversable. Backup your data if you want to be able to restore it later."
+msgstr "این کار قابل برگشت نیست. اطلاعات خود را پشتیبان گیری کنید، تا بتوانید بعدا آنها را برگردانید"
+
+#: options/setup/setup_database.php:11
+msgid "Reinstall Multi Ratings"
+msgstr "نصب مجدد رای گیری های چند تایی"
+
+#: options/setup/setup_database.php:14
+msgid "Only multi ratings tables will be deleted, and installed again."
+msgstr "فقط جداول رتبه دهی چندتایی پاک شده و دوباره نصب می شوند"
+
+#: options/setup/setup_database.php:21
+#: options/setup/setup_database.php:25
+#: options/setup.php:28
+msgid "Reinstall Templates"
+msgstr "نصب مجدد قالب ها"
+
+#: options/setup/setup_database.php:24
+msgid "This will remove all saved templates for the plugin. Templates will be reseted to their default values."
+msgstr "این کار باعث حذف کلیه قالب های ذخیره شده افزونه می شود.قالب ها به مقادیر پایه خودشان بر می گردند."
+
+#: options/setup/setup_global.php:1
+#: options/setup/setup_global.php:5
+#: options/setup.php:21
+msgid "Remove Settings"
+msgstr "حذف تنظیمات"
+
+#: options/setup/setup_global.php:4
+msgid "This will remove all plugin settings and all the saved widgets."
+msgstr "با این کار کلیه تنظیمات افزونه و ابزارک های ذخیره شده حذف میشوند."
+
+#: options/setup/setup_global.php:11
+#: options/setup/setup_global.php:15
+#: options/setup.php:36
+msgid "Reset Imports"
+msgstr "درون ریزی مجدد."
+
+#: options/setup/setup_global.php:14
+msgid "This will reset all import flags for import data modules and will allow you to import again allready imported data."
+msgstr ""
+
+#: options/setup/setup_uninstall.php:1
+msgid "Uninstall"
+msgstr "حذف برنامه"
+
+#: options/setup/setup_uninstall.php:4
+msgid "After removal, plugin will be disabled. All data recorded by the plugin will be lost"
+msgstr "بعد از حذف،افزونه غیرفعال می شود. کلیه اطلاعات ثبت شده توسط برنامه هم حذف می شوند."
+
+#: options/tools/tools_bulk.php:2
+msgid "Date Based Post Locking"
+msgstr ""
+
+#: options/tools/tools_bulk.php:7
+msgid "Lock posts older than"
+msgstr "قفل کردن مطالب قدیمی تر از"
+
+#: options/tools/tools_bulk.php:11
+msgid "Lock"
+msgstr "قفل"
+
+#: options/tools/tools_bulk.php:13
+msgid "Previous Lock Date"
+msgstr "تاریخ قفل کردن قبلی"
+
+#: options/tools/tools_bulk.php:17
+msgid "Global Voting Rules Update"
+msgstr "به روز رسانی قوانین رای دهی عمومی"
+
+#: options/tools/tools_bulk.php:22
+msgid "Articles Stars"
+msgstr "ستاره های مقالات"
+
+#: options/tools/tools_bulk.php:41
+msgid "Articles Thumbs"
+msgstr "ایول های مقالات"
+
+#: options/tools/tools_bulk.php:60
+msgid "Comments Stars"
+msgstr "ستاره های دیدگاه ها"
+
+#: options/tools/tools_bulk.php:79
+msgid "Comments Thumbs"
+msgstr "ایول های دیدگاه ها"
+
+#: options/tools/tools_bulk.php:98
+msgid "This will update all posts and comments with previously saved ratings."
+msgstr "اینکار باعث به روز رسانی همه مطالب و دیدگاه هایی میشود که دارای رتبه قبلی هستند."
+
+#: options/tools/tools_bulk.php:102
+msgid "Recalculate Multi Ratings Averages"
+msgstr "محاسبه مجدد میانگین رتبه دهی چندتایی"
+
+#: options/tools/tools_bulk.php:105
+msgid "If you change multi rating sets weight for the elements you can execute recaluculation of all average ratings saved. Select the set you want to recalculate for, or select all sets."
+msgstr ""
+
+#: options/tools/tools_bulk.php:106
+msgid "Use this also if you update from versions before 1.2.0 and you had problems with saving multi rating results."
+msgstr ""
+
+#: options/tools/tools_bulk.php:109
+msgid "Select multi set"
+msgstr "انتخاب دسته چندتایی"
+
+#: options/tools/tools_bulk.php:112
+msgid "All Sets"
+msgstr "همه بسته ها"
+
+#: options/tools/tools_bulk.php:118
+msgid "Recalculate"
+msgstr "محاسبه مجدد"
+
+#: options/tools/tools_bulk.php:120
+msgid "Depending on the number of posts, this operation can take a while to complete. Be patient."
+msgstr ""
+
+#: options/tools/tools_bulk.php:124
+msgid "Update Multi Rating Votes Log"
+msgstr "به روز رسانی اطلاعات ذخیره شده چند رایی ها"
+
+#: options/tools/tools_bulk.php:127
+msgid "This tool will update votes log and recalculate average value for each multi ratings votes."
+msgstr "این ابزار اطلاعات آراء را به روز رسانی کرده و میزان میانگین را برای هر چند رایی محاسبه می کند."
+
+#: options/tools/tools_bulk.php:130
+msgid "You need to do only once."
+msgstr "لازم است که فقط یکبار انجام گیرد."
+
+#: options/tools/tools_cleanup.php:4
+msgid "Delete all cached files from folder"
+msgstr "حذف همه فایل های کش شده از پوشه"
+
+#: options/tools/tools_cleanup.php:5
+#: options/tools/tools_cleanup.php:18
+#: options/tools/tools_db.php:22
+msgid "Clean"
+msgstr "حذف"
+
+#: options/tools/tools_cleanup.php:7
+#: options/tools/tools_db.php:7
+#: options/tools/tools_db.php:24
+msgid "Last cleanup was executed on"
+msgstr "آخرین حذف در این تاریخ بوده است:"
+
+#: options/tools/tools_cleanup.php:9
+msgid "Total files cached"
+msgstr "کل فایل های کش شده"
+
+#: options/tools/tools_cleanup.php:11
+msgid "Total size of cached files"
+msgstr "حجم کلی فایل های کش شده"
+
+#: options/tools/tools_cleanup.php:14
+msgid "Debug"
+msgstr "رفع خطا"
+
+#: options/tools/tools_cleanup.php:17
+msgid "Empty the debug file"
+msgstr "خالی کردن فایل رفع خطا"
+
+#: options/tools/tools_cleanup.php:21
+msgid "Total size of debug file"
+msgstr "کل حجم فایل رفع خطا"
+
+#: options/tools/tools_db.php:1
+#: options/tools/tools_db.php:5
+msgid "Upgrade"
+msgstr "به روز رسانی"
+
+#: options/tools/tools_db.php:4
+msgid "Try to upgrade plugin tables. This is performed automatically after each plugin upgrade, but you can use this tool also."
+msgstr "لطفا سعی کنید جداول افزونه را به روز کنید. این کار به طور خودکار بعد از هر بار به روز رسانی افزونه انجام میشود، ولی می توانید از این ابزار هم بهره بگیرید."
+
+#: options/tools/tools_db.php:11
+#: options/tools.php:7
+msgid "Cleanup"
+msgstr "پاک کردن"
+
+#: options/tools/tools_db.php:14
+msgid "Remove all invalid votes from votes log."
+msgstr "حذف همه آراء خطادار که در لوگ ثبت شده اند."
+
+#: options/tools/tools_db.php:16
+msgid "Remove all invalid votes from trends log."
+msgstr "حذف همه آراء خطادار از لوگ رشته ها."
+
+#: options/tools/tools_db.php:18
+msgid "Remove data for old and deleted posts and comments."
+msgstr "حذف اطلاعات مطالب و دیدگاه های قدیمی و یا حذف شده."
+
+#: options/tools/tools_db.php:20
+msgid "Remove data for old and deleted multi ratings."
+msgstr "حذف اطلاعات چندرتبه ای های قدیمی و یا حذف شده/"
+
+#: options/tools/tools_db.php:25
+msgid "Cleanup summary"
+msgstr "حذف خلاصه"
+
+#: options/tools/tools_editcss.php:21
+msgid "Save"
+msgstr "ذخیره"
+
+#: options/tools/tools_editcss.php:6
+msgid "File is not writeable and can't be saved through this form."
+msgstr "فایل قابل نوشتن نیست و از طریق این فرم نمی توان آنرا ذخیره کرد."
+
+#: options/tools/tools_editcss.php:11
+msgid "Additional CSS file not found"
+msgstr "فایل CSS اضافی یافت نشد"
+
+#: options/articles.php:141
+msgid "Title &amp; Categories"
+msgstr "عنوان و دسته"
+
+#: options/articles.php:144
+msgid "Time"
+msgstr "زمان"
+
+#: options/articles.php:187
+#: options/articles.php:208
+#: options/categories.php:85
+msgid "date limit"
+msgstr "محدودیت زمانی"
+
+#: options/articles.php:190
+#: options/articles.php:211
+#: options/categories.php:89
+msgid "countdown"
+msgstr "شمارش معکوس"
+
+#: options/articles.php:203
+#: options/articles.php:224
+#: options/categories.php:103
+msgid "no limit"
+msgstr "نامحدود"
+
+#: options/articles.php:238
+msgid "Chart"
+msgstr "نمودار"
+
+#: options/articles.php:239
+msgid "Edit"
+msgstr "ویرایش"
+
+#: options/articles.php:243
+#: options/users_log.php:112
+msgid "Post"
+msgstr "مطلب"
+
+#: options/articles.php:244
+msgid "Page"
+msgstr "برگه"
+
+#: options/articles.php:245
+msgid "Views"
+msgstr "بازدیدها"
+
+#: options/builder.php:6
+msgid "Shortcode/Functions"
+msgstr "کد کوتاه/عملگر ها"
+
+#: options/categories.php:62
+#: tinymce3/panels/filter.php:22
+msgid "Category"
+msgstr "دسته"
+
+#: options/categories.php:68
+msgid "Time Restrictions"
+msgstr "محدودیت های زمانی"
+
+#: options/categories.php:119
+msgid "inhert from parent"
+msgstr "جدا از اصلی"
+
+#: options/categories.php:122
+msgid "standard"
+msgstr "استاندارد"
+
+#: options/categories.php:123
+msgid "multis"
+msgstr "چندتایی"
+
+#: options/categories.php:124
+msgid "inactive"
+msgstr "غیرفعال"
+
+#: options/charts.php:1
+msgid "Charts"
+msgstr "نمودارها"
+
+#: options/charts.php:6
+msgid "Articles (Posts And Pages)"
+msgstr "مقالات (مطالب و برگه ها)"
+
+#: options/comments.php:32
+msgid "Comments for post"
+msgstr "دیدگاه های مطلب"
+
+#: options/comments.php:76
+msgid "Comment"
+msgstr "دیدگاه"
+
+#: options/comments.php:77
+#: options/moderation.php:102
+msgid "User"
+msgstr "کاربر"
+
+#: options/comments.php:78
+#: options/moderation.php:101
+msgid "Date And Time"
+msgstr "تاریخ و زمان"
+
+#: options/comments.php:120
+#: options/voters.php:171
+msgid "With selected"
+msgstr "انتخاب شده"
+
+#: options/export.php:1
+msgid "Export Data"
+msgstr "برون دهی اطلاعات"
+
+#: options/export.php:6
+msgid "Users Data"
+msgstr "اطلاعات کاربری"
+
+#: options/gfx.php:1
+#: options/settings.php:30
+msgid "Settings saved."
+msgstr "تنظیمات ذخیره شد."
+
+#: options/gfx.php:79
+#: options/settings.php:86
+msgid "Save Settings"
+msgstr "ذخیره کردن تنظیمات"
+
+#: options/import.php:8
+#: options/import.php:15
+#: options/import.php:22
+msgid "Data import completed."
+msgstr "درون ریزی اطلاعات کامل شد."
+
+#: options/import.php:28
+#: options/import.php:59
+#: options/import.php:84
+#: options/import.php:143
+#: options/import.php:4
+#: options/import.php:11
+#: options/import.php:18
+msgid "Import Data"
+msgstr "درون ریزی اطلاعات"
+
+#: options/import.php:42
+#: options/import.php:67
+#: options/import.php:92
+msgid "Plugin URL"
+msgstr "آدرس افزونه"
+
+#: options/import.php:47
+#: options/import.php:72
+#: options/import.php:97
+msgid "Author URL"
+msgstr "آدرس طراح"
+
+#: options/import.php:52
+#: options/import.php:77
+#: options/import.php:136
+#: options/users_log.php:109
+msgid "Status"
+msgstr "وضعیت"
+
+#: options/import.php:102
+msgid "Instructions"
+msgstr "دستورالعمل ها"
+
+#: options/import.php:105
+msgid "For each value you have a name of the variable from plugin file in square brackets."
+msgstr ""
+
+#: options/import.php:106
+msgid "Plugin could save data in post meta table or only in the post using shortcodes. Import can try both, but if you are usre that ratings are stored in post meta table, use that option."
+msgstr ""
+
+#: options/import.php:109
+msgid "Import Settings"
+msgstr "درون ریزی تنظیمات"
+
+#: options/import.php:113
+msgid "Maximum review value"
+msgstr "حداکثر مقدار بررسی"
+
+#: options/import.php:119
+msgid "Meta Key"
+msgstr "کلید متا"
+
+#: options/import.php:125
+msgid "Try Importing from"
+msgstr "سعی در درون ریزی از"
+
+#: options/import.php:128
+msgid "Posts meta table"
+msgstr "جدول متا مطالب"
+
+#: options/import.php:129
+msgid "Posts contents only"
+msgstr "فقط محتوای مطالب"
+
+#: options/import.php:130
+msgid "Both contents and meta"
+msgstr "هم محتوا و هم متا"
+
+#: options/import.php:149
+msgid "To avoid rating data import problems, please don't use GD Star Rating in the same time as the plugins above, to avoid potential import problems and false data. I can't guarantee that data will be transfered without problems."
+msgstr ""
+
+#: options/import.php:104
+msgid "You need to enter few settings for this plugin. This can be found in the plugin's main and only PHP file: %s"
+msgstr "اطلاعاتی را برای تنظیمات این افزونه باید وارد کنید. اینها فقط در فایلهای php اصلی افزونه موجود است: %s"
+
+#: options/ips.php:73
+msgid "Ban New"
+msgstr "محدود کردن جدید"
+
+#: options/ips.php:74
+msgid "Banned"
+msgstr "محدود شده"
+
+#: options/moderation.php:134
+msgid "With Selected"
+msgstr "انتخاب شده"
+
+#: options/moderation.php:137
+msgid "Approve"
+msgstr "تایید"
+
+#: options/settings.php:41
+msgid "Features"
+msgstr "امکانات"
+
+#: options/settings.php:42
+msgid "Security"
+msgstr "امنیت"
+
+#: options/settings.php:43
+msgid "Advanced"
+msgstr "پیشرفته"
+
+#: options/settings.php:44
+msgid "Integration"
+msgstr "همسان سازی"
+
+#: options/settings.php:50
+msgid "Special"
+msgstr "مخصوص"
+
+#: options/setup.php:8
+msgid "Database tables reinstalled."
+msgstr "جداول دیتابیس دوباره نصب شدند."
+
+#: options/setup.php:18
+msgid "Multi rating tables reinstalled."
+msgstr "جداول رای دهی چندتایی دوباره نصب شدند."
+
+#: options/setup.php:25
+msgid "Settings are removed from WordPress installation."
+msgstr "تنظیمات از بخش نصب وردپرس حذف شده اند."
+
+#: options/setup.php:33
+msgid "Plugins default templates are reinstalled."
+msgstr "قالب های پیش فرض افزونه دوباره نصب شدند."
+
+#: options/setup.php:38
+msgid "Import Information is reseted."
+msgstr "اطلاعات درون ریزی مجددا ریست شد."
+
+#: options/setup.php:44
+msgid "Are you sure? Operation is not reversible."
+msgstr "مطمئن هستید؟ این کار غیرقابل برگشت است."
+
+#: options/setup.php:51
+msgid "Database Maintenance"
+msgstr "تعمیر بانک اطلاعاتی"
+
+#: options/setup.php:52
+msgid "Global Maintenance"
+msgstr "تعمیر عمومی"
+
+#: options/setup.php:53
+msgid "Full Uninstall"
+msgstr "حذف کامل برنامه"
+
+#: options/templates.php:25
+msgid "Templates"
+msgstr "قالب ها"
+
+#: options/tools.php:5
+msgid "Bulk"
+msgstr "کلی"
+
+#: options/tools.php:6
+msgid "Database"
+msgstr "بانک اطلاعاتی"
+
+#: options/tools.php:8
+msgid "Edit CSS"
+msgstr "ویرایش CSS"
+
+#: options/users.php:60
+msgid "Email"
+msgstr "ایمیل"
+
+#: options/users.php:61
+msgid "Thumbs Articles"
+msgstr "مقالات ایول داده شده"
+
+#: options/users.php:62
+msgid "Thumbs Comments"
+msgstr "دیدگاه های ایول داده شده"
+
+#: options/users.php:63
+msgid "Ratings Articles"
+msgstr "مقالات رتبه داده شده"
+
+#: options/users.php:64
+msgid "Ratings Comments"
+msgstr "دیدگاه های رتبه داده شده"
+
+#: options/users.php:32
+msgid "Visitor"
+msgstr "بازدیدکننده"
+
+#: options/users.php:109
+#: options/users.php:114
+#: options/users.php:119
+#: options/users.php:124
+msgid "unique ip's"
+msgstr "آی پی ثابت"
+
+#: options/users_log.php:82
+msgid "User Vote Log"
+msgstr "اطلاعات ثبت شده رای کاربر"
+
+#: options/users_log.php:85
+msgid "Votes log for user"
+msgstr "تاریخچه آراء برای کاربر"
+
+#: options/users_log.php:88
+msgid "Votes log for visitors"
+msgstr "تاریخچه آراء برای بازدید کننده ها"
+
+#: options/users_log.php:94
+#: options/voters.php:101
+msgid "All Votes"
+msgstr "همه آراء"
+
+#: options/users_log.php:110
+#: options/voters.php:132
+msgid "Vote Date"
+msgstr "تاریخ ارسال رای"
+
+#: options/users_log.php:114
+msgid "Comment Author"
+msgstr "نویسنده دیدگاه"
+
+#: options/users_log.php:115
+msgid "Comment Excerpt"
+msgstr "خلاصه دیدگاه"
+
+#: options/users_log.php:186
+msgid "Add selected IP's to ban IP's list."
+msgstr "آی پی های انتخابی را به لیست ممنوعه اضافه کن."
+
+#: options/users_log.php:199
+msgid "Only Invalid"
+msgstr "فقط غیرمعتبر ها"
+
+#: options/users_log.php:200
+#: options/voters.php:178
+msgid "From Log Only"
+msgstr "فقط از لوگ"
+
+#: options/users_log.php:201
+#: options/voters.php:177
+msgid "Full Delete"
+msgstr "حذف کامل"
+
+#: options/voters.php:86
+msgid "Vote log for post"
+msgstr "اطلاعات رای برای مطلب"
+
+#: tinymce3/panels/articlesrater.php:2
+#: tinymce3/panels/thumbsrating.php:2
+msgid "StarRater will render actual rating block if you choose not to have it automatically inserted. This way you can position it wherever you want in the contnents."
+msgstr ""
+
+#: tinymce3/panels/articlesrater.php:12
+#: tinymce3/panels/multis.php:21
+#: tinymce3/panels/thumbsrating.php:12
+msgid "Display rating block as read only."
+msgstr "بلوک رای گیری را به شکل فقط خواندنی نمایش بده."
+
+#: tinymce3/panels/articlesrater.php:16
+#: tinymce3/panels/styles.php:57
+msgid "Rating Stars"
+msgstr "ستاره های رای گیری"
+
+#: tinymce3/panels/articlesreview.php:1
+msgid "Articles Review Rating"
+msgstr "رتبه دهی بازبینی مقالات"
+
+#: tinymce3/panels/articlesreview.php:2
+msgid "StarReview will render stars representing review value assigned to the post or page."
+msgstr ""
+
+#: tinymce3/panels/articlesreview.php:11
+#: tinymce3/panels/general.php:30
+#: tinymce3/panels/multisreview.php:21
+msgid "Source"
+msgstr "منبع"
+
+#: tinymce3/panels/articlesreview.php:14
+#: tinymce3/panels/multisreview.php:24
+msgid "Post ID"
+msgstr "شناسه مطلب"
+
+#: tinymce3/panels/articlesreview.php:21
+#: tinymce3/panels/styles.php:77
+msgid "Review Stars"
+msgstr "ستاره های بررسی"
+
+#: tinymce3/panels/blograting.php:9
+#: widgets/top/part_filter.php:13
+#: widgets/top_28/part_filter.php:13
+msgid "Include Articles"
+msgstr "شامل مقالات"
+
+#: tinymce3/panels/blograting.php:12
+#: tinymce3/panels/filter.php:7
+msgid "Posts And Pages"
+msgstr "مطالب و برگه ها"
+
+#: tinymce3/panels/blograting.php:13
+#: tinymce3/panels/filter.php:8
+#: widgets/rating/part_filter.php:17
+#: widgets/rating_28/part_filter.php:17
+#: widgets/top/part_filter.php:17
+#: widgets/top_28/part_filter.php:17
+msgid "Posts Only"
+msgstr "فقط مطالب"
+
+#: tinymce3/panels/blograting.php:14
+#: tinymce3/panels/filter.php:9
+#: widgets/rating/part_filter.php:18
+#: widgets/rating_28/part_filter.php:18
+#: widgets/top/part_filter.php:18
+#: widgets/top_28/part_filter.php:18
+msgid "Pages Only"
+msgstr "فقط برگه ها"
+
+#: tinymce3/panels/blograting.php:19
+#: widgets/comments/part_filter.php:13
+#: widgets/comments_28/part_filter.php:13
+#: widgets/top/part_filter.php:24
+#: widgets/top_28/part_filter.php:24
+msgid "Display Votes From"
+msgstr "نمایش آرا از طرف"
+
+#: tinymce3/panels/blograting.php:21
+#: tinymce3/panels/commentsaggr.php:16
+#: tinymce3/panels/filter.php:16
+#: widgets/comments/part_basic.php:16
+#: widgets/comments/part_filter.php:16
+#: widgets/comments_28/part_basic.php:16
+#: widgets/comments_28/part_filter.php:16
+#: widgets/rating/part_basic.php:15
+#: widgets/rating/part_filter.php:27
+#: widgets/rating_28/part_basic.php:16
+#: widgets/rating_28/part_filter.php:27
+#: widgets/top/part_basic.php:16
+#: widgets/top/part_filter.php:27
+#: widgets/top_28/part_basic.php:16
+#: widgets/top_28/part_filter.php:27
+msgid "Everyone"
+msgstr "همه"
+
+#: tinymce3/panels/blograting.php:23
+#: tinymce3/panels/commentsaggr.php:18
+#: tinymce3/panels/filter.php:18
+#: widgets/comments/part_basic.php:18
+#: widgets/comments/part_filter.php:18
+#: widgets/comments_28/part_basic.php:18
+#: widgets/comments_28/part_filter.php:18
+#: widgets/rating/part_basic.php:17
+#: widgets/rating/part_filter.php:29
+#: widgets/rating_28/part_basic.php:18
+#: widgets/rating_28/part_filter.php:29
+#: widgets/top/part_basic.php:18
+#: widgets/top/part_filter.php:29
+#: widgets/top_28/part_basic.php:18
+#: widgets/top_28/part_filter.php:29
+msgid "Users Only"
+msgstr "فقط کاربران"
+
+#: tinymce3/panels/commentsaggr.php:1
+msgid "Aggregated Comments Ratings"
+msgstr "رتبه های دیدگاه های دریافت شده"
+
+#: tinymce3/panels/commentsaggr.php:2
+msgid "This will render aggregated comments rating for the post."
+msgstr ""
+
+#: tinymce3/panels/commentsaggr.php:14
+msgid "Calculate Votes From"
+msgstr "محاسبه آراء از طرف"
+
+#: tinymce3/panels/filter.php:1
+msgid "Basic"
+msgstr "ساده"
+
+#: tinymce3/panels/filter.php:4
+#: widgets/rating/part_filter.php:13
+#: widgets/rating_28/part_filter.php:13
+msgid "Include articles"
+msgstr "شامل مقالات"
+
+#: tinymce3/panels/filter.php:14
+#: widgets/rating/part_filter.php:24
+#: widgets/rating_28/part_filter.php:24
+msgid "Display votes from"
+msgstr "نمایش آراء از طرف"
+
+#: tinymce3/panels/filter.php:26
+#: widgets/rating/part_filter.php:52
+#: widgets/rating_28/part_filter.php:52
+msgid "Minimum votes"
+msgstr "کمترین آراء"
+
+#: tinymce3/panels/filter.php:30
+msgid "Excerpt words"
+msgstr "کلمات منتخب"
+
+#: tinymce3/panels/filter.php:37
+msgid "Grouping Specific"
+msgstr ""
+
+#: tinymce3/panels/filter.php:40
+#: widgets/rating/part_filter.php:65
+#: widgets/rating_28/part_filter.php:65
+msgid "Minimum posts count"
+msgstr "کمترین تعداد شمارش"
+
+#: tinymce3/panels/filter.php:47
+msgid "Sorting"
+msgstr "چینش"
+
+#: tinymce3/panels/filter.php:50
+msgid "Column"
+msgstr "ستون"
+
+#: tinymce3/panels/filter.php:54
+#: widgets/comments/part_filter.php:47
+#: widgets/comments_28/part_filter.php:47
+#: widgets/rating/part_filter.php:86
+#: widgets/rating_28/part_filter.php:86
+msgid "Total Votes"
+msgstr "کل آراء"
+
+#: tinymce3/panels/filter.php:58
+#: widgets/rating/part_filter.php:90
+#: widgets/rating_28/part_filter.php:90
+msgid "Count"
+msgstr "شمارش"
+
+#: tinymce3/panels/filter.php:59
+#: widgets/rating/part_filter.php:91
+#: widgets/rating_28/part_filter.php:91
+msgid "Bayesian Rating"
+msgstr "رتبه دهی بایسین"
+
+#: tinymce3/panels/filter.php:64
+msgid "Order"
+msgstr "چینش"
+
+#: tinymce3/panels/filter.php:67
+#: widgets/comments/part_filter.php:57
+#: widgets/comments_28/part_filter.php:57
+#: widgets/rating/part_filter.php:100
+#: widgets/rating_28/part_filter.php:100
+msgid "Descending"
+msgstr "نزولی"
+
+#: tinymce3/panels/filter.php:68
+#: widgets/comments/part_filter.php:58
+#: widgets/comments_28/part_filter.php:58
+#: widgets/rating/part_filter.php:101
+#: widgets/rating_28/part_filter.php:101
+msgid "Ascending"
+msgstr "سعودی"
+
+#: tinymce3/panels/filter.php:76
+msgid "Last Voted"
+msgstr "آخرین رای گرفته"
+
+#: tinymce3/panels/filter.php:77
+#: widgets/rating/part_filter.php:146
+#: widgets/rating_28/part_filter.php:146
+msgid "Use only articles voted for in last # days."
+msgstr ""
+
+#: tinymce3/panels/filter.php:80
+#: widgets/comments/part_filter.php:77
+#: widgets/comments_28/part_filter.php:77
+#: widgets/rating/part_filter.php:151
+#: widgets/rating_28/part_filter.php:151
+msgid "Enter 0 for all"
+msgstr "عدد 0 را برای همه وارد کنید"
+
+#: tinymce3/panels/filter.php:90
+msgid "Publish Date"
+msgstr "تاریخ انتشار"
+
+#: tinymce3/panels/filter.php:93
+#: widgets/rating/part_filter.php:168
+#: widgets/rating_28/part_filter.php:168
+msgid "Last # days"
+msgstr "# روز اخیر"
+
+#: tinymce3/panels/filter.php:94
+#: widgets/rating/part_filter.php:169
+#: widgets/rating_28/part_filter.php:169
+msgid "Exact month"
+msgstr "ماه دقیق"
+
+#: tinymce3/panels/filter.php:95
+#: widgets/rating/part_filter.php:170
+#: widgets/rating_28/part_filter.php:170
+msgid "Date range"
+msgstr "بازه تاریخ"
+
+#: tinymce3/panels/filter.php:103
+#: widgets/rating/part_filter.php:179
+#: widgets/rating_28/part_filter.php:179
+msgid "Number Of Days"
+msgstr "تعداد روزها"
+
+#: tinymce3/panels/filter.php:113
+#: widgets/rating/part_filter.php:190
+#: widgets/rating_28/part_filter.php:190
+msgid "Month"
+msgstr "ماه"
+
+#: tinymce3/panels/filter.php:123
+#: widgets/rating/part_filter.php:201
+#: widgets/rating_28/part_filter.php:201
+msgid "Range"
+msgstr "بازه"
+
+#: tinymce3/panels/general.php:1
+msgid "Display"
+msgstr "نمایش"
+
+#: tinymce3/panels/general.php:4
+msgid "Number Of Posts"
+msgstr "تعداد مطالب"
+
+#: tinymce3/panels/general.php:8
+#: widgets/rating/part_basic.php:23
+#: widgets/rating_28/part_basic.php:24
+msgid "Items Grouping"
+msgstr "گروه بندی گزینه ها"
+
+#: tinymce3/panels/general.php:11
+#: widgets/rating/part_basic.php:26
+#: widgets/rating_28/part_basic.php:27
+msgid "No grouping"
+msgstr "بدون گروه بندی"
+
+#: tinymce3/panels/general.php:12
+#: widgets/rating/part_basic.php:27
+#: widgets/rating_28/part_basic.php:28
+msgid "User based"
+msgstr "بر اساس کاربران"
+
+#: tinymce3/panels/general.php:13
+#: widgets/rating/part_basic.php:28
+#: widgets/rating_28/part_basic.php:29
+msgid "Category based"
+msgstr "بر اساس دسته ها"
+
+#: tinymce3/panels/general.php:14
+#: widgets/rating/part_basic.php:29
+#: widgets/rating_28/part_basic.php:30
+msgid "Taxonomy based"
+msgstr "بر اساس طبقه بندی"
+
+#: tinymce3/panels/general.php:22
+#: widgets/rating/part_basic.php:37
+#: widgets/rating_28/part_basic.php:38
+msgid "Taxonomy"
+msgstr "طبقه بندی"
+
+#: tinymce3/panels/general.php:33
+#: widgets/rating/part_basic.php:44
+#: widgets/rating_28/part_basic.php:45
+#: widgets/top/part_basic.php:24
+#: widgets/top_28/part_basic.php:24
+msgid "Data Source"
+msgstr "منبع اطلاعات"
+
+#: tinymce3/panels/general.php:54
+#: widgets/rating/part_trend.php:4
+#: widgets/rating/part_trend.php:12
+#: widgets/rating_28/part_trend.php:4
+#: widgets/rating_28/part_trend.php:12
+msgid "Trend"
+msgstr "روند"
+
+#: tinymce3/panels/general.php:57
+#: widgets/rating/part_trend.php:13
+#: widgets/rating_28/part_trend.php:13
+msgid "Rating trend display as"
+msgstr "رتبه دهی به روند و نمایش به عنوان"
+
+#: tinymce3/panels/general.php:60
+#: tinymce3/panels/general.php:97
+#: widgets/rating/part_trend.php:16
+#: widgets/rating/part_trend.php:54
+#: widgets/rating_28/part_trend.php:16
+#: widgets/rating_28/part_trend.php:54
+msgid "Text"
+msgstr "متن"
+
+#: tinymce3/panels/general.php:61
+#: tinymce3/panels/general.php:98
+#: widgets/rating/part_image.php:4
+#: widgets/rating/part_image.php:12
+#: widgets/rating/part_trend.php:17
+#: widgets/rating/part_trend.php:55
+#: widgets/rating_28/part_image.php:4
+#: widgets/rating_28/part_image.php:12
+#: widgets/rating_28/part_trend.php:17
+#: widgets/rating_28/part_trend.php:55
+msgid "Image"
+msgstr "تصویر"
+
+#: tinymce3/panels/general.php:69
+#: tinymce3/panels/general.php:106
+#: widgets/rating/part_trend.php:26
+#: widgets/rating/part_trend.php:64
+#: widgets/rating_28/part_trend.php:26
+#: widgets/rating_28/part_trend.php:64
+msgid "Up"
+msgstr "بالا"
+
+#: tinymce3/panels/general.php:72
+#: tinymce3/panels/general.php:109
+#: widgets/rating/part_trend.php:28
+#: widgets/rating/part_trend.php:66
+#: widgets/rating_28/part_trend.php:28
+#: widgets/rating_28/part_trend.php:66
+msgid "Equal"
+msgstr "معادل"
+
+#: tinymce3/panels/general.php:75
+#: tinymce3/panels/general.php:112
+#: widgets/rating/part_trend.php:30
+#: widgets/rating/part_trend.php:68
+#: widgets/rating_28/part_trend.php:30
+#: widgets/rating_28/part_trend.php:68
+msgid "Down"
+msgstr "پایین"
+
+#: tinymce3/panels/general.php:83
+#: tinymce3/panels/general.php:120
+#: widgets/rating/part_trend.php:39
+#: widgets/rating/part_trend.php:77
+#: widgets/rating_28/part_trend.php:39
+#: widgets/rating_28/part_trend.php:77
+msgid "Image set"
+msgstr "بسته تصاویر"
+
+#: tinymce3/panels/general.php:94
+#: widgets/rating/part_trend.php:51
+#: widgets/rating_28/part_trend.php:51
+msgid "Voting trend display as"
+msgstr ""
+
+#: tinymce3/panels/general.php:132
+msgid "Hiding"
+msgstr "مخفی سازی"
+
+#: tinymce3/panels/general.php:133
+#: widgets/rating/part_filter.php:108
+#: widgets/rating_28/part_filter.php:108
+msgid "Bayesian minumum votes required."
+msgstr "کمترین تعداد آراء بایسین."
+
+#: tinymce3/panels/general.php:134
+#: widgets/comments_28/part_filter.php:65
+#: widgets/rating/part_filter.php:114
+#: widgets/rating_28/part_filter.php:114
+msgid "Hide articles with no recorded votes."
+msgstr "مقالاتی که رای ای ندارند را مخفی کن."
+
+#: tinymce3/panels/general.php:135
+#: widgets/rating/part_filter.php:120
+#: widgets/rating_28/part_filter.php:120
+msgid "Hide articles with no review values."
+msgstr "مقالات بدون مقدار بازبینی را مخفی کن."
+
+#: tinymce3/panels/multis.php:6
+msgid "Multi Ratings"
+msgstr "چند رایی"
+
+#: tinymce3/panels/multis.php:25
+#: tinymce3/panels/multisreview.php:31
+msgid "Elements Stars"
+msgstr "ستاره های عناصر"
+
+#: tinymce3/panels/multis.php:45
+#: tinymce3/panels/multisreview.php:51
+msgid "Average Stars"
+msgstr "ستاره های میانگین"
+
+#: tinymce3/panels/multisreview.php:6
+msgid "Multi Reviews"
+msgstr "چند بازبینی ها"
+
+#: tinymce3/panels/multisreview.php:12
+msgid "Default"
+msgstr "پیش فرض"
+
+#: tinymce3/panels/styles.php:6
+msgid "Post Image"
+msgstr "تصویر مطلب"
+
+#: tinymce3/panels/styles.php:9
+msgid "Resize Width x Height"
+msgstr "تغییر اندازه عرض در طول"
+
+#: tinymce3/panels/styles.php:13
+#: widgets/rating/part_image.php:21
+#: widgets/rating_28/part_image.php:21
+msgid "This will work only if image is stored on the server."
+msgstr "این گزینه فقط در صورتی کار می کند که تصویر بر روی همین سرور باشد."
+
+#: tinymce3/panels/styles.php:16
+#: widgets/rating/part_image.php:25
+#: widgets/rating_28/part_image.php:25
+msgid "Get Image From"
+msgstr "دریافت تصویر از"
+
+#: tinymce3/panels/styles.php:19
+#: widgets/rating/part_image.php:28
+#: widgets/rating_28/part_image.php:28
+msgid "No image"
+msgstr "بدون تصویر"
+
+#: tinymce3/panels/styles.php:20
+#: widgets/rating/part_image.php:29
+#: widgets/rating_28/part_image.php:29
+msgid "Custom field"
+msgstr "فیلد دلخواه"
+
+#: tinymce3/panels/styles.php:21
+#: widgets/rating/part_image.php:30
+#: widgets/rating_28/part_image.php:30
+msgid "Post content"
+msgstr "محتویات مطلب"
+
+#: tinymce3/panels/styles.php:30
+#: widgets/rating/part_image.php:39
+#: widgets/rating_28/part_image.php:39
+msgid "If you use %IMAGE% tag in template and this option is selected, image will not be rendered."
+msgstr "اگر از برچسب %IMAGE% در قالب استفاده کرده اید و این تنظیم را هم به کار می برید، تصویر نمایش داده نمی شود."
+
+#: tinymce3/panels/styles.php:38
+#: widgets/rating/part_image.php:47
+#: widgets/rating_28/part_image.php:47
+msgid "Custom Field"
+msgstr "فیلد دلخواه"
+
+#: tinymce3/panels/styles.php:49
+#: widgets/rating/part_image.php:56
+#: widgets/rating_28/part_image.php:56
+msgid "First image from post content will be used for %IMAGE% tag."
+msgstr "اولین عکس مطلب به عنوان برچسب %IMAGE% مورد استفاده قرار می گیرد."
+
+#: tinymce3/panels/thumbsrating.php:1
+msgid "Thumbs Rating Block"
+msgstr "بلوک رتبه دهی ایول"
+
+#: tinymce3/window.php:33
+#: tinymce3/window.php:124
+msgid "Insert"
+msgstr "وارد کردن"
+
+#: tinymce3/window.php:51
+msgid "Shortcode"
+msgstr "کد میانبر"
+
+#: tinymce3/window.php:75
+msgid "Shortcode Info"
+msgstr "اطلاعات کد های کوتاه"
+
+#: tinymce3/window.php:76
+msgid "Change shortcode to see additional options you can set."
+msgstr "کلید میانبر را تغییر دهید تا تنظیمات اضافی را ببینید."
+
+#: tinymce3/window.php:120
+msgid "Cancel"
+msgstr "لغو"
+
+#: widgets/comments/part_basic.php:13
+#: widgets/comments_28/part_basic.php:13
+#: widgets/rating/part_basic.php:12
+#: widgets/rating_28/part_basic.php:13
+#: widgets/top/part_basic.php:13
+#: widgets/top_28/part_basic.php:13
+msgid "Show Widget To"
+msgstr "نمایش ابزارک برای"
+
+#: widgets/comments/part_basic.php:19
+#: widgets/comments_28/part_basic.php:19
+#: widgets/rating/part_basic.php:18
+#: widgets/rating_28/part_basic.php:19
+#: widgets/top/part_basic.php:19
+#: widgets/top_28/part_basic.php:19
+msgid "Hide Widget"
+msgstr "مخفی سازی ابزارک"
+
+#: widgets/comments/part_filter.php:5
+#: widgets/comments/part_image.php:5
+#: widgets/comments/part_stars.php:5
+#: widgets/comments_28/part_filter.php:5
+#: widgets/comments_28/part_image.php:5
+#: widgets/comments_28/part_stars.php:5
+#: widgets/rating/part_filter.php:5
+#: widgets/rating/part_image.php:5
+#: widgets/rating/part_stars.php:5
+#: widgets/rating/part_trend.php:5
+#: widgets/rating_28/part_filter.php:5
+#: widgets/rating_28/part_image.php:5
+#: widgets/rating_28/part_stars.php:5
+#: widgets/rating_28/part_trend.php:5
+#: widgets/top/part_filter.php:5
+#: widgets/top_28/part_filter.php:5
+msgid "Click on the header title to display the options."
+msgstr "بر روی عنوان سربرگ برای نمایش تنظیماتش کلیک کنید."
+
+#: widgets/comments/part_filter.php:24
+#: widgets/comments_28/part_filter.php:24
+msgid "Number Of Comments"
+msgstr "تعداد دیدگاه ها"
+
+#: widgets/comments/part_filter.php:31
+#: widgets/comments_28/part_filter.php:31
+msgid "Maximal length of comment text"
+msgstr "بیشترین طول متن دیدگاه"
+
+#: widgets/comments/part_filter.php:36
+#: widgets/comments_28/part_filter.php:36
+msgid "Minimum Votes"
+msgstr "کمترین رای"
+
+#: widgets/comments/part_filter.php:43
+#: widgets/comments_28/part_filter.php:43
+msgid "Sorting Column"
+msgstr "ستون چینش"
+
+#: widgets/comments/part_filter.php:48
+#: widgets/comments_28/part_filter.php:48
+msgid "Comment ID"
+msgstr "شناسه دیدگاه"
+
+#: widgets/comments/part_filter.php:54
+#: widgets/comments_28/part_filter.php:54
+msgid "Sorting Order"
+msgstr "ترتیب چینش"
+
+#: widgets/comments/part_filter.php:65
+msgid "Hide comments with no recorded votes."
+msgstr "دیدگاه های بدون رای را پنهان کن."
+
+#: widgets/comments/part_filter.php:72
+#: widgets/comments_28/part_filter.php:72
+msgid "Use only comments voted for in last # days."
+msgstr "فقط دیدگاه هایی که # روز اخیر رای دریافت کرده اند را به کاربگیر."
+
+#: widgets/comments/part_image.php:4
+#: widgets/comments/part_image.php:12
+#: widgets/comments_28/part_image.php:4
+#: widgets/comments_28/part_image.php:12
+msgid "Avatar"
+msgstr "شکلک"
+
+#: widgets/rating/part_filter.php:16
+#: widgets/rating_28/part_filter.php:16
+#: widgets/top/part_filter.php:16
+#: widgets/top_28/part_filter.php:16
+msgid "Posts & Pages"
+msgstr "مطالب و برگه ها"
+
+#: widgets/rating/part_filter.php:35
+#: widgets/rating_28/part_filter.php:35
+msgid "Number of posts"
+msgstr "تعداد مطالب"
+
+#: widgets/rating/part_filter.php:42
+#: widgets/rating_28/part_filter.php:42
+msgid "Maximal character length for title"
+msgstr "حداکثر تعداد حروف عنوان"
+
+#: widgets/rating/part_filter.php:47
+#: widgets/rating_28/part_filter.php:47
+msgid "Number of words for excerpt"
+msgstr "تعداد کلمات برای چکیده"
+
+#: widgets/rating/part_filter.php:72
+#: widgets/rating_28/part_filter.php:72
+msgid "This filter will be used only with grouping options."
+msgstr "این فیلتر فقط با تنظیمات گروه بندی مورد استفاده قرار می گیرد."
+
+#: widgets/rating/part_filter.php:82
+#: widgets/rating_28/part_filter.php:82
+msgid "Sorting column"
+msgstr "ستون چینش"
+
+#: widgets/rating/part_filter.php:97
+#: widgets/rating_28/part_filter.php:97
+msgid "Sorting order"
+msgstr "ترتیب چینش"
+
+#: widgets/rating/part_filter.php:131
+#: widgets/rating_28/part_filter.php:131
+msgid "Article Category"
+msgstr "دسته مقاله"
+
+#: widgets/rating/part_filter.php:139
+#: widgets/rating_28/part_filter.php:139
+msgid "Only selected category, no subcategories."
+msgstr "فقط دسته های انتخاب شده، نه زیر دسته ها."
+
+#: widgets/rating/part_filter.php:164
+#: widgets/rating_28/part_filter.php:164
+msgid "Article Publish Date"
+msgstr "تاریخ انتشار مقاله"
+
+#: widgets/rating/part_filter.php:167
+#: widgets/rating_28/part_filter.php:167
+msgid "Any date"
+msgstr "هر تاریخی"
+
+#: widgets/rating/part_image.php:13
+#: widgets/rating_28/part_image.php:13
+msgid "Resize Image"
+msgstr "تغییر اندازه تصویر"
+
+#: widgets/rating/part_stars.php:13
+#: widgets/rating_28/part_stars.php:13
+msgid "Stars Set"
+msgstr "بسته ستاره ها"
+
+#: widgets/rating/part_stars.php:18
+#: widgets/rating_28/part_stars.php:18
+msgid "Stars Size"
+msgstr "اندازه ستاره ها"
+
+#: widgets/rating/part_stars.php:23
+#: widgets/rating_28/part_stars.php:23
+msgid "Review Set"
+msgstr "بسته بررسی"
+
+#: widgets/rating/part_stars.php:28
+#: widgets/rating_28/part_stars.php:28
+msgid "Review Size"
+msgstr "اندازه بازبینی"
+
+#: widgets/rating/part_stars.php:38
+#: widgets/rating_28/part_stars.php:38
+msgid "Thumbs Size"
+msgstr "اندازه ایول ها"
+

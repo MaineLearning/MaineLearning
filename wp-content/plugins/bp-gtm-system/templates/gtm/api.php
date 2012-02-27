@@ -1,0 +1,3 @@
+<?php
+$api = new API;
+?>

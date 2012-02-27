@@ -1,0 +1,17 @@
+CREATE TABLE `%sgdsr_data_comment` (
+  `comment_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `post_id` int(11) DEFAULT '-1',
+  `is_locked` char(1) DEFAULT '0',
+  `user_voters` int(11) DEFAULT '0',
+  `user_votes` decimal(11,1) DEFAULT '0.0',
+  `visitor_voters` int(11) DEFAULT '0',
+  `visitor_votes` decimal(11,1) DEFAULT '0.0',
+  `review` decimal(3,1) DEFAULT '-1.0',
+  `review_text` varchar(255) DEFAULT NULL,
+  `user_recc_plus` int(11) DEFAULT '0',
+  `user_recc_minus` int(11) DEFAULT '0',
+  `visitor_recc_plus` int(11) DEFAULT '0',
+  `visitor_recc_minus` int(11) DEFAULT '0',
+  `last_voted` timestamp NULL DEFAULT NULL,
+  `last_voted_recc` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`comment_id`))%COLLATE%;

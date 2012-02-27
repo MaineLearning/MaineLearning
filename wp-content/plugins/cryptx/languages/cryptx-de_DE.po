@@ -1,0 +1,259 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CryptX 2.5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-15 10:43+0100\n"
+"PO-Revision-Date: 2011-09-15 10:50+0100\n"
+"Last-Translator: Ralf Weber <ralf@weber-nrw.de>\n"
+"Language-Team: Ralf Weber <ralf@weber-nrw.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: /Users/ralf/Dropbox/Code/CryptX/trunk\n"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:153
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:159
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:474
+msgid "Donate"
+msgstr "Spenden"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:444
+msgid "Settings saved."
+msgstr "Einstellungen speichern."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:458
+msgid "Information"
+msgstr "Information"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:468
+msgid "Plugin"
+msgstr "Plugin"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:470
+msgid "Version"
+msgstr "Version"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:472
+msgid "Author"
+msgstr "Autor"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:473
+msgid "Follow on Twitter"
+msgstr "auf Twitter folgen"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+msgid "Please support me by translating CryptX into other languages. You can download the cryptx.pot file from my"
+msgstr "Bitte unterstützt mich bei der Übersetzung von CryptX in andere Sprachen. Du cryptx.pot Datei kann von meiner"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+msgid "site"
+msgstr "Internetseite"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+msgid "and mail me the zipped language files. Thanks for it."
+msgstr "heruntergeladen werden.<br/>Die Sprachdateien können mir dann einfach zu mailen. Danke."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:487
+msgid "Presentation"
+msgstr "Darstellung"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:492
+msgid "Replacement for '@'"
+msgstr "Ersatz f&uuml;r das '@' im Email-Link"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:497
+msgid "Replacement for '.'"
+msgstr "Ersatz f&uuml;r den '.' im Email-Link"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:502
+msgid "Text for link"
+msgstr "Text f&uuml;r den Link"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:507
+msgid "Image-URL"
+msgstr "Bild Url f&uuml;r den Link"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:512
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:529
+msgid "Title-Tag for the Image"
+msgstr "Title-Tag für das Bild"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:517
+msgid "Select image from folder"
+msgstr "W&auml;hlen Sie ein Bild"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:524
+msgid "the selected image: "
+msgstr "ausgew&auml;hltes Bild: "
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:525
+#, php-format
+msgid "Upload your favorite email-image to '%s'. Only .jpg and .gif Supported!"
+msgstr "Speichern Sie ein Bild im Verzeichnis '%s', um es in der Liste ausw&auml;hlen zu k&ouml;nnen. Es werden nur .jpg und .gif unterst&uuml;tzt!"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:534
+msgid "Text scrambled by AntiSpamBot (<small>Try it and look at your site and check the html source!</small>)"
+msgstr "Text mit der Antispambot Funktion von Wordpress ver&auml;ndern (<small>Es sieht zwar aus wie eine normale Email Adresse, aber es ist keine mehr. Seht im Quelltext nach!</small>)"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:538
+msgid "Convert Email to PNG-image"
+msgstr "Email in ein Bild umwandeln"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:539
+msgid "Example with the saved options: "
+msgstr "Beispiel mit den gespeicherten Optionen:"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:543
+msgid "Choose a Font"
+msgstr "W&auml;hlen Sie eine Schrift"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:549
+#, php-format
+msgid "Upload your favorite font to '%s'. Only .ttf is Supported!"
+msgstr "Speichern Sie die Fontdatei im Verzeichnis '%s', um es in der Liste ausw&auml;hlen zu k&ouml;nnen. Es wird nur .ttf unterst&uuml;tzt!"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:554
+msgid "Font size (pixel)"
+msgstr "Schriftgr&ouml;sse (Pixel)"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:559
+msgid "Font color (RGB)"
+msgstr "Schriftfarbe (RGB)"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:563
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:598
+msgid "Save Changes"
+msgstr "%Auml;nderungen speichern"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:567
+msgid "General"
+msgstr "Allgemeines"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:571
+msgid "Apply CryptX to..."
+msgstr "CryptX anwenden auf..."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:572
+msgid "Content"
+msgstr "Inhalt"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:572
+msgid "(<i>this can be disabled per Post by an Option</i>)"
+msgstr "(<i>kann bei jedem Artikel/Seite seperat abgeschaltet werden</i>)"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:573
+msgid "Custom fields"
+msgstr "Benutzerdefinierte Felder"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:574
+msgid "Excerpt"
+msgstr "Auszug"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:575
+msgid "Comments"
+msgstr "Kommentaren"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:576
+msgid "Widgets"
+msgstr "Widgets"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:576
+msgid "(<i>works only on all widgets, not on a single widget</i>!)"
+msgstr "(<i>betrifft ALLE Widgets</i>!)"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:579
+msgid "Excluded ID's..."
+msgstr "Ausgenommene ID's..."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:581
+msgid "Enter all Page/Post ID's to exclude from CryptX as comma seperated list."
+msgstr "Trage hier alle Seiten/Artikel ID's durch Komma getrennt ein die von CryptX ausgenommen werden sollen."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:582
+msgid "Enable the CryptX Widget on editing a post or page."
+msgstr "Aktiviert das CryptX Widget beim bearbeiten eines Artikels oder einer Seite."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:585
+msgid "Type of decryption"
+msgstr "Art der Verschl&uuml;sselung"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:586
+msgid "Use javascript to hide the Email-Link."
+msgstr "Zum verstecken der Emails <b>javascript</b> benutzen"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:587
+msgid "Use Unicode to hide the Email-Link."
+msgstr "Zum verstecken der Emails <b>UNICODE</b> benutzen"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:590
+msgid "Where to load the needed javascript..."
+msgstr "Wo soll das benötigte Javascript geladen werden..."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:591
+msgid "Load the javascript in the <b>header</b> of the page."
+msgstr "Javascript im <b>Header</b> der Seite laden"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:592
+msgid "Load the javascript in the <b>footer</b> of the page."
+msgstr "Javascript im <b>Footer</b> der Seite laden"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:595
+msgid "Add mailto to all unlinked email addresses"
+msgstr "Füge mailto-Link zu allen nicht verlinkten Email Adressen"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:602
+msgid "How to use CryptX in your Template"
+msgstr "Wie bindest Du CryptX in Dein Template ein"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:606
+msgid "In your Template you can use the following function to encrypt a email address:"
+msgstr "Im Template kannst Du zum verschlüsseln von Email Adressen die folgende Funktion von CryptX verwenden:"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:621
+msgid "parameter is the email address."
+msgstr "Parameter ist die Email Adresse"
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:622
+msgid "parameter is the linktext. If none given the email address is used."
+msgstr "Parameter ist der angezeigte Text für den Link. Wenn nicht angegeben wird die Email Adresse genommen."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:623
+msgid "parameter is a css class added to the link."
+msgstr "Parameter ist eine CSS Klasse die hinzugefügt werden soll."
+
+#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:624
+msgid "parameter is 1 for echo the encrypted email address or 0 to return the result to a variable."
+msgstr "Parameter ist entweder 1 zum direkten ausgeben oder 0 um das Ergebnis an eine Variable zu übergeben."
+
+#~ msgid "Upload your favorite email-image to "
+#~ msgstr "Speicher Dein bevorzugtes Email Bild nach "
+
+#~ msgid ". Only .jpg and .gif Supported!"
+#~ msgstr " . Nur .jpg und .gif wird unterstützt!"
+
+#~ msgid "CryptX Options..."
+#~ msgstr "CryptX Optionen..."
+
+#~ msgid "Apply CryptX to the Content"
+#~ msgstr "CryptX auf den Inhalt anwenden"
+
+#~ msgid "Apply CryptX to the Excerpt"
+#~ msgstr "CryptX auf die Ausz&uuml;ge anwenden"
+
+#, fuzzy
+#~ msgid "Gerneral"
+#~ msgstr "Allgemeines"
+
+#~ msgid "Apply CryptX to the Comments"
+#~ msgstr "CryptX auf Kommentare anwenden"
+
+#~ msgid "Update &raquo;"
+#~ msgstr "Aktualisieren &raquo;"

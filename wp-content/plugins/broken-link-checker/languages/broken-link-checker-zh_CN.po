@@ -1,0 +1,696 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: whiteshadow@w-shadow.com\n"
+"POT-Creation-Date: 2009-10-30 11:06+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: HankYang <yrstyh@gmail.com>\n"
+"Language-Team: wenzhu.org <yrstyh@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: core.php:132
+#: core.php:1284
+msgid "Loading..."
+msgstr "加载中……"
+
+#: core.php:155
+#: core.php:569
+msgid "[ Network error ]"
+msgstr "[网络错误]"
+
+#: core.php:180
+msgid "Automatically expand the widget if broken links have been detected"
+msgstr "若检测到失效链接则自动展开窗口部件"
+
+#: core.php:359
+#: core.php:368
+#: core.php:386
+#: core.php:400
+#: core.php:907
+#, php-format
+msgid "Database error : %s"
+msgstr "数据库错误：%s"
+
+#: core.php:423
+msgid "Link Checker Settings"
+msgstr "链接检查器设置"
+
+#: core.php:424
+msgid "Link Checker"
+msgstr "链接检查器"
+
+#: core.php:435
+msgid "View Broken Links"
+msgstr "查看失效链接"
+
+#: core.php:436
+#: core.php:833
+msgid "Broken Links"
+msgstr "失效链接"
+
+#: core.php:453
+msgid "Settings"
+msgstr "设置"
+
+#: core.php:533
+msgid "Broken Link Checker Options"
+msgstr "链接检查器选项"
+
+#: core.php:546
+msgid "Status"
+msgstr "状态"
+
+#: core.php:548
+#: core.php:771
+msgid "Show debug info"
+msgstr "显示调试信息"
+
+#: core.php:582
+msgid "Re-check all pages"
+msgstr "重新检查所有页面"
+
+#: core.php:606
+msgid "Check each link"
+msgstr "检查每一个链接"
+
+#: core.php:611
+#, php-format
+msgid "Every %s hours"
+msgstr "每 %s 小时"
+
+#: core.php:620
+msgid "Existing links will be checked this often. New links will usually be checked ASAP."
+msgstr "已有的链接将以这个频率检测，新加的链接通常会被尽快检测"
+
+#: core.php:627
+msgid "Broken link CSS"
+msgstr "失效链接的CSS样式"
+
+#: core.php:632
+msgid "Apply <em>class=\"broken_link\"</em> to broken links"
+msgstr "将样式<em>class=\"broken_link\"</em>应用到失效链接"
+
+#: core.php:644
+msgid "Exclusion list"
+msgstr "排除列表"
+
+#: core.php:645
+msgid "Don't check links where the URL contains any of these words (one per line) :"
+msgstr "不检测含有以下关键字的链接（每个关键字一行）"
+
+#: core.php:655
+msgid "Custom fields"
+msgstr "自定义内容"
+
+#: core.php:656
+msgid "Check URLs entered in these custom fields (one per line) :"
+msgstr "检测输入到此自定义栏目中的链接（每个链接一行）"
+
+#: core.php:667
+msgid "Advanced"
+msgstr "高级"
+
+#: core.php:673
+msgid "Timeout"
+msgstr "超时"
+
+#: core.php:679
+#: core.php:735
+#, php-format
+msgid "%s seconds"
+msgstr "%s 秒"
+
+#: core.php:688
+msgid "Links that take longer than this to load will be marked as broken."
+msgstr "若链接超过这么长的时间响应将被视为失效"
+
+#: core.php:697
+msgid "Custom temporary directory"
+msgstr "自定义临时目录"
+
+#: core.php:706
+#: core.php:2047
+#: core.php:2088
+msgid "OK"
+msgstr "确定"
+
+#: core.php:709
+msgid "Error : This directory isn't writable by PHP."
+msgstr "错误：此目录不可被PHP写入"
+
+#: core.php:714
+msgid "Error : This directory doesn't exist."
+msgstr "错误：此目录不存在"
+
+#: core.php:722
+msgid "Set this field if you want the plugin to use a custom directory for its lockfiles. Otherwise, leave it blank."
+msgstr "如果你想让插件的锁档使用一个自定义目录。否则请留空。"
+
+#: core.php:729
+msgid "Max. execution time"
+msgstr "最大执行时间"
+
+#: core.php:746
+msgid "The plugin works by periodically creating a background worker instance that parses your posts looking for links, checks the discovered URLs, and performs other time-consuming tasks. Here you can set for how long, at most, the background instance may run each time before stopping."
+msgstr "此插件通通过定期在后台创建一个实例来解析你的文章以搜索链接，检查找到的链接并执行一些其他耗时的任务。在这里你可以设置后台实例每次最多可以运行多长时间。"
+
+#: core.php:756
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: core.php:769
+msgid "Hide debug info"
+msgstr "隐藏调试信息"
+
+#: core.php:832
+msgid "Broken"
+msgstr "失效"
+
+#: core.php:834
+msgid "No broken links found"
+msgstr "未找到失效链接"
+
+#: core.php:838
+msgid "Redirects"
+msgstr "重定向"
+
+#: core.php:839
+msgid "Redirected Links"
+msgstr "被重定向的链接"
+
+#: core.php:840
+msgid "No redirects found"
+msgstr "未发现重定向的链接"
+
+#: core.php:845
+msgid "All"
+msgstr "所有"
+
+#: core.php:846
+msgid "Detected Links"
+msgstr "检测到的链接"
+
+#: core.php:847
+msgid "No links found (yet)"
+msgstr "（尚未）发现连接"
+
+#: core.php:966
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: core.php:967
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: core.php:974
+#: core.php:1149
+#, php-format
+msgid "Displaying %s&#8211;%s of <span class=\"current-link-count\">%s</span>"
+msgstr "显示 <span class=\"current-link-count\">%s</span> 的  %s&#8211;%s"
+
+#: core.php:996
+msgid "Source"
+msgstr "来源"
+
+#: core.php:998
+msgid "Link Text"
+msgstr "链接文字"
+
+#: core.php:999
+msgid "URL"
+msgstr "网址"
+
+#: core.php:1025
+#: core.php:1031
+msgid "Edit this post"
+msgstr "编辑此文章"
+
+#: core.php:1031
+#: core.php:1046
+msgid "Edit"
+msgstr "编辑"
+
+#: core.php:1032
+msgid "Delete this post"
+msgstr "删除此文章"
+
+#: core.php:1032
+#, php-format
+msgid ""
+"You are about to delete this post '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"你将要删除这篇文章 '%s'\n"
+" '取消'以停止, '确定'以删除."
+
+#: core.php:1032
+#: core.php:1047
+msgid "Delete"
+msgstr "删除"
+
+#: core.php:1034
+#, php-format
+msgid "View \"%s\""
+msgstr "查看 \"%s\""
+
+#: core.php:1034
+msgid "View"
+msgstr "查看"
+
+#: core.php:1041
+#: core.php:1046
+msgid "Edit this bookmark"
+msgstr "编辑此书签"
+
+#: core.php:1047
+#, php-format
+msgid ""
+"You are about to delete this link '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"你将要删除这个链接 '%s'\n"
+"  '取消' 以停止, '确定' 以删除."
+
+#: core.php:1056
+msgid "[An orphaned link! This is a bug.]"
+msgstr "[一个孤立链接！这是一个错误。]"
+
+#: core.php:1070
+msgid "Image"
+msgstr "图像"
+
+#: core.php:1081
+msgid "Custom field"
+msgstr "自定义项目"
+
+#: core.php:1089
+msgid "Bookmark"
+msgstr "书签"
+
+#: core.php:1104
+msgid "Show more info about this link"
+msgstr "显示关于此链接的更多信息"
+
+#: core.php:1104
+#: core.php:2381
+msgid "Details"
+msgstr "详情"
+
+#: core.php:1106
+msgid "Remove this link from all posts"
+msgstr "将此链接从所有文章中删除"
+
+#: core.php:1107
+#: core.php:1371
+msgid "Unlink"
+msgstr "取消链接"
+
+#: core.php:1110
+#: core.php:1401
+#: core.php:1412
+msgid "Excluded"
+msgstr "已排除的"
+
+#: core.php:1112
+msgid "Add this URL to the exclusion list"
+msgstr "将此链接添加进排除列表"
+
+#: core.php:1113
+#: core.php:1415
+msgid "Exclude"
+msgstr "排除"
+
+#: core.php:1116
+msgid "Edit link URL"
+msgstr "修改这个网址"
+
+#: core.php:1116
+#: core.php:1340
+msgid "Edit URL"
+msgstr "修改网址"
+
+#: core.php:1122
+msgid "Cancel URL editing"
+msgstr "取消网址修改"
+
+#: core.php:1122
+msgid "Cancel"
+msgstr "取消"
+
+#: core.php:1133
+msgid "Remove this link from the list of broken links and mark it as valid"
+msgstr "将此链接从失效链接列表中删除并标记为有效"
+
+#: core.php:1135
+#: core.php:1204
+msgid "Discard"
+msgstr "忽略"
+
+#: core.php:1180
+#: core.php:1347
+#: core.php:1384
+msgid "Wait..."
+msgstr "稍等……"
+
+#: core.php:1238
+msgid "Save URL"
+msgstr "保存网址"
+
+#: core.php:1248
+msgid "Saving changes..."
+msgstr "保存更改中……"
+
+#: core.php:1437
+msgid "Log"
+msgstr "日志"
+
+#: core.php:1445
+msgid "Post published on"
+msgstr "文章发布在"
+
+#: core.php:1450
+msgid "Link last checked"
+msgstr "最后一次检查的链接"
+
+#: core.php:1454
+msgid "Never"
+msgstr "从不"
+
+#: core.php:1460
+msgid "HTTP code"
+msgstr "HTTP代码"
+
+#: core.php:1465
+msgid "Response time"
+msgstr "响应时间"
+
+#: core.php:1467
+#, php-format
+msgid "%2.3f seconds"
+msgstr "%2.3f 秒"
+
+#: core.php:1470
+msgid "Final URL"
+msgstr "最终网址"
+
+#: core.php:1475
+msgid "Redirect count"
+msgstr "重定向数目"
+
+#: core.php:1480
+msgid "Instance count"
+msgstr "实例数目"
+
+#: core.php:1489
+#, php-format
+msgid "This link has failed %d time."
+msgid_plural "This link has failed %d times."
+msgstr[0] "此链接失败了%d次"
+
+#: core.php:1879
+#: core.php:2206
+msgid "This link wasn't checked because a matching keyword was found on your exclusion list."
+msgstr "没有检查此链接因为它包含了您的排除列表中的关键字"
+
+#: core.php:1921
+msgid "View broken links"
+msgstr "查看失效链接"
+
+#: core.php:1922
+#, php-format
+msgid "Found %d broken link"
+msgid_plural "Found %d broken links"
+msgstr[0] "已找到%d条失效链接"
+
+#: core.php:1928
+msgid "No broken links found."
+msgstr "未找到失效链接。"
+
+#: core.php:1935
+#, php-format
+msgid "%d URL in the work queue"
+msgid_plural "%d URLs in the work queue"
+msgstr[0] "执行队列中还有%d条网址"
+
+#: core.php:1938
+msgid "No URLs in the work queue."
+msgstr "执行队列中无网址"
+
+#: core.php:1944
+#, php-format
+msgid "Detected %d unique URL"
+msgid_plural "Detected %d unique URLs"
+msgstr[0] "发现%d条唯一网址"
+
+#: core.php:1945
+#, php-format
+msgid "in %d link"
+msgid_plural "in %d links"
+msgstr[0] "在 %d 条链接中"
+
+#: core.php:1950
+msgid "and still searching..."
+msgstr "还在继续搜索……"
+
+#: core.php:1956
+msgid "Searching your blog for links..."
+msgstr "正在您的博客中搜索链接……"
+
+#: core.php:1958
+msgid "No links detected."
+msgstr "没有发现链接。"
+
+#: core.php:2027
+#: core.php:2059
+#: core.php:2102
+#: core.php:2183
+msgid "You're not allowed to do that!"
+msgstr "您无权限执行此操作！"
+
+#: core.php:2035
+#: core.php:2069
+#: core.php:2112
+#: core.php:2193
+#, php-format
+msgid "Oops, I can't find the link %d"
+msgstr "啊哦，我找不到%d号链接"
+
+#: core.php:2043
+msgid "This link was manually marked as working by the user."
+msgstr "此链接被用户标记为有效。"
+
+#: core.php:2049
+msgid "Oops, couldn't modify the link!"
+msgstr "啊哦，无法修改此链接！"
+
+#: core.php:2052
+#: core.php:2129
+msgid "Error : link_id not specified"
+msgstr "错误：未指定link_id"
+
+#: core.php:2076
+msgid "Oops, the new URL is invalid!"
+msgstr "啊哦，这条新的链接无效！"
+
+#: core.php:2085
+msgid "An unexpected error occured!"
+msgstr "发生了一个未捕获的异常！"
+
+#: core.php:2094
+msgid "Error : link_id or new_url not specified"
+msgstr "错误：未指定link_id或者new_url"
+
+#: core.php:2119
+#, php-format
+msgid "URL %s was removed."
+msgstr "网址%s已经被删除。"
+
+#: core.php:2123
+msgid "The plugin failed to remove the link."
+msgstr "移除链接失败。"
+
+#: core.php:2138
+msgid "You don't have sufficient privileges to access this information!"
+msgstr "您没有足够的权限来访问此信息！"
+
+#: core.php:2151
+msgid "Error : link ID not specified"
+msgstr "错误：链接ID未指定"
+
+#: core.php:2175
+#, php-format
+msgid "Failed to load link details (%s)"
+msgstr "加载链接(%s)详情失败"
+
+#: core.php:2213
+#, php-format
+msgid "URL %s added to the exclusion list"
+msgstr "网址%s成功添加到排除列表"
+
+#: core.php:2217
+msgid "Link ID not specified"
+msgstr "链接ID未指定"
+
+#: core.php:2367
+#, php-format
+msgid "The current temporary directory is not accessible; please <a href=\"%s\">set a different one</a>."
+msgstr "当前的临时目录不可访问；请<a href=\"%s\">重新设置一个</a>."
+
+#: core.php:2372
+#, php-format
+msgid "Please make the directory <code>%1$s</code> writable by plugins or <a href=\"%2$s\">set a custom temporary directory</a>."
+msgstr "请让目录<code>%1$s</code>可被插件写入或者<a href=\"%2$s\">设置一个自定义临时目录</a>."
+
+#: core.php:2379
+msgid "Broken Link Checker can't create a lockfile."
+msgstr "无效链接检查器无法创建一个锁档"
+
+#: core.php:2384
+msgid ""
+"The plugin uses a file-based locking mechanism to ensure that only one instance of the\r\n"
+"\t\t\t\tresource-heavy link checking algorithm is running at any given time. Unfortunately,  \r\n"
+"\t\t\t\tBLC can't find a writable directory where it could store the lockfile - it failed to \r\n"
+"\t\t\t\tdetect the location of your server's temporary directory, and the plugin's own directory\r\n"
+"\t\t\t\tisn't writable by PHP. To fix this problem, please make the plugin's directory writable\r\n"
+"\t\t\t\tor enter a specify a custom temporary directory in the plugin's settings."
+msgstr ""
+"此插件利用一个基于文件的锁定机制来确定在任何时间里\r\n"
+"\t\t\t\t只有一个大型的链接检查算法运行。不幸的是，\r\n"
+"\t\t\t\t BLC无法找到一个可写入的目录来保存锁档。它无法检测到你服务器上的临时目录，而且 \r\n"
+"\t\t\t\t插件自身所在的目录也无法被PHP写入。要修复这个问题，请使插件的目录可写。\r\n"
+"\t\t\t\t或者在插件的设置中指定一个临时目录。"
+
+#: core.php:2409
+msgid "PHP version"
+msgstr "PHP版本"
+
+#: core.php:2415
+msgid "MySQL version"
+msgstr "MySQL版本"
+
+#: core.php:2428
+msgid "You have an old version of CURL. Redirect detection may not work properly."
+msgstr "您的CURL版本过低。重定向检测可能无法正确运行。"
+
+#: core.php:2440
+#: core.php:2456
+#: core.php:2461
+msgid "Not installed"
+msgstr "未安装"
+
+#: core.php:2443
+msgid "CURL version"
+msgstr "CURL版本"
+
+#: core.php:2449
+msgid "Installed"
+msgstr "已安装"
+
+#: core.php:2462
+msgid "You must have either CURL or Snoopy installed for the plugin to work!"
+msgstr "要让插件正常运行，您必须安装CURL或者Snoopy！"
+
+#: core.php:2473
+msgid "On"
+msgstr "开启"
+
+#: core.php:2474
+msgid "Redirects may be detected as broken links when safe_mode is on."
+msgstr "在安全模式打开时重定向可能被识别为无效链接。"
+
+#: core.php:2479
+#: core.php:2493
+msgid "Off"
+msgstr "关闭"
+
+#: core.php:2487
+#, php-format
+msgid "On ( %s )"
+msgstr "在（%s）内"
+
+#: core.php:2488
+msgid "Redirects may be detected as broken links when open_basedir is on."
+msgstr "当open_basedir打开时重定向可能被识别为无效链接。"
+
+#: core.php:2507
+msgid "Can't create a lockfile. Please specify a custom temporary directory."
+msgstr "无法建立锁档。请指定一个自定义临时目录。"
+
+#: link-classes.php:212
+msgid "First try : 0 (No response)"
+msgstr "第一次尝试：0（无响应）"
+
+#: link-classes.php:214
+#, php-format
+msgid "First try : %d"
+msgstr "第一次尝试：%d"
+
+#: link-classes.php:222
+msgid "Trying a second time with different settings..."
+msgstr "用不同的设置尝试第二次……"
+
+#: link-classes.php:237
+msgid "Second try : 0 (No response)"
+msgstr "第二次尝试：0（无响应）"
+
+#: link-classes.php:239
+#, php-format
+msgid "Second try : %d"
+msgstr "第二次尝试：%d"
+
+#: link-classes.php:265
+msgid "Using Snoopy"
+msgstr "使用Snoopy"
+
+#: link-classes.php:285
+msgid "Request timed out."
+msgstr "请求超时。"
+
+#: link-classes.php:304
+msgid "Link is valid."
+msgstr "链接有效。"
+
+#: link-classes.php:309
+msgid "Link is broken."
+msgstr "链接失效。"
+
+#: link-classes.php:313
+msgid "Most likely the connection timed out or the domain doesn't exist."
+msgstr "最大的可能是连接超时或者此域名不存在。"
+
+#: link-classes.php:354
+#, php-format
+msgid "Error adding link %s : %s"
+msgstr "在添加链接 %s : %s 时发生错误"
+
+#: link-classes.php:374
+#, php-format
+msgid "Error updating link %d : %s"
+msgstr "在更行链接 %d : %s 时失败。"
+
+#. Plugin Name of an extension
+msgid "Broken Link Checker"
+msgstr "失效链接检查器"
+
+#. Plugin URI of an extension
+msgid "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
+msgstr "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
+
+#. Description of an extension
+msgid "Checks your posts for broken links and missing images and notifies you on the dashboard if any are found."
+msgstr "检查您文章中的失效链接和丢失的图片，如果有任何发现就在控制面板中提醒您。"
+
+#. Author of an extension
+msgid "Janis Elsts"
+msgstr "Janis Elsts"
+
+#. Author URI of an extension
+msgid "http://w-shadow.com/blog/"
+msgstr "http://w-shadow.com/blog/"
+

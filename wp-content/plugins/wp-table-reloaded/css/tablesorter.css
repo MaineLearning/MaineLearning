@@ -1,0 +1,17 @@
+/*************************************************
+*  This CSS file belongs to WP-Table Reloaded!   *
+*    DO NOT make any changes here, but in the    *
+* "Custom CSS" textarea in the "Plugin Options"! *
+*************************************************/
+
+.wp-table-reloaded .header {
+	background: #E6EEEE url(../img/bg.gif) no-repeat center right;
+	cursor: pointer;
+}
+.wp-table-reloaded .headerSortUp {
+	background: #8DBDD8 url(../img/asc.gif) no-repeat center right;
+}
+
+.wp-table-reloaded .headerSortDown {
+	background: #8DBDD8 url(../img/desc.gif) no-repeat center right;
+}

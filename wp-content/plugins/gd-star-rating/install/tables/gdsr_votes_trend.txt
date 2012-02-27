@@ -1,0 +1,10 @@
+CREATE TABLE `%sgdsr_votes_trend` (
+  `id` int(11) DEFAULT NULL,
+  `vote_type` varchar(10) DEFAULT 'article',
+  `user_voters` int(11) DEFAULT '0',
+  `user_votes` int(11) DEFAULT '0',
+  `visitor_voters` int(11) DEFAULT '0',
+  `visitor_votes` int(11) DEFAULT '0',
+  `vote_date` varchar(10) DEFAULT NULL,
+  KEY idx_id_trd (id),
+  KEY idx_vote_trd (vote_type))%COLLATE%;

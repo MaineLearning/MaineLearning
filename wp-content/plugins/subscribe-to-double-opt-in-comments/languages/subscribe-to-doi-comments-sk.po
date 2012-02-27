@@ -1,0 +1,470 @@
+# This is an POT file!
+# You can translate the messages below into your language
+# and send this file to webmaster@webmaster-eye.de.
+# I will publish your language file with the next version
+# of this plugin.
+# ----------------------------------
+# Plugin-Author: Tobias Koelligan
+# Copyright by Tobias Koelligan
+# Blog: http://www.tobiaskoelligan.de
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.6\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/subscribe-to-double-opt-in-comments\n"
+"POT-Creation-Date: 2009-09-26 20:09+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Martin Mikláš <plugins [at] rozhladna.sk>\n"
+"Language-Team: rozhladna.sk <preklady@rozhladna.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+
+#: subscribe-to-doi-comments.php:79
+msgid "<strong>Error: </strong>"
+msgstr "<strong>Chyba: </strong>"
+
+#: subscribe-to-doi-comments.php:94
+msgid "Subscribe without commenting"
+msgstr "Prihlásiť sa k odberu bez komentovania"
+
+#: subscribe-to-doi-comments.php:96
+msgid "E-Mail:"
+msgstr "E-Mail:"
+
+#: subscribe-to-doi-comments.php:98
+msgid "Subscribe"
+msgstr "Prihlásiť"
+
+#: subscribe-to-doi-comments.php:138
+msgid "Subscribe to Comments Options"
+msgstr "Nastavenia odberu komentárov"
+
+#: subscribe-to-doi-comments.php:141
+msgid "\"From\" name for notifications:"
+msgstr "\"Od\" meno pre oznámenia:"
+
+#: subscribe-to-doi-comments.php:142
+msgid "\"From\" e-mail addresss for notifications:"
+msgstr "\"Od\" e-mail adresa pre oznámenia:"
+
+#: subscribe-to-doi-comments.php:143
+msgid "Do a CSS \"clear\" on the subscription checkbox/message (uncheck this if the checkbox/message appears in a strange location in your theme)"
+msgstr "Urobiť CSS \"clear\" pri políčku a správe na prihlásenie sa k odberu (odškrtnite túto voľbu ak majú políčko alebo správa nezvyčajné umiestnenie v téme)"
+
+#: subscribe-to-doi-comments.php:146
+msgid "Comment Form Text"
+msgstr "Text formulára komentára"
+
+#: subscribe-to-doi-comments.php:148
+msgid "Customize the messages shown to different people.  Use <code>[manager_link]</code> to insert the URI to the Subscription Manager."
+msgstr "Upraviť správu zjavujúcu sa rôznym ľuďom. Použite <code>[manager_link]</code> pre vloženie URI do manažéra odberov."
+
+#: subscribe-to-doi-comments.php:152
+msgid "Not subscribed"
+msgstr "Neprihlásený"
+
+#: subscribe-to-doi-comments.php:154
+msgid "Subscribed"
+msgstr "Prihlásený"
+
+#: subscribe-to-doi-comments.php:156
+msgid "Entry Author"
+msgstr "Autor príspevku"
+
+#: subscribe-to-doi-comments.php:158
+msgid "Confirmation Text (will be shown after user has clicked on the confirmation link)"
+msgstr "Text potvrdenia (zobrazí sa, keď používateľ klikne na potvrdzovací odkaz)"
+
+#: subscribe-to-doi-comments.php:160
+msgid "Headline for Double-Opt-In"
+msgstr "Predmet pre Double-Opt-In"
+
+#: subscribe-to-doi-comments.php:162
+msgid "Mail Text for Double-Opt-In ([verify_url] will be replaced with URL to subscribe finally, no HTML!)"
+msgstr "Text e-mailu pre potvrdenie prihlásenia ([verify_url] bude nahradené s URL na potvrdenie, žiadne HTML!)"
+
+#: subscribe-to-doi-comments.php:168
+msgid "Use custom style for Subscription Manager"
+msgstr "Použiť vlastný štýl pre manažéra odberov"
+
+#: subscribe-to-doi-comments.php:170
+msgid "These settings only matter if you are using a custom style.  <code>[theme_path]</code> will be replaced with the path to your current theme."
+msgstr "Na týchto nastaveniach záleží len ak používate vlastné štýly. <code>[theme_path]</code> bude nahradené cestou k aktuálnej téme."
+
+#: subscribe-to-doi-comments.php:173
+msgid "Path to header:"
+msgstr "Cesta k hlavičke:"
+
+#: subscribe-to-doi-comments.php:174
+msgid "Path to sidebar:"
+msgstr "Cesta k sidebaru:"
+
+#: subscribe-to-doi-comments.php:175
+msgid "Path to footer:"
+msgstr "Cesta k pätičke:"
+
+#: subscribe-to-doi-comments.php:178
+msgid "HTML for before the subscription manager:"
+msgstr "HTML pred manažérom odberov:"
+
+#: subscribe-to-doi-comments.php:179
+msgid "HTML for after the subscription manager:"
+msgstr "HTML po manažérovi odberov:"
+
+#: subscribe-to-doi-comments.php:205
+msgid "Options saved."
+msgstr "Nastavenia uložené."
+
+#: subscribe-to-doi-comments.php:212
+msgid "Update Options &raquo;"
+msgstr "Uložiť nastavenia &raquo;"
+
+#: subscribe-to-doi-comments.php:383
+msgid "Please provide a valid e-mail address."
+msgstr "Prosím zadajte platný e-mail."
+
+#: subscribe-to-doi-comments.php:387
+msgid "This e-mail address may not be subscribed"
+msgstr "Táto e-mailová adresa nemôže byť prihlásená"
+
+#: subscribe-to-doi-comments.php:393
+#: subscribe-to-doi-comments.php:409
+msgid "You appear to be already subscribed to this entry."
+msgstr "Vyzerá to, že už ste prihlásený k tomuto príspevku."
+
+#: subscribe-to-doi-comments.php:399
+msgid "Comments are not allowed on this entry."
+msgstr "Komentáre k tomuto príspevku nie sú povolené."
+
+#: subscribe-to-doi-comments.php:618
+#, php-format
+msgid "There is a new comment on the post \"%s\""
+msgstr "Je tu nový komentár k príspevku \"%s\""
+
+#: subscribe-to-doi-comments.php:619
+#, php-format
+msgid "Author: %s\n"
+msgstr "Autor: %s\n"
+
+#: subscribe-to-doi-comments.php:620
+msgid "Comment:\n"
+msgstr "Komentár:\n"
+
+#: subscribe-to-doi-comments.php:621
+msgid "See all comments on this post here:\n"
+msgstr "Prezrite si všetky komentáre k tomuto príspevku tu:\n"
+
+#: subscribe-to-doi-comments.php:624
+msgid "To manage your subscriptions or to block all notifications from this site, click the link below:\n"
+msgstr "Pre úpravy odoberaní alebo blokovanie všetkých oznámení z tejto stránky, kliknite na odkaz:\n"
+
+#: subscribe-to-doi-comments.php:627
+#, php-format
+msgid "New Comment On: %s"
+msgstr "Nový komentár k: %s"
+
+#: subscribe-to-doi-comments.php:646
+msgid "E-mail change confirmation"
+msgstr "Potvrdenie zmeny e-mailu"
+
+#: subscribe-to-doi-comments.php:647
+#, php-format
+msgid ""
+"You are receiving this message to confirm a change of e-mail address for your subscriptions at \"%s\"\n"
+"\n"
+msgstr ""
+"Túto správu ste dostali, aby ste potvrdili zmenu e-mailu pre vaše odbery \"%s\"\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:648
+#, php-format
+msgid ""
+"To change your e-mail address to %s, click this link:\n"
+"\n"
+msgstr ""
+"Aby ste zmenili váš e-mail na %s, kliknite na odkaz:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:650
+#: subscribe-to-doi-comments.php:662
+msgid "If you did not request this action, please disregard this message."
+msgstr "Ak ste nežiadali o tento úkon, prosím ignorujte túto správu."
+
+#: subscribe-to-doi-comments.php:658
+msgid "E-mail block confirmation"
+msgstr "Potvrdenie blokácie e-mailu"
+
+#: subscribe-to-doi-comments.php:659
+#, php-format
+msgid ""
+"You are receiving this message to confirm that you no longer wish to receive e-mail comment notifications from \"%s\"\n"
+"\n"
+msgstr ""
+"Túto správu ste dostali, aby ste potvrdili, že si už neželáte dostávať e-mailové oznámenia o komentároch z \"%s\"\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:660
+msgid ""
+"To cancel all future notifications for this address, click this link:\n"
+"\n"
+msgstr ""
+"Pre zrušenie všetkých budúcich notifikácií z tejto adresy, kliknite na odkaz:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:700
+msgid "click here"
+msgstr "kliknite sem"
+
+#: subscribe-to-doi-comments.php:722
+msgid "Notify me of followup comments via e-mail"
+msgstr "Prihláste sa k odberu komentárov cez e-mail"
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are subscribed to this entry.  <a href=\"[manager_link]\">Manage your subscriptions</a>."
+msgstr "Komentáre k tomuto príspevku už odoberáte.  <a href=\"[manager_link]\">Spravovať vaše odbery</a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are the author of this entry.  <a href=\"[manager_link]\">Manage subscriptions</a>."
+msgstr "Ste autorom príspevku.  <a href=\"[manager_link]\">Správa odberov</a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid ""
+"Hello,\n"
+"\n"
+"please click on the following link:\n"
+"[verify_url]\n"
+"to confirm your subscription."
+msgstr ""
+"Dobrý deň,\n"
+"\n"
+"prosím kliknite na nasledujúci odkaz:\n"
+"[verify_url]\n"
+"Potvrdíte tak vaše prihlásenie k odberu."
+
+#: subscribe-to-doi-comments.php:722
+msgid "Double Opt In"
+msgstr "Potvrdenie odberu komentárov"
+
+#: subscribe-to-doi-comments.php:755
+msgid "You will now get an e-mail, if a new comment is posted."
+msgstr "Odteraz dostanete e-mail vždy, keď pribudne nový komentár."
+
+#: subscribe-to-doi-comments.php:838
+msgid "Comment Subscription Manager"
+msgstr "Správca odberov komentárov"
+
+#: subscribe-to-doi-comments.php:838
+#: subscribe-to-doi-comments.php:1193
+msgid "Subscriptions"
+msgstr "Odbery"
+
+#: subscribe-to-doi-comments.php:840
+msgid "Subscribe to Comments"
+msgstr "Subscribe to Comments"
+
+#: subscribe-to-doi-comments.php:921
+msgid "You may not access this page without a valid key."
+msgstr "K tejto stránke nemožno pristupovať bez platného kľúča."
+
+#: subscribe-to-doi-comments.php:929
+#, php-format
+msgid "All notifications that were formerly sent to <strong>%1$s</strong> will now be sent to <strong>%2$s</strong>!"
+msgstr "Všetky oznámenia, pôvodne zasielané na <strong>%1$s</strong>, budú odteraz chodiť na <strong>%2$s</strong>!"
+
+#: subscribe-to-doi-comments.php:941
+#, php-format
+msgid "<strong>%1$s</strong> %2$s removed successfully."
+msgstr "<strong>%1$s</strong> %2$s úspešne odobrané."
+
+#: subscribe-to-doi-comments.php:941
+msgid "subscriptions"
+msgstr "odbery"
+
+#: subscribe-to-doi-comments.php:941
+msgid "subscription"
+msgstr "odber"
+
+#: subscribe-to-doi-comments.php:946
+#, php-format
+msgid "The block on <strong>%s</strong> has been successfully removed."
+msgstr "Blokácia <strong>%s</strong> bola úspešne odstránená."
+
+#: subscribe-to-doi-comments.php:948
+#, php-format
+msgid "<strong>%s</strong> isn't blocked!"
+msgstr "<strong>%s</strong> nie je blokované!"
+
+#: subscribe-to-doi-comments.php:953
+#, php-format
+msgid "<strong>%s</strong> has been blocked from receiving notifications.  You will have to have the administrator remove the block before you will be able to change your notification address."
+msgstr "<strong>%s</strong> bola zablokovaná na odosielanie oznámení. Budete musieť kontaktovať správcu na zrušenie blokovania pred tým, než budete chcieť zmeniť adresu pre zasielanie oznámení."
+
+#: subscribe-to-doi-comments.php:956
+#, php-format
+msgid "Your change of e-mail request was successfully received.  Please check your old account (<strong>%s</strong>) in order to confirm the change."
+msgstr "Žiadosť o zmenu e-mailu bola úspešne prijatá. Prosím skontrolujte si starý účet (<strong>%s</strong>) a zmenu potvrďte."
+
+#: subscribe-to-doi-comments.php:961
+#, php-format
+msgid "Your request to block <strong>%s</strong> from receiving any further notifications has been received.  In order for you to complete the block, please check your e-mail and click on the link in the message that has been sent to you."
+msgstr "Žiadosť na blokáciu ďalších oznámení pre <strong>%s</strong> bola prijatá. Pre dokončenie blokácie si prosím skontrolujte e-mail a kliknite na odkaz v zaslanej správe."
+
+#: subscribe-to-doi-comments.php:965
+#, php-format
+msgid "<strong>%1$s</strong> has been successfully subscribed to %2$s"
+msgstr "<strong>%1$s</strong> bolo úspešne prihlásené k %2$s"
+
+#: subscribe-to-doi-comments.php:970
+#, php-format
+msgid "<strong>%1$s</strong> has been added to the \"do not mail\" list. You will no longer receive any notifications from this site. If this was done in error, please contact the <a href=\"mailto:%2$s\">site administrator</a> to remove this block."
+msgstr "<strong>%1$s</strong> bolo pridané do zoznamu \"nepísať\". Z tejto stránky už nebudete dostávať žiadne oznámenia. Ak to bolo spravené omylom, prosím kontaktujte <a href=\"mailto:%2$s\">správcu stránky</a> na odstránenie blokovania."
+
+#: subscribe-to-doi-comments.php:972
+#, php-format
+msgid "<strong>%s</strong> has already been blocked!"
+msgstr "<strong>%s</strong> už je blokovaná!"
+
+#: subscribe-to-doi-comments.php:988
+#: subscribe-to-doi-comments.php:1015
+#, php-format
+msgid "%s Comment Subscription Manager"
+msgstr "%s Správca odoberania komentárov"
+
+#: subscribe-to-doi-comments.php:1018
+#, php-format
+msgid "Return to the page you were viewing: %s"
+msgstr "Návrat na stránku, ktorú ste si prehliadali: %s"
+
+#: subscribe-to-doi-comments.php:1029
+msgid "Remove Block"
+msgstr "Odstrániť blokovanie"
+
+#: subscribe-to-doi-comments.php:1032
+#, php-format
+msgid "Click the button below to remove the block on <strong>%s</strong>.  This should only be done if the user has specifically requested it."
+msgstr "Kliknite na tlačidlo ak chcete odstrániť blokovanie pre <strong>%s</strong>. Toto by malo byť vykonané len ak si to užívateľ výslovne vyžiadal."
+
+#: subscribe-to-doi-comments.php:1040
+msgid "Remove Block &raquo;"
+msgstr "Zrušiť blokovanie &raquo;"
+
+#: subscribe-to-doi-comments.php:1048
+msgid "Blocked"
+msgstr "Blokované"
+
+#: subscribe-to-doi-comments.php:1051
+#, php-format
+msgid "You have indicated that you do not wish to receive any notifications at <strong>%1$s</strong> from this site. If this is incorrect, or if you wish to have the block removed, please contact the <a href=\"mailto:%2$s\">site administrator</a>."
+msgstr "Označili ste, že si neželáte dostávať žiadne oznámenia na <strong>%1$s</strong> z tejto stránky. Ak sa jedná o omyl alebo si želáte blokovanie odstrániť, kontaktujte prosím <a href=\"mailto:%2$s\">správcu stránky</a>."
+
+#: subscribe-to-doi-comments.php:1066
+#, php-format
+msgid "<strong>%s</strong> is not subscribed to any posts on this site."
+msgstr "<strong>%s</strong> neodoberá žiadne príspevky z tejto stránky."
+
+#: subscribe-to-doi-comments.php:1068
+#, php-format
+msgid "<strong>%s</strong> is not a valid e-mail address."
+msgstr "<strong>%s</strong> nie je platný e-mail."
+
+#: subscribe-to-doi-comments.php:1081
+msgid "&laquo; Back"
+msgstr "&laquo; Späť"
+
+#: subscribe-to-doi-comments.php:1084
+msgid "Find Subscriptions"
+msgstr "Nájsť odbery"
+
+#: subscribe-to-doi-comments.php:1087
+msgid "Enter an e-mail address to view its subscriptions or undo a block."
+msgstr "Vložte e-mail pre prezeranie jeho odberov alebo zrušenie blokácie."
+
+#: subscribe-to-doi-comments.php:1095
+msgid "Search &raquo;"
+msgstr "Hľadať &raquo;"
+
+#: subscribe-to-doi-comments.php:1103
+msgid "Top Subscriber List"
+msgstr "Zoznam TOP odberateľov"
+
+#: subscribe-to-doi-comments.php:1105
+msgid "Subscriber List"
+msgstr "Zoznam odberateľov"
+
+#: subscribe-to-doi-comments.php:1124
+msgid "Show all subscribers"
+msgstr "Zobraziť všetkých odberateľov"
+
+#: subscribe-to-doi-comments.php:1126
+msgid "Show list of subscribers in <code>CC:</code>-field format (for bulk e-mailing)"
+msgstr "Zobraziť zoznam odberateľov vo formáte pre pole <code>CC:</code> (na hromadné rozosielanie pošty)"
+
+#: subscribe-to-doi-comments.php:1128
+msgid "&laquo; Back to regular view"
+msgstr "&laquo; Späť na normálny pohľad"
+
+#: subscribe-to-doi-comments.php:1143
+msgid "Top Subscribed Posts"
+msgstr "TOP odoberané príspevky"
+
+#: subscribe-to-doi-comments.php:1196
+#, php-format
+msgid "<strong>%s</strong> is subscribed to the posts listed below. To unsubscribe to one or more posts, click the checkbox next to the title, then click \"Remove Selected Subscription(s)\" at the bottom of the list."
+msgstr "<strong>%s</strong> je prihlásená na odber nižšie uvedených príspevkov. Pre odhlásenie jedného alebo viacero príspevkov, kliknite na políčko pri názve, potom kliknite na \"Odstrániť vybrané odbery\" at the bottom of the list."
+
+#: subscribe-to-doi-comments.php:1210
+msgid "Invert Checkbox Selection"
+msgstr "Invertovať výber"
+
+#: subscribe-to-doi-comments.php:1214
+msgid "Remove Selected Subscription(s) &raquo;"
+msgstr "Odstrániť vybrané odbery &raquo;"
+
+#: subscribe-to-doi-comments.php:1221
+msgid "Advanced Options"
+msgstr "Rozšírené nastavenia"
+
+#: subscribe-to-doi-comments.php:1224
+msgid "Block All Notifications"
+msgstr "Blokovať všetky oznámenia"
+
+#: subscribe-to-doi-comments.php:1231
+#, php-format
+msgid "If you would like <strong>%s</strong> to be blocked from receiving any notifications from this site, click the button below.  This should be reserved for cases where someone is signing you up for notifications without your consent."
+msgstr "Ak chcete blokovať <strong>%s</strong> od prijímania notifikácií z tejto stránky, kliknite na tlačidlo nižšie. Toto je vyhradené na prípady, kedy vás niekto prihlasuje na odbery bez vášho vedomia."
+
+#: subscribe-to-doi-comments.php:1235
+msgid "Block Notifications &raquo;"
+msgstr "Blokovať oznámenia &raquo;"
+
+#: subscribe-to-doi-comments.php:1241
+msgid "Change E-mail Address"
+msgstr "Zmeniť e-mailovú adresu"
+
+#: subscribe-to-doi-comments.php:1248
+#, php-format
+msgid "If you would like to change the e-mail address for your subscriptions, enter the new address below.  You will be required to verify this request by clicking a special link sent to your current address (<strong>%s</strong>)."
+msgstr "Ak chcete zmeniť e-mailovú adresu pre odbery, vložte novú adresu nižšie. Bude potrebné potvrdiť túto žiadosť kliknutím na špeciálny odkaz zaslaný na súčasnú adresu (<strong>%s</strong>)."
+
+#: subscribe-to-doi-comments.php:1252
+msgid "New E-mail Address:"
+msgstr "Nová e-mailová adresa:"
+
+#: subscribe-to-doi-comments.php:1257
+msgid "Change E-mail Address &raquo;"
+msgstr "Zmeniť e-mail  &raquo;"
+
+#~ msgid ""
+#~ "Hallo,\n"
+#~ "\n"
+#~ "bitte klicke hier\n"
+#~ "[verify_url]\n"
+#~ "wenn du benachrichtigt werden mchtest."
+#~ msgstr ""
+#~ "Zdravím,\n"
+#~ "\n"
+#~ "prosím kliknite sem\n"
+#~ "[verify_url]\n"
+#~ "ak chcete byť informovaný."

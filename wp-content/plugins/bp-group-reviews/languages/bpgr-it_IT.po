@@ -1,0 +1,132 @@
+# Translation of the WordPress plugin BP Group Reviews by Andy Peatling and Boone Gorges.
+# Copyright (C) 2010
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Group Reviews\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-reviews\n"
+"POT-Creation-Date: 2010-11-19 15:30+0000\n"
+"PO-Revision-Date: 2010-11-20 01:34+0100\n"
+"Last-Translator: Luca Camellini <luccame@gmail.com>\n"
+"Language-Team: luccame <luccame@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/classes.php:10
+#: templates/index.php:16
+msgid "Reviews"
+msgstr "Recensioni"
+
+#: includes/classes.php:29
+msgid "Please make sure you fill in the review, and don't forget to provide a rating!"
+msgstr "Assicurati di aver inserito una recensione e non dimenticare di esprimere una valutazione!"
+
+#: includes/classes.php:83
+#, php-format
+msgid "%s reviewed %s:"
+msgstr "%s ha recensito %s:"
+
+#: includes/templatetags.php:42
+#: includes/templatetags.php:81
+#, php-format
+msgid "(based on %s rating)"
+msgid_plural "(based on %s ratings)"
+msgstr[0] "(sulla base di % valutazione)"
+msgstr[1] "(sulla base di % valutazioni)"
+
+#: includes/templatetags.php:44
+#: includes/templatetags.php:51
+#: includes/templatetags.php:53
+msgid "1 star"
+msgstr "1 stella"
+
+#: includes/templatetags.php:45
+#: includes/templatetags.php:56
+#: includes/templatetags.php:58
+#: includes/templatetags.php:91
+#: includes/templatetags.php:100
+#: templates/post.php:21
+msgid "2 stars"
+msgstr "2 stelle"
+
+#: includes/templatetags.php:46
+#: includes/templatetags.php:61
+#: includes/templatetags.php:63
+#: includes/templatetags.php:92
+#: includes/templatetags.php:103
+#: templates/post.php:21
+msgid "3 stars"
+msgstr "3 stelle"
+
+#: includes/templatetags.php:47
+#: includes/templatetags.php:66
+#: includes/templatetags.php:68
+#: includes/templatetags.php:93
+#: includes/templatetags.php:106
+#: templates/post.php:21
+msgid "4 stars"
+msgstr "4 stelle"
+
+#: includes/templatetags.php:48
+#: includes/templatetags.php:71
+#: includes/templatetags.php:73
+#: includes/templatetags.php:94
+#: includes/templatetags.php:109
+#: templates/post.php:21
+msgid "5 stars"
+msgstr "5 stelle"
+
+#: includes/templatetags.php:90
+#: includes/templatetags.php:97
+#: templates/post.php:21
+msgid "1 stars"
+msgstr "1 stelle"
+
+#: templates/entry.php:15
+#, php-format
+msgid "By %s"
+msgstr "Di %s"
+
+#: templates/entry.php:15
+#, php-format
+msgid "%s ago"
+msgstr "%s fa"
+
+#: templates/entry.php:15
+msgid "#"
+msgstr "#"
+
+#: templates/entry.php:28
+msgid "Comment"
+msgstr "Commenta"
+
+#: templates/entry.php:48
+msgid "Post"
+msgstr "Pubblica"
+
+#: templates/entry.php:48
+msgid "or press esc to cancel."
+msgstr "oppure premi esc per annullare."
+
+#: templates/index.php:39
+#, php-format
+msgid "There are no reviews yet. Why not <a href=\"%s\">be the first to write one</a>?"
+msgstr "Non ci sono ancora recensioni. Perchè non <a href=\"%s\">essere il primo a scriverne una</a>?"
+
+#: templates/post.php:11
+#, php-format
+msgid "What are your thoughts on %s, %s?"
+msgstr "Cosa ne pensi di %s, %s?"
+
+#: templates/post.php:21
+msgid "Rate it:"
+msgstr "Valutazione:"
+
+#: templates/post.php:27
+msgid "Post My Review"
+msgstr "Pubblica la Mia Recensione"
+

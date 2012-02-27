@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>GD Star Rating: Filters &amp; Actions</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE ]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen" /><![endif]-->
+</head>
+<body>
+
+<div id="sidebar">
+    <h4>Contents:</h4>
+    <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="functions.html">General Functions</a></li>
+        <li><a href="rendering.html">Rendering Functions</a></li>
+        <li><a href="legacy.html">Legacy Functions</a></li>
+        <li><a href="filters.html">Filters &amp; Actions</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+        <li><a href="wpquery.html">WP Query</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="t2map.html">T2 Templates</a></li>
+        <li><a href="languages.html">Translations</a></li>
+    </ul>
+    <h4>Plugin Links:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/">Home Page</a></li>
+        <li><a href="http://wordpress.org/extend/plugins/gd-star-rating">WordPress Extend</a></li>
+        <li><a href="http://groups.google.com/group/gd-star-rating">Google Groups</a></li>
+        <li><a href="http://twitter.com/milangd">Follow on Twitter</a></li>
+    </ul>
+    <h4>Support:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/premium/">Premium Support</a></li>
+    </ul>
+    <h4 class="copyright">Copyright:</h4>
+    <p>
+        &copy; 2008-2009. <a href="http://www.gdragon.info/">Golden Dragon WebStudio</a>
+    </p>
+</div>
+<div id="content">
+<div class="title">
+    <h1>GD Star Rating</h1>
+    <h2>filters &amp; actions</h2>
+</div>
+
+<div class="contents">
+    <p>This is the list of filters and actions added by the plugin. You can use them as any standard WordPress filters and actions from other plugins or themes. If it's not stated differently, actions don't have additional parameters, and filters have only one parameter. Parameters, if they are existing, are colored red. What needs to be returned is colored blue. If the return is misisng for the filter, than you need to return the variable you got from the filter (input) after modifing it.</p>
+    <h3>Actions, General</h3>
+    <ul>
+        <li><strong>gdsr_init</strong>: executed at the end of plugins init block</li>
+        <li><strong>gdsr_admin_menu</strong>: executed before adding last menu element</li>
+        <li><strong>gdsr_admin_head</strong>: executed at the end of plugins admin header block</li>
+        <li><strong>gdsr_wp_head</strong>: executed at the end of plugins blog header block</li>
+        <li><strong>gdsr_init_save_review</strong>: executed after saving review values</li>
+    </ul>
+    <h3>Actions, Saving</h3>
+    <ul>
+        <li><strong>gdsr_vote_rating_article</strong>: <em style="color: #cc0000;">$post_id, $user_id, $vote</em> executed when the rating vote for post/page is saved.</li>
+        <li><strong>gdsr_vote_rating_comment</strong>: <em style="color: #cc0000;">$comment_id, $user_id, $vote</em> executed when the rating vote for comment is saved.</li>
+        <li><strong>gdsr_vote_rating_multis</strong>: <em style="color: #cc0000;">$post_id, $user_id, $set_id, $votes</em> executed when the multis rating vote for post/page is saved.</li>
+        <li><strong>gdsr_vote_thumb_article</strong>: <em style="color: #cc0000;">$post_id, $user_id, $vote</em> executed when the thumb vote for post/page is saved.</li>
+        <li><strong>gdsr_vote_thumb_comment</strong>: <em style="color: #cc0000;">$comment_id, $user_id, $vote</em> executed when the thumb vote for comment is saved.</li>
+        <li><strong>gdsr_vote_rating_article_return</strong>: <em style="color: #cc0000;">$rating_width, $rating, $vote_value</em> executed before rating response is returned.</li>
+        <li><strong>gdsr_vote_rating_comment_return</strong>: <em style="color: #cc0000;">$rating_width, $rating, $vote_value</em> executed before rating response is returned.</li>
+        <li><strong>gdsr_vote_rating_multis_return</strong>: <em style="color: #cc0000;">$json, $summary, $values</em> executed before rating response is returned.</li>
+    </ul>
+    <h3>Filters, Prepare Rendering</h3>
+    <ul>
+        <li><strong>gdsr_query_totals</strong>: <em style="color: #cc0000;">$query, $widget</em>, <em style="color: #0000cc;">$query</em> filter for array of sql elements for the query to get data for total blog rating widget.</li>
+        <li><strong>gdsr_query_results</strong>: <em style="color: #cc0000;">$query, $widget</em>, <em style="color: #0000cc;">$query</em> filter for array of sql elements for the query to get data for main widget and rating results.</li>
+        <li><strong>gdsr_widget_image_url_prepare</strong>: <em style="color: #cc0000;">$image, $widget, $row</em>, <em style="color: #0000cc;">$image</em> filter for url for the image in the widget or results. returns image url.</li>
+        <li><strong>gdsr_widget_data_prepare</strong>: filter for array of the results prepared for rating results widget</li>
+        <li><strong>gdsr_widget_post_title</strong>: modify post title for each of widget results. if you already changed titles using widget settings, this filter will be on changed title, not original. disable widget setting for title if you want to change it using filter.</li>
+        <li><strong>gdsr_widget_post_excerpt</strong>: modify post excerpt for each of widget results. excerpt will be already prepared and even shortened if you set the length for it in the widget settings.</li>
+        <li><strong>gdsr_comments_widget_data_prepare</strong>: filter for array of the results prepared for comments rating results widget</li>
+        <li><strong>gdsr_comments_widget_comment_content</strong>: modify the comment content for each of the widget results. if you already changed it using widget settings, this filter will be on changed content, not original. disable widget setting for content if you want to change it using filter.</li>
+    </ul>
+    <h3>Filters, T2 Rendering, Global</h3>
+    <p>Each rendering function for every template type uses the same filter. Name of the filter is universal, but you need to replace it with actual values for type and element. </p>
+    <ul>
+        <li><strong>gdsr_t2render_<em>$tpltype</em>_<em>$tplelm</em></strong>: <em style="color: #cc0000;">$result, $template, $parameters, $element</em>, <em style="color: #0000cc;">$result</em> filter for every type of rendering.</li>
+        <li><strong>gdsr_t2parameters_<em>$tpltype</em></strong>: <em style="color: #cc0000;">$parameters</em>, <em style="color: #0000cc;">$parameters</em> filter for every type of rendering input parameters.</li>
+    </ul>
+    <h3>Filters, T2 Rendering, Results</h3>
+    <ul>
+        <li><strong>gdsr_t2render_wbr_normal</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for rendering in blog rating widget.</li>
+        <li><strong>gdsr_t2render_wcr_header</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for header rendering in comments rating widget.</li>
+        <li><strong>gdsr_t2render_wcr_item</strong>: <em style="color: #cc0000;">$result, $template, $widget, $row, $element</em>, <em style="color: #0000cc;">$result</em> filter for single item rendering in comments rating widget.</li>
+        <li><strong>gdsr_t2render_wcr_footer</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for footer rendering in comments rating widget.</li>
+        <li><strong>gdsr_t2render_wsr_header</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for header rendering in posts rating widget.</li>
+        <li><strong>gdsr_t2render_wsr_item</strong>: <em style="color: #cc0000;">$result, $template, $widget, $row, $element</em>, <em style="color: #0000cc;">$result</em> filter for single item rendering in posts rating widget.</li>
+        <li><strong>gdsr_t2render_wsr_footer</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for footer rendering in posts rating widget.</li>
+        <li><strong>gdsr_t2render_srr_header</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for header rendering in posts rating results.</li>
+        <li><strong>gdsr_t2render_srr_item</strong>: <em style="color: #cc0000;">$result, $template, $widget, $row, $element</em>, <em style="color: #0000cc;">$result</em> filter for single item rendering in posts rating results.</li>
+        <li><strong>gdsr_t2render_srr_footer</strong>: <em style="color: #cc0000;">$result, $template, $widget, $element</em>, <em style="color: #0000cc;">$result</em> filter for footer rendering in posts rating results.</li>
+    </ul>
+    <p>Parameters for this rendering:</p>
+    <ul>
+        <li>$tpltype: 3 letters short name (type) of the template</li>
+        <li>$tplelm: name of the template element</li>
+        <li>$result: actual rendered HTML, with all tags still inside, before processing</li>
+        <li>$template: full template object</li>
+        <li>$parameters: input rendering settings</li>
+        <li>$widget: widget settings</li>
+        <li>$row: data for the row</li>
+        <li>$element: name of the template element</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

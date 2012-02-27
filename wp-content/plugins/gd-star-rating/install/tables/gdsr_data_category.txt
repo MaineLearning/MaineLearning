@@ -1,0 +1,18 @@
+CREATE TABLE `%sgdsr_data_category` (
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `rules_articles` char(1) DEFAULT '0',
+  `rules_comments` char(1) DEFAULT '0',
+  `moderate_articles` char(1) DEFAULT '0',
+  `moderate_comments` char(1) DEFAULT '0',
+  `recc_rules_articles` char(1) DEFAULT 'A',
+  `recc_rules_comments` char(1) DEFAULT 'A',
+  `recc_moderate_articles` char(1) DEFAULT 'N',
+  `recc_moderate_comments` char(1) DEFAULT 'N',
+  `expiry_type` char(1) NOT NULL DEFAULT 'N',
+  `expiry_value` varchar(32) NOT NULL DEFAULT '',
+  `recc_expiry_type` char(1) NOT NULL DEFAULT 'N',
+  `recc_expiry_value` varchar(32) NOT NULL DEFAULT '',
+  `cmm_integration_std` char(1) DEFAULT 'A',
+  `cmm_integration_mur` char(1) DEFAULT 'A',
+  `cmm_integration_set` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_id`))%COLLATE%;

@@ -1,0 +1,4353 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GDSR\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ashish Jha <ashish@outshinesolutions.com>\n"
+"Language-Team: Outshine Solutions <ashish@outshinesolutions.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Hindi\n"
+"X-Poedit-Country: INDIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: charts/chart_pie_votes_summary.php:35
+msgid "Chart with votes distribution"
+msgstr "वोट वितरण के साथ चार्ट"
+
+#: code/db/main.php:1181
+msgid "Show all dates"
+msgstr "सभी तिथियाँ दिखाएँ"
+
+#: code/db/main.php:1209
+msgid "All users and visitors"
+msgstr "सभी उपयोगकर्ता और आगंतुक"
+
+#: code/db/main.php:1210
+#: tinymce3/panels/blograting.php:22
+#: tinymce3/panels/commentsaggr.php:17
+#: tinymce3/panels/filter.php:17
+#: widgets/comments/part_basic.php:17
+#: widgets/comments/part_filter.php:17
+#: widgets/comments_28/part_basic.php:17
+#: widgets/comments_28/part_filter.php:17
+#: widgets/rating/part_basic.php:17
+#: widgets/rating/part_filter.php:28
+#: widgets/rating_28/part_basic.php:17
+#: widgets/rating_28/part_filter.php:28
+#: widgets/top/part_basic.php:17
+#: widgets/top/part_filter.php:28
+#: widgets/top_28/part_basic.php:17
+#: widgets/top_28/part_filter.php:28
+msgid "Visitors Only"
+msgstr "केवल आगंतुक"
+
+#: code/db/main.php:1211
+msgid "All Users"
+msgstr "सभी उपयोगकर्ता"
+
+#: code/db/main.php:1227
+msgid "All categories"
+msgstr "सभी श्रेणियां"
+
+#: code/db/operations.php:117
+#: code/db/operations.php:120
+#: code/db/operations.php:123
+#: code/db/operations.php:126
+#: code/db/operations.php:130
+#: code/db/operations.php:153
+#: code/db/operations.php:156
+#: code/db/operations.php:159
+#: code/db/operations.php:162
+#: code/db/operations.php:165
+#: code/db/operations.php:168
+#: code/db/operations.php:260
+#: code/db/operations.php:263
+#: code/db/operations.php:266
+#: code/db/operations.php:269
+#: code/db/operations.php:273
+#: code/db/operations.php:296
+#: code/db/operations.php:299
+#: code/db/operations.php:302
+#: code/db/operations.php:305
+#: code/db/operations.php:308
+#: code/db/operations.php:312
+msgid "articles"
+msgstr "लेख"
+
+#: code/db/operations.php:117
+#: code/db/operations.php:135
+#: code/db/operations.php:153
+#: code/db/operations.php:173
+msgid "inherited"
+msgstr "विरासत"
+
+#: code/db/operations.php:120
+#: code/db/operations.php:138
+#: code/db/operations.php:263
+#: code/db/operations.php:281
+msgid "all"
+msgstr "समस्त"
+
+#: code/db/operations.php:123
+#: code/db/operations.php:141
+#: code/db/operations.php:162
+#: code/db/operations.php:182
+#: code/db/operations.php:249
+#: code/db/operations.php:250
+#: code/db/operations.php:266
+#: code/db/operations.php:284
+#: code/db/operations.php:305
+#: code/db/operations.php:326
+#: code/db/operations.php:403
+#: code/db/operations.php:404
+#: integrate/dash_latest.php:41
+#: options/multis/results_post.php:159
+#: options/multis/results_post.php:160
+msgid "visitors"
+msgstr "आगंतुक"
+
+#: code/db/operations.php:126
+#: code/db/operations.php:144
+#: code/db/operations.php:165
+#: code/db/operations.php:185
+#: code/db/operations.php:249
+#: code/db/operations.php:250
+#: code/db/operations.php:269
+#: code/db/operations.php:287
+#: code/db/operations.php:308
+#: code/db/operations.php:329
+#: code/db/operations.php:403
+#: code/db/operations.php:404
+#: options/multis/results_post.php:161
+#: options/multis/results_post.php:162
+msgid "users"
+msgstr "प्रयोक्ता"
+
+#: code/db/operations.php:130
+#: code/db/operations.php:148
+#: code/db/operations.php:273
+#: code/db/operations.php:291
+msgid "free"
+msgstr "स्वतंत्र"
+
+#: code/db/operations.php:135
+#: code/db/operations.php:138
+#: code/db/operations.php:141
+#: code/db/operations.php:144
+#: code/db/operations.php:148
+#: code/db/operations.php:173
+#: code/db/operations.php:176
+#: code/db/operations.php:179
+#: code/db/operations.php:182
+#: code/db/operations.php:185
+#: code/db/operations.php:188
+#: code/db/operations.php:278
+#: code/db/operations.php:281
+#: code/db/operations.php:284
+#: code/db/operations.php:287
+#: code/db/operations.php:291
+#: code/db/operations.php:317
+#: code/db/operations.php:320
+#: code/db/operations.php:323
+#: code/db/operations.php:326
+#: code/db/operations.php:329
+#: code/db/operations.php:333
+msgid "comments"
+msgstr "टिप्पणियाँ"
+
+#: code/db/operations.php:156
+#: code/db/operations.php:176
+#: code/db/operations.php:299
+#: code/db/operations.php:320
+msgid "hidden"
+msgstr "छिपा हुआ"
+
+#: code/db/operations.php:159
+#: code/db/operations.php:179
+#: code/db/operations.php:302
+#: code/db/operations.php:323
+msgid "locked"
+msgstr "बंद"
+
+#: code/db/operations.php:168
+#: code/db/operations.php:188
+#: code/db/operations.php:312
+#: code/db/operations.php:333
+msgid "everyone"
+msgstr "सभी"
+
+#: code/db/operations.php:248
+#: options/multis/results_post.php:165
+#: options/multis/results_post.php:166
+#: options/users.php:110
+#: options/users.php:115
+#: options/users.php:120
+#: options/users.php:125
+msgid "rating"
+msgstr "दर्ज़ा"
+
+#: code/db/operations.php:248
+#: code/db/operations.php:402
+msgid "thumbs"
+msgstr "अच्छा!"
+
+#: code/db/operations.php:260
+#: code/db/operations.php:278
+#: code/db/operations.php:296
+#: code/db/operations.php:317
+msgid "parent"
+msgstr "पेरेंट "
+
+#: code/db/operations.php:402
+#: options/users.php:109
+#: options/users.php:114
+#: options/users.php:119
+#: options/users.php:124
+msgid "votes"
+msgstr "वोट"
+
+#: code/t2/render.php:781
+msgid "(no title)"
+msgstr "(शीर्षक नहीं)"
+
+#: code/t2/templates.php:4
+msgid "Element Word Votes"
+msgstr "तत्व शब्द वोट"
+
+#: code/t2/templates.php:5
+msgid "Singular"
+msgstr "एकवचन"
+
+#: code/t2/templates.php:6
+msgid "Plural"
+msgstr "बहुवचन"
+
+#: code/t2/templates.php:9
+msgid "Element For Alternating Table Rows"
+msgstr "तत्व वैकल्पिक तालिका पंक्तियाँ के लिए"
+
+#: code/t2/templates.php:10
+msgid "Odd"
+msgstr "विषम"
+
+#: code/t2/templates.php:11
+msgid "Even"
+msgstr "सम"
+
+#: code/t2/templates.php:14
+msgid "Standard Ratings Text"
+msgstr "मानक पाठ रेटिंग"
+
+#: code/t2/templates.php:16
+#: code/t2/templates.php:41
+#: code/t2/templates.php:81
+#: code/t2/templates.php:103
+#: code/t2/templates.php:178
+#: code/t2/templates.php:206
+#: code/t2/templates.php:297
+#: code/t2/templates.php:336
+msgid "article rating"
+msgstr "लेख दर्ज़ा"
+
+#: code/t2/templates.php:17
+#: code/t2/templates.php:42
+#: code/t2/templates.php:82
+#: code/t2/templates.php:104
+#: code/t2/templates.php:179
+#: code/t2/templates.php:207
+#: code/t2/templates.php:220
+#: code/t2/templates.php:288
+msgid "maximum rating value"
+msgstr "अधिकतम दर्ज़ा मूल्य"
+
+#: code/t2/templates.php:18
+#: code/t2/templates.php:45
+#: code/t2/templates.php:83
+#: code/t2/templates.php:105
+#: code/t2/templates.php:182
+#: code/t2/templates.php:209
+#: code/t2/templates.php:298
+#: code/t2/templates.php:337
+msgid "total votes for article"
+msgstr "लेख के लिए कुल वोट"
+
+#: code/t2/templates.php:19
+#: code/t2/templates.php:55
+#: code/t2/templates.php:84
+#: code/t2/templates.php:106
+#: code/t2/templates.php:192
+#: code/t2/templates.php:287
+#: code/t2/templates.php:296
+#: code/t2/templates.php:335
+msgid "post/page id"
+msgstr "पोस्ट/पृष्ठ क्रमांक"
+
+#: code/t2/templates.php:20
+#: code/t2/templates.php:60
+#: code/t2/templates.php:72
+#: code/t2/templates.php:86
+#: code/t2/templates.php:97
+#: code/t2/templates.php:107
+#: code/t2/templates.php:197
+#: code/t2/templates.php:212
+#: code/t2/templates.php:230
+#: code/t2/templates.php:268
+#: code/t2/templates.php:301
+#: code/t2/templates.php:340
+msgid "singular/plural word votes"
+msgstr "एकवचन/बहुवचन शब्द वोट"
+
+#: code/t2/templates.php:21
+#: code/t2/templates.php:108
+#: code/t2/templates.php:302
+msgid "remaining years"
+msgstr "शेष वर्ष"
+
+#: code/t2/templates.php:22
+#: code/t2/templates.php:109
+#: code/t2/templates.php:303
+msgid "remaining months"
+msgstr "शेष महीने"
+
+#: code/t2/templates.php:23
+#: code/t2/templates.php:110
+#: code/t2/templates.php:304
+msgid "remaining days"
+msgstr "शेष दिन"
+
+#: code/t2/templates.php:24
+#: code/t2/templates.php:111
+#: code/t2/templates.php:305
+msgid "remaining hours"
+msgstr "शेष घंटे"
+
+#: code/t2/templates.php:25
+#: code/t2/templates.php:112
+#: code/t2/templates.php:306
+msgid "remaining minutes"
+msgstr "शेष मिनट"
+
+#: code/t2/templates.php:26
+#: code/t2/templates.php:113
+#: code/t2/templates.php:307
+msgid "remaining seconds"
+msgstr "शेष सेकंड"
+
+#: code/t2/templates.php:27
+#: code/t2/templates.php:114
+#: code/t2/templates.php:308
+msgid "end voting date"
+msgstr "मतदान की अंतिम तारीख"
+
+#: code/t2/templates.php:28
+#: code/t2/templates.php:115
+#: code/t2/templates.php:309
+msgid "total remaining days"
+msgstr "कुल शेष दिन"
+
+#: code/t2/templates.php:29
+#: code/t2/templates.php:116
+#: code/t2/templates.php:310
+msgid "total remaining hours"
+msgstr "कुल शेष घंटे"
+
+#: code/t2/templates.php:30
+#: code/t2/templates.php:117
+#: code/t2/templates.php:311
+msgid "total remaining minutes"
+msgstr "कुल शेष मिनट"
+
+#: code/t2/templates.php:31
+#: code/t2/templates.php:73
+#: code/t2/templates.php:118
+#: code/t2/templates.php:312
+#: code/t2/templates.php:341
+msgid "saved vote value"
+msgstr "बचे वोट मूल्य"
+
+#: code/t2/templates.php:32
+#: code/t2/templates.php:74
+#: code/t2/templates.php:87
+#: code/t2/templates.php:98
+#: code/t2/templates.php:119
+#: code/t2/templates.php:148
+#: code/t2/templates.php:160
+#: code/t2/templates.php:172
+#: code/t2/templates.php:213
+#: code/t2/templates.php:243
+#: code/t2/templates.php:250
+#: code/t2/templates.php:259
+#: code/t2/templates.php:269
+#: code/t2/templates.php:276
+#: code/t2/templates.php:283
+#: code/t2/templates.php:291
+#: code/t2/templates.php:313
+#: code/t2/templates.php:342
+msgid "Normal"
+msgstr "सामान्य"
+
+#: code/t2/templates.php:33
+#: code/t2/templates.php:120
+#: code/t2/templates.php:314
+msgid "Time Restricted Active"
+msgstr "समय प्रतिबंधित सक्रिय"
+
+#: code/t2/templates.php:34
+#: code/t2/templates.php:121
+#: code/t2/templates.php:315
+msgid "Time Restricted Closed"
+msgstr "समय प्रतिबंधित बंद"
+
+#: code/t2/templates.php:35
+#: code/t2/templates.php:75
+#: code/t2/templates.php:122
+#: code/t2/templates.php:316
+#: code/t2/templates.php:343
+msgid "Vote Saved"
+msgstr "वोट सहेजा गया"
+
+#: code/t2/templates.php:38
+msgid "Standard Ratings Results"
+msgstr "मानक रेटिंग परिणाम"
+
+#: code/t2/templates.php:43
+#: code/t2/templates.php:180
+msgid "article review"
+msgstr "लेख की समीक्षा"
+
+#: code/t2/templates.php:44
+#: code/t2/templates.php:181
+msgid "maximum review value"
+msgstr "अधिकतम समीक्षा का मूल्य "
+
+#: code/t2/templates.php:46
+#: code/t2/templates.php:183
+msgid "post/page title"
+msgstr "पोस्ट/पेज शीर्षक "
+
+#: code/t2/templates.php:47
+#: code/t2/templates.php:184
+msgid "url to post/page"
+msgstr "यू आर एल से पोस्ट/ पृष्ठ"
+
+#: code/t2/templates.php:48
+#: code/t2/templates.php:80
+#: code/t2/templates.php:154
+#: code/t2/templates.php:166
+#: code/t2/templates.php:185
+#: code/t2/templates.php:224
+#: code/t2/templates.php:240
+#: code/t2/templates.php:241
+#: code/t2/templates.php:242
+msgid "rating stars"
+msgstr "दर्ज़ा सितारे"
+
+#: code/t2/templates.php:49
+#: code/t2/templates.php:186
+#: code/t2/templates.php:208
+msgid "bayesian estimate mean rating"
+msgstr "बयेसियन अनुमान मतलब दर्ज़ा"
+
+#: code/t2/templates.php:50
+#: code/t2/templates.php:187
+msgid "bayesian estimate mean rating stars"
+msgstr "बयेसियन अनुमान मतलब दर्ज़ा सितारे"
+
+#: code/t2/templates.php:51
+#: code/t2/templates.php:188
+msgid "article rating trend"
+msgstr "लेख दर्ज़ा प्रवृत्ति"
+
+#: code/t2/templates.php:52
+#: code/t2/templates.php:189
+msgid "article voting trend"
+msgstr "लेख मतदान की प्रवृत्ति"
+
+#: code/t2/templates.php:53
+#: code/t2/templates.php:190
+msgid "article review stars"
+msgstr "लेख समीक्षा के सितारे"
+
+#: code/t2/templates.php:54
+#: code/t2/templates.php:191
+#: code/t2/templates.php:210
+msgid "number of posts/pages"
+msgstr "पोस्ट/पृष्ठ की संख्या"
+
+#: code/t2/templates.php:56
+#: code/t2/templates.php:193
+msgid "image for the post/page"
+msgstr "पोस्ट/पृष्ठ के लिए छवि"
+
+#: code/t2/templates.php:57
+#: code/t2/templates.php:194
+msgid "short post/page excerpt"
+msgstr "छोटी पोस्ट / पृष्ठ अंश"
+
+#: code/t2/templates.php:58
+#: code/t2/templates.php:195
+msgid "name of the post/page author"
+msgstr "पोस्ट का नाम / पृष्ठ लेखक"
+
+#: code/t2/templates.php:59
+#: code/t2/templates.php:196
+msgid "url to authors archive"
+msgstr "लेखकों के संग्रह के लिए यू आर एल"
+
+#: code/t2/templates.php:61
+#: code/t2/templates.php:131
+#: code/t2/templates.php:198
+#: code/t2/templates.php:231
+msgid "class for alternating row class"
+msgstr "वैकल्पिक पंक्ति वर्ग के लिए वर्ग"
+
+#: code/t2/templates.php:62
+#: code/t2/templates.php:199
+#: code/t2/templates.php:232
+msgid "Header"
+msgstr "शीर्षक"
+
+#: code/t2/templates.php:63
+#: code/t2/templates.php:132
+#: code/t2/templates.php:200
+#: code/t2/templates.php:233
+msgid "Item"
+msgstr "वस्तु"
+
+#: code/t2/templates.php:64
+#: code/t2/templates.php:201
+#: code/t2/templates.php:234
+msgid "Footer"
+msgstr "पाद लेख"
+
+#: code/t2/templates.php:67
+msgid "Comments Ratings Text"
+msgstr "टिप्पणियाँ दर्ज़ा पाठ"
+
+#: code/t2/templates.php:69
+#: code/t2/templates.php:92
+#: code/t2/templates.php:219
+#: code/t2/templates.php:248
+#: code/t2/templates.php:264
+msgid "comment rating"
+msgstr "टिप्पणी दर्ज़ा"
+
+#: code/t2/templates.php:70
+#: code/t2/templates.php:93
+#: code/t2/templates.php:249
+#: code/t2/templates.php:256
+#: code/t2/templates.php:265
+msgid "maximum comment rating value"
+msgstr "अधिकतम टिप्पणी दर्ज़ा मूल्य"
+
+#: code/t2/templates.php:71
+#: code/t2/templates.php:221
+msgid "total votes for comment"
+msgstr "टिप्पणी के लिए कुल वोट"
+
+#: code/t2/templates.php:78
+msgid "Standard RSS Rating Block"
+msgstr "मानक आर एस एस रेटिंग ब्लॉक"
+
+#: code/t2/templates.php:85
+#: code/t2/templates.php:153
+#: code/t2/templates.php:165
+#: code/t2/templates.php:238
+#: code/t2/templates.php:239
+#: code/t2/templates.php:323
+#: code/t2/templates.php:351
+msgid "rating header text"
+msgstr "दर्ज़ा शीर्षक पाठ"
+
+#: code/t2/templates.php:90
+msgid "Comments Aggregated Rating"
+msgstr "टिप्पणियाँ एकत्रित रेटिंग"
+
+#: code/t2/templates.php:94
+msgid "total comments"
+msgstr "कुल टिप्पणियाँ"
+
+#: code/t2/templates.php:95
+#: code/t2/templates.php:266
+msgid "total votes for all comment"
+msgstr "सभी टिप्पणी के लिए कुल वोट"
+
+#: code/t2/templates.php:96
+#: code/t2/templates.php:247
+#: code/t2/templates.php:267
+msgid "comment rating stars"
+msgstr "टिप्पणी दर्ज़ा सितारे "
+
+#: code/t2/templates.php:101
+msgid "Multi Ratings Text"
+msgstr "बहुदर्ज़ा पाठ"
+
+#: code/t2/templates.php:125
+msgid "Multi Ratings Stars"
+msgstr "बहुदर्ज़ा सितारे"
+
+#: code/t2/templates.php:127
+msgid "single element name"
+msgstr "एकल तत्व का नाम"
+
+#: code/t2/templates.php:128
+msgid "single element id"
+msgstr "एकल तत्व आईडी "
+
+#: code/t2/templates.php:129
+msgid "single element stars"
+msgstr "एकल तत्व सितारे"
+
+#: code/t2/templates.php:130
+msgid "single element value"
+msgstr "एकल तत्व मूल्य"
+
+#: code/t2/templates.php:135
+msgid "Multi Ratings Block"
+msgstr "बहुदर्ज़ा खंड"
+
+#: code/t2/templates.php:138
+msgid "mulit rating header text"
+msgstr "बहुदर्ज़ा शीर्षक पाठ "
+
+#: code/t2/templates.php:139
+msgid "multi rating text"
+msgstr "बहुदर्ज़ा पाठ "
+
+#: code/t2/templates.php:140
+#: code/t2/templates.php:255
+#: code/t2/templates.php:274
+#: code/t2/templates.php:281
+msgid "multi rating stars"
+msgstr "बहुदर्ज़ा सितारे"
+
+#: code/t2/templates.php:141
+#: code/t2/templates.php:156
+#: code/t2/templates.php:168
+#: code/t2/templates.php:275
+#: code/t2/templates.php:282
+#: code/t2/templates.php:325
+#: code/t2/templates.php:352
+msgid "css class for whole block"
+msgstr "पूरे खंड के लिए सी एस एस वर्ग"
+
+#: code/t2/templates.php:142
+#: code/t2/templates.php:157
+#: code/t2/templates.php:169
+#: code/t2/templates.php:326
+#: code/t2/templates.php:353
+msgid "css class for header"
+msgstr "सी एस एस वर्ग के लिए शीर्षक"
+
+#: code/t2/templates.php:143
+#: code/t2/templates.php:144
+#: code/t2/templates.php:159
+#: code/t2/templates.php:171
+#: code/t2/templates.php:328
+#: code/t2/templates.php:355
+msgid "css class for rating text"
+msgstr "सी एस एस वर्ग के लिए दर्ज़ा पाठ"
+
+#: code/t2/templates.php:145
+msgid "rating button"
+msgstr "दर्ज़ा बटन"
+
+#: code/t2/templates.php:146
+#: code/t2/templates.php:257
+#: code/t2/templates.php:289
+msgid "average rating"
+msgstr "औसत दर्ज़ा"
+
+#: code/t2/templates.php:147
+#: code/t2/templates.php:258
+#: code/t2/templates.php:290
+msgid "average rating stars"
+msgstr "औसत दर्ज़ा सितारे"
+
+#: code/t2/templates.php:151
+msgid "Standard Ratings Block"
+msgstr "मानक रेटिंग खंड"
+
+#: code/t2/templates.php:155
+#: code/t2/templates.php:167
+#: code/t2/templates.php:324
+#: code/t2/templates.php:350
+msgid "rating text"
+msgstr "दर्ज़ा पाठ"
+
+#: code/t2/templates.php:158
+#: code/t2/templates.php:170
+#: code/t2/templates.php:327
+#: code/t2/templates.php:354
+msgid "css class for stars"
+msgstr "सितारों के लिए सी एस एस वर्ग "
+
+#: code/t2/templates.php:163
+msgid "Comments Ratings Block"
+msgstr "टिप्पणियाँ रेटिंग खंड"
+
+#: code/t2/templates.php:175
+msgid "Widget Star Rating"
+msgstr "विजेट सितारा श्रेणी"
+
+#: code/t2/templates.php:204
+msgid "Widget Blog Rating"
+msgstr "विजेट ब्लॉग रेटिंग"
+
+#: code/t2/templates.php:211
+msgid "article percentage rating"
+msgstr "लेख प्रतिशत दर्ज़ा"
+
+#: code/t2/templates.php:216
+msgid "Widget Comments Rating"
+msgstr "विजेट टिप्पणियाँ रेटिंग"
+
+#: code/t2/templates.php:222
+msgid "comment contents"
+msgstr "टिप्पणी विषय-सूची"
+
+#: code/t2/templates.php:223
+msgid "url to comment"
+msgstr "यू आर एल से टिप्पणी"
+
+#: code/t2/templates.php:225
+msgid "post id"
+msgstr "पोस्ट आई डी"
+
+#: code/t2/templates.php:226
+msgid "comment id"
+msgstr "टिप्पणी आई डी"
+
+#: code/t2/templates.php:227
+msgid "name of the comments author"
+msgstr "टिप्पणी लेखक का नाम"
+
+#: code/t2/templates.php:228
+msgid "authors url"
+msgstr "लेखक यू आर एल"
+
+#: code/t2/templates.php:229
+msgid "authors avatar"
+msgstr "लेखक अवतार"
+
+#: code/t2/templates.php:237
+msgid "Standard Review Rating Block"
+msgstr "मानक समीक्षा रेटिंग खंड"
+
+#: code/t2/templates.php:246
+msgid "Comments Review Rating Block"
+msgstr "टिप्पणियाँ समीक्षा रेटिंग खंड"
+
+#: code/t2/templates.php:253
+msgid "Multi Review Rating Block"
+msgstr "बहुसमीक्षा रेटिंग खंड"
+
+#: code/t2/templates.php:262
+msgid "Aggregated Comments Review Rating"
+msgstr "एकत्रित टिप्पणियाँ समीक्षा रेटिंग "
+
+#: code/t2/templates.php:272
+msgid "Multi Review Editor"
+msgstr "बहुसमीक्षा संपादक"
+
+#: code/t2/templates.php:279
+msgid "Multi Rating Comment Integration"
+msgstr "बहुदर्ज़ा टिप्पणी एकता"
+
+#: code/t2/templates.php:286
+msgid "Multi Rating Comment Integration Result"
+msgstr "बहुदर्ज़ा टिप्पणी एकता परिणाम"
+
+#: code/t2/templates.php:294
+msgid "Thumbs Article Ratings Text"
+msgstr "अंगूठे लेख दर्ज़ा पाठ"
+
+#: code/t2/templates.php:299
+#: code/t2/templates.php:338
+msgid "total up votes for article"
+msgstr "लेख के लिए कुल अच्छा वोट"
+
+#: code/t2/templates.php:300
+#: code/t2/templates.php:339
+msgid "total down votes for article"
+msgstr "लेख के लिए कुल बुरा वोट"
+
+#: code/t2/templates.php:319
+msgid "Thumbs Article Rating Block"
+msgstr "अंगूठे लेख दर्ज़ा खंड"
+
+#: code/t2/templates.php:321
+#: code/t2/templates.php:348
+msgid "thumb down image style"
+msgstr "अंगूठे नीचे छवि शैली "
+
+#: code/t2/templates.php:322
+#: code/t2/templates.php:349
+msgid "thumb up image style"
+msgstr "अंगूठे ऊपर छवि शैली "
+
+#: code/t2/templates.php:329
+#: code/t2/templates.php:356
+msgid "Inactive"
+msgstr "निष्क्रिय"
+
+#: code/t2/templates.php:330
+#: code/t2/templates.php:357
+msgid "Active"
+msgstr "सक्रिय"
+
+#: code/t2/templates.php:333
+msgid "Thumbs Comment Ratings Text"
+msgstr "अंगूठे टिप्पणी दर्ज़ा पाठ"
+
+#: code/t2/templates.php:346
+msgid "Thumbs Comment Rating Block"
+msgstr "अंगूठे टिप्पणी दर्ज़ा खंड"
+
+#: code/helpers.php:229
+msgid "No moderation"
+msgstr "मॉडरेशन नहीं"
+
+#: code/helpers.php:230
+msgid "Moderate visitors"
+msgstr "मॉडरेट आगंतुक"
+
+#: code/helpers.php:231
+msgid "Moderate users"
+msgstr "मॉडरेट प्रयोक्ता"
+
+#: code/helpers.php:232
+msgid "Moderate all"
+msgstr "मॉडरेट सर्वस्व"
+
+#: code/helpers.php:233
+#: code/helpers.php:248
+#: code/helpers.php:262
+#: code/helpers.php:285
+msgid "Inherit from Category"
+msgstr "श्रेणी से विरासत में"
+
+#: code/helpers.php:234
+#: code/helpers.php:249
+#: code/helpers.php:263
+#: options/categories.php:209
+msgid "Inherit from Parent"
+msgstr "पेरेंट से विरासत में"
+
+#: code/helpers.php:243
+msgid "Everyone can vote"
+msgstr "सब लोग मतदान कर सकते हैं"
+
+#: code/helpers.php:244
+msgid "Only visitors"
+msgstr "केवल आगंतुक"
+
+#: code/helpers.php:245
+msgid "Only users"
+msgstr "केवल उपयोगकर्ता"
+
+#: code/helpers.php:246
+msgid "Locked"
+msgstr "बंद"
+
+#: code/helpers.php:247
+msgid "Locked and hidden"
+msgstr "बंद और छिपा"
+
+#: code/helpers.php:259
+msgid "No timer"
+msgstr "टाइमर नहीं"
+
+#: code/helpers.php:260
+msgid "Countdown timer"
+msgstr "उलटी गिनती टाइमर"
+
+#: code/helpers.php:261
+msgid "Date limited"
+msgstr "दिनांक सीमित"
+
+#: code/helpers.php:271
+#: code/helpers.php:369
+#: options/multis/editor.php:67
+#: options/multis/sets.php:109
+msgid "Bottom"
+msgstr "तली"
+
+#: code/helpers.php:272
+#: code/helpers.php:367
+#: options/multis/editor.php:68
+#: options/multis/sets.php:106
+msgid "Top"
+msgstr "चोटी"
+
+#: code/helpers.php:273
+msgid "Top and Bottom"
+msgstr "ऊपर और नीचे"
+
+#: code/helpers.php:282
+#: options/articles.php:203
+#: options/categories.php:123
+msgid "Hours"
+msgstr "घंटे"
+
+#: code/helpers.php:283
+#: options/articles.php:206
+#: options/categories.php:126
+msgid "Days"
+msgstr "दिन"
+
+#: code/helpers.php:284
+#: options/articles.php:209
+#: options/categories.php:129
+msgid "Months"
+msgstr "महीने "
+
+#: code/helpers.php:293
+#: code/helpers.php:306
+msgid "Mini"
+msgstr "मिनी"
+
+#: code/helpers.php:294
+#: code/helpers.php:307
+msgid "Icon"
+msgstr "आइकन"
+
+#: code/helpers.php:295
+#: code/helpers.php:308
+msgid "Small"
+msgstr "छोटा"
+
+#: code/helpers.php:296
+#: code/helpers.php:309
+#: options/tools/tools_bulk.php:22
+msgid "Standard"
+msgstr "मानक"
+
+#: code/helpers.php:297
+#: code/helpers.php:310
+msgid "Medium"
+msgstr "मध्यम"
+
+#: code/helpers.php:298
+#: code/helpers.php:311
+msgid "Big"
+msgstr "बड़ा"
+
+#: code/helpers.php:323
+msgid "Stars and text"
+msgstr "सितारे और पाठ"
+
+#: code/helpers.php:324
+msgid "Stars only"
+msgstr "केवल सितारे"
+
+#: code/helpers.php:325
+msgid "Text only"
+msgstr "केवल आलेख"
+
+#: code/helpers.php:333
+msgid "No alignment"
+msgstr "संरेखण नहीं "
+
+#: code/helpers.php:334
+#: code/helpers.php:371
+msgid "Left"
+msgstr "बाएं"
+
+#: code/helpers.php:335
+msgid "Center"
+msgstr "केन्द्र"
+
+#: code/helpers.php:336
+#: code/helpers.php:373
+msgid "Right"
+msgstr "दाएं"
+
+#: code/helpers.php:344
+msgid "No Animation"
+msgstr "एनिमेशन नहीं"
+
+#: code/helpers.php:366
+msgid "Always hide"
+msgstr "हमेशा छुपा"
+
+#: code/helpers.php:368
+msgid "Top (hide if empty)"
+msgstr "शीर्ष (छिपाना यदि खाली)"
+
+#: code/helpers.php:370
+msgid "Bottom (hide if empty)"
+msgstr "नीचे (छिपाना यदि खाली)"
+
+#: code/helpers.php:372
+msgid "Left (hide if empty)"
+msgstr "बायां (छिपाना यदि खाली)"
+
+#: code/helpers.php:374
+msgid "Right (hide if empty)"
+msgstr "दायां (छिपाना यदि खाली)"
+
+#: code/import.php:5
+msgid "Data not imported."
+msgstr "डेटा नहीं आयात किया."
+
+#: code/import.php:9
+msgid "Plugin not available for import."
+msgstr "आयात के लिए प्लगइन उपलब्ध नहीं है."
+
+#: code/import.php:55
+#: code/import.php:74
+#: code/import.php:134
+msgid "Data imported."
+msgstr "डेटा आयात किया."
+
+#: code/widgets_wp28.php:5
+msgid "Customized rating results list."
+msgstr "अनुकूलित परिणाम दर्ज़ा सूची."
+
+#: code/widgets_wp28.php:100
+msgid "Overall blog rating results."
+msgstr "कुल दर्ज़ा परिणाम ब्लॉग."
+
+#: code/widgets_wp28.php:141
+msgid "Current post comments rating."
+msgstr "वर्तमान पद टिप्पणियाँ दर्ज़ा."
+
+#: gdt2/form_defaults.php:0
+msgid "Default Templates"
+msgstr "डिफ़ॉल्ट टेम्पलेट्स"
+
+#: gdt2/form_defaults.php:7
+#: gdt2/form_list.php:46
+#: options/multis/sets.php:61
+#: options/users.php:61
+#: options/voters.php:142
+#: tinymce3/panels/filter.php:45
+#: widgets/rating/part_filter.php:64
+#: widgets/rating_28/part_filter.php:64
+msgid "ID"
+msgstr "आई डी"
+
+#: gdt2/form_defaults.php:8
+#: gdt2/form_list.php:48
+msgid "Section / Type"
+msgstr "धारा/प्रकार "
+
+#: gdt2/form_defaults.php:9
+#: gdt2/form_editor.php:51
+#: tinymce3/panels/articlesrater.php:6
+#: tinymce3/panels/articlesreview.php:6
+#: tinymce3/panels/blograting.php:1
+#: tinymce3/panels/commentsaggr.php:6
+#: tinymce3/panels/multis.php:1
+#: tinymce3/panels/multisreview.php:1
+#: tinymce3/panels/styles.php:1
+#: tinymce3/panels/thumbsrating.php:6
+#: widgets/comments/part_basic.php:8
+#: widgets/comments_28/part_basic.php:8
+#: widgets/rating/part_basic.php:9
+#: widgets/rating_28/part_basic.php:8
+#: widgets/top/part_basic.php:8
+#: widgets/top_28/part_basic.php:8
+msgid "Template"
+msgstr "टेम्पलेट"
+
+#: gdt2/form_defaults.php:10
+#: gdt2/form_list.php:50
+msgid "Options"
+msgstr "विकल्प"
+
+#: gdt2/form_defaults.php:40
+msgid "Save Changes"
+msgstr "परिवर्तन सहेजें"
+
+#: gdt2/form_editor.php:21
+msgid "Template Editor"
+msgstr "खाका संपादक"
+
+#: gdt2/form_editor.php:29
+msgid "Editor"
+msgstr "संपादक"
+
+#: gdt2/form_editor.php:31
+#: options/multis/editor.php:87
+msgid "Elements"
+msgstr "तत्व"
+
+#: gdt2/form_editor.php:36
+#: options/front/front_right.php:4
+msgid "Info"
+msgstr "जानकारी"
+
+#: gdt2/form_editor.php:43
+#: options/builder/settings.php:2
+#: tinymce3/window.php:30
+msgid "General"
+msgstr "सामान्य"
+
+#: gdt2/form_editor.php:45
+#: gdt2/form_list.php:47
+#: options/multis/editor.php:27
+#: options/multis/editor.php:93
+#: options/multis/sets.php:62
+#: options/users.php:60
+#: options/voters.php:143
+msgid "Name"
+msgstr "नाम"
+
+#: gdt2/form_editor.php:47
+#: gdt2/form_editor.php:60
+#: options/multis/editor.php:32
+msgid "Description"
+msgstr "विवरण"
+
+#: gdt2/form_editor.php:69
+msgid "All tag elements"
+msgstr "सभी टैग तत्वों"
+
+#: gdt2/form_editor.php:70
+msgid "No tag elements allowed"
+msgstr "टैग तत्वों को अनुमति नहीं"
+
+#: gdt2/form_editor.php:82
+msgid "Save Template"
+msgstr "टेम्पलेट सहेजें"
+
+#: gdt2/form_editor.php:92
+msgid "Select template to use for this element:"
+msgstr "टेम्पलेट का चयन तत्व के उपयोग के लिए करें:"
+
+#: gdt2/form_editor.php:40
+msgid "Creating new template"
+msgstr "नया टेम्पलेट बनाना"
+
+#: gdt2/form_editor.php:61
+msgid "Allowed elements"
+msgstr "अनुमति प्राप्त तत्व"
+
+#: gdt2/form_list.php:29
+msgid "Templates"
+msgstr "टेम्पलेट्स"
+
+#: gdt2/form_list.php:36
+#: gdt2/form_list.php:15
+#: options/multis/results_post.php:115
+#: options/multis/results_post.php:26
+#: options/multis/results_set.php:22
+#: options/articles.php:132
+#: options/articles.php:23
+#: options/users_log.php:109
+#: options/users_log.php:23
+#: options/voters.php:117
+#: options/voters.php:32
+#: tinymce3/panels/blograting.php:6
+#: tinymce3/panels/commentsaggr.php:11
+#: tinymce3/window.php:31
+#: widgets/comments/part_filter.php:4
+#: widgets/comments/part_filter.php:12
+#: widgets/comments_28/part_filter.php:4
+#: widgets/comments_28/part_filter.php:12
+#: widgets/rating/part_filter.php:4
+#: widgets/rating/part_filter.php:12
+#: widgets/rating_28/part_filter.php:4
+#: widgets/rating_28/part_filter.php:12
+#: widgets/top/part_filter.php:4
+#: widgets/top/part_filter.php:12
+#: widgets/top_28/part_filter.php:4
+#: widgets/top_28/part_filter.php:12
+msgid "Filter"
+msgstr "फ़िल्टर"
+
+#: gdt2/form_list.php:49
+msgid "Tag"
+msgstr "टैग"
+
+#: gdt2/form_list.php:90
+msgid "Set Default Templates"
+msgstr "डिफ़ॉल्ट टेम्पलेट्स लगाये "
+
+#: gdt2/form_list.php:96
+msgid "New template for:"
+msgstr "नई टेम्पलेट के लिए:"
+
+#: gdt2/form_list.php:98
+msgid "Create"
+msgstr "बनाएँ"
+
+#: gdt2/form_list.php:107
+msgid "Click to open post with T2 templates map with dependencies for templates"
+msgstr "क्लिक करें टी 2 टेम्पलेट्स नक्शा के साथ पोस्ट खोलने के लिए साथ ही टेम्पलेट्स के साथ निर्भरता के लिए. "
+
+#: gdt2/form_list.php:108
+msgid "T2 Templates Map"
+msgstr "टी 2 टेम्पलेट्स मानचित्र"
+
+#: gdt2/form_list.php:70
+msgid "delete"
+msgstr "मिटाना "
+
+#: gdt2/form_list.php:71
+msgid "edit"
+msgstr "संपादन"
+
+#: gdt2/form_list.php:73
+msgid "duplicate"
+msgstr "प्रतिलिपि"
+
+#: integrate/dash_latest.php:51
+msgid "from"
+msgstr "से"
+
+#: integrate/dash_latest.php:51
+msgid "on"
+msgstr "पर"
+
+#: integrate/dash_latest.php:53
+msgid "ip"
+msgstr "आई पी "
+
+#: integrate/dash_latest.php:53
+msgid "log"
+msgstr "लॉग"
+
+#: integrate/dash_latest.php:65
+msgid "Articles Log"
+msgstr "लेख प्रवेश करें"
+
+#: integrate/dash_latest.php:66
+msgid "Users Log"
+msgstr "प्रयोक्ता प्रवेश करें"
+
+#: integrate/dash_latest.php:7
+msgid "visitor"
+msgstr "आगंतुक"
+
+#: integrate/dash_latest.php:11
+msgid "Thumb"
+msgstr "अंगूठा"
+
+#: integrate/dash_latest.php:18
+msgid "Multi Vote"
+msgstr "बहूमत"
+
+#: integrate/dash_latest.php:20
+#: options/moderation.php:116
+#: options/users_log.php:123
+#: options/users_log.php:107
+#: options/voters.php:144
+#: options/voters.php:115
+msgid "Vote"
+msgstr "मत"
+
+#: integrate/dash_latest.php:27
+#: integrate/dash_latest.php:36
+msgid "post"
+msgstr "पोस्ट"
+
+#: integrate/dash_latest.php:31
+#: integrate/dash_latest.php:33
+msgid "comment"
+msgstr "टिप्पणी"
+
+#: integrate/dash_latest.php:31
+msgid "for"
+msgstr "के लिए"
+
+#: integrate/dash_latest.php:44
+msgid "user"
+msgstr "उपयोगकर्ता"
+
+#: integrate/edit.php:1
+msgid "Post Review"
+msgstr "पोस्ट की समीक्षा"
+
+#: integrate/edit.php:3
+msgid "Value"
+msgstr "मूल्य"
+
+#: integrate/edit.php:15
+msgid "Post Rating"
+msgstr "पोस्ट रेटिंग"
+
+#: integrate/edit.php:17
+#: integrate/edit.php:33
+msgid "Vote Rule"
+msgstr "मत नियम"
+
+#: integrate/edit.php:23
+#: integrate/edit.php:39
+msgid "Moderate"
+msgstr "मॉडरेट"
+
+#: integrate/edit.php:31
+msgid "Comments Rating"
+msgstr "टिप्पणियाँ दर्ज़ा"
+
+#: integrate/edit.php:48
+msgid "Time Restriction"
+msgstr "समय प्रतिबंध"
+
+#: integrate/edit.php:50
+#: options/multis/results_post.php:235
+#: options/articles.php:307
+#: options/categories.php:219
+msgid "Restriction"
+msgstr "प्रतिबंध"
+
+#: integrate/edit.php:57
+#: options/multis/results_post.php:242
+#: options/articles.php:314
+#: options/categories.php:226
+#: tinymce3/panels/filter.php:77
+msgid "Date"
+msgstr "तिथि"
+
+#: integrate/edit.php:65
+#: options/multis/results_post.php:241
+#: options/articles.php:313
+#: options/categories.php:225
+msgid "Countdown"
+msgstr "उलटी गिनती"
+
+#: integrate/edit_multi.php:1
+msgid "You don't have any multi rating sets defined. Create at least one set."
+msgstr "आपने कोई भी बहुदर्ज़ा सेट परिभाषित नहीं किया हैं. कम से कम एक सेट बनाएँ."
+
+#: integrate/edit_multi.php:10
+#: options/tools/tools_bulk.php:77
+#: tinymce3/panels/multis.php:9
+#: tinymce3/panels/multis.php:28
+#: tinymce3/panels/multis.php:48
+#: tinymce3/panels/multisreview.php:9
+#: tinymce3/panels/multisreview.php:24
+#: tinymce3/panels/multisreview.php:44
+#: tinymce3/panels/styles.php:41
+#: tinymce3/panels/styles.php:61
+#: widgets/comments/part_stars.php:13
+#: widgets/comments_28/part_stars.php:13
+#: widgets/rating_28/part_stars.php:13
+#: widgets/rating_28/part_stars.php:23
+msgid "Set"
+msgstr "सेट "
+
+#: integrate/edit_multi.php:17
+msgid "To change the active set, you need to select the set you want from the list on the left, and save this article to accept the change."
+msgstr "सक्रिय सेट बदलने के लिए, आपको सेट चयन करना होगा बाईं ओर सूची से , और बचाने के लिए इस लेख को स्वीकार करने की जरूरत है."
+
+#: integrate/edit_multi.php:19
+msgid "All values for all sets will be saved in the database. This allows different multi rating sets reviews."
+msgstr "सभी सेट के लिए सभी मूल्यों को डेटाबेस में बचाया जाएगा. यह अनुमति देता है भिन्न बहु दर्ज़ा सेट की समीक्षा करने की."
+
+#: integrate/edit_multi.php:30
+msgid "Clear"
+msgstr "स्पष्ट"
+
+#: integrate/edit_multi.php:31
+msgid "Revert"
+msgstr "वापस"
+
+#: integrate/edit_multi.php:26
+msgid "Set ID"
+msgstr "सेट आई डी"
+
+#: integrate/edit_multi.php:27
+#: options/multis/results_post.php:97
+msgid "Set Name"
+msgstr "सेट का नाम"
+
+#: options/builder/settings.php:3
+msgid "Filter    "
+msgstr "फ़िल्टर"
+
+#: options/builder/settings.php:4
+#: options/gfx.php:57
+#: options/tools.php:9
+#: tinymce3/window.php:32
+#: gd-star-rating.php:626
+msgid "Graphics"
+msgstr "ग्राफिक्स"
+
+#: options/builder/settings.php:5
+#: tinymce3/panels/general.php:26
+#: tinymce3/window.php:33
+#: widgets/rating/part_basic.php:39
+#: widgets/rating_28/part_basic.php:38
+msgid "Multi Rating"
+msgstr "बहुदर्ज़ा"
+
+#: options/builder/settings.php:6
+#: tinymce3/window.php:34
+msgid "Multi Review"
+msgstr "बहुसमीक्षा"
+
+#: options/builder/settings.php:7
+#: tinymce3/window.php:35
+msgid "Articles Review"
+msgstr "लेख की समीक्षा"
+
+#: options/builder/settings.php:8
+#: tinymce3/panels/articlesrater.php:1
+#: tinymce3/window.php:36
+msgid "Articles Rating Block"
+msgstr "लेख दर्ज़ा खंड"
+
+#: options/builder/settings.php:9
+#: tinymce3/window.php:37
+msgid "Aggregated Comments"
+msgstr "एकत्रित टिप्पणियाँ"
+
+#: options/builder/settings.php:10
+#: tinymce3/window.php:38
+msgid "Blog Rating"
+msgstr "ब्लॉग दर्ज़ा"
+
+#: options/builder/settings.php:11
+#: tinymce3/window.php:39
+msgid "Thumbs Rating"
+msgstr "अंगूठे दर्ज़ा"
+
+#: options/builder/shortcode.php:2
+msgid "Select code:"
+msgstr "चुनें कोड:"
+
+#: options/builder/shortcode.php:5
+#: options/builder/shortcode.php:6
+#: tinymce3/window.php:53
+#: tinymce3/window.php:54
+msgid "Results"
+msgstr "परिणाम"
+
+#: options/builder/shortcode.php:8
+#: options/builder/shortcode.php:9
+#: tinymce3/window.php:56
+#: tinymce3/window.php:57
+msgid "Multi"
+msgstr "बहु"
+
+#: options/builder/shortcode.php:11
+#: options/builder/shortcode.php:12
+#: options/builder/shortcode.php:13
+#: options/multis/results_post.php:194
+#: options/articles.php:114
+#: options/articles.php:258
+#: options/categories.php:173
+#: tinymce3/window.php:59
+#: tinymce3/window.php:60
+#: tinymce3/window.php:61
+#: gd-star-rating.php:619
+msgid "Articles"
+msgstr "लेख"
+
+#: options/builder/shortcode.php:15
+#: options/settings/settings_thumbs.php:65
+#: options/tools/tools_bulk.php:60
+#: options/articles.php:328
+#: options/categories.php:241
+#: options/charts.php:7
+#: options/comments.php:44
+#: options/settings.php:47
+#: tinymce3/window.php:63
+msgid "Comments"
+msgstr "टिप्पणियाँ"
+
+#: options/builder/shortcode.php:23
+msgid "Shortcode:"
+msgstr "शोर्टकोड:"
+
+#: options/builder/shortcode.php:32
+msgid "Function:"
+msgstr "समारोह:"
+
+#: options/builder/shortcode.php:38
+msgid "Rebuild"
+msgstr "पुनर्निर्माण"
+
+#: options/builder/shortcode.php:40
+msgid "List of all functions with additional parameters"
+msgstr "अतिरिक्त पैरामीटर के साथ सभी समारोह की सूची"
+
+#: options/builder/shortcode.php:41
+msgid "Functions"
+msgstr "समारोह"
+
+#: options/export/export_t2.php:1
+msgid "Export Templates"
+msgstr "निर्यात टेम्पलेट्स"
+
+#: options/export/export_t2.php:3
+msgid "This will export all templates you created into a file."
+msgstr "यह सभी टेम्पलेट्स निर्यात करेगा जो तुमने एक फ़ाइल में बनाया है."
+
+#: options/export/export_t2.php:4
+#: options/export/export_users.php:53
+#: options/export/export_users.php:56
+#: gd-star-rating.php:633
+msgid "Export"
+msgstr "निर्यात "
+
+#: options/export/export_t2.php:6
+msgid "Exported file will contain names, descriptions and contents of templates. File will be in CSV format."
+msgstr "निर्यात फ़ाइल नाम, विवरण और टेम्पलेट्स की सामग्री शामिल करेगा . फ़ाइल CSV  प्रारूप में होगा."
+
+#: options/export/export_users.php:29
+msgid "User Info"
+msgstr "उपयोगकर्ता जानकारी"
+
+#: options/export/export_users.php:31
+msgid "Minimal: only user id is exported"
+msgstr "न्यूनतम: केवल प्रयोक्ता आई डी निर्यात किया जाता है"
+
+#: options/export/export_users.php:32
+msgid "Normal: user id, name and email are exported"
+msgstr "सामान्य: उपयोगकर्ता आईडी, नाम और ईमेल का निर्यात कर रहे हैं"
+
+#: options/export/export_users.php:35
+msgid "Data"
+msgstr "डेटा"
+
+#: options/export/export_users.php:37
+msgid "Post / Page votes"
+msgstr "पोस्ट/पृष्ठ मत"
+
+#: options/export/export_users.php:38
+msgid "Comments votes"
+msgstr "टिप्पणियाँ मत"
+
+#: options/export/export_users.php:41
+msgid "Additional Columns"
+msgstr "अतिरिक्त कॉलम"
+
+#: options/export/export_users.php:43
+#: options/ips/ips_list.php:55
+#: options/moderation.php:117
+#: options/users_log.php:120
+#: options/voters.php:146
+msgid "IP"
+msgstr "आई पी"
+
+#: options/export/export_users.php:44
+#: options/moderation.php:118
+#: options/voters.php:147
+msgid "User Agent"
+msgstr "प्रयोक्ता एजेंट"
+
+#: options/export/export_users.php:46
+msgid "Post/Page title"
+msgstr "पोस्ट/पृष्ठ शीर्षक"
+
+#: options/export/export_users.php:47
+msgid "Post/Page date"
+msgstr "पोस्ट/पृष्ठ की तारीख"
+
+#: options/export/export_users.php:49
+msgid "Comment author"
+msgstr "टिप्पणी लेखक"
+
+#: options/export/export_users.php:50
+msgid "Comment date"
+msgstr "टिप्पणी की तारीख"
+
+#: options/export/export_users.php:55
+msgid "This will export voters data file."
+msgstr "यह निर्यात करेगा मतदाताओं के डेटा फ़ाइल को."
+
+#: options/export/export_users.php:58
+msgid "Exported file will contain all the users ratings. File will be in CSV format."
+msgstr "निर्यात फ़ाइल में सभी उपयोगकर्ताओं के दर्ज़ा शामिल होंगे.फ़ाइल CSV  प्रारूप में होगा."
+
+#: options/front/front_left.php:20
+msgid "Quick Rating Facts"
+msgstr "त्वरित तथ्य दर्ज़ा"
+
+#: options/front/front_left.php:45
+msgid "See All"
+msgstr "सभी देखें"
+
+#: options/front/front_left.php:47
+msgid "Latest News"
+msgstr "नवीनतम समाचार"
+
+#: options/front/front_left.php:81
+msgid "Newsfeed update is disabled. You can enable it on settings page."
+msgstr "न्यूज़फीड अद्यतन अक्षम है. आप इसे सेटिंग्स पृष्ठ पर सक्षम कर सकते हैं."
+
+#: options/front/front_left.php:24
+msgid "Registered users rated %s articles with average rating of %s and %s comments with average rating of %s. Visitors rated %s articles with average rating of %s and %s comments with average rating of %s."
+msgstr "पंजीकृत उपयोगकर्ता रेटेड %s के औसत के हिसाब से लेख %s और %s की औसत रेटिंग के साथ टिप्पणी %s आगंतुकों रेटेड %s के औसत के हिसाब से लेख %s और %s की औसत रेटिंग के साथ टिप्पणी %s"
+
+#: options/front/front_left.php:35
+msgid " There are %s article and %s comments ratings waiting in moderation queue."
+msgstr "वहाँ %s लेख और %s टिप्पणी रेटिंग्स मॉडरेशन कतार में इंतजार कर रहे है."
+
+#: options/front/front_left.php:75
+msgid "An error occured while loading newsfeed. Go to the %sfront page%s to check for updates."
+msgstr "एक त्रुटि हो गई, जबकि न्यूज़फीड लोड हो रहा था. %sfront page%s पृष्ठ पर अद्यतन जाँच के जाये."
+
+#: options/front/front_right.php:8
+msgid "Version"
+msgstr "संस्करणः"
+
+#: options/front/front_right.php:9
+msgid "release date"
+msgstr "प्रकाशन की तारीख"
+
+#: options/front/front_right.php:13
+msgid "Change Log"
+msgstr "बदलें लॉग"
+
+#: options/front/front_right.php:14
+msgid "detailed list of changes"
+msgstr "परिवर्तन की विस्तृत सूची"
+
+#: options/front/front_right.php:15
+msgid "show"
+msgstr "दिखाना"
+
+#: options/front/front_right.php:19
+msgid "Links"
+msgstr "लिंक"
+
+#: options/front/front_right.php:24
+#: options/front/front_right.php:73
+msgid "official plugin page"
+msgstr "आधिकारिक प्लगइन पृष्ठ"
+
+#: options/front/front_right.php:25
+#: options/front/front_right.php:30
+#: options/front/front_right.php:35
+#: options/front/front_right.php:40
+#: options/front/front_right.php:55
+#: options/front/front_right.php:60
+#: options/front/front_right.php:74
+#: options/front/front_right.php:79
+#: options/front/front_right.php:84
+#: options/front/front_right.php:89
+#: options/front/front_right.php:103
+#: options/front/front_right.php:108
+#: options/front/front_right.php:113
+#: options/front/front_right.php:118
+msgid "visit"
+msgstr "यात्रा"
+
+#: options/front/front_right.php:29
+msgid "development home with svn"
+msgstr "svn के साथ विकास के घर"
+
+#: options/front/front_right.php:34
+msgid "discussions group"
+msgstr "चर्चा समूह"
+
+#: options/front/front_right.php:39
+msgid "wordpress plugin page"
+msgstr "वर्डप्रेस प्लगइन पृष्ठ"
+
+#: options/front/front_right.php:44
+msgid "development progress"
+msgstr "विकास कार्य प्रगति"
+
+#: options/front/front_right.php:45
+msgid "follow"
+msgstr "अनुगमन"
+
+#: options/front/front_right.php:49
+msgid "Extra"
+msgstr "अतिरिक्त"
+
+#: options/front/front_right.php:53
+msgid "Premium Support"
+msgstr "प्रीमियम सहायता"
+
+#: options/front/front_right.php:54
+msgid "special plugin customizations"
+msgstr "विशेष प्लगइन अनुकूलन"
+
+#: options/front/front_right.php:58
+msgid "Donate"
+msgstr "दान"
+
+#: options/front/front_right.php:59
+msgid "help further development"
+msgstr "और विकास में मदद"
+
+#: options/front/front_right.php:67
+msgid "GD WordPress Plugins"
+msgstr "जी.डी. वर्डप्रेस प्लगइन्स"
+
+#: options/front/front_right.php:78
+msgid "collection of widgets"
+msgstr "विजेट्स का संग्रह"
+
+#: options/front/front_right.php:83
+msgid "advanced pages widget"
+msgstr "उन्नत पृष्ठों विजेट"
+
+#: options/front/front_right.php:88
+msgid "widget to add linkedin badge"
+msgstr "विजेट लिंक्डइन बिल्ला जोड़ने के लिए"
+
+#: options/front/front_right.php:101
+msgid "Official Website"
+msgstr "आधिकारिक वेबसाइट"
+
+#: options/front/front_right.php:102
+msgid "golden dragon official web portal"
+msgstr "गोल्डन ड्रेगन आधिकारिक वेब पोर्टल"
+
+#: options/front/front_right.php:106
+msgid "Support Forum"
+msgstr "समर्थन फोरम"
+
+#: options/front/front_right.php:107
+msgid "development discussion forum"
+msgstr "विकास चर्चा मंच"
+
+#: options/front/front_right.php:112
+msgid "wordpress development"
+msgstr "वर्डप्रेस विकास"
+
+#: options/front/front_right.php:117
+msgid "announcements and theme demo"
+msgstr "घोषणाए और विषय डेमो"
+
+#: options/gfx/gfx_preview.php:1
+msgid "Stars Preview"
+msgstr "सितारे पूर्वावलोकन"
+
+#: options/gfx/gfx_preview.php:5
+#: options/multis/sets.php:65
+#: options/settings/settings_articles.php:14
+#: options/settings/settings_articles.php:188
+#: options/settings/settings_comments.php:14
+#: options/settings/settings_comments.php:133
+#: options/settings/settings_comments.php:202
+#: options/settings/settings_integration.php:74
+#: options/settings/settings_multis.php:14
+#: options/gfx.php:61
+#: widgets/comments/part_stars.php:4
+#: widgets/comments/part_stars.php:12
+#: widgets/comments_28/part_stars.php:4
+#: widgets/comments_28/part_stars.php:12
+#: widgets/rating/part_stars.php:4
+#: widgets/rating/part_stars.php:12
+#: widgets/rating_28/part_stars.php:4
+#: widgets/rating_28/part_stars.php:12
+msgid "Stars"
+msgstr "सितारे"
+
+#: options/gfx/gfx_preview.php:35
+#: options/gfx/gfx_preview.php:85
+#: tinymce3/panels/multis.php:36
+#: tinymce3/panels/multis.php:56
+#: tinymce3/panels/multisreview.php:32
+#: tinymce3/panels/multisreview.php:52
+#: tinymce3/panels/styles.php:49
+#: tinymce3/panels/styles.php:69
+#: widgets/comments/part_image.php:13
+#: widgets/comments/part_stars.php:18
+#: widgets/comments_28/part_image.php:13
+#: widgets/comments_28/part_stars.php:18
+#: widgets/rating_28/part_stars.php:18
+#: widgets/rating_28/part_stars.php:28
+msgid "Size"
+msgstr "आकार"
+
+#: options/gfx/gfx_preview.php:41
+#: options/gfx/gfx_preview.php:91
+msgid "Author"
+msgstr "लेखक"
+
+#: options/gfx/gfx_preview.php:51
+msgid "Thumbs Preview"
+msgstr "अंगूठे का पूर्वावलोकन करें"
+
+#: options/gfx/gfx_preview.php:55
+#: options/articles.php:159
+#: options/comments.php:94
+#: options/gfx.php:62
+msgid "Thumbs"
+msgstr "अंगूठे"
+
+#: options/gfx/gfx_preview.php:101
+msgid "Trends Preview"
+msgstr "प्रवृत्तियों का पूर्वावलोकन करें"
+
+#: options/gfx/gfx_preview.php:105
+msgid "Trends"
+msgstr "प्रवृत्तिया"
+
+#: options/gfx/gfx_stars.php:1
+msgid "Stars Sizes"
+msgstr "सितारे आकार"
+
+#: options/gfx/gfx_stars.php:24
+#: options/gfx/gfx_thumbs.php:24
+msgid "Only sizes checked here will be included in the css file for the active rating blocks."
+msgstr "यहाँ केवल आकार जाँच सक्रिय दर्ज़ा ब्लाकों के लिए सी एस एस फ़ाइल में शामिल किया जाएगा."
+
+#: options/gfx/gfx_stars.php:27
+#: options/gfx/gfx_thumbs.php:27
+msgid "Stars Sets"
+msgstr "सितारे समूह"
+
+#: options/gfx/gfx_stars.php:54
+msgid "Only stars set checked here will be included in the css file for the active rating blocks."
+msgstr "यहाँ केवल जाँच सितारे सेट सक्रिय दर्ज़ा ब्लाकों के लिए सी एस एस फ़ाइल में शामिल किया जाएगा."
+
+#: options/gfx/gfx_thumbs.php:1
+msgid "Thumbs Sizes"
+msgstr "अंगूठे आकार"
+
+#: options/gfx/gfx_thumbs.php:54
+msgid "Only thumbs set checked here will be included in the css file for the active rating blocks."
+msgstr "यहाँ केवल जाँच अंगूठे सेट सक्रिय दर्ज़ा ब्लाकों के लिए सी एस एस फ़ाइल में शामिल किया जाएगा."
+
+#: options/ips/ips_list.php:53
+msgid "Record Id"
+msgstr "रिकॉर्ड क्रमांक"
+
+#: options/ips/ips_list.php:54
+msgid "Type"
+msgstr "प्रकार"
+
+#: options/ips/ips_list.php:95
+msgid "Unban Selected"
+msgstr "अप्रतिबंध चयनित"
+
+#: options/ips/ips_options.php:1
+msgid "Ban Single IP's"
+msgstr "प्रतिबंध सिंगल आई पी"
+
+#: options/ips/ips_options.php:8
+msgid "Add IP addresses"
+msgstr "IP पते जोड़ें"
+
+#: options/ips/ips_options.php:9
+msgid "One IP address per line."
+msgstr "प्रति पंक्ति एक IP पता."
+
+#: options/ips/ips_options.php:15
+#: options/ips/ips_options.php:41
+#: options/ips/ips_options.php:57
+msgid "Add"
+msgstr "जोड़ना"
+
+#: options/ips/ips_options.php:19
+msgid "Ban IP Range"
+msgstr "प्रतिबंध आईपी रेंज"
+
+#: options/ips/ips_options.php:25
+msgid "From"
+msgstr "से"
+
+#: options/ips/ips_options.php:35
+msgid "To"
+msgstr "को"
+
+#: options/ips/ips_options.php:45
+msgid "Ban IP Masked"
+msgstr "प्रतिबंध आई पी मास्क"
+
+#: options/ips/ips_options.php:51
+msgid "Mask"
+msgstr "मास्क"
+
+#: options/ips/ips_options.php:55
+msgid "Use XXX as a part of IP or leave empty to mask."
+msgstr "आई पी के एक भाग के रूप में XXX का प्रयोग करें या मास्क के लिए खाली छोड़ दें."
+
+#: options/multis/editor.php:24
+msgid "Multi Sets Editor"
+msgstr "बहुसमूह संपादक"
+
+#: options/multis/editor.php:37
+msgid "Number Of Stars"
+msgstr "सितारे की संख्या"
+
+#: options/multis/editor.php:44
+#: options/multis/sets.php:64
+#: options/settings/settings_articles.php:74
+#: options/settings/settings_comments.php:78
+#: options/settings/settings_multis.php:39
+msgid "Defaults"
+msgstr "डीफौल्ट्स"
+
+#: options/multis/editor.php:48
+msgid "Auto Insertion"
+msgstr " स्वतंत्र घुसाव "
+
+#: options/multis/editor.php:52
+msgid "Insertion"
+msgstr "घुसाव "
+
+#: options/multis/editor.php:55
+#: options/multis/sets.php:87
+msgid "No"
+msgstr "नहीं"
+
+#: options/multis/editor.php:56
+#: options/multis/sets.php:90
+msgid "Category Based"
+msgstr "श्रेणी के आधार"
+
+#: options/multis/editor.php:57
+#: options/multis/sets.php:93
+msgid "All Posts"
+msgstr "सभी पोस्ट"
+
+#: options/multis/editor.php:58
+#: options/multis/sets.php:96
+msgid "All Pages"
+msgstr "सभी पेज"
+
+#: options/multis/editor.php:59
+#: options/multis/sets.php:99
+msgid "All Posts &amp; Pages"
+msgstr "सभी पोस्ट और amp; पेज"
+
+#: options/multis/editor.php:64
+msgid "Location"
+msgstr "स्थान"
+
+#: options/multis/editor.php:77
+#: options/multis/results_post.php:135
+#: options/categories.php:79
+#: gd-star-rating.php:620
+msgid "Categories"
+msgstr "श्रेणियाँ"
+
+#: options/multis/editor.php:96
+msgid "Weight"
+msgstr "वजन"
+
+#: options/multis/editor.php:103
+msgid "Important Notice"
+msgstr "महत्वपूर्ण सूचना"
+
+#: options/multis/editor.php:105
+msgid "Once the set is created, you can't change number of elements in the set or number of stars! You can edit names and weight of the elements, name and description of the set."
+msgstr "एक बार सेट बनाया है, आप सेट में तत्वों की संख्या या सितारों की संख्या में परिवर्तन नहीं कर सकते है! आप नाम और तत्वों, नाम और सेट के विवरण के वजन संपादित कर सकते हैं."
+
+#: options/multis/editor.php:110
+msgid "Save Multi Set"
+msgstr "सहेजें बहुसेट "
+
+#: options/multis/results_post.php:96
+#: options/multis/results_set.php:17
+msgid "Multi Set Results"
+msgstr "बहुसेट परिणाम"
+
+#: options/multis/results_post.php:107
+#: options/multis/results_post.php:109
+#: options/multis/results_post.php:31
+#: options/articles.php:124
+#: options/articles.php:126
+#: options/articles.php:29
+msgid "Search Posts"
+msgstr "पोस्ट खोज"
+
+#: options/multis/results_post.php:133
+#: options/articles.php:149
+#: tinymce3/panels/filter.php:46
+#: widgets/comments/part_basic.php:2
+#: widgets/comments_28/part_basic.php:2
+#: widgets/rating/part_basic.php:2
+#: widgets/rating/part_filter.php:65
+#: widgets/rating_28/part_basic.php:2
+#: widgets/rating_28/part_filter.php:65
+#: widgets/top/part_basic.php:2
+#: widgets/top_28/part_basic.php:2
+msgid "Title"
+msgstr "शीर्षक"
+
+#: options/multis/results_post.php:134
+#: options/articles.php:150
+msgid "View"
+msgstr "दृश्य"
+
+#: options/multis/results_post.php:136
+#: options/multis/sets.php:66
+#: options/articles.php:160
+msgid "Ratings"
+msgstr "दर्जे"
+
+#: options/multis/results_post.php:137
+#: options/articles.php:161
+#: options/comments.php:96
+msgid "Total"
+msgstr "कुल"
+
+#: options/multis/results_post.php:139
+#: options/multis/sets.php:67
+#: options/settings/settings_articles.php:184
+#: options/settings/settings_comments.php:198
+#: options/articles.php:166
+#: options/articles.php:293
+#: options/comments.php:97
+#: tinymce3/panels/filter.php:47
+#: widgets/rating/part_filter.php:66
+#: widgets/rating_28/part_filter.php:66
+msgid "Review"
+msgstr "समीक्षा"
+
+#: options/multis/results_post.php:197
+#: options/articles.php:261
+#: options/articles.php:331
+#: options/categories.php:176
+#: options/categories.php:244
+#: options/comments.php:138
+#: options/moderation.php:151
+#: options/users_log.php:206
+#: options/voters.php:187
+msgid "Delete"
+msgstr "मिटाना"
+
+#: options/multis/results_post.php:202
+#: options/articles.php:266
+#: options/articles.php:336
+#: options/categories.php:181
+#: options/categories.php:249
+#: options/comments.php:141
+msgid "Visitors"
+msgstr "आगंतुकों"
+
+#: options/multis/results_post.php:203
+#: options/settings/settings_administration.php:37
+#: options/articles.php:267
+#: options/articles.php:337
+#: options/categories.php:182
+#: options/categories.php:250
+#: options/comments.php:142
+#: options/users.php:47
+#: gd-star-rating.php:622
+msgid "Users"
+msgstr "उपयोगकर्ता"
+
+#: options/multis/results_post.php:204
+#: options/articles.php:268
+#: options/articles.php:338
+#: options/categories.php:183
+#: options/categories.php:251
+#: options/comments.php:143
+msgid "All"
+msgstr "सब"
+
+#: options/multis/results_post.php:209
+#: options/tools/tools_bulk.php:25
+#: options/tools/tools_bulk.php:44
+#: options/tools/tools_bulk.php:63
+#: options/articles.php:153
+#: options/articles.php:273
+#: options/articles.php:343
+#: options/categories.php:95
+#: options/categories.php:188
+#: options/categories.php:256
+#: options/moderation.php:34
+msgid "Moderation"
+msgstr "मॉडरेशन"
+
+#: options/multis/results_post.php:216
+#: options/tools/tools_bulk.php:32
+#: options/tools/tools_bulk.php:51
+#: options/tools/tools_bulk.php:70
+#: options/articles.php:158
+#: options/articles.php:280
+#: options/articles.php:350
+#: options/categories.php:100
+#: options/categories.php:195
+#: options/categories.php:263
+msgid "Vote Rules"
+msgstr "मत नियम"
+
+#: options/multis/results_post.php:226
+#: options/tools/tools_bulk.php:109
+#: options/articles.php:361
+#: options/articles.php:34
+#: options/categories.php:273
+#: options/categories.php:14
+#: options/comments.php:147
+#: options/comments.php:17
+#: options/users_log.php:221
+#: options/users_log.php:28
+#: options/voters.php:195
+#: options/voters.php:38
+msgid "Update"
+msgstr "अद्यतन "
+
+#: options/multis/results_set.php:17
+#: options/multis/sets.php:144
+msgid "Voters"
+msgstr "मतदाता"
+
+#: options/multis/sets.php:45
+#: gd-star-rating.php:624
+msgid "Multi Sets"
+msgstr "बहुसमूह"
+
+#: options/multis/sets.php:49
+msgid "Add New Multi Rating Set"
+msgstr "नई बहु रेटिंग सेट जोड़ें"
+
+#: options/multis/sets.php:63
+msgid "Auto Insert"
+msgstr "स्वतः डालें"
+
+#: options/multis/sets.php:68
+#: options/settings.php:50
+msgid "Statistics"
+msgstr "सांख्यिकी"
+
+#: options/multis/sets.php:162
+#: options/multis/sets.php:4
+msgid "Delete Selected"
+msgstr "चयनित हटाएँ"
+
+#: options/multis/sets.php:134
+#: options/multis/sets.php:143
+#: options/categories.php:102
+msgid "Posts"
+msgstr "पोस्ट्स"
+
+#: options/settings/settings_administration.php:0
+msgid "Admin Display"
+msgstr "व्यवस्थापक प्रदर्शन"
+
+#: options/settings/settings_administration.php:4
+msgid "Maximum screen width"
+msgstr "अधिकतम स्क्रीन चौड़ाई"
+
+#: options/settings/settings_administration.php:15
+msgid "Rows for display"
+msgstr "प्रदर्शन के लिए पंक्तियाँ"
+
+#: options/settings/settings_administration.php:27
+msgid "Show column with number of views on the plugins articles panel."
+msgstr "प्लगिंस लेख पैनल पर विचारों की संख्या के साथ कॉलम दिखाएँ."
+
+#: options/settings/settings_administration.php:29
+msgid "Maximum screen width is used only on WP version older than 2.7."
+msgstr "अधिकतम स्क्रीन चौड़ाई केवल WP 2.7 से अधिक पुराने संस्करण पर किया जाता है."
+
+#: options/settings/settings_administration.php:32
+msgid "Plugin Panels"
+msgstr "प्लगइन पैनलों"
+
+#: options/settings/settings_administration.php:37
+msgid "Users rating managment."
+msgstr "प्रयोक्ता दर्ज़ा प्रबंधन."
+
+#: options/settings/settings_administration.php:39
+#: options/setup.php:42
+#: gd-star-rating.php:636
+msgid "Setup"
+msgstr "सेटअप"
+
+#: options/settings/settings_administration.php:39
+msgid "Uninstall and maintenance."
+msgstr "स्थापना रद्द और रखरखाव."
+
+#: options/settings/settings_administration.php:43
+#: options/tools/tools_t2.php:6
+#: gd-star-rating.php:632
+msgid "Import"
+msgstr "आयात"
+
+#: options/settings/settings_administration.php:43
+msgid "Importing data for other rating plugins."
+msgstr "अन्य दर्ज़ा प्लगिंस के लिए डेटा आयात."
+
+#: options/settings/settings_administration.php:45
+#: options/ips.php:67
+#: options/users_log.php:195
+#: gd-star-rating.php:630
+msgid "IP's"
+msgstr "आई पी "
+
+#: options/settings/settings_administration.php:45
+msgid "IP addresses managment."
+msgstr "आई पी पते प्रबंधन."
+
+#: options/settings/settings_administration.php:51
+msgid "Other Settings"
+msgstr "अन्य सेटिंग्स"
+
+#: options/settings/settings_administration.php:53
+msgid "Update front page latest news feed."
+msgstr "अद्यतन मुखपृष्ठ नवीनतम समाचार फ़ीड."
+
+#: options/settings/settings_advanced.php:3
+msgid "PHP is working in the safe mode. Plugin can't create folders for caching. You need to do it manually if you want to use cache."
+msgstr "PHP सुरक्षित मोड में काम कर रही है.प्लगइन कैशिंग के लिए फ़ोल्डर नहीं बना सकते हैं.अगर आप कैश उपयोग करना चाहते हैं तो आप इसे मैन्युअल रूप से कर सकते है."
+
+#: options/settings/settings_advanced.php:4
+msgid "For cache to work, plugin must be able to access cache folder. Plugin has tried to create folders needed and failed. Until you resolved this issue cache feature can't be used."
+msgstr "कैश काम करने के लिए, प्लगइन को कैश फ़ोल्डर का उपयोग सक्षम होना चाहिए. प्लगइन ने फ़ोल्डर्स बनाने की असफल कोशिश की है.जब तक आप इस मुद्दे का समाधान नहीं करते,कैश सुविधा का उपयोग नहीं किया जा सकता है."
+
+#: options/settings/settings_advanced.php:5
+msgid "Either make <strong>wp-content</strong> folder writeable or create <strong>gd-star-rating</strong> folder in <strong>wp-content</strong> and make it writeable. Use 0755 chmod setting."
+msgstr "या तो बनाये <strong>wp-content</strong>फ़ोल्डर लेखनीय या बनाये <strong>gd-star-rating</strong> में फ़ोल्डर<strong>wp-content</strong>और लेखनीय है. 0,755 chmod सेटिंग का प्रयोग करें."
+
+#: options/settings/settings_advanced.php:10
+msgid "Cache Activation"
+msgstr "कैश सक्रियकरण"
+
+#: options/settings/settings_advanced.php:12
+msgid "Cache enabled."
+msgstr "कैश सक्षम"
+
+#: options/settings/settings_advanced.php:15
+msgid "Cache Cleanup"
+msgstr "कैश सफाई"
+
+#: options/settings/settings_advanced.php:19
+msgid "Auto cleanup cache"
+msgstr "स्वतः सफाई कैश"
+
+#: options/settings/settings_advanced.php:20
+msgid "Enabled."
+msgstr "सक्षम हो गया"
+
+#: options/settings/settings_advanced.php:23
+msgid "Cleanup cache every"
+msgstr "सफाई कैश हर"
+
+#: options/settings/settings_advanced.php:29
+msgid "Inline Debug Info"
+msgstr "इनलाइन डीबग जानकारी"
+
+#: options/settings/settings_advanced.php:31
+msgid "Add small block with essential debug info into each rating block."
+msgstr "छोटी सी ब्लॉक जोड़ें,आवश्यक डिबग जानकारी के साथ प्रत्येक दर्ज़ा ब्लॉक में."
+
+#: options/settings/settings_advanced.php:33
+#: options/settings/settings_advanced.php:42
+msgid "Important"
+msgstr "महत्वपूर्ण"
+
+#: options/settings/settings_advanced.php:36
+msgid "Log Into File"
+msgstr "लॉग फाइल में"
+
+#: options/settings/settings_advanced.php:38
+msgid "Log into file various debug information."
+msgstr "विभिन्न डिबग जानकारी फाइल में प्रवेश करें."
+
+#: options/settings/settings_advanced.php:40
+msgid "Save into debug file each WP Query executed."
+msgstr "प्रत्येक निष्पादित WP क्वेरी डिबग फ़ाइल में सहेजें."
+
+#: options/settings/settings_articles.php:10
+#: options/settings/settings_comments.php:10
+#: options/settings/settings_multis.php:10
+#: tinymce3/panels/filter.php:43
+#: widgets/comments/part_filter.php:46
+#: widgets/comments_28/part_filter.php:46
+#: widgets/rating/part_filter.php:62
+#: widgets/rating_28/part_filter.php:62
+msgid "Rating"
+msgstr "दर्ज़ा"
+
+#: options/settings/settings_articles.php:25
+#: options/settings/settings_articles.php:199
+#: options/settings/settings_comments.php:25
+#: options/settings/settings_comments.php:213
+msgid "Number of stars"
+msgstr "सितारों की संख्या"
+
+#: options/settings/settings_articles.php:42
+#: options/settings/settings_articles.php:218
+#: options/settings/settings_comments.php:42
+#: options/settings/settings_multis.php:33
+#: options/settings/settings_thumbs.php:26
+#: options/settings/settings_thumbs.php:90
+msgid "Rating header"
+msgstr "दर्ज़ा शीर्षक"
+
+#: options/settings/settings_articles.php:49
+#: options/settings/settings_comments.php:49
+#: options/settings/settings_thumbs.php:33
+#: options/settings/settings_thumbs.php:97
+msgid "Auto insert rating code"
+msgstr "स्वतः दर्ज़ा कोड डाले"
+
+#: options/settings/settings_articles.php:51
+#: options/settings/settings_thumbs.php:35
+msgid "For individual posts."
+msgstr "अकेले पोस्ट्स के लिए"
+
+#: options/settings/settings_articles.php:53
+#: options/settings/settings_thumbs.php:37
+msgid "For individual pages."
+msgstr "अकेले पृष्ठों के लिए"
+
+#: options/settings/settings_articles.php:57
+#: options/settings/settings_thumbs.php:41
+msgid "For posts displayed in Archives."
+msgstr "अभिलेखागार में प्रदर्शित पोस्ट्स के लिए."
+
+#: options/settings/settings_articles.php:59
+#: options/settings/settings_thumbs.php:43
+msgid "For posts displayed on Front Page."
+msgstr "मुख पृष्ठ पर प्रदर्शित पोस्ट्स के लिए."
+
+#: options/settings/settings_articles.php:61
+#: options/settings/settings_thumbs.php:45
+msgid "For posts displayed on Search results."
+msgstr "खोज परिणामों पर प्रदर्शित पोस्ट्स के लिए."
+
+#: options/settings/settings_articles.php:68
+#: options/settings/settings_comments.php:69
+#: options/settings/settings_thumbs.php:52
+#: options/settings/settings_thumbs.php:117
+msgid "Auto insert location"
+msgstr "स्वतः स्थान डाले"
+
+#: options/settings/settings_articles.php:78
+#: options/settings/settings_comments.php:82
+#: options/settings/settings_multis.php:43
+msgid "Vote rule"
+msgstr "मत नियम"
+
+#: options/settings/settings_articles.php:84
+#: options/settings/settings_comments.php:88
+#: options/settings/settings_multis.php:49
+msgid "Moderation rule"
+msgstr "मॉडरेशन नियम"
+
+#: options/settings/settings_articles.php:94
+#: options/settings/settings_multis.php:59
+msgid "Time restriction"
+msgstr "समय प्रतिबंध"
+
+#: options/settings/settings_articles.php:99
+#: options/settings/settings_multis.php:64
+msgid "Countdown value"
+msgstr "उलटी गिनती मूल्य"
+
+#: options/settings/settings_articles.php:110
+#: options/settings/settings_articles.php:223
+#: options/settings/settings_comments.php:72
+#: options/settings/settings_comments.php:98
+#: options/settings/settings_multis.php:75
+msgid "Rating block CSS class"
+msgstr "दर्ज़ा खंड सी एस एस वर्ग"
+
+#: options/settings/settings_articles.php:115
+#: options/settings/settings_comments.php:103
+#: options/settings/settings_multis.php:80
+msgid "Rating text CSS class"
+msgstr "दर्ज़ा पाठ सी एस एस वर्ग"
+
+#: options/settings/settings_articles.php:121
+#: options/settings/settings_comments.php:109
+#: options/settings/settings_multis.php:86
+msgid "Rating header CSS class"
+msgstr "दर्ज़ा शीर्षक सी एस एस वर्ग"
+
+#: options/settings/settings_articles.php:126
+#: options/settings/settings_comments.php:114
+msgid "Rating stars CSS class"
+msgstr "दर्ज़ा सितारे सी एस एस वर्ग "
+
+#: options/settings/settings_articles.php:135
+#: options/settings/settings_comments.php:123
+#: options/settings/settings_integration.php:93
+#: options/settings/settings_multis.php:100
+#: options/settings/settings_thumbs.php:59
+#: options/settings/settings_thumbs.php:124
+msgid "Rating Template"
+msgstr "दर्ज़ा टेम्पलेट"
+
+#: options/settings/settings_articles.php:141
+#: options/settings/settings_comments.php:155
+msgid "Restrict"
+msgstr "सीमित"
+
+#: options/settings/settings_articles.php:143
+msgid "Prevent article author to vote."
+msgstr "लेख के लेखक को वोट देने से रोकें."
+
+#: options/settings/settings_articles.php:143
+msgid "This is only for registered users."
+msgstr "यह केवल पंजीकृत उपयोगकर्ताओं के लिए ही है."
+
+#: options/settings/settings_articles.php:145
+#: options/settings/settings_comments.php:159
+msgid "Use logged data (IP) to prevent duplicate voting."
+msgstr "प्रतिरूप मतदान को रोकने के लिए ,लॉग इन आंकड़ों का प्रयोग करें (आईपी)."
+
+#: options/settings/settings_articles.php:147
+#: options/settings/settings_comments.php:161
+msgid "Use cookies to prevent duplicate voting."
+msgstr "कुकीज़ का उपयोग प्रतिरूप मतदान को रोकने के लिए करें."
+
+#: options/settings/settings_articles.php:149
+#: options/settings/settings_comments.php:163
+msgid "Allow votes from user and visitor coming from same IP address."
+msgstr "उपयोगकर्ता और आगंतुक को एक ही आई पी पते से मत की अनुमति दें."
+
+#: options/settings/settings_articles.php:152
+#: options/settings/settings_comments.php:166
+#: options/settings/settings_multis.php:120
+msgid "Vote Waiting Message"
+msgstr "मत प्रतीक्षा संदेश"
+
+#: options/settings/settings_articles.php:156
+#: options/settings/settings_comments.php:170
+#: options/settings/settings_multis.php:124
+msgid "Animation indicator"
+msgstr "एनिमेशन सूचक"
+
+#: options/settings/settings_articles.php:159
+#: options/settings/settings_comments.php:173
+#: options/settings/settings_multis.php:127
+#: options/gfx.php:63
+msgid "Preview"
+msgstr "पूर्वावलोकन"
+
+#: options/settings/settings_articles.php:169
+#: options/settings/settings_comments.php:183
+#: options/settings/settings_multis.php:137
+msgid "Text to display"
+msgstr "पाठ प्रदर्शित करने के लिए"
+
+#: options/settings/settings_articles.php:174
+#: options/settings/settings_comments.php:188
+#: options/settings/settings_multis.php:142
+msgid "Additional CSS class"
+msgstr "अतिरिक्त सी एस एस वर्ग"
+
+#: options/settings/settings_articles.php:180
+#: options/settings/settings_comments.php:194
+#: options/settings/settings_multis.php:148
+msgid "Hide text and show only animation image."
+msgstr "पाठ छिपाएँ और केवल एनिमेशन छवि छिपाएँ."
+
+#: options/settings/settings_bots.php:0
+msgid "Spider BOT's"
+msgstr "Spider बोट्स"
+
+#: options/settings/settings_bots.php:8
+msgid "Each line must contain only one BOT name to ensure proper detection of search engines."
+msgstr "प्रत्येक पंक्ति में केवल एक बी ओ टी नाम शामिल होना चाहिए, जिससे खोज इंजन के समुचित पहचान सुनिश्चित हो."
+
+#: options/settings/settings_comments.php:51
+#: options/settings/settings_thumbs.php:99
+msgid "For comments for posts."
+msgstr "पोस्ट के लिए टिप्पणियाँ"
+
+#: options/settings/settings_comments.php:55
+#: options/settings/settings_thumbs.php:103
+msgid "For comments for pages."
+msgstr "पृष्ठों के लिए टिप्पणियाँ"
+
+#: options/settings/settings_comments.php:62
+#: options/settings/settings_thumbs.php:110
+msgid "Enable auto insert regardless of the single page or post."
+msgstr "एकल पृष्ठ या पोस्ट की परवाह किए बिना ,स्वतः डालें सक्षम करे."
+
+#: options/settings/settings_comments.php:129
+msgid "Aggregated Rating"
+msgstr "एकत्रित दर्ज़ा"
+
+#: options/settings/settings_comments.php:157
+msgid "Prevent comment author to vote."
+msgstr "टिप्पणी लेखक को मत देने से रोकें."
+
+#: options/settings/settings_features.php:1
+msgid "Voting"
+msgstr "मत"
+
+#: options/settings/settings_features.php:3
+msgid "Use Nonce with AJAX for improved security."
+msgstr "सुरक्षा में सुधार के लिए AJAX के साथ Nonce इस्तेमाल करे."
+
+#: options/settings/settings_features.php:5
+msgid "Use AJAX cross-domain calls. Enable only if your website URL is different from actual URL."
+msgstr "AJAX का प्रयोग करें पार डोमेन काल्स के लिए. सक्षम करें केवल यदि आपकी वेबसाइट यूआरएल वास्तविक URL से अलग है."
+
+#: options/settings/settings_features.php:7
+msgid "Use banned IP's lists to filter out visitors."
+msgstr "प्रतिबंधित IP सूची का इस्तेमाल आगंतुकों को बाहर फिल्टर के करने लिए करे."
+
+#: options/settings/settings_features.php:9
+msgid "Don't even show rating stars to visitors comming from banned IP's."
+msgstr "प्रतिबंधित आई पी से आने वाले आगंतुकों को भी  दर्ज़ा तारे मत दिखाओ."
+
+#: options/settings/settings_features.php:11
+msgid "Hide comment integrated rating block if the comment is in reply mode (WP 2.7 or newer only)."
+msgstr "टिप्पणी एकीकृत दर्ज़ा खंड छुपाएँ अगर टिप्पणी उत्तर मोड में है (WP 2.7 या नए केवल)."
+
+#: options/settings/settings_features.php:14
+msgid "Plugin Features"
+msgstr "प्लगइन विशेषताएँ"
+
+#: options/settings/settings_features.php:19
+msgid "Time restriction for rating."
+msgstr "दर्ज़ा के लिए समय प्रतिबंध."
+
+#: options/settings/settings_features.php:21
+msgid "Moderation options and handling."
+msgstr "मॉडरेशन विकल्प और हैंडलिंग."
+
+#: options/settings/settings_features.php:23
+msgid "Multiple rating support."
+msgstr "एकाधिक दर्ज़ा समर्थन."
+
+#: options/settings/settings_features.php:25
+msgid "Thumbs up/down rating support."
+msgstr "ऊपर अंगूठे /नीचे रेटिंग समर्थन."
+
+#: options/settings/settings_features.php:29
+msgid "Post And Page Review Rating."
+msgstr "पोस्ट और पेज की समीक्षा दर्ज़ा."
+
+#: options/settings/settings_features.php:31
+msgid "Comments Rating."
+msgstr "टिप्पणियाँ दर्ज़ा."
+
+#: options/settings/settings_features.php:33
+msgid "Comments Review Rating."
+msgstr "टिप्पणियाँ समीक्षा दर्ज़ा."
+
+#: options/settings/settings_features.php:38
+msgid "Use graphics generator to generate and display static stars images."
+msgstr "ग्राफिक्स जनरेटर का प्रयोग स्थिर सितारे उत्पन्न और चित्र प्रदर्शित करने के लिए करें."
+
+#: options/settings/settings_features.php:40
+msgid "Prevent outside access to graphics generator. Graphics integrated into RSS is not affected."
+msgstr "ग्राफिक्स जनरेटर तक पहुंच के बाहरी रास्ते रोकें.आर एस एस में एकीकृत ग्राफिक्स प्रभावित नहीं है."
+
+#: options/settings/settings_features.php:42
+msgid "This leeching prevention will only work if a referer is sent and your server is set up correctly with proper server name variable."
+msgstr "यह लीचिंग रोकथाम तब ही काम करेगा अगर आपने एक रेफेरेर भेजा और आपका सर्वर सही ढंग से उचित सर्वर के नाम के चर के साथ स्थापित हो गया."
+
+#: options/settings/settings_features.php:45
+msgid "JS and CSS files"
+msgstr "जे एस और सी एस एस फ़ाइलें"
+
+#: options/settings/settings_features.php:47
+msgid "Link external javascript rating code, instead of embeding it into the page."
+msgstr "बाहरी जावास्क्रिप्ट दर्ज़ा कोड जोड़ें,बजाय इस पृष्ठ में एम्बेड करने के."
+
+#: options/settings/settings_features.php:49
+msgid "Link external CSS rating code, uncheck to embed all the CSS into the page."
+msgstr "बाहरी सी एस एस दर्ज़ा कोड जोड़ें, पृष्ठ में सभी सी एस एस एम्बेड करने के लिए सही का निशान हटाएँ."
+
+#: options/settings/settings_features.php:51
+msgid "Link additional CSS file"
+msgstr "अतिरिक्त सी एस एस फ़ाइल जोड़ें"
+
+#: options/settings/settings_features.php:53
+msgid "Auto cache of the main CSS file enabled."
+msgstr "मुख्य सीएसएस फ़ाइल का स्वत: कैश सक्षम होना चाहिए."
+
+#: options/settings/settings_features.php:56
+msgid "Charset"
+msgstr "चारसेट"
+
+#: options/settings/settings_features.php:60
+msgid "Character encoding"
+msgstr "वर्ण एन्कोडिंग"
+
+#: options/settings/settings_features.php:64
+msgid "For list of supported charsets visit: "
+msgstr "समर्थित चर्सेट्स की सूची के लिए यात्रा:"
+
+#: options/settings/settings_features.php:67
+msgid "Rating Log"
+msgstr "दर्ज़ा प्रवेश करें"
+
+#: options/settings/settings_features.php:69
+msgid "Log user agent (browser) information."
+msgstr "प्रवेश करें उपयोगकर्ता एजेंट (ब्राउज़र) जानकारी."
+
+#: options/settings/settings_features.php:71
+msgid "Save cookies with ratings."
+msgstr "रेटिंग के साथ सहेजें कुकीज़."
+
+#: options/settings/settings_features.php:74
+msgid "Internet Explorer"
+msgstr "इंटरनेट एक्सप्लोरर"
+
+#: options/settings/settings_features.php:76
+msgid "Use IE opacity fix for multi ratings."
+msgstr "IE पारदर्शिता का प्रयोग बहुरेटिंग के लिए तय कर लो."
+
+#: options/settings/settings_features.php:78
+msgid "Disable checking for IE6 and IE6 specific settings."
+msgstr "जाँच निष्क्रिय करे IE6 और IE6 के विशिष्ट सेटिंग्स के लिए."
+
+#: options/settings/settings_integration.php:1
+msgid "WP Query Object"
+msgstr "WP क्वेरी वस्तु"
+
+#: options/settings/settings_integration.php:3
+msgid "Expand WP Query with new rating specific sorting and filtering."
+msgstr "WP क्वेरी का विस्तार करें ,नई दर्ज़ा विशेष छंटाई और फ़िल्टरिंग के साथ."
+
+#: options/settings/settings_integration.php:6
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: options/settings/settings_integration.php:8
+msgid "Add widgets to the administration dashboard."
+msgstr "प्रशासन डैशबोर्ड पर विजेट्स जोड़ें."
+
+#: options/settings/settings_integration.php:10
+msgid "Add chart summary rating widget."
+msgstr "चार्ट सारांश दर्ज़ा विजेट जोड़ें."
+
+#: options/settings/settings_integration.php:15
+msgid "Add widget with list of latest votes."
+msgstr "नवीनतम वोट की सूची के साथ विजेट जोड़ें."
+
+#: options/settings/settings_integration.php:18
+msgid "Votes to display:"
+msgstr "वोट प्रदर्शित करने के लिए:"
+
+#: options/settings/settings_integration.php:26
+msgid "Show thumbs for posts."
+msgstr "पोस्ट्स के लिए अंगूठे दिखाए. "
+
+#: options/settings/settings_integration.php:28
+msgid "Show stars for posts."
+msgstr "पोस्ट्स के लिए तारे दिखाएँ."
+
+#: options/settings/settings_integration.php:30
+msgid "Show multis for posts."
+msgstr "पोस्ट्स के लिए मल्टीज़ दिखाएँ."
+
+#: options/settings/settings_integration.php:33
+msgid "Show thumbs for comments."
+msgstr "टिप्पणियों के लिए अंगूठे दिखाएँ. "
+
+#: options/settings/settings_integration.php:35
+msgid "Show stars for comments."
+msgstr "टिप्पणियों के लिए तारे दिखाएँ. "
+
+#: options/settings/settings_integration.php:41
+msgid "Widgets"
+msgstr "विजेट्स"
+
+#: options/settings/settings_integration.php:43
+msgid "GD Star Rating: Post/Page rating widget."
+msgstr "जी.डी. सितारा श्रेणी: पोस्ट/पृष्ठ दर्ज़ा विजेट."
+
+#: options/settings/settings_integration.php:45
+msgid "GD Blog Rating: Blog average rating."
+msgstr "जी.डी. ब्लॉग रेटिंग: ब्लॉग औसत दर्ज़ा."
+
+#: options/settings/settings_integration.php:47
+msgid "GD Comments Rating: Per post comments rating."
+msgstr "जी.डी. टिप्पणियाँ रेटिंग: प्रति पोस्ट टिप्पणी दर्ज़ा."
+
+#: options/settings/settings_integration.php:49
+msgid "Don't render the widget if there are no results to display."
+msgstr "विजेट प्रतिपादन न करे,अगर वहाँ कोई परिणाम प्रदर्शित करने के लिए नहीं हो."
+
+#: options/settings/settings_integration.php:52
+msgid "Post Edit"
+msgstr "पोस्ट संपादन"
+
+#: options/settings/settings_integration.php:54
+msgid "Add standard rating box in the post/page edit sidebar area."
+msgstr "मानक दर्ज़ा बॉक्स जोड़ें पोस्ट/पृष्ठ संपादन साइडबार क्षेत्र में."
+
+#: options/settings/settings_integration.php:56
+msgid "Add multi ratings box in the post/page edit."
+msgstr "बहु दर्ज़ा बॉक्स जोड़ें पोस्ट/पृष्ठ संपादन में."
+
+#: options/settings/settings_integration.php:58
+msgid "Add rating shortcode plugin into tinyMCE visual editor."
+msgstr "दर्ज़ा शोर्टकोड प्लगइन जोड़ें tinyMCE दृश्य संपादक में."
+
+#: options/settings/settings_integration.php:61
+msgid "Comment Edit"
+msgstr "टिप्पणी संपादन"
+
+#: options/settings/settings_integration.php:63
+msgid "Add rating box on the comment edit page."
+msgstr "दर्ज़ा बॉक्स टिप्पणी संपादित पृष्ठ में जोड़ें."
+
+#: options/settings/settings_integration.php:66
+msgid "RSS Feeds"
+msgstr "आर एस एस फीड्स"
+
+#: options/settings/settings_integration.php:68
+msgid "Add small 80x15 badge to posts in RSS feed."
+msgstr "आर एस एस फ़ीड में पोस्ट्स के लिए छोटे 80x15 बिल्ला जोड़ें."
+
+#: options/settings/settings_integration.php:70
+msgid "Add ratings to posts in RSS feeds."
+msgstr "आर एस एस फ़ीड के पोस्ट्स के लिए रेटिंग जोड़ें."
+
+#: options/settings/settings_integration.php:89
+msgid "Rating Header"
+msgstr "दर्ज़ा शीर्षक"
+
+#: options/settings/settings_multis.php:91
+msgid "Rating button CSS class"
+msgstr "दर्ज़ा बटन सी एस एस वर्ग"
+
+#: options/settings/settings_multis.php:106
+msgid "Submit Button"
+msgstr "जमा बटन"
+
+#: options/settings/settings_multis.php:110
+msgid "Button text"
+msgstr "बटन पाठ"
+
+#: options/settings/settings_multis.php:117
+msgid "Use submit button to send votes. If disabled, votes will be send once all block elements are rated."
+msgstr "सबमिट बटन का प्रयोग वोट भेजने के लिए करें. यदि अक्षम, वोट एक बार भेजा जाएगा जब सभी खंड तत्वों को दर्ज़ा प्राप्त हो जायेगा."
+
+#: options/settings/settings_statistics.php:1
+msgid "Trend Calculations"
+msgstr "प्रवृत्ति गणना"
+
+#: options/settings/settings_statistics.php:5
+msgid "Calculate for last number of days"
+msgstr "पिछले दिनों की संख्या की गणना के लिए"
+
+#: options/settings/settings_statistics.php:9
+msgid "Calculate over how many days before"
+msgstr "कितने दिनों की गणना से पहले"
+
+#: options/settings/settings_statistics.php:15
+msgid "Bayesian Estimate Mean"
+msgstr "बयेसियन अनुमान मीन"
+
+#: options/settings/settings_statistics.php:19
+msgid "Minimum votes required"
+msgstr "न्यूनतम आवश्यक वोट"
+
+#: options/settings/settings_statistics.php:23
+msgid "Mean vote rating across the whole report"
+msgstr "पूरी रिपोर्ट में वोट दर्ज़ा मीन"
+
+#: options/settings/settings_thumbs.php:1
+msgid "Posts &amp; Pages"
+msgstr "पोस्ट औरamp;पेज"
+
+#: options/settings/settings_thumbs.php:5
+#: options/settings/settings_thumbs.php:69
+msgid "Thumbs Set"
+msgstr "अंगूठे समूह"
+
+#: options/setup/setup_database.php:1
+#: options/setup/setup_database.php:5
+#: options/setup/setup_database.php:15
+#: options/setup.php:2
+#: options/setup.php:8
+msgid "Reinstall"
+msgstr "पुनर्स्थापना"
+
+#: options/setup/setup_database.php:4
+msgid "All database tables will be deleted, and installed again."
+msgstr "सभी डेटाबेस टेबल नष्ट कर दिया जाएगा, और फिर से स्थापित किया जाएगा"
+
+#: options/setup/setup_database.php:7
+#: options/setup/setup_database.php:17
+#: options/setup/setup_database.php:27
+#: options/setup/setup_global.php:7
+#: options/setup/setup_uninstall.php:7
+msgid "This operation is not reversable. Backup your data if you want to be able to restore it later."
+msgstr "यह आपरेशन उलटने के योग्य नहीं है. अगर आप चाहते हो की डेटा बाद में बहाल करने में सक्षम हो तो, अपने डेटा का बैकअप लीजिये."
+
+#: options/setup/setup_database.php:11
+msgid "Reinstall Multi Ratings"
+msgstr "बहुदर्ज़ा पुनर्स्थापना "
+
+#: options/setup/setup_database.php:14
+msgid "Only multi ratings tables will be deleted, and installed again."
+msgstr "केवल बहुदर्ज़ा टेबल नष्ट कर दिया जाएगा, और फिर से स्थापित किया जाएगा."
+
+#: options/setup/setup_database.php:21
+#: options/setup/setup_database.php:25
+#: options/setup.php:23
+msgid "Reinstall Templates"
+msgstr "पुनर्स्थापना टेम्पलेट"
+
+#: options/setup/setup_database.php:24
+msgid "This will remove all saved templates for the plugin. Templates will be reseted to their default values."
+msgstr "यह सब बचे टेम्पलेट्स निकाल देगा प्लगइन के लिए. टेम्पलेट्स उनके डिफ़ॉल्ट मानों पर रीसेट किया जाएगा."
+
+#: options/setup/setup_global.php:1
+#: options/setup/setup_global.php:5
+#: options/setup.php:17
+msgid "Remove Settings"
+msgstr "सेटिंग्स हटाना"
+
+#: options/setup/setup_global.php:4
+msgid "This will remove all plugin settings and all the saved widgets."
+msgstr "यह सभी प्लगइन सेटिंग्स और सभी बचे विजेट्स हटा देगा."
+
+#: options/setup/setup_global.php:11
+#: options/setup/setup_global.php:15
+#: options/setup.php:30
+msgid "Reset Imports"
+msgstr "रीसेट आयात"
+
+#: options/setup/setup_global.php:14
+msgid "This will reset all import flags for import data modules and will allow you to import again allready imported data."
+msgstr "यह आयात डाटा मॉड्यूल के लिए सभी आयात झंडे रीसेट और आपको पहले से आयातित डेटा फिर से आयात करने की अनुमति देगा."
+
+#: options/setup/setup_uninstall.php:1
+msgid "Uninstall"
+msgstr "स्थापना रद्द करें"
+
+#: options/setup/setup_uninstall.php:4
+msgid "After removal, plugin will be disabled. All data recorded by the plugin will be lost"
+msgstr "हटाने के बाद, प्लगइन निष्क्रिय हो जाएगा. सभी प्लगइन द्वारा दर्ज डेटा खो जाएगा"
+
+#: options/setup/setup_uninstall.php:5
+#: gd-star-rating.php:1404
+msgid "UNINSTALL"
+msgstr "स्थापना रद्द करें"
+
+#: options/tools/tools_bulk.php:2
+msgid "Date Based Post Locking"
+msgstr "दिनांक आधारित पोस्ट लोक्क "
+
+#: options/tools/tools_bulk.php:7
+msgid "Lock posts older than"
+msgstr "लोक्क पोस्ट पुराने से"
+
+#: options/tools/tools_bulk.php:11
+msgid "Lock"
+msgstr "लोक्क "
+
+#: options/tools/tools_bulk.php:13
+msgid "Previous Lock Date"
+msgstr "पिछले लोक्क दिनांक"
+
+#: options/tools/tools_bulk.php:17
+msgid "Global Voting Rules Update"
+msgstr "वैश्विक मतदान नियम अद्यतन"
+
+#: options/tools/tools_bulk.php:41
+#: options/settings.php:48
+msgid "Multis"
+msgstr "मल्टीज़"
+
+#: options/tools/tools_bulk.php:79
+msgid "This will update all posts and comments with previously saved ratings."
+msgstr "यह सभी संदेश और पहले से बचाए रेटिंग के साथ टिप्पणियों का अद्यतन करेगा."
+
+#: options/tools/tools_bulk.php:83
+msgid "Recalculate Multi Ratings Averages"
+msgstr "पुनर्गणना मल्टी रेटिंग औसत"
+
+#: options/tools/tools_bulk.php:86
+msgid "If you change multi rating sets weight for the elements you can execute recaluculation of all average ratings saved. Select the set you want to recalculate for, or select all sets."
+msgstr "यदि आप मल्टी दर्ज़ा सेट के वजन बदलते है तत्वों के लिए तो आप सब बचे औसत रेटिंग के पुन:गणना निष्पादित कर सकते हैं . पुनर्गणना के लिए आप सेट चुनें , या सभी सेट का चयन करे."
+
+#: options/tools/tools_bulk.php:87
+msgid "Use this also if you update from versions before 1.2.0 and you had problems with saving multi rating results."
+msgstr "इसका भी प्रयोग करें, अगर आप 1.2.0 के पहले संस्करण से अद्यतन और आपको बहु दर्ज़ा परिणामों की बचत के साथ समस्या था."
+
+#: options/tools/tools_bulk.php:90
+msgid "Select multi set"
+msgstr "चुनें बहु सेट"
+
+#: options/tools/tools_bulk.php:93
+msgid "All Sets"
+msgstr "सभी समूह"
+
+#: options/tools/tools_bulk.php:99
+msgid "Recalculate"
+msgstr "पुनर्गणना"
+
+#: options/tools/tools_bulk.php:101
+msgid "Depending on the number of posts, this operation can take a while to complete. Be patient."
+msgstr "पोस्ट्स की संख्या पर निर्भर करते हुए, इस अभियान को पूरा होने में कुछ समय लग सकता है. धीरज रखो."
+
+#: options/tools/tools_bulk.php:105
+msgid "Update Multi Rating Votes Log"
+msgstr "अद्यतन बहु दर्ज़ा वोट लॉग"
+
+#: options/tools/tools_bulk.php:108
+msgid "This tool will update votes log and recalculate average value for each multi ratings votes."
+msgstr "यह उपकरण वोट लॉग का अद्यतन करेगा, वोट लॉग इन करें और एक बहु दर्ज़ा वोट के लिए औसत मूल्य पुनर्गणना करे."
+
+#: options/tools/tools_bulk.php:111
+msgid "You need to do only once."
+msgstr "आपको केवल एक बार करना है."
+
+#: options/tools/tools_cleanup.php:1
+msgid "Cache"
+msgstr "कैश"
+
+#: options/tools/tools_cleanup.php:4
+msgid "Delete all cached files from folder"
+msgstr "सभी कैश फाइल फ़ोल्डर से हटाएँ "
+
+#: options/tools/tools_cleanup.php:5
+#: options/tools/tools_cleanup.php:18
+#: options/tools/tools_db.php:22
+msgid "Clean"
+msgstr "साफ़"
+
+#: options/tools/tools_cleanup.php:7
+#: options/tools/tools_db.php:7
+#: options/tools/tools_db.php:24
+msgid "Last cleanup was executed on"
+msgstr "पिछले सफाई निष्पादित की गयी थी"
+
+#: options/tools/tools_cleanup.php:9
+msgid "Total files cached"
+msgstr "कुल फ़ाइलें कैश्ड"
+
+#: options/tools/tools_cleanup.php:11
+msgid "Total size of cached files"
+msgstr "कैश्ड फ़ाइलों का कुल आकार"
+
+#: options/tools/tools_cleanup.php:14
+msgid "Debug"
+msgstr "डीबग"
+
+#: options/tools/tools_cleanup.php:17
+msgid "Empty the debug file"
+msgstr "खाली डिबग फ़ाइल"
+
+#: options/tools/tools_cleanup.php:21
+msgid "Total size of debug file"
+msgstr "डिबग फ़ाइल का कुल आकार"
+
+#: options/tools/tools_db.php:1
+#: options/tools/tools_db.php:5
+msgid "Upgrade"
+msgstr "अद्यतन"
+
+#: options/tools/tools_db.php:4
+msgid "Try to upgrade plugin tables. This is performed automatically after each plugin upgrade, but you can use this tool also."
+msgstr "प्लगइन टेबल उन्नयन की कोशिश करे. यह स्वतः ही प्रत्येक प्लगइन के उन्नयन के बाद किया जाता है,लेकिन आप इस उपकरण का भी उपयोग कर सकते हैं."
+
+#: options/tools/tools_db.php:11
+#: options/tools.php:7
+msgid "Cleanup"
+msgstr "सफाई"
+
+#: options/tools/tools_db.php:14
+msgid "Remove all invalid votes from votes log."
+msgstr "वोट लॉग से सभी अवैध वोट निकालें. "
+
+#: options/tools/tools_db.php:16
+msgid "Remove all invalid votes from trends log."
+msgstr "प्रवृत्ति लॉग से सभी अवैध वोट निकालें."
+
+#: options/tools/tools_db.php:18
+msgid "Remove data for old and deleted posts and comments."
+msgstr "पुराने और नष्ट कर दिए पोस्ट्स और टिप्पणियों के लिए डेटा निकालें."
+
+#: options/tools/tools_db.php:20
+msgid "Remove data for old and deleted multi ratings."
+msgstr "पुराने और नष्ट कर दिए बहु दर्ज़ा के लिए डेटा निकालें."
+
+#: options/tools/tools_db.php:25
+msgid "Cleanup summary"
+msgstr "सफाई सारांश"
+
+#: options/tools/tools_editcss.php:21
+msgid "Save"
+msgstr "सहेजे "
+
+#: options/tools/tools_editcss.php:6
+msgid "File is not writeable and can't be saved through this form."
+msgstr "फ़ाइल लेखनीय नहीं है और इस प्रपत्र के माध्यम से नहीं बचाया जा सकता है."
+
+#: options/tools/tools_editcss.php:11
+msgid "Additional CSS file not found"
+msgstr "अतिरिक्त सी एस एस नहीं मिला"
+
+#: options/tools/tools_gfx.php:1
+msgid "Stars and Trends Graphics"
+msgstr "सितारे और रुझान ग्राफिक्स"
+
+#: options/tools/tools_gfx.php:4
+msgid "Rescan graphics folders for new stars and trends images."
+msgstr " नए सितारों और प्रवृत्ति छवियों के लिए ग्राफिक्स फ़ोल्डर्स रीस्कैन करे."
+
+#: options/tools/tools_gfx.php:5
+msgid "Rescan"
+msgstr "रीस्कैन"
+
+#: options/tools/tools_gfx.php:7
+msgid "Last scan was executed on."
+msgstr "पिछला स्कैन निष्पादित हुआ था."
+
+#: options/tools/tools_t2.php:1
+msgid "Import Templates"
+msgstr "आयात टेम्पलेट"
+
+#: options/tools/tools_t2.php:4
+msgid "This will import templates from alternative location:"
+msgstr "यह खाके आयात करेगा वैकल्पिक स्थान से:"
+
+#: options/tools/tools_t2.php:8
+msgid "Templates with same name as the templates already in database will be skipped."
+msgstr "डाटाबेस में पहले से ही टेम्पलेट के रूप में एक ही नाम के साथ टेम्पलेट को छोड़ दिया जाएगा."
+
+#: options/articles.php:156
+msgid "Time"
+msgstr "समय"
+
+#: options/articles.php:163
+msgid "Views"
+msgstr "दर्शाव"
+
+#: options/articles.php:196
+#: options/categories.php:115
+msgid "date limit"
+msgstr "तिथि सीमा"
+
+#: options/articles.php:199
+#: options/categories.php:119
+msgid "countdown"
+msgstr "उलटी गिनती"
+
+#: options/articles.php:212
+#: options/categories.php:133
+msgid "no limit"
+msgstr "कोई सीमा नहीं"
+
+#: options/articles.php:224
+#: options/charts.php:1
+msgid "Charts"
+msgstr "चार्ट्स "
+
+#: options/builder.php:2
+#: gd-star-rating.php:618
+msgid "Builder"
+msgstr "बिल्डर"
+
+#: options/builder.php:6
+msgid "Shortcode/Functions"
+msgstr "शोर्टकोड /फंक्शन्स "
+
+#: options/builder.php:7
+#: options/settings.php:39
+#: tinymce3/panels/articlesrater.php:11
+#: tinymce3/panels/multis.php:20
+#: tinymce3/panels/thumbsrating.php:11
+#: gd-star-rating.php:625
+#: gd-star-rating.php:842
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: options/categories.php:92
+#: tinymce3/panels/filter.php:22
+msgid "Category"
+msgstr "श्रेणी"
+
+#: options/categories.php:98
+msgid "Time Restrictions"
+msgstr "समय प्रतिबंध"
+
+#: options/categories.php:101
+#: options/settings.php:45
+msgid "Integration"
+msgstr "एकीकरण"
+
+#: options/categories.php:204
+#: tinymce3/panels/general.php:34
+#: widgets/rating/part_basic.php:48
+#: widgets/rating_28/part_basic.php:46
+msgid "Multi Set"
+msgstr "बहु सेट "
+
+#: options/categories.php:214
+msgid "(this multi set is used for comment integration)"
+msgstr "(इस बहु सेट का प्रयोग टिप्पणी एकीकरण के लिए किया जाता है)"
+
+#: options/categories.php:148
+msgid "multi set"
+msgstr "बहु सेट"
+
+#: options/categories.php:149
+msgid "inhert from parent"
+msgstr "पेरेंट से वारिस "
+
+#: options/charts.php:6
+msgid "Articles (Posts And Pages)"
+msgstr "लेख (पोस्ट और पेज)"
+
+#: options/comments.php:46
+msgid "Comments for post"
+msgstr "पोस्ट के लिए टिप्पणियाँ"
+
+#: options/comments.php:91
+msgid "Comment"
+msgstr "टिप्पणि"
+
+#: options/comments.php:92
+#: options/moderation.php:115
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+#: options/comments.php:93
+#: options/moderation.php:114
+msgid "Date And Time"
+msgstr "दिनांक और समय"
+
+#: options/comments.php:95
+#: options/users_log.php:203
+msgid "Votes"
+msgstr "वोट"
+
+#: options/comments.php:135
+#: options/voters.php:184
+msgid "With selected"
+msgstr "के साथ चुना"
+
+#: options/export.php:1
+msgid "Export Data"
+msgstr "निर्यात डेटा"
+
+#: options/export.php:6
+msgid "Users Data"
+msgstr "उपयोगकर्ता डेटा"
+
+#: options/export.php:7
+#: options/tools.php:8
+#: gd-star-rating.php:628
+msgid "T2 Templates"
+msgstr "टी 2 टेम्पलेट्स"
+
+#: options/gfx.php:1
+#: options/settings.php:30
+msgid "Settings saved."
+msgstr "सेटिंग्स को बचा लिया."
+
+#: options/gfx.php:77
+#: options/settings.php:81
+msgid "Save Settings"
+msgstr "सेटिंग्स सहेजें"
+
+#: options/import.php:28
+#: options/import.php:60
+#: options/import.php:85
+#: options/import.php:144
+#: options/import.php:4
+#: options/import.php:11
+#: options/import.php:18
+msgid "Import Data"
+msgstr "आयात डाटा"
+
+#: options/import.php:43
+#: options/import.php:68
+#: options/import.php:93
+#: options/import.php:151
+msgid "Plugin URL"
+msgstr "प्लगइन यू आर एल"
+
+#: options/import.php:48
+#: options/import.php:73
+#: options/import.php:98
+#: options/import.php:156
+msgid "Author URL"
+msgstr "लेखक यू आर एल"
+
+#: options/import.php:53
+#: options/import.php:78
+#: options/import.php:137
+#: options/users_log.php:121
+msgid "Status"
+msgstr "स्थिति"
+
+#: options/import.php:103
+msgid "Instructions"
+msgstr "निर्देश"
+
+#: options/import.php:106
+msgid "For each value you have a name of the variable from plugin file in square brackets."
+msgstr "प्रत्येक मान के लिए प्लगइन फ़ाइल से चर का एक नाम है जो वर्ग कोष्ठक में है."
+
+#: options/import.php:107
+msgid "Plugin could save data in post meta table or only in the post using shortcodes. Import can try both, but if you are usre that ratings are stored in post meta table, use that option."
+msgstr "प्लगइन पोस्ट मेटा टेबल या केवल पोस्ट में डेटा को बचाने के शोर्टकोड का उपयोग कर सकता है. आयात दोनों की कोशिश सकते हैं, लेकिन यदि आप उपयोगकर्ता है तो रेटिंग्स पोस्ट मेटा तालिका में संग्रहीत हैं, के विकल्प का उपयोग करें."
+
+#: options/import.php:110
+msgid "Import Settings"
+msgstr "आयात सेटिंग्स"
+
+#: options/import.php:114
+msgid "Maximum review value"
+msgstr "अधिकतम समीक्षा का मूल्य "
+
+#: options/import.php:120
+msgid "Meta Key"
+msgstr "मेटा कुंजी"
+
+#: options/import.php:126
+msgid "Try Importing from"
+msgstr "से आयात करने की कोशिश "
+
+#: options/import.php:129
+msgid "Posts meta table"
+msgstr "मेटा तालिका पोस्ट्स"
+
+#: options/import.php:130
+msgid "Posts contents only"
+msgstr "केवल पोस्ट्स सामग्री  "
+
+#: options/import.php:131
+msgid "Both contents and meta"
+msgstr "दोनों सामग्री और मेटा"
+
+#: options/import.php:166
+msgid "To avoid rating data import problems, please don't use GD Star Rating in the same time as the plugins above, to avoid potential import problems and false data. I can't guarantee that data will be transfered without problems."
+msgstr "दर्ज़ा डेटा समस्याओं के आयात से बचने के लिए , इसके बाद के संस्करण प्लगइन के रूप में एक ही समय में जी.डी. सितारा श्रेणी प्रयोग मत करो, आयात के लिए संभावित समस्याओं और गलत जानकारी से बचें. मैं गारंटी नहीं दे सकते कि डेटा  स्थानांतरित कर दिया जाएगा बिना समस्याओं के."
+
+#: options/import.php:105
+msgid "You need to enter few settings for this plugin. This can be found in the plugin's main and only PHP file: %s"
+msgstr "आपको इस प्लगइन के लिए कुछ सेटिंग्स में प्रवेश की जरूरत है.यह प्लगइन के मुख्य और केवल PHP फ़ाइल:%s में पाया जा सकता है."
+
+#: options/ips.php:71
+msgid "Ban New"
+msgstr "नई प्रतिबंध "
+
+#: options/ips.php:72
+msgid "Banned"
+msgstr "प्रतिबंधित "
+
+#: options/moderation.php:147
+msgid "With Selected"
+msgstr "चुनिंदा के साथ"
+
+#: options/moderation.php:150
+msgid "Approve"
+msgstr "स्वीकृत"
+
+#: options/settings.php:43
+msgid "Features"
+msgstr "विशेषताएँ"
+
+#: options/settings.php:44
+msgid "Advanced"
+msgstr "उन्नत"
+
+#: options/settings.php:46
+#: tinymce3/panels/blograting.php:12
+#: tinymce3/panels/filter.php:7
+msgid "Posts And Pages"
+msgstr "पोस्ट और पेज"
+
+#: options/settings.php:49
+msgid "Thumbs Up/Down"
+msgstr "अंगूठे ऊपर / नीचे"
+
+#: options/setup.php:6
+msgid "Database tables reinstalled."
+msgstr "डाटाबेस टेबल पुनःस्थापित."
+
+#: options/setup.php:15
+msgid "Multi rating tables reinstalled."
+msgstr "मल्टी दर्ज़ा टेबल पुनःस्थापित."
+
+#: options/setup.php:21
+msgid "Settings are removed from WordPress installation."
+msgstr "सेटिंग्स वर्डप्रेस स्थापना से हटा रहे हैं."
+
+#: options/setup.php:28
+msgid "Plugins default templates are reinstalled."
+msgstr "प्लगइन डिफ़ॉल्ट टेम्पलेट्स पुनःस्थापित हो चुके है."
+
+#: options/setup.php:32
+msgid "Import Information is reseted."
+msgstr "आयात सूचना रीसेट है."
+
+#: options/setup.php:38
+msgid "Are you sure? Operation is not reversible."
+msgstr "क्या आप सुनिश्चित हैं? ऑपरेशन उलटने योग्य नहीं है."
+
+#: options/setup.php:45
+msgid "Database Maintenance"
+msgstr "डेटाबेस रखरखाव"
+
+#: options/setup.php:46
+msgid "Global Maintenance"
+msgstr "वैश्विक रखरखाव"
+
+#: options/setup.php:47
+msgid "Full Uninstall"
+msgstr "पूरी तरह स्थापना रद्द करें"
+
+#: options/tools.php:0
+#: gd-star-rating.php:627
+msgid "Tools"
+msgstr "उपकरण"
+
+#: options/tools.php:5
+msgid "Bulk"
+msgstr "थोक"
+
+#: options/tools.php:6
+msgid "Database"
+msgstr "डेटाबेस"
+
+#: options/tools.php:10
+msgid "Edit CSS"
+msgstr "संपादित करें सी एस एस"
+
+#: options/users.php:62
+msgid "Email"
+msgstr "ई-मेल"
+
+#: options/users.php:63
+msgid "Thumbs Articles"
+msgstr "अंगूठे लेख"
+
+#: options/users.php:64
+msgid "Thumbs Comments"
+msgstr "अंगूठे टिप्पणियाँ"
+
+#: options/users.php:65
+msgid "Ratings Articles"
+msgstr "दर्ज़ा लेख"
+
+#: options/users.php:66
+msgid "Ratings Comments"
+msgstr "दर्ज़ा टिप्पणियाँ"
+
+#: options/users.php:33
+msgid "Visitor"
+msgstr "आगंतुक"
+
+#: options/users.php:111
+#: options/users.php:116
+#: options/users.php:121
+#: options/users.php:126
+msgid "unique ip's"
+msgstr "अद्वितीय है आई पी"
+
+#: options/users_log.php:94
+msgid "User Vote Log"
+msgstr "उपयोगकर्ता वोट लॉग"
+
+#: options/users_log.php:97
+msgid "Votes log for user"
+msgstr "उपयोगकर्ता के लिए वोट लॉग "
+
+#: options/users_log.php:100
+msgid "Votes log for visitors"
+msgstr "आगंतुकों के लिए वोट लॉग "
+
+#: options/users_log.php:106
+#: options/voters.php:114
+msgid "All Votes"
+msgstr "सभी वोट"
+
+#: options/users_log.php:122
+#: options/voters.php:145
+msgid "Vote Date"
+msgstr "मतदान की तिथि"
+
+#: options/users_log.php:124
+msgid "Post"
+msgstr "पोस्ट"
+
+#: options/users_log.php:126
+msgid "Comment Author"
+msgstr "टिप्पणी लेखक"
+
+#: options/users_log.php:127
+msgid "Comment Excerpt"
+msgstr "टिप्पणी अंश"
+
+#: options/users_log.php:198
+msgid "Add selected IP's to ban IP's list."
+msgstr "चुने आई पी जोड़ें आई पी की सूची पर प्रतिबंध लगाने के लिए."
+
+#: options/users_log.php:211
+msgid "Only Invalid"
+msgstr "केवल अवैध"
+
+#: options/users_log.php:212
+#: options/voters.php:191
+msgid "From Log Only"
+msgstr "केवल लॉग से"
+
+#: options/users_log.php:213
+#: options/voters.php:190
+msgid "Full Delete"
+msgstr "पूर्ण हटाएँ"
+
+#: options/voters.php:99
+msgid "Vote log for post"
+msgstr "वोट लॉग के लिए पोस्ट दें  "
+
+#: tinymce3/panels/articlesrater.php:2
+#: tinymce3/panels/thumbsrating.php:2
+msgid "StarRater will render actual rating block if you choose not to have it automatically inserted. This way you can position it wherever you want in the contnents."
+msgstr "सितारा दर्ज़ा वास्तविक दर्ज़ा खंड प्रदान करेगा,यदि आप इसे स्वतः डाला चुनाव नहीं करते. इस तरह इसे आप उस स्थिति में जहाँ भी आप सामग्री में करना चाहते हैं कर सकते हैं."
+
+#: tinymce3/panels/articlesrater.php:12
+#: tinymce3/panels/multis.php:21
+#: tinymce3/panels/thumbsrating.php:12
+msgid "Display rating block as read only."
+msgstr "प्रदर्शन दर्ज़ा खंड के रूप में ही पढ़ें."
+
+#: tinymce3/panels/articlesreview.php:1
+msgid "Articles Review Rating"
+msgstr "लेख की समीक्षा दर्ज़ा"
+
+#: tinymce3/panels/articlesreview.php:2
+msgid "StarReview will render stars representing review value assigned to the post or page."
+msgstr "सितारे की समीक्षा प्रस्तुत करना होगा सितारों की समीक्षा करने के बाद या पृष्ठ को सौंपा मूल्य का प्रतिनिधित्व."
+
+#: tinymce3/panels/blograting.php:9
+#: tinymce3/panels/filter.php:4
+#: widgets/rating/part_filter.php:13
+#: widgets/rating_28/part_filter.php:13
+#: widgets/top/part_filter.php:13
+#: widgets/top_28/part_filter.php:13
+msgid "Include Articles"
+msgstr "शामिल लेख"
+
+#: tinymce3/panels/blograting.php:13
+#: tinymce3/panels/filter.php:8
+#: widgets/rating/part_filter.php:17
+#: widgets/rating_28/part_filter.php:17
+#: widgets/top/part_filter.php:17
+#: widgets/top_28/part_filter.php:17
+msgid "Posts Only"
+msgstr "केवल पोस्ट"
+
+#: tinymce3/panels/blograting.php:14
+#: tinymce3/panels/filter.php:9
+#: widgets/rating/part_filter.php:18
+#: widgets/rating_28/part_filter.php:18
+#: widgets/top/part_filter.php:18
+#: widgets/top_28/part_filter.php:18
+msgid "Pages Only"
+msgstr "केवल पृष्ठ"
+
+#: tinymce3/panels/blograting.php:19
+#: tinymce3/panels/filter.php:14
+#: widgets/comments/part_filter.php:13
+#: widgets/comments_28/part_filter.php:13
+#: widgets/rating/part_filter.php:24
+#: widgets/rating_28/part_filter.php:24
+#: widgets/top/part_filter.php:24
+#: widgets/top_28/part_filter.php:24
+msgid "Display Votes From"
+msgstr "प्रदर्शन के वोट से"
+
+#: tinymce3/panels/blograting.php:21
+#: tinymce3/panels/commentsaggr.php:16
+#: tinymce3/panels/filter.php:16
+#: widgets/comments/part_basic.php:16
+#: widgets/comments/part_filter.php:16
+#: widgets/comments_28/part_basic.php:16
+#: widgets/comments_28/part_filter.php:16
+#: widgets/rating/part_basic.php:16
+#: widgets/rating/part_filter.php:27
+#: widgets/rating_28/part_basic.php:16
+#: widgets/rating_28/part_filter.php:27
+#: widgets/top/part_basic.php:16
+#: widgets/top/part_filter.php:27
+#: widgets/top_28/part_basic.php:16
+#: widgets/top_28/part_filter.php:27
+msgid "Everyone"
+msgstr "सभी"
+
+#: tinymce3/panels/blograting.php:23
+#: tinymce3/panels/commentsaggr.php:18
+#: tinymce3/panels/filter.php:18
+#: widgets/comments/part_basic.php:18
+#: widgets/comments/part_filter.php:18
+#: widgets/comments_28/part_basic.php:18
+#: widgets/comments_28/part_filter.php:18
+#: widgets/rating/part_basic.php:18
+#: widgets/rating/part_filter.php:29
+#: widgets/rating_28/part_basic.php:18
+#: widgets/rating_28/part_filter.php:29
+#: widgets/top/part_basic.php:18
+#: widgets/top/part_filter.php:29
+#: widgets/top_28/part_basic.php:18
+#: widgets/top_28/part_filter.php:29
+msgid "Users Only"
+msgstr "केवल उपयोगकर्ता"
+
+#: tinymce3/panels/commentsaggr.php:1
+msgid "Aggregated Comments Ratings"
+msgstr "एकत्रित टिप्पणियाँ दर्ज़ा"
+
+#: tinymce3/panels/commentsaggr.php:2
+msgid "This will render aggregated comments rating for the post."
+msgstr "यह पोस्ट के लिए जोड़ टिप्पणियाँ दर्ज़ा प्रदान करेंगे."
+
+#: tinymce3/panels/commentsaggr.php:14
+msgid "Calculate Votes From"
+msgstr "गणना वोट से"
+
+#: tinymce3/panels/filter.php:1
+msgid "Basic"
+msgstr "बुनियादी"
+
+#: tinymce3/panels/filter.php:26
+#: widgets/comments/part_filter.php:36
+#: widgets/comments_28/part_filter.php:36
+#: widgets/rating/part_filter.php:52
+#: widgets/rating_28/part_filter.php:52
+msgid "Minimum Votes"
+msgstr "कम से कम वोट"
+
+#: tinymce3/panels/filter.php:30
+msgid "Excerpt words"
+msgstr "अंश शब्द"
+
+#: tinymce3/panels/filter.php:37
+msgid "Sorting"
+msgstr "छँटाई"
+
+#: tinymce3/panels/filter.php:40
+msgid "Column"
+msgstr "स्तंभ"
+
+#: tinymce3/panels/filter.php:44
+#: widgets/comments/part_filter.php:47
+#: widgets/comments_28/part_filter.php:47
+#: widgets/rating/part_filter.php:63
+#: widgets/rating_28/part_filter.php:63
+msgid "Total Votes"
+msgstr "कुल वोट"
+
+#: tinymce3/panels/filter.php:48
+#: widgets/rating/part_filter.php:67
+#: widgets/rating_28/part_filter.php:67
+msgid "Count"
+msgstr "गणना"
+
+#: tinymce3/panels/filter.php:49
+#: widgets/rating/part_filter.php:68
+#: widgets/rating_28/part_filter.php:68
+msgid "Bayesian Rating"
+msgstr "बयेसियन दर्ज़ा"
+
+#: tinymce3/panels/filter.php:54
+msgid "Order"
+msgstr "क्रम"
+
+#: tinymce3/panels/filter.php:57
+#: widgets/comments/part_filter.php:57
+#: widgets/comments_28/part_filter.php:57
+#: widgets/rating/part_filter.php:77
+#: widgets/rating_28/part_filter.php:77
+msgid "Descending"
+msgstr "अवरोही"
+
+#: tinymce3/panels/filter.php:58
+#: widgets/comments/part_filter.php:58
+#: widgets/comments_28/part_filter.php:58
+#: widgets/rating/part_filter.php:78
+#: widgets/rating_28/part_filter.php:78
+msgid "Ascending"
+msgstr "आरोही"
+
+#: tinymce3/panels/filter.php:66
+msgid "Last Voted"
+msgstr "अंतिम वोट"
+
+#: tinymce3/panels/filter.php:67
+#: widgets/rating/part_filter.php:123
+#: widgets/rating_28/part_filter.php:123
+msgid "Use only articles voted for in last # days."
+msgstr "केवल उन लेख का प्रयोग करे जो अंतिम # दिनों में वोट दिया गया."
+
+#: tinymce3/panels/filter.php:70
+#: widgets/comments/part_filter.php:77
+#: widgets/comments_28/part_filter.php:77
+#: widgets/rating/part_filter.php:128
+#: widgets/rating_28/part_filter.php:128
+msgid "Enter 0 for all"
+msgstr "0 सभी के लिए दर्ज करें"
+
+#: tinymce3/panels/filter.php:80
+msgid "Publish Date"
+msgstr "प्रकाशित दिनांक"
+
+#: tinymce3/panels/filter.php:83
+#: widgets/rating/part_filter.php:145
+#: widgets/rating_28/part_filter.php:145
+msgid "Last # days"
+msgstr "पिछले # दिनों "
+
+#: tinymce3/panels/filter.php:84
+#: widgets/rating/part_filter.php:146
+#: widgets/rating_28/part_filter.php:146
+msgid "Exact month"
+msgstr "सटीक महीने"
+
+#: tinymce3/panels/filter.php:85
+#: widgets/rating/part_filter.php:147
+#: widgets/rating_28/part_filter.php:147
+msgid "Date range"
+msgstr "तिथि सीमा"
+
+#: tinymce3/panels/filter.php:93
+#: widgets/rating/part_filter.php:156
+#: widgets/rating_28/part_filter.php:156
+msgid "Number Of Days"
+msgstr "दिनों की संख्या"
+
+#: tinymce3/panels/filter.php:103
+#: widgets/rating/part_filter.php:167
+#: widgets/rating_28/part_filter.php:167
+msgid "Month"
+msgstr "महीने"
+
+#: tinymce3/panels/filter.php:113
+#: widgets/rating/part_filter.php:178
+#: widgets/rating_28/part_filter.php:178
+msgid "Range"
+msgstr "सीमा"
+
+#: tinymce3/panels/general.php:1
+msgid "Display"
+msgstr "प्रदर्शन"
+
+#: tinymce3/panels/general.php:4
+#: widgets/rating/part_filter.php:35
+#: widgets/rating_28/part_filter.php:35
+msgid "Number Of Posts"
+msgstr "की संख्या के पोस्ट"
+
+#: tinymce3/panels/general.php:8
+#: widgets/rating/part_basic.php:24
+#: widgets/rating_28/part_basic.php:24
+msgid "Items Grouping"
+msgstr "समूह वस्तु"
+
+#: tinymce3/panels/general.php:10
+#: widgets/rating/part_basic.php:27
+#: widgets/rating_28/part_basic.php:27
+msgid "No grouping"
+msgstr "कोई समूह नहीं"
+
+#: tinymce3/panels/general.php:11
+#: widgets/rating/part_basic.php:28
+#: widgets/rating_28/part_basic.php:28
+msgid "User based"
+msgstr "उपयोगकर्ता आधारित"
+
+#: tinymce3/panels/general.php:12
+#: widgets/rating/part_basic.php:29
+#: widgets/rating_28/part_basic.php:29
+msgid "Category based"
+msgstr "श्रेणी के आधार"
+
+#: tinymce3/panels/general.php:19
+msgid "Source"
+msgstr "स्रोत"
+
+#: tinymce3/panels/general.php:22
+#: widgets/rating/part_basic.php:34
+#: widgets/rating_28/part_basic.php:34
+msgid "Data Source"
+msgstr "डेटा स्रोत"
+
+#: tinymce3/panels/general.php:25
+#: widgets/rating/part_basic.php:37
+#: widgets/rating_28/part_basic.php:37
+msgid "Standard Rating"
+msgstr "मानक दर्ज़ा"
+
+#: tinymce3/panels/general.php:42
+#: widgets/rating/part_trend.php:4
+#: widgets/rating/part_trend.php:12
+#: widgets/rating_28/part_trend.php:4
+#: widgets/rating_28/part_trend.php:12
+msgid "Trend"
+msgstr "रुझान"
+
+#: tinymce3/panels/general.php:45
+#: widgets/rating/part_trend.php:13
+#: widgets/rating_28/part_trend.php:13
+msgid "Rating trend display as"
+msgstr "दर्ज़ा प्रवृत्ति प्रदर्शन के रूप में"
+
+#: tinymce3/panels/general.php:48
+#: tinymce3/panels/general.php:85
+#: widgets/rating/part_trend.php:16
+#: widgets/rating/part_trend.php:54
+#: widgets/rating_28/part_trend.php:16
+#: widgets/rating_28/part_trend.php:54
+msgid "Text"
+msgstr "पाठ"
+
+#: tinymce3/panels/general.php:49
+#: tinymce3/panels/general.php:86
+#: widgets/rating/part_image.php:4
+#: widgets/rating/part_image.php:12
+#: widgets/rating/part_trend.php:17
+#: widgets/rating/part_trend.php:55
+#: widgets/rating_28/part_image.php:4
+#: widgets/rating_28/part_image.php:12
+#: widgets/rating_28/part_trend.php:17
+#: widgets/rating_28/part_trend.php:55
+msgid "Image"
+msgstr "छवि"
+
+#: tinymce3/panels/general.php:57
+#: tinymce3/panels/general.php:94
+#: widgets/rating/part_trend.php:26
+#: widgets/rating/part_trend.php:64
+#: widgets/rating_28/part_trend.php:26
+#: widgets/rating_28/part_trend.php:64
+msgid "Up"
+msgstr "ऊपर"
+
+#: tinymce3/panels/general.php:60
+#: tinymce3/panels/general.php:97
+#: widgets/rating/part_trend.php:28
+#: widgets/rating/part_trend.php:66
+#: widgets/rating_28/part_trend.php:28
+#: widgets/rating_28/part_trend.php:66
+msgid "Equal"
+msgstr "बराबर"
+
+#: tinymce3/panels/general.php:63
+#: tinymce3/panels/general.php:100
+#: widgets/rating/part_trend.php:30
+#: widgets/rating/part_trend.php:68
+#: widgets/rating_28/part_trend.php:30
+#: widgets/rating_28/part_trend.php:68
+msgid "Down"
+msgstr "नीचे"
+
+#: tinymce3/panels/general.php:71
+#: tinymce3/panels/general.php:108
+#: widgets/rating/part_trend.php:39
+#: widgets/rating/part_trend.php:77
+#: widgets/rating_28/part_trend.php:39
+#: widgets/rating_28/part_trend.php:77
+msgid "Image set"
+msgstr "छवि निर्धारित"
+
+#: tinymce3/panels/general.php:82
+#: widgets/rating/part_trend.php:51
+#: widgets/rating_28/part_trend.php:51
+msgid "Voting trend display as"
+msgstr "मतदान के रुझान प्रदर्शन के रूप में"
+
+#: tinymce3/panels/general.php:120
+msgid "Hiding"
+msgstr "छुपा"
+
+#: tinymce3/panels/general.php:121
+#: widgets/rating/part_filter.php:85
+#: widgets/rating_28/part_filter.php:85
+msgid "Bayesian minumum votes required."
+msgstr "बयेसियन न्यूनतम वोटों की जरूरत थी."
+
+#: tinymce3/panels/general.php:122
+#: widgets/comments_28/part_filter.php:65
+#: widgets/rating/part_filter.php:91
+#: widgets/rating_28/part_filter.php:91
+msgid "Hide articles with no recorded votes."
+msgstr "कोई मत रिकॉर्ड नहीं के साथ लेख छिपाएँ."
+
+#: tinymce3/panels/general.php:123
+#: widgets/rating/part_filter.php:97
+#: widgets/rating_28/part_filter.php:97
+msgid "Hide articles with no review values."
+msgstr "कोई समीक्षा मूल्य नहीं के साथ लेख छिपाएँ."
+
+#: tinymce3/panels/multis.php:6
+msgid "Multi Ratings"
+msgstr "बहुदर्ज़ा"
+
+#: tinymce3/panels/multis.php:25
+#: tinymce3/panels/multisreview.php:21
+msgid "Elements Stars"
+msgstr "तत्वों सितारे"
+
+#: tinymce3/panels/multis.php:45
+#: tinymce3/panels/multisreview.php:41
+msgid "Average Stars"
+msgstr "औसत सितारे"
+
+#: tinymce3/panels/multisreview.php:6
+msgid "Multi Reviews"
+msgstr "बहु समीक्षाएं"
+
+#: tinymce3/panels/multisreview.php:12
+msgid "Default"
+msgstr "डीफौल्ट    "
+
+#: tinymce3/panels/styles.php:6
+msgid "Post Image"
+msgstr "पोस्ट छवि"
+
+#: tinymce3/panels/styles.php:9
+#: widgets/rating/part_image.php:13
+#: widgets/rating_28/part_image.php:13
+msgid "Get Image From"
+msgstr "छवि से प्राप्त करें"
+
+#: tinymce3/panels/styles.php:12
+#: widgets/rating/part_image.php:16
+#: widgets/rating_28/part_image.php:16
+msgid "No image"
+msgstr "कोई छवि नहीं"
+
+#: tinymce3/panels/styles.php:13
+#: widgets/rating/part_image.php:17
+#: widgets/rating_28/part_image.php:17
+msgid "Custom field"
+msgstr "कस्टम क्षेत्र"
+
+#: tinymce3/panels/styles.php:14
+#: widgets/rating/part_image.php:18
+#: widgets/rating_28/part_image.php:18
+msgid "Post content"
+msgstr "पोस्ट सामग्री"
+
+#: tinymce3/panels/styles.php:20
+#: widgets/rating/part_image.php:27
+#: widgets/rating_28/part_image.php:27
+msgid "If you use %IMAGE% tag in template and this option is selected, image will not be rendered."
+msgstr "यदि आप %IMAGE% टैग का उपयोग टेम्पलेट में और इस विकल्प का चयन किया जाता है, छवि प्रदान नहीं किया जाएगा."
+
+#: tinymce3/panels/styles.php:25
+#: widgets/rating/part_image.php:35
+#: widgets/rating_28/part_image.php:35
+msgid "Custom Field"
+msgstr "कस्टम फील्ड"
+
+#: tinymce3/panels/styles.php:33
+#: widgets/rating/part_image.php:44
+#: widgets/rating_28/part_image.php:44
+msgid "First image from post content will be used for %IMAGE% tag."
+msgstr "पोस्ट सामग्री से पहले छवि %IMAGE% टैग के लिए इस्तेमाल किया जाएगा ."
+
+#: tinymce3/panels/styles.php:38
+msgid "Rating Stars"
+msgstr "दर्ज़ा सितारे"
+
+#: tinymce3/panels/styles.php:58
+msgid "Review Stars"
+msgstr "समीक्षा सितारे"
+
+#: tinymce3/panels/thumbsrating.php:1
+msgid "Thumbs Rating Block"
+msgstr "अंगूठे दर्ज़ा ब्लॉक"
+
+#: tinymce3/window.php:29
+#: tinymce3/window.php:120
+msgid "Insert"
+msgstr "डालें"
+
+#: tinymce3/window.php:47
+msgid "Shortcode"
+msgstr "शोर्टकोड  "
+
+#: tinymce3/window.php:71
+msgid "Shortcode Info"
+msgstr "शोर्टकोड जानकारी"
+
+#: tinymce3/window.php:72
+msgid "Change shortcode to see additional options you can set."
+msgstr "शोर्टकोड बदलने के लिए अतिरिक्त विकल्प आप निर्धारित कर सकते हैं"
+
+#: tinymce3/window.php:116
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: widgets/comments/part_basic.php:13
+#: widgets/comments_28/part_basic.php:13
+#: widgets/rating/part_basic.php:13
+#: widgets/rating_28/part_basic.php:13
+#: widgets/top/part_basic.php:13
+#: widgets/top_28/part_basic.php:13
+msgid "Show Widget To"
+msgstr "दिखाएँ विजेट के लिए"
+
+#: widgets/comments/part_basic.php:19
+#: widgets/comments_28/part_basic.php:19
+#: widgets/rating/part_basic.php:19
+#: widgets/rating_28/part_basic.php:19
+#: widgets/top/part_basic.php:19
+#: widgets/top_28/part_basic.php:19
+msgid "Hide Widget"
+msgstr "छिपाएँ विजेट"
+
+#: widgets/comments/part_filter.php:5
+#: widgets/comments/part_image.php:5
+#: widgets/comments/part_stars.php:5
+#: widgets/comments_28/part_filter.php:5
+#: widgets/comments_28/part_image.php:5
+#: widgets/comments_28/part_stars.php:5
+#: widgets/rating/part_filter.php:5
+#: widgets/rating/part_image.php:5
+#: widgets/rating/part_stars.php:5
+#: widgets/rating/part_trend.php:5
+#: widgets/rating_28/part_filter.php:5
+#: widgets/rating_28/part_image.php:5
+#: widgets/rating_28/part_stars.php:5
+#: widgets/rating_28/part_trend.php:5
+#: widgets/top/part_filter.php:5
+#: widgets/top_28/part_filter.php:5
+msgid "Click on the header title to display the options."
+msgstr "हेडर शीर्षक पर क्लिक करें विकल्प प्रदर्शित करने के लिए."
+
+#: widgets/comments/part_filter.php:24
+#: widgets/comments_28/part_filter.php:24
+msgid "Number Of Comments"
+msgstr "संख्या टिप्पणियाँ की"
+
+#: widgets/comments/part_filter.php:31
+#: widgets/comments_28/part_filter.php:31
+msgid "Maximal length of comment text"
+msgstr "टिप्पणी के अधिकतम लंबाई पाठ"
+
+#: widgets/comments/part_filter.php:43
+#: widgets/comments_28/part_filter.php:43
+#: widgets/rating/part_filter.php:59
+#: widgets/rating_28/part_filter.php:59
+msgid "Sorting Column"
+msgstr "स्तंभ अनुक्रमित किया जा रहा"
+
+#: widgets/comments/part_filter.php:48
+#: widgets/comments_28/part_filter.php:48
+msgid "Comment ID"
+msgstr "टिप्पणी आई डी"
+
+#: widgets/comments/part_filter.php:54
+#: widgets/comments_28/part_filter.php:54
+#: widgets/rating/part_filter.php:74
+#: widgets/rating_28/part_filter.php:74
+msgid "Sorting Order"
+msgstr "आदेश अनुक्रमित किया जा रहा"
+
+#: widgets/comments/part_filter.php:65
+msgid "Hide comments with no recorded votes."
+msgstr "कोई रिकॉर्ड नहीं मतों के साथ टिप्पणियाँ छिपाएँ."
+
+#: widgets/comments/part_filter.php:72
+#: widgets/comments_28/part_filter.php:72
+msgid "Use only comments voted for in last # days."
+msgstr "केवल उन टिप्पणियां का प्रयोग करे जो अंतिम # दिनों में वोट दिया गया."
+
+#: widgets/comments/part_image.php:4
+#: widgets/comments/part_image.php:12
+#: widgets/comments_28/part_image.php:4
+#: widgets/comments_28/part_image.php:12
+msgid "Avatar"
+msgstr "अवतार"
+
+#: widgets/rating/part_filter.php:16
+#: widgets/rating_28/part_filter.php:16
+#: widgets/top/part_filter.php:16
+#: widgets/top_28/part_filter.php:16
+msgid "Posts & Pages"
+msgstr "पोस्ट और पेज"
+
+#: widgets/rating/part_filter.php:42
+#: widgets/rating_28/part_filter.php:42
+msgid "Maximal character length for title"
+msgstr "अधिक से अधिक शीर्षक के लिए चरित्र लंबाई"
+
+#: widgets/rating/part_filter.php:47
+#: widgets/rating_28/part_filter.php:47
+msgid "Number of words for excerpt"
+msgstr "अंश के लिए शब्दों की संख्या"
+
+#: widgets/rating/part_filter.php:108
+#: widgets/rating_28/part_filter.php:108
+msgid "Article Category"
+msgstr "लेख श्रेणी"
+
+#: widgets/rating/part_filter.php:116
+#: widgets/rating_28/part_filter.php:116
+msgid "Only selected category, no subcategories."
+msgstr "केवल चयनित श्रेणी में,उपश्रेणीया नहीं. "
+
+#: widgets/rating/part_filter.php:141
+#: widgets/rating_28/part_filter.php:141
+msgid "Article Publish Date"
+msgstr "लेख प्रकाशित दिनांक"
+
+#: widgets/rating/part_filter.php:144
+#: widgets/rating_28/part_filter.php:144
+msgid "Any date"
+msgstr "किसी भी तारीख"
+
+#: widgets/rating/part_stars.php:13
+msgid "Rating Set"
+msgstr "दर्ज़ा सेट करें"
+
+#: widgets/rating/part_stars.php:18
+msgid "Rating Size"
+msgstr "दर्ज़ा आकार"
+
+#: widgets/rating/part_stars.php:23
+msgid "Review Set"
+msgstr "समीक्षा सेट करें"
+
+#: widgets/rating/part_stars.php:28
+msgid "Review Size"
+msgstr "समीक्षा आकार"
+
+#: gd-star-rating.php:598
+#: gd-star-rating.php:599
+#: gd-star-rating.php:609
+#: gd-star-rating.php:610
+msgid "Multi Ratings Review"
+msgstr "बहुदर्ज़ा समीक्षा"
+
+#: gd-star-rating.php:617
+msgid "Front Page"
+msgstr "मुखपृष्ठ"
+
+#: gd-star-rating.php:894
+#: gd-star-rating.php:897
+msgid "Latest"
+msgstr "नवीनतम"
+
+#: gd-star-rating.php:895
+#: gd-star-rating.php:898
+msgid "Chart"
+msgstr "चार्ट"
+
+#: gd-star-rating.php:1504
+msgid "articles records from log table removed."
+msgstr "लेख रिकॉर्ड लॉग तालिका से हटा दिया."
+
+#: gd-star-rating.php:1506
+msgid "comments records from log table removed."
+msgstr "टिप्पणी रिकॉर्ड लॉग तालिका से हटा दिया."
+
+#: gd-star-rating.php:1510
+msgid "articles records from trends log table removed."
+msgstr "प्रवृत्ति लॉग तालिका से लेख रिकॉर्ड हटा दिया."
+
+#: gd-star-rating.php:1512
+msgid "comments records from trends log table removed."
+msgstr "प्रवृत्तियों लॉग तालिका से टिप्पणी रिकॉर्ड हटा दिया."
+
+#: gd-star-rating.php:1516
+msgid "dead articles records from articles table."
+msgstr "मृत लेख रिकॉर्ड ,लेख तालिका से."
+
+#: gd-star-rating.php:1518
+msgid "post revisions records from articles table."
+msgstr "पोस्ट संशोधन रिकॉर्ड ,लेख तालिका से."
+
+#: gd-star-rating.php:1520
+msgid "dead comments records from comments table."
+msgstr "मृत टिप्पणी रिकॉर्ड, टिप्पणी तालिका से."
+
+#: gd-star-rating.php:1524
+msgid "dead articles records from multi ratings tables."
+msgstr "मृत लेख रिकॉर्ड, बहुदर्ज़ा तालिका से."
+
+#: gd-star-rating.php:1526
+msgid "post revisions records from multi ratings tables."
+msgstr "पोस्ट संशोधन रिकॉर्ड, बहु दर्ज़ा तालिका से."
+
+#~ msgid "views"
+#~ msgstr "Angesehen"
+
+#~ msgid "thumb down text style"
+#~ msgstr "Daumen runter Textstil"
+
+#~ msgid "thumb up text style"
+#~ msgstr "Daumen hoch Textstil"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "Panels"
+#~ msgstr "Fl?chen"
+
+#~ msgid "Administration"
+#~ msgstr "Administration"
+
+#~ msgid "Fixing"
+#~ msgstr "Reparieren"
+
+#~ msgid "Web Key"
+#~ msgstr "Webschl?ssel"
+
+#~ msgid "Managment for default settings."
+#~ msgstr "Managemet f?r Standard Einstelungen."
+
+#~ msgid "Plugin Info"
+#~ msgstr "Info Plugin"
+
+#~ msgid "wordpress ratings system"
+#~ msgstr "syst?m de votes pour wordpress"
+
+#~ msgid "basic plugin class and wizard"
+#~ msgstr "classe de style basique et assistant"
+
+#~ msgid "Delete Selected Sets"
+#~ msgstr "Effacer la configuration s?lectionn?e"
+
+#~ msgid "BOT List"
+#~ msgstr "Liste des BOT"
+
+#~ msgid "Exporting rating data."
+#~ msgstr "Exporter les donn?es d'?valuation."
+
+#~ msgid "Posts Data"
+#~ msgstr "Donn?es des articles"
+
+#~ msgid "Comments Data"
+#~ msgstr "Donn?es des commentaires"
+
+#~ msgid "Display custom rating CSS settings."
+#~ msgstr "Afficher la configuration du CSS de vote personnalis?."
+
+#~ msgid "Display rating placement settings."
+#~ msgstr "Afficher la configuration du placement de l'?valuation."
+
+#~ msgid "Display rating defaults settings."
+#~ msgstr "Afficher la configuration des ?valuations par d?faut."
+
+#~ msgid "Rating alignment"
+#~ msgstr "Alignement de l'?valuation"
+
+#~ msgid "Rating text placement"
+#~ msgstr "Placement du texte de l'?valuation"
+
+#~ msgid "Display header text."
+#~ msgstr "Afficher le texte de l'ent?te."
+
+#~ msgid "Render"
+#~ msgstr "Rendu"
+
+#~ msgid "Important Links"
+#~ msgstr "Liens Importants"
+
+#~ msgid "various administration tools"
+#~ msgstr "plusieurs outils d'administration"
+
+#~ msgid "RSS"
+#~ msgstr "RSS"
+
+#~ msgid "Standard Elements"
+#~ msgstr "El?ments Standards"
+
+#~ msgid "Custom Elements"
+#~ msgstr "El?ments personnalis?s"
+
+#~ msgid "Rating Text For Time Restricted Voting"
+#~ msgstr "Texte d'estimation pour le vote limit? par le temps"
+
+#~ msgid "and time restriction elements"
+#~ msgstr "et des ?l?ments de restriction de temps"
+
+#~ msgid "Voting Closed"
+#~ msgstr "Votes Clos"
+
+#~ msgid "no template elements allowed"
+#~ msgstr "Pas d'?l?ments de template autoris?s"
+
+#~ msgid "all articles and custom templates elements"
+#~ msgstr "tous les articles et les ?l?ments de template personnalis?s"
+
+#~ msgid "Words"
+#~ msgstr "Mots"
+
+#~ msgid "singular"
+#~ msgstr "singulier"
+
+#~ msgid "plural"
+#~ msgstr "pluriel"
+
+#~ msgid ""
+#~ "this can be used to replace word 'votes', and you need to set both "
+#~ "singular and plural form of this word"
+#~ msgstr ""
+#~ "ceci peut ?tre utilis? pour remplacer le mot 'votes', et vous devez "
+#~ "ajouter un mot pour le singulier et un autre pour le pluriel"
+
+#~ msgid "CSS Classes"
+#~ msgstr "Classes CSS"
+
+#~ msgid "even row"
+#~ msgstr "m?me rang?e"
+
+#~ msgid "odd row"
+#~ msgstr "rang?e impaire"
+
+#~ msgid ""
+#~ "this can be used to render table rows used in templates with different "
+#~ "classes"
+#~ msgstr ""
+#~ "ceci peut ?tre employ? pour rendre des rang?es de tables utilis?es dans "
+#~ "les templates avec diff?rentes classes"
+
+#~ msgid "Post Rating Text"
+#~ msgstr "Texte pour l'?valuation des articles"
+
+#~ msgid "item id"
+#~ msgstr "id de l'?l?ment"
+
+#~ msgid "comment rating trend"
+#~ msgstr "tendance des ?valuations de commentaire"
+
+#~ msgid "comment voting trend"
+#~ msgstr "tendance des votes de commentaire"
+
+#~ msgid "Standard RSS Text"
+#~ msgstr "Texte pour le flux RSS Standard"
+
+#~ msgid "Additional Style"
+#~ msgstr "Style additionnel"
+
+#~ msgid "Style Class"
+#~ msgstr "Class de style"
+
+#~ msgid "Don't Add"
+#~ msgstr "Ne pas ajouter"
+
+#~ msgid "Built In"
+#~ msgstr "Cr?? en"
+
+#~ msgid "Built In Class"
+#~ msgstr "Int?gr? dans la classe"
+
+#~ msgid "External Class"
+#~ msgstr "Classe externe"
+
+#~ msgid ""
+#~ "There are no settings for this shortcode yet. This will be updated soon."
+#~ msgstr ""
+#~ "Il n'y a pas encore de configuration pour ce shortcode. Celui-ci sera mis "
+#~ "? jour prochainement."
+
+#~ msgid "bayesian article rating"
+#~ msgstr "?valuation bay?sienne de l'article"
+
+#~ msgid "item title"
+#~ msgstr "titre de l'?l?ment"
+
+#~ msgid "rating trend"
+#~ msgstr "?valuation de la tendance"
+
+#~ msgid "voting trend"
+#~ msgstr "vote de la tendance"
+
+#~ msgid "item url"
+#~ msgstr "url de l'?l?ment"
+
+#~ msgid "singular/plural word vote"
+#~ msgstr "mot singulier/pluriel pour vote"
+
+#~ msgid "T2"
+#~ msgstr "T2"
+
+#~ msgid ""
+#~ "You first need to select which multi set you want to use for review "
+#~ "rating."
+#~ msgstr ""
+#~ "Vous devez tout d'abord s?lectionner quelle configuration multiple vous "
+#~ "souhaitez utiliser pour les r?sum?s d'?valuations."
+
+#~ msgid ""
+#~ "Use this set for post/page review. Only one set at the time can be used "
+#~ "for review feature."
+#~ msgstr ""
+#~ "Utilisez cette configuration pour le r?sum? article/page. Seulement une "
+#~ "configuration ? la fois peut ?tre utilis?e pour la fonction r?sum?."
+
+#~ msgid "AJAX enabled rating."
+#~ msgstr "Vote AJAX autoris?."
+
+#~ msgid "Use IE6 PNG transparency fix."
+#~ msgstr "Utiliser le Fix de transparance PNG pour IE6."
+
+#~ msgid "T2 / Alpha"
+#~ msgstr "T2 / Alpha"
+
+#~ msgid "Submit"
+#~ msgstr "Soumettre"
+
+#~ msgid ""
+#~ "Use this options to reinstall or uninstall the plugin. This will remove "
+#~ "all existing data recorded by the plugin."
+#~ msgstr ""
+#~ "Utiliser cette option pour r?installer le plugin. Ceci va supprimer toute "
+#~ "donn?e existante enregistr?e par le plugin."
+
+#~ msgid "REINSTALL"
+#~ msgstr "R?installer"
+
+#~ msgid "These are various maintenace options."
+#~ msgstr "Il y a plusieurs options de maintenance."
+
+#~ msgid "REMOVE SETTINGS"
+#~ msgstr "Supprimer la configuration"
+
+#~ msgid "REMOVE TEMPLATES"
+#~ msgstr "Supprimer les templates"
+
+#~ msgid "RESET IMPORTS"
+#~ msgstr "Remettre ? z?ro les importations"
+
+#~ msgid ""
+#~ "This will remove all database tables created by plugin, all settings, "
+#~ "templates and import settings."
+#~ msgstr ""
+#~ "Ceci va supprimer toutes les tables de la base de donn?e du plugin, toute "
+#~ "la configuration, les templates ainsi que les changements import?s."
+
+#~ msgid "FULL UNINSTALL"
+#~ msgstr "D?sinstallation totale"
+
+#~ msgid "Simple"
+#~ msgstr "Simple"
+
+#~ msgid "plugins, user guides and more"
+#~ msgstr "plugins, guides utilisateurs et plus encore"
+
+#~ msgid "different versions and user guide"
+#~ msgstr "diff?rentes versions et guide utilisateur"
+
+#~ msgid "Administration Settings"
+#~ msgstr "Configuration de l'Administration"
+
+#~ msgid "Template Elements"
+#~ msgstr "El?ments de template"
+
+#~ msgid "Default Vote Rule"
+#~ msgstr "R?gle de Vote par D?faut"
+
+#~ msgid "Default Moderation Rule"
+#~ msgstr "R?gle de Mod?ration par D?faut"
+
+#~ msgid "Default time restriction"
+#~ msgstr "Restriction de temps par d?faut"
+
+#~ msgid "Default countdown value"
+#~ msgstr "Valeur de compte ? rebours par d?faut"
+
+#~ msgid ""
+#~ "All the options in this options panel are for the StarRating panel. "
+#~ "StarReview and StarRater don't have any options."
+#~ msgstr ""
+#~ "Toutes les options de ce panel d'options sont r?serv?es au panel "
+#~ "StarRating. StarReview et StarRater n'ont pas d'options."
+
+#~ msgid "Database Cleanup"
+#~ msgstr "Nettoyage de la Base de Donn?e"
+
+#~ msgid "Click on this section header title to show preview panel."
+#~ msgstr ""
+#~ "Cliquez sur le titre de cet ent?te de section pour visualiser le panel."
+
+#~ msgid "Insert Shortcode"
+#~ msgstr "Ins?rer un Shortcode"
+
+#~ msgid "IP Status"
+#~ msgstr "Statut de l'IP"
+
+#~ msgid "User ID"
+#~ msgstr "Id utilisateur"

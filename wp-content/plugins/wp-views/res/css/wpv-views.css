@@ -1,0 +1,59 @@
+#icon-edit, #icon-post, #icon-views {
+    background:url("../img/views-32.png") #fff right no-repeat;
+}
+
+.wpv_form_errors {
+    border:1px solid #f00;
+    background-color: #ffb7b7;
+    color:#000;
+    width:65%;
+    padding: 5px;    
+    -moz-border-radius-bottomleft:3px;
+    -moz-border-radius-bottomright:3px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-topright:3px;
+    border-bottom-left-radius: 3px 3px;
+    border-bottom-right-radius: 3px 3px;
+    border-top-left-radius: 3px 3px;
+    border-top-right-radius: 3px 3px;
+}
+
+.wpv_form_notice {
+    background-color: #FFFBCC; 
+    border: 1pt solid #E6DB55; 
+    color:#000;
+    width:65%;
+    padding: 5px;    
+    -moz-border-radius-bottomleft:3px;
+    -moz-border-radius-bottomright:3px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-topright:3px;
+    border-bottom-left-radius: 3px 3px;
+    border-bottom-right-radius: 3px 3px;
+    border-top-left-radius: 3px 3px;
+    border-top-right-radius: 3px 3px;
+}
+
+#view_layout_fields_table {
+    width: auto;
+}
+
+#view_layout_fields_table .ui-sortable-helper td {
+    background-color: #F9F9F9;
+}
+
+#view_layout_fields_table input {
+    width: 110px;
+}
+
+.wpv_view_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #fff repeat;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    text-align: center;
+}

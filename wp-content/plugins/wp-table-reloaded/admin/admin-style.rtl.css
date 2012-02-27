@@ -1,0 +1,9 @@
+/****************************************************************
+* This CSS file belongs to the Admin part of WP-Table Reloaded! *
+*        PLEASE DO NOT make any changes here! Thank you!        *
+****************************************************************/
+
+.hide_link, .expand_link {
+    right:auto!important;
+    left:10px!important;
+}

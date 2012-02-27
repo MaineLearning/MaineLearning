@@ -1,0 +1,39 @@
+/*
+Theme Name: Compass
+*/
+
+/*
+Used to style the TinyMCE editor.
+*/
+
+.byline
+{
+	background: transparent;
+	color: #99958a;
+	font-size: 18px;
+	font-style: normal;
+	letter-spacing: 0.2px;
+	line-height: 135%;
+}
+
+.summary
+{
+	background: transparent;
+	color: #898989;
+	font-size: 17px;
+	letter-spacing: -0.3px;
+	line-height: 150%;
+}
+
+.pullquote-40pc
+{
+	background: #fff;
+	border-left: 3px #eee solid;
+	color: #888;
+	float: right;
+	font-size: 130%;
+	line-height: 190%;
+	margin: 10px 0 26px 40px;
+	padding: 0 0 0 10px;
+	width: 40%;
+}

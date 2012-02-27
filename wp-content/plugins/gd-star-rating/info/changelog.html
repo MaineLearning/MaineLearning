@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>GD Star Rating: Changelog</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE ]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen" /><![endif]-->
+</head>
+<body>
+
+<div id="sidebar">
+    <h4>Contents:</h4>
+    <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="functions.html">General Functions</a></li>
+        <li><a href="rendering.html">Rendering Functions</a></li>
+        <li><a href="legacy.html">Legacy Functions</a></li>
+        <li><a href="filters.html">Filters &amp; Actions</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+        <li><a href="wpquery.html">WP Query</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="t2map.html">T2 Templates</a></li>
+        <li><a href="languages.html">Translations</a></li>
+    </ul>
+    <h4>Plugin Links:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/">Home Page</a></li>
+        <li><a href="http://wordpress.org/extend/plugins/gd-star-rating">WordPress Extend</a></li>
+        <li><a href="http://groups.google.com/group/gd-star-rating">Google Groups</a></li>
+        <li><a href="http://twitter.com/milangd">Follow on Twitter</a></li>
+    </ul>
+    <h4>Support:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/premium/">Premium Support</a></li>
+    </ul>
+    <h4 class="copyright">Copyright:</h4>
+    <p>
+        &copy; 2008-2009. <a href="http://www.gdragon.info/">Golden Dragon WebStudio</a>
+    </p>
+</div>
+<div id="content">
+<div class="title">
+    <h1>GD Star Rating</h1>
+    <h2>changelog</h2>
+</div>
+
+<div class="contents">
+<h3>Version 1.9.14 / february 10 2012</h3><ul>
+    <li><strong>new</strong> filters for rating values before saving to database</li>
+    <li><strong>fix</strong> votes keyword used for google rich snippets integration</li>
+</ul>
+<h3>Version 1.9.13 / december 26 2011</h3><ul>
+    <li><strong>edit</strong> changes to some of the rendering functions</li>
+</ul>
+<h3>Version 1.9.12 / december 15 2011</h3><ul>
+    <li><strong>edit</strong> plugin is tested with wordpress 3.3, no problems were found</li>
+    <li><strong>edit</strong> removed some obsolete website links from info files</li>
+    <li><strong>edit</strong> several minor changes and cleanup of the public functions</li>
+    <li><strong>fix</strong> validity data check could generate warnings in the gdsr.css.php</li>
+</ul>
+<h3>Version 1.9.11 / october 6 2011</h3><ul>
+    <li><strong>edit</strong> minor changes to filters attached to posts</li>
+    <li><strong>fix</strong> export script SQL injection exploit (thanks to Miroslav Stampar for reporting, http://about.me/stamparm)</li>
+</ul>
+<h3>Version 1.9.10 / june 29 2011</h3><ul>
+    <li><strong>edit</strong> Minor changes and improvements to the templates system</li>
+    <li><strong>fix</strong> Missing default parameters for rating shortcode</li>
+    <li><strong>fix</strong> JSONP callback function printed without checking for validity (thanks to Julio from www.boiteaweb.fr)</li>
+    <li><strong>fix</strong> Very rare memory leak caused by loading of templates definitions</li>
+</ul>
+<h3>Version 1.9.9 / june 10 2011</h3><ul>
+    <li><strong>edit</strong> Additional cleanup of AJAX received data before processing</li>
+    <li><strong>edit</strong> Nonce AJAX protection is now always active and used</li>
+    <li><strong>fix</strong> Bayesian stars were invalid in the rating widget</li>
+    <li><strong>fix</strong> Rare SQL injection exploit through cached AJAX requests</li>
+</ul>
+<h3>Version 1.9.8 / april 04 2011</h3><ul>
+    <li><strong>new</strong> Added filters for checking the voting rules for rating blocks</li>
+    <li><strong>del</strong> Removed outdated check for update changelog code</li>
+    <li><strong>fix</strong> Problem with range settings for rating widget</li>
+    <li><strong>fix</strong> Minor JavaScript issue with missing variables</li>
+</ul>
+<h3>Version 1.9.7 / january 06 2011</h3><ul>
+    <li><strong>new</strong> Persian translation</li>
+    <li><strong>edit</strong> JavaScript compressed using YUI Compressor</li>
+    <li><strong>edit</strong> Improved widget results templates rendering</li>
+    <li><strong>fix</strong> Some minor fixes and changes</li>
+</ul>
+<h3>Version 1.9.6 / october 16 2010</h3><ul>
+    <li><strong>edit</strong> added several new entries in FAQ</li>
+    <li><strong>fix</strong> multi rating javascript voting problem</li>
+    <li><strong>fix</strong> small noticed validation issues</li>
+</ul>
+<h3>Version 1.9.5 / september 26 2010</h3><ul>
+    <li><strong>del</strong> removed dropdown checkbox control for causing too much problems</li>
+    <li><strong>edit</strong> improvements in rating javascript code</li>
+</ul>
+<h3>Version 1.9.4 / september 8 2010</h3><ul>
+    <li><strong>new</strong> hindi translation</li>
+    <li><strong>new</strong> plugin icons designed for next major release</li>
+    <li><strong>fix</strong> minor problem with custom rendering function</li>
+    <li><strong>fix</strong> several problems with including js/css files</li>
+    <li><strong>fix</strong> invalid loading of some admin styles</li>
+</ul>
+<h3>Version 1.9.3 / july 8 2010</h3><ul>
+    <li><strong>new</strong> tool to remove all and only rating data from database</li>
+    <li><strong>edit</strong> articles panel supports custom post types</li>
+    <li><strong>edit</strong> few integration functions improvements</li>
+    <li><strong>edit</strong> updated readme file with new faq entries</li>
+    <li><strong>fix</strong> builder panel problems in wordpress 3.0</li>
+    <li><strong>fix</strong> tinymce popup control problems in wordpress 3.0</li>
+    <li><strong>fix</strong> taxonomies in widget in wordpress 3.0</li>
+    <li><strong>fix</strong> rating integration missing on the new post editor</li>
+    <li><strong>fix</strong> several minor interface problem</li>
+</ul>
+<h3>Version 1.9.2 / june 27 2010</h3><ul>
+    <li><strong>new</strong> rating widget supports custom post types in wordpress 3.0</li>
+    <li><strong>fix</strong> loading styles and stars for post editor panels</li>
+    <li><strong>fix</strong> meta boxes missing for custom post types editors</li>
+    <li><strong>fix</strong> several minor rendering improvements</li>
+</ul>
+<h3>Version 1.9.1 / may 20 2010</h3><ul>
+    <li><strong>edit</strong> added filters to WP Query expansion</li>
+    <li><strong>edit</strong> added new filters to T2 rendering engine</li>
+    <li><strong>edit</strong> changes in some actions used for saving votes</li>
+    <li><strong>fix</strong> problems preventing authors to vote for own comments and posts</li>
+    <li><strong>fix</strong> problems with grouping in rating widget</li>
+</ul>
+<h3>Version 1.9.0 / may 10 2010</h3><ul>
+    <li><strong>new</strong> google rich snippets support for rdf and microdata formats</li>
+    <li><strong>new</strong> google rich snippets expanded default templates</li>
+    <li><strong>edit</strong> updated translations to some languages</li>
+</ul>
+<h3>Version 1.8.9 / may 3 2010</h3><ul>
+    <li><strong>new</strong> more options for google rich snippet</li>
+    <li><strong>new</strong> added robots nofollow/noindex for plugin ajax handler</li>
+    <li><strong>new</strong> added info on using the gdsr-config.php file</li>
+    <li><strong>fix</strong> enqueue of js and css for non plugin admin pages</li>
+    <li><strong>fix</strong> some minor problems with js on admin pages</li>
+</ul>
+<h3>Version 1.8.8 / april 15 2010</h3><ul>
+    <li><strong>fix</strong> invalid header order for export data to csv</li>
+    <li><strong>fix</strong> invalid default rules for post meta box thumbs</li>
+    <li><strong>fix</strong> minor problem with loading js datepicker translation</li>
+</ul>
+<h3>Version 1.8.7 / april 5 2010</h3><ul>
+    <li><strong>fix</strong> url to the datepicker translation file</li>
+    <li><strong>fix</strong> comment text fails validation due to filter order</li>
+</ul>
+<h3>Version 1.8.6 / march 22 2010</h3><ul>
+    <li><strong>edit</strong> changed json response for votes to be jquery 1.4 compatible</li>
+    <li><strong>fix</strong> invalid loader class for the thumbs in comment</li>
+</ul>
+<h3>Version 1.8.5 / march 12 2010</h3><ul>
+    <li><strong>new</strong> more tags for some rating blocks rendering</li>
+    <li><strong>edit</strong> active blocks rendering expanded with more css classes</li>
+    <li><strong>edit</strong> improvements to some of the functions</li>
+    <li><strong>edit</strong> some text template thumb tags added to block template</li>
+    <li><strong>fix</strong> invalid use of variables in few functions</li>
+    <li><strong>fix</strong> proper use of thumbs voting rules</li>
+    <li><strong>fix</strong> invalid alter row class for results</li>
+    <li><strong>fix</strong> minor saving graphics settings problem</li>
+</ul>
+<h3>Version 1.8.4 / march 3 2010</h3><ul>
+    <li><strong>new</strong> value-template-tag filter for some of the t2 rendering tags</li>
+    <li><strong>edit</strong> global rules tool changed and improved</li>
+    <li><strong>edit</strong> some obsolete settings removed</li>
+    <li><strong>fix</strong> some integration problems caused by new rating javascript file</li>
+    <li><strong>fix</strong> cache cleanup can fail in some cases</li>
+</ul>
+<h3>Version 1.8.3 / february 23 2010</h3><ul>
+    <li><strong>new</strong> rewritten main rating javascript file</li>
+    <li><strong>new</strong> main rating javascript file is now packed</li>
+    <li><strong>fix</strong> several more php notices</li>
+    <li><strong>fix</strong> replaced noticed wordpress depracted functions</li>
+</ul>
+    <h3>Version 1.8.2 / february 15 2010</h3><ul>
+    <li><strong>new</strong> functions for xscape framework integration</li>
+    <li><strong>new</strong> option to enable/diable opacity in css (breaks validation if on)</li>
+    <li><strong>edit</strong> several functions refactoring and renaming</li>
+    <li><strong>edit</strong> updated rendering and js for multi comment integration</li>
+    <li><strong>fix</strong> invalid function parameters for integration</li>
+    <li><strong>fix</strong> main css file validation errors</li>
+    <li><strong>fix</strong> some minor problems with integration</li>
+</ul>
+<h3>Version 1.8.1 / january 17 2010</h3><ul>
+    <li><strong>edit</strong> updated several translations</li>
+    <li><strong>fix</strong> missing closing of A tag for bot rendering</li>
+    <li><strong>fix</strong> override thumbs no votes percentage not used</li>
+    <li><strong>fix</strong> datepicker problems on post edit page</li>
+</ul>
+<h3>Version 1.8.0 / january 4 2010</h3><ul>
+    <li><strong>new</strong> setting for default percentage value</li>
+    <li><strong>new</strong> rewritten multi editor functions</li>
+    <li><strong>fix</strong> several important fixes and changes</li>
+</ul>
+<h3>Version 1.7.9 / december 23 2009</h3><ul>
+    <li><strong>new</strong> control output for search engine bots</li>
+    <li><strong>fix</strong> few fixes and imporovements</li>
+</ul>
+<h3>Version 1.7.8 / december 13 2009</h3><ul>
+    <li><strong>new</strong> few more tags added into templates</li>
+    <li><strong>fix</strong> importing templates sets wrong edit flags</li>
+    <li><strong>fix</strong> multi rating average stars rendering</li>
+    <li><strong>fix</strong> several minor warnings on saving settings</li>
+    <li><strong>fix</strong> few other minor rendering issues</li>
+</ul>
+<h3>Version 1.7.7 / november 23 2009</h3><ul>
+    <li><strong>new</strong> belorussian translation</li>
+    <li><strong>fix</strong> broken loading of js breaks some admin pages</li>
+</ul>
+<h3>Version 1.7.6 / november 22 2009</h3><ul>
+    <li><strong>new</strong> rewritten taxonomy based calculation</li>
+    <li><strong>new</strong> colorbox javascript for popup charts</li>
+    <li><strong>new</strong> flot javascript for charts</li>
+    <li><strong>edit</strong> improved js and css loading for admin pages, js moved to footer</li>
+    <li><strong>edit</strong> google rich snippet moved to the end of the content</li>
+    <li><strong>edit</strong> info files and functions documentation updated</li>
+    <li><strong>edit</strong> updated german translation</li>
+    <li><strong>del</strong> removed old charts code and dashboard chart widget</li>
+    <li><strong>fix</strong> invalid user level for my ratings panel</li>
+    <li><strong>fix</strong> some warnings on the settings page when some features are disabled</li>
+</ul>
+<h3>Version 1.7.5 / november 9 2009</h3><ul>
+    <li><strong>new</strong> function for manual integration of google rich snippets</li>
+    <li><strong>fix</strong> missing vote waiting message for multi ratings</li>
+    <li><strong>fix</strong> duplicated px in the loader style markup</li>
+    <li><strong>fix</strong> invalid dates for google rich snippets</li>
+    <li><strong>fix</strong> broken full uninstall tool</li>
+    <li><strong>fix</strong> missing author name tag from multi rating results template</li>
+    <li><strong>fix</strong> database upgrade tool fails to execute</li>
+</ul>
+<h3>Version 1.7.4 / november 2 2009</h3><ul>
+    <li><strong>new</strong> fully implemented google rich snippets support</li>
+    <li><strong>new</strong> permanently solved famous excerpt problem</li>
+    <li><strong>new</strong> support for SSL using plugins_url functions</li>
+    <li><strong>new</strong> controls for google rich snippets integration</li>
+    <li><strong>new</strong> rewritten import and export for templates</li>
+    <li><strong>new</strong> loaders optimizations for main css file</li>
+    <li><strong>edit</strong> cleaned javascript for admin pages</li>
+    <li><strong>edit</strong> improved shortcode defaults and building</li>
+    <li><strong>fix</strong> invalid generation of shortcode for multi rating</li>
+    <li><strong>fix</strong> css fails to generate with no sets for thumbs or stars</li>
+    <li><strong>fix</strong> problems with some integration functions</li>
+    <li><strong>fix</strong> some minor moderation issues</li>
+    <li><strong>fix</strong> missing settings for my ratings dashboard widgets</li>
+    <li><strong>fix</strong> star review shortcode fails rendering</li>
+    <li><strong>fix</strong> multi review editor on page edit fails to load javascript</li>
+    <li><strong>fix</strong> database class fails loading on setup panel</li>
+</ul>
+<h3>Version 1.7.3 / october 27 2009</h3><ul>
+    <li><strong>new</strong> config option to move my ratings panel under the dashboard</li>
+    <li><strong>edit</strong> more database code optimizations</li>
+    <li><strong>del</strong> removed some unused and obsolete code</li>
+    <li><strong>fix</strong> problems with wp-query expansion sorting</li>
+    <li><strong>fix</strong> multi rating integration saving can fail</li>
+    <li><strong>fix</strong> rating data caching not working for manual integration</li>
+    <li><strong>fix</strong> multi rating bayesian calculation</li>
+    <li><strong>fix</strong> multi review function invalid parameters</li>
+    <li><strong>fix</strong> saving multi rating values from customized integration</li>
+</ul>
+<h3>Version 1.7.2 / october 19 2009</h3><ul>
+    <li><strong>fix</strong> critical problem with google rich snippets code</li>
+    <li><strong>fix</strong> rendering google rich snippet in excerpts</li>
+    <li><strong>fix</strong> loading of javascript with some missing settings</li>
+    <li><strong>fix</strong> sorting issues with widget results</li>
+    <li><strong>fix</strong> two invalid sql queries for new articles panel</li>
+    <li><strong>fix</strong> some rare problems with saving multi rating review values</li>
+    <li><strong>fix</strong> few more problems with saving post edit data</li>
+    <li><strong>fix</strong> missing default values for comments widget</li>
+    <li><strong>fix</strong> several more notices and warnings</li>
+</ul>
+<h3>Version 1.7.1 / october 19 2009</h3><ul>
+    <li><strong>new</strong> control for thumbs rules and restriction</li>
+    <li><strong>edit</strong> major code reorganization with code loader</li>
+    <li><strong>edit</strong> many optimizations to minimize memory usage and increase speed</li>
+    <li><strong>edit</strong> redesigned post edit widget</li>
+    <li><strong>edit</strong> redesigned articles panel</li>
+    <li><strong>edit</strong> some visual changes to settings panel</li>
+    <li><strong>edit</strong> improved query sorting with secondary ordering</li>
+    <li><strong>fix</strong> problem with cached response missing loading code</li>
+    <li><strong>fix</strong> invalid default values for multi ratings</li>
+    <li><strong>fix</strong> invalid default values for comments on post editor widget</li>
+    <li><strong>fix</strong> missing some of the parameters for multi ratings cache support</li>
+    <li><strong>fix</strong> problem with loading javascript for post editor integration</li>
+    <li><strong>fix</strong> several more notices and warnings</li>
+</ul>
+<h3>Version 1.7.0 / october 12 2009</h3><ul>
+    <li><strong>new</strong> cache plugins support for multis ratings</li>
+    <li><strong>new</strong> filters for input parameters for all types of templates rendering</li>
+    <li><strong>new</strong> config control for main plugin menu item visibilty</li>
+    <li><strong>edit</strong> improved category based comment integration</li>
+    <li><strong>edit</strong> expanded shortcode builder elements</li>
+    <li><strong>edit</strong> many shortcode improvements and changes</li>
+    <li><strong>edit</strong> more refactoring of javascript code</li>
+    <li><strong>edit</strong> moved all js from admin pages into single file</li>
+    <li><strong>edit</strong> updated info and readme files</li>
+    <li><strong>edit</strong> updated all gdragon libraries</li>
+    <li><strong>del</strong> removed support for wordpress 2.6.x</li>
+    <li><strong>fix</strong> wp-post ratings plugin import</li>
+    <li><strong>fix</strong> invalid default shortcode values</li>
+    <li><strong>fix</strong> multi rating block text missing voted class</li>
+    <li><strong>fix</strong> saving category settings for parented categories</li>
+    <li><strong>fix</strong> missing auto rendering parameters causing vote rules problems</li>
+</ul>
+<h3>Version 1.6.9 / october 4 2009</h3><ul>
+    <li><strong>new</strong> minimum count option for rating widgets with grouping</li>
+    <li><strong>new</strong> more filters for return star voting values</li>
+    <li><strong>edit</strong> improved gdragon database library</li>
+    <li><strong>fix</strong> removed all sql errors thrown during the upgrade</li>
+    <li><strong>fix</strong> some minor problems with builder default values</li>
+    <li><strong>fix</strong> several more notices and warnings</li>
+    <li><strong>fix</strong> removed php 5.3 depracted functions</li>
+</ul>
+<h3>Version 1.6.8 / september 28 2009</h3><ul>
+    <li><strong>new</strong> security settings for widgets and showing ip's</li>
+    <li><strong>new</strong> added few more extras templates for thumbs</li>
+    <li><strong>new</strong> cache plugins support for thumbs ratings</li>
+    <li><strong>fix</strong> various minor internal cache problems</li>
+    <li><strong>fix</strong> missing admin export panel</li>
+    <li><strong>fix</strong> multi ratings rendering some invalid parameters</li>
+</ul>
+<h3>Version 1.6.7 / september 25 2009</h3><ul>
+    <li><strong>new</strong> cache plugins support for post and comment standard rating</li>
+    <li><strong>edit</strong> several improvements in rendering</li>
+    <li><strong>edit</strong> optimized javascript rating code</li>
+    <li><strong>fix</strong> loading translation for editor plugin</li>
+    <li><strong>fix</strong> several translation errors</li>
+    <li><strong>fix</strong> invalid class for waiting messages</li>
+</ul>
+<h3>Version 1.6.6 / september 22 2009</h3><ul>
+    <li><strong>new</strong> upgrade database tables by setting the collation</li>
+    <li><strong>edit</strong> optimization of plugin loading</li>
+    <li><strong>edit</strong> improved database installation to include collation</li>
+</ul>
+<h3>Version 1.6.5 / september 14 2009</h3><ul>
+    <li><strong>new</strong> filters for all t2 rendering functions</li>
+    <li><strong>edit</strong> more changes to t2 templates base classes</li>
+    <li><strong>edit</strong> full refactoring of all t2 rendering methods</li>
+    <li><strong>edit</strong> updated info and readme files</li>
+    <li><strong>fix</strong> minor rendering and validation error</li>
+</ul>
+<h3>Version 1.6.4 / september 3 2009</h3><ul>
+    <li><strong>new</strong> tag percentage for thumbs post and comments ratings</li>
+    <li><strong>edit</strong> few improvements to t2 custom tags and filters</li>
+    <li><strong>edit</strong> improved templates caching</li>
+    <li><strong>edit</strong> updated shared gdragon libraries</li>
+    <li><strong>fix</strong> blog widget data retrival</li>
+    <li><strong>fix</strong> minor integration code problem</li>
+    <li><strong>fix</strong> code cleanup of many admin panels</li>
+    <li><strong>fix</strong> several more notices and warnings</li>
+</ul>
+<h3>Version 1.6.3 / august 25 2009</h3><ul>
+    <li><strong>fix</strong> missing redirections for some of the actions on admin pages</li>
+    <li><strong>fix</strong> adding new ip address for ban</li>
+    <li><strong>fix</strong> reverted options for t2 template editor</li>
+    <li><strong>fix</strong> initial saving of post review from editor</li>
+</ul>
+<h3>Version 1.6.2 / august 17 2009</h3><ul>
+    <li><strong>new</strong> my ratings panel for current logged user ratings stats</li>
+    <li><strong>new</strong> templates tab for setting template dependencies</li>
+    <li><strong>new</strong> template edit option to alter default and dependency</li>
+    <li><strong>new</strong> several new functions to get user ratings data</li>
+    <li><strong>edit</strong> updated main t2 templates panel</li>
+    <li><strong>edit</strong> more updates to access level code</li>
+    <li><strong>edit</strong> many improvements to css styles</li>
+    <li><strong>fix</strong> pager for multi sets panel</li>
+    <li><strong>fix</strong> minor problem with adding dashboard widgets</li>
+    <li><strong>fix</strong> some division by zero problems</li>
+    <li><strong>fix</strong> jquery datapicker adds empty space to wordpress footer</li>
+    <li><strong>fix</strong> t2 templates classes improved to prevent some errors</li>
+</ul>
+<h3>Version 1.6.1 / august 12 2009</h3><ul>
+    <li><strong>edit</strong> updated access level code to avoid admin level 9 problems</li>
+    <li><strong>edit</strong> updated main readme.txt and info files</li>
+    <li><strong>edit</strong> changed some of the default settings for widgets</li>
+    <li><strong>del</strong> removed support for wordpress 2.5.x</li>
+    <li><strong>fix</strong> some of the extras templates were invalid</li>
+    <li><strong>fix</strong> invalid generated image for widget or results</li>
+</ul>
+<h3>Version 1.6.0 / august 9 2009</h3><ul>
+    <li><strong>new</strong> support for custom taxonomies in widgets and builder</li>
+    <li><strong>new</strong> resizing images support for widget and results</li>
+    <li><strong>new</strong> config options to set the panels user access levels</li>
+    <li><strong>new</strong> preventing duplicate votes from integration</li>
+    <li><strong>new</strong> few more filters for t2 rendering</li>
+    <li><strong>new</strong> filters for modifying sql queries used for results</li>
+    <li><strong>new</strong> few more tags for results and widgets templates</li>
+    <li><strong>edit</strong> many improvements for t2 rendering</li>
+    <li><strong>edit</strong> cleanup of widgets, render and templates code</li>
+    <li><strong>fix</strong> missing voters log on the articles panel</li>
+    <li><strong>fix</strong> invalid review rating results from widget sql query</li>
+    <li><strong>fix</strong> panel with multi rating results filtering problems</li>
+    <li><strong>fix</strong> rendering review stars for widget or results</li>
+    <li><strong>fix</strong> option to control comment reply for integration was not working</li>
+    <li><strong>fix</strong> rendering multi rating stars results for widget or results</li>
+    <li><strong>fix</strong> rating added to rss cut during formation of the feed</li>
+    <li><strong>fix</strong> some minor problems with t2 rendering of comments widget</li>
+    <li><strong>fix</strong> builder javascript problems in wordpress 2.8</li>
+</ul>
+<h3>Version 1.5.8 / august 4 2009</h3>
+<ul>
+    <li><a href="http://code.google.com/p/gd-star-rating/wiki/ChangeLog">http://code.google.com/p/gd-star-rating/wiki/ChangeLog</a></li>
+</ul>
+<h3>Version 0.9.9.6 RC4 / october 28 2008</h3>
+<ul>
+    <li><a href="http://code.google.com/p/gd-star-rating/wiki/ChangeLogDevelopment">http://code.google.com/p/gd-star-rating/wiki/ChangeLogDevelopment</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

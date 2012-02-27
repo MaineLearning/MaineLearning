@@ -1,0 +1,4679 @@
+# Header entry was created by Lokalize.
+#
+#: code/adm/db.php:1192
+# Oleksandr Natalenko <pfactum@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Mime-Version: 1.0Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
+"PO-Revision-Date: 2010-08-19 11:57+0300\n"
+"Project-Id-Version: \n"
+"Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
+"X-Generator: Lokalize 1.0\n"
+"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
+
+#: code/adm/db.php:1192
+msgid "Show all dates"
+msgstr "Показати всі дати"
+
+#: code/adm/db.php:1220
+msgid "All users and visitors"
+msgstr "Усі користувачі та відвідувачі"
+
+#: code/adm/db.php:1221
+#: tinymce3/panels/blograting.php:22
+#: tinymce3/panels/commentsaggr.php:17
+#: tinymce3/panels/filter.php:17
+#: widgets/comments/part_basic.php:17
+#: widgets/comments/part_filter.php:17
+#: widgets/comments_28/part_basic.php:17
+#: widgets/comments_28/part_filter.php:17
+#: widgets/rating/part_basic.php:16
+#: widgets/rating/part_filter.php:28
+#: widgets/rating_28/part_basic.php:17
+#: widgets/rating_28/part_filter.php:30
+#: widgets/top/part_basic.php:17
+#: widgets/top/part_filter.php:28
+#: widgets/top_28/part_basic.php:17
+#: widgets/top_28/part_filter.php:28
+msgid "Visitors Only"
+msgstr "Тільки відвідувачі"
+
+#: code/adm/db.php:1222
+#: code/class.php:684
+#: code/class.php:684
+msgid "All Users"
+msgstr "Усі користувачі"
+
+#: code/adm/db.php:722
+#: code/adm/db.php:725
+#: code/adm/db.php:728
+#: code/adm/db.php:731
+#: code/adm/db.php:735
+#: code/adm/db.php:758
+#: code/adm/db.php:761
+#: code/adm/db.php:764
+#: code/adm/db.php:767
+#: code/adm/db.php:770
+#: code/adm/db.php:773
+#: code/adm/db.php:798
+#: code/adm/db.php:801
+#: code/adm/db.php:804
+#: code/adm/db.php:807
+#: code/adm/db.php:811
+#: code/adm/db.php:834
+#: code/adm/db.php:837
+#: code/adm/db.php:840
+#: code/adm/db.php:843
+#: code/adm/db.php:846
+#: code/adm/db.php:849
+#: code/adm/db.php:969
+#: code/adm/db.php:972
+#: code/adm/db.php:975
+#: code/adm/db.php:978
+#: code/adm/db.php:982
+#: code/adm/db.php:1005
+#: code/adm/db.php:1008
+#: code/adm/db.php:1011
+#: code/adm/db.php:1014
+#: code/adm/db.php:1017
+#: code/adm/db.php:1021
+msgid "articles"
+msgstr "статті"
+
+#: code/adm/db.php:722
+#: code/adm/db.php:740
+#: code/adm/db.php:758
+#: code/adm/db.php:778
+#: code/adm/db.php:798
+#: code/adm/db.php:816
+#: code/adm/db.php:834
+#: code/adm/db.php:854
+msgid "inherited"
+msgstr "успадковано"
+
+#: code/adm/db.php:725
+#: code/adm/db.php:743
+#: code/adm/db.php:801
+#: code/adm/db.php:819
+#: code/adm/db.php:972
+#: code/adm/db.php:990
+msgid "all"
+msgstr "усі"
+
+#: code/adm/db.php:728
+#: code/adm/db.php:746
+#: code/adm/db.php:767
+#: code/adm/db.php:787
+#: code/adm/db.php:804
+#: code/adm/db.php:822
+#: code/adm/db.php:843
+#: code/adm/db.php:863
+#: code/adm/db.php:953
+#: code/adm/db.php:954
+#: code/adm/db.php:975
+#: code/adm/db.php:993
+#: code/adm/db.php:1014
+#: code/adm/db.php:1035
+#: code/adm/db.php:1112
+#: code/adm/db.php:1113
+#: code/adm/elements.php:364
+#: options/multis/results_post.php:140
+#: options/multis/results_post.php:141
+msgid "visitors"
+msgstr "відвідувачі"
+
+#: code/adm/db.php:731
+#: code/adm/db.php:749
+#: code/adm/db.php:770
+#: code/adm/db.php:790
+#: code/adm/db.php:807
+#: code/adm/db.php:825
+#: code/adm/db.php:846
+#: code/adm/db.php:866
+#: code/adm/db.php:953
+#: code/adm/db.php:954
+#: code/adm/db.php:978
+#: code/adm/db.php:996
+#: code/adm/db.php:1017
+#: code/adm/db.php:1038
+#: code/adm/db.php:1112
+#: code/adm/db.php:1113
+#: options/multis/results_post.php:142
+#: options/multis/results_post.php:143
+msgid "users"
+msgstr "користувачі"
+
+#: code/adm/db.php:735
+#: code/adm/db.php:753
+#: code/adm/db.php:811
+#: code/adm/db.php:829
+#: code/adm/db.php:982
+#: code/adm/db.php:1000
+msgid "free"
+msgstr "вільно"
+
+#: code/adm/db.php:740
+#: code/adm/db.php:743
+#: code/adm/db.php:746
+#: code/adm/db.php:749
+#: code/adm/db.php:753
+#: code/adm/db.php:778
+#: code/adm/db.php:781
+#: code/adm/db.php:784
+#: code/adm/db.php:787
+#: code/adm/db.php:790
+#: code/adm/db.php:793
+#: code/adm/db.php:816
+#: code/adm/db.php:819
+#: code/adm/db.php:822
+#: code/adm/db.php:825
+#: code/adm/db.php:829
+#: code/adm/db.php:854
+#: code/adm/db.php:857
+#: code/adm/db.php:860
+#: code/adm/db.php:863
+#: code/adm/db.php:866
+#: code/adm/db.php:869
+#: code/adm/db.php:987
+#: code/adm/db.php:990
+#: code/adm/db.php:993
+#: code/adm/db.php:996
+#: code/adm/db.php:1000
+#: code/adm/db.php:1026
+#: code/adm/db.php:1029
+#: code/adm/db.php:1032
+#: code/adm/db.php:1035
+#: code/adm/db.php:1038
+#: code/adm/db.php:1042
+msgid "comments"
+msgstr "коментарі"
+
+#: code/adm/db.php:761
+#: code/adm/db.php:781
+#: code/adm/db.php:837
+#: code/adm/db.php:857
+#: code/adm/db.php:1008
+#: code/adm/db.php:1029
+msgid "hidden"
+msgstr "приховано"
+
+#: code/adm/db.php:764
+#: code/adm/db.php:784
+#: code/adm/db.php:840
+#: code/adm/db.php:860
+#: code/adm/db.php:1011
+#: code/adm/db.php:1032
+msgid "locked"
+msgstr "закрито"
+
+#: code/adm/db.php:773
+#: code/adm/db.php:793
+#: code/adm/db.php:849
+#: code/adm/db.php:869
+#: code/adm/db.php:1021
+#: code/adm/db.php:1042
+msgid "everyone"
+msgstr "кожен"
+
+#: code/adm/db.php:875
+#: code/adm/db.php:887
+msgid "inherit from category"
+msgstr "наслідувати із категорії"
+
+#: code/adm/db.php:878
+#: code/adm/db.php:890
+msgid "force hidden"
+msgstr "вимушено приховувати"
+
+#: code/adm/db.php:881
+#: code/adm/db.php:893
+msgid "normal activity"
+msgstr "нормальна активність"
+
+#: code/adm/db.php:915
+msgid "review"
+msgstr "оцінка"
+
+#: code/adm/db.php:950
+#: code/adm/db.php:952
+#: gdragon/gd_google.php:211
+#: options/multis/results_post.php:146
+#: options/multis/results_post.php:147
+#: options/users.php:108
+#: options/users.php:113
+#: options/users.php:118
+#: options/users.php:123
+msgid "rating"
+msgstr "рейтинг"
+
+#: code/adm/db.php:957
+#: options/categories.php:120
+msgid "no multi set assigned"
+msgstr "мультинабір не присвоєно"
+
+#: code/adm/db.php:957
+#: options/categories.php:118
+msgid "multi set"
+msgstr "мультинабір"
+
+#: code/adm/db.php:969
+#: code/adm/db.php:987
+#: code/adm/db.php:1005
+#: code/adm/db.php:1026
+msgid "parent"
+msgstr "батько"
+
+#: code/adm/db.php:1111
+#: options/users.php:107
+#: options/users.php:112
+#: options/users.php:117
+#: options/users.php:122
+msgid "votes"
+msgstr "голосів"
+
+#: code/adm/db.php:1111
+msgid "thumbs"
+msgstr "карма"
+
+#: code/adm/db.php:1236
+msgid "All categories"
+msgstr "Усі категорії"
+
+#: code/adm/db.php:1369
+#: options/setup/setup_uninstall.php:5
+msgid "UNINSTALL"
+msgstr "ДЕІНСТАЛЮВАТИ"
+
+#: code/adm/elements.php:168
+msgid "No moderation"
+msgstr "Без модерації"
+
+#: code/adm/elements.php:169
+msgid "Moderate visitors"
+msgstr "Модерувати відвідувачів"
+
+#: code/adm/elements.php:170
+msgid "Moderate users"
+msgstr "Модерувати користувачів"
+
+#: code/adm/elements.php:171
+msgid "Moderate all"
+msgstr "Модерувати усіх"
+
+#: code/adm/elements.php:172
+#: code/adm/elements.php:187
+#: code/adm/elements.php:201
+#: code/adm/elements.php:224
+#: options/elements/articles_options.php:248
+#: options/elements/articles_options.php:260
+#: options/elements/articles_options.php:274
+msgid "Inherit from Category"
+msgstr "Успадкувати від категорії"
+
+#: code/adm/elements.php:173
+#: code/adm/elements.php:188
+#: code/adm/elements.php:202
+#: options/categories.php:234
+msgid "Inherit from Parent"
+msgstr "Успадкувати від батька"
+
+#: code/adm/elements.php:182
+msgid "Everyone can vote"
+msgstr "Усі можуть голосувати"
+
+#: code/adm/elements.php:183
+msgid "Only visitors"
+msgstr "Лише відвідувачі"
+
+#: code/adm/elements.php:184
+msgid "Only users"
+msgstr "Лише користувачі"
+
+#: code/adm/elements.php:185
+msgid "Locked"
+msgstr "Закрито"
+
+#: code/adm/elements.php:186
+msgid "Locked and hidden"
+msgstr "Закрито і сховано"
+
+#: code/adm/elements.php:198
+msgid "No timer"
+msgstr "Без таймеру"
+
+#: code/adm/elements.php:199
+msgid "Countdown timer"
+msgstr "Таймер зворотнього відліку"
+
+#: code/adm/elements.php:200
+msgid "Date limited"
+msgstr "Ліміт за датою"
+
+#: code/adm/elements.php:210
+#: code/adm/elements.php:312
+#: options/multis/editor.php:67
+#: options/multis/sets.php:107
+msgid "Bottom"
+msgstr "Низ"
+
+#: code/adm/elements.php:211
+#: code/adm/elements.php:310
+#: options/multis/editor.php:68
+#: options/multis/sets.php:104
+msgid "Top"
+msgstr "Верх"
+
+#: code/adm/elements.php:212
+msgid "Top and Bottom"
+msgstr "Верх і низ"
+
+#: code/adm/elements.php:221
+#: options/articles.php:194
+#: options/articles.php:215
+#: options/categories.php:93
+msgid "Hours"
+msgstr "Години"
+
+#: code/adm/elements.php:222
+#: options/articles.php:197
+#: options/articles.php:218
+#: options/categories.php:96
+msgid "Days"
+msgstr "Дні"
+
+#: code/adm/elements.php:223
+#: options/articles.php:200
+#: options/articles.php:221
+#: options/categories.php:99
+msgid "Months"
+msgstr "Місяці"
+
+#: code/adm/elements.php:232
+#: code/adm/elements.php:245
+msgid "Mini"
+msgstr "Міні"
+
+#: code/adm/elements.php:233
+#: code/adm/elements.php:246
+msgid "Icon"
+msgstr "Іконка"
+
+#: code/adm/elements.php:234
+#: code/adm/elements.php:247
+msgid "Small"
+msgstr "Маленький"
+
+#: code/adm/elements.php:235
+#: code/adm/elements.php:248
+#: options/elements/articles_options.php:253
+#: options/categories.php:213
+msgid "Standard"
+msgstr "Стандартний"
+
+#: code/adm/elements.php:236
+#: code/adm/elements.php:249
+msgid "Medium"
+msgstr "Середній"
+
+#: code/adm/elements.php:237
+#: code/adm/elements.php:250
+msgid "Big"
+msgstr "Великий"
+
+#: code/adm/elements.php:266
+msgid "Stars and text"
+msgstr "Зірочки і текст"
+
+#: code/adm/elements.php:267
+msgid "Stars only"
+msgstr "Тільки зірочки"
+
+#: code/adm/elements.php:268
+msgid "Text only"
+msgstr "Тільки текст"
+
+#: code/adm/elements.php:276
+msgid "No alignment"
+msgstr "Не вирівнювати"
+
+#: code/adm/elements.php:277
+#: code/adm/elements.php:314
+msgid "Left"
+msgstr "Ліворуч"
+
+#: code/adm/elements.php:278
+msgid "Center"
+msgstr "Центр"
+
+#: code/adm/elements.php:279
+#: code/adm/elements.php:316
+msgid "Right"
+msgstr "Праворуч"
+
+#: code/adm/elements.php:287
+msgid "No Animation"
+msgstr "Без анімації"
+
+#: code/adm/elements.php:309
+msgid "Always hide"
+msgstr "Завжди ховати"
+
+#: code/adm/elements.php:311
+msgid "Top (hide if empty)"
+msgstr "Верх (не показувати пустий)"
+
+#: code/adm/elements.php:313
+msgid "Bottom (hide if empty)"
+msgstr "Низ (не показувати пустий)"
+
+#: code/adm/elements.php:315
+msgid "Left (hide if empty)"
+msgstr "Ліворуч (не показувати пустий)"
+
+#: code/adm/elements.php:317
+msgid "Right (hide if empty)"
+msgstr "Праворуч (не показувати пустий)"
+
+#: code/adm/elements.php:374
+msgid "from"
+msgstr "з"
+
+#: code/adm/elements.php:374
+#: gdragon/gd_google.php:210
+msgid "on"
+msgstr "на"
+
+#: code/adm/elements.php:378
+msgid "ip"
+msgstr "ip"
+
+#: code/adm/elements.php:380
+msgid "log"
+msgstr "лог"
+
+#: code/adm/elements.php:330
+msgid "visitor"
+msgstr "відвідувач"
+
+#: code/adm/elements.php:334
+msgid "Thumb"
+msgstr "Карма"
+
+#: code/adm/elements.php:341
+msgid "Multi Vote"
+msgstr "Мультиголосування"
+
+#: code/adm/elements.php:343
+#: options/moderation.php:103
+#: options/users_log.php:111
+#: options/users_log.php:95
+#: options/voters.php:131
+#: options/voters.php:102
+msgid "Vote"
+msgstr "Голос"
+
+#: code/adm/elements.php:350
+#: code/adm/elements.php:359
+msgid "post"
+msgstr "запис"
+
+#: code/adm/elements.php:354
+#: code/adm/elements.php:356
+msgid "comment"
+msgstr "коментар"
+
+#: code/adm/elements.php:354
+msgid "for"
+msgstr "для"
+
+#: code/adm/elements.php:367
+msgid "user"
+msgstr "користувач"
+
+#: code/cls/import.php:11
+msgid "Data not imported."
+msgstr "Дані не імпортовано."
+
+#: code/cls/import.php:15
+msgid "Plugin not available for import."
+msgstr "Плагін недоступний для імпорту"
+
+#: code/cls/import.php:61
+#: code/cls/import.php:80
+#: code/cls/import.php:140
+msgid "Data imported."
+msgstr "Дані імпортовано."
+
+#: code/cls/render.php:32
+msgid "loading"
+msgstr "завантаження"
+
+#: code/t2/render.php:1239
+msgid "(no title)"
+msgstr "(без назви)"
+
+#: code/t2/templates.php:4
+msgid "Element Word Votes"
+msgstr "Елемент Word Votes"
+
+#: code/t2/templates.php:5
+msgid "Singular"
+msgstr "Одиничний"
+
+#: code/t2/templates.php:6
+msgid "Plural"
+msgstr "Численний"
+
+#: code/t2/templates.php:9
+msgid "Element For Alternating Table Rows"
+msgstr "Елементи налаштування стовпчиків таблиці"
+
+#: code/t2/templates.php:10
+msgid "Odd"
+msgstr "Непарний"
+
+#: code/t2/templates.php:11
+msgid "Even"
+msgstr "Парний"
+
+#: code/t2/templates.php:14
+msgid "Standard Ratings Results"
+msgstr "Стандартні результати рейтингів"
+
+#: code/t2/templates.php:17
+#: code/t2/templates.php:51
+#: code/t2/templates.php:73
+#: code/t2/templates.php:110
+#: code/t2/templates.php:130
+#: code/t2/templates.php:155
+#: code/t2/templates.php:198
+#: code/t2/templates.php:231
+#: code/t2/templates.php:324
+#: code/t2/templates.php:355
+msgid "article rating"
+msgstr "рейтинг статті"
+
+#: code/t2/templates.php:18
+#: code/t2/templates.php:52
+#: code/t2/templates.php:76
+#: code/t2/templates.php:129
+#: code/t2/templates.php:199
+#: code/t2/templates.php:232
+#: code/t2/templates.php:245
+#: code/t2/templates.php:315
+msgid "maximum rating value"
+msgstr "максимальне значення рейтингу"
+
+#: code/t2/templates.php:19
+#: code/t2/templates.php:200
+msgid "article review"
+msgstr "оцінка статті"
+
+#: code/t2/templates.php:20
+#: code/t2/templates.php:201
+msgid "maximum review value"
+msgstr "максимальне значення оцінки"
+
+#: code/t2/templates.php:21
+#: code/t2/templates.php:53
+#: code/t2/templates.php:74
+#: code/t2/templates.php:111
+#: code/t2/templates.php:131
+#: code/t2/templates.php:156
+#: code/t2/templates.php:202
+#: code/t2/templates.php:234
+#: code/t2/templates.php:326
+#: code/t2/templates.php:357
+#: code/t2/templates.php:375
+#: code/t2/templates.php:392
+msgid "total votes for article"
+msgstr "усього голосів за статтю"
+
+#: code/t2/templates.php:22
+#: code/t2/templates.php:203
+msgid "title"
+msgstr "заголовок"
+
+#: code/t2/templates.php:23
+#: code/t2/templates.php:204
+msgid "clean name"
+msgstr "чисте ім’я"
+
+#: code/t2/templates.php:24
+#: code/t2/templates.php:205
+msgid "taxonomy"
+msgstr "таксономія"
+
+#: code/t2/templates.php:25
+#: code/t2/templates.php:109
+#: code/t2/templates.php:154
+#: code/t2/templates.php:206
+msgid "url to post/page"
+msgstr "посилання на запис/сторінку"
+
+#: code/t2/templates.php:26
+#: code/t2/templates.php:50
+#: code/t2/templates.php:159
+#: code/t2/templates.php:185
+#: code/t2/templates.php:207
+#: code/t2/templates.php:249
+#: code/t2/templates.php:267
+#: code/t2/templates.php:268
+#: code/t2/templates.php:269
+msgid "rating stars"
+msgstr "рейтинг зірочками"
+
+#: code/t2/templates.php:27
+#: code/t2/templates.php:208
+msgid "rating thumb"
+msgstr "кнопка карми"
+
+#: code/t2/templates.php:28
+#: code/t2/templates.php:209
+#: code/t2/templates.php:233
+msgid "bayesian estimate mean rating"
+msgstr "бейєсівське математичне очікування рейтингу"
+
+#: code/t2/templates.php:29
+#: code/t2/templates.php:210
+msgid "bayesian estimate mean rating stars"
+msgstr "бейєсівське математичне очікування рейтингу зірочками"
+
+#: code/t2/templates.php:30
+#: code/t2/templates.php:211
+msgid "article rating trend"
+msgstr "хід оцінювання статті"
+
+#: code/t2/templates.php:31
+#: code/t2/templates.php:212
+msgid "article voting trend"
+msgstr "хід голосування за статтю"
+
+#: code/t2/templates.php:32
+#: code/t2/templates.php:213
+msgid "article review stars"
+msgstr "зірочки оцінок про статтю"
+
+#: code/t2/templates.php:33
+#: code/t2/templates.php:214
+#: code/t2/templates.php:235
+msgid "number of posts/pages"
+msgstr "кількість записів/сторінок"
+
+#: code/t2/templates.php:34
+#: code/t2/templates.php:215
+#: code/t2/templates.php:251
+msgid "results rank id"
+msgstr "id результатів оцінювання"
+
+#: code/t2/templates.php:35
+#: code/t2/templates.php:54
+#: code/t2/templates.php:75
+#: code/t2/templates.php:112
+#: code/t2/templates.php:132
+#: code/t2/templates.php:157
+#: code/t2/templates.php:216
+#: code/t2/templates.php:314
+#: code/t2/templates.php:323
+#: code/t2/templates.php:354
+#: code/t2/templates.php:372
+#: code/t2/templates.php:389
+msgid "post/page id"
+msgstr "ID запису/сторінки"
+
+#: code/t2/templates.php:36
+#: code/t2/templates.php:217
+msgid "image for the post/page"
+msgstr "зображення для запису/сторінки"
+
+#: code/t2/templates.php:37
+#: code/t2/templates.php:218
+msgid "short post/page excerpt"
+msgstr "короткий витяг із запису/сторінки"
+
+#: code/t2/templates.php:38
+#: code/t2/templates.php:219
+msgid "name of the post/page author"
+msgstr "ім’я автору запису/сторінки"
+
+#: code/t2/templates.php:39
+#: code/t2/templates.php:220
+msgid "url to authors archive"
+msgstr "посилання на архіви автора"
+
+#: code/t2/templates.php:40
+#: code/t2/templates.php:56
+#: code/t2/templates.php:67
+#: code/t2/templates.php:77
+#: code/t2/templates.php:133
+#: code/t2/templates.php:174
+#: code/t2/templates.php:221
+#: code/t2/templates.php:237
+#: code/t2/templates.php:256
+#: code/t2/templates.php:295
+#: code/t2/templates.php:330
+#: code/t2/templates.php:379
+msgid "singular/plural word votes"
+msgstr "одиничні/численні голоси за слова"
+
+#: code/t2/templates.php:41
+#: code/t2/templates.php:101
+#: code/t2/templates.php:222
+#: code/t2/templates.php:257
+msgid "class for alternating row class"
+msgstr "клас налаштування рядків"
+
+#: code/t2/templates.php:42
+#: code/t2/templates.php:223
+#: code/t2/templates.php:258
+msgid "auto generated row classes"
+msgstr "автозгенеровані класи рядків"
+
+#: code/t2/templates.php:43
+#: code/t2/templates.php:224
+#: code/t2/templates.php:259
+msgid "Header"
+msgstr "Заголовок"
+
+#: code/t2/templates.php:44
+#: code/t2/templates.php:102
+#: code/t2/templates.php:225
+#: code/t2/templates.php:260
+msgid "Item"
+msgstr "Пункт"
+
+#: code/t2/templates.php:45
+#: code/t2/templates.php:226
+#: code/t2/templates.php:261
+msgid "Footer"
+msgstr "Нижня частина"
+
+#: code/t2/templates.php:48
+msgid "Standard RSS Rating Block"
+msgstr "RSS стандартного блоку рейтингу"
+
+#: code/t2/templates.php:55
+#: code/t2/templates.php:158
+#: code/t2/templates.php:184
+#: code/t2/templates.php:265
+#: code/t2/templates.php:266
+#: code/t2/templates.php:352
+#: code/t2/templates.php:397
+msgid "rating header text"
+msgstr "заголовок рейтингу"
+
+#: code/t2/templates.php:57
+#: code/t2/templates.php:68
+#: code/t2/templates.php:89
+#: code/t2/templates.php:124
+#: code/t2/templates.php:145
+#: code/t2/templates.php:166
+#: code/t2/templates.php:176
+#: code/t2/templates.php:192
+#: code/t2/templates.php:238
+#: code/t2/templates.php:270
+#: code/t2/templates.php:277
+#: code/t2/templates.php:286
+#: code/t2/templates.php:296
+#: code/t2/templates.php:303
+#: code/t2/templates.php:310
+#: code/t2/templates.php:318
+#: code/t2/templates.php:342
+#: code/t2/templates.php:381
+msgid "Normal"
+msgstr "Звичайний"
+
+#: code/t2/templates.php:60
+msgid "Comments Aggregated Rating"
+msgstr "Згенерований рейтинг коментарів"
+
+#: code/t2/templates.php:62
+#: code/t2/templates.php:171
+#: code/t2/templates.php:182
+#: code/t2/templates.php:244
+#: code/t2/templates.php:275
+#: code/t2/templates.php:291
+#: code/t2/templates.php:373
+#: code/t2/templates.php:390
+msgid "comment rating"
+msgstr "рейтинг коментаря"
+
+#: code/t2/templates.php:63
+#: code/t2/templates.php:172
+#: code/t2/templates.php:276
+#: code/t2/templates.php:283
+#: code/t2/templates.php:292
+msgid "maximum comment rating value"
+msgstr "максимальне значення рейтингу коментаря"
+
+#: code/t2/templates.php:64
+msgid "total comments"
+msgstr "усього коментарів"
+
+#: code/t2/templates.php:65
+#: code/t2/templates.php:293
+msgid "total votes for all comment"
+msgstr "усього голосів за усі коментарі"
+
+#: code/t2/templates.php:66
+#: code/t2/templates.php:274
+#: code/t2/templates.php:294
+msgid "comment rating stars"
+msgstr "рейтинг коментарів зірочками"
+
+#: code/t2/templates.php:71
+msgid "Multi Ratings Text"
+msgstr "Текст мультирейтингу"
+
+#: code/t2/templates.php:78
+#: code/t2/templates.php:134
+#: code/t2/templates.php:331
+msgid "remaining years"
+msgstr "лишилось років"
+
+#: code/t2/templates.php:79
+#: code/t2/templates.php:135
+#: code/t2/templates.php:332
+msgid "remaining months"
+msgstr "лишилось місяців"
+
+#: code/t2/templates.php:80
+#: code/t2/templates.php:136
+#: code/t2/templates.php:333
+msgid "remaining days"
+msgstr "лишилось днів"
+
+#: code/t2/templates.php:81
+#: code/t2/templates.php:137
+#: code/t2/templates.php:334
+msgid "remaining hours"
+msgstr "лишилось годин"
+
+#: code/t2/templates.php:82
+#: code/t2/templates.php:138
+#: code/t2/templates.php:335
+msgid "remaining minutes"
+msgstr "лишилось хвилин"
+
+#: code/t2/templates.php:83
+#: code/t2/templates.php:139
+#: code/t2/templates.php:336
+msgid "remaining seconds"
+msgstr "лишилось секунд"
+
+#: code/t2/templates.php:84
+#: code/t2/templates.php:140
+#: code/t2/templates.php:337
+msgid "end voting date"
+msgstr "кінцева дата голосування"
+
+#: code/t2/templates.php:85
+#: code/t2/templates.php:141
+#: code/t2/templates.php:338
+msgid "total remaining days"
+msgstr "усього лишилось днів"
+
+#: code/t2/templates.php:86
+#: code/t2/templates.php:142
+#: code/t2/templates.php:339
+msgid "total remaining hours"
+msgstr "усього лишилось годин"
+
+#: code/t2/templates.php:87
+#: code/t2/templates.php:143
+#: code/t2/templates.php:340
+msgid "total remaining minutes"
+msgstr "усього лишилось хвилин "
+
+#: code/t2/templates.php:88
+#: code/t2/templates.php:144
+#: code/t2/templates.php:175
+#: code/t2/templates.php:329
+#: code/t2/templates.php:360
+#: code/t2/templates.php:378
+#: code/t2/templates.php:395
+msgid "saved vote value"
+msgstr "збережене значення голосування"
+
+#: code/t2/templates.php:90
+#: code/t2/templates.php:146
+#: code/t2/templates.php:343
+msgid "Time Restricted Active"
+msgstr "Обмеження за часом — Активне"
+
+#: code/t2/templates.php:91
+#: code/t2/templates.php:147
+#: code/t2/templates.php:344
+msgid "Time Restricted Closed"
+msgstr "Обмеження за часом — Закрите"
+
+#: code/t2/templates.php:92
+#: code/t2/templates.php:148
+#: code/t2/templates.php:177
+#: code/t2/templates.php:345
+#: code/t2/templates.php:382
+msgid "Vote Saved"
+msgstr "Голос збережено"
+
+#: code/t2/templates.php:95
+msgid "Multi Ratings Stars"
+msgstr "Зірочки мультирейтингу"
+
+#: code/t2/templates.php:97
+msgid "single element name"
+msgstr "назва одиничного елементу"
+
+#: code/t2/templates.php:98
+msgid "single element id"
+msgstr "ID одиничного елементу"
+
+#: code/t2/templates.php:99
+msgid "single element stars"
+msgstr "зірочки одиничного елементу"
+
+#: code/t2/templates.php:100
+msgid "single element value"
+msgstr "значення одиничного елементу"
+
+#: code/t2/templates.php:105
+msgid "Multi Ratings Block"
+msgstr "Блок мультирейтингу"
+
+#: code/t2/templates.php:108
+#: code/t2/templates.php:153
+msgid "post/page title"
+msgstr "заголовок запису/сторінки"
+
+#: code/t2/templates.php:113
+msgid "multi rating header text"
+msgstr "заголовочний текст мультирейтингу"
+
+#: code/t2/templates.php:114
+msgid "multi rating text"
+msgstr "текст мультирейтингу"
+
+#: code/t2/templates.php:115
+#: code/t2/templates.php:282
+#: code/t2/templates.php:301
+#: code/t2/templates.php:308
+msgid "multi rating stars"
+msgstr "зірочки мультирейтингу"
+
+#: code/t2/templates.php:116
+#: code/t2/templates.php:161
+#: code/t2/templates.php:187
+#: code/t2/templates.php:302
+#: code/t2/templates.php:309
+#: code/t2/templates.php:361
+#: code/t2/templates.php:398
+msgid "css class for whole block"
+msgstr "клас CSS усього блоку"
+
+#: code/t2/templates.php:117
+#: code/t2/templates.php:162
+#: code/t2/templates.php:188
+#: code/t2/templates.php:362
+#: code/t2/templates.php:399
+msgid "css class for header"
+msgstr "клас CSS заголовку"
+
+#: code/t2/templates.php:118
+#: code/t2/templates.php:119
+#: code/t2/templates.php:164
+#: code/t2/templates.php:190
+#: code/t2/templates.php:364
+#: code/t2/templates.php:401
+msgid "css class for rating text"
+msgstr "клас CSS тексту рейтинга"
+
+#: code/t2/templates.php:120
+msgid "rating button"
+msgstr "кнопка рейтингу"
+
+#: code/t2/templates.php:121
+#: code/t2/templates.php:284
+#: code/t2/templates.php:316
+msgid "average rating"
+msgstr "середній рейтинг"
+
+#: code/t2/templates.php:122
+#: code/t2/templates.php:285
+#: code/t2/templates.php:317
+msgid "average rating stars"
+msgstr "зірочки середнього рейтингу"
+
+#: code/t2/templates.php:123
+#: code/t2/templates.php:165
+#: code/t2/templates.php:191
+#: code/t2/templates.php:341
+#: code/t2/templates.php:365
+#: code/t2/templates.php:380
+#: code/t2/templates.php:402
+msgid "auto generated css"
+msgstr "автогенеровані CSS"
+
+#: code/t2/templates.php:127
+msgid "Standard Ratings Text"
+msgstr "Стандартний текст рейтингу"
+
+#: code/t2/templates.php:151
+msgid "Standard Ratings Block"
+msgstr "Блок стандартного рейтингу"
+
+#: code/t2/templates.php:160
+#: code/t2/templates.php:186
+#: code/t2/templates.php:353
+#: code/t2/templates.php:396
+msgid "rating text"
+msgstr "текст рейтингу"
+
+#: code/t2/templates.php:163
+#: code/t2/templates.php:189
+#: code/t2/templates.php:363
+#: code/t2/templates.php:400
+msgid "css class for stars"
+msgstr "клас CSS для зірочок"
+
+#: code/t2/templates.php:169
+msgid "Comments Ratings Text"
+msgstr "Текст рейтингу коментарів"
+
+#: code/t2/templates.php:173
+#: code/t2/templates.php:183
+#: code/t2/templates.php:246
+msgid "total votes for comment"
+msgstr "усього голосів за коментар"
+
+#: code/t2/templates.php:180
+msgid "Comments Ratings Block"
+msgstr "Блок рейтингу коментарів"
+
+#: code/t2/templates.php:195
+msgid "Widget Star Rating"
+msgstr "Віджет рейтингу зірочками"
+
+#: code/t2/templates.php:229
+msgid "Widget Blog Rating"
+msgstr "Віджет рейтингу блогу"
+
+#: code/t2/templates.php:236
+#: code/t2/templates.php:325
+#: code/t2/templates.php:356
+msgid "article percentage rating"
+msgstr "процент рейтингу статті"
+
+#: code/t2/templates.php:241
+msgid "Widget Comments Rating"
+msgstr "Віджет рейтингу коментарів"
+
+#: code/t2/templates.php:247
+msgid "comment contents"
+msgstr "зміст коментаря"
+
+#: code/t2/templates.php:248
+msgid "url to comment"
+msgstr "посилання на коментар"
+
+#: code/t2/templates.php:250
+msgid "post id"
+msgstr "ID запису"
+
+#: code/t2/templates.php:252
+msgid "comment id"
+msgstr "ID коментаря"
+
+#: code/t2/templates.php:253
+msgid "name of the comments author"
+msgstr "ім’я автора коментаря"
+
+#: code/t2/templates.php:254
+msgid "authors url"
+msgstr "посилання автора"
+
+#: code/t2/templates.php:255
+msgid "authors avatar"
+msgstr "аватар автора"
+
+#: code/t2/templates.php:264
+msgid "Standard Review Rating Block"
+msgstr "Блок стандартного та рейтингу оцінки"
+
+#: code/t2/templates.php:273
+msgid "Comments Review Rating Block"
+msgstr "Блок рейтингу оцінки коментарів"
+
+#: code/t2/templates.php:280
+msgid "Multi Review Rating Block"
+msgstr "Блок мультирейтингу оцінки"
+
+#: code/t2/templates.php:289
+msgid "Aggregated Comments Review Rating"
+msgstr "Згенерований рейтинг оцінок коментарів"
+
+#: code/t2/templates.php:299
+msgid "Multi Review Editor"
+msgstr "Редактор мультиоцінок"
+
+#: code/t2/templates.php:306
+msgid "Multi Rating Comment Integration"
+msgstr "Інтеграція мультирейтингу коментарів"
+
+#: code/t2/templates.php:313
+msgid "Multi Rating Comment Integration Result"
+msgstr "Результати інтеграції мультирейтингу коментарів"
+
+#: code/t2/templates.php:321
+msgid "Thumbs Article Ratings Text"
+msgstr "Текст кармовидного рейтингу"
+
+#: code/t2/templates.php:327
+#: code/t2/templates.php:358
+#: code/t2/templates.php:376
+#: code/t2/templates.php:393
+msgid "total up votes for article"
+msgstr "усього позитивних голосів про статтю"
+
+#: code/t2/templates.php:328
+#: code/t2/templates.php:359
+#: code/t2/templates.php:377
+#: code/t2/templates.php:394
+msgid "total down votes for article"
+msgstr "усього негативних голосів про статтю"
+
+#: code/t2/templates.php:348
+msgid "Thumbs Article Rating Block"
+msgstr "Блог карми статті"
+
+#: code/t2/templates.php:350
+#: code/t2/templates.php:387
+msgid "thumb down image style"
+msgstr "зображення пониження карми"
+
+#: code/t2/templates.php:351
+#: code/t2/templates.php:388
+msgid "thumb up image style"
+msgstr "зображння підвищення карми"
+
+#: code/t2/templates.php:366
+#: code/t2/templates.php:403
+msgid "Inactive"
+msgstr "Неактивно"
+
+#: code/t2/templates.php:367
+#: code/t2/templates.php:404
+msgid "Active"
+msgstr "Активно"
+
+#: code/t2/templates.php:370
+msgid "Thumbs Comment Ratings Text"
+msgstr "Текст карми коментаря"
+
+#: code/t2/templates.php:374
+#: code/t2/templates.php:391
+msgid "comment percentage rating"
+msgstr "відсоток коментарів рейтингу"
+
+#: code/t2/templates.php:385
+msgid "Thumbs Comment Rating Block"
+msgstr "Блок карми коментаря"
+
+#: code/wdg/widgets_wp28.php:5
+msgid "Customized rating results list."
+msgstr "Довільний список результатів рейтингу. "
+
+#: code/wdg/widgets_wp28.php:125
+msgid "Overall blog rating results."
+msgstr "Загальні результати рейтингу блогу."
+
+#: code/wdg/widgets_wp28.php:169
+msgid "Current post comments rating."
+msgstr "Рейтинг коментарів цього запису."
+
+#: code/class.php:648
+#: code/class.php:659
+#: code/class.php:660
+msgid "Multi Ratings Review"
+msgstr "Оцінки мультирейтингу"
+
+#: code/class.php:674
+#: code/class.php:674
+msgid "Front Page"
+msgstr "Головна сторінка"
+
+#: code/class.php:676
+#: code/class.php:676
+#: code/class.php:678
+#: code/class.php:678
+#: options/my.php:12
+msgid "My Ratings"
+msgstr "Мої рейтинги"
+
+#: code/class.php:680
+#: code/class.php:680
+#: options/builder.php:2
+msgid "Builder"
+msgstr "Конструктор"
+
+#: code/class.php:682
+#: code/class.php:682
+#: options/builder/shortcode.php:11
+#: options/builder/shortcode.php:12
+#: options/builder/shortcode.php:13
+#: options/multis/results_post.php:175
+#: options/articles.php:104
+#: options/categories.php:148
+#: options/settings.php:45
+#: options/settings.php:48
+#: tinymce3/window.php:63
+#: tinymce3/window.php:64
+#: tinymce3/window.php:65
+msgid "Articles"
+msgstr "Статті "
+
+#: code/class.php:683
+#: code/class.php:683
+#: options/multis/editor.php:77
+#: options/multis/results_post.php:116
+#: options/categories.php:49
+msgid "Categories"
+msgstr "Категорії"
+
+#: code/class.php:687
+#: code/class.php:687
+#: options/multis/sets.php:43
+msgid "Multi Sets"
+msgstr "Мультинабори"
+
+#: code/class.php:689
+#: code/class.php:689
+#: code/class.php:921
+#: options/builder.php:7
+#: options/settings.php:37
+#: tinymce3/panels/articlesrater.php:11
+#: tinymce3/panels/multis.php:20
+#: tinymce3/panels/thumbsrating.php:11
+msgid "Settings"
+msgstr "Налаштування"
+
+#: code/class.php:690
+#: code/class.php:690
+#: options/builder/settings.php:4
+#: options/gfx.php:55
+#: tinymce3/window.php:36
+#: widgets/rating/part_stars.php:4
+#: widgets/rating/part_stars.php:12
+#: widgets/rating_28/part_stars.php:4
+#: widgets/rating_28/part_stars.php:12
+msgid "Graphics"
+msgstr "Графіка"
+
+#: code/class.php:691
+#: code/class.php:691
+#: options/templates.php:20
+msgid "T2 Templates"
+msgstr "Шаблони T2"
+
+#: code/class.php:694
+#: code/class.php:694
+#: options/settings/settings_administration.php:13
+#: options/ips.php:69
+#: options/users_log.php:183
+msgid "IP's"
+msgstr "Адреси IP"
+
+#: code/class.php:696
+#: code/class.php:696
+#: gdt2/form_files.php:22
+#: gdt2/form_files.php:33
+#: options/settings/settings_administration.php:5
+msgid "Import"
+msgstr "Імпорт"
+
+#: code/class.php:698
+#: code/class.php:698
+#: gdt2/form_files.php:4
+#: gdt2/form_files.php:12
+#: options/export/export_users.php:53
+#: options/export/export_users.php:56
+#: options/settings/settings_administration.php:11
+msgid "Export"
+msgstr "Експорт"
+
+#: code/class.php:702
+#: code/class.php:702
+#: options/gfx.php:62
+#: options/templates.php:28
+#: options/tools.php:0
+msgid "Tools"
+msgstr "Інструменти"
+
+#: code/class.php:703
+#: code/class.php:703
+#: options/settings/settings_administration.php:7
+#: options/setup.php:48
+msgid "Setup"
+msgstr "Встановлення"
+
+#: code/class.php:993
+#: code/class.php:996
+msgid "Latest"
+msgstr "Останнє"
+
+#: code/class.php:1563
+msgid "articles records from log table removed."
+msgstr "записи статтей з логу таблиці видалені."
+
+#: code/class.php:1565
+msgid "comments records from log table removed."
+msgstr "записи коментарів з логу таблиці видалені."
+
+#: code/class.php:1569
+msgid "articles records from trends log table removed."
+msgstr "записи статтей з логу тенденцій видалені."
+
+#: code/class.php:1571
+msgid "comments records from trends log table removed."
+msgstr "записи коментарів з таблиці логу тенденцій видалені."
+
+#: code/class.php:1575
+msgid "dead articles records from articles table."
+msgstr "мертві записи статтей з таблиці статтей."
+
+#: code/class.php:1577
+msgid "post revisions records from articles table."
+msgstr "записи ревізій записів із таблиці статтей."
+
+#: code/class.php:1579
+msgid "dead comments records from comments table."
+msgstr "записи мертвих коментарів з таблиці статтей."
+
+#: code/class.php:1583
+msgid "dead articles records from multi ratings tables."
+msgstr "записи мертвих статтей з таблиці мультирейтингу."
+
+#: code/class.php:1585
+msgid "post revisions records from multi ratings tables."
+msgstr "записи ревізій записів із таблиць мультирейтингу."
+
+#: gdragon/gd_google.php:91
+#: gdragon/gd_google.php:151
+msgid "based on"
+msgstr "базовано на"
+
+#: gdragon/gd_google.php:152
+#: gdragon/gd_google.php:212
+msgid "out of"
+msgstr "із"
+
+#: gdragon/gd_google.php:209
+msgid "reviewed by"
+msgstr "переглянуто"
+
+#: gdt2/classes.php:183
+msgid "All Sections"
+msgstr "Усі секції"
+
+#: gdt2/form_defaults.php:4
+#: gdt2/form_dependencies.php:10
+#: gdt2/form_list.php:43
+#: options/multis/sets.php:59
+#: options/articles.php:139
+#: options/users.php:59
+#: options/voters.php:129
+#: tinymce3/panels/filter.php:55
+#: widgets/rating/part_filter.php:87
+#: widgets/rating_28/part_filter.php:89
+msgid "ID"
+msgstr "ID"
+
+#: gdt2/form_defaults.php:5
+#: gdt2/form_list.php:45
+msgid "Section / Type"
+msgstr "Розділ/Тип"
+
+#: gdt2/form_defaults.php:6
+#: gdt2/form_editor.php:60
+#: tinymce3/panels/articlesrater.php:6
+#: tinymce3/panels/articlesreview.php:6
+#: tinymce3/panels/blograting.php:1
+#: tinymce3/panels/commentsaggr.php:6
+#: tinymce3/panels/multis.php:1
+#: tinymce3/panels/multisreview.php:1
+#: tinymce3/panels/styles.php:1
+#: tinymce3/panels/thumbsrating.php:6
+#: widgets/comments/part_basic.php:8
+#: widgets/comments_28/part_basic.php:8
+#: widgets/rating/part_basic.php:9
+#: widgets/rating_28/part_basic.php:8
+#: widgets/top/part_basic.php:8
+#: widgets/top_28/part_basic.php:8
+msgid "Template"
+msgstr "Шаблон"
+
+#: gdt2/form_defaults.php:7
+#: gdt2/form_editor.php:43
+#: gdt2/form_list.php:47
+msgid "Options"
+msgstr "Параметри"
+
+#: gdt2/form_defaults.php:37
+#: gdt2/form_dependencies.php:47
+msgid "Save Changes"
+msgstr "Зберегти зміни"
+
+#: gdt2/form_dependencies.php:11
+#: options/ips/ips_list.php:40
+msgid "Type"
+msgstr "Тип"
+
+#: gdt2/form_dependencies.php:12
+#: gdt2/form_editor.php:54
+#: gdt2/form_list.php:44
+#: options/multis/editor.php:27
+#: options/multis/editor.php:93
+#: options/multis/sets.php:60
+#: options/users.php:58
+#: options/voters.php:130
+msgid "Name"
+msgstr "Ім’я"
+
+#: gdt2/form_dependencies.php:13
+#: options/templates.php:26
+msgid "Dependencies"
+msgstr "Залежності"
+
+#: gdt2/form_editor.php:21
+msgid "Template Editor"
+msgstr "Редактор шаблону"
+
+#: gdt2/form_editor.php:29
+msgid "Editor"
+msgstr "Редактор"
+
+#: gdt2/form_editor.php:31
+#: options/multis/editor.php:87
+msgid "Elements"
+msgstr "Елементи"
+
+#: gdt2/form_editor.php:36
+#: options/front/front_right.php:4
+msgid "Info"
+msgstr "Інформація"
+
+#: gdt2/form_editor.php:45
+msgid "Set this template as default for this type of templates."
+msgstr "Установіть цей шаблон за змовчуванням для цього типу шаблонів."
+
+#: gdt2/form_editor.php:48
+msgid "Set this template as a dependency for all other templates that use it."
+msgstr "Установіть цей шаблон як залежність для усіх інших шаблонів, що його використовують."
+
+#: gdt2/form_editor.php:52
+#: options/builder/settings.php:2
+#: tinymce3/window.php:34
+msgid "General"
+msgstr "Загальне"
+
+#: gdt2/form_editor.php:56
+#: gdt2/form_editor.php:69
+#: options/multis/editor.php:32
+msgid "Description"
+msgstr "Опис"
+
+#: gdt2/form_editor.php:78
+msgid "All tag elements"
+msgstr "Всі теги"
+
+#: gdt2/form_editor.php:79
+msgid "No tag elements allowed"
+msgstr "Теги не дозволені"
+
+#: gdt2/form_editor.php:91
+msgid "Save Template"
+msgstr "Зберегти шаблон"
+
+#: gdt2/form_editor.php:101
+msgid "Select template to use for this element:"
+msgstr "Оберіть шаблон для використання з елементом:"
+
+#: gdt2/form_editor.php:40
+msgid "Creating new template"
+msgstr "Створення нового шаблону"
+
+#: gdt2/form_editor.php:70
+msgid "Allowed elements"
+msgstr "Дозволені елементи"
+
+#: gdt2/form_files.php:1
+msgid "Export Own Templates"
+msgstr "Експорт власних шаблонів"
+
+#: gdt2/form_files.php:3
+msgid "This will export all templates you created into a file."
+msgstr "Експорт усіх створених Вами шаблонів до файлу."
+
+#: gdt2/form_files.php:6
+msgid "Exported file will contain names, descriptions and contents of templates. File will be in CSV format."
+msgstr "Експортований файл буде містити назви, описи та зміст шаблонів. Файл матиме формат CSV."
+
+#: gdt2/form_files.php:9
+msgid "Export All Templates"
+msgstr "Експорт усіх шаблонів"
+
+#: gdt2/form_files.php:11
+msgid "This will export all templates and their dependencies."
+msgstr "Ця дія експортує усі шаблони та їх залежності."
+
+#: gdt2/form_files.php:14
+msgid "Exported file will contain full structure of the database table. File will be in CSV format. This is useful if you need to transfer everything the way it is to another website."
+msgstr "Файл експорту буде містити повну структуру таблиці бази даних. Файл буде у форматі CSV. Це корисно, якщо вам необхідно передати будь-що на інший веб-сайт."
+
+#: gdt2/form_files.php:17
+msgid "Import Own Templates"
+msgstr "Імпортувати власні шаблони"
+
+#: gdt2/form_files.php:19
+msgid "Use this to import templates you made. File must be generated with first export tool."
+msgstr "Використовуйте це для імпорту зроблених вами шаблонів. Файл має бути згенерований за допомогою першої утиліти експорту."
+
+#: gdt2/form_files.php:25
+msgid "Once imported, these templates will use default dependencies."
+msgstr "Як тільки шаблони імпортуються, вони будуть використовувати залежності за змовчуванням."
+
+#: gdt2/form_files.php:28
+msgid "Import All Templates"
+msgstr "Імпортувати усі шаблони"
+
+#: gdt2/form_files.php:30
+msgid "Use this to import all templates. File must be generated with second export tool."
+msgstr "Використовуйте це для імпорту всіх шаблонів. Файл має бути згенерований за допомогою другої утиліти експорту."
+
+#: gdt2/form_files.php:36
+msgid "Before import, all existing templates will be deleted. All dependencies from the file will be preserved."
+msgstr "Перед імпортом усі існуючі шаблони будуть видалені. Усі залежності із файлу будуть збережені."
+
+#: gdt2/form_list.php:33
+#: gdt2/form_list.php:15
+#: options/multis/results_post.php:96
+#: options/multis/results_post.php:26
+#: options/multis/results_set.php:22
+#: options/articles.php:122
+#: options/articles.php:23
+#: options/users_log.php:97
+#: options/users_log.php:23
+#: options/voters.php:104
+#: options/voters.php:32
+#: tinymce3/panels/blograting.php:6
+#: tinymce3/panels/commentsaggr.php:11
+#: tinymce3/window.php:35
+#: widgets/comments/part_filter.php:4
+#: widgets/comments/part_filter.php:12
+#: widgets/comments_28/part_filter.php:4
+#: widgets/comments_28/part_filter.php:12
+#: widgets/rating/part_filter.php:4
+#: widgets/rating/part_filter.php:12
+#: widgets/rating_28/part_filter.php:4
+#: widgets/rating_28/part_filter.php:12
+#: widgets/top/part_filter.php:4
+#: widgets/top/part_filter.php:12
+#: widgets/top_28/part_filter.php:4
+#: widgets/top_28/part_filter.php:12
+msgid "Filter"
+msgstr "Фільтр"
+
+#: gdt2/form_list.php:46
+msgid "Tag"
+msgstr "Тег"
+
+#: gdt2/form_list.php:86
+msgid "Map with dependencies for templates"
+msgstr "Карта залежностей шаблонів"
+
+#: gdt2/form_list.php:87
+msgid "T2 Templates Map"
+msgstr "Карта шаблонів T2 "
+
+#: gdt2/form_list.php:92
+msgid "New template for:"
+msgstr "Новий шаблон для:"
+
+#: gdt2/form_list.php:94
+msgid "Create"
+msgstr "Створити"
+
+#: gdt2/form_list.php:67
+msgid "delete"
+msgstr "видалити"
+
+#: gdt2/form_list.php:68
+msgid "edit"
+msgstr "редагувати"
+
+#: gdt2/form_list.php:70
+msgid "duplicate"
+msgstr "створити дублікат"
+
+#: integrate/dash_latest.php:7
+msgid "Articles Log"
+msgstr "Лог статтей"
+
+#: integrate/dash_latest.php:8
+msgid "Users Log"
+msgstr "Лог користувачів"
+
+#: integrate/edit.php:2
+msgid "Standard Post Review"
+msgstr "Стандартна оцінка запису"
+
+#: integrate/edit.php:7
+msgid "Value"
+msgstr "Значення"
+
+#: integrate/edit.php:22
+msgid "Post Stars Rating"
+msgstr "Рейтинг запису зірочками"
+
+#: integrate/edit.php:27
+#: integrate/edit.php:78
+#: integrate/edit.php:130
+#: integrate/edit.php:150
+msgid "Vote Rule"
+msgstr "Правило голосування"
+
+#: integrate/edit.php:33
+#: integrate/edit.php:84
+#: integrate/edit.php:136
+#: integrate/edit.php:156
+msgid "Moderate"
+msgstr "Модерація"
+
+#: integrate/edit.php:43
+#: integrate/edit.php:94
+#: options/elements/articles_options.php:60
+#: options/elements/articles_options.php:123
+#: options/multis/results_post.php:216
+#: options/categories.php:179
+msgid "Restriction"
+msgstr "Обмеження"
+
+#: integrate/edit.php:52
+#: integrate/edit.php:103
+#: options/elements/articles_options.php:67
+#: options/elements/articles_options.php:131
+#: options/multis/results_post.php:223
+#: options/categories.php:186
+#: tinymce3/panels/filter.php:87
+msgid "Date"
+msgstr "Дата"
+
+#: integrate/edit.php:62
+#: integrate/edit.php:113
+#: options/elements/articles_options.php:66
+#: options/elements/articles_options.php:130
+#: options/multis/results_post.php:222
+#: options/categories.php:185
+msgid "Countdown"
+msgstr "Зворотній відлік"
+
+#: integrate/edit.php:73
+msgid "Post Thumbs Rating"
+msgstr "Карма запису"
+
+#: integrate/edit.php:125
+msgid "Comment Stars Rating"
+msgstr "Рейтинг коментаря зірочками"
+
+#: integrate/edit.php:145
+msgid "Comment Thumbs Rating"
+msgstr "Карма коментаря"
+
+#: integrate/edit.php:166
+msgid "Comment Integration Ratings"
+msgstr "Рейтинги інтеграції коментаря"
+
+#: integrate/edit_multi.php:1
+msgid "You don't have any multi rating sets defined. Create at least one set."
+msgstr "Не визначено жодного набору мультирейтингу. Створіть хоча б один набір."
+
+#: integrate/edit_multi.php:11
+#: options/tools/tools_bulk.php:96
+#: tinymce3/panels/articlesrater.php:19
+#: tinymce3/panels/articlesreview.php:24
+#: tinymce3/panels/multis.php:9
+#: tinymce3/panels/multis.php:28
+#: tinymce3/panels/multis.php:48
+#: tinymce3/panels/multisreview.php:9
+#: tinymce3/panels/multisreview.php:34
+#: tinymce3/panels/multisreview.php:54
+#: tinymce3/panels/styles.php:60
+#: tinymce3/panels/styles.php:80
+#: tinymce3/panels/styles.php:100
+#: widgets/comments/part_stars.php:13
+#: widgets/comments_28/part_stars.php:13
+msgid "Set"
+msgstr "Набір"
+
+#: integrate/edit_multi.php:18
+msgid "To change the active set, you need to select the set you want from the list on the left, and save this article to accept the change."
+msgstr "Аби змінити активний набір, оберіть новий ліворуч та збережіть статтю для застосування змін."
+
+#: integrate/edit_multi.php:20
+msgid "All values for all sets will be saved in the database. This allows different multi rating sets reviews."
+msgstr "Усі значення наборів будуть збережені до бази даних. Це дозволяє переглядати різні набори мультирейтингу."
+
+#: integrate/edit_multi.php:31
+msgid "Clear"
+msgstr "Очистити"
+
+#: integrate/edit_multi.php:32
+msgid "Revert"
+msgstr "Повернути"
+
+#: integrate/edit_multi.php:27
+msgid "Set ID"
+msgstr "ID набору"
+
+#: integrate/edit_multi.php:28
+#: options/multis/results_post.php:78
+msgid "Set Name"
+msgstr "Назва набору"
+
+#: options/builder/settings.php:3
+msgid "Filter    "
+msgstr "Фільтр"
+
+#: options/builder/settings.php:5
+#: options/settings/settings_special.php:14
+#: options/settings/settings_special.php:69
+#: tinymce3/panels/general.php:37
+#: tinymce3/window.php:37
+#: widgets/rating/part_basic.php:49
+#: widgets/rating_28/part_basic.php:49
+msgid "Multi Rating"
+msgstr "Мультирейтинг"
+
+#: options/builder/settings.php:6
+#: options/settings/settings_special.php:15
+#: tinymce3/window.php:38
+msgid "Multi Review"
+msgstr "Мультиоцінка"
+
+#: options/builder/settings.php:7
+#: tinymce3/window.php:39
+msgid "Articles Review"
+msgstr "Оцінка статтей"
+
+#: options/builder/settings.php:8
+#: tinymce3/panels/articlesrater.php:1
+#: tinymce3/window.php:40
+msgid "Articles Rating Block"
+msgstr "Блок рейтингу статтей"
+
+#: options/builder/settings.php:9
+#: tinymce3/window.php:41
+msgid "Aggregated Comments"
+msgstr "Зібрані коментарі"
+
+#: options/builder/settings.php:10
+#: tinymce3/window.php:42
+msgid "Blog Rating"
+msgstr "Рейтинг блогу"
+
+#: options/builder/settings.php:11
+#: options/settings/settings_special.php:16
+#: options/settings/settings_special.php:70
+#: tinymce3/panels/general.php:38
+#: tinymce3/window.php:43
+#: widgets/rating/part_basic.php:51
+#: widgets/rating_28/part_basic.php:50
+#: widgets/top/part_basic.php:28
+#: widgets/top_28/part_basic.php:28
+msgid "Thumbs Rating"
+msgstr "Рейтинг карми"
+
+#: options/builder/shortcode.php:2
+msgid "Select code:"
+msgstr "Оберіть код:"
+
+#: options/builder/shortcode.php:5
+#: options/builder/shortcode.php:6
+#: tinymce3/window.php:57
+#: tinymce3/window.php:58
+msgid "Results"
+msgstr "Результат"
+
+#: options/builder/shortcode.php:8
+#: options/builder/shortcode.php:9
+#: tinymce3/window.php:60
+#: tinymce3/window.php:61
+msgid "Multi"
+msgstr "Мульти"
+
+#: options/builder/shortcode.php:15
+#: options/my/my_general.php:27
+#: options/articles.php:237
+#: options/articles.php:237
+#: options/categories.php:246
+#: options/charts.php:7
+#: options/comments.php:30
+#: options/settings.php:46
+#: options/settings.php:49
+#: tinymce3/window.php:67
+msgid "Comments"
+msgstr "Коментарі"
+
+#: options/builder/shortcode.php:23
+msgid "Shortcode:"
+msgstr "Короткий код:"
+
+#: options/builder/shortcode.php:32
+msgid "Function:"
+msgstr "Функція:"
+
+#: options/builder/shortcode.php:38
+msgid "Rebuild"
+msgstr "Перебудувати"
+
+#: options/builder/shortcode.php:40
+msgid "List of all functions with additional parameters"
+msgstr "Список усіх функцій із додатковими параметрами"
+
+#: options/builder/shortcode.php:41
+msgid "Functions"
+msgstr "Функції"
+
+#: options/charts/post_charts.php:48
+#: options/comments.php:80
+#: options/users_log.php:191
+msgid "Votes"
+msgstr "Голоси"
+
+#: options/charts/post_charts.php:49
+#: options/settings/settings_articles.php:10
+#: options/settings/settings_comments.php:10
+#: options/settings/settings_multis.php:10
+#: options/settings/settings_thumbs_articles.php:1
+#: options/settings/settings_thumbs_comments.php:1
+#: tinymce3/panels/filter.php:53
+#: widgets/comments/part_filter.php:46
+#: widgets/comments_28/part_filter.php:46
+#: widgets/rating/part_filter.php:85
+#: widgets/rating_28/part_filter.php:87
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: options/elements/articles_options.php:7
+msgid "Stars for Articles"
+msgstr "Зірочки статтей"
+
+#: options/elements/articles_options.php:14
+#: options/elements/articles_options.php:89
+#: options/elements/articles_options.php:154
+#: options/elements/articles_options.php:197
+#: options/multis/results_post.php:178
+#: options/categories.php:151
+#: options/categories.php:249
+#: options/comments.php:123
+#: options/moderation.php:138
+#: options/users_log.php:194
+#: options/voters.php:171
+msgid "Delete"
+msgstr "Видалити"
+
+#: options/elements/articles_options.php:19
+#: options/elements/articles_options.php:94
+#: options/elements/articles_options.php:159
+#: options/elements/articles_options.php:202
+#: options/multis/results_post.php:183
+#: options/categories.php:156
+#: options/categories.php:254
+#: options/comments.php:126
+msgid "Visitors"
+msgstr "Відвідувачі"
+
+#: options/elements/articles_options.php:20
+#: options/elements/articles_options.php:95
+#: options/elements/articles_options.php:160
+#: options/elements/articles_options.php:203
+#: options/multis/results_post.php:184
+#: options/categories.php:157
+#: options/categories.php:255
+#: options/comments.php:127
+#: options/users.php:45
+msgid "Users"
+msgstr "Користувачі"
+
+#: options/elements/articles_options.php:21
+#: options/elements/articles_options.php:96
+#: options/elements/articles_options.php:161
+#: options/elements/articles_options.php:204
+#: options/multis/results_post.php:185
+#: options/categories.php:158
+#: options/categories.php:256
+#: options/comments.php:128
+msgid "All"
+msgstr "Усе"
+
+#: options/elements/articles_options.php:26
+#: options/multis/results_post.php:120
+#: options/multis/sets.php:65
+#: options/settings/settings_articles.php:184
+#: options/settings/settings_comments.php:198
+#: options/comments.php:82
+#: tinymce3/panels/filter.php:57
+#: widgets/rating/part_filter.php:89
+#: widgets/rating_28/part_filter.php:91
+msgid "Review"
+msgstr "Оцінка"
+
+#: options/elements/articles_options.php:43
+#: options/elements/articles_options.php:105
+#: options/elements/articles_options.php:170
+#: options/elements/articles_options.php:213
+#: options/multis/results_post.php:190
+#: options/tools/tools_bulk.php:25
+#: options/tools/tools_bulk.php:44
+#: options/tools/tools_bulk.php:63
+#: options/tools/tools_bulk.php:82
+#: options/articles.php:147
+#: options/categories.php:65
+#: options/categories.php:163
+#: options/categories.php:261
+#: options/moderation.php:22
+msgid "Moderation"
+msgstr "Модерація"
+
+#: options/elements/articles_options.php:50
+#: options/elements/articles_options.php:113
+#: options/elements/articles_options.php:177
+#: options/elements/articles_options.php:220
+#: options/multis/results_post.php:197
+#: options/tools/tools_bulk.php:32
+#: options/tools/tools_bulk.php:51
+#: options/tools/tools_bulk.php:70
+#: options/tools/tools_bulk.php:89
+#: options/articles.php:142
+#: options/categories.php:70
+#: options/categories.php:170
+#: options/categories.php:268
+msgid "Vote Rules"
+msgstr "Правила голосування"
+
+#: options/elements/articles_options.php:82
+msgid "Thumbs for Articles"
+msgstr "Карма статтей"
+
+#: options/elements/articles_options.php:147
+msgid "Stars for Comments"
+msgstr "Зірочки коментарів"
+
+#: options/elements/articles_options.php:190
+msgid "Thumbs for Commnets"
+msgstr "Карма коментарів"
+
+#: options/elements/articles_options.php:234
+msgid "Comments Integration"
+msgstr "Інтеграція коментарів"
+
+#: options/elements/articles_options.php:241
+#: options/categories.php:203
+#: options/settings.php:47
+msgid "Multis"
+msgstr "Мульти"
+
+#: options/elements/articles_options.php:246
+#: options/elements/articles_options.php:258
+#: options/categories.php:208
+#: options/categories.php:218
+msgid "Normal activity"
+msgstr "Нормальна активність"
+
+#: options/elements/articles_options.php:247
+#: options/elements/articles_options.php:259
+#: options/categories.php:209
+#: options/categories.php:219
+msgid "Force hidden"
+msgstr "Вимушено сховати"
+
+#: options/elements/articles_options.php:269
+#: options/categories.php:229
+#: tinymce3/panels/general.php:46
+#: widgets/rating/part_basic.php:59
+#: widgets/rating_28/part_basic.php:58
+msgid "Multi Set"
+msgstr "Мультинабір"
+
+#: options/elements/articles_options.php:288
+#: options/multis/results_post.php:207
+#: options/multis/results_post.php:35
+#: options/tools/tools_bulk.php:128
+#: options/articles.php:34
+#: options/categories.php:278
+#: options/categories.php:14
+#: options/comments.php:132
+#: options/comments.php:17
+#: options/users_log.php:209
+#: options/users_log.php:30
+#: options/voters.php:179
+#: options/voters.php:40
+msgid "Update"
+msgstr "Оновлення"
+
+#: options/export/export_users.php:29
+msgid "User Info"
+msgstr "Користувацька інформація"
+
+#: options/export/export_users.php:31
+msgid "Minimal: only user id is exported"
+msgstr "Мінімум: експортується лише користувацький ID"
+
+#: options/export/export_users.php:32
+msgid "Normal: user id, name and email are exported"
+msgstr "Нормально: експортуються користувацький ID, ім’я та електропошта"
+
+#: options/export/export_users.php:35
+msgid "Data"
+msgstr "Дані"
+
+#: options/export/export_users.php:37
+msgid "Post / Page votes"
+msgstr "Голоси за запис/сторінку"
+
+#: options/export/export_users.php:38
+msgid "Comments votes"
+msgstr "Голоси за коментарі"
+
+#: options/export/export_users.php:41
+msgid "Additional Columns"
+msgstr "Додаткові колонки"
+
+#: options/export/export_users.php:43
+#: options/ips/ips_list.php:41
+#: options/moderation.php:104
+#: options/users_log.php:108
+#: options/voters.php:133
+msgid "IP"
+msgstr "IP"
+
+#: options/export/export_users.php:44
+#: options/moderation.php:105
+#: options/voters.php:134
+msgid "User Agent"
+msgstr "Браузер"
+
+#: options/export/export_users.php:46
+msgid "Post/Page title"
+msgstr "Заголовок запису/сторінки"
+
+#: options/export/export_users.php:47
+msgid "Post/Page date"
+msgstr "Дата запису/сторінки"
+
+#: options/export/export_users.php:49
+msgid "Comment author"
+msgstr "Автор коментаря"
+
+#: options/export/export_users.php:50
+msgid "Comment date"
+msgstr "Дата коментаря"
+
+#: options/export/export_users.php:55
+msgid "This will export voters data file."
+msgstr "Експорт файлу даних голосуючих."
+
+#: options/export/export_users.php:58
+msgid "Exported file will contain all the users ratings. File will be in CSV format."
+msgstr "Файл експорту міститиме усі користувацькі рейтинги. Файл матиме формат CSV."
+
+#: options/front/front_left.php:2
+msgid "See All"
+msgstr "Дивитися все"
+
+#: options/front/front_left.php:4
+msgid "Latest News"
+msgstr "Свіжі новини"
+
+#: options/front/front_left.php:38
+msgid "Newsfeed update is disabled. You can enable it on settings page."
+msgstr "Оновлення стрічки новин вимкнене. Ви можете ввімкнути його на сторінці налаштувань."
+
+#: options/front/front_left.php:32
+msgid "An error occured while loading newsfeed. Go to the %sfront page%s to check for updates."
+msgstr "Помилка отримання стрічки новин. Перевірте оновлення на %sголовній сторінці%s."
+
+#: options/front/front_right.php:8
+msgid "Version"
+msgstr "Версія"
+
+#: options/front/front_right.php:9
+msgid "release date"
+msgstr "дата випуску"
+
+#: options/front/front_right.php:13
+msgid "Code Name"
+msgstr "Кодове ім’я"
+
+#: options/front/front_right.php:14
+msgid "current major release"
+msgstr "поточний основний випуск"
+
+#: options/front/front_right.php:19
+msgid "Change Log"
+msgstr "Лог змін"
+
+#: options/front/front_right.php:20
+msgid "detailed list of changes"
+msgstr "детальний список змін"
+
+#: options/front/front_right.php:21
+msgid "show"
+msgstr "показати"
+
+#: options/front/front_right.php:26
+msgid "Links"
+msgstr "Посилання"
+
+#: options/front/front_right.php:31
+#: options/front/front_right.php:75
+msgid "official plugin page"
+msgstr "офіційний сайт плагіну"
+
+#: options/front/front_right.php:32
+#: options/front/front_right.php:37
+#: options/front/front_right.php:42
+#: options/front/front_right.php:47
+#: options/front/front_right.php:62
+#: options/front/front_right.php:76
+#: options/front/front_right.php:81
+#: options/front/front_right.php:86
+#: options/front/front_right.php:91
+#: options/front/front_right.php:96
+#: options/front/front_right.php:110
+#: options/front/front_right.php:115
+#: options/front/front_right.php:120
+#: options/front/front_right.php:125
+msgid "visit"
+msgstr "відвідати"
+
+#: options/front/front_right.php:36
+msgid "development home with svn"
+msgstr "SVN розробників"
+
+#: options/front/front_right.php:41
+msgid "discussions group"
+msgstr "обговорення"
+
+#: options/front/front_right.php:46
+msgid "wordpress plugin page"
+msgstr "Сторінка плагіну на WordPress"
+
+#: options/front/front_right.php:51
+msgid "development progress"
+msgstr "процес розробки"
+
+#: options/front/front_right.php:52
+msgid "follow"
+msgstr "відслідковувати"
+
+#: options/front/front_right.php:56
+msgid "Support"
+msgstr "Підтримка"
+
+#: options/front/front_right.php:60
+msgid "Premium Support"
+msgstr "Преміум підтримка"
+
+#: options/front/front_right.php:61
+msgid "special plugin customizations"
+msgstr "особливі налаштування плагіну"
+
+#: options/front/front_right.php:69
+msgid "GD WordPress Plugins"
+msgstr "Плагіни GD WordPress"
+
+#: options/front/front_right.php:80
+msgid "custom taxonomies managment"
+msgstr "довільне керування таксономією"
+
+#: options/front/front_right.php:85
+msgid "collection of widgets"
+msgstr "колекція віджетів"
+
+#: options/front/front_right.php:90
+msgid "advanced pages widget"
+msgstr "віджети просунутих сторінок"
+
+#: options/front/front_right.php:95
+msgid "widget to add linkedin badge"
+msgstr "віджет додавання іконки LinkedIn"
+
+#: options/front/front_right.php:109
+msgid "premium wordpress plugins and themes"
+msgstr "преміум-плагіни та теми WordPress"
+
+#: options/front/front_right.php:114
+msgid "tv shows reviews and news"
+msgstr "оцінки ТБ-шоу та новин"
+
+#: options/front/front_right.php:119
+msgid "announcements and theme demo"
+msgstr "анонси та демки тем"
+
+#: options/front/front_right.php:123
+msgid "Official Website"
+msgstr "Офіційний сайт"
+
+#: options/front/front_right.php:124
+msgid "golden dragon official web portal"
+msgstr "офіційний портал Golden Dragon"
+
+#: options/gfx/gfx_preview.php:1
+msgid "Stars Preview"
+msgstr "Попередній перегляд зірочок"
+
+#: options/gfx/gfx_preview.php:5
+#: options/multis/sets.php:63
+#: options/settings/settings_articles.php:14
+#: options/settings/settings_articles.php:188
+#: options/settings/settings_comments.php:14
+#: options/settings/settings_comments.php:133
+#: options/settings/settings_comments.php:202
+#: options/settings/settings_multis.php:14
+#: options/settings/settings_special.php:78
+#: options/gfx.php:59
+#: widgets/comments/part_stars.php:4
+#: widgets/comments/part_stars.php:12
+#: widgets/comments_28/part_stars.php:4
+#: widgets/comments_28/part_stars.php:12
+msgid "Stars"
+msgstr "Зірочки"
+
+#: options/gfx/gfx_preview.php:35
+#: options/gfx/gfx_preview.php:85
+#: tinymce3/panels/articlesrater.php:27
+#: tinymce3/panels/articlesreview.php:32
+#: tinymce3/panels/multis.php:36
+#: tinymce3/panels/multis.php:56
+#: tinymce3/panels/multisreview.php:42
+#: tinymce3/panels/multisreview.php:62
+#: tinymce3/panels/styles.php:68
+#: tinymce3/panels/styles.php:88
+#: tinymce3/panels/styles.php:108
+#: widgets/comments/part_image.php:13
+#: widgets/comments/part_stars.php:18
+#: widgets/comments_28/part_image.php:13
+#: widgets/comments_28/part_stars.php:18
+msgid "Size"
+msgstr "Розмір"
+
+#: options/gfx/gfx_preview.php:41
+#: options/gfx/gfx_preview.php:91
+msgid "Author"
+msgstr "Автор"
+
+#: options/gfx/gfx_preview.php:51
+msgid "Thumbs Preview"
+msgstr "Попередній перегляд карми"
+
+#: options/gfx/gfx_preview.php:55
+#: options/settings/settings_special.php:90
+#: options/comments.php:79
+#: options/gfx.php:60
+#: tinymce3/panels/styles.php:97
+msgid "Thumbs"
+msgstr "Карма"
+
+#: options/gfx/gfx_preview.php:101
+msgid "Trends Preview"
+msgstr "Попередній перегляд тенденцій"
+
+#: options/gfx/gfx_preview.php:105
+msgid "Trends"
+msgstr "Тенденції"
+
+#: options/gfx/gfx_stars.php:1
+msgid "Stars Sizes"
+msgstr "Розміри зірочок"
+
+#: options/gfx/gfx_stars.php:24
+#: options/gfx/gfx_thumbs.php:24
+msgid "Only sizes checked here will be included in the css file for the active rating blocks."
+msgstr "Тільки відмічені розміри будуть включені до файлу CSS для активних блоків рейтингу."
+
+#: options/gfx/gfx_stars.php:27
+#: options/gfx/gfx_thumbs.php:27
+msgid "Stars Sets"
+msgstr "Набори зірочок"
+
+#: options/gfx/gfx_stars.php:54
+msgid "Only stars set checked here will be included in the css file for the active rating blocks."
+msgstr "Лише відмічені набори зірочок будуть включені до файлу CSS для активних блоків рейтингу."
+
+#: options/gfx/gfx_thumbs.php:1
+msgid "Thumbs Sizes"
+msgstr "Розміри кнопок карми"
+
+#: options/gfx/gfx_thumbs.php:54
+msgid "Only thumbs set checked here will be included in the css file for the active rating blocks."
+msgstr "Лише відмічені кнопки карми будуть включені до файлу CSS для активних блоків рейтингу."
+
+#: options/gfx/gfx_tools.php:1
+msgid "Rescan graphics"
+msgstr "Пересканувати графіки"
+
+#: options/gfx/gfx_tools.php:3
+msgid "Rescan graphics folders for new stars and trends images."
+msgstr "Пересканувати каталог графіки на предмет нових зображень зірочок та тенденцій."
+
+#: options/gfx/gfx_tools.php:4
+msgid "Rescan"
+msgstr "Пересканувати"
+
+#: options/gfx/gfx_tools.php:6
+msgid "Last scan was executed on."
+msgstr "Останнє сканування проводилося"
+
+#: options/ips/ips_list.php:39
+msgid "Record Id"
+msgstr "Записати ID"
+
+#: options/ips/ips_list.php:81
+msgid "Unban Selected"
+msgstr "Обрано зняття бану"
+
+#: options/ips/ips_options.php:1
+msgid "Ban Single IP's"
+msgstr "Забанити конкретний IP"
+
+#: options/ips/ips_options.php:8
+msgid "Add IP addresses"
+msgstr "Додати адреси IP"
+
+#: options/ips/ips_options.php:9
+msgid "One IP address per line."
+msgstr "1 адреса на рядок"
+
+#: options/ips/ips_options.php:15
+#: options/ips/ips_options.php:41
+#: options/ips/ips_options.php:57
+msgid "Add"
+msgstr "Додати"
+
+#: options/ips/ips_options.php:19
+msgid "Ban IP Range"
+msgstr "Забанити підмережу IP"
+
+#: options/ips/ips_options.php:25
+msgid "From"
+msgstr "Від"
+
+#: options/ips/ips_options.php:35
+msgid "To"
+msgstr "До"
+
+#: options/ips/ips_options.php:45
+msgid "Ban IP Masked"
+msgstr "Забанити по масці IP"
+
+#: options/ips/ips_options.php:51
+msgid "Mask"
+msgstr "Маска підмережі"
+
+#: options/ips/ips_options.php:55
+msgid "Use XXX as a part of IP or leave empty to mask."
+msgstr "Використайте XXX як частину IP чи лишіть пустою для маски."
+
+#: options/multis/editor.php:24
+msgid "Multi Sets Editor"
+msgstr "Редактор мультинаборів"
+
+#: options/multis/editor.php:37
+msgid "Number Of Stars"
+msgstr "Кількість зірок"
+
+#: options/multis/editor.php:44
+#: options/multis/sets.php:62
+#: options/settings/settings_articles.php:74
+#: options/settings/settings_comments.php:78
+#: options/settings/settings_multis.php:39
+#: options/settings/settings_thumbs_articles.php:58
+#: options/settings/settings_thumbs_comments.php:59
+#: options/templates.php:27
+msgid "Defaults"
+msgstr "За змовчуванням"
+
+#: options/multis/editor.php:48
+msgid "Auto Insertion"
+msgstr "Вставляти автоматично"
+
+#: options/multis/editor.php:52
+msgid "Insertion"
+msgstr "Вставляти"
+
+#: options/multis/editor.php:55
+#: options/multis/sets.php:85
+msgid "No"
+msgstr "Ні"
+
+#: options/multis/editor.php:56
+#: options/multis/sets.php:88
+msgid "Category Based"
+msgstr "За категоріями"
+
+#: options/multis/editor.php:57
+#: options/multis/sets.php:91
+msgid "All Posts"
+msgstr "Усі записи"
+
+#: options/multis/editor.php:58
+#: options/multis/sets.php:94
+msgid "All Pages"
+msgstr "Усі сторінки"
+
+#: options/multis/editor.php:59
+#: options/multis/sets.php:97
+msgid "All Posts &amp; Pages"
+msgstr "Усі записи та сторінки"
+
+#: options/multis/editor.php:64
+#: options/settings/settings_special.php:41
+msgid "Location"
+msgstr "Місцезнаходження"
+
+#: options/multis/editor.php:96
+msgid "Weight"
+msgstr "Вага"
+
+#: options/multis/editor.php:103
+msgid "Important Notice"
+msgstr "Важлива відмітка"
+
+#: options/multis/editor.php:105
+msgid "Once the set is created, you can't change number of elements in the set or number of stars! You can edit names and weight of the elements, name and description of the set."
+msgstr "Як тільки набір створено, Ви не можете змінити кількість елементів набору чи кількість зірочок! Ви можете редагувати імена та вагу елементів, ім’я та опи набору."
+
+#: options/multis/editor.php:110
+msgid "Save Multi Set"
+msgstr "Зберегти мультинабір"
+
+#: options/multis/results_post.php:77
+#: options/multis/results_set.php:17
+msgid "Multi Set Results"
+msgstr "Результати мультинабору"
+
+#: options/multis/results_post.php:88
+#: options/multis/results_post.php:90
+#: options/multis/results_post.php:31
+#: options/articles.php:114
+#: options/articles.php:116
+#: options/articles.php:29
+msgid "Search Posts"
+msgstr "Шукати записи"
+
+#: options/multis/results_post.php:114
+#: tinymce3/panels/filter.php:56
+#: widgets/comments/part_basic.php:2
+#: widgets/comments_28/part_basic.php:2
+#: widgets/rating/part_basic.php:2
+#: widgets/rating/part_filter.php:88
+#: widgets/rating_28/part_basic.php:2
+#: widgets/rating_28/part_filter.php:90
+#: widgets/top/part_basic.php:2
+#: widgets/top_28/part_basic.php:2
+msgid "Title"
+msgstr "Заголовок"
+
+#: options/multis/results_post.php:115
+#: options/articles.php:240
+#: options/articles.php:240
+msgid "View"
+msgstr "Перегляд"
+
+#: options/multis/results_post.php:117
+#: options/multis/sets.php:64
+#: options/articles.php:149
+msgid "Ratings"
+msgstr "Рейтинги"
+
+#: options/multis/results_post.php:118
+#: options/articles.php:150
+#: options/comments.php:81
+msgid "Total"
+msgstr "Усього"
+
+#: options/multis/results_set.php:17
+#: options/multis/sets.php:142
+msgid "Voters"
+msgstr "Голосуючі"
+
+#: options/multis/sets.php:47
+msgid "Add New Multi Rating Set"
+msgstr "Додати новий набір мультирейтингу"
+
+#: options/multis/sets.php:61
+msgid "Auto Insert"
+msgstr "Автоматично вставляти"
+
+#: options/multis/sets.php:66
+msgid "Statistics"
+msgstr "Статистика"
+
+#: options/multis/sets.php:160
+#: options/multis/sets.php:4
+msgid "Delete Selected"
+msgstr "Видалити обране"
+
+#: options/multis/sets.php:132
+#: options/multis/sets.php:141
+#: options/my/my_general.php:23
+#: options/categories.php:72
+msgid "Posts"
+msgstr "Записи"
+
+#: options/my/my_comments.php:1
+msgid "Votes for my comments"
+msgstr "Голоси за мої коментарі"
+
+#: options/my/my_general.php:16
+msgid "General Statistics"
+msgstr "Загальна статистика"
+
+#: options/my/my_general.php:19
+msgid "My votes overview"
+msgstr "Огляд моїх голосів"
+
+#: options/my/my_posts.php:1
+msgid "Votes for my posts"
+msgstr "Голоси за мої записи"
+
+#: options/my/my_voted.php:1
+msgid "My Latest 100 Votes"
+msgstr "Мої останні 100 голосів"
+
+#: options/settings/settings_administration.php:0
+msgid "Plugin Panels"
+msgstr "Панелі плагіну"
+
+#: options/settings/settings_administration.php:5
+msgid "Importing data for other rating plugins."
+msgstr "Імпортування даних для інших рейтингових плагінів."
+
+#: options/settings/settings_administration.php:7
+msgid "Uninstall and maintenance."
+msgstr "Видалення та супроводження."
+
+#: options/settings/settings_administration.php:11
+msgid "Export data and custom templates."
+msgstr "Експортувати дані та довільні шаблони."
+
+#: options/settings/settings_administration.php:13
+msgid "IP addresses managment."
+msgstr "Адміністрування IP-адрес."
+
+#: options/settings/settings_administration.php:19
+msgid "Other Settings"
+msgstr "Інші налаштування"
+
+#: options/settings/settings_administration.php:23
+msgid "Rows to display on plugin admin grids"
+msgstr "Рядки для відображення на плагіні адміністраторської таблиці"
+
+#: options/settings/settings_administration.php:36
+msgid "Update front page latest news feed."
+msgstr "Оновлювати стрічку новин на головній сторінці."
+
+#: options/settings/settings_advanced.php:3
+msgid "PHP is working in the safe mode. Plugin can't create folders for caching. You need to do it manually if you want to use cache."
+msgstr "PHP працює в безпечному режимі. Плагін не може створювати каталоги для кешування. Вам треба зробити це вручну, якщо хочете використовувати кеш."
+
+#: options/settings/settings_advanced.php:4
+msgid "For cache to work, plugin must be able to access cache folder. Plugin has tried to create folders needed and failed. Until you resolved this issue cache feature can't be used."
+msgstr "Для роботи кешування плагін має мати доступ до каталогу кешу. Плагін намагався створити необхідні каталоги, але нічого не вийшло. Доки Ви не вирішите цю проблему, кешування не працюватиме."
+
+#: options/settings/settings_advanced.php:5
+msgid "Either make <strong>wp-content</strong> folder writeable or create <strong>gd-star-rating</strong> folder in <strong>wp-content</strong> and make it writeable. Use 0755 chmod setting."
+msgstr "Зробіть каталог <strong>wp-content</strong> доступним для запису або створіть каталог <strong>gd-star-rating</strong> у каталозі <strong>wp-content</strong> та зробіть його доступним для запису. Використовуйте chmod 0755."
+
+#: options/settings/settings_advanced.php:10
+#: options/tools/tools_cleanup.php:1
+msgid "Cache"
+msgstr "Кеш"
+
+#: options/settings/settings_advanced.php:12
+msgid "Cache enabled."
+msgstr "Кеш увімкнено."
+
+#: options/settings/settings_advanced.php:14
+msgid "Force using of cache. This is usefull in some rare cases when PHP can't report writeability correct."
+msgstr "Вимушене використання кешу. Це корисно у деяких випадках, коли PHP не може звітувати правильно про можливість запису."
+
+#: options/settings/settings_advanced.php:16
+msgid "Enable auto cache cleanup."
+msgstr "Увімкнути автоочистку кеша."
+
+#: options/settings/settings_advanced.php:19
+msgid "Cleanup cache every"
+msgstr "Очищати кеш кожні"
+
+#: options/settings/settings_advanced.php:25
+msgid "Inline Debug Info"
+msgstr "Вбудована інформація дебага"
+
+#: options/settings/settings_advanced.php:27
+msgid "Add small block with essential debug info into each rating block."
+msgstr "Додати маленьки блок з важливої інформацією дебагу до кожного блоку рейтингу."
+
+#: options/settings/settings_advanced.php:29
+#: options/settings/settings_advanced.php:38
+msgid "Important"
+msgstr "Важливо"
+
+#: options/settings/settings_advanced.php:29
+msgid "I strongly recommend leaving this option active. It doesn't disrupt the page, it's hidden and very small."
+msgstr "Рекомендується залишити цю опцію активною. Це не порушить сторінку, вона прихована і дуже маленька."
+
+#: options/settings/settings_advanced.php:32
+msgid "Log Into File"
+msgstr "Логувати до файлу"
+
+#: options/settings/settings_advanced.php:34
+msgid "Log into file various debug information."
+msgstr "Логувати до файлу всіляку інформацію дебагу."
+
+#: options/settings/settings_advanced.php:36
+msgid "Save into debug file each WP Query executed."
+msgstr "Зберігати у дебажний файл кожну виконану WP Query."
+
+#: options/settings/settings_advanced.php:41
+msgid "Trend Calculations"
+msgstr "Вираховування тенденцій"
+
+#: options/settings/settings_advanced.php:45
+msgid "Calculate for last number of days"
+msgstr "Вирахувати за останні дні"
+
+#: options/settings/settings_advanced.php:49
+msgid "Calculate over how many days before"
+msgstr "Вирахувати на дні назад"
+
+#: options/settings/settings_advanced.php:55
+msgid "Bayesian Estimate Mean"
+msgstr "Бейєсівське математичне очікування"
+
+#: options/settings/settings_advanced.php:59
+msgid "Minimum votes required"
+msgstr "Необхідно мінімум голосів"
+
+#: options/settings/settings_advanced.php:63
+msgid "Mean vote rating across the whole report"
+msgstr "Значення голосу рейтингу у всьому звіті"
+
+#: options/settings/settings_advanced.php:38
+msgid "Plugin must have write access to a text file. Path to this file needs to be set in %s file."
+msgstr "Плагін повинен мати права на запис до текстового файлу. Шлях до цього файлу необхідно встановити у файлі %s."
+
+#: options/settings/settings_articles.php:25
+#: options/settings/settings_articles.php:199
+#: options/settings/settings_comments.php:25
+#: options/settings/settings_comments.php:213
+msgid "Number of stars"
+msgstr "Кількість зірочок"
+
+#: options/settings/settings_articles.php:42
+#: options/settings/settings_articles.php:218
+#: options/settings/settings_comments.php:42
+#: options/settings/settings_multis.php:33
+#: options/settings/settings_thumbs_articles.php:26
+#: options/settings/settings_thumbs_comments.php:26
+msgid "Rating header"
+msgstr "Заголовок рейтингу"
+
+#: options/settings/settings_articles.php:49
+#: options/settings/settings_comments.php:49
+#: options/settings/settings_thumbs_articles.php:33
+#: options/settings/settings_thumbs_comments.php:33
+msgid "Auto insert rating code"
+msgstr "Автовставлення коду рейтингу"
+
+#: options/settings/settings_articles.php:51
+#: options/settings/settings_thumbs_articles.php:35
+msgid "For individual posts."
+msgstr "Для окремих записів."
+
+#: options/settings/settings_articles.php:53
+#: options/settings/settings_thumbs_articles.php:37
+msgid "For individual pages."
+msgstr "Для окремих сторінок."
+
+#: options/settings/settings_articles.php:57
+#: options/settings/settings_thumbs_articles.php:41
+msgid "For posts displayed in Archives."
+msgstr "Для записів у архівах."
+
+#: options/settings/settings_articles.php:59
+#: options/settings/settings_thumbs_articles.php:43
+msgid "For posts displayed on Front Page."
+msgstr "Для записів на головній сторінці."
+
+#: options/settings/settings_articles.php:61
+#: options/settings/settings_thumbs_articles.php:45
+msgid "For posts displayed on Search results."
+msgstr "Для записів у результатах пошуку."
+
+#: options/settings/settings_articles.php:68
+#: options/settings/settings_comments.php:69
+#: options/settings/settings_thumbs_articles.php:52
+#: options/settings/settings_thumbs_comments.php:53
+msgid "Auto insert location"
+msgstr "Автовставлення місцезнаходження"
+
+#: options/settings/settings_articles.php:78
+#: options/settings/settings_comments.php:82
+#: options/settings/settings_multis.php:43
+#: options/settings/settings_thumbs_articles.php:62
+#: options/settings/settings_thumbs_comments.php:63
+msgid "Vote rule"
+msgstr "Правило голосування"
+
+#: options/settings/settings_articles.php:84
+#: options/settings/settings_comments.php:88
+#: options/settings/settings_multis.php:49
+#: options/settings/settings_thumbs_articles.php:68
+#: options/settings/settings_thumbs_comments.php:69
+msgid "Moderation rule"
+msgstr "Правило модерації"
+
+#: options/settings/settings_articles.php:94
+#: options/settings/settings_multis.php:59
+msgid "Time restriction"
+msgstr "Обмеження за часом"
+
+#: options/settings/settings_articles.php:99
+#: options/settings/settings_multis.php:64
+msgid "Countdown value"
+msgstr "Значення зворотнього відліку"
+
+#: options/settings/settings_articles.php:110
+#: options/settings/settings_articles.php:223
+#: options/settings/settings_comments.php:72
+#: options/settings/settings_comments.php:98
+#: options/settings/settings_multis.php:75
+msgid "Rating block CSS class"
+msgstr "CSS клас блоку рейтингу"
+
+#: options/settings/settings_articles.php:115
+#: options/settings/settings_comments.php:103
+#: options/settings/settings_multis.php:80
+msgid "Rating text CSS class"
+msgstr "CSS клас тексту рейтингу"
+
+#: options/settings/settings_articles.php:121
+#: options/settings/settings_comments.php:109
+#: options/settings/settings_multis.php:86
+msgid "Rating header CSS class"
+msgstr "CSS клас заголовку рейтингу"
+
+#: options/settings/settings_articles.php:126
+#: options/settings/settings_comments.php:114
+msgid "Rating stars CSS class"
+msgstr "CSS клас зірочок рейтингу"
+
+#: options/settings/settings_articles.php:135
+#: options/settings/settings_comments.php:123
+#: options/settings/settings_multis.php:100
+#: options/settings/settings_special.php:109
+#: options/settings/settings_thumbs_articles.php:78
+#: options/settings/settings_thumbs_comments.php:79
+msgid "Rating Template"
+msgstr "Шаблон рейтингу"
+
+#: options/settings/settings_articles.php:141
+#: options/settings/settings_comments.php:155
+msgid "Restrict"
+msgstr "Обмежити"
+
+#: options/settings/settings_articles.php:143
+msgid "Prevent article author to vote."
+msgstr "Не дозволяти автору статті голосувати."
+
+#: options/settings/settings_articles.php:143
+msgid "This is only for registered users."
+msgstr "Лише для зареєстрованих користувачів."
+
+#: options/settings/settings_articles.php:145
+#: options/settings/settings_comments.php:159
+msgid "Use logged data (IP) to prevent duplicate voting."
+msgstr "Використовувати залоговані дані (IP) для уникання повторного голосування."
+
+#: options/settings/settings_articles.php:147
+#: options/settings/settings_comments.php:161
+msgid "Use cookies to prevent duplicate voting."
+msgstr "Використовувати cookies для запобігання повторного голосування."
+
+#: options/settings/settings_articles.php:149
+#: options/settings/settings_comments.php:163
+msgid "Allow votes from user and visitor coming from same IP address."
+msgstr "Дозволити голосування користувачам та відвідувачам з одного IP."
+
+#: options/settings/settings_articles.php:152
+#: options/settings/settings_comments.php:166
+#: options/settings/settings_multis.php:120
+msgid "Vote Waiting Message"
+msgstr "Повідомлення про очікування"
+
+#: options/settings/settings_articles.php:156
+#: options/settings/settings_comments.php:170
+#: options/settings/settings_multis.php:124
+#: options/settings/settings_thumbs_articles.php:82
+#: options/settings/settings_thumbs_comments.php:83
+msgid "Animation indicator"
+msgstr "Анімаційний індикатор"
+
+#: options/settings/settings_articles.php:159
+#: options/settings/settings_comments.php:173
+#: options/settings/settings_multis.php:127
+#: options/gfx.php:61
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+#: options/settings/settings_articles.php:169
+#: options/settings/settings_comments.php:183
+#: options/settings/settings_multis.php:137
+msgid "Text to display"
+msgstr "Текст для показу"
+
+#: options/settings/settings_articles.php:174
+#: options/settings/settings_comments.php:188
+#: options/settings/settings_multis.php:142
+msgid "Additional CSS class"
+msgstr "Додатковий клас CSS"
+
+#: options/settings/settings_articles.php:180
+#: options/settings/settings_comments.php:194
+#: options/settings/settings_multis.php:148
+msgid "Hide text and show only animation image."
+msgstr "Сховати текст і показувати лише анімацію."
+
+#: options/settings/settings_comments.php:51
+#: options/settings/settings_thumbs_comments.php:35
+msgid "For comments for posts."
+msgstr "Для коментарів записів."
+
+#: options/settings/settings_comments.php:55
+#: options/settings/settings_thumbs_comments.php:39
+msgid "For comments for pages."
+msgstr "Для коментарів сторінок."
+
+#: options/settings/settings_comments.php:62
+#: options/settings/settings_thumbs_comments.php:46
+msgid "Enable auto insert regardless of the single page or post."
+msgstr "Автовставлення незалежно від того, запис чи сторінка."
+
+#: options/settings/settings_comments.php:129
+msgid "Aggregated Rating"
+msgstr "Зібраний рейтинг"
+
+#: options/settings/settings_comments.php:157
+msgid "Prevent comment author to vote."
+msgstr "Заборонити голосування автора коментаря."
+
+#: options/settings/settings_features.php:1
+msgid "Cache Support"
+msgstr "Підтримка кешу"
+
+#: options/settings/settings_features.php:3
+msgid "Activate support for cache plugins and dynamic loading of data."
+msgstr "Активує підтримку кешу плагінів та динамічного завантаження даних."
+
+#: options/settings/settings_features.php:5
+msgid "This options is designed for use with cache plugins, but it can be activated regardless of that. Ratings will be loaded dynamically using ajax."
+msgstr "Ця опція призначена для використання із кешом плагінів, але вона може бути активована незалежно від них. Рейтинги завантажуватимуться динамічно із використанням AJAX."
+
+#: options/settings/settings_features.php:8
+msgid "Plugin Features"
+msgstr "Можливості плагіну"
+
+#: options/settings/settings_features.php:13
+msgid "Time restriction for rating."
+msgstr "Обмеження за часом для рейтингу."
+
+#: options/settings/settings_features.php:15
+msgid "Moderation options and handling."
+msgstr "Параметри модерації та поведінки."
+
+#: options/settings/settings_features.php:17
+msgid "Multiple rating support."
+msgstr "Підтримка мультирейтингу."
+
+#: options/settings/settings_features.php:19
+msgid "Thumbs up/down rating support."
+msgstr "Підтримка карми."
+
+#: options/settings/settings_features.php:23
+msgid "Post And Page Review Rating."
+msgstr "Рейтинг оцінок записів та сторінок."
+
+#: options/settings/settings_features.php:25
+msgid "Comments Rating."
+msgstr "Рейтинг коментарів."
+
+#: options/settings/settings_features.php:27
+msgid "Comments Review Rating."
+msgstr "Рейтинг оцінок коментарів."
+
+#: options/settings/settings_features.php:29
+msgid "Show comments integration ratings on articles panel."
+msgstr "Показати рейтинги інтеграції коментарів на панелі статтей."
+
+#: options/settings/settings_features.php:34
+msgid "Expand WP Query with new rating specific sorting and filtering."
+msgstr "Розширити WP Query зновим рейтинговим специфічним сортуванням та фільтруванням."
+
+#: options/settings/settings_features.php:36
+msgid "Use graphics generator to generate and display static stars images."
+msgstr "Використовувати графічний генератор для генерування та відображення статичних зображень зірочок."
+
+#: options/settings/settings_features.php:38
+msgid "Prevent outside access to graphics generator. Graphics integrated into RSS is not affected."
+msgstr "Запобігати зовнішньому доступу до графічного генератора. Не діє на графіку, інтегровану в RSS."
+
+#: options/settings/settings_features.php:40
+msgid "This leeching prevention will only work if a referer is sent and your server is set up correctly with proper server name variable."
+msgstr "Антиліч буде працювати лише якщо надіслано джерело переходу і Ваш сервер налаштований правильно із вірною змінною імені серверу."
+
+#: options/settings/settings_features.php:43
+msgid "JS and CSS files"
+msgstr "Файли JS та CSS"
+
+#: options/settings/settings_features.php:45
+msgid "Link external CSS rating code, uncheck to embed all the CSS into the page."
+msgstr "Посилатися на зовнішній код CSS замість вбудовування усього коду в сторінку."
+
+#: options/settings/settings_features.php:47
+msgid "Link additional CSS file"
+msgstr "Посилатися на додатковий файл CSS"
+
+#: options/settings/settings_features.php:49
+msgid "Include opacity for some styles. If activated, it will break CSS 2.1 validation."
+msgstr "Включити прозорість для деяких стилів. Якщо активовано, це зламає перевірку CSS 2.1."
+
+#: options/settings/settings_features.php:51
+msgid "Auto cache of the main CSS file enabled."
+msgstr "Автокешування головного CSS-файлу увімкнено."
+
+#: options/settings/settings_features.php:54
+msgid "Percentages"
+msgstr "Відсотки"
+
+#: options/settings/settings_features.php:58
+msgid "No votes value"
+msgstr "Значення без голосів"
+
+#: options/settings/settings_features.php:63
+msgid "If you use percentage tag in templates, and there are not votes recorded, default percentage would be 0. Here you can set that to any other value between 0 and 100."
+msgstr "Якщо ви використовуєте тег відсотків у шаблонах, і немає записаних голосів, відсоток за змовчуванням буде 0. Тут ви можете виставити якесь інше значення між 0 та 100."
+
+#: options/settings/settings_features.php:66
+msgid "Charset"
+msgstr "Кодування"
+
+#: options/settings/settings_features.php:70
+msgid "Character encoding"
+msgstr "Кодування знаків"
+
+#: options/settings/settings_features.php:75
+msgid "For list of supported charsets visit: "
+msgstr "Для списку підтримуваних кодувань відвідайте:"
+
+#: options/settings/settings_features.php:78
+msgid "Search engines"
+msgstr "Пошукові движки"
+
+#: options/settings/settings_features.php:82
+msgid "Display this"
+msgstr "Відображувати це"
+
+#: options/settings/settings_features.php:85
+msgid "Plugin website URL block"
+msgstr "Блок URL вебсайту плагіна"
+
+#: options/settings/settings_features.php:86
+msgid "Plugin name and description"
+msgstr "Ім’я та опис плагіна"
+
+#: options/settings/settings_features.php:87
+msgid "Don't render rating block"
+msgstr "Не відображувати блок рейтингу"
+
+#: options/settings/settings_features.php:88
+msgid "Render normal rating block"
+msgstr "Відображувати нормальний блок рейтингу"
+
+#: options/settings/settings_features.php:94
+msgid "Plugin detects search engine BOT's and to save on the resources, there is no need to render whole rating block since it doesn't mean much to the search engine. You can select what plugin should do for BOT visits. Last option is not reccomended."
+msgstr ""
+"Плагін визначає ботів пошукових движків та задля збереження ресурсів не відображує для них цілий блок рейтингу, оскільки він не значить багато для пошукового движка. Ви можете обрати, що має робити плагін для відвідувань ботів. Останній параметр не "
+"рекомендується."
+
+#: options/settings/settings_features.php:97
+msgid "Internet Explorer"
+msgstr "Internet Explorer"
+
+#: options/settings/settings_features.php:99
+msgid "Use IE opacity fix for multi ratings."
+msgstr "Використовувати виправлення прозорості в IE для мультирейтингів."
+
+#: options/settings/settings_features.php:101
+msgid "Disable checking for IE6 and IE6 specific settings."
+msgstr "Вимкнути перевірку на IE6 та специфічні налаштування IE6."
+
+#: options/settings/settings_integration.php:1
+#: options/articles.php:152
+#: options/categories.php:71
+#: options/categories.php:200
+msgid "Comment Integration"
+msgstr "Інтеграція коментаря"
+
+#: options/settings/settings_integration.php:3
+msgid "Hide comment integrated rating block if the comment is in reply mode (WP 2.7 or newer only)."
+msgstr "Ховати інтегрований блок рейтингу, якщо коментар є відповіддю (лише для WP 2.7+)."
+
+#: options/settings/settings_integration.php:5
+msgid "Prevent saving more than one rating per user or visitor."
+msgstr "Запобігти зберіганню більше, ніж одного рейтингу на користувача чи відвідувача."
+
+#: options/settings/settings_integration.php:7
+msgid "Allow rating zero for standard rating vote from comment integration."
+msgstr "Дозволити нульовий рейтинг для стандартного рейтингового голосу з інтеграції коментаря."
+
+#: options/settings/settings_integration.php:9
+msgid "Allow rating zero for multis ratings vote from comment integration."
+msgstr "Дозволити нульовий рейтинг для мультирейтингового голосу з інтеграції коментаря."
+
+#: options/settings/settings_integration.php:11
+msgid "Be careful with zero's settings. This can break some other things, and is not recommended or supported."
+msgstr "Будьте обережними із нульовими налаштуваннями. Це може зламати деякі інші речі, тому не рекомендується та не підтримується."
+
+#: options/settings/settings_integration.php:14
+msgid "Dashboard"
+msgstr "Панель керування"
+
+#: options/settings/settings_integration.php:16
+msgid "Add widgets to the administration dashboard."
+msgstr "Додати віджети на адміністративну панель керування."
+
+#: options/settings/settings_integration.php:21
+msgid "Add widget with list of latest votes."
+msgstr "Додати віджет із списком останніх голосів."
+
+#: options/settings/settings_integration.php:24
+msgid "Votes to display:"
+msgstr "Показувати голоси:"
+
+#: options/settings/settings_integration.php:32
+msgid "Show thumbs for posts."
+msgstr "Показувати карму для записів."
+
+#: options/settings/settings_integration.php:34
+msgid "Show stars for posts."
+msgstr "Показувати зірочки для записів."
+
+#: options/settings/settings_integration.php:36
+msgid "Show multis for posts."
+msgstr "Показувати мультирейтинги для записів."
+
+#: options/settings/settings_integration.php:39
+msgid "Show thumbs for comments."
+msgstr "Показувати карму для коментарів."
+
+#: options/settings/settings_integration.php:41
+msgid "Show stars for comments."
+msgstr "Показувати зірочки для коментарів."
+
+#: options/settings/settings_integration.php:47
+msgid "Widgets"
+msgstr "Віджети"
+
+#: options/settings/settings_integration.php:49
+msgid "GD Star Rating: Post/Page rating widget."
+msgstr "Рейтинг зірочками GD: віджет рейтингу запису/сторінки."
+
+#: options/settings/settings_integration.php:51
+msgid "GD Blog Rating: Blog average rating."
+msgstr "Рейтинг блогу GD: Середній рейтинг блогу."
+
+#: options/settings/settings_integration.php:53
+msgid "GD Comments Rating: Per post comments rating."
+msgstr "Рейтинг коментарів GD: Рейтинг коментарів позаписово."
+
+#: options/settings/settings_integration.php:55
+msgid "Don't render the widget if there are no results to display."
+msgstr "Не виводити віджет за відсутності результату."
+
+#: options/settings/settings_integration.php:58
+msgid "Post Edit"
+msgstr "Редагувати запис"
+
+#: options/settings/settings_integration.php:60
+msgid "Add standard rating box in the post/page edit sidebar area."
+msgstr "Додати стандартний блок рейтингу до бокової панелі редагування запису/сторінки."
+
+#: options/settings/settings_integration.php:62
+msgid "Add multi ratings box in the post/page edit."
+msgstr "Додати блок мультирейтингу до редагування запису/сторінки."
+
+#: options/settings/settings_integration.php:64
+msgid "Add rating shortcode plugin into tinyMCE visual editor."
+msgstr "Додати плагін короткого коду рейтингу до візуального редактора tinyMCE ."
+
+#: options/settings/settings_multis.php:91
+msgid "Rating button CSS class"
+msgstr "CSS-клас кнопки рейтингу"
+
+#: options/settings/settings_multis.php:106
+msgid "Submit Button"
+msgstr "Кнопка надсилання"
+
+#: options/settings/settings_multis.php:110
+msgid "Button text"
+msgstr "Текст кнопки"
+
+#: options/settings/settings_multis.php:117
+msgid "Use submit button to send votes. If disabled, votes will be send once all block elements are rated."
+msgstr "Використовуйте кнопку надсилання для надсилання голосів. Якщо вимкнено, голоси будуть надіслані як тільки всі елементи блоку будуть оцінені."
+
+#: options/settings/settings_security.php:1
+msgid "Voting"
+msgstr "Голосування"
+
+#: options/settings/settings_security.php:3
+msgid "Use Nonce with AJAX for improved security."
+msgstr "Використовувати Nonce та AJAX для покращеної безпеки."
+
+#: options/settings/settings_security.php:5
+msgid "Use AJAX cross-domain calls. Enable only if your website URL is different from actual URL."
+msgstr "Використовувати крос-доменні виклики AJAX. Увімкніть, якщо адреса Вашого сайту відрізняється від самої адреси."
+
+#: options/settings/settings_security.php:7
+msgid "Use banned IP's lists to filter out visitors."
+msgstr "Використовувати списки забанених IP для фільтрації користувачів."
+
+#: options/settings/settings_security.php:9
+msgid "Don't even show rating stars to visitors comming from banned IP's."
+msgstr "Навіть не показувати зірочок рейтингу для користувачів із забаненим IP."
+
+#: options/settings/settings_security.php:12
+msgid "User Levels"
+msgstr "Рівні користувачів"
+
+#: options/settings/settings_security.php:16
+msgid "Required to show the dashboard widgets"
+msgstr "Необхідно для показу віджетів панелі керування"
+
+#: options/settings/settings_security.php:20
+msgid "Required to show IP's in widgets and my ratings"
+msgstr "Необхідно для показу IP у віджетах та моїх рейтингах"
+
+#: options/settings/settings_security.php:26
+msgid "Rating Log"
+msgstr "Лог рейтингу"
+
+#: options/settings/settings_security.php:28
+msgid "Log user agent (browser) information."
+msgstr "Лог інформації браузерів"
+
+#: options/settings/settings_security.php:30
+msgid "Save cookies with ratings."
+msgstr "Зберігати cookies з рейтингом."
+
+#: options/settings/settings_security.php:33
+msgid "Spider BOT's"
+msgstr "Боти павуків"
+
+#: options/settings/settings_security.php:41
+msgid "Each line must contain only one BOT name to ensure proper detection of search engines."
+msgstr "Кожен рядок має містити лише одне ім’я бота аби гарантувати правильне знаходження пошуковими машинами."
+
+#: options/settings/settings_security.php:47
+msgid "Plugin Update"
+msgstr "Оновлення плагіну"
+
+#: options/settings/settings_security.php:49
+msgid "Report basic usage data that will be used for statistical purposes only."
+msgstr "Поміщати у звіт дані про базове використання, які будуть використані лише для статичних цілей."
+
+#: options/settings/settings_security.php:51
+msgid "This report will include your WordPress version and website URL. Report will be sent only when plugin needs to be updated."
+msgstr "Цей звіт буде включати версію WordPress та URL веб-сайту. Звіт буде надсилатися лише тоді, коли плагіну необхідно оновлюватися."
+
+#: options/settings/settings_special.php:1
+msgid "Google Rich Snippets"
+msgstr "Google Rich Snippets"
+
+#: options/settings/settings_special.php:3
+msgid "Automatically Embed Google Rich Snippets."
+msgstr "Автоматично вбудовувати Google Rich Snippets."
+
+#: options/settings/settings_special.php:5
+msgid "Snippet will be renedered hidden on the page (style display set to none)."
+msgstr "Фрагменти будуть приховані на сторінці (стиль показу — none)."
+
+#: options/settings/settings_special.php:9
+#: options/settings/settings_special.php:65
+msgid "Data source"
+msgstr "Джерела даних"
+
+#: options/settings/settings_special.php:12
+#: options/settings/settings_special.php:68
+#: tinymce3/panels/general.php:36
+#: widgets/rating/part_basic.php:47
+#: widgets/rating_28/part_basic.php:48
+#: widgets/top/part_basic.php:27
+#: widgets/top_28/part_basic.php:27
+msgid "Standard Rating"
+msgstr "Стандартний рейтинг"
+
+#: options/settings/settings_special.php:13
+msgid "Standard Review"
+msgstr "Стандартна оцінка"
+
+#: options/settings/settings_special.php:21
+msgid "Embed format"
+msgstr "Вбудований формат"
+
+#: options/settings/settings_special.php:24
+msgid "Microformat"
+msgstr "Мікроформат"
+
+#: options/settings/settings_special.php:25
+msgid "Microdata"
+msgstr "Мікродані"
+
+#: options/settings/settings_special.php:26
+msgid "RDF"
+msgstr "RDF"
+
+#: options/settings/settings_special.php:32
+msgid "Thumbs ratings will be embeded as percentage ratings."
+msgstr "Карму буде вбудовано як відсоткові рейтинги."
+
+#: options/settings/settings_special.php:33
+msgid "If the post or page has no valid rating set, snippet code will not be embeded for that post or page."
+msgstr "Якщо запис чи сторінка не мають правильного набору рейтингу, snippet-код не буде вбудовано до цього запису чи сторінки."
+
+#: options/settings/settings_special.php:34
+msgid "To test snippet use Google testing tool"
+msgstr "Для тестування фрагменту використовуйте тестову утиліту Google"
+
+#: options/settings/settings_special.php:34
+msgid "Rich Snippets Testing Tool"
+msgstr "Тестова утиліта Rich Snippets"
+
+#: options/settings/settings_special.php:37
+msgid "Inserting"
+msgstr "Вставка"
+
+#: options/settings/settings_special.php:44
+msgid "Post content top"
+msgstr "Опублікувати початок вмісту"
+
+#: options/settings/settings_special.php:45
+msgid "Post content bottom"
+msgstr "Опублікувати кінець вмісту"
+
+#: options/settings/settings_special.php:46
+msgid "On Snippet action"
+msgstr "Дія на фрагмент"
+
+#: options/settings/settings_special.php:52
+msgid "If you select third option, Google Rich Snippet will be added using this action"
+msgstr "Якщо обрати третю опцію, Google Rich Snippet буде додано використовуючи цю дію"
+
+#: options/settings/settings_special.php:53
+msgid "Action will be added on single post or page only. Do action call must be within template body."
+msgstr "Дія буде додана до одного запису чи сторінки. Виклик дії повинен відбуватися із тіла шаблону."
+
+#: options/settings/settings_special.php:54
+msgid "This method is supported by all premium xScape Theme Framework based themes"
+msgstr "Цей метод підтримується усіма темами, базованими на xScape Theme Framework"
+
+#: options/settings/settings_special.php:54
+msgid "xScape themes on Dev4Press"
+msgstr "Теми xScape на Dev4Press"
+
+#: options/settings/settings_special.php:57
+msgid "RSS Feeds"
+msgstr "RSS-стрічки"
+
+#: options/settings/settings_special.php:59
+msgid "Add small 80x15 badge to posts in RSS feed."
+msgstr "Додати маленьку 80x15 іконку до записів у стрічці RSS."
+
+#: options/settings/settings_special.php:61
+msgid "Add ratings to posts in RSS feeds."
+msgstr "Додавати рейтинги до записів у стріці RSS."
+
+#: options/settings/settings_special.php:105
+msgid "Rating Header"
+msgstr "Заголовок рейтингу"
+
+#: options/settings/settings_thumbs_articles.php:5
+#: options/settings/settings_thumbs_comments.php:5
+#: widgets/rating/part_stars.php:33
+#: widgets/rating_28/part_stars.php:33
+msgid "Thumbs Set"
+msgstr "Набір карми"
+
+#: options/setup/setup_database.php:1
+#: options/setup/setup_database.php:5
+#: options/setup/setup_database.php:15
+#: options/setup.php:4
+#: options/setup.php:11
+msgid "Reinstall"
+msgstr "Перевстановити"
+
+#: options/setup/setup_database.php:4
+msgid "All database tables will be deleted, and installed again."
+msgstr "Усі таблиці бази даних будуть видалені та створені знову."
+
+#: options/setup/setup_database.php:7
+#: options/setup/setup_database.php:17
+#: options/setup/setup_database.php:27
+#: options/setup/setup_global.php:7
+#: options/setup/setup_uninstall.php:7
+msgid "This operation is not reversable. Backup your data if you want to be able to restore it later."
+msgstr "Дія незворотня. Створіть резервну копію даних, якщо хочете мати змогу потім їх відновити."
+
+#: options/setup/setup_database.php:11
+msgid "Reinstall Multi Ratings"
+msgstr "Перевстановити мультирейтинги"
+
+#: options/setup/setup_database.php:14
+msgid "Only multi ratings tables will be deleted, and installed again."
+msgstr "Лише таблиці мультирейтингів будуть видалені та встановлені знову."
+
+#: options/setup/setup_database.php:21
+#: options/setup/setup_database.php:25
+#: options/setup.php:28
+msgid "Reinstall Templates"
+msgstr "Перевстановити шаблони"
+
+#: options/setup/setup_database.php:24
+msgid "This will remove all saved templates for the plugin. Templates will be reseted to their default values."
+msgstr "Ця дія видалить усі збережені шаблони з плагіну. Шаблони будуть скинуті на значення за замовчуванням."
+
+#: options/setup/setup_global.php:1
+#: options/setup/setup_global.php:5
+#: options/setup.php:21
+msgid "Remove Settings"
+msgstr "Видалити налаштування"
+
+#: options/setup/setup_global.php:4
+msgid "This will remove all plugin settings and all the saved widgets."
+msgstr "Ця дія видалить усі налаштування плагіну та усі збережені віджети."
+
+#: options/setup/setup_global.php:11
+#: options/setup/setup_global.php:15
+#: options/setup.php:36
+msgid "Reset Imports"
+msgstr "Скинути імпорти"
+
+#: options/setup/setup_global.php:14
+msgid "This will reset all import flags for import data modules and will allow you to import again allready imported data."
+msgstr "Ця дія скине усі флаги імпорту для модулів імпорту даних і дасть змогу імпортувати знову вже імпортовані дані."
+
+#: options/setup/setup_uninstall.php:1
+msgid "Uninstall"
+msgstr "Деінсталювати"
+
+#: options/setup/setup_uninstall.php:4
+msgid "After removal, plugin will be disabled. All data recorded by the plugin will be lost"
+msgstr "Після видалення плагін буде вимкнено. Усі дані, записані плагіном, втратяться."
+
+#: options/tools/tools_bulk.php:2
+msgid "Date Based Post Locking"
+msgstr "Блокування записів за датою"
+
+#: options/tools/tools_bulk.php:7
+msgid "Lock posts older than"
+msgstr "Заблокувати записи, старіші, ніж"
+
+#: options/tools/tools_bulk.php:11
+msgid "Lock"
+msgstr "Заблокувати"
+
+#: options/tools/tools_bulk.php:13
+msgid "Previous Lock Date"
+msgstr "Попередня дата блокування"
+
+#: options/tools/tools_bulk.php:17
+msgid "Global Voting Rules Update"
+msgstr "Поновлення глобальних правил голосування"
+
+#: options/tools/tools_bulk.php:22
+msgid "Articles Stars"
+msgstr "Зірочки статей"
+
+#: options/tools/tools_bulk.php:41
+msgid "Articles Thumbs"
+msgstr "Карма статей"
+
+#: options/tools/tools_bulk.php:60
+msgid "Comments Stars"
+msgstr "Зірочки коментарів"
+
+#: options/tools/tools_bulk.php:79
+msgid "Comments Thumbs"
+msgstr "Карма коментарів"
+
+#: options/tools/tools_bulk.php:98
+msgid "This will update all posts and comments with previously saved ratings."
+msgstr "Ця дія поновить усі записи та коментарі із попередньо збереженими рейтингами."
+
+#: options/tools/tools_bulk.php:102
+msgid "Recalculate Multi Ratings Averages"
+msgstr "Перерахувати середні значення мультирейтингів"
+
+#: options/tools/tools_bulk.php:105
+msgid "If you change multi rating sets weight for the elements you can execute recaluculation of all average ratings saved. Select the set you want to recalculate for, or select all sets."
+msgstr "Якщо Ви зміните вагу елементів наборів мультирейтингів, Ви можете виконати перераховування усіх збережених середніх значень рейтингів. Оберіть набір для перераховування або оберіть усі набори."
+
+#: options/tools/tools_bulk.php:106
+msgid "Use this also if you update from versions before 1.2.0 and you had problems with saving multi rating results."
+msgstr "Використовуйте це також якщо Ви поновлюєтеся з версії, що передує 1.2.0 та якщо Ви мали проблеми із зберіганням результатів мультирейтингів."
+
+#: options/tools/tools_bulk.php:109
+msgid "Select multi set"
+msgstr "Обрати мультинабір"
+
+#: options/tools/tools_bulk.php:112
+msgid "All Sets"
+msgstr "Усі набори"
+
+#: options/tools/tools_bulk.php:118
+msgid "Recalculate"
+msgstr "Перерахувати"
+
+#: options/tools/tools_bulk.php:120
+msgid "Depending on the number of posts, this operation can take a while to complete. Be patient."
+msgstr "Залежно від кількості записів ця дія може забрати деякий час. Почекайте."
+
+#: options/tools/tools_bulk.php:124
+msgid "Update Multi Rating Votes Log"
+msgstr "Поновлювати лог голосів мультирейтингу"
+
+#: options/tools/tools_bulk.php:127
+msgid "This tool will update votes log and recalculate average value for each multi ratings votes."
+msgstr "Цей інструмент поновить лог голосів та перерахує середні значення кожного голосу мультирейтингу."
+
+#: options/tools/tools_bulk.php:130
+msgid "You need to do only once."
+msgstr "Вам треба зробити це лише раз."
+
+#: options/tools/tools_cleanup.php:4
+msgid "Delete all cached files from folder"
+msgstr "Видалити усі кешовані файли із каталогу"
+
+#: options/tools/tools_cleanup.php:5
+#: options/tools/tools_cleanup.php:18
+#: options/tools/tools_db.php:22
+msgid "Clean"
+msgstr "Очистити"
+
+#: options/tools/tools_cleanup.php:7
+#: options/tools/tools_db.php:7
+#: options/tools/tools_db.php:24
+msgid "Last cleanup was executed on"
+msgstr "Остання чистка виконувалася"
+
+#: options/tools/tools_cleanup.php:9
+msgid "Total files cached"
+msgstr "Усього файлів кешовано"
+
+#: options/tools/tools_cleanup.php:11
+msgid "Total size of cached files"
+msgstr "Загальний розмір кешованих файлів"
+
+#: options/tools/tools_cleanup.php:14
+msgid "Debug"
+msgstr "Дебаг"
+
+#: options/tools/tools_cleanup.php:17
+msgid "Empty the debug file"
+msgstr "Спорожнити файл дебагу"
+
+#: options/tools/tools_cleanup.php:21
+msgid "Total size of debug file"
+msgstr "Загальний розмір файлу дебагу"
+
+#: options/tools/tools_db.php:1
+#: options/tools/tools_db.php:5
+msgid "Upgrade"
+msgstr "Поновлення"
+
+#: options/tools/tools_db.php:4
+msgid "Try to upgrade plugin tables. This is performed automatically after each plugin upgrade, but you can use this tool also."
+msgstr "Спробуйте поновити таблиці плагіну. Ця дія виконується автоматично після кожного поновлення плагіну, але Ви також можете використати цей інструмент."
+
+#: options/tools/tools_db.php:11
+#: options/tools.php:7
+msgid "Cleanup"
+msgstr "Чистка"
+
+#: options/tools/tools_db.php:14
+msgid "Remove all invalid votes from votes log."
+msgstr "Видалити усі невірні голоси з логу голосів."
+
+#: options/tools/tools_db.php:16
+msgid "Remove all invalid votes from trends log."
+msgstr "Видалити усі невірні голоси з логу тенденцій."
+
+#: options/tools/tools_db.php:18
+msgid "Remove data for old and deleted posts and comments."
+msgstr "Видалити дані старих та видалених записів та коментарів."
+
+#: options/tools/tools_db.php:20
+msgid "Remove data for old and deleted multi ratings."
+msgstr "Видалити дані старих та видалених мультирейтингів."
+
+#: options/tools/tools_db.php:25
+msgid "Cleanup summary"
+msgstr "Звіт про очистку"
+
+#: options/tools/tools_editcss.php:21
+msgid "Save"
+msgstr "Зберегти"
+
+#: options/tools/tools_editcss.php:6
+msgid "File is not writeable and can't be saved through this form."
+msgstr "Файл не доступний для запису і не може бути збережений з цієї форми."
+
+#: options/tools/tools_editcss.php:11
+msgid "Additional CSS file not found"
+msgstr "Додатковий CSS-файл не знайдено"
+
+#: options/articles.php:141
+msgid "Title &amp; Categories"
+msgstr "Заголовки та категорії"
+
+#: options/articles.php:144
+msgid "Time"
+msgstr "Час"
+
+#: options/articles.php:187
+#: options/articles.php:208
+#: options/categories.php:85
+msgid "date limit"
+msgstr "ліміт за датою"
+
+#: options/articles.php:190
+#: options/articles.php:211
+#: options/categories.php:89
+msgid "countdown"
+msgstr "зворотній відлік"
+
+#: options/articles.php:203
+#: options/articles.php:224
+#: options/categories.php:103
+msgid "no limit"
+msgstr "без ліміту"
+
+#: options/articles.php:238
+#: options/articles.php:238
+msgid "Chart"
+msgstr "Діаграма"
+
+#: options/articles.php:239
+#: options/articles.php:239
+msgid "Edit"
+msgstr "Редагувати"
+
+#: options/articles.php:243
+#: options/users_log.php:112
+msgid "Post"
+msgstr "Запис"
+
+#: options/articles.php:244
+msgid "Page"
+msgstr "Сторінка"
+
+#: options/articles.php:245
+msgid "Views"
+msgstr "Перегляди"
+
+#: options/builder.php:6
+msgid "Shortcode/Functions"
+msgstr "Короткий код/Функції"
+
+#: options/categories.php:62
+#: tinymce3/panels/filter.php:22
+msgid "Category"
+msgstr "Категорія"
+
+#: options/categories.php:68
+msgid "Time Restrictions"
+msgstr "Обмеження за часом"
+
+#: options/categories.php:119
+msgid "inhert from parent"
+msgstr "успадкувати від батька"
+
+#: options/categories.php:122
+msgid "standard"
+msgstr "стандартно"
+
+#: options/categories.php:123
+msgid "multis"
+msgstr "мульти"
+
+#: options/categories.php:124
+msgid "inactive"
+msgstr "неактивно"
+
+#: options/charts.php:1
+msgid "Charts"
+msgstr "Діаграми"
+
+#: options/charts.php:6
+msgid "Articles (Posts And Pages)"
+msgstr "Статті (записи та сторінки)"
+
+#: options/comments.php:32
+msgid "Comments for post"
+msgstr "Коментарі для записів"
+
+#: options/comments.php:76
+msgid "Comment"
+msgstr "Коментар"
+
+#: options/comments.php:77
+#: options/moderation.php:102
+msgid "User"
+msgstr "Користувач"
+
+#: options/comments.php:78
+#: options/moderation.php:101
+msgid "Date And Time"
+msgstr "Дата і час"
+
+#: options/comments.php:120
+#: options/voters.php:168
+msgid "With selected"
+msgstr "Із обраним"
+
+#: options/export.php:1
+msgid "Export Data"
+msgstr "Експортувати дані"
+
+#: options/export.php:6
+msgid "Users Data"
+msgstr "Дані користувачів"
+
+#: options/gfx.php:1
+#: options/settings.php:30
+msgid "Settings saved."
+msgstr "Налаштування збережені."
+
+#: options/gfx.php:79
+#: options/settings.php:86
+msgid "Save Settings"
+msgstr "Зберегти налаштування"
+
+#: options/import.php:8
+#: options/import.php:15
+#: options/import.php:22
+msgid "Data import completed."
+msgstr "Імпорт даних завершено."
+
+#: options/import.php:28
+#: options/import.php:59
+#: options/import.php:84
+#: options/import.php:143
+#: options/import.php:4
+#: options/import.php:11
+#: options/import.php:18
+msgid "Import Data"
+msgstr "Імпортувати дані"
+
+#: options/import.php:42
+#: options/import.php:67
+#: options/import.php:92
+msgid "Plugin URL"
+msgstr "Посилання на плагін"
+
+#: options/import.php:47
+#: options/import.php:72
+#: options/import.php:97
+msgid "Author URL"
+msgstr "Посилання автора"
+
+#: options/import.php:52
+#: options/import.php:77
+#: options/import.php:136
+#: options/users_log.php:109
+msgid "Status"
+msgstr "Статус"
+
+#: options/import.php:102
+msgid "Instructions"
+msgstr "Інструкції"
+
+#: options/import.php:105
+msgid "For each value you have a name of the variable from plugin file in square brackets."
+msgstr "Для кодного значення є ім’я змінної із файлу плагіну у квадратних дужках."
+
+#: options/import.php:106
+msgid "Plugin could save data in post meta table or only in the post using shortcodes. Import can try both, but if you are usre that ratings are stored in post meta table, use that option."
+msgstr ""
+"Плагін може зберегти дані у метатаблиці запису або лише у записі, використовуючи короткий код. Імпортування може спробувати і те, і те, але якщо Ви використовуєте рейтинги, які зберігаються у метатаблиці запису, використовуйте цю "
+"опцію."
+
+#: options/import.php:109
+msgid "Import Settings"
+msgstr "Налаштування імпорту"
+
+#: options/import.php:113
+msgid "Maximum review value"
+msgstr "Максимальне значення оцінки"
+
+#: options/import.php:119
+msgid "Meta Key"
+msgstr "Метаключ"
+
+#: options/import.php:125
+msgid "Try Importing from"
+msgstr "Спробувати імпортувати з"
+
+#: options/import.php:128
+msgid "Posts meta table"
+msgstr "Метатаблиця записів"
+
+#: options/import.php:129
+msgid "Posts contents only"
+msgstr "Лише зміст записів"
+
+#: options/import.php:130
+msgid "Both contents and meta"
+msgstr "Зміст і метадані"
+
+#: options/import.php:149
+msgid "To avoid rating data import problems, please don't use GD Star Rating in the same time as the plugins above, to avoid potential import problems and false data. I can't guarantee that data will be transfered without problems."
+msgstr "Для уникання проблем імпорту даних рейтингу не використовуйте GD Star Rating одночасно з плагінами вище. Передача даних без проблем не гарантується."
+
+#: options/import.php:104
+msgid "You need to enter few settings for this plugin. This can be found in the plugin's main and only PHP file: %s"
+msgstr "Вам необхідно ввести деякі налаштування цього плагіну. Це може бути зроблене у головному та єдиному PHP-файлі: %s"
+
+#: options/ips.php:73
+msgid "Ban New"
+msgstr "Забанити нового"
+
+#: options/ips.php:74
+msgid "Banned"
+msgstr "Забанений"
+
+#: options/moderation.php:134
+msgid "With Selected"
+msgstr "Із обраним"
+
+#: options/moderation.php:137
+msgid "Approve"
+msgstr "Схвалити"
+
+#: options/settings.php:41
+msgid "Features"
+msgstr "Можливості"
+
+#: options/settings.php:42
+msgid "Security"
+msgstr "Безпека"
+
+#: options/settings.php:43
+msgid "Advanced"
+msgstr "Просунуті налаштування"
+
+#: options/settings.php:44
+msgid "Integration"
+msgstr "Інтеграція"
+
+#: options/settings.php:50
+msgid "Special"
+msgstr "Спеціально"
+
+#: options/setup.php:8
+msgid "Database tables reinstalled."
+msgstr "Таблиці бази даних перевстановлені."
+
+#: options/setup.php:18
+msgid "Multi rating tables reinstalled."
+msgstr "Таблиці мультирейтингу перевстановлені."
+
+#: options/setup.php:25
+msgid "Settings are removed from WordPress installation."
+msgstr "Налаштування видалені із встановлення WordPress."
+
+#: options/setup.php:33
+msgid "Plugins default templates are reinstalled."
+msgstr "Шаблони плагіна за змовчуванням перевстановлені."
+
+#: options/setup.php:38
+msgid "Import Information is reseted."
+msgstr "Інформація імпорту скинута."
+
+#: options/setup.php:44
+msgid "Are you sure? Operation is not reversible."
+msgstr "Ви впевнені? Операція незворотня."
+
+#: options/setup.php:51
+msgid "Database Maintenance"
+msgstr "Супроводження бази даних "
+
+#: options/setup.php:52
+msgid "Global Maintenance"
+msgstr "Глобальне супроводження"
+
+#: options/setup.php:53
+msgid "Full Uninstall"
+msgstr "Повна деінсталляція"
+
+#: options/templates.php:25
+msgid "Templates"
+msgstr "Шаблони"
+
+#: options/tools.php:5
+msgid "Bulk"
+msgstr "Об’єм"
+
+#: options/tools.php:6
+msgid "Database"
+msgstr "База даних"
+
+#: options/tools.php:8
+msgid "Edit CSS"
+msgstr "Редагувати CSS"
+
+#: options/users.php:60
+msgid "Email"
+msgstr "Електропошта"
+
+#: options/users.php:61
+msgid "Thumbs Articles"
+msgstr "Статті з кармою"
+
+#: options/users.php:62
+msgid "Thumbs Comments"
+msgstr "Коментарі з кармою"
+
+#: options/users.php:63
+msgid "Ratings Articles"
+msgstr "Статті з рейтингами"
+
+#: options/users.php:64
+msgid "Ratings Comments"
+msgstr "Коментарі з рейтингами"
+
+#: options/users.php:32
+msgid "Visitor"
+msgstr "Відвідувачі"
+
+#: options/users.php:109
+#: options/users.php:114
+#: options/users.php:119
+#: options/users.php:124
+msgid "unique ip's"
+msgstr "унікальні ip"
+
+#: options/users_log.php:82
+msgid "User Vote Log"
+msgstr "Лог голосування користувача"
+
+#: options/users_log.php:85
+msgid "Votes log for user"
+msgstr "Лог голосів користувача"
+
+#: options/users_log.php:88
+msgid "Votes log for visitors"
+msgstr "Лог голосів відвідувачів"
+
+#: options/users_log.php:94
+#: options/voters.php:101
+msgid "All Votes"
+msgstr "Усі голоси"
+
+#: options/users_log.php:110
+#: options/voters.php:132
+msgid "Vote Date"
+msgstr "Дата голосування"
+
+#: options/users_log.php:114
+msgid "Comment Author"
+msgstr "Автор коментаря"
+
+#: options/users_log.php:115
+msgid "Comment Excerpt"
+msgstr "Витяг з коментаря"
+
+#: options/users_log.php:186
+msgid "Add selected IP's to ban IP's list."
+msgstr "Додати обрані IP до списку забанених."
+
+#: options/users_log.php:199
+msgid "Only Invalid"
+msgstr "Лише неправильні"
+
+#: options/users_log.php:200
+#: options/voters.php:175
+msgid "From Log Only"
+msgstr "Лише з логу"
+
+#: options/users_log.php:201
+#: options/voters.php:174
+msgid "Full Delete"
+msgstr "Повне видалення"
+
+#: options/voters.php:86
+msgid "Vote log for post"
+msgstr "Лог голосування запису"
+
+#: tinymce3/panels/articlesrater.php:2
+#: tinymce3/panels/thumbsrating.php:2
+msgid "StarRater will render actual rating block if you choose not to have it automatically inserted. This way you can position it wherever you want in the contnents."
+msgstr "StarRater виведе блок актуального рейтингу, якщо Ви обрали не вставляти його автоматично. Таким чином Ви можене розмістити його де хочете у змісті."
+
+#: tinymce3/panels/articlesrater.php:12
+#: tinymce3/panels/multis.php:21
+#: tinymce3/panels/thumbsrating.php:12
+msgid "Display rating block as read only."
+msgstr "Показувати блок рейтингу лише для читання."
+
+#: tinymce3/panels/articlesrater.php:16
+#: tinymce3/panels/styles.php:57
+msgid "Rating Stars"
+msgstr "Зірочки рейтингу"
+
+#: tinymce3/panels/articlesreview.php:1
+msgid "Articles Review Rating"
+msgstr "Рейтинг оцінок статтей"
+
+#: tinymce3/panels/articlesreview.php:2
+msgid "StarReview will render stars representing review value assigned to the post or page."
+msgstr "StarReview виведе зірочки на основі значення оцінки запису чи сторінки."
+
+#: tinymce3/panels/articlesreview.php:11
+#: tinymce3/panels/general.php:30
+#: tinymce3/panels/multisreview.php:21
+msgid "Source"
+msgstr "Джерело"
+
+#: tinymce3/panels/articlesreview.php:14
+#: tinymce3/panels/multisreview.php:24
+msgid "Post ID"
+msgstr "ID запису"
+
+#: tinymce3/panels/articlesreview.php:21
+#: tinymce3/panels/styles.php:77
+msgid "Review Stars"
+msgstr "Зірочки оцінок"
+
+#: tinymce3/panels/blograting.php:9
+#: widgets/top/part_filter.php:13
+#: widgets/top_28/part_filter.php:13
+msgid "Include Articles"
+msgstr "Увімкнути статті"
+
+#: tinymce3/panels/blograting.php:12
+#: tinymce3/panels/filter.php:7
+msgid "Posts And Pages"
+msgstr "Записи та сторінки"
+
+#: tinymce3/panels/blograting.php:13
+#: tinymce3/panels/filter.php:8
+#: widgets/rating/part_filter.php:17
+#: widgets/top/part_filter.php:17
+#: widgets/top_28/part_filter.php:17
+msgid "Posts Only"
+msgstr "Лише записи"
+
+#: tinymce3/panels/blograting.php:14
+#: tinymce3/panels/filter.php:9
+#: widgets/rating/part_filter.php:18
+#: widgets/top/part_filter.php:18
+#: widgets/top_28/part_filter.php:18
+msgid "Pages Only"
+msgstr "Лише сторінки"
+
+#: tinymce3/panels/blograting.php:19
+#: widgets/comments/part_filter.php:13
+#: widgets/comments_28/part_filter.php:13
+#: widgets/top/part_filter.php:24
+#: widgets/top_28/part_filter.php:24
+msgid "Display Votes From"
+msgstr "Показувати голоси із"
+
+#: tinymce3/panels/blograting.php:21
+#: tinymce3/panels/commentsaggr.php:16
+#: tinymce3/panels/filter.php:16
+#: widgets/comments/part_basic.php:16
+#: widgets/comments/part_filter.php:16
+#: widgets/comments_28/part_basic.php:16
+#: widgets/comments_28/part_filter.php:16
+#: widgets/rating/part_basic.php:15
+#: widgets/rating/part_filter.php:27
+#: widgets/rating_28/part_basic.php:16
+#: widgets/rating_28/part_filter.php:29
+#: widgets/top/part_basic.php:16
+#: widgets/top/part_filter.php:27
+#: widgets/top_28/part_basic.php:16
+#: widgets/top_28/part_filter.php:27
+msgid "Everyone"
+msgstr "Усі"
+
+#: tinymce3/panels/blograting.php:23
+#: tinymce3/panels/commentsaggr.php:18
+#: tinymce3/panels/filter.php:18
+#: widgets/comments/part_basic.php:18
+#: widgets/comments/part_filter.php:18
+#: widgets/comments_28/part_basic.php:18
+#: widgets/comments_28/part_filter.php:18
+#: widgets/rating/part_basic.php:17
+#: widgets/rating/part_filter.php:29
+#: widgets/rating_28/part_basic.php:18
+#: widgets/rating_28/part_filter.php:31
+#: widgets/top/part_basic.php:18
+#: widgets/top/part_filter.php:29
+#: widgets/top_28/part_basic.php:18
+#: widgets/top_28/part_filter.php:29
+msgid "Users Only"
+msgstr "Лише користувачі"
+
+#: tinymce3/panels/commentsaggr.php:1
+msgid "Aggregated Comments Ratings"
+msgstr "Зібрані рейтинги коментарів"
+
+#: tinymce3/panels/commentsaggr.php:2
+msgid "This will render aggregated comments rating for the post."
+msgstr "Ця дія виведе зібраний рейтинг коментарів запису."
+
+#: tinymce3/panels/commentsaggr.php:14
+msgid "Calculate Votes From"
+msgstr "Підрахувати голоси від"
+
+#: tinymce3/panels/filter.php:1
+msgid "Basic"
+msgstr "Базове"
+
+#: tinymce3/panels/filter.php:4
+#: widgets/rating/part_filter.php:13
+msgid "Include articles"
+msgstr "Включати статті"
+
+#: tinymce3/panels/filter.php:14
+#: widgets/rating/part_filter.php:24
+#: widgets/rating_28/part_filter.php:26
+msgid "Display votes from"
+msgstr "Відображувати голоси від"
+
+#: tinymce3/panels/filter.php:26
+#: widgets/rating/part_filter.php:52
+#: widgets/rating_28/part_filter.php:54
+msgid "Minimum votes"
+msgstr "Мінімум голосів"
+
+#: tinymce3/panels/filter.php:30
+msgid "Excerpt words"
+msgstr "Слова витягу"
+
+#: tinymce3/panels/filter.php:37
+msgid "Grouping Specific"
+msgstr "Специфіка групування"
+
+#: tinymce3/panels/filter.php:40
+#: widgets/rating/part_filter.php:65
+#: widgets/rating_28/part_filter.php:67
+msgid "Minimum posts count"
+msgstr "Мінімальна кількість записів"
+
+#: tinymce3/panels/filter.php:47
+msgid "Sorting"
+msgstr "Сортування"
+
+#: tinymce3/panels/filter.php:50
+msgid "Column"
+msgstr "Колонка"
+
+#: tinymce3/panels/filter.php:54
+#: widgets/comments/part_filter.php:47
+#: widgets/comments_28/part_filter.php:47
+#: widgets/rating/part_filter.php:86
+#: widgets/rating_28/part_filter.php:88
+msgid "Total Votes"
+msgstr "Усього голосів"
+
+#: tinymce3/panels/filter.php:58
+#: widgets/rating/part_filter.php:90
+#: widgets/rating_28/part_filter.php:92
+msgid "Count"
+msgstr "Кількість"
+
+#: tinymce3/panels/filter.php:59
+#: widgets/rating/part_filter.php:91
+#: widgets/rating_28/part_filter.php:93
+msgid "Bayesian Rating"
+msgstr "Бейєсівський рейтинг"
+
+#: tinymce3/panels/filter.php:64
+msgid "Order"
+msgstr "Порядок"
+
+#: tinymce3/panels/filter.php:67
+#: widgets/comments/part_filter.php:57
+#: widgets/comments_28/part_filter.php:57
+#: widgets/rating/part_filter.php:100
+#: widgets/rating_28/part_filter.php:102
+msgid "Descending"
+msgstr "По спадаючій"
+
+#: tinymce3/panels/filter.php:68
+#: widgets/comments/part_filter.php:58
+#: widgets/comments_28/part_filter.php:58
+#: widgets/rating/part_filter.php:101
+#: widgets/rating_28/part_filter.php:103
+msgid "Ascending"
+msgstr "По зростаючій"
+
+#: tinymce3/panels/filter.php:76
+msgid "Last Voted"
+msgstr "Останній голос"
+
+#: tinymce3/panels/filter.php:77
+#: widgets/rating/part_filter.php:146
+#: widgets/rating_28/part_filter.php:148
+msgid "Use only articles voted for in last # days."
+msgstr "Використовувати тільки статті, за які голосували останні # днів."
+
+#: tinymce3/panels/filter.php:80
+#: widgets/comments/part_filter.php:77
+#: widgets/comments_28/part_filter.php:77
+#: widgets/rating/part_filter.php:151
+#: widgets/rating_28/part_filter.php:153
+msgid "Enter 0 for all"
+msgstr "Ввести 0 для всіх"
+
+#: tinymce3/panels/filter.php:90
+msgid "Publish Date"
+msgstr "Дата публікації"
+
+#: tinymce3/panels/filter.php:93
+#: widgets/rating/part_filter.php:168
+#: widgets/rating_28/part_filter.php:170
+msgid "Last # days"
+msgstr "Останні # днів"
+
+#: tinymce3/panels/filter.php:94
+#: widgets/rating/part_filter.php:169
+#: widgets/rating_28/part_filter.php:171
+msgid "Exact month"
+msgstr "Точний місяць"
+
+#: tinymce3/panels/filter.php:95
+#: widgets/rating/part_filter.php:170
+#: widgets/rating_28/part_filter.php:172
+msgid "Date range"
+msgstr "Період між датами"
+
+#: tinymce3/panels/filter.php:103
+#: widgets/rating/part_filter.php:179
+#: widgets/rating_28/part_filter.php:181
+msgid "Number Of Days"
+msgstr "Кількість днів"
+
+#: tinymce3/panels/filter.php:113
+#: widgets/rating/part_filter.php:190
+#: widgets/rating_28/part_filter.php:192
+msgid "Month"
+msgstr "Місяць"
+
+#: tinymce3/panels/filter.php:123
+#: widgets/rating/part_filter.php:201
+#: widgets/rating_28/part_filter.php:203
+msgid "Range"
+msgstr "Діапазон"
+
+#: tinymce3/panels/general.php:1
+msgid "Display"
+msgstr "Відображення"
+
+#: tinymce3/panels/general.php:4
+msgid "Number Of Posts"
+msgstr "Кількість записів"
+
+#: tinymce3/panels/general.php:8
+#: widgets/rating/part_basic.php:23
+#: widgets/rating_28/part_basic.php:24
+msgid "Items Grouping"
+msgstr "Групування пунктів"
+
+#: tinymce3/panels/general.php:11
+#: widgets/rating/part_basic.php:26
+#: widgets/rating_28/part_basic.php:27
+msgid "No grouping"
+msgstr "Без групування"
+
+#: tinymce3/panels/general.php:12
+#: widgets/rating/part_basic.php:27
+#: widgets/rating_28/part_basic.php:28
+msgid "User based"
+msgstr "За користувачами"
+
+#: tinymce3/panels/general.php:13
+#: widgets/rating/part_basic.php:28
+#: widgets/rating_28/part_basic.php:29
+msgid "Category based"
+msgstr "За категоріями"
+
+#: tinymce3/panels/general.php:14
+#: widgets/rating/part_basic.php:29
+#: widgets/rating_28/part_basic.php:30
+msgid "Taxonomy based"
+msgstr "На таксономії"
+
+#: tinymce3/panels/general.php:22
+#: widgets/rating/part_basic.php:37
+#: widgets/rating_28/part_basic.php:38
+msgid "Taxonomy"
+msgstr "Таксономія"
+
+#: tinymce3/panels/general.php:33
+#: widgets/rating/part_basic.php:44
+#: widgets/rating_28/part_basic.php:45
+#: widgets/top/part_basic.php:24
+#: widgets/top_28/part_basic.php:24
+msgid "Data Source"
+msgstr "Джерело даних"
+
+#: tinymce3/panels/general.php:54
+#: widgets/rating/part_trend.php:4
+#: widgets/rating/part_trend.php:12
+#: widgets/rating_28/part_trend.php:4
+#: widgets/rating_28/part_trend.php:12
+msgid "Trend"
+msgstr "Тенденція"
+
+#: tinymce3/panels/general.php:57
+#: widgets/rating/part_trend.php:13
+#: widgets/rating_28/part_trend.php:13
+msgid "Rating trend display as"
+msgstr "Показувати тенденцію як"
+
+#: tinymce3/panels/general.php:60
+#: tinymce3/panels/general.php:97
+#: widgets/rating/part_trend.php:16
+#: widgets/rating/part_trend.php:54
+#: widgets/rating_28/part_trend.php:16
+#: widgets/rating_28/part_trend.php:54
+msgid "Text"
+msgstr "Текст"
+
+#: tinymce3/panels/general.php:61
+#: tinymce3/panels/general.php:98
+#: widgets/rating/part_image.php:4
+#: widgets/rating/part_image.php:12
+#: widgets/rating/part_trend.php:17
+#: widgets/rating/part_trend.php:55
+#: widgets/rating_28/part_image.php:4
+#: widgets/rating_28/part_image.php:12
+#: widgets/rating_28/part_trend.php:17
+#: widgets/rating_28/part_trend.php:55
+msgid "Image"
+msgstr "Зображення"
+
+#: tinymce3/panels/general.php:69
+#: tinymce3/panels/general.php:106
+#: widgets/rating/part_trend.php:26
+#: widgets/rating/part_trend.php:64
+#: widgets/rating_28/part_trend.php:26
+#: widgets/rating_28/part_trend.php:64
+msgid "Up"
+msgstr "Нагору"
+
+#: tinymce3/panels/general.php:72
+#: tinymce3/panels/general.php:109
+#: widgets/rating/part_trend.php:28
+#: widgets/rating/part_trend.php:66
+#: widgets/rating_28/part_trend.php:28
+#: widgets/rating_28/part_trend.php:66
+msgid "Equal"
+msgstr "Рівно"
+
+#: tinymce3/panels/general.php:75
+#: tinymce3/panels/general.php:112
+#: widgets/rating/part_trend.php:30
+#: widgets/rating/part_trend.php:68
+#: widgets/rating_28/part_trend.php:30
+#: widgets/rating_28/part_trend.php:68
+msgid "Down"
+msgstr "Донизу"
+
+#: tinymce3/panels/general.php:83
+#: tinymce3/panels/general.php:120
+#: widgets/rating/part_trend.php:39
+#: widgets/rating/part_trend.php:77
+#: widgets/rating_28/part_trend.php:39
+#: widgets/rating_28/part_trend.php:77
+msgid "Image set"
+msgstr "Набір зображень"
+
+#: tinymce3/panels/general.php:94
+#: widgets/rating/part_trend.php:51
+#: widgets/rating_28/part_trend.php:51
+msgid "Voting trend display as"
+msgstr "Показувати тенденцію голосування як"
+
+#: tinymce3/panels/general.php:132
+msgid "Hiding"
+msgstr "Ховати"
+
+#: tinymce3/panels/general.php:133
+#: widgets/rating/part_filter.php:108
+#: widgets/rating_28/part_filter.php:110
+msgid "Bayesian minumum votes required."
+msgstr "Необхідний бейєсівський мінімум голосів."
+
+#: tinymce3/panels/general.php:134
+#: widgets/comments_28/part_filter.php:65
+#: widgets/rating/part_filter.php:114
+#: widgets/rating_28/part_filter.php:116
+msgid "Hide articles with no recorded votes."
+msgstr "Ховати статті без записаних голосів."
+
+#: tinymce3/panels/general.php:135
+#: widgets/rating/part_filter.php:120
+#: widgets/rating_28/part_filter.php:122
+msgid "Hide articles with no review values."
+msgstr "Ховати статті без значень оцінки."
+
+#: tinymce3/panels/multis.php:6
+msgid "Multi Ratings"
+msgstr "Мультирейтинг"
+
+#: tinymce3/panels/multis.php:25
+#: tinymce3/panels/multisreview.php:31
+msgid "Elements Stars"
+msgstr "Елементи зірочок"
+
+#: tinymce3/panels/multis.php:45
+#: tinymce3/panels/multisreview.php:51
+msgid "Average Stars"
+msgstr "Середні зірочки"
+
+#: tinymce3/panels/multisreview.php:6
+msgid "Multi Reviews"
+msgstr "Мультиоцінки"
+
+#: tinymce3/panels/multisreview.php:12
+msgid "Default"
+msgstr "За змовчуванням"
+
+#: tinymce3/panels/styles.php:6
+msgid "Post Image"
+msgstr "Зображення запису"
+
+#: tinymce3/panels/styles.php:9
+msgid "Resize Width x Height"
+msgstr "Змінити розмір ширина x висота"
+
+#: tinymce3/panels/styles.php:13
+#: widgets/rating/part_image.php:21
+#: widgets/rating_28/part_image.php:21
+msgid "This will work only if image is stored on the server."
+msgstr "Це спрацює лише тоді, коли зображення збережено на сервері."
+
+#: tinymce3/panels/styles.php:16
+#: widgets/rating/part_image.php:25
+#: widgets/rating_28/part_image.php:25
+msgid "Get Image From"
+msgstr "Узяти малюнок з"
+
+#: tinymce3/panels/styles.php:19
+#: widgets/rating/part_image.php:28
+#: widgets/rating_28/part_image.php:28
+msgid "No image"
+msgstr "Без зображення"
+
+#: tinymce3/panels/styles.php:20
+#: widgets/rating/part_image.php:29
+#: widgets/rating_28/part_image.php:29
+msgid "Custom field"
+msgstr "Додаткове поле"
+
+#: tinymce3/panels/styles.php:21
+#: widgets/rating/part_image.php:30
+#: widgets/rating_28/part_image.php:30
+msgid "Post content"
+msgstr "Зміст запису"
+
+#: tinymce3/panels/styles.php:30
+#: widgets/rating/part_image.php:39
+#: widgets/rating_28/part_image.php:39
+msgid "If you use %IMAGE% tag in template and this option is selected, image will not be rendered."
+msgstr "Якщо Ви використовуєте тег %IMAGE% в шаблоні, і ця опція обрана, зображення не буде виведене."
+
+#: tinymce3/panels/styles.php:38
+#: widgets/rating/part_image.php:47
+#: widgets/rating_28/part_image.php:47
+msgid "Custom Field"
+msgstr "Додаткове поле"
+
+#: tinymce3/panels/styles.php:49
+#: widgets/rating/part_image.php:56
+#: widgets/rating_28/part_image.php:56
+msgid "First image from post content will be used for %IMAGE% tag."
+msgstr "Перше зображення зі змісту запису буде використане для тегу %IMAGE%."
+
+#: tinymce3/panels/thumbsrating.php:1
+msgid "Thumbs Rating Block"
+msgstr "Блок рейтингу карми"
+
+#: tinymce3/window.php:33
+#: tinymce3/window.php:124
+msgid "Insert"
+msgstr "Вставити"
+
+#: tinymce3/window.php:51
+msgid "Shortcode"
+msgstr "Короткий код"
+
+#: tinymce3/window.php:75
+msgid "Shortcode Info"
+msgstr "Інформація про короткий код"
+
+#: tinymce3/window.php:76
+msgid "Change shortcode to see additional options you can set."
+msgstr "Змінити короткий код аби побачити додаткові параметри, які Ви можете встановити."
+
+#: tinymce3/window.php:120
+msgid "Cancel"
+msgstr "Відміна"
+
+#: widgets/comments/part_basic.php:13
+#: widgets/comments_28/part_basic.php:13
+#: widgets/rating/part_basic.php:12
+#: widgets/rating_28/part_basic.php:13
+#: widgets/top/part_basic.php:13
+#: widgets/top_28/part_basic.php:13
+msgid "Show Widget To"
+msgstr "Показати віджет"
+
+#: widgets/comments/part_basic.php:19
+#: widgets/comments_28/part_basic.php:19
+#: widgets/rating/part_basic.php:18
+#: widgets/rating_28/part_basic.php:19
+#: widgets/top/part_basic.php:19
+#: widgets/top_28/part_basic.php:19
+msgid "Hide Widget"
+msgstr "Сховати віджет"
+
+#: widgets/comments/part_filter.php:5
+#: widgets/comments/part_image.php:5
+#: widgets/comments/part_stars.php:5
+#: widgets/comments_28/part_filter.php:5
+#: widgets/comments_28/part_image.php:5
+#: widgets/comments_28/part_stars.php:5
+#: widgets/rating/part_filter.php:5
+#: widgets/rating/part_image.php:5
+#: widgets/rating/part_stars.php:5
+#: widgets/rating/part_trend.php:5
+#: widgets/rating_28/part_filter.php:5
+#: widgets/rating_28/part_image.php:5
+#: widgets/rating_28/part_stars.php:5
+#: widgets/rating_28/part_trend.php:5
+#: widgets/top/part_filter.php:5
+#: widgets/top_28/part_filter.php:5
+msgid "Click on the header title to display the options."
+msgstr "Клацніть на заголовку для відображення параметрів."
+
+#: widgets/comments/part_filter.php:24
+#: widgets/comments_28/part_filter.php:24
+msgid "Number Of Comments"
+msgstr "Кількість коментарів"
+
+#: widgets/comments/part_filter.php:31
+#: widgets/comments_28/part_filter.php:31
+msgid "Maximal length of comment text"
+msgstr "Максимальна довжина тексту коментаря"
+
+#: widgets/comments/part_filter.php:36
+#: widgets/comments_28/part_filter.php:36
+msgid "Minimum Votes"
+msgstr "Мінімум голосів"
+
+#: widgets/comments/part_filter.php:43
+#: widgets/comments_28/part_filter.php:43
+msgid "Sorting Column"
+msgstr "Сортування колонки"
+
+#: widgets/comments/part_filter.php:48
+#: widgets/comments_28/part_filter.php:48
+msgid "Comment ID"
+msgstr "ID коментаря"
+
+#: widgets/comments/part_filter.php:54
+#: widgets/comments_28/part_filter.php:54
+msgid "Sorting Order"
+msgstr "Порядок сортування"
+
+#: widgets/comments/part_filter.php:65
+msgid "Hide comments with no recorded votes."
+msgstr "Ховати коментарі без записаних голосів."
+
+#: widgets/comments/part_filter.php:72
+#: widgets/comments_28/part_filter.php:72
+msgid "Use only comments voted for in last # days."
+msgstr "Використовувати лише коментарі, за які голосували останні # днів."
+
+#: widgets/comments/part_image.php:4
+#: widgets/comments/part_image.php:12
+#: widgets/comments_28/part_image.php:4
+#: widgets/comments_28/part_image.php:12
+msgid "Avatar"
+msgstr "Аватар"
+
+#: widgets/rating/part_filter.php:16
+#: widgets/top/part_filter.php:16
+#: widgets/top_28/part_filter.php:16
+msgid "Posts & Pages"
+msgstr "Записи та сторінки"
+
+#: widgets/rating/part_filter.php:35
+#: widgets/rating_28/part_filter.php:37
+msgid "Number of posts"
+msgstr "Кількість записів"
+
+#: widgets/rating/part_filter.php:42
+#: widgets/rating_28/part_filter.php:44
+msgid "Maximal character length for title"
+msgstr "Максимальна довжина заголовку"
+
+#: widgets/rating/part_filter.php:47
+#: widgets/rating_28/part_filter.php:49
+msgid "Number of words for excerpt"
+msgstr "Кількість слів для витягу"
+
+#: widgets/rating/part_filter.php:72
+#: widgets/rating_28/part_filter.php:74
+msgid "This filter will be used only with grouping options."
+msgstr "Цей фільтр буде використано лише із опціями групування."
+
+#: widgets/rating/part_filter.php:82
+#: widgets/rating_28/part_filter.php:84
+msgid "Sorting column"
+msgstr "Сортування стовпців"
+
+#: widgets/rating/part_filter.php:97
+#: widgets/rating_28/part_filter.php:99
+msgid "Sorting order"
+msgstr "Порядок сортування"
+
+#: widgets/rating/part_filter.php:131
+#: widgets/rating_28/part_filter.php:133
+msgid "Article Category"
+msgstr "Категорії статтей"
+
+#: widgets/rating/part_filter.php:139
+#: widgets/rating_28/part_filter.php:141
+msgid "Only selected category, no subcategories."
+msgstr "Лише обрані категорії, без підкатегорій."
+
+#: widgets/rating/part_filter.php:164
+#: widgets/rating_28/part_filter.php:166
+msgid "Article Publish Date"
+msgstr "Дата публікації статті"
+
+#: widgets/rating/part_filter.php:167
+#: widgets/rating_28/part_filter.php:169
+msgid "Any date"
+msgstr "Будь-яка дата"
+
+#: widgets/rating/part_image.php:13
+#: widgets/rating_28/part_image.php:13
+msgid "Resize Image"
+msgstr "Змінити розмір зображення"
+
+#: widgets/rating/part_stars.php:13
+#: widgets/rating_28/part_stars.php:13
+msgid "Stars Set"
+msgstr "Набір зірочок"
+
+#: widgets/rating/part_stars.php:18
+#: widgets/rating_28/part_stars.php:18
+msgid "Stars Size"
+msgstr "Розмір зірочок"
+
+#: widgets/rating/part_stars.php:23
+#: widgets/rating_28/part_stars.php:23
+msgid "Review Set"
+msgstr "Набір оцінок"
+
+#: widgets/rating/part_stars.php:28
+#: widgets/rating_28/part_stars.php:28
+msgid "Review Size"
+msgstr "Розмір оцінок"
+
+#: widgets/rating/part_stars.php:38
+#: widgets/rating_28/part_stars.php:38
+msgid "Thumbs Size"
+msgstr "Розмір кнопок карми"
+
+#: widgets/rating_28/part_filter.php:13
+msgid "Include post types"
+msgstr "Включати типи запису"
+
+#: widgets/rating_28/part_filter.php:16
+msgid "(all)"
+msgstr "(усі)"
+
+

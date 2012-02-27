@@ -1,0 +1,456 @@
+# This is an POT file!
+# You can translate the messages below into your language
+# and send this file to webmaster@webmaster-eye.de.
+# I will publish your language file with the next version
+# of this plugin.
+# ----------------------------------
+# Plugin-Author: Tobias Koelligan
+# Copyright by Tobias Koelligan
+# Blog: http://www.tobiaskoelligan.de
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.6\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/subscribe-to-double-opt-in-comments\n"
+"POT-Creation-Date: 2009-09-26 20:09+0000\n"
+"Last-Translator: Mehmet Karaca <doctorkaraca@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+
+#: subscribe-to-doi-comments.php:79
+msgid "<strong>Error: </strong>"
+msgstr "<strong>Hata: </strong>"
+
+#: subscribe-to-doi-comments.php:94
+msgid "Subscribe without commenting"
+msgstr "Yorum yazmadan abone ol"
+
+#: subscribe-to-doi-comments.php:96
+msgid "E-Mail:"
+msgstr "E-Posta:"
+
+#: subscribe-to-doi-comments.php:98
+msgid "Subscribe"
+msgstr "Abone Ol"
+
+#: subscribe-to-doi-comments.php:138
+msgid "Subscribe to Comments Options"
+msgstr "Yorumlara Abonelik Seçenekleri"
+
+#: subscribe-to-doi-comments.php:141
+msgid "\"From\" name for notifications:"
+msgstr "Bildirim mesajları için \"kimden\" alanı isim bilgisi:"
+
+#: subscribe-to-doi-comments.php:142
+msgid "\"From\" e-mail addresss for notifications:"
+msgstr "Bildirim mesajları için \"kimden\" alanı e-posta adresi bilgisi:"
+
+#: subscribe-to-doi-comments.php:143
+msgid "Do a CSS \"clear\" on the subscription checkbox/message (uncheck this if the checkbox/message appears in a strange location in your theme)"
+msgstr "Abonelik tercih kutucuğu/mesajı CSS ile \"temizlensin\" (yalnızca tercih kutucuğu/mesajı kullandığınız temada olağandışı bir konumda ise kapatın)"
+
+#: subscribe-to-doi-comments.php:146
+msgid "Comment Form Text"
+msgstr "Yorum Formu Metni"
+
+#: subscribe-to-doi-comments.php:148
+msgid "Customize the messages shown to different people.  Use <code>[manager_link]</code> to insert the URI to the Subscription Manager."
+msgstr "Farklı kişilere gösterilen mesajları özelleştir. Abonelik Yöneticisi URI bilgisini iliştirmek için <code>[manager_link]</code> kodunu kullanabilirsiniz."
+
+#: subscribe-to-doi-comments.php:152
+msgid "Not subscribed"
+msgstr "Abone değil"
+
+#: subscribe-to-doi-comments.php:154
+msgid "Subscribed"
+msgstr "Abone"
+
+#: subscribe-to-doi-comments.php:156
+msgid "Entry Author"
+msgstr "Girdi Yazarı"
+
+#: subscribe-to-doi-comments.php:158
+msgid "Confirmation Text (will be shown after user has clicked on the confirmation link)"
+msgstr "Onay Metni (kullanıcı onay bağlantısına tıkladıktan sonra gösterilecektir)"
+
+#: subscribe-to-doi-comments.php:160
+msgid "Headline for Double-Opt-In"
+msgstr "Çifte-Katılım-Onayı için Başlık"
+
+#: subscribe-to-doi-comments.php:162
+msgid "Mail Text for Double-Opt-In ([verify_url] will be replaced with URL to subscribe finally, no HTML!)"
+msgstr "Çifte-Katılım-Onayı için Posta Metni ([verify_url] abone olunacak URL ile değiştirilecektir, HTML yok!)"
+
+#: subscribe-to-doi-comments.php:168
+msgid "Use custom style for Subscription Manager"
+msgstr "Abonelik Yöneticisi için özelleştirilmiş tarz kullan"
+
+#: subscribe-to-doi-comments.php:170
+msgid "These settings only matter if you are using a custom style.  <code>[theme_path]</code> will be replaced with the path to your current theme."
+msgstr "Bu seçenekler yalnızca özelleştirilmiş tarz kullanıyorsanız önemlidir. <code>[theme_path]</code> kullanmakta olduğunuz temanın yolu ile değiştirilecektir."
+
+#: subscribe-to-doi-comments.php:173
+msgid "Path to header:"
+msgstr "Üstbilgi (header) yolu:"
+
+#: subscribe-to-doi-comments.php:174
+msgid "Path to sidebar:"
+msgstr "Kenar çubuğu (sidebar) yolu:"
+
+#: subscribe-to-doi-comments.php:175
+msgid "Path to footer:"
+msgstr "Altbilgi (footer) yolu:"
+
+#: subscribe-to-doi-comments.php:178
+msgid "HTML for before the subscription manager:"
+msgstr "Abonelik yöneticisinden önceki HTML:"
+
+#: subscribe-to-doi-comments.php:179
+msgid "HTML for after the subscription manager:"
+msgstr "Abonelik yöneticisinden sonraki HTML:"
+
+#: subscribe-to-doi-comments.php:205
+msgid "Options saved."
+msgstr "Seçenekler kaydedildi."
+
+#: subscribe-to-doi-comments.php:212
+msgid "Update Options &raquo;"
+msgstr "Seçenekleri Güncelle &raquo;"
+
+#: subscribe-to-doi-comments.php:383
+msgid "Please provide a valid e-mail address."
+msgstr "Lütfen geçerli bir e-posta adresi girin."
+
+#: subscribe-to-doi-comments.php:387
+msgid "This e-mail address may not be subscribed"
+msgstr "Bu e-posta adresi abonelik için kullanılamaz."
+
+#: subscribe-to-doi-comments.php:393
+#: subscribe-to-doi-comments.php:409
+msgid "You appear to be already subscribed to this entry."
+msgstr "Bu girdi için zaten aboneliğiniz var."
+
+#: subscribe-to-doi-comments.php:399
+msgid "Comments are not allowed on this entry."
+msgstr "Bu girdi yeni yorumlara kapalıdır."
+
+#: subscribe-to-doi-comments.php:618
+#, php-format
+msgid "There is a new comment on the post \"%s\""
+msgstr "\"%s\" girdisi için yeni bir yorum yazıldı."
+
+#: subscribe-to-doi-comments.php:619
+#, php-format
+msgid "Author: %s\n"
+msgstr "Yazar: %s\n"
+
+#: subscribe-to-doi-comments.php:620
+msgid "Comment:\n"
+msgstr "Yorum:\n"
+
+#: subscribe-to-doi-comments.php:621
+msgid "See all comments on this post here:\n"
+msgstr "Bu girdi için yazılan tüm yorumları şurada görebilirsiniz:\n"
+
+#: subscribe-to-doi-comments.php:624
+msgid "To manage your subscriptions or to block all notifications from this site, click the link below:\n"
+msgstr "Aboneliklerinizi yönetmek ya da bildirim mesajı gönderimini engellemek için bu bağlantıyı tıklayın:\n"
+
+#: subscribe-to-doi-comments.php:627
+#, php-format
+msgid "New Comment On: %s"
+msgstr "\"%s\" Hakkında Yeni Bir Yorum Var"
+
+#: subscribe-to-doi-comments.php:646
+msgid "E-mail change confirmation"
+msgstr "E-posta değişikliği onayı"
+
+#: subscribe-to-doi-comments.php:647
+#, php-format
+msgid ""
+"You are receiving this message to confirm a change of e-mail address for your subscriptions at \"%s\"\n"
+"\n"
+msgstr ""
+"Bu mesaj, \"%s\" yorum aboneliği e-posta adresinizi değiştirme talebinizi onaylamanız amacıyla gönderilmiştir.\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:648
+#, php-format
+msgid ""
+"To change your e-mail address to %s, click this link:\n"
+"\n"
+msgstr ""
+"E-posta adresinizi %s olarak değiştirmek için, bu bağlantıyı tıklayın:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:650
+#: subscribe-to-doi-comments.php:662
+msgid "If you did not request this action, please disregard this message."
+msgstr "Engelleme işlemini siz talep etmediyseniz, lütfen bu mesajı gözardı ediniz."
+
+#: subscribe-to-doi-comments.php:658
+msgid "E-mail block confirmation"
+msgstr "E-posta engelleme onayı"
+
+#: subscribe-to-doi-comments.php:659
+#, php-format
+msgid ""
+"You are receiving this message to confirm that you no longer wish to receive e-mail comment notifications from \"%s\"\n"
+"\n"
+msgstr ""
+"Bu mesaj, \"%s\" yorum aboneliği e-posta bildirimlerini engelleme talebinizi onaylamanız amacıyla gönderilmiştir.\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:660
+msgid ""
+"To cancel all future notifications for this address, click this link:\n"
+"\n"
+msgstr ""
+"Bu adres için tüm bildirimleri iptal etmek için bu bağlantıyı tıklayın:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:700
+msgid "click here"
+msgstr "burayı tıklayın"
+
+#: subscribe-to-doi-comments.php:722
+msgid "Notify me of followup comments via e-mail"
+msgstr "Eklenen yorumları bana e-posta ile bildir"
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are subscribed to this entry.  <a href=\"[manager_link]\">Manage your subscriptions</a>."
+msgstr "Bu girdinin yorumlarına abonesiniz. <a href=\"[manager_link]\">Aboneliklerinizi yönetin</a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are the author of this entry.  <a href=\"[manager_link]\">Manage subscriptions</a>."
+msgstr "Bu girdinin yazarısınız.  <a href=\"[manager_link]\">Aboneliklerinizi yönetin</a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid ""
+"Hello,\n"
+"\n"
+"please click on the following link:\n"
+"[verify_url]\n"
+"to confirm your subscription."
+msgstr ""
+"Merhaba,\n"
+"\n"
+"abonelik talebinizi onaylamak için bu bağlantıyı tıklayın:\n"
+"[verify_url]\n"
+"Teşekkürler."
+
+#: subscribe-to-doi-comments.php:722
+msgid "Double Opt In"
+msgstr "Çifte Katılım Onayı"
+
+#: subscribe-to-doi-comments.php:749
+msgid "You will now get an e-mail, if a new comment is posted."
+msgstr "Girdiye yeni bir yorum eklenirse size e-posta ile bildirilecek."
+
+#: subscribe-to-doi-comments.php:838
+msgid "Comment Subscription Manager"
+msgstr "Yorum Aboneliği Yöneticisi"
+
+#: subscribe-to-doi-comments.php:838
+#: subscribe-to-doi-comments.php:1193
+msgid "Subscriptions"
+msgstr "Abonelikler"
+
+#: subscribe-to-doi-comments.php:840
+msgid "Subscribe to Comments"
+msgstr "Yorumlara Abobelik"
+
+#: subscribe-to-doi-comments.php:921
+msgid "You may not access this page without a valid key."
+msgstr "Geçerli bir anahtar olmadan bu sayfaya erişemezsiniz."
+
+#: subscribe-to-doi-comments.php:929
+#, php-format
+msgid "All notifications that were formerly sent to <strong>%1$s</strong> will now be sent to <strong>%2$s</strong>!"
+msgstr "Daha önce <strong>%1$s</strong> adresinde gönderilen tüm bildirimler bundan sonra <strong>%2$s</strong> adresinde yollanacak!"
+
+#: subscribe-to-doi-comments.php:941
+#, php-format
+msgid "<strong>%1$s</strong> %2$s removed successfully."
+msgstr "<strong>%1$s</strong> %2$s iptal edildi."
+
+#: subscribe-to-doi-comments.php:941
+msgid "subscriptions"
+msgstr "abonelik"
+
+#: subscribe-to-doi-comments.php:941
+msgid "subscription"
+msgstr "abonelik"
+
+#: subscribe-to-doi-comments.php:946
+#, php-format
+msgid "The block on <strong>%s</strong> has been successfully removed."
+msgstr "<strong>%s</strong> üzerindeki engelleme kaldırıldı."
+
+#: subscribe-to-doi-comments.php:948
+#, php-format
+msgid "<strong>%s</strong> isn't blocked!"
+msgstr "<strong>%s</strong> engellenmemiş!"
+
+#: subscribe-to-doi-comments.php:953
+#, php-format
+msgid "<strong>%s</strong> has been blocked from receiving notifications.  You will have to have the administrator remove the block before you will be able to change your notification address."
+msgstr "<strong>%s</strong> adresine bildirim gönderimi engellenmiş. Bildirim e-posta adresinizi değiştirebilmek için öncelikle site yöneticisi ile görüşüp engeli kaldırtmanız gerekli."
+
+#: subscribe-to-doi-comments.php:956
+#, php-format
+msgid "Your change of e-mail request was successfully received.  Please check your old account (<strong>%s</strong>) in order to confirm the change."
+msgstr "E-posta adresi değişikliği talebiniz alındı. Değişikliği onaylamak için eski e-posta adresinize (<strong>%s</strong>) bir mesaj gönderildi."
+
+#: subscribe-to-doi-comments.php:961
+#, php-format
+msgid "Your request to block <strong>%s</strong> from receiving any further notifications has been received.  In order for you to complete the block, please check your e-mail and click on the link in the message that has been sent to you."
+msgstr "<strong>%s</strong> adresine bildirim mesajı gönderilmesini engelleme talebiniz alındı. Engelleme işlemini tamamlamak için size gönderilen onay mesajındaki bağlantıyı tıklamanız gerekli. Lütfen e-posta kutunuzu kontrol edin."
+
+#: subscribe-to-doi-comments.php:965
+#, php-format
+msgid "<strong>%1$s</strong> has been successfully subscribed to %2$s"
+msgstr "<strong>%1$s</strong> adresinin %2$s girdisine aboneliği gerçekleştirildi."
+
+#: subscribe-to-doi-comments.php:970
+#, php-format
+msgid "<strong>%1$s</strong> has been added to the \"do not mail\" list. You will no longer receive any notifications from this site. If this was done in error, please contact the <a href=\"mailto:%2$s\">site administrator</a> to remove this block."
+msgstr "<strong>%1$s</strong> adresi \"bildirim mesajı gönderme\" listesine eklendi. Artık bu siteden bildirim mesajı almayacaksınız. Eğer işlemi yanlışlıkla yaptıysanız, engellemeyi kaldırmak için <a href=\"mailto:%2$s\">site yöneticisine</a> görüşün."
+
+#: subscribe-to-doi-comments.php:972
+#, php-format
+msgid "<strong>%s</strong> has already been blocked!"
+msgstr "<strong>%s</strong> daha önceden engellenmiş!"
+
+#: subscribe-to-doi-comments.php:988
+#: subscribe-to-doi-comments.php:1015
+#, php-format
+msgid "%s Comment Subscription Manager"
+msgstr "%s Yorum Aboneliği Yöneticisi"
+
+#: subscribe-to-doi-comments.php:1018
+#, php-format
+msgid "Return to the page you were viewing: %s"
+msgstr "Görüntülemekte olduğunuz sayfaya dönün: %s"
+
+#: subscribe-to-doi-comments.php:1029
+msgid "Remove Block"
+msgstr "Engelleme Kaldırma"
+
+#: subscribe-to-doi-comments.php:1032
+#, php-format
+msgid "Click the button below to remove the block on <strong>%s</strong>.  This should only be done if the user has specifically requested it."
+msgstr "<strong>%s</strong> adresinin engellemesini kaldırmak için aşağıdaki düğmeyi tıklayın.  Bu, sadece kullanıcı özel olarak talep ettiyse yapılmalıdır."
+
+#: subscribe-to-doi-comments.php:1040
+msgid "Remove Block &raquo;"
+msgstr "Engellemeyi Kaldır &raquo;"
+
+#: subscribe-to-doi-comments.php:1048
+msgid "Blocked"
+msgstr "Engellenmiş"
+
+#: subscribe-to-doi-comments.php:1051
+#, php-format
+msgid "You have indicated that you do not wish to receive any notifications at <strong>%1$s</strong> from this site. If this is incorrect, or if you wish to have the block removed, please contact the <a href=\"mailto:%2$s\">site administrator</a>."
+msgstr "<strong>%1$s</strong> adresine bu siteden hiçbir bildirim mesajı gönderilmesini istemediğinizi belirttiniz. Eğer bu doğru değilse veya engellemeyi kaldırtmak istiyorsanız <a href=\"mailto:%2$s\">site yöneticisiyle</a> görüşün."
+
+#: subscribe-to-doi-comments.php:1066
+#, php-format
+msgid "<strong>%s</strong> is not subscribed to any posts on this site."
+msgstr "<strong>%s</strong> adresinin bu sitede yorum aboneliği bulunmamaktadır."
+
+#: subscribe-to-doi-comments.php:1068
+#, php-format
+msgid "<strong>%s</strong> is not a valid e-mail address."
+msgstr "<strong>%s</strong> geçerli bir e-posta adresi değildir."
+
+#: subscribe-to-doi-comments.php:1081
+msgid "&laquo; Back"
+msgstr "&laquo; Geri"
+
+#: subscribe-to-doi-comments.php:1084
+msgid "Find Subscriptions"
+msgstr "Abonelikleri Bul"
+
+#: subscribe-to-doi-comments.php:1087
+msgid "Enter an e-mail address to view its subscriptions or undo a block."
+msgstr "Aboneliklerini görmek veya engellemesini kaldırmak istediğiniz e-posta adresini girin."
+
+#: subscribe-to-doi-comments.php:1095
+msgid "Search &raquo;"
+msgstr "Ara &raquo;"
+
+#: subscribe-to-doi-comments.php:1103
+msgid "Top Subscriber List"
+msgstr "En Fazla Aboneliği Olan Kişiler"
+
+#: subscribe-to-doi-comments.php:1105
+msgid "Subscriber List"
+msgstr "Abone Listesi"
+
+#: subscribe-to-doi-comments.php:1124
+msgid "Show all subscribers"
+msgstr "Tüm aboneleri göster"
+
+#: subscribe-to-doi-comments.php:1126
+msgid "Show list of subscribers in <code>CC:</code>-field format (for bulk e-mailing)"
+msgstr "Abone listesini <code>CC:</code>-alanı biçiminde görüntüle (toplu e-posta gönderimi için)"
+
+#: subscribe-to-doi-comments.php:1128
+msgid "&laquo; Back to regular view"
+msgstr "&laquo; Normal görünüme dön"
+
+#: subscribe-to-doi-comments.php:1143
+msgid "Top Subscribed Posts"
+msgstr "En Fazla Abonesi Olan Girdiler"
+
+#: subscribe-to-doi-comments.php:1196
+#, php-format
+msgid "<strong>%s</strong> is subscribed to the posts listed below. To unsubscribe to one or more posts, click the checkbox next to the title, then click \"Remove Selected Subscription(s)\" at the bottom of the list."
+msgstr "<strong>%s</strong> aşağıdaki girdilerin yorumlarına abone. Aboneliğini iptal etmek istediğiniz girdi (veya girdileri) işaretleyin ve \"Seçili Abonelikleri İptal Et\" bağlantısını tıklayın."
+
+#: subscribe-to-doi-comments.php:1210
+msgid "Invert Checkbox Selection"
+msgstr "Seçimi Tersine Çevir"
+
+#: subscribe-to-doi-comments.php:1214
+msgid "Remove Selected Subscription(s) &raquo;"
+msgstr "Seçilen Abonelikleri İptal Et &raquo;"
+
+#: subscribe-to-doi-comments.php:1221
+msgid "Advanced Options"
+msgstr "Gelişmiş Seçenekler"
+
+#: subscribe-to-doi-comments.php:1224
+msgid "Block All Notifications"
+msgstr "Tüm Bildirimleri Engelle"
+
+#: subscribe-to-doi-comments.php:1231
+#, php-format
+msgid "If you would like <strong>%s</strong> to be blocked from receiving any notifications from this site, click the button below.  This should be reserved for cases where someone is signing you up for notifications without your consent."
+msgstr "Bu siteden <strong>%s</strong> adresine gönderilen tüm bildirimleri engellemek için aşağıdaki düğmeyi tıklayın. Bu seçeneği yalnızca üçüncü bir kişi rızanız olmadan sizin e-posta adresinizle yorumlara abone oluyorsa kullanmanız önerilir."
+
+#: subscribe-to-doi-comments.php:1235
+msgid "Block Notifications &raquo;"
+msgstr "Bildirimleri Engelle &raquo;"
+
+#: subscribe-to-doi-comments.php:1241
+msgid "Change E-mail Address"
+msgstr "E-posta Adresi Değiştir"
+
+#: subscribe-to-doi-comments.php:1248
+#, php-format
+msgid "If you would like to change the e-mail address for your subscriptions, enter the new address below.  You will be required to verify this request by clicking a special link sent to your current address (<strong>%s</strong>)."
+msgstr "Mevcut e-posta adresinizi değiştirmek için aşağıya yeni e-posta adresinizi girin. Bu talebinizi onaylamak için eski e-posta adresinize (<strong>%s</strong>) gönderilecek teyit mesajındakı bağlantıyı tıklamanız gerekecek."
+
+#: subscribe-to-doi-comments.php:1252
+msgid "New E-mail Address:"
+msgstr "Yeni E-posta Adresi:"
+
+#: subscribe-to-doi-comments.php:1257
+msgid "Change E-mail Address &raquo;"
+msgstr "E-posta Adresi Değiştir &raquo;"
+

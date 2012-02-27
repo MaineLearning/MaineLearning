@@ -1,0 +1,762 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Broken-link-checker\n"
+"Report-Msgid-Bugs-To: whiteshadow@w-shadow.com\n"
+"POT-Creation-Date: 2009-10-30 11:06+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gideon van Melle <gvmelle@gmail.com>\n"
+"Language-Team: Brokenlinkchecker <gvmelle@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;_c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: core.php:132
+#: core.php:1284
+msgid "Loading..."
+msgstr "Aan &#x0027;t laden..."
+
+#: core.php:155
+#: core.php:569
+msgid "[ Network error ]"
+msgstr "[Netwerk fout]"
+
+#: core.php:180
+msgid "Automatically expand the widget if broken links have been detected"
+msgstr "Klap automatisch de widget uit wanneer er verbroken koppelingen zijn ontdekt"
+
+#: core.php:359
+#: core.php:368
+#: core.php:386
+#: core.php:400
+#: core.php:907
+#, php-format
+msgid "Database error : %s"
+msgstr "Database fout : %s"
+
+#: core.php:423
+msgid "Link Checker Settings"
+msgstr "Link Checker Instellingen"
+
+#: core.php:424
+msgid "Link Checker"
+msgstr "Link Checker"
+
+#: core.php:435
+msgid "View Broken Links"
+msgstr "Bekijk Verbroken koppelingen"
+
+#: core.php:436
+#: core.php:833
+msgid "Broken Links"
+msgstr "Verbroken Koppelingen"
+
+#: core.php:453
+msgid "Settings"
+msgstr "Instellingen"
+
+#: core.php:533
+msgid "Broken Link Checker Options"
+msgstr "Verbroken Link Checker Opties"
+
+#: core.php:546
+msgid "Status"
+msgstr "Status"
+
+#: core.php:548
+#: core.php:771
+msgid "Show debug info"
+msgstr "Toon debug info"
+
+#: core.php:582
+msgid "Re-check all pages"
+msgstr "controleer all pagina&#x0027;s nogmaals"
+
+#: core.php:606
+msgid "Check each link"
+msgstr "Controleer elke link"
+
+#: core.php:611
+#, php-format
+msgid "Every %s hours"
+msgstr "Elke %s uur"
+
+#: core.php:620
+msgid "Existing links will be checked this often. New links will usually be checked ASAP."
+msgstr "Bestaande koppelingen zullen om de zoveel uur worden gecontroleerd. Nieuwe koppelingen zullen zo spoedig mogelijk worden gecontroleerd. "
+
+#: core.php:627
+msgid "Broken link CSS"
+msgstr "Verbroken link CSS"
+
+#: core.php:632
+msgid "Apply <em>class=\"broken_link\"</em> to broken links"
+msgstr "Toepassen <em>class=\"broken_link\"</em> op verbroken koppelingen"
+
+#: core.php:644
+msgid "Exclusion list"
+msgstr "Lijst met uitzonderingen"
+
+#: core.php:645
+msgid "Don't check links where the URL contains any of these words (one per line) :"
+msgstr "controleer geen koppelingen waarvan de URL een van de volgende woorden bevat (één per regel)"
+
+#: core.php:655
+msgid "Custom fields"
+msgstr "Aangepaste Velden"
+
+#: core.php:656
+msgid "Check URLs entered in these custom fields (one per line) :"
+msgstr "Controleer URL's die in dit vak zijn ingevuld (1 per regel):"
+
+#: core.php:667
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#: core.php:673
+msgid "Timeout"
+msgstr "Timeout"
+
+#: core.php:679
+#: core.php:735
+#, php-format
+msgid "%s seconds"
+msgstr "%s seconden"
+
+#: core.php:688
+msgid "Links that take longer than this to load will be marked as broken."
+msgstr "Koppelingen die er langer over doen dan dit zullen aangemerkt worden als verbroken."
+
+#: core.php:697
+msgid "Custom temporary directory"
+msgstr "Aangepaste tijdelijke map"
+
+#: core.php:706
+#: core.php:2047
+#: core.php:2088
+msgid "OK"
+msgstr "OK"
+
+#: core.php:709
+msgid "Error : This directory isn't writable by PHP."
+msgstr "Fout : er zijn PHP geen schrijfrechten in deze map."
+
+#: core.php:714
+msgid "Error : This directory doesn't exist."
+msgstr "Fout:  deze map bestaat niet."
+
+#: core.php:722
+msgid "Set this field if you want the plugin to use a custom directory for its lockfiles. Otherwise, leave it blank."
+msgstr "Vul dit veld in als u de invoegtoepassing een aangepaste map wilt laten gebruiken voor zijn vergrendelingsbestanden. Zo niet, dan laat u het veld leeg."
+
+#: core.php:729
+msgid "Max. execution time"
+msgstr "Max. uitvoeringstijd"
+
+#: core.php:746
+msgid "The plugin works by periodically creating a background worker instance that parses your posts looking for links, checks the discovered URLs, and performs other time-consuming tasks. Here you can set for how long, at most, the background instance may run each time before stopping."
+msgstr "De Plugin werkt door regelmatig op de achtergrond uw blogberichten te controleren, de ontdekte URL's te controleren en andere tijdrovende zaken uit te voeren. Hier kunt u instellen voor hoe lang de achtergrondtaak mag blijven draaien. "
+
+#: core.php:756
+msgid "Save Changes"
+msgstr "Veranderingen Opslaan"
+
+#: core.php:769
+msgid "Hide debug info"
+msgstr "Verberg Foutopsporingsinformatie"
+
+#: core.php:832
+msgid "Broken"
+msgstr "Verbroken"
+
+#: core.php:834
+msgid "No broken links found"
+msgstr "Geen verbroken koppelingen gevonden."
+
+#: core.php:838
+msgid "Redirects"
+msgstr "Omgeleide Koppelingen"
+
+#: core.php:839
+msgid "Redirected Links"
+msgstr "Omgeleide Koppelingen"
+
+#: core.php:840
+msgid "No redirects found"
+msgstr "Geen omgeleide koppelingen gevonden."
+
+#: core.php:845
+msgid "All"
+msgstr "Alles"
+
+#: core.php:846
+msgid "Detected Links"
+msgstr "Opgespoorde koppelingen"
+
+#: core.php:847
+msgid "No links found (yet)"
+msgstr "(Nog) geen koppelingen gevonden."
+
+#: core.php:966
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: core.php:967
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: core.php:974
+#: core.php:1149
+#, php-format
+msgid "Displaying %s&#8211;%s of <span class=\"current-link-count\">%s</span>"
+msgstr "Weergave van %s&#8211;%s van <span class=\"huidige-link-aantal\">%s</span>"
+
+#: core.php:996
+msgid "Source"
+msgstr "Bron"
+
+#: core.php:998
+msgid "Link Text"
+msgstr "Link Tekst"
+
+#: core.php:999
+msgid "URL"
+msgstr "URL"
+
+#: core.php:1025
+#: core.php:1031
+msgid "Edit this post"
+msgstr "Bewerk dit bericht"
+
+#: core.php:1031
+#: core.php:1046
+msgid "Edit"
+msgstr "Bewerken"
+
+#: core.php:1032
+msgid "Delete this post"
+msgstr "Verwijderen dit bericht"
+
+#: core.php:1032
+#, php-format
+msgid ""
+"You are about to delete this post '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"U staat op het punt dit bericht '%s' te verwijderen\n"
+" 'Annuleren' om te stoppen, 'OK' om te verwijderen. "
+
+#: core.php:1032
+#: core.php:1047
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: core.php:1034
+#, php-format
+msgid "View \"%s\""
+msgstr "Toon \"%s\""
+
+#: core.php:1034
+msgid "View"
+msgstr "Bekijken"
+
+#: core.php:1041
+#: core.php:1046
+msgid "Edit this bookmark"
+msgstr "Bewerk deze bladwijzer "
+
+#: core.php:1047
+#, php-format
+msgid ""
+"You are about to delete this link '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"U staat op het punt deze koppeling '%s' te verwijderen\n"
+"  'Annuleren' om te stoppen, 'OK' om te verwijderen."
+
+#: core.php:1056
+msgid "[An orphaned link! This is a bug.]"
+msgstr "[Een link zonder referentie! Dit is een bug.]"
+
+#: core.php:1070
+msgid "Image"
+msgstr "Afbeelding"
+
+#: core.php:1081
+msgid "Custom field"
+msgstr "Aangepast Veld"
+
+#: core.php:1089
+msgid "Bookmark"
+msgstr "Bladwijzer"
+
+#: core.php:1104
+msgid "Show more info about this link"
+msgstr "Toon meer informatie over deze koppeling"
+
+#: core.php:1104
+#: core.php:2381
+msgid "Details"
+msgstr "Details"
+
+#: core.php:1106
+msgid "Remove this link from all posts"
+msgstr "Verwijder deze koppeling uit alle berichten"
+
+#: core.php:1107
+#: core.php:1371
+msgid "Unlink"
+msgstr "ontkoppel"
+
+#: core.php:1110
+#: core.php:1401
+#: core.php:1412
+msgid "Excluded"
+msgstr "Uitgesloten"
+
+#: core.php:1112
+msgid "Add this URL to the exclusion list"
+msgstr "Voeg deze URL toe aan de lijst met uitsluitingen"
+
+#: core.php:1113
+#: core.php:1415
+msgid "Exclude"
+msgstr "Uitsluiten"
+
+#: core.php:1116
+msgid "Edit link URL"
+msgstr "Bewerk URL koppeling"
+
+#: core.php:1116
+#: core.php:1340
+msgid "Edit URL"
+msgstr "Bewerk URL"
+
+#: core.php:1122
+msgid "Cancel URL editing"
+msgstr "Annuleer URL Bewerking"
+
+#: core.php:1122
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: core.php:1133
+msgid "Remove this link from the list of broken links and mark it as valid"
+msgstr "Verwijder deze koppeling uit de lijst met verbroken koppelingen en markeer hem als geldig"
+
+#: core.php:1135
+#: core.php:1204
+msgid "Discard"
+msgstr "Negeren"
+
+#: core.php:1180
+#: core.php:1347
+#: core.php:1384
+msgid "Wait..."
+msgstr "Wachten..."
+
+#: core.php:1238
+msgid "Save URL"
+msgstr "Opslaan URL"
+
+#: core.php:1248
+msgid "Saving changes..."
+msgstr "Veranderingen Opslaan..."
+
+#: core.php:1437
+msgid "Log"
+msgstr "Log"
+
+#: core.php:1445
+msgid "Post published on"
+msgstr "Bericht gepubliceer op"
+
+#: core.php:1450
+msgid "Link last checked"
+msgstr "Koppeling laatst gecontroleerd op"
+
+#: core.php:1454
+msgid "Never"
+msgstr "Nooit"
+
+#: core.php:1460
+msgid "HTTP code"
+msgstr "HTTP code"
+
+#: core.php:1465
+msgid "Response time"
+msgstr "Responstijd"
+
+#: core.php:1467
+#, php-format
+msgid "%2.3f seconds"
+msgstr "%2.3f seconden"
+
+#: core.php:1470
+msgid "Final URL"
+msgstr "Ultime URL"
+
+#: core.php:1475
+msgid "Redirect count"
+msgstr "aantal omgeleide koppelingen"
+
+#: core.php:1480
+msgid "Instance count"
+msgstr "Aantal"
+
+#: core.php:1489
+#, php-format
+msgid "This link has failed %d time."
+msgid_plural "This link has failed %d times."
+msgstr[0] "Deze koppeling heeft %d keer gefaald."
+msgstr[1] "Deze koppeling heeft %d keer gefaald."
+
+#: core.php:1879
+#: core.php:2206
+msgid "This link wasn't checked because a matching keyword was found on your exclusion list."
+msgstr "Deze koppeling is niet gecontroleerd omdat een overeenkomend sleutelwoord is gevonden in uw lijst van uitsluitingen."
+
+#: core.php:1921
+msgid "View broken links"
+msgstr "Bekijk verbroken koppelingen."
+
+#: core.php:1922
+#, php-format
+msgid "Found %d broken link"
+msgid_plural "Found %d broken links"
+msgstr[0] "%d verbroken koppeling gevonden"
+msgstr[1] "%d verbroken koppelingen gevonden"
+
+#: core.php:1928
+msgid "No broken links found."
+msgstr "Geen verbroken koppelingen gevonden."
+
+#: core.php:1935
+#, php-format
+msgid "%d URL in the work queue"
+msgid_plural "%d URLs in the work queue"
+msgstr[0] "%d URL in de wachtrij"
+msgstr[1] "%d URL&#x0027;s in de wachtrij"
+
+#: core.php:1938
+msgid "No URLs in the work queue."
+msgstr "Geen URL's in de wachtrij."
+
+#: core.php:1944
+#, php-format
+msgid "Detected %d unique URL"
+msgid_plural "Detected %d unique URLs"
+msgstr[0] "%d unieke URL ontdekt"
+msgstr[1] "%d unieke URL&#x0027;s ontdekt"
+
+#: core.php:1945
+#, php-format
+msgid "in %d link"
+msgid_plural "in %d links"
+msgstr[0] "In %d koppeling"
+msgstr[1] "in %d koppelingen"
+
+#: core.php:1950
+msgid "and still searching..."
+msgstr "en nog steeds aan 't zoeken..."
+
+#: core.php:1956
+msgid "Searching your blog for links..."
+msgstr "Uw blog aan 't doorzoeken op koppelingen..."
+
+#: core.php:1958
+msgid "No links detected."
+msgstr "geen koppelingen aangetroffen."
+
+#: core.php:2027
+#: core.php:2059
+#: core.php:2102
+#: core.php:2183
+msgid "You're not allowed to do that!"
+msgstr "U heeft geen toestemming om dat te doen!"
+
+#: core.php:2035
+#: core.php:2069
+#: core.php:2112
+#: core.php:2193
+#, php-format
+msgid "Oops, I can't find the link %d"
+msgstr "Oei, ik kan koppeling %d niet vinden"
+
+#: core.php:2043
+msgid "This link was manually marked as working by the user."
+msgstr "Deze koppeling is handmatig aangemerkt als werkende door de gebruiker."
+
+#: core.php:2049
+msgid "Oops, couldn't modify the link!"
+msgstr "Oei, ik kan deze koppeling niet bewerken!"
+
+#: core.php:2052
+#: core.php:2129
+msgid "Error : link_id not specified"
+msgstr "Fout : link_id niet opgegeven"
+
+#: core.php:2076
+msgid "Oops, the new URL is invalid!"
+msgstr "Oei, de nieuwe URL is ongeldig!"
+
+#: core.php:2085
+msgid "An unexpected error occured!"
+msgstr "Er is een onverwachte fout opgetreden!"
+
+#: core.php:2094
+msgid "Error : link_id or new_url not specified"
+msgstr "Fout: link_id of new_url niet opgegeven"
+
+#: core.php:2119
+#, php-format
+msgid "URL %s was removed."
+msgstr "de URL %s is verwijderd."
+
+#: core.php:2123
+msgid "The plugin failed to remove the link."
+msgstr "De invoegtoepassing kon de koppeling niet verwijderen."
+
+#: core.php:2138
+msgid "You don't have sufficient privileges to access this information!"
+msgstr "U heefty onvoldoende toegangsrechten tot deze informatie! "
+
+#: core.php:2151
+msgid "Error : link ID not specified"
+msgstr "Fout : link ID niet opgegeven"
+
+#: core.php:2175
+#, php-format
+msgid "Failed to load link details (%s)"
+msgstr "Laden van koppelingsdetails (%s) mislukt"
+
+#: core.php:2213
+#, php-format
+msgid "URL %s added to the exclusion list"
+msgstr "URL %s toegevoegd aan de lijst van uitsluitingen"
+
+#: core.php:2217
+msgid "Link ID not specified"
+msgstr "Link ID niet opgegeven"
+
+#: core.php:2367
+#, php-format
+msgid "The current temporary directory is not accessible; please <a href=\"%s\">set a different one</a>."
+msgstr "De huidige tijdelijke map is niet toegankelijk: svp <a href=\"%s\">een nieuwe instellen</a>."
+
+#: core.php:2372
+#, php-format
+msgid "Please make the directory <code>%1$s</code> writable by plugins or <a href=\"%2$s\">set a custom temporary directory</a>."
+msgstr "Geef spv de map <code>%1$s</code> schrijfrechten voor invoegtoepassingen of <a href=\"%2$s\">stel een aangepaste tijdelijke map in</a>."
+
+#: core.php:2379
+msgid "Broken Link Checker can't create a lockfile."
+msgstr "BLC kan geen vergrendelbestand maken."
+
+#: core.php:2384
+msgid ""
+"The plugin uses a file-based locking mechanism to ensure that only one instance of the\n"
+"\t\t\t\tresource-heavy link checking algorithm is running at any given time. Unfortunately,  \n"
+"\t\t\t\tBLC can't find a writable directory where it could store the lockfile - it failed to \n"
+"\t\t\t\tdetect the location of your server's temporary directory, and the plugin's own directory\n"
+"\t\t\t\tisn't writable by PHP. To fix this problem, please make the plugin's directory writable\n"
+"\t\t\t\tor enter a specify a custom temporary directory in the plugin's settings."
+msgstr ""
+"De invoegtoepassing gebruikt een vergrendelingsbestand om zeker te stellen dat slechts exemplaar van het\n"
+"\t\t\t\tveel geheugen inbeslagnemende algorithme voor kopplingscontrole is geladen. Helaas kan \n"
+"\t\t\t\tBLC geen beschrijfbare map vinden waar het zijn vergrendelingsbestand kan opslaan. BLC kon \n"
+"\t\t\t\tuw server&#x0027;s tijdelijke map niet vinden en de eigen map is niet beschrijfbaar door PHP. \n"
+"\t\t\t\t Om dit probleem op te lossen moet u de map schrijfrechten geven \n"
+"\t\t\t\tof zelf een tijdelijke map opgeven bij de instellingen van de invoegtoepassing."
+
+#: core.php:2409
+msgid "PHP version"
+msgstr "PHP versie"
+
+#: core.php:2415
+msgid "MySQL version"
+msgstr "MySQL versie"
+
+#: core.php:2428
+msgid "You have an old version of CURL. Redirect detection may not work properly."
+msgstr "U heeft een oude versie van CURL. Omleidingsdetectie werkt misschien niet goed."
+
+#: core.php:2440
+#: core.php:2456
+#: core.php:2461
+msgid "Not installed"
+msgstr "Niet ge&iuml;nstalleerd."
+
+#: core.php:2443
+msgid "CURL version"
+msgstr "CURL versie"
+
+#: core.php:2449
+msgid "Installed"
+msgstr "Ge&iuml;nstalleerd."
+
+#: core.php:2462
+msgid "You must have either CURL or Snoopy installed for the plugin to work!"
+msgstr "U moet of CURL of Snoopy hebben ge&iuml;nstalleerd. Anders werkt de invoegtoepassing niet!"
+
+#: core.php:2473
+msgid "On"
+msgstr "Op"
+
+#: core.php:2474
+msgid "Redirects may be detected as broken links when safe_mode is on."
+msgstr "Omgeleid koppelingen kunnen worden ge&iuml;ntepreteerd als verbroken koppelingen wanneer safe_mode aan staat."
+
+#: core.php:2479
+#: core.php:2493
+msgid "Off"
+msgstr "Uit"
+
+#: core.php:2487
+#, php-format
+msgid "On ( %s )"
+msgstr "Aan (%s)"
+
+#: core.php:2488
+msgid "Redirects may be detected as broken links when open_basedir is on."
+msgstr "Omgeleide koppelingen kunnen worden aangemerkt als verbroken koppeligen wanneer open_basedir aan staan."
+
+#: core.php:2507
+msgid "Can't create a lockfile. Please specify a custom temporary directory."
+msgstr "Kan geen vergrendelingsbestand maken. Geef een aangepast tijdelijke mapm op."
+
+#: link-classes.php:212
+msgid "First try : 0 (No response)"
+msgstr "eerste poging : 0 (geen reactie)"
+
+#: link-classes.php:214
+#, php-format
+msgid "First try : %d"
+msgstr "eerste poging : %d"
+
+#: link-classes.php:222
+msgid "Trying a second time with different settings..."
+msgstr "Een tweede poging met verschillende instellingen..."
+
+#: link-classes.php:237
+msgid "Second try : 0 (No response)"
+msgstr "Tweede poging : 0 (Geen reactie)"
+
+#: link-classes.php:239
+#, php-format
+msgid "Second try : %d"
+msgstr "Tweede poging : %d"
+
+#: link-classes.php:265
+msgid "Using Snoopy"
+msgstr "Gebruik Snoopy"
+
+#: link-classes.php:285
+msgid "Request timed out."
+msgstr "Time-out voor Verzoek opgetreden."
+
+#: link-classes.php:304
+msgid "Link is valid."
+msgstr "Koppeling is geldig."
+
+#: link-classes.php:309
+msgid "Link is broken."
+msgstr "Koppeling is verbroken."
+
+#: link-classes.php:313
+msgid "Most likely the connection timed out or the domain doesn't exist."
+msgstr "Hoogstwaarschijnlijk is er een time-out voor de verbinding opgetreden, of het domein bestaat niet."
+
+#: link-classes.php:354
+#, php-format
+msgid "Error adding link %s : %s"
+msgstr "Fout bij het toevoegen van koppeling %s : %s"
+
+#: link-classes.php:374
+#, php-format
+msgid "Error updating link %d : %s"
+msgstr "Fout bij het vernieuwen van de koppeling %d : %s"
+
+#. Plugin Name of an extension
+msgid "Broken Link Checker"
+msgstr "Broken Link Checker"
+
+#. Plugin URI of an extension
+msgid "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
+msgstr "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
+
+#. Description of an extension
+msgid "Checks your posts for broken links and missing images and notifies you on the dashboard if any are found."
+msgstr "Controlleert uw berichten op verbroken koppelingen, missende afbeeldingen en geeft dit op uw Dashboard weer als die zijn gevonden."
+
+#. Author of an extension
+msgid "Janis Elsts"
+msgstr "Janis Elsts"
+
+#. Author URI of an extension
+msgid "http://w-shadow.com/blog/"
+msgstr "http://w-shadow.com/blog/"
+
+#~ msgid "hours"
+#~ msgstr "uur"
+#~ msgid "Apply"
+#~ msgstr "Toepassen van "
+#~ msgid ""
+#~ "<span class='view'><a class='blc-details-button' href='javascript:void"
+#~ "(0)' title='Show more info about this link'>Details</a>"
+#~ msgstr ""
+#~ "<span class='view'><a class='blc-details-button' href='javascript:void"
+#~ "(0)' title='Toon meer info over deze link'>Details</a>"
+#~ msgid ""
+#~ "<span class='delete'><a class='submitdelete blc-unlink-button' "
+#~ "title='Remove this link from all posts' id='unlink-button-$rownum' "
+#~ "href='javascript:void(0);'>Unlink</a>"
+#~ msgstr ""
+#~ "<span class='delete'><a class='submitdelete blc-unlink-button' "
+#~ "title='Verwijder deze link uit alle berichten' id='unlink-button-$rownum' "
+#~ "href='javascript:void(0);'>Ontkoppel</a>"
+#~ msgid "<span class='delete'>Excluded"
+#~ msgstr "<span class='delete'>Uitgesloten"
+#~ msgid ""
+#~ "<span class='delete'><a class='submitdelete blc-exclude-button' "
+#~ "title='Add this URL to the exclusion list' id='exclude-button-$rownum' "
+#~ "href='javascript:void(0);'>Exclude</a>"
+#~ msgstr ""
+#~ "<span class='delete'><a class='submitdelete blc-unlink-button' "
+#~ "title='Voeg deze URL toe aan de lijst met uitzonderingen' id='unlink-"
+#~ "button-$rownum' href='javascript:void(0);'>Uitsluiten</a>"
+#~ msgid ""
+#~ "<span class='edit'><a href='javascript:void(0)' class='blc-edit-button' "
+#~ "title='Edit link URL'>Edit URL</a>"
+#~ msgstr ""
+#~ "<span class='edit'><a href='javascript:void(0)' class='blc-edit-button' "
+#~ "title='Bewerk link van URL'>Bewerk URL</a>"
+#~ msgid "'Remove this message and mark the link as valid'>Discard"
+#~ msgstr ""
+#~ "'Verwijder deze boodschap en markeer de koppling als geldig'>Negeren"
+#~ msgid ""
+#~ "<a href='%stools.php?page=view-broken-links' title='View broken "
+#~ "links'><strong>Found %d broken link%s</strong></a>"
+#~ msgstr ""
+#~ "<a href='%stools.php?page=view-broken-links' title='Bekijk verbroken "
+#~ "links'><strong>%d verbroken link%s gevonden</strong></a>"
+#~ msgid ""
+#~ "<a class=\"row-title\" href=\"post.php?action=edit&amp;post=$link"
+#~ "[source_id]\" title=\"Edit this post\">{$link[post_title]}</a>"
+#~ msgstr ""
+#~ "<a class=\"row-title\" href=\"post.php?action=edit&amp;post=$link"
+#~ "[source_id]\" title=\"Bewerk dit bericht\">{$link[post_title]}</a>"
+#~ msgid ""
+#~ "<a class=\"row-title\" href=\"link.php?action=edit&amp;link_id=$link"
+#~ "[source_id]\" title=\"Edit this bookmark\">{$link[link_text]}</a>"
+#~ msgstr ""
+#~ "<a class=\"row-title\" href=\"link.php?action=edit&amp;link_id=$link"
+#~ "[source_id]\" title=\"Bewerk deze bladwijzer\">{$link[link_text]}</a>"
+

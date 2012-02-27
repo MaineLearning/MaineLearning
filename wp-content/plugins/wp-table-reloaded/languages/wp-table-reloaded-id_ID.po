@@ -1,0 +1,2479 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Table Reloaded 1.8\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-table-reloaded\n"
+"POT-Creation-Date: 2011-09-16 17:55:21+00:00\n"
+"PO-Revision-Date: 2011-09-18 22:27+0700\n"
+"Last-Translator: Kelayang <k@kelayang.com>\n"
+"Language-Team: Dedy Sofyan <dedy@sys-talk.com>, Kelayang <k@kelayang.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid "It is recommended to export and backup the data of important tables regularly."
+msgstr "Disarankan untuk mengekspor dan mencadangkan data-data penting pada tabel secara teratur."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid "Select the table, the desired export format and (for CSV only) a delimiter."
+msgstr "Pilih tabel, format ekspor yang diinginkan dan (untuk CSV saja) karakter pembatas."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid "You may choose to download the export file. Otherwise it will be shown on this page."
+msgstr "Anda dapat memilih untuk mengunduh berkas ekspor. Jika tidak, ia akan muncul di laman ini."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid "Be aware that only the table data, but no options or settings are exported."
+msgstr "Mohon dicatat, hanya data tabel saja (pengaturan tidak termasuk) yang akan diekspor."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid "To backup all tables, including their settings, at once use the &quot;%s&quot; button in the &quot;%s&quot;."
+msgstr "Untuk menyalin cadangan seluruh tabel, termasuk pengaturan mereka, sekaligus silahkan gunakan tombol &quot;%s&quot; pada &quot;%s&quot;."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+#: views/view-options.php:190
+msgid "Create and Download Dump File"
+msgstr "Buat dan Unduh Berkas <em>Dump</em>"
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+#: views/view-edit.php:350
+#: views/view-edit.php:365
+#: controllers/controller-admin.php:1266
+#: controllers/controller-admin.php:1308
+msgid "Plugin Options"
+msgstr "Pengaturan Plugin"
+
+# @ wp-table-reloaded
+#: views/view-export.php:18
+msgid "Select Table to Export"
+msgstr "Pilih Tabel untuk Diekspor"
+
+# @ wp-table-reloaded
+#: views/view-export.php:34
+msgid "Select Export Format"
+msgstr "Pilih Format Ekspor"
+
+# @ wp-table-reloaded
+#: views/view-export.php:44
+msgid "Select Delimiter to use"
+msgstr "Pilih Karakter Pembatas yang ingin digunakan"
+
+# @ wp-table-reloaded
+#: views/view-export.php:51
+msgid "Only needed for CSV export."
+msgstr "Hanya dibutuhkan ketika mengekspor CSV."
+
+# @ wp-table-reloaded
+#: views/view-export.php:54
+msgid "Download file"
+msgstr "Unduh berkas"
+
+# @ wp-table-reloaded
+#: views/view-export.php:55
+msgid "Yes, I want to download the export file."
+msgstr "Ya, saya ingin mengunduh berkas ekspor tsb."
+
+# @ wp-table-reloaded
+#: views/view-export.php:60
+#: views/view-edit.php:477
+msgid "Export Table"
+msgstr "Ekspor Tabel"
+
+# @ wp-table-reloaded
+#: views/view-export.php:72
+#: views/view-ajax_list.php:53
+#: views/view-list.php:87
+#: controllers/controller-admin.php:1856
+msgid "No tables were found."
+msgstr "Tidak ditemukan tabel."
+
+# @ wp-table-reloaded
+#: views/view-export.php:72
+#: views/view-list.php:87
+msgid "You should <a href=\"%s\">add</a> or <a href=\"%s\">import</a> a table to get started!"
+msgstr "Anda disarankan <a href=\"%s\">menambah</a> atau <a href=\"%s\">mengimpor</a> sebuah tabel untuk memulai!"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:8
+msgid "On this page, you can edit the content of the table."
+msgstr "Pada laman ini, Anda dapat menyunting konten dari tabel."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:8
+msgid "It is also possible to change the table structure by inserting, deleting, moving, and swapping columns and rows."
+msgstr "Mungkin juga mengubah struktur tabel dengan menyisipkan, menghapus, memindahkan, dan menukar kolom dan baris."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:9
+#: views/view-about.php:14
+#: views/view-list.php:2
+#: views/view-ajax_preview.php:5
+msgid "To insert the table into a page, post or text-widget, copy the shortcode <strong>[table id=%s /]</strong> and paste it into the corresponding place in the editor."
+msgstr "Untuk menambahkan tabel ke dalam suatu halaman, tulisan, atau widget teks, salinlah kode-singkat ini <strong>[table id=%s /]</strong> dan tempelkan ke tempat yang diinginkan pada editor."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:15
+msgid "Table Information"
+msgstr "Informasi Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:361
+#: views/view-edit.php:422
+#: views/view-about.php:89
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:91
+#: views/view-options.php:185
+#: views/view-options.php:196
+msgctxt "expand"
+msgid "Hide"
+msgstr "Sembunyikan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:15
+#: views/view-edit.php:51
+#: views/view-edit.php:104
+#: views/view-edit.php:262
+#: views/view-edit.php:361
+#: views/view-edit.php:422
+#: views/view-about.php:89
+#: views/view-options.php:19
+#: views/view-options.php:70
+#: views/view-options.php:91
+#: views/view-options.php:185
+#: views/view-options.php:196
+msgid "Expand"
+msgstr "Perluas"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:19
+msgid "Table ID"
+msgstr "ID Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:23
+#: views/view-edit.php:283
+#: views/view-ajax_list.php:14
+#: views/view-ajax_list.php:22
+#: views/view-import.php:100
+#: views/view-import.php:109
+#: views/view-list.php:15
+#: views/view-list.php:25
+#: views/view-add.php:13
+msgid "Table Name"
+msgstr "Nama Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:27
+#: views/view-ajax_list.php:15
+#: views/view-ajax_list.php:23
+#: views/view-import.php:101
+#: views/view-import.php:110
+#: views/view-list.php:16
+#: views/view-list.php:26
+#: views/view-add.php:17
+msgid "Description"
+msgstr "Deskripsi"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:32
+#: views/view-list.php:17
+#: views/view-list.php:27
+msgid "Last Modified"
+msgstr "Terakhir Dimodifikasi"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:33
+#: views/view-list.php:44
+msgid "by"
+msgstr "oleh"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:41
+#: views/view-edit.php:253
+#: views/view-edit.php:413
+#: views/view-edit.php:464
+#: controllers/controller-admin.php:1746
+msgid "Update Changes"
+msgstr "Perbarui Perubahan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:42
+#: views/view-edit.php:254
+#: views/view-edit.php:414
+#: views/view-edit.php:465
+msgid "Save and go back"
+msgstr "Simpan dan kembali"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:45
+#: views/view-edit.php:257
+#: views/view-edit.php:417
+#: views/view-edit.php:468
+#: views/view-options.php:65
+#: views/view-options.php:172
+msgid "Cancel"
+msgstr "Batal"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:51
+msgid "Table Contents"
+msgstr "Konten Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:104
+msgid "Data Manipulation"
+msgstr "Manipulasi Data"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:114
+#: views/view-options.php:55
+msgid "Insert Link"
+msgstr "Sisip Taut"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:115
+msgid "Insert Image"
+msgstr "Sisip Gambar"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:124
+msgid "ascending"
+msgstr "naik"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:125
+msgid "descending"
+msgstr "turun"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:128
+msgid "Sort table by column %s in %s order"
+msgstr "Sortir tabel dengan kolom %s dalam %s urutan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:130
+msgid "Sort"
+msgstr "Sortir"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:135
+#: views/view-edit.php:139
+msgctxt "item"
+msgid "Hide"
+msgstr "Sembunyikan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:136
+#: views/view-edit.php:140
+msgctxt "item"
+msgid "Unhide"
+msgstr "Munculkan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:137
+msgctxt "hide_unhide"
+msgid "Selected rows: %s %s"
+msgstr "Baris terpilih: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:141
+msgctxt "hide_unhide"
+msgid "Selected columns: %s %s"
+msgstr "Kolom terpilih: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:144
+msgid "Combine cells in a row:"
+msgstr "Gabungkan sel dalam satu baris:"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:145
+msgid "Add colspan"
+msgstr "Tambah <em>colspan</em>"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:148
+msgid "Combine cells in a column:"
+msgstr "Gabungkan sel pada satu kolom:"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:149
+msgid "Add rowspan"
+msgstr "Tambah <em>rowspan</em>"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:155
+msgid "Insert row"
+msgstr "Tambah baris"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:156
+#: views/view-edit.php:160
+#: views/view-list.php:65
+msgid "Delete"
+msgstr "Hapus"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:157
+msgctxt "insert_delete"
+msgid "Selected rows: %s %s"
+msgstr "Baris terpilih: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:159
+msgid "Insert column"
+msgstr "Tambah kolom"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:161
+msgctxt "insert_delete"
+msgid "Selected columns: %s %s"
+msgstr "Kolom terpilih: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:171
+msgid "Add %s row(s)"
+msgstr "Tambah %s baris"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:172
+#: views/view-edit.php:175
+#: views/view-edit.php:459
+msgid "Add"
+msgstr "Tambah"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:174
+msgid "Add %s column(s)"
+msgstr "Tambah %s kolom"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:189
+msgid "Swap rows %s and %s"
+msgstr "Tukar baris %s dan %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:191
+#: views/view-edit.php:206
+msgid "Swap"
+msgstr "Tukar"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:204
+msgid "Swap columns %s and %s"
+msgstr "Tukar kolom %s dan %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:219
+#: views/view-edit.php:239
+msgid "before"
+msgstr "sebelum"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:220
+#: views/view-edit.php:240
+msgid "after"
+msgstr "sesudah"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:223
+msgid "Move row %s %s row %s"
+msgstr "Pindah baris %s %s baris %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:225
+#: views/view-edit.php:245
+msgid "Move"
+msgstr "Pindah"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:243
+msgid "Move column %s %s column %s"
+msgstr "Pindah kolom %s %s kolom %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:262
+msgid "Table Styling Options"
+msgstr "Pengaturan Penggayaan Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:264
+msgid "These settings will only be used for this table."
+msgstr "Pengaturan ini hanya akan digunakan oleh tabel ini saja."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:267
+msgid "Alternating row colors"
+msgstr "Warna baris bergantian"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:268
+msgid "Every second row has an alternating background color."
+msgstr "Setiap baris genap akan memiliki warna yang berbeda dengan yang ganjil."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:271
+msgid "Row Highlighting"
+msgstr "Penyorotan baris"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:272
+msgid "Highlight a row by changing its background color while the mouse cursor hovers above it."
+msgstr "Sorot sebuah baris dengan mengganti warna latarnya ketika kursor tetikus melayang di atasnya."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:275
+msgid "Table head"
+msgstr "Tajuk tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:276
+msgid "The first row of your table is the table head (HTML tags &lt;thead&gt; and &lt;th&gt;)."
+msgstr "Baris pertama tabel Anda adalah tajuk tabel (tag HTML &lt;thead&gt; dan &lt;th&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:279
+msgid "Table footer"
+msgstr "Kaki tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:280
+msgid "The last row of your table is the table footer (HTML tags &lt;tfoot&gt; and &lt;th&gt;)."
+msgstr "Baris terakhir dari tabel Anda adalah kaki tabel (tag HTML  &lt;tfoot&gt; dan &lt;th&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:289
+#: views/view-edit.php:306
+msgid "above"
+msgstr "di atas"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:291
+#: views/view-edit.php:308
+msgid "below"
+msgstr "di bawah"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:294
+msgid "The Table Name shall be written %s the table (HTML tag &lt;h2&gt;)."
+msgstr "Nama Tabel akan ditulis %s tabel (tag HTML &lt;h2&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:300
+msgid "Table Description"
+msgstr "Deskripsi Tabel"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:311
+msgid "The Table Description shall be written %s the table."
+msgstr "Deskripsi Tabel akan ditulis %s tabel ybs."
+
+#: views/view-edit.php:317
+msgid "Cache Table Output"
+msgstr "Tembolokkan Hasil Tabel"
+
+#: views/view-edit.php:318
+msgid "The resulting HTML output of the table shall be cached in the WordPress database cache for faster page generation."
+msgstr "Hasil keluaran HTML berikut akan ditembolokkan ke dalam tembolok basis data WordPress untuk produk halaman yang lebih cepat."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:321
+msgid "Extra CSS Class"
+msgstr "Kelas CSS Tersuai"
+
+#: views/view-edit.php:322
+msgid "Enter a string that will be given to the table as an additional class for styling with CSS."
+msgstr "Masukkan sebuah <em>string</em> yang akan diberikan ke tabel sebagai kelas tambahan untuk penggayaan dengan CSS."
+
+#: views/view-edit.php:322
+msgid "This is not the place to enter \"Custom CSS\" code!"
+msgstr "Ini bukan tempat untuk memasukkan kode \"CSS Tersuai\"!"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:325
+msgid "Use JavaScript library"
+msgstr "Gunakan pustaka JavaScript"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:331
+#: views/view-edit.php:335
+#: views/view-edit.php:347
+msgid "You can change further settings for this library below."
+msgstr "Anda dapat mengubah pengaturan lebih lanjut untuk pustaka ini di bawah."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:339
+#: views/view-edit.php:343
+msgid "The table will then be sortable by the visitor."
+msgstr "Tabel akan dapat disortir oleh pengunjung."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:350
+msgid "Yes, use the &quot;%s&quot; JavaScript library with this table."
+msgstr "Ya, gunakan pustaka JavaScript &quot;%s&quot; pada tabel ini."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:350
+msgid "You must enable the use of a JavaScript library on the &quot;%s&quot; screen first."
+msgstr "Anda harus mengaktifkan pustaka JavaScript pada layar &quot;%s&quot; terlebih dahulu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:361
+msgid "DataTables JavaScript Features"
+msgstr "Fitur JavaScript DataTables"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:363
+msgid "You can enable certain features for the DataTables JavaScript library here."
+msgstr "Anda dapat mengaktifkan fitur-fitur tertentu pada pustaka JavaScript DataTables di sini."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:363
+msgid "More information on these features can be found on the <a href=\"http://www.datatables.net/\">DataTables website</a>."
+msgstr "Info lebih lanjut untuk fitur-fitur ini dapat dilihat di <a href=\"http://www.datatables.net/\">situs web DataTables</a>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:365
+msgid "You can currently not change these options, because you have not enabled the &quot;DataTables&quot; or the &quot;DataTables+TableTools&quot; JavaScript library on the &quot;%s&quot; screen."
+msgstr "Anda saat ini tidak dapat mengubah pengaturan ini, karena Anda belum mengaktifkan pustaka JavaScript &quot;DataTables&quot; atau &quot;DataTables+TableTools&quot; pada layar &quot;%s&quot;."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:365
+msgid "It is not possible to use these features with the &quot;Tablesorter&quot; or &quot;Tablesorter Extended&quot; libraries."
+msgstr "Tidak memungkinkan untuk menggunakan fitur-fitur ini dengan pustaka &quot;Tablesorter&quot; atau &quot;Tablesorter Extended&quot;"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:369
+msgid "Sorting"
+msgstr "Pensortiran"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:370
+msgid "Yes, enable sorting of table data by the visitor."
+msgstr "Ya, aktifkan pensortiran data tabel oleh pengunjung."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:373
+msgid "Pagination"
+msgstr "Penomoran-laman (paginasi)"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:378
+msgid "Yes, enable pagination (showing only a certain number of rows) of the table by the visitor."
+msgstr "Ya, mengaktifkan penomoran-laman (menampilkan hanya beberapa baris saja) dari sebuah tabel oleh pengunjung."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:380
+msgid "Show %1$s rows of the table per page."
+msgstr "Tampilkan %1$s baris dari sebuah tabel per halaman."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:386
+msgid "Length Change"
+msgstr "Perubahan Panjang"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:387
+msgid "Yes, allow the visitor to change the number of rows shown when using pagination."
+msgstr "Ya, izinkan pengunjung mengubah jumlah baris yang ditampilkan ketika menggunakan penomoran-laman (paginasi)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:390
+msgid "Filtering"
+msgstr "Penyaringan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:391
+msgid "Yes, enable the visitor to filter or search the table. Only rows with the search word in them are shown."
+msgstr "Ya, izinkan pengunjung menyaring atau mencari tabel. Hanya baris-baris dengan kata pencarian yang ditampilkan."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:394
+msgid "Info Bar"
+msgstr "Batang Info"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:395
+msgid "Yes, show the table information display. This shows information and statistics about the currently visible data, including filtering."
+msgstr "Ya, tampilkan informasi tabel. Ini menampilkan informasi dan statistik mengenai data yang muncul saat ini, termasuk penyaringan."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:398
+msgid "TableTools"
+msgstr "TableTools"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:400
+msgid "Yes, activate the TableTools functions (Copy to Clipboard, Save to CSV, Save to XLS, Print Table) for this table."
+msgstr "Ya, aktifkan fungsi TableTools (Salin ke Klipbor, Simpan ke CSV, Simpan ke XLS, Cetak Tabel) untuk tabel ini."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:401
+msgid "This option can only be used with the &quot;DataTables+TableTools&quot; JavaScript library."
+msgstr "Pengaturan ini hanya dapat digunakan dengan pustaka JavaScript &quot;DataTables+TableTools&quot;."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:405
+msgid "Custom Commands"
+msgstr "Perintah Tersuai"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:406
+msgid "Enter additional DataTables JavaScript parameters that will be included with the script call here."
+msgstr "Masukkan parameter tambahan JavaScript DataTables yang ingin diikutsertakan ke dalam panggilan skrip di sini."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:406
+msgid "For advanced use only. Read the <a href=\"http://www.datatables.net/\">DataTables documentation</a> before."
+msgstr "Untuk pengguna lanjutan saja. Baca terlebih dahulu <a href=\"http://www.datatables.net/\">dokumentasi DataTables</a>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:422
+msgid "Custom Data Fields"
+msgstr "Ruas Data Tersuai"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:424
+msgid "Custom Data Fields can be used to add extra metadata to a table."
+msgstr "Ruas Data Tersuai yang dapat digunakan untuk menambah metadata ekstra ke dalam tabel."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:424
+msgid "For example, this could be information about the source or the creator of the data."
+msgstr "Sebagai contoh, bisa merupakan informasi mengenai sumber atau pembuat data tsb."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:426
+msgid "You can show this data in the same way as tables by using the shortcode <strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+msgstr "Anda dapat menampilkan data ini dengan cara yang sama dengan tabel lain menggunakan kode-singkat <strong>[table-info id=%s field=\"&lt;nama-field&gt;\" /]</strong>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:432
+msgid "Field Name"
+msgstr "Nama Ruas"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:433
+msgid "Value"
+msgstr "Nilai"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:434
+#: views/view-ajax_list.php:16
+#: views/view-ajax_list.php:24
+#: views/view-import.php:102
+#: views/view-import.php:111
+msgid "Action"
+msgstr "Tindakan"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:447
+msgid "Delete Field"
+msgstr "Hapus Ruas"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:449
+msgid "View shortcode"
+msgstr "Tampil kode-singkat"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:458
+msgid "To add a new Custom Data Field, enter its name (only lowercase letters, numbers, _ and -)."
+msgstr "Untuk menambah Ruas Data Tersuai yang baru, masukkan namanya (hanya huruf kecil, angka, _ dan -)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:459
+msgid "Custom Data Field Name"
+msgstr "Nama Ruas Data Tersuai"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:473
+msgid "Other actions"
+msgstr "Tindakan lain"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:476
+msgid "Delete Table"
+msgstr "Hapus Tabel"
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:3
+#: views/view-list.php:2
+msgid "This is a list of all available tables."
+msgstr "Ini adalah daftar dari seluruh tabel yang ada."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:3
+msgid "You may insert a table into a post or page here."
+msgstr "Anda dapat menyisipkan sebuah tabel ke dalam tulisan atau halaman di sini."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:4
+msgid "Click the &quot;%s&quot; link after the desired table and the corresponding shortcode will be inserted into the editor (<strong>[table id=&lt;ID&gt; /]</strong>)."
+msgstr "Klik taut &quot;%s&quot; sesudah tabel yang diinginkan maka kode-singkat ybs akan disisipkan ke dalam editor (<strong>[table id=&lt;ID&gt; /]</strong>)."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:4
+#: views/view-ajax_list.php:44
+msgid "Insert"
+msgstr "Sisipkan"
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:13
+#: views/view-ajax_list.php:21
+#: views/view-import.php:99
+#: views/view-import.php:108
+#: views/view-list.php:13
+#: views/view-list.php:23
+msgid "ID"
+msgstr "ID"
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "WP-Table Reloaded can import tables from existing data."
+msgstr "WP-Table Reloaded dapat mengimpor tabel dari data yang sudah ada."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "This may be a CSV, XML or HTML file, each with a certain structure."
+msgstr "Ini dapat  berupa berkas CSV, XML atau HTML, masing-masing dengan struktur tertentu."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "To import an existing table, please select its format and the source for the import."
+msgstr "Untuk mengimpor tabel yang sudah ada, silahkan pilih formatnya dan dari sumber mana untuk diimpor."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "You can also decide, if you want to import it as a new table or replace an existing table."
+msgstr "Anda juga dapat memutuskan, jika Anda ingin mengimpornya sebagai satu tabel baru atau mengganti tabel yang sudah ada."
+
+# @ wp-table-reloaded
+#: views/view-import.php:10
+msgid "Select Import Format"
+msgstr "Pilih Format Impor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:21
+msgid "Add or Replace Table?"
+msgstr "Tambah atau Ganti Tabel?"
+
+# @ wp-table-reloaded
+#: views/view-import.php:23
+msgid "Add as new Table"
+msgstr "Tambah sebagai Tabel baru"
+
+# @ wp-table-reloaded
+#: views/view-import.php:24
+msgid "Replace existing Table"
+msgstr "Ganti Tabel yang sudah ada"
+
+# @ wp-table-reloaded
+#: views/view-import.php:28
+msgid "Select existing Table to Replace"
+msgstr "Pilih Tabel yang sudah ada untuk Diganti"
+
+# @ wp-table-reloaded
+#: views/view-import.php:45
+msgid "Select source for Import"
+msgstr "Pilih sumber untuk Diimpor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:47
+msgid "File upload"
+msgstr "Pengunggahan berkas"
+
+# @ wp-table-reloaded
+#: views/view-import.php:48
+msgid "URL"
+msgstr "URL"
+
+# @ wp-table-reloaded
+#: views/view-import.php:49
+msgid "Manual input"
+msgstr "Masukan Manual"
+
+# @ wp-table-reloaded
+#: views/view-import.php:50
+msgid "File on server"
+msgstr "Berkas pada server"
+
+# @ wp-table-reloaded
+#: views/view-import.php:54
+msgid "Select File with Table to Import"
+msgstr "Pilih Berkas dengan Tabel untuk Diimpor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:58
+msgid "URL to Import Table from"
+msgstr "URL dari mana Tabel akan Diimpor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:62
+msgid "Path to file on server"
+msgstr "Path berkas pada server"
+
+# @ wp-table-reloaded
+#: views/view-import.php:66
+msgid "Paste data with Table to Import"
+msgstr "Tempel data dengan Tabel untuk Impor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:72
+msgid "Import Table"
+msgstr "Impor Tabel"
+
+# @ wp-table-reloaded
+#: views/view-import.php:86
+msgid "Import from original wp-Table plugin"
+msgstr "Impor dari plugin asal wp-Table"
+
+# @ wp-table-reloaded
+#: views/view-import.php:132
+msgid "Import"
+msgstr "Impor"
+
+# @ wp-table-reloaded
+#: views/view-import.php:140
+#: views/view-list.php:78
+msgid "Bulk actions:"
+msgstr "Tindakan massal:"
+
+# @ wp-table-reloaded
+#: views/view-import.php:140
+msgid "Import Tables"
+msgstr "Impor Tabel"
+
+# @ wp-table-reloaded
+#: views/view-import.php:146
+msgid "wp-Table by Alex Rabe seems to be installed, but no tables were found."
+msgstr "wp-Table oleh Alex Rabe sepertinya telah terpasang, tapi tidak ditemukan tabel."
+
+# @ wp-table-reloaded
+#: views/view-about.php:5
+msgid "Plugin Purpose"
+msgstr "Kegunaan Plugin"
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid "WP-Table Reloaded allows you to create and manage tables in the admin-area of WordPress."
+msgstr "WP-Table Reloaded mengizinkan Anda membuat dan mengatur tabel-tabel dari area admin WordPress."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid "Those tables may contain strings, numbers and even HTML (e.g. to include images or links)."
+msgstr "Tabel-tabel dapat mengandung unsur teks (string), angka dan bahkan HTML (co: untuk menyisipkan gambar atau taut)."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid "You can then show the tables in your posts, on your pages or in text-widgets by using a shortcode."
+msgstr "Anda dapat menampilkan tabel pada tulisan, halaman, atau pada widget teks Anda dengan menggunakan kode-singkat."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid "If you want to show your tables anywhere else in your theme, you can use a template tag function."
+msgstr "Jika Anda ingin menampilkan tabel Anda di tempat lain pada tema Anda, Anda bisa menggunakan fungsi tag templat."
+
+# @ wp-table-reloaded
+#: views/view-about.php:12
+msgid "Usage"
+msgstr "Pemakaian"
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "At first you should add or import a table."
+msgstr "Pertama-tama Anda disarankan menambahkan atau mengimpor sebuah tabel."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "This means that you either let the plugin create an empty table for you or that you load an existing table from either a CSV, XML or HTML file."
+msgstr "Ini artinya Anda mengizinkan plugin membuat sebuah tabel kosong untuk Anda atau memuat tabel yang sudah ada dari berkas CSV, XML atau HTML."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "Then you can edit your data or change the structure of your table (e.g. by inserting or deleting rows or columns, swaping rows or columns or sorting them) and select specific table options like alternating row colors or whether to print the name or description, if you want."
+msgstr "Lalu Anda sunting datanya atau ubah struktur tabelnya (co: dengan menyisipkan atau menghapus baris atau kolom, menukar baris atau kolom, atau mensortir mereka) dan memilih pengaturan tabel tertentu seperti warna baris berseling atau bahkan menampilkan nama atau deskripsi, jika Anda mau."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "To easily add a link or an image to a cell, use the provided buttons. Those will ask you for the URL and a title. Then you can click into a cell and the corresponding HTML will be added to it for you."
+msgstr "Untuk menambahkan sebuah taut atau gambar ke dalam satu sel dengan mudah, gunakan tombol-tombol yang telah disediakan. Mereka akan menanyakan Anda URL-nya dan judulnya. Lalu Anda klik pada sel dan HTML yang terkait akan ditambahkan di sana untuk Anda."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "You can also select the desired table from a list (after clicking the button &quot;%s&quot; in the editor toolbar) and the corresponding shortcode will be added for you."
+msgstr "Anda juga dapat memilih tabel yang diinginkan dari daftar (setelah klik tombol &quot;%s&quot; pada batang perkakas di editor) lalu kode-singkat ybs akan ditambahkan otomatis untuk Anda."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+#: views/view-list.php:2
+#: controllers/controller-admin.php:1795
+msgid "Table"
+msgstr "Tabel"
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "Tables can be styled by changing and adding CSS commands."
+msgstr "Tabel dapat digayakan dengan mengubah dan menambahkan perintah CSS."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "The plugin ships with default CSS Stylesheets, which can be customized with own code or replaced with other Stylesheets."
+msgstr "Plugin ini datang dengan Stylesheet CSS bawaan, yang bisa diganti menggunakan kode sendiri atau digantikan dengan Stylesheet yang lain."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "For this, each table is given certain CSS classes that can be used as CSS selectors."
+msgstr "Untuk ini, setiap tabel akan diberikan kelas CSS tertentu yang digunakan sebagai selektor CSS."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "Please see the <a href=\"%s\">documentation</a> for a list of these selectors and for styling examples."
+msgstr "Silahkan baca <a href=\"%s\">dokumentasi</a> untuk daftar selektor dan untuk contoh penggayaan."
+
+# @ wp-table-reloaded
+#: views/view-about.php:19
+msgid "More Information and Documentation"
+msgstr "Info lebih lanjut dan Dokumentasi"
+
+# @ wp-table-reloaded
+#: views/view-about.php:21
+#: classes/helper.class.php:40
+msgid "More information about WP-Table Reloaded can be found on the <a href=\"%s\">plugin's website</a> or on its page in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "Info lebih lanjut mengenai WP-Table Reloaded bisa Anda dapatkan di <a href=\"%s\">situs plugin tsb</a> atau pada halaman <a href=\"%s\">Direktori Plugin WordPress</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:21
+#: classes/helper.class.php:41
+msgid "For technical information, see the <a href=\"%s\">documentation</a>."
+msgstr "Untuk info teknis, silahkan baca <a href=\"%s\">dokumentasi</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:26
+msgid "Help and Support"
+msgstr "Bantuan dan Dukungan"
+
+# @ wp-table-reloaded
+#: views/view-about.php:28
+#: classes/helper.class.php:42
+msgid "<a href=\"%s\">Support</a> is provided through the <a href=\"%s\">WordPress Support Forums</a>."
+msgstr "<a href=\"%s\">Dukungan</a> diberikan melalui <a href=\"%s\">Forum Dukungan WordPress</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:28
+#: classes/helper.class.php:43
+msgid "Before asking for support, please carefully read the <a href=\"%s\">Frequently Asked Questions</a> where you will find answered to the most common questions, and search through the forums."
+msgstr "Sebelum meminta bantuan, harap baca terlebih dahulu secara seksama <a href=\"%s\">Frequently Asked Questions</a> di mana akan ditampilkan pertanyaan-pertanyaan yang biasanya sering ditanyakan oleh pengguna lain, setelah itu barulah lakukan pencarian di forum."
+
+# @ wp-table-reloaded
+#: views/view-about.php:28
+msgid "If you do not find an answer there, please <a href=\"%s\">open a new thread</a> in the WordPress Support Forums with the tag &quot;wp-table-reloaded&quot;."
+msgstr "Bila Anda tidak menemukan jawaban yang Anda cari di sini, harap <a href=\"%s\">buka thread baru</a> di Forum Dukungan WordPress dengan tag &quot;wp-table-reloaded&quot;."
+
+# @ wp-table-reloaded
+#: views/view-about.php:33
+msgid "Author and License"
+msgstr "Penulis dan Lisensi"
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid "This plugin was written by <a href=\"%s\">Tobias B&auml;thge</a>."
+msgstr "Plugin ini ditulis oleh <a href=\"%s\">Tobias B&auml;thge</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid "It is licensed as Free Software under GPL 2."
+msgstr "Dilisensi sebagai Piranti Lunak Gratis di bawah naungan GPL 2 (\"Free Software under GPL 2\")."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+#: classes/helper.class.php:44
+msgid "If you like the plugin, <a href=\"%s\"><strong>a donation</strong></a> is recommended."
+msgstr "Jika Anda suka plugin ini, kami hargai <a href=\"%s\"><strong>donasinya</strong></a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid "Please rate the plugin in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr "Silahkan nilai plugin ini di <a href=\"%s\">Direktori Plugin WordPress</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid "Donations and good ratings encourage me to further develop the plugin and to provide countless hours of support. Any amount is appreciated! Thanks!"
+msgstr "Donasi dan nilai yang bagus akan mendorong saya untuk terus mengembangkan plugin ini dan memberikan berjam-jam dukungan. Berapapun jumlah dan nilainya tetap saya hargai! Terima kasih!"
+
+# @ wp-table-reloaded
+#: views/view-about.php:40
+msgid "Credits and Thanks"
+msgstr "Penghargaan dan Terima kasih"
+
+# @ wp-table-reloaded
+#: views/view-about.php:43
+msgid "Thanks go to <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> for the original wp-Table plugin,"
+msgstr "Terima kasih kepada <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> untuk plugin awal wp-Table,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:44
+msgid "Allan Jardine for the <a href=\"http://www.datatables.net/\">DataTables jQuery plugin</a>,"
+msgstr "Allan Jardine untuk <a href=\"http://www.datatables.net/\">plugin DataTables jQuery</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:45
+msgid "Christian Bach for the <a href=\"http://www.tablesorter.com/\">Tablesorter jQuery plugin</a>,"
+msgstr "Christian Bach untuk <a href=\"http://www.tablesorter.com/\">plugin Tablesorter jQuery</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:46
+msgid "Soeren Krings for its extension <a href=\"http://tablesorter.openwerk.de/\">Tablesorter Extended</a>,"
+msgstr "Soeren Krings untuk ekstensi <a href=\"http://tablesorter.openwerk.de/\">Tablesorter Extended</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:47
+msgid "the submitters of translations:"
+msgstr "pengirim terjemahan:"
+
+# @ wp-table-reloaded
+#: views/view-about.php:80
+msgid "%s (thanks to %s)"
+msgstr "%s (terima kasih kepada %s)"
+
+# @ wp-table-reloaded
+#: views/view-about.php:83
+msgid "and to all donors, contributors, supporters, reviewers and users of the plugin!"
+msgstr "dan kepada semua donatur, kontributor, pendukung, pengulas dan pengguna plugin ini!"
+
+# @ wp-table-reloaded
+#: views/view-about.php:89
+msgid "Debug and Version Information"
+msgstr "Debug dan Informasi Versi"
+
+# @ wp-table-reloaded
+#: views/view-about.php:92
+msgid "You are using the following versions of the software."
+msgstr "Anda menggunakan piranti lunak dengan versi berikut ini."
+
+# @ wp-table-reloaded
+#: views/view-about.php:92
+msgid "Please provide this information in bug reports."
+msgstr "Silahkan sertakan informasi ini pada laporan <em>bug</em>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:95
+msgid "Plugin installed"
+msgstr "Plugin terpasang"
+
+# @ wp-table-reloaded
+#: views/view-options.php:3
+msgid "WP-Table Reloaded has several options which affect the plugin behavior in different areas."
+msgstr "WP-Table Reloaded memiliki beberapa pengaturan yang dapat mempengaruhi perilkau plugin di area tertentu."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+msgid "Frontend Options influence the output and used features of tables in pages, posts or text-widgets."
+msgstr "Pengaturan Muka-depan mempengaruhi keluaran dan fitur yang digunakan oleh tabel pada halaman, tulisan, atau widget teks."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+msgid "The Backend Options control the plugin's admin area, e.g. the &quot;%s&quot; screen."
+msgstr "Pengaturan Muka-Belakang mempengaruhi area admin plugin, co: layar &quot;%s&quot;."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+#: views/view-options.php:55
+#: views/view-options.php:75
+#: views/view-options.php:79
+msgid "Edit Table"
+msgstr "Sunting Tabel"
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+msgid "Administrators have access to further Admin Options."
+msgstr "Administrator memiliki akses ke Pengaturan Admin lebih lanjut."
+
+# @ wp-table-reloaded
+#: views/view-options.php:19
+msgid "Frontend Options"
+msgstr "Pengaturan Muka-Depan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:23
+msgid "JavaScript library"
+msgstr "Pustaka JavaScript"
+
+# @ wp-table-reloaded
+#: views/view-options.php:24
+msgid "Yes, enable the use of a JavaScript library."
+msgstr "Ya, aktifkan penggunaan pustaka JavaScript."
+
+# @ wp-table-reloaded
+#: views/view-options.php:24
+msgid "WP-Table Reloaded includes three JavaScript libraries that can add useful features, like sorting, pagination, and filtering, to a table."
+msgstr "WP-Table Reloaded mengikutsertakan tiga pustaka JavaScript yang dapat menambahkan fitur-fitur berguna, seperti sortir, penomoran laman (paginasi), dan penyaringan ke dalam tabel."
+
+# @ wp-table-reloaded
+#: views/view-options.php:28
+msgid "Select the library to use:"
+msgstr "Pilih pustaka yang akan digunakan:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:29
+#: views/view-options.php:131
+msgid "recommended"
+msgstr "direkomendasikan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:33
+msgid "(You can read more about each library's features on the <a href=\"%s\">plugin's website</a>.)"
+msgstr "(Anda dapat membaca lebih lanjut mengenai fitur dari masing-masing pustaka di <a href=\"%s\">situs web plugin tsb</a>.)"
+
+# @ wp-table-reloaded
+#: views/view-options.php:36
+msgid "Default CSS"
+msgstr "CSS Bawaan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:38
+msgid "Yes, include and load the plugin's default CSS Stylesheets. This is highly recommended, if you use one of the JavaScript libraries!"
+msgstr "Ya, sertakan dan gunakan Stylesheet CSS bawaan plugin. Ini sangat direkomendasikan, bila Anda menggunakan satu dari beberapa pustaka JavaScript yang disediakan!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:42
+msgid "Custom CSS"
+msgstr "CSS Tersuai"
+
+# @ wp-table-reloaded
+#: views/view-options.php:44
+msgid "Yes, include and load the following custom CSS commands."
+msgstr "Ya, sertakan dan gunakan perintah-perintah CSS khusus berikut."
+
+# @ wp-table-reloaded
+#: views/view-options.php:44
+msgid "This should be used to change the table layout and styling."
+msgstr "Ini sebaiknya digunakan untuk mengubah tata letak tabel dan penggayaan."
+
+# @ wp-table-reloaded
+#: views/view-options.php:50
+msgid "You can get styling examples from the <a href=\"%s\">FAQ</a>."
+msgstr "Anda bisa mendapatkan contoh penggayaan dari <a href=\"%s\">FAQ</a>."
+
+# @ wp-table-reloaded
+#: views/view-options.php:50
+msgid "Information on available CSS selectors can be found in the <a href=\"%s\">documentation</a>."
+msgstr "Informasi mengenai pemilih CSS yang tersedia dapat dilihat pada <a href=\"%s\">dokumentasi</a>."
+
+# @ wp-table-reloaded
+#: views/view-options.php:54
+msgid "Links in new window"
+msgstr "Tautan pada jendela baru"
+
+# @ wp-table-reloaded
+#: views/view-options.php:55
+msgid "Yes, open links that are inserted with the &quot;%s&quot; button on the &quot;%s&quot; screen in a new browser window <strong>from now on</strong>."
+msgstr "Ya, buka tautan yang disisipkan dengan tombol &quot;%s&quot; pada layar &quot;%s&quot; di jendela peramban baru <strong>mulai sekarang</strong>."
+
+# @ wp-table-reloaded
+#: views/view-options.php:62
+#: views/view-options.php:169
+msgid "Save Options"
+msgstr "Simpan Pengaturan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:70
+msgid "Backend Options"
+msgstr "Pengaturan Muka-Belakang"
+
+# @ wp-table-reloaded
+#: views/view-options.php:74
+msgid "Exit warning"
+msgstr "Tutup peringatan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:75
+msgid "Yes, show a warning message, if I leave the &quot;%s&quot; screen and have not yet saved my changes."
+msgstr "Ya, tampilkan pesan peringatan, jika saya keluar dari layar &quot;%s&quot; dan belum menyimpan perubahan yang ada."
+
+# @ wp-table-reloaded
+#: views/view-options.php:78
+msgid "Growing textareas"
+msgstr "Area-teks yang bisa membesar"
+
+# @ wp-table-reloaded
+#: views/view-options.php:79
+msgid "Yes, enlarge the textareas on the &quot;%s&quot; screen when they are focussed."
+msgstr "Ya, perbesar area-teks pada layar &quot;%s&quot; ketika mereka difokus."
+
+# @ wp-table-reloaded
+#: views/view-options.php:82
+msgid "List of Tables features"
+msgstr "Daftar Fitur Tabel"
+
+#: views/view-options.php:83
+msgid "Yes, use the DataTables JavaScript features (sorting, pagination, filtering) on the &quot;%s&quot; screen."
+msgstr "Ya, gunakan fitur JavaScript DataTables (sortir, penomoran-laman, saring) pada layar &quot;%s&quot;."
+
+# @ wp-table-reloaded
+#: views/view-options.php:83
+#: controllers/controller-admin.php:1298
+msgid "List Tables"
+msgstr "Daftar Tabel"
+
+# @ wp-table-reloaded
+#: views/view-options.php:91
+msgid "Admin Options"
+msgstr "Pengaturan Admin"
+
+# @ wp-table-reloaded
+#: views/view-options.php:93
+#: views/view-options.php:210
+#: views/view-options.php:224
+msgid "This area are only available to site administrators!"
+msgstr "Area ini hanya tersedia bagi administrator situs!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:93
+msgid "You can therefore not change these options."
+msgstr "Oleh sebab itu Anda tidak dapat mengubah pengaturan ini."
+
+# @ wp-table-reloaded
+#: views/view-options.php:98
+msgid "Plugin Access"
+msgstr "Akses Plugin"
+
+# @ wp-table-reloaded
+#: views/view-options.php:99
+msgid "To access WP-Table Reloaded, a user needs to be:"
+msgstr "Untuk mengakses WP-Table Reloaded, seorang pengguna haruslah:"
+
+# @ default
+#: views/view-options.php:100
+#: views/view-options.php:111
+msgctxt "User role"
+msgid "Administrator"
+msgstr "Administrator"
+
+# @ default
+#: views/view-options.php:101
+#: views/view-options.php:112
+msgctxt "User role"
+msgid "Editor"
+msgstr "Penyunting"
+
+# @ default
+#: views/view-options.php:102
+#: views/view-options.php:113
+msgctxt "User role"
+msgid "Author"
+msgstr "Penulis"
+
+# @ default
+#: views/view-options.php:103
+msgctxt "User role"
+msgid "Contributor"
+msgstr "Kontributor"
+
+# @ wp-table-reloaded
+#: views/view-options.php:109
+msgid "Plugin Options Access"
+msgstr "Akses Pengaturan Plugin"
+
+# @ wp-table-reloaded
+#: views/view-options.php:110
+msgid "To access the Plugin Options of WP-Table Reloaded, a user needs to be:"
+msgstr "Untuk mengakses Pengaturan Plugin WP-Table Reloaded, seorang pengguna haruslah:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:114
+msgid "Admin Options, Dump file Import, and Manual Plugin Uninstall are always accessible by Administrators only, regardless of this setting."
+msgstr "Pengaturan Admin, Impor berkas <em>Dump</em>, dan Pencabutan Plugin secara Manual akan selalu dapat diakses hanya oleh Administrator, terlepas dari pengaturan apapun di sini."
+
+# @ wp-table-reloaded
+#: views/view-options.php:118
+msgid "Plugin Language"
+msgstr "Bahasa Plugin"
+
+# @ wp-table-reloaded
+#: views/view-options.php:119
+msgid "WP-Table Reloaded shall be shown in this language:"
+msgstr "WP-Table Reloaded akan ditampilkan dalam bahasa ini:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:120
+msgid "WordPress Default (currently %s)"
+msgstr "Bawaan WordPress (saat ini %s)"
+
+# @ wp-table-reloaded
+#: views/view-options.php:129
+msgid "Admin menu entry"
+msgstr "Entri  menu Admin"
+
+# @ wp-table-reloaded
+#: views/view-options.php:130
+msgid "WP-Table Reloaded shall be shown in this section of the admin menu:"
+msgstr "WP-Table Reloaded akan ditampilkan pada bagian ini di menu admin:"
+
+# @ default
+#: views/view-options.php:131
+msgid "Tools"
+msgstr "Perkakas"
+
+# @ default
+#: views/view-options.php:132
+msgid "Posts"
+msgstr "Tulisan"
+
+# @ default
+#: views/view-options.php:139
+msgid "Pages"
+msgstr "Halaman"
+
+# @ default
+#: views/view-options.php:140
+msgid "Plugins"
+msgstr "Plugin"
+
+# @ default
+#: views/view-options.php:141
+msgid "Settings"
+msgstr "Pengaturan"
+
+# @ default
+#: views/view-options.php:142
+msgid "Dashboard"
+msgstr "Dasbor"
+
+# @ wp-table-reloaded
+#: views/view-options.php:143
+msgid "Top-Level"
+msgstr "Level-Atas"
+
+# @ wp-table-reloaded
+#: views/view-options.php:148
+msgid "Frontend Edit Link"
+msgstr "Taut Sunting Muka-depan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:149
+msgid "Yes, show an \"Edit\" link to users with sufficient rights near every table on the frontend."
+msgstr "Ya, tampilkan taut \"Sunting\" bagi pengguna dengan hak-hak akses yang cukup dekat setiap tabel pada muka-depan."
+
+# @ wp-table-reloaded
+#: views/view-options.php:153
+msgid "WordPress Search"
+msgstr "Pencarian WordPress"
+
+# @ wp-table-reloaded
+#: views/view-options.php:154
+msgid "Yes, the WordPress Search shall also find posts and pages that contain the search term inside a table."
+msgstr "Ya, Pencarian WordPress juga akan mencari tulisan dan halaman yang mengandung kata-kata yang berada di dalam tabel."
+
+# @ wp-table-reloaded
+#: views/view-options.php:158
+msgid "Remove upon Deactivation"
+msgstr "Singkirkan bila Dinonaktifkan"
+
+# @ wp-table-reloaded
+#: views/view-options.php:159
+msgid "Yes, remove all plugin related data from the database when the plugin is deactivated."
+msgstr "Ya, singkirkan semua data yang berhubungan dengan plugin dari basis data ketika plugin ini di-nonaktifkan."
+
+# @ wp-table-reloaded
+#: views/view-options.php:159
+msgid "Should be activated directly before deactivation only!"
+msgstr "Sebaiknya diaktifkan langsung sebelum non-aktivasi saja!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:179
+msgid "WP-Table Reloaded Data Export and Backup"
+msgstr "Ekspor Data dan Cadangkan WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: views/view-options.php:182
+msgid "WP-Table Reloaded can export and import a so-called dump file that contains all tables, their settings and the plugin's options."
+msgstr "WP-Table Reloaded dapat mengekspor dan mengimpor berkas <em>dump</em> yang berisi seluruh tabel, pengaturannya dan juga pengaturan pluginnya."
+
+# @ wp-table-reloaded
+#: views/view-options.php:182
+msgid "This file can be used as a backup or to move all data to another WordPress site."
+msgstr "Berkas ini dapat digunakan sebagai cadangan atau untuk memindahkan seluruh data ke situs WordPress lain."
+
+# @ wp-table-reloaded
+#: views/view-options.php:185
+msgid "Export a dump file"
+msgstr "Ekspor berkas <em>dump</em>"
+
+# @ wp-table-reloaded
+#: views/view-options.php:187
+msgid "To export all Tables and their settings, click the button below to generate and download a dump file."
+msgstr "Untuk mengekspor seluruh Tabel dan pengaturannya, klik tombol di bawah untuk membuat dan mengunduh berkas <em>dump</em>-nya."
+
+# @ wp-table-reloaded
+#: views/view-options.php:187
+msgid "<strong>Warning</strong>: Do <strong>not</strong> edit the content of that file under any circumstances as you will destroy the file!"
+msgstr "<strong>Peringatan</strong>: <strong>Jangan</strong> sunting konten dari berkas tsb untuk keperluan apapun karena akan merusak isinya!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:196
+msgid "Import a dump file"
+msgstr "Impor berkas <em>dump</em>"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid "To import a WP-Table Reloaded dump file and restore the included data, upload the file from your computer."
+msgstr "Untuk mengimpor berkas <em>dump</em> WP-Table Reloaded dan memulihkan data disertakannya, unggah berkasnya dari komputer Anda."
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid "All current data of this WP-Table Reloaded installation (Tables, Options, Settings) <strong>WILL BE OVERWRITTEN</strong> with the data from the file!"
+msgstr "Semua data yang ada pada instalasi WP-Table Reloaded ini (Tabel, Pilihan, Pengaturan) <strong>AKAN TERTIMPA</strong> dengan data dari berkas ini!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid "Do not proceed, if you do not understand this!"
+msgstr "Jangan lanjutkan bila Anda tidak paham sepenuhnya!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid "It is highly recommended to export and backup the data of this installation before importing another dump file (see above)."
+msgstr "Sangat direkomendasikan untuk mengekspor dan menyimpan salinan data dari instalasi ini sebelum melakukan impor dari berkas <em>dump</em> yang lain (lihat di atas)."
+
+# @ wp-table-reloaded
+#: views/view-options.php:204
+msgid "Select Dump File"
+msgstr "Pilih Berkas <em>Dump</em>"
+
+# @ wp-table-reloaded
+#: views/view-options.php:206
+msgid "Import Dump File"
+msgstr "Impor Berkas <em>Dump</em>"
+
+# @ wp-table-reloaded
+#: views/view-options.php:216
+msgid "Manually Uninstall WP-Table Reloaded"
+msgstr "Cabut secara Manual WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid "Uninstalling <strong>will permanently delete</strong> all tables, data, and options, that belong to WP-Table Reloaded from the database, including all tables you added or imported."
+msgstr "Pencabutan akan <strong>menghapus secara permanen</strong> seluruh tabel, data, dan pengaturan, yang terkait dengan WP-Table Reloaded dari basis data, termasuk seluruh tabel yang pernah Anda tambahkan atau impor."
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid "You will manually need to remove the plugin's files from the plugin folder afterwards."
+msgstr "Sesudah ini, Anda perlu menghapus berkas-berkas plugin ini dari folder plugin secara manual."
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid "Be very careful with this and only click the button if you know what you are doing!"
+msgstr "Hati-hati dengan ini dan harap hanya klik tombol ini jika Anda mengerti apa yang sedang Anda lakukan!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:222
+msgid "Uninstall Plugin WP-Table Reloaded"
+msgstr "Cabut Plugin WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: views/view-options.php:233
+#: controllers/controller-admin.php:1085
+msgid "You do not have sufficient rights to access the Plugin Options."
+msgstr "Anda belum memiliki hak akses yang cukup untuk mengakses Pengaturan Plugin."
+
+# @ wp-table-reloaded
+#: views/view-uninstall.php:3
+msgid "Plugin deactivated successfully."
+msgstr "Plugin berhasil dinonaktifkan."
+
+# @ wp-table-reloaded
+#: views/view-uninstall.php:4
+msgid "All tables, data and options were deleted. You may now manually remove the plugin's subfolder from your WordPress plugin folder or use the \"Delete\" link on the Plugins page."
+msgstr "Semua tabel, data dan pengaturan telah dihapus. Anda sekarang dapat secara manual menghapus subfolder plugin dari folder plugin WordPress Anda atau gunakan taut \"Hapus\" pada laman Plugin."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+msgid "You may add, edit, copy, delete or preview tables here."
+msgstr "Anda dapat menambah, menyunting, menyalin, menghapus atau pratinjau tabel di sini."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+msgid "Each table has a unique ID that needs to be adjusted in that shortcode."
+msgstr "Setiap tabel memiliki satu ID unik yang perlu disesuaikan pada kode-singkat tadi."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+msgid "You can also click the button &quot;%s&quot; in the editor toolbar to select and insert a table."
+msgstr "Anda juga dapat mengeklik tombol &quot;%s&quot; pada baris perkakas editor untuk memilih dan menyisipkan tabel."
+
+# @ wp-table-reloaded
+#: views/view-list.php:39
+msgid "(no name)"
+msgstr "(tiada nama)"
+
+# @ wp-table-reloaded
+#: views/view-list.php:40
+msgid "(no description)"
+msgstr "(tiada deskripsi)"
+
+# @ wp-table-reloaded
+#: views/view-list.php:58
+msgid "Edit %s"
+msgstr "Sunting %s"
+
+# @ default
+# @ wp-table-reloaded
+#: views/view-list.php:60
+#: classes/render.class.php:141
+msgid "Edit"
+msgstr "Sunting"
+
+# @ wp-table-reloaded
+#: views/view-list.php:62
+msgid "Shortcode"
+msgstr "Kode-singkat"
+
+# @ wp-table-reloaded
+#: views/view-list.php:63
+msgid "Copy"
+msgstr "Salin"
+
+# @ wp-table-reloaded
+#: views/view-list.php:64
+msgid "Export"
+msgstr "Ekspor"
+
+# @ wp-table-reloaded
+#: views/view-list.php:66
+msgid "Preview of Table %s"
+msgstr "Pratampil dari Tabel %s"
+
+# @ wp-table-reloaded
+#: views/view-list.php:67
+msgid "Preview"
+msgstr "Pratinjau"
+
+# @ wp-table-reloaded
+#: views/view-list.php:78
+msgid "Copy Tables"
+msgstr "Salin Tabel"
+
+# @ wp-table-reloaded
+#: views/view-list.php:78
+msgid "Delete Tables"
+msgstr "Hapus Tabel"
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:3
+msgid "This is a preview of your table."
+msgstr "Ini adalah pratampil dari tabel Anda."
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:4
+msgid "Because of CSS styling, the table might look different on your page!"
+msgstr "Karena penggayaan CSS, tabel Anda mungkin akan beda tampilannya pada halaman Anda!"
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:4
+msgid "The JavaScript libraries are also not available in this preview."
+msgstr "Pustaka JavaScript juga tidak akan muncul pada pratampil ini."
+
+# @ wp-table-reloaded
+#: views/view-add.php:4
+msgid "To add a new table, enter its name, a description (optional) and the number of rows and columns."
+msgstr "Untuk menambahkan sebuah tabel baru, masukkan namanya, deskripsi (opsional) serta beberapa baris dan kolom."
+
+# @ wp-table-reloaded
+#: views/view-add.php:4
+msgid "You may also add, insert or delete rows and columns later."
+msgstr "Anda juga dapat menambahkan, menyisipkan atau menghapus baris dan kolom lain kali."
+
+# @ wp-table-reloaded
+#: views/view-add.php:14
+msgid "Enter Table Name"
+msgstr "Masukkan Nama Tabel"
+
+# @ wp-table-reloaded
+#: views/view-add.php:18
+msgid "Enter Description"
+msgstr "Masukkan Deskripsi"
+
+# @ wp-table-reloaded
+#: views/view-add.php:21
+msgid "Number of Rows"
+msgstr "Jumlah Baris"
+
+# @ wp-table-reloaded
+#: views/view-add.php:25
+msgid "Number of Columns"
+msgstr "Jumlah Kolom"
+
+# @ wp-table-reloaded
+#: views/view-add.php:32
+msgid "Add Table"
+msgstr "Tambah Tabel"
+
+#: controllers/controller-admin.php:255
+msgid "Arabic"
+msgstr "Arab"
+
+#: controllers/controller-admin.php:256
+msgid "Belarusian"
+msgstr "Belarusia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:257
+msgid "Czech"
+msgstr "Ceko"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:258
+msgid "German"
+msgstr "Jerman"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:259
+msgid "English"
+msgstr "Inggris"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:260
+msgid "Spanish"
+msgstr "Spanyol"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:261
+msgid "Finnish"
+msgstr "Finlandia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:262
+msgid "French"
+msgstr "Perancis"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:263
+msgid "Hindi"
+msgstr "Hindi"
+
+#: controllers/controller-admin.php:264
+msgid "Indonesian"
+msgstr "Bahasa Indonesia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:265
+msgid "Italian"
+msgstr "Italia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:266
+msgid "Japanese"
+msgstr "Jepang"
+
+#: controllers/controller-admin.php:267
+msgid "Dutch"
+msgstr "Belanda"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:268
+msgid "Polish"
+msgstr "Polandia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:269
+msgid "Brazilian Portuguese"
+msgstr "Portugis Brazil"
+
+#: controllers/controller-admin.php:270
+msgid "Portuguese (Portugal)"
+msgstr "Portugis (Portugal)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:271
+msgid "Russian"
+msgstr "Rusia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:272
+msgid "Slovak"
+msgstr "Slovakia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:273
+msgid "Swedish"
+msgstr "Swedia"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:274
+msgid "Ukrainian"
+msgstr "Ukraina"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:275
+msgid "Chinese (Simplified)"
+msgstr "China (Sederhana)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:305
+msgid "Welcome to WP-Table Reloaded %s. If you encounter any questions or problems, please refer to the <a href=\"%s\">FAQ</a>, the <a href=\"%s\">documentation</a>, and the <a href=\"%s\">support</a> section."
+msgstr "Selamat datang di WP-Table Reloaded %s. Jika Anda mengalami kesulitan atau memiliki pertanyaan, silahkan merujuk ke <a href=\"%s\">FAQ</a>, <a href=\"%s\">Dokumentasi</a>, dan bagian <a href=\"%s\">Dukungan</a>."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:306
+msgid "Thank you for upgrading to WP-Table Reloaded %s."
+msgstr "Terima kasih telah memutakhirkan WP-Table Reloaded %s."
+
+#: controllers/controller-admin.php:306
+msgid "This version includes several bugfixes and a few enhancements."
+msgstr "Versi ini mengikutsertakan beberapa perbaikan dan penambahan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:306
+msgid "Please read the <a href=\"%s\">release announcement</a> for more information."
+msgstr "Silahkan baca <a href=\"%s\">pengumuman rilis</a> untuk info lebih lanjut."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:306
+msgid "If you like the new features and enhancements, I would appreciate a small <a href=\"%s\">donation</a>. Thank you."
+msgstr "Jika Anda ingin tambahan fitur baru dan pengembangan lebih lanjut, saya hargai <a href=\"%s\">donasi</a> suka rela Anda. Terima kasih."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:311
+msgid "Hide this message"
+msgstr "Sembunyikan pesan ini"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:319
+msgid "Thanks for using this plugin! You've installed WP-Table Reloaded over a month ago."
+msgstr "Terima kasih telah menggunakan plugin ini! Anda telah memasang WP-Table Reloaded lebih dari satu bulan yang lalu."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:319
+msgid "If it works and you are satisfied with the results of managing your %s table, isn't it worth at least one dollar or euro?"
+msgid_plural "If it works and you are satisfied with the results of managing your %s tables, isn't it worth at least one dollar or euro?"
+msgstr[0] "Jika plugin ini berfungsi semestinya dan Anda puas akan hasil dari mengatur %s tabel Anda, bukankah plugin ini setidaknya bernilai sekurang-kurangnya satu dolar atau euro?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:320
+msgid "<a href=\"%s\">Donations</a> help me to continue support and development of this <i>free</i> software - things for which I spend countless hours of my free time! Thank you!"
+msgstr "<a href=\"%s\">Donasi</a> membantu saya untuk terus mendukung dan mengembangkan piranti linak <i>gratis</i> ini - di mana saya telah meluangkan banyak waktu luang saya untuk plugin ini! Terima kasih!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:321
+msgid "Sure, no problem!"
+msgstr "Tentu, tidak masalah!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:322
+msgid "I already donated."
+msgstr "Saya sudah memberikan donasi."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:323
+msgid "No, thanks. Don't ask again."
+msgstr "Tidak, terima kasih. Tolong jangan tanya lagi."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:351
+msgid "Table &quot;%s&quot; added successfully."
+msgstr "Tabel &quot;%s&quot; berhasil ditambahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:382
+msgid "Table edited successfully. This Table now has the ID %s. You'll need to adjust existing shortcodes accordingly."
+msgstr "Tabel telah berhasil disunting. Tabel sekarang ber-ID %s. Anda harus menyesuaikan kode-singkat yang telah ada."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:384
+msgid "The ID could not be changed from %s to %s, because there already is a Table with that ID."
+msgstr "ID tidak dapat diubah dari %s menjadi %s, karena sudah ada Tabel lain dengan ID tsb."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:387
+msgid "Table edited successfully."
+msgstr "Tabel berhasil disunting."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:436
+msgid "Rows swapped successfully."
+msgstr "Baris-baris tsb telah berhasil ditukar-posisikan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:457
+msgid "Columns swapped successfully."
+msgstr "Kolom-kolom tsb telah berhasil ditukar-posisikan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:498
+msgid "Table sorted successfully."
+msgstr "Tabel telah berhasil disortir."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:521
+msgid "Row moved successfully."
+msgstr "Baris tsb telah berhasil dipindahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:548
+msgid "Column moved successfully."
+msgstr "Kolom telah berhasil dipindahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:556
+msgid "Row could not be deleted."
+msgid_plural "Rows could not be deleted."
+msgstr[0] "Baris tidak dapat dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:565
+msgid "Row deleted successfully."
+msgid_plural "Rows deleted successfully."
+msgstr[0] "Baris telah berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:575
+msgid "Column could not be deleted."
+msgid_plural "Columns could not be deleted."
+msgstr[0] "Kolom tidak dapat dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:588
+msgid "Column deleted successfully."
+msgid_plural "Columns deleted successfully."
+msgstr[0] "Kolom telah berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:611
+msgid "Row inserted successfully."
+msgid_plural "Rows inserted successfully."
+msgstr[0] "Baris telah berhasil disisipkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:638
+msgid "Column inserted successfully."
+msgid_plural "Columns inserted successfully."
+msgstr[0] "Kolom telah berhasil disisipkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:653
+msgid "Row added successfully."
+msgid_plural "Rows added successfully."
+msgstr[0] "Baris telah berhasil ditambahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:667
+msgid "Column added successfully."
+msgid_plural "Columns added successfully."
+msgstr[0] "Kolom telah berhasil ditambahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:674
+msgid "Could not add Custom Data Field, because you did not enter a name."
+msgstr "Tidak dapat menambahkan Ruas Data Tersuai, karena Anda belum mengisikan sebuah nama."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:679
+msgid "Could not add Custom Data Field, because the name you entered is reserved for other table data."
+msgstr "Tidak dapat menambah Ruas Data Tersuai, karena nama yang Anda masukkan sudah dibooking untuk tabel data yang lain."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:685
+msgid "Could not add Custom Data Field, because the name contained illegal characters."
+msgstr "Tidak dapat menambahkan Ruas Data Tersuai, karena nama mengandung karakter ilegal."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:689
+msgid "Could not add Custom Data Field, because a Field with that name already exists."
+msgstr "Tidak dapat menambahkan Ruas Data Tersuai, karena sudah ada Field dengan nama tersebut."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:695
+msgid "Custom Data Field added successfully."
+msgstr "Ruas Data Tersuai berhasil ditambahkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:735
+#: controllers/controller-admin.php:791
+msgid "Copy of"
+msgstr "Salinan dari"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:739
+msgid "Table copied successfully."
+msgid_plural "Tables copied successfully."
+msgstr[0] "Tabel berhasil disalin."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:745
+msgid "Table deleted successfully."
+msgid_plural "Tables deleted successfully."
+msgstr[0] "Tabel berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:766
+#: controllers/controller-admin.php:921
+#: controllers/controller-admin.php:959
+msgid "Table imported successfully."
+msgid_plural "Tables imported successfully."
+msgstr[0] "Tabel berhasil diimpor."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:773
+msgid "You did not select any tables!"
+msgstr "Anda belum memilih satu tabel pun!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:796
+msgid "Table &quot;%s&quot; copied successfully."
+msgstr "Tabel &quot;%s&quot; berhasil disalin."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:814
+msgid "Table &quot;%s&quot; deleted successfully."
+msgstr "Tabel &quot;%s&quot; berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:822
+msgid "Custom Data Field deleted successfully."
+msgstr "Ruas Data Tersuai  berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:824
+msgid "Custom Data Field could not be deleted."
+msgstr "Ruas Data Tersuai tidak berhasil dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:830
+msgid "Delete failed."
+msgstr "Gagal dihapus."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:862
+#: controllers/controller-admin.php:872
+#: controllers/controller-admin.php:883
+msgid "Imported Table"
+msgstr "Tabel yang Diimpor"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:863
+#: controllers/controller-admin.php:884
+msgid "from %s"
+msgstr "dari %s"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:873
+msgid "via form"
+msgstr "lewat formulir"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:900
+#: controllers/controller-admin.php:937
+msgid "Table could not be imported."
+msgstr "Tabel tidak dapat diimpor."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:917
+msgid "Table %s (%s) replaced successfully."
+msgstr "Tabel %s (%s) berhasil ditukar."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:967
+#: controllers/controller-admin.php:1160
+msgid "You do not have sufficient rights to perform this action."
+msgstr "Anda belum memiliki hak akses yang cukup untuk melakukan tindakan ini."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:974
+msgid "You did not upload a WP-Table Reloaded dump file."
+msgstr "Anda tidak mengunggah berkas <em>dump</em> WP-Table Reloaded."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:983
+msgid "The uploaded dump file is empty. Please upload a valid dump file."
+msgstr "Berkas <em>dump</em> yang diunggah ternyata kosong. Silahkan unggah berkas <em>dump</em> yang valid."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1011
+msgid "All Tables, Settings and Options were successfully imported."
+msgstr "Semua Tabel dan Penggaturan berhasil diimpor."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1040
+msgid "Table &quot;%s&quot; exported successfully."
+msgstr "Tabel &quot;%s&quot; berhasil diekspor."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1141
+msgid "Options saved successfully."
+msgstr "Pengaturan berhasil disimpan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1144
+msgid "<a href=\"%s\">Click here to Proceed.</a>"
+msgstr "<a href=\"%s\">Klik di sini untuk lanjut.</a>"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1210
+msgid "There is no table with this ID!"
+msgstr "Tidak ada tabel dengan ID ini!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1237
+msgid "Thank you very much! Your donation is highly appreciated. You just contributed to the further development of WP-Table Reloaded!"
+msgstr "Saya ucapkan banyak terima kasih! Donasi Anda amat dihargai. Anda baru saja memberikan kontribusi untuk mendorong pengembangan WP-Table Reloaded lebih lanjut!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1239
+msgid "No problem! I still hope you enjoy the benefits that WP-Table Reloaded brings to you. If you should want to change your mind, you'll always find the &quot;%s&quot; button on the <a href=\"%s\">WP-Table Reloaded website</a>."
+msgstr "Tak masalah! Saya tetap berharap Anda tetap dapat menikmati fitur-fitur WP-Table Reloaded. Jika Anda berubah pikiran, Anda selalu dapat menemukan tombol &quot;%s&quot; di <a href=\"%s\">situs web WP-Table Reloaded</a>."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1239
+#: controllers/controller-admin.php:1678
+msgid "Donate"
+msgstr "Donasi"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1262
+#: controllers/controller-admin.php:1269
+msgid "List of Tables"
+msgstr "Daftar Tabel"
+
+# @ wp-table-reloaded
+#. #-#-#-#-#  plugin.pot (WP-Table Reloaded 1.9.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: controllers/controller-admin.php:1262
+#: controllers/controller-admin.php:1266
+#: controllers/controller-admin.php:1268
+msgid "WP-Table Reloaded"
+msgstr "WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1263
+#: controllers/controller-admin.php:1299
+msgid "Add new Table"
+msgstr "Tambah Tabel baru"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1264
+#: controllers/controller-admin.php:1300
+msgid "Import a Table"
+msgstr "Impor Tabel"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1265
+#: controllers/controller-admin.php:1301
+msgid "Export a Table"
+msgstr "Ekspor Tabel"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1267
+msgid "About WP-Table Reloaded"
+msgstr "Tentang WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1275
+msgid "Edit Table &quot;%s&quot; (ID %s)"
+msgstr "Sunting Tabel &quot;%s&quot; (ID %s)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1276
+msgid "Preview of Table &quot;%s&quot; (ID %s)"
+msgstr "Pratinjau Tabel &quot;%s&quot; (ID %s)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1309
+msgid "About the plugin"
+msgstr "Tentang plugin ini"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1674
+msgid "WP-Table Reloaded Plugin Page"
+msgstr "Laman Plugin WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1674
+msgid "Plugin Page"
+msgstr "Laman Plugin"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1675
+msgid "Frequently Asked Questions"
+msgstr "FAQ: Pertanyaan yang sering ditanyakan"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1675
+msgid "FAQ"
+msgstr "FAQ"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1676
+msgid "Support"
+msgstr "Dukungan"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1677
+msgid "Plugin Documentation"
+msgstr "Dokumentasi Plugin"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1677
+msgid "Documentation"
+msgstr "Dokumentasi"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1678
+msgid "Support WP-Table Reloaded with your donation!"
+msgstr "Dukung WP-Table Reloaded dengan donasi Anda!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1717
+msgid "Do you really want to activate this? You should only do that right before uninstallation!"
+msgstr "Anda yakin ingin mengaktifkan ini? Anda hanya ingin melakukan ini sebelum pencabutan plugin!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1718
+msgid "URL of link to insert"
+msgstr "URL dari taut yang ingin disisipkan"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1719
+msgid "Text of link"
+msgstr "Teks dari taut"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1720
+msgid "To insert the following HTML code for a link into a cell, just click the cell after closing this dialog."
+msgstr "Untuk menyisipkan kode HTML untuk tautan ke dalam sebuah sel, cukup klik sel tersebut sesudah menutup dialog ini."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1721
+msgid "To insert an image, click &quot;OK&quot; and then click into the cell into which you want to insert the image."
+msgstr "Untuk menyisipkan sebuah gambar, klik &quot;OK&quot; lalu klik ke dalam sel yang Anda maksud."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1721
+msgid "The Media Library will open, from which you can select the desired image or insert the image URL."
+msgstr "Pustaka Media akan dibuka, dari situ Anda dapat memilih gambar atau URL gambar ybs."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1721
+msgid "Click the &quot;%s&quot; button to insert the image."
+msgstr "Klik tombol &quot;%s&quot; untuk menyisipkan gambar."
+
+# @ default
+#: controllers/controller-admin.php:1721
+msgid "Insert into Post"
+msgstr "Sisipkan ke dalam Tulisan"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1722
+msgid "To combine cells within a row, click into the cell to the right of the cell that has the content the combined cells shall have."
+msgstr "Untuk menggabungkan sel di dalam satu baris, klik pada sel di sebelah kanan sel yang memiliki konten yang ingin digabungkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1723
+msgid "To combine cells within a column, click into the cell below the cell that has the content the combined cells shall have."
+msgstr "Untuk menggabungkan sel di dalam satu kolom, klik pada sel di sebelah kanan sel yang memiliki konten yang ingin digabungkan."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1724
+msgid "Do you want to copy the selected tables?"
+msgstr "Apakah Anda ingin menyalin tabel yang terpilih?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1725
+msgid "The selected tables and all content will be erased. Do you really want to delete them?"
+msgstr "Tabel yang terpilih beserta seluruh kontennya akan dihapus. Anda yakin ingin menghapus mereka?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1726
+msgid "Do you really want to import the selected tables from the wp-Table plugin?"
+msgstr "Anda yakin ingin mengimpor tabel yang terpilih ke dalam plugin wp-Table?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1727
+msgid "Do you want to copy this table?"
+msgstr "Anda ingin menyalin tabel ini?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1728
+msgid "The complete table and all content will be erased. Do you really want to delete it?"
+msgstr "Tabel dan seluruh isinya akan dihapus. Anda yakin ingin menghapusnya?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1729
+msgid "Do you really want to delete the selected rows?"
+msgstr "Apakah Anda yakin ingin menghapus baris yang dipilih?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1730
+msgid "Do you really want to delete the selected columns?"
+msgstr "Apakah Anda yakin ingin menghapus kolom yang dipilih?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1731
+#: controllers/controller-admin.php:1735
+#: controllers/controller-admin.php:1737
+msgid "You have not selected any rows."
+msgstr "Anda belum memilih satu baris pun."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1732
+#: controllers/controller-admin.php:1736
+#: controllers/controller-admin.php:1738
+msgid "You have not selected any columns."
+msgstr "Anda belum memilih satu kolom pun."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1733
+msgid "You can not delete all rows of the table at once!"
+msgstr "Anda tidak dapat menghapus seluruh baris pada satu tabel sekaligus!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1734
+msgid "You can not delete all columns of the table at once!"
+msgstr "Anda tidak dapat menghapus seluruh kolom pada satu tabel sekaligus!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1739
+msgid "Do you really want to import this table from the wp-Table plugin?"
+msgstr "Anda yakin ingin mengimpor tabel ini ke dalam plugin wp-Table?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1740
+msgid "Do you really want to uninstall the plugin and delete ALL data?"
+msgstr "Anda yakin ingin mencabut plugin dan menghapus SEMUA data?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1741
+msgid "Are you really sure?"
+msgstr "Apakah Anda yakin?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1742
+msgid "Do you really want to change the ID of the table?"
+msgstr "Apakah Anda yakin ingin mengubah ID tabel ini?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1743
+msgid "To show this Custom Data Field, use this shortcode:"
+msgstr "Untuk menampilkan Ruas Data Tersuai, gunakan kode-singkat ini:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1744
+msgid "To show this table, use this shortcode:"
+msgstr "Untuk menampilkan tabel ini, gunakan kode-singkat ini:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1745
+msgid "Warning: You will lose all current Tables and Settings! You should create a backup first. Be warned!"
+msgstr "Perhatian: Anda akan kehilangan seluruh Tabel dan Pengaturan! Anda sebaiknya membuat cadangan dahulu. Berhati-hatilah!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1746
+msgid "You have made changes to the content of this table and not yet saved them."
+msgstr "Anda telah melakukan perubahan pada konten tabel ini dan belum menyimpannya."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1746
+msgid "You should first click &quot;%s&quot; or they will be lost if you navigate away from this page."
+msgstr "Anda sebaiknya mengeklik &quot;%s&quot; atau mereka semua akan hilang bila Anda berpindah dari laman ini."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1796
+msgid "Insert a Table"
+msgstr "Sisipkan sebuah Tabel"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1853
+msgid "Please wait..."
+msgstr "Silahkan tunggu..."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1854
+msgid "Show _MENU_ Tables"
+msgstr "Tampilkan Tabel _MENU_"
+
+#: controllers/controller-admin.php:1855
+msgid "All"
+msgstr "Semua"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1857
+msgid "_START_ to _END_ of _TOTAL_ Tables"
+msgstr "_START_ s/d _END_ dari _TOTAL_ Tabel"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1858
+msgid "(filtered from _MAX_ Tables)"
+msgstr "(disaring dari _MAX_ Tabel)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1859
+msgid "Filter:"
+msgstr "Saringan:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1860
+msgid "First"
+msgstr "Pertama"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1861
+msgid "Back"
+msgstr "Kembali"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1862
+msgid "Next"
+msgstr "Berikut"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1863
+msgid "Last"
+msgstr "Terakhir"
+
+# @ wp-table-reloaded
+#: classes/import.class.php:36
+#: classes/export.class.php:28
+msgid "CSV - Character-Separated Values"
+msgstr "CSV - Comma-Separated Values"
+
+# @ wp-table-reloaded
+#: classes/import.class.php:37
+#: classes/export.class.php:29
+msgid "HTML - Hypertext Markup Language"
+msgstr "HTML - Hypertext Markup Language"
+
+# @ wp-table-reloaded
+#: classes/import.class.php:38
+#: classes/export.class.php:30
+msgid "XML - eXtended Markup Language"
+msgstr "XML - eXtended Markup Language"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:74
+msgid "Thank you for using <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>."
+msgstr "Terima kasih telah menggunakan <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/\">WP-Table Reloaded</a>."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:74
+msgid "Support the plugin with your <a href=\"%s\">donation</a>!"
+msgstr "Dukung plugin ini dengan <a href=\"%s\">donasi Anda</a>!"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Table cells can span across more than one column or row."
+msgstr "Sel tabel dapat dibentangkan lebih dari satu kolom atau baris."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+msgid "Combining consecutive cells within the same row is called \"colspanning\"."
+msgstr "Menggabungkan sel-sel yang berdekatan pada baris yang sama disebut \"colspanning\"."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+msgid "To combine cells, add the keyword #colspan# to the cell to the right of the one with the content for the combined cell by using the corresponding button."
+msgstr "Untuk menggabungkan sel, tambahkan kata kunci #colspan# pada sel tepat di sebelah kanan sel yang mengandung konten untuk digabungkan, dengan menggunakan tombol ybs."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Repeat this to add the keyword to all cells that shall be connected."
+msgstr "Ulangi langkah ini untuk menambahkan kata kunci ke semua sel yang ingin dihubungkan."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+#: classes/helper.class.php:109
+msgid "Be aware that the JavaScript libraries will not work on tables which have combined cells."
+msgstr "Harap ingat bahwa pustaka JavaScript tidak akan berfungsi pada tabel yang memiliki sel yang telah digabungkan."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:109
+msgid "Combining consecutive cells within the same column is called \"rowspanning\"."
+msgstr "Menggabungkan sel-sel yang berdekatan pada kolom yang sama disebut \"rowspanning\"."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:109
+msgid "To combine cells, add the keyword #rowspan# to the cell below the one with the content for the combined cell by using the corresponding button."
+msgstr "Untuk menggabungkan sel-sel, tambahkan kata kunci #rowspan# pada sel di sebelah bawah sel yang mengandung konten yang ingin digabungkan, dengan menggunakan tombol ybs."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:118
+msgid "Help"
+msgstr "Bantuan"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:33
+msgid "; (semicolon)"
+msgstr "; (titik koma)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:34
+msgid ", (comma)"
+msgstr ", (koma)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:35
+msgid ": (colon)"
+msgstr ": (titik dua)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:36
+msgid ". (dot)"
+msgstr ". (titik)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:37
+msgid "| (pipe)"
+msgstr "| (pipa)"
+
+# @ wp-table-reloaded
+#. Plugin URI of the plugin/theme
+msgid "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+msgstr "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+
+# @ wp-table-reloaded
+#. Description of the plugin/theme
+msgid "This plugin allows you to create and easily manage tables in the admin-area of WordPress. A comfortable backend allows an easy manipulation of table data. You can then include the tables into your posts, on your pages or in text widgets by using a shortcode or a template tag function. Tables can be imported and exported from/to CSV, XML and HTML."
+msgstr "Plugin ini mengizinkan Anda membuat dan mengatur tabel dengan mudah dari area admin WordPress. Muka-belakang yang nyaman memudahkan manipulasi tabel data. Anda juga dapat menyisipkan tabel-tabel ke dalam tulisan, halaman, atau bahkan widget teks dengan menggunakan kode-singkat atau dengan fungsi tag templat. Tabel juga dapat diimpor dan diekspor dari/ke CSV, XML, dan HTML."
+
+# @ wp-table-reloaded
+#. Author of the plugin/theme
+msgid "Tobias B&auml;thge"
+msgstr "Tobias B&auml;thge"
+
+# @ wp-table-reloaded
+#. Author URI of the plugin/theme
+msgid "http://tobias.baethge.com/"
+msgstr "http://tobias.baethge.com/"
+
+#~ msgid "Albanian"
+#~ msgstr "Albania"
+
+#~ msgid "Turkish"
+#~ msgstr "Turki"
+
+#~ msgid ""
+#~ "This version includes a few new features, like output caching and a "
+#~ "custom table CSS class, and several enhancements."
+#~ msgstr ""
+#~ "Versi ini mengikutsertakan beberapa fitur baru, seperti tembolok keluaran "
+#~ "dan sebuah kelas CSS tabel tersuai, dan beberapa penambahan lainnya."

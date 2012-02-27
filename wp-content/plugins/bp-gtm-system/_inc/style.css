@@ -1,0 +1,440 @@
+input#project_deadline, input#task_deadline {width:275px !important}
+
+.ui-datepicker {width:17em;padding:.2em .2em 0;background:#fff;border:1px solid #eaeaea;border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px}
+.ui-datepicker .ui-datepicker-header {position:relative;padding:.2em 0}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {position:absolute;top:2px;width:1.8em;height:1.8em}
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {top:1px}
+.ui-datepicker .ui-datepicker-prev {left:2px}
+.ui-datepicker .ui-datepicker-next {right:7px}
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {font-weight:normal;cursor:pointer}
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {left:50%;margin-left:-8px;margin-top:-8px; display: initial; position: relative;}
+.ui-datepicker .ui-datepicker-prev a, .ui-datepicker .ui-datepicker-next a {font-weight:normal}
+.ui-datepicker .ui-datepicker-prev a:hover, .ui-datepicker .ui-datepicker-next a:hover {}
+.ui-datepicker .ui-datepicker-title {margin:0 2.3em;line-height:1.8em;text-align:center}
+.ui-datepicker select.ui-datepicker-month-year {width:100%}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {width:49%}
+.ui-datepicker table {width:100%;font-size:.9em;border-collapse:collapse;margin:0 0 .4em}
+.ui-datepicker th {padding:2px;text-align:center;font-weight:bold;border:0}
+.ui-datepicker td {border:0;padding:1px}
+.ui-datepicker td span, .ui-datepicker td a {display:block;padding:.2em;text-align:center;text-decoration:none}
+.ui-datepicker-today, .ui-datepicker-current-day {background:#eaeaea;border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px}
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {display:none;display/**/:block;position:absolute;z-index:-1;filter:mask();top:-4px;left:-4px;width:200px;height:200px}
+
+
+tbody#tasks-list span.all_in_all{
+    display: inherit !important;
+    float: left !important;
+    padding: 1px 3px;
+    background: #319f52;
+    color:#fff;
+    border-radius:5px;
+}
+
+/* Create new term block */
+div#box{position:relative;padding:7px;border:1px solid #ededed;width:300px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-khtml-border-radius:5px}
+#gtm_form label#term_name {margin:0;width:95%}
+#gtm_form div#toggler,.personal div#toggler {margin:0 0 10px}
+#gtm_form div#toggler.padder,.personal div#toggler.padder{padding:0}
+#box span.submit{float:right;margin:0 -3px 0 0}
+
+/* Delete all GTM data page */
+#gtm_form ul.deleted {margin:-10px 0 10px 20px}
+#gtm_form ul.deleted li {list-style-type:disc}
+
+#gtm_form ul.projects-filter {margin:-5px 5px 5px}
+#gtm_form span.close, .personal span.close{font-weight:bold;float:right;margin:-5px 0 0}
+
+#gtm_form div.pag-count a.current, .personal div.pag-count a.current{padding:2px 3px;background:#eaeaea}
+#gtm_form div.pag-count a.task_navi,div.pag-count a.discuss_navi{margin:0px 2px}
+
+
+#gtm_form .post-content p {margin-bottom:5px}
+#gtm_form .post-content blockquote{
+    -moz-border-radius:5px;
+    border-radius:5px;
+    background-color:#F5F5F5;
+    border:1px solid #E0E0E0;
+    line-height:1.8em;
+    margin:10px 20px;
+    overflow:auto;
+    padding:10px
+}
+#gtm_form .post-content ul, #gtm_form .post-content ol {margin:0 30px 5px}
+#gtm_form .post-content ul li{
+    padding:0px;
+    position:relative;
+    border:none;
+    list-style-type:disc
+}
+#gtm_form .post-content ol li{
+    padding:0px;
+    position:relative;
+    border:none;
+    list-style-type:decimal
+}
+
+#gtm_form span.role {margin:0 0 0 10px}
+
+#backgroundPopup{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:100%;width:100%;top:0;left:0;background:#000000;border:1px solid #cecece;z-index:1}
+#popupRoles{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:auto;width:408px;background:#FFFFFF;border:2px solid #cecece;z-index:2;padding:12px;font-size:13px}
+#popupRoles h1{text-align:left;color:#6FA5FD;font-size:22px;font-weight:700;border-bottom:1px dotted #D3D3D3;padding-bottom:10px;margin-bottom:20px}
+#popupRolesClose{font-size:14px;cursor: pointer;line-height:14px;right:6px;top:4px;position:absolute;color:#6fa5fd;font-weight:700;display:block}
+#gtm_form span.popupReport{float:left}
+#gtm_form span.popupReport span.response1{color:green}
+#gtm_form span.popupReport span.response0{color:red}
+
+#gtm_form div.gtm_files{
+    clear: both;
+    margin: 0;
+    padding-top: 20px;
+}
+#gtm_form div.gtm_files_list{margin:10px 20px;padding:5px}
+#gtm_form div.gtm_files_list li{padding:0 !important}
+
+#gtm_form div.pagination{
+    margin: 0px -19px 0px -19px;
+}
+#gtm_form div#topic-meta div.admin-links {
+    right: 7px;
+    top: -8px;
+}
+#gtm_form div#topic-meta h3 {
+    font-size: 20px;
+    margin: 5px 0 15px 0;
+}
+#gtm_form table.forum {
+    /*margin: 0 -15px;*/
+}
+
+
+#gtm_form .check-user{
+    float: left;
+    margin: 21px 12px 0 0;
+}
+
+#gtm_form .role-box{
+    position: relative;
+    top: 10px;
+    left: 2px;
+}
+
+#gtm_form .poster-name{
+    float: left;
+    height: 30px;
+    overflow: hidden;
+}
+
+#gtm_form .wrap-roles{
+    height: 300px;
+    width: 75%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+#gtm_form .float{
+    float: left;
+    width: 50%;
+}
+
+#gtm_form .right{
+    float: right;
+    width: 50%;
+}
+#gtm_form .widget p{
+    overflow: hidden;
+}
+
+#gtm_form div.pagination .pagination-links a:hover {font-weight:normal;}
+
+#gtm_form .discussions{
+    margin-top:-10px;
+}
+#gtm_form .error-boreder{
+    border: 1px solid red !important;
+}
+#gtm_form #involved #th-title{
+    width:40%;
+}
+#gtm_form #involved #th-poster, #gtm_form #involved #th-group, #gtm_form #involved #th-poster{
+    width: 10%;
+}
+#gtm_form #topic-meta h3 a{
+    text-decoration:none;
+    color:#777777;
+}
+#gtm_form #topic-meta button{
+    margin-right:20px;
+}
+#gtm_form .admin-links .responsible{
+    font-size:12px;
+    float:right;
+}
+#gtm_form .admin-links .responsible-link{
+    float:right;
+    margin:0 0 0 5px;
+}
+
+#gtm_form .admin-links .float-right, #popupArea .float-right, #popupArea .button{
+    float: right;
+}
+#gtm_form #post-reply .reply, #post-reply h4{
+    margin-top:30px;
+}
+#gtm_form  .grey, #item-body .grey{
+    color: grey;
+}
+#gtm_form .group-navi #projects-filter, .pagination #projects-filter{
+    float:right;
+    font-size: 12px;
+}
+#gtm_form #projects img, #tasks img{
+    border: none;
+}
+#gtm_form #terms-add label{
+    margin:10px 0 10px 0;
+}
+#gtm_form #create-button{
+    margin:  0 0 15px 0;
+}
+#gtm_form .red{
+    background-color: #EAEAEA;
+}
+.personal{
+    padding-top: 10px;
+}
+#toggler #box, .personal #box{
+    display:none;
+    position:absolute;
+    background:#fff;
+    z-index: 1000;
+}
+
+.add-new12 #box{
+    display:none;
+    background:#fff;
+    position: relative !important;
+    left: 0 !important; 
+    z-index: 1000;
+}
+#gtm_form .group-navi #ta
+#gtm_form  .sks-filter, #gtm_form #discuss-filter{
+    float:right;
+    font-size: 12px;
+}
+#gtm_form .item-list #th-title{
+    width: 35%;
+}
+#gtm_form .item-list thead tr th{
+    text-align: left;
+}
+
+#gtm_form tbody#tasks-list span{
+    display:none;
+    float:right;
+}
+#gtm_form .wrap-roles{
+    margin-top:10px;
+}
+#gtm_form .wrap-roles div#subnav.item-list-tabs {
+    display:none;
+}
+#gtm_form .wrap-roles #member-list input{
+    display: none;
+}
+#gtm_form .wrap-roles #member-list li{
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+    float: left;
+    height: 50px;
+    margin: 0 5px 10px 0;
+    overflow: hidden;
+    padding: 5px 5px 10px;
+    width: 295px;
+}
+#gtm_form .wrap-roles .item-list li div.action{
+    position: absolute;
+    top: 21px;
+    right: 10px;
+    text-align: right;
+    width: 170px;
+}
+#gtm_form #topic-meta h3{
+    text-decoration:none;
+    color:#777777;
+}
+#gtm_form .back-task{
+    margin-right: 20px;
+}
+#gtm_form .edit-button{
+    margin-left: 20px;
+}
+#gtm_form .complete_the_task{
+    display:none;
+    font-size:14px
+}
+#gtm_form .subtasks{
+    margin: 0 0 25px 0;
+}
+#gtm_form .mini-ava{
+    float:right;
+    margin:0 0 0 5px;
+}
+#gtm_form .resp-style{
+    font-size:12px;
+    float:right;
+}
+#gtm_form .table-left{
+    width:50%;
+    float:left;
+    border:1px solid #eaeaea;
+}
+
+#toggler #term_name{
+    width: 285px;
+}
+#toggler #box{
+    display: none;
+}
+#gtm_form .pagination #terms-filter{
+    float:right;
+    font-size:12px;
+    display:none;
+}
+#gtm_form .table-right #th-title, #gtm_form .table-left #th-title{
+    width: 60%;
+}
+#gtm_form .table-right #th-postcount, #gtm_form .table-left #th-postcount{
+    width: 10%;
+}
+#gtm_form .info-right{
+    width: 48%;
+    float: right;
+}
+#gtm_form .info-left{
+    width: 48%;
+    float: left;
+}
+#gtm_form #gtm-tasks-pp, #gtm_form #gtm-discuss-pp{
+    width: 245px;
+}
+#gtm_form .generic-button-gtm{
+    margin: 5px 0;
+}
+
+#gtm_form #disply-tags{
+    margin:0 0 5px 10px;
+}
+#gtm_form #disply-cats{
+    margin:0 0 0 10px;
+}
+
+table#personal tr th{
+    text-align:left;
+}
+able#personal tr th#th-postcount{
+    text-align:center;
+}
+#personal #th-title{
+    width: 35%;
+}
+#gtm_form .color-red{
+    color: red;
+}
+#gtm_form .task-project {
+    padding:0px 15px 0 0;
+}
+#gtm_form .paddind0{
+    padding: 0;
+}
+#gtm_form #td-title .td-title{
+    display:none;
+    float:right;
+}
+
+#gtm_form #task_status{
+    color: green;
+}
+#gtm_form .done{
+    color:green;
+    font-size:14px;
+}
+#tasks-filter, .personal #tasks-filter{
+    float: right;
+}
+#gtm_form #member-list li:hover{
+    cursor: pointer;
+}
+#gtm_form #th-freshness{
+    position: relative;
+    width: 70px;
+}
+#gtm_form  .ui-icon{
+    display: inline !important;
+}
+#gtm_form .responsibles{
+    position: relative;
+    top: -4px;
+}
+ 
+#gtm_form table.forum tr.sticky td{
+     background: white;
+}
+#gtm_form .object-name{
+    
+    margin: 0;
+    padding: 0;
+}
+#gtm_form .text input{
+    width: 245px;
+}
+.clear-both{
+    clear: both;
+}
+#gtm_form #message{
+    margin-top: 10px;
+}
+
+#gtm_form ul#topic-post-list{
+    margin: 20px 0 0 0;
+}
+#gtm_form ul#topic-post-list .gtm_files_list{
+    border-top: 1px dashed grey;
+}
+#gtm_form .gtm_files_list ul li{
+    border:none !important;
+}
+
+#gtm_form table.forum th#th-title{
+    width: auto;
+}
+#gtm_form table.files,#gtm_form table#involved,
+#gtm_form table.projects-list, #gtm_form .disscussions, 
+#gtm_form table.item-list,
+.personal .projects-list, .personal table.item-list{
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+#gtm_form .notified_users{
+    background-color: #ffe8c4;
+}
+#gtm_form .activity{
+    margin-left: 10px;
+}
+#gtm_form .projects-files .gtm_files_list{
+    border: none;
+}
+#gtm_form ul.item-list li{
+    border: none;
+}
+#gtm_form .table-left, #gtm_form .text-right{
+    margin: 10px -6px 0 -6px;
+}
+#gtm_form .table-right{
+    width:50%;
+    float:right;
+    border:1px solid #eaeaea;
+    text-align: right;
+    margin: 10px -6px 0 -6px;
+}

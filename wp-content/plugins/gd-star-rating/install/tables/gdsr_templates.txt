@@ -1,0 +1,10 @@
+CREATE TABLE `%sgdsr_templates` (
+  `template_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `section` varchar(3) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `description` text NOT NULL,
+  `elements` text NOT NULL,
+  `dependencies` text NOT NULL,
+  `preinstalled` varchar(1) NOT NULL DEFAULT '0',
+  `default` varchar(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`template_id`))%COLLATE%;

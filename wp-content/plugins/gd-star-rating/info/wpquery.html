@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>GD Star Rating: WP Query</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE ]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen" /><![endif]-->
+</head>
+<body>
+
+<div id="sidebar">
+    <h4>Contents:</h4>
+    <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="functions.html">General Functions</a></li>
+        <li><a href="rendering.html">Rendering Functions</a></li>
+        <li><a href="legacy.html">Legacy Functions</a></li>
+        <li><a href="filters.html">Filters &amp; Actions</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+        <li><a href="wpquery.html">WP Query</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="t2map.html">T2 Templates</a></li>
+        <li><a href="languages.html">Translations</a></li>
+    </ul>
+    <h4>Plugin Links:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/">Home Page</a></li>
+        <li><a href="http://wordpress.org/extend/plugins/gd-star-rating">WordPress Extend</a></li>
+        <li><a href="http://groups.google.com/group/gd-star-rating">Google Groups</a></li>
+        <li><a href="http://twitter.com/milangd">Follow on Twitter</a></li>
+    </ul>
+    <h4>Support:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/premium/">Premium Support</a></li>
+    </ul>
+    <h4 class="copyright">Copyright:</h4>
+    <p>
+        &copy; 2008-2009. <a href="http://www.gdragon.info/">Golden Dragon WebStudio</a>
+    </p>
+</div>
+<div id="content">
+<div class="title">
+    <h1>GD Star Rating</h1>
+    <h2>wp query</h2>
+</div>
+
+<div class="contents">
+<h3>Query variables</h3>
+<ul>
+    <li><strong>gdsr_sort</strong>: data used for sorting results</li>
+    <li><strong>gdsr_order</strong>: data sorting order</li>
+    <li><strong>gdsr_multi</strong>: standard or multi ratings data to use</li>
+    <li><strong>gdsr_fsvmin</strong>: filter to specify minimal number of standard rating votes</li>
+    <li><strong>gdsr_ftvmin</strong>: filter to specify minimal number of thumbs rating votes</li>
+</ul>
+<h3>gdsr_sort</h3>
+<p>Supported values (columns) for sorting data:</p>
+<ul>
+    <li><strong>rating</strong>: post ratings, standard or multi ratings depending on the multi parameter</li>
+    <li><strong>review</strong>: post review rating, standard or multi ratings depending on the multi parameter</li>
+    <li><strong>votes</strong>: number of votes saved for the post</li>
+    <li><strong>thumbs</strong>: post thumbs rating</li>
+    <li><strong>last_voted</strong>: date of the last vote recorded</li>
+</ul>
+<h3>gdsr_order</h3>
+<p>Ascending or descending order to sort data:</p>
+<ul>
+    <li><strong>asc</strong>: ascending</li>
+    <li><strong>desc</strong>: descending (default)</li>
+</ul>
+<h3>gdsr_multi</h3>
+<p>
+    For standard rating data, don't use this variable, or set it to zero.<br />
+    To get multi ratings data this variable must be set to multi set id to use.
+</p>
+<h3>gdsr_fsvmin</h3>
+<p>
+    Set to number of votes for standard rating, and only posts with at least set number of votes will be included.
+</p>
+<h3>gdsr_ftvmin</h3>
+<p>
+    Set to number of votes for thumbs rating, and only posts with at least set number of votes will be included.
+</p>
+</div>
+</div>
+</body>
+</html>

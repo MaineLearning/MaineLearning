@@ -1,0 +1,461 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: subscribe-to-double-opt-in-comments\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-27 17:53+0300\n"
+"PO-Revision-Date: 2010-04-08 20:29+0300\n"
+"Last-Translator: FatCow <zhr@tut.by>\n"
+"Language-Team: Marics G. <by.marcis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;_c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../subscribe-to-doi-comments.php:88
+msgid "<strong>Error: </strong>"
+msgstr "<strong>Памылка: </strong>"
+
+#: ../subscribe-to-doi-comments.php:103
+msgid "Subscribe without commenting"
+msgstr "Падпісацца, не каментуючы"
+
+#: ../subscribe-to-doi-comments.php:105
+msgid "E-Mail:"
+msgstr "E-mail:"
+
+#: ../subscribe-to-doi-comments.php:107
+msgid "Subscribe"
+msgstr "Падпісацца"
+
+#: ../subscribe-to-doi-comments.php:147
+msgid "Subscribe to Comments Options"
+msgstr "Падпіска на каментары"
+
+#: ../subscribe-to-doi-comments.php:150
+msgid "\"From\" name for notifications:"
+msgstr "Імя \"Ад каго\" для апавяшчэнняў:"
+
+#: ../subscribe-to-doi-comments.php:151
+msgid "\"From\" e-mail addresss for notifications:"
+msgstr "E-mail \"Ад каго\" для апавяшчэнняў:"
+
+#: ../subscribe-to-doi-comments.php:152
+msgid "Do a CSS \"clear\" on the subscription checkbox/message (uncheck this if the checkbox/message appears in a strange location in your theme)"
+msgstr "Прысвоіць CSS уласцівасць \"clear\" сцяжку і паведамленню пра падпіску (прыбярыце галачку, калі сцяжок ці паведамленне з'яўляецца ў незразумелым месцы)."
+
+#: ../subscribe-to-doi-comments.php:155
+msgid "Comment Form Text"
+msgstr "Тэкст для формы каментароў"
+
+#: ../subscribe-to-doi-comments.php:157
+msgid "Customize the messages shown to different people.  Use <code>[manager_link]</code> to insert the URI to the Subscription Manager."
+msgstr "Задайце паведамленні, якія адлюстроўваюцца для розных карыстачоў. Выкарыстоўвайце <code>[manager_link]</code> для ўстаўкі спасылкі на Кіраванне Падпіскамі."
+
+#: ../subscribe-to-doi-comments.php:161
+msgid "Not subscribed"
+msgstr "Не падпісаны"
+
+#: ../subscribe-to-doi-comments.php:163
+msgid "Subscribed"
+msgstr "Падпісаны"
+
+#: ../subscribe-to-doi-comments.php:165
+msgid "Entry Author"
+msgstr "Аўтар запісу"
+
+#: ../subscribe-to-doi-comments.php:167
+msgid "Confirmation Text (will be shown after user has clicked on the confirmation link)"
+msgstr "Тэкст пацверджання (будзе паказаны пасля таго, як карыстач націснуў на спасылку пацверджання)"
+
+#: ../subscribe-to-doi-comments.php:169
+msgid "Headline for Double-Opt-In"
+msgstr "Загаловак для Double-Opt-In"
+
+#: ../subscribe-to-doi-comments.php:171
+msgid "Mail Text for Double-Opt-In ([verify_url] will be replaced with URL to subscribe finally, no HTML!)"
+msgstr "Тэкст паведамлення для Double-Opt-In  ([verify_url], будзе заменены URL, каб падпісацца канчаткова, без HTML!)"
+
+#: ../subscribe-to-doi-comments.php:177
+msgid "Use custom style for Subscription Manager"
+msgstr "Выкарыстоўваць свой стыль для Кіравання Падпіскамі"
+
+#: ../subscribe-to-doi-comments.php:179
+msgid "These settings only matter if you are using a custom style.  <code>[theme_path]</code> will be replaced with the path to your current theme."
+msgstr "Гэтыя налады маюць значэнне, толькі калі Вы выкарыстоўваеце свой стыль. <code>[theme_path]</code> будзе заменены на шлях да Вашай бягучай тэмы."
+
+#: ../subscribe-to-doi-comments.php:182
+msgid "Path to header:"
+msgstr "Шлях да шапкі:"
+
+#: ../subscribe-to-doi-comments.php:183
+msgid "Path to sidebar:"
+msgstr "Шлях да сайдбару:"
+
+#: ../subscribe-to-doi-comments.php:184
+msgid "Path to footer:"
+msgstr "Шлях да склепа:"
+
+#: ../subscribe-to-doi-comments.php:187
+msgid "HTML for before the subscription manager:"
+msgstr "HTML-код перад мэнэджарам падпіскі:"
+
+#: ../subscribe-to-doi-comments.php:188
+msgid "HTML for after the subscription manager:"
+msgstr "HTML-код пасля мэнэджара падпіскі:"
+
+#: ../subscribe-to-doi-comments.php:214
+msgid "Options saved."
+msgstr "Налады захаваны."
+
+#: ../subscribe-to-doi-comments.php:221
+msgid "Update Options &raquo;"
+msgstr "Абнавіць налады &raquo;"
+
+#: ../subscribe-to-doi-comments.php:386
+msgid "Please provide a valid e-mail address."
+msgstr "Калі ласка, увядзіце карэктны e-mail адрас."
+
+#: ../subscribe-to-doi-comments.php:390
+msgid "This e-mail address may not be subscribed"
+msgstr "Гэта e-mail не можа быць падпісаны"
+
+#: ../subscribe-to-doi-comments.php:396
+#: ../subscribe-to-doi-comments.php:412
+msgid "You appear to be already subscribed to this entry."
+msgstr "Вы, здаецца, ужо падпісаны на гэты запіс."
+
+#: ../subscribe-to-doi-comments.php:402
+msgid "Comments are not allowed on this entry."
+msgstr "Каментаванне гэтага запісу не дазволена."
+
+#: ../subscribe-to-doi-comments.php:616
+#, php-format
+msgid "There is a new comment on the post \"%s\""
+msgstr "Паступіў новы каментар на запіс \"%s\""
+
+#: ../subscribe-to-doi-comments.php:617
+#, php-format
+msgid "Author: %s\n"
+msgstr "Аўтар: %s\n"
+
+#: ../subscribe-to-doi-comments.php:618
+msgid "Comment:\n"
+msgstr "Каментар: \n"
+
+#: ../subscribe-to-doi-comments.php:619
+msgid "See all comments on this post here:\n"
+msgstr "Паглядзець усе каментары да гэтага запісу тут:\n"
+
+#: ../subscribe-to-doi-comments.php:622
+msgid "To manage your subscriptions or to block all notifications from this site, click the link below:\n"
+msgstr "Для кіравання Вашай падпіскай ці адмены ўсіх апавяшчэнняў з сайта, пстрыкніце па наступнай спасылцы: \n"
+
+#: ../subscribe-to-doi-comments.php:625
+#, php-format
+msgid "New Comment On: %s"
+msgstr "Новы каментар да запісу: %s"
+
+#: ../subscribe-to-doi-comments.php:644
+msgid "E-mail change confirmation"
+msgstr "Пацверджанне змены e-mail"
+
+#: ../subscribe-to-doi-comments.php:645
+#, php-format
+msgid ""
+"You are receiving this message to confirm a change of e-mail address for your subscriptions at \"%s\"\n"
+"\n"
+msgstr ""
+"Вы атрымалі гэта паведамленне, каб пацвердзіць змену e-mai адресаl для Вашых падпісак на \"%s\"\n"
+"\n"
+
+#: ../subscribe-to-doi-comments.php:646
+#, php-format
+msgid ""
+"To change your e-mail address to %s, click this link:\n"
+"\n"
+msgstr ""
+"Каб змяніць Ваш e-mail адрас на %s, пстрыкніце па наступнай спасылцы: \n"
+"\n"
+
+#: ../subscribe-to-doi-comments.php:648
+#: ../subscribe-to-doi-comments.php:660
+msgid "If you did not request this action, please disregard this message."
+msgstr "Калі Вы рабілі такога запыту, проста праігнаруйце паведамленне."
+
+#: ../subscribe-to-doi-comments.php:656
+msgid "E-mail block confirmation"
+msgstr "Пацверджанне абароны e-amil"
+
+#: ../subscribe-to-doi-comments.php:657
+#, php-format
+msgid ""
+"You are receiving this message to confirm that you no longer wish to receive e-mail comment notifications from \"%s\"\n"
+"\n"
+msgstr ""
+"Вы атрымалі гэта паведамленне для таго, каб пацвердзіць, што Вы больш не жадаеце атрымліваць рассыланне каментароў з сайта \"%s\"\n"
+"\n"
+
+#: ../subscribe-to-doi-comments.php:658
+msgid ""
+"To cancel all future notifications for this address, click this link:\n"
+"\n"
+msgstr ""
+"Каб адмяніць усе будучыя апавяшчэнні, пстрыкніце па наступнай спасылцы: \n"
+"\n"
+
+#: ../subscribe-to-doi-comments.php:698
+msgid "click here"
+msgstr "націсніце тут"
+
+#: ../subscribe-to-doi-comments.php:720
+msgid "Notify me of followup comments via e-mail"
+msgstr "Апавяшчаць мяне пра новыя каментароў па пошце"
+
+#: ../subscribe-to-doi-comments.php:720
+msgid "You are subscribed to this entry.  <a href=\"[manager_link]\">Manage your subscriptions</a>."
+msgstr "Вы падпісаны на гэты запіс. <a href=\"[manager_link]\">Кіраванне падпіскамі</a>."
+
+#: ../subscribe-to-doi-comments.php:720
+msgid "You are the author of this entry.  <a href=\"[manager_link]\">Manage subscriptions</a>."
+msgstr "Вы аўтар гэтага запісу.  <a href=\"[manager_link]\">Кіраванне падпіскамі</a>."
+
+#: ../subscribe-to-doi-comments.php:720
+msgid ""
+"Hello,\n"
+"\n"
+"please click on the following link:\n"
+"[verify_url]\n"
+"to confirm your subscription."
+msgstr ""
+"Дабрыдзень, \n"
+"\n"
+"калі ласка націсніце на наступную спасылку:\n"
+"[verify_url] \n"
+"пацвердзіць Вашу падпіску."
+
+#: ../subscribe-to-doi-comments.php:720
+msgid "Double Opt In"
+msgstr "Double Opt In ці Паўторнае (падвойнае) пацверджанне"
+
+#: ../subscribe-to-doi-comments.php:744
+msgid "You will now get an e-mail, if a new comment is posted."
+msgstr "Зараз Вы атрымаеце e-mail, калі з'явіцца новы каментар."
+
+#: ../subscribe-to-doi-comments.php:836
+msgid "Comment Subscription Manager"
+msgstr "Кіраванне падпіскамі на каментары"
+
+#: ../subscribe-to-doi-comments.php:836
+#: ../subscribe-to-doi-comments.php:1195
+msgid "Subscriptions"
+msgstr "Падпіскі"
+
+#: ../subscribe-to-doi-comments.php:838
+msgid "Subscribe to Comments"
+msgstr "Падпіска на каментары"
+
+#: ../subscribe-to-doi-comments.php:918
+msgid "You may not access this page without a valid key."
+msgstr "Для доступу да старонкі неабходзен правільны ключ."
+
+#: ../subscribe-to-doi-comments.php:926
+#, php-format
+msgid "All notifications that were formerly sent to <strong>%1$s</strong> will now be sent to <strong>%2$s</strong>!"
+msgstr "Усе апавяшчэнні, которы адпраўляліся на адрас <strong>%s</strong> зараз будуць накіроўвацца на адрас <strong>%s</strong>!"
+
+#: ../subscribe-to-doi-comments.php:938
+#, php-format
+msgid "<strong>%1$s</strong> %2$s removed successfully."
+msgstr "<strong>%s</strong> %s паспяхова выдалена."
+
+#: ../subscribe-to-doi-comments.php:938
+msgid "subscriptions"
+msgstr "падпіскі"
+
+#: ../subscribe-to-doi-comments.php:938
+msgid "subscription"
+msgstr "падпіска"
+
+#: ../subscribe-to-doi-comments.php:943
+#, php-format
+msgid "The block on <strong>%s</strong> has been successfully removed."
+msgstr "Абарона адрасу <strong>%s</strong> была выдалена."
+
+#: ../subscribe-to-doi-comments.php:945
+#, php-format
+msgid "<strong>%s</strong> isn't blocked!"
+msgstr "<strong>%s</strong> не абаронены!"
+
+#: ../subscribe-to-doi-comments.php:950
+#, php-format
+msgid "<strong>%s</strong> has been blocked from receiving notifications.  You will have to have the administrator remove the block before you will be able to change your notification address."
+msgstr "<strong>%s</strong> абаронены ад атрымання апавяшчэнняў. Вы павінны папытаць адміністратара сайта зняць абарону, і толькі пасля гэтага зможаце памяняць адрас."
+
+#: ../subscribe-to-doi-comments.php:953
+#, php-format
+msgid "Your change of e-mail request was successfully received.  Please check your old account (<strong>%s</strong>) in order to confirm the change."
+msgstr "Запыт на змены e-mail прыняты. Калі ласка, праверце Ваш стары адрас (<strong>%s</strong>) для пацверджання змены."
+
+#: ../subscribe-to-doi-comments.php:958
+#, php-format
+msgid "Your request to block <strong>%s</strong> from receiving any further notifications has been received.  In order for you to complete the block, please check your e-mail and click on the link in the message that has been sent to you."
+msgstr "Вы папыталі абараніць адрас <strong>%s</strong> ад атрымання любых апавяшчэнняў. Для таго, каб усталяваць абарону, праверце пошту і пстрыкніце па спасылку ў лісце, якое было адпраўлена Вам."
+
+#: ../subscribe-to-doi-comments.php:962
+#, php-format
+msgid "<strong>%1$s</strong> has been successfully subscribed to %2$s"
+msgstr "Адрас <strong>%1$s</strong> падпісаны на апавяшчэнні пра новыя каментары да запісу  %2$s"
+
+#: ../subscribe-to-doi-comments.php:967
+#, php-format
+msgid "<strong>%1$s</strong> has been added to the \"do not mail\" list. You will no longer receive any notifications from this site. If this was done in error, please contact the <a href=\"mailto:%2$s\">site administrator</a> to remove this block."
+msgstr "Адрас <strong>%1$s</strong> быў дададзены ў спіс не \"не дасылаць апавяшчэнні\". Вы больш не будзеце атрымліваць апавяшчэнні з гэтага сайта.  Калі гэта здарылася па памылцы, звяжыцеся з <a href=\"mailto:%2$s\">адміністратарам сайта</a>."
+
+#: ../subscribe-to-doi-comments.php:969
+#, php-format
+msgid "<strong>%s</strong> has already been blocked!"
+msgstr "<strong>%s</strong> ужо абаронены!"
+
+#: ../subscribe-to-doi-comments.php:985
+#: ../subscribe-to-doi-comments.php:1017
+#, php-format
+msgid "%s Comment Subscription Manager"
+msgstr "%s Кіраванне падпіскай на каментары"
+
+#: ../subscribe-to-doi-comments.php:1003
+msgid "Error! Comment does not exist anymore!"
+msgstr "Памылка! Каментар больш не існуе!"
+
+#: ../subscribe-to-doi-comments.php:1020
+#, php-format
+msgid "Return to the page you were viewing: %s"
+msgstr "Вярнуцца да прагляданай старонкі: %s"
+
+#: ../subscribe-to-doi-comments.php:1031
+msgid "Remove Block"
+msgstr "Выдаліць абарону"
+
+#: ../subscribe-to-doi-comments.php:1034
+#, php-format
+msgid "Click the button below to remove the block on <strong>%s</strong>.  This should only be done if the user has specifically requested it."
+msgstr "Націсніце на наступную кнопку, каб прыбраць абарону на <strong>%s</strong>. Вы павінны гэта зрабіць, толькі калі карыстач папытаў Вас пра гэта."
+
+#: ../subscribe-to-doi-comments.php:1042
+msgid "Remove Block &raquo;"
+msgstr "Выдаліць абарону &raquo;"
+
+#: ../subscribe-to-doi-comments.php:1050
+msgid "Blocked"
+msgstr "Абаронены"
+
+#: ../subscribe-to-doi-comments.php:1053
+#, php-format
+msgid "You have indicated that you do not wish to receive any notifications at <strong>%1$s</strong> from this site. If this is incorrect, or if you wish to have the block removed, please contact the <a href=\"mailto:%2$s\">site administrator</a>."
+msgstr "Вы паказалі, што не жадаеце больш атрымліваць апавяшчэнні на адрас <strong>%1$s</strong>  з гэтага сайта. Калі гэта не так і Вы жадаеце зняць абарону, звяжыцеся з <a href=\"mailto:%2$s\">адміністратарам сайта</a>."
+
+#: ../subscribe-to-doi-comments.php:1068
+#, php-format
+msgid "<strong>%s</strong> is not subscribed to any posts on this site."
+msgstr "<strong>%s</strong> не падпісаны на рассыланне каментароў на гэтым сайце."
+
+#: ../subscribe-to-doi-comments.php:1070
+#, php-format
+msgid "<strong>%s</strong> is not a valid e-mail address."
+msgstr "<strong>%s</strong> - некарэктны e-mail адрас."
+
+#: ../subscribe-to-doi-comments.php:1083
+msgid "&laquo; Back"
+msgstr "&laquo; Назад"
+
+#: ../subscribe-to-doi-comments.php:1086
+msgid "Find Subscriptions"
+msgstr "Знайсці падпіскі"
+
+#: ../subscribe-to-doi-comments.php:1089
+msgid "Enter an e-mail address to view its subscriptions or undo a block."
+msgstr "Увядзіце e-mail адрас для прагляду падпісак ці здыманні абароны."
+
+#: ../subscribe-to-doi-comments.php:1097
+msgid "Search &raquo;"
+msgstr "Знайсці &raquo;"
+
+#: ../subscribe-to-doi-comments.php:1105
+msgid "Top Subscriber List"
+msgstr "Рэйтынг падпісантаў"
+
+#: ../subscribe-to-doi-comments.php:1107
+msgid "Subscriber List"
+msgstr "Спіс падпісантаў"
+
+#: ../subscribe-to-doi-comments.php:1126
+msgid "Show all subscribers"
+msgstr "Паказаць усіх падпісантаў"
+
+#: ../subscribe-to-doi-comments.php:1128
+msgid "Show list of subscribers in <code>CC:</code>-field format (for bulk e-mailing)"
+msgstr "Паказаць спіс падпісантаў у фармаце поля <code>CC:</code> (для масавага рассылання)"
+
+#: ../subscribe-to-doi-comments.php:1130
+msgid "&laquo; Back to regular view"
+msgstr "&laquo; Вярнуцца да звычайнага выгляду"
+
+#: ../subscribe-to-doi-comments.php:1145
+msgid "Top Subscribed Posts"
+msgstr "Запісы з найвялікай колькасцю падпісантаў"
+
+#: ../subscribe-to-doi-comments.php:1198
+#, php-format
+msgid "<strong>%s</strong> is subscribed to the posts listed below. To unsubscribe to one or more posts, click the checkbox next to the title, then click \"Remove Selected Subscription(s)\" at the bottom of the list."
+msgstr "<strong>%s</strong> падпісаны на наступныя запісы. Каб адпісацца ад адной ці некалькіх рассыланняў, абярыце запісы, затым націсніце \"Выдаліць абраныя падпіскі &raquo;\"."
+
+#: ../subscribe-to-doi-comments.php:1212
+msgid "Invert Checkbox Selection"
+msgstr "Інвертаваць станы сцяжкоў"
+
+#: ../subscribe-to-doi-comments.php:1216
+msgid "Remove Selected Subscription(s) &raquo;"
+msgstr "Выдаліць абраныя падпіскі &raquo;"
+
+#: ../subscribe-to-doi-comments.php:1223
+msgid "Advanced Options"
+msgstr "Пашыраныя налады"
+
+#: ../subscribe-to-doi-comments.php:1226
+msgid "Block All Notifications"
+msgstr "Блакаваць усе апавяшчэнні"
+
+#: ../subscribe-to-doi-comments.php:1233
+#, php-format
+msgid "If you would like <strong>%s</strong> to be blocked from receiving any notifications from this site, click the button below.  This should be reserved for cases where someone is signing you up for notifications without your consent."
+msgstr "Калі Вы жадаеце, каб адрас <strong>%s</strong> быў абаронены ад прыёму любых апавяшчэнняў з гэтага сайта, націсніце на наступную кнопку. Гэта неабходна ў выпадку, калі хтосьці спрабуе падпісаць Вас на апавяшчэнні без Вашай згоды."
+
+#: ../subscribe-to-doi-comments.php:1237
+msgid "Block Notifications &raquo;"
+msgstr "Блакаваць апавяшчэнні &raquo;"
+
+#: ../subscribe-to-doi-comments.php:1243
+msgid "Change E-mail Address"
+msgstr "Змяніць E-mail адрас"
+
+#: ../subscribe-to-doi-comments.php:1250
+#, php-format
+msgid "If you would like to change the e-mail address for your subscriptions, enter the new address below.  You will be required to verify this request by clicking a special link sent to your current address (<strong>%s</strong>)."
+msgstr "Калі Вы жадаеце змяніць e-mail адрас вашай падпіскі, увядзіце яго ў cледующее поле. Вам неабходна пацвердзіць сваё жаданне, нажава на спасылку, якая будзе адпраўлена на Ваш бягучы адрас (<strong>%s</strong>)."
+
+#: ../subscribe-to-doi-comments.php:1254
+msgid "New E-mail Address:"
+msgstr "Новы e-mail адрас:"
+
+#: ../subscribe-to-doi-comments.php:1259
+msgid "Change E-mail Address &raquo;"
+msgstr "Змяніць E-mail адрас &raquo;"
+
+#~ msgid "\"Subscribe\" box should be checked by default"
+#~ msgstr "Галачка \"Падпісацца\" адзначана па умолчанмю"

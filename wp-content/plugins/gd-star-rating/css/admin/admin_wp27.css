@@ -1,0 +1,15 @@
+a.rsswidget { padding: 0 !important; }
+
+.form-table td, .form-table th { border-bottom: 6px solid white; }
+
+.rss-date { padding-left: 5px; }
+
+.rssTitle { margin-top: 3px; }
+
+.search-input { border-style: solid; border-width: 1px; padding: 2px; }
+
+#gdptlogo { margin-top: 10px; }
+
+#post-search { float: right; margin: -5px 0 0; }
+
+#rightnow { padding: 0; }

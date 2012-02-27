@@ -1,0 +1,10 @@
+/*************************************************
+*  This CSS file belongs to WP-Table Reloaded!   *
+*  DO NOT make any changes here, add them to the *
+* "Custom CSS" textarea in the "Plugin Options"! *
+*************************************************/
+
+.wp-table-reloaded {
+	direction: rtl;
+	text-align: right;	
+}

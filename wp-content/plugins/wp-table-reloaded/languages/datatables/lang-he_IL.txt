@@ -1,0 +1,17 @@
+﻿{
+	"sProcessing":   "מעבד...",
+	"sLengthMenu":   "מראה _MENU_ רשומות",
+	"sZeroRecords":  "לא נמצאו רשומות מתאימות",
+	"sInfo":         "מראה _START_ עד _END_ מתוך _TOTAL_ רשומות",
+	"sInfoEmpty":    "מראה 0 עד 0 מתוך 0 רשומות",
+	"sInfoFiltered": "(מסנן מתול _MAX_ רשומות)",
+	"sInfoPostFix":  "",
+	"sSearch":       "חיפוש:",
+	"sUrl":          "",
+	"oPaginate": {
+		"sFirst":    "ראשון",
+		"sPrevious": "הקודם",
+		"sNext":     "הבא",
+		"sLast":     "אחרון"
+	}
+}

@@ -1,0 +1,28 @@
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	max-width: 300px;
+	opacity: 0.85;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+.pluginbuddy-nodecor a {
+	text-decoration: none;
+}
+.pluginbuddy_tip img {
+	vertical-align: -2px;
+}
+
+.indent {
+	width: 100px;
+	display: inline-block;
+}
+
+.postbox {
+	line-height: 1.4em;
+}

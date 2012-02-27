@@ -1,0 +1,36 @@
+# Exclude user generated content
+wp-content/blogs.dir/
+wp-content/uploads/*
+wp-content/cache/*
+
+_archive
+
+# Exclude environment files
+env.php
+
+# Don't include .htaccess, which causes problems with the dev site
+# .htaccess
+
+# Don't include the error log
+php_error.log
+
+# Misc exclusions
+*.bak
+*.sql
+PHP_errors.log
+error_log
+.DS_store
+.DS_Store
+#maintenance.html
+LocalSettings.old*
+wp-content/plugins/custom-anti-spam/cas_*
+*.php.orig
+
+.svn
+wp-admin/error_log
+.fseventsd/
+
+# vim files
+*.swp
+
+

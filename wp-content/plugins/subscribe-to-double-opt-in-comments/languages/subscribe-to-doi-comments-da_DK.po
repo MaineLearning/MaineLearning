@@ -1,0 +1,454 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Subscribe to Double-Opt-In Comments 2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-30 08:02+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Team Blogos <wordpress@blogos.dk>\n"
+"Language-Team: Team Blogos <wordpress@blogos.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2;plural=n != 1;\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_c;_e;__ngettext:1,2;__ngettext_noop:1,2;_n:1,2;_nc:1,2;_n_noop:1,2\n"
+"X-Poedit-Basepath: d:\\wordpress\\plugins\\subscribe-to-double-opt-in-comments\n"
+"X-Poedit-SearchPath-0: d:\\wordpress\\plugins\\subscribe-to-double-opt-in-comments\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:88
+msgid "<strong>Error: </strong>"
+msgstr "<strong>Fejl: </strong>"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:103
+msgid "Subscribe without commenting"
+msgstr "Tilmeld uden at kommentere"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:105
+msgid "E-Mail:"
+msgstr "E-mail:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:107
+msgid "Subscribe"
+msgstr "Tilmeld"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:147
+msgid "Subscribe to Comments Options"
+msgstr "Subscribe to Comments-indstillinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:150
+msgid "\"From\" name for notifications:"
+msgstr "\"Fra\"-navn til orienteringsmails:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:151
+msgid "\"From\" e-mail addresss for notifications:"
+msgstr "\"Fra\"-emailadresse til orienteringsmails:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:152
+msgid "Do a CSS \"clear\" on the subscription checkbox/message (uncheck this if the checkbox/message appears in a strange location in your theme)"
+msgstr "Medtag en CSS-\"clear\" på tilmeldingens afkrydsfelt/besked (fjern krydset, hvis afkrydsningsfeltet/beskeden vises et mærkeligt sted i dit tema)"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:155
+msgid "Comment Form Text"
+msgstr "Tekst på kommentarformular"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:157
+msgid "Customize the messages shown to different people.  Use <code>[manager_link]</code> to insert the URI to the Subscription Manager."
+msgstr "Tilpas beskederne, der vises til forskellige folk. Brug <code>[manager_link]</code>, hvis du vil indsætte URI&#39;en til Administration af tilmeldinger."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:161
+msgid "Not subscribed"
+msgstr "Ikke-tilmeldt"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:163
+msgid "Subscribed"
+msgstr "Tilmeldte"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:165
+msgid "Entry Author"
+msgstr "Forfatter til artiklen"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:167
+msgid "Confirmation Text (will be shown after user has clicked on the confirmation link)"
+msgstr "Bekræftelsestekst (som vises, når en bruger har klikket på bekræftelseslinket)"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:169
+msgid "Headline for Double-Opt-In"
+msgstr "Overskrift for Double-Opt-In"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:171
+msgid "Mail Text for Double-Opt-In ([verify_url] will be replaced with URL to subscribe finally, no HTML!)"
+msgstr "Mail-tekst for Double-Opt-In ([verify_url] erstattes med URL&#39;en, hvor man tilmelder sig endeligt. Ingen HTML!)"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:177
+msgid "Use custom style for Subscription Manager"
+msgstr "Brug egen style for Administration af tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:179
+msgid "These settings only matter if you are using a custom style.  <code>[theme_path]</code> will be replaced with the path to your current theme."
+msgstr "Disse indstillinger bruges kun, hvis du bruger egen style. <code>[theme_path]</code> erstattes med stien til dit aktuelle tema."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:182
+msgid "Path to header:"
+msgstr "Sti til header:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:183
+msgid "Path to sidebar:"
+msgstr "Sti til sidepanel:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:184
+msgid "Path to footer:"
+msgstr "Sti til footer:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:187
+msgid "HTML for before the subscription manager:"
+msgstr "HTML, der skal bruges før Administration af tilmeldinger:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:188
+msgid "HTML for after the subscription manager:"
+msgstr "HTML, der skal bruges efter Administration af tilmeldinger:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:214
+msgid "Options saved."
+msgstr "Indstillinger gemt."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:221
+msgid "Update Options &raquo;"
+msgstr "Opdatér indstillinger &raquo;"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:386
+msgid "Please provide a valid e-mail address."
+msgstr "Indtast venligst en gyldig emailadresse"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:390
+msgid "This e-mail address may not be subscribed"
+msgstr "Denne emailadresse kan ikke tilmeldes"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:396
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:412
+msgid "You appear to be already subscribed to this entry."
+msgstr "Du ser ud til allerede at være tilmeldt til denne artikel."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:402
+msgid "Comments are not allowed on this entry."
+msgstr "Kommentarer til denne artikel er ikke tilladt."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:621
+#, php-format
+msgid "There is a new comment on the post \"%s\""
+msgstr "Der er en ny kommentar til indlægget \"%s\""
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:622
+#, php-format
+msgid "Author: %s\n"
+msgstr "Forfatter: %s\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:623
+msgid "Comment:\n"
+msgstr "Kommentar:\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:624
+msgid "See all comments on this post here:\n"
+msgstr "Se alle kommentarer til dette indlæg her:\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:627
+msgid "To manage your subscriptions or to block all notifications from this site, click the link below:\n"
+msgstr "Klik linket nedenfor, hvis du vil administrere dine tilmeldinger eller blokere for alle orienteringsmails fra denne site:\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:630
+#, php-format
+msgid "New Comment On: %s"
+msgstr "Ny kommentar til: %s"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:649
+msgid "E-mail change confirmation"
+msgstr "Bekræftelse på ny email"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:650
+#, php-format
+msgid ""
+"You are receiving this message to confirm a change of e-mail address for your subscriptions at \"%s\"\n"
+"\n"
+msgstr ""
+"Du får denne mail, så du kan bekræfte, at du ønsker at skifte emailadresse for dine tilmeldinger på \"%s\"\n"
+"\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:651
+#, php-format
+msgid ""
+"To change your e-mail address to %s, click this link:\n"
+"\n"
+msgstr ""
+"Klik på det følgende link, hvis du vil skifte emailadressen til %s:\n"
+"\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:653
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:665
+msgid "If you did not request this action, please disregard this message."
+msgstr "Hvis du ikke har anmodet om dette, bedes du ignorere denne mail."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:661
+msgid "E-mail block confirmation"
+msgstr "Bekræftelse på blokering af orienteringsmails"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:662
+#, php-format
+msgid ""
+"You are receiving this message to confirm that you no longer wish to receive e-mail comment notifications from \"%s\"\n"
+"\n"
+msgstr ""
+"Du har fået denne mail, så du kan bekræfte, at du ikke længere ønsker at modtage orienteringsmails fra \"%s\"\n"
+"\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:663
+msgid ""
+"To cancel all future notifications for this address, click this link:\n"
+"\n"
+msgstr ""
+"Klik på det følgende link, hvis du vil standse alle fremtidige orienteringsmails til denne adresse:\n"
+"\n"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:703
+msgid "click here"
+msgstr "klik her"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:725
+msgid "Notify me of followup comments via e-mail"
+msgstr "Giv mig besked per mail om opfølgende kommentarer"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:725
+msgid "You are subscribed to this entry.  <a href=\"[manager_link]\">Manage your subscriptions</a>."
+msgstr "Du er tilmeldt til denne artikel.  <a href=\"[manager_link]\">Administration af tilmeldinger</a>."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:725
+msgid "You are the author of this entry.  <a href=\"[manager_link]\">Manage subscriptions</a>."
+msgstr "Du er forfatteren til denne artikel.  <a href=\"[manager_link]\">Administrér tilmeldinger</a>."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:725
+msgid ""
+"Hello,\n"
+"\n"
+"please click on the following link:\n"
+"[verify_url]\n"
+"to confirm your subscription."
+msgstr ""
+"Hej!\n"
+"\n"
+"Klik på det følgende link:\n"
+"[verify_url]\n"
+"hvis du vil bekræfte din tilmelding."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:725
+msgid "Double Opt In"
+msgstr "Double Opt In"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:749
+msgid "You will now get an e-mail, if a new comment is posted."
+msgstr "Du vil nu få emails, hvis der kommer nye kommentarer."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:841
+msgid "Comment Subscription Manager"
+msgstr ""
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:841
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1195
+msgid "Subscriptions"
+msgstr "Tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:843
+msgid "Subscribe to Comments"
+msgstr ""
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:923
+msgid "You may not access this page without a valid key."
+msgstr "Du kan ikke få adgang til denne side uden et gyldigt kodeord."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:931
+#, php-format
+msgid "All notifications that were formerly sent to <strong>%1$s</strong> will now be sent to <strong>%2$s</strong>!"
+msgstr "Alle orienteringsmails, som tidligere sendtes til <strong>%1$s</strong>, vil nu blive sendt til <strong>%2$s</strong>!"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:943
+#, php-format
+msgid "<strong>%1$s</strong> %2$s removed successfully."
+msgstr "<strong>%1$s</strong> %2$s er blevet fjernet."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:943
+msgid "subscriptions"
+msgstr "Tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:943
+msgid "subscription"
+msgstr "tilmelding"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:948
+#, php-format
+msgid "The block on <strong>%s</strong> has been successfully removed."
+msgstr "Blokeringen af <strong>%s</strong> er blevet fjernet."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:950
+#, php-format
+msgid "<strong>%s</strong> isn't blocked!"
+msgstr "<strong>%s</strong> er ikke blokeret!"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:955
+#, php-format
+msgid "<strong>%s</strong> has been blocked from receiving notifications.  You will have to have the administrator remove the block before you will be able to change your notification address."
+msgstr "<strong>%s</strong> er blevet blokeret og vil ikke modtage orienteringsmails. Du er nødt til at bede administrator fjerne blokeringen, før du kan ændre din emailadresse."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:958
+#, php-format
+msgid "Your change of e-mail request was successfully received.  Please check your old account (<strong>%s</strong>) in order to confirm the change."
+msgstr "Din anmodning om at ændre emailadresse er blevet modtaget. Tjek venligst din gamle emailkonto (<strong>%s</strong>), så du kan bekræfte ændringen."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:963
+#, php-format
+msgid "Your request to block <strong>%s</strong> from receiving any further notifications has been received.  In order for you to complete the block, please check your e-mail and click on the link in the message that has been sent to you."
+msgstr "Din anmodning om at blokere <strong>%s</strong>, så der fremover ikke modtages orienteringsmails, er blevet modtaget. Hvis du vil gennemføre blokeringen, skal du tjekke din email og klikke på linket i mailen, der er blevet sendt til dig."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:967
+#, php-format
+msgid "<strong>%1$s</strong> has been successfully subscribed to %2$s"
+msgstr "<strong>%1$s</strong> er blevet tilmeldt til %2$s"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:972
+#, php-format
+msgid "<strong>%1$s</strong> has been added to the \"do not mail\" list. You will no longer receive any notifications from this site. If this was done in error, please contact the <a href=\"mailto:%2$s\">site administrator</a> to remove this block."
+msgstr "<strong>%1$s</strong> er blevet tilføjet til \"mail ikke\"-listen. Du vil ikke længere få orienteringsmails fra denne site. Hvis det er en fejltagelse, kan du kontakte <a href=\"mailto:%2$s\">sitens administrator</a> og få blokeringen fjernet."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:974
+#, php-format
+msgid "<strong>%s</strong> has already been blocked!"
+msgstr "<strong>%s</strong> er allerede blokeret!"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:990
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1017
+#, php-format
+msgid "%s Comment Subscription Manager"
+msgstr "%s &ndash; Administration af kommentartilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1020
+#, php-format
+msgid "Return to the page you were viewing: %s"
+msgstr "Gå tilbage til den, du så på: %s"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1031
+msgid "Remove Block"
+msgstr "Fjern blokering"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1034
+#, php-format
+msgid "Click the button below to remove the block on <strong>%s</strong>.  This should only be done if the user has specifically requested it."
+msgstr "Klik på knappen nedenfor for at fjerne blokeringen på <strong>%s</strong>. Det bør du kun gøre, hvis brugeren udtrykkeligt har bedt om det."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1042
+msgid "Remove Block &raquo;"
+msgstr "Fjern blokering &raquo;"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1050
+msgid "Blocked"
+msgstr "Blokeret"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1053
+#, php-format
+msgid "You have indicated that you do not wish to receive any notifications at <strong>%1$s</strong> from this site. If this is incorrect, or if you wish to have the block removed, please contact the <a href=\"mailto:%2$s\">site administrator</a>."
+msgstr "Du har meddelt, at du ikke ønsker at modtage flere orienteringsmails <strong>%1$s</strong> fra denne site. Hvis det er forkert, eller hvis du ønsker at få blokeringen fjernet, bedes du kontakte <a href=\"mailto:%2$s\">sitens administrator</a>."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1068
+#, php-format
+msgid "<strong>%s</strong> is not subscribed to any posts on this site."
+msgstr "<strong>%s</strong> er ikke tilmeldt til indlæg på denne site."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1070
+#, php-format
+msgid "<strong>%s</strong> is not a valid e-mail address."
+msgstr "<strong>%s</strong> er ikke en gyldig emailadresse."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1083
+msgid "&laquo; Back"
+msgstr "&laquo; Tilbage"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1086
+msgid "Find Subscriptions"
+msgstr "Find tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1089
+msgid "Enter an e-mail address to view its subscriptions or undo a block."
+msgstr "Indtast en emailadresse for at se dens tilmeldinger eller fjerne en blokering."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1097
+msgid "Search &raquo;"
+msgstr "Søg &raquo;"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1105
+msgid "Top Subscriber List"
+msgstr "Liste over brugere med flest tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1107
+msgid "Subscriber List"
+msgstr "Liste over tilmeldte"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1126
+msgid "Show all subscribers"
+msgstr "Vis alle tilmeldte"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1128
+msgid "Show list of subscribers in <code>CC:</code>-field format (for bulk e-mailing)"
+msgstr "Vis liste over tilmeldte i format passende <code>CC:</code>-feltet (til masseforsendelse af emails)"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1130
+msgid "&laquo; Back to regular view"
+msgstr "&laquo; Tilbage til normal visning"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1145
+msgid "Top Subscribed Posts"
+msgstr "Liste over indlæg med flest tilmeldinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1198
+#, php-format
+msgid "<strong>%s</strong> is subscribed to the posts listed below. To unsubscribe to one or more posts, click the checkbox next to the title, then click \"Remove Selected Subscription(s)\" at the bottom of the list."
+msgstr "<strong>%s</strong> er tilmeldt til indlæggene anført nedenfor. Hvis du fjerne tilmeldinger på et eller flere indlæg, skal du sætte kryds ved siden af titlen og klikke \"Fjern valgte tilmelding(er)\" nedenunder listen."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1212
+msgid "Invert Checkbox Selection"
+msgstr "Invertér valg i afkrydsningsfelterne"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1216
+msgid "Remove Selected Subscription(s) &raquo;"
+msgstr "Fjern valgte tilmelding(er) &raquo;"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1223
+msgid "Advanced Options"
+msgstr "Avancerede indstillinger"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1226
+msgid "Block All Notifications"
+msgstr "Blokér alle orienteringsmails"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1233
+#, php-format
+msgid "If you would like <strong>%s</strong> to be blocked from receiving any notifications from this site, click the button below.  This should be reserved for cases where someone is signing you up for notifications without your consent."
+msgstr "Hvis du ønsker, at <strong>%s</strong> blokeres, så der ikke længere sendes orienteringsmails, skal du klikke på knappen nedenfor. Dette bør kun anvendes i de tilfælde, hvor en anden har tilmeldt dig til orienteringsmails uden din accept."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1237
+msgid "Block Notifications &raquo;"
+msgstr "Blokér orienteringsmails &raquo;"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1243
+msgid "Change E-mail Address"
+msgstr "Skift emailadresse"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1250
+#, php-format
+msgid "If you would like to change the e-mail address for your subscriptions, enter the new address below.  You will be required to verify this request by clicking a special link sent to your current address (<strong>%s</strong>)."
+msgstr "Hvis du ønsker at ændre emailadresse for dine tilmeldinger, skal du indtaste den nye adresse nedenfor. Du vil blive bedt om at bekræfte denne anmodning ved at klikke på et særligt link, som sendes til din nuværende adresse (<strong>%s</strong>)."
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1254
+msgid "New E-mail Address:"
+msgstr "Ny emailadresse:"
+
+#: d:\wordpress\plugins\subscribe-to-double-opt-in-comments/subscribe-to-doi-comments.php:1259
+msgid "Change E-mail Address &raquo;"
+msgstr "Skift emailadresse &raquo;"
+

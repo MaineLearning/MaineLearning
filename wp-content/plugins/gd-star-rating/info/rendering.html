@@ -1,0 +1,585 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>GD Star Rating: Custom Functions</title>
+    <link rel="stylesheet" href="doxygen.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE ]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen" /><![endif]-->
+</head>
+<body>
+
+<div id="sidebar">
+    <h4>Contents:</h4>
+    <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="functions.html">General Functions</a></li>
+        <li><a href="rendering.html">Rendering Functions</a></li>
+        <li><a href="legacy.html">Legacy Functions</a></li>
+        <li><a href="filters.html">Filters &amp; Actions</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+        <li><a href="wpquery.html">WP Query</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="t2map.html">T2 Templates</a></li>
+        <li><a href="languages.html">Translations</a></li>
+    </ul>
+    <h4>Plugin Links:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/">Home Page</a></li>
+        <li><a href="http://wordpress.org/extend/plugins/gd-star-rating">WordPress Extend</a></li>
+        <li><a href="http://groups.google.com/group/gd-star-rating">Google Groups</a></li>
+        <li><a href="http://twitter.com/milangd">Follow on Twitter</a></li>
+    </ul>
+    <h4>Support:</h4>
+    <ul>
+        <li><a href="http://www.gdstarrating.com/premium/">Premium Support</a></li>
+    </ul>
+    <h4 class="copyright">Copyright:</h4>
+    <p>
+        &copy; 2008-2009. <a href="http://www.gdragon.info/">Golden Dragon WebStudio</a>
+    </p>
+</div>
+<div id="content">
+<div class="title">
+    <h1>GD Star Rating</h1>
+    <h2>integration functions</h2>
+</div>
+
+<div class="contents">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="memItemLeft" nowrap align="right" valign="top">
+         
+      </td>
+      <td class="memItemRight" valign="bottom">
+        <a class="el" href=
+        "#9aaa6111faf43cfe3547687b127c5f04">gdsr_render_google_rich_snippets</a>
+        ($settings=array(), $echo=true)
+      </td>
+    </tr>
+    <tr>
+      <td class="mdescLeft">
+         
+      </td>
+      <td class="mdescRight">
+        Renders Google Rich Snippet code block. <a href=
+        "#9aaa6111faf43cfe3547687b127c5f04"></a><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="memItemLeft" nowrap align="right" valign="top">
+         
+      </td>
+      <td class="memItemRight" valign="bottom">
+        <a class="el" href=
+        "#611fb744f89ebb901cf006649c2bb521">gdsr_render_stars_custom</a>
+        ($settings=array(), $echo=true)
+      </td>
+    </tr>
+    <tr>
+      <td class="mdescLeft">
+         
+      </td>
+      <td class="mdescRight">
+        Renders custom stars image (or div block). <a href=
+        "#611fb744f89ebb901cf006649c2bb521"></a><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="memItemLeft" nowrap align="right" valign="top">
+         
+      </td>
+      <td class="memItemRight" valign="bottom">
+        <a class="el" href=
+        "#99c8295ab772dd6f063b0f2ea53ee2f5">gdsr_render_star_rating_widget</a>
+        ($widget=array(), $echo=true)
+      </td>
+    </tr>
+    <tr>
+      <td class="mdescLeft">
+         
+      </td>
+      <td class="mdescRight">
+        Renders widget-like element based on the $widget settings array.
+        <a href="#99c8295ab772dd6f063b0f2ea53ee2f5"></a><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="memItemLeft" nowrap align="right" valign="top">
+         
+      </td>
+      <td class="memItemRight" valign="bottom">
+        <a class="el" href=
+        "#136858a62f57c192d6f61212bcfd5723">gdsr_render_blog_rating_widget</a>
+        ($widget=array(), $echo=true)
+      </td>
+    </tr>
+    <tr>
+      <td class="mdescLeft">
+         
+      </td>
+      <td class="mdescRight">
+        Renders blog rating widget element based on the $widget settings
+        array. <a href="#136858a62f57c192d6f61212bcfd5723"></a><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="memItemLeft" nowrap align="right" valign="top">
+         
+      </td>
+      <td class="memItemRight" valign="bottom">
+        <a class="el" href=
+        "#b002b58c7337e3c09c2fd128fb344a26">gdsr_render_comments_rating_widget</a>
+        ($widget=array(), $echo=true)
+      </td>
+    </tr>
+    <tr>
+      <td class="mdescLeft">
+         
+      </td>
+      <td class="mdescRight">
+        Renders comments rating widget element based on the $widget
+        settings array. <a href=
+        "#b002b58c7337e3c09c2fd128fb344a26"></a><br>
+      </td>
+    </tr>
+  </table>
+
+<a class="anchor" name="136858a62f57c192d6f61212bcfd5723"></a>
+<!-- doxytag: member="render.php::gdsr_render_blog_rating_widget" ref="136858a62f57c192d6f61212bcfd5723" args="($widget=array(), $echo=true)" -->
+  </p>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">
+            gdsr_render_blog_rating_widget
+          </td>
+          <td>
+            (
+          </td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>widget</em> = <code>array()</code>,
+          </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>echo</em> = <code>true</code>
+          </td>
+          <td>
+             
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            )
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+      <p>
+        Renders blog rating widget element based on the $widget settings
+        array.
+      </p>
+      <dl compact>
+        <dt>
+          <b>Parameters:</b>
+        </dt>
+        <dd>
+          <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>array</em> 
+              </td>
+              <td>
+                $widget settings to use for rendering
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>bool</em> 
+              </td>
+              <td>
+                $echo echo results or return it as a string
+              </td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <dl class="return" compact>
+        <dt>
+          <b>Returns:</b>
+        </dt>
+        <dd>
+          string html with rendered contents
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <p>
+    <a class="anchor" name="b002b58c7337e3c09c2fd128fb344a26" id=
+    "b002b58c7337e3c09c2fd128fb344a26"></a>
+    <!-- doxytag: member="render.php::gdsr_render_comments_rating_widget" ref="b002b58c7337e3c09c2fd128fb344a26" args="($widget=array(), $echo=true)" -->
+  </p>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">
+            gdsr_render_comments_rating_widget
+          </td>
+          <td>
+            (
+          </td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>widget</em> = <code>array()</code>,
+          </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>echo</em> = <code>true</code>
+          </td>
+          <td>
+             
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            )
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+      <p>
+        Renders comments rating widget element based on the $widget
+        settings array.
+      </p>
+      <dl compact>
+        <dt>
+          <b>Parameters:</b>
+        </dt>
+        <dd>
+          <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>array</em> 
+              </td>
+              <td>
+                $widget settings to use for rendering
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>bool</em> 
+              </td>
+              <td>
+                $echo echo results or return it as a string
+              </td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <dl class="return" compact>
+        <dt>
+          <b>Returns:</b>
+        </dt>
+        <dd>
+          string html with rendered contents
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <p>
+    <a class="anchor" name="9aaa6111faf43cfe3547687b127c5f04"></a>
+    <!-- doxytag: member="render.php::gdsr_render_google_rich_snippets" ref="9aaa6111faf43cfe3547687b127c5f04" args="($settings=array(), $echo=true)" -->
+  </p>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">
+            gdsr_render_google_rich_snippets
+          </td>
+          <td>
+            (
+          </td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>settings</em> = <code>array()</code>,
+          </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>echo</em> = <code>true</code>
+          </td>
+          <td>
+             
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            )
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+      <p>
+        Renders Google Rich Snippet code block.
+      </p>
+      <dl compact>
+        <dt>
+          <b>Parameters:</b>
+        </dt>
+        <dd>
+          <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>string</em> 
+              </td>
+              <td>
+                $settings rendering parameters
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>bool</em> 
+              </td>
+              <td>
+                $echo echo results or return it as a string
+              </td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <dl class="return" compact>
+        <dt>
+          <b>Returns:</b>
+        </dt>
+        <dd>
+          string html with rendered contents
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <p>
+    <a class="anchor" name="99c8295ab772dd6f063b0f2ea53ee2f5"></a>
+    <!-- doxytag: member="render.php::gdsr_render_star_rating_widget" ref="99c8295ab772dd6f063b0f2ea53ee2f5" args="($widget=array(), $echo=true)" -->
+  </p>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">
+            gdsr_render_star_rating_widget
+          </td>
+          <td>
+            (
+          </td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>widget</em> = <code>array()</code>,
+          </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>echo</em> = <code>true</code>
+          </td>
+          <td>
+             
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            )
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+      <p>
+        Renders widget-like element based on the $widget settings array.
+      </p>
+      <dl compact>
+        <dt>
+          <b>Parameters:</b>
+        </dt>
+        <dd>
+          <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>array</em> 
+              </td>
+              <td>
+                $widget settings to use for rendering
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>bool</em> 
+              </td>
+              <td>
+                $echo echo results or return it as a string
+              </td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <dl class="return" compact>
+        <dt>
+          <b>Returns:</b>
+        </dt>
+        <dd>
+          string html with rendered contents
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <p>
+    <a class="anchor" name="611fb744f89ebb901cf006649c2bb521"></a>
+    <!-- doxytag: member="render.php::gdsr_render_stars_custom" ref="611fb744f89ebb901cf006649c2bb521" args="($settings=array(), $echo=true)" -->
+  </p>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">
+            gdsr_render_stars_custom
+          </td>
+          <td>
+            (
+          </td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>settings</em> = <code>array()</code>,
+          </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">
+            $ 
+          </td>
+          <td class="paramname">
+            <em>echo</em> = <code>true</code>
+          </td>
+          <td>
+             
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            )
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+      <p>
+        Renders custom stars image (or div block).
+      </p>
+      <dl compact>
+        <dt>
+          <b>Parameters:</b>
+        </dt>
+        <dd>
+          <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>string</em> 
+              </td>
+              <td>
+                $settings rendering parameters
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"></td>
+              <td valign="top">
+                <em>bool</em> 
+              </td>
+              <td>
+                $echo echo results or return it as a string
+              </td>
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      <dl class="return" compact>
+        <dt>
+          <b>Returns:</b>
+        </dt>
+        <dd>
+          string html with rendered contents
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+</div>
+
+</div>
+</body>
+</html>
