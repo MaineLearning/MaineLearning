@@ -1,5 +1,7 @@
 ## Installation process (for new dev or staging installs)
 
+This process assumes you have Git installed on your local machine. Visit http://help.github.com/mac-set-up-git/ for a nice guide.
+
 1) Create a new database on the local machine.
 
 2) Download the latest database dump from the production site (~/dbdumps/)
