@@ -3,3 +3,4 @@ Database actions
 2012-02-29
 
 Deactivated WP-DBManager and deleted files.
+Installed WP-Optimize, and activated on Site 1.
