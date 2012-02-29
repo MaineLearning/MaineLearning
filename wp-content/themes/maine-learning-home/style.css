@@ -204,6 +204,12 @@ ul#nav { max-width: 70%; }
 	letter-spacing: .5px;
 }
 
+#nav li a:hover
+{
+	background: transparent;
+	color: #ddd;
+}
+
 #nav li.selected a, #nav > li.current-menu-item a, #nav > li.current_page_item a, #nav > li.current_page_ancestor a
 {
 	background: transparent;
