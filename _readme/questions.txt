@@ -1,0 +1,4 @@
+2012-02-29
+
+How shall we handle the absolute server paths in the advanced-cache.php file. They currently reference the production server.
+
