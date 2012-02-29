@@ -99,7 +99,6 @@ body#bp-default #wp-admin-bar .padder
 	font-family: 'Cabin',arial,serif;
 }
 
-
 #wp-admin-bar
 {
 	background: url("images/80pc_black.png") repeat scroll 0 0 transparent;
@@ -227,9 +226,7 @@ h2
 	letter-spacing: .2px;
 }
 
-h2.posttitle {
-	font-size: 24px;
-	}
+h2.posttitle { font-size: 24px; }
 
 h3
 {
@@ -300,21 +297,23 @@ img.alignright { margin: 0 0 2px 5px; }
 /* Comments
 ----------------------- */
 
-#comments h3 {
-font-size: 18px;
+#comments h3
+{
+	font-size: 18px;
 	/* ML */
 }
 
-.comment-entry {
-font-size: 12px;
+.comment-entry
+{
+	font-size: 12px;
 	/* ML */
-	}
-	
-.comment-entry a, .comment-entry a:visited {
-font-weight: normal;
+}
+
+.comment-entry a, .comment-entry a:visited
+{
+	font-weight: normal;
 	/* ML */
-	}
-	
+}
 
 .comments-closed
 {
@@ -323,10 +322,6 @@ font-weight: normal;
 	height: 0;
 	/* ML */
 }
-
-/* ----------------------
-BUDDYPRESS PANELS
------------------------ */
 
 /* ----------------------
 BUDDYPRESS PANELS: HEADER
@@ -467,6 +462,12 @@ ul.item-list li div.meta
 }
 
 /* ----------------------
+BP PANELS: GROUPS
+----------------------- */
+
+#groups-directory-form a { display: none; }
+
+/* ----------------------
 BP PANELS: BLOG PAGES
 ----------------------- */
 
@@ -496,19 +497,11 @@ div#topic-meta
 
 .ass-topic-subscribe { margin-top: 4px !important; }
 
-
 /* ----------------------
 BP PANELS: ALERT BOXES
 ----------------------- */
 
-
-div#message.updated p {
-background-color: #ffdfb1;
-}
-
-
-
-
+div#message.updated p { background-color: #ffdfb1; }
 
 /* ----------------------
 SIDEBAR
@@ -563,9 +556,10 @@ FOOTER
 
 #footer-widgets a { text-decoration: none; }
 
-#footer-widgets a.external_icon {
-background: transparent;
-padding-right: 0;
+#footer-widgets a.external_icon
+{
+	background: transparent;
+	padding-right: 0;
 }
 
 #site-generator { display: none; }
