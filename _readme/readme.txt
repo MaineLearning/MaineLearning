@@ -1,4 +1,4 @@
-Changes made (see also LearnMaine theme)
+Changes made 
 
 2011-07-09 - Translation file for buddypress docs
 
