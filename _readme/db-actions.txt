@@ -1,0 +1,5 @@
+Database actions
+
+2012-02-29
+
+Deactivated WP-DBManager and deleted files.
