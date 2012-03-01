@@ -389,7 +389,11 @@ BUDDYPRESS PANELS: ITEMS
 
 #item-body h4 { padding: 4px 0 0 12px; }
 div.pagination { margin: 0; }
-span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #a1e5b5; }
+span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
+
+
+span.activity, div#message p {
+border: 1px solid #E1CA82;
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
