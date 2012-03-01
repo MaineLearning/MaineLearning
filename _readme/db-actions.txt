@@ -4,3 +4,4 @@ Database actions
 
 Deactivated WP-DBManager and deleted files.
 Installed WP-Optimize, and activated on Site 1.
+Updated Cryptx to 3.2.1
