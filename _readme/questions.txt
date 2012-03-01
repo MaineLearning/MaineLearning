@@ -3,3 +3,5 @@
 How shall we handle the absolute server paths in the advanced-cache.php file. They currently reference the production server.
 
 On localdev, in the Groups Directory, in e-mail subscription, the subscription options (All, Weekly, Daily) are not being hidden correctly. Javascript problem?
+
+On http://mainelearning.net/sites/, where are the site avatar/blavatars coming from?
