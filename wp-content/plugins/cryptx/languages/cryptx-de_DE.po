@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CryptX 2.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-15 10:43+0100\n"
-"PO-Revision-Date: 2011-09-15 10:50+0100\n"
+"POT-Creation-Date: 2012-02-28 08:38+0100\n"
+"PO-Revision-Date: 2012-02-28 08:39+0100\n"
 "Last-Translator: Ralf Weber <ralf@weber-nrw.de>\n"
 "Language-Team: Ralf Weber <ralf@weber-nrw.de>\n"
 "MIME-Version: 1.0\n"
@@ -14,224 +14,286 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: /Users/ralf/Dropbox/Code/CryptX/trunk\n"
+"X-Poedit-SearchPath-0: /Users/ralf/Subversion/CryptX/trunk\n"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:153
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:18
+msgid "You use the deprecated CryptX function cryptx() in your template. You should use the new function encryptx() described at the plugin"
+msgstr "Du verwendest die veraltete Funktion cryptx() in Deinem Template. Du solltest die neue Funktion encryptx() verwenden. Beschrieben in den Plugin"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:22
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:44
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:159
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:474
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:32
+msgid "Your theme is OK! You have nothing to do."
+msgstr "Dein Template ist in Ordnung. Du musst nichts tun."
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:50
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:129
 msgid "Donate"
 msgstr "Spenden"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:444
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:98
 msgid "Settings saved."
 msgstr "Einstellungen speichern."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:458
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:113
 msgid "Information"
 msgstr "Information"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:468
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:123
 msgid "Plugin"
 msgstr "Plugin"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:470
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:125
 msgid "Version"
 msgstr "Version"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:472
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:127
 msgid "Author"
 msgstr "Autor"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:473
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:128
 msgid "Follow on Twitter"
 msgstr "auf Twitter folgen"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:135
 msgid "Please support me by translating CryptX into other languages. You can download the cryptx.pot file from my"
 msgstr "Bitte unterstützt mich bei der Übersetzung von CryptX in andere Sprachen. Du cryptx.pot Datei kann von meiner"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:135
 msgid "site"
 msgstr "Internetseite"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:480
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:135
 msgid "and mail me the zipped language files. Thanks for it."
 msgstr "heruntergeladen werden.<br/>Die Sprachdateien können mir dann einfach zu mailen. Danke."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:487
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:143
 msgid "Presentation"
 msgstr "Darstellung"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:492
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:146
+msgid "Define CSS Options"
+msgstr "CSS Optionen festlegen"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:150
+msgid "CSS ID"
+msgstr "CSS ID"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:151
+msgid "Please be careful using this feature! IDs should be unique. You should prefer of using a css class instead."
+msgstr "Vorsicht bei Nutzung dieses Features! CSS IDs sollten nur auf ein Element angewendet werden. Besser ist die Nutzung von CSS Klassen."
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:154
+msgid "CSS Class"
+msgstr "CSS Class"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:160
+msgid "Define Presentation Options"
+msgstr "Darstellungsoptionen festlegen"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:165
 msgid "Replacement for '@'"
 msgstr "Ersatz f&uuml;r das '@' im Email-Link"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:497
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:170
 msgid "Replacement for '.'"
 msgstr "Ersatz f&uuml;r den '.' im Email-Link"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:502
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:175
 msgid "Text for link"
 msgstr "Text f&uuml;r den Link"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:507
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:180
 msgid "Image-URL"
 msgstr "Bild Url f&uuml;r den Link"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:512
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:529
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:185
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:202
 msgid "Title-Tag for the Image"
 msgstr "Title-Tag für das Bild"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:517
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:190
 msgid "Select image from folder"
 msgstr "W&auml;hlen Sie ein Bild"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:524
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:197
 msgid "the selected image: "
 msgstr "ausgew&auml;hltes Bild: "
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:525
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:198
 #, php-format
 msgid "Upload your favorite email-image to '%s'. Only .jpg and .gif Supported!"
 msgstr "Speichern Sie ein Bild im Verzeichnis '%s', um es in der Liste ausw&auml;hlen zu k&ouml;nnen. Es werden nur .jpg und .gif unterst&uuml;tzt!"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:534
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:207
 msgid "Text scrambled by AntiSpamBot (<small>Try it and look at your site and check the html source!</small>)"
 msgstr "Text mit der Antispambot Funktion von Wordpress ver&auml;ndern (<small>Es sieht zwar aus wie eine normale Email Adresse, aber es ist keine mehr. Seht im Quelltext nach!</small>)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:538
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:211
 msgid "Convert Email to PNG-image"
 msgstr "Email in ein Bild umwandeln"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:539
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:212
 msgid "Example with the saved options: "
 msgstr "Beispiel mit den gespeicherten Optionen:"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:543
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:216
 msgid "Choose a Font"
 msgstr "W&auml;hlen Sie eine Schrift"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:549
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:222
 #, php-format
 msgid "Upload your favorite font to '%s'. Only .ttf is Supported!"
 msgstr "Speichern Sie die Fontdatei im Verzeichnis '%s', um es in der Liste ausw&auml;hlen zu k&ouml;nnen. Es wird nur .ttf unterst&uuml;tzt!"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:554
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:227
 msgid "Font size (pixel)"
 msgstr "Schriftgr&ouml;sse (Pixel)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:559
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:232
 msgid "Font color (RGB)"
 msgstr "Schriftfarbe (RGB)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:563
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:598
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:237
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:279
 msgid "Save Changes"
 msgstr "%Auml;nderungen speichern"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:567
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:243
 msgid "General"
 msgstr "Allgemeines"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:571
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:247
 msgid "Apply CryptX to..."
 msgstr "CryptX anwenden auf..."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:572
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:249
 msgid "Content"
 msgstr "Inhalt"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:572
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:249
 msgid "(<i>this can be disabled per Post by an Option</i>)"
 msgstr "(<i>kann bei jedem Artikel/Seite seperat abgeschaltet werden</i>)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:573
-msgid "Custom fields"
-msgstr "Benutzerdefinierte Felder"
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:250
+msgid "Custom fields (<strong>works only with the_meta()!</strong>)"
+msgstr "Benutzerdefinierte Felder (<strong>Funktioniert nur mit the_meta()!</strong>)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:574
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:251
 msgid "Excerpt"
 msgstr "Auszug"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:575
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:252
 msgid "Comments"
 msgstr "Kommentaren"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:576
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:253
 msgid "Widgets"
 msgstr "Widgets"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:576
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:253
 msgid "(<i>works only on all widgets, not on a single widget</i>!)"
 msgstr "(<i>betrifft ALLE Widgets</i>!)"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:579
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:257
 msgid "Excluded ID's..."
 msgstr "Ausgenommene ID's..."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:581
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:259
 msgid "Enter all Page/Post ID's to exclude from CryptX as comma seperated list."
 msgstr "Trage hier alle Seiten/Artikel ID's durch Komma getrennt ein die von CryptX ausgenommen werden sollen."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:582
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:260
 msgid "Enable the CryptX Widget on editing a post or page."
 msgstr "Aktiviert das CryptX Widget beim bearbeiten eines Artikels oder einer Seite."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:585
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:263
 msgid "Type of decryption"
 msgstr "Art der Verschl&uuml;sselung"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:586
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:264
 msgid "Use javascript to hide the Email-Link."
 msgstr "Zum verstecken der Emails <b>javascript</b> benutzen"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:587
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:265
 msgid "Use Unicode to hide the Email-Link."
 msgstr "Zum verstecken der Emails <b>UNICODE</b> benutzen"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:590
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:268
 msgid "Where to load the needed javascript..."
 msgstr "Wo soll das benötigte Javascript geladen werden..."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:591
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:269
 msgid "Load the javascript in the <b>header</b> of the page."
 msgstr "Javascript im <b>Header</b> der Seite laden"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:592
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:270
 msgid "Load the javascript in the <b>footer</b> of the page."
 msgstr "Javascript im <b>Footer</b> der Seite laden"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:595
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:273
 msgid "Add mailto to all unlinked email addresses"
 msgstr "Füge mailto-Link zu allen nicht verlinkten Email Adressen"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:602
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:276
+msgid "Reset CryptX options to defaults. Use it carefully and at your own risk. All changes will be deleted!"
+msgstr "CryptX Optionen auf die Standardwerte zur&uuml;cksetzen. Verwenden Sie es sorgf&auml;ltig und auf eigenes Risiko. Alle &Auml;nderungen werden gel&ouml;scht!"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:285
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:332
 msgid "How to use CryptX in your Template"
 msgstr "Wie bindest Du CryptX in Dein Template ein"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:606
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:289
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:337
 msgid "In your Template you can use the following function to encrypt a email address:"
 msgstr "Im Template kannst Du zum verschlüsseln von Email Adressen die folgende Funktion von CryptX verwenden:"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:621
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:307
+msgid "In your Template you can use the following function to encrypt mail adresses at custom fields:"
+msgstr "Im Template kannst Du zum verschlüsseln von Email Adressen in Benutzerdefinierten Feldern folgende Funktion verwenden:"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:308
+msgid "Replace the call of get_post_meta in yout template with the CryptX function <strong>get_encryptx_meta</strong>. The parameters are the same!<br/>1. Example:"
+msgstr "Ersetze im Template den aufruf der Funktion get_post_meta() durch die CryptX Funktion <strong>get_encryptx_meta()</strong>. Die Parameter sind die gleichen!<br/>1. Beispiel:"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:317
+msgid "2. Example:"
+msgstr "2. Beispiel:"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:323
+msgid "Rescan current theme"
+msgstr "&Uuml;berpr&uuml;fe aktuelles Templates"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:334
+msgid "ATTENTION"
+msgstr "ACHTUNG"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:334
+msgid "This function is deprecated and will be removed in future releases!"
+msgstr "Diese Funktion ist veraltet und wird in zukünftigen Versionen entfernt werden!"
+
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:352
 msgid "parameter is the email address."
 msgstr "Parameter ist die Email Adresse"
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:622
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:353
 msgid "parameter is the linktext. If none given the email address is used."
 msgstr "Parameter ist der angezeigte Text für den Link. Wenn nicht angegeben wird die Email Adresse genommen."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:623
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:354
 msgid "parameter is a css class added to the link."
 msgstr "Parameter ist eine CSS Klasse die hinzugefügt werden soll."
 
-#: /Users/ralf/Dropbox/Code/CryptX/trunk/cryptx.php:624
+#: /Users/ralf/Subversion/CryptX/trunk/admin.php:355
 msgid "parameter is 1 for echo the encrypted email address or 0 to return the result to a variable."
 msgstr "Parameter ist entweder 1 zum direkten ausgeben oder 0 um das Ergebnis an eine Variable zu übergeben."
+
+#~ msgid "Custom fields"
+#~ msgstr "Benutzerdefinierte Felder"
 
 #~ msgid "Upload your favorite email-image to "
 #~ msgstr "Speicher Dein bevorzugtes Email Bild nach "
