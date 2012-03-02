@@ -3,7 +3,7 @@ Contributors: jim912
 Tags: category, tag, taxonomy, custom taxonomy
 Requires at least: 3.0
 Tested up to: 3.3.1
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 
 Makes categories, tags and custom taxonomies more useful.
 
@@ -32,6 +32,9 @@ PS Taxonomy Expander makes easy to use categories, tags and custom taxonomies on
 3. You can specify taxonomy selection, default taxonomy and display taxonomies on All posts. You can specify order of taxonomies on Term order menu.
 
 == Changelog ==
+= 1.1.6 =
+* Fixed Notice Error(replace wp_deregister_script to wp_dequeue_script).
+
 = 1.1.5 =
 * Fixed Quick Edit link bug in 3.3.
 

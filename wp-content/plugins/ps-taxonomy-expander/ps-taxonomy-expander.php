@@ -4,7 +4,7 @@
  Plugin URI: http://www.warna.info/archives/451/
  Description: PS Taxonomy Expander makes easy to use categories, tags and custom taxonomies on editing posts.
  Author: Hitoshi Omagari
- Version: 1.1.5
+ Version: 1.1.6
  License: GPLv2 or later
  Text Domain: ps-taxonomy-expander
  Domain Path: /language/
@@ -12,7 +12,7 @@
 
 
 class PS_Taxonomy_Expander {
-	var $version = '1.1.5';
+	var $version = '1.1.6';
 	var $single_taxonomies;
 	var $edit_post_type;
 	var $disp_taxonomies;
@@ -145,7 +145,7 @@ EOF;
 
 function remove_inline_edit_post_js() {
 	global $wp_version;
-	wp_deregister_script( 'inline-edit-post' );
+	wp_dequeue_script( 'inline-edit-post' );
 	if ( version_compare( $wp_version, '3.3.x', '>=' ) ) {
 		wp_enqueue_script( 'suggest' );
 	}
@@ -1005,3 +1005,17 @@ class PS_TaxonomyDropdown extends Walker_CategoryDropdown {
 		$output .= "</option>\n";
 	}
 }
+
+if ( ! function_exists( 'wp_dequeue_script' ) ) :
+function wp_dequeue_script( $handle ) {
+	global $wp_scripts;
+	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
+		if ( ! did_action( 'init' ) )
+			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
+				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>init</code>' ), '3.3' );
+		$wp_scripts = new WP_Scripts();
+	}
+
+	$wp_scripts->dequeue( $handle );
+}
+endif;

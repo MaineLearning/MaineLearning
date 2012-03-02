@@ -1,0 +1,39 @@
+2012-02-29
+
+How shall we handle the absolute server paths in the advanced-cache.php file. They currently reference the production server. 
+
+	IGNORE FOR NOW.
+
+On localdev, in the Groups Directory, in e-mail subscription, the subscription options (All, Weekly, Daily) are not being hidden correctly. Javascript problem? 
+
+	IGNORE FOR NOW.
+
+On http://mainelearning.net/sites/, where are the site avatar/blavatars coming from? They seem to show the Gravatar of the e-mail address associated with them. How to change them? 
+
+	FOR CUSTOM AVATAR:  https://buddypress.trac.wordpress.org/ticket/192 ALSO, CHECK FOR UPDATE TO FUNCTIONS.PHP
+	
+	FOR GROUP AVATAR: https://buddypress.trac.wordpress.org/browser/tags/1.5.4/bp-core/bp-core-avatars.php#L297
+	
+	ALSO CAN HIDE IT WITH CSS.
+
+2012-03-01
+
+How to change the full name for one of the members. This doesn't work:
+http://mainelearning.net/people/xxx/profile/edit/group/1/
+
+	UNKNOWN PROBLEM. MAY BE BUG.
+	PLUGIN - MASQUERADE AS A USER TO MAKE CHANGES.
+
+Why does http://mainelearning.net/people/ show 17 people, when there are only 13?
+
+	COULD BE MEMBERS WHO HAVEN'T LOGGED IN.
+	UNKNOWN PROBLEM. MAY BE BUG.
+
+How to hide the main blog from the /sites/ directory? It is only used for page/holders for Buddypress.
+
+	NOT AN EASY.
+	FEATURE REQUEST.
+	CAN BE DONE IN FUTURE WITH FILTERS.
+
+2012-03-02
+

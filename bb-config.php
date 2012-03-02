@@ -11,19 +11,6 @@
  * @package bbPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for bbPress */
-define( 'BBDB_NAME', 'mainelea_wpbp' );
-
-/** MySQL database username */
-define( 'BBDB_USER', 'mainelea_guru12' );
-
-/** MySQL database password */
-define( 'BBDB_PASSWORD', '12dirigo' );
-
-/** MySQL hostname */
-define( 'BBDB_HOST', 'localhost' );
-
 /** Database Charset to use in creating database tables. */
 define( 'BBDB_CHARSET', 'utf8' );
 
