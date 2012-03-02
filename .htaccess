@@ -1,4 +1,10 @@
 
+#Options +FollowSymlinks
+#RewriteEngine on
+#RewriteCond %{REQUEST_URI} !/maintenance.html$
+#RewriteCond %{REQUEST_URI} !/wp-content/themes/bp-nelo/_inc/images/bg-header.gif$
+#RewriteCond %{REMOTE_HOST} !^127\.0\.0\.1
+#RewriteRule $ /maintenance.html [R=302,L]
 
 
 
