@@ -4,4 +4,13 @@ How shall we handle the absolute server paths in the advanced-cache.php file. Th
 
 On localdev, in the Groups Directory, in e-mail subscription, the subscription options (All, Weekly, Daily) are not being hidden correctly. Javascript problem?
 
-On http://mainelearning.net/sites/, where are the site avatar/blavatars coming from?
+On http://mainelearning.net/sites/, where are the site avatar/blavatars coming from? They seem to show the Gravatar of the e-mail address associated with them. How to change them?
+
+2012-03-01
+
+How to change the full name for one of the members. This doesn't work:
+http://mainelearning.net/people/xxx/profile/edit/group/1/
+
+Why does http://mainelearning.net/people/ show 17 people, when there are only 13?
+
+How to hide the main blog from the /sites/ directory? It is only used for page/holders for Buddypress.
