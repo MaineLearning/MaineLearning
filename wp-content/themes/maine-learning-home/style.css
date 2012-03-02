@@ -9,7 +9,7 @@
 	Tags: buddypress
 */
 
-/*  
+/*
 http://codex.buddypress.org/theme-development/building-a-buddypress-child-theme/
 */
 
@@ -98,7 +98,6 @@ body#bp-default #wp-admin-bar .padder
 	min-width: 900px;
 	font-family: 'Cabin',arial,serif;
 }
-
 
 #wp-admin-bar
 {
@@ -205,6 +204,12 @@ ul#nav { max-width: 70%; }
 	letter-spacing: .5px;
 }
 
+#nav li a:hover
+{
+	background: transparent;
+	color: #ddd;
+}
+
 #nav li.selected a, #nav > li.current-menu-item a, #nav > li.current_page_item a, #nav > li.current_page_ancestor a
 {
 	background: transparent;
@@ -227,9 +232,7 @@ h2
 	letter-spacing: .2px;
 }
 
-h2.posttitle {
-	font-size: 24px;
-	}
+h2.posttitle { font-size: 24px; }
 
 h3
 {
@@ -300,21 +303,23 @@ img.alignright { margin: 0 0 2px 5px; }
 /* Comments
 ----------------------- */
 
-#comments h3 {
-font-size: 18px;
+#comments h3
+{
+	font-size: 18px;
 	/* ML */
 }
 
-.comment-entry {
-font-size: 12px;
+.comment-entry
+{
+	font-size: 12px;
 	/* ML */
-	}
-	
-.comment-entry a, .comment-entry a:visited {
-font-weight: normal;
+}
+
+.comment-entry a, .comment-entry a:visited
+{
+	font-weight: normal;
 	/* ML */
-	}
-	
+}
 
 .comments-closed
 {
@@ -323,10 +328,6 @@ font-weight: normal;
 	height: 0;
 	/* ML */
 }
-
-/* ----------------------
-BUDDYPRESS PANELS
------------------------ */
 
 /* ----------------------
 BUDDYPRESS PANELS: HEADER
@@ -388,7 +389,12 @@ BUDDYPRESS PANELS: ITEMS
 
 #item-body h4 { padding: 4px 0 0 12px; }
 div.pagination { margin: 0; }
-span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #a1e5b5; }
+span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
+
+
+span.activity, div#message p {
+	border: 1px solid #E1CA82;
+}
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
@@ -467,6 +473,12 @@ ul.item-list li div.meta
 }
 
 /* ----------------------
+BP PANELS: GROUPS
+----------------------- */
+
+#groups-directory-form a { display: none; }
+
+/* ----------------------
 BP PANELS: BLOG PAGES
 ----------------------- */
 
@@ -496,19 +508,11 @@ div#topic-meta
 
 .ass-topic-subscribe { margin-top: 4px !important; }
 
-
 /* ----------------------
 BP PANELS: ALERT BOXES
 ----------------------- */
 
-
-div#message.updated p {
-background-color: #ffdfb1;
-}
-
-
-
-
+div#message.updated p { background-color: #ffdfb1; }
 
 /* ----------------------
 SIDEBAR
@@ -563,208 +567,10 @@ FOOTER
 
 #footer-widgets a { text-decoration: none; }
 
-#footer-widgets a.external_icon {
-background: transparent;
-padding-right: 0;
+#footer-widgets a.external_icon
+{
+	background: transparent;
+	padding-right: 0;
 }
 
 #site-generator { display: none; }
-
-/* ----------------------
-BUDDYVENTS
------------------------ */
-
-
-ul.item-list li div.item-title span.summary {
-font-size: 17px !important;
-}
-
-/* ----------------------
-LEGACY
-
-
-.summary
-{
-	background: none repeat scroll 0 0 transparent;
-	color: #888888;
-	font-size: 18px;
-	line-height: 160%;
-	margin: 0 0 30px;
-	padding: 0;
-}
-
-form#whats-new-form textarea { height: 30px; }
-.doctable td.title-cell, .doctable td.author-cell, .doctable td.date-cell, .doctable td.tags-cell { vertical-align: text-top; }
-.doctable td.title-cell { font-size: 11px; }
-
-.doctable td.title-cell a
-{
-	font-size: 14px;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-div.post { margin: 0 0 20px !important; }
-div.search-result div.post { margin: 0 !important; }
-.entry ul { clear: left; }
-
-/* ----------------------
-LIST CATEGORY POSTS
------------------------ 
-
-.lcp_catlist a.post-title
-{
-	clear: left;
-	font-size: 20px;
-	text-decoration: none;
-}
-
-.lcp_catlist .entry-date
-{
-	color: #999;
-	float: right;
-	font-size: 14px;
-	font-weight: 700;
-	margin: 0 0 10px 14px;
-	text-align: right;
-	width: 70px;
-}
-
-.lcp_catlist .entry-author
-{
-	color: #999;
-	font-size: 14px;
-}
-
-.lcp_catlist p { margin-bottom: 4px; }
-.lcp_catlist a { text-decoration: none; }
-.lcp_catlist span.entry-more { margin-top: -20px !important; }
-
-.lcp_catlist span.entry-more a
-{
-	padding-top: 0;
-	font-weight: bold !important;
-	text-decoration: none;
-}
-
-/* ----------------------
-POST CONTENT
------------------------ 
-
-div.post .wp-caption
-{
-	background-color: #fff;
-	border: 0px solid #fff;
-	padding: 0;
-	text-align: center;
-}
-
-div.post .wp-caption img
-{
-	border-radius: 3px 3px 3px 3px;
-	margin-top: 0;
-}
-
-div.post blockquote
-{
-	border-left: 14px solid #eee;
-	color: #555;
-	font-size: 14px;
-	font-style: italic;
-	line-height: 150%;
-	padding: 0 3em 0 2em;
-}
-
-/* ----------------------
-EVENTS
------------------------ 
-
-table.calendar-view
-{
-	margin: 0 10px 0 20px !important;
-	width: 100% !important;
-}
-
-table.calendar-view td.cal-left { width: 260px !important; }
-table.calendar-view td.cal-right { padding-left: 30px !important; }
-
-/* ----------------------
-SOCIALIZE
------------------------ 
-
-.home .socialize-in-content, .page-id-28 .socialize-in-content, .docs .socialize-in-content, .page-id-134 .socialize-in-content { display: none; }
-.doc-content table { width: 100% !important; }
-table.mceItemTable { width: 100% !important; }
-div.item-list-tabs ul li:first-child { margin-left: 12px !important; }
-#blog-archives h3.pagetitle { color: #FFF; }
-
-#blog-archives h3.pagetitle:before
-{
-	content: "LearnMaine Pointers Archive";
-	background-color: transparent;
-	color: #444;
-	font-weight: bold;
-}
-
-label.ginput_post_image_file { display: none; }
-
-form.wpmcsw.reset
-{
-	padding-left: 72px !important;
-	margin-top: -25px !important;
-}
-
-div.post img.alignright
-{
-	float: right !important;
-	margin: 0 0 10px 10px !important;
-}
-
-div.post p.date { margin: 10px 0 20px 0 !important; }
-textarea#comment { width: 500px !important; }
-div.search-result { padding-bottom: 30px; }
-
-div.search-result h2
-{
-	font-size: 16px;
-	margin-bottom: 0px;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
-div.search-result div.postmetadata, div.search-result a.bpm-report-link { display: none; }
-div.search-result div.post div.post-content { margin-left: 0px; }
-div.search-result a { text-decoration: none; }
-form.taxonomy-drilldown-dropdowns li select { display: block; }
-div#item-header h2 { font-size: 24px; }
-
-div#item-header div#item-meta
-{
-	font-size: 12px;
-	margin: 0px 0 5px;
-}
-
-div#item-header div#item-meta p { margin-bottom: 5px; }
-ul.item-list li { padding: 5px 0; }
-#invite-anyone-group-list li img { display: none; }
-#search-terms-label { display: none; }
-#item-header-content h3, #item-header-content p.address { display: none; }
-#item-header-content .clear { clear: none; }
-#sidebar p#login-text, #sidebar form#sidebar-login-form { display: none; }
-span.activity { clear: left; }
-
-
-.swa-activity-header p { line-height: 180% !important; }
-
-/* ----------------------
-WIDGETS ON PAGE
------------------------ 
-
-div.widgets_on_page ul { list-style: none; }
-ul#invite-anyone-invite-list li { padding: 10px 0 !important; }
-div#doc-content-textarea table.mceToolbar td { width: 24px; }
-span.mceSeparator { width: 1px; }
-
-
-
-*/

@@ -1655,7 +1655,7 @@ div.gform_wrapper .gform_footer
 /* Custom for MLN
 ------------------------------------------------------------ */
 
-.home-page .entry-title, .home-page .post-info, .home-page a.bpm-report-link 
+.home-page .post-info, .home-page a.bpm-report-link 
 {
 	display: none;
 	height: 0;
