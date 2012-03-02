@@ -9,7 +9,7 @@
 	Tags: buddypress
 */
 
-/*  
+/*
 http://codex.buddypress.org/theme-development/building-a-buddypress-child-theme/
 */
 
@@ -393,7 +393,8 @@ span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 2
 
 
 span.activity, div#message p {
-border: 1px solid #E1CA82;
+	border: 1px solid #E1CA82;
+}
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
