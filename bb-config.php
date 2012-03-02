@@ -11,9 +11,6 @@
  * @package bbPress
  */
 
-// Include environment-specific constants
-require( dirname(__FILE__) . '/env.php' );
-
 /** Database Charset to use in creating database tables. */
 define( 'BBDB_CHARSET', 'utf8' );
 
