@@ -40,18 +40,20 @@ if (!defined('STARRATING_LOG_PATH')) define('STARRATING_LOG_PATH', dirname(__FIL
  */
 define('STARRATING_TPLT2_TABLE', 'gdsr_templates');
 
-/**
- * Returns the path to wp-config.php file
- * 
- * @return string wp-load.php path
- */
-function get_gdsr_wpload_path() {
-    if (STARRATING_WPLOAD == '') {
-        $d = 0;
-        while (!file_exists(str_repeat('../', $d).'wp-load.php'))
-            if (++$d > 16) exit;
-        return str_repeat('../', $d).'wp-load.php';
-    } else return STARRATING_WPLOAD;
+if (!function_exists('get_gdsr_wpload_path')) {
+    /**
+    * Returns the path to wp-config.php file
+    * 
+    * @return string wp-load.php path
+    */
+    function get_gdsr_wpload_path() {
+        if (STARRATING_WPLOAD == '') {
+            $d = 0;
+            while (!file_exists(str_repeat('../', $d).'wp-load.php'))
+                if (++$d > 16) exit;
+            return str_repeat('../', $d).'wp-load.php';
+        } else return STARRATING_WPLOAD;
+    }
 }
 
 ?>

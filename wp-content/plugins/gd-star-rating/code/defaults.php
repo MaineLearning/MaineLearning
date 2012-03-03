@@ -2,9 +2,9 @@
 
 class GDSRDefaults {
     var $default_options = array(
-        "version" => "1.9.14",
-        "date" => "2012.02.10.",
-        "build" => 1148,
+        "version" => "1.9.15",
+        "date" => "2012.03.01.",
+        "build" => 1155,
         "code_name" => "Prelude",
         "revision" => 0,
         "status" => "Stable",
