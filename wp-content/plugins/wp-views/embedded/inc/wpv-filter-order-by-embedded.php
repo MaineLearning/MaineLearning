@@ -1,5 +1,19 @@
 <?php
 
+add_filter('wpv_view_settings', 'wpv_order_by_default_settings', 10, 2);
+function wpv_order_by_default_settings($view_settings) {
+
+    if (!isset($view_settings['orderby'])) {
+        $view_settings['orderby'] = 'post_date';
+    }
+    if (!isset($view_settings['order'])) {
+        $view_settings['order'] = 'DESC';
+    }
+    
+    return $view_settings;
+}
+
+
 add_filter('wpv_filter_query', 'wpv_filter_get_order_arg', 10, 2);
 function wpv_filter_get_order_arg($query, $view_settings) {
     $orderby = $view_settings['orderby'];

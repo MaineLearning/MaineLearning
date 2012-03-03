@@ -30,7 +30,33 @@ function wpv_pagination_init_preload_images() {
         }
     });
 }
-            
+
+function add_url_query_parameters(data) {
+    var qs = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=');
+            if (p.length != 2) continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'));
+
+    data['get_params'] = {};
+    for (var prop in qs) {
+        if (qs.hasOwnProperty(prop)) {
+            if (!data.hasOwnProperty(prop)) {
+                data['get_params'][prop] = qs[prop];
+            }
+
+        }
+    }
+    
+    return data;
+}
+
 function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages, cache_pages, preload_pages, spinner, spinner_image, callback_next, stop_rollover) {
     
     if (stop_rollover) {
@@ -38,6 +64,21 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
     }
     
     if (ajax != true) {
+        // add elements for the current url parameters
+        // So any views that filter by url parameters will still work.
+        data = {};
+        add_url_query_parameters(data);
+        for (var prop in data['get_params']) {
+            if (!(jQuery('#wpv-filter-' + view_number + ' > input[name=' + prop + ']').length > 0)) {
+                jQuery('<input>').attr({
+                                    type: 'hidden',
+                                    name: prop,
+                                    value: data['get_params'][prop]
+                                }).appendTo('#wpv-filter-' + view_number);
+
+            }
+        }
+        
         jQuery('#wpv_paged-'+view_number).val(page);
         jQuery('#wpv-filter-'+view_number).submit();
         return false;
@@ -93,8 +134,12 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
             page : page,
             post_id : jQuery('input[name=wpv_post_id]').val(),
             view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value')
+            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
+            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
+            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
+            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
         };
+        add_url_query_parameters(data);
         if (typeof(icl_lang) != 'undefined') {
             data['lang'] = icl_lang;
         }
@@ -136,8 +181,12 @@ function wpv_pagination_load_next_page(view_number, page, max_pages) {
             page : next_page,
             post_id : jQuery('input[name=wpv_post_id]').val(),
             view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value')
+            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
+            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
+            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
+            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
         };
+        add_url_query_parameters(dataNext);
         if (typeof(icl_lang) != 'undefined') {
             dataNext['lang'] = icl_lang;
         }
@@ -165,8 +214,12 @@ function wpv_pagination_load_previous_page(view_number, page, max_pages) {
             page : previous_page,
             post_id : jQuery('input[name=wpv_post_id]').val(),
             view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value')
+            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
+            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
+            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
+            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
         };
+        add_url_query_parameters(dataPrevious);
         if (typeof(icl_lang) != 'undefined') {
             dataPrevious['lang'] = icl_lang;
         }
@@ -193,8 +246,12 @@ function wpv_pagination_cache_current_page(view_number, page, max_pages) {
             page : page,
             post_id : jQuery('input[name=wpv_post_id]').val(),
             view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value')
+            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
+            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
+            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
+            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
         };
+        add_url_query_parameters(dataCurrent);
         if (typeof(icl_lang) != 'undefined') {
             dataCurrent['lang'] = icl_lang;
         }

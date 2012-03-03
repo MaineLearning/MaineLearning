@@ -1,7 +1,8 @@
 <?php
 
-function wpv_filter_order_by_admin_summary($settings) {
-    switch($settings['orderby']) {
+function wpv_filter_order_by_admin_summary($view_settings) {
+    $view_settings = wpv_order_by_default_settings($view_settings);
+    switch($view_settings['orderby']) {
         case 'post_date':
             $order_by = __('post date', 'wpv-view');
             break;
@@ -18,14 +19,18 @@ function wpv_filter_order_by_admin_summary($settings) {
             $order_by = __('menu order', 'wpv-view');
             break;
         
+        case 'rand':
+            $order_by = __('random order', 'wpv-view');
+            break;
+            
         default:
-            $order_by = str_replace('field-', '', $settings['orderby']);
+            $order_by = str_replace('field-', '', $view_settings['orderby']);
             $order_by = sprintf(__('Field - %s', 'wpv-view'), $order_by);
             break;
         
     }
     $order = __('descending', 'wpv-view');
-    if ($settings['order'] == 'ASC') {
+    if ($view_settings['order'] == 'ASC') {
         $order = __('ascending', 'wpv-view');
     }
     echo sprintf(__(', ordered by <strong>%s</strong>, <strong>%s</strong>', 'wpv-view'), $order_by, $order);
@@ -49,6 +54,8 @@ function wpv_filter_order_by_admin($view_settings) {
                     <option value="ID" <?php echo $selected ?>><?php _e('post id', 'wpv-views'); ?></option>
                     <?php $selected = $view_settings['orderby']=='menu_order' ? ' selected="selected"' : ''; ?>
                     <option value="menu_order" <?php echo $selected ?>><?php _e('menu order', 'wpv-views'); ?></option>
+                    <?php $selected = $view_settings['orderby']=='rand' ? ' selected="selected"' : ''; ?>
+                    <option value="rand" <?php echo $selected ?>><?php _e('random order', 'wpv-views'); ?></option>
                     
                     <?php
                         $cf_keys = $WP_Views->get_meta_keys();

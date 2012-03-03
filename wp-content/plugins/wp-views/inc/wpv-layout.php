@@ -19,7 +19,7 @@ function view_layout_box($post){
     
     view_layout_additional_js($post, $view_layout_settings);
 
-    wpv_layout_meta_html_admin($view_layout_settings);
+    wpv_layout_meta_html_admin($post, $view_layout_settings);
     
     ?>
     </div>
@@ -33,6 +33,9 @@ function view_layout_style($post, $view_layout_settings) {
     }
     if (!isset($view_layout_settings['style'])) {
         $view_layout_settings['style'] = 'table';
+    }
+    if (!isset($view_layout_settings['table_cols'])) {
+        $view_layout_settings['table_cols'] = 2;
     }
     ?>
         <fieldset>
@@ -108,31 +111,47 @@ class View_layout_field {
     }
     
     function render_to_table($index) {
-        global $wpv_shortcodes, $WPV_templates;
+        global $wpv_shortcodes, $WPV_templates, $WP_Views;
         
         $view_template = null;
+        $taxonomy_view = null;
         
         if (strpos($this->type, 'wpv-post-field - ') === 0) {
             $name = substr($this->type, strlen('wpv-post-field - '));
+            $title = $name;
         } elseif (strpos($this->type, 'wpv-post-body ') === 0) {
             $name = $wpv_shortcodes['wpv-post-body'][1];
             $parts = explode(' ', $this->type);
             if (isset($parts[1])) {
                 $view_template = $parts[1];
             }
+            $title = $name;
+        } elseif (strpos($this->type, 'wpv-view ') === 0) {
+            $name = 'Taxonomy View';
+            $parts = explode(' ', $this->type);
+            if (isset($parts[1])) {
+                $taxonomy_view = $parts[1];
+            }
+            $title = "";
         } else {
             $name = $wpv_shortcodes[$this->type][1];
+            $title = $name;
         }
         
         ?>
         <td width="120px"><input id="wpv_field_prefix_<?php echo $index; ?>" type="text" value="<?php echo htmlspecialchars($this->prefix); ?>" name="_wpv_layout_settings[fields][prefix_<?php echo $index; ?>]" /></td>
         <td width="120px">
-            <span id="wpv_field_name_<?php echo $index; ?>"><?php echo $name; ?></span>
+            <span id="wpv_field_name_<?php echo $index; ?>"><?php echo $title; ?></span>
             <?php
                 if ($view_template) {
                     $view_template_select_box = $WPV_templates->get_view_template_select_box($index, $view_template);
                     $view_template_select_box = '<div id="views_template_body_' . $index . '" style="display:none;""><i> - ' . __('Using view template:' , 'wpv-views') . '</i>' . $view_template_select_box . '</div>';
                     echo $view_template_select_box;
+                }
+                if ($taxonomy_view) {
+                    $taxonomy_view_select_box = $WP_Views->get_taxonomy_view_select_box($index, $taxonomy_view);
+                    $taxonomy_view_select_box = '<div id="taxonomy_view_select_' . $index . '" style="display:none;"">' . $taxonomy_view_select_box . '</div>';
+                    echo $taxonomy_view_select_box;
                 }
             ?>
             <input id="wpv_field_name_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo $name; ?>" name="_wpv_layout_settings[fields][name_<?php echo $index; ?>]">
@@ -143,6 +162,26 @@ class View_layout_field {
         <td class="row-title hidden" width="120px"><input type="text" id="wpv_field_row_title_<?php echo $index; ?>" value="<?php echo $row_title; ?>" name="_wpv_layout_settings[fields][row_title_<?php echo $index; ?>]" /></td>
         <td width="120px"><input id="wpv_field_suffix_<?php echo $index; ?>" type="text" value="<?php echo htmlspecialchars($this->suffix); ?>" name="_wpv_layout_settings[fields][suffix_<?php echo $index; ?>]" /></td>
         <?php
+    }
+    
+    function render_table_row_attributes($view_settings) {
+        
+        if (strpos($this->type, 'wpv-taxonomy-') === 0 || strpos($this->type, 'wpv-view') === 0) {
+            // taxonomy type.
+            $output = 'class="wpv-taxonomy-field"';
+            if ($view_settings['query_type'][0] != 'taxonomy') {
+                $output .= ' style="display:none"';
+            }
+        } else {
+            // post type
+            $output = 'class="wpv-post-type-field"';
+            if ($view_settings['query_type'][0] != 'posts') {
+                $output .= ' style="display:none"';
+            }
+        }
+        
+        return $output;
+        
     }
     
     function get_body_template() {
@@ -176,6 +215,8 @@ function view_layout_fields_to_classes($fields) {
 
 function view_layout_fields($post, $view_layout_settings) {
     
+    global $WP_Views;
+    $view_settings = $WP_Views->get_view_settings($post->ID);
     
     if (isset($view_layout_settings['fields'])) {
         $view_layout_settings['fields'] = view_layout_fields_to_classes($view_layout_settings['fields']);
@@ -194,8 +235,15 @@ function view_layout_fields($post, $view_layout_settings) {
             break;
         }
     }
+    
+    // Add a select control so that we can chose the view template for the body.
     $view_template_select_box = $WPV_templates->get_view_template_select_box('', '');
-    $view_template_select_box = '<div id="views_template_body" style="display:none;""><i> - ' . __('Using view template:' , 'wpv-views') . '</i>' . $view_template_select_box . '</div>';
+    $view_template_select_box = '<div id="views_template_body" style="display:none;""><i> - ' . __('Using View template:' , 'wpv-views') . '</i>' . $view_template_select_box . '</div>';
+
+
+    // Add a select control so that we can chose the Taxonomy View.
+    $taxonomy_view_select_box = $WP_Views->get_taxonomy_view_select_box('', '');
+    $taxonomy_view_select_box = '<div id="taxonomy_view_select" style="display:none;"">' . $taxonomy_view_select_box . '</div>';
 
     ?>
     
@@ -204,6 +252,7 @@ function view_layout_fields($post, $view_layout_settings) {
         <p id="view_layout_fields_to_include"><strong><?php echo __('Fields to include:', 'wpv-views'); ?></strong></p>
         
         <?php echo $view_template_select_box; ?>
+        <?php echo $taxonomy_view_select_box; ?>
         
         <p id="view_layout_add_field_message_1"><?php echo __("Click on <strong>Add field</strong> to insert additional fields. Drag them to reorder, or delete fields that you don't need.", 'wpv-views'); ?></p>
         <p id="view_layout_add_field_message_2" style="display:none"><?php echo __("Click on <strong>Add field</strong> to insert fields to this View.", 'wpv-views'); ?></p>
@@ -225,7 +274,7 @@ function view_layout_fields($post, $view_layout_settings) {
                 $count = sizeof($view_layout_settings['fields']);
                 foreach($view_layout_settings['fields'] as $index => $field) {
                     ?>
-                    <tr id="wpv_field_row_<?php echo $index; ?>">
+                    <tr id="wpv_field_row_<?php echo $index; ?>" <?php echo $field->render_table_row_attributes($view_settings); ?>>
                     
                         <td width="20px"><img src="<?php echo WPV_URL . '/res/img/delete.png'; ?>" onclick="on_delete_wpv(<?php echo $index; ?>)" style="cursor: pointer"></td><?php $field->render_to_table($index); ?><td width="16px"><img src="<?php echo WPV_URL; ?>/res/img/move.png" class="move" style="cursor: move;" /></td>
                     
@@ -253,15 +302,50 @@ function view_layout_fields($post, $view_layout_settings) {
 
     </div>  
 
+    <?php
+        $show = $view_settings['query_type'][0] == 'posts';
+    ?>
+    <input alt="#TB_inline?inlineId=add_field_popup" class="thickbox button-secondary wpv_add_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="wpv-layout-add-field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?>>
+
+    <?php // Add a popup for taxonomy fields ?>
+    
+    <div id="add_taxonomy_field_popup" style="display:none">
+
+        <table id="wpv_taxonomy_field_popup_table" width="100%">
+        <tr>
+        <?php
+        global $link_layout_number;
+        $link_layout_number = 0;
+        add_short_codes_to_js(array('taxonomy', 'taxonomy-view', 'post-view'), null, 'short_code_taxonomy_menu_callback');
+        ?>
+        </tr>
+        </table>
+
+    </div>  
+
     <script type="text/javascript">
         var wpv_shortcodes = new Array();
-        <?php add_short_codes_to_js(array('post'), null, 'short_code_variable_callback'); ?>
+        <?php
+            $current_index = add_short_codes_to_js(array('post', 'taxonomy', 'taxonomy-view', 'post-view'), null, 'short_code_variable_callback');
+        ?>
+        wpv_shortcodes[<?php echo $current_index; ?>] = new Array('Taxonomy View', 'wpv-view');
         var wpv_view_template_text = "<?php echo __('View template', 'wpv-views'); ?>";
+        var wpv_taxonomy_view_text = "<?php echo __('Taxonomy View', 'wpv-views'); ?>";
+        var wpv_post_view_text = "<?php echo __('Post View', 'wpv-views'); ?>";
     </script>
-    <input alt="#TB_inline?inlineId=add_field_popup" class="thickbox button-secondary" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="wpv-layout-add-field">
-    <i><?php echo sprintf(__('Want to add complex fields? Learn about <a href="%s">using View Templates to customize fields</a>.', 'wpv-views'), 'http://wp-types.com/user-guides/using-a-view-template-in-a-view-layout/'); ?></i>
+    <?php
+        $show = $view_settings['query_type'][0] == 'taxonomy';
+    ?>
+    <input alt="#TB_inline?inlineId=add_taxonomy_field_popup" class="thickbox button-secondary wpv_add_taxonomy_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="Add a taxonomy field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?>>
     
-    
+    <?php
+        $show = $view_settings['query_type'][0] == 'posts' ? '' : 'style="display:none"';
+    ?>
+    <span id="wpv-layout-help-posts" <?php echo $show;?>><i><?php echo sprintf(__('Want to add complex fields? Learn about <a href="%s">using View Templates to customize fields</a>.', 'wpv-views'), 'http://wp-types.com/user-guides/using-a-view-template-in-a-view-layout/'); ?></i></span>
+    <?php
+        $show = $view_settings['query_type'][0] == 'taxonomy' ? '' : 'style="display:none"';
+    ?>
+    <span id="wpv-layout-help-taxonomy" <?php echo $show;?>><i><?php echo sprintf(__('Want to display posts that belong to this taxonomy? Learn about <a href="%s">inserting child Views to Taxonomy Views</a>.', 'wpv-views'), 'http://wp-types.com/user-guides/using-a-child-view-in-a-taxonomy-view-layout/'); ?></i></span>
     
     <?php
 }
@@ -275,7 +359,8 @@ function view_layout_javascript() {
         var wpv_url = '<?php echo WPV_URL; ?>';
         var wpv_field_text = '<?php _e('Field', 'wpv-views'); ?> - ';
         var wpv_confirm_layout_change = '<?php _e("Are you sure you want to change the layout?\\n\\nIt appears that you made modifications to the layout.", 'wpv-views'); ?>';
-        var no_results_text = "[wpv-no-posts-found][wpml-string context=\"wpv-views\"]<strong>No posts found</strong>[/wpml-string][/wpv-no-posts-found]";
+        var no_post_results_text = "[wpv-no-posts-found][wpml-string context=\"wpv-views\"]<strong>No posts found</strong>[/wpml-string][/wpv-no-posts-found]";
+        var no_taxonomy_results_text = "[wpv-no-taxonomy-found][wpml-string context=\"wpv-views\"]<strong>No taxonomy found</strong>[/wpml-string][/wpv-no-taxonomy-found]";
         
     </script>
     
@@ -311,6 +396,14 @@ function save_view_layout_settings($post_id) {
                             $fields[$index] .= ' ' . $_POST['views_template_' . $row];
                         }
                     }
+
+                    // Check for a taxonomy view (A view for laying out the child terms)
+                    if ($fields[$index] == 'wpv-view') {
+                        $row = substr($index, 5);
+                        if (isset($_POST['taxonomy_view_' . $row]) && $_POST['taxonomy_view_' . $row] != 0) {
+                            $fields[$index] .= ' ' . $_POST['taxonomy_view_' . $row];
+                        }
+                    }
                 }
             } else if (strpos($index, 'suffix_') == 0 || strpos($index, 'prefix_') == 0) {
                 $fields[$index] = htmlspecialchars_decode($value);
@@ -322,7 +415,7 @@ function save_view_layout_settings($post_id) {
 }
 
 function short_code_menu_callback($index, $cf_key, $function_name, $menu, $shortcode) {
-    global $link_layout_number;
+    global $link_layout_number, $wpdb;
     static $fields_started = false;
     static $templates_started = false;
 
@@ -348,7 +441,72 @@ function short_code_menu_callback($index, $cf_key, $function_name, $menu, $short
         }
         
     }
-    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . $cf_key . '\')">';
+ 
+    if ($menu == __('View template', 'wpv-views')) {
+
+        // get the View template title.
+        $field_name = $wpdb->get_var($wpdb->prepare("SELECT post_title FROM {$wpdb->posts} WHERE post_type='view-template' AND post_name=%s", $cf_key));
+        if (!$field_name) {
+            $field_name = $cf_key;
+        }
+        
+    } else {
+        $field_name = $cf_key;
+        if (function_exists('wpcf_types_get_meta_prefix')) {
+            // we have types.
+            // Get the field name for display
+            $types_prefix = wpcf_types_get_meta_prefix();
+            if (strpos($cf_key, $types_prefix) === 0) {
+                $field_info = wpcf_fields_get_field_by_slug(substr($cf_key, strlen($types_prefix)));
+                
+                if (isset($field_info['name'])) {
+                    $field_name = $field_info['name'];
+                }
+            }
+        }
+    }
+    
+    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . $cf_key . '\', \'' . $field_name . '\')">';
+    echo $field_name;
+    echo '</a></td>';
+    
+    $link_layout_number++;
+}
+
+function short_code_taxonomy_menu_callback($index, $cf_key, $function_name, $menu, $shortcode) {
+    global $link_layout_number;
+    
+    static $taxonomy_view_started = false;
+    static $post_view_started = false;
+    static $suffix = '';
+    
+    if (!$taxonomy_view_started && $menu == __('Taxonomy View', 'wpv-views')) {
+        echo '</tr><tr><td></td>';
+        echo '</tr><tr><td></td></tr><tr>';
+        echo '<td colspan="2"><strong>' . $menu . '</strong> ' . __(' - Use to layout child taxonomy terms', 'wpv-views') . '</td>';
+        echo '</tr><tr>';
+        $link_layout_number = 0;
+        $taxonomy_view_started = true;
+        $suffix = ' - ' . __('Taxonomy View', 'wpv-views');
+    }
+
+    if (!$post_view_started && $menu == __('Post View', 'wpv-views')) {
+        echo '</tr><tr><td></td>';
+        echo '</tr><tr><td></td></tr><tr>';
+        echo '<td colspan="2"><strong>' . $menu . '</strong> ' . __(' - Use to layout posts for the current taxonomy term', 'wpv-views') . '</td>';
+        echo '</tr><tr>';
+        $link_layout_number = 0;
+        $post_view_started = true;
+        $suffix = ' - ' . __('Post View', 'wpv-views');
+    }
+    
+    if (!($link_layout_number % 2)) {
+        if ($link_layout_number != 0) {
+            echo '</tr><tr>' ;
+        }
+        
+    }
+    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . $cf_key . '\', \'' . $cf_key . $suffix . '\')">';
     echo $cf_key;
     echo '</a></td>';
     

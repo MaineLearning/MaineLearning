@@ -199,7 +199,7 @@ class WPV_template_plugin extends WPV_template {
         
         ?>
         
-        <h3 class="title"><?php _e('View Template settings for archive loops', 'wpv-views'); ?></h3>
+        <h3 class="title"><?php _e('View Template settings for Taxonomy archive loops', 'wpv-views'); ?></h3>
         <div style="margin-left:20px;">
             <table class="widefat" style="width:auto;">
                 <thead>
@@ -260,8 +260,9 @@ class WPV_template_plugin extends WPV_template {
                 <thead>
                     <tr>
                         <th><?php _e('Post Types'); ?></th>
-                        <th><?php _e('Use this View Template', 'wpv-views'); ?></th>
+                        <th><?php _e('Use this View Template (Single)', 'wpv-views'); ?></th>
                         <th><?php _e('Usage', 'wpv-views'); ?></th>
+                        <th><?php _e('Use this View Template (Archive loop)', 'wpv-views'); ?></th>
                     </tr>
                 </thead>
                         
@@ -329,6 +330,17 @@ class WPV_template_plugin extends WPV_template {
                                     }
                                     ?>
                                 </td>
+                                <td>
+                                    <?php
+                                        if (!isset($options['views_template_archive_for_' . $type ])) {
+                                            $options['views_template_archive_for_' . $type ] = 0;
+                                        }
+                                        $template = $this->get_view_template_select_box('', $options['views_template_archive_for_' . $type ]);
+                                        $template = str_replace('name="views_template" id="views_template"', 'name="views_template_archive_for_' . $type . '" id="views_template_archive_for_' . $type . '"', $template);
+                                        echo $template;
+                                        ?>
+                                    
+                                </td>
                             </tr>
                             <?php
 
@@ -395,6 +407,9 @@ class WPV_template_plugin extends WPV_template {
                 $options[$index] = $value;
             }
             if (strpos($index, 'views_template_for_') === 0) {
+                $options[$index] = $value;
+            }
+            if (strpos($index, 'views_template_archive_for_') === 0) {
                 $options[$index] = $value;
             }
         }

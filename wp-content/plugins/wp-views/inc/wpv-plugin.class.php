@@ -166,8 +166,8 @@ class WP_Views_plugin extends WP_Views {
             </thead>
             
             <tbody>
-                <tr id="wpv_filter_type_posts">
-                    <?php wpv_filter_post_types_admin($view_settings); ?>
+                <tr id="wpv_filter_type">
+                    <?php wpv_filter_types_admin($view_settings); ?>
                 </tr>
                 
                 <?php
@@ -181,7 +181,9 @@ class WP_Views_plugin extends WP_Views {
 
         <?php
         
-        wpv_filter_add_filter_admin($view_settings);
+        $view_settings = wpv_types_defaults($view_settings);
+        wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter', '', 'wpv_add_filters', $view_settings['query_type'][0] == 'posts');
+        wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter_taxonomy', '', 'wpv_add_filters_taxonomy', $view_settings['query_type'][0] == 'taxonomy');
         
         wpv_pagination_admin($view_settings);
         

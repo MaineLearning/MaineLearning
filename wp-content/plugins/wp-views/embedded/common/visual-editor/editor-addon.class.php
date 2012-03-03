@@ -15,16 +15,21 @@ if (!class_exists('Editor_addon')) {
         global $pagenow;
 
         if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
+            //@todo REMOVE code and associated files
+//            wp_enqueue_script('editor_addon_menu_mousewheel',
+//                    EDITOR_ADDON_RELPATH . '/res/js/mousewheel.js',
+//                    array('jquery'));
+//            wp_enqueue_script('editor_addon_menu_mousewheelintent',
+//                    EDITOR_ADDON_RELPATH . '/res/js/mwheelIntent.js',
+//                    array('editor_addon_menu_mousewheel'));
+//            wp_enqueue_script('editor_addon_menu_scrollbar',
+//                    EDITOR_ADDON_RELPATH . '/res/js/scrollbar.js',
+//                    array('editor_addon_menu_mousewheelintent'));
+            
             wp_enqueue_style('editor_addon_menu',
                     EDITOR_ADDON_RELPATH . '/res/css/pro_dropdown_2.css');
             wp_enqueue_style('editor_addon_menu_scroll',
                     EDITOR_ADDON_RELPATH . '/res/css/scroll.css');
-            wp_enqueue_script('editor_addon_menu_scrollbar',
-                    EDITOR_ADDON_RELPATH . '/res/js/scrollbar.js',
-                    array('jquery'));
-            wp_enqueue_script('editor_addon_menu_mousewheel',
-                    EDITOR_ADDON_RELPATH . '/res/js/mousewheel.js',
-                    array('editor_addon_menu_scrollbar'));
         }
     }
 
@@ -119,18 +124,33 @@ if (!class_exists('Editor_addon')) {
 
             // Apply filters
             $menus = apply_filters('editor_addon_menus_' . $this->name, $menus);
-
+			
+            // Sort menus
+            if(is_array($menus)) {
+            	$this->sort_menus_alphabetically(&$menus);
+            }
+            
             $this->_media_menu_direct_links = array();
             $menus_output = $this->_output_media_menu($menus, $text_area);
             $direct_links = implode(' ', $this->_media_menu_direct_links);
             $out = '
-<ul class="editor_addon_wrapper"><li><img src="' . $this->media_button_image . '"><ul class="editor_addon_dropdown"><li><div class="title">' . $this->button_text . '</div><div class="close">&nbsp;</div></li><li><div class="direct-links">' . $direct_links . '</div><div class="scroll">' . $menus_output . '</div></li></ul></li></ul>';
+<ul class="editor_addon_wrapper"><li><img src="'
+            . $this->media_button_image
+                    . '"><ul class="editor_addon_dropdown"><li><div class="title">'
+                    . $this->button_text
+                    . '</div><div class="close">&nbsp;</div></li><li><div>'
+                    . apply_filters('editor_addon_dropdown_top_message_' . $this->name, '')
+                    . '</div><div class="direct-links">'
+                    . $direct_links . '</div><div class="scroll"><div class="wrapper">'
+                    . $menus_output . '</div><div></div>'
+                    . apply_filters('editor_addon_dropdown_bottom_message' . $this->name, '')
+                    . '</div></li></ul></li></ul>';
 
             // WP 3.3 changes
             if (version_compare($wp_version, '3.2.1', '>')) {
-                echo $out;
+                echo apply_filters('wpv_add_media_buttons', $out);
             } else {
-                return $context . $out;
+                return apply_filters('wpv_add_media_buttons', $context . $out);
             }
         }
 
@@ -231,8 +251,44 @@ if (!class_exists('Editor_addon')) {
             $plugin_array[str_replace('-', '_', $this->name)] = $this->plugin_js_url;
             return $plugin_array;
         }
+        
+        /**
+         * 
+         * Sort menus (and menu content) in an alphabetical order
+         * 
+         * Still, keep Basic and Taxonomy on the top and Other Fields at the bottom
+         * 
+         * @param array $menu menu reference
+         */
+	    function sort_menus_alphabetically($menus) {
+    		// keep main references if set (not set on every screen)
+   			$menu_basic[__('Basic', 'wp-views')] = isset($menus[__('Basic', 'wp-views')]) ? $menus[__('Basic', 'wp-views')] : array();
+ 			$menu_taxonomy[__('Taxonomy', 'wp-views')] = isset($menus[__('Taxonomy', 'wp-views')]) ? $menus[__('Taxonomy', 'wp-views')] : array();
+ 			$menu_field[__('Other Fields', 'wp-views')] = isset($menus[__('Field', 'wp-views')]) ? $menus[__('Field', 'wp-views')] : array();
 
+ 			// remove them to preserve correct listing
+ 			unset($menus[__('Basic', 'wp-views')]);
+ 			unset($menus[__('Taxonomy', 'wp-views')]);
+ 			unset($menus[__('Field', 'wp-views')]);
+
+ 			// sort all elements by key
+            ksort($menus);
+            
+           	// add main elements in the correct order
+            $menus = !empty($menu_taxonomy[__('Taxonomy', 'wp-views')]) ? array_merge($menu_taxonomy, $menus) : $menus;
+            $menus = !empty($menu_basic[__('Basic', 'wp-views')]) ? array_merge($menu_basic, $menus): $menus;
+            $menus = !empty($menu_field[__('Other Fields', 'wp-views')]) ? array_merge($menus, $menu_field) : $menus;
+            
+            // sort inner elements in the submenus
+            foreach($menus as $key=>&$menu_group) {
+            	if(is_array($menu_group)) {
+            		ksort($menu_group);
+            	}
+            }
+	    }
     }
+    
+ 	
 
     function editor_add_js() {
         global $pagenow;
@@ -244,6 +300,7 @@ if (!class_exists('Editor_addon')) {
                     array());
         }
     }
-
+    
+   
 }
 

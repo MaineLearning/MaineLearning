@@ -47,7 +47,7 @@ if(is_admin()){
 				$name = substr($key, 0, strlen($key) - strlen('_compare'));
 
 				$td = wpv_get_table_row_ui_post_custom_field($view_settings_table_row, $name, null, null, $view_settings);
-				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">' . $td . '</tr>';
+				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">' . $td . '</tr>';
             
 				$view_settings_table_row++;
 				$count++;
@@ -67,13 +67,13 @@ if(is_admin()){
 		
 		if ($summary != '') {
 			if ($count > 1) {
-				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">';
+				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">';
 				wpv_filter_custom_field_relationship_admin($view_settings);			
 				echo '</tr>';
 			
 				$view_settings_table_row++;
 			}
-			echo '<tr class="wpv_custom_field_edit_row wpv_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;"><td></td><td>';
+			echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;"><td></td><td>';
 			?>
 				<?php
 					$filters = wpv_add_filter_custom_field(array());
@@ -88,7 +88,7 @@ if(is_admin()){
 		
 			$view_settings_table_row++;
 
-			echo '<tr class="wpv_custom_field_show_row wpv_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"><td></td><td>';
+			echo '<tr class="wpv_custom_field_show_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"><td></td><td>';
 			_e('Select posts with custom fields: ', 'wpv-view');
 			echo $summary;
 			

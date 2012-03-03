@@ -78,9 +78,8 @@ function wpv_pagination_shortcode($atts, $value) {
     );
 
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
 
-    if ($post_query && $post_query->max_num_pages > 1.0) {
+    if ($WP_Views->get_max_pages() > 1.0) {
         // output the pagination.
         return wpv_do_shortcode($value);
     } else {
@@ -106,9 +105,8 @@ function wpv_pager_num_page_shortcode($atts) {
     );
 
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
 
-    return sprintf('%1.0f', $post_query->max_num_pages);
+    return sprintf('%1.0f', $WP_Views->get_max_pages());
 }
 
 /**
@@ -129,9 +127,8 @@ function wpv_pager_prev_page_shortcode($atts, $value) {
     );
 
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
 
-    $page = intval($post_query->query_vars['paged']);
+    $page = $WP_Views->get_current_page_number();
 
     if ($page > 1) {
 
@@ -149,7 +146,7 @@ function wpv_pager_prev_page_shortcode($atts, $value) {
         $spinner = $view_settings['pagination']['spinner'];
         $spinner_image = $view_settings['pagination']['spinner_image'];
         $callback_next = $view_settings['pagination']['callback_next'];
-        return '<a href="#" class="wpv-filter-previous-link" onclick="return wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ',' . $page . ', ' . $ajax . ', \'' . $effect . '\', ' . $post_query->max_num_pages . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', false)">' . $value . '</a>';
+        return '<a href="#" class="wpv-filter-previous-link" onclick="return wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ',' . $page . ', ' . $ajax . ', \'' . $effect . '\', ' . $WP_Views->get_max_pages() . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', false)">' . $value . '</a>';
     } else {
         return '';
     }
@@ -173,11 +170,10 @@ function wpv_pager_next_page_shortcode($atts, $value) {
     );
 
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
 
-    $page = intval($post_query->query_vars['paged']);
+    $page = $WP_Views->get_current_page_number();
 
-    if ($page < $post_query->max_num_pages) {
+    if ($page < $WP_Views->get_max_pages()) {
 
         $page++;
 
@@ -193,7 +189,7 @@ function wpv_pager_next_page_shortcode($atts, $value) {
         $spinner = $view_settings['pagination']['spinner'];
         $spinner_image = $view_settings['pagination']['spinner_image'];
         $callback_next = $view_settings['pagination']['callback_next'];
-        return '<a href="#" class="wpv-filter-next-link" onclick="return wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ',' . $page . ', ' . $ajax . ', \'' . $effect . '\',' . $post_query->max_num_pages . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', false)">' . $value . '</a>';
+        return '<a href="#" class="wpv-filter-next-link" onclick="return wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ',' . $page . ', ' . $ajax . ', \'' . $effect . '\',' . $WP_Views->get_max_pages() . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', false)">' . $value . '</a>';
     } else {
         return '';
     }
@@ -219,9 +215,8 @@ function wpv_pager_current_page_shortcode($atts) {
     );
 
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
 
-    $page = intval($post_query->query_vars['paged']);
+    $page = $WP_Views->get_current_page_number();
 
     if (isset($atts['style'])) {
         
@@ -253,9 +248,9 @@ function wpv_pager_current_page_shortcode($atts) {
         switch($atts['style']) {
             case 'drop_down':
                 $out = '';
-                $out .= '<select id="wpv-page-selector-' . $WP_Views->get_view_count() . '" onchange="wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ', jQuery(this).val(), ' . $ajax . ', \'' . $effect . '\',' . $post_query->max_num_pages . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', true);">' . "\n";
+                $out .= '<select id="wpv-page-selector-' . $WP_Views->get_view_count() . '" onchange="wpv_pagination_replace_view(' . $WP_Views->get_view_count() . ', jQuery(this).val(), ' . $ajax . ', \'' . $effect . '\',' . $WP_Views->get_max_pages() . ', ' . $cache_pages . ', ' . $preload_pages . ', \'' . $spinner . '\', \'' . $spinner_image . '\', \'' . $callback_next . '\', true);">' . "\n";
         
-                $max_page = intval($post_query->max_num_pages);
+                $max_page = intval($WP_Views->get_max_pages());
                 for ($i = 1; $i < $max_page + 1; $i++) {
                     $is_selected = $i == $page ? ' selected="selected"' : '';
                     $page_number = apply_filters('wpv_pagination_page_number', $i);
@@ -266,7 +261,7 @@ function wpv_pager_current_page_shortcode($atts) {
                 return $out;
                     
             case 'link':
-                $page_count = intval($post_query->max_num_pages);
+                $page_count = intval($WP_Views->get_max_pages());
                 // output a series of links to each page.
                 
                 $out = '<div class="wpv_pagination_links">';
@@ -318,9 +313,8 @@ function wpv_pagination_js() {
 
 function wpv_pagination_rollover_shortcode() {
     global $WP_Views;
-    $post_query = $WP_Views->get_query();
     $view_settings = $WP_Views->get_view_settings();
-    $view_settings['rollover']['count'] = $post_query->max_num_pages;
+    $view_settings['rollover']['count'] = $WP_Views->get_max_pages();
     wpv_pagination_rollover_add_slide($WP_Views->get_view_count(),
             $view_settings);
     add_action('wp_footer', 'wpv_pagination_rollover_js');
@@ -383,6 +377,8 @@ function wpv_ajax_pagination_lang($lang) {
 
 function wpv_ajax_get_page() {
     if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_page_nonce')) {
+        global $WP_Views;
+        
         // Fix a problem with WPML using cookie language when DOING_AJAX is set.
         $cookie_lang = null;
         if (isset($_COOKIE['_icl_current_language']) && isset($_POST['lang'])) {
@@ -394,6 +390,18 @@ function wpv_ajax_get_page() {
 
         $_GET['wpv_paged'] = $_POST['page'];
         $_GET['wpv_view_number'] = $_POST['view_number'];
+        if (isset($_POST['wpv_column_sort_id'])) {
+            $_GET['wpv_column_sort_id'] = $_POST['wpv_column_sort_id'];
+        }
+        if (isset($_POST['wpv_column_sort_dir'])) {
+            $_GET['wpv_column_sort_dir'] = $_POST['wpv_column_sort_dir'];
+        }
+        
+        if (isset($_POST['get_params'])) {
+            foreach($_POST['get_params'] as $key => $param) {
+                $_GET[$key] = $param;
+            }
+        }
 
         global $post, $authordata, $id;
 
@@ -401,7 +409,25 @@ function wpv_ajax_get_page() {
         $authordata = new WP_User($post->post_author);
         $id = $post->ID;
 
-        echo wpv_do_shortcode($post->post_content);
+        if ($_POST['wpv_view_widget_id'] == 0) {
+            echo wpv_do_shortcode($post->post_content);
+        } else {
+            
+            // set the view count so we return the right view number after rendering.
+            $WP_Views->set_view_count(intval($_POST['view_number']) - 1);
+            
+            $widget = new WPV_Widget();
+            
+            $ars = array('before_widget' => '',
+                         'before_title' => '',
+                         'after_title' => '',
+                         'after_widget' => '');
+            
+            $widget->widget($args, array('title' => '',
+                                         'view' => $_POST['wpv_view_widget_id']));
+            
+            echo $WP_Views->get_max_pages();
+        }
 
         if ($cookie_lang) {
             // reset language cookie.

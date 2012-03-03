@@ -12,11 +12,13 @@ class WPV_Widget extends WP_Widget{
         extract($args);
         $title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 
+		$WP_Views->set_widget_view_id($instance['view']);
+		
         echo $before_widget;
         if ( $title )
             echo $before_title . $title . $after_title;
 
-        $out = $WP_Views->render_view_ex($instance['view']);
+        $out = $WP_Views->render_view_ex($instance['view'], $instance['view']);
         $out = wpv_do_shortcode($out);
         
     	$post_type_object = get_post_type_object( 'view' );
@@ -27,6 +29,8 @@ class WPV_Widget extends WP_Widget{
         echo $out;
 
         echo $after_widget;
+
+		$WP_Views->set_widget_view_id(0);
     }
     
     function form( $instance ) {
