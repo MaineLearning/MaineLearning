@@ -1,0 +1,41 @@
+2.2.2 - 2011-09-19 - Dustin Bolton
+	ImportBuddy BETA:
+		ABSPATH now includes trailing slash to match WordPress. Fixes zip detection on many Linux systems.
+		Fixed is_writable blogging log creation in log() function.
+2.2.1 - 2011-09-16 - Dustin Bolton
+	ImportBuddy BETA: Added addslashes() into status function for javascript passing. Prevented slashes from disappearing.
+2.0.0 - 2011-08-23 - Dustin Bolton
+	ImportBuddy BETA: 
+		General UI cleanup and polishing.
+		Added Server Info. page's Server Configuration section within new 'Server Information' button on Step 1.
+		Added ability to upload backups from local computer to server (only if importbuddy password is set; for security).
+		Added more Advanced Configuration options for fallback unzip modes.
+		Added more detailed status logging to each step in a textarea.
+		Re-arranged and reduced step count for streamlining imports.
+		When 'wipe database' option is selected the mysql test now reports warnings and notes it will wipe if it finds an existing database rather than errors.
+		Rather than ALL rows of ALL databases having URLs and paths 'migrated', known tables/rows where no serialized data should ever show up are skipped for increate migration performance. All unknown tables/rows are scanned and updated if needed.
+		Now also deleting the import directory on cleanup step.
+		Broke out all importbuddy functionality into separate files in the importbuddy directory. This directory and contents are 'extracted' from importbuddy.php if they do not exist.
+		Broke out database migration functions into a new class for easier updating to handle new databases and scenarios.
+		Now using ZipBuddy class for full zip compatibility fallbacks including ZipArchive & PCLZip. Issues #10, #36.
+		PCLZip no longer throws undefined constant notices. Issue #14.
+		No longer re-enabled commented out WP_SITEURL & WP_HOME instances in wp-config.php. Issue #52.
+		Better testing / handling of serialized data. Issue #62, #29.
+		Updated importbuddy to use BackupBuddy's greedy script limits funtionality. Issue #69.
+		Improved ImportBuddy error messages. Issue #38.
+		Better parsing of configurations in wp-config.php. Issue #33.
+2.2.0 - 2011-08-23 - Dustin Bolton
+	Updated ABSPATH to use WordPress style with trailing slash. Updated all uses. Issue #
+	Fixed all sites being detected as Multisite instances. Issue #97.
+	Fixed table bruteforcing displaying `Working` seemingly endlessly on very large tables. Could cause mysql to go away also. Issue #98.
+	Post GUIDs are no longer updated during migrations as per http://codex.wordpress.org/Changing_The_Site_URL#Important_GUID_Note  .. Issue #96.
+	Added addslashes() into importbuddy status function for javascript passing.
+2.2.1 - 2011-11-26 - Dustin Bolton
+	importbuddy: Problem with Multisite backup detection in import causing problems for standalone migrations with custom home url. Issue #130.
+	importbuddy: Problem with Multisite backup detection in import causing problems for standalone migrations with split url. Issue #131.
+	importbuddy: Fixed ability to skip database import. Issue #114.
+	importbuddy: Database test incorrectly stated that the database would be wiped even when wiping is not enabled. Issue #103.
+	importbuddy: Explicitly setting PHP timezone to avoid warnings. Issue #132.
+2.2.3 - 2012-01-06 - Dustin Bolton
+	Split URL migrations modified to update both site URL and home URL in the proper order when doing mass replacements.
+	Fixed preg_replace backreference issue with wp-config password replacement. Now filtering password through preg_replace_back().

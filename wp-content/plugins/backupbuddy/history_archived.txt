@@ -1,0 +1,316 @@
+0.1.9 - 2010-02-11 - Dustin Bolton
+	Initial public beta release.
+0.1.10 - 2010-02-12 - Dustin Bolton
+	Fixed file download URL.
+0.1.11 - 2010-02-12 - Dustin Bolton
+	Various fixes.
+0.1.12 - 2010-02-12 - Dustin Bolton
+	Fixed importbuddy.php download length issue.
+0.1.13 - 2010-02-13 - Dustin Bolton
+	Clarified usage instructions.
+	Various user interface changes.
+0.1.14 - 2010-02-16 - Dustin Bolton
+	Many various changes.
+0.1.15 - 2010-02-18 - Dustin Bolton
+	Added scheduling.
+	Added email and FTP sending.
+0.1.16 - 2010-02-18 - Chris Jean
+	Created directory zipping class.
+0.1.17 - 2010-02-26 - Dustin Bolton
+	Various fixes.
+0.1.18 - 2010-03-02 - Dustin Bolton
+	Added updating system.
+0.1.19 - 2010-03-02 - Dustin Bolton
+	Update system fixes.
+0.1.20 - 2010-03-02 - Dustin Bolton
+	Updater fixes.
+0.1.21 - 2010-03-03 - Dustin Bolton
+	Various minor fixes.
+0.1.22 - 2010-03-03 - Dustin Bolton
+	Updater fixes
+0.1.23 - 2010-03-03 - Chris Jean
+	Updated backupbuddy.php:
+		Rewrote code for PHP4 support
+		Fixed clearstatcache warnings
+	Updated lib/zip/zip.php:
+		Added compat functionality for PHP4
+0.1.24 - 2010-03-03 - Chris Jean
+	Updated lib/zip/zip.php:
+		Added native zip failure reason output for
+			add_directory_to_zip function
+0.1.25 - 2010-03-03 - Chris Jean
+	Updated lib/zip/zip.php:
+		Removed modified timestamp checking for
+			native zip method
+		Added better error messages
+1.0.0 - 2010-03-04 - Dustin Bolton
+	Fixed updater reporting upgrades always available.
+	Official version change to 1.0 and public release.
+1.0.1 - 2010-03-04 - Dustin Bolton
+	UI improvements.
+	FTP was failing in some situations.
+1.0.2 - 2010-03-05 - Dustin Bolton
+	Corrected Internet Explorer styling issues in importer.
+1.0.3 - 2010-03-05 - Dustin Bolton
+	Fixed FTP functionality.
+1.0.4 - 2010-03-05 - Dustin Bolton
+	Fixed hardcoded temporary password in importbuddy.php
+1.0.5 - 2010-03-05 - Dustin Bolton
+	Corrected PHP shorttag in importbuddy.php
+1.0.6 - 2010-03-05 - Chris Jean
+	Fixed relative path issue when adding db_0.sql to backup file.
+1.0.7 - 2010-03-05 - Chris Jean
+	Fixed problem with Step 2 of backup process hanging at
+		"Backing up files...".
+	Added missing PluginBuddyZip class initialization.
+1.0.8 - 2010-03-05 - Dustin Bolton
+	Fixed version numbering & removed PHPdoc from header.
+1.0.9 - 2010-03-05 - Dustin Bolton
+	Now hiding passwords on Settings page.
+1.0.10 - 2010-03-05 - Dustin Bolton
+	Updated key system.
+1.0.11 - 2010-03-06 - Dustin Bolton
+	Import script now pre-fills destination URL based on current url.
+1.0.12 - 2010-03-07 - Dustin Bolton
+	Not using standard apostrophe in SQL. (' instead of `)
+1.0.13 - 2010-03-09 - Dustin Bolton
+	Fixed curl_init error in updater on some servers.
+1.0.14 - 2010-03-09 - Dustin Bolton
+	Fixed managing licenses when using SSL url.
+1.0.15 - 2010-03-10 - Dustin Bolton
+	Fixed database only backup problem / empty zip file.
+	Fixed database only import problem.
+	Fixed missing .dat file in database only backup.
+1.0.16 - 2010-03-10 - Dustin Bolton
+	importbuddy UI fix.
+1.0.17 - 2010-03-10 - Dustin Bolton
+	Fixed HTTPS checking warning.
+Pre-release version 1.0.18a - 2010-03-12 - Chris Jean
+	Intial rewrite of the backup process
+	Output cleanup needed
+	Laid foundation for multiple backup process to make a single backup
+Pre-release version - 2010-03-12 - Chris Jean
+	Added a couple tweaks to backupbuddy.php and lib/zip/zip.php
+1.1.0 - 2010-03-15 - Dustin Bolton
+	Partial rewrite of importbuddy.php to handle new backup format for full and DB only backups.
+	Legacy mode option in importbuddy.php to support older BackupBuddy backups (1.0.18 or older).
+	FTP password now hidden.
+1.1.1 - 2010-03-16 - Dustin Bolton
+	Fixed successful extraction incorrectly returning failure message in importbuddy.
+	Fixed updater $key warning.
+1.1.2 - 2010-03-18 - Dustin Bolton
+	Added backup file integrity check to BackupBuddy file listing.
+1.1.3 - 2010-03-19 - Dustin Bolton
+	Fixed strange characters being added into database on import by forcing UTF8 with SET NAMES option.
+	Cleared up some warnings in file integrity checking.
+Pre-release version 1.1.4a - 2010-03-22 - Chris Jean
+	Modified the primary zip process to not require the ZipArchive class
+Pre-release version 1.1.4b - 2010-03-22 - Chris Jean
+	Removed the FileArchive warnings
+Pre-release version 1.1.4c - 2010-03-22 - Chris Jean
+	Added diable_compression option for zipping
+Pre-release version 1.1.4d - 2010-03-22 - Dustin Bolton
+	Added date sorting to backup file listing.
+Pre-release version 1.1.4e - 2010-03-22 - Dustin Bolton
+	Now using recursive feature for making directories in case parent(s) missing. Using custom function for PHP4 compatability.
+1.1.4 - 2010-03-23 - Dustin Bolton
+	Updater now uses built-in WP ajax system.
+1.1.5 - 2010-03-23 - Dustin Bolton
+	Version fix.
+1.1.6 - 2010-03-23 - Dustin Bolton
+	Converted importbuddy download to using WP-Ajax system for increased compatibility.
+	Fixed situation where only having one backup could cause file listing to now show on some servers.
+	importbuddy UI improvements.
+1.1.7 - 2010-03-24 - Dustin Bolton
+	Fixed problem logging into license system on some servers.
+	Backup directory is set on each load rather than only on installation in case this directory changes (ie new host).
+1.1.8 - 2010-03-26 - Dustin Bolton
+	Added web resources links to Getting Started page.
+	Added better graphical indicator to display status during backups.
+1.1.9 - 2010-03-30 - Dustin Bolton
+	Added mySQL connection settings testing button to importbuddy.php.
+	Improved user interface of importbuddy.php.
+	Added documentation hover question marks '(?)' to importbuddy.php.
+1.1.10 - 2010-04-01 - Dustin Bolton
+	Added tutorial and support links to importbuddy.php
+	Fixed condition where scheduled backups could trigger manual backup emails.
+1.1.11 - 2010-04-02 - Dustin Bolton
+	Corrected issue with scheduled file uploads & email attachments failing.
+	Fixed issue with custom upload directory locations.
+1.1.12 - 2010-04-02 - Dustin Bolton
+	Fixed issue with admin dashboard permissions being denied in some situations when database prefix is changed.
+1.1.13 - 2010-04-02 - Dustin Bolton
+	Fixed alert email address setting not changing when settings saved.
+1.1.14 - 2010-04-06 - Dustin Bolton
+	Fixed problem with scheduled emails and FTP failing due to file not being passed to cron system.
+	Added FTP connection test button.
+1.1.15 - 2010-04-06 - Dustin Bolton
+	Added option to disable compression for non-compatibility-mode backups to improve speed for improved host compatibility.
+1.1.16 - 2010-04-12 - Dustin Bolton
+	Fixed manual email notification being triggered by scheduled backups.
+	Corrected flaw in the way cron schedule time periods were being added causing some incompatibility issues with other scheduling plugins.
+	Fixed changing of site name & description in importbuddy.php
+1.1.17 - 2010-04-12 - Dustin Bolton
+	Added $force_compatibility option to importbuddy.php to override native zip detection and force compatibility mode.
+	Added improved detection for lack of exec() function to importbuddy.php.
+1.1.18 - 2010-04-22 - Dustin Bolton
+	Updater: Fixed unchecked index warnings when curl unavailable.
+	UI improvements to Settings page.
+	Added option to force compatibility mode to settings page.
+	Disabling ZIP compression now available in compatibility mode. No longer limited to native only.
+1.1.19 - 2010-04-22 - Dustin Bolton
+	Fixed forced compatibility mode for full backup not working.
+	Flushing full mode status to screen after displaying compatibility mode notice for improved feedback.
+1.1.20 - 2010-04-26 - Dustin Bolton
+	Improved detection of native zip in importbuddy.php and compatibility fallback.
+	Changed error message when falling back to compatibility to be less alarming.
+1.1.21 - 2010-05-03 - Dustin Bolton
+	Corrected native zip function detection bug caused by previous version.
+1.1.22 - 2010-05-03 - Dustin Bolton	
+	Added site url to ZIP backup file name.
+	Added option to delete file after scheduled sending via ftp and/or email.
+1.1.25 - 2010-05-04 - Dustin Bolton
+	Fixed backup integrity checker to recognize new filename format.
+1.1.26 - 2010-05-06 - Dustin Bolton
+	Fixed importbuddy.php to recognize new filename format.
+1.1.27 - 2010-05-17 - Dustin Bolton
+	Added Windows native zip compatibility by using http://pluginbuddy.com/wp-content/uploads/2010/05/backupbuddy_windows_unzip.zip
+1.1.28 - 2010-05-17 - Dustin Bolton
+	Windows native zip option now only displayed when running on a Windows server.
+	Added more detail warnings for lack of exec functionality on Linux servers.
+	Added option to disable file integrity checking for increased server compatibility.
+	Added option to reset all settings & defaults in the Debugging Information section on the Getting Started page.
+1.1.29 - 2010-05-20 - Dustin Bolton
+	Added .htaccess migration to importbuddy.php to handle changes in subdirectories from breaking permalinks.
+	Added warning to Step 2 of importbuddy.php if an existing WordPress installation is found in the directory.
+1.1.30 - 2010-05-24 - Dustin Bolton
+	Fixed indices on some checkbox option on settings page.
+	Added directory exclusion ability to non-compatibility mode backups via settings page.
+	Added current server date & time to scheduling page.
+1.1.31 - 2010-05-24 - Dustin Bolton
+	Corrected importbuddy debugging defaulting to true.
+1.1.32 - 2010-05-28 - Dustin Bolton
+	Updated updater for WP 3.0
+1.1.33 - 2010-06-01 - Dustin Bolton
+	Corrected license manager loading issue due to short timeout limit.
+1.1.34 - 2010-06-02 - Dustin Bolton
+	Removed legacy mode from importbuddy.php.
+	Improved importbuddy.php unzip failure detection.
+	Improved unzip.exe Windows executable detection and usage.
+	Added prompt for migrating or restoring for improved usability.
+	Added additional information on database settings.
+1.1.35 - 2010-06-21 - Dustin Bolton
+	Fixed notice of unexpected output on plugin activation in WordPress 3.0
+1.1.36 - 2010-06-21 - Dustin Bolton
+	Added advanced troubleshooting options to importbuddy.php Step 1.
+	Improved directory exclusion usability for all users. Now supports OS X.
+	Improved Getting Started page.
+1.1.37 - 2010-06-24 - Dustin Bolton
+	Began added error codes with links to the wiki for more error details and potential fixes.
+	Improved error reporting on mysql errors during backups.
+1.2.0 - 2010-06-25 - Dustin Bolton
+	Added Amazon S3 support for remote backups.
+	Added FTPs support for remote backups.
+1.2.1 - 2010-06-29 - Dustin Bolton
+	Added directory configuration option for Amazon S3.
+	Various minor fixes.
+1.2.3 - 2010-07-07 - Dustin Bolton
+	Fixed improper label-checkbox associations.
+	Added feature to continue in importbuddy even if backup ZIP file is not found.
+1.2.4 - 2010-07-14 - Dustin Bolton
+	Corrected updater conflict with 3.0 plugins.
+1.2.5 - 2010-07-16 - Skyler Moore
+	Fixed importbuddy.php from excluding differing prefixed tables.
+1.2.6 - 2010-07-20 - Dustin Bolton
+	Added additional protection to temporary backup data to prevent failed backups from leaking secure data.
+	Updated siteurl option to end use of deprecated functions.
+1.2.8 - 2010-07-21 - Dustin Bolton
+	Fixed problem with subdirectories caused by previous siteurl option update.
+1.2.9 - 2010-07-26 - Dustin Bolton
+	Scheduled backups now are set up using local time as set by WP Settings page.
+	Improved backup file sort order.
+1.2.11 - 2010-07-27 - Dustin Bolton
+	Fixed issue in updater preventing some other plugins from checking for upgrades.
+1.2.12 - 2010-08-04 - Dustin Bolton
+	Fixed issue where backup file listings could be viewed via wp-cron.php under some circumstances.
+	Updated updater to be universal for PluginBuddy & iThemes branded products.
+1.2.15 - 2010-08-11 - Dustin Bolton
+	Removed FTP filename announcement for increased security during cron.
+	Email notifications now properly going to specified address.
+	Re-coded large portion of updater to better handle WordPress 3.0 issues better.
+	Updated importbuddy.php to provide more detailed error warnings & links to codex.
+1.2.17 - 2010-08-11 - Dustin Bolton
+	Corrected some warnings in debug mode from updater.
+1.2.18 - 2010-08-23 - Dustin Bolton
+	Fixed some index warnings on settings page.
+	Amazon S3 support now out of beta.
+1.2.19 - 2010-08-25 - Dustin Bolton
+	Directory exclusion would only exclude the last directory on some servers. Trimmed newlines to fix.
+1.2.20 - 2010-08-26 - Dustin Bolton
+	Licensing fixes.
+1.2.21 - 2010-09-07 - Dustin Bolton
+	Licensing fixes.
+1.3.0 - 2010-09-09 - Dustin Bolton
+	Major importbuddy.php rewrite for enhanced compatibility.
+	Added new compatibility mode to importbuddy: ZipArchive
+	Fixed FTP system not sending.
+	Fixed default FTP type on manual FTP sending popup.
+	Added debug logging to importbuddy.php to log into importbuddy.txt.
+	Added new option to optionally select compatibility mode to force to.
+1.3.1 - 2010-09-20 - Dustin Bolton
+	Updated importbuddy.php to fail gracefully on non-supported PHP versions.
+	Added additional logging to importbuddy.php for ABSPATH changes.
+	Updated tooltip (?) to use new graphic.
+	Fixed Amazon S3 SSL option to be able to disable.
+	Added 'Get Key' link to Amazon S3 section.
+	Fixed manually sending Amazon S3 failing in some cases.
+1.3.2 - 2010-09-23 - Dustin Bolton
+	Implemented fix for glitchy .htaccess file caused by malformed Fantastico .htaccess files.
+	Fixed problem with migrating absolute paths on Windows servers caused by problems with file path format.
+1.3.3 - 2010-09-28 - Dustin Bolton
+	Fixed echo of SQL data on import when changing prefix.
+	Added logging of version numbers into importbuddy.php.
+	Fixed not initializing some variables.
+	Added WordPress and PHP version checking to BackupBuddy to better warn of incompatibility issues.
+	Added additional SQL logging to importbuddy.php to help find ninjas better.
+1.3.4 - 2010-10-06 - Dustin Bolton	
+	Added additional warnings if trying to import to a database and existing WP is found with that prefix.
+	Now blocking database merges in importbuddy.php to prevent data loss or corruption.
+	Added URL migration of both www and non-www domain prefixes to importbuddy.php.
+1.3.5 - 2010-10-12 - Dustin Bolton
+	Updated updater to v1.0.1.
+1.3.6 - 2010-10-18 - Dustin Bolton
+	Updated updater to v1.0.2.
+1.3.7 - 2010-10-18 - Dustin Bolton
+	Fixed problem with FTP test & directory exclusion textarea in IE8.
+	Improved format of Backup Status page.
+	Added additional help question marks to Schedules page.
+1.3.8 - 2010-10-27 - Dustin Bolton
+	Fixed missing index on AWS SSL Encryption when not checked.
+	Added option to limit number of stored backup archives.
+1.3.9 - 2010-10-29 - Dustin Bolton
+	Fixed non-array error when no backups exist.
+1.3.10 - 2010-11-01 - Dustin Bolton
+	Fixed lack of backup directory exclusion if no other directories were excluded.
+	Added dashboard status.
+	Tweaked various styling.
+1.3.11 - 2010-12-02 - Dustin Bolton
+	Fixed dashboard status showing for users with Dashboard access that were under admin level.
+1.3.12 - 2010-12-08 - Dustin Bolton
+	Amazon S3 now waits until the next page load to send on scheduled sending of full backups. This increases reliability.
+1.3.13 - 2011-01-05 - Dustin Bolton
+	Moved directory listing blockers from temp backup directory to wp-uploads root.
+1.3.15 - 2011-01-07 - Dustin Bolton
+	Fixed warning being displayed during database backup caused by 1.3.13 fix.
+1.3.16 - 2011-01-07 - Dustin Bolton
+	Database backup only fix for Josh.
+1.3.17 - 2011-01-10 - Dustin Bolton
+	Corrected problem with missing trailing slash for directory exclusion before wildcard. Could have resulted in too much being excluded.
+1.3.18 - 2011-01-11 - Dustin Bolton
+	Temporary security files now only generated for Full Backups.
+1.3.19 - 2011-01-17 - Dustin Bolton
+	Increased security of log file when logs are enabled for debugging. (log file moved to /wp-uploads/backupbuddy_backups/ with a unique file name per site)
+1.3.20 - 2011-03-03 - Dustin Bolton
+	Added additional debug error logging.
+	
+--ARCHIVED ALL UPDATES TO THIS POINT. ALL NEW UPDATES IN history.txt--
