@@ -51,7 +51,7 @@ class GFExport{
                     if($inputType != "creditcard")
                         unset($field["creditCards"]);
 
-                    if($field["type"] == $field["inputType"])
+                    if($field["type"] == rgar($field, "inputType"))
                         unset($field["inputType"]);
 
                     if(in_array($inputType, array("checkbox", "radio", "select")) && !rgar($field,"enableChoiceValue")){
@@ -180,9 +180,9 @@ class GFExport{
 
         ?>
         <ul class="subsubsub">
-            <li><a href="?page=gf_export&view=export_entry" class="<?php echo $view=="export_entry" || empty($view) ? 'current' : ''; ?>"><?php _e("Export Entries", "gravityforms"); ?></a> | </li>
-            <li><a href="?page=gf_export&view=export_form" class="<?php echo $view=="export_form" ? 'current' : ''; ?>"><?php _e("Export Forms", "gravityforms"); ?></a> | </li>
-            <li><a href="?page=gf_export&view=import_form" class="<?php echo $view=="import_form" ? 'current' : ''; ?>"><?php _e("Import Forms", "gravityforms"); ?></a></li>
+                <li><a href="?page=gf_export&view=export_entry" class="<?php echo $view=="export_entry" || empty($view) ? 'current' : ''; ?>"><?php _e("Export Entries", "gravityforms"); ?></a> | </li>
+                <li><a href="?page=gf_export&view=export_form" class="<?php echo $view=="export_form" ? 'current' : ''; ?>"><?php _e("Export Forms", "gravityforms"); ?></a> | </li>
+                <li><a href="?page=gf_export&view=import_form" class="<?php echo $view=="import_form" ? 'current' : ''; ?>"><?php _e("Import Forms", "gravityforms"); ?></a></li>
         </ul>
         <br style="clear:both"/>
         <br/>

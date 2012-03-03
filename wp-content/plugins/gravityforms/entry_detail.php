@@ -11,19 +11,45 @@ class GFEntryDetail{
         echo GFCommon::get_remote_message();
 
         $form = RGFormsModel::get_form_meta($_GET["id"]);
-        $lead = RGFormsModel::get_lead($_GET["lid"]);
 
-        if(!$lead){
-            _e("OOps! We couldn't find your lead. Please try again", "gravityforms");
+        $filter = rgget("filter");
+        $status = in_array($filter, array("trash", "spam")) ? $filter : "active";
+
+        $search = rgget("s");
+        $position = rgget('pos') ? rgget('pos') : 0;
+        $sort_direction = rgget('dir') ? rgget('dir') : 'DESC';
+
+        $sort_field = empty($_GET["sort"]) ? 0 : $_GET["sort"];
+        $sort_field_meta = RGFormsModel::get_field($form, $sort_field);
+        $is_numeric = $sort_field_meta["type"] == "number";
+
+        $star = $filter == "star" ? 1 : null;
+        $read = $filter == "unread" ? 0 : null;
+
+        //added status as an optional parameter to get_lead_count because the counts are inaccurate without using the status
+       	$lead_count = RGFormsModel::get_lead_count($form['id'], $search, $star, $read, null, null, $status);
+
+        $lead = RGFormsModel::get_leads($form['id'], $sort_field, $sort_direction, $search, $position, 1, $star, $read, $is_numeric, null, null, $status);
+        $lead = !empty($lead) ? $lead[0] : false;
+
+        if(!$lead) {
+            _e("Oops! We couldn't find your lead. Please try again", "gravityforms");
             return;
         }
 
         RGFormsModel::update_lead_property($lead["id"], "is_read", 1);
 
-        $search_qs = empty($_GET["s"]) ? "" : "&s=" . $_GET["s"];
-        $sort_qs = empty($_GET["sort"]) ? "" : "&sort=" . $_GET["sort"];
-        $dir_qs = empty($_GET["dir"]) ? "" : "&dir=" . $_GET["dir"];
-        $page_qs = empty($_GET["paged"]) ? "" : "&paged=" . absint($_GET["paged"]);
+        $prev_pos = !rgblank($position) && $position > 0 ? $position - 1 : false;
+        $next_pos = !rgblank($position) && $position < $lead_count - 1 ? $position + 1 : false;
+
+        // unread filter requires special handling for pagination since entries are filter out of the query as they are read
+        if($filter == 'unread') {
+            $next_pos = $position;
+
+            if($next_pos + 1 == $lead_count)
+                $next_pos = false;
+
+        }
 
         switch(RGForms::post("action")){
             case "update" :
@@ -97,10 +123,7 @@ class GFEntryDetail{
 
         ?>
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css" />
-        <style type="text/css">
-            #notifications_advanced_settings label { line-height: 18px; }
-        </style>
-        <script type="text/javascript">
+         <script type="text/javascript">
 
             jQuery(document).ready(function(){
                 toggleNotificationOverride(true);
@@ -227,7 +250,13 @@ class GFEntryDetail{
             <div class="icon32" id="gravity-title-icon"><br></div>
             <h2><?php _e("Entry #", "gravityforms"); ?><?php echo absint($lead["id"])?></h2>
 
-            <!--<a href="<?php echo esc_url("admin.php?page=gf_entries&view=entries&id=" . absint($form["id"]) . $search_qs . $sort_qs . $dir_qs . $page_qs) ?>"><?php _e("&laquo; back to entries list", "gravityforms"); ?></a>-->
+            <div class="gf_entry_detail_pagination">
+                <ul>
+                    <li class="gf_entry_count"><span>entry <strong><?php echo $position + 1; ?></strong> of <strong><?php echo $lead_count; ?></strong></span></li>
+                    <li class="gf_entry_prev gf_entry_pagination"><?php echo GFEntryDetail::entry_detail_pagination_link($prev_pos, 'Previous Entry', 'gf_entry_prev_link'); ?></li>
+                    <li class="gf_entry_next gf_entry_pagination"><?php echo GFEntryDetail::entry_detail_pagination_link($next_pos, 'Next Entry', 'gf_entry_next_link'); ?></li>
+                </ul>
+            </div>
 
             <?php RGForms::top_toolbar() ?>
 
@@ -296,7 +325,7 @@ class GFEntryDetail{
                                         <?php
                                         switch($lead["status"]){
                                             case "spam" :
-                                                if(GFCommon::has_akismet()){
+                                                if(GFCommon::akismet_enabled($form['id'])){
                                                     ?>
                                                     <a onclick="jQuery('#action').val('unspam'); jQuery('#entry_form').submit()" href="#"><?php _e("Not Spam", "gravityforms") ?></a>
                                                     <?php
@@ -328,9 +357,9 @@ class GFEntryDetail{
                                                     ?>
                                                     <a class="submitdelete deletion" onclick="jQuery('#action').val('trash'); jQuery('#entry_form').submit()" href="#"><?php _e("Move to Trash", "gravityforms") ?></a>
                                                     <?php
-                                                    echo GFCommon::has_akismet() ? "|" : "";
+                                                    echo GFCommon::akismet_enabled($form['id']) ? "|" : "";
                                                 }
-                                                if(GFCommon::has_akismet()){
+                                                if(GFCommon::akismet_enabled($form['id'])){
                                                 ?>
                                                     <a class="submitdelete deletion" onclick="jQuery('#action').val('spam'); jQuery('#entry_form').submit()" href="#"><?php _e("Mark as Spam", "gravityforms") ?></a>
                                                 <?php
@@ -716,14 +745,12 @@ class GFEntryDetail{
                         <tr>
                             <td colspan="2" class="entry-view-field-value lastrow">
                                 <table class="entry-products" cellspacing="0" width="97%">
-
-                                      <colgroup>
+                                    <colgroup>
                                           <col class="entry-products-col1">
                                           <col class="entry-products-col2">
                                           <col class="entry-products-col3">
                                           <col class="entry-products-col4">
-                                      </colgroup>
-
+                                    </colgroup>
                                     <thead>
                                         <th scope="col"><?php echo apply_filters("gform_product_{$form_id}", apply_filters("gform_product", __("Product", "gravityforms"), $form_id), $form_id) ?></th>
                                         <th scope="col" class="textcenter"><?php echo apply_filters("gform_product_qty_{$form_id}", apply_filters("gform_product_qty", __("Qty", "gravityforms"), $form_id), $form_id) ?></th>
@@ -803,6 +830,15 @@ class GFEntryDetail{
             </tbody>
         </table>
         <?php
+    }
+
+    public static function entry_detail_pagination_link($pos, $label = '', $class = '') {
+
+        $href = !rgblank($pos) ? 'href="' . add_query_arg(array('pos' => $pos), remove_query_arg(array('pos', 'lid'))) . '"': '';
+        $class .= ' gf_entry_pagination_link';
+        $class .= $pos !== false ? ' gf_entry_pagination_link_active' : ' gf_entry_pagination_link_inactive';
+
+        return '<a ' . $href . ' class="' . $class . '" title="' . $label . '">' . $label . '</a></li>';
     }
 
 }

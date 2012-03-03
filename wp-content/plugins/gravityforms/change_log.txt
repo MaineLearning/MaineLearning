@@ -1,4 +1,107 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.1.2
+	- Fixed notices in form widget and when enabling no-conflict mode
+	- Fixed issue with entry list throwing database errors when sorting while filtering by starred or unread
+    - Fixed javascript error on form editor for IE7/8
+    - Fixed issue with entry detail page displaying an error when query string "pos" wasn't specified.
+    - Fixed issue with text counter being displayed multiple times when more than one form is embeded on a page
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.1.1
+    - Fixed bug with Post Category merge tags
+    - Fixed issue when AJAX forms getting displayed blank
+    - Fixed issue with product fields being added to entry even though they were hidden by conditional logic
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.1
+    - Fixed bug with conditional logic when applied to checkboxes
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3
+    - Fixed issue where entry limit was not being validated on form submssion
+    - Fixed issue where form schedule was not being validated on form submission
+    - Added no-conflict mode functionality
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.beta2.4
+    - Fixed issue with spinner when multiple forms are placed on the same page
+    - Fixed issue with AJAX multi-form not being displayed on some occasions
+    - Fixed issue with email validation when using {admin_email} on notification emails
+    - Added integration with ManageWP
+    - Fixed deprecated PHP functions
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.beta2.3
+    - Updated pricing fields so that they don't support the "Admin Only" option.
+    - Fixed issue with reCaptcha not changing languages properly
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.beta2.2
+	- Fixed issue when clicking on "enable values" in admin throwing javascript error; function SetFieldChoices was missing
+	- Fixed issue with non-customer facing error when there was no attachment
+    - Fixed issue with with submit button text always using default text
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.beta2
+	- Fixed issue when applying conditional logic to the submit button
+    - Fixed issue with non-translatable strings in JS files
+	- Added merge tag support for HTML fields
+    - Added hook to enable attachments to be added to notifications
+    - Updated POT file
+    - Added total entries to dashboard widget
+    - Added filter to customize dashboard widget title
+    - Fixed issue with dashboard widget table breaking outside of container
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.beta1
+    - Fixed issue with post author not being correctly set for posts configured to be created after payment is received
+    - Updated conditional logic to support other types of operation and other types of fields
+    - Updated search in admin to maintain the filter (starred, unread, spam, trash) so the filtered results you are viewing are what is searched
+    - Added field type (Multi Select, Drop Down, Radio, Checkbox) support to Post Category field
+    - Updated single product field so that its quantity is defauted to 1 when the quantity field is disabled
+    - Fixed notices in export and notification page
+    - Added setting to enable/disable Akismet
+    - Removed CDATA from scripts to prevent JS error on some browsers due to a character replacement done by WP core.
+    - Added hooks to enable CDATA wrapping
+    - Fixed issue with Date field not honoring the "No Duplicate" setting and allowing duplicate dates to be entered when they shouldn't
+    - Fixed issue with custom confirmation not working properly on AJAX forms
+    - Added back button to entry detail pagination
+    - Added pagination on entry detail page
+    - Fixed WP3.3 bug with {user:***} merge tag
+    - Fixed issue with chosen script initialization when field is target of conditional logic
+	- Added support for {admin_email} merge tag and using it as the default value for notifications instead of the actual admin email
+	- Updated admin paging total to not include items in the trash
+	- Updated admin paging links so that when an item is moved to the trash using the link, the counts are updated as necessary to reflect the change
+	- Updated admin paging links so that when an item is marked spam using the link, the counts are updated as necessary to reflect the change
+	- Fixed admin paging so that the filter carries through to the next page
+	- Fixed admin paging so that the counts displayed apply to the entry list you are viewing (all, unread, starred, spam, trash)
+    - Added "gform_akismet_enabled" hook which allows you to disable akismet integration
+        Documentation: http://www.gravityhelp.com/documentation/page/Gform_akismet_enabled
+        Example:
+            add_filter("gform_akismet_enabled", "__return_false");
+    - Updated enqueue and print scripts functions to always include jQuery, allows "gform_post_render" js hook to be accessible even when GF not using it
+    - Added 'eventName' parameter to ajaxSpinner submit event to allow third party integrations to target this specific event
+    - Added $ajax parameter to 'gform_pre_render' hook
+    - Updated field type menu on form editor page to prevent it from overlapping the form toolbar when a notice is displayed
+    - Fixed issue with textarea and input mask script on AJAX forms
+    - Fixed issue with multi-select fields on AJAX multi-page forms
+	- Updated progress bar to start at 0%
+	- Added ability to turn on/off progress bar and set completion text when displayed with the confirmation text
+	- Added "gform_progressbar_start_at_zero" hook to set progress bar back to previous behavior
+	  Example:
+	  	add_filter("gform_progressbar_start_at_zero", "set_progressbar_start", 10, 2);
+		function set_progressbar_start($start_at_zero, $form)
+		{
+			return false;
+		}
+    - Added functionality to store a static copy of the product info when the entry is created
+    - Updated Really Simple Captcha to set a tabindex
+    - Fixed notice occuring when 'postFormat' property of form object was not present
+    - Added TinyMCE editor to notification page
+    - Fixed issue with main Gravity Forms permission that prevented the Forms menu from displaying the first time a new user logged in.
+    - Fixed issue with Simple Captcha field not validating because of an extra "input_" in the input's ID attribute
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.2
 
     - Fixed issue with uploaded files not being properly deleted on multi-site installs
