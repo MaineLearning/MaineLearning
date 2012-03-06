@@ -1,12 +1,16 @@
 
+var __gf_timeout_handle;
 
 function gf_apply_rules(formId, fields, isInit){
     var rule_applied = 0;
     for(var i=0; i < fields.length; i++){
         gf_apply_field_rule(formId, fields[i], isInit, function(){
             rule_applied++;
-            if(rule_applied == fields.length && window["gformCalculateTotalPrice"])
-                window["gformCalculateTotalPrice"](formId);
+            if(rule_applied == fields.length){
+                jQuery(document).trigger('gform_post_conditional_logic', [formId, fields, isInit]);
+                if(window["gformCalculateTotalPrice"])
+                    window["gformCalculateTotalPrice"](formId);
+            }
         });
     }
 }
@@ -38,7 +42,7 @@ function gf_get_field_action(formId, conditionalLogic){
     var matches = 0;
     for(var i = 0; i < conditionalLogic["rules"].length; i++){
         var rule = conditionalLogic["rules"][i];
-        if( (rule["operator"] == "is" && gf_is_value_selected(formId, rule["fieldId"], rule["value"])) || (rule["operator"] == "isnot" && !gf_is_value_selected(formId, rule["fieldId"], rule["value"])) )
+        if(gf_is_match(formId, rule))
             matches++;
     }
 
@@ -51,19 +55,98 @@ function gf_get_field_action(formId, conditionalLogic){
     return action;
 }
 
-function gf_is_value_selected(formId, fieldId, value){
-    var inputs = jQuery("#input_" + formId + "_" + fieldId + " input");
+function gf_is_match(formId, rule){
+
+    var inputs = jQuery("#input_" + formId + "_" + rule["fieldId"] + " input");
+
     if(inputs.length > 0){
+        //handling checkboxes
         for(var i=0; i< inputs.length; i++){
-            if(gf_get_value(jQuery(inputs[i]).val()) == value && jQuery(inputs[i]).is(":checked"))
+            var fieldValue = gf_get_value(jQuery(inputs[i]).val());
+
+            //find specific checkbox item
+            if(fieldValue != rule["value"])
+                continue;
+
+            //blank value if item isn't checked
+            if(!jQuery(inputs[i]).is(":checked"))
+                fieldValue = "";
+
+            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"]))
                 return true;
         }
     }
     else{
-        if(gf_get_value(jQuery("#input_" + formId + "_" + fieldId).val()) == value)
-            return true;
+        //handling all other fields (non-checkboxes)
+        var val = jQuery("#input_" + formId + "_" + rule["fieldId"]).val();
+
+        //transform regular value into array to support multi-select (which returns an array of selected items)
+        var values = (val instanceof Array) ? val : [val];
+
+        for(var i=0; i < values.length; i++){
+            var fieldValue = gf_get_value(values[i]);
+            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"]))
+                return true;
+        }
+    }
+    return false;
+}
+
+function gf_try_convert_float(text){
+    var format = window["gf_number_format"] == "decimal_comma" ? "decimal_comma" : "decimal_dot";
+
+    if(gformIsNumeric(text, format)){
+        var decimal_separator = format == "decimal_comma" ? "," : ".";
+        return gformCleanNumber(text, "", "", decimal_separator);
     }
 
+    return text;
+}
+
+function gf_matches_operation(val1, val2, operation){
+    val1 = val1 ? val1.toLowerCase() : "";
+    val2 = val2 ? val2.toLowerCase() : "";
+
+    switch(operation){
+        case "is" :
+            return val1 == val2;
+        break;
+
+        case "isnot" :
+            return val1 != val2;
+        break;
+
+        case ">" :
+            val1 = gf_try_convert_float(val1);
+            val2 = gf_try_convert_float(val2);
+
+            return val1 > val2;
+        break;
+
+        case "<" :
+            val1 = gf_try_convert_float(val1);
+            val2 = gf_try_convert_float(val2);
+
+            return val1 < val2;
+        break;
+
+        case "contains" :
+            return val1.indexOf(val2) >=0;
+        break;
+
+        case "starts_with" :
+            return val1.indexOf(val2) ==0;
+        break;
+
+        case "ends_with" :
+            var start = val1.length - val2.length;
+            if(start < 0)
+                return false;
+
+            var tail = val1.substring(start);
+            return val2 == tail;
+        break;
+    }
     return false;
 }
 
@@ -71,7 +154,7 @@ function gf_get_value(val){
     if(!val)
         return "";
 
-    var val = val.split("|");
+    val = val.split("|");
     return val[0];
 }
 
@@ -117,3 +200,4 @@ function gf_do_action(action, targetId, useAnimation, isInit, callback){
         }
     }
 }
+

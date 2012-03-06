@@ -2,12 +2,12 @@
 ----------------------------------------------------------------
 
 Gravity Forms Front End Form Styles
-Version 1.6.2
+Version 1.6.3.1.2
 http: //www.gravityforms.com
-updated: November 3, 2011 3:46 PM
+updated: February 18, 2012 1:41 AM
 
 Gravity Forms is a Rocketgenius project
-copyright 2011 Rocketgenius Inc.
+copyright 2012 Rocketgenius Inc.
 http: //www.rocketgenius.com
 this may not be re-distrubited without the
 express written permission of the author.
@@ -541,14 +541,8 @@ li.gfield + li.gfield.gfield_creditcard_warning {
 	border: none !important
 }
 #gforms_confirmation_message {
-	background-color: #FFFAC6;
-	border: 1px solid #E6DB55;
-	margin: 10px auto;
-	padding: 30px 10px;
-	width: 90%;
-	font-size: 1.4em;
-	color: #222;
-	text-align: center
+	margin: 30px 0;
+	max-width: 99%;
 }
 .gform_wrapper .ginput_complex .ginput_left,
 .gform_wrapper .ginput_complex .ginput_right,
@@ -565,7 +559,6 @@ li.gfield + li.gfield.gfield_creditcard_warning {
 	margin: 0 0 8px 0;
 	line-height: 1.3em
 }
-
 .gform_wrapper ul.gfield_radio li input[type="radio"]:checked+label,
 .gform_wrapper ul.gfield_checkbox li input[type="checkbox"]:checked+label {
     font-weight: bold
@@ -905,7 +898,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 
 .gform_wrapper .gform_page_footer {
 	margin: 20px 0;
-	width: 92%;
+	width: 99%;
 	border-top: 1px dotted #CCC;
 	padding: 16px 0 0 0
 }
@@ -917,7 +910,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 
 .gform_wrapper .gf_progressbar_wrapper {
 	clear: both;
-	width: 92%;
+	width: 99%;
 	margin: 0 0 8px 0;
 	padding: 0 0 16px 0;
 	border-bottom: 1px dotted #CCC
@@ -960,6 +953,10 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 	margin-right: 5px;
 	margin-left: 5px
 }
+.gform_wrapper .gf_progressbar_percentage.percentbar_0 span {
+	color: #959595;
+	text-shadow: none
+}
 .gform_wrapper .percentbar_blue {
 	background-image: url(../images/percentbar_blue.png);
 	background-repeat: repeat-x;
@@ -998,7 +995,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 /* multi-page steps ------------------------------------------------------*/
 
 .gform_wrapper .gf_page_steps {
-	width: 92%;
+	width: 99%;
 	margin: 0 0 8px 0;
 	padding: 0 0 4px 0;
 	border-bottom: 1px dotted #CCC
@@ -1071,27 +1068,39 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ul li,
 body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ul li {
 	list-style-type: disc !important;
+	margin: 0 0 0.5em;
 	overflow: visible;
 	padding-left: 0
 }
 body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ul,
 body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ul {
 	list-style-type: disc !important;
-	margin: 0 0 1.5em 1.5em;
+	margin: 1em 0 1em 1.5em;
 	padding-left: 0
 }
 body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ol li,
 body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ol li {
 	list-style-type: decimal!important;
 	overflow:visible;
-	margin: 0 0 .5em 0;
+	margin: 0 0 0.5em;
 	padding-left: 0
 }
 body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ol,
 body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ol {
 	list-style-type: decimal!important;
-	margin: 0 0 1.5em 1.5em;
+	margin: 1em 0 1.5em 2.0em;
 	padding-left: 0
+}
+body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ol li ul,
+body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ol li ul li {
+    list-style-type: disc !important;
+    padding-left: 0;
+}
+body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html ol li ul {
+	margin: 1em 0 1em 1.5em;
+}
+body .gform_wrapper form div.gform_body ul.gform_fields li.gfield.gfield_html ol li ul li {
+	margin: 0 0 0.5em;
 }
 body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html dl {
 	margin: 0 0 1.5em 0;
@@ -1831,6 +1840,50 @@ body .gform_wrapper div.gform_body ul.gform_fields li.gfield.gfield_html dl dd {
 .gform_wrapper li.gsection.gf_scroll_text .gsection_description {
 	margin: 10px;
 	font-size: 0.8em
+}
+
+/* HTML field alert style ready classes  ------------------------------------------------------*/
+
+.gform_wrapper li.gfield.gfield_html.gf_alert_green,
+.gform_wrapper li.gfield.gfield_html.gf_alert_red,
+.gform_wrapper li.gfield.gfield_html.gf_alert_yellow,
+.gform_wrapper li.gfield.gfield_html.gf_alert_gray,
+.gform_wrapper li.gfield.gfield_html.gf_alert_blue {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin: 20px 0 !important;
+	padding: 20px !important
+}
+.gform_wrapper li.gfield.gfield_html.gf_alert_green {
+	border: 1px solid #97B48A;
+	background-color: #CBECA0;
+	text-shadow: #DFB 1px 1px;
+	color: #030
+}
+.gform_wrapper li.gfield.gfield_html.gf_alert_red {
+	border: 1px solid #CFADB3;
+	background-color: #FAF2F5;
+	text-shadow: #FFF 1px 1px;
+	color: #832525
+}
+.gform_wrapper li.gfield.gfield_html.gf_alert_yellow {
+	border: 1px solid #E6DB55;
+	background-color: #FFFBCC;
+	text-shadow: #FCFAEA 1px 1px;
+	color: #222
+}
+.gform_wrapper li.gfield.gfield_html.gf_alert_gray {
+	border: 1px solid #CCC;
+	background-color: #EEE;
+	text-shadow: #FFF 1px 1px;
+	color: #424242
+}
+.gform_wrapper li.gfield.gfield_html.gf_alert_blue {
+	border: 1px solid #a7c2e7;
+	background-color: #D1E4F3;
+	text-shadow: #E0F1FF 1px 1px;
+	color: #314475
 }
 
 /* credit card icons ------------------------------------------------------*/

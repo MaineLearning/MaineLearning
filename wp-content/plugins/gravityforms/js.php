@@ -2,16 +2,6 @@
 var gforms_dragging = 0;
 var gforms_original_json;
 
-var gf_vars = {
-    "save": "<?php _e("Save", "gravityforms") ?>",
-    "update": "<?php _e("Update", "gravityforms") ?>",
-    "baseUrl": "<?php echo GFCommon::get_base_url()?>",
-    "previousLabel" : "<?php _e("Previous", "gravityforms") ?>",
-    "selectFormat" : "<?php _e("Select a format", "gravityforms") ?>",
-    "otherChoiceValue" : "<?php echo GFCommon::get_other_choice_value(); ?>",
-    "editToViewAll" : "<?php _e("5 of %d items shown. Edit field to view all", "gravityforms"); ?>"
-};
-
 function DeleteCustomChoice(){
     if(!confirm("<?php _e("Delete this custom choice list? 'OK' to delete, 'Cancel' to abort.", "gravityforms") ?>"))
         return;
@@ -93,9 +83,12 @@ function InitPaginationOptions(isInit){
 
     if(jQuery("#pagination_type_none").is(":checked")){
         jQuery(".gform_page_names input").val("");
+        jQuery("#percentage_confirmation_page_name").val("");
+        jQuery("#percentage_confirmation_display").attr("checked",false);
 
         jQuery("#page_names_setting").hide(speed);
         jQuery("#percentage_style_setting").hide(speed);
+        jQuery("#percentage_confirmation_display_setting").hide(speed);
     }
     else if(jQuery("#pagination_type_percentage").is(":checked")){
         var style = form["pagination"] && form["pagination"]["style"] ? form["pagination"]["style"] : "blue";
@@ -112,13 +105,25 @@ function InitPaginationOptions(isInit){
 
         jQuery("#page_names_setting").show(speed);
         jQuery("#percentage_style_setting").show(speed);
+        jQuery("#percentage_confirmation_display_setting").show(speed);
+        jQuery("#percentage_confirmation_page_name_setting").show(speed);
+
+        jQuery("#percentage_confirmation_display").attr("checked", form["pagination"] && form["pagination"]["display_progressbar_on_confirmation"] ? true : false);
+        //set default text to Completed when displaying progress bar on confirmation is NOT checked
+        var completion_text = form["pagination"] && form["pagination"]["display_progressbar_on_confirmation"] ? form["pagination"]["progressbar_completion_text"] : "<?php _e("Completed","gravityforms") ?>";
+        jQuery("#percentage_confirmation_page_name").val(completion_text);
     }
     else{
         jQuery("#percentage_style_setting").hide(speed);
         jQuery("#page_names_setting").show(speed);
+        jQuery("#percentage_confirmation_display_setting").hide(speed);
+        jQuery("#percentage_confirmation_page_name_setting").hide(speed);
+        jQuery("percentage_confirmation_page_name").val("");
+        jQuery("#percentage_confirmation_display").attr("checked",false);
     }
 
     TogglePercentageStyle(isInit);
+    TogglePercentageConfirmationText(isInit);
 }
 
 
@@ -352,6 +357,15 @@ function SetDefaultValues(field){
 
     var inputType = GetInputType(field);
     switch(inputType){
+
+        case "post_category" :
+            field.label = "<?php _e("Post Category", "gravityforms"); ?>";
+            field.inputs = null;
+            field.choices = new Array();
+            field.displayAllCategories = true;
+            field.inputType = 'select';
+            break;
+
         case "section" :
             field.label = "<?php _e("Section Break", "gravityforms"); ?>";
             field.inputs = null;
@@ -364,7 +378,7 @@ function SetDefaultValues(field){
             field["displayOnly"] = true;
             field["nextButton"] = new Button();
             field["nextButton"]["text"] = "<?php _e("Next", "gravityforms") ?>";
-            field["previousButton"] = new Button()
+            field["previousButton"] = new Button();
             field["previousButton"]["text"] = "<?php _e("Previous", "gravityforms") ?>";
         break;
 
@@ -409,8 +423,9 @@ function SetDefaultValues(field){
                 field.choices = new Array(new Choice("<?php _e("First Choice", "gravityforms"); ?>"), new Choice("<?php _e("Second Choice", "gravityforms"); ?>"), new Choice("<?php _e("Third Choice", "gravityforms"); ?>"));
 
             field.inputs = new Array();
-            for(var i=1; i<=field.choices.length; i++)
+            for(var i=1; i<=field.choices.length; i++) {
                 field.inputs.push(new Input(field.id + (i/10), field.choices[i-1].text));
+            }
 
             break;
         case "radio" :
@@ -530,12 +545,6 @@ function SetDefaultValues(field){
             if(!field.inputType)
                 field.inputType = "text";
             field.label = "<?php _e("Post Custom Field", "gravityforms"); ?>";
-            break;
-        case "post_category" :
-            field.label = "<?php _e("Post Category", "gravityforms"); ?>";
-            field.inputs = null;
-            field.choices = new Array();
-            field.displayAllCategories = true;
             break;
         case "post_image" :
             field.label = "<?php _e("Post Image", "gravityforms"); ?>";
@@ -809,9 +818,14 @@ function CreateConditionalLogic(objectType, obj){
     for(var i=0; i<obj.conditionalLogic.rules.length; i++){
         var isSelected = obj.conditionalLogic.rules[i].operator == "is" ? "selected='selected'" :"";
         var isNotSelected = obj.conditionalLogic.rules[i].operator == "isnot" ? "selected='selected'" :"";
+        var greaterThanSelected = obj.conditionalLogic.rules[i].operator == ">" ? "selected='selected'" :"";
+        var lessThanSelected = obj.conditionalLogic.rules[i].operator == "<" ? "selected='selected'" :"";
+        var containsSelected = obj.conditionalLogic.rules[i].operator == "contains" ? "selected='selected'" :"";
+        var startsWithSelected = obj.conditionalLogic.rules[i].operator == "starts_with" ? "selected='selected'" :"";
+        var endsWithSelected = obj.conditionalLogic.rules[i].operator == "ends_with" ? "selected='selected'" :"";
 
         str += "<div style='width:100%'>" + GetRuleFields(objectType, i, obj.conditionalLogic.rules[i].fieldId);
-        str += "<select id='" + objectType + "_rule_operator_" + i + "' onchange='SetRuleProperty(\"" + objectType + "\", " + i + ", \"operator\", jQuery(this).val());'><option value='is' " + isSelected + "><?php _e("is", "gravityforms") ?></option><option value='isnot' " + isNotSelected + "><?php _e("is not", "gravityforms") ?></option></select>";
+        str += "<select id='" + objectType + "_rule_operator_" + i + "' onchange='SetRuleProperty(\"" + objectType + "\", " + i + ", \"operator\", jQuery(this).val());'><option value='is' " + isSelected + "><?php _e("is", "gravityforms") ?></option><option value='isnot' " + isNotSelected + "><?php _e("is not", "gravityforms") ?></option><option value='>' " + greaterThanSelected + "><?php _e("greater than", "gravityforms") ?></option><option value='<' " + lessThanSelected + "><?php _e("less than", "gravityforms") ?></option><option value='contains' " + containsSelected + "><?php _e("contains", "gravityforms") ?></option><option value='starts_with' " + startsWithSelected + "><?php _e("starts with", "gravityforms") ?></option><option value='ends_with' " + endsWithSelected + "><?php _e("ends with", "gravityforms") ?></option></select>";
         str += GetRuleValues(objectType, i, obj.conditionalLogic.rules[i].fieldId, obj.conditionalLogic.rules[i].value);
         str += "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='add another rule' alt='add another rule' style='cursor:pointer; margin:0 3px;' onclick=\"InsertRule('" + objectType + "', " + (i+1) + ");\" />";
         if(obj.conditionalLogic.rules.length > 1 )
@@ -821,6 +835,9 @@ function CreateConditionalLogic(objectType, obj){
     }
 
     jQuery("#" + objectType + "_conditional_logic_container").html(str);
+
+    //initializing placeholder script
+    jQuery.Placeholder.init();
 }
 
 function GetFieldChoices(field){

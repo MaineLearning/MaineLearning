@@ -35,7 +35,7 @@ if(is_admin()){
             global $view_settings_table_row;
             $td = wpv_get_table_row_ui_post_status($view_settings_table_row, $view_settings['post_status']);
         
-            echo '<tr class="wpv_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '">' . $td . '</tr>';
+            echo '<tr class="wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"' . wpv_filter_type_hide_element($view_settings, 'posts') . '>' . $td . '</tr>';
             
             $view_settings_table_row++;
         }
@@ -53,9 +53,9 @@ if(is_admin()){
         if (isset($_POST['checkboxes'])) {
             // From ajax.
             $selected = $_POST['checkboxes'];
-        } else {
-            $selected = array();
-        }
+        } elseif (!is_array($selected)) {
+			$selected = array();
+		}
 		
 		
         $checkboxes = wpv_render_checkboxes(array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash', 'any'),

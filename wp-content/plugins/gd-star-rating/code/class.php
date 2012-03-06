@@ -10,12 +10,12 @@ class GDStarRating {
     var $is_cached = false;
     var $is_update = false;
 
-    var $security_level = 9;
-    var $security_level_front = 1;
-    var $security_level_builder = 1;
-    var $security_level_setup = 9;
+    var $security_level = 'edit_dashboard';
+    var $security_level_front = 'delete_posts';
+    var $security_level_builder = 'delete_posts';
+    var $security_level_setup = 'edit_dashboard';
     var $security_my_ratings = false;
-    var $security_my_ratings_level = 0;
+    var $security_my_ratings_level = 'read';
     var $security_users = '0';
 
     var $is_cached_integration_std = false;
@@ -28,7 +28,6 @@ class GDStarRating {
     var $cats_data_posts = array();
     var $cats_data_cats = array();
 
-    var $wp_access_level = 0;
     var $wp_secure_level = false;
     var $wpr8_available = false;
     var $admin_plugin = false;
@@ -182,9 +181,9 @@ class GDStarRating {
         if (defined('STARRATING_ACCESS_LEVEL_FRONT')) $this->security_level_front = STARRATING_ACCESS_LEVEL_FRONT;
         if (defined('STARRATING_ACCESS_LEVEL_BUILDER')) $this->security_level_builder = STARRATING_ACCESS_LEVEL_BUILDER;
         if (defined('STARRATING_ACCESS_LEVEL_SETUP')) $this->security_level_setup = STARRATING_ACCESS_LEVEL_SETUP;
-        if (defined('STARRATING_ACCESS_ADMIN_USERIDS')) $this->security_users = STARRATING_ACCESS_ADMIN_USERIDS;
         if (defined('STARRATING_ACCESS_MY_RATINGS')) $this->security_my_ratings = STARRATING_ACCESS_MY_RATINGS;
         if (defined('STARRATING_ACCESS_MY_RATINGS_LEVEL')) $this->security_my_ratings_level = STARRATING_ACCESS_MY_RATINGS_LEVEL;
+        if (defined('STARRATING_ACCESS_ADMIN_USERIDS')) $this->security_users = STARRATING_ACCESS_ADMIN_USERIDS;
     }
 
     /**
@@ -638,15 +637,17 @@ class GDStarRating {
      */
     function check_user_access() {
         global $userdata;
-        $this->wp_access_level = isset($userdata->user_level) ? $userdata->user_level : 0;
 
         if ($this->security_users == "0") {
-            $this->wp_secure_level = $this->wp_access_level > 8;
+            $this->wp_secure_level = current_user_can('edit_dashboard');
         } else {
             $allowed = explode(",", $this->security_users);
+
             if (is_array($allowed)) {
                 $this->wp_secure_level = in_array($userdata->ID, $allowed);
-            } else $this->wp_secure_level = false;
+            } else {
+                $this->wp_secure_level = false;
+            }
         }
     }
 
@@ -687,30 +688,39 @@ class GDStarRating {
 
         add_menu_page('GD Star Rating', 'GD Star Rating', $this->security_level_front, $this->plugin_base, array(&$this->m, "star_menu_front"), plugins_url('gd-star-rating/gfx/menu.png'));
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Front Page", "gd-star-rating"), __("Front Page", "gd-star-rating"), $this->security_level_front, $this->plugin_base, array(&$this->m, "star_menu_front"));
+        add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("GDSR 2.0", "gd-star-rating"), __("GDSR 2.0", "gd-star-rating"), $this->security_level, "gd-star-rating-gdsr2", array(&$this->m, "star_menu_gdsr2"));
+
         if ($this->security_my_ratings) {
             add_submenu_page('index.php', 'GD Star Rating: '.__("My Ratings", "gd-star-rating"), __("My Ratings", "gd-star-rating"), $this->security_my_ratings_level, "gd-star-rating-my", array(&$this->m, "star_menu_my"));
         } else {
             add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("My Ratings", "gd-star-rating"), __("My Ratings", "gd-star-rating"), $this->security_level_front, "gd-star-rating-my", array(&$this->m, "star_menu_my"));
         }
+
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Builder", "gd-star-rating"), __("Builder", "gd-star-rating"), $this->security_level_builder, "gd-star-rating-builder", array(&$this->m, "star_menu_builder"));
 
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Articles", "gd-star-rating"), __("Articles", "gd-star-rating"), $this->security_level, "gd-star-rating-stats", array(&$this->m, "star_menu_stats"));
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Categories", "gd-star-rating"), __("Categories", "gd-star-rating"), $this->security_level, "gd-star-rating-cats", array(&$this->m, "star_menu_cats"));
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("All Users", "gd-star-rating"), __("All Users", "gd-star-rating"), $this->security_level, "gd-star-rating-users", array(&$this->m, "star_menu_users"));
 
-        if ($this->o["multis_active"] == 1)
+        if ($this->o["multis_active"] == 1) {
             add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Multi Sets", "gd-star-rating"), __("Multi Sets", "gd-star-rating"), $this->security_level, "gd-star-rating-multi-sets", array(&$this->m, "star_multi_sets"));
+        }
 
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Settings", "gd-star-rating"), __("Settings", "gd-star-rating"), $this->security_level, "gd-star-rating-settings", array(&$this->m, "star_menu_settings"));
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Graphics", "gd-star-rating"), __("Graphics", "gd-star-rating"), $this->security_level, "gd-star-rating-gfx-page", array(&$this->m, "star_menu_gfx"));
         add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("T2 Templates", "gd-star-rating"), __("T2 Templates", "gd-star-rating"), $this->security_level, "gd-star-rating-t2", array(&$this->m, "star_menu_t2"));
 
-        if ($this->o["admin_ips"] == 1)
+        if ($this->o["admin_ips"] == 1) {
             add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("IP's", "gd-star-rating"), __("IP's", "gd-star-rating"), $this->security_level, "gd-star-rating-ips", array(&$this->m, "star_menu_ips"));
-        if ($this->o["admin_import"] == 1)
+        }
+
+        if ($this->o["admin_import"] == 1) {
             add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Import", "gd-star-rating"), __("Import", "gd-star-rating"), $this->security_level, "gd-star-rating-import", array(&$this->m, "star_menu_import"));
-        if ($this->o["admin_export"] == 1)
+        }
+
+        if ($this->o["admin_export"] == 1) {
             add_submenu_page($this->plugin_base, 'GD Star Rating: '.__("Export", "gd-star-rating"), __("Export", "gd-star-rating"), $this->security_level, "gd-star-rating-export", array(&$this->m, "star_menu_export"));
+        }
 
         $this->custom_actions('admin_menu');
 

@@ -62,21 +62,17 @@ class WPV_template{
 	
     function post_edit_template_options(){
 
-        if (current_user_can('manage_options')) {
-            
-            global $post;
+		global $post;
 
-            $post_object = get_post_type_object($post->post_type);
+		$post_object = get_post_type_object($post->post_type);
 
-            if ($post_object->publicly_queryable || $post_object->public) {
-				// Add meta box so that a view template can be set for a post
-                add_meta_box('views_template', __('Content Template', 'wpv-views'), array($this,'meta_box'), $post->post_type, 'side', 'high');
-            } else if ($post_object->name == 'view-template') {
-				// add a meta box for the views template settings
-				$this->add_view_template_settings();
-            }
-        }
-        
+		if ($post_object->publicly_queryable || $post_object->public) {
+			// Add meta box so that a view template can be set for a post
+			add_meta_box('views_template', __('Content Template', 'wpv-views'), array($this,'meta_box'), $post->post_type, 'side', 'high');
+		} else if ($post_object->name == 'view-template') {
+			// add a meta box for the views template settings
+			$this->add_view_template_settings();
+		}
     }
 
 	function add_view_template_settings() {
@@ -102,7 +98,7 @@ class WPV_template{
             
         global $wpdb, $WP_Views;
         
-        $view_tempates_available = $wpdb->get_results("SELECT ID, post_name FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
+        $view_tempates_available = $wpdb->get_results("SELECT ID, post_name, post_title FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
         if (isset($_GET['post'])) {
             $template_selected = get_post_meta($_GET['post'], '_views_template', true);
         } else {
@@ -152,7 +148,7 @@ class WPV_template{
         // Add a "None" type to the list.
         $none = new stdClass();
         $none->ID = '0';
-        $none->post_name = __('None', 'wpv-views');
+        $none->post_title = __('None', 'wpv-views');
         array_unshift($view_tempates_available, $none);
         
         foreach($view_tempates_available as $template) {
@@ -161,7 +157,11 @@ class WPV_template{
             else
                 $selected = '';
             
-            $view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_name . '</option>';
+			if ($template->post_title != '') {
+				$view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_title . '</option>';
+			} else {
+				$view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_name . '</option>';
+			}
         }
         $view_template .= '</select>';
         
@@ -195,6 +195,9 @@ class WPV_template{
 		if (!isset($templates[$template_name])) {
 			$templates[$template_name] = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_type='view-template' AND post_name='{$template_name}'");
 		}
+		if (!isset($templates[$template_name])) {
+			$templates[$template_name] = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_type='view-template' AND post_title='{$template_name}'");
+		}
 		
 		return $templates[$template_name]; 
 	}
@@ -223,7 +226,7 @@ class WPV_template{
 	 */
 	
     function the_content($content) {
-        global $id, $post, $wpdb, $WP_Views, $wp_query;
+        global $id, $post, $wpdb, $WP_Views, $wp_query, $wplogger;
 	
         $db = debug_backtrace();
 		
@@ -246,6 +249,7 @@ class WPV_template{
 		
 		static $view_options = null;
 		static $taxonomy_loop = null;
+		static $archive_loop = null;
 		if (!$view_options) {
 			$view_options = $WP_Views->get_options();
 						
@@ -258,6 +262,8 @@ class WPV_template{
 					$term = $wp_query->get_queried_object();
 					$taxonomy_loop = 'views_template_loop_' . $term->taxonomy;
 	
+				} else if (is_post_type_archive($post->post_type)) {
+					$archive_loop = 'views_template_archive_for_' . $post->post_type;
 				}
 			}
 		}
@@ -272,6 +278,11 @@ class WPV_template{
 			if ($taxonomy_loop && isset($view_options[$taxonomy_loop])) {
 				if (!isset($post->view_template_override_loop_setting)) {
 					$template_selected = $view_options[$taxonomy_loop];
+					$post->view_template_override_loop_setting = true;
+				}
+			} else if ($archive_loop && isset($view_options[$archive_loop])) {
+				if (!isset($post->view_template_override_loop_setting)) {
+					$template_selected = $view_options[$archive_loop];
 					$post->view_template_override_loop_setting = true;
 				}
 			} else {
@@ -292,17 +303,14 @@ class WPV_template{
 				$template_selected = icl_object_id($template_selected, 'view-template', true);
 			}
 
+			$wplogger->log('Using view template: ' . $template_selected . ' on post: ' . $post->ID);
+
             $content = $this->get_template_content($template_selected);
 			
 			$output_mode = get_post_meta($template_selected, '_wpv_view_template_mode', true);
 			if ($output_mode == 'raw_mode') {
 
-				remove_filter('the_content', 'wpautop');
-				remove_filter('the_content', 'shortcode_unautop');
-		        remove_filter('the_excerpt', 'wpautop');
-				remove_filter('the_excerpt', 'shortcode_unautop');
-				
-				$this->wpautop_removed = true;
+				$this->remove_wpautop();
 			}
         }
 
@@ -310,6 +318,19 @@ class WPV_template{
 		return $content;
     
     }
+	
+	function is_wpautop_removed() {
+		return $this->wpautop_removed;
+	}
+	
+	function remove_wpautop() {
+		remove_filter('the_content', 'wpautop');
+		remove_filter('the_content', 'shortcode_unautop');
+		remove_filter('the_excerpt', 'wpautop');
+		remove_filter('the_excerpt', 'shortcode_unautop');
+		
+		$this->wpautop_removed = true;
+	}
 	
 	function restore_wpautop($content) {
 		if ($this->wpautop_removed) {
@@ -377,9 +398,11 @@ class WPV_template{
 				if (!$lang) {
 					$lang = $sitepress->get_current_language();
 				}
-				$join = " JOIN {$wpdb->prefix}icl_translations t ON {$wpdb->posts}.ID = t.element_id
-							AND t.element_type = 'post_{$type}' JOIN {$wpdb->prefix}icl_languages l ON t.language_code=l.code AND l.active=1";
-				$cond = " AND t.language_code='{$wpdb->escape($lang)}'";
+				if ($lang) {
+					$join = " JOIN {$wpdb->prefix}icl_translations t ON {$wpdb->posts}.ID = t.element_id
+								AND t.element_type = 'post_{$type}' JOIN {$wpdb->prefix}icl_languages l ON t.language_code=l.code AND l.active=1";
+					$cond = " AND t.language_code='{$wpdb->escape($lang)}'";
+				}
 			}
 		}
 
@@ -394,7 +417,7 @@ class WPV_template{
 	function get_view_template_select_box($row, $template_selected) {
 		global $wpdb;
 		
-        $view_tempates_available = $wpdb->get_results("SELECT ID, post_name FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
+        $view_tempates_available = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
 
         $view_template = '';
         //$view_template .= '<p><strong>' . __('Views template', 'wpv-views') . '</strong></p>';
@@ -407,7 +430,7 @@ class WPV_template{
         // Add a "None" type to the list.
         $none = new stdClass();
         $none->ID = '0';
-        $none->post_name = __('None', 'wpv-views');
+        $none->post_title = __('None', 'wpv-views');
         array_unshift($view_tempates_available, $none);
         
         foreach($view_tempates_available as $template) {
@@ -416,7 +439,11 @@ class WPV_template{
             else
                 $selected = '';
             
-            $view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_name . '</option>';
+			if ($template->post_title) {
+				$view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_title . '</option>';
+			} else {
+				$view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_name . '</option>';
+			}
         }
         $view_template .= '</select>';
         

@@ -256,6 +256,10 @@ class gdsrMenus {
         $gdst_multis = GDSRDBMulti::get_multis_tinymce();
         include(STARRATING_PATH.'options/builder.php');
     }
+
+    function star_menu_gdsr2() {
+        include(STARRATING_PATH.'options/gdsr2.php');
+    }
 }
 
 ?>

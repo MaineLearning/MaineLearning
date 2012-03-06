@@ -7,6 +7,8 @@
 
 add_filter('wpv_filter_query', 'wpv_filter_post_category', 10, 2);
 function wpv_filter_post_category($query, $view_settings) {
+
+	global $WP_Views;
 	
 	if (!isset($view_settings['taxonomy_relationship'])) {
 		$view_settings['taxonomy_relationship'] = 'OR';
@@ -26,13 +28,47 @@ function wpv_filter_post_category($query, $view_settings) {
 			
 			if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM PAGE") {
 				// we need to get the terms from the current page.
-				global $WP_Views;
 				$current_page = $WP_Views->get_current_page();
 				if ($current_page) {
 					$terms = wp_get_post_terms($current_page->ID, $category->name, array("fields" => "ids"));
 					$query['tax_query'][] = array('taxonomy' => $category->name,
 											  'field' => 'id',
 											  'terms' => $terms,
+											  'operator' => "IN");
+				}
+			} else if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM ATTRIBUTE") {
+				$attribute = $view_settings['taxonomy-' . $category->name . '-attribute-url'];
+				$view_attrs = $WP_Views->get_view_shortcodes_attributes();
+				if (isset($view_attrs[$attribute])) {
+					$term = $view_attrs[$attribute];
+					$term = get_term_by('name', $term, $category->name);
+					
+					if ($term) {
+						$query['tax_query'][] = array('taxonomy' => $category->name,
+												  'field' => 'id',
+												  'terms' => array($term->term_id),
+												  'operator' => "IN");
+					}
+				}
+			} else if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM URL") {
+				$url_parameter = $view_settings['taxonomy-' . $category->name . '-attribute-url'];
+				if (isset($_GET[$url_parameter])) {
+					$term = $_GET[$url_parameter];
+					$term = get_term_by('name', $term, $category->name);
+					
+					if ($term) {
+						$query['tax_query'][] = array('taxonomy' => $category->name,
+												  'field' => 'id',
+												  'terms' => array($term->term_id),
+												  'operator' => "IN");
+					}
+				}
+			} else if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM PARENT VIEW") {
+	            $parent_term_id = $WP_Views->get_parent_view_taxonomy();
+				if ($parent_term_id) {
+					$query['tax_query'][] = array('taxonomy' => $category->name,
+											  'field' => 'id',
+											  'terms' => array($parent_term_id),
 											  'operator' => "IN");
 				}
 			} else if (isset($view_settings[$save_name])) {

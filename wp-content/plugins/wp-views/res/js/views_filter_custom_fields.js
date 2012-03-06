@@ -19,7 +19,7 @@ function wpv_show_filter_custom_field_edit() {
 
 function wpv_show_filter_custom_field_edit_ok() {
     wpv_add_edit_custom_field('', '', 'edit');
-    jQuery('input[name="Add another filter term"]').show();
+    jQuery('.wpv_add_filters_button').show();
 }
 
 function wpv_show_filter_custom_field_edit_cancel() {
@@ -29,7 +29,7 @@ function wpv_show_filter_custom_field_edit_cancel() {
         jQuery('#' + index).attr('class', 'wpv_custom_field_edit_row');
     }
     
-    jQuery('input[name="Add another filter term"]').show();
+    jQuery('.wpv_add_filters_button').show();
     jQuery('.wpv_custom_field_show_row').show();
     jQuery('.wpv_custom_field_edit_row').hide();
 }

@@ -1,0 +1,216 @@
+body {
+	background-color: #FFFFFF;
+	font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size: 12px;
+	color: #464646;
+	padding: 30px;
+	text-align: center;
+}
+a {
+	color: #21759B;
+	text-decoration: none;
+}
+a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+.widefat {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border-spacing: 0;
+    border-style: solid;
+    border-width: 1px;
+    clear: both;
+    margin: 0;
+    width: 100%;
+	background-color: #FFFFFF;
+    border-color: #DFDFDF;
+}
+.widefat td, .widefat th {
+	font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	border-bottom-style: solid;
+    border-bottom-width: 1px;
+    font-size: 11px;
+	border-color: #DFDFDF;
+}
+.widefat th {
+	background: url("../../importbuddy.php?ezimg=gray-grad.png") repeat-x scroll left top #DFDFDF;
+	color: #333333;
+	font-size: 11px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	line-height: 1.3em;
+    padding: 7px 7px 8px;
+    text-align: left;
+}
+.widefat td {
+	padding: 3px 7px;
+    vertical-align: top;
+}
+h1 {
+	color: #464646;
+	font-size: 24px;
+	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-style: italic;
+	margin-top: 0px;
+}
+h2 {
+	color: #464646;
+	font-size: 20px;
+	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-style: italic;
+	margin-top: -10px;
+}
+.wrap {
+	margin-top: 10px;
+	min-height: 200px;
+	position: relative;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+img {
+	vertical-align: -2px;
+}
+.menu {
+	padding: 8px;
+	text-align: center;
+	background-color: #CCCCCC;
+	font-weight: bold;
+}
+input[type="text"], textarea {
+	margin: 3px;
+	padding: 3px;
+	-moz-border-radius:4px 4px 4px 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #DFDFDF;
+}
+textarea {
+	font-family: sans-serif;
+	font-size: 13px;
+	line-height: 1.4em;
+	color: #464646;
+}
+.button {
+	/*
+	position: absolute;
+	left: 37%;
+	*/
+	margin-left: auto;
+	margin-right: auto;
+	bottom: 15px;
+	
+	background:url("../../importbuddy.php?ezimg=button-grad.png") repeat-x scroll left top #21759B;
+	border-color:#298CBA;
+	color:#FFFFFF;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.3);
+	-moz-border-radius:11px 11px 11px 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	-moz-box-sizing:content-box;
+	border-style:solid;
+	border-width:1px;
+	cursor:pointer;
+	font-size:11px !important;
+	line-height:14px;
+	padding:2px 8px;
+	text-decoration:none;
+	font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size:13px;
+}
+.button:hover {
+	border-color: #13455B;
+}
+.button-secondary {
+	background:url("../../importbuddy.php?ezimg=white-grad.png") repeat-x scroll left top #21759B;
+	border-color:#BBBBBB;
+	color:#464646;
+	-moz-border-radius:11px 11px 11px 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	-moz-box-sizing:content-box;
+	border-style:solid;
+	border-width:1px;
+	cursor:pointer;
+	font-size:11px !important;
+	line-height:14px;
+	padding:2px 8px;
+	text-decoration:none;
+	font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size:13px;
+}
+.button-secondary:hover {
+	border-color: #13455B;
+}
+.alert {
+	background-color:#FFFFE0;
+	border: 1px solid #E6DB55;
+	padding: 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	min-height: 55px;
+}
+label {
+	float: left;
+	width: 150px;
+	margin-top: 7px;
+}
+.toggle {
+	cursor: pointer;
+}
+.toggled {
+	display: none;
+	border: 1px solid #CCCCCC;
+	margin: 4px;
+	padding: 8px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	max-width: 300px;
+	opacity: 0.85;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+.light {
+	color: #AFAFAF;
+}
+#pb_importbuddy_working {
+	text-align: center;
+	padding-top: 20px;
+}
+
+/* Tabs
+----------------------------------*/
+.ui-tabs { border-top: 1px solid #DFDFDF; margin-top: 20px; } /* padding: .2em; zoom: 1; */
+.ui-tabs .ui-tabs-nav { z-index: 15; list-style: none; position: relative; padding: 0px 0px 0px; margin-top: -15px; margin-left: 10px; }
+.ui-tabs .ui-tabs-nav li { margin: -11px 3px -1px 0px; position: relative; float: left; padding: 0; text-align: center; }
+.ui-tabs .ui-tabs-nav li a { background-color: #EDEDED; height: 19px; float: left; text-decoration: none; padding-left: 10px; padding-right: 10px; -moz-border-radius: 10px 10px 0px 0px; -webkit-border-radius: 10px 10px 0px 0px; border: 1px solid #DFDFDF; outline: none; padding-top: 5px; }
+.ui-tabs .ui-tabs-nav li a:hover { background-color: #DFDFDF; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {  } /* padding-bottom: 0px; */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { height: 20px; cursor: text; background-color: #FFFFFF; font-weight: bold; border-bottom: 0px; color: #333333; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { padding-top: 3px; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
+.tabs-item {
+	padding: 16px;
+	padding-top: 28px;
+	padding-bottom: 28px;
+	background: #FFFFFF;
+}

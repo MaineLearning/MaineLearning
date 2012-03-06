@@ -53,8 +53,12 @@ if ($vote_type == "cache") {
             break;
         case 'm':
             $vote_set = intval($_GET["vote_set"]);
-            if ($vote_set > 0) $result = $gdsr->v->vote_multis($vote_value, $vote_id, $vote_set, $vote_tpl, $vote_size);
-            else $result = "m_set_error";
+
+            if ($vote_set > 0) {
+                $result = $gdsr->v->vote_multis($vote_value, $vote_id, $vote_set, $vote_tpl, $vote_size);
+            } else {
+                $result = "m_set_error";
+            }
             break;
     }
 }

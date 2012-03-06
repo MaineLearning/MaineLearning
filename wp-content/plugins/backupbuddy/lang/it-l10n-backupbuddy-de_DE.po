@@ -1,0 +1,2653 @@
+# Copyright (C) 2010 BackupBuddy BETA
+# This file is distributed under the same license as the BackupBuddy BETA package.
+msgid ""
+msgstr ""
+"Project-Id-Version: BackupBuddy BETA 2.2.0b\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/backupbuddy\n"
+"POT-Creation-Date: 2011-06-29 20:14:55+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-07-01 15:40-0600\n"
+"Last-Translator: Jesse Clark <jesseclark@iThemes.com>\n"
+"Language-Team: Language <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Project-Id-Version: BackupBuddy BETA 2.2.0b\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/backupbuddy\n"
+"POT-Creation-Date: 2011-06-23 14:59:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-06-27 12:17+0100\n"
+"Last-Translator: Thomas Heinrichsdobler <dertyp@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: backupbuddy.php:213
+msgid "Error Code"
+msgstr "Fehler-Code"
+
+#: backupbuddy.php:213
+msgid "Click for more details."
+msgstr "Klicken für mehr Details."
+
+#: backupbuddy.php:269
+msgid "Video Tutorial"
+msgstr "Video-Tutorial"
+
+#: backupbuddy.php:269
+msgid "video"
+msgstr "Video"
+
+#: backupbuddy.php:458
+msgid "You currently have %s stored backups."
+msgstr "Es sind %s gespeicherte Backups vorhanden."
+
+#: backupbuddy.php:460
+msgid "You have not created any backups."
+msgstr "Es sind noch keine Backups vorhanden."
+
+#: backupbuddy.php:462
+msgid " Your most recent backup was %s ago."
+msgstr "Das neueste Backup war vor %s."
+
+#: backupbuddy.php:464
+msgid "There have been %s post/page modifications since your last backup."
+msgstr "Seit dem letzten Backup wurden %s Artikel/Seiten geändert."
+
+#: backupbuddy.php:465
+msgid "Go create a backup!"
+msgstr "Erstellen Sie ein Backup!"
+
+#: backupbuddy.php:476
+#: classes/view_backup-run_backup-home.php:107
+msgid "Full Backup"
+msgstr "Vollständiges Backup"
+
+#: backupbuddy.php:476
+msgid "Database Backup"
+msgstr "Datenbank-Backup"
+
+#: backupbuddy.php:526
+msgid "WordPress Updates"
+msgstr "WordPress-Updates"
+
+#: backupbuddy.php:526
+msgid "Remember to back up your site with BackupBuddy before upgrading!"
+msgstr "Vergessen Sie nicht, vor dem Upgrade ein Backup mit BackupBuddy zu erstellen!"
+
+#: backupbuddy.php:548
+msgid "Temporary ZIP file size"
+msgstr "Dateigröße der temporären ZIP-Datei"
+
+#: backupbuddy.php:557
+msgid "Final ZIP file size"
+msgstr "Dateigröße der fertigen ZIP-Datei"
+
+#: backupbuddy.php:632
+msgid "Error #4564658344443: Backup failure"
+msgstr "Fehler Nr. 4564658344443: Backup fehlgeschlagen"
+
+#: backupbuddy.php:689
+msgid "Successfully written to"
+msgstr "Erfolgreich erstellt in"
+
+#: backupbuddy.php:691
+msgid "There was a problem"
+msgstr "Es ist ein Fehler aufgetreten"
+
+#: backupbuddy.php:759
+msgid "MD5 Checksum Hash"
+msgstr "Hash der MD5-Prüfsumme"
+
+#: backupbuddy.php:760
+msgid "This is a string of characters that uniquely represents this file.  If this file is in any way manipulated then this string of characters will change.  This allows you to later verify that the file is intact and uncorrupted.  For instance you may verify the file after uploading it to a new location by making sure the MD5 checksum matches."
+msgstr "Diese Zeichenkette identifiziert die Datei eindeutig. Falls die Datei auf irgend eine Art und Weise verändert würde, würde sich diese Zeichenkette auch ändern. Dadurch lässt sich später überprüfen, ob die Datei intakt oder beschädigt ist. So kann z.B. später beim Umzug auf einen neuen Server überprüft werden, ob die MD5-Prüfsummen beider Dateien auf Ursprungs- und Zielserver übereinstimmen."
+
+#: backupbuddy.php:761
+#: classes/view_backup-listing.php:283
+msgid "MD5 Checksum"
+msgstr "MD5-Prüfsumme"
+
+#: backupbuddy.php:816
+#: backupbuddy.php:822
+#: backupbuddy.php:833
+msgid "Test completed successfully."
+msgstr "Test verlief erfolgreich."
+
+#: backupbuddy.php:818
+#: backupbuddy.php:824
+#: backupbuddy.php:835
+msgid "Failure"
+msgstr "Fehler"
+
+#: backupbuddy.php:838
+msgid "Error #4343489. There is not an automated test available for this service at this time."
+msgstr "Fehler Nr. 4343489. Dieser Dienst kann im Moment noch nicht automatisch getestet werden."
+
+#: backupbuddy.php:1063
+msgid "Dropbox remote limit could not delete %s backups."
+msgstr "In der Dropbox konnten %s Backups nicht gelöscht werden."
+
+#: backupbuddy.php:1121
+msgid "Amazon S3 remote limit could not delete %s backups."
+msgstr "Auf Amazon S3 konnten %s Backups nicht gelöscht werden."
+
+#: backupbuddy.php:1129
+msgid "ERROR #9002! Failed sending file to Amazon S3."
+msgstr "FEHLER Nr. 9002! Datei konnte nicht nach Amazon S3 gesendet werden."
+
+#: backupbuddy.php:1180
+msgid "Rackspace remote limit could not delete %s backups."
+msgstr "Auf Rackspace konnten %s Backups nicht gelöscht werden."
+
+#: backupbuddy.php:1188
+msgid "ERROR #9002-rs! Failed sending file to Rackspace."
+msgstr "FEHLER Nr. 9002-rs! Datei konnte nicht nach Rackspace gesendet werden."
+
+#: backupbuddy.php:1279
+msgid "FTP remote limit could not delete %s backups."
+msgstr "Auf FTP konnten %s Backups nicht gelöscht werden."
+
+#: backupbuddy.php:1302
+#: backupbuddy.php:1334
+msgid "Missing one or more required fields."
+msgstr "Ein oder mehrere erforderliche Felder sind nicht ausgefüllt."
+
+#: backupbuddy.php:1319
+msgid "Upload test for BackupBuddy for Amazon S3"
+msgstr "Upload-Test für BackupBuddy für Amazon S3"
+
+#: backupbuddy.php:1322
+msgid "Unable to upload. Verify your keys, bucket name, and account permissions."
+msgstr "Upload fehlgeschlagen. Überprüfen Sie Schlüssel, Bucket-Namen und die Zugriffsberechtigungen."
+
+#: backupbuddy.php:1326
+msgid "Partial success. Could not delete temp file."
+msgstr "Teilerfolg: Konnte temporäre Datei nicht löschen."
+
+#: backupbuddy.php:1339
+msgid "Unable to authenticate. Verify your username/api key."
+msgstr "Authentifizierung fehlgeschlagen. Überprüfen Sie Benutzername/API-Schlüssel."
+
+#: backupbuddy.php:1346
+msgid "Invalid container. You must create it first."
+msgstr "Ungültiger Container. Er muss zuvor erstellt werden."
+
+#: backupbuddy.php:1351
+msgid "BackupBuddy was not able to write the test file."
+msgstr "BackupBuddy konnte die Test-Datei nicht schreiben."
+
+#: backupbuddy.php:1356
+msgid "Unable to delete file from container."
+msgstr "Konnte Datei nicht aus dem Container löschen."
+
+#: backupbuddy.php:1364
+msgid "Missing required input."
+msgstr "Erforderliche Angaben fehlen."
+
+#: backupbuddy.php:1378
+msgid "Unable to connect to FTP (check address)."
+msgstr "Konnte nicht zum FTP-Server verbinden. Prüfen Sie die Adresse."
+
+#: backupbuddy.php:1384
+msgid "Destination server does not support FTPS?"
+msgstr "Ziel-Server unterstützt kein FTPS?"
+
+#: backupbuddy.php:1387
+msgid "Your web server doesnt support FTPS."
+msgstr "Ihr Web-Server unterstützt kein FTPS."
+
+#: backupbuddy.php:1394
+msgid "Unable to login. Bad user/pass."
+msgstr "Login fehlgeschlagen. Ungültige Benutzername/Passwort-Kombination."
+
+#: backupbuddy.php:1403
+msgid "Failure uploading. Check path & permissions."
+msgstr "Upload fehlgeschlagen. Überprüfen Sie Pfad und Berechtigungen."
+
+#: backupbuddy.php:1468
+msgid "Visit PluginBuddy.com"
+msgstr "PluginBuddy.com besuchen"
+
+#: backupbuddy.php:1528
+msgid "ERROR: %1$s requires WordPress version %2$s or higher. You may experience unexpected behavior or complete failure in this environment. Please consider upgrading WordPress."
+msgstr "FEHLER: %1$s erfordert WordPress Version %2$s oder höher.  In der aktuellen Umgebung kann es zu unverhersehbarem Verhalten und kompletten Ausfällen kommen. Bitte aktualisieren Sie Ihre WordPress-Version."
+
+#: backupbuddy.php:1537
+msgid "ERROR: %1$s requires PHP version %2$s or higher. You may experience unexpected behavior or complete failure in this environment. Please consider upgrading PHP."
+msgstr "FEHLER: %1$s erfordert PHP Version %2$s oder höher. In der aktuellen Umgebung kann es zu unverhersehbarem Verhalten und kompletten Ausfällen kommen. Bitte aktualisieren Sie Ihre PHP-Version."
+
+#: backupbuddy.php:1622
+msgid "second"
+msgstr "Sekunde"
+
+#: backupbuddy.php:1623
+msgid "minute"
+msgstr "Minute"
+
+#: backupbuddy.php:1624
+msgid "hour"
+msgstr "Stunde"
+
+#: backupbuddy.php:1625
+msgid "day"
+msgstr "Tag"
+
+#: backupbuddy.php:1626
+msgid "week"
+msgstr "Woche"
+
+#: backupbuddy.php:1627
+msgid "month"
+msgstr "Monat"
+
+#: backupbuddy.php:1628
+msgid "year"
+msgstr "Jahr"
+
+#: backupbuddy.php:1636
+#: classes/view_backup-listing.php:289
+#: classes/view_custom-remoteclient-dropbox.php:103
+msgid "ago"
+msgstr "alt"
+
+#: classes/admin.php:123
+msgid "Settings saved..."
+msgstr "Einstellungen gespeichert"
+
+#: classes/admin.php:179
+msgid "Temporarily unable to load feed..."
+msgstr "Konnte Feed im Moment nicht laden..."
+
+#: classes/admin.php:239
+#: classes/admin.php:247
+#: classes/admin.php:248
+#: classes/admin.php:265
+msgid "Getting Started"
+msgstr "Erste Schritte"
+
+#: classes/admin.php:266
+msgid "Backup & Restore"
+msgstr "Backup & Wiederherstellung"
+
+#: classes/admin.php:267
+#: classes/view_malware.php:18
+msgid "Malware Scan"
+msgstr "Scan auf Malware"
+
+#: classes/admin.php:268
+msgid "Server Info."
+msgstr "Server-Informationen."
+
+#: classes/admin.php:269
+msgid "Scheduling"
+msgstr "Zeitplan"
+
+#: classes/admin.php:270
+#: classes/view_settings.php:123
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: classes/ajax_remotedestination.php:25
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: classes/ajax_remotedestination.php:26
+msgid "Dropbox"
+msgstr "Dropbox"
+
+#: classes/ajax_remotedestination.php:27
+msgid "Rackspace Cloudfiles"
+msgstr "Rackspace Cloudfiles"
+
+#: classes/ajax_remotedestination.php:28
+msgid "FTP"
+msgstr "FTP"
+
+#: classes/ajax_remotedestination.php:29
+#: classes/ajax_remotedestination_dropbox.php:203
+#: classes/ajax_remotedestination_email.php:19
+#: classes/ajax_remotedestination_email.php:26
+#: classes/ajax_remotedestination_email.php:44
+#: classes/ajax_remotedestination_email.php:88
+msgid "Email"
+msgstr "Email"
+
+#: classes/ajax_remotedestination.php:62
+msgid "Deleted destination(s) "
+msgstr "Ziel(e) gelöscht"
+
+#: classes/ajax_remotedestination_dropbox.php:34
+#: classes/ajax_remotedestination_dropbox.php:47
+#: classes/ajax_remotedestination_email.php:18
+#: classes/ajax_remotedestination_email.php:25
+#: classes/ajax_remotedestination_ftp.php:19
+#: classes/ajax_remotedestination_ftp.php:32
+#: classes/ajax_remotedestination_rackspace.php:19
+#: classes/ajax_remotedestination_rackspace.php:30
+#: classes/ajax_remotedestination_s3.php:19
+#: classes/ajax_remotedestination_s3.php:32
+#: classes/view_scheduling.php:89
+#: classes/view_scheduling.php:101
+msgid "Name"
+msgstr "Name"
+
+#: classes/ajax_remotedestination_dropbox.php:35
+#: classes/ajax_remotedestination_dropbox.php:48
+msgid "Owner"
+msgstr "Besitzer"
+
+#: classes/ajax_remotedestination_dropbox.php:36
+#: classes/ajax_remotedestination_dropbox.php:49
+#: classes/ajax_remotedestination_s3.php:22
+#: classes/ajax_remotedestination_s3.php:35
+#: classes/view_tools-sitesize.php:88
+#: classes/view_tools-sitesize.php:96
+msgid "Directory"
+msgstr "Verzeichnis"
+
+#: classes/ajax_remotedestination_dropbox.php:37
+#: classes/ajax_remotedestination_dropbox.php:50
+msgid "Usage"
+msgstr "Belegung"
+
+#: classes/ajax_remotedestination_dropbox.php:38
+#: classes/ajax_remotedestination_dropbox.php:51
+#: classes/ajax_remotedestination_ftp.php:24
+#: classes/ajax_remotedestination_ftp.php:37
+#: classes/ajax_remotedestination_rackspace.php:22
+#: classes/ajax_remotedestination_rackspace.php:33
+#: classes/ajax_remotedestination_s3.php:24
+#: classes/ajax_remotedestination_s3.php:37
+msgid "Limit"
+msgstr "Grenze"
+
+#: classes/ajax_remotedestination_dropbox.php:77
+msgid "Amazon dropbox"
+msgstr "Amazon-Dropbox"
+
+#: classes/ajax_remotedestination_dropbox.php:77
+#: classes/ajax_remotedestination_email.php:44
+#: classes/ajax_remotedestination_ftp.php:55
+#: classes/ajax_remotedestination_rackspace.php:51
+#: classes/ajax_remotedestination_s3.php:55
+msgid "Select this destination"
+msgstr "Dieses Ziel auswählen"
+
+#: classes/ajax_remotedestination_dropbox.php:78
+#: classes/ajax_remotedestination_email.php:45
+#: classes/ajax_remotedestination_ftp.php:56
+#: classes/ajax_remotedestination_rackspace.php:52
+#: classes/ajax_remotedestination_s3.php:56
+msgid "Edit Settings"
+msgstr "Einstellungen bearbeiten"
+
+#: classes/ajax_remotedestination_dropbox.php:83
+#: classes/ajax_remotedestination_dropbox.php:98
+msgid "Access Denied"
+msgstr "Zugriff verweigert"
+
+#: classes/ajax_remotedestination_dropbox.php:86
+#: classes/ajax_remotedestination_dropbox.php:200
+msgid "Referral Link"
+msgstr "Empfehlungs-Link"
+
+#: classes/ajax_remotedestination_dropbox.php:119
+#: classes/ajax_remotedestination_email.php:11
+#: classes/ajax_remotedestination_email.php:58
+#: classes/ajax_remotedestination_ftp.php:11
+#: classes/ajax_remotedestination_ftp.php:83
+#: classes/ajax_remotedestination_rackspace.php:11
+#: classes/ajax_remotedestination_rackspace.php:73
+#: classes/ajax_remotedestination_s3.php:11
+#: classes/ajax_remotedestination_s3.php:83
+#: classes/view_backup-listing.php:242
+#: classes/view_backup-listing.php:328
+#: classes/view_scheduling.php:81
+#: classes/view_scheduling.php:160
+msgid "Delete"
+msgstr "Löschen"
+
+#: classes/ajax_remotedestination_dropbox.php:126
+msgid "BackupBuddy works with Dropbox.com"
+msgstr "BackupBuddy funktioniert mit Dropbox.com"
+
+#: classes/ajax_remotedestination_dropbox.php:160
+msgid "Connect to Dropbox & Authorize"
+msgstr "Mit Dropbox verbinden und autorisieren"
+
+#: classes/ajax_remotedestination_dropbox.php:164
+msgid "Yes, I've Authorized BackupBuddy with Dropbox"
+msgstr "Ja, ich habe BackupBuddy bei Dropbox autorisiert"
+
+#: classes/ajax_remotedestination_dropbox.php:171
+#: classes/ajax_remotedestination_email.php:71
+#: classes/ajax_remotedestination_ftp.php:96
+#: classes/ajax_remotedestination_rackspace.php:86
+#: classes/ajax_remotedestination_s3.php:96
+msgid "Edit Destination"
+msgstr "Ziel bearbeiten"
+
+#: classes/ajax_remotedestination_dropbox.php:178
+#: classes/ajax_remotedestination_email.php:77
+#: classes/ajax_remotedestination_ftp.php:102
+#: classes/ajax_remotedestination_rackspace.php:92
+msgid "Add New Destination"
+msgstr "Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_dropbox.php:192
+msgid "Dropbox Access Denied"
+msgstr "Dropbox-Zugriff verweigert"
+
+#: classes/ajax_remotedestination_dropbox.php:199
+msgid "Dropbox Owner"
+msgstr "Besitzer der Dropbox"
+
+#: classes/ajax_remotedestination_dropbox.php:207
+msgid "Quota Usage"
+msgstr "Speicherbelegung"
+
+#: classes/ajax_remotedestination_dropbox.php:213
+#: classes/ajax_remotedestination_email.php:84
+#: classes/ajax_remotedestination_ftp.php:109
+#: classes/ajax_remotedestination_rackspace.php:99
+#: classes/ajax_remotedestination_s3.php:109
+msgid "Destination Name"
+msgstr "Name des Ziels"
+
+#: classes/ajax_remotedestination_dropbox.php:213
+#: classes/ajax_remotedestination_email.php:84
+#: classes/ajax_remotedestination_ftp.php:109
+#: classes/ajax_remotedestination_rackspace.php:99
+#: classes/ajax_remotedestination_s3.php:109
+msgid "Name of the new destination to create. This is for your convenience only."
+msgstr "Name des Backup-Ziels. Dies dient nur organisatorischen Zwecken."
+
+#: classes/ajax_remotedestination_dropbox.php:217
+#: classes/ajax_remotedestination_s3.php:125
+msgid "Directory (optional)"
+msgstr "Verzeichnis (optional)"
+
+#: classes/ajax_remotedestination_dropbox.php:217
+#: classes/ajax_remotedestination_s3.php:125
+msgid "[Example: backupbuddy] - Directory name to place the backup in within the bucket."
+msgstr "[Beispiel: backupbuddy] - Verzeichnis, in welchem das Backup innerhalb des Bucket gespeichert werden soll."
+
+#: classes/ajax_remotedestination_dropbox.php:217
+msgid "Create an Amazon dropbox bucket"
+msgstr "Amazon-Dropbox-Bucket erstellen"
+
+#: classes/ajax_remotedestination_dropbox.php:221
+#: classes/ajax_remotedestination_ftp.php:129
+#: classes/ajax_remotedestination_rackspace.php:115
+#: classes/ajax_remotedestination_s3.php:129
+msgid "Archive Limit"
+msgstr "Archiv-Limit"
+
+#: classes/ajax_remotedestination_dropbox.php:221
+#: classes/ajax_remotedestination_ftp.php:129
+#: classes/ajax_remotedestination_rackspace.php:115
+#: classes/ajax_remotedestination_s3.php:129
+msgid "[Example: 5] - Enter 0 for no limit. This is the maximum number of archives to be stored in this specific destination. If this limit is met the oldest backups will be deleted."
+msgstr "[Beispiel: 5] - geben Sie 0 für keine Limit ein. Dies ist die maximal in diesem Ziel gespeicherte Anzahl an Backup-Archiven. Sobald diese Anzahl überschritten würde wird das älteste Backup gelöscht und das neueste gespeichert."
+
+#: classes/ajax_remotedestination_dropbox.php:229
+#: classes/ajax_remotedestination_email.php:95
+#: classes/ajax_remotedestination_ftp.php:151
+#: classes/ajax_remotedestination_rackspace.php:129
+#: classes/ajax_remotedestination_s3.php:151
+#: classes/view_scheduling.php:246
+msgid "Save Changes"
+msgstr "Änderungen übernehmen"
+
+#: classes/ajax_remotedestination_dropbox.php:232
+#: classes/ajax_remotedestination_email.php:97
+#: classes/ajax_remotedestination_ftp.php:153
+#: classes/ajax_remotedestination_rackspace.php:131
+#: classes/ajax_remotedestination_s3.php:153
+msgid "Add Destination"
+msgstr "Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_dropbox.php:233
+msgid "Re-authenticate Dropbox"
+msgstr "Dropbox erneut autorisieren"
+
+#: classes/ajax_remotedestination_email.php:77
+msgid "Add a new Email destination"
+msgstr "Neues Email-Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_email.php:88
+msgid "[Example: your@email.com] - Email address for this destination."
+msgstr "[Beispiel: your@email.com] - Email-Adresse für dieses Ziel"
+
+#: classes/ajax_remotedestination_ftp.php:20
+#: classes/ajax_remotedestination_ftp.php:33
+msgid "Address"
+msgstr "Adresse"
+
+#: classes/ajax_remotedestination_ftp.php:21
+#: classes/ajax_remotedestination_ftp.php:34
+#: classes/ajax_remotedestination_ftp.php:117
+#: classes/ajax_remotedestination_rackspace.php:20
+#: classes/ajax_remotedestination_rackspace.php:31
+#: classes/ajax_remotedestination_rackspace.php:103
+msgid "Username"
+msgstr "Benutzername"
+
+#: classes/ajax_remotedestination_ftp.php:22
+#: classes/ajax_remotedestination_ftp.php:35
+msgid "Path"
+msgstr "Pfad"
+
+#: classes/ajax_remotedestination_ftp.php:23
+#: classes/ajax_remotedestination_ftp.php:36
+msgid "FTPs"
+msgstr "FTPs"
+
+#: classes/ajax_remotedestination_ftp.php:102
+msgid "Add a new FTP destination"
+msgstr "Neues FTP-Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_ftp.php:113
+msgid "Server Address"
+msgstr "Server-Adresse"
+
+#: classes/ajax_remotedestination_ftp.php:113
+msgid "[Example: ftp.foo.com] - FTP server address.  Do not include http:// or ftp:// or any other prefixes. You may specify an alternate port in the format of ftp_address:ip_address such as yourftp.com:21"
+msgstr "[Beispiel: ftp.foo.com] - FTP-Server-Adresse.  Bitte ohne http:// or ftp:// eingeben. Sie können einen alternativen Port nach Schema ftp_adresse:port angeben, z.B. yourftp.com:21"
+
+#: classes/ajax_remotedestination_ftp.php:117
+msgid "[Example: foo] - Username to use when connecting to the FTP server."
+msgstr "[Beispiel: foo] - Benutzername für den FTP-Server."
+
+#: classes/ajax_remotedestination_ftp.php:121
+msgid "Password"
+msgstr "Passwort"
+
+#: classes/ajax_remotedestination_ftp.php:121
+msgid "[Example: 1234xyz] - Password to use when connecting to the FTP server."
+msgstr "[Beispiel: 1234xyz] - Passwort für den FTP-Server"
+
+#: classes/ajax_remotedestination_ftp.php:125
+msgid "Remote Path (optional)"
+msgstr "Pfad auf Ziel (optional)"
+
+#: classes/ajax_remotedestination_ftp.php:125
+msgid "[Example: /public_html/backups] - Remote path to place uploaded files into on the destination FTP server. Make sure this path is correct and that the directory already exists. No trailing slash."
+msgstr "[Beispiel: /public_html/backups] - Entfernter Pfad, in den die hochgeladenen Dateien auf dem Ziel-FTP gespeichert werden sollen. Stellen Sie sicher dass der Pfad korrekt ist und das Verzeichnis bereits existiert. Geben Sie den Pfad ohne abschließenden / ein."
+
+#: classes/ajax_remotedestination_ftp.php:125
+msgid "Set a FTP remote directory"
+msgstr "Entfernten FTP-Pfad festlegen"
+
+#: classes/ajax_remotedestination_ftp.php:133
+msgid "Use sFTP Encryption"
+msgstr "sFTP-Verschlüsselung verwenden"
+
+#: classes/ajax_remotedestination_ftp.php:133
+msgid "[Default: disabled] - Select whether this connection is for FTP or FTPs (enabled; FTP over SSL). Note that FTPs is NOT the same as sFTP (FTP over SSH) and is not compatible or equal."
+msgstr "[Standard: deaktiviert] - Legt fest, ob die Verbindung über FTP oder FTPs (über SSL) hergestellt wird. Beachten Sie, dass dies nicht das selbe ist wie sFTP (über SSH), und nicht damit kompatibel ist."
+
+#: classes/ajax_remotedestination_ftp.php:136
+#: classes/ajax_remotedestination_s3.php:136
+msgid "Enable high security mode"
+msgstr "Hohe Sicherheit aktivieren"
+
+#: classes/ajax_remotedestination_ftp.php:143
+#: classes/ajax_remotedestination_rackspace.php:121
+#: classes/ajax_remotedestination_s3.php:143
+msgid "Test these settings"
+msgstr "Einstellungen überprüfen"
+
+#: classes/ajax_remotedestination_rackspace.php:21
+#: classes/ajax_remotedestination_rackspace.php:32
+#: classes/ajax_remotedestination_rackspace.php:111
+msgid "Container"
+msgstr "Container"
+
+#: classes/ajax_remotedestination_rackspace.php:92
+msgid "Add a new Rackspace destination"
+msgstr "Neues Rackspace-Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_rackspace.php:103
+msgid "[Example: badger] - Your Rackspace Cloudfiles username."
+msgstr "[Beispiel: badger] - Ihr Rackspace Cloudfiles Benutzername"
+
+#: classes/ajax_remotedestination_rackspace.php:107
+msgid "API Key"
+msgstr "API-Schlüssel"
+
+#: classes/ajax_remotedestination_rackspace.php:107
+msgid "[Example: 9032jk09jkdspo9sd32jds9swd039dwe] - Log in to your Rackspace Cloudfiles Account and navigate to Your Account: API Access"
+msgstr "[Beispiel: 9032jk09jkdspo9sd32jds9swd039dwe] - Loggen Sie sich in Ihren Rackspace Cloudfiles Account ein und gehen Sie zu Your Account: API Access"
+
+#: classes/ajax_remotedestination_rackspace.php:107
+msgid "Get your Rackspace Cloudfiles API key"
+msgstr "Rackspace Cloufiles API Key finden"
+
+#: classes/ajax_remotedestination_rackspace.php:111
+msgid "[Example: wordpress_backups] - This container will NOT be created for you automatically if it does not already exist. Please create it first."
+msgstr "[Beispiel: wordpress_backups] - Dieser Container wird NICHT automatisch für Sie erzeugt. Bitte erstellen Sie ihn bevor Sie ihn hier eintragen."
+
+#: classes/ajax_remotedestination_rackspace.php:111
+msgid "Create a container from the Rackspace Cloudfiles panel"
+msgstr "Erstellen Sie einen Container im Rackspace Cloudfiles Panel"
+
+#: classes/ajax_remotedestination_s3.php:20
+#: classes/ajax_remotedestination_s3.php:33
+msgid "AWS Keys"
+msgstr "AWS-Schlüssel"
+
+#: classes/ajax_remotedestination_s3.php:21
+#: classes/ajax_remotedestination_s3.php:34
+msgid "Bucket"
+msgstr "Bucket"
+
+#: classes/ajax_remotedestination_s3.php:23
+#: classes/ajax_remotedestination_s3.php:36
+msgid "SSL"
+msgstr "SSL"
+
+#: classes/ajax_remotedestination_s3.php:102
+msgid "Add New Destination "
+msgstr "Neues Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_s3.php:102
+msgid "Add a new Amazon S3 destination"
+msgstr "Neues Amazon S3-Ziel hinzufügen"
+
+#: classes/ajax_remotedestination_s3.php:113
+msgid "AWS Access Key"
+msgstr "AWS Zugriffsschlüssel-ID"
+
+#: classes/ajax_remotedestination_s3.php:113
+msgid "[Example: BSEGHGSDEUOXSQOPGSBE] - Log in to your Amazon S3 AWS Account and navigate to Account: Access Credentials: Security Credentials."
+msgstr "[Beispiel: BSEGHGSDEUOXSQOPGSBE] - Loggen Sie sich in Ihren Amazon S3 Account ein und gehen Sie zu Account: Access Credentials: Security Credentials."
+
+#: classes/ajax_remotedestination_s3.php:117
+msgid "AWS Secret Key"
+msgstr "AWS Geheimer Zugriffsschlüssel"
+
+#: classes/ajax_remotedestination_s3.php:117
+msgid "[Example: GHOIDDWE56SDSAZXMOPR] - Log in to your Amazon S3 AWS Account and navigate to Account: Access Credentials: Security Credentials."
+msgstr "[Beispiel: GHOIDDWE56SDSAZXMOPR] - Loggen Sie sich in Ihren Amazon S3 Account ein und gehen Sie zu Account: Access Credentials: Security Credentials."
+
+#: classes/ajax_remotedestination_s3.php:117
+msgid "Find your Amazon S3 key"
+msgstr "Amazon S3-Schlüssel finden"
+
+#: classes/ajax_remotedestination_s3.php:118
+msgid "Opens a new tab where you can get your Amazon S3 key"
+msgstr "Öffnet einen neuen Tab, über den Sie Ihren Amazon S3-Zugriffsschlüssel holen können"
+
+#: classes/ajax_remotedestination_s3.php:118
+msgid "Get Key"
+msgstr "Key holen"
+
+#: classes/ajax_remotedestination_s3.php:121
+msgid "Bucket Name"
+msgstr "Name des Buckets"
+
+#: classes/ajax_remotedestination_s3.php:121
+msgid "[Example: wordpress_backups] - This bucket will be created for you automatically if it does not already exist."
+msgstr "[Beispiel: wordpress_backups] - Dieser Bucket wird automatisch angelegt falls er noch nicht existiert."
+
+#: classes/ajax_remotedestination_s3.php:125
+msgid "Create an Amazon S3 bucket"
+msgstr "Amazon S3-Bucket erstellen"
+
+#: classes/ajax_remotedestination_s3.php:133
+msgid "Use SSL Encryption"
+msgstr "SSL-Verschlüsselung verwenden"
+
+#: classes/ajax_remotedestination_s3.php:133
+msgid "[Default: enabled] - When enabled, all transfers will be encrypted with SSL encryption. Please note that encryption introduces overhead and may slow down the transfer. If Amazon S3 sends are failing try disabling this feature to speed up the process.  Note that 32-bit servers cannot encrypt transfers of 2GB or larger with SSL, causing large file transfers to fail."
+msgstr "[Standard: aktiviert] - Wenn aktiv werden sämtliche Übertragungen mit SSL verschlüsselt. Bitte beachten Sie dass die Verschlüsselung den Transfer unter Umständen verlangsamen kann. Falls der Versand an Amazon S3 fehlschlägt versuchen Sie diese Funktion, um den Fehler zu beheben. Bitte beachten Sie dass 32 Bit-Server keine Dateien größer als 2GB mit SSL verschlüsseln können, und große Übertragungen dadurch fehlschlagen werden."
+
+#: classes/backup.php:43
+#: classes/view_backup.php:24
+msgid "Unable to create backup storage directory"
+msgstr "Konnte Verzeichnis für Backups nicht anlegen"
+
+#: classes/backup.php:48
+msgid "Archive directory is not writable. Check your permissions."
+msgstr "In Archiv-Verzeichnis konnte nicht geschrieben werden. Überprüfen Sie die Berechtigungen."
+
+#: classes/backup.php:71
+msgid "Scheduling Cron for"
+msgstr "Terminiere Cron für"
+
+#: classes/backup.php:89
+msgid "Starting function"
+msgstr "Starte Funktion"
+
+#: classes/backup.php:92
+msgid "Failed function %s. Backup terminated."
+msgstr "Funktion %s fehlgeschlagen. Backup abgebrochen."
+
+#: classes/backup.php:95
+msgid "Finished function `%s`."
+msgstr "Funktion `%s` abgeschlossen."
+
+#: classes/backup.php:125
+msgid "Full backup mode."
+msgstr "Modus: Vollständiges Backup."
+
+#: classes/backup.php:127
+msgid "Database only backup mode."
+msgstr "Modus: Nur Datenbank-Backup."
+
+#: classes/backup.php:129
+msgid "Unknown backup mode."
+msgstr "Modus: Unbekannt."
+
+#: classes/backup.php:131
+msgid "Performing pre-backup procedures."
+msgstr "Führe Backup-Vorbereitung aus."
+
+#: classes/backup.php:140
+msgctxt "backup serial number that is attached to files, a random string of characters"
+msgid "Backup serial: "
+msgstr "Backup-Seriennummer:"
+
+#: classes/backup.php:173
+msgid "Error #9002: Unable to create temporary storage directory (%s)."
+msgstr "Fehler Nr. 9002: Konnte temporäres Verzeichnis nicht anlegen (%s)."
+
+#: classes/backup.php:179
+#: classes/backup.php:195
+msgid "Error #9015: Temp data directory is not writable. Check your permissions. (%s)."
+msgstr "Fehler Nr. 9015: Temporäres Verzeichnis nicht beschreibbar. Überprüfen Sie die Berechtigungen. (%s)."
+
+#: classes/backup.php:189
+msgid "Error #9002: Unable to create temporary ZIP storage directory (%s)."
+msgstr "Fehler Nr. 9002: Konnte temporäres ZIP-Verzeichnis nicht erstellen (%s)."
+
+#: classes/backup.php:202
+msgid "Problem creating DAT file."
+msgstr "Konnte DAT-Datei nicht erstellen."
+
+#: classes/backup.php:206
+msgid "Finished pre-backup procedures."
+msgstr "Backup-Vorbereitung abgeschlossen."
+
+#: classes/backup.php:229
+msgid "Creating import data file."
+msgstr "Erstelle Import-Datendatei."
+
+#: classes/backup.php:264
+msgid "High security mode enabled."
+msgstr "Sicherheitsmodus aktiviert."
+
+#: classes/backup.php:270
+msgid "Compensating for SSL in siteurl."
+msgstr "Führe Anpassungen für SSL in siteurl durch."
+
+#: classes/backup.php:287
+msgid "Error #9017: Temp data file is not creatable/writable. Check your permissions. (%s)"
+msgstr "Fehler Nr. 9017: Temporäre Datendatei konnte nicht erstellt/beschrieben werden. Überprüfen Sie die Berechtigungen. (%s)"
+
+#: classes/backup.php:294
+msgid "Finished creating import data file."
+msgstr "Import-Datendatei erstellt."
+
+#: classes/backup.php:303
+msgid "Saving database content to file."
+msgstr "Schreibe Datenbank-Inhalt in Datei."
+
+#: classes/backup.php:307
+msgid "Error #9018: Database file is not creatable/writable. Check your permissions. (%s)"
+msgstr "Fehler Nr. 9018: Datenbank-Datei konnte nicht erstellt/beschrieben werden. Überprüfen Sie die Berechtigungen. (%s)"
+
+#: classes/backup.php:320
+msgid "Saving database content to file. (%d tables)"
+msgstr "Schreibe Datenbank-Inhalt in Datei. (%d Tabellen)"
+
+#: classes/backup.php:329
+msgid "Including non-WordPress tables in backup (if found; based on settings)."
+msgstr "Schließe nicht-WordPress-Tabellen im Backup mit ein (falls vorhanden, basierend auf den Einstellungen)."
+
+#: classes/backup.php:336
+msgid "Only including WordPress tables in backup (unless more explicitly defined)."
+msgstr "Schließe nur WordPress-Tabellen im Backup mit ein (außer weitere wurden explizit angegeben)."
+
+#: classes/backup.php:357
+msgid "Additional tables are set to be excluded based on settings."
+msgstr "Zusatz-Tabllen sollen laut Einstellungen ausgeschlossen werden."
+
+#: classes/backup.php:360
+msgid "Additional tables are set to be included based on settings."
+msgstr "Zusatz-Tabllen sollen laut Einstellungen eingeschlossen werden."
+
+#: classes/backup.php:366
+msgid "Beginning actual SQL dump."
+msgstr "Beginne den SQL-Dump."
+
+#: classes/backup.php:421
+msgid "Finished actual SQL dump."
+msgstr "SQL-Dump abgeschlossen."
+
+#: classes/backup.php:464
+msgid "Backup FAILED. Unknown backup type."
+msgstr "Backup FEHLGESCHLAGEN. Unbekannter Backup-Typ."
+
+#: classes/backup.php:470
+msgid "Backup ZIP file successfully created."
+msgstr "Backup-ZIP-Datei erfolgreich erstellt."
+
+#: classes/backup.php:472
+msgid "Chmod to 0644 succeeded."
+msgstr "Chmod auf 0644 erfolgreich."
+
+#: classes/backup.php:474
+msgid "Chmod to 0644 failed."
+msgstr "Chmod auf 0644 fehlgeschlagen."
+
+#: classes/backup.php:477
+msgid "Backup FAILED. Unable to successfully generate ZIP archive. Error #3382."
+msgstr "Backup FEHLGESCHLAGEN. Konnte ZIP-Archiv nicht erstellen. Fehler Nr. 3382."
+
+#: classes/backup.php:486
+msgid "Trimming old archives (if needed)."
+msgstr "Entferne alte Archive (falls nötig)."
+
+#: classes/backup.php:518
+msgid "Deleting old archive `%s` due as it causes archives to exceed total number allowed."
+msgstr "Lösche altes Archiv `%s`, da sonst die maximal erlaubte Anzahl überschritten würde."
+
+#: classes/backup.php:531
+msgid "Deleting old archive `%s` due as it causes archives to exceed total size allowed."
+msgstr "Lösche altes Archiv `%s`, da sonst die maximal erlaubte Gesamtgröße überschritten würde."
+
+#: classes/backup.php:541
+msgid "Cleaning up after backup."
+msgstr "Räume nach dem Backup auf."
+
+#: classes/backup.php:545
+msgid "Removing temp data directory."
+msgstr "Entferne temporäres Datenverzeichnis."
+
+#: classes/backup.php:550
+msgid "Removing temp zip directory."
+msgstr "Entferne temporäres ZIP-Verzeichnis."
+
+#: classes/backup.php:556
+msgid "completed successfully in "
+msgstr "erfolgreich abgeschlossen in"
+
+#: classes/backup.php:558
+msgid "Sending manual backup email notification."
+msgstr "Sende manuelle Backup-Benachrichtigungen."
+
+#: classes/backup.php:561
+msgid "Sending scheduled backup email notification."
+msgstr "Sende geplante Backup-Benachrichtigungen."
+
+#: classes/backup.php:562
+msgid "Scheduled backup"
+msgstr "Geplantes backup"
+
+#: classes/backup.php:570
+msgid "Finished cleaning up."
+msgstr "Aufräumen beendet."
+
+#: classes/backup.php:572
+msgid "Backup completed successfully in"
+msgstr "Backup erfolgreich erstellt. Dauer:"
+
+#: classes/backup.php:572
+msgid "Done."
+msgstr "Fertig."
+
+#: classes/backup.php:578
+msgid "Sending file to remote destination `%s`."
+msgstr "Sende Datei zum enftfernten Ziel `%s`."
+
+#: classes/backup.php:584
+msgid "Deleting local copy of file sent remote."
+msgstr "Lösche lokale Kopie der versendeten Datei."
+
+#: classes/backup.php:591
+msgid "Error. Unable to delete local archive as requested."
+msgstr "Fehler. Konnte lokales Archiv nicht wie gewünscht löschen."
+
+#: classes/backup.php:594
+msgid "Deleted local archive as requested."
+msgstr "Lokales Archiv wie gewünscht gelöscht."
+
+#: classes/backup.php:618
+msgid "Error #9002: Unable to create directory (%s)."
+msgstr "Fehler Nr. 9002: Konnte Verzeichnis nicht erstellen (%s)."
+
+#: classes/backup.php:632
+msgid "Error #983489. Unable to create anti-directory browsing files (index.php). Backup halted to maintain security."
+msgstr "Fehler Nr. 983489. Konnte Dateien nicht erzeugen, die eine Verzeichnis-Auflistung verhindern (index.php). Backup angehalten um Sicherheit zu gewährleisten."
+
+#: classes/backup.php:645
+msgid "Error #983489. Unable to create anti-directory browsing files (index.htm). Backup halted to maintain security."
+msgstr "Fehler Nr. 983489. Konnte Dateien nicht erzeugen, die eine Verzeichnis-Auflistung verhindern (index.htm). Backup angehalten um Sicherheit zu gewährleisten."
+
+#: classes/backup.php:658
+msgid "Error #983489. Unable to create anti-directory browsing files (index.html). Backup halted to maintain security."
+msgstr "Fehler Nr. 983489. Konnte Dateien nicht erzeugen, die eine Verzeichnis-Auflistung verhindern (index.html). Backup angehalten um Sicherheit zu gewährleisten."
+
+#: classes/backup.php:671
+msgid "Error #983489. Unable to create anti-directory browsing files. Backup halted to maintain security."
+msgstr "Fehler Nr. 983489. Konnte Dateien nicht erzeugen, die eine Verzeichnis-Auflistung verhindern. Backup angehalten um Sicherheit zu gewährleisten."
+
+#: classes/backup.php:689
+msgid "Setting greedy script limits."
+msgstr "Setze gierige Skript-Limits."
+
+#: classes/backup.php:711
+msgid "Set memory limit to 256M. Previous value < 256M."
+msgstr "Setzte Speicherlimit auf 256M. Vorheriger Wert war < 256M."
+
+#: classes/backup.php:716
+msgid "Set memory limit to 256M. Previous value unknown."
+msgstr "Setzte Speicherlimit auf 256M. Vorheriger Wert unbekannt."
+
+#: classes/backup.php:719
+msgid "Finished greedy script limits."
+msgstr "Gierige Skript-Limits gesetzt."
+
+#: classes/view_backup-listing.php:19
+msgid "Unable to delete file `%s` error"
+msgstr "Konnte Datei `%s` nicht löschen: Fehler"
+
+#: classes/view_backup-listing.php:32
+msgid "Deleted %s files."
+msgstr "%s Dateien gelöscht."
+
+#: classes/view_backup-listing.php:82
+msgid "Integrity checking disabled based on settings. This file has not been verified."
+msgstr "Integritätsprüfung in Einstellungen deaktiviert. Die Datei wurde nicht überprüft."
+
+#: classes/view_backup-listing.php:139
+msgid "Missing .dat file."
+msgstr "Fehlende .dat-Datei."
+
+#: classes/view_backup-listing.php:143
+msgid "Missing DB SQL file."
+msgstr "Fehlende SQL-DB-Datei."
+
+#: classes/view_backup-listing.php:147
+msgid "Missing WP config file."
+msgstr "Fehlende WP-Config-Datei."
+
+#: classes/view_backup-listing.php:154
+msgid "Technical Details"
+msgstr "Technische Details"
+
+#: classes/view_backup-listing.php:189
+msgid "Files include random characters in their name for increased security. Verify that write permissions are available for this directory. Backup files are stored in "
+msgstr "Aus Sicherheitsgründen beinhalten Dateinamen zufällige Zahlen-/Buchstabenkombinationen. Stellen Sie sicher dass in diesem Verzeichnis geschrieben werden kann. Backup-Dateien werden gespeichert in"
+
+#: classes/view_backup-listing.php:219
+msgid "Error starting remote send"
+msgstr "Fehler beim Versand"
+
+#: classes/view_backup-listing.php:221
+msgid "Your file has been scheduled to be sent now. It should arrive shortly."
+msgstr "Ihre Datei wurde für den Versand eingeplant. Sie sollte in Kürze eintreffen."
+
+#: classes/view_backup-listing.php:249
+#: classes/view_backup-listing.php:260
+#: classes/view_custom-remoteclient-dropbox.php:62
+#: classes/view_custom-remoteclient-dropbox.php:73
+#: classes/view_custom-remoteclient-ftp.php:95
+#: classes/view_custom-remoteclient-ftp.php:105
+#: classes/view_custom-remoteclient-s3.php:55
+#: classes/view_custom-remoteclient-s3.php:66
+msgid "Backup File"
+msgstr "Backup-Datei"
+
+#: classes/view_backup-listing.php:250
+#: classes/view_backup-listing.php:261
+#: classes/view_custom-remoteclient-dropbox.php:63
+#: classes/view_custom-remoteclient-dropbox.php:74
+#: classes/view_custom-remoteclient-s3.php:56
+#: classes/view_custom-remoteclient-s3.php:67
+msgid "Last Modified"
+msgstr "Zuletzt geändert"
+
+#: classes/view_backup-listing.php:251
+#: classes/view_backup-listing.php:262
+#: classes/view_custom-remoteclient-dropbox.php:64
+#: classes/view_custom-remoteclient-dropbox.php:75
+#: classes/view_custom-remoteclient-ftp.php:96
+#: classes/view_custom-remoteclient-ftp.php:106
+#: classes/view_custom-remoteclient-s3.php:57
+#: classes/view_custom-remoteclient-s3.php:68
+msgid "File Size"
+msgstr "Dateigröße"
+
+#: classes/view_backup-listing.php:252
+#: classes/view_backup-listing.php:263
+#: classes/view_backup-run_backup-perform.php:311
+#: classes/view_tools-permissions.php:131
+#: classes/view_tools-permissions.php:142
+#: classes/view_tools-server.php:264
+#: classes/view_tools-server.php:276
+msgid "Status"
+msgstr "Status"
+
+#: classes/view_backup-listing.php:252
+#: classes/view_backup-listing.php:263
+msgid "Backups are checked to verify that they are valid BackupBuddy backups and contain all of the key backup components needed to restore. Backups may display as invalid until they are completed. Click the refresh icon to re-verify the archive."
+msgstr "Backup-Archive werden dahingehend überprüft, dass sie gültige BackupBuddy-Backups sind und sie alle Schlüsselkomponenten enthalten, um eine Wiederherstellung sicher zu stellen. Backups können als 'ungültig' angezeigt werden solange sie noch nicht abgeschlossen sind. Klicken Sie auf das \"Neu laden\"-Symbol, um das Archiv erneut zu überprüfen."
+
+#: classes/view_backup-listing.php:253
+#: classes/view_backup-listing.php:264
+#: classes/view_scheduling.php:90
+#: classes/view_scheduling.php:102
+msgid "Type"
+msgstr "Typ"
+
+#: classes/view_backup-listing.php:271
+msgid "You have not created any backups yet."
+msgstr "Sie haben noch keine Backups erstellt."
+
+#: classes/view_backup-listing.php:280
+msgid "Click to download this backup."
+msgstr "Klicken, um Ihr Backup herunterzuladen."
+
+#: classes/view_backup-listing.php:282
+msgid "Send this file to a remote destination such as Amazon S3, Email, FTP, or Rackspace Cloud."
+msgstr "Diese Datei an ein externes Ziel wie Amazon S3, Email, FTP oder Rackspace Cloudfiles senden."
+
+#: classes/view_backup-listing.php:282
+msgid "Send file offsite"
+msgstr "Datei extern versenden"
+
+#: classes/view_backup-listing.php:283
+msgid "Allows you to later verify the backup file has been unchanged."
+msgstr "Erlaubt es Ihnen, später die Unversehrtheit der Backup-Datei zu überprüfen."
+
+#: classes/view_backup-listing.php:299
+msgid "Good"
+msgstr "Gut"
+
+#: classes/view_backup-listing.php:301
+#: classes/view_backup-listing.php:315
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: classes/view_backup-listing.php:303
+msgid "Bad"
+msgstr "Schlecht"
+
+#: classes/view_backup-listing.php:304
+msgid "Integrity Check Failure"
+msgstr "Integritäts-Check fehlgeschlagen"
+
+#: classes/view_backup-listing.php:306
+msgid "Refresh backup integrity status for this file"
+msgstr "Integritäts-Check für diese Datei erneut ausführen"
+
+#: classes/view_backup-listing.php:311
+msgid "Full"
+msgstr "Vollständig"
+
+#: classes/view_backup-listing.php:313
+msgid "Database"
+msgstr "Datenbank"
+
+#: classes/view_backup-listing.php:330
+msgid "Hover over a file above for additional options."
+msgstr "Zeigen Sie auf eine Datei für weitere Optionen."
+
+#: classes/view_backup-listing.php:338
+#: classes/view_settings.php:274
+msgid "Select a destination within to manage archives within the destination"
+msgstr "Wählen Sie ein Ziel aus, um die dort gespeicherten Archive zu bearbeiten"
+
+#: classes/view_backup-listing.php:338
+#: classes/view_settings.php:274
+msgid "Manage Remote Destinations & Archives"
+msgstr "Entfernte Ziele und Archive bearbeiten"
+
+#: classes/view_backup-listing.php:341
+#: classes/view_settings.php:277
+msgid "Manage Amazon S3, Rackspace Cloudfiles, Email, and FTP."
+msgstr "Amazon S3, Rackspace Cloudfiles, Email und FTP verwalten."
+
+#: classes/view_backup-run_backup-home.php:2
+msgid "Backup, Restore, Migrate"
+msgstr "Backup, wiederherstellen, umziehen"
+
+#: classes/view_backup-run_backup-home.php:81
+msgid "Select a backup option from the buttons below to begin:"
+msgstr "Wählen Sie zum Beginnen eine Backup-Option auf den Buttons:"
+
+#: classes/view_backup-run_backup-home.php:88
+msgid "A backup was recently started and reports unfinished steps. You should not begin<br />another backup unless you are sure the previous backup has completed or failed."
+msgstr "Es wurde erst vor Kurzem ein Backup gestartet, das noch offene Arbeitsschritte hat.<br /> Sie sollten kein weiteres Backup starten bevor das vorherige nicht entweder abgeschlossen oder fehlgeschlagen ist."
+
+#: classes/view_backup-run_backup-home.php:94
+msgid "Backs up the database only. This backup is fast and creates a small backup file. Includes pages, posts, comments, etc. Files such as media are not included."
+msgstr "Sichert nur die Datenbank. Dieses Backup ist schnell und erzeugt eine kleine Backup-Datei. Eingeschlossen sind Seiten, Artikel, Kommentare, etc. Dateien wie Bilder sind nicht eingeschlossen."
+
+#: classes/view_backup-run_backup-home.php:98
+#: classes/view_scheduling.php:196
+msgid "Database Only"
+msgstr "Nur Datenbank"
+
+#: classes/view_backup-run_backup-home.php:99
+msgid "back up content only"
+msgstr "Nur Inhalt sichern"
+
+#: classes/view_backup-run_backup-home.php:103
+msgid "Backs up everything including the database, settings, themes, plugins, files, media, etc. This backup takes more time and can create a large file."
+msgstr "Sichert alles inklusive Datenbank, Einstellungen, Themes, Plugins, Dateien, Medien, etc. Dieses Backup dauert länger und erstellt eine große Backup-Datei."
+
+#: classes/view_backup-run_backup-home.php:108
+msgid "back up everything"
+msgstr "Alles sichern"
+
+#: classes/view_backup-run_backup-home.php:114
+msgid "Download the import & migration script, importbuddy.php"
+msgstr "Das Import- und Migrationsskript, importbuddy.php herunterladen"
+
+#: classes/view_backup-run_backup-home.php:118
+msgid "Restore/Migrate"
+msgstr "Wiederherstellen/umziehen"
+
+#: classes/view_backup-run_backup-home.php:119
+msgid "restore or move your site"
+msgstr "Seite wiederherstellen oder umziehen"
+
+#: classes/view_backup-run_backup-home.php:129
+msgid "Backup Archives (local)"
+msgstr "Backup-Archive (lokal)"
+
+#: classes/view_backup-run_backup-perform.php:2
+msgid "Backing Up"
+msgstr "Backup erstellen"
+
+#: classes/view_backup-run_backup-perform.php:9
+msgid "Error #4344443: Backup failure"
+msgstr "Fehler Nr. 4344443: Backup fehlgeschlagen"
+
+#: classes/view_backup-run_backup-perform.php:68
+msgid "Warning: The backup archive file size has not increased in"
+msgstr "Warnung: Die Größe des Backup-Archivs hat sich nicht geändert seit"
+
+#: classes/view_backup-run_backup-perform.php:68
+msgid "seconds. The backup may have failed. If you wish to wait you will be notified if there is no progress in 5 minutes."
+msgstr "Sekunden. Das Backup könnte fehlgeschlagen sein. Falls Sie warten möchten werden Sie in 5 Minuten über etwaige Fortschritte informiert."
+
+#: classes/view_backup-run_backup-perform.php:144
+msgid "A fatal error has been encountered.  The backup has halted."
+msgstr "Ein fataler Fehler ist aufgetreten. Das Backup wurde gestoppt."
+
+#: classes/view_backup-run_backup-perform.php:146
+msgid "Unknown action"
+msgstr "Unbekannte Aktion"
+
+#: classes/view_backup-run_backup-perform.php:188
+msgid "BackupBuddy encountered the following error receiving data from the server"
+msgstr "Beim Empfang von Daten hat BackupBuddy folgenden Fehler vom Server erhalten"
+
+#: classes/view_backup-run_backup-perform.php:279
+msgid "Settings export"
+msgstr "Einstellungen exportieren"
+
+#: classes/view_backup-run_backup-perform.php:285
+msgid "Database export"
+msgstr "Datenbank exportieren"
+
+#: classes/view_backup-run_backup-perform.php:291
+msgid "Files Export"
+msgstr "Dateien exportieren"
+
+#: classes/view_backup-run_backup-perform.php:304
+msgid "Download backup ZIP archive"
+msgstr "Backup-ZIP-Datei herunterladen"
+
+#: classes/view_backup-run_backup-perform.php:306
+msgid "Back to backup page"
+msgstr "Zurück zur Backup-Seite"
+
+#: classes/view_backup-run_backup-perform.php:312
+msgid "Loading..."
+msgstr "Laden..."
+
+#: classes/view_backup-run_backup-perform.php:313
+msgid "Archive size"
+msgstr "Archiv-Größe"
+
+#: classes/view_backup-run_backup-perform.php:313
+msgid "This is the current size of the backup archive as it is being generated. This size will grow until the backup is complete."
+msgstr "Dies ist die aktuelle Größe des Backup-Archivs. Die Größe wird steigen bis das Backup abgeschlossen ist."
+
+#: classes/view_backup-run_backup-perform.php:315
+#: classes/view_backup-run_backup-perform.php:319
+msgid "Backing up with BackupBuddy"
+msgstr "BackupBuddy erstellt ein Backup"
+
+#: classes/view_backup-run_backup-perform.php:317
+msgid "Advanced Details"
+msgstr "Erweiterte Details"
+
+#: classes/view_backup-run_backup-perform.php:325
+msgid "You may leave this page at any time and the backup will continue uninterrupted."
+msgstr "Sie können diese Seite jederzeit verlassen. Das Backup wird dadurch nicht unterbrochen."
+
+#: classes/view_backup.php:15
+msgid "Running in Alternate WordPress Cron mode. HTTP Loopback Connections are not enabled on this server but you have overridden this in the wp-config.php file (this is a good thing)."
+msgstr "Laufe im alternativen WordPress Cron-Modus. Loopback-Verbindungen über HTTP sind auf diesem Server zwar nicht aktiviert, aber Sie haben sie in der Datei wp-config.php dennoch aktiviert (gut gemacht!)."
+
+#: classes/view_backup.php:15
+msgid "Additional Information Here"
+msgstr "Zusätzliche Information hier verfügbar"
+
+#: classes/view_backup.php:17
+msgid "HTTP Loopback Connections are not enabled on this server. You may encounter stalled or significantly delayed backups."
+msgstr "Loopback-Verbindungen über HTTP sind auf diesem Server deaktiviert. Es kann zu langsamen und deutlich verzögerten Backups kommen."
+
+#: classes/view_backup.php:17
+#: classes/view_backup.php:38
+msgid "Click for instructions on how to resolve this issue."
+msgstr "Klicken Sie für Anweisungen um dieses Problem zu beheben."
+
+#: classes/view_backup.php:32
+msgid "Your server does not support command line ZIP. Backups will be performed in compatibility mode."
+msgstr "Ihr Server unterstützt ZIP nicht auf der Kommandozeile. Backups werden im Kompatibilitätsmodus ausgeführt."
+
+#: classes/view_backup.php:34
+msgid "Directory/file exclusion is not available in this mode so even existing backups will be backed up."
+msgstr "Ausschluss von Dateien und Verzeichnissen ist in diesem Modus nicht verfügbar, es werden also auch alle bereits vorhandenen Backups mit gesichert."
+
+#: classes/view_backup.php:36
+msgid "You may encounter stalled or significantly delayed backups."
+msgstr "Es können verlangsamte und deutlich verzögerte Backups auftreten."
+
+#: classes/view_custom-remoteclient-dropbox.php:33
+#: classes/view_custom-remoteclient-rackspace.php:32
+msgid "Deleted %d file"
+msgid_plural "Deleted %d files"
+msgstr[0] "%d Datei gelöscht"
+msgstr[1] "%d Dateien gelöscht"
+
+#: classes/view_custom-remoteclient-dropbox.php:40
+#: classes/view_custom-remoteclient-ftp.php:50
+#: classes/view_custom-remoteclient-s3.php:34
+msgid "The remote file is now being copied to your %s local backups"
+msgstr "Die entfernte Datei wird jetzt in Ihre %s lokalen Backups kopiert"
+
+#: classes/view_custom-remoteclient-dropbox.php:47
+#: classes/view_custom-remoteclient-ftp.php:81
+#: classes/view_custom-remoteclient-s3.php:41
+msgid "Editing"
+msgstr "Bearbeite"
+
+#: classes/view_custom-remoteclient-dropbox.php:54
+#: classes/view_custom-remoteclient-dropbox.php:122
+msgid "Delete from Dropbox"
+msgstr "Aus Dropbox löschen"
+
+#: classes/view_custom-remoteclient-dropbox.php:62
+#: classes/view_custom-remoteclient-dropbox.php:73
+#: classes/view_custom-remoteclient-ftp.php:95
+#: classes/view_custom-remoteclient-ftp.php:105
+#: classes/view_custom-remoteclient-s3.php:55
+#: classes/view_custom-remoteclient-s3.php:66
+msgid "Sorted by filename"
+msgstr "Nach Dateiname sortiert"
+
+#: classes/view_custom-remoteclient-dropbox.php:65
+#: classes/view_custom-remoteclient-dropbox.php:76
+#: classes/view_custom-remoteclient-ftp.php:97
+#: classes/view_custom-remoteclient-ftp.php:107
+#: classes/view_custom-remoteclient-s3.php:58
+#: classes/view_custom-remoteclient-s3.php:69
+msgid "Actions"
+msgstr "Aktionen"
+
+#: classes/view_custom-remoteclient-dropbox.php:84
+msgid "You have not created any dropbox backups yet."
+msgstr "Es wurden noch keine Dropbox-Backups erstellt."
+
+#: classes/view_custom-remoteclient-dropbox.php:110
+#: classes/view_custom-remoteclient-s3.php:106
+msgid "Copy to local"
+msgstr "Auf den Server kopieren"
+
+#: classes/view_custom-remoteclient-ftp.php:26
+#: classes/view_custom-remoteclient-ftp.php:59
+msgid "Could not connect to"
+msgstr "Verbindung fehlgeschlagen: "
+
+#: classes/view_custom-remoteclient-ftp.php:42
+#: classes/view_custom-remoteclient-s3.php:28
+msgid "Deleted %d file."
+msgid_plural "Deleted %d files."
+msgstr[0] "%d Datei gelöscht."
+msgstr[1] "%d Dateien gelöscht."
+
+#: classes/view_custom-remoteclient-ftp.php:44
+msgid "No backups were deleted."
+msgstr "Es wurden keine Backups gelöscht."
+
+#: classes/view_custom-remoteclient-ftp.php:87
+#: classes/view_custom-remoteclient-ftp.php:143
+msgid "Delete from FTP"
+msgstr "Von FTP löschen"
+
+#: classes/view_custom-remoteclient-ftp.php:115
+msgid "This directory does not have any backups."
+msgstr "In diesem Verzeichnis existieren keine Backups."
+
+#: classes/view_custom-remoteclient-rackspace.php:38
+msgctxt "%1$s and %1$s are open and close <a> tags"
+msgid "The remote file is now being copied to your %1$slocal backups%2$s"
+msgstr "Die entfernte Datei wird jetzt in Ihre %1$slokalen Backups%2$s kopiert"
+
+#: classes/view_custom-remoteclient-s3.php:47
+msgid "Delete from S3"
+msgstr "Von S3 löschen"
+
+#: classes/view_custom-remoteclient-s3.php:79
+msgid "You have not created any S3 backups yet."
+msgstr "Es wurden noch keine S3-Backups erstellt."
+
+#: classes/view_custom-remoteclient.php:5
+msgid "Error #438934894349. Invalid destination ID."
+msgstr "Fehler Nr. 438934894349. Ungültige Ziel-ID."
+
+#: classes/view_custom-remoteclient.php:17
+msgid "Sorry, a remote client is not available for this destination at this time."
+msgstr "Tut uns leid, es gibt momentan noch keinen Client für dieses externe Ziel."
+
+#: classes/view_gettingstarted.php:3
+msgid "Alternate Cron Should Run Now"
+msgstr "Alternativer Cron sollte jetzt laufen"
+
+#: classes/view_gettingstarted.php:19
+msgid "Plugin settings have been reset to defaults."
+msgstr "Plugin-Einstellungen auf Werkseinstellungen zurückgesetzt."
+
+#: classes/view_gettingstarted.php:25
+msgid "Plugin log has been cleared."
+msgstr "Plugin-Protokoll wurde geleert."
+
+#: classes/view_gettingstarted.php:32
+msgctxt "v for version"
+msgid "Getting Started with BackupBuddy v"
+msgstr "Erste Schritte mit BackupBuddy v"
+
+#: classes/view_gettingstarted.php:37
+msgid "BackupBuddy is the all-in-one solution for backups, restoration, and migration.  The single backup ZIP file created can be used with the import & migration script to quickly and easily restore your site on the same server or even migrate to a new host with different settings.  Whether you're an end user or a developer, this plugin will bring you peace of mind and added safety in the event of data loss.  Our goal is keeping the backup, restoration, and migration processes easy, fast, and reliable."
+msgstr "BackupBuddy ist die All-In-One-Lösung für Backups, Wiederherstellung und Umzug. Die erzeugte Backup-ZIP-Datei kann zusammen mit dem Import- und Umzugsskript dazu verwendet werden, die Daten schnell und einfach auf dem gleichen Server wiederherzustellen, oder sogar auf einen neuen Server umzuziehen. Ob Sie ein Endbenutzer oder Entwickler sind, dieses Plugin wird Ihnen eine zusätzliche Sicherheit geben, und Sie vor Datenverlust bewahren. Unser Ziel ist es, den Backup-, Wiederherstellungs- und Umzugsprozess so einfach, schnell und zuverlässig wie möglich zu machen."
+
+#: classes/view_gettingstarted.php:41
+msgid "Throughout the plugin you may hover your mouse over question marks %1$s for tips or click play icons %2$s for video tutorials."
+msgstr "Sie können jederzeit mit der Maus auf %1$s zeigen, um Tipps anzeigen zu lassen, oder auf das Play-Symbol %2$s klicken, um Video-Tutorials anzusehen."
+
+#: classes/view_gettingstarted.php:42
+msgid "This tip provides additional help."
+msgstr "Dieser Tipp bietet zusätzliche Hilfe."
+
+#: classes/view_gettingstarted.php:43
+msgid "This video would provide detailed information."
+msgstr "Dieses Video bietet zusätzliche Detail-Informationen."
+
+#: classes/view_gettingstarted.php:49
+msgid "Backup"
+msgstr "Backup"
+
+#: classes/view_gettingstarted.php:53
+msgid "Perform a <b>Full Backup</b> by clicking `Full Backup` button on the <a href=\"%s\">Backup</a> page. This backs up all files in your WordPress directory (and subdirectories) as well as the database. This will capture everything from the Database Only Backup and also all files in the WordPress directory and subdirectories. This includes files such as media, plugins, themes, images, and any other files found."
+msgstr "Erstellen Sie ein <b>Vollständiges Backup</b> durch einen Klick auf den `Vollständiges Backup`-Button auf der <a href=\"%s\">Backup</a>-Seite. Dadurch werden alle Dateien in Ihrem WordPress-Verzeichnis (und Unterverzeichnisse), sowie die Datenbank gesichert. Dies schließt also alle Daten des Datenbank-Backups ein, und alle Dateien im WordPress-Verzeichnis und den Unterverzeichnissen. Eingeschlossene Dateien sind unter anderem Medien, Plugins, Themes, Bilder und sämtliche anderen Dateien."
+
+#: classes/view_gettingstarted.php:58
+msgid "Perform a <b>Database Backup</b> regularly by clicking `Database Backup` button on the <a href=\"%s\">Backup</a>. The database contains posts, pages, comments widget content, media titles & descriptions (but not media files), and other WordPress settings. It may be backed up more often without impacting your available storage space or server performance as much as a Full Backup."
+msgstr "Erstellen Sie ein <b>Datenbank-Backup</b> durch Klick auf den `Datenbank-Backup`-Button auf der <a href=\"%s\">Backup</a>-Seite. Die Datenbank beinhaltet Artikel, Seiten, Kommentare, den Inhalt von Widgets, Titel und Beschreibung von Medien (nicht jedoch die eigentlichen Medien-Dateien), und andere WordPress-Einstellungen. Datenbank-Backups können Sie auch ohne Sorge um den benötigten Speicherplatz immer wieder ausführen, da der Speicherbedarf wesentlich geringer ist als bei vollständigen Backups."
+
+#: classes/view_gettingstarted.php:61
+msgid "Local backup storage directory"
+msgstr "Lokales Backup-Verzeichnis"
+
+#: classes/view_gettingstarted.php:61
+msgid "This is the local directory that backups are stored in. Backup files include random characters in their name for increased security. BackupBuddy must be able to create this directory & write to it."
+msgstr "In diesem lokalen Verzeichnis werden die Backup-Archive gespeichert. Die Archive beinhalten Zufallszeichen im Namen für zusätzliche Sicherheit. BackupBuddy muss berechtigt sein, dieses Verzeichnis zu erstellen und darin zu schreiben."
+
+#: classes/view_gettingstarted.php:67
+msgid "Restoring, Migrating"
+msgstr "Wiederherstellen, Umziehen"
+
+#: classes/view_gettingstarted.php:71
+msgid "Upload the backup file and <a href=\"%s\">importbuddy.php</a> to the root web directory of the destination server. <b>Do not install WordPress</b> on the destination server. The importbuddy.php script will restore all files, including WordPress."
+msgstr "Laden Sie die Backup-Datei und <a href=\"%s\">importbuddy.php</a> in das gewünschte Verzeichnis auf dem Ziel-Webserver. <b>Installieren Sie WordPress nicht</b> auf dem Zielserver. Das Skript importbuddy.php wird alle Dateien wiederherstellen, inklusive WordPress."
+
+#: classes/view_gettingstarted.php:74
+msgid "Create a mySQL database on the destination server."
+msgstr "Erstellen Sie eine MySQL-Datenbank auf dem Ziel-Webserver."
+
+#: classes/view_gettingstarted.php:76
+msgid "Tutorial Video & Instructions Here"
+msgstr "Tutorial-Video und Anleitung hier"
+
+#: classes/view_gettingstarted.php:79
+msgid "Navigate to <a href=\"%s\">importbuddy.php</a> in your web browser on the destination server. If you provided an import password you will be prompted for this password before you may continue."
+msgstr "Öffnen Sie <a href=\"%s\">importbuddy.php</a> in Ihrem Browser auf dem Ziel-Webserver. Falls Sie ein Passwort angegeben haben, müssen Sie dieses eingeben, bevor Sie fortfahren können."
+
+#: classes/view_gettingstarted.php:82
+msgid "Follow the importing instructions on screen. You will be asked whether you are restoring or migrating."
+msgstr "Folgen Sie den Import-Anweisungen auf der Seite. Sie werden gefragt werden ob Sie eine Wiederherstellung oder einen Umzug durchführen möchten."
+
+#: classes/view_gettingstarted.php:92
+msgid "Windows Server Performance Boost"
+msgstr "Performance-Boost für Windows-Server"
+
+#: classes/view_gettingstarted.php:94
+msgid ""
+"Windows servers may be able to significantly boost performance, if the server allows executing .exe files, by adding native Zip compatibility executable files <a href=\"http://pluginbuddy.com/wp-content/uploads/2010/05/backupbuddy_windows_unzip.zip\">available for download here</a>.\n"
+"\t\t\t\tInstructions are provided within the readme.txt in the package.  This package prevents Windows from falling back to Zip compatiblity mode and works for both BackupBuddy and importbuddy.php. This is particularly useful for <a href=\"http://ithemes.com/codex/page/BackupBuddy:_Local_Development\">local development on a Windows machine using a system like XAMPP</a>."
+msgstr ""
+"Die Leistung von Windows-basierten Servern kann deutlich gesteigert werden, wenn der Server die Ausführung von .exe-Dateien erlaubt. Dies wird durch native ZIP-Programme erzielt, welche Sie <a href=\"http://pluginbuddy.com/wp-content/uploads/2010/05/backupbuddy_windows_unzip.zip\">hier herunterladen können</a>.\n"
+"\t\t\t\tAnweisungen für die Installation finden Sie in der readme.txt in der heruntergeladenen Datei.  Durch diese Tools wird der Kompatibilätsmodus von BackupBuddy und importbuddy.php vermieden und die Leistung deutlich gesteigert. Dies ist insbesondere für <a href=\"http://ithemes.com/codex/page/BackupBuddy:_Local_Development\">lokale Entwicklung auf einem Windows-basierten Server mit einem System wie XAMPP</a> nützlich."
+
+#: classes/view_gettingstarted.php:104
+msgid "Click to visit the PluginBuddy Knowledge Base"
+msgstr "Klicken Sie, um die PluginBuddy Knowledge Base aufzurufen"
+
+#: classes/view_gettingstarted.php:105
+msgid "For documentation &#038; help visit our"
+msgstr "Für Dokumentation &#038; Hilfe besuchen Sie unsere"
+
+#: classes/view_gettingstarted.php:106
+msgid "Knowledge Base"
+msgstr "Knowledge Base"
+
+#: classes/view_gettingstarted.php:107
+msgid "Walkthroughs &middot; Tutorials &middot;  Technical Details"
+msgstr "Anleitungen &middot; Tutorials &middot; technische Details"
+
+#: classes/view_gettingstarted.php:116
+msgid "Version History"
+msgstr "Versions-Historie"
+
+#: classes/view_gettingstarted.php:127
+#: classes/view_gettingstarted.php:129
+msgid "Debugging Information"
+msgstr "Debug-Informationen"
+
+#: classes/view_gettingstarted.php:143
+msgid "Reset Plugin Settings & Defaults"
+msgstr "Plugin-Einstellungen auf Werkseinstellungen setzen"
+
+#: classes/view_gettingstarted.php:143
+msgid "WARNING: This will reset all settings associated with this plugin to their defaults. Are you sure you want to do this?"
+msgstr "WARNUNG: Dies wird alle Einstellungen des Plugins auf Standard-Werte zurücksetzen. Sind Sie sicher, dass Sie dies tun möchten?"
+
+#: classes/view_gettingstarted.php:147
+msgid "Log File"
+msgstr "Logdatei"
+
+#: classes/view_gettingstarted.php:153
+msgid "Nothing has been logged."
+msgstr "Nichts wurde protokolliert."
+
+#: classes/view_gettingstarted.php:160
+msgid "Clear Log File"
+msgstr "Logdatei leeren"
+
+#: classes/view_gettingstarted.php:175
+msgid "Things to do..."
+msgstr "Vorschläge"
+
+#: classes/view_gettingstarted.php:178
+msgid "Check out this awesome plugin"
+msgstr "Sehen Sie sich dieses Plugin an"
+
+#: classes/view_gettingstarted.php:178
+msgid "Share on Twitter"
+msgstr "Auf Twitter teilen"
+
+#: classes/view_gettingstarted.php:178
+msgid "Tweet about this plugin."
+msgstr "Über dieses Plugin twittern"
+
+#: classes/view_gettingstarted.php:179
+msgid "Check out PluginBuddy plugins."
+msgstr "Weitere PluginBuddy Plugins ansehen"
+
+#: classes/view_gettingstarted.php:180
+msgid "Check out iThemes themes."
+msgstr "Themes von iThemes ansehen"
+
+#: classes/view_gettingstarted.php:181
+msgid "Get HostGator web hosting."
+msgstr "Webhosting von HostGator"
+
+#: classes/view_gettingstarted.php:187
+#: classes/view_gettingstarted.php:207
+#: classes/view_malware.php:119
+#: classes/view_malware.php:133
+#: classes/view_malware.php:157
+#: classes/view_malware.php:165
+#: classes/view_malware.php:173
+#: classes/view_malware.php:181
+#: classes/view_malware.php:189
+#: classes/view_settings.php:139
+#: classes/view_settings.php:161
+#: classes/view_settings.php:249
+#: classes/view_settings.php:271
+#: classes/view_tools.php:34
+#: classes/view_tools.php:45
+#: classes/view_tools.php:56
+#: classes/view_tools.php:67
+#: classes/view_tools.php:78
+msgid "Click to toggle"
+msgstr "Ein/Ausklappen"
+
+#: classes/view_gettingstarted.php:188
+msgid "Latest news from PluginBuddy"
+msgstr "Aktuelles vom PluginBuddy"
+
+#: classes/view_gettingstarted.php:196
+msgid "Follow @pluginbuddy on Twitter."
+msgstr "Folge @pluginbuddy auf Twitter"
+
+#: classes/view_gettingstarted.php:198
+msgid "Subscribe to RSS news feed."
+msgstr "RSS-Feed abonnieren"
+
+#: classes/view_gettingstarted.php:200
+msgid "Subscribe to Email Newsletter."
+msgstr "Email-Newsletter abonnieren"
+
+#: classes/view_gettingstarted.php:208
+msgid "Need support?"
+msgstr "Brauchen Sie Hilfe?"
+
+#: classes/view_gettingstarted.php:210
+msgid "See our <a href=\"http://pluginbuddy.com/tutorials/\">tutorials & videos</a> or visit our <a href=\"http://pluginbuddy.com/support/\">support forum</a> for additional information and help."
+msgstr "Sehen Sie sich unsere  <a href=\"http://pluginbuddy.com/tutorials/\">Tutorials & Videos</a> an, oder besuchesn Sie unser <a href=\"http://pluginbuddy.com/support/\">Support-Forum</a> für weitere Informationen und Hilfe."
+
+#: classes/view_malware.php:25
+msgid "ERROR: You are currently running your site locally. Your site must be internet accessible to scan."
+msgstr "FEHLER: Ihre Seite ist auf Ihrem lokalen Rechner gespeichert. Ihre Seite muss vom Internet aus erreichbar sein, damit der Scan durchgeführt werden kann."
+
+#: classes/view_malware.php:37
+msgid "Scanning for Malware... Please wait..."
+msgstr "Scanne nach Malware... bitte warten..."
+
+#: classes/view_malware.php:57
+msgid "ERROR #24452. Unable to load Malware Scan results. Details:"
+msgstr "FEHLER Nr. 24452. Konnte Ergebnisse des Malware-Scans nicht laden. Details:"
+
+#: classes/view_malware.php:75
+msgid "An error was encountered attempting to scan this site."
+msgstr "Beim Versuch die Seite zu scannen ist ein Fehler aufgetreten."
+
+#: classes/view_malware.php:76
+msgid "An internet connection is required and this site must be accessible on the public internet."
+msgstr "Eine Internetverbindung ist erforderlich, und die Seite muss vom Internet aus erreichbar sein."
+
+#: classes/view_malware.php:100
+#: classes/view_malware.php:127
+#: classes/view_malware.php:136
+#: classes/view_malware.php:137
+#: classes/view_malware.php:138
+#: classes/view_malware.php:139
+#: classes/view_malware.php:140
+#: classes/view_malware.php:148
+#: classes/view_malware.php:149
+#: classes/view_malware.php:150
+#: classes/view_malware.php:151
+#: classes/view_malware.php:152
+#: classes/view_malware.php:160
+#: classes/view_malware.php:168
+#: classes/view_malware.php:176
+#: classes/view_malware.php:184
+#: classes/view_malware.php:192
+#: classes/view_tools-cron.php:56
+msgid "none"
+msgstr "keine"
+
+#: classes/view_malware.php:109
+msgid "Warning: Malware Detected!"
+msgstr "Warnung: Malware gefunden!"
+
+#: classes/view_malware.php:109
+msgid "See details below."
+msgstr "Details finden Sie weiter unten."
+
+#: classes/view_malware.php:109
+msgid "Sign up with Sucuri for removal assistance."
+msgstr "Melden Sie sich bei Sucuri an, um Unterstützung für die Entfernung zu erhalten."
+
+#: classes/view_malware.php:120
+msgid "Malware Detected"
+msgstr "Malware gefunden"
+
+#: classes/view_malware.php:122
+msgid "Malware"
+msgstr "Malware"
+
+#: classes/view_malware.php:134
+msgid "Web server details"
+msgstr "Webserver-Details"
+
+#: classes/view_malware.php:136
+msgid "Site"
+msgstr "Site"
+
+#: classes/view_malware.php:137
+msgid "Hostname"
+msgstr "Hostname"
+
+#: classes/view_malware.php:138
+msgid "IP Address"
+msgstr "IP-Adresse"
+
+#: classes/view_malware.php:139
+msgid "System details"
+msgstr "Systemdetails"
+
+#: classes/view_malware.php:140
+msgid "Information"
+msgstr "Information"
+
+#: classes/view_malware.php:146
+msgid "Web application"
+msgstr "Web-Anwendung"
+
+#: classes/view_malware.php:148
+msgid "Details"
+msgstr "Details"
+
+#: classes/view_malware.php:149
+msgid "Versions"
+msgstr "Versionen"
+
+#: classes/view_malware.php:150
+msgid "Notices"
+msgstr "Hinweise"
+
+#: classes/view_malware.php:151
+msgid "Errors"
+msgstr "Fehler"
+
+#: classes/view_malware.php:152
+msgid "Warnings"
+msgstr "Warnungen"
+
+#: classes/view_malware.php:158
+msgid "Links"
+msgstr "Links"
+
+#: classes/view_malware.php:166
+msgid "Local Javascript"
+msgstr "Lokales JavaScript"
+
+#: classes/view_malware.php:174
+msgid "External Javascript"
+msgstr "Externes JavaScript"
+
+#: classes/view_malware.php:182
+msgid "Iframes Included"
+msgstr "Eingebettete Iframes"
+
+#: classes/view_malware.php:190
+msgid "Blacklisting Status"
+msgstr "Blacklist-Status"
+
+#: classes/view_malware.php:204
+msgid "Malware scan results are cached for one hour."
+msgstr "Die Ergebnisse des Malware-Scans werden für eine Stunde zwischengespeichert."
+
+#: classes/view_malware.php:204
+msgid "Perform New Scan Now"
+msgstr "Neuen Scan jetzt ausführen"
+
+#: classes/view_scheduling.php:15
+#: classes/view_scheduling.php:32
+msgid "Invalid time format. Please use the specified format / example %s"
+msgstr "Ungültiges Zeitformat. Bitte benutzen Sie das angegebene Format / Beispiel %s"
+
+#: classes/view_scheduling.php:19
+#: classes/view_scheduling.php:36
+msgid "You must enter a schedule name."
+msgstr "Sie müssen einen Namen für den Zeitplan angeben."
+
+#: classes/view_scheduling.php:59
+msgid "Deleted schedule(s)"
+msgstr "Zeitplan gelöscht"
+
+#: classes/view_scheduling.php:74
+msgid "Scheduled Backups"
+msgstr "Geplante Backups"
+
+#: classes/view_scheduling.php:91
+#: classes/view_scheduling.php:103
+#: classes/view_tools-cron.php:42
+msgid "Interval"
+msgstr "Intervall"
+
+#: classes/view_scheduling.php:92
+#: classes/view_scheduling.php:104
+msgid "First Run"
+msgstr "Erste Ausführung"
+
+#: classes/view_scheduling.php:93
+#: classes/view_scheduling.php:105
+msgid "Destinations"
+msgstr "Ziele"
+
+#: classes/view_scheduling.php:119
+msgid "Edit this schedule"
+msgstr "Zeitplan bearbeiten"
+
+#: classes/view_scheduling.php:125
+msgid "full"
+msgstr "voll"
+
+#: classes/view_scheduling.php:127
+msgid "database"
+msgstr "Datenbank"
+
+#: classes/view_scheduling.php:129
+msgid "unknown"
+msgstr "unbekannt"
+
+#: classes/view_scheduling.php:162
+msgid "Hover over a schedule above for additional options."
+msgstr "Zeigen Sie auf einen Zeitplan für weitere Optionen."
+
+#: classes/view_scheduling.php:178
+msgid "Edit Schedule"
+msgstr "Zeitplan bearbeiten"
+
+#: classes/view_scheduling.php:184
+msgid "Add New Schedule"
+msgstr "Neuen Zeitplan erstellen"
+
+#: classes/view_scheduling.php:184
+msgid "Add a new schedule"
+msgstr "Einen neuen Zeitplan erstellen"
+
+#: classes/view_scheduling.php:190
+msgid "Name for backup schedule"
+msgstr "Name des Zeitplans"
+
+#: classes/view_scheduling.php:190
+msgid "This is a name for your reference only."
+msgstr "Dieser Name dient nur organisatorischen Zwecken"
+
+#: classes/view_scheduling.php:193
+msgid "Backup type"
+msgstr "Backup-Typ"
+
+#: classes/view_scheduling.php:193
+msgid "Full backups contain all files (except exclusions) and your database. Database only backups consist of an export of your mysql database; no WordPress files or media. Database backups are typically much smaller and faster to perform and are typically the most quickly changing part of a site."
+msgstr "Vollständige Backups beinhalten alle Dateien (außer die auf der Ausschlussliste) und Ihre Datenbank. Reine Datenbank-Backups beinhalten einen Export der MySQL-Datenbank, jedoch keine WordPress-Dateien oder Medien. Datenbank-Backups sind in der Regel viel kleiner und schneller erstellt und spiegeln den sich am Häufigsten ändernden Teil einer Seite wider."
+
+#: classes/view_scheduling.php:197
+msgid "Full (database + files)"
+msgstr "Vollständig (Datenbank + Dateien)"
+
+#: classes/view_scheduling.php:201
+msgid "Backup interval"
+msgstr "Backup-Intervall"
+
+#: classes/view_scheduling.php:201
+msgid "Time period between backups."
+msgstr "Zeit zwichen den Backups."
+
+#: classes/view_scheduling.php:204
+msgid "Monthly"
+msgstr "Monatlich"
+
+#: classes/view_scheduling.php:205
+msgid "Twice Monthly"
+msgstr "Zweimal monatlich"
+
+#: classes/view_scheduling.php:206
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: classes/view_scheduling.php:207
+msgid "Daily"
+msgstr "Täglich"
+
+#: classes/view_scheduling.php:208
+msgid "Hourly"
+msgstr "Stündlich"
+
+#: classes/view_scheduling.php:212
+msgid "Date/time of next run"
+msgstr "Datum/Uhrzeit der nächsten Ausführung"
+
+#: classes/view_scheduling.php:212
+msgid "IMPORTANT: For scheduled events to be occur someone (or you) must visit this site on or after the scheduled time. If no one visits your site for a long period of time some backup events may not be triggered."
+msgstr "WICHTIG: Damit die Events gemäß Zeitplan ausgeführt werden können, muss jemand (oder Sie) die Seite zur oder nach der geplanten Zeit besuchen. Wenn längere Zeit keine Besuche auf Ihrer Seite auftreten kann es sein dass bestimmte Backup-Events nicht ausgeführt werden."
+
+#: classes/view_scheduling.php:214
+msgid "Currently"
+msgstr "Aktuell"
+
+#: classes/view_scheduling.php:214
+msgid "based on"
+msgstr "basierend auf den"
+
+#: classes/view_scheduling.php:214
+msgid "WordPress settings"
+msgstr "WordPress-Einstellungen"
+
+#: classes/view_scheduling.php:219
+msgid "Remote backup destination"
+msgstr "Entferntes Backup-Ziel"
+
+#: classes/view_scheduling.php:219
+msgid "Automatically sends generated backups to a remote destination such as Amazon S3, Rackspace Cloudsites, Email, or FTP."
+msgstr "Sendet die erstellten Backups automatisch auf Amazon S3, Rackspace Cloudfiles, Email oder FTP."
+
+#: classes/view_scheduling.php:232
+msgid "Add Remote Destination"
+msgstr "Entferntes Ziel hinzufügen"
+
+#: classes/view_scheduling.php:238
+msgid "Delete local copy after remote send"
+msgstr "Lokale Kopie nach Versand löschen"
+
+#: classes/view_scheduling.php:238
+msgid "[Default: disabled] - When enabled the local copy of the backup will be deleted after the file has been sent to the remote destination(s)."
+msgstr "[Standard: deaktiviert] - Wenn aktiv werden die lokalen Kopien von Backup-Dateien nach dem Versand auf externe Ziele gelöscht."
+
+#: classes/view_scheduling.php:248
+msgid "Add Schedule"
+msgstr "Zeitplan hinzufügen"
+
+#: classes/view_scheduling.php:259
+msgid "Due to the way schedules are triggered in WordPress someone must visit your site<br /> for scheduled backups to occur. If there are no visits, some schedules may not be triggered."
+msgstr "Bedingt durch die Art und Weise wie Backups in WordPress ausgeführt werden, muss jemand Ihre Seite besuchen,<br /> damit geplante Backups ausgeführt werden. Wenn keine Besuche stattfinden kann es sein dass manche Zeitpläne nicht erfüllt werden."
+
+#: classes/view_settings.php:42
+msgid "You cannot exclude /wp-content/ or /wp-content/uploads/.  However, you may exclude subdirectories within these. The backupbuddy_backups directory is also automatically excluded and cannot be added to exclusion list."
+msgstr "Die Verzeichnisse /wp-content/ oder /wp-content/uploads/ können nicht ausgeschlossen werden, deren Unterverzeichnisse aber schon. Das Speicher-Verzeichnis der Backups (backupbuddy_backups) wird automatisch ausgeschlossen und kann nicht zur Ausschluss-Liste hinzugefügt werden."
+
+#: classes/view_settings.php:140
+msgid "Email Notifications"
+msgstr "Email-Benachrichtigungen"
+
+#: classes/view_settings.php:140
+msgid "Email Notifications Tutorial"
+msgstr "Tutorial für Email-Benachrichtigungen"
+
+#: classes/view_settings.php:144
+msgid "Scheduled backup completion recipients"
+msgstr "Empfänger bei Backup nach Zeitplan"
+
+#: classes/view_settings.php:144
+msgid "Email address(es) to send notifications to upon scheduled backup completion."
+msgstr "Email-Adresse(n), an die Benachrichtigungen gesendet werden sollen, sobald ein geplantes Backup ausgeführt wurde."
+
+#: classes/view_settings.php:148
+msgid "Manual backup completion recipients"
+msgstr "Empfänger bei manuellen Backups"
+
+#: classes/view_settings.php:148
+msgid "Email address(es) to send notifications to upon manually triggered backup completion."
+msgstr "Email-Adresse(n), an die Benachrichtigungen gesendet werden sollen, sobald ein manuell gestartetes Backup ausgeführt wurde."
+
+#: classes/view_settings.php:152
+msgid "Backup failure/error recipients"
+msgstr "Empfänger bei fehlgeschlagenen Backups"
+
+#: classes/view_settings.php:152
+msgid "Email address(es) to send notifications to upon encountering any errors or problems."
+msgstr "Email-Adresse(n), an die Benachrichtigungen gesendet werden sollen, wenn Fehler oder Probleme auftreten."
+
+#: classes/view_settings.php:162
+msgid "General Options"
+msgstr "Allgemeine Einstellungen"
+
+#: classes/view_settings.php:162
+msgid "General Options Tutorial"
+msgstr "Tutorial für allgemeine Einstellungen"
+
+#: classes/view_settings.php:166
+msgid "Import password (optional)"
+msgstr "Import-Passwort (optional)"
+
+#: classes/view_settings.php:166
+msgid "[Example: myp@ssw0rD] - Optional password to be required to launch the importbuddy import/migration script. This prevents unauthorized users from being able to view your backup archive listing on the destination server during Step 1 or proceed with an unauthorized import."
+msgstr "[Example: myp@ssw0rD] - optionales Passwort, das abgefragt wird, wenn Sie das importbuddy Import/Umzug-Skript benutzen. Dies verhindert unberechtigten Zugriff auf den Inhalt des Backup-Archivs auf dem Zielserver in Schritt 1, sowie den unberechtigten Import der Daten."
+
+#: classes/view_settings.php:170
+msgid "Backup reminders"
+msgstr "Backup-Erinnerungen"
+
+#: classes/view_settings.php:170
+msgid "[Default: enabled] - When enabled links will be displayed upon post or page edits and during WordPress upgrades to remind and allow rapid backing up after modifications or before upgrading."
+msgstr "[Standart: aktiviert] - Wenn aktiv werden beim Bearbeiten von Artikeln und Seiten, sowie beim Upgrade von WordPress Links angezeigt, über die schnell und einfach Backups nach Änderungen oder vor dem Upgrade erstellt werden können."
+
+#: classes/view_settings.php:173
+msgid "Enable backup reminders"
+msgstr "Backup-Erinnerungen aktivieren"
+
+#: classes/view_settings.php:177
+msgid "Backup all database tables"
+msgstr "Alle Datenbank-Tabellen sichern"
+
+#: classes/view_settings.php:177
+msgid "[Default: disabled] - Checking this box will result in ALL tables and data in the database being backed up, even database content not related to WordPress, its content, or plugins (based on prefix).  This is useful if you have other software installed on your hosting that stores data in your database."
+msgstr "[Standart: deaktiviert] - Wenn aktiv werden ALLE Tabellen in Ihrer Datenbank gesichert, auch Inhalt der nichts mit WordPress, Inhalten oder Plugins zu tun hat. Dies ist nützlich, wenn Sie zusätzliche Software installiert haben, die Daten in der Datenbank speichert."
+
+#: classes/view_settings.php:182
+msgid "Enable backing up all tables in your database (not just WordPress tables)"
+msgstr "Sicherung aller Datenbank-Tabellen aktivieren (nicht nur WordPress-Tabellen)"
+
+#: classes/view_settings.php:184
+msgid "Use this if your plugins create their own custom tables."
+msgstr "Erforderlich, wenn Ihre Plugins eigene Tabellen erzeugen."
+
+#: classes/view_settings.php:189
+msgid "Compatibility/Troubleshooting options"
+msgstr "Optionen zur Kompatibilität/Fehlerbehebung"
+
+#: classes/view_settings.php:189
+msgid "Various options to aid in making BackupBuddy work in less than ideal server environments. These are useful for working around problems. You may be directed by support to modify these if you encounter problems."
+msgstr "Verschiedene Einstellungen, die es BackupBuddy erlauben, in suboptimalen Server-Umgebungen zu funktionieren. Diese sind nützlich, um bestimmte Probleme zu umgehen. Es kann sein, dass Sie vom Support gebeten werden, diese bei Problemen zu ändern."
+
+#: classes/view_settings.php:189
+msgid "Compatibility Options Details"
+msgstr "Details der Kompatibilitäts-/Fehlerbehebungs-Optionen"
+
+#: classes/view_settings.php:194
+msgid "Enable ZIP compression"
+msgstr "ZIP-Kompression aktivieren"
+
+#: classes/view_settings.php:194
+msgid "[Default: enabled] - ZIP compression decreases file sizes of stored backups. If you are encountering timeouts due to the script running too long, disabling compression may allow the process to complete faster."
+msgstr "[Standard: aktiviert] - ZIP-Komprimierung verringert die Größe der gespeicherten Backups. Falls Sie Probleme beim erstellen der Backups feststellen, kann diese Option die Ausführung beschleunigen."
+
+#: classes/view_settings.php:196
+msgid "Disable this if your site is too large, causing backups to not complete."
+msgstr "Deaktivieren falls Ihre Seite zu groß ist und Backups dadurch nicht abgeschlossen werden können."
+
+#: classes/view_settings.php:202
+msgid "Perform integrity check on backup files"
+msgstr "Integritätsprüfung für Backup-Dateien ausführen"
+
+#: classes/view_settings.php:202
+msgid "[Default: enabled] - By default each backup file is checked for integrity and completion the first time it is viewed on the Backup page.  On some server configurations this may cause memory problems as the integrity checking process is intensive.  If you are experiencing out of memory errors on the Backup file listing, you can uncheck this to disable this feature."
+msgstr "[Standard: aktiviert] - Standardmäßig wird jede Backup-Datei beim ersten Betrachten auf der Backup-Seite auf Integrität und Vollständigkeit überprüft. In manchen Server-Umgebungen kann dies zu Speicherproblemen führen, da die Prüfung mit einigem Aufwand verbunden ist. Deaktivieren Sie diese Funktion, wenn beim Betrachten der Backup-Liste Speicherfehler angezeigt werden."
+
+#: classes/view_settings.php:204
+msgid "Use if you have problems viewing your backup listing."
+msgstr "Benutzen, falls die Backup-Liste nicht richtig angezeigt wird."
+
+#: classes/view_settings.php:210
+msgid "Advanced: Force compatibility mode backups"
+msgstr "Erweitert: Kompatibilitätsmodus erzwingen"
+
+#: classes/view_settings.php:210
+msgid "[Default: disabled] - (WARNING: This forces the less reliable mode of operation. Only use if absolutely necessary. Checking this box can cause backup failures if it is not needed.) Under normal circumstances compatibility mode is automatically entered as needed without user intervention. However under some server configurations the native backup system is unavailable but is incorrectly reported as functioning by the server.  Forcing compatibility may fix problems in this situation by bypassing the native backup system check entirely."
+msgstr "[Standard: deaktiviert] - (WARNUNG: Dies erzwingt einen weniger zuverlässigen Arbeitsablauf. Nur benutzen wenn es absolut notwendig ist, es könnten sonst Backup-Fehler entstehen.) Unter normalen Umständen wird der Kompatibilitätsmodus bei Bedarf automatisch aktiviert. Unter gewissen Server-Umgebungen geht das System jedoch davon aus, dass das Backup-System funktioniert, obwohl dies nicht der Fall ist. Die Aktivierung des Kompatibilitätsmodus ist in diesem Fall eine Lösungsmöglichkeit, um die Prüfung auf Standard-Umgebungen zu umgehen."
+
+#: classes/view_settings.php:212
+msgid "Only use if absolutely necessary or directed by support."
+msgstr "Nur benutzen wenn es absolut notwendig ist, oder vom Support angewiesen."
+
+#: classes/view_settings.php:217
+msgid "Logging level"
+msgstr "Log-Level"
+
+#: classes/view_settings.php:217
+msgid "[Default: Errors Only] - This option controls how much activity is logged for records or debugging. Logs saved in %s/uploads/backupbuddy.txt"
+msgstr "[Standard: Nur Fehler] - Diese Option legt fest, wie viel Aktivität protokolliert werden soll. Logs finden sich in %s/uploads/backupbuddy.txt"
+
+#: classes/view_settings.php:220
+msgid "None"
+msgstr "Keine"
+
+#: classes/view_settings.php:221
+msgid "Errors Only"
+msgstr "Nur Fehler"
+
+#: classes/view_settings.php:222
+msgid "Errors & Warnings"
+msgstr "Fehler & Warnungen"
+
+#: classes/view_settings.php:223
+msgid "Everything (debug mode)"
+msgstr "Alles (Debug-Modus)"
+
+#: classes/view_settings.php:250
+msgid "Archive Storage Limits"
+msgstr "Speicherbegrenzung für Archive"
+
+#: classes/view_settings.php:250
+msgid "Archive Storage Limits Tutorial"
+msgstr "Tutorial für Archiv-Speicherbegrenzung"
+
+#: classes/view_settings.php:254
+msgid "Maximum number of archived backups"
+msgstr "Maximale Anzahl archivierter Backups"
+
+#: classes/view_settings.php:254
+msgid "[Example: 10] - Maximum number of archived backups to store. The oldest backup(s) will be removed if this limit is exceeded. Set to zero for no limit. You can either limit the total backups or by type.  Set unused limits to zero (0)."
+msgstr "[Beispiel: 10] - Maximale Anzahl zu speichernder Backups. Das älteste Backup wird entfernt, wenn diese Grenze beim Erstellen eines Backups überschritten würde. Auf 0 setzen für keine Begrenzung. Sie können entweder eine globale Begrenzung für alle Backups, oder für jeden Typ einzeln festlegen. Setzen Sie unbenutzte Werte auf 0."
+
+#: classes/view_settings.php:256
+#: lib/zipbuddy/zipbuddy.php:169
+#: lib/zipbuddy/zipbuddy.php:171
+msgid "total"
+msgstr "insgesamt"
+
+#: classes/view_settings.php:260
+msgid "Maximum size of archived backups"
+msgstr "Maximale Größe archivierter Backups"
+
+#: classes/view_settings.php:260
+msgid "[Example: 350] - Maximum size (in MB) to allow your total archives to reach. Any new backups created after this limit is met will result in your oldest backup(s) being deleted to make room for the newer ones."
+msgstr "[Beispiel: 350] - Maximalgröße (in MB) aller gespeicherter Backups zusammen. Beim Erstellen eines Backups werden ältere nach Bedarf gelöscht, um innerhalb dieser Grenze zu bleiben."
+
+#: classes/view_settings.php:262
+msgid "MB total"
+msgstr "MB insgesamt"
+
+#: classes/view_settings.php:272
+msgid "Remote Offsite Storage / Destinations"
+msgstr "Ziele für Externe Datensicherung"
+
+#: classes/view_settings.php:272
+msgid "Remote Offsite Management / Remote Clients Tutorial"
+msgstr "Tutorial für Verwaltung Externer Ziele"
+
+#: classes/view_settings.php:285
+msgid "Backup Exclusions"
+msgstr "Ausgeschlossene Verzeichnisse"
+
+#: classes/view_settings.php:285
+msgid "Backup Directory Excluding Tutorial"
+msgstr "Tutorial für ausgeschlossene Verzeichnisse"
+
+#: classes/view_settings.php:290
+msgid "Click directory to navigate to it or %s to exclude it."
+msgstr "Klicken Sie auf ein Verzeichnis um es zu öffnen, oder auf %s, um es auszuschließen."
+
+#: classes/view_settings.php:290
+msgid "Click on a directory name to navigate directories. Click the red minus sign to the right of a directory to place it in the exclusion list. /wp-content/ and /wp-content/uploads/ cannot be excluded."
+msgstr "Klicken Sie auf einen Verzeichnisnamen, um das Verzeichnis zu öffnen. Klicken Sie das rote Minus-Zeichen rechts neben einem Verzeichnis, um es auf die Ausschluss-Liste zu setzen. Die Verzeichnisse /wp-content/ und /wp-content/uploads/ können nicht ausgeschlossen werden."
+
+#: classes/view_settings.php:293
+msgid "Available if server does not require compatibility mode."
+msgstr "Verfügbar, falls der Server nicht den Kompatibilitätsmodus erzwingt."
+
+#: classes/view_settings.php:293
+msgid "If you receive notifications that your server is entering compatibility mode or that native zip functionality is unavailable then this feature will not be available due to technical limitations of the compatibility mode.  Ask your host to correct the problems causing compatibility mode or move to a new server."
+msgstr "Falls Sie Meldungen erhalten, dass sich Ihr Server im Kompatibilitäsmodus befindet, oder dass die native ZIP-Funktionalität nicht verfügbar ist, wird diese Funktion bedingt durch technische Einschränkungen des Kompatibilitätsmodus nicht verfügbar sein. Bitten Sie Ihren Webhosting-Anbieter, die Probleme zu beheben die den Kompatibilitätsmodus erzwingen, oder ziehen Sie auf einen neuen Server um."
+
+#: classes/view_settings.php:297
+msgid "Excluded directories (path relative to root)"
+msgstr "Ausgeschlossene Verzeichnisse (Pfad relativ zum Stammverzeichnis)"
+
+#: classes/view_settings.php:298
+msgid "List paths relative to root to be excluded from backups.  You may use the directory selector to the left to easily exclude directories by ctrl+clicking them.  Paths are relative to root. Ex: /wp-content/uploads/junk/"
+msgstr "Listen Sie Verzeichnisse relativ zum Stammverzeichnis auf, die vom Backup ausgeschlossen werden sollen. Sie können über das Auswahlfeld auf der linken Seite mehrere Verzeichnisse auswählen, indem Sie sie bei gedrückter Strg-Taste anklicken. Pfade sind relativ zum Stammverzeichnis, z.B. /wp-content/uploads/junk"
+
+#: classes/view_settings.php:302
+msgid "List one path per line. Remove a line to remove exclusion."
+msgstr "Ein Verzeichnis pro Zeile. Eine Zeile entfernen, um den Ausschluss rückgängig zu machen."
+
+#: classes/view_settings.php:320
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#: classes/view_tools-cron.php:8
+msgid "Deleted sheduled CRON event"
+msgstr "Geplantes CRON-Ereignis gelöscht"
+
+#: classes/view_tools-cron.php:18
+msgid "Ran CRON event `%s` (did not modify schedule)."
+msgstr "CRON-Ereignis `%s` durchlaufen (Zeitplan bleibt unverändert)."
+
+#: classes/view_tools-cron.php:29
+msgid "Event Action"
+msgstr "Event-Aktion"
+
+#: classes/view_tools-cron.php:29
+msgid "WARNING: This will delete a scheduled WordPress action. Doing so may compromise the operation of WordPress or other plugins and should be used with care. Are you sure you want to do this?"
+msgstr "WARNUNG: Dies löscht eine geplante WordPress-Aktion. Dies kann sowohl WordPress als auch Plugins erheblich in ihrer Funktion beeinträchtigen, und sollte mit Vorsicht benutzt werden. Sind Sie sicher, dass Sie dies tun möchten?"
+
+#: classes/view_tools-cron.php:29
+msgid "Delete this scheduled cron entry"
+msgstr "Diesen geplanten Cron-Eintrag löschen"
+
+#: classes/view_tools-cron.php:29
+msgid "Run scheduled cron's function now (does not modify schedule)"
+msgstr "Geplante Cron-Funktion jetzt ausführen (Zeitplan bleibt unverändert)"
+
+#: classes/view_tools-cron.php:31
+msgid "Event Key"
+msgstr "Event-Schlüssel"
+
+#: classes/view_tools-cron.php:33
+msgid "Run Time"
+msgstr "Nächster Lauf"
+
+#: classes/view_tools-cron.php:35
+msgid "Period"
+msgstr "Zeitplan"
+
+#: classes/view_tools-cron.php:39
+#: classes/view_tools-cron.php:46
+msgid "one time only"
+msgstr "einmalig"
+
+#: classes/view_tools-cron.php:44
+#: classes/view_tools-sitesize.php:78
+msgid "seconds"
+msgstr "Sekunden"
+
+#: classes/view_tools-cron.php:49
+msgid "Arguments"
+msgstr "Parameter"
+
+#: classes/view_tools-cron.php:71
+msgid "Display CRON Debugging Array"
+msgstr "CRON-Debug-Array anzeigen"
+
+#: classes/view_tools-cron.php:80
+msgid "Current Time"
+msgstr "Aktuelle Zeit"
+
+#: classes/view_tools-database.php:5
+#: classes/view_tools-database.php:16
+msgid "Database Table"
+msgstr "Datenbank-Tabelle"
+
+#: classes/view_tools-database.php:6
+#: classes/view_tools-database.php:17
+msgid "Engine"
+msgstr "Speicher-Engine"
+
+#: classes/view_tools-database.php:7
+#: classes/view_tools-database.php:18
+msgid "Last Updated"
+msgstr "Zuletzt aktualisiert"
+
+#: classes/view_tools-database.php:8
+#: classes/view_tools-database.php:19
+msgid "Rows"
+msgstr "Zeilen"
+
+#: classes/view_tools-database.php:9
+#: classes/view_tools-database.php:20
+msgid "Size"
+msgstr "Größe"
+
+#: classes/view_tools-database.php:44
+msgid "TOTALS"
+msgstr "GESAMT"
+
+#: classes/view_tools-permissions.php:11
+#: classes/view_tools-permissions.php:24
+#: classes/view_tools-permissions.php:37
+#: classes/view_tools-permissions.php:50
+#: classes/view_tools-permissions.php:63
+#: classes/view_tools-permissions.php:76
+#: classes/view_tools-permissions.php:89
+#: classes/view_tools-permissions.php:102
+#: classes/view_tools-permissions.php:115
+msgid "warn"
+msgstr "Warnung"
+
+#: classes/view_tools-permissions.php:13
+#: classes/view_tools-permissions.php:26
+#: classes/view_tools-permissions.php:39
+#: classes/view_tools-permissions.php:52
+#: classes/view_tools-permissions.php:65
+#: classes/view_tools-permissions.php:78
+#: classes/view_tools-permissions.php:91
+#: classes/view_tools-permissions.php:104
+#: classes/view_tools-permissions.php:117
+msgid "success"
+msgstr "Erfolg"
+
+#: classes/view_tools-permissions.php:127
+#: classes/view_tools-permissions.php:138
+msgid "Relative Path"
+msgstr "re"
+
+#: classes/view_tools-permissions.php:128
+#: classes/view_tools-permissions.php:139
+#: classes/view_tools-server.php:261
+#: classes/view_tools-server.php:273
+msgid "Suggestion"
+msgstr "Empfohlen"
+
+#: classes/view_tools-permissions.php:129
+#: classes/view_tools-permissions.php:140
+#: classes/view_tools-server.php:262
+#: classes/view_tools-server.php:274
+msgid "Value"
+msgstr "Wert"
+
+#: classes/view_tools-permissions.php:130
+#: classes/view_tools-permissions.php:141
+#: classes/view_tools-server.php:263
+#: classes/view_tools-server.php:275
+msgid "Result"
+msgstr "Ergebnis"
+
+#: classes/view_tools-permissions.php:155
+#: classes/view_tools-server.php:33
+#: classes/view_tools-server.php:48
+#: classes/view_tools-server.php:64
+#: classes/view_tools-server.php:80
+#: classes/view_tools-server.php:104
+#: classes/view_tools-server.php:120
+#: classes/view_tools-server.php:128
+#: classes/view_tools-server.php:148
+#: classes/view_tools-server.php:167
+#: classes/view_tools-server.php:186
+#: classes/view_tools-server.php:205
+#: classes/view_tools-server.php:219
+#: classes/view_tools-server.php:243
+#: classes/view_tools-server.php:290
+msgid "OK"
+msgstr "OK"
+
+#: classes/view_tools-permissions.php:157
+#: classes/view_tools-server.php:31
+#: classes/view_tools-server.php:62
+#: classes/view_tools-server.php:78
+#: classes/view_tools-server.php:146
+#: classes/view_tools-server.php:292
+msgid "FAIL"
+msgstr "FEHLER"
+
+#: classes/view_tools-permissions.php:159
+#: classes/view_tools-server.php:46
+#: classes/view_tools-server.php:106
+#: classes/view_tools-server.php:123
+#: classes/view_tools-server.php:165
+#: classes/view_tools-server.php:184
+#: classes/view_tools-server.php:203
+#: classes/view_tools-server.php:217
+#: classes/view_tools-server.php:241
+#: classes/view_tools-server.php:247
+#: classes/view_tools-server.php:294
+msgid "WARNING"
+msgstr "WARNUNG"
+
+#: classes/view_tools-server.php:28
+msgid "Version of PHP currently running on this site."
+msgstr "PHP-Version, die auf dem Server läuft"
+
+#: classes/view_tools-server.php:43
+msgid "Maximum amount of time that PHP allows scripts to run. After this limit is reached the script is killed. The more time available the better. 30 seconds is most common though 60 seconds is ideal."
+msgstr "Maximale Zeit die ein PHP-Skript laufen darf. Wird dieses Limit erreicht wird das Skript beendet. Je mehr Zeit verfügbar ist, umso besser. 30 Sekunden sind normal, 60 Sekunden sind ideal."
+
+#: classes/view_tools-server.php:59
+msgid "Version of WordPress currently running. It is important to keep your WordPress up to date for security & features."
+msgstr "Momentan installierte WordPress-Version. Um stets die neuesten Funktionen und hohe Sicherheit zu haben ist es wichtig, WordPress aktuell zu halten."
+
+#: classes/view_tools-server.php:75
+msgid "Version of your database server (mysql) as reported to this script by WordPress."
+msgstr "Version Ihres Datenbank-Servers (MySQL) wie sie von WordPress gemeldet wird."
+
+#: classes/view_tools-server.php:89
+msgid "Unable to create backup storage directory (%s)"
+msgstr "Konnte Backup-Verzeichnis nicht anlegen (%s)"
+
+#: classes/view_tools-server.php:101
+msgid "Methods your server supports for creating ZIP files. These were tested & verified to operate."
+msgstr "Methoden, die Ihr Server für die Erstellung von ZIP-Dateien unterstützt. Diese wurden gefunden und auf Funktion getestet."
+
+#: classes/view_tools-server.php:115
+msgid "If detected then you may have difficulty migrating your site to some hosts without first removing the AddHandler line. Some hosts will malfunction with this line in the .htaccess file."
+msgstr "Falls gefunden kann es sein dass Sie beim Umzug Ihrer Seite auf bestimmte Webhoster Probleme haben ohne dass Sie zuvor die AddHandler-Zeile entfernen. Manche Webserver funktionieren nicht mit dieser Zeile in der .htaccess-Datei."
+
+#: classes/view_tools-server.php:121
+#: classes/view_tools-server.php:129
+msgid "n/a"
+msgstr "n/v"
+
+#: classes/view_tools-server.php:124
+msgid "exists"
+msgstr "existiert"
+
+#: classes/view_tools-server.php:143
+msgid "Automatically registers user input as variables. HIGHLY discouraged. Removed from PHP in PHP 6 for security."
+msgstr "Wertet Benutzereingaben automatisch als Variablen aus. DRINGEND abzuraten. In PHP6 aus PHP aus Sicherheitsgründen entfernt."
+
+#: classes/view_tools-server.php:162
+#: classes/view_tools-server.php:181
+msgid "Automatically escapes user inputted data. Not needed when using properly coded software."
+msgstr "Automatische Benutzung von Escape-Zeichen für Benutzereingaben. Nicht benötigt bei entsprechend programmierter Software."
+
+#: classes/view_tools-server.php:200
+msgid "This mode is HIGHLY discouraged and is a sign of a poorly configured host."
+msgstr "Von dieser Einstellung wird DRINGEND abgeraten, sie ist ein Zeichen für einen schlecht konfigurierten Server."
+
+#: classes/view_tools-server.php:214
+msgid "The server operating system running this site. Linux based systems are encouraged. Windows users may need to perform additional steps to get plugins to perform properly."
+msgstr "Das Betriebssystem des Servers auf dem die Seite läuft. Linux-basierende Systeme sind empfohlen. Benutzer von Windows-Servern müssen unter Umständen zusätzliche Schritte ausführen, um Plugins korrekt benutzen zu können."
+
+#: classes/view_tools-server.php:233
+msgid "The amount of memory this site is allowed to consume."
+msgstr "The amount of memory this site is allowed to consume."
+
+#: classes/view_tools-server.php:260
+#: classes/view_tools-server.php:272
+msgid "Parameter"
+msgstr "Parameter"
+
+#: classes/view_tools-server.php:305
+msgid "Response"
+msgstr "Antwort"
+
+#: classes/view_tools-server.php:322
+msgid "Display Extended PHP Settings via phpinfo()"
+msgstr "Erweiterte PHP-Konfiguration mit phpinfo() anzeigen"
+
+#: classes/view_tools-sitesize.php:22
+msgid "Directory Size Map"
+msgstr "Grafische Speicherverteilung"
+
+#: classes/view_tools-sitesize.php:23
+msgid ""
+"This option displays an interactive graphical representation of directories and the corresponding size of all contents within, including subdirectories.\n"
+"This is useful for finding where space is being used. Directory boxes are scaled based on size. Click on a directory box to move around. Note that this\n"
+"is a CPU intensive process and may take a while to load and even time out on some servers. Slower computers may have trouble navigating the interactive map."
+msgstr ""
+"Diese Funktion zeigt Ihnen eine übersichtliche grafische Darstellung aller Verzeichnisse und der Größe der jeweils enthaltenen Dateien und Unterverzeichnisse an.\n"
+"Dies ist sinnvoll um herauszufinden, wie sich der belegte Speicherplatz verteilt. Die Größe der Verzeichnis-Boxen entspricht deren anteiliger Größe des WordPress-Verzeichnisses.\n"
+"Navigation erfolgt über Klicks auf die Verzeichnis-Boxen. Bitte beachten Sie dass dies ein CPU-intensiver Prozess ist, der eine gewisse Ladezeit benötigt, und auf manchen \n"
+"Servern unter Umständen nicht funktioniert. Langsamere Client-Rechner haben unter Umständen Probleme diese Funktion zu benutzen."
+
+#: classes/view_tools-sitesize.php:27
+msgid "Display Directory Size Map"
+msgstr "Grafische Speicherverteilung anzeigen"
+
+#: classes/view_tools-sitesize.php:38
+msgid "Loading ... Please wait ..."
+msgstr "Laden... bitte warten..."
+
+#: classes/view_tools-sitesize.php:43
+msgid "Orientation"
+msgstr "Ausrichtung"
+
+#: classes/view_tools-sitesize.php:45
+msgid "horizontal"
+msgstr "horizontal"
+
+#: classes/view_tools-sitesize.php:46
+msgid "vertical"
+msgstr "vertikal"
+
+#: classes/view_tools-sitesize.php:49
+msgid "Max levels"
+msgstr "Ebenen"
+
+#: classes/view_tools-sitesize.php:59
+msgid "Go Up"
+msgstr "Nach oben"
+
+#: classes/view_tools-sitesize.php:71
+msgid "Directory Size Listing"
+msgstr "Speicherbelegung auflisten"
+
+#: classes/view_tools-sitesize.php:74
+msgid "This option displays a comprehensive listing of directories and the corresponding size of all contents within, including subdirectories.  This is useful for finding where space is being used. Note that this is a CPU intensive process and may take a while to load and even time out on some servers."
+msgstr "Diese Funktion zeigt Ihnen eine übersichtliche Liste aller Verzeichnisse und der Größe der jeweils enthaltenen Dateien und Unterverzeichnisse an. Dies ist sinnvoll um herauszufinden, wie sich der belegte Speicherplatz verteilt. Bitte beachten Sie dass dies ein CPU-intensiver Prozess ist, der eine gewisse Ladezeit benötigt, und auf manchen Servern unter Umständen nicht funktioniert."
+
+#: classes/view_tools-sitesize.php:75
+msgid "Display Directory Size Listing"
+msgstr "Speicherbelegungsliste anzeigen"
+
+#: classes/view_tools-sitesize.php:78
+msgid "Time taken"
+msgstr "Erstellt in"
+
+#: classes/view_tools-sitesize.php:82
+#: classes/view_tools-sitesize.php:115
+msgid "Total size of site"
+msgstr "Gesamtgröße der Seite"
+
+#: classes/view_tools-sitesize.php:89
+#: classes/view_tools-sitesize.php:97
+msgid "Size with Children"
+msgstr "Größe inkl. Unterverzeichnisse"
+
+#: classes/view_tools.php:25
+msgid "Server Information"
+msgstr "Server-Informationen"
+
+#: classes/view_tools.php:35
+msgid "Server Configuration"
+msgstr "Server-Konfiguration"
+
+#: classes/view_tools.php:46
+msgid "File Permissions"
+msgstr "Dateiberechtigungen"
+
+#: classes/view_tools.php:57
+msgid "Site Size Map"
+msgstr "Größe der Seite"
+
+#: classes/view_tools.php:68
+msgid "Database/table Size"
+msgstr "Datenbank/Tabellen-Größe"
+
+#: classes/view_tools.php:79
+msgid "WordPress Scheduled Actions (CRON)"
+msgstr "Geplante Aufgaben für WordPress (CRON)"
+
+#: classes/view_tools.php:79
+msgid "Cron Overview"
+msgstr "Cron-Überblick"
+
+#: lib/zipbuddy/zipbuddy.php:38
+msgid "File not found (ziparchive)"
+msgstr "Datei nicht gefunden (ziparchive)"
+
+#: lib/zipbuddy/zipbuddy.php:44
+msgid "ZipArchive failed to open file to check if file exists (looking for %1$s in %2$s)."
+msgstr "ZipArchive konnte Datei nicht öffnen um zu prüfen ob eine Datei existiert (suche nach %1$s in %2$s)."
+
+#: lib/zipbuddy/zipbuddy.php:62
+msgid "File not found (pclzip)"
+msgstr "Datei nicht gefunden (pclzip)"
+
+#: lib/zipbuddy/zipbuddy.php:66
+msgid "Unable to check if file exists: No compatible zip method found."
+msgstr "Konnte nicht prüfen ob Datei existiert: Keine kompatible ZIP-Methode gefunden."
+
+#: lib/zipbuddy/zipbuddy.php:94
+msgid "Forced compatibility mode (PCLZip) based on settings. This is slower and less reliable."
+msgstr "Erzwinge Benutzung des Kompatibilitätsmodus (PCLZip) gemäß Einstellungen. Dies ist langsamer und weniger zuverlässig."
+
+#: lib/zipbuddy/zipbuddy.php:97
+msgid "Using all available zip methods in preferred order."
+msgstr "Benutze alle verfügbaren ZIP-Methoden in bevorzugter Reihenfolge."
+
+#: lib/zipbuddy/zipbuddy.php:108
+msgid "Creating ZIP file"
+msgstr "Erstelle ZIP-Datei"
+
+#: lib/zipbuddy/zipbuddy.php:108
+msgid "Adding directory"
+msgstr "Füge Verzeichnis hinzu"
+
+#: lib/zipbuddy/zipbuddy.php:108
+msgid "Compression"
+msgstr "Kompression"
+
+#: lib/zipbuddy/zipbuddy.php:108
+msgid "Excludes"
+msgstr "Ausschlüsse"
+
+#: lib/zipbuddy/zipbuddy.php:111
+msgid "Using exec() method for ZIP."
+msgstr "Benutze exec()-Methode für ZIP."
+
+#: lib/zipbuddy/zipbuddy.php:117
+msgid "Exec compression disabled based on settings."
+msgstr "Exec-Kompression in den Einstellungen deaktiviert."
+
+#: lib/zipbuddy/zipbuddy.php:121
+#: lib/zipbuddy/zipbuddy.php:244
+msgid "ZIP file exists. Appending based on options."
+msgstr "ZIP-Datei existiert. Füge Backup an (gemäß Einstellungen)."
+
+#: lib/zipbuddy/zipbuddy.php:124
+msgid "ZIP file exists. Deleting & writing based on options."
+msgstr "ZIP-Datei existiert. Lösche Datei und erstelle eine neue."
+
+#: lib/zipbuddy/zipbuddy.php:139
+msgid "Calculating directories to exclude from backup."
+msgstr "Berechne Verzeichnisse, die vom Backup ausgenommen werden sollen."
+
+#: lib/zipbuddy/zipbuddy.php:158
+msgid "Excluding"
+msgstr "Ausschließen"
+
+#: lib/zipbuddy/zipbuddy.php:169
+msgid "Excluding archives directory and additional directories defined in settings."
+msgstr "Schließe Archiv-Verzeichnis und weitere Verzeichnisse (gemäß Einstellungen) aus."
+
+#: lib/zipbuddy/zipbuddy.php:171
+msgid "Only excluding archives directory based on settings."
+msgstr "Schließe nur Archiv-Verzeichnis aus (gemäß Einstellungen)."
+
+#: lib/zipbuddy/zipbuddy.php:181
+msgid "Attempting to use provided zip.exe for native Windows zip functionality."
+msgstr "Versuche, mitgelieferte zip.exe für native Windows-ZIP-Funktionalität zu benutzen."
+
+#: lib/zipbuddy/zipbuddy.php:182
+msgid "Attempting to use provided Windows zip.exe."
+msgstr "Versuche, mitgelieferte zip.exe für Windows zu benutzen."
+
+#: lib/zipbuddy/zipbuddy.php:187
+msgid "Exec command (Windows)"
+msgstr "Exec-Befehl (Windows)"
+
+#: lib/zipbuddy/zipbuddy.php:190
+msgid "Exec command (Linux)"
+msgstr "Exec-Befehl (Linux)"
+
+#: lib/zipbuddy/zipbuddy.php:197
+msgid "Exec command returned -1."
+msgstr "Exec-Befehl liefert -1."
+
+#: lib/zipbuddy/zipbuddy.php:200
+msgid "Exec command ran but ZIP file did not exist."
+msgstr "Exec-Befehl ausgeführt, aber ZIP-Datei nicht vorhanden."
+
+#: lib/zipbuddy/zipbuddy.php:202
+msgid "Full speed mode did not complete. Trying compatibility mode next."
+msgstr "Hochgeschwindigkeitsmodus konnte nicht abgeschlossen werden. Versuche statt dessen den Kompatibilitätsmodus."
+
+#: lib/zipbuddy/zipbuddy.php:204
+msgid "Unlinking damaged ZIP file. Error #3489328998."
+msgstr "Lösche beschädigte ZIP-Datei. Fehler Nr. 3489328998."
+
+#: lib/zipbuddy/zipbuddy.php:208
+msgid "Full speed mode completed & generated ZIP file."
+msgstr "Hochgeschwindigkeitsmodus abgeschlossen & ZIP-Datei erstellt."
+
+#: lib/zipbuddy/zipbuddy.php:218
+msgid "Exec command did not succeed. Falling back."
+msgstr "Exec-Befehl fehlgeschlagen. Benutze Alternative."
+
+#: lib/zipbuddy/zipbuddy.php:222
+msgid "Using Compatibility Mode for ZIP. This is slower and less reliable."
+msgstr "Benutze Kompatibilitätsmodus für ZIP. Dies ist langsamer und weniger zuverlässig."
+
+#: lib/zipbuddy/zipbuddy.php:223
+msgid "If your backup times out in compatibility mode try disabled zip compression."
+msgstr "Falls das Backup im Kompatibilitätsmodus nicht zu Ende läuft, versuchen Sie die ZIP-Komprimierung zu deaktivieren."
+
+#: lib/zipbuddy/zipbuddy.php:224
+msgid "WARNING: Directory/file exclusion unavailable in Compatibility Mode. Even existing old backups will be backed up."
+msgstr "WARNUNG: Verzeichnis- und Datei-Ausschlüsse sind im Kompatibilitätsmodus nicht verfügbar. Auch alte Backups werden mit gesichert."
+
+#: lib/zipbuddy/zipbuddy.php:235
+msgid "PCLZip compression disabled based on settings."
+msgstr "PCLZip-Komprimierung gemäß Einstellungen deaktiviert."
+
+#: lib/zipbuddy/zipbuddy.php:238
+msgid "PCLZip compression enabled based on settings."
+msgstr "PCLZip-Komprimierung gemäß Einstellungen aktiviert."
+
+#: lib/zipbuddy/zipbuddy.php:249
+msgid "Appending to ZIP file via PCLZip."
+msgstr "Füge via PCLZip an ZIP-Datei an."
+
+#: lib/zipbuddy/zipbuddy.php:252
+msgid "Creating ZIP file via PCLZip"
+msgstr "Erstelle ZIP-Datei via PCLZip"
+
+#: lib/zipbuddy/zipbuddy.php:259
+msgid "Renaming PCLZip File..."
+msgstr "Benenne PCLZip-Datei um..."
+
+#: lib/zipbuddy/zipbuddy.php:262
+msgid "Renaming PCLZip success."
+msgstr "Umbenennung PCLZip erfolgreich."
+
+#: lib/zipbuddy/zipbuddy.php:264
+msgid "Renaming PCLZip failure."
+msgstr "Umbenennung PCLZip fehlgeschlagen."
+
+#: lib/zipbuddy/zipbuddy.php:267
+msgid "Temporary PCLZip archive file expected but not found."
+msgstr "Temporäres PCLZip-Archiv erwartet aber nicht gefunden."
+
+#: lib/zipbuddy/zipbuddy.php:273
+msgid "Backup file created in compatibility mode (PCLZip)."
+msgstr "Backup-Datei im Kompatibilitätsmodus erstellt (PCLZip)."
+
+#: lib/zipbuddy/zipbuddy.php:277
+msgid "PCLZip returned status 0."
+msgstr "PCLZip liefert Status 0."
+
+#: lib/zipbuddy/zipbuddy.php:280
+msgid "PCLZip archive ZIP file was not found."
+msgstr "PCLZip Archiv-ZIP-Datei nicht gefunden."
+
+#: lib/zipbuddy/zipbuddy.php:306
+msgid "ZipArchive test PASSED."
+msgstr "ZipArchive Test OK."
+
+#: lib/zipbuddy/zipbuddy.php:309
+msgid "ZipArchive test FAILED: Zip file not found."
+msgstr "ZipArchive-Test FEHLGESCHLAGEN: ZIP-Datei nicht gefunden."
+
+#: lib/zipbuddy/zipbuddy.php:313
+msgid "ZipArchive test FAILED: Unable to create/open zip file."
+msgstr "ZipArchive-Test FEHLGESCHLAGEN: Konnte ZIP-Datei nicht erstellen/öffnen."
+
+#: lib/zipbuddy/zipbuddy.php:332
+msgid "Error #564634. Unable to delete test file (%s)!"
+msgstr "Fehler Nr. 564634. Konnte Test-Datei (%s) nicht löschen!"
+
+#. Plugin Name of the plugin/theme
+msgid "BackupBuddy BETA"
+msgstr "BackupBuddy BETA"
+
+#. Plugin URI of the plugin/theme
+msgid "http://pluginbuddy.com/backupbuddy/"
+msgstr "http://pluginbuddy.com/backupbuddy/"
+
+#. Description of the plugin/theme
+msgid "Backup - Restore - Migrate. Backs up files, settings, and content for a complete snapshot of your site. Allows migration to a new host or URL."
+msgstr "Backup - Wiederherstellen - Umziehen. Sichert Dateien, Einstellungen und Inhalt für ein komplettes Abbild Ihrer Seite. Erlaubt den Umzug auf einen neuen Server oder eine neue URL."
+
+#. Author of the plugin/theme
+msgid "Dustin Bolton"
+msgstr "Dustin Bolton"
+
+#. Author URI of the plugin/theme
+msgid "http://dustinbolton.com/"
+msgstr "http://dustinbolton.com/"
+
