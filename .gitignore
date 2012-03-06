@@ -3,6 +3,7 @@ wp-content/blogs.dir/
 wp-content/uploads/*
 wp-content/cache/*
 
+mnlbackups
 wp-content/backup-db/
 _archive
 
