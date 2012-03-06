@@ -1,15 +1,30 @@
 jQuery(document).ready(function($){
     wvp_initialize_tax_relationship_select();
+    update_taxonomy_term_check();
+    
+    jQuery('input[name="_wpv_settings\\[taxonomy_type\\]\\[\\]"]').click(function () {
+        update_taxonomy_term_check();
+    });
 });
 
 function wvp_initialize_tax_relationship_select() {
     jQuery('.wpv_taxonomy_relationship').change(function() {
         var relationship = jQuery(this).val();
         
-        if (relationship == "FROM PAGE") {
+        if (relationship == "FROM PAGE" ||
+                relationship == "FROM ATTRIBUTE" ||
+                relationship == "FROM URL" ||
+                relationship == "FROM PARENT VIEW") {
             jQuery('.wpv_taxonomy_relationship').next().hide();
         } else {
             jQuery('.wpv_taxonomy_relationship').next().show();
+        }
+
+        if (relationship == "FROM ATTRIBUTE" ||
+                relationship == "FROM URL") {
+            jQuery('.wpv_taxonomy_relationship').next().next().show();
+        } else {
+            jQuery('.wpv_taxonomy_relationship').next().next().hide();
         }
     });
     
@@ -36,7 +51,7 @@ function wpv_show_filter_taxonomy_edit() {
 
 function wpv_show_filter_taxonomy_edit_ok() {
     wpv_add_edit_taxonomy('', '', 'edit');
-    jQuery('input[name="Add another filter term"]').show();
+    jQuery('.wpv_add_filters_button').show();
 }
 
 function wpv_show_filter_taxonomy_edit_cancel() {
@@ -46,7 +61,7 @@ function wpv_show_filter_taxonomy_edit_cancel() {
         jQuery('#' + index).attr('class', 'wpv_taxonomy_edit_row');
     }
     
-    jQuery('input[name="Add another filter term"]').show();
+    jQuery('.wpv_add_filters_button').show()
     jQuery('.wpv_taxonomy_show_row').show();
     jQuery('.wpv_taxonomy_edit_row').hide();
     
@@ -66,12 +81,19 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
     var taxonomy_name = Array();
     var taxonomy_relationship = Array();
     var taxonomy_value = Array();
+    var taxonomy_attribute_url = Array();
+    
     jQuery('select').each( function(index) {
         if (mode == 'add' || jQuery(this).is(":visible")) {
             var name = jQuery(this).attr('name');
             if (name && name.startsWith('_wpv_settings[tax_') && name.endsWith('_relationship]')) {
                 name = name.slice(18, -14);
+
                 taxonomy_name.push(name);
+
+                // Add the attribute or url filter.
+                taxonomy_attribute_url.push(jQuery('input[name="_wpv_settings\\[taxonomy-' + name + '-attribute-url\\]"]').val());
+
                 if (name == 'category') {
                     name = 'post_category';
                 } else {
@@ -88,6 +110,8 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
                     }
                 });
                 taxonomy_value.push(current_taxonomy_value);
+            
+            
             }
         }        
     });
@@ -115,6 +139,9 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         taxonomy_value.push(current_taxonomy_value);
         taxonomy_relationship.push(jQuery('select[name="tax_' + taxonomy_name[0] + '_relationship"]').val());
 
+        // Add the attribute or url filter.
+        taxonomy_attribute_url.push(jQuery('input[name="tax_' + taxonomy_name[0] + '_attribute_url"]').val());
+
     }
 
     var temp_index = -1;
@@ -133,6 +160,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         taxonomys_relationship = jQuery('select[name="_wpv_settings\\[taxonomy_relationship\\]"]').val();
     }
     
+
     var data = {
         action : 'wpv_add_taxonomy',
         taxonomy_name : taxonomy_name,
@@ -141,6 +169,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         taxonomy_value : taxonomy_value,
         taxonomy_relationship : taxonomy_relationship,
         taxonomys_relationship : taxonomys_relationship,
+        taxonomy_attribute_url : taxonomy_attribute_url,
         row : temp_index + 1,
         wpv_nonce : jQuery('#wpv_add_taxonomy_nonce').attr('value')
     };
@@ -216,4 +245,74 @@ function wpv_update_categories_in_select(select_id) {
         }
     }
     
+}
+
+// Update the items in the taxonomy term checkboxes
+// if the taxonomy type has changed.
+
+function update_taxonomy_term_check() {
+    
+    var taxonomy = jQuery('input[name="_wpv_settings\\[taxonomy_type\\]\\[\\]"]:checked').val();
+    var current = jQuery('#wpv-current-taxonomy-term').val();
+    
+    if (taxonomy != current) {
+        // we need to update the parent select to list the required taxonomy
+
+        var data = {
+            action : 'wpv_get_taxonomy_term_check',
+            taxonomy : taxonomy,
+            wpv_nonce : jQuery('#wpv_get_taxonomy_term_check_nonce').attr('value')
+        };
+        
+        jQuery('#wpv_update_taxonomy_term').show();
+        jQuery.post(ajaxurl, data, function(response) {
+            
+            jQuery('.taxonomy-term-div').html(response);
+            jQuery('#wpv_update_taxonomy_term').hide();
+        });
+    }
+}
+
+var taxonomy_terms_selected = Array();
+
+function wpv_show_taxonomy_term_edit() {
+
+    // record checked items just in case the operation is cancelled.    
+    taxonomy_terms_selected = jQuery('input[name="_wpv_settings\\[taxonomy_terms\\]\\[\\]"]:checked');
+
+    // Show the edit div for selecting terms
+    jQuery('#wpv-filter-taxonomy-term-show').hide();
+    jQuery('#wpv-filter-taxonomy-term-edit').show();
+}
+
+function wpv_show_taxonomy_term_edit_ok() {
+
+    var taxonomy = jQuery('input[name="_wpv_settings\\[taxonomy_type\\]\\[\\]"]:checked').val();
+ 
+    data = jQuery('#wpv-filter-taxonomy-term-edit :input').serialize();
+    data += '&action=wpv_get_taxonomy_term_summary';
+    data += '&taxonomy_type=' + taxonomy;
+    
+    jQuery.post(ajaxurl, data, function(response) {
+        
+        jQuery('#wpv-filter-taxonomy-term-show').html(response);
+        jQuery('#wpv-filter-taxonomy-term-show').show();
+        jQuery('#wpv-filter-taxonomy-term-edit').hide();
+        
+    });
+
+}
+
+function wpv_show_taxonomy_term_edit_cancel() {
+    // undo any changes.
+    jQuery('input[name="_wpv_settings\\[taxonomy_terms\\]\\[\\]"]').each( function(index) {
+        jQuery(this).attr('checked', false);
+    });
+    
+    // check the items that were selected.
+    taxonomy_terms_selected.each( function(index) {
+        jQuery(this).attr('checked', true);
+    });
+    jQuery('#wpv-filter-taxonomy-term-show').show();
+    jQuery('#wpv-filter-taxonomy-term-edit').hide();
 }

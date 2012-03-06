@@ -129,7 +129,7 @@ $table_prefix  = 'wp_';
 /**
  * This will log all errors notices and warnings to a file called debug.log in
  * wp-content (if Apache does not have write permission, you may need to create
- * the file first and set the appropriate permissions (i.e. use 666) ) 
+ * the file first and set the appropriate permissions (i.e. use 666) )
  */
 
 
@@ -157,10 +157,9 @@ if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
 
+/** ADDED BY JFC 1/27/2011 PER http://wordpress.org/support/topic/fatal-error-in-incoming-links-dashboard-widget-memory-exhausted?replies=12. */
 
-/** Sets up WordPress vars and included files. */
-
-require_once(ABSPATH . 'wp-settings.php');
+define('WP_MEMORY_LIMIT', '128M');
 
 /** Change slug for BP Docs*/
 
@@ -171,10 +170,8 @@ if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
 /** Sets up WordPress vars and included files. */
+/* Note: This must be the last thing in the file! */
 require_once(ABSPATH . 'wp-settings.php');
 
-/** ADDED BY JFC 1/27/2011 PER http://wordpress.org/support/topic/fatal-error-in-incoming-links-dashboard-widget-memory-exhausted?replies=12. */
-
-define('WP_MEMORY_LIMIT', '128M');
 
 

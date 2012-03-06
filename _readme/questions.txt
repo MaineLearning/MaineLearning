@@ -18,8 +18,7 @@ On http://mainelearning.net/sites/, where are the site avatar/blavatars coming f
 
 2012-03-01
 
-How to change the full name for one of the members. This doesn't work:
-http://mainelearning.net/people/xxx/profile/edit/group/1/
+How to change the full name for one of the members. This doesn't work: http://mainelearning.net/people/xxx/profile/edit/group/1/
 
 	UNKNOWN PROBLEM. MAY BE BUG.
 	PLUGIN - MASQUERADE AS A USER TO MAKE CHANGES.
@@ -28,12 +27,26 @@ Why does http://mainelearning.net/people/ show 17 people, when there are only 13
 
 	COULD BE MEMBERS WHO HAVEN'T LOGGED IN.
 	UNKNOWN PROBLEM. MAY BE BUG.
+	NO LONGER HAPPENING, IT'S NOW CONSISTENT
 
 How to hide the main blog from the /sites/ directory? It is only used for page/holders for Buddypress.
 
-	NOT AN EASY.
+	NOT AN EASY FIX.
 	FEATURE REQUEST.
 	CAN BE DONE IN FUTURE WITH FILTERS.
 
 2012-03-02
+
+What is the best way to identify and diagnose PHP errors?
+
+2012-03-03
+
+Tried upgrading to BuddyPress 1.5.4 (from .3) for second time. Again this time, in local-dev, result: front page white screen, /wp-admin/: server error.
+
+2012-03-06
+
+Group blog shows all pages in BP Blog panel. How to change to Menus rather than all pages?
+
+
+
 

@@ -22,6 +22,7 @@ function on_delete_wpv(index) {
 
     on_generate_wpv_layout(false);
     show_body_view_template_controls();
+    show_taxonomy_view_controls();
     
 };
 
@@ -82,16 +83,23 @@ function on_up_wpv(index) {
     index = Number(index);
     on_down_wpv(index - 1, false);
 };
-function on_add_field_wpv(menu, name) {
-    var originalName = name;
+function on_add_field_wpv(menu, name, text) {
     var view_template = '';
+    var view = '';
+    var title = name;
     if (menu == wpv_view_template_text) {
-        view_template = name;
+        view_template = text;
         menu = '';
         name = 'Body';
-    }
-    if (menu != '') {
+        title = name;
+    } else if (menu == wpv_taxonomy_view_text || menu == wpv_post_view_text) {
+        view = text;
+        name = wpv_taxonomy_view_text;
+        menu = '';
+        title = '';
+    } else if (menu != '') {
         name = menu.split('-!')[0] + ' - ' + name;
+        title = name;
     }
     
     // find the last row.
@@ -110,12 +118,20 @@ function on_add_field_wpv(menu, name) {
     // add a new row.
     var td = '<td width="20px"><img src="' + wpv_url + '/res/img/delete.png" onclick="on_delete_wpv(\'' + temp_index + '\')" style="cursor: pointer"></td>';
     td += '<td width="120px"><input id="wpv_field_prefix_' + temp_index + '" type="text" value="" name="_wpv_layout_settings[fields][prefix_' + temp_index + ']" width="100%"></td>';
-    td += '<td width="76px"><span id="wpv_field_name_' + temp_index + '">' + name + '</span><input id="wpv_field_name_hidden_' + temp_index + '" type="hidden" value="' + name + '" name="_wpv_layout_settings[fields][name_' + temp_index + ']" ></td>';
-    td += '<td class="row-title hidden" width="120px"><input id="wpv_field_row_title_' + temp_index + '" type="text" name="_wpv_layout_settings[fields][row_title_' + temp_index + ']" value="' + originalName + '"></td>';
+    td += '<td width="76px"><span id="wpv_field_name_' + temp_index + '">' + title + '</span><input id="wpv_field_name_hidden_' + temp_index + '" type="hidden" value="' + name + '" name="_wpv_layout_settings[fields][name_' + temp_index + ']" ></td>';
+    td += '<td class="row-title hidden" width="120px"><input id="wpv_field_row_title_' + temp_index + '" type="text" name="_wpv_layout_settings[fields][row_title_' + temp_index + ']" value="' + text + '"></td>';
     td += '<td width="120px"><input id="wpv_field_suffix_' + temp_index + '" type="text" value="" name="_wpv_layout_settings[fields][suffix_' + temp_index + ']" width="100%"></td>';
     td += '<td width="16px"><img src="' + wpv_url + '/res/img/move.png" class="move" style="cursor: move;" /></td>';
+
+    var query_type = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked').val();
+    var row_class = '';
+    if (query_type == 'posts') {
+        row_class = 'class="wpv-post-type-field"';
+    } else if (query_type == 'taxonomy') {
+        row_class = 'class="wpv-taxonomy-field"';
+    }
     
-    jQuery('#view_layout_fields_table').append('<tr id="wpv_field_row_' + temp_index + '">' + td + '</tr>');
+    jQuery('#view_layout_fields_table').append('<tr id="wpv_field_row_' + temp_index + '" ' + row_class + '>' + td + '</tr>');
     
     // Show/hide row title
     view_layout_fields_table_add_row_title_field();
@@ -129,12 +145,21 @@ function on_add_field_wpv(menu, name) {
         select_view_template_in_dropdown(temp_index, view_template);
     }
 
+
+    show_taxonomy_view_controls();
+    
+    if (view != '') {
+        // We're adding a taxonomy view. Select in the drop down.
+        select_taxonomy_view_in_dropdown(temp_index, view);
+    }
+
     on_generate_wpv_layout(false);
 };
 
 jQuery(document).ready(function($){
     
     show_body_view_template_controls();
+    show_taxonomy_view_controls();
     
     var c = jQuery('textarea#wpv_layout_meta_html_content').val();
     
@@ -147,6 +172,8 @@ jQuery(document).ready(function($){
 
 function on_generate_wpv_layout(force) {
     
+    var query_type = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked').val();
+    
     show_or_hide_layout_table();
     
     jQuery('#wpv_generating_layout').show();
@@ -155,22 +182,41 @@ function on_generate_wpv_layout(force) {
     
     var fields = Array();
     var temp_index = 0;
+    var add_index = 0;
+    var add_type = 0;
     while (jQuery('#wpv_field_row_' + temp_index).length != 0) {
         field_type = jQuery('#wpv_field_name_' + temp_index).html();
         if (field_type.indexOf(wpv_field_text) == 0) {
+            add_type = 'custom';
             // a custom field
             
             header_name = 'post-field-' + field_type.substring(wpv_field_text.length);
             field_type = '[wpv-post-field name="' + field_type.substring(wpv_field_text.length) + '"]';
         } else {
+
             // a post field
             
             for(var i = 0; i < wpv_shortcodes.length; i++) {
                 if (wpv_shortcodes[i][0] == field_type) {
+                    
+                    if (wpv_shortcodes[i][1].indexOf('wpv-taxonomy') == 0) {
+                        add_type = 'taxonomy';
+                    } else {
+                        add_type = 'posts';
+                    }
+
                     if (wpv_shortcodes[i][1] == 'wpv-post-body') {
                         var selected = jQuery('select[name="views_template_' + temp_index + '"]').val();
                         selected = jQuery('#views_template_' + temp_index + ' option[value="' + selected + '"]').text();
                         field_type = '[wpv-post-body view_template="' + selected + '"]';
+                    } else if (wpv_shortcodes[i][1] == 'wpv-view') {
+                        add_type = 'taxonomy';
+                        var selected = jQuery('select[name="taxonomy_view_' + temp_index + '"]').val();
+                        selected = jQuery('#taxonomy_view_' + temp_index + ' option[value="' + selected + '"]').text();
+                        // remove the " - Post View" or " - Taxonomy View" from the selection.
+                        selected = selected.replace(' - ' + wpv_taxonomy_view_text, '');
+                        selected = selected.replace(' - ' + wpv_post_view_text, '');
+                        field_type = '[wpv-view name="' + selected + '"]';
                     } else {
                         field_type = '[' + wpv_shortcodes[i][1] + ']';
                         field_type = field_type.replace(/_/g, '-');
@@ -181,13 +227,16 @@ function on_generate_wpv_layout(force) {
                 }
             }
         }
-        fields[temp_index] = Array(jQuery('#wpv_field_prefix_' + temp_index).val(),
-                                   field_type,
-                                   jQuery('#wpv_field_suffix_' + temp_index).val(),
-                                   jQuery('#wpv_field_name_' + temp_index).text(),
-                                   header_name,
-                                   jQuery('#wpv_field_row_title_' + temp_index).val());
         
+        if ((query_type == 'posts' && (add_type == 'custom' || add_type == 'posts')) || (query_type == 'taxonomy' && add_type == 'taxonomy')) {
+            fields[add_index] = Array(jQuery('#wpv_field_prefix_' + temp_index).val(),
+                                       field_type,
+                                       jQuery('#wpv_field_suffix_' + temp_index).val(),
+                                       jQuery('#wpv_field_name_' + temp_index).text(),
+                                       header_name,
+                                       jQuery('#wpv_field_row_title_' + temp_index).val());
+            add_index++;
+        }        
         temp_index++;
     }
     
@@ -214,6 +263,13 @@ function on_generate_wpv_layout(force) {
             // unformatted
             data = wpv_render_unformatted_layout(fields);
             break;
+    }
+    
+    var no_results_text = '';
+    if (query_type == 'posts') {
+        no_results_text = no_post_results_text;
+    } else if (query_type == 'taxonomy') {
+        no_results_text = no_taxonomy_results_text;
     }
     
     data = "\[wpv-layout-start\]\n<!-- wpv-loop-start -->\n" + data + "\n<!-- wpv-loop-end -->\n" + no_results_text + "\n\[wpv-layout-end\]\n";
@@ -462,6 +518,10 @@ jQuery(document).ready(function($){
         on_generate_wpv_layout(false);
     });
     
+    jQuery('.taxonomy_view_select').change(function() {
+        on_generate_wpv_layout(false);
+    });
+    
     var fixHelper = function(e, ui) {
         ui.children().each(function() {
             $(this).width($(this).width());
@@ -483,6 +543,7 @@ jQuery(document).ready(function($){
             wpv_update_layout_rows();
             on_generate_wpv_layout(false);
             show_body_view_template_controls();
+            show_taxonomy_view_controls();
         }
     });
     // Table of fields Row Title
@@ -564,6 +625,38 @@ function show_body_view_template_controls() {
 function select_view_template_in_dropdown(row, view_template) {
     jQuery('#views_template_body_' + row + ' > #views_template_' + row + ' > option').each(function() {
         if (jQuery(this).html() == view_template) {
+            jQuery(this).parent().val(jQuery(this).val());
+        }
+    });
+}
+
+function show_taxonomy_view_controls() {
+    var taxonomy_view = jQuery('input[value="Taxonomy View"]');
+    taxonomy_view.each(function() {
+        if (jQuery(this).attr('id').slice(0, 22) == 'wpv_field_name_hidden_') {
+            row = jQuery(this).attr('id').slice(22);
+            if (jQuery('#taxonomy_view_' + row).length == 0) {
+                var copy = jQuery('#taxonomy_view_select').clone(true);
+                copy.attr('id', 'taxonomy_view_select_' + row);
+                copy.children().each(function() {
+                    if (jQuery(this).attr('id') == 'taxonomy_view') {
+                        jQuery(this).attr('id', 'taxonomy_view_' + row);
+                        jQuery(this).attr('name', 'taxonomy_view_' + row);
+                    }
+                });
+            }
+            jQuery('#wpv_field_name_' + jQuery(this).attr('id').slice(22)).after(copy);
+            jQuery('#taxonomy_view_select_' + row).css('display', 'inline');
+        } else {
+            jQuery('#taxonomy_view').hide();
+        }
+        
+    });
+}
+
+function select_taxonomy_view_in_dropdown(row, view) {
+    jQuery('#taxonomy_view_select_' + row + ' > #taxonomy_view_' + row + ' > option').each(function() {
+        if (jQuery(this).html() == view) {
             jQuery(this).parent().val(jQuery(this).val());
         }
     });

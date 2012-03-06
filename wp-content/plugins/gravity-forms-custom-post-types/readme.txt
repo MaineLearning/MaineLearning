@@ -2,9 +2,9 @@
 Contributors: bradvin
 Donate link: http://themergency.com/donate/
 Tags: form,forms,gravity,gravity form,gravity forms,CPT,custom post types,custom post type,taxonomy,taxonomies
-Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: trunk
+Requires at least: 3.0.1
+Tested up to: 3.3.1
+Stable tag: 3.0.1
 
 Easily map your forms that create posts to a custom post type. Also map dropdown select, radio buttons list and checkboxes lists to a custom taxonomy.
 
@@ -62,6 +62,10 @@ You can now link the dropdown field to a post type and try to make it set the pa
 7. How to map a single line text field to a taxonomy
 
 == Changelog ==
+
+= 3.0.1 =
+* Fixed minor bug causing a PHP warning (_FILE_)
+* removed the restriction of not including scripts when a call is ajax
 
 = 3.0 =
 * Removed support for Gravity Forms v1.4.5. Now supports v1.5 and up (including 1.6)

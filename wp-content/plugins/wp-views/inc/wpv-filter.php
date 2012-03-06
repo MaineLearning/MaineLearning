@@ -1,10 +1,15 @@
 <?php
 
 require WPV_PATH . '/inc/wpv-filter-add-filter.php';
+require WPV_PATH . '/inc/wpv-filter-types.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-types-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-types-embedded.php';
 require WPV_PATH . '/inc/wpv-filter-post-types.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-taxonomy-embedded.php';
+require WPV_PATH . '/inc/wpv-filter-taxonomy.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-order-by-embedded.php';
 require WPV_PATH . '/inc/wpv-filter-order-by.php';
+require WPV_PATH . '/inc/wpv-filter-taxonomy-order-by.php';
 require WPV_PATH . '/inc/wpv-pagination.php';
 require WPV_PATH . '/inc/wpv-filter-meta-html.php';
 

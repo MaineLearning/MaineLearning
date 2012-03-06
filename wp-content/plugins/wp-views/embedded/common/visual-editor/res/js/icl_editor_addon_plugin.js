@@ -92,7 +92,7 @@ jQuery.fn.extend({
     }
 });
 
-jQuery(document).ready(function(){
+jQuery(window).load(function(){
     jQuery('.editor_addon_wrapper img').click(function(e){
         if (jQuery(this).parent().find('.editor_addon_dropdown').css('visibility') == 'hidden') {
             // Close others possibly opened
@@ -123,26 +123,26 @@ jQuery(document).ready(function(){
         jQuery('.editor_addon_dropdown').css('visibility', 'hidden').hide().css('display', 'inline');
     });
     // Resize dropdowns if necessary (in #media-buttons)
-    jQuery('#media-buttons .editor_addon_dropdown').each(function(){
+    jQuery('#media-buttons .editor_addon_dropdown, #wp-content-media-buttons .editor_addon_dropdown').each(function(){
         var width = jQuery(this).width();
         var height = jQuery(this).height();
         var screenHeight = jQuery(window).height();
         var offset = jQuery(this).offset();
         
         if (offset.top+height > screenHeight) {
-            var resizedHeight = screenHeight-offset.top-20;
+            var resizedHeight = Math.round(screenHeight-offset.top-20);
             if (resizedHeight < 200) {
                 resizedHeight = 200;
             }
             jQuery(this).height(resizedHeight);
             jQuery(this).css('height', resizedHeight+'px');
-            var scrollHeight = resizedHeight-jQuery(this).find('.direct-links').height()-50;
+            var scrollHeight = Math.round(resizedHeight-jQuery(this).find('.direct-links').height()-50);
             jQuery(this).find('.scroll').css('height', scrollHeight+'px');
         } else {
             jQuery(this).find('.direct-links').hide();
             jQuery(this).find('.editor-addon-link-to-top').hide();
         }
-        jQuery(this).find('.scroll').jScrollPane();
+    //        jQuery(this).find('.scroll').jScrollPane();
     });
     // For hidden in Meta HTML set scroll when visible
     jQuery('#wpv_layout_meta_html_admin_show a, #wpv_filter_meta_html_admin_show a').click(function(){
@@ -151,14 +151,14 @@ jQuery(document).ready(function(){
             var divWidth = 400;
             var divHeight = 250;
             jQuery(this).width(divWidth).css('width', divWidth+'px');
-            scrollDiv.width(divWidth-40).css('width', (divWidth-40)+'px');
+            scrollDiv.width(Math.round(divWidth-40)).css('width', (Math.round(divWidth-40))+'px');
             jQuery(this).height(divHeight).css('height', divHeight+'px');
-            var scrollHeight = divHeight-jQuery(this).find('.direct-links').height()-50;
+            var scrollHeight = Math.round(divHeight-jQuery(this).find('.direct-links').height()-50);
             scrollDiv.height(scrollHeight).css('height', scrollHeight+'px');
-            scrollDiv.jScrollPane();
+            //            scrollDiv.jScrollPane();
             if (jQuery(this).find('.jspPane').height() < scrollDiv.height()) {
                 jQuery(this).find('.direct-links').hide();
-                scrollDiv.height(divHeight-50).css('height', (divHeight-50)+'px');
+                scrollDiv.height(Math.round(divHeight-50)).css('height', (Math.round(divHeight-50))+'px');
             }
         });
     });
@@ -169,24 +169,35 @@ jQuery(document).ready(function(){
     });
     // Direct links
     jQuery('.editor-addon-top-link').bind('click', function(){
-        var scrollToElement = jQuery(this).attr('id')+'-target';
-        var api = jQuery(this).parent().next().data('jsp');
-        api.scrollToElement('#'+scrollToElement, true, true);
+        //        var api = jQuery(this).parents('.editor_addon_dropdown').find('.scroll').data('jsp');
+        //        if (typeof api != 'undefined') {
+        //            var wpcfScrollToElement = jQuery(this).attr('id')+'-target';
+        //            api.scrollToElement(jQuery('#'+wpcfScrollToElement).parent(), true, true);
+        //        }
+        // get position of elements
+        var positionNested = jQuery('#'+jQuery(this).attr('id')+'-target').offset();
+        var positionParent = jQuery('#'+jQuery(this).attr('id')+'-target').parent().parent().offset();
+        if (positionParent.top > positionNested.top) {
+            var scrollTo = positionParent.top - positionNested.top;
+        } else {
+            var scrollTo = positionNested.top - positionParent.top;
+        }
+        jQuery(this).parents('.editor_addon_dropdown').find('.scroll').animate({scrollTop:Math.round(scrollTo)}, 'fast');
         return false;
     });
-    jQuery('.editor-addon-link-to-top').click(function(){
-        var api = jQuery(this).parents('.editor_addon_dropdown').find('.scroll').data('jsp');
-        var scrollToElement = jQuery(this).parents('.editor_addon_dropdown').find('.group');
-        api.scrollToElement(scrollToElement, true, true);
-        return false;
-    });
+//    jQuery('.editor-addon-link-to-top').click(function(){
+//        var api = jQuery(this).parents('.editor_addon_dropdown').find('.scroll').data('jsp');
+//        var scrollToElement = jQuery(this).parents('.editor_addon_dropdown').find('.group');
+//        api.scrollToElement(scrollToElement, true, true);
+//        return false;
+//    });
 });
 
 var keyStr = "ABCDEFGHIJKLMNOP" +
-	               "QRSTUVWXYZabcdef" +
-	               "ghijklmnopqrstuv" +
-	               "wxyz0123456789+/" +
-	               "=";
+"QRSTUVWXYZabcdef" +
+"ghijklmnopqrstuv" +
+"wxyz0123456789+/" +
+"=";
                    
 function editor_decode64(input) {
     var output = "";
@@ -197,33 +208,33 @@ function editor_decode64(input) {
     // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
     var base64test = /[^A-Za-z0-9\+\/\=]/g;
     if (base64test.exec(input)) {
-       alert("There were invalid base64 characters in the input text.\n" +
-             "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-             "Expect errors in decoding.");
+        alert("There were invalid base64 characters in the input text.\n" +
+            "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
+            "Expect errors in decoding.");
     }
     input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
     
     do {
-       enc1 = keyStr.indexOf(input.charAt(i++));
-       enc2 = keyStr.indexOf(input.charAt(i++));
-       enc3 = keyStr.indexOf(input.charAt(i++));
-       enc4 = keyStr.indexOf(input.charAt(i++));
+        enc1 = keyStr.indexOf(input.charAt(i++));
+        enc2 = keyStr.indexOf(input.charAt(i++));
+        enc3 = keyStr.indexOf(input.charAt(i++));
+        enc4 = keyStr.indexOf(input.charAt(i++));
     
-       chr1 = (enc1 << 2) | (enc2 >> 4);
-       chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-       chr3 = ((enc3 & 3) << 6) | enc4;
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
     
-       output = output + String.fromCharCode(chr1);
+        output = output + String.fromCharCode(chr1);
     
-       if (enc3 != 64) {
-          output = output + String.fromCharCode(chr2);
-       }
-       if (enc4 != 64) {
-          output = output + String.fromCharCode(chr3);
-       }
+        if (enc3 != 64) {
+            output = output + String.fromCharCode(chr2);
+        }
+        if (enc4 != 64) {
+            output = output + String.fromCharCode(chr3);
+        }
     
-       chr1 = chr2 = chr3 = "";
-       enc1 = enc2 = enc3 = enc4 = "";
+        chr1 = chr2 = chr3 = "";
+        enc1 = enc2 = enc3 = enc4 = "";
     
     } while (i < input.length);
     
@@ -231,7 +242,7 @@ function editor_decode64(input) {
 }
 
 function insert_b64_shortcode_to_editor(b64_shortcode, text_area) {
-        var shortcode = editor_decode64(b64_shortcode);
+    var shortcode = editor_decode64(b64_shortcode);
     if (text_area == 'textarea#content') {
         // the main editor
         if (window.parent.jQuery('textarea#content:visible').length) {

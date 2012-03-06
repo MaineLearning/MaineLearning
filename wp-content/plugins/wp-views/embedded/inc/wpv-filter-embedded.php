@@ -24,77 +24,103 @@
   
 add_shortcode('wpv-filter-start', 'wpv_filter_shortcode_start');
 function wpv_filter_shortcode_start($atts){
-    global $WP_Views;
-    $post_query = $WP_Views->get_query();
+    if (_wpv_filter_is_form_required()) {
+        global $WP_Views;
+    
+        extract(
+            shortcode_atts( array(), $atts )
+        );
+        
+        $hide = '';
+        if (isset($atts['hide']) && $atts['hide'] == 'true') {
+            $hide = ' display:none;';
+        }
+        
+        $url = get_permalink();
+        $out = '<form style="margin:0; padding:0;' . $hide . '" id="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
+        
+        // add hidden inputs for any url parameters.
+        // We need these for when the form is submitted.
+        $url_query = parse_url($url, PHP_URL_QUERY);
+        if ($url_query != '') {
+            $query_parts = explode('&', $url_query);
+            foreach($query_parts as $param) {
+                $item = explode('=', $param);
+                if (strpos($item[0], 'wpv_') !== 0) {
+                    $out .= '<input id="wpv_param_' . $item[0] . '" type="hidden" name="' . $item[0] . '" value="' . $item[1] . '">' . "\n";
+                }
+            }
+        }
+        
+        // add hidden inputs for column sorting id and direction.
+        // these are empty to start off with but will be populated
+        // when a column title is clicked.
+        
+        $view_layout_settings = $WP_Views->get_view_layout_settings();
+        if (!isset($view_layout_settings['style'])) {
+            return '';
+        }
+    
+        $view_settings = $WP_Views->get_view_settings();
+        
+        if ($view_layout_settings['style'] == 'table_of_fields') {
+            
+            if ($view_settings['query_type'][0] == 'posts') {
+                $sort_id = $view_settings['orderby'];
+                $sort_dir = strtolower($view_settings['order']);
+            }
+            if ($view_settings['query_type'][0] == 'taxonomy') {
+                $sort_id = $view_settings['taxonomy_orderby'];
+                $sort_dir = strtolower($view_settings['taxonomy_order']);
+            }
 
-    extract(
-        shortcode_atts( array(), $atts )
-    );
+            if (isset($_GET['wpv_column_sort_id'])) {
+                $sort_id = $_GET['wpv_column_sort_id'];
+            }
+            if (isset($_GET['wpv_column_sort_dir'])) {
+                $sort_dir = $_GET['wpv_column_sort_dir'];
+            }
+            
+            $out .= '<input id="wpv_column_sort_id" type="hidden" name="wpv_column_sort_id" value="' . $sort_id . '">' . "\n";
+            $out .= '<input id="wpv_column_sort_dir" type="hidden" name="wpv_column_sort_dir" value="' . $sort_dir . '">' . "\n";
+            
+            $out .= "
+            <script type=\"text/javascript\">
+                function wpv_column_head_click(name, direction) {
+                    jQuery('#wpv_column_sort_id').val(name);
+                    jQuery('#wpv_column_sort_dir').val(direction);
+                    jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "').submit();
+                    return false;
+                }
+            </script>
+            ";
+        }
+        
+        // add a hidden input for the current page.
+        $page = '1';
+        if (isset($_GET['wpv_paged'])) {
+            $page = $_GET['wpv_paged'];
+        }
+        $out .= '<input id="wpv_paged-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged" value="' . $page . '">' . "\n";
+        $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($WP_Views->get_max_pages()) . '">' . "\n";
+        
+        $out .= '<input id="wpv_widget_view-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_widget_view_id" value="' . intval($WP_Views->get_widget_view_id()) . '">' . "\n";
     
-    $hide = '';
-    if (isset($atts['hide']) && $atts['hide'] == 'true') {
-        $hide = ' style="display:none"';
-    }
-    
-    $out = '<form style="margin:0; padding:0;" id="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . get_permalink() . '" method="GET"' . $hide . ">\n";
-    
-    // add hidden inputs for column sorting id and direction.
-    // these are empty to start off with but will be populated
-    // when a column title is clicked.
-    
-    $view_layout_settings = $WP_Views->get_view_layout_settings();
-    if (!isset($view_layout_settings['style'])) {
+        // Output the current page ID. This is used for ajax call back in pagination.
+        $current_post = $WP_Views->get_top_current_page();
+        if ($current_post) {
+            $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
+        }
+        add_action('wp_footer', 'wpv_pagination_js');
+        
+        // Rollover
+        if (isset($view_settings['pagination']['mode']) && $view_settings['pagination']['mode'] == 'rollover') {
+            wpv_pagination_rollover_shortcode();
+        }
+        return $out;
+    } else {
         return '';
     }
-
-    $view_settings = $WP_Views->get_view_settings();
-    
-    if ($view_layout_settings['style'] == 'table_of_fields') {
-        
-        $sort_id = $view_settings['orderby'];
-        if (isset($_GET['wpv_column_sort_id'])) {
-            $sort_id = $_GET['wpv_column_sort_id'];
-        }
-        $sort_dir = strtolower($view_settings['order']);
-        if (isset($_GET['wpv_column_sort_dir'])) {
-            $sort_dir = $_GET['wpv_column_sort_dir'];
-        }
-        
-        $out .= '<input id="wpv_column_sort_id" type="hidden" name="wpv_column_sort_id" value="' . $sort_id . '">' . "\n";
-        $out .= '<input id="wpv_column_sort_dir" type="hidden" name="wpv_column_sort_dir" value="' . $sort_dir . '">' . "\n";
-        
-        $out .= "
-        <script type=\"text/javascript\">
-            function wpv_column_head_click(name, direction) {
-                jQuery('#wpv_column_sort_id').val(name);
-                jQuery('#wpv_column_sort_dir').val(direction);
-                jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "').submit();
-                return false;
-            }
-        </script>
-        ";
-    }
-    
-    // add a hidden input for the current page.
-    $page = '1';
-    if (isset($_GET['wpv_paged'])) {
-        $page = $_GET['wpv_paged'];
-    }
-    $out .= '<input id="wpv_paged-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged" value="' . $page . '">' . "\n";
-    $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($post_query->max_num_pages) . '">' . "\n";
-
-    // Output the current page ID. This is used for ajax call back in pagination.
-    $current_post = $WP_Views->get_top_current_page();
-    if ($current_post) {
-        $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
-    }
-    add_action('wp_footer', 'wpv_pagination_js');
-    
-    // Rollover
-    if (isset($view_settings['pagination']['mode']) && $view_settings['pagination']['mode'] == 'rollover') {
-        wpv_pagination_rollover_shortcode();
-    }
-    return $out;
 }
 
 /**
@@ -110,13 +136,43 @@ function wpv_filter_shortcode_start($atts){
   
 add_shortcode('wpv-filter-end', 'wpv_filter_shortcode_end');
 function wpv_filter_shortcode_end($atts){
-    extract(
-        shortcode_atts( array(), $atts )
-    );
-    
-    return '</form>';
+    if (_wpv_filter_is_form_required()) {
+        extract(
+            shortcode_atts( array(), $atts )
+        );
+        
+        return '</form>';
+    } else {
+        return '';
+    }
 }
     
+function _wpv_filter_is_form_required() {
+    global $WP_Views;
+    
+    $view_layout_settings = $WP_Views->get_view_layout_settings();
+    if (!isset($view_layout_settings['style'])) {
+        return false;
+    }
+
+    if ($view_layout_settings['style'] == 'table_of_fields') {
+        // required for table sorting
+        return true;
+    }
+
+    $view_settings = $WP_Views->get_view_settings();
+    if ($view_settings['pagination'][0] == 'enable' || $view_settings['pagination']['mode'] == 'rollover') {
+        return true;
+    }
+
+
+    if (isset($view_settings['post_search_value'])) {
+        return true;
+    }
+    
+    return false;
+}
+
 /**
  * Views-Shortcode: wpv-filter-submit
  *
@@ -133,18 +189,22 @@ function wpv_filter_shortcode_end($atts){
 add_shortcode('wpv-filter-submit', 'wpv_filter_shortcode_submit');
 function wpv_filter_shortcode_submit($atts){
 
-    extract(
-        shortcode_atts( array(), $atts )
-    );
-    
-    $hide = '';
-    if (isset($atts['hide']) && $atts['hide'] == 'true') {
-        $hide = ' style="display:none"';
+    if (_wpv_filter_is_form_required()) {
+        extract(
+            shortcode_atts( array(), $atts )
+        );
+        
+        $hide = '';
+        if (isset($atts['hide']) && $atts['hide'] == 'true') {
+            $hide = ' style="display:none"';
+        }
+        
+        $out = '';
+        $out .= '<input type="submit" value="' . $atts['name'] . '" name="wpv_filter_submit"' . $hide . '>';
+        return $out;
+    } else {
+        return '';
     }
-    
-    $out = '';
-    $out .= '<input type="submit" value="' . $atts['name'] . '" name="wpv_filter_submit"' . $hide . '>';
-    return $out;
 }
 
 /**
@@ -169,7 +229,11 @@ function wpv_post_count($atts){
     
     $query = $WP_Views->get_query();
     
-    return $query->post_count;
+    if ($query) {
+        return $query->post_count;
+    } else {
+        return '';
+    }
 }
     
 /**
@@ -193,7 +257,11 @@ function wpv_found_count($atts){
     
     $query = $WP_Views->get_query();
     
-    return $query->found_posts;
+    if ($query) {
+        return $query->found_posts;
+    } else {
+        return '';
+    }
 }
 
 /**
@@ -218,7 +286,7 @@ function wpv_posts_found($atts, $value){
     
     $query = $WP_Views->get_query();
 
-    if ($query->found_posts != 0 || $query->post_count != 0) {
+    if ($query && ($query->found_posts != 0 || $query->post_count != 0)) {
         // display the message when posts are found.
         return wpv_do_shortcode($value);
     } else {
@@ -249,7 +317,7 @@ function wpv_no_posts_found($atts, $value){
     
     $query = $WP_Views->get_query();
 
-    if ($query->found_posts == 0 && $query->post_count == 0) {
+    if ($query && $query->found_posts == 0 && $query->post_count == 0) {
         // display the message when no posts are found.
         return wpv_do_shortcode($value);
     } else {

@@ -15,7 +15,7 @@
                     <td class="t"><?php _e("current major release", "gd-star-rating"); ?></td>
                     <td class="b options" style="color: red; font-weight: bold;"><?php echo $options["code_name"]; ?></td>
                 </tr>
-                <?php if ($this->g->wp_access_level >= $this->g->security_level) { ?>
+                <?php if (current_user_can($this->g->security_level)) { ?>
                 <tr>
                     <td class="first b" style="width: 133px;"><?php _e("Change Log", "gd-star-rating"); ?></td>
                     <td class="t"><?php _e("detailed list of changes", "gd-star-rating"); ?></td>

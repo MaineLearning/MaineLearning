@@ -1,0 +1,84 @@
+/* Tabs
+----------------------------------*/
+.ui-tabs { border-top: 1px solid #DFDFDF; margin-top: 20px; } /* padding: .2em; zoom: 1; */
+.ui-tabs .ui-tabs-nav { z-index: 15; list-style: none; position: relative; padding: 0px 0px 0px; margin-top: -15px; margin-left: 10px; }
+.ui-tabs .ui-tabs-nav li { margin: -11px 3px -1px 0px; position: relative; float: left; padding: 0; text-align: center; }
+.ui-tabs .ui-tabs-nav li a { background-color: #EDEDED; height: 19px; float: left; text-decoration: none; padding-left: 10px; padding-right: 10px; -moz-border-radius: 10px 10px 0px 0px; -webkit-border-radius: 10px 10px 0px 0px; border: 1px solid #DFDFDF; outline: none; padding-top: 5px; }
+.ui-tabs .ui-tabs-nav li a:hover { background-color: #DFDFDF; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {  } /* padding-bottom: 0px; */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { height: 21px; cursor: text; background-color: #F9F9F9; font-weight: bold; border-bottom: 0px; color: #333333; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { padding: 16px; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
+
+#pblogo {
+	padding: 40px 0;
+	text-align: center;
+}
+
+body {
+	font: 14px/1.4 arial, helvetica, sans-serif;
+	background: #FFFFFF;
+	color: #000000;
+	text-align: center;
+}
+img {
+	display: inline;
+	border: 0px;
+}
+hr {
+	color: #CFCFCF;
+	background-color: #CFCFCF;
+	height: 2px;
+	border: 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+h2 {
+	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: normal;
+	font-size: 24px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	-x-system-font: none;
+	margin-top: 0pt;
+	margin-right: 0pt;
+	margin-bottom: 0pt;
+	margin-left: 0pt;
+	padding-top: 14px;
+	padding-right: 15px;
+	padding-bottom: 3px;
+	padding-left: 0pt;
+	line-height: 35px;
+	text-shadow: #ffffff;
+}
+.wrap {
+	text-align: left;
+	width: 450px;
+	padding-left: 15px;
+	margin-left: auto;
+    margin-right: auto;
+}
+label, .label {
+	float: left;
+	width: 100px;
+	font-weight: bold;
+}
+.icon {
+	vertical-align: -3px;
+}
+.keys {
+	border-top: 1px dotted #0F80CC;
+	margin-top: 7px;
+	padding-top: 7px;
+}
+.rounded {
+	background-color: #F9F9F9;
+	margin-right: 40px;
+	padding: 15px;
+	border: 1px solid #8FD2FF;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}

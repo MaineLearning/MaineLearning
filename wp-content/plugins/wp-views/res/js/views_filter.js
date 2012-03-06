@@ -133,61 +133,109 @@ function check_if_previous_filter_has_changed(body) {
 }
 
 var post_types_selected = Array();
-function wpv_show_post_type_edit() {
+var query_type_selected = Array();
+function wpv_show_type_edit() {
 
     // record checked items just in case the operation is cancelled.    
     post_types_selected = jQuery('input[name="_wpv_settings\\[post_type\\]\\[\\]"]:checked');
+    query_type_selected = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked');
     
-    jQuery('#wpv-filter-post-type-edit').parent().parent().css('background-color', jQuery('#wpv-filter-post-type-edit').css('background-color'));
-    
-    jQuery('#wpv-filter-post-type-edit').show();
-    jQuery('#wpv-filter-post-type-show').hide();
+    wpv_filter_show_edit_mode('type');
 }
 
-function wpv_show_post_type_edit_ok() {
+function wpv_show_type_edit_ok() {
     
-    // get selected post types.
-    var selected = new Array;
-    jQuery('input[name="_wpv_settings\\[post_type\\]\\[\\]"]:checked').each( function(index) {
-        selected.push(jQuery(this).attr('value'));
-    });
-
-    // get the order by
-    var orderby = jQuery('select[name=_wpv_settings\\[orderby\\]]').val();
-    var order = jQuery('select[name=_wpv_settings\\[order\\]]').val();
-    
-    var data = {
-        action : 'wpv_get_post_filter_summary',
-        selected : selected,
-        orderby : orderby,
-        order : order,
-        wpv_nonce : jQuery('#wpv_post_filter_nonce').attr('value')
-        
-    };
+    data = jQuery('#wpv-filter-type-edit :input').serialize();
+    data += '&action=wpv_get_type_filter_summary';
     
     jQuery.post(ajaxurl, data, function(response) {
         
-        jQuery('#wpv-filter-post-type-edit').parent().parent().css('background-color', '');
-        jQuery('#wpv-filter-post-type-show').html(response);
-        jQuery('#wpv-filter-post-type-edit').hide();
-        jQuery('#wpv-filter-post-type-show').show();
+        jQuery('#wpv-filter-type-show').html(response);
+        wpv_filter_hide_edit_mode('type')
+        
     });
     
 }
 
-function wpv_show_post_type_edit_cancel() {
-    // uncheck any that may have been checked.
+var post_type_controls = Array('#wpv-post-type-checkboxes',
+                               '#wpv-post-order-by',
+                               '.wpv_post_type_filter_row',
+                               '.wpv_add_filters_button',
+                               '.wpv-post-type-field',
+                               '.wpv_add_fields_button');
+var taxonomy_controls = Array('#wpv-taxonomy-radios',
+                              '#wpv-taxonomy-order-by',
+                              '#wpv-taxonomy-settings',
+                              '.wpv_taxonomy_filter_row',
+                              '.wpv-taxonomy-field',
+                              '.wpv_add_filters_taxonomy_button',
+                              '.wpv_add_taxonomy_fields_button');
+
+
+function wpv_select_post_type_filter() {
+    for (var i= 0; i < post_type_controls.length; i++) {
+        jQuery(post_type_controls[i]).show();
+    }
+
+    for (var i= 0; i < taxonomy_controls.length; i++) {
+        jQuery(taxonomy_controls[i]).hide();
+    }
     
+    jQuery('#wpv-layout-help-posts').show();
+    jQuery('#wpv-layout-help-taxonomy').hide();
+    
+    jQuery('#wpv-layout-v-icon-posts').show();
+    jQuery('#wpv-layout-v-icon-taxonomy').hide();
+
+    // Generate the layout 
+    on_generate_wpv_layout(true);
+}
+
+function wpv_select_taxonomy_type_filter() {
+    for (var i= 0; i < post_type_controls.length; i++) {
+        jQuery(post_type_controls[i]).hide();
+    }
+
+    for (var i= 0; i < taxonomy_controls.length; i++) {
+        jQuery(taxonomy_controls[i]).show();
+    }
+    
+    jQuery('#wpv-layout-help-posts').hide();
+    jQuery('#wpv-layout-help-taxonomy').show();
+
+    jQuery('#wpv-layout-v-icon-posts').hide();
+    jQuery('#wpv-layout-v-icon-taxonomy').show();
+
+    // Generate the layout 
+    on_generate_wpv_layout(true);
+}
+
+function wpv_show_type_edit_cancel() {
+
+    // uncheck any that may have been checked.
     jQuery('input[name="_wpv_settings\\[post_type\\]\\[\\]"]').each( function(index) {
         jQuery(this).attr('checked', false);
     });
+    jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]').each( function(index) {
+        jQuery(this).attr('checked', false);
+    });
+    
+    // check the items that were selected.
     post_types_selected.each( function(index) {
         jQuery(this).attr('checked', true);
     });
+    query_type_selected.each( function(index) {
+        jQuery(this).attr('checked', true);
+    });
+
+    if (query_type_selected.val() == 'posts') {
+        wpv_select_post_type_filter()
+    }
+    if (query_type_selected.val() == 'taxonomy') {
+        wpv_select_taxonomy_type_filter()
+    }
     
-    jQuery('#wpv-filter-post-type-edit').parent().parent().css('background-color', '');
-    jQuery('#wpv-filter-post-type-edit').hide();
-    jQuery('#wpv-filter-post-type-show').show();
+    wpv_filter_hide_edit_mode('type');
 }
 
 function wpv_filter_show_edit_mode(id) {
@@ -198,7 +246,7 @@ function wpv_filter_show_edit_mode(id) {
    
 }
 
-function wpv_hide_filter_edit_mode(id) {
+function wpv_filter_hide_edit_mode(id) {
     jQuery('#wpv-filter-' + id + '-edit').parent().parent().css('background-color', '');
     jQuery('#wpv-filter-' + id + '-edit').hide();
     jQuery('#wpv-filter-' + id + '-show').show();
@@ -237,7 +285,7 @@ function wpv_show_filter_status_edit_ok() {
     jQuery.post(ajaxurl, data, function(response) {
         td = response;
         jQuery('#wpv_filter_row_' + row).html(td);
-        wpv_hide_filter_edit_mode('status');
+        wpv_filter_hide_edit_mode('status');
     });
    
 }
@@ -252,7 +300,7 @@ function wpv_show_filter_status_edit_cancel() {
         jQuery(this).attr('checked', true);
     });
     
-    wpv_hide_filter_edit_mode('status');
+    wpv_filter_hide_edit_mode('status');
 }
 
 function wpv_duplicate_view_click() {

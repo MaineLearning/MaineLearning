@@ -10,46 +10,7 @@ function Currency(currency){
         if(this.isNumeric(text))
             return parseFloat(text);
 
-        //converting to a string if a number as passed
-        text = text + " ";
-
-        //Removing symbol in unicode format (i.e. &#4444;)
-        text = text.replace(/&.*?;/, "", text);
-
-        //Removing symbol from text
-        text = text.replace(this.currency["symbol_right"], "");
-        text = text.replace(this.currency["symbol_left"], "");
-
-
-        //Removing all non-numeric characters
-        var clean_number = "";
-        var is_negative = false;
-        for(var i=0; i<text.length; i++){
-            var digit = text.substr(i,1);
-            if( (parseInt(digit) >= 0 && parseInt(digit) <= 9) || digit == this.currency["decimal_separator"] )
-                clean_number += digit;
-            else if(digit == '-')
-                is_negative = true;
-        }
-
-        //Removing thousand separators but keeping decimal point
-        var float_number = "";
-        var decimal_separator = this.currency && this.currency["decimal_separator"] ? this.currency["decimal_separator"] : ".";
-
-        for(var i=0; i<clean_number.length; i++)
-        {
-            var char = clean_number.substr(i,1);
-            if (char >= '0' && char <= '9')
-                float_number += char;
-            else if(char == decimal_separator){
-                float_number += ".";
-            }
-        }
-
-        if(is_negative)
-            float_number = "-" + float_number;
-
-        return this.isNumeric(float_number) ? parseFloat(float_number) : false;
+        return gformCleanNumber(text, this.currency["symbol_right"], this.currency["symbol_left"], this.currency["decimal_separator"]);
     };
 
     this.toMoney = function(number){
@@ -100,9 +61,8 @@ function Currency(currency){
     }
 
     this.isNumeric = function(number){
-        return !isNaN(parseFloat(number)) && isFinite(number);
+        return gformIsNumber(number);
     };
-
 
     this.htmlDecode = function(text) {
         var c,m,d = text;
@@ -128,6 +88,67 @@ function Currency(currency){
     };
 }
 
+function gformCleanNumber(text, symbol_right, symbol_left, decimal_separator){
+    //converting to a string if a number as passed
+    text = text + " ";
+
+    //Removing symbol in unicode format (i.e. &#4444;)
+    text = text.replace(/&.*?;/, "", text);
+
+    //Removing symbol from text
+    text = text.replace(symbol_right, "");
+    text = text.replace(symbol_left, "");
+
+
+    //Removing all non-numeric characters
+    var clean_number = "";
+    var is_negative = false;
+    for(var i=0; i<text.length; i++){
+        var digit = text.substr(i,1);
+        if( (parseInt(digit) >= 0 && parseInt(digit) <= 9) || digit == decimal_separator )
+            clean_number += digit;
+        else if(digit == '-')
+            is_negative = true;
+    }
+
+    //Removing thousand separators but keeping decimal point
+    var float_number = "";
+
+    for(var i=0; i<clean_number.length; i++)
+    {
+        var char = clean_number.substr(i,1);
+        if (char >= '0' && char <= '9')
+            float_number += char;
+        else if(char == decimal_separator){
+            float_number += ".";
+        }
+    }
+
+    if(is_negative)
+        float_number = "-" + float_number;
+
+    return gformIsNumber(float_number) ? parseFloat(float_number) : false;
+}
+
+function gformIsNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function gformIsNumeric(value, number_format){
+
+    switch(number_format){
+        case "decimal_dot" :
+            var r = new RegExp("^(-?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]+)?)$");
+            return r.test(value);
+        break;
+
+        case "decimal_comma" :
+            var r = new RegExp("^(-?[0-9]{1,3}(?:\.?[0-9]{3})*(?:,[0-9]+)?)$");
+            return r.test(value);
+        break;
+    }
+    return false;
+}
 
 //------------------------------------------------
 //---------- MULTI-PAGE --------------------------
@@ -197,8 +218,6 @@ function gformCalculateTotalPrice(formId){
         totalElement.html(gformFormatMoney(price));
     }
 }
-
-
 
 function gformGetShippingPrice(formId){
     var shippingField = jQuery(".gfield_shipping_" + formId + " input[type=\"hidden\"], .gfield_shipping_" + formId + " select, .gfield_shipping_" + formId + " input:checked");
@@ -376,10 +395,6 @@ function gformGetPrice(text){
          return currency.toNumber(val[1]);
 
     return 0;
-}
-
-function gformIsNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 function gformRegisterPriceField(item){
@@ -566,4 +581,19 @@ function gformFindCardType(value) {
     }
 
     return validCardTypes.length == 1 ? validCardTypes[0].toLowerCase() : false;
+}
+
+
+//----------------------------------------
+//------ CHOSEN DROP DOWN FIELD ----------
+//----------------------------------------
+
+function gformInitChosenFields(fieldList, noResultsText){
+    return jQuery(fieldList).each(function(){
+        var element = jQuery(this);
+        //only initialize once
+        if(element.is(":visible") && element.siblings(".chzn-container").length == 0){
+            jQuery(this).chosen({no_results_text: noResultsText});
+        }
+    });
 }

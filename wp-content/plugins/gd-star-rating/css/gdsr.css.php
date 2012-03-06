@@ -33,9 +33,11 @@ function get_class_head($head, $element) {
 if (!isset($inclusion)) {
     $base_url_local = "../";
     $base_url_extra = "../../../gd-star-rating/";
+
     $t = isset($_GET["t"]) && !empty($_GET["t"]) && is_string($_GET["t"]) ? urldecode($_GET["t"]) : 0;
-    $q = isset($_GET["s"]) && !empty($_GET["t"]) && is_string($_GET["s"]) ? urldecode($_GET["s"]) : "";
+    $q = isset($_GET["s"]) && !empty($_GET["s"]) && is_string($_GET["s"]) ? urldecode($_GET["s"]) : "";
     $opacity = isset($_GET["o"]) && !empty($_GET["o"]) && is_string($_GET["o"]) ? urldecode($_GET["o"]) : "off";
+
     @ob_start("ob_gzhandler");
     header("Content-Type: text/css");
 
@@ -48,6 +50,7 @@ if (!isset($inclusion)) {
 
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             $head_mod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+
             if ($head_mod >= $t) {
                 if (php_sapi_name() == 'CGI') {
                     Header("Status: 304 Not Modified");

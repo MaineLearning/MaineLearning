@@ -179,6 +179,7 @@ function LoadFieldSettings(){
 
     //loads settings
     field = GetSelectedField();
+    var inputType = GetInputType(field);
 
     jQuery("#field_label").val(field.label);
     if(field.type == "html"){
@@ -335,8 +336,6 @@ function LoadFieldSettings(){
     ToggleInputMask(true);
     ToggleInputMaskOptions(true);
 
-    var inputType = GetInputType(field);
-
     if(inputType == "creditcard"){
         if(!field.creditCards || field.creditCards.length <= 0)
             field.creditCards = ['amex', 'visa', 'discover', 'mastercard'];
@@ -426,7 +425,8 @@ function LoadFieldSettings(){
     jQuery(".field_setting").hide();
 
     var allSettings = fieldSettings[field.type];
-    if(field.inputType)
+
+    if(field.inputType && field.type != 'post_category')
         allSettings += "," + fieldSettings[field.inputType];
 
     jQuery(allSettings).show();
@@ -438,6 +438,15 @@ function LoadFieldSettings(){
             break;
         }
     }
+
+    // hide "Display placeholder" option for post category field if input type is not a select
+    if(field.type == 'post_category' && inputType != 'select') {
+        jQuery('.post_category_initial_item_setting').hide();
+        jQuery('#gfield_post_category_initial_item_enabled').prop('checked', false);
+        SetCategoryInitialItem();
+    }
+
+    jQuery("#post_category_field_type").val(field.inputType);
 
     jQuery("#field_captcha_type").val(field.captchaType == undefined ? "recaptcha" : field.captchaType);
     jQuery("#field_captcha_size").val(field.simpleCaptchaSize == undefined ? "medium" : field.simpleCaptchaSize);
@@ -471,9 +480,10 @@ function LoadFieldSettings(){
     }
 
 
-    //Display default value setting for simple name field
+    //Display default value setting and size setting for simple name field
     if(field["type"] == "name" && field["nameFormat"] == "simple"){
         jQuery(".default_value_setting").show();
+        jQuery(".size_setting").show();
     }
 
     // if a product or option field, hide "other choice" setting
@@ -485,7 +495,6 @@ function LoadFieldSettings(){
 
     jQuery("#field_settings").appendTo(".field_selected");
 
-    //jQuery("#field_settings").tabs("_create");
     jQuery("#field_settings").tabs("select", 0);
 
     ShowSettings("field_settings");
@@ -1122,10 +1131,14 @@ function UpdateFormObject(){
             form["pagination"]["style"] = jQuery("#percentage_style").val();
             form["pagination"]["backgroundColor"] = form["pagination"]["style"] == "custom" ? jQuery("#percentage_style_custom_bgcolor").val() : null;
             form["pagination"]["color"] = form["pagination"]["style"] == "custom" ? jQuery("#percentage_style_custom_color").val() : null;
+            form["pagination"]["display_progressbar_on_confirmation"] = jQuery("#percentage_confirmation_display").is(":checked");
+            form["pagination"]["progressbar_completion_text"] = jQuery("#percentage_confirmation_display").is(":checked") ? jQuery("#percentage_confirmation_page_name").val() : null;
         }
         else{
             form["pagination"]["backgroundColor"] = null;
             form["pagination"]["color"] = null;
+            form["pagination"]["display_progressbar_on_confirmation"] = null;
+            form["pagination"]["progressbar_completion_text"] = null;
         }
 
         form["firstPageCssClass"] = jQuery("#first_page_css_class").val();
@@ -1472,6 +1485,22 @@ function StartChangeShippingType(type){
     return StartChangeInputType(type, field);
 }
 
+function StartChangePostCategoryType(type){
+
+    if(type == 'dropdown') {
+
+        jQuery('.post_category_initial_item_setting').hide();
+
+    } else {
+
+        jQuery('.post_category_initial_item_setting').show();
+
+    }
+
+    field = GetSelectedField();
+    return StartChangeInputType(type, field);
+}
+
 function EndChangeInputType(fieldId, fieldType, fieldString){
 
     jQuery("#field_" + fieldId).html(fieldString);
@@ -1618,6 +1647,17 @@ function TogglePercentageStyle(isInit){
     }
 }
 
+function TogglePercentageConfirmationText(isInit){
+    var speed = isInit ? "" : "slow";
+
+    if(jQuery("#percentage_confirmation_display").is(":checked")){
+        jQuery('.percentage_confirmation_page_name_setting').show(speed);
+    }
+    else{
+        jQuery('.percentage_confirmation_page_name_setting').hide(speed);
+    }
+}
+
 function CustomFieldExists(name){
     if(!name)
         return true;
@@ -1667,8 +1707,7 @@ function GetRuleFields(objectType, ruleIndex, selectedFieldId){
     var str = "<select id='" + objectType + "_rule_field_" + ruleIndex + "' class='gfield_rule_select' onchange='jQuery(\"#" + objectType + "_rule_value_" + ruleIndex + "\").replaceWith(GetRuleValues(\"" + objectType + "\", " + ruleIndex + ", jQuery(this).val())); SetRule(\"" + objectType + "\", " + ruleIndex + "); '>";
     var inputType;
     for(var i=0; i<form.fields.length; i++){
-        inputType = form.fields[i].inputType ? form.fields[i].inputType : form.fields[i].type;
-        if(inputType == "checkbox" || inputType == "radio" || inputType == "select"){
+        if(IsConditionalLogicField(form.fields[i])){
             var selected = form.fields[i].id == selectedFieldId ? "selected='selected'" : "";
             var label = form.fields[i].adminLabel ? form.fields[i].adminLabel : form.fields[i].label
             str += "<option value='" + form.fields[i].id + "' " + selected + ">" + TruncateRuleText(label) + "</option>";
@@ -1676,6 +1715,15 @@ function GetRuleFields(objectType, ruleIndex, selectedFieldId){
     }
     str += "</select>";
     return str;
+}
+
+function IsConditionalLogicField(field){
+    inputType = field.inputType ? field.inputType : field.type;
+    var supported_fields = ["checkbox", "radio", "select", "text", "website", "textarea", "email", "hidden", "number", "phone", "multiselect", "post_title",
+                            "post_tags", "post_custom_field", "post_content", "post_excerpt"];
+
+    return jQuery.inArray(inputType, supported_fields);
+
 }
 
 function TruncateRuleText(text){
@@ -1688,8 +1736,7 @@ function TruncateRuleText(text){
 function GetFirstRuleField(){
     var inputType;
     for(var i=0; i<form.fields.length; i++){
-        inputType = form.fields[i].inputType ? form.fields[i].inputType : form.fields[i].type;
-        if(inputType == "checkbox" || inputType == "radio" || inputType == "select")
+        if(IsConditionalLogicField(form.fields[i]))
             return form.fields[i].id;
     }
 
@@ -1697,7 +1744,6 @@ function GetFirstRuleField(){
 }
 
 function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue){
-    var str = "<select class='gfield_rule_select' id='" + objectType + "_rule_value_" + ruleIndex + "' onchange='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());'>";
 
     if(selectedFieldId == 0)
         selectedFieldId = GetFirstRuleField();
@@ -1707,7 +1753,12 @@ function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue){
 
     var isAnySelected = false;
     var field = GetFieldById(selectedFieldId);
+    var str = "";
     if(field && field.choices){
+        //create a drop down for fields that have choices (i.e. drop down, radio, checkboxes, etc...)
+
+        str = "<select class='gfield_rule_select' id='" + objectType + "_rule_value_" + ruleIndex + "' onchange='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());'>";
+
         for(var i=0; i<field.choices.length; i++){
             var choiceValue = typeof field.choices[i].value == "undefined" || field.choices[i].value == null ? field.choices[i].text + '' : field.choices[i].value + '';
             var isSelected = choiceValue == selectedValue;
@@ -1717,12 +1768,19 @@ function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue){
 
             str += "<option value='" + choiceValue.replace(/'/g, "&#039;") + "' " + selected + ">" + TruncateRuleText(field.choices[i].text) + "</option>";
         }
+
+        if(!isAnySelected && selectedValue && selectedValue != "")
+            str += "<option value='" + selectedValue.replace(/'/g, "&#039;") + "' selected='selected'>" + TruncateRuleText(selectedValue) + "</option>";
+
+        str += "</select>";
+
     }
+    else if(field){
+        selectedValue = selectedValue ? selectedValue.replace(/'/g, "&#039;") : "";
 
-    if(!isAnySelected && selectedValue && selectedValue != "")
-        str += "<option value='" + selectedValue.replace(/'/g, "&#039;") + "' selected='selected'>" + TruncateRuleText(selectedValue) + "</option>";
-
-    str += "</select>";
+        //create a text field for fields that don't have choices (i.e text, textarea, number, email, etc...)
+        str = "<input type='text' placeholder='" + gf_vars["enterValue"] + "' class='gfield_rule_select' id='" + objectType + "_rule_value_" + ruleIndex + "' value='" + selectedValue.replace(/'/g, "&#039;") + "' onchange='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());' onkeyup='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());'>";
+    }
 
     return str;
 }
@@ -2401,6 +2459,13 @@ function IndexOf(ary, item){
     return -1;
 }
 
+function DefaultValueCallback(){
+    SetFieldDefaultValue(jQuery('#field_default_value').val())
+}
+
+function HtmlContentCallback(){
+    SetFieldProperty('content', jQuery('#field_content').val())
+}
 
 //------------------------------------------------------------------------------------------------------------------------
 //Color Picker
@@ -2446,4 +2511,11 @@ function SetColorPickerColor(field_name, color, callback){
     chip.css("background-color", color);
     if(callback)
         window[callback](color);
+}
+
+function SetFieldChoices(){
+    var field = GetSelectedField();
+    for(var i=0; i<field.choices.length; i++){
+        SetFieldChoice(i);
+    }
 }

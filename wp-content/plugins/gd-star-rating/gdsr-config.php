@@ -16,7 +16,7 @@ define('STARRATING_WPLOAD', '');
 /**
  * Minimal user level required to access all plugins panels except Front and Builder.
  */
-define('STARRATING_ACCESS_LEVEL', 9);
+define('STARRATING_ACCESS_LEVEL', 'edit_dashboard');
 
 /**
  * Should plugin load and use old format legacy functions.
@@ -36,15 +36,15 @@ define('STARRATING_JAVASCRIPT_DEBUG', false);
 /**
  * Minimal user level required to access some of the plugins panels.
  */
-define('STARRATING_ACCESS_LEVEL_FRONT', 1);
-define('STARRATING_ACCESS_LEVEL_BUILDER', 1);
-define('STARRATING_ACCESS_LEVEL_SETUP', 9);
+define('STARRATING_ACCESS_LEVEL_FRONT', 'delete_posts');
+define('STARRATING_ACCESS_LEVEL_BUILDER', 'delete_posts');
+define('STARRATING_ACCESS_LEVEL_SETUP', 'edit_dashboard');
 
 /**
  * My Ratings is moved under dahsboard and visible to all registered users regardless of other access settings.
  */
 define('STARRATING_ACCESS_MY_RATINGS', false);
-define('STARRATING_ACCESS_MY_RATINGS_LEVEL', 0);
+define('STARRATING_ACCESS_MY_RATINGS_LEVEL', 'read');
 
 /**
  * Main admin account user ID's with access to special Security panel. If not set, all administrators will have access to it. You can set it to single account or to list of accounts, separated by commas ('1,6,23,12').
