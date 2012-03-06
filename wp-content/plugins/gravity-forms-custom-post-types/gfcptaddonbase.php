@@ -112,70 +112,68 @@ if (!class_exists('GFCPTAddonBase')) {
         }
 
         function enqueue_custom_scripts($form, $is_ajax) {
-          if (!$is_ajax) {
-            //loop thru all fields
-            foreach($form['fields'] as &$field) {
-              //if its a text field, see if we have set it to save to a taxonomy
-              if ($field['type'] == 'text' && array_key_exists('saveToTaxonomy', $field)) {
-                $saveToTaxonomy = $field['saveToTaxonomy'];
+          //loop thru all fields
+          foreach($form['fields'] as &$field) {
+            //if its a text field, see if we have set it to save to a taxonomy
+            if ($field['type'] == 'text' && array_key_exists('saveToTaxonomy', $field)) {
+              $saveToTaxonomy = $field['saveToTaxonomy'];
 
-                if (taxonomy_exists($saveToTaxonomy) && array_key_exists('taxonomyEnhanced', $field)) {
-                  if ($field['taxonomyEnhanced']) {
+              if (taxonomy_exists($saveToTaxonomy) && array_key_exists('taxonomyEnhanced', $field)) {
+                if ($field['taxonomyEnhanced']) {
 
-                    $this->_has_tag_inputs = true;
+                  $this->_has_tag_inputs = true;
 
-                    $tag_input_id = '#input_'.$form['id'].'_'.$field['id'];
+                  $tag_input_id = '#input_'.$form['id'].'_'.$field['id'];
 
-                    $this->_tag_inputs[$tag_input_id] = $saveToTaxonomy;
+                  $this->_tag_inputs[$tag_input_id] = $saveToTaxonomy;
 
-                    if ( !array_key_exists($saveToTaxonomy, $this->_tag_terms) ) {
-                      //get the existing taxonomies and add them to an array to render later
-                      $terms = get_terms($saveToTaxonomy, 'orderby=name&hide_empty=0&fields=names');
-                      $this->_tag_terms[$saveToTaxonomy] = $terms;
-                    }
-
-                    if (!$this->_included_js) {
-
-                      //enqueue some scripts for the enhaced UI
-                      $this->_included_js = true;
-
-                      wp_register_style(
-                              $handle = 'gfcpt_jquery_ui_theme',
-                              $src = plugins_url( 'css/custom/jquery-ui-1.8.16.custom.css' , __FILE__ ) );
-                      wp_enqueue_style('gfcpt_jquery_ui_theme');
-
-                      wp_register_style(
-                              $handle = 'gfcpt_tagit_css',
-                              $src = plugins_url( 'css/jquery.tagit.css' , __FILE__ ) );
-                      wp_enqueue_style('gfcpt_tagit_css');
-
-
-                      wp_register_script(
-                              $handle = 'gfcpt_jquery_ui',
-                              $src = plugins_url( 'js/jquery-ui-1.8.16.custom.min.js' , __FILE__ ),
-                              $deps = array('jquery') );
-
-                      wp_enqueue_script('gfcpt_jquery_ui');
-
-                      wp_register_script(
-                              $handle = 'gfcpt_tagit_js',
-                              $src = plugins_url( 'js/tag-it.js' , __FILE__ ),
-                              $deps = array('gfcpt_jquery_ui') );
-
-                      wp_enqueue_script('gfcpt_tagit_js');
-
-                      wp_register_script(
-                              $handle = 'gfcpt_tagit_init_js',
-                              $src = plugins_url( 'js/tag-it.init.js' , __FILE__ ),
-                              $deps = array('gfcpt_tagit_js') );
-
-                      wp_enqueue_script('gfcpt_tagit_init_js');
-                    }
-
+                  if ( !array_key_exists($saveToTaxonomy, $this->_tag_terms) ) {
+                    //get the existing taxonomies and add them to an array to render later
+                    $terms = get_terms($saveToTaxonomy, 'orderby=name&hide_empty=0&fields=names');
+                    $this->_tag_terms[$saveToTaxonomy] = $terms;
                   }
+
+                  if (!$this->_included_js) {
+
+                    //enqueue some scripts for the enhaced UI
+                    $this->_included_js = true;
+
+                    wp_register_style(
+                            $handle = 'gfcpt_jquery_ui_theme',
+                            $src = plugins_url( 'css/custom/jquery-ui-1.8.16.custom.css' , __FILE__ ) );
+                    wp_enqueue_style('gfcpt_jquery_ui_theme');
+
+                    wp_register_style(
+                            $handle = 'gfcpt_tagit_css',
+                            $src = plugins_url( 'css/jquery.tagit.css' , __FILE__ ) );
+                    wp_enqueue_style('gfcpt_tagit_css');
+
+
+                    wp_register_script(
+                            $handle = 'gfcpt_jquery_ui',
+                            $src = plugins_url( 'js/jquery-ui-1.8.16.custom.min.js' , __FILE__ ),
+                            $deps = array('jquery') );
+
+                    wp_enqueue_script('gfcpt_jquery_ui');
+
+                    wp_register_script(
+                            $handle = 'gfcpt_tagit_js',
+                            $src = plugins_url( 'js/tag-it.js' , __FILE__ ),
+                            $deps = array('gfcpt_jquery_ui') );
+
+                    wp_enqueue_script('gfcpt_tagit_js');
+
+                    wp_register_script(
+                            $handle = 'gfcpt_tagit_init_js',
+                            $src = plugins_url( 'js/tag-it.init.js' , __FILE__ ),
+                            $deps = array('gfcpt_tagit_js') );
+
+                    wp_enqueue_script('gfcpt_tagit_init_js');
+                  }
+
                 }
-              }              
-            }
+              }
+            }              
           }
         }
 

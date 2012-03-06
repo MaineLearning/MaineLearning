@@ -108,7 +108,7 @@ function wpv_admin_import_data() {
         $xml = simplexml_load_string($data);
         
         if (!$xml) {
-            return new WP_Error('not_xml_file', sprintf(__('The xliff file (%s) could not be read.', 'wpv-views'), $file['name']));
+            return new WP_Error('not_xml_file', sprintf(__('The XML file (%s) could not be read.', 'wpv-views'), $file['name']));
         }
         
         $import_data = wpv_admin_import_export_simplexml2array($xml);
@@ -141,6 +141,11 @@ function wpv_admin_import_view_templates($import_data) {
     
     if (isset($import_data['view-templates']['view-template'])) {
         $view_templates = $import_data['view-templates']['view-template'];
+		
+		// check for a single view template
+		if (!isset($view_templates[0])) {
+			$view_templates = array($view_templates);
+		}
         
         foreach($view_templates as $view_template) {
         
@@ -210,6 +215,12 @@ function wpv_admin_import_views($import_data) {
     if (isset($import_data['views']['view'])) {
         $views = $import_data['views']['view'];
         
+		// check for a single view
+		if (!isset($views[0])) {
+			$views = array($views);
+		}
+        
+		
         foreach($views as $view) {
         
             $meta = $view['meta'];

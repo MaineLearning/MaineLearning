@@ -7,6 +7,10 @@
  */
 
 function wpv_filter_get_posts($id) {
+    global $WP_Views, $post, $wplogger;
+    
+    $post_not_in_list = isset($post) ? array($post->ID) : array();
+    
     $view_settings_defaults = array(
         'post_type'         => 'any',
         'orderby'           => 'post-date',
@@ -15,7 +19,7 @@ function wpv_filter_get_posts($id) {
         'posts_per_page'    =>  -1
     );
     extract($view_settings_defaults);
-    $view_settings = (array)get_post_meta($id, '_wpv_settings', true);
+    $view_settings = $WP_Views->get_view_settings($id);
     extract($view_settings, EXTR_OVERWRITE);
     
     if (isset($_GET['wpv_paged'])) {
@@ -27,7 +31,9 @@ function wpv_filter_get_posts($id) {
             'paged'             => $paged,
             'post_type'         => $post_type,
             'order'             => $order,
-            'suppress_filters'  => false);
+            'suppress_filters'  => false,
+    		'post__not_in'      => $post_not_in_list
+    );
     
     if (isset($view_settings['pagination'][0]) && $view_settings['pagination'][0] == 'disable' && isset($view_settings['pagination']['mode']) && $view_settings['pagination']['mode'] == 'paged') {
         // Show all the posts if pagination is disabled.
@@ -40,6 +46,9 @@ function wpv_filter_get_posts($id) {
     $query = apply_filters('wpv_filter_query', $query, $view_settings);
     
     $post_query = new WP_Query($query);
+	
+	$wplogger->log($post_query->query, WPLOG_DEBUG);
+	$wplogger->log($post_query->request, WPLOG_DEBUG);
     
     $post_query = apply_filters('wpv_filter_query_post_process', $post_query, $view_settings);
     

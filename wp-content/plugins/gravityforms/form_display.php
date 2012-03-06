@@ -2,6 +2,10 @@
 
 class GFFormDisplay{
     public static $submission = array();
+    private static $init_scripts = array();
+
+    const ON_PAGE_RENDER = 1;
+    const ON_CONDITIONAL_LOGIC = 2;
 
     public static function process_form($form_id){
 
@@ -332,7 +336,7 @@ class GFFormDisplay{
         $submission_info = isset(self::$submission[$form_id]) ? self::$submission[$form_id] : false;
         if($submission_info){
             $is_postback = true;
-            $is_valid = $submission_info["is_valid"] || rgget("is_confirmation", $submission_info);
+            $is_valid = rgar($submission_info, "is_valid") || rgar($submission_info, "is_confirmation");
             $form = $submission_info["form"];
             $lead = $submission_info["lead"];
             $confirmation_message = rgget("confirmation_message", $submission_info);
@@ -359,7 +363,7 @@ class GFFormDisplay{
             $form["fields"][] = self::get_honeypot_field($form);
 
         //Fired right before the form rendering process. Allow users to manipulate the form object before it gets displayed in the front end
-        $form = apply_filters("gform_pre_render_$form_id", apply_filters("gform_pre_render", $form));
+        $form = apply_filters("gform_pre_render_$form_id", apply_filters("gform_pre_render", $form, $ajax), $ajax);
 
         if($form == null)
             return "<p>" . __("Oops! We could not locate your form.", "gravityforms") . "</p>";
@@ -376,33 +380,30 @@ class GFFormDisplay{
             if(!$form_info->is_active)
                 return "";
 
-            //If form has a schedule, make sure it is within the configured start and end dates
-            if(rgar($form, "scheduleForm")){
-                $local_time_start = sprintf("%s %02d:%02d %s", $form["scheduleStart"], $form["scheduleStartHour"], $form["scheduleStartMinute"], $form["scheduleStartAmpm"]);
-                $local_time_end = sprintf("%s %02d:%02d %s", $form["scheduleEnd"], $form["scheduleEndHour"], $form["scheduleEndMinute"], $form["scheduleEndAmpm"]);
-                $timestamp_start = strtotime($local_time_start . ' +0000');
-                $timestamp_end = strtotime($local_time_end . ' +0000');
-                $now = current_time("timestamp");
-
-                if( (!empty($form["scheduleStart"]) && $now < $timestamp_start) || (!empty($form["scheduleEnd"]) && $now > $timestamp_end))
-                    return  empty($form["scheduleMessage"]) ? "<p>" . __("Sorry. This form is no longer available.", "gravityforms") . "</p>" : "<p>" . GFCommon::gform_do_shortcode($form["scheduleMessage"]) . "</p>";
-            }
-
-            //If form has a limit of entries, check current entry count
-            if(rgar($form,"limitEntries")) {
-                $period = rgar($form, "limitEntriesPeriod");
-                $range = self::get_limit_period_dates($period);
-                $entry_count = RGFormsModel::get_lead_count($form_id, "", null, null, $range["start_date"], $range["end_date"]);
-
-                if($entry_count >= $form["limitEntriesCount"])
-                    return  empty($form["limitEntriesMessage"]) ? "<p>" . __("Sorry. This form is no longer accepting new submissions.", "gravityforms"). "</p>" : "<p>" . GFCommon::gform_do_shortcode($form["limitEntriesMessage"]) . "</p>";
-            }
-
             // If form requires login, check if user is logged in
             if(rgar($form, "requireLogin")) {
                 if(!is_user_logged_in())
                     return empty($form["requireLoginMessage"]) ? "<p>" . __("Sorry. You must be logged in to view this form.", "gravityforms"). "</p>" : "<p>" . GFCommon::gform_do_shortcode($form["requireLoginMessage"]) . "</p>";
             }
+
+        }
+
+        // show the form regardless of the following validations when force display is set to true
+        if(!$force_display) {
+
+            $form_schedule_validation = self::validate_form_schedule($form);
+
+            // if form schedule validation fails AND this is not a postback, display the validation error
+            // if form schedule validation fails AND this is a postback, make sure is not a valid submission (enables display of confirmation message)
+            if( ($form_schedule_validation && !$is_postback) || ($form_schedule_validation && $is_postback && !$is_valid) )
+                return $form_schedule_validation;
+
+            $entry_limit_validation = self::validate_entry_limit($form);
+
+            // refer to form schedule condition notes above
+            if( ($entry_limit_validation && !$is_postback) || ($entry_limit_validation && $is_postback && !$is_valid) )
+                return $entry_limit_validation;
+
         }
 
         $form_string = "";
@@ -419,8 +420,9 @@ class GFFormDisplay{
 
             //Hidding entire form if conditional logic is on to prevent "hidden" fields from blinking. Form will be set to visible in the conditional_logic.php after the rules have been applied.
             $style = self::has_conditional_logic($form) ? "style='display:none'" : "";
+            $custom_wrapper_css_class = !empty($form["cssClass"]) ? " {$form["cssClass"]}_wrapper": "";
             $form_string .= "
-                <div class='{$wrapper_css_class}' id='gform_wrapper_$form_id' " . $style . ">";
+                <div class='{$wrapper_css_class}{$custom_wrapper_css_class}' id='gform_wrapper_$form_id' " . $style . ">";
 
             $action = add_query_arg(array());
             $default_anchor = $has_pages || $ajax ? true : false;
@@ -451,26 +453,12 @@ class GFFormDisplay{
                         </div>";
             }
 
+            $current_page = self::get_current_page($form_id);
             if($has_pages && !IS_ADMIN){
                 $page_count = self::get_max_page_number($form);
-                $current_page = self::get_current_page($form_id);
 
                 if($form["pagination"]["type"] == "percentage"){
-                    $percent = floor(( ($current_page) / $page_count ) * 100) . "%";
-
-                    $page_name = rgar(rgar($form["pagination"],"pages"), $current_page -1);
-                    $page_name = !empty($page_name) ? " - " . $page_name : "";
-
-                    $style = $form["pagination"]["style"];
-                    $color = $style == "custom" ? " color:{$form["pagination"]["color"]};" : "";
-                    $bgcolor = $style == "custom" ? " background-color:{$form["pagination"]["backgroundColor"]};" : "";
-                    $form_string .="
-                        <div id='gf_progressbar_wrapper_{$form_id}' class='gf_progressbar_wrapper'>
-                            <h3 class='gf_progressbar_title'>" . __("Step", "gravityforms") . " {$current_page} " . __("of", "gravityforms") . " {$page_count}{$page_name}</h3>
-                            <div class='gf_progressbar'>
-                                <div class='gf_progressbar_percentage percentbar_{$style}' style='width:{$percent};{$color}{$bgcolor}'><span>{$percent}</span></div>
-                            </div>
-                        </div>";
+                    $form_string .= self::get_progress_bar($form, $form_id,$confirmation_message);
                 }
                 else if($form["pagination"]["type"] == "steps"){
                     $form_string .="
@@ -553,9 +541,16 @@ class GFFormDisplay{
             if(self::has_conditional_logic($form)){
                 $form_string .= self::get_conditional_logic($form);
             }
-            else if(self::has_enhanced_dropdown($form)){
 
-                $form_string .= "<script type='text/javascript'>//<![CDATA[\n" . self::get_chosen_init_script($form) . "\n//]]></script>";
+            if(self::has_enhanced_dropdown($form) ){
+
+                $chosen_script = self::get_chosen_init_script($form);
+                self::add_init_script($form["id"], "chosen", self::ON_PAGE_RENDER, $chosen_script);
+                self::add_init_script($form["id"], "chosen", self::ON_CONDITIONAL_LOGIC, $chosen_script);
+            }
+
+            if(self::has_character_counter($form)){
+                $form_string .= "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " jQuery(document).bind('gform_post_render', function(event, formId, currentPage){" . self::get_counter_script_init($form) . "}); " . apply_filters("gform_cdata_close", "") . "</script>";
             }
 
             //adding currency config if there are any product fields in the form
@@ -563,16 +558,44 @@ class GFFormDisplay{
                 if(!class_exists("RGCurrency"))
                     require_once("currency.php");
 
-                $form_string .= "<script type='text/javascript'>//<![CDATA[\n if(window[\"gformInitPriceFields\"]) jQuery(document).ready(function(){gformInitPriceFields();}); window['gf_currency_config'] = " . GFCommon::json_encode(RGCurrency::get_currency(GFCommon::get_currency()))  . "; \n//]]></script>";
+                $form_string .= "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " if(window[\"gformInitPriceFields\"]) jQuery(document).ready(function(){gformInitPriceFields();}); window['gf_currency_config'] = " . GFCommon::json_encode(RGCurrency::get_currency(GFCommon::get_currency()))  . "; " . apply_filters("gform_cdata_close", "") . "</script>";
             }
 
             if(self::has_password_strength($form)){
-                $form_string .= "<script type='text/javascript'>//<![CDATA[\nif(!window['gf_text']){window['gf_text'] = new Array();} window['gf_text']['password_blank'] = '" . __("Strength indicator", "gravityforms") . "'; window['gf_text']['password_mismatch'] = '" . __("Mismatch", "gravityforms") . "';window['gf_text']['password_bad'] = '" . __("Bad", "gravityforms") . "'; window['gf_text']['password_short'] = '" . __("Short", "gravityforms") . "'; window['gf_text']['password_good'] = '" . __("Good", "gravityforms") . "'; window['gf_text']['password_strong'] = '" . __("Strong", "gravityforms") . "';\n//]]></script>";
+                $form_string .= "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . "if(!window['gf_text']){window['gf_text'] = new Array();} window['gf_text']['password_blank'] = '" . __("Strength indicator", "gravityforms") . "'; window['gf_text']['password_mismatch'] = '" . __("Mismatch", "gravityforms") . "';window['gf_text']['password_bad'] = '" . __("Bad", "gravityforms") . "'; window['gf_text']['password_short'] = '" . __("Short", "gravityforms") . "'; window['gf_text']['password_good'] = '" . __("Good", "gravityforms") . "'; window['gf_text']['password_strong'] = '" . __("Strong", "gravityforms") . "';" . apply_filters("gform_cdata_close", "") . "</script>";
             }
 
             if(GFCommon::has_credit_card_field($form)) {
                 $card_rules = self::get_credit_card_rules();
-                $form_string .= "<script type='text/javascript'>//<![CDATA[\n if(!window['gf_cc_rules']){window['gf_cc_rules'] = new Array(); } window['gf_cc_rules'] = " . GFCommon::json_encode($card_rules) . "; \n//]]></script>";
+                $form_string .= "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " if(!window['gf_cc_rules']){window['gf_cc_rules'] = new Array(); } window['gf_cc_rules'] = " . GFCommon::json_encode($card_rules) . "; " . apply_filters("gform_cdata_close", "") . "</script>";
+            }
+
+            //rendering initialization scripts
+            $init_scripts = rgar(self::$init_scripts, $form["id"]);
+            if(!empty($init_scripts)){
+                $form_string .=
+                "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " ".
+                    "jQuery(document).bind('gform_post_render', function(event, formId, currentPage){";
+                        foreach($init_scripts as $init_script){
+                            if($init_script["location"] == self::ON_PAGE_RENDER){
+                                $form_string .= $init_script["script"];
+                            }
+                        }
+
+                $form_string .=
+
+                    "});".
+
+                    "jQuery(document).bind('gform_post_conditional_logic', function(event, formId, fields, isInit){" ;
+                        foreach($init_scripts as $init_script){
+                            if($init_script["location"] == self::ON_CONDITIONAL_LOGIC){
+                                $form_string .= $init_script["script"];
+                            }
+                        }
+
+                $form_string .=
+
+                    "});". apply_filters("gform_cdata_close", "") . "</script>";
             }
 
             if($ajax && $is_postback){
@@ -581,7 +604,10 @@ class GFFormDisplay{
                 $form_string = "<!DOCTYPE html><html><head>" .
                                 "<script type='text/javascript' src='" . $wp_scripts->base_url . $wp_scripts->registered["jquery"]->src . "'></script>" .
                                 "<script type='text/javascript' src='" . GFCommon::get_base_url() . "/js/conditional_logic.js'></script>" .
-                                "<meta charset='UTF-8' /></head><body>" . $form_string . "</body></html>";
+                                "<script type='text/javascript' src='" . GFCommon::get_base_url() . "/js/chosen.jquery.min.js'></script>" .
+                                "<script type='text/javascript' src='" . GFCommon::get_base_url() . "/js/jquery.textareaCounter.plugin.js'></script>" .
+                                "<script type='text/javascript' src='" . GFCommon::get_base_url() . "/js/jquery.maskedinput-1.3.min.js'></script>" .
+                                "<meta charset='UTF-8' /></head><body class='GF_AJAX_POSTBACK'>" . $form_string . "</body></html>";
             }
 
             if($ajax && !$is_postback){
@@ -595,19 +621,22 @@ class GFFormDisplay{
 
                 $form_string .="
                 <iframe style='display:none;width:0px; height:0px;' src='about:blank' name='gform_ajax_frame_{$form_id}' id='gform_ajax_frame_{$form_id}'></iframe>
-                <script type='text/javascript'>//<![CDATA[\n" .
-                    "function gformInitSpinner(){" .
-                        "jQuery('#gform_{$form_id}').submit(function(){" .
+                <script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . "" .
+                    "function gformInitSpinner_{$form_id}(){" .
+                        "jQuery('#gform_{$form_id}').submit({eventName : 'ajaxSpinner'}, function(){" .
                             "jQuery('#gform_submit_button_{$form_id}').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
                             "jQuery('#gform_wrapper_{$form_id} .gform_previous_button').attr('disabled', true); " .
                             "jQuery('#gform_wrapper_{$form_id} .gform_next_button').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
                         "});" .
                     "}" .
                     "jQuery(document).ready(function($){" .
-                        "gformInitSpinner();" .
+                        "gformInitSpinner_{$form_id}();" .
                         "jQuery('#gform_ajax_frame_{$form_id}').load( function(){" .
+                            "var contents = jQuery(this).contents().find('*').html();" .
+                            "var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;" .
+                            "if(!is_postback){return;}" .
                             "var form_content = jQuery(this).contents().find('#gform_wrapper_{$form_id}');" .
-                            "var confirmation_content = jQuery(this).contents().find('#gforms_confirmation_message');" .
+                            "var is_redirect = contents.indexOf('gformRedirect(){') >= 0;".
                             "jQuery('#gform_submit_button_{$form_id}').removeAttr('disabled');" .
                             "if(form_content.length > 0){" .
                                 "jQuery('#gform_wrapper_{$form_id}').html(form_content.html());" .
@@ -615,33 +644,82 @@ class GFFormDisplay{
                                 "if(window['gformInitDatepicker']) {gformInitDatepicker();}" .
                                 "if(window['gformInitPriceFields']) {gformInitPriceFields();}" .
                                 "var current_page = jQuery('#gform_source_page_number_{$form_id}').val();".
-                                "gformInitSpinner();" .
+                                "gformInitSpinner_{$form_id}();" .
                                 "jQuery(document).trigger('gform_page_loaded', [{$form_id}, current_page]);" .
                             "}" .
-                            "else if(confirmation_content.length > 0){" .
+                            "else if(!is_redirect){" .
+                                "var confirmation_content = jQuery(this).contents().find('#gforms_confirmation_message').html();" .
+                                "if(!confirmation_content){".
+                                    "confirmation_content = contents;".
+                                "}" .
                                 "setTimeout(function(){" .
-                                    "jQuery('#gform_wrapper_{$form_id}').replaceWith('<' + 'div id=\'gforms_confirmation_message\' class=\'gform_confirmation_message_{$form_id}\'' + '>' + confirmation_content.html() + '<' + '/div' + '>');" .
+                                    "jQuery('#gform_wrapper_{$form_id}').replaceWith('<' + 'div id=\'gforms_confirmation_message\' class=\'gform_confirmation_message_{$form_id}\'' + '>' + confirmation_content + '<' + '/div' + '>');" .
                                     "{$scroll_position['confirmation']}" .
                                     "jQuery(document).trigger('gform_confirmation_loaded', [{$form_id}]);" .
                                 "}, 50);" .
                             "}" .
                             "else{" .
-                                "jQuery('#gform_{$form_id}').append(jQuery(this).contents().find('*').html());" .
+                                "jQuery('#gform_{$form_id}').append(contents);" .
                                 "if(window['gformRedirect']) gformRedirect();" .
                             "}" .
                             "jQuery(document).trigger('gform_post_render', [{$form_id}, current_page]);" .
                         "});" .
-                    "});" .
-                "\n//]]></script>";
+                    "});" . apply_filters("gform_cdata_close", "") . "</script>";
             }
+
+            $is_first_load = !$is_postback;
+            if(!$ajax || $is_first_load)
+                $form_string .= "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " jQuery(document).ready(function(){jQuery(document).trigger('gform_post_render', [{$form_id}, {$current_page}])}); " . apply_filters("gform_cdata_close", "") . "</script>";
+
             return apply_filters('gform_get_form_filter',$form_string);
         }
         else{
-            if($ajax)
-                $confirmation_message = "<!DOCTYPE html><html><head><meta charset='UTF-8' /></head><body>" . $confirmation_message . "</body></html>";
+            $progress_confirmation = "";
 
-            return $confirmation_message;
+			//check admin setting for whether the progress bar should start at zero
+        	$start_at_zero = rgars($form, "pagination/display_progressbar_on_confirmation");
+			//check for filter
+            $start_at_zero = apply_filters("gform_progressbar_start_at_zero", $start_at_zero, $form);
+
+            //show progress bar on confirmation
+            if($start_at_zero && $has_pages && !IS_ADMIN && ($form["confirmation"]["type"] == "message" && $form["pagination"]["type"] == "percentage") && $form["pagination"]["display_progressbar_on_confirmation"])
+            {
+                $progress_confirmation = self::get_progress_bar($form, $form_id,$confirmation_message);
+                if($ajax)
+                {
+                    $progress_confirmation = "<!DOCTYPE html><html><head><meta charset='UTF-8' /></head><body class='GF_AJAX_POSTBACK'>" . $progress_confirmation . $confirmation_message . "</body></html>";
+                }
+                else
+                {
+                 	$progress_confirmation = $progress_confirmation . $confirmation_message;
+                }
+            }
+            else
+            {
+                //return regular confirmation message
+                if($ajax)
+                {
+                    $progress_confirmation = "<!DOCTYPE html><html><head><meta charset='UTF-8' /></head><body class='GF_AJAX_POSTBACK'>" . $confirmation_message . "</body></html>";
+                }
+                else
+                {
+                 $progress_confirmation = $confirmation_message;
+                }
+            }
+
+            return $progress_confirmation;
         }
+    }
+
+    public static function add_init_script($form_id, $script_name, $location, $script){
+        $key = $script_name . "_" . $location;
+
+        if(!isset(self::$init_scripts[$form_id]))
+            self::$init_scripts[$form_id] = array();
+
+        //add script if it hasn't been added before
+        if(!array_key_exists($key, self::$init_scripts[$form_id]))
+            self::$init_scripts[$form_id][] = array("location" => $location, "script" => $script);
     }
 
     private static function get_form_button($form_id, $button_input_id, $button, $default_text, $class, $alt, $target_page_number){
@@ -654,7 +732,7 @@ class GFFormDisplay{
         }
 
         if($button["type"] == "text" || empty($button["imageUrl"])){
-            $button_text = empty($button["text"]) ? $default_text : $button["text"];
+            $button_text = !empty($button["text"]) ? $button["text"] : $default_text;
             $button_input = "<input type='{$input_type}' id='{$button_input_id}' class='{$class}' value='" . esc_attr($button_text) . "' {$tabindex} {$onclick}/>";
         }
         else{
@@ -826,7 +904,7 @@ class GFFormDisplay{
 
         //if Akismet plugin is installed, run lead through Akismet and mark it as Spam when appropriate
         $is_spam = false;
-        if(GFCommon::has_akismet() && GFCommon::is_akismet_spam($form, $lead)){
+        if(GFCommon::akismet_enabled($form['id']) && GFCommon::is_akismet_spam($form, $lead)){
             $is_spam = true;
         }
 
@@ -872,19 +950,33 @@ class GFFormDisplay{
             }
 
             if(headers_sent() || $ajax){
-                $confirmation = "<script type=\"text/javascript\">//<![CDATA[\n function gformRedirect(){document.location.href='$url';}";
-                if(!$ajax)
-                    $confirmation .="gformRedirect();";
-
-                $confirmation .= "\n//]]></script>";
+                //Perform client side redirect for AJAX forms, of if headers have already been sent
+                $confirmation = self::get_js_redirect_confirmation($url, $ajax);
             }
             else{
                 $confirmation = array("redirect" => $url);
             }
         }
+
         $confirmation = apply_filters("gform_confirmation_{$form["id"]}", apply_filters("gform_confirmation", $confirmation, $form, $lead, $ajax), $form, $lead, $ajax);
-        if(!is_array($confirmation))
-            $confirmation = GFCommon::gform_do_shortcode($confirmation);
+
+        if(!is_array($confirmation)){
+            $confirmation = GFCommon::gform_do_shortcode($confirmation); //enabling shortcodes
+        }
+        else if(headers_sent() || $ajax){
+            //Perform client side redirect for AJAX forms, of if headers have already been sent
+            $confirmation = self::get_js_redirect_confirmation($confirmation["redirect"], $ajax); //redirecting via client side
+        }
+
+        return $confirmation;
+    }
+
+    private static function get_js_redirect_confirmation($url, $ajax){
+        $confirmation = "<script type=\"text/javascript\">" . apply_filters("gform_cdata_open", "") . " function gformRedirect(){document.location.href='$url';}";
+        if(!$ajax)
+            $confirmation .="gformRedirect();";
+
+        $confirmation .= apply_filters("gform_cdata_close", "") . "</script>";
 
         return $confirmation;
     }
@@ -910,6 +1002,14 @@ class GFFormDisplay{
 
     public static function validate(&$form, $field_values, $page_number=0){
 
+        // validate form schedule
+        if(self::validate_form_schedule($form))
+            return false;
+
+        // validate entry limit
+        if(self::validate_entry_limit($form))
+            return false;
+
         foreach($form["fields"] as &$field){
 
             //If a page number is specified, only validates fields that are on current page
@@ -927,11 +1027,24 @@ class GFFormDisplay{
                 $field["failed_validation"] = true;
                 $field["validation_message"] = empty($field["errorMessage"]) ? __("This field is required.", "gravityforms") : $field["errorMessage"];
             }
-
             //display error if field does not allow duplicates and the submitted value already exists
             else if($field["noDuplicates"] && RGFormsModel::is_duplicate($form["id"], $field, $value)){
                 $field["failed_validation"] = true;
-                $field["validation_message"] = is_array($value) ? apply_filters("gform_duplicate_message_{$form["id"]}", apply_filters("gform_duplicate_message", __("This field requires an unique entry and the values you entered have been already been used", "gravityforms"), $form), $form) :  apply_filters("gform_duplicate_message_{$form["id"]}", apply_filters("gform_duplicate_message", sprintf(__("This field requires an unique entry and '%s' has already been used", "gravityforms"), $value), $form), $form);
+
+                $input_type = RGFormsModel::get_input_type($field);
+                switch($input_type){
+                    case "date" :
+                        $default_message = __("This date has already been taken. Please select a new date.", "gravityforms");
+                    break;
+
+                    default:
+                        $default_message = is_array($value) ? __("This field requires an unique entry and the values you entered have been already been used.", "gravityforms") :
+                                                              sprintf(__("This field requires an unique entry and '%s' has already been used", "gravityforms"), $value);
+                    break;
+                }
+
+                $field["validation_message"] =  apply_filters("gform_duplicate_message_{$form["id"]}", apply_filters("gform_duplicate_message", $default_message, $form), $form);
+
             }
             else{
                 if(self::failed_state_validation($form["id"], $field, $value)){
@@ -1070,8 +1183,6 @@ class GFFormDisplay{
                                 $format = empty($field["dateFormat"]) ? "mdy" : $field["dateFormat"];
                                 $date = GFCommon::parse_date($value, $format);
 
-
-
                                 if(empty($date) || !self::checkdate($date["month"], $date["day"], $date["year"])){
                                     $field["failed_validation"] = true;
                                     $format_name = "";
@@ -1158,8 +1269,6 @@ class GFFormDisplay{
                                             $field["failed_validation"] = true;
                                             $field["validation_message"] = empty($field["errorMessage"]) ? __("The CAPTCHA wasn't entered correctly. Go back and try it again.", "gravityforms") : $field["errorMessage"];
                                         }
-                                        //removes current captcha file
-                                        $captcha_obj->remove($prefix);
 
                                         //removes old files in captcha folder (older than 1 hour);
                                         $captcha_obj->cleanup();
@@ -1195,8 +1304,6 @@ class GFFormDisplay{
                                         $field["failed_validation"] = true;
                                         $field["validation_message"] = empty($field["errorMessage"]) ? __("The CAPTCHA wasn't entered correctly. Go back and try it again.", "gravityforms") : $field["errorMessage"];
                                     }
-                                    //removes current captcha file
-                                    $captcha_obj->remove($prefix);
 
                                     //removes old files in captcha folder (older than 1 hour);
                                     $captcha_obj->cleanup();
@@ -1390,7 +1497,7 @@ class GFFormDisplay{
             wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
         }
 
-        if(self::has_pages($form) || self::has_fileupload_field($form)){
+        if(self::has_enhanced_dropdown($form) || self::has_pages($form) || self::has_fileupload_field($form)){
             wp_enqueue_script("gforms_json", GFCommon::get_base_url() . "/js/jquery.json-1.3.js", array("jquery"), GFCommon::$version, true);
             wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("gforms_json"), GFCommon::$version, false);
         }
@@ -1410,8 +1517,9 @@ class GFFormDisplay{
         do_action("gform_enqueue_scripts", $form, $ajax);
         do_action("gform_enqueue_scripts_{$form["id"]}", $form, $ajax);
 
-        if($ajax || self::has_other_choice($form))
-            wp_enqueue_script("jquery");
+        // enqueue jQuery every time form is displayed to allow "gform_post_render" js hook
+        // to be available to users even when GF is not using it
+        wp_enqueue_script("jquery");
 
     }
 
@@ -1442,7 +1550,7 @@ class GFFormDisplay{
             wp_print_scripts(array("gforms_json"));
         }
 
-        if( (self::has_price_field($form) || self::has_password_strength($form) || self::has_pages($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form)) && !wp_script_is("gforms_gravityforms", "queue")){
+        if( (self::has_enhanced_dropdown($form) || self::has_price_field($form) || self::has_password_strength($form) || self::has_pages($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form)) && !wp_script_is("gforms_gravityforms", "queue")){
             wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
             wp_print_scripts(array("gforms_gravityforms"));
         }
@@ -1452,7 +1560,17 @@ class GFFormDisplay{
             wp_print_scripts(array("gforms_character_counter"));
         }
 
-        if($ajax && !wp_script_is("jquery", "queue")){
+        if(self::has_input_mask($form) && !wp_script_is("gforms_input_mask", "queue")){
+            wp_enqueue_script("gforms_input_mask", GFCommon::get_base_url() . "/js/jquery.maskedinput-1.3.min.js", array("jquery"), GFCommon::$version, true);
+            wp_print_scripts(array("gforms_input_mask"));
+        }
+
+        if(self::has_enhanced_dropdown($form)&& !wp_script_is("gforms_chosen", "queue")){
+            wp_enqueue_script("gforms_chosen", GFCommon::get_base_url() . "/js/chosen.jquery.min.js", array("jquery"), GFCommon::$version, false);
+            wp_print_scripts(array("gforms_chosen"));
+        }
+
+        if(!wp_script_is("jquery", "queue")){
             wp_print_scripts(array("jquery"));
         }
     }
@@ -1530,23 +1648,23 @@ class GFFormDisplay{
             $dependents = substr($dependents, 0, strlen($dependents) - 1); //removing last comma;
 
         $animation = rgar($form,"enableAnimation") ? "1" : "0";
-        $chosen_init = self::has_enhanced_dropdown($form) ? self::get_chosen_init_script($form) : '';
-        $str = "<script type='text/javascript'>//<![CDATA[\n" .
+        global $wp_locale;
+        $number_format = $wp_locale->number_format['decimal_point'] == "," ? "decimal_comma" : "decimal_dot";
+
+        $str = "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . "" .
                 "if(window['jQuery']){" .
                     "jQuery(document).ready(function(){" .
                         "gf_apply_rules({$form['id']}, " . GFCommon::json_encode($fields_with_logic) . ", true);" .
-                        "jQuery('#gform_wrapper_{$form['id']}').show(0, function(){" .
-                                                                $chosen_init .
-                                                                "if(window['gformCalculateTotalPrice']){" .
-                                                                    "window['gformCalculateTotalPrice']({$form['id']});} " .
-                                                                "});" .
+                        "jQuery('#gform_wrapper_{$form['id']}').show();" .
                         $button_conditional_script .
 
                     "});" .
                     "if(!window['gf_form_conditional_logic'])" .
                         "window['gf_form_conditional_logic'] = new Array();" .
                     "window['gf_form_conditional_logic'][{$form['id']}] = {'logic' : {" . $logics . " }, 'dependents' : {" . $dependents . " }, 'animation' : " . $animation . " }; ".
-                "} \n//]]></script>";
+                    "if(!window['gf_number_format'])" .
+                        "window['gf_number_format'] = '" . $number_format . "';" .
+                "} " . apply_filters("gform_cdata_close", "") . "</script>";
 
         return $str;
     }
@@ -1557,8 +1675,33 @@ class GFFormDisplay{
             if(rgar($field, "enableEnhancedUI"))
                 $chosen_fields[] = "#input_{$form["id"]}_{$field["id"]}";
         }
-        return "jQuery('" . implode(",", $chosen_fields) . "').chosen({no_results_text: '" . esc_attr(apply_filters("gform_dropdown_no_results_text_{$form["id"]}", apply_filters("gform_dropdown_no_results_text", __("No results matched", "gravityforms"), $form["id"]), $form["id"])) . "'});";
+        return "gformInitChosenFields('" . implode(",", $chosen_fields) . "','" . esc_attr(apply_filters("gform_dropdown_no_results_text_{$form["id"]}", apply_filters("gform_dropdown_no_results_text", __("No results matched", "gravityforms"), $form["id"]), $form["id"])) . "');";
     }
+
+    public static function get_counter_script_init($form){
+
+        $script = "";
+        foreach($form["fields"] as $field){
+            $max_length = rgar($field,"maxLength");
+            $field_id = "input_{$form["id"]}_{$field["id"]}";
+            if(!empty($max_length))
+            {
+                $field_script =
+                        "if(jQuery('#field_{$form["id"]}_{$field["id"]} .ginput_counter').length == 0){" .
+                        "   jQuery('#{$field_id}').textareaCount(" .
+                        "    {" .
+                        "       'maxCharacterSize': {$max_length}," .
+                        "       'originalStyle': 'ginput_counter'," .
+                        "       'displayFormat' : '#input " . __("of", "gravityforms") . " #max " . __("max characters", "gravityforms") . "'" .
+                        "    });".
+                        "}";
+
+                $script .= apply_filters("gform_counter_script_{$form["id"]}", apply_filters("gform_counter_script", $field_script, $form["id"], $field_id, $max_length), $form["id"], $field_id, $max_length);
+            }
+        }
+        return $script;
+    }
+
 
     private static function has_date_field($form){
         if(is_array($form["fields"])){
@@ -1634,7 +1777,7 @@ class GFFormDisplay{
 
         //adding submit button field if enabled
         if(isset($form["button"]["conditionalLogic"])){
-            $fields[] = "0";
+            $fields[] = 0;
         }
 
         foreach($form["fields"] as $field){
@@ -1694,6 +1837,12 @@ class GFFormDisplay{
             }
         }
 
+        if($field["type"] == "post_category") {
+
+
+
+        }
+
         if(!IS_ADMIN && rgar($field,"adminOnly"))
         {
             if($field["allowsPrepopulate"])
@@ -1725,7 +1874,7 @@ class GFFormDisplay{
         $hidden_product_class = $input_type == "hiddenproduct" ? "gfield_hidden_product" : "";
         $donation_class = $field["type"] == "donation" ? "gfield_price gfield_price_{$form["id"]}_{$field["id"]} gfield_donation_{$form["id"]}_{$field["id"]}" : "";
         $required_class = rgar($field, "isRequired") ? "gfield_contains_required" : "";
-        $creditcard_warning_class = $input_type == "creditcard" && !is_ssl() ? "gfield_creditcard_warning" : "";
+        $creditcard_warning_class = $input_type == "creditcard" && !GFCommon::is_ssl() ? "gfield_creditcard_warning" : "";
 
         $css_class = "$selectable_class gfield $error_class $section_class $admin_only_class $custom_class $hidden_class $html_block_class $html_formatted_class $html_no_follows_desc_class $option_class $quantity_class $product_class $donation_class $shipping_class $page_class $required_class $hidden_product_class $creditcard_warning_class";
         $css_class = apply_filters("gform_field_css_class_{$form["id"]}", apply_filters("gform_field_css_class", trim($css_class), $field, $form), $field, $form);
@@ -1827,7 +1976,7 @@ class GFFormDisplay{
             break;
         }
 
-        if(RGFormsModel::get_input_type($field) == "creditcard" && !is_ssl() && !IS_ADMIN){
+        if(RGFormsModel::get_input_type($field) == "creditcard" && !GFCommon::is_ssl() && !IS_ADMIN){
             $field_content = "<div class='gfield_creditcard_warning_message'>" . __("This page is unsecured. Do not enter a real credit card number. Use this field only for testing purposes. ", "gravityforms") . "</div>" . $field_content;
         }
 
@@ -1876,6 +2025,92 @@ class GFFormDisplay{
 
         return $rules;
     }
+
+    private static function get_progress_bar($form, $form_id,$confirmation_message) {
+
+        $progress_complete = false;
+        $progress_bar = "";
+        $page_count = self::get_max_page_number($form);
+        $current_page = self::get_current_page($form_id);
+        $page_name = rgar(rgar($form["pagination"],"pages"), $current_page -1);
+        $page_name = !empty($page_name) ? " - " . $page_name : "";
+        $style = $form["pagination"]["style"];
+        $color = $style == "custom" ? " color:{$form["pagination"]["color"]};" : "";
+        $bgcolor = $style == "custom" ? " background-color:{$form["pagination"]["backgroundColor"]};" : "";
+
+        if (!empty($confirmation_message))
+        {
+            $progress_complete = true;
+        }
+        //check admin setting for whether the progress bar should start at zero
+        $start_at_zero = rgars($form, "pagination/display_progressbar_on_confirmation");
+		//check for filter
+        $start_at_zero = apply_filters("gform_progressbar_start_at_zero", $start_at_zero, $form);
+        $progressbar_page_count = $start_at_zero ? $current_page - 1 : $current_page;
+        $percent = !$progress_complete ? floor(( ($progressbar_page_count) / $page_count ) * 100) . "%" : "100%";
+        $percent_number = !$progress_complete ? floor(( ($progressbar_page_count) / $page_count ) * 100) . "" : "100";
+
+        if ($progress_complete)
+        {
+            $wrapper_css_class = GFCommon::get_browser_class() . " gform_wrapper";
+            //add on surrounding wrapper class when confirmation page
+            $progress_bar = "<div class='{$wrapper_css_class}' id='gform_wrapper_$form_id' ";
+            $progress_bar .= self::has_conditional_logic($form) ? "style='display:none'" : "" . ">";
+            $page_name = !empty($form["pagination"]["progressbar_completion_text"]) ? $form["pagination"]["progressbar_completion_text"] : "";
+        }
+
+
+        $progress_bar .="
+        <div id='gf_progressbar_wrapper_{$form_id}' class='gf_progressbar_wrapper'>
+            <h3 class='gf_progressbar_title'>";
+        $progress_bar .= !$progress_complete ? __("Step", "gravityforms") . " {$current_page} " . __("of", "gravityforms") . " {$page_count}{$page_name}" : "{$page_name}";
+        $progress_bar .= "
+        </h3>
+            <div class='gf_progressbar'>
+                <div class='gf_progressbar_percentage percentbar_{$style} percentbar_{$percent_number}' style='width:{$percent};{$color}{$bgcolor}'><span>{$percent}</span></div>
+            </div></div>";
+        //close div for surrounding wrapper class when confirmation page
+        $progress_bar .= $progress_complete ? "</div>" : "";
+
+        return $progress_bar;
+    }
+
+    /**
+    * Validates the form's entry limit settings. Returns the entry limit message if entry limit exceeded.
+    *
+    * @param array $form current GF form object
+    * @return string If entry limit exceeded returns entry limit setting.
+    */
+    public static function validate_entry_limit($form) {
+
+        //If form has a limit of entries, check current entry count
+        if(rgar($form,"limitEntries")) {
+            $period = rgar($form, "limitEntriesPeriod");
+            $range = self::get_limit_period_dates($period);
+            $entry_count = RGFormsModel::get_lead_count($form['id'], "", null, null, $range["start_date"], $range["end_date"]);
+
+            if($entry_count >= $form["limitEntriesCount"])
+                return empty($form["limitEntriesMessage"]) ? "<p>" . __("Sorry. This form is no longer accepting new submissions.", "gravityforms"). "</p>" : "<p>" . GFCommon::gform_do_shortcode($form["limitEntriesMessage"]) . "</p>";
+        }
+
+    }
+
+    public static function validate_form_schedule($form) {
+
+        //If form has a schedule, make sure it is within the configured start and end dates
+        if(rgar($form, "scheduleForm")){
+            $local_time_start = sprintf("%s %02d:%02d %s", $form["scheduleStart"], $form["scheduleStartHour"], $form["scheduleStartMinute"], $form["scheduleStartAmpm"]);
+            $local_time_end = sprintf("%s %02d:%02d %s", $form["scheduleEnd"], $form["scheduleEndHour"], $form["scheduleEndMinute"], $form["scheduleEndAmpm"]);
+            $timestamp_start = strtotime($local_time_start . ' +0000');
+            $timestamp_end = strtotime($local_time_end . ' +0000');
+            $now = current_time("timestamp");
+
+            if( (!empty($form["scheduleStart"]) && $now < $timestamp_start) || (!empty($form["scheduleEnd"]) && $now > $timestamp_end))
+                return empty($form["scheduleMessage"]) ? "<p>" . __("Sorry. This form is no longer available.", "gravityforms") . "</p>" : "<p>" . GFCommon::gform_do_shortcode($form["scheduleMessage"]) . "</p>";
+        }
+
+    }
+
 
 }
 ?>

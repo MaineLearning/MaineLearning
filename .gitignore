@@ -15,6 +15,9 @@ env.php
 # Don't include the error log
 php_error.log
 
+# Don't include the debug log
+wp-content/debug.log
+
 # Don't include Espresso metadata
 mainelearning.net.esproj
 

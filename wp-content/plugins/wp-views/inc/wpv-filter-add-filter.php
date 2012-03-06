@@ -6,7 +6,7 @@
  *
  */
 
-function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'popup_add_filter', $button_text = '') {
+function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'popup_add_filter', $button_text = '', $filter_type = 'wpv_add_filters', $show = true) {
 
     if ($button_text == '') {
         $button_text = __('Add another filter term', 'wpv-views');
@@ -14,7 +14,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
     // Get all the filters    
     if ($filters == null) {
         $filters = array();
-        $filters = apply_filters('wpv_add_filters', $filters);
+        $filters = apply_filters($filter_type, $filters);
     }
 
     foreach($filters as $type => $filter) {
@@ -88,7 +88,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
             </div>  
         </div>
 
-        <input alt="#TB_inline?inlineId=<?php echo $id; ?>" class="thickbox button-secondary" type="button" value="<?php echo $button_text; ?>" name="<?php echo $button_text; ?>" />
+        <input alt="#TB_inline?inlineId=<?php echo $id; ?>" class="thickbox button-secondary <?php echo $filter_type; ?>_button" type="button" value="<?php echo $button_text; ?>" name="<?php echo $button_text; ?>" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?>/>
         <br />
     <?php
 }

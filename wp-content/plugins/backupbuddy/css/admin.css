@@ -1,0 +1,70 @@
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	max-width: 300px;
+	opacity: 0.85;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+.pluginbuddy-nodecor a {
+	text-decoration: none;
+}
+.pluginbuddy_tip img {
+	vertical-align: -2px;
+}
+.pluginbuddy_popup {
+	position:absolute;
+	z-index:20;
+	display:none;
+	padding: 0px;
+	background-color: #EBF6F8;
+	border: 2px solid #ABADB3;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 10px 10px 15px -12px #356D8F;
+	-webkit-box-shadow: 10px 10px 15px -12px #356D8F;
+}
+.postbox {
+	line-height: 1.4em;
+}
+
+.toggle {
+	cursor: pointer;
+}
+.toggled {
+	display: none;
+	border: 1px solid #CCCCCC;
+	margin: 4px;
+	padding: 8px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.inside {
+	padding: 10px !important;
+}
+
+.indent {
+	width: 100px;
+	display: inline-block;
+}
+
+
+/* Tabs
+----------------------------------*/
+.ui-tabs { border-top: 1px solid #DFDFDF; margin-top: 20px; } /* padding: .2em; zoom: 1; */
+.ui-tabs .ui-tabs-nav { z-index: 15; list-style: none; position: relative; padding: 0px 0px 0px; margin-top: -15px; margin-left: 10px; }
+.ui-tabs .ui-tabs-nav li { margin: -11px 3px -1px 0px; position: relative; float: left; padding: 0; text-align: center; }
+.ui-tabs .ui-tabs-nav li a { background-color: #EDEDED; height: 19px; float: left; text-decoration: none; padding-left: 10px; padding-right: 10px; -moz-border-radius: 10px 10px 0px 0px; -webkit-border-radius: 10px 10px 0px 0px; border: 1px solid #DFDFDF; outline: none; padding-top: 5px; }
+.ui-tabs .ui-tabs-nav li a:hover { background-color: #DFDFDF; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {  } /* padding-bottom: 0px; */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { height: 21px; cursor: text; background-color: #F9F9F9; font-weight: bold; border-bottom: 0px; color: #333333; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { padding: 16px; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }

@@ -126,7 +126,13 @@ way to fit your requirements.
 .editor_addon_dropdown .scroll {
     width: 100%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+}
+
+.editor_addon_dropdown .scroll .wrapper {
+    position: relative;
 }
 
 .editor_addon_dropdown .group-title {

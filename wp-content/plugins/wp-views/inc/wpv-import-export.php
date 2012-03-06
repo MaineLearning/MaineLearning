@@ -94,6 +94,7 @@ function wpv_admin_export_data() {
                         if ($meta_key == '_wpv_settings') {
                             $value = maybe_unserialize($meta_value[0]);
                             $value = $WP_Views->convert_ids_to_names_in_settings($value);
+                            
                             $data['views']['view-' . $post['ID']]['meta'][$meta_key] = $value;
                         }
                         if ($meta_key == '_wpv_layout_settings') {
@@ -156,7 +157,7 @@ function wpv_admin_export_data() {
         $file = tempnam("tmp", "zip");
         $zip->open($file, ZipArchive::OVERWRITE);
     
-        $zip->addFromString('settings.xml', $data);
+        $res = $zip->addFromString('settings.xml', $data);
         $zip->addFromString('settings.php', $code);
         $zip->close();
         $data = file_get_contents($file);

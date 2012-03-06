@@ -1,9 +1,9 @@
 jQuery(document).ready(function($){
 
     wpv_initialize_filter_select('popup_add_filter');
+    wpv_initialize_filter_select('popup_add_filter_taxonomy');
     wpv_initialize_filter_select('popup_add_custom_field');
     wpv_initialize_filter_select('popup_add_category_field');
-    
 
 });
 
@@ -39,6 +39,9 @@ function wpv_initialize_filter_select(filter) {
 }
 
 function wpv_add_filter_submit(div_id) {
+
+    var query_type = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked').val();
+
     var type = jQuery('#' + div_id + '_select').val();
     
     if (type.substr(0, 13) == 'custom-field-') {
@@ -77,6 +80,14 @@ function wpv_add_filter_submit(div_id) {
         mode = jQuery('input[name=post_search_mode\\[\\]]:checked').val();
     }
     
+    // get taxonomy search if set
+    var taxonomy_search = '';
+    var taxonomy_mode = '';
+    if (jQuery('input[name=taxonomy_search_value]').length) {
+        taxonomy_search = jQuery('input[name=taxonomy_search_value]').val();
+        taxonomy_mode = jQuery('input[name=taxonomy_search_mode\\[\\]]:checked').val();
+    }
+    
     // get parent if set
     var parent_mode = '';
     var parent_id = '';
@@ -104,11 +115,32 @@ function wpv_add_filter_submit(div_id) {
         checkboxes : checkboxes,
         search : search,
         mode : mode,
+        taxonomy_search : taxonomy_search,
+        taxonomy_mode : taxonomy_mode,
         parent_mode : parent_mode,
         parent_id : parent_id,
         wpv_nonce : jQuery('#wpv_get_table_row_ui_nonce').attr('value')
         
     };
+
+    if (query_type == 'taxonomy') {
+        // get taxonomy parent if set
+        if (jQuery('input[name=taxonomy_parent_mode\\[\\]]').length) {
+            data['parent_mode'] = jQuery('input[name=taxonomy_parent_mode\\[\\]]:checked').val();
+            data['parent_id'] = jQuery('select[name=wpv_taxonomy_parent_id]').val();
+            data['taxonomy'] = jQuery('input[name=_wpv_settings\\[taxonomy_type\\]\\[\\]]:checked').val();
+        }
+
+        var taxonomy_terms = Array();
+        jQuery('.taxonomy-term-div input').each( function(index) {
+            if (jQuery(this).attr('checked')) {
+                taxonomy_terms.push(jQuery(this).attr('value'));
+            }
+        });
+        
+        data['taxonomy_term_checks'] = taxonomy_terms;
+    }
+        
     
     var td = '';
     jQuery.ajaxSetup({async:false});
@@ -116,8 +148,14 @@ function wpv_add_filter_submit(div_id) {
         td = response;
     });
     
+    var row_class = '';
+    if (query_type == 'posts') {
+        row_class = ' wpv_post_type_filter_row';
+    } else if (query_type == 'taxonomy') {
+        row_class = ' wpv_taxonomy_filter_row';
+    }
 
-    jQuery('#wpv_filter_table').append('<tr class="wpv_filter_row" id="wpv_filter_row_' + (temp_index + 1) + '">' + td + '</tr>');
+    jQuery('#wpv_filter_table').append('<tr class="wpv_filter_row' + row_class + '" id="wpv_filter_row_' + (temp_index + 1) + '">' + td + '</tr>');
     
     on_generate_wpv_filter();
     
@@ -165,3 +203,4 @@ function on_delete_wpv_filter(index) {
     
     return;
 };
+
