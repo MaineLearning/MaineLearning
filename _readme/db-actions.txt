@@ -14,4 +14,6 @@ Updated Cryptx to 3.2.1
 
 Install and activate WP Replicator by Ron Rennick
 
+Install and activate Custom CSS Manager
+
 Update Gravity Forms
