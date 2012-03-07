@@ -1,3 +1,5 @@
+# Development Processes
+
 ## Installation process (for new dev or staging installs)
 
 This process assumes you have Git installed on your local machine. Visit http://help.github.com/mac-set-up-git/ for a nice guide.
