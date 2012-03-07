@@ -365,7 +365,6 @@ div#item-header div#item-actions
 }
 
 div#item-header span.activity, div#item-header h2 span.highlight { margin-bottom: 0px; }
-
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 
@@ -386,11 +385,7 @@ BUDDYPRESS PANELS: ITEMS
 #item-body h4 { padding: 4px 0 0 12px; }
 div.pagination { margin: 0; }
 span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
-
-
-span.activity, div#message p {
-	border: 1px solid #E1CA82;
-}
+span.activity, div#message p { border: 1px solid #E1CA82; }
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
@@ -460,10 +455,7 @@ div#subnav.item-list-tabs
 BP PANELS: GROUP DIRECTORY
 ----------------------- */
 
-#groups-list .item-avatar {
-	display: none;
-}
-
+#groups-list .item-avatar { display: none; }
 
 /* ----------------------
 BP PANELS: SITES
@@ -485,6 +477,7 @@ BP PANELS: BLOG PAGES
 #item-body { background-color: #f4f4f4; }
 .standard-form { margin: 0 14px 0 14px; }
 div.author-box { background: none repeat scroll 0 0 #f4f4f4; }
+#blog-latest { padding: 10px 0; }
 
 /* ----------------------
 BP PANELS: FORUM POSTS
