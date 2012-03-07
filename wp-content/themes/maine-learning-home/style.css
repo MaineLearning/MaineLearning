@@ -91,6 +91,10 @@ div#sidebar { display: none; }
 ADMIN BARS
 ----------------------- */
 
+body.admin-bar #wpcontent, body.admin-bar #adminmenu {
+padding-top: 0px !important;
+}
+
 body#bp-default #wp-admin-bar .padder
 {
 	margin-top: 12px;
