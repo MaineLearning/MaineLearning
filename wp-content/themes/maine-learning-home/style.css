@@ -478,6 +478,7 @@ BP PANELS: BLOG PAGES
 .standard-form { margin: 0 14px 0 14px; }
 div.author-box { background: none repeat scroll 0 0 #f4f4f4; }
 #blog-latest { padding: 10px 0; }
+#blog-latest .post { padding: 10px 0; }
 
 /* ----------------------
 BP PANELS: FORUM POSTS
