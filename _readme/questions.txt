@@ -1,4 +1,4 @@
-------------------------------------------------------------
+--------------------------------------------------
 2012-02-29
 
 How shall we handle the absolute server paths in the advanced-cache.php file. They currently reference the production server. 
@@ -17,7 +17,7 @@ On http://mainelearning.net/sites/, where are the site avatar/blavatars coming f
 	
 	ALSO CAN HIDE IT WITH CSS.
 
-------------------------------------------------------------
+--------------------------------------------------
 2012-03-01
 
 How to change the full name for one of the members. This doesn't work: http://mainelearning.net/people/xxx/profile/edit/group/1/
@@ -37,28 +37,28 @@ How to hide the main blog from the /sites/ directory? It is only used for page/h
 	FEATURE REQUEST.
 	CAN BE DONE IN FUTURE WITH FILTERS.
 
-------------------------------------------------------------
+--------------------------------------------------
 2012-03-02
 
 What is the best way to identify and diagnose PHP errors?
 
 
-------------------------------------------------------------
+--------------------------------------------------
 2012-03-03
 
 Tried upgrading to BuddyPress 1.5.4 (from .3) for second time. Again this time, in local-dev, result: front page white screen, /wp-admin/: server error.
 
-------------------------------------------------------------
+--------------------------------------------------
 2012-03-06
 
 Group blog shows all pages in BP Blog panel. How to change to Menus rather than all pages?
 
-------------------------------------------------------------
+--------------------------------------------------
 2012-03-07
 
 Why do the group blog notifications have
 
-------------------------------------------------------------
+--------------------------------------------------
 
 
 
