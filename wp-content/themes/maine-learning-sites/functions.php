@@ -35,4 +35,11 @@ function wpmu_body_class( $class ) {
     return $class; 
 }  
 
+/** MLN: Change comments invite copy */
+/** http://wpsmith.net/2011/genesis/how-to-customize-the-genesis-comment-form/ */
 
+add_filter('genesis_comment_form_args', 'custom_comment_form_args');
+function custom_comment_form_args($args) {
+  $args['title_reply'] = 'Share your knowledge';// $args['title_reply'] = ''; for total removal
+  return $args;
+}
