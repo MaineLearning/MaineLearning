@@ -456,6 +456,15 @@ div#subnav.item-list-tabs
 }
 
 /* ----------------------
+BP PANELS: PROFILE: CHANGE AVATAR
+----------------------- */
+
+.profile p {
+	margin: 0 14px 0 14px;
+}
+
+
+/* ----------------------
 BP PANELS: GROUP DIRECTORY
 ----------------------- */
 
