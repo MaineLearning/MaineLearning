@@ -463,6 +463,17 @@ BP PANELS: PROFILE: CHANGE AVATAR
 	margin: 0 0 10px 12px;
 }
 
+/* ----------------------
+BP PANELS: ACTIVITIES
+----------------------- */
+
+div.activity {
+	background: #efefef;
+}
+
+div.activity-avatar {
+	margin: 20px 0 0 16px;
+}
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
