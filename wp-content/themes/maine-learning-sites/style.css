@@ -1798,3 +1798,9 @@ img.float-left-flex
 	margin-bottom: 0px;
 	padding: 9px 5px 0 0;
 }
+
+/* SUBSCRIPTION MANAGER */
+
+#subscription-manager b {
+	display:  none;
+}
