@@ -992,15 +992,17 @@ h6 { font-size: 12px; }
 /* Post Meta
 ------------------------------------------------------------ */
 
+/*
 .post-meta
 {
-	display: none;
-	/*	border-top: 1px solid #ddd;
+	border-top: 1px solid #ddd;
 	clear: both;
 	font-size: 12px;
 	padding: 5px 0 0;
-	text-transform: uppercase;*/
+	text-transform: uppercase;
 }
+
+*/
 
 /* Author Box
 ------------------------------------------------------------ */
@@ -1655,7 +1657,9 @@ div.gform_wrapper .gform_footer
 /* Custom for MLN
 ------------------------------------------------------------ */
 
-.home-page .post-info, .home-page a.bpm-report-link 
+/*.home-page .post-info */
+
+.home-page a.bpm-report-link 
 {
 	display: none;
 	height: 0;
