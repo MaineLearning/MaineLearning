@@ -115,15 +115,55 @@ WordPress keeps a lot of configuration data in the database rather than the file
 
 The production site is a clone of the Github repo, just like your dev environment. It runs the master branch at all times, which is dedicated to final releases. The workflow for the release manager is like this:
 
-- Merge the latest changes from the source branch (the stable branch for bugfix releases, the dev branch for feature releases) into the master branch
-- Use the .htaccess flags to do an IP block, and change the maintenance file to give up-to-date information. Commit these changes.
+- Merge the latest changes from the source branch (the stable branch for bugfix releases, the dev branch for feature releases) into the master branch. Example:
+
+    git checkout master
+    git pull origin master # get yourself up to date
+    git merge --no-ff 0.9.x
+
+- Use the .htaccess flags to do an IP block, and change the maintenance.html file to give up-to-date information. Commit these changes.
+
+    git add maintenance.html
+    git add .htaccess
+    git commit -m "Shuts down site for 0.9.3 release"
+
 - Push the master branch to the Github repo
+
+    git push origin master
+
 - From the production server, pull the latest master branch
-- Grep the `git log` for ACTION_REQUIRED, and pull up actions_required.md for cross-reference. Do any of the required actions.
+
+    git pull origin master
+    
+- Grep the `git log` for ACTION_REQUIRED, and pull up actions_required.md (or wherever you have stored your Database Actions) for cross-reference. Do any of the required actions.
 - Do any necessary testing
-- When everything looks OK, remove the .htaccess restrictions, commit the changes, and push back to Github master. The release is live.
+- When everything looks OK, remove the .htaccess restrictions. The release is now live.
+- Commit the changes, and push back to Github master.
+
+    git add .htaccess
+    # add any other files you may have changed on the production server during deployment
+    git commit -m "Re-opens site after the 0.9.3 release"
+    git push origin master
+    
 - On the local machine, pull the latest changes.
-- If any substantive changes were necessary on the production server, cherry-pick them to the appropriate branch
-- If this is a bugfix release, merge --no-ff the bugfix branch into the dev branch, so that all bugfixes are applied to the dev branch. If this is a feature release, then the old dev branch has become the bugfix branch, and you'll need to create a new dev branch named after the *next* feature release.
-- Push all changes
+
+    git pull origin master
+
+- Tag the release
+
+    git tag -a 0.9.3 -m "Tagging 0.9.3"
+    git push --tags
+
+- If any substantive changes were necessary on the production server ('substantive' meaning anything other than the .htaccess switch), cherry-pick or merge them to the appropriate branch
+- If this is a bugfix release, merge --no-ff the bugfix branch into the dev branch, so that all bugfixes are applied to the dev branch:
+    
+    git checkout 1.0.x
+    git merge --no-ff 0.9.x
+    git push origin 1.0.x
+    
+- If, on the other hand, this is a feature release, then the old dev branch has become the bugfix branch, and you'll need to create a new dev branch named after the *next* feature release.
+
+    git checkout -b 1.1.x # create the 1.1.x feature branch locally
+    git push origin 1.1.x # create it remotely
+
 - Make sure the Github issues milestone is cleared, and a new one is created for the new release
