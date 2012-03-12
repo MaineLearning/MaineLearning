@@ -18,8 +18,9 @@ It appears that the field being displayed is the username (not changeable) rathe
 
 However, in the WordPress Network Admin, "Display name publicly as" does work.
 
-	UNKNOWN PROBLEM. MAY BE BUG.
-	PLUGIN - MASQUERADE AS A USER TO MAKE CHANGES.
+	CAUSED BY BP USING FIELD NAME RATHER FIELD ID, AND I CHANGED IT IN BP-PROFILE FIELDS.
+	
+	TO REPAIR, CLICK SAVE ON FULL NAME FIELD.
 	
 
 --------------------------------------------------
@@ -29,15 +30,33 @@ Where is New Post button on blog page?
 --------------------------------------------------
 Why do Group Moderation changes in email subscriptions not "stick".
 
+BP GROUP MANAGEMENT AND E-MAIL. KNOWN BUG. CHANGE IN FRONT END.
+
 
 --------------------------------------------------
 After creating/attaching a blog to a group, the following screen does not load correct CSS. http://mainelearning.net/groups/dcs/admin/group-blog. See screenshot in local-dev.
 
+A HACK. BROKEN. LEFT OVER.
+
 --------------------------------------------------
 Group blog shows all pages in BP Blog panel. How to configure so Menus appear rather than all of the pages?
 
+BUILD BLOG FIRST, THEN ATTACH TO GROUP. TRY RUNNING WITH REPLICATOR.
+
 --------------------------------------------------
 Why do the group blog notifications have [&hellip;] at the end of the excerpted content?
+
+LOOKING INTO THIS. SOMETHING LIKE THIS
+
+function blah( $content ) {
+   $content = str_replace( '[hellip]', '...', $content );
+   
+   return $content;
+}
+add_action( 'bp_ass_activity_notification_content', 'blah' );
+
+
+
 
 
 
