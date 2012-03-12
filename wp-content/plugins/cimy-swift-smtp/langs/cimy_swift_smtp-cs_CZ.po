@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cimy Swift SMTP v2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-18 16:46+0300\n"
+"PO-Revision-Date: 2011-12-18 16:47+0300\n"
+"Last-Translator: Marco Cimmino <cimmino.marco@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:105
+msgid "Add here your SMTP server details"
+msgstr "Sem vložte informace o SMTP serveru"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:105
+#, php-format
+msgid "<strong>Note:</strong> Gmail users need to use the server 'smtp.gmail.com' with TLS enabled and port %s"
+msgstr "<strong>Poznámka:</strong> Gmail uživatelé musí používat server &quot;smtp.gmail.com&quot; s povoleným TLS na portu %s"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:112
+msgid "Sender name:"
+msgstr "Jméno odesílatele:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:120
+msgid "Sender e-mail:"
+msgstr "E-mail odesílatele:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:128
+#, fuzzy
+msgid "Never overwrite the sender:"
+msgstr "Vždy nahrazovat odesílatele:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:136
+msgid "Always overwrite the sender:"
+msgstr "Vždy nahrazovat odesílatele:"
+
+#: cimy_swift_smtp.php:144
+#, php-format
+msgid "Overwrite the sender only for the WordPress default [%s]:"
+msgstr ""
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:152
+msgid "SMTP server address:"
+msgstr "Adresa SMTP serveru:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:160
+msgid "Port:"
+msgstr "Port:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:164
+#, php-format
+msgid "%s (Default SMTP Port)"
+msgstr "%s (výchozí SMTP Port)"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:165
+#, php-format
+msgid "%s (Use for SSL/GMAIL)"
+msgstr "%s (použijte pro SSL/GMAIL)"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:166
+#, php-format
+msgid "%s (Use for TLS/STARTTLS/GMAIL)"
+msgstr "%s (použijte pro TLS/STARTTLS/GMAIL)"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:167
+msgid "Custom Port: (Use Box)"
+msgstr "Vlastní port: (použijte políčko)"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:173
+msgid "Username:"
+msgstr "Přihlašovací jméno:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:181
+msgid "Password:"
+msgstr "Heslo:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:189
+msgid "Use SSL or TLS?:"
+msgstr "Použít SSL nebo TLS?:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:193
+msgid "No"
+msgstr "Ne"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:194
+msgid "SSL"
+msgstr "SSL"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:195
+msgid "TLS (Use for Gmail)"
+msgstr "TLS (použijte pro Gmail)"
+
+#: cimy_swift_smtp.php:201
+#, php-format
+msgid "The selected protocol '%s' is not available on your PHP configuration, check how to enable it from %s"
+msgstr "Vybraný protokol '%s' není ve Vaší konfiguraci PHP dostupný. Pokuste se najít způsob, jak %s zpřístupnit."
+
+# @ default
+#: cimy_swift_smtp.php:210
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:214
+msgid "Test Connection"
+msgstr "Vyzkoušet připojení"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:215
+msgid "Once you've saved your settings, click the link below to test your connection."
+msgstr "Jakmile uložíte vaše nastavení, klikněte na link níže pro otestování připojení na SMTP server."
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:218
+msgid "Send Test Email to this Address:"
+msgstr "Odešli e-mail na tuto e-mailovou adresu:"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:218
+msgid "Send Test"
+msgstr "Odešli test"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:223
+msgid "Test result"
+msgstr "Výsledek testu"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:229
+msgid "This is a test mail sent using the Cimy Swift SMTP Plugin. If you've received this email it means your connection has been set up properly! Cool!"
+msgstr "Toto je testovací e-mail odeslaný pomocí Cimy Swift SMTP pluginu. Pokud jste v pořádku obdrželi tuto zprávu, znamená to, že připojení na SMTP server jste nakonfigurovali správně. Gratulujeme!"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:232
+msgid "TEST EMAIL SENT - Connection Verified."
+msgstr "TESTOVACÍ ZPRÁVA ODESLÁNA - Připojení je funkční"
+
+# @ cimy_swift_smtp
+#: cimy_swift_smtp.php:232
+msgid "If you don't receive the e-mail check also the spam folder."
+msgstr "Pokud jste zprávu nedostali, zkuste se podívat do SPAMového koše."
+

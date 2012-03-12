@@ -1,4 +1,11 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.2
+    - Fixed issue with dbDelta causing errors when trying to update the database tables on case sensitive database servers
+    - Fixed issue with conditional logic displaying wrong fields in the admin
+    - Fixed issue with form redirect not url encoding the total field properly
+    - Fixed XSS vulnerability with the "Other" radio button input and one of the AJAX hidden fields
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.3.1.2
 	- Fixed notices in form widget and when enabling no-conflict mode
 	- Fixed issue with entry list throwing database errors when sorting while filtering by starred or unread

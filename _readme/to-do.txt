@@ -1,7 +1,16 @@
-2012-03-01
+TO DO
+
+
+
+
+
+DONE
+
+
+---------------------------------------------
 
 Unhide post titles on all home pages.
 
-Create New Post button on blog page.
+Changing styling of group page to narrow description and not clear right.
 
-Find out why Group Moderation changes in email subscriptions don't "stick".
+Customize CSS for site headers
