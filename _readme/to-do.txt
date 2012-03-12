@@ -1,27 +1,16 @@
+TO DO
+
+
+
+
+
+DONE
+
+
 ---------------------------------------------
-2012-03-01
 
 Unhide post titles on all home pages.
 
-Create New Post button on blog page.
-
-Find out why Group Moderation changes in email subscriptions don't "stick".
-
----------------------------------------------
-2012-03-07
-
 Changing styling of group page to narrow description and not clear right.
 
-After creating/attaching a blog to a group, the following screen does not load correct CSS. http://mainelearning.net/groups/dcs/admin/group-blog. See screenshot in local-dev.
-
 Customize CSS for site headers
-
-Site styling for search box in header.
-
-Change styling/hide for Group titles and avatars.
-
-Full name in Profile > Edit does not "stick" after saving.
-
-mdoecaoette, mdoemao
-
-http://mainelearning.net/people/mdoecaoette/profile/edit/group/1
