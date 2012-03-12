@@ -165,6 +165,11 @@ The production site is a clone of the Github repo, just like your dev environmen
         git push --tags
 
 11. If any substantive changes were necessary on the production server ('substantive' meaning anything other than the .htaccess switch), cherry-pick or merge them to the appropriate branch
+
+       git cherry-pick ed518555edd0f00e122f78e7ae212da83fa543bf
+       
+    Note that you can get the hash number either from Github, `git log`.
+
 12. If this is a bugfix release, merge --no-ff the bugfix branch into the dev branch, so that all bugfixes are applied to the dev branch:
     
         git checkout 1.0.x
