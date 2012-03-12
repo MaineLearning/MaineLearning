@@ -1,21 +1,22 @@
 <?php
-/*
- WARNING: This file is part of the core Genesis framework. DO NOT edit
- this file under any circumstances. Please do all modifications
- in the form of a child theme.
- */
 
-/**
- * This file handles posts, but only exists for the sake of
- * child theme forward compatibility.
- *
- * This file is a core Genesis file and should not be edited.
- *
- * @category Genesis
- * @package  Templates
- * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
- * @link     http://www.studiopress.com/themes/genesis
- */
+/** Add the home featured section */
+/** http://teethgrinder.net/articles/2011/12/how-to-add-a-widget-area-in-genesis/ */
+
+add_action( 'genesis_before_loop', 'home_featured' );
+function home_featured() {
+
+    /** Do nothing on page 2 or greater */
+    if ( get_query_var( 'paged' ) >= 2 )
+        return;
+
+    genesis_widget_area( 'home-featured', array(
+    'before' => '<div class="home-featured widget-area">',
+    ) );
+
+}
+
 
 genesis();
+
+
