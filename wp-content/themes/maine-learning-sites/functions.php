@@ -43,3 +43,12 @@ function custom_comment_form_args($args) {
   $args['title_reply'] = 'Share your knowledge';// $args['title_reply'] = ''; for total removal
   return $args;
 }
+
+/** MLN: Add home featured widgitized area */
+
+genesis_register_sidebar( array(	
+'id'		=> 'home-featured',
+'name'		=> __( 'Home Featured Area' ),	
+'description'	=> __( 'This is the Home Featured Area.' ),
+) );
+
