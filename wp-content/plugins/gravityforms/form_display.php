@@ -752,7 +752,7 @@ class GFFormDisplay{
         $footer .= $previous_button . " " . $button_input;
 
         if($ajax){
-            $footer .= "<input type='hidden' name='gform_ajax' value='form_id={$form_id}&amp;title={$display_title}&amp;description={$display_description}' />";
+            $footer .= "<input type='hidden' name='gform_ajax' value='" . esc_attr("form_id={$form_id}&amp;title={$display_title}&amp;description={$display_description}") . "' />";
         }
         $current_page = self::get_current_page($form_id);
         $next_page = $current_page + 1;

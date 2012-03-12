@@ -91,13 +91,13 @@ textarea
 	/* ML */
 	font-family: "myriad-pro-1","myriad-pro-2",'Helvetica Neue',Helvetica,'Lucida Grande','Lucida Sans Unicode',sans-serif;
 	/* ML */
-	font-size: 13px;
+	font-size: 14px;
 	/* ML */
 	font-weight: 400;
 	/* ML */
-	letter-spacing: -.5px;
-	/* ML */
 	line-height: 160%;
+	/* ML */
+	letter-spacing: -.2px;
 	/* ML */
 	margin: 0;
 	padding: 0;
@@ -167,7 +167,7 @@ body
 	background-attachment: scroll;
 	background-color: #DDD;
 	background-image: url("images/top-bg-2012-02-08b.png");
-		/* ML */
+	/* ML */
 	background-position: left top;
 	background-repeat: repeat-x;
 	padding-top: 0px;
@@ -181,7 +181,7 @@ body
 
 #wrap
 {
-	background-image: url("images/mln-banner-sites-2012-02-21e.jpg");
+	background-image: url("images/mln-banner-sites-default-green.jpg");
 	/* ML */
 	background-repeat: no-repeat;
 	/* ML */
@@ -199,7 +199,6 @@ body
 
 #header
 {
-
 	overflow: hidden;
 	width: 100%;
 	/* ML */
@@ -233,13 +232,13 @@ body
 {
 	font-family: 'Cabin', arial, serif;
 	font-size: 28px;
-		/* ML */
+	/* ML */
 	font-weight: bold;
 	letter-spacing: .3px;
 	/* ML */
 	line-height: 42px;
 	margin: 0 0 0 30px;
-		/* ML */
+	/* ML */
 	text-shadow: #111111 2px 2px 4px;
 	/* ML */
 	text-transform: normal;
@@ -265,7 +264,7 @@ body
 #header .widget-area
 {
 	float: right;
-	margin-top: 30px;
+	margin: 30px 50px 0 0;
 	/* ML */
 	width: 300px;
 	/* ML */
@@ -368,7 +367,7 @@ li li a .sf-sub-indicator
 {
 	border-right: 1px solid #ddd;
 	color: #70bdcc;
-		/* ML */
+	/* ML */
 	display: block;
 	font-size: 12px;
 	padding: 6px 15px 5px;
@@ -476,8 +475,10 @@ li li a .sf-sub-indicator
 
 #nav ul
 {
+	background: transparent;
+	/* ML */
 	float: left;
-	margin: 0 20px 0 16px;
+	margin: 0 20px 0 0;
 	width: 960px;
 }
 
@@ -485,6 +486,8 @@ li li a .sf-sub-indicator
 {
 	float: left;
 	list-style-type: none;
+	margin: 0 0 0 16px;
+	/* ML */
 }
 
 #nav li a
@@ -498,10 +501,11 @@ li li a .sf-sub-indicator
 	/* ML */
 	font-weight: bold;
 	/* ML */
-	padding: 4px 15px 10px;
+	padding: 2px 0 10px 14px;
+	/* ML */
 	position: relative;
 	text-decoration: none;
-		text-shadow: #000 1px 1px 2px;
+	text-shadow: #000 1px 1px 2px;
 	/* ML */
 }
 
@@ -745,7 +749,7 @@ li li a .sf-sub-indicator
 #content
 {
 	float: left;
-	padding: 20px 20px 10px 30px;
+	padding: 20px 30px 10px 30px;
 	/* ML */
 	min-width: 440px;
 	/* ML */
@@ -872,7 +876,7 @@ h1
 	color: #555555;
 	/* ML */
 	font-family: 'Cabin', arial, serif;
-	font-size: 22px;
+	font-size: 24px;
 	/* ML */
 	font-weight: bold;
 	/* ML */
@@ -890,7 +894,9 @@ h2 a:visited
 	color: #555555;
 	/* ML */
 	font-family: 'Cabin', arial, serif;
-	font-size: 20px;
+	font-size: 22px;
+	/* ML */
+	font-weight: bold;
 	/* ML */
 	letter-spacing: 0px;
 	/* ML */
@@ -992,15 +998,17 @@ h6 { font-size: 12px; }
 /* Post Meta
 ------------------------------------------------------------ */
 
+/*
 .post-meta
 {
-	display: none;
-	/*	border-top: 1px solid #ddd;
+	border-top: 1px solid #ddd;
 	clear: both;
 	font-size: 12px;
 	padding: 5px 0 0;
-	text-transform: uppercase;*/
+	text-transform: uppercase;
 }
+
+*/
 
 /* Author Box
 ------------------------------------------------------------ */
@@ -1170,10 +1178,12 @@ p.wp-caption-text
 	float: right;
 	font-size: 13px;
 	line-height: 20px;
-	padding-right: 20px;
+	padding-right: 30px;
+	/* ML */
 	padding-top: 30px;
 	/* ML */
-	width: 280px;
+	width: 270px;
+	/* ML */
 }
 
 .sidebar p
@@ -1655,7 +1665,8 @@ div.gform_wrapper .gform_footer
 /* Custom for MLN
 ------------------------------------------------------------ */
 
-.home-page .post-info, .home-page a.bpm-report-link 
+/*.home-page .post-info */
+.home-page a.bpm-report-link
 {
 	display: none;
 	height: 0;
@@ -1794,3 +1805,12 @@ img.float-left-flex
 	margin-bottom: 0px;
 	padding: 9px 5px 0 0;
 }
+
+/* Subscription Manager */
+#subscription-manager b { display: none; }
+
+/* Home Featured Widget */
+div.home-featured .textwidget { 
+	font-size: 18px; 
+	line-height: 28px;
+	padding: 6px 0 45px 0 !important; }

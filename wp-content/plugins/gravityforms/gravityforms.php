@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.3.1.2
+Version: 1.6.3.2
 Author: Rocketgenius Inc.
 Author URI: http://www.rocketgenius.com
 
@@ -254,9 +254,12 @@ class RGForms{
             if ( ! empty($wpdb->collate) )
                 $charset_collate .= " COLLATE $wpdb->collate";
 
+            //Fixes issue with dbDelta lower-casing table names, which cause problems on case sensitive DB servers.
+            add_filter( 'dbdelta_create_queries', array("RGForms", "dbdelta_fix_case"));
+
             //------ FORM -----------------------------------------------
             $form_table_name = RGFormsModel::get_form_table_name();
-            $sql = "CREATE TABLE " . $form_table_name . " (
+            $sql = "CREATE TABLE A" . $form_table_name . " (
                   id mediumint(8) unsigned not null auto_increment,
                   title varchar(150) not null,
                   date_created datetime not null,
@@ -373,6 +376,8 @@ class RGForms{
                 ) $charset_collate;";
             dbDelta($sql);
 
+            remove_filter('dbdelta_create_queries', array("RGForms", "dbdelta_fix_case"));
+
             //fix checkbox value. needed for version 1.0 and below but won't hurt for higher versions
             self::fix_checkbox_value();
 
@@ -425,6 +430,23 @@ class RGForms{
             }
         }
     }
+
+    public static function dbdelta_fix_case($cqueries){
+        foreach ($cqueries as $table => $qry) {
+            $table_name = $table;
+            if(preg_match("|CREATE TABLE ([^ ]*)|", $qry, $matches)){
+                $query_table_name = trim($matches[1], '`' );
+
+                //fix table names that are different just by their casing
+                if(strtolower($query_table_name) == $table){
+                    $table_name = $query_table_name;
+                }
+            }
+            $queries[$table_name] = $qry;
+        }
+        return $queries;
+    }
+
 
     public static function no_conflict_mode_style(){
         if(!get_option("gform_enable_noconflict"))

@@ -1,0 +1,142 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cimy Swift SMTP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-18 16:47+0300\n"
+"PO-Revision-Date: 2011-12-18 16:47+0300\n"
+"Last-Translator: Marco Cimmino <cimmino.marco@gmail.com>\n"
+"Language-Team: Fat Cow <zhr@tut.by>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/wp-content/plugins/cimy-swift-smtp\n"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:105
+msgid "Add here your SMTP server details"
+msgstr "Дадаць сюды налады SMTP"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:105
+#, php-format
+msgid "<strong>Note:</strong> Gmail users need to use the server 'smtp.gmail.com' with TLS enabled and port %s"
+msgstr "<strong>Нататка:</strong> Карыстачы Gmail павінны выкарыстоўваць сервер 'smtp.gmail.com' з уключаным TLS і портам %s"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:112
+msgid "Sender name:"
+msgstr "Імя адпраўніка:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:120
+msgid "Sender e-mail:"
+msgstr "Адпраўнік e-mail:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:128
+#, fuzzy
+msgid "Never overwrite the sender:"
+msgstr "Заўсёды перапрызначаць імя адпраўніка:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:136
+msgid "Always overwrite the sender:"
+msgstr "Заўсёды перапрызначаць імя адпраўніка:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:144
+#, php-format
+msgid "Overwrite the sender only for the WordPress default [%s]:"
+msgstr ""
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:152
+msgid "SMTP server address:"
+msgstr "Адрас SMTP-сервера:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:160
+msgid "Port:"
+msgstr "Порт:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:164
+#, php-format
+msgid "%s (Default SMTP Port)"
+msgstr "%s (стандартны SMTP-порт)"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:165
+#, php-format
+msgid "%s (Use for SSL/GMAIL)"
+msgstr "%s (выкарыстоўваць для SSL/GMAIL)"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:166
+#, php-format
+msgid "%s (Use for TLS/STARTTLS/GMAIL)"
+msgstr "%s (выкарыстоўваць для TLS/STARTTLS/GMAIL)"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:167
+msgid "Custom Port: (Use Box)"
+msgstr "Адмысловы порт: (исп. Box)"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:173
+msgid "Username:"
+msgstr "Імя карыстача:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:181
+msgid "Password:"
+msgstr "Пароль:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:189
+msgid "Use SSL or TLS?:"
+msgstr "Исп. SSL ці TLS?:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:193
+msgid "No"
+msgstr "Не"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:194
+msgid "SSL"
+msgstr "SSL"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:195
+msgid "TLS (Use for Gmail)"
+msgstr "TLS (исп. для Gmail)"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:201
+#, php-format
+msgid "The selected protocol '%s' is not available on your PHP configuration, check how to enable it from %s"
+msgstr ""
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:210
+msgid "Save Changes"
+msgstr "Захаваць змены"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:214
+msgid "Test Connection"
+msgstr "Тэставае злучэнне"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:215
+msgid "Once you've saved your settings, click the link below to test your connection."
+msgstr "Як толькі вы захаваеце налады, націсніце спасылку ніжэй для тэставання вашага злучэння."
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:218
+msgid "Send Test Email to this Address:"
+msgstr "Адправіць тэставы email на гэты адрас:"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:218
+msgid "Send Test"
+msgstr "Тэст адпраўкі"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:223
+msgid "Test result"
+msgstr "Вынік цеста"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:229
+msgid "This is a test mail sent using the Cimy Swift SMTP Plugin. If you've received this email it means your connection has been set up properly! Cool!"
+msgstr "Гэта тэст пошта адпраўляецца з дапамогай Swift Cimy SMTP Plugin. Калі вы атрымалі гэта паведамленне, гэта азначае, што ваша злучэнне было ўсталявана правільна! Стромка!"
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:232
+msgid "TEST EMAIL SENT - Connection Verified."
+msgstr "ТЭСТАВЫ ЛІСТ АДПРАЎЛЕНА - ЗЛУЧЭННЕ ПАЦВЕРДЖАНА."
+
+#: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:232
+msgid "If you don't receive the e-mail check also the spam folder."
+msgstr "Калі вы не атрымаеце паведамленне па электроннай пошце, праверце тэчку са спамам."
+

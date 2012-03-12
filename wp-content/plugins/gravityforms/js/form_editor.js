@@ -1722,7 +1722,7 @@ function IsConditionalLogicField(field){
     var supported_fields = ["checkbox", "radio", "select", "text", "website", "textarea", "email", "hidden", "number", "phone", "multiselect", "post_title",
                             "post_tags", "post_custom_field", "post_content", "post_excerpt"];
 
-    return jQuery.inArray(inputType, supported_fields);
+    return jQuery.inArray(inputType, supported_fields) >= 0;
 
 }
 

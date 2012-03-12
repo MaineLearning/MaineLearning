@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.3.1.2";
+    public static $version = "1.6.3.2";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -567,7 +567,8 @@ class GFCommon{
                             if(is_array($items)){
                                 $cats = array();
                                 foreach($items as $item){
-                                    $cats[] = self::format_post_category($item, $use_id);
+                                    $cat = self::format_post_category($item, $use_id);
+                                    $cats[] = self::format_variable_value($cat, $url_encode, $esc_html, $format);
                                 }
                                 $value = self::implode_non_blank(", ", $cats);
                             }
@@ -581,11 +582,13 @@ class GFCommon{
 
                     case "total" :
                         $value = GFCommon::to_money($value);
+                        $value = self::format_variable_value($value, $url_encode, $esc_html, $format);
                     break;
 
                     case "post_category" :
                         $use_id = strtolower(rgar($match,4)) == "id";
                         $value = self::format_post_category($value, $use_id);
+                        $value = self::format_variable_value($value, $url_encode, $esc_html, $format);
                     break;
 
                     case "list" :
@@ -1630,7 +1633,7 @@ class GFCommon{
                         $other_value = $other_default_value;
                     }
 
-                    $label = "<input name='input_{$field["id"]}_other' type='text' value='$other_value' onfocus='$onfocus' onblur='$onblur' $tabindex $disabled_text />";
+                    $label = "<input name='input_{$field["id"]}_other' type='text' value='" . esc_attr($other_value) . "' onfocus='$onfocus' onblur='$onblur' $tabindex $disabled_text />";
                 }
 
                 $choices .= sprintf("<li class='gchoice_$id'><input name='input_%d' type='radio' value='%s' %s id='choice_%s' $tabindex %s $logic_event %s />%s</li>", $field["id"], esc_attr($field_value), $checked, $id, $disabled_text, $input_focus, $label);

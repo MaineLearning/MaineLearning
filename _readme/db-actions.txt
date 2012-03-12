@@ -1,5 +1,6 @@
 Database actions
 
+------------------------------------
 2012-02-29
 
 Deactivated WP-DBManager and deleted files.
@@ -7,3 +8,12 @@ Deactivated WP-DBManager and deleted files.
 Installed WP-Optimize, and activated on Site 1.
 
 Updated Cryptx to 3.2.1
+
+------------------------------------
+2012-03-07
+
+Install and activate WP Replicator by Ron Rennick
+
+Install and activate Custom CSS Manager
+
+Update Gravity Forms

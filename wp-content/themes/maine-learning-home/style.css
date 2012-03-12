@@ -91,6 +91,10 @@ div#sidebar { display: none; }
 ADMIN BARS
 ----------------------- */
 
+body.admin-bar #wpcontent, body.admin-bar #adminmenu {
+padding-top: 0px !important;
+}
+
 body#bp-default #wp-admin-bar .padder
 {
 	margin-top: 12px;
@@ -282,7 +286,6 @@ ul.item-list li div.item-desc
 /* Images
 ----------------------- */
 
-body.home h2.pagetitle, .comment-form-comment label { display: none; }
 img.alignright { margin: 0 0 2px 5px; }
 
 /* Summary
@@ -329,6 +332,8 @@ img.alignright { margin: 0 0 2px 5px; }
 	/* ML */
 }
 
+body.home h2.pagetitle, .comment-form-comment label { display: none; }
+
 /* ----------------------
 BUDDYPRESS PANELS: HEADER
 ----------------------- */
@@ -346,8 +351,15 @@ div#item-header div#item-meta
 {
 	color: #888888;
 	font-size: 13px;
-	margin: 0;
+	margin: 20px 0 0 0;
 	padding-bottom: 0px;
+	width: 80%;
+}
+
+#item-meta p
+{
+	float: left;
+	width: 70%;
 }
 
 div#item-header div#item-actions
@@ -357,19 +369,6 @@ div#item-header div#item-actions
 }
 
 div#item-header span.activity, div#item-header h2 span.highlight { margin-bottom: 0px; }
-
-#item-meta
-{
-	margin: 0;
-	width: 100%;
-}
-
-#item-meta p
-{
-	float: left;
-	width: 70%;
-}
-
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 
@@ -390,11 +389,7 @@ BUDDYPRESS PANELS: ITEMS
 #item-body h4 { padding: 4px 0 0 12px; }
 div.pagination { margin: 0; }
 span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
-
-
-span.activity, div#message p {
-	border: 1px solid #E1CA82;
-}
+span.activity, div#message p { border: 1px solid #E1CA82; }
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
@@ -461,6 +456,32 @@ div#subnav.item-list-tabs
 }
 
 /* ----------------------
+BP PANELS: PROFILE: CHANGE AVATAR
+----------------------- */
+
+.profile p {
+	margin: 0 0 10px 12px;
+}
+
+/* ----------------------
+BP PANELS: ACTIVITIES
+----------------------- */
+
+div.activity {
+	background: #efefef;
+}
+
+div.activity-avatar {
+	margin: 20px 0 0 16px;
+}
+
+/* ----------------------
+BP PANELS: GROUP DIRECTORY
+----------------------- */
+
+#groups-list .item-avatar { display: none; }
+
+/* ----------------------
 BP PANELS: SITES
 ----------------------- */
 
@@ -473,12 +494,6 @@ ul.item-list li div.meta
 }
 
 /* ----------------------
-BP PANELS: GROUPS
------------------------ */
-
-#groups-directory-form a { display: none; }
-
-/* ----------------------
 BP PANELS: BLOG PAGES
 ----------------------- */
 
@@ -486,6 +501,8 @@ BP PANELS: BLOG PAGES
 #item-body { background-color: #f4f4f4; }
 .standard-form { margin: 0 14px 0 14px; }
 div.author-box { background: none repeat scroll 0 0 #f4f4f4; }
+#blog-latest { padding: 10px 0; }
+#blog-latest .post { padding: 10px 0; }
 
 /* ----------------------
 BP PANELS: FORUM POSTS
