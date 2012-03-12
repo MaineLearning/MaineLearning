@@ -133,13 +133,21 @@ The production site is a clone of the Github repo, just like your dev environmen
 
         git push origin master
 
-4. From the production server, pull the latest master branch
+3. Shell to the production server
+
+        ssh mainelea@vm285.sgvps.net -p 18765
+        
+    Change into the correct directory
+    
+        cd /home/mainelea/public_html/
+
+4. Pull the latest master branch
 
         git pull origin master
     
-5. Grep the `git log` for ACTION_REQUIRED, and pull up actions_required.md (or wherever you have stored your Database Actions) for cross-reference. Do any of the required actions.
+5. Open _readme/db-actions.txt, for reference. Do any of the required actions.
 6. Do any necessary testing
-7. When everything looks OK, remove the .htaccess restrictions. The release is now live.
+7. When everything looks OK, remove the .htaccess restrictions (by adding a # before the first block of rewrite rules). The release is now live.
 8. Commit the changes, and push back to Github master.
 
         git add .htaccess
