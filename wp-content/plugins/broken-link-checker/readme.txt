@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: links, broken, maintenance, blogroll, custom fields, admin, comments, posts
 Requires at least: 3.2
-Tested up to: 3.3
-Stable tag: 1.4
+Tested up to: 3.4-alpha
+Stable tag: 1.5
 
 This plugin will check your posts, comments and other content for broken links and missing images, and notify you if any are found. 
 
@@ -62,6 +62,7 @@ You can also click on the contents of the "Status" or "Link Text" columns to get
 * Romanian - [Ovidiu](http://www.jibo.ro)
 * Russian - [Anna Ozeritskaya](http://hweia.ru/)
 * Spanish - [Neoshinji](http://blog.tuayudainformatica.com/traducciones-de-plugins-wordpress/)
+* Turkish - [Murat Durgun](http://www.lanwifi.net/)
 * Ukrainian - [Stas Mykhajlyuk](http://www.kosivart.com/)
 
 *Note: Some translations are not entirely up to date with the latest release, so parts of the interface may appear untranslated.*
@@ -88,6 +89,18 @@ To upgrade your installation
 1. Reactivate the plugin. Your settings will be retained from the previous version.
 
 == Changelog ==
+
+= 1.5 =
+* Added a FileServe checker.
+* Added Turkish translation.
+* Added GoogleVideo and Megavideo embed support.
+* Fixed Megaupload links being reported with an "Unknown error" message when it should be "Not found".
+* Fixed a couple of bugs in the Rapidshare and MediaFire checkers.
+* Updated German translation.
+* Updated Italian translation.
+* Updated Portuguese translation.
+* The explanatory text for the broken link CSS and removed link CSS inputs can now be translated.
+* Tested on WP 3.4-alpha-20291.
 
 = 1.4 =
 * Added an option to send post authors notifications about broken links in their posts.

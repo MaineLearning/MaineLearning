@@ -564,8 +564,9 @@ class GFExport{
 
                         default :
                             $long_text = "";
-                            if(strlen($lead[$field_id]) >= GFORMS_MAX_FIELD_LENGTH)
-                                $long_text = RGFormsModel::get_field_value_long($lead["id"], $field_id);
+                            if(strlen($lead[$field_id]) >= (GFORMS_MAX_FIELD_LENGTH-10)){
+                                $long_text = RGFormsModel::get_field_value_long($lead, $field_id, $form);
+                            }
 
                             $value = !empty($long_text) ? $long_text : $lead[$field_id];
 

@@ -4,27 +4,39 @@ ACTIVE
 
 
 --------------------------------------------------
-What is the best way to import users into a specific group?
+How do we get nested comments in the forum?
 
 
 --------------------------------------------------
-In the Buddypress profile edit page ...
+In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
 
-http://mainelearning.net/people/xxx/profile/edit/group/1/
 
-... changing the Full/Display name from the username, which is displayed, to a real name and then saving does not "stick." 
-
-It appears that the field being displayed is the username (not changeable) rather than the Full/Display name.
-
-However, in the WordPress Network Admin, "Display name publicly as" does work.
-
-	CAUSED BY BP USING FIELD NAME RATHER FIELD ID, AND I CHANGED IT IN BP-PROFILE FIELDS.
-	
-	TO REPAIR, CLICK SAVE ON FULL NAME FIELD.
-	
 
 --------------------------------------------------
 Where is New Post button on blog page?
+
+
+When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
+
+
+
+--------------------------------------------------
+Why do the group blog notifications have [&hellip;] at the end of the excerpted content?
+
+LOOKING INTO THIS. SOMETHING LIKE THIS
+
+function blah( $content ) {
+   $content = str_replace( '[hellip]', '...', $content );
+   
+   return $content;
+}
+add_action( 'bp_ass_activity_notification_content', 'blah' );
+
+
+
+--------------------------------------------------
+AWAITING RESOLUTION
+--------------------------------------------------
 
 
 --------------------------------------------------
@@ -42,22 +54,6 @@ A HACK. BROKEN. LEFT OVER.
 Group blog shows all pages in BP Blog panel. How to configure so Menus appear rather than all of the pages?
 
 BUILD BLOG FIRST, THEN ATTACH TO GROUP. TRY RUNNING WITH REPLICATOR.
-
---------------------------------------------------
-Why do the group blog notifications have [&hellip;] at the end of the excerpted content?
-
-LOOKING INTO THIS. SOMETHING LIKE THIS
-
-function blah( $content ) {
-   $content = str_replace( '[hellip]', '...', $content );
-   
-   return $content;
-}
-add_action( 'bp_ass_activity_notification_content', 'blah' );
-
-
-
-
 
 
 --------------------------------------------------
@@ -98,3 +94,19 @@ Tried upgrading to BuddyPress 1.5.4 (from .3) for second time. Again this time, 
 
 
 What is the best way to identify and diagnose PHP errors?
+
+
+--------------------------------------------------
+In the Buddypress profile edit page ...
+
+http://mainelearning.net/people/xxx/profile/edit/group/1/
+
+... changing the Full/Display name from the username, which is displayed, to a real name and then saving does not "stick." 
+
+It appears that the field being displayed is the username (not changeable) rather than the Full/Display name.
+
+However, in the WordPress Network Admin, "Display name publicly as" does work.
+
+	CAUSED BY BP USING FIELD NAME RATHER FIELD ID, AND I CHANGED IT IN BP-PROFILE FIELDS.
+	
+	TO REPAIR, CLICK SAVE ON FULL NAME FIELD.

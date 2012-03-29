@@ -69,12 +69,13 @@ class blcEmbedParserBase extends blcParser {
 	 * Extract embedded elements from a HTML string.
 	 * 
 	 * This function returns an array of <embed> elements found in the input
-	 * string. Only <embed>'s that are inside <object>'s are considered. Embeds
-	 * without a 'src' attribute are skipped. 
+	 * string. Embeds without a 'src' attribute are skipped.
 	 * 
 	 * Each array item has the same basic structure as the array items
 	 * returned by blcUtility::extract_tags(), plus an additional 'embed_code' key 
-	 * that contains the full HTML code for the entire <object> + <embed> structure.  
+	 * that contains the HTML code for the element. If the embed element is wrapped
+	 * in an <object>, the 'embed_code' key contains the full HTML for the entire
+	 * <object> + <embed> structure.
 	 *  
 	 * @uses blcUtility::extract_tags() This function is a simple wrapper around extract_tags()
 	 * 
@@ -86,7 +87,7 @@ class blcEmbedParserBase extends blcParser {
 		
 		//remove all <code></code> blocks first
 		$html = preg_replace('/<code[^>]*>.+?<\/code>/si', ' ', $html);
-		
+
 		//Find likely-looking <object> elements
 		$objects = blcUtility::extract_tags($html, 'object', false, true);
 		foreach($objects as $candidate){
@@ -100,15 +101,27 @@ class blcEmbedParserBase extends blcParser {
 			}
 			
 			$embed['embed_code'] = $candidate['full_tag'];
-			
+
 			$results[] = $embed;
+
+			//Remove the element so it doesn't come up when we search for plain <embed> elements.
+			$html = str_replace($candidate['full_tag'], ' ', $html);
 		}
-		
+
+		//Find <embed> elements not wrapped in an <object> element.
+		$embeds = blcUtility::extract_tags($html, 'embed', false, true);
+		foreach($embeds as $embed) {
+			if ( !empty($embed['attributes']['src']) ){
+				$embed['embed_code'] = $embed['full_tag'];
+				$results[] = $embed;
+			}
+		}
+
 		return $results;
 	}
 	
   /**
-   * Remove all occurences of the specified embed from a string.
+   * Remove all occurrences of the specified embed from a string.
    *
    * @param string $content	Look for embeds in this string.
    * @param string $url Ignored.
@@ -123,12 +136,13 @@ class blcEmbedParserBase extends blcParser {
 		return str_replace($embed_code, '', $content); //Super-simple.
 	}
 
-  /**
-   * Get the link text for printing in the "Broken Links" table.
-   *
-   * @param blcLinkInstance $instance
-   * @return string HTML 
-   */
+    /**
+     * Get the link text for printing in the "Broken Links" table.
+     *
+     * @param blcLinkInstance $instance
+     * @param string $context
+     * @return string HTML
+     */
 	function ui_get_link_text($instance, $context = 'display'){
 		$image_url = sprintf(
 			'/images/%s.png',
@@ -152,7 +166,7 @@ class blcEmbedParserBase extends blcParser {
 		
 		return $field_html;
 	}
-	
+
 	/**
 	 * Determine the original URL of an embedded object by analysing its SRC attribute.
 	 * 

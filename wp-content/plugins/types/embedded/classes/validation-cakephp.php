@@ -104,7 +104,7 @@ class Wpcf_Cake_Validation
         static $instance = array();
 
         if (!$instance) {
-            $instance[0] = & new Wpcf_Cake_Validation();
+            $instance[0] = new Wpcf_Cake_Validation();
         }
         return $instance[0];
     }

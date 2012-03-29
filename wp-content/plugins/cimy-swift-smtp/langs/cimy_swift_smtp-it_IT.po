@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cimy Swift SMTP\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-18 16:40+0300\n"
-"PO-Revision-Date: 2011-12-18 16:45+0300\n"
+"PO-Revision-Date: 2012-03-05 07:40+0300\n"
 "Last-Translator: Marco Cimmino <cimmino.marco@gmail.com>\n"
 "Language-Team:  <cimmino.marco@gmail.com>\n"
 "Language: \n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:105
 msgid "Add here your SMTP server details"
-msgstr "Inserisci qui i dettagli del tuo server SMTP"
+msgstr "Inserire qui i dettagli del server SMTP"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:105
 #, php-format
@@ -36,16 +36,16 @@ msgstr "E-mail mittente:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:128
 msgid "Never overwrite the sender:"
-msgstr "Non sovrascrivivere il mittente:"
+msgstr "Non sovrascrivere il mittente:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:136
 msgid "Always overwrite the sender:"
-msgstr "Sovrascrivi sempre il mittente:"
+msgstr "Sovrascrivere sempre il mittente:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:144
 #, php-format
 msgid "Overwrite the sender only for the WordPress default [%s]:"
-msgstr "Sovascrivi il mittente solo per il valore di default di WordPress [%s]:"
+msgstr "Sovrascrivere il mittente solo per il valore di default di WordPress [%s]:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:152
 msgid "SMTP server address:"
@@ -84,7 +84,7 @@ msgstr "Password:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:189
 msgid "Use SSL or TLS?:"
-msgstr "Usa SSL o TLS?:"
+msgstr "Usare SSL o TLS?:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:193
 msgid "No"
@@ -113,15 +113,15 @@ msgstr "Test della connessione"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:215
 msgid "Once you've saved your settings, click the link below to test your connection."
-msgstr "Una volta salvate le impostazioni, clicca sul link qui sotto per testare la tua connessione."
+msgstr "Una volta salvate le impostazioni, cliccare sul link qui sotto per testare la connessione."
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:218
 msgid "Send Test Email to this Address:"
-msgstr "Spedisci l'email di test a questo indirizzo:"
+msgstr "Inviare l'email di test a questo indirizzo:"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:218
 msgid "Send Test"
-msgstr "Spedisci il test"
+msgstr "Invia il test"
 
 #: /var/www/wp-content/plugins/cimy-swift-smtp/cimy_swift_smtp.php:223
 msgid "Test result"

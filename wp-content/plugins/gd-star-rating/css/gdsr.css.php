@@ -261,10 +261,12 @@ if (count($thumb_sets) > 0 && count($thumb_sizes)) {
 <?php
 
 foreach ($loaders as $l) {
-    $loader = $load_base[$l["folder"]];
-    $url = $base_url_local."gfx/loader/".$l["folder"].".gif";
-    echo sprintf(".loader.%s { background: url(%s) no-repeat left; padding-left: %spx; }\r\n", $l["folder"], $url, $loader[0]);
-    echo sprintf(".loader.%s.width { width: %spx; }\r\n", $l["folder"], $loader[1]);
+    if (isset($load_base[$l["folder"]])) {
+        $loader = $load_base[$l["folder"]];
+        $url = $base_url_local."gfx/loader/".$l["folder"].".gif";
+        echo sprintf(".loader.%s { background: url(%s) no-repeat left; padding-left: %spx; }\r\n", $l["folder"], $url, $loader[0]);
+        echo sprintf(".loader.%s.width { width: %spx; }\r\n", $l["folder"], $loader[1]);
+    }
 }
 
 ?>

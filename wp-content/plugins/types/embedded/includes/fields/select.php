@@ -60,9 +60,6 @@ function wpcf_fields_select_meta_box_form($field) {
  * @param type $params 
  */
 function wpcf_fields_select_view($params) {
-    if ($params['style'] == 'raw') {
-        return '';
-    }
     $field = wpcf_fields_get_field_by_slug($params['field']['slug']);
     $output = '';
     if (!empty($field['data']['options'])) {
@@ -74,10 +71,7 @@ function wpcf_fields_select_view($params) {
                         . $option_key . ' title', $option['title']);
             }
         }
-        $field_value = wpcf_frontend_wrap_field_value($params['field'],
-                $field_value, $params);
-        $output = wpcf_frontend_wrap_field($params['field'], $field_value,
-                $params);
+        $output = $field_value;
     }
     return $output;
 }

@@ -18,7 +18,7 @@ function wpcf_admin_ctt_list() {
                 'wpcf')
         . '</p>';
     }
-    
+
     echo '<br /><a class="button-secondary" href="'
     . admin_url('admin.php?page=wpcf-edit-type')
     . '">' . __('Add Custom Post Type', 'wpcf') . '</a>'
@@ -37,7 +37,8 @@ function wpcf_admin_ctt_list() {
             $name = '';
             $name .= '<a href="'
                     . admin_url('admin.php?page=wpcf-edit-type&amp;wpcf-post-type='
-                            . $post_type) . '">' . $type['labels']['name'] . '</a>';
+                            . $post_type) . '">' . wpcf_translate($post_type . ' name',
+                            $type['labels']['name'], 'Types-CPT') . '</a>';
             $name .= '<br />';
             $name .= '<a href="'
                     . admin_url('admin.php?page=wpcf-edit-type&amp;wpcf-post-type='
@@ -47,19 +48,27 @@ function wpcf_admin_ctt_list() {
                     . admin_url('admin-ajax.php?action=wpcf_ajax&amp;'
                             . 'wpcf_action=delete_post_type&amp;wpcf-post-type='
                             . $post_type . '&amp;wpcf_ajax_update=wpcf_list_ajax_response_'
-                            . $post_type) . '&amp;_wpnonce='
+                            . $post_type) . '&amp;wpcf_ajax_callback=wpcfRefresh&amp;_wpnonce='
                     . wp_create_nonce('delete_post_type') . '&amp;wpcf_warning='
                     . __('Are you sure?', 'wpcf') . '" class="wpcf-ajax-link" id="wpcf-list-delete-'
                     . $post_type . '">'
                     . __('Delete Permanently', 'wpcf') . '</a>';
             $name .= '<div id="wpcf_list_ajax_response_' . $post_type . '"></div>';
             $rows[$post_type]['name'] = $name;
-            $rows[$post_type]['description'] = isset($type['description']) ? htmlspecialchars(stripslashes($type['description']),
-                    ENT_QUOTES) : '';
-            $rows[$post_type]['active-' . $post_type] = !empty($type['disabled']) ? __('No', 'wpcf') : __('Yes', 'wpcf');
-            $output = !empty($type['taxonomies']) ? implode(', ',
-                            array_keys($type['taxonomies'])) : __('None', 'wpcf');
-            $rows[$post_type]['tax'] = $output;
+            $rows[$post_type]['description'] = isset($type['description']) ? htmlspecialchars(stripslashes(wpcf_translate($post_type . ' description',
+                                            $type['description'], 'Types-CPT')),
+                            ENT_QUOTES) : '';
+            $rows[$post_type]['active-' . $post_type] = !empty($type['disabled']) ? __('No',
+                            'wpcf') : __('Yes', 'wpcf');
+            $rows[$post_type]['tax'] = array();
+            if (!empty($type['taxonomies'])) {
+                foreach ($type['taxonomies'] as $temp_tax => $true) {
+                    $rows[$post_type]['tax'][] = wpcf_translate($temp_tax . ' name',
+                            $temp_tax, 'Types-TAX');
+                }
+            }
+            $rows[$post_type]['tax'] = !empty($rows[$post_type]['tax']) ? implode(', ',
+                            $rows[$post_type]['tax']) : __('None', 'wpcf');
         }
 
         // Render table
@@ -78,7 +87,8 @@ function wpcf_admin_ctt_list() {
             $name = '';
             $name .= '<a href="'
                     . admin_url('admin.php?page=wpcf-edit-tax&amp;wpcf-tax='
-                            . $taxonomy) . '">' . $data['labels']['name'] . '</a>';
+                            . $taxonomy) . '">' . wpcf_translate($taxonomy . ' name',
+                            $data['labels']['name'], 'Types-TAX') . '</a>';
             $name .= '<br />';
             $name .= '<a href="'
                     . admin_url('admin.php?page=wpcf-edit-tax&amp;wpcf-tax='
@@ -87,7 +97,7 @@ function wpcf_admin_ctt_list() {
             $name .= '<a href="'
                     . admin_url('admin-ajax.php?action=wpcf_ajax&amp;'
                             . 'wpcf_action=delete_taxonomy&amp;wpcf-tax='
-                            . $taxonomy . '&amp;wpcf_ajax_update=wpcf_list_ajax_response_'
+                            . $taxonomy . '&amp;wpcf_ajax_callback=wpcfRefresh&amp;wpcf_ajax_update=wpcf_list_ajax_response_'
                             . $taxonomy) . '&amp;_wpnonce=' . wp_create_nonce('delete_taxonomy')
                     . '&amp;wpcf_warning='
                     . __('Are you sure?', 'wpcf') . '" class="wpcf-ajax-link" id="wpcf-list-delete-'
@@ -95,16 +105,24 @@ function wpcf_admin_ctt_list() {
                     . __('Delete Permanently', 'wpcf') . '</a>';
             $name .= '<div id="wpcf_list_ajax_response_' . $taxonomy . '"></div>';
             $rows[$taxonomy]['name'] = $name;
-            $rows[$taxonomy]['description'] = isset($data['description']) ? htmlspecialchars(stripslashes($data['description']),
-                    ENT_QUOTES) : '';
-            $rows[$taxonomy]['active-' . $taxonomy] = !empty($data['disabled']) ? __('No', 'wpcf') : __('Yes', 'wpcf');
-            $output = !empty($data['supports']) ? implode(', ',
-                            array_keys($data['supports'])) : __('None', 'wpcf');
-            $rows[$taxonomy]['post_types'] = $output;
+            $rows[$taxonomy]['description'] = isset($data['description']) ? htmlspecialchars(stripslashes(wpcf_translate($taxonomy . ' description',
+                                            $type['description'], 'Types-TAX')),
+                            ENT_QUOTES) : '';
+            $rows[$taxonomy]['active-' . $taxonomy] = !empty($data['disabled']) ? __('No',
+                            'wpcf') : __('Yes', 'wpcf');
+            $rows[$taxonomy]['post_types'] = array();
+            if (!empty($data['supports'])) {
+                foreach ($data['supports'] as $temp_post_type => $true) {
+                    $rows[$taxonomy]['post_types'][] = wpcf_translate($temp_post_type . ' name',
+                            $temp_post_type, 'Types-CPT');
+                }
+            }
+            $rows[$taxonomy]['post_types'] = !empty($rows[$taxonomy]['post_types']) ? implode(', ',
+                            $rows[$taxonomy]['post_types']) : __('None', 'wpcf');
         }
-
         // Render table
         echo '<br />';
         wpcf_admin_widefat_table('wpcf_tax_list', $header, $rows);
     }
+    do_action('wpcf_types_tax_list_table_after');
 }

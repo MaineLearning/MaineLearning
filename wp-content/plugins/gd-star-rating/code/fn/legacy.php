@@ -295,15 +295,20 @@ function wp_gdsr_show_multi_review($multi_set_id = 0, $template_id = 0, $post_id
  * @param int $set_id id of the multi rating set
  * @param int $post_id id of the post rating will be attributed to
  * @param string $show what data to use: total, visitors or users votes only
+ * @param string $avg_stars_set set to use for rendering of average element
+ * @param int $avg_stars_size set size to use for rendering of average element
+ * @param string $avg_stars_set_ie6 set to use for rendering in ie6 of average element
  * @param bool $echo echo results or return it as a string
  * @return string html with rendered contents
  */
-function wp_gdsr_multi_rating_average($multi_set_id = 0, $post_id = 0, $show = "total", $echo = true) {
+function wp_gdsr_multi_rating_average($multi_set_id = 0, $post_id = 0, $show = "total", $avg_stars_set = "", $avg_stars_size = 0, $avg_stars_set_ie6 = "", $echo = true) {
     global $gdsr, $post;
     if ($post_id == 0) $post_id = $post->ID;
 
     $multi_set_id = $multi_set_id == 0 ? gdsr_get_multi_set($post_id) : $multi_set_id;
-    $rating = $gdsr->get_multi_average_rendered($post_id, array("id" => $multi_set_id, "show" => $show, "render" => "rating"));
+    $rating = $gdsr->get_multi_average_rendered($post_id, array(
+        "id" => $multi_set_id, "show" => $show, "render" => "rating",
+        "style" => $avg_stars_set, "size" => $avg_stars_size, "style_ie6" => $avg_stars_set_ie6));
     if ($echo) echo $rating;
     else return $rating;
 }

@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.3.2
+Version: 1.6.3.3.4
 Author: Rocketgenius Inc.
 Author URI: http://www.rocketgenius.com
 
@@ -153,6 +153,7 @@ class RGForms{
                         add_action('wp_ajax_gf_upgrade_license', array('RGForms', 'upgrade_license'));
                         add_action('wp_ajax_gf_delete_custom_choice', array('RGForms', 'delete_custom_choice'));
                         add_action('wp_ajax_gf_save_custom_choice', array('RGForms', 'save_custom_choice'));
+                        add_action('wp_ajax_gf_get_post_categories', array('RGForms', 'get_post_category_values'));
 
                         //entry list ajax operations
                         add_action('wp_ajax_rg_update_lead_property', array('RGForms', 'update_lead_property'));
@@ -259,7 +260,7 @@ class RGForms{
 
             //------ FORM -----------------------------------------------
             $form_table_name = RGFormsModel::get_form_table_name();
-            $sql = "CREATE TABLE A" . $form_table_name . " (
+            $sql = "CREATE TABLE " . $form_table_name . " (
                   id mediumint(8) unsigned not null auto_increment,
                   title varchar(150) not null,
                   date_created datetime not null,
@@ -267,6 +268,9 @@ class RGForms{
                   PRIMARY KEY  (id)
                 ) $charset_collate;";
             dbDelta($sql);
+
+            //droping table that was created by mistake in version 1.6.3.2
+            $wpdb->query("DROP TABLE IF EXISTS A" . $form_table_name);
 
             //------ META -----------------------------------------------
             $meta_table_name = RGFormsModel::get_meta_table_name();
@@ -1150,7 +1154,7 @@ class RGForms{
         $raw_response = wp_remote_post($request_url, $options);
 
          if ( is_wp_error( $raw_response ) || $raw_response['response']['code'] != 200){
-            echo "<div class='error' style='margin-top:50px; padding:20px;'>" . __("Add-On brower is currently unavailable. Please try again later.", "gravityforms") . "</div>";
+            echo "<div class='error' style='margin-top:50px; padding:20px;'>" . __("Add-On browser is currently unavailable. Please try again later.", "gravityforms") . "</div>";
          }
          else{
             echo GFCommon::get_remote_message();
@@ -1204,6 +1208,11 @@ class RGForms{
     public static function start_export(){
         require_once(GFCommon::get_base_path() . "/export.php");
         GFExport::start_export();
+    }
+
+    public static function get_post_category_values(){
+        require_once(GFCommon::get_base_path() . "/form_detail.php");
+        GFFormDetail::get_post_category_values();
     }
 
     public static function all_leads_page(){

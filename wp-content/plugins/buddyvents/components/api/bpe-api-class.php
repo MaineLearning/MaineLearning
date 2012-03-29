@@ -682,7 +682,7 @@ class Buddyvents_API_Response
 			$this->user = 0;
 			if( ! $this->ids ) $this->ids = -1;
 		}
-		
+        
 		$this->result = bpe_get_events( array(
 			'user_id'		=> $this->user,
 			'group_id'		=> $this->group,

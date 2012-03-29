@@ -25,19 +25,6 @@ function wpcf_fields_image() {
 }
 
 /**
- * Form data for post edit page.
- * 
- * @param type $field 
- */
-function wpcf_fields_image_meta_box_form($field) {
-    $filename = WPCF_EMBEDDED_INC_ABSPATH . '/fields/file.php';
-    require_once $filename;
-    if (function_exists('wpcf_fields_file_meta_box_form')) {
-        return wpcf_fields_file_meta_box_form($field, true);
-    }
-}
-
-/**
  * Renders inline JS.
  */
 function wpcf_fields_image_meta_box_js_inline() {
@@ -48,14 +35,16 @@ function wpcf_fields_image_meta_box_js_inline() {
         //<![CDATA[
         jQuery(document).ready(function(){
             wpcf_formfield = false;
-            jQuery('.wpcf-fields-image-upload-link').click(function() {
+            jQuery('.wpcf-fields-image-upload-link').live('click', function() {
                 wpcf_formfield = '#'+jQuery(this).attr('id')+'-holder';
-                tb_show('<?php _e('Upload image',
-            'wpcf'); ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&wpcf-fields-media-insert=1&TB_iframe=true');
-                        return false;
-                    }); 
-                });
-                //]]>
+                tb_show('<?php
+    _e('Upload image', 'wpcf');
+
+    ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&wpcf-fields-media-insert=1&TB_iframe=true');
+                return false;
+            }); 
+        });
+        //]]>
     </script>
     <?php
 }
@@ -81,9 +70,11 @@ function wpcf_fields_image_editor_callback() {
         $post_ID = intval($_POST['post_id']);
     } else {
         $http_referer = explode('?', $_SERVER['HTTP_REFERER']);
-        parse_str($http_referer[1], $http_referer);
-        if (isset($http_referer['post'])) {
-            $post_ID = $http_referer['post'];
+        if (isset($http_referer[1])) {
+            parse_str($http_referer[1], $http_referer);
+            if (isset($http_referer['post'])) {
+                $post_ID = $http_referer['post'];
+            }
         }
     }
 
@@ -161,7 +152,7 @@ function wpcf_fields_image_editor_callback() {
         '#description' => __('Title text for the image, e.g. &#8220;The Mona Lisa&#8221;',
                 'wpcf'),
         '#name' => 'title',
-        '#value' => $title,
+        '#value' => isset($last_settings['title']) ? $last_settings['title'] : $title,
     );
     $form['alt'] = array(
         '#type' => 'textfield',
@@ -169,7 +160,7 @@ function wpcf_fields_image_editor_callback() {
         '#description' => __('Alt text for the image, e.g. &#8220;The Mona Lisa&#8221;',
                 'wpcf'),
         '#name' => 'alt',
-        '#value' => $alt,
+        '#value' => isset($last_settings['alt']) ? $last_settings['alt'] : $alt,
     );
     $form['alignment'] = array(
         '#type' => 'radios',
@@ -271,8 +262,10 @@ function wpcf_fields_image_editor_callback() {
         );
     }
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Insert shortcode', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Insert shortcode', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert email', 'wpcf');
@@ -399,9 +392,6 @@ function wpcf_fields_image_view($params) {
             'title' => $title
                 )
         );
-        $output = wpcf_frontend_wrap_field_value($params['field'], $output,
-                $params);
-        $output = wpcf_frontend_wrap_field($params['field'], $output, $params);
     } else { // Custom size
         $width = !empty($params['width']) ? intval($params['width']) : null;
         $height = !empty($params['height']) ? intval($params['height']) : null;
@@ -415,6 +405,41 @@ function wpcf_fields_image_view($params) {
             );
             if (!$resized_image) {
                 $resized_image = $params['field_value'];
+            } else {
+                // Add to library
+                $image_abspath = wpcf_fields_image_resize_image(
+                        $params['field_value'], $width, $height, 'abspath',
+                        false, $crop
+                );
+                $add_to_library = wpcf_get_settings('add_resized_images_to_library');
+                if ($add_to_library) {
+                    global $wpdb;
+                    $attachment_exists = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
+    WHERE post_type = 'attachment' AND guid=%s",
+                                    $resized_image));
+                    if (empty($attachment_exists)) {
+                        // Add as attachment
+                        $wp_filetype = wp_check_filetype(basename($image_abspath),
+                                null);
+                        $attachment = array(
+                            'post_mime_type' => $wp_filetype['type'],
+                            'post_title' => preg_replace('/\.[^.]+$/', '',
+                                    basename($image_abspath)),
+                            'post_content' => '',
+                            'post_status' => 'inherit',
+                            'guid' => $resized_image,
+                        );
+                        global $post;
+                        $attach_id = wp_insert_attachment($attachment,
+                                $image_abspath, $post->ID);
+                        // you must first include the image.php file
+                        // for the function wp_generate_attachment_metadata() to work
+                        require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                        $attach_data = wp_generate_attachment_metadata($attach_id,
+                                $image_abspath);
+                        wp_update_attachment_metadata($attach_id, $attach_data);
+                    }
+                }
             }
         } else {
             $resized_image = $params['field_value'];
@@ -427,9 +452,6 @@ function wpcf_fields_image_view($params) {
         $output .=!empty($params['onload']) ? ' onload="' . $params['onload'] . '"' : '';
         $output .=!empty($class) ? ' class="' . implode(' ', $class) . '"' : '';
         $output .= ' src="' . $resized_image . '" />';
-        $output = wpcf_frontend_wrap_field_value($params['field'], $output,
-                $params);
-        $output = wpcf_frontend_wrap_field($params['field'], $output, $params);
     }
 
     return $output;
@@ -462,7 +484,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     // Get image data
     $image_data = wpcf_fields_image_get_data($url_path);
 
-    if (!empty($image_data['error']) || !$image_data['is_dir_writable']) {
+    if (empty($image_data['fullabspath']) || !empty($image_data['error']) || !$image_data['is_dir_writable']) {
         return $url_path;
     }
 
@@ -496,8 +518,9 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     } else {
         $suffix .= '_wpcf_' . $dst_w . 'x' . $dst_h;
     }
-    
-    $image_data['extension'] = in_array($image_data['extension'], array('gif', 'png')) ? $image_data['extension'] : 'jpg';
+
+    $image_data['extension'] = in_array($image_data['extension'],
+                    array('gif', 'png')) ? $image_data['extension'] : 'jpg';
 
     $image_relpath = $image_data['relpath'] . '/' . $image_data['image_name'] . '-'
             . $suffix . '.' . $image_data['extension'];
@@ -520,8 +543,8 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
 
     // Resize image
     $resized_image = @image_resize(
-            $image_data['fullabspath'], $width, $height, $crop, $suffix,
-            $dest_path, $quality
+                    $image_data['fullabspath'], $width, $height, $crop, $suffix,
+                    $dest_path, $quality
     );
 
     // Check if error
@@ -590,11 +613,14 @@ function wpcf_fields_image_get_data($image) {
     // Check if it's in upload path
     $upload_dir = wp_upload_dir();
     unset($check_image_url[0]);
-    $check_upload_dir = explode('//', trim($upload_dir['baseurl']));
-    $check_upload_dir = explode('/', $check_upload_dir[1]);
-    unset($check_upload_dir[0]);
-    if (strpos(implode('/', $check_image_url), implode('/', $check_upload_dir)) !== false) {
-        $is_in_upload_path = 1;
+    if (empty($upload_dir['error'])) {
+        $check_upload_dir = explode('//', trim($upload_dir['baseurl']));
+        $check_upload_dir = explode('/', $check_upload_dir[1]);
+        unset($check_upload_dir[0]);
+        if (strpos(implode('/', $check_image_url),
+                        implode('/', $check_upload_dir)) !== false) {
+            $is_in_upload_path = 1;
+        }
     }
 
     if (!$is_outsider) {

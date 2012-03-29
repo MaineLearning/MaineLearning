@@ -48,13 +48,15 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
     );
 
     $existing_options = array();
-    if (!empty($form_data['data']['options'])) {
-        foreach ($form_data['data']['options'] as $option_key => $option) {
+    $options = !empty($form_data['options']) ? $form_data['options'] : array();
+    $options = !empty($form_data['data']['options']) ? $form_data['data']['options'] : $options;
+    if (!empty($options)) {
+        foreach ($options as $option_key => $option) {
             if ($option_key == 'default') {
                 continue;
             }
             $option['key'] = $option_key;
-            $option['default'] = isset($form_data['data']['options']['default']) ? $form_data['data']['options']['default'] : null;
+            $option['default'] = isset($options['default']) ? $options['default'] : null;
             $form_option = wpcf_fields_radio_get_option('', $option);
             $existing_options[array_shift($form_option)] = $option;
             $form = $form + $form_option;
@@ -76,11 +78,11 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
         '#title' => __('No Default', 'wpcf'),
         '#name' => '[options][default]',
         '#value' => 'no-default',
-        '#default_value' => isset($form_data['data']['options']['default']) ? $form_data['data']['options']['default'] : null,
+        '#default_value' => isset($options['default']) ? $options['default'] : null,
     );
 
-    if (!empty($form_data['data']['options'])) {
-        $count = count($form_data['data']['options']);
+    if (!empty($options)) {
+        $count = count($options);
     } else {
         $count = 1;
     }

@@ -93,9 +93,56 @@ jQuery.fn.extend({
 });
 
 jQuery(window).load(function(){
+	// handle the "Add Field" boxes - some layout changes
+	jQuery('.wpv_add_fields_button').click(function(e) {
+		var dropdown_list = jQuery('#add_field_popup .editor_addon_dropdown');
+		jQuery('#add_field_popup .editor_addon_wrapper .vicon').css('display', 'none');
+		dropdown_list.css('height', '470px');
+		dropdown_list.css('width', '100%');
+		dropdown_list.css('margin', '-2px 0 0 -15px');
+		dropdown_list.css('padding', '0px');
+		dropdown_list.css('overflow', 'auto');
+		dropdown_list.css('visibility', 'visible');
+		
+		jQuery('#add_field_popup .editor_addon_wrapper .close').css('display', 'none');
+		
+		wpv_hide_top_groups(jQuery(dropdown_list).parent());
+		
+		var ajaxWrapper = jQuery(dropdown_list).parent().parent().parent();
+		ajaxWrapper.css('padding', '0px');
+		ajaxWrapper.css('margin', '0px');
+		
+	});
+	
+	// second (backup) lightbox behavior for add field
+	jQuery('#addfields2').click(function() {
+		var add_field_popup = jQuery('#add_field_popup');
+		
+		add_field_popup.css("position","absolute");
+	    add_field_popup.css('width', '700px');
+	    add_field_popup.css('height', '500px');
+	    add_field_popup.css('z-index', '10000px');
+	    
+	    add_field_popup.css('top', '-100px');
+	    add_field_popup.css('left', '150px');
+	    
+//	    add_field_popup.css("top", ((jQuery(window).height() - add_field_popup.outerHeight()) / 2) + 
+//	                                                jQuery(window).scrollTop() + "px");
+//	    add_field_popup.css("left", ((jQuery(window).width() - add_field_popup.outerWidth()) / 2) + 
+//		                                                jQuery(window).scrollLeft() + "px");
+		if(jQuery('#add_field_popup').css('display') == 'block') {
+			jQuery('#add_field_popup').css('display', 'none');
+		}
+		else {
+			jQuery('#add_field_popup').css('display', 'block');
+		}
+	});
+	
+	// this manages the "V" button 
     jQuery('.editor_addon_wrapper img').click(function(e){
         if (jQuery(this).parent().find('.editor_addon_dropdown').css('visibility') == 'hidden') {
             // Close others possibly opened
+        	wpv_hide_top_groups(jQuery(this).parent());
             jQuery('.editor_addon_dropdown').css('visibility', 'hidden').hide().css('display', 'inline');
             jQuery(this).parent().find('.editor_addon_dropdown').css('visibility', 'visible').show().css('display', 'inline');
             jQuery(document.body).bind('click',function(e){
@@ -243,6 +290,10 @@ function editor_decode64(input) {
 
 function insert_b64_shortcode_to_editor(b64_shortcode, text_area) {
     var shortcode = editor_decode64(b64_shortcode);
+    if(shortcode.indexOf('[types') == 0 && shortcode.indexOf('[/types') === false) {
+    	shortcode += '[/types]';
+    }
+    
     if (text_area == 'textarea#content') {
         // the main editor
         if (window.parent.jQuery('textarea#content:visible').length) {
@@ -263,4 +314,62 @@ function insert_b64_shortcode_to_editor(b64_shortcode, text_area) {
             window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, shortcode);
         }
     }
+}
+
+/**
+ * Filtering elements from search boxes with JS
+ */
+function wpv_on_search_filter(el) {
+	// get search text
+	var searchText = jQuery(el).val();
+	
+	// get parent on DOM to find items and hide/show Search
+	var parent = el.parentNode.parentNode;
+	var searchItems = jQuery(parent).find('.group .item');
+	
+	jQuery(parent).find('.search_clear').css('display', (searchText == '') ? 'none' : 'inline');
+	
+	// iterate items and search
+	jQuery(searchItems).each(function() {
+		if(searchText == '' || jQuery(this).text().search(new RegExp(searchText, 'i')) > -1) {
+			// alert(jQuery(this).text());
+			jQuery(this).css('display', 'inline');
+		} 
+		else {
+			jQuery(this).css('display', 'none');
+		}
+	});
+	
+	// iterate group titles and check if they have items (otherwise hide them)
+	
+	wpv_hide_top_groups(parent);
+}
+
+function wpv_hide_top_groups(parent) {
+	var groupTitles = jQuery(parent).find('.group-title');
+	jQuery(groupTitles).each(function() {
+		var parentOfGroup = jQuery(this).parent();
+		// by default we assume that there are no children to show
+		var visibleGroup = false;
+		jQuery(parentOfGroup).find('.item').each(function() {
+			if(jQuery(this).css('display') == 'inline') {
+				visibleGroup = true;
+				return false;
+			}
+		});
+		
+		if(!visibleGroup) {
+			jQuery(this).css('display', 'none');
+		} else {
+			jQuery(this).css('display', 'block');
+		}
+	});
+}
+
+// clear search input
+function wpv_search_clear(el) {
+	var parent = el.parentNode.parentNode;
+	var searchbox = jQuery(parent).find('.search_field');
+	searchbox.val('');
+	wpv_on_search_filter(searchbox[0]);
 }

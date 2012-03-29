@@ -29,6 +29,8 @@ class Wpcf_Validate
      * @var type 
      */
     private static $_is_required = false;
+    
+    private static $_validation_object = null;
 
     /**
      * Sets calls.
@@ -39,6 +41,11 @@ class Wpcf_Validate
      */
     public static function check($args, $value)
     {
+        // Init validation object
+        if (is_null(self::$_validation_object)) {
+            self::$_validation_object = new Wpcf_Cake_Validation();
+        }
+        
         // Init messages
         if (is_null(self::$messages)) {
             self::_set_messages();
@@ -58,7 +65,7 @@ class Wpcf_Validate
             } else if ((isset(self::$_cake_aliases[$method])
                     && is_callable(array('Wpcf_Cake_Validation', self::$_cake_aliases[$method])))
                     || is_callable(array('Wpcf_Cake_Validation', $method))) {
-
+                
                 // Check if validation pattern is set
                 if (isset($v['pattern'])) {
                     $pattern = array_flip(explode('.', $v['pattern']));
@@ -77,10 +84,14 @@ class Wpcf_Validate
 
                 // Validate
                 if (isset(self::$_cake_aliases[$method]) && is_callable(array('Wpcf_Cake_Validation', self::$_cake_aliases[$method]))) {
-                    $check = @call_user_func_array(array('Wpcf_Cake_Validation', self::$_cake_aliases[$method]),
+//                    $check = @call_user_func_array(array('Wpcf_Cake_Validation', self::$_cake_aliases[$method]),
+//                                    array_values($v));
+                    $check = @call_user_func_array(array(self::$_validation_object, self::$_cake_aliases[$method]),
                                     array_values($v));
                 } else {
-                    $check = @call_user_func_array(array('Wpcf_Cake_Validation', $method),
+//                    $check = @call_user_func_array(array('Wpcf_Cake_Validation', $method),
+//                                    array_values($v));
+                    $check = @call_user_func_array(array(self::$_validation_object, $method),
                                     array_values($v));
                 }
                 if (!$check) {

@@ -97,8 +97,10 @@ function wpcf_fields_checkbox_editor_callback() {
         '#after' => '</tr></table>'
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Changes'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert checkbox', 'wpcf');

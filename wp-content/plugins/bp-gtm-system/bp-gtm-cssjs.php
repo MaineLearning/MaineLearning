@@ -16,8 +16,10 @@ add_action('wp_head', 'bp_gtm_autocomplete_js');
 function bp_gtm_js_groups_all() {
 
     // one main js file
-    if (!is_admin())
+    if (!is_admin()){
         wp_enqueue_script('BP_GTM_GLOBAL_JS', plugins_url('_inc/global.js', __FILE__), array('jquery'));
+        wp_enqueue_script('tool_tip', plugins_url('_inc/jquery.tools.min.js', __FILE__), array('jquery'));
+    }
 
     if (is_admin())
         wp_enqueue_script('BP_GTM_ADMIN_JS', plugins_url('_inc/admin-scripts.js', __FILE__), array('jquery'));
@@ -33,7 +35,6 @@ function bp_gtm_localize_js() {
     $filter = isset($_GET['filter']) ? $_GET['filter'] : 'deadline';
     $project = isset($_GET['project']) ? $_GET['project'] : '';
     $person_navi_filter = isset($_GET['filter']) ? $_GET['filter'] : '';
-
     $localize = array(
         'role_changed' => __('Role was successfully changed', 'bp_gtm'),
         'role_error_again' => __('Error: please try again', 'bp_gtm'),
@@ -54,6 +55,7 @@ function bp_gtm_localize_js() {
         'task_navi_project' => $project,
         'person_navi_filter' => $person_navi_filter,
         'date_format' => $date_format,
+        'files_count' => $bp_gtm['files_count'],
     );
     $localize['mce'] = $bp_gtm['mce'] == 'on' ? 'on' : ''; // on/off tinymce
 
@@ -64,7 +66,7 @@ function bp_gtm_autocomplete_js() {
     global $bp;
     // Include the autocomplete JS for required pages only inside GTM component
     if ((!empty($bp->action_variables[1]) && $bp->action_variables[0]) && ('projects' == $bp->action_variables[0] || 'tasks' == $bp->action_variables[0] ) && ('create' == $bp->action_variables[1] || 'edit' == $bp->action_variables[1])) {
-        wp_enqueue_script('bp-gtm-autocomplete', WP_PLUGIN_URL . '/bp-gtm-system/_inc/autocomplete/autocomplete.js', array('jquery'));
+        wp_enqueue_script('bp-gtm-autocomplete', plugins_url('/_inc/autocomplete/autocomplete.js', __FILE__), array('jquery'));
     }
 }
 
@@ -81,31 +83,33 @@ function bp_gtm_datepicker_js() {
 // Add global styles and autocomplete if required
 function bp_gtm_add_css() {
     global $bp;
-    if ($bp->current_component == $bp->groups->slug && !empty($bp->action_variables[1]) && ('create' == $bp->action_variables[1] || 'edit' == $bp->action_variables[1]))
+//    if ((!empty($bp->action_variables[1]) && $bp->action_variables[0]) && ('projects' == $bp->action_variables[0] || 'tasks' == $bp->action_variables[0] ) && ('create' == $bp->action_variables[1] || 'edit' == $bp->action_variables[1])) 
         wp_enqueue_style('bp-gtm-autocomplete', plugins_url('_inc/autocomplete.css', __FILE__));
 
 
-    wp_enqueue_style('bp-gtm-style', plugins_url('_inc/style.css', __FILE__));
-}
-
-// Admin page styles
-function bp_gtm_admin_css() {
-    wp_enqueue_style('bp-gtm-admin-style', plugins_url('_inc/admin-styles.css', __FILE__));
-}
-
-function gtm_js_date_format($php_date_str = '') {
-    $js_date_str = 'M d, yy';
-    $dates = array(
-        'F j, Y' => 'MM d, yy',
-        'Y/m/d' => 'yy/mm/dd',
-        'm/d/Y' => 'mm/dd/yy',
-        'd/m/Y' => 'dd/mm/yy',
-        'd.m.Y' => 'dd.mm.yy'
-    );
-
-    if (isset($dates[$php_date_str])) {
-        $js_date_str = $dates[$php_date_str];
+        wp_enqueue_style('bp-gtm-style', plugins_url('_inc/style.css', __FILE__));
     }
 
-    return $js_date_str;
-}
+// Admin page styles
+    function bp_gtm_admin_css() {
+        wp_enqueue_style('bp-gtm-admin-style', plugins_url('_inc/admin-styles.css', __FILE__));
+    }
+
+    function gtm_js_date_format($php_date_str = '') {
+        $js_date_str = 'M d, yy';
+        $dates = array(
+            'F j, Y' => 'MM d, yy',
+            'Y/m/d' => 'yy/mm/dd',
+            'm/d/Y' => 'mm/dd/yy',
+            'd/m/Y' => 'dd/mm/yy',
+            'd.m.Y' => 'dd.mm.yy'
+        );
+
+        if (isset($dates[$php_date_str])) {
+            $js_date_str = $dates[$php_date_str];
+        }
+
+        return $js_date_str;
+    }
+
+    

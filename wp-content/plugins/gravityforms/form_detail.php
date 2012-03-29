@@ -71,7 +71,8 @@ class GFFormDetail{
                 "formTitle" : "<?php _e("Untitled Form", "gravityforms"); ?>",
                 "formDescription" : "<?php _e("We would love to hear from you! Please fill out this form and we will get in touch with you shortly.", "gravityforms"); ?>",
                 "formConfirmationMessage" : "<?php _e("Thanks for contacting us! We will get in touch with you shortly.", "gravityforms"); ?>",
-                "buttonText" : "<?php _e("Submit", "gravityforms"); ?>"
+                "buttonText" : "<?php _e("Submit", "gravityforms"); ?>",
+                "loading" : "<?php _e("Loading...", "gravityforms"); ?>"
             };
         </script>
 
@@ -2422,7 +2423,7 @@ class GFFormDetail{
 
         require_once(GFCommon::get_base_path() . "/form_display.php");
         $field_html = GFFormDisplay::get_field($field, "", true);
-
+        $field_html = str_replace('"', '\"', $field_html);
         die("EndDuplicateField($field_json, \"$field_html\", $source_field_id);");
     }
 
@@ -2543,6 +2544,15 @@ class GFFormDetail{
             break;
 
         }
+    }
+
+    public static function get_post_category_values(){
+
+        $id = rgpost("objectType") . "_rule_value_" . rgpost("ruleIndex");
+        $selected = rgempty("selectedValue") ? 0 : rgpost("selectedValue");
+
+        $dropdown = wp_dropdown_categories(array("class"=>"gfield_rule_select gfield_rule_value_dropdown gfield_category_dropdown", "id"=> $id, "selected"=>$selected, "hierarchical"=>true, "hide_empty"=>0, "echo"=>false));
+        die($dropdown);
     }
 }
 ?>

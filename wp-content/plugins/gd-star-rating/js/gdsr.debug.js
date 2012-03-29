@@ -1,3 +1,4 @@
+/*jslint regexp: true, nomen: true, undef: true, sloppy: true, eqeq: true, vars: true, white: true, plusplus: true, maxerr: 50, indent: 4 */
 
 function gdsrWait(rater, loader) {
     jQuery("#"+rater).css("display", "none");
@@ -24,10 +25,11 @@ function multi_rating_vote(block) {
         jQuery("#gdsr_mur_block_" + post_id + "_" + set_id + " input").remove();
         jQuery("#gdsr_mur_block_" + post_id + "_" + set_id + " .ratingbutton").remove();
         var height = jQuery("#gdsr_mur_avgstars_" + post_id + "_" + set_id + " div").css("height");
+        var i;
         if (height > 0) {
             jQuery("#gdsr_mur_avgstars_" + post_id + "_" + set_id + " div").css("width", json.average * height.substring(0, 2));
         }
-        for (var i = 0; i < json.values.length; i++) {
+        for (i = 0; i < json.values.length; i++) {
             jQuery("#gdsr_mur_stars_rated_" + post_id + "_" + set_id + "_" + i).css("width", parseInt(json.values[i]));
         }
         jQuery("#gdsr_mur_text_" + post_id + "_" + set_id).html(json.rater).addClass("voted");
@@ -53,7 +55,8 @@ function gdsr_rating_multi_stars(elm) {
     var rating_values = jQuery(input_id).val().split("X");
     rating_values[el[3]] = vote;
     var active = true;
-    for (var i = 0; i < rating_values.length; i++) {
+    var i;
+    for (i = 0; i < rating_values.length; i++) {
         if (parseInt(rating_values[i]) === 0) {
             active = false;
             break;
@@ -145,7 +148,8 @@ function value_cmm_rated_multis() {
 function is_cmm_rated_multis() {
     var value = value_cmm_rated_multis();
     var rated = true;
-    for (var i = 0; i < value.length; i++) {
+    var i;
+    for (i = 0; i < value.length; i++) {
         if (parseInt(value[i]) === 0) {
             rated = false;
         }
@@ -195,7 +199,8 @@ jQuery(document).ready(function() {
         if (ela.length > 0) {
             ela = ela.substring(0, ela.length - 1);
             jQuery.getJSON(gdsr_cnst_ajax, {_ajax_nonce: gdsr_cnst_nonce, vote_type: 'cache', vote_domain: 'a', votes: ela}, function(json) {
-                for (var i = 0; i < json.items.length; i++) {
+                var i;
+                for (i = 0; i < json.items.length; i++) {
                     var item = json.items[i];
                     jQuery(jquery_escape_id(item.id)).replaceWith(item.html);
                 }
@@ -220,7 +225,8 @@ jQuery(document).ready(function() {
         if (elc.length > 0) {
             elc = elc.substring(0, elc.length - 1);
             jQuery.getJSON(gdsr_cnst_ajax, {_ajax_nonce: gdsr_cnst_nonce, vote_type: 'cache', vote_domain: 'c', votes: elc}, function(json) {
-                for (var i = 0; i < json.items.length; i++) {
+                var i;
+                for (i = 0; i < json.items.length; i++) {
                     var item = json.items[i];
                     jQuery(jquery_escape_id(item.id)).replaceWith(item.html);
                 }
@@ -268,7 +274,8 @@ jQuery(document).ready(function() {
         jQuery(current_id).css("width", new_width + "px");
         var rating_values = jQuery(input_id).val().split("X");
         rating_values[el[3]] = vote;
-        for (var i = 0; i < rating_values.length; i++) { if (parseInt(rating_values[i]) === 0) { break; } }
+        var i;
+        for (i = 0; i < rating_values.length; i++) { if (parseInt(rating_values[i]) === 0) { break; } }
         jQuery(input_id).val(rating_values.join("X"));
     });
 });

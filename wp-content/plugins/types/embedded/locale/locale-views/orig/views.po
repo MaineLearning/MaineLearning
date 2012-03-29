@@ -717,7 +717,7 @@ msgstr ""
 msgid "the same as the <strong>current page</strong>"
 msgstr ""
 
-msgid "Taxomomy"
+msgid "Taxonomy"
 msgstr ""
 
 msgid "Select posts with taxonomy: "

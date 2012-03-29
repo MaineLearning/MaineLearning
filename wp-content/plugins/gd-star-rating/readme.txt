@@ -1,6 +1,6 @@
 === GD Star Rating ===
 Contributors: GDragoN
-Version: 1.9.15
+Version: 1.9.16
 Donate link: http://www.dev4press.com/plugins/gd-star-rating/
 Tags: vote, ratings, cache, integration, post, page, widget, thumb, rating, star, gdragon, ajax, templates, trends, comments, review, multi, wpmu
 Requires at least: 2.8
@@ -170,10 +170,19 @@ I can't guarantee that plugin will work on every WordPress setup. In 99.9% of th
 7. Example multi rating block
 
 == Upgrade Notice ==
-= 1.9.15 =
-Using user roles and capabilities instead of user levels. Information panel for upcoming GDSR 2.0. Fixed several deprecated warnings caused by use of user levels. Fixed query parameter issue with the main CSS file ( thanks to Emil Sirbu: http://trafictube.ro ).
+= 1.9.16 =
+Additional arguments for some of the rendering functions. Several new actions and filters for ajax and rendering. Static directive added to functions in some classes. Conditional load of debug version of gdsr.js. Fixed several potential undefined warnings. Fixed replaced deprecated wp_specialchars function. Fixed replaced deprecated fetch_rss function.
 
 == Changelog ==
+= 1.9.16 =
+* Additional arguments for some of the rendering functions
+* Several new actions and filters for ajax and rendering ( thanks to Galen Wright-Watson: http://sublimitywebdesign.com/ )
+* Static directive added to functions in some classes ( thanks to Galen Wright-Watson )
+* Conditional load of debug version of gdsr.js ( thanks to Galen Wright-Watson )
+* Fixed several potential undefined warnings ( thanks to Galen Wright-Watson )
+* Fixed replaced deprecated wp_specialchars function ( thanks to Galen Wright-Watson )
+* Fixed replaced deprecated fetch_rss function ( thanks to Galen Wright-Watson )
+
 = 1.9.15 =
 * Using user roles and capabilities instead of user levels
 * Information panel for upcoming GDSR 2.0

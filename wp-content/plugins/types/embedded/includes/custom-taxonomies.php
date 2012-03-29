@@ -1,5 +1,54 @@
 <?php
 /**
+ * Custom taxonomies registration.
+ */
+
+/**
+ * Returna default custom taxonomy structure.
+ *
+ * @return array
+ */
+function wpcf_custom_taxonomies_default() {
+    return array(
+        'slug' => '',
+        'description' => '',
+        'supports' => array(),
+        'public' => true,
+        'show_in_nav_menus' => true,
+        'hierarchical' => false,
+        'show_ui' => true,
+        'show_tagcloud' => true,
+        'update_count_callback' => '',
+        'query_var_enabled' => true,
+        'query_var' => '',
+        'rewrite' => array(
+            'enabled' => true,
+            'slug' => '',
+            'with_front' => true,
+            'hierarchical' => true
+        ),
+        'capabilities' => false,
+        'labels' => array(
+            'name' => '',
+            'singular_name' => '',
+            'search_items' => 'Search %s',
+            'popular_items' => 'Popular %s',
+            'all_items' => 'All %s',
+            'parent_item' => 'Parent %s',
+            'parent_item_colon' => 'Parent %s:',
+            'edit_item' => 'Edit %s',
+            'update_item' => 'Update %s',
+            'add_new_item' => 'Add New %s',
+            'new_item_name' => 'New %s Name',
+            'separate_items_with_commas' => 'Separate %s with commas',
+            'add_or_remove_items' => 'Add or remove %s',
+            'choose_from_most_used' => 'Choose from the most used %s',
+            'menu_name' => '%s',
+        ),
+    );
+}
+
+/**
  * Inits custom taxonomies.
  */
 function wpcf_custom_taxonomies_init() {
@@ -27,6 +76,7 @@ function wpcf_custom_taxonomies_register($taxonomy, $data) {
     } else {
         $object_types = array();
     }
+    $data = wpcf_custom_taxonomies_translate($taxonomy, $data);
     // Set labels
     if (!empty($data['labels'])) {
         if (!isset($data['labels']['name'])) {
@@ -64,7 +114,7 @@ function wpcf_custom_taxonomies_register($taxonomy, $data) {
                     ENT_QUOTES) : '';
     $data['public'] = (empty($data['public']) || strval($data['public']) == 'hidden') ? false : true;
     $data['show_ui'] = (empty($data['show_ui']) || !$data['public']) ? false : true;
-    $data['hierarchical'] = (empty($data['hierarchical']) || $data['hierarchical'] == 'flat')  ? false : true;
+    $data['hierarchical'] = (empty($data['hierarchical']) || $data['hierarchical'] == 'flat') ? false : true;
     $data['show_in_nav_menus'] = !empty($data['show_in_nav_menus']);
     if (empty($data['query_var_enabled'])) {
         $data['query_var'] = false;
@@ -84,4 +134,33 @@ function wpcf_custom_taxonomies_register($taxonomy, $data) {
     // Force removing capabilities here
     unset($data['capabilities']);
     register_taxonomy($taxonomy, $object_types, $data);
+}
+
+/**
+ * Translates data.
+ * 
+ * @param type $post_type
+ * @param type $data 
+ */
+function wpcf_custom_taxonomies_translate($taxonomy, $data) {
+    if (!function_exists('icl_t')) {
+        return $data;
+    }
+    $default = wpcf_custom_taxonomies_default();
+    if (!empty($data['description'])) {
+        $data['description'] = wpcf_translate($taxonomy . ' description',
+                $data['description'], 'Types-TAX');
+    }
+    foreach ($data['labels'] as $label => $string) {
+        if ($label == 'name' || $label == 'singular_name') {
+            $data['labels'][$label] = wpcf_translate($taxonomy . ' ' . $label,
+                    $string, 'Types-TAX');
+            continue;
+        }
+        if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
+            $data['labels'][$label] = wpcf_translate($taxonomy . ' ' . $label,
+                    $string, 'Types-TAX');
+        }
+    }
+    return $data;
 }

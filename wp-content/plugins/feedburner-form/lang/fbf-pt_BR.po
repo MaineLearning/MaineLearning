@@ -1,0 +1,250 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: control/info.php:7
+
+msgid "About FeedBurner Form"
+msgstr "Sobre FeedBurner Form"
+
+#: control/info.php:9
+
+msgid "<strong>FeedBurner Form</strong> is a simple plugin that allows you insert &reg;Google FeedBurner subscription forms in widgetized areas of you site."
+msgstr "<strong>FeedBurner Form</strong> é um plugin que permite inserir formulários de assinatura de feed do &reg;Google FeedBurner em áreas de widgets do seu site."
+
+#: control/info.php:10
+
+msgid "By using this form, you allow visitors to subscribe to your feed and receive an e-mail sent by &reg;Google FeedBurner, everytime you publish content within the added feed."
+msgstr "Ao usar o formulário, você permite que os visitantes assinem seu feed para receber um email enviado pelo &reg;Google FeedBurner cada vez que publicar conteúdo no feed adicionado."
+
+#: control/info.php:11
+
+msgid "Also, you don't have to worry about manage subscriptions: the visitors can subscribe and unscribe themselves through &reg;Google FeedBurner service."
+msgstr "Além disso, você não precisa se preocupar em gerenciar assinaturas: os próprios visitantes podem assinar e cancelar a assinatura através do site do &reg;Google FeedBurner."
+
+#: control/info.php:14
+
+msgid "is a registered trademark and service owned by &reg;Google Inc."
+msgstr "é uma marca registrada e serviço de propriedade do &reg;Google Inc."
+
+#: control/info.php:16
+
+msgid "How to use"
+msgstr "Como usar"
+
+#: control/info.php:18
+
+msgid "Signup for an account at <a href=\"http://feedburner.google.com\" target=\"_blank\" >&reg;Google FeedBurner site</a>."
+msgstr "Inscreva-se para uma conta no <a href=\"http://feedburner.google.com\" target=\"_blank\" >site do &reg;Google FeedBurner</a>."
+
+#: control/info.php:24
+
+msgid "<strong>Note</strong> you don't have to inform your password neither to authenticate. Also note that feed name is not you Gmail account user, but the url feed name you choose."
+msgstr "<strong>Nota:</strong> não é preciso informar sua senha ou autenticar. Repare que nome do feed não é seu nome de usuário Gmail, mas o nome do feed que escolheu ao adicioná-lo a conta."
+
+#: control/info.php:27
+#@ default
+msgid "Help"
+msgstr ""
+
+#: control/info.php:29
+
+msgid "Plugin site:"
+msgstr "Site do plugin:"
+
+#: control/info.php:30
+
+msgid "Documentation on <a href=\"http://codex.wordpress.org/WordPress_Feeds\">WordPress Feeds</a>"
+msgstr "Documentação sobre <a href=\"http://codex.wordpress.org/pt-br:Feeds_no_WordPress_Feeds\">Feeds no WordPress</a>"
+
+#: control/info.php:31
+
+msgid "Google FeedBurner help (only in english):"
+msgstr "Ajuda do Google FeedBurner (site apenas em inglês):"
+
+#: control/info.php:36
+
+msgid "Donate!"
+msgstr "Doar!"
+
+#: control/info.php:37
+
+msgid "Have you using this plugin a lot? Consider make a donation. Also, you can send me translations files, improvements etc."
+msgstr "Você tem usado basante este plugin? Considera fazer uma doação, enviar traduções etc."
+
+#: control/info.php:45
+
+msgid "PayPal - The safer, easier way to pay online!"
+msgstr "PayPal - A maneira mais segura e fácil de pagar online!"
+
+#: control/widgets.php:7
+
+msgctxt "plugin name"
+msgid "Feedburner Form"
+msgstr "Feedburner Form"
+
+#: control/widgets.php:7
+
+msgid "Add a Feedburner Form"
+msgstr "Adicione um formulário FeedBurner Form"
+
+#: control/widgets.php:38
+#: control/widgets.php:152
+
+msgid "Powered by &reg;Google Feedburner"
+msgstr "Por &reg;Google Feedburner"
+
+#: control/widgets.php:131
+#@ default
+msgid "Title"
+msgstr ""
+
+#: control/widgets.php:131
+#: control/widgets.php:134
+#@ default
+msgid "Optional"
+msgstr ""
+
+#: control/widgets.php:134
+#@ default
+msgid "Arbitrary text or HTML"
+msgstr ""
+
+#: control/widgets.php:139
+
+msgid "Button text"
+msgstr "Texto do botão"
+
+#: control/widgets.php:144
+
+msgid "Feed URL name"
+msgstr "Nome do URL de Feed"
+
+#: control/widgets.php:146
+
+msgid "MyFeedName"
+msgstr "NomedoFeed"
+
+#: control/widgets.php:150
+
+msgid "Display credits"
+msgstr "Mostrar créditos"
+
+#: control/widgets.php:155
+
+msgid "Display counter"
+msgstr "Mostrar contador"
+
+#: control/widgets.php:158
+
+msgid "Counter style:"
+msgstr "Estilo do contador:"
+
+#: control/widgets.php:160
+
+msgid "Static"
+msgstr "Estático"
+
+#: control/widgets.php:161
+
+msgid "Animated"
+msgstr "Animado"
+
+#: control/widgets.php:166
+#@ default
+msgid "Background Color"
+msgstr ""
+
+#: control/widgets.php:171
+
+msgid "Counter text color"
+msgstr "Cor do texto"
+
+#: control/widgets.php:176
+
+msgid "Counter text"
+msgstr "Texto do contador"
+
+#: control/widgets.php:180
+
+msgid "Counter preview"
+msgstr "Pré-visualização"
+
+#. translators: plugin header field 'Name'
+#: feedburner-form.php:0
+
+msgid "FeedBurner Form"
+msgstr "FeedBurner Form"
+
+#. translators: plugin header field 'PluginURI'
+#: feedburner-form.php:0
+
+msgid "http://arquivo.tk/dev/feedburner-form"
+msgstr "http://arquivo.tk/dev/feedburner-form"
+
+#. translators: plugin header field 'Description'
+#: feedburner-form.php:0
+
+msgid "Add Google Feedburner&reg; email subscription forms with optional subscribers counter. Access Plugins &rarr; <a href=\"plugins.php?page=fbtools\">FeedBurner Form</a>."
+msgstr "Adicione no seu site um formulário de assinatura do  &reg; Google Feedburner. Acesso: Plugins &rarr; <a href=\"plugins.php?page=fbtools\">FeedBurner Form</a>."
+
+#. translators: plugin header field 'Author'
+#: feedburner-form.php:0
+
+msgid "Diana K. Cury"
+msgstr "Diana K. Cury"
+
+#. translators: plugin header field 'AuthorURI'
+#: feedburner-form.php:0
+
+msgid "http://arquivo.tk/"
+msgstr "http://arquivo.tk/"
+
+#. translators: plugin header field 'Version'
+#: feedburner-form.php:0
+
+msgid "1.2"
+msgstr "1.2"
+
+#: control/info.php:19
+
+msgid "Add <strong>any valid feed url</strong> to your account, i.e. <code>http://example.com/movies/feed</code> and activate the subscription and counter services in <em>Publicize</em> item."
+msgstr "Adicione<strong>qualquer URL de feed válido</strong> à sua conta, i.e. <code>http://exemplo.com/filmes/feed</code> e ative os serviços Subscription e Counter no menu <em>Publicize</em>."
+
+#: control/info.php:20
+
+msgid "Choose a feed name for your new added feed i.e. <code>CategoryMoviesSite1</code>. You can add any feed, how many URLs you need as long as every feed name is unique, please note that you need to activate the service for every added feed."
+msgstr "Escolha um nome para o feed recém-adicionado ex.: <code>CategoriaFilmesSite1</code>. Você pode adicionar qualquer feed, quantos URLs precisa com tanto que cada nome de feed seja único, repare que precisará ativar os serviços para cada feed adicionado."
+
+#: control/info.php:21
+
+msgid "Add a FeedBurner Form <a href=\"widgets.php\">widget</a> in your site. You can set several forms, for every added feed."
+msgstr "Adicione um <a href=\"widgets.php\">widget</a> FeedBurner Form a seu site. Você pode adicionar vários formulários, para cada feed que tiver em sua conta."
+
+#: control/info.php:22
+
+msgid "Inform a feed name you created within your account i.e.<code>CategoryMoviesSite1</code>."
+msgstr "Informe o nome de feed que criou em sua conta, ex.: <code>CategoriaFilmesSite1</code>."
+
+#: control/info.php:23
+
+msgid "Add an intro text, choose to display the subscriber counter etc."
+msgstr "Adicione texto, escolha mostrar contador etc."
+

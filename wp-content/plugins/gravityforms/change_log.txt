@@ -1,4 +1,52 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.3.4
+    - Updated Auto-format option on the notification page so that it is always visible.
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.3.3
+    - Fixed issue with gform_get_input_value being fired inconsistently for leads with long text
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.3.2
+    - Fixed issue with form editor creating javascript errors on sites with older versions of jQuery
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.3.1
+    - Fixed issue causing post body to be cut off when typing greek text in a post body field.
+    - Added gform_entry_detail hook
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.3
+    - Fixed conflict with jQuery on IE 7 causing option pricing to be displayed on product (i.e. non-option) fields
+    - Fixed admin display issue with the bulk-add modal panel in Chrome
+    - Fixed conflict with jQuery on IE 8 causing total to be doubled up
+	- Fixed warnings when nl2br used on array
+    - Fixed issue with form editor not allowing users to uncheck the "Set as Post Image" checkbox
+    - Fixed issue where errors would be displayed when a "starts with" conditional logic was configured without the actual "starts with" value
+    - Fixed issue with quantity field being recorded as . when a value is not entered
+    - Fixed issue with a "Select Format" option appearing in the quantity field's number format option for newly created fields.
+    - Added hook to allow users to specify the page size on the entry list page
+        add_filter("gform_entry_page_size", "set_page_size", 10, 2);
+        function set_page_size($page_size, $form_id){
+            return 50; //sets page size to 50
+        }
+    - Fixed issue with conditional logic when using post category fields that were configured to display all categories
+    - Added javascript hook to allow option price to be manipulated or disabled
+        <script type="text/javascript">
+            function gform_format_option_label(full_label, field_label, price_label, selected_price, price, form_id, field_id){
+                //disabling option price
+                return field_label;
+            }
+        </script>
+
+    - Fixed issue with gravityforms.js not being enqueued on forms with conditional logic
+    - Fixed issue with duplicate field feature when field has a double quote in the description
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.3.2.1
+    - Fixed issue with wrongly named form table
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.3.2
     - Fixed issue with dbDelta causing errors when trying to update the database tables on case sensitive database servers
     - Fixed issue with conditional logic displaying wrong fields in the admin
