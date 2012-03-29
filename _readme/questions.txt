@@ -33,6 +33,15 @@ On Network Admin: Users, the search is exact rather than fuzzy. For instance, wh
 --------------------------------------------------
 When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
 
+--------------------------------------------------
+When entering wp-admin without the trailing slash, there is a strange redirect. This only started happening recently. Any suggestions?
+
+http://mainelearning.net/wp-admin
+
+--------------------------------------------------
+Even though I used the language file to change all instances of Forum to Discussion, Forum still appears o the /people/ pages.
+
+http://mainelearning.net/people/jcollier/
 
 
 --------------------------------------------------
