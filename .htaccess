@@ -4,12 +4,13 @@ RewriteEngine on
 
 
 # BEGIN MAINTENANCE BLOCK
-RewriteCond %{REQUEST_URI} !/maintenance.html$
-RewriteCond %{REQUEST_URI} !/wp-content/themes/bp-nelo/_inc/images/bg-header.gif$
-RewriteCond %{REMOTE_HOST} !^67\.243\.140\.73
-RewriteCond %{REMOTE_HOST} !^71\.241\.203\.51
-RewriteCond %{REMOTE_HOST} !^127\.0\.0\.1
-RewriteRule $ /maintenance.html [R=302,L]
+#RewriteCond %{REQUEST_URI} !/maintenance.html$
+#RewriteCond %{REQUEST_URI} !/wp-content/themes/bp-nelo/_inc/images/bg-header.gif$
+#RewriteCond %{REMOTE_HOST} !^67\.243\.140\.73
+#RewriteCond %{REMOTE_HOST} !^71\.241\.203\.51
+#RewriteCond %{REMOTE_HOST} !^71\.161\.117\.236
+#RewriteCond %{REMOTE_HOST} !^127\.0\.0\.1
+#RewriteRule $ /maintenance.html [R=302,L]
 # END MAINTENANCE BLOCK
 
 
