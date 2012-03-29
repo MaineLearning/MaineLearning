@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.3.2";
+    public static $version = "1.6.3.3.4";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -86,6 +86,9 @@ class GFCommon{
     }
 
     public static function clean_number($number, $number_format=""){
+        if(rgblank($number))
+            return $number;
+
         $decimal_char = "";
         if($number_format == "decimal_dot")
             $decimal_char = ".";
@@ -3859,7 +3862,10 @@ class GFCommon{
             break;
 
             default :
-                return nl2br($value);
+            	if (!is_array($value))
+            	{
+                	return nl2br($value);
+				}
             break;
         }
     }

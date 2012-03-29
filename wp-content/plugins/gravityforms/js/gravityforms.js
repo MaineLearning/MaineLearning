@@ -232,42 +232,56 @@ function gformGetShippingPrice(formId){
     return gformToNumber(shipping);
 }
 
+function gformGetFieldId(element){
+    var id = jQuery(element).attr("id");
+    var pieces = id.split("_");
+    if(pieces.length <=0)
+        return 0;
+
+    var fieldId = pieces[pieces.length-1];
+    return fieldId;
+
+}
+
 function gformCalculateProductPrice(formId, productFieldId){
     var price = gformGetBasePrice(formId, productFieldId);
 
     var suffix = "_" + formId + "_" + productFieldId;
 
     //Drop down auto-calculating labels
-    jQuery(".gfield_option" + suffix + " select, .gfield_shipping_" + formId + " select").each(function(){
+    jQuery(".gfield_option" + suffix + ", .gfield_shipping_" + formId).find("select").each(function(){
         var selected_price = gformGetPrice(jQuery(this).val());
+        var fieldId = gformGetFieldId(this);
         jQuery(this).children("option").each(function(){
-            var label = gformGetOptionLabel(this, jQuery(this).val(), selected_price);
+            var label = gformGetOptionLabel(this, jQuery(this).val(), selected_price, formId, fieldId);
             jQuery(this).html(label);
         });
     });
 
     //Checkboxes labels with prices
-    jQuery(".gfield_option" + suffix + " .gfield_checkbox input").each(function(){
+    jQuery(".gfield_option" + suffix).find(".gfield_checkbox").find("input").each(function(){
+        var fieldId = gformGetFieldId(jQuery(this).parents(".gfield_checkbox"));
         var element = jQuery(this).next();
-        var label = gformGetOptionLabel(element, jQuery(this).val(), 0);
+        var label = gformGetOptionLabel(element, jQuery(this).val(), 0, formId, fieldId);
         element.html(label);
     });
 
     //Radio button auto-calculating lables
-    jQuery(".gfield_option" + suffix + " .gfield_radio, .gfield_shipping_" + formId + " .gfield_radio").each(function(){
+    jQuery(".gfield_option" + suffix + ", .gfield_shipping_" + formId).find(".gfield_radio").each(function(){
         var selected_price = 0;
         var selected_value = jQuery(this).find("input:checked").val();
+        var fieldId = gformGetFieldId(this);
         if(selected_value)
             selected_price = gformGetPrice(selected_value);
 
         jQuery(this).find("input").each(function(){
             var label_element = jQuery(this).next();
-            var label = gformGetOptionLabel(label_element, jQuery(this).val(), selected_price);
+            var label = gformGetOptionLabel(label_element, jQuery(this).val(), selected_price, formId, fieldId);
             label_element.html(label);
         });
     });
 
-    jQuery(".gfield_option" + suffix + " input:checked, .gfield_option" + suffix + " select").each(function(){
+    jQuery(".gfield_option" + suffix).find("input:checked, select").each(function(){
         if(!gformIsHidden(jQuery(this)))
             price += gformGetPrice(jQuery(this).val());
     });
@@ -363,18 +377,24 @@ function gformGetPriceDifference(currentPrice, newPrice){
     return price;
 }
 
-function gformGetOptionLabel(element, selected_value, current_price){
+function gformGetOptionLabel(element, selected_value, current_price, form_id, field_id){
     element = jQuery(element);
     var price = gformGetPrice(selected_value);
     var current_diff = element.attr('price');
-    var label = element.html().replace(/<span(.*)<\/span>/i, "").replace(current_diff, "");
+    var original_label = element.html().replace(/<span(.*)<\/span>/i, "").replace(current_diff, "");
 
     var diff = gformGetPriceDifference(current_price, price);
     diff = gformToNumber(diff) == 0 ? "" : " " + diff;
     element.attr('price', diff);
 
     //don't add <span> for drop down items (not supported)
-    var label = element[0].tagName.toLowerCase() == "option" ? label + " " + diff : label + "<span class='ginput_price'>" + diff + "</span>";
+    var price_label = element[0].tagName.toLowerCase() == "option" ? " " + diff : "<span class='ginput_price'>" + diff + "</span>";
+    var label = original_label + price_label;
+
+    //calling hook to allow for custom option formatting
+    if(window["gform_format_option_label"])
+        label = gform_format_option_label(label, original_label, price_label, current_price, price, form_id, field_id);
+
     return label;
 }
 

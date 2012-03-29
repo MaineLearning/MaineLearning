@@ -1484,17 +1484,17 @@ class GFFormDisplay{
             wp_enqueue_style("gforms_css", GFCommon::get_base_url() . "/css/forms.css", null, GFCommon::$version);
         }
 
+        if(self::has_price_field($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form) || self::has_conditional_logic($form)){
+            wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
+        }
+
         if(self::has_conditional_logic($form)){
-            wp_enqueue_script("gforms_conditional_logic_lib", GFCommon::get_base_url() . "/js/conditional_logic.js", array("jquery"), GFCommon::$version);
+            wp_enqueue_script("gforms_conditional_logic_lib", GFCommon::get_base_url() . "/js/conditional_logic.js", array("jquery", "gforms_gravityforms"), GFCommon::$version);
         }
 
         if(self::has_date_field($form)){
             wp_enqueue_script("gforms_ui_datepicker", GFCommon::get_base_url() . "/js/jquery-ui/ui.datepicker.js", array("jquery"), GFCommon::$version, true);
             wp_enqueue_script("gforms_datepicker", GFCommon::get_base_url() . "/js/datepicker.js", array("gforms_ui_datepicker"), GFCommon::$version, true);
-        }
-
-        if(self::has_price_field($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form)){
-            wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
         }
 
         if(self::has_enhanced_dropdown($form) || self::has_pages($form) || self::has_fileupload_field($form)){
@@ -1534,8 +1534,13 @@ class GFFormDisplay{
             }
         }
 
+        if( (self::has_enhanced_dropdown($form) || self::has_price_field($form) || self::has_password_strength($form) || self::has_pages($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form)) && !wp_script_is("gforms_gravityforms", "queue")){
+            wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
+            wp_print_scripts(array("gforms_gravityforms"));
+        }
+
         if(self::has_conditional_logic($form) && !wp_script_is("gforms_conditional_logic_lib", "queue")){
-            wp_enqueue_script("gforms_conditional_logic_lib", GFCommon::get_base_url() . "/js/conditional_logic.js", array("jquery"), GFCommon::$version);
+            wp_enqueue_script("gforms_conditional_logic_lib", GFCommon::get_base_url() . "/js/conditional_logic.js", array("jquery", "gforms_gravityforms"), GFCommon::$version);
             wp_print_scripts(array("gforms_conditional_logic_lib"));
         }
 
@@ -1548,11 +1553,6 @@ class GFFormDisplay{
         if(self::has_pages($form) && !wp_script_is("gforms_json", "queue")){
             wp_enqueue_script("gforms_json", GFCommon::get_base_url() . "/js/jquery.json-1.3.js", array("jquery"), GFCommon::$version, true);
             wp_print_scripts(array("gforms_json"));
-        }
-
-        if( (self::has_enhanced_dropdown($form) || self::has_price_field($form) || self::has_password_strength($form) || self::has_pages($form) || self::has_password_strength($form) || GFCommon::has_list_field($form) || GFCommon::has_credit_card_field($form)) && !wp_script_is("gforms_gravityforms", "queue")){
-            wp_enqueue_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", array("jquery"), GFCommon::$version, false);
-            wp_print_scripts(array("gforms_gravityforms"));
         }
 
         if(self::has_character_counter($form) && !wp_script_is("gforms_character_counter", "queue")){

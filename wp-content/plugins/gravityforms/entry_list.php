@@ -119,7 +119,7 @@ class GFEntryList{
         $star = $filter == "star" ? 1 : null; // is_numeric(RGForms::get("star")) ? intval(RGForms::get("star")) : null;
         $read = $filter == "unread" ? 0 : null; //is_numeric(RGForms::get("read")) ? intval(RGForms::get("read")) : null;
 
-        $page_size = 20;
+        $page_size = apply_filters("gform_entry_page_size", apply_filters("gform_entry_page_size_{$form_id}", 20, $form_id), $form_id);
         $first_item_index = $page_index * $page_size;
 
         $form = RGFormsModel::get_form_meta($form_id);

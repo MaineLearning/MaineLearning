@@ -974,11 +974,11 @@ class RGFormsModel{
             break;
 
             case "contains" :
-                return strpos($val1, $val2) !== false;
+                return !empty($val2) && strpos($val1, $val2) !== false;
             break;
 
             case "starts_with" :
-                return strpos($val1, $val2) === 0;
+                return !empty($val2) && strpos($val1, $val2) === 0;
             break;
 
             case "ends_with" :
@@ -2170,7 +2170,17 @@ class RGFormsModel{
             foreach($lead_field_keys as $input_id){
                 if(is_numeric($input_id) && absint($input_id) == absint($field["id"])){
                     $val = $lead[$input_id];
-                    $value[$input_id] = strlen($val) >= $max_length ? self::get_field_value_long($lead["id"], $input_id) : $val;
+                    if(strlen($val) >= ($max_length-10)) {
+                        if(empty($form))
+                            $form = RGFormsModel::get_form_meta($lead["form_id"]);
+
+                        $long_choice = self::get_field_value_long($lead, $input_id, $form);
+                    }
+                    else{
+                        $long_choice = $val;
+                    }
+
+                    $value[$input_id] = !empty($long_choice) ? $long_choice : $val;
                 }
             }
         }
@@ -2178,8 +2188,12 @@ class RGFormsModel{
             $val = rgget($field["id"], $lead);
 
             //To save a database call to get long text, only getting long text if regular field is "somewhat" large (i.e. max - 50)
-            if(strlen($val) >= ($max_length - 50))
-                $long_text = self::get_field_value_long($lead["id"], $field["id"]);
+            if(strlen($val) >= ($max_length - 50)){
+                if(empty($form))
+                    $form = RGFormsModel::get_form_meta($lead["form_id"]);
+
+                $long_text = self::get_field_value_long($lead, $field["id"], $form);
+            }
 
             $value = !empty($long_text) ? $long_text : $val;
         }
@@ -2190,16 +2204,25 @@ class RGFormsModel{
         return $value;
     }
 
-    public static function get_field_value_long($lead_id, $field_number){
+    public static function get_field_value_long($lead, $field_number, $form, $apply_filter=true){
         global $wpdb;
         $detail_table_name = self::get_lead_details_table_name();
         $long_table_name = self::get_lead_details_long_table_name();
 
         $sql = $wpdb->prepare(" SELECT l.value FROM $detail_table_name d
                                 INNER JOIN $long_table_name l ON l.lead_detail_id = d.id
-                                WHERE lead_id=%d AND field_number BETWEEN %f AND %f", $lead_id, $field_number - 0.001, $field_number + 0.001);
+                                WHERE lead_id=%d AND field_number BETWEEN %f AND %f", $lead["id"], $field_number - 0.001, $field_number + 0.001);
 
-         return $wpdb->get_var($sql);
+         $val = $wpdb->get_var($sql);
+
+         //running aform_get_input_value when needed
+         if($apply_filter){
+            $field = RGFormsModel::get_field($form, $field_number);
+            $input_id = (string)$field_number == (string)$field["id"] ? "" : $field_number;
+            $val = apply_filters("gform_get_input_value", $val, $lead, $field, $input_id);
+         }
+
+         return $val;
     }
 
     public static function get_leads($form_id, $sort_field_number=0, $sort_direction='DESC', $search='', $offset=0, $page_size=30, $star=null, $read=null, $is_numeric_sort = false, $start_date=null, $end_date=null, $status='active'){
@@ -2344,6 +2367,7 @@ class RGFormsModel{
             $lead = array("id" => $results[0]->id, "form_id" => $results[0]->form_id, "date_created" => $results[0]->date_created, "is_starred" => intval($results[0]->is_starred), "is_read" => intval($results[0]->is_read), "ip" => $results[0]->ip, "source_url" => $results[0]->source_url, "post_id" => $results[0]->post_id, "currency" => $results[0]->currency, "payment_status" => $results[0]->payment_status, "payment_date" => $results[0]->payment_date, "transaction_id" => $results[0]->transaction_id, "payment_amount" => $results[0]->payment_amount, "is_fulfilled" => $results[0]->is_fulfilled, "created_by" => $results[0]->created_by, "transaction_type" => $results[0]->transaction_type, "user_agent" => $results[0]->user_agent, "status" => $results[0]->status);
         }
 
+        $form = RGFormsModel::get_form_meta($form_id);
         $prev_lead_id=0;
         foreach($results as $result){
             if($prev_lead_id <> $result->id && $prev_lead_id > 0){
@@ -2353,8 +2377,9 @@ class RGFormsModel{
 
             $field_value = $result->value;
             //using long values if specified
-            if($use_long_values && strlen($field_value) >= GFORMS_MAX_FIELD_LENGTH){
-                $long_text = RGFormsModel::get_field_value_long($lead["id"], $result->field_number);
+            if($use_long_values && strlen($field_value) >= (GFORMS_MAX_FIELD_LENGTH-10)){
+                $field = RGFormsModel::get_field($form, $result->field_number);
+                $long_text = RGFormsModel::get_field_value_long($lead, $result->field_number, $form, false);
                 $field_value = !empty($long_text) ? $long_text : $field_value;
             }
 
@@ -2366,7 +2391,6 @@ class RGFormsModel{
             array_push($leads, $lead);
 
         //running entry through gform_get_field_value filter
-        $form = RGFormsModel::get_form_meta($form_id);
         foreach($leads as &$lead){
             foreach($form["fields"] as $field){
                 if(isset($field["inputs"]) && is_array($field["inputs"])){
