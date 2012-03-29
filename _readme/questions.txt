@@ -4,11 +4,9 @@ ACTIVE
 
 
 --------------------------------------------------
-How do we get nested comments in the forum?
-
-
---------------------------------------------------
 In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
+
+COULD BE DONE IN 30-MINUTES OR LESS
 
 
 --------------------------------------------------
@@ -35,11 +33,19 @@ function blah( $content ) {
 add_action( 'bp_ass_activity_notification_content', 'blah' );
 
 
+30-MINUTE TEST
+
+
 
 --------------------------------------------------
 AWAITING RESOLUTION
 --------------------------------------------------
 
+
+--------------------------------------------------
+How do we get nested comments in the forum?
+
+NO FOR NOW. AT LEAST 3 MONTHS.
 
 --------------------------------------------------
 Why do Group Moderation changes in email subscriptions not "stick".
