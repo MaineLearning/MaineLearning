@@ -1,0 +1,202 @@
+# YD OPTIONS PAGE TEMPLATE TEXT.
+# Copyright (C) 2009 yann.com
+# This file is distributed under the same license as the YD plugin package.
+# FIRST AUTHOR <yann@abc.fr>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YD Options Page Template Text\n"
+"POT-Creation-Date: 2010-10-13 23:03+0000\n"
+"PO-Revision-Date: 2010-10-14 15:07+0100\n"
+"Last-Translator: Yann Dubois <yann@abc.fr>\n"
+"Language-Team: Y.Dubois <yann@abc.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: yd-widget-framework.inc.php:22
+msgid "This will disable the link in your blog footer. If you are using this plugin on your site and like it, did you consider making a donation? - Thanks."
+msgstr "Ceci va désactiver le lien en bas de page. Puisque vous utilisez cette extension sur votre site et que vous l'appréciez, avez-vous envisagé de faire un don ? - Merci."
+
+#: yd-widget-framework.inc.php:49
+#: yd-widget-framework.inc.php:326
+msgid "Clear cache"
+msgstr "Vider le cache"
+
+#: yd-widget-framework.inc.php:53
+msgid "Caches are cleared"
+msgstr "Les caches sont vidés"
+
+#: yd-widget-framework.inc.php:54
+#: yd-widget-framework.inc.php:78
+#: yd-widget-framework.inc.php:324
+msgid "Reset plugin settings"
+msgstr "RAZ des réglages"
+
+#: yd-widget-framework.inc.php:56
+msgid "Plugin settings are reset"
+msgstr "Les options de l&apos;extension sont réinitialisées"
+
+#: yd-widget-framework.inc.php:57
+#: yd-widget-framework.inc.php:321
+msgid "Update plugin settings"
+msgstr "MAJ des réglages"
+
+#: yd-widget-framework.inc.php:59
+msgid "Plugin settings are updated"
+msgstr "Les réglages de l&apos;extension sont mis à jour"
+
+#: yd-widget-framework.inc.php:66
+msgid "Welcome to YD recent Posts Admin Page."
+msgstr "Bienvenue sur la page d'administration YD Billets Récents"
+
+#: yd-widget-framework.inc.php:76
+msgid "Uh-oh. Looks like I lost my settings. Sorry."
+msgstr "Oh-oh, on dirait que j'ai perdu mes réglages. Désolé."
+
+#: yd-widget-framework.inc.php:112
+msgid "Considered donating?"
+msgstr "Envisagé de faire un don&nbsp;?"
+
+#: yd-widget-framework.inc.php:116
+msgid "Enjoy this plugin?"
+msgstr "Vous appréciez cette extension&nbsp;?"
+
+#: yd-widget-framework.inc.php:116
+msgid "Help me improve it!"
+msgstr "Aidez-moi à l'améliorer&nbsp;!"
+
+#: yd-widget-framework.inc.php:121
+#: yd-widget-framework.inc.php:122
+msgid "en_US"
+msgstr "fr_FR"
+
+#: yd-widget-framework.inc.php:124
+msgid "Thanks"
+msgstr "Merci"
+
+#: yd-widget-framework.inc.php:132
+msgid "Credits"
+msgstr "Crédits"
+
+#: yd-widget-framework.inc.php:135
+msgid "Funding"
+msgstr "Financement"
+
+#: yd-widget-framework.inc.php:137
+msgid "Initial:"
+msgstr "Initial&nbsp;:"
+
+#: yd-widget-framework.inc.php:140
+msgid "Translations"
+msgstr "Traductions"
+
+#: yd-widget-framework.inc.php:142
+msgid "English:"
+msgstr "Anglais&nbsp;:"
+
+#: yd-widget-framework.inc.php:143
+msgid "French:"
+msgstr "Français&nbsp;:"
+
+#: yd-widget-framework.inc.php:144
+msgid "Russian:"
+msgstr "Russe&nbsp;:"
+
+#: yd-widget-framework.inc.php:145
+msgid "Dutch:"
+msgstr "Hollandais&nbsp;:"
+
+#: yd-widget-framework.inc.php:146
+msgid "German:"
+msgstr "Allemand&nbsp;:"
+
+#: yd-widget-framework.inc.php:148
+msgid "If you want to contribute to a translation of this plugin, please drop me a line by "
+msgstr "Si vous voulez proposer une traduction de cette extension, veuillez me contacter par "
+
+#: yd-widget-framework.inc.php:149
+msgid "e-mail"
+msgstr "courriel"
+
+#: yd-widget-framework.inc.php:150
+msgid "or leave a comment on the "
+msgstr "ou laissez un commentaire sur la "
+
+#: yd-widget-framework.inc.php:151
+msgid "plugin's page"
+msgstr "page de l&apos;extension"
+
+#: yd-widget-framework.inc.php:152
+msgid "You will get credit for your translation in the plugin file and the documentation page, "
+msgstr "Vous serez crédité pour votre traduction dans le fichier de l&apos;extension et sa page de documentation, "
+
+#: yd-widget-framework.inc.php:153
+msgid "as well as a link on this page and on my developers' blog."
+msgstr "et vous obtiendrez un lien sur cette page, et sur mon blog de développeur."
+
+#: yd-widget-framework.inc.php:163
+msgid "Free support"
+msgstr "Support gratuit"
+
+#: yd-widget-framework.inc.php:165
+msgid "Support page:"
+msgstr "Page de support&nbsp;:"
+
+#: yd-widget-framework.inc.php:166
+msgid "here."
+msgstr "ici."
+
+#: yd-widget-framework.inc.php:167
+msgid "(use comments!)"
+msgstr "(utilisez les commentaires&nbsp;!)"
+
+#: yd-widget-framework.inc.php:169
+msgid "Professional consulting"
+msgstr "Assistance professionnelle"
+
+#: yd-widget-framework.inc.php:170
+msgid "I am available as an experienced free-lance Wordpress plugin developer and web consultant. "
+msgstr "Je suis disponible en tant que développeur d'extensions Wordpress expérimenté et consultant web. "
+
+#: yd-widget-framework.inc.php:171
+msgid "Please feel free to <a href=\"mailto:yann@abc.fr\">check with me</a> for any adaptation or specific implementation of this plugin. "
+msgstr "N'hésitez pas à <a href=\"mailto:yann@abc.fr\">me contacter</a> pour toute adaptation ou installation particulière de cette extension. "
+
+#: yd-widget-framework.inc.php:172
+msgid "Or for any WP-related custom development or consulting work. Hourly rates available."
+msgstr "Ou pour tout développement sur mesure en rapport avec WP. Tarifs horaires disponibles."
+
+#: yd-widget-framework.inc.php:194
+msgid "Main plugin settings:"
+msgstr "Principaux réglages de l&apos;extension&nbsp;:"
+
+#: yd-widget-framework.inc.php:198
+#: yd-widget-framework.inc.php:265
+msgid "Setting:"
+msgstr "Réglage&nbsp;:"
+
+#: yd-widget-framework.inc.php:199
+#: yd-widget-framework.inc.php:266
+msgid "Value:"
+msgstr "Valeur&nbsp;:"
+
+#: yd-widget-framework.inc.php:277
+msgid "This will disable the link in your blog footer. If you are using this plugin on your site and like it, did you consider making a donation? -- Thanks."
+msgstr "Ceci va désactiver le lien en bas de page. Puisque vous utilisez cette extension sur votre site et que vous l'appréciez, avez-vous envisagé de faire un don ? -- Merci."
+
+#: yd-widget-framework.inc.php:290
+msgid "Other options:"
+msgstr "Autres options&nbsp;:"
+
+#: yd-widget-framework.inc.php:298
+msgid "Show debug messages:"
+msgstr "Afficher les messages de diagnostic&nbsp;:"
+
+#: yd-widget-framework.inc.php:307
+msgid "Disable backlink in the blog footer:"
+msgstr "Désactivation du lien en bas de page&nbsp;:"
+

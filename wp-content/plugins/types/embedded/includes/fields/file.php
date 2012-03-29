@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Register data (called automatically).
  * 
@@ -23,17 +24,22 @@ function wpcf_fields_file() {
  * 
  * @param type $field 
  */
-function wpcf_fields_file_meta_box_form($field, $image = false) {
+function wpcf_fields_file_meta_box_form($field, $element, $image = false) {
     add_thickbox();
-    $type = $image ? 'image' : 'file';
-    $button_text = $image ? __('Upload image', 'wpcf') : __('Upload file',
+    $type = $field['type'] == 'image' ? 'image' : 'file';
+    $button_text = $type == 'image' ? __('Upload image', 'wpcf') : __('Upload file',
                     'wpcf');
+    // Set ID
+    $element_id = !empty($element['#id']) ? $element['#id'] : 'wpcf-fields-' . $field['slug'];
+    $attachment_id = false;
 
     // Get attachment by guid
     global $wpdb;
-    $attachment_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
+    if (!empty($field['value'])) {
+        $attachment_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
     WHERE post_type = 'attachment' AND guid=%s",
-                    $field['value']));
+                        $field['value']));
+    }
 
     // Set preview
     $preview = '';
@@ -55,17 +61,17 @@ function wpcf_fields_file_meta_box_form($field, $image = false) {
     } else {
         $button = '<a href="javascript:void(0);"'
                 . ' class="wpcf-fields-' . $type . '-upload-link button-secondary"'
-                . ' id="wpcf-fields-' . $field['slug'] . '-upload">'
+                . ' id="' . $element_id . '-upload">'
                 . $button_text . '</a>';
     }
 
     // Set form
     $form = array(
         '#type' => 'textfield',
-        '#id' => 'wpcf-fields-' . $field['slug'] . '-upload-holder',
+        '#id' => $element_id . '-upload-holder',
         '#name' => 'wpcf[' . $field['slug'] . ']',
         '#suffix' => '&nbsp;' . $button,
-        '#after' => '<div id="wpcf-fields-' . $field['slug']
+        '#after' => '<div id="' . $element_id
         . '-upload-holder-preview"'
         . ' class="wpcf-fields-file-preview">' . $preview . '</div>',
         '#attributes' => array('class' => 'wpcf-fields-file-textfield'),
@@ -85,10 +91,12 @@ function wpcf_fields_file_meta_box_js_inline() {
         //<![CDATA[
         jQuery(document).ready(function(){
             window.wpcf_formfield = false;
-            jQuery('.wpcf-fields-file-upload-link').click(function() {
+            jQuery('.wpcf-fields-file-upload-link').live('click', function() {
                 window.wpcf_formfield = '#'+jQuery(this).attr('id')+'-holder';
                 tb_show('<?php _e('Upload file',
-            'wpcf'); ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=file&wpcf-fields-media-insert=1&TB_iframe=true');
+            'wpcf');
+
+    ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=file&wpcf-fields-media-insert=1&TB_iframe=true');
                         return false;
                     });
                 });
@@ -173,9 +181,6 @@ function wpcf_fields_file_view($params) {
         $output = $params['field_value'];
     }
 
-    $output = wpcf_frontend_wrap_field_value($params['field'], $output, $params);
-    $output = wpcf_frontend_wrap_field($params['field'], $output, $params);
-
     return $output;
 }
 
@@ -183,8 +188,8 @@ function wpcf_fields_file_view($params) {
  * Editor callback form.
  */
 function wpcf_fields_file_editor_callback() {
-    wp_enqueue_style('wpcf-fields-file', WPCF_EMBEDDED_RES_RELPATH . '/css/basic.css',
-            array(), WPCF_VERSION);
+    wp_enqueue_style('wpcf-fields-file',
+            WPCF_EMBEDDED_RES_RELPATH . '/css/basic.css', array(), WPCF_VERSION);
 
     // Get field
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
@@ -208,7 +213,8 @@ function wpcf_fields_file_editor_callback() {
     // Get attachment
     $attachment_id = false;
     if ($post_ID) {
-        $file = get_post_meta($post_ID, wpcf_types_get_meta_prefix($field) . $field['slug'], true);
+        $file = get_post_meta($post_ID,
+                wpcf_types_get_meta_prefix($field) . $field['slug'], true);
         if (!empty($file)) {
             // Get attachment by guid
             global $wpdb;
@@ -242,8 +248,10 @@ function wpcf_fields_file_editor_callback() {
         '#value' => isset($last_settings['title']) ? $last_settings['title'] : '',
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Insert shortcode', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Insert shortcode', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert email', 'wpcf');
@@ -263,8 +271,8 @@ function wpcf_fields_file_editor_submit() {
         if (!empty($_POST['title'])) {
             $add .= ' title="' . strval($_POST['title']) . '"';
         }
+        $add .= ' class=""';
     }
-    $add .= ' class=""';
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);

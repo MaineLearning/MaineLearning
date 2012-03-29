@@ -67,8 +67,8 @@ class blcMediaFireChecker extends blcChecker {
 			
 			//An unexpected error.
 			$result['broken'] = true; 
-			$result['log'] .= "Error : " . $info->get_error_message();
-			if ( $data = $info->get_error_data() ){
+			$result['log'] .= "Error : " . $rez->get_error_message();
+			if ( $data = $rez->get_error_data() ){
 				$result['log'] .= "\n\nError data : " . print_r($data, true);
 			}
 			
@@ -91,6 +91,11 @@ class blcMediaFireChecker extends blcChecker {
 					$result['status_text'] = __('Not Found', 'broken-link-checker');
 					$result['http_code'] = 0;
 					$result['log'] .= "The file is invalid or has been removed.";
+				} else if ( strpos($rez['headers']['location'], 'errno=378') !== false ){
+					$result['status_code'] = BLC_LINK_STATUS_ERROR;
+					$result['status_text'] = __('Not Found', 'broken-link-checker');
+					$result['http_code'] = 0;
+					$result['log'] .= "The file has been removed due to a violation of MediaFire ToS.";
 				} else {
 					$result['status_code'] = BLC_LINK_STATUS_INFO;
 					$result['status_text'] = __('Unknown Error', 'broken-link-checker');

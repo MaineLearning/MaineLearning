@@ -647,6 +647,9 @@ function SetDefaultValues(field){
             if(productFields.length > 0)
                 field["productField"] = productFields[0]["id"];
 
+            if(!field.numberFormat)
+                field.numberFormat = "decimal_dot";
+
             break;
 
         <?php do_action('gform_editor_js_set_default_values'); ?>

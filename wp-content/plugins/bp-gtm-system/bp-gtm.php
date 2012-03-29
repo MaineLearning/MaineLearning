@@ -4,8 +4,8 @@ Plugin Name: BP GTM System
 Plugin URI: http://ovirium.com/plugins/bp-gtm-system/
 Description: Create a tasks management system for BuddyPress groups in your network with lots of features.
 Author: slaFFik
-Version: 1.9
-DB Version: 41
+Version: 1.9.5
+DB Version: 42
 Author URI: http://cosydale.com/
 Domain Path: /langs/
 Text Domain: bp_gtm
@@ -43,7 +43,7 @@ function bp_gtm_init(){
     $bp_gtm['label_gtm_system'] = __('ToDo','bp_gtm');
     $bp_gtm['label_assignments'] = __('Assignments','bp_gtm');
     
-    $bp_gtm['def_g_role'] = 5;
+    $bp_gtm['def_g_role'] = 4;
     $bp_gtm['def_admin_g_role'] = 1;
     
     add_option('bp_gtm', $bp_gtm, '', 'yes');
@@ -157,6 +157,7 @@ function bp_gtm_install($bp_gtm){
                 `owner_id` bigint(20) NOT NULL,
                 `group_id` bigint(20) NOT NULL,
                 `path` varchar(500) NOT NULL,
+                `description` TINYTEXT NOT NULL,
                 `date_uploaded` INT UNSIGNED NOT NULL DEFAULT  '0',
                 KEY `owner_id` (owner_id),
                 KEY `group_id` (group_id)

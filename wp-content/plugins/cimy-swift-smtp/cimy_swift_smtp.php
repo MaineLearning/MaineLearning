@@ -4,7 +4,7 @@ Plugin Name: Cimy Swift SMTP
 Plugin URI: http://www.marcocimmino.net/cimy-wordpress-plugins/cimy-swift-smtp/
 Description: Send email via SMTP (Compatible with GMAIL)
 Author: Marco Cimmino
-Version: 2.1.2
+Version: 2.1.3
 Author URI: mailto:cimmino.marco@gmail.com
 
 Copyright (c) 2007-2012 Marco Cimmino

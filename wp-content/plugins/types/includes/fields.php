@@ -240,9 +240,10 @@ function wpcf_admin_fields_save_group($group) {
             return false;
         }
     }
-    
+
     if (!empty($group['filters_association'])) {
-        update_post_meta($group_id, '_wp_types_group_filters_association', $group['filters_association']);
+        update_post_meta($group_id, '_wp_types_group_filters_association',
+                $group['filters_association']);
     } else {
         delete_post_meta($group_id, '_wp_types_group_filters_association');
     }
@@ -291,7 +292,7 @@ function wpcf_admin_fields_save_field($field) {
     // Set field specific data
     // NOTE: This was $field['data'] = $field and seemed to work on most systems.
     // I changed it to asign via a temporary variable to fix on one system.
-    $temp_field = $field; 
+    $temp_field = $field;
     $field['data'] = $temp_field;
     // Unset default fields
     unset($field['data']['type'], $field['data']['slug'],
@@ -300,10 +301,13 @@ function wpcf_admin_fields_save_field($field) {
             $field['data']['data']);
 
     // Merge previous data (added because of outside fields)
-    $field_previous_data = wpcf_admin_fields_get_field($field['id']);
-    if (!empty($field_previous_data['data'])) {
-        $field['data'] = array_merge($field_previous_data['data'],
-                $field['data']);
+    // @TODO Remember why
+    if (wpcf_types_cf_under_control('check_outsider', $field['id'])) {
+        $field_previous_data = wpcf_admin_fields_get_field($field['id']);
+        if (!empty($field_previous_data['data'])) {
+            $field['data'] = array_merge($field_previous_data['data'],
+                    $field['data']);
+        }
     }
 
     $field['data'] = apply_filters('wpcf_fields_' . $field['type'] . '_meta_data',

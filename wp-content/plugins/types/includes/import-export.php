@@ -28,7 +28,8 @@ function wpcf_admin_import_export_form() {
                     if (is_resource($zip)) {
                         while (($zip_entry = zip_read($zip)) !== false) {
                             if (zip_entry_name($zip_entry) == 'settings.xml') {
-                                $data = @zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
+                                $data = @zip_entry_read($zip_entry,
+                                                zip_entry_filesize($zip_entry));
                             }
                         }
                     } else {
@@ -84,7 +85,8 @@ function wpcf_admin_import_export_form() {
                     if (is_resource($zip)) {
                         while (($zip_entry = zip_read($zip)) !== false) {
                             if (zip_entry_name($zip_entry) == 'settings.xml') {
-                                $data = @zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
+                                $data = @zip_entry_read($zip_entry,
+                                                zip_entry_filesize($zip_entry));
                             }
                         }
                     } else {
@@ -188,7 +190,8 @@ function wpcf_admin_import_export_form() {
                 '#type' => 'submit',
                 '#name' => 'import-file',
                 '#value' => __('Import file', 'wpcf'),
-                '#attributes' => array_merge($attributes, array('class' => 'button-primary')),
+                '#attributes' => array_merge($attributes,
+                        array('class' => 'button-primary')),
                 '#prefix' => '<br />',
                 '#suffix' => '<br /><br />',
             );
@@ -488,6 +491,24 @@ function wpcf_admin_import_export_settings($data) {
         }
     }
 
+    // Check post relationships
+    if (!empty($data->post_relationships)) {
+        foreach ($data->post_relationships->post_relationship as $relationship) {
+            $form['title-post-relationships'] = array(
+                '#type' => 'markup',
+                '#markup' => '<h2>' . __('Post relationship', 'wpcf') . '</h2>',
+            );
+            $form['pr-add'] = array(
+                '#type' => 'checkbox',
+                '#name' => 'post_relationship',
+                '#default_value' => true,
+                '#title' => '<strong>' . __('Create relationships', 'wpcf') . '</strong>',
+                '#inline' => true,
+                '#after' => '<br />',
+            );
+        }
+    }
+
     return $form;
 }
 
@@ -521,7 +542,8 @@ function wpcf_admin_export_data() {
                     if (in_array($meta_key,
                                     array('_wp_types_group_terms',
                                 '_wp_types_group_post_types',
-                                '_wp_types_group_fields'))) {
+                                '_wp_types_group_fields',
+                                '_wp_types_group_templates'))) {
                         $data['groups']['group-' . $post['ID']]['meta'][$meta_key] = $meta_value[0];
                     }
                 }
@@ -569,6 +591,18 @@ function wpcf_admin_export_data() {
         $data['taxonomies']['__key'] = 'taxonomy';
     }
 
+    // Get post relationships
+    $relationships = get_option('wpcf_post_relationship', array());
+    if (!empty($relationships)) {
+//        foreach ($relationships as $key => $relationship) {
+//            $relationships[$key] = array();
+//            $relationships[$key]['data'] = serialize($relationship);
+//            $relationships[$key]['id'] = $key;
+//        }
+        $data['post_relationships']['data'] = serialize($relationships);
+        $data['post_relationships']['__key'] = 'post_relationship';
+    }
+
     // Offer for download
     $data = $xml->array2xml($data, 'types');
 
@@ -584,13 +618,13 @@ function wpcf_admin_export_data() {
     $code .= ';' . "\r\n";
     $code .= "\r\n?>";
 
-    if (class_exists('ZipArchive')) { 
+    if (class_exists('ZipArchive')) {
         $zipname = $sitename . 'types.' . date('Y-m-d') . '.zip';
-    
-        $file = tempnam("tmp", "zip");
+        $temp_dir = sys_get_temp_dir();
+        $file = tempnam($temp_dir, "zip");
         $zip = new ZipArchive();
         $zip->open($file, ZipArchive::OVERWRITE);
-    
+
         $zip->addFromString('settings.xml', $data);
         $zip->addFromString('settings.php', $code);
         $zip->close();
@@ -605,7 +639,7 @@ function wpcf_admin_export_data() {
         die();
     } else {
         // download the xml.
-        
+
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=" . $filename);
         header("Content-Type: application/xml");

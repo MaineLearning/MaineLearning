@@ -1,3 +1,41 @@
+<?php
+if ( !function_exists('fetch_feed') ){
+	include_once(ABSPATH . WPINC . '/feed.php');
+}
+if ( function_exists('fetch_feed') ):
+	$feed_url = 'http://w-shadow.com/files/blc-plugin-links.rss';
+	$num_items = 3;
+
+	$feed = fetch_feed($feed_url);
+	if ( !is_wp_error($feed) ):
+?>
+<style>
+#advertising .inside {
+	text-align: left;
+}
+</style>
+<div id="advertising" class="postbox">
+	<h3 class="hndle"><?php _e('More plugins by Janis Elsts', 'broken-link-checker'); ?></h3>
+	<div class="inside">
+		<ul>
+		<?php
+		foreach($feed->get_items(0, $num_items) as $item) {
+			printf(
+				'<li><a href="%1$s" title="%2$s">%3$s</a></li>',
+				esc_url( $item->get_link() ),
+				esc_attr( strip_tags( $item->get_title() ) ),
+				esc_html( $item->get_title() )
+			);
+		}
+		?>
+		</ul>
+	</div>
+</div>
+<?php
+	endif;
+endif;
+?>
+
 <div id="donate" class="postbox">
 	<h3 class="hndle"><?php _e('Donate $10, $20 or $50!', 'broken-link-checker'); ?></h3>
 	<div class="inside">
@@ -30,40 +68,4 @@
 	</div>					
 </div>
 
-<?php
-if ( !function_exists('fetch_feed') ){
-	include_once(ABSPATH . WPINC . '/feed.php');
-}
-if ( function_exists('fetch_feed') ):
-	$feed_url = 'http://w-shadow.com/files/blc-plugin-links.rss';
-	$num_items = 3;
-	
-	$feed = fetch_feed($feed_url);
-	if ( !is_wp_error($feed) ):	
-?>
-<style>
-#advertising .inside {
-	text-align: left;
-}
-</style>
-<div id="advertising" class="postbox">
-	<h3 class="hndle"><?php _e('More plugins by Janis Elsts', 'broken-link-checker'); ?></h3>
-	<div class="inside">
-		<ul>
-		<?php
-		foreach($feed->get_items(0, $num_items) as $item) {
-			printf(
-				'<li><a href="%1$s" title="%2$s">%3$s</a></li>',
-				esc_url( $item->get_link() ),
-				esc_attr( strip_tags( $item->get_title() ) ),
-				esc_html( $item->get_title() )
-			);
-		}
-		?>
-		</ul>
-	</div>					
-</div>
-<?php
-	endif; 
-endif; 
-?>
+

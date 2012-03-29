@@ -104,7 +104,7 @@
         <table cellpadding="0" cellspacing="0" class="previewtable">
             <tr>
                 <td width="150"><?php _e("Rating Header", "gd-star-rating"); ?>:</td>
-                <td><input type="text" name="gdsr_rss_header_text" id="gdsr_rss_header_text" value="<?php echo wp_specialchars($gdsr_options["rss_header_text"]); ?>" style="width: 350px" /></td>
+                <td><input type="text" name="gdsr_rss_header_text" id="gdsr_rss_header_text" value="<?php echo esc_attr($gdsr_options["rss_header_text"]); ?>" style="width: 350px" /></td>
             </tr>
             <tr>
                 <td width="150"><?php _e("Rating Template", "gd-star-rating"); ?>:</td>

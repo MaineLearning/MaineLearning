@@ -747,6 +747,7 @@ class GDSRRenderT2 {
                 $rater = sprintf('<div id="gdsr_thumb_%s_a_up" class="gdt-size-%s gdthumb gdup"><div class="gdt-%s"></div></div>',
                     $post_id, $unit_width, $style);
             }
+            $rater = apply_filters('gdsr_thumb_up', $rater, $template);
             $tpl_render = str_replace("%THUMB_UP%", $rater, $tpl_render);
         }
 
@@ -762,6 +763,7 @@ class GDSRRenderT2 {
                 $rater = sprintf('<div id="gdsr_thumb_%s_a_dw" class="gdt-size-%s gdthumb gddw"><div class="gdt-%s"></div></div>',
                     $post_id, $unit_width, $style);
             }
+            $rater = apply_filters('gdsr_thumb_down', $rater, $template);
             $tpl_render = str_replace("%THUMB_DOWN%", $rater, $tpl_render);
         }
 
@@ -820,6 +822,7 @@ class GDSRRenderT2 {
                 $rater = sprintf('<div id="gdsr_thumb_%s_c_up" class="gdt-size-%s gdthumb gdup"><div class="gdt-%s"></div></div>',
                     $comment_id, $unit_width, $style);
             }
+            $rater = apply_filters('gdsr_thumb_up', $rater, $template);
             $tpl_render = str_replace("%THUMB_UP%", $rater, $tpl_render);
         }
 
@@ -835,6 +838,7 @@ class GDSRRenderT2 {
                 $rater = sprintf('<div id="gdsr_thumb_%s_c_dw" class="gdt-size-%s gdthumb gddw"><div class="gdt-%s"></div></div>',
                     $comment_id, $unit_width, $style);
             }
+            $rater = apply_filters('gdsr_thumb_down', $rater, $template);
             $tpl_render = str_replace("%THUMB_DOWN%", $rater, $tpl_render);
         }
 
@@ -1301,6 +1305,8 @@ class GDSRRenderT2 {
 
                 $tpl_render.= $rt;
             }
+        } else {
+            $tpl_render.= apply_filters('gdsr_no_results', __("No results.", "gd-star-rating"));
         }
 
         $rt = html_entity_decode($template->elm["footer"]);

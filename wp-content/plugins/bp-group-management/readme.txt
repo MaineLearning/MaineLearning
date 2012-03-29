@@ -4,7 +4,7 @@ Tags: buddypress, groups, members, manage
 Requires at least: WP 2.8, BuddyPress 1.2
 Tested up to: WP 3.1, BuddyPress 1.2.8
 Donate link: http://teleogistic.net/donate/
-Stable tag: 0.5.2
+Stable tag: 0.5.3
 
 Allows site administrators to manage BuddyPress group membership
 
@@ -22,8 +22,12 @@ This plugin creates an admin panel at Dashboard > BuddyPress > Group Management.
 * Turkish: gk
 * German: Tom
 * Dutch: [Anja](http://werkgroepen.net/wordpress/)
+* Romanian, [Web Geek Science](http://webhostinggeeks.com/) 
 
 == Changelog ==
+
+= 0.5.3 =
+* Adds Romanian translation
 
 = 0.5.2 =
 * Fixes bug that caused problem with site member listing on non-MS WP installations

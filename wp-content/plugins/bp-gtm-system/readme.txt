@@ -1,8 +1,8 @@
 === BP GTM System ===
 Contributors: slaFFik, valant
 Tags: buddypress,tasks,task management,projects,project management,ajax,community,groups,management,todo,todo list,crm
-Tested up to: WP 3.3, BP 1.5.3.1
-Stable tag: 1.9
+Tested up to: WP 3.3, BP 1.5.4
+Stable tag: 1.9.5
 Requires at least: WP 3.3, BP 1.5
 
 BP GTM System will turn your site into a developer center, where tasks, projects, discussions, categories and tags will help you maintain products.
@@ -31,6 +31,11 @@ BuddyPress Group Tasks Management (BP GTM) System helps you control the developm
 * autocompletion for tags / categories
 
 == Changelog ==
+
+= 1.9.5 (15.03.2012) =
+* Changes on adding/updating projects/tasks pages (tags, files look differently now)
+* Improved a bit Files management and display
+* Some other minor code changes
 
 = 1.9 (03.02.2012) =
 * Introducing files management for projects, tasks, discussion posts

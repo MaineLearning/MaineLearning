@@ -8,7 +8,7 @@ class gdsrFrontHelp {
     * @param string $type article or comment
     * @return bool true if cookie exists for $id and $type, false if is not
     */
-    function check_cookie($id, $type = "article") {
+    static function check_cookie($id, $type = "article") {
         global $gdsr;
         if (
             ($type == "article" && $gdsr->o["cookies"]) ||
@@ -33,7 +33,7 @@ class gdsrFrontHelp {
     * @param int $id post or comment id depending on $type
     * @param string $type article or comment
     */
-    function save_cookie($id, $type = "article") {
+    static function save_cookie($id, $type = "article") {
         global $gdsr;
         if (
             ($type == "article" && $gdsr->o["cookies"] == 1) ||
@@ -55,7 +55,7 @@ class gdsrFrontHelp {
     /**
      * Adding elements for IE Opacity fix
      */
-    function ie_opacity_fix() {
+    static function ie_opacity_fix() {
         echo('<!--[if IE]>');
         echo('<style type="text/css">');
         echo('.ratemulti .starsbar .gdcurrent { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; filter: alpha(opacity=70); }');
@@ -71,7 +71,7 @@ class gdsrFrontHelp {
      * @param array $spiders list of bots
      * @return bool result 
      */
-    function detect_bot($str, $spiders = array()) {
+    static function detect_bot($str, $spiders = array()) {
         foreach($spiders as $spider) {
         if (preg_match("/".$spider."/", $str))
             return true;
@@ -84,7 +84,7 @@ class gdsrFrontHelp {
      *
      * @return bool result
      */
-    function detect_ban() {
+    static function detect_ban() {
         $ip = $_SERVER["REMOTE_ADDR"];
         $ban = false;
         $ban = gdsrBlgDB::check_ip_single($ip);
@@ -102,7 +102,7 @@ class gdsrFrontHelp {
      * @param string $value expiration value with period type
      * @return int expiration time
      */
-    function expiration_countdown($post_date, $value) {
+    static function expiration_countdown($post_date, $value) {
         $period = substr($value, 0, 1);
         $value = substr($value, 1);
         $pdate = strtotime($post_date);
@@ -127,7 +127,7 @@ class gdsrFrontHelp {
      * @param datetime $value string with date
      * @return int expiration time
      */
-    function expiration_date($value) {
+    static function expiration_date($value) {
         return strtotime($value) - mktime();
     }
 
@@ -137,12 +137,12 @@ class gdsrFrontHelp {
      * @param timestamp $timestamp timestamp to calculate
      * @return date calculated deadline
      */
-    function calculate_deadline($timestamp) {
+    static function calculate_deadline($timestamp) {
         $deadline_ts = $timestamp + mktime();
         return date("Y-m-d", $deadline_ts);
     }
 
-    function remaining_time_parts($timestamp) {
+    static function remaining_time_parts($timestamp) {
         $times = array(
                 31536000 => 'year',
                 2592000 => 'month',
@@ -166,7 +166,7 @@ class gdsrFrontHelp {
         return $parts;
     }
 
-    function remaining_time_total($timestamp) {
+    static function remaining_time_total($timestamp) {
         $times = array(
                 31536000 => 'year',
                 2592000 => 'month',

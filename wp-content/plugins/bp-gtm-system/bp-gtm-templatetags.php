@@ -14,10 +14,8 @@ function bp_gtm_filter_users($resps = null) {
                 <?php while (bp_group_members()) : bp_group_the_member(); ?>
                     <?php $member = bp_get_member_user_login(); ?>
                     <li  <?php echo in_array($member, $check) ? 'class="red"' : ''; ?> ><input type="checkbox" name="user_ids[<?php esc_attr(bp_member_user_login()) ?>]" class="check-user" value="<?php esc_attr(bp_member_user_login()) ?>" <?php echo in_array($member, $check) ? 'checked="checked"' : ''; ?> />
-                        <a href="<?php bp_group_member_domain(); ?>">
-                            <?php bp_group_member_avatar_thumb(); ?>
-                        </a>
-                        <h5><?php bp_group_member_link(); ?></h5>
+                        <?php bp_group_member_avatar_thumb(); ?>
+                        <h5><?php echo $member; ?></h5>
                         <?php if (bp_is_active('friends')) : ?>
                             <div class="action">
                                 <?php do_action('bp_directory_members_actions_loop', bp_get_member_user_login()); ?>
@@ -177,10 +175,10 @@ function bp_gtm_terms_loop($tags, $tax) {
                 <?php } ?>
                 <?php if (bp_gtm_check_access('taxon_delete')) { ?>
                     <a class="delete_me" id="<?php echo $tag['id']; ?>" href="#"><img height='16' width='16' src="<?php echo GTM_URL ?>_inc/images/delete.png" alt="<?php _e('Delete', 'bp_gtm') ?>" /></a>
-        <?php } ?>
+                <?php } ?>
             </td>
 
-        <?php do_action('bp_directory_' . $tax . '_extra_cell') ?>
+            <?php do_action('bp_directory_' . $tax . '_extra_cell') ?>
         </tr>
 
         <?php do_action('bp_directory_' . $tax . '_extra_row') ?>
@@ -188,15 +186,15 @@ function bp_gtm_terms_loop($tags, $tax) {
     }
 }
 
-function bp_gtm_terms_nodes($elements = array(), $task_or_proj = 'projects') {
+function bp_gtm_terms_nodes($elements = array(), $task_or_proj = 'project', $gtm_link) {
     foreach ($elements as $task_id => $task_name):
         ?>
         <tr class="" id="<?php echo $task_id; ?>">
             <td class="td-title">
-                <a href="<?php echo 'tasks/view/' . $task_id ?>" title="<?php _e('Permalink to this task page', 'bp_gtm') ?>"><?php echo $task_name; ?></a>
+                <a href="<?php echo $gtm_link . $task_or_proj . '/view/' . $task_id ?>" title="<?php sprintf(_e('Permalink to this %s page', 'bp_gtm'), $task_or_proj) ?>"><?php echo $task_name; ?></a>
             </td>
             <td class="td-postcount">
-        <?php bp_gtm_is_elem_done($task_id, $task_or_proj) ? _e('Yes', 'bp_gtm') : _e('No', 'bp_gtm'); ?>
+                <?php bp_gtm_is_elem_done($task_id, $task_or_proj) ? _e('Yes', 'bp_gtm') : _e('No', 'bp_gtm'); ?>
             </td>
         </tr>
         <?php
@@ -207,7 +205,7 @@ function bp_gtm_task_project($parent_task = 0, $task = null) {
     if ($parent_task == 0) :
         ?>
         <p>
-            <label for="task_project">* <?php _e('Project that this task corresponds to', 'bp_gtm'); ?></label>
+            <label for="task_project"><?php _e('Project that this task corresponds to', 'bp_gtm'); ?></label>
             <?php
             $projects = bp_gtm_get_projects(bp_get_current_group_id(), 'alpha');
             if (count($projects) > 0) :
@@ -221,7 +219,7 @@ function bp_gtm_task_project($parent_task = 0, $task = null) {
                         <td class="task-project"><input type="radio" name="task_project" value="<?php echo $project->id ?>" <?php echo $checked; ?>/><?php echo $project->name ?></td>
                         <td class="padding0"><?php _e('Deadline', 'bp_gtm') ?>: <?php bp_gtm_format_date($project->deadline); ?></td>
                     </tr>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </table>
             <?php
         else :
@@ -237,13 +235,20 @@ function bp_gtm_task_project($parent_task = 0, $task = null) {
 function bp_gtm_term_task_edit_loop($task_id, $tax) {
     $terms = BP_GTM_Taxon::get_terms_4task(bp_get_current_group_id(), $task_id, $tax);
     if (count($terms) > 0) {
+        if($tax!='tag'){
         foreach ($terms as $tag) {
             ($tag['used'] == '1') ? $used = 'checked="checked"' : $used = '';
             echo '<input name="task_old_' . $tax . 's[]" type="checkbox" ' . $used . ' value="' . stripslashes($tag['name']) . '" /> ' . stripslashes($tag['name']) . '<br>';
         }
+        } else {
+           foreach ($terms as $tag) {
+            if($tag['used'] == '1')
+             echo '<li class="resps-tab" id="un-tag"><span>' . stripslashes($tag['name']) . '</span> <span class="p">X</span></li>';
+        } 
+        }
     } else {
         $link = 'terms';
-        echo '<p>'.sprintf(__('There are no %ss to display. Create them <a href="%s" target="_blank">here</a>', 'bp_gtm'), $tax, $link) .'</p>';
+        echo '<p>' . sprintf(__('There are no %ss to display. Create them <a href="%s" target="_blank">here</a>', 'bp_gtm'), $tax, $link) . '</p>';
     }
 }
 
@@ -259,12 +264,12 @@ function bp_gtm_discussion_list($task_id, $tax = 'task', $avatar) {
                 <li id="post-<?php echo $post->id; ?>" class="alt">
                     <div class="poster-meta">
                         <?php bp_gtm_poster_discussion_meta($post->author_id); ?>
-                        <?php echo '&nbsp; '.sprintf(__('said %s:', 'bp_gtm'), bp_core_time_since($post->date_created)) ?>
+                        <?php echo '&nbsp; ' . sprintf(__('said %s:', 'bp_gtm'), bp_core_time_since($post->date_created)) ?>
                     </div>
 
                     <div class="post-content"><?php echo $post->text; ?></div>
 
-            <?php do_action('bp_gtm_discuss_after_content', $post, 'discuss', true); ?>
+                    <?php do_action('bp_gtm_discuss_after_content', $post, 'discuss', true); ?>
 
                     <div class="admin-links">
                         <?php bp_gtm_discuss_admin_links($post->id, $i, $tax, $task_id); ?>
@@ -301,35 +306,56 @@ function bp_gtm_get_responsibles($task_resp_id) {
 function bp_gtm_terms_for_project($project_id, $tax) {
     $terms = BP_GTM_Taxon::get_terms_4project(bp_get_current_group_id(), $project_id, $tax);
     if (count($terms) > 0) {
-        echo '<p>';
-        foreach ($terms as $tag) {
-            if ($tag['name'] != '') {
-                ($tag['used'] == '1') ? $used = 'checked="checked"' : $used = '';
-                echo '<input name="project_old_' . $tax . 's[]" type="checkbox" ' . $used . ' value="' . stripslashes($tag['name']) . '" /> ' . stripslashes($tag['name']) . '<br>';
+        if ($tax != 'tag') {
+            echo '<p>';
+            foreach ($terms as $tag) {
+                if ($tag['name'] != '') {
+                    ($tag['used'] == '1') ? $used = 'checked="checked"' : $used = '';
+                    echo '<input name="project_old_' . $tax . 's[]" type="checkbox" ' . $used . ' value="' . stripslashes($tag['name']) . '" /> ' . stripslashes($tag['name']) . '<br>';
+                }
+            }
+            echo '</p>';
+        } else {
+            foreach ($terms as $tag) {
+                if ($tag['used'] == '1')
+                    echo '<li class="resps-tab" id="un-tag"><span>' . stripslashes($tag['name']) . '</span> <span class="p">X</span></li>';
             }
         }
-        echo '</p>';
     } else {
         $link = $gtm_link . 'terms';
         echo sprintf(__('<p>There are no tags to display. Create them <a href="%s" target="_blank">here</a></p>', 'bp_gtm'), $link);
     }
 }
 
+function bp_gtm_get_cats_for_group() {
+    $terms = BP_GTM_Taxon::get_terms_in_group(bp_get_current_group_id(), 'cat');
+    if (count($terms) > 0) {
+        echo '<div class="group_cats">';
+        foreach ($terms as $tag) {
+            if ($tag['name'] != '') {
+                ($tag['used'] == '1') ? $used = 'checked="checked"' : $used = '';
+                echo '<p><input name="project_cats[]" type="checkbox" ' . $used . ' value="' . stripslashes($tag['name']) . '" /> <span>' . stripslashes($tag['name']) . '</span></p>';
+            }
+        }
+        echo '</div>';
+    }
+}
+
 function bp_gtm_project_list_settings() {
     $options = array();
     $options['filter'] = !empty($_GET['filter']) ? $_GET['filter'] : 'deadline';
-    $options['action'] = !empty($_GET['action']) ?  'project_' . $_GET['action'] : 'project_view';
+    $options['action'] = !empty($_GET['action']) ? 'project_' . $_GET['action'] : 'project_view';
     if ($options['filter'] == 'done') {
         $options['page_h4'] = __('Completed Projects', 'bp_gtm');
         $options['projects'] = bp_gtm_get_projects(bp_get_current_group_id(), 'done');
         $options['done_style'] = 'class="grey"';
     } elseif ($options['filter'] == 'alpha') {
         $options['page_h4'] = __('Projects by A/Z', 'bp_gtm');
-        $options['projects'] = bp_gtm_get_projects(bp_get_current_group_id(),'alpha');
+        $options['projects'] = bp_gtm_get_projects(bp_get_current_group_id(), 'alpha');
         $options['alpha_style'] = 'class="grey"';
     } elseif ($options['filter'] == 'deadline') {
         $options['page_h4'] = __('Projects by Deadline', 'bp_gtm');
-        $options['projects'] = bp_gtm_get_projects(bp_get_current_group_id(),'deadline');
+        $options['projects'] = bp_gtm_get_projects(bp_get_current_group_id(), 'deadline');
         $options['deadline_style'] = 'class="grey"';
     }
 
@@ -422,16 +448,16 @@ function bp_gtm_tasks_navi_content() {
                 <td class="td-title">
                     <span class="subtasks_<?php echo $task->id; ?> td-title">
                         <span class="all_in_all" title="<?php _e('Current number of subtasks', 'bp_gtm'); ?>"><?php echo bp_gtm_get_subtasks_count($task->id) ?></span>&nbsp;
-                    <?php bp_get_create_subtask_link($task->id, $gtm_link); ?>
+                        <?php bp_get_create_subtask_link($task->id, $gtm_link); ?>
                     </span>
-            <?php bp_gtm_view_link($task->id, $task->name, $gtm_link, 'task') ?>
+                    <?php bp_gtm_view_link($task->id, $task->name, $gtm_link, 'task') ?>
 
                 </td>
                 <td class="td-poster">
-            <?php bp_gtm_get_responsibles($task->resp_id); ?>
+                    <?php bp_gtm_get_responsibles($task->resp_id); ?>
                 </td>
                 <td class="td-group">
-            <?php bp_gtm_view_link($task->project_id, bp_gtm_get_el_name_by_id($task->project_id, 'project'), $gtm_link, 'project'); ?>
+                    <?php bp_gtm_view_link($task->project_id, bp_gtm_get_el_name_by_id($task->project_id, 'project'), $gtm_link, 'project'); ?>
                 </td>
                 <td class="td-group">
                     <div class="object-name center"><?php bp_gtm_format_date($task->deadline) ?></div>
@@ -444,7 +470,7 @@ function bp_gtm_tasks_navi_content() {
                     ?>
                 </td>
 
-            <?php do_action('bp_directory_tasks_extra_cell') ?>
+                <?php do_action('bp_directory_tasks_extra_cell') ?>
             </tr>
             <?php
             do_action('bp_directory_tasks_extra_row');
@@ -478,13 +504,13 @@ function bp_gtm_discuss_navi_content() {
             ?>
             <tr class="<?php echo $alt ?>">
                 <td class="td-title">
-            <?php bp_gtm_view_disscuss_link($post->elem_id, $gtm_link, $_GET['what']); ?>
+                    <?php bp_gtm_view_disscuss_link($post->elem_id, $gtm_link, $_GET['what']); ?>
                 </td>
                 <td class="td-poster">
-            <?php bp_gtm_poster_discussion_meta($post->author_id); ?></div>
+                    <?php bp_gtm_poster_discussion_meta($post->author_id); ?></div>
             </td>
             <td class="td-postcount">
-            <?php echo $post->discuss_count; ?>
+                <?php echo $post->discuss_count; ?>
             </td>
             <td class="td-freshness"><div class="object-name" class="center"><?php bp_gtm_format_date($post->date_created) ?></div>
             </td>
@@ -588,7 +614,7 @@ function bp_gtm_personal_tasks_navi_content() {
             ?>">
                 <td class="td-title">
                     <a class="topic-title" href="<?php echo $gtm_link . $bp->current_action . '/view/' . $task->id ?>" title="<?php _e('Permalink on task\'s page', 'bp_gtm') ?>">
-            <?php echo $task->name; ?>
+                        <?php echo $task->name; ?>
                     </a>
                 </td>
                 <td class="td-group">
@@ -608,7 +634,7 @@ function bp_gtm_personal_tasks_navi_content() {
                 <td class="td-group"><div class="object-name" class="text-right"><?php bp_gtm_format_date($task->deadline); ?></div>
                 </td>
 
-            <?php do_action('bp_directory_personal_tasks_extra_cell') ?>
+                <?php do_action('bp_directory_personal_tasks_extra_cell') ?>
             </tr>
             <?php
             do_action('bp_directory_personal_tasks_extra_row');
@@ -847,7 +873,7 @@ function bp_gtm_get_personal_filter_project_list() {
             <tr id="<?php echo $task->id; ?>" class="<?php bp_gtm_task_check_date($task->id, $task->deadline); ?>">
                 <td class="td-title">
                     <a class="topic-title" href="<?php echo $gtm_link . $bp->current_action . '/view/' . $task->id ?>" title="<?php _e('Permalink on task\'s page', 'bp_gtm') ?>">
-        <?php echo $task->name; ?>
+                        <?php echo $task->name; ?>
                     </a>
                 </td>
                 <td class="td-group">
@@ -866,7 +892,7 @@ function bp_gtm_get_personal_filter_project_list() {
                     <div class="object-name center"><?php bp_gtm_format_date($task->deadline); ?></div>
                 </td>
 
-            <?php do_action('bp_gtm_personal_tasks_extra_cell') ?>
+                <?php do_action('bp_gtm_personal_tasks_extra_cell') ?>
             </tr>
             <?php
             do_action('bp_gtm_personal_tasks_extra_row');
@@ -883,7 +909,7 @@ function bp_gtm_get_personal_filter_project_list() {
 
                 <td class="td-title">
                     <a class="topic-title" href="<?php echo $gtm_url . '/projects/view/' . $project->id ?>" title="<?php _e('Permalink', 'bp_gtm') ?>">
-        <?php echo $project->name; ?>
+                        <?php echo $project->name; ?>
                     </a>
                 </td>
                 <td class="td-poster"><!-- group name -->
@@ -894,7 +920,7 @@ function bp_gtm_get_personal_filter_project_list() {
                 <td class="td-poster">
                     <div class="object-name" class="center"><?php bp_gtm_format_date($project->deadline); ?></div>
                 </td>
-            <?php do_action('bp_gtm_personal_projects_extra_cell') ?>
+                <?php do_action('bp_gtm_personal_projects_extra_cell') ?>
             </tr>
             <?php
             do_action('bp_gtm_personal_projects_extra_row');
@@ -950,7 +976,7 @@ function bp_gtm_get_personal_filter_project_list() {
                 ?>
                 <div class="poster-name">
                     <a href="<?php echo bp_core_get_userlink($arg['item_id'], false, true); ?>" title="<?php echo bp_core_get_userlink($arg['item_id'], true, false); ?>">
-            <?php echo bp_core_fetch_avatar($arg); ?>
+                        <?php echo bp_core_fetch_avatar($arg); ?>
                     </a>
                 </div>
                 <?php
@@ -959,8 +985,8 @@ function bp_gtm_get_personal_filter_project_list() {
             $arg['item_id'] = bp_core_get_userid($users_logins['0']);
             ?>
             <div class="poster-name"><?php
-            echo bp_core_fetch_avatar($arg);
-            echo bp_core_get_userlink($arg['item_id']);
+        echo bp_core_fetch_avatar($arg);
+        echo bp_core_get_userlink($arg['item_id']);
             ?></div>
             <?php
         }
@@ -977,7 +1003,7 @@ function bp_gtm_get_personal_filter_project_list() {
     function bp_gtm_delete_link($project_id, $type = 'project') {
         if (bp_gtm_check_access($type . '_delete')) {
             ?>
-            <a class="delete_me" id="<?php echo $project_id; ?>" href="#" title="<?php _e('Delete this project and all corresponding tasks', 'bp_gtm'); ?>"><img height="16" width="16" src="<?php echo WP_PLUGIN_URL . "/bp-gtm-system/_inc/images/delete.png" ?>" alt="<?php _e('Delete', 'bp_gtm') ?>" /></a>&nbsp;
+            <a class="delete_me" id="<?php echo $project_id; ?>" href="#" title="<?php _e('Delete this project and all corresponding tasks', 'bp_gtm'); ?>"><img height="16" width="16" src="<?php echo plugins_url("_inc/images/delete.png", __FILE__) ?>" alt="<?php _e('Delete', 'bp_gtm') ?>" /></a>&nbsp;
             <?php
         }
     }
@@ -986,17 +1012,17 @@ function bp_gtm_get_personal_filter_project_list() {
         $type_title = substr($type, 0, -1);
         if (bp_gtm_check_access($type_title . '_edit')) {
             ?>
-            <a href="<?php echo $gtm_link . $type . '/edit/' . $project_id ?>" title="<?php _e(sprintf('Edit this %s' , $type_title), 'bp_gtm'); ?>"><img height="16" width="16" src="<?php echo WP_PLUGIN_URL . "/bp-gtm-system/_inc/images/edit.png" ?>" alt="<?php _e('Edit', 'bp_gtm') ?>" /></a>&nbsp;
+            <a href="<?php echo $gtm_link . $type . '/edit/' . $project_id ?>" title="<?php printf(__('Edit this %s', 'bp_gtm'), $type_title); ?>"><img height="16" width="16" src="<?php echo plugins_url("_inc/images/edit.png", __FILE__) ?>" alt="<?php _e('Edit', 'bp_gtm') ?>" /></a>&nbsp;
 
             <?php
         }
     }
 
-    function bp_gtm_view_link($project_id, $project_name, $gtm_link, $type) {
+    function bp_gtm_view_link($project, $gtm_link, $type) {
         if (bp_gtm_check_access($type . '_view')) {
             ?>
-            <a class="topic-title" href="<?php echo $gtm_link . $type . 's/view/' . $project_id ?>" title="<?php _e(sprintf('Permalink on %s\'s page', $type), 'bp_gtm') ?>">
-            <?php echo $project_name; ?>
+            <a class="topic-title" href="<?php echo $gtm_link . $type . 's/view/' . $project->id ?>" title="<?php echo $project->desc ?>">
+                <?php echo $project->name; ?>
             </a>
             <?php
         }
@@ -1005,7 +1031,7 @@ function bp_gtm_get_personal_filter_project_list() {
     function bp_gtm_delete_task_link($task_id) {
         if (bp_gtm_check_access('task_delete')) {
             ?>
-            <a class="delete_me" id="<?php echo $task_id; ?>" href="#" title="<?php _e('Delete this task', 'bp_gtm'); ?>"><img height="16" width="16" src="<?php echo WP_PLUGIN_URL . "/bp-gtm-system/_inc/images/delete.png" ?>" alt="<?php _e('Delete', 'bp_gtm') ?>" /></a>&nbsp;
+            <a class="delete_me" id="<?php echo $task_id; ?>" href="#" title="<?php _e('Delete this task', 'bp_gtm'); ?>"><img height="16" width="16" src="<?php echo plugins_url("_inc/images/delete.png", __FILE__) ?>" alt="<?php _e('Delete', 'bp_gtm') ?>" /></a>&nbsp;
 
             <?php
         }
@@ -1025,7 +1051,7 @@ function bp_gtm_get_personal_filter_project_list() {
         if (bp_gtm_check_access('task_create')) {
             ?>
             <a href="<?php echo $gtm_link ?>tasks/create?<?php echo $task_id; ?>" title="<?php _e('Create SubTask', 'bp_gtm'); ?>">
-                <img src="<?php echo WP_PLUGIN_URL . '/bp-gtm-system/_inc/images/add.png'; ?>" alt="<?php _e('Create SubTask', 'bp_gtm'); ?>" height='16' width='16' />
+                <img src="<?php echo plugins_url('_inc/images/add.png', __FILE__); ?>" alt="<?php _e('Create SubTask', 'bp_gtm'); ?>" height='16' width='16' />
             </a>
             <?php
         }
@@ -1038,24 +1064,33 @@ function bp_gtm_get_personal_filter_project_list() {
         $avatar['height'] = '40';
         if ($project->done == 1)
             $project_done = '&rarr; <span class="done">' . __('completed', 'bp_gtm') . '</span>';
-        $action = !empty($_GET['action']) ? $type .'_'. $_GET['action']:'';
+        $action = !empty($_GET['action']) ? $type . '_' . $_GET['action'] : '';
 
         do_action('bp_gtm_delete_view_notification', $bp->loggedin_user->id, $project->id, $action);
         echo bp_core_fetch_avatar($avatar);
-        echo sprintf(__('%s created %s on %s:', 'bp_gtm'), bp_core_get_userlink($project->creator_id), $type, bp_gtm_get_format_date($project->date_created));
+        if ($type == 'project') {
+            echo sprintf(__('%s created project on %s:', 'bp_gtm'), bp_core_get_userlink($project->creator_id), bp_gtm_get_format_date($project->date_created));
+        } else {
+            echo sprintf(__('%s created task on %s:', 'bp_gtm'), bp_core_get_userlink($project->creator_id), bp_gtm_get_format_date($project->date_created));
+        }
     }
 
     function bp_gtm_view_list_button($gtm_link, $type = 'projects') {
-        ?>
-        <a class="button back-task" href="<?php echo $gtm_link . $type; ?>"><?php _e('&larr; Back To ' . ucfirst($type) . ' List', 'bp_gtm') ?></a>
+        if ($type == 'projects'):
+            ?>
+            <a class="button back-task" href="<?php echo $gtm_link . $type; ?>"><?php _e('&larr; Back To Projects List', 'bp_gtm') ?></a>
+        <?php else:
+            ?>
+            <a class="button back-task" href="<?php echo $gtm_link . $type; ?>"><?php _e('&larr; Back To Tasks List', 'bp_gtm') ?></a>
         <?php
+        endif;
     }
 
     function bp_gtm_edit_button($project_id, $gtm_link, $type) {
-        if (bp_gtm_check_access($type . '_edit')) {
+        if (bp_gtm_check_access($type . '_edit')) { 
             ?>
 
-            <a class="button" href="<?php echo $gtm_link . $type . 's/edit/' . $project_id; ?>" title="<?php _e('Edit this ' . $type, 'bp_gtm'); ?>"><?php _e('Edit', 'bp_gtm'); ?></a>
+            <a class="button" href="<?php echo $gtm_link . $type . 's/edit/' . $project_id; ?>" title="<?php printf(__('Edit this %s', 'bp_gtm'), $type); ?>"><?php _e('Edit', 'bp_gtm'); ?></a>
             <?php
         }
     }
@@ -1116,8 +1151,8 @@ function bp_gtm_get_personal_filter_project_list() {
         $arg['height'] = '25';
         ?>
         <div class="poster-name"><?php
-        echo bp_core_fetch_avatar($arg);
-        echo bp_core_get_userlink($arg['item_id']);
+    echo bp_core_fetch_avatar($arg);
+    echo bp_core_get_userlink($arg['item_id']);
         ?></div>
         <?php
     }
@@ -1133,8 +1168,49 @@ function bp_gtm_get_personal_filter_project_list() {
 
     function bp_gtm_view_disscuss_link($id, $gtm_link, $type) {
         ?>
-            <a class="topic-title" href="<?php echo $gtm_link . $type . '/view/' . $id ?>" title="<?php _e('Permalink', 'bp_gtm') ?>">
-                    <?php echo bp_gtm_get_el_name_by_id($id, $type); ?>
-                </a>
-    <?php }
-    ?>
+        <a class="topic-title" href="<?php echo $gtm_link . $type . '/view/' . $id ?>" title="<?php _e('Permalink', 'bp_gtm') ?>">
+            <?php echo bp_gtm_get_el_name_by_id($id, $type); ?>
+        </a>
+    <?php
+    }
+
+    function bp_gtm_get_project_cats($project_id) {
+        $tags = '';
+        $terms = BP_GTM_Taxon::get_terms_4project(bp_get_current_group_id(), $project_id, 'tag');
+        if (!empty($terms)) {
+                foreach ($terms as $tag) {
+                        if($tag['used'] == '1'){
+                        $tags .= '|'.stripslashes($tag['name']);
+                    }
+                }
+        }
+        return $tags;
+    }
+    function bp_gtm_get_task_cats($task_id){
+        $tags = '';
+        $terms = BP_GTM_Taxon::get_terms_4task(bp_get_current_group_id(), $task_id, 'tag');
+        if (!empty($terms)) {
+                foreach ($terms as $tag) {
+                        if($tag['used'] == '1'){
+                        $tags .= '|'.stripslashes($tag['name']);
+                    }
+                }
+        }
+        return $tags;
+    }
+    /**
+     * Get link with description with description in title
+     * @param object $parent_task 
+     */
+   function  bp_gtm_get_parent_task_link($parent_task, $gtm_link){
+//       var_dump($parent_task);
+//       var_dump($parent_task[0]);
+       if (bp_gtm_check_access('task_view')) {
+            
+            return '<a class="topic-title parent-task-link" href="'. $gtm_link . 'tasks/view/' . $parent_task[0]->id .'" 
+                        title="'.trim(strip_tags($parent_task[0]->desc)).'">'. $parent_task[0]->name.'</a>';
+            
+        }
+        return false;
+   }
+?>

@@ -258,6 +258,10 @@ function wpcfGetParameterByName(name, string){
     }
 }
 
+function wpcfRefresh() {
+    window.location.reload();
+}
+
 /**
  * AJAX delete elements from group form callback.
  */

@@ -1055,13 +1055,15 @@ class GDStarRating {
 
         if ($this->post_comment["standard_rating"] > $std_minimum) {
             $votes = $this->post_comment["standard_rating"];
-            $ua = $this->o["save_user_agent"] == 1 ? $_SERVER["HTTP_USER_AGENT"] : "";
+            $ua = $this->o["save_user_agent"] == 1 && isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
             $allow_vote = true;
+
             if ($this->o["cmm_integration_prevent_duplicates"] == 1) {
                 $allow_vote = intval($votes) <= $this->o["stars"];
                 if ($allow_vote) $allow_vote = gdsrFrontHelp::check_cookie($id);
                 if ($allow_vote) $allow_vote = gdsrBlgDB::check_vote($id, $user, 'article', $ip, false, false);
             }
+
             if ($allow_vote) {
                 gdsrBlgDB::save_vote($id, $user, $ip, $ua, $votes, $comment_id);
                 if ($this->o["cmm_integration_prevent_duplicates"] == 1) gdsrFrontHelp::save_cookie($id);
@@ -1086,8 +1088,9 @@ class GDStarRating {
             }
             if ($allow_vote) {
                 $ip = $_SERVER["REMOTE_ADDR"];
-                $ua = $this->o["save_user_agent"] == 1 ? $_SERVER["HTTP_USER_AGENT"] : "";
+                $ua = $this->o["save_user_agent"] == 1 && isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
                 $data = GDSRDatabase::get_post_data($id);
+
                 GDSRDBMulti::save_vote($id, $set->multi_id, $user, $ip, $ua, $values, $data, $comment_id);
                 GDSRDBMulti::recalculate_multi_averages($id, $set->multi_id, "", $set, true);
                 if ($this->o["cmm_integration_prevent_duplicates"] == 1) gdsrFrontHelp::save_cookie($id."#".$set_id, "multis");
@@ -1326,7 +1329,12 @@ class GDStarRating {
         wp_enqueue_script('jquery');
 
         if (!is_admin()) {
-            $this->is_bot = gdsrFrontHelp::detect_bot($_SERVER['HTTP_USER_AGENT'], $this->bots);
+            if (isset($_SERVER['HTTP_USER_AGENT'])) {
+                $this->is_bot = gdsrFrontHelp::detect_bot($_SERVER['HTTP_USER_AGENT'], $this->bots);
+            } else {
+                $this->is_bot = FALSE;
+            }
+
             $this->is_ban = gdsrFrontHelp::detect_ban();
 
             if ($this->o["cached_loading"] != 1) {
@@ -1823,7 +1831,9 @@ class GDStarRating {
 
     function multi_rating_header($external_css = true) {
         $this->include_rating_css($external_css);
-        echo('<script type="text/javascript" src="'.$this->plugin_url.'js/gdsr.js"></script>');
+
+        $js_name = STARRATING_JAVASCRIPT_DEBUG ? 'js/gdsr.debug.js' : 'js/gdsr.js';
+        echo('<script type="text/javascript" src="'.$this->plugin_url.$js_name.'"></script>');
     }
 
     /**

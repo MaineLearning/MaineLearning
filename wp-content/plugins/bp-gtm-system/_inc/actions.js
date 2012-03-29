@@ -27,7 +27,6 @@ jQuery(document).ready(function($) {
         var popupWidth = $("#popupRoles").width();
         //centering
         var scroll = $(window).scrollTop();
-        console.log(scroll)
         $("#popupRoles").css({
             "position": "absolute",
             "top": ($('#container').height() + $("#popupRoles").height()/2)/2 + scroll,

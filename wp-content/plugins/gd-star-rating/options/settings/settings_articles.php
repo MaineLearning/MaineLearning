@@ -41,7 +41,7 @@ $default_preview_class.= $gdsr_options["wait_class_article"];
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating header", "gd-star-rating"); ?>:</td>
-                <td><input type="text" name="gdsr_header_text" id="gdsr_header_text" value="<?php echo wp_specialchars($gdsr_options["header_text"]); ?>" style="width: 170px" /></td>
+                <td><input type="text" name="gdsr_header_text" id="gdsr_header_text" value="<?php echo esc_attr($gdsr_options["header_text"]); ?>" style="width: 170px" /></td>
             </tr>
         </table>
         <div class="gdsr-table-split"></div>
@@ -110,23 +110,23 @@ $default_preview_class.= $gdsr_options["wait_class_article"];
             <tr>
                 <td width="150"><?php _e("Rating block CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_classblock" value="<?php echo wp_specialchars($gdsr_options["srb_class_block"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_classblock" value="<?php echo esc_attr($gdsr_options["srb_class_block"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating text CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_classtext" value="<?php echo wp_specialchars($gdsr_options["srb_class_text"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_classtext" value="<?php echo esc_attr($gdsr_options["srb_class_text"]); ?>" style="width: 170px" />
                 </td>
             </tr>
             <tr>
                 <td width="150"><?php _e("Rating header CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_classheader" value="<?php echo wp_specialchars($gdsr_options["srb_class_header"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_classheader" value="<?php echo esc_attr($gdsr_options["srb_class_header"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating stars CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_classstars" value="<?php echo wp_specialchars($gdsr_options["srb_class_stars"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_classstars" value="<?php echo esc_attr($gdsr_options["srb_class_stars"]); ?>" style="width: 170px" />
                 </td>
             </tr>
         </table>
@@ -218,12 +218,12 @@ $default_preview_class.= $gdsr_options["wait_class_article"];
             <tr>
                 <td width="150"><?php _e("Rating header", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_review_header_text" id="gdsr_review_header_text" value="<?php echo wp_specialchars($gdsr_options["review_header_text"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_review_header_text" id="gdsr_review_header_text" value="<?php echo esc_attr($gdsr_options["review_header_text"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating block CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_review_classblock" id="gdsr_review_classblock" value="<?php echo wp_specialchars($gdsr_options["review_class_block"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_review_classblock" id="gdsr_review_classblock" value="<?php echo esc_attr($gdsr_options["review_class_block"]); ?>" style="width: 170px" />
                 </td>
             </tr>
         </table>

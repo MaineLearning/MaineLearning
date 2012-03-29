@@ -42,8 +42,10 @@ function wpcf_fields_numeric_editor_callback() {
         '#value' => isset($last_settings['format']) ? $last_settings['format'] : 'FIELD_NAME: FIELD_VALUE',
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Insert shortcode', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Insert shortcode', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert numeric', 'wpcf');
@@ -83,8 +85,8 @@ function wpcf_fields_numeric_view($params) {
         $replacements = array($params['field']['name'], $params['field_value']);
         $output = preg_replace($patterns, $replacements, $params['format']);
         $output = sprintf($output, $params['field_value']);
+    } else {
+        $output = $params['field_value'];
     }
-    $output = wpcf_frontend_wrap_field_value($params['field'], $output, $params);
-    $output = wpcf_frontend_wrap_field($params['field'], $output, $params);
     return $output;
 }

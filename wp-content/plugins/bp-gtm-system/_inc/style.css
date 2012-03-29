@@ -76,8 +76,8 @@ div#box{position:relative;padding:7px;border:1px solid #ededed;width:300px;borde
 
 #gtm_form span.role {margin:0 0 0 10px}
 
-#backgroundPopup{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:100%;width:100%;top:0;left:0;background:#000000;border:1px solid #cecece;z-index:1}
-#popupRoles{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:auto;width:408px;background:#FFFFFF;border:2px solid #cecece;z-index:2;padding:12px;font-size:13px}
+#backgroundPopup{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:100%;width:100%;top:0;left:0;background:#000000;border:1px solid #cecece;z-index:1001}
+#popupRoles{display:none;position:fixed;_position:absolute; /* hack for internet explorer 6*/height:auto;width:408px;background:#FFFFFF;border:2px solid #cecece;z-index:1002;padding:12px;font-size:13px}
 #popupRoles h1{text-align:left;color:#6FA5FD;font-size:22px;font-weight:700;border-bottom:1px dotted #D3D3D3;padding-bottom:10px;margin-bottom:20px}
 #popupRolesClose{font-size:14px;cursor: pointer;line-height:14px;right:6px;top:4px;position:absolute;color:#6fa5fd;font-weight:700;display:block}
 #gtm_form span.popupReport{float:left}
@@ -128,7 +128,6 @@ div#box{position:relative;padding:7px;border:1px solid #ededed;width:300px;borde
 #gtm_form .wrap-roles{
     height: 300px;
     width: 75%;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -224,7 +223,7 @@ div#box{position:relative;padding:7px;border:1px solid #ededed;width:300px;borde
     font-size: 12px;
 }
 #gtm_form .item-list #th-title{
-    width: 35%;
+    width: 35% !important;
 }
 #gtm_form .item-list thead tr th{
     text-align: left;
@@ -241,7 +240,9 @@ div#box{position:relative;padding:7px;border:1px solid #ededed;width:300px;borde
     display:none;
 }
 #gtm_form .wrap-roles #member-list input{
-    display: none;
+    position: absolute;
+    top: -12px;
+    right: -3px
 }
 #gtm_form .wrap-roles #member-list li{
     border: 1px solid #EAEAEA;
@@ -377,12 +378,12 @@ able#personal tr th#th-postcount{
     position: relative;
     top: -4px;
 }
- 
+
 #gtm_form table.forum tr.sticky td{
-     background: white;
+    background: white;
 }
 #gtm_form .object-name{
-    
+
     margin: 0;
     padding: 0;
 }
@@ -438,3 +439,100 @@ able#personal tr th#th-postcount{
     text-align: right;
     margin: 10px -6px 0 -6px;
 }
+#gtm_form .paste-tags, #gtm_form .paste-cats{
+    min-height: 30px;
+}
+#gtm_form .additional-file-info span:first-child{
+    display: block;
+}
+#gtm_form .additional-file-info span{
+    margin: 0 3px;
+}
+#gtm_form #additional-file-info .additional-file-info{
+    width: 50%;
+    float: left;
+}
+#gtm_form .required{
+    color: red;
+    padding-left: 3px;
+}
+
+#gtm_form .delete_file{
+    color: red;
+    position: absolute;
+    top: 0px;
+    left: 325px;
+}
+#gtm_form .additional-file-info{
+    margin-bottom: 40px;
+}
+#gtm_form .float p, #gtm_form .right p{
+    padding-right: 215px;
+}
+#gtm_form .paste-tags, #gtm_form .paste-cats{
+    clear: both;
+}
+#gtm_form .paste-cats p{
+    margin: 0;
+}
+#gtm_form .single_file textarea{
+    display: none;
+    width: 250px;
+}
+#gtm_form .gtm_files .first{
+    width: 285px;
+    float: left;
+}
+#gtm_form .additional-file-info,#gtm_form #projects_tax{
+    clear: both;
+}
+#gtm_form .right .group_cats p{
+    margin: 0;
+}
+#gtmFile{
+    display: block;
+}
+#gtm_form .single_file{
+    position: relative;
+}
+#gtm_form .gtm_files_list ul li {
+    position: relative;
+}
+#gtm_form .edit_buttons{
+    position: absolute;
+    right: 10px;
+}
+#gtm_form .file_uploader{
+    font-weight: bold;
+}
+#gtm_form .hidden{
+    display: none;
+}
+#gtm_form .edit_buttons span:hover {
+    text-decoration: underline;
+    color: #6fa5fd;
+    cursor: pointer;
+}
+#gtm_form .edit_buttons span {
+    color: blue;
+}
+#gtm_form .tags,#gtm_form .cats {
+    width: 65%;
+}
+#gtm_form .parent-task-link{
+    color: #555;
+}
+.tooltip{
+    background-color: #EAEAEA;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    min-width: 150px;
+    min-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #afafaf;
+}
+#gtm_form .edit_buttons .edit_description, #gtm_form .edit_buttons .delete_file_discussion{
+    color: #6FA5FD;
+} 
