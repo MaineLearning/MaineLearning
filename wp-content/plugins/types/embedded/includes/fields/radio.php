@@ -21,7 +21,7 @@ function wpcf_fields_radio() {
  */
 function wpcf_fields_radio_meta_box_form($field) {
     $options = array();
-    $default_value = null;
+    $default_value = '';
 
     if (!empty($field['data']['options'])) {
         foreach ($field['data']['options'] as $option_key => $option) {
@@ -41,7 +41,7 @@ function wpcf_fields_radio_meta_box_form($field) {
             );
         }
     }
-
+    
     if (!empty($field['value'])) {
         $default_value = $field['value'];
     }
@@ -114,8 +114,10 @@ function wpcf_fields_radio_editor_callback() {
         );
     }
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Changes'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
 
@@ -187,9 +189,7 @@ function wpcf_fields_radio_view($params) {
                 }
             }
         }
-        $field_value = wpcf_frontend_wrap_field_value($params['field'],
-                $field_value, $params);
-        $output = wpcf_frontend_wrap_field($params['field'], $field_value);
+        $output = $field_value;
     }
     return $output;
 }

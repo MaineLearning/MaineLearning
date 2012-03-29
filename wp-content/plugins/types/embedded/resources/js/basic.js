@@ -1,5 +1,6 @@
 var wpcfFormGroupsSupportPostTypeState = new Array();
 var wpcfFormGroupsSupportTaxState = new Array();
+var wpcfFormGroupsSupportTemplatesState = new Array();
 
 jQuery(document).ready(function(){
     // Only for adding group
@@ -191,6 +192,12 @@ jQuery(document).ready(function(){
         }
     });
     
+    jQuery('.wpcf-form-groups-support-templates input').each(function(){
+        if (jQuery(this).is(':checked')) {
+            window.wpcfFormGroupsSupportTemplatesState.push(jQuery(this).attr('id'));
+        }
+    });
+    
     // Add scroll to user created fieldset if necessary
     if (jQuery('#wpcf-form-groups-user-fields').length > 0) {
         var wpcfFormGroupsUserCreatedFieldsHeight = Math.round(jQuery('#wpcf-form-groups-user-fields').height());
@@ -293,6 +300,10 @@ function wpcfFieldsFormCountOptions(obj) {
     var count = wpcfGetParameterByName('count', obj.attr('href'));
     count++;
     obj.attr('href',  obj.attr('href').replace(/count=.*/, 'count='+count));
+}
+
+function wpcfRefresh() {
+    window.location.reload();
 }
 
 function wpcfFieldsFormFiltersSummary() {

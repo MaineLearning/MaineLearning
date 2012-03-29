@@ -673,12 +673,13 @@ class Enlimbo_Forms_Wpcf
         $count = 1;
         foreach ($element['#options'] as $id => $value) {
             if (!is_array($value)) {
-                $value = array('#title' => $id, '#value' => $value, '#type' => 'option');
+                $value = array('#title' => $id, '#value' => $value);
             }
             if (!isset($value['#value'])) {
                 $value['#value'] = $this->_count['select'] . '-' . $count;
                 $count += 1;
             }
+            $value['#type'] = 'option';
             $element['_render']['element'] .= '<option value="'
                     . htmlspecialchars($value['#value']) . '"';
             $element['_render']['element'] .= ( $element['#default_value']
@@ -914,5 +915,4 @@ class Enlimbo_Forms_Wpcf
         }
         return 0;
     }
-
 }

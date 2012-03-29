@@ -3,6 +3,7 @@
  * Fields and groups form functions.
  */
 require_once WPCF_EMBEDDED_ABSPATH . '/classes/validate.php';
+require_once WPCF_ABSPATH . '/includes/conditional-display.php';
 
 /**
  * Saves fields and groups.
@@ -16,6 +17,11 @@ function wpcf_admin_save_fields_groups_submit($form) {
     if (!isset($_POST['wpcf']['group']['name'])) {
         return false;
     }
+    $_POST['wpcf']['group']['name'] = trim($_POST['wpcf']['group']['name']);
+
+    $_POST['wpcf']['group'] = apply_filters('wpcf_group_pre_save',
+            $_POST['wpcf']['group']);
+
     global $wpdb;
 
     $new_group = false;
@@ -26,15 +32,38 @@ function wpcf_admin_save_fields_groups_submit($form) {
     if (isset($_REQUEST['group_id'])) {
         // Check if group exists
         $post = get_post($_REQUEST['group_id']);
+        // Name changed
+        if (strtolower($_POST['wpcf']['group']['name']) != strtolower($post->post_title)) {
+            // Check if already exists
+            $exists = get_page_by_title($_POST['wpcf']['group']['name'],
+                    'OBJECT', 'wp-types-group');
+            if (!empty($exists)) {
+                $form->triggerError();
+                wpcf_admin_message(sprintf(__("A group by name <em>%s</em> already exists. Please use a different name and save again.",
+                                        'wpcf'), $_POST['wpcf']['group']['name']),
+                        'error');
+                return $form;
+            }
+        }
         if (empty($post) || $post->post_type != 'wp-types-group') {
             $form->triggerError();
             wpcf_admin_message(sprintf(__("Wrong group ID %d", 'wpcf'),
                             intval($_REQUEST['group_id'])), 'error');
-            return false;
+            return $form;
         }
         $group_id = $post->ID;
     } else {
         $new_group = true;
+        // Check if already exists
+        $exists = get_page_by_title($_POST['wpcf']['group']['name'], 'OBJECT',
+                'wp-types-group');
+        if (!empty($exists)) {
+            $form->triggerError();
+            wpcf_admin_message(sprintf(__("A group by name <em>%s</em> already exists. Please use a different name and save again.",
+                                    'wpcf'), $_POST['wpcf']['group']['name']),
+                    'error');
+            return $form;
+        }
     }
 
     // Save fields for future use
@@ -49,21 +78,21 @@ function wpcf_admin_save_fields_groups_submit($form) {
                 $form->triggerError();
                 wpcf_admin_message(sprintf(__('Field slugs cannot contain non-English characters. Please edit this field name %s and save again.',
                                         'wpcf'), $field['name']), 'error');
-                return false;
+                return $form;
             }
         }
         foreach ($_POST['wpcf']['fields'] as $key => $field) {
+            $field = apply_filters('wpcf_field_pre_save', $field);
             if (!empty($field['is_new'])) {
                 if (wpcf_types_cf_under_control('check_exists',
                                 sanitize_title($field['name']))) {
                     $form->triggerError();
                     wpcf_admin_message(sprintf(__('Field with name "%s" already exists',
                                             'wpcf'), $field['name']), 'error');
-                    return false;
+                    return $form;
                 }
             }
             // Field ID and slug are same thing
-//            $slug = $_POST['wpcf']['fields'][$key]['slug'] = sanitize_title($field['name']);
             $field_id = wpcf_admin_fields_save_field($field);
             if (!empty($field_id)) {
                 $fields[] = $field_id;
@@ -91,6 +120,7 @@ function wpcf_admin_save_fields_groups_submit($form) {
     }
 
     $group_id = wpcf_admin_fields_save_group($_POST['wpcf']['group']);
+    $_POST['wpcf']['group']['id'] = $group_id;
 
     // Set open fieldsets
     if ($new_group && !empty($group_id)) {
@@ -174,6 +204,7 @@ function wpcf_admin_fields_form() {
     $fields_registered = wpcf_admin_fields_get_available_types();
 //    foreach (glob(WPCF_EMBEDDED_INC_ABSPATH . '/fields/*.php') as $filename) {
     foreach ($fields_registered as $filename => $data) {
+        // TODO remove
 //        require_once $filename;
 //        if (function_exists('wpcf_fields_' . basename($filename, '.php'))) {
 //            $data = call_user_func('wpcf_fields_' . basename($filename, '.php'));
@@ -218,6 +249,15 @@ function wpcf_admin_fields_form() {
         }
 //        }
     }
+
+    // Link
+    $form['fields-link-tutorial-1'] = array(
+        '#type' => 'markup',
+        '#markup' => '<strong>' . __('Looking for repeater fields?', 'wpcf')
+        . '</strong><br />'
+        . sprintf(__('Learn about Types %sfield tables%s', 'wpcf'),
+                '<a href="http://wp-types.com/documentation/user-guides/bulk-content-editing-with-fields-table/" target="_blank">', '</a>'),
+    );
 
     // Get fields created by user
     $fields = wpcf_admin_fields_get_fields(true, true);
@@ -619,6 +659,10 @@ function wpcf_admin_fields_form() {
     wpcf_admin_add_js_settings('wpcf_filters_association_all_templates',
             '\'' . __('any', 'wpcf') . '\'');
 
+    $additional_filters = apply_filters('wpcf_fields_form_additional_filters',
+            array(), $update);
+    $form = $form + $additional_filters;
+
     $form['supports-table-close'] = array(
         '#type' => 'markup',
         '#markup' => '</td></tr></tbody></table><br />',
@@ -969,7 +1013,9 @@ function wpcf_fields_get_field_form_data($type, $form_data = array()) {
                 '#value' => '1',
             );
         }
-
+        $form_data['id'] = $id;
+        $form['wpcf-' . $id] = apply_filters('wpcf_form_field',
+                $form['wpcf-' . $id], $form_data);
         return $form;
     }
     return false;

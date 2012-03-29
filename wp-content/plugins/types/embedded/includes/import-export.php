@@ -335,10 +335,27 @@ function wpcf_admin_import_data($data = '', $redirect = true) {
         update_option('wpcf-custom-taxonomies', $taxonomies_existing);
     }
 
+    // Add relationships
+    if (!empty($data->post_relationships) && !empty($_POST['post_relationship'])) {
+        $relationship_existing = get_option('wpcf_post_relationship', array());
+        foreach ($data->post_relationships->post_relationship as $relationship) {
+            $relationship = unserialize($relationship);
+            $relationship = array_merge($relationship_existing, $relationship);
+            update_option('wpcf_post_relationship', $relationship);
+            wpcf_admin_message_store(__('Post relationships created', 'wpcf'));
+            break;
+        }
+    }
+    
+    // WPML bulk registration
+    if (wpcf_get_settings('register_translations_on_import')) {
+        wpcf_admin_bulk_string_translation();
+    }
+
     // Flush rewrite rules
     wpcf_init_custom_types_taxonomies();
     flush_rewrite_rules();
-    
+
     if ($redirect) {
         echo '<script type="text/javascript">
 <!--

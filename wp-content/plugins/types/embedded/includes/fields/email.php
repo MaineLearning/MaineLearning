@@ -26,22 +26,17 @@ function wpcf_fields_email() {
  * @param type $params 
  */
 function wpcf_fields_email_view($params) {
-    if ($params['style'] == 'raw') {
-        return '';
-    }
-    $title = '';
     $add = '';
     if (!empty($params['title'])) {
         $add .= ' title="' . $params['title'] . '"';
-        $title .= $params['title'];
+        $title = $params['title'];
     } else {
         $add .= ' title="' . $params['field_value'] . '"';
-        $title .= $params['field_value'];
+        $title = $params['field_value'];
     }
     $output = '<a href="mailto:' . $params['field_value'] . '"' . $add . '>'
             . $title . '</a>';
-    $output = wpcf_frontend_wrap_field_value($params['field'], $output, $params);
-    return wpcf_frontend_wrap_field($params['field'], $output, $params);
+    return $output;
 }
 
 /**
@@ -77,8 +72,10 @@ function wpcf_fields_email_editor_callback() {
         '#value' => isset($last_settings['title']) ? $last_settings['title'] : '',
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Changes'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert email', 'wpcf');

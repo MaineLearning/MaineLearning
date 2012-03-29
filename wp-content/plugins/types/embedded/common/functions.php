@@ -277,6 +277,8 @@ function wpv_evaluate_expression($expression){
     $expression = str_replace("OR", "||", $expression);
     $expression = str_replace("NOT", "!", $expression);
     $expression = str_replace("=", "==", $expression);
+    $expression = str_replace("<==", "<=", $expression);
+    $expression = str_replace(">==", ">=", $expression);
     $expression = str_replace("!==", "!=", $expression); // due to the line above
     
     // validate against allowed input characters
@@ -301,4 +303,129 @@ function wpv_evaluate_expression($expression){
 		return __("Correct conditional expression has not been found", 'wpv-views');
 	}
 	
+}
+
+/**
+ * class WPV_wpcf_switch_post_from_attr_id
+ *
+ * This class handles the "id" attribute in a wpv-post-xxxxx shortcode
+ * and sets the global $id, $post, and $authordata
+ *
+ * It also handles types. eg [types field='my-field' id='233']
+ *
+ * id can be a integer to refer directly to a post
+ * id can be $parent to refer to the parent
+ *
+ * id can also refer to a related post type
+ * eg. for a stay the related post types could be guest and room
+ * [types field='my-field' id='$guest']
+ * [types field='my-field' id='$room']
+ */
+
+class WPV_wpcf_switch_post_from_attr_id {
+
+    function __construct($atts){
+        $this->found = false;
+        
+        if (isset($atts['id'])) {
+
+            global $post, $authordata, $id, $WPV_wpcf_post_relationship;                                    
+            
+            $post_id = 0;
+            
+            if (strpos($atts['id'], '$') === 0) {
+                // Handle the parent if the id is $parent
+                if ($atts['id'] == '$parent' && isset($post->post_parent)) {
+                    $post_id = $post->post_parent;
+                } else {
+                    // See if Views has the variable
+                    global $WP_Views;
+                    if (isset($WP_Views)) {
+                        $post_id = $WP_Views->get_variable($atts['id'] . '_id');
+                    }
+					if ($post_id == 0) {
+						// Try the local storage.
+						if (isset($WPV_wpcf_post_relationship[$atts['id'] . '_id'])) {
+							$post_id = $WPV_wpcf_post_relationship[$atts['id'] . '_id'];
+						}
+					}
+                }
+                
+            } else {
+                $post_id = intval($atts['id']);
+            }
+            
+            if ($post_id > 0) {
+            
+                $this->found = true;
+    
+                // save original post 
+                $this->post = isset($post) ? clone $post : null;
+                if ($authordata) {
+                    $this->authordata = clone $authordata;
+                } else {
+                    $this->authordata = null;
+                }
+                $this->id = $id;
+                
+                // set the global post values
+                $id = $post_id;
+                $post = get_post($id);
+				$authordata = new WP_User($post->post_author);
+                
+            }   
+        }
+        
+    }
+    
+    function __destruct(){
+        if ($this->found) {
+            global $post, $authordata, $id;                                    
+            
+            // restore the global post values.
+            $post = isset($this->post) ? clone $this->post : null;
+            if ($this->authordata) {
+                $authordata = clone $this->authordata;
+            } else {
+                $authordata = null;
+            }
+            $id = $this->id;
+        }
+        
+    }
+    
+}
+
+// Add a filter on the content so that we can record any related posts.
+// These can then be used ine id of Types and Views shortcodes
+// eg. for a stay we can have
+// [types field='my-field' id="$room"] displays my-field from the related room
+// [wpv-post-title id="$room"] display the title of the related room
+
+add_filter('the_content', 'WPV_wpcf_record_post_relationship_belongs', 0, 1);
+
+$WPV_wpcf_post_relationship = Array();
+
+function WPV_wpcf_record_post_relationship_belongs($content) {
+
+	global $post, $WPV_wpcf_post_relationship;
+    static $related = array();
+	
+    if (function_exists('wpcf_pr_get_belongs')) {
+        
+        if (!isset($related[$post->post_type])) {
+            $related[$post->post_type] = wpcf_pr_get_belongs($post->post_type);
+        }
+        if (is_array($related[$post->post_type])) {
+            foreach($related[$post->post_type] as $post_type => $data) {
+                $related_id = wpcf_pr_post_get_belongs($post->ID, $post_type);
+                if ($related_id) {
+                    $WPV_wpcf_post_relationship['$' . $post_type . '_id'] = $related_id;
+                }
+            }
+        }
+    }
+    
+
+	return $content;
 }

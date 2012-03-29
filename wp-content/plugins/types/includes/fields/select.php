@@ -46,21 +46,23 @@ function wpcf_fields_select_insert_form($form_data = array(), $parent_name = '')
         . '</strong><br /><br /><div id="' . $id . '-sortable"'
         . ' class="wpcf-fields-select-sortable wpcf-compare-unique-value-wrapper">',
     );
-    if (!empty($form_data['data']['options'])) {
-        foreach ($form_data['data']['options'] as $option_key => $option) {
+    $options = !empty($form_data['options']) ? $form_data['options'] : array();
+    $options = !empty($form_data['data']['options']) ? $form_data['data']['options'] : $options;
+    if (!empty($options)) {
+        foreach ($options as $option_key => $option) {
             if ($option_key == 'default') {
                 continue;
             }
             $option['key'] = $option_key;
-            $option['default'] = isset($form_data['data']['options']['default']) ? $form_data['data']['options']['default'] : null;
+            $option['default'] = isset($options['default']) ? $options['default'] : null;
             $form = $form + wpcf_fields_select_get_option('', $option);
         }
     } else {
         $form = $form + wpcf_fields_select_get_option();
     }
 
-    if (!empty($form_data['data']['options'])) {
-        $count = count($form_data['data']['options']);
+    if (!empty($options)) {
+        $count = count($options);
     } else {
         $count = 1;
     }

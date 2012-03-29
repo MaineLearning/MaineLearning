@@ -27,8 +27,8 @@ function wpcf_ajax() {
         case 'remove_field_from_group':
             require_once WPCF_INC_ABSPATH . '/fields.php';
             if (isset($_GET['group_id']) && isset($_GET['field_id'])) {
-            wpcf_admin_fields_remove_field_from_group($_GET['group_id'],
-                    $_GET['field_id']);
+                wpcf_admin_fields_remove_field_from_group($_GET['group_id'],
+                        $_GET['field_id']);
             }
             break;
 
@@ -98,7 +98,7 @@ function wpcf_ajax() {
                     'execute' => 'jQuery("#wpcf-list-activate-'
                     . $_GET['wpcf-post-type'] . '").replaceWith(\''
                     . wpcf_admin_custom_types_get_ajax_activation_link(esc_attr(
-$_GET['wpcf-post-type']))
+                                    $_GET['wpcf-post-type']))
                     . '\');jQuery(".wpcf-table-column-active-'
                     . $_GET['wpcf-post-type'] . '").html("' . __('No', 'wpcf') . '");',
                     'wpcf_nonce_ajax_callback' => wp_create_nonce('execute'),
@@ -140,8 +140,10 @@ $_GET['wpcf-post-type']))
                 die();
             }
             $custom_types = get_option('wpcf-custom-types', array());
-            unset($custom_types[$_GET['wpcf-post-type']]);
+            $custom_type = strval($_GET['wpcf-post-type']);
+            unset($custom_types[$custom_type]);
             update_option('wpcf-custom-types', $custom_types);
+            wpcf_admin_deactivate_content('post_type', $custom_type);
             echo json_encode(array(
                 'output' => '',
                 'execute' => 'jQuery("#wpcf-list-activate-'
@@ -206,8 +208,10 @@ $_GET['wpcf-post-type']))
                 die();
             }
             $custom_taxonomies = get_option('wpcf-custom-taxonomies', array());
-            unset($custom_taxonomies[$_GET['wpcf-tax']]);
+            $custom_taxonomy = strval($_GET['wpcf-tax']);
+            unset($custom_taxonomies[$custom_taxonomy]);
             update_option('wpcf-custom-taxonomies', $custom_taxonomies);
+            wpcf_admin_deactivate_content('taxonomy', $custom_taxonomy);
             echo json_encode(array(
                 'output' => '',
                 'execute' => 'jQuery("#wpcf-list-activate-'
@@ -316,14 +320,14 @@ $_GET['wpcf-post-type']))
                 'output' => $output
             ));
             break;
-            
+
         case 'custom_fields_control_bulk':
             require_once WPCF_INC_ABSPATH . '/fields.php';
             require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
             require_once WPCF_INC_ABSPATH . '/fields-control.php';
             wpcf_admin_custom_fields_control_bulk_ajax();
             break;
-        
+
         case 'fields_delete':
         case 'delete_field':
             require_once WPCF_INC_ABSPATH . '/fields.php';
@@ -337,7 +341,7 @@ $_GET['wpcf-post-type']))
                 'output' => ''
             ));
             break;
-            
+
         case 'remove_from_history':
             require_once WPCF_INC_ABSPATH . '/fields.php';
             $fields = wpcf_admin_fields_get_fields();
@@ -348,6 +352,64 @@ $_GET['wpcf-post-type']))
             echo json_encode(array(
                 'output' => ''
             ));
+            break;
+
+        case 'add_condition':
+            require_once WPCF_INC_ABSPATH . '/fields.php';
+            require_once WPCF_ABSPATH . '/includes/conditional-display.php';
+            if (!empty($_GET['field']) || !empty($_GET['group'])) {
+                $data = array();
+                if (isset($_GET['group'])) {
+                    $output = wpcf_form_simple(wpcf_cd_admin_form_single_filter(array(),
+                                    array(), null, true));
+                    echo json_encode(array(
+                        'output' => $output,
+                    ));
+                } else {
+                    $data['id'] = str_replace('_conditional_display', '',
+                            $_GET['field']);
+                    $output = wpcf_form_simple(wpcf_cd_admin_form_single_filter($data,
+                                    array(), null, false));
+                    if (!empty($data['id'])) {
+                        echo json_encode(array(
+                            'output' => $output,
+                        ));
+                    } else {
+                        echo json_encode(array(
+                            'output' => __('Error occured'),
+                        ));
+                    }
+                }
+            } else {
+                echo json_encode(array(
+                    'output' => __('Error occured'),
+                ));
+            }
+            break;
+
+        case 'pt_edit_fields':
+            if (!empty($_GET['parent']) && !empty($_GET['child'])) {
+                require_once WPCF_INC_ABSPATH . '/fields.php';
+                require_once WPCF_INC_ABSPATH . '/post-relationship.php';
+                wpcf_pr_admin_edit_fields($_GET['parent'], $_GET['child']);
+            }
+            break;
+            
+        case 'toggle':
+            $option = get_option('wpcf_toggle', array());
+            $hidden = isset($_GET['hidden']) ? (bool)$_GET['hidden'] : 1;
+            $_GET['div'] = strval($_GET['div']);
+            if (!$hidden) {
+                unset($option[$_GET['div']]);
+            } else {
+                $option[$_GET['div']] = 1;
+            }
+            update_option('wpcf_toggle', $option);
+            break;
+            
+        case 'footer_credits':
+            require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
+            wpcf_footer_credit_settings();
             break;
 
         default:

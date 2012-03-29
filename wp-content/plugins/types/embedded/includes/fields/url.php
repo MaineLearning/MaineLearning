@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Register data (called automatically).
  * 
@@ -6,7 +7,7 @@
  */
 function wpcf_fields_url() {
     return array(
-        'id' => 'wpcf-email',
+        'id' => 'wpcf-url',
         'title' => 'URL',
         'description' => 'URL',
         'validate' => array('required', 'url'),
@@ -20,9 +21,6 @@ function wpcf_fields_url() {
  * @param type $params 
  */
 function wpcf_fields_url_view($params) {
-    if ($params['style'] == 'raw') {
-        return '';
-    }
     $title = '';
     $add = '';
     if (!empty($params['title'])) {
@@ -37,8 +35,7 @@ function wpcf_fields_url_view($params) {
     }
     $output = '<a href="' . $params['field_value'] . '"' . $add . '>'
             . $title . '</a>';
-    $output = wpcf_frontend_wrap_field_value($params['field'], $output, $params);
-    return wpcf_frontend_wrap_field($params['field'], $output, $params);
+    return $output;
 }
 
 /**
@@ -54,8 +51,10 @@ function wpcf_fields_url_editor_callback() {
         '#name' => 'title',
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Changes'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-form', $form);
     wpcf_admin_ajax_head('Insert URL', 'wpcf');

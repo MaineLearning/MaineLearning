@@ -20,7 +20,8 @@ function wpcf_admin_custom_fields_control_form($table) {
 class WPCF_Custom_Fields_Control_Table extends WP_List_Table
 {
 
-    function prepare_items() {$time = time();
+    function prepare_items() {
+        $time = time();
         global $wpdb;
         $wpcf_per_page = 15;
         $this->wpcf_groups = wpcf_admin_fields_get_groups();
@@ -175,7 +176,7 @@ class WPCF_Custom_Fields_Control_Table extends WP_List_Table
     }
 
     function has_items() {
-        return!empty($this->items);
+        return !empty($this->items);
     }
 
     function get_columns() {
@@ -280,7 +281,7 @@ function wpcf_admin_custom_fields_control_js() {
                 return wpcfAdminCustomFieldsControlSubmit(jQuery(this).prev());
             });
         });
-                                                                                                        
+                                                                                                                
         function wpcfAdminCustomFieldsControlSubmit(action_field) {
             var action = action_field.val();
             var open_popup = false;
@@ -299,16 +300,19 @@ function wpcf_admin_custom_fields_control_js() {
                 return false;
             }
             if (action == 'wpcf-delete-bulk') {
-                var answer = confirm('<?php _e('Deleting fields will remove fields from groups and delete post meta. Continue?',
-            'wpcf') ?>');
-                        if (answer){
-                            jQuery('#wpcf-custom-fields-control-form').submit();
-                        } else{
-                            return false;
-                        }
-                    }
-                    return true;
+                var answer = confirm('<?php
+    _e('Deleting fields will remove fields from groups and delete post meta. Continue?',
+            'wpcf')
+
+    ?>');
+                if (answer){
+                    jQuery('#wpcf-custom-fields-control-form').submit();
+                } else{
+                    return false;
                 }
+            }
+            return true;
+        }
     </script>
     <?php
 }
@@ -346,7 +350,8 @@ function wpcf_admin_custom_fields_control_bulk_actions($action = '') {
         foreach ($_POST['fields'] as $field_id) {
             $response = wpcf_admin_fields_delete_field($field_id);
             if (!$response) {
-                $failed[] = str_replace('_' . md5('wpcf_not_controlled'), '', $field_id);
+                $failed[] = str_replace('_' . md5('wpcf_not_controlled'), '',
+                        $field_id);
             } else {
                 $success[] = $field_id;
             }
@@ -426,9 +431,14 @@ function wpcf_admin_custom_fields_control_bulk_ajax() {
             '#value' => $field_id,
         );
     }
+    $output['submit'] = array(
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Changes'),
+        '#attributes' => array('class' => 'button-primary'),
+    );
     echo '<form method="post" action="">';
     echo wpcf_form_simple($output);
-    echo get_submit_button();
     wp_nonce_field('custom_fields_control_bulk');
     echo '<input type="hidden" name="action" value="' . esc_attr($_GET['wpcf_bulk_action']) . '" />';
     echo '</form>';
