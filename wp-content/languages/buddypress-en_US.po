@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-08-28 19:42-0500\n"
+"PO-Revision-Date: 2012-03-29 10:16-0500\n"
 "Last-Translator: Jay Collier <jay.collier@thecompass.com>\n"
 "Language-Team: Learn Maine\n"
 "X-Poedit-Language: English\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: bp-blogs/bp-blogs-template.php:424
 msgid "By filling out the form below, you can <strong>add a site to your account</strong>. There is no limit to the number of sites that you can have, so create to your heart's content, but blog responsibly!"
-msgstr ""
+msgstr "By filling out the form below, you can <strong>add a site to your account</strong>. There is no limit to the number of sites that you can have, so create to your heart's content, but post responsibly!"
 
 #: bp-blogs/bp-blogs-template.php:426
 msgid "If you&#8217;re not going to use a great domain, leave it for a new user. Now have at it!"
@@ -137,7 +137,7 @@ msgstr ""
 
 #: bp-blogs/bp-blogs-template.php:468
 msgid "blogname"
-msgstr ""
+msgstr "sitename"
 
 #: bp-blogs/bp-blogs-template.php:470
 msgid "domain."
@@ -279,7 +279,7 @@ msgstr ""
 #: bp-members/bp-members-loader.php:24
 #: bp-themes/bp-default/groups/single/admin.php:229
 msgid "Members"
-msgstr "People"
+msgstr ""
 
 #: bp-core/bp-core-widgets.php:48
 #: bp-core/bp-core-widgets.php:128
@@ -486,7 +486,7 @@ msgstr ""
 #: bp-core/admin/bp-core-admin.php:291
 #: bp-forums/bp-forums-admin.php:30
 msgid "Forum Setup"
-msgstr ""
+msgstr "Discussion Setup"
 
 #: bp-core/admin/bp-core-admin.php:83
 #: bp-core/admin/bp-core-admin.php:251
@@ -512,7 +512,7 @@ msgstr ""
 
 #: bp-core/admin/bp-core-admin.php:132
 msgid "Disable activity stream commenting on blog and forum posts?"
-msgstr ""
+msgstr "Disable activity stream commenting on site and forum posts?"
 
 #: bp-core/admin/bp-core-admin.php:144
 msgid "Restrict group creation to Site Admins?"
@@ -1115,7 +1115,7 @@ msgstr ""
 
 #: bp-core/bp-core-template.php:248
 msgid "Blogs"
-msgstr ""
+msgstr "Sites"
 
 #: bp-core/bp-core-template.php:253
 #: bp-themes/bp-default/members/single/activity.php:27
@@ -1739,11 +1739,11 @@ msgstr ""
 
 #: bp-groups/bp-groups-activity.php:23
 msgid "New group forum topic"
-msgstr ""
+msgstr "New group discussion topic"
 
 #: bp-groups/bp-groups-activity.php:24
 msgid "New group forum post"
-msgstr ""
+msgstr "New group discussion post"
 
 #: bp-groups/bp-groups-activity.php:93
 msgid "%1$d new membership requests for the group \"%2$s\""
@@ -1857,7 +1857,7 @@ msgstr ""
 
 #: bp-groups/bp-groups-loader.php:321
 msgid "Forum"
-msgstr ""
+msgstr "Discussion"
 
 #: bp-groups/bp-groups-loader.php:333
 msgid "Members <span>%s</span>"
@@ -2054,12 +2054,12 @@ msgstr ""
 #: bp-groups/bp-groups-forums.php:56
 #: bp-groups/bp-groups-forums.php:160
 msgid "%1$s replied to the forum topic %2$s in the group %3$s"
-msgstr ""
+msgstr "%1$s replied to the discussion topic %2$s in the group %3$s"
 
 #: bp-groups/bp-groups-forums.php:95
 #: bp-groups/bp-groups-forums.php:127
 msgid "%1$s started the forum topic %2$s in the group %3$s"
-msgstr ""
+msgstr "%1$s started the discussion topic %2$s in the group %3$s"
 
 #: bp-groups/bp-groups-screens.php:49
 msgid "Group invite could not be accepted"
@@ -2163,16 +2163,16 @@ msgstr ""
 #: bp-groups/bp-groups-screens.php:346
 #: bp-forums/bp-forums-screens.php:36
 msgid "Please provide a title for your forum topic."
-msgstr ""
+msgstr "Please provide a title for your discussion topic."
 
 #: bp-groups/bp-groups-screens.php:348
 #: bp-forums/bp-forums-screens.php:38
 msgid "Forum posts cannot be empty. Please enter some text."
-msgstr ""
+msgstr "Discussion posts cannot be empty. Please enter some text."
 
 #: bp-groups/bp-groups-screens.php:351
 msgid "This group does not have a forum setup yet."
-msgstr ""
+msgstr "This group does not have a discussion set up yet."
 
 #: bp-groups/bp-groups-screens.php:358
 #: bp-forums/bp-forums-screens.php:45
@@ -2933,7 +2933,7 @@ msgstr ""
 
 #: bp-forums/bp-forums-admin.php:51
 msgid "bbPress forum integration in BuddyPress has been set up correctly. If you are having problems you can <a href=\"%s\" title=\"Reinstall bbPress\">re-install</a>."
-msgstr ""
+msgstr "bbPress discussion integration in BuddyPress has been set up correctly. If you are having problems you can <a href=\"%s\" title=\"Reinstall bbPress\">re-install</a>."
 
 #: bp-forums/bp-forums-admin.php:52
 msgid "NOTE: The forums directory will only work if your bbPress tables are in the same database as your WordPress tables. If you are not using an existing bbPress install you can ignore this message."
@@ -2970,7 +2970,7 @@ msgstr ""
 
 #: bp-forums/bp-forums-admin.php:101
 msgid "<p>A configuration file could not be created. No problem, but you will need to save the text shown below into a file named <code>bb-config.php</code> in the root directory of your WordPress installation before you can start using the forum functionality.</p>"
-msgstr ""
+msgstr "<p>A configuration file could not be created. No problem, but you will need to save the text shown below into a file named <code>bb-config.php</code> in the root directory of your WordPress installation before you can start using the discussion functionality.</p>"
 
 #: bp-forums/bp-forums-admin.php:110
 msgid "New bbPress Installation"
@@ -2981,6 +2981,8 @@ msgid ""
 "You've decided to set up a new installation of bbPress for forum management in BuddyPress. This is very simple and is usually just a one click\n"
 "\t\t\t\tprocess. When you're ready, hit the link below."
 msgstr ""
+"You've decided to set up a new installation of bbPress for discussion management in BuddyPress. This is very simple and is usually just a one click\n"
+"\t\t\t\tprocess. When you're ready, hit the link below."
 
 #: bp-forums/bp-forums-admin.php:123
 msgid "bbPress files were not found. To install the forums component you must download a copy of bbPress and make sure it is in the folder: \"%s\""
@@ -3072,7 +3074,7 @@ msgstr ""
 #: bp-forums/bp-forums-screens.php:56
 #: bp-forums/bp-forums-screens.php:61
 msgid "Please pick the group forum where you would like to post this topic."
-msgstr ""
+msgstr "Please pick the group discussion where you would like to post this topic."
 
 #: bp-messages/bp-messages-loader.php:24
 msgid "Private Messages"
@@ -3361,7 +3363,7 @@ msgstr ""
 
 #: bp-members/bp-members-buddybar.php:62
 msgid "Blog Authors"
-msgstr ""
+msgstr "Site Authors"
 
 #: bp-members/bp-members-buddybar.php:108
 msgid "Edit %s's Profile"
@@ -3649,7 +3651,7 @@ msgstr ""
 
 #: bp-themes/bp-default/registration/register.php:183
 msgid "Blog Details"
-msgstr ""
+msgstr "Site Details"
 
 #: bp-themes/bp-default/registration/register.php:185
 msgid "Yes, I'd like to create a new site"
@@ -3657,7 +3659,7 @@ msgstr ""
 
 #: bp-themes/bp-default/registration/register.php:189
 msgid "Blog URL"
-msgstr ""
+msgstr "Site URL"
 
 #: bp-themes/bp-default/registration/register.php:198
 msgid "Site Title"
@@ -3790,7 +3792,7 @@ msgstr ""
 
 #: bp-themes/bp-default/sidebar.php:61
 msgid "Forum Topic Tags"
-msgstr ""
+msgstr "Discussion Topic Tags"
 
 #: bp-themes/bp-default/comments.php:3
 msgid "Password Protected"
@@ -4247,13 +4249,13 @@ msgstr ""
 #: bp-themes/bp-default/activity/index.php:104
 #: bp-themes/bp-default/groups/single/activity.php:14
 msgid "Forum Topics"
-msgstr ""
+msgstr "Discussion Topics"
 
 #: bp-themes/bp-default/members/single/activity.php:44
 #: bp-themes/bp-default/activity/index.php:105
 #: bp-themes/bp-default/groups/single/activity.php:15
 msgid "Forum Replies"
-msgstr ""
+msgstr "Discussion Replies"
 
 #: bp-themes/bp-default/members/single/activity.php:50
 #: bp-themes/bp-default/activity/index.php:111
@@ -4424,7 +4426,7 @@ msgstr ""
 
 #: bp-themes/bp-default/forums/index.php:111
 msgid "Post In Group Forum:"
-msgstr ""
+msgstr "Post In Group Discussion:"
 
 #: bp-themes/bp-default/forums/index.php:131
 #: bp-themes/bp-default/groups/single/forum.php:83
@@ -4459,7 +4461,7 @@ msgstr ""
 
 #: bp-themes/bp-default/forums/forums-loop.php:122
 msgid "Sorry, there were no forum topics found."
-msgstr ""
+msgstr "Sorry, there were no discussion topics found."
 
 #: bp-themes/bp-default/forums/single/forum.php:25
 #: bp-themes/bp-default/forums/single/edit.php:16
@@ -4468,7 +4470,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/single/forum/topic.php:16
 #: bp-themes/bp-default/groups/single/forum.php:23
 msgid "Forum Directory"
-msgstr ""
+msgstr "Discussion Directory"
 
 #: bp-themes/bp-default/forums/single/edit.php:25
 #: bp-themes/bp-default/groups/single/forum/edit.php:25
@@ -4599,7 +4601,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/single/admin.php:47
 #: bp-themes/bp-default/groups/create.php:62
 msgid "Enable discussion forum"
-msgstr ""
+msgstr "Enable discussions"
 
 #: bp-themes/bp-default/groups/single/admin.php:56
 #: bp-themes/bp-default/groups/create.php:78
