@@ -326,7 +326,7 @@ class wsBrokenLinkChecker {
 		
         //Make the Settings page link to the link list, and vice versa
         add_screen_meta_link(
-        	'blc-settings-link',
+        	'blc-more-plugins-link',
 			__('More plugins by Janis Elsts', 'broken-link-checker'),
 			'http://w-shadow.com/MoreWpPlugins/',
 			$links_page_hook,
@@ -710,11 +710,13 @@ class wsBrokenLinkChecker {
 		            if( isset($this->conf->options['broken_link_css']) )
 		                echo $this->conf->options['broken_link_css'];
 		        ?></textarea>
-		        <p class="description">
-            	Example : Lorem ipsum <a href="#" class="broken_link" onclick="return false;">broken link</a>,
-				dolor sit amet.
-	        	Click "Save Changes" to update example output.
-				</p>
+		        <p class="description"><?php
+					printf(
+						__('Example : Lorem ipsum <a %s>broken link</a>, dolor sit amet.', 'broken-link-checker'),
+						' href="#" class="broken_link" onclick="return false;"'
+					);
+					echo ' ', __('Click "Save Changes" to update example output.', 'broken-link-checker');
+				?></p>
         	</div>
         	
         	<p style="margin-bottom: 0.5em;">
@@ -739,9 +741,14 @@ class wsBrokenLinkChecker {
 		                echo $this->conf->options['removed_link_css'];
 		        ?></textarea>
 		        
-		        <p class="description">
-            		Example : Lorem ipsum <span class="removed_link">removed link</span>, dolor sit amet.
-            		Click "Save Changes" to update example output.
+		        <p class="description"><?php
+			    printf(
+			        __('Example : Lorem ipsum <span %s>removed link</span>, dolor sit amet.', 'broken-link-checker'),
+			        ' class="removed_link"'
+		        );
+				echo ' ', __('Click "Save Changes" to update example output.', 'broken-link-checker');
+				?>
+
 				</p>
         	</div>
         

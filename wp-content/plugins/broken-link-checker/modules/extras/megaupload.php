@@ -1,4 +1,8 @@
 <?php
+/**
+ * Megaupload.com has been seized by the USA government, rendering this module irrelevant.
+ */
+
 /*
 Plugin Name: MegaUpload API
 Description: Check links to MegaUpload files.
@@ -17,7 +21,7 @@ ModuleCheckerUrlPattern: @^http://[\w\.]*?megaupload\.com/.*?(?:\?|&)d=([0-9A-Za
 
 /**
  * MegaUpload API link checker.
- * 
+ *
  * @package Broken Link Checker
  * @author Janis Elsts
  * @access public
@@ -67,9 +71,19 @@ class blcMegaUploadChecker extends blcChecker {
 			
 			//An unexpected error. Connection problems, IP blocks - it all goes here.
 			$result['broken'] = true;
-			$result['log'] .= "Error : " . $info->get_error_message();
 			if ( $data = $info->get_error_data() ){
-				$result['log'] .= "\n\nError data : " . print_r($data, true);
+				//Check for the "domain seized" message.
+				$code = isset($data['response']['code']) ? $data['response']['code'] : 0;
+				$body = isset($data['body']) ? $data['body'] : '';
+				if ( ($code == 404) && (strpos($body, '<title>NOTICE</title>') !== false) ) {
+					$result['log'] .= "The domain megaupload.com has been seized.";
+					$result['status_code'] = BLC_LINK_STATUS_ERROR;
+					$result['status_text'] = __('Not Found', 'broken-link-checker');
+					$result['http_code'] = 404;
+				} else {
+					$result['log'] .= "Error : " . $info->get_error_message();
+					$result['log'] .= "\n\nError data : " . print_r($data, true);
+				}
 			}
 			
 		} else {
