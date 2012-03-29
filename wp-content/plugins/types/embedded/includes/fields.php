@@ -385,32 +385,44 @@ function wpcf_admin_get_groups_by_template($templates = array('default'),
  * @param type $args 
  */
 function wpcf_fields_type_action($type, $func = '', $args = array()) {
-    $fields_registered = wpcf_admin_fields_get_available_types();
-    if (isset($fields_registered[$type]) && isset($fields_registered[$type]['path'])) {
-        $file = $fields_registered[$type]['path'];
-    } else if (defined('WPCF_INC_ABSPATH')) {
-        $file = WPCF_INC_ABSPATH . '/fields/' . $type . '.php';
-    } else {
-        $file = '';
-    }
-    $file_embedded = WPCF_EMBEDDED_INC_ABSPATH . '/fields/' . $type . '.php';
-    if (file_exists($file) || file_exists($file_embedded)) {
-        if (file_exists($file)) {
-            require_once $file;
-        }
-        if (file_exists($file_embedded)) {
-            require_once $file_embedded;
-        }
-        if (empty($func)) {
-            $func = 'wpcf_fields_' . $type;
+    static $actions = array();
+    $func_in = $func;
+    
+    $md5_args = md5(serialize($args));
+    
+    if (!isset($actions[$type . '-' . $func_in . '-' . $md5_args])) {
+        $fields_registered = wpcf_admin_fields_get_available_types();
+        if (isset($fields_registered[$type]) && isset($fields_registered[$type]['path'])) {
+            $file = $fields_registered[$type]['path'];
+        } else if (defined('WPCF_INC_ABSPATH')) {
+            $file = WPCF_INC_ABSPATH . '/fields/' . $type . '.php';
         } else {
-            $func = 'wpcf_fields_' . $type . '_' . $func;
+            $file = '';
         }
-        if (function_exists($func)) {
-            return call_user_func($func, $args);
+        $file_embedded = WPCF_EMBEDDED_INC_ABSPATH . '/fields/' . $type . '.php';
+        if (file_exists($file) || file_exists($file_embedded)) {
+            if (file_exists($file)) {
+                require_once $file;
+            }
+            if (file_exists($file_embedded)) {
+                require_once $file_embedded;
+            }
+            if (empty($func)) {
+                $func = 'wpcf_fields_' . $type;
+            } else {
+                $func = 'wpcf_fields_' . $type . '_' . $func;
+            }
+            if (function_exists($func)) {
+                $actions[$type . '-' . $func_in . '-' . $md5_args] = call_user_func($func, $args);
+            } else {
+                $actions[$type . '-' . $func_in . '-' . $md5_args] = array();
+            }
+            
+        } else {
+            $actions[$type . '-' . $func_in . '-' . $md5_args] = array();
         }
     }
-    return array();
+    return $actions[$type . '-' . $func_in . '-' . $md5_args];
 }
 
 /**
@@ -422,7 +434,7 @@ function wpcf_fields_type_action($type, $func = '', $args = array()) {
 function wpcf_fields_get_shortcode($field, $add = '') {
     $shortcode = '[';
     $shortcode .= 'types field="' . $field['slug'] . '"' . $add;
-    $shortcode .= ']';
+    $shortcode .= '][/types]';
     $shortcode = apply_filters('wpcf_fields_shortcode', $shortcode, $field);
     $shortcode = apply_filters('wpcf_fields_shortcode_type_' . $field['type'],
             $shortcode, $field);

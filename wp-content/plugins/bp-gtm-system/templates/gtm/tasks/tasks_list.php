@@ -35,7 +35,7 @@ bp_gtm_create_button($gtm_link, 'task');
 
 if (count($option['tasks']) > 0) { ?>
 
-    <table class="item-list zebra forum">
+    <table class="item-list zebra forum task-list">
         <thead>
             <tr>
                 <th id="th-title"><?php _e('Task Title', 'bp_gtm') ?></th>
@@ -60,14 +60,14 @@ if (count($option['tasks']) > 0) { ?>
                             bp_get_create_subtask_link($task->id, $gtm_link);
                             ?>
                         </span>
-                        <?php bp_gtm_view_link($task->id, $task->name, $gtm_link, 'task') ?>
+                        <?php bp_gtm_view_link($task, $gtm_link, 'task') ?>
                         </a>
                     </td>
                     <td class="td-poster">
                         <?php bp_gtm_get_group_project_respossibles($task); ?>
                     </td>
                     <td class="td-group">
-                        <?php bp_gtm_view_link($task->project_id, bp_gtm_get_el_name_by_id($task->project_id, 'project'), $gtm_link, 'project'); ?>
+                        <?php bp_gtm_view_link($project, $gtm_link, 'project'); ?>
                     </td>
                     <td class="td-group">
                         <div class="object-name center"><?php bp_gtm_format_date($task->deadline); ?></div>

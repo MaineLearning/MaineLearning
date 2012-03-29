@@ -242,25 +242,21 @@ class BP_GTM extends BP_Group_Extension {
             ", $name, $description, $bp->groups->current_group->status, $_POST['project_group'], $_POST['project_creator'], implode(' ', $_POST['user_ids']), bp_gtm_covert_date($_POST['project_deadline'])));
         $project_id = $wpdb->insert_id; // id of a newly created project
         // save data to resps table
-        $resps = $_POST['user_ids'];
-        bp_gtm_save_g_resps('0', $project_id, $_POST['project_group'], $resps);
-        $change_roles = array_intersect_key($_POST['user_role'], $resps);
-        foreach ($change_roles as $key => $value) {
-            $resp_id = bp_core_get_userid($key);
-            bp_gtm_change_user_role($resp_id, $value, $_POST['project_group']);
-        }
+
+        bp_gtm_change_user_group_role($_POST['user_ids'], $project_id);
+
+
         // save tags if any
         $this->bp_gtm_insert_term($_POST['project_tag_names'], $_POST['project_tags'], $project_id, 'tag');
 
-
         // save categories if any
-        $this->bp_gtm_insert_term($_POST['project_cat_names'], $_POST['project_cats'], $project_id, 'cat');
-
+        $this->bp_gtm_insert_term($_POST['project_old_cats'], $_POST['project_cats'], $project_id, 'cat');
+//        var_dump($_POST['project_old_cats'], $_POST['project_cats']);die;
 
 
         // display user message
         if ($inserted_project != null) {
-            foreach ($resps as $resp) {
+            foreach ($_POST['user_ids'] as $resp) {
                 $resp_id = bp_core_get_userid($resp);
                 bp_core_add_notification($project_id, $resp_id, 'gtm', 'project_created', $_POST['project_group']);
             }
@@ -298,12 +294,8 @@ class BP_GTM extends BP_Group_Extension {
             $project_resps_old = array();
         }
         $resps = array_keys((array) $project_resps_old);
-        
-        $change_roles = array_intersect_key($_POST['user_role'], array_flip($resps));
-        foreach ($change_roles as $key => $value) {
-            $resp_id = bp_core_get_userid($key);
-            bp_gtm_change_user_role($resp_id, $value, $_POST['project_group']);
-        }
+
+        bp_gtm_change_user_group_role($_POST['user_ids'], $project_id);
         // todo smth with this:
         if (count($resps) > 0) {
             bp_gtm_save_g_resps('0', $project_id, $_POST['project_group'], $resps);
@@ -332,16 +324,15 @@ class BP_GTM extends BP_Group_Extension {
 
         // update cats
         $updated_cat = $wpdb->query($wpdb->prepare("DELETE FROM " . $bp->gtm->table_taxon . " WHERE `project_id` = %d AND `taxon` = 'cat'", $project_id));
-        $this->bp_gtm_insert_term($_POST['project_cat_names'], $_POST['project_cats'], $project_id, 'cat', 0, $_POST['project_old_cats']);
+        $this->bp_gtm_insert_term($_POST['project_old_cats'], $_POST['project_cats'], $project_id, 'cat', 0);
+//var_dump($_POST['project_old_cats'], $_POST['project_cats']);die;
 
-        
         // display user message
         if ($updated_project != null || $updated_cat != null || $updated_tag != null) {
             foreach ($resps as $resp) {
                 $resp_id = bp_core_get_userid($resp);
                 bp_core_add_notification($project_id, $resp_id, 'gtm', 'project_edited', $_POST['project_group']);
             }
-            
         }
         do_action('bp_gtm_save_discussion_post', 'project', $_POST['project_creator'], false, false, $project_id, $bp->groups->current_group->id);
         bp_core_add_message(__('Project data was successfully updated.', 'bp_gtm'));
@@ -402,18 +393,12 @@ class BP_GTM extends BP_Group_Extension {
             ", $name, $description, $status, $_POST['task_parent'], $_POST['task_group'], $_POST['task_creator'], $project_id, implode(' ', $_POST['user_ids']), bp_gtm_covert_date($_POST['task_deadline'])));
         $task_id = $wpdb->insert_id; // id of a newly created project
         // save data to resps table
-        $resps = $_POST['user_ids'];
-        bp_gtm_save_g_resps($task_id, $project_id, $_POST['task_group'], $resps);
 
-        $change_roles = array_intersect_key($_POST['user_role'], $resps);
-        foreach ($change_roles as $key => $value) {
-            $resp_id = bp_core_get_userid($key);
-            bp_gtm_change_user_role($resp_id, $value, $_POST['task_group']);
-        }
+        bp_gtm_change_user_group_role($_POST['user_ids'], $project_id, $task_id);
         // save tags if any
         // get rid of unnecessary chars in tags' list
         $this->bp_gtm_insert_term($_POST['task_tag_names'], $_POST['task_tags'], $project_id, 'tag', $task_id);
-        $this->bp_gtm_insert_term($_POST['task_cat_names'], $_POST['task_cats'], $project_id, 'cat', $task_id);
+        $this->bp_gtm_insert_term($_POST['project_old_cats'], $_POST['project_cats'], $project_id, 'cat', $task_id);
 
         // display user message
         if ($inserted_task != null) {
@@ -463,11 +448,9 @@ class BP_GTM extends BP_Group_Extension {
             $task_resps_old = array();
         }
         $resps = (array) $task_resps_old;
-        $change_roles = array_intersect_key($_POST['user_role'], array_flip($resps));
-        foreach ($change_roles as $key => $value) {
-            $resp_id = bp_core_get_userid($key);
-            bp_gtm_change_user_role($resp_id, $value, $_POST['task_group']);
-        }
+        
+        bp_gtm_change_user_group_role($change_roles, $project_id, $task_id);
+        
         // todo smth with this:
         if (count($resps) > 0) {
             bp_gtm_save_g_resps($task_id, $_POST['task_project'], $_POST['task_group'], $resps);
@@ -488,11 +471,11 @@ class BP_GTM extends BP_Group_Extension {
         // delete old tags
         $updated_tag = $wpdb->query($wpdb->prepare("DELETE FROM " . $bp->gtm->table_taxon . " WHERE `task_id` = %d AND `taxon` = 'tag'", $task_id));
         // get rid of unnecessary chars in existed tags
-        $this->bp_gtm_insert_term($_POST['task_tag_names'], $_POST['task_tags'], $project_id, 'tag', $task_id, $_POST['task_old_tags']);
+        $this->bp_gtm_insert_term($_POST['task_tag_names'], '', $project_id, 'tag', $task_id);
 
         // update cats
         $updated_cat = $wpdb->query($wpdb->prepare("DELETE FROM " . $bp->gtm->table_taxon . " WHERE `task_id` = %d AND `taxon` = 'cat'", $task_id));
-        $this->bp_gtm_insert_term($_POST['task_cat_names'], $_POST['task_cats'], $project_id, 'cat', $task_id, $_POST['task_old_cats']);
+        $this->bp_gtm_insert_term($_POST['task_old_cats'], $_POST['project_cats'], $project_id, 'cat', $task_id);
 
 
         // display user message
@@ -502,7 +485,6 @@ class BP_GTM extends BP_Group_Extension {
                     $resp_id = bp_core_get_userid($resp);
                     bp_core_add_notification($task_id, $resp_id, 'gtm', 'task_edited', $_POST['task_group']);
                 }
-            
         }
         do_action('bp_gtm_save_discussion_post', 'task', $_POST['task_creator'], false, $task_id, false, $bp->groups->current_group->id);
         bp_core_add_message(__('Task data was successfully updated.', 'bp_gtm'));
@@ -545,18 +527,24 @@ class BP_GTM extends BP_Group_Extension {
 
     /**
      * Insert new term (tag or category in database)
-     * @param string $term_manes string with terms adding by ajax autocompliter
-     * @param type $task_tags string comma separated new terms
+     * @param string/array $term_manes string with terms adding by ajax autocompliter
+     * @param string/array $task_tags string comma separated new terms
      * @param int $project_id id of terms project 
      * @param int $group_id  id of terms group 
      * @param string $term_type this is tag or cat
      * @return bool true if insert are success and false if not
      */
-    protected function bp_gtm_insert_term($term_manes, $task_tags, $project_id, $term_type, $task_id = 0, $existing_terms = array()) {
+    protected function bp_gtm_insert_term($term_manes, $task_tags, $project_id = 0, $term_type='tag', $task_id = 0, $existing_terms = array()) {
         global $wpdb, $bp;
+
+        if(!is_array($term_manes) && !is_array($task_tags)){
         $tags = $this->bp_gtm_split_string($term_manes, $task_tags); /// split terms into array of values
         if (!empty($existing_terms)) {
             $tags = array_unique(array_merge($tags, $existing_terms));
+        }} else {
+            if(empty($term_manes)) $term_manes= array();
+            if(empty($task_tags)) $task_tags= array();
+            $tags = array_unique(array_merge($term_manes, $task_tags));
         }
         if (!empty($tags)) {
             foreach ($tags as $tag) {
@@ -615,7 +603,9 @@ function bp_gtm_load_template_filter($found_template, $templates) {
             } else if (file_exists(STYLESHEETPATH . '/gtm/' . $template)) {
                 $filtered_templates[] = STYLESHEETPATH . '/gtm/' . $template;
             } else {
-                $filtered_templates[] = plugin_dir_path(__FILE__) . 'templates/' . $template;
+                if (($position = strpos($template, '/')) !== false)
+                    $template = substr($template, $position + 1);
+                $filtered_templates[] = plugin_dir_path(__FILE__) . 'templates/gtm/' . $template;
             }
         }
         $found_template = $filtered_templates[0];
@@ -738,7 +728,7 @@ function bp_gtm_save_p_settings($data) {
  */
 function bp_gtm_tabs($group = false) {
     global $bp, $groups_template;
-
+    $bp_gtm = get_option('bp_gtm');
     if (!$group)
         $group = ( $groups_template->group ) ? $groups_template->group : $bp->groups->current_group;
 
@@ -764,7 +754,7 @@ function bp_gtm_tabs($group = false) {
         <li<?php if ('involved' == $current_tab) : ?> class="current"<?php endif; ?>><a href="<?php echo $gtm_link ?>/involved"><?php _e('Involved', 'bp_gtm') ?></a></li>
     <?php } ?>
     <?php
-    if (bp_gtm_check_access('files_view')) {
+    if (bp_gtm_check_access('files_view') && $bp_gtm['files'] == 'on') {
 //        unlink(WP_CONTENT_DIR.'/uploads/gtm/files/discuss/28_bbpress.2.0.2.zip')
         ?>
         <li<?php if ('files' == $current_tab) : ?> class="current"<?php endif; ?>><a href="<?php echo $gtm_link ?>/files"><?php _e('Files', 'bp_gtm') ?></a></li>
@@ -842,4 +832,20 @@ function bp_gtm_covert_date($date) {
         $timestamp = strtotime($timestamp);
     };
     return date('Y-m-d', $timestamp);
+}
+
+function bp_gtm_change_user_group_role($resps, $id, $task_id = 0) {
+    global $wpdb, $bp;
+    $group_id = bp_get_current_group_id();
+    bp_gtm_save_g_resps($task_id, $id, $group_id, $resps);
+    foreach ($resps as $value) {
+        $resp_id = bp_core_get_userid($value);
+        $exist = $wpdb->query($wpdb->prepare("
+            SELECT id
+            FROM {$bp->gtm->table_roles_caps}
+            WHERE `group_id` = $group_id AND `user_id` = $resp_id"));
+        if (!$exist) {
+            bp_gtm_change_user_role($resp_id, 3, $_POST['project_group']);
+        }
+    }
 }

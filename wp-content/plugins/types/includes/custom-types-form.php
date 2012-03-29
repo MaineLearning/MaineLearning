@@ -60,12 +60,12 @@ function wpcf_admin_custom_types_form() {
         '#title' => __('Custom post type name plural', 'wpcf') . ' (<strong>' . __('required',
                 'wpcf') . '</strong>)',
         '#description' => '<strong>' . __('Enter in plural!', 'wpcf')
-        . '</strong><br />' . __('Alphanumeric with whitespaces only', 'wpcf')
+//        . '</strong><br />' . __('Alphanumeric with whitespaces only', 'wpcf')
         . '.',
         '#value' => isset($ct['labels']['name']) ? $ct['labels']['name'] : '',
         '#validate' => array(
             'required' => array('value' => 'true'),
-            'alphanumeric' => array('value' => 'true'),
+//            'alphanumeric' => array('value' => 'true'),
         ),
         '#pattern' => $table_row,
         '#inline' => true,
@@ -77,12 +77,12 @@ function wpcf_admin_custom_types_form() {
                 'wpcf') . '</strong>)',
         '#description' => '<strong>' . __('Enter in singular!', 'wpcf')
         . '</strong><br />'
-        . __('Alphanumeric with whitespaces only', 'wpcf')
+//        . __('Alphanumeric with whitespaces only', 'wpcf')
         . '.',
         '#value' => isset($ct['labels']['singular_name']) ? $ct['labels']['singular_name'] : '',
         '#validate' => array(
             'required' => array('value' => 'true'),
-            'alphanumeric' => array('value' => 'true'),
+//            'alphanumeric' => array('value' => 'true'),
         ),
         '#pattern' => $table_row,
         '#inline' => true,
@@ -90,14 +90,18 @@ function wpcf_admin_custom_types_form() {
     $form['slug'] = array(
         '#type' => 'textfield',
         '#name' => 'ct[slug]',
-        '#title' => __('Slug', 'wpcf'),
-        '#description' => '<strong>' . __('Enter in singular!', 'wpcf')
-        . '</strong><br />' . __('Machine readable name.', 'wpcf')
-        . '<br />' . __('If not provided - will be created from singular name.',
-                'wpcf') . '<br />',
+        '#title' => __('Slug', 'wpcf') . ' (<strong>' . __('required', 'wpcf') . '</strong>)',
+//        '#description' => '<strong>' . __('Enter in singular!', 'wpcf')
+//        . '</strong><br />' . __('Machine readable name.', 'wpcf')
+//        . '<br />' . __('If not provided - will be created from singular name.',
+//                'wpcf') . '<br />',
         '#value' => isset($ct['slug']) ? $ct['slug'] : '',
         '#pattern' => $table_row,
         '#inline' => true,
+        '#validate' => array(
+            'required' => array('value' => 'true'),
+            'nospecialchars' => array('value' => 'true'),
+        ),
     );
     $form['description'] = array(
         '#type' => 'textarea',
@@ -513,9 +517,13 @@ function wpcf_admin_custom_types_form() {
         '#markup' => '</td></tr></tbody></table>',
     );
 
+    $form = $form + apply_filters('wpcf_post_type_form', array(), $ct);
+
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Save Custom Post Type', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Custom Post Type', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
 
     return $form;
@@ -612,12 +620,43 @@ function wpcf_admin_custom_types_form_submit($form) {
     $custom_types[$post_type] = $data;
     update_option('wpcf-custom-types', $custom_types);
 
+    // WPML register strings
+    wpcf_custom_types_register_translation($post_type, $data);
+
     wpcf_admin_message_store(__('Custom post type saved', 'wpcf'));
 
     // Flush rewrite rules
     flush_rewrite_rules();
 
+    do_action('wpcf_custom_types_save', $data);
+
     // Redirect
     wp_redirect(admin_url('admin.php?page=wpcf-edit-type&wpcf-post-type=' . $post_type . '&wpcf-rewrite=1'));
     die();
+}
+
+/**
+ * Registers translation data.
+ * 
+ * @param type $post_type
+ * @param type $data 
+ */
+function wpcf_custom_types_register_translation($post_type, $data) {
+    if (!function_exists('icl_register_string')) {
+        return $data;
+    }
+    $default = wpcf_custom_types_default();
+    if (isset($data['description'])) {
+        icl_register_string('Types-CPT', $post_type . ' description',
+                $data['description']);
+    }
+    foreach ($data['labels'] as $label => $string) {
+        if ($label == 'name' || $label == 'singular_name') {
+            icl_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+            continue;
+        }
+        if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
+            icl_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+        }
+    }
 }

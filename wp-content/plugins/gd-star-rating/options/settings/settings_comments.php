@@ -41,7 +41,7 @@ $default_preview_class.= $gdsr_options["wait_class_comment"];
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating header", "gd-star-rating"); ?>:</td>
-                <td><input type="text" name="gdsr_cmm_header_text" id="gdsr_cmm_header_text" value="<?php echo wp_specialchars($gdsr_options["cmm_header_text"]); ?>" style="width: 170px" /></td>
+                <td><input type="text" name="gdsr_cmm_header_text" id="gdsr_cmm_header_text" value="<?php echo esc_attr($gdsr_options["cmm_header_text"]); ?>" style="width: 170px" /></td>
             </tr>
         </table>
         <div class="gdsr-table-split"></div>
@@ -71,7 +71,7 @@ $default_preview_class.= $gdsr_options["wait_class_comment"];
                 <td width="200" valign="top"><?php GDSRHelper::render_insert_position("gdsr_auto_display_comment_position", $gdsr_options["auto_display_comment_position"]); ?></td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating block CSS class", "gd-star-rating"); ?>:</td>
-                <td><input type="text" name="gdsr_cmm_classblock" id="gdsr_cmm_classblock" value="<?php echo wp_specialchars($gdsr_options["cmm_class_block"]); ?>" style="width: 170px" /></td>
+                <td><input type="text" name="gdsr_cmm_classblock" id="gdsr_cmm_classblock" value="<?php echo esc_attr($gdsr_options["cmm_class_block"]); ?>" style="width: 170px" /></td>
             </tr>
         </table>
     </td>
@@ -98,23 +98,23 @@ $default_preview_class.= $gdsr_options["wait_class_comment"];
             <tr>
                 <td width="150"><?php _e("Rating block CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_cmm_classblock" value="<?php echo wp_specialchars($gdsr_options["cmm_class_block"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_cmm_classblock" value="<?php echo esc_attr($gdsr_options["cmm_class_block"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating text CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_cmm_classtext" value="<?php echo wp_specialchars($gdsr_options["cmm_class_text"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_cmm_classtext" value="<?php echo esc_attr($gdsr_options["cmm_class_text"]); ?>" style="width: 170px" />
                 </td>
             </tr>
             <tr>
                 <td width="150"><?php _e("Rating header CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_cmm_classheader" value="<?php echo wp_specialchars($gdsr_options["cmm_class_header"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_cmm_classheader" value="<?php echo esc_attr($gdsr_options["cmm_class_header"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating stars CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_cmm_classstars" value="<?php echo wp_specialchars($gdsr_options["cmm_class_stars"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_cmm_classstars" value="<?php echo esc_attr($gdsr_options["cmm_class_stars"]); ?>" style="width: 170px" />
                 </td>
             </tr>
         </table>

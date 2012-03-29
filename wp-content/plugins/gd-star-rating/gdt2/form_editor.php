@@ -65,8 +65,8 @@ $template = $tpls->get_list($section);
 $lines = count($template->parts) - 1;
 foreach ($template->parts as $p) {
     echo '<p class="tpl-edit-name">'.$p->name.":</p>";
-    if ($p->size == "single") echo '<input type="text" name="tpl_element['.$p->code.']" value="'.wp_specialchars($elements[$p->code]).'" style="width: 500px" /><br />';
-    else echo '<textarea rows="6" style="width: 500px" name="tpl_element['.$p->code.']">'.wp_specialchars($elements[$p->code]).'</textarea><br />';
+    if ($p->size == "single") echo '<input type="text" name="tpl_element['.$p->code.']" value="'.esc_attr($elements[$p->code]).'" style="width: 500px" /><br />';
+    else echo '<textarea rows="6" style="width: 500px" name="tpl_element['.$p->code.']">'.esc_html($elements[$p->code]).'</textarea><br />';
     if ($p->description != "") echo '<strong>'.__("Description", "gd-star-rating").':</strong><br />';
     echo '<strong>'.__("Allowed elements", "gd-star-rating").':</strong> ';
     if (is_array($p->elements)) {

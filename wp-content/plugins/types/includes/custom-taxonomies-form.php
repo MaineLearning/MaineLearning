@@ -61,12 +61,12 @@ function wpcf_admin_custom_taxonomies_form() {
         '#title' => __('Custom taxonomy name plural', 'wpcf') . ' (<strong>' . __('required',
                 'wpcf') . '</strong>)',
         '#description' => '<strong>' . __('Enter in plural!', 'wpcf')
-        . '</strong><br />' . __('Alphanumeric with whitespaces only', 'wpcf')
+//        . '</strong><br />' . __('Alphanumeric with whitespaces only', 'wpcf')
         . '.',
         '#value' => isset($ct['labels']['name']) ? $ct['labels']['name'] : '',
         '#validate' => array(
             'required' => array('value' => true),
-            'alphanumeric' => array('value' => true),
+//            'alphanumeric' => array('value' => true),
         ),
         '#pattern' => $table_row,
         '#inline' => true,
@@ -78,12 +78,12 @@ function wpcf_admin_custom_taxonomies_form() {
                 'wpcf') . '</strong>)',
         '#description' => '<strong>' . __('Enter in singular!', 'wpcf')
         . '</strong><br />'
-        . __('Alphanumeric with whitespaces only', 'wpcf')
+//        . __('Alphanumeric with whitespaces only', 'wpcf')
         . '.',
         '#value' => isset($ct['labels']['singular_name']) ? $ct['labels']['singular_name'] : '',
         '#validate' => array(
             'required' => array('value' => true),
-            'alphanumeric' => array('value' => true),
+//            'alphanumeric' => array('value' => true),
         ),
         '#pattern' => $table_row,
         '#inline' => true,
@@ -91,7 +91,7 @@ function wpcf_admin_custom_taxonomies_form() {
     $form['slug'] = array(
         '#type' => 'textfield',
         '#name' => 'ct[slug]',
-        '#title' => __('Slug', 'wpcf'),
+        '#title' => __('Slug', 'wpcf') . ' (<strong>' . __('required', 'wpcf') . '</strong>)',
         '#description' => '<strong>' . __('Enter in singular!', 'wpcf')
         . '</strong><br />' . __('Machine readable name.', 'wpcf')
         . '<br />' . __('If not provided - will be created from singular name.',
@@ -99,6 +99,10 @@ function wpcf_admin_custom_taxonomies_form() {
         '#value' => isset($ct['slug']) ? $ct['slug'] : '',
         '#pattern' => $table_row,
         '#inline' => true,
+        '#validate' => array(
+            'required' => array('value' => true),
+            'nospecialchars' => array('value' => true),
+        ),
     );
     $form['description'] = array(
         '#type' => 'textarea',
@@ -229,7 +233,7 @@ function wpcf_admin_custom_taxonomies_form() {
     $form['make-hierarchical'] = array(
         '#type' => 'radios',
         '#name' => 'ct[hierarchical]',
-        '#default_value' => (empty($ct['hierarchical']) || $ct['hierarchical'] == 'flat')  ? 'flat' : 'hierarchical',
+        '#default_value' => (empty($ct['hierarchical']) || $ct['hierarchical'] == 'flat') ? 'flat' : 'hierarchical',
 //        '#title' => __('hierarchical', 'wpcf'),
 //        '#description' => __('Is this taxonomy hierarchical (have descendants) like categories or not hierarchical like tags.',
 //                'wpcf') . '<br />' . __('Default: false.', 'wpcf'),
@@ -346,8 +350,10 @@ function wpcf_admin_custom_taxonomies_form() {
         '#markup' => '</td></tr></tbody></table>',
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Save Taxonomy', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Save Taxonomy', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
 
     return $form;
@@ -446,7 +452,7 @@ function wpcf_admin_custom_taxonomies_form_submit($form) {
     if (isset($custom_taxonomies[$tax]['disabled'])) {
         $data['disabled'] = $custom_taxonomies[$tax]['disabled'];
     }
-    
+
     // Sync with post types
     if (!empty($data['supports'])) {
         $post_types = get_option('wpcf-custom-types', array());
@@ -463,12 +469,41 @@ function wpcf_admin_custom_taxonomies_form_submit($form) {
     $custom_taxonomies[$tax] = $data;
     update_option('wpcf-custom-taxonomies', $custom_taxonomies);
 
+    // WPML register strings
+    wpcf_custom_taxonimies_register_translation($tax, $data);
+
     wpcf_admin_message_store(__('Custom taxonomy saved', 'wpcf'));
-    
+
     // Flush rewrite rules
     flush_rewrite_rules();
 
     // Redirect
     wp_redirect(admin_url('admin.php?page=wpcf-edit-tax&wpcf-tax=' . $tax . '&wpcf-rewrite=1'));
     die();
+}
+
+/**
+ * Registers translation data.
+ * 
+ * @param type $post_type
+ * @param type $data 
+ */
+function wpcf_custom_taxonimies_register_translation($taxonomy, $data) {
+    if (!function_exists('icl_register_string')) {
+        return $data;
+    }
+    $default = wpcf_custom_taxonomies_default();
+    if (isset($data['description'])) {
+        icl_register_string('Types-TAX', $taxonomy . ' description',
+                $data['description']);
+    }
+    foreach ($data['labels'] as $label => $string) {
+        if ($label == 'name' || $label == 'singular_name') {
+            icl_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+            continue;
+        }
+        if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
+            icl_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+        }
+    }
 }

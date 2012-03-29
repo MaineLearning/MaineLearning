@@ -4,13 +4,14 @@ $files = bp_gtm_get_all_files();
 $gtm_link = bp_get_group_permalink() . $bp->gtm->slug;
 ?>
 
-<h4><?php _e('List Of Files'); ?></h4>
+<h4><?php _e('List Of Files', 'bp_gtm'); ?></h4>
 <?php 
 if(!empty($files)){ ?>
     <table class="forum files">
         <thead>
             <tr>
                 <th id="th-title"><?php _e('File Name', 'bp_gtm') ?></th>
+                <th><?php _e('Uploaded by', 'bp_gtm') ?></th>
                 <th><?php _e('Type', 'bp_gtm')?></th>
                 <th><?php _e('Date Uploaded',  'bp_gtm')?></th>
                 <th id="th-freshness"><?php _e('Actions', 'bp_gtm') ?></th>
@@ -23,6 +24,9 @@ if(!empty($files)){ ?>
                 <tr class="" id="<?php echo $file->id; ?>">
                     <td class="td-title">
                         <?php echo bp_gtm_file_link($file->path) ?>
+                    </td>
+                    <td>
+                        <?php echo bp_core_get_userlink($file->owner_id);?>
                     </td>
                     <td>
                         <?php bp_gtm_get_upload_target($file, $gtm_link );?>

@@ -1,4 +1,13 @@
-jQuery(document).ready( function() {	
+jQuery(document).ready( function() {
+	jQuery('.bpe-sorter select').hover(
+		function () {
+			jQuery('.user-dropdowns').addClass('keep-open');
+  		},
+		function () {
+			jQuery('.user-dropdowns').removeClass('keep-open');
+		}
+	);
+	
 	jQuery('.sorter').change(function() {
 		window.location.href = jQuery(this).val();
 	});

@@ -13,6 +13,7 @@ class gdsrShared {
         $init_votes = $settings["votes"];
         $set = gd_get_multi_set($multi_id);
         if (is_null($set)) $set = gd_get_multi_set();
+
         $multi_id = !is_null($set) ? $set->multi_id : 0;
         if ($multi_id > 0 && $post_id > 0) {
             $vote_id = GDSRDBMulti::get_vote($post_id, $multi_id, count($set->object));

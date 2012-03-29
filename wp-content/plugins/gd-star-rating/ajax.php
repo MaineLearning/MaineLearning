@@ -13,6 +13,8 @@ global $gdsr;
 require_once(ABSPATH.WPINC."/pluggable.php");
 check_ajax_referer('gdsr_ajax_r8');
 
+do_action('gdsr_ajax_start');
+
 $vote_type = $_GET["vote_type"];
 
 $vote_id = isset($_GET["vote_id"]) ? intval($_GET["vote_id"]) : 0;
@@ -24,6 +26,7 @@ if ($vote_type == "cache") {
     $result = "xss_error";
     if (isset($_GET["vote_domain"]) && isset( $_GET["votes"])) {
         $votes = explode(":", $_GET["votes"]);
+        $votes = apply_filters('gdsr_votes_cache', $votes, $_GET["vote_domain"]);
         switch ($_GET["vote_domain"]) {
             case 'a':
                 $result = $gdsr->cached_posts($votes);
@@ -38,6 +41,7 @@ if ($vote_type == "cache") {
 } else {
     $result = $vote_type."_error";
     if ($vote_type == "a" || $vote_type == "c") $vote_value = intval($vote_value);
+    do_action('gdsr_vote', $vote_value, $vote_id, $vote_tpl, $vote_size);
     switch ($vote_type) {
         case 'ra':
             $result = $gdsr->v->vote_thumbs_article($vote_value, $vote_id, $vote_tpl, $vote_size);
@@ -65,6 +69,7 @@ if ($vote_type == "cache") {
 
 if (isset($_GET["callback"])) {
     $callback = $_GET["callback"];
+    $result = apply_filters('gdsr_ajax_send', $result, $callback);
 
     if (substr($callback, 0, 5) == "jsonp" && is_numeric(substr($callback, 5))) {
         echo $callback.'('.$result.');';
@@ -74,6 +79,7 @@ if (isset($_GET["callback"])) {
         echo $result;
     }
 } else {
+    $result = apply_filters('gdsr_ajax_send', $result, null);
     echo $result;
 }
 

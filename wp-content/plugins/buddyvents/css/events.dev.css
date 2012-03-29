@@ -585,10 +585,10 @@ div.item-list-tabs ul li.options-dd .user-dropdowns{
     -webkit-border-radius: 3px 0px 3px 3px;  
     border-radius: 3px 0px 3px 3px;  
 }
-div.item-list-tabs ul li.options-dd:hover .user-dropdowns {  
-	left:auto;  
-	right:-1px;
- 	top:auto;  
+div.item-list-tabs ul li.options-dd:hover .user-dropdowns, .keep-open {
+	left:auto !important;
+	right:-1px !important;
+ 	top:auto !important;
 }
 li.bpe-sorter {
 	margin-left:5px !important;

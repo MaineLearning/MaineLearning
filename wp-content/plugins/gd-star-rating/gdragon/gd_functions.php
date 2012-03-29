@@ -36,7 +36,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $url website url
          * @return string url to update check
          */
-        function get_update_url($options, $url = "") {
+        static function get_update_url($options, $url = "") {
             global $wp_version;
             $url = sprintf("http://info.dev4press.com/update/index.php?ver=%s&pdt=%s", 
                 $options["version"], urlencode($options["product_id"]));
@@ -51,7 +51,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          *
          * @return array all functions calls leading to the place of call to this one
          */
-        function get_caller_backtrace() {
+        static function get_caller_backtrace() {
             if (!is_callable('debug_backtrace')) return array();
             $bt = debug_backtrace();
             $caller = array();
@@ -74,7 +74,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param int $words_count words to trim to
          * @return string trimmed text
          */
-        function trim_to_words($text, $words_count = 10) {
+        static function trim_to_words($text, $words_count = 10) {
             if ($words_count > 0) {
                 $words = explode(' ', $text, $words_count + 1);
                 if (count($words) > $words_count) {
@@ -92,7 +92,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param int $len max number of zeroes
          * @return string prefilled text
          */
-        function prefill_zeros($text, $len) {
+        static function prefill_zeros($text, $len) {
             $count = strlen($text);
             $zeros = "";
             for ($i = 0; $i < $len - $count; $i++) $zeros.= "0";
@@ -106,7 +106,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param int $chunk lenght of each element
          * @return array split string
          */
-        function split_by_length($string, $chunk = 1) {
+        static function split_by_length($string, $chunk = 1) {
             $result = array();
             $strlnght = strlen($string);
             $x = 0;
@@ -124,7 +124,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $text text to search
          * @return string image url
          */
-        function get_image_from_text($text) {
+        static function get_image_from_text($text) {
             $imageurl = "";
             preg_match('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i', $text, $matches);
             $imageurl = $matches[1];
@@ -137,7 +137,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $path folder path
          * @return int number of files in the folder
          */
-        function get_folder_files_count($path) {
+        static function get_folder_files_count($path) {
             if (!file_exists($path))
                 return 0;
             if (is_file($path))
@@ -155,7 +155,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $path folder path
          * @return int folder size
          */
-        function get_folder_size($path) {
+        static function get_folder_size($path) {
             if (!file_exists($path))
                 return 0;
             if (is_file($path))
@@ -173,7 +173,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $path path of the folder to scan
          * @return array list of files and folders in the folder
          */
-        function scan_dir($path) {
+        static function scan_dir($path) {
             if (function_exists("scandir")) {
                 return scandir($path);
             } else {
@@ -193,7 +193,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $path path to file or folder
          * @return string file permissions
          */
-        function file_permission($path) {
+        static function file_permission($path) {
             return substr(sprintf('%o', fileperms($path)), -4);
         }
 
@@ -203,7 +203,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $path folder path
          * @return array founded folders in array
          */
-        function get_folders($path) {
+        static function get_folders($path) {
             $folders = gdFunctionsGDSR::scan_dir($path);
             $import = array();
             foreach ($folders as $folder) {
@@ -222,7 +222,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param array $new new settings
          * @return array upgraded array
          */
-        function upgrade_settings($old, $new) {
+        static function upgrade_settings($old, $new) {
             foreach ($new as $key => $value) {
                 if (!isset($old[$key])) $old[$key] = $value;
             }
@@ -246,7 +246,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param array $attributes input parameters
          * @return array result
          */
-        function prefill_attributes($defaults, $attributes) {
+        static function prefill_attributes($defaults, $attributes) {
             $attributes = (array)$attributes;
             $result = array();
             foreach($defaults as $name => $default) {
@@ -262,7 +262,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param int $size size in bytes
          * @return string formated string
          */
-        function size_format($size) {
+        static function size_format($size) {
             if (strlen($size) <= 9 && strlen($size) >= 7) {
                 $size = number_format($size / 1048576,1);
                 return "$size MB";
@@ -281,7 +281,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $size input string with k/m/g/t ending
          * @return int resulting size
          */
-        function recalculate_size($size) {
+        static function recalculate_size($size) {
             switch (strtolower(substr($size, -1))) {
                 case "k":
                     return $size * 1024;
@@ -307,7 +307,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $sign what sign to add before page part
          * @param bool $div draw div around the pager
          */
-        function loop_pager($query = "pg", $sign = "?", $div = true) {
+        static function loop_pager($query = "pg", $sign = "?", $div = true) {
             global $wp_query;
             $numposts = $wp_query->found_posts;
             $max_page = $wp_query->max_num_pages;
@@ -331,7 +331,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $sign what sign to add before page part
          * @return string html for pager
          */
-        function draw_pager($total_pages, $current_page, $url, $query = "page", $sign = "&") {
+        static function draw_pager($total_pages, $current_page, $url, $query = "page", $sign = "&") {
             $pages = array();
             $break_first = -1;
             $break_last = -1;
@@ -384,14 +384,14 @@ if (!class_exists('gdFunctionsGDSR')) {
         }
 
         /**
-         * Internal function used for adding sorting element to a-href.
+         * Internal static function used for adding sorting element to a-href.
          *
          * @param string $column column name
          * @param string $sort_order sort order asc/desc
          * @param string $sort_column column for sorting
          * @return array array with sort elements to add to a-href tag
          */
-        function column_sort_vars($column, $sort_order, $sort_column) {
+        static function column_sort_vars($column, $sort_order, $sort_column) {
             $col["url"] = '&amp;sc='.$column;
             $col["cls"] = '';
             if ($sort_column == $column) {
@@ -412,7 +412,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          *
          * @return bool
          */
-        function php_in_safe_mode() {
+        static function php_in_safe_mode() {
             return (@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1) ? TRUE : FALSE;
         }
 
@@ -422,7 +422,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param bool $full return full version string or only main version number
          * @return string mySQL version
          */
-        function mysql_version($full = false) {
+        static function mysql_version($full = false) {
             if ($full)
                 return mysql_get_server_info();
             else
@@ -434,7 +434,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          *
          * @return bool mySQL older than 4.1 returns true
          */
-        function mysql_pre_4_1() {
+        static function mysql_pre_4_1() {
             $mysql = str_replace(".", "", substr(mysql_get_server_info(), 0, 3));
             return $mysql < 41;
         }
@@ -445,7 +445,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param bool $full return full version string or only main version number
          * @return string PHP version
          */
-        function php_version($full = false) {
+        static function php_version($full = false) {
             if ($full)
                 return phpversion();
             else
@@ -458,7 +458,7 @@ if (!class_exists('gdFunctionsGDSR')) {
          * @param string $input Input string
          * @return string Result
          */
-        function add_slashes($input) {
+        static function add_slashes($input) {
             if (get_magic_quotes_gpc()) return $input;
             else return addslashes($input);
         }

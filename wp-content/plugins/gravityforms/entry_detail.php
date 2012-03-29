@@ -443,13 +443,16 @@ class GFEntryDetail{
                 <div id="post-body" class="has-sidebar">
                     <div id="post-body-content" class="has-sidebar-content">
                         <?php
-                        if($mode == "view")
+                        if($mode == "view"){
                             self::lead_detail_grid($form, $lead, true);
-                        else
+                        }
+                        else{
                             self::lead_detail_edit($form, $lead);
-                        ?>
+                        }
 
-                        <?php if(GFCommon::current_user_can_any("gravityforms_view_entry_notes")) { ?>
+                        do_action("gform_entry_detail", $form, $lead);
+
+                        if(GFCommon::current_user_can_any("gravityforms_view_entry_notes")) { ?>
                             <div id="namediv" class="stuffbox">
                                 <h3>
                                     <label for="name"><?php _e("Notes", "gravityforms"); ?></label>

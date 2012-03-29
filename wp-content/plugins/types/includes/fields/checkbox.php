@@ -28,7 +28,8 @@
  * 
  * @return type 
  */
-function wpcf_fields_checkbox_insert_form() {
+function wpcf_fields_checkbox_insert_form($form_data) {
+    $form = array();
     $form['name'] = array(
         '#type' => 'textfield',
         '#title' => __('Name of custom field', 'wpcf'),
@@ -55,6 +56,7 @@ function wpcf_fields_checkbox_insert_form() {
         '#type' => 'checkbox',
         '#title' => __('Set checked by default (on new post)?', 'wpcf'),
         '#name' => 'checked',
+        '#default_value' => !empty($form_data['data']['checked']) ? 1 : 0,
     );
     $form['display'] = array(
         '#type' => 'radios',

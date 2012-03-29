@@ -45,6 +45,11 @@ function wpcf_admin_menu_hook() {
             'wpcf_admin_menu_custom_fields_control');
     add_action('load-' . $hook, 'wpcf_admin_menu_custom_fields_control_hook');
     wpcf_admin_plugin_help($hook, 'wpcf-custom-fields-control');
+    // Settings
+    $hook = add_submenu_page('wpcf', __('Settings', 'wpcf'),
+            __('Settings', 'wpcf'), 'manage_options', 'wpcf-custom-settings',
+            'wpcf_admin_menu_settings');
+    add_action('load-' . $hook, 'wpcf_admin_menu_settings_hook');
 
     if (isset($_GET['page'])) {
         switch ($_GET['page']) {
@@ -84,8 +89,7 @@ function wpcf_admin_menu_hook() {
     // @todo Check for network active may be needed
     if (class_exists('Acf') || defined('CPT_VERSION')) {
         $hook = add_submenu_page('wpcf', __('Migration', 'wpcf'),
-                __('Migration', 'wpcf'), 'manage_options',
-                'wpcf-migration',
+                __('Migration', 'wpcf'), 'manage_options', 'wpcf-migration',
                 'wpcf_admin_menu_migration');
         add_action('load-' . $hook, 'wpcf_admin_menu_migration_hook');
         wpcf_admin_plugin_help($hook, 'wpcf-migration');
@@ -101,6 +105,7 @@ function wpcf_admin_menu_summary_hook() {
             WPCF_VERSION);
     wp_enqueue_style('wpcf-fields-edit', WPCF_RES_RELPATH . '/css/basic.css',
             array(), WPCF_VERSION);
+    wpcf_admin_load_collapsible();
 }
 
 /**
@@ -110,36 +115,11 @@ function wpcf_admin_menu_summary() {
     echo wpcf_add_admin_header(__('Custom Fields', 'wpcf'));
     require_once WPCF_INC_ABSPATH . '/fields.php';
     require_once WPCF_INC_ABSPATH . '/fields-list.php';
-    wpcf_admin_fields_list();
     $to_display = wpcf_admin_fields_get_fields();
     if (!empty($to_display)) {
-        $promotional_text = '<div class="message updated" style="padding: 5px 20px;"><h3>' . __('Want to display custom content easily?',
-                        'wpcf') . '</h3>';
-        $promotional_text .= '<p style="font-size: 110%;">' . __('<a href="http://wp-types.com">Views</a> plugin let\'s you create dynamic templates for single pages and complex content lists. It queries content from the database, filters it and displays in any way you choose.',
-                        'wpcf') . '</p>';
-        if (defined('WPV_VERSION')) { // Views active
-            $promotional_text .= '<ul style="list-style-type:disc; list-style-position: inside; font-size: 110%;"><li><a href="' . admin_url('edit.php?post_type=view-template') . '">' . __('Create <strong>View Templates</strong> for single pages',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="' . admin_url('edit.php?post_type=view') . '">' . __('Create <strong>Views</strong> for content lists',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="http://wp-types.com">' . __('Find <strong>documentation</strong> and <strong>help</strong>',
-                            'wpcf') . '</a></li></ul>';
-        } else {
-            $promotional_text .= '<p style="font-size: 110%;">' . __('Learn more:',
-                            'wpcf') . '</p>';
-            $promotional_text .= '<ul style="list-style-type:disc; list-style-position: inside; font-size: 110%;"><li><a href="http://wp-types.com/documentation/user-guides/view-templates/">' . __('Creating dynamic templates',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="http://wp-types.com/documentation/user-guides/views/">' . __('Query content and display it',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '</ul><p style="font-size: 110%;">' . __('Get Views:',
-                            'wpcf') . '</p><ul>';
-            $promotional_text .= '<li style="font-size: 110%;"><a href="http://wp-types.com/buy/">' . __('Buy and download Views',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '</ul>';
-        }
-        $promotional_text .= '</div>';
-        echo '<br />' . $promotional_text;
+        add_action('wpcf_groups_list_table_after', 'wpcf_admin_promotional_text');
     }
+    wpcf_admin_fields_list();
     echo wpcf_add_admin_footer();
 }
 
@@ -222,6 +202,7 @@ function wpcf_admin_menu_summary_ctt_hook() {
             WPCF_VERSION);
     wp_enqueue_style('wpcf-ctt', WPCF_RES_RELPATH . '/css/basic.css', array(),
             WPCF_VERSION);
+    wpcf_admin_load_collapsible();
     require_once WPCF_INC_ABSPATH . '/custom-types.php';
     require_once WPCF_INC_ABSPATH . '/custom-taxonomies.php';
     require_once WPCF_INC_ABSPATH . '/custom-types-taxonomies-list.php';
@@ -232,37 +213,13 @@ function wpcf_admin_menu_summary_ctt_hook() {
  */
 function wpcf_admin_menu_summary_ctt() {
     echo wpcf_add_admin_header(__('Custom Post Types and Taxonomies', 'wpcf'));
-    wpcf_admin_ctt_list();
     $to_display_posts = get_option('wpcf-custom-types', array());
     $to_display_tax = get_option('wpcf-custom-taxonomies', array());
     if (!empty($to_display_posts) || !empty($to_display_tax)) {
-        $promotional_text = '<div class="message updated" style="padding: 5px 20px;"><h3>' . __('Want to display custom content easily?',
-                        'wpcf') . '</h3>';
-        $promotional_text .= '<p style="font-size: 110%;">' . __('<a href="http://wp-types.com">Views</a> plugin let\'s you create dynamic templates for single pages and complex content lists. It queries content from the database, filters it and displays in any way you choose.',
-                        'wpcf') . '</p>';
-        if (defined('WPV_VERSION')) { // Views active
-            $promotional_text .= '<ul style="list-style-type:disc; list-style-position: inside; font-size: 110%;"><li><a href="' . admin_url('edit.php?post_type=view-template') . '">' . __('Create <strong>View Templates</strong> for single pages',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="' . admin_url('edit.php?post_type=view') . '">' . __('Create <strong>Views</strong> for content lists',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="http://wp-types.com">' . __('Find <strong>documentation</strong> and <strong>help</strong>',
-                            'wpcf') . '</a></li></ul>';
-        } else {
-            $promotional_text .= '<p style="font-size: 110%;">' . __('Learn more:',
-                            'wpcf') . '</p>';
-            $promotional_text .= '<ul style="list-style-type:disc; list-style-position: inside; font-size: 110%;"><li><a href="http://wp-types.com/documentation/user-guides/view-templates/">' . __('Creating dynamic templates',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '<li><a href="http://wp-types.com/documentation/user-guides/views/">' . __('Query content and display it',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '</ul><p style="font-size: 110%;">' . __('Get Views:',
-                            'wpcf') . '</p><ul>';
-            $promotional_text .= '<li style="font-size: 110%;"><a href="http://wp-types.com/buy/">' . __('Buy and download Views',
-                            'wpcf') . '</a></li>';
-            $promotional_text .= '</ul>';
-        }
-        $promotional_text .= '</div>';
-        echo '<br />' . $promotional_text;
+        add_action('wpcf_types_tax_list_table_after',
+                'wpcf_admin_promotional_text');
     }
+    wpcf_admin_ctt_list();
     echo wpcf_add_admin_footer();
 }
 
@@ -270,6 +227,9 @@ function wpcf_admin_menu_summary_ctt() {
  * Menu page hook.
  */
 function wpcf_admin_menu_edit_type_hook() {
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
+    require_once WPCF_INC_ABSPATH . '/custom-types-form.php';
+    require_once WPCF_INC_ABSPATH . '/post-relationship.php';
     wp_enqueue_script('wpcf-fields-edit', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
@@ -284,8 +244,7 @@ function wpcf_admin_menu_edit_type_hook() {
             . 'jquery-form-validation/additional-methods.min.js',
             array('jquery'), WPCF_VERSION);
     add_action('admin_footer', 'wpcf_admin_types_form_js_validation');
-    require_once WPCF_INC_ABSPATH . '/custom-types.php';
-    require_once WPCF_INC_ABSPATH . '/custom-types-form.php';
+    wpcf_post_relationship_init();
     $form = wpcf_admin_custom_types_form();
     wpcf_form('wpcf_form_types', $form);
 }
@@ -326,7 +285,7 @@ function wpcf_admin_menu_edit_tax_hook() {
             . 'jquery-form-validation/additional-methods.min.js',
             array('jquery'), WPCF_VERSION);
     add_action('admin_footer', 'wpcf_admin_tax_form_js_validation');
-    require_once WPCF_INC_ABSPATH . '/custom-taxonomies.php';
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-taxonomies.php';
     require_once WPCF_INC_ABSPATH . '/custom-taxonomies-form.php';
     $form = wpcf_admin_custom_taxonomies_form();
     wpcf_form('wpcf_form_tax', $form);
@@ -428,8 +387,8 @@ function wpcf_admin_menu_custom_fields_control() {
  * Menu page hook.
  */
 function wpcf_admin_menu_migration_hook() {
-    wp_enqueue_style('wpcf-migration',
-            WPCF_RES_RELPATH . '/css/basic.css', array(), WPCF_VERSION);
+    wp_enqueue_style('wpcf-migration', WPCF_RES_RELPATH . '/css/basic.css',
+            array(), WPCF_VERSION);
     wp_enqueue_script('wpcf-migration', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
@@ -449,6 +408,30 @@ function wpcf_admin_menu_migration() {
     echo '<br /><form method="post" action="" id="wpcf-migration-form" class="wpcf-migration-form '
     . 'wpcf-form-validate" enctype="multipart/form-data">';
     $form = wpcf_form('wpcf_form_migration');
+    echo $form->renderForm();
+    echo '</form>';
+    echo wpcf_add_admin_footer();
+}
+
+/**
+ * Menu page hook.
+ */
+function wpcf_admin_menu_settings_hook() {
+    wp_enqueue_style('wpcf-migration', WPCF_RES_RELPATH . '/css/basic.css',
+            array(), WPCF_VERSION);
+    require_once WPCF_INC_ABSPATH . '/settings.php';
+    $form = wpcf_admin_settings_form();
+    wpcf_form('wpcf_form_settings', $form);
+}
+
+/**
+ * Menu page display.
+ */
+function wpcf_admin_menu_settings() {
+    echo wpcf_add_admin_header(__('Settings', 'wpcf'));
+    echo '<br /><form method="post" action="" id="wpcf-settings-form" class="wpcf-settings-form '
+    . 'wpcf-form-validate">';
+    $form = wpcf_form('wpcf_form_settings');
     echo $form->renderForm();
     echo '</form>';
     echo wpcf_add_admin_footer();
@@ -620,5 +603,174 @@ function wpcf_admin_plugin_help($hook, $page) {
         } else {
             add_contextual_help($hook, $contextual_help);
         }
+    }
+}
+
+function wpcf_admin_promotional_text() {
+    $promotional_text = '<div class="message updated wpcf-collapsible" style="margin-top: 50px; padding: 5px 20px;">';
+    if (defined('WPV_VERSION')) { // Views active
+        $promotional_text .= wpcf_admin_toggle_button('wpcf-promotional-noviews');
+        $promotional_text .= '<h3>' . __('Want to display custom content easily?',
+                        'wpcf') . '</h3><div id="wpcf-promotional-noviews-toggle" class="wpcf-toggle-wrapper">';
+        $promotional_text .= '<p style="font-size: 110%;">' . sprintf(__("%sViews%s plugin let's you create dynamic templates for single pages and complex content lists. It queries content from the database, filters it and displays in any way you choose.",
+                                'wpcf'),
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" title="Views" target="_blank">',
+                        '</a>') . '</p>';
+        $promotional_text .= '<p style="font-size: 110%;">' . __("Views is already installed in your site!",
+                        'wpcf') . '</p>';
+        $promotional_text .= '<p style="font-size: 110%;">' . __("Next:", 'wpcf') . '</p>';
+        $promotional_text .= '<ul style="margin-bottom: 20px; list-style-type:disc; list-style-position: inside; font-size: 110%;">
+            <li style="margin-left:20px;"><a href="' . admin_url('edit.php?post_type=view-template') . '">' . __('Create <strong>View Templates</strong> for single pages &raquo;',
+                        'wpcf') . '</a></li>';
+        $promotional_text .= '<li style="margin-left:20px;"><a href="' . admin_url('edit.php?post_type=view') . '">' . __('Create <strong>Views</strong> for content lists &raquo;',
+                        'wpcf') . '</a></li></ul>';
+        $promotional_text .= sprintf(__('For tutorials and manuals, go to %shttp://wp-types.com%s',
+                        'wpcf'), '<a href="http://wp-types.com"><strong>',
+                '</strong></a>');
+    } else {
+        $post_types = get_post_types(array('_builtin' => false), 'objects');
+        unset($post_types['wp-types-group'], $post_types['view'],
+                $post_types['view-template']);
+        if (count($post_types) < 1) {
+            $list_post_types = __("posts, pages and custom content types",
+                    'wpcf');
+        } else if (count($post_types) < 2) {
+            $add = array_shift($post_types);
+            $list_post_types = $add->label;
+        } else {
+            $add = array();
+            foreach ($post_types as $p => $post_type) {
+                $add[] = $post_type->label;
+            }
+            $last = array_pop($add);
+            $list_post_types = sprintf(__('%s and %s', 'wpcf'),
+                    implode(', ', $add), $last);
+        }
+        $promotional_text .= wpcf_admin_toggle_button('wpcf-promotional-views');
+        $promotional_text .= '<h3>' . __('Display Custom Content', 'wpcf') . '</h3><div id="wpcf-promotional-views-toggle" class="wpcf-toggle-wrapper">'
+                . '<p>' . __("Now that you’ve created your content, how are you going to display it?",
+                        'wpcf') . '</p>'
+                . '<p>' . sprintf(__("The %sViews plugin%s with its graphical user interface, makes it easy for you to create complex layouts and perform dynamic queries on the WordPress database, without writing any PHP.",
+                                'wpcf'),
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</p>'
+                . '<p>' . __("From the WordPress Dashboard, you’ll be able to:",
+                        'wpcf') . '</p>'
+                . '<p style="margin:-5px 0 0 0;padding:0;">' . '<ul style="list-style-type:disc; list-style-position: inside;">'
+                . '<li>' . sprintf(__("Create dynamic page templates for your %s content.",
+                                'wpcf'), $list_post_types) . '</li>'
+                . '<li>' . sprintf(__("Load %s and display them as lists, grids, tables, sliders and more.",
+                                'wpcf'), $list_post_types) . '</li>'
+                . '<li>' . __("Create your own widgets and place them anywhere in the theme.",
+                        'wpcf') . '</li>'
+                . '</ul></p>'
+                . '<p>' . sprintf(__("%sLearn more about Views%s", 'wpcf'),
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" title="http://wp-types.com/" target="_blank" class="button-primary">',
+                        '</a>') . '</p>'
+                . '<p>' . __("Check out some examples of sites that were created without writing any PHP. We’ve even created tutorials to teach you how to build them yourself:",
+                        'wpcf') . '</p>'
+                . '<p>' . '<ul style="list-style-type:none; list-style-position: inside;">'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/magazine-final-150x150.jpg" /></div>'
+                . sprintf(__("Magazine<br />(%stutorial%s)", 'wpcf'),
+                        '<a href="http://wp-types.com/learn/create-a-wordpress-magazine-theme/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/classifieds-150x150.jpg" /></div>'
+                . sprintf(__("Classifieds<br />(%stutorial%s)", 'wpcf'),
+                        '<a href="http://wp-types.com/learn/wordpress-classifieds-site/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-50px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/realestate-150x150.jpg" /></div>'
+                . sprintf(__("Real Estate<br />(%stutorial%s)", 'wpcf'),
+                        '<a href="http://wp-types.com/learn/create-a-real-estate-wordpress-theme/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:0px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/showcase1-150x150.jpg" /></div>'
+                . sprintf(__("Showcase<br />(%stutorial%s)", 'wpcf'),
+                        '<a href="http://wp-types.com/learn/create-a-showcase-website/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</div></li>'
+                . '</ul></p>'
+                . '<hr style="clear:both;" />'
+                . '<p>' . __("Prefer to use PHP and code templates manually?",
+                        'wpcf') . '</p>'
+                . '<p>' . sprintf(__("%sLearn the Types PHP API%s", 'wpcf'),
+                        '<a href="http://wp-types.com/documentation/functions/" title="http://wp-types.com/" target="_blank">',
+                        '</a>') . '</p>';
+    }
+    $promotional_text .= '</div></div>';
+    echo $promotional_text;
+}
+
+/**
+ * Collapsible scripts. 
+ */
+function wpcf_admin_load_collapsible() {
+    wp_enqueue_script('wpcf-collapsible',
+            WPCF_RES_RELPATH . '/js/collapsible.js', array('jquery'),
+            WPCF_VERSION);
+    wp_enqueue_style('wpcf-collapsible',
+            WPCF_RES_RELPATH . '/css/collapsible.css', array(), WPCF_VERSION);
+    $option = get_option('wpcf_toggle', array());
+    if (!empty($option)) {
+        $setting = 'new Array("' . implode('", "', array_keys($option)) . '")';
+        wpcf_admin_add_js_settings('wpcf_collapsed', $setting);
+    }
+}
+
+/**
+ * Toggle button.
+ * 
+ * @param type $div_id
+ * @return type 
+ */
+function wpcf_admin_toggle_button($div_id) {
+    return '<a href="'
+            . admin_url('admin-ajax.php?action=wpcf_ajax&wpcf_action=toggle&div='
+                    . $div_id . '-toggle&_wpnonce='
+                    . wp_create_nonce('toggle'))
+            . '" id="' . $div_id
+            . '" class="wpcf-collapsible-button"></a>';
+}
+
+/**
+ * Various delete/deactivate content actions.
+ * 
+ * @param type $type
+ * @param type $arg
+ * @param type $action 
+ */
+function wpcf_admin_deactivate_content($type, $arg, $action = 'delete') {
+    switch ($type) {
+        case 'post_type':
+            // Clean tax relations
+            if ($action == 'delete') {
+                $custom = get_option('wpcf-custom-taxonomies', array());
+                foreach ($custom as $post_type => $data) {
+                    if (empty($data['supports'])) {
+                        continue;
+                    }
+                    if (array_key_exists($arg, $data['supports'])) {
+                        unset($custom[$post_type]['supports'][$arg]);
+                    }
+                }
+                update_option('wpcf-custom-taxonomies', $custom);
+            }
+            break;
+
+        case 'taxonomy':
+            // Clean post relations
+            if ($action == 'delete') {
+                $custom = get_option('wpcf-custom-types', array());
+                foreach ($custom as $post_type => $data) {
+                    if (empty($data['taxonomies'])) {
+                        continue;
+                    }
+                    if (array_key_exists($arg, $data['taxonomies'])) {
+                        unset($custom[$post_type]['taxonomies'][$arg]);
+                    }
+                }
+                update_option('wpcf-custom-types', $custom);
+            }
+            break;
+
+        default:
+            break;
     }
 }

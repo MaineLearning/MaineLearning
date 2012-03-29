@@ -89,4 +89,6 @@ function wpcf_admin_fields_list() {
         // Render table
         wpcf_admin_widefat_table('wpcf_groups_list', $header, $rows);
     }
+    
+    do_action('wpcf_groups_list_table_after');
 }

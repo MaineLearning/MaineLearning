@@ -1,0 +1,183 @@
+# YD BUDDYPRESS FEED SYNDICATION TEXT.
+# Copyright (C) 2011 yann.com
+# This file is distributed under the same license as the YD BuddyPress Feed Syndication package.
+# FIRST AUTHOR <yann@abc.fr>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YD BuddyPress Feed Syndication Text\n"
+"POT-Creation-Date: 2011-07-15 12:36+0000\n"
+"PO-Revision-Date: 2011-08-27 18:54+0100\n"
+"Last-Translator: Yann Dubois <yann@abc.fr>\n"
+"Language-Team: Y.Dubois <yann@abc.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: yd-widget-framework.inc.php:574
+msgid "Main options"
+msgstr "Options principales"
+
+#: ydbfs.inc.php:88
+msgid "Import a blog"
+msgstr "Importer un blog"
+
+#: ydbfs.inc.php:155
+msgid "Changes Saved."
+msgstr "Modifications enregistrées."
+
+#: ydbfs.inc.php:224
+msgid "Feed address"
+msgstr "Adresse du fil"
+
+#: ydbfs.inc.php:225
+msgid "Feed title"
+msgstr "Titre du fil"
+
+#: ydbfs.inc.php:226
+msgid "Feed refresh"
+msgstr "Mises à jour"
+
+#: ydbfs.inc.php:227
+msgid "Unsubscribe"
+msgstr "Supprimer"
+
+#: ydbfs.inc.php:99
+msgid "Syndication Settings"
+msgstr "Réglage des importations"
+
+#: ydbfs.inc.php:112
+msgid "RSS feed syndication and aggregation"
+msgstr "Importation et agrégation de flux RSS"
+
+#: ydbfs.inc.php:114
+msgid "Enter full URL of blog or site feeds to import into your activity page."
+msgstr "Indiquez l'URL complet de votre blog ou du flux RSS de votre site pour l'importer."
+
+#: ydbfs.inc.php:115
+msgid "You can specify multiple RSS feeds that will be mixed."
+msgstr "Vous pouvez indiquer plusieurs flux qui seront agrégés."
+
+#: ydbfs.inc.php:236
+msgid "Feed validated"
+msgstr "Fil validé."
+
+#: ydbfs.inc.php:239
+msgid "Error: feed could not be fetched at that address"
+msgstr "Erreur&nbsp;: le fil n'a pas été trouvé à cette adresse"
+
+#: ydbfs.inc.php:258
+msgid "Delete feed"
+msgstr "Supprimer ce fil"
+
+#: ydbfs.inc.php:155
+msgid "New RSS feed address to syndicate:"
+msgstr "Nouvelle adresse de fil RSS à importer&nbsp;:"
+
+#: ydbfs.inc.php:159
+msgid "Add feed"
+msgstr "Ajouter"
+
+#: ydbfs.inc.php:319
+msgid "Refresh every:"
+msgstr "Rafraîchir toutes les&nbsp;:"
+
+#: ydbfs.inc.php:207
+msgid "3 hours"
+msgstr "3 heures"
+
+#: ydbfs.inc.php:207
+msgid "6 hours"
+msgstr "6 heures"
+
+#: ydbfs.inc.php:207
+msgid "12 hours"
+msgstr "12 heures"
+
+#: ydbfs.inc.php:448,809
+msgid "Imported"
+msgstr "Importé"
+
+#: ydbfs.inc.php:318
+msgid "New blog post: %s"
+msgstr "Nouveau billet&nbsp;: %s"
+
+#: ydbfs.inc.php:461
+msgid "New blog post imported from &laquo;%1$s&raquo; by %2$s: %3$s"
+msgstr "Nouveau billet importé de &laquo;%1$s&raquo; par %2$s&nbsp;: %3$s"
+
+#: ydbfs.inc.php:463
+msgid "New blog post imported by %1$s: %2$s"
+msgstr "Nouveau billet importé par %1$s&nbsp;: %2$s"
+
+#: ydbfs.inc.php:499
+msgid "Feeds syndication updated."
+msgstr "Abonnements aux fils RSS mis à jour."
+
+#: ydbfs.inc.php:507
+msgid "Last daily action was on: "
+msgstr "Dernier déclenchement quotidien&nbsp;: "
+
+#: ydbfs.inc.php:510
+msgid "No daily action yet."
+msgstr "Pas encore de déclenchement quotidien."
+
+#: ydbfs.inc.php:513
+msgid "Last hourly action was on: "
+msgstr "Dernier déclenchement horaire&nbsp;: "
+
+#: ydbfs.inc.php:516
+msgid "No hourly action yet."
+msgstr "Pas encore de déclenchement horaire."
+
+#: ydbfs.inc.php:519
+msgid "Last completed action was on: "
+msgstr "Dernier déclenchement effectué&nbsp;: "
+
+#: ydbfs.inc.php:522
+msgid "No recorded action yet."
+msgstr "Aucune action enregistrée pour le moment."
+
+#: ydbfs.inc.php:600
+msgid "Import blogs"
+msgstr "Importer des blogs"
+
+#: ydbfs.inc.php:828
+msgid "New blog post imported from &laquo;%1$s&raquo; for group %2$s: %3$s"
+msgstr "Nouveau billet importé de &laquo;%1$s&raquo; pour le groupe %2$s&nbsp;: %3$s"
+
+#: ydbfs.inc.php:830
+msgid "New blog post imported for group %1$s: %2$s"
+msgstr "Nouveau billet importé pour le groupe %1$s&nbsp;: %1$s"
+
+#: yd-buddypress-feed-syndication.php:135
+msgid "Maximum number of user-aggregated feeds:"
+msgstr "Nombre maximum de fils qu'un utilisateur peut agréger&nbsp;:"
+
+#: yd-buddypress-feed-syndication.php:136
+msgid "Maximum number of group-aggregated feeds:"
+msgstr "Nombre maximum de fils qu'un groupe peut agréger&nbsp;:"
+
+#: yd-buddypress-feed-syndication.php:137
+msgid "Open feed links in new window."
+msgstr "Ouvrir les liens des fils dans une nouvelle fenêtre."
+
+#: yd-buddypress-feed-syndication.php:145
+msgid "Manually run hourly process"
+msgstr "Déclencher manuellement le processus horaire"
+
+#: yd-buddypress-feed-syndication.php:146
+msgid "Manually force feed reload"
+msgstr "Forcer le rechargement des fils RSS"
+
+#: yd-buddypress-feed-syndication.php:147
+msgid "Manually check broken feeds"
+msgstr "Vérifier les fils marqués défectueux"
+
+#: yd-buddypress-feed-syndication.php:148
+msgid "Check latest"
+msgstr "Rapport du dernier déclenchement"
+

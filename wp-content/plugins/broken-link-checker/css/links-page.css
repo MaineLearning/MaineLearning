@@ -25,7 +25,7 @@ th.column-new-url {
 }
 
 th.column-status {
-	width: 16em;
+	width: 12em;
 }
 
 th.column-new-link-text {
@@ -350,4 +350,20 @@ div.search-box{
 
 #s_link_type optgroup option {
 	margin-left: 1em;
+}
+
+/* Miscellaneous styles */
+
+#blc-more-plugins-link-wrap {
+	background: #00C31F none;
+}
+
+#screen-meta-links #blc-more-plugins-link {
+	font-weight: bold;
+	color: #DEFFD8;
+	text-shadow: none;
+}
+
+#screen-meta-links #blc-more-plugins-link-wrap a.show-settings:hover {
+	color: white;
 }

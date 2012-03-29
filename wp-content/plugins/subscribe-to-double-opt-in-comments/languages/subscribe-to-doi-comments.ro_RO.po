@@ -1,0 +1,457 @@
+# Copyright (C) 2010
+# This file is distributed under the same license as the GPLv2 package.
+# Tobias Koelligan, mail@sjmp.de 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/subscribe-to-double-opt-in-comments\n"
+"POT-Creation-Date: 2010-03-14 20:01+0000\n"
+"PO-Revision-Date: 2012-03-14 14:23+0200\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: Romania\n"
+"Language-Team: Web Geeks\n"
+"Last-Translator: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: subscribe-to-doi-comments.php:88
+msgid "<strong>Error: </strong>"
+msgstr "<strong>Eroare:</strong>"
+
+#: subscribe-to-doi-comments.php:105
+msgid "E-Mail:"
+msgstr "Poştă electronică:"
+
+#: subscribe-to-doi-comments.php:107
+msgid "Subscribe"
+msgstr "Aboneaza-te"
+
+#: subscribe-to-doi-comments.php:147
+msgid "Subscribe to Comments Options"
+msgstr "Aboneaza-te la Opţiuni comentarii"
+
+#: subscribe-to-doi-comments.php:150
+msgid "\"From\" name for notifications:"
+msgstr "\"From\" nume pentru notificări:"
+
+#: subscribe-to-doi-comments.php:151
+msgid "\"From\" e-mail addresss for notifications:"
+msgstr "\"From\" poştă electronică addresss pentru notificări:"
+
+#: subscribe-to-doi-comments.php:152
+msgid "Do a CSS \"clear\" on the subscription checkbox/message (uncheck this if the checkbox/message appears in a strange location in your theme)"
+msgstr "Face un CSS \"clar\" de pe caseta de validare abonament/mesaj (dacă debifaţi această casetă/mesaj apare într-un loc ciudat in tema)"
+
+#: subscribe-to-doi-comments.php:155
+msgid "Comment Form Text"
+msgstr "Text comentariu în formă"
+
+#: subscribe-to-doi-comments.php:157
+msgid "Customize the messages shown to different people.  Use <code>[manager_link]</code> to insert the URI to the Subscription Manager."
+msgstr "Personaliza mesajele afişate de persoane diferite. Folositi <code> [manager_link] </code> pentru a insera URI pentru Manager de abonament."
+
+#: subscribe-to-doi-comments.php:161
+msgid "Not subscribed"
+msgstr "Nu subscris"
+
+#: subscribe-to-doi-comments.php:163
+msgid "Subscribed"
+msgstr "Abonat"
+
+#: subscribe-to-doi-comments.php:165
+msgid "Entry Author"
+msgstr "Autor de intrare"
+
+#: subscribe-to-doi-comments.php:167
+msgid "\"Subscribe without Commenting\" Text"
+msgstr " Text"
+
+#: subscribe-to-doi-comments.php:169
+msgid "Confirmation Text (will be shown after user has clicked on the confirmation link)"
+msgstr "Text de confirmare (va fi indicat după ce utilizatorul a dat clic pe link-ul de confirmare)"
+
+#: subscribe-to-doi-comments.php:171
+msgid "Headline for Double-Opt-In"
+msgstr "Titlu pentru dublu-Opt-In"
+
+#: subscribe-to-doi-comments.php:173
+msgid "Mail Text for Double-Opt-In ([verify_url] will be replaced with URL to subscribe finally, no HTML!)"
+msgstr "Textul mail pentru dublu-Opt-In ([verify_url] va fi înlocuit cu URL-ul pentru a subscrie în cele din urmă, nu HTML!)"
+
+#: subscribe-to-doi-comments.php:179
+msgid "Use custom style for Subscription Manager"
+msgstr "Utilizaţi stil particularizat pentru Managerul de abonament"
+
+#: subscribe-to-doi-comments.php:181
+msgid "These settings only matter if you are using a custom style.  <code>[theme_path]</code> will be replaced with the path to your current theme."
+msgstr "Aceste setări contează numai dacă utilizaţi un stil particularizat. <code> [theme_path] </code> va fi înlocuit cu calea la tema curentă."
+
+#: subscribe-to-doi-comments.php:184
+msgid "Path to header:"
+msgstr "Calea antet:"
+
+#: subscribe-to-doi-comments.php:185
+msgid "Path to sidebar:"
+msgstr "Calea spre bara laterală:"
+
+#: subscribe-to-doi-comments.php:186
+msgid "Path to footer:"
+msgstr "Calea de subsol:"
+
+#: subscribe-to-doi-comments.php:189
+msgid "HTML for before the subscription manager:"
+msgstr "HTML pentru, înainte de abonament manager:"
+
+#: subscribe-to-doi-comments.php:190
+msgid "HTML for after the subscription manager:"
+msgstr "HTML pentru după ce Managerul de abonament:"
+
+#: subscribe-to-doi-comments.php:216
+msgid "Options saved."
+msgstr "Opţiuni salvate."
+
+#: subscribe-to-doi-comments.php:223
+msgid "Update Options »"
+msgstr "Opţiuni de actualizare»"
+
+#: subscribe-to-doi-comments.php:388
+msgid "Please provide a valid e-mail address."
+msgstr "Furnizați o adresă corectă de poştă electronică."
+
+#: subscribe-to-doi-comments.php:392
+msgid "This e-mail address may not be subscribed"
+msgstr "Această adresă de poştă electronică nu pot fi abonat"
+
+#: subscribe-to-doi-comments.php:398
+#: subscribe-to-doi-comments.php:414
+msgid "You appear to be already subscribed to this entry."
+msgstr "Tu par a fi deja abonat la această intrare."
+
+#: subscribe-to-doi-comments.php:404
+msgid "Comments are not allowed on this entry."
+msgstr "Nu sunt permise comentarii pe această intrare."
+
+#: subscribe-to-doi-comments.php:618
+#, php-format
+msgid "There is a new comment on the post \"%s\""
+msgstr "Există un nou comentariu pe post \"%s\""
+
+#: subscribe-to-doi-comments.php:619
+#, php-format
+msgid "Author: %s\n"
+msgstr "Autor: %s\n"
+
+#: subscribe-to-doi-comments.php:620
+msgid "Comment:\n"
+msgstr "Comentariu: \n"
+
+#: subscribe-to-doi-comments.php:621
+msgid "See all comments on this post here:\n"
+msgstr "Vezi toate comentarii pe acest post aici: \n"
+
+#: subscribe-to-doi-comments.php:624
+msgid "To manage your subscriptions or to block all notifications from this site, click the link below:\n"
+msgstr "Pentru a gestiona abonamentele sau pentru a bloca toate notificările de pe acest site, faceţi clic pe link-ul de mai jos:\n"
+
+#: subscribe-to-doi-comments.php:627
+#, php-format
+msgid "New Comment On: %s"
+msgstr "Nou comentariu pe: %s"
+
+#: subscribe-to-doi-comments.php:646
+msgid "E-mail change confirmation"
+msgstr "Confirmarea schimbare poştă electronică"
+
+#: subscribe-to-doi-comments.php:647
+#, php-format
+msgid ""
+"You are receiving this message to confirm a change of e-mail address for your subscriptions at \"%s\"\n"
+"\n"
+msgstr ""
+"Aţi primit acest mesaj pentru a confirma o schimbare de e-mail pentru abonamentele la \"%s\"\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:648
+#, php-format
+msgid ""
+"To change your e-mail address to %s, click this link:\n"
+"\n"
+msgstr ""
+"Pentru a schimba adresa de e-mail la% s, faceţi clic pe acest link:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:650
+#: subscribe-to-doi-comments.php:662
+msgid "If you did not request this action, please disregard this message."
+msgstr "Dacă nu solicitaţi această acţiune, vă rugăm să ignore acest mesaj."
+
+#: subscribe-to-doi-comments.php:658
+msgid "E-mail block confirmation"
+msgstr "E-mail de confirmare bloc"
+
+#: subscribe-to-doi-comments.php:659
+#, php-format
+msgid ""
+"You are receiving this message to confirm that you no longer wish to receive e-mail comment notifications from \"%s\"\n"
+"\n"
+msgstr ""
+"Aţi primit acest mesaj pentru a confirma faptul că nu mai doresc sa primesc e-mail notificări de comentarii de la \"%s\"\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:660
+msgid ""
+"To cancel all future notifications for this address, click this link:\n"
+"\n"
+msgstr ""
+"Pentru a anula toate notificările viitoare pentru această adresă, faceţi clic pe acest link:\n"
+"\n"
+
+#: subscribe-to-doi-comments.php:700
+msgid "click here"
+msgstr "Faceţi clic aici"
+
+#: subscribe-to-doi-comments.php:722
+msgid "Notify me of followup comments via e-mail"
+msgstr "Anunta-ma de urmărire comentarii prin e-mail"
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are subscribed to this entry.  <a href=\"[manager_link]\">Manage your subscriptions</a>."
+msgstr "Sunteţi abonat la această intrare. <a href=\"[manager_link]\">Gestionaţi abonamentele </a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid "You are the author of this entry.  <a href=\"[manager_link]\">Manage subscriptions</a>."
+msgstr "Sunteţi autorul a acestui intrare. <a href=\"[manager_link]\">Administreaza abonamente </a>."
+
+#: subscribe-to-doi-comments.php:722
+msgid ""
+"Hello,\n"
+"\n"
+"please click on the following link:\n"
+"[verify_url]\n"
+"to confirm your subscription."
+msgstr ""
+"Buna ziua,\n"
+"\n"
+"vă rugăm să faceţi clic pe următorul link:\n"
+"[verify_url]\n"
+"pentru a confirma abonarea."
+
+#: subscribe-to-doi-comments.php:722
+msgid "Double Opt In"
+msgstr "Double Opt în"
+
+#: subscribe-to-doi-comments.php:746
+msgid "You will now get an e-mail, if a new comment is posted."
+msgstr "Acum vei primi un e-mail, dacă un nou comentariu este înregistrată."
+
+#: subscribe-to-doi-comments.php:838
+msgid "Comment Subscription Manager"
+msgstr "Comentariu abonare Manager"
+
+#: subscribe-to-doi-comments.php:838
+#: subscribe-to-doi-comments.php:1197
+msgid "Subscriptions"
+msgstr "Abonamente"
+
+#: subscribe-to-doi-comments.php:840
+msgid "Subscribe to DOI Comments"
+msgstr "Abonare la comentarii DOI"
+
+#: subscribe-to-doi-comments.php:920
+msgid "You may not access this page without a valid key."
+msgstr "Nu puteţi să accesaţi această pagină fără o cheie validă."
+
+#: subscribe-to-doi-comments.php:928
+#, php-format
+msgid "All notifications that were formerly sent to <strong>%1$s</strong> will now be sent to <strong>%2$s</strong>!"
+msgstr "Toate notificările care au fost trimise anterior la <strong>%1$s </strong> vor fi trimise la <strong>%2$s </strong>!"
+
+#: subscribe-to-doi-comments.php:940
+#, php-format
+msgid "<strong>%1$s</strong> %2$s removed successfully."
+msgstr "<strong>%1$ s</strong> în %2$ s eliminat cu succes."
+
+#: subscribe-to-doi-comments.php:940
+msgid "subscriptions"
+msgstr "abonamente"
+
+#: subscribe-to-doi-comments.php:940
+msgid "subscription"
+msgstr "abonament"
+
+#: subscribe-to-doi-comments.php:945
+#, php-format
+msgid "The block on <strong>%s</strong> has been successfully removed."
+msgstr "Bloc pe <strong>%s</strong> a fost eliminat cu succes."
+
+#: subscribe-to-doi-comments.php:947
+#, php-format
+msgid "<strong>%s</strong> isn't blocked!"
+msgstr "<strong>%s</strong> nu este blocat!"
+
+#: subscribe-to-doi-comments.php:952
+#, php-format
+msgid "<strong>%s</strong> has been blocked from receiving notifications.  You will have to have the administrator remove the block before you will be able to change your notification address."
+msgstr "<strong>%s </strong> a fost blocat de la primirea notificărilor. Tu va trebui să aibă administrator înainte de a scoate blocul va fi capabil de a schimba adresa de notificare."
+
+#: subscribe-to-doi-comments.php:955
+#, php-format
+msgid "Your change of e-mail request was successfully received.  Please check your old account (<strong>%s</strong>) in order to confirm the change."
+msgstr "Schimbarea dvs. de e-mail cererea a fost primită cu succes. Vă rugăm să verificaţi contul vechi (<strong>%s</strong>), în scopul de a confirma schimbarea."
+
+#: subscribe-to-doi-comments.php:960
+#, php-format
+msgid "Your request to block <strong>%s</strong> from receiving any further notifications has been received.  In order for you to complete the block, please check your e-mail and click on the link in the message that has been sent to you."
+msgstr "Cererea dvs. de a bloca <strong>%s </strong> de la primirea orice alte notificări a fost primită. Pentru tine pentru a finaliza blocul, vă rugăm să verificaţi adresa dvs. de e-mail şi faceţi clic pe link-ul în mesajul care a fost trimis la tine."
+
+#: subscribe-to-doi-comments.php:964
+#, php-format
+msgid "<strong>%1$s</strong> has been successfully subscribed to %2$s"
+msgstr "<strong>%1$ s</strong> a fost abonat cu succes la %2$ s"
+
+#: subscribe-to-doi-comments.php:969
+#, php-format
+msgid "<strong>%1$s</strong> has been added to the \"do not mail\" list. You will no longer receive any notifications from this site. If this was done in error, please contact the <a href=\"mailto:%2$s\">site administrator</a> to remove this block."
+msgstr "<strong>%1$s </strong> a fost adăugată la \"nu poştă\" lista. Tu nu vor mai primi notificări de la acest site. În cazul în care acest lucru a fost făcut din greşeală, vă rugăm să contactaţi administratorul site-ului <a href=\"mailto:%2$s\"> </a> pentru a elimina acest bloc."
+
+#: subscribe-to-doi-comments.php:971
+#, php-format
+msgid "<strong>%s</strong> has already been blocked!"
+msgstr "<strong>%s</strong> a fost deja blocat!"
+
+#: subscribe-to-doi-comments.php:987
+#: subscribe-to-doi-comments.php:1019
+#, php-format
+msgid "%s Comment Subscription Manager"
+msgstr "%s comentariu abonament Manager"
+
+#: subscribe-to-doi-comments.php:1005
+msgid "Error! Comment does not exist anymore!"
+msgstr "Eroare! Comentariu nu există anymore!"
+
+#: subscribe-to-doi-comments.php:1022
+#, php-format
+msgid "Return to the page you were viewing: %s"
+msgstr "Revenire la pagina au fost vizualizaţi: %s"
+
+#: subscribe-to-doi-comments.php:1033
+msgid "Remove Block"
+msgstr "Eliminaţi bloc"
+
+#: subscribe-to-doi-comments.php:1036
+#, php-format
+msgid "Click the button below to remove the block on <strong>%s</strong>.  This should only be done if the user has specifically requested it."
+msgstr "Faceţi clic pe butonul de mai jos pentru a elimina bloc de pe <strong>%s </strong>. Acest lucru ar trebui realizat numai în cazul în care utilizatorul a solicitat în mod specific."
+
+#: subscribe-to-doi-comments.php:1044
+msgid "Remove Block »"
+msgstr "Remove bloc»"
+
+#: subscribe-to-doi-comments.php:1052
+msgid "Blocked"
+msgstr "Blocat"
+
+#: subscribe-to-doi-comments.php:1055
+#, php-format
+msgid "You have indicated that you do not wish to receive any notifications at <strong>%1$s</strong> from this site. If this is incorrect, or if you wish to have the block removed, please contact the <a href=\"mailto:%2$s\">site administrator</a>."
+msgstr "Aţi indicat că nu doresc să primească notificări de la <strong>%1$s </strong> de pe acest site. În cazul în care acest lucru este incorect, sau dacă doriţi să aveţi bloc eliminate, vă rugăm să contactaţi administratorul site-ului <a href=\"mailto:%2$s\"> </a>."
+
+#: subscribe-to-doi-comments.php:1070
+#, php-format
+msgid "<strong>%s</strong> is not subscribed to any posts on this site."
+msgstr "<strong>%s</strong> nu este abonat la orice posturi pe acest site."
+
+#: subscribe-to-doi-comments.php:1072
+#, php-format
+msgid "<strong>%s</strong> is not a valid e-mail address."
+msgstr "<strong>%s</strong> nu este o adresă corectă de poştă electronică."
+
+#: subscribe-to-doi-comments.php:1085
+msgid "« Back"
+msgstr "«Spate"
+
+#: subscribe-to-doi-comments.php:1088
+msgid "Find Subscriptions"
+msgstr "Găsi abonamente"
+
+#: subscribe-to-doi-comments.php:1091
+msgid "Enter an e-mail address to view its subscriptions or undo a block."
+msgstr "Introduceţi o adresă de poştă electronică pentru a vizualiza sale abonamente sau anula un bloc."
+
+#: subscribe-to-doi-comments.php:1099
+msgid "Search »"
+msgstr "Căutare»"
+
+#: subscribe-to-doi-comments.php:1107
+msgid "Top Subscriber List"
+msgstr "Listă de top abonat"
+
+#: subscribe-to-doi-comments.php:1109
+msgid "Subscriber List"
+msgstr "Lista de abonat"
+
+#: subscribe-to-doi-comments.php:1128
+msgid "Show all subscribers"
+msgstr "Arată toţi abonaţii"
+
+#: subscribe-to-doi-comments.php:1130
+msgid "Show list of subscribers in <code>CC:</code>-field format (for bulk e-mailing)"
+msgstr "Arată lista de abonaţi în CC <code>: </code>-câmp format (vrac pentru e-mail)"
+
+#: subscribe-to-doi-comments.php:1132
+msgid "« Back to regular view"
+msgstr "«Înapoi la view regulate"
+
+#: subscribe-to-doi-comments.php:1147
+msgid "Top Subscribed Posts"
+msgstr "Top subscris Posts"
+
+#: subscribe-to-doi-comments.php:1200
+#, php-format
+msgid "<strong>%s</strong> is subscribed to the posts listed below. To unsubscribe to one or more posts, click the checkbox next to the title, then click \"Remove Selected Subscription(s)\" at the bottom of the list."
+msgstr "<strong>%s</strong> este abonat la posturile enumerate mai jos. Pentru a vă dezabona de la unul sau mai multe mesaje, faceţi clic pe caseta de selectare de lângă titlul, apoi faceţi clic pe \"Remove abonamentul selectat (e)\", la partea de jos a listei."
+
+#: subscribe-to-doi-comments.php:1214
+msgid "Invert Checkbox Selection"
+msgstr "Invertire selecţie caseta de selectare"
+
+#: subscribe-to-doi-comments.php:1218
+msgid "Remove Selected Subscription(s) »"
+msgstr "Eliminare selectat Subscription(s)»"
+
+#: subscribe-to-doi-comments.php:1225
+msgid "Advanced Options"
+msgstr "Opţiuni avansate"
+
+#: subscribe-to-doi-comments.php:1228
+msgid "Block All Notifications"
+msgstr "Blocaţi toate notificările"
+
+#: subscribe-to-doi-comments.php:1235
+#, php-format
+msgid "If you would like <strong>%s</strong> to be blocked from receiving any notifications from this site, click the button below.  This should be reserved for cases where someone is signing you up for notifications without your consent."
+msgstr "Dacă doriţi <strong>%s</strong> pentru a fi blocat de la primirea de notificări de la acest site, faceţi clic pe butonul de mai jos. Acest lucru ar trebui să fie rezervată pentru cazurile în care cineva se va semna pentru notificări fără consimţământul dumneavoastră."
+
+#: subscribe-to-doi-comments.php:1239
+msgid "Block Notifications »"
+msgstr "Notificările bloc»"
+
+#: subscribe-to-doi-comments.php:1245
+msgid "Change E-mail Address"
+msgstr "Schimbarea adresa de poştă electronică"
+
+#: subscribe-to-doi-comments.php:1252
+#, php-format
+msgid "If you would like to change the e-mail address for your subscriptions, enter the new address below.  You will be required to verify this request by clicking a special link sent to your current address (<strong>%s</strong>)."
+msgstr "Dacă doriţi să modificaţi adresa de e-mail pentru abonamentele, introduceţi noua adresă de mai jos. Vi se va cere să verifice această cerere făcând clic pe un link special trimis la adresa dvs. de curent (<strong>%s</strong>)."
+
+#: subscribe-to-doi-comments.php:1256
+msgid "New E-mail Address:"
+msgstr "Noua adresa de E-mail:"
+
+#: subscribe-to-doi-comments.php:1261
+msgid "Change E-mail Address »"
+msgstr "Schimbarea adresa de poştă electronică»"
+

@@ -106,19 +106,19 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array(),
 	 * option but some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007.
 	 */
-
-	if (empty($from_email)) {
+	// Get the site domain and get rid of www.
+	$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+	if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+		$sitename = substr( $sitename, 4 );
+	}
+	$wp_from_email = 'wordpress@' . $sitename;
+	if (empty($from_email) || $from_email == $wp_from_email) {
 		if ($st_smtp_config['overwrite_sender'] == "overwrite_wp_default") {
 			$from_name = $st_smtp_config['sender_name'];
 			$from_email = $st_smtp_config['sender_mail'];
 		}
 		else {
-			// Get the site domain and get rid of www.
-			$sitename = strtolower( $_SERVER['SERVER_NAME'] );
-			if ( substr( $sitename, 0, 4 ) == 'www.' ) {
-				$sitename = substr( $sitename, 4 );
-			}
-			$from_email = 'wordpress@' . $sitename;
+			$from_email = $wp_from_email;
 		}
 	}
 

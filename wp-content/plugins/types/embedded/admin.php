@@ -1,11 +1,11 @@
 <?php
-
 require_once(WPCF_EMBEDDED_ABSPATH . '/common/visual-editor/editor-addon.class.php');
 
 if (defined('DOING_AJAX')) {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/ajax.php';
     add_action('wp_ajax_wpcf_ajax', 'wpcf_ajax_embedded');
 }
+
 /**
  * admin_init hook.
  */
@@ -13,19 +13,19 @@ function wpcf_embedded_admin_init_hook() {
     // Add callbacks for post edit pages
     add_action('load-post.php', 'wpcf_admin_post_page_load_hook');
     add_action('load-post-new.php', 'wpcf_admin_post_page_load_hook');
-    
+
     // Add callback for 'media-upload.php'
     add_filter('get_media_item_args', 'wpcf_get_media_item_args_filter');
 
     // Add save_post callback
     add_action('save_post', 'wpcf_admin_save_post_hook', 10, 2);
-    
+
     // Render messages
     wpcf_show_admin_messages();
-    
+
     // Render JS settings
     add_action('admin_head', 'wpcf_admin_render_js_settings');
-    
+
     // Media insert code
     if (isset($_GET['wpcf-fields-media-insert'])
             || (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'],
@@ -40,7 +40,7 @@ function wpcf_embedded_admin_init_hook() {
         add_filter('media_upload_tabs',
                 'wpcf_fields_file_media_upload_tabs_filter');
     }
-    
+
     register_post_type('wp-types-group',
             array(
         'public' => false,
@@ -48,7 +48,7 @@ function wpcf_embedded_admin_init_hook() {
         'can_export' => false,
             )
     );
-    
+
     add_filter('icl_custom_fields_to_be_copied',
             'wpcf_custom_fields_to_be_copied', 10, 2);
 
@@ -57,6 +57,13 @@ function wpcf_embedded_admin_init_hook() {
     add_filter('icl_editor_cf_description',
             'wpcf_icl_editor_cf_description_filter', 10, 2);
     add_filter('icl_editor_cf_style', 'wpcf_icl_editor_cf_style_filter', 10, 2);
+    // Initialize translations
+    if (function_exists('icl_register_string')
+            && defined('WPML_ST_VERSION')
+            && !get_option('wpcf_strings_translation_initialized', false)) {
+        wpcf_admin_bulk_string_translation();
+        update_option('wpcf_strings_translation_initialized', 1);
+    }
 }
 
 /**
@@ -173,15 +180,21 @@ function wpcf_form_add_js_validation($element) {
  * 
  * @return type 
  */
-function wpcf_form_render_js_validation($form = '.wpcf-form-validate') {
+function wpcf_form_render_js_validation($form = '.wpcf-form-validate',
+        $echo = true) {
+//    static $cache;
+//    if (($echo && isset($cache[$form]['echo'])) || (!$echo && isset($cache[$form]['return']))) {
+//        return '';
+//    }
     $elements = wpcf_form_add_js_validation('get');
     if (empty($elements)) {
         return '';
     }
-    echo "\r\n" . '<script type="text/javascript">' . "\r\n" . '/* <![CDATA[ */'
-    . "\r\n" . 'jQuery(document).ready(function(){' . "\r\n"
-    . 'if (jQuery("' . $form . '").length > 0){' . "\r\n"
-    . 'jQuery("' . $form . '").validate({
+    $output = '';
+    $output .= "\r\n" . '<script type="text/javascript">' . "\r\n" . '/* <![CDATA[ */'
+            . "\r\n" . 'jQuery(document).ready(function(){' . "\r\n"
+            . 'if (jQuery("' . $form . '").length > 0){' . "\r\n"
+            . 'jQuery("' . $form . '").validate({
         errorClass: "wpcf-form-error",
         errorPlacement: function(error, element){
             error.insertBefore(element);
@@ -200,10 +213,13 @@ function wpcf_form_render_js_validation($form = '.wpcf-form-validate') {
 		},
     });' . "\r\n";
     foreach ($elements as $id => $element) {
+        if (empty($element['#validate'])) {
+            continue;
+        }
         if (in_array($element['#type'], array('radios'))) {
-            echo 'jQuery(\'input:[name="' . $element['#name'] . '"]\').rules("add", {' . "\r\n";
+            $output .= 'jQuery(\'input:[name="' . $element['#name'] . '"]\').rules("add", {' . "\r\n";
         } else {
-            echo 'jQuery("#' . $id . '").rules("add", {' . "\r\n";
+            $output .= 'jQuery("#' . $id . '").rules("add", {' . "\r\n";
         }
         $rules = array();
         $messages = array();
@@ -220,15 +236,23 @@ function wpcf_form_render_js_validation($form = '.wpcf-form-validate') {
 //                $messages[] = $method . ': "' . wpcf_translate('field ' . $element['wpcf-id'] . ' validation message ' . $method, $args['message']) . '"';
 //            }
         }
-        echo implode(',' . "\r\n", $rules);
+        $output .= implode(',' . "\r\n", $rules);
         if (!empty($messages)) {
-            echo ',' . "\r\n" . 'messages: {' . "\r\n"
-            . implode(',' . "\r\n", $messages) . "\r\n" . '}';
+            $output .= ',' . "\r\n" . 'messages: {' . "\r\n"
+                    . implode(',' . "\r\n", $messages) . "\r\n" . '}';
         }
-        echo "\r\n" . '});' . "\r\n";
+        $output .= "\r\n" . '});' . "\r\n";
     }
-    echo "\r\n" . '/* ]]> */' . "\r\n" . '}' . "\r\n" . '})' . "\r\n"
-    . '</script>' . "\r\n";
+    $output .= "\r\n" . '/* ]]> */' . "\r\n" . '}' . "\r\n" . '})' . "\r\n"
+            . '</script>' . "\r\n";
+
+    if ($echo) {
+//        $cache[$form]['echo'] = 1;
+        echo $output;
+    } else {
+//        $cache[$form]['return'] = 1;
+        return $output;
+    }
 }
 
 /**
@@ -395,10 +419,13 @@ function wpcf_icl_editor_cf_description_filter($description, $cf_name) {
 function wpcf_icl_editor_cf_style_filter($style, $cf_name) {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
     $fields = wpcf_admin_fields_get_fields();
+
     if (empty($fields)) {
         return $style;
     }
+
     $cf_name = substr($cf_name, 6);
+
     if (strpos($cf_name, WPCF_META_PREFIX) == 0) {
         $cf_name = str_replace(WPCF_META_PREFIX, '', $cf_name);
     }
@@ -541,19 +568,17 @@ function wpcf_admin_render_js_settings() {
  * returns the fields handled by types
  *
  */
-
 function wpcf_get_post_meta_field_names() {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
     $fields = wpcf_admin_fields_get_fields();
-    
+
     $field_names = array();
-    foreach($fields as $field) {
+    foreach ($fields as $field) {
         $field_names[] = wpcf_types_get_meta_prefix($field) . $field['slug'];
     }
-    
+
     return $field_names;
 }
-
 
 /**
  * Forces 'Insert into post' link when called from our WYSIWYG.
@@ -570,4 +595,150 @@ function wpcf_get_media_item_args_filter($args) {
         $args['send'] = true;
     }
     return $args;
+}
+
+/**
+ * Gets post.
+ * 
+ * @return type 
+ */
+function wpcf_admin_get_edited_post() {
+    if (isset($_GET['post'])) {
+        $post_id = (int) $_GET['post'];
+    } else if (isset($_POST['post_ID'])) {
+        $post_id = (int) $_POST['post_ID'];
+    } else {
+        $post_id = 0;
+    }
+    if ($post_id) {
+        return get_post($post_id);
+    } else {
+        return array();
+    }
+}
+
+/**
+ * Gets post type.
+ * 
+ * @param type $post
+ * @return boolean 
+ */
+function wpcf_admin_get_post_type($post) {
+    if ($post) {
+        $post_type = get_post_type($post);
+    } else {
+        if (!isset($_GET['post_type'])) {
+            $post_type = 'post';
+        } else if (in_array($_GET['post_type'],
+                        get_post_types(array('show_ui' => true)))) {
+            $post_type = $_GET['post_type'];
+        } else {
+            $post_type = 'post';
+        }
+    }
+    return $post_type;
+}
+
+/**
+ * Bulk translation. 
+ */
+function wpcf_admin_bulk_string_translation() {
+    if (!function_exists('icl_register_string')) {
+        return false;
+    }
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
+    require_once WPCF_INC_ABSPATH . '/custom-types-form.php';
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-taxonomies.php';
+    require_once WPCF_INC_ABSPATH . '/custom-taxonomies-form.php';
+
+    // Register groups
+    $groups = wpcf_admin_fields_get_groups();
+    foreach ($groups as $group_id => $group) {
+        icl_register_string('plugin Types', 'group ' . $group_id . ' name',
+                $group['name']);
+        if (isset($group['description'])) {
+            icl_register_string('plugin Types',
+                    'group ' . $group_id . ' description', $group['description']);
+        }
+    }
+
+    // Register fields
+    $fields = wpcf_admin_fields_get_fields();
+    foreach ($fields as $field_id => $field) {
+        icl_register_string('plugin Types', 'field ' . $field_id . ' name',
+                $field['name']);
+        if (isset($field['description'])) {
+            icl_register_string('plugin Types',
+                    'field ' . $field_id . ' description', $field['description']);
+        }
+
+        // For radios or select
+        if (!empty($field['data']['options'])) {
+            foreach ($field['data']['options'] as $name => $option) {
+                if ($name == 'default') {
+                    continue;
+                }
+                icl_register_string('plugin Types',
+                        'field ' . $field_id . ' option ' . $name . ' title',
+                        $option['title']);
+                icl_register_string('plugin Types',
+                        'field ' . $field_id . ' option ' . $name . ' value',
+                        $option['value']);
+                if (isset($option['display_value'])) {
+                    icl_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' display value',
+                            $option['display_value']);
+                }
+            }
+        }
+
+        if ($field['type'] == 'checkbox' && (isset($field['set_value']) && $field['set_value'] != '1')) {
+            // we need to translate the check box value to store
+            icl_register_string('plugin Types',
+                    'field ' . $field_id . ' checkbox value',
+                    $field['set_value']);
+        }
+
+        if ($field['type'] == 'checkbox' && !empty($field['display_value_selected'])) {
+            // we need to translate the check box value to store
+            icl_register_string('plugin Types',
+                    'field ' . $field_id . ' checkbox value selected',
+                    $field['display_value_selected']);
+        }
+
+        if ($field['type'] == 'checkbox' && !empty($field['display_value_not_selected'])) {
+            // we need to translate the check box value to store
+            icl_register_string('plugin Types',
+                    'field ' . $field_id . ' checkbox value not selected',
+                    $field['display_value_not_selected']);
+        }
+
+        // Validation message
+        if (!empty($field['data']['validate'])) {
+            foreach ($field['data']['validate'] as $method => $validation) {
+                if (!empty($validation['message'])) {
+                    // Skip if it's same as default
+                    $default_message = wpcf_admin_validation_messages($method);
+                    if ($validation['message'] != $default_message) {
+                        icl_register_string('plugin Types',
+                                'field ' . $field_id . ' validation message ' . $method,
+                                $validation['message']);
+                    }
+                }
+            }
+        }
+    }
+
+    // Register types
+    $custom_types = get_option('wpcf-custom-types', array());
+    foreach ($custom_types as $post_type => $data) {
+        wpcf_custom_types_register_translation($post_type, $data);
+    }
+
+    // Register taxonomies
+    $custom_taxonomies = get_option('wpcf-custom-taxonomies', array());
+    foreach ($custom_taxonomies as $taxonomy => $data) {
+        wpcf_custom_taxonimies_register_translation($taxonomy, $data);
+    }
 }

@@ -211,6 +211,9 @@ input.wpcf-form-error {
 .wpcf-fields-form-validate-table td .textfield{
     width: 100%;
 }
+.wpcf-fields-form-radio-move-field {
+    cursor: move;
+}
 
 /* TYPES FORM */
 #wpcf-types-form-name-table,

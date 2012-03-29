@@ -16,6 +16,7 @@ ModulePriority: -1
 
 //TODO: Rewrite sub-classes as transports, not stand-alone checkers
 class blcHttpChecker extends blcChecker {
+	/* @var blcChecker */
 	var $implementation = null;
 	
 	function init(){
@@ -100,7 +101,7 @@ class blcHttpCheckerBase extends blcChecker {
    * This checker only accepts HTTP(s) links.
    *
    * @param string $url
-   * @param array|false $parsed
+   * @param array|bool $parsed
    * @return bool
    */
 	function can_check($url, $parsed){
@@ -112,7 +113,7 @@ class blcHttpCheckerBase extends blcChecker {
   /**
    * Takes an URL and replaces spaces and some other non-alphanumeric characters with their urlencoded equivalents.
    *
-   * @param string $str
+   * @param string $url
    * @return string
    */
 	function urlencodefix($url){

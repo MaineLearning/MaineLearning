@@ -766,7 +766,6 @@ li li a .sf-sub-indicator
 	/* ML */
 }
 
-/* ML */
 blockquote
 {
 	margin: 5px 15px 20px;
@@ -776,6 +775,10 @@ blockquote
 .post { margin: 0 0 40px; }
 .entry-content { overflow: hidden; }
 .entry-content p { padding: 0 0 15px; }
+
+div.entry-content div {
+  padding-top: 10px; /* ML */
+}
 p.subscribe-to-comments { padding: 20px 0 10px; }
 .clear { clear: both; }
 
@@ -902,6 +905,7 @@ h2 a:visited
 	/* ML */
 	line-height: 22px;
 	/* ML */
+	margin: 20px 0 10px 0; /* ML */
 	text-transform: none;
 	/* ML */
 }
@@ -998,17 +1002,20 @@ h6 { font-size: 12px; }
 /* Post Meta
 ------------------------------------------------------------ */
 
-/*
+
 .post-meta
 {
+	margin-top: 10px;
+/*
 	border-top: 1px solid #ddd;
 	clear: both;
 	font-size: 12px;
 	padding: 5px 0 0;
 	text-transform: uppercase;
+	*/
 }
 
-*/
+
 
 /* Author Box
 ------------------------------------------------------------ */
@@ -1121,15 +1128,17 @@ img.alignright
 
 .wp-caption
 {
+	background-color: transparent !important;
 	padding: 5px;
 	text-align: center;
 }
 
 p.wp-caption-text
 {
+	background-color: transparent !important;
 	font-size: 12px;
 	line-height: 16px;
-	padding: 5px 0;
+	padding: 6px 5px 20px 5px;
 }
 
 .wp-smiley,
@@ -1192,6 +1201,10 @@ p.wp-caption-text
 	line-height: 20px;
 }
 
+div.sidebar li {
+  padding-bottom: 10px; 	/* ML */
+}
+
 #sidebar-alt
 {
 	float: left;
@@ -1218,6 +1231,10 @@ p.wp-caption-text
 	/* ML */
 	margin: 0 0 15px;
 	padding: 0 0 15px;
+}
+
+div.widget-wrap li {
+  margin-top: 4px; 	/* ML */
 }
 
 .widget-area .textwidget { padding: 5px 15px 0; }
@@ -1711,6 +1728,12 @@ div.gform_wrapper .gform_footer
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
+#wp-admin-bar ul li#bp-adminbar-notifications-menu a span {
+	background: #aaa;
+	color: #222;
+	text-shadow: none;
+}
+
 /* Summary
 ----------------------- */
 
@@ -1753,6 +1776,18 @@ div.gform_wrapper .gform_footer
 }
 
 /* ENTRY: CONTENT: IMAGES */
+
+#content img {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 4px 4px 4px 4px;
+	-moz-box-shadow: 2px 2px 8px #888;
+	-webkit-box-shadow: 2px 2px 8px #888;
+	box-shadow: 2px 2px 8px #888;
+	display: inline-block;
+	margin: 0 20px 20px 2px;
+	padding: 0;
+}
+
 .entry-content .wp-post-image
 {
 	border: none;

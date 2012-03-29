@@ -1,0 +1,202 @@
+# YD OPTIONS PAGE TEMPLATE TEXT.
+# Copyright (C) 2009 yann.com
+# This file is distributed under the same license as the YD plugin package.
+# FIRST AUTHOR <yann@abc.fr>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YD Options Page Template Text\n"
+"POT-Creation-Date: 2010-10-13 23:03+0000\n"
+"PO-Revision-Date: 2011-07-28 17:21+0100\n"
+"Last-Translator: Yann Dubois <yann@abc.fr>\n"
+"Language-Team: Y.Dubois <yann@abc.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: yd-widget-framework.inc.php:22
+msgid "This will disable the link in your blog footer. If you are using this plugin on your site and like it, did you consider making a donation? - Thanks."
+msgstr "Это отключит ссылки в футере сайта. Если Вам нравится плагин, то вы можете сделать пожертвование его разработчику. - Спасибо."
+
+#: yd-widget-framework.inc.php:49
+#: yd-widget-framework.inc.php:326
+msgid "Clear cache"
+msgstr "Очистить кэш"
+
+#: yd-widget-framework.inc.php:53
+msgid "Caches are cleared"
+msgstr "Кэш очищен"
+
+#: yd-widget-framework.inc.php:54
+#: yd-widget-framework.inc.php:78
+#: yd-widget-framework.inc.php:324
+msgid "Reset plugin settings"
+msgstr "Сбросить настройки плагина"
+
+#: yd-widget-framework.inc.php:56
+msgid "Plugin settings are reset"
+msgstr "Настройки плагина сброшены"
+
+#: yd-widget-framework.inc.php:57
+#: yd-widget-framework.inc.php:321
+msgid "Update plugin settings"
+msgstr "Обновить настройки плагина"
+
+#: yd-widget-framework.inc.php:59
+msgid "Plugin settings are updated"
+msgstr "Настройки плагина обновлены"
+
+#: yd-widget-framework.inc.php:66
+msgid "Welcome to YD recent Posts Admin Page."
+msgstr "Добро пожаловать на админ-страницу YD recent Posts."
+
+#: yd-widget-framework.inc.php:76
+msgid "Uh-oh. Looks like I lost my settings. Sorry."
+msgstr "Сожалею, но похоже что настройки были потеряны."
+
+#: yd-widget-framework.inc.php:112
+msgid "Considered donating?"
+msgstr "Хотите сделать пожертвование&nbsp;?"
+
+#: yd-widget-framework.inc.php:116
+msgid "Enjoy this plugin?"
+msgstr "Вам нравится плагин&nbsp;?"
+
+#: yd-widget-framework.inc.php:116
+msgid "Help me improve it!"
+msgstr "Вы можете помочь сделать его еще лучше&nbsp;!"
+
+#: yd-widget-framework.inc.php:121
+#: yd-widget-framework.inc.php:122
+msgid "en_US"
+msgstr "ru_RU"
+
+#: yd-widget-framework.inc.php:124
+msgid "Thanks"
+msgstr "Спасибо"
+
+#: yd-widget-framework.inc.php:132
+msgid "Credits"
+msgstr "Credits"
+
+#: yd-widget-framework.inc.php:135
+msgid "Funding"
+msgstr "Финансирование"
+
+#: yd-widget-framework.inc.php:137
+msgid "Initial:"
+msgstr "Первая версия плагина&nbsp;:"
+
+#: yd-widget-framework.inc.php:140
+msgid "Translations"
+msgstr "Переводы"
+
+#: yd-widget-framework.inc.php:142
+msgid "English:"
+msgstr "Английский&nbsp;:"
+
+#: yd-widget-framework.inc.php:143
+msgid "French:"
+msgstr "Французский&nbsp;:"
+
+#: yd-widget-framework.inc.php:144
+msgid "Russian:"
+msgstr "Русский&nbsp;:"
+
+#: yd-widget-framework.inc.php:145
+msgid "Dutch:"
+msgstr "Голландский&nbsp;:"
+
+#: yd-widget-framework.inc.php:146
+msgid "German:"
+msgstr "Немецкий&nbsp;:"
+
+#: yd-widget-framework.inc.php:148
+msgid "If you want to contribute to a translation of this plugin, please drop me a line by "
+msgstr "Если Вы хотите сделать перевод плагина, пожалуйста, "
+
+#: yd-widget-framework.inc.php:149
+msgid "e-mail"
+msgstr "напишите мне&nbsp;"
+
+#: yd-widget-framework.inc.php:150
+msgid "or leave a comment on the "
+msgstr "или оставьте комментарий на&nbsp;"
+
+#: yd-widget-framework.inc.php:151
+msgid "plugin's page"
+msgstr "странице плагина"
+
+#: yd-widget-framework.inc.php:152
+msgid "You will get credit for your translation in the plugin file and the documentation page, "
+msgstr "Разумеется, что авторство файлов перевода будет указано в документации &nbsp;"
+
+#: yd-widget-framework.inc.php:153
+msgid "as well as a link on this page and on my developers' blog."
+msgstr "и на сайте разработчика плагина."
+
+#: yd-widget-framework.inc.php:163
+msgid "Free support"
+msgstr "Бесплатная поддержка"
+
+#: yd-widget-framework.inc.php:165
+msgid "Support page:"
+msgstr "Страница поддержки&nbsp;:"
+
+#: yd-widget-framework.inc.php:166
+msgid "here."
+msgstr "здесь."
+
+#: yd-widget-framework.inc.php:167
+msgid "(use comments!)"
+msgstr "(используйте комментарии&nbsp;!)"
+
+#: yd-widget-framework.inc.php:169
+msgid "Professional consulting"
+msgstr "Профессиональные консультации"
+
+#: yd-widget-framework.inc.php:170
+msgid "I am available as an experienced free-lance Wordpress plugin developer and web consultant. "
+msgstr "Я доступен как разработчик Вордпресс плагинов и веб-консультант."
+
+#: yd-widget-framework.inc.php:171
+msgid "Please feel free to <a href=\"mailto:yann@abc.fr\">check with me</a> for any adaptation or specific implementation of this plugin. "
+msgstr "Пожалуйста, не стесняйтесь <a href=\"mailto:yann@abc.fr\">обращаться ко мне</a> для адаптации или изменения этого плагина в соответствии с вашими требованиями. "
+
+#: yd-widget-framework.inc.php:172
+msgid "Or for any WP-related custom development or consulting work. Hourly rates available."
+msgstr "Или для других разработок, связанных с WP. Доступна почасовая оплата."
+
+#: yd-widget-framework.inc.php:194
+msgid "Main plugin settings:"
+msgstr "Основные настройки плагина&nbsp;:"
+
+#: yd-widget-framework.inc.php:198
+#: yd-widget-framework.inc.php:265
+msgid "Setting:"
+msgstr "Настройки&nbsp;:"
+
+#: yd-widget-framework.inc.php:199
+#: yd-widget-framework.inc.php:266
+msgid "Value:"
+msgstr "Значение&nbsp;:"
+
+#: yd-widget-framework.inc.php:277
+msgid "This will disable the link in your blog footer. If you are using this plugin on your site and like it, did you consider making a donation? -- Thanks."
+msgstr "Это отключит ссылки в футере сайта. Если Вам нравится плагин, то вы можете сделать пожертвование его разработчику. - Спасибо."
+
+#: yd-widget-framework.inc.php:290
+msgid "Other options:"
+msgstr "Другие настройки&nbsp;:"
+
+#: yd-widget-framework.inc.php:298
+msgid "Show debug messages:"
+msgstr "Показывать информацию об ошибках&nbsp;:"
+
+#: yd-widget-framework.inc.php:307
+msgid "Disable backlink in the blog footer:"
+msgstr "Отключить обратные ссылки в подвале страницы&nbsp;:"
+

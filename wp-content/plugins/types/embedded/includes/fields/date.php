@@ -1,39 +1,38 @@
 <?php
-
 global $supported_date_formats, $supported_date_formats_text;
 $supported_date_formats = array('F j, Y', //December 23, 2011
-                                'Y/m/d', // 2011/12/23
-                                'm/d/Y', // 12/23/2011
-                                'd/m/Y' // 23/22/2011
-                               );
+    'Y/m/d', // 2011/12/23
+    'm/d/Y', // 12/23/2011
+    'd/m/Y' // 23/22/2011
+);
 
 $supported_date_formats_text = array('F j, Y' => 'Month dd, yyyy',
-                                'Y/m/d' => 'yyyy/mm/dd', 
-                                'm/d/Y' => 'mm/dd/yyyy',
-                                'd/m/Y' => 'dd/mm/yyyy'
-                               );
+    'Y/m/d' => 'yyyy/mm/dd',
+    'm/d/Y' => 'mm/dd/yyyy',
+    'd/m/Y' => 'dd/mm/yyyy'
+);
 
 function wpcf_get_date_format() {
     global $supported_date_formats;
-    
+
     $date_format = get_option('date_format');
     if (!in_array($date_format, $supported_date_formats)) {
         // Choose the Month day, Year fromat
         $date_format = 'F j, Y';
     }
-    
+
     return $date_format;
 }
 
 function wpcf_get_date_format_text() {
     global $supported_date_formats, $supported_date_formats_text;
-    
+
     $date_format = get_option('date_format');
     if (!in_array($date_format, $supported_date_formats)) {
         // Choose the Month day, Year fromat
         $date_format = 'F j, Y';
     }
-    
+
     return $supported_date_formats_text[$date_format];
 }
 
@@ -97,7 +96,7 @@ function _wpcf_date_convert_wp_to_js($date_format) {
     $date_format = str_replace('n', 'm', $date_format);
     $date_format = str_replace('F', 'MM', $date_format);
     $date_format = str_replace('Y', 'yy', $date_format);
-    
+
     return $date_format;
 }
 
@@ -108,37 +107,39 @@ function wpcf_fields_date_meta_box_js_inline() {
 
     $date_format = wpcf_get_date_format();
     $date_format = _wpcf_date_convert_wp_to_js($date_format);
-    
-    $date_format_note = '<span style="margin-left:10px"><i>' . sprintf(__('Input format: %s', 'wpcf'), wpcf_get_date_format_text()) . '</i></span>';
-    
+
+    $date_format_note = '<span style="margin-left:10px"><i>' . sprintf(__('Input format: %s',
+                            'wpcf'), wpcf_get_date_format_text()) . '</i></span>';
+
     ?>
     <script type="text/javascript">
         //<![CDATA[
         jQuery(document).ready(function(){
+            wpcfFieldsDateInit('');
+        });
+           
+        function wpcfFieldsDateInit(div) {
             if (jQuery.isFunction(jQuery.fn.datepicker)) {
-                jQuery('.wpcf-datepicker').each(function(index) {
-                    if (!jQuery(this).is(':disabled')) {
-                            jQuery(this).datepicker({
+                jQuery(div+' .wpcf-datepicker').each(function(index) {
+                    if (!jQuery(this).is(':disabled') && !jQuery(this).hasClass('hasDatepicker')) {
+                        jQuery(this).datepicker({
                             showOn: "button",
                             buttonImage: "<?php echo WPCF_EMBEDDED_RES_RELPATH; ?>/images/calendar.gif",
                             buttonImageOnly: true,
                             buttonText: "<?php _e('Select date', 'wpcf'); ?>",
                             dateFormat: "<?php echo $date_format; ?>",
-                            altFormat: "<?php echo $date_format; ?>",
-                                });
-                            
-                        jQuery(this).next().after('<?php echo $date_format_note;?>');
-                        }
-                    
-                    });
+                            altFormat: "<?php echo $date_format; ?>"
+                        });
+                        jQuery(this).next().after('<?php echo $date_format_note; ?>');
                     }
                 });
-                function wpcfFieldsDateEditorCallback(field_id) {
-                    var url = "<?php echo admin_url('admin-ajax.php'); ?>?action=wpcf_ajax&wpcf_action=editor_insert_date&_wpnonce=<?php echo wp_create_nonce('fields_insert'); ?>&field_id="+field_id+"&keepThis=true&TB_iframe=true&width=400&height=400";
-                    tb_show("<?php _e('Insert date',
-            'wpcf'); ?>", url);
-                }
-                //]]>
+            }
+        }
+        function wpcfFieldsDateEditorCallback(field_id) {
+            var url = "<?php echo admin_url('admin-ajax.php'); ?>?action=wpcf_ajax&wpcf_action=editor_insert_date&_wpnonce=<?php echo wp_create_nonce('fields_insert'); ?>&field_id="+field_id+"&keepThis=true&TB_iframe=true&width=400&height=400";
+            tb_show("<?php _e('Insert date', 'wpcf'); ?>", url);
+        }
+        //]]>
     </script>
     <?php
 }
@@ -153,7 +154,7 @@ function wpcf_fields_date_value_get_filter($value) {
     if (empty($value)) {
         return $value;
     }
-    return date(get_option('date_format'), intval($value));
+    return date(wpcf_get_date_format(), intval($value));
 }
 
 /**
@@ -166,7 +167,7 @@ function wpcf_fields_date_value_save_filter($value) {
     if (empty($value)) {
         return $value;
     }
-    
+
     $date_format = wpcf_get_date_format();
     if ($date_format == 'd/m/Y') {
         // strtotime requires a dash or dot separator to determine dd/mm/yyyy format
@@ -180,7 +181,6 @@ function wpcf_fields_date_value_save_filter($value) {
  * Convert a format from date() to strftime() format
  *
  */
-
 function wpcf_date_to_strftime($format) {
 
     $format = str_replace('d', '%d', $format);
@@ -191,18 +191,19 @@ function wpcf_date_to_strftime($format) {
     $format = str_replace('w', '%w', $format);
 
     $format = str_replace('W', '%W', $format);
-    
+
     $format = str_replace('F', '%B', $format);
     $format = str_replace('m', '%m', $format);
     $format = str_replace('M', '%b', $format);
     $format = str_replace('n', '%m', $format);
-    
+
     $format = str_replace('o', '%g', $format);
     $format = str_replace('Y', '%Y', $format);
     $format = str_replace('y', '%y', $format);
-    
-    return $format;    
+
+    return $format;
 }
+
 /**
  * View function.
  * 
@@ -211,7 +212,7 @@ function wpcf_date_to_strftime($format) {
 function wpcf_fields_date_view($params) {
 
     global $wp_locale;
-    
+
     $defaults = array(
         'format' => get_option('date_format'),
     );
@@ -225,7 +226,7 @@ function wpcf_fields_date_view($params) {
         default:
             $field_name = '';
 
-            
+
             // Extract the Full month and Short month from the format.
             // We'll replace with the translated months if possible.
             $format = $params['format'];
@@ -249,12 +250,8 @@ function wpcf_fields_date_view($params) {
             $date_out = str_replace('#333333#', $day_full, $date_out);
             $day_short = $wp_locale->get_weekday_abbrev($day_full);
             $date_out = str_replace('#444444#', $day_short, $date_out);
-            
-            $field_value = wpcf_frontend_wrap_field_value($params['field'],
-                    $date_out,
-                    $params);
-            $output = wpcf_frontend_wrap_field($params['field'], $field_value,
-                    $params);
+
+            $output = $date_out;
             break;
     }
 
@@ -360,7 +357,7 @@ function wpcf_fields_date_get_calendar($params, $initial = true, $echo = true) {
 
 	<tbody>
 	<tr>';
-    
+
     // See how much we should pad in the beginning
     $pad = calendar_week_mod(date('w', $unixmonth) - $week_begins);
     if (0 != $pad)
@@ -476,8 +473,10 @@ function wpcf_fields_date_editor_callback() {
         '#value' => $_GET['field_id'],
     );
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Insert date', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Insert date', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
     $f = wpcf_form('wpcf-fields-date-editor', $form);
     add_action('admin_head_wpcf_ajax', 'wpcf_fields_date_editor_form_script');

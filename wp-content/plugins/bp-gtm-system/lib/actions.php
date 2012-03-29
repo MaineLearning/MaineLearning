@@ -18,7 +18,6 @@ class BP_GTM_Actions {
         if( bp_gtm_check_access('involved_roles') &&
                 ( $bp_gtm['groups'] == 'all' || array_key_exists($bp->groups->current_group->id, $bp_gtm['groups']) ) ){
             
-            add_action('bp_group_members_list_item_action', array($this, 'role_button'));
             add_action('bp_directory_involved_actions', array($this, 'role_extra_button'));
         }
         add_action('wp_footer', array($this, 'role_popup'));
@@ -62,13 +61,7 @@ class BP_GTM_Actions {
         die();
     }
 
-    // display on Group->Members page
-    function role_button(){
-        echo '
-        <div class="generic-button-gtm generic-button">
-            <a class="change_role" rel="'.bp_get_group_member_id().'" href="#">'.__('Change role','bp_gtm').'</a>
-        </div>';
-    }
+    
     // display on Group->GTM->Involved page
     function role_extra_button($user_id){
         echo ' | <a class="change_role" rel="'.$user_id.'" href="#" title="'.__('Change role','bp_gtm').'">'.__('R', 'bp_gtm').'</a>';

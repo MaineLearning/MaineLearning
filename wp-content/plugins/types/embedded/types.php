@@ -11,8 +11,10 @@ define('WPCF_EMBEDDED_RES_ABSPATH', WPCF_EMBEDDED_ABSPATH . '/resources');
 if (!defined('ICL_COMMON_FUNCTIONS')) {
     require_once WPCF_EMBEDDED_ABSPATH . '/common/functions.php';
 }
+require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
 
 wpcf_embedded_after_setup_theme_hook();
+
 /**
  * after_setup_theme hook.
  */
@@ -46,7 +48,7 @@ function wpcf_embedded_init() {
 
     // Define necessary constants if plugin is not present
     if (!defined('WPCF_VERSION')) {
-        define('WPCF_VERSION', '0.9.4.2');
+        define('WPCF_VERSION', '0.9.5.1');
         define('WPCF_META_PREFIX', 'wpcf-');
         define('WPCF_EMBEDDED_RELPATH', icl_get_file_relpath(__FILE__));
     } else {
@@ -73,15 +75,15 @@ function wpcf_embedded_init() {
  * Inits custom types and taxonomies.
  */
 function wpcf_init_custom_types_taxonomies() {
-    $custom_types = get_option('wpcf-custom-types', array());
-    if (!empty($custom_types)) {
-        require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
-        wpcf_custom_types_init();
-    }
     $custom_taxonomies = get_option('wpcf-custom-taxonomies', array());
     if (!empty($custom_taxonomies)) {
         require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-taxonomies.php';
         wpcf_custom_taxonomies_init();
+    }
+    $custom_types = get_option('wpcf-custom-types', array());
+    if (!empty($custom_types)) {
+        require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
+        wpcf_custom_types_init();
     }
 }
 
@@ -92,11 +94,11 @@ function wpcf_init_custom_types_taxonomies() {
  * @param type $string
  * @return type 
  */
-function wpcf_translate($name, $string) {
+function wpcf_translate($name, $string, $context = 'plugin Types') {
     if (!function_exists('icl_t')) {
         return $string;
     }
-    return icl_t('plugin Types', $name, $string);
+    return icl_t($context, $name, $string);
 }
 
 /**
@@ -151,6 +153,7 @@ function wpcf_embedded_check_import() {
                     $_POST['delete-fields'] = 1;
                     $_POST['delete-types'] = 1;
                     $_POST['delete-tax'] = 1;
+                    $_POST['post_relationship'] = 1;
                     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
                     require_once WPCF_EMBEDDED_INC_ABSPATH . '/import-export.php';
                     $data = @file_get_contents(WPCF_EMBEDDED_ABSPATH . '/settings.xml');
@@ -285,4 +288,119 @@ function wpcf_types_get_meta_prefix($field = array()) {
 function wpcf_compare_wp_version($version = '3.2.1', $operator = '>') {
     global $wp_version;
     return version_compare($wp_version, $version, $operator);
+}
+
+/**
+ * Gets post type with data to which belongs.
+ * 
+ * @param type $post_type
+ * @return type 
+ */
+function wpcf_pr_get_belongs($post_type) {
+    require_once WPCF_EMBEDDED_ABSPATH . '/includes/post-relationship.php';
+    return wpcf_pr_admin_get_belongs($post_type);
+}
+
+/**
+ * Gets all post types and data that owns.
+ * 
+ * @param type $post_type
+ * @return type 
+ */
+function wpcf_pr_get_has($post_type) {
+    require_once WPCF_EMBEDDED_ABSPATH . '/includes/post-relationship.php';
+    return wpcf_pr_admin_get_has($post_type);
+}
+
+/**
+ * Gets individual post ID to which queried post belongs.
+ * 
+ * @param type $post_id
+ * @param type $post_type Post type of owner
+ * @return type 
+ */
+function wpcf_pr_post_get_belongs($post_id, $post_type) {
+    return get_post_meta($post_id, '_wpcf_belongs_' . $post_type . '_id', true);
+}
+
+/**
+ * Gets all posts that belong to queried post, grouped by post type.
+ * 
+ * @param type $post_id
+ * @param type $post_type
+ * @return type 
+ */
+function wpcf_pr_post_get_has($post_id, $post_type_q = null) {
+    $post_type = get_post_type($post_id);
+    $has = array_keys(wpcf_pr_get_has($post_type));
+    $add = is_null($post_type_q) ? '&post_type=any' : '&post_type=' . $post_type_q;
+    $posts = get_posts('numberposts=-1&post_status=null&meta_key=_wpcf_belongs_'
+            . $post_type . '_id&meta_value=' . $post_id . $add);
+
+    $results = array();
+    foreach ($posts as $post) {
+        if (!in_array($post->post_type, $has)) {
+            continue;
+        }
+        $results[$post->post_type][] = $post;
+    }
+    return is_null($post_type_q) ? $results : array_shift($results);
+}
+
+/**
+ * Gets posts that belongs to current post.
+ * 
+ * @global type $post
+ * @param type $post_type
+ * @param type $args
+ * @return type 
+ */
+function types_child_posts($post_type, $args = array()) {
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields-post.php';
+    global $post;
+    $defaults = array(
+        'post_type' => $post_type,
+        'numberposts' => -1,
+        'post_status' => null,
+        'meta_key' => '_wpcf_belongs_' . $post->post_type . '_id',
+        'meta_value' => $post->ID,
+    );
+    $args = wp_parse_args($args, $defaults);
+    $child_posts = get_posts($args);
+    foreach ($child_posts as $child_post_key => $child_post) {
+        $child_posts[$child_post_key]->fields = array();
+        $groups = wpcf_admin_post_get_post_groups_fields($child_post);
+        foreach ($groups as $group) {
+            if (!empty($group['fields'])) {
+                // Process fields
+                foreach ($group['fields'] as $k => $field) {
+                    $child_posts[$child_post_key]->fields[$k] = get_post_meta($child_post->ID,
+                            wpcf_types_get_meta_prefix($field) . $field['slug'], true);
+                }
+            }
+        }
+    }
+    return $child_posts;
+}
+
+/**
+ * Gets settings.
+ */
+function wpcf_get_settings($specific = false) {
+    $defaults = array(
+        'add_resized_images_to_library' => 0,
+        'register_translations_on_import' => 1,
+    );
+    $settings = wp_parse_args(get_option('wpcf_settings', array()), $defaults);
+    if ($specific) {
+        return isset($settings[$specific]) ? $settings[$specific] : false;
+    }
+    return $settings;
+}
+
+/**
+ * Saves settings.
+ */
+function wpcf_save_settings($settings) {
+    update_option('wpcf_settings', $settings);
 }

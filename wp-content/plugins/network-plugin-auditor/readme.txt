@@ -21,6 +21,10 @@ This plugin adds a column to your network admin to show which sites have each pl
 
 == Changelog ==
 
+= 1.0.1 =
+
+Bug fix: Check column_name before adding the output (Thanks to gabriel-reguly for the catch!)
+
 = 1.0 =
 
 Initial release

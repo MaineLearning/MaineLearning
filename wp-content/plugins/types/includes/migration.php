@@ -21,6 +21,9 @@ function wpcf_admin_migration_form() {
     $cfui_types = get_option('cpt_custom_post_types', array());
     $cfui_types_migrated = array();
 
+    $cfui_taxonomies = get_option('cpt_custom_tax_types', array());
+    $cfui_tax_migrated = array();
+
     if (!empty($cfui_types)) {
         $form['types_title'] = array(
             '#type' => 'markup',
@@ -53,9 +56,6 @@ function wpcf_admin_migration_form() {
         }
     }
 
-    $cfui_taxonomies = get_option('cpt_custom_tax_types', array());
-    $cfui_tax_migrated = array();
-
     if (!empty($cfui_taxonomies)) {
         $form['tax_titles'] = array(
             '#type' => 'markup',
@@ -87,17 +87,16 @@ function wpcf_admin_migration_form() {
                 '#attributes' => $attributes,
             );
         }
-        $form['deactivate-cfui'] = array(
-            '#type' => 'checkbox',
-            '#name' => 'deactivate-cfui',
-            '#before' => '<br /><br />',
-            '#default_value' => 1,
-            '#title' => __('Disable Custom Types UI after importing the configuration (leave this checked to avoid defining custom types twice)',
-                    'wpcf'),
-        );
     }
 
-
+    $form['deactivate-cfui'] = array(
+        '#type' => 'checkbox',
+        '#name' => 'deactivate-cfui',
+        '#before' => '<br /><br />',
+        '#default_value' => 1,
+        '#title' => __('Disable Custom Types UI after importing the configuration (leave this checked to avoid defining custom types twice)',
+                'wpcf'),
+    );
 
 
 
@@ -295,8 +294,10 @@ function wpcf_admin_migration_form() {
     }
 
     $form['submit'] = array(
-        '#type' => 'markup',
-        '#markup' => get_submit_button(__('Import custom field settings', 'wpcf')),
+        '#type' => 'submit',
+        '#name' => 'submit',
+        '#value' => __('Import custom field settings', 'wpcf'),
+        '#attributes' => array('class' => 'button-primary'),
     );
 
     return $form;
@@ -310,12 +311,12 @@ function wpcf_admin_migration_form_submit() {
     $cfui_taxonomies = get_option('cpt_custom_tax_types', array());
     $wpcf_types = get_option('wpcf-custom-types', array());
     $wpcf_taxonomies = get_option('wpcf-custom-taxonomies', array());
+    $redirect_page = 'wpcf-ctt';
 
     if (!empty($_POST['cfui']['types'])) {
         $data = array();
         foreach ($_POST['cfui']['types'] as $key => $types_slug) {
-            if (array_key_exists(sanitize_title($types_slug),
-                            sanitize_title($wpcf_types))) {
+            if (array_key_exists(sanitize_title($types_slug), $wpcf_types)) {
                 continue;
             }
             foreach ($cfui_types as $cfui_type) {
@@ -333,8 +334,7 @@ function wpcf_admin_migration_form_submit() {
     if (!empty($_POST['cfui']['tax'])) {
         $data = array();
         foreach ($_POST['cfui']['tax'] as $key => $tax_slug) {
-            if (array_key_exists(sanitize_title($tax_slug),
-                            sanitize_title($wpcf_taxonomies))) {
+            if (array_key_exists(sanitize_title($tax_slug), $wpcf_taxonomies)) {
                 continue;
             }
             foreach ($cfui_taxonomies as $cfui_tax) {
@@ -398,6 +398,7 @@ function wpcf_admin_migration_form_submit() {
             wpcf_admin_fields_save_group_post_types($group_id, array());
             wpcf_admin_fields_save_group_terms($group_id, array());
         }
+        $redirect_page = 'wpcf';
     }
     flush_rewrite_rules();
 
@@ -411,7 +412,7 @@ function wpcf_admin_migration_form_submit() {
         }
         update_option('active_plugins', array_values($active_plugins));
     }
-    wp_redirect(admin_url('admin.php?page=wpcf'));
+    wp_redirect(admin_url('admin.php?page=' . $redirect_page));
     die();
 }
 
@@ -422,6 +423,7 @@ function wpcf_admin_migration_form_submit() {
  * @return type 
  */
 function wpcf_admin_migrate_get_cfui_type_data($cfui_type) {
+    $cfui_types_migrated = array();
     $supports = array();
     if (!empty($cfui_type[0])) {
         foreach ($cfui_type[0] as $temp_key => $support) {
@@ -430,23 +432,26 @@ function wpcf_admin_migrate_get_cfui_type_data($cfui_type) {
     }
 
     $taxonomies = array();
-    foreach ($cfui_type[1] as $key => $tax) {
-        $taxonomies[$tax] = 1;
+    if (!empty($cfui_type[1])) {
+        foreach ($cfui_type[1] as $key => $tax) {
+            $taxonomies[$tax] = 1;
+        }
     }
     $wpcf_types_defaults = wpcf_custom_types_default();
     $slug = $id = sanitize_title($cfui_type['name']);
 
     // Set labels
-    $labels = $cfui_type[2];
+    $labels = isset($cfui_type[2]) ? $cfui_type[2] : array();
     $labels['name'] = !empty($cfui_type['label']) ? $cfui_type['label'] : $slug;
-    $labels['singular_name'] = !empty($cfui_type['singlular_label']) ? $cfui_type['singlular_label'] : $slug;
+    $labels['singular_name'] = !empty($cfui_type['singular_label']) ? $cfui_type['singular_label'] : $slug;
+    foreach ($wpcf_types_defaults['labels'] as $label_id => $label_text) {
+        if (empty($labels[$label_id])) {
+            $labels[$label_id] = $label_text;
+        }
+    }
     foreach ($labels as $label_id => $label_text) {
-        if (empty($label_text)) {
-            if (!empty($wpcf_types_defaults['labels'][$label_id])) {
-                $labels[$label_id] = $wpcf_types_defaults['labels'][$label_id];
-            } else {
-                unset($labels[$label_id]);
-            }
+        if (!isset($wpcf_types_defaults['labels'][$label_id])) {
+            unset($labels[$label_id]);
         }
     }
     // Force menu_name label
@@ -459,7 +464,8 @@ function wpcf_admin_migrate_get_cfui_type_data($cfui_type) {
     if (is_array($rewrite)) {
         $rewrite = array(
             'enabled' => 1,
-            'rewrite_slug' => !empty($cfui_type['rewrite_slug']) ? $cfui_type['rewrite_slug'] : 'normal',
+            'custom' => !empty($cfui_type['rewrite_slug']) ? 'custom' : 'normal',
+            'slug' => !empty($cfui_type['rewrite_slug']) ? $cfui_type['rewrite_slug'] : '',
             'with_front' => 1,
             'feeds' => 1,
             'pages' => 1,
@@ -474,17 +480,24 @@ function wpcf_admin_migrate_get_cfui_type_data($cfui_type) {
         'slug' => $slug,
         'id' => $id,
         'public' => empty($cfui_type['public']) ? 'hidden' : 'public',
+        'publicly_queryable' => empty($cfui_type['public']) ? false : true,
         'query_var_enabled' => (bool) $cfui_type['query_var'],
         'query_var' => '',
+        'show_in_menu' => (bool) $cfui_type['show_in_menu'],
         'show_in_menu_page' => $cfui_type['show_in_menu_string'],
+        'has_archive' => (bool) $cfui_type['has_archive'],
         'taxonomies' => $taxonomies,
+        'can_export' => true,
+        'show_in_nav_menus' => true,
     );
 
     unset($cfui_type[0], $cfui_type[1], $cfui_type[2], $cfui_type['public'],
             $cfui_type['rewrite'], $cfui_type['name'], $cfui_type['label'],
             $cfui_type['singular_label'], $cfui_type['capability_type'],
-            $cfui_type['rewrite_slug'], $cfui_type['show_in_menu_string'],
-            $cfui_type['capabilities']);
+            $cfui_type['rewrite_slug'], $cfui_type['show_in_menu'],
+            $cfui_type['show_in_menu_string'], $cfui_type['publicly_queryable'],
+            $cfui_type['capabilities'], $cfui_type['has_archive'],
+            $cfui_type['show_in_nav_menus']);
 
     $cfui_types_migrated[$slug] = array_merge($cfui_type,
             $cfui_types_migrated[$slug]);
@@ -499,6 +512,7 @@ function wpcf_admin_migrate_get_cfui_type_data($cfui_type) {
  * @return type 
  */
 function wpcf_admin_migrate_get_cfui_tax_data($cfui_tax) {
+    $cfui_tax_migrated = array();
     $supports = array();
     if (!empty($cfui_tax[1])) {
         foreach ($cfui_tax[1] as $temp_key => $support) {
@@ -510,16 +524,17 @@ function wpcf_admin_migrate_get_cfui_tax_data($cfui_tax) {
     $slug = $id = sanitize_title($cfui_tax['name']);
 
     // Set labels
-    $labels = $cfui_tax[0];
+    $labels = isset($cfui_tax[0]) ? $cfui_tax[0] : array();
     $labels['name'] = !empty($cfui_tax['label']) ? $cfui_tax['label'] : $slug;
-    $labels['singular_name'] = !empty($cfui_tax['singlular_label']) ? $cfui_tax['singlular_label'] : $slug;
+    $labels['singular_name'] = !empty($cfui_tax['singular_label']) ? $cfui_tax['singular_label'] : $slug;
+    foreach ($wpcf_taxonomies_defaults['labels'] as $label_id => $label_text) {
+        if (empty($labels[$label_id])) {
+            $labels[$label_id] = $label_text;
+        }
+    }
     foreach ($labels as $label_id => $label_text) {
-        if (empty($label_text)) {
-            if (!empty($wpcf_taxonomies_defaults['labels'][$label_id])) {
-                $labels[$label_id] = $wpcf_taxonomies_defaults['labels'][$label_id];
-            } else {
-                unset($labels[$label_id]);
-            }
+        if (!isset($wpcf_taxonomies_defaults['labels'][$label_id])) {
+            unset($labels[$label_id]);
         }
     }
     // Force menu_name label
@@ -532,9 +547,9 @@ function wpcf_admin_migrate_get_cfui_tax_data($cfui_tax) {
     if (is_array($rewrite)) {
         $rewrite = array(
             'enabled' => 1,
-            'slug' => !empty($cfui_tax['rewrite_slug']) ? $cfui_tax['rewrite_slug'] : 'normal',
+            'slug' => !empty($cfui_tax['rewrite_slug']) ? $cfui_tax['rewrite_slug'] : '',
             'with_front' => 1,
-            'hierarchical' => $cfui_tax['hierarchical'],
+            'hierarchical' => (bool) $cfui_tax['hierarchical'],
         );
     }
 
@@ -549,11 +564,13 @@ function wpcf_admin_migrate_get_cfui_tax_data($cfui_tax) {
         'public' => 'public',
         'query_var_enabled' => (bool) $cfui_tax['query_var'],
         'query_var' => '',
+        'hierarchical' => (bool) $cfui_tax['hierarchical'] ? 'hierarchical' : 'flat',
     );
 
     unset($cfui_tax[0], $cfui_tax[1], $cfui_tax['rewrite'], $cfui_tax['name'],
             $cfui_tax['label'], $cfui_tax['singular_label'],
-            $cfui_tax['rewrite_slug'], $cfui_tax['capabilities']);
+            $cfui_tax['rewrite_slug'], $cfui_tax['capabilities'],
+            $cfui_tax['hierarchical']);
 
     $cfui_tax_migrated[$slug] = array_merge($wpcf_taxonomies_defaults,
             array_merge($cfui_tax, $cfui_tax_migrated[$slug]));

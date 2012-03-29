@@ -48,7 +48,7 @@ class blcRapidShareChecker extends blcChecker {
 			'redirect_count' => 0,
 			'timeout' => false,
 			'broken' => false,
-			'log' => "<em>(Using RapidShare API)</em>\n\n",
+			'log' => sprintf("<em>(%s)</em>\n\n", __('Using RapidShare API', 'broken-link-checker')),
 			'result_hash' => '',
 			'status_code' => '',
 			'status_text' => '',
@@ -61,42 +61,39 @@ class blcRapidShareChecker extends blcChecker {
 		$file_name = $matches[2];
 		
 		/*
-		We use the checkfiles_v1 function to check file status. The RapidShare API docs can be found here : 
+		We use the checkfiles function to check file status. The RapidShare API docs can be found here :
 		http://images.rapidshare.com/apidoc.txt
 	 	
 	 	The relevant function is documented thusly :  
 	 	
-		subroutine=checkfiles_v1
+		sub=checkfiles
 		
-		Description:	
-			Gets status details about a list of given files. (files parameter limited to 3000 bytes. filenames parameter limited to 30000 bytes.)
-			
-		Parameters:	
+		Description:
+				Gets status details about a list of given files. (files parameter limited to 3000 bytes.
+				filenames parameter limited to 30000 bytes.)
+
+		Parameters:
 				files=comma separated list of file ids
 				filenames=comma separated list of the respective filename. Example: files=50444381,50444382 filenames=test1.rar,test2.rar
-				incmd5=if set to 1, field 7 is the hex-md5 of the file. This will double your points! If not given, all md5 values will be 0
-				
-		Reply fields:	
+
+		Reply fields:
 				1:File ID
 				2:Filename
 				3:Size (in bytes. If size is 0, this file does not exist.)
 				4:Server ID
 				5:Status integer, which can have the following numeric values:
 					0=File not found
-					1=File OK (Anonymous downloading)
-					2=File OK (TrafficShare direct download without any logging)
+					1=File OK
 					3=Server down
 					4=File marked as illegal
-					5=Anonymous file locked, because it has more than 10 downloads already
-					6=File OK (TrafficShare direct download with enabled logging. Read our privacy policy to see what is logged.)
 				6:Short host (Use the short host to get the best download mirror: http://rs$serverid$shorthost.rapidshare.com/files/$fileid/$filename)
-				7:md5 (See parameter incmd5 in parameter description above.)
-				
+				7:MD5 (hexadecimal)
+
 		Reply format:	integer,string,integer,integer,integer,string,string
 		*/
 		
 		$api_url = sprintf(
-			'http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles_v1&files=%d&filenames=%s',
+			'http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files=%d&filenames=%s',
 			$file_id,
 			$file_name
 		);

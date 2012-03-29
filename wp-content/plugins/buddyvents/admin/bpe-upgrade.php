@@ -19,6 +19,8 @@ if( ! defined( 'ABSPATH' ) ) exit;
  */
 function bpe_upgrade()
 {
+	set_time_limit( 0 );
+	
 	global $bpe, $wpdb, $bp;
 	
 	$version = get_blog_option( Buddyvents::$root_blog, 'bpe_dbversion' );
@@ -803,7 +805,34 @@ function bpe_upgrade()
             require_once( EVENT_ABSPATH .'admin/bpe-install.php' );
             
         bpe_activate();
+
+		// Update the db version
+		update_blog_option( Buddyvents::$root_blog, 'bpe_dbversion', EVENT_DBVERSION );
             
+        echo __( 'Done! Please refresh this page.', 'events' ) . "<br />\n";
+        $wpdb->hide_errors();
+            
+        $updated = true;
+    }
+
+
+    // upgrading to db version 2.9
+    if( version_compare( $version, '2.9', '<' ) )
+    {
+        printf( __( 'Upgrading database structure for DB %s...', 'events' ), 'v2.9' );
+        $wpdb->show_errors();
+            
+		// add status metadata for all events
+		$events = $wpdb->get_col( $wpdb->prepare( "SELECT id FROM {$bpe->tables->events}" ) );		
+		foreach( $events as $event_id ) 
+		{
+			if( ! bpe_get_eventmeta( $event_id, 'status' ) )
+				bpe_update_eventmeta( $event_id, 'status', 'active' );
+		}
+
+		// Update the db version
+		update_blog_option( Buddyvents::$root_blog, 'bpe_dbversion', EVENT_DBVERSION );
+		
         echo __( 'Done! Please refresh this page.', 'events' ) . "<br />\n";
         $wpdb->hide_errors();
             

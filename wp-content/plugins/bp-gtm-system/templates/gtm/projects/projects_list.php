@@ -50,7 +50,7 @@ if (count($options['projects'])) { ?>
                     <?php foreach ($options['projects'] as $project) { ?>
                 <tr id="<?php echo $project->id; ?>" class="<?php bp_gtm_project_check_date($project->id, $project->deadline); ?>">
                     <td class="td-title">
-                        <?php bp_gtm_view_link($project->id, $project->name, $gtm_link, 'project'); ?>
+                        <?php bp_gtm_view_link($project, $gtm_link, 'project'); ?>
                     </td>
                     <td class="td-poster">
                         <?php
