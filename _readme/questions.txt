@@ -11,6 +11,8 @@ How do we get nested comments in the forum?
 In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
 
 
+--------------------------------------------------
+What's the best way to get external RSS items integrated into group activity streams? I tried YD's plugin, but it appears to not work with 1.5.
 
 --------------------------------------------------
 Where is New Post button on blog page?
