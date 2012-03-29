@@ -27,15 +27,11 @@ After maintenance is over, htaccess file should always redirect maintenance.html
 
 
 --------------------------------------------------
-What's the best way to get external RSS items integrated into group activity streams? I tried YD's plugin, but it appears to not work with 1.5.
+On Network Admin: Users, the search is exact rather than fuzzy. For instance, when I search for "wood", it does not show "mdoewood" in the results. Is this configurable?
+
 
 --------------------------------------------------
-Where is New Post button on blog page?
-
-
 When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
-
-
 
 
 
@@ -94,7 +90,7 @@ BUILD BLOG FIRST, THEN ATTACH TO GROUP. TRY RUNNING WITH REPLICATOR.
 
 
 --------------------------------------------------
-RESOLVED
+RESOLVED OR ANSWERED
 --------------------------------------------------
 
 
@@ -131,6 +127,11 @@ Tried upgrading to BuddyPress 1.5.4 (from .3) for second time. Again this time, 
 
 
 What is the best way to identify and diagnose PHP errors?
+
+--------------------------------------------------
+What's the best way to get external RSS items integrated into group activity streams? I tried YD's plugin, but it appears to not work with 1.5.
+
+CHECKING OUT EXTERNAL BLOGS BY ANDY
 
 
 --------------------------------------------------
