@@ -1,4 +1,3 @@
-# Translation of the WordPress plugin BP Group Management 0.2 by Boone Gorges.
 # Copyright (C) 2010 Boone Gorges
 # This file is distributed under the same license as the BP Group Management package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,22 +7,21 @@ msgstr ""
 "Project-Id-Version: BP Group Management 0.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-management\n"
 "POT-Creation-Date: 2010-03-07 21:39+0000\n"
-"PO-Revision-Date: 2010-03-08 20:40+0200\n"
-"Last-Translator: h <h@h.com>\n"
-"Language-Team: luccame\n"
+"PO-Revision-Date: 2012-03-20 18:15+0200\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: Romania\n"
+"Language-Team: Web Geeks\n"
+"Last-Translator: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: bp-group-management-bp-functions.php:5
 #: bp-group-management-bp-functions.php:59
 #: bp-group-management-bp-functions.php:243
 #: bp-group-management-bp-functions.php:367
 msgid "Group Management"
-msgstr "Grup Yönetimi"
+msgstr "Gestionarea grupului"
 
 #: bp-group-management-bp-functions.php:45
 #: bp-group-management-bp-functions.php:163
@@ -33,147 +31,147 @@ msgstr "Grup Yönetimi"
 #: bp-group-management-bp-functions.php:219
 #: bp-group-management-bp-functions.php:231
 msgid "Sorry, there was an error."
-msgstr "Üzgünüm, bir hata meydana geldi."
+msgstr "Ne pare rău, a fost o eroare."
 
 #: bp-group-management-bp-functions.php:47
 msgid "Group deleted."
-msgstr "Grup silindi."
+msgstr "Grupa elimină."
 
 #: bp-group-management-bp-functions.php:65
 msgid "Group ID"
-msgstr "Grup Sırası"
+msgstr "ID de grup"
 
 #: bp-group-management-bp-functions.php:66
 msgid "Group Name"
-msgstr "Grup Adı"
+msgstr "Nume grup"
 
 #: bp-group-management-bp-functions.php:67
 msgid "Date Created"
-msgstr "Kurulma Tarihi"
+msgstr "Data creat"
 
 #: bp-group-management-bp-functions.php:68
 msgid "Number of Members"
-msgstr "Üye Sayısı"
+msgstr "Numărul de membri"
 
 #: bp-group-management-bp-functions.php:104
 msgid "Edit"
-msgstr "Düzenle"
+msgstr "Editare"
 
 #: bp-group-management-bp-functions.php:107
 msgid "Delete"
-msgstr "Sil"
+msgstr "Ştergere"
 
 #: bp-group-management-bp-functions.php:109
 msgid "Visit"
-msgstr "Görüntüle"
+msgstr "Vizitaţi"
 
 #: bp-group-management-bp-functions.php:165
 msgid "Member kicked and banned"
-msgstr "Üye yasaklandı"
+msgstr "Membre dat şi interzis"
 
 #: bp-group-management-bp-functions.php:179
 msgid "Member unbanned"
-msgstr "Üyenin yasağı kaldırıldı"
+msgstr "Membru unbanned"
 
 #: bp-group-management-bp-functions.php:193
 msgid "Member demoted"
-msgstr "Üyenin yetkisi alındı"
+msgstr "Membre retrogradat"
 
 #: bp-group-management-bp-functions.php:207
 msgid "Member promoted to moderator"
-msgstr "Üye mod yapıldı"
+msgstr "Membre promovat moderator"
 
 #: bp-group-management-bp-functions.php:221
 msgid "Member promoted to admin"
-msgstr "Üye yönetici yapıldı"
+msgstr "Membre promovat la admin"
 
 #: bp-group-management-bp-functions.php:233
 msgid "User added to group"
-msgstr "Üye gruba eklendi"
+msgstr "Utilizator adăugate la Grupa"
 
 #: bp-group-management-bp-functions.php:244
 #: bp-group-management-bp-functions.php:368
 msgid "Back to group index"
-msgstr "Grup dizinine dön"
+msgstr "Înapoi la indexul de grup"
 
 #: bp-group-management-bp-functions.php:248
 msgid "Manage current and banned group members"
-msgstr "Üyeleri ve yasaklı üyeleri yönet"
+msgstr "Gestionaţi membrii grupului curente şi interzis"
 
 #: bp-group-management-bp-functions.php:277
 msgid "(banned)"
-msgstr "(yasaklı)"
+msgstr "(interzis)"
 
 #: bp-group-management-bp-functions.php:277
 msgid "Remove Ban"
-msgstr "Yasağı Kaldır"
+msgstr "Remove Ban"
 
 #: bp-group-management-bp-functions.php:300
 msgid "Kick and ban this member"
-msgstr "Bu üyeyi yasakla"
+msgstr "Lovi cu piciorul şi ban acest membru"
 
 #: bp-group-management-bp-functions.php:300
-msgid "Kick &amp; Ban"
-msgstr "Yasakla"
+msgid "Kick & Ban"
+msgstr "Kick & Ban"
 
 #: bp-group-management-bp-functions.php:302
 #: bp-group-management-bp-functions.php:304
 msgid "Demote to Member"
-msgstr "Yetkisini Al"
+msgstr "Retrogradarea la membre"
 
 #: bp-group-management-bp-functions.php:304
 #: bp-group-management-bp-functions.php:306
 msgid "Promote to Admin"
-msgstr "Yönetici Yap"
+msgstr "Promovarea la Admin"
 
 #: bp-group-management-bp-functions.php:306
 msgid "Promote to Moderator"
-msgstr "Mod Yap"
+msgstr "Promova Moderator"
 
 #: bp-group-management-bp-functions.php:325
 msgid "Add members to group"
-msgstr "Gruba Dahil Et"
+msgstr "Adăuga membri la grup"
 
 #: bp-group-management-bp-functions.php:342
 msgid "Add"
-msgstr "Ekle"
+msgstr "Adăuga"
 
 #: bp-group-management-bp-functions.php:371
 msgid "Deleting the group"
-msgstr "Grup siliniyor"
+msgstr "Şterge grupul"
 
 #: bp-group-management-bp-functions.php:372
 msgid "You are about to delete the group"
-msgstr "Bu grubu silmek üzeresiniz"
+msgstr "Doriţi să ştergeţi grupul"
 
 #: bp-group-management-bp-functions.php:372
 msgid "This action cannot be undone."
-msgstr "Bu işlemin geri dönüşü yok."
+msgstr "Această acţiune nu poate fi anulată."
 
 #: bp-group-management-bp-functions.php:374
 msgid "Delete Group"
-msgstr "Grubu Sil"
+msgstr "Ştergere grup"
 
 #: bp-group-management-bp-functions.php:375
 msgid "Oops, I changed my mind"
-msgstr "Ehm, fikrimi değiştirdim"
+msgstr "Oops, am schimbat mintea mea"
 
 #: bp-group-management-bp-functions.php:477
 #, php-format
 msgid "%s joined the group %s"
-msgstr "%s, %s grubuna katıldı"
+msgstr "%s s-a alăturat grupului %s"
 
 #. Plugin Name of an extension
 msgid "BP Group Management"
-msgstr "BP Grup Yönetimi"
+msgstr "Gestionarea grupul BP"
 
 #. Plugin URI of an extension
 msgid "http://teleogistic.net/code/buddypress/bp-group-management"
-msgstr "http://teleogistic.net/code/buddypress/bp-group-management"
+msgstr "http://teleogistic.net/code/BuddyPress/BP-Group-management"
 
 #. Description of an extension
 msgid "Allows site administrators to manage BuddyPress group membership"
-msgstr "Site yöneticilerinin grup üyeliklerini yönetmelerine izin ver"
+msgstr "Permite administratorilor de site-ul pentru a gestiona apartenenţa BuddyPress la grup"
 
 #. Author of an extension
 msgid "Boone Gorges"
