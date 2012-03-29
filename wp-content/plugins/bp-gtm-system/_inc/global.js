@@ -472,7 +472,7 @@ jQuery(document).ready(function() {
         if(error){
             e.preventDefault();
             jQuery('#message').remove();
-            jQuery('form h4').after('<div id="message" class="error">'+error+'<ul></ul></div>');
+            jQuery('form h4:first').after('<div id="message" class="error">'+error+'<ul></ul></div>');
         }
     });
     
@@ -496,7 +496,7 @@ jQuery(document).ready(function() {
         }
     });
     
-    jQuery('#gtm_form #member-list li').click(function(){
+    jQuery('#gtm_form #member-list li').click(function(e){
         var checked = jQuery(this).find('input').attr('checked');
         if(!checked){
             jQuery(this).find('input').attr('checked', true);
@@ -508,8 +508,8 @@ jQuery(document).ready(function() {
     
     if(jQuery.fn.autoCompleteCats){
         /**
-       * Autocomplete init
-       */ 
+         * Autocomplete init
+         */ 
         // for cats
         ajaxurl = '/wp-load.php'
         var resps = jQuery("ul.second").autoCompleteCats({
@@ -528,15 +528,26 @@ jQuery(document).ready(function() {
         
     }
     jQuery('#gtm_form #tags,  #tasks_tax #tags').keypress(function(e){
-        if(e.which==13){
+        var project_tags_val = jQuery.trim(jQuery(this).val());
+        if(e.which==13 && project_tags_val!=''){
             var project_tags = jQuery(this);
-            var project_tags_val = jQuery(this).val();
             e.preventDefault()
-            jQuery('<li class="resps-tab" id="un-tag"><span></span> <span class="p">X</span></li>').find('span:first').text(project_tags_val).end().prependTo('#projects_tax .first, #tasks_tax .first');
+            paste_terms(project_tags_val, 'tags')
             project_tags.val('');
-            jQuery('#tag_names').addClass('|'+project_tags_val);
+            jQuery('#tag_names').addClass('|'+replace_coma(project_tags_val));
+        } else if(e.which==13 && project_tags_val==''){
+            e.preventDefault()
         }
     });
+    jQuery('#projects_tax [name="tags"], #tasks_tax [name="tags"]').click(function(){
+        var obj = jQuery(this).parent().find(':text');
+        var project_tags_val = obj.val();
+        paste_terms(project_tags_val, 'tags')
+        obj.val('');
+        jQuery('#tag_names').addClass('|'+replace_coma(project_tags_val));
+    });
+    
+    
     jQuery('#projects_tax .float .p, #tasks_tax .float .p').live('click', function(){
         var class_remove = jQuery(this).parent().find('span:first').text();
         jQuery(this).parent().remove();
@@ -544,15 +555,26 @@ jQuery(document).ready(function() {
     });
     
     jQuery('#gtm_form #cats, #tasks_tax #cats').keypress(function(e){
-        if(e.which==13){
+        var project_tags_val = jQuery.trim(jQuery(this).val());
+        if(e.which==13 && project_tags_val!=''){
             var project_tags = jQuery(this);
-            var project_tags_val = jQuery(this).val();
-            e.preventDefault()
-            jQuery('<li class="resps-tab" id="un-tag"><span></span> <span class="p">X</span></li>').find('span:first').text(project_tags_val).end().prependTo('#projects_tax .second, #tasks_tax .second');
+            e.preventDefault();
+            paste_cats(project_tags_val, 'cats')
             project_tags.val('');
-            jQuery('#cat_names').addClass('|'+project_tags_val);
+            jQuery('#cat_names').addClass('|'+replace_coma(project_tags_val));
+        } else if(e.which==13 && project_tags_val==''){
+            e.preventDefault()
         }
     });
+    jQuery('#projects_tax [name="cats"], #tasks_tax [name="cats"]').click(function(){
+        var obj = jQuery(this).parent().find(':text');
+        var project_tags_val = obj.val();
+        paste_cats(project_tags_val, 'cats')
+        obj.val('');
+        jQuery('#cat_names').addClass('|'+replace_coma(project_tags_val));
+    });
+    
+    
     jQuery('#projects_tax .right .p, #tasks_tax .right .p,').live('click', function(){
         var class_remove = jQuery(this).parent().find('span:first').text();
         jQuery(this).parent().remove();
@@ -560,7 +582,7 @@ jQuery(document).ready(function() {
     });
     
     jQuery('#gtm_form #post-topic-reply :submit').click(function(e){
-        var textarea = jQuery('#gtm_form #post-topic-reply textarea');
+        var textarea = jQuery('#gtm_form textarea#discuss_text');
         if(!jQuery.trim(textarea.val())){
             e.preventDefault();
             textarea.addClass('error-boreder');
@@ -568,5 +590,114 @@ jQuery(document).ready(function() {
         }
         
     });
+    function paste_terms(project_tags_val, block){
+        if(project_tags_val.indexOf(',')==-1){
+            jQuery('<li class="resps-tab" id="un-tag"><span></span> <span class="p">X</span></li>').find('span:first').text(project_tags_val).end().prependTo('#projects_tax .paste-'+block+', #tasks_tax .paste-'+block);
+        } else {
+            var terms = project_tags_val.split(',');
+            for(var c in terms){
+                if(jQuery.trim(terms[c]))
+                    jQuery('<li class="resps-tab" id="un-tag"><span></span> <span class="p">X</span></li>').find('span:first').text(terms[c]).end().prependTo('#projects_tax .paste-'+block+', #tasks_tax .paste-'+block);
+            }
+        }
+        return false;
+    }
+    function paste_cats(project_tags_val, block){
+        if(project_tags_val.indexOf(',')==-1){
+            jQuery('<p><input name="project_cats[]" type="checkbox" id="un-'+project_tags_val+'" checked="checked" value="'+project_tags_val+'"/><span class="text"></span></p>').find('.text').text(project_tags_val).end().prependTo('#projects_tax .paste-'+block+', #tasks_tax .paste-'+block);
+        } else {
+            var terms = project_tags_val.split(',');
+            for(var c in terms){
+                if(jQuery.trim(terms[c]))
+                    jQuery('<p><input name="project_cats[]" type="checkbox" id="un-'+terms[c]+'" checked="checked" value="'+terms[c]+'"/><span class="text"></span></p>').find('.text').text(terms[c]).end().prependTo('#projects_tax .paste-'+block+', #tasks_tax .paste-'+block);
+            }
+        }
+        //        console.log(jQuery('<span><input type="checkbox" id="un-'+project_tags_val+'" checked="checked" value="'+project_tags_val+'"/><span class="text"></span></span>').find('.text'))
+        return false;
+    }
+  
+    jQuery('#gtm_form .gtm_files .add_file').live('click', function(){
+        var size = jQuery('#gtm_form .single_file').size();
+        if(size < bp_gtm_strings.files_count){
+            size++;
+            jQuery('<div class="single_file"><input type="file" name="gtmFile_'+size+'" id="gtmFile" /><textarea name="description[gtmFile_'+size+']"></textarea><span class="delete_file">X</span></div>').appendTo('#gtm_form .gtm_files');
+        }
+    });
+    jQuery('#gtm_form .gtm_files .delete_file').live('click', function(){
+        jQuery(this).parent().remove();
+    });
+    
+    var height_one_user = jQuery('#member-list li').height();
+    var height_users = jQuery('.wrap-roles').height();
+    if(jQuery('#member-list li').length > height_users/height_one_user){
+        jQuery('#member-list li').parent().parent().css('overflow-y', 'scroll');
+    }
+    jQuery('#member-list li input').click(function(e){
+        e.stopPropagation();
+        jQuery(this).parent().toggleClass('red')
+    });
+    
+    jQuery('#gtm_form .single_file [type="file"]').live('change', function(){
+        jQuery(this).parent().find('textarea').show();
+    });
+    
+    jQuery('.gtm_files_list .edit_description').click(function(){
+        var textarea = jQuery(this).parent().parent();
+        textarea.find('.hidden').toggle();
+        textarea.find('.file_description').toggle();
+    });
+    
+    jQuery('#gtm_form .submit_description').click(function(){
+        var textarea = jQuery(this).parent().find('textarea');
+        var file_id = textarea.attr('id').substring(12);
+        var description = textarea.val();
+        jQuery.ajax({
+            type: 'GET',
+            url: ajaxurl,
+            data: {
+                file_id: file_id,
+                description: description,
+                action: 'bp_update_description'
+            },
+            success: function(data) {
+                if(!data){
+                    textarea.end().parent().find('.edit_description').trigger('click');
+                    textarea.end().parent().find('span.file_description').text(description);
+                }
+            }
+        });
+    });
+    
+    jQuery('#gtm_form .delete_file_discussion').click(function(){
+        var textarea = jQuery(this).parent().parent().find('textarea');
+        var file_id = textarea.attr('id').substring(12);
+        if(confirm('Do you really want to delete this file?')){
+            jQuery.ajax({
+                type: 'GET',
+                url: ajaxurl,
+                data: {
+                    file_id: file_id,
+                    action: 'bp_delete_file'
+                },
+                success: function(data) {
+                    if(!data){
+                        textarea.end().hide().remove();
+                    }
+                }
+            });
+        }
+    });
+ function replace_coma(str){
+     return str.replace(/,/gi, '| ');
+     
+ }
+ jQuery('.projects-list .td-title a[title], .task-list .td-title a[title]').tooltip(
+        {
+            opacity: 0.7,
+            position: ['bottom'],
+            offset: [0, 50]
+        }
+    );
+    
     
 })

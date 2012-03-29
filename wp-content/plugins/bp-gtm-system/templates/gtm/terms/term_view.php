@@ -4,6 +4,8 @@
 
 <?php
 $elements = BP_GTM_Taxon::get_elements_4term($bp->action_variables[2]);
+$gtm_link = bp_get_group_permalink(). $bp->gtm->slug . '/';
+//var_dump($gtm_link); die;
 ?>
 <p>&nbsp;</p>
 <?php if (count($elements['tasks']) && !$elements['tasks']['0']): ?>
@@ -17,7 +19,7 @@ $elements = BP_GTM_Taxon::get_elements_4term($bp->action_variables[2]);
             </tr>
         </thead>
         <tbody>
-            <?php bp_gtm_terms_nodes($elements['tasks'], 'tasks') ?>
+            <?php bp_gtm_terms_nodes($elements['tasks'], 'tasks', $gtm_link) ?>
         </tbody>
     </table>
     <?php else : ?>
@@ -33,7 +35,7 @@ $elements = BP_GTM_Taxon::get_elements_4term($bp->action_variables[2]);
         </thead>
 
         <tbody>
-            <?php bp_gtm_terms_nodes($elements['projects'], 'projects') ?>
+            <?php bp_gtm_terms_nodes($elements['projects'], 'projects', $gtm_link) ?>
         </tbody>
     </table>
 <?php else : ?>

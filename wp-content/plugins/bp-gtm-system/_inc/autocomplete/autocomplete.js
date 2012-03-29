@@ -330,7 +330,7 @@ $.Autocompleter.defaults = {
     type: 'resps',
     mustMatch: false,
     extraParams: {},
-    selectFirst: true,
+    selectFirst: false,
     formatItem: function(row) {
         return row[0];
     },
@@ -762,7 +762,7 @@ jQuery.fn.autoCompleteTags = function(options) {
         var tag = String(d).replace(/\ /,'**');
         var d = String(d);
         var v = '<li class="'+f+'" id="un-'+d+'"><span>'+d+'</span> <span class="p">X</span></li>';
-        var x = jQuery(settings.inputID,tmp).before(v);
+        var x = jQuery('#gtm_form .paste-tags').append(v);
         
         jQuery('#tag_names').addClass('|'+tag);
 
@@ -816,10 +816,10 @@ jQuery.fn.autoCompleteCats = function(options) {
         var f = settings.foundClass.replace(/\./,'');
         var tag = String(d).replace(/\ /,'**');
         var d = String(d);
-        var v = '<li class="'+f+'" id="un-'+d+'"><span>'+d+'</span> <span class="p">X</span></li>';
-        var x = jQuery(settings.inputID,tmp).before(v);
+        var v = '<input type="checkbox" name="cats[]" value="'+d+'"id="un-'+d+'" checked="checked"/><span>'+d+'</span>';
+        var x = jQuery('#gtm_form .paste-cats').prepend(v);
         
-        jQuery('#cat_names').addClass('|'+tag);
+        //jQuery('#cat_names').addClass('|'+tag);
 
         
         jQuery('.p',x[0].previousSibling).click(function(){
