@@ -179,7 +179,7 @@ function bpe_facebook_callback()
 			
 			$pages = array();
 			
-			foreach( $account['data'] as $data ) :
+			foreach( (array) $account['data'] as $data ) :
 				if( $data['category'] == 'Application' )
 					continue;
 				
@@ -359,8 +359,8 @@ function bpe_facebook_send_update( $event )
 			$page_data = bp_get_user_meta( bp_loggedin_user_id(), 'fb_pages', true );
 			
 			// loop through the pages and build the tokens
-			foreach( $post_to as $id ) :
-				foreach( $page_data as $data ) :
+			foreach( (array) $post_to as $id ) :
+				foreach( (array) $page_data as $data ) :
 					if( $id == 'me' ) :
 						$tokens['me'] = $personal_token;
 						continue;
