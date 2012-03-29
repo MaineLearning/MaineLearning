@@ -4,9 +4,26 @@ ACTIVE
 
 
 --------------------------------------------------
-In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
+When you were pushing to production today, this is the list of files that were ignored.
 
-COULD BE DONE IN 30-MINUTES OR LESS
+_archive/
+env.php
+error_log
+wp-admin/error_log
+wp-content/backup-db/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/plugins/easy-fancybox/error_log
+wp-content/themes/maine-learning-sites/.DS_Store
+wp-content/themes/maine-learning-sites/images/.svn/
+wp-content/themes/maine-learning-sites/xml/.DS_Store
+wp-content/uploads/
+
+You mentioned that they needed to be added to gitignore, but they all appear there. Is there anything else I need to do?
+
+
+--------------------------------------------------
+After maintenance is over, htaccess file should always redirect maintenance.html back to the root
 
 
 --------------------------------------------------
@@ -17,6 +34,19 @@ Where is New Post button on blog page?
 
 
 When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
+
+
+
+
+
+--------------------------------------------------
+POTENTIAL DEVELOPMENT PROJECTS
+--------------------------------------------------
+
+--------------------------------------------------
+In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
+
+COULD BE DONE IN 30-MINUTES OR LESS
 
 
 
@@ -33,8 +63,7 @@ function blah( $content ) {
 add_action( 'bp_ass_activity_notification_content', 'blah' );
 
 
-30-MINUTE TEST
-
+COULD BE DONE IN 30-MINUTES OR LESS
 
 
 --------------------------------------------------
