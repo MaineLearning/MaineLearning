@@ -32,7 +32,7 @@ $default_preview_class.= $gdsr_options["wait_class_multis"];
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating header", "gd-star-rating"); ?>:</td>
-                <td><input type="text" name="gdsr_mur_header_text" id="gdsr_mur_header_text" value="<?php echo wp_specialchars($gdsr_options["mur_header_text"]); ?>" style="width: 170px" /></td>
+                <td><input type="text" name="gdsr_mur_header_text" id="gdsr_mur_header_text" value="<?php echo esc_attr($gdsr_options["mur_header_text"]); ?>" style="width: 170px" /></td>
             </tr>
         </table>
     </td>
@@ -75,23 +75,23 @@ $default_preview_class.= $gdsr_options["wait_class_multis"];
             <tr>
                 <td width="150"><?php _e("Rating block CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_mur_classblock" id="gdsr_mur_classblock" value="<?php echo wp_specialchars($gdsr_options["mur_class_block"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_mur_classblock" id="gdsr_mur_classblock" value="<?php echo esc_attr($gdsr_options["mur_class_block"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating text CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_mur_classtext" id="gdsr_mur_classtext" value="<?php echo wp_specialchars($gdsr_options["mur_class_text"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_mur_classtext" id="gdsr_mur_classtext" value="<?php echo esc_attr($gdsr_options["mur_class_text"]); ?>" style="width: 170px" />
                 </td>
             </tr>
             <tr>
                 <td width="150"><?php _e("Rating header CSS class", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_mur_classheader" id="gdsr_mur_classheader" value="<?php echo wp_specialchars($gdsr_options["mur_class_header"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_mur_classheader" id="gdsr_mur_classheader" value="<?php echo esc_attr($gdsr_options["mur_class_header"]); ?>" style="width: 170px" />
                 </td>
                 <td width="10"></td>
                 <td width="150"><?php _e("Rating button CSS class", "gd-star-rating"); ?>:</td>
                 <td>
-                    <input type="text" name="gdsr_mur_classbutton" id="gdsr_mur_classbutton" value="<?php echo wp_specialchars($gdsr_options["mur_class_button"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_mur_classbutton" id="gdsr_mur_classbutton" value="<?php echo esc_attr($gdsr_options["mur_class_button"]); ?>" style="width: 170px" />
                 </td>
             </tr>
         </table>
@@ -110,7 +110,7 @@ $default_preview_class.= $gdsr_options["wait_class_multis"];
             <tr>
                 <td width="150"><?php _e("Button text", "gd-star-rating"); ?>:</td>
                 <td width="200">
-                    <input type="text" name="gdsr_mur_submittext" id="gdsr_mur_submittext" value="<?php echo wp_specialchars($gdsr_options["mur_button_text"]); ?>" style="width: 170px" />
+                    <input type="text" name="gdsr_mur_submittext" id="gdsr_mur_submittext" value="<?php echo esc_attr($gdsr_options["mur_button_text"]); ?>" style="width: 170px" />
                 </td>
             </tr>
         </table>

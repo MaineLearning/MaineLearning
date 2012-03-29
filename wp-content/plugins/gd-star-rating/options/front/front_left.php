@@ -7,36 +7,38 @@
     <div class="inside">
         <?php
 
-          if ($options["news_feed_active"] == 1) {
-              $rss = fetch_rss('http://www.gdstarrating.com/feed/');
-              if (isset($rss->items) && 0 != count($rss->items))
-              {
-                echo '<ul>';
-                $rss->items = array_slice($rss->items, 0, 4);
-                foreach ($rss->items as $item)
-                {
+        if ($options["news_feed_active"] == 1) {
+            $feed = fetch_feed('http://www.gdstarrating.com/feed/');
+                if (!is_wp_error( $feed )) {
+                    $items = $feed->get_items(0, 4);
+                    if (! empty($items)) {
+                        echo '<ul>';
+                        foreach ($items as $item) {
+                        ?>
+                                <li>
+                                    <div class="rssTitle">
+                                        <a target="_blank" class="rsswidget" title='' href='<?php echo wp_filter_kses($item->get_link()); ?>'><?php echo esc_html($item->get_title()); ?></a>
+                                        <span class="rss-date"><?php echo human_time_diff($item->get_date('U'), time()); ?></span>
+                                        <div class="gdsrclear"></div>
+                                    </div>
+                                    <div class="rssSummary"><?php echo '<strong>', $item->get_date("F, jS"), '</strong> - ', $item->get_description(); ?></div>
+                                </li>
+                        <?php
+                        }
+                        echo '</ul>';
+                    } else {
+                        ?>
+                        <p><?php printf(__("No news items found, possibly due to an error. Go to the %sfront page%s to check for updates.", "gd-star-rating"), '<a href="http://www.gdstarrating.com/">', '</a>') ?></p>
+                        <?php
+                    }
+                } else {
                 ?>
-                  <li>
-                  <div class="rssTitle">
-                    <a target="_blank" class="rsswidget" title='' href='<?php echo wp_filter_kses($item['link']); ?>'><?php echo wp_specialchars($item['title']); ?></a>
-                    <span class="rss-date"><?php echo human_time_diff(strtotime($item['pubdate'], time())); ?></span>
-                    <div class="gdsrclear"></div>
-                  </div>
-                  <div class="rssSummary"><?php echo '<strong>'.date("F, jS", strtotime($item['pubdate'])).'</strong> - '.$item['description']; ?></div></li>
-                <?php
-                }
-                echo '</ul>';
-              }
-              else
-              {
-                ?>
-                <p><?php printf(__("An error occured while loading newsfeed. Go to the %sfront page%s to check for updates.", "gd-star-rating"), '<a href="http://www.gdstarrating.com/">', '</a>') ?></p>
+                  <p><?php printf(__("An error occured while loading newsfeed: %s. Go to the %sfront page%s to check for updates.", "gd-star-rating"), $feed->get_error_message(), '<a href="http://www.gdstarrating.com/">', '</a>') ?></p>
                 <?php
               }
-          }
-          else {
+          } else {
             ?>
-            <p><?php _e("Newsfeed update is disabled. You can enable it on settings page.", "gd-star-rating"); ?></p>
+                <p><?php _e("Newsfeed update is disabled. You can enable it on settings page.", "gd-star-rating"); ?></p>
             <?php
           }
 

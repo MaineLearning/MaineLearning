@@ -159,7 +159,7 @@ if (!function_exists("is_msie6")) {
      * @return bool true if the browser is IE6
      */
     function is_msie6() {
-        $agent = $_SERVER['HTTP_USER_AGENT'];
+        $agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
         if (preg_match("/msie/i", $agent) && !preg_match("/opera/i", $agent)) {
             $val = explode(" ", stristr($agent, "msie"));
             $version = substr($val[1], 0, 1);

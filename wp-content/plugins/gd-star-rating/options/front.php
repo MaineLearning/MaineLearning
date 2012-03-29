@@ -1,4 +1,4 @@
-<?php require_once(ABSPATH.WPINC.'/rss.php'); ?>
+<?php require_once(ABSPATH.WPINC.'/feed.php'); ?>
 
 <div class="wrap">
     <div id="gdptlogo">
