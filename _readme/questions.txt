@@ -27,6 +27,9 @@ After maintenance is over, htaccess file should always redirect maintenance.html
 
 
 --------------------------------------------------
+I tested bp-tinymce to add an editor to the forum posts. It broke the layout of the home page. Are there other options?
+
+--------------------------------------------------
 On Network Admin: Users, the search is exact rather than fuzzy. For instance, when I search for "wood", it does not show "mdoewood" in the results. Is this configurable?
 
 
