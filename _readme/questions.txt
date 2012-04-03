@@ -39,9 +39,12 @@ When entering wp-admin without the trailing slash, there is a strange redirect. 
 http://mainelearning.net/wp-admin
 
 --------------------------------------------------
-Even though I used the language file to change all instances of Forum to Discussion, Forum still appears o the /people/ pages.
+Even though I used the language file to change all instances of Forum to Discussion, Forum still appears on the /people/ pages.
 
 http://mainelearning.net/people/jcollier/
+
+--------------------------------------------------
+Auto join support group?
 
 
 --------------------------------------------------
