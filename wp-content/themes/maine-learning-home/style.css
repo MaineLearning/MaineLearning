@@ -91,9 +91,7 @@ div#sidebar { display: none; }
 ADMIN BARS
 ----------------------- */
 
-body.admin-bar #wpcontent, body.admin-bar #adminmenu {
-padding-top: 0px !important;
-}
+body.admin-bar #wpcontent, body.admin-bar #adminmenu { padding-top: 0px !important; }
 
 body#bp-default #wp-admin-bar .padder
 {
@@ -238,8 +236,8 @@ h2
 
 h2.pagetitle
 {
-  font-size: 22px;
-  margin-top: 10px;
+	font-size: 22px;
+	margin-top: 10px;
 }
 
 h2.posttitle { font-size: 24px; }
@@ -350,20 +348,14 @@ div#item-header img.avatar
 	width: 100px;
 }
 
-
 div#item-header h2 { font-size: 22px; }
-
-
-
-div#item-header div#item-header-content {
-	margin-left: 130px;
-}
+div#item-header div#item-header-content { margin-left: 130px; }
 
 div#item-header div#item-meta
 {
 	border-top: 1px solid #ddd;
 	color: #888888;
-	display:  inline-block;
+	display: inline-block;
 	font-size: 13px;
 	margin: 14px 0 0 0;
 	padding: 10px 0 20px 0;
@@ -383,11 +375,11 @@ div#item-header div#item-actions
 }
 
 div#item-header span.activity, div#item-header h2 span.highlight
-{ 
+{
 	margin-bottom: 0px;
 	vertical-align: top;
 }
-   
+
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 
@@ -409,14 +401,9 @@ BUDDYPRESS PANELS: ITEMS
 div.pagination { margin: 0; }
 span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
 span.activity, div#message p { border: 1px solid #E1CA82; }
-
 #message-thread { margin: 10px 10px 10px 14px; }
-
 table#message-threads { margin: 0; }
-
-.standard-form textarea {
-margin-left: 20px;
-}
+.standard-form textarea { margin-left: 20px; }
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
@@ -484,8 +471,8 @@ div#subnav.item-list-tabs
 
 div#item-header div.generic-button, div#item-header a.button
 {
-  float: right;
-  margin: 10px 0 10px 0;
+	float: right;
+	margin: 10px 0 10px 0;
 }
 
 #item-buttons { width: auto; }
@@ -494,34 +481,39 @@ div#item-header div.generic-button, div#item-header a.button
 BP PANELS: PROFILE: CHANGE AVATAR
 ----------------------- */
 
-.profile p {
-	margin: 0 0 10px 12px;
-}
+.profile p { margin: 0 0 10px 12px; }
 
 /* ----------------------
 BP PANELS: ACTIVITIES
 ----------------------- */
 
-div.activity {
-	background: #efefef;
-}
+div.activity { background: #efefef; }
+div.activity-avatar { margin: 6px 0 0 16px; }
+div.activity-comments div.acomment-content { font-size: 12px; }
 
-div.activity-avatar {
-	margin: 6px 0 0 16px;
-}
-
-div.activity-comments div.acomment-content {
-font-size: 12px;
-}
+.activity-meta a.view-post
+{
+background: #ededed;
+background: moz-linear-gradient(top, #ffffff 0%, #e0e0e0 100%);
+background: webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e0e0e0));
+background: -webkit-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
+background: -o-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
+background: -ms-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 );
+background: linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
+border: 1px solid #bbb;
+webkit-border-radius: 3px;
+border-radius: 3px;
+color: #555;
+outline: none;
+text-decoration: none;}
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
 ----------------------- */
 
 #groups-list .item-avatar { display: block; }
-
 form#groups-directory-form h3 a { display: none; }
-
 
 /* ----------------------
 BP PANELS: SITES
@@ -529,8 +521,8 @@ BP PANELS: SITES
 
 ul.item-list
 {
-  padding: 0 20px 0 20px;
-  width: 94%;
+	padding: 0 20px 0 20px;
+	width: 94%;
 }
 
 ul.item-list li div.meta
@@ -545,10 +537,7 @@ ul.item-list li div.meta
 BP PANELS: BLOGS
 ----------------------- */
 
-div#blogs-dir-list div.item-avatar {
-  display: none;
-}
-
+div#blogs-dir-list div.item-avatar { display: none; }
 #blog-pages { margin: 10px 0 0 0 !important; }
 #item-body { background-color: #f4f4f4; }
 .standard-form { margin: 0 14px 0 14px; }
@@ -561,10 +550,7 @@ BP PANELS: FORUM POSTS
 ----------------------- */
 
 table.forum { margin: 0; }
-
-table.forum tr td.td-title a.topic-title {
-font-size: 1em;
-}
+table.forum tr td.td-title a.topic-title { font-size: 1em; }
 
 div#topic-meta div.admin-links
 {
@@ -580,18 +566,14 @@ div#topic-meta
 }
 
 div#topic-meta h3 { width: 60%; }
-
 form#forum-topic-form { margin: 0; }
-
 .ass-topic-subscribe { margin-top: 4px !important; }
+div.generic-button.ass-topic-subscribe a { border: 0px solid #fff; }
 
-div.generic-button.ass-topic-subscribe a {
-border: 0px solid #fff;
-}
-
-p:last-child {
- margin-bottom: 0;
- margin-right: 20px;
+p:last-child
+{
+	margin-bottom: 0;
+	margin-right: 20px;
 }
 
 /* ----------------------
@@ -604,44 +586,36 @@ div#message.updated p { background-color: #ffdfb1; }
 BP PANELS: BUDDYVENTS
 ----------------------- */
 
-
 #events-dir-list ul.item-list li div.item-title span.summary { font-size: 18px; }
 
 #events-dir-list ul.item-list li div.item-desc
 {
-  display: inline;
-  font-size: 12px;
-  height: 0;
+	display: inline;
+	font-size: 12px;
+	height: 0;
 }
 
 #events-dir-list .event-meta { font-size: 12px; }
-
 table#approve-events { margin: 0 -19px 0; }
-
 a.approve { line-height: 40px; }
-
 
 /* ----------------------
 BP PANELS: BP-MODERATION
 ----------------------- */
 
-.bpm-unflagged .bpm-inner-text {
-  background-position: 0 0;
-  float: right;
-  margin: 0 10px 10px 0;
+.bpm-unflagged .bpm-inner-text
+{
+	background-position: 0 0;
+	float: right;
+	margin: 0 10px 10px 0;
 }
 
 /* ----------------------
 BP PANELS: BP GROUP DOCS
 ----------------------- */
 
-#bp-group-documents h3 {
-  padding: 20px 0 0 20px;
-}
-
-#bp-group-documents-categories, #bp-group-documents-sorting {
-  margin-top: 20px;
-}
+#bp-group-documents h3 { padding: 20px 0 0 20px; }
+#bp-group-documents-categories, #bp-group-documents-sorting { margin-top: 20px; }
 
 /* ----------------------
 SIDEBAR
