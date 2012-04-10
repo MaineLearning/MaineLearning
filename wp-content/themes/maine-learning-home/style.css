@@ -128,10 +128,22 @@ body#bp-default #wp-admin-bar .padder
 
 #wp-admin-bar li a
 {
-	color: #aaa;
-	font-size: 13px;
+	color: #aaa !important;
+	font-family: 'Cabin',arial,serif !important;
+	font-size: 13px !important;
+	letter-spacing: 0px !important;
+	padding: 8px 14px !important;
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
+
+#wp-admin-bar ul li#bp-adminbar-notifications-menu a span {
+	background: #aaa;
+	color: #222;
+	text-shadow: none;
+}
+
+
+
 
 /* ----------------------
 HEADER
