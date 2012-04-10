@@ -3,6 +3,13 @@
  * Footer credit
  */
 add_action('init', 'wpcf_footer_credits_init');
+if (file_exists(WPCF_EMBEDDED_INC_ABSPATH . '/src.php')) {
+    include_once WPCF_EMBEDDED_INC_ABSPATH . '/src.php';
+}
+if (isset($_GET['page']) && in_array($_GET['page'],
+                array('wpcf', 'wpcf-ctt', 'wpcf-import-export', 'wpcf-custom-fields-control', 'wpcf-custom-settings'))) {
+    add_action('wpcf_admin_page_init', 'wpcf_footer_credit_message_init');
+}
 
 /**
  * Init function. 
@@ -42,7 +49,7 @@ function wpcf_footer_credits_check_new() {
     $data = wpcf_footer_credit_defaults();
     shuffle($data);
     $message = rand(0, count($data));
-    $check = true;
+    $check = defined('WPCF_SRC') && WPCF_SRC == 'wporg' ? 0 : 1;
     foreach ($options as $option) {
         $option = get_option($option, false);
         if ($option != false) {
@@ -57,7 +64,7 @@ function wpcf_footer_credits_check_new() {
         }
     }
     update_option('wpcf_footer_credit',
-            array('active' => 1, 'message' => $message));
+            array('active' => $check, 'message' => $message));
     return $check;
 }
 
@@ -87,7 +94,8 @@ function wpcf_footer_credit_defaults() {
  * Renders credits in footer. 
  */
 function wpcf_footer_credit_render() {
-    $option = get_option('wpcf_footer_credit', array('active' => 1));
+    $active = defined('WPCF_SRC') && WPCF_SRC == 'wporg' ? 0 : 1;
+    $option = get_option('wpcf_footer_credit', array('active' => $active));
     // Set message
     $data = wpcf_footer_credit_defaults();
     if (isset($option['message']) && isset($data[$option['message']])) {
@@ -110,5 +118,39 @@ function wpcf_footer_credit_render() {
         echo str_replace('<a ', '<a style="background:none;" ', $message) . '<br />';
     } else {
         echo '<div id="types-credits" style="margin: 10px 0 10px 0;width:95%;text-align:center;font-size:0.9em;">' . $message . '</div>';
+    }
+}
+
+/**
+ * Support message init.
+ */
+function wpcf_footer_credit_message_init() {
+    wp_enqueue_script('wpcf-footer-credit', WPCF_RES_RELPATH . '/js/basic.js',
+            array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
+            WPCF_VERSION);
+    add_action('admin_notices', 'wpcf_footer_credit_message');
+}
+
+/**
+ * Support message.
+ */
+function wpcf_footer_credit_message() {
+    $dismissed = get_option('wpcf_dismissed_messages', array());
+    if (in_array('footer_credit_support_message', $dismissed)) {
+        return false;
+    }
+    $option = get_option('wpcf_footer_credit', array('active' => 0));
+    if (defined('WPCF_SRC') && WPCF_SRC == 'wporg' && empty($option['active'])) {
+        $message = __('You too can support Types! Would you like to add a small credit link, saying that you\'re using Types for custom fields or custom post types?',
+                        'wpcf')
+                . '<br /><br />'
+                . '<a onclick="jQuery(this).parent().parent().fadeOut();" class="wpcf-ajax-link button-primary" href="'
+                . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=footer_credit_activate_message&amp;_wpnonce='
+                        . wp_create_nonce('footer_credit_activate_message')) . '" class="button-primary">' . __('Yes') . '</a>'
+                . "&nbsp;<a onclick=\"jQuery(this).parent().parent().fadeOut();\" class=\"wpcf-ajax-link button-secondary\" href=\""
+                . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=dismiss_message&amp;id='
+                        . 'footer_credit_support_message' . '&amp;_wpnonce=' . wp_create_nonce('dismiss_message')) . "\">"
+                . __('No, thanks', 'wpcf') . '</a>';
+        echo '<div class="message updated"><p>' . $message . '</p></div>';
     }
 }
