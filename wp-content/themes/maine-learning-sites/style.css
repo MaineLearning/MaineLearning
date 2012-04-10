@@ -1203,6 +1203,7 @@ p.wp-caption-text
 
 div.sidebar li {
   padding-bottom: 10px; 	/* ML */
+  margin-bottom: 10px; 	/* ML */
 }
 
 #sidebar-alt
