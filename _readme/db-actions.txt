@@ -22,3 +22,5 @@ Update Gravity Forms
 2012-04-10
 
 Remove custom CSS in home and sites. (Moved into styles.css files.)
+
+Activate WP-Better-Emails.
