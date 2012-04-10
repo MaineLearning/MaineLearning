@@ -21,6 +21,6 @@ Update Gravity Forms
 ------------------------------------
 2012-04-10
 
-Remove custom CSS in home and sites (Digital Citizenship). (Moved into styles.css files.)
+Remove custom CSS in home and sites (Digital Citizenship and Support). (Moved into styles.css files.)
 
 Activate WP-Better-Emails.
