@@ -136,14 +136,12 @@ body#bp-default #wp-admin-bar .padder
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-#wp-admin-bar ul li#bp-adminbar-notifications-menu a span {
+#wp-admin-bar ul li#bp-adminbar-notifications-menu a span
+{
 	background: #aaa;
 	color: #222;
 	text-shadow: none;
 }
-
-
-
 
 /* ----------------------
 HEADER
@@ -264,7 +262,7 @@ h3
 h4
 {
 	font-family: 'Cabin',arial,serif;
-	font-size: 13px;
+	font-size: 14px;
 	color: #444;
 	letter-spacing: .2px;
 	text-transform: uppercase;
@@ -285,6 +283,16 @@ a, a:visited
 	/* ML */
 	text-decoration: none;
 	/* ML */
+}
+
+.exb blockquote
+{
+	background-color: #e5e5e5;
+	color: #888;
+	font-size: 15px;
+	font-style: normal !important;
+	padding: 18px 10px 4px 20px;
+	text-shadow: none;
 }
 
 ul.item-list li div.item-title, ul.item-list li div.item-title a
@@ -371,7 +379,7 @@ div#item-header div#item-meta
 	font-size: 13px;
 	margin: 14px 0 0 0;
 	padding: 10px 0 20px 0;
-	width: 590px;
+	width: 80%;
 }
 
 #item-meta p
@@ -386,6 +394,10 @@ div#item-header div#item-actions
 	margin: 0 0 0px 15px;
 }
 
+/* ----------------------
+BUDDYPRESS PANELS: ACTIVITY
+----------------------- */
+
 div#item-header span.activity, div#item-header h2 span.highlight
 {
 	margin-bottom: 0px;
@@ -394,6 +406,7 @@ div#item-header span.activity, div#item-header h2 span.highlight
 
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
+ul#activity-stream li.activity_update { padding-top: 20px; }
 
 /* ----------------------
 BUDDYPRESS PANELS: ITEMS
@@ -490,9 +503,10 @@ div#item-header div.generic-button, div#item-header a.button
 #item-buttons { width: auto; }
 
 /* ----------------------
-BP PANELS: PROFILE: CHANGE AVATAR
+BP PANELS: PROFILE
 ----------------------- */
 
+table.profile-fields { margin-left: 20px; }
 .profile p { margin: 0 0 10px 12px; }
 
 /* ----------------------
@@ -505,27 +519,24 @@ div.activity-comments div.acomment-content { font-size: 12px; }
 
 .activity-meta a.view-post
 {
-background: #ededed;
-background: moz-linear-gradient(top, #ffffff 0%, #e0e0e0 100%);
-background: webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e0e0e0));
-background: -webkit-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
-background: -o-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
-background: -ms-linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 );
-background: linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
-border: 1px solid #bbb;
-webkit-border-radius: 3px;
-border-radius: 3px;
-color: #555;
-outline: none;
-text-decoration: none;}
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 );
+	background: linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
+	border: 1px solid #bbb;
+	webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #555;
+	outline: none;
+	text-decoration: none;
+}
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
 ----------------------- */
 
+a.join-group { display: none; }
 #groups-list .item-avatar { display: block; }
 form#groups-directory-form h3 a { display: none; }
+li#invite-groups-li { display: none; }
 
 /* ----------------------
 BP PANELS: SITES
@@ -609,6 +620,14 @@ BP PANELS: BUDDYVENTS
 
 #events-dir-list .event-meta { font-size: 12px; }
 table#approve-events { margin: 0 -19px 0; }
+table#approve-events td { vertical-align: top; }
+
+table#approve-events td img.avatar
+{
+	display: none;
+	width: 0;
+}
+
 a.approve { line-height: 40px; }
 
 /* ----------------------
