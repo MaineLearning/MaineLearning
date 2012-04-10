@@ -285,16 +285,6 @@ a, a:visited
 	/* ML */
 }
 
-.exb blockquote
-{
-	background-color: #e5e5e5;
-	color: #888;
-	font-size: 15px;
-	font-style: normal !important;
-	padding: 18px 10px 4px 20px;
-	text-shadow: none;
-}
-
 ul.item-list li div.item-title, ul.item-list li div.item-title a
 {
 	font-weight: bold;
@@ -408,6 +398,58 @@ div#item-header span.activity, div#item-header h2 span.highlight
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 ul#activity-stream li.activity_update { padding-top: 20px; }
 
+.exb blockquote
+{
+	background-color: #eaeaea;
+	color: #666;
+	font-size: 15px;
+	font-style: normal !important;
+	padding: 18px 10px 4px 20px;
+}
+
+li.exb blockquote p a
+{
+	font-family: "myriad-pro-1","myriad-pro-2",'Helvetica Neue',Helvetica,'Lucida Grande','Lucida Sans Unicode',sans-serif;
+	font-size: 13px;
+	float: right;
+	margin: 2px 4px 0px 0px;
+}
+
+.activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
+{
+	background-color: #eaeaea;
+	color: #666;
+	padding: 10px 10px 10px 14px;
+}
+
+.activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header
+{
+	line-height: 180%;
+	margin-bottom: 16px;
+}
+
+a.view-post
+{
+	font-size: 13px;
+	float: right;
+	padding: 0 10px 8px 0;
+}
+
+span.activity-read-more
+{
+	display: block;
+	font-size: 13px;
+	float: right;
+}
+
+div.activity-meta { clear: right; }
+
+.bpm-no-images .bpm-inner-text
+{
+	font-size: 13px;
+	text-decoration: none;
+}
+
 /* ----------------------
 BUDDYPRESS PANELS: ITEMS
 ----------------------- */
@@ -429,6 +471,7 @@ span.activity, div#message p { border: 1px solid #E1CA82; }
 #message-thread { margin: 10px 10px 10px 14px; }
 table#message-threads { margin: 0; }
 .standard-form textarea { margin-left: 20px; }
+p.desc { padding-top: 14px; }
 
 /* ----------------------
 BUDDYPRESS PANELS: TABS
@@ -517,17 +560,8 @@ div.activity { background: #efefef; }
 div.activity-avatar { margin: 6px 0 0 16px; }
 div.activity-comments div.acomment-content { font-size: 12px; }
 
-.activity-meta a.view-post
-{
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 );
-	background: linear-gradient(top, #ffffff 0%,#e0e0e0 100%);
-	border: 1px solid #bbb;
-	webkit-border-radius: 3px;
-	border-radius: 3px;
-	color: #555;
-	outline: none;
-	text-decoration: none;
-}
+div.activity-comments > ul {
+background: transparent;
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
@@ -596,7 +630,7 @@ div.generic-button.ass-topic-subscribe a { border: 0px solid #fff; }
 p:last-child
 {
 	margin-bottom: 0;
-	margin-right: 20px;
+	margin-right: 0;
 }
 
 /* ----------------------
