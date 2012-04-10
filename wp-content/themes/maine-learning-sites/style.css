@@ -104,6 +104,10 @@ textarea
 	text-decoration: none;
 }
 
+h2, h2 a, h2 a:visited {
+margin: 20px 0 10px 0;
+}
+
 input
 {
 	color: #333;
