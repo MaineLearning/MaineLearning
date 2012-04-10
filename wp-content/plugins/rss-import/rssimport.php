@@ -1,22 +1,21 @@
 <?php
 /**
  * @package WP-RSSImport
- * @author Frank B&uuml;ltge
- * @version 4.4.11
+ * @author Frank B&uuml;ltge &amp; Novaclic
+ * @version 4.4.12
  */
  
-/*
-Plugin Name: WP-RSSImport
-Plugin URI: http://bueltge.de/wp-rss-import-plugin/55/
-Text Domain: rssimport
-Domain Path: /languages
-Description: Import and display Feeds in your blog, use the function RSSImport(), a Widget or Shortcode [RSSImport]. Please see the new <a href="http://wordpress.org/extend/plugins/rss-import/">possibilities</a>.
-Author: Frank B&uuml;ltge
-Version: 4.4.11
-License: GPL
-Author URI: http://bueltge.de/
-Last change: 13.12.2011
-*/ 
+/**
+ * Plugin Name: WP-RSSImport
+ * Plugin URI:  http://bueltge.de/wp-rss-import-plugin/55/
+ * Text Domain: rssimport
+ * Domain Path: /languages
+ * Description: Import and display Feeds in your blog, use the function RSSImport(), a Widget or Shortcode [RSSImport]. Please see the new <a href="http://wordpress.org/extend/plugins/rss-import/">possibilities</a>.
+ * Author:      Frank B&uuml;ltge, novaclic
+ * Version:     4.4.12
+ * License:     GPLv3
+ * Last change: 04/04/2012
+ */ 
 
 /*
 ------------------------------------------------------------
@@ -35,7 +34,7 @@ Example: <?php RSSImport(10, "http://bueltge.de/feed/"); ?>
 */
 
 //avoid direct calls to this file, because now WP core and framework has been used
-if ( !function_exists('add_action') ) {
+if ( ! function_exists('add_action') ) {
 	header('Status: 403 Forbidden');
 	header('HTTP/1.1 403 Forbidden');
 	exit();
@@ -69,13 +68,13 @@ function RSSImport_textdomain() {
 		load_plugin_textdomain( FB_RSSI_TEXTDOMAIN, FALSE, dirname( FB_RSSI_BASENAME ) . '/languages');
 }
 
-if ( !function_exists('esc_attr') ) {
+if ( ! function_exists('esc_attr') ) {
 	function esc_attr( $text ) {
 		return attribute_escape( $text );
 	}
 }
 
-if ( !function_exists('esc_url') ) {
+if ( ! function_exists('esc_url') ) {
 	function esc_url($text ) {
 		return clean_url($text);
 	}
@@ -84,7 +83,7 @@ if ( !function_exists('esc_url') ) {
 
 // cache and error report
 //define('MAGPIE_CACHE_ON', FALSE); // Cache off
-if ( !defined('MAGPIE_CACHE_AGE') )
+if ( ! defined('MAGPIE_CACHE_AGE') )
 	define('MAGPIE_CACHE_AGE', '60*60'); // in sec, one hour
 // error reporting
 //error_reporting(E_ALL);
@@ -136,7 +135,7 @@ function RSSImport(
 	$view = (int) $view;
 	
 	if ($use_simplepie) {
-		if ( !class_exists('SimplePie') ) {
+		if ( ! class_exists('SimplePie') ) {
 			if ( file_exists(ABSPATH . WPINC . '/class-simplepie.php') ) {
 				@require_once (ABSPATH . WPINC . '/class-simplepie.php');
 			} else {
@@ -180,7 +179,7 @@ function RSSImport(
 	else
 		$rss = fetch_rss($feedurl);
 		
-	if ( $rss && !is_wp_error($rss) ) {
+	if ( $rss && ! is_wp_error($rss) ) {
 		
 		// the follow print_r list all items in array, for debug purpose
 		if ( $debug ) {
@@ -188,7 +187,7 @@ function RSSImport(
 			print('<pre>');
 			print_r($rss);
 			print('</pre>');
-			if ( !defined('MAGPIE_CACHE_ON') )
+			if ( ! defined('MAGPIE_CACHE_ON') )
 				define('MAGPIE_CACHE_ON', FALSE);
 		}
 		
@@ -303,8 +302,10 @@ function RSSImport(
 				if ( $desc4title ) {
 					if ($use_simplepie)
 						$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) ); // For import without HTML
-					else
+					else if (isset($item['description']))
 						$desc = wp_specialchars(strip_tags($item['description']));
+					else
+						$desc ='';
 					$atitle = wp_html_excerpt($desc, $truncatedescchar) . $truncatedescstring;
 				} else {
 					$atitle = $title;
@@ -567,6 +568,7 @@ function RSSImport_shortcode_quot($pee) {
 /**
  * add quicktag-button to editor
  */
+ 
 function RSSImport_insert_button() {
 	global $pagenow;
 	
@@ -577,18 +579,35 @@ function RSSImport_insert_button() {
 	echo '
 	<script type="text/javascript">
 		//<![CDATA[
-		var length = edButtons.length;
-		edButtons[length] = new edButton(\'RSSImport\', \'$context\', \'[RSSImport display="5" feedurl="http://feedurl.com/" before_desc="<br />" displaydescriptions="TRUE" after_desc=" " html="FALSE" truncatedescchar="200" truncatedescstring=" ... " truncatetitlechar=" " truncatetitlestring=" ... " before_date=" <small>" date="FALSE" after_date="</small>" date_format="" before_creator=" <small>" creator="FALSE" after_creator="</small>" start_items="<ul>" end_items="</ul>" start_item="<li>" end_item="</li>" target="" rel="" desc4title="" charsetscan="FALSE" debug="FALSE" before_noitems="<p>" noitems="No items, feed is empty." after_noitems="</p>" before_error="<p>" error="Error: Feed has a error or is not valid" after_error="</p>" paging="FALSE" prev_paging_link="&laquo; Previous" next_paging_link="Next &raquo;" prev_paging_title="more items" next_paging_title="more items" use_simplepie="FALSE"]\', \'\', \'\');
-		function RSSImport_tag(id) {
-			id = id.replace(/RSSImport_/, \'\');
-			edInsertTag(edCanvas, id);
+		if ( typeof edButtons != \'undefined\' ) {
+			var length = edButtons.length;
+			edButtons[length] = new edButton(\'RSSImport\', \'$context\', \'[RSSImport display="5" feedurl="http://feedurl.com/" before_desc="<br />" displaydescriptions="TRUE" after_desc=" " html="FALSE" truncatedescchar="200" truncatedescstring=" ... " truncatetitlechar=" " truncatetitlestring=" ... " before_date=" <small>" date="FALSE" after_date="</small>" date_format="" before_creator=" <small>" creator="FALSE" after_creator="</small>" start_items="<ul>" end_items="</ul>" start_item="<li>" end_item="</li>" target="" rel="" desc4title="" charsetscan="FALSE" debug="FALSE" before_noitems="<p>" noitems="No items, feed is empty." after_noitems="</p>" before_error="<p>" error="Error: Feed has a error or is not valid" after_error="</p>" paging="FALSE" prev_paging_link="&laquo; Previous" next_paging_link="Next &raquo;" prev_paging_title="more items" next_paging_title="more items" use_simplepie="FALSE"]\', \'\', \'\');
+			function RSSImport_tag(id) {
+				id = id.replace(/RSSImport_/, \'\');
+				edInsertTag(edCanvas, id);
+			}
+			jQuery(document).ready(function() {
+				content = \'<input id="RSSImport_\'+length+\'" class="ed_button" type="button" value="' . __( 'RSSImport', FB_RSSI_TEXTDOMAIN ) . '" title="' . __( 'Import a feed with RSSImport', FB_RSSI_TEXTDOMAIN ) . '" onclick="RSSImport_tag(this.id);" />\';
+				jQuery("#ed_toolbar").append(content);
+			});
 		}
-		jQuery(document).ready(function() {
-			content = \'<input id="RSSImport_\'+length+\'" class="ed_button" type="button" value="' . __( 'RSSImport', FB_RSSI_TEXTDOMAIN ) . '" title="' . __( 'Import a feed with RSSImport', FB_RSSI_TEXTDOMAIN ) . '" onclick="RSSImport_tag(this.id);" />\';
-			jQuery("#ed_toolbar").append(content);
-		});
 		//]]>
 	</script>';
+}
+if ( is_admin() && FB_RSSI_QUICKTAG ) {
+	if ( version_compare( $GLOBALS['wp_version'], '3.3alpha', '>=' ) ) {
+		$post_page_pages = array('post-new.php', 'post.php', 'page-new.php', 'page.php');
+		if ( in_array( $pagenow, $post_page_pages ) ) {
+			wp_enqueue_script(
+				'rssimport_insert_button',
+				plugin_dir_url( __FILE__) . '/js/quicktag.js', 
+				array( 'quicktags' )
+			);
+			add_action( 'admin_print_scripts', 'rssimport_insert_button' );
+		}
+	} else {
+		add_action( 'admin_footer', 'RSSImport_insert_button' );
+	}
 }
 
 
@@ -596,8 +615,7 @@ if ( function_exists('add_shortcode') )
 	add_shortcode('RSSImport', 'RSSImport_Shortcode');
 
 add_action( 'init', 'RSSImport_textdomain' );
-if ( is_admin() && FB_RSSI_QUICKTAG )
-	add_filter( 'admin_footer', 'RSSImport_insert_button' );
+
 
 
 /**
