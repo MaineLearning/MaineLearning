@@ -11,6 +11,7 @@ RewriteRule $ /maintenance.html [R=302,L]
 
 
 # BEGIN WPSuperCache
+# Full SuperCache rewrite rules added to production server
 # END WPSuperCache
 
 # BEGIN WordPress
