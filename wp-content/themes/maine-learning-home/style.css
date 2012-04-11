@@ -733,6 +733,10 @@ FOOTER
 	padding: 5px 0 15px 0;
 }
 
+#footer-widget-area div.widget-area > ul {
+width: 30%;
+}
+
 #footer-widgets a { text-decoration: none; }
 
 #footer-widgets a.external_icon
