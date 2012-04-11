@@ -25,4 +25,6 @@ Remove custom CSS in home and sites (Digital Citizenship and Support). (Moved in
 
 Activate WP-Better-Emails.
 
+Activate Blog-Copier
+
 Active Bulletproof security and check changes to .htaccess from dev server, including Options -Indexes.
