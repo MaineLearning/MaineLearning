@@ -1,4 +1,5 @@
 Options +FollowSymlinks
+Options -Indexes
 
 # BEGIN WPSuperCache
 <IfModule mod_rewrite.c>
@@ -61,8 +62,6 @@ RewriteRule ^(.*) "/wp-content/cache/supercache/%{HTTP_HOST}/$1/index.html" [L]
 </IfModule>
 
 # END WPSuperCache
-
-
 
 # BEGIN WordPress
 
