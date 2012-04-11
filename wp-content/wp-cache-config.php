@@ -5,6 +5,7 @@ WP-Cache Config Sample File
 See wp-cache.php for author details.
 */
 
+$wp_cache_pages[ "author" ] = 0; //Added by WP-Cache Manager
 $wp_cache_preload_on = 0; //Added by WP-Cache Manager
 $wp_cache_preload_email_volume = 'less'; //Added by WP-Cache Manager
 $wp_cache_preload_email_me = 0; //Added by WP-Cache Manager
@@ -83,15 +84,15 @@ $wp_cache_debug_level = 5;
 $wp_cache_debug_ip = '';
 $wp_cache_debug_log = '';
 $wp_cache_debug_email = '';
-$wp_cache_pages[ "search" ] = 0;
-$wp_cache_pages[ "feed" ] = 0;
-$wp_cache_pages[ "category" ] = 0;
-$wp_cache_pages[ "home" ] = 0;
-$wp_cache_pages[ "frontpage" ] = 0;
-$wp_cache_pages[ "tag" ] = 0;
-$wp_cache_pages[ "archives" ] = 0;
-$wp_cache_pages[ "pages" ] = 0;
-$wp_cache_pages[ "single" ] = 0;
+$wp_cache_pages[ "search" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "feed" ] = 1; //Added by WP-Cache Manager
+$wp_cache_pages[ "category" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "home" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "frontpage" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "tag" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "archives" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "pages" ] = 0; //Added by WP-Cache Manager
+$wp_cache_pages[ "single" ] = 0; //Added by WP-Cache Manager
 $wp_cache_hide_donation = 0;
 $wp_cache_not_logged_in = 1; //Added by WP-Cache Manager
 $wp_cache_clear_on_post_edit = 0; //Added by WP-Cache Manager
