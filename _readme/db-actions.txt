@@ -24,3 +24,5 @@ Update Gravity Forms
 Remove custom CSS in home and sites (Digital Citizenship and Support). (Moved into styles.css files.)
 
 Activate WP-Better-Emails.
+
+Active Bulletproof security and check changes to .htaccess from dev server, including Options -Indexes.
