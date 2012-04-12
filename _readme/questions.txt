@@ -56,6 +56,8 @@ DESELECT WHOLE WORDS
 --------------------------------------------------
 Auto join support group?
 
+BG: Changed hook for auto join
+
 
 --------------------------------------------------
 POTENTIAL DEVELOPMENT PROJECTS
