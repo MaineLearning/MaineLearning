@@ -394,10 +394,10 @@ function wpcf_ajax() {
                 wpcf_pr_admin_edit_fields($_GET['parent'], $_GET['child']);
             }
             break;
-            
+
         case 'toggle':
             $option = get_option('wpcf_toggle', array());
-            $hidden = isset($_GET['hidden']) ? (bool)$_GET['hidden'] : 1;
+            $hidden = isset($_GET['hidden']) ? (bool) $_GET['hidden'] : 1;
             $_GET['div'] = strval($_GET['div']);
             if (!$hidden) {
                 unset($option[$_GET['div']]);
@@ -406,10 +406,17 @@ function wpcf_ajax() {
             }
             update_option('wpcf_toggle', $option);
             break;
-            
+
         case 'footer_credits':
             require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
             wpcf_footer_credit_settings();
+            break;
+
+        case 'footer_credit_activate_message':
+            update_option('wpcf_footer_credit', array('active' => 1));
+            $messages = get_option('wpcf_dismissed_messages', array());
+            $messages[] = 'footer_credit_support_message';
+            update_option('wpcf_dismissed_messages', $messages);
             break;
 
         default:
