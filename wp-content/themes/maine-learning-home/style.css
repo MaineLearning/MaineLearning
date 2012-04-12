@@ -398,6 +398,10 @@ div#item-header span.activity, div#item-header h2 span.highlight
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 ul#activity-stream li.activity_update { padding-top: 20px; }
 
+li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta {
+	display: none;
+}
+
 .exb blockquote
 {
 	background-color: #eaeaea;
