@@ -25,26 +25,33 @@ You mentioned that they needed to be added to gitignore, but they all appear the
 --------------------------------------------------
 After maintenance is over, htaccess file should always redirect maintenance.html back to the root
 
+BG: Will add 
+
 
 --------------------------------------------------
 I tested bp-tinymce to add an editor to the forum posts. It broke the layout of the home page. Are there other options?
 
+BG: New WP TMCE API appeared in 3.3. In future. Will update in future.
+
 --------------------------------------------------
 On Network Admin: Users, the search is exact rather than fuzzy. For instance, when I search for "wood", it does not show "mdoewood" in the results. Is this configurable?
+
+BG: Use asterisks for wildcards.
 
 
 --------------------------------------------------
 When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
 
---------------------------------------------------
-When entering wp-admin without the trailing slash, there is a strange redirect. This only started happening recently. Any suggestions?
+BG: With PO edit open. Open catalog > Settings > Language team. Change to anything. Drop it into WPcontent/languages. See if it works. If not, let Boone know.
 
-http://mainelearning.net/wp-admin
+
 
 --------------------------------------------------
 Even though I used the language file to change all instances of Forum to Discussion, Forum still appears on the /people/ pages.
 
 http://mainelearning.net/people/jcollier/
+
+DESELECT WHOLE WORDS
 
 --------------------------------------------------
 Auto join support group?
