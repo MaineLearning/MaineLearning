@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 3.0
-Tested up to: 3.2.1
-Stable tag: 1.1.5
+Tested up to: 3.3.1
+Stable tag: 1.1.6
 
 Lets you directly edit the WordPress admin menu. You can re-order, hide or rename existing menus, add custom menus and more. 
 
@@ -19,9 +19,9 @@ Admin Menu Editor lets you manually edit the Dashboard menu. You can reorder the
 * Hide/show any menu or menu item. A hidden menu is invisible to all users, including administrators.
 * Create custom menus that point to any part of the Dashboard or an external URL.
 
-The [Pro version](http://wpplugins.com/plugin/146/admin-menu-editor-pro) of the plugin lets you also import/export menu configurations, make menu items open in a new window, and use [shortcodes](http://wpplugins.com/plugin/146/admin-menu-editor-pro?view=notes) in the Dashboard menu.
+The [Pro version](http://w-shadow.com/AdminMenuEditor/) of the plugin lets you also import/export menu configurations, make menu items open in a new window, and use shortcodes in the Dashboard menu.
 
-[Suggest new features and improvements here](http://feedback.w-shadow.com/forums/58572-admin-menu-editor)
+[Suggest new features and improvements here](http://w-shadow.com/admin-menu-editor-pro/contact/)
 
 **Notes**
 
@@ -60,6 +60,14 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 
 
 == Changelog ==
+
+= 1.1.6 =
+* Tested on WP 3.3.1.
+* Fixed a couple 404's in the readme and the plugin itself.
+
+= 1.1.5 =
+* Fixed an error where there would be no custom menu to show.
+* Removed the "Feedback" button due to lack of use. You can still provide feedback via blog comments or email, of course.
 
 = 1.1.4 =
 * Fixed the updater's cron hook not being removed when the plugin is deactivated.

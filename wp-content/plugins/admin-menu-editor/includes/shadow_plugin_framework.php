@@ -33,8 +33,8 @@ class MenuEd_ShadowPluginFramework {
 	public $is_mu_plugin = null; //True if installed in the mu-plugins directory, false otherwise
 	
 	protected $options = array();
-	public $option_name = ''; //should be set or overriden by the plugin
-	protected $defaults = array(); //should be set or overriden by the plugin
+	public $option_name = ''; //should be set or overridden by the plugin
+	protected $defaults = array(); //should be set or overridden by the plugin
 	protected $sitewide_options = false; //WPMU only : save the setting in a site-wide option
 	protected $serialize_with_json = false; //Use the JSON format for option storage 
 	
@@ -49,10 +49,10 @@ class MenuEd_ShadowPluginFramework {
 	
   /**
    * Class constructor. Populates some internal fields, then calls the plugin's own 
-   * intializer (if any).
+   * initializer (if any).
    *
-   * @param string $plugin_file Plugin's filename. Usuallly you can just use __FILE__.
-   * @return void
+   * @param string $plugin_file Plugin's filename. Usually you can just use __FILE__.
+   * @param string $option_name
    */
 	function __construct( $plugin_file = '', $option_name = null ){
 		if ($plugin_file == ''){
