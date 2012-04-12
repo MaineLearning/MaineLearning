@@ -388,6 +388,8 @@ div#item-header div#item-actions
 BUDDYPRESS PANELS: ACTIVITY
 ----------------------- */
 
+body.activity.directory form#whats-new-form { display: none; }
+
 div#item-header span.activity, div#item-header h2 span.highlight
 {
 	margin-bottom: 0px;
@@ -397,10 +399,7 @@ div#item-header span.activity, div#item-header h2 span.highlight
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 ul#activity-stream li.activity_update { padding-top: 20px; }
-
-li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta {
-	display: none;
-}
+li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta { display: none; }
 
 .exb blockquote
 {
@@ -416,12 +415,12 @@ li.exb blockquote p a
 	font-family: "myriad-pro-1","myriad-pro-2",'Helvetica Neue',Helvetica,'Lucida Grande','Lucida Sans Unicode',sans-serif;
 	font-size: 13px;
 	float: right;
-	margin: 2px 4px 0px 0px;
+	margin: 24px 4px 4px 0px;
 }
 
 .activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
 {
-	background-color: #eaeaea;
+	background-color: #e6e6e6;
 	color: #666;
 	padding: 10px 10px 10px 14px;
 }
@@ -563,9 +562,7 @@ BP PANELS: ACTIVITIES
 div.activity { background: #efefef; }
 div.activity-avatar { margin: 6px 0 0 16px; }
 div.activity-comments div.acomment-content { font-size: 12px; }
-
-div.activity-comments > ul {
-background: transparent;
+div.activity-comments > ul { background: transparent; }
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
@@ -737,10 +734,7 @@ FOOTER
 	padding: 5px 0 15px 0;
 }
 
-#footer-widget-area div.widget-area > ul {
-width: 30%;
-}
-
+#footer-widget-area div.widget-area > ul { width: 30%; }
 #footer-widgets a { text-decoration: none; }
 
 #footer-widgets a.external_icon
