@@ -23,7 +23,7 @@ function my_bp_activity_entry_content() {
     <?php }
  
     if ( bp_get_activity_object_name() == 'activity' && bp_get_activity_type() == 'activity_update' ) {?>
-        <a class="view-post view-group-activity" href="<?php bp_activity_thread_permalink() ?>">View group activity</a>
+        <a class="view-post view-group-activity" href="<?php bp_activity_thread_permalink() ?>">View status update</a>
     <?php }
  
         if ( bp_get_activity_object_name() == 'groups' && bp_get_activity_type() == 'new_forum_topic' ) {?>
