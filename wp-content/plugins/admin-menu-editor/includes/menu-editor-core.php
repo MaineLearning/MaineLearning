@@ -15,8 +15,11 @@ if ( !class_exists('WPMenuEditor') ) :
 
 class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
-	protected $default_wp_menu = null; //Holds the default WP menu for later use in the editor
+	protected $default_wp_menu = null;    //Holds the default WP menu for later use in the editor
 	protected $default_wp_submenu = null; //Holds the default WP menu for later use
+	private $filtered_wp_menu = null;     //The final, ready-for-display top-level menu and sub-menu.
+	private $filtered_wp_submenu = null;
+
 	protected $title_lookups = array(); //A list of page titles indexed by $item['file']. Used to
 	                                    //fix the titles of moved plugin pages.
 	private $custom_menu = null;        //The current custom menu with defaults merged in
@@ -218,12 +221,14 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			}
 			//Merge in data from the default menu
 			$tree = $this->menu_merge($this->options['custom_menu'], $menu, $submenu);
-			//Apply the custom menu
-			list($menu, $submenu, $this->title_lookups) = $this->tree2wp($tree);
 			//Save for later - the editor page will need it
 			$this->custom_menu = $tree;
+			//Apply the custom menu
+			list($menu, $submenu, $this->title_lookups) = $this->tree2wp($tree);
 			//Re-filter the menu (silly WP should do that itself, oh well)
 			$this->filter_menu();
+			$this->filtered_wp_menu = $menu;
+			$this->filtered_wp_submenu = $submenu;
 		}
 	}
 
@@ -247,8 +252,8 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			return $menu_order;
 		}
 		$custom_menu_order = array();
-		foreach($this->custom_menu as $topmenu){
-			$filename = $this->get_menu_field($topmenu, 'file');
+		foreach($this->filtered_wp_menu as $topmenu){
+			$filename = $topmenu[2];
 			if ( in_array($filename, $menu_order) ){
 				$custom_menu_order[] = $filename;
 			}
@@ -819,7 +824,6 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 				}
 			}
 		}
-		
 		return array($menu, $submenu, $title_lookup);
 	}
 	
@@ -905,8 +909,6 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			die();
 		}
 
-		//Attach a "Feedback" link to the screen meta panel.
-		$this->print_uservoice_widget();
 		//Kindly remind the user to give me money
 		if ( !apply_filters('admin_menu_editor_is_pro', false) ){
 			$this->print_upgrade_notice();
@@ -1197,31 +1199,14 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 	 * @return array Filtered version of $allcaps
 	 */
 	function hook_user_has_cap($allcaps, $required_caps, $args){
-		if ( in_array('super_admin', $required_caps) ){
+		//Be careful not to overwrite a super_admin cap added by other plugins 
+		//For example, Advanced Access Manager also adds this capability. 
+		if ( in_array('super_admin', $required_caps) && !isset($allcaps['super_admin']) ){
 			$allcaps['super_admin'] = is_multisite() && is_super_admin($args[1]);
 		}
 		return $allcaps;
 	}
 
-  /**
-   * Output the JavaScript that adds the "Feedback" widget to screen meta.
-   *
-   * @return void
-   */
-	function print_uservoice_widget(){
-		?>
-		<script type="text/javascript">
-		(function($){
-			$('#screen-meta-links').append(
-				'<div id="ws-ame-feedback-widget-wrap">' +
-					'<a href="http://feedback.w-shadow.com/forums/58572-admin-menu-editor" id="ws-ame-feedback-widget" class="show-settings" target="_blank" title="Open the user feedback forum">Feedback</a>' +
-				'</div>'
-			);
-		})(jQuery);
-		</script>
-		<?php
-	}
-	
   /**
    * Output the "Upgrade to Pro" message
    *
@@ -1233,7 +1218,7 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 		(function($){
 			$('#screen-meta-links').append(
 				'<div id="ws-pro-version-notice">' +
-					'<a href="http://wpplugins.com/plugin/146/admin-menu-editor-pro" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
+					'<a href="http://w-shadow.com/AdminMenuEditor/" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
 				'</div>'
 			);
 		})(jQuery);

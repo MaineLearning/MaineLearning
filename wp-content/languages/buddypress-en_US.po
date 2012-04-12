@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-03-29 10:16-0500\n"
+"PO-Revision-Date: 2012-04-12 11:40-0500\n"
 "Last-Translator: Jay Collier <jay.collier@thecompass.com>\n"
 "Language-Team: Learn Maine\n"
 "X-Poedit-Language: English\n"
@@ -582,7 +582,7 @@ msgstr ""
 #: bp-core/admin/bp-core-admin.php:367
 #: bp-forums/bp-forums-loader.php:24
 msgid "Discussion Forums"
-msgstr ""
+msgstr "Discussions"
 
 #: bp-core/admin/bp-core-admin.php:368
 msgid "Full powered discussion forums built directly into groups allow for more conventional in-depth conversations. NOTE: This will require an extra (but easy) setup step."
@@ -826,7 +826,7 @@ msgstr ""
 
 #: bp-core/admin/bp-core-update.php:399
 msgid "forums"
-msgstr ""
+msgstr "discussions"
 
 #: bp-core/admin/bp-core-update.php:402
 msgid "blogs"
@@ -884,7 +884,7 @@ msgstr ""
 #: bp-forums/bp-forums-loader.php:194
 #: bp-forums/bp-forums-loader.php:234
 msgid "Forums"
-msgstr ""
+msgstr "Discussions"
 
 #: bp-core/admin/bp-core-update.php:501
 #: bp-core/bp-core-functions.php:451
@@ -2925,7 +2925,7 @@ msgstr ""
 
 #: bp-forums/bp-forums-admin.php:12
 msgid "Forums Setup"
-msgstr ""
+msgstr "Discussions Setup"
 
 #: bp-forums/bp-forums-admin.php:38
 msgid "Settings Saved."
@@ -2945,7 +2945,7 @@ msgstr ""
 
 #: bp-forums/bp-forums-admin.php:72
 msgid "Forums were set up correctly using your existing bbPress install!"
-msgstr ""
+msgstr "Forums (discussions) were set up correctly using your existing bbPress install!"
 
 #: bp-forums/bp-forums-admin.php:73
 msgid "BuddyPress will now use its internal copy of bbPress to run the forums on your site. If you wish, you can remove your old bbPress installation files, as long as you keep the bb-config.php file in the same location."
@@ -3002,7 +3002,7 @@ msgstr ""
 
 #: bp-forums/bp-forums-loader.php:61
 msgid "Search Forums..."
-msgstr ""
+msgstr "Search Discussions..."
 
 #: bp-forums/bp-forums-loader.php:135
 #: bp-forums/bp-forums-loader.php:201
@@ -4397,7 +4397,7 @@ msgstr ""
 
 #: bp-themes/bp-default/forums/index.php:23
 msgid "Forums Directory"
-msgstr ""
+msgstr "Discussions Directory"
 
 #: bp-themes/bp-default/forums/index.php:38
 msgid "All Topics <span>%s</span>"

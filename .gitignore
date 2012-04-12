@@ -10,7 +10,7 @@ _archive
 env.php
 
 # Don't include .htaccess, which causes problems with the dev site
-# .htaccess
+.htaccess
 
 # Don't include supercache configuration files
 

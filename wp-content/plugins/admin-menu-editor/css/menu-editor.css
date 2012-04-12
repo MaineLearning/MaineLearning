@@ -553,7 +553,6 @@ a.ws_button:hover {
 *************************************/
 
 /* All buttons */
-#ws-ame-feedback-widget-wrap, 
 #ws-pro-version-notice {
 	float: right;
 	height: 22px;
@@ -581,7 +580,6 @@ a.ws_button:hover {
 	background-image: linear-gradient(bottom, #dfdfdf, #f1f1f1); /* proposed W3C Markup */
 }
 
-#ws-ame-feedback-widget-wrap a.show-settings, 
 #ws-pro-version-notice a.show-settings {
 	background-image: none;
 	padding:0 6px 0 6px;
