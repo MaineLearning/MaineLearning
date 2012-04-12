@@ -15,23 +15,23 @@ add_action( 'bp_core_activated_user', 'automatic_group_membership' );
 function my_bp_activity_entry_content() {
  
     if ( bp_get_activity_object_name() == 'blogs' && bp_get_activity_type() == 'new_blog_post' ) {?>
-        <a class="view-post" href="<?php bp_activity_thread_permalink() ?>">[Read more]</a>
+        <a class="view-post view-group-blog-comment" href="<?php bp_activity_thread_permalink() ?>">View group blog</a>
     <?php }
  
     if ( bp_get_activity_object_name() == 'blogs' && bp_get_activity_type() == 'new_blog_comment' ) {?>
-        <a class="view-post" href="<?php bp_activity_thread_permalink() ?>">[Read more]</a>
+        <a class="view-post view-group-blog-comment" href="<?php bp_activity_thread_permalink() ?>">View group blog</a>
     <?php }
  
     if ( bp_get_activity_object_name() == 'activity' && bp_get_activity_type() == 'activity_update' ) {?>
-        <a class="view-post" href="<?php bp_activity_thread_permalink() ?>">[Read more]</a>
+        <a class="view-post view-group-activity" href="<?php bp_activity_thread_permalink() ?>">View group activity</a>
     <?php }
  
         if ( bp_get_activity_object_name() == 'groups' && bp_get_activity_type() == 'new_forum_topic' ) {?>
-        <a class="view-thread" href="<?php bp_activity_thread_permalink() ?>">[Read more]</a>
+        <a class="view-thread view-group-discussion-topic" href="<?php bp_activity_thread_permalink() ?>">View group discussion</a>
     <?php }
  
         if ( bp_get_activity_object_name() == 'groups' && bp_get_activity_type() == 'new_forum_post' ) {?>
-        <a class="view-post" href="<?php bp_activity_thread_permalink() ?>">[Read more]</a>
+        <a class="view-post view-group-discussion-post" href="<?php bp_activity_thread_permalink() ?>">View group discussion</a>
     <?php }
  
 }
