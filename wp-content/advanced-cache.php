@@ -5,8 +5,8 @@ function wpcache_broken_message() {
 		echo "<!-- WP Super Cache is installed but broken. The path to wp-cache-phase1.php in wp-content/advanced-cache.php must be fixed! -->";
 }
 
-if ( !include_once( '/home/mainelea/public_html/wp-content/plugins/wp-super-cache/' . 'wp-cache-phase1.php' ) ) {
-	if ( !@is_file( '/home/mainelea/public_html/wp-content/plugins/wp-super-cache/' . 'wp-cache-phase1.php' ) ) {
+if ( !include_once( '/Users/jcollier/Sites/mainelearning.net/wp-content/plugins/wp-super-cache/' . 'wp-cache-phase1.php' ) ) {
+	if ( !@is_file( '/Users/jcollier/Sites/mainelearning.net/wp-content/plugins/wp-super-cache/' . 'wp-cache-phase1.php' ) ) {
 		define( 'ADVANCEDCACHEPROBLEM', 1 );
 		register_shutdown_function( 'wpcache_broken_message' );
 	}

@@ -100,6 +100,7 @@ function wpcf_admin_menu_hook() {
  * Menu page hook.
  */
 function wpcf_admin_menu_summary_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_script('wpcf-fields-edit', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
@@ -127,6 +128,7 @@ function wpcf_admin_menu_summary() {
  * Menu page hook.
  */
 function wpcf_admin_menu_edit_fields_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_script('wpcf-fields-edit',
             WPCF_EMBEDDED_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
@@ -197,6 +199,7 @@ function wpcf_admin_menu_edit_fields() {
  * Menu page hook.
  */
 function wpcf_admin_menu_summary_ctt_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_script('wpcf-ctt', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
@@ -227,6 +230,7 @@ function wpcf_admin_menu_summary_ctt() {
  * Menu page hook.
  */
 function wpcf_admin_menu_edit_type_hook() {
+    do_action('wpcf_admin_page_init');
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
     require_once WPCF_INC_ABSPATH . '/custom-types-form.php';
     require_once WPCF_INC_ABSPATH . '/post-relationship.php';
@@ -271,6 +275,7 @@ function wpcf_admin_menu_edit_type() {
  * Menu page hook.
  */
 function wpcf_admin_menu_edit_tax_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_script('wpcf-tax-edit', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
@@ -313,6 +318,7 @@ function wpcf_admin_menu_edit_tax() {
  * Menu page hook.
  */
 function wpcf_admin_menu_import_export_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_style('wpcf-import-export', WPCF_RES_RELPATH . '/css/basic.css',
             array(), WPCF_VERSION);
     require_once WPCF_INC_ABSPATH . '/fields.php';
@@ -340,6 +346,7 @@ function wpcf_admin_menu_import_export() {
  * Menu page hook.
  */
 function wpcf_admin_menu_custom_fields_control_hook() {
+    do_action('wpcf_admin_page_init');
     add_action('admin_head', 'wpcf_admin_custom_fields_control_js');
     add_thickbox();
     wp_enqueue_script('wpcf-fields-edit', WPCF_RES_RELPATH . '/js/basic.js',
@@ -387,6 +394,7 @@ function wpcf_admin_menu_custom_fields_control() {
  * Menu page hook.
  */
 function wpcf_admin_menu_migration_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_style('wpcf-migration', WPCF_RES_RELPATH . '/css/basic.css',
             array(), WPCF_VERSION);
     wp_enqueue_script('wpcf-migration', WPCF_RES_RELPATH . '/js/basic.js',
@@ -417,6 +425,7 @@ function wpcf_admin_menu_migration() {
  * Menu page hook.
  */
 function wpcf_admin_menu_settings_hook() {
+    do_action('wpcf_admin_page_init');
     wp_enqueue_style('wpcf-migration', WPCF_RES_RELPATH . '/css/basic.css',
             array(), WPCF_VERSION);
     require_once WPCF_INC_ABSPATH . '/settings.php';

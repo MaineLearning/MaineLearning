@@ -4,19 +4,69 @@ ACTIVE
 
 
 --------------------------------------------------
+When you were pushing to production today, this is the list of files that were ignored.
+
+_archive/
+env.php
+error_log
+wp-admin/error_log
+wp-content/backup-db/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/plugins/easy-fancybox/error_log
+wp-content/themes/maine-learning-sites/.DS_Store
+wp-content/themes/maine-learning-sites/images/.svn/
+wp-content/themes/maine-learning-sites/xml/.DS_Store
+wp-content/uploads/
+
+You mentioned that they needed to be added to gitignore, but they all appear there. Is there anything else I need to do?
+
+
+--------------------------------------------------
+After maintenance is over, htaccess file should always redirect maintenance.html back to the root
+
+BG: Will add 
+
+
+--------------------------------------------------
+I tested bp-tinymce to add an editor to the forum posts. It broke the layout of the home page. Are there other options?
+
+BG: New WP TMCE API appeared in 3.3. In future. Will update in future.
+
+--------------------------------------------------
+On Network Admin: Users, the search is exact rather than fuzzy. For instance, when I search for "wood", it does not show "mdoewood" in the results. Is this configurable?
+
+BG: Use asterisks for wildcards.
+
+
+--------------------------------------------------
+When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
+
+BG: With PO edit open. Open catalog > Settings > Language team. Change to anything. Drop it into WPcontent/languages. See if it works. If not, let Boone know.
+
+
+
+--------------------------------------------------
+Even though I used the language file to change all instances of Forum to Discussion, Forum still appears on the /people/ pages.
+
+http://mainelearning.net/people/jcollier/
+
+DESELECT WHOLE WORDS
+
+--------------------------------------------------
+Auto join support group?
+
+BG: Changed hook for auto join
+
+
+--------------------------------------------------
+POTENTIAL DEVELOPMENT PROJECTS
+--------------------------------------------------
+
+--------------------------------------------------
 In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
 
 COULD BE DONE IN 30-MINUTES OR LESS
-
-
---------------------------------------------------
-What's the best way to get external RSS items integrated into group activity streams? I tried YD's plugin, but it appears to not work with 1.5.
-
---------------------------------------------------
-Where is New Post button on blog page?
-
-
-When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
 
 
 
@@ -33,8 +83,7 @@ function blah( $content ) {
 add_action( 'bp_ass_activity_notification_content', 'blah' );
 
 
-30-MINUTE TEST
-
+COULD BE DONE IN 30-MINUTES OR LESS
 
 
 --------------------------------------------------
@@ -65,7 +114,7 @@ BUILD BLOG FIRST, THEN ATTACH TO GROUP. TRY RUNNING WITH REPLICATOR.
 
 
 --------------------------------------------------
-RESOLVED
+RESOLVED OR ANSWERED
 --------------------------------------------------
 
 
@@ -102,6 +151,11 @@ Tried upgrading to BuddyPress 1.5.4 (from .3) for second time. Again this time, 
 
 
 What is the best way to identify and diagnose PHP errors?
+
+--------------------------------------------------
+What's the best way to get external RSS items integrated into group activity streams? I tried YD's plugin, but it appears to not work with 1.5.
+
+CHECKING OUT EXTERNAL BLOGS BY ANDY
 
 
 --------------------------------------------------

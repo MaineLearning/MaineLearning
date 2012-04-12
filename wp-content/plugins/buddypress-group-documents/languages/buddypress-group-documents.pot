@@ -1,16 +1,15 @@
 # Translation of the WordPress plugin   by .
-# Copyright (C) 2010 
+# Copyright (C) 2010
 # This file is distributed under the same license as the  package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/buddypress-group-documents\n"
 "POT-Creation-Date: 2010-04-11 01:46+0000\n"
-"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-03-29 17:09-0500\n"
+"Last-Translator: Jay Collier <jay.collier@thecompass.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -35,7 +34,9 @@ msgstr ""
 msgid "Bulk File Uploads"
 msgstr ""
 
-#: include/admin-uploads.php:48 include/widgets.php:87 include/widgets.php:187
+#: include/admin-uploads.php:48
+#: include/widgets.php:87
+#: include/widgets.php:187
 msgid "Select Group..."
 msgstr ""
 
@@ -59,14 +60,15 @@ msgstr ""
 msgid "There was a problem moving the file."
 msgstr ""
 
-#: include/admin.php:66 index.php:164
+#: include/admin.php:66
+#: index.php:164
 msgid "Group Documents Admin"
 msgstr ""
 
 #: include/admin.php:69
 #, php-format
 msgid "%s Documents Moved."
-msgstr ""
+msgstr "%s Files Moved."
 
 #: include/admin.php:70
 msgid "Settings Updated."
@@ -121,9 +123,7 @@ msgid "The type of document submitted is not allowed"
 msgstr ""
 
 #: include/classes.php:204
-msgid ""
-"There was a problem; your file is larger than is allowed by the site "
-"administrator."
+msgid "There was a problem; your file is larger than is allowed by the site administrator."
 msgstr ""
 
 #: include/classes.php:207
@@ -146,7 +146,8 @@ msgstr ""
 msgid "There was a problem saving your file, please try again."
 msgstr ""
 
-#: include/group-admin.php:12 index.php:245
+#: include/group-admin.php:12
+#: index.php:245
 msgid "Documents"
 msgstr ""
 
@@ -179,8 +180,7 @@ msgid "A member uploads a document to a group you belong to"
 msgstr ""
 
 #: include/notifications.php:21
-msgid ""
-"A member uploads a document to a group for which you are an moderator/admin"
+msgid "A member uploads a document to a group for which you are an moderator/admin"
 msgstr ""
 
 #: include/notifications.php:50
@@ -215,7 +215,8 @@ msgstr ""
 msgid "Document successfully edited"
 msgstr ""
 
-#: include/templatetags.php:143 index.php:486
+#: include/templatetags.php:143
+#: index.php:486
 msgid "Upload a New Document"
 msgstr ""
 
@@ -236,32 +237,39 @@ msgstr ""
 msgid "The most recently uploaded group documents"
 msgstr ""
 
-#: include/widgets.php:13 include/widgets.php:20
+#: include/widgets.php:13
+#: include/widgets.php:20
 msgid "Recent Group Documents"
 msgstr ""
 
-#: include/widgets.php:45 include/widgets.php:145
+#: include/widgets.php:45
+#: include/widgets.php:145
 #, php-format
 msgid "%s posted in %s"
 msgstr ""
 
-#: include/widgets.php:51 include/widgets.php:151
+#: include/widgets.php:51
+#: include/widgets.php:151
 msgid "There are no documents to display."
 msgstr ""
 
-#: include/widgets.php:82 include/widgets.php:182
+#: include/widgets.php:82
+#: include/widgets.php:182
 msgid "Title:"
 msgstr ""
 
-#: include/widgets.php:85 include/widgets.php:185
+#: include/widgets.php:85
+#: include/widgets.php:185
 msgid "Filter by Group:"
 msgstr ""
 
-#: include/widgets.php:99 include/widgets.php:199
+#: include/widgets.php:99
+#: include/widgets.php:199
 msgid "Show featured documents only"
 msgstr ""
 
-#: include/widgets.php:102 include/widgets.php:202
+#: include/widgets.php:102
+#: include/widgets.php:202
 msgid "Number of items to show:"
 msgstr ""
 
@@ -269,11 +277,13 @@ msgstr ""
 msgid "The most commonly downloaded group documents"
 msgstr ""
 
-#: include/widgets.php:112 include/widgets.php:119
+#: include/widgets.php:112
+#: include/widgets.php:119
 msgid "Popular Group Documents"
 msgstr ""
 
-#: index.php:164 index.php:316
+#: index.php:164
+#: index.php:316
 msgid "Group Documents"
 msgstr ""
 
@@ -281,11 +291,13 @@ msgstr ""
 msgid "Group Document Categories"
 msgstr ""
 
-#: index.php:319 index.php:369
+#: index.php:319
+#: index.php:369
 msgid "Document List"
 msgstr ""
 
-#: index.php:343 index.php:470
+#: index.php:343
+#: index.php:470
 msgid "Category:"
 msgstr ""
 
@@ -293,7 +305,8 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: index.php:350 index.php:363
+#: index.php:350
+#: index.php:363
 msgid "Go"
 msgstr ""
 
@@ -357,3 +370,4 @@ msgstr ""
 #: index.php:514
 msgid "There was a security problem"
 msgstr ""
+

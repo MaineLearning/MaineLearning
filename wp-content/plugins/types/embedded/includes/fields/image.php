@@ -353,14 +353,14 @@ function wpcf_fields_image_view($params) {
         }
         return $params['field_value'];
     }
-    if (!$image_data['is_outsider'] && !$image_data['is_dir_writable']) {
-        if (current_user_can('administrator')) {
-            return '<div style="padding:10px;background-color:Red;color:#FFFFFF;">'
-                    . 'Types: ' . sprintf(__('Directory %s not writable', 'wpcf'),
-                            $image_data['abspath']) . '</div>';
-        }
-        return $params['field_value'];
-    }
+    //if (!$image_data['is_outsider']) {
+    //    if (current_user_can('administrator')) {
+    //        return '<div style="padding:10px;background-color:Red;color:#FFFFFF;">'
+    //                . 'Types: ' . sprintf(__('Directory %s not writable', 'wpcf'),
+    //                        $image_data['abspath']) . '</div>';
+    //    }
+    //    return $params['field_value'];
+    //}
 
     // Set alt
     if (isset($params['alt'])) {
@@ -484,7 +484,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     // Get image data
     $image_data = wpcf_fields_image_get_data($url_path);
 
-    if (empty($image_data['fullabspath']) || !empty($image_data['error']) || !$image_data['is_dir_writable']) {
+    if (empty($image_data['fullabspath']) || !empty($image_data['error'])) {
         return $url_path;
     }
 
@@ -595,7 +595,6 @@ function wpcf_fields_image_get_data($image) {
     $is_outsider = 1;
     $is_in_upload_path = 0;
     $is_attachment = 0;
-    $is_dir_writable = 0;
     $error = '';
 
     // Check if it's on domain or subdomain
@@ -658,8 +657,6 @@ function wpcf_fields_image_get_data($image) {
                                 $network_url + $check_image_url));
             }
         }
-        // See if dir is writable
-        $is_dir_writable = is_writable($abspath) ? 1 : 0;
     }
 
     $data = array(
@@ -673,7 +670,6 @@ function wpcf_fields_image_get_data($image) {
         'is_outsider' => $is_outsider,
         'is_in_upload_path' => $is_in_upload_path,
         'is_attachment' => !empty($attachment_id) ? $attachment_id : 0,
-        'is_dir_writable' => $is_dir_writable,
         'error' => $error,
     );
 

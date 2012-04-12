@@ -1,18 +1,18 @@
 === Plugin Name ===
 Contributors: ksemel
 Donate Link: http://bonsaibudget.com/donate/
-Tags: network, multisite, plugin management, admin
+Tags: network, multisite, plugin management, theme management, admin
 Requires at least: 3.2.1
 Tested up to: 3.3.1
 Stable tag: trunk
 
-For multisite/network installations only.  Adds columns to your network admin to show which sites are using each plugin.
+For multisite/network installations only.  Adds columns to your network admin to show which sites are using each plugin and theme.
 
 == Description ==
 
-As my wordpress network grew I found it challenging to track which plugins were used on which sites as the only way to check was to visit each dashboard one at a time.  What a hassle!
+As my wordpress network grew I found it challenging to track which plugins and themes were used on each site, and the only way to check was to visit each dashboard one at a time.  What a hassle!
 
-This plugin adds a column to your network admin to show which sites have each plugin active (on the plugin page), and which plugins are active on each site (on the sites page). Now you can easily determine which plugins are used on your network sites and which can be safely removed.
+This plugin adds a column to your network admin to show which sites have each plugin active (on the plugin page), and which plugins are active on each site (on the sites page), and the active theme on each blog (on the themes page). Now you can easily determine which plugins and themes are used on your network sites and which can be safely removed.
 
 == Installation ==
 
@@ -20,6 +20,12 @@ This plugin adds a column to your network admin to show which sites have each pl
 2. Network Activate the plugin through the 'Network Plugins' menu in WordPress
 
 == Changelog ==
+
+= 1.1 =
+
+- Added support for Themes.  Now shows which themes are actually used and by which blog in your themes list
+- Stored some of the more intensive queries in the transient cache to improve performance
+- Improved error handling
 
 = 1.0.1 =
 
@@ -45,3 +51,4 @@ No, the columns are only added in the network admin dashboard.  There is no chan
 
 1. Plugin Active on the Network Plugins page
 2. Plugin Active on the Network Sites page
+3. Plugin Active on the Network Themes page
