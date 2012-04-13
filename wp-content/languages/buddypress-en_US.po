@@ -8,12 +8,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-04-12 11:40-0500\n"
+"PO-Revision-Date: 2012-04-12 16:11-0500\n"
 "Last-Translator: Jay Collier <jay.collier@thecompass.com>\n"
 "Language-Team: Learn Maine\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: UNITED STATES\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Bookmarks: -1,611,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: bp-blogs/bp-blogs-loader.php:24
 #: bp-core/admin/bp-core-admin.php:374
