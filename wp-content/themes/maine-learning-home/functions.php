@@ -10,7 +10,7 @@ function automatic_group_membership( $user_id ) {
 add_action( 'user_register', 'automatic_group_membership' );
 
 
-/* Add Cool Buttons to Activity Stream Items */
+/* Add Buttons to Activity Stream Items */
 /* http://bp-tricks.com/snippets/adding-buttons-to-activity-stream-entries/ */
 
 function my_bp_activity_entry_content() {
@@ -37,3 +37,16 @@ function my_bp_activity_entry_content() {
 
 }
 add_action('bp_activity_entry_content', 'my_bp_activity_entry_content');
+
+
+
+/* Change default member avatar */
+/* http://bp-tricks.com/snippets/adding-buttons-to-activity-stream-entries/ */
+
+
+function myavatar_add_default_avatar( $url )
+{
+
+return get_stylesheet_directory_uri() .'/images/default-avatar.jpg';
+}
+add_filter( 'bp_core_mysteryman_src', 'myavatar_add_default_avatar' );
