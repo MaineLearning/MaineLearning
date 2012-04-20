@@ -8,6 +8,9 @@ To view or reply, log in and go to:
 http://mainelearning.net/groups//
 
 
+Why is the backend left column dropped? I think I made change for the front end BuddyBar, but need assistance problem solving on this one.
+
+
 
 --------------------------------------------------
 When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
