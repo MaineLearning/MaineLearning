@@ -1,4 +1,4 @@
-<?php
+
 /**
  * WordPress Chosen Taxonomy Metabox
  * Author: Helen Hou-Sandi
@@ -97,4 +97,3 @@ add_action( 'do_meta_boxes', 'hhs_remove_tax_meta_boxes', 10, 3 );
 function hhs_remove_tax_meta_boxes( $post_type, $priority, $post ) {
 	remove_meta_box( 'tagsdiv-post_tag', 'post', 'side' );
 }
-?>
