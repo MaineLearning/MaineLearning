@@ -3,13 +3,13 @@
 	Plugin Name: AP Extended Mime Types
 	Plugin URI: http://ardentpixels.com/josh/wordpress/plugins/ap-extended-mime-types/
 	Description: Extends the allowed uploadable MIME types to include a WIDE range of file types. 
-	Version: 1.0
+	Version: 1.1
 	Author: Josh Maxwell (Ardent Pixels)
 	Author URI: http://ardentpixels.com/josh
 	License: GPL2
 */
 
-/*  Copyright 2010 Josh Maxwell & Ardent Pixels
+/*  Copyright 2011 Josh Maxwell & Ardent Pixels
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -41,7 +41,7 @@ function ap_extended_mime_types ( $mime_types=array() ) {
 
 	foreach ($mime_file_lines as $line) {
 		//Catch all sorts of line endings - CR/CRLF/LF
-		$mime_type = explode(" ",rtrim(rtrim($line,"\n"),"\r"));
+		$mime_type = explode(' ',rtrim(rtrim($line,"\n"),"\r"));
 		$mime_types[$mime_type[0]] = $mime_type[1];
 	}
 

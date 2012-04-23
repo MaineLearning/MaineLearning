@@ -1,4 +1,5 @@
-=== Plugin Name ===
+
+=== AP Extended MIME Types ===
 Contributors: hornetok
 Plugin Name: AP Extended MIME Types
 Donate link: http://ardentpixels.com/josh/contact
@@ -7,13 +8,14 @@ Author URI: http://ardentpixels.com/josh/
 Author: Josh Maxwell, Ardent Pixels
 Requires at least: 2.0
 Tested up to: 3.3.1
-Stable tag: 1.0
+Stable tag: 1.1
 
-Extends allowed uploadable MIME types to include a WIDE range of file types. Created for WPMS, but usable by single installs.
+This plugin extends the allowed uploadable MIME types to include a WIDE range of file types. Created specifically for WPMS...
+
 
 == Description ==
 
-The [Ardent Pixels'](http://ardentpixels.com/) *Extended MIME Types* plugin was created specifically for WPMS in mind (but it's still usable by single installs). You can now allow all or only select blogs to upload a WIDE range of file types.
+The [Ardent Pixels'](http://ardentpixels.com/) *Extended MIME Types* plugin was created specifically for WPMS in mind. You can now allow all or only select blogs to upload a WIDE range of file types.
 
 = Included MIME Types: =
 * ac3
@@ -43,8 +45,6 @@ The [Ardent Pixels'](http://ardentpixels.com/) *Extended MIME Types* plugin was 
 * gtar
 * gz
 * gzip
-* htm
-* html
 * ics
 * ief
 * ifb
@@ -118,6 +118,7 @@ The [Ardent Pixels'](http://ardentpixels.com/) *Extended MIME Types* plugin was 
 * xlw
 * zip
 
+
 == Installation ==
 = Single WordPress Install = 
 1. Upload the **ap-extended-mime-types** folder to the **/wp-content/plugins/** directory
@@ -126,13 +127,21 @@ The [Ardent Pixels'](http://ardentpixels.com/) *Extended MIME Types* plugin was 
 = WordPress MultiSite Install =
 1. Upload the **ap-extended-mime-types** folder to the **/wp-content/plugins/** directory
 1. *Network Activate* the plugin through the *Network Admin > Plugins* menu in WordPress
-       **--OR--**
+  **--OR--**
 1. *Activate* the plugin through the *Plugins* menu in WordPress on an individual site basis
+
 
 == Changelog ==
 
+= 1.1 =
+* ap-extended-mime-types.php, line 44: changed double quotes to single
+* mime-types.txt: changed commas to pipettes
+* "doc,dot,word,w6w" now upload correctly
+* Removed .htm & .html as allowed file types
+
 = 1.0 =
 * First release
+
 
 == Frequently Asked Questions ==
 = Do I need to do anything else for AP Extended MIME Types to work? =
@@ -149,8 +158,14 @@ For more file and formatting examples, view the *mime-types.txt* file. Also, a f
 = What in the world is a MIME? =
 No, MIMEs are not white-faced, beret-sporting people who live in a *"box"*. MIMEs are [Multipurpose Internet Mail Extensions](http://en.wikipedia.org/wiki/Internet_media_type).
 
+
 == Upgrade Notice ==
 N/A
+
+
+== Screenshots ==
+No screenshots -- just code.
+
 
 == Notes ==
 = Donations =
