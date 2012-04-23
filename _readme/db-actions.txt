@@ -1,6 +1,20 @@
-Database actions
+DATABASE ACTIONS
+
+------------------------------------
+TO DO
+
+Deactivate Buddyvents and configure Events Manager
+
+Categories
+Existing
+Events
+Events page
+Events in Menu
+Front end submission
 
 
+
+------------------------------------
 DONE
 
 ------------------------------------
