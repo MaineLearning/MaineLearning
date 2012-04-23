@@ -10,6 +10,8 @@ http://mainelearning.net/groups//
 
 Why is the backend left column dropped? I think I made change for the front end BuddyBar, but need assistance problem solving on this one.
 
+JFC: Add http://wordpress.org/extend/plugins/lazy-load/
+
 
 
 --------------------------------------------------
