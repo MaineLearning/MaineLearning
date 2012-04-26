@@ -4,6 +4,9 @@ Add Email Post Changes
 
 Look into integrating metaboxes - Helen Hou functions.php
 
+http://harvesthq.github.com/chosen/
+http://www.helenhousandi.com/wordpress/2012/01/using-chosen-for-a-replacement-taxonomy-metabox/
+
 BG: Check out EditFlow
 
 
