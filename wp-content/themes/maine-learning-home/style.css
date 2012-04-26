@@ -211,7 +211,7 @@ ul#nav { max-width: 70%; }
 	font-size: 15px;
 	font-weight: bold;
 	padding: 5px 10px;
-	text-shadow: black 0.1em 0.1em 0.2em;
+	text-shadow: black 1px 1px 1px; 
 	text-transform: uppercase;
 	letter-spacing: .5px;
 }
@@ -368,7 +368,7 @@ div#item-header div#item-meta
 	display: inline-block;
 	font-size: 13px;
 	margin: 14px 0 0 0;
-	padding: 10px 0 20px 0;
+	padding: 10px 0 8px 0;
 	width: 80%;
 }
 
@@ -388,6 +388,20 @@ div#item-header div#item-actions
 BUDDYPRESS PANELS: ACTIVITY
 ----------------------- */
 
+body.group-home #activity-stream
+{
+	background: url(http://mainelearning.net/wp-content/uploads/2012/04/Activity-header-text-group-2012-04-19a.png) top left no-repeat;
+	margin-top: -5px;
+	padding-top: 40px;
+}
+
+body.directory.activity #activity-stream
+{
+	background: url(http://mainelearning.net/wp-content/uploads/2012/04/Activity-header-text-site-2012-04-19a.png) top left no-repeat;
+	margin-top: -5px;
+	padding-top: 50px;
+}
+
 body.activity.directory form#whats-new-form { display: none; }
 
 div#item-header span.activity, div#item-header h2 span.highlight
@@ -397,18 +411,33 @@ div#item-header span.activity, div#item-header h2 span.highlight
 }
 
 .dir-form h3 { font-size: 18px; }
+
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
+
 ul#activity-stream li.activity_update { padding-top: 20px; }
+
 li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta { display: none; }
+
+.activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
+{
+	font-size: 13px;
+	line-height: 21px;
+}
 
 .exb blockquote
 {
 	background-color: #eaeaea;
 	color: #666;
-	font-size: 15px;
+	font-size: 13.5px;
+	line-height: 21px;
 	font-style: normal !important;
 	padding: 18px 10px 4px 20px;
 }
+
+
+li.exb div.activity-meta { display: block !important; }
+
+li.exb .acomment-reply, li.new_forum_topic .acomment-reply, li.new_forum_post .acomment-reply, li.new_forum_post .fav,  li.new_forum_topic .fav, .exb .fav { display: none; }
 
 li.exb blockquote p a
 {
@@ -438,6 +467,14 @@ a.view-post
 	padding: 0 10px 8px 0;
 }
 
+.view-group-discussion-topic
+{
+	float: right;
+	margin-right: 12px;
+	margin-bottom: 8px;
+	font-size: 13px;
+}
+
 span.activity-read-more
 {
 	display: block;
@@ -453,6 +490,19 @@ div.activity-meta { clear: right; }
 	text-decoration: none;
 }
 
+.bpm-bottom-link
+{
+	margin-right: 22px;
+	padding: 2px 0 16px 0;
+}
+
+.bpm-bottom-link span
+{
+	font-size: 12px;
+	text-decoration: none;
+}
+
+
 /* ----------------------
 BUDDYPRESS PANELS: ITEMS
 ----------------------- */
@@ -466,6 +516,8 @@ BUDDYPRESS PANELS: ITEMS
 	width: 20%;
 	text-align: right;
 }
+
+.single-item.groups #nav li#menu-item-587 a, .forums li#menu-item-594 a, .settings li#menu-item-594 a, .events li#menu-item-594 a, .my-friends li#menu-item-594 a, .my-profile li#menu-item-594 a, .my-activity li#menu-item-594 a, .my-groups li#menu-item-594 a, .my-blogs li#menu-item-594 a { color: #ddd; }
 
 #item-body h4 { padding: 4px 0 0 12px; }
 div.pagination { margin: 0; }
@@ -624,8 +676,13 @@ div#topic-meta
 }
 
 div#topic-meta h3 { width: 60%; }
+
 form#forum-topic-form { margin: 0; }
+
 .ass-topic-subscribe { margin-top: 4px !important; }
+
+#ass-email-subscriptions-options-page { padding: 12px 20px 20px 20px; }
+
 div.generic-button.ass-topic-subscribe a { border: 0px solid #fff; }
 
 p:last-child
@@ -633,6 +690,8 @@ p:last-child
 	margin-bottom: 0;
 	margin-right: 0;
 }
+
+#topic-post-list .post-content p { font-size: 13px; }
 
 /* ----------------------
 BP PANELS: ALERT BOXES

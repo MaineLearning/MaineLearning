@@ -2,23 +2,28 @@
 Contributors: johnjamesjacoby
 Tags: post type
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 1.0
+Tested up to: 3.4
+Stable tag: 1.1
 
 A simple way to change a post type in WordPress.
 
 == Description ==
 
-A simple way to change a post type in WordPress.
+Any combination is possible, even custom post types:
 
-Any combination is possible, even custom post types.
+* Page to Post
+* Post to Page
+* Page to Attachment
+* Post to Custom
 
-Page to Post
-Post to Page
-Page to Attachment
-Post to Custom
+Note: Invisible post types (revisions, menus, etc...) are purposely excluded. Filter 'pts_post_type_filter' to adjust the boundaries.
 
 == Changelog ==
+
+= Version 1.1 =
+* Fix revisions being nooped
+* Fix malformed HTML for some user roles
+* Classificationate
 
 = Version 1.0 =
 * Fix JS bugs
@@ -44,7 +49,7 @@ Post to Custom
 == Frequently Asked Questions ==
 
 = Why would I need this? =
-I needed it to move WordPress posts into a custom post type of my own, so this plugin was borned!
+You need to selectively change a posts type from one to another.
 
 = Does this ruin my taxonomy associations? =
-It shouldn't. The only thing this plugin does for version 0.1 is change the 'post_type' property of the post.
+It should not. This plugin only changes the 'post_type' property of a post.
