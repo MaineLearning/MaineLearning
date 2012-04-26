@@ -2,6 +2,8 @@ TO DO
 
 Add Email Post Changes
 
+Look into integrating metaboxes - Helen Hou functions.php
+
 BG: Check out EditFlow
 
 
