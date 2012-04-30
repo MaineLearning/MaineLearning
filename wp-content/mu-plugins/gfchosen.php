@@ -20,6 +20,8 @@ function mln_maybe_enqueue_scripts() {
 	if ( false !== strpos( $content, '[gravityform' ) ) {
 		$url_base = WP_CONTENT_URL . '/chosen';
 
+		add_action( 'wp_head', 'mln_load_chosen', 9999 );
+
 		wp_enqueue_style(  'chosen', $url_base . '/chosen.css' );
 		wp_enqueue_script( 'chosen', $url_base . '/chosen.jquery.min.js', array( 'jquery' ), false, true );
 
@@ -36,6 +38,5 @@ function mln_load_chosen() {
 
 	<?php
 }
-add_action( 'wp_head', 'mln_load_chosen', 9999 );
 
 ?>
