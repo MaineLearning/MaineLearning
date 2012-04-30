@@ -14,7 +14,8 @@ env.php
 
 # Don't include supercache configuration files
 
-wp-content/advanced-cache.phpwp-content/wp-cache-config.php
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
 
 
 # Don't include Espresso metadata
