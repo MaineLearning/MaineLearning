@@ -3,6 +3,10 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Upgrade 8 plugins on the production server.
+
+
+
 Deactivate Buddyvents and configure Events Manager
 
 Categories

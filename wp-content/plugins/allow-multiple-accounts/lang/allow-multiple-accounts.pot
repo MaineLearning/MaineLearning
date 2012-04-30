@@ -1,0 +1,245 @@
+# Translation of the WordPress plugin Allow Multiple Accounts v2.6 by Scott Reilly.
+# Copyright (C) 2011 Scott Reilly
+# This file is distributed under the same license as the Allow Multiple Accounts plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Allow Multiple Accounts 2.6\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/allow-multiple-accounts\n"
+"POT-Creation-Date: 2011-12-29 18:09:57+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#. #-#-#-#-#  allow-multiple-accounts.pot (Allow Multiple Accounts 2.6)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: allow-multiple-accounts.php:108
+msgid "Allow Multiple Accounts"
+msgstr ""
+
+#: allow-multiple-accounts.php:109
+msgid "Multiple Accounts"
+msgstr ""
+
+#: allow-multiple-accounts.php:113
+msgid "Allow multiple accounts for everyone?"
+msgstr ""
+
+#: allow-multiple-accounts.php:114
+msgid ""
+"If not checked, only the emails listed below can have multiple accounts."
+msgstr ""
+
+#: allow-multiple-accounts.php:116
+msgid "Account limit"
+msgstr ""
+
+#: allow-multiple-accounts.php:117
+msgid ""
+"The maximum number of accounts that can be associated with a single email "
+"address.  Leave blank to indicate no limit."
+msgstr ""
+
+#: allow-multiple-accounts.php:120
+msgid "Multi-account emails"
+msgstr ""
+
+#: allow-multiple-accounts.php:121
+msgid ""
+"If the checkbox above is unchecked, then only the emails listed here will be "
+"allowed to have multiple accounts.  Define one per line."
+msgstr ""
+
+#: allow-multiple-accounts.php:155
+msgid "Allow Multiple Accounts Settings"
+msgstr ""
+
+#. #-#-#-#-#  allow-multiple-accounts.pot (Allow Multiple Accounts 2.6)  #-#-#-#-#
+#. Description of the plugin/theme
+#: allow-multiple-accounts.php:156
+msgid "Allow multiple user accounts to be created from the same email address."
+msgstr ""
+
+#: allow-multiple-accounts.php:157
+msgid ""
+"By default, WordPress only allows a single user account to be assigned to a "
+"specific email address.  This plugin removes that restriction.  A setting is "
+"also provided to allow only certain email addresses the ability to have "
+"multiple accounts.  You may also specify a limit to the number of accounts "
+"an email address can have."
+msgstr ""
+
+#: allow-multiple-accounts.php:158
+msgid "View a list of user accounts grouped by email address."
+msgstr ""
+
+#: allow-multiple-accounts.php:170
+msgid ""
+"NOTE: Allow Multiple Accounts is not able to function as intended because "
+"another plugin has overridden the WordPress function <code>get_user_by()</"
+"code>."
+msgstr ""
+
+#: allow-multiple-accounts.php:262
+msgid "E-mail Addresses with Multiple User Accounts"
+msgstr ""
+
+#: allow-multiple-accounts.php:270 allow-multiple-accounts.php:575
+msgid "Username"
+msgstr ""
+
+#: allow-multiple-accounts.php:271 allow-multiple-accounts.php:576
+msgid "Name"
+msgstr ""
+
+#: allow-multiple-accounts.php:272 allow-multiple-accounts.php:577
+msgid "E-mail"
+msgstr ""
+
+#: allow-multiple-accounts.php:273 allow-multiple-accounts.php:578
+msgid "Role"
+msgstr ""
+
+#: allow-multiple-accounts.php:287
+msgid "%1$s &#8212; %2$d account"
+msgid_plural "%1$s &#8212; %2$d accounts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: allow-multiple-accounts.php:394
+msgid ""
+"<strong>ERROR</strong>: Too many accounts are associated with this e-mail "
+"address, please choose another one."
+msgstr ""
+
+#: allow-multiple-accounts.php:423
+msgid ""
+"For your information, your e-mail address is also associated with the "
+"following accounts:"
+msgstr ""
+
+#: allow-multiple-accounts.php:428
+msgid ""
+"In order to reset the password for any of these (if you aren't already "
+"successfully in the middle of doing so already), you should specify the "
+"login when requesting a password reset rather than using your e-mail."
+msgstr ""
+
+#: allow-multiple-accounts.php:471
+msgid "Sorry, that email address is already used!"
+msgstr ""
+
+#: allow-multiple-accounts.php:477
+msgid ""
+"Too many accounts are associated with this email, please choose another one."
+msgstr ""
+
+#: allow-multiple-accounts.php:544
+msgid "Edit"
+msgstr ""
+
+#: allow-multiple-accounts.php:550
+msgid "Delete"
+msgstr ""
+
+#: allow-multiple-accounts.php:552
+msgid "Remove"
+msgstr ""
+
+#: allow-multiple-accounts.php:570
+msgid "None"
+msgstr ""
+
+#: allow-multiple-accounts.php:596
+msgid "E-mail: %s"
+msgstr ""
+
+#: allow-multiple-accounts.php:605
+msgid "View posts by this author"
+msgstr ""
+
+#: c2c-plugin.php:76
+msgid "Invalid file specified for C2C_Plugin: %s"
+msgstr ""
+
+#: c2c-plugin.php:292
+msgid "See the \"Help\" link to the top-right of the page for more help."
+msgstr ""
+
+#: c2c-plugin.php:325
+msgid "Settings reset."
+msgstr ""
+
+#: c2c-plugin.php:336 c2c-plugin.php:344
+msgid "A value is required for: \"%s\""
+msgstr ""
+
+#: c2c-plugin.php:353
+msgid "Expected integer value for: %s"
+msgstr ""
+
+#: c2c-plugin.php:464
+msgid "More information about %1$s %2$s"
+msgstr ""
+
+#: c2c-plugin.php:465
+msgid "Click for more help on this plugin"
+msgstr ""
+
+#: c2c-plugin.php:466
+msgid " (especially check out the \"Other Notes\" tab, if present)"
+msgstr ""
+
+#: c2c-plugin.php:555
+msgid "Settings"
+msgstr ""
+
+#: c2c-plugin.php:567
+msgid "Donation for coffee2code plugin: %s"
+msgstr ""
+
+#: c2c-plugin.php:568
+msgid "Coffee fuels my coding."
+msgstr ""
+
+#: c2c-plugin.php:806
+msgid "A plugin by coffee2code"
+msgstr ""
+
+#: c2c-plugin.php:815
+msgid "Save Changes"
+msgstr ""
+
+#: c2c-plugin.php:816
+msgid "Reset Settings"
+msgstr ""
+
+#: c2c-plugin.php:822
+msgid "Scott Reilly, aka coffee2code"
+msgstr ""
+
+#: c2c-plugin.php:823
+msgid "This plugin brought to you by %s."
+msgstr ""
+
+#: c2c-plugin.php:824
+msgid "Please consider a donation"
+msgstr ""
+
+#: c2c-plugin.php:825
+msgid "Did you find this plugin useful?"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://coffee2code.com/wp-plugins/allow-multiple-accounts/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Scott Reilly"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://coffee2code.com/"
+msgstr ""
