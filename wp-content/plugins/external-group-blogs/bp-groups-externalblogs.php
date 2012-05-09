@@ -177,8 +177,7 @@ function bp_groupblogs_fetch_group_feeds( $group_id = false ) {
 	/* Record found blog posts in activity streams */
 	foreach ( (array) $items as $post_date => $post ) {
 		$activity_action = sprintf( __( 'New external post %s from the blog %s in the group %s', 'bp-groups-externalblogs' ),
-		'<a href="' . attribute_escape( $post['link'] ) . '">' . attribute_escape( $post['title'] ) . '</a>', '<a href="' . attribute_escape( $post['blogurl'] ) . '">' . attribute_escape( $post['blogname'] ) . '</a>',
-		'<a href="' . bp_get_group_permalink( $group ) . '">' . attribute_escape( $group->name ) . '</a>' );
+		'<a href="' . attribute_escape( $post['link'] ) . '">' . attribute_escape( $post['title'] ) . '</a>', '<a href="' . attribute_escape( $post['blogurl'] ) . '">' . attribute_escape( $post['blogname'] ) . '</a>', '<a href="' . bp_get_group_permalink( $group ) . '">' . attribute_escape( $group->name ) . '</a>' );
 		$activity_content = '<blockquote>' . strip_tags( bp_create_excerpt( $post['description'], 200 ) ) . ' <a class="exb-view" href="' . attribute_escape( $post['link'] ) . '">' . 'View external post' . '</blockquote>';
 		$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, &$post, &$group );
 
