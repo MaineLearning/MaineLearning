@@ -143,6 +143,10 @@ body#bp-default #wp-admin-bar .padder
 	text-shadow: none;
 }
 
+html body.wp-admin {
+    padding-top: 0px !important;
+}
+
 /* ----------------------
 HEADER
 ----------------------- */
@@ -226,6 +230,14 @@ ul#nav { max-width: 70%; }
 {
 	background: transparent;
 	color: #ddd;
+}
+
+#nav .sfhover ul li a, #nav :hover ul li a {
+  padding: 0 0;
+  background-color: #444;
+  color: #ccc;
+  font-size: 12px;
+  text-transform: none;
 }
 
 div#content .padder { border-right: 0px solid #fff; }
@@ -390,19 +402,19 @@ BUDDYPRESS PANELS: ACTIVITY
 
 body.group-home #activity-stream
 {
-	background: url(http://mainelearning.net/wp-content/uploads/2012/04/Activity-header-text-group-2012-04-19a.png) top left no-repeat;
+	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) top left no-repeat;
 	margin-top: -5px;
 	padding-top: 40px;
 }
 
 body.directory.activity #activity-stream
 {
-	background: url(http://mainelearning.net/wp-content/uploads/2012/04/Activity-header-text-site-2012-04-19a.png) top left no-repeat;
+	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) top left no-repeat;
 	margin-top: -5px;
 	padding-top: 50px;
 }
 
-body.activity.directory form#whats-new-form { display: none; }
+
 
 div#item-header span.activity, div#item-header h2 span.highlight
 {
@@ -444,7 +456,7 @@ li.exb blockquote p a
 	font-family: "myriad-pro-1","myriad-pro-2",'Helvetica Neue',Helvetica,'Lucida Grande','Lucida Sans Unicode',sans-serif;
 	font-size: 13px;
 	float: right;
-	margin: 24px 4px 4px 0px;
+	margin: 2px 4px 4px 0px;
 }
 
 .activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
@@ -465,6 +477,11 @@ a.view-post
 	font-size: 13px;
 	float: right;
 	padding: 0 10px 8px 0;
+}
+
+#posts-filter {
+  margin: 0px 0px 0px 20px;
+  
 }
 
 .view-group-discussion-topic
@@ -611,10 +628,29 @@ table.profile-fields { margin-left: 20px; }
 BP PANELS: ACTIVITIES
 ----------------------- */
 
+#item-body form#whats-new-form {
+	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-quickpost-2012-05-14a.png) top left no-repeat;
+	margin: 0 0 10px;
+	padding: 40px 0 20px 0;
+}
+
+#item-body form#whats-new-form {
+  display: block !important;
+}
+
+#item-body form#whats-new-form h5 {
+  display: none;
+}
+
+
 div.activity { background: #efefef; }
 div.activity-avatar { margin: 6px 0 0 16px; }
 div.activity-comments div.acomment-content { font-size: 12px; }
 div.activity-comments > ul { background: transparent; }
+
+form#whats-new-form #whats-new-content {
+margin-left: 44px;
+}
 
 /* ----------------------
 BP PANELS: GROUP DIRECTORY
@@ -699,30 +735,89 @@ BP PANELS: ALERT BOXES
 
 div#message.updated p { background-color: #ffdfb1; }
 
+
 /* ----------------------
-BP PANELS: BUDDYVENTS
+BP PANELS: EVENTS MANAGER
 ----------------------- */
 
-#events-dir-list ul.item-list li div.item-title span.summary { font-size: 18px; }
-
-#events-dir-list ul.item-list li div.item-desc
-{
-	display: inline;
-	font-size: 12px;
-	height: 0;
+#event-form h4 {
+  font-size: 14px;
 }
 
-#events-dir-list .event-meta { font-size: 12px; }
-table#approve-events { margin: 0 -19px 0; }
-table#approve-events td { vertical-align: top; }
-
-table#approve-events td img.avatar
-{
-	display: none;
-	width: 0;
+.em-warning-confirms {
+background-color: #e5e0b8;
+border: 1px solid #A8D144;
+  margin: 2px 30px 2px 20px;
 }
 
-a.approve { line-height: 40px; }
+#respond {
+  margin-top: 40px;
+}
+
+#event-form {
+  margin-left: 20px;
+}
+
+.my-events h3 {
+    margin: 10px 0 0 20px;
+}
+
+#event-form h4 {
+  margin-top: 10px;
+  padding: 4px 0 0 0;
+}
+
+.event .postmetadata {
+  display: none;
+}
+
+.event .entry {
+  padding-bottom: 20px;
+}
+  
+.em-calendar tbody td {
+  vertical-align: top;
+}
+
+td.eventful ul li a, td.eventful a {
+    color: #1FB3DD !important;
+    font-size: 12px;
+  font-style: normal;
+}
+
+table thead tr {
+background: #ddd;
+}
+
+td.month_name {
+  background: #ddd;
+  text-align: center !important;
+  text-size: 18px;
+}
+
+tr.days-names td {
+    background: #ddd;
+  height: .7em;
+}
+
+.em-calendar-wrapper {
+  border-top: 3px solid #bbb !important;
+}
+
+
+div.post table, div.page table  {
+border: 0px solid #EEE;
+}
+
+table.fullcalendar td {
+height: 46px;
+}
+
+div.post table thead td, div.page table thead td {
+border-top: 0px solid #EEE;
+}
+
+
 
 /* ----------------------
 BP PANELS: BP-MODERATION
