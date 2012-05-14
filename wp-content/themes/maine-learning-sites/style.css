@@ -185,7 +185,7 @@ body
 
 #wrap
 {
-	background-image: url("images/mln-banner-sites-default-green.jpg");
+	background-image: url("http://mainelearning.net/resources/wp-content/blogs.dir/5/files/2012/05/mln-banner-sites-resources-2012-05-04a.jpg");
 	/* ML */
 	background-repeat: no-repeat;
 	/* ML */
@@ -238,7 +238,7 @@ body
 	font-size: 28px;
 	/* ML */
 	font-weight: bold;
-	letter-spacing: .3px;
+	letter-spacing: 1px;
 	/* ML */
 	line-height: 42px;
 	margin: 0 0 0 30px;
@@ -483,7 +483,8 @@ li li a .sf-sub-indicator
 	/* ML */
 	float: left;
 	margin: 0 20px 0 0;
-	width: 960px;
+	width: 100%;
+	/* ML */
 }
 
 #nav li
@@ -684,6 +685,8 @@ li li a .sf-sub-indicator
 {
 	background-color: #eee;
 	/* ML */
+	background-image: url(images/mln-banner-sites-default-green.jpg); 
+	/* ML */
 	margin: 0 auto 0;
 	/* ML */
 	overflow: hidden;
@@ -701,20 +704,19 @@ li li a .sf-sub-indicator
 
 .breadcrumb
 {
+
+	display: none; 
 	background: transparent;
-	/* ML */
 	border: none;
-	/* ML */
 	border-radius: none;
-	/* ML */
+	
+/* ML Unused
 	color: #777;
-	/* ML */
 	font-size: 11px;
 	line-height: 18px;
 	margin: 0 0 4px;
-	/* ML */
 	padding: 6px 10px 5px 0;
-	/* ML */
+*/
 }
 
 /* Taxonomy Description
@@ -769,6 +771,9 @@ li li a .sf-sub-indicator
 	max-width: 960px;
 	/* ML */
 }
+
+.standard-form textarea { margin-left: 0 !important; }
+	/* ML */
 
 blockquote
 {
@@ -1647,6 +1652,9 @@ input:hover[type="submit"]
 /* Gravity Forms
 ------------------------------------------------------------ */
 
+.gform_wrapper { margin: 0; }
+	/* MLN */
+
 div.gform_wrapper input,
 div.gform_wrapper select,
 div.gform_wrapper textarea
@@ -1658,12 +1666,15 @@ div.gform_wrapper textarea
 	padding: 4px 5px !important;
 }
 
+div.entry-content div.ginput_container { padding-top: 0; }
+	/* MLN */
+	
 div.gform_footer input.button { color: #fff; }
 
 div.gform_wrapper .ginput_complex label
 {
 	font-size: 11px;
-	/* ML */
+	/* MLN */
 }
 
 div.gform_wrapper li,
@@ -1673,19 +1684,25 @@ div.gform_wrapper .gform_footer
 {
 	border: none;
 	margin: 0;
-	padding: 0;
+	padding: 0 0 20px 0;
+	/* MLN */
 }
 
 .gsection, .gfield_label
 {
 	font-family: 'Cabin',arial,serif;
-	/* ML */
+	/* MLN */
 	letter-spacing: 0px;
-	/* ML */
+	/* MLN */
 }
+
+.gform_wrapper .chzn-container .chzn-results li { line-height: 80%; }
+	/* MLN */
 
 /* Custom for MLN
 ------------------------------------------------------------ */
+
+body.home-page .entry-title { display: none; }
 
 /*.home-page .post-info */
 .home-page a.bpm-report-link
@@ -1750,7 +1767,8 @@ div.gform_wrapper .gform_footer
 	font-size: 18px;
 	letter-spacing: -0.2px;
 	line-height: 160%;
-	margin: 0 0 20px 0;
+	margin: 0;
+	/* MLN */
 	padding: 0;
 }
 
