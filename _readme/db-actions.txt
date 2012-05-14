@@ -13,6 +13,7 @@ Upgrade Login Logo to 0.6
 
 Upgrade Bulletproof Security to .47.1, but don't activate. Awaiting resolution for Buddypress. http://wordpress.org/support/topic/plugin-bulletproof-security-buddypress-and-403
 
+Upgraded to network-privacy.0.1.3
 
 
 
