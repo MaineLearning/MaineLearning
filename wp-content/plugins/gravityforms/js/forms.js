@@ -68,7 +68,7 @@ var fieldSettings = {
     "creditcard" :      ".conditional_logic_field_setting, .force_ssl_field_setting, .credit_card_style_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .description_setting, .css_class_setting, .credit_card_setting",
     "website" :         ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .size_setting, .rules_setting, .visibility_setting, .duplicate_setting, .default_value_setting, .description_setting, .css_class_setting",
     "phone" :           ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .size_setting, .rules_setting, .duplicate_setting, .visibility_setting, .default_value_setting, .description_setting, .phone_format_setting, .css_class_setting",
-    "number" :          ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .size_setting, .number_format_setting, .range_setting, .rules_setting, .visibility_setting, .duplicate_setting, .default_value_setting, .description_setting, .css_class_setting",
+    "number" :          ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .size_setting, .number_format_setting, .range_setting, .rules_setting, .visibility_setting, .duplicate_setting, .default_value_setting, .description_setting, .css_class_setting, .calculation_setting",
     "date" :            ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .date_input_type_setting, .duplicate_setting, .visibility_setting, .date_format_setting, .default_value_setting, .description_setting, .css_class_setting",
     "time" :            ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .time_format_setting, .rules_setting, .duplicate_setting, .visibility_setting, .description_setting, .css_class_setting",
     "textarea" :        ".conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .maxlen_setting, .size_setting, .rules_setting, .visibility_setting, .duplicate_setting, .default_value_textarea_setting, .description_setting, .css_class_setting",
@@ -89,6 +89,7 @@ var fieldSettings = {
     "captcha"   :       ".captcha_type_setting, .captcha_size_setting, .captcha_fg_setting, .captcha_bg_setting, .conditional_logic_field_setting, .captcha_language_setting, .captcha_theme_setting, .error_message_setting, .label_setting, .description_setting, .css_class_setting",
     "product"   :       ".product_field_type_setting, .conditional_logic_field_setting, .prepopulate_field_setting, .label_setting, .admin_label_setting, .description_setting, .css_class_setting",
     "singleproduct" :   ".base_price_setting, .disable_quantity_setting, .rules_setting, .duplicate_setting",
+    "calculation" :     ".disable_quantity_setting, .rules_setting, .duplicate_setting, .calculation_setting",
     "price" :           ".rules_setting, .duplicate_setting",
     "hiddenproduct" :   ".base_price_setting",
     "list" :            ".columns_setting, .maxrows_setting, .add_icon_url_setting, .delete_icon_url_setting, .conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .visibility_setting, .description_setting, .css_class_setting",
@@ -102,5 +103,3 @@ var fieldSettings = {
     "password" :        ".conditional_logic_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .duplicate_setting, .description_setting, .css_class_setting, .password_strength_setting"
 
 }
-
-

@@ -15,7 +15,11 @@ function gf_apply_rules(formId, fields, isInit){
     }
 }
 
-function gf_apply_field_rule(formId, fieldId, isInit, callback){
+function gf_check_field_rule(formId, fieldId, isInit, callback){
+
+    //if conditional logic is not specified for that field, it is supposed to be displayed
+    if(!window["gf_form_conditional_logic"][formId] || !window["gf_form_conditional_logic"][formId]["logic"][fieldId])
+        return "show";
 
     var conditionalLogic = window["gf_form_conditional_logic"][formId]["logic"][fieldId];
 
@@ -25,8 +29,16 @@ function gf_apply_field_rule(formId, fieldId, isInit, callback){
     if(action != "hide")
         action = gf_get_field_action(formId, conditionalLogic["field"]);
 
+    return action;
+}
+
+function gf_apply_field_rule(formId, fieldId, isInit, callback){
+
+    action = gf_check_field_rule(formId, fieldId, isInit, callback);
+
     gf_do_field_action(formId, action, fieldId, isInit, callback);
 
+    var conditionalLogic = window["gf_form_conditional_logic"][formId]["logic"][fieldId];
     //perform conditional logic for the next button
     if(conditionalLogic["nextButton"]){
         action = gf_get_field_action(formId, conditionalLogic["nextButton"]);
@@ -190,6 +202,19 @@ function gf_do_action(action, targetId, useAnimation, isInit, callback){
         }
     }
     else{
+        //cascading down conditional logic to children to suppport nested conditions
+        //text fields and drop downs
+        jQuery(targetId).find('select, input[type="text"], textarea').val('').trigger('change');
+
+        //checkboxes and radio buttons
+        var elements = jQuery(targetId).find('input[type="radio"]:checked, input[type="checkbox"]:checked');
+        elements.prop("checked", false);
+        elements.each(function(){
+            //need to set the prop again after the click is triggered
+            jQuery(this).trigger('click').prop('checked', false);
+        });
+
+
         if(useAnimation && !isInit){
             jQuery(targetId).slideUp(callback);
         }

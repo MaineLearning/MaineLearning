@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.3.3.4";
+    public static $version = "1.6.4.2.1";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -12,7 +12,7 @@ class GFCommon{
             $field_label = RGFormsModel::get_label($field);
             if($input_type == "checkbox" || $input_type == "radio" || $input_type == "select"){
                 $selected = $field["id"] == $selected_field_id ? "selected='selected'" : "";
-                $str .= "<option value='" . $field["id"] . "' " . $selected . ">" . self::truncate_middle($field_label, 16) . "</option>";
+                $str .= "<option value='" . $field["id"] . "' " . $selected . ">" . $field_label . "</option>";
             }
         }
         return $str;
@@ -171,7 +171,7 @@ class GFCommon{
     }
 
     public static function is_valid_url($url){
-        return preg_match('!^(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$!', $url);
+        return preg_match('!^(http|https)://([\w-]+\.?)+[\w-]+(:\d+)?(/[\w- ./?%&=+\']*)?$!', $url);
     }
 
     public static function is_valid_email($email){
@@ -187,10 +187,10 @@ class GFCommon{
     }
 
     public static function insert_post_content_variables($fields, $element_id, $callback, $max_label_size=25){
-        self::insert_variables($fields, $element_id, true, "", "InsertPostContentVariable('{$element_id}', '{$callback}');", $max_label_size);
+        self::insert_variables($fields, $element_id, true, "", "InsertPostContentVariable('{$element_id}', '{$callback}');", $max_label_size, null, "", "gform_content_template_merge_tags");
         ?>
         &nbsp;&nbsp;
-        <select id="<?php echo $element_id?>_image_size_select" onchange="InsertPostImageVariable('<?php echo $element_id ?>', '<?php echo $element_id ?>');" style="display:none;">
+        <select id="<?php echo $element_id?>_image_size_select" onchange="InsertPostImageVariable('<?php echo $element_id ?>', '<?php echo $element_id ?>'); SetCustomFieldTemplate();" style="display:none;">
             <option value=""><?php _e("Select image size", "gravityforms") ?></option>
             <option value="thumbnail"><?php _e("Thumbnail") ?></option>
             <option value="thumbnail:left"><?php _e("Thumbnail - Left Aligned") ?></option>
@@ -215,7 +215,7 @@ class GFCommon{
         <?php
     }
 
-    public static function insert_variables($fields, $element_id, $hide_all_fields=false, $callback="", $onchange="", $max_label_size=40, $exclude = null, $args=""){
+    public static function insert_variables($fields, $element_id, $hide_all_fields=false, $callback="", $onchange="", $max_label_size=40, $exclude = null, $args="", $class_name=""){
         if($fields == null)
             $fields = array();
 
@@ -225,8 +225,9 @@ class GFCommon{
         $exclude = apply_filters("gform_merge_tag_list_exclude", $exclude, $element_id, $fields);
 
         $onchange = empty($onchange) ? "InsertVariable('{$element_id}', '{$callback}');" : $onchange;
+        $class = trim($class_name . " gform_merge_tags");
         ?>
-        <select id="<?php echo $element_id?>_variable_select" onchange="<?php echo $onchange ?>">
+        <select id="<?php echo $element_id?>_variable_select" onchange="<?php echo $onchange ?>" class="<?php echo esc_attr($class)?>">
             <option value=''><?php _e("Insert Merge Tag", "gravityforms"); ?></option>
             <?php
             if(!$hide_all_fields){
@@ -380,21 +381,78 @@ class GFCommon{
         {
             if(RGFormsModel::get_input_type($field) == "checkbox"){
                 ?>
-                <option value='<?php echo "{" . esc_html(GFCommon::get_label($field, $field["id"])) . ":" . $field["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::truncate_middle(GFCommon::get_label($field, $field["id"]), $max_label_size)) ?></option>
+                <option value='<?php echo "{" . esc_html(GFCommon::get_label($field, $field["id"])) . ":" . $field["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::get_label($field, $field["id"])) ?></option>
                 <?php
             }
 
             foreach($field["inputs"] as $input){
                 ?>
-                <option value='<?php echo "{" . esc_html(GFCommon::get_label($field, $input["id"])) . ":" . $input["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::truncate_middle(GFCommon::get_label($field, $input["id"]), $max_label_size)) ?></option>
+                <option value='<?php echo "{" . esc_html(GFCommon::get_label($field, $input["id"])) . ":" . $input["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::get_label($field, $input["id"])) ?></option>
                 <?php
             }
         }
         else{
             ?>
-            <option value='<?php echo "{" . esc_html(GFCommon::get_label($field)) . ":" . $field["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::truncate_middle(GFCommon::get_label($field), $max_label_size)) ?></option>
+            <option value='<?php echo "{" . esc_html(GFCommon::get_label($field)) . ":" . $field["id"] . "{$tag_args}}" ?>'><?php echo esc_html(GFCommon::get_label($field)) ?></option>
             <?php
         }
+    }
+
+    public static function insert_calculation_variables($fields, $element_id, $onchange = '', $callback = '') {
+
+        if($fields == null)
+            $fields = array();
+
+        $onchange = empty($onchange) ? "InsertVariable('{$element_id}', '{$callback}');" : $onchange;
+        $class = 'gform_merge_tags';
+        ?>
+
+        <select id="<?php echo $element_id?>_variable_select" onchange="<?php echo $onchange ?>" class="<?php echo esc_attr($class)?>">
+            <option value=''><?php _e("Insert Merge Tag", "gravityforms"); ?></option>
+            <optgroup label="<?php _e("Allowable form fields", "gravityforms"); ?>">
+
+                <?php
+                foreach($fields as $field) {
+
+                    if(!self::is_valid_for_calcuation($field))
+                        continue;
+
+                    if(RGFormsModel::get_input_type($field) == 'checkbox') {
+                        foreach($field["inputs"] as $input){
+                            ?>
+                            <option value='<?php echo "{" . esc_html(GFCommon::get_label($field, $input["id"])) . ":" . $input["id"] . "}" ?>'><?php echo esc_html(GFCommon::get_label($field, $input["id"])) ?></option>
+                            <?php
+                        }
+                    } else {
+                        self::insert_field_variable($field, $max_label_size, $args);
+                    }
+
+                }
+                ?>
+
+            </optgroup>
+
+            <?php
+
+            $custom_merge_tags = apply_filters('gform_custom_merge_tags', array(), rgars($fields, '0/formId'), $fields, $element_id);
+
+            if(is_array($custom_merge_tags) && !empty($custom_merge_tags)) { ?>
+
+                <optgroup label="<?php _e("Custom", "gravityforms"); ?>">
+
+                <?php foreach($custom_merge_tags as $custom_merge_tag) { ?>
+
+                    <option value='<?php echo rgar($custom_merge_tag, 'tag'); ?>'><?php echo rgar($custom_merge_tag, 'label'); ?></option>
+
+                <?php } ?>
+
+                </optgroup>
+
+            <?php } ?>
+
+        </select>
+
+        <?php
     }
 
     private static function get_post_image_variable($media_id, $arg1, $arg2, $is_url = false){
@@ -584,7 +642,10 @@ class GFCommon{
                     break;
 
                     case "total" :
-                        $value = GFCommon::to_money($value);
+                        $format_numeric = rgar($match,4) == "price";
+
+                        $value = $format_numeric ? GFCommon::to_number($value) : GFCommon::to_money($value);
+
                         $value = self::format_variable_value($value, $url_encode, $esc_html, $format);
                     break;
 
@@ -602,6 +663,16 @@ class GFCommon{
 
                 if(rgar($match,4) == "label"){
                     $value = empty($value) ? "" : rgar($field, "label");
+                }
+                else if(rgar($match,4) == "qty" && $field["type"] == "product"){
+                    //getting quantity associated with product field
+                    $products = self::get_product_fields($form, $lead, false, false);
+                    $value = 0;
+                    foreach($products["products"] as $product_id => $product)
+                    {
+                        if($product_id == $field["id"])
+                            $value = $product["quantity"];
+                    }
                 }
 
                 //filter can change merge code variable
@@ -673,7 +744,6 @@ class GFCommon{
 
         return $item_value;
     }
-
 
     public static function get_embed_post(){
         global $embed_post, $post, $wp_query;
@@ -789,6 +859,7 @@ class GFCommon{
         $no_hidden = in_array("nohidden", $options_array);
         $has_product_fields = false;
         foreach($form["fields"] as $field){
+            $field_value = "";
 
             $field_label = $use_admin_label && !rgempty("adminLabel", $field) ? rgar($field, "adminLabel") : esc_html(GFCommon::get_label($field));
 
@@ -801,16 +872,20 @@ class GFCommon{
 
                         switch($format){
                             case "text" :
-                                $field_data .=  "--------------------------------\n{$field_label}\n\n";
+                                $field_value = "--------------------------------\n{$field_label}\n\n";
                             break;
 
                             default:
-                                $field_data .= sprintf('<tr>
+                                $field_value = sprintf('<tr>
                                                             <td colspan="2" style="font-size:14px; font-weight:bold; background-color:#EEE; border-bottom:1px solid #DFDFDF; padding:7px 7px">%s</td>
                                                        </tr>', $field_label);
                             break;
                         }
                     }
+
+                    $field_value = apply_filters("gform_merge_tag_filter", $field_value, $merge_tag, $options, $field);
+
+                    $field_data .= $field_value;
 
                     break;
                 case "password" :
@@ -1073,14 +1148,13 @@ class GFCommon{
         }
         else{
             $email_to = array();
-
             foreach($form["notification"]["routing"] as $routing){
 
                 $source_field = RGFormsModel::get_field($form, $routing["fieldId"]);
                 $field_value = RGFormsModel::get_field_value($source_field, array());
-                $is_value_match = is_array($field_value) ? in_array($routing["value"], $field_value) : $field_value == $routing["value"];
+                $is_value_match = RGFormsModel::is_value_match($field_value, $routing["value"], $routing["operator"], $source_field) && !RGFormsModel::is_field_hidden($form, $source_field, array(), $lead);
 
-                if( ($routing["operator"] == "is" && $is_value_match ) || ($routing["operator"] == "isnot" && !$is_value_match) )
+                if ($is_value_match)
                     $email_to[] = $routing["email"];
             }
 
@@ -1122,6 +1196,9 @@ class GFCommon{
     }
 
     private static function send_email($from, $to, $bcc, $reply_to, $subject, $message, $from_name="", $message_format="html", $attachments=""){
+
+        $to = str_replace(" ", "", $to);
+        $bcc = str_replace(" ", "", $bcc);
 
         //invalid to email address or no content. can't send email
         if(!GFCommon::is_valid_email($to) || (empty($subject) && empty($message)))
@@ -1200,7 +1277,7 @@ class GFCommon{
     }
 
     function is_product_field($field_type){
-        return in_array($field_type, array("option", "quantity", "product", "total", "shipping"));
+        return in_array($field_type, array("option", "quantity", "product", "total", "shipping", "calculation"));
     }
 
     function all_caps(){
@@ -1223,8 +1300,7 @@ class GFCommon{
     }
 
 
-    public static function delete_directory($dir)
-    {
+    public static function delete_directory($dir) {
         if(!file_exists($dir))
             return;
 
@@ -1313,7 +1389,6 @@ class GFCommon{
 
     public static function get_remote_request_params(){
         global $wpdb;
-
         return sprintf("of=GravityForms&key=%s&v=%s&wp=%s&php=%s&mysql=%s", urlencode(self::get_key()), urlencode(self::$version), urlencode(get_bloginfo("version")), urlencode(phpversion()), urlencode($wpdb->db_version()));
     }
 
@@ -1635,7 +1710,6 @@ class GFCommon{
                     } else {
                         $other_value = $other_default_value;
                     }
-
                     $label = "<input name='input_{$field["id"]}_other' type='text' value='" . esc_attr($other_value) . "' onfocus='$onfocus' onblur='$onblur' $tabindex $disabled_text />";
                 }
 
@@ -2232,6 +2306,15 @@ class GFCommon{
         }
     }
 
+    public static function has_field_calculation($field) {
+
+        if($field['type'] == 'number') {
+            return rgar($field, 'enableCalculation') && rgar($field, 'calculationFormula');
+        }
+
+        return RGFormsModel::get_input_type($field) == 'calculation';
+    }
+
     public static function get_field_input($field, $value="", $lead_id=0, $form_id=0){
 
         $id = $field["id"];
@@ -2281,6 +2364,7 @@ class GFCommon{
                     return "<div class='ginput_container'><span class='ginput_total ginput_total_{$form_id}'>" . self::to_money("0") . "</span><input type='hidden' name='input_{$id}' id='{$field_id}' class='gform_hidden'/></div>";
             break;
 
+            case "calculation" :
             case "singleproduct" :
 
                 $product_name = !is_array($value) || empty($value[$field["id"] . ".1"]) ? esc_attr($field["label"]) : esc_attr($value[$field["id"] . ".1"]);
@@ -2323,12 +2407,12 @@ class GFCommon{
                 $has_quantity_field = sizeof(GFCommon::get_product_fields_by_type($form, array("quantity"), $field["id"])) > 0;
 
                 $product_name = !is_array($value) || empty($value[$field["id"] . ".1"]) ? esc_attr($field["label"]) : esc_attr($value[$field["id"] . ".1"]);
-                $quantity = is_array($value) ? esc_attr($value[$field["id"] . ".3"]) : "";
+                $quantity = is_array($value) ? esc_attr($value[$field["id"] . ".3"]) : "1";
                 $price = !is_array($value) || empty($value[$field["id"] . ".2"]) ? rgget("basePrice", $field) : esc_attr($value[$field["id"] . ".2"]);
                 if(empty($price))
                     $price = 0;
 
-                $quantity_field = $has_quantity_field ? "" : "<input type='hidden' name='input_{$id}.3' value='1' class='ginput_quantity_{$form_id}_{$field["id"]} gform_hidden' />";
+                $quantity_field = $has_quantity_field ? "" : "<input type='hidden' name='input_{$id}.3' value='" . esc_attr($quantity) . "' id='ginput_quantity_{$form_id}_{$field["id"]}' class='gform_hidden' />";
                 $product_name_field = "<input type='hidden' name='input_{$id}.1' value='{$product_name}' class='gform_hidden' />";
 
                 $field_type = IS_ADMIN ? "text" : "hidden";
@@ -2359,10 +2443,6 @@ class GFCommon{
                 if(rgget("enablePasswordInput", $field) && RG_CURRENT_VIEW != "entry")
                     $html_input_type = "password";
 
-                $input_mask_script = "";
-                if(!IS_ADMIN && GFFormDisplay::has_field_input_mask($field))
-                    $input_mask_script = self::get_input_mask_script($form_id, $field_id, $field["inputMaskValue"]);
-
                 if(is_numeric(rgget("maxLength", $field)))
                     $max_length = "maxlength='{$field["maxLength"]}'";
 
@@ -2372,7 +2452,7 @@ class GFCommon{
                 $logic_event = self::get_logic_event($field, "keyup");
 
                 $tabindex = self::get_tabindex();
-                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='%s' value='%s' class='%s' $max_length $tabindex $logic_event $html5_attributes %s/></div>{$input_mask_script}", $id, $field_id, $html_input_type, esc_attr($value), esc_attr($class), $disabled_text);
+                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='%s' value='%s' class='%s' $max_length $tabindex $logic_event $html5_attributes %s/></div>", $id, $field_id, $html_input_type, esc_attr($value), esc_attr($class), $disabled_text);
             break;
 
             case "email":
@@ -2440,25 +2520,38 @@ class GFCommon{
                     return $post_link;
 
                 $instruction = "";
-                if(!IS_ADMIN){
-                    $min = $field["rangeMin"];
-                    $max = $field["rangeMax"];
-                    $validation_class = $field["failed_validation"] ? "validation_message" : "";
-                    $message = self::get_range_message($field);
+                $read_only = "";
 
-                    if(!$field["failed_validation"] && !empty($message) && empty($field["errorMessage"]))
-                        $instruction = "<div class='instruction $validation_class'>" . $message . "</div>";
+                if(!IS_ADMIN){
+
+                    if(GFCommon::has_field_calculation($field)) {
+
+                        // calculation-enabled fields should be read only
+                        $read_only = 'readonly="readonly"';
+
+                    } else {
+
+                        $message = self::get_range_message($field);
+                        $validation_class = $field["failed_validation"] ? "validation_message" : "";
+
+                        if(!$field["failed_validation"] && !empty($message) && empty($field["errorMessage"]))
+                            $instruction = "<div class='instruction $validation_class'>" . $message . "</div>";
+
+                    }
 
                 }
-                $html_input_type = RGFormsModel::is_html5_enabled() ? "number" : "text";
+                $is_html5 = RGFormsModel::is_html5_enabled();
+                $html_input_type = $is_html5 && !GFCommon::has_field_calculation($field) ? "number" : "text"; // chrome does not allow number fields to have commas, calculations display numbers with commas
+                $step_attr = $is_html5 ? "step='any'" : "";
+
                 $logic_event = self::get_logic_event($field, "keyup");
 
                 $tabindex = self::get_tabindex();
-                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='{$html_input_type}' value='%s' class='%s' {$tabindex} {$logic_event} %s/>%s</div>", $id, $field_id, esc_attr($value), esc_attr($class),  $disabled_text, $instruction);
+                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='{$html_input_type}' {$step_attr} value='%s' class='%s' {$tabindex} {$logic_event} {$read_only} %s/>%s</div>", $id, $field_id, esc_attr($value), esc_attr($class),  $disabled_text, $instruction);
 
             case "donation" :
                 $tabindex = self::get_tabindex();
-                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='text' value='%s' class='%s' $tabindex %s/></div>", $id, $field_id, esc_attr($value), esc_attr($class),  $disabled_text);
+                return sprintf("<div class='ginput_container'><input name='input_%d' id='%s' type='text' value='%s' class='%s ginput_donation_amount' $tabindex %s/></div>", $id, $field_id, esc_attr($value), esc_attr($class),  $disabled_text);
 
             case "price" :
                 $logic_event = self::get_logic_event($field, "keyup");
@@ -2627,9 +2720,9 @@ class GFCommon{
                 $action = !IS_ADMIN ? "gformShowPasswordStrength(\"$field_id\");" : "";
                 $onchange= rgar($field,"passwordStrengthEnabled") ? "onchange='{$action}'" : "";
                 $onkeyup = rgar($field,"passwordStrengthEnabled") ? "onkeyup='{$action}'" : "";
-                $script = rgar($field,"passwordStrengthEnabled") && !IS_ADMIN ? "<script type=\"text/javascript\">" . apply_filters("gform_cdata_open", "") . " if(window[\"gformShowPasswordStrength\"]) jQuery(document).ready(function(){{$action}});" . apply_filters("gform_cdata_close", "") . "</script>" : "";
+
                 $pass = RGForms::post("input_" . $id ."_2");
-                return sprintf("<div class='ginput_complex$class_suffix ginput_container' id='{$field_id}_container'><span id='" . $field_id . "_1_container' class='ginput_left'><input type='password' name='input_%d' id='%s' {$onkeyup} {$onchange} value='%s' $first_tabindex %s/><label for='%s'>" . apply_filters("gform_password_{$form_id}", apply_filters("gform_password",__("Enter Password", "gravityforms"), $form_id), $form_id) . "</label></span><span id='" . $field_id . "_2_container' class='ginput_right'><input type='password' name='input_%d_2' id='%s_2' {$onkeyup} {$onchange} value='%s' $last_tabindex %s/><label for='%s_2'>" . apply_filters("gform_password_confirm_{$form_id}", apply_filters("gform_password_confirm",__("Confirm Password", "gravityforms"), $form_id), $form_id) . "</label></span>{$script}</div>{$strength}", $id, $field_id, $value, $disabled_text, $field_id, $id, $field_id, $pass, $disabled_text, $field_id);
+                return sprintf("<div class='ginput_complex$class_suffix ginput_container' id='{$field_id}_container'><span id='" . $field_id . "_1_container' class='ginput_left'><input type='password' name='input_%d' id='%s' {$onkeyup} {$onchange} value='%s' $first_tabindex %s/><label for='%s'>" . apply_filters("gform_password_{$form_id}", apply_filters("gform_password",__("Enter Password", "gravityforms"), $form_id), $form_id) . "</label></span><span id='" . $field_id . "_2_container' class='ginput_right'><input type='password' name='input_%d_2' id='%s_2' {$onkeyup} {$onchange} value='%s' $last_tabindex %s/><label for='%s_2'>" . apply_filters("gform_password_confirm_{$form_id}", apply_filters("gform_password_confirm",__("Confirm Password", "gravityforms"), $form_id), $form_id) . "</label></span></div>{$strength}", $id, $field_id, $value, $disabled_text, $field_id, $id, $field_id, $pass, $disabled_text, $field_id);
 
             case "name" :
                 $prefix = "";
@@ -2973,7 +3066,8 @@ class GFCommon{
                         else{
                             $language = empty($field["captchaLanguage"]) ? "en" : esc_attr($field["captchaLanguage"]);
 
-                            $options = "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " var RecaptchaOptions = {theme : '$theme'}; if(parseInt('" . self::$tab_index . "') > 0) {RecaptchaOptions.tabindex = " . self::$tab_index++ . ";} " . apply_filters("gform_cdata_close", "") . "</script>";
+                            $options = "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " var RecaptchaOptions = {theme : '$theme'}; if(parseInt('" . self::$tab_index . "') > 0) {RecaptchaOptions.tabindex = " . self::$tab_index++ . ";}" .
+                            apply_filters("gform_recaptcha_init_script", "", $form_id, $field) . apply_filters("gform_cdata_close", "") . "</script>";
 
                             $is_ssl = !empty($_SERVER['HTTPS']);
                             return $options . "<div class='ginput_container' id='$field_id'>" . recaptcha_get_html($publickey, null, $is_ssl, $language) . "</div>";
@@ -3004,16 +3098,8 @@ class GFCommon{
                     $security_code = esc_attr(rgget($field["id"] . ".3",$value));
                 }
 
-                $action = !IS_ADMIN ? "gformMatchCard(\"{$field_id}_1\");" : "";
-
-
                 $onchange= "onchange='{$action}'";
                 $onkeyup = "onkeyup='{$action}'";
-
-                $script = !IS_ADMIN ? "<script type=\"text/javascript\">" . apply_filters("gform_cdata_open", "") . " jQuery(document).ready(function(){{$action}}); " . apply_filters("gform_cdata_close", "") . "</script>" : "";
-
-                if(rgar($field, "forceSSL") && !self::is_ssl() && !IS_ADMIN && !self::is_preview())
-                    $script = !IS_ADMIN ? "<script type=\"text/javascript\">" . apply_filters("gform_cdata_open", "") . " document.location.href='" . esc_js( RGFormsModel::get_current_page_url(true) ) . "' " . apply_filters("gform_cdata_close", "") . "</script>" : "";
 
                 $card_icons = '';
                 $cards = GFCommon::get_card_types();
@@ -3040,17 +3126,14 @@ class GFCommon{
 
                 $card_icons = "<div class='gform_card_icon_container gform_card_icon_{$card_style}'>{$card_icons}</div>";
 
-			 //kevin working on this..
-
-                //card number & cardholder name fields
+                //card number fields
                 $tabindex = self::get_tabindex();
-                $card_field =   sprintf("<span class='ginput_full{$class_suffix}' id='{$field_id}_5_container'>{$card_icons}<input type='text' name='input_%d.5' id='%s_5' value='%s' {$tabindex} %s /><label for='%s_5' id='{$field_id}_5_label'>" . apply_filters("gform_card_name_{$form_id}", apply_filters("gform_card_name",__("Cardholder Name", "gravityforms"), $form_id), $form_id) . "</label></span>", $id, $field_id, $card_name, $disabled_text, $field_id) .
-                                sprintf("<span class='ginput_full{$class_suffix}' id='{$field_id}_1_container'><input type='text' name='input_%d.1' id='%s_1' value='%s' {$tabindex} %s {$onchange} {$onkeyup} /><label for='%s_1' id='{$field_id}_1_label'>" . apply_filters("gform_card_number_{$form_id}", apply_filters("gform_card_number",__("Card Number", "gravityforms"), $form_id), $form_id) . "</label></span>", $id, $field_id, $card_number, $disabled_text, $field_id);
+                $card_field =   sprintf("<span class='ginput_full{$class_suffix}' id='{$field_id}_1_container'>{$card_icons}<input type='text' name='input_%d.1' id='%s_1' value='%s' {$tabindex} %s {$onchange} {$onkeyup} /><label for='%s_1' id='{$field_id}_1_label'>" . apply_filters("gform_card_number_{$form_id}", apply_filters("gform_card_number",__("Card Number", "gravityforms"), $form_id), $form_id) . "</label></span>", $id, $field_id, $card_number, $disabled_text, $field_id);
 
                 //expiration date field
                 $expiration_field =  "<span class='ginput_full{$class_suffix} ginput_cardextras' id='{$field_id}_2_container'>".
 
-                				  "<span class='ginput_cardinfo_left{$class_suffix}' id='{$field_id}_2_container'>".
+                				    "<span class='ginput_cardinfo_left{$class_suffix}' id='{$field_id}_2_container'>".
 
                                      "<span class='ginput_card_expiration_container'>".
 
@@ -3079,7 +3162,10 @@ class GFCommon{
                                     "</span>".
                                     "</span>";
 
-                return "<div class='ginput_complex{$class_suffix} ginput_container' id='{$field_id}'>" . $card_field . $expiration_field . $security_field . " $script </div>";
+                $tabindex = self::get_tabindex();
+                $card_name_field = sprintf("<span class='ginput_full{$class_suffix}' id='{$field_id}_5_container'><input type='text' name='input_%d.5' id='%s_5' value='%s' {$tabindex} %s /><label for='%s_5' id='{$field_id}_5_label'>" . apply_filters("gform_card_name_{$form_id}", apply_filters("gform_card_name",__("Cardholder Name", "gravityforms"), $form_id), $form_id) . "</label></span>", $id, $field_id, $card_name, $disabled_text, $field_id);
+
+                return "<div class='ginput_complex{$class_suffix} ginput_container' id='{$field_id}'>" . $card_field . $expiration_field . $security_field . $card_name_field . " </div>";
 
             break;
 
@@ -3183,12 +3269,25 @@ class GFCommon{
         global $wordpress_https;
         $is_ssl = false;
 
+        $has_https_plugin = class_exists('WordPressHTTPS') && isset($wordpress_https);
+        $has_is_ssl_method = $has_https_plugin && method_exists('WordPressHTTPS', 'is_ssl');
+        $has_isSsl_method = $has_https_plugin && method_exists('WordPressHTTPS', 'isSsl');
+
         //Use the WordPress HTTPs plugin if installed
-        if (class_exists('WordPressHTTPS') && isset($wordpress_https)){
+        if ($has_https_plugin && $has_is_ssl_method){
             $is_ssl = $wordpress_https->is_ssl();
         }
-        else
+        else if ($has_https_plugin && $has_isSsl_method){
+            $is_ssl = $wordpress_https->isSsl();
+        }
+        else{
             $is_ssl = is_ssl();
+        }
+
+
+        if(!$is_ssl && isset($_SERVER["HTTP_CF_VISITOR"]) && strpos($_SERVER["HTTP_CF_VISITOR"], "https")){
+            $is_ssl=true;
+        }
 
         return apply_filters("gform_is_ssl", $is_ssl);
     }
@@ -3284,15 +3383,6 @@ class GFCommon{
 
 
         return $input;
-    }
-
-    public static function get_input_mask_script($form_id, $field_id, $mask){
-
-        $script =   "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . "jQuery(document).ready(function(){" .
-                        "jQuery('#{$field_id}').mask('{$mask}');" .
-                    "});" . apply_filters("gform_cdata_close", "") . "</script>";
-
-        return apply_filters("gform_input_mask_script_{$form_id}", apply_filters("gform_input_mask_script", $script, $form_id, $field_id, $mask), $form_id, $field_id, $mask);
     }
 
     public static function to_money($number, $currency_code=""){
@@ -3438,8 +3528,7 @@ class GFCommon{
         return array("path"=>$path, "url"=> $url, "height" => $captcha->img_size[1], "width" => $captcha->img_size[0], "prefix" => $prefix);
     }
 
-    private static function hex2rgb($color)
-    {
+    private static function hex2rgb($color){
         if ($color[0] == '#')
             $color = substr($color, 1);
 
@@ -3713,6 +3802,7 @@ class GFCommon{
 
             break;
 
+            case "calculation" :
             case "singleproduct" :
                 if(is_array($value)){
                     $product_name = trim($value[$field["id"] . ".1"]);
@@ -3874,7 +3964,7 @@ class GFCommon{
         $products = array();
 
         // retrieve static copy of product info
-        $product_info = gform_get_meta(rgar($lead,'id'), 'gform_product_info');
+        $product_info = gform_get_meta(rgar($lead,'id'), "gform_product_info_{$use_choice_text}_{$use_admin_label}");
 
         // if no static copy, generate from form/lead info
         if(!$product_info) {
@@ -3971,7 +4061,7 @@ class GFCommon{
             $product_info = apply_filters("gform_product_info_{$form["id"]}", apply_filters("gform_product_info", $product_info, $form, $lead), $form, $lead);
 
             // save static copy of product info
-            gform_update_meta($lead['id'], 'gform_product_info', $product_info);
+            gform_update_meta($lead['id'], "gform_product_info_{$use_choice_text}_{$use_admin_label}", $product_info);
 
         }
 
@@ -4343,28 +4433,93 @@ class GFCommon{
             $value = explode(',', $value);
 
         $cat_names = array();
-
+        $cat_ids = array();
         foreach($value as $cat_string) {
             $ary = explode(":", $cat_string);
             $cat_name = count($ary) > 0 ? $ary[0] : "";
+            $cat_id = count($ary) > 1 ? $ary[1] : $ary[0];
 
             if(!empty($cat_name))
                 $cat_names[] = $cat_name;
+
+            if(!empty($cat_id))
+                $cat_ids[] = $cat_id;
         }
 
         sort($cat_names);
 
         switch($mode) {
-        case 'entry_list':
-            $value = self::implode_non_blank(', ', $cat_names);
-            break;
-        case 'entry_detail':
-            $value = RGFormsModel::get_input_type($field) == 'checkbox' ? $cat_names : self::implode_non_blank(', ', $cat_names);
-            break;
+            case 'entry_list':
+                $value = self::implode_non_blank(', ', $cat_names);
+                break;
+            case 'entry_detail':
+                $value = RGFormsModel::get_input_type($field) == 'checkbox' ? $cat_names : self::implode_non_blank(', ', $cat_names);
+                break;
+            case 'conditional_logic':
+                $value = self::implode_non_blank(',', $cat_ids);
+                break;
         }
 
         return $value;
 
+    }
+
+    public static function calculate($field, $form, $lead) {
+
+        $formula = rgar($field, 'calculationFormula');
+
+        preg_match_all('/{[^{]*?:(\d+(\.\d+)?)(:(.*?))?}/mi', $formula, $matches, PREG_SET_ORDER);
+
+        if(is_array($matches)) {
+            foreach($matches as $match) {
+
+                list($text, $input_id) = $match;
+
+                $value = self::get_calculation_value($match[1], $form, $lead);
+                $formula = str_replace($match[0], $value, $formula);
+
+            }
+        }
+
+        return preg_match("/^[0-9 -\/*\(\)]+$/", $formula) ? eval("return {$formula};") : false;
+    }
+
+    public static function get_calculation_value($field_id, $form, $lead) {
+
+        $filters = array('price', 'value', '');
+
+        do {
+            $filter = isset($filter) ? next($filters) : reset($filters);
+            $value =  GFCommon::to_number(GFCommon::replace_variables("{:{$field_id}:$filter}", $form, $lead));
+        } while(!is_numeric($value) && $filter !== false);
+
+        if(!$value || !is_numeric($value))
+            $value = 0;
+
+        return $value;
+    }
+
+    public static function conditional_shortcode($attributes, $content = null) {
+
+        extract(shortcode_atts(array(
+             'merge_tag' => '',
+             'condition' => '',
+             'value' => ''
+          ), $attributes));
+
+        $result = RGFormsModel::matches_operation($merge_tag, $value, $condition);
+
+        return RGFormsModel::matches_operation($merge_tag, $value, $condition) ? do_shortcode($content) : '';
+
+    }
+
+    public static function is_valid_for_calcuation($field) {
+
+        $supported_input_types = array('text', 'select', 'number', 'checkbox', 'radio', 'hidden', 'singleproduct', 'price', 'hiddenproduct', 'calculation', 'singleshipping');
+        $unsupported_field_types = array('category');
+        $input_type = RGFormsModel::get_input_type($field);
+
+        return in_array($input_type, $supported_input_types) && !in_array($input_type, $unsupported_field_types);
     }
 
 }

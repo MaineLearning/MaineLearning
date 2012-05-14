@@ -4,7 +4,7 @@
 admin.css
 Gravity Forms Administration Form Styles
 http: //www.gravityforms.com
-updated: March 20, 2012 12:08 PM
+updated: March 23, 2012 3:50 PM
 
 Gravity Forms is a Rocketgenius project
 copyright 2012 Rocketgenius Inc.
@@ -1165,8 +1165,17 @@ ul#form_autoresponder_container li label {
 	height: 80px
 }
 
-/* bulk add panel ------------------------------------------------------*/
+.gform_merge_tags{
+    width: 200px;
+}
+.gform_editor_merge_tags{
+    width: 190px;
+}
+.gform_content_template_merge_tags{
+    width: 165px;
+}
 
+/* bulk add panel ------------------------------------------------------*/
 .panel-instructions {
 	border-bottom: 1px solid #DFDFDF;
 	color: #555;
@@ -2212,7 +2221,7 @@ input.headercb {
 	margin-top: -3px
 }
 .gfield_rule_select,.gfield_routing_select {
-	width: 140px
+	width: 138px
 }
 .validation_message {
 	color: #790000 !important;
@@ -2495,18 +2504,18 @@ div.wrap.gf_browser_ie.gf_browser_ie9 .menu.collapsible ol.field_type li input.b
 	width: 80% !important
 }
 .wp-media-buttons {
-	padding: 0px !important; 
+	padding: 0px !important;
 	line-height: 3px !important
 }
 .wp-media-buttons select {
-	padding: 1px !important; 
-	font-size: 10px !important; 
+	padding: 1px !important;
+	font-size: 10px !important;
 	line-height: 2.2em
 }
 
 /* notification paging added in version 1.6.3 ----------------------------- */
 
-#notifications_advanced_settings label { 
+#notifications_advanced_settings label {
 	line-height: 18px
 }
 
@@ -2514,15 +2523,15 @@ div.wrap.gf_browser_ie.gf_browser_ie9 .menu.collapsible ol.field_type li input.b
 div.gf_entry_wrap {
 	position: relative;
 }
-div.gf_toolset_dropdown_menu { 
+div.gf_toolset_dropdown_menu {
 	position: absolute;
 	top: 10px;
 	right: 0
-} 
+}
 
 
 
-div.gf_toolset_dropdown_menu ul li.gf_toolset_dropdown_toplevel a.gf_toolset_dropdown_toplevel_link { 
+div.gf_toolset_dropdown_menu ul li.gf_toolset_dropdown_toplevel a.gf_toolset_dropdown_toplevel_link {
 	display: block;
 	width: 40px;
 	height: 24px;
@@ -2542,7 +2551,7 @@ div.gf_toolset_dropdown_menu ul li.gf_toolset_dropdown_toplevel a.gf_toolset_dro
 }
 
 
-div.gf_entry_detail_pagination { 
+div.gf_entry_detail_pagination {
 	position: absolute;
 	top: 10px;
 	right: 0
@@ -2556,9 +2565,9 @@ div.gf_entry_detail_pagination ul li {
 	line-height: 24px;
 	height: 26px;
 	overflow: hidden;
-	display: -moz-inline-stack; 
-	display: inline-block; 
-	zoom: 1; 
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
 	*display: inline
 }
 
@@ -2571,7 +2580,7 @@ div.gf_entry_detail_pagination ul li.gf_entry_count span {
 div.gf_entry_detail_pagination ul li.gf_entry_count span strong {
 	color: #D24E29
 }
-div.gf_entry_detail_pagination ul li.gf_entry_pagination a { 
+div.gf_entry_detail_pagination ul li.gf_entry_pagination a {
 	display: block;
 	width: 24px;
 	height: 24px;
@@ -2623,9 +2632,9 @@ html body.wp-admin div#wpwrap div#wpcontent div#wpbody div#wpbody-content form#e
 }
 html body.wp-admin div#wpwrap #wp-form_notification_message-media-buttons.hide-if-no-js.wp-media-buttons {
 	position: absolute;
-    top: -2px;
-	left:0;
-    width: 280px !important;
+    	top: -2px;
+    	left: 0;
+    	width: 290px !important;
 	padding: 3px 4px 3px 6px !important;
 	background-color: #E9E9E9;
 	border-left: 1px solid #CCCCCC;
@@ -2661,9 +2670,9 @@ html body.wp-admin div#wpwrap div#form_notification_admin_container ul#form_noti
 	font-weight: normal;
 	font-size: 12px;
 	line-height: 18px;
-	display: -moz-inline-stack; 
-	display: inline-block; 
-	zoom: 1; 
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
 	*display: inline
 }
 html body.wp-admin div#wpwrap div#form_notification_admin_container ul#form_notification_container li div div#wp-form_notification_message-wrap.wp-editor-wrap div#wp-form_notification_message-editor-tools.wp-editor-tools div#wp-form_notification_message-media-buttons.hide-if-no-js a#form_notification_message-add_media img {

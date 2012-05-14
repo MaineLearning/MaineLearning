@@ -145,7 +145,7 @@ class GFEntryList{
         $star_qs = $star !== null ? "&star=$star" : "";
         $read_qs = $read !== null ? "&read=$read" : "";
         $filter_qs = "&filter=" . $filter;
-        
+
         //determine which counter to use for paging and set total count
         switch ($filter)
         {
@@ -246,7 +246,7 @@ class GFEntryList{
                 	title.css("display", "none");
                 	UpdatePagingCounts(1);
 				}
-                
+
                 UpdateCount("unread_count", marking_read ? -1 : 1);
                 UpdateLeadProperty(lead_id, "is_read", marking_read ? 1 : 0);
             }
@@ -272,7 +272,7 @@ class GFEntryList{
                 var count = parseInt(element.html()) + change
                 element.html(count + "");
             }
-            
+
             function UpdatePagingCounts(change)
             {
 				//update paging header/footer Displaying # - # of #, use counts from header, no need to use footer since they are the same, just update footer paging with header info
@@ -299,7 +299,7 @@ class GFEntryList{
                 	paging_total_header.html(total_change + "");
                 	paging_total_footer.html(total_change + "");
 				}
-				
+
             }
 
             function DeleteLead(lead_id){
@@ -551,7 +551,7 @@ class GFEntryList{
 						}
 						else
 						{
-							UpdatePagingCounts(trashCount);	
+							UpdatePagingCounts(trashCount);
 						}
                     }
 
@@ -795,9 +795,9 @@ class GFEntryList{
                         $field_ids = array_keys($columns);
 
                         foreach($leads as $position => $lead){
-                            
+
                             $position = ($page_size * $page_index) + $position;
-                            
+
                             ?>
                             <tr id="lead_row_<?php echo $lead["id"] ?>" class='author-self status-inherit <?php echo $lead["is_read"] ? "" : "lead_unread" ?> <?php echo $lead["is_starred"] ? "lead_starred" : "" ?> <?php echo in_array($filter, array("trash", "spam")) ? "lead_spam_trash" : "" ?>'  valign="top">
                                 <th scope="row" class="check-column">
@@ -816,13 +816,13 @@ class GFEntryList{
 
                                 $nowrap_class="entry_nowrap";
                                 foreach($field_ids as $field_id){
-                                    
+
                                     $field = RGFormsModel::get_field($form, $field_id);
                                     $value = rgar($lead, $field_id);
 
                                     if($field['type'] == 'post_category')
                                         $value = GFCommon::prepare_post_category_value($value, $field, 'entry_list');
-            
+
                                     //filtering lead value
                                     $value = apply_filters("gform_get_field_value", $value, $lead, $field);
 
@@ -841,11 +841,11 @@ class GFEntryList{
                                                     }
                                                 }
                                                 $value = GFCommon::implode_non_blank(", ", $items);
-                                                
+
                                                 // special case for post category checkbox fields
                                                 if($field['type'] == 'post_category')
                                                     $value = GFCommon::prepare_post_category_value($value, $field, 'entry_list');
-                                                
+
                                             }
                                             else{
                                                 $value = "";
@@ -1057,10 +1057,8 @@ class GFEntryList{
                                     else{
                                         ?>
                                         <td class="<?php echo $nowrap_class ?>">
-                                            <?php echo $value ?>&nbsp;
-                                            <?php
-                                            do_action("gform_entries_column", $form_id, $field_id, $value, $lead, $query_string);
-                                            ?>
+                                            <?php echo apply_filters("gform_entries_column_filter", $value, $form_id, $field_id, $lead, $query_string); ?>&nbsp;
+                                            <?php do_action("gform_entries_column", $form_id, $field_id, $value, $lead, $query_string); ?>
                                         </td>
                                         <?php
                                     }
@@ -1169,7 +1167,7 @@ class GFEntryList{
                     </div>
 
                     <?php echo self::display_paging_links("footer", $page_links, $first_item_index, $page_size, $total_lead_count);?>
-                    
+
                     <div class="clear"></div>
                 </div>
 
@@ -1288,13 +1286,13 @@ class GFEntryList{
 
 
     }
-    
+
     private function display_paging_links($which, $page_links, $first_item_index, $page_size, $total_lead_count)
     {
 		//Displaying paging links if appropriate
 		//$which - header or footer, so the items can have unique names
 		if($page_links)
-		{ 
+		{
 			$paging_html = '
 			<div class="tablenav-pages">
 			<span id="paging_' . $which . '" class="displaying-num">';
@@ -1316,7 +1314,7 @@ class GFEntryList{
 		else
 		{
 			$paging_html = "";
-		}	
+		}
 		return $paging_html;
     }
 }
