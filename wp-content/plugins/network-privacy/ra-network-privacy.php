@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name:   Network Privacy
-Version:       0.1.2
+Version:       0.1.3
 Description:   Adds more privacy options to Settings -> Privacy pages and when Network activated: Super Admin -> Options & Sites pages.
 Author:        Ron Rennick
 Author URI:    http://ronandandrea.com/
@@ -177,11 +177,11 @@ class RA_Network_Privacy {
 		if( $privacy > -1 )
 			return;
 
-		if( $privacy > -2 || current_user_can( $this->meta[$privacy]['cap'] ) )
-			return;
-
 		if ( is_user_logged_in() ) {
 
+			if( $privacy > -2 || current_user_can( $this->meta[$privacy]['cap'] ) )
+				return;
+	
 			$this->login_header();
 ?>
 					<form name="loginform" id="loginform">
