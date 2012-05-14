@@ -324,14 +324,17 @@ class wsBrokenLinkChecker {
         	array($options_page_hook, $links_page_hook)
 		);
 		
-        //Make the Settings page link to the link list, and vice versa
-        add_screen_meta_link(
-        	'blc-more-plugins-link',
-			__('More plugins by Janis Elsts', 'broken-link-checker'),
-			'http://w-shadow.com/MoreWpPlugins/',
-			$links_page_hook,
-			array('style' => 'font-weight: bold;')
-		);
+        if ( !$this->conf->get('user_has_donated') ) {
+	        add_screen_meta_link(
+	            'blc-more-plugins-link',
+				__('More plugins by Janis Elsts', 'broken-link-checker'),
+				'http://w-shadow.com/MoreWpPlugins/',
+				$links_page_hook,
+				array('style' => 'font-weight: bold;')
+			);
+        }
+
+	    //Make the Settings page link to the link list
 		add_screen_meta_link(
         	'blc-links-page-link',
 			__('Go to Broken Links', 'broken-link-checker'),
@@ -525,7 +528,7 @@ class wsBrokenLinkChecker {
         //Show a thank-you message when a donation is made.
         if ( !empty($_GET['donated']) ){
         	echo '<div id="message" class="updated fade"><p><strong>',__('Thank you for your donation!', 'broken-link-checker'), '</strong></p></div>';
-        	
+        	$this->conf->set('user_has_donated', true);
         }
         
         //Show one when recheck is started, too. 
