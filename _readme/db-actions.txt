@@ -17,6 +17,8 @@ Upgraded to network-privacy.0.1.3
 
 Upgraded to google-sitemap-generator.3.2.7
 
+Upgraded to wp-document-revisions.1.3.1
+
 
 
 
