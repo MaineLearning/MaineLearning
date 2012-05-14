@@ -96,13 +96,13 @@ p { font-family: Verdana, Arial, Helvetica, sans-serif; }
 <?php
 // #################### The www prefix of your domain name is not displayed #################
 // #################### to Display www comment out $bps-hostname = str_replace ##############
-$bps_hostname = $_SERVER['SERVER_NAME']; 
+$bps_hostname = htmlspecialchars($_SERVER['SERVER_NAME']); 
 $bps_hostname = str_replace('www.', '', $bps_hostname); ?>
 <div id="website_domain_name"><?php echo $bps_hostname; ?></div>
 
 <p><?php echo "<div id=\"online_text1\">" . "$bps_message1" . "</div><br>"; ?></p>
 <p><?php echo "<div id=\"online_text1\">" . "$bps_message2" . "</div><br>"; ?></p>
-<p>Your IP Address is: <?php echo $_SERVER['REMOTE_ADDR']; ?></p>
+<p>Your IP Address is: <?php echo htmlspecialchars($_SERVER['REMOTE_ADDR']); ?></p>
 
 </td>
 </tr>

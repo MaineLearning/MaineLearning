@@ -2,8 +2,10 @@
 /*
 Plugin Name: BulletProof Security
 Plugin URI: http://www.ait-pro.com/aitpro-blog/297/bulletproof-security-plugin-support/bulletproof-security-wordpress-plugin-support/
+Text Domain: bulletproof-security
+Domain Path: /languages/
 Description: Website Security Protection: BulletProof Security protects your website against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts. One-click .htaccess WordPress security protection. Protects wp-config.php, bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. One-click Website Maintenance Mode (HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
-Version: .46.9
+Version: .47.1
 Author: Edward Alexander
 Author URI: http://www.ait-pro.com/
 */
@@ -25,25 +27,23 @@ Author URI: http://www.ait-pro.com/
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define( 'BULLETPROOF_VERSION', '.46.9' );
+define( 'BULLETPROOF_VERSION', '.47.1' );
 
-// Global configuration class file - pending development
+// Load BPS Global class - not doing anything with this Class in BPS Free
 require_once( WP_PLUGIN_DIR . '/bulletproof-security/includes/class.php' );
 
-// Define vars and globals
-global $bulletproof_security;
+add_action( 'init', 'bulletproof_security_load_plugin_textdomain' );
 
-// Global configuration class initialization
-$bulletproof_security = new Bulletproof_Security();
+// Load i18n Language Translation
+function bulletproof_security_load_plugin_textdomain() {
+	load_plugin_textdomain('bulletproof-security', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
+}
 
-// BPS functions
+// Load BPS functions.php
 require_once( WP_PLUGIN_DIR . '/bulletproof-security/includes/functions.php' );
 	remove_action('wp_head', 'wp_generator');
 	
-// Load BPS plugin textdomain - pending language translations
-// load_plugin_textdomain('bulletproof-security', '', 'bulletproof-security/language');
-
-// If in WP Dashboard or Admin Panels
+// If in WP Admin Dashboard
 if ( is_admin() ) {
     require_once( WP_PLUGIN_DIR . '/bulletproof-security/admin/includes/admin.php' );
 	register_activation_hook(__FILE__, 'bulletproof_security_install');
@@ -58,7 +58,7 @@ function bps_plugin_actlinks( $links, $file ){
 	static $this_plugin;
 	if ( ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
 	if ( $file == $this_plugin ){
-	$settings_link = '<a href="admin.php?page=bulletproof-security/admin/options.php">' . __('Settings') . '</a>';
+	$settings_link = '<a href="admin.php?page=bulletproof-security/admin/options.php">' . __('Settings', 'bulletproof-security') . '</a>';
 		array_unshift( $links, $settings_link );
 	}
 	return $links;
