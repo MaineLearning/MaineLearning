@@ -375,6 +375,9 @@ function wpcf_admin_import_export_settings($data) {
         $fields_to_be_deleted = array();
         foreach ($data->fields->field as $field) {
             $field = (array) $field;
+            if (empty($field['id']) || empty($field['name'])) {
+                continue;
+            }
             $form['field-add-' . $field['id']] = array(
                 '#type' => 'checkbox',
                 '#name' => 'fields[' . $field['id'] . '][add]',
@@ -561,7 +564,7 @@ function wpcf_admin_export_data() {
         global $iclTranslationManagement;
         if (!empty($iclTranslationManagement)) {
             foreach ($fields as $field_id => $field) {
-                // @todo Fix for added fields
+                // @todo Fix for added fields (may be problems)
                 if (isset($iclTranslationManagement->settings['custom_fields_translation'][wpcf_types_get_meta_prefix($field) . $field_id])) {
                     $fields[$field_id]['wpml_action'] = $iclTranslationManagement->settings['custom_fields_translation'][wpcf_types_get_meta_prefix($field) . $field_id];
                 }

@@ -34,6 +34,12 @@ function wpcf_fields_email_view($params) {
         $add .= ' title="' . $params['field_value'] . '"';
         $title = $params['field_value'];
     }
+    if (!empty($params['class'])) {
+        $add .= ' class="' . $params['class'] . '"';
+    }
+    if (!empty($params['style'])) {
+        $add .= ' style="' . $params['style'] . '"';
+    }
     $output = '<a href="mailto:' . $params['field_value'] . '"' . $add . '>'
             . $title . '</a>';
     return $output;
@@ -71,6 +77,18 @@ function wpcf_fields_email_editor_callback() {
         '#name' => 'title',
         '#value' => isset($last_settings['title']) ? $last_settings['title'] : '',
     );
+    $form['class'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Class', 'wpcf'),
+        '#name' => 'class',
+        '#value' => isset($last_settings['class']) ? $last_settings['class'] : '',
+    );
+    $form['style'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Style', 'wpcf'),
+        '#name' => 'style',
+        '#value' => isset($last_settings['style']) ? $last_settings['style'] : '',
+    );
     $form['submit'] = array(
         '#type' => 'submit',
         '#name' => 'submit',
@@ -92,6 +110,12 @@ function wpcf_fields_email_editor_submit() {
     $add = '';
     if (!empty($_POST['title'])) {
         $add = ' title="' . strval($_POST['title']) . '"';
+    }
+    if (!empty($_POST['class'])) {
+        $add .= ' class="' . $_POST['class'] . '"';
+    }
+    if (!empty($_POST['style'])) {
+        $add .= ' style="' . $_POST['style'] . '"';
     }
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
     if (!empty($field)) {

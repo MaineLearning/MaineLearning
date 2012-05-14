@@ -19,6 +19,21 @@ add_action('admin_footer', 'wpcf_cd_admin_form_js');
  * @return type 
  */
 function wpcf_cd_form_field_filter($form, $data) {
+    if (defined('DOING_AJAX') && isset($_SERVER['HTTP_REFERER'])) {
+        parse_str($_SERVER['HTTP_REFERER'], $vars);
+    } else if (isset($_GET['group_id'])) {
+        $vars = array();
+        $vars['group_id'] = $_GET['group_id'];
+    }
+    if (!isset($vars['group_id'])) {
+        return $form + array(
+            'cd_not_available' => array(
+                '#type' => 'markup',
+                '#markup' => '<p>' . __('You will be able to set conditional field display once this group is saved.',
+                        'wpcf') . '</p>',
+            ),
+        );
+    }
     $form = $form + wpcf_cd_admin_form_filter($data);
     return $form;
 }
@@ -95,7 +110,6 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
         '#type' => 'radios',
         '#name' => $name . '[relation]',
         '#options' => array(
-//            'AND' => 'AND',
             'AND' => array(
                 '#title' => 'AND',
                 '#attributes' => array('onclick' => 'wpcfCdCreateSummary(\'' . md5($data['id']) . '_cd_summary\')'),
@@ -103,7 +117,6 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
                 '#value' => 'AND',
                 '#after' => '<br />',
             ),
-//            'OR' => 'OR'
             'OR' => array(
                 '#title' => 'OR',
                 '#attributes' => array('onclick' => 'wpcfCdCreateSummary(\'' . md5($data['id']) . '_cd_summary\')'),
@@ -120,7 +133,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
         '#type' => 'markup',
         '#markup' => '<div class="toggle-cd" style="display:none;">',
     );
-    $prepopulate = !empty($data['data']['conditional_display']['custom'])  ? ' jQuery(\'#' . md5($data['id']) . '_cd_summary\').val();' : ' wpcfCdCreateSummary(\'' . md5($data['id']) . '_cd_summary\');';
+    $prepopulate = !empty($data['data']['conditional_display']['custom']) ? ' jQuery(\'#' . md5($data['id']) . '_cd_summary\').val();' : ' wpcfCdCreateSummary(\'' . md5($data['id']) . '_cd_summary\');';
     $form['cd']['customize_display_logic_link'] = array(
         '#type' => 'markup',
         '#markup' => '<a href="javascript:void(0);" class="button-secondary wpcf-cd-enable-custom-mode" onclick="window.wpcfCdState_' . md5($data['id'])
@@ -143,12 +156,10 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
         '#name' => $name . '[custom]',
         '#title' => __('Customize conditions', 'wpcf'),
         '#id' => md5($data['id']) . '_cd_summary',
-//        '#before' => '<div class="toggle-cd" style="display:none;"><br />',
         '#after' => '<br /><a href="javascript:void(0);" onclick="wpcfCdCreateSummary(\''
         . md5($data['id']) . '_cd_summary\');">'
         . __('Re-read structure', 'wpcf') . '</a><br />',
         '#inline' => true,
-//        '#attributtes' => array('style' => 'display:none;'),
         '#value' => isset($data['data']['conditional_display']['custom']) ? $data['data']['conditional_display']['custom'] : '',
     );
     $form['cd']['custom_use'] = array(
@@ -218,7 +229,22 @@ function wpcf_cd_admin_form_single_filter($data, $condition, $key = null,
     }
     $options = array();
     foreach ($fields as $field_id => $field) {
+        if (!$group && $data['id'] == $field_id) {
+            continue;
+        }
+        if (wpcf_admin_is_repetitive($field)) {
+            continue;
+        }
         $options[$field['name']] = $field_id;
+    }
+    if (!$group && empty($options)) {
+        return array(
+            'cd' => array(
+                '#type' => 'markup',
+                '#markup' => '<p>' . __('You will be able to set conditional field display when you save more fields.',
+                        'wpcf') . '</p>',
+            )
+        );
     }
     $id = !is_null($key) ? $key : strval('condition_' . mt_rand());
     $form = array();
@@ -330,7 +356,7 @@ function wpcf_cd_admin_form_js() {
                 object.parent().parent().find('.wpcf-cd-relation').show();
             }
             var url = '<?php
-            $group_id = isset($_GET['group_id']) ? '&group_id=' . $_GET['group_id'] : '';
+    $group_id = isset($_GET['group_id']) ? '&group_id=' . $_GET['group_id'] : '';
     echo admin_url('admin-ajax.php?action=wpcf_ajax&wpcf_action=add_condition'
             . $group_id . '&_wpnonce='
             . wp_create_nonce('add_condition'));

@@ -93,24 +93,24 @@ function wpcf_fields_file_meta_box_js_inline() {
             window.wpcf_formfield = false;
             jQuery('.wpcf-fields-file-upload-link').live('click', function() {
                 window.wpcf_formfield = '#'+jQuery(this).attr('id')+'-holder';
-                tb_show('<?php _e('Upload file',
-            'wpcf');
+                tb_show('<?php
+    _e('Upload file', 'wpcf');
 
     ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=file&wpcf-fields-media-insert=1&TB_iframe=true');
-                        return false;
-                    });
-                });
-                function wpcfFieldsFileMediaInsert(url, type) {
-                    jQuery(window.wpcf_formfield).val(url);
-                    if (type == 'image') {
-                        jQuery(window.wpcf_formfield+'-preview').html('<img src="'+url+'" />');
-                    } else {
-                        jQuery(window.wpcf_formfield+'-preview').html('');
-                    }
-                    tb_remove();
-                    window.wpcf_formfield = false;
-                }
-                //]]>
+                return false;
+            });
+        });
+        function wpcfFieldsFileMediaInsert(url, type) {
+            jQuery(window.wpcf_formfield).val(url);
+            if (type == 'image') {
+                jQuery(window.wpcf_formfield+'-preview').html('<img src="'+url+'" />');
+            } else {
+                jQuery(window.wpcf_formfield+'-preview').html('');
+            }
+            tb_remove();
+            window.wpcf_formfield = false;
+        }
+        //]]>
     </script>
     <?php
 }
@@ -174,6 +174,9 @@ function wpcf_fields_file_view($params) {
         }
         if (!empty($params['class'])) {
             $add .= ' class="' . $params['class'] . '"';
+        }
+        if (!empty($params['style'])) {
+            $add .= ' style="' . $params['style'] . '"';
         }
         $output = '<a href="' . $params['field_value'] . '"' . $add . '>'
                 . $title . '</a>';
@@ -247,6 +250,18 @@ function wpcf_fields_file_editor_callback() {
         '#name' => 'title',
         '#value' => isset($last_settings['title']) ? $last_settings['title'] : '',
     );
+    $form['class'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Class', 'wpcf'),
+        '#name' => 'class',
+        '#value' => isset($last_settings['class']) ? $last_settings['class'] : '',
+    );
+    $form['style'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Style', 'wpcf'),
+        '#name' => 'style',
+        '#value' => isset($last_settings['style']) ? $last_settings['style'] : '',
+    );
     $form['submit'] = array(
         '#type' => 'submit',
         '#name' => 'submit',
@@ -271,7 +286,12 @@ function wpcf_fields_file_editor_submit() {
         if (!empty($_POST['title'])) {
             $add .= ' title="' . strval($_POST['title']) . '"';
         }
-        $add .= ' class=""';
+    }
+    if (!empty($_POST['class'])) {
+        $add .= ' class="' . $_POST['class'] . '"';
+    }
+    if (!empty($_POST['style'])) {
+        $add .= ' style="' . $_POST['style'] . '"';
     }
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
     if (!empty($field)) {

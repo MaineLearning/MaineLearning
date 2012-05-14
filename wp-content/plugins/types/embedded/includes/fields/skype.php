@@ -23,15 +23,18 @@ add_filter('wpcf_pr_fields_type_skype_value_save',
  * @param type $field 
  */
 function wpcf_fields_skype_meta_box_form($field) {
+    if (isset($field['value'])) {
+        $field['value'] = maybe_unserialize($field['value']);
+    }
     $form = array();
     add_filter('wpcf_fields_shortcode_slug_' . $field['slug'],
             'wpcf_fields_skype_shortcode_filter', 10, 2);
-
+    $rand = mt_rand();
     $form['skypename'] = array(
         '#type' => 'textfield',
         '#value' => isset($field['value']['skypename']) ? $field['value']['skypename'] : '',
         '#name' => 'wpcf[' . $field['slug'] . '][skypename]',
-        '#id' => 'wpcf-fields-skype-' . $field['slug'] . '-skypename',
+        '#id' => 'wpcf-fields-skype-' . $field['slug'] . '-' . $rand . '-skypename',
         '#inline' => true,
         '#suffix' => '&nbsp;' . __('Skype name', 'wpcf'),
         '#description' => '',
@@ -40,13 +43,14 @@ function wpcf_fields_skype_meta_box_form($field) {
                 . '<br /><br />' : '',
         '#attributes' => array('style' => 'width:60%;'),
         '#_validate_this' => true,
+        '#before' => '<div class="wpcf-skype">',
     );
 
     $form['style'] = array(
         '#type' => 'hidden',
         '#value' => isset($field['value']['style']) ? $field['value']['style'] : 'btn2',
         '#name' => 'wpcf[' . $field['slug'] . '][style]',
-        '#id' => 'wpcf-fields-skype-' . $field['slug'] . '-style',
+        '#id' => 'wpcf-fields-skype-' . $field['slug'] . '-' . $rand . '-style',
     );
 
     $preview_skypename = !empty($field['value']['skypename']) ? $field['value']['skypename'] : '--not--';
@@ -64,7 +68,7 @@ function wpcf_fields_skype_meta_box_form($field) {
                         . 'wpcf_action=insert_skype_button&amp;_wpnonce='
                         . wp_create_nonce('insert_skype_button')
                         . '&amp;update=wpcf-fields-skype-'
-                        . $field['slug'] . '&amp;skypename=' . $preview_skypename
+                        . $field['slug'] . '-' . $rand . '&amp;skypename=' . $preview_skypename
                         . '&amp;style=' . $preview_style
                         . '&amp;keepThis=true&amp;TB_iframe=true&amp;width=500&amp;height=500')
                 . '"'
@@ -78,8 +82,12 @@ function wpcf_fields_skype_meta_box_form($field) {
         '#type' => 'markup',
         '#markup' => '<br /><div class="wpcf-form-item">'
         . '<div id="wpcf-fields-skype-'
-        . $field['slug'] . '-preview">' . $preview . '</div>'
+        . $field['slug'] . '-' . $rand . '-preview">' . $preview . '</div>'
         . $edit_button . '</div>',
+    );
+    $form['markup-close'] = array(
+        '#type' => 'markup',
+        '#markup' => '</div>',
     );
     return $form;
 }
@@ -95,7 +103,7 @@ function wpcf_fields_skype_shortcode_filter($shortcode, $field) {
     return $shortcode;
     $add = '';
     $add .= isset($field['value']['skypename']) ? ' skypename="' . $field['value']['skypename'] . '"' : '';
-    $add .= isset($field['value']['skypename']) ? ' style="' . $field['value']['style'] . '"' : '';
+//    $add .= isset($field['value']['style']) ? ' style="' . $field['value']['style'] . '"' : '';
     return str_replace(']', $add . ']', $shortcode);
 }
 
@@ -375,7 +383,7 @@ function wpcf_fields_skype_get_button_image($skypename, $template = '') {
  */
 function wpcf_fields_skype_view($params) {
     if (!isset($params['field_value']['skypename'])) {
-        return ' ';
+        return '__wpcf_skip_empty';
     }
     if ($params['style'] == 'raw') {
         return $params['field_value']['skypename'];

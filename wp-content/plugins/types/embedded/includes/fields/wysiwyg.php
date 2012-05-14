@@ -2,6 +2,7 @@
 if (wpcf_compare_wp_version('3.3', '<')) {
     return false;
 }
+
 /**
  * Register data (called automatically).
  * 
@@ -110,12 +111,27 @@ function wpcf_fields_wysiwyg_css() {
  * @return type 
  */
 function wpcf_fields_wysiwyg_view($params) {
-//    return apply_filters('the_content',
-//                    htmlspecialchars_decode(stripslashes($params['field_value'])));
+    $output = '';
+    if (!empty($params['style']) || !empty($params['class'])) {
+        $output .= '<div';
+        if (!empty($params['style'])) {
+            $output .= ' style="' . $params['style'] . '"';
+        }
+        if (!empty($params['class'])) {
+            $output .= ' class="' . $params['class'] . '"';
+        }
+        $output .= '>';
+    }
+    $output .= apply_filters('the_content',
+            htmlspecialchars_decode(stripslashes($params['field_value'])));
+    if (!empty($params['style']) || !empty($params['class'])) {
+        $output .= '</div>';
+    }
+    return $output;
 
-    $content = $params['field_value'];
-    $content = htmlspecialchars_decode(stripslashes($content));
-    $content = do_shortcode($content);
-    $content = wpautop($content);
-    return $content;
+//    $content = $params['field_value'];
+//    $content = htmlspecialchars_decode(stripslashes($content));
+//    $content = do_shortcode($content);
+//    $content = wpautop($content);
+//    return $content;
 }

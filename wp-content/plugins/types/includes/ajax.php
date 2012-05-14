@@ -245,6 +245,22 @@ function wpcf_ajax() {
                 'output' => wpcf_form_simple($element)
             ));
             break;
+        
+        case 'add_checkboxes_option':
+            require_once WPCF_INC_ABSPATH . '/fields/checkboxes.php';
+            $element = wpcf_fields_checkboxes_get_option(
+                    urldecode($_GET['parent_name']));
+            $id = array_shift($element);
+            $element_txt = wpcf_fields_checkboxes_get_option_alt_text($id,
+                    urldecode($_GET['parent_name']));
+            echo json_encode(array(
+                'output' => wpcf_form_simple($element),
+//                'execute' => 'jQuery("#wpcf-form-groups-checkboxes-ajax-response-'
+//                . urldecode($_GET['wpcf_ajax_update_add']) . '").append(\''
+//                . trim(str_replace("\r\n", '', wpcf_form_simple($element_txt))) . '\');',
+                'wpcf_nonce_ajax_callback' => wp_create_nonce('execute'),
+            ));
+            break;
 
         case 'group_form_collapsed':
             require_once WPCF_INC_ABSPATH . '/fields-form.php';
@@ -394,10 +410,10 @@ function wpcf_ajax() {
                 wpcf_pr_admin_edit_fields($_GET['parent'], $_GET['child']);
             }
             break;
-
+            
         case 'toggle':
             $option = get_option('wpcf_toggle', array());
-            $hidden = isset($_GET['hidden']) ? (bool) $_GET['hidden'] : 1;
+            $hidden = isset($_GET['hidden']) ? (bool)$_GET['hidden'] : 1;
             $_GET['div'] = strval($_GET['div']);
             if (!$hidden) {
                 unset($option[$_GET['div']]);
@@ -406,17 +422,10 @@ function wpcf_ajax() {
             }
             update_option('wpcf_toggle', $option);
             break;
-
+            
         case 'footer_credits':
             require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
             wpcf_footer_credit_settings();
-            break;
-
-        case 'footer_credit_activate_message':
-            update_option('wpcf_footer_credit', array('active' => 1));
-            $messages = get_option('wpcf_dismissed_messages', array());
-            $messages[] = 'footer_credit_support_message';
-            update_option('wpcf_dismissed_messages', $messages);
             break;
 
         default:

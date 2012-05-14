@@ -1,5 +1,6 @@
 <?php
 require_once(WPCF_EMBEDDED_ABSPATH . '/common/visual-editor/editor-addon.class.php');
+require_once WPCF_EMBEDDED_ABSPATH . '/includes/post-relationship.php';
 
 if (defined('DOING_AJAX')) {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/ajax.php';
@@ -231,10 +232,6 @@ function wpcf_form_render_js_validation($form = '.wpcf-form-validate',
             if (empty($args['message'])) {
                 $args['message'] = wpcf_admin_validation_messages($method);
             }
-            // TODO Why is this here?
-//            if (!empty($args['message'])) {
-//                $messages[] = $method . ': "' . wpcf_translate('field ' . $element['wpcf-id'] . ' validation message ' . $method, $args['message']) . '"';
-//            }
         }
         $output .= implode(',' . "\r\n", $rules);
         if (!empty($messages)) {
@@ -314,8 +311,8 @@ function wpcf_admin_validation_messages($method = false) {
 function wpcf_admin_message($message, $class = 'updated') {
     add_action('admin_notices',
             create_function('$a=1, $class=\'' . $class . '\', $message=\''
-                    . $message . '\'',
-                    '$screen = get_current_screen(); if (!$screen->is_network) echo "<div class=\"message $class\"><p>$message</p></div>";'));
+                    . htmlentities($message, ENT_QUOTES) . '\'',
+                    '$screen = get_current_screen(); if (!$screen->is_network) echo "<div class=\"message $class\"><p>" . html_entity_decode($message, ENT_QUOTES) . "</p></div>";'));
 }
 
 /**
@@ -655,10 +652,10 @@ function wpcf_admin_bulk_string_translation() {
     // Register groups
     $groups = wpcf_admin_fields_get_groups();
     foreach ($groups as $group_id => $group) {
-        icl_register_string('plugin Types', 'group ' . $group_id . ' name',
-                $group['name']);
+        wpcf_translate_register_string('plugin Types',
+                'group ' . $group_id . ' name', $group['name']);
         if (isset($group['description'])) {
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'group ' . $group_id . ' description', $group['description']);
         }
     }
@@ -666,10 +663,10 @@ function wpcf_admin_bulk_string_translation() {
     // Register fields
     $fields = wpcf_admin_fields_get_fields();
     foreach ($fields as $field_id => $field) {
-        icl_register_string('plugin Types', 'field ' . $field_id . ' name',
-                $field['name']);
+        wpcf_translate_register_string('plugin Types',
+                'field ' . $field_id . ' name', $field['name']);
         if (isset($field['description'])) {
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' description', $field['description']);
         }
 
@@ -679,14 +676,18 @@ function wpcf_admin_bulk_string_translation() {
                 if ($name == 'default') {
                     continue;
                 }
-                icl_register_string('plugin Types',
-                        'field ' . $field_id . ' option ' . $name . ' title',
-                        $option['title']);
-                icl_register_string('plugin Types',
-                        'field ' . $field_id . ' option ' . $name . ' value',
-                        $option['value']);
+                if (isset($option['title'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' title',
+                            $option['title']);
+                }
+                if (isset($option['value'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' value',
+                            $option['value']);
+                }
                 if (isset($option['display_value'])) {
-                    icl_register_string('plugin Types',
+                    wpcf_translate_register_string('plugin Types',
                             'field ' . $field_id . ' option ' . $name . ' display value',
                             $option['display_value']);
                 }
@@ -695,21 +696,21 @@ function wpcf_admin_bulk_string_translation() {
 
         if ($field['type'] == 'checkbox' && (isset($field['set_value']) && $field['set_value'] != '1')) {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value',
                     $field['set_value']);
         }
 
         if ($field['type'] == 'checkbox' && !empty($field['display_value_selected'])) {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value selected',
                     $field['display_value_selected']);
         }
 
         if ($field['type'] == 'checkbox' && !empty($field['display_value_not_selected'])) {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value not selected',
                     $field['display_value_not_selected']);
         }
@@ -721,7 +722,7 @@ function wpcf_admin_bulk_string_translation() {
                     // Skip if it's same as default
                     $default_message = wpcf_admin_validation_messages($method);
                     if ($validation['message'] != $default_message) {
-                        icl_register_string('plugin Types',
+                        wpcf_translate_register_string('plugin Types',
                                 'field ' . $field_id . ' validation message ' . $method,
                                 $validation['message']);
                     }

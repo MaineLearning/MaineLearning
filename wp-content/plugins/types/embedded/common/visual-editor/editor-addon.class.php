@@ -15,17 +15,6 @@ if (!class_exists('Editor_addon')) {
         global $pagenow;
 
         if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
-            //@todo REMOVE code and associated files
-//            wp_enqueue_script('editor_addon_menu_mousewheel',
-//                    EDITOR_ADDON_RELPATH . '/res/js/mousewheel.js',
-//                    array('jquery'));
-//            wp_enqueue_script('editor_addon_menu_mousewheelintent',
-//                    EDITOR_ADDON_RELPATH . '/res/js/mwheelIntent.js',
-//                    array('editor_addon_menu_mousewheel'));
-//            wp_enqueue_script('editor_addon_menu_scrollbar',
-//                    EDITOR_ADDON_RELPATH . '/res/js/scrollbar.js',
-//                    array('editor_addon_menu_mousewheelintent'));
-            
             wp_enqueue_style('editor_addon_menu',
                     EDITOR_ADDON_RELPATH . '/res/css/pro_dropdown_2.css');
             wp_enqueue_style('editor_addon_menu_scroll',
@@ -56,7 +45,7 @@ if (!class_exists('Editor_addon')) {
                 //Adding "embed form" button
                 // WP 3.3 changes
                 global $wp_version;
-                if (version_compare($wp_version, '3.2.1', '>')) {
+                if (version_compare($wp_version, '3.1.4', '>')) {
                     add_action('media_buttons', array($this, 'add_form_button'),
                             10, 2);
                 } else {
@@ -102,7 +91,7 @@ if (!class_exists('Editor_addon')) {
         function add_form_button($context, $text_area = 'textarea#content', $standard_v = TRUE) {
             global $wp_version;
             // WP 3.3 changes ($context arg is actually a editor ID now)
-            if (version_compare($wp_version, '3.2.1', '>') && !empty($context)) {
+            if (version_compare($wp_version, '3.1.4', '>') && !empty($context)) {
                 $text_area = $context;
             }
             
@@ -137,12 +126,12 @@ if (!class_exists('Editor_addon')) {
 
             // add View Template links to the "Add Field" button
             if(!$standard_v) {
-            	$this->add_view_templates(&$menus);
+            	$this->add_view_templates($menus);
 			}
 
             // Sort menus
             if(is_array($menus)) {
-            	$this->sort_menus_alphabetically(&$menus);
+            	$menus = $this->sort_menus_alphabetically($menus);
             }
             
             
@@ -174,7 +163,7 @@ if (!class_exists('Editor_addon')) {
                     . '</div></li></ul></li></ul>';
 
             // WP 3.3 changes
-            if (version_compare($wp_version, '3.2.1', '>')) {
+            if (version_compare($wp_version, '3.1.4', '>')) {
                 echo apply_filters('wpv_add_media_buttons', $out);
             } else {
                 return apply_filters('wpv_add_media_buttons', $context . $out);
@@ -199,7 +188,7 @@ if (!class_exists('Editor_addon')) {
                         		if(!$standard_v && (strpos($menu_item[3], 'wpcfFieldsEditorCallback') !== false || (strpos($menu_item[3], 'wpcfFieldsEmailEditorCallback') !== false))) {
                         			$out .= $this->wpv_parse_menu_item_from_addfield($menu_item);
                         		} else {
-                            		$out .= '<a href="javascript:void(0);" class="item" onclick="' . $menu_item[3] . '">' . $menu_item[0] . "</a>\n";
+                            		$out .= '<a href="javascript:void(0);" class="item" onclick="' . $menu_item[3] . '; return false;">' . $menu_item[0] . "</a>\n";
                         		}
                         	}
                         } else {
@@ -209,7 +198,7 @@ if (!class_exists('Editor_addon')) {
 //                             var_dump($menu);
 //                             echo "</pre>"; 
                             if($standard_v) {
-                            	$out .= '<a href="#" class="item" onclick="insert_b64_shortcode_to_editor(\'' . $short_code . '\', \'' . $text_area . '\')">' . $menu_item[0] . "</a>\n";
+                            	$out .= '<a href="#" class="item" onclick="insert_b64_shortcode_to_editor(\'' . $short_code . '\', \'' . $text_area . '\'); return false;">' . $menu_item[0] . "</a>\n";
                             } else {
                             	$out .= $this->wpv_parse_menu_item_from_addfield($menu_item);
                             }
@@ -252,12 +241,14 @@ if (!class_exists('Editor_addon')) {
         				|| (strpos($slug, 'wpcfFieldsEditorCallback') !== false)
         				|| (strpos($slug, 'wpcfFieldsEmailEditorCallback') !== false)) {
         		$types_slug = $matches[1];
+                $types_slug = str_replace('" class="" style="', '', $types_slug);
         		// convert Types fields to Views fields
         		$slug = $types_slug;
         		$param1 = 'Types-!-wpcf';
         	} 
         	else if(preg_match('/type="(.+)"/', $slug, $matches) > 0) {
         		$types_slug = $matches[1];
+                $types_slug = str_replace('" class="" style="', '', $types_slug);
         		// convert field to Views field
         		$slug = $types_slug;
         		$param1 = 'Types-!-wpcf';
@@ -291,7 +282,7 @@ if (!class_exists('Editor_addon')) {
         		$slug = str_replace('wpv-post-taxonomy', 'wpv-taxonomy', $slug); */
         	}
         	
-        	return '<a href="javascript:void(0);" class="item" onclick="on_add_field_wpv(\''. $param1 . '\', \'' . $slug . '\', \'' . $menu_item[0] . '\')">' . $menu_item[0] . "</a>\n";
+        	return '<a href="javascript:void(0);" class="item" onclick="on_add_field_wpv(\''. $param1 . '\', \'' . $slug . '\', \'' . base64_encode($menu_item[0]) . '\')">' . $menu_item[0] . "</a>\n";
         }
         
         // add parent items for Views and View Templates
@@ -457,11 +448,13 @@ if (!class_exists('Editor_addon')) {
             $menus = !empty($menu_field[__('Other Fields', 'wp-views')]) ? array_merge($menus, $menu_field) : $menus;
             
             // sort inner elements in the submenus
-            foreach($menus as $key=>&$menu_group) {
+            foreach($menus as $key=>$menu_group) {
             	if(is_array($menu_group)) {
             		ksort($menu_group);
             	}
             }
+            
+            return $menus;
 	    }
 	    
 	    function get_search_bar() {
@@ -474,7 +467,7 @@ if (!class_exists('Editor_addon')) {
 	    	return $searchbar;
 	    }
 	    
-	    function add_view_templates($menus) {
+	    function add_view_templates(&$menus) {
 	    	global $wpdb;
 	    	
 	    	$view_templates_available = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");

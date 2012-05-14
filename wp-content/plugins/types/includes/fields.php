@@ -5,17 +5,6 @@
 require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
 
 /**
- * Gets group by ID.
- * 
- * @global type $wpdb
- * @param type $group_id
- * @return type 
- */
-function wpcf_admin_fields_get_group($group_id) {
-    return wpcf_admin_fields_adjust_group(get_post($group_id));
-}
-
-/**
  * Gets post_types supported by specific group.
  * 
  * @global type $wpdb
@@ -250,9 +239,9 @@ function wpcf_admin_fields_save_group($group) {
 
     // WPML register strings
     if (function_exists('icl_register_string')) {
-        icl_register_string('plugin Types', 'group ' . $group_id . ' name',
-                $group['name']);
-        icl_register_string('plugin Types',
+        wpcf_translate_register_string('plugin Types',
+                'group ' . $group_id . ' name', $group['name']);
+        wpcf_translate_register_string('plugin Types',
                 'group ' . $group_id . ' description', $group['description']);
     }
 
@@ -332,17 +321,30 @@ function wpcf_admin_fields_save_field($field) {
     $save_data['name'] = $field['name'];
     $save_data['description'] = $field['description'];
     $save_data['data'] = $field['data'];
-
-    // @todo Check if it's OK to be here
     $save_data['data']['disabled_by_type'] = 0;
 
     // For radios or select
     if (!empty($field['data']['options'])) {
         foreach ($field['data']['options'] as $name => $option) {
-            $option['title'] = $field['data']['options'][$name]['title'] = htmlspecialchars_decode($option['title']);
-            $option['value'] = $field['data']['options'][$name]['value'] = htmlspecialchars_decode($option['value']);
+            if (isset($option['title'])) {
+                $option['title'] = $field['data']['options'][$name]['title'] = htmlspecialchars_decode($option['title']);
+            }
+            if (isset($option['value'])) {
+                $option['value'] = $field['data']['options'][$name]['value'] = htmlspecialchars_decode($option['value']);
+            }
             if (isset($option['display_value'])) {
                 $option['display_value'] = $field['data']['options'][$name]['display_value'] = htmlspecialchars_decode($option['display_value']);
+            }
+            // For checkboxes
+            if ($field['type'] == 'checkboxes' && isset($option['set_value'])
+                    && $option['set_value'] != '1') {
+                $option['set_value'] = $field['data']['options'][$name]['set_value'] = htmlspecialchars_decode($option['set_value']);
+            }
+            if ($field['type'] == 'checkboxes' && !empty($option['display_value_selected'])) {
+                $option['display_value_selected'] = $field['data']['options'][$name]['display_value_selected'] = htmlspecialchars_decode($option['display_value_selected']);
+            }
+            if ($field['type'] == 'checkboxes' && !empty($option['display_value_not_selected'])) {
+                $option['display_value_not_selected'] = $field['data']['options'][$name]['display_value_not_selected'] = htmlspecialchars_decode($option['display_value_not_selected']);
             }
         }
     }
@@ -366,9 +368,9 @@ function wpcf_admin_fields_save_field($field) {
 
     // WPML register strings
     if (function_exists('icl_register_string')) {
-        icl_register_string('plugin Types', 'field ' . $field_id . ' name',
-                $field['name']);
-        icl_register_string('plugin Types',
+        wpcf_translate_register_string('plugin Types',
+                'field ' . $field_id . ' name', $field['name']);
+        wpcf_translate_register_string('plugin Types',
                 'field ' . $field_id . ' description', $field['description']);
 
         // For radios or select
@@ -377,37 +379,57 @@ function wpcf_admin_fields_save_field($field) {
                 if ($name == 'default') {
                     continue;
                 }
-                icl_register_string('plugin Types',
-                        'field ' . $field_id . ' option ' . $name . ' title',
-                        $option['title']);
-                icl_register_string('plugin Types',
-                        'field ' . $field_id . ' option ' . $name . ' value',
-                        $option['value']);
+                if (isset($option['title'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' title',
+                            $option['title']);
+                }
+                if (isset($option['value'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' value',
+                            $option['value']);
+                }
                 if (isset($option['display_value'])) {
-                    icl_register_string('plugin Types',
+                    wpcf_translate_register_string('plugin Types',
                             'field ' . $field_id . ' option ' . $name . ' display value',
                             $option['display_value']);
+                }
+                // For checkboxes
+                if (isset($option['set_value']) && $option['set_value'] != '1') {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' value',
+                            $option['set_value']);
+                }
+                if (!empty($option['display_value_selected'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' display value selected',
+                            $option['display_value_selected']);
+                }
+                if (!empty($option['display_value_not_selected'])) {
+                    wpcf_translate_register_string('plugin Types',
+                            'field ' . $field_id . ' option ' . $name . ' display value not selected',
+                            $option['display_value_not_selected']);
                 }
             }
         }
 
         if ($field['type'] == 'checkbox' && $field['set_value'] != '1') {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value',
                     $field['set_value']);
         }
 
         if ($field['type'] == 'checkbox' && !empty($field['display_value_selected'])) {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value selected',
                     $field['display_value_selected']);
         }
 
         if ($field['type'] == 'checkbox' && !empty($field['display_value_not_selected'])) {
             // we need to translate the check box value to store
-            icl_register_string('plugin Types',
+            wpcf_translate_register_string('plugin Types',
                     'field ' . $field_id . ' checkbox value not selected',
                     $field['display_value_not_selected']);
         }
@@ -419,7 +441,7 @@ function wpcf_admin_fields_save_field($field) {
                     // Skip if it's same as default
                     $default_message = wpcf_admin_validation_messages($method);
                     if ($validation['message'] != $default_message) {
-                        icl_register_string('plugin Types',
+                        wpcf_translate_register_string('plugin Types',
                                 'field ' . $field_id . ' validation message ' . $method,
                                 $validation['message']);
                     }

@@ -202,16 +202,7 @@ function wpcf_admin_fields_form() {
 
     // Get field types
     $fields_registered = wpcf_admin_fields_get_available_types();
-//    foreach (glob(WPCF_EMBEDDED_INC_ABSPATH . '/fields/*.php') as $filename) {
     foreach ($fields_registered as $filename => $data) {
-        // TODO remove
-//        require_once $filename;
-//        if (function_exists('wpcf_fields_' . basename($filename, '.php'))) {
-//            $data = call_user_func('wpcf_fields_' . basename($filename, '.php'));
-//            if (isset($data['wp_version']) && wpcf_compare_wp_version($data['wp_version'],
-//                            '<')) {
-//                continue;
-//            }
         $form['fields'][basename($filename, '.php')] = array(
             '#type' => 'markup',
             '#markup' => '<a href="' . admin_url('admin-ajax.php'
@@ -247,7 +238,6 @@ function wpcf_admin_fields_form() {
                 }
             }
         }
-//        }
     }
 
     // Link
@@ -256,7 +246,8 @@ function wpcf_admin_fields_form() {
         '#markup' => '<strong>' . __('Looking for repeater fields?', 'wpcf')
         . '</strong><br />'
         . sprintf(__('Learn about Types %sfield tables%s', 'wpcf'),
-                '<a href="http://wp-types.com/documentation/user-guides/bulk-content-editing-with-fields-table/" target="_blank">', '</a>'),
+                '<a href="http://wp-types.com/documentation/user-guides/bulk-content-editing-with-fields-table/" target="_blank">',
+                ' &raquo;</a>'),
     );
 
     // Get fields created by user
@@ -620,8 +611,6 @@ function wpcf_admin_fields_form() {
         '#name' => 'wpcf[group][templates]',
         '#options' => $options,
         '#inline' => true,
-//        '#title' => sprintf(__('Display this group on pages that use these content templates: %s',
-//                        'wpcf'), '<em>' . $text . '</em>'),
     );
     $form['templates'] = wpcf_admin_fields_form_nested_elements('templates',
             $form['templates'], __('Content templates:', 'wpcf'), $text,
@@ -823,7 +812,6 @@ function wpcf_fields_get_field_form_data($type, $form_data = array()) {
     $field_data = wpcf_fields_type_action($type);
 
     if (!empty($field_data)) {
-//        require_once $filename;
         $form = array();
 
         // Set right ID if existing field
@@ -869,6 +857,9 @@ function wpcf_fields_get_field_form_data($type, $form_data = array()) {
                         'wpcf');
         $title = '<span class="wpcf-legend-update">' . $title . '</span> - '
                 . sprintf(__('%s field', 'wpcf'), $field_data['title']);
+        if (!empty($form_data['data']['conditional_display']['conditions'])) {
+            $title .= ' ' . __('(conditional)', 'wpcf');
+        }
         $form['wpcf-' . $id] = array(
             '#type' => 'fieldset',
             '#title' => $title,
@@ -942,6 +933,27 @@ function wpcf_fields_get_field_form_data($type, $form_data = array()) {
                     . __('Describe this field', 'wpcf') . '\') { jQuery(this).val(\'\'); }';
             $form_field['description']['#attributes']['onblur'] = 'if (jQuery(this).val() == \'\') { jQuery(this).val(\''
                     . __('Describe this field', 'wpcf') . '\') }';
+        }
+
+        if (wpcf_admin_can_be_repetitive($type)) {
+            $temp_warning_message = '<div class="wpcf-message wpcf-cd-repetitive-warning wpcf-error"';
+            if (empty($form_data['data']['repetitive'])) {
+                $temp_warning_message .= ' style="display:none;"';
+            }
+            $temp_warning_message .= '><p>'
+                    . __('Since this field is repeating, you cannot use it to control the display of other fields.',
+                            'wpcf')
+                    . '</p></div>';
+            $form_field['repetitive'] = array(
+                '#type' => 'checkbox',
+                '#name' => 'repetitive',
+                '#title' => __('This fields can appear multiple times when editing',
+                        'wpcf'),
+                '#default_value' => !empty($form_data['data']['repetitive']) ? 1 : 0,
+                '#attributes' => array('onclick' => 'if (jQuery(this).is(\':checked\')) { jQuery(this).parent().find(\'.wpcf-cd-warning\').hide(); jQuery(this).parent().find(\'.wpcf-cd-repetitive-warning\').show(); } else { jQuery(this).parent().find(\'.wpcf-cd-warning\').show(); jQuery(this).parent().find(\'.wpcf-cd-repetitive-warning\').hide(); }'),
+                '#after' => !empty($form_data['data']['repetitive']) ? '<div class="wpcf-message wpcf-cd-warning wpcf-error" style="display:none;"><p>' . __("There may be multiple instances of this field already. When you switch back to single-field mode, all values of this field will be updated when it's edited.",
+                                'wpcf') . '</p></div>' . $temp_warning_message : $temp_warning_message,
+            );
         }
 
         // Process all form fields

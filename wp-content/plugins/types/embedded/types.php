@@ -39,16 +39,15 @@ function wpcf_embedded_after_setup_theme_hook() {
  * Main init hook.
  */
 function wpcf_embedded_init() {
-
-    load_plugin_textdomain('wpcf', false, WPCF_EMBEDDED_ABSPATH . '/locale');
+    $locale = get_locale();
+    load_textdomain('wpcf', WPCF_EMBEDDED_ABSPATH . '/locale/types-' . $locale . '.mo');
     if (!defined('WPV_VERSION')) {
-        load_plugin_textdomain('wpv-views', false,
-                WPCF_EMBEDDED_ABSPATH . '/locale/locale-views');
+        load_textdomain('wpv-views', WPCF_EMBEDDED_ABSPATH . '/locale/locale-views/views-' . $locale . '.mo');
     }
 
     // Define necessary constants if plugin is not present
     if (!defined('WPCF_VERSION')) {
-        define('WPCF_VERSION', '0.9.5.4');
+        define('WPCF_VERSION', '1.0');
         define('WPCF_META_PREFIX', 'wpcf-');
         define('WPCF_EMBEDDED_RELPATH', icl_get_file_relpath(__FILE__));
     } else {
@@ -98,7 +97,20 @@ function wpcf_translate($name, $string, $context = 'plugin Types') {
     if (!function_exists('icl_t')) {
         return $string;
     }
-    return icl_t($context, $name, $string);
+    return icl_t($context, $name, stripslashes($string));
+}
+
+/**
+ * Registers WPML translation string.
+ * 
+ * @param type $context
+ * @param type $name
+ * @param type $value 
+ */
+function wpcf_translate_register_string($context, $name, $value, $allow_empty_value = false) {
+    if (function_exists('icl_register_string')) {
+        icl_register_string($context, $name, stripslashes($value), $allow_empty_value);
+    }
 }
 
 /**
@@ -149,10 +161,10 @@ function wpcf_embedded_check_import() {
                     $_POST['overwrite-fields'] = 1;
                     $_POST['overwrite-types'] = 1;
                     $_POST['overwrite-tax'] = 1;
-                    $_POST['delete-groups'] = 1;
-                    $_POST['delete-fields'] = 1;
-                    $_POST['delete-types'] = 1;
-                    $_POST['delete-tax'] = 1;
+//                    $_POST['delete-groups'] = 0;
+//                    $_POST['delete-fields'] = 0;
+//                    $_POST['delete-types'] = 0;
+//                    $_POST['delete-tax'] = 0;
                     $_POST['post_relationship'] = 1;
                     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
                     require_once WPCF_EMBEDDED_INC_ABSPATH . '/import-export.php';
@@ -236,7 +248,7 @@ function wpcf_types_cf_under_control($action = 'add', $args = array()) {
                     }
                 }
             }
-            wpcf_admin_fields_save_fields($fields);
+            wpcf_admin_fields_save_fields($fields, true);
             return $args['fields'];
             break;
 
@@ -356,6 +368,7 @@ function wpcf_pr_post_get_has($post_id, $post_type_q = null) {
  * @return type 
  */
 function types_child_posts($post_type, $args = array()) {
+    require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields-post.php';
     global $post;
     $defaults = array(
@@ -403,4 +416,24 @@ function wpcf_get_settings($specific = false) {
  */
 function wpcf_save_settings($settings) {
     update_option('wpcf_settings', $settings);
+}
+
+
+/**
+ * Check if it can be repetitive
+ * @param type $field
+ * @return type 
+ */
+function wpcf_admin_can_be_repetitive($type) {
+    return !in_array($type, array('checkbox', 'checkboxes', 'wysiwyg'));
+}
+
+/**
+ * Check if field is repetitive
+ * @param type $type
+ * @return type 
+ */
+function wpcf_admin_is_repetitive($field) {
+    return isset($field['data']['repetitive']) && !in_array($field['type'],
+                    array('checkbox', 'checkboxes', 'wysiwyg'));
 }

@@ -6,6 +6,7 @@ require_once WPCF_EMBEDDED_INC_ABSPATH . '/editor-support/post-relationship-edit
 
 add_action('wpcf_admin_post_init', 'wpcf_pr_admin_post_init_action', 10, 4);
 add_action('save_post', 'wpcf_pr_admin_save_post_hook', 10, 2);
+add_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter', 10, 4);
 
 /**
  * Init function.
@@ -19,6 +20,7 @@ function wpcf_pr_admin_post_init_action($post_type, $post, $groups, $wpcf_active
     $has = wpcf_pr_admin_get_has($post_type);
     $belongs = wpcf_pr_admin_get_belongs($post_type);
     if (!empty($has) || !empty($belongs)) {
+        add_action('admin_head', 'wpcf_pr_add_field_js');
         $output = wpcf_pr_admin_post_meta_box_output($post,
                 array('post_type' => $post_type, 'has' => $has, 'belongs' => $belongs));
         add_meta_box('wpcf-post-relationship', __('Fields table', 'wpcf'),
@@ -92,14 +94,16 @@ function wpcf_pr_admin_get_belongs($post_type) {
     }
     $relationships = get_option('wpcf_post_relationship', array());
     $results = array();
-    foreach ($relationships as $has => $belongs) {
-        // See if enabled
-        $active = get_post_type_object($has);
-        if (!$active) {
-            continue;
-        }
-        if (array_key_exists($post_type, $belongs)) {
-            $results[$has] = $belongs[$post_type];
+    if (is_array($relationships)) {
+        foreach ($relationships as $has => $belongs) {
+            // See if enabled
+            $active = get_post_type_object($has);
+            if (!$active) {
+                continue;
+            }
+            if (array_key_exists($post_type, $belongs)) {
+                $results[$has] = $belongs[$post_type];
+            }
         }
     }
     return !empty($results) ? $results : false;
@@ -200,6 +204,7 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
         return '';
     }
     $output = array();
+    $repetitive_warning = false;
 
     // Sorting
     $dir = isset($_GET['sort']) && $_GET['sort'] == 'ASC' ? 'DESC' : 'ASC';
@@ -216,7 +221,7 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
         if ($_GET['field'] == '_wp_title') {
             $items = get_posts('post_type=' . $post_type . '&numberposts=-1&post_status=null&meta_key='
                     . '_wpcf_belongs_' . $parent_post_type . '_id&meta_value='
-                    . $post->ID . '&orderby=title&order=' . $_GET['sort']);
+                    . $post->ID . '&orderby=title&suppress_filters=0&order=' . $_GET['sort']);
         } else if ($_GET['field'] == '_wpcf_pr_parent') {
             global $wpdb;
             $query = "
@@ -244,7 +249,8 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
             }
             $additional = get_posts('post_type=' . $post_type . '&numberposts=-1&post_status=null&meta_key='
                     . '_wpcf_belongs_' . $parent_post_type . '_id&meta_value='
-                    . $post->ID . '&exclude=' . implode(',', $exclude));
+                    . $post->ID . '&suppress_filters=0&exclude=' . implode(',',
+                            $exclude));
             $items = array_merge(array_values($items), array_values($additional));
         } else {
             if ($_GET['field'] == '_wp_title' || $_GET['field'] == '_wp_body') {
@@ -288,14 +294,15 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
                 }
                 $additional = get_posts('post_type=' . $post_type . '&numberposts=-1&post_status=null&meta_key='
                         . '_wpcf_belongs_' . $parent_post_type . '_id&meta_value='
-                        . $post->ID . '&exclude=' . implode(',', $exclude));
+                        . $post->ID . '&suppress_filters=0&exclude=' . implode(',',
+                                $exclude));
                 $items = array_merge(array_values($items),
                         array_values($additional));
             }
         }
     } else {
         $items = get_posts('post_type=' . $post_type . '&numberposts=-1&post_status=null&meta_key='
-                . '_wpcf_belongs_' . $parent_post_type . '_id&meta_value=' . $post->ID);
+                . '_wpcf_belongs_' . $parent_post_type . '_id&suppress_filters=0&meta_value=' . $post->ID);
     }
 
     // Pagination
@@ -313,19 +320,20 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
     $wpcf_fields = wpcf_admin_fields_get_fields(true);
 
     if ($data['fields_setting'] == 'specific') {
-        $title_dir = $sort_field == '_wp_title' ? $dir : 'ASC';
-        $_wp_title = '';
-        $_wp_title .= $sort_field == '_wp_title' ? '<div class="wpcf-pr-sort-' . $dir . '"></div>' : '';
-        $_wp_title .= '<a href="' . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=pr_sort&amp;field='
-                        . '_wp_title&amp;sort=' . $title_dir . '&amp;post_id=' . $post->ID . '&amp;post_type='
-                        . $post_type . '&amp;_wpnonce='
-                        . wp_create_nonce('pr_sort')) . '">' . __('Post Title') . '</a>';
         $keys = array_keys($data['fields']);
         foreach ($keys as $k => $header) {
-            if ($header == '_wp_title' || $header == '_wpcf_pr_parents') {
+            if ($header == '_wpcf_pr_parents') {
                 continue;
             }
-            if ($header == '_wp_body') {
+            if ($header == '_wp_title') {
+                $title_dir = $sort_field == '_wp_title' ? $dir : 'ASC';
+                $headers[$k] = '';
+                $headers[$k] .= $sort_field == '_wp_title' ? '<div class="wpcf-pr-sort-' . $dir . '"></div>' : '';
+                $headers[$k] .= '<a href="' . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=pr_sort&amp;field='
+                                . '_wp_title&amp;sort=' . $title_dir . '&amp;post_id=' . $post->ID . '&amp;post_type='
+                                . $post_type . '&amp;_wpnonce='
+                                . wp_create_nonce('pr_sort')) . '">' . __('Post Title') . '</a>';
+            } else if ($header == '_wp_body') {
                 $body_dir = $sort_field == '_wp_body' ? $dir : $dir_default;
                 $headers[$k] = '';
                 $headers[$k] .= $sort_field == '_wp_body' ? '<div class="wpcf-pr-sort-' . $dir . '"></div>' : '';
@@ -344,8 +352,12 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
                 $headers[$k] .= '<a href="' . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=pr_sort&amp;field='
                                 . $header . '&amp;sort=' . $field_dir . '&amp;post_id=' . $post->ID . '&amp;post_type='
                                 . $post_type . '&amp;_wpnonce='
-                                . wp_create_nonce('pr_sort')) . '">' . $wpcf_fields[str_replace(WPCF_META_PREFIX,
-                                '', $header)]['name'] . '</a>';
+                                . wp_create_nonce('pr_sort')) . '">' . stripslashes($wpcf_fields[str_replace(WPCF_META_PREFIX,
+                                        '', $header)]['name']) . '</a>';
+                if (wpcf_admin_is_repetitive($wpcf_fields[str_replace(WPCF_META_PREFIX,
+                                        '', $header)])) {
+                    $repetitive_warning = true;
+                }
             } else {
                 $field_dir = $sort_field == $header ? $dir : $dir_default;
                 $headers[$k] = '';
@@ -353,7 +365,8 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
                 $headers[$k] .= '<a href="' . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=pr_sort&amp;field='
                                 . $header . '&amp;sort=' . $field_dir . '&amp;post_id=' . $post->ID . '&amp;post_type='
                                 . $post_type . '&amp;_wpnonce='
-                                . wp_create_nonce('pr_sort')) . '">' . $header . '</a>';
+                                . wp_create_nonce('pr_sort')) . '">'
+                        . stripslashes($header) . '</a>';
             }
         }
         if (!empty($data['fields']['_wpcf_pr_parents'])) {
@@ -374,7 +387,7 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
                                 . wp_create_nonce('pr_sort')) . '">' . $temp_parent_type->label . '</a>';
             }
         }
-        array_unshift($headers, $_wp_title);
+//        array_unshift($headers, $_wp_title);
     } else {
         $item = new stdClass();
         $item->ID = 'new_' . mt_rand();
@@ -401,6 +414,9 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
         }
         foreach ($groups as $group) {
             foreach ($group['fields'] as $field) {
+                if (wpcf_admin_is_repetitive($field)) {
+                    $repetitive_warning = true;
+                }
                 wpcf_admin_post_field_load_js_css(wpcf_fields_type_action($field['type']));
                 $field_dir = $sort_field == wpcf_types_get_meta_prefix($field) . $field['slug'] ? $dir : $dir_default;
                 $headers[$field['id']] = '';
@@ -409,7 +425,8 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
                                 . wpcf_types_get_meta_prefix($field) . $field['slug'] . '&amp;sort='
                                 . $field_dir . '&amp;post_id=' . $post->ID . '&amp;post_type='
                                 . $post_type . '&amp;_wpnonce='
-                                . wp_create_nonce('pr_sort')) . '">' . $field['name'] . '</a>';
+                                . wp_create_nonce('pr_sort')) . '">'
+                        . stripslashes($field['name']) . '</a>';
             }
         }
         // Get all parents
@@ -446,9 +463,12 @@ function wpcf_pr_admin_post_meta_box_has_form($post, $post_type, $data,
     }
 
     $return = '';
+    $return .= $repetitive_warning ? '<div class="wpcf-message wpcf-error"><p>'
+            . __('Repeating fields should not be used in child posts. Types will update all field values.',
+                    'wpcf') . '</p></div>' : '';
     $return .= wpcf_pr_admin_has_pagination($post, $post_type, $page, $prev,
             $next, $per_page, $total_items);
-    $return .= '<table id="wpcf_pr_table_sortable_' . md5($post_type) . '" class="tablesorter wpcf_pr_table_sortable" cellpadding="0" cellspacing="0" style="width:100%;">' . $header . '<tbody>' . implode($output) . '</tbody></table>';
+    $return .= '<div class="wpcf-pr-table-wrapper"><table id="wpcf_pr_table_sortable_' . md5($post_type) . '" class="tablesorter wpcf_pr_table_sortable" cellpadding="0" cellspacing="0" style="width:100%;">' . $header . '<tbody>' . implode($output) . '</tbody></table></div>';
     $return .= wpcf_form_render_js_validation('#post', false);
     return $return;
 }
@@ -487,18 +507,17 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
 
     $row_data = array();
     $wpcf_fields = wpcf_admin_fields_get_fields();
-    $row_data[] = wpcf_form_simple(array('field' => array(
-            '#type' => 'textfield',
-            '#id' => 'wpcf_post_relationship_' . $item->ID . '_wp_title',
-            '#name' => 'wpcf_post_relationship[' . $item->ID . '][_wp_title]',
-            '#value' => $item->post_title,
-            '#inline' => true,
-            '#attributes' => $new_item || $data['fields_setting'] == 'all_cf_standard' || isset($data['fields']['_wp_title']) ? array() : array('readonly' => 'readonly'),
-            )));
     if ($data['fields_setting'] == 'specific' && !empty($data['fields'])) {
         foreach ($data['fields'] as $field_key => $true) {
             if ($field_key == '_wp_title') {
-                continue;
+                $element = wpcf_form_simple(array('field' => array(
+                        '#type' => 'textfield',
+                        '#id' => 'wpcf_post_relationship_' . $item->ID . '_wp_title',
+                        '#name' => 'wpcf_post_relationship[' . $item->ID . '][_wp_title]',
+                        '#value' => $item->post_title,
+                        '#inline' => true,
+//                        '#attributes' => $new_item || $data['fields_setting'] == 'all_cf_standard' || isset($data['fields']['_wp_title']) ? array() : array('readonly' => 'readonly'),
+                        )));
             } else if ($field_key == '_wp_body') {
                 $value = wp_trim_words($item->post_content, 10, null);
                 $element = wpcf_form_simple(array('field' => array(
@@ -522,7 +541,6 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
                             array('field' => $wpcf_fields[$wpcf_key]), false,
                             false, 'post_relationship');
                     $element = array_shift($element);
-                    // TODO There may still be problem with IDs
                     if (!in_array($wpcf_fields[$wpcf_key]['type'],
                                     array('image', 'file'))) {
                         $element['#id'] = 'wpcf_post_relationship_' . $item->ID . '_' . $wpcf_key;
@@ -530,14 +548,26 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
                     $element['#name'] = 'wpcf_post_relationship[' . $item->ID . '][' . $field_key . ']';
                     $element['#inline'] = true;
                     unset($element['#title'], $element['#description']);
+                    if ($wpcf_fields[$wpcf_key]['type'] == 'skype') {
+                        unset($element['#prefix']);
+                    }
                     if (in_array($wpcf_fields[$wpcf_key]['type'],
                                     array('wysiwyg'))) {
                         $element['#type'] = 'textarea';
                         $element['#attributes'] = array('style' => 'width:300px;height:100px;');
                     }
                     if (in_array($wpcf_fields[$wpcf_key]['type'],
-                                    array('checkbox'))) {
-                        $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkbox[' . $item->ID . '][' . $wpcf_key . ']" value="1" />';
+                                    array('checkbox', 'checkboxes'))) {
+                        if ($wpcf_fields[$wpcf_key]['type'] == 'checkbox') {
+                            $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkbox[' . $item->ID . '][' . $wpcf_key . ']" value="1" />';
+                        } else if ($wpcf_fields[$wpcf_key]['type'] == 'checkboxes' && !empty($element['#options'])) {
+                            foreach ($element['#options'] as $temp_key => $temp_value) {
+                                $element['#options'][$temp_key]['#name'] = 'wpcf_post_relationship[' . $item->ID . '][' . $field_key . '][' . $temp_key . ']';
+                                $element['#options'][$temp_key]['#inline'] = true;
+                                $element['#options'][$temp_key]['#after'] = '<br />';
+                            }
+                            $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkboxes[' . $item->ID . '][' . $field_key . ']" value="1" />';
+                        }
                     }
                     $value = get_post_meta($item->ID, $field_key, true);
                     $element = wpcf_form_simple(array('field' => $element));
@@ -575,6 +605,15 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
     } else {
         $groups = wpcf_admin_post_get_post_groups_fields($item,
                 'post_relationships');
+        $element = wpcf_form_simple(array('field' => array(
+                '#type' => 'textfield',
+                '#id' => 'wpcf_post_relationship_' . $item->ID . '_wp_title',
+                '#name' => 'wpcf_post_relationship[' . $item->ID . '][_wp_title]',
+                '#value' => $item->post_title,
+                '#inline' => true,
+//                        '#attributes' => $new_item || $data['fields_setting'] == 'all_cf_standard' || isset($data['fields']['_wp_title']) ? array() : array('readonly' => 'readonly'),
+                )));
+        $row_data[] = $element;
         if ($data['fields_setting'] == 'all_cf_standard') {
             $element = wpcf_form_simple(array('field' => array(
                     '#type' => 'textarea',
@@ -597,27 +636,30 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
                         array('field' => $field), false, false,
                         'post_relationship');
                 $element = array_shift($element_org);
-                // @todo Check if this is needed for skype only
-//                if ($field['type'] == 'skype') {
-//                    $temp_second_element = array_pop($element_org);
-//                    if (!empty($temp_second_element['#validate'])) {
-//                        $element['#validate'] = $temp_second_element['#validate'];
-//                    }
-//                    
-//                }
-                // TODO Monitor if may still be problem with IDs
                 if (!in_array($field['type'], array('image', 'file'))) {
                     $element['#id'] = 'wpcf_post_relationship_' . $item->ID . '_' . $field['id'];
                 }
                 $element['#name'] = 'wpcf_post_relationship[' . $item->ID . '][' . wpcf_types_get_meta_prefix($field) . $field['slug'] . ']';
                 $element['#inline'] = true;
                 unset($element['#title'], $element['#description']);
+                if ($field['type'] == 'skype') {
+                    unset($element['#prefix']);
+                }
                 if (in_array($field['type'], array('wysiwyg'))) {
                     $element['#type'] = 'textarea';
                     $element['#attributes'] = array('style' => 'width:300px;height:100px;');
                 }
-                if (in_array($field['type'], array('checkbox'))) {
-                    $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkbox[' . $item->ID . '][' . wpcf_types_get_meta_prefix($field) . $field['slug'] . ']" value="1" />';
+                if (in_array($field['type'], array('checkbox', 'checkboxes'))) {
+                    if ($field['type'] == 'checkbox') {
+                        $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkbox[' . $item->ID . '][' . wpcf_types_get_meta_prefix($field) . $field['slug'] . ']" value="1" />';
+                    } else if ($field['type'] == 'checkboxes' && !empty($element['#options'])) {
+                        foreach ($element['#options'] as $temp_key => $temp_value) {
+                            $element['#options'][$temp_key]['#name'] = 'wpcf_post_relationship[' . $item->ID . '][' . wpcf_types_get_meta_prefix($field) . $field['slug'] . '][' . $temp_key . ']';
+                            $element['#options'][$temp_key]['#inline'] = true;
+                            $element['#options'][$temp_key]['#after'] = '<br />';
+                        }
+                        $element['#suffix'] = '<input type="hidden" name="wpcf_post_relationship_checkboxes[' . $item->ID . '][' . wpcf_types_get_meta_prefix($field) . $field['slug'] . ']" value="1" />';
+                    }
                 }
                 $value = get_post_meta($item->ID,
                         wpcf_types_get_meta_prefix($field) . $field['slug'],
@@ -683,6 +725,9 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
         //]]>
     </script>';
         }
+        if (defined('DOING_AJAX')) {
+            $output .= '<script type="text/javascript">wpcfPrVerifyInit();</script>';
+        }
         $output .= wpcf_form_render_js_validation('#post', false) . '</td></tr>';
         return $output;
     }
@@ -701,6 +746,7 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
 function wpcf_pr_admin_save_child_item($parent_post, $post_type, $data) {
     if (!empty($data['wpcf_post_relationship'])) {
         $post_id = key($data['wpcf_post_relationship']);
+        $original_post_id = $post_id;
         $save_fields = array_shift($data['wpcf_post_relationship']);
         if (strpos($post_id, 'new_') !== false) {
             $post_data['post_title'] = !empty($save_fields['_wp_title']) ? $save_fields['_wp_title'] : 'post ' . $post_id;
@@ -714,6 +760,17 @@ function wpcf_pr_admin_save_child_item($parent_post, $post_type, $data) {
         }
         unset($save_fields['_wp_title'], $save_fields['_wp_body']);
         $post_id = wp_insert_post($post_data);
+
+        // Set the language.        
+        global $sitepress;
+        if (isset($sitepress)) {
+            $lang_details = $sitepress->get_element_language_details($parent_post->ID, 'post_' . $parent_post->post_type);
+            if ($lang_details) {
+                $sitepress->set_element_language_details($post_id, 'post_' . $post_type, null, $lang_details->language_code);
+            }
+        }
+
+        
 
         // Save other parents
         if (isset($save_fields['parents'])) {
@@ -747,9 +804,9 @@ function wpcf_pr_admin_save_child_item($parent_post, $post_type, $data) {
             }
             update_post_meta($post_id, $meta_key, $field_value);
         }
-        // Process checkboxes
-        if (isset($data['wpcf_post_relationship_checkbox'][$post_id])) {
-            $check_meta = key($data['wpcf_post_relationship_checkbox'][$post_id]);
+        // Process single checkboxes
+        if (isset($data['wpcf_post_relationship_checkbox'][$original_post_id])) {
+            $check_meta = key($data['wpcf_post_relationship_checkbox'][$original_post_id]);
             if (!isset($save_fields[$check_meta])) {
                 delete_post_meta($post_id, $check_meta);
             }
@@ -761,15 +818,17 @@ function wpcf_pr_admin_save_child_item($parent_post, $post_type, $data) {
         $item = get_post($post_id);
         $relationships = get_option('wpcf_post_relationship', array());
         if (!isset($relationships[$parent_post->post_type][$item->post_type])) {
-            return __('Post not updated. Relationship data missing.', 'wpcf');
+            return array('new_post_id' => 0, 'output' => __('Post not updated. Relationship data missing.',
+                        'wpcf'));
         }
         $data = $relationships[$parent_post->post_type][$item->post_type];
         $output = wpcf_pr_admin_post_meta_box_has_row($parent_post,
                 $item->post_type, $data, $parent_post->post_type, $item);
 
-        return $output;
+        return array('new_post_id' => $post_id, 'output' => $output);
     }
-    return __('Post not updated. Relationship data missing.', 'wpcf');
+    return array('new_post_id' => 0, 'output' => __('Post not updated. Relationship data missing.',
+                'wpcf'));
 }
 
 /**
@@ -803,7 +862,7 @@ function wpcf_pr_admin_post_meta_box_belongs_form($post, $type, $belongs) {
     $options = array(
         __('Not selected', 'wpcf') => 0,
     );
-    $items = get_posts('post_type=' . $type . '&numberposts=-1&post_status=null&order=ASC&orderby=title');
+    $items = get_posts('post_type=' . $type . '&numberposts=-1&post_status=null&order=ASC&orderby=title&suppress_filters=0');
     if (empty($items)) {
         return array();
     }
@@ -912,6 +971,49 @@ function wpcf_pr_admin_has_pagination($post, $post_type, $page, $prev, $next,
  * @return string 
  */
 function wpcf_pr_admin_save_post_hook($parent_post_id) {
+    
+    // WPML check if it's translation of a child
+    // Fix up the parent if it's the child of a related post and it doesn't yet have a parent
+    if (function_exists('icl_object_id')) {
+
+        remove_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter',
+                10, 4);
+
+        $post = get_post($parent_post_id);
+        $original_post_id = icl_object_id($parent_post_id, $post->post_type,
+                false);
+        if (!empty($original_post_id)) {
+            // it has a translation
+            $original_post = get_post($original_post_id);
+            if (!empty($original_post)) {
+                
+                // look for _wpcf_belongs_xxxx_id fields.
+                
+                $metas = get_post_custom($original_post->ID);
+                foreach ($metas as $meta_key => $meta) {
+                    if (strpos($meta_key, '_wpcf_belongs_') !== false) {
+                        $meta_post = get_post($meta[0]);
+                        $exists = get_post_meta($parent_post_id, $meta_key, true);
+                        if (!empty($meta_post) && empty($exists)) {
+                            global $sitepress;
+                            $ulanguage = $sitepress->get_language_for_element($parent_post_id, 'post_' . $post->post_type);
+                            $meta_translated_id = icl_object_id($meta_post->ID,
+                                    $meta_post->post_type, false, $ulanguage);
+                            // Only force if meta is not already set
+                            if (!empty($meta_translated_id)) {
+                                update_post_meta($parent_post_id, $meta_key,
+                                        $meta_translated_id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        add_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter', 10, 4);
+
+    }    
+    // Save child items
     if (defined('DOING_AJAX') && !isset($_REQUEST['wpcf_action'])) {
         return array();
     }
@@ -920,9 +1022,9 @@ function wpcf_pr_admin_save_post_hook($parent_post_id) {
     if (isset($processed[$parent_post_id])) {
         return array();
     }
+    $parent_post = get_post($parent_post_id);
     $results = array();
     if (!empty($_POST['wpcf_post_relationship'])) {
-        $parent_post = get_post($parent_post_id);
         foreach ($_POST['wpcf_post_relationship'] as $post_id => $data) {
             $post_id_sent = $post_id;
             $post_type = $data['post_type'];
@@ -932,11 +1034,119 @@ function wpcf_pr_admin_save_post_hook($parent_post_id) {
             if (isset($_POST['wpcf_post_relationship_checkbox'][$post_id])) {
                 $send_data['wpcf_post_relationship_checkbox'][$post_id] = $_POST['wpcf_post_relationship_checkbox'][$post_id];
             }
-            $output = wpcf_pr_admin_save_child_item($parent_post, $post_type,
-                    $send_data);
+            extract(wpcf_pr_admin_save_child_item($parent_post, $post_type,
+                            $send_data));
             $results[$post_id_sent] = $output;
+        }
+    }
+    if (isset($_POST['wpcf_post_relationship_checkboxes'])) {
+        foreach ($_POST['wpcf_post_relationship_checkboxes'] as $post_id => $data) {
+            foreach ($data as $temp_slug => $temp_options) {
+                if (!isset($_POST['wpcf_post_relationship'][$post_id][$temp_slug])) {
+                    $post_type = isset($_POST['post_type_child']) ? $_POST['post_type_child'] : $_POST['post_type'];
+                    extract(wpcf_pr_admin_save_child_item($parent_post,
+                                    $post_type,
+                                    array('wpcf_post_relationship' => array(
+                                    $new_post_id => array($new_post_id => array())
+                                )
+                                    )
+                            ));
+                    $results[$post_id] = $output;
+                }
+            }
         }
     }
     $processed[$parent_post_id] = 1;
     return implode('', $results);
+}
+
+/**
+ * Returns translated '_wpcf_belongs_XXX_id' if any.
+ * 
+ * @global type $sitepress
+ * @param type $value
+ * @param type $object_id
+ * @param type $meta_key
+ * @param type $single
+ * @return type 
+ */
+function wpcf_pr_meta_belongs_filter($value, $object_id, $meta_key, $single) {
+    // WPML check if it's translation of a child
+    // Only force if meta is not already set
+    if (empty($value) && function_exists('icl_object_id') && strpos($meta_key,
+                    '_wpcf_belongs_') !== false) {
+        $post = get_post($object_id);
+        $original_post_id = icl_object_id($object_id, $post->post_type, false);
+        if (!empty($original_post_id)) {
+            remove_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter',
+                    10, 4);
+            $original_post_meta = get_post_meta($original_post_id, $meta_key,
+                    true);
+            add_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter', 10, 4);
+            if (!empty($original_post_meta)) {
+                $meta_post = get_post($original_post_meta);
+                if (!empty($meta_post)) {
+                    global $sitepress;
+                    $ulanguage = $sitepress->get_language_for_element($object_id,
+                            'post_' . $post->post_type);
+                    $meta_translated_id = icl_object_id($meta_post->ID,
+                            $meta_post->post_type, false, $ulanguage);
+                    if (!empty($meta_translated_id)) {
+                        $value = $meta_translated_id;
+                    }
+                }
+            }
+        }
+    }
+    return $value;
+}
+
+/**
+ * JS for fields AJAX.
+ */
+function wpcf_pr_add_field_js() {
+
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            wpcfPrVerifyInit();
+        });
+            
+        function wpcfPrVerifyInit() {
+            jQuery('.wpcf-pr-has-entries .wpcf-cd').each(function(){
+                jQuery(this).parents('tr').find(':input').each(function(){
+                    if (jQuery(this).hasClass('wpcf-pr-binded')) {
+                        return false;
+                    }
+                    jQuery(this).addClass('wpcf-pr-binded');
+                    jQuery(this).bind('blur', function(){
+                        wpcfPrVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                    });
+                });
+            });
+        }
+                                                                    
+        function wpcfPrVerify(object, name, value) {
+            var form = object.parents('tr').find(':input');
+            jQuery.ajax({
+                url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: form.serialize()+'<?php echo '&action=wpcf_ajax&wpcf_action=pr_verify&_wpnonce=' . wp_create_nonce('pr_verify'); ?>',
+                cache: false,
+                beforeSend: function() {
+                },
+                success: function(data) {
+                    if (data != null) {
+                        if (typeof data.execute != 'undefined'
+                            && (typeof data.wpcf_nonce_ajax_callback != 'undefined'
+                            && data.wpcf_nonce_ajax_callback == wpcf_nonce_ajax_callback)) {
+                            eval(data.execute);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    <?php
 }

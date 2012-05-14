@@ -1,7 +1,6 @@
 <?php
 /*
  * Custom types functions.
- * @todo Investigate supports post-formats
  */
 
 /**

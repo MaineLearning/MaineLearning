@@ -86,6 +86,7 @@ function wpcf_custom_taxonomies_register($taxonomy, $data) {
             $data['labels']['singular_name'] = $data['labels']['name'];
         }
         foreach ($data['labels'] as $label_key => $label) {
+            $data['labels'][$label_key] = $label = stripslashes($label);
             switch ($label_key) {
                 case 'parent_item':
                 case 'parent_item_colon':
