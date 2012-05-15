@@ -1,8 +1,4 @@
-
-/* Includes externally-stored functions */
-
-/* include_once "functions/chosen-taxonomy-metabox.php"; //
-
+<?php
 
 /**
  * WordPress Chosen Taxonomy Metabox
@@ -179,3 +175,5 @@ class HHS_Chosen_Tax_Metabox {
 		}
 	}
 }
+
+?>
