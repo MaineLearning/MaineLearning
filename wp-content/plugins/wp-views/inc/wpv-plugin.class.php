@@ -68,7 +68,7 @@ class WP_Views_plugin extends WP_Views {
         'can_export' => false,
         'has_archive' => false, 
         'hierarchical' => false,
-        'menu_position' => null,
+        'menu_position' => 80,
         'menu_icon' => WPV_URL .'/res/img/views-18.png',
         'supports' => array('title','editor','author')
       ); 
@@ -76,6 +76,14 @@ class WP_Views_plugin extends WP_Views {
     }
 
     function admin_menu(){
+
+        // remove the default menus and then add a Help menu
+        remove_submenu_page('edit.php?post_type=view', 'edit.php?post_type=view');
+        remove_submenu_page('edit.php?post_type=view', 'post-new.php?post_type=view');
+        
+                // Add the default menus after the Help menu
+        add_submenu_page('edit.php?post_type=view', __('Views', 'wpv-views'), __('Views', 'wpv-views'), 'manage_options', 'edit.php?post_type=view');
+        add_submenu_page('edit.php?post_type=view', __('New View', 'wpv-views'), __('New View', 'wpv-views'), 'manage_options', 'post-new.php?post_type=view');
 
         // Add the view template menus.        
         add_submenu_page('edit.php?post_type=view', __('View Templates', 'wpv-views'), __('View Templates', 'wpv-views'), 'manage_options', 'edit.php?post_type=view-template');
@@ -94,11 +102,15 @@ class WP_Views_plugin extends WP_Views {
         
         add_submenu_page('edit.php?post_type=view', __('Views Subscription','wp-wiews'), __('Views Subscription','wp-wiews'), 'manage_options', WPV_FOLDER . '/menu/main.php', null, WPV_URL . '/res/img/icon16.png');
         
+        add_submenu_page('edit.php?post_type=view', __('Help', 'wpv-views'), __('Help', 'wpv-views'), 'manage_options', WPV_FOLDER . '/menu/help.php', null, WPV_URL . '/res/img/icon16.png');
     }
 
     function settings_box_load(){
-        add_meta_box('wpv_settings', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Query', 'wpv-views'), array($this, 'settings_box'), 'view', 'normal', 'high');    
-        add_meta_box('wpv_layout', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Layout', 'wpv-views'), 'view_layout_box', 'view', 'normal', 'high');
+        add_meta_box('wpv_settings', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Query - Choose what content to load', 'wpv-views'), array($this, 'settings_box'), 'view', 'normal', 'high');    
+        add_meta_box('wpv_layout', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Layout - Edit the layout', 'wpv-views'), 'view_layout_box', 'view', 'normal', 'high');
+
+        add_meta_box('wpv_views_help', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('Views Help', 'wpv-views'), array($this, 'view_help_box'), 'view', 'side', 'high');
+
         //add_meta_box('wpv_css', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('CSS for view', 'wpv-views'), array($this, 'css_box'), 'view', 'normal', 'high');    
         
         global $pagenow;
@@ -111,7 +123,60 @@ class WP_Views_plugin extends WP_Views {
         if ($pagenow == 'options-general.php' && isset($_GET['page']) && $_GET['page'] == 'wpv-import-theme') {
             $this->include_admin_css();
         }
-}
+        
+
+    }
+    
+    function hide_view_body_controls() {
+        global $pagenow, $post;
+        if (($pagenow == 'post-new.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'view') ||
+                ($pagenow == 'post.php' && isset($_GET['action']) && $_GET['action'] == 'edit')) {
+
+            $post_type = $post->post_type;
+
+            if($pagenow == 'post.php' && $post_type != 'view') {
+                return;
+            }
+            // hide the post body.
+            ?>
+                <div id="wpv-customize-link" style="display:none;margin-bottom:15px">
+                    <a href="#" onclick="wpv_show_post_body()"><?php _e('Fully customize the View HTML output', 'wpv-views'); ?></a>
+                </div>
+                
+                <div id="wpv-learn-about-views-editing" style="display:none;margin-bottom:15px">
+                    <?php printf(__('Learn about %sediting Views HTML%s', 'wpv-views'),
+                                 '<a href="http://wp-types.com/documentation/user-guides/digging-into-view-outputs/" target="_blank">',
+                                 ' &raquo;</a>'); ?>
+                    <input class="button-secondary" type="button" value="<?php echo __('Hide this editor', 'wpv-views'); ?>" onclick="wpv_hide_post_body()">
+                </div>
+
+                <script type="text/javascript">
+                    jQuery('#postdivrich').hide();
+                    jQuery('#wpv-learn-about-views-editing').insertAfter('#postdivrich');
+                </script>
+
+
+            <?php
+            
+            // hide the author as well.
+            ?>            
+                <script type="text/javascript">
+                    jQuery('#authordiv').hide();
+                </script>
+            <?php
+
+            // add a note about saving changes
+            ?>
+                <div id="wpv-save-changes" class="wpv_form_notice" style="display:none;margin-top:10px;width:95%">
+                    <?php _e('* This View has changed. You need to save for these changes to take effect.', 'wpv-views'); ?>
+                </div>
+                
+            <?php
+                
+            
+        }
+        
+    }
 
     /**
      * Output the view query metabox on the view edit page.
@@ -180,7 +245,6 @@ class WP_Views_plugin extends WP_Views {
         </table>
 
         <?php
-        
         $view_settings = wpv_types_defaults($view_settings);
         wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter', '', 'wpv_add_filters', $view_settings['query_type'][0] == 'posts');
         wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter_taxonomy', '', 'wpv_add_filters_taxonomy', $view_settings['query_type'][0] == 'taxonomy');
@@ -193,6 +257,29 @@ class WP_Views_plugin extends WP_Views {
         </div>
         <?php
     }
+    
+    function view_help_box($post){
+        
+        global $pagenow;
+        ?>
+            <div id="wpv-step-help-1" class="wpv-incomplete-step"><?php _e('1. Enter title', 'wpv-views'); ?></div>
+            <div id="wpv-step-help-2" class="wpv-incomplete-step"><?php _e('2. Choose what content to load', 'wpv-views'); ?></div>
+            <div id="wpv-step-help-3" class="wpv-incomplete-step"><?php _e('3. Edit the layout', 'wpv-views'); ?></div>
+            
+            <?php if($pagenow == 'post-new.php') :?>
+                <div id="wpv-step-help-4" class="wpv-incomplete-step"><?php _e('4. Save this View', 'wpv-views'); ?></div>
+            <?php else:?>
+                <div id="wpv-step-help-4" class="wpv-complete-step"><?php _e('4. Save this View', 'wpv-views'); ?></div>
+            <?php endif;?>
+            <br />
+            <?php printf(__('Learn how to create a View and how to display it in the complete %sViews Guide%s', 'wpv-views'),
+                         '<a target=_"blank" href="http://wp-types.com/documentation/user-guides/views/">',
+                         ' &raquo;</a>'); ?>
+           
+        <?php
+        
+    }
+
 
     /**
      * save the view settings.
@@ -327,30 +414,30 @@ class WP_Views_plugin extends WP_Views {
         switch ($screen_id) {
             case 'edit-view-template':
                 $help = '<p>'.__("Create <strong>View Templates</strong> and attach them to content types to display content in complex ways. You can read more detail about View Templates on our website:",'wpv-views');
-                $help .= '<br /><a href="http://wp-types.com/user-guides/view-templates/">http://wp-types.com/user-guides/view-templates/</a></p>';
+                $help .= '<br /><a href="http://wp-types.com/user-guides/view-templates/" target="_blank">http://wp-types.com/user-guides/view-templates/ &raquo;</a></p>';
                 $help .= '<p>'.__("On this page you have the following options:", 'wpv-views').'</p>';
                 $help .= '<ul><li>'.__("<strong>Add New</strong> – create a new View Template", 'wpv-views').'</li></ul>';
                 $help .= '<p>'.__("Hover over the name of your View Template to get additional options:", 'wpv-views').'</p>';
                 $help .= '<ul><li>'.__("<strong>Edit:</strong> Click to Edit the View Template", 'wpv-views').'</li>';
                 $help .= '<li>'.__("<strong>Quick Edit:</strong> click to get quick editing options for the View Template, such as title, slug and date", 'wpv-views').'</li>';
                 $help .= '<li>'.__("<strong>Trash:</strong> Move the View Template to Trash", 'wpv-views').'</li></ul>';
-                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
+                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
                 break;
             
             case 'view-template':
                 $help = '<p>'.__("Use this page to create and edit <strong>View Templates</strong>. For more information about View Templates visit the user guide on our website:", 'wpv-views');
-		$help .= '<br /><a href="http://wp-types.com/user-guides/view-templates/">http://wp-types.com/user-guides/view-templates/</a></p>';
+		$help .= '<br /><a href="http://wp-types.com/user-guides/view-templates/" target="_blank">http://wp-types.com/user-guides/view-templates/ &raquo;</a></p>';
                 $help .= '<p>'.__("To Create a View Template", 'wpv-views').'</p>';
                 $help .= '<ol><li>'.__("Add a Title", 'wpv-views').'</li>';
                 $help .= '<li>'.__("Add shortcodes to the body. You can find these by clicking on the “V” icon", 'wpv-views').'</li>';
                 $help .= '<li>'.__("Use HTML mode to style your content (we recommend keeping your styles in style.css or another external stylesheet rather than including them inline)", 'wpv-views').'</li>';
                 $help .= '</ol>';
-                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
+                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
                 break;
             
             case 'edit-view':
                 $help = '<p>'.__("Use <strong>Views</strong> to filter and display lists in complex and interesting ways. Read more about Views in our user guide:",'wpv-views');
-                $help .= '<br /><a href="http://wp-types.com/user-guides/views/">http://wp-types.com/user-guides/views/</a></p>';
+                $help .= '<br /><a href="http://wp-types.com/user-guides/views/" target="_blank">http://wp-types.com/user-guides/views/ &raquo;</a></p>';
                 $help .= '<p>'.__("This page gives you an overview of the Views you have created.", 'wpv-views').'</p>';
                 $help .= '<p>'.__("It has the following options:", 'wpv-views').'</p>';
                 $help .= '<ul><li>'.__("<strong>Add New</strong>: Add a New View", 'wpv-views').'</li></ul>';
@@ -358,12 +445,12 @@ class WP_Views_plugin extends WP_Views {
                 $help .= '<ul><li>'.__("<strong>Edit</strong>: Click to edit the View<br />\n", 'wpv-views').'</li>';
                 $help .= '<li>'.__("<strong>Quick Edit</strong>: click to get quick editing options for the View, such as title, slug and date", 'wpv-views').'</li>';
                 $help .= '<li>'.__("<strong>Trash</strong>: Move the View to Trash", 'wpv-views').'</li></ul>';
-                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
+                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
                 break;
             
             case 'view':
                 $help = '<p>'.__("Use this page to create and edit your <strong>Views</strong>. You can read more about creating Views in our user guide:",'wpv-views');
-                $help .= '<br /><a href="http://wp-types.com/user-guides/views/">http://wp-types.com/user-guides/views/</a></p>';
+                $help .= '<br /><a href="http://wp-types.com/user-guides/views/" target="_blank">http://wp-types.com/user-guides/views/ &raquo;</a></p>';
                 $help .= '<p>'.__("To Create a View:", 'wpv-views').'</p>';
                 $help .= '<ol><li>'.__("Add a Title for your View.", 'wpv-views').'</li>';
                 $help .= '<li>'.__("Leave the shortcodes that are in your text area. These are for filtering and displaying your content.", 'wpv-views').'</li>';
@@ -372,7 +459,7 @@ class WP_Views_plugin extends WP_Views {
                 $help .= '<li>'.__("View Query &gt; View/Edit HTML : fine tune the HTML for your query.", 'wpv-views').'</li>';
                 $help .= '<li>'.__("View Layout: Choose your layout.", 'wpv-views').'</li>';
                 $help .= '<li>'.__("View Layout &gt; View/Edit HTML: use addition CSS and HTML to control how your View is displayed.", 'wpv-views').'</li></ol>';
-                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
+                $help .= '<p>'.sprintf(__("If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>.", 'wpv-views'), WPV_SUPPORT_LINK).'</p>';
                 break;
                 
         }

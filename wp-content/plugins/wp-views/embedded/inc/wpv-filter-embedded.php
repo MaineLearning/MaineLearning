@@ -98,13 +98,18 @@ function wpv_filter_shortcode_start($atts){
         
         // add a hidden input for the current page.
         $page = '1';
-        if (isset($_GET['wpv_paged'])) {
+        if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && $_GET['wpv_view_count'] == $WP_Views->get_view_count()) {
             $page = $_GET['wpv_paged'];
         }
         $out .= '<input id="wpv_paged-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged" value="' . $page . '">' . "\n";
         $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($WP_Views->get_max_pages()) . '">' . "\n";
         
         $out .= '<input id="wpv_widget_view-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_widget_view_id" value="' . intval($WP_Views->get_widget_view_id()) . '">' . "\n";
+        $out .= '<input id="wpv_view_count-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_count" value="' . $WP_Views->get_view_count() . '">' . "\n";
+
+        $view_data = $WP_Views->get_view_shortcodes_attributes();
+        //$view_data['view_id'] = $WP_Views->get_current_view();
+        $out .= '<input id="wpv_view_hash-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_hash" value="' . base64_encode(serialize($view_data)) . '">' . "\n";
     
         // Output the current page ID. This is used for ajax call back in pagination.
         $current_post = $WP_Views->get_top_current_page();
@@ -267,7 +272,7 @@ function wpv_found_count($atts){
 /**
  * Views-Shortcode: wpv-posts-found
  *
- * Description: The [wpv-posts-found] shortcode will display the text inside
+ * Description: The wpv-posts-found shortcode will display the text inside
  * the shortcode if there are posts found by the Views query.
  * eg. [wpv-posts-found]<strong>Some posts were found</strong>[/wpv-posts-found]
  *
@@ -298,7 +303,7 @@ function wpv_posts_found($atts, $value){
 /**
  * Views-Shortcode: wpv-no-posts-found
  *
- * Description: The [wpv-no-posts-found] shortcode will display the text inside
+ * Description: The wpv-no-posts-found shortcode will display the text inside
  * the shortcode if there are no posts found by the Views query.
  * eg. [wpv-no-posts-found]<strong>No posts found</strong>[/wpv-no-posts-found]
  *

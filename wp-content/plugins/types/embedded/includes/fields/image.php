@@ -174,6 +174,18 @@ function wpcf_fields_image_editor_callback() {
             __('Right', 'wpcf') => 'right',
         ),
     );
+    $form['class'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Class', 'wpcf'),
+        '#name' => 'class',
+        '#value' => isset($last_settings['class']) ? $last_settings['class'] : '',
+    );
+    $form['style'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Style', 'wpcf'),
+        '#name' => 'style',
+        '#value' => isset($last_settings['style']) ? $last_settings['style'] : '',
+    );
 
     if (!in_array($post_type, array('view', 'view-template'))) {
         $attributes_outsider = $image_data['is_outsider'] ? array('disabled' => 'disabled') : array();
@@ -322,6 +334,12 @@ function wpcf_fields_image_editor_submit() {
     if (!empty($_POST['alignment'])) {
         $add .= ' align="' . $_POST['alignment'] . '"';
     }
+    if (!empty($_POST['class'])) {
+        $add .= ' class="' . $_POST['class'] . '"';
+    }
+    if (!empty($_POST['style'])) {
+        $add .= ' style="' . $_POST['style'] . '"';
+    }
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);
@@ -341,6 +359,7 @@ function wpcf_fields_image_view($params) {
     $alt = false;
     $title = false;
     $class = array();
+    $style = array();
 
     // Get image data
     $image_data = wpcf_fields_image_get_data($params['field_value']);
@@ -353,14 +372,6 @@ function wpcf_fields_image_view($params) {
         }
         return $params['field_value'];
     }
-    //if (!$image_data['is_outsider']) {
-    //    if (current_user_can('administrator')) {
-    //        return '<div style="padding:10px;background-color:Red;color:#FFFFFF;">'
-    //                . 'Types: ' . sprintf(__('Directory %s not writable', 'wpcf'),
-    //                        $image_data['abspath']) . '</div>';
-    //    }
-    //    return $params['field_value'];
-    //}
 
     // Set alt
     if (isset($params['alt'])) {
@@ -382,16 +393,34 @@ function wpcf_fields_image_view($params) {
         $class[] = 'align' . $params['align'];
     }
 
+    if (!empty($params['class'])) {
+        $class[] = $params['class'];
+    }
+    if (!empty($params['style'])) {
+        $style[] = $params['style'];
+    }
+
     // Pre-configured size (use WP function)
     if ($image_data['is_attachment'] && !empty($params['size'])) {
-        $output = wp_get_attachment_image($image_data['is_attachment'],
-                $params['size'], false,
-                array(
-            'class' => implode(' ', $class),
-            'alt' => $alt,
-            'title' => $title
-                )
-        );
+        if (isset($params['url']) && $params['url'] == 'true') {
+            $image_url = wp_get_attachment_image_src($image_data['is_attachment'],
+                    $params['size']);
+            if (!empty($image_url[0])) {
+                $output = $image_url[0];
+            } else {
+                $output = $params['field_value'];
+            }
+        } else {
+            $output = wp_get_attachment_image($image_data['is_attachment'],
+                    $params['size'], false,
+                    array(
+                'class' => implode(' ', $class),
+                'style' => implode(' ', $style),
+                'alt' => $alt,
+                'title' => $title
+                    )
+            );
+        }
     } else { // Custom size
         $width = !empty($params['width']) ? intval($params['width']) : null;
         $height = !empty($params['height']) ? intval($params['height']) : null;
@@ -444,6 +473,9 @@ function wpcf_fields_image_view($params) {
         } else {
             $resized_image = $params['field_value'];
         }
+        if (isset($params['url']) && $params['url'] == 'true') {
+            return $resized_image;
+        }
         $output = '<img alt="';
         $output .= $alt !== false ? $alt : $resized_image;
         $output .= '" title="';
@@ -451,6 +483,7 @@ function wpcf_fields_image_view($params) {
         $output .= '"';
         $output .=!empty($params['onload']) ? ' onload="' . $params['onload'] . '"' : '';
         $output .=!empty($class) ? ' class="' . implode(' ', $class) . '"' : '';
+        $output .=!empty($style) ? ' style="' . implode(' ', $style) . '"' : '';
         $output .= ' src="' . $resized_image . '" />';
     }
 
@@ -559,6 +592,27 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     $cached[$cache_key]['abspath'] = $image_abspath;
 
     return $return == 'relpath' ? $image_relpath : $image_abspath;
+}
+
+function is__writable($path) {
+//will work in despite of Windows ACLs bug
+//NOTE: use a trailing slash for folders!!!
+//see http://bugs.php.net/bug.php?id=27609
+//see http://bugs.php.net/bug.php?id=30931
+
+    if ($path{strlen($path) - 1} == '/') // recursively return a temporary file path
+        return is__writable($path . uniqid(mt_rand()) . '.tmp');
+    else if (is_dir($path))
+        return is__writable($path . '/' . uniqid(mt_rand()) . '.tmp');
+    // check tmp file for read/write capabilities
+    $rm = file_exists($path);
+    $f = @fopen($path, 'a');
+    if ($f === false)
+        return false;
+    fclose($f);
+    if (!$rm)
+        unlink($path);
+    return true;
 }
 
 /**

@@ -105,7 +105,7 @@ if(is_admin()){
         return $td;
     }
     
-    function wpv_get_filter_search_summary($view_settings) {
+    function wpv_get_filter_search_summary_text($view_settings, $short=false) {
         
         ob_start();
         
@@ -113,19 +113,42 @@ if(is_admin()){
             case 'specific':
                 $term = $view_settings['post_search_value'];
                 if ($term == '') {
-                    $term = '<i>' . __('None set', 'wpv-view') . '</i>';
+                    $term = '<i>' . __('None set', 'wpv-views') . '</i>';
                 }
-                echo sprintf(__('Filter by this search term: <strong>%s</strong>.', 'wpv-view'), $term);
+                if($short) {
+					echo sprintf(__('Filter by <strong>search</strong> term: <strong>%s</strong>', 'wpv-views'), $term);
+				} else {
+					echo sprintf(__('Filter by this search term: <strong>%s</strong>.', 'wpv-views'), $term);
+				}
                 break;
             
             case 'visitor':
-                echo __('Show a <strong>search box</strong> for vistors.', 'wpv-view');
+                if ($short) {
+					echo __('Show a <strong>search box</strong> for vistors', 'wpv-views');
+				} else {
+					echo __('Show a <strong>search box</strong> for vistors.', 'wpv-views');
+				}
                 break;
             
             case 'manual':
-                echo __('The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>.', 'wpv-view');
+				if ($short) {
+					echo __('Filter by <strong>search box</strong>', 'wpv-views');
+				} else {
+					echo __('The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>.', 'wpv-views');
+				}
                 break;
         }
+        $data = ob_get_clean();
+        
+        return $data;
+        
+    }
+	
+    function wpv_get_filter_search_summary($view_settings) {
+        
+        ob_start();
+		
+		echo wpv_get_filter_search_summary_text($view_settings);
         ?>
         <br />
         <input class="button-secondary" type="button" value="<?php echo __('Edit', 'wpv-views'); ?>" name="<?php echo __('Edit', 'wpv-views'); ?>" onclick="wpv_show_filter_search_edit('wpv-filter-search', 'post_search_value', 'search_mode')"/>
@@ -214,17 +237,17 @@ if(is_admin()){
             case 'specific':
                 $term = $view_settings['taxonomy_search_value'];
                 if ($term == '') {
-                    $term = '<i>' . __('None set', 'wpv-view') . '</i>';
+                    $term = '<i>' . __('None set', 'wpv-views') . '</i>';
                 }
-                echo sprintf(__('Filter by this search term: <strong>%s</strong>.', 'wpv-view'), $term);
+                echo sprintf(__('Filter by this search term: <strong>%s</strong>.', 'wpv-views'), $term);
                 break;
             
             case 'visitor':
-                echo __('Show a <strong>search box</strong> for vistors.', 'wpv-view');
+                echo __('Show a <strong>search box</strong> for vistors.', 'wpv-views');
                 break;
             
             case 'manual':
-                echo __('The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>.', 'wpv-view');
+                echo __('The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>.', 'wpv-views');
                 break;
         }
         ?>
@@ -331,4 +354,20 @@ function wpv_add_search_taxonomy($args) {
 	<?php
 }
 
+add_filter('wpv-view-get-summary', 'wpv_search_summary_filter', 5, 3);
+
+function wpv_search_summary_filter($summary, $post_id, $view_settings) {
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'posts' && isset($view_settings['search_mode'])) {
+		
+		$view_settings['search_mode'] = $view_settings['search_mode'][0];
+
+		$result = wpv_get_filter_search_summary_text($view_settings, true);
+		if ($result != '' && $summary != '') {
+			$summary .= '<br />';
+		}
+		$summary .= $result;
+	}
+	
+	return $summary;
+}
 

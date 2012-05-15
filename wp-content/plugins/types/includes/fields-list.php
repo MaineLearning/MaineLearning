@@ -14,7 +14,7 @@ function wpcf_admin_fields_list() {
         . __("Custom Fields (also known as post-meta) are information attached to WordPress posts. This data can then be queried and filtered in your database. With Types you can create Custom Field Groups which are then attached to any post type (including Posts, Pages and Custom Post Types) or taxonomy.",
                 'wpcf')
         . '<br /><br />'
-        . __('You can read more about Custom Fields in this tutorial: <a href="http://wp-types.com/user-guides/using-custom-fields/" target="_blank">http://wp-types.com/user-guides/using-custom-fields/</a>.',
+        . __('You can read more about Custom Fields in this tutorial: <a href="http://wp-types.com/user-guides/using-custom-fields/" target="_blank">http://wp-types.com/user-guides/using-custom-fields/ &raquo;</a>.',
                 'wpcf')
         . '</p>';
     }

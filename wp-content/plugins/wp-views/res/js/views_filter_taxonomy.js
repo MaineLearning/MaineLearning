@@ -15,16 +15,16 @@ function wvp_initialize_tax_relationship_select() {
                 relationship == "FROM ATTRIBUTE" ||
                 relationship == "FROM URL" ||
                 relationship == "FROM PARENT VIEW") {
-            jQuery('.wpv_taxonomy_relationship').next().hide();
+            jQuery(this).next().hide();
         } else {
-            jQuery('.wpv_taxonomy_relationship').next().show();
+            jQuery(this).next().show();
         }
 
         if (relationship == "FROM ATTRIBUTE" ||
                 relationship == "FROM URL") {
-            jQuery('.wpv_taxonomy_relationship').next().next().show();
+            jQuery(this).next().next().show();
         } else {
-            jQuery('.wpv_taxonomy_relationship').next().next().hide();
+            jQuery(this).next().next().hide();
         }
     });
     
@@ -82,6 +82,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
     var taxonomy_relationship = Array();
     var taxonomy_value = Array();
     var taxonomy_attribute_url = Array();
+    var taxonomy_attribute_url_format = Array();
     
     jQuery('select').each( function(index) {
         if (mode == 'add' || jQuery(this).is(":visible")) {
@@ -93,6 +94,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
 
                 // Add the attribute or url filter.
                 taxonomy_attribute_url.push(jQuery('input[name="_wpv_settings\\[taxonomy-' + name + '-attribute-url\\]"]').val());
+                taxonomy_attribute_url_format.push(jQuery('input[name="_wpv_settings\\[taxonomy-' + name + '-attribute-url-format\\]\\[\\]"]:checked').val());
 
                 if (name == 'category') {
                     name = 'post_category';
@@ -141,6 +143,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
 
         // Add the attribute or url filter.
         taxonomy_attribute_url.push(jQuery('input[name="tax_' + taxonomy_name[0] + '_attribute_url"]').val());
+        taxonomy_attribute_url_format.push(jQuery('input[name="tax-' + taxonomy_name[0] + '-attribute-url-format"]:checked').val());
 
     }
 
@@ -170,6 +173,7 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         taxonomy_relationship : taxonomy_relationship,
         taxonomys_relationship : taxonomys_relationship,
         taxonomy_attribute_url : taxonomy_attribute_url,
+        taxonomy_attribute_url_format : taxonomy_attribute_url_format,
         row : temp_index + 1,
         wpv_nonce : jQuery('#wpv_add_taxonomy_nonce').attr('value')
     };
@@ -300,6 +304,8 @@ function wpv_show_taxonomy_term_edit_ok() {
         jQuery('#wpv-filter-taxonomy-term-edit').hide();
         
     });
+
+	show_view_changed_message();
 
 }
 

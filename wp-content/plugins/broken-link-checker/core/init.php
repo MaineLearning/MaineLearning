@@ -108,6 +108,7 @@ $blc_config_manager = new blcConfigurationManager(
 												//recovered after this many days.
 												
 		'installation_complete' => false,
+		'user_has_donated' => true,   //Whether the user has donated to the plugin.
    )
 );
 

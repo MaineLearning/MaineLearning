@@ -175,7 +175,7 @@ jQuery(window).load(function(){
         var height = jQuery(this).height();
         var screenHeight = jQuery(window).height();
         var offset = jQuery(this).offset();
-        
+
         if (offset.top+height > screenHeight) {
             var resizedHeight = Math.round(screenHeight-offset.top-20);
             if (resizedHeight < 200) {
@@ -189,6 +189,14 @@ jQuery(window).load(function(){
             jQuery(this).find('.direct-links').hide();
             jQuery(this).find('.editor-addon-link-to-top').hide();
         }
+
+		// make sure the popup is not to wide.		
+        var screenWidth = jQuery(window).width();
+        if (offset.left + width > screenWidth) {
+			jQuery(this).css('width', screenWidth - offset.left - 20 + 'px');
+		}
+        
+		
     //        jQuery(this).find('.scroll').jScrollPane();
     });
     // For hidden in Meta HTML set scroll when visible

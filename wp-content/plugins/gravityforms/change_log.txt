@@ -1,26 +1,50 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.3.4
-    - Updated Auto-format option on the notification page so that it is always visible.
+Version 1.6.4.2.1
+    - Fixed issue with short codes being executed when processing the post content template
 
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.3.3
-    - Fixed issue with gform_get_input_value being fired inconsistently for leads with long text
+Version 1.6.4.2
+    - Fixed issue with website validation not allowing port numbers to be entered
+    - Added override for jQuery "prop" method which defaults to using attr if prop not available
+    - Updated AJAX .submit() call, removing extra event data parameter that caused a conflict with some scripts
+    - Fixed issue with field calculation not taking fields hidden by conditional logic into account
+    - Moved Cardholder name under the expiration date on credit card fields
+    - Fixed issue with post image size merge tag drop down not saving its value properly
+    - Fixed issue where field calculations were not triggering conditional logic
+    - Fixed issue with {all_fields} displaying duplicate values
+    - Fixed issue with No conflict mode not enqueueing gravityforms.js on the form editor
+    - Updated Single Product field so that the field label is changed to match the pre-populated product name
+    - Fixed issue with Forms menu overriding other custom post type menus
+    - Fixed issue where number fields in HTML where chocking on comma-formatted numbers
+    - Fixed issue on form editor for forms that had hidden product fields
 
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.3.2
-    - Fixed issue with form editor creating javascript errors on sites with older versions of jQuery
+Version 1.6.4.1
+    - Fixed issue with conditional logic throwing a javascript error.
+    - Fixed issue with price calculation rounding
 
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.3.1
-    - Fixed issue causing post body to be cut off when typing greek text in a post body field.
-    - Added gform_entry_detail hook
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.3
-    - Fixed conflict with jQuery on IE 7 causing option pricing to be displayed on product (i.e. non-option) fields
+Version 1.6.4
+    - Fixed issue with notification failing when a comma separated list of emails was entered with spaces in between emails
+    - Fixed quantity validation so that it does not allow decimals.
+    - Fixed issue with chosen script not being enqueued properly when form had conditional logic
+    - Fixed validation issue with quantity field that didn't honor the min/max setting
+    - Removed "Enable calculation" option from quantity field
+    - Added step='any' attribute to number inputs when HTML5 is enabled
+    - Fixed javascript error on AJAX forms with credit card field
+    - Added id attribute to anchor
+    - Fixed issue with the WordPress HTTPS plugin integration
+    - Added new entry information fields to the entry export field list
+    - Updated conditional logic and merge tag drop downs so that a width is specified instead of truncating the value
+    - Fixed issue on notification merge tag drop down wrapping to next line when field labels were long
+    - Fixed issue with hidden product not taking quantity into account when calculating total
+    - Fixed issue with hidden product field preventing quantity from being populated dynamically
+    - Fixed issue with entry detail page not loading the entry that was clicked on entry list page
+    - Updated inline js so that it is now "enqueued" and consolidated into a single script block tied to the 'gform_post_render' event
     - Fixed admin display issue with the bulk-add modal panel in Chrome
-    - Fixed conflict with jQuery on IE 8 causing total to be doubled up
-	- Fixed warnings when nl2br used on array
+    - Fixed warnings when nl2br used on array
+    - Added new choices for conditional routing to administrator notifications (greater than, less than, contains, starts with, ends with)
+    - Updated notification wysiwyg styles in admin
     - Fixed issue with form editor not allowing users to uncheck the "Set as Post Image" checkbox
     - Fixed issue where errors would be displayed when a "starts with" conditional logic was configured without the actual "starts with" value
     - Fixed issue with quantity field being recorded as . when a value is not entered
@@ -30,28 +54,35 @@ Version 1.6.3.3
         function set_page_size($page_size, $form_id){
             return 50; //sets page size to 50
         }
-    - Fixed issue with conditional logic when using post category fields that were configured to display all categories
-    - Added javascript hook to allow option price to be manipulated or disabled
-        <script type="text/javascript">
-            function gform_format_option_label(full_label, field_label, price_label, selected_price, price, form_id, field_id){
-                //disabling option price
-                return field_label;
-            }
-        </script>
+    - Updated the form editor so that the max characters option on single input field is hidden when input mask is enabled
+    - Updated checkbox field so that it can be pre-populated using an array in addition to a comma separated list
+    - Fixed notice for $read_only variable
+    - Fixed notice for postStatus
+    - Added support for calculations in Number field
+    - Added Calculation product type
+    - Added [gravityforms action="conditional"] shortcode
+    - Added support for showing lead on entry detail when LID or POS are passed. Always third parties to link directly to leads.
+    - Implemented support for {Product Name:1:qty} merge tag to allow the quantity of product fields to be returned via a merge tag
+    - Fixed issue with {all_fields} merge tag when using post category fields as target of conditional logic
+    - Added filter to allow changes to the recaptcha init screen
+        add_filter("gform_recaptcha_init_script", "custom_translation", 10, 3);
+        function custom_translation($script, $form_id, $field){
+            $script = 'RecaptchaOptions.custom_translations = {
+                                instructions_visual : "Scrivi le due parole:",
+                                instructions_audio : "Trascrivi ci\u00f2 che senti:",
+                                play_again : "Riascolta la traccia audio",
+                                cant_hear_this : "Scarica la traccia in formato MP3",
+                                visual_challenge : "Modalit\u00e0 visiva",
+                                audio_challenge : "Modalit\u00e0 auditiva",
+                                refresh_btn : "Chiedi due nuove parole",
+                                help_btn : "Aiuto",
+                                incorrect_try_again : "Scorretto. Riprova.",
+                        }';
+            return $script;
 
-    - Fixed issue with gravityforms.js not being enqueued on forms with conditional logic
-    - Fixed issue with duplicate field feature when field has a double quote in the description
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.2.1
-    - Fixed issue with wrongly named form table
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.6.3.2
-    - Fixed issue with dbDelta causing errors when trying to update the database tables on case sensitive database servers
-    - Fixed issue with conditional logic displaying wrong fields in the admin
-    - Fixed issue with form redirect not url encoding the total field properly
-    - Fixed XSS vulnerability with the "Other" radio button input and one of the AJAX hidden fields
+        }
+    - Added support for {Total:1:price} merge tag to allow total to be formatted numerically
+    - Fixed issue of no results displayed when viewing a form that has a paged entry list and switching to a form that does not
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.3.1.2
@@ -59,7 +90,6 @@ Version 1.6.3.1.2
 	- Fixed issue with entry list throwing database errors when sorting while filtering by starred or unread
     - Fixed javascript error on form editor for IE7/8
     - Fixed issue with entry detail page displaying an error when query string "pos" wasn't specified.
-    - Fixed issue with text counter being displayed multiple times when more than one form is embeded on a page
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.3.1.1
@@ -70,6 +100,7 @@ Version 1.6.3.1.1
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.3.1
     - Fixed bug with conditional logic when applied to checkboxes
+    - Fixed issue where entry limit
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.3

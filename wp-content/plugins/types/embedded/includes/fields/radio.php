@@ -42,7 +42,8 @@ function wpcf_fields_radio_meta_box_form($field) {
         }
     }
     
-    if (!empty($field['value'])) {
+    if (!empty($field['value'])
+            || ($field['value'] === 0 || $field['value'] === '0')) {
         $default_value = $field['value'];
     }
 
@@ -170,7 +171,8 @@ function wpcf_fields_radio_view($params) {
                 return htmlspecialchars_decode($params['#content']);
             }
         }
-        return ' ';
+//        return ' ';
+        return '__wpcf_skip_empty';
     }
 
     if (!empty($field['data']['options'])) {

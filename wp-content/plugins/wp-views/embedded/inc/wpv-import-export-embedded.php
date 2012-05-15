@@ -39,7 +39,6 @@ function wpv_admin_import_form($file_name) {
 		
 		<input id="wpv-import" class="button-primary" type="submit" value="<?php _e('Import', 'wpv-views'); ?>" name="import" />
 		
-		<input type="hidden" name="post_type" value="view" />
 		<input type="hidden" name="page" value="views-import-export" />
 		<?php wp_nonce_field('wpv-import-nonce', 'wpv-import-nonce'); ?>
 
@@ -86,7 +85,11 @@ function wpv_admin_menu_import_export_hook() {
 function wpv_admin_import_data() {
     global $WP_Views;
 
-    $file = $_FILES['import-file'];
+    if (isset($_FILES['import-file'])) {
+		$file = $_FILES['import-file'];
+	} else {
+		$file = null;
+	}
 	
 	if ($file == null) {
 		// check for import from settings.xml in theme

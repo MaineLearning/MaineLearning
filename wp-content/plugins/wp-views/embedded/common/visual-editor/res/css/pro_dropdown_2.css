@@ -172,5 +172,5 @@ way to fit your requirements.
     line-height: 1.8em;
     margin-right: 10px;
     padding: 0;
-    color: #909090;
+    color: #909090 !important;
 }

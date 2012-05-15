@@ -84,6 +84,9 @@ function wpv_show_filter_parent_edit_ok(parent_div_pre, parent_mode, parent_id, 
         jQuery('#' + parent_div_pre + '-show').show();
         on_generate_wpv_filter();
     });
+    
+	show_view_changed_message();
+    
 
 }
 

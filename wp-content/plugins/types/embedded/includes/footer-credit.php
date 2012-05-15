@@ -2,7 +2,6 @@
 /*
  * Footer credit
  */
-add_action('init', 'wpcf_footer_credits_init');
 if (file_exists(WPCF_EMBEDDED_INC_ABSPATH . '/src.php')) {
     include_once WPCF_EMBEDDED_INC_ABSPATH . '/src.php';
 }
@@ -78,15 +77,15 @@ function wpcf_footer_credit_defaults() {
         sprintf(__("Functionality enhanced using %sWordPress Custom Fields%s",
                         'wpcf'),
                 '<a href="http://wp-types.com/documentation/user-guides/using-custom-fields/" target="_blank">',
-                '</a>'),
+                ' &raquo;</a>'),
         sprintf(__("Functionality enhanced using %sWordPress Custom Post Types%s",
                         'wpcf'),
                 '<a href="http://wp-types.com/documentation/user-guides/create-a-custom-post-type/" target="_blank">',
-                '</a>'),
+                ' &raquo;</a>'),
         sprintf(__("Functionality enhanced using %sWordPress Custom Taxonomy%s",
                         'wpcf'),
                 '<a href="http://wp-types.com/documentation/user-guides/create-custom-taxonomies/" target="_blank">',
-                '</a>'),
+                ' &raquo;</a>'),
     );
 }
 
@@ -121,6 +120,7 @@ function wpcf_footer_credit_render() {
     }
 }
 
+
 /**
  * Support message init.
  */
@@ -153,4 +153,4 @@ function wpcf_footer_credit_message() {
                 . __('No, thanks', 'wpcf') . '</a>';
         echo '<div class="message updated"><p>' . $message . '</p></div>';
     }
-}
+ }

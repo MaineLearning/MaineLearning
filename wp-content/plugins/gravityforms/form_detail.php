@@ -53,12 +53,16 @@ class GFFormDetail{
             wp_print_styles(array("thickbox"));
         }
 
-        wp_register_script("rg_currency", GFCommon::get_base_url() . "/js/gravityforms.js", null, GFCommon::$version);
-        wp_print_scripts(array("jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","sack", "rg_currency"));
+        wp_register_script("gforms_gravityforms", GFCommon::get_base_url() . "/js/gravityforms.js", null, GFCommon::$version);
+        wp_print_scripts(array("jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","sack", "gforms_gravityforms"));
 
+        require_once(GFCommon::get_base_path() . '/currency.php');
         ?>
-
         <script type="text/javascript">
+            var gf_global = {
+                "gf_currency_config" : <?php echo json_encode(RGCurrency::get_currency(GFCommon::get_currency()));?>
+            };
+
             var gf_vars = {
                 "save": "<?php _e("Save", "gravityforms") ?>",
                 "update": "<?php _e("Update", "gravityforms") ?>",
@@ -176,12 +180,19 @@ class GFFormDetail{
             .field_type input{
                 width:100px;
             }
+
             .description-list { margin: 10px 0; padding: 0 20px; }
             .description-list li { padding: 0; list-style: disc; overflow: visible; }
             .custom_mask_instructions h5 { margin: 0 0 4px; font-size: 11px; }
             .custom_mask_instructions span.label { font-size: 11px; display: -moz-inline-stack; display: inline-block; zoom: 1; *display: inline;
                 width: 80px; }
             .custom_mask_instructions li { margin: 0 0 14px; }
+
+            .gf_calculation_buttons { float: right; margin-right: 55px; }
+            .gf_calculation_buttons input[type=button]{ width: 22px; float: left; }
+            #field_calculation_formula_variable_select { width: 150px; }
+            #calculation_options p { margin: 0 0 14px; padding: 0; }
+
         </style>
 
         <?php
@@ -788,6 +799,7 @@ class GFFormDetail{
                                     <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                     <option value="price"><?php _e("User Defined Price", "gravityforms"); ?></option>
                                     <option value="hiddenproduct"><?php _e("Hidden", "gravityforms"); ?></option>
+                                    <option value="calculation"><?php _e("Calculation", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -1900,9 +1912,77 @@ class GFFormDetail{
                                 </div>
                                 <br class="clear" />
                             </li>
+
                             <?php
                             do_action("gform_field_standard_settings", 1550, $form_id);
                             ?>
+
+                            <li class="calculation_setting field_setting">
+
+                                <div class="field_enable_calculation">
+                                    <input type="checkbox" id="field_enable_calculation" onclick="ToggleCalculationOptions(this.checked, field);" />
+                                    <label for="field_enable_calculation" class="inline">
+                                        <?php _e("Enable Calculation", "gravityforms"); ?>
+                                        <?php gform_tooltip("form_field_enable_calculation") ?>
+                                    </label>
+                                </div>
+
+                                <div id="calculation_options" style="display:none;margin-top:10px;">
+
+                                    <label for="field_calculation_formula">
+                                        <?php _e("Formula", "gravityforms"); ?>
+                                        <?php gform_tooltip("form_field_calculation_formula") ?>
+                                    </label>
+                                    <div>
+                                        <?php GFCommon::insert_calculation_variables($form["fields"], "field_calculation_formula", '', 'FormulaContentCallback'); ?>
+                                        <div class="gf_calculation_buttons">
+                                            <?php foreach(array('+', '-', '/', '*', '(', ')', '.') as $button) { ?>
+                                                <input type="button" value=" <?php echo $button; ?> " onclick="InsertVariable('field_calculation_formula', 'FormulaContentCallback', this.value);" />
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <textarea id="field_calculation_formula" onkeyup="SetFieldProperty('calculationFormula', this.value);" class="fieldwidth-3 fieldheight-2"></textarea>
+
+                                    <div id="forumla_instructions" style="display:none;">
+                                        <div class="forumla_instructions">
+
+                                            <h4><?php _e("Usage", "gravityforms") ?></h4>
+                                            <ul class="description-list">
+                                                <li><?php _e("Use a <em>'9'</em> to indicate a numerical character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use a lower case <em>'a'</em> to indicate an alphabetical character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use an asterick <em>'*'</em> to indicate any alphanumeric character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use a question mark <em>'?'</em> to indicate optional characters. <em>Note:</em> All characters after the question mark will be optional.", "gravityforms") ?></li>
+                                                <li><?php _e("All other characters are literal values and will be displayed automatically.", "gravityforms") ?></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="field_calculation_rounding">
+                                        <label for="field_calculation_formula" style="margin-top:10px;">
+                                            <?php _e("Rounding", "gravityforms"); ?>
+                                            <?php gform_tooltip("form_field_calculation_rounding") ?>
+                                        </label>
+                                        <select id="field_calculation_rounding" onchange="SetFieldProperty('calculationRounding', this.value);">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="norounding">Do not round</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <br class="clear" />
+
+                            </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 1600, $form_id);
+                            ?>
+
                             <li class="rules_setting field_setting">
                                 <?php _e("Rules", "gravityforms"); ?><br/>
                                 <input type="checkbox" id="field_required" onclick="SetFieldRequired(this.checked);"/>
@@ -2383,7 +2463,6 @@ class GFFormDetail{
         return $children;
     }
 
-
     private static function insert_variable_prepopulate($element_id, $callback=""){
         ?>
         <select id="<?php echo $element_id?>_variable_select" onchange="InsertVariable('<?php echo $element_id?>', '<?php echo $callback?>'); ">
@@ -2551,8 +2630,9 @@ class GFFormDetail{
         $id = rgpost("objectType") . "_rule_value_" . rgpost("ruleIndex");
         $selected = rgempty("selectedValue") ? 0 : rgpost("selectedValue");
 
-        $dropdown = wp_dropdown_categories(array("class"=>"gfield_rule_select gfield_rule_value_dropdown gfield_category_dropdown", "id"=> $id, "selected"=>$selected, "hierarchical"=>true, "hide_empty"=>0, "echo"=>false));
+        $dropdown = wp_dropdown_categories(array("class"=>"gfield_rule_select gfield_rule_value_dropdown gfield_category_dropdown", "orderby"=> "name", "id"=> $id, "selected"=>$selected, "hierarchical"=>true, "hide_empty"=>0, "echo"=>false));
         die($dropdown);
     }
 }
+
 ?>

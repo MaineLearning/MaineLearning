@@ -83,7 +83,6 @@ class WPCF_Custom_Fields_Control_Table extends WP_List_Table
                     );
                 }
             } else {
-                // @todo not working
                 if (wpcf_types_cf_under_control('check_exists',
                                 $type_data->meta_key)) {
                     unset($cf_other[$type_id]);
@@ -252,7 +251,7 @@ class WPCF_Custom_Fields_Control_Table extends WP_List_Table
         return $actions;
     }
 
-    function view_switcher() {
+    function view_switcher($current_mode = '') {
         echo '<div style="clear:both; margin: 20px 0 10px 0; float: right;"><a class="button button-secondary" href="';
         if (empty($_GET['display_all'])) {
             echo esc_url($_SERVER['REQUEST_URI']) . '&amp;display_all=1">' . __('Display all items',

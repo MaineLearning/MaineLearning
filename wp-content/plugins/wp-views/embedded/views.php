@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '0.9.4.2');
+define('WPV_VERSION', '1.0');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -50,6 +50,10 @@ require WPV_PATH_EMBEDDED . '/inc/wpv-filter-search-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-status-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-parent-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-types-embedded.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-relationship-embedded.php';
+
+
+require WPV_PATH_EMBEDDED . '/inc/wpv-user-functions.php';
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-widgets.php';
 
@@ -114,9 +118,8 @@ function wpv_promote_views_admin() {
             echo "</ul>\n";
         }
     ?>
-    <p><?php echo sprintf(__('If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from <a href="%s">%s</a>', 'wpv-views'),
-                            'http://wp-types.com/' . $affiliate_url,
-                            'http://wp-types.com/'); ?></p>
+    <p><?php echo sprintf(__('If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from %s', 'wpv-views'),
+                            '<a href="http://wp-types.com/' . $affiliate_url . '" target="_blank">http://wp-types.com/ &raquo;</a>'); ?></p>
     
     <?php
     

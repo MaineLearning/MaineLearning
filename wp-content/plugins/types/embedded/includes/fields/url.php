@@ -33,6 +33,9 @@ function wpcf_fields_url_view($params) {
     if (!empty($params['class'])) {
         $add .= ' class="' . $params['class'] . '"';
     }
+    if (!empty($params['style'])) {
+        $add .= ' style="' . $params['style'] . '"';
+    }
     $output = '<a href="' . $params['field_value'] . '"' . $add . '>'
             . $title . '</a>';
     return $output;
@@ -42,6 +45,7 @@ function wpcf_fields_url_view($params) {
  * Editor callback form.
  */
 function wpcf_fields_url_editor_callback() {
+    $last_settings = wpcf_admin_fields_get_field_last_settings($_GET['field_id']);
     $form = array();
     $form['#form']['callback'] = 'wpcf_fields_url_editor_submit';
     $form['title'] = array(
@@ -49,6 +53,19 @@ function wpcf_fields_url_editor_callback() {
         '#title' => __('Title', 'wpcf'),
         '#description' => __('If set, this text will be displayed instead of raw data'),
         '#name' => 'title',
+        '#value' => isset($last_settings['title']) ? $last_settings['title'] : '',
+    );
+    $form['class'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Class', 'wpcf'),
+        '#name' => 'class',
+        '#value' => isset($last_settings['class']) ? $last_settings['class'] : '',
+    );
+    $form['style'] = array(
+        '#type' => 'textfield',
+        '#title' => __('Style', 'wpcf'),
+        '#name' => 'style',
+        '#value' => isset($last_settings['style']) ? $last_settings['style'] : '',
     );
     $form['submit'] = array(
         '#type' => 'submit',
@@ -72,10 +89,16 @@ function wpcf_fields_url_editor_submit() {
     if (!empty($_POST['title'])) {
         $add .= ' title="' . strval($_POST['title']) . '"';
     }
-    $add .= ' class=""';
+    if (!empty($_POST['class'])) {
+        $add .= ' class="' . $_POST['class'] . '"';
+    }
+    if (!empty($_POST['style'])) {
+        $add .= ' style="' . $_POST['style'] . '"';
+    }
     $field = wpcf_admin_fields_get_field($_GET['field_id']);
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);
+        wpcf_admin_fields_save_field_last_settings($_GET['field_id'], $_POST);
         echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
         die();
     }

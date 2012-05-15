@@ -19,8 +19,9 @@ function wpcf_admin_help($page, $contextual_help) {
                     . __("Custom Fields (also known as post-meta) are information attached to WordPress posts. This data can then be queried and filtered in your database. With Types you can create Custom Field Groups which are then attached to any post type (including Posts, Pages and Custom Post Types) or taxonomy.",
                             'wpcf')
                     . '<br /><br />'
-                    . __('You can read more about Custom Fields in this tutorial: <a href="http://wp-types.com/user-guides/using-custom-fields/" target="_blank">http://wp-types.com/user-guides/using-custom-fields/</a>.',
-                            'wpcf')
+                    . sprintf(__('You can read more about Custom Fields in this tutorial: %s.', 
+                            'wpcf'),
+                              '<a href="http://wp-types.com/user-guides/using-custom-fields/" target="_blank">http://wp-types.com/user-guides/using-custom-fields/ &raquo;</a>')
                     . '<br /><br />'
                     . __("On this page you can see your current custom field groups, as well as information about which post types and taxonomies they are attached to, and whether they are active or not.",
                             'wpcf')
@@ -45,8 +46,8 @@ function wpcf_admin_help($page, $contextual_help) {
         case 'custom_types_and_taxonomies':
             $help .= __('Custom Post Types are user-defined content types. Custom Taxonomies are used to categorize your content.',
                             'wpcf')
-                    . ' ' . __('You can read more about Custom Post Types and Taxonomies in this tutorial. <a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/</a>',
-                            'wpcf')
+                    . ' ' . sprintf(__('You can read more about Custom Post Types and Taxonomies in this tutorial. %s',
+                            'wpcf'), '<a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/ &raquo;</a>')
                     . '<br /><br />'
                     . __('This is the main admin page for your Custom Post Types and Taxonomies. It provides you with an overview of your data.',
                             'wpcf')
@@ -97,8 +98,8 @@ function wpcf_admin_help($page, $contextual_help) {
             $help .= __('This is the edit page for your Custom Fields Groups.',
                             'wpcf')
                     . '<br />'
-                    . __('You can read more about creating a Custom Fields Group here: <a href="http://wp-types.com/user-guides/using-custom-fields/">http://wp-types.com/user-guides/using-custom-fields/</a>',
-                            'wpcf')
+                    . sprintf(__('You can read more about creating a Custom Fields Group here: %s',
+                            'wpcf'), '<a href="http://wp-types.com/user-guides/using-custom-fields/" target="_blank">http://wp-types.com/user-guides/using-custom-fields/ &raquo;</a>')
                     . '<br /><br />'
                     . __('On this page you can create and edit your groups. To create a group, do the following:',
                             'wpcf')
@@ -127,7 +128,7 @@ function wpcf_admin_help($page, $contextual_help) {
 
         // Add/Edit custom type form page
         case 'edit_type':
-            $help .= __('Use this page to create a WordPress post type. If you’d like to learn more about Custom Post Types you can read our detailed guide: <a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/</a> or check out our tutorial on creating them with Types: <a href="http://wp-types.com/user-guides/create-a-custom-post-type/" target="_blank">http://wp-types.com/user-guides/create-a-custom-post-type/</a>',
+            $help .= __('Use this page to create a WordPress post type. If you’d like to learn more about Custom Post Types you can read our detailed guide: <a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/</a> or check out our tutorial on creating them with Types: <a href="http://wp-types.com/user-guides/create-a-custom-post-type/" target="_blank">http://wp-types.com/user-guides/create-a-custom-post-type/ &raquo;</a>',
                             'wpcf')
                     . '<br /><br />'
                     . '<strong>' . __('Name and Description', 'wpcf') . '</strong>'
@@ -169,7 +170,7 @@ function wpcf_admin_help($page, $contextual_help) {
 
         // Add/Edit custom taxonomy form page
         case 'edit_tax':
-            $help .= __('You can use Custom Taxonomies to categorize your content. Read more about what they are on our website: <a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/</a> or you can read our guide about how to set them up: <a href="http://wp-types.com/user-guides/create-custom-taxonomies/" target="_blank">http://wp-types.com/user-guides/create-custom-taxonomies/</a>',
+            $help .= __('You can use Custom Taxonomies to categorize your content. Read more about what they are on our website: <a href="http://wp-types.com/learn/custom-post-types/" target="_blank">http://wp-types.com/learn/custom-post-types/ &raquo;</a> or you can read our guide about how to set them up: <a href="http://wp-types.com/user-guides/create-custom-taxonomies/" target="_blank">http://wp-types.com/user-guides/create-custom-taxonomies/</a>',
                             'wpcf')
                     . '<br /><br />'
                     . '<strong>' . __('Name and Description', 'wpcf') . '</strong>'

@@ -66,25 +66,43 @@ if(is_admin()){
         
         return $td;
     }
-    
-    function wpv_get_filter_status_summary($selected) {
+
+    function wpv_get_filter_status_summary_text($selected, $short=false) {
         ob_start();
         
         if (sizeof($selected)) {
-            _e('Select posts with status of ', 'wpv-view');
+			if ($short) {
+				_e('status of ', 'wpv-views');
+			} else {
+				_e('Select posts with status of ', 'wpv-views');
+			}
             $first = true;
             foreach($selected as $value) {
                 if ($first) {
                     echo '<strong>' . $value . '</strong>';
                     $first = false;
                 } else {
-                    _e(' or ', 'wpv-view');
+                    _e(' or ', 'wpv-views');
                     echo '<strong>' . $value . '</strong>';
                 }
             }
         } else {
-            _e('Select posts with any status.', 'wpv-view');
+			if ($short) {
+				_e('any status.', 'wpv-views');
+			} else {
+				_e('Select posts with any status.', 'wpv-views');
+			}
         }
+        $data = ob_get_clean();
+        
+        return $data;
+        
+    }
+    
+    function wpv_get_filter_status_summary($selected) {
+        ob_start();
+
+		echo wpv_get_filter_status_summary_text($selected);        
         ?>
         <br />
         <input class="button-secondary" type="button" value="<?php echo __('Edit', 'wpv-views'); ?>" name="<?php echo __('Edit', 'wpv-views'); ?>" onclick="wpv_show_filter_status_edit()"/>
@@ -95,6 +113,22 @@ if(is_admin()){
         return $data;
         
     }
+    
+    add_filter('wpv-view-get-summary', 'wpv_status_summary_filter', 5, 3);
+
+	function wpv_status_summary_filter($summary, $post_id, $view_settings) {
+		if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'posts' && isset($view_settings['post_status'])) {
+			$selected = $view_settings['post_status'];
+			
+			$result = wpv_get_filter_status_summary_text($selected, true);
+			if ($result != '' && $summary != '') {
+				$summary .= '<br />';
+			}
+			$summary .= $result;
+		}
+		
+		return $summary;
+	}
     
 }
 

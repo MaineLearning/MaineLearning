@@ -4,36 +4,36 @@ function wpv_filter_order_by_admin_summary($view_settings) {
     $view_settings = wpv_order_by_default_settings($view_settings);
     switch($view_settings['orderby']) {
         case 'post_date':
-            $order_by = __('post date', 'wpv-view');
+            $order_by = __('post date', 'wpv-views');
             break;
         
         case 'post_title':
-            $order_by = __('post title', 'wpv-view');
+            $order_by = __('post title', 'wpv-views');
             break;
         
         case 'ID':
-            $order_by = __('post ID', 'wpv-view');
+            $order_by = __('post ID', 'wpv-views');
             break;
         
         case 'menu_order':
-            $order_by = __('menu order', 'wpv-view');
+            $order_by = __('menu order', 'wpv-views');
             break;
         
         case 'rand':
-            $order_by = __('random order', 'wpv-view');
+            $order_by = __('random order', 'wpv-views');
             break;
             
         default:
             $order_by = str_replace('field-', '', $view_settings['orderby']);
-            $order_by = sprintf(__('Field - %s', 'wpv-view'), $order_by);
+            $order_by = sprintf(__('Field - %s', 'wpv-views'), $order_by);
             break;
         
     }
-    $order = __('descending', 'wpv-view');
+    $order = __('descending', 'wpv-views');
     if ($view_settings['order'] == 'ASC') {
-        $order = __('ascending', 'wpv-view');
+        $order = __('ascending', 'wpv-views');
     }
-    echo sprintf(__(', ordered by <strong>%s</strong>, <strong>%s</strong>', 'wpv-view'), $order_by, $order);
+    echo sprintf(__(', ordered by <strong>%s</strong>, <strong>%s</strong>', 'wpv-views'), $order_by, $order);
     
 }
 
@@ -62,7 +62,7 @@ function wpv_filter_order_by_admin($view_settings) {
                         foreach ($cf_keys as $key) {
                             $selected = $view_settings['orderby'] == "field-" . $key ? ' selected="selected"' : '';
                             $option = '<option value="field-' . $key . '"' . $selected . '>';
-                            $option .= sprintf(__('Field - %s', 'wpv-view'), $key);
+                            $option .= sprintf(__('Field - %s', 'wpv-views'), $key);
                             $option .= '</option>';
                             echo $option;
                         }
@@ -82,4 +82,18 @@ function wpv_filter_order_by_admin($view_settings) {
 
     <?php
 }
+
+add_filter('wpv-view-get-content-summary', 'wpv_order_summary_filter', 5, 3);
+
+function wpv_order_summary_filter($summary, $post_id, $view_settings) {
+	if(!isset($view_settings['query_type']) || (isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'posts')) {
+		ob_start();
+		wpv_filter_order_by_admin_summary($view_settings);
+		$summary .= ob_get_contents();
+		ob_end_clean();
+	}
+	
+	return $summary;
+}
+
 

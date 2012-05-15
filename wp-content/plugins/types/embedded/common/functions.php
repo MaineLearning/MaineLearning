@@ -171,7 +171,7 @@ function wpv_condition($atts) {
     // replace all variables with their values listed as shortcode parameters
     if($count && $count > 0) {
     	// sort array by length desc, fix str_replace incorrect replacement
-    	wpv_sort_matches_by_length(&$matches[1]);
+    	$matches[1] = wpv_sort_matches_by_length($matches[1]);
     	
 	    foreach($matches[1] as $match) {
             $meta = get_post_meta($post->ID, $atts[$match], true);
@@ -223,6 +223,8 @@ function wpv_sort_matches_by_length($matches) {
 		$matches[$i] = $matches[$max_index];
 		$matches[$max_index] = $temp;
 	}
+	
+	return 	$matches;
 	
 }
 

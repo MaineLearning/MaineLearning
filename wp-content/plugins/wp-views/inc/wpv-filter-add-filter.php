@@ -7,7 +7,6 @@
  */
 
 function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'popup_add_filter', $button_text = '', $filter_type = 'wpv_add_filters', $show = true) {
-
     if ($button_text == '') {
         $button_text = __('Add another filter term', 'wpv-views');
     }

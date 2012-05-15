@@ -558,16 +558,18 @@ function SetDefaultValues(field){
             field.label = "<?php _e("Captcha", "gravityforms"); ?>";
 
             break;
+        case "calculation" :
+            field.enableCalculation = true;
         case "singleproduct" :
         case "product" :
         case "hiddenproduct" :
             field.label = '<?php _e("Product Name", "gravityforms")?>';
             field.inputs = null;
-
+            
             if(!field.inputType)
                 field.inputType = "singleproduct";
 
-            if(field.inputType == "singleproduct" || field.inputType == "hiddenproduct"){
+            if(field.inputType == "singleproduct" || field.inputType == "hiddenproduct" || field.inputType == "calculation"){
                 field.inputs = [new Input(field.id + 0.1, '<?php echo __("Name", "gravityforms"); ?>'), new Input(field.id + 0.2, '<?php echo __("Price", "gravityforms"); ?>'), new Input(field.id + 0.3, '<?php echo __("Quantity", "gravityforms"); ?>')];
                 field.enablePrice = null;
             }
@@ -595,7 +597,7 @@ function SetDefaultValues(field){
             field.inputs = null;
 
             break;
-
+            
         case "option" :
              field.label = '<?php _e("Option", "gravityforms")?>';
 
@@ -651,7 +653,7 @@ function SetDefaultValues(field){
                 field.numberFormat = "decimal_dot";
 
             break;
-
+        
         <?php do_action('gform_editor_js_set_default_values'); ?>
 
         default :
@@ -827,7 +829,7 @@ function CreateConditionalLogic(objectType, obj){
         var startsWithSelected = obj.conditionalLogic.rules[i].operator == "starts_with" ? "selected='selected'" :"";
         var endsWithSelected = obj.conditionalLogic.rules[i].operator == "ends_with" ? "selected='selected'" :"";
 
-        str += "<div style='width:100%'>" + GetRuleFields(objectType, i, obj.conditionalLogic.rules[i].fieldId);
+        str += "<div width='100%'>" + GetRuleFields(objectType, i, obj.conditionalLogic.rules[i].fieldId);
         str += "<select id='" + objectType + "_rule_operator_" + i + "' onchange='SetRuleProperty(\"" + objectType + "\", " + i + ", \"operator\", jQuery(this).val());'><option value='is' " + isSelected + "><?php _e("is", "gravityforms") ?></option><option value='isnot' " + isNotSelected + "><?php _e("is not", "gravityforms") ?></option><option value='>' " + greaterThanSelected + "><?php _e("greater than", "gravityforms") ?></option><option value='<' " + lessThanSelected + "><?php _e("less than", "gravityforms") ?></option><option value='contains' " + containsSelected + "><?php _e("contains", "gravityforms") ?></option><option value='starts_with' " + startsWithSelected + "><?php _e("starts with", "gravityforms") ?></option><option value='ends_with' " + endsWithSelected + "><?php _e("ends with", "gravityforms") ?></option></select>";
         str += GetRuleValues(objectType, i, obj.conditionalLogic.rules[i].fieldId, obj.conditionalLogic.rules[i].value);
         str += "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='add another rule' alt='add another rule' style='cursor:pointer; margin:0 3px;' onclick=\"InsertRule('" + objectType + "', " + (i+1) + ");\" />";

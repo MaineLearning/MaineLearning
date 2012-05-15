@@ -235,6 +235,8 @@
                         Added friendly hint to try out the new beta
  2010-09-19     3.2.6   Removed YAHOO ping since YAHOO uses bing now
                         Removed deprecated function call
+ 2012-04-24     3.2.7   Fixed custom post types, thanks to clearsite of the wordpress.org forum!
+                        Fixed broken admin layout on WP 3.4
 
  Maybe Todo:
  ==============================================================================
@@ -243,7 +245,7 @@
  
  License:
  ==============================================================================
- Copyright 2005 - 2009 ARNE BRACHHOLD  (email : himself - arnebrachhold - de)
+ Copyright 2005 - 2012 ARNE BRACHHOLD  (email : himself - arnebrachhold - de)
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

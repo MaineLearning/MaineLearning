@@ -3,7 +3,7 @@ Contributors: wpmuguru
 Tags: privacy, plugin, wordpress, network 
 Requires at least: 3.3
 Tested up to: 3.3.1
-Stable tag: trunk
+Stable tag: 0.1.3
 
 Adds more privacy options to both single Wordpress sites and WordPress networks.
 
@@ -44,6 +44,9 @@ Support can be obtained through:
 
 == Changelog ==
 
+= 0.1.3 =
+* Fix bug in "Network Users" option
+
 = 0.1.2 =
 * update to be compatible with WP 3.3
 * remove Edit site option due to hook changes in WP
@@ -54,3 +57,7 @@ Support can be obtained through:
 = 0.1 =
 * Original version.
 
+== Upgrade Notice ==
+
+= 0.1.3 =
+This update should repair the bug in the "Network Users Only" privacy option

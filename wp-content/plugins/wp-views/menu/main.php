@@ -1,7 +1,7 @@
 <div class="wrap">
 
     <div id="icon-views" class="icon32"><br /></div>
-    <h2><?php _e('Views subscription', 'sitepress') ?></h2>
+    <h2><?php _e('Views subscription', 'wpv-views') ?></h2>
 
     <?php
     
@@ -35,7 +35,7 @@
         // TODO Why use json decode?
         //$args->installed = json_encode($installed);
         $args->installed = $installed;
-        
+
         $plugin_info = get_views_plugin_page(0, 'support_information', $args);
         if (isset($plugin_info->subscription['after'])
                 && function_exists('is_multisite')
@@ -57,12 +57,12 @@
         <table class="form-table icl-account-setup">
             <tbody>
                 <tr class="form-field">
-                    <th scope="row"><?php _e('wp-types.com subscription email', 'sitepress'); ?></th>
+                    <th scope="row"><?php _e('wp-types.com subscription email', 'wpv-views'); ?></th>
                     <td><input name="sub[subscription_email]" type="text" value="<?php echo isset($_POST['sub']['subscription_email']) ? $_POST['sub']['subscription_email'] : 
                         isset($options['subscription_email']) ? $options['subscription_email'] : ''; ?>" /></td>
                 </tr>
                 <tr class="form-field">
-                    <th scope="row"><?php _e('wp-types.com subscription key', 'sitepress'); ?></th>
+                    <th scope="row"><?php _e('wp-types.com subscription key', 'wpv-views'); ?></th>
                     <td><input name="sub[subscription_key]" type="password" value="<?php echo isset($_POST['sub']['subscription_key']) ? $_POST['sub']['subscription_key'] :
                         isset($options['subscription_key']) ? $options['subscription_key'] : ''; ?>" /></td>
                 </tr>
@@ -71,9 +71,9 @@
         </table>
         <p class="submit">
             <input type="hidden" name="save_sub" value="1" />
-            <input class="button" name="save sub" value="<?php _e('Save subscription details', 'sitepress'); ?>" type="submit" />
+            <input class="button" name="save sub" value="<?php _e('Save subscription details', 'wpv-views'); ?>" type="submit" />
         </p>
-        <div class="wpv_progress" style="display:none;"><?php _e('Saving. Please wait...', 'sitepress'); ?></div>
+        <div class="wpv_progress" style="display:none;"><?php _e('Saving. Please wait...', 'wpv-views'); ?></div>
 
         <?php @printf($plugin_info->subscription['after']); ?>
 

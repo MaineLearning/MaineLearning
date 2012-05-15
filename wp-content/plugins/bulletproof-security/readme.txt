@@ -4,27 +4,34 @@ Donate link: http://www.ait-pro.com/aitpro-blog/331/bulletproof-security-plugin-
 Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability
 Requires at least: 3.0 
 Tested up to: 3.4 
-Stable tag: .46.9 
+Stable tag: .47.1 
 
 WordPress Website Security Protection. Website security protection against: XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking... 
 
 == Description ==
 
-WordPress Website Security Protection: BulletProof Security protects your WordPress website against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts. One-click .htaccess WordPress security protection. Protects wp-config.php, bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. One-click Website Maintenance Mode (HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
+WordPress Website Security Protection: BulletProof Security protects your WordPress website against XSS, RFI, CRLF, CSRF, Base64, 
+Code Injection and SQL Injection hacking attempts. One-click .htaccess WordPress security protection. Protects wp-config.php, 
+bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. One-click Website Maintenance Mode 
+(HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, 
+Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
+
+BulletProof Security uses .htaccess website security files, which are specific to Apache Linux Servers.
+Please read the FAQ page for Server compatibility questions. 
 
 The BulletProof Security WordPress Security plugin is designed to be a fast, simple and one click security plugin to 
-add .htaccess website security protection for your WordPress website. Activate .htaccess website security and .htaccess
- website under maintenance modes from within your WordPress Dashboard - no FTP required. The BulletProof Security 
- WordPress plugin is a one click security solution that creates, copies, renames, moves or writes to the provided 
- BulletProof Security .htaccess master files. BulletProof Security protects both your Root website folder and wp-admin 
- folder with .htaccess website security protection, as well as providing additional website security protection.
+add .htaccess website security protection for your WordPress website. Activate .htaccess website security and .htaccess 
+website under maintenance modes from within your WordPress Dashboard - no FTP required. The BulletProof Security 
+WordPress plugin is a one click security solution that creates, copies, renames, moves or writes to the provided 
+BulletProof Security .htaccess master files. BulletProof Security protects both your Root website folder and wp-admin 
+folder with .htaccess website security protection, as well as providing additional website security protection.
 
 BulletProof Security allows you to add .htaccess website security protection from within the WordPress Dashboard so 
 that you do not have to access your website via FTP or your Web Host Control Panel in order to add website security 
-protection for your WordPress site. BulletProof Security Modes: Root .htaccess security protection, wp-admin .htaccess
- security protection, Deny All .htaccess self protection, WordPress default .htaccess mode and .htaccess Maintenance 
- Mode (503 Website Under Maintenance). In BulletProof Security Mode your WordPress website is protected from XSS, RFI,
- CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts.
+protection for your WordPress site. BulletProof Security Modes: Root .htaccess security protection, wp-admin .htaccess 
+security protection, Deny All .htaccess self protection, WordPress default .htaccess mode and .htaccess Maintenance 
+Mode (503 Website Under Maintenance). In BulletProof Security Mode your WordPress website is protected from XSS, RFI, 
+CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts.
 
 BPS Maintenance Mode allows you to create your custom website under maintenance page within BulletProof Security 
 and activate Maintenance Mode to put your website in maintenance mode. Maintenance Mode allows website developers or
@@ -33,12 +40,15 @@ all other visitors to the website. Allow access to your WordPress Dashboard for 
 addresses to allow mulitple IP addresses access to your WP Dashboard while in maintenance mode.
 
 WordPress is already very secure, but every website, no matter what type of platform it is built on should
-be using a secure .htaccess file as a standard website security measure. BulletProof Security provides the additional website
- security measures and protection that every website should have.
+have additional website security measures in place as a standard. BulletProof Security provides that additional website
+ security protection that every website should have.
+ 
+= Translations =
+If you would like to translate the BPS plugin to your language see this <a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" title="BPS Plugin Language Translation Tutorial" rel="nofollow" target="_blank">BPS Plugin Language Translation Tutorial</a>). Please include a link to your website so that we can add it here. Thank you.
 
 * One-click .htaccess website security protection from within the WP Dashboard
-* Secure .htaccess protection blocks XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts
-* Permanent online .htaccess file backup and restore
+* Secure .htaccess protection against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts
+* .htaccess file backup and restore
 * Built-in File Editing, File Downloading and File Uploading
 * Custom Code feature that permanently saves and writes your personal custom .htaccess code
 * WordPress readme.html and /wp-admin/install.php protected with .htaccess security protection
@@ -47,10 +57,10 @@ be using a secure .htaccess file as a standard website security measure. BulletP
 * WordPress database errors turned off - Verification and function insurance
 * WordPress version is not displayed / not shown - WordPress version is removed
 * WP Generator Meta Tag filtered - not displayed / not shown
-* The Administrator username “admin” check - check WP DB for admin username
+* WP DB default admin username / account check
 * System Information Page: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload...
 * Security Status Page - Displays website security status information
-* File and Folder Permission Checking - CGI / DSO SAPI check and display
+* File and Folder Permission Checking - CGI / DSO SAPI check / display
 * Help & FAQ page - links to BPS Guide and other detailed Help & Info pages
 * Extensive Read Me! jQuery Dialog Help Windows throughout the BulletProof Security plugin pages
 * Backup and Restore existing .htaccess files
@@ -61,6 +71,7 @@ be using a secure .htaccess file as a standard website security measure. BulletP
 * Log in / out of your website while in Maintenance Mode
 * Customizable 503 Website Under Maintenance page
 * HUD Success / Error message display
+* i18n Language Translation coding
 
 == Installation ==
 
@@ -77,76 +88,113 @@ be using a secure .htaccess file as a standard website security measure. BulletP
 
 The BulletProof Security Plugin allows you to instantly create and activate .htaccess website security with 
 one click (ok maybe a few clicks) for your website without having to know anything about .htaccess files. The Master 
-.htaccess files are pre-made and BPS writes .htaccess code specific to your website. There is nothing to figure out 
-or to configure. Click the AutoMagic buttons and Activate BulletProof Modes. BPS has built-in Backup and Restore and 
-an .htaccess File Editor for full manual editing control as well. Website security fast and simple. Enjoy!
+.htaccess files are pre-made and BPS writes .htaccess code that is customized for your website. There is nothing to figure out 
+or to configure. Click the AutoMagic buttons (creates customized Master .htaccess files) and Activate BulletProof Modes (copies 
+the customized Master .htaccess files to your root and wp-admin folders). BPS has built-in Backup and Restore and 
+an .htaccess File Editor for full manual editing control as well. BulletProof Website Security fast and simple. Enjoy!
 
-= Are there any known conflicts with other WordPress Plugins or Themes? =
+= Do I need to understand .htaccess code in order to use the BulletProof Security Plugin? =
 
-Yep here and there issues do pop up with plugins, but they are always quickly resolved in minutes.
-Please check the BulletProof Security <a href="http://www.ait-pro.com/aitpro-blog/2252/bulletproof-security-plugin-support/checking-plugin-compatibility-with-bps-plugin-testing-to-do-list/" title="BPS Plugin Testing and Fixes" rel="nofollow" target="_blank">Plugin Compatibility Testing and Fixes</a> page
- for any new fixes that are not yet included in the most current version of BPS. Typically a simple .htaccess skip rule is all 
- that is required to fix any plugin conflict issues.
+No, The .htaccess file creation is automated in BulletProof Security. Everything is automatically done for you.
+You do not need to know or understand anything about .htaccess website security files in order to use the 
+BulletProof Security plugin.
+
+= What do I do if I cannot log back into my website? =
+
+If you accidentally activated BulletProof Modes without first clicking the AutoMagic buttons or if you put your 
+website in Maintenance Mode and your IP address has been changed by your ISP and you cannot log back into 
+your website then you will need to use FTP or your Web Host Control Panel File Manager and delete the .htaccess file 
+that BPS created in your website root folder. BPS website security is done purely with .htaccess website security
+and nothing else is modified on your website. So simply deleting the .htaccess file in your website root folder
+removes BPS website security and will allow you to log back in, use the AutoMagic buttons and activate 
+BulletProof Mode again to protect your website again.
+
+= Does BulletProof Security work on every type of Server? =
+
+BulletProof Security uses .htaccess website security files, which are specific to Apache Linux Servers.
+
+= Does BulletProof Security Work on Windows IIS Servers? =
+
+Yes and No. .htaccess files are only used on Linux based hosting. You can install BulletProof Security if you have a Windows IIS
+hosted website to use the additional features in BPS, but you cannot Activate BulletProof Modes and use .htaccess files on Windows Hosting.
+Please see this WordPress Codex <a href="http://codex.wordpress.org/Using_Permalinks#Permalinks_without_mod_rewrite" title="Permalinks without mod_rewrite" target="_blank">Permalinks without mod_rewrite</a> for more information.
+
+= Does BulletProof Security Work on Nginx Servers? =
+
+If you are using both Apache and Nginx together and Nginx is the frontend webserver and Apache is the backend Server
+used to process PHP then BulletProof Security will work on this type of combined Server Configuration. If you are only
+using Nginx then an .htaccess file will not work. Nginx has its own rewrite module - HttpRewriteModule and the mod_rewrite equivalent
+of an .htaccess file has similar, but different coding and is added to an Nginx Server config file.
+Note: If you are not familiar with Nginx, then it should be noted that Nginx does not have a PHP module like apache’s mod_php, 
+instead you either need to build PHP with FPM (ie: php-fpm/fastcgi), or you need to pass the request to something that can handle PHP.
+
+= Are there any known issues or conflicts with other WordPress Plugins or Themes? =
+
+Occaisonally issues or conflicts do occur with other plugins, but they are always quickly resolved. BPS is compatible with all
+other Plugins and Themes. An .htaccess bypass / skip rule is all that is required to allow a plugin to do something that is blocked by BPS.
+Please check the BulletProof Security <a href="http://www.ait-pro.com/aitpro-blog/2252/bulletproof-security-plugin-support/checking-plugin-compatibility-with-bps-plugin-testing-to-do-list/" title="BPS Plugin Testing and Fixes" rel="nofollow" target="_blank">Plugin Compatibility Testing and Fixes</a> page for the latest plugin bypass / skip rules.
 
 = What is the difference between BulletProof Security free and BulletProof Security Pro? =
 
-BulletProof Security free provides .htaccess protection against browser based hacking attempts: XSS, RFI, CRLF, CSRF, Base64, 
+BulletProof Security free provides .htaccess website security protection against browser based hacking attempts: XSS, RFI, CRLF, CSRF, Base64, 
 Code Injection and SQL Injection hacking attempts. It is recommended that you additionally add a secure custom php.ini, log 
-PHP errors, lock ALL WordPress Mission Critical files and add HTTP error logging for your website. BulletProof Security Pro 
-contains the same secure .htaccess files as the free version and includes secure custom php.ini files, logs PHP errors, locks 
-ALL WordPress Mission Critical files on the fly and has built-in HTTP error logging to log 400, 403 and 404 errors that occur 
-on your website. BPS Pro 5.1.5 has the first generation of AutoRestore Countermeasure security for automatic file restoring.
-
-= Is BulletProof Security automatically setup already? =
-
-Yes and No. You must be using a WordPress Custom Permalink structure for BPS to work correctly (every WordPress site should be anyway).
- If you are not using a custom Permalink structure then you will get a warning message that Custom Permalinks need to be enabled when you
- access the BulletProof Security Options page. BulletProof Security includes AutoMagic Master .htaccess file creation so that only one 
- click is required to automatically create your Master .htaccess security files for your website, which you then Activate - BulletProof Mode. 
- BulletProof Security also offers full manual control of editing the .htaccess files using the built-in File Editor. BulletProof Security 
- is designed with everyone in mind: regular folks, Designers, Developers and Coders. BulletProof Security is designed to work with every 
- type of WordPress installation: Single websites, subfolder websites, subdomain websites, "Giving WordPress its Own Directory" websites, 
- Network / MU subdirectory websites and Network / MU subdomain websites. BulletProof Security will automatically create the correct Master 
- .htaccess files for your website when you click the AutoMagic buttons. If you prefer to do everything manually then you would edit your 
- .htaccess using the built-in .htaccess File Editor instead of using Automagic to automatically create your .htaccess files.
-
-= Can I add my own .htaccess code to the BulletProof Security .htaccess files? =
-
-Yes. Of course. The secure.htaccess and wpadmin-secure.htaccess Master .htaccess files already contain 
- .htaccess security code that protects your website against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts. 
- Add any additional security filters or other .htaccess code to your Master .htaccess files or your currently active .htaccess files using 
- the built-in .htaccess File Editor. The BulletProof Security Master .htaccess files contain help info and additional options within the 
- the .htaccess files themselves. htaccess files can do a lot of neat things besides just providing website security protection. As of 
- version .46.9 you can now also add any custom code to the Custom Code feature. Your custom .htaccess code will be saved to your WP DB
- permanently until you delete it. Please view the Read Me Help button in Custom Code for specific details.
-
-= Does the BulletProof Security Plugin create or write the .htaccess files? =
-
-Yes. BulletProof Security has full AutoMagic capability and automatically creates the .htaccess files for your webiste. BulletProof
-Security also offers full manual control of editing both the BPS Master .htaccess files and your currently active .htaccess files using 
-the built-in .htaccess File Editor. The BPS Master .htaccess files have already been pre-made. When you click the AutoMagic buttons your 
-.htaccess Master files are created with specific code for your specific website with the correct RewriteRule and RewriteBase automatically added 
-to your .htaccess files. You can add additional code to the master .htaccess files, edit the .htaccess files or create completely new .htaccess 
-master files from within the WordPress Dashboard using the built-in BPS File Editor - no FTP required - no Web Host Control Panel required. 
- BPS could also just be used simply as an online .htaccess file editor and manager. AutoMagic is great, but having both AutoMagic and full manual
-  editing control makes BulletProof Security a very versatile website security protection tool.
-  
-= Does BulletProof Security Work on Windows IIS Hosting? =
-
-Yes and No. .htaccess files are only used on Linux based hosting. You can install BulletProof Security if you have a Windows IIS
-hosted website to use the additional features in BPS, but you cannot Activate BulletProof Modes or use .htaccess files on Windows Hosting. 
-At some point in the future additional coding will be added just for Windows IIS websites.
+PHP errors, lock ALL WordPress Mission Critical files and add Security logging and HTTP error logging for your website. BulletProof Security Pro 
+contains the same secure .htaccess website security files, includes a custom php.ini file maker / creator, includes AutoRestore - automatic 
+file restoring, includes F-Lock - lock all WordPress Mission Critical files from within your WordPress Dashboard, includes a PHP Error Log and has 
+built-in Security logging and HTTP 400, 403 and 404 error logging. BPS Pro files are automatically updated during the one click upgrade installation. 
+When you perform the one click BPS Pro upgrade your currently active htaccess files will be automatically updated to your current new version 
+of BPS Pro automatically. BPS Pro also has Advanced Real-Time Alerts - BPS Pro checks and displays error, warning, notifications and alert messages 
+in real time. You can choose how you want these messages displayed to you with S-Monitor Monitoring & Alerting Options - Display in your WP Dashboard, 
+BPS Pro pages only, Turned off, Email Alerts, Logging... BPS Pro also has Pro-Tools, which is a set of versatile website tools that perform tasks 
+such as searching your entire website in one click for a particular string or code anywhere throughout all of your website files in one search, 
+decoding or encoding base64 code, replacing or removing a particular string or code anywhere throughout all of your files simultaneously, 
+searching your entire WordPress Database with one click for a particular string or code anywhere throughout all of database tables simultaneously, 
+DNS Finder, DB Table Cleaner...
 
 = Is BulletProof Security Network / MU / Multisite Compatible? =
 
 Yes. BulletProof Security contains AutoMagic buttons for Network /  MU / Multisite websites. Both sub-directory and sub-domain Master .htaccess 
 code is written / created for your specific Network / MU site. BulletProof Modes should only be Activated on the Primary site. All sub sites 
 are virtual and there is no need to Activate BulletProof Modes on sub sites. This will actually screw up your Primary site. BPS allows only 
-Super Admins to see the BPS menus in sub sites.
+Super Admins to see the BPS menus in sub sites. BPS also works with Network / MU Domain Mapping.
 
 = Is BulletProof Security Compatible with subdomain websites and subdirectory websites? =
 
-Yes. BulletProof Security works on all types of WordPress installations including "Giving WordPress Its Own Directory" websites.
+Yes, BulletProof Security works on all types of WordPress installations including "Giving WordPress Its Own Directory" websites.
+
+= Is BulletProof Security automatically setup already? =
+
+Yes and No. You must be using a WordPress Custom Permalink structure for BPS to work correctly (every WordPress site should be anyway). If 
+you are not using a custom Permalink structure then you will get a warning message that Custom Permalinks need to be enabled when you access 
+the BulletProof Security Options page. BulletProof Security includes AutoMagic Master .htaccess file creation so that only one click is 
+required to automatically create your Master .htaccess security files for your website, which you then Activate - BulletProof Mode. 
+BulletProof Security also offers full manual control of editing the .htaccess files using the built-in File Editor. BulletProof Security is 
+designed with everyone in mind: regular folks, Designers, Developers and Coders. BulletProof Security is designed to work with every type 
+of WordPress installation: Single websites, subfolder websites, subdomain websites, "Giving WordPress its Own Directory" websites, 
+Network / MU subdirectory websites and Network / MU subdomain websites. BulletProof Security will automatically create the correct Master 
+.htaccess files for your website when you click the AutoMagic buttons. If you prefer to do everything manually then you would edit your 
+.htaccess using the built-in .htaccess File Editor instead of using Automagic to automatically create your .htaccess files.
+
+= Can I add my own .htaccess code to the BulletProof Security .htaccess files? =
+
+Yes. Of course. The secure.htaccess and wpadmin-secure.htaccess Master .htaccess files already contain .htaccess security code that protects 
+your website against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts. Add any additional security filters or 
+other .htaccess code to your Master .htaccess files or your currently active .htaccess files using the built-in .htaccess File Editor. The 
+BulletProof Security Master .htaccess files contain help info and additional options within the .htaccess files themselves. htaccess files 
+can do a lot of neat things besides just providing website security protection. As of version .46.9 you can now also add any custom code 
+to the Custom Code feature. Your custom .htaccess code will be saved to your WP DB permanently until you delete it. Please view the Read Me 
+Help button in Custom Code for specific details.
+
+= Does the BulletProof Security Plugin create or write the .htaccess files? =
+
+Yes, BulletProof Security creates customized .htaccess website security files with AutoMagic. BulletProof Security also offers full manual 
+control of editing both the BPS Master .htaccess files and your currently active .htaccess files using the built-in .htaccess File Editor. 
+The BPS Master .htaccess files have already been pre-made. When you click the AutoMagic buttons your .htaccess Master files are created with 
+specific code for your specific website with the correct RewriteRule and RewriteBase automatically added to your .htaccess files. You can 
+add additional code to the master .htaccess files, edit the .htaccess files or create completely new .htaccess master files from within the 
+WordPress Dashboard using the built-in BPS File Editor - no FTP required - no Web Host Control Panel required.  BPS could also just be used 
+simply as an online .htaccess file editor and manager. AutoMagic is great, but having both AutoMagic and full manual editing control makes 
+BulletProof Security a very versatile website security protection tool.
 
 == Screenshots ==
 
@@ -154,8 +202,21 @@ Yes. BulletProof Security works on all types of WordPress installations includin
 2. BulletProof Security Status page
 3. BulletProof File Editing, Uploading and Downloading
 
-
 == Changelog ==
+
+= .47.1 =
+* Security Patch - This is a patch version of BPS
+* An XSS vulnerability was found in BPS by SiNA Rabbani at packetstormsecurity.org
+* Sincere thanks to SiNA Rabbani for discovering this XSS vulnerability
+* Sincere thanks to Jon and Mark from WordPress.org as well for assistance
+
+= .47 =
+* View the Whats New page in BPS for the latest changes to BPS
+* No changes have been made to either the Root or wp-admin .htaccess files
+* i18n Language Translation Coding Added
+* Language Translation Tutorial link added to the Whats New page in BPS
+* Coding improvements / enhancements
+* Enjoy!
 
 = .46.9 =
 * Significant changes to both the Root and wp-admin .htaccess files
@@ -377,9 +438,10 @@ Create new Master .htaccess files with AutoMagic and activate all BulletProof Mo
 
 == Upgrade Notice ==
 
-* Significant changes to both the Root and wp-admin .htaccess files
-Create new Master .htaccess files with AutoMagic and activate all BulletProof Modes.
-* NEW Custom Code feature added to BPS
+* View the Whats New page in BPS for the latest changes to BPS
+* No changes have been made to either the Root or wp-admin .htaccess files
+* i18n Language Translation Coding Added
+* Language Translation Tutorial link added to the Whats New page in BPS
 * Coding improvements / enhancements
 * Enjoy!
 
@@ -391,16 +453,6 @@ the particular section or page of the BulletProof Security plugin that you are i
 Help and FAQ page contains links to Help pages that will load in a new browser tab so
 that you are not redirected away from your WordPress Dashboard. 
 
-What's New in .46.9
+What's New in .47.1
 
-* Significant changes to both the Root and wp-admin .htaccess files
-Create new Master .htaccess files with AutoMagic and activate all BulletProof Modes.
-
-* NEW Custom Code feature added
-Root .htaccess File Custom Code and AutoMagic: Any custom .htaccess code that you save here will be saved to your WP Database permanently and automatically be created in your Root .htaccess file when you click the Create secure.htaccess File AutoMagic button. wp-admin .htaccess File Custom Code: The wp-admin .htaccess File Custom Code feature works differently then the Root .htaccess Custom Code feature. The wp-admin .htaccess file does not use AutoMagic and your Custom Code is written directly to your wp-admin .htaccess file when you Activate BulletProof Mode for your wp-admin folder.
-
-* Coding improvements / enhancements
-Coding enhancements and improvements made throughout BPS Free.
-
-* BPS Pro 5.1.5
-The first generation of AutoRestore released in BPS Pro 5.1.5. BPS Pro 5.1.7 will have full site AutoRestore.
+* BPS Security Patch version

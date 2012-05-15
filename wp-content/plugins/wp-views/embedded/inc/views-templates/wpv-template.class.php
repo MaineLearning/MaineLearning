@@ -22,6 +22,8 @@ class WPV_template{
         add_action('wp_ajax_set_view_template', array($this, 'ajax_action_callback'));
         add_filter('the_content', array($this, 'the_content'), 1, 1);
         add_filter('the_content', array($this, 'restore_wpautop'), 999, 1);
+
+        add_filter('the_excerpt', array($this, 'the_excerpt_for_archives'), 1, 1);
         
         if(is_admin()){
             global $pagenow;
@@ -30,6 +32,9 @@ class WPV_template{
             if($pagenow == 'post.php' || $pagenow == 'post-new.php'){
                 add_action('admin_head', array($this,'post_edit_template_options'));            
                 add_action('admin_head', array($this,'post_edit_tinymce'));            
+	            add_action('admin_footer', array($this, 'hide_view_template_author'));
+				
+				add_action('admin_notices', array($this, 'show_admin_messages'));
 
 				// Post/page save actions
 				add_action('save_post', array($this,'save_post_actions'), 10, 2);
@@ -43,7 +48,7 @@ class WPV_template{
         
         
     }
-
+	
     function custom_field_translate_state($state, $field_name) {
         switch($field_name) {
             case '_views_template':
@@ -227,14 +232,55 @@ class WPV_template{
 	
     function the_content($content) {
         global $id, $post, $wpdb, $WP_Views, $wp_query, $wplogger;
+		
+		// core functions that we except calls from.
+		static $the_content_core = array('the_content', 'wpv_shortcode_wpv_post_body');
+		// known theme functions that we except calls from.
+		static $the_content_themes = array('wptouch_the_content');
 	
         $db = debug_backtrace();
 		
 		if (!isset($db[3]['function'])) {
 			return $content;
 		}
-		if ($db[3]['function'] != 'the_content' && $db[3]['function'] != 'wpv_shortcode_wpv_post_body') {
-			return $content;
+		
+		$function_ok = false;
+		if ($db[1]['function'] == 'the_excerpt_for_archives') {
+			$function_ok = true;
+		}
+		
+		if (!$function_ok) {
+			
+			if (in_array($db[3]['function'], $the_content_core)) {
+				$function_ok = true;
+			}
+		}
+
+		if (!$function_ok) {
+			
+			if (in_array($db[3]['function'], $the_content_themes)) {
+				$function_ok = true;
+			}
+		}
+		
+		if (!$function_ok) {
+			
+			$options = $WP_Views->get_options();
+			if (isset($options['wpv-theme-function'])) {
+				if (in_array($db[3]['function'], explode(',', str_replace(', ', ',', $options['wpv-theme-function'])))) {
+					$function_ok = true;
+				}
+			}
+
+			if (!$function_ok) {
+				// We don't except calls from the calling function.
+				if (current_user_can('administrator')) {
+					if (isset($options['wpv-theme-function-debug']) && $options['wpv-theme-function-debug']) {
+						$content = sprintf(__('<strong>View template debug: </strong>Calling function is <strong>%s</strong>', 'wpv-views'), $db[3]['function']) . '<br />' . $content;
+					}
+				}
+				return $content;
+			}
 		}
 		
 		
@@ -343,6 +389,47 @@ class WPV_template{
 		
 		return $content;
 	}
+	
+	/**
+	 * Handle the_excerpt filter when it's used in an archive loop
+	 *
+	 */
+	
+	function the_excerpt_for_archives($content) {
+		global $WP_Views, $post, $wp_query;
+		
+		static $view_options = null;
+		static $taxonomy_loop = null;
+		static $archive_loop = null;
+		if (!$view_options) {
+			$view_options = $WP_Views->get_options();
+						
+			if ( is_archive() ) {
+			
+				/* Taxonomy archives. */
+	
+				if ( is_tax() || is_category() || is_tag() ) {
+	
+					$term = $wp_query->get_queried_object();
+					$taxonomy_loop = 'views_template_loop_' . $term->taxonomy;
+	
+				} else if (is_post_type_archive($post->post_type)) {
+					$archive_loop = 'views_template_archive_for_' . $post->post_type;
+				}
+			}
+		}
+        
+		if ($taxonomy_loop && isset($view_options[$taxonomy_loop])) {
+			// this is a taxonomy loop. Get the view template using the_content function
+			$content = do_shortcode($this->the_content($content));
+		} else if ($archive_loop && isset($view_options[$archive_loop])) {
+			// this is an archive loop. Get the view template using the_content function
+			$content = do_shortcode($this->the_content($content));
+		} 
+		
+		return $content;	
+	}
+	
 	/**
 	 * If the post has a view template
 	 * add an view template edit link to post.
@@ -433,12 +520,17 @@ class WPV_template{
         $none->post_title = __('None', 'wpv-views');
         array_unshift($view_tempates_available, $none);
         
+//         echo "<pre>";
+//         var_dump($view_tempates_available);
+//         echo "</pre>";
+//         var_dump($template_selected);
+        
         foreach($view_tempates_available as $template) {
             if ($template_selected == $template->ID)
                 $selected = ' selected="selected"';
             else
                 $selected = '';
-            
+           
 			if ($template->post_title) {
 				$view_template .= '<option value="' . $template->ID . '"' . $selected . '>' . $template->post_title . '</option>';
 			} else {
@@ -448,5 +540,13 @@ class WPV_template{
         $view_template .= '</select>';
         
         return $view_template;
+	}
+	
+	function hide_view_template_author() {
+		
+	}
+	
+	function show_admin_messages() {
+		
 	}
 }

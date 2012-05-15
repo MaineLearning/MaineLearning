@@ -11,6 +11,7 @@ class GFEntryDetail{
         echo GFCommon::get_remote_message();
 
         $form = RGFormsModel::get_form_meta($_GET["id"]);
+        $lead_id = rgget('lid');
 
         $filter = rgget("filter");
         $status = in_array($filter, array("trash", "spam")) ? $filter : "active";
@@ -26,18 +27,8 @@ class GFEntryDetail{
         $star = $filter == "star" ? 1 : null;
         $read = $filter == "unread" ? 0 : null;
 
-        //added status as an optional parameter to get_lead_count because the counts are inaccurate without using the status
+        // added status as an optional parameter to get_lead_count because the counts are inaccurate without using the status
        	$lead_count = RGFormsModel::get_lead_count($form['id'], $search, $star, $read, null, null, $status);
-
-        $lead = RGFormsModel::get_leads($form['id'], $sort_field, $sort_direction, $search, $position, 1, $star, $read, $is_numeric, null, null, $status);
-        $lead = !empty($lead) ? $lead[0] : false;
-
-        if(!$lead) {
-            _e("Oops! We couldn't find your lead. Please try again", "gravityforms");
-            return;
-        }
-
-        RGFormsModel::update_lead_property($lead["id"], "is_read", 1);
 
         $prev_pos = !rgblank($position) && $position > 0 ? $position - 1 : false;
         $next_pos = !rgblank($position) && $position < $lead_count - 1 ? $position + 1 : false;
@@ -51,11 +42,32 @@ class GFEntryDetail{
 
         }
 
+        // get the lead
+        $leads = RGFormsModel::get_leads($form['id'], $sort_field, $sort_direction, $search, $position, 1, $star, $read, $is_numeric, null, null, $status);
+
+        if(!$lead_id) {
+            $lead = !empty($leads) ? $leads[0] : false;
+        }
+        else {
+            $lead = RGFormsModel::get_lead($lead_id);
+        }
+
+        if(!$lead) {
+            _e("Oops! We couldn't find your lead. Please try again", "gravityforms");
+            return;
+        }
+
+        RGFormsModel::update_lead_property($lead["id"], "is_read", 1);
+
         switch(RGForms::post("action")){
             case "update" :
                 check_admin_referer('gforms_save_entry', 'gforms_save_entry');
                 RGFormsModel::save_lead($form, $lead);
-                $lead = RGFormsModel::get_lead($_GET["lid"]);
+
+                do_action("gform_after_update_entry", $form, $lead["id"]);
+                do_action("gform_after_update_entry_{$form["id"]}", $form, $lead["id"]);
+
+                $lead = RGFormsModel::get_lead($lead["id"]);
 
             break;
 
@@ -91,20 +103,20 @@ class GFEntryDetail{
             case "trash" :
                 check_admin_referer('gforms_save_entry', 'gforms_save_entry');
                 RGFormsModel::update_lead_property($lead["id"], "status", "trash");
-                $lead = RGFormsModel::get_lead($_GET["lid"]);
+                $lead = RGFormsModel::get_lead($lead["id"]);
             break;
 
             case "restore" :
             case "unspam" :
                 check_admin_referer('gforms_save_entry', 'gforms_save_entry');
                 RGFormsModel::update_lead_property($lead["id"], "status", "active");
-                $lead = RGFormsModel::get_lead($_GET["lid"]);
+                $lead = RGFormsModel::get_lead($lead["id"]);
             break;
 
             case "spam" :
                 check_admin_referer('gforms_save_entry', 'gforms_save_entry');
                 RGFormsModel::update_lead_property($lead["id"], "status", "spam");
-                $lead = RGFormsModel::get_lead($_GET["lid"]);
+                $lead = RGFormsModel::get_lead($lead["id"]);
             break;
 
             case "delete" :
@@ -250,6 +262,7 @@ class GFEntryDetail{
             <div class="icon32" id="gravity-title-icon"><br></div>
             <h2><?php _e("Entry #", "gravityforms"); ?><?php echo absint($lead["id"])?></h2>
 
+            <?php if(isset($_GET["pos"])) { ?>
             <div class="gf_entry_detail_pagination">
                 <ul>
                     <li class="gf_entry_count"><span>entry <strong><?php echo $position + 1; ?></strong> of <strong><?php echo $lead_count; ?></strong></span></li>
@@ -257,6 +270,7 @@ class GFEntryDetail{
                     <li class="gf_entry_next gf_entry_pagination"><?php echo GFEntryDetail::entry_detail_pagination_link($next_pos, 'Next Entry', 'gf_entry_next_link'); ?></li>
                 </ul>
             </div>
+            <?php } ?>
 
             <?php RGForms::top_toolbar() ?>
 
@@ -296,7 +310,7 @@ class GFEntryDetail{
                                     }
 
                                     if(!empty($lead["payment_status"])){
-                                        echo $lead["transaction_type"] != 2 ? __("Payment Status", "gravityforms") : __("Subscription Status", "gravityforms"); ?>: <span id="gform_payment_status"><?php echo $lead["payment_status"] ?></span>
+                                        echo $lead["transaction_type"] != 2 ? __("Payment Status", "gravityforms") : __("Subscription Status", "gravityforms"); ?>: <span id="gform_payment_status"><?php echo apply_filters("gform_payment_status", $lead["payment_status"], $form, $lead) ?></span>
                                         <br/><br/>
                                         <?php
                                         if(!empty($lead["payment_date"])){
@@ -443,12 +457,10 @@ class GFEntryDetail{
                 <div id="post-body" class="has-sidebar">
                     <div id="post-body-content" class="has-sidebar-content">
                         <?php
-                        if($mode == "view"){
+                        if($mode == "view")
                             self::lead_detail_grid($form, $lead, true);
-                        }
-                        else{
+                        else
                             self::lead_detail_edit($form, $lead);
-                        }
 
                         do_action("gform_entry_detail", $form, $lead);
 

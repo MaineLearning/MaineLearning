@@ -297,12 +297,16 @@ function wpv_pagination_js() {
     static $js_rendered = false;
     if ($js_rendered == false) {
 
-        wp_nonce_field('wpv_get_page_nonce', 'wpv_get_page_nonce');
-
+        $ajax_url = site_url();
+        if (substr($ajax_url, strlen($ajax_url) - 1, 1) != '/') {
+            $ajax_url .= '/';
+        }
+        $ajax_url .= 'wpv-ajax-pagination/';
         ?>
         <script type="text/javascript">
         
             var wpv_admin_ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+            var wpv_ajax_pagination_url = "<?php echo $ajax_url; ?>";
 
                         
         </script>
@@ -375,65 +379,103 @@ function wpv_ajax_pagination_lang($lang) {
 
 // Gets the new page for a view.
 
-function wpv_ajax_get_page() {
-    if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_page_nonce')) {
-        global $WP_Views;
-        
-        // Fix a problem with WPML using cookie language when DOING_AJAX is set.
-        $cookie_lang = null;
-        if (isset($_COOKIE['_icl_current_language']) && isset($_POST['lang'])) {
-            $cookie_lang = $_COOKIE['_icl_current_language'];
-            $_COOKIE['_icl_current_language'] = $_POST['lang'];
-        }
-
-        $post_id = $_POST['post_id'];
-
-        $_GET['wpv_paged'] = $_POST['page'];
-        $_GET['wpv_view_number'] = $_POST['view_number'];
-        if (isset($_POST['wpv_column_sort_id'])) {
-            $_GET['wpv_column_sort_id'] = $_POST['wpv_column_sort_id'];
-        }
-        if (isset($_POST['wpv_column_sort_dir'])) {
-            $_GET['wpv_column_sort_dir'] = $_POST['wpv_column_sort_dir'];
-        }
-        
-        if (isset($_POST['get_params'])) {
-            foreach($_POST['get_params'] as $key => $param) {
-                $_GET[$key] = $param;
-            }
-        }
-
-        global $post, $authordata, $id;
-
-        $post = get_post($post_id);
-        $authordata = new WP_User($post->post_author);
-        $id = $post->ID;
-
-        if ($_POST['wpv_view_widget_id'] == 0) {
-            echo wpv_do_shortcode($post->post_content);
-        } else {
-            
-            // set the view count so we return the right view number after rendering.
-            $WP_Views->set_view_count(intval($_POST['view_number']) - 1);
-            
-            $widget = new WPV_Widget();
-            
-            $ars = array('before_widget' => '',
-                         'before_title' => '',
-                         'after_title' => '',
-                         'after_widget' => '');
-            
-            $widget->widget($args, array('title' => '',
-                                         'view' => $_POST['wpv_view_widget_id']));
-            
-            echo $WP_Views->get_max_pages();
-        }
-
-        if ($cookie_lang) {
-            // reset language cookie.
-            $_COOKIE['_icl_current_language'] = $cookie_lang;
+function wpv_ajax_get_page($post_data) {
+    global $WP_Views;
+    
+    // Fix a problem with WPML using cookie language when DOING_AJAX is set.
+    $cookie_lang = null;
+    if (isset($_COOKIE['_icl_current_language']) && isset($post_data['lang'])) {
+        $cookie_lang = $_COOKIE['_icl_current_language'];
+        $_COOKIE['_icl_current_language'] = $post_data['lang'];
+    }
+    
+    // Switch WPML to the correct language.
+    if (isset($post_data['lang'])) {
+        global $sitepress;
+        if (method_exists($sitepress, 'switch_lang')) {
+            $sitepress->switch_lang($post_data['lang']);
         }
     }
-    die();
+
+    $post_id = $post_data['post_id'];
+
+    $_GET['wpv_paged'] = $post_data['page'];
+    $_GET['wpv_view_count'] = $post_data['view_number'];
+    if (isset($post_data['wpv_column_sort_id'])) {
+        $_GET['wpv_column_sort_id'] = $post_data['wpv_column_sort_id'];
+    }
+    if (isset($post_data['wpv_column_sort_dir'])) {
+        $_GET['wpv_column_sort_dir'] = $post_data['wpv_column_sort_dir'];
+    }
+    
+    if (isset($post_data['get_params'])) {
+        foreach($post_data['get_params'] as $key => $param) {
+            $_GET[$key] = $param;
+        }
+    }
+
+    global $post, $authordata, $id;
+
+    $view_data = unserialize(base64_decode($post_data['view_hash']));
+    $post = get_post($post_id);
+    $authordata = new WP_User($post->post_author);
+    $id = $post->ID;
+
+    if ($post_data['wpv_view_widget_id'] == 0) {
+        // set the view count so we return the right view number after rendering.
+        $WP_Views->set_view_count(intval($post_data['view_number']) - 1);
+
+        echo $WP_Views->short_tag_wpv_view($view_data);
+        //echo wpv_do_shortcode($post->post_content);
+    } else {
+        
+        // set the view count so we return the right view number after rendering.
+        $WP_Views->set_view_count(intval($post_data['view_number']) - 1);
+        
+        $widget = new WPV_Widget();
+        
+        $ars = array('before_widget' => '',
+                     'before_title' => '',
+                     'after_title' => '',
+                     'after_widget' => '');
+        
+        $widget->widget($args, array('title' => '',
+                                     'view' => $post_data['wpv_view_widget_id']));
+        
+        echo $WP_Views->get_max_pages();
+    }
+
+    if ($cookie_lang) {
+        // reset language cookie.
+        $_COOKIE['_icl_current_language'] = $cookie_lang;
+    }
 }
 
+
+add_action('template_redirect', 'wpv_pagination_router');
+
+function wpv_pagination_router() {
+    global $wp_query;
+    $bits =explode("/",$_SERVER['REQUEST_URI']);
+    for ($i = 0; $i < count($bits) - 1; $i++) {
+    
+        if ($bits[$i] == 'wpv-ajax-pagination') {
+            // get the post data. It's hex encoded json
+            $post_data = $bits[$i + 1];
+            $post_data = pack('H*', $post_data);
+            
+            $post_data = json_decode($post_data, true);
+            
+            header('HTTP/1.0 200 OK');
+            header( 'Content-Type: text/css' );
+            echo '<html><body>';
+    
+            wpv_ajax_get_page($post_data);
+            
+            echo '</body></html>';
+            
+            $wp_query->is_404 = false;
+            exit;
+        }
+    }
+}

@@ -1,4 +1,26 @@
 
+// "prop" method fix for previous versions of jQuery 
+var originalPropMethod = jQuery.fn.prop;
+
+jQuery.fn.prop = function() {
+    if(typeof originalPropMethod == 'undefined') {
+        jQuery.fn.attr.apply(this, arguments);
+    } else {
+        originalPropMethod.apply(this, arguments);
+    }
+}
+
+//Formatting free form currency fields to currency
+jQuery(document).ready(function(){
+    jQuery(".ginput_amount, .ginput_donation_amount").bind("change", function(){
+        gformFormatPricingField(this);
+    });
+
+    jQuery(".ginput_amount, .ginput_donation_amount").each(function(){
+        gformFormatPricingField(this);
+    });
+});
+
 
 //------------------------------------------------
 //---------- CURRENCY ----------------------------
@@ -34,7 +56,8 @@ function Currency(currency){
         return money;
     };
 
-    this.numberFormat = function(number, decimals, dec_point, thousands_sep){
+    this.numberFormat = function(number, decimals, dec_point, thousands_sep, padded){
+        var padded = typeof padded == 'undefined';
         number = (number+'').replace(',', '').replace(' ', '');
         var n = !isFinite(+number) ? 0 : +number,
         prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -46,15 +69,25 @@ function Currency(currency){
             return '' + Math.round(n * k) / k;
         };
 
-        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if(decimals == '0') {
+            s = ('' + Math.round(n)).split('.');
+        } else
+        if(decimals == -1) {
+            s = ('' + n).split('.');
+        } else {
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = toFixedFix(n, prec).split('.');
+        }
+
         if (s[0].length > 3) {
             s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
         }
 
-        if ((s[1] || '').length < prec) {
-            s[1] = s[1] || '';
-            s[1] += new Array(prec - s[1].length + 1).join('0');
+        if(padded) {
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
         }
 
         return s.join(dec);
@@ -327,11 +360,6 @@ function gformGetBasePrice(formId, productFieldId){
         if(gformIsHidden(productField)){
             price = 0;
         }
-        else if(productField.parents(".gfield_donation" + suffix).length > 0 || productField.parents(".gfield_product" + suffix).length > 0){
-            //Formatting open text donation and product fields
-            var currency = new Currency(window['gf_currency_config']);
-            productField.val(currency.toMoney(price));
-        }
     }
     else
     {
@@ -348,21 +376,29 @@ function gformGetBasePrice(formId, productFieldId){
 
     }
 
-    var c = new Currency(window['gf_currency_config']);
+    var c = new Currency(gf_global.gf_currency_config);
     price = c.toNumber(price);
     return price === false ? 0 : price;
 }
 
 function gformFormatMoney(text){
-    if(!window['gf_currency_config'])
+    if(!gf_global.gf_currency_config)
         return text;
 
-    var currency = new Currency(window['gf_currency_config']);
+    var currency = new Currency(gf_global.gf_currency_config);
     return currency.toMoney(text);
 }
 
+function gformFormatPricingField(element){
+    if(gf_global.gf_currency_config){
+        var currency = new Currency(gf_global.gf_currency_config);
+        var price = currency.toMoney(jQuery(element).val());
+        jQuery(element).val(price);
+    }
+}
+
 function gformToNumber(text){
-    var currency = new Currency(window['gf_currency_config']);
+    var currency = new Currency(gf_global.gf_currency_config);
     return currency.toNumber(text);
 }
 
@@ -409,7 +445,7 @@ function gformGetProductIds(parent_class, element){
 
 function gformGetPrice(text){
     var val = text.split("|");
-    var currency = new Currency(window['gf_currency_config']);
+    var currency = new Currency(gf_global.gf_currency_config);
 
     if(val.length > 1 && currency.toNumber(val[1]) !== false)
          return currency.toNumber(val[1]);
@@ -604,6 +640,7 @@ function gformFindCardType(value) {
 }
 
 
+
 //----------------------------------------
 //------ CHOSEN DROP DOWN FIELD ----------
 //----------------------------------------
@@ -612,8 +649,203 @@ function gformInitChosenFields(fieldList, noResultsText){
     return jQuery(fieldList).each(function(){
         var element = jQuery(this);
         //only initialize once
+
         if(element.is(":visible") && element.siblings(".chzn-container").length == 0){
             jQuery(this).chosen({no_results_text: noResultsText});
         }
     });
+}
+
+
+
+//----------------------------------------
+//------ CALCULATION FUNCTIONS -----------
+//----------------------------------------
+
+var GFCalc = function(formId, formulaFields){
+
+    this.patt = /{[^{]*?:(\d+(\.\d+)?)(:(.*?))?}/i;
+    this.exprPatt = /^[0-9 -/*\(\)]+$/i;
+    this.isCalculating = {};
+
+    this.init = function(formId, formulaFields) {
+        var calc = this;
+        jQuery(document).bind("gform_post_conditional_logic", function(){
+            for(var i in formulaFields) {
+                var formulaField = jQuery.extend({}, formulaFields[i]);
+                calc.runCalc(formulaField, formId);
+            }
+        });
+
+        for(var i in formulaFields) {
+            var formulaField = jQuery.extend({}, formulaFields[i]);
+            this.runCalc(formulaField, formId);
+            this.bindCalcEvents(formulaField, formId);
+        }
+
+    }
+
+    this.runCalc = function(formulaField, formId) {
+
+        var calcObj = this;
+        var formulaInput, expr;
+
+        var field = jQuery('#field_' + formId + '_' + formulaField.field_id);
+        formulaInput = jQuery('#input_' + formId + '_' + formulaField.field_id);
+        var previous_val = formulaInput.val();
+
+        expr = calcObj.replaceFieldTags(formId, formulaField.formula);
+        result = '';
+
+        try {
+
+            if(calcObj.exprPatt.test(expr)) {
+                result = eval(expr);
+                result = gformFormatNumber(result, !gformIsNumber(formulaField.rounding) ? -1 : formulaField.rounding);
+            }
+
+            // allow users to modify result with their own function
+            if(window["gform_calculation_result"])
+                result = window["gform_calculation_result"](result, formulaField, formId);
+
+        } catch (e) { }
+
+        //If value doesn't change, abort.
+        //This is needed to prevent an infinite loop condition with conditional logic
+        if(result == previous_val)
+            return;
+
+        // if this is a calucation product, handle differently
+        if(field.hasClass('gfield_price')) {
+            result = gformFormatMoney(result ? result : 0);
+
+            formulaInput.text(result);
+            jQuery('#ginput_base_price_' + formId + '_' + formulaField.field_id).val(result).trigger('change');
+            gformCalculateTotalPrice(formId);
+        } else {
+            formulaInput.val(result).trigger('change');
+        }
+
+    }
+
+    this.bindCalcEvents = function(formulaField, formId) {
+
+        var calcObj = this;
+        var formulaFieldId = formulaField.field_id;
+        var matches = getMatchGroups(formulaField.formula, this.patt);
+
+        calcObj.isCalculating[formulaFieldId] = false;
+
+        for(i in matches) {
+
+            var inputId = matches[i][1];
+            var fieldId = parseInt(inputId);
+            var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
+
+            if(input.prop('type') == 'checkbox' || input.prop('type') == 'radio') {
+                jQuery(input).click(function(){
+                    calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
+                });
+            } else
+            if(input.is('select')) {
+                jQuery(input).change(function(){
+                    calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
+                });
+            } else {
+                jQuery(input).keydown(function(){
+                    calcObj.bindCalcEvent(inputId, formulaField, formId);
+                });
+            }
+
+        }
+
+    }
+
+    this.bindCalcEvent = function(inputId, formulaField, formId, delay) {
+
+        var calcObj = this;
+        var formulaFieldId = formulaField.field_id;
+
+        delay = delay == undefined ? 345 : delay;
+
+        if(calcObj.isCalculating[formulaFieldId][inputId])
+            clearTimeout(calcObj.isCalculating[formulaFieldId][inputId]);
+
+        calcObj.isCalculating[formulaFieldId][inputId] = window.setTimeout(function() {
+            calcObj.runCalc(formulaField, formId);
+        }, delay);
+
+    }
+
+    this.replaceFieldTags = function(formId, expr) {
+
+        var matches = getMatchGroups(expr, this.patt);
+
+        for(i in matches) {
+
+            var inputId = matches[i][1];
+            var fieldId = parseInt(inputId);
+            var columnId = matches[i][3];
+            var value = 0;
+
+            var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
+
+            // radio buttons will return multiple inputs, checkboxes will only return one but it may not be selected, filter out unselected inputs
+            if(input.length > 1 || input.prop('type') == 'checkbox')
+                input = input.filter(':checked');
+
+
+            var isVisible = window["gf_check_field_rule"] ? gf_check_field_rule(formId, fieldId, true, "") == "show" : true;
+
+            if(input.length > 0 && isVisible) {
+
+                var val = input.val();
+                val = val.split('|');
+
+                if(val.length > 1) {
+                    value = val[1];
+                } else {
+                    value = input.val();
+                }
+
+            }
+
+            value = gformToNumber(value) ? gformToNumber(value) : 0;
+
+            expr = expr.replace(matches[i][0], value);
+        }
+
+        return expr;
+    }
+
+    this.init(formId, formulaFields);
+
+}
+
+function gformFormatNumber(number, rounding){
+    if(!window['gf_global'])
+        return text;
+
+    var currency = new Currency(gf_global.gf_currency_config);
+    return currency.numberFormat(number, rounding, currency.currency["decimal_separator"], currency.currency["thousand_separator"], false)
+}
+
+function gformToNumber(text) {
+    var currency = new Currency(gf_global.gf_currency_config);
+    return currency.toNumber(text);
+}
+
+function getMatchGroups(expr, patt) {
+
+    var matches = new Array();
+
+    while(patt.test(expr)) {
+
+        var i = matches.length;
+        matches[i] = patt.exec(expr)
+        expr = expr.replace('' + matches[i][0], '');
+
+    }
+
+    return matches;
 }

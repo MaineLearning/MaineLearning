@@ -2,7 +2,6 @@
 /*
  * Post relationship code.
  * 
- * @todo Add check that belongs and has cant contain same types 
  */
 require_once WPCF_EMBEDDED_ABSPATH . '/includes/post-relationship.php';
 add_filter('wpcf_post_type_form', 'wpcf_pr_post_type_form_filter', 10, 2);
@@ -32,29 +31,17 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
 
     if (empty($has) || empty($post_type['slug'])) {
         $txt_has = __("Children: None", 'wpcf');
-//        $txt_has = __("None post type belongs to this post type", 'wpcf');
     } else {
         $txt_has = array();
         foreach ($has as $pr_key => $pr_data) {
             $txt_has[] = isset($post_types[$pr_key]) ? $post_types[$pr_key]->labels->singular_name : $pr_key;
         }
         $txt_has = sprintf(__("Children: %s", 'wpcf'), implode(', ', $txt_has));
-//        if (count($txt_has) < 2) {
-//            $txt_has = sprintf(__("%s belong to this post type", 'wpcf'),
-//                    implode(', ', $txt_has));
-//        } else {
-//            $txt_has = sprintf(__("%s belongs to this post type", 'wpcf'),
-//                    implode(', ', $txt_has));
-//        }
     }
     wpcf_admin_add_js_settings('wpcf_pr_has_empty_txt',
             '\'' . __("Children: None", 'wpcf') . '\'');
-//    wpcf_admin_add_js_settings('wpcf_pr_has_empty_txt',
-//            '\'' . __("None post type belongs to this post type", 'wpcf') . '\'');
     wpcf_admin_add_js_settings('wpcf_pr_has_txt',
             '\'' . __("Children: %s", 'wpcf') . '\'');
-//    wpcf_admin_add_js_settings('wpcf_pr_has_txt',
-//            '\'' . __("%s belong to this post type", 'wpcf') . '\'');
     // Others belonging to
     if (!empty($belongs)) {
         $txt_belongs = array();
@@ -63,21 +50,9 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
         }
         $txt_belongs = sprintf(__("Parent: %s", 'wpcf'),
                 implode(', ', $txt_belongs));
-//        if (count($txt_belongs) > 1) {
-//            $txt_belongs = sprintf(__("This post type belongs to %s", 'wpcf'),
-//                    implode(', ', $txt_belongs));
-//        } else {
-//            $txt_belongs = sprintf(__("This post type belongs to %s", 'wpcf'),
-//                    $txt_belongs[0]);
-//        }
     } else {
-//        $txt_belongs = __("This post type belongs to none", 'wpcf');
         $txt_belongs = __("Parent: None", 'wpcf');
     }
-//    wpcf_admin_add_js_settings('wpcf_pr_belongs_empty_txt',
-//            '\'' . __("This post type belongs to none", 'wpcf') . '\'');
-//    wpcf_admin_add_js_settings('wpcf_pr_belongs_txt',
-//            '\'' . __("This post type belongs to %s", 'wpcf') . '\'');
     wpcf_admin_add_js_settings('wpcf_pr_belongs_empty_txt',
             '\'' . __("Parent: None", 'wpcf') . '\'');
     wpcf_admin_add_js_settings('wpcf_pr_belongs_txt',
@@ -183,7 +158,7 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
         . '<br />'
         . sprintf(__('Learn about %sPost Type Relationships%s', 'wpcf'),
                 '<a href="http://wp-types.com/documentation/user-guides/creating-post-type-relationships/" target="_blank">',
-                '</a>')
+                ' &raquo;</a>')
         . '</div>',
     );
     return $form;
@@ -268,8 +243,38 @@ function wpcf_pr_admin_edit_fields($parent, $child) {
         <?php
         die();
     }
+    
+    $groups = wpcf_admin_get_groups_by_post_type($child);
+    $options_cf = array();
+    $repetitive_warning = false;
+    $repetitive_warning_markup = array();
+    $repetitive_warning_txt = __('Repeating fields should not be used in child posts. Types will update all field values.', 'wpcf');
+    foreach ($groups as $group) {
+        $fields = wpcf_admin_fields_get_fields_by_group($group['id']);
+        foreach ($fields as $key => $cf) {
+            $options_cf[WPCF_META_PREFIX . $key] = array();
+            $options_cf[WPCF_META_PREFIX . $key]['#title'] = $cf['name'];
+            $options_cf[WPCF_META_PREFIX . $key]['#name'] = 'fields[' . WPCF_META_PREFIX . $key . ']';
+            $options_cf[WPCF_META_PREFIX . $key]['#default_value'] = isset($data['fields'][WPCF_META_PREFIX . $key]) ? 1 : 0;
+            // Repetitive warning
+            if (wpcf_admin_is_repetitive($cf)) {
+                if (!$repetitive_warning) {
+                    $repetitive_warning_markup = array(
+                        '#type' => 'markup',
+                        '#markup' => '<div class="message error" style="display:none;" id="wpcf-repetitive-warning"><p>' . $repetitive_warning_txt . '</p></div>',
+                    );
+                }
+                $repetitive_warning = true;
+                $options_cf[WPCF_META_PREFIX . $key]['#after'] = !isset($data['fields'][WPCF_META_PREFIX . $key]) ? '<div class="message error" style="display:none;"><p>' : '<div class="message error"><p>';
+                $options_cf[WPCF_META_PREFIX . $key]['#after'] .= $repetitive_warning_txt;
+                $options_cf[WPCF_META_PREFIX . $key]['#after'] .= '</p></div>';
+                $options_cf[WPCF_META_PREFIX . $key]['#attributes'] = array('onclick' => 'jQuery(this).parent().find(\'.message\').toggle();');
+            }
+        }
+    }
 
     $form = array();
+    $form['repetitive_warning_markup'] = $repetitive_warning_markup;
     $form['select'] = array(
         '#type' => 'radios',
         '#name' => 'fields_setting',
@@ -291,17 +296,7 @@ function wpcf_pr_admin_edit_fields($parent, $child) {
         '#name' => 'fields[_wp_body]',
         '#default_value' => isset($data['fields']['_wp_body']) ? 1 : 0,
     );
-//    $wpcf_fields = wpcf_admin_fields_get_fields(true);
-    $groups = wpcf_admin_get_groups_by_post_type($child);
-    foreach ($groups as $group) {
-        $fields = wpcf_admin_fields_get_fields_by_group($group['id']);
-        foreach ($fields as $key => $cf) {
-            $options[WPCF_META_PREFIX . $key] = array();
-            $options[WPCF_META_PREFIX . $key]['#title'] = $cf['name'];
-            $options[WPCF_META_PREFIX . $key]['#name'] = 'fields[' . WPCF_META_PREFIX . $key . ']';
-            $options[WPCF_META_PREFIX . $key]['#default_value'] = isset($data['fields'][WPCF_META_PREFIX . $key]) ? 1 : 0;
-        }
-    }
+    $options = $options + $options_cf;
     $temp_belongs = wpcf_pr_admin_get_belongs($child);
     foreach ($temp_belongs as $temp_parent => $temp_data) {
         if ($temp_parent == $parent) {
@@ -313,27 +308,6 @@ function wpcf_pr_admin_edit_fields($parent, $child) {
         $options[$temp_parent]['#name'] = 'fields[_wpcf_pr_parents][' . $temp_parent . ']';
         $options[$temp_parent]['#default_value'] = isset($data['fields']['_wpcf_pr_parents'][$temp_parent]) ? 1 : 0;
     }
-//    foreach ($wpcf_fields as $key => $cf) {
-//        $options[WPCF_META_PREFIX . $key] = array();
-//        $options[WPCF_META_PREFIX . $key]['#title'] = $cf['name'];
-//        $options[WPCF_META_PREFIX . $key]['#name'] = 'fields[' . WPCF_META_PREFIX . $key . ']';
-//        $options[WPCF_META_PREFIX . $key]['#default_value'] = isset($data['fields'][WPCF_META_PREFIX . $key]) ? 1 : 0;
-//    }
-//    $cf_all = $wpdb->get_results("
-//		SELECT meta_id, meta_key
-//		FROM $wpdb->postmeta
-//		GROUP BY meta_key
-//		HAVING meta_key NOT LIKE '\_%'
-//		ORDER BY meta_key");
-//    foreach ($cf_all as $key => $cf) {
-//        if (isset($options[$cf->meta_key])) {
-//            continue;
-//        }
-//        $options[$key] = array();
-//        $options[$key]['#title'] = $cf->meta_key;
-//        $options[$key]['#name'] = 'fields[' . $cf->meta_key . ']';
-//        $options[$key]['#default_value'] = isset($data['fields'][$cf->meta_key]) ? 1 : 0;
-//    }
     $form['specific'] = array(
         '#type' => 'checkboxes',
         '#name' => 'fields',
@@ -358,12 +332,25 @@ function wpcf_pr_admin_edit_fields($parent, $child) {
         jQuery(document).ready(function(){
             if (jQuery('input[name="fields_setting"]:checked').val() == 'specific') {
                 jQuery('#wpcf-specific').show();
+            } else {
+                <?php
+                    if ($repetitive_warning) { ?>
+                                    jQuery('#wpcf-repetitive-warning').show();
+                                    <?php
+                    }
+                    ?>
             }
             jQuery('input[name="fields_setting"]').change(function(){
                 if (jQuery(this).val() == 'specific') {
                     jQuery('#wpcf-specific').slideDown();
                 } else {
                     jQuery('#wpcf-specific').slideUp();
+                    <?php
+                    if ($repetitive_warning) { ?>
+                                    jQuery('#wpcf-repetitive-warning').show();
+                                    <?php
+                    }
+                    ?>
                 }
             });
         });

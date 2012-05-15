@@ -32,6 +32,11 @@ jQuery(document).ready(function(){
         handle: 'img.wpcf-fields-form-radio-move-field',
         containment: 'parent'
     });
+    jQuery('.wpcf-fields-checkboxes-sortable').sortable({
+        revert: true,
+        handle: 'img.wpcf-fields-form-checkboxes-move-field',
+        containment: 'parent'
+    });
     jQuery('.wpcf-fields-select-sortable').sortable({
         revert: true,
         handle: 'img.wpcf-fields-form-select-move-field',

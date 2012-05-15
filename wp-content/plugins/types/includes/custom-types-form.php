@@ -647,16 +647,16 @@ function wpcf_custom_types_register_translation($post_type, $data) {
     }
     $default = wpcf_custom_types_default();
     if (isset($data['description'])) {
-        icl_register_string('Types-CPT', $post_type . ' description',
+        wpcf_translate_register_string('Types-CPT', $post_type . ' description',
                 $data['description']);
     }
     foreach ($data['labels'] as $label => $string) {
         if ($label == 'name' || $label == 'singular_name') {
-            icl_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-CPT', $post_type . ' ' . $label, $string);
             continue;
         }
         if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
-            icl_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-CPT', $post_type . ' ' . $label, $string);
         }
     }
 }

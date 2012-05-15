@@ -9,8 +9,6 @@
 function wpv_filter_get_posts($id) {
     global $WP_Views, $post, $wplogger;
     
-    $post_not_in_list = isset($post) ? array($post->ID) : array();
-    
     $view_settings_defaults = array(
         'post_type'         => 'any',
         'orderby'           => 'post-date',
@@ -22,8 +20,8 @@ function wpv_filter_get_posts($id) {
     $view_settings = $WP_Views->get_view_settings($id);
     extract($view_settings, EXTR_OVERWRITE);
     
-    if (isset($_GET['wpv_paged'])) {
-        $paged = $_GET['wpv_paged'];
+    if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && $_GET['wpv_view_count'] == $WP_Views->get_view_count()) {
+        $paged = intval($_GET['wpv_paged']);
     }
     
     $query = array(
@@ -32,7 +30,7 @@ function wpv_filter_get_posts($id) {
             'post_type'         => $post_type,
             'order'             => $order,
             'suppress_filters'  => false,
-    		'post__not_in'      => $post_not_in_list
+			'ignore_sticky_posts' => true
     );
     
     if (isset($view_settings['pagination'][0]) && $view_settings['pagination'][0] == 'disable' && isset($view_settings['pagination']['mode']) && $view_settings['pagination']['mode'] == 'paged') {

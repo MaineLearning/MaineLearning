@@ -83,7 +83,7 @@ class blcConfigurationManager {
 	}
 	
 	/**
-	 * Retrieve a scpecific setting.
+	 * Retrieve a specific setting.
 	 * 
 	 * @param string $key
 	 * @param mixed $default

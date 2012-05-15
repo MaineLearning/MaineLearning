@@ -99,19 +99,13 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-msgid "This View selects <strong>%s</strong>"
+msgid "<strong>%s</strong>"
 msgstr ""
 
 msgid "Don't include current page in query result"
 msgstr ""
 
-msgid "This View selects <strong>ALL</strong> post types"
-msgstr ""
-
-msgid "This View selects "
-msgstr ""
-
-msgid " and "
+msgid "<strong>ALL</strong> post types"
 msgstr ""
 
 msgid "descending"
@@ -148,6 +142,48 @@ msgid "Edit"
 msgstr ""
 
 msgid "Select what content type to load:"
+msgstr ""
+
+msgid "Content to load"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Fields used"
+msgstr ""
+
+msgid "How this View Template is used"
+msgstr ""
+
+msgid "Unformatted"
+msgstr ""
+
+msgid "Ordered List"
+msgstr ""
+
+msgid "Unordered List"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Single view for "
+msgstr ""
+
+msgid "Archive view for "
+msgstr ""
+
+msgid "Loop view for "
+msgstr ""
+
+msgid "No filters selected."
 msgstr ""
 
 msgid "None"
@@ -264,19 +300,7 @@ msgstr ""
 msgid "Field - %s"
 msgstr ""
 
-msgid "post date"
-msgstr ""
-
-msgid "post title"
-msgstr ""
-
 msgid "post id"
-msgstr ""
-
-msgid "menu order"
-msgstr ""
-
-msgid "random order"
 msgstr ""
 
 msgid "Taxonomy Term"
@@ -306,6 +330,12 @@ msgstr ""
 msgid "No views found in Trash"
 msgstr ""
 
+msgid "Views"
+msgstr ""
+
+msgid "New View"
+msgstr ""
+
 msgid "View Templates"
 msgstr ""
 
@@ -321,19 +351,31 @@ msgstr ""
 msgid "Views Subscription"
 msgstr ""
 
-msgid "View Query"
+msgid "Help"
 msgstr ""
 
-msgid "View Layout"
+msgid "View Query - Choose what content to load"
+msgstr ""
+
+msgid "View Layout - Edit the layout"
+msgstr ""
+
+msgid "Views Help"
+msgstr ""
+
+msgid "Learn about %sediting Views HTML%s"
+msgstr ""
+
+msgid "Hide this editor"
 msgstr ""
 
 msgid "The view query settings will be copied from the original"
 msgstr ""
 
-msgid "Edit view"
+msgid "Learn how to create a View and how to display it in the complete %sViews Guide%s"
 msgstr ""
 
-msgid "Views"
+msgid "Edit view"
 msgstr ""
 
 msgid "Create <strong>View Templates</strong> and attach them to content types to display content in complex ways. You can read more detail about View Templates on our website:"
@@ -357,7 +399,7 @@ msgstr ""
 msgid "<strong>Trash:</strong> Move the View Template to Trash"
 msgstr ""
 
-msgid "If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>."
+msgid "If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>."
 msgstr ""
 
 msgid "Use this page to create and edit <strong>View Templates</strong>. For more information about View Templates visit the user guide on our website:"
@@ -438,6 +480,12 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+msgid "Fully customize the View HTML output"
+msgstr ""
+
+msgid "* This View has changed. You need to save for these changes to take effect."
+msgstr ""
+
 msgid "* Requires WordPress 3.2 or greater for best results."
 msgstr ""
 
@@ -450,6 +498,18 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
+msgid "1. Enter title"
+msgstr ""
+
+msgid "2. Choose what content to load"
+msgstr ""
+
+msgid "3. Edit the layout"
+msgstr ""
+
+msgid "4. Save this View"
+msgstr ""
+
 msgid "Settings Saved"
 msgstr ""
 
@@ -459,10 +519,16 @@ msgstr ""
 msgid "Post status"
 msgstr ""
 
+msgid "status of "
+msgstr ""
+
 msgid "Select posts with status of "
 msgstr ""
 
 msgid " or "
+msgstr ""
+
+msgid "any status."
 msgstr ""
 
 msgid "Select posts with any status."
@@ -471,7 +537,7 @@ msgstr ""
 msgid "The view layout settings will be copied from the original"
 msgstr ""
 
-msgid "Learn about different <a href=\"%s\">layouts</a>"
+msgid "Learn about different %slayouts%s"
 msgstr ""
 
 msgid "Using view template:"
@@ -516,10 +582,10 @@ msgstr ""
 msgid "Taxonomy"
 msgstr ""
 
-msgid "Want to add complex fields? Learn about <a href=\"%s\">using View Templates to customize fields</a>."
+msgid "Want to add complex fields? Learn about %susing View Templates to customize fields%s."
 msgstr ""
 
-msgid "Want to display posts that belong to this taxonomy? Learn about <a href=\"%s\">inserting child Views to Taxonomy Views</a>."
+msgid "Want to display posts that belong to this taxonomy? Learn about %sinserting child Views to Taxonomy Views%s."
 msgstr ""
 
 msgid "View templates"
@@ -615,9 +681,6 @@ msgstr ""
 msgid "and <strong>previous</strong> and <strong>next</strong> page controls."
 msgstr ""
 
-msgid "Fade"
-msgstr ""
-
 msgid "Slide horizontally"
 msgstr ""
 
@@ -681,12 +744,6 @@ msgstr ""
 msgid "Pagination updates only the view (use AJAX)"
 msgstr ""
 
-msgid "Slide horizontally"
-msgstr ""
-
-msgid "Slide vertically"
-msgstr ""
-
 msgid "Transition effect"
 msgstr ""
 
@@ -735,7 +792,13 @@ msgstr ""
 msgid "An unknown error occurred."
 msgstr ""
 
+msgid "View Template Help"
+msgstr ""
+
 msgid "View Template Settings"
+msgstr ""
+
+msgid "Go to the %sSettings page%s to apply this template to content types."
 msgstr ""
 
 msgid "Edit view template"
@@ -766,6 +829,15 @@ msgid "Normal WordPress output - add paragraphs an breaks and resolve shortcodes
 msgstr ""
 
 msgid "Raw output - only resolve shortcodes without adding line breaks or paragraphs"
+msgstr ""
+
+msgid "What is a View Template"
+msgstr ""
+
+msgid "Editing instructions"
+msgstr ""
+
+msgid "How to apply View Templates to content"
 msgstr ""
 
 msgid "View Template settings for Taxonomy archive loops"
@@ -834,6 +906,9 @@ msgstr ""
 msgid "Post parent"
 msgstr ""
 
+msgid "parent is <strong>%s</strong>"
+msgstr ""
+
 msgid "Select posts whose parent is <strong>%s</strong>."
 msgstr ""
 
@@ -841,6 +916,9 @@ msgid "Taxonomy parent"
 msgstr ""
 
 msgid "Select taxonomy whose parent is <strong>%s</strong>."
+msgstr ""
+
+msgid "parent is the <strong>current page</strong>"
 msgstr ""
 
 msgid "Select posts whose parent is the <strong>current page</strong>."
@@ -960,10 +1038,19 @@ msgstr ""
 msgid "None set"
 msgstr ""
 
+msgid "Filter by <strong>search</strong> term: <strong>%s</strong>"
+msgstr ""
+
 msgid "Filter by this search term: <strong>%s</strong>."
 msgstr ""
 
+msgid "Show a <strong>search box</strong> for vistors"
+msgstr ""
+
 msgid "Show a <strong>search box</strong> for vistors."
+msgstr ""
+
+msgid "Filter by <strong>search box</strong>"
 msgstr ""
 
 msgid "The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>."
@@ -1033,6 +1120,30 @@ msgid "Select what to filter by:"
 msgstr ""
 
 msgid "Condition:"
+msgstr ""
+
+msgid "%sViews%s load content from the database and display it."
+msgstr ""
+
+msgid "Views help"
+msgstr ""
+
+msgid "%sView Templates%s style single pages."
+msgstr ""
+
+msgid "View Template help"
+msgstr ""
+
+msgid "%sUser Guides%s  - everything you need to know about using Views"
+msgstr ""
+
+msgid "%sExamples%s - learn from examples and see what you can build with Views"
+msgstr ""
+
+msgid "%sSupport forum%s - get help"
+msgstr ""
+
+msgid "Documentation and Support"
 msgstr ""
 
 msgid "Views subscription"
@@ -1128,6 +1239,9 @@ msgstr ""
 msgid "Insert Views Shortcode"
 msgstr ""
 
+msgid "Getting started"
+msgstr ""
+
 msgid "Views Import"
 msgstr ""
 
@@ -1165,6 +1279,9 @@ msgid "Comments number"
 msgstr ""
 
 msgid "Edit Link"
+msgstr ""
+
+msgid "Post type"
 msgstr ""
 
 msgid "Comment title"
@@ -1233,7 +1350,7 @@ msgstr ""
 msgid "View Templates are applied to pages to create different layouts. On your theme the following View Templates are defined:"
 msgstr ""
 
-msgid "If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from <a href=\"%s\">%s</a>"
+msgid "If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from %s"
 msgstr ""
 
 msgid "Basic"
@@ -1260,10 +1377,10 @@ msgstr ""
 msgid "Get Types and Views"
 msgstr ""
 
-msgid "<a href=\"%s\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
+msgid "<a href=\"%s\" target=\"_blank\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
 msgstr ""
 
-msgid "<a href=\"%s\">Learn more</a>"
+msgid "<a href=\"%s\" target=\"_blank\">Learn more</a>"
 msgstr ""
 
 msgid "Your theme was created using <strong>Types</strong> and <strong>Views</strong>. Developers use these two plugins to build complex websites, without coding."

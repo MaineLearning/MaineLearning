@@ -21,6 +21,8 @@ class WPV_template_plugin extends WPV_template {
         <?php
         
         global $post;
+        
+        add_meta_box('views_template_help', __('View Template Help', 'wpv-views'), array($this,'view_settings_help'), $post->post_type, 'side', 'high');
         add_meta_box('views_template', __('View Template Settings', 'wpv-views'), array($this,'view_settings_meta_box'), $post->post_type, 'side', 'high');
         
     }
@@ -78,6 +80,16 @@ class WPV_template_plugin extends WPV_template {
         <?php
         
     }
+
+    function view_settings_help() {
+		?>
+		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/view-templates/"><?php _e('What is a View Template', 'wpv-views')?> &raquo;</a></p>
+		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/editing-view-templates/"><?php _e('Editing instructions', 'wpv-views')?>  &raquo;</a></p>
+		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/setting-view-templates-for-single-pages/"><?php _e('How to apply View Templates to content', 'wpv-views')?>  &raquo;</a></p>
+		
+		<?php
+		printf(__('Go to the %sSettings page%s to apply this template to content types.'), '<a href="' . admin_url('edit.php?post_type=view&page=views-settings') . '">', '</a>');
+	}
     
 	/**
 	 * Add admin css to the view template edit page
@@ -85,9 +97,23 @@ class WPV_template_plugin extends WPV_template {
 	 */
 	
     function include_admin_css() {
-        global $pagenow;
-        if ($pagenow == 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'view-template') {
-            $link_tag = '<link rel="stylesheet" href="'. WPV_URL . '/res/css/wpv-views.css?v='.WPV_VERSION.'" type="text/css" media="all" />';
+		global $pagenow;
+		
+		$found = false;
+		
+        if (($pagenow == 'edit.php' || $pagenow == 'post-new.php') && isset($_GET['post_type']) && $_GET['post_type'] == 'view-template') {
+			$found = true;
+		}
+		if ($pagenow == 'post.php') {
+			global $post;
+            if ($post->post_type == 'view-template') {
+				$found = true;
+			}
+			
+		}
+		
+        if ($found) {
+			$link_tag = '<link rel="stylesheet" href="'. WPV_URL . '/res/css/wpv-views.css?v='.WPV_VERSION.'" type="text/css" media="all" />';
             echo $link_tag;
         }
     }
@@ -97,14 +123,15 @@ class WPV_template_plugin extends WPV_template {
         if ($post->post_type == 'view-template') {
             if (isset($_POST['_wpv_view_template_mode'][0])) {
                 update_post_meta($pidd, '_wpv_view_template_mode', $_POST['_wpv_view_template_mode'][0]);
-            }
 
+	            wpv_view_template_update_field_values($pidd);
+            }
         }
         
         // pass to the base class.
         parent::save_post_actions($pidd, $post);
     }
-
+    
 	/**
 	 * If the post has a view template
 	 * add an view template edit link to post.
@@ -196,9 +223,16 @@ class WPV_template_plugin extends WPV_template {
         $items_found = array();
         
         $options = $this->legacy_view_settings($options);
-        
+		
+		if (!isset($options['wpv-theme-function'])) {
+			$options['wpv-theme-function'] = '';
+		}
+		if (!isset($options['wpv-theme-function-debug'])) {
+			$options['wpv-theme-function-debug'] = false;
+		}
+		
         ?>
-        
+
         <h3 class="title"><?php _e('View Template settings for Taxonomy archive loops', 'wpv-views'); ?></h3>
         <div style="margin-left:20px;">
             <table class="widefat" style="width:auto;">
@@ -236,7 +270,7 @@ class WPV_template_plugin extends WPV_template {
                                         if ($most_popular_term) {
                                             $link = get_term_link(intval($most_popular_term), $name);
                                             ?>
-                                            <a id="views_template_loop_preview_<?php echo $name?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-view'); ?></a>
+                                            <a id="views_template_loop_preview_<?php echo $name?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-views'); ?></a>
                                             <?php
                                         }
                                     ?>
@@ -288,7 +322,7 @@ class WPV_template_plugin extends WPV_template {
                                         if ($post_id) {
                                             $link = get_permalink($post_id);
                                             ?>
-                                            <a id="views_template_for_preview_<?php echo $type?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-view'); ?></a>
+                                            <a id="views_template_for_preview_<?php echo $type?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-views'); ?></a>
                                             <?php
                                         }
                                         ?>
@@ -350,6 +384,27 @@ class WPV_template_plugin extends WPV_template {
             </table>
                        
         </div>
+
+		<br />
+        <h3 class="title"><?php _e('Theme support for View Templates', 'wpv-views'); ?></h3>
+        <div style="margin-left:20px;">
+			<p>
+				<?php _e("View Templates modify the content when called from 'the_content' function. Some themes don't use 'the_content' function but define their own function.", 'wpv-views');?>
+			</p>
+			<p>
+				<?php _e("If View Templates don't work with your theme then you can enter the name of the function your theme uses here:", 'wpv-views');?>
+				<input type="text" name="wpv-theme-function" value="<?php echo $options['wpv-theme-function'];?>" />
+			</p>
+			<p>
+				<?php _e("Don't know the name of your theme function?", 'wpv-views');?>
+				<br />
+				<?php $checked = $options['wpv-theme-function-debug'] ? ' checked="checked"' : '';?>
+
+				<label><input type="checkbox" name="wpv-theme-function-debug" value="1" <?php echo $checked;?> /> <?php _e("Enable debugging and go to a page that should display a View Template and Views will display the call function name.", 'wpv-views');?></label>
+			</p>
+
+		</div>
+			
 
         <?php
         
@@ -414,8 +469,78 @@ class WPV_template_plugin extends WPV_template {
             }
         }
         
+		$options['wpv-theme-function'] = $_POST['wpv-theme-function'];
+		$options['wpv-theme-function-debug'] = isset($_POST['wpv-theme-function-debug']) && $_POST['wpv-theme-function-debug'];
+		
         return $options;
     }
-    
+
+    function hide_view_template_author() {
+        global $pagenow, $post;
+        if (($pagenow == 'post-new.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'view-template') ||
+                ($pagenow == 'post.php' && isset($_GET['action']) && $_GET['action'] == 'edit')) {
+
+            $post_type = $post->post_type;
+
+            if($pagenow == 'post.php' && $post_type != 'view-template') {
+                return;
+            }
+            ?>            
+                <script type="text/javascript">
+                    jQuery('#authordiv').hide();
+                </script>
+            <?php
+            
+            
+        }
+        
+    }
+	
+	function show_admin_messages() {
+		global $pagenow, $post;
+		
+        if ($pagenow == 'post.php' && isset($_GET['action']) && $_GET['action'] == 'edit') {
+			
+            $post_type = $post->post_type;
+
+            if($pagenow == 'post.php' && $post_type != 'view-template') {
+                return;
+            }
+			
+			$open_tags = substr_count($post->post_content, '[types');
+			$close_tags = substr_count($post->post_content, '[/types');
+			if ($close_tags < $open_tags) {
+				echo '<div id="message" class="error">';
+				echo sprintf(__('<strong>This template includes single-ended shortcodes</strong>. Pleae close all shortcodes to avoid processing errors. %sRead more%s', 'wpv-views'),
+							 '<a href="http://wp-types.com/faq/why-do-types-shortcodes-have-to-be-closed/" target="_blank">',
+							 ' &raquo;</a>');
+				echo '</div>';
+			}					
+			
+		}
+	}
 }
+
+/**
+ * Update custom fields array for view template on save
+ * @param unknown_type $pidd post ID
+ * @param unknown_type $post post reference
+ */
+function wpv_view_template_update_field_values($pidd, $post = null) {
+	if($post == null) {
+		$post = get_post($pidd);
+	}
+	$content = $post->post_content;
+	$shortcode_expression = "/\\[(wpv-|types).*?\\]/i";
+
+	// search for shortcodes
+	$counts = preg_match_all($shortcode_expression, $content, $matches);
+	
+	// iterate 0-level shortcode elements
+	if($counts > 0) {
+		$_wpv_view_template_fields = serialize($matches[0]);
+		update_post_meta($pidd, '_wpv_view_template_fields', $_wpv_view_template_fields);
+	}
+}
+
 

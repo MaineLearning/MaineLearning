@@ -89,7 +89,7 @@ if(is_admin()){
 			$view_settings_table_row++;
 
 			echo '<tr class="wpv_custom_field_show_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"><td></td><td>';
-			_e('Select posts with custom fields: ', 'wpv-view');
+			_e('Select posts with custom fields: ', 'wpv-views');
 			echo $summary;
 			
 			?>
@@ -248,8 +248,39 @@ function wpv_add_meta_key($args, $view_settings = null) {
 		<?php else: ?>
 			<?php $value = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_value']; ?>
 			<input type='text' name="_wpv_settings[custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_value]" value="<?php echo $value; ?>" />
-		<?php endif; ?>		
-		<?php _e('<strong>Note:</strong> Separate multiple values with a comma', 'wpv-views'); ?>
+		<?php endif; ?>
+		<?php _e('<strong>Note:</strong> Separate multiple values with a comma.', 'wpv-views'); ?>
+		<a style="cursor: pointer" onclick="show_custom_field_compare_functions()"><?php _e('Compare functions', 'wpv-views'); ?></a>
+		
+		<script type="text/javascript">
+			function show_custom_field_compare_functions() {
+				jQuery('.show_custom_field_compare_functions').show();
+			}
+		</script>
+
+		<div class="show_custom_field_compare_functions" style="display:none;margin-top:10px;">
+			<?php _e('<strong>Functions:</strong> You can use any of these functions for comparison:', 'wpv-views'); ?>
+					
+			<ul>
+				<li><?php _e('<strong>URL_PARAM</strong>(foo) - Use the url parameter "foo". eg http://www.example.com/foo=something', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>VIEW_PARAM</strong>(foo) - Use the parameter "foo" in the View shortcode. eg. [wpv-view name="my-view" foo="something"]', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>NOW</strong>() - The current time.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>TODAY</strong>() - The time at the start of today.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>FUTURE_DAY</strong>(x) - The day x days in the future.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>PAST_DAY</strong>(x) - The day x days in the past.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>THIS_MONTH</strong>() - The first day of this month.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>FUTURE_MONTH</strong>(x) - The first day of x months in the future.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>PAST_MONTH</strong>(x) - The first day of x months in the past.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>THIS_YEAR</strong>() - The first day of this year.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>FUTURE_YEAR</strong>(x) - The first day of x years in the future.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>PAST_YEAR</strong>(x) - The first day of x months in the past.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>SECONDS_FROM_NOW</strong>(x) - x seconds from now.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>MONTHS_FROM_NOW</strong>(x) - x months from now.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>YEARS_FROM_NOW</strong>(x) - x years from now.', 'wpv-views'); ?></li>
+				<li><?php _e('<strong>DATE</strong>(d,m,y) - The date d,m,y.', 'wpv-views'); ?></li>
+				
+			</ul>
+		</div>
 	</div>
 
 	<?php
@@ -265,4 +296,38 @@ function wpv_get_table_row_ui_type_custom_field($type) {
 	
 	return $type;
 }
+
+add_filter('wpv-view-get-summary', 'wpv_custom_field_summary_filter', 7, 3);
+
+function wpv_custom_field_summary_filter($summary, $post_id, $view_settings) {
+	$result = '';
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'posts') {
+		$count = 0;
+		foreach (array_keys($view_settings) as $key) {
+			if (strpos($key, 'custom-field-') === 0 && strpos($key, '_compare') === strlen($key) - strlen('_compare')) {
+				$name = substr($key, 0, strlen($key) - strlen('_compare'));
+	
+				$count++;
+					
+				if ($result != '') {
+					if (isset($view_settings['custom_fields_relationship']) && $view_settings['custom_fields_relationship'] == 'OR') {
+						$result .= __(' OR', 'wpv-views');
+					} else {
+						$result .= __(' AND', 'wpv-views');
+					}
+				}
+					
+				$result .= wpv_get_custom_field_summary($name, $view_settings);
+						
+			}
+		}
+	}
+
+	if ($result != '' && $summary != '') {
+		$summary .= '<br />';
+	}
+	$summary .= $result;
+	return $summary;
+}
+
 

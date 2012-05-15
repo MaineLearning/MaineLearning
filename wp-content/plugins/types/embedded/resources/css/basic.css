@@ -277,3 +277,27 @@ input.wpcf-form-error {
 #wpcf-types-form-rewrite-toggle {
     margin: 0 0 20px 0;
 }
+/*CHECKBOXES*/
+.wpcf-checkboxes-drag {
+    position: absolute;
+}
+.wpcf-checkboxes-drag img {
+    cursor: pointer;
+}
+.wpcf-fields-checkboxes-draggable legend {
+    background-position: 15px 2px !important;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding-left: 30px !important;
+}
+.wpcf-message {
+    padding: 0 0.6em;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 1em 0 1em 0;
+}
+.wpcf-error {
+    background-color: #FFEBE8;
+    border-color: #CC0000;
+}

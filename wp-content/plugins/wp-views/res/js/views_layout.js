@@ -23,6 +23,7 @@ function on_delete_wpv(index) {
     on_generate_wpv_layout(false);
     show_body_view_template_controls();
     show_taxonomy_view_controls();
+	show_view_changed_message();
     
 };
 
@@ -84,9 +85,13 @@ function on_up_wpv(index) {
     on_down_wpv(index - 1, false);
 };
 function on_add_field_wpv(menu, name, text) {
+	
+	text = editor_decode64(text);
+	
     var view_template = '';
     var view = '';
     var title = name;
+
     if (menu == wpv_view_template_text) {
         view_template = text;
         menu = '';
@@ -96,12 +101,22 @@ function on_add_field_wpv(menu, name, text) {
         view = text;
         name = wpv_taxonomy_view_text;
         menu = '';
-        title = '';
-    } else if (menu != '') {
+        title = wpv_taxonomy_view_text;
+    } 
+    // for taxonomies, add the necessary shortcode parts 
+    else if(menu.indexOf(wpv_add_taxonomy_text +'-!-') == 0) {
+    	name = 'wpv-taxonomy type="' + name + '" separator=", " format="link" show="name"'; 
+    }
+    else if(menu.indexOf('Types-!-') == 0) {
+        title = 'Types - ' + name;
+        name = title;
+    }
+    else if (menu != '') {
         name = menu.split('-!')[0] + ' - ' + name;
         title = name;
     }
     
+ 
     // find the last row.
     var temp_index = 0;
     while (jQuery('#wpv_field_row_' + temp_index).length != 0) {
@@ -114,7 +129,7 @@ function on_add_field_wpv(menu, name, text) {
     jQuery('#wpv_field_row_' + (temp_index - 1) + ' .arrow-none').attr('onclick', 'on_down_wpv(' + (temp_index - 1) + ')');
     jQuery('#wpv_field_row_' + (temp_index - 1) + ' .arrow-none').attr('style', 'cursor: pointer;');
     jQuery('#wpv_field_row_' + (temp_index - 1) + ' .arrow-none').attr('class', 'arrow-down');
-    
+
     // add a new row.
     var td = '<td width="20px"><img src="' + wpv_url + '/res/img/delete.png" onclick="on_delete_wpv(\'' + temp_index + '\')" style="cursor: pointer"></td>';
     td += '<td width="120px"><input id="wpv_field_prefix_' + temp_index + '" type="text" value="" name="_wpv_layout_settings[fields][prefix_' + temp_index + ']" width="100%"></td>';
@@ -154,6 +169,9 @@ function on_add_field_wpv(menu, name, text) {
     }
 
     on_generate_wpv_layout(false);
+	
+	show_view_changed_message();
+
 };
 
 jQuery(document).ready(function($){
@@ -180,6 +198,7 @@ function on_generate_wpv_layout(force) {
     
     // go through each row and get the fields
     
+    var header_name = '';
     var fields = Array();
     var temp_index = 0;
     var add_index = 0;
@@ -192,8 +211,22 @@ function on_generate_wpv_layout(force) {
             
             header_name = 'post-field-' + field_type.substring(wpv_field_text.length);
             field_type = '[wpv-post-field name="' + field_type.substring(wpv_field_text.length) + '"]';
+        } 
+        else if (field_type.indexOf('Types - ') == 0) {
+            add_type = 'custom';
+            // a custom field
+            
+            header_name = 'types-field-' + field_type.substring('Types - '.length);
+            field_type = '[types field="' + field_type.substring('Types - '.length) + '"][/types]';
+        } 
+        // taxonomy search, some prefix preset
+        else if(field_type.indexOf('wpvtax-') > 0) {
+        	add_type = 'posts';
+        	field_type = field_type.substring(field_type.indexOf('wpvtax-') + 7);
+        	// handle taxonomies
+			field_type = '[wpv-post-taxonomy type="' + field_type + '" separator=", " format="link" show="name"]';
+        	
         } else {
-
             // a post field
             
             for(var i = 0; i < wpv_shortcodes.length; i++) {
@@ -224,12 +257,15 @@ function on_generate_wpv_layout(force) {
                     header_name = wpv_shortcodes[i][1].substring(4);
                     header_name = header_name.replace(/_/g, '-');
                     break;
-                }
-            }
+                } 
+            } 
         }
         
         if ((query_type == 'posts' && (add_type == 'custom' || add_type == 'posts')) || (query_type == 'taxonomy' && add_type == 'taxonomy')) {
-            fields[add_index] = Array(jQuery('#wpv_field_prefix_' + temp_index).val(),
+            var open_wrapper = (query_type == 'taxonomy') ? '[' : '';
+            var close_wrapper = (query_type == 'taxonomy') ? ']' : '';
+            
+        	fields[add_index] = Array(jQuery('#wpv_field_prefix_' + temp_index).val(),
                                        field_type,
                                        jQuery('#wpv_field_suffix_' + temp_index).val(),
                                        jQuery('#wpv_field_name_' + temp_index).text(),
@@ -370,6 +406,10 @@ function wpv_render_table_layout(fields, cols) {
     output += "            <td>" + body + "</td>\n";
     output += "         [wpv-item index=" + cols + "]\n";
     output += "            <td>" + body + "</td></tr>\n";
+    output += "         [wpv-item index=pad]\n";
+    output += "            <td></td>\n";
+    output += "         [wpv-item index=pad-last]\n";
+    output += "            <td></td></tr>\n";
     output += "      </wpv-loop>\n   </table>\n";
     
     return output;
@@ -509,17 +549,24 @@ jQuery(document).ready(function($){
         // Show/Hide Row Title
         view_layout_fields_table_add_row_title_field();
         on_generate_wpv_layout(false);
+		
+		show_view_changed_message();
+
         
     });
     jQuery('select[name="_wpv_layout_settings[table_cols]"]').change(function() {
         on_generate_wpv_layout(false);
+		show_view_changed_message();
+
     });
     jQuery('.views_template_select').change(function() {
         on_generate_wpv_layout(false);
-    });
+		show_view_changed_message();
+	});
     
     jQuery('.taxonomy_view_select').change(function() {
         on_generate_wpv_layout(false);
+		show_view_changed_message();
     });
     
     var fixHelper = function(e, ui) {
@@ -544,9 +591,11 @@ jQuery(document).ready(function($){
             on_generate_wpv_layout(false);
             show_body_view_template_controls();
             show_taxonomy_view_controls();
+			show_view_changed_message();
+			
         }
     });
-    // Table of fields Row Title
+    // Table Row Title
     jQuery('#_wpv_layout_include_field_names').click(function(){
         view_layout_fields_table_add_row_title_field();
         on_generate_wpv_layout(false);
@@ -661,3 +710,4 @@ function select_taxonomy_view_in_dropdown(row, view) {
         }
     });
 }
+
