@@ -3,19 +3,34 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
-Deactivate Buddyvents and configure Events Manager
+Upgrade Akismet to 2.5.6
 
-Categories
-Existing
-Events
-Events page
-Events in Menu
-Front end submission
+Upgrade Gravity Forms to 1.6.4.2.1
+
+Upgrade Broken Link Checker to 1.5.1
+
+Upgrade Login Logo to 0.6
+
+Upgrade Bulletproof Security to .47.1, but don't activate. Awaiting resolution for Buddypress. http://wordpress.org/support/topic/plugin-bulletproof-security-buddypress-and-403
+
+Upgraded to network-privacy.0.1.3
+
+Upgraded to google-sitemap-generator.3.2.7
+
+Upgraded to wp-document-revisions.1.3.1
+
+Empty custom css in sites theme.
+
+Check to make sure "Quick post" and "All group activity" graphics appear correctly.
+
 
 
 
 ------------------------------------
 DONE
+
+------------------------------------
+Deactivate Buddyvents and configure Events Manager
 
 ------------------------------------
 2012-02-29

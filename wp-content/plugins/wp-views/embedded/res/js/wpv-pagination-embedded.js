@@ -8,7 +8,60 @@ jQuery(document).ready(function(){
         wpv_pagination_preload_pages(view_number, 1, max_pages, false, true);
     });
 });
-            
+
+function encodeToHex(str){
+    var r="";
+    var e=str.length;
+    var c=0;
+    var h;
+    while(c<e){
+        h=str.charCodeAt(c++).toString(16);
+        while(h.length<2) h="0"+h;
+        r+=h;
+    }
+    return r;
+}
+
+/**
+ * Converts the given data structure to a JSON string.
+ * Argument: arr - The data structure that must be converted to JSON
+ * Example: var json_string = array2json(['e', {pluribus: 'unum'}]);
+ * 			var json = array2json({"success":"Sweet","failure":false,"empty_array":[],"numbers":[1,2,3],"info":{"name":"Binny","site":"http:\/\/www.openjs.com\/"}});
+ * http://www.openjs.com/scripts/data/json_encode.php
+ */
+function array2json(arr) {
+    var parts = [];
+    var is_list = (Object.prototype.toString.apply(arr) === '[object Array]');
+
+    for(var key in arr) {
+    	var value = arr[key];
+        if(typeof value == "object") { //Custom handling for arrays
+            if(is_list) parts.push(array2json(value)); /* :RECURSION: */
+            else parts[key] = array2json(value); /* :RECURSION: */
+        } else {
+            var str = "";
+            if(!is_list) str = '"' + key + '":';
+
+            //Custom handling for multiple data types
+            if(typeof value == "number") str += value; //Numbers
+            else if(value === false) str += 'false'; //The booleans
+            else if(value === true) str += 'true';
+            else str += '"' + value + '"'; //All other things
+            // :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
+
+            parts.push(str);
+        }
+    }
+    var json = parts.join(",");
+    
+    if(is_list) return '[' + json + ']';//Return numerical JSON
+    return '{' + json + '}';//Return associative JSON
+}
+
+function wpv_serialize_array(data) {
+    return encodeToHex(array2json(data));
+}
+
 function wpv_pagination_init_preload_images() {
     jQuery('.wpv-pagination-preload-images').each(function(){
         var preloadedImages = new Array();
@@ -56,6 +109,19 @@ function add_url_query_parameters(data) {
     
     return data;
 }
+
+function add_view_parameters(data, page, view_number) {
+    data['action'] = 'wpv_get_page';
+    data['page'] = page;
+    data['post_id'] = jQuery('input[name=wpv_post_id]').val();
+    data['view_number'] = view_number;
+    data['wpv_column_sort_id'] = jQuery('input[name=wpv_column_sort_id]').val();
+    data['wpv_column_sort_dir'] = jQuery('input[name=wpv_column_sort_dir]').val();
+    data['wpv_view_widget_id'] = jQuery('#wpv_widget_view-' + view_number).val();
+    data['view_hash'] = jQuery('#wpv_view_hash-' + view_number).val();
+    
+    return data;
+    };
 
 function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages, cache_pages, preload_pages, spinner, spinner_image, callback_next, stop_rollover) {
     
@@ -129,24 +195,18 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
                 wpvPaginatorLayout.before('<div style="width:32px;height:32px;border:1px solid #6D6D6D;background:#FFFFFF 50% 50% no-repeat url('+spinner_image+');position:absolute;z-index:99;top:'+(Math.round(wpvPaginatorLayoutOffset.top)+(Math.round(wpvPaginatorLayout.height()/2))-img.height)+'px; left:'+(Math.round(wpvPaginatorLayoutOffset.left)+(Math.round(wpvPaginatorLayout.width()/2))-img.width)+'px;" id="wpv_slide_loading_img_'+view_number+'" class="wpv_slide_loading_img"></div>').animate({opacity:0.5}, 300);
             };
         }
-        var data = {
-            action : 'wpv_get_page',
-            page : page,
-            post_id : jQuery('input[name=wpv_post_id]').val(),
-            view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
-            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
-            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
-            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
-        };
+        var data = {};
+        add_view_parameters(data, page, view_number);
         add_url_query_parameters(data);
         if (typeof(icl_lang) != 'undefined') {
             data['lang'] = icl_lang;
         }
-        jQuery.post(wpv_admin_ajax_url, data, function(response) {
+        
+        jQuery.get(wpv_ajax_pagination_url + wpv_serialize_array(data), function(response) {
             window.wpvCachedPages[view_number][page] = response;
             wpv_pagination_get_page(view_number, next, effect, speed, response, wpvPaginatorLayout, wpvPaginatorFilter, callback_next);
         });
+  
         wpv_pagination_preload_pages(view_number, page, max_pages, cache_pages, preload_pages);
     }
     this.historyP[view_number] = page;
@@ -176,21 +236,14 @@ function wpv_pagination_load_next_page(view_number, page, max_pages) {
     }
     // LOAD NEXT
     if (page < max_pages) {
-        var dataNext = {
-            action : 'wpv_get_page',
-            page : next_page,
-            post_id : jQuery('input[name=wpv_post_id]').val(),
-            view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
-            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
-            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
-            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
-        };
+        var dataNext = {};
+        add_view_parameters(dataNext, next_page, view_number);
         add_url_query_parameters(dataNext);
         if (typeof(icl_lang) != 'undefined') {
             dataNext['lang'] = icl_lang;
         }
-        jQuery.post(wpv_admin_ajax_url, dataNext, function(response) {
+        
+        jQuery.get(wpv_ajax_pagination_url + wpv_serialize_array(dataNext), function(response) {
             window.wpvCachedPages[view_number][next_page] = response;
         });
     }
@@ -209,21 +262,14 @@ function wpv_pagination_load_previous_page(view_number, page, max_pages) {
     }
     // LOAD PREVIOUS
     if (page > 1) {
-        var dataPrevious = {
-            action : 'wpv_get_page',
-            page : previous_page,
-            post_id : jQuery('input[name=wpv_post_id]').val(),
-            view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
-            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
-            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
-            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
-        };
+        var dataPrevious = {};
+        
+        add_view_parameters(dataPrevious, previous_page, view_number);
         add_url_query_parameters(dataPrevious);
         if (typeof(icl_lang) != 'undefined') {
             dataPrevious['lang'] = icl_lang;
         }
-        jQuery.post(wpv_admin_ajax_url, dataPrevious, function(response) {
+        jQuery.get(wpv_ajax_pagination_url + wpv_serialize_array(dataPrevious), function(response) {
             window.wpvCachedPages[view_number][previous_page] = response;
         });
     }
@@ -241,21 +287,14 @@ function wpv_pagination_cache_current_page(view_number, page, max_pages) {
     }
     // Cache current page
     if (page in window.wpvCachedPages[view_number] == false) {
-        var dataCurrent = {
-            action : 'wpv_get_page',
-            page : page,
-            post_id : jQuery('input[name=wpv_post_id]').val(),
-            view_number : view_number,
-            wpv_nonce : jQuery('#wpv_get_page_nonce').attr('value'),
-            wpv_column_sort_id : jQuery('input[name=wpv_column_sort_id]').val(),
-            wpv_column_sort_dir : jQuery('input[name=wpv_column_sort_dir]').val(),
-            wpv_view_widget_id : jQuery('#wpv_widget_view-' + view_number).val()
-        };
+        var dataCurrent = {};
+        add_view_parameters(dataCurrent, page, view_number);
         add_url_query_parameters(dataCurrent);
         if (typeof(icl_lang) != 'undefined') {
             dataCurrent['lang'] = icl_lang;
         }
-        jQuery.post(wpv_admin_ajax_url, dataCurrent, function(response) {
+        
+        jQuery.get(wpv_ajax_pagination_url + wpv_serialize_array(dataCurrent), function(response) {
             window.wpvCachedPages[view_number][page] = response;
         });
     }

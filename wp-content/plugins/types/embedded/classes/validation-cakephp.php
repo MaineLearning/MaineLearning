@@ -962,6 +962,10 @@ class Wpcf_Cake_Validation
     function noSpecialChars($check) {
         return preg_match('#[^a-zA-Z0-9\s\_\-]#', $check) ? false : true;
     }
+    
+    function rewriteSlug($check) {
+        return preg_match('#[^a-zA-Z0-9\s\_\-\%]#', $check) ? false : true;
+    }
 
     /**
      * Attempts to pass unhandled Validation locales to a class starting with $classPrefix

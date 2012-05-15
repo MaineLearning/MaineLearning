@@ -303,6 +303,16 @@ jQuery(document).ready(function(){
         });
         return false;
     });
+    
+    // We need to hide the _wpcf_belongs_xxxx_id field for WPML.
+    
+    jQuery('#icl_mcs_details table tbody tr').each(function() {
+        var name = jQuery(this).find('td').html();
+        if (name.search(/^_wpcf_belongs_.*?_id/) != -1) {
+            jQuery(this).hide();
+        }
+        
+    });
 });
 
 

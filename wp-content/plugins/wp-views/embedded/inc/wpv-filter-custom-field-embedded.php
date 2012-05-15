@@ -8,7 +8,8 @@
 add_filter('wpv_filter_query', 'wpv_filter_post_custom_field', 11, 2);  // 11 to make sure it occurs after the orderby filter.
 function wpv_filter_post_custom_field($query, $view_settings) {
 
-	global $WP_Views;
+	global $WP_Views, $no_parameter_found;
+
 	$meta_keys = $WP_Views->get_meta_keys();
 
 	foreach (array_keys($view_settings) as $key) {
@@ -21,15 +22,23 @@ function wpv_filter_post_custom_field($query, $view_settings) {
 				$meta_name = str_replace('_', ' ', $meta_name);
 			}
 
-			if (!isset($query['meta_query']) && isset($view_settings['custom_fields_relationship'])) {
-				$query['meta_query'] = array('relation' => $view_settings['custom_fields_relationship']);
-			}
-
-			$query['meta_query'][] = array('key' => $meta_name,
-										  'value' => $view_settings['custom-field-' . $name . '_value'],
-										  'type' => $view_settings['custom-field-' . $name . '_type'],
-										  'compare' => $view_settings['custom-field-' . $name . '_compare']);
+			$value = $view_settings['custom-field-' . $name . '_value'];
+			$value = wpv_apply_user_functions($value);
 			
+			if ($value != $no_parameter_found) { // Only add if we have found a parameter
+				
+				$value = str_replace($no_parameter_found, '', $value); // just in case we have more than on parameter
+
+				if (!isset($query['meta_query']) && isset($view_settings['custom_fields_relationship'])) {
+					$query['meta_query'] = array('relation' => $view_settings['custom_fields_relationship']);
+				}
+	
+				
+				$query['meta_query'][] = array('key' => $meta_name,
+											  'value' => $value,
+											  'type' => $view_settings['custom-field-' . $name . '_type'],
+											  'compare' => $view_settings['custom-field-' . $name . '_compare']);
+			}			
 			
 		}
 	}
@@ -48,6 +57,31 @@ function wpv_filter_post_custom_field($query, $view_settings) {
 	}
 	
     return $query;
+}
+
+function wpv_get_custom_field_view_params($view_settings) {
+    $pattern = '/VIEW_PARAM\(([^(]*?)\)/siU';
+
+	$results = array();
+	
+	foreach (array_keys($view_settings) as $key) {
+		if (strpos($key, 'custom-field-') === 0 && strpos($key, '_compare') === strlen($key) - strlen('_compare')) {
+			$name = substr($key, 0, strlen($key) - strlen('_compare'));
+			$name = substr($name, strlen('custom-field-'));
+			
+			$value = $view_settings['custom-field-' . $name . '_value'];
+			
+    
+		    if(preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {
+		        foreach($matches as $match) {
+					$results[] = $match[1];
+				}
+			}
+			
+		}
+	}
+	
+	return $results;
 }
 
 function wpv_filter_post_process_custom_field($post_query, $view_settings) {

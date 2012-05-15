@@ -84,6 +84,9 @@ function wpv_pagination_edit_ok() {
     jQuery('#wpv_pagination_admin_edit').hide();
     
     on_generate_wpv_filter(false);
+    
+    show_view_changed_message();
+
 }
 
 function wpv_pagination_edit_cancel() {

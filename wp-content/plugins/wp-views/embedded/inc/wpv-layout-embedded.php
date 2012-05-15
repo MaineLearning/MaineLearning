@@ -3,7 +3,7 @@
 /*
  
     Shortcode for sorting by the column heading in
-    table of fields layout mode.
+    table layout mode.
     
 */
 

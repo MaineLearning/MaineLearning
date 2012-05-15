@@ -494,16 +494,16 @@ function wpcf_custom_taxonimies_register_translation($taxonomy, $data) {
     }
     $default = wpcf_custom_taxonomies_default();
     if (isset($data['description'])) {
-        icl_register_string('Types-TAX', $taxonomy . ' description',
+        wpcf_translate_register_string('Types-TAX', $taxonomy . ' description',
                 $data['description']);
     }
     foreach ($data['labels'] as $label => $string) {
         if ($label == 'name' || $label == 'singular_name') {
-            icl_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
             continue;
         }
         if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
-            icl_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
         }
     }
 }

@@ -17,6 +17,17 @@ function wpcf_admin_fields_get_groups() {
 }
 
 /**
+ * Gets group by ID.
+ * 
+ * @global type $wpdb
+ * @param type $group_id
+ * @return type 
+ */
+function wpcf_admin_fields_get_group($group_id) {
+    return wpcf_admin_fields_adjust_group(get_post($group_id));
+}
+
+/**
  * Converts post data.
  * 
  * @param type $post
@@ -434,6 +445,9 @@ function wpcf_fields_type_action($type, $func = '', $args = array()) {
 function wpcf_fields_get_shortcode($field, $add = '') {
     $shortcode = '[';
     $shortcode .= 'types field="' . $field['slug'] . '"' . $add;
+    if (in_array($field['type'], array('textfield', 'textarea', 'wysiwyg'))) {
+        $shortcode .= ' class="" style=""';
+    }
     $shortcode .= '][/types]';
     $shortcode = apply_filters('wpcf_fields_shortcode', $shortcode, $field);
     $shortcode = apply_filters('wpcf_fields_shortcode_type_' . $field['type'],

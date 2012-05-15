@@ -142,13 +142,13 @@ function wpcf_fields_checkbox_view($params) {
     if (isset($params['state']) && $params['state'] == 'unchecked' && empty($params['field_value'])) {
         return htmlspecialchars_decode($params['#content']);
     } else if (isset($params['state']) && $params['state'] == 'unchecked') {
-        return ' ';
+        return '__wpcf_skip_empty';
     }
 
     if (isset($params['state']) && $params['state'] == 'checked' && !empty($params['field_value'])) {
         return htmlspecialchars_decode($params['#content']);
     } else if (isset($params['state']) && $params['state'] == 'checked') {
-        return ' ';
+        return '__wpcf_skip_empty';
     }
     if (!empty($params['#content'])) {
         return htmlspecialchars_decode($params['#content']);

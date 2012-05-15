@@ -44,6 +44,9 @@ function wpv_filter_types_admin($view_settings) {
                 </div>
             </fieldset>
             
+            <div id="wpv-post-types-settings"<?php if($view_settings['query_type'][0] != 'posts') { echo ' style="display:none"'; }?>>
+                <?php wpv_post_types_settings($view_settings); ?>
+            </div>
             <div id="wpv-post-order-by"<?php if($view_settings['query_type'][0] != 'posts') { echo ' style="display:none"'; }?>>
                 <?php wpv_filter_order_by_admin($view_settings); ?>
             </div>

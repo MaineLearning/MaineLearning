@@ -2,15 +2,15 @@
 /*
 Plugin Name: WP Views
 Plugin URI: http://wp-types.com/
-Description: When you need to create lists of items, Views is the solution. Views will query the content from the database, iterate through it and let you display in with flair. You can also enable pagination, search, filtering and sorting by site visitors.
+Description: When you need to create lists of items, Views is the solution. Views will query the content from the database, iterate through it and let you display it with flair. You can also enable pagination, search, filtering and sorting by site visitors.
 Author: ICanLocalize
 Author URI: http://wpml.org
-Version: 0.9.4.2
+Version: 1.0
 */
 
 if(defined('WPV_VERSION')) return;
 
-define('WPV_VERSION', '0.9.4.2');
+define('WPV_VERSION', '1.0');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__) . '/embedded');
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -31,10 +31,13 @@ require WPV_PATH_EMBEDDED . '/inc/wpv-filter-meta-html-embedded.php';
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-widgets.php';
 require WPV_PATH . '/inc/wpv-layout.php';
+require WPV_PATH . '/inc/wpv-admin-changes.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-layout-embedded.php';
 require WPV_PATH . '/inc/wpv-filter.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-pagination-embedded.php';
+
+require WPV_PATH_EMBEDDED . '/inc/wpv-user-functions.php';
 
 require_once( WPV_PATH_EMBEDDED . '/inc/wpv-filter-status-embedded.php');
 require_once( WPV_PATH . '/inc/wpv-filter-status.php');
@@ -47,6 +50,8 @@ require_once( WPV_PATH . '/inc/wpv-filter-custom-field.php');
 require_once( WPV_PATH_EMBEDDED . '/inc/wpv-filter-parent-embedded.php');
 require_once( WPV_PATH . '/inc/wpv-filter-parent.php');
 require_once( WPV_PATH . '/inc/wpv-filter-taxonomy-term.php');
+require_once( WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-relationship-embedded.php');
+require_once( WPV_PATH . '/inc/wpv-filter-post-relationship.php');
 
 require WPV_PATH . '/inc/wpv-plugin.class.php';
 
@@ -66,5 +71,9 @@ require WPV_PATH . '/inc/views-templates/functions-templates.php';
 require WPV_PATH . '/inc/views-templates/wpv-template-plugin.class.php';
 $WPV_templates = new WPV_template_plugin();
 
+register_activation_hook(__FILE__, 'wpv_views_plugin_activate');
+register_deactivation_hook(__FILE__, 'wpv_views_plugin_deactivate');
 
+add_action('admin_init', 'wpv_views_plugin_redirect');
 
+add_filter('plugin_action_links', 'wpv_views_plugin_action_links', 10, 2);

@@ -217,3 +217,16 @@ function wpv_ajax_get_taxonomy_term_summary() {
     }    
     die;
 }
+
+add_filter('wpv-view-get-summary', 'wpv_taxonomy_term_summary_filter', 5, 3);
+
+function wpv_taxonomy_term_summary_filter($summary, $post_id, $view_settings) {
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'taxomomy') {
+		ob_start();
+		wpv_get_filter_taxonomy_term_summary($view_settings);
+		$summary .= ob_get_contents();
+		ob_end_clean();
+	}
+	return $summary;
+}
+

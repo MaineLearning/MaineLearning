@@ -22,9 +22,6 @@ function wpcf_fields_textarea() {
 
 function wpcf_fields_textarea_value_display_filter($value) {
     
-    // TODO Verify
-//    return strpos($value, '<p>') !== false ? $value : wpautop($value);
-    
     // see if it's already wrapped in <p> ... </p>
     $wrapped_in_p = false;
     if (!empty($value) && strpos($value, '<p>') === 0 && strrpos($value, "</p>\n") == strlen($value) - 5 ) {

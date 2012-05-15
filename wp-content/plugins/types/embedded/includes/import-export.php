@@ -181,6 +181,9 @@ function wpcf_admin_import_data($data = '', $redirect = true) {
             if ((isset($field['add']) && !$field['add']) && !$overwrite_fields) {
                 continue;
             }
+            if (empty($field['id']) || empty($field['name']) || empty($field['slug'])) {
+                continue;
+            }
             $field_data = array();
             $field_data['id'] = $field['id'];
             $field_data['name'] = $field['name'];

@@ -12,166 +12,352 @@ msgstr ""
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 
-msgid "Custom Fields (also known as post-meta) are information attached to WordPress posts. This data can then be queried and filtered in your database. With Types you can create Custom Field Groups which are then attached to any post type (including Posts, Pages and Custom Post Types) or taxonomy."
+msgid "Search fields"
 msgstr ""
 
-msgid "You can read more about Custom Fields in this tutorial: <a href=\"http://wp-types.com/user-guides/using-custom-fields/\" target=\"_blank\">http://wp-types.com/user-guides/using-custom-fields/</a>."
+msgid "None"
 msgstr ""
 
-msgid "On this page you can see your current custom field groups, as well as information about which post types and taxonomies they are attached to, and whether they are active or not."
+msgid "Custom Field Name"
 msgstr ""
 
-msgid "You have the following options:"
+msgid "Group"
 msgstr ""
 
-msgid "<strong>Add a Custom Fields Group:</strong> Use this to add a new custom fields group which can be attached to a post type"
+msgid "Types Name"
 msgstr ""
 
-msgid "<strong>Edit:</strong> Click to edit the custom field group"
+msgid "Type"
 msgstr ""
 
-msgid "<strong>Deactivate:</strong> Click to deactivate a custom field group (this can be re-activated at a later date)"
+msgid "Not under Types control"
 msgstr ""
 
-msgid "<strong>Delete Permanently:</strong> Click to delete a custom field group. <strong>Warning: This cannot be undone.</strong>"
+msgid "disabled"
 msgstr ""
 
-msgid "Custom Post Types are user-defined content types. Custom Taxonomies are used to categorize your content."
+msgid "This field was disabled during conversion. You need to set some further settings in the group editor."
 msgstr ""
 
-msgid "You can read more about Custom Post Types and Taxonomies in this tutorial. <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/</a>"
+msgid "Edit"
 msgstr ""
 
-msgid "This is the main admin page for your Custom Post Types and Taxonomies. It provides you with an overview of your data."
+msgid "Add to group"
 msgstr ""
 
-msgid "On this page you have the following options:"
+msgid "Remove from group"
 msgstr ""
 
-msgid "<strong>Add Custom Post Type:</strong> Use to create a new Custom Post Type"
+msgid "Change type"
 msgstr ""
 
-msgid "<strong>Add Custom Taxonomy:</strong> Use to create a new Custom Taxonomy"
+msgid "Add to Types control"
 msgstr ""
 
-msgid "<strong>Edit:</strong> Click to edit the settings of a Custom Post Type or Taxonomy"
+msgid "Stop controlling with Types"
 msgstr ""
 
-msgid "<strong>Deactivate:</strong> Click to deactivate a Custom Post Type or Taxonomy (this can be reactivated at a later date)"
+msgid "Delete"
 msgstr ""
 
-msgid "<strong>Delete:</strong> Click to delete a Custom Post Type or Taxonomy. <strong> Warning: This cannot be undone</strong> "
+msgid "Display all items"
 msgstr ""
 
-msgid "Use this page to import and export custom post types, taxonomies and custom fields to and from Types."
+msgid "Show pagination"
 msgstr ""
 
-msgid "Import"
+msgid "Removed from Types control: %s"
 msgstr ""
 
-msgid "<strong>Step 1:</strong> Upload an XML file or paste XML content directly into the text area."
+msgid "Added to Types control: %s"
 msgstr ""
 
-msgid "<strong>Step 2:</strong> Select which custom post types, taxonomies and custom fields should be imported."
+msgid "Fields %s have been deleted."
 msgstr ""
 
-msgid "Export"
+msgid "Fields %s are not Types fields. Types wont delete these fields."
 msgstr ""
 
-msgid "Click Export to export data from Types as an XML file."
+msgid "Please select fields"
 msgstr ""
 
-msgid "This is the edit page for your Custom Fields Groups."
+msgid "Save Changes"
 msgstr ""
 
-msgid "You can read more about creating a Custom Fields Group here: <a href=\"http://wp-types.com/user-guides/using-custom-fields/\">http://wp-types.com/user-guides/using-custom-fields/</a>"
+msgid "Deleting fields will remove fields from groups and delete post meta. Continue?"
 msgstr ""
 
-msgid "On this page you can create and edit your groups. To create a group, do the following:"
+msgid "Name of custom field"
 msgstr ""
 
-msgid "Add a Title"
+msgid "Under this name field will be stored in DB (sanitized)"
 msgstr ""
 
-msgid "Choose where to display your group. You can attach this to both default WordPress post types and Custom Post Types. (nb: you can also associate taxonomy terms with Custom Field Groups)"
+msgid "Description"
 msgstr ""
 
-msgid "To add a field click on the field you desire under “Available Fields” on the right hand side of your screen. This will be added to your Custom Field Group"
+msgid "Text that describes function to user"
 msgstr ""
 
-msgid "Add information about your Custom Field"
+msgid "Value to store"
 msgstr ""
 
-msgid "Tips"
+msgid "Set checked by default (on new post)?"
 msgstr ""
 
-msgid "To ensure a user completes a field, check the box for validation required"
+msgid "Display the value of this field from the database"
 msgstr ""
 
-msgid "Once you have created a field it will be saved for future use under \"User created fields\""
+msgid "Show one of these two values:"
 msgstr ""
 
-msgid "You can drag and drop the order of your custom fields using the blue icon"
+msgid "Not selected:"
 msgstr ""
 
-msgid "Use this page to create a WordPress post type. If you’d like to learn more about Custom Post Types you can read our detailed guide: <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/</a> or check out our tutorial on creating them with Types: <a href=\"http://wp-types.com/user-guides/create-a-custom-post-type/\" target=\"_blank\">http://wp-types.com/user-guides/create-a-custom-post-type/</a>"
+msgid "Selected:"
 msgstr ""
 
-msgid "Name and Description"
+msgid "Checkboxes"
 msgstr ""
 
-msgid "Add a singular and plural name for your post type. You should also add a slug. This will be created from the post type name if none is added."
+msgid "Add option"
 msgstr ""
 
-msgid "Visibility"
+msgid "Checkbox title"
 msgstr ""
 
-msgid "Determine whether your post type will be visible on the admin menu to your users."
+msgid "Move this option"
 msgstr ""
 
-msgid "You can also adjust the menu position. The default position is 20, which means your post type will appear under “Pages”. You can find more information about menu positioning in the WordPress Codex. <a href=\"http://codex.wordpress.org/Function_Reference/register_post_type#Parameters\" target=\"_blank\">http://codex.wordpress.org/Function_Reference/register_post_type#Parameters</a>"
+msgid "Are you sure?"
 msgstr ""
 
-msgid "The default post type icon is the pushpin icon that appears beside WordPress posts. You can change this by adding your own icon of 16px x 16px."
+msgid "Delete this checkbox"
 msgstr ""
 
-msgid "Select Taxonomies"
+msgid "Title"
 msgstr ""
 
-msgid "Choose which taxonomies are to be associated with this post type."
+msgid "Options"
 msgstr ""
 
-msgid "Labels"
+msgid "Option title"
 msgstr ""
 
-msgid "Labels are the text that is attached to your custom post type name. Examples of them in use are “Add New Post” (where “Add New” is the label”) and “Edit Post” (where “Edit” is the label). In normal circumstances the defaults will suffice."
+msgid "Delete this option"
 msgstr ""
 
-msgid "Display Sections"
+msgid "Default"
 msgstr ""
 
-msgid "Choose which sections to display on your “Add New” page."
+msgid "No Default"
 msgstr ""
 
-msgid "Advanced Settings"
+msgid "Show one of these values:"
 msgstr ""
 
-msgid "Advanced settings give you even more control over your custom post type. You can read in detail what all of these settings do on our tutorial."
+msgid "Help"
 msgstr ""
 
-msgid "You can use Custom Taxonomies to categorize your content. Read more about what they are on our website: <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/</a> or you can read our guide about how to set them up: <a href=\"http://wp-types.com/user-guides/create-custom-taxonomies/\" target=\"_blank\">http://wp-types.com/user-guides/create-custom-taxonomies/</a>"
+msgid "%sUser Guides%s  - everything you need to know about using Types"
 msgstr ""
 
-msgid "Add a singular and plural name for your taxonomy. You should also add a slug. This will be created from the taxonomy name if none is added."
+msgid "%sTypes fields API%s (for developers) - Learn how to insert Types fields to PHP templates"
 msgstr ""
 
-msgid "Select Post Types"
+msgid "%sSupport forum%s - register in our forum to receive support"
 msgstr ""
 
-msgid "Choose which post types this taxonomy should be associated with."
+msgid "%sRate Types on WordPress.org%s"
+msgstr ""
+
+msgid "%sTypes press resources%s  - write about Types"
+msgstr ""
+
+msgid "%sViews%s - the commercial complement of Types, which makes content display a breeze."
+msgstr ""
+
+msgid "Start using Types"
+msgstr ""
+
+msgid "New custom post types and taxonomy"
+msgstr ""
+
+msgid "New custom fields"
+msgstr ""
+
+msgid "Documentation and Support"
+msgstr ""
+
+msgid "Want to help Types?"
+msgstr ""
+
+msgid "Activate"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "A group by name <em>%s</em> already exists. Please use a different name and save again."
+msgstr ""
+
+msgid "Wrong group ID %d"
+msgstr ""
+
+msgid "Field slugs cannot contain non-English characters. Please edit this field name %s and save again."
+msgstr ""
+
+msgid "Field with name \"%s\" already exists"
+msgstr ""
+
+msgid "Group saved"
+msgstr ""
+
+msgid "Error saving group"
+msgstr ""
+
+msgid "Group with ID %d do not exist"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Available fields"
+msgstr ""
+
+msgid "Looking for repeater fields?"
+msgstr ""
+
+msgid "Learn about Types %sfield tables%s"
+msgstr ""
+
+msgid "User created fields"
+msgstr ""
+
+msgid "Are you sure that you want to remove field %s from history?"
+msgstr ""
+
+msgid "Remove field %s"
+msgstr ""
+
+msgid "Enter group title"
+msgstr ""
+
+msgid "Enter a description for this group"
+msgstr ""
+
+msgid "Displayed on all content types"
+msgstr ""
+
+msgid "Post Types:"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Not Selected"
+msgstr ""
+
+msgid "Terms:"
+msgstr ""
+
+msgid "Where to display this group"
+msgstr ""
+
+msgid "Each custom fields group can display on different content types or different taxonomy."
+msgstr ""
+
+msgid "Default Template"
+msgstr ""
+
+msgid "Content templates:"
+msgstr ""
+
+msgid "Display this group when ANY of the above conditions is met"
+msgstr ""
+
+msgid "Display this group when ALL the above conditions is met"
+msgstr ""
+
+msgid "This group will appear on %pt% edit pages where content belongs to taxonomy: %tx% or View Template is: %vt%"
+msgstr ""
+
+msgid "This group will appear on %pt% edit pages where content belongs to taxonomy: %tx% and View Template is: %vt%"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "any"
+msgstr ""
+
+msgid "Fields"
+msgstr ""
+
+msgid "There are no fields in this group. To add a field, click on the field buttons at the right."
+msgstr ""
+
+msgid "Warning: same values selected"
+msgstr ""
+
+msgid "Requested field don't exist"
+msgstr ""
+
+msgid "Wrong field requested"
+msgstr ""
+
+msgid "Move this field"
+msgstr ""
+
+msgid "Delete this field"
+msgstr ""
+
+msgid "Untitled"
+msgstr ""
+
+msgid "%s field"
+msgstr ""
+
+msgid "Enter field name"
+msgstr ""
+
+msgid "Enter field slug"
+msgstr ""
+
+msgid "Describe this field"
+msgstr ""
+
+msgid "This fields can appear multiple times when editing"
+msgstr ""
+
+msgid "There may be multiple instances of this field already. When you switch back to single-field mode, all values of this field will be updated when it's edited."
+msgstr ""
+
+msgid "Translation preferences"
+msgstr ""
+
+msgid "Validation"
+msgstr ""
+
+msgid "Error message"
+msgstr ""
+
+msgid "Unable to open zip file"
+msgstr ""
+
+msgid "Unable to process file"
+msgstr ""
+
+msgid "Error uploading file"
 msgstr ""
 
 msgid "Data not valid"
+msgstr ""
+
+msgid "Import"
 msgstr ""
 
 msgid "When importing to theme:"
@@ -187,6 +373,9 @@ msgid "Export Types data"
 msgstr ""
 
 msgid "Download all custom fields, custom post types and taxonomies created by Types plugin."
+msgstr ""
+
+msgid "Export"
 msgstr ""
 
 msgid "Upload XML file"
@@ -267,6 +456,249 @@ msgstr ""
 msgid "Custom taxonomies to be deleted"
 msgstr ""
 
+msgid "Post relationship"
+msgstr ""
+
+msgid "Create relationships"
+msgstr ""
+
+msgid "Add resized images to the media library"
+msgstr ""
+
+msgid "Types will automatically add the resized images as attachments to the media library. Choose this to automatically upload resized images to a CDN."
+msgstr ""
+
+msgid "When importing, add texts to WPML's String Translation table"
+msgstr ""
+
+msgid "Display Types footer credits"
+msgstr ""
+
+msgid "Show your support to Types, by telling people that you're using it. We'll add a small footer that tells just about Types."
+msgstr ""
+
+msgid "Settings saved"
+msgstr ""
+
+msgid "Children: None"
+msgstr ""
+
+msgid "Children: %s"
+msgstr ""
+
+msgid "Parent: %s"
+msgstr ""
+
+msgid "Parent: None"
+msgstr ""
+
+msgid "Post Relationship"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Edit fields"
+msgstr ""
+
+msgid "Please save the page first, before you can edit the child items"
+msgstr ""
+
+msgid "You can choose which fields will show when editing parent pages."
+msgstr ""
+
+msgid "Click on the 'edit' button to select them for each parent."
+msgstr ""
+
+msgid "Learn about %sPost Type Relationships%s"
+msgstr ""
+
+msgid "Wrong post types"
+msgstr ""
+
+msgid "Relationship do not exist"
+msgstr ""
+
+msgid "Repeating fields should not be used in child posts. Types will update all field values."
+msgstr ""
+
+msgid "Title, all custom fields and parents"
+msgstr ""
+
+msgid "All fields, including the standard post fields"
+msgstr ""
+
+msgid "Specific fields"
+msgstr ""
+
+msgid "Post title"
+msgstr ""
+
+msgid "Post body"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Custom Fields (also known as post-meta) are information attached to WordPress posts. This data can then be queried and filtered in your database. With Types you can create Custom Field Groups which are then attached to any post type (including Posts, Pages and Custom Post Types) or taxonomy."
+msgstr ""
+
+msgid "You can read more about Custom Fields in this tutorial: <a href=\"http://wp-types.com/user-guides/using-custom-fields/\" target=\"_blank\">http://wp-types.com/user-guides/using-custom-fields/ &raquo;</a>."
+msgstr ""
+
+msgid "Add a custom fields group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Post types"
+msgstr ""
+
+msgid "Taxonomies"
+msgstr ""
+
+msgid "Delete Permanently"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "You will be able to set conditional field display once this group is saved."
+msgstr ""
+
+msgid "Conditional display"
+msgstr ""
+
+msgid "Data-dependent display filters"
+msgstr ""
+
+msgid "Specify additional filters that control this group's display, based on values of custom fields."
+msgstr ""
+
+msgid "Add condition"
+msgstr ""
+
+msgid "Customize the display logic"
+msgstr ""
+
+msgid "Go back to simple logic"
+msgstr ""
+
+msgid "Customize conditions"
+msgstr ""
+
+msgid "Re-read structure"
+msgstr ""
+
+msgid "Use customized conditions"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "You will be able to set conditional field display when you save more fields."
+msgstr ""
+
+msgid "Remove condition"
+msgstr ""
+
+msgid "Custom Types UI Post Types"
+msgstr ""
+
+msgid "(exists)"
+msgstr ""
+
+msgid "Custom Types UI Taxonomies"
+msgstr ""
+
+msgid "Disable Custom Types UI after importing the configuration (leave this checked to avoid defining custom types twice)"
+msgstr ""
+
+msgid "Advanced Custom Fields"
+msgstr ""
+
+msgid "Group will be created"
+msgstr ""
+
+msgid "Group will be updated"
+msgstr ""
+
+msgid "Field conversion not supported by Types"
+msgstr ""
+
+msgid "Field with same name is already controlled by Types"
+msgstr ""
+
+msgid "Field will be updated"
+msgstr ""
+
+msgid "Field will be created"
+msgstr ""
+
+msgid "Import custom field settings"
+msgstr ""
+
+msgid "Post Type %s added"
+msgstr ""
+
+msgid "Taxonomy %s added"
+msgstr ""
+
+msgid "Group %s added"
+msgstr ""
+
+msgid "Group %s updated"
+msgstr ""
+
+msgid "Field %s added"
+msgstr ""
+
+msgid "Group deactivated"
+msgstr ""
+
+msgid "Error occured"
+msgstr ""
+
+msgid "Group activated"
+msgstr ""
+
+msgid "Post type deactivated"
+msgstr ""
+
+msgid "Post type activated"
+msgstr ""
+
+msgid "Taxonomy deactivated"
+msgstr ""
+
+msgid "Taxonomy activated"
+msgstr ""
+
+msgid "No post types associated"
+msgstr ""
+
+msgid "No taxonomies associated"
+msgstr ""
+
+msgid "Error occured"
+msgstr ""
+
+msgid "Field \"%s\" type was converted from %s to %s. You need to set some further settings in the group editor."
+msgstr ""
+
 msgid "Wrong custom post type specified"
 msgstr ""
 
@@ -282,9 +714,6 @@ msgstr ""
 msgid "Enter in plural!"
 msgstr ""
 
-msgid "Alphanumeric with whitespaces only"
-msgstr ""
-
 msgid "Custom post type name singular"
 msgstr ""
 
@@ -294,13 +723,7 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-msgid "Machine readable name."
-msgstr ""
-
-msgid "If not provided - will be created from singular name."
-msgstr ""
-
-msgid "Description"
+msgid "Visibility"
 msgstr ""
 
 msgid "Make this type public (will appear in the WordPress Admin menu)"
@@ -318,7 +741,13 @@ msgstr ""
 msgid "The url to the icon to be used for this menu. Default: null - defaults to the posts icon."
 msgstr ""
 
+msgid "Select Taxonomies"
+msgstr ""
+
 msgid "Registered taxonomies that will be used with this post type."
+msgstr ""
+
+msgid "Labels"
 msgstr ""
 
 msgid "Add New"
@@ -378,7 +807,7 @@ msgstr ""
 msgid "The all items text used in the menu. Default is the Name label."
 msgstr ""
 
-msgid "Title"
+msgid "Display Sections"
 msgstr ""
 
 msgid "Text input field to create a post title."
@@ -582,252 +1011,6 @@ msgstr ""
 msgid "Custom post type saved"
 msgstr ""
 
-msgid "Wrong group ID %d"
-msgstr ""
-
-msgid "Group saved"
-msgstr ""
-
-msgid "Error saving group"
-msgstr ""
-
-msgid "Group with ID %d do not exist"
-msgstr ""
-
-msgid "Available fields"
-msgstr ""
-
-msgid "User created fields"
-msgstr ""
-
-msgid "Enter group title"
-msgstr ""
-
-msgid "Enter a description for this group"
-msgstr ""
-
-msgid "Displayed on all content types"
-msgstr ""
-
-msgid "Post Types:"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "OK"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "No terms associated"
-msgstr ""
-
-msgid "Terms:"
-msgstr ""
-
-msgid "Where to display this group"
-msgstr ""
-
-msgid "Each custom fields group can display on different content types or different taxonomy."
-msgstr ""
-
-msgid "Fields"
-msgstr ""
-
-msgid "There are no fields in this group. To add a field, click on the field buttons at the right."
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Warning: same values selected"
-msgstr ""
-
-msgid "Requested field don't exist"
-msgstr ""
-
-msgid "Wrong field requested"
-msgstr ""
-
-msgid "Are you sure?"
-msgstr ""
-
-msgid "Move this field"
-msgstr ""
-
-msgid "Delete this field"
-msgstr ""
-
-msgid "Untitled"
-msgstr ""
-
-msgid "%s field"
-msgstr ""
-
-msgid "Enter field name"
-msgstr ""
-
-msgid "Describe this field"
-msgstr ""
-
-msgid "Translation preferences"
-msgstr ""
-
-msgid "Validation"
-msgstr ""
-
-msgid "Error message"
-msgstr ""
-
-msgid "Add Custom Post Type"
-msgstr ""
-
-msgid "Add Custom Taxonomy"
-msgstr ""
-
-msgid "Post Type Name"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Taxonomies"
-msgstr ""
-
-msgid "Delete Permanently"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Yes"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Taxonomy Name"
-msgstr ""
-
-msgid "Post Types"
-msgstr ""
-
-msgid "Add a custom fields group"
-msgstr ""
-
-msgid "Group name"
-msgstr ""
-
-msgid "Post types"
-msgstr ""
-
-msgid "Name of custom field"
-msgstr ""
-
-msgid "Under this name field will be stored in DB (sanitized)"
-msgstr ""
-
-msgid "Text that describes function to user"
-msgstr ""
-
-msgid "Value to store"
-msgstr ""
-
-msgid "Set checked by default (on new post)?"
-msgstr ""
-
-msgid "Display the value of this field from the database"
-msgstr ""
-
-msgid "Show one of these two values:"
-msgstr ""
-
-msgid "Not selected:"
-msgstr ""
-
-msgid "Selected:"
-msgstr ""
-
-msgid "Options"
-msgstr ""
-
-msgid "Add option"
-msgstr ""
-
-msgid "Option title"
-msgstr ""
-
-msgid "Move this option"
-msgstr ""
-
-msgid "Delete this option"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "No Default"
-msgstr ""
-
-msgid "Show one of these values:"
-msgstr ""
-
-msgid "Search fields"
-msgstr ""
-
-msgid "Custom Field Name"
-msgstr ""
-
-msgid "Group"
-msgstr ""
-
-msgid "Types Name"
-msgstr ""
-
-msgid "Type"
-msgstr ""
-
-msgid "Not under Types control"
-msgstr ""
-
-msgid "disabled"
-msgstr ""
-
-msgid "Disabled during conversion to other type. Fix field in form."
-msgstr ""
-
-msgid "Add to group"
-msgstr ""
-
-msgid "Remove from group"
-msgstr ""
-
-msgid "Change type"
-msgstr ""
-
-msgid "Add to Types control"
-msgstr ""
-
-msgid "Stop controlling with Types"
-msgstr ""
-
-msgid "Display all items"
-msgstr ""
-
-msgid "Show pagination"
-msgstr ""
-
-msgid "Removed from Types control: %s"
-msgstr ""
-
-msgid "Added to Types control: %s"
-msgstr ""
-
-msgid "Please select fields"
-msgstr ""
-
 msgid "Wrong custom taxonomy specified"
 msgstr ""
 
@@ -837,10 +1020,19 @@ msgstr ""
 msgid "Custom taxonomy name singular"
 msgstr ""
 
+msgid "Machine readable name."
+msgstr ""
+
+msgid "If not provided - will be created from singular name."
+msgstr ""
+
 msgid "Make this taxonomy public (will appear in the WordPress Admin menu)"
 msgstr ""
 
 msgid "Hidden - users cannot directly edit data in this taxonomy"
+msgstr ""
+
+msgid "Select Post Types"
 msgstr ""
 
 msgid "Registered post types that will be used with this taxonomy."
@@ -915,6 +1107,12 @@ msgstr ""
 msgid "The menu name text. This string is the name to give menu items. Defaults to value of name."
 msgstr ""
 
+msgid "Hierarchical - like post categories, with parent / children relationship and checkboxes to select taxonomy"
+msgstr ""
+
+msgid "Flat - like post tags, with a text input to enter terms"
+msgstr ""
+
 msgid "Rewrite permalinks with this format. Default will use $taxonomy as query var."
 msgstr ""
 
@@ -948,9 +1146,6 @@ msgstr ""
 msgid "Default: if not set, defaults to value of show_ui argument."
 msgstr ""
 
-msgid "Is this taxonomy hierarchical (have descendants) like categories or not hierarchical like tags."
-msgstr ""
-
 msgid "False to prevent queries, or string to customize query var. Default will use $taxonomy as query var."
 msgstr ""
 
@@ -981,64 +1176,391 @@ msgstr ""
 msgid "Custom taxonomy saved"
 msgstr ""
 
-msgid "Activate"
+msgid "Custom Post Types are user-defined content types. Custom Taxonomies are used to categorize your content."
 msgstr ""
 
-msgid "Deactivate"
+msgid "You can read more about Custom Post Types and Taxonomies in this tutorial. <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/ &raquo;</a>"
 msgstr ""
 
-msgid "Group deactivated"
+msgid "Add Custom Post Type"
 msgstr ""
 
-msgid "Error occured"
+msgid "Add Custom Taxonomy"
 msgstr ""
 
-msgid "Group activated"
+msgid "Post Type Name"
 msgstr ""
 
-msgid "Post type deactivated"
+msgid "Taxonomy Name"
 msgstr ""
 
-msgid "Post type activated"
+msgid "Post Types"
 msgstr ""
 
-msgid "Taxonomy deactivated"
+msgid "Custom Fields"
 msgstr ""
 
-msgid "Taxonomy activated"
+msgid "Custom Types and Taxonomies"
 msgstr ""
 
-msgid "No post types associated"
+msgid "Import/Export"
 msgstr ""
 
-msgid "No taxonomies associated"
+msgid "Custom Fields Control"
 msgstr ""
 
-msgid "You must define the $operator parameter for Wpcf_Cake_Validation::comparison()"
+msgid "Settings"
 msgstr ""
 
-msgid "You must define a regular expression for Wpcf_Cake_Validation::custom()"
+msgid "Edit Group"
 msgstr ""
 
-msgid "Could not find %s class, unable to complete validation."
+msgid "Add New Group"
 msgstr ""
 
-msgid "Method %s does not exist on %s unable to complete validation."
+msgid "Edit Custom Post Type"
 msgstr ""
 
-msgid "Required"
+msgid "Add New Custom Post Type"
 msgstr ""
 
-msgid "Email"
+msgid "Edit Taxonomy"
+msgstr ""
+
+msgid "Add New Taxonomy"
+msgstr ""
+
+msgid "Migration"
+msgstr ""
+
+msgid "Custom Post Types and Taxonomies"
+msgstr ""
+
+msgid "Custom Field"
+msgstr ""
+
+msgid "Types"
+msgstr ""
+
+msgid "Want to display custom content easily?"
+msgstr ""
+
+msgid "%sViews%s plugin let's you create dynamic templates for single pages and complex content lists. It queries content from the database, filters it and displays in any way you choose."
+msgstr ""
+
+msgid "Views is already installed in your site!"
+msgstr ""
+
+msgid "Next:"
+msgstr ""
+
+msgid "Create <strong>View Templates</strong> for single pages &raquo;"
+msgstr ""
+
+msgid "Create <strong>Views</strong> for content lists &raquo;"
+msgstr ""
+
+msgid "For tutorials and manuals, go to %shttp://wp-types.com%s"
+msgstr ""
+
+msgid "posts, pages and custom content types"
+msgstr ""
+
+msgid "%s and %s"
+msgstr ""
+
+msgid "Display Custom Content"
+msgstr ""
+
+msgid "Now that you’ve created your content, how are you going to display it?"
+msgstr ""
+
+msgid "The %sViews plugin%s with its graphical user interface, makes it easy for you to create complex layouts and perform dynamic queries on the WordPress database, without writing any PHP."
+msgstr ""
+
+msgid "From the WordPress Dashboard, you’ll be able to:"
+msgstr ""
+
+msgid "Create dynamic page templates for your %s content."
+msgstr ""
+
+msgid "Load %s and display them as lists, grids, tables, sliders and more."
+msgstr ""
+
+msgid "Create your own widgets and place them anywhere in the theme."
+msgstr ""
+
+msgid "%sLearn more about Views%s"
+msgstr ""
+
+msgid "Check out some examples of sites that were created without writing any PHP. We’ve even created tutorials to teach you how to build them yourself:"
+msgstr ""
+
+msgid "Magazine<br />(%stutorial%s)"
+msgstr ""
+
+msgid "Classifieds<br />(%stutorial%s)"
+msgstr ""
+
+msgid "Real Estate<br />(%stutorial%s)"
+msgstr ""
+
+msgid "Showcase<br />(%stutorial%s)"
+msgstr ""
+
+msgid "Prefer to use PHP and code templates manually?"
+msgstr ""
+
+msgid "%sLearn the Types PHP API%s"
+msgstr ""
+
+msgid "You have Types import pending. %sClick here to import.%s %sDismiss message.%s"
+msgstr ""
+
+msgid "settings.xml file missing"
+msgstr ""
+
+msgid "Types creates Custom Post Types. These are user-defined WordPress content types. On  your theme the following Types are defined:"
+msgstr ""
+
+msgid "If you want to edit these or create your own you can download the full version of <strong>Types</strong> from <a href=\"%s\">%s</a>"
+msgstr ""
+
+msgid "Please check your input data"
+msgstr ""
+
+msgid "This field is locked for editing because WPML will copy its value from the original language."
+msgstr ""
+
+msgid "Warning: same values set"
+msgstr ""
+
+msgid "Insert Types Shortcode"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "Insert field"
+msgstr ""
+
+msgid "Multiple lines"
+msgstr ""
+
+msgid "Textarea"
+msgstr ""
+
+msgid "If set, this text will be displayed instead of raw data"
+msgstr ""
+
+msgid "Class"
+msgstr ""
+
+msgid "Style"
 msgstr ""
 
 msgid "Date"
 msgstr ""
 
-msgid "Digits"
+msgid "Input format: %s"
+msgstr ""
+
+msgid "Show as calendar"
+msgstr ""
+
+msgid "Show as text"
+msgstr ""
+
+msgid "F j, Y"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Documentation on date and time formatting"
+msgstr ""
+
+msgid "Insert date"
+msgstr ""
+
+msgid "Calendar"
+msgstr ""
+
+msgid "Select date"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Image title"
+msgstr ""
+
+msgid "Title text for the image, e.g. &#8220;The Mona Lisa&#8221;"
+msgstr ""
+
+msgid "Alternate Text"
+msgstr ""
+
+msgid "Alt text for the image, e.g. &#8220;The Mona Lisa&#8221;"
+msgstr ""
+
+msgid "Alignment"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Types can only resize images that you upload to this site and not images from other domains."
+msgstr ""
+
+msgid "Types will be able to resize images that are uploaded to the post. If you specify URLs of images on other sites, Types will not resize them."
+msgstr ""
+
+msgid "Pre-defined sizes"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Full Size"
+msgstr ""
+
+msgid "Custom size"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Specify custom width"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Specify custom height"
+msgstr ""
+
+msgid "Keep proportional"
+msgstr ""
+
+msgid "Insert shortcode"
+msgstr ""
+
+msgid "Image %s not valid"
+msgstr ""
+
+msgid "Upload image"
+msgstr ""
+
+msgid "Wrong field specified"
+msgstr ""
+
+msgid "Checkbox"
+msgstr ""
+
+msgid "Single line"
+msgstr ""
+
+msgid "Texfield"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "WYSIWYG"
+msgstr ""
+
+msgid "WYSIWYG editor"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Insert email"
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Phone"
 msgstr ""
 
 msgid "Numeric"
+msgstr ""
+
+msgid "Output format"
+msgstr ""
+
+msgid "Similar to sprintf function. Default: 'FIELD_NAME: FIELD_VALUE'."
+msgstr ""
+
+msgid "Skype"
+msgstr ""
+
+msgid "Skype name"
+msgstr ""
+
+msgid "Edit Skype button"
+msgstr ""
+
+msgid "Insert skype button"
+msgstr ""
+
+msgid "Enter your Skype Name"
+msgstr ""
+
+msgid "Select a button from below"
+msgstr ""
+
+msgid "Skype buttons with status"
+msgstr ""
+
+msgid "If you choose to show your Skype status, your Skype button will always reflect your availability on Skype. This status will be shown to everyone, whether they’re in your contact list or not."
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Upload file"
+msgstr ""
+
+msgid "Use as field value"
+msgstr ""
+
+msgid "Display as link"
+msgstr ""
+
+msgid "Link title"
+msgstr ""
+
+msgid "Functionality enhanced using %sWordPress Custom Fields%s"
+msgstr ""
+
+msgid "Functionality enhanced using %sWordPress Custom Post Types%s"
+msgstr ""
+
+msgid "Functionality enhanced using %sWordPress Custom Taxonomy%s"
+msgstr ""
+
+msgid "You too can support Types! Would you like to add a small credit link, saying that you're using Types for custom fields or custom post types?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No, thanks"
 msgstr ""
 
 msgid "Group \"%s\" update failed"
@@ -1077,226 +1599,85 @@ msgstr ""
 msgid "Custom taxonomy \"%s\" deleted"
 msgstr ""
 
-msgid "Multiple lines"
+msgid "Post relationships created"
 msgstr ""
 
-msgid "Textarea"
+msgid "Fields table"
 msgstr ""
 
-msgid "If set, this text will be displayed instead of raw data"
+msgid "Are you sure about deleting this post?"
 msgstr ""
 
-msgid "Checkbox"
+msgid "If you continue without saving your changes, it might get lost."
 msgstr ""
 
-msgid "Skype"
+msgid "Save All"
 msgstr ""
 
-msgid "Skype name"
+msgid "This %s belongs to:"
 msgstr ""
 
-msgid "Edit Skype button"
+msgid "Post Title"
 msgstr ""
 
-msgid "Insert skype button"
+msgid "Post Body"
 msgstr ""
 
-msgid "Enter your Skype Name"
+msgid "Action"
 msgstr ""
 
-msgid "Select a button from below"
+msgid "Delete"
 msgstr ""
 
-msgid "Skype buttons with status"
+msgid "Post not updated. Relationship data missing."
 msgstr ""
 
-msgid "If you choose to show your Skype status, your Skype button will always reflect your availability on Skype. This status will be shown to everyone, whether they’re in your contact list or not."
+msgid "Post deleted"
 msgstr ""
 
-msgid "Output format"
+msgid "Not selected"
 msgstr ""
 
-msgid "Similar to sprintf function. Default: 'FIELD_NAME: FIELD_VALUE'."
+msgid "Post updated"
 msgstr ""
 
-msgid "Insert shortcode"
+msgid "Passed wrong parameters"
 msgstr ""
 
-msgid "Wrong field specified"
+msgid "Prev"
 msgstr ""
 
-msgid "Phone"
+msgid "Next"
 msgstr ""
 
-msgid "Single line"
+msgid "You will be able to add/edit child posts after saving the parent post."
 msgstr ""
 
-msgid "Texfield"
+msgid "Equal to"
 msgstr ""
 
-msgid "Select"
+msgid "Larger than"
 msgstr ""
 
-msgid "File"
+msgid "Less than"
 msgstr ""
 
-msgid "Upload image"
+msgid "Larger or equal to"
 msgstr ""
 
-msgid "Upload file"
+msgid "Less or equal to"
 msgstr ""
 
-msgid "Types"
+msgid "Identical to"
 msgstr ""
 
-msgid "Use as field value"
+msgid "Not identical to"
 msgstr ""
 
-msgid "Display as link"
-msgstr ""
-
-msgid "Link title"
-msgstr ""
-
-msgid "Image"
-msgstr ""
-
-msgid "Image title"
-msgstr ""
-
-msgid "Title text for the image, e.g. &#8220;The Mona Lisa&#8221;"
-msgstr ""
-
-msgid "Alternate Text"
-msgstr ""
-
-msgid "Alt text for the image, e.g. &#8220;The Mona Lisa&#8221;"
-msgstr ""
-
-msgid "Alignment"
-msgstr ""
-
-msgid "Left"
-msgstr ""
-
-msgid "Center"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Pre-defined sizes"
-msgstr ""
-
-msgid "Medium"
-msgstr ""
-
-msgid "Large"
-msgstr ""
-
-msgid "Full Size"
-msgstr ""
-
-msgid "Custom size"
-msgstr ""
-
-msgid "Width"
-msgstr ""
-
-msgid "Specify custom width"
-msgstr ""
-
-msgid "Height"
-msgstr ""
-
-msgid "Specify custom height"
-msgstr ""
-
-msgid "Keep proportional"
-msgstr ""
-
-msgid "Insert email"
-msgstr ""
-
-msgid "Radio"
-msgstr ""
-
-msgid "Show as calendar"
-msgstr ""
-
-msgid "Show as text"
-msgstr ""
-
-msgid "F j, Y"
-msgstr ""
-
-msgid "Custom"
-msgstr ""
-
-msgid "Documentation on date and time formatting"
-msgstr ""
-
-msgid "Insert date"
-msgstr ""
-
-msgid "Calendar"
-msgstr ""
-
-msgid "Select date"
-msgstr ""
-
-msgid "Please check your input data"
-msgstr ""
-
-msgid "Shortcode:"
-msgstr ""
-
-msgid "Insert Types Shortcode"
-msgstr ""
-
-msgid "Basic"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "Insert field"
+msgid "Strictly not equal"
 msgstr ""
 
 msgid "Invalid field \"%s\". %sDelete it%s"
-msgstr ""
-
-msgid "Get Types and Views"
-msgstr ""
-
-msgid "<a href=\"%s\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
-msgstr ""
-
-msgid "<a href=\"%s\">Learn more</a>"
-msgstr ""
-
-msgid "Your theme was created using <strong>Types</strong> and <strong>Views</strong>. Developers use these two plugins to build complex websites, without coding."
-msgstr ""
-
-msgid "Right now, you're using the embedded version, which creates the layout but doesn't include the editing interface. You can upgrade to the full version and customize your site yourself - you don't even need to know how to program!"
-msgstr ""
-
-msgid "Every purchase of Views entitles you to commercial-grade support and upgrades for one year."
-msgstr ""
-
-msgid "You can use Types and Views for as many themes and websites as you like."
-msgstr ""
-
-msgid "You have Types import pending. %sClick here to import.%s %sDismiss message.%s"
-msgstr ""
-
-msgid "settings.xml file missing"
-msgstr ""
-
-msgid "Types creates Custom Post Types. These are user-defined WordPress content types. On  your theme the following Types are defined:"
-msgstr ""
-
-msgid "If you want to edit these or create your own you can download the full version of <strong>Types</strong> from <a href=\"%s\">%s</a>"
 msgstr ""
 
 msgid "This Field is required"
@@ -1317,38 +1698,218 @@ msgstr ""
 msgid "Letters, numbers, spaces or underscores only please"
 msgstr ""
 
-msgid "Custom Fields"
+msgid "Letters, numbers, spaces, underscores and dashes only please"
 msgstr ""
 
-msgid "Custom Types and Taxonomies"
+msgid "Letters, numbers, slashes, underscores and dashes only please"
 msgstr ""
 
-msgid "Import/Export"
+msgid "Taxonomy"
 msgstr ""
 
-msgid "Custom Fields Control"
+msgid "View templates"
 msgstr ""
 
-msgid "Edit Group"
+msgid "Basic"
 msgstr ""
 
-msgid "Add New Group"
+msgid "Taxonomy"
 msgstr ""
 
-msgid "Edit Custom Post Type"
+msgid "Other Fields"
 msgstr ""
 
-msgid "Add New Custom Post Type"
+msgid "Field"
 msgstr ""
 
-msgid "Edit Taxonomy"
+msgid "View templates"
 msgstr ""
 
-msgid "Add New Taxonomy"
+msgid "Search"
 msgstr ""
 
-msgid "Custom Post Types and Taxonomies"
+msgid "Clear"
 msgstr ""
 
-msgid "Custom Field"
+msgid "Get Types and Views"
+msgstr ""
+
+msgid "<a href=\"%s\" target=\"_blank\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
+msgstr ""
+
+msgid "<a href=\"%s\" target=\"_blank\">Learn more</a>"
+msgstr ""
+
+msgid "Your theme was created using <strong>Types</strong> and <strong>Views</strong>. Developers use these two plugins to build complex websites, without coding."
+msgstr ""
+
+msgid "Right now, you're using the embedded version, which creates the layout but doesn't include the editing interface. You can upgrade to the full version and customize your site yourself - you don't even need to know how to program!"
+msgstr ""
+
+msgid "Every purchase of Views entitles you to commercial-grade support and upgrades for one year."
+msgstr ""
+
+msgid "You can use Types and Views for as many themes and websites as you like."
+msgstr ""
+
+msgid "Error while parsing the evaluate expression"
+msgstr ""
+
+msgid "Conditional expression includes illegal characters"
+msgstr ""
+
+msgid "Correct conditional expression has not been found"
+msgstr ""
+
+msgid "You must define the $operator parameter for Wpcf_Cake_Validation::comparison()"
+msgstr ""
+
+msgid "You must define a regular expression for Wpcf_Cake_Validation::custom()"
+msgstr ""
+
+msgid "Could not find %s class, unable to complete validation."
+msgstr ""
+
+msgid "Method %s does not exist on %s unable to complete validation."
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "Digits"
+msgstr ""
+
+msgid "You can read more about Custom Fields in this tutorial: %s."
+msgstr ""
+
+msgid "On this page you can see your current custom field groups, as well as information about which post types and taxonomies they are attached to, and whether they are active or not."
+msgstr ""
+
+msgid "You have the following options:"
+msgstr ""
+
+msgid "<strong>Add a Custom Fields Group:</strong> Use this to add a new custom fields group which can be attached to a post type"
+msgstr ""
+
+msgid "<strong>Edit:</strong> Click to edit the custom field group"
+msgstr ""
+
+msgid "<strong>Deactivate:</strong> Click to deactivate a custom field group (this can be re-activated at a later date)"
+msgstr ""
+
+msgid "<strong>Delete Permanently:</strong> Click to delete a custom field group. <strong>Warning: This cannot be undone.</strong>"
+msgstr ""
+
+msgid "You can read more about Custom Post Types and Taxonomies in this tutorial. %s"
+msgstr ""
+
+msgid "This is the main admin page for your Custom Post Types and Taxonomies. It provides you with an overview of your data."
+msgstr ""
+
+msgid "On this page you have the following options:"
+msgstr ""
+
+msgid "<strong>Add Custom Post Type:</strong> Use to create a new Custom Post Type"
+msgstr ""
+
+msgid "<strong>Add Custom Taxonomy:</strong> Use to create a new Custom Taxonomy"
+msgstr ""
+
+msgid "<strong>Edit:</strong> Click to edit the settings of a Custom Post Type or Taxonomy"
+msgstr ""
+
+msgid "<strong>Deactivate:</strong> Click to deactivate a Custom Post Type or Taxonomy (this can be reactivated at a later date)"
+msgstr ""
+
+msgid "<strong>Delete:</strong> Click to delete a Custom Post Type or Taxonomy. <strong> Warning: This cannot be undone</strong> "
+msgstr ""
+
+msgid "Use this page to import and export custom post types, taxonomies and custom fields to and from Types."
+msgstr ""
+
+msgid "<strong>Step 1:</strong> Upload an XML file or paste XML content directly into the text area."
+msgstr ""
+
+msgid "<strong>Step 2:</strong> Select which custom post types, taxonomies and custom fields should be imported."
+msgstr ""
+
+msgid "Click Export to export data from Types as an XML file."
+msgstr ""
+
+msgid "This is the edit page for your Custom Fields Groups."
+msgstr ""
+
+msgid "You can read more about creating a Custom Fields Group here: %s"
+msgstr ""
+
+msgid "On this page you can create and edit your groups. To create a group, do the following:"
+msgstr ""
+
+msgid "Add a Title"
+msgstr ""
+
+msgid "Choose where to display your group. You can attach this to both default WordPress post types and Custom Post Types. (nb: you can also associate taxonomy terms with Custom Field Groups)"
+msgstr ""
+
+msgid "To add a field click on the field you desire under “Available Fields” on the right hand side of your screen. This will be added to your Custom Field Group"
+msgstr ""
+
+msgid "Add information about your Custom Field"
+msgstr ""
+
+msgid "Tips"
+msgstr ""
+
+msgid "To ensure a user completes a field, check the box for validation required"
+msgstr ""
+
+msgid "Once you have created a field it will be saved for future use under \"User created fields\""
+msgstr ""
+
+msgid "You can drag and drop the order of your custom fields using the blue icon"
+msgstr ""
+
+msgid "Use this page to create a WordPress post type. If you’d like to learn more about Custom Post Types you can read our detailed guide: <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/</a> or check out our tutorial on creating them with Types: <a href=\"http://wp-types.com/user-guides/create-a-custom-post-type/\" target=\"_blank\">http://wp-types.com/user-guides/create-a-custom-post-type/ &raquo;</a>"
+msgstr ""
+
+msgid "Name and Description"
+msgstr ""
+
+msgid "Add a singular and plural name for your post type. You should also add a slug. This will be created from the post type name if none is added."
+msgstr ""
+
+msgid "Determine whether your post type will be visible on the admin menu to your users."
+msgstr ""
+
+msgid "You can also adjust the menu position. The default position is 20, which means your post type will appear under “Pages”. You can find more information about menu positioning in the WordPress Codex. <a href=\"http://codex.wordpress.org/Function_Reference/register_post_type#Parameters\" target=\"_blank\">http://codex.wordpress.org/Function_Reference/register_post_type#Parameters</a>"
+msgstr ""
+
+msgid "The default post type icon is the pushpin icon that appears beside WordPress posts. You can change this by adding your own icon of 16px x 16px."
+msgstr ""
+
+msgid "Choose which taxonomies are to be associated with this post type."
+msgstr ""
+
+msgid "Labels are the text that is attached to your custom post type name. Examples of them in use are “Add New Post” (where “Add New” is the label”) and “Edit Post” (where “Edit” is the label). In normal circumstances the defaults will suffice."
+msgstr ""
+
+msgid "Choose which sections to display on your “Add New” page."
+msgstr ""
+
+msgid "Advanced Settings"
+msgstr ""
+
+msgid "Advanced settings give you even more control over your custom post type. You can read in detail what all of these settings do on our tutorial."
+msgstr ""
+
+msgid "You can use Custom Taxonomies to categorize your content. Read more about what they are on our website: <a href=\"http://wp-types.com/learn/custom-post-types/\" target=\"_blank\">http://wp-types.com/learn/custom-post-types/ &raquo;</a> or you can read our guide about how to set them up: <a href=\"http://wp-types.com/user-guides/create-custom-taxonomies/\" target=\"_blank\">http://wp-types.com/user-guides/create-custom-taxonomies/</a>"
+msgstr ""
+
+msgid "Add a singular and plural name for your taxonomy. You should also add a slug. This will be created from the taxonomy name if none is added."
+msgstr ""
+
+msgid "Choose which post types this taxonomy should be associated with."
+msgstr ""
+
+msgid "Getting started"
 msgstr ""

@@ -280,7 +280,7 @@ function wpcf_fields_date_get_calendar($params, $initial = true, $echo = true) {
     $wpcf_date = date('j', $params['field_value']);
 
     $cache = array();
-    $key = md5($params['field']['slug']);
+    $key = md5($params['field']['slug'] . $wpcf_date);
     if ($cache = wp_cache_get('get_calendar', 'calendar')) {
         if (is_array($cache) && isset($cache[$key])) {
             if ($echo) {

@@ -1,18 +1,22 @@
 <?php
+
 Class GFNotification{
+	private static $supported_fields = array("checkbox", "radio", "select", "text", "website", "textarea", "email", "hidden", "number", "phone", "multiselect", "post_title",
+		                            "post_tags", "post_custom_field", "post_content", "post_excerpt");
+
     function media_buttons($editor_id = 'content') {
         $onchange = GFCommon::is_wp_version("3.3") ? "InsertEditorVariable('{$editor_id}');" : "";
-		echo "&nbsp;&nbsp;";        
+		echo "&nbsp;&nbsp;";
         $form_id = rgget('id');
         $form = RGFormsModel::get_form_meta($form_id);
-        GFCommon::insert_variables(rgar($form,"fields"), $editor_id, false, "", $onchange);
+        GFCommon::insert_variables(rgar($form,"fields"), $editor_id, false, "", $onchange, 26, null, "", "gform_editor_merge_tags");
     }
 
     public static function notification_page($form_id){
         add_action( 'media_buttons', array('GFNotification', 'media_buttons'), 40);
-        
+
         $form = RGFormsModel::get_form_meta($form_id);
-        
+
         $invalid_tab = "";
 
         if(rgpost("save")){
@@ -72,7 +76,7 @@ Class GFNotification{
         $is_admin_notification_enabled = ($has_admin_notification_fields && empty($_POST["save"])) || !empty($_POST["form_notification_enable_admin"]);
         $is_user_notification_enabled =  ($has_user_notification_fields && empty($_POST["save"])) || !empty($_POST["form_notification_enable_user"]);
 
-        $is_routing_enabled = !empty($form["notification"]["routing"]) && $_POST["notification_to"] != "email";
+        $is_routing_enabled = !empty($form["notification"]["routing"]) && rgpost("notification_to") != "email";
 
         ?>
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css?ver=<?php echo GFCommon::$version ?>" />
@@ -92,7 +96,20 @@ Class GFNotification{
                     return "You have unsaved changes.";
                 }
             }
+
+
+            if(jQuery(document).on){
+                jQuery(document).on('change', '.gfield_routing_value_dropdown', function(){
+                        SetRoutingValueDropDown(jQuery(this));
+                    });
+            }
+            else{
+                jQuery('.gfield_routing_value_dropdown').live('change', function(){
+                    SetRoutingValueDropDown(jQuery(this));
+                });
+            }
         });
+
 
         <?php
         if(empty($form["notification"]))
@@ -100,6 +117,12 @@ Class GFNotification{
         ?>
 
         var form = <?php echo GFCommon::json_encode($form) ?>;
+
+        function SetRoutingValueDropDown(element){
+            //parsing ID to get routing Index
+            var index = element.attr("id").replace("routing_value_", "");
+            SetRouting(index);
+        }
 
         function InsertVariable(element_id, callback, variable){
                 if(!variable)
@@ -139,16 +162,29 @@ Class GFNotification{
         }
 
         function CreateRouting(routings){
-
             var str = "";
             for(var i=0; i< routings.length; i++){
+
                 var isSelected = routings[i].operator == "is" ? "selected='selected'" :"";
                 var isNotSelected = routings[i].operator == "isnot" ? "selected='selected'" :"";
+                var greaterThanSelected = routings[i].operator == ">" ? "selected='selected'" :"";
+                var lessThanSelected = routings[i].operator == "<" ? "selected='selected'" :"";
+                var containsSelected = routings[i].operator == "contains" ? "selected='selected'" :"";
+                var startsWithSelected = routings[i].operator == "starts_with" ? "selected='selected'" :"";
+                var endsWithSelected = routings[i].operator == "ends_with" ? "selected='selected'" :"";
                 var email = routings[i]["email"] ? routings[i]["email"] : '';
 
                 str += "<div style='width:99%'><?php _e("Send to", "gravityforms") ?> <input type='text' id='routing_email_" + i +"' value='" + email + "' onkeyup='SetRouting(" + i + ");'/>";
                 str += " <?php _e("if", "gravityforms") ?> " + GetRoutingFields(i, routings[i].fieldId);
-                str += "<select id='routing_operator_" + i + "' onchange='SetRouting(" + i + ");'><option value='is' " + isSelected + "><?php _e("is", "gravityforms") ?></option><option value='isnot' " + isNotSelected + "><?php _e("is not", "gravityforms") ?></option></select>";
+                str += "<select id='routing_operator_" + i + "' onchange='SetRouting(" + i + ");'>";
+                str += "<option value='is' " + isSelected + "><?php _e("is", "gravityforms") ?></option>";
+                str += "<option value='isnot' " + isNotSelected + "><?php _e("is not", "gravityforms") ?></option>";
+                str += "<option value='>' " + greaterThanSelected + "><?php _e("greater than", "gravityforms") ?></option>";
+                str += "<option value='<' " + lessThanSelected + "><?php _e("less than", "gravityforms") ?></option>";
+                str += "<option value='contains' " + containsSelected + "><?php _e("contains", "gravityforms") ?></option>";
+                str += "<option value='starts_with' " + startsWithSelected + "><?php _e("starts with", "gravityforms") ?></option>";
+                str += "<option value='ends_with' " + endsWithSelected + "><?php _e("ends with", "gravityforms") ?></option>";
+                str += "</select>";
                 str += GetRoutingValues(i, routings[i].fieldId, routings[i].value);
                 str += "<img src='<?php echo GFCommon::get_base_url() ?>/images/add.png' class='add_field_choice' title='add another rule' alt='add another rule' style='cursor:pointer; margin:0 3px;' onclick=\"InsertRouting(" + (i+1) + ");\" />";
                 if(routings.length > 1 )
@@ -161,9 +197,7 @@ Class GFNotification{
         }
 
         function GetRoutingValues(index, fieldId, selectedValue){
-            var str = "<select class='gfield_routing_select' id='routing_value_" + index + "' onchange='SetRouting(" + index + ");'>";
-            str += GetFieldValues(fieldId, selectedValue, 16);
-            str += "</select>";
+            str = GetFieldValues(index, fieldId, selectedValue, 16);
 
             return str;
         }
@@ -176,27 +210,39 @@ Class GFNotification{
             return str;
         }
 
-
         //---------------------- generic ---------------
         function GetSelectableFields(selectedFieldId, labelMaxCharacters){
             var str = "";
             var inputType;
             for(var i=0; i<form.fields.length; i++){
                 inputType = form.fields[i].inputType ? form.fields[i].inputType : form.fields[i].type;
-                if(inputType == "checkbox" || inputType == "radio" || inputType == "select"){
+                //see if this field type can be used for conditionals
+                if (IsNotificationConditionalLogicField(form.fields[i])) {
                     var selected = form.fields[i].id == selectedFieldId ? "selected='selected'" : "";
-                    str += "<option value='" + form.fields[i].id + "' " + selected + ">" + TruncateMiddle(form.fields[i].label, labelMaxCharacters) + "</option>";
+                    str += "<option value='" + form.fields[i].id + "' " + selected + ">" + form.fields[i].label + "</option>";
                 }
             }
             return str;
         }
 
+        function IsNotificationConditionalLogicField(field){
+        	//this function is a duplicate of IsConditionalLogicField from form_editor.js
+		    inputType = field.inputType ? field.inputType : field.type;
+		    var supported_fields = ["checkbox", "radio", "select", "text", "website", "textarea", "email", "hidden", "number", "phone", "multiselect", "post_title",
+		                            "post_tags", "post_custom_field", "post_content", "post_excerpt"];
+
+		    var index = jQuery.inArray(inputType, supported_fields);
+
+		    return index >= 0;
+		}
+
         function GetFirstSelectableField(){
             var inputType;
             for(var i=0; i<form.fields.length; i++){
                 inputType = form.fields[i].inputType ? form.fields[i].inputType : form.fields[i].type;
-                if(inputType == "checkbox" || inputType == "radio" || inputType == "select")
+                if (IsNotificationConditionalLogicField(form.fields[i])){
                     return form.fields[i].id;
+				}
             }
 
             return 0;
@@ -210,9 +256,10 @@ Class GFNotification{
                 return text;
             var middle = parseInt(maxCharacters / 2);
             return text.substr(0, middle) + "..." + text.substr(text.length - middle, middle);
+
         }
 
-        function GetFieldValues(fieldId, selectedValue, labelMaxCharacters){
+        function GetFieldValues(index, fieldId, selectedValue, labelMaxCharacters){
             if(!fieldId)
                 fieldId = GetFirstSelectableField();
 
@@ -222,20 +269,61 @@ Class GFNotification{
             var str = "";
             var field = GetFieldById(fieldId);
             var isAnySelected = false;
-            for(var i=0; i<field.choices.length; i++){
-                var choiceValue = field.choices[i].value ? field.choices[i].value : field.choices[i].text;
-                var isSelected = choiceValue == selectedValue;
-                var selected = isSelected ? "selected='selected'" : "";
-                if(isSelected)
-                    isAnySelected = true;
 
-                str += "<option value='" + choiceValue.replace(/'/g, "&#039;") + "' " + selected + ">" + TruncateMiddle(field.choices[i].text, labelMaxCharacters) + "</option>";
-            }
+            if(!field)
+        		return "";
 
-            if(!isAnySelected && selectedValue){
-                str += "<option value='" + selectedValue.replace(/'/g, "&#039;") + "' selected='selected'>" + TruncateMiddle(selectedValue, labelMaxCharacters) + "</option>";
-            }
+            if(field["type"] == "post_category" && field["displayAllCategories"]){
+            	var dropdown_id = "routing_value_" + index;
+		        var dropdown = jQuery('#' + dropdown_id + ".gfield_category_dropdown");
 
+		        //don't load category drop down if it already exists (to avoid unecessary ajax requests)
+		        if(dropdown.length > 0){
+
+		            var options = dropdown.html();
+		            options = options.replace("value=\"" + selectedValue + "\"", "value=\"" + selectedValue + "\" selected=\"selected\"");
+		            str = "<select id='" + dropdown_id + "' class='gfield_routing_select gfield_category_dropdown gfield_routing_value_dropdown'>" + options + "</select>";
+		        }
+		        else{
+		            //loading categories via AJAX
+		            jQuery.post(ajaxurl,{   action:"gf_get_notification_post_categories",
+		                                    ruleIndex: index,
+		                                    selectedValue: selectedValue},
+		                                function(dropdown_string){
+		                                    if(dropdown_string){
+		                                        jQuery('#gfield_ajax_placeholder_' + index).replaceWith(dropdown_string.trim());
+		                                    }
+		                                }
+		                        );
+
+		            //will be replaced by real drop down during the ajax callback
+		            str = "<select id='gfield_ajax_placeholder_" + index + "' class='gfield_routing_select'><option><?php _e("Loading...", "gravityforms"); ?></option></select>";
+		        }
+			}
+            else if(field.choices){
+            	//create a drop down for fields that have choices (i.e. drop down, radio, checkboxes, etc...)
+	            str = "<select class='gfield_routing_select gfield_routing_value_dropdown' id='routing_value_" + index + "'>";
+	            for(var i=0; i<field.choices.length; i++){
+	                var choiceValue = field.choices[i].value ? field.choices[i].value : field.choices[i].text;
+	                var isSelected = choiceValue == selectedValue;
+	                var selected = isSelected ? "selected='selected'" : "";
+	                if(isSelected)
+	                    isAnySelected = true;
+
+	                str += "<option value='" + choiceValue.replace(/'/g, "&#039;") + "' " + selected + ">" + field.choices[i].text + "</option>";
+	            }
+
+	            if(!isAnySelected && selectedValue){
+	                str += "<option value='" + selectedValue.replace(/'/g, "&#039;") + "' selected='selected'>" + selectedValue + "</option>";
+	            }
+	            str += "</select>";
+			}
+			else
+			{
+			    selectedValue = selectedValue ? selectedValue.replace(/'/g, "&#039;") : "";
+			    //create a text field for fields that don't have choices (i.e text, textarea, number, email, etc...)
+			    str = "<input type='text' placeholder='<?php _e("Enter value", "gravityforms"); ?>' class='gfield_routing_select' id='routing_value_" + index + "' value='" + selectedValue.replace(/'/g, "&#039;") + "' onchange='SetRouting(" + index + ");' onkeyup='SetRouting(" + index + ");'>";
+			}
             return str;
         }
 
@@ -248,10 +336,10 @@ Class GFNotification{
         }
         //---------------------------------------------------------------------------------
 
-
         function InsertRouting(index){
             var routings = form.notification.routing;
             routings.splice(index, 0, new ConditionalRule());
+
             CreateRouting(routings);
             SetRouting(index);
         }
@@ -273,7 +361,6 @@ Class GFNotification{
             form.notification.routing.splice(ruleIndex, 1);
             CreateRouting(form.notification.routing);
         }
-
 
         </script>
         <?php echo GFCommon::get_remote_message(); ?>
@@ -338,7 +425,7 @@ Class GFNotification{
                                                         if(empty($routing_fields)){//if(empty(){
                                                             ?>
                                                             <div class="gold_notice">
-                                                                <p><?php _e("To use notification routing, your form must have a drop down, checkbox or radio button field.", "gravityforms"); ?></p>
+                                                                <p><?php _e("To use notification routing, your form must have a field supported by conditional logic.", "gravityforms"); ?></p>
                                                             </div>
                                                             <?php
                                                         }
@@ -361,17 +448,20 @@ Class GFNotification{
                                                                     <select id="routing_operator_<?php echo $i?>" onchange="SetRouting(<?php echo $i ?>)" >
                                                                         <option value="is" <?php echo rgar($routing,"operator") == "is" ? "selected='selected'" : "" ?>><?php _e("is", "gravityforms") ?></option>
                                                                         <option value="isnot" <?php echo rgar($routing,"operator") == "isnot" ? "selected='selected'" : "" ?>><?php _e("is not", "gravityforms") ?></option>
+                                                                        <option value=">" <?php echo rgar($routing,"operator") == ">" ? "selected='selected'" : "" ?>><?php _e("greater than", "gravityforms") ?></option>
+                                                                        <option value="<" <?php echo rgar($routing,"operator") == "<" ? "selected='selected'" : "" ?>><?php _e("less than", "gravityforms") ?></option>
+                                                                        <option value="contains" <?php echo rgar($routing,"operator") == "contains" ? "selected='selected'" : "" ?>><?php _e("contains", "gravityforms") ?></option>
+                                                                        <option value="starts_with" <?php echo rgar($routing,"operator") == "starts_with" ? "selected='selected'" : "" ?>><?php _e("starts with", "gravityforms") ?></option>
+                                                                        <option value="ends_with" <?php echo rgar($routing,"operator") == "ends_with" ? "selected='selected'" : "" ?>><?php _e("ends with", "gravityforms") ?></option>
                                                                     </select>
-                                                                    <select id="routing_value_<?php echo $i?>" class='gfield_routing_select' onchange="SetRouting(<?php echo $i ?>);">
-                                                                        <?php echo self::get_field_values($form, rgar($routing,"fieldId"), rgar($routing,"value")) ?>
-                                                                    </select>
+                                                                    <?php echo self::get_field_values($i, $form, rgar($routing,"fieldId"), rgar($routing,"value")) ?>
                                                                     <img src='<?php echo GFCommon::get_base_url()?>/images/add.png' class='add_field_choice' title='add another email routing' alt='add another email routing' style='cursor:pointer; margin:0 3px;' onclick='SetRouting(<?php echo $i ?>); InsertRouting(<?php echo $i + 1 ?>);' />
                                                                     <?php if($count > 1 ){ ?>
                                                                         <img src='<?php echo GFCommon::get_base_url()?>/images/remove.png' id='routing_delete_<?php echo $i?>' title='remove this email routing' alt='remove this email routing' class='delete_field_choice' style='cursor:pointer;' onclick='DeleteRouting(<?php echo $i ?>);' />
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php
-                                                            }
+															}
 
                                                             if($is_invalid_rule){ ?>
                                                                 <span class="validation_message"><?php _e("Please enter a valid email address for all highlighted routing rules above.") ?></span>
@@ -689,8 +779,6 @@ Class GFNotification{
         }
     }
 
-
-
     private static function validate_notification(){
 
         $admin_tab_invalid = !empty($_POST["form_notification_enable_admin"]) && ( !self::is_valid_admin_to() || empty($_POST["form_notification_subject"]) || empty($_POST["form_notification_message"]) );
@@ -743,7 +831,7 @@ Class GFNotification{
     private static function get_first_routing_field($form){
         foreach($form["fields"] as $field){
             $input_type = RGFormsModel::get_input_type($field);
-            if($input_type == "checkbox" || $input_type == "radio" || $input_type == "select")
+            if(in_array($input_type, self::$supported_fields))
                 return $field["id"];
         }
 
@@ -751,11 +839,20 @@ Class GFNotification{
     }
 
     private static function get_routing_fields($form, $selected_field_id){
-        return GFCommon::get_selection_fields($form, $selected_field_id);
+        $str = "";
+        foreach($form["fields"] as $field){
+            $input_type = RGFormsModel::get_input_type($field);
+            $field_label = RGFormsModel::get_label($field);
+            if (in_array($input_type, self::$supported_fields)){
+                $selected = $field["id"] == $selected_field_id ? "selected='selected'" : "";
+                $str .= "<option value='" . $field["id"] . "' " . $selected . ">" . $field_label . "</option>";
+            }
+        }
+        return $str;
     }
 
-     private static function get_field_values($form, $field_id, $selected_value, $max_field_length = 16){
-        if(empty($field_id))
+    private static function get_field_values($i, $form, $field_id, $selected_value, $max_field_length = 16){
+         if(empty($field_id))
                 $field_id = self::get_first_routing_field($form);
 
             if(empty($field_id))
@@ -764,21 +861,48 @@ Class GFNotification{
             $field = RGFormsModel::get_field($form, $field_id);
             $is_any_selected = false;
             $str = "";
-            foreach($field["choices"] as $choice){
-                $is_selected = $choice["value"] == $selected_value;
-                $selected = $is_selected ? "selected='selected'" : "";
-                if($is_selected)
-                    $is_any_selected = true;
 
-                $str .= "<option value='" . esc_attr($choice["value"]) . "' " . $selected . ">" . GFCommon::truncate_middle($choice["text"], $max_field_length) . "</option>";
-            }
+            if (!$field)
+            	return "";
 
-            //adding current selected field value to the list
-            if(!$is_any_selected && !empty($selected_value))
-                $str .= "<option value='" . esc_attr($selected_value) . "' selected='selected'>" . GFCommon::truncate_middle($selected_value, $max_field_length) . "</option>";
+			if ($field["type"] == "post_category" && rgar($field, "displayAllCategories") == true)
+			{
+				$str .= wp_dropdown_categories(array("class"=>"gfield_routing_select gfield_category_dropdown gfield_routing_value_dropdown", "orderby"=> "name", "id"=> "routing_value_" . $i, "selected"=>$selected_value, "hierarchical"=>true, "hide_empty"=>0, "echo"=>false));
+			}
+            elseif (rgar($field,"choices")) {
+            	$str .= "<select id='routing_value_" . $i . "' class='gfield_routing_select gfield_routing_value_dropdown'>";
+	            foreach($field["choices"] as $choice){
+	                $is_selected = $choice["value"] == $selected_value;
+	                $selected = $is_selected ? "selected='selected'" : "";
+	                if($is_selected)
+	                    $is_any_selected = true;
+
+	                $str .= "<option value='" . esc_attr($choice["value"]) . "' " . $selected . ">" . $choice["text"] . "</option>";
+	            }
+
+	            //adding current selected field value to the list
+	            if(!$is_any_selected && !empty($selected_value))
+	            {
+	                $str .= "<option value='" . esc_attr($selected_value) . "' selected='selected'>" . $selected_value . "</option>";
+				}
+	            $str .= "</select>";
+			}
+			else
+			{
+			    //create a text field for fields that don't have choices (i.e text, textarea, number, email, etc...)
+			    $str = "<input type='text' placeholder='" . __("Enter value") . "' class='gfield_routing_select' id='routing_value_" . $i . "' value='" . esc_attr($selected_value) . "' onchange='SetRouting(" . $i . ");' onkeyup='SetRouting(" . $i . ");'>";
+			}
 
             return $str;
     }
 
+    public static function get_post_category_values(){
+
+        $id = "routing_value_" . rgpost("ruleIndex");
+        $selected = rgempty("selectedValue") ? 0 : rgpost("selectedValue");
+
+        $dropdown = wp_dropdown_categories(array("class"=>"gfield_routing_select gfield_routing_value_dropdown gfield_category_dropdown", "orderby"=> "name", "id"=> $id, "selected"=>$selected, "hierarchical"=>true, "hide_empty"=>0, "echo"=>false));
+        die($dropdown);
+    }
 }
 ?>

@@ -71,47 +71,47 @@ function wpv_pagination_admin($view_settings) {
                 <strong><?php _e('Pagination: ', 'wpv-views') ?></strong>
                 <?php
                     if ($view_settings['pagination'][0] == 'disable') {
-                        echo __('Show <strong>all</strong> items. Pagination is disabled.', 'wpv-view');
+                        echo __('Show <strong>all</strong> items. Pagination is disabled.', 'wpv-views');
                     } else {
                         
-                        echo sprintf(__('Show <strong>%s</strong> items per page.', 'wpv-view'), $view_settings['posts_per_page']);
+                        echo sprintf(__('Show <strong>%s</strong> items per page.', 'wpv-views'), $view_settings['posts_per_page']);
                         $controls = '';
                         if (isset($view_settings['include_page_selector_control']) && $view_settings['include_page_selector_control']) {
                             switch ($view_settings['pagination']['page_selector_control_type']) {
                                 case 'drop_down':
-                                    $controls .= __('Show <strong>page selector</strong> drop down ', 'wpv-view');
+                                    $controls .= __('Show <strong>page selector</strong> drop down ', 'wpv-views');
                                     break;
 
                                 case 'link':
-                                    $controls .= __('Show <strong>page selector</strong> links ', 'wpv-view');
+                                    $controls .= __('Show <strong>page selector</strong> links ', 'wpv-views');
                                     break;
                             }
                         }
                         if (isset($view_settings['include_prev_next_page_controls']) && $view_settings['include_prev_next_page_controls']) {
                             if ($controls == '') {
-                                $controls .= __('Show <strong>previous</strong> and <strong>next</strong> page controls.', 'wpv-view');
+                                $controls .= __('Show <strong>previous</strong> and <strong>next</strong> page controls.', 'wpv-views');
                             } else {
-                                $controls .= __('and <strong>previous</strong> and <strong>next</strong> page controls.', 'wpv-view');
+                                $controls .= __('and <strong>previous</strong> and <strong>next</strong> page controls.', 'wpv-views');
                             }
                         }
                         if ($view_settings['ajax_pagination'][0] == 'enable') {
                             if (isset($view_settings['ajax_pagination']['style'])) {
-                                $effect = array('fade' => __('Fade', 'wpv-view'),
+                                $effect = array('fade' => __('Fade', 'wpv-views'),
                                                 'fadefast' => __('Fade fast', 'wpv-views'),
                                                 'fadeslow' => __('Fade slow', 'wpv-views'),
-                                                'slideh' => __('Slide horizontally', 'wpv-view'),
-                                                'slidev' => __('Slide vertically', 'wpv-view'));
+                                                'slideh' => __('Slide horizontally', 'wpv-views'),
+                                                'slidev' => __('Slide vertically', 'wpv-views'));
                                 $effect = isset($effect[$view_settings['ajax_pagination']['style']]) ? $effect[$view_settings['ajax_pagination']['style']] : $effect['fade'];
-                                $controls .= sprintf(__(' Use <strong>AJAX</strong> to update page content using <strong>%s</strong> transition effect.', 'wpv-view'), $effect);
+                                $controls .= sprintf(__(' Use <strong>AJAX</strong> to update page content using <strong>%s</strong> transition effect.', 'wpv-views'), $effect);
                             } else {
-                                $controls .= __(' Use <strong>AJAX</strong> to update page content.', 'wpv-view');
+                                $controls .= __(' Use <strong>AJAX</strong> to update page content.', 'wpv-views');
                             }
                         }
                         
                         echo ' ' . $controls;
                     }
                 } else if ($view_settings['pagination']['mode'] == 'rollover') {
-                    echo sprintf(__('<strong>Auto transition:</strong> Display <strong>%s</strong> items per page for <strong>%s</strong> seconds and then <strong>%s</strong> to the next items.', 'wpv-view'),
+                    echo sprintf(__('<strong>Auto transition:</strong> Display <strong>%s</strong> items per page for <strong>%s</strong> seconds and then <strong>%s</strong> to the next items.', 'wpv-views'),
                             strval($view_settings['rollover']['posts_per_page']),
                             strval($view_settings['rollover']['speed']),
                             $rollover_effects[strval($view_settings['rollover']['effect'])]

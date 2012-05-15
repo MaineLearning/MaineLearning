@@ -14,7 +14,7 @@
  * Boolean operators: AND, OR, NOT
  * Nested expressions - several levels of brackets
  * Variables defined as shortcode parameters starting with a dollar sign
- * empty() function that checks for blank or non-existing fields
+ * empty() function that checks for empty or non-existing fields
  * 
  *
  * Example usage:
@@ -42,7 +42,7 @@
  *
  * Parameters:
  * 'condition' => Define expected result from evaluate - either true or false
- * 'evaluate' => Evaluate expression with fields involved, sample use: "($field1 > $field2) AND !blank($field3)"
+ * 'evaluate' => Evaluate expression with fields involved, sample use: "($field1 > $field2) AND !empty($field3)"
  * 'debug' => Enable debug to display error messages in the shortcode 
  * 'fieldX' => Define fields to be taken into account during evaluation 
  *

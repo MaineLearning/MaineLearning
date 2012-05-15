@@ -41,7 +41,8 @@ function wpcf_fields_select_meta_box_form($field) {
         }
     }
 
-    if (!empty($field['value'])) {
+    if (!empty($field['value'])
+            || ($field['value'] === 0 || $field['value'] === '0')) {
         $default_value = $field['value'];
     }
 

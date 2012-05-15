@@ -12,67 +12,55 @@ msgstr ""
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 
-msgid "Custom field - %s"
+msgid "Basic"
 msgstr ""
 
-msgid " OR"
+msgid "Generate the new layout content"
 msgstr ""
 
-msgid " AND"
+msgid "dismiss"
 msgstr ""
 
-msgid "OK"
+msgid "View/Edit Meta HTML"
 msgstr ""
 
-msgid "Cancel"
+msgid "<strong>Meta HTML</strong> - This is used to layout the posts found. It gets generated from the View Layout settings and can be modified to suit."
 msgstr ""
 
-msgid "Edit"
+msgid "Changes can't be applied. It appears that you made manual modifications to the Meta HTML."
 msgstr ""
 
-msgid "Custom field"
+msgid "(your edits will be displayed and you can apply them again)"
 msgstr ""
 
-msgid "Select posts with custom fields: "
+msgid "<strong>Your edits are shown below:</strong>"
 msgstr ""
 
-msgid "Custom field relationship:"
+msgid "* These updates will take effect when you save the view."
 msgstr ""
 
-msgid "Relationship to use when querying with multiple custom fields:"
+msgid "Close"
 msgstr ""
 
-msgid "OR"
+msgid "This View selects <strong>Taxonomy</strong> of type <strong>%s</strong>"
 msgstr ""
 
-msgid "AND"
+msgid "Settings:"
 msgstr ""
 
-msgid "Comparison function:"
+msgid "Don't show empty terms"
 msgstr ""
 
-msgid "Value/s to compare:"
+msgid "Include terms that have non-empty descendants"
 msgstr ""
 
-msgid "<strong>Note:</strong> Separate multiple values with a comma"
+msgid "Include children in the post count"
 msgstr ""
 
-msgid "An Unexpected HTTP Error occurred during the API request."
+msgid "Generate the new filter content"
 msgstr ""
 
-msgid "An unknown error occurred."
-msgstr ""
-
-msgid "Post status"
-msgstr ""
-
-msgid "Select posts with status of "
-msgstr ""
-
-msgid " or "
-msgstr ""
-
-msgid "Select posts with any status."
+msgid "<strong>Meta HTML</strong> - This is used to add front end controls to a View. It gets generated from the View Query settings and can be modified to suit."
 msgstr ""
 
 msgid "Log into your account at <a href=\"%s\">%s</a> and go to <a href=\"%s\">%s</a> for details."
@@ -111,283 +99,136 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-msgid "Generate the new filter content"
+msgid "<strong>%s</strong>"
 msgstr ""
 
-msgid "dismiss"
+msgid "Don't include current page in query result"
 msgstr ""
 
-msgid "View/Edit Meta HTML"
+msgid "<strong>ALL</strong> post types"
 msgstr ""
 
-msgid "<strong>Meta HTML</strong> - This is used to add front end controls to a View. It gets generated from the View Query settings and can be modified to suit."
+msgid "descending"
 msgstr ""
 
-msgid "Changes can't be applied. It appears that you made manual modifications to the Meta HTML."
+msgid "ascending"
 msgstr ""
 
-msgid "(your edits will be displayed and you can apply them again)"
+msgid ", ordered by <strong>%s</strong>, <strong>%s</strong>"
 msgstr ""
 
-msgid "<strong>Your edits are shown below:</strong>"
+msgid "Order by:"
 msgstr ""
 
-msgid "* These updates will take effect when you save the view."
+msgid "Descending"
 msgstr ""
 
-msgid "Close"
+msgid "Ascending"
 msgstr ""
 
-msgid "Fade"
+msgid "Posts (This View returns posts)"
 msgstr ""
 
-msgid "Fade fast"
+msgid "Taxonomy (This View returns taxonomies)"
 msgstr ""
 
-msgid "Fade slow"
+msgid "OK"
 msgstr ""
 
-msgid "Slide Left"
+msgid "Cancel"
 msgstr ""
 
-msgid "Slide Right"
-msgstr ""
-
-msgid "Slide Up"
-msgstr ""
-
-msgid "Slide Down"
-msgstr ""
-
-msgid "Show <strong>all</strong> items. Pagination is disabled."
-msgstr ""
-
-msgid "Show <strong>%s</strong> items per page."
-msgstr ""
-
-msgid "Show <strong>page selector</strong> drop down "
-msgstr ""
-
-msgid "Show <strong>previous</strong> and <strong>next</strong> page controls."
-msgstr ""
-
-msgid "and <strong>previous</strong> and <strong>next</strong> page controls."
-msgstr ""
-
-msgid "Fade"
-msgstr ""
-
-msgid "Slide horizontally"
-msgstr ""
-
-msgid "Slide vertically"
-msgstr ""
-
-msgid " Use <strong>AJAX</strong> to update page content using <strong>%s</strong> transition effect."
-msgstr ""
-
-msgid " Use <strong>AJAX</strong> to update page content."
-msgstr ""
-
-msgid "<strong>Rollover:</strong> Display <strong>%s</strong> items per page for <strong>%s</strong> seconds and then <strong>%s</strong> to the next items."
-msgstr ""
-
-msgid "Views Pagination"
-msgstr ""
-
-msgid "Use as spinner image"
-msgstr ""
-
-msgid "Pagination: "
-msgstr ""
-
-msgid "Pagination:"
-msgstr ""
-
-msgid "Paged"
-msgstr ""
-
-msgid "Roll over"
-msgstr ""
-
-msgid "Load all results (no pagination)"
-msgstr ""
-
-msgid "Limit the number of results (enable pagination)"
-msgstr ""
-
-msgid "Number of items per page:"
-msgstr ""
-
-msgid "Include a page selection drop down"
-msgstr ""
-
-msgid "Include next page and previous page controls"
-msgstr ""
-
-msgid "AJAX:"
-msgstr ""
-
-msgid "Pagination updates the entire page"
-msgstr ""
-
-msgid "Pagination updates only the view (use AJAX)"
-msgstr ""
-
-msgid "Slide horizontally"
-msgstr ""
-
-msgid "Slide vertically"
-msgstr ""
-
-msgid "Transition effect"
-msgstr ""
-
-msgid "Preload images before transition"
-msgstr ""
-
-msgid "Show each page for:"
-msgstr ""
-
-msgid "seconds"
-msgstr ""
-
-msgid "Transition effect:"
-msgstr ""
-
-msgid "Cache pages"
-msgstr ""
-
-msgid "Pre-load the next and previous pages - avoids loading delays when users move between pages"
-msgstr ""
-
-msgid "Spinner graphics from Types"
-msgstr ""
-
-msgid "My custom spinner graphics"
-msgstr ""
-
-msgid "Upload image"
-msgstr ""
-
-msgid "Upload Image"
-msgstr ""
-
-msgid "No spinner graphics"
-msgstr ""
-
-msgid "This View selects <strong>%s</strong>"
-msgstr ""
-
-msgid "This View selects <strong>ALL</strong> post types"
-msgstr ""
-
-msgid "This View selects "
-msgstr ""
-
-msgid " and "
+msgid "Edit"
 msgstr ""
 
 msgid "Select what content type to load:"
 msgstr ""
 
-msgid "The view layout settings will be copied from the original"
+msgid "Content to load"
 msgstr ""
 
-msgid "Using view template:"
+msgid "Filter"
 msgstr ""
 
-msgid "Fields to include:"
+msgid "Display"
 msgstr ""
 
-msgid "Click on <strong>Add field</strong> to insert additional fields. Drag them to reorder, or delete fields that you don't need."
+msgid "Fields used"
 msgstr ""
 
-msgid "Click on <strong>Add field</strong> to insert fields to this View."
-msgstr ""
-
-msgid "Prefix"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "Row Title"
-msgstr ""
-
-msgid "Suffix"
-msgstr ""
-
-msgid "View template"
-msgstr ""
-
-msgid "Add field"
-msgstr ""
-
-msgid "Want to add complex fields? Learn about <a href=\"%s\">using View Templates to customize fields</a>."
-msgstr ""
-
-msgid "View templates"
-msgstr ""
-
-msgid "Fields"
-msgstr ""
-
-msgid "Layout style:"
+msgid "How this View Template is used"
 msgstr ""
 
 msgid "Unformatted"
 msgstr ""
 
+msgid "Ordered List"
+msgstr ""
+
+msgid "Unordered List"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
 msgid "Table"
 msgstr ""
 
-msgid "Table of fields"
+msgid "Single view for "
 msgstr ""
 
-msgid "Ordered list"
+msgid "Archive view for "
 msgstr ""
 
-msgid "Unordered list"
+msgid "Loop view for "
 msgstr ""
 
-msgid "Layout the items using a HTML table"
+msgid "No filters selected."
 msgstr ""
 
-msgid "Number of columns:"
+msgid "None"
 msgstr ""
 
-msgid "Create a table of items with a column for each field"
+msgid "Checkboxes"
 msgstr ""
 
-msgid "Include field names in table headings"
+msgid "Radios"
 msgstr ""
 
-msgid "Items are added to an ordered list"
+msgid "Drop down list"
 msgstr ""
 
-msgid "Items are added to an unordered list"
+msgid "Post Relationship - Post is a child of"
 msgstr ""
 
-msgid "Are you sure you want to change the layout?\\n\\nIt appears that you made modifications to the layout."
+msgid "Select related posts that are a child of <strong>%s</strong>."
 msgstr ""
 
-msgid "Additional Javascript files to be loaded with this View (comma separated): "
+msgid "Post type <strong>%s</strong> doesn't belong to any other post type"
 msgstr ""
 
-msgid "Post parent"
+msgid "Post type <strong>%s</strong> is a child of <strong>%s</strong> post type"
 msgstr ""
 
-msgid "Select posts whose parent is <strong>%s</strong>."
+msgid " and "
 msgstr ""
 
-msgid "Select posts whose parent is the <strong>current page</strong>."
+msgid "Post type <strong>%s</strong> is a child of <strong>%s</strong> post types"
 msgstr ""
 
-msgid "Parent is the current page"
+msgid "Select related posts that are a <strong>child</strong> of the <strong>post where this View is inserted</strong>."
 msgstr ""
 
-msgid "Parent is:"
+msgid "Select related posts that are a <strong>child</strong> to the <strong>Post set by parent View</strong>."
+msgstr ""
+
+msgid "Post where this View is inserted"
+msgstr ""
+
+msgid "Post set by parent View"
+msgstr ""
+
+msgid "Specific:"
 msgstr ""
 
 msgid "View updated."
@@ -441,88 +282,31 @@ msgstr ""
 msgid "View template draft updated"
 msgstr ""
 
-msgid "Generate the new layout content"
+msgid "post date"
 msgstr ""
 
-msgid "<strong>Meta HTML</strong> - This is used to layout the posts found. It gets generated from the View Layout settings and can be modified to suit."
+msgid "post title"
 msgstr ""
 
-msgid "Add another filter term"
+msgid "post ID"
 msgstr ""
 
-msgid "Add filter"
+msgid "menu order"
 msgstr ""
 
-msgid "Select what to filter by:"
+msgid "random order"
 msgstr ""
 
-msgid "Condition:"
+msgid "Field - %s"
 msgstr ""
 
-msgid "Add New View Template"
+msgid "post id"
 msgstr ""
 
-msgid "Edit View Template"
+msgid "Taxonomy Term"
 msgstr ""
 
-msgid "New View Template"
-msgstr ""
-
-msgid "View Views-Templates"
-msgstr ""
-
-msgid "Search View Templates"
-msgstr ""
-
-msgid "No view templates found"
-msgstr ""
-
-msgid "No view templates found in Trash"
-msgstr ""
-
-msgid "Edit view template"
-msgstr ""
-
-msgid "%d %ss use a different template:"
-msgstr ""
-
-msgid "Update all %ss now"
-msgstr ""
-
-msgid "<span id=\"%s\">%d</span> %ss have updated to use this template."
-msgstr ""
-
-msgid "All %s are using this template"
-msgstr ""
-
-msgid "There are no %s"
-msgstr ""
-
-msgid "No template selected for %s"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "View Template settings for archive loops:"
-msgstr ""
-
-msgid "Loop"
-msgstr ""
-
-msgid "Use this view template"
-msgstr ""
-
-msgid "Preview"
-msgstr ""
-
-msgid "View Template for Post Types:"
-msgstr ""
-
-msgid "Post Types"
-msgstr ""
-
-msgid "Usage"
+msgid "Taxonomy is <strong>One</strong> of these"
 msgstr ""
 
 msgid "Add New View"
@@ -546,6 +330,12 @@ msgstr ""
 msgid "No views found in Trash"
 msgstr ""
 
+msgid "Views"
+msgstr ""
+
+msgid "New View"
+msgstr ""
+
 msgid "View Templates"
 msgstr ""
 
@@ -561,13 +351,28 @@ msgstr ""
 msgid "Views Subscription"
 msgstr ""
 
-msgid "View Query"
+msgid "Help"
 msgstr ""
 
-msgid "View Layout"
+msgid "View Query - Choose what content to load"
+msgstr ""
+
+msgid "View Layout - Edit the layout"
+msgstr ""
+
+msgid "Views Help"
+msgstr ""
+
+msgid "Learn about %sediting Views HTML%s"
+msgstr ""
+
+msgid "Hide this editor"
 msgstr ""
 
 msgid "The view query settings will be copied from the original"
+msgstr ""
+
+msgid "Learn how to create a View and how to display it in the complete %sViews Guide%s"
 msgstr ""
 
 msgid "Edit view"
@@ -594,7 +399,7 @@ msgstr ""
 msgid "<strong>Trash:</strong> Move the View Template to Trash"
 msgstr ""
 
-msgid "If you need additional help with View Templates you can visit our <a href='%s'>support forum</a>."
+msgid "If you need additional help with View Templates you can visit our <a href='%s' target='_blank'>support forum &raquo;</a>."
 msgstr ""
 
 msgid "Use this page to create and edit <strong>View Templates</strong>. For more information about View Templates visit the user guide on our website:"
@@ -610,9 +415,6 @@ msgid "Add shortcodes to the body. You can find these by clicking on the “V”
 msgstr ""
 
 msgid "Use HTML mode to style your content (we recommend keeping your styles in style.css or another external stylesheet rather than including them inline)"
-msgstr ""
-
-msgid "Choose a post type under “Template Usage” to attach your template to that post type"
 msgstr ""
 
 msgid "Use <strong>Views</strong> to filter and display lists in complex and interesting ways. Read more about Views in our user guide:"
@@ -678,6 +480,12 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+msgid "Fully customize the View HTML output"
+msgstr ""
+
+msgid "* This View has changed. You need to save for these changes to take effect."
+msgstr ""
+
 msgid "* Requires WordPress 3.2 or greater for best results."
 msgstr ""
 
@@ -690,10 +498,442 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
+msgid "1. Enter title"
+msgstr ""
+
+msgid "2. Choose what content to load"
+msgstr ""
+
+msgid "3. Edit the layout"
+msgstr ""
+
+msgid "4. Save this View"
+msgstr ""
+
 msgid "Settings Saved"
 msgstr ""
 
 msgid "Views Settings"
+msgstr ""
+
+msgid "Post status"
+msgstr ""
+
+msgid "status of "
+msgstr ""
+
+msgid "Select posts with status of "
+msgstr ""
+
+msgid " or "
+msgstr ""
+
+msgid "any status."
+msgstr ""
+
+msgid "Select posts with any status."
+msgstr ""
+
+msgid "The view layout settings will be copied from the original"
+msgstr ""
+
+msgid "Learn about different %slayouts%s"
+msgstr ""
+
+msgid "Using view template:"
+msgstr ""
+
+msgid "Using View template:"
+msgstr ""
+
+msgid "Fields to include:"
+msgstr ""
+
+msgid "Click on <strong>Add field</strong> to insert additional fields. Drag them to reorder, or delete fields that you don't need."
+msgstr ""
+
+msgid "Click on <strong>Add field</strong> to insert fields to this View."
+msgstr ""
+
+msgid "Prefix"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "Row Title"
+msgstr ""
+
+msgid "Suffix"
+msgstr ""
+
+msgid "Add field"
+msgstr ""
+
+msgid "View template"
+msgstr ""
+
+msgid "Taxonomy View"
+msgstr ""
+
+msgid "Post View"
+msgstr ""
+
+msgid "Taxonomy"
+msgstr ""
+
+msgid "Want to add complex fields? Learn about %susing View Templates to customize fields%s."
+msgstr ""
+
+msgid "Want to display posts that belong to this taxonomy? Learn about %sinserting child Views to Taxonomy Views%s."
+msgstr ""
+
+msgid "View templates"
+msgstr ""
+
+msgid "Fields"
+msgstr ""
+
+msgid " - Use to layout child taxonomy terms"
+msgstr ""
+
+msgid " - Use to layout posts for the current taxonomy term"
+msgstr ""
+
+msgid "Layout style:"
+msgstr ""
+
+msgid "Unformatted"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Ordered list"
+msgstr ""
+
+msgid "Unordered list"
+msgstr ""
+
+msgid "Layout the items using a HTML table"
+msgstr ""
+
+msgid "Number of columns:"
+msgstr ""
+
+msgid "Create a table of items with a column for each field"
+msgstr ""
+
+msgid "Include field names in table headings"
+msgstr ""
+
+msgid "Items are added to an ordered list"
+msgstr ""
+
+msgid "Items are added to an unordered list"
+msgstr ""
+
+msgid "Are you sure you want to change the layout?\\n\\nIt appears that you made modifications to the layout."
+msgstr ""
+
+msgid "Additional Javascript files to be loaded with this View (comma separated): "
+msgstr ""
+
+msgid "Fade"
+msgstr ""
+
+msgid "Fade fast"
+msgstr ""
+
+msgid "Fade slow"
+msgstr ""
+
+msgid "Slide Left"
+msgstr ""
+
+msgid "Slide Right"
+msgstr ""
+
+msgid "Slide Up"
+msgstr ""
+
+msgid "Slide Down"
+msgstr ""
+
+msgid "Show <strong>all</strong> items. Pagination is disabled."
+msgstr ""
+
+msgid "Show <strong>%s</strong> items per page."
+msgstr ""
+
+msgid "Show <strong>page selector</strong> drop down "
+msgstr ""
+
+msgid "Show <strong>page selector</strong> links "
+msgstr ""
+
+msgid "Show <strong>previous</strong> and <strong>next</strong> page controls."
+msgstr ""
+
+msgid "and <strong>previous</strong> and <strong>next</strong> page controls."
+msgstr ""
+
+msgid "Slide horizontally"
+msgstr ""
+
+msgid "Slide vertically"
+msgstr ""
+
+msgid " Use <strong>AJAX</strong> to update page content using <strong>%s</strong> transition effect."
+msgstr ""
+
+msgid " Use <strong>AJAX</strong> to update page content."
+msgstr ""
+
+msgid "<strong>Auto transition:</strong> Display <strong>%s</strong> items per page for <strong>%s</strong> seconds and then <strong>%s</strong> to the next items."
+msgstr ""
+
+msgid "Views Pagination"
+msgstr ""
+
+msgid "Use as spinner image"
+msgstr ""
+
+msgid "Pagination: "
+msgstr ""
+
+msgid "Pagination:"
+msgstr ""
+
+msgid "Paged"
+msgstr ""
+
+msgid "Auto transition"
+msgstr ""
+
+msgid "Load all results (no pagination)"
+msgstr ""
+
+msgid "Limit the number of results (enable pagination)"
+msgstr ""
+
+msgid "Number of items per page:"
+msgstr ""
+
+msgid "Include a page selector"
+msgstr ""
+
+msgid "Drop down"
+msgstr ""
+
+msgid "Links"
+msgstr ""
+
+msgid "Include next page and previous page controls"
+msgstr ""
+
+msgid "AJAX:"
+msgstr ""
+
+msgid "Pagination updates the entire page"
+msgstr ""
+
+msgid "Pagination updates only the view (use AJAX)"
+msgstr ""
+
+msgid "Transition effect"
+msgstr ""
+
+msgid "Preload images before transition"
+msgstr ""
+
+msgid "Show each page for:"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "Transition effect:"
+msgstr ""
+
+msgid "Include page selector links"
+msgstr ""
+
+msgid "Cache pages"
+msgstr ""
+
+msgid "Pre-load the next and previous pages - avoids loading delays when users move between pages"
+msgstr ""
+
+msgid "Spinner graphics from Types"
+msgstr ""
+
+msgid "My custom spinner graphics"
+msgstr ""
+
+msgid "Upload image"
+msgstr ""
+
+msgid "Upload Image"
+msgstr ""
+
+msgid "No spinner graphics"
+msgstr ""
+
+msgid "Javascript callback function on next slide"
+msgstr ""
+
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "View Template Help"
+msgstr ""
+
+msgid "View Template Settings"
+msgstr ""
+
+msgid "Go to the %sSettings page%s to apply this template to content types."
+msgstr ""
+
+msgid "Edit view template"
+msgstr ""
+
+msgid "%d %ss use a different template:"
+msgstr ""
+
+msgid "Update all %ss now"
+msgstr ""
+
+msgid "<span id=\"%s\">%d</span> %ss have updated to use this template."
+msgstr ""
+
+msgid "All %s are using this template"
+msgstr ""
+
+msgid "There are no %s"
+msgstr ""
+
+msgid "No template selected for %s"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Normal WordPress output - add paragraphs an breaks and resolve shortcodes"
+msgstr ""
+
+msgid "Raw output - only resolve shortcodes without adding line breaks or paragraphs"
+msgstr ""
+
+msgid "What is a View Template"
+msgstr ""
+
+msgid "Editing instructions"
+msgstr ""
+
+msgid "How to apply View Templates to content"
+msgstr ""
+
+msgid "View Template settings for Taxonomy archive loops"
+msgstr ""
+
+msgid "Loop"
+msgstr ""
+
+msgid "Use this View Template"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "View Template for Post Types"
+msgstr ""
+
+msgid "Post Types"
+msgstr ""
+
+msgid "Use this View Template (Single)"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Use this View Template (Archive loop)"
+msgstr ""
+
+msgid "Theme support for View Templates"
+msgstr ""
+
+msgid "View Templates modify the content when called from 'the_content' function. Some themes don't use 'the_content' function but define their own function."
+msgstr ""
+
+msgid "If View Templates don't work with your theme then you can enter the name of the function your theme uses here:"
+msgstr ""
+
+msgid "Don't know the name of your theme function?"
+msgstr ""
+
+msgid "Enable debugging and go to a page that should display a View Template and Views will display the call function name."
+msgstr ""
+
+msgid "Add New View Template"
+msgstr ""
+
+msgid "Edit View Template"
+msgstr ""
+
+msgid "New View Template"
+msgstr ""
+
+msgid "View Views-Templates"
+msgstr ""
+
+msgid "Search View Templates"
+msgstr ""
+
+msgid "No view templates found"
+msgstr ""
+
+msgid "No view templates found in Trash"
+msgstr ""
+
+msgid "Post parent"
+msgstr ""
+
+msgid "parent is <strong>%s</strong>"
+msgstr ""
+
+msgid "Select posts whose parent is <strong>%s</strong>."
+msgstr ""
+
+msgid "Taxonomy parent"
+msgstr ""
+
+msgid "Select taxonomy whose parent is <strong>%s</strong>."
+msgstr ""
+
+msgid "parent is the <strong>current page</strong>"
+msgstr ""
+
+msgid "Select posts whose parent is the <strong>current page</strong>."
+msgstr ""
+
+msgid "Select taxonomy whose parent is the value set by the <strong>parent view</strong>."
+msgstr ""
+
+msgid "Parent is the current page"
+msgstr ""
+
+msgid "Parent is:"
+msgstr ""
+
+msgid "Parent is the taxonomy selected by the <strong>parent view</strong>"
 msgstr ""
 
 msgid " OR "
@@ -717,7 +957,37 @@ msgstr ""
 msgid "the same as the <strong>current page</strong>"
 msgstr ""
 
-msgid "Taxomomy"
+msgid "the same as set by the View shortcode attribute "
+msgstr ""
+
+msgid "the same as set by the URL parameter "
+msgstr ""
+
+msgid "selected by the parent view."
+msgstr ""
+
+msgid "eg. [wpv-views name=\"view-name\" <strong>%s=\"xxxx\"</strong>]"
+msgstr ""
+
+msgid "eg. http://www.example.com/page/?<strong>%s=\"xxxx\"</strong>"
+msgstr ""
+
+msgid "Taxonomy"
+msgstr ""
+
+msgid "Shortcode attribute"
+msgstr ""
+
+msgid "URL parameter"
+msgstr ""
+
+msgid "Using : "
+msgstr ""
+
+msgid "Taxonomy name"
+msgstr ""
+
+msgid "Taxonomy slug"
 msgstr ""
 
 msgid "Select posts with taxonomy: "
@@ -729,7 +999,13 @@ msgstr ""
 msgid "Relationship to use when querying with multiple taxonomies:"
 msgstr ""
 
-msgid "Post is:"
+msgid "OR"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
+msgid "Taxonomy is:"
 msgstr ""
 
 msgid "Any of the following"
@@ -744,19 +1020,43 @@ msgstr ""
 msgid "Value set by the current page"
 msgstr ""
 
+msgid "Value set by View shortcode attribute"
+msgstr ""
+
+msgid "Value set by URL paremeter"
+msgstr ""
+
+msgid "Value set by parent view"
+msgstr ""
+
+msgid "Value set by URL parameter"
+msgstr ""
+
 msgid "Post search"
 msgstr ""
 
 msgid "None set"
 msgstr ""
 
+msgid "Filter by <strong>search</strong> term: <strong>%s</strong>"
+msgstr ""
+
 msgid "Filter by this search term: <strong>%s</strong>."
+msgstr ""
+
+msgid "Show a <strong>search box</strong> for vistors"
 msgstr ""
 
 msgid "Show a <strong>search box</strong> for vistors."
 msgstr ""
 
+msgid "Filter by <strong>search box</strong>"
+msgstr ""
+
 msgid "The search box will be added <strong>manually</strong>. The search box shortcode to use is <strong>[wpv-filter-search-box]</strong>."
+msgstr ""
+
+msgid "Taxonomy search"
 msgstr ""
 
 msgid "Search for a specific text:"
@@ -768,151 +1068,97 @@ msgstr ""
 msgid "I’ll add the search box to the HTML manually"
 msgstr ""
 
-msgid "None"
+msgid "Custom field - %s"
 msgstr ""
 
-msgid "Checkboxes"
+msgid " OR"
 msgstr ""
 
-msgid "Radios"
+msgid " AND"
 msgstr ""
 
-msgid "Drop down list"
+msgid "Custom field"
 msgstr ""
 
-msgid "post date"
+msgid "Select posts with custom fields: "
 msgstr ""
 
-msgid "post title"
+msgid "Custom field relationship:"
 msgstr ""
 
-msgid "post ID"
+msgid "Relationship to use when querying with multiple custom fields:"
 msgstr ""
 
-msgid "menu order"
+msgid "Comparison function:"
 msgstr ""
 
-msgid "Field - %s"
+msgid "Value/s to compare:"
 msgstr ""
 
-msgid "descending"
+msgid "<strong>Note:</strong> Separate multiple values with a comma."
 msgstr ""
 
-msgid "ascending"
+msgid "Compare functions"
 msgstr ""
 
-msgid ", ordered by <strong>%s</strong>, <strong>%s</strong>"
+msgid "<strong>Functions:</strong> You can use any of these functions for comparison:"
 msgstr ""
 
-msgid "Order by:"
+msgid "<strong>URL_PARAM</strong>(foo) - Use the url parameter \"foo\". eg http://www.example.com/foo=something"
 msgstr ""
 
-msgid "post date"
+msgid "<strong>VIEW_PARAM</strong>(foo) - Use the parameter \"foo\" in the View shortcode. eg. [wpv-view name=\"my-view\" foo=\"something\"]"
 msgstr ""
 
-msgid "post title"
+msgid "Add another filter term"
 msgstr ""
 
-msgid "post id"
+msgid "Add filter"
 msgstr ""
 
-msgid "menu order"
+msgid "Select what to filter by:"
 msgstr ""
 
-msgid "Descending"
+msgid "Condition:"
 msgstr ""
 
-msgid "Ascending"
+msgid "%sViews%s load content from the database and display it."
 msgstr ""
 
-msgid "Views are lists and groups of content, like a listing or showcase page. On your theme the following Views are defined:"
+msgid "Views help"
 msgstr ""
 
-msgid "View Templates are applied to pages to create different layouts. On your theme the following View Templates are defined:"
+msgid "%sView Templates%s style single pages."
 msgstr ""
 
-msgid "If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from <a href=\"%s\">%s</a>"
+msgid "View Template help"
 msgstr ""
 
-msgid "ID"
+msgid "%sUser Guides%s  - everything you need to know about using Views"
 msgstr ""
 
-msgid "Title"
+msgid "%sExamples%s - learn from examples and see what you can build with Views"
 msgstr ""
 
-msgid "Title with a link"
+msgid "%sSupport forum%s - get help"
 msgstr ""
 
-msgid "Body"
+msgid "Documentation and Support"
 msgstr ""
 
-msgid "Excerpt"
+msgid "Views subscription"
 msgstr ""
 
-msgid "Author"
+msgid "wp-types.com subscription email"
 msgstr ""
 
-msgid "Date"
+msgid "wp-types.com subscription key"
 msgstr ""
 
-msgid "URL"
+msgid "Save subscription details"
 msgstr ""
 
-msgid "Featured image"
-msgstr ""
-
-msgid "Comment title"
-msgstr ""
-
-msgid "Comment body"
-msgstr ""
-
-msgid "Comment Author"
-msgstr ""
-
-msgid "Comment Date"
-msgstr ""
-
-msgid "Taxonomy title"
-msgstr ""
-
-msgid "Taxonomy description"
-msgstr ""
-
-msgid "Taxonomy items count"
-msgstr ""
-
-msgid "Basic"
-msgstr ""
-
-msgid "View"
-msgstr ""
-
-msgid "Taxonomy"
-msgstr ""
-
-msgid "Category"
-msgstr ""
-
-msgid "Import"
-msgstr ""
-
-msgid "You have <strong>Views</strong> import pending. %sClick here to import.%s %sDismiss message.%s"
-msgstr ""
-
-msgid "Import Views for theme"
-msgstr ""
-
-msgid "View not found"
-msgstr ""
-
-msgid "Insert Views Shortcode"
-msgstr ""
-
-msgid "Views Import"
-msgstr ""
-
-msgid "Views import complete"
+msgid "Saving. Please wait..."
 msgstr ""
 
 msgid "WP Views widget"
@@ -930,16 +1176,16 @@ msgstr ""
 msgid "View:"
 msgstr ""
 
-msgid "Content Template"
+msgid "Select the views xml file to upload from your computer:&nbsp;"
 msgstr ""
 
-msgid "Select the views xml file to upload from your computer:&nbsp;"
+msgid "Import"
 msgstr ""
 
 msgid "The Simple XML library is missing."
 msgstr ""
 
-msgid "The xliff file (%s) could not be read."
+msgid "The XML file (%s) could not be read."
 msgstr ""
 
 msgid "Could not read the Views import file."
@@ -969,9 +1215,6 @@ msgstr ""
 msgid "Import Views and View Templates"
 msgstr ""
 
-msgid "Settings:"
-msgstr ""
-
 msgid "Bulk overwrite if View exists"
 msgstr ""
 
@@ -984,13 +1227,160 @@ msgstr ""
 msgid "Delete any existing View Templates that are not in the import"
 msgstr ""
 
+msgid "You have <strong>Views</strong> import pending. %sClick here to import.%s %sDismiss message.%s"
+msgstr ""
+
+msgid "Import Views for theme"
+msgstr ""
+
+msgid "View not found"
+msgstr ""
+
+msgid "Insert Views Shortcode"
+msgstr ""
+
+msgid "Getting started"
+msgstr ""
+
+msgid "Views Import"
+msgstr ""
+
+msgid "Views import complete"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Title with a link"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Excerpt"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Featured image"
+msgstr ""
+
+msgid "Comments number"
+msgstr ""
+
+msgid "Edit Link"
+msgstr ""
+
+msgid "Post type"
+msgstr ""
+
+msgid "Comment title"
+msgstr ""
+
+msgid "Comment body"
+msgstr ""
+
+msgid "Comment Author"
+msgstr ""
+
+msgid "Comment Date"
+msgstr ""
+
+msgid "Taxonomy title"
+msgstr ""
+
+msgid "Taxonomy title with a link"
+msgstr ""
+
+msgid "Taxonomy URL"
+msgstr ""
+
+msgid "Taxonomy slug"
+msgstr ""
+
+msgid "Taxonomy description"
+msgstr ""
+
+msgid "Taxonomy post count"
+msgstr ""
+
+msgid "Edit "
+msgstr ""
+
+msgid "Edit This"
+msgstr ""
+
+msgid "No Comments"
+msgstr ""
+
+msgid "1 Comment"
+msgstr ""
+
+msgid "% Comments"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Page %s"
+msgstr ""
+
+msgid "Content Template"
+msgstr ""
+
+msgid "<strong>View template debug: </strong>Calling function is <strong>%s</strong>"
+msgstr ""
+
+msgid "Views are lists and groups of content, like a listing or showcase page. On your theme the following Views are defined:"
+msgstr ""
+
+msgid "View Templates are applied to pages to create different layouts. On your theme the following View Templates are defined:"
+msgstr ""
+
+msgid "If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from %s"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "Taxonomy"
+msgstr ""
+
+msgid "Other Fields"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "View templates"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
 msgid "Get Types and Views"
 msgstr ""
 
-msgid "<a href=\"%s\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
+msgid "<a href=\"%s\" target=\"_blank\">Types</a> is available for free and <a href=\"%s\">Views</a> costs only $49. Once you have installed the full versions of Types and Views you'll be able to create and edit your own content types, layouts and listings."
 msgstr ""
 
-msgid "<a href=\"%s\">Learn more</a>"
+msgid "<a href=\"%s\" target=\"_blank\">Learn more</a>"
 msgstr ""
 
 msgid "Your theme was created using <strong>Types</strong> and <strong>Views</strong>. Developers use these two plugins to build complex websites, without coding."
@@ -1005,17 +1395,11 @@ msgstr ""
 msgid "You can use Types and Views for as many themes and websites as you like."
 msgstr ""
 
-msgid "Views subscription"
+msgid "Error while parsing the evaluate expression"
 msgstr ""
 
-msgid "wp-types.com subscription email"
+msgid "Conditional expression includes illegal characters"
 msgstr ""
 
-msgid "wp-types.com subscription key"
-msgstr ""
-
-msgid "Save subscription details"
-msgstr ""
-
-msgid "Saving. Please wait..."
+msgid "Correct conditional expression has not been found"
 msgstr ""

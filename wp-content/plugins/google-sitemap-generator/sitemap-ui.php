@@ -1,7 +1,7 @@
 <?php
 /*
  
- $Id: sitemap-ui.php 440117 2011-09-19 13:24:49Z arnee $
+ $Id: sitemap-ui.php 535851 2012-04-24 21:48:23Z arnee $
 
 */
 
@@ -443,6 +443,39 @@ class GoogleSitemapGeneratorUI {
 					padding:1px;
 					margin:0;
 				}
+
+				<?php if (version_compare($wp_version, "3.4", "<")): //Fix style for WP 3.4 (dirty way for now..) ?>
+
+				.inner-sidebar #side-sortables, .columns-2 .inner-sidebar #side-sortables {
+					min-height: 300px;
+					width: 280px;
+					padding: 0;
+				}
+
+				.has-right-sidebar .inner-sidebar {
+					display: block;
+				}
+
+				.inner-sidebar {
+					float: right;
+					clear: right;
+					display: none;
+					width: 281px;
+					position: relative;
+				}
+
+				.has-right-sidebar #post-body-content {
+					margin-right: 300px;
+				}
+
+				#post-body-content {
+					width: auto !important;
+					float: none !important;
+				}
+
+				<?php endif; ?>
+
+
 			</style>
 				
 			<?php elseif(version_compare($wp_version,"2.5",">=")): ?>
@@ -1073,7 +1106,7 @@ class GoogleSitemapGeneratorUI {
 						
 							$enabledPostTypes = $this->sg->GetOption('in_customtypes');
 						
-							if(count($taxonomies)>0) {
+							if(count($custom_post_types)>0) {
 								?><b><?php _e('Custom post types', 'sitemap') ?>:</b><ul><?php 
 							
 								foreach ($custom_post_types as $post_type) {

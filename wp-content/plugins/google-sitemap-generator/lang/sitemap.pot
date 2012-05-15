@@ -2,7 +2,7 @@
 # Copyright (C) 2005 [name] : [URL]
 # This file is distributed under the same license as the WordPress package.
 # [name] <[mail-address]>, 2005.
-# $Id: sitemap.pot 175669 2009-11-20 21:55:02Z arnee $
+# $Id: sitemap.pot 535845 2012-04-24 21:44:22Z arnee $
 #
 msgid ""
 msgstr ""

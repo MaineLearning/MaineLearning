@@ -22,7 +22,13 @@ function wpv_get_taxonomy_filter_summary($view_settings) {
     $selected = $view_settings['taxonomy_type'];
     
 	$taxonomies = get_taxonomies('', 'objects');
-    echo sprintf(__('This View selects <strong>Taxonomy</strong> of type <strong>%s</strong>', 'wpv-view'), $taxonomies[$selected[0]]->labels->name);
+	
+	if (isset($taxonomies[$selected[0]])) {
+		$name = $taxonomies[$selected[0]]->labels->name;
+	} else {
+		$name = $selected[0];
+	}
+    echo sprintf(__('This View selects <strong>Taxonomy</strong> of type <strong>%s</strong>', 'wpv-views'), $name);
             
 }
 
@@ -66,3 +72,16 @@ function wpv_taxonomy_settings($view_settings) {
     </ul>
     <?php
 }
+
+add_filter('wpv-view-get-content-summary', 'wpv_taxonomy_summary_filter', 5, 3);
+
+function wpv_taxonomy_summary_filter($summary, $post_id, $view_settings) {
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'taxonomy') {
+		ob_start();
+		wpv_get_taxonomy_filter_summary($view_settings);
+		$summary .= ob_get_contents();
+		ob_end_clean();
+	}
+	return $summary;
+}
+

@@ -86,7 +86,7 @@
             
             $request = wp_remote_post(VIEWS_UPDATE_URL, array( 'timeout' => 15, 'body' => $body_array) );
             if ( is_wp_error($request) ) {
-                $res = new WP_Error('plugins_api_failed', __('An Unexpected HTTP Error occurred during the API request.', 'sitepress'), $request->get_error_message() );
+                $res = new WP_Error('plugins_api_failed', __('An Unexpected HTTP Error occurred during the API request.', 'wpv-views'), $request->get_error_message() );
             } else {
                 $res = maybe_unserialize($request['body']);
                 if ( false === $res )

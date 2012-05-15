@@ -15,6 +15,8 @@ function wpv_view_layout_meta_html_close() {
 jQuery(document).ready(function($){
     jQuery('#wpv_layout_meta_html_content').keyup(function(event) {
         jQuery('#wpv_layout_meta_html_notice').show();
+        show_view_changed_message();
+
     });
 });
 

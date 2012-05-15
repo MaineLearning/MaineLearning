@@ -27,11 +27,11 @@ function wpv_filter_taxonomy_order_by_admin_summary($view_settings) {
     global $taxonomy_order_by;
     $order_by = $taxonomy_order_by[$view_settings['taxonomy_orderby']];
     
-    $order = __('descending', 'wpv-view');
+    $order = __('descending', 'wpv-views');
     if ($view_settings['taxonomy_order'] == 'ASC') {
-        $order = __('ascending', 'wpv-view');
+        $order = __('ascending', 'wpv-views');
     }
-    echo sprintf(__(', ordered by <strong>%s</strong>, <strong>%s</strong>', 'wpv-view'), $order_by, $order);
+    echo sprintf(__(', ordered by <strong>%s</strong>, <strong>%s</strong>', 'wpv-views'), $order_by, $order);
     
 }
 
@@ -71,4 +71,15 @@ function wpv_filter_taxonomy_order_by_admin($view_settings) {
 
     <?php
 }
+add_filter('wpv-view-get-content-summary', 'wpv_taxonomy_order_summary_filter', 5, 3);
 
+function wpv_taxonomy_order_summary_filter($summary, $post_id, $view_settings) {
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'taxonomy') {
+		ob_start();
+		wpv_filter_taxonomy_order_by_admin_summary($view_settings);
+		$summary .= ob_get_contents();
+		ob_end_clean();
+	}
+	
+	return $summary;
+}

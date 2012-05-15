@@ -102,6 +102,7 @@ function wpcf_custom_types_register($post_type, $data) {
             $data['labels']['singular_name'] = $data['labels']['name'];
         }
         foreach ($data['labels'] as $label_key => $label) {
+            $data['labels'][$label_key] = $label = stripslashes($label);
             switch ($label_key) {
                 case 'add_new_item':
                 case 'edit_item':

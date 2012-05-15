@@ -177,7 +177,7 @@ class Wpcf_Validate
      */
     public static function required($args, $value)
     {
-        if (empty($value)) {
+        if (empty($value) && $value !== 0 && $value !== '0') {
             return array(
                 'error' => 1,
             );
@@ -239,7 +239,7 @@ class Wpcf_Validate
      */
     public static function rewriteslug($args, $value)
     {
-        if (preg_match('#[^a-zA-Z0-9\/\_\-]#', $value) === false) {
+        if (preg_match('#[^a-zA-Z0-9\/\_\-\%]#', $value) === false) {
             return array(
                 'error' => 1,
             );

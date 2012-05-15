@@ -1,16 +1,35 @@
 <?php
 /*
 Plugin Name: Login Logo
-Description: Drop a PNG file named <code>login-logo.png</code> into your <code>wp-content</code> directory. This simple plugin takes care of the rest, with zero configuration. Transparent backgrounds work best. Keep the width below 326 pixels.
-Version: 0.5
+Description: Drop a PNG file named <code>login-logo.png</code> into your <code>wp-content</code> directory. This simple plugin takes care of the rest, with zero configuration. Transparent backgrounds work best. Crop it tight, with a width of 312 pixels, for best results.
+Version: 0.6
 License: GPL
+Plugin URI: http://txfx.net/wordpress-plugins/login-logo/
 Author: Mark Jaquith
 Author URI: http://coveredwebservices.com/
+
+==========================================================================
+
+Copyright 2011-2012  Mark Jaquith
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 class CWS_Login_Logo_Plugin {
 	static $instance;
-	const cutoff = 326;
+	const cutoff = 312;
 	var $logo_locations;
 	var $logo_location;
 	var $width = 0;
@@ -26,8 +45,16 @@ class CWS_Login_Logo_Plugin {
 	}
 
 	public function init() {
+		global $blog_id;
 		$this->logo_locations = array();
 		if ( is_multisite() && function_exists( 'get_current_site' ) ) {
+			// First, see if there is one for this specific site (blog)
+			$this->logo_locations['site'] = array(
+				'path' => WP_CONTENT_DIR . '/login-logo-site-' . $blog_id . '.png',
+				'url' => $this->maybe_ssl( WP_CONTENT_URL . '/login-logo-site-' . $blog_id . '.png' )
+			);
+
+			// Next, we see if there is one for this specific network
 			$site = get_current_site(); // Site = Network? Ugh.
 			if ( $site && isset( $site->id ) ) {
 				$this->logo_locations['network'] = array(
@@ -36,6 +63,7 @@ class CWS_Login_Logo_Plugin {
 					);
 			}
 		}
+		// Finally, we do a global lookup
 		$this->logo_locations['global'] =  array(
 			'path' => WP_CONTENT_DIR . '/login-logo.png',
 			'url' => $this->maybe_ssl( WP_CONTENT_URL . '/login-logo.png' )
@@ -137,8 +165,15 @@ class CWS_Login_Logo_Plugin {
 		.login h1 a {
 			background: url(<?php echo esc_url_raw( $this->get_location( 'url' ) ); ?>) no-repeat top center;
 			width: <?php echo self::cutoff; ?>px;
-			height: <?php echo $this->get_height() + 3; ?>px;
-			<?php if ( self::cutoff < $this->get_original_width() ) $this->css3( 'background-size', 'contain' ); ?>
+			height: <?php echo $this->get_height(); ?>px;
+			margin-left: 8px;
+			padding-bottom: 16px;
+			<?php
+			if ( self::cutoff < $this->get_original_width() )
+				$this->css3( 'background-size', 'contain' );
+			else
+				$this->css3( 'background-size', 'auto' );
+			?>
 		}
 	</style>
 <?php if ( self::cutoff < $this->get_width() ) { ?>

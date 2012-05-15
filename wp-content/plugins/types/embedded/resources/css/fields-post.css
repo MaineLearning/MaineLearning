@@ -12,8 +12,14 @@ img.ui-datepicker-trigger {
     margin: 5px 0 15px 0;
 }
 #poststuff .inside .wpcf-form-item:last-child {
-    margin-bottom: 0;
+/*    margin-bottom: 0;*/
 }
+/*#poststuff .inside .wpcf-form-item .wpcf-form-item:last-child {
+    margin-bottom: 15px;
+}
+#poststuff .inside .form-item-radios:last-child {
+    margin-bottom: 15px !important;
+}*/
 .wpcf-fields-file-preview {
     /*    float: left;*/
     /*    margin-right: 10px;*/
@@ -34,4 +40,34 @@ img.ui-datepicker-trigger {
 }
 #side-info-column .wpcf-fields-file-textfield {
     width: 130px;
+}
+.wpcf-repetitive-response {
+    margin-top: 20px;
+}
+.wpcf-repetitive-response .form-item,
+.wpcf-skype {
+    margin-bottom: 40px !important;
+}
+.wpcf-repetitive-response .wpcf-form-item-radio {
+    margin-bottom: 0 !important;
+}
+.wpcf-repetitive-buttons {
+    float: right;
+    position: relative;
+    top: -10px;
+}
+.wpcf-message {
+    padding: 0 0.6em;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 1em 0 1em 0;
+}
+.wpcf-error {
+    background-color: #FFEBE8;
+    border-color: #CC0000;
+}
+.wpcf-pr-table-wrapper {
+    width: 100%;
+    overflow: auto;
 }

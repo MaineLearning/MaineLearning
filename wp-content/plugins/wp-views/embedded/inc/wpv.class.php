@@ -30,6 +30,8 @@ class WP_Views{
 		$this->view_shortcode_attributes = array();
         
         $this->widget_view_id = 0;
+		
+		$this->variables = array();
         
         add_filter('icl_cf_translate_state', array($this, 'custom_field_translate_state'), 10, 2);
 
@@ -42,6 +44,12 @@ class WP_Views{
     }
 
     function init(){
+		
+	    $views = $this->get_views();
+		foreach($views as $view) {
+			$params = $this->get_view_shortcode_params($view->ID);
+		}
+		
         $this->wpv_register_type_view();
         
         $this->plugin_localization();
@@ -51,14 +59,13 @@ class WP_Views{
         add_action('wp_ajax_wpv_add_custom_field', 'wpv_ajax_add_custom_field');
         add_action('wp_ajax_wpv_add_taxonomy', 'wpv_ajax_add_taxonomy');
         add_action('wp_ajax_wpv_pagination', 'wpv_ajax_pagination');
-        add_action('wp_ajax_wpv_get_page', 'wpv_ajax_get_page');
-        add_action('wp_ajax_nopriv_wpv_get_page', 'wpv_ajax_get_page');
         add_action('wp_ajax_wpv_views_editor_height', array($this, 'save_editor_height'));
         add_action('wp_ajax_wpv_get_posts_select', 'wpv_get_posts_select');
         add_action('wp_ajax_wpv_dismiss_message', array($this, 'wpv_dismiss_message'));
         add_action('wp_ajax_wpv_get_taxonomy_parents_select', 'wpv_get_taxonomy_parents_select');
         add_action('wp_ajax_wpv_get_taxonomy_term_check', 'wpv_get_taxonomy_term_check');
         add_action('wp_ajax_wpv_get_taxonomy_term_summary', 'wpv_ajax_get_taxonomy_term_summary');
+        add_action('wp_ajax_wpv_get_post_relationship_info', 'wpv_ajax_wpv_get_post_relationship_info');
         
         if(is_admin()){
 
@@ -68,6 +75,7 @@ class WP_Views{
             
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_head', array($this, 'settings_box_load'));            
+            add_action('admin_footer', array($this, 'hide_view_body_controls'));            
             add_action('save_post', array($this, 'save_view_settings'));
             //add_action('save_post', array($this, 'save_css'));
 
@@ -98,7 +106,7 @@ class WP_Views{
             wp_enqueue_style( 'views-pagination-style', WPV_URL_EMBEDDED . '/res/css/wpv-pagination.css', array(), WPV_VERSION);
         }        
         
-        /*shorttags*/
+         /*shorttags*/
         add_shortcode( 'wpv-view', array($this, 'short_tag_wpv_view') );
         
         add_action('wp_print_styles', array($this, 'add_render_css'));
@@ -140,12 +148,12 @@ class WP_Views{
                             add_action('admin_notices', create_function('$a=1', $code));
                         }
                         
-                        add_action('admin_menu', array($this, 'add_import_menu'));
                     }
                 }                
             }
-        }        
-
+        
+        add_action('admin_menu', array($this, 'add_import_menu'));
+		}        
     }
     
     function wpv_register_type_view() 
@@ -177,7 +185,7 @@ class WP_Views{
         'capability_type' => 'post',
         'has_archive' => false, 
         'hierarchical' => false,
-        'menu_position' => null,
+        'menu_position' => 80,
         'supports' => array('title','editor','author')
       ); 
       register_post_type('view',$args);
@@ -202,7 +210,6 @@ class WP_Views{
         // not needed for theme version.
         
 	}
-    
     
     function widgets_init(){
         register_widget('WPV_Widget');
@@ -272,6 +279,10 @@ class WP_Views{
             $this->include_admin_css();
         }
     }
+	
+	function hide_view_body_controls() {
+		// do nothing for embedded version.
+	}
 
     function include_admin_css() {
         $link_tag = '<link rel="stylesheet" href="'. WPV_URL . '/res/css/wpv-views.css?v='.WPV_VERSION.'" type="text/css" media="all" />';
@@ -622,6 +633,9 @@ class WP_Views{
 							$post = clone $items[$i];
 							$authordata = new WP_User($post->post_author);
 							$id = $post->ID;
+							$temp_variables = $this->variables;
+							$this->variables = array();
+							do_action('wpv-before-display-post', $post, $view_id);
 						}
 						if ($view_settings['query_type'][0] == 'taxonomy') {
 							$this->taxonomy_data['term'] = $items[$i];
@@ -637,8 +651,31 @@ class WP_Views{
                         } elseif (isset($item_indexes['other'])) {
                             $loop .= wpv_do_shortcode($item_indexes['other']);
                         }
+						
+						if ($view_settings['query_type'][0] == 'posts') {
+							do_action('wpv-after-display-post', $post, $view_id);
+							$this->variables = $temp_variables;
+						}
+						
                         
                     }
+					
+					// see if we should pad the remaining items.
+					if (isset($args['wrap']) && isset($args['pad'])) {
+						while (($i % $args['wrap']) && $args['pad']) {
+	                        $index = $i;
+                            $index %= $args['wrap'];
+							
+							if($index == $args['wrap'] - 1) {
+		                        $loop .= wpv_do_shortcode($item_indexes['pad-last']);
+							} else {
+		                        $loop .= wpv_do_shortcode($item_indexes['pad']);
+							}
+							
+							$i++;
+						}
+					}
+					
                     $out .= str_replace($matches[0], $loop, $post_content);
                     
                     $post = isset($tmp_post) ? clone $tmp_post : null; // restore original $post
@@ -653,10 +690,6 @@ class WP_Views{
             }else{
                 $out .= sprintf('<!- %s ->', __('View not found', 'wpv-views'));
             }
-            
-			if ($view_settings['query_type'][0] != 'taxonomy') {
-				//$processed_views[$view_caller_id][$hash] = $out; // save output to be used later
-			}
             
         }else{
             
@@ -682,6 +715,10 @@ class WP_Views{
      * Output for item 8
      * [wpv-item index=others]
      * Output for other items
+     * [wpv-item index=pad]
+     * Output for when padding is required
+     * [wpv-item index=pad-last]
+     * Output for the last item when padding is required
      * </wpv-loop>
      *
      * Will return an array with the output for each index
@@ -698,6 +735,8 @@ class WP_Views{
     function _get_item_indexes($template) {
         $indexes = array();
         $indexes['all'] = '';
+        $indexes['pad'] = '';
+        $indexes['pad-last'] = '';
         
         // search for the [wpv-item index=xx] shortcode
         $found = false;
@@ -792,7 +831,7 @@ class WP_Views{
         if ($post->post_type != 'view' && $post->post_type != 'view-template') {
             
             // add tool bar to other edit pages so they can insert the view shortcodes.
-            add_short_codes_to_js(array('view'), $this->editor_addon);
+            add_short_codes_to_js(array('view'), $this->editor_addon, 'add-basics');
         }
         
     }
@@ -1042,7 +1081,17 @@ jQuery(document).ready(function(){
                 unset($settings['post_types'][$key]);
             }
             $settings['post_types']['__key'] = 'post_type';
+        }
+        
+        if (isset($settings['post_status'])) {
+            $settings['post_statuses'] = $settings['post_status'];
+            unset($settings['post_status']);
+            foreach($settings['post_statuses'] as $key => $value) {
+                $settings['post_statuses']['post_status-' . $key] = $value;
+                unset($settings['post_statuses'][$key]);
             }
+            $settings['post_statuses']['__key'] = 'post_status';
+        }
         
         if (isset($settings['parent_id']) && $settings['parent_id'] != '') {
             $parent_name = $wpdb->get_var("SELECT post_name FROM {$wpdb->posts} WHERE ID = " . $settings['parent_id']);
@@ -1112,21 +1161,23 @@ jQuery(document).ready(function(){
     function convert_ids_to_names_in_layout_settings($settings) {
         global $wpdb;
         
-        foreach($settings['fields'] as $key => $value) {
-            if (substr($key, 0, 5) == 'name_') {
-                if (substr($value, 0, 13) == 'wpv-post-body') {
-                    // use the view template name instead of the id
-                    $parts = explode(' ', $value);
-                    if (sizeof($parts) == 2) {
-                        $view_template_id = $parts[1];
-                        $view_template_name = $wpdb->get_var("SELECT post_name FROM {$wpdb->posts} WHERE ID = " . $view_template_id);
-                        if ($view_template_name) {
-                            $settings['fields'][$key] = 'wpv-post-body ' . $view_template_name;
-                        }
-                    }
-                }
-            }
-            
+		if (isset($settings['fields'])) {
+			foreach($settings['fields'] as $key => $value) {
+				if (substr($key, 0, 5) == 'name_') {
+					if (substr($value, 0, 13) == 'wpv-post-body') {
+						// use the view template name instead of the id
+						$parts = explode(' ', $value);
+						if (sizeof($parts) == 2) {
+							$view_template_id = $parts[1];
+							$view_template_name = $wpdb->get_var("SELECT post_name FROM {$wpdb->posts} WHERE ID = " . $view_template_id);
+							if ($view_template_name) {
+								$settings['fields'][$key] = 'wpv-post-body ' . $view_template_name;
+							}
+						}
+					}
+				}
+			}
+			
         }
         return $settings;
     }
@@ -1142,6 +1193,17 @@ jQuery(document).ready(function(){
             } else {
                 $settings['post_type'][0] = $settings['post_type']['post_type'];
                 unset($settings['post_type']['post_type']);
+            }
+        }
+        
+        if (isset($settings['post_statuses'])) {
+            $settings['post_status'] = $settings['post_statuses'];
+            unset($settings['post_statuses']);
+            if(is_array($settings['post_status']['post_status'])) {
+                $settings['post_status'] = $settings['post_status']['post_status'];
+            } else {
+                $settings['post_status'][0] = $settings['post_status']['post_status'];
+                unset($settings['post_status']['post_status']);
             }
         }
         
@@ -1259,7 +1321,8 @@ jQuery(document).ready(function(){
 
     // Localization
     function plugin_localization(){
-        load_plugin_textdomain( 'wpv-views', false, WPV_PATH_EMBEDDED . '/locale');
+        $locale = get_locale();
+        load_textdomain( 'wpv-views', WPV_PATH_EMBEDDED . '/locale/views-' . $locale . '.mo');
     }
 	
 	function get_current_taxonomy_term() {
@@ -1380,8 +1443,32 @@ jQuery(document).ready(function(){
     function get_widget_view_id() {
         return $this->widget_view_id;
     }
+	
+	function set_variable($name, $value) {
+		$this->variables[$name] = $value;
+	}
+	
+	function get_variable($name) {
+        if (strpos($name, '$') === 0) {
+			$name = substr($name, 1);
+			
+			if (isset($this->variables[$name])) {
+				return $this->variables[$name];
+			}
+		}
+		return null;
+	}
+	
+	function get_view_shortcode_params($view_id) {
+		$settings = $this->get_view_settings($view_id);
+		
+		$params = wpv_get_custom_field_view_params($settings);
+		$params = array_merge($params, wpv_get_taxonomy_view_params($settings));
+		
+		return $params;
+	}
+	
 }
-
 /**
  * render_view
  *
@@ -1412,8 +1499,40 @@ function render_view($args) {
     }
     
     if ($id) {
-        return $WP_Views->render_view_ex($id, md5(serialize($args)));
+
+		$args['id'] = $id;
+		array_push($WP_Views->view_shortcode_attributes, $args);
+		
+        $out = $WP_Views->render_view_ex($id, md5(serialize($args)));
+        
+		array_pop($WP_Views->view_shortcode_attributes);
+        
+        return $out;
     } else {
         return '';
     }
+}
+
+function wpv_views_plugin_activate() {
+    add_option('wpv_views_plugin_do_activation_redirect', true);
+}
+
+function wpv_views_plugin_deactivate() {
+    delete_option('wpv_views_plugin_do_activation_redirect', true);
+}
+
+function wpv_views_plugin_redirect() {
+    if (get_option('wpv_views_plugin_do_activation_redirect', false)) {
+        delete_option('wpv_views_plugin_do_activation_redirect');
+        wp_redirect(admin_url() . 'edit.php?post_type=view&page='. WPV_FOLDER .'/menu/help.php');
+        exit;
+    }
+}
+
+function wpv_views_plugin_action_links($links, $file) {
+    $this_plugin = basename(WPV_PATH) . '/wp-views.php';
+    if($file == $this_plugin) {
+        $links[] = '<a href="admin.php?page='.basename(WPV_PATH).'/menu/help.php">' . __('Getting started', 'wp-views') . '</a>';
+    }
+    return $links;
 }

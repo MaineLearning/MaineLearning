@@ -20,6 +20,9 @@ function wpv_show_filter_custom_field_edit() {
 function wpv_show_filter_custom_field_edit_ok() {
     wpv_add_edit_custom_field('', '', 'edit');
     jQuery('.wpv_add_filters_button').show();
+    
+    show_view_changed_message();
+
 }
 
 function wpv_show_filter_custom_field_edit_cancel() {

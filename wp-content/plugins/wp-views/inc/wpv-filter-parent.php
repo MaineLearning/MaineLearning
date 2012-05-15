@@ -107,13 +107,17 @@ if(is_admin()){
         return $td;
     }
     
-    function wpv_get_filter_parent_summary($view_settings) {
+    function wpv_get_filter_parent_summary_text($view_settings, $short = false) {
         global $wpdb;
         
         ob_start();
         
         if ($view_settings['parent_mode'] == 'current_page') {
-            _e('Select posts whose parent is the <strong>current page</strong>.', 'wpv-view');
+            if ($short) {
+				_e('parent is the <strong>current page</strong>', 'wpv-views');
+			} else {
+				_e('Select posts whose parent is the <strong>current page</strong>.', 'wpv-views');
+			}
         } else {
             if (isset($view_settings['parent_id']) && $view_settings['parent_id'] > 0) {
                 $selected_title = $wpdb->get_var($wpdb->prepare("
@@ -121,8 +125,25 @@ if(is_admin()){
             } else {
                 $selected_title = 'None';
             }
-            echo sprintf(__('Select posts whose parent is <strong>%s</strong>.', 'wpv-view'), $selected_title);
+            if ($short) {
+	            echo sprintf(__('parent is <strong>%s</strong>', 'wpv-views'), $selected_title);
+			} else {
+	            echo sprintf(__('Select posts whose parent is <strong>%s</strong>.', 'wpv-views'), $selected_title);
+			}
         }
+        
+        $data = ob_get_clean();
+        
+        return $data;
+        
+    }
+
+    function wpv_get_filter_parent_summary($view_settings) {
+        global $wpdb;
+        
+        ob_start();
+
+		echo wpv_get_filter_parent_summary_text($view_settings);        
         
         ?>
         <br />
@@ -210,7 +231,7 @@ if(is_admin()){
         ob_start();
         
         if ($view_settings['taxonomy_parent_mode'] == 'current_view') {
-            _e('Select taxonomy whose parent is the value set by the <strong>parent view</strong>.', 'wpv-view');
+            _e('Select taxonomy whose parent is the value set by the <strong>parent view</strong>.', 'wpv-views');
         } else {
             if (isset($view_settings['taxonomy_parent_id']) && $view_settings['taxonomy_parent_id'] > 0) {
                 $selected_taxonomy = get_term($view_settings['taxonomy_parent_id'], $view_settings['taxonomy_type']);
@@ -218,7 +239,7 @@ if(is_admin()){
             } else {
                 $selected_taxonomy = 'None';
             }
-            echo sprintf(__('Select taxonomy whose parent is <strong>%s</strong>.', 'wpv-view'), $selected_taxonomy);
+            echo sprintf(__('Select taxonomy whose parent is <strong>%s</strong>.', 'wpv-views'), $selected_taxonomy);
         }
         
         ?>
@@ -406,11 +427,54 @@ class Walker_Category_select extends Walker {
 
 function wpv_get_posts_select() {
     if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_posts_select_nonce')) {
-        wp_dropdown_pages(array('name'=>'_wpv_settings[parent_id]', 'post_type' => $_POST['post_type'], 'show_option_none' => __('None', 'wpv-views')));
+		wpv_show_posts_dropdown($_POST['post_type']);
     }
     die();
 }
 
+function wpv_show_posts_dropdown($post_type, $name = '_wpv_settings[parent_id]', $selected = 0) {
+
+	$hierarchical_post_types = get_post_types( array( 'hierarchical' => true ) );
+	
+	$hierarchical = in_array($post_type, $hierarchical_post_types) ? 1 : 0;
+	
+	$attr = array('name'=> $name,
+				  'post_type' => $post_type,
+				  'show_option_none' => __('None', 'wpv-views'),
+				  'selected' => $selected);
+	
+	if ($hierarchical) {
+		wp_dropdown_pages($attr);
+	} else {
+		$defaults = array(
+			'depth' => 0, 'child_of' => 0,
+			'selected' => $selected, 'echo' => 1,
+			'name' => 'page_id', 'id' => '',
+			'show_option_none' => '', 'show_option_no_change' => '',
+			'option_none_value' => ''
+		);
+		$r = wp_parse_args( $attr, $defaults );
+		extract( $r, EXTR_SKIP );
+		
+		$pages = get_posts(array('numberposts' => -1, 'post_type' => $post_type));
+		$output = '';
+		// Back-compat with old system where both id and name were based on $name argument
+		if ( empty($id) )
+			$id = $name;
+	
+		if ( ! empty($pages) ) {
+			$output = "<select name='" . esc_attr( $name ) . "' id='" . esc_attr( $id ) . "'>\n";
+			if ( $show_option_no_change )
+				$output .= "\t<option value=\"-1\">$show_option_no_change</option>";
+			if ( $show_option_none )
+				$output .= "\t<option value=\"" . esc_attr($option_none_value) . "\">$show_option_none</option>\n";
+			$output .= walk_page_dropdown_tree($pages, $depth, $r);
+			$output .= "</select>\n";
+		}
+	
+		echo $output;	
+	}
+}
 function wpv_get_taxonomy_parents_select() {
     if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_taxonomy_select_nonce')) {
 		?>
@@ -428,3 +492,19 @@ function wpv_get_taxonomy_parents_select() {
     die();
 	
 }
+
+add_filter('wpv-view-get-summary', 'wpv_parent_summary_filter', 5, 3);
+
+function wpv_parent_summary_filter($summary, $post_id, $view_settings) {
+	if(isset($view_settings['query_type']) && $view_settings['query_type'][0] == 'posts' && isset($view_settings['parent_mode'][0])) {
+        $view_settings['parent_mode'] = $view_settings['parent_mode'][0];
+		$result = wpv_get_filter_parent_summary_text($view_settings, true);
+		if ($result != '' && $summary != '') {
+			$summary .= '<br />';
+		}
+		$summary .= $result;
+	}
+	return $summary;
+}
+
+
