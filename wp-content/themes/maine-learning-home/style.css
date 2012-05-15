@@ -397,24 +397,22 @@ div#item-header div#item-actions
 }
 
 /* ----------------------
-BUDDYPRESS PANELS: ACTIVITY
+BUDDYPRESS PANELS: ACTIVITIES
 ----------------------- */
 
 body.group-home #activity-stream
 {
-	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) top left no-repeat;
-	margin-top: -5px;
-	padding-top: 40px;
+	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) 8px 0 no-repeat;
+	margin: -5px 0 0 10px;
+	padding-top: 50px;
 }
 
 body.directory.activity #activity-stream
 {
-	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) top left no-repeat;
+	background: url(http://mainelearning.net/wp-content/uploads/2012/04/Activity-header-text-site-2012-04-19a.png) top left no-repeat;
 	margin-top: -5px;
 	padding-top: 50px;
 }
-
-
 
 div#item-header span.activity, div#item-header h2 span.highlight
 {
@@ -449,7 +447,7 @@ li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_do
 
 li.exb div.activity-meta { display: block !important; }
 
-li.exb .acomment-reply, li.new_forum_topic .acomment-reply, li.new_forum_post .acomment-reply, li.new_forum_post .fav,  li.new_forum_topic .fav, .exb .fav { display: none; }
+/*li.exb .acomment-reply, li.new_forum_topic .acomment-reply, li.new_forum_post .acomment-reply, li.new_forum_post .fav,  li.new_forum_topic .fav, .exb .fav { display: none; }*/
 
 li.exb blockquote p a
 {
@@ -518,6 +516,36 @@ div.activity-meta { clear: right; }
 	font-size: 12px;
 	text-decoration: none;
 }
+
+#item-body form#whats-new-form {
+	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-quickpost-2012-05-14a.png) 20px 0 no-repeat;
+	border-bottom: 2px solid #ddd !important;
+	margin: 6px 0 5px 0;
+	padding: 40px 10px 30px 20px;
+}
+
+form#whats-new-form textarea {
+	width: 96%;
+}
+
+form#whats-new-form h5 {
+	margin-left: 66px;
+}
+
+form#whats-new-form #whats-new-content {
+margin-left: 44px;
+}
+
+form#whats-new-form #whats-new-avatar {
+margin-top: 4px;
+}
+
+
+div.activity { background: #efefef; }
+div.activity-avatar { margin: 6px 0 0 16px; }
+div.activity-comments div.acomment-content { font-size: 12px; }
+div.activity-comments > ul { background: transparent; }
+
 
 
 /* ----------------------
@@ -623,35 +651,6 @@ BP PANELS: PROFILE
 
 table.profile-fields { margin-left: 20px; }
 .profile p { margin: 0 0 10px 12px; }
-
-/* ----------------------
-BP PANELS: ACTIVITIES
------------------------ */
-
-#item-body form#whats-new-form {
-	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-quickpost-2012-05-14a.png) top left no-repeat;
-	  display: block !important;
-	margin: 0 0 10px 10px;
-	padding: 40px 0 20px 0;
-}
-
-form#whats-new-form h5 {
-	margin-left: 66px;
-}
-
-form#whats-new-form #whats-new-content {
-margin-left: 44px;
-}
-
-form#whats-new-form #whats-new-avatar {
-margin-top: 4px;
-}
-
-div.activity { background: #efefef; }
-div.activity-avatar { margin: 6px 0 0 16px; }
-div.activity-comments div.acomment-content { font-size: 12px; }
-div.activity-comments > ul { background: transparent; }
-
 
 
 /* ----------------------
