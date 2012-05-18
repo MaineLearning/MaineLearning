@@ -5,7 +5,7 @@ TO DO
 
 Activate Search Everything on MLN Resources
 
-
+Search highlight color: ccc066
 
 ------------------------------------
 DONE
