@@ -16,9 +16,11 @@
  * 'width' => image width e.g. 300 (overriden if 'size' is specified)
  * 'height' => image height e.g. 100 (overriden if 'size' is specified)
  * 'proportional' => 'true'|'false' (overriden if 'size' is specified)
+ * 'url' => 'true'|'false' - When true it will output the url of the image instead of the img tag. Works with the size parameter to output the url of the re-sized image
  *
  * Example usage:
  * With a short code use [types field="my-image"]
+ * Output url of thumbnail image [types field="my-image" size="thumbnail" url="true"]
  * In a theme use types_render_field("my-image", $parameters)
  * 
  */

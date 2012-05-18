@@ -4,7 +4,7 @@ Donate link: http://wp-types.com
 Tags: CMS, custom field, custom fields, custom post type, custom post types, post, post type, post types, cck, taxonomy, fields, types, relationships, WPML
 Requires at least: 3.1
 Tested up to: 3.3.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 The complete solution for custom post types, custom taxonomy and custom fields. Craft your edit screens and use shortcodes to display fields.
 
@@ -224,6 +224,9 @@ Additionally, Types is the only plugin that lets you define parent/child relatio
 * Added translations for Spanish, French, German, Portuguese, Italian and Dutch
 * Fixed many small bugs and glitches
 
+= 1.0.1 =
+* Fixes a number of small bugs, related with JS interaction with other plugins
+
 == Upgrade Notice ==
 
 = 0.9.1 =
@@ -252,3 +255,6 @@ Fixed a javascript bug on group edit pages
 
 = 1.0 =
 You can make any field repeating now
+
+= 1.0.1 =
+Small bugfix release

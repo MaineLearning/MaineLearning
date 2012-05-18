@@ -321,6 +321,9 @@ msgstr ""
 msgid "%s field"
 msgstr ""
 
+msgid "(conditional)"
+msgstr ""
+
 msgid "Enter field name"
 msgstr ""
 
@@ -328,6 +331,9 @@ msgid "Enter field slug"
 msgstr ""
 
 msgid "Describe this field"
+msgstr ""
+
+msgid "Since this field is repeating, you cannot use it to control the display of other fields."
 msgstr ""
 
 msgid "This fields can appear multiple times when editing"
@@ -495,13 +501,7 @@ msgstr ""
 msgid "Post Relationship"
 msgstr ""
 
-msgid "Edit"
-msgstr ""
-
 msgid "Apply"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Edit fields"
@@ -541,9 +541,6 @@ msgid "Post title"
 msgstr ""
 
 msgid "Post body"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Custom Fields (also known as post-meta) are information attached to WordPress posts. This data can then be queried and filtered in your database. With Types you can create Custom Field Groups which are then attached to any post type (including Posts, Pages and Custom Post Types) or taxonomy."
@@ -604,9 +601,6 @@ msgid "Re-read structure"
 msgstr ""
 
 msgid "Use customized conditions"
-msgstr ""
-
-msgid "Apply"
 msgstr ""
 
 msgid "You will be able to set conditional field display when you save more fields."
@@ -691,9 +685,6 @@ msgid "No post types associated"
 msgstr ""
 
 msgid "No taxonomies associated"
-msgstr ""
-
-msgid "Error occured"
 msgstr ""
 
 msgid "Field \"%s\" type was converted from %s to %s. You need to set some further settings in the group editor."
@@ -1395,6 +1386,9 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+msgid "Upload image"
+msgstr ""
+
 msgid "Image title"
 msgstr ""
 
@@ -1459,9 +1453,6 @@ msgid "Insert shortcode"
 msgstr ""
 
 msgid "Image %s not valid"
-msgstr ""
-
-msgid "Upload image"
 msgstr ""
 
 msgid "Wrong field specified"
@@ -1557,9 +1548,6 @@ msgstr ""
 msgid "You too can support Types! Would you like to add a small credit link, saying that you're using Types for custom fields or custom post types?"
 msgstr ""
 
-msgid "Yes"
-msgstr ""
-
 msgid "No, thanks"
 msgstr ""
 
@@ -1624,9 +1612,6 @@ msgid "Post Body"
 msgstr ""
 
 msgid "Action"
-msgstr ""
-
-msgid "Delete"
 msgstr ""
 
 msgid "Post not updated. Relationship data missing."
@@ -1710,19 +1695,7 @@ msgstr ""
 msgid "View templates"
 msgstr ""
 
-msgid "Basic"
-msgstr ""
-
-msgid "Taxonomy"
-msgstr ""
-
 msgid "Other Fields"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "View templates"
 msgstr ""
 
 msgid "Search"

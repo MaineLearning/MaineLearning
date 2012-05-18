@@ -1,4 +1,5 @@
 <?php
+
 if (!class_exists('Editor_addon')) {
 
     if (!defined('ICL_COMMON_FUNCTIONS')) {
@@ -427,25 +428,25 @@ if (!class_exists('Editor_addon')) {
          */
 	    function sort_menus_alphabetically($menus) {
     		// keep main references if set (not set on every screen)
-   			$menu_basic[__('Basic', 'wp-views')] = isset($menus[__('Basic', 'wp-views')]) ? $menus[__('Basic', 'wp-views')] : array();
- 			$menu_taxonomy[__('Taxonomy', 'wp-views')] = isset($menus[__('Taxonomy', 'wp-views')]) ? $menus[__('Taxonomy', 'wp-views')] : array();
- 			$menu_field[__('Other Fields', 'wp-views')] = isset($menus[__('Field', 'wp-views')]) ? $menus[__('Field', 'wp-views')] : array();
-			$menu_vtemplate[__('View templates', 'wp-views')] = isset($menus[__('View templates', 'wp-views')]) ? $menus[__('View templates', 'wp-views')] : array();
+   			$menu_basic[__('Basic', 'wpv-views')] = isset($menus[__('Basic', 'wpv-views')]) ? $menus[__('Basic', 'wpv-views')] : array();
+ 			$menu_taxonomy[__('Taxonomy', 'wpv-views')] = isset($menus[__('Taxonomy', 'wpv-views')]) ? $menus[__('Taxonomy', 'wpv-views')] : array();
+ 			$menu_field[__('Other Fields', 'wpv-views')] = isset($menus[__('Field', 'wpv-views')]) ? $menus[__('Field', 'wpv-views')] : array();
+			$menu_vtemplate[__('View templates', 'wpv-views')] = isset($menus[__('View templates', 'wpv-views')]) ? $menus[__('View templates', 'wpv-views')] : array();
  			
  			// remove them to preserve correct listing
- 			unset($menus[__('Basic', 'wp-views')]);
- 			unset($menus[__('Taxonomy', 'wp-views')]);
- 			unset($menus[__('Field', 'wp-views')]);
- 			unset($menus[__('View templates', 'wp-views')]);
+ 			unset($menus[__('Basic', 'wpv-views')]);
+ 			unset($menus[__('Taxonomy', 'wpv-views')]);
+ 			unset($menus[__('Field', 'wpv-views')]);
+ 			unset($menus[__('View templates', 'wpv-views')]);
 
  			// sort all elements by key
             ksort($menus);
             
            	// add main elements in the correct order
-            $menus = !empty($menu_taxonomy[__('Taxonomy', 'wp-views')]) ? array_merge($menu_taxonomy, $menus) : $menus;
-            $menus = !empty($menu_vtemplate[__('View templates', 'wp-views')]) ? array_merge($menu_vtemplate, $menus) : $menus;
-            $menus = !empty($menu_basic[__('Basic', 'wp-views')]) ? array_merge($menu_basic, $menus): $menus;
-            $menus = !empty($menu_field[__('Other Fields', 'wp-views')]) ? array_merge($menus, $menu_field) : $menus;
+            $menus = !empty($menu_taxonomy[__('Taxonomy', 'wpv-views')]) ? array_merge($menu_taxonomy, $menus) : $menus;
+            $menus = !empty($menu_vtemplate[__('View templates', 'wpv-views')]) ? array_merge($menu_vtemplate, $menus) : $menus;
+            $menus = !empty($menu_basic[__('Basic', 'wpv-views')]) ? array_merge($menu_basic, $menus): $menus;
+            $menus = !empty($menu_field[__('Other Fields', 'wpv-views')]) ? array_merge($menus, $menu_field) : $menus;
             
             // sort inner elements in the submenus
             foreach($menus as $key=>$menu_group) {
@@ -461,7 +462,7 @@ if (!class_exists('Editor_addon')) {
 	    	$searchbar = '<div class="searchbar">';
 	    	$searchbar .= '<span>'. __('Search', 'wpv-views') .': </span>';
 	    	$searchbar .= '<input type="text" class="search_field" onkeyup="wpv_on_search_filter(this)" />';
-	    	$searchbar .= '<input type="button" class="search_clear" value="'.__('Clear', 'wp-views'). '" onclick="wpv_search_clear(this)" style="display: none;" />';
+	    	$searchbar .= '<input type="button" class="search_clear" value="'.__('Clear', 'wpv-views'). '" onclick="wpv_search_clear(this)" style="display: none;" />';
 	    	$searchbar .= '</div>';
 	    
 	    	return $searchbar;
