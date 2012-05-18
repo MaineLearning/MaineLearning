@@ -3,6 +3,14 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Activate Search Everything on MLN Resources
+
+Search highlight color: ccc066
+
+------------------------------------
+DONE
+
+
 Upgrade Akismet to 2.5.6
 
 Upgrade Gravity Forms to 1.6.4.2.1
@@ -26,8 +34,7 @@ Check to make sure "Quick post" and "All group activity" graphics appear correct
 
 
 
-------------------------------------
-DONE
+
 
 ------------------------------------
 Deactivate Buddyvents and configure Events Manager
