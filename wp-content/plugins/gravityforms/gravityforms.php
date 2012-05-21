@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.4.2.1
+Version: 1.6.4.3.1
 Author: Rocketgenius Inc.
 Author URI: http://www.rocketgenius.com
 
@@ -61,7 +61,8 @@ if(!defined("IS_ADMIN"))
     define("IS_ADMIN",  is_admin());
 
 define("RG_CURRENT_VIEW", RGForms::get("view"));
-define("GF_SUPPORTED_WP_VERSION", version_compare(get_bloginfo("version"), '3.2', '>='));
+define("GF_MIN_WP_VERSION", '3.2');
+define("GF_SUPPORTED_WP_VERSION", version_compare(get_bloginfo("version"), GF_MIN_WP_VERSION, '>='));
 
 if(!defined("GRAVITY_MANAGER_URL"))
     define("GRAVITY_MANAGER_URL", "http://www.gravityhelp.com/wp-content/plugins/gravitymanager");
@@ -79,7 +80,7 @@ add_filter('user_has_cap', array("RGForms", "user_has_cap"), 10, 3);
 
 
 //Hooks for no-conflict functionality
-if(is_admin() && (RGForms::is_gravity_page() || RG_CURRENT_PAGE == "admin-ajax.php")){
+if(is_admin() && (RGForms::is_gravity_page() || RGForms::is_gravity_ajax_action())){
     add_action("wp_print_scripts", array("RGForms", "no_conflict_mode_script"), 1000);
     add_action("admin_print_footer_scripts", array("RGForms", "no_conflict_mode_script"), 9);
 
@@ -702,8 +703,27 @@ class RGForms{
         wp_print_scripts();
     }
 
+    public static function is_gravity_ajax_action(){
+        //Gravity Forms AJAX requests
+        $current_action = self::post("action");
+        $gf_ajax_actions = array('rg_save_form', 'rg_change_input_type', 'rg_add_field', 'rg_duplicate_field',
+                                 'rg_delete_field', 'rg_select_export_form', 'rg_start_export', 'gf_upgrade_license',
+                                 'gf_delete_custom_choice', 'gf_save_custom_choice', 'gf_get_notification_post_categories',
+                                 'rg_update_lead_property', 'delete-gf_entry', 'rg_update_form_active',
+                                 'gf_resend_notifications', 'rg_dismiss_upgrade');
+
+        if(defined("DOING_AJAX") && DOING_AJAX && in_array($current_action, $gf_ajax_actions))
+            return true;
+
+        //not a gravity forms ajax request.
+        return false;
+    }
+
+
     //Returns true if the current page is one of Gravity Forms pages. Returns false if not
     public static function is_gravity_page(){
+
+        //Gravity Forms pages
         $current_page = trim(strtolower(self::get("page")));
         $gf_pages = array("gf_edit_forms","gf_new_form","gf_entries","gf_settings","gf_export","gf_help");
 

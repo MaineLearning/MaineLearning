@@ -1284,9 +1284,18 @@ div#bulk_custom_message {
 table.form-table td .updated_base {
 	font-size: 13px
 }
+#gform_no_product_field_message{
+    background-color: #FFEBE8;
+    border-color: #CC0000;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.6em 0.6em;
+    margin: 10px 15px 10px 0;
+}
+
 .error_base {
 	background-color: #FFEBE8;
-	border-color: #CC0000
+	border-color: #CC0000;
 	border-width: 1px;
 	border-style: solid;
 	padding: 0 0.6em;

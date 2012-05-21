@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.4.2.1";
+    public static $version = "1.6.4.3.1";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -1621,7 +1621,7 @@ class GFCommon{
                 $input_id = $field["id"] . '.' . $choice_number;
                 $id = $field["id"] . '_' . $choice_number++;
 
-                if(empty($value) && rgar($choice,"isSelected")){
+                if(empty($_POST) && rgar($choice,"isSelected")){
                     $checked = "checked='checked'";
                 }
                 else if(is_array($value) && RGFormsModel::choice_value_match($field, $choice, rgget($input_id, $value))){
@@ -4046,7 +4046,7 @@ class GFCommon{
             $shipping_field = self::get_fields_by_type($form, array("shipping"));
             $shipping_price = $shipping_name = "";
 
-            if(!empty($shipping_field)){
+            if(!empty($shipping_field) && !RGFormsModel::is_field_hidden($form, $shipping_field[0], array(), $lead)){
                 $shipping_price = RGFormsModel::get_lead_field_value($lead, $shipping_field[0]);
                 $shipping_name = $shipping_field[0]["label"];
                 if($shipping_field[0]["inputType"] != "singleshipping"){
@@ -4456,12 +4456,11 @@ class GFCommon{
                 $value = RGFormsModel::get_input_type($field) == 'checkbox' ? $cat_names : self::implode_non_blank(', ', $cat_names);
                 break;
             case 'conditional_logic':
-                $value = self::implode_non_blank(',', $cat_ids);
+                $value = array_values($cat_ids);
                 break;
         }
 
         return $value;
-
     }
 
     public static function calculate($field, $form, $lead) {

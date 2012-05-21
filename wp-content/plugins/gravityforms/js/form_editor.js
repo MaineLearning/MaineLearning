@@ -1329,11 +1329,11 @@ function EndDeleteField(fieldId){
                 form.fields[i]["conditionalLogic"] = false;
         }
 
-
         //Getting first product and compiling a list of options and quantities dependent on this field
-        if(form.fields[i]["type"] == "product" && form.fields[i]["id"] != fieldId && first_product != "")
+        if(form.fields[i]["type"] == "product" && form.fields[i]["id"] != fieldId && first_product == "")
             first_product = form.fields[i]["id"];
-        else if(form.fields[i]["productField"] == fieldId)
+
+        if(form.fields[i]["productField"] == fieldId)
             product_dependencies.push(i);
     }
 

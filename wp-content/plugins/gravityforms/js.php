@@ -184,11 +184,13 @@ function SetProductField(field){
             productFields.push(form["fields"][i]);
     }
 
-    if(productFields.length <= 1){
-        jQuery(".product_field_setting").hide();
+    jQuery("#gform_no_product_field_message").remove();
+    if(productFields.length < 1){
+        jQuery("#product_field").hide().after("<div id='gform_no_product_field_message'><?php _e("This field is not associated with a product. Please add a Product Field to the form.", "gravityforms") ?></div>");
     }
     else{
         var product_field = jQuery("#product_field");
+        product_field.show();
         product_field.html("");
         var is_selected = false;
         for(var i=0; i<productFields.length; i++){
@@ -201,8 +203,9 @@ function SetProductField(field){
         }
 
         //Adds existing product field if it is not found in the list (to prevent confusion)
-        if(!is_selected && field["productField"] != "")
+        if(!is_selected && field["productField"] != ""){
             product_field.append("<option value='" + field["productField"] + "' selected='selected'>[<?php _e("Deleted Field", "gravityforms") ?>]</option>");
+        }
 
     }
 }
@@ -565,7 +568,7 @@ function SetDefaultValues(field){
         case "hiddenproduct" :
             field.label = '<?php _e("Product Name", "gravityforms")?>';
             field.inputs = null;
-            
+
             if(!field.inputType)
                 field.inputType = "singleproduct";
 
@@ -597,7 +600,7 @@ function SetDefaultValues(field){
             field.inputs = null;
 
             break;
-            
+
         case "option" :
              field.label = '<?php _e("Option", "gravityforms")?>';
 
@@ -653,7 +656,7 @@ function SetDefaultValues(field){
                 field.numberFormat = "decimal_dot";
 
             break;
-        
+
         <?php do_action('gform_editor_js_set_default_values'); ?>
 
         default :
@@ -727,6 +730,13 @@ function CanFieldBeAdded(type){
         case "creditcard" :
             if(GetFieldsByType(["creditcard"]).length > 0){
                 alert("<?php _e("Only one credit card field can be added to the form", "gravityforms") ?>");
+                return false;
+            }
+        break;
+        case "quantity" :
+        case "option" :
+            if(GetFieldsByType(["product"]).length <= 0){
+                alert("<?php _e("You must add a product field to the form first", "gravityforms") ?>");
                 return false;
             }
         break;
