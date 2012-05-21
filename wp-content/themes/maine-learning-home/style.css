@@ -288,7 +288,7 @@ h4
 
 a, a:visited
 {
-	color: #1FB3DD;
+	color: #126880;
 	/* ML */
 	font-weight: bold;
 	/* ML */
@@ -736,7 +736,7 @@ BP PANELS: EVENTS MANAGER
 
 td.eventful ul li a, td.eventful a
 {
-	color: #1FB3DD !important;
+	color: #126880 !important;
 	font-size: 12px;
 	font-style: normal;
 }
