@@ -1888,3 +1888,11 @@ body.archive .taxonomy-description
 
 body.archive .taxonomy-description h1 { font-size: 20px; }
 body.archive h2.entry-title a, body.archive h2.entry-title a:visited { color: #14748F; }
+
+body.archive .sidebar
+{
+	display: none;
+	width: 0;
+}
+
+body.archive #content { width: 960px; }
