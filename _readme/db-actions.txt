@@ -4,8 +4,18 @@ DATABASE ACTIONS
 TO DO
 
 Activate Search Everything on MLN Resources
-
 Search highlight color: ccc066
+
+Views templates - remove spaces around hyphen in Objects-archive and Objects-single titles.
+
+Add the following to Objects-archive
+
+<h2 class="entry-title">[wpv-post-link]</h2>
+<p>[types field="abstract-excerpt" class="" style=""][/types]</p>
+
+Apply Objects-archive to all taxonomies and post type: Object
+
+
 
 ------------------------------------
 DONE
