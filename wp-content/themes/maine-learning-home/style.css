@@ -13,6 +13,10 @@
 http://codex.buddypress.org/theme-development/building-a-buddypress-child-theme/
 */
 
+/*
+DO NOT USE BBEDIT TO FORMAT CSS. IT REMOVES THE ALTERNATIVE BG GRADIENTS.
+*/
+
 /* Inherit the default theme styles */
 
 @import url(../../plugins/buddypress/bp-themes/bp-default/_inc/css/default.css);
@@ -405,7 +409,7 @@ BUDDYPRESS PANELS: ACTIVITIES
 body.group-home #activity-stream
 {
 	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) 8px 0 no-repeat;
-	margin: -5px 0 0 10px;
+	margin: -5px 0 -5 10px;
 	padding-top: 50px;
 }
 
@@ -471,32 +475,30 @@ li.exb blockquote p a
 	margin-bottom: 16px;
 }
 
-a.view-post
+a.view-post, a.view-thread, a.exb-view
 {
-	background: linear-gradient(top, white 0%, #E0E0E0 100%);
+background: #EDEDED;
+background: -moz-linear-gradient(top, white 0%, #E0E0E0 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #E0E0E0));
+background: -webkit-linear-gradient(top,  white 0%, #E0E0E0 100%);
+background: -o-linear-gradient(top,  white 0%, #E0E0E0 100%);
+background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%);
 	border: 1px solid #BBB;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 	color: #555;
-	font-size: 12px;
+	float: right;
+	font-size: 11px;
 	font-weight: normal;
 	margin: 4px 10px 10px 0;
 	outline: none;
-	padding: 1px 8px 1px 8px;
+	padding: 2px 8px 2px 8px;
 	text-decoration: none;
 }
 
 #posts-filter { margin: 0px 0px 0px 20px; }
-
-.view-group-discussion-topic
-{
-	float: right;
-	margin-right: 12px;
-	margin-bottom: 8px;
-	font-size: 13px;
-}
 
 span.activity-read-more
 {
