@@ -48,6 +48,8 @@ body
 	width: 100%;
 }
 
+#header { background: #292929 url(images/mln-banner-home-2012-02-22c.jpg) no-repeat scroll 0 0; }
+
 #header, #container
 {
 	border-bottom-left-radius: 0px;
@@ -239,6 +241,7 @@ ul#nav { max-width: 70%; }
 	text-transform: none;
 }
 
+#nav li li { width: 150px !important; }
 div#content .padder { border-right: 0px solid #fff; }
 
 /* ----------------------
@@ -258,7 +261,7 @@ h2
 h2.pagetitle
 {
 	font-size: 22px;
-	margin-top: 10px;
+	margin: 10px 0 14px 0;
 }
 
 h2.posttitle { font-size: 24px; }
@@ -286,7 +289,7 @@ h4
 	color: #333;
 }
 
-a, a:visited
+a, a:link, a:visited, a:hover, a:active
 {
 	color: #14748f;
 	/* ML */
@@ -422,10 +425,14 @@ div#item-header span.activity, div#item-header h2 span.highlight
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 ul#activity-stream li.activity_update { padding-top: 20px; }
-li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta { display: none; }
+li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta, li.new_forum_post a.bp-primary-action, li.new_forum_topic a.bp-primary-action { display: none; }
 
 .activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
 {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 	font-size: 13px;
 	line-height: 21px;
 }
@@ -466,9 +473,19 @@ li.exb blockquote p a
 
 a.view-post
 {
-	font-size: 13px;
-	float: right;
-	padding: 0 10px 8px 0;
+	background: linear-gradient(top, white 0%, #E0E0E0 100%);
+	border: 1px solid #BBB;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: #555;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 4px 10px 10px 0;
+	outline: none;
+	padding: 1px 8px 1px 8px;
+	text-decoration: none;
 }
 
 #posts-filter { margin: 0px 0px 0px 20px; }
@@ -577,6 +594,7 @@ div.item-list-tabs ul li a, div.item-list-tabs ul li span
 
 div.item-list-tabs ul li a span
 {
+	background: #147691;
 	text-shadow: none;
 	/* ML */
 }
@@ -736,7 +754,7 @@ BP PANELS: EVENTS MANAGER
 
 td.eventful ul li a, td.eventful a
 {
-	color: #14748f !important;
+	color: #147691 !important;
 	font-size: 12px;
 	font-style: normal;
 }
@@ -776,8 +794,15 @@ BP PANELS: BP-MODERATION
 BP PANELS: BP GROUP DOCS
 ----------------------- */
 
+#bp-group-documents { margin-top: -5px; }
 #bp-group-documents h3 { padding: 20px 0 0 20px; }
 #bp-group-documents-categories, #bp-group-documents-sorting { margin-top: 20px; }
+
+/* ----------------------
+GRAVITY FORMS
+----------------------- */
+
+.gform_body .instruction { display: none; }
 
 /* ----------------------
 SIDEBAR
@@ -809,7 +834,7 @@ FOOTER
 
 #footer-widgets
 {
-	background: transparent;
+	background: #292929;
 	color: #999;
 	border-bottom: none;
 	border-radius: 0;
