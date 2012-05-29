@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 3.0
-Tested up to: 3.3.1
-Stable tag: 1.1.6
+Tested up to: 3.3.2
+Stable tag: 1.1.6.1
 
 Lets you directly edit the WordPress admin menu. You can re-order, hide or rename existing menus, add custom menus and more. 
 
@@ -60,6 +60,10 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 
 
 == Changelog ==
+
+= 1.1.6.1 =
+* Tested on WP 3.3.2
+* Added a user survey.
 
 = 1.1.6 =
 * Tested on WP 3.3.1.
