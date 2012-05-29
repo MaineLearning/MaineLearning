@@ -1,9 +1,11 @@
 TO DO
 
 
-JFC: Send Boone description of requested change to External Blog activity/email updates
+JFC: Send Boone description of requested change to External Blog Plugin activity/email updates
 
-Integrating Chosen into into back-end pages and posts pages.
+Boone: Integrating Chosen into into back-end pages and posts listings.
+
+Boone: Recommendation for allowing entry into Event date fields.
 
 Helen Hou functions.php
 
@@ -11,8 +13,6 @@ http://harvesthq.github.com/chosen/
 http://www.helenhousandi.com/wordpress/2012/01/using-chosen-for-a-replacement-taxonomy-metabox/
 
 BG: Check out EditFlow
-
-
 
 Submit changes in meta-formatting in External Blogs to the WP plugin page.
 
