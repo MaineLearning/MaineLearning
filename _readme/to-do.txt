@@ -1,6 +1,8 @@
 TO DO
 
 
+JFC: Send Boone description of requested change to External Blog activity/email updates
+
 Integrating Chosen into into back-end pages and posts pages.
 
 Helen Hou functions.php
