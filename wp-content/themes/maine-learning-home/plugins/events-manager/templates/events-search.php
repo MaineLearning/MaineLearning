@@ -25,26 +25,26 @@
 		<?php if( !empty($search_text) || (get_option('dbem_search_form_text') && empty($search_text)) ): ?>
 		<!-- START General Search -->
 		<?php /* This general search will find matches within event_name, event_notes, and the location_name, address, town, state and country. */ ?>
-		<input type="text" name="em_search" class="em-events-search-text" value="<?php echo $s; ?>" onfocus="if(this.value=='<?php echo $s_default; ?>')this.value=''" onblur="if(this.value=='')this.value='<?php echo $s_default; ?>'" />
+		<label for="em_search_input">Search for: </label><input type="text" id="em_search_input" name="em_search" class="em-events-search-text" value="<?php echo $s; ?>" onfocus="if(this.value=='<?php echo $s_default; ?>')this.value=''" onblur="if(this.value=='')this.value='<?php echo $s_default; ?>'" />
 		<!-- END General Search -->
 		<?php endif; ?>
 		
 		<?php if( !empty($search_dates) || (get_option('dbem_search_form_dates') && empty($search_dates)) ): ?>
 		<!-- START Date Search -->
 		<span class="em-events-search-dates">
-			<?php _e('between','dbem'); ?>:
+			<label for="em-date-start-loc"><?php _e('Start','dbem'); ?>:</label>
 			<input type="text" id="em-date-start-loc" />
 			<input type="hidden" id="em-date-start" name="scope[0]" value="<?php if( !empty($_REQUEST['scope'][0]) ) echo $_REQUEST['scope'][0]; ?>" />
-			<?php _e('and','dbem'); ?>
+			<label for="em-date-end-loc"><?php _e('End:','dbem'); ?></label>
 			<input type="text" id="em-date-end-loc" />
 			<input type="hidden" id="em-date-end" name="scope[1]" value="<?php if( !empty($_REQUEST['scope'][1]) ) echo $_REQUEST['scope'][1]; ?>" />
 		</span>
 		<!-- END Date Search -->
 		<?php endif; ?>
 		
-		<?php if( !empty($search_categories) || (get_option('dbem_search_form_categories') && empty($search_categories)) ): ?>	
+		<br /><?php if( !empty($search_categories) || (get_option('dbem_search_form_categories') && empty($search_categories)) ): ?>	
 		<!-- START Category Search -->
-		<select name="category" class="em-events-search-category">
+		<label for="em-events-search-category_select">Category: </label><select name="category" id="em-events-search-category_select" class="em-events-search-category">
 			<option value=''><?php echo get_option('dbem_search_form_categories_label') ?></option>
 			<?php foreach(EM_Categories::get(array('orderby'=>'category_name')) as $EM_Category): ?>
 			 <option value="<?php echo $EM_Category->id; ?>" <?php echo (!empty($_REQUEST['category']) && $_REQUEST['category'] == $EM_Category->id) ? 'selected="selected"':''; ?>><?php echo $EM_Category->name; ?></option>
@@ -55,7 +55,7 @@
 		
 		<?php if( !empty($search_countries) || (get_option('dbem_search_form_countries') && empty($search_countries)) ): ?>
 		<!-- START Country Search -->
-		<select name="country" class="em-events-search-country">
+		<label for="em-events-search-country_option">Country: </label><select name="country" class="em-events-search-country" id="em-events-search-country_option">
 			<option value=''><?php echo get_option('dbem_search_form_countries_label'); ?></option>
 			<?php 
 			//get the counties from locations table
@@ -72,7 +72,7 @@
 		
 		<?php if( !empty($search_regions) || (get_option('dbem_search_form_regions') && empty($search_regions)) ): ?>
 		<!-- START Region Search -->
-		<select name="region" class="em-events-search-region">
+		<label for="em-events-search-region_option">Region: </label><select name="region" class="em-events-search-region" id="em-events-search-region_option">
 			<option value=''><?php echo get_option('dbem_search_form_regions_label'); ?></option>
 			<?php 
 			if( !empty($country) ){
@@ -92,7 +92,7 @@
 		
 		<?php if( !empty($search_states) || (get_option('dbem_search_form_states') && empty($search_states)) ): ?>
 		<!-- START State/County Search -->
-		<select name="state" class="em-events-search-state">
+		<label for="em-events-search-state">State: </label><select name="state" class="em-events-search-state" id="em-events-search-state">
 			<option value=''><?php echo get_option('dbem_search_form_states_label'); ?></option>
 			<?php 
 			if( !empty($country) ){
