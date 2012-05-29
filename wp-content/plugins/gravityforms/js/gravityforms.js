@@ -1,14 +1,14 @@
-
 // "prop" method fix for previous versions of jQuery 
 var originalPropMethod = jQuery.fn.prop;
 
 jQuery.fn.prop = function() {
     if(typeof originalPropMethod == 'undefined') {
-        jQuery.fn.attr.apply(this, arguments);
+        return jQuery.fn.attr.apply(this, arguments);
     } else {
-        originalPropMethod.apply(this, arguments);
+        return originalPropMethod.apply(this, arguments);
     }
 }
+
 
 //Formatting free form currency fields to currency
 jQuery(document).ready(function(){
@@ -334,7 +334,8 @@ function gformCalculateProductPrice(formId, productFieldId){
             quantity = quantityElement.find("select").val();
 
         if(!gformIsNumber(quantity))
-            quantity = 0
+            quantity = 0;
+            
     }
     quantity = parseFloat(quantity);
 
@@ -474,7 +475,7 @@ function gformInitPriceFields(){
         var productIds = gformGetProductIds("gfield_price", this);
         gformRegisterPriceField(productIds);
 
-       jQuery(this).find("input[type=\"text\"], select").change(function(){
+       jQuery(this).find("input[type=\"text\"], input[type=\"number\"], select").change(function(){
            var productIds = gformGetProductIds("gfield_price", this);
            if(productIds.formId == 0)
                 productIds = gformGetProductIds("gfield_shipping", this);
@@ -686,14 +687,14 @@ var GFCalc = function(formId, formulaFields){
     }
 
     this.runCalc = function(formulaField, formId) {
-
+        
         var calcObj = this;
         var formulaInput, expr;
 
         var field = jQuery('#field_' + formId + '_' + formulaField.field_id);
         formulaInput = jQuery('#input_' + formId + '_' + formulaField.field_id);
         var previous_val = formulaInput.val();
-
+        
         expr = calcObj.replaceFieldTags(formId, formulaField.formula);
         result = '';
 
@@ -733,21 +734,21 @@ var GFCalc = function(formId, formulaFields){
         var calcObj = this;
         var formulaFieldId = formulaField.field_id;
         var matches = getMatchGroups(formulaField.formula, this.patt);
-
+        
         calcObj.isCalculating[formulaFieldId] = false;
 
         for(i in matches) {
-
+            
             var inputId = matches[i][1];
             var fieldId = parseInt(inputId);
             var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
-
+            
             if(input.prop('type') == 'checkbox' || input.prop('type') == 'radio') {
                 jQuery(input).click(function(){
                     calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
                 });
             } else
-            if(input.is('select')) {
+            if(input.is('select') || input.prop('type') == 'hidden') {
                 jQuery(input).change(function(){
                     calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
                 });
@@ -780,7 +781,7 @@ var GFCalc = function(formId, formulaFields){
     this.replaceFieldTags = function(formId, expr) {
 
         var matches = getMatchGroups(expr, this.patt);
-
+        
         for(i in matches) {
 
             var inputId = matches[i][1];
@@ -789,11 +790,10 @@ var GFCalc = function(formId, formulaFields){
             var value = 0;
 
             var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
-
+            
             // radio buttons will return multiple inputs, checkboxes will only return one but it may not be selected, filter out unselected inputs
             if(input.length > 1 || input.prop('type') == 'checkbox')
                 input = input.filter(':checked');
-
 
             var isVisible = window["gf_check_field_rule"] ? gf_check_field_rule(formId, fieldId, true, "") == "show" : true;
 
@@ -809,7 +809,7 @@ var GFCalc = function(formId, formulaFields){
                 }
 
             }
-
+            
             value = gformToNumber(value) ? gformToNumber(value) : 0;
 
             expr = expr.replace(matches[i][0], value);

@@ -41,6 +41,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$this->defaults = array(
 			'hide_advanced_settings' => true,
 			'menu_format_version' => 0,
+			'display_survey_notice' => true,
 		);
 		$this->serialize_with_json = false; //(Don't) store the options in JSON format
 
@@ -913,6 +914,26 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		if ( !apply_filters('admin_menu_editor_is_pro', false) ){
 			$this->print_upgrade_notice();
 		}
+		
+		//Handle the survey notice
+		if ( isset($_GET['hide_survey_notice']) && !empty($_GET['hide_survey_notice']) ) {
+			$this->options['display_survey_notice'] = false;
+			$this->save_options();
+		}
+				
+		if ( $this->options['display_survey_notice'] ) {
+			$survey_url = 'https://docs.google.com/spreadsheet/viewform?formkey=dDVLOFM4V0JodUVTbWdUMkJtb2ZtZGc6MQ';
+			$hide_url = add_query_arg('hide_survey_notice', 1);
+			printf(
+				'<div class="updated">
+					<p><strong>Help improve this plugin - take the Admin Menu Editor user survey!</strong></p>
+					<p><a href="%s" target="_blank" title="Opens in a new window">Take the survey</a></p>
+					<p><a href="%s">Hide this notice</a></p>
+				</div>',
+				esc_attr($survey_url),
+				esc_attr($hide_url)
+			);
+		}
 ?>
 <div class="wrap">
 <h2>
@@ -1218,7 +1239,7 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 		(function($){
 			$('#screen-meta-links').append(
 				'<div id="ws-pro-version-notice">' +
-					'<a href="http://w-shadow.com/AdminMenuEditor/" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
+					'<a href="http://w-shadow.com/admin-menu-editor-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=top_upgrade_link&utm_campaign=Plugins" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
 				'</div>'
 			);
 		})(jQuery);

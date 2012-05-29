@@ -56,6 +56,3 @@ genesis_register_sidebar( array(
 /* Includes externally-stored functions */
 
 include_once( "functions/chosen-taxonomy-metabox.php" );
-
-
-

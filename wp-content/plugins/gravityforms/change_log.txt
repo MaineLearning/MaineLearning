@@ -1,6 +1,30 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.2.1
-    - Fixed issue with short codes being executed when processing the post content template
+Version 1.6.4.3.1
+    - Fixed issue with post not being associated with entries
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.3
+    - Fixed issue with notification url not accepting port number and cleaned up trailing slash and question mark when not necessary
+    - Fixed issue with shipping being displayed even when shipping is hidden by conditional logic
+    - Fixed issue with slow conditional logic on certain situations
+    - Added "create_lead()" function to allow creation of lead object prior to actually saving the lead
+    - Fixed issue with checkbox field reverting back to default selections after form is submitted
+    - Fixed issue with payment amount being displayed on entry details for payments of $0.00
+    - Fixed issue causing long entry values to not be displayed when server's localization changes the number format
+    - Fixed issue with quantity fields not updating total on blur
+    - Fixed issue where "No duplicates" option was not working on calculated fields on values above 999
+    - Fixed issue where jQuery prop function was not returning elem/value
+    - Fixed misc notices
+    - Added constant for min wp version and updated min version error to use this
+    - Fixed issue where hidden fields were not triggering calculation event
+    - Fixed an issue with character counter throwing errors when configured on admin only fields
+    - Fixed issue with shortcodes being executed as part of the post body template
+    - Fixed issue with default values being reset on forms with conditional logic
+    - Updated how gf_global js object was being enqueued and output to work around wp3.2 wp_localize script limitation
+    - Fixed issue with conditional logic when using the post category checkbox field as a target
+    - Fixed issue with no conflict mode blocking scripts for any ajax call
+    - Fixed issue with option and quantity fields not being properly re-assigned to another product field when the product field they are assigned to is deleted.
+    - Added validation to prevent option and quantity fields from being added to the form without a product field.
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.4.2

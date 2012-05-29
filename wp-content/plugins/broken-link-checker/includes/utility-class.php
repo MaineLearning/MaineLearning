@@ -15,6 +15,7 @@ if ( !function_exists('sys_get_temp_dir')) {
 	    unlink($tempfile);
 	    return realpath(dirname($tempfile));
     }
+	return '';
   }
 }
 
@@ -76,7 +77,7 @@ class blcUtility {
    * @param integer $max_characters Return no more than $max_characters
    * @param string $break Break on this character. Defaults to space.
    * @param string $pad Pad the truncated string with this string. Defaults to an HTML ellipsis.
-   * @return
+   * @return string
    */
 	static function truncate($text, $max_characters = 0, $break = ' ', $pad = '&hellip;'){
 		if ( strlen($text) <= $max_characters ){
@@ -299,7 +300,7 @@ class blcUtility {
    * @return void
    */
 	static function optimize_database(){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		$wpdb->query("OPTIMIZE TABLE {$wpdb->prefix}blc_links, {$wpdb->prefix}blc_instances, {$wpdb->prefix}blc_synch");
 	}
@@ -383,7 +384,7 @@ class blcUtility {
 	/**
 	 * Get an instance of idna_converter
 	 * 
-	 * @return object Either an instance of idna_converter, or NULL if the converter class is not available
+	 * @return idna_convert|null Either an instance of IDNA converter, or NULL if the converter class is not available
 	 */
 	static function get_idna_converter(){
 		static $idn = null;
@@ -391,6 +392,23 @@ class blcUtility {
 			$idn = new idna_convert();
 		}
 		return $idn;
+	}
+
+	/**
+	 * Generate a numeric hash from a string. The result will be constrained to the specified interval.
+	 *
+	 * @static
+	 * @param string $input
+	 * @param int $min
+	 * @param int $max
+	 * @return float
+	 */
+	public static function constrained_hash($input, $min = 0, $max = 1) {
+		$bytes_to_use = 3;
+		$md5_char_count = 32;
+		$hash = substr(md5($input), $md5_char_count - $bytes_to_use*2);
+		$hash = intval(hexdec($hash));
+		return  $min + (($max - $min) * ($hash / (pow(2, $bytes_to_use * 8) - 1)));
 	}
 	
 }//class

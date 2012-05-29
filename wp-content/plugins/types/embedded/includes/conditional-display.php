@@ -290,13 +290,27 @@ function wpcf_cd_add_field_js() {
                         return false;
                     }
                     jQuery(this).addClass('wpcf-cd-binded');
-                    jQuery(this).bind('blur', function(){
-                        wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
-                    });
+                    if (jQuery(this).hasClass('radio')
+                        || jQuery(this).hasClass('checkbox')) {
+                        jQuery(this).bind('click', function(){
+                            wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                        });
+                    } else if (jQuery(this).hasClass('select')) {
+                        jQuery(this).bind('change', function(){
+                            wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                        });
+                    } else {
+                        jQuery(this).bind('blur', function(){
+                            wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                        });
+                    }
                 });
+                if (typeof adminpage !== 'undefined' && adminpage == 'post-new-php') {
+                    wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                }
             });
         });
-                                                                                                        
+                                                                                                                    
         function wpcfCdVerify(object, name, value) {
             if (object.hasClass('wpcf-pr-binded')) {
                 return false;
@@ -373,7 +387,7 @@ function wpcf_cd_add_group_js_render($conditions = array()) {
     ?>
             jQuery('.wpcf-cd-group-failed').parents('.postbox').hide();
         });
-                                                                                                        
+                                                                                                                    
         function wpcfCdGroupVerify(object, name, value, group_id) {
             var form = jQuery('#post');
             jQuery.ajax({

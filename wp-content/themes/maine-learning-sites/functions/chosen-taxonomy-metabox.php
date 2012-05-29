@@ -16,14 +16,20 @@
  * Modified by Boone Gorges to work for arbitrary tags/post types. Modify the arguments as follows:
  *   'post_types' can be either an array of post types, or the string 'all'
  *   'taxes' can be either an array of taxonomy names, or the string 'all'
+ *
+ * Example array:
+ *		array(
+ *			'post_types' => array(
+ *				'object'
+ *			)
  */
 
 function hhs_load_chosen_tax_metabox() {
 	$args = array(
-		'post_types' => array(
-			'objects'
-		),
-		'taxes' => 'all'
+ 			'post_types' => array(
+ 				'object'
+ 			),
+ 			'taxes' => 'all'
 	);
 	new HHS_Chosen_Tax_Metabox( $args );
 }

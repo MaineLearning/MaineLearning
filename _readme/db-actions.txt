@@ -3,6 +3,26 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Remove Custom CSS for Home and Sites
+
+Activate Search Everything on MLN Resources
+Search highlight color: ccc066
+
+Views templates - remove spaces around hyphen in Objects-archive and Objects-single titles.
+
+Add the following to Objects-archive
+
+<h2 class="entry-title">[wpv-post-link]</h2>
+<p>[types field="abstract-excerpt" class="" style=""][/types]</p>
+
+Apply Objects-archive to all taxonomies and post type: Object
+
+
+
+------------------------------------
+DONE
+
+
 Upgrade Akismet to 2.5.6
 
 Upgrade Gravity Forms to 1.6.4.2.1
@@ -26,8 +46,7 @@ Check to make sure "Quick post" and "All group activity" graphics appear correct
 
 
 
-------------------------------------
-DONE
+
 
 ------------------------------------
 Deactivate Buddyvents and configure Events Manager

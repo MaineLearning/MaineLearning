@@ -686,51 +686,54 @@ function wpcf_admin_promotional_text() {
                     implode(', ', $add), $last);
         }
         $promotional_text .= wpcf_admin_toggle_button('wpcf-promotional-views');
-        $promotional_text .= '<h3>' . __('Display Custom Content', 'wpcf') . '</h3><div id="wpcf-promotional-views-toggle" class="wpcf-toggle-wrapper">'
-                . '<p>' . __("Now that you’ve created your content, how are you going to display it?",
-                        'wpcf') . '</p>'
-                . '<p>' . sprintf(__("The %sViews plugin%s with its graphical user interface, makes it easy for you to create complex layouts and perform dynamic queries on the WordPress database, without writing any PHP.",
+        $promotional_text .= '<h3>' . __('Want to Build Sites Faster?', 'wpcf') . '</h3><div id="wpcf-promotional-views-toggle" class="wpcf-toggle-wrapper">'
+                . '<p><strong>' . sprintf(__("%sViews%s, lets you create complex WordPress sites, quickly and easily. Instead of coding and debugging everything, let Views do the heavy lifting for you.",
                                 'wpcf'),
-                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" title="http://wp-types.com/" target="_blank">',
-                        '</a>') . '</p>'
-                . '<p>' . __("From the WordPress Dashboard, you’ll be able to:",
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" target="_blank">',
+                        '</a>') . '</strong></p>'
+                . '<p>' . __("With Views, you can:",
                         'wpcf') . '</p>'
-                . '<p style="margin:-5px 0 0 0;padding:0;">' . '<ul style="list-style-type:disc; list-style-position: inside;">'
-                . '<li>' . sprintf(__("Create dynamic page templates for your %s content.",
-                                'wpcf'), $list_post_types) . '</li>'
-                . '<li>' . sprintf(__("Load %s and display them as lists, grids, tables, sliders and more.",
-                                'wpcf'), $list_post_types) . '</li>'
+                . '<p style="margin:-5px 0 0 0; padding:0;">' . '<ul style="margin:15px 10px; list-style-type:disc; list-style-position: inside;">'
+                . '<li>' . __("Create single-page templates and insert custom fields.",
+                                'wpcf') . '</li>'
+                . '<li>' . __("Load content and display it as lists, grids, tables, sliders and more.",
+                                'wpcf') . '</li>'
                 . '<li>' . __("Create your own widgets and place them anywhere in the theme.",
                         'wpcf') . '</li>'
                 . '</ul></p>'
                 . '<p>' . sprintf(__("%sLearn more about Views%s", 'wpcf'),
-                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" title="http://wp-types.com/" target="_blank" class="button-primary">',
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/" target="_blank" class="button-primary">',
                         ' &raquo;</a>') . '</p>'
-                . '<p>' . __("Check out some examples of sites that were created without writing any PHP. We’ve even created tutorials to teach you how to build them yourself:",
+                . '<p><br />' . __("Check out these Views tutorials:",
                         'wpcf') . '</p>'
                 . '<p>' . '<ul style="list-style-type:none; list-style-position: inside;">'
-                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/magazine-final-150x150.jpg" /></div>'
-                . sprintf(__("Magazine<br />(%stutorial%s)", 'wpcf'),
-                        '<a href="http://wp-types.com/learn/create-a-wordpress-magazine-theme/" title="http://wp-types.com/" target="_blank">',
-                        ' &raquo;</a>') . '</div></li>'
-                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/classifieds-150x150.jpg" /></div>'
-                . sprintf(__("Classifieds<br />(%stutorial%s)", 'wpcf'),
-                        '<a href="http://wp-types.com/learn/wordpress-classifieds-site/" title="http://wp-types.com/" target="_blank">',
-                        ' &raquo;</a>') . '</div></li>'
-                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:-50px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/realestate-150x150.jpg" /></div>'
-                . sprintf(__("Real Estate<br />(%stutorial%s)", 'wpcf'),
-                        '<a href="http://wp-types.com/learn/create-a-real-estate-wordpress-theme/" title="http://wp-types.com/" target="_blank">',
-                        ' &raquo;</a>') . '</div></li>'
-                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><img style="position:relative;top:0px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/showcase1-150x150.jpg" /></div>'
-                . sprintf(__("Showcase<br />(%stutorial%s)", 'wpcf'),
-                        '<a href="http://wp-types.com/learn/create-a-showcase-website/" title="http://wp-types.com/" target="_blank">',
-                        ' &raquo;</a>') . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><a href="http://wp-types.com/learn/create-a-showcase-website/" target="_blank"><img style="position:relative;top:0px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/showcase1-150x150.jpg" /></a></div>'
+                      . '<strong>' . __("Showcase Site","wpcf") . '</strong><br /><span style="color: #808080;">(' . sprintf(__('%d minutes to build','wpcf'),20) . ')</span><br /><br />'
+                      .  '<a href="http://wp-types.com/learn/create-a-showcase-website/" target="_blank">' . __('Tutorial','wpcf')
+                      .  ' &raquo;</a>'
+                . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><a href="http://wp-types.com/learn/create-a-real-estate-wordpress-theme/" target="_blank"><img style="position:relative;top:-50px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/realestate-150x150.jpg" /></a></div>'
+                      . '<strong>' . __("Real Estate Listing","wpcf") . '</strong><br /><span style="color: #808080;">(' . sprintf(__('%d minutes to build','wpcf'),30) . ')</span><br /><br />'
+                      .  '<a href="http://wp-types.com/learn/create-a-real-estate-wordpress-theme/" target="_blank">' . __('Tutorial','wpcf')
+                      .  ' &raquo;</a>'
+                . '</div></li>'
+                . '</ul><br style="clear:both;" /><ul style="list-style-type:none; list-style-position: inside;">'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><a href="http://wp-types.com/learn/create-a-wordpress-magazine-theme/" target="_blank"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/magazine-final-150x150.jpg" /></a></div>'
+                      . '<strong>' . __("Magazine Theme","wpcf") . '</strong><br /><span style="color: #808080;">(' . sprintf(__('%d minutes to build','wpcf'),45) . ')</span><br /><br />'
+                      .  '<a href="http://wp-types.com/learn/create-a-wordpress-magazine-theme/" target="_blank">' . __('Tutorial','wpcf')
+                      .  ' &raquo;</a>'
+                . '</div></li>'
+                . '<li style="width: 300px;float:left;"><div style="clear:both;"><div style="border:1px solid #DFDFDF; height:100px;overflow:hidden;float:left;margin-right:10px;margin-bottom:20px;"><a href="http://wp-types.com/learn/wordpress-classifieds-site/" target="_blank"><img style="position:relative;top:-30px;" src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/classifieds-150x150.jpg" /></a></div>'
+                      . '<strong>' . __("Classifieds Site","wpcf") . '</strong><br /><span style="color: #808080;">(' . sprintf(__('%d minutes to build','wpcf'),60) . ')</span><br /><br />'
+                      .  '<a href="http://wp-types.com/learn/wordpress-classifieds-site/" target="_blank">' . __('Tutorial','wpcf')
+                      .  ' &raquo;</a>'
+                . '</div></li>'
                 . '</ul></p>'
                 . '<hr style="clear:both;" />'
-                . '<p>' . __("Prefer to use PHP and code templates manually?",
+                . '<p><br />' . __("Prefer to use PHP and code everything from scratch?",
                         'wpcf') . '</p>'
                 . '<p>' . sprintf(__("%sLearn the Types PHP API%s", 'wpcf'),
-                        '<a href="http://wp-types.com/documentation/functions/" title="http://wp-types.com/" target="_blank">',
+                        '<a href="http://wp-types.com/documentation/functions/" target="_blank">',
                         ' &raquo;</a>') . '</p>';
     }
     $promotional_text .= '</div></div>';

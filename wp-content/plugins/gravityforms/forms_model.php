@@ -364,7 +364,7 @@ class RGFormsModel{
         $lead_table = self::get_lead_table_name();
 
         $payment_date = strtotime(rgar($lead,"payment_date")) ? "'{$lead["payment_date"]}'" : "NULL";
-        $payment_amount = !rgempty("payment_amount", $lead) ? $lead["payment_amount"] : "NULL";
+        $payment_amount = !rgblank(rgar($lead, "payment_amount")) ? rgar($lead, "payment_amount") : "NULL";
         $transaction_type = !rgempty("transaction_type", $lead) ? $lead["transaction_type"] : "NULL";
         $status = !rgempty("status", $lead) ? $lead["status"] : "active";
 
@@ -384,7 +384,7 @@ class RGFormsModel{
                                     is_fulfilled=%d,
                                     transaction_type={$transaction_type},
                                     status='{$status}'
-                                WHERE id=%d",   rgar($lead,"form_id"), rgar($lead,"post_id"), rgar($lead,"is_starred"), rgar($lead,"is_read"), rgar($lead,"ip"), rgar($lead,"source_url"), rgar($lead,"user_agent"),
+                               WHERE id=%d",   rgar($lead,"form_id"), rgar($lead,"post_id"), rgar($lead,"is_starred"), rgar($lead,"is_read"), rgar($lead,"ip"), rgar($lead,"source_url"), rgar($lead,"user_agent"),
                                                 rgar($lead,"currency"), rgar($lead,"payment_status"), rgar($lead,"transaction_id"), rgar($lead,"is_fulfilled"), rgar($lead,"id"));
         $wpdb->query($sql);
     }
@@ -580,13 +580,13 @@ class RGFormsModel{
         $lead_detail_table = self::get_lead_details_table_name();
 
         //Deleting file
-        $sql = $wpdb->prepare("SELECT value FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %f AND %f", $lead_id, $field_id - 0.001, $field_id + 0.001);
+        $sql = $wpdb->prepare("SELECT value FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %s AND %s", $lead_id, doubleval($field_id) - 0.001, doubleval($field_id) + 0.001);
         $file_path = $wpdb->get_var($sql);
 
         self::delete_physical_file($file_path);
 
         //Delete from lead details
-        $sql = $wpdb->prepare("DELETE FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %f AND %f", $lead_id, $field_id - 0.001, $field_id + 0.001);
+        $sql = $wpdb->prepare("DELETE FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %s AND %s", $lead_id, doubleval($field_id) - 0.001, doubleval($field_id) + 0.001);
         $wpdb->query($sql);
     }
 
@@ -889,6 +889,119 @@ class RGFormsModel{
 
     }
 
+    public static function create_lead($form) {
+        global $current_user;
+
+        $calculation_fields = array();
+
+        $lead = array();
+        $lead['id'] = null;
+        $lead['post_id'] = null;
+        $lead['date_created'] = null;
+        $lead['form_id'] = $form['id'];
+        $lead['ip'] = self::get_ip();
+        $lead['source_url'] = self::get_current_page_url();
+        $lead['user_agent'] = strlen($_SERVER['HTTP_USER_AGENT']) > 250 ? substr($_SERVER['HTTP_USER_AGENT'], 0, 250) : $_SERVER['HTTP_USER_AGENT'];
+        $lead['currency'] = GFCommon::get_currency();
+        $lead['created_by'] = $current_user && $current_user->ID ? $current_user->ID : 'NULL';
+
+        foreach($form['fields'] as $field) {
+
+            // ignore fields that are marked as display only
+            if(rgget('displayOnly', $field) && $field['type'] != 'password'){
+                continue;
+            }
+
+            // process total field after all fields have been saved
+            if($field['type'] == 'total'){
+                $total_field = $field;
+                continue;
+            }
+
+            // process calculation fields after all fields have been saved
+            if(GFCommon::has_field_calculation($field)) {
+                $calculation_fields[] = $field;
+                continue;
+            }
+
+            // only save fields that are not hidden
+            if(!RGFormsModel::is_field_hidden($form, $field, array()) ){
+
+                if($field['type'] == 'post_category')
+                    $field = GFCommon::add_categories_as_choices($field, '');
+
+                if(isset($field['inputs']) && is_array($field['inputs'])){
+                    foreach($field['inputs'] as $input) {
+                        $lead[(string)$input['id']] = self::get_prepared_input_value($form, $field, $lead, $input["id"]);
+                    }
+                }
+                else {
+                    $lead[$field['id']] = self::get_prepared_input_value($form, $field, $lead, $field["id"]);
+                }
+            }
+        }
+
+        if(!empty($calculation_fields)) {
+            foreach($calculation_fields as $field) {
+                if(isset($field["inputs"]) && is_array($field["inputs"])){
+                    foreach($field["inputs"] as $input) {
+                        $lead[(string)$input['id']] = self::get_prepared_input_value($form, $field, $lead, $input["id"]);
+                    }
+                }
+                else{
+                    $lead[$field['id']] = self::get_prepared_input_value($form, $field, $lead, $field["id"]);
+                }
+            }
+            self::refresh_product_cache($form, $lead);
+        }
+
+        // saving total field as the last field of the form.
+        if(isset($total_field)) {
+            $lead[$total_field['id']] = self::get_prepared_input_value($form, $total_field, $lead, $total_field["id"]);
+        }
+
+        return $lead;
+    }
+
+    public static function get_prepared_input_value($form, $field, $lead, $input_id) {
+
+        $input_name = "input_" . str_replace('.', '_', $input_id);
+        $value = rgpost($input_name);
+
+        if(empty($value) && rgar($field, "adminOnly") && !IS_ADMIN){
+            $value = self::get_default_value($field, $input_id);
+        }
+
+        switch(self::get_input_type($field)) {
+
+        case "post_image":
+            $file_info = self::get_temp_filename($form['id'], $input_name);
+            $file_path = self::get_file_upload_path($form['id'], $file_info["uploaded_filename"]);
+            $url = $file_path['url'];
+
+            $image_title = isset($_POST["{$input_name}_1"]) ? strip_tags($_POST["{$input_name}_1"]) : "";
+            $image_caption = isset($_POST["{$input_name}_4"]) ? strip_tags($_POST["{$input_name}_4"]) : "";
+            $image_description = isset($_POST["{$input_name}_7"]) ? strip_tags($_POST["{$input_name}_7"]) : "";
+
+            $value = !empty($url) ? $url . "|:|" . $image_title . "|:|" . $image_caption . "|:|" . $image_description : "";
+            break;
+
+        case "fileupload" :
+            $file_info = self::get_temp_filename($form['id'], $input_name);
+            $file_path = self::get_file_upload_path($form['id'], $file_info["uploaded_filename"]);
+            $value = $file_path['url'];
+            break;
+
+        default:
+
+            // processing values so that they are in the correct format for each input type
+            $value = self::prepare_value($form, $field, $value, $input_name, rgar($lead, 'id'), $lead);
+
+        }
+
+        return apply_filters("gform_save_field_value", $value, $lead, $field, $form);
+    }
+
     public static function refresh_product_cache($form, $lead, $use_choice_text = false, $use_admin_label = false) {
 
         $cache_options = array(
@@ -1047,7 +1160,7 @@ class RGFormsModel{
 
     private static function get_field_display($form, $field, $field_values, $lead=null){
 
-        $logic = RGForms::get("conditionalLogic", $field);
+        $logic = rgar($field, "conditionalLogic");
 
         //if this field does not have any conditional logic associated with it, it won't be hidden
         if(empty($logic))
@@ -1143,6 +1256,12 @@ class RGFormsModel{
             case "list" :
                 $value = self::get_input_value($field, "input_" . $field["id"], rgar($field, "inputName"), $field_values, $get_from_post);
                 $value = self::create_list_array($field, $value);
+            break;
+
+            case "number":
+                $value = self::get_input_value($field, "input_" . $field["id"], rgar($field, "inputName"), $field_values, $get_from_post);
+                if(GFCommon::is_numeric($value, rgar($field, 'numberFormat')))
+                    $value = GFCommon::clean_number($value, rgar($field, 'numberFormat'));
             break;
 
             default:
@@ -1309,7 +1428,7 @@ class RGFormsModel{
         }
 
         $post_data["post_status"] = rgar($form, "postStatus");
-        $post_data["post_category"] = !empty($categories) ? $categories : array($form["postCategory"]);
+        $post_data["post_category"] = !empty($categories) ? $categories : array(rgar($field, 'postCategory'));
         $post_data["images"] = $images;
 
         //setting current user as author depending on settings
@@ -1373,14 +1492,24 @@ class RGFormsModel{
         return $value;
     }
 
-    public static function prepare_value($form, $field, $value, $input_name, $lead_id){
+    /**
+    * Prepare the value before saving it to the lead.
+    *
+    * @param mixed $form
+    * @param mixed $field
+    * @param mixed $value
+    * @param mixed $input_name
+    * @param mixed $lead_id the current lead ID, used for fields that are processed after other fields have been saved (ie Total, Calculations)
+    * @param mixed $lead passed by the RGFormsModel::create_lead() method, lead ID is not available for leads created by this function
+    */
+    public static function prepare_value($form, $field, $value, $input_name, $lead_id, $lead = array()){
         $form_id = $form["id"];
 
         $input_type = self::get_input_type($field);
         switch($input_type)
         {
             case "total" :
-                $lead = RGFormsModel::get_lead($lead_id);
+                $lead = empty($lead) ? RGFormsModel::get_lead($lead_id) : $lead;
                 $value = GFCommon::get_order_total($form, $lead);
             break;
 
@@ -1390,7 +1519,7 @@ class RGFormsModel{
                 if($input_id == 2) {
                     require_once(GFCommon::get_base_path() . '/currency.php');
                     $currency = new RGCurrency(GFCommon::get_currency());
-                    $lead = RGFormsModel::get_lead($lead_id);
+                    $lead = empty($lead) ? RGFormsModel::get_lead($lead_id) : $lead;
                     $value = $currency->to_money(GFCommon::calculate($field, $form, $lead));
                 }
             break;
@@ -1442,7 +1571,7 @@ class RGFormsModel{
             break;
 
             case "number" :
-                $lead = RGFormsModel::get_lead($lead_id);
+                $lead = empty($lead) ? RGFormsModel::get_lead($lead_id) : $lead;
                 $value = GFCommon::has_field_calculation($field) ? GFCommon::calculate($field, $form, $lead) : GFCommon::clean_number($value, rgar($field, "numberFormat"));
             break;
 
@@ -2005,15 +2134,15 @@ class RGFormsModel{
         }
         else{
             //Deleting details for this field
-            $sql = $wpdb->prepare("DELETE FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %f AND %f ", $lead["id"], $input_id - 0.001, $input_id + 0.001);
+            $sql = $wpdb->prepare("DELETE FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %s AND %s ", $lead["id"], doubleval($input_id) - 0.001, doubleval($input_id) + 0.001);
             $wpdb->query($sql);
 
             //Deleting long field if there is one
             $sql = $wpdb->prepare("DELETE FROM $lead_detail_long_table
                                     WHERE lead_detail_id IN(
-                                        SELECT id FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %f AND %f
+                                        SELECT id FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %s AND %s
                                     )",
-                                    $lead["id"], $input_id - 0,001, $input_id + 0.001);
+                                    $lead["id"], doubleval($input_id) - 0.001, doubleval($input_id) + 0.001);
             $wpdb->query($sql);
         }
     }
@@ -2125,7 +2254,7 @@ class RGFormsModel{
         //Add the original filename to our target path.
         //Result is "uploads/filename.extension"
         $file_info = pathinfo($file_name);
-        $extension = $file_info["extension"];
+        $extension = rgar($file_info, 'extension');
         $file_name = basename($file_info["basename"], "." . $extension);
 
         $file_name = sanitize_file_name($file_name);
@@ -2207,7 +2336,7 @@ class RGFormsModel{
             }
         }
         else{
-            $inner_sql = $wpdb->prepare($inner_sql_template, $field["id"], $form_id, $form_id, $field["id"] - 0.001, $field["id"] + 0.001, $value);
+            $inner_sql = $wpdb->prepare($inner_sql_template, $field["id"], $form_id, $form_id, doubleval($field["id"]) - 0.001, doubleval($field["id"]) + 0.001, $value);
         }
 
         $sql .= $inner_sql . "
@@ -2298,7 +2427,7 @@ class RGFormsModel{
 
         $sql = $wpdb->prepare(" SELECT l.value FROM $detail_table_name d
                                 INNER JOIN $long_table_name l ON l.lead_detail_id = d.id
-                                WHERE lead_id=%d AND field_number BETWEEN %f AND %f", $lead["id"], $field_number - 0.001, $field_number + 0.001);
+                                WHERE lead_id=%d AND field_number BETWEEN %s AND %s", $lead["id"], doubleval($field_number) - 0.001, doubleval($field_number) + 0.001);
 
          $val = $wpdb->get_var($sql);
 

@@ -86,7 +86,7 @@ class blcLinkQuery {
    * @return array An array of custom filter definitions. If there are no custom filters defined returns an empty array.
    */
 	function load_custom_filters(){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		$filter_data = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}blc_filters ORDER BY name ASC", ARRAY_A);
 		$filters = array();
@@ -118,7 +118,7 @@ class blcLinkQuery {
    * @return string|bool The ID of the newly added filter, or False.  
    */
 	function create_custom_filter($name, $params){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		if ( is_array($params) ){
 			$params = http_build_query($params, null, '&');
@@ -145,7 +145,7 @@ class blcLinkQuery {
    * @return bool True on success, False if a database error occured.
    */
 	function delete_custom_filter($filter_id){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		//Remove the "f" character from the filter ID to get its database key
 		$filter_id = intval(ltrim($_POST['filter_id'], 'f'));
@@ -230,7 +230,7 @@ class blcLinkQuery {
    * @return array 'where_exprs' - an array of search expressions, 'join_instances' - whether joining the instance table is required. 
    */
 	function compile_search_params($params){
-		global $wpdb;		
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		//Track whether we'll need to left-join the instance table to run the query.
 		$join_instances = false;
@@ -462,7 +462,7 @@ class blcLinkQuery {
    * @return array|int
    */
 	function get_links($params = null){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		if( !is_array($params) ){
 			$params = array();

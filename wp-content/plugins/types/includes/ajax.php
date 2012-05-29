@@ -392,13 +392,13 @@ function wpcf_ajax() {
                         ));
                     } else {
                         echo json_encode(array(
-                            'output' => __('Error occured'),
+                            'output' => __('Error occured', 'wpcf'),
                         ));
                     }
                 }
             } else {
                 echo json_encode(array(
-                    'output' => __('Error occured'),
+                    'output' => __('Error occured', 'wpcf'),
                 ));
             }
             break;

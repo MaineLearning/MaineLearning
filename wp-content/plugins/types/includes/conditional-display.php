@@ -81,7 +81,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
             . __("Specify additional filters that control this group's display, based on values of custom fields.",
                     'wpcf')
             . '<br /><a class="button-secondary" onclick="jQuery(this).css(\'visibility\',\'hidden\').next().slideToggle();" style="line-height: 30px;" href="javascript:void(0);">'
-            . __('Edit') . '</a><div id="wpcf-cd-group" style="display:none;">',
+            . __('Edit', 'wpcf') . '</a><div id="wpcf-cd-group" style="display:none;">',
         );
     }
     if (!empty($data['data']['conditional_display']['conditions'])) {

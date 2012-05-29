@@ -444,7 +444,6 @@ function wpcf_icl_editor_cf_style_filter($style, $cf_name) {
 function wpcf_admin_ajax_head($title) {
     global $pagenow;
     $hook_suffix = $pagenow;
-
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" <?php do_action('admin_xml_ns'); ?> <?php language_attributes(); ?>>
@@ -458,12 +457,11 @@ function wpcf_admin_ajax_head($title) {
             wp_admin_css();
             wp_admin_css('colors');
             wp_admin_css('ie');
-            do_action('admin_enqueue_scripts', $hook_suffix);
+//            do_action('admin_enqueue_scripts', $hook_suffix);
             do_action("admin_print_styles-$hook_suffix");
             do_action('admin_print_styles');
-            do_action("admin_print_scripts-$hook_suffix");
+//            do_action("admin_print_scripts-$hook_suffix");
             do_action('admin_print_scripts');
-            // TODO Check if needed
 //            do_action("admin_head-$hook_suffix");
 //            do_action('admin_head');
             do_action('admin_head_wpcf_ajax');

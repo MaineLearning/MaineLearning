@@ -413,7 +413,7 @@ function WPV_wpcf_record_post_relationship_belongs($content) {
 	global $post, $WPV_wpcf_post_relationship;
     static $related = array();
 	
-    if (function_exists('wpcf_pr_get_belongs')) {
+    if (isset($post) && function_exists('wpcf_pr_get_belongs')) {
         
         if (!isset($related[$post->post_type])) {
             $related[$post->post_type] = wpcf_pr_get_belongs($post->post_type);
