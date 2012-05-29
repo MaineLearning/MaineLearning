@@ -17,7 +17,7 @@ This process assumes you have Git installed on your local machine. Visit http://
 5) Clone the Git repository into that directory:
 
     git clone git@github.com:MaineLearning/MaineLearning.git /path/to/your/local/directory/
-    
+
 6) Once the clone is finished, copy env-sample.php to a new file env.php. Enter the approprate DB-specific config data into this new file.
 
 7) From the production site, download wp-content/blogs.dir and wp-content/uploads to the corresponding directories in your local installation.
@@ -34,11 +34,11 @@ This process assumes you have Git installed on your local machine. Visit http://
 
 ### Overview
 
-The guiding principle for development is that the file system on the production environment is never touched, except at deployment. All development happens in local dev environments. All changes are tracked via Git, and shared with the rest of the development team via the shared Github repository. 
+The guiding principle for development is that the file system on the production environment is never touched, except at deployment. All development happens in local dev environments. All changes are tracked via Git, and shared with the rest of the development team via the shared Github repository.
 
 ### Branching philosophy
 
-At any given time, there will be three active shared branches in the Github repository: 
+At any given time, there will be three active shared branches in the Github repository:
 
 - The stable branch will be named after the current dot-dot series. So if the current release number is 1.3.5, the current stable branch is 1.3.x. The purpose of this stable branch is for the fixing of bugs that will go into minor releases. This branch should (as the name suggests) remain stable at all times.
 - The feature development branch will be named after the upcoming dot/feature release. In the case described above, our feature branch would be 1.4.x. All new feature development/all items in the 1.4 milestone go in this branch.
@@ -67,13 +67,13 @@ Before beginning development, pull the latest changes from the proper branch on 
 If you are making changes beyond the extremely trivial, it's recommended that you start a new local branch. To create a branch, use `git checkout` with the `-b` flag:
 
     git checkout -b mybugfixbranch
-    
+
 When you're ready to commit your changes to your local repository, first you'll need to stage them, using `git add` on each file/directory with changes.
 
     git add wp-config.php
     git add wp-content/themes/my-theme/index.php
     git add wp-content/themes/my-theme/images
-    
+
 Note that `git add` is recursive by default. You can now commit:
 
     git commit -m "This is my commit message."
@@ -97,15 +97,15 @@ If you get a message that Git has prevented your push because it can't fast-forw
 WordPress keeps a lot of configuration data in the database rather than the file system, making it more difficult to track. If you commit a change that requires a change to the database - for instance, if you add a theme that needs to be enabled, or a plugin that needs to be activated, or you change settings somewhere - make sure to do both of the following:
 
 - Mention this change in the commit message, using the flag ACTION_REQUIRED. For example,
-    
+
     git commit -m "Adds the WordPress plugin BuddyPress Awesometown. Fixes #33; see also #18. ACTION_REQUIRED: Network activate the plugin."
 
 - Record the change under the appropriate release header in actions_required.md. For example,
-    
+
     ### 1.3.7
-        
+
     - Network activate the plugin BuddyPress Awesometown
-        
+
 #### The short version
 
 - Make sure you're developing off the right branch before doing anything (the stable branch for bugfixes, the feature branch for new features). The master branch is for releases only (see 'Deployment' below).
@@ -123,11 +123,10 @@ The production site is a clone of the Github repo, just like your dev environmen
         git pull origin master # get yourself up to date
         git merge --no-ff 0.9.x
 
-2. Use the .htaccess flags to do an IP block, and change the maintenance.html file to give up-to-date information. Commit these changes.
+2. Change the maintenance.html file to give up-to-date information. Commit these changes.
 
         git add maintenance.html
-        git add .htaccess
-        git commit -m "Shuts down site for 0.9.3 release"
+        git commit -m "Modifies maintenance.html for 0.9.3 release"
 
 3. Push the master branch to the Github repo
 
@@ -136,15 +135,15 @@ The production site is a clone of the Github repo, just like your dev environmen
 3. Shell to the production server
 
         ssh mainelea@vm285.sgvps.net -p 18765
-        
+
     Change into the correct directory
-    
+
         cd /home/mainelea/public_html/
 
 4. Pull the latest master branch
 
         git pull origin master
-    
+
 5. Open _readme/db-actions.txt, for reference. Do any of the required actions.
 6. Do any necessary testing
 7. When everything looks OK, remove the .htaccess restrictions (by adding a # before the first block of rewrite rules). The release is now live.
@@ -154,7 +153,7 @@ The production site is a clone of the Github repo, just like your dev environmen
         # add any other files you may have changed on the production server during deployment
         git commit -m "Re-opens site after the 0.9.3 release"
         git push origin master
-    
+
 9. On the local machine, pull the latest changes.
 
         git pull origin master
@@ -167,15 +166,15 @@ The production site is a clone of the Github repo, just like your dev environmen
 11. If any substantive changes were necessary on the production server ('substantive' meaning anything other than the .htaccess switch), cherry-pick or merge them to the appropriate branch
 
        git cherry-pick ed518555edd0f00e122f78e7ae212da83fa543bf
-       
+
     Note that you can get the hash number either from Github, `git log`.
 
 12. If this is a bugfix release, merge --no-ff the bugfix branch into the dev branch, so that all bugfixes are applied to the dev branch:
-    
+
         git checkout 1.0.x
         git merge --no-ff 0.9.x
         git push origin 1.0.x
-    
+
 13. If, on the other hand, this is a feature release, then the old dev branch has become the bugfix branch, and you'll need to create a new dev branch named after the *next* feature release.
 
         git checkout -b 1.1.x # create the 1.1.x feature branch locally
