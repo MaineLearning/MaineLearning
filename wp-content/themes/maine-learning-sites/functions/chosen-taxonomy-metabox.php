@@ -26,8 +26,10 @@
 
 function hhs_load_chosen_tax_metabox() {
 	$args = array(
-		'post_types' => 'all',
-		'taxes' => 'all'
+ 			'post_types' => array(
+ 				'objects'
+ 			),
+ 			'taxes' => 'all'
 	);
 	new HHS_Chosen_Tax_Metabox( $args );
 }
