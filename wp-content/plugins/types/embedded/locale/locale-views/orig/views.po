@@ -333,9 +333,6 @@ msgstr ""
 msgid "Views"
 msgstr ""
 
-msgid "New View"
-msgstr ""
-
 msgid "View Templates"
 msgstr ""
 
@@ -495,9 +492,6 @@ msgstr ""
 msgid "Save View"
 msgstr ""
 
-msgid "Filter"
-msgstr ""
-
 msgid "1. Enter title"
 msgstr ""
 
@@ -603,15 +597,6 @@ msgstr ""
 msgid "Layout style:"
 msgstr ""
 
-msgid "Unformatted"
-msgstr ""
-
-msgid "Grid"
-msgstr ""
-
-msgid "Table"
-msgstr ""
-
 msgid "Ordered list"
 msgstr ""
 
@@ -636,7 +621,10 @@ msgstr ""
 msgid "Items are added to an unordered list"
 msgstr ""
 
-msgid "Are you sure you want to change the layout?\\n\\nIt appears that you made modifications to the layout."
+msgid "Are you sure you want to change the layout?"
+msgstr ""
+
+msgid "It appears that you made modifications to the layout."
 msgstr ""
 
 msgid "Additional Javascript files to be loaded with this View (comma separated): "
@@ -822,6 +810,9 @@ msgstr ""
 msgid "No template selected for %s"
 msgstr ""
 
+msgid "<strong>This template includes single-ended shortcodes</strong>. Pleae close all shortcodes to avoid processing errors. %sRead more%s"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -886,9 +877,6 @@ msgid "Add New View Template"
 msgstr ""
 
 msgid "Edit View Template"
-msgstr ""
-
-msgid "New View Template"
 msgstr ""
 
 msgid "View Views-Templates"
@@ -970,9 +958,6 @@ msgid "eg. [wpv-views name=\"view-name\" <strong>%s=\"xxxx\"</strong>]"
 msgstr ""
 
 msgid "eg. http://www.example.com/page/?<strong>%s=\"xxxx\"</strong>"
-msgstr ""
-
-msgid "Taxonomy"
 msgstr ""
 
 msgid "Shortcode attribute"
@@ -1108,6 +1093,48 @@ msgid "<strong>URL_PARAM</strong>(foo) - Use the url parameter \"foo\". eg http:
 msgstr ""
 
 msgid "<strong>VIEW_PARAM</strong>(foo) - Use the parameter \"foo\" in the View shortcode. eg. [wpv-view name=\"my-view\" foo=\"something\"]"
+msgstr ""
+
+msgid "<strong>NOW</strong>() - The current time."
+msgstr ""
+
+msgid "<strong>TODAY</strong>() - The time at the start of today."
+msgstr ""
+
+msgid "<strong>FUTURE_DAY</strong>(x) - The day x days in the future."
+msgstr ""
+
+msgid "<strong>PAST_DAY</strong>(x) - The day x days in the past."
+msgstr ""
+
+msgid "<strong>THIS_MONTH</strong>() - The first day of this month."
+msgstr ""
+
+msgid "<strong>FUTURE_MONTH</strong>(x) - The first day of x months in the future."
+msgstr ""
+
+msgid "<strong>PAST_MONTH</strong>(x) - The first day of x months in the past."
+msgstr ""
+
+msgid "<strong>THIS_YEAR</strong>() - The first day of this year."
+msgstr ""
+
+msgid "<strong>FUTURE_YEAR</strong>(x) - The first day of x years in the future."
+msgstr ""
+
+msgid "<strong>PAST_YEAR</strong>(x) - The first day of x months in the past."
+msgstr ""
+
+msgid "<strong>SECONDS_FROM_NOW</strong>(x) - x seconds from now."
+msgstr ""
+
+msgid "<strong>MONTHS_FROM_NOW</strong>(x) - x months from now."
+msgstr ""
+
+msgid "<strong>YEARS_FROM_NOW</strong>(x) - x years from now."
+msgstr ""
+
+msgid "<strong>DATE</strong>(d,m,y) - The date d,m,y."
 msgstr ""
 
 msgid "Add another filter term"
@@ -1305,9 +1332,6 @@ msgstr ""
 msgid "Taxonomy URL"
 msgstr ""
 
-msgid "Taxonomy slug"
-msgstr ""
-
 msgid "Taxonomy description"
 msgstr ""
 
@@ -1353,19 +1377,7 @@ msgstr ""
 msgid "If you want to edit these or create your own you can purchase the full version of <strong>Views</strong> from %s"
 msgstr ""
 
-msgid "Basic"
-msgstr ""
-
-msgid "Taxonomy"
-msgstr ""
-
 msgid "Other Fields"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "View templates"
 msgstr ""
 
 msgid "Search"

@@ -67,7 +67,7 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
         '#type' => 'markup',
         '#markup' => '<div style="margin: 10px 0 10px 0;"><span class="wpcf-pr-belongs-summary">' . $txt_belongs . '</span>&nbsp;'
         . '<a href="javascript:void(0);" id="wpcf-pr-belongs-edit" class="button-secondary wpcf-pr-edit">'
-        . __('Edit') . '</a>',
+        . __('Edit', 'wpcf') . '</a>',
     );
 
     $options = array();
@@ -94,15 +94,15 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
         '#name' => 'ct[post_relationship]',
         '#before' => '<div style="display:none; margin: 10px 0 20px 0;">',
         '#after' => '<br /><br /><a href="javascript:void(0);" class="button-primary wpcf-pr-belongs-apply">'
-        . __('Apply') . '</a>&nbsp;<a href="javascript:void(0);" class="button-secondary wpcf-pr-belongs-cancel">'
-        . __('Cancel') . '</a></div></div>',
+        . __('Apply', 'wpcf') . '</a>&nbsp;<a href="javascript:void(0);" class="button-secondary wpcf-pr-belongs-cancel">'
+        . __('Cancel', 'wpcf') . '</a></div></div>',
         '#inline' => true,
     );
     $form['table-pr-has'] = array(
         '#type' => 'markup',
         '#markup' => '<div style="margin: 10px 0 5px 0;"><span class="wpcf-pr-has-summary">' . $txt_has . '</span>&nbsp;'
         . '<a href="javascript:void(0);" id="wpcf-pr-has-edit" class="button-secondary wpcf-pr-edit">'
-        . __('Edit') . '</a>',
+        . __('Edit', 'wpcf') . '</a>',
     );
     $options = array();
     foreach ($post_types as $temp_post_type_slug => $temp_post_type) {
@@ -140,8 +140,8 @@ function wpcf_pr_post_type_form_filter($form, $post_type) {
         '#name' => 'ct[post_relationship]',
         '#before' => '<div style="display:none; margin: 10px 0 20px 0;">',
         '#after' => '<br /><br /><a href="javascript:void(0);" class="button-primary wpcf-pr-has-apply">'
-        . __('Apply') . '</a>&nbsp;<a href="javascript:void(0);" class="button-secondary wpcf-pr-has-cancel">'
-        . __('Cancel') . '</a></div></div>',
+        . __('Apply', 'wpcf') . '</a>&nbsp;<a href="javascript:void(0);" class="button-secondary wpcf-pr-has-cancel">'
+        . __('Cancel', 'wpcf') . '</a></div></div>',
         '#inline' => true,
     );
     $form['table-pr-close'] = array(
@@ -319,7 +319,7 @@ function wpcf_pr_admin_edit_fields($parent, $child) {
     $form['submit'] = array(
         '#type' => 'submit',
         '#name' => 'submit',
-        '#value' => __('Save'),
+        '#value' => __('Save', 'wpcf'),
         '#attributes' => array('class' => 'button-primary'),
     );
     echo '<form method="post" action="">';

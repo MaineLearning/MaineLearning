@@ -704,18 +704,18 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
                         . '&amp;post_id=' . $post->ID
                         . '&amp;post_type_child='
                         . $post_type . '&_wpnonce=' . wp_create_nonce('pr_save_child_post'))
-                . '" class="wpcf-pr-save-ajax button-secondary">' . __('Save') . '</a>';
+                . '" class="wpcf-pr-save-ajax button-secondary">' . __('Save', 'wpcf') . '</a>';
         $output .= strpos($item->ID, 'new_') === false ?
                 ' <a href="'
                 . get_edit_post_link($item->ID)
-                . '" class="button-secondary">' . __('Edit') . '</a>' : '';
+                . '" class="button-secondary">' . __('Edit', 'wpcf') . '</a>' : '';
         $output .= strpos($item->ID, 'new_') === false ?
                 ' <a href="'
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;'
                         . 'wpcf_action=pr_delete_child_post'
                         . '&amp;post_id=' . $item->ID
                         . '&_wpnonce=' . wp_create_nonce('pr_delete_child_post'))
-                . '" class="wpcf-pr-delete-ajax button-secondary">' . __('Delete') . '</a>' : '';
+                . '" class="wpcf-pr-delete-ajax button-secondary">' . __('Delete', 'wpcf') . '</a>' : '';
         if ($date_trigger) {
             $output .= '<script type="text/javascript">
         //<![CDATA[

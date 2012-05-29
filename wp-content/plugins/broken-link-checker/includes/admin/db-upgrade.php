@@ -7,7 +7,7 @@ class blcDatabaseUpgrader {
    *
    * @return bool
    */
-    function upgrade_database(){
+    public static function upgrade_database(){
 		global $wpdb, $blclog;
 		
 		$conf = blc_get_configuration();
@@ -162,7 +162,7 @@ class blcTableDelta {
 	 * @param bool $drop_indexes Whether to drop indexes not present in the input. Defaults to true.
 	 * @return array   
 	 */
-	function delta($queries, $execute = true, $drop_columns = true, $drop_indexes = true){
+	static function delta($queries, $execute = true, $drop_columns = true, $drop_indexes = true){
 		global $wpdb;
 	
 		// Separate individual queries into an array

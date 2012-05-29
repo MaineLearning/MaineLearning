@@ -883,7 +883,15 @@ class GFFormDisplay{
                 if(!empty($url_info["fragment"]))
                     $query_string .= "#" . $url_info["fragment"];
 
-                $url = $url_info["scheme"] . "://" . $url_info["host"] . $url_info["path"] . "?" . $query_string;
+                $url = $url_info["scheme"] . "://" . $url_info["host"];
+                if(!empty($url_info["port"]))
+                    $url .= ":{$url_info["port"]}";
+
+                $url .= rgar($url_info,"path");
+                if(!empty($query_string)){
+                    $url .= "?{$query_string}";
+                }
+
             }
 
             if(headers_sent() || $ajax){
@@ -1461,11 +1469,6 @@ class GFFormDisplay{
             wp_enqueue_script("gforms_chosen", GFCommon::get_base_url() . "/js/chosen.jquery.min.js", array("jquery"), GFCommon::$version, false);
         }
 
-        if(wp_script_is("gforms_gravityforms")) {
-            require_once(GFCommon::get_base_path() . '/currency.php');
-            wp_localize_script('gforms_gravityforms', 'gf_global', array( 'gf_currency_config' => RGCurrency::get_currency(GFCommon::get_currency()) ));
-        }
-
         do_action("gform_enqueue_scripts", $form, $ajax);
         do_action("gform_enqueue_scripts_{$form["id"]}", $form, $ajax);
 
@@ -1560,6 +1563,8 @@ class GFFormDisplay{
         $logics = "";
         $dependents = "";
         $fields_with_logic = array();
+        $default_values = array();
+
         foreach($form["fields"] as $field){
 
             //use section's logic if one exists
@@ -1585,6 +1590,29 @@ class GFFormDisplay{
                     $peer_ids[] = $peer["id"];
 
                 $dependents .= $field["id"] . ": " . GFCommon::json_encode($peer_ids) . ",";
+            }
+
+            //getting default values
+            if(!rgempty("defaultValue", $field)){
+                $default_values[$field["id"]] = $field["defaultValue"];
+            }
+            else if(is_array(rgar($field, "choices"))){
+                $choice_index = 1;
+                $input_type = RGFormsModel::get_input_type($field);
+                foreach($field["choices"] as $choice){
+
+                    if($choice["isSelected"] && $input_type == "select"){
+                        $val = isset($choice["price"]) ? $choice["value"] . "|" . GFCommon::to_number($choice["price"]) :  $choice["value"];
+                        $default_values[$field["id"]] = $val;
+                    }
+                    else if($choice["isSelected"]){
+                        if(!isset($default_values[$field["id"]]))
+                            $default_values[$field["id"]] = array();
+
+                        $default_values[$field["id"]][] = "choice_{$field["id"]}_{$choice_index}";
+                    }
+                    $choice_index++;
+                }
             }
         }
 
@@ -1618,12 +1646,12 @@ class GFFormDisplay{
 
                     "if(!window['gf_form_conditional_logic'])" .
                         "window['gf_form_conditional_logic'] = new Array();" .
-                    "window['gf_form_conditional_logic'][{$form['id']}] = {'logic' : {" . $logics . " }, 'dependents' : {" . $dependents . " }, 'animation' : " . $animation . " }; ".
+                    "window['gf_form_conditional_logic'][{$form['id']}] = {'logic' : {" . $logics . " }, 'dependents' : {" . $dependents . " }, 'animation' : " . $animation . " , 'defaults' : " . json_encode($default_values) . " }; ".
                     "if(!window['gf_number_format'])" .
                         "window['gf_number_format'] = '" . $number_format . "';" .
 
                     "jQuery(document).ready(function(){" .
-                        "gf_apply_rules({$form['id']}, " . GFCommon::json_encode($fields_with_logic) . ", true);" .
+                        "gf_apply_rules({$form['id']}, " . json_encode($fields_with_logic) . ", true);" .
                         "jQuery('#gform_wrapper_{$form['id']}').show();" .
                         "jQuery(document).trigger('gform_post_conditional_logic', [{$form['id']}, null, true]);" .
                         $button_conditional_script .
@@ -1643,6 +1671,7 @@ class GFFormDisplay{
     * @param mixed $form
     */
     private static function get_form_init_scripts($form) {
+        global $gf_global_obj;
 
         $script_string = '';
 
@@ -1685,13 +1714,24 @@ class GFFormDisplay{
             self::add_init_script($form['id'], 'calculation', self::ON_PAGE_RENDER, self::get_calculations_init_script($form));
         }
 
+        // temporary solution for output gf_global obj until wp min version raised to 3.3
+        if(wp_script_is("gforms_gravityforms") && $gf_global_obj == null) {
+            require_once(GFCommon::get_base_path() . '/currency.php');
+            $gf_global_obj = array( 'gf_currency_config' => RGCurrency::get_currency(GFCommon::get_currency()) );
+            $gf_global_script = "var gf_global = " . json_encode($gf_global_obj) . ";";
+        }
+
         /* rendering initialization scripts */
 
         $init_scripts = rgar(self::$init_scripts, $form["id"]);
 
         if(!empty($init_scripts)){
             $script_string =
-            "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " " .
+            "<script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . " ";
+
+            $script_string .= isset($gf_global_script) ? $gf_global_script : '';
+
+            $script_string .=
                 "jQuery(document).bind('gform_post_render', function(event, formId, currentPage){" .
                     "if(formId == {$form['id']}) {";
 
@@ -1735,7 +1775,7 @@ class GFFormDisplay{
         foreach($form["fields"] as $field){
             $max_length = rgar($field,"maxLength");
             $field_id = "input_{$form["id"]}_{$field["id"]}";
-            if(!empty($max_length))
+            if(!empty($max_length) && !rgar($field,"adminOnly"))
             {
                 $field_script =
                         //******  make this callable only once ***********

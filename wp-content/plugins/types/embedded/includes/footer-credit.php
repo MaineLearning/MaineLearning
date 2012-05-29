@@ -146,7 +146,7 @@ function wpcf_footer_credit_message() {
                 . '<br /><br />'
                 . '<a onclick="jQuery(this).parent().parent().fadeOut();" class="wpcf-ajax-link button-primary" href="'
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=footer_credit_activate_message&amp;_wpnonce='
-                        . wp_create_nonce('footer_credit_activate_message')) . '" class="button-primary">' . __('Yes') . '</a>'
+                        . wp_create_nonce('footer_credit_activate_message')) . '" class="button-primary">' . __('Yes', 'wpcf') . '</a>'
                 . "&nbsp;<a onclick=\"jQuery(this).parent().parent().fadeOut();\" class=\"wpcf-ajax-link button-secondary\" href=\""
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=dismiss_message&amp;id='
                         . 'footer_credit_support_message' . '&amp;_wpnonce=' . wp_create_nonce('dismiss_message')) . "\">"

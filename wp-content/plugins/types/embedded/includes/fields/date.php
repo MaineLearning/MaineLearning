@@ -108,8 +108,8 @@ function wpcf_fields_date_meta_box_js_inline() {
     $date_format = wpcf_get_date_format();
     $date_format = _wpcf_date_convert_wp_to_js($date_format);
 
-    $date_format_note = '<span style="margin-left:10px"><i>' . sprintf(__('Input format: %s',
-                            'wpcf'), wpcf_get_date_format_text()) . '</i></span>';
+    $date_format_note = '<span style="margin-left:10px"><i>' . esc_js(sprintf(__('Input format: %s',
+                            'wpcf'), wpcf_get_date_format_text())) . '</i></span>';
 
     ?>
     <script type="text/javascript">

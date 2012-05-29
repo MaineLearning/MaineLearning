@@ -325,7 +325,7 @@ class GFEntryDetail{
                                             <?php
                                         }
 
-                                        if(strlen($lead["payment_amount"]) > 0){
+                                        if(!rgblank($lead["payment_amount"])){
                                             echo $lead["transaction_type"] == 1 ? __("Payment Amount", "gravityforms") : __("Subscription Amount", "gravityforms"); ?>: <?php echo GFCommon::to_money($lead["payment_amount"], $lead["currency"]) ?>
                                             <br/><br/>
                                             <?php

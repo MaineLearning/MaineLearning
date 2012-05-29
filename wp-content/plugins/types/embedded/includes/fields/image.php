@@ -38,7 +38,7 @@ function wpcf_fields_image_meta_box_js_inline() {
             jQuery('.wpcf-fields-image-upload-link').live('click', function() {
                 wpcf_formfield = '#'+jQuery(this).attr('id')+'-holder';
                 tb_show('<?php
-    _e('Upload image', 'wpcf');
+    echo esc_js(__('Upload image', 'wpcf'));
 
     ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&wpcf-fields-media-insert=1&TB_iframe=true');
                 return false;
@@ -594,27 +594,6 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     return $return == 'relpath' ? $image_relpath : $image_abspath;
 }
 
-function is__writable($path) {
-//will work in despite of Windows ACLs bug
-//NOTE: use a trailing slash for folders!!!
-//see http://bugs.php.net/bug.php?id=27609
-//see http://bugs.php.net/bug.php?id=30931
-
-    if ($path{strlen($path) - 1} == '/') // recursively return a temporary file path
-        return is__writable($path . uniqid(mt_rand()) . '.tmp');
-    else if (is_dir($path))
-        return is__writable($path . '/' . uniqid(mt_rand()) . '.tmp');
-    // check tmp file for read/write capabilities
-    $rm = file_exists($path);
-    $f = @fopen($path, 'a');
-    if ($f === false)
-        return false;
-    fclose($f);
-    if (!$rm)
-        unlink($path);
-    return true;
-}
-
 /**
  * Gets all necessary data for processed image.
  * 
@@ -692,7 +671,8 @@ function wpcf_fields_image_get_data($image) {
             } else {
                 $temp = parse_url(get_bloginfo('url'));
             }
-            $info['dirname'] = $temp['scheme'] . '://' . $temp['host'] . dirname($path['path']);
+            $port = isset($path['port']) ? ':' . $path['port'] : '';
+            $info['dirname'] = $temp['scheme'] . '://' . $temp['host'] . $port . dirname($path['path']);
             $abspath = str_replace(
                     $upload_dir['baseurl'], $upload_dir['basedir'],
                     $info['dirname']

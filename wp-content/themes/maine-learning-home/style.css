@@ -13,6 +13,10 @@
 http://codex.buddypress.org/theme-development/building-a-buddypress-child-theme/
 */
 
+/*
+DO NOT USE BBEDIT TO FORMAT CSS. IT REMOVES THE ALTERNATIVE BG GRADIENTS.
+*/
+
 /* Inherit the default theme styles */
 
 @import url(../../plugins/buddypress/bp-themes/bp-default/_inc/css/default.css);
@@ -47,6 +51,8 @@ body
 	margin: 0 !important;
 	width: 100%;
 }
+
+#header { background: #292929 url(images/mln-banner-home-2012-02-22c.jpg) no-repeat scroll 0 0; }
 
 #header, #container
 {
@@ -239,6 +245,7 @@ ul#nav { max-width: 70%; }
 	text-transform: none;
 }
 
+#nav li li { width: 150px !important; }
 div#content .padder { border-right: 0px solid #fff; }
 
 /* ----------------------
@@ -258,7 +265,7 @@ h2
 h2.pagetitle
 {
 	font-size: 22px;
-	margin-top: 10px;
+	margin: 10px 0 14px 0;
 }
 
 h2.posttitle { font-size: 24px; }
@@ -286,9 +293,9 @@ h4
 	color: #333;
 }
 
-a, a:visited
+a, a:link, a:visited, a:hover, a:active
 {
-	color: #1FB3DD;
+	color: #14748f;
 	/* ML */
 	font-weight: bold;
 	/* ML */
@@ -402,7 +409,7 @@ BUDDYPRESS PANELS: ACTIVITIES
 body.group-home #activity-stream
 {
 	background: url(http://mainelearning.net/wp-content/uploads/2012/05/Activity-header-all-activity-2012-05-14a.png) 8px 0 no-repeat;
-	margin: -5px 0 0 10px;
+	margin: -5px 0 -5 10px;
 	padding-top: 50px;
 }
 
@@ -422,10 +429,14 @@ div#item-header span.activity, div#item-header h2 span.highlight
 .dir-form h3 { font-size: 18px; }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header { font-size: 12px; }
 ul#activity-stream li.activity_update { padding-top: 20px; }
-li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta { display: none; }
+li.new_forum_post div.activity-meta, li.exb div.activity-meta, li.added_group_document div.activity-meta, li.new_forum_post a.bp-primary-action, li.new_forum_topic a.bp-primary-action { display: none; }
 
 .activity-list li.new_forum_post .activity-content .activity-inner, .activity-list li.new_forum_topic .activity-content .activity-inner
 {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 	font-size: 13px;
 	line-height: 21px;
 }
@@ -464,22 +475,30 @@ li.exb blockquote p a
 	margin-bottom: 16px;
 }
 
-a.view-post
+a.view-post, a.view-thread, a.exb-view
 {
-	font-size: 13px;
+background: #EDEDED !important;
+background: -moz-linear-gradient(top, white 0%, #E0E0E0 100%) !important;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #E0E0E0)) !important;
+background: -webkit-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+background: -o-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+	border: 1px solid #BBB;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: #555;
 	float: right;
-	padding: 0 10px 8px 0;
+	font-size: 11px !important;
+	font-weight: normal;
+	margin: 4px 10px 10px 0;
+	outline: none;
+	padding: 2px 8px 2px 8px;
+	text-decoration: none;
 }
 
 #posts-filter { margin: 0px 0px 0px 20px; }
-
-.view-group-discussion-topic
-{
-	float: right;
-	margin-right: 12px;
-	margin-bottom: 8px;
-	font-size: 13px;
-}
 
 span.activity-read-more
 {
@@ -577,6 +596,7 @@ div.item-list-tabs ul li a, div.item-list-tabs ul li span
 
 div.item-list-tabs ul li a span
 {
+	background: #147691;
 	text-shadow: none;
 	/* ML */
 }
@@ -736,7 +756,7 @@ BP PANELS: EVENTS MANAGER
 
 td.eventful ul li a, td.eventful a
 {
-	color: #1FB3DD !important;
+	color: #147691 !important;
 	font-size: 12px;
 	font-style: normal;
 }
@@ -776,8 +796,15 @@ BP PANELS: BP-MODERATION
 BP PANELS: BP GROUP DOCS
 ----------------------- */
 
+#bp-group-documents { margin-top: -5px; }
 #bp-group-documents h3 { padding: 20px 0 0 20px; }
 #bp-group-documents-categories, #bp-group-documents-sorting { margin-top: 20px; }
+
+/* ----------------------
+GRAVITY FORMS
+----------------------- */
+
+.gform_body .instruction { display: none; }
 
 /* ----------------------
 SIDEBAR
@@ -809,7 +836,7 @@ FOOTER
 
 #footer-widgets
 {
-	background: transparent;
+	background: #292929;
 	color: #999;
 	border-bottom: none;
 	border-radius: 0;

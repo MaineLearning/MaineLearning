@@ -108,11 +108,12 @@ class GFFormDetail{
             }
 
             function InsertVariable(element_id, callback, variable){
+                
                 if(!variable)
                     variable = jQuery('#' + element_id + '_variable_select').val();
-
+                
                 var messageElement = jQuery("#" + element_id);
-
+                
                 if(document.selection) {
                     // Go the IE way
                     messageElement[0].focus();
@@ -154,7 +155,7 @@ class GFFormDetail{
                     InsertVariable(element_id, callback);
                     return;
                 }
-
+                
                 variable = matches[1];
                 field_id = matches[2];
 
@@ -1937,7 +1938,7 @@ class GFFormDetail{
                                         <?php GFCommon::insert_calculation_variables($form["fields"], "field_calculation_formula", '', 'FormulaContentCallback'); ?>
                                         <div class="gf_calculation_buttons">
                                             <?php foreach(array('+', '-', '/', '*', '(', ')', '.') as $button) { ?>
-                                                <input type="button" value=" <?php echo $button; ?> " onclick="InsertVariable('field_calculation_formula', 'FormulaContentCallback', this.value);" />
+                                                <input type="button" value="<?php echo in_array($button, array('.')) ? $button : " $button "; ?>" onclick="InsertVariable('field_calculation_formula', 'FormulaContentCallback', this.value);" />
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -1959,7 +1960,7 @@ class GFFormDetail{
                                     </div>
 
                                     <div class="field_calculation_rounding">
-                                        <label for="field_calculation_formula" style="margin-top:10px;">
+                                        <label for="field_calculation_rounding" style="margin-top:10px;">
                                             <?php _e("Rounding", "gravityforms"); ?>
                                             <?php gform_tooltip("form_field_calculation_rounding") ?>
                                         </label>
