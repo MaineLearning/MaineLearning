@@ -20,14 +20,14 @@
  * Example array:
  *		array(
  *			'post_types' => array(
- *				'objects'
+ *				'object'
  *			)
  */
 
 function hhs_load_chosen_tax_metabox() {
 	$args = array(
  			'post_types' => array(
- 				'objects'
+ 				'object'
  			),
  			'taxes' => 'all'
 	);
