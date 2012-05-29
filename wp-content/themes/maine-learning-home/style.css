@@ -477,12 +477,12 @@ li.exb blockquote p a
 
 a.view-post, a.view-thread, a.exb-view
 {
-background: #EDEDED;
-background: -moz-linear-gradient(top, white 0%, #E0E0E0 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #E0E0E0));
-background: -webkit-linear-gradient(top,  white 0%, #E0E0E0 100%);
-background: -o-linear-gradient(top,  white 0%, #E0E0E0 100%);
-background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%);
+background: #EDEDED !important;
+background: -moz-linear-gradient(top, white 0%, #E0E0E0 100%) !important;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #E0E0E0)) !important;
+background: -webkit-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+background: -o-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
 	border: 1px solid #BBB;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
@@ -490,7 +490,7 @@ background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%);
 	border-bottom-right-radius: 3px;
 	color: #555;
 	float: right;
-	font-size: 11px;
+	font-size: 11px !important;
 	font-weight: normal;
 	margin: 4px 10px 10px 0;
 	outline: none;
