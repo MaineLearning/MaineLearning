@@ -140,6 +140,12 @@ The production site is a clone of the Github repo, just like your dev environmen
 
         cd /home/mainelea/public_html/
 
+4. Run
+
+        git status
+
+    to see if there have been any changes to the live server since the last release. If so, do something with them.
+
 4. Pull the latest master branch
 
         git pull origin master
