@@ -25,7 +25,7 @@
 		<?php if( !empty($search_text) || (get_option('dbem_search_form_text') && empty($search_text)) ): ?>
 		<!-- START General Search -->
 		<?php /* This general search will find matches within event_name, event_notes, and the location_name, address, town, state and country. */ ?>
-		<label for="em_search">Search for: </label><input type="text" id="em_search_input" name="em_search" class="em-events-search-text" value="<?php echo $s; ?>" onfocus="if(this.value=='<?php echo $s_default; ?>')this.value=''" onblur="if(this.value=='')this.value='<?php echo $s_default; ?>'" />
+		<label for="em_search_input">Search for: </label><input type="text" id="em_search_input" name="em_search" class="em-events-search-text" value="<?php echo $s; ?>" onfocus="if(this.value=='<?php echo $s_default; ?>')this.value=''" onblur="if(this.value=='')this.value='<?php echo $s_default; ?>'" />
 		<!-- END General Search -->
 		<?php endif; ?>
 		
