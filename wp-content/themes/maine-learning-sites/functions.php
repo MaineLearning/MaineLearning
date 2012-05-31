@@ -40,7 +40,7 @@ function wpmu_body_class( $class ) {
 
 add_filter('genesis_comment_form_args', 'custom_comment_form_args');
 function custom_comment_form_args($args) {
-  $args['title_reply'] = 'Share your knowledge';// $args['title_reply'] = ''; for total removal
+  $args['title_reply'] = 'How have you used this resource?';// $args['title_reply'] = ''; for total removal
   return $args;
 }
 
