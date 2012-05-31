@@ -44,7 +44,7 @@
 		
 		<br /><?php if( !empty($search_categories) || (get_option('dbem_search_form_categories') && empty($search_categories)) ): ?>	
 		<!-- START Category Search -->
-		<label for="category">Category: </label><select name="category" id="em-events-search-category_select" class="em-events-search-category">
+		<label for="em-events-search-category_select">Category: </label><select name="category" id="em-events-search-category_select" class="em-events-search-category">
 			<option value=''><?php echo get_option('dbem_search_form_categories_label') ?></option>
 			<?php foreach(EM_Categories::get(array('orderby'=>'category_name')) as $EM_Category): ?>
 			 <option value="<?php echo $EM_Category->id; ?>" <?php echo (!empty($_REQUEST['category']) && $_REQUEST['category'] == $EM_Category->id) ? 'selected="selected"':''; ?>><?php echo $EM_Category->name; ?></option>
@@ -55,7 +55,7 @@
 		
 		<?php if( !empty($search_countries) || (get_option('dbem_search_form_countries') && empty($search_countries)) ): ?>
 		<!-- START Country Search -->
-		<label for="country">Country: </label><select name="country" class="em-events-search-country" id="em-events-search-country_option">
+		<label for="em-events-search-country_option">Country: </label><select name="country" class="em-events-search-country" id="em-events-search-country_option">
 			<option value=''><?php echo get_option('dbem_search_form_countries_label'); ?></option>
 			<?php 
 			//get the counties from locations table
@@ -72,7 +72,7 @@
 		
 		<?php if( !empty($search_regions) || (get_option('dbem_search_form_regions') && empty($search_regions)) ): ?>
 		<!-- START Region Search -->
-		<label for="region">Region: </label><select name="region" class="em-events-search-region" id="em-events-search-region_option">
+		<label for="em-events-search-region_option">Region: </label><select name="region" class="em-events-search-region" id="em-events-search-region_option">
 			<option value=''><?php echo get_option('dbem_search_form_regions_label'); ?></option>
 			<?php 
 			if( !empty($country) ){
@@ -92,7 +92,7 @@
 		
 		<?php if( !empty($search_states) || (get_option('dbem_search_form_states') && empty($search_states)) ): ?>
 		<!-- START State/County Search -->
-		<label for="state">State: </label><select name="state" class="em-events-search-state" id="em-events-search-state">
+		<label for="em-events-search-state">State: </label><select name="state" class="em-events-search-state" id="em-events-search-state">
 			<option value=''><?php echo get_option('dbem_search_form_states_label'); ?></option>
 			<?php 
 			if( !empty($country) ){
