@@ -21,7 +21,7 @@ add_filter( 'bp_ass_activity_notification_action', 'mainelearning_external_blog_
  */
 function mainelearning_external_blog_notification_content( $content, $activity ) {
 	if ( 'exb' != $activity->type ) {
-		return $action;
+		return $content;
 	}
 
 	$content = str_replace( 'View external post', '', $content );
