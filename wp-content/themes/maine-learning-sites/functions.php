@@ -36,12 +36,13 @@ function wpmu_body_class( $class ) {
 }
 
 /** MLN: Change comments invite copy */
-/** http://wpsmith.net/2011/genesis/how-to-customize-the-genesis-comment-form/ */
+/** http://www.studiopress.com/tutorials/comments 
+*/
 
-add_filter('genesis_comment_form_args', 'custom_comment_form_args');
-function custom_comment_form_args($args) {
-  $args['title_reply'] = 'How have you used this resource?';// $args['title_reply'] = ''; for total removal
-  return $args;
+/** Modify the comment link text */
+add_filter( 'genesis_post_meta', 'post_meta_filter' );
+function post_meta_filter( $post_meta ) {
+    return '[post_comments zero="Share your recommendation" one="1 Comment" more="% Comments"]';
 }
 
 /** MLN: Add home featured widgitized area */
@@ -51,6 +52,29 @@ genesis_register_sidebar( array(
 'name'		=> __( 'Home Featured Area' ),
 'description'	=> __( 'This is the Home Featured Area.' ),
 ) );
+
+
+/**
+ * Customize text inside of search box
+ *
+ * @author Rick R. Duncan
+ * @link http://www.buildbrandbelieve.com
+ */
+add_filter('genesis_search_text', 'b3_custom_search_text');
+function b3_custom_search_text($text) {
+    return esc_attr('Search all text');
+}
+
+/**
+ * Customize search button text
+ *
+ * @author Rick R. Duncan
+ * @link http://www.buildbrandbelieve.com
+ */
+add_filter('genesis_search_button_text', 'b3_custom_search_button_text');
+function b3_custom_search_button_text($text) {
+    return esc_attr('Go');
+}
 
 
 /* Includes externally-stored functions */
