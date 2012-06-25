@@ -179,6 +179,7 @@ function gf_do_field_action(formId, action, fieldId, isInit, callback){
 
         //calling callback function on the last dependent field, to make sure it is only called once
         do_callback = (i+1) == dependent_fields.length ? callback : null;
+
         gf_do_action(action, targetId, conditional_logic["animation"], conditional_logic["defaults"][dependent_fields[i]], isInit, do_callback);
     }
 }
@@ -191,25 +192,35 @@ function gf_do_next_button_action(formId, action, fieldId, isInit){
 }
 
 function gf_do_action(action, targetId, useAnimation, defaultValues, isInit, callback){
+
     if(action == "show"){
         if(useAnimation && !isInit){
-            jQuery(targetId).slideDown(callback);
+            if(jQuery(targetId).length > 0)
+                jQuery(targetId).slideDown(callback);
+            else if(callback)
+                callback();
+
         }
         else{
             jQuery(targetId).show();
-            if(callback)
+            if(callback){
                 callback();
+            }
         }
     }
     else{
-        //if field is not already hidde, reset its values to the default
+        //if field is not already hidden, reset its values to the default
         var child = jQuery(targetId).children().first();
+
         if(!gformIsHidden(child)){
             gf_reset_to_default(targetId, defaultValues);
         }
 
         if(useAnimation && !isInit){
-            jQuery(targetId).slideUp(callback);
+            if(jQuery(targetId).length > 0)
+                jQuery(targetId).slideUp(callback);
+            else if(callback)
+                callback();
         }
         else{
             jQuery(targetId).hide();
@@ -224,10 +235,24 @@ function gf_reset_to_default(targetId, defaultValue){
     //cascading down conditional logic to children to suppport nested conditions
     //text fields and drop downs
     var target = jQuery(targetId).find('select, input[type="text"], input[type="number"], textarea');
-    if(target){
-        var val = defaultValue ? defaultValue : "";
-        target.val(val).trigger('change');
-    }
+
+    var target_index = 0;
+
+    target.each(function(){
+        var val = "";
+        if(jQuery.isArray(defaultValue)){
+            val = defaultValue[target_index];
+        }
+        else if(jQuery.isPlainObject(defaultValue)){
+            val = defaultValue[jQuery(this).attr("name")];
+        }
+        else if(defaultValue){
+            val = defaultValue;
+        }
+
+        jQuery(this).val(val).trigger('change');
+        target_index++;
+    });
 
     //checkboxes and radio buttons
     var elements = jQuery(targetId).find('input[type="radio"], input[type="checkbox"]');
@@ -238,7 +263,7 @@ function gf_reset_to_default(targetId, defaultValue){
         var isChecked = jQuery(this).is(':checked') ? true : false;
 
         //does input need to be marked as checked or unchecked?
-        var doCheck = jQuery.inArray(jQuery(this).attr('id'), defaultValue) > -1;
+        var doCheck = defaultValue ? jQuery.inArray(jQuery(this).attr('id'), defaultValue) > -1 : false;
 
         //if value changed, trigger click event
         if(isChecked != doCheck){

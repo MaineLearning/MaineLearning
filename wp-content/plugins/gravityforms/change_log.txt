@@ -1,6 +1,52 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.3.1
+Version 1.6.4.5.4
+    - Replaced }) with } ) to alleviate conflict with some themes that replace }) with ]
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.5.3
+    - Added space between multiselect values on entry list view
+    - Fixed issue on confirmation page causing malformed markup and preventing progress bar from being displayed properly
+    - Added swedish translation
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.5.2
+    - Fixed issue where submissions (entries) could be created on forms that did not exist or that were inactive.
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.5.1
+    - Fixed issue with number field calculation not rounding correctly when entry is saved
+    - Added gform_shortcode_$action filter to allow Add-Ons to implement shortcode actions
+        add_filter("gform_shortcode_custom", "custom_action", 10, 3);
+        function custom_action($string, $attributes, $content){
+            $string = "custom shortcode action";
+
+            return $string;
+        }
+    - Fixed issue with total not being calculated on forms with animation and next button conditional logic
+    - Fixed issue with conditional logic value reset with pre-populated fields
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.5
+    - Fixed issue with conditional logic on jQuery 1.6.1 under certain circumstances
+    - Fixed issue where required quantity on single, hidden and cacluation products did not accept "0"
+    - Added logging infrastructure and a few log messages around multi-page file upload
+    - Fixed issue where inputs did not have calc events bound to change event
+    - Fixed issue where required quantity on single, hidden and cacluation products did not accept "0"
+    - Fixed issue with input mask not properly clearing value when form was submitted via the Enter key.
+    - Fixed issue with gform_product_info being added to meta even on non-product forms
+    - Fixed issue with default post category not being properly set
+    - Updated "GFCommon::is_post_field()" to be a public method (for use in User Registration Add-on)
+    - Fixed issue with number field failing validation when field was configured with commas for decimal separators
+    - Fixed issue with calculation not supporting the field number format setting
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.4.4
+    - Fixed issue with get_product_fields() function caching product fields for pre-submission entries (ones without an ID)
+    - Fixed issue with credit card field not updating card type as the card number is entered
+    - Fixed issue with init scripts being executed more than once
+    - Fixed issue with gf_global not being output on certain situations
     - Fixed issue with post not being associated with entries
+    - Fixed some notice messages
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.6.4.3
