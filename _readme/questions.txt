@@ -2,6 +2,9 @@
 ACTIVE
 --------------------------------------------------
 
+How would I add an "Activated" column to the back-end users list?
+
+
 With e-mail messages from External Blogs, through the Activity Stream, and then through WP Better E-mails, the group address is incorrect.
 
 To view or reply, log in and go to:
