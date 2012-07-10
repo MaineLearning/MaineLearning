@@ -10,6 +10,7 @@ With e-mail messages from External Blogs, through the Activity Stream, and then 
 To view or reply, log in and go to:
 http://mainelearning.net/groups//
 
+When I enter multiple field items in the submission form, they don't pass into the database. 
 
 Why is the backend left column dropped? I think I made change for the front end BuddyBar, but need assistance problem solving on this one.
 
