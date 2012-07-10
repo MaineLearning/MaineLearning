@@ -549,6 +549,72 @@ a.ws_button:hover {
 }
 
 /************************************
+        Tooltips and hints
+*************************************/
+
+.ws_tooltip_trigger {
+	cursor: pointer;
+}
+
+.ws_tooltip_content_list {
+	list-style: disc;
+	margin-left: 1em;
+}
+
+.ws_hint {
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+
+	margin-bottom: 0.5em;
+	border-radius: 3px;
+	position: relative;
+	padding-right: 20px;
+}
+
+.ws_hint_close {
+	border: 1px solid #E6DB55;
+	border-right: none;
+	border-top: none;
+	color: #dcc500;
+	font-weight: bold;
+	cursor: pointer;
+
+	width: 18px;
+	text-align: center;
+	border-radius: 3px;
+
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.ws_hint_close:hover {
+	background-color: #ffef4c;
+	border-color: #e0b900;
+	color: black;
+}
+
+.ws_hint_content {
+	padding: 0.4em 0 0.4em 0.4em;
+}
+
+.ws_hint_content ul {
+	list-style: disc;
+	list-style-position: inside;
+	margin-left: 0.5em;
+}
+
+#ws_sidebar_pro_ad {
+	margin-top: 5px;
+	margin-left: 3px;
+
+	position: fixed;
+	right: 20px;
+	bottom: 40px;
+	z-index: 100;
+}
+
+/************************************
         Screen meta buttons
 *************************************/
 
