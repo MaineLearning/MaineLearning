@@ -3,15 +3,15 @@
 Plugin Name: Category Order and Taxonomy Terms Order
 Plugin URI: http://www.nsp-code.com
 Description: Category Order and Taxonomy Terms Order
-Version: 1.2.7
+Version: 1.2.9
 Author: Nsp-Code
 Author URI: http://www.nsp-code.com
 Author Email: electronice_delphi@yahoo.com
 */
 
 
-define('TOPATH',    WP_PLUGIN_DIR .'/taxonomy-terms-order');
-define('TOURL',     WP_PLUGIN_URL .'/taxonomy-terms-order');
+define('TOPATH',    plugin_dir_path(__FILE__));
+define('TOURL',     plugins_url('', __FILE__));
 
 load_plugin_textdomain('to', FALSE, TOPATH. "/lang/");
 
@@ -117,7 +117,7 @@ function TOPluginMenu()
 add_action( 'wp_ajax_update-custom-type-order-hierarchical', array(&$this, 'saveAjaxOrderHierarchical') );
     
 
-function mycategoryorder_applyorderfilter($orderby, $args)
+function TO_applyorderfilter($orderby, $args)
     {
 	    $options = get_option('tto_options');
         
@@ -139,7 +139,7 @@ function mycategoryorder_applyorderfilter($orderby, $args)
         return $orderby; 
     }
 
-add_filter('get_terms_orderby', 'mycategoryorder_applyorderfilter', 10, 2);
+add_filter('get_terms_orderby', 'TO_applyorderfilter', 10, 2);
 
 add_filter('get_terms_orderby', 'TO_get_terms_orderby', 1, 2);
 function TO_get_terms_orderby($orderby, $args)
@@ -172,12 +172,6 @@ function TOsaveAjaxOrder()
                 if (is_array($items) && count($items) > 0)
                 foreach( $items as $item_key => $term_id ) 
                     {
-                        /*
-                        $args = array(
-                                        'parent'    =>  $key_parent
-                                        );
-                        wp_update_term( $term_id, $taxonomy, $args ); 
-                        */
                         $wpdb->update( $wpdb->terms, array('term_order' => ($item_key + 1)), array('term_id' => $term_id) );
                     } 
             }
