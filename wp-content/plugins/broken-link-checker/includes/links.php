@@ -40,6 +40,8 @@ class blcLink {
 	
 	var $false_positive = false;
 	var $result_hash = '';
+
+	var $dismissed = false;
 	
 	var $status_text = '';
 	var $status_code = '';
@@ -104,7 +106,7 @@ class blcLink {
 	);
 	
 	function __construct($arg = null){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb  */
 		
 		$this->field_format = array(
 			'url' => '%s',
@@ -126,6 +128,7 @@ class blcLink {
 			'being_checked' => 'bool',
 		 	'status_text' => '%s',
 		 	'status_code' => '%s',
+			'dismissed' => 'bool',
 		);
 		
 		if (is_numeric($arg)){
@@ -306,9 +309,14 @@ class blcLink {
    * @access private
    *
    * @param bool $broken
+   * @param string $new_result_hash
    * @return void
    */
-	function status_changed($broken, $new_result_hash = ''){
+	private function status_changed($broken, $new_result_hash = ''){
+		//If a link's status changes, un-dismiss it.
+		if ( $this->result_hash != $new_result_hash ) {
+			$this->dismissed = false;
+		}
 		
 		if ( $this->false_positive && !empty($new_result_hash) ){
 			//If the link has been marked as a (probable) false positive, 
@@ -359,7 +367,7 @@ class blcLink {
    * @return bool True if saved successfully, false otherwise.
    */
 	function save(){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 
 		if ( !$this->valid() ) return false;
 		
@@ -431,7 +439,6 @@ class blcLink {
 			//FB::log($q, 'Link update query');
 			
 			$rez = $wpdb->query($q) !== false;
-			
 			if ( $rez ){
 				//FB::log($this->link_id, "Link updated");
 			} else {
