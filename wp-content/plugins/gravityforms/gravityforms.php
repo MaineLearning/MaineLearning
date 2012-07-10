@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.4.3.1
+Version: 1.6.4.5.4
 Author: Rocketgenius Inc.
 Author URI: http://www.rocketgenius.com
 
@@ -101,8 +101,9 @@ class RGForms{
 
         load_plugin_textdomain( 'gravityforms', false, '/gravityforms/languages' );
 
-        if(IS_ADMIN){
+        add_filter("gform_logging_supported", array("RGForms", "set_logging_supported"));
 
+        if(IS_ADMIN){
 
             global $current_user;
 
@@ -198,12 +199,23 @@ class RGForms{
         add_shortcode('gravityforms', array('RGForms', 'parse_shortcode'));
     }
 
+    public static function set_logging_supported($plugins)
+    {
+        $plugins["gravityforms"] = "Gravity Forms Core";
+        return $plugins;
+    }
+
     public static function maybe_process_form(){
 
         $form_id = isset($_POST["gform_submit"]) ? $_POST["gform_submit"] : 0;
         if($form_id){
-            require_once(GFCommon::get_base_path() . "/form_display.php");
-            GFFormDisplay::process_form($form_id);
+            $form_info = RGFormsModel::get_form($form_id);
+            $is_valid_form = $form_info && $form_info->is_active;
+
+            if($is_valid_form){
+                require_once(GFCommon::get_base_path() . "/form_display.php");
+                GFFormDisplay::process_form($form_id);
+            }
         }
     }
 
@@ -719,7 +731,6 @@ class RGForms{
         return false;
     }
 
-
     //Returns true if the current page is one of Gravity Forms pages. Returns false if not
     public static function is_gravity_page(){
 
@@ -832,34 +843,40 @@ class RGForms{
              'field_values' => "",
              'ajax' => false,
              'tabindex' => 1,
-             'action' => false
+             'action' => 'form'
           ), $attributes));
 
-        if($action) {
+        $shortcode_string = "";
 
-            switch($action) {
+        switch($action) {
             case 'conditional':
-                return GFCommon::conditional_shortcode($attributes, $content);
-                break;
-            }
+                $shortcode_string = GFCommon::conditional_shortcode($attributes, $content);
+            break;
 
+            case 'form' :
+                //displaying form
+                $title = strtolower($title) == "false" ? false : true;
+                $description = strtolower($description) == "false" ? false : true;
+                $field_values = htmlspecialchars_decode($field_values);
+                $field_values = str_replace("&#038;", "&", $field_values);
+
+                $ajax = strtolower($ajax) == "true" ? true : false;
+
+                //using name to lookup form if id is not specified
+                if(empty($id))
+                    $id = $name;
+
+                parse_str($field_values, $field_value_array); //parsing query string like string for field values and placing them into an associative array
+                $field_value_array = stripslashes_deep($field_value_array);
+
+                $shortcode_string = self::get_form($id, $title, $description, false, $field_value_array, $ajax, $tabindex);
+
+            break;
         }
 
-        $title = strtolower($title) == "false" ? false : true;
-        $description = strtolower($description) == "false" ? false : true;
-        $field_values = htmlspecialchars_decode($field_values);
-        $field_values = str_replace("&#038;", "&", $field_values);
+        $shortcode_string = apply_filters("gform_shortcode_{$action}", $shortcode_string, $attributes, $content);
 
-        $ajax = strtolower($ajax) == "true" ? true : false;
-
-        //using name to lookup form if id is not specified
-        if(empty($id))
-            $id = $name;
-
-        parse_str($field_values, $field_value_array); //parsing query string like string for field values and placing them into an associative array
-        $field_value_array = stripslashes_deep($field_value_array);
-
-        return self::get_form($id, $title, $description, false, $field_value_array, $ajax, $tabindex);
+        return $shortcode_string;
     }
 
     //-------------------------------------------------

@@ -56,5 +56,8 @@ if(!GFCommon::current_user_can_any(array("gravityforms_edit_forms", "gravityform
 
         ?>
         </div>
+        <?php
+        do_action("gform_preview_footer");
+        ?>
     </body>
 </html>
