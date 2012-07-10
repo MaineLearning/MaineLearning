@@ -27,6 +27,10 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
     
     private $templates = null; //Template arrays for various menu structures. See the constructor for details.
 
+	//Our personal copy of the request vars, without any "magic quotes".
+	private $post = array();
+	private $get = array();
+
 	function init(){
 		//Determine if the plugin is active network-wide (i.e. either installed in 
 		//the /mu-plugins/ directory or activated "network wide" by the super admin.
@@ -41,7 +45,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$this->defaults = array(
 			'hide_advanced_settings' => true,
 			'menu_format_version' => 0,
-			'display_survey_notice' => true,
+			'display_survey_notice' => false,
 		);
 		$this->serialize_with_json = false; //(Don't) store the options in JSON format
 
@@ -94,7 +98,17 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		 );
 
 		//AJAXify screen options
-		add_action( 'wp_ajax_ws_ame_save_screen_options', array(&$this,'ajax_save_screen_options') );		 
+		add_action( 'wp_ajax_ws_ame_save_screen_options', array(&$this,'ajax_save_screen_options') );
+
+		//AJAXify hints
+		add_action('wp_ajax_ws_ame_hide_hint', array($this, 'ajax_hide_hint'));
+
+		//Make sure we have access to the original, un-mangled request data.
+		//This is necessary because WordPress will stupidly apply "magic quotes"
+		//to the request vars even if this PHP misfeature is disabled.
+		add_action('plugins_loaded', array($this, 'capture_request_vars'));
+
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_menu_fix_script'));
 	}
 	
   /**
@@ -148,6 +162,16 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			array('jquery', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-form'), 
 			'1.1'
 		);
+
+		//The editor will need access to some of the plugin data and WP data.
+		wp_localize_script(
+			'menu-editor',
+			'wsEditorData',
+			array(
+				'adminAjaxUrl' => admin_url('admin-ajax.php'),
+				'showHints' => $this->get_hint_visibility(),
+			)
+		);
 	}
 	
   /**
@@ -156,7 +180,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
    * @return void
    */
 	function enqueue_styles(){
-		wp_enqueue_style('menu-editor-style', $this->plugin_dir_url . '/css/menu-editor.css', array(), '1.1');
+		wp_enqueue_style('menu-editor-style', $this->plugin_dir_url . '/css/menu-editor.css', array(), '20120626');
 	}
 
   /**
@@ -168,7 +192,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		global $menu, $submenu;
 		
 		//Menu reset (for emergencies). Executed by accessing http://example.com/wp-admin/?reset_admin_menu=1 
-		$reset_requested = isset($_GET['reset_admin_menu']) && $_GET['reset_admin_menu'];
+		$reset_requested = isset($this->get['reset_admin_menu']) && $this->get['reset_admin_menu'];
 		if ( $reset_requested && $this->current_user_can_edit_menu() ){
 			$this->options['custom_menu'] = null;
 			$this->save_options();
@@ -446,7 +470,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
    */
 	function menu_merge($tree, $menu, $submenu){
 		list($menu_defaults, $submenu_defaults) = $this->build_lookups($menu, $submenu);
-		
+
 		//Iterate over all menus and submenus and look up default values
 		foreach ($tree as &$topmenu){
 			$topfile = $this->get_menu_field($topmenu, 'file');
@@ -470,7 +494,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 				}
 			}
 
-			if (is_array($topmenu['items'])) {
+			if (isset($topmenu['items']) && is_array($topmenu['items'])) {
 				//Iterate over submenu items
 				foreach ($topmenu['items'] as $file => &$item){
 					$uid = $this->unique_submenu_id($item, $topfile);
@@ -588,10 +612,10 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			//Attach submenu items
 			$parent = $tree_item['defaults']['file'];
 			if ( isset($submenu[$parent]) ){
-				foreach($submenu[$parent] as $pos => $subitem){
+				foreach($submenu[$parent] as $subitem_pos => $subitem){
 					$tree_item['items'][$subitem[2]] = array_merge(
 						$this->templates['blank_item'],
-						array('defaults' => $this->submenu2assoc($subitem, $pos, $parent))
+						array('defaults' => $this->submenu2assoc($subitem, $subitem_pos, $parent))
 					);
 				}				
 			}
@@ -865,25 +889,17 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			die("Access denied");
 		}
 		
-		$post = $_POST;
-		$get = $_GET;
-		if ( function_exists('wp_magic_quotes') ){
-			//Ceterum censeo, WP shouldn't mangle superglobals.
-			$post = stripslashes_deep($post); 
-			$get = stripslashes_deep($get);
-		}
-		
-		$action = isset($post['action'])?$post['action']:(isset($get['action'])?$get['action']:'');
+		$action = isset($this->post['action']) ? $this->post['action'] : (isset($this->get['action']) ? $this->get['action'] : '');
 		do_action('admin_menu_editor_header', $action);
 		
 		//Handle form submissions
-		if (isset($post['data'])){
+		if (isset($this->post['data'])){
 			check_admin_referer('menu-editor-form');
 
 			//Try to decode a menu tree encoded as JSON
-			$data = $this->json_decode($post['data'], true);
+			$data = $this->json_decode($this->post['data'], true);
 			if (!$data || (count($data) < 2) ){
-				$fixed = stripslashes($post['data']);
+				$fixed = stripslashes($this->post['data']);
 				$data = $this->json_decode( $fixed, true );
 			}
 
@@ -916,7 +932,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		}
 		
 		//Handle the survey notice
-		if ( isset($_GET['hide_survey_notice']) && !empty($_GET['hide_survey_notice']) ) {
+		if ( isset($this->get['hide_survey_notice']) && !empty($this->get['hide_survey_notice']) ) {
 			$this->options['display_survey_notice'] = false;
 			$this->save_options();
 		}
@@ -942,10 +958,10 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 <?php
 	
-	if ( !empty($_GET['message']) ){
-		if ( intval($_GET['message']) == 1 ){
+	if ( !empty($this->get['message']) ){
+		if ( intval($this->get['message']) == 1 ){
 			echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
-		} elseif ( intval($_GET['message']) == 2 ) {
+		} elseif ( intval($this->get['message']) == 2 ) {
 			echo '<div id="message" class="error"><p><strong>Failed to decode input! The menu wasn\'t modified.</strong></p></div>';
 		}
 	}
@@ -1054,6 +1070,30 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		do_action('admin_menu_editor_sidebar');
 	?>
 </div>
+
+	<?php
+	$show_hints = $this->get_hint_visibility();
+	$hint_id = 'ws_sidebar_pro_ad';
+	$show_pro_benefits = !apply_filters('admin_menu_editor_is_pro', false) && (!isset($show_hints[$hint_id]) || $show_hints[$hint_id]);
+	if ( $show_pro_benefits ):
+	?>
+		<div class="clear"></div>
+
+		<div class="ws_hint" id="<?php echo esc_attr($hint_id); ?>">
+			<div class="ws_hint_close" title="Close">x</div>
+			<div class="ws_hint_content">
+				<strong>Upgrade to Pro:</strong>
+				<ul>
+					<li>Menu export & import.</li>
+					<li>Per-role menu permissions.</li>
+					<li>Drag items between menu levels.</li>
+				</ul>
+				<a href="http://w-shadow.com/admin-menu-editor-pro/upgrade-to-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=sidebar_link&utm_campaign=Plugins" target="_blank">Learn more</a>
+			</div>
+		</div>
+	<?php
+	endif;
+	?>
 
 </div>
 
@@ -1262,9 +1302,56 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 			 )));
 		}
 		
-		$this->options['hide_advanced_settings'] = !empty($_POST['hide_advanced_settings']);
+		$this->options['hide_advanced_settings'] = !empty($this->post['hide_advanced_settings']);
 		$this->save_options();
 		die('1');
+	}
+
+	public function ajax_hide_hint() {
+		if ( !isset($this->post['hint']) || !$this->current_user_can_edit_menu() ){
+			die("You're not allowed to do that!");
+		}
+
+		$show_hints = $this->get_hint_visibility();
+		$show_hints[strval($this->post['hint'])] = false;
+		$this->set_hint_visibility($show_hints);
+
+		die("OK");
+	}
+
+	private function get_hint_visibility() {
+		$user = wp_get_current_user();
+		$show_hints = get_user_meta($user->ID, 'ame_show_hints', true);
+		if ( !is_array($show_hints) ) {
+			$show_hints = array();
+		}
+
+        $defaults = array(
+            'ws_sidebar_pro_ad' => true,
+            //'ws_whats_new_120' => true, //Set upon activation, default not needed.
+            'ws_hint_menu_permissions' => true,
+        );
+
+		return array_merge($defaults, $show_hints);
+	}
+
+	private function set_hint_visibility($show_hints) {
+		$user = wp_get_current_user();
+		update_user_meta($user->ID, 'ame_show_hints', $show_hints);
+	}
+
+	/**
+	 * Enqueue a script that fixes a bug where pages moved to a different menu
+	 * would not be highlighted properly when the user visits them.
+	 */
+	public function enqueue_menu_fix_script() {
+		wp_enqueue_script(
+			'ame-menu-fix',
+			$this->plugin_dir_url . '/js/menu-highlight-fix.js',
+			array('jquery'),
+			'20120519',
+			true
+		);
 	}
 	
 	/**
@@ -1275,7 +1362,23 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 	function noop(){
 		//nihil
 	}
-	
+
+	/**
+	 * Capture $_GET and $_POST in $this->get and $this->post.
+	 * Slashes added by "magic quotes" will be stripped.
+	 *
+	 * @return void
+	 */
+	function capture_request_vars(){
+		$this->post = $_POST;
+		$this->get = $_GET;
+
+		if ( function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ) {
+			$this->post = stripslashes_deep($this->post);
+			$this->get = stripslashes_deep($this->get);
+		}
+	}
+
 } //class
 
 endif;
