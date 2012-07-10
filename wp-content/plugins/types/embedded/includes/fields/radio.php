@@ -145,7 +145,7 @@ function wpcf_fields_radio_editor_submit() {
         } else {
             $shortcode = wpcf_fields_get_shortcode($field, $add);
         }
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }

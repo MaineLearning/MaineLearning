@@ -344,7 +344,7 @@ function wpcf_fields_image_editor_submit() {
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);
         wpcf_admin_fields_save_field_last_settings($_GET['field_id'], $_POST);
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }
@@ -552,8 +552,8 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
         $suffix .= '_wpcf_' . $dst_w . 'x' . $dst_h;
     }
 
-    $image_data['extension'] = in_array($image_data['extension'],
-                    array('gif', 'png')) ? $image_data['extension'] : 'jpg';
+    $image_data['extension'] = in_array(strtolower($image_data['extension']),
+                    array('gif', 'png', 'jpeg')) ? $image_data['extension'] : 'jpg';
 
     $image_relpath = $image_data['relpath'] . '/' . $image_data['image_name'] . '-'
             . $suffix . '.' . $image_data['extension'];
@@ -618,7 +618,7 @@ function wpcf_fields_image_get_data($image) {
     }
     // Extension check
     $extension = pathinfo($image, PATHINFO_EXTENSION);
-    if (!in_array($extension, array('jpg', 'jpeg', 'gif', 'png'))) {
+    if (!in_array(strtolower($extension), array('jpg', 'jpeg', 'gif', 'png'))) {
         return array('error' => sprintf(__('Image %s not valid', 'wpcf'), $image));
     }
 

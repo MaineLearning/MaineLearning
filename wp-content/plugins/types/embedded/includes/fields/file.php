@@ -43,26 +43,32 @@ function wpcf_fields_file_meta_box_form($field, $element, $image = false) {
 
     // Set preview
     $preview = '';
-    if (!empty($attachment_id)) {
-        $preview = wp_get_attachment_image($attachment_id, 'thumbnail');
-    } else {
-        // If external image set preview
-        $file = pathinfo($field['value']);
-        if (isset($file['extension'])
-                && in_array($file['extension'],
-                        array('jpg', 'jpeg', 'gif', 'png'))) {
-            $preview = '<img alt="" src="' . $field['value'] . '" />';
+    if (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy') {
+        if (!empty($attachment_id)) {
+            $preview = wp_get_attachment_image($attachment_id, 'thumbnail');
+        } else {
+            // If external image set preview
+            $file = pathinfo($field['value']);
+            if (isset($file['extension'])
+                    && in_array($file['extension'],
+                            array('jpg', 'jpeg', 'gif', 'png'))) {
+                $preview = '<img alt="" src="' . $field['value'] . '" />';
+            }
         }
     }
 
     // Set button
-    if (!empty($field['#attributes']['readonly']) || !empty($field['#attributes']['disabled'])) {
-        $button = '';
+    if (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy') {
+        if (!empty($field['#attributes']['readonly']) || !empty($field['#attributes']['disabled'])) {
+            $button = '';
+        } else {
+            $button = '<a href="javascript:void(0);"'
+                    . ' class="wpcf-fields-' . $type . '-upload-link button-secondary"'
+                    . ' id="' . $element_id . '-upload">'
+                    . $button_text . '</a>';
+        }
     } else {
-        $button = '<a href="javascript:void(0);"'
-                . ' class="wpcf-fields-' . $type . '-upload-link button-secondary"'
-                . ' id="' . $element_id . '-upload">'
-                . $button_text . '</a>';
+        $button = '';
     }
 
     // Set form
@@ -297,7 +303,7 @@ function wpcf_fields_file_editor_submit() {
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);
         wpcf_admin_fields_save_field_last_settings($_GET['field_id'], $_POST);
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }

@@ -63,7 +63,7 @@ function types_render_field($field_id, $params, $content = null, $code = '') {
         }
         global $wplogger;
         $wplogger->log('types_render_field call for missing field \''
-                . $field_id. '\'', WPLOG_DEBUG);
+                . $field_id . '\'', WPLOG_DEBUG);
         return '';
     }
 
@@ -71,6 +71,10 @@ function types_render_field($field_id, $params, $content = null, $code = '') {
     if (wpcf_admin_is_repetitive($field)) {
         $meta = get_post_meta($post->ID,
                 wpcf_types_get_meta_prefix($field) . $field['slug'], false);
+        // Sometimes if meta is empty - array(0 => '') is returned
+        if ((count($meta) == 1 && strval($meta[0]) == '')) {
+            return '';
+        }
         if (!empty($meta)) {
             $output = '';
 

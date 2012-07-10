@@ -40,14 +40,16 @@ function wpcf_embedded_after_setup_theme_hook() {
  */
 function wpcf_embedded_init() {
     $locale = get_locale();
-    load_textdomain('wpcf', WPCF_EMBEDDED_ABSPATH . '/locale/types-' . $locale . '.mo');
+    load_textdomain('wpcf',
+            WPCF_EMBEDDED_ABSPATH . '/locale/types-' . $locale . '.mo');
     if (!defined('WPV_VERSION')) {
-        load_textdomain('wpv-views', WPCF_EMBEDDED_ABSPATH . '/locale/locale-views/views-' . $locale . '.mo');
+        load_textdomain('wpv-views',
+                WPCF_EMBEDDED_ABSPATH . '/locale/locale-views/views-' . $locale . '.mo');
     }
 
     // Define necessary constants if plugin is not present
     if (!defined('WPCF_VERSION')) {
-        define('WPCF_VERSION', '1.0.1');
+        define('WPCF_VERSION', '1.0.2');
         define('WPCF_META_PREFIX', 'wpcf-');
         define('WPCF_EMBEDDED_RELPATH', icl_get_file_relpath(__FILE__));
     } else {
@@ -107,9 +109,11 @@ function wpcf_translate($name, $string, $context = 'plugin Types') {
  * @param type $name
  * @param type $value 
  */
-function wpcf_translate_register_string($context, $name, $value, $allow_empty_value = false) {
+function wpcf_translate_register_string($context, $name, $value,
+        $allow_empty_value = false) {
     if (function_exists('icl_register_string')) {
-        icl_register_string($context, $name, stripslashes($value), $allow_empty_value);
+        icl_register_string($context, $name, stripslashes($value),
+                $allow_empty_value);
     }
 }
 
@@ -141,7 +145,7 @@ function wpcf_embedded_check_import() {
         }
         if ($timestamp > get_option('wpcf-types-embedded-import', 0)) {
             if (!$auto_import) {
-                wp_enqueue_script('wpcf-fields-edit',
+                wp_enqueue_script('wpcf-js',
                         WPCF_EMBEDDED_RES_RELPATH . '/js/basic.js',
                         array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
                         WPCF_VERSION);
@@ -370,15 +374,22 @@ function wpcf_pr_post_get_has($post_id, $post_type_q = null) {
 function types_child_posts($post_type, $args = array()) {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields-post.php';
-    global $post;
+    global $post, $wp_post_types;
+    // WP allows querying inactive post types
+    if (!isset($wp_post_types[$post_type])
+            || !$wp_post_types[$post_type]->publicly_queryable) {
+        return array();
+    }
     $defaults = array(
         'post_type' => $post_type,
         'numberposts' => -1,
         'post_status' => null,
         'meta_key' => '_wpcf_belongs_' . $post->post_type . '_id',
         'meta_value' => $post->ID,
+        'suppress_filters' => false,
     );
     $args = wp_parse_args($args, $defaults);
+    $args = apply_filters('types_child_posts_args', $args);
     $child_posts = get_posts($args);
     foreach ($child_posts as $child_post_key => $child_post) {
         $child_posts[$child_post_key]->fields = array();
@@ -388,7 +399,8 @@ function types_child_posts($post_type, $args = array()) {
                 // Process fields
                 foreach ($group['fields'] as $k => $field) {
                     $child_posts[$child_post_key]->fields[$k] = get_post_meta($child_post->ID,
-                            wpcf_types_get_meta_prefix($field) . $field['slug'], true);
+                            wpcf_types_get_meta_prefix($field) . $field['slug'],
+                            true);
                 }
             }
         }
@@ -418,14 +430,14 @@ function wpcf_save_settings($settings) {
     update_option('wpcf_settings', $settings);
 }
 
-
 /**
  * Check if it can be repetitive
  * @param type $field
  * @return type 
  */
 function wpcf_admin_can_be_repetitive($type) {
-    return !in_array($type, array('checkbox', 'checkboxes', 'wysiwyg'));
+    return !in_array($type,
+                    array('checkbox', 'checkboxes', 'wysiwyg', 'radio', 'select'));
 }
 
 /**
@@ -434,6 +446,10 @@ function wpcf_admin_can_be_repetitive($type) {
  * @return type 
  */
 function wpcf_admin_is_repetitive($field) {
-    return isset($field['data']['repetitive']) && !in_array($field['type'],
-                    array('checkbox', 'checkboxes', 'wysiwyg'));
+    if (!isset($field['data']['repetitive']) || !isset($field['type'])) {
+        return false;
+    }
+    $check = intval($field['data']['repetitive']);
+    return !empty($check)
+            && wpcf_admin_can_be_repetitive($field['type']);
 }

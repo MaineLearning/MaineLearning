@@ -89,14 +89,16 @@ function wpcf_admin_migration_form() {
         }
     }
 
-    $form['deactivate-cfui'] = array(
-        '#type' => 'checkbox',
-        '#name' => 'deactivate-cfui',
-        '#before' => '<br /><br />',
-        '#default_value' => 1,
-        '#title' => __('Disable Custom Types UI after importing the configuration (leave this checked to avoid defining custom types twice)',
-                'wpcf'),
-    );
+    if (!empty($cfui_types) || !empty($cfui_taxonomies)) {
+        $form['deactivate-cfui'] = array(
+            '#type' => 'checkbox',
+            '#name' => 'deactivate-cfui',
+            '#before' => '<br /><br />',
+            '#default_value' => 1,
+            '#title' => __('Disable Custom Types UI after importing the configuration (leave this checked to avoid defining custom types twice)',
+                    'wpcf'),
+        );
+    };
 
 
 
