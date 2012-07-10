@@ -658,7 +658,7 @@ class blcContainerHelper {
    * @param string $purpose Optional code indicating how the retrieved containers will be used.
    * @param string $fallback The fallback container type to use for unrecognized containers.
    * @param bool $load_wrapped_objects Preload wrapped objects regardless of purpose.
-   * @return array of blcContainer indexed by "container_type|container_id"
+   * @return blcContainer[] Array of blcContainer indexed by "container_type|container_id"
    */
 	static function get_containers( $containers, $purpose = '', $fallback = '', $load_wrapped_objects = false ){
 		global $wpdb; /* @var wpdb $wpdb */
@@ -733,7 +733,7 @@ class blcContainerHelper {
    * Retrieve link containers that need to be synchronized (parsed).
    *
    * @param integer $max_results The maximum number of containers to return. Defaults to returning all unsynched containers. 
-   * @return array of blcContainer
+   * @return blcContainer[]
    */
 	static function get_unsynched_containers($max_results = 0){
 		global $wpdb; /* @var wpdb $wpdb */

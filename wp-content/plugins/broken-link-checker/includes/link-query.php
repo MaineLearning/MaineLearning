@@ -21,6 +21,7 @@ class blcLinkQuery {
 			'broken' => array(
 				'params' => array(
 					'where_expr' => '( broken = 1 )',
+					's_include_dismissed' => false,
 				),
 				'name' => __('Broken', 'broken-link-checker'),
 				'heading' => __('Broken Links', 'broken-link-checker'),
@@ -30,12 +31,23 @@ class blcLinkQuery {
 			 'redirects' => array(
 			 	'params' => array(
 					'where_expr' => '( redirect_count > 0 )',
+					 's_include_dismissed' => false,
 				),
 				'name' => __('Redirects', 'broken-link-checker'),
 				'heading' => __('Redirected Links', 'broken-link-checker'),
 				'heading_zero' => __('No redirects found', 'broken-link-checker'),
 				'native' => true,
-			 ), 
+			 ),
+
+			'dismissed' => array(
+				'params' => array(
+					'where_expr' => '( dismissed = 1 )',
+				),
+				'name' => __('Dismissed', 'broken-link-checker'),
+				'heading' => __('Dismissed Links', 'broken-link-checker'),
+				'heading_zero' => __('No dismissed links found', 'broken-link-checker'),
+				'native' => true,
+			),
 			 
 			'all' => array(
 				'params' => array(
@@ -418,6 +430,13 @@ class blcLinkQuery {
 			
 		}
 
+		//Dismissed links are included by default, but can explicitly included
+		//or filtered out by passing a special param.
+		if ( isset($params['s_include_dismissed']) ) {
+			$s_include_dismissed = !empty($params['s_include_dismissed']);
+			$pieces['filter_dismissed'] = $s_include_dismissed ? '1' : '(dismissed = 0)';
+		}
+
 		//Optionally sorting is also possible
 		$order_exprs = array();
 		if ( !empty($params['orderby']) ) {
@@ -442,7 +461,7 @@ class blcLinkQuery {
 			$the_filter = $this->native_filters[$params['s_filter']];
 			$extra_criteria = $this->compile_search_params($the_filter['params']);
 			
-			$pieces = array_merge($pieces, $extra_criteria['where_exprs']);
+			$pieces = array_merge($extra_criteria['where_exprs'], $pieces);
 			$join_instances = $join_instances || $extra_criteria['join_instances'];			
 		}
 		
@@ -649,7 +668,7 @@ class blcLinkQuery {
 				$number_class = 'current-link-count';	
 			}
 			
-			$items[] = "<li><a href='tools.php?page=view-broken-links&filter_id=$filter' $class>
+			$items[] = "<li><a href='tools.php?page=view-broken-links&filter_id=$filter' {$class}>
 				{$data['name']}</a> <span class='count'>(<span class='$number_class'>{$data['count']}</span>)</span>";
 		}
 		echo implode(' |</li>', $items);
@@ -735,12 +754,17 @@ class blcLinkQuery {
 			$search_params = $this->get_search_params($current_filter);
 		}
 		
-		//TODO: Simplify this. Maybe overhaul the filter system to let us query the effective filter.
-		$is_broken_filter = 
-			($filter_id == 'broken') 
-			|| ( isset($current_filter['params']['s_filter']) && ($current_filter['params']['s_filter'] == 'broken') )
-			|| ( isset($_GET['s_filter']) && ($_GET['s_filter'] == 'broken') );
-		
+		$base_filter = '';
+		if ( array_key_exists($filter_id, $this->native_filters) ) {
+			$base_filter = $filter_id;
+		} else if ( isset($current_filter['params']['s_filter']) && !empty($current_filter['params']['s_filter']) ) {
+			$base_filter = $current_filter['params']['s_filter'];
+		} else if ( isset($_GET['s_filter']) && !empty($_GET['s_filter']) ) {
+			$base_filter = $_GET['s_filter'];
+		}
+
+		$is_broken_filter = ($base_filter == 'broken');
+
 		//Save the effective filter data in the filter array. 
 		//It can be used later to print the link table.
 		$current_filter = array_merge(array(
@@ -751,6 +775,7 @@ class blcLinkQuery {
 			'links' => $links,
 			'search_params' => $search_params,
 			'is_broken_filter' => $is_broken_filter,
+			'base_filter' => $base_filter,
 		), $current_filter);
 		
 		return $current_filter;
@@ -786,7 +811,7 @@ class blcLinkQuery {
  * @uses blcLinkQuery::get_links();
  *
  * @param array $params
- * @return int|array Either an array of blcLink objects, or the number of results for the query.
+ * @return int|blcLink[] Either an array of blcLink objects, or the number of results for the query.
  */
 function blc_get_links($params = null){
 	$instance = blcLinkQuery::getInstance();

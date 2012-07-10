@@ -286,7 +286,7 @@ class blcPostMeta extends blcContainer {
 						$this->container_id
 					)
 				);
-			};
+			}
 		}
 	}
 	
@@ -324,7 +324,7 @@ class blcPostMeta extends blcContainer {
 					$this->container_id
 				)
 			);
-		};
+		}
 	}
 	
 	function current_user_can_delete(){
@@ -350,7 +350,7 @@ class blcPostMetaManager extends blcContainerManager {
 		add_action( "updated_{$this->meta_type}_meta", array(&$this, 'meta_modified'), 10, 4 );
 		add_action( "deleted_{$this->meta_type}_meta", array(&$this, 'meta_modified'), 10, 4 );
 		//Also intercept the equivalent actions used in /wp-admin/includes/post.php. 
-		//(WP is bloody inconsitent. The action names differ by a single character
+		//(WP is bloody inconsistent. The action names differ by a single character
 		//but have different argument counts)
 		add_action( "added_{$this->meta_type}meta", array(&$this, 'meta_modified'), 10, 4 );
 		add_action( "deleted_{$this->meta_type}meta", array(&$this, 'meta_modified'), 10, 1 );//NB : 1 argument!
@@ -427,7 +427,7 @@ class blcPostMetaManager extends blcContainerManager {
    * @return void
    */
 	function resynch($forced = false){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		global $blclog;
 		
 		if ( $forced ){
@@ -492,7 +492,7 @@ class blcPostMetaManager extends blcContainerManager {
    * @return void
    */
 	function meta_modified($meta_id, $object_id = 0, $meta_key= '', $meta_value = ''){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		//If object_id isn't specified then the hook was probably called from the 
 		//stupidly inconsistent delete_meta() function in /wp-admin/includes/post.php.
