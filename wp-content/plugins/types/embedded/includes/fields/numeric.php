@@ -68,7 +68,7 @@ function wpcf_fields_numeric_editor_submit() {
         wpcf_admin_fields_save_field_last_settings($_GET['field_id'],
                 array('format' => $_POST['format'])
         );
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }

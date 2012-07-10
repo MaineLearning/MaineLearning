@@ -2,6 +2,7 @@
 /*
  * Custom taxonomies functions.
  */
+require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-taxonomies.php';
 
 /**
  * Returns HTML formatted AJAX activation link.

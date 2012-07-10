@@ -40,6 +40,17 @@ add_filter('wpcf_fields_type_date_value_get',
         'wpcf_fields_date_value_get_filter');
 add_filter('wpcf_fields_type_date_value_save',
         'wpcf_fields_date_value_save_filter');
+add_filter('wpcf_conditional_display_compare_condition_value',
+        'wpcf_fields_date_conditional_display_value_filter', 10, 5);
+add_filter('wpcf_repetitive_field_old_value',
+        'wpcf_repetitive_date_old_value_filter', 10, 4);
+if (defined('DOING_AJAX')) {
+    add_filter('wpcf_conditional_display_compare_meta_value',
+            'wpcf_fields_date_conditional_display_value_filter', 10, 5);
+}
+if (!function_exists('wpv_filter_parse_date')) {
+    require_once WPCF_EMBEDDED_ABSPATH . '/common/wpv-filter-date-embedded.php';
+}
 
 /**
  * Register data (called automatically).
@@ -109,7 +120,7 @@ function wpcf_fields_date_meta_box_js_inline() {
     $date_format = _wpcf_date_convert_wp_to_js($date_format);
 
     $date_format_note = '<span style="margin-left:10px"><i>' . esc_js(sprintf(__('Input format: %s',
-                            'wpcf'), wpcf_get_date_format_text())) . '</i></span>';
+                                    'wpcf'), wpcf_get_date_format_text())) . '</i></span>';
 
     ?>
     <script type="text/javascript">
@@ -117,7 +128,7 @@ function wpcf_fields_date_meta_box_js_inline() {
         jQuery(document).ready(function(){
             wpcfFieldsDateInit('');
         });
-           
+                                       
         function wpcfFieldsDateInit(div) {
             if (jQuery.isFunction(jQuery.fn.datepicker)) {
                 jQuery(div+' .wpcf-datepicker').each(function(index) {
@@ -126,9 +137,15 @@ function wpcf_fields_date_meta_box_js_inline() {
                             showOn: "button",
                             buttonImage: "<?php echo WPCF_EMBEDDED_RES_RELPATH; ?>/images/calendar.gif",
                             buttonImageOnly: true,
-                            buttonText: "<?php _e('Select date', 'wpcf'); ?>",
+                            buttonText: "<?php
+    _e('Select date', 'wpcf');
+
+    ?>",
                             dateFormat: "<?php echo $date_format; ?>",
-                            altFormat: "<?php echo $date_format; ?>"
+                            altFormat: "<?php echo $date_format; ?>",
+                            onSelect: function(dateText, inst) {
+                                jQuery(this).trigger('wpcfDateBlur');
+                            }
                         });
                         jQuery(this).next().after('<?php echo $date_format_note; ?>');
                     }
@@ -137,7 +154,10 @@ function wpcf_fields_date_meta_box_js_inline() {
         }
         function wpcfFieldsDateEditorCallback(field_id) {
             var url = "<?php echo admin_url('admin-ajax.php'); ?>?action=wpcf_ajax&wpcf_action=editor_insert_date&_wpnonce=<?php echo wp_create_nonce('fields_insert'); ?>&field_id="+field_id+"&keepThis=true&TB_iframe=true&width=400&height=400";
-            tb_show("<?php _e('Insert date', 'wpcf'); ?>", url);
+            tb_show("<?php
+    _e('Insert date', 'wpcf');
+
+    ?>", url);
         }
         //]]>
     </script>
@@ -411,6 +431,7 @@ function wpcf_fields_date_get_calendar($params, $initial = true, $echo = true) {
  */
 function wpcf_fields_date_editor_callback() {
     $last_settings = wpcf_admin_fields_get_field_last_settings($_GET['field_id']);
+    wp_enqueue_script('jquery');
     $form = array();
     $form['#form']['callback'] = 'wpcf_fields_date_editor_form_submit';
     $form['style'] = array(
@@ -549,6 +570,50 @@ function wpcf_fields_date_editor_form_submit() {
         'format-custom' => $_POST['wpcf']['format-custom'],
             )
     );
-    echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+    echo editor_admin_popup_insert_shortcode_js($shortcode);
     die();
+}
+
+/**
+ * Filters conditional display value.
+ * 
+ * @param type $value
+ * @param type $field
+ * @param type $operation
+ * @param type $conditional_field
+ * @param type $post
+ * @return type 
+ */
+function wpcf_fields_date_conditional_display_value_filter($value, $field,
+        $operation, $field_compared, $post) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (!empty($field) && $field['type'] == 'date') {
+        $time = strtotime($value);
+        if ($time) {
+            return $time;
+        } else {
+            // Check dates
+            $value = wpv_filter_parse_date($value);
+        }
+    }
+    return $value;
+}
+
+/**
+ * Set repetitive old value back to time.
+ * 
+ * @param type $value
+ * @param type $field
+ * @param type $post
+ * @param type $element
+ * @return type 
+ */
+function wpcf_repetitive_date_old_value_filter($value, $field, $post, $element) {
+    if ($field['type'] == 'date') {
+        $time = strtotime($value);
+        if ($time) {
+            return $time;
+        }
+    }
+    return $value;
 }

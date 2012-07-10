@@ -91,7 +91,7 @@ function wpcf_admin_fields_get_fields($only_active = false,
             if (!isset($v[$required])) {
                 if (!defined('WPCF_RUNNING_EMBEDDED')) {
                     $link = admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=delete_field&amp;field_id=' . $v['id'] . '&amp;_wpnonce=' . wp_create_nonce('delete_field'));
-                    wp_enqueue_script('wpcf-fields-edit',
+                    wp_enqueue_script('wpcf-js',
                             WPCF_RES_RELPATH . '/js/basic.js',
                             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
                             WPCF_VERSION);
@@ -426,11 +426,11 @@ function wpcf_fields_type_action($type, $func = '', $args = array()) {
             if (function_exists($func)) {
                 $actions[$type . '-' . $func_in . '-' . $md5_args] = call_user_func($func, $args);
             } else {
-                $actions[$type . '-' . $func_in . '-' . $md5_args] = array();
+                $actions[$type . '-' . $func_in . '-' . $md5_args] = false;
             }
             
         } else {
-            $actions[$type . '-' . $func_in . '-' . $md5_args] = array();
+            $actions[$type . '-' . $func_in . '-' . $md5_args] = false;
         }
     }
     return $actions[$type . '-' . $func_in . '-' . $md5_args];
@@ -457,43 +457,6 @@ function wpcf_fields_get_shortcode($field, $add = '') {
     return $shortcode;
 }
 
-/**
- * Renders JS for inserting shortcode from thickbox popup to editor.
- * 
- * @param type $shortcode 
- */
-function wpcf_admin_fields_popup_insert_shortcode_js($shortcode) {
-
-    ?>
-    <script type="text/javascript">
-        //<![CDATA[
-        window.parent.jQuery('#TB_closeWindowButton').trigger('click');
-        if (window.parent.wpcfActiveEditor != false) {
-            if (window.parent.jQuery('textarea#'+window.parent.wpcfActiveEditor+':visible').length) {
-                // HTML editor
-                window.parent.jQuery('textarea#'+window.parent.wpcfActiveEditor).insertAtCaret('<?php echo $shortcode; ?>');
-            } else {
-                // Visual editor
-                window.parent.tinyMCE.execCommand('mceFocus', false, window.parent.wpcfActiveEditor);
-                window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
-            }
-        } else if (window.parent.wpcfInsertMetaHTML == false) {
-            if (window.parent.jQuery('textarea#content:visible').length) {
-                // HTML editor
-                window.parent.jQuery('textarea#content').insertAtCaret('<?php echo $shortcode; ?>');
-            } else {
-                // Visual editor
-                window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
-            }
-        } else {
-            window.parent.jQuery('#'+window.parent.wpcfInsertMetaHTML).insertAtCaret('<?php echo $shortcode; ?>');
-            window.parent.wpcfInsertMetaHTML = false;
-        }
-                                                                                            
-        //]]>
-    </script>
-    <?php
-}
 
 /**
  * Saves last field settings when inserting from toolbar.

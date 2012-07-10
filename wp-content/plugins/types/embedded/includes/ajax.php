@@ -50,8 +50,9 @@ function wpcf_ajax_embedded() {
                 $post_type = $_GET['post_type_child'];
                 $parent_post_type = $_GET['post_type_parent'];
                 $data = $relationships[$parent_post_type][$post_type];
+                $headers = wpcf_pr_admin_post_meta_box_has_form_headers($post, $post_type, $parent_post_type, $data);
                 $output = wpcf_pr_admin_post_meta_box_has_row($post, $post_type,
-                        $data, $parent_post_type, false);
+                        $data, $parent_post_type, false, $headers);
             }
             echo json_encode(array(
                 'output' => $output,

@@ -59,7 +59,8 @@ function wpcf_fields_skype_meta_box_form($field) {
             $preview_style);
 
     // Set button
-    if (isset($field['disable'])) {
+    if (isset($field['disable'])
+            || (isset($field['wpml_action']) && $field['wpml_action'] == 'copy')) {
         $edit_button = '';
     } else {
         $edit_button = '<br />'
@@ -382,7 +383,7 @@ function wpcf_fields_skype_get_button_image($skypename, $template = '') {
  * @param type $params 
  */
 function wpcf_fields_skype_view($params) {
-    if (!isset($params['field_value']['skypename'])) {
+    if (empty($params['field_value']['skypename'])) {
         return '__wpcf_skip_empty';
     }
     if ($params['style'] == 'raw') {
