@@ -59,7 +59,7 @@
 					$localised_end_date = date_i18n('D d M Y', $event->end);
 					$style = "";
 					$today = date ( "Y-m-d" );
-					$location_summary = "<b>" . $event->location->name . "</b><br/>" . $event->location->address . " - " . $event->location->town;
+					$location_summary = "<b>" . $event->get_location()->name . "</b><br/>" . $event->get_location()->address . " - " . $event->get_location()->town;
 					
 					if ($event->start_date < $today && $event->end_date < $today){
 						$class .= " past";

@@ -184,9 +184,10 @@ class EM_Location extends EM_Object {
 	 * @return boolean
 	 */
 	function get_post($validate = true){
+	    global $allowedtags;
 		do_action('em_location_get_post_pre', $this);
-		$this->location_name = ( !empty($_POST['location_name']) ) ? wp_kses($_POST['location_name'], array()):'';
-		$this->post_content = ( !empty($_POST['content']) ) ? wp_kses($_POST['content'], array()):'';
+		$this->location_name = ( !empty($_POST['location_name']) ) ? wp_kses_data( stripslashes($_POST['location_name'])):'';
+		$this->post_content = ( !empty($_POST['content']) ) ? wp_kses( stripslashes($_POST['content']), $allowedtags):'';
 		$this->get_post_meta(false);
 		$result = $validate ? $this->validate():true; //validate both post and meta, otherwise return true
 		$this->compat_keys();
@@ -200,12 +201,12 @@ class EM_Location extends EM_Object {
 	function get_post_meta($validate = true){
 		//We are getting the values via POST or GET
 		do_action('em_location_get_post_meta_pre', $this);
-		$this->location_address = ( !empty($_POST['location_address']) ) ? wp_kses($_POST['location_address'], array()):'';
-		$this->location_town = ( !empty($_POST['location_town']) ) ? wp_kses($_POST['location_town'], array()):'';
-		$this->location_state = ( !empty($_POST['location_state']) ) ? wp_kses($_POST['location_state'], array()):'';
-		$this->location_postcode = ( !empty($_POST['location_postcode']) ) ? wp_kses($_POST['location_postcode'], array()):'';
-		$this->location_region = ( !empty($_POST['location_region']) ) ? wp_kses($_POST['location_region'], array()):'';
-		$this->location_country = ( !empty($_POST['location_country']) ) ? wp_kses($_POST['location_country'], array()):'';
+		$this->location_address = ( !empty($_POST['location_address']) ) ? wp_kses(stripslashes($_POST['location_address']), array()):'';
+		$this->location_town = ( !empty($_POST['location_town']) ) ? wp_kses(stripslashes($_POST['location_town']), array()):'';
+		$this->location_state = ( !empty($_POST['location_state']) ) ? wp_kses(stripslashes($_POST['location_state']), array()):'';
+		$this->location_postcode = ( !empty($_POST['location_postcode']) ) ? wp_kses(stripslashes($_POST['location_postcode']), array()):'';
+		$this->location_region = ( !empty($_POST['location_region']) ) ? wp_kses(stripslashes($_POST['location_region']), array()):'';
+		$this->location_country = ( !empty($_POST['location_country']) ) ? wp_kses(stripslashes($_POST['location_country']), array()):'';
 		$this->location_latitude = ( !empty($_POST['location_latitude']) && is_numeric($_POST['location_latitude']) ) ? $_POST['location_latitude']:'';
 		$this->location_longitude = ( !empty($_POST['location_longitude']) && is_numeric($_POST['location_longitude']) ) ? $_POST['location_longitude']:'';
 		//Set Blog ID
@@ -643,6 +644,13 @@ class EM_Location extends EM_Object {
 							}else{
 								$image_size = explode(',', $placeholders[3][$key]);
 								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
+									global $blog_id;
+									if ( is_multisite() && $blog_id > 0) {
+										$imageParts = explode('/blogs.dir/', $image_url);
+										if (isset($imageParts[1])) {
+											$image_url = network_site_url('/wp-content/blogs.dir/'. $blog_id. '/' . $imageParts[1]);
+										}
+									}
 									$replace = "<img src='".esc_url(em_get_thumbnail_url($image_url, $image_size[0], $image_size[1]))."' alt='".esc_attr($this->location_name)."'/>";
 								}else{
 									$replace = "<img src='".$image_url."' alt='".esc_attr($this->location_name)."'/>";
@@ -668,6 +676,7 @@ class EM_Location extends EM_Object {
 				case '#_LOCATIONNEXTEVENTS':
 				case '#_ALLEVENTS': //Depreciated
 				case '#_LOCATIONALLEVENTS':
+					//TODO: add limit to lists of events
 					//convert depreciated placeholders for compatability
 					$result = ($result == '#_PASTEVENTS') ? '#_LOCATIONPASTEVENTS':$result; 
 					$result = ($result == '#_NEXTEVENTS') ? '#_LOCATIONNEXTEVENTS':$result;
@@ -698,13 +707,12 @@ class EM_Location extends EM_Object {
 					$replace = $full_result;
 					break;
 			}
-			$replaces[$key] = apply_filters('em_location_output_placeholder', $replace, $this, $full_result, $target);
+			$replaces[$full_result] = apply_filters('em_location_output_placeholder', $replace, $this, $full_result, $target);
 		}
-		//sort out replacements of placeholders here so that e.g. #_X won't overwrite #_XY by mistake
+		//sort out replacements so that during replacements shorter placeholders don't overwrite longer varieties.
 		krsort($replaces);
-		foreach($replaces as $key => $value){
-			$full_result = $placeholders[0][$key];
-			$location_string = str_replace($full_result, $value , $location_string );
+		foreach($replaces as $full_result => $replacement){
+			$location_string = str_replace($full_result, $replacement , $location_string );
 		}
 		return apply_filters('em_location_output', $location_string, $this, $format, $target);	
 	}

@@ -9,7 +9,7 @@
  * 
  */ 
 $args['limit'] = get_option('dbem_locations_default_limit');
-$args['page'] = (!empty($_REQUEST['page']) && is_numeric($_REQUEST['page']) )? $_REQUEST['page'] : 1;
+$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : 1;
 $args['offset'] = ($args['page']-1)*$args['limit'];
 $args['pagination'] = true;
 echo EM_Locations::output(apply_filters('em_content_locations_args', $args));

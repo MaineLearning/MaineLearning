@@ -97,9 +97,11 @@
                 foreach ($this->notices[$type] as $key => $error){
                     $class = substr($type, 0, (strlen($type)-1));
                     $string .= "<p>{$error['string']}</p>";
+                    /* Disabled for now, pending review due to issues in the_content firing x times e.g. in SFC
                     if( empty($error['static']) || $error['static'] !== true){
                         $this->remove($key, $type);
                     }
+                    */
                 }
                 return $string;
             }
@@ -191,6 +193,9 @@
 	    }        
         
     }
-    global $EM_Notices;
-    $EM_Notices = new EM_Notices();
+    function em_notices_init(){
+	    global $EM_Notices;
+	    $EM_Notices = new EM_Notices();	
+    }
+    add_action('plugins_loaded', 'em_notices_init');
 ?>

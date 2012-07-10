@@ -131,6 +131,7 @@ add_filter('single_template','bp_em_private_event_check',20);
  */
 function bp_em_meta_boxes(){
 	add_meta_box('em-event-group', __('Group Ownership','dbem'), 'bp_em_meta_box_group',EM_POST_TYPE_EVENT, 'side','low');
+	add_meta_box('em-event-group', __('Group Ownership','dbem'), 'bp_em_meta_box_group','event-recurring', 'side','low');
 }
 add_action('add_meta_boxes', 'bp_em_meta_boxes');
 	

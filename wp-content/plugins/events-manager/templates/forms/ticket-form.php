@@ -18,13 +18,13 @@ $col_count = empty($col_count) ? 1:$col_count;
 		<label><?php _e('Spaces','dbem') ?></label><input type="text" name="em_tickets[<?php echo $col_count; ?>][ticket_spaces]" value="<?php echo esc_attr($EM_Ticket->ticket_spaces) ?>" />
 		<a href="#" title="<?php __('Enter a maximum number of spaces (required).','dbem'); ?>">?</a>
 	</div>
-	<div class="date-limits">
+	<div class="date-limits em-date-range">
 		<?php _e('Available from','dbem') ?> 
-		<input type="hidden" name="em_tickets[<?php echo $col_count; ?>][ticket_start]" class="start" value="<?php echo ( !empty($EM_Ticket->ticket_start) ) ? date("Y-m-d", $EM_Ticket->start_timestamp):''; ?>" />
-		<input type="text" name="ticket_start_pub"  class="start-loc" />
+		<input type="text" name="ticket_start_pub"  class="em-date-input-loc em-date-start" />
+		<input type="hidden" name="em_tickets[<?php echo $col_count; ?>][ticket_start]" class="em-date-input" value="<?php echo ( !empty($EM_Ticket->ticket_start) ) ? date("Y-m-d", $EM_Ticket->start_timestamp):''; ?>" />
 		<?php _e('to','dbem'); ?>
-		<input type="hidden" name="em_tickets[<?php echo $col_count; ?>][ticket_end]" class="end" value="<?php echo ( !empty($EM_Ticket->ticket_end) ) ? date("Y-m-d", $EM_Ticket->end_timestamp):''; ?>" />
-		<input type="text" name="ticket_end_pub"  class="end-loc" />
+		<input type="text" name="ticket_end_pub" class="em-date-input-loc em-date-end" />
+		<input type="hidden" name="em_tickets[<?php echo $col_count; ?>][ticket_end]" class="em-date-input" value="<?php echo ( !empty($EM_Ticket->ticket_end) ) ? date("Y-m-d", $EM_Ticket->end_timestamp):''; ?>" />
 		<a href="#" title="<?php _e('Add a start or end date (or both) to impose time constraints on ticket availability. Leave either blank for no upper/lower limit.','dbem'); ?>">?</a>
 	</div>
 	<div class="space-limits">

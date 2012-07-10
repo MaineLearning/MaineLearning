@@ -10,9 +10,9 @@ echo "<?xml version='1.0' encoding='utf-8' ?>\n";
 ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title><?php echo htmlentities(get_option ( 'dbem_rss_main_title' )); ?></title>
-		<link><?php	echo get_permalink ( get_option('dbem_events_page') ); ?></link>
-		<description><?php echo htmlentities(get_option('dbem_rss_main_description')); ?></description>
+		<title><?php echo esc_html(get_option ( 'dbem_rss_main_title' )); ?></title>
+		<link><?php	echo EM_URI; ?></link>
+		<description><?php echo esc_html(get_option('dbem_rss_main_description')); ?></description>
 		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
 		<pubDate><?php echo get_option('em_rss_pubdate', date('D, d M Y H:i:s T')); ?></pubDate>
 		<atom:link href="<?php echo esc_attr(EM_RSS_URI); ?>" rel="self" type="application/rss+xml" />
@@ -22,6 +22,7 @@ echo "<?xml version='1.0' encoding='utf-8' ?>\n";
 		$EM_Events = EM_Events::get( array('scope'=>'future', 'owner'=>false ) );
 		
 		foreach ( $EM_Events as $EM_Event ) {
+			/* @var $EM_Event EM_Event */
 			$description = $EM_Event->output( get_option ( 'dbem_rss_description_format' ), "rss");
 			$description = ent2ncr(convert_chars($description)); //Some RSS filtering
 			$event_url = $EM_Event->output('#_EVENTURL');

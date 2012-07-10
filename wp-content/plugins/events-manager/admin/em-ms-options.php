@@ -5,17 +5,24 @@ function em_ms_upgrade( $blog_id ){
 		<div id='icon-options-general' class='icon32'><br /></div>
 		<h2><?php _e('Update Network'); ?></h2>
 		<?php
-		if( $_REQUEST['action'] == 'upgrade' && check_admin_referer('em_ms_ugrade_'.get_current_user_id()) ){
+		if( !empty($_REQUEST['action']) && $_REQUEST['action'] == 'upgrade' && check_admin_referer('em_ms_ugrade_'.get_current_user_id()) ){
 			global $current_site,$wpdb;
-			$blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs.' WHERE site_id='.$current_site->blog_id);
+			$blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs.' WHERE site_id='.$current_site->id);
 			foreach($blog_ids as $blog_id){
-				switch_to_blog($blog_id);
-				if( EM_VERSION > get_option('dbem_version', 0) ){
-					require_once( dirname(__FILE__).'/../em-install.php');
-					em_install();
-					echo "<p>Upgraded - ".get_bloginfo('blogname')."</p>";
+			    $plugin_basename = plugin_basename(dirname(dirname(__FILE__)).'/events-manager.php');
+			    if( in_array( $plugin_basename, (array) get_blog_option($blog_id, 'active_plugins', array() ) ) || is_plugin_active_for_network($plugin_basename) ){
+					if( EM_VERSION > get_blog_option($blog_id, 'dbem_version', 0) ){
+						switch_to_blog($blog_id);
+						require_once( dirname(__FILE__).'/../em-install.php');
+						em_install();
+						echo "<p>Upgraded - ".get_bloginfo('blogname')."</p>";
+						restore_current_blog();
+					}else{
+						echo "<p>&quot;".get_blog_option($blog_id, 'blogname')."&quot; is up to date.</p>";
+					}
+			    }else{
+					echo "<p>&quot;".get_blog_option($blog_id, 'blogname')."&quot; does not have Events Manager activated.</p>";
 				}
-				restore_current_blog();
 			}
 			echo "<p>Done Upgrading</p>";
 		}else{
