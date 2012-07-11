@@ -6,6 +6,7 @@ TO DO
 Upgrade BuddyPress database
 Upgrade network after WP update
 Optimize database
+Activate Google Analytics
 
 Activate Search Everything on MLN Resources
 Search highlight color: ccc066
