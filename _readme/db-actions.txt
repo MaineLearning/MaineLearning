@@ -3,9 +3,10 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Upgrade BuddyPress database
+
 Activate Search Everything on MLN Resources
 Search highlight color: ccc066
-
 
 
 
