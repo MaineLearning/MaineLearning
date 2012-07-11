@@ -892,12 +892,13 @@ class GDStarRating {
             add_action('wp_head', array(&$this, 'wp_head'));
             add_action('gdsr_gsr_insert_snippet', array(&$this->f, 'insert_google_rich_snippet'));
             add_filter('query_vars', array($this->q, 'query_vars'));
-            add_action('pre_get_posts', array($this->q, 'pre_get_posts'), 1);
+            add_action('pre_get_posts', array($this->q, 'pre_get_posts'), 10000);
             add_filter('comment_text', array(&$this, 'display_comment'), 10000);
             add_filter('the_content', array(&$this, 'display_article'));
             add_action('loop_start', array(&$this, 'loop_start'));
             add_filter('preprocess_comment', array(&$this, 'comment_read_post'));
             add_filter('comment_post', array(&$this, 'comment_save'));
+
             if ($this->o["integrate_rss_powered"] == 1 || $this->o["rss_active"] == 1) {
                 add_filter('the_excerpt_rss', array(&$this, 'rss_filter'));
                 add_filter('the_content_rss', array(&$this, 'rss_filter'));
