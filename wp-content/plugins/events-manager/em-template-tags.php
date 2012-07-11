@@ -83,7 +83,7 @@ function em_get_events_list_grouped($args, $format=''){
 	//Reset some args to include pagination for if pagination is requested.
 	$args['limit'] = (!empty($args['limit']) && is_numeric($args['limit']) )? $args['limit'] : false;
 	$args['page'] = (!empty($args['page']) && is_numeric($args['page']) )? $args['page'] : 1;
-	$args['page'] = (!empty($_REQUEST['page']) && is_numeric($_REQUEST['page']) )? $_REQUEST['page'] : $args['page'];
+	$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : $args['page'];
 	$args['offset'] = ($args['page']-1) * $args['limit'];
 	$args['orderby'] = 'event_start_date,event_start_time,event_name'; // must override this to display events in right cronology.
 	if( !empty($format) ){ $args['format'] = html_entity_decode($format); } //accept formats
@@ -155,7 +155,7 @@ function em_get_events_list_grouped($args, $format=''){
 	}
 	if( !empty($args['limit']) && $events_count > $args['limit'] && (!empty($args['pagination']) || !isset($args['pagination'])) ){
 		//Show the pagination links (unless there's less than $limit events)
-		$page_link_template = add_query_arg(array('page'=>'%PAGE%'));
+		$page_link_template = add_query_arg(array('pno'=>'%PAGE%'));
 		echo em_paginate( $page_link_template, $events_count, $args['limit'], $args['page']);
 	}
 	return ob_get_clean();
@@ -177,7 +177,7 @@ function em_events_list_grouped($args, $format=''){ echo em_get_events_list_grou
 function em_get_link( $text = '' ) {
 	$text = ($text == '') ? get_option ( "dbem_events_page_title" ) : $text;
 	$text = ($text == '') ? __('Events','dbem') : $text; //In case options aren't there....
-	return "<a href='".EM_URI."' title='$text'>$text</a>";
+	return '<a href="'.esc_url(EM_URI).'" title="'.esc_url($text).'">'.esc_html($text).'</a>';
 }
 /**
  * Prints the result of em_get_link()
@@ -193,7 +193,7 @@ function em_link($text = ''){ echo em_get_link($text); }
  */
 function em_get_rss_link($text = "RSS") {
 	$text = ($text == '') ? 'RSS' : $text;
-	return "<a href='".EM_RSS_URI."'>$text</a>";
+	return '<a href="'.esc_url(EM_RSS_URI).'">'.esc_html($text).'</a>';
 }
 /**
  * Prints the result of em_get_rss_link()
@@ -293,8 +293,10 @@ function em_events_admin($args = array()){
 				'show_add_new' => true
 			));
 		}
+	}elseif( !is_user_logged_in() && get_option('dbem_events_anonymous_submissions') ){
+		em_event_form($args);
 	}else{
-		echo __("You must log in to view and manage your events.",'dbem');
+		echo apply_filters('em_event_submission_login', __("You must log in to view and manage your events.",'dbem'));
 	}
 }
 /**

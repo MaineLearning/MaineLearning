@@ -39,12 +39,11 @@ function bp_em_record_activity( $args = '' ) {
 function bp_em_record_activity_event_save( $result, $EM_Event ){
 	if( $result && $EM_Event->event_status == 1 && empty($EM_Event->previous_status) ){
 		$user = get_userdata($EM_Event->event_owner);
-		$member_slug = function_exists( 'bp_get_members_root_slug' ) ? bp_get_members_root_slug() : BP_MEMBERS_SLUG;
-		$member_link = trailingslashit(bp_get_root_domain()) . $member_slug . '/' . $user->user_login;
+		$member_link = bp_core_get_user_domain($user->ID);
 		if( empty($EM_Event->group_id) ){
 			bp_em_record_activity( array(
 				'user_id' => $user->ID,
-				'action' => sprintf(__('%s added the event %s','dbem'), "<a href='".$member_link."/'>".$user->display_name."</a>", $EM_Event->output('#_EVENTLINK') ),
+				'action' => sprintf(__('%s added the event %s','dbem'), "<a href='".$member_link."'>".$user->display_name."</a>", $EM_Event->output('#_EVENTLINK') ),
 				'primary_link' => $EM_Event->output('#_EVENTURL'),
 				'type' => 'new_event',
 				'item_id' => $EM_Event->event_id,
@@ -55,7 +54,7 @@ function bp_em_record_activity_event_save( $result, $EM_Event ){
 			$group = new BP_Groups_Group($EM_Event->group_id);
 			bp_em_record_activity( array(
 				'user_id' => $user->ID,
-				'action' => sprintf(__('%s added the event %s to %s.','dbem'), "<a href='".$member_link."/'>".$user->display_name."</a>", $EM_Event->output('#_EVENTLINK'), '<a href="'.bp_get_group_permalink($group).'">'.bp_get_group_name($group).'</a>' ),
+				'action' => sprintf(__('%s added the event %s to %s.','dbem'), "<a href='".$member_link."'>".$user->display_name."</a>", $EM_Event->output('#_EVENTLINK'), '<a href="'.bp_get_group_permalink($group).'">'.bp_get_group_name($group).'</a>' ),
 				'component' => 'groups',
 				'type' => 'new_event',
 				'item_id' => $EM_Event->group_id,

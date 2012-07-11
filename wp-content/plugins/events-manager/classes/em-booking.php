@@ -417,8 +417,8 @@ class EM_Booking extends EM_Object{
 	 * Approve a booking.
 	 * @return bool
 	 */
-	function approve($email = true){
-		return $this->set_status(1, $email);
+	function approve($email = true, $ignore_spaces = false){
+		return $this->set_status(1, $email, $ignore_spaces);
 	}	
 	/**
 	 * Reject a booking and save
@@ -440,11 +440,11 @@ class EM_Booking extends EM_Object{
 	 * @param int $status
 	 * @return boolean
 	 */
-	function set_status($status, $email = true){
+	function set_status($status, $email = true, $ignore_spaces = false){
 		global $wpdb;
 		$action_string = strtolower($this->status_array[$status]); 
 		//if we're approving we can't approve a booking if spaces are full, so check before it's approved.
-		if($status == 1){
+		if(!$ignore_spaces && $status == 1){
 			if( $this->get_event()->get_bookings()->get_available_spaces() < $this->get_spaces() && !get_option('dbem_bookings_approval_overbooking') ){
 				$this->feedback_message = sprintf(__('Not approved, spaces full.','dbem'), $action_string);
 				return apply_filters('em_booking_set_status', false, $this);
@@ -563,13 +563,12 @@ class EM_Booking extends EM_Object{
 					$replace = $full_result;
 					break;
 			}
-			$replaces[$key] = apply_filters('em_booking_output_placeholder', $replace, $this, $full_result, $target);
+			$replaces[$full_result] = apply_filters('em_booking_output_placeholder', $replace, $this, $full_result, $target);
 		}
-		//sort out replacements so that 
+		//sort out replacements so that during replacements shorter placeholders don't overwrite longer varieties.
 		krsort($replaces);
-		foreach($replaces as $key => $value){
-			$full_result = $placeholders[0][$key];
-			$output_string = str_replace($full_result, $value , $output_string );
+		foreach($replaces as $full_result => $replacement){
+			$output_string = str_replace($full_result, $replacement , $output_string );
 		}
 		//run event output too, since this is never run from within events and will not infinitely loop
 		$output_string = $this->get_event()->output($output_string, $target);
@@ -583,6 +582,8 @@ class EM_Booking extends EM_Object{
 	 */
 	function email( $email_admin = true, $force_resend = false ){
 		global $EM_Mailer;
+		$result = true;
+		
 		//FIXME ticket logic needed
 		$EM_Event = $this->get_event(); //We NEED event details here.
 		$EM_Event->get_bookings(true); //refresh all bookings
@@ -591,54 +592,58 @@ class EM_Booking extends EM_Object{
 		if( $this->booking_status !== $this->previous_status || $force_resend ){
 			$msg = array( 'user'=> array('subject'=>'', 'body'=>''), 'admin'=> array('subject'=>'', 'body'=>'')); //blank msg template
 			
-			//admin messages won't change whether pending or already approved
-			$msg['admin']['subject'] = get_option('dbem_bookings_contact_email_subject');
-			$msg['admin']['body'] = get_option('dbem_bookings_contact_email_body');
-			
+			//admin messages won't change whether pending or already approved			
 			switch( $this->booking_status ){
 				case 0:
 				case 5: //TODO remove offline status from here and move to pro
 					$msg['user']['subject'] = get_option('dbem_bookings_email_pending_subject');
 					$msg['user']['body'] = get_option('dbem_bookings_email_pending_body');
+					//admins should get something (if set to)
+					$msg['admin']['subject'] = get_option('dbem_bookings_contact_email_subject');
+					$msg['admin']['body'] = get_option('dbem_bookings_contact_email_body');
 					break;
 				case 1:
 					$msg['user']['subject'] = get_option('dbem_bookings_email_confirmed_subject');
 					$msg['user']['body'] = get_option('dbem_bookings_email_confirmed_body');
+					//admins should get something (if set to)
+					$msg['admin']['subject'] = get_option('dbem_bookings_contact_email_subject');
+					$msg['admin']['body'] = get_option('dbem_bookings_contact_email_body');
 					break;
 				case 2:
 					$msg['user']['subject'] = get_option('dbem_bookings_email_rejected_subject');
 					$msg['user']['body'] = get_option('dbem_bookings_email_rejected_body');
-					$msg['admin']['subject'] = ''; //only admins can reject
 					break;
 				case 3:
 					$msg['user']['subject'] = get_option('dbem_bookings_email_cancelled_subject');
 					$msg['user']['body'] = get_option('dbem_bookings_email_cancelled_body');
+					//admins should get something (if set to)
 					$msg['admin']['subject'] = get_option('dbem_contactperson_email_cancelled_subject');
 					$msg['admin']['body'] = get_option('dbem_contactperson_email_cancelled_body');
 					break;
 			}
 			//messages can be overriden just before being sent
 			$msg = apply_filters('em_booking_email_messages', $msg, $this);
+			$output_type = get_option('dbem_smtp_html') ? 'html':'email';
 
 			//Send user (booker) emails
 			if( !empty($msg['user']['subject']) ){
-				$msg['user']['subject'] = $this->output($msg['user']['subject'], 'email');
-				$msg['user']['body'] = $this->output($msg['user']['body'], 'email');
+				$msg['user']['subject'] = $this->output($msg['user']['subject'], $output_type);
+				$msg['user']['body'] = $this->output($msg['user']['body'], $output_type);
 				if( get_option('dbem_smtp_html') && get_option('dbem_smtp_html_br', 1) ){
 					$msg['user']['body'] = nl2br($msg['user']['body']);
 				}
 				//Send to the person booking
 				if( !$this->email_send( $msg['user']['subject'], $msg['user']['body'], $this->get_person()->user_email) ){
-					return false;
+					$result = false;
 				}
 			}
 			
 			//Send admin/contact emails if this isn't the event owner or an events admin
-			if( $email_admin && !empty($msg['admin']['subject']) && !$this->can_manage() ){ //no point sending contacts emails on changes to a booking status if an admin makes it
+			if( $email_admin && !empty($msg['admin']['subject']) && (!$this->can_manage() || (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'booking_add') || $this->manage_override) ){ //emails won't be sent if admin is logged in unless they book themselves
 				if( get_option('dbem_bookings_contact_email') == 1 || get_option('dbem_bookings_notify_admin') ){
 					//Only gets sent if this is a pending booking, unless approvals are disabled.
-					$msg['admin']['subject'] = $this->output($msg['admin']['subject'], 'email');
-					$msg['admin']['body'] = $this->output($msg['admin']['body'], 'email'); 
+					$msg['admin']['subject'] = $this->output($msg['admin']['subject'], $output_type);
+					$msg['admin']['body'] = $this->output($msg['admin']['body'], $output_type); 
 					if( get_option('dbem_smtp_html') && get_option('dbem_smtp_html_br', 1) ){
 						$msg['admin']['body'] = nl2br($msg['admin']['body']);
 					}
@@ -646,7 +651,7 @@ class EM_Booking extends EM_Object{
 					if( get_option('dbem_bookings_contact_email') == 1 ){
 						if( !$this->email_send( $msg['admin']['subject'], $msg['admin']['body'], $EM_Event->get_contact()->user_email) && current_user_can('activate_plugins')){
 							$this->errors[] = __('Confirmation email could not be sent to contact person. Registrant should have gotten their email (only admin see this warning).','dbem');
-							return false;
+							$result = false;
 						}
 					}
 					//email admin
@@ -655,13 +660,13 @@ class EM_Booking extends EM_Object{
 						$admin_emails = explode(',', $admin_emails); //supply emails as array 
 						if( !$this->email_send( $msg['admin']['subject'], $msg['admin']['body'], $admin_emails) ){
 							$this->errors[] = __('Confirmation email could not be sent to admin. Registrant should have gotten their email (only admin see this warning).','dbem');
-							return false;
+							$result = false;
 						}
 					}
 				}
 			}
 		}
-		return true;
+		return $result;
 		//TODO need error checking for booking mail send
 	}	
 	

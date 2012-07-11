@@ -4,6 +4,8 @@ ACTIVE
 
 How would I add an "Activated" column to the back-end users list?
 
+How do we find out when someone logs in.
+
 
 With e-mail messages from External Blogs, through the Activity Stream, and then through WP Better E-mails, the group address is incorrect.
 

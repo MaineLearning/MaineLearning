@@ -10,7 +10,7 @@
 	global $em_localized_js;
 	$s_default = get_option('dbem_search_form_text_label');	
 	$s = !empty($_REQUEST['em_search']) ? $_REQUEST['em_search']:$s_default;
-	if( empty($_REQUEST['country']) && empty($_REQUEST['page']) ){
+	if( !isset($_REQUEST['country']) ){
 		$country = get_option('dbem_location_default_country');
 	}elseif( !empty($_REQUEST['country']) ){
 		$country = $_REQUEST['country'];
@@ -22,38 +22,36 @@
 	<form action="<?php echo EM_URI; ?>" method="post" class="em-events-search-form">
 		<?php do_action('em_template_events_search_form_header'); ?>
 		
-		<?php if( !empty($search_text) || (get_option('dbem_search_form_text') && empty($search_text)) ): ?>
+		<?php if( get_option('dbem_search_form_text') ): ?>
 		<!-- START General Search -->
 		<?php /* This general search will find matches within event_name, event_notes, and the location_name, address, town, state and country. */ ?>
 		<input type="text" name="em_search" class="em-events-search-text" value="<?php echo $s; ?>" onfocus="if(this.value=='<?php echo $s_default; ?>')this.value=''" onblur="if(this.value=='')this.value='<?php echo $s_default; ?>'" />
 		<!-- END General Search -->
 		<?php endif; ?>
 		
-		<?php if( !empty($search_dates) || (get_option('dbem_search_form_dates') && empty($search_dates)) ): ?>
+		<?php if( get_option('dbem_search_form_dates') ): ?>
 		<!-- START Date Search -->
-		<span class="em-events-search-dates">
+		<span class="em-events-search-dates em-date-range">
 			<?php _e('between','dbem'); ?>:
-			<input type="text" id="em-date-start-loc" />
-			<input type="hidden" id="em-date-start" name="scope[0]" value="<?php if( !empty($_REQUEST['scope'][0]) ) echo $_REQUEST['scope'][0]; ?>" />
+			<input type="text" class="em-date-input-loc em-date-start" />
+			<input type="hidden" class="em-date-input" name="scope[0]" value="<?php if( !empty($_REQUEST['scope'][0]) ) echo $_REQUEST['scope'][0]; ?>" />
 			<?php _e('and','dbem'); ?>
-			<input type="text" id="em-date-end-loc" />
-			<input type="hidden" id="em-date-end" name="scope[1]" value="<?php if( !empty($_REQUEST['scope'][1]) ) echo $_REQUEST['scope'][1]; ?>" />
+			<input type="text" class="em-date-input-loc em-date-end" />
+			<input type="hidden" class="em-date-input" name="scope[1]" value="<?php if( !empty($_REQUEST['scope'][1]) ) echo $_REQUEST['scope'][1]; ?>" />
 		</span>
 		<!-- END Date Search -->
 		<?php endif; ?>
 		
-		<?php if( !empty($search_categories) || (get_option('dbem_search_form_categories') && empty($search_categories)) ): ?>	
+		<?php if( get_option('dbem_search_form_categories') ): ?>	
 		<!-- START Category Search -->
-		<select name="category" class="em-events-search-category">
-			<option value=''><?php echo get_option('dbem_search_form_categories_label') ?></option>
-			<?php foreach(EM_Categories::get(array('orderby'=>'category_name')) as $EM_Category): ?>
-			 <option value="<?php echo $EM_Category->id; ?>" <?php echo (!empty($_REQUEST['category']) && $_REQUEST['category'] == $EM_Category->id) ? 'selected="selected"':''; ?>><?php echo $EM_Category->name; ?></option>
-			<?php endforeach; ?>
-		</select>
+			<?php 
+				$selected = !empty($_REQUEST['category']) ? $_REQUEST['category'] : 0;
+				wp_dropdown_categories(array( 'hide_empty' => 0, 'name' => 'category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'show_option_none' => get_option('dbem_search_form_categories_label'), 'class'=>'em-events-search-category'));		
+			?>
 		<!-- END Category Search -->
 		<?php endif; ?>
 		
-		<?php if( !empty($search_countries) || (get_option('dbem_search_form_countries') && empty($search_countries)) ): ?>
+		<?php if( get_option('dbem_search_form_countries') ): ?>
 		<!-- START Country Search -->
 		<select name="country" class="em-events-search-country">
 			<option value=''><?php echo get_option('dbem_search_form_countries_label'); ?></option>
@@ -70,7 +68,7 @@
 		<!-- END Country Search -->	
 		<?php endif; ?>
 		
-		<?php if( !empty($search_regions) || (get_option('dbem_search_form_regions') && empty($search_regions)) ): ?>
+		<?php if( get_option('dbem_search_form_regions') ): ?>
 		<!-- START Region Search -->
 		<select name="region" class="em-events-search-region">
 			<option value=''><?php echo get_option('dbem_search_form_regions_label'); ?></option>
@@ -90,7 +88,7 @@
 		<!-- END Region Search -->	
 		<?php endif; ?>
 		
-		<?php if( !empty($search_states) || (get_option('dbem_search_form_states') && empty($search_states)) ): ?>
+		<?php if( get_option('dbem_search_form_states') ): ?>
 		<!-- START State/County Search -->
 		<select name="state" class="em-events-search-state">
 			<option value=''><?php echo get_option('dbem_search_form_states_label'); ?></option>
@@ -111,7 +109,7 @@
 		<!-- END State/County Search -->
 		<?php endif; ?>
 		
-		<?php if( !empty($search_towns) || (get_option('dbem_search_form_towns') && empty($search_towns)) ): ?>
+		<?php if( get_option('dbem_search_form_towns') ): ?>
 		<!-- START City Search -->
 		<select name="town" class="em-events-search-town">
 			<option value=''><?php echo get_option('dbem_search_form_towns_label'); ?></option>

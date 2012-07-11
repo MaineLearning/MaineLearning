@@ -179,11 +179,16 @@ class EM_Event_Post_Admin{
 	
 	function meta_boxes(){
 		global $EM_Event;
+		if( !empty($EM_Event->event_owner_anonymous) ){
+			add_meta_box('em-event-anonymous', __('Anonymous Submitter Info','dbem'), array('EM_Event_Post_Admin','meta_box_anonymous'),EM_POST_TYPE_EVENT, 'side','high');
+		}
 		add_meta_box('em-event-when', __('When','dbem'), array('EM_Event_Post_Admin','meta_box_date'),EM_POST_TYPE_EVENT, 'side','high');
 		if(get_option('dbem_locations_enabled', true)){
 			add_meta_box('em-event-where', __('Where','dbem'), array('EM_Event_Post_Admin','meta_box_location'),EM_POST_TYPE_EVENT, 'normal','high');
 		}
-		//add_meta_box('em-event-meta', 'Event Meta (debugging only)', array('EM_Event_Post_Admin','meta_box_metadump'),EM_POST_TYPE_EVENT, 'normal','high');
+		if( defined('WP_DEBUG') && WP_DEBUG ){
+			add_meta_box('em-event-meta', 'Event Meta (debugging only)', array('EM_Event_Post_Admin','meta_box_metadump'),EM_POST_TYPE_EVENT, 'normal','high');
+		}
 		if(get_option('dbem_rsvp_enabled', true)){
 			add_meta_box('em-event-bookings', __('Bookings/Registration','dbem'), array('EM_Event_Post_Admin','meta_box_bookings'),EM_POST_TYPE_EVENT, 'normal','high');
 			if( !empty($EM_Event->event_id) && $EM_Event->event_rsvp ){
@@ -197,10 +202,21 @@ class EM_Event_Post_Admin{
 			add_meta_box('em-event-categories', __('Site Categories','dbem'), array('EM_Event_Post_Admin','meta_box_ms_categories'),EM_POST_TYPE_EVENT, 'side','low');
 		}
 	}
+	
 	function meta_box_metadump(){
 		global $post,$EM_Event;
 		echo "<pre>"; print_r($EM_Event); echo "</pre>";
 	}
+	
+	function meta_box_anonymous(){
+		global $EM_Event;
+		?>
+		<div class='updated'><p><?php _e('This event was submitted by a guest. You will find their details in the <em>Anonymous Submitter Info</em> box','dbem')?></p></div>
+		<p><strong><?php _e('Name','dbem'); ?> :</strong> <?php echo $EM_Event->event_owner_name; ?></p> 
+		<p><strong><?php _e('Name','dbem'); ?> :</strong> <?php echo $EM_Event->event_owner_email; ?></p> 
+		<?php
+	}
+	
 	function meta_box_date(){
 		//create meta box check of date nonce
 		?><input type="hidden" name="_emnonce" value="<?php echo wp_create_nonce('edit_event'); ?>" /><?php
@@ -213,9 +229,7 @@ class EM_Event_Post_Admin{
 
 	function meta_box_bookings(){
 		em_locate_template('forms/event/bookings.php', true);
-		if( !get_option('dbem_bookings_tickets_single') ){
-			add_action('admin_footer',array('EM_Event_Post_Admin','meta_box_bookings_overlay'));
-		}
+		add_action('admin_footer',array('EM_Event_Post_Admin','meta_box_bookings_overlay'));
 	}
 	
 	function meta_box_bookings_overlay(){
@@ -353,14 +367,8 @@ class EM_Event_Recurring_Post_Admin{
 		if(get_option('dbem_rsvp_enabled')){
 			add_meta_box('em-event-bookings', __('Bookings/Registration','dbem'), array('EM_Event_Post_Admin','meta_box_bookings'),'event-recurring', 'normal','high');
 		}
-		if( empty($EM_Event->event_id) && function_exists('groups_get_user_groups') ){
-			add_meta_box('em-event-group', __('Group Ownership','dbem'), array('EM_Event_Post_Admin','meta_box_group'),'event-recurring', 'side','low');
-		}
 		if( get_option('dbem_attributes_enabled') ){
 			add_meta_box('em-event-attributes', __('Attributes','dbem'), array('EM_Event_Post_Admin','meta_box_attributes'),'event-recurring', 'normal','default');
-		}
-		if( (empty($EM_Event->event_id) || !empty($EM_Event->group_id)) && function_exists('groups_get_user_groups') ){
-			add_meta_box('em-event-group', __('Group Ownership','dbem'), array('EM_Event_Post_Admin','meta_box_group'),'event-recurring', 'side','low');
 		}
 		if( EM_MS_GLOBAL && !is_main_site() && get_option('dbem_categories_enabled') ){
 			add_meta_box('em-event-categories', __('Site Categories','dbem'), array('EM_Event_Post_Admin','meta_box_ms_categories'),'event-recurring', 'side','low');

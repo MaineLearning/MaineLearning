@@ -3,6 +3,12 @@ class EM_Event_Posts_Admin{
 	function init(){
 		global $pagenow;
 		if( $pagenow == 'edit.php' && !empty($_REQUEST['post_type']) && $_REQUEST['post_type'] == EM_POST_TYPE_EVENT ){ //only needed for events list
+			if( !empty($_REQUEST['category_id']) && is_numeric($_REQUEST['category_id']) ){
+				$term = get_term_by('id', $_REQUEST['category_id'], EM_TAXONOMY_CATEGORY);
+				if( !empty($term->slug) ){
+					$_REQUEST['category_id'] = $term->slug;
+				}
+			}
 			//hide some cols by default:
 			$screen = 'edit-'.EM_POST_TYPE_EVENT;
 			$hidden = get_user_option( 'manage' . $screen . 'columnshidden' );
@@ -68,16 +74,11 @@ class EM_Event_Posts_Admin{
 			<?php
 			if( get_option('dbem_categories_enabled') ){
 				//Categories
-	            $terms = get_terms(EM_TAXONOMY_CATEGORY);	
-	            // output html for taxonomy dropdown filter
-	            echo '<select name="'.EM_TAXONOMY_CATEGORY.'" id="'.EM_TAXONOMY_CATEGORY.'" class="postform">';
-	            echo '<option value="">'.__('View all categories').'&nbsp;</option>';
-	            foreach ($terms as $term) {
-	                // output each select option line, check against the last $_GET to show the current option selected
-	                $selected = (!empty($_GET[EM_TAXONOMY_CATEGORY]) && $_GET[EM_TAXONOMY_CATEGORY] == $term->slug) ? 'selected="selected"':'';
-	                echo '<option value="'. $term->slug.'" '.$selected.'>'.$term->name.'</option>';
-	            }
-	            echo "</select>";
+	            $selected = !empty($_GET['event-categories']) ? $_GET['event-categories'] : 0;
+				wp_dropdown_categories(array( 'hide_empty' => 1, 'name' => 'event-categories',
+                              'hierarchical' => true, 'id' => EM_TAXONOMY_CATEGORY,
+                              'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected,
+                              'show_option_all' => __('View all categories')));
 			}
             if( !empty($_REQUEST['author']) ){
             	?>

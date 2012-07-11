@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Events Manager
-Version: 5.1.6
+Version: 5.1.8.5
 Plugin URI: http://wp-events-plugin.com
 Description: Event registration and booking management for WordPress. Recurring events, locations, google maps, rss, ical, booking registration and more!
 Author: Marcus Sykes
@@ -9,7 +9,7 @@ Author URI: http://wp-events-plugin.com
 */
 
 /*
-Copyright (c) 2011, Marcus Sykes
+Copyright (c) 2012, Marcus Sykes
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Setting constants
-define('EM_VERSION', 5.147); //self expanatory
-define('EM_PRO_MIN_VERSION', 2.12); //self expanatory
+define('EM_VERSION', 5.1841); //self expanatory
+define('EM_PRO_MIN_VERSION', 2.144); //self expanatory
 define('EM_DIR', dirname( __FILE__ )); //an absolute path to this directory
 define('EM_SLUG', plugin_basename( __FILE__ )); //for updates
 
@@ -165,10 +165,6 @@ if( file_exists($upload_dir['basedir'].'/locations-pics' ) ){
 	define("EM_IMAGE_DS",'/');
 }
 
-// Localised date formats as in the jquery UI datepicker plugin but for php date
-$localised_date_formats = array("am" => "d.m.Y","ar" => "d/m/Y", "bg" => "d.m.Y", "ca" => "m/d/Y", "cs" => "d.m.Y", "da" => "d-m-Y", "de" =>"d.m.Y", "es" => "d/m/Y", "en" => "m/d/Y", "fi" => "d.m.Y", "fr" => "d/m/Y", "he" => "d/m/Y", "hu" => "Y-m-d", "hy" => "d.m.Y", "id" => "d/m/Y", "is" => "d/m/Y", "it" => "d/m/Y", "ja" => "Y/m/d", "ko" => "Y-m-d", "lt" => "Y-m-d", "lv" => "d-m-Y", "nl" => "d.m.Y", "no" => "Y-m-d", "pl" => "Y-m-d", "pt" => "d/m/Y", "ro" => "m/d/Y", "ru" => "d.m.Y", "sk" => "d.m.Y", "sv" => "Y-m-d", "th" => "d/m/Y", "tr" => "d.m.Y", "ua" => "d.m.Y", "uk" => "d.m.Y", "us" => "m/d/Y", "CN" => "Y-m-d", "TW" => "Y/m/d");
-//TODO reorganize how defaults are created, e.g. is it necessary to create false entries? They are false by default... less code, but maybe not verbose enough...
-
 /**
  * @author marcus
  * Contains functions for loading styles on both admin and public sides.
@@ -200,7 +196,7 @@ class EM_Scripts_and_Styles {
 	 */
 	function public_enqueue() {
 		//Scripts
-		wp_enqueue_script('events-manager', plugins_url('includes/js/events-manager.js',__FILE__), array('jquery', 'jquery-ui-core','jquery-ui-widget','jquery-ui-position','jquery-ui-sortable')); //jQuery will load as dependency
+		wp_enqueue_script('events-manager', plugins_url('includes/js/events-manager.js',__FILE__), array('jquery', 'jquery-ui-core','jquery-ui-widget','jquery-ui-position','jquery-ui-sortable','jquery-ui-datepicker','jquery-ui-autocomplete','jquery-ui-dialog')); //jQuery will load as dependency
 		//Styles
 		wp_enqueue_style('events-manager', plugins_url('includes/css/events_manager.css',__FILE__)); //main css
 	}
@@ -218,11 +214,19 @@ class EM_Scripts_and_Styles {
 			'locationajaxurl' => admin_url('admin-ajax.php?action=locations_search'),
 			'firstDay' => get_option('start_of_week'),
 			'locale' => $locale_code,
+			'dateFormat' => get_option('dbem_date_format_js'),
 			'bookingInProgress' => __('Please wait while the booking is being submitted.','dbem'),
-			'ui_css' => plugins_url('includes/css/jquery-ui-1.8.13.custom.css', __FILE__),
+			'ui_css' => plugins_url('includes/css/ui-lightness.css', __FILE__),
 			'show24hours' => get_option('dbem_time_24h'),
-			'is_ssl' => is_ssl()
+			'is_ssl' => is_ssl(),
+			'tickets_save' => __('Save Ticket','dbem'),
+			'bookings_export_save' => __('Export Bookings','dbem'),
+			'bookings_settings_save' => __('Save Settings','dbem'),
+			'booking_delete' => __("Are you sure you want to delete?",'dbem')
 		);
+		$em_localized_js['txt_search'] = get_option('dbem_search_form_text_label',__('Search','dbem'));
+		$em_localized_js['txt_searching'] = __('Searching...','dbem');
+		$em_localized_js['txt_loading'] = __('Loading...','dbem');
 		//logged in messages that visitors shouldn't need to see
 		if( is_user_logged_in() ){
 			$em_localized_js['event_reschedule_warning'] = __('Are you sure you want to reschedule this recurring event? If you do this, you will lose all booking information and the old recurring events will be deleted.', 'dbem');
@@ -236,10 +240,6 @@ class EM_Scripts_and_Styles {
 		if( is_admin() ){
 			$em_localized_js['event_post_type'] = EM_POST_TYPE_EVENT;
 			$em_localized_js['location_post_type'] = EM_POST_TYPE_LOCATION;
-		}else{
-			$em_localized_js['txt_search'] = get_option('dbem_search_form_text_label',__('Search','dbem'));
-			$em_localized_js['txt_searching'] = __('Searching...','dbem');
-			$em_localized_js['txt_loading'] = __('Loading...','dbem');
 		}
 		wp_localize_script('events-manager','EM', apply_filters('em_wp_localize_script', $em_localized_js));
 	}
@@ -250,7 +250,7 @@ class EM_Scripts_and_Styles {
 	}
 	function admin_scripts(){
 		global $post;
-		wp_enqueue_script('events-manager', WP_PLUGIN_URL.'/events-manager/includes/js/events-manager.js', array('jquery', 'jquery-ui-core','jquery-ui-widget','jquery-ui-position','jquery-ui-sortable'));
+		wp_enqueue_script('events-manager', WP_PLUGIN_URL.'/events-manager/includes/js/events-manager.js', array('jquery', 'jquery-ui-core','jquery-ui-widget','jquery-ui-position','jquery-ui-sortable','jquery-ui-datepicker','jquery-ui-autocomplete','jquery-ui-dialog'));
 		self::localize_script();
 	}
 }
@@ -333,6 +333,8 @@ function em_init(){
 			em_install();
 		}
 	}
+	//add custom functions.php file
+	locate_template('plugins/events-manager/functions.php', true);
 }
 add_filter('init','em_init',1);
 
@@ -418,7 +420,7 @@ class EM_MS_Globals {
 	function get_globals(){
 		$globals = array(
 			//multisite settings
-			'dbem_ms_global_table',
+			'dbem_ms_global_table', 'dbem_ms_global_caps',
 			'dbem_ms_global_events', 'dbem_ms_global_events_links','dbem_ms_events_slug',
 			'dbem_ms_global_locations','dbem_ms_global_locations_links','dbem_ms_locations_slug','dbem_ms_mainblog_locations',
 			//mail

@@ -15,7 +15,8 @@ function em_docs_init($force_init = false){
 				'events' => array(
 					'blog' => array( 'desc' => sprintf('Limit search to %s created in a specific blog id (MultiSite only)','events')),
 					'bookings' => array( 'desc'=> 'Include only events with bookings enabled. Use \'user\' to show events a logged in user has booked.'.'1 = yes, 0 = no'),
-					'category' => array( 'desc'=> sprintf('Supply a single id or comma-seperated ids (e.g. "1,2,3") to limit the search to events in these %s.','categories'), 'default'=>0),
+					'category' => array( 'desc'=> sprintf('Supply a single id or comma-seperated ids (e.g. "1,2,3") to limit the search to events in these %s. You can also use negative numbers to exclude specific categories (e.g. -1,-2,-3).','categories'), 'default'=>0),
+					'tag' => array( 'desc'=> sprintf('Supply a single id or comma-seperated ids (e.g. "music,theatre,sport") to limit the search to events in these %s.','tags'), 'default'=>0),
 					'event' => array( 'desc'=> sprintf('Supply a single id or comma-seperated ids (e.g. "1,2,3") to limit the search to %s with the %s.','events', 'event_id(s)'), 'default'=>0),
 					'group' => array( 'desc' => 'Limit search to events belonging to a specific group id (BuddyPress only). Using \'my\' will show events belonging to groups the logged in user is a member of.'),
 					'post_id' => array( 'desc' => sprintf('Supply a single id or comma-seperated ids (e.g. "1,2,3") to limit the search to %s with the %s.','events', 'post_id(s)')),
@@ -46,6 +47,9 @@ function em_docs_init($force_init = false){
 					'postcode' => array( 'desc'=> sprintf('Search for %s in this %s (no partial matches, case sensitive).','locations','Postcode'), 'default' => 'none')
 				),
 				'categories' => array(
+					'' => array( 'desc' => 'See the <a href="http://codex.wordpress.org/Function_Reference/get_terms">WordPress get_terms() Codex</a> for a list of possible search attributes/arguments.'),
+				),
+				'tags' => array(
 					'' => array( 'desc' => 'See the <a href="http://codex.wordpress.org/Function_Reference/get_terms">WordPress get_terms() Codex</a> for a list of possible search attributes/arguments.'),
 				),
 				'calendar' => array(
@@ -241,7 +245,8 @@ function em_docs_init($force_init = false){
 							'#_BOOKINGTICKETPRICE' => array( 'desc' => 'Booked ticket price with currency symbol (e.g. $ 10.00). Useful in single ticket mode, if multiple tickets are booked a random ticket is used.' ),
 							'#_BOOKINGTICKETS' => array( 'desc' => 'A list of booked tickets. You can modify this by using template files and modifying templates/emails/bookingtickets.php' ),
 							'#_BOOKINGFORMCUSTOM{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/upgrade/') ),
-							'#_BOOKINGFORMCUSTOMREG{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields that are used for guest user registration. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/upgrade/') )
+							'#_BOOKINGFORMCUSTOMREG{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields that are used for guest user registration. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/upgrade/') ),
+							'#_BOOKINGFORMCUSTOMFIELDS' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Generates a list of booking form custom fields that are used in the booking.','http://wp-events-plugin.com/upgrade/') )
 						)
 					),
 					'Pricing Information' => array(
