@@ -31,15 +31,8 @@ function wpv_filter_get_order_arg($query, $view_settings) {
         $orderby_set = true;
         
         // Fix for numeric custom field , need to user meta_value_num
-        $opt = get_option('wpcf-fields');
-        if($opt && mb_ereg('^field-wpcf-',$view_settings['orderby'])) {
-            $field_name = substr($view_settings['orderby'],11);
-            if (isset($opt[$field_name]['type'])) {
-                $field_type = strtolower($opt[$field_name]['type']);
-                if ( $field_type == 'numeric' || $field_type == 'date') {
-                    $orderby= 'meta_value_num';
-                }
-            }
+        if (_wpv_is_numeric_field($view_settings['orderby'])) {
+            $orderby= 'meta_value_num';
         }        
     }
     $query['orderby'] = $orderby;
@@ -60,7 +53,11 @@ function wpv_filter_get_order_arg($query, $view_settings) {
             if (function_exists('wpcf_types_get_meta_prefix')) {
                 $query['meta_key'] = wpcf_types_get_meta_prefix() . $query['meta_key'];
             }
-            $query['orderby'] = 'meta_value';
+            if (_wpv_is_numeric_field('field-' . $query['meta_key'])) {
+                $query['orderby'] = 'meta_value_num';
+            } else {
+                $query['orderby'] = 'meta_value';
+            }
         } else {
             $query['orderby'] = str_replace('-', '_', $field);
         }
@@ -84,3 +81,18 @@ function wpv_filter_get_order_arg($query, $view_settings) {
     return $query;
 }
 
+function _wpv_is_numeric_field($field_name) {
+    $opt = get_option('wpcf-fields');
+    if($opt && mb_ereg('^field-wpcf-',$field_name)) {
+        $field_name = substr($field_name,11);
+        if (isset($opt[$field_name]['type'])) {
+            $field_type = strtolower($opt[$field_name]['type']);
+            if ( $field_type == 'numeric' || $field_type == 'date') {
+                return true;
+            }
+        }
+        
+    }
+    
+    return false;
+}

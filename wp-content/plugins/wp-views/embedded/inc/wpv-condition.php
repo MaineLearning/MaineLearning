@@ -12,7 +12,7 @@
  * Math operators: +, -, *, /
  * Comparison operators: &lt;, &gt;, =, &lt;=, &gt;=, !=
  * Boolean operators: AND, OR, NOT
- * Nested expressions - several levels of brackets
+ * Nested expressions - several levels of parentheses
  * Variables defined as shortcode parameters starting with a dollar sign
  * empty() function that checks for empty or non-existing fields
  * 

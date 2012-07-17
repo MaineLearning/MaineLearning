@@ -2,9 +2,9 @@
 
 
 function wpv_manage_views_columns($columns) {
-	$columns['wpv_query'] = __('Content to load', 'wp-views');
-	$columns['wpv_filter'] = __('Filter', 'wp-views');
-	$columns['wpv_display'] = __('Display', 'wp-views');
+	$columns['wpv_query'] = __('Content to load', 'wpv-views');
+	$columns['wpv_filter'] = __('Filter', 'wpv-views');
+	$columns['wpv_display'] = __('Display', 'wpv-views');
 	
 	return $columns;
 }
@@ -13,8 +13,8 @@ add_filter('manage_edit-view_columns', 'wpv_manage_views_columns');
 
 
 function wpv_manage_view_templates_columns($columns) {
-	$columns['wpv_fields'] = __('Fields used', 'wp-views');
-	$columns['wpv_default'] = __('How this View Template is used', 'wp-views');
+	$columns['wpv_fields'] = __('Fields used', 'wpv-views');
+	$columns['wpv_default'] = __('How this View Template is used', 'wpv-views');
 	
 	return $columns;
 }
@@ -84,11 +84,11 @@ function wpv_get_layout_label_by_slug($wpv_layout_settings) {
 
 	$layout_box = '<div class="view_layout_box"><table><tr><td colspan="2" style="border-bottom-color:#FFFFFF;margin-left:10px;">';
 	switch($style) {
-		case 'unformatted': $layout_box .= __('Unformatted', 'wp-views'); break;
-		case 'ordered_list': $layout_box .= __('Ordered List', 'wp-views'); break;
-		case 'un_ordered_list': $layout_box .= __('Unordered List', 'wp-views'); break;
-		case 'table': $layout_box .= __('Grid', 'wp-views'); break;
-		case 'table_of_fields': $layout_box .= __('Table', 'wp-views'); break;
+		case 'unformatted': $layout_box .= __('Unformatted', 'wpv-views'); break;
+		case 'ordered_list': $layout_box .= __('Ordered List', 'wpv-views'); break;
+		case 'un_ordered_list': $layout_box .= __('Unordered List', 'wpv-views'); break;
+		case 'table': $layout_box .= __('Grid', 'wpv-views'); break;
+		case 'table_of_fields': $layout_box .= __('Table', 'wpv-views'); break;
 	}
 
 	$layout_box .= '</td></tr><tr><td width="34" style="border-bottom-color:#FFFFFF;">';
@@ -137,13 +137,13 @@ function wpv_get_view_template_defaults($wpv_options, $post_id) {
 			if($value == $post_id) {
 				if(strpos($option, 'views_template_for_') !== false) {
 					$term = substr($option, 19);
-					$result .= __('Single view for ', 'wp-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
+					$result .= __('Single view for ', 'wpv-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
 				} else if(strpos($option, 'views_template_archive_for_') !== false) {
 					$term = substr($option, 27);
-					$result .= __('Archive view for ', 'wp-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
+					$result .= __('Archive view for ', 'wpv-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
 				} else if(strpos($option, 'views_template_loop_') !== false) {
 					$term = substr($option, 20);
-					$result .= __('Loop view for ', 'wp-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
+					$result .= __('Loop view for ', 'wpv-views'). '<span class="view_template_term">' . $term .  '</span>. <br />';
 				}
 			}
 		}
@@ -157,8 +157,20 @@ function wpv_get_view_template_defaults($wpv_options, $post_id) {
 function wpv_create_content_summary_for_listing($post_id) {
 	$summary = '<div class="view_summary_box">';
 	$view_settings = get_post_meta($post_id, '_wpv_settings', true);
-
-	$summary .= apply_filters('wpv-view-get-content-summary', $summary, $post_id, $view_settings);
+	
+	if (!isset($view_settings['view-query-mode'])) {
+		$view_settings['view-query-mode'] = 'normal';
+	}
+	
+	switch ($view_settings['view-query-mode']) {
+		case 'normal':
+			$summary .= apply_filters('wpv-view-get-content-summary', $summary, $post_id, $view_settings);
+			break;
+		
+		case 'archive':
+			$summary .= __('This View displays results for an <strong>existing WordPress query</strong>', 'wpv-views');
+			break;
+	}
 	
 	$summary .= '</div>';
 	

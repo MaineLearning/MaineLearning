@@ -12,6 +12,8 @@ require WPV_PATH . '/inc/wpv-filter-order-by.php';
 require WPV_PATH . '/inc/wpv-filter-taxonomy-order-by.php';
 require WPV_PATH . '/inc/wpv-pagination.php';
 require WPV_PATH . '/inc/wpv-filter-meta-html.php';
+require WPV_PATH . '/inc/wpv-filter-limit.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-limit-embedded.php';
 
 
 function wpv_filter_interface_select($view_settings, $key, $output_text, $short_code, $allow_multiple = false) {
@@ -47,5 +49,7 @@ function wpv_filter_add_js() {
     wp_enqueue_script( 'views-pagination-script' , WPV_URL . '/res/js/views_pagination.js', array(), WPV_VERSION);
     wp_enqueue_script( 'views-filter-meta-html-script' , WPV_URL . '/res/js/views_filter_meta_html.js', array(), WPV_VERSION);
     wp_enqueue_script( 'views-filter-post-relationship-script' , WPV_URL . '/res/js/views_filter_post_relationship.js', array(), WPV_VERSION);
+    wp_enqueue_script( 'views-insert-controls-script' , WPV_URL . '/res/js/views_insert_controls.js', array(), WPV_VERSION);
+    wp_enqueue_script( 'views-filter-controls-script' , WPV_URL . '/res/js/views_filter_controls.js', array(), WPV_VERSION);
 }
 

@@ -34,6 +34,12 @@ jQuery(document).ready(function($){
     jQuery('#content').keyup(function(event) {
        	show_view_changed_message();
     });
+	
+    jQuery('input[name=_wpv_settings\\[view-query-mode\\]]').change(function(event) {
+       	show_view_changed_message();
+    });
+	
+	
     
 });
 
@@ -81,24 +87,12 @@ function add_wpv_filter_data_to_content(c, data) {
 function wpv_get_filter_code() {
     
     var controls = '';
-    jQuery('#wpv_filter_table').find('.wpv_interface_select').each(function(){
-        if (jQuery(this).val() != 'none') {
-            var name = jQuery(this).attr('name');
-            var output_text = jQuery(this).attr('output_text');
-            var short_code = jQuery(this).attr('short_code');
-            
-            if (this.tagName == 'SELECT') {
-                controls += output_text + ' [' + short_code + ' style="' + jQuery(this).val() + '"]\n<br />\n';
-            } else if (this.tagName == 'INPUT' && jQuery(this).attr('checked')) {
-                controls += output_text + ' [' + short_code + ']\n<br />\n';
-            }
-        }
-    });
-    
-    controls += wpv_search_box_code();
+
+    controls += wpv_filter_controls_code();
     
     var no_user_controls = controls.length == 0;
 
+	
     controls += wpv_get_pagination_code();
     
     var out = '';
@@ -107,12 +101,6 @@ function wpv_get_filter_code() {
     
     controls = '\n' + controls;
     
-    if (no_user_controls) {
-        controls += '[wpv-filter-submit name="Apply" hide="true"]\n';
-    } else {
-        controls += '[wpv-filter-submit name="Apply"]\n';
-    }
-        
     if (no_controls) {
         // hide the form if there are know other controls.
         out += '[wpv-filter-start hide="true"]';
@@ -130,21 +118,25 @@ function wpv_get_filter_code() {
 
 function check_if_previous_filter_has_changed(body) {
     // find the filter info
+	
     var match = /\[wpv-filter-start.*?\]([\s\S]*)\[wpv-filter-end\]/.exec(body);
     
     var original = jQuery('textarea#wpv_generated_filter_meta_html_content').val();
+
     var match_original = /\[wpv-filter-start.*?\]([\s\S]*)\[wpv-filter-end\]/.exec(original);
         
     if (match && match_original) {
         if (match_original[1] != match[1]) {
             // something has changed
             jQuery('#wpv_filter_meta_html_content_error').show();
+			jQuery('#wpv_filter_control_meta_html_content_error').hide();
             wpv_view_filter_meta_html();
             return false;
         }
     }
 
     jQuery('#wpv_filter_meta_html_content_error').hide();
+	jQuery('#wpv_filter_control_meta_html_content_error').hide();
     return true;
 }
 
@@ -175,6 +167,7 @@ function wpv_show_type_edit_ok() {
 
 var post_type_controls = Array('#wpv-post-type-checkboxes',
                                '#wpv-post-order-by',
+                               '#wpv-post-limit',
                                '#wpv-post-types-settings',
                                '.wpv_post_type_filter_row',
                                '.wpv_add_filters_button',
@@ -182,6 +175,7 @@ var post_type_controls = Array('#wpv-post-type-checkboxes',
                                '.wpv_add_fields_button');
 var taxonomy_controls = Array('#wpv-taxonomy-radios',
                               '#wpv-taxonomy-order-by',
+                              '#wpv-taxonomy-limit',
                               '#wpv-taxonomy-settings',
                               '.wpv_taxonomy_filter_row',
                               '.wpv-taxonomy-field',
@@ -194,7 +188,11 @@ var taxonomy_controls = Array('#wpv-taxonomy-radios',
  */
 function wpv_select_post_type_filter() {
     for (var i= 0; i < post_type_controls.length; i++) {
-        jQuery(post_type_controls[i]).show();
+		jQuery(post_type_controls[i]).each (function (index) {
+			if (!jQuery(this).hasClass('wpv_edit_row')) {
+				jQuery(this).show();
+			}
+		});
     }
 
     for (var i= 0; i < taxonomy_controls.length; i++) {
@@ -263,7 +261,7 @@ function wpv_show_type_edit_cancel() {
     query_type_selected.each( function(index) {
         jQuery(this).attr('checked', true);
     });
-
+    
     if (query_type_selected.val() == 'posts') {
         wpv_select_post_type_filter()
     }
@@ -406,7 +404,8 @@ function wpv_update_views_step_help() {
 	
     var post_types = jQuery('input[name="_wpv_settings\\[post_type\\]\\[\\]"]:checked');
     var query_type = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked').val();
-
+    var view_query_mode = jQuery('input[name=_wpv_settings\\[view-query-mode\\]]:checked').val();
+	
 	var help_1_complete = false;
 	var help_2_complete = false;
 	var help_3_complete = false;
@@ -417,7 +416,7 @@ function wpv_update_views_step_help() {
 	}
 	
 	if (!jQuery('#wpv-filter-type-edit').is(":visible")) {
-		if (post_types.length || query_type == 'taxonomy') {
+		if (post_types.length || query_type == 'taxonomy' || view_query_mode == 'archive') {
 			help_2_complete = true;
 		} else {
 			jQuery('#wpv-step-help-2').removeClass().addClass('wpv-incomplete-step')

@@ -12,6 +12,8 @@ if(is_admin()){
             add_filter('wpv_add_filters', 'wpv_add_filter_search', 1, 1);
             add_filter('wpv_add_filters_taxonomy', 'wpv_add_filter_search_taxonomy', 1, 1);
         }
+		
+        add_action('admin_head', 'wpv_filter_search_js');            
     }
     
     /**
@@ -97,7 +99,7 @@ if(is_admin()){
         ob_start();
         ?>
             <input class="button-primary" type="button" value="<?php echo __('OK', 'wpv-views'); ?>" name="<?php echo __('OK', 'wpv-views'); ?>" onclick="wpv_show_filter_search_edit_ok('wpv-filter-search', 'post_search_value', 'search_mode', 'post_search')"/>
-            <input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" name="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_filter_search_edit_cancel()"/>
+            <input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" name="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_filter_search_edit_cancel('wpv-filter-search', 'post_search_value', 'search_mode', 'post_search')"/>
         <?php
         $td .= ob_get_clean();
         $td .= '</div></td>';
@@ -371,3 +373,20 @@ function wpv_search_summary_filter($summary, $post_id, $view_settings) {
 	return $summary;
 }
 
+function wpv_search_get_url_params($view_settings) {
+	if (isset($view_settings['search_mode'][0]) && $view_settings['search_mode'][0] == 'visitor') {
+		return array(array('name' => __('Search' , 'wpv-views'), 'param' => 'wpv_post_search', 'mode' => 'search'));
+	} else {
+		return array();
+	}
+}
+
+function wpv_filter_search_js() {
+	?>
+	
+    <script type="text/javascript">
+		var wpv_search_text = '<?php echo __('Search', 'wpv-views'); ?>';
+	</script>
+	
+	<?php
+}

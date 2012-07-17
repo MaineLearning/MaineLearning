@@ -16,3 +16,8 @@ ul.wpv_pagination_dots {
 .wpv_pagination_dots li.wpv_page_current a {
     background-position: 0 -16px;
 }
+
+.wpv-filter-next-link,
+.wpv-filter-previous-link {
+    z-index: 10;
+}

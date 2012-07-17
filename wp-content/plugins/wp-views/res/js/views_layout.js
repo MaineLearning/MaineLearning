@@ -67,13 +67,17 @@ function wpv_update_layout_rows() {
         jQuery(this).attr('id', 'wpv_field_row_'+row);
         jQuery(this).children('td:first-child').children('img').attr('onclick', 'on_delete_wpv('+row+')');
         jQuery(this).children('td:nth-child(2)').children('input').attr('id', 'wpv_field_prefix_'+row).attr('name', '_wpv_layout_settings[fields][prefix_'+row+']');
-        jQuery(this).children('td:nth-child(3)').children('span').attr('id', 'wpv_field_name_'+row);
-        jQuery(this).children('td:nth-child(3)').children('input').attr('id', 'wpv_field_name_hidden_'+row).attr('name', '_wpv_layout_settings[fields][name_'+row+']');
+        
+		jQuery(this).children('td:nth-child(3)').children('span').attr('id', 'wpv_field_name_'+row);
+        jQuery(this).children('td:nth-child(3)').children('input:nth-child(2)').attr('id', 'wpv_field_name_hidden_'+row).attr('name', '_wpv_layout_settings[fields][name_'+row+']');
         if (jQuery(this).children('td:nth-child(3)').children('div').length !== 0) {
             jQuery(this).children('td:nth-child(3)').children('div').attr('id', 'views_template_body_'+row);
             jQuery(this).children('td:nth-child(3)').children('div').children('select').attr('id', 'views_template_'+row).attr('name', 'views_template_'+row);
         }
-        jQuery(this).children('td:nth-child(4)').children('input').attr('id', 'wpv_field_row_title_'+row).attr('name', '_wpv_layout_settings[fields][row_title_'+row+']');
+        jQuery(this).children('td:nth-child(3)').children('input:nth-child(3)').attr('id', 'wpv_types_field_name_hidden_'+row).attr('name', '_wpv_layout_settings[fields][types_field_name_'+row+']');
+        jQuery(this).children('td:nth-child(3)').children('input:nth-child(4)').attr('id', 'wpv_types_field_data_hidden_'+row).attr('name', '_wpv_layout_settings[fields][types_field_data_'+row+']');
+        
+		jQuery(this).children('td:nth-child(4)').children('input').attr('id', 'wpv_field_row_title_'+row).attr('name', '_wpv_layout_settings[fields][row_title_'+row+']');
         jQuery(this).children('td:nth-child(5)').children('input').attr('id', 'wpv_field_suffix_'+row).attr('name', '_wpv_layout_settings[fields][suffix_'+row+']');
         row++;
     });
@@ -86,13 +90,17 @@ function on_up_wpv(index) {
 };
 function on_add_field_wpv(menu, name, text) {
 	
-	text = editor_decode64(text);
+	if(menu.indexOf('Types-!-Complete-!-') != 0) {
+		text = editor_decode64(text);
+	}
 	
     var view_template = '';
     var view = '';
     var title = name;
+	var types_field_name = '';
+	var types_field_data = '';
 
-    if (menu == wpv_view_template_text) {
+    if (menu == 'View template') {
         view_template = text;
         menu = '';
         name = 'Body';
@@ -106,6 +114,13 @@ function on_add_field_wpv(menu, name, text) {
     // for taxonomies, add the necessary shortcode parts 
     else if(menu.indexOf(wpv_add_taxonomy_text +'-!-') == 0) {
     	name = 'wpv-taxonomy type="' + name + '" separator=", " format="link" show="name"'; 
+    }
+	else if(menu.indexOf('Types-!-Complete-!-') == 0) {
+        title = 'Types - ' + name;
+		types_field_name = name;
+		types_field_data = text;
+		text = name;
+		name = 'types-field';
     }
     else if(menu.indexOf('Types-!-') == 0) {
         title = 'Types - ' + name;
@@ -133,7 +148,14 @@ function on_add_field_wpv(menu, name, text) {
     // add a new row.
     var td = '<td width="20px"><img src="' + wpv_url + '/res/img/delete.png" onclick="on_delete_wpv(\'' + temp_index + '\')" style="cursor: pointer"></td>';
     td += '<td width="120px"><input id="wpv_field_prefix_' + temp_index + '" type="text" value="" name="_wpv_layout_settings[fields][prefix_' + temp_index + ']" width="100%"></td>';
-    td += '<td width="76px"><span id="wpv_field_name_' + temp_index + '">' + title + '</span><input id="wpv_field_name_hidden_' + temp_index + '" type="hidden" value="' + name + '" name="_wpv_layout_settings[fields][name_' + temp_index + ']" ></td>';
+    td += '<td width="76px">';
+	
+	td += '<span id="wpv_field_name_' + temp_index + '">' + title + '</span>';
+	td += '<input id="wpv_field_name_hidden_' + temp_index + '" type="hidden" value="' + name + '" name="_wpv_layout_settings[fields][name_' + temp_index + ']" >';
+	td += '<input id="wpv_types_field_name_hidden_' + temp_index + '" type="hidden" value="' + types_field_name + '" name="_wpv_layout_settings[fields][types_field_name_' + temp_index + ']" >';
+	td += '<input id="wpv_types_field_data_hidden_' + temp_index + '" type="hidden" value="' + types_field_data + '" name="_wpv_layout_settings[fields][types_field_data_' + temp_index + ']" >';
+	
+	td += '</td>';
     td += '<td class="row-title hidden" width="120px"><input id="wpv_field_row_title_' + temp_index + '" type="text" name="_wpv_layout_settings[fields][row_title_' + temp_index + ']" value="' + text + '"></td>';
     td += '<td width="120px"><input id="wpv_field_suffix_' + temp_index + '" type="text" value="" name="_wpv_layout_settings[fields][suffix_' + temp_index + ']" width="100%"></td>';
     td += '<td width="16px"><img src="' + wpv_url + '/res/img/move.png" class="move" style="cursor: move;" /></td>';
@@ -174,6 +196,21 @@ function on_add_field_wpv(menu, name, text) {
 
 };
 
+function on_add_field_wpv_types_callback(types_call, field_title) {
+	// We're calling a types function.
+	// We need to set a re-direct so that the result of the Types popup
+	// returns here instead of being inserted into the editor.
+	if (wpcfFieldsEditorCallback_set_redirect) {
+		wpcfFieldsEditorCallback_set_redirect('window.parent.on_add_field_wpv_types_callback_action', {'title' : field_title});
+	}
+	eval(types_call);
+}
+
+function on_add_field_wpv_types_callback_action(shortcode, params) {
+	// The result of a Types popup.
+	on_add_field_wpv('Types-!-Complete-!-', params['title'], shortcode);
+}
+
 jQuery(document).ready(function($){
     
     show_body_view_template_controls();
@@ -211,13 +248,18 @@ function on_generate_wpv_layout(force) {
             
             header_name = 'post-field-' + field_type.substring(wpv_field_text.length);
             field_type = '[wpv-post-field name="' + field_type.substring(wpv_field_text.length) + '"]';
-        } 
+        }
+		else if (jQuery('#wpv_field_name_hidden_' + temp_index).val() == 'types-field') {
+            add_type = 'custom';
+			header_name = 'types-field-' + field_type.substring('Types - '.length);
+			field_type = jQuery('#wpv_types_field_data_hidden_' + temp_index).val();
+		}
         else if (field_type.indexOf('Types - ') == 0) {
             add_type = 'custom';
             // a custom field
             
-            header_name = 'types-field-' + field_type.substring('Types - '.length);
-            field_type = '[types field="' + field_type.substring('Types - '.length) + '"][/types]';
+			header_name = 'types-field-' + field_type.substring('Types - '.length);
+			field_type = '[types field="' + field_type.substring('Types - '.length) + '"][/types]';
         } 
         // taxonomy search, some prefix preset
         else if(field_type.indexOf('wpvtax-') > 0) {
@@ -329,13 +371,13 @@ function show_or_hide_layout_table() {
         jQuery('#view_layout_add_field_message_1').hide();
         jQuery('#view_layout_fields_to_include').hide();
         jQuery('#view_layout_add_field_message_2').show();
-        jQuery('input[name=wpv-layout-add-field]').removeClass('thickbox button-secondary').addClass('thickbox button-primary');
+        jQuery('input[name=wpv-layout-add-field]').removeClass('button-secondary').addClass('button-primary');
     } else {
         jQuery('#view_layout_fields_table').show();
         jQuery('#view_layout_add_field_message_1').show();
         jQuery('#view_layout_fields_to_include').show();
         jQuery('#view_layout_add_field_message_2').hide();
-        jQuery('input[name=wpv-layout-add-field]').removeClass('thickbox button-primary').addClass('thickbox button-secondary');
+        jQuery('input[name=wpv-layout-add-field]').removeClass('button-primary').addClass('button-secondary');
     }
 }
 
@@ -608,27 +650,6 @@ jQuery(document).ready(function($){
     jQuery('#view_layout_fields_table input').blur(function(){on_generate_wpv_layout(false);});
 });
 
-// thickbox settings
-var tb_position;
-jQuery(document).ready(function($){
-    tb_position = function() {
-        var tbWindow = $('#TB_window'), width = $(window).width(), H = $(window).height(), W = ( 860 < width ) ? 860 : width, adminbar_height = 0;
-        
-        adminbar_height = $('#TB_title').height();
-
-        if ( tbWindow.size() ) {
-            tbWindow.width( W).height( H - 150);
-            $('#TB_ajaxContent').width( W - 30).height( H - 150 - adminbar_height -17);
-            tbWindow.css({'margin-left': '-' + parseInt((( W ) / 2),10) + 'px'});
-            if ( typeof document.body.style.maxWidth != 'undefined' )
-                tbWindow.css({'top': adminbar_height + 'px','margin-top':'0'});
-        };
-
-    };
-
-    $(window).resize(function(){ tb_position(); });
-
-    });
 
 function view_layout_fields_table_add_row_title_field() {
     var style = jQuery('select[name="_wpv_layout_settings[style]"]').val();

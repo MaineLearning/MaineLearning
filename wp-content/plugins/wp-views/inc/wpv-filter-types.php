@@ -50,12 +50,18 @@ function wpv_filter_types_admin($view_settings) {
             <div id="wpv-post-order-by"<?php if($view_settings['query_type'][0] != 'posts') { echo ' style="display:none"'; }?>>
                 <?php wpv_filter_order_by_admin($view_settings); ?>
             </div>
+            <div id="wpv-post-limit"<?php if($view_settings['query_type'][0] != 'posts') { echo ' style="display:none"'; }?>>
+                <?php wpv_filter_limit_admin($view_settings); ?>
+            </div>
 
             <div id="wpv-taxonomy-settings"<?php if($view_settings['query_type'][0] != 'taxonomy') { echo ' style="display:none"'; }?>>
                 <?php wpv_taxonomy_settings($view_settings); ?>
             </div>
             <div id="wpv-taxonomy-order-by"<?php if($view_settings['query_type'][0] != 'taxonomy') { echo ' style="display:none"'; }?>>
                 <?php wpv_filter_taxonomy_order_by_admin($view_settings); ?>
+            </div>
+            <div id="wpv-taxonomy-limit"<?php if($view_settings['query_type'][0] != 'taxonomy') { echo ' style="display:none"'; }?>>
+                <?php wpv_filter_limit_admin($view_settings, 'taxonomy'); ?>
             </div>
 
             
@@ -72,11 +78,13 @@ function wpv_get_type_filter_summary($view_settings) {
         case 'posts':
             wpv_get_post_filter_summary($view_settings);
             wpv_filter_order_by_admin_summary($view_settings);
+            wpv_filter_limit_admin_summary($view_settings);
             break;
         
         case 'taxonomy':
             wpv_get_taxonomy_filter_summary($view_settings);
             wpv_filter_taxonomy_order_by_admin_summary($view_settings);
+            wpv_filter_limit_admin_summary($view_settings, 'taxonomy');
             break;
         
     }

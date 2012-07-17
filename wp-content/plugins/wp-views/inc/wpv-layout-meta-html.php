@@ -44,8 +44,8 @@ function wpv_layout_meta_html_admin($post, $view_layout_settings) {
     ?>
         <div id="wpv_layout_meta_html_admin">
             <div id="wpv_layout_meta_html_admin_show">
-                <br />
-                <a style="cursor: pointer" onclick="wpv_view_layout_meta_html()"><?php _e('View/Edit Meta HTML', 'wpv-views'); ?></a>
+                <p><i><?php echo __('The layout-style and fields that you selected generate meta HTML. This meta HTML includes shortcodes and HTML, which you can edit, to fully customize the appearance of this View\'s content output section.', 'wpv-views'); ?></i></p>
+                <input type="button" class="button-secondary" onclick="wpv_view_layout_meta_html()" value="<?php _e('View/Edit Meta HTML', 'wpv-views'); ?>" />
             </div>
             <div id="wpv_layout_meta_html_admin_edit" style="background:<?php echo WPV_EDIT_BACKGROUND;?>;display:none">
                 <div style="margin:10px 10px 10px 10px;">

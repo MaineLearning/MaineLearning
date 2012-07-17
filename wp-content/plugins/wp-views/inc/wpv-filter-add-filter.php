@@ -53,7 +53,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
                 <?php
                     foreach($filters as $type => $filter) {
                         ?>
-                        <div id="<?php echo $id; ?>_con_<?php echo $type; ?>" class="wpv_add_filter_con" style="display:none;">
+                        <div id="<?php echo $id; ?>_con_<?php echo $type; ?>" class="wpv_add_filter_con_<?php echo $id; ?>" style="display:none;">
                         
                             <?php
                                 switch ($filter['type']) {
