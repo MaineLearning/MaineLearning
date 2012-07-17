@@ -217,11 +217,11 @@ function wpcf_admin_post_save_post_hook($post_ID, $post) {
                     // Skype specific
                     if ($field['type'] == 'skype') {
                         unset($repetitive_data['old_value']);
-                        wpcf_admin_post_save_field($post_ID, $meta_key,
-                                $field, $repetitive_data, true);
+                        wpcf_admin_post_save_field($post_ID, $meta_key, $field,
+                                $repetitive_data, true);
                     } else {
-                        wpcf_admin_post_save_field($post_ID, $meta_key,
-                                $field, $repetitive_data['new_value'], true);
+                        wpcf_admin_post_save_field($post_ID, $meta_key, $field,
+                                $repetitive_data['new_value'], true);
                     }
                 }
             } else {
@@ -281,25 +281,28 @@ function wpcf_admin_post_save_post_hook($post_ID, $post) {
  * @param string $old_value
  * @return boolean 
  */
-function wpcf_admin_post_save_field($post_ID, $meta_key, $field, $field_value, $add = false) {
-        // Apply filters
-        $field_value = apply_filters('wpcf_fields_value_save', $field_value,
-                $field['type'], $field['slug'], $field);
-        $field_value = apply_filters('wpcf_fields_slug_' . $field['slug']
-                . '_value_save', $field_value, $field);
-        $field_value = apply_filters('wpcf_fields_type_' . $field['type']
-                . '_value_save', $field_value, $field);
+function wpcf_admin_post_save_field($post_ID, $meta_key, $field, $field_value,
+        $add = false) {
+    // Apply filters
+    $field_value = apply_filters('wpcf_fields_value_save', $field_value,
+            $field['type'], $field['slug'], $field);
+    $field_value = apply_filters('wpcf_fields_slug_' . $field['slug']
+            . '_value_save', $field_value, $field);
+    $field_value = apply_filters('wpcf_fields_type_' . $field['type']
+            . '_value_save', $field_value, $field);
 
-        // Save field
-        if ($add) {
-            add_post_meta($post_ID, $meta_key, $field_value);
-        } else {
-            update_post_meta($post_ID, $meta_key, $field_value);
-        }
+    // Save field
+    if ($add) {
+        add_post_meta($post_ID, $meta_key, $field_value);
+    } else {
+        update_post_meta($post_ID, $meta_key, $field_value);
+    }
 
-        do_action('wpcf_fields_save', $field_value, $field);
-        do_action('wpcf_fields_slug_' . $field['slug'] . '_save', $field_value, $field);
-        do_action('wpcf_fields_type_' . $field['type'] . '_save', $field_value, $field);
+    do_action('wpcf_fields_save', $field_value, $field);
+    do_action('wpcf_fields_slug_' . $field['slug'] . '_save', $field_value,
+            $field);
+    do_action('wpcf_fields_type_' . $field['type'] . '_save', $field_value,
+            $field);
 }
 
 /**
@@ -319,13 +322,13 @@ function wpcf_admin_post_js_validation() {
 
     ?>", url);
         }
-                                                    
+                                                        
         var wpcfFieldsEditorCallback_redirect = null;
-                                                    
+                                                        
         function wpcfFieldsEditorCallback_set_redirect(function_name, params) {
             wpcfFieldsEditorCallback_redirect = {'function' : function_name, 'params' : params};
         }
-                                                    
+                                                        
         //]]>
     </script>
     <?php
@@ -437,8 +440,11 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
                 } else {
                     $temp_flag = true;
                 }
+            } else {
+                $temp_flag = true;
             }
-                // Get repetitive fields values
+            
+            // Get repetitive fields values
             if ($temp_flag && !empty($post->ID)) {
                 $temp_flag = false;
                 $temp_fields = get_post_meta($post->ID,
@@ -1485,10 +1491,10 @@ function wpcf_admin_post_marketing_meta_box() {
                 . '</a></li>'
                 . '</ul>'
                 . '<p style="margin-top:2em;"><a class="button button-highlighted" href="http://wp-types.com/buy/?utm_source=types&utm_medium=plugin&utm_term=buy&utm_content=post-edit-sidebar&utm_campaign=types" target="_blank">'
-                . __('Buy Views ($49)','wpcf')
+                . __('Buy Views ($49)', 'wpcf')
                 . '</a></p>'
                 . '<p style="font-size: 90%;">'
-                . __('Risk free - 30 days money back guarantee','wpcf')
+                . __('Risk free - 30 days money back guarantee', 'wpcf')
                 . '</p>';
     }
     echo $output;
