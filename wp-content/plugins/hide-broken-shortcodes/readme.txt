@@ -2,10 +2,12 @@
 Contributors: coffee2code
 Donate link: http://coffee2code.com/donate
 Tags: shortcode, shortcodes, content, post, page, coffee2code
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 2.5
-Tested up to: 3.3
-Stable tag: 1.4
-Version: 1.4
+Tested up to: 3.4
+Stable tag: 1.5
+Version: 1.5
 
 Prevent broken shortcodes from appearing in posts and pages.
 
@@ -55,8 +57,8 @@ Assuming you want to allow the broken shortcodes 'abc' and 'gallery' to be ignor
 function allowed_broken_shortcodes( $display, $shortcode_name, $m ) {
 	$shortcodes_not_to_hide = array( 'abc', 'gallery' );
 	if ( in_array( $shortcode_name, $shortcodes_not_to_hide ) )
-		$default_display = $m[0];
-	return $default_display;
+		$display = $m[0];
+	return $display;
 }
 add_filter( 'hide_broken_shortcode', 'allowed_broken_shortcodes', 10, 3 );
 `
@@ -97,6 +99,14 @@ function hbs_filter( $filters_array ) {
 
 
 == Changelog ==
+
+= 1.5 =
+* Recursively hide nested broken shortcodes
+* Re-license as GPLv2 or later (from X11)
+* Add 'License' and 'License URI' header tags to readme.txt and plugin file
+* Remove ending PHP close tag
+* Note compatibility through WP 3.4+
+* Fix error in example code in readme.txt
 
 = 1.4 =
 * Update get_shortcode_regex() and do_shortcode_tag() to support shortcode escape syntax
@@ -142,6 +152,9 @@ function hbs_filter( $filters_array ) {
 
 
 == Upgrade Notice ==
+
+= 1.5 =
+Recommended minor update: recursively hide nested broken shortcodes; noted compatibility through WP 3.4+; explicitly stated license
 
 = 1.4 =
 Minor update: support shortcode escaping syntax; noted compatibility through WP 3.3+. BE AWARE: An incompatible change has been made in third argument sent to 'hide_broken_shortcode' filter.

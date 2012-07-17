@@ -28,10 +28,9 @@ add_action('admin_init','em_admin_actions_bookings',100);
  * Decide what content to show in the bookings section. 
  */
 function em_bookings_page(){
-	global $action;
 	//First any actions take priority
 	if( !empty($_REQUEST['action']) && substr($_REQUEST['action'],0,7) != 'booking' ){ //actions not starting with booking_
-		do_action('em_bookings_'.$action);
+		do_action('em_bookings_'.$_REQUEST['action']);
 	}elseif( !empty($_REQUEST['booking_id']) ){
 		em_bookings_single();
 	}elseif( !empty($_REQUEST['person_id']) ){
@@ -162,8 +161,8 @@ function em_bookings_ticket(){
 		</div>
   		<h2>
   			<?php echo sprintf(__('Ticket for %s', 'dbem'), "'{$EM_Event->name}'"); ?>
-  			<a href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-event&event_id=<?php echo $EM_Event->event_id; ?>" class="button add-new-h2"><?php _e('View/Edit Event','dbem') ?></a>
-  			<a href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-bookings&event_id=<?php echo $EM_Event->event_id; ?>" class="button add-new-h2"><?php _e('View Event Bookings','dbem') ?></a>
+  			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="button add-new-h2"><?php _e('View/Edit Event','dbem') ?></a>
+  			<a href="<?php echo $EM_Event->get_bookings_url(); ?>" class="button add-new-h2"><?php _e('View Event Bookings','dbem') ?></a>
   		</h2> 
   		<?php echo $EM_Notices; ?>
 		<div>
@@ -224,7 +223,7 @@ function em_bookings_single(){
 							$localised_end_date = date_i18n(get_option('dbem_date_format'), $EM_Event->end);
 							?>
 							<table>
-								<tr><td><strong><?php _e('Name','dbem'); ?></strong></td><td><a class="row-title" href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-bookings&amp;event_id=<?php echo $EM_Event->event_id ?>"><?php echo ($EM_Event->event_name); ?></a></td></tr>
+								<tr><td><strong><?php _e('Name','dbem'); ?></strong></td><td><a class="row-title" href="<?php echo $EM_Event->get_bookings_url(); ?>"><?php echo ($EM_Event->event_name); ?></a></td></tr>
 								<tr>
 									<td><strong><?php _e('Date/Time','dbem'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
 									<td>
@@ -297,7 +296,7 @@ function em_bookings_single(){
 									<tbody>
 										<?php foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking): ?>
 										<tr>
-											<td class="ticket-type"><a class="row-title" href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-bookings&amp;ticket_id=<?php echo $EM_Ticket_Booking->get_ticket()->ticket_id ?>"><?php echo $EM_Ticket_Booking->get_ticket()->ticket_name ?></a></td>
+											<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket_Booking->get_ticket()->ticket_id)); ?>"><?php echo $EM_Ticket_Booking->get_ticket()->ticket_name ?></a></td>
 											<td>
 												<span class="em-booking-single-info"><?php echo $EM_Ticket_Booking->get_spaces(); ?></span>
 												<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket_Booking->get_ticket()->ticket_id; ?>][spaces]" class="em-ticket-select" value="<?php echo $EM_Ticket_Booking->get_spaces(); ?>" /></div>
@@ -310,7 +309,7 @@ function em_bookings_single(){
 											<?php foreach($EM_Event->get_bookings()->get_tickets()->tickets as $EM_Ticket): ?>
 												<?php if( !in_array($EM_Ticket->ticket_id, $shown_tickets) ): ?>
 												<tr>
-													<td class="ticket-type"><a class="row-title" href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-bookings&amp;ticket_id=<?php echo $EM_Ticket->ticket_id ?>"><?php echo $EM_Ticket->ticket_name ?></a></td>
+													<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket_Booking->get_ticket()->ticket_id)); ?>"><?php echo $EM_Ticket->ticket_name ?></a></td>
 													<td>
 														<span class="em-booking-single-info">0</span>
 														<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket->ticket_id; ?>][spaces]" class="em-ticket-select" value="0" /></div>
@@ -456,7 +455,7 @@ function em_bookings_person(){
   		<h2>
   			<?php _e('Manage Person\'s Booking', 'dbem'); ?>
   			<?php if( current_user_can('edit_users') ) : ?>
-  			<a href="user-edit.php?user_id=<?php echo $EM_Person->ID; ?>" class="button add-new-h2"><?php _e('Edit User','dbem') ?></a>
+  			<a href="<?php admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="button add-new-h2"><?php _e('Edit User','dbem') ?></a>
   			<?php endif; ?>
   		</h2>
   		<?php echo $EM_Notices; ?>

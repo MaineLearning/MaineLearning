@@ -30,7 +30,7 @@ if (!class_exists('ICL_Array2XML')) {
             }
             foreach ($array as $key => $value) {
                 if (!is_array($value)) {
-                    if (empty($key) || empty($value)) {
+                    if (empty($key)) {
                         continue;
                     }
                     $key = $child_key ? $child_key : $key;

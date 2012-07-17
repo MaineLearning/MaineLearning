@@ -121,7 +121,7 @@ function wpcf_fields_email_editor_submit() {
     if (!empty($field)) {
         $shortcode = wpcf_fields_get_shortcode($field, $add);
         wpcf_admin_fields_save_field_last_settings($_GET['field_id'], $_POST);
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }

@@ -49,8 +49,8 @@ class EM_Location_Post_Admin{
 		$is_post_type = get_post_type($post_id) == EM_POST_TYPE_LOCATION;
 		if(!defined('UNTRASHING_'.$post_id) && $is_post_type && $saving_status){
 			if( wp_verify_nonce($_REQUEST['_emnonce'], 'edit_location')){
-				do_action('em_location_save_pre', $this);
 				$EM_Location = em_get_location($post_id, 'post_id');
+				do_action('em_location_save_pre', $EM_Location);
 				$get_meta = $EM_Location->get_post_meta();
 				$save_meta = $EM_Location->save_meta();
 				//Handle Errors by making post draft
@@ -58,9 +58,9 @@ class EM_Location_Post_Admin{
 					$EM_Location->set_status(null, true);
 					$EM_Notices->add_error( '<strong>'.sprintf(__('Your %s details are incorrect and cannot be published, please correct these errors first:','dbem'),__('location','dbem')).'</strong>', true); //Always seems to redirect, so we make it static
 					$EM_Notices->add_error($EM_Location->get_errors(), true); //Always seems to redirect, so we make it static
-					apply_filters('em_location_save', false , $this);
+					apply_filters('em_location_save', false , $EM_Location);
 				}else{
-					apply_filters('em_location_save', true , $this);
+					apply_filters('em_location_save', true , $EM_Location);
 				}
 			}else{
 				//do a quick and dirty update

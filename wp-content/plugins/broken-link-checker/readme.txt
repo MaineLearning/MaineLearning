@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: links, broken, maintenance, blogroll, custom fields, admin, comments, posts
 Requires at least: 3.2
-Tested up to: 3.4-beta4
-Stable tag: 1.5.4
+Tested up to: 3.4.1
+Stable tag: 1.6.2
 
 This plugin will check your posts, comments and other content for broken links and missing images, and notify you if any are found. 
 
@@ -37,6 +37,7 @@ There are several actions associated with each link. They show up when you move 
 * "Edit URL" lets you change the URL of that link. If the link is present in more than one place (e.g. both in a post and in the blogroll), all occurrences of that URL will be changed.
 * "Unlink" removes the link but leaves the link text intact.
 * "Not broken" lets you manually mark a "broken" link as working. This is useful if you know it was incorrectly detected as broken due to a network glitch or a bug. The marked link will still be checked periodically, but the plugin won't consider it broken unless it gets a new result.
+* "Dismiss" hides the link from the "Broken Links" and "Redirects" views. It will still be checked as normal and get the normal link styles (e.g. a strike-through effect for broken links), but won't be reported again unless its status changes. Useful if you want to acknowledge a link as broken/redirected and just leave as it is.
 
 You can also click on the contents of the "Status" or "Link Text" columns to get more info about the status of each link.
 
@@ -49,7 +50,7 @@ You can also click on the contents of the "Status" or "Link Text" columns to get
 * Czech - [Lelkoun](http://lelkoun.cz/)
 * Danish - [Georg S. Adamsen](http://wordpress.blogos.dk/)
 * Dutch - [Gideon van Melle](http://www.gvmelle.com/)
-* French - [Whiler](http://blogs.wittwer.fr/whiler/)
+* French - [Whiler](http://blogs.wittwer.fr/whiler/), Luc Capronnier
 * German - [Ivan Graf](http://blog.bildergallery.com/)
 * Hindi - [Outshine Solutions](http://outshinesolutions.com/)
 * Irish - [Ray Gren](http://letsbefamous.com/)
@@ -58,7 +59,7 @@ You can also click on the contents of the "Status" or "Link Text" columns to get
 * Korean - [MinHyeong Lim](http://ssamture.net/)
 * Persian - [Omid Sheerkavand](http://qanal.ir/)
 * Polish - [http://positionmaker.pl](http://positionmaker.pl/)
-* Portuguese - [PedroDM](http://development.mowster.net/)
+* Portuguese - [mowster](http://wordpress.mowster.net/)
 * Romanian - [Ovidiu](http://www.jibo.ro)
 * Russian - [Anna Ozeritskaya](http://hweia.ru/)
 * Spanish - [Neoshinji](http://blog.tuayudainformatica.com/traducciones-de-plugins-wordpress/)
@@ -89,6 +90,23 @@ To upgrade your installation
 1. Reactivate the plugin. Your settings will be retained from the previous version.
 
 == Changelog ==
+
+= 1.6.2 =
+* Another attempt to fix the "database not up to date" that some users are still experiencing even with 1.6.1.
+
+= 1.6.1 =
+* Fixed the "database not up to date" bug. Now the plugin should properly upgrade the DB.
+
+= 1.6 =
+* Added a way to dismiss links. Dismissed links don't show up in the "Broken" and "Redirects" lists, but are still checked as normal and get the normal link styles (e.g. strike-through for broken links). Useful if you want to, for example, acknowledge that a link is broken and leave it be.
+* Added a "Redirect URL" column. For redirects this will display the URL that the link redirects to. For normal, non-redirected links, it will be empty. This column is hidden by default. You can enable it in the "Screen Options" panel.
+* Updated French translation.
+* Tested on WP 3.4.1.
+* Replace the "More plugins..." link on the "Broken Links" page with a link to the Admin Menu Editor page. This link will be hidden for users who have donated.
+* A number of minor fixes.
+
+= 1.5.5 =
+* Fix broken image on the settings page.
 
 = 1.5.3 =
 * Fixed a bug that would cause the donation flag to be recorded incorrectly. Apologies to everyone who donated.
@@ -312,7 +330,7 @@ To upgrade your installation
 * "Discard" gone, replaced by "Not broken".
 * "Exclude" gone from action links.
 * Better handling of false positives.
-* FTP, mailto:, javascript: and other links with unsupported protocols now show up in the “All links” list.
+* FTP, mailto:, javascript: and other links with unsupported protocols now show up in the ï¿½All linksï¿½ list.
 
 = 0.8.1 =
 * Updated Italian translation.
@@ -459,7 +477,7 @@ To upgrade your installation
 
 = 0.5 =
 * This is a near-complete rewrite with a lot of new features. 
-* See  http://w-shadow.com/blog/2009/05/22/broken-link-checker-05/ for details.
+* See ï¿½http://w-shadow.com/blog/2009/05/22/broken-link-checker-05/ for details.
 
 = 0.4.14 =
 * Fix false positives when the URL contains an #anchor
@@ -586,6 +604,9 @@ To upgrade your installation
 * *There are no release notes for this version*
 
 == Upgrade Notice ==
+
+= 1.6.2 =
+Attempts to fix the "database not up to date" bug that some users are still experiencing with 1.6.1. If you have not encountered this bug, you can skip this update.
 
 = 1.4 =
 Adds an option to send post authors notifications about broken links in their posts and the the ability to sort links by URL, as well as a number of other updates and fixes.

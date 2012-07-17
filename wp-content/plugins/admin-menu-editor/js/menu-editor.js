@@ -1,5 +1,7 @@
 //(c) W-Shadow
 
+/** @namespace wsEditorData */
+
 var wsIdCounter = 0;
 
 (function ($){
@@ -150,7 +152,7 @@ function buildSubmenu(items){
 	
 	//Only show menus that have items. 
 	//Skip arrays (with a length) because filled menus are encoded as custom objects.
-	var entry = null 
+	var entry = null;
 	if (items && (typeof items != 'Array')){
 		for (var item_file in items){
 			entry = buildMenuItem(items[item_file]);
@@ -1415,8 +1417,21 @@ $(document).ready(function(){
 			}
 			
 		}
-	}); 
-	
+	});
+
+	//Flag closed hints as hidden by sending the appropriate AJAX request to the backend.
+	$('.ws_hint_close').click(function() {
+		var hint = $(this).parents('.ws_hint').first();
+		hint.hide();
+		wsEditorData.showHints[hint.attr('id')] = false;
+		$.post(
+			wsEditorData.adminAjaxUrl,
+			{
+				'action' : 'ws_ame_hide_hint',
+				'hint' : hint.attr('id')
+			}
+		);
+	});
 	
 	//Finally, show the menu
     outputWpMenu(customMenu);

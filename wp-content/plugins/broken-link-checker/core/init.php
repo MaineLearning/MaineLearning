@@ -46,6 +46,8 @@ define('BLC_FOR_EDITING', 'edit');
 define('BLC_FOR_PARSING', 'parse');
 define('BLC_FOR_DISPLAY', 'display');
 
+define('BLC_DATABASE_VERSION', 6);
+
 /***********************************************
 				Configuration
 ************************************************/
@@ -252,7 +254,7 @@ add_filter('cron_schedules', 'blc_cron_schedules');
 function blc_activation_hook(){
 	require BLC_DIRECTORY . '/includes/activation.php';
 }
-register_activation_hook(plugin_basename(BLC_PLUGIN_FILE), 'blc_activation_hook');
+register_activation_hook(BLC_PLUGIN_FILE, 'blc_activation_hook');
 
 //Load the plugin if installed successfully
 if ( $blc_config_manager->options['installation_complete'] ){
@@ -264,6 +266,12 @@ if ( $blc_config_manager->options['installation_complete'] ){
 			return;
 		}
 		$init_done = true;
+		
+		//Ensure the database is up to date
+		if ($blc_config_manager->options['current_db_version'] != BLC_DATABASE_VERSION) {
+			require_once BLC_DIRECTORY . '/includes/admin/db-upgrade.php';
+			blcDatabaseUpgrader::upgrade_database(); //Also updates the DB ver. in options['current_db_version'].
+		}
 		
 		//Load the base classes and utilities
 		require_once BLC_DIRECTORY . '/includes/links.php';

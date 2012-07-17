@@ -1258,12 +1258,6 @@ class RGFormsModel{
                 $value = self::create_list_array($field, $value);
             break;
 
-            case "number":
-                $value = self::get_input_value($field, "input_" . $field["id"], rgar($field, "inputName"), $field_values, $get_from_post);
-                if(GFCommon::is_numeric($value, rgar($field, 'numberFormat')))
-                    $value = GFCommon::clean_number($value, rgar($field, 'numberFormat'));
-            break;
-
             default:
 
                 if(isset($field["inputs"]) && is_array($field["inputs"])){
@@ -1286,12 +1280,10 @@ class RGFormsModel{
         }
         else if(rgar($field, "allowsPrepopulate")){
             return self::get_parameter_value($custom_name, $field_values, $field);
-
-
         }
     }
 
-    private static function get_parameter_value($name, $field_values, $field){
+    public static function get_parameter_value($name, $field_values, $field){
         $value = stripslashes(rgget($name));
         if(empty($value))
             $value = rgget($name, $field_values);
@@ -1428,7 +1420,7 @@ class RGFormsModel{
         }
 
         $post_data["post_status"] = rgar($form, "postStatus");
-        $post_data["post_category"] = !empty($categories) ? $categories : array(rgar($field, 'postCategory'));
+        $post_data["post_category"] = !empty($categories) ? $categories : array(rgar($form, 'postCategory'));
         $post_data["images"] = $images;
 
         //setting current user as author depending on settings
@@ -1572,7 +1564,7 @@ class RGFormsModel{
 
             case "number" :
                 $lead = empty($lead) ? RGFormsModel::get_lead($lead_id) : $lead;
-                $value = GFCommon::has_field_calculation($field) ? GFCommon::calculate($field, $form, $lead) : GFCommon::clean_number($value, rgar($field, "numberFormat"));
+                $value = GFCommon::has_field_calculation($field) ? GFCommon::round_number(GFCommon::calculate($field, $form, $lead), rgar($field, "calculationRounding")) : GFCommon::clean_number($value, rgar($field, "numberFormat"));
             break;
 
             case "website" :
@@ -2314,6 +2306,9 @@ class RGFormsModel{
             break;
             case "date" :
                 $value = self::prepare_date(rgar($field, "dateFormat"), $value);
+            break;
+            case "number" :
+                $value = GFCommon::clean_number($value, rgar($field, 'numberFormat'));
             break;
          }
 

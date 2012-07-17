@@ -13,7 +13,7 @@ function to_plugin_options()
                 $options['autosort']    = isset($_POST['autosort'])     ? $_POST['autosort']    : '';
                 $options['adminsort']   = isset($_POST['adminsort'])    ? $_POST['adminsort']   : '';
                     
-                echo '<div class="updated fade"><p>' . _e('Settings Saved', 'to') . '</p></div>';
+                ?><div class="updated fade"><p><?php _e('Settings Saved', 'to') ?></p></div><?php
 
                 update_option('tto_options', $options);   
             }

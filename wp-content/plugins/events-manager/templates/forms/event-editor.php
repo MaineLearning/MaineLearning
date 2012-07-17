@@ -27,7 +27,20 @@ if( !empty($_REQUEST['success']) ){
 <form enctype='multipart/form-data' id="event-form" method="post" action="">
 	<div class="wrap">
 		<?php do_action('em_front_event_form_header'); ?>
-		
+		<?php if(get_option('dbem_events_anonymous_submissions') && !is_user_logged_in()): ?>
+			<h4 class="event-form-submitter"><?php _e ( 'Your Details', 'dbem' ); ?></h4>
+			<div class="inside event-form-submitter">
+				<p>
+					<label><?php _e('Name', 'dbem'); ?></label>
+					<input type="text" name="event_owner_name" id="event-owner-name" value="<?php echo esc_attr($EM_Event->event_owner_name); ?>" />
+				</p>
+				<p>
+					<label><?php _e('Email', 'dbem'); ?></label>
+					<input type="text" name="event_owner_email" id="event-owner-email" value="<?php echo esc_attr($EM_Event->event_owner_email); ?>" />
+				</p>
+				<?php do_action('em_font_event_form_guest'); ?>
+			</div>
+		<?php endif; ?>
 		<h4 class="event-form-name"><?php _e ( 'Event Name', 'dbem' ); ?></h4>
 		<div class="inside event-form-name">
 			<input type="text" name="event_name" id="event-name" value="<?php echo htmlspecialchars($EM_Event->event_name,ENT_QUOTES); ?>" /><?php echo $required; ?>
@@ -90,10 +103,12 @@ if( !empty($_REQUEST['success']) ){
 		?>
 		</div>
 
+		<?php if( get_option('dbem_locations_enabled') ): ?>
 		<h4 class="event-form-where"><?php _e ( 'Where', 'dbem' ); ?></h4>
-		<div class="inside">
+		<div class="inside event-form-where">
 		<?php em_locate_template('forms/event/location.php',true); ?>
 		</div>
+		<?php endif; ?>
 		
 		<h4 class="event-form-details"><?php _e ( 'Details', 'dbem' ); ?></h4>
 		<div class="inside event-form-details">
@@ -114,17 +129,12 @@ if( !empty($_REQUEST['success']) ){
 						<!-- START Categories -->
 						<label for="event_categories[]"><?php _e ( 'Category:', 'dbem' ); ?></label>
 						<select name="event_categories[]" multiple size="10">
-							<?php
-							foreach ( $categories as $EM_Category ){
-								$selected = ($EM_Event->get_categories()->has($EM_Category->term_id)) ? "selected='selected'": '';
-								?>
-								<option value="<?php echo $EM_Category->term_id ?>" <?php echo $selected ?>>
-								<?php echo $EM_Category->name ?>
-								</option>
-								<?php 
-							}
-							?>
-						</select>						
+						<?php
+						$selected = $EM_Event->get_categories()->get_ids();
+						$walker = new EM_Walker_CategoryMultiselect();
+						$args_em = array( 'hide_empty' => 0, 'name' => 'event_categories[]', 'hierarchical' => true, 'id' => EM_TAXONOMY_CATEGORY, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'walker'=> $walker);
+						echo walk_category_dropdown_tree($categories, 0, $args_em);
+						?></select>
 						<!-- END Categories -->
 					</div>
 					<?php endif; ?>

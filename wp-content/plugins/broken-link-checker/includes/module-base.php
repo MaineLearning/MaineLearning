@@ -15,7 +15,8 @@
 class blcModule {
 	
 	var $module_id;      //The ID of this module. Usually a lowercase string.
-	var $cached_header;  //An associative array containing the header data of the module file. 
+	var $cached_header;  //An associative array containing the header data of the module file.
+	/** @var blcConfigurationManager $plugin__conf */
 	var $plugin_conf;    //A reference to the plugin's global configuration object.
 	var $module_manager; //A reference to the module manager.
 	
@@ -24,7 +25,7 @@ class blcModule {
 	 * 
 	 * @param string $module_id
 	 * @param array $cached_header
-	 * @param blcPluginConfiguration $plugin_conf
+	 * @param blcConfigurationManager $plugin_conf
 	 * @param blcModuleManager $module_manager
 	 * @return void
 	 */

@@ -3,7 +3,12 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Upgrade WordPress to 3.4.1.
+
 Remove Custom CSS for Home and Sites
+
+------------------------------------
+STILL TO BE DONE
 
 Activate Search Everything on MLN Resources
 Search highlight color: ccc066

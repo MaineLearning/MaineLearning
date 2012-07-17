@@ -321,11 +321,17 @@ function wpcf_admin_message($message, $class = 'updated') {
 function wpcf_show_admin_messages() {
     $messages = get_option('wpcf-messages', array());
     $messages_for_user = isset($messages[get_current_user_id()]) ? $messages[get_current_user_id()] : array();
+    $dismissed = get_option('wpcf_dismissed_messages', array());
     if (!empty($messages_for_user)) {
-        foreach ($messages_for_user as $message) {
-            wpcf_admin_message($message['message'], $message['class']);
+        foreach ($messages_for_user as $message_id => $message) {
+            if (!in_array($message['keep_id'], $dismissed)) {
+                wpcf_admin_message($message['message'], $message['class']);
+            }
+            if (empty($message['keep_id'])
+                    || in_array($message['keep_id'], $dismissed)) {
+                unset($messages[get_current_user_id()][$message_id]);
+            }
         }
-        unset($messages[get_current_user_id()]);
     }
     update_option('wpcf-messages', $messages);
 }
@@ -337,13 +343,66 @@ function wpcf_show_admin_messages() {
  * @param type $class
  * @return type 
  */
-function wpcf_admin_message_store($message, $class = 'updated') {
+function wpcf_admin_message_store($message, $class = 'updated', $keep_id = false) {
     $messages = get_option('wpcf-messages', array());
     $messages[get_current_user_id()][md5($message)] = array(
         'message' => $message,
-        'class' => $class
+        'class' => $class,
+        'keep_id' => $keep_id ? $keep_id : false,
     );
     update_option('wpcf-messages', $messages);
+}
+
+/**
+ * Admin notice with dismiss button.
+ * 
+ * @param type $ID
+ * @param string $message
+ * @param type $store
+ * @return boolean 
+ */
+function wpcf_admin_message_dismiss($ID, $message, $store = true) {
+    $dismissed = get_option('wpcf_dismissed_messages', array());
+    if (in_array($ID, $dismissed)) {
+        return false;
+    }
+    $message = $message . '<div style="float:right; margin:-15px 0 0 15px;"><a onclick="jQuery(this).parent().parent().fadeOut();jQuery.get(\''
+            . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=dismiss_message&amp;id='
+                    . $ID . '&amp;_wpnonce=' . wp_create_nonce('dismiss_message')) . '\');return false;"'
+            . 'class="button-secondary" href="javascript:void(0);">'
+            . __('Dismiss', 'wpcf') . '</a></div>';
+    if ($store) {
+        wpcf_admin_message_store($message, 'updated', $ID);
+    } else {
+        wpcf_admin_message($message);
+    }
+}
+
+/**
+ * Adds dismissed message to record.
+ * 
+ * @param type $ID 
+ */
+function wpcf_admin_message_set_dismissed($ID) {
+    $messages = get_option('wpcf_dismissed_messages', array());
+    if (!in_array($ID, $messages)) {
+        $messages[] = $ID;
+        update_option('wpcf_dismissed_messages', $messages);
+    }
+}
+
+/**
+ * Removes dismissed message from record.
+ * 
+ * @param type $ID 
+ */
+function wpcf_admin_message_restore_dismissed($ID) {
+    $messages = get_option('wpcf_dismissed_messages', array());
+    $key = array_search($ID, $messages);
+    if ($key !== false) {
+        unset($messages[$key]);
+        update_option('wpcf_dismissed_messages', $messages);
+    }
 }
 
 /**
@@ -444,6 +503,7 @@ function wpcf_icl_editor_cf_style_filter($style, $cf_name) {
 function wpcf_admin_ajax_head($title) {
     global $pagenow;
     $hook_suffix = $pagenow;
+
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" <?php do_action('admin_xml_ns'); ?> <?php language_attributes(); ?>>

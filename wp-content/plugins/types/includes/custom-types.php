@@ -2,6 +2,7 @@
 /*
  * Custom types functions.
  */
+require_once WPCF_EMBEDDED_INC_ABSPATH . '/custom-types.php';
 
 /**
  * Returns HTML formatted AJAX activation link.

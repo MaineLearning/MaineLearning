@@ -125,7 +125,7 @@ function wpcf_footer_credit_render() {
  * Support message init.
  */
 function wpcf_footer_credit_message_init() {
-    wp_enqueue_script('wpcf-footer-credit', WPCF_RES_RELPATH . '/js/basic.js',
+    wp_enqueue_script('wpcf-js', WPCF_RES_RELPATH . '/js/basic.js',
             array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable'),
             WPCF_VERSION);
     add_action('admin_notices', 'wpcf_footer_credit_message');
