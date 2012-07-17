@@ -2,15 +2,7 @@
 ACTIVE
 --------------------------------------------------
 
-How would I add an "Activated" column to the back-end users list?
 
-How do we find out when someone logs in.
-
-
-With e-mail messages from External Blogs, through the Activity Stream, and then through WP Better E-mails, the group address is incorrect.
-
-To view or reply, log in and go to:
-http://mainelearning.net/groups//
 
 When I enter multiple field items in the submission form, they don't pass into the database. 
 
@@ -35,6 +27,20 @@ POTENTIAL DEVELOPMENT PROJECTS
 In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
 
 COULD BE DONE IN 30-MINUTES OR LESS
+
+
+How do we find out when someone logs in.
+
+Boone will write query for users (email, first, last) without last activity.
+
+Yes
+
+
+
+Adding column.
+
+45 minutes to an hour
+
 
 
 
