@@ -32,10 +32,6 @@ $button_cancel_fail = sprintf(__('%s Error. Try again?','dbem'), __('Cancellatio
 					$.ajax({
 						url: EM.ajaxurl,
 						dataType: 'jsonp',
-						beforeSubmit: function(formData, jqForm, options) {
-							$('.em-booking-message').remove();
-							$('#em-booking-form').append('<div id="em-loading"></div>');
-						},
 						data: {
 							event_id : '<?php echo $EM_Event->event_id; ?>',
 							_wpnonce : '<?php echo wp_create_nonce('booking_add_one') ?>',
@@ -61,10 +57,6 @@ $button_cancel_fail = sprintf(__('%s Error. Try again?','dbem'), __('Cancellatio
 					$.ajax({
 						url: EM.ajaxurl,
 						dataType: 'jsonp',
-						beforeSubmit: function(formData, jqForm, options) {
-							$('.em-booking-message').remove();
-							$('#em-booking-form').append('<div id="em-loading"></div>');
-						},
 						data: {
 							booking_id : '<?php echo $EM_Booking->booking_id; ?>',
 							_wpnonce : '<?php echo wp_create_nonce('booking_cancel') ?>',

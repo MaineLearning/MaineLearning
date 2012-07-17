@@ -3,7 +3,7 @@ Contributors: ksemel
 Donate Link: http://bonsaibudget.com/donate/
 Tags: network, multisite, plugin management, theme management, admin
 Requires at least: 3.2.1
-Tested up to: 3.3.1
+Tested up to: 3.4.1
 Stable tag: trunk
 
 For multisite/network installations only.  Adds columns to your network admin to show which sites are using each plugin and theme.
@@ -21,6 +21,11 @@ This plugin adds a column to your network admin to show which sites have each pl
 
 == Changelog ==
 
+= 1.2 =
+
+- Fixed an issue where the database prefixes were not determined correctly (Thank you montykaplan for your debugging log info!)
+- Added messaging for the case where the database prefix is blank (which isn't supported in multisite as of 3.3)
+
 = 1.1 =
 
 - Added support for Themes.  Now shows which themes are actually used and by which blog in your themes list
@@ -37,6 +42,11 @@ Initial release
 
 == Upgrade Notice ==
 
+= 1.2 =
+
+- Fixed an issue where the database prefixes were not determined correctly (Thank you montykaplan for your debugging log info!)
+- Added messaging for the case where the database prefix is blank (which isn't supported in multisite as of 3.3)
+
 = 1.0 =
 
 Initial release
@@ -46,6 +56,14 @@ Initial release
 = Will this plugin work with my single-site wordpress installation? =
 
 No, the columns are only added in the network admin dashboard.  There is no change on the normal site dashboards so there is nothing to see on a single-site installation.
+
+= All my blogs are showing blank columns except for the first! =
+
+Please update to version 1.2 for improved support for custom database prefixes.
+
+= Can I use this plugin as an Must-Use plugin? =
+
+Yes!  Just copy the network-plugin-auditor.php file to your mu-plugins folder.  Be aware that you will not receive automatic notices of updates if you choose to install the plugin this way.
 
 == Screenshots ==
 

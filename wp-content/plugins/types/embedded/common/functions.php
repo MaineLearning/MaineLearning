@@ -106,6 +106,8 @@ function wpv_condition($atts) {
 
     $logging_string = "Original expression: ". $evaluate;
     
+    $evaluate = apply_filters('wpv-extra-condition-filters', $evaluate);
+    
     // evaluate empty() statements for variables
     $empties = preg_match_all("/empty\(\s*\\$(\w+)\s*\)/", $evaluate, $matches);
     
@@ -430,4 +432,126 @@ function WPV_wpcf_record_post_relationship_belongs($content) {
     
 
 	return $content;
+}
+
+/**
+ * Form for Enlimbo calls for wpv-control shortcode calls
+ 
+ * @param unknown_type $elements
+ */
+function wpv_form_control($elements) {
+    static $form = NULL;
+    require_once 'classes/control_forms.php';
+    if (is_null($form)) {
+        $form = new Enlimbo_Control_Forms();
+    }
+    return $form->renderElements($elements);
+}
+
+/**
+ * Dismiss message.
+ * 
+ * @param type $message_id
+ * @param string $message
+ * @param type $class 
+ */
+function wpv_add_dismiss_message($message_id, $message, $clear_dismissed = false, $class = 'updated') {
+    $dismissed_messages = get_option('wpv-dismissed-messages', array());
+	if ($clear_dismissed) {
+		if (isset($dismissed_messages[$message_id])) {
+			unset($dismissed_messages[$message_id]);
+	        update_option('wpv-dismissed-messages', $dismissed_messages);
+		}
+	}
+    if (!array_key_exists($message_id, $dismissed_messages)) {
+        $message = $message . '<div style="float:right; margin:-15px 0 0 15px;"><a onclick="jQuery(this).parent().parent().fadeOut();jQuery.get(\''
+                . admin_url('admin-ajax.php?action=wpv_dismiss_message&amp;message_id='
+                        . $message_id . '&amp;_wpnonce='
+                        . wp_create_nonce('dismiss_message')) . '\');return false;"'
+                . 'class="button-secondary" href="javascript:void(0);">'
+                . __("Don't show this message again", 'wpv-views') . '</a></div>';
+        wpv_admin_message_store($message_id, $message, false);
+    }
+}
+
+add_action('wp_ajax_wpv_dismiss_message', 'wpv_dismiss_message_ajax');
+
+/**
+ * Dismiss message AJAX. 
+ */
+function wpv_dismiss_message_ajax() {
+    if (isset($_GET['message_id']) && isset($_GET['_wpnonce'])
+            && wp_verify_nonce($_GET['_wpnonce'], 'dismiss_message')) {
+        $dismissed_messages = get_option('wpv-dismissed-messages', array());
+        $dismissed_messages[strval($_GET['message_id'])] = 1;
+        update_option('wpv-dismissed-messages', $dismissed_messages);
+    }
+    die('ajax');
+}
+
+// disable the admin messages for now. They are causing problems.
+//add_action('admin_head', 'wpv_show_admin_messages');
+
+/**
+ * Shows stored admin messages. 
+ */
+function wpv_show_admin_messages() {
+    $messages = get_option('wpv-messages', array());
+    $dismissed_messages = get_option('wpv-dismissed-messages', array());
+    foreach ($messages as $message_id => $message) {
+        if (array_key_exists($message_id, $dismissed_messages)) {
+            unset($messages[$message_id]);
+            continue;
+        }
+		// update the nonce
+		$text = $message['message'];
+	    $nonce = preg_match_all("/_wpnonce=[^']+/", $text, $matches);
+		
+		if ($nonce) {
+			$text = str_replace($matches[0][0], '_wpnonce=' . wp_create_nonce('dismiss_message'), $text);
+		}
+		
+        wpv_admin_message($message_id, $text, $message['class']);
+        if ($show_once) {
+            unset($messages[$message_id]);
+        }
+    }
+    update_option('wpv-messages', $messages);
+}
+
+/**
+ * Stores admin messages.
+ * 
+ * @param type $message_id
+ * @param type $message
+ * @param type $show_once
+ * @param type $class 
+ */
+function wpv_admin_message_store($message_id, $message, $show_once = true,
+        $class = 'updated') {
+    $messages = get_option('wpv-messages', array());
+    $messages[strval($message_id)] = array(
+        'message' => strval($message),
+        'class' => strval($class),
+        'show_once' => $show_once,
+    );
+    update_option('wpv-messages', $messages);
+}
+
+/**
+ * Shows admin message.
+ * 
+ * @param type $message_id
+ * @param type $message
+ * @param type $class 
+ */
+function wpv_admin_message($message_id, $message, $class = 'updated') {
+    if (apply_filters('wpv-show-message', true, $message_id)) {
+		add_action('admin_notices',
+                create_function('$a=1, $message_id=\'' . strval($message_id)
+                        . '\', $class=\'' . strval($class)
+                        . '\', $message=\''
+                        . htmlentities(strval($message), ENT_QUOTES) . '\'',
+                        '$screen = get_current_screen(); if (!$screen->is_network) echo "<div class=\"message $class\" id=\"wpv-message-$message_id\"><p>" . html_entity_decode($message, ENT_QUOTES) . "</p></div>";'));
+	}
 }

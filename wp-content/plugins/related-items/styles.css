@@ -1,0 +1,101 @@
+.related-item {
+	font-size: 11px;
+	margin: 6px 6px 8px;
+	padding: 8px;
+	background: #f1f1f1;
+	border: 1px solid #dfdfdf;
+	cursor: move;
+	
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+.related-item-title {
+	padding: 0 30px 0 0;
+}
+.related-item a {
+	float: right;
+}
+.related-item img {
+  	float:left;
+	margin-top: -8px;
+	margin-left: -8px;
+}
+
+.related-item a img {
+  margin-top:0px;
+}
+
+
+div.related-items {
+  margin: 1.5em;
+  padding: 1em;
+  color: #666;
+  background: #E6E6E6;
+  font-style: italic;
+  border: 1px solid gainsboro;
+  border-image: initial;
+}
+
+div#related-items-box{
+  //border: 1px solid #DFDFDF; 
+  padding-bottom:1px;
+}
+
+div#related-items{
+  //border: 1px solid #DFDFDF; 
+}
+
+div.new_relationship_form{
+  //border: 1px solid #DFDFDF; 
+    //padding:5px;
+}
+  
+div#related-items p{
+  	//padding:0px; 
+	//margin:0px;
+	//padding-left:5px;
+}
+  
+  
+div.related-items h2{
+  padding-top:0px; 
+}
+
+div.related-items h4{
+  padding-bottom:0px; 
+}
+
+div.related-items ul{
+  padding-top:5px; 
+}
+
+.wp-admin select {
+	
+	height: auto;
+}
+
+ul.related_items h3{
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+input#add_relationship{
+  -webkit-border-radius: 11px;
+	border-radius: 11px;
+
+text-decoration: none;
+font-size: 12px!important;
+line-height: 13px;
+padding: 3px 8px;
+cursor: pointer;
+background-image: url(/wp-admin/images/white-grad.png);
+
+  }
+                      
+                      
+                      
+div#related-items-box{
+
+   margin-top:10px;
+}

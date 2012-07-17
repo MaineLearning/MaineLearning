@@ -265,7 +265,7 @@ class blcPostTypeOverlord {
    * @return string Modified post content.
    */
 	function hook_the_content($content){
-		global $post, $wpdb;
+		global $post, $wpdb; /** @var wpdb $wpdb */
         if ( empty($post) || !in_array($post->post_type, $this->enabled_post_types)) {
         	return $content;
        	}

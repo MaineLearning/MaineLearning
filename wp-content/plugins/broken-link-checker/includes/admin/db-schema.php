@@ -65,8 +65,10 @@ function blc_get_db_schema(){
 		`broken` tinyint(1) NOT NULL DEFAULT '0',
 		`may_recheck` tinyint(1) NOT NULL DEFAULT '1',
 		`being_checked` tinyint(1) NOT NULL DEFAULT '0',
+
 		`result_hash` varchar(200) NOT NULL DEFAULT '',
 		`false_positive` tinyint(1) NOT NULL DEFAULT '0',
+		`dismissed` tinyint(1) NOT NULL DEFAULT '0',
 		
 		PRIMARY KEY (`link_id`),
 		KEY `url` (`url`(150)),

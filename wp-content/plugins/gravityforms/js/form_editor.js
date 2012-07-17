@@ -283,9 +283,8 @@ function LoadFieldSettings(){
     ToggleCalculationOptions(field.enableCalculation, field);
 
     jQuery('#field_calculation_formula').val(field.calculationFormula);
-    jQuery('#field_calculation_rounding').val(field.calculationRounding);
-
-
+    var rounding = gformIsNumber(field.calculationRounding) ? field.calculationRounding : "norounding";
+    jQuery('#field_calculation_rounding').val(rounding);
 
 
 

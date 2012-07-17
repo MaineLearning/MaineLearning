@@ -146,6 +146,8 @@ The production site is a clone of the Github repo, just like your dev environmen
 
     to see if there have been any changes to the live server since the last release. If so, do something with them.
 
+4. Shut down the site with the .htaccess rules.
+
 4. Pull the latest master branch
 
         git pull origin master

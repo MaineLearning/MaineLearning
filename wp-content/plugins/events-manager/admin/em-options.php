@@ -25,12 +25,33 @@ function em_options_save(){
 		//set capabilities
 		if( !empty($_POST['em_capabilities']) && is_array($_POST['em_capabilities']) && (!is_multisite() || is_multisite() && is_super_admin()) ){
 			global $em_capabilities_array, $wp_roles;
-			foreach( $wp_roles->role_objects as $role_name => $role ){
-				foreach( array_keys($em_capabilities_array) as $capability){
-					if( !empty($_POST['em_capabilities'][$role_name][$capability]) ){
-						$role->add_cap($capability);
-					}else{
-						$role->remove_cap($capability);						
+			if( is_multisite() && is_network_admin() && $_POST['dbem_ms_global_caps'] == 1 ){
+			    //apply_caps_to_blog
+				global $current_site,$wpdb;
+				$blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs.' WHERE site_id='.$current_site->id);
+				foreach($blog_ids as $blog_id){
+					switch_to_blog($blog_id);
+				    //normal blog role application
+					foreach( $wp_roles->role_objects as $role_name => $role ){
+						foreach( array_keys($em_capabilities_array) as $capability){
+							if( !empty($_POST['em_capabilities'][$role_name][$capability]) ){
+								$role->add_cap($capability);
+							}else{
+								$role->remove_cap($capability);
+							}
+						}
+					}
+					restore_current_blog();
+				}
+			}elseif( !is_network_admin() ){
+			    //normal blog role application
+				foreach( $wp_roles->role_objects as $role_name => $role ){
+					foreach( array_keys($em_capabilities_array) as $capability){
+						if( !empty($_POST['em_capabilities'][$role_name][$capability]) ){
+							$role->add_cap($capability);
+						}else{
+							$role->remove_cap($capability);
+						}
 					}
 				}
 			}
@@ -285,7 +306,6 @@ function em_admin_options_page() {
 			<?php endif; ?>
 			<a href="#emails" id="em-menu-emails" class="nav-tab"><?php _e('Emails','dbem'); ?></a>
 		</h2>
-		<?php echo $EM_Notices; ?>
 		<h3 id="em-options-title"><?php _e ( 'Event Manager Options', 'dbem' ); ?></h3>
 		<form id="em-options-form" method="post" action="">
 			<div class="metabox-holder">         
@@ -320,7 +340,10 @@ function em_admin_options_page() {
 								foreach($EM_Categories as $EM_Category){
 							 		$category_options[$EM_Category->id] = $EM_Category->name;
 							 	}
-								em_options_select ( __( 'Default Category', 'dbem' ), 'dbem_default_category', $category_options, __( 'This option allows you to select the default category when adding an event.','dbem' ).' '.__('If an event does not have a category assigned when editing, this one will be assigned automatically.','dbem'));
+							 	echo "<tr><td>".__( 'Default Category', 'dbem' )."</td><td>";
+								wp_dropdown_categories(array( 'hide_empty' => 0, 'name' => 'dbem_default_category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => get_option('dbem_default_category'), 'show_option_none' => __('None','dbem'), 'class'=>''));
+								echo "</br><em>" .__( 'This option allows you to select the default category when adding an event.','dbem' ).' '.__('If an event does not have a category assigned when editing, this one will be assigned automatically.','dbem')."</em>";
+								echo "</td></tr>";
 							}
 						}
 						em_options_radio_binary ( sprintf(__( 'Enable %s attributes?', 'dbem' ),__('event','dbem')), 'dbem_attributes_enabled', __( 'Select yes to enable the attributes feature','dbem' ) );
@@ -375,7 +398,7 @@ function em_admin_options_page() {
 				
 				<?php if ( !is_multisite() ){ em_admin_option_box_image_sizes(); } ?>
 				
-				<?php if ( !is_multisite() ){ em_admin_option_box_caps(); } ?>
+				<?php if ( !is_multisite() || (is_super_admin() && !get_site_option('dbem_ms_global_caps')) ){ em_admin_option_box_caps(); } ?>
 				
 				<div  class="postbox" >
 				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Event Submission Forms', 'dbem' ); ?></span></h3>
@@ -794,6 +817,7 @@ function em_admin_options_page() {
 				 				</option>
 								<?php endforeach; ?>
 							</select>
+							<br /><?php echo __('When listing events for a category, this order is applied.', 'dbem'); ?>
 						</td>
 				   	</tr>
 					<tr>
@@ -808,9 +832,11 @@ function em_admin_options_page() {
 							<select name="dbem_categories_default_orderby" >
 								<?php 
 									$orderby_options = apply_filters('em_settings_categories_default_orderby_ddm', array(
-										'category_country' => sprintf(__('Order by %s','dbem'),__('Country','dbem')),
-										'category_town' => sprintf(__('Order by %s','dbem'),__('Town','dbem')),
-										'category_name' => sprintf(__('Order by %s','dbem'),__('Name','dbem'))
+										'id' => sprintf(__('Order by %s','dbem'),__('ID','dbem')),
+										'count' => sprintf(__('Order by %s','dbem'),__('Count','dbem')),
+										'name' => sprintf(__('Order by %s','dbem'),__('Name','dbem')),
+										'slug' => sprintf(__('Order by %s','dbem'),__('Slug','dbem')),
+										'term_group' => sprintf(__('Order by %s','dbem'),'term_group'),
 									)); 
 								?>
 								<?php foreach($orderby_options as $key => $value) : ?>
@@ -834,6 +860,7 @@ function em_admin_options_page() {
 				 				</option>
 								<?php endforeach; ?>
 							</select>
+							<br /><?php echo __('When listing categories, this order is applied.', 'dbem'); ?>
 						</td>
 				   	</tr>
 					<?php
@@ -923,10 +950,12 @@ function em_admin_options_page() {
 							</select>
 						</td>
 				   	</tr>
-					<tr><td colspan="2"><h4><?php echo _e('Front-end management pages','dbem'); ?></h4></td></tr><?php
+					<tr><td colspan="2"><h4><?php echo _e('Front-end management pages','dbem'); ?></h4></td></tr>
+					<tr><td colspan="2"><?php echo _e('Users can create and edit events and locations, as well as managing bookings for their events.','dbem'); ?></td></tr>
+					<?php
 	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Edit events','dbem')), 'dbem_edit_events_page', $events_page_options, sprintf(__('Users can view, add and edit their %s on this page.','dbem'),__('events','dbem')) );
 	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Edit locations','dbem')), 'dbem_edit_locations_page', $events_page_options, sprintf(__('Users can view, add and edit their %s on this page.','dbem'),__('locations','dbem')) );
-	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Manage bookings','dbem')), 'dbem_edit_bookings_page', $events_page_options, sprintf(__('Users can manage their %s on this page.','dbem'),__('bookings','dbem')) );
+	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Manage bookings','dbem')), 'dbem_edit_bookings_page', $events_page_options, __('Users can manage bookings for their events on this page.','dbem') );
 					echo $save_button;
 					?>
 	            	</table>
@@ -943,8 +972,14 @@ function em_admin_options_page() {
 				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Events format', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
-					 	<tr><td><strong><?php echo sprintf(__('%s Page','dbem'),__('Events','dbem')); ?></strong></td></tr>
+					 	<tr><td colspan="2">
+					 		<strong><?php echo sprintf(__('%s Page','dbem'),__('Events','dbem')); ?></strong>
+					 		<p><?php _e('These formats will be used on your events page. This will also be used if you do not provide specified formats in other event lists, like in shortcodes.','dbem'); ?></p>
+					 	</td></tr>
 						<?php
+						$grouby_modes = array(0=>__('None','dbem'), 'yearly'=>__('Yearly','dbem'), 'monthly'=>__('Monthly','dbem'), 'weekly'=>__('Weekly','dbem'), 'daily'=>__('Daily','dbem'));
+						em_options_select(__('Events page grouping','dbem'), 'dbem_event_list_groupby', $grouby_modes, __('If you choose a group by mode, your events page will ','dbem'));
+						em_options_input_text(__('Events page grouping','dbem'), 'dbem_event_list_groupby_format', __('Choose how to format your group headings. Leave blank for defaults.','dbem').' '. sprintf(__('Date and Time formats follow the <a href="%s">WordPress time formatting conventions</a>', 'dbem'), 'http://codex.wordpress.org/Formatting_Date_and_Time'));
 						em_options_textarea ( __( 'Default event list format header', 'dbem' ), 'dbem_event_list_item_format_header', __( 'This content will appear just above your code for the default event list format. Default is blank', 'dbem' ) );
 					 	em_options_textarea ( __( 'Default event list format', 'dbem' ), 'dbem_event_list_item_format', __( 'The format of any events in a list.', 'dbem' ).$events_placeholder_tip );
 						em_options_textarea ( __( 'Default event list format footer', 'dbem' ), 'dbem_event_list_item_format_footer', __( 'This content will appear just below your code for the default event list format. Default is blank', 'dbem' ) );
@@ -994,6 +1029,7 @@ function em_admin_options_page() {
 					<table class="form-table">
 	            		<?php
 						em_options_input_text ( __( 'Date Format', 'dbem' ), 'dbem_date_format', sprintf(__('For use with the %s placeholder'),'<code>#_EVENTDATES</code>') );
+						em_options_input_text ( __( 'Date Picker Format', 'dbem' ), 'dbem_date_format_js', sprintf(__( 'Same as <em>Date Format</em>, but this is used for the datepickers used by Events Manager. This uses a slightly different format to the others on here, for a list of characters to use, visit the <a href="%s">jQuery formatDate reference</a>', 'dbem' ),'http://docs.jquery.com/UI/Datepicker/formatDate') );
 						em_options_input_text ( __( 'Date Seperator', 'dbem' ), 'dbem_dates_seperator', sprintf(__( 'For when start/end %s are present, this will seperate the two (include spaces here if necessary).', 'dbem' ), __('dates','dbem')) );
 						em_options_input_text ( __( 'Time Format', 'dbem' ), 'dbem_time_format', sprintf(__('For use with the %s placeholder'),'<code>#_EVENTTIMES</code>') );
 						em_options_input_text ( __( 'Time Seperator', 'dbem' ), 'dbem_times_seperator', sprintf(__( 'For when start/end %s are present, this will seperate the two (include spaces here if necessary).', 'dbem' ), __('times','dbem')) );
@@ -1517,7 +1553,7 @@ function em_admin_option_box_email(){
  * Meta options box for user capabilities. Shared in both MS and Normal options page, hence it's own function 
  */
 function em_admin_option_box_caps(){
-	global $save_button;
+	global $save_button, $wpdb;
 	?>
 	<div  class="postbox" >
 	<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'User Capabilities', 'dbem' ); ?></span></h3>
@@ -1571,6 +1607,15 @@ function em_admin_option_box_caps(){
             ?>
             <tr><td colspan="2">
             	<p><em><?php _e('You can now give fine grained control with regards to what your users can do with events. Each user role can have perform different sets of actions.','dbem'); ?></em></p>
+            </td></tr>
+            <tr><td colspan="2">
+            	<?php 
+            	if( is_multisite() && is_network_admin() ){
+		            echo em_options_radio_binary(__('Apply global capabilities?','dbem'), 'dbem_ms_global_caps', __('If set to yes the capabilities will be applied all your network blogs and you will not be able to set custom capabilities each blog. You can select no later and visit specific blog settings pages to add/remove capabilities.','dbem') );
+		        } 
+		        ?>
+		    </td></tr>
+            <tr><td colspan="2">
 	            <table class="em-caps-table" style="width:auto;" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>

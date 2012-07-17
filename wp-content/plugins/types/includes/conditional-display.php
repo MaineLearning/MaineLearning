@@ -137,7 +137,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
     $form['cd']['customize_display_logic_link'] = array(
         '#type' => 'markup',
         '#markup' => '<a href="javascript:void(0);" class="button-secondary wpcf-cd-enable-custom-mode" onclick="window.wpcfCdState_' . md5($data['id'])
-        . ' = jQuery(\'#' . md5($data['id']) . '_cd_summary\').val();' . $prepopulate . ' jQuery(\'#' . md5($data['id']) . '_cd_summary\').parent().slideDown(); jQuery(this).hide().next().show();">'
+        . ' = jQuery(\'#' . md5($data['id']) . '_cd_summary\').val();' . $prepopulate . ' jQuery(\'#' . md5($data['id']) . '_cd_summary\').parent().slideDown(); jQuery(this).hide().next().show();wpcfCdCheckDateCustomized(jQuery(this));">'
         . __('Customize the display logic', 'wpcf')
         . '</a>',
     );
@@ -169,6 +169,11 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
         '#inline' => true,
         '#default_value' => isset($data['data']['conditional_display']['custom_use']),
         '#after' => '',
+    );
+    $form['cd']['date_notice'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div style="display:none; margin-top:15px;" class="wpcf-cd-notice-date">'
+        . sprintf(__('%sDates can be entered using the date filters &raquo;%s', 'wpcf'), '<a href="http://wp-types.com/documentation/user-guides/date-filters/" target="_blank">', '</a>') . '</div>',
     );
     $form['cd']['apply_display_logic_link'] = array(
         '#type' => 'markup',
@@ -235,7 +240,11 @@ function wpcf_cd_admin_form_single_filter($data, $condition, $key = null,
         if (wpcf_admin_is_repetitive($field)) {
             continue;
         }
-        $options[$field['name']] = $field_id;
+        $options[$field_id] = array(
+            '#value' => $field_id,
+            '#title' => $field['name'],
+            '#attributes' => array('class' => 'wpcf-conditional-select-' . $field['type']),
+        );
     }
     if (!$group && empty($options)) {
         return array(

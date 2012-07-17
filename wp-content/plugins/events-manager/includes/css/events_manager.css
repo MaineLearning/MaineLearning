@@ -7,8 +7,8 @@
 	a.em-button:hover { text-decoration:none; }	
 
 /* Booking Form */
-	#em-booking { margin:15px 0px 10px 0px; position:relative; }
-	#em-booking-form  { position:relative; clear:left; }
+	.em-booking { margin:15px 0px 10px 0px; position:relative; }
+	.em-booking-form  { position:relative; clear:left; }
 	.em-booking-form-details  { padding:10px; width:360px; float:left; }  
 	.em-booking-form-details input.input, .em-booking-form-details textarea { width:250px; }
 	.em-booking-form-details p { clear:left; }
@@ -16,7 +16,7 @@
 	.em-booking-form-details span.input-group input { margin-left:-20px; }
 	.em-booking-form-details span.input-group { display:block; margin-left:120px; }
 	.em-booking-form-details .em-booking-submit { width:auto; }	
-	#em-booking-form label  { display:inline-block; width:100px; }	
+	.em-booking-form label  { display:inline-block; width:100px; }	
 	/* Tickets */
 		.em-tickets { margin-bottom:20px; }
 	/* Message Errors */
@@ -45,13 +45,8 @@
 		#event-tickets th { width:auto; }
 		#event-tickets th.ticket-status { width:20px; }
 		/* Overlay Form */
-			#em-tickets-form { margin-top:10px; display:none; }
 			#em-tickets-form input[type=text] { width:97%; padding:2px; color:#666; }
-			#em-tickets-form { background-color:#fff; color:#333; display:none; width:350px; padding:15px; text-align:left;  border:2px solid #333; opacity:0.8; -moz-border-radius:6px; -webkit-border-radius:6px; -moz-box-shadow: 0 0 50px #ccc; -webkit-box-shadow: 0 0 50px #ccc; }
-			#em-tickets-form h4 { font-size:16px; margin:0px; padding:0px; }
-			#em-tickets-form form { overflow:auto; }
-			#em-tickets-form .close { background:url(../images/close.png) 0px 0px no-repeat  !important; position:absolute; right:-15px; top:-15px; cursor:pointer; height:35px; width:35px; border:none; padding:0px; margin:0px; }
-			#em-tickets-form #wp-submit { display:block; clear:both; }
+			#em-tickets-form #wp-submit { display:block; clear:both; }		
 		/*Inline Form */
 			.em-ticket-form { padding:0px 10px; margin-bottom:10px; width:400px; }
 			.em-ticket-form label { display:inline-block; min-width:70px; padding-right:10px; }
@@ -78,19 +73,12 @@
 			#em-bookings-table-export, #em-bookings-table-settings { width:500px; height: 75%; }
 			#em-bookings-table-export form, #em-bookings-table-settings form { height: 100%; overflow:auto; }
 			/* Sorting */
-				.em-bookings-table ul.em-bookings-cols-sortable { list-style-type: none; margin: 0; padding: 0 0 10px; float: left; margin-right: 10px; }
-				.em-bookings-table ul.em-bookings-cols-sortable li { margin: 0 5px 5px 5px; padding: 3px 8px; font-size: 12px; width: 120px; font-weight:none; cursor:move; }
-				.em-bookings-table ul.em-bookings-cols-sortable li.ui-state-highlight {}
-				.em-bookings-table ul.em-bookings-cols-sortable li.ui-state-default { color:#999; }
+				.em-bookings-table-overlay ul.em-bookings-cols-sortable { list-style-type: none; margin: 0; padding: 0 0 10px; float: left; margin-right: 10px; }
+				.em-bookings-table-overlay ul.em-bookings-cols-sortable li { margin: 0 5px 5px 5px; padding: 3px 8px; font-size: 12px; width: 120px; font-weight:none; cursor:move; }
+				.em-bookings-table-overlay ul.em-bookings-cols-sortable li.ui-state-highlight {}
+				.em-bookings-table-overlay ul.em-bookings-cols-sortable li.ui-state-default { color:#999; }
 				#em-bookings-export-cols-inactive, #em-bookings-cols-inactive { width:300px; }	
-				#em-bookings-export-cols-inactive li, #em-bookings-cols-inactive li { float:left; }		
-	/* Booking Overlay Forms*/
-		.em-bookings-table-overlay { margin-top:10px; display:none; }
-		.em-bookings-table-overlay input[type=text] { width:97%; padding:2px; color:#666; }
-		.em-bookings-table-overlay { background-color:#fff; color:#333; display:none; width:350px; padding:15px; text-align:left;  border:2px solid #333; opacity:0.8; -moz-border-radius:6px; -webkit-border-radius:6px; -moz-box-shadow: 0 0 50px #ccc; -webkit-box-shadow: 0 0 50px #ccc; }
-		.em-bookings-table-overlay h4 { font-size:16px; margin:0px; padding:0px; }
-		.em-bookings-table-overlay form { overflow:auto; }
-		.em-bookings-table-overlay .close { background:url(../images/close.png) 0px 0px no-repeat  !important; position:absolute; right:-15px; top:-15px; cursor:pointer; height:35px; width:35px; border:none; padding:0px; margin:0px; }
+				#em-bookings-export-cols-inactive li, #em-bookings-cols-inactive li { float:left; }
 	/* Single Booking Edit View */
 		#em-bookings-admin-booking .em-booking-single-info { display:none; }		
 		
@@ -118,7 +106,7 @@
 	table.fullcalendar { border-collapse: collapse; }
 	table.fullcalendar td { text-align: left; width: 50px; height: 50px; border: 1px solid #888; }
 	div.em-calendar-wrapper { position:relative; }
-	div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF url(../images/loading.gif) 50% 50% no-repeat; left:0px; top:0px; opacity:0.8; filter:alpha(opacity=80)}
+	div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF url(../images/loading.gif) 50% 50% no-repeat; left:0px; top:0px; opacity:0.8; filter:alpha(opacity=80); z-index:9999999999; }
 /*
 Maps - if the info balloons don't look right on your site, chances are it's a CSS issue. 
 Google is VERY sensitive to CSS rules for the infowindows, making it hard to accommodate every theme in WP. 

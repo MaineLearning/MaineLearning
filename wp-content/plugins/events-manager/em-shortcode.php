@@ -48,7 +48,7 @@ function em_get_events_list_shortcode($atts, $format='') {
 	$atts['format'] = ($format != '' || empty($atts['format'])) ? $format : $atts['format']; 
 	$atts['format'] = html_entity_decode($atts['format']); //shorcode doesn't accept html
 	$atts['page'] = ( !empty($atts['page']) && is_numeric($atts['page']) )? $atts['page'] : 1;
-	$atts['page'] = ( !empty($_GET['page']) && is_numeric($_GET['page']) )? $_GET['page'] : $atts['page'];
+	$atts['page'] = ( !empty($_GET['pno']) && is_numeric($_GET['pno']) )? $_GET['pno'] : $atts['page'];
 	return EM_Events::output( $atts );
 }
 add_shortcode ( 'events_list', 'em_get_events_list_shortcode' );
@@ -80,7 +80,7 @@ function em_get_locations_list_shortcode( $atts, $format='' ) {
 	$atts['format'] = ($format != '' || empty($atts['format'])) ? $format : $atts['format']; 
 	$atts['format'] = html_entity_decode($atts['format']); //shorcode doesn't accept html
 	$atts['page'] = ( !empty($atts['page']) && is_numeric($atts['page']) )? $atts['page'] : 1;
-	$atts['page'] = ( !empty($_GET['page']) && is_numeric($_GET['page']) )? $_GET['page'] : $atts['page'];
+	$atts['page'] = ( !empty($_GET['pno']) && is_numeric($_GET['pno']) )? $_GET['pno'] : $atts['page'];
 	$args['orderby'] = !empty($args['orderby']) ? $args['orderby'] : get_option('dbem_locations_default_orderby');
 	$args['order'] = !empty($args['order']) ? $args['order'] : get_option('dbem_locations_default_order');
 	return EM_Locations::output( $atts );

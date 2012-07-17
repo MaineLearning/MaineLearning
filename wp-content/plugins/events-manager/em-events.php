@@ -29,6 +29,7 @@ function em_content($page_content) {
 			if ( $post->ID == $events_page_id && $events_page_id != 0 ) {
 				if ( !empty($_REQUEST['calendar_day']) ) {
 					//Events for a specific day
+					$args = EM_Events::get_post_search( array_merge($args, $_REQUEST) );
 					em_locate_template('templates/calendar-day.php',true, array('args'=>$args));
 				}elseif ( $wp_query->get('bookings_page') && empty($my_bookings_page_id)) {
 					//Bookings Page
@@ -46,7 +47,7 @@ function em_content($page_content) {
 						//Intercept search request, if defined
 						$args['scope'] = get_option('dbem_events_page_scope');
 						if( !empty($_REQUEST['action']) && $_REQUEST['action'] == 'search_events' ){
-							$args = EM_Events::get_post_search($args + $_REQUEST);
+							$args = EM_Events::get_post_search( array_merge($args, $_REQUEST) );
 						}
 						em_locate_template('templates/events-list.php', true, array('args'=>$args));
 					}
@@ -216,7 +217,7 @@ function em_wp_the_title($data){
 	$edit_events_page_id = get_option( 'dbem_edit_events_page' );
 	$edit_locations_page_id = get_option( 'dbem_edit_locations_page' );
 	$edit_bookings_page_id = get_option( 'dbem_edit_bookings_page' );
-	if( get_option('dbem_disable_title_rewrites') != 1 && !empty($post->ID) && in_array($post->ID, array($events_page_id, $locations_page_id, $edit_events_page_id, $edit_locations_page_id, $edit_bookings_page_id)) ){
+	if( !is_main_query() && !empty($post->ID) && in_array($post->ID, array($events_page_id, $locations_page_id, $edit_events_page_id, $edit_locations_page_id, $edit_bookings_page_id)) ){
 		if ( $wp_query->in_the_loop ) {
 			return apply_filters('em_wp_the_title', em_content_page_title($data)) ;
 		}

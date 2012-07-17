@@ -12,7 +12,7 @@ class GFEntryList{
         {
             ?>
             <div style="margin:50px 0 0 10px;">
-                <?php echo sprintf(__("You don't have any active forms. Let's go %screate one%s", "gravityforms"), '<a href="?page=gravityforms.php&id=0">', '</a>'); ?>
+                <?php echo sprintf(__("You don't have any active forms. Let's go %screate one%s", "gravityforms"), '<a href="?page=gf_new_form">', '</a>'); ?>
             </div>
             <?php
         }
@@ -50,7 +50,7 @@ class GFEntryList{
 
                 $entry_count = count($leads) > 1 ? sprintf(__("%d entries", "gravityforms"), count($leads)) : __("1 entry", "gravityforms");
 
-                switch($bulk_action){
+                switch($bulk_action) {
                     case "delete":
                         RGFormsModel::delete_leads($leads);
                         $update_message = sprintf(__("%s deleted.", "gravityforms"), $entry_count);
@@ -114,8 +114,7 @@ class GFEntryList{
         $sort_direction = empty($_GET["dir"]) ? "DESC" : $_GET["dir"];
         $search = RGForms::get("s");
         $page_index = empty($_GET["paged"]) ? 0 : intval($_GET["paged"]) - 1;
-
-
+        
         $star = $filter == "star" ? 1 : null; // is_numeric(RGForms::get("star")) ? intval(RGForms::get("star")) : null;
         $read = $filter == "unread" ? 0 : null; //is_numeric(RGForms::get("read")) ? intval(RGForms::get("read")) : null;
 
@@ -146,7 +145,7 @@ class GFEntryList{
         $read_qs = $read !== null ? "&read=$read" : "";
         $filter_qs = "&filter=" . $filter;
 
-        //determine which counter to use for paging and set total count
+        // determine which counter to use for paging and set total count
         switch ($filter)
         {
 			case "trash" :
@@ -273,8 +272,7 @@ class GFEntryList{
                 element.html(count + "");
             }
 
-            function UpdatePagingCounts(change)
-            {
+            function UpdatePagingCounts(change){
 				//update paging header/footer Displaying # - # of #, use counts from header, no need to use footer since they are the same, just update footer paging with header info
                 var paging_range_max_header = jQuery("#paging_range_max_header");
                 var paging_range_max_footer = jQuery("#paging_range_max_footer");
@@ -816,7 +814,9 @@ class GFEntryList{
 
                                 $nowrap_class="entry_nowrap";
                                 foreach($field_ids as $field_id){
-
+                                    
+                                    /* maybe move to function */
+                                    
                                     $field = RGFormsModel::get_field($form, $field_id);
                                     $value = rgar($lead, $field_id);
 
@@ -944,13 +944,20 @@ class GFEntryList{
                                                 $value = $userdata->user_login;
                                             }
                                         break;
-
+                                        
+                                        case "multiselect":
+                                            // add space after comma-delimited values
+                                            $value = implode(', ', explode(',', $value));
+                                            break;
+                                        
                                         default:
                                             $value = esc_html($value);
                                     }
 
                                     $value = apply_filters("gform_entries_field_value", $value, $form_id, $field_id, $lead);
-
+                                    
+                                    /* ^ maybe move to function */
+                                    
                                     $query_string = "gf_entries&view=entry&id={$form_id}&lid={$lead["id"]}{$search_qs}{$sort_qs}{$dir_qs}{$filter_qs}&paged=" . ($page_index + 1);
                                     if($is_first_column){
                                         ?>
@@ -1287,8 +1294,7 @@ class GFEntryList{
 
     }
 
-    private function display_paging_links($which, $page_links, $first_item_index, $page_size, $total_lead_count)
-    {
+    private function display_paging_links($which, $page_links, $first_item_index, $page_size, $total_lead_count) {
 		//Displaying paging links if appropriate
 		//$which - header or footer, so the items can have unique names
 		if($page_links)
@@ -1317,6 +1323,7 @@ class GFEntryList{
 		}
 		return $paging_html;
     }
+    
 }
 
 ?>

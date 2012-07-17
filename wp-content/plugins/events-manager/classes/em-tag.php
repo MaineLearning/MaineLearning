@@ -47,7 +47,10 @@ class EM_Tag extends EM_Object {
 			if( is_object($tag_data) && !empty($tag_data->taxonomy) && $tag_data->taxonomy == EM_TAXONOMY_TAG ){
 				$tag = $tag_data;
 			}elseif( !is_numeric($tag_data) ){
-				$tag = get_term_by('slug', $tag_data, EM_TAXONOMY_TAG);
+				$tag = get_term_by('name', $tag_data, EM_TAXONOMY_TAG);
+				if( empty($tag) ){
+					$tag = get_term_by('slug', $tag_data, EM_TAXONOMY_TAG);					
+				}
 			}else{		
 				$tag = get_term_by('id', $tag_data, EM_TAXONOMY_TAG);
 			}

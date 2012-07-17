@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Category Order and Taxonomy Terms Order\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-06 11:38+0200\n"
-"PO-Revision-Date: 2011-12-06 11:46+0200\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/taxonomy-terms-order\n"
+"POT-Creation-Date: 2012-03-04 23:32:48+00:00\n"
+"PO-Revision-Date: 2012-07-06 17:34+0200\n"
 "Last-Translator: nsp-code <electronice_delphi@yahoo.com>\n"
 "Language-Team: nsp-code <electronice_delphi@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -83,9 +83,42 @@ msgstr ""
 msgid "Minimum Level to use this plugin"
 msgstr "Nivel minim pentru a utiliza acest plugin"
 
+#: include/options.php:72
+msgid "Subscriber"
+msgstr ""
+
+#: include/options.php:73
+msgid "Contributor"
+msgstr ""
+
+#: include/options.php:74
+msgid "Author"
+msgstr ""
+
+#: include/options.php:75
+msgid "Editor"
+msgstr ""
+
+#: include/options.php:76
+msgid "Administrator"
+msgstr ""
+
 #: include/options.php:83
 msgid "Auto Sort"
 msgstr ""
+
+#: include/options.php:86
+msgid "OFF"
+msgstr ""
+
+#: include/options.php:87
+msgid "ON"
+msgstr ""
+
+#: include/options.php:88
+#, fuzzy
+msgid "global setting"
+msgstr "Setari generale"
 
 #: include/options.php:93
 msgid "Admin Sort"
@@ -100,7 +133,8 @@ msgid "Autosort OFF"
 msgstr ""
 
 #: include/options.php:106
-msgid "No query will be changed, the terms will appear in the original order. To retrieve the terms in the required order you must use the menu_order on the orderby parameter"
+#, fuzzy
+msgid "No query will be changed, the terms will appear in the original order. To retrieve the terms in the required order you must use the term_order on the orderby parameter"
 msgstr "Nr interogarea va fi schimbat, ceea ce va apărea în ordinea iniţială. Pentru a prelua termenii în ordinea cerută trebuie să utilizaţi menu_order pe parametrul orderby"
 
 #: include/options.php:114
@@ -116,10 +150,29 @@ msgid "Autosort ON"
 msgstr ""
 
 #: include/options.php:117
-msgid "The query will be updated, all terms will appear in the order you manually defined. This is recommended if you don't want to change any theme code to apply the terms order"
+#, fuzzy
+msgid "The queries will be updated, all terms will appear in the order you manually defined. This is recommended if you don't want to change any theme code to apply the terms order"
 msgstr "Interogarea va fi actualizat, toţi termenii vor apărea în ordinea în care manual definit. Acest lucru este recomandat dacă nu doriţi să modificaţi codul din temă pentru a aplica ordinul de termeni"
 
 #: include/options.php:127
 msgid "Save Settings"
 msgstr "Salveaza Setarile"
+
+#. #-#-#-#-#  plugin.pot (Category Order and Taxonomy Terms Order 1.2.7)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Category Order and Taxonomy Terms Order 1.2.7)  #-#-#-#-#
+#. Description of the plugin/theme
+msgid "Category Order and Taxonomy Terms Order"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Category Order and Taxonomy Terms Order 1.2.7)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Category Order and Taxonomy Terms Order 1.2.7)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.nsp-code.com"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Nsp-Code"
+msgstr ""
 

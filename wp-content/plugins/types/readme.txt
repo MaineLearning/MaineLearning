@@ -2,104 +2,67 @@
 Contributors: brucepearson, AmirHelzer, jozik, mihaimihai
 Donate link: http://wp-types.com
 Tags: CMS, custom field, custom fields, custom post type, custom post types, post, post type, post types, cck, taxonomy, fields, types, relationships, WPML
+License: GPLv2
 Requires at least: 3.1
-Tested up to: 3.3.1
-Stable tag: 1.0.1
+Tested up to: 3.4.1
+Stable tag: 1.0.3
 
-The complete solution for custom post types, custom taxonomy and custom fields. Craft your edit screens and use shortcodes to display fields.
+The complete and reliable plugin for managing custom post types, custom taxonomy and custom fields.
 
 == Description ==
 
-[Types](http://wp-types.com/home/types-manage-post-types-taxonomy-and-custom-fields/) is your one-stop solution for creating custom content with WordPress.
+Types makes it easy to customize the WordPress admin. Define your own content using **custom post types** and **custom taxonomy**. Redesign editing screens using **custom fields**.
 
-Use Types to:
+The integration between custom post types, taxonomy and fields lets you do things that no other custom-fields plugin can do.
 
-* Add **custom post types** to WordPress
-* Organize content with **custom taxonomy**
-* Enhance editing screens with **custom fields**
-* Define **parent / child** relationship between post types
+[vimeo http://vimeo.com/43104695]
 
-It's powerful enough to help you build any site with WordPress, but also simple and friendly for non-techies.
+= CUSTOM FIELDS =
 
-Once you've defined your custom post types and custom fields, you can display them using Types' PHP API or Views.
+Types includes support for a wide list of custom fields.
 
-= Custom post types and taxonomy =
+* **Single-line text**
+* **Multi-line text**
+* **WYSIWYG** (WordPress Visual Editor)
+* **Checkbox**
+* **Multi-value Checkboxes**
+* **Radio group**
+* **Drop-down Select**
+* **File upload**
+* **Image** (Types includes a robust image-resize and caching engine)
+* **Date** (includes a JS date-picker)
+* **Email**
+* **Numeric**
+* **Phone**
+* **Skype**
+* **URL**
+* **Post reference** (using Types Parent / Child relationships management)
 
-Types lets you define custom post types and taxonomy from within the WordPress GUI.
+Types custom fields use the standard WordPress post-meta table, making it cross-compatible with any theme or plugin. Additionally, all fields can be **repeating fields**.
 
-This video shows how to define custom post types and custom taxonomy. You're also welcome to read the complete tutorial on [WordPress custom Post Types](http://wp-types.com/documentation/user-guides/create-a-custom-post-type/).
+Types includes a complete [API for displaying custom fields with PHP](http://wp-types.com/documentation/functions/). It also integrates with [Views](http://wp-types.com/home/views-create-elegant-displays-for-your-content/), for fast and easy display of custom content.
 
-[vimeo http://vimeo.com/37267854]
+= CUSTOM POST TYPES AND TAXONOMY =
 
-**New in Types 0.9.5 - define parent / child relationship between different post types!**
+Types lets you easily setup custom post types and taxonomy. You can create new post types in seconds and use the advanced settings to customize every aspect.
 
-You can create complex content hierarchies in Types. For example, if you're building a site for artists, each *Artist* can have many *Show* child items. You can add and edit Shows right from within the Artist edit page in one neat table.
+* Quick setup mode
+* Full control over every feature
+* Associate taxonomy with custom post types
+* Define parent-child relationships between different post types
+* Edit child items within parent editor (field tables)
 
-When you setup post relationships, different content types become interconnected. Field Tables let you bulk-edit child items when you're editing parents. This takes the concept of repeater fields to a whole new level.
+= BUILT FOR STABILITY =
 
-= Custom fields =
+Types is part of a family of plugins, developed and maintained by [OnTheGoSystems](http://www.onthegosystems.com). Our plugins power over 100,000 commercial sites, using WordPress as a complete CMS. While we love features, we know that stability, performance, usability and security are critical. All our plugins go through comprehensive testing, QA and security analysis before every release.
 
-Types lets you completely customize the WordPress editing interface with different kinds of custom fields. You can display the custom fields using Types API functions or with Views.
+= RELIABLE SUPPORT =
 
-Watch this video for a quick intro to custom fields. For the complete reference, go to our [WordPress custom fields tutorial](http://wp-types.com/documentation/user-guides/using-custom-fields/).
+When you need help, we're here for you. We have a dedicated team of expert supporters, who can help with anything from a simple how-to advice to complex problem solving. Depending on your needs, you can get free community support, or dedicated high-availability commercial support. See for yourself in our [support forum](http://wp-types.com/forums/).
 
-[vimeo http://vimeo.com/37320858]
+= MULTILINGUAL READY =
 
-Choose which fields to display, group them together into 'meta boxes' and select on what edit pages they will display.
-
-Types supports these custom field kinds:
-
-* **Single-line text** - a single text line
-* **Multi-line text** - a paragraph of text
-* **WYSIWYG** - Visual editor in custom fields (requires WordPress 3.3 and above)
-* **Checkbox** - yes / no fields. You can control the text output for on and off.
-* **Radio** - displays multiple text options as radio buttons
-* **Select** - displays multiple text options as a drop-down select input
-* **File** - allows uploading files to posts and displays a download link on public pages
-* **Image** - allows uploading images and displaying them at different sizes with a resize cache
-* **Date** - shows a date-picker in the editor screen and lets you choose output formats when displaying
-* **Email** - inputs and validates correct email format
-* **Numeric** - lets writers enter number data only by validating its content
-* **Phone** - validates format for phone numbers and allows to display them with special styling
-* **Skype** - displays the Skype graphics, showing when you're available
-* **URL** - validates URL format and displays a link on public pages
-
-Besides defining custom fields, Types can also validate correct user-input. You can enable format validation for every field type and make different fields optional or required.
-
-= Displaying custom fields in PHP templates using Types API =
-
-If you're convenient with PHP and WordPress API, Types makes it super-easy for you to display custom fields. It includes a complete API that will display each custom field in a unique way.
-
-For example, when you display an image, Types will output the IMG tag with all its attributes. It also includes an image resizer and cache that let you display images in any size, without loading you server.
-
-See how to insert custom fields into WordPress template files in PHP. Types includes a comprehensive [custom fields API](http://wp-types.com/documentation/functions/), which lets you insert any field, anywhere in the site.
-
-[vimeo http://vimeo.com/37725539]
-
-= Display custom content types and fields with Views and no coding =
-
-**[Views](http://wp-types.com/home/views-create-elegant-displays-for-your-content/) is the display companion for Types.** It's a commercial plugin that costs just $49 USD, which will turn weeks of programming and debug into a few hours of fun. With Views you don't need a programmer to create complex sites. It's like having your own developer, instantly building whatever you want.
-
-Views lets you:
-
-* Load any content from the database and display it with [Views](http://wp-types.com/documentation/user-guides/views/).
-* Create templates right from within the WordPress editor using [View Templates](http://wp-types.com/documentation/user-guides/view-templates/).
-* Insert custom fields anywhere.
-
-Watch this video for a quick teaser:
-[vimeo http://vimeo.com/37376736]
-
-You're welcome to visit our [learn section](http://wp-types.com/learn/) to see complete working examples of classified sites, magazine layout, real-estate sites and other complete and functional designs we've built with Types and Views and no PHP at all.
-
-Views is designed for both non-techies and developers alike. If you're just starting with custom content types for WordPress, you'll appreciate how quickly you can have a fully-working site that uses custom post types, taxonomy and fields.
-
-Then, when you're more convenient with Types and Views and want to get more, you'll discover power-features such as nested output, conditional display, post relationship and other features that turn WordPress into a top-notch CMS.
-
-= Need to build multilingual sites? =
-
-The same folks who wrote [WPML](http://wpml.org) have created Types, so the two plugins play perfectly together. You can translate all labels via WPML's String Translation, without any configuration.
-
-When you translate content that includes custom fields, these fields will appear in WPML's Translation Editor. Also, content synchronization between different languages is fully supported.
+Types is the only custom fields and post types plugin that's built multilingual-ready. It plays perfectly with [WPML](http://wpml.org). You'll be able to translate everything, including texts and labels in the WordPress admin and user-content for front-page.
 
 == Installation ==
 
@@ -227,6 +190,15 @@ Additionally, Types is the only plugin that lets you define parent/child relatio
 = 1.0.1 =
 * Fixes a number of small bugs, related with JS interaction with other plugins
 
+= 1.0.2 =
+* Improved WPML support with repeating fields
+* Fixed problems with decimal repeating fields
+* Post relationship meta box goes through standard WordPress filters
+* Fixed field display conditions for date fields
+* Fixed field count when adding or deleting fields
+* Stopped saving child posts when saving the parent, to avoid conflicts with other plugins
+* Checkboxes can save '0' for empty fields
+
 == Upgrade Notice ==
 
 = 0.9.1 =
@@ -258,3 +230,6 @@ You can make any field repeating now
 
 = 1.0.1 =
 Small bugfix release
+
+= 1.0.2 =
+Better support for multilingual sites with repeating fields

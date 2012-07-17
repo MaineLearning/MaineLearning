@@ -1,10 +1,10 @@
 === Events Manager ===
-Contributors: nutsmuggler, netweblogic
+Contributors: netweblogic, nutsmuggler
 Donate link: http://wp-events-plugin.com
 Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
 Requires at least: 3.3
-Tested up to: 3.3.1
-Stable tag: 5.1.6
+Tested up to: 3.4
+Stable tag: 5.1.8.5
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -98,6 +98,95 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.1.8.5 =
+* fixed bug with bookings being open/closed due to changes in 5.1.8.5
+
+= 5.1.8.4 =
+* fixed some issues in the EM blog updater and EM use of table constants
+* improved BP member link generation in activity stream, uses bp_core_bet_user_domain now
+* fixed cancellation link disappearing after booking cut-off date, even if event hasn't started
+* fixed use of some get_price style filters and supplying pre-formatted currency numbers
+* fixed pagination issues in shortcodes
+* fixed booking table ajax issues
+* fixed location auto-completer not working when maps are disabled
+* fixed ical all-day event issues when offsets come into play
+* fixed single day ical offset problems
+
+= 5.1.8.3 =
+* fixed bookings being closed if booking cut-off date/time not specificed in new events
+
+= 5.1.8.2 =
+* added booking cut-off times
+* fixed events with bookings table ajax
+* fixed bp group events list not showing location info
+* fixed calendar day pages showing 'past' events if option is set not to
+
+= 5.1.8.1 =
+* important - Modified template files? See this http://em.cm/templates-5181
+* fixed date ranges not working properly
+* fixed pagination issues
+
+= 5.1.8 =
+* important - Modified template files? See this http://em.cm/datetime
+* fixed jigoshop session_start conflict
+* removed some group metabox php warnings
+* fixed slashes added to location/event name in db table
+* fixed/improved multisite capability management (see network admin settings)
+* events with >1 ticket will show multi-ticket editor regardless of single ticket mode setting
+* updated Brazilian language, added Catalan and fixed a few language datepicker oddities
+* fixed RSS validation fails for some special characters
+* fixed cancellations being possible after event boookings close 
+* fixed admin-side search-by-category
+* fixed manage_others_bookings not allowing access to bookings without other caps
+* fixed calendar widgets taking on day link search arguments from other parts of the page
+* fixed admin email problems when in auto-approve mode and using alternate status numbers e.g. 5
+* added force-approve booking flag in EM_Booking::set_status
+* fixed ical locations and apostrophes and single ical file time offsets
+* fixed gallery shortcode for recurring events
+* fixed guest event submission auto-complete
+* refactored booking form JS to allow multiple forms on one page
+* fixed some booking js ui animations
+* fixed booking table overlay issues
+* added more js vars for translation purposes
+* improved placeholder replacement logic
+* added em_event_submission_login filter
+* simplified timepicker and datepicker JS and html strucuture for re-use
+* EM_Notices behaviour changed so errors are printed and not deleted, only at start/end of script
+
+= 5.1.7 =
+* added excludeable categories (use negative numbers instead)
+* clarified some of the field tips of "other pages" in options
+* fixed thumbnail issue in MS (again)
+* added event dates and times as sortable booking collumns
+* fixed multisite duplicate post id bug in global mode
+* simplified meaning of EM_Bookings::get_booked_spaces, so it's just booked spaces, not pending. get_available_spaces() should be used for reserved seats instead.
+* replaced old default date formats with #_EVENTDATES and #_EVENTTIMES
+* fixed some datepicker problems in single ticket mode with start/end date tickets
+* removed jQuery datepicker and autocomplete libraries, now using WP's internal scripts instead
+* improved the reliability of returned json data in booking form
+* fixed categories not editable in front-end,
+* added email not sent flag to booking object
+* fixed tags not working for slug searches
+* fixed dst issues in ical calendars
+* added name/slug search fall back for tags search
+* added datepicker custom date formatting
+* fixed non registered user problem for failed JS submissions
+* fixed some rsvp conditional and gcal placeholders
+* added jquery-ui-css id to jquery ui css loader to promote compatability with others
+* you can now add a custom functions.php file within yourtheme/plugins/events-manager/
+* improved title rewriting compatibility
+* added hierarchies to category dropdowns
+* fixed an object reference error in em-object.php send_mail()
+* added jQuery em_booking_success event to document
+* fixed tickets not showing start/end dates in admin after editing
+* fully booked message now shown rather than closed message
+* location description won't take event description in public submission forms
+* re-added get_date_format for backwards compatability with overriding templates
+* fixed pagination issue in my events page on front-end
+* fixed potential security xss exploit in json call links
+* fixed default country overriding all country search option on search pages
+* fixed pagination issue on my events page on the front-end
+
 = 5.1.6 =
 * fixed multiple admin emails not going out
 * updated timthumb to v2.8.10

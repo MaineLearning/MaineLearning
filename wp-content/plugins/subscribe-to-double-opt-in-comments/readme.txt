@@ -3,12 +3,15 @@ Contributors: Tobiask
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3736248
 Tags: comments, subscribe, double opt in, kommentar, abonnieren, opt in, optin, kommentare, benachrichtigung
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 6.1.1
+Tested up to: 3.4.1
+Stable tag: 6.1.2
 
 Based on the well known Subscribe-to-Comments PlugIn, but now with double-opt-in feature to prevent spam.
 
 == Changelog ==
+
+= 6.1.2 =
+* Tested with 3.4.1
 
 = 6.1.1 =
 * Added Romanian translation, big thanks to: Web Geek Science (<a href="http://webhostinggeeks.com/">Web Hosting Geeks</a>)
@@ -83,7 +86,7 @@ First, the user will get an e-mail with a confirmation link, after the user has 
 Plugin based on Mark Jaquith "Subscribe to Comments".
 More information on my blog: <a href="http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/">sjmp.de</a>.
 
-Language support: English, German, Slovak, Turkish, Danish, Belorussian, Spanish (Argentina), Ukrainian, Italian, Hebrew, Arabic, Portuguese (Brazilian), Lithuanian, Dutch.
+Language support: English, German, Slovak, Turkish, Danish, Belorussian, Spanish (Argentina), Ukrainian, Italian, Hebrew, Arabic, Portuguese (Brazilian), Lithuanian, Dutch, Romanian.
 
 = Deutsch =
 
@@ -93,7 +96,7 @@ Danach erhalten sie erst eine Mail falls ein neuer Kommentar gepostet wurde. So 
 Mehr dazu auch auf meinem Blog: <a href="http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/">sjmp.de</a>.
 
 Sprachunterst&uuml;tzung: Deutsch, Englisch, Slowakisch, T&uuml;rkisch, D&auml;nisch, Wei&szlig;russisch, 
-Spanisch (Argentinien), Ukrainisch, Italienisch, Hebr&auml;isch, Arabisch, Portugiesisch (Brasilien), Litauisch, Niederl&auml;ndisch.
+Spanisch (Argentinien), Ukrainisch, Italienisch, Hebr&auml;isch, Arabisch, Portugiesisch (Brasilien), Litauisch, Niederl&auml;ndisch, Rum&auml;nisch.
 
 == Installation ==
 
@@ -104,12 +107,16 @@ Spanisch (Argentinien), Ukrainisch, Italienisch, Hebr&auml;isch, Arabisch, Portu
 3. Set settings via "Settings" menu in WordPress
 4. Ready, steady, go :)
 
+Questions? Go to <a href="http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/">this page</a> and leave a comment!
+
 = Deutsch =
 
 1. Dateien ins "/wp-content/plugins" Verzeichnis laden
 2. Im Adminbereich das Plugin aktivieren
 3. Einstellungen anpassen, ebenfalls im Adminbereich!
 4. Fertig, jetzt darf man sich freuen :)
+
+Fragen? Du kannst deine Fragen <a href="http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/">hier</a> stellen! Einfach einen Kommentar hinterlassen.
 
 == Frequently Asked Questions ==
 
@@ -123,8 +130,9 @@ Yes, just place this code snippet in your template (outside the comments form): 
 
 = I use Hosteurope and I cannot send e-mails via this plugin =
 
-See this comment for a solution: http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/comment-page-10/#comment-4460
+See this (german) comment for a solution: http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/comment-page-10/#comment-4460
 
 == Screenshots ==
 
-1. Part of the settings menu
+1. Part of the settings menu.
+2. The checkbox to subscribe to a comment thread.

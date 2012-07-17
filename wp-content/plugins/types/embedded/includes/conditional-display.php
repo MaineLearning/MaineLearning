@@ -8,6 +8,9 @@ add_filter('wpcf_post_groups', 'wpcf_cd_post_groups_filter', 10, 3);
 if (!function_exists('wplogger')) {
     require_once WPCF_EMBEDDED_ABSPATH . '/common/wplogger.php';
 }
+if (!function_exists('wpv_filter_parse_date')) {
+    require_once WPCF_EMBEDDED_ABSPATH . '/common/wpv-filter-date-embedded.php';
+}
 
 /**
  * Filters groups on post edit page.
@@ -38,6 +41,8 @@ function wpcf_cd_post_groups_filter($groups, $post, $context) {
                 }
 
                 $evaluate = trim(stripslashes($group['conditional_display']['custom']));
+                // Check dates
+                $evaluate = wpv_filter_parse_date($evaluate);
                 // Add quotes = > < >= <= === <> !==
                 $strings_count = preg_match_all('/[=|==|===|<=|<==|<===|>=|>==|>===|\!===|\!==|\!=|<>]\s(?!\$)(\w*)[\)|\$|\W]/',
                         $evaluate, $matches);
@@ -75,12 +80,22 @@ function wpcf_cd_post_groups_filter($groups, $post, $context) {
                 $passed_all = true;
                 $passed_one = false;
                 foreach ($group['conditional_display']['conditions'] as $condition) {
+                    // Load field
+                    $field = wpcf_admin_fields_get_field($condition['field']);
+                    wpcf_fields_type_action($field['type']);
+
                     wpcf_cd_add_group_js('add', $condition['field'],
                             $condition['value'], $condition['operation'],
                             $group['id']);
                     $value = get_post_meta($post->ID,
                             wpcf_types_get_meta_prefix($condition['field']) . $condition['field'],
                             true);
+                    $value = apply_filters('wpcf_conditional_display_compare_meta_value',
+                            $value, $condition['field'],
+                            $condition['operation'], $key, $post);
+                    $condition['value'] = apply_filters('wpcf_conditional_display_compare_condition_value',
+                            $condition['value'], $condition['field'],
+                            $condition['operation'], $key, $post);
                     $check = wpcf_cd_admin_compare($condition['operation'],
                             $value, $condition['value']);
                     if (!$check) {
@@ -129,6 +144,8 @@ function wpcf_cd_post_edit_field_filter($element, $field, $post,
                 return array();
             }
             $evaluate = trim(stripslashes($field['data']['conditional_display']['custom']));
+            // Check dates
+            $evaluate = wpv_filter_parse_date($evaluate);
             // Add quotes = > < >= <= === <> !==
             $strings_count = preg_match_all('/[=|==|===|<=|<==|<===|>=|>==|>===|\!===|\!==|\!=|<>]\s(?!\$)(\w*)[\)|\$|\W]/',
                     $evaluate, $matches);
@@ -170,6 +187,12 @@ function wpcf_cd_post_edit_field_filter($element, $field, $post,
                 $value = get_post_meta($post->ID,
                         wpcf_types_get_meta_prefix($condition['field']) . $condition['field'],
                         true);
+                $value = apply_filters('wpcf_conditional_display_compare_meta_value',
+                        $value, $condition['field'], $condition['operation'],
+                        $field['slug'], $post);
+                $condition['value'] = apply_filters('wpcf_conditional_display_compare_condition_value',
+                        $condition['value'], $condition['field'],
+                        $condition['operation'], $field['slug'], $post);
                 $check = wpcf_cd_admin_compare($condition['operation'], $value,
                         $condition['value']);
                 if (!$check) {
@@ -299,6 +322,10 @@ function wpcf_cd_add_field_js() {
                         jQuery(this).bind('change', function(){
                             wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
                         });
+                    } else if (jQuery(this).hasClass('wpcf-datepicker')) {
+                        jQuery(this).bind('wpcfDateBlur', function(){
+                            wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
+                        });
                     } else {
                         jQuery(this).bind('blur', function(){
                             wpcfCdVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val());
@@ -310,7 +337,7 @@ function wpcf_cd_add_field_js() {
                 }
             });
         });
-                                                                                                                    
+                                                                                                                                        
         function wpcfCdVerify(object, name, value) {
             if (object.hasClass('wpcf-pr-binded')) {
                 return false;
@@ -378,16 +405,31 @@ function wpcf_cd_add_group_js_render($conditions = array()) {
     foreach ($conditions as $field => $data) {
 
         ?>
-                    jQuery('[name="wpcf[<?php echo $field; ?>]"]').bind('blur', function(){
-                        wpcfCdGroupVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val(), <?php echo $data['group_id']; ?>);
-                    });
+                    if (jQuery('[name="wpcf[<?php echo $field; ?>]"]').hasClass('radio')
+                        || jQuery('[name="wpcf[<?php echo $field; ?>]"]').hasClass('checkbox')) {
+                        jQuery('[name="wpcf[<?php echo $field; ?>]"]').bind('click', function(){
+                            wpcfCdGroupVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val(), <?php echo $data['group_id']; ?>);
+                        });
+                    } else if (jQuery('[name="wpcf[<?php echo $field; ?>]"]').hasClass('select')) {
+                        jQuery('[name="wpcf[<?php echo $field; ?>]"]').bind('change', function(){
+                            wpcfCdGroupVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val(), <?php echo $data['group_id']; ?>);
+                        });
+                    } else if (jQuery('[name="wpcf[<?php echo $field; ?>]"]').hasClass('wpcf-datepicker')) {
+                        jQuery('[name="wpcf[<?php echo $field; ?>]"]').bind('wpcfDateBlur', function(){
+                            wpcfCdGroupVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val(), <?php echo $data['group_id']; ?>);
+                        });
+                    } else {
+                        jQuery('[name="wpcf[<?php echo $field; ?>]"]').bind('blur', function(){
+                            wpcfCdGroupVerify(jQuery(this), jQuery(this).attr('name'), jQuery(this).val(), <?php echo $data['group_id']; ?>);
+                        });
+                    }
         <?php
     }
 
     ?>
             jQuery('.wpcf-cd-group-failed').parents('.postbox').hide();
         });
-                                                                                                                    
+                                                                                                                                        
         function wpcfCdGroupVerify(object, name, value, group_id) {
             var form = jQuery('#post');
             jQuery.ajax({
@@ -425,6 +467,13 @@ function wpcf_cd_add_group_js_render($conditions = array()) {
 function wpcf_cd_meta_ajax_validation_filter($null, $object_id, $meta_key,
         $single) {
     $meta_key = str_replace('wpcf-', '', $meta_key);
+    $field = wpcf_admin_fields_get_field($meta_key);
+    if (isset($_POST['wpcf'][$meta_key]) && !empty($field) && $field['type'] == 'date') {
+        $time = strtotime($_POST['wpcf'][$meta_key]);
+        if ($time) {
+            return $time;
+        }
+    }
     return isset($_POST['wpcf'][$meta_key]) ? $_POST['wpcf'][$meta_key] : '';
 }
 
@@ -439,5 +488,12 @@ function wpcf_cd_meta_ajax_validation_filter($null, $object_id, $meta_key,
  */
 function wpcf_cd_pr_meta_ajax_validation_filter($null, $object_id, $meta_key,
         $single) {
+    $field = wpcf_admin_fields_get_field($meta_key);
+    if (isset($_POST['wpcf_post_relationship'][$meta_key]) && !empty($field) && $field['type'] == 'date') {
+        $time = strtotime($_POST['wpcf_post_relationship'][$meta_key]);
+        if ($time) {
+            return $time;
+        }
+    }
     return isset($_POST['wpcf_post_relationship'][$meta_key]) ? $_POST['wpcf_post_relationship'][$meta_key] : '';
 }

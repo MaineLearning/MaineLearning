@@ -67,7 +67,7 @@ class blcConfigurationManager {
 	
   /**
    * blcOptionManager::save_options()
-   * Save plugin options to the databse. 
+   * Save plugin options to the database.
    *
    * @param string $option_name (Optional) Save the options under this name 
    * @return bool True if settings were saved, false if settings haven't been changed or if there was an error.
@@ -110,4 +110,3 @@ class blcConfigurationManager {
 }
 
 }
-?>
