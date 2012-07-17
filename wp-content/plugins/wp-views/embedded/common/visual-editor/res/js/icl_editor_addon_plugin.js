@@ -7,65 +7,6 @@ jQuery(document).ready(function(){
 });
 
 
-function icl_editor_add_menu(c, m, icl_editor_menu) {
-    Array.prototype.isKey = function(){
-        for(i in this){
-            if(i === arguments[0])
-                return true;
-        };
-        return false;
-    };
-    
-    var sub_menus = new Array();
-    for (var index = 0; index < icl_editor_menu.length; index++) {
-        
-        // Set callback function
-        var fn = icl_editor_menu[index][1];
-
-        if (icl_editor_menu[index][2] != "") {
-            // a sub menu
-            
-            
-            if (sub_menus.isKey(icl_editor_menu[index][2])) {
-                sub = sub_menus[icl_editor_menu[index][2]];
-            } else {
-                // Create a sub menu/s
-                parts = icl_editor_menu[index][2].split('-!-');
-                sub = m;
-                name = '';
-                for (var part = 0; part < parts.length; part++) {
-                    if (name == '') {
-                        name = parts[part];
-                    } else {
-                        name += '-!-' + parts[part];
-                    }
-                    if (sub_menus.isKey(name)) {
-                        sub = sub_menus[name];
-                    } else {
-                        sub = sub.addMenu({
-                            title : parts[part]
-                        });
-                        sub_menus[name] = sub;
-                    }
-                }
-            }
-
-            sub.add({
-                title : icl_editor_menu[index][0],
-                onclick : eval(fn)
-            });
-            
-        } else {
-            m.add({
-                title : icl_editor_menu[index][0],
-                onclick : eval(fn)
-            });
-        }
-    }
-
-//    return c;
-}
-
 jQuery.fn.extend({
     insertAtCaret: function(myValue){
         return this.each(function(i) {
@@ -97,45 +38,54 @@ jQuery(window).load(function(){
 	jQuery('.wpv_add_fields_button').click(function(e) {
 		var dropdown_list = jQuery('#add_field_popup .editor_addon_dropdown');
 		jQuery('#add_field_popup .editor_addon_wrapper .vicon').css('display', 'none');
+		jQuery('#add_field_popup').show();
 		dropdown_list.css('height', '470px');
-		dropdown_list.css('width', '100%');
+		dropdown_list.css('width', '800px');
 		dropdown_list.css('margin', '-2px 0 0 -15px');
 		dropdown_list.css('padding', '0px');
 		dropdown_list.css('overflow', 'auto');
 		dropdown_list.css('visibility', 'visible');
 		
-		jQuery('#add_field_popup .editor_addon_wrapper .close').css('display', 'none');
+		var pos = jQuery('.wpv_add_fields_button').position();
 		
-		wpv_hide_top_groups(jQuery(dropdown_list).parent());
+		dropdown_list.css('position', 'absolute');
+		dropdown_list.css('top', pos.top + jQuery('.wpv_add_fields_button').height() - 470 + 'px');
+		dropdown_list.css('left', pos.left + jQuery('.wpv_add_fields_button').width() + 'px');
+
 		
-		var ajaxWrapper = jQuery(dropdown_list).parent().parent().parent();
-		ajaxWrapper.css('padding', '0px');
-		ajaxWrapper.css('margin', '0px');
+		//
+		//jQuery('#add_field_popup .editor_addon_wrapper .close').css('display', 'none');
+		//
+		//wpv_hide_top_groups(jQuery(dropdown_list).parent());
+		//
+		//var ajaxWrapper = jQuery(dropdown_list).parent().parent().parent();
+		//ajaxWrapper.css('padding', '0px');
+		//ajaxWrapper.css('margin', '0px');
 		
 	});
 	
 	// second (backup) lightbox behavior for add field
 	jQuery('#addfields2').click(function() {
-		var add_field_popup = jQuery('#add_field_popup');
-		
-		add_field_popup.css("position","absolute");
-	    add_field_popup.css('width', '700px');
-	    add_field_popup.css('height', '500px');
-	    add_field_popup.css('z-index', '10000px');
-	    
-	    add_field_popup.css('top', '-100px');
-	    add_field_popup.css('left', '150px');
-	    
-//	    add_field_popup.css("top", ((jQuery(window).height() - add_field_popup.outerHeight()) / 2) + 
-//	                                                jQuery(window).scrollTop() + "px");
-//	    add_field_popup.css("left", ((jQuery(window).width() - add_field_popup.outerWidth()) / 2) + 
-//		                                                jQuery(window).scrollLeft() + "px");
-		if(jQuery('#add_field_popup').css('display') == 'block') {
-			jQuery('#add_field_popup').css('display', 'none');
-		}
-		else {
-			jQuery('#add_field_popup').css('display', 'block');
-		}
+//		var add_field_popup = jQuery('#add_field_popup');
+//		
+//		add_field_popup.css("position","absolute");
+//	    add_field_popup.css('width', '700px');
+//	    add_field_popup.css('height', '500px');
+//	    add_field_popup.css('z-index', '10000px');
+//	    
+//	    add_field_popup.css('top', '-100px');
+//	    add_field_popup.css('left', '150px');
+//	    
+////	    add_field_popup.css("top", ((jQuery(window).height() - add_field_popup.outerHeight()) / 2) + 
+////	                                                jQuery(window).scrollTop() + "px");
+////	    add_field_popup.css("left", ((jQuery(window).width() - add_field_popup.outerWidth()) / 2) + 
+////		                                                jQuery(window).scrollLeft() + "px");
+//		if(jQuery('#add_field_popup').css('display') == 'block') {
+//			jQuery('#add_field_popup').css('display', 'none');
+//		}
+//		else {
+//			jQuery('#add_field_popup').css('display', 'block');
+//		}
 	});
 	
 	// this manages the "V" button 

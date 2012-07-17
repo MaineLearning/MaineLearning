@@ -19,7 +19,7 @@ function wpv_header_shortcode($atts, $value){
     //'wpv_column_sort_id'
     $order_class = 'wpv-header-no-sort';
     
-    if ($atts['name'] != 'post-body') {
+    if ($view_settings['view-query-mode'] == 'normal' && $atts['name'] != 'post-body') {
 
         if (isset($_GET['wpv_column_sort_id']) && $_GET['wpv_column_sort_id'] == $atts['name']) {
             

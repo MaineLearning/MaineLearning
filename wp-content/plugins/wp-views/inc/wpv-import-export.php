@@ -126,9 +126,28 @@ function wpv_admin_export_data() {
                         $post_data[$copy] = $post[$copy];
                     }
                 }
+                $output_mode = get_post_meta($post['ID'], '_wpv_view_template_mode', true);
+                
+                $post_data['template_mode'] = $output_mode;
+
                 $data['view-templates']['view-template-' . $post['ID']] = $post_data;
             }
         }
+    }
+    
+    // Get settings
+    $options = $WP_Views->get_options();
+    if (!empty($options)) {
+        foreach ($options as $option_name => $option_value) {
+            if (strpos($option_name, 'view_') === 0
+                    || strpos($option_name, 'views_template_') === 0) {
+                $post = get_post($option_value);
+                if (!empty($post)) {
+                    $options[$option_name] = $post->post_name;
+                }
+            }
+        }
+        $data['settings'] = $options;
     }
 
 

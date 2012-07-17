@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '1.0');
+define('WPV_VERSION', '1.1');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -36,6 +36,7 @@ if (!defined('EDITOR_ADDON_RELPATH')) {
 }
 
 require_once WPV_PATH_EMBEDDED . '/common/wplogger.php';
+require_once WPV_PATH_EMBEDDED . '/common/wp-pointer.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-shortcodes.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-shortcodes-in-shortcodes.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-layout-embedded.php';
@@ -51,6 +52,8 @@ require WPV_PATH_EMBEDDED . '/inc/wpv-filter-status-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-parent-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-types-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-relationship-embedded.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-taxonomy-embedded.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-limit-embedded.php';
 
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-user-functions.php';

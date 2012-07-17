@@ -18,6 +18,7 @@ function wpv_filter_get_posts($id) {
     );
     extract($view_settings_defaults);
     $view_settings = $WP_Views->get_view_settings($id);
+	$view_settings['view_id'] = $id;
     extract($view_settings, EXTR_OVERWRITE);
     
     if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && $_GET['wpv_view_count'] == $WP_Views->get_view_count()) {

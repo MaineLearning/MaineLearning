@@ -64,7 +64,22 @@ function get_taxonomy_query($view_settings) {
 
     }    
     
-    $items = get_terms($taxonomies[$view_settings['taxonomy_type'][0]]->name, $tax_query_settings);
+    if (isset($taxonomies[$view_settings['taxonomy_type'][0]])) {
+        $items = get_terms($taxonomies[$view_settings['taxonomy_type'][0]]->name, $tax_query_settings);
+    } else {
+        // taxonomy no longer exists.
+        $items = array();
+    }
+    
+    // get_terms doesn't sort by count when child count is included.
+    // we need to do it manually.
+    if ($view_settings['taxonomy_orderby'] == 'count') {
+        if ($view_settings['taxonomy_order'] == 'ASC') {
+            usort($items, '_wpv_taxonomy_sort_asc');
+        } else {
+            usort($items, '_wpv_taxonomy_sort_dec');
+        }
+    }
 
     // Filter by parent if required.
     // Note: We could use the 'parent' siggin in the tax_query_settings but
@@ -108,9 +123,27 @@ function get_taxonomy_query($view_settings) {
 
     $items = array_values($items);
 
-    return $items;
+    return apply_filters('wpv_filter_taxonomy_post_query', $items, $tax_query_settings, $view_settings);
 
 }
+
+function _wpv_taxonomy_sort_asc($a, $b) {
+    if ($a->count == $b->count) {
+        return 0;
+    }
+    
+    return ($a->count < $b->count) ? -1 : 1;
+}
+
+function _wpv_taxonomy_sort_dec($a, $b) {
+    if ($a->count == $b->count) {
+        return 0;
+    }
+    
+    return ($a->count < $b->count) ? 1 : -1;
+}
+
+
 /**
  * Views-Shortcode: wpv-no-taxonomy-found
  *
