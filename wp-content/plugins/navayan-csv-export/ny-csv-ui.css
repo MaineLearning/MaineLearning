@@ -1,0 +1,25 @@
+.iedit:hover{background:#eee}
+.ny-left{clear: left; float: left; margin-right: -325px; width: 100%;}
+.ny-left-widgets{margin-right: 325px;}
+.ny-right{clear: right;float: right;width: 300px; margin-right: 15px;}		 
+.ny-widgets{width: 285px; margin: 0 auto 15px auto; border: 1px solid #DFDFDF; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px;}
+.ny-widgets h3{
+		font-size: 14px;
+		font-weight: 700;
+		padding: 8px 10px;
+		margin:0;
+		color:#777;
+		background: #F1F1F1;
+		background: -o-linear-gradient(top,#F9F9F9,#ECECEC);
+		background: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
+		background:	-webkit-gradient(linear, center top, center bottom, from(#F9F9F9), to(#ECECEC));
+		filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#F9F9F9',EndColorStr='#ECECEC');
+		border-bottom: 1px solid #dfdfdf;
+}
+.ny-widgets .ny-widgets-desc{
+		font-size: 13px;
+		margin: 15px;
+}
+.ny-widgets-desc p{font-size: 13px}
+.ny-widgets-desc ul{font-size: 13px; list-style: disc outside; margin-left: 12px}
+.ny-widgets-desc ol{font-size: 13px; list-style: decimal outside}

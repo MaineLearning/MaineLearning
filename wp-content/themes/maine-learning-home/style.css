@@ -52,8 +52,6 @@ body
 	width: 100%;
 }
 
-#header { background: #292929 url(images/mln-banner-home-2012-02-22c.jpg) no-repeat scroll 0 0; }
-
 #header, #container
 {
 	border-bottom-left-radius: 0px;
@@ -157,7 +155,7 @@ HEADER
 
 #header
 {
-	background: url("images/mln-banner-home-2012-02-22c.jpg") no-repeat scroll 0 0 transparent !important;
+	background: url(/wp-content/uploads/2012/06/mln-banner-home-2012-06-26u.jpg) no-repeat scroll 0 0 transparent !important;
 	height: 186px;
 	margin-bottom: 0px;
 	padding-top: 0;
@@ -170,7 +168,7 @@ h1#logo a
 	background: url("images/transparent-50x400.gif") no-repeat scroll 0 0 transparent;
 	display: block;
 	height: 80px;
-	margin-top: 36px;
+	margin-top: 39px;
 	margin-bottom: 0px;
 	outline: medium none;
 	overflow: hidden;
@@ -183,6 +181,7 @@ form#search-form
 {
 	float: right;
 	margin-right: 16px;
+	margin-top: 4px;
 	text-align: right;
 	width: 260px;
 }
@@ -214,12 +213,12 @@ ul#nav { max-width: 70%; }
 #nav li a
 {
 	background: transparent;
-	color: #62a6b3;
+	color: #9fd1d6;
 	font-family: 'Cabin',arial,serif;
 	font-size: 15px;
 	font-weight: bold;
-	padding: 5px 10px;
-	text-shadow: black 1px 1px 1px;
+	padding: 5px 8px;
+	text-shadow: black 1px 1px 5px;
 	text-transform: uppercase;
 	letter-spacing: .5px;
 }
@@ -233,7 +232,7 @@ ul#nav { max-width: 70%; }
 #nav li.selected a, #nav > li.current-menu-item a, #nav > li.current_page_item a, #nav > li.current_page_ancestor a
 {
 	background: transparent;
-	color: #ddd;
+	color: #f6d09e;
 }
 
 #nav .sfhover ul li a, #nav :hover ul li a
@@ -280,7 +279,7 @@ h3
 h4
 {
 	font-family: 'Cabin',arial,serif;
-	font-size: 14px;
+	font-size: 14px !important;
 	color: #444;
 	letter-spacing: .2px;
 	text-transform: uppercase;
@@ -331,7 +330,7 @@ img.alignright { margin: 0 0 2px 5px; }
 	font-size: 18px;
 	letter-spacing: -0.2px;
 	line-height: 160%;
-	margin: 4px 0 20px 0;
+	margin: 4px 0 16px 0;
 	padding: 0;
 }
 
@@ -475,14 +474,9 @@ li.exb blockquote p a
 	margin-bottom: 16px;
 }
 
-a.view-post, a.view-thread, a.exb-view
+a.view-post, a.view-thread
 {
-background: #EDEDED !important;
-background: -moz-linear-gradient(top, white 0%, #E0E0E0 100%) !important;
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #E0E0E0)) !important;
-background: -webkit-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
-background: -o-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
-background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
+	background: -ms-linear-gradient(top, white 0%, #E0E0E0 100%) !important;
 	border: 1px solid #BBB;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
@@ -496,6 +490,26 @@ background: -ms-linear-gradient(top,  white 0%, #E0E0E0 100%) !important;
 	outline: none;
 	padding: 2px 8px 2px 8px;
 	text-decoration: none;
+}
+
+a.view-group-discussion-topic, a.exb-view, a.view-group-discussion-post, a.view-group-activity
+{
+	background-color: none;
+	border: none !important;
+	color: #14748F;
+	font-size: 12px !important;
+	font-weight: bold;
+	margin: -27px 24px 10px 0;
+	outline: none;
+	padding: 2px 8px 2px 8px;
+	text-decoration: none;
+	background: -ms-linear-gradient(top, #E6E6E6 0%, #E6E6E6 100%) !important;
+}
+
+a.view-group-discussion-topic, a.view-group-discussion-post
+{
+	background-color: #E6E6E6 !important;
+	z-index: 100 !important;
 }
 
 #posts-filter { margin: 0px 0px 0px 20px; }
@@ -848,10 +862,12 @@ FOOTER
 	max-width: 960px;
 }
 
+#footer-widgets a, #footer-widgets a:link, #footer-widgets a:visited, #footer-widgets a:hover, #footer-widgets a:active { color: #62A6B3; }
+
 #footer-widget-area h3.widgettitle
 {
-	background: transparent;
-	color: #99904c;
+	background: #292929;
+	color: #ccc27a;
 	font-size: 16px;
 	margin: 0;
 	padding: 5px 0 15px 0;

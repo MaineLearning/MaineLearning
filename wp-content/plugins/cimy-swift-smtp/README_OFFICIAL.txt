@@ -60,6 +60,9 @@ A lot of times I cannot reproduce the problem and I need more details, so if you
 
 
 CHANGELOG:
+v2.2.0 - 16/07/2012
+- Updated Swift Mailer to 4.2.1
+
 v2.1.3 - 25/03/2012
 - Updated Swift Mailer to 4.1.6
 - Fixed 'overwrite the sender only for the WordPress default' was not working in certain cases like comments moderation (thanks to Rolf Hillen for the patch)

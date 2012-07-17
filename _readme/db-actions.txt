@@ -3,15 +3,22 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
-Upgrade WordPress to 3.4.1.
-
-Remove Custom CSS for Home and Sites
-
-------------------------------------
-STILL TO BE DONE
+Upgrade BuddyPress database
+Upgrade network after WP update
+Optimize database
+Activate Google Analytics
+Active Super Cache and test
 
 Activate Search Everything on MLN Resources
 Search highlight color: ccc066
+
+Remove custom CSS.
+
+
+------------------------------------
+DONE
+
+Remove Custom CSS for Home and Sites
 
 Views templates - remove spaces around hyphen in Objects-archive and Objects-single titles.
 
@@ -21,11 +28,6 @@ Add the following to Objects-archive
 <p>[types field="abstract-excerpt" class="" style=""][/types]</p>
 
 Apply Objects-archive to all taxonomies and post type: Object
-
-
-
-------------------------------------
-DONE
 
 
 Upgrade Akismet to 2.5.6
@@ -47,10 +49,6 @@ Upgraded to wp-document-revisions.1.3.1
 Empty custom css in sites theme.
 
 Check to make sure "Quick post" and "All group activity" graphics appear correctly.
-
-
-
-
 
 
 ------------------------------------

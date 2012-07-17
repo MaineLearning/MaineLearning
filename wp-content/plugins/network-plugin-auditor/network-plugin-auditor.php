@@ -3,7 +3,7 @@
 Plugin Name: Network Plugin Auditor
 Plugin URI: http://bonsaibudget.com/wordpress/network-plugin-auditor/
 Description: Add a column to your network admin to show which sites have each plugin active (on the plugin page), and which plugins are active on each site (on the sites page), and the active theme on each blog (on the themes page).
-Version: 1.1
+Version: 1.2
 Author: Katherine Semel
 Author URI: http://bonsaibudget.com/
 Network: true
@@ -14,17 +14,31 @@ class NetworkPluginAuditor {
     function NetworkPluginAuditor( ) {
         $this->optionprefix = 'networkauditor_';
 
-        // On the network plugins page, show which blogs have this plugin active
-        add_filter( 'manage_plugins-network_columns', array( &$this, 'add_plugins_column' ), 10, 1);
-        add_action( 'manage_plugins_custom_column', array( &$this, 'manage_plugins_custom_column' ), 10, 3);
+        global $wpdb;
+        if ( ! is_string( $wpdb->base_prefix ) || '' === $wpdb->base_prefix ) {
+            if ( is_network_admin() ) {
+                add_action('network_admin_notices', array( &$this, 'unsupported_prefix_notice' ));
+            }
 
-        // On the network theme list page, show each blog next to its active theme
-        add_filter( 'manage_themes-network_columns', array( &$this, 'add_themes_column' ), 10, 1);
-        add_action( 'manage_themes_custom_column', array( &$this, 'manage_themes_custom_column' ), 10, 3);
+        } else {
 
-        // On the blog list page, show the plugins active on each blog
-        add_filter( 'manage_sites-network_columns', array( &$this, 'add_sites_column' ), 10, 1);
-        add_action( 'manage_sites_custom_column', array( &$this, 'manage_sites_custom_column' ), 10, 3);
+            // On the network plugins page, show which blogs have this plugin active
+            add_filter( 'manage_plugins-network_columns', array( &$this, 'add_plugins_column' ), 10, 1);
+            add_action( 'manage_plugins_custom_column', array( &$this, 'manage_plugins_custom_column' ), 10, 3);
+
+            // On the network theme list page, show each blog next to its active theme
+            add_filter( 'manage_themes-network_columns', array( &$this, 'add_themes_column' ), 10, 1);
+            add_action( 'manage_themes_custom_column', array( &$this, 'manage_themes_custom_column' ), 10, 3);
+
+            // On the blog list page, show the plugins active on each blog
+            add_filter( 'manage_sites-network_columns', array( &$this, 'add_sites_column' ), 10, 1);
+            add_action( 'manage_sites_custom_column', array( &$this, 'manage_sites_custom_column' ), 10, 3);
+        }
+    }
+
+    function unsupported_prefix_notice() {
+        // The plugin does not support a blank database prefix at this time
+        echo '<div class="error"><p style="color: red; font-size: 14px; font-weight: bold;">Network Plugin Auditor</p><p>Your <code>wp-config.php</code> file has an empty database table prefix, which is not supported at this time. Please disable the Network Plugin Auditor to avoid error messages.</p><p>If you feel you have received this message in error, please <a href="http://wordpress.org/support/plugin/network-plugin-auditor">visit the support forum</a> for more assistance.</div>';
     }
 
 /* Plugins Page Functions *****************************************************/
@@ -168,6 +182,22 @@ class NetworkPluginAuditor {
 
 /* Helper Functions ***********************************************************/
 
+    // Get the database prefix
+    function get_blog_prefix( $blog_id ) {
+        global $wpdb;
+
+        if ( null === $blog_id ) {
+            $blog_id = $wpdb->blogid;
+        }
+        $blog_id = (int) $blog_id;
+
+        if ( defined( 'MULTISITE' ) && ( 0 == $blog_id || 1 == $blog_id ) ) {
+            return $wpdb->base_prefix;
+        } else {
+            return $wpdb->base_prefix . $blog_id . '_';
+        }
+    }
+
     // Get the list of blogs
     function get_network_blog_list( ) {
         global $wpdb;
@@ -175,7 +205,7 @@ class NetworkPluginAuditor {
         // Fetch the list of blogs (from the transient cache if available)
         if ( false === ( $blog_list = get_transient( $this->optionprefix.'blog_list' ) ) ) {
 
-            $blog_list = $wpdb->get_results( $wpdb->prepare( "SELECT blog_id, domain FROM " . $wpdb->prefix . "blogs" ) );
+            $blog_list = $wpdb->get_results( $wpdb->prepare( "SELECT blog_id, domain FROM " . $wpdb->base_prefix . "blogs" ) );
 
             // Store for one hour
             set_transient( $this->optionprefix.'blog_list', $blog_list, 3600 );
@@ -247,15 +277,9 @@ class NetworkPluginAuditor {
     function get_active_plugins( $blog_id ) {
         global $wpdb;
 
-        $query = "SELECT option_value FROM ";
-        // Is the primary blog?
-        if ( $blog_id != 1 ) {
-            $query .= $wpdb->prefix.$blog_id . "_options ";
+        $blog_prefix = NetworkPluginAuditor::get_blog_prefix( $blog_id );
 
-        } else {
-            $query .= $wpdb->prefix . "options ";
-        }
-        $query .= " WHERE option_name = 'active_plugins'";
+        $query = "SELECT option_value FROM " . $blog_prefix . "options WHERE option_name = 'active_plugins'";
 
         $active_plugins = $wpdb->get_var( $wpdb->prepare( $query ) );
 
@@ -325,16 +349,9 @@ class NetworkPluginAuditor {
     function get_active_theme( $blog_id ) {
         global $wpdb;
 
-        $query = "SELECT option_value FROM ";
-        // Is the primary blog?
-        if ( $blog_id != 1 ) {
-            $query .= $wpdb->prefix.$blog_id . "_options ";
+        $blog_prefix = NetworkPluginAuditor::get_blog_prefix( $blog_id );
 
-        } else {
-            $query .= $wpdb->prefix . "options ";
-        }
-        $query .= " WHERE option_name = 'current_theme'";
-
+        $query = "SELECT option_value FROM " . $blog_prefix . "options WHERE option_name = 'current_theme'";
         $active_theme = $wpdb->get_var( $wpdb->prepare( $query ) );
 
         return $active_theme;
