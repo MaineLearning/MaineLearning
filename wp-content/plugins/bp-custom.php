@@ -40,4 +40,12 @@ function mainelearning_dont_load_bp_css_in_dashboard() {
 }
 add_action( 'bp_init', 'mainelearning_dont_load_bp_css_in_dashboard', 1 );
 
+/**
+ * Don't load the buddybar in the Dashboard at all
+ */
+function mainelearning_dont_load_buddybar_in_dashboard() {
+	remove_action( 'admin_footer', 'bp_core_admin_bar' );
+}
+add_action( 'admin_footer', 'mainelearning_dont_load_buddybar_in_dashboard', 1 );
+
 ?>
