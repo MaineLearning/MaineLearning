@@ -30,4 +30,14 @@ function mainelearning_external_blog_notification_content( $content, $activity )
 }
 add_filter( 'bp_ass_activity_notification_content', 'mainelearning_external_blog_notification_content', 10, 2 );
 
+/**
+ * Don't load buddybar css in the Dashboard
+ */
+function mainelearning_dont_load_bp_css_in_dashboard() {
+	if ( is_admin() || is_network_admin() ) {
+		remove_action( 'bp_init', 'bp_core_load_buddybar_css' );
+	}
+}
+add_action( 'bp_init', 'mainelearning_dont_load_bp_css_in_dashboard', 1 );
+
 ?>
