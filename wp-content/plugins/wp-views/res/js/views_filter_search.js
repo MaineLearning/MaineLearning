@@ -38,6 +38,8 @@ function wpv_show_filter_search_edit_ok(search_div_pre, search_value, search_mod
         on_generate_wpv_filter();
     });
 
+	wpv_add_filter_controls_for_search();
+	
 	show_view_changed_message();
 
 }

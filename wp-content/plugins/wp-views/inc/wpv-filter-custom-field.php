@@ -47,7 +47,7 @@ if(is_admin()){
 				$name = substr($key, 0, strlen($key) - strlen('_compare'));
 
 				$td = wpv_get_table_row_ui_post_custom_field($view_settings_table_row, $name, null, null, $view_settings);
-				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">' . $td . '</tr>';
+				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row wpv_edit_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">' . $td . '</tr>';
             
 				$view_settings_table_row++;
 				$count++;
@@ -67,28 +67,36 @@ if(is_admin()){
 		
 		if ($summary != '') {
 			if ($count > 1) {
-				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">';
+				echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row wpv_edit_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;">';
 				wpv_filter_custom_field_relationship_admin($view_settings);			
 				echo '</tr>';
 			
 				$view_settings_table_row++;
 			}
-			echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;"><td></td><td>';
+			echo '<tr class="wpv_custom_field_edit_row wpv_filter_row wpv_post_type_filter_row wpv_edit_row" id="wpv_filter_row_' . $view_settings_table_row . '" style="background:' . WPV_EDIT_BACKGROUND . '; display:none;"><td></td><td>';
 			?>
 				<?php
 					$filters = wpv_add_filter_custom_field(array());
 					wpv_filter_add_filter_admin($view_settings, $filters, 'popup_add_custom_field', 'Add another custom field');
 				?>
 				<hr />
+				<div class="wpv_custom_field_param_missing_ok"><?php echo __('A custom field parameter is missing or incorrect.', 'wpv-views'); ?></div>
 				<input class="button-primary" type="button" value="<?php echo __('OK', 'wpv-views'); ?>" name="<?php echo __('OK', 'wpv-views'); ?>" onclick="wpv_show_filter_custom_field_edit_ok()"/>
 				<input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" name="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_filter_custom_field_edit_cancel()"/>
+				<span class="wpv-custom-fields-help"><i>
+					<?php echo sprintf(__('%sLearn about filtering by custom fields%s', 'wpv-views'),
+								   '<a href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
+								   ' &raquo;</a>'
+								   ); ?>
+				</i></span>
+				
 			<?php
 			
 			echo '</td></tr>';
 		
 			$view_settings_table_row++;
 
-			echo '<tr class="wpv_custom_field_show_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"><td></td><td>';
+			echo '<tr class="wpv_custom_field_show_row wpv_filter_row wpv_post_type_filter_row" id="wpv_filter_row_' . $view_settings_table_row . '"><td><img src="' . WPV_URL . '/res/img/delete-disabled.png" title="' . __('Edit this filters group to delete items', 'wpv-views') . '"></td><td>';
 			_e('Select posts with custom fields: ', 'wpv-views');
 			echo $summary;
 			
@@ -202,90 +210,266 @@ function wpv_add_meta_key($args, $view_settings = null) {
 	
 	$compare = array('=', '!=', '>', '>=', '<', '<=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN');
 	$types = array('CHAR', 'NUMERIC', 'BINARY', 'DATE', 'DATETIME', 'DECIMAL', 'SIGNED', 'TIME', 'UNSIGNED');
+	
+	if($view_settings === null) {
+		$value = '';
+		$compare_selected = '';
+		$type_selected = '';
+		$name = 'custom-field-' . str_replace(' ', '_', $args['name']) . '%s';
+		$parts = array($value);
+	} else {
+		$value = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_value'];
+		
+		$value = _wpv_encode_date($value);
+		
+		$compare_selected = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_compare'];
+		$compare_count = 1;
+		$parts = array($value);
+		switch($compare_selected) {
+			case 'BETWEEN':
+			case 'NOT BETWEEN':
+				$compare_count = 2;
+				$parts = explode(',', $value);
+				
+				// Make sure we have only 2 items.
+				while (count($parts) < 2) {
+					$parts[] = '';
+				}
+				while (count($parts) > 2) {
+					array_pop($parts);
+				}
+				break;
+			
+			case 'IN':
+			case 'NOT IN':
+				$parts = explode(',', $value);
+				$compare_count = count($parts);
+				if ($compare_count < 1) {
+					$compare_count = 1;
+					$parts = array($value);
+				}
+				break;
+			
+		}
+
+		$value = _wpv_unencode_date($value);
+
+		$type_selected = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_type'];
+		$name = '_wpv_settings[custom-field-' . str_replace(' ', '_', $args['name']) . '%s]';
+	}
+
+	
 	?>
 
-	<div class="meta_key_div" style="margin-left: 20px;">
-		<?php _e('Comparison function:', 'wpv-views'); ?>
-		<?php if($view_settings === null): ?>
-			<select name="custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_compare">
-				<?php
-					foreach($compare as $com) {
-						echo '<option value="'. $com . '">' . $com . '&nbsp;</option>';
-					}
-				?>
-			</select>
-			<select name="custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_type">
-				<?php
-					foreach($types as $type) {
-						echo '<option value="'. $type . '">' . $type . '&nbsp;</option>';
-					}
-				?>
-			</select>
-		<?php else: ?>
-			<select name="_wpv_settings[custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_compare]">
-				<?php
-					$compare_selected = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_compare'];
-					foreach($compare as $com) {
-						$selected = $compare_selected == $com ? ' selected="selected"' : ''; 
-						echo '<option value="'. $com . '" '. $selected . '>' . $com . '&nbsp;</option>';
-					}
-				?>
-			</select>
-			<select name="_wpv_settings[custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_type]">
-				<?php
-					$type_selected = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_type'];
-					foreach($types as $type) {
-						$selected = $type_selected == $type ? ' selected="selected"' : ''; 
-						echo '<option value="'. $type . '" '. $selected . '>' . $type . '&nbsp;</option>';
-					}
-				?>
-			</select>
-		<?php endif; ?>		
-		<br />
-		<?php _e('Value/s to compare:', 'wpv-views'); ?>
-		<?php if($view_settings === null): ?>
-			<input type='text' name="custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_value" />
-		<?php else: ?>
-			<?php $value = $view_settings['custom-field-' . str_replace(' ', '_', $args['name']) . '_value']; ?>
-			<input type='text' name="_wpv_settings[custom-field-<?php echo str_replace(' ', '_', $args['name']); ?>_value]" value="<?php echo $value; ?>" />
-		<?php endif; ?>
-		<?php _e('<strong>Note:</strong> Separate multiple values with a comma.', 'wpv-views'); ?>
-		<a style="cursor: pointer" onclick="show_custom_field_compare_functions()"><?php _e('Compare functions', 'wpv-views'); ?></a>
-		
-		<script type="text/javascript">
-			function show_custom_field_compare_functions() {
-				jQuery('.show_custom_field_compare_functions').show();
-			}
-		</script>
 
-		<div class="show_custom_field_compare_functions" style="display:none;margin-top:10px;">
-			<?php _e('<strong>Functions:</strong> You can use any of these functions for comparison:', 'wpv-views'); ?>
+	<div class="meta_key_div" style="margin-left: 20px;">
+		<br />
+		<?php _e('Comparison function:', 'wpv-views'); ?>
+		<select name="<?php echo sprintf($name, '_compare'); ?>" class="wpv_custom_field_compare_select">
+			<?php
+				foreach($compare as $com) {
+					$selected = $compare_selected == $com ? ' selected="selected"' : ''; 
+					echo '<option value="'. $com . '" '. $selected . '>' . $com . '&nbsp;</option>';
+				}
+			?>
+		</select>
+		<select name="<?php echo sprintf($name, '_type'); ?>">
+			<?php
+				foreach($types as $type) {
+					$selected = $type_selected == $type ? ' selected="selected"' : ''; 
+					echo '<option value="'. $type . '" '. $selected . '>' . $type . '&nbsp;</option>';
+				}
+			?>
+		</select>
+		<br />
+		
+		<div class="wpv_custom_field_values">
+
+			<?php // This is where we store the actual value derived from the follow controls ?>
+			<input type="hidden" name="<?php echo sprintf($name, '_value'); ?>" value="<?php echo $value; ?>" />
+
+			<?php
+			
+				for ($i = 0; $i < count($parts); $i++) {
 					
-			<ul>
-				<li><?php _e('<strong>URL_PARAM</strong>(foo) - Use the url parameter "foo". eg http://www.example.com/foo=something', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>VIEW_PARAM</strong>(foo) - Use the parameter "foo" in the View shortcode. eg. [wpv-view name="my-view" foo="something"]', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>NOW</strong>() - The current time.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>TODAY</strong>() - The time at the start of today.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>FUTURE_DAY</strong>(x) - The day x days in the future.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>PAST_DAY</strong>(x) - The day x days in the past.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>THIS_MONTH</strong>() - The first day of this month.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>FUTURE_MONTH</strong>(x) - The first day of x months in the future.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>PAST_MONTH</strong>(x) - The first day of x months in the past.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>THIS_YEAR</strong>() - The first day of this year.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>FUTURE_YEAR</strong>(x) - The first day of x years in the future.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>PAST_YEAR</strong>(x) - The first day of x months in the past.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>SECONDS_FROM_NOW</strong>(x) - x seconds from now.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>MONTHS_FROM_NOW</strong>(x) - x months from now.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>YEARS_FROM_NOW</strong>(x) - x years from now.', 'wpv-views'); ?></li>
-				<li><?php _e('<strong>DATE</strong>(d,m,y) - The date d,m,y.', 'wpv-views'); ?></li>
-				
-			</ul>
+					echo '<div class="wpv_custom_field_value_div">';
+					
+					
+					$options = array();
+					$options[__('Constant', 'wpv-views') . '&nbsp'] = 'constant';
+					$options[__('URL parameter', 'wpv-views') . '&nbsp'] = 'url';
+					$options[__('Shortcode attribute', 'wpv-views') . '&nbsp'] = 'attribute';
+					$options['NOW&nbsp'] = 'now';
+					$options['TODAY&nbsp;'] = 'today';
+					$options['FUTURE_DAY&nbsp;'] = 'future_day';
+					$options['PAST_DAY&nbsp;'] = 'past_day';
+					$options['THIS_MONTH&nbsp;'] = 'this_month';
+					$options['FUTURE_MONTH&nbsp;'] = 'future_month';
+					$options['PAST_MONTH&nbsp;'] = 'past_month';
+					$options['THIS_YEAR&nbsp;'] = 'this_year';
+					$options['FUTURE_YEAR&nbsp;'] = 'future_year';
+					$options['PAST_YEAR&nbsp;'] = 'past_year';
+					$options['SECONDS_FROM_NOW&nbsp;'] = 'seconds_from_now';
+					$options['MONTHS_FROM_NOW&nbsp;'] = 'months_from_now';
+					$options['YEARS_FROM_NOW&nbsp;'] = 'years_from_now';
+					$options['DATE&nbsp;'] = 'date';
+		
+					$function_value = _wpv_get_custom_filter_function_and_value($parts[$i]);
+					
+					echo wpv_form_control(array('field' => array(
+							'#name' => 'wpv_custom_field_compare_mode-' . $args['name'] . $i ,
+							'#type' => 'select',
+							'#attributes' => array('style' => '', 'class' => 'wpv_custom_field_compare_mode'),
+							'#inline' => true,
+							'#options' => $options,
+							'#default_value' => $function_value['function'],
+					 )));
+					
+					echo '<input type="text" class="wpv_custom_filter_value_text" value="' . $function_value['value'];
+					if ($function_value['text_boxes'] == 1) {
+						echo '" />';
+					} else {
+						echo '" style="display:none;" />';
+					}
+					
+					?>
+					<span class="wpv_custom_field_param_missing"><?php echo __('<- Please enter a value here', 'wpv-views'); ?></span>
+					<?php
+					
+					// Add controls for entering the date.
+					_wpv_add_date_controls($function_value['function'], $function_value['value']);
+					
+					// Add a "Remove" button
+					echo '<input type="button" class="button-secondary wpv_custom_field_remove_value" value="' . __('Remove', 'wpv-views') . '" ';
+					if ($i > 0 && ($compare_selected == 'IN' || $compare_selected == 'NOT IN')) {
+						echo ' />';
+					} else {
+						echo 'style="display:none" />';
+					}
+					
+					echo '</div>';
+					
+				}
+			?>
+			<?php $show = ($compare_selected == 'IN' || $compare_selected == 'NOT IN') ? ' ' : 'style="display:none" '; ?>
+			<input type="button" class="button-secondary wpv_custom_field_add_value" value="<?php echo __('Add another value', 'wpv-views'); ?>" <?php echo $show; ?>/>
+																								  
+																								  
 		</div>
+		
+
+	<?php if ($view_settings == null): ?>		
+		<br />
+		<span class="wpv-custom-fields-help"><i>
+			<?php echo sprintf(__('%sLearn about filtering by custom fields%s', 'wpv-views'),
+						   '<a href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
+						   ' &raquo;</a>'
+						   ); ?>
+		</i></span>
+	<?php endif; ?>
+	
 	</div>
+	
 
 	<?php
 }
 
+function _wpv_add_date_controls($function, $value) {
+
+	global $wp_locale;
+	
+	if ($function == 'date') {
+		$date_parts = explode(',', $value);
+		$time_adj = mktime(0, 0, 0, $date_parts[1], $date_parts[0], $date_parts[2]);
+	} else {
+		$time_adj = current_time('timestamp');
+	}
+	$jj = gmdate( 'd', $time_adj );
+	$mm = gmdate( 'm', $time_adj );
+	$aa = gmdate( 'Y', $time_adj );
+
+	echo '<span class="wpv-custom-field-date">' . "\n";
+	
+	$month = "<select >\n";
+	for ( $i = 1; $i < 13; $i = $i +1 ) {
+		$monthnum = zeroise($i, 2);
+		$month .= "\t\t\t" . '<option value="' . $monthnum . '"';
+		if ( $i == $mm )
+			$month .= ' selected="selected"';
+		$month .= '>' . $monthnum . '-' . $wp_locale->get_month_abbrev( $wp_locale->get_month( $i ) ) . "</option>\n";
+	}
+	$month .= '</select>';
+
+	$day = '<input type="text" value="' . $jj . '" size="2" maxlength="2" autocomplete="off" />';
+	$year = '<input type="text" value="' . $aa . '" size="4" maxlength="4" autocomplete="off" />';
+	
+	printf(__('%1$s%2$s, %3$s'), $month, $day, $year);
+	
+	echo '<span class="wpv_custom_field_invalid_date">' . __('<- Please enter a valid date here', 'wpv-views') . '</span>' . "\n";
+	
+	echo "</span>\n";
+}
+
+function _wpv_encode_date($value) {
+	if (preg_match_all('/DATE\(([\\d,-]*)\)/', $value, $matches)) {
+        foreach($matches[0] as $match) {
+			$value = str_replace($match, str_replace(',', '####coma####', $match), $value);
+		}		
+	}
+	
+	return $value;
+}
+
+function _wpv_unencode_date($value) {
+	return str_replace('####coma####', ',', $value);
+}
+
+function _wpv_get_custom_filter_function_and_value($value) {
+	$trim = trim($value);
+	$function = 'constant';
+	$return_val = $value;
+	$text_boxes = 1;
+	
+	$singles = array('url' => '/^URL_PARAM\((.*?)\)/',
+					 'attribute' => '/^VIEW_PARAM\((.*?)\)/',
+					 'future_day' => '/^FUTURE_DAY\((.*?)\)/',
+					 'past_day' => '/^PAST_DAY\((.*?)\)/',
+					 'future_month' => '/^FUTURE_MONTH\((.*?)\)/',
+					 'past_month' => '/^PAST_MONTH\((.*?)\)/',
+					 'future_year' => '/^FUTURE_YEAR\((.*?)\)/',
+					 'past_year' => '/^PAST_YEAR\((.*?)\)/',
+					 'seconds_from_now' => '/^SECONDS_FROM_NOW\((.*?)\)/',
+					 'months_from_now' => '/^MONTHS_FROM_NOW\((.*?)\)/',
+					 'years_from_now' => '/^YEARS_FROM_NOW\((.*?)\)/',
+					 'date' => '/^DATE\((.*?)\)/');
+					 
+	
+	foreach($singles as $code => $pattern) {
+		if (preg_match($pattern, $trim, $matches) == 1) {
+			$function = $code;
+			$return_val = $matches[1];
+			break;
+		}
+	}
+
+	$zeros = array('now' => '/^NOW\((.*?)\)/',
+				   'today' => '/^TODAY\((.*?)\)/',
+				   'this_month' => '/^THIS_MONTH\((.*?)\)/',
+				   'this_year' => '/^THIS_YEAR\((.*?)\)/');
+
+	foreach($zeros as $code => $pattern) {
+		if (preg_match($pattern, $trim, $matches) == 1) {
+			$function = $code;
+			$return_val = '';
+			$text_boxes = 0;
+			break;
+		}
+	}
+	
+	$return_val = str_replace('####coma####', ',', $return_val);
+
+	return array('function' => $function, 'value' => $return_val, 'text_boxes' => $text_boxes);
+}
 
 add_filter('wpv_get_table_row_ui_type', 'wpv_get_table_row_ui_type_custom_field');
 function wpv_get_table_row_ui_type_custom_field($type) {
@@ -331,3 +515,33 @@ function wpv_custom_field_summary_filter($summary, $post_id, $view_settings) {
 }
 
 
+function wpv_custom_fields_get_url_params($view_settings) {
+	global $WP_Views;
+
+	$pattern = '/URL_PARAM\(([^(]*?)\)/siU';
+	$meta_keys = $WP_Views->get_meta_keys();
+	
+	$results = array();
+
+	foreach (array_keys($view_settings) as $key) {
+		if (strpos($key, 'custom-field-') === 0 && strpos($key, '_compare') === strlen($key) - strlen('_compare')) {
+			$name = substr($key, 0, strlen($key) - strlen('_compare'));
+			$name = substr($name, strlen('custom-field-'));
+			
+			$meta_name = $name;
+			if (!in_array($meta_name, $meta_keys)) {
+				$meta_name = str_replace('_', ' ', $meta_name);
+			}
+
+			$value = $view_settings['custom-field-' . $name . '_value'];
+			
+			if(preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {
+				foreach($matches as $match) {
+					$results[] = array('name' => $name, 'param' => $match[1], 'mode' => 'cf');
+				}
+			}
+		}
+	}
+	
+	return $results;
+}

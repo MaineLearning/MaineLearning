@@ -73,8 +73,12 @@ function wpv_filter_post_category($query, $view_settings) {
 				}
 				
 				if (isset($_GET[$url_parameter])) {
-					// support csv terms
-					$terms = explode(',', $_GET[$url_parameter]);
+					if (is_array($_GET[$url_parameter])) {
+						$terms = $_GET[$url_parameter];
+					} else {
+						// support csv terms
+						$terms = explode(',', $_GET[$url_parameter]);
+					}
 					$term_ids = array();
 					foreach($terms as $t){
 						$term = get_term_by($url_format, trim($t), $category->name);

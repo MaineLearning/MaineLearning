@@ -7,25 +7,47 @@ jQuery(document).ready(function($){
     });
 });
 
+function wvp_tax_relationship_change(selector) {
+    var relationship = jQuery(selector).val();
+    
+    if (relationship == "FROM PAGE" ||
+            relationship == "FROM ATTRIBUTE" ||
+            relationship == "FROM URL" ||
+            relationship == "FROM PARENT VIEW") {
+        jQuery(selector).next().hide(); // hide category list
+    } else {
+        jQuery(selector).next().show(); // show category list
+    }
+
+    var parameter_div = jQuery(selector).next().next();
+    if (relationship == "FROM ATTRIBUTE" ||
+            relationship == "FROM URL") {
+        parameter_div.show(); // Show parameters
+        if (relationship == "FROM ATTRIBUTE") {
+            parameter_div.children('.attribute').show();
+            parameter_div.children('.url').hide();
+        } else {
+            parameter_div.children('.attribute').hide();
+            parameter_div.children('.url').show();
+        }
+    } else {
+        parameter_div.hide(); // Hide parameters
+    }
+
+    if (relationship == "FROM URL") {
+        wpv_filter_url_hint(selector);
+    }
+
+}
+
 function wvp_initialize_tax_relationship_select() {
     jQuery('.wpv_taxonomy_relationship').change(function() {
-        var relationship = jQuery(this).val();
-        
-        if (relationship == "FROM PAGE" ||
-                relationship == "FROM ATTRIBUTE" ||
-                relationship == "FROM URL" ||
-                relationship == "FROM PARENT VIEW") {
-            jQuery(this).next().hide();
-        } else {
-            jQuery(this).next().show();
-        }
+        wvp_tax_relationship_change(this);
+    });
 
-        if (relationship == "FROM ATTRIBUTE" ||
-                relationship == "FROM URL") {
-            jQuery(this).next().next().show();
-        } else {
-            jQuery(this).next().next().hide();
-        }
+    jQuery('.wpv_taxonomy_relationship').each(function(index) {
+        // trigger the change event to setup the help.
+        wvp_tax_relationship_change(this);
     });
     
 }
@@ -49,9 +71,60 @@ function wpv_show_filter_taxonomy_edit() {
     
 }
 
+var wpv_filter_taxonomy_edit_is_ok;
+
+function wpv_validate_taxonomy_data(in_popup) {
+    wpv_filter_taxonomy_edit_is_ok = true;
+    
+    jQuery('.wpv_taxonomy_relationship:visible').each(function(index) {
+
+        if (in_popup) {
+            // make sure we only check ones in the popup.
+            var found = false;
+            var parents = jQuery(this).parents();
+            for (var i=0; i < parents.length; i++) {
+                var id = jQuery(parents[i]).attr('id');
+                if (id == 'popup_add_custom_field_controls' || id == 'popup_add_filter_controls') {
+                    found = true;
+                    break;
+                }
+            }
+            
+            if (!found) {
+                return;
+            }
+        }
+
+        var relationship = jQuery(this).val();
+        if (relationship == "FROM ATTRIBUTE" ||
+                relationship == "FROM URL") {
+            var param = jQuery(this).parent().find('.wpv_taxonomy_param').val();
+            if (param == '') {
+                jQuery(this).parent().find('.wpv_taxonomy_param_missing').show();
+                wpv_filter_taxonomy_edit_is_ok = false;
+            } else {
+                jQuery(this).parent().find('.wpv_taxonomy_param_missing').hide();
+            }
+        }    
+        
+    });
+    
+    return wpv_filter_taxonomy_edit_is_ok;    
+}
+
 function wpv_show_filter_taxonomy_edit_ok() {
-    wpv_add_edit_taxonomy('', '', 'edit');
-    jQuery('.wpv_add_filters_button').show();
+    // Make sure there's something set for the URL/VIEW parameter
+
+
+    if (wpv_validate_taxonomy_data(false)) {
+        wpv_add_edit_taxonomy('', '', 'edit');
+        jQuery('.wpv_add_filters_button').show();
+        
+        wpv_add_filter_controls_for_url_params();
+        
+    } else {
+        jQuery('#popup_add_category_field').parent().find('.wpv_taxonomy_param_missing_ok').show();
+    }
 }
 
 function wpv_show_filter_taxonomy_edit_cancel() {
@@ -76,6 +149,9 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         return this.slice(-str.length) == str;
     };
 
+    if (mode == 'add' && !wpv_validate_taxonomy_data(true)) {
+        return false;
+    }
 
     // get existing taxonomy data
     var taxonomy_name = Array();
@@ -118,6 +194,8 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
         }        
     });
     
+    var uncheck = Array();
+    
     if (type != '') {
         // get the new taxonomy data
 
@@ -136,6 +214,8 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
                     current_taxonomy_value += ',';
                 }
                 current_taxonomy_value += jQuery(this).attr('value');
+                
+                uncheck.push(this);
             }
         });
         taxonomy_value.push(current_taxonomy_value);
@@ -181,6 +261,12 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
     jQuery.ajaxSetup({async:false});
     jQuery.post(ajaxurl, data, function(response) {
         tb_remove();
+
+        for (var i = 0; i < uncheck.length; i++) {
+            // Uncheck it so that wordpress doesn't think we're saving a new taxonomy.
+                
+            jQuery(uncheck[i]).attr('checked', false);
+        }
 
         jQuery('.wpv_taxonomy_edit_row').each( function(index) {
             jQuery(this).remove();
