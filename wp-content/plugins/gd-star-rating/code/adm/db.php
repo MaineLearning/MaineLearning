@@ -1371,6 +1371,7 @@ class gdsrAdmFunc {
             if ($gfx->imported)
                 $data->stars[] = $gfx;
         }
+
         if (is_dir(STARRATING_XTRA_PATH."stars/")) {
             $stars_folders = gdFunctionsGDSR::get_folders(STARRATING_XTRA_PATH."stars/");
             foreach ($stars_folders as $f) {
@@ -1386,6 +1387,7 @@ class gdsrAdmFunc {
             if ($gfx->imported)
                 $data->trend[] = $gfx;
         }
+
         if (is_dir(STARRATING_XTRA_PATH."trends/")) {
             $trend_folders = gdFunctionsGDSR::get_folders(STARRATING_XTRA_PATH."trends/");
             foreach ($trend_folders as $f) {
@@ -1401,6 +1403,7 @@ class gdsrAdmFunc {
             if ($gfx->imported)
                 $data->thumbs[] = $gfx;
         }
+
         if (is_dir(STARRATING_XTRA_PATH."thumbs/")) {
             $thumbs_folders = gdFunctionsGDSR::get_folders(STARRATING_XTRA_PATH."thumbs/");
             foreach ($thumbs_folders as $f) {

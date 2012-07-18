@@ -27,6 +27,58 @@ function wpv_filter_post_custom_field($query, $view_settings) {
 			
 			if ($value != $no_parameter_found) { // Only add if we have found a parameter
 				
+				$compare_mode = $view_settings['custom-field-' . $name . '_compare'];
+				
+				if ($compare_mode == 'BETWEEN' || $compare_mode == 'NOT BETWEEN') {
+					// we need to make sure we have values for min and max.
+					
+					$values = explode(',', $value);
+					if (count($values) == 0) {
+						continue;
+					}
+					if (count($values) == 1) {
+						
+						if ($values[0] == $no_parameter_found) {
+							// nothing to compare to so ignore
+							continue;
+						}
+						
+						// assume this is the smaller value
+						
+						if ($compare_mode == 'BETWEEN') {
+							$compare_mode =  '>=';
+						} else {
+							$compare_mode =  '<=';
+						}
+						$value = $values[0];
+					} else {
+						if ($values[0] == $no_parameter_found && $values[1] == $no_parameter_found) {
+							// nothing to compare so ignore
+							continue;
+						}
+						if ($values[0] == $no_parameter_found) {
+							// minimum value is missing so use less than compare.
+							if ($compare_mode == 'BETWEEN') {
+								$compare_mode = '<=';
+							} else {
+								$compare_mode = '>=';
+							}
+							$value = $values[1];
+						} elseif ($values[1] == $no_parameter_found) {
+							// maximum value is missing so use greater than compare.
+							if ($compare_mode == 'BETWEEN') {
+								$compare_mode = '>=';
+							} else {
+								$compare_mode = '<=';
+							}
+							$value = $values[0];
+						}  
+						
+						
+					}
+					
+				}
+				
 				$value = str_replace($no_parameter_found, '', $value); // just in case we have more than on parameter
 
 				if (!isset($query['meta_query']) && isset($view_settings['custom_fields_relationship'])) {
@@ -37,25 +89,12 @@ function wpv_filter_post_custom_field($query, $view_settings) {
 				$query['meta_query'][] = array('key' => $meta_name,
 											  'value' => $value,
 											  'type' => $view_settings['custom-field-' . $name . '_type'],
-											  'compare' => $view_settings['custom-field-' . $name . '_compare']);
+											  'compare' => $compare_mode);
 			}			
 			
 		}
 	}
 
-	if (isset($query['meta_query'])) {
-		$orderby = $view_settings['orderby'];
-		if (strpos($orderby, 'field-') === 0) {
-			// we need to remove the orderby set by the orderby filter
-			unset($query['meta_key']);
-			unset($query['orderby']);
-			// we then post process the query posts to fix the order
-			add_filter('wpv_filter_query_post_process', 'wpv_filter_post_process_custom_field', 10, 2);
-			
-		}
-		
-	}
-	
     return $query;
 }
 

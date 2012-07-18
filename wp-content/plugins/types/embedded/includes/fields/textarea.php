@@ -1,6 +1,4 @@
 <?php
-add_filter('wpcf_fields_type_textarea_value_display',
-        'wpcf_fields_textarea_value_display_filter');
 
 /**
  * Register data (called automatically).
@@ -19,21 +17,24 @@ function wpcf_fields_textarea() {
 /**
  * Formats display data.
  */
+function wpcf_fields_textarea_view($params) {
 
-function wpcf_fields_textarea_value_display_filter($value) {
-    
+    $value = $params['field_value'];
+
     // see if it's already wrapped in <p> ... </p>
     $wrapped_in_p = false;
-    if (!empty($value) && strpos($value, '<p>') === 0 && strrpos($value, "</p>\n") == strlen($value) - 5 ) {
+    if (!empty($value) && strpos($value, '<p>') === 0 && strrpos($value,
+                    "</p>\n") == strlen($value) - 5) {
         $wrapped_in_p = true;
     }
-    
+
     // use wpautop for converting line feeds to <br />, etc
     $value = wpautop($value);
-    
+
     if (!$wrapped_in_p) {
         // If it wasn't wrapped then remove the wrapping wpautop has added.
-        if(!empty($value) && strpos($value, '<p>') === 0 && strrpos($value, "</p>\n") == strlen($value) - 5 ) {
+        if (!empty($value) && strpos($value, '<p>') === 0 && strrpos($value,
+                        "</p>\n") == strlen($value) - 5) {
             // unwrapp the <p> ..... </p>
             $value = substr($value, 3, -5);
         }

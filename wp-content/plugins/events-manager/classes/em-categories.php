@@ -58,6 +58,7 @@ class EM_Categories extends EM_Object implements Iterator{
 	
 	function get_post(){
 		$this->ms_global_switch();
+		$this->categories = array();
 		if(!empty($_POST['event_categories']) && $this->array_is_numeric($_POST['event_categories'])){
 			foreach( $_POST['event_categories'] as $term ){
 				$this->categories[$term] = new EM_Category($term);
@@ -73,7 +74,7 @@ class EM_Categories extends EM_Object implements Iterator{
 			/* @var $EM_Category EM_Category */
 			if( !empty($EM_Category->slug) ) $term_slugs[] = $EM_Category->slug; //save of category will soft-fail if slug is empty
 		}
-		if( count($term_slugs) == 0 && get_option('dbem_default_category') ){
+		if( count($term_slugs) == 0 && get_option('dbem_default_category') > 0 ){
 			$default_term = get_term_by('id',get_option('dbem_default_category'), EM_TAXONOMY_CATEGORY);
 			if($default_term) $term_slugs[] = $default_term->slug;
 		}
@@ -183,8 +184,8 @@ class EM_Categories extends EM_Object implements Iterator{
 			//Pagination (if needed/requested)
 			if( !empty($args['pagination']) && !empty($limit) && $categories_count >= $limit ){
 				//Show the pagination links (unless there's less than 10 events, or the custom limit)
-				$page_link_template = preg_replace('/(&|\?)page=\d+/i','',$_SERVER['REQUEST_URI']);
-				$page_link_template = em_add_get_params($page_link_template, array('page'=>'%PAGE%'), false); //don't html encode, so em_paginate does its thing
+				$page_link_template = preg_replace('/(&|\?)pno=\d+/i','',$_SERVER['REQUEST_URI']);
+				$page_link_template = em_add_get_params($page_link_template, array('pno'=>'%PAGE%'), false); //don't html encode, so em_paginate does its thing
 				$output .= apply_filters('em_events_output_pagination', em_paginate( $page_link_template, $categories_count, $limit, $page), $page_link_template, $categories_count, $limit, $page);
 			}
 		} else {

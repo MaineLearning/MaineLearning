@@ -28,7 +28,7 @@ function wpcf_fields_checkboxes_meta_box_form($field, $data) {
             // Set value
             $options[$option_key] = array(
                 '#value' => $option['set_value'],
-                '#title' => wpcf_translate('field ' . $field['id'] . ' checkbox '
+                '#title' => wpcf_translate('field ' . $field['id'] . ' option '
                         . $option_key . ' title', $option['title']),
                 '#default_value' => (!empty($data['#value'][$option_key])// Also check new post
                 || ($pagenow == 'post-new.php' && !empty($option['checked']))) ? 1 : 0,
@@ -51,7 +51,7 @@ function wpcf_fields_checkboxes_editor_callback() {
     $form['#form']['callback'] = 'wpcf_fields_checkboxes_editor_submit';
     $form['display'] = array(
         '#type' => 'radios',
-        '#default_value' => 'db',
+        '#default_value' => 'display_all',
         '#name' => 'display',
         '#options' => array(
             'display_from_db' => array(
@@ -61,6 +61,19 @@ function wpcf_fields_checkboxes_editor_callback() {
                 '#value' => 'db',
                 '#inline' => true,
                 '#after' => '<br />'
+            ),
+            'display_all' => array(
+                '#title' => __('Display all values with separator', 'wpcf'),
+                '#name' => 'display',
+                '#value' => 'display_all',
+                '#inline' => true,
+                '#after' => '&nbsp;' . wpcf_form_simple(array('separator' => array(
+                        '#type' => 'textfield',
+                        '#name' => 'separator',
+                        '#value' => ', ',
+//                        '#title' => __('Separator', 'wpcf'),
+                        '#inline' => true,
+                        ))) . '<br />'
             ),
             'display_values' => array(
                 '#title' => __('Show one of these two values:', 'wpcf'),
@@ -122,26 +135,32 @@ function wpcf_fields_checkboxes_editor_submit() {
     $shortcode = '';
     if (!empty($field)) {
         if (!empty($_POST['options'])) {
-            $i = 0;
-            foreach ($_POST['options'] as $option_key => $option) {
-                if ($_POST['display'] == 'value') {
+            if ($_POST['display'] == 'display_all') {
+                $separator = !empty($_POST['separator']) ? $_POST['separator'] : '';
+                $shortcode .= '[types field="' . $field['slug'] . '" separator="'
+                                . $separator . '"]' . '[/types] ';
+            } else {
+                $i = 0;
+                foreach ($_POST['options'] as $option_key => $option) {
+                    if ($_POST['display'] == 'value') {
 
-                    $shortcode .= '[types field="' . $field['slug'] . '" option="'
-                            . $i . '" state="checked"]'
-                            . $option['display_value_selected']
-                            . '[/types] ';
-                    $shortcode .= '[types field="' . $field['slug'] . '" option="'
-                            . $i . '" state="unchecked"]'
-                            . $option['display_value_not_selected']
-                            . '[/types] ';
-                } else {
-                    $add = ' option="' . $i . '"';
-                    $shortcode .= wpcf_fields_get_shortcode($field, $add) . ' ';
+                        $shortcode .= '[types field="' . $field['slug'] . '" option="'
+                                . $i . '" state="checked"]'
+                                . $option['display_value_selected']
+                                . '[/types] ';
+                        $shortcode .= '[types field="' . $field['slug'] . '" option="'
+                                . $i . '" state="unchecked"]'
+                                . $option['display_value_not_selected']
+                                . '[/types] ';
+                    } else {
+                        $add = ' option="' . $i . '"';
+                        $shortcode .= wpcf_fields_get_shortcode($field, $add) . ' ';
+                    }
+                    $i++;
                 }
-                $i++;
             }
         }
-        echo wpcf_admin_fields_popup_insert_shortcode_js($shortcode);
+        echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }
 }
@@ -153,8 +172,40 @@ function wpcf_fields_checkboxes_editor_submit() {
  */
 function wpcf_fields_checkboxes_view($params) {
     $option = array();
-    if (!isset($params['option']) || empty($params['field']['data']['options'])) {
+    if (empty($params['field']['data']['options'])) {
         return '__wpcf_skip_empty';
+    }
+    // If no option specified, display all of them
+    if (!isset($params['option'])) {
+        $separator = isset($params['separator']) ? $params['separator'] : ', ';
+        foreach ($params['field_value'] as $name => &$value) {
+            if (isset($params['field']['data']['options'][$name])) {
+                $option = $params['field']['data']['options'][$name];
+            } else {
+                unset($params['field_value'][$name]);
+                continue;
+            }
+            if ($option['display'] == 'db'
+                    && !empty($option['set_value']) && !empty($value)) {
+                $value = $option['set_value'];
+                $value = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $name . ' value',
+                        $value);
+            } else if ($option['display'] == 'value') {
+                if (isset($option['display_value_selected']) && !empty($value)) {
+                    $value = $option['display_value_selected'];
+                    $value = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $name . ' display value selected',
+                            $value);
+                } else {
+                    $value = $option['display_value_not_selected'];
+                    $value = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $name . ' display value not selected',
+                            $value);
+                }
+            } else {
+                unset($params['field_value'][$name]);
+            }
+        }
+        $output = implode(array_values($params['field_value']), $separator);
+        return $output;
     }
 
     $i = 0;
@@ -162,7 +213,7 @@ function wpcf_fields_checkboxes_view($params) {
         if (intval($params['option']) == $i) {
             $option['key'] = $option_key;
             $option['data'] = $option_value;
-            $option['value'] = isset($params['field_value'][$option_key]) ? $params['field_value'][$option_key] : '__wpcf_unchecked';
+            $option['value'] = !empty($params['field_value'][$option_key]) ? $params['field_value'][$option_key] : '__wpcf_unchecked';
             break;
         }
         $i++;
@@ -180,26 +231,23 @@ function wpcf_fields_checkboxes_view($params) {
     } else if (isset($params['state']) && $params['state'] == 'checked') {
         return '__wpcf_skip_empty';
     }
-//    if (!empty($params['#content'])) {
-//        return htmlspecialchars_decode($params['#content']);
-//    }
 
     if ($option['data']['display'] == 'db'
             && !empty($option['data']['set_value']) && $option['value'] != '__wpcf_unchecked') {
         $output = $option['data']['set_value'];
-        $output = wpcf_translate('field ' . $params['field']['id'] . ' checkbox value',
+        $output = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $option['key'] . ' value',
                 $output);
     } else if ($option['data']['display'] == 'value'
             && $option['value'] != '__wpcf_unchecked') {
         if (isset($option['data']['display_value_selected'])) {
             $output = $option['data']['display_value_selected'];
-            $output = wpcf_translate('field ' . $params['field']['id'] . ' checkbox value selected',
+            $output = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $option['key'] . ' display value selected',
                     $output);
         }
     } else if ($option['data']['display'] == 'value') {
         if (isset($option['data']['display_value_not_selected'])) {
             $output = $option['data']['display_value_not_selected'];
-            $output = wpcf_translate('field ' . $params['field']['id'] . ' checkbox value not selected',
+            $output = wpcf_translate('field ' . $params['field']['id'] . ' option ' . $option['key'] . ' display value not selected',
                     $output);
         }
     }

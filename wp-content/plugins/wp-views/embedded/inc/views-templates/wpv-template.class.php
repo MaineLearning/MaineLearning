@@ -38,9 +38,15 @@ class WPV_template{
 
 				// Post/page save actions
 				add_action('save_post', array($this,'save_post_actions'), 10, 2);
+				
+				add_filter('user_can_richedit', array($this, 'disable_rich_edit_for_views'));
                 
             }
             add_action('admin_head', array($this,'include_admin_css'));
+			
+            add_action('wp_ajax_wpv_get_archive_view_template_taxonomy_summary', array($this, '_ajax_get_taxonomy_loop_summary'));
+            add_action('wp_ajax_wpv_get_archive_view_template_post_type_summary', array($this, '_ajax_get_post_type_loop_summary'));
+            add_action('wp_ajax_wpv_get_archive_view_template_post_type_edit', array($this, '_ajax_get_post_type_loop_edit'));
 			
         } else {
 			add_filter('edit_post_link', array($this, 'edit_post_link'), 10, 2);
@@ -182,9 +188,13 @@ class WPV_template{
     function save_post_actions($pidd, $post){
         
         if (isset($_POST['views_template'])) {
-            $template_selected = $_POST['views_template'];
+			// make sure we only update this for the current post.
+	        if (isset($_POST['post_ID']) && $_POST['post_ID'] == $pidd) {
+			
+				$template_selected = $_POST['views_template'];
             
-			update_post_meta($pidd, '_views_template', $template_selected);
+				update_post_meta($pidd, '_views_template', $template_selected);
+			}
 		}
     }
     
@@ -321,26 +331,24 @@ class WPV_template{
 				$post->view_template_override_get = true;
 			}
 		} else {
-			if ($taxonomy_loop && isset($view_options[$taxonomy_loop])) {
+			if (isset($post->view_template_override)) {
+				if (strtolower($post->view_template_override) == 'none') {
+					$template_selected = 0;
+				} else {
+					$template_selected = $this->get_template_id($post->view_template_override);
+				}
+			} else if ($taxonomy_loop && isset($view_options[$taxonomy_loop]) && $view_options[$taxonomy_loop] > 0) {
 				if (!isset($post->view_template_override_loop_setting)) {
 					$template_selected = $view_options[$taxonomy_loop];
 					$post->view_template_override_loop_setting = true;
 				}
-			} else if ($archive_loop && isset($view_options[$archive_loop])) {
+			} else if ($archive_loop && isset($view_options[$archive_loop]) && $view_options[$archive_loop] > 0) {
 				if (!isset($post->view_template_override_loop_setting)) {
 					$template_selected = $view_options[$archive_loop];
 					$post->view_template_override_loop_setting = true;
 				}
 			} else {
-				if (isset($post->view_template_override)) {
-					if (strtolower($post->view_template_override) == 'none') {
-						$template_selected = 0;
-					} else {
-						$template_selected = $this->get_template_id($post->view_template_override);
-					}
-				} else {
-					$template_selected = get_post_meta($id, '_views_template', true);
-				}
+				$template_selected = get_post_meta($id, '_views_template', true);
 			}
 		}
 		
@@ -541,6 +549,22 @@ class WPV_template{
         
         return $view_template;
 	}
+
+	function get_view_template_titles() {
+        global $wpdb;
+        
+        static $view_templates_available = null;
+		
+		if ($view_templates_available === null) {
+
+			$view_templates_available = array();			
+			$view_templates = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='view-template'");
+			foreach ($view_templates as $view_template) {
+				$view_templates_available[$view_template->ID] = $view_template->post_title;
+			}
+		}
+		return $view_templates_available;
+	}
 	
 	function hide_view_template_author() {
 		
@@ -548,5 +572,9 @@ class WPV_template{
 	
 	function show_admin_messages() {
 		
+	}
+	
+	function disable_rich_edit_for_views($state) {
+		return $state;
 	}
 }

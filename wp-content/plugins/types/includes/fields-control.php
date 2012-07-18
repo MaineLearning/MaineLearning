@@ -377,7 +377,7 @@ function wpcf_admin_custom_fields_control_bulk_ajax() {
     }
     if (!empty($_POST)) {
         if (!empty($_POST['groups']) && !empty($_POST['fields'])) {
-            $action = isset($_POST['action']) ? $_POST['action'] : 'wpcf-add-to-group-bulk';
+            $action = isset($_POST['wpcf_action_control']) ? $_POST['wpcf_action_control'] : 'wpcf-add-to-group-bulk';
             foreach ($_POST['groups'] as $group_id) {
                 switch ($action) {
                     case 'wpcf-add-to-group-bulk':
@@ -439,7 +439,9 @@ function wpcf_admin_custom_fields_control_bulk_ajax() {
     echo '<form method="post" action="">';
     echo wpcf_form_simple($output);
     wp_nonce_field('custom_fields_control_bulk');
-    echo '<input type="hidden" name="action" value="' . esc_attr($_GET['wpcf_bulk_action']) . '" />';
+    echo '<input type="hidden" name="action" value="wpcf_ajax" />';
+    echo '<input type="hidden" name="wpcf_action" value="custom_fields_control_bulk" />';
+    echo '<input type="hidden" name="wpcf_action_control" value="' . esc_attr($_GET['wpcf_bulk_action']) . '" />';
     echo '</form>';
 }
 

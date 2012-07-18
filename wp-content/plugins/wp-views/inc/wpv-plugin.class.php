@@ -14,7 +14,11 @@ class WP_Views_plugin extends WP_Views {
             add_action('admin_head-post.php', array($this, 'admin_add_help'));
             add_action('admin_head-post-new.php', array($this, 'admin_add_help'));
         }
-        parent::init();        
+        parent::init();
+		
+        add_action('wp_ajax_wpv_get_types_field_name', array($this, 'wpv_ajax_wpv_get_types_field_name'));
+        add_action('wp_ajax_wpv_get_taxonomy_name', array($this, 'wpv_ajax_wpv_get_taxonomy_name'));
+		
     }
 
     function enable_custom_menu_order($menu_ord) {
@@ -45,13 +49,13 @@ class WP_Views_plugin extends WP_Views {
         'name' => _x('Views', 'post type general name'),
         'singular_name' => _x('View', 'post type singular name'),
         'add_new' => _x('Add New View', 'book'),
-        'add_new_item' => __('Add New View'),
-        'edit_item' => __('Edit View'),
-        'new_item' => __('New View'),
-        'view_item' => __('View Views'),
-        'search_items' => __('Search Views'),
-        'not_found' =>  __('No views found'),
-        'not_found_in_trash' => __('No views found in Trash'), 
+        'add_new_item' => __('Add New View', 'wpv-views'),
+        'edit_item' => __('Edit View', 'wpv-views'),
+        'new_item' => __('New View', 'wpv-views'),
+        'view_item' => __('View Views', 'wpv-views'),
+        'search_items' => __('Search Views', 'wpv-views'),
+        'not_found' =>  __('No views found', 'wpv-views'),
+        'not_found_in_trash' => __('No views found in Trash', 'wpv-views'), 
         'parent_item_colon' => '',
         'menu_name' => 'Views'
     
@@ -61,14 +65,14 @@ class WP_Views_plugin extends WP_Views {
         'public' => false,
         'publicly_queryable' => false,
         'show_ui' => true, 
-        'show_in_menu' => true, 
+        'show_in_menu' => false, 
         'query_var' => false,
         'rewrite' => false,
         'capability_type' => 'post',
         'can_export' => false,
         'has_archive' => false, 
         'hierarchical' => false,
-        'menu_position' => 80,
+        //'menu_position' => 80,
         'menu_icon' => WPV_URL .'/res/img/views-18.png',
         'supports' => array('title','editor','author')
       ); 
@@ -76,6 +80,8 @@ class WP_Views_plugin extends WP_Views {
     }
 
     function admin_menu(){
+
+		add_utility_page(__('Views', 'wpv-views'), __('Views', 'wpv-views'), 'manage_options', 'edit.php?post_type=view', '', WPV_URL .'/res/img/views-18.png');
 
         // remove the default menus and then add a Help menu
         remove_submenu_page('edit.php?post_type=view', 'edit.php?post_type=view');
@@ -185,75 +191,114 @@ class WP_Views_plugin extends WP_Views {
     
     function settings_box($post){
         
+        global $WPV_view_archive_loop;
+        
         ?>
         <div id="wpv_view_query_controls" style="position: relative">
             <span id="wpv_view_query_controls_over" class="wpv_view_overlay" style="display:none">
                 <p><strong><?php echo __('The view query settings will be copied from the original', 'wpv-views'); ?></strong></p>
             </span>
-        <?php
-
-        global $wp_version, $pagenow;        
-        if (version_compare($wp_version, '3.2', '<')) {
-            echo '<p style="color:red;"><strong>';
-            _e('* Requires WordPress 3.2 or greater for best results.', 'wpv-views');
-            echo '</strong></p>';
-        }
-        
-        $this->include_admin_css();
-        
-        wp_nonce_field( 'wpv_get_table_row_ui_nonce', 'wpv_get_table_row_ui_nonce');
-
-        ?>        
-        <script type="text/javascript">
+            <?php
     
-            var wpv_confirm_filter_change = '<?php _e("Are you sure you want to change the filter?\\n\\nIt appears that you made modifications to the filter.", 'wpv-views'); ?>';
-            <?php if ($pagenow == 'post-new.php'): ?>
-                jQuery(document).ready(function($){
-                   wpv_add_initial_filter_shortcode(); 
-                });
-            <?php endif; ?>
+            global $wp_version, $pagenow;        
+            if (version_compare($wp_version, '3.2', '<')) {
+                echo '<p style="color:red;"><strong>';
+                _e('* Requires WordPress 3.2 or greater for best results.', 'wpv-views');
+                echo '</strong></p>';
+            }
             
-            var wpv_save_button_text = '<?php _e("Save View", 'wpv-views'); ?>';
-        </script>
-        
-        <?php
-        
-        global $WP_Views;
-        $view_settings = $WP_Views->get_view_settings($post->ID);
-//        $view_settings = (array)get_post_meta($post->ID, '_wpv_settings', true);
-        ?>
-        <table id="wpv_filter_table" class="widefat fixed">
-            <thead>
-                <tr>
-                    <th width="20px"></th>
-                    <th width="100%"><?php _e('Filter', 'wpv-views'); ?></th>
-                </tr>
-            </thead>
+            $this->include_admin_css();
             
-            <tbody>
-                <tr id="wpv_filter_type">
-                    <?php wpv_filter_types_admin($view_settings); ?>
-                </tr>
+            wp_nonce_field( 'wpv_get_table_row_ui_nonce', 'wpv_get_table_row_ui_nonce');
+    
+            ?>        
+            <script type="text/javascript">
+        
+                var wpv_confirm_filter_change = '<?php _e("Are you sure you want to change the filter?\\n\\nIt appears that you made modifications to the filter.", 'wpv-views'); ?>';
+                <?php if ($pagenow == 'post-new.php'): ?>
+                    jQuery(document).ready(function($){
+                       wpv_add_initial_filter_shortcode(); 
+                    });
+                <?php endif; ?>
                 
-                <?php
-                    global $view_settings_table_row;
-                    $view_settings_table_row = 0;
-                    do_action('wpv_add_filter_table_row', $view_settings);
-                ?>
-                
-            </tbody>
-        </table>
+                var wpv_save_button_text = '<?php _e("Save View", 'wpv-views'); ?>';
+            </script>
+            
+            <?php
+            
+            global $WP_Views;
+            $view_settings = $WP_Views->get_view_settings($post->ID);
+            
+            // check for creating a new view for an archive loop.
+            
+            if (isset($_GET['view_archive']) || isset($_GET['view_archive_taxonomy'])) {
+                $view_settings['view-query-mode'] = 'archive';
+                global $wpv_wp_pointer;
+                $wpv_wp_pointer->add_pointer('View Layout',
+                                             'This View displays results for an existing WordPress query.</p><p>Now choose the layout style and then add the fields you wish to display.',
+                                             'select[name="_wpv_layout_settings[style]"]',
+                                             'bottom',
+                                             'wpv_layout');
 
-        <?php
-        $view_settings = wpv_types_defaults($view_settings);
-        wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter', '', 'wpv_add_filters', $view_settings['query_type'][0] == 'posts');
-        wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter_taxonomy', '', 'wpv_add_filters_taxonomy', $view_settings['query_type'][0] == 'taxonomy');
+            }
+            
+            ?>
+            
+            <p><span style="font-size:1.1em;font-weight:bold;">Does this View query it's own data or replace a standard WordPress archive?</span>&nbsp;&nbsp;&nbsp;<img src="<?php echo WPV_URL_EMBEDDED; ?>/common/res/images/question.png" style="position:relative;top:2px;" />&nbsp;<a href="http://wp-types.com/documentation/user-guides/normal-vs-archive-views/" target="_blank"><?php _e('Learn about Normal and Archive Views &raquo;',
+'wpv-views'); ?></a></p>
+            <ul style="margin-bottom:10px">
+                <?php $checked = $view_settings['view-query-mode'] == 'normal' ? 'checked="checked"' : ''; ?>
+                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="normal" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').show();jQuery('#wpv-archive-view-mode').hide()">&nbsp;<?php _e('<strong>Normal View:</strong> This View queries content from the database (good for inserting Views into content or widgets)', 'wpv-views'); ?></label></li>
+                <?php $checked = $view_settings['view-query-mode'] == 'archive' ? 'checked="checked"' : ''; ?>
+                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="archive" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').hide();jQuery('#wpv-archive-view-mode').show()">&nbsp;<?php _e('<strong>Archive View:</strong> This View displays results for an existing WordPress query (good for archive pages, taxonomy listing, search, etc.)', 'wpv-views'); ?></label></li>
+            </ul>
+            
+            <div id="wpv-normal-view-mode"<?php if($view_settings['view-query-mode'] != 'normal') {echo ' style="display:none;"';} ?>>
+                <table id="wpv_filter_table" class="widefat fixed">
+                    <thead>
+                        <tr>
+                            <th width="20px"></th>
+                            <th width="100%"><?php _e('Filter', 'wpv-views'); ?></th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr id="wpv_filter_type">
+                            <?php wpv_filter_types_admin($view_settings); ?>
+                        </tr>
+                        
+                        <?php
+                            global $view_settings_table_row;
+                            $view_settings_table_row = 0;
+                            do_action('wpv_add_filter_table_row', $view_settings);
+                        ?>
+                        
+                    </tbody>
+                </table>
         
-        wpv_pagination_admin($view_settings);
+                <?php
+                $view_settings = wpv_types_defaults($view_settings);
+                wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter', '', 'wpv_add_filters', $view_settings['query_type'][0] == 'posts');
+                wpv_filter_add_filter_admin($view_settings, null, 'popup_add_filter_taxonomy', '', 'wpv_add_filters_taxonomy', $view_settings['query_type'][0] == 'taxonomy');
+
+				wpv_filter_controls_admin($view_settings);
+				
+                ?>
+                <p>
+                    <span style="font-size:1.1em;font-weight:bold;"><?php _e('Pagination settings',
+            'wpv-views') ?></span>&nbsp;&nbsp;&nbsp;<img src="<?php echo WPV_URL_EMBEDDED; ?>/common/res/images/question.png" style="position:relative;top:2px;" />&nbsp;<a href="http://wp-types.com/documentation/user-guides/views-pagination/" target="_blank"><?php _e('Everything about Views pagination &raquo;',
+            'wpv-views'); ?></a>
+                </p>
+			    <?php
+                wpv_pagination_admin($view_settings);
+                
+                wpv_filter_meta_html_admin($view_settings);
+                
+                ?>
+            </div>
         
-        wpv_filter_meta_html_admin($view_settings);
+            <?php $WPV_view_archive_loop->view_edit_admin($post->ID, $view_settings); ?>
         
-        ?>
         </div>
         <?php
     }
@@ -513,16 +558,17 @@ class WP_Views_plugin extends WP_Views {
  
     function views_settings_admin() {
         
-        global $WPV_templates, $wpdb;
+        global $WPV_templates, $wpdb, $WPV_view_archive_loop;
         
         $options = $this->get_options();
         
         $defaults = array('views_template_loop_blog' => '0');
         $options = wp_parse_args($options, $defaults);
         
-        if (isset($_POST['submit']) && $_POST['submit'] == __('Save Changes', 'wpv-views') &&
+        if (isset($_POST['submit']) && $_POST['submit'] == __('Save', 'wpv-views') &&
                             wp_verify_nonce($_POST['wpv_view_templates'], 'wpv_view_templates')) {
             
+            $options = $WPV_view_archive_loop->submit($options);
             $options = $WPV_templates->submit($options);
             
             $this->save_options($options);
@@ -545,13 +591,13 @@ class WP_Views_plugin extends WP_Views {
             <br />
             
             <form method="post" action="edit.php?post_type=view&page=views-settings">
-                <input id="submit-top" class="button-primary" type="submit" value="<?php _e('Save Changes', 'wpv-views'); ?>" name="submit" />
                 
+                <?php $WPV_view_archive_loop->admin_settings($options); ?>
                 <?php $WPV_templates->admin_settings($options); ?>
                 
                 <?php wp_nonce_field('wpv_view_templates', 'wpv_view_templates'); ?>
-                <p class="submit">
-                    <input id="submit" class="button-primary" type="submit" value="<?php _e('Save Changes', 'wpv-views'); ?>" name="submit" />
+                <p class="submit" style="margin-left:20px;margin-top:0px;">
+                    <input id="submit" class="button-primary" type="submit" value="<?php _e('Save', 'wpv-views'); ?>" name="submit" />
                 </p>
 
             </form>
@@ -609,5 +655,114 @@ class WP_Views_plugin extends WP_Views {
         
         <?php
     }
+
+	/**
+	 * Get the available View in a select box
+	 *
+	 */
+	
+	function get_view_select_box($row, $page_selected, $archives_only = false) {
+		global $wpdb;
+		
+		static $views_available = null;
+		
+		if (!$views_available) {
+			$views_available = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='view' AND post_status='publish'");
+            
+            if ($archives_only) {
+                foreach ($views_available as $index => $view) {
+                    $view_settings = $this->get_view_settings($view->ID);
+                    if ($view_settings['view-query-mode'] != 'archive') {
+                        unset($views_available[$index]);
+                    }
+                }
+            }
+
+			// Add a "None" type to the list.
+			$none = new stdClass();
+			$none->ID = '0';
+			$none->post_title = __('None', 'wpv-views');
+			$none->post_content = '';
+			array_unshift($views_available, $none);
+		}
+
+        $view_box = '';
+		if ($row === '') {
+			$view_box .= '<select class="view_select" name="view" id="view">';
+		} else {
+			$view_box .= '<select class="view_select" name="view_' . $row . '" id="view_' . $row . '">';
+		}
+
+        foreach($views_available as $view) {
+            if ($page_selected == $view->ID)
+                $selected = ' selected="selected"';
+            else
+                $selected = '';
+           
+			if ($view->post_title) {
+				$post_name = $view->post_title;
+			} else {
+				$post_name = $view->post_name;
+			}
+			
+			$view_box .= '<option value="' . $view->ID . '"' . $selected . '>' . $post_name . '</option>';
+			
+        }
+        $view_box .= '</select>';
+        
+        return $view_box;
+	}
+	
+	function wpv_ajax_wpv_get_types_field_name() {
+		if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_types_field_name_nonce')) {
+			if (!defined('WPCF_VERSION')) {
+				echo json_encode(array('found' => false,
+									   'name' => $_POST['field']));
+			} else {
+			    if (defined('WPCF_INC_ABSPATH')) {
+					require_once WPCF_INC_ABSPATH . '/fields.php';
+				}
+				
+				if (function_exists('wpcf_admin_fields_get_fields')) {
+					$fields = wpcf_admin_fields_get_fields();
+				} else {
+					$fields = array();
+				}
+				
+				$found = false;
+				foreach ($fields as $field) {
+					if ($_POST['field'] == wpcf_types_get_meta_prefix($field) . $field['slug']) {
+						echo json_encode(array('found' => true,
+											   'name' => $field['name']));
+						$found = true;
+						break;
+					}
+				}
+				
+				if (!$found) {
+					echo json_encode(array('found' => false,
+										   'name' => $_POST['field']));
+				}
+
+			}
+		}
+		die();
+	}
+	
+	function wpv_ajax_wpv_get_taxonomy_name() {
+		if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_types_field_name_nonce')) {
+			
+			$taxonomies = get_taxonomies('', 'objects');
+			if (isset($taxonomies[$_POST['taxonomy']])) {
+				echo json_encode(array('found' => false,
+								   'name' => $taxonomies[$_POST['taxonomy']]->labels->name));
+			} else {
+				echo json_encode(array('found' => false,
+								   'name' => $_POST['taxonomy']));
+			}
+		}
+		die();
+	}
+	
     
 }

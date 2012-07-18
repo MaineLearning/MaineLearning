@@ -31,6 +31,9 @@ $wpv_shortcodes['wpv-taxonomy-slug'] = array('wpv-taxonomy-slug', __('Taxonomy s
 $wpv_shortcodes['wpv-taxonomy-description'] = array('wpv-taxonomy-description', __('Taxonomy description', 'wpv-views'), 'wpv_shortcode_wpv_tax_description');
 $wpv_shortcodes['wpv-taxonomy-post-count'] = array('wpv-taxonomy-post-count', __('Taxonomy post count', 'wpv-views'), 'wpv_shortcode_wpv_tax_items_count');
 
+// $wpv_shortcodes['wpv-control'] = array('wpv-control', __('Filter control', 'wpv-views'), 'wpv_shortcode_wpv_control');
+
+
 // register the short codes
 foreach ($wpv_shortcodes as $shortcode) {
     if (function_exists($shortcode[2])) {
@@ -486,6 +489,8 @@ function wpv_shortcode_wpv_post_edit_link($atts){
 }
 
 
+
+
 /**
  * Views-Shortcode: wpv-post-field
  *
@@ -893,9 +898,27 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
         $view_available = $wpdb->get_results("SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type='view' AND post_status in ('publish')");
         foreach($view_available as $view) {
 
-            $editor->add_insert_shortcode_menu($view->post_title, 'wpv-view name="' . $view->post_title . '"', __('View', 'wpv-views'));
+            if (!$WP_Views->is_archive_view($view->ID)) {
+                $editor->add_insert_shortcode_menu($view->post_title, 'wpv-view name="' . $view->post_title . '"', __('View', 'wpv-views'));
 
-            $index += 1;
+                $index += 1;
+            }
+        }
+    }
+    
+    if (in_array('view-form', $types)) {
+        // we need to add the available views.
+        $view_available = $wpdb->get_results("SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type='view' AND post_status in ('publish')");
+        foreach($view_available as $view) {
+            
+            if ($WP_Views->does_view_have_form_controls($view->ID) && !$WP_Views->is_archive_view($view->ID)) {
+                $editor->add_insert_shortcode_menu($view->post_title,
+                                                    'wpv-form-view name="' . $view->post_title . '"',
+                                                    __('View Form', 'wpv-views'),
+                                                    'wpv_insert_view_form_popup(' . $view->ID . ')');
+
+                $index += 1;
+                }
         }
     }
     
@@ -933,9 +956,42 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
         }
     }
     
-    if ($editor) {
-//        $editor->render_js();
+    if (in_array('wpml', $types)) {
+        global $sitepress;
+        
+        if (isset($sitepress)) {
+        
+            $editor->add_insert_shortcode_menu('WPML lang switcher', 'wpml-lang-switcher', 'WPML');
+            $index += 1;
+            
+            global $icl_language_switcher;
+            if (isset($icl_language_switcher)) {
+
+                $editor->add_insert_shortcode_menu('WPML lang footer', 'wpml-lang-footer', 'WPML');
+                $index += 1;
+                
+            }
+            
+            global $iclCMSNavigation;
+            if (isset($iclCMSNavigation)) {
+                
+                //$editor->add_insert_shortcode_menu('WPML breadcrumbs', 'wpml-breadcrumbs', 'WPML');
+                //$index += 1;
+
+                $editor->add_insert_shortcode_menu('WPML sidebar', 'wpml-sidebar', 'WPML');
+                $index += 1;
+                
+            }
+        }
+        
+        if (defined('WPSEO_VERSION')) {
+        
+            $editor->add_insert_shortcode_menu('Yoast SEO breadcrumbs', 'yoast-breadcrumbs', 'Yoast SEO');
+            $index += 1;
+        }
     }
+    
+    
     
     return $index;
 }
@@ -1197,4 +1253,73 @@ function wpv_for_each_index($index) {
     }
     
     return $index;
+}
+
+
+// WPML shortcodes to add to Views.
+
+add_shortcode('wpml-lang-switcher', 'wpv_wpml_lang_switcher');
+function wpv_wpml_lang_switcher($atts, $value){
+    ob_start();
+    
+    do_action('icl_language_selector');
+    
+    $result = ob_get_clean();
+    
+    return $result;
+}
+
+add_shortcode('wpml-lang-footer', 'wpv_wpml_lang_footer');
+function wpv_wpml_lang_footer($atts, $value){
+    
+    global $icl_language_switcher;
+    
+    if (isset($icl_language_switcher)) {
+        ob_start();
+        $icl_language_switcher->language_selector_footer_style();
+        $icl_language_switcher->language_selector_footer();
+        
+        $result = ob_get_clean();
+        return $result;
+    }
+    
+    return '';
+    
+}
+
+/*
+add_shortcode('wpml-breadcrumbs', 'wpv_wpml_breadcrumbs');
+function wpv_wpml_breadcrumbs($atts, $value){
+    ob_start();
+    
+    global $iclCMSNavigation;
+    if (isset($iclCMSNavigation)) {
+        $iclCMSNavigation->cms_navigation_breadcrumb('');
+    }
+    
+    $result = ob_get_clean();
+    
+    return $result;
+}
+*/
+
+add_shortcode('wpml-sidebar', 'wpv_wpml_sidebar');
+function wpv_wpml_sidebar($atts, $value){
+    ob_start();
+    
+    do_action('icl_navigation_sidebar', '');
+    
+    $result = ob_get_clean();
+    
+    return $result;
+}
+        
+add_shortcode('yoast-breadcrumbs', 'wpv_yoast_breadcrumbs');
+function wpv_yoast_breadcrumbs($atts, $value){
+    
+    if ( function_exists('yoast_breadcrumb') ) {
+        return yoast_breadcrumb("","",false);
+    }
+    
+    return '';
 }

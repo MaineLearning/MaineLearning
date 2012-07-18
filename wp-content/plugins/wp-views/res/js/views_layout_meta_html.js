@@ -1,6 +1,12 @@
 function wpv_view_layout_meta_html() {
     jQuery('#wpv_layout_meta_html_admin_show').hide();
     jQuery('#wpv_layout_meta_html_admin_edit').show();
+    
+    // scroll the edit into view.
+    jQuery('html, body').animate({
+         scrollTop: jQuery("#wpv_layout_meta_html_admin_edit").offset().top
+     }, 500);
+    
 }
 
 function wpv_view_layout_meta_html_close() {

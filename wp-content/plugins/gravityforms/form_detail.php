@@ -94,7 +94,7 @@ class GFFormDetail{
         <script type="text/javascript">
             jQuery(document).ready(
                 function() {
-                    jQuery('.datepicker').datepicker({showOn: "both", buttonImage: "<?php echo GFCommon::get_base_url() ?>/images/calendar.png", buttonImageOnly: true});
+                    jQuery('.datepicker').datepicker({showOn: "both", buttonImage: "<?php echo GFCommon::get_base_url() ?>/images/calendar.png", buttonImageOnly: true} );
                 }
             );
 
@@ -108,12 +108,12 @@ class GFFormDetail{
             }
 
             function InsertVariable(element_id, callback, variable){
-                
+
                 if(!variable)
                     variable = jQuery('#' + element_id + '_variable_select').val();
-                
+
                 var messageElement = jQuery("#" + element_id);
-                
+
                 if(document.selection) {
                     // Go the IE way
                     messageElement[0].focus();
@@ -155,7 +155,7 @@ class GFFormDetail{
                     InsertVariable(element_id, callback);
                     return;
                 }
-                
+
                 variable = matches[1];
                 field_id = matches[2];
 
@@ -2359,8 +2359,8 @@ class GFFormDetail{
             </tr>
         </table>
         <script type="text/javascript">
-            jQuery("#chooser_<?php echo $field_name ?>").click(function(e){iColorShow(e.pageX, e.pageY, '<?php echo $field_name ?>', "<?php echo $callback ?>");});
-            jQuery("#chip_<?php echo $field_name ?>").click(function(e){iColorShow(e.pageX, e.pageY, '<?php echo $field_name ?>', "<?php echo $callback ?>");});
+            jQuery("#chooser_<?php echo $field_name ?>").click(function(e){iColorShow(e.pageX, e.pageY, '<?php echo $field_name ?>', "<?php echo $callback ?>");} );
+            jQuery("#chip_<?php echo $field_name ?>").click(function(e){iColorShow(e.pageX, e.pageY, '<?php echo $field_name ?>', "<?php echo $callback ?>");} );
         </script>
         <?php
     }
@@ -2467,7 +2467,7 @@ class GFFormDetail{
     private static function insert_variable_prepopulate($element_id, $callback=""){
         ?>
         <select id="<?php echo $element_id?>_variable_select" onchange="InsertVariable('<?php echo $element_id?>', '<?php echo $callback?>'); ">
-            <option value=''><?php _e("Insert variable", "gravityforms"); ?></option>
+            <option value=''><?php _e("Insert Merge Tag", "gravityforms"); ?></option>
 
             <option value='{ip}'><?php _e("Client IP Address", "gravityforms"); ?></option>
             <option value='{date_mdy}'><?php _e("Date", "gravityforms"); ?> (mm/dd/yyyy)</option>

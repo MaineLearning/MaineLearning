@@ -2,22 +2,11 @@
 ACTIVE
 --------------------------------------------------
 
-With e-mail messages from External Blogs, through the Activity Stream, and then through WP Better E-mails, the group address is incorrect.
 
-To view or reply, log in and go to:
-http://mainelearning.net/groups//
+When I enter multiple field items in the submission form, they don't pass into the database. 
 
-
-Why is the backend left column dropped? I think I made change for the front end BuddyBar, but need assistance problem solving on this one.
 
 JFC: Add http://wordpress.org/extend/plugins/lazy-load/
-
-
-
---------------------------------------------------
-When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
-
-BG: With PO edit open. Open catalog > Settings > Language team. Change to anything. Drop it into WPcontent/languages. See if it works. If not, let Boone know.
 
 
 
@@ -29,6 +18,20 @@ POTENTIAL DEVELOPMENT PROJECTS
 In forum posts shown in the activity stream, how do we get a "Read more" link after the ellipses that links to the actual forum post?
 
 COULD BE DONE IN 30-MINUTES OR LESS
+
+
+How do we find out when someone logs in.
+
+Boone will write query for users (email, first, last) without last activity.
+
+Yes
+
+
+
+Adding column.
+
+45 minutes to an hour
+
 
 
 
@@ -78,6 +81,15 @@ BUILD BLOG FIRST, THEN ATTACH TO GROUP. TRY RUNNING WITH REPLICATOR.
 --------------------------------------------------
 RESOLVED OR ANSWERED
 --------------------------------------------------
+
+
+
+--------------------------------------------------
+When creating an en-US language file for BuddyPress Docs, I get this error with POEdit:  /.../bp-docs-en_US.pot:4: field 'Language-Team' still has initial default value.
+
+BG: With PO edit open. Open catalog > Settings > Language team. Change to anything. Drop it into WPcontent/languages. See if it works. If not, let Boone know.
+
+
 
 
 How shall we handle the absolute server paths in the advanced-cache.php file. They currently reference the production server. 

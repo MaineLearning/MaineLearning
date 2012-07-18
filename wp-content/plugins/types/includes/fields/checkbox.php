@@ -52,6 +52,28 @@ function wpcf_fields_checkbox_insert_form($form_data) {
         '#name' => 'set_value',
         '#value' => 1,
     );
+    $cb_migrate_save = !empty($form_data['slug']) ? 'wpcfCbSaveEmptyMigrate(jQuery(this), \'' . $form_data['slug'] . '\', \'\', \'' . wp_create_nonce('cb_save_empty_migrate') . '\', \'save_check\');' : '';
+    $cb_migrate_do_not_save = !empty($form_data['slug']) ? 'wpcfCbSaveEmptyMigrate(jQuery(this), \'' . $form_data['slug'] . '\', \'\', \'' . wp_create_nonce('cb_save_empty_migrate') . '\', \'do_not_save_check\');' : '';
+    $update_response = !empty($form_data['slug']) ? '<div id="wpcf-cb-save-empty-migrate-response-'
+        . $form_data['slug'] . '" class="wpcf-cb-save-empty-migrate-response"></div>' : '<div class="wpcf-cb-save-empty-migrate-response"></div>';
+    $form['save_empty'] = array(
+        '#type' => 'radios',
+        '#name' => 'save_empty',
+        '#default_value' => !empty($form_data['data']['save_empty']) ? $form_data['data']['save_empty'] : 'no',
+        '#options' => array(
+            'yes' => array(
+                '#title' => __('When unchecked, save 0 to the database', 'wpcf'),
+                '#value' => 'yes',
+                '#attributes' => array('class' => 'wpcf-cb-save-empty-migrate', 'onclick' => $cb_migrate_save),
+            ),
+            'no' => array(
+                '#title' => __("When unchecked, don't save anything to the database", 'wpcf'),
+                '#value' => 'no',
+                '#attributes' => array('class' => 'wpcf-cb-save-empty-migrate', 'onclick' => $cb_migrate_do_not_save),
+            ),
+        ),
+        '#after' => $update_response,
+    );
     $form['checked'] = array(
         '#type' => 'checkbox',
         '#title' => __('Set checked by default (on new post)?', 'wpcf'),

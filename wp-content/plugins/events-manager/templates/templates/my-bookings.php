@@ -18,13 +18,6 @@
 		echo $EM_Notices;
 		?>
 		<div class='em-my-bookings'>
-				<!--
-				<ul class="subsubsub">
-					<li>
-						<a href='edit.php?post_type=post' class="current">All <span class="count">(1)</span></a> |
-					</li>
-				</ul>
-				-->
 				<?php if ( $bookings_count >= $limit ) : ?>
 				<div class='tablenav'>
 					<?php 
@@ -56,6 +49,7 @@
 						$event_count = 0;
 						$nonce = wp_create_nonce('booking_cancel');
 						foreach ($EM_Bookings as $EM_Booking) {
+							/* @var $EM_Booking EM_Booking */
 							$EM_Event = $EM_Booking->get_event();						
 							if( ($rowno < $limit || empty($limit)) && ($event_count >= $offset || $offset === 0) ) {
 								$rowno++;
@@ -70,7 +64,7 @@
 									<td>
 										<?php
 										$cancel_link = '';
-										if($EM_Booking->status != 3 && get_option('dbem_bookings_user_cancellation')){
+										if( $EM_Booking->status != 3 && get_option('dbem_bookings_user_cancellation') && $EM_Event->get_bookings()->has_open_time() ){
 											$cancel_url = em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'booking_cancel', 'booking_id'=>$EM_Booking->booking_id, '_wpnonce'=>$nonce));
 											$cancel_link = '<a class="em-bookings-cancel" href="'.$cancel_url.'" onclick="if( !confirm(EM.booking_warning_cancel) ){ return false; }">'.__('Cancel','dbem').'</a>';
 										}

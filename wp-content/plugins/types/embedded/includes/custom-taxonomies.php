@@ -134,7 +134,9 @@ function wpcf_custom_taxonomies_register($taxonomy, $data) {
     }
     // Force removing capabilities here
     unset($data['capabilities']);
-    register_taxonomy($taxonomy, $object_types, $data);
+    register_taxonomy($taxonomy,
+            apply_filters('wpcf_taxonomy_objects', $object_types, $taxonomy),
+            apply_filters('wpcf_taxonomy_data', $data, $taxonomy, $object_types));
 }
 
 /**

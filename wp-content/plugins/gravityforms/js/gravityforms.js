@@ -1,4 +1,4 @@
-// "prop" method fix for previous versions of jQuery 
+// "prop" method fix for previous versions of jQuery
 var originalPropMethod = jQuery.fn.prop;
 
 jQuery.fn.prop = function() {
@@ -335,7 +335,7 @@ function gformCalculateProductPrice(formId, productFieldId){
 
         if(!gformIsNumber(quantity))
             quantity = 0;
-            
+
     }
     quantity = parseFloat(quantity);
 
@@ -687,29 +687,47 @@ var GFCalc = function(formId, formulaFields){
     }
 
     this.runCalc = function(formulaField, formId) {
-        
+
         var calcObj = this;
         var formulaInput, expr;
 
         var field = jQuery('#field_' + formId + '_' + formulaField.field_id);
         formulaInput = jQuery('#input_' + formId + '_' + formulaField.field_id);
         var previous_val = formulaInput.val();
-        
-        expr = calcObj.replaceFieldTags(formId, formulaField.formula);
+
+        expr = calcObj.replaceFieldTags(formId, formulaField.formula, formulaField.numberFormat);
         result = '';
 
-        try {
+        if(calcObj.exprPatt.test(expr)) {
+            try {
 
-            if(calcObj.exprPatt.test(expr)) {
+                //run calculation
                 result = eval(expr);
-                result = gformFormatNumber(result, !gformIsNumber(formulaField.rounding) ? -1 : formulaField.rounding);
+
+            } catch (e) {}
+        }
+
+        // allow users to modify result with their own function
+        if(window["gform_calculation_result"])
+            result = window["gform_calculation_result"](result, formulaField, formId);
+
+        //formatting number
+        if(field.hasClass('gfield_price')) {
+            result = gformFormatMoney(result ? result : 0);
+        }
+        else{
+
+            var decimalSeparator, thousandSeparator;
+            if(formulaField.numberFormat == "decimal_comma"){
+                decimalSeparator = ",";
+                thousandSeparator = ".";
             }
-
-            // allow users to modify result with their own function
-            if(window["gform_calculation_result"])
-                result = window["gform_calculation_result"](result, formulaField, formId);
-
-        } catch (e) { }
+            else if(formulaField.numberFormat == "decimal_dot"){
+                decimalSeparator = ".";
+                thousandSeparator = ",";
+            }
+            result = gformFormatNumber(result, !gformIsNumber(formulaField.rounding) ? -1 : formulaField.rounding, decimalSeparator, thousandSeparator);
+        }
 
         //If value doesn't change, abort.
         //This is needed to prevent an infinite loop condition with conditional logic
@@ -718,7 +736,6 @@ var GFCalc = function(formId, formulaFields){
 
         // if this is a calucation product, handle differently
         if(field.hasClass('gfield_price')) {
-            result = gformFormatMoney(result ? result : 0);
 
             formulaInput.text(result);
             jQuery('#ginput_base_price_' + formId + '_' + formulaField.field_id).val(result).trigger('change');
@@ -734,15 +751,15 @@ var GFCalc = function(formId, formulaFields){
         var calcObj = this;
         var formulaFieldId = formulaField.field_id;
         var matches = getMatchGroups(formulaField.formula, this.patt);
-        
+
         calcObj.isCalculating[formulaFieldId] = false;
 
         for(i in matches) {
-            
+
             var inputId = matches[i][1];
             var fieldId = parseInt(inputId);
             var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
-            
+
             if(input.prop('type') == 'checkbox' || input.prop('type') == 'radio') {
                 jQuery(input).click(function(){
                     calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
@@ -755,6 +772,8 @@ var GFCalc = function(formId, formulaFields){
             } else {
                 jQuery(input).keydown(function(){
                     calcObj.bindCalcEvent(inputId, formulaField, formId);
+                }).change(function(){
+                    calcObj.bindCalcEvent(inputId, formulaField, formId, 0);
                 });
             }
 
@@ -778,10 +797,10 @@ var GFCalc = function(formId, formulaFields){
 
     }
 
-    this.replaceFieldTags = function(formId, expr) {
+    this.replaceFieldTags = function(formId, expr, numberFormat) {
 
         var matches = getMatchGroups(expr, this.patt);
-        
+
         for(i in matches) {
 
             var inputId = matches[i][1];
@@ -790,7 +809,7 @@ var GFCalc = function(formId, formulaFields){
             var value = 0;
 
             var input = jQuery('#field_' + formId + '_' + fieldId).find('input[name="input_' + inputId + '"], select[name="input_' + inputId + '"]');
-            
+
             // radio buttons will return multiple inputs, checkboxes will only return one but it may not be selected, filter out unselected inputs
             if(input.length > 1 || input.prop('type') == 'checkbox')
                 input = input.filter(':checked');
@@ -807,10 +826,23 @@ var GFCalc = function(formId, formulaFields){
                 } else {
                     value = input.val();
                 }
-
             }
-            
-            value = gformToNumber(value) ? gformToNumber(value) : 0;
+
+            var decimalSeparator = ".";
+            if(numberFormat == "decimal_comma"){
+                decimalSeparator = ",";
+            }
+            else if(numberFormat == "decimal_dot"){
+                decimalSeparator = ".";
+            }
+            else if(window['gf_global']){
+                var currency = new Currency(gf_global.gf_currency_config);
+                decimalSeparator = currency.currency["decimal_separator"];
+            }
+
+            value = gformCleanNumber(value, "", "", decimalSeparator);
+            if(!value)
+                value = 0;
 
             expr = expr.replace(matches[i][0], value);
         }
@@ -822,12 +854,30 @@ var GFCalc = function(formId, formulaFields){
 
 }
 
-function gformFormatNumber(number, rounding){
-    if(!window['gf_global'])
-        return text;
+function gformFormatNumber(number, rounding, decimalSeparator, thousandSeparator){
 
-    var currency = new Currency(gf_global.gf_currency_config);
-    return currency.numberFormat(number, rounding, currency.currency["decimal_separator"], currency.currency["thousand_separator"], false)
+    if(typeof decimalSeparator == "undefined"){
+        if(window['gf_global']){
+            var currency = new Currency(gf_global.gf_currency_config);
+            decimalSeparator = currency.currency["decimal_separator"];
+        }
+        else{
+            decimalSeparator = ".";
+        }
+    }
+
+    if(typeof thousandSeparator == "undefined"){
+        if(window['gf_global']){
+            var currency = new Currency(gf_global.gf_currency_config);
+            thousandSeparator = currency.currency["thousand_separator"];
+        }
+        else{
+            thousandSeparator = ",";
+        }
+    }
+
+    var currency = new Currency();
+    return currency.numberFormat(number, rounding, decimalSeparator, thousandSeparator, false)
 }
 
 function gformToNumber(text) {

@@ -227,13 +227,6 @@ function em_get_hour_format(){
 	return get_option('dbem_time_24h') ? "H:i":"h:i A";
 }
 
-function em_get_date_format(){
-	global $localised_date_formats;
-	$locale_code = substr ( get_locale (), 0, 2 );
-	$localised_date_format = !empty($localised_date_formats[$locale_code]) ? $localised_date_formats[$locale_code]:$localised_date_formats['en'];
-	return $localised_date_format;
-}
-
 function em_get_days_names(){
 	return array (1 => __ ( 'Mon' ), 2 => __ ( 'Tue' ), 3 => __ ( 'Wed' ), 4 => __ ( 'Thu' ), 5 => __ ( 'Fri' ), 6 => __ ( 'Sat' ), 0 => __ ( 'Sun' ) );
 }
@@ -519,8 +512,8 @@ function em_options_radio_binary($title, $name, $description, $option_names = ''
 	<?php
 }
 
-function em_options_select($title, $name, $list, $description) {
-	$option_value = get_option($name);
+function em_options_select($title, $name, $list, $description, $default='') {
+	$option_value = get_option($name, $default);
 	if( $name == 'dbem_events_page' && !is_object(get_page($option_value)) ){
 		$option_value = 0; //Special value
 	}
@@ -556,7 +549,23 @@ if( !function_exists('get_current_blog_id') ){
 	function get_current_blog_id(){ return 1; } //for < 3.1
 }
 
+if( !function_exists( 'is_main_query' ) ){
+	/**
+	 * Substitutes the original function in 3.3 onwards, for backwards compatability (only created if not previously defined)
+	 * @return bool
+	 */
+	function is_main_query(){ global $wp_query; return $wp_query->in_the_loop == true; }
+}
+
 function em_get_thumbnail_url($image_url, $width, $height){
 	return plugins_url('includes/thumbnails/timthumb.php', __FILE__).'?src='.$image_url.'&amp;h='. $height .'&amp;w='. $width;
+}
+
+/**
+ * Depreciated
+ * @return unknown
+ */
+function em_get_date_format(){
+	return get_option('dbem_date_format');
 }
 ?>

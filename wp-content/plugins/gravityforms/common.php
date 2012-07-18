@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.4.3.1";
+    public static $version = "1.6.4.5.4";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -850,8 +850,8 @@ class GFCommon{
 
         $field_data = "";
         if($format == "html"){
-            $field_data = '<table width="99%" border="0" cellpadding="1" cellpsacing="0" bgcolor="#EAEAEA"><tr><td>
-                            <table width="100%" border="0" cellpadding="5" cellpsacing="0" bgcolor="#FFFFFF">';
+            $field_data = '<table width="99%" border="0" cellpadding="1" cellspacing="0" bgcolor="#EAEAEA"><tr><td>
+                            <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#FFFFFF">';
         }
 
         $options_array = explode(",", $options);
@@ -2210,7 +2210,7 @@ class GFCommon{
         return $str;
     }
 
-    private static function is_post_field($field){
+    public static function is_post_field($field){
         return in_array($field["type"], array("post_title", "post_tags", "post_category", "post_custom_field", "post_content", "post_excerpt", "post_image"));
     }
 
@@ -3098,6 +3098,8 @@ class GFCommon{
                     $security_code = esc_attr(rgget($field["id"] . ".3",$value));
                 }
 
+                $action = !IS_ADMIN ? "gformMatchCard(\"{$field_id}_1\");" : "";
+
                 $onchange= "onchange='{$action}'";
                 $onkeyup = "onkeyup='{$action}'";
 
@@ -3963,8 +3965,10 @@ class GFCommon{
     public static function get_product_fields($form, $lead, $use_choice_text=false, $use_admin_label=false){
         $products = array();
 
-        // retrieve static copy of product info
-        $product_info = gform_get_meta(rgar($lead,'id'), "gform_product_info_{$use_choice_text}_{$use_admin_label}");
+        $product_info = null;
+        // retrieve static copy of product info (only for "real" entries)
+        if(!rgempty("id", $lead))
+            $product_info = gform_get_meta(rgar($lead,'id'), "gform_product_info_{$use_choice_text}_{$use_admin_label}");
 
         // if no static copy, generate from form/lead info
         if(!$product_info) {
@@ -4060,9 +4064,9 @@ class GFCommon{
 
             $product_info = apply_filters("gform_product_info_{$form["id"]}", apply_filters("gform_product_info", $product_info, $form, $lead), $form, $lead);
 
-            // save static copy of product info
-            gform_update_meta($lead['id'], "gform_product_info_{$use_choice_text}_{$use_admin_label}", $product_info);
-
+            // save static copy of product info (only for "real" entries)
+            if(!rgempty("id", $lead) && !empty($product_info["products"]))
+                gform_update_meta($lead['id'], "gform_product_info_{$use_choice_text}_{$use_admin_label}", $product_info);
         }
 
         return $product_info;
@@ -4483,6 +4487,13 @@ class GFCommon{
         return preg_match("/^[0-9 -\/*\(\)]+$/", $formula) ? eval("return {$formula};") : false;
     }
 
+    public static function round_number($number, $rounding){
+        if(is_numeric($rounding) && $rounding >= 0){
+            $number = round($number, $rounding);
+        }
+        return $number;
+    }
+
     public static function get_calculation_value($field_id, $form, $lead) {
 
         $filters = array('price', 'value', '');
@@ -4521,5 +4532,20 @@ class GFCommon{
         return in_array($input_type, $supported_input_types) && !in_array($input_type, $unsupported_field_types);
     }
 
+    public static function log_error($message){
+        if(class_exists("GFLogging"))
+        {
+            GFLogging::include_logger();
+            GFLogging::log_message("gravityforms", $message, KLogger::ERROR);
+        }
+    }
+
+    public static function log_debug($message){
+        if(class_exists("GFLogging"))
+        {
+            GFLogging::include_logger();
+            GFLogging::log_message("gravityforms", $message, KLogger::DEBUG);
+        }
+    }
 }
 ?>

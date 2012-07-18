@@ -32,7 +32,7 @@ function em_init_actions() {
 			}			
 		    echo EM_Object::json_encode($result);
 			die();
-		} 
+		}
 		if(isset($_REQUEST['query']) && $_REQUEST['query'] == 'GlobalMapData') {
 			$EM_Locations = EM_Locations::get( $_REQUEST );
 			$json_locations = array();
@@ -184,23 +184,27 @@ function em_init_actions() {
 				}
 			}
 		}elseif( !empty($_REQUEST['action']) && $_REQUEST['action'] == "locations_search" && (!empty($_REQUEST['term']) || !empty($_REQUEST['q'])) ){
-			$location_cond = ( !current_user_can('edit_others_locations') && !current_user_can('read_others_locations') ) ? "AND location_owner=".get_current_user_id() : '';
-			$term = (isset($_REQUEST['term'])) ? '%'.$_REQUEST['term'].'%' : '%'.$_REQUEST['q'].'%';
-			$sql = $wpdb->prepare("
-				SELECT 
-					location_id AS `id`,
-					Concat( location_name, ', ', location_address, ', ', location_town)  AS `label`,
-					location_name AS `value`,
-					location_address AS `address`, 
-					location_town AS `town`, 
-					location_state AS `state`,
-					location_region AS `region`,
-					location_postcode AS `postcode`,
-					location_country AS `country`
-				FROM ".EM_LOCATIONS_TABLE." 
-				WHERE ( `location_name` LIKE %s ) $location_cond LIMIT 10
-			", $term);
-			echo EM_Object::json_encode($wpdb->get_results($sql));
+			$results = array();
+			if( is_user_logged_in() || ( get_option('dbem_events_anonymous_submissions') && user_can(get_option('dbem_events_anonymous_user'), 'read_others_locations') ) ){
+				$location_cond = (is_user_logged_in() && !current_user_can('read_others_locations')) ? "AND location_owner=".get_current_user_id() : '';
+				$term = (isset($_REQUEST['term'])) ? '%'.$_REQUEST['term'].'%' : '%'.$_REQUEST['q'].'%';
+				$sql = $wpdb->prepare("
+					SELECT 
+						location_id AS `id`,
+						Concat( location_name, ', ', location_address, ', ', location_town)  AS `label`,
+						location_name AS `value`,
+						location_address AS `address`, 
+						location_town AS `town`, 
+						location_state AS `state`,
+						location_region AS `region`,
+						location_postcode AS `postcode`,
+						location_country AS `country`
+					FROM ".EM_LOCATIONS_TABLE." 
+					WHERE ( `location_name` LIKE %s ) AND location_status=1 $location_cond LIMIT 10
+				", $term);
+				$results = $wpdb->get_results($sql);
+			}
+			echo EM_Object::json_encode($results);
 			die();
 		}
 		if( isset($result) && $result && !empty($_REQUEST['em_ajax']) ){
@@ -230,6 +234,7 @@ function em_init_actions() {
 		$feedback = '';
 		if ( $_REQUEST['action'] == 'booking_add') {
 			//ADD/EDIT Booking
+			ob_start();
 			em_verify_nonce('booking_add');
 			if( !is_user_logged_in() || get_option('dbem_bookings_double') || !$EM_Event->get_bookings()->has_booking(get_current_user_id()) ){
 				$post_validation = $EM_Booking->get_post();
@@ -309,6 +314,8 @@ function em_init_actions() {
 						}elseif( !is_user_logged_in() ){
 							$registration = false;
 							$EM_Notices->add_error( get_option('dbem_booking_feedback_log_in') );
+						}elseif( empty($EM_Booking->person_id) ){ //user must be logged in, so we make this person the current user id
+							$EM_Booking->person_id = get_current_user_id();
 						}
 					}
 					$EM_Bookings = $EM_Event->get_bookings();
@@ -330,6 +337,7 @@ function em_init_actions() {
 				$feedback = get_option('dbem_booking_feedback_already_booked');
 				$EM_Notices->add_error( $feedback );
 			}
+			ob_clean();
 	  	}elseif ( $_REQUEST['action'] == 'booking_add_one' && is_object($EM_Event) && is_user_logged_in() ) {
 			//ADD/EDIT Booking
 			em_verify_nonce('booking_add_one');
@@ -605,26 +613,32 @@ function em_init_actions() {
 		//generate bookings export according to search request
 		$show_tickets = !empty($_REQUEST['show_tickets']);
 		$EM_Bookings_Table = new EM_Bookings_Table($show_tickets);
-		$EM_Bookings_Table->limit = 0;
 		header("Content-Type: application/octet-stream; charset=utf-8");
 		header("Content-Disposition: Attachment; filename=".sanitize_title(get_bloginfo())."-bookings-export.csv");
 		echo sprintf(__('Exported booking on %s','dbem'), date_i18n('D d M Y h:i', current_time('timestamp'))) .  "\n";
 		echo '"'. implode('","', $EM_Bookings_Table->get_headers(true)). '"' .  "\n";
 		//Rows
+		$EM_Bookings_Table->limit = 150; //if you're having server memory issues, try messing with this number
+		$EM_Bookings = $EM_Bookings_Table->get_bookings();
 		$handle = fopen("php://output", "w");
-		foreach( $EM_Bookings_Table->get_bookings() as $EM_Booking ) {
-			//Display all values
-			/* @var $EM_Booking EM_Booking */
-			/* @var $EM_Ticket_Booking EM_Ticket_Booking */
-			if( $show_tickets ){
-				foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking){
-					$row = $EM_Bookings_Table->get_row_csv($EM_Ticket_Booking);
+		while(!empty($EM_Bookings)){
+			foreach( $EM_Bookings as $EM_Booking ) {
+				//Display all values
+				/* @var $EM_Booking EM_Booking */
+				/* @var $EM_Ticket_Booking EM_Ticket_Booking */
+				if( $show_tickets ){
+					foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking){
+						$row = $EM_Bookings_Table->get_row_csv($EM_Ticket_Booking);
+						fputcsv($handle, $row);
+					}
+				}else{
+					$row = $EM_Bookings_Table->get_row_csv($EM_Booking);
 					fputcsv($handle, $row);
 				}
-			}else{
-				$row = $EM_Bookings_Table->get_row_csv($EM_Booking);
-				fputcsv($handle, $row);
 			}
+			//reiterate loop
+			$EM_Bookings_Table->offset += $EM_Bookings_Table->limit;
+			$EM_Bookings = $EM_Bookings_Table->get_bookings();
 		}
 		fclose($handle);
 		exit();
@@ -634,7 +648,7 @@ add_action('init','em_init_actions',11);
 
 function em_ajax_bookings_table(){
 	$EM_Bookings_Table = new EM_Bookings_Table();
-	$EM_Bookings_Table->output_content();
+	$EM_Bookings_Table->output_table();
 	exit();
 }
 add_action('wp_ajax_em_bookings_table','em_ajax_bookings_table');

@@ -5,12 +5,12 @@ Plugin URI: http://wp-types.com/
 Description: When you need to create lists of items, Views is the solution. Views will query the content from the database, iterate through it and let you display it with flair. You can also enable pagination, search, filtering and sorting by site visitors.
 Author: ICanLocalize
 Author URI: http://wpml.org
-Version: 1.0
+Version: 1.1
 */
 
 if(defined('WPV_VERSION')) return;
 
-define('WPV_VERSION', '1.0');
+define('WPV_VERSION', '1.1');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__) . '/embedded');
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -21,9 +21,12 @@ if (!defined('EDITOR_ADDON_RELPATH')) {
     define('EDITOR_ADDON_RELPATH', WPV_URL . '/embedded/common/visual-editor');
 }
 
-require WPV_PATH . '/inc/constants.inc';
+require WPV_PATH . '/inc/constants.php';
 require WPV_PATH . '/inc/functions-core.php';
 require_once(WPV_PATH_EMBEDDED) . '/common/wplogger.php';
+require_once(WPV_PATH_EMBEDDED) . '/common/wp-pointer.php';
+
+$wpv_wp_pointer = new WPV_wp_pointer('views');
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-shortcodes.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-shortcodes-in-shortcodes.php';
@@ -31,11 +34,13 @@ require WPV_PATH_EMBEDDED . '/inc/wpv-filter-meta-html-embedded.php';
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-widgets.php';
 require WPV_PATH . '/inc/wpv-layout.php';
+require WPV_PATH . '/inc/wpv-filter-controls.php';
 require WPV_PATH . '/inc/wpv-admin-changes.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-layout-embedded.php';
 require WPV_PATH . '/inc/wpv-filter.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-pagination-embedded.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-archive-loop.php';
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-user-functions.php';
 

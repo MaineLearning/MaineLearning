@@ -1,6 +1,12 @@
 #icon-wpcf {
     background: url(../images/logo-32.png) no-repeat;
 }
+#icon-wpcf-access {
+    background: url(../images/access_36x34.png) no-repeat;
+}
+#icon-wpcf-search {
+    background: url(../images/search_36x34.png) no-repeat;
+}
 .wpcf-ajax-loading {
     background: url(../images/ajax-loader-big.gif) no-repeat;
     width: 32px;
@@ -300,4 +306,11 @@ input.wpcf-form-error {
 .wpcf-error {
     background-color: #FFEBE8;
     border-color: #CC0000;
+}
+.wpcf-admin-fields-help {
+/*    position: absolute;
+    width: 400px;
+    margin-top: -15px;
+    z-index: 9;
+    text-align: right;*/
 }

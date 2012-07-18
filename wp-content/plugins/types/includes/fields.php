@@ -636,3 +636,389 @@ function wpcf_admin_fields_get_groups_by_field($field_id) {
     $cache['groups'][$group_id] = $fields;
     return $return;
 }
+
+/**
+ * Check how many posts needs checkbox update.
+ * 
+ * @param type $field
+ * @param type $action
+ * @return boolean|int 
+ */
+function wpcf_admin_fields_checkbox_migrate_empty_check($field, $action) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (empty($field) || $field['type'] != 'checkbox') {
+        return false;
+    }
+    $filter = wpcf_admin_fields_get_filter_by_field($field['id']);
+    if (!empty($filter)) {
+        $posts = array();
+        $meta_key = wpcf_types_get_meta_prefix($field) . $field['id'];
+        $meta_query = '';
+        if ($action == 'do_not_save_check') {
+            $meta_query = "(m.meta_key = '$meta_key' AND m.meta_value = '0')";
+            $posts = wpcf_admin_fields_get_posts_by_filter($filter, $meta_query);
+        } else if ($action == 'save_check') {
+            $posts = wpcf_admin_fields_get_posts_by_filter_missing_meta($filter,
+                    $meta_key);
+        }
+        $option = get_option('wpcf_checkbox_migration', array());
+        $cache_key = $action == 'do_not_save_check' ? 'do_not_save' : 'save';
+        $option[$cache_key] = $posts;
+        update_option('wpcf_checkbox_migration', $option);
+        return $posts;
+    }
+    return false;
+}
+
+/**
+ * Update posts checkboxes fields.
+ * 
+ * @param type $field
+ * @param type $action
+ * @return boolean|int 
+ */
+function wpcf_admin_fields_checkbox_migrate_empty($field, $action) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (empty($field) || $field['type'] != 'checkbox') {
+        return false;
+    }
+    $option = get_option('wpcf_checkbox_migration', array());
+    $meta_key = wpcf_types_get_meta_prefix($field) . $field['id'];
+    if (empty($option[$action])) {
+        $posts = wpcf_admin_fields_checkbox_migrate_empty_check($field['id'],
+                $action . '_check');
+    } else {
+        $posts = $option[$action];
+    }
+
+    if (!empty($posts)) {
+        if ($action == 'do_not_save') {
+            $count = 0;
+            foreach ($posts as $temp_key => $post_id) {
+                if ($count == 1000) {
+                    $option[$action] = $posts;
+                    update_option('wpcf_checkbox_migration', $option);
+                    $data = array('offset' => $temp_key);
+                    return $data;
+                }
+                delete_post_meta($post_id, $meta_key, 0);
+                unset($posts[$temp_key]);
+                $count++;
+            }
+            unset($option[$action]);
+            update_option('wpcf_checkbox_migration', $option);
+            return $posts;
+        } else if ($action == 'save') {
+            $count = 0;
+            foreach ($posts as $temp_key => $post_id) {
+                if ($count == 1000) {
+                    $option[$action] = $posts;
+                    update_option('wpcf_checkbox_migration', $option);
+                    $data = array('offset' => $temp_key);
+                    return $data;
+                }
+                update_post_meta($post_id, $meta_key, 0);
+                unset($posts[$temp_key]);
+                $count++;
+            }
+            unset($option[$action]);
+            update_option('wpcf_checkbox_migration', $option);
+            return $posts;
+        }
+    }
+    return false;
+}
+
+/**
+ * Gets all filters required for field to be used.
+ * 
+ * @param type $field
+ * @return boolean|string 
+ */
+function wpcf_admin_fields_get_filter_by_field($field) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (empty($field)) {
+        return false;
+    }
+    $filter = array();
+    $filter['types'] = array();
+    $filter['terms'] = array();
+    $filter['templates'] = array();
+    $groups = wpcf_admin_fields_get_groups_by_field($field['id']);
+    foreach ($groups as $group_id => $group_data) {
+        // Get filters
+        $filter['types'] = array_merge($filter['types'],
+                explode(',',
+                        trim(get_post_meta($group_id,
+                                        '_wp_types_group_post_types', true), ',')));
+        $filter['terms'] = array_merge($filter['terms'],
+                explode(',',
+                        trim(get_post_meta($group_id, '_wp_types_group_terms',
+                                        true), ',')));
+        $filter['templates'] = array_merge($filter['templates'],
+                explode(',',
+                        trim(get_post_meta($group_id,
+                                        '_wp_types_group_templates', true), ',')));
+        $filter['association'] = isset($group_data['filters_association']) && $group_data['filters_association'] == 'any' ? 'OR' : 'AND';
+    }
+    if (in_array('all', $filter['types'])) {
+        $filter['types'] = 'all';
+    }
+    if (in_array('all', $filter['terms'])) {
+        $filter['terms'] = 'all';
+    }
+    if (in_array('all', $filter['templates'])) {
+        $filter['templates'] = 'all';
+    }
+
+    return $filter;
+}
+
+/**
+ * Gets posts by filter fetched with wpcf_admin_fields_get_filter_by_field().
+ * 
+ * @global type $wpdb
+ * @param type $filter
+ * @return type 
+ */
+function wpcf_admin_fields_get_posts_by_filter($filter, $meta_query = '') {
+    global $wpdb;
+    $query = array();
+    $join = array();
+    if ($filter['types'] != 'all' && !empty($filter['types'])) {
+        $query[] = 'p.post_type IN (\'' . implode('\',\'', $filter['types']) . '\')';
+    } else {
+        $post_types = get_post_types(array('show_ui' => true), 'names');
+        foreach ($post_types as $post_type_slug => $post_type) {
+            if (in_array($post_type_slug,
+                            array('attachment', 'revision', 'nav_menu_item',
+                        'view', 'view-template'))) {
+                unset($post_types[$post_type_slug]);
+            }
+        }
+        $query[] = 'p.post_type IN (\'' . implode('\',\'', $post_types) . '\')';
+    }
+    if ($filter['terms'] != 'all' && !empty($filter['terms'])) {
+        $ttid = array();
+        foreach ($filter['terms'] as $term_id) {
+            $term_taxonomy_id = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE term_id=%d",
+                            $term_id));
+            if (!empty($term_taxonomy_id)) {
+                $ttid[] = $term_taxonomy_id;
+            }
+        }
+        $query[] = 't.term_taxonomy_id IN (\'' . implode('\',\'', $ttid) . '\')';
+        $join[] = "LEFT JOIN $wpdb->term_relationships t ON p.ID = t.object_id ";
+    }
+    if ($filter['templates'] != 'all' && !empty($filter['templates'])) {
+        $query[] = '(m.meta_key = \'_wp_page_template\' AND m.meta_value IN (\'' . implode('\',\'',
+                        $filter['templates']) . '\'))';
+    }
+    if (!empty($meta_query)
+            || ($filter['templates'] != 'all' && !empty($filter['templates']))) {
+        $join[] = "LEFT JOIN $wpdb->postmeta m ON p.ID = m.post_id ";
+    }
+
+    $_query = "SELECT p.ID FROM $wpdb->posts p " . implode('', $join);
+    if (!empty($query)) {
+        $_query .= "WHERE " . implode(' ' . $filter['association'] . ' ', $query) . ' ';
+        if (!empty($meta_query)) {
+            $_query .= ' AND ' . $meta_query . ' ';
+        }
+    } else if (!empty($meta_query)) {
+        $_query .= "WHERE " . $meta_query . ' ';
+    }
+    $_query .= "GROUP BY p.ID";
+    $posts = $wpdb->get_col($_query);
+    return $posts;
+}
+
+/**
+ * Gets posts by filter with missing meta fetched
+ * with wpcf_admin_fields_get_filter_by_field().
+ * 
+ * @global type $wpdb
+ * @param type $filter
+ * @return type 
+ */
+function wpcf_admin_fields_get_posts_by_filter_missing_meta($filter,
+        $meta_key = '') {
+    global $wpdb;
+    $query = array();
+    $join = array();
+    if ($filter['types'] != 'all' && !empty($filter['types'])) {
+        $query[] = 'p.post_type IN (\'' . implode('\',\'', $filter['types']) . '\')';
+    } else {
+        $post_types = get_post_types(array('show_ui' => true), 'names');
+        foreach ($post_types as $post_type_slug => $post_type) {
+            if (in_array($post_type_slug,
+                            array('attachment', 'revision', 'nav_menu_item',
+                        'view', 'view-template'))) {
+                unset($post_types[$post_type_slug]);
+            }
+        }
+        $query[] = 'p.post_type IN (\'' . implode('\',\'', $post_types) . '\')';
+    }
+    if ($filter['terms'] != 'all' && !empty($filter['terms'])) {
+        $ttid = array();
+        foreach ($filter['terms'] as $term_id) {
+            $term_taxonomy_id = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE term_id=%d",
+                            $term_id));
+            if (!empty($term_taxonomy_id)) {
+                $ttid[] = $term_taxonomy_id;
+            }
+        }
+        $query[] = 't.term_taxonomy_id IN (\'' . implode('\',\'', $ttid) . '\')';
+        $join[] = "LEFT JOIN $wpdb->term_relationships t ON p.ID = t.object_id ";
+    }
+    if ($filter['templates'] != 'all' && !empty($filter['templates'])) {
+        $query[] = '(m.meta_key = \'_wp_page_template\' AND m.meta_value IN (\'' . implode('\',\'',
+                        $filter['templates']) . '\'))';
+        $join[] = "LEFT JOIN $wpdb->postmeta m ON p.ID = m.post_id ";
+    }
+    $_query = "SELECT DISTINCT p.ID FROM $wpdb->posts p " . implode('', $join);
+    $_query .= "WHERE NOT EXISTS (SELECT * FROM $wpdb->postmeta mm WHERE p.ID = mm.post_id AND mm.meta_key = '$meta_key')";
+    if (!empty($query)) {
+        $_query .= "AND (" . implode(' ' . $filter['association'] . ' ', $query) . ') ';
+    }
+    $_query .= "GROUP BY p.ID";
+    $posts = $wpdb->get_col($_query);
+    return $posts;
+}
+
+/**
+ * Check how many posts needs checkboxes update.
+ * 
+ * @param type $field
+ * @param type $action
+ * @return boolean|int 
+ */
+function wpcf_admin_fields_checkboxes_migrate_empty_check($field, $action) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (empty($field) || $field['type'] != 'checkboxes' || empty($field['data']['options'])) {
+        return false;
+    }
+    $filter = wpcf_admin_fields_get_filter_by_field($field['id']);
+    if (!empty($filter)) {
+        $posts = array();
+        $meta_key = wpcf_types_get_meta_prefix($field) . $field['id'];
+        $meta_query = '';
+        // "wpcf-fields-checkboxes-option-1873650245";s:1:"1";
+        if ($action == 'do_not_save_check') {
+            $query = array();
+            foreach ($field['data']['options'] as $option_id => $option_data) {
+                $query[] = '\"' . $option_id . '\";s:1:\"0\";';
+            }
+            $meta_query = "(m.meta_key = '$meta_key' AND (m.meta_value LIKE '%%"
+                    . implode("%%' OR m.meta_value LIKE '%%", $query) . "%%'))";
+            $posts = wpcf_admin_fields_get_posts_by_filter($filter, $meta_query);
+        } else if ($action == 'save_check') {
+            $query = array();
+            foreach ($field['data']['options'] as $option_id => $option_data) {
+                $query[] = '\"' . $option_id . '\";s:1:\"0\";';
+            }
+            $meta_query = "(m.meta_key = '$meta_key' AND (m.meta_value NOT LIKE '%%"
+                    . implode("%%' AND m.meta_value NOT LIKE '%%", $query) . "%%'))";
+            $posts = wpcf_admin_fields_get_posts_by_filter($filter, $meta_query);
+        }
+        $option = get_option('wpcf_checkboxes_migration', array());
+        $cache_key = $action == 'do_not_save_check' ? 'do_not_save' : 'save';
+        $option[$cache_key] = $posts;
+        update_option('wpcf_checkboxes_migration', $option);
+        return $posts;
+    }
+    return false;
+}
+
+/**
+ * Update posts checkboxes fields.
+ * 
+ * @param type $field
+ * @param type $action
+ * @return boolean|int 
+ */
+function wpcf_admin_fields_checkboxes_migrate_empty($field, $action) {
+    $field = wpcf_admin_fields_get_field($field);
+    if (empty($field) || $field['type'] != 'checkboxes' || empty($field['data']['options'])) {
+        return false;
+    }
+    $option = get_option('wpcf_checkboxes_migration', array());
+    $meta_key = wpcf_types_get_meta_prefix($field) . $field['id'];
+    if (empty($option[$action])) {
+        $posts = wpcf_admin_fields_checkboxes_migrate_empty_check($field['id'],
+                $action . '_check');
+    } else {
+        $posts = $option[$action];
+    }
+
+    if (!empty($posts)) {
+        if ($action == 'do_not_save') {
+            $count = 0;
+            foreach ($posts as $temp_key => $post_id) {
+                if ($count == 1000) {
+                    $option[$action] = $posts;
+                    update_option('wpcf_checkboxes_migration', $option);
+                    $data = array('offset' => $temp_key);
+                    return $data;
+                }
+                $meta_saved = get_post_meta($post_id, $meta_key);
+                if (!empty($meta_saved)) {
+                    foreach ($meta_saved as $key => $value) {
+                        if (!is_array($value)) {
+                            $value_check = array();
+                        } else {
+                            $value_check = $value;
+                        }
+                        foreach ($field['data']['options'] as $option_id => $option_data) {
+                            if (isset($value_check[$option_id])) {
+                                unset($value_check[$option_id]);
+                            }
+                        }
+                        update_post_meta($post_id, $meta_key, $value_check,
+                                $value);
+                    }
+                }
+                unset($posts[$temp_key]);
+                $count++;
+            }
+            unset($option[$action]);
+            update_option('wpcf_checkboxes_migration', $option);
+            return $posts;
+        } else if ($action == 'save') {
+            $count = 0;
+            foreach ($posts as $temp_key => $post_id) {
+                if ($count == 1000) {
+                    $option[$action] = $posts;
+                    update_option('wpcf_checkboxes_migration', $option);
+                    $data = array('offset' => $temp_key);
+                    return $data;
+                }
+                $meta_saved = get_post_meta($post_id, $meta_key);
+                if (!empty($meta_saved)) {
+                    foreach ($meta_saved as $key => $value) {
+                        if (!is_array($value)) {
+                            $value_check = array();
+                        } else {
+                            $value_check = $value;
+                        }
+                        $set_value = array();
+                        foreach ($field['data']['options'] as $option_id => $option_data) {
+                            if (!isset($value_check[$option_id])) {
+                                $set_value[$option_id] = 0;
+                            }
+                        }
+                        $updated_value = $value_check + $set_value;
+                        update_post_meta($post_id, $meta_key, $updated_value,
+                                $value);
+                    }
+                }
+                unset($posts[$temp_key]);
+                $count++;
+            }
+            unset($option[$action]);
+            update_option('wpcf_checkboxes_migration', $option);
+            return $posts;
+        }
+    }
+    return false;
+}

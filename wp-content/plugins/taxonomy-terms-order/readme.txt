@@ -3,14 +3,14 @@ Contributors: Nsp Code
 Donate link: http://www.nsp-code.com/donate.php
 Tags: category order,terms order, taxonomy order, admin order
 Requires at least: 2.8
-Tested up to: 3.3
-Stable tag: 1.2.7
+Tested up to: 3.4.1
+Stable tag: 1.2.9
 
-Order Categories and all custom taxonomies terms and child terms using a Drag and Drop Sortable javascript capability. No Theme update is required the code will change the query on the fly.
+Order Categories and all custom taxonomies terms and child terms using a Drag and Drop Sortable javascript capability. No Theme update is required.
 
 == Description ==
 
-Order Categories and all custom taxonomies terms using a Drag and Drop Sortable javascript capability. <b>No Theme update is required<b/> the code will change the query on the fly.
+Order Categories and all custom taxonomies terms using a Drag and Drop Sortable javascript capability. <strong>No Theme update is required</strong> the code will change the query on the fly.
 If multiple taxonomies are created for a custom post type, a menu will allow to chose the one you need sorted. If child categories (terms) are define, tose can be sorder too using the same interface
 <br />Also you can have the admin terms interface sorted per your new sort.
 <br />This plugin it's developed by <a target="_blank" href="http://www.nsp-code.com">Nsp-Code</a>
@@ -49,6 +49,10 @@ All ideas are welcome and i put them on my list to be implemented into the new v
 
 == Change Log ==
 
+= 1.2.9 = 
+ - Small updates
+ - Germa and French.
+
 = 1.2.7 = 
  - Localisation Implement, Dutch and Romanian.
  Many thanks to Anja Fokker  http://www.werkgroepen.net/
@@ -62,4 +66,4 @@ Make sure you get the latest version
 
 == Localization ==
 
-Currently only available in English, Dutch and Romanian
+Currently available in English, Dutch, French, Deutch and Romanian

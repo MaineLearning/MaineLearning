@@ -15,7 +15,7 @@
 	$table .= '<tr>';
 	$table .= '<td style="width: 220px; padding:5px 10px;"><a class="button-primary" href="' . admin_url('edit.php?post_type=view') . '">' . __('New View', 'wpv-views') . '</a></td>';
 	$table .= '<td style="width: 220px; padding:5px 10px;"><a class="button-primary" href="' . admin_url('edit.php?post_type=view-template') . '">' . __('New View Template', 'wpv-views') . '</a></td></tr>';
-	$table .= '</tbody><table>';
+	$table .= '</tbody></table>';
  	echo($table);
 ?>
 

@@ -108,7 +108,6 @@ jQuery(document).ready(function(){
                 object.parent().parent().fadeOut(function(){
                     jQuery(this).remove();
                 });
-                eval('window.wpcf_repetitive_count_'+field_id+' -= 1;');
             }
         });
         return false;
@@ -154,7 +153,7 @@ jQuery(document).ready(function(){
             // Bind message fade out
             jQuery('.wpcf-repetitive').live('click', function(){
                 jQuery(this).removeClass('wpcf-repetitive-error');
-                jQuery(this).prev().fadeOut(function(){
+                jQuery(this).parents('.wpcf-repetitive-wrapper').find('.wpcf-form-error-unique-value').fadeOut(function(){
                     jQuery(this).remove();
                 });
             });

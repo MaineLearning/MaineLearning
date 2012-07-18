@@ -196,13 +196,14 @@ class EM_Ticket extends EM_Object{
 		if( is_numeric(get_option('dbem_bookings_tax')) && get_option('dbem_bookings_tax') > 0 ){
 			//tax could be added here
 			if( $add_tax === true || ($add_tax !== false && get_option('dbem_bookings_tax_auto_add')) ){
-				$price = round($price * (1 + get_option('dbem_bookings_tax')/100),2);				
+				$price = round($price * (1 + get_option('dbem_bookings_tax')/100),2);
 			}
 		}
+		$price = apply_filters('em_ticket_get_price',$price,$this);
 		if($format){
-			return apply_filters('em_ticket_get_price', em_get_currency_formatted($price),$this);
+			return em_get_currency_formatted($price);
 		}
-		return apply_filters('em_ticket_get_price',$price,$this);
+		return $price;
 	}
 	
 	/**

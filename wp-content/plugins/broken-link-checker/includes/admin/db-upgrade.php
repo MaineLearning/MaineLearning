@@ -35,7 +35,7 @@ class blcDatabaseUpgrader {
 			
 		}
 		
-		$conf->options['current_db_version'] = 5;
+		$conf->options['current_db_version'] = BLC_DATABASE_VERSION;
 		$conf->save_options();
 		$blclog->info('Database successfully upgraded.');
 		
@@ -108,7 +108,7 @@ class blcDatabaseUpgrader {
 	}
 	
 	function upgrade_095($trigger_errors = false){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		//Prior to 0.9.5 all supported post types were internally represented using 
 		//a common 'post' container type. The current version creates a unique container 

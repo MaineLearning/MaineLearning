@@ -15,7 +15,7 @@ function wpv_initialize_filter_select(filter) {
         jQuery('#' + filter + '_con_' + type).show();
     
         jQuery('#' + filter + '_select').change(function() {
-            jQuery('.wpv_add_filter_con').each(function() {
+            jQuery('.wpv_add_filter_con_'+filter).each(function() {
                 jQuery(this).hide();
             });
             
@@ -50,20 +50,22 @@ function wpv_add_filter_submit(div_id) {
     var type = jQuery('#' + div_id + '_select').val();
     
     if (type.substr(0, 13) == 'custom-field-') {
-        wpv_add_edit_custom_field(div_id, type, 'add');
-        jQuery('option[value="'+type+'"]').hide();
-        jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
-        jQuery('#popup_add_filter_select').trigger('change');
-        wpv_initialize_filter_select('popup_add_custom_field');
+        if (wpv_add_edit_custom_field(div_id, type, 'add')) {
+			jQuery('option[value="'+type+'"]').hide();
+			jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
+			jQuery('#popup_add_filter_select').trigger('change');
+			wpv_initialize_filter_select('popup_add_custom_field');
+		}
         return;
     }
     
     if (type == 'post_category' || type.substr(0, 9) == 'tax_input') {
-        wpv_add_edit_taxonomy(div_id, type, 'add');
-        jQuery('option[value="'+type+'"]').hide();
-        jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
-        jQuery('#popup_add_filter_select').trigger('change');
-        wpv_initialize_filter_select('popup_add_category_field');
+        if (wpv_add_edit_taxonomy(div_id, type, 'add')) {
+			jQuery('option[value="'+type+'"]').hide();
+			jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
+			jQuery('#popup_add_filter_select').trigger('change');
+			wpv_initialize_filter_select('popup_add_category_field');
+		}
         return;
     }
     
@@ -180,6 +182,11 @@ function wpv_add_filter_submit(div_id) {
     tb_remove();
  
  	show_view_changed_message();
+	
+	if (mode == 'visitor') {
+		// Add filter controls for search
+		wpv_add_filter_controls_for_search();
+	}
    
 }
 
