@@ -413,6 +413,10 @@ if (!class_exists('GFCPTAddonBase')) {
               $terms = $entry[$field['id']];
               if ( !empty($terms) )
                 wp_set_post_terms( $entry['post_id'], $terms, $taxonomy );
+            } else if ( array_key_exists( 'type', $field ) && $field['type'] == 'multiselect' ) {
+              // terms are passed as comma-separated
+              $term_ids = wp_parse_id_list( $entry[$field['id']] );
+              wp_set_object_terms( $entry['post_id'], $term_ids, $taxonomy, true );
             } else {
                 $term_id = (int) $entry[$field['id']];
                 if ( $term_id > 0 )
