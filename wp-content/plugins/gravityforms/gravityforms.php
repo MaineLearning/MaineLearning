@@ -3,8 +3,8 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.4.5.4
-Author: Rocketgenius Inc.
+Version: 1.6.5.1
+Author: rocketgenius
 Author URI: http://www.rocketgenius.com
 
 ------------------------------------------------------------------------
@@ -633,7 +633,7 @@ class RGForms{
         if(!empty($wpdb->last_error))
             $has_permission = false;
 
-        $sql = "ALTER TABLE {$wpdb->prefix}rg_test ADD COLUMN " . uniqid() ." int";
+        $sql = "ALTER TABLE {$wpdb->prefix}rg_test ADD COLUMN a" . uniqid() ." int";
         $wpdb->query($sql);
         $error = "Current database user does not have necessary permissions to modify (ALTER) tables.";
         if(!empty($wpdb->last_error))
