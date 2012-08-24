@@ -38,7 +38,8 @@ function relevanssi_init() {
 		function relevanssi_warning() {
 			RELEVANSSI_PREMIUM ? $plugin = 'relevanssi-premium' : $plugin = 'relevanssi';
 			echo "<div id='relevanssi-warning' class='updated fade'><p><strong>"
-			   . sprintf(__('Relevanssi needs attention: Remember to build the index (you can do it at <a href="%1$s">the settings page</a>), otherwise searching won\'t work.'), "options-general.php?page=" . $plugin . "/relevanssi.php")
+			   . sprintf(__('Relevanssi needs attention: Remember to build the index (you can do it at <a href="%1$s">the
+			   settings page</a>), otherwise searching won\'t work.'), "options-general.php?page=" . $plugin . "/relevanssi.php")
 			   . "</strong></p></div>";
 		}
 		add_action('admin_notices', 'relevanssi_warning');
@@ -83,7 +84,7 @@ function relevanssi_menu() {
 	add_dashboard_page(
 		__('User searches', 'relevanssi'),
 		__('User searches', 'relevanssi'),
-		'edit_pages',
+		apply_filters('relevanssi_user_searches_capability', 'edit_pages'),
 		$relevanssi_variables['file'],
 		'relevanssi_search_stats'
 	);
@@ -162,32 +163,32 @@ function relevanssi_create_database_tables($relevanssi_db_version) {
 		$sql = "CREATE INDEX docs ON $relevanssi_table (doc)";
 		$wpdb->query($sql);
 
-		$sql = "CREATE TABLE " . $relevanssi_stopword_table . " (stopword varchar(50) $charset_collate_bin_column NOT NULL, "
-	    . "UNIQUE KEY stopword (stopword)) $charset_collate;";
+		$sql = "CREATE TABLE " . $relevanssi_stopword_table . " (stopword varchar(50) $charset_collate_bin_column NOT NULL,
+	    UNIQUE KEY stopword (stopword)) $charset_collate;";
 
 		dbDelta($sql);
 
-		$sql = "CREATE TABLE " . $relevanssi_log_table . " (id bigint(9) NOT NULL AUTO_INCREMENT, "
-		. "query varchar(200) NOT NULL, "
-		. "hits mediumint(9) NOT NULL DEFAULT '0', "
-		. "time timestamp NOT NULL, "
-		. "user_id bigint(20) NOT NULL DEFAULT '0', "
-		. "ip varchar(40) NOT NULL DEFAULT '', "
-	    . "UNIQUE KEY id (id)) $charset_collate;";
+		$sql = "CREATE TABLE " . $relevanssi_log_table . " (id bigint(9) NOT NULL AUTO_INCREMENT, 
+		query varchar(200) NOT NULL,
+		hits mediumint(9) NOT NULL DEFAULT '0',
+		time timestamp NOT NULL,
+		user_id bigint(20) NOT NULL DEFAULT '0',
+		ip varchar(40) NOT NULL DEFAULT '',
+	    UNIQUE KEY id (id)) $charset_collate;";
 
 		dbDelta($sql);
 	
-		$sql = "CREATE TABLE " . $relevanssi_cache . " (param varchar(32) $charset_collate_bin_column NOT NULL, "
-		. "hits text NOT NULL, "
-		. "tstamp timestamp NOT NULL, "
-	    . "UNIQUE KEY param (param)) $charset_collate;";
+		$sql = "CREATE TABLE " . $relevanssi_cache . " (param varchar(32) $charset_collate_bin_column NOT NULL,
+		hits text NOT NULL,
+		tstamp timestamp NOT NULL,
+	    UNIQUE KEY param (param)) $charset_collate;";
 
 		dbDelta($sql);
 
-		$sql = "CREATE TABLE " . $relevanssi_excerpt_cache . " (query varchar(100) $charset_collate_bin_column NOT NULL, "
-		. "post mediumint(9) NOT NULL, "
-		. "excerpt text NOT NULL, "
-	    . "UNIQUE (query, post)) $charset_collate;";
+		$sql = "CREATE TABLE " . $relevanssi_excerpt_cache . " (query varchar(100) $charset_collate_bin_column NOT NULL, 
+		post mediumint(9) NOT NULL, 
+		excerpt text NOT NULL, 
+	    UNIQUE (query, post)) $charset_collate;";
 
 		dbDelta($sql);
 
