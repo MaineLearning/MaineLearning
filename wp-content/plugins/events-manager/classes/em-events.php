@@ -65,8 +65,7 @@ class EM_Events extends EM_Object implements Iterator {
 		
 		//Get ordering instructions
 		$EM_Event = new EM_Event();
-		$accepted_fields = $EM_Event->get_fields(true);
-		$orderby = self::build_sql_orderby($args, $accepted_fields, get_option('dbem_events_default_order'));
+		$orderby = self::build_sql_orderby($args, array_keys($EM_Event->fields), get_option('dbem_events_default_order'));
 		//Now, build orderby sql
 		$orderby_sql = ( count($orderby) > 0 ) ? 'ORDER BY '. implode(', ', $orderby) : '';
 		
@@ -282,7 +281,7 @@ class EM_Events extends EM_Object implements Iterator {
 		}elseif( !empty($args['private_only']) ){
 			$conditions['private_only'] = "(`event_private`=1)";
 		}
-		if( EM_MS_GLOBAL && array_key_exists('blog',$args) && is_numeric($args['blog']) ){
+		if( EM_MS_GLOBAL && !empty($args['blog']) && is_numeric($args['blog']) ){
 			if( is_main_site($args['blog']) ){
 				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']} OR ".EM_EVENTS_TABLE.".blog_id IS NULL)";
 			}else{
@@ -341,11 +340,8 @@ class EM_Events extends EM_Object implements Iterator {
 			'post_id' => false
 		);
 		if(EM_MS_GLOBAL){
-			global $bp;
-			if( !is_main_site() && !array_key_exists('blog', $array) ){
-				$array['blog'] = get_current_blog_id();
-			}elseif( empty($array['blog']) && get_site_option('dbem_ms_global_events') ) {
-				$array['blog'] = false;
+			if( empty($array['blog']) && is_main_site() && get_site_option('dbem_ms_global_events') ){
+			    $array['blog'] = false;
 			}
 		}
 		if( is_admin() ){

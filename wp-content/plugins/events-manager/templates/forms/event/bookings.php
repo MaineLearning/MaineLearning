@@ -110,22 +110,24 @@ global $EM_Event, $post;
 				?>
 			</tbody>
 		</table>
-		<p>
-			<label><strong><?php _e('Total Spaces','dbem'); ?></strong></label>
-			<input type="text" name="event_spaces" value="<?php echo $EM_Event->event_spaces; ?>" /><br />
-			<em><?php _e('Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit.','dbem'); ?></em>
-		</p>
-		<p>
-			<label><strong><?php _e('Booking Cut-Off Date','dbem'); ?></strong></label>
-			<span class="em-date-single">
-				<input id="em-bookings-date-loc" class="em-date-input-loc" type="text" />
-				<input id="em-bookings-date" class="em-date-input" type="hidden" name="event_rsvp_date" value="<?php echo $EM_Event->event_rsvp_date; ?>" />
-			</span>
-			<input type="text" name="event_rsvp_time" class="em-time-input" maxlength="8" size="8" value="<?php echo date( em_get_hour_format(), $EM_Event->rsvp_end ); ?>">
-			<br />
-			<em><?php _e('This is the definite date after which bookings will be closed for this event, regardless of individual ticket settings above. Default value will be the event start date.','dbem'); ?></em>
-		</p>
 	<?php } ?>
+	<p>
+		<label><strong><?php _e('Total Spaces','dbem'); ?></strong></label>
+		<input type="text" name="event_spaces" value="<?php echo $EM_Event->event_spaces; ?>" /><br />
+		<em><?php _e('Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit.','dbem'); ?></em>
+	</p>
+	<?php if( !$EM_Event->is_recurring() ): ?>
+	<p>
+		<label><strong><?php _e('Booking Cut-Off Date','dbem'); ?></strong></label>
+		<span class="em-date-single">
+			<input id="em-bookings-date-loc" class="em-date-input-loc" type="text" />
+			<input id="em-bookings-date" class="em-date-input" type="hidden" name="event_rsvp_date" value="<?php echo $EM_Event->event_rsvp_date; ?>" />
+		</span>
+		<input type="text" name="event_rsvp_time" class="em-time-input" maxlength="8" size="8" value="<?php echo date( em_get_hour_format(), $EM_Event->rsvp_end ); ?>">
+		<br />
+		<em><?php _e('This is the definite date after which bookings will be closed for this event, regardless of individual ticket settings above. Default value will be the event start date.','dbem'); ?></em>
+	</p>
+	<?php endif; ?>
 	<?php do_action('em_events_admin_bookings_footer', $EM_Event); ?>
 </div>
 <script type="text/javascript">

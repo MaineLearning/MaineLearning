@@ -21,11 +21,13 @@ class EM_Widget_Calendar extends WP_Widget {
     /** @see WP_Widget::widget */
     function widget($args, $instance) {
     	$instance = array_merge($this->defaults, $instance);
-		echo $args['before_widget'];
-	    echo $args['before_title'];
-	    echo $instance['title'];
-	    echo $args['after_title'];
-	    
+
+    	echo $args['before_widget'];
+    	if( !empty($instance['title']) ){
+		    echo $args['before_title'];
+		    echo $instance['title'];
+		    echo $args['after_title'];
+    	}
     	//Shall we show a specific month?
 		if ( !empty($_REQUEST['calendar_day']) ) {
 			$date = explode('-', $_REQUEST['calendar_day']);
@@ -44,7 +46,7 @@ class EM_Widget_Calendar extends WP_Widget {
     /** @see WP_Widget::update */
     function update($new_instance, $old_instance) {
     	//filter the new instance and replace blanks with defaults
-    	$new_instance['title'] = ($new_instance['title'] == '') ? $this->defaults['title']:$new_instance['title'];
+    	$new_instance['title'] = (!isset($new_instance['title'])) ? $this->defaults['title']:$new_instance['title'];
     	$new_instance['long_events'] = ($new_instance['long_events'] == '') ? $this->defaults['long_events']:$new_instance['long_events'];
     	$new_instance['category'] = ($new_instance['category'] == '') ? $this->defaults['category']:$new_instance['category'];
     	return $new_instance;

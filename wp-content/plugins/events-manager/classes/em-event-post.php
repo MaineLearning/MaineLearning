@@ -21,6 +21,18 @@ class EM_Event_Post {
 			add_filter('the_category',array('EM_Event_Post','the_category'),10,3);
 		}
 		add_action('parse_query', array('EM_Event_Post','parse_query'));
+		add_action('publish_future_post',array('EM_Event_Post','publish_future_post'),10,1);
+	}
+	
+	function publish_future_post($post_id){
+		global $wpdb, $EM_Event, $EM_Location, $EM_Notices;
+		$post_type = get_post_type($post_id);
+		$is_post_type = $post_type == EM_POST_TYPE_EVENT || $post_type == 'event-recurring';
+		$saving_status = !in_array(get_post_status($post_id), array('trash','auto-draft')) && !defined('DOING_AUTOSAVE');
+		if(!defined('UNTRASHING_'.$post_id) && $is_post_type && $saving_status ){
+		    $EM_Event = em_get_event($post_id, 'post_id');
+		    $EM_Event->set_status(1);
+		}
 	}
 	
 	/**

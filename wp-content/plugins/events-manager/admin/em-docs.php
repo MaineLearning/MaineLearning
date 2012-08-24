@@ -27,7 +27,6 @@ function em_docs_init($force_init = false){
 					'search' => array( 'desc'=> 'Do a search for this string within event name, details and location address.' ),
 					'status' => array( 'desc' => sprintf('Limit search to %s with a spefic status (1 is active, 0 is pending approval)','events'), 'default'=>1),
 					'scope' => array( 'desc'=> 'Choose the time frame of events to show. Additionally you can supply dates (in format of YYYY-MM-DD), either single for events on a specific date or two dates seperated by a comma (e.g. 2010-12-25,2010-12-31) for events ocurring between these dates.', 'default'=>'future', 'args'=>array("future", "past", "today", "tomorrow", "month", "next-month", "1-months", "2-months", "3-months", "6-months", "12-months","all")),
-					'category' => array( 'desc'=> sprintf('Supply a single id or comma-seperated ids (e.g. "1,2,3") to limit the search to events in these %s.','tags'), 'default'=>0),
 					'year' => array( 'desc'=> 'If set to a year (e.g. 2010) only events that start or end during this year/month will be returned. Does not work as intended if used with scope.', 'default'=>''),
 				),
 				'locations' => array(
@@ -130,7 +129,8 @@ function em_docs_init($force_init = false){
 							'#_BOOKEDSPACES' => array( 'desc' => 'Shows the amount of currently booked spaces for the event.' ),
 							'#_PENDINGSPACES' => array( 'desc' => 'Shows the amount of pending spaces for the event.' ),
 							'#_SPACES' => array( 'desc' => 'Shows the total spaces for the event.' ),
-							'#_ATTENDEES' => array( 'desc' => 'Shows the list of user avatars attending events.' ),
+							'#_ATTENDEES' => array( 'desc' => 'Shows the list of user avatars attending the event.' ),
+							'#_ATTENDEESLIST' => array( 'desc' => 'Shows the list of people attending the event.' ),
 							'#_BOOKINGSURL' => array( 'desc' => 'Shows the url to the admin, front-end or buddypress (if activated) bookings management page for this event. Only shown if user is logged in and able to manage bookings.' ),
 							'#_BOOKINGSLINK' => array( 'desc' => 'Shows a link to the admin, front-end or buddypress (if activated) bookings management page for this event. Only shown if user is logged in and able to manage bookings.' ),
 							'#_EVENTPRICERANGE' => array( 'desc' => 'Shows a "maximum - minimum" price range, or a single price if there is no range. Price is formatted according to currency formatting in your settings page.' ),

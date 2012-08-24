@@ -16,6 +16,6 @@ function em_bp_slug() {
 	function em_bp_get_slug() {
 		global $bp;
 		// Avoid PHP warnings, in case the value is not set for some reason
-		$slug = !empty( $bp->evebts->slug ) ? $bp->events->slug : BP_EM_SLUG;
+		$slug = !empty( $bp->events->slug ) ? $bp->events->slug : BP_EM_SLUG;
 		return apply_filters( 'em_bp_get_slug', $slug );
 	}

@@ -117,6 +117,25 @@ function em_get_categories_shortcode($args, $format=''){
 add_shortcode ( 'categories_list', 'em_get_categories_shortcode' );
 
 /**
+ * Shows a single location according to given specifications. Accepts any event query attribute.
+ * @param array $atts
+ * @return string
+ */
+function em_get_event_category_shortcode($atts, $format='') {
+	$atts = (array) $atts;
+	$atts['format'] = ($format != '' || empty($atts['format'])) ? $format : $atts['format']; 
+	$atts['format'] = html_entity_decode($atts['format']); //shorcode doesn't accept html
+	if( !empty($atts['category']) && is_numeric($atts['category']) ){
+		$EM_Category = new EM_Category($atts['category']);
+		return ( !empty($atts['format']) ) ? $EM_Category->output($atts['format']) : $EM_Category->output_single();
+	}elseif( !empty($atts['post_id']) && is_numeric($atts['post_id']) ){
+		$EM_Category = new EM_Category($atts['post_id'],'post_id');
+		return ( !empty($atts['format']) ) ? $EM_Category->output($atts['format']) : $EM_Category->output_single();
+	}
+}
+add_shortcode ( 'event_category', 'em_get_event_category_shortcode' );
+
+/**
  * DO NOT DOCUMENT! This should be replaced with shortcodes events-link and events_uri
  * @param array $atts
  * @return string

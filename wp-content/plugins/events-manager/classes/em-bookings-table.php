@@ -53,8 +53,8 @@ class EM_Bookings_Table{
 			'all' => array('label'=>__('All','dbem'), 'search'=>false),
 			'pending' => array('label'=>__('Pending','dbem'), 'search'=>0),
 			'confirmed' => array('label'=>__('Confirmed','dbem'), 'search'=>1),
-			'cancelled' => array('label'=>__('Cancelled','dbem'), 'search'=>2),
-			'rejected' => array('label'=>__('Rejected','dbem'), 'search'=>3),
+			'cancelled' => array('label'=>__('Cancelled','dbem'), 'search'=>3),
+			'rejected' => array('label'=>__('Rejected','dbem'), 'search'=>2),
 			'needs-attention' => array('label'=>__('Needs Attention','dbem'), 'search'=>array(0)),
 			'incomplete' => array('label'=>__('Incomplete Bookings','dbem'), 'search'=>array(0))
 		);
@@ -74,6 +74,8 @@ class EM_Bookings_Table{
 		//build template of possible collumns
 		$this->cols_template = apply_filters('em_bookings_table_cols_template', array(
 			'user_name'=>__('Name','dbem'),
+			'first_name'=>__('First Name','dbem'),
+			'last_name'=>__('Last Name','dbem'),
 			'event_name'=>__('Event','dbem'),
 			'event_date'=>__('Event Date(s)','dbem'),
 			'event_time'=>__('Event Time(s)','dbem'),
@@ -176,6 +178,11 @@ class EM_Bookings_Table{
 		return false;
 	}
 	
+	/**
+	 * Gets the bookings for this object instance according to its settings
+	 * @param boolean $force_refresh
+	 * @return EM_Bookings
+	 */
 	function get_bookings($force_refresh = true){	
 		if( empty($this->bookings) || $force_refresh ){
 			$this->events = array();
@@ -349,6 +356,7 @@ class EM_Bookings_Table{
 				<?php if( $EM_Person !== false ): ?>
 				<input type="hidden" name="person_id" value='<?php echo $EM_Person->ID; ?>' />
 				<?php endif; ?>
+				<input type="hidden" name="is_public" value="<?php echo is_admin() ? 1:0; ?>" />
 				<input type="hidden" name="pno" value='<?php echo $this->page ?>' />
 				<input type="hidden" name="order" value='<?php echo $this->order ?>' />
 				<input type="hidden" name="orderby" value='<?php echo $this->orderby ?>' />
@@ -518,6 +526,10 @@ class EM_Bookings_Table{
 				}else{
 					$cols[] = '<a href="'.add_query_arg(array('person_id'=>$EM_Booking->person_id, 'event_id'=>null), $EM_Booking->get_event()->get_bookings_url()).'">'. $EM_Booking->person->get_name() .'</a>';
 				}
+			}elseif($col == 'first_name'){
+				$cols[] = $EM_Booking->get_person()->first_name;
+			}elseif($col == 'last_name'){
+				$cols[] = $EM_Booking->get_person()->last_name;
 			}elseif($col == 'event_name'){
 				if( $csv ){
 					$cols[] = $EM_Booking->get_event()->event_name;
@@ -579,7 +591,7 @@ class EM_Bookings_Table{
 				}//if approvals are off, treat as a 1
 			case 1:
 				$booking_actions = array(
-					'unapprove' => '<a class="em-bookings-unapprove" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_unapprove', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Unpprove','dbem').'</a>',
+					'unapprove' => '<a class="em-bookings-unapprove" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_unapprove', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Unapprove','dbem').'</a>',
 					'reject' => '<a class="em-bookings-reject" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_reject', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Reject','dbem').'</a>',
 					'delete' => '<span class="trash"><a class="em-bookings-delete" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_delete', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Delete','dbem').'</a></span>',
 					'edit' => '<a class="em-bookings-edit" href="'.em_add_get_params($EM_Booking->get_event()->get_bookings_url(), array('booking_id'=>$EM_Booking->booking_id, 'em_ajax'=>null, 'em_obj'=>null)).'">'.__('Edit/View','dbem').'</a>',
@@ -587,7 +599,6 @@ class EM_Bookings_Table{
 				break;
 			case 2:
 				$booking_actions = array(
-					'unapprove' => '<a class="em-bookings-unapprove" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_unapprove', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Unpprove','dbem').'</a>',
 					'approve' => '<a class="em-bookings-approve" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_approve', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Approve','dbem').'</a>',
 					'delete' => '<span class="trash"><a class="em-bookings-delete" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_delete', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Delete','dbem').'</a></span>',
 					'edit' => '<a class="em-bookings-edit" href="'.em_add_get_params($EM_Booking->get_event()->get_bookings_url(), array('booking_id'=>$EM_Booking->booking_id, 'em_ajax'=>null, 'em_obj'=>null)).'">'.__('Edit/View','dbem').'</a>',
@@ -595,7 +606,6 @@ class EM_Bookings_Table{
 				break;
 			case 3:
 				$booking_actions = array(
-					'unapprove' => '<a class="em-bookings-unapprove" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_unapprove', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Unpprove','dbem').'</a>',
 					'approve' => '<a class="em-bookings-approve" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_approve', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Approve','dbem').'</a>',
 					'delete' => '<span class="trash"><a class="em-bookings-delete" href="'.em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'bookings_delete', 'booking_id'=>$EM_Booking->booking_id)).'">'.__('Delete','dbem').'</a></span>',
 					'edit' => '<a class="em-bookings-edit" href="'.em_add_get_params($EM_Booking->get_event()->get_bookings_url(), array('booking_id'=>$EM_Booking->booking_id, 'em_ajax'=>null, 'em_obj'=>null)).'">'.__('Edit/View','dbem').'</a>',

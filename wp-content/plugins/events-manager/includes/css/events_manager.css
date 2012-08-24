@@ -64,6 +64,9 @@
 		#event-form .em-location-map-container, #event-form .em-location-map-404, #event-form .em-location-map-content { width: 400px; height: 300px; float:left; }
 		#event-form .em-location-map-404 { vertical-align:middle; text-align: center; }
 /* Booking Admin */
+	/* Generic Table Info */
+	table.em-form-fields td, table.em-form-fields th { text-align:left; vertical-align:top; }
+	table.em-form-fields th { padding:0px 20px 5px 0px; }		
 	/* Bookings Table */
 		.em_obj { position:relative; }
 		.em-bookings-table .em-bookings-table-export, .em-bookings-table .em-bookings-table-settings { float:left; display:block; margin:2px 5px; width:25px; height:25px;  }
@@ -80,7 +83,8 @@
 				#em-bookings-export-cols-inactive, #em-bookings-cols-inactive { width:300px; }	
 				#em-bookings-export-cols-inactive li, #em-bookings-cols-inactive li { float:left; }
 	/* Single Booking Edit View */
-		#em-bookings-admin-booking .em-booking-single-info { display:none; }		
+		#em-bookings-admin-booking .em-booking-single-info { display:none; }
+		#em-bookings-admin-booking .em-booking-single-form { padding-right:20px; }		
 		
 /* Printable stuff */
 	body#printable { font-family: Gill Sans, Helvetica, Arial, sans-serif; text-align: center; }  
@@ -101,7 +105,7 @@
 	table.em-calendar td.eventful-pre a, table.em-calendar td.eventful-post a{ color: #aaa; text-decoration:underline; }
 	table.em-calendar td.eventful a, table.em-calendar td.eventful-today a { color: #FD7E29; }
 	table.em-calendar td.eventful-today a { font-weight: bold; }
-	table.em-calendar td.eventless-today { background-color: #CFCFCF; }
+	table.em-calendar td.eventless-today, table.em-calendar td.eventful-today { background-color: #CFCFCF; }
 	table.em-calendar thead { font-size: 120%; font-weight: bold; }
 	table.fullcalendar { border-collapse: collapse; }
 	table.fullcalendar td { text-align: left; width: 50px; height: 50px; border: 1px solid #888; }
@@ -128,8 +132,8 @@ Please edit your theme's CSS to override this
 		border:none !important; 
 		margin:0 !important; 
 		padding:0 !important; 
-		height:auto !important; 
-		width:auto !important;
+		height:auto; 
+		width:auto;
 	}
 
 /* Time Picker */

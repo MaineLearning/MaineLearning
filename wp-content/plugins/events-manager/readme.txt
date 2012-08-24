@@ -4,7 +4,7 @@ Donate link: http://wp-events-plugin.com
 Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 5.1.8.5
+Stable tag: 5.2.1
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -98,6 +98,66 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.2.1 =
+* quick fix for fatal error on front-side event submit forms when bp is disabled
+
+= 5.2 =
+* reversed order of settings link in plugins page
+* updated French, Czech, Dutch and pot language files
+* fixed category page display problems on some themes (e.g. Thesis) and for some plugins using the loop on the same page
+* added rss pubdate to individual events
+* removed cut-off time for now from recurring events, since it copies same date over to every recurrence
+* fixed bug in bookings table ajax
+* updated to PHPMailer 5.2.1, added attachment capabilities and the em_mailer or em_mailer_sent actions
+* fixed magnified google maps logo size
+* fixed admin emails not going out on event submission under some configurations
+* improvements to permalinks for home page loading
+* added first/last name collumn to bookings admin table
+* added conditional placeholders for location image has_loc_image and no_loc_image
+* fixed cancelled/rejected mixup in bookings admin table
+* single booking button will show 'Sold Out' if full
+* booking cancel link will not show to rejected, cancelled, pending online payment statuses
+* fixed yearly recurrences bug
+* added em_get_currency_formatted filter 
+* added event_category shortcode
+* fixed search bug not showing long events outside start/end parameters
+* fixed event form not showing submitted data on validation fail during second event submit
+* added event re-submission and re-approval custom emails
+* added has_category_x, no_category_x, has_tag_x, and no_tag
+* my-bookings auto permalink won't happen if bookings disabled
+* added israeli translation
+* added choice of initial length for calendar day names
+* template modification: passed on $EM_Event to em_booking_form_custom action, may prevent some bugs in certain situations
+* fixed ical modified timestamp issue
+* fixed scheduled events not being published
+* fixed incorrect event links to cross blog events in MultiSite global mode
+* added $post_ids to em_event_save_events filter
+* updated booking button, made button text customizable and moved the js out of the template file
+* updated forms/event/groups.php template to allow for site admins to see all bp groups
+* updated ui-lightness.css jQuery UI CSS Framework file to v1.8.22
+* fixed templates/templates/events-search.php to prevent showing unapproved locations in dropdowns
+* fixed admin CSS and JS locations using WP_PLUGIN_URL instead of plugins_url()
+* fixed global events and locations not showing up in MS subsites
+* fixed dev-mod updating in MS network admin
+* added a test email settings button/feature
+* fixed grouping by date fomrat option in settings page not being used
+* tidied up location autocompleter formatting
+* fixed potential timepicker bug when themes add extra br tags between timepickers
+* fixed maps not loading when updating events
+* fixed ical description formatting issue escaping &
+* fixed default location not showing on second event form update
+* fixed booking table links going to admin area on public pages after ajax calls
+* fixed ical time and time placeholder output issues
+* fixed event form breaking when BP groups are deactivated
+* fixed printable booking report showing non-approved bookings
+* fixed widgets not allowing blank titles and disappearing widget headers
+* removed weekly recurring events days checked by default
+* removed some optional properties to the ical files, including X-WR-CALNAME
+* fixed weekly recurrence bug skipping first event on some instances
+* fixed rejected bookings counting as double bookings
+* removed unapprove link showing up for rejected/cancelled events
+* added bookings link to actions on the wp users admin page
+
 = 5.1.8.5 =
 * fixed bug with bookings being open/closed due to changes in 5.1.8.5
 

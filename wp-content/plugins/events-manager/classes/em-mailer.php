@@ -16,7 +16,7 @@ class EM_Mailer {
 	 * @param $body
 	 * @param $receiver
 	 */
-	function send($subject="no title",$body="No message specified", $receiver='') {
+	function send($subject="no title",$body="No message specified", $receiver='', $attachments = array() ) {
 		//TODO add an EM_Error global object, for this sort of error reporting. (@marcus like StatusNotice)
 		global $smtpsettings, $phpmailer, $cformsSettings;
 		if( is_array($receiver) ){
@@ -76,7 +76,19 @@ class EM_Mailer {
 			$mail->From = get_option('dbem_mail_sender_address');			
 			$mail->FromName = get_option('dbem_mail_sender_name'); // This is the from name in the email, you can put anything you like here
 			$mail->Body = $body;
-			$mail->Subject = $subject;  
+			$mail->Subject = $subject;
+			//add attachments
+			foreach($attachments as $attachment){
+			    $att = array('name'=> '', 'encoding' => 'base64', 'type' => 'application/octet-stream');
+			    if( is_array($attachment) ){
+			        $att = array_merge($att, $attachment);
+			    }else{
+			        $att['path'] = $attachment;
+			    }
+			    $mail->AddAttachment($att['path'], $att['name'], $att['encoding'], $att['type']);
+			}
+			
+			do_action('em_mailer', $mail); //$mail will still be modified  
 			if(is_array($receiver)){
 				foreach($receiver as $receiver_email){
 					$mail->AddAddress($receiver_email);	
@@ -98,6 +110,7 @@ class EM_Mailer {
 			if(!$send){
 				$this->errors[] = $mail->ErrorInfo;
 			}
+			do_action('em_mailer_sent', $mail, $send); //$mail can still be modified
 			return $send;
 		}else{
 			$this->errors = __('Please supply a valid email format.', 'dbem');

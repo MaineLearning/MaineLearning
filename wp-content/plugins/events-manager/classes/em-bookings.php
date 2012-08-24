@@ -449,7 +449,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 		}
 		if( is_numeric($user_id) && $user_id > 0 ){
 			foreach ($this->bookings as $EM_Booking){
-				if( $EM_Booking->person->ID == $user_id && $EM_Booking->booking_status != 3 ){
+				if( $EM_Booking->person->ID == $user_id && !in_array($EM_Booking->booking_status, array(2,3)) ){
 					return apply_filters('em_bookings_has_booking', $EM_Booking, $this);
 				}
 			}	

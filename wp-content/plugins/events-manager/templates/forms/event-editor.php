@@ -20,11 +20,10 @@ $required = '*';
 echo $EM_Notices;
 //Success notice
 if( !empty($_REQUEST['success']) ){
-	$EM_Event = new $EM_Event(); //reset the event
 	if(!get_option('dbem_events_form_reshow')) return false;
 }
 ?>	
-<form enctype='multipart/form-data' id="event-form" method="post" action="">
+<form enctype='multipart/form-data' id="event-form" method="post" action="<?php echo add_query_arg(array('success'=>null)); ?>">
 	<div class="wrap">
 		<?php do_action('em_front_event_form_header'); ?>
 		<?php if(get_option('dbem_events_anonymous_submissions') && !is_user_logged_in()): ?>
@@ -46,35 +45,7 @@ if( !empty($_REQUEST['success']) ){
 			<input type="text" name="event_name" id="event-name" value="<?php echo htmlspecialchars($EM_Event->event_name,ENT_QUOTES); ?>" /><?php echo $required; ?>
 			<br />
 			<?php _e ( 'The event name. Example: Birthday party', 'dbem' )?>
-			<?php if( empty($EM_Event->group_id) ): ?>
-				<?php 
-				$user_groups = array();
-				if( !empty($bp->groups) ){
-					$group_data = groups_get_user_groups(get_current_user_id());
-					foreach( $group_data['groups'] as $group_id ){
-						if( groups_is_user_admin(get_current_user_id(), $group_id) ){
-							$user_groups[] = groups_get_group( array('group_id'=>$group_id)); 
-						}
-					}
-				} 
-				?>
-				<?php if( count($user_groups) > 0 ): ?>
-				<p>
-					<select name="group_id">
-						<option value="<?php echo $BP_Group->id; ?>">Not a Group Event</option>
-					<?php
-					foreach($user_groups as $BP_Group){
-						?>
-						<option value="<?php echo $BP_Group->id; ?>"><?php echo $BP_Group->name; ?></option>
-						<?php
-					} 
-					?>
-					</select>
-					<br />
-					<?php _e ( 'Select a group you admin to attach this event to it. Note that all other admins of that group can modify the booking, and you will not be able to unattach the event without deleting it.', 'dbem' )?>
-				</p>
-				<?php endif; ?>
-			<?php endif; ?>
+			<?php em_locate_template('forms/event/group.php',true); ?>
 		</div>
 					
 		<h4 class="event-form-when"><?php _e ( 'When', 'dbem' ); ?></h4>

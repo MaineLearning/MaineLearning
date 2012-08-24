@@ -166,7 +166,7 @@ function em_get_countries($add_blank = false){
 		if(is_array($add_blank)){
 			$em_countries_array = $add_blank + $em_countries_array;
 		}else{
-			array_unshift($em_countries_array, $add_blank);
+		    $em_countries_array = array(0 => $add_blank) + $em_countries_array;
 		}
 	}
 	return apply_filters('em_get_countries', $em_countries_array);
@@ -207,7 +207,7 @@ function em_get_currency_formatted($price, $currency=false, $format=false){
 	if(!$currency) $currency = get_option('dbem_bookings_currency');
 	$formatted_price = str_replace('@', em_get_currency_symbol(true,$currency), $format);
 	$formatted_price = str_replace('#', number_format( $price, 2, get_option('dbem_bookings_currency_decimal_point','.'), get_option('dbem_bookings_currency_thousands_sep',',') ), $formatted_price);
-	return $formatted_price;
+	return apply_filters('em_get_currency_formatted', $formatted_price, $price, $currency, $format);
 }
 
 function em_get_currency_symbol($true_symbol = false, $currency = false){
@@ -340,10 +340,11 @@ function em_register_new_user( $user_data ) {
 	$errors = apply_filters( 'registration_errors', $errors, $sanitized_user_login, $user_email );
 	ob_clean();
 
-	if ( $errors->get_error_code() )
-		return $errors;
+	if ( $errors->get_error_code() ) return $errors;
 
-	$user_data['user_pass'] = wp_generate_password( 12, false);
+	if(empty($user_data['user_pass'])){
+		$user_data['user_pass'] =  wp_generate_password( 12, false);
+	}
 
 	$user_id = wp_insert_user( $user_data );
 	if( is_numeric($user_id) && !empty($user_data['dbem_phone']) ){
