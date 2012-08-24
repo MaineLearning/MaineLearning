@@ -74,19 +74,43 @@ function ass_group_notification_forum_posts( $post_id ) {
 
 	$is_topic = false;
 
+	// initialize faux activity object for backpat filter reasons
+	//
+	// due to r-a-y being an idiot here:
+	// https://github.com/boonebgorges/buddypress-group-email-subscription/commit/526b80c617fe9058a859ac4eb4cfb1d42d333aa0
+	//
+	// because we moved the email recording process to 'bb_new_post' from the BP activity save hook,
+	// we need to ensure that 3rd-party code will continue to work as-is
+	//
+	// we can't add the 'id' because we're firing the filters before the activity item is created :(
+	$activity = new stdClass;
+	$activity->user_id   = $post->poster_id;
+	$activity->component = 'groups';
+	$activity->item_id   = $group->id;
+	$activity->content   = $post->post_text;
+
 	// this is a new topic
 	if ( $post->post_position == 1 ) {
 		$is_topic    = true;
 
-		$action      = sprintf( __( '%s started the forum topic "%s" in the group "%s"', 'bp-ass' ), bp_core_get_user_displayname( $post->poster_id ), $topic->topic_title, $group->name );
+		// more faux activity items!
+		$activity->type              = 'new_forum_topic';
+		$activity->secondary_item_id = $topic->topic_id;
+		$activity->primary_link      = $primary_link;
+
+		$action = $activity->action  = sprintf( __( '%s started the forum topic "%s" in the group "%s"', 'bp-ass' ), bp_core_get_user_displayname( $post->poster_id ), $topic->topic_title, $group->name );
 
 		$subject     = apply_filters( 'bp_ass_new_topic_subject', $action . ' ' . $blogname, $action, $blogname );
-		$the_content = apply_filters( 'bp_ass_new_topic_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $post->post_text );
+		$the_content = apply_filters( 'bp_ass_new_topic_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $activity );
 
 	}
 	// this is a forum reply
 	else {
-		$action = sprintf( __( '%s replied to the forum topic "%s" in the group "%s"', 'bp-ass' ), bp_core_get_user_displayname( $post->poster_id ), $topic->topic_title, $group->name );
+		// more faux activity items!
+		$activity->type              = 'new_forum_post';
+		$activity->secondary_item_id = $post_id;
+
+		$action = $activity->action  = sprintf( __( '%s replied to the forum topic "%s" in the group "%s"', 'bp-ass' ), bp_core_get_user_displayname( $post->poster_id ), $topic->topic_title, $group->name );
 
 		// calculate the topic page for pagination purposes
 		$pag_num = apply_filters( 'bp_ass_topic_pag_num', 15 );
@@ -97,8 +121,10 @@ function ass_group_notification_forum_posts( $post_id ) {
 
 		$primary_link .= "#post-" . $post_id;
 
+		$activity->primary_link = $primary_link;
+
 		$subject     = apply_filters( 'bp_ass_forum_reply_subject', $action . ' ' . $blogname, $action, $blogname );
-		$the_content = apply_filters( 'bp_ass_forum_reply_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $post->post_text );
+		$the_content = apply_filters( 'bp_ass_forum_reply_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $activity );
 	}
 
 	// setup the email meessage
@@ -134,6 +160,13 @@ To view or reply to this topic, log in and go to:
 				$subscribed_users[$previous_poster] = 'prev-post';
 		}
 	}
+
+	// setup our temporary GES object
+	$bp->ges = new stdClass;
+	$bp->ges->items = array();
+
+	// digest key iterator
+	$d = 0;
 
 	// now let's either send the email or record it for digest purposes
 	foreach ( (array) $subscribed_users as $user_id => $group_status ) {
@@ -244,9 +277,13 @@ To view or reply to this topic, log in and go to:
 		// temporarily save some variables to pass to groups_record_activity()
 		// actual digest recording occurs in ass_group_forum_record_digest()
 		if ( $group_status == 'dig' || ( $is_topic && $group_status == 'sum' ) ) {
-			$bp->ges->temp->user_id      = $user_id;
-			$bp->ges->temp->group_id     = $group->id;
-			$bp->ges->temp->group_status = $group_status;
+			$bp->ges->items[$d] = new stdClass;
+			$bp->ges->items[$d]->user_id      = $user_id;
+			$bp->ges->items[$d]->group_id     = $group->id;
+			$bp->ges->items[$d]->group_status = $group_status;
+
+			// iterate our key value
+			++$d;
 		}
 
 		unset( $notice );
@@ -266,9 +303,13 @@ function ass_group_forum_record_digest( $activity ) {
 	global $bp;
 
 	// see if our temporary GES variable is set via ass_group_notification_forum_posts()
-	if ( ! empty( $bp->ges->temp ) ) {
+	if ( ! empty( $bp->ges->items ) ) {
+
 		// okay, we're good to go! let's record this digest item!
-		ass_digest_record_activity( $activity->id, $bp->ges->temp->user_id, $bp->ges->temp->group_id, $bp->ges->temp->group_status );
+		foreach ( $bp->ges->items as $item ) {
+			ass_digest_record_activity( $activity->id, $item->user_id, $item->group_id, $item->group_status );
+
+		}
 
 		// unset the temporary variable
 		unset( $bp->ges );
@@ -561,7 +602,7 @@ function ass_update_group_subscribe_settings() {
 			ass_group_subscription( $action, $user_id, $group_id ); // save the settings
 
 			bp_core_add_message( sprintf( __( 'Your email notifications are set to %s for this group.', 'bp-ass' ), ass_subscribe_translate( $action ) ) );
-			bp_core_redirect( wp_get_referer() );
+			bp_core_redirect( trailingslashit( bp_get_group_permalink( groups_get_current_group() ) . 'notifications' ) );
 		}
 	}
 }
@@ -1023,14 +1064,14 @@ function ass_manage_members_email_status(  $user_id='' ) {
 	$group = &$groups_template->group;
 	$group_url = bp_get_group_permalink( $group ) . 'admin/manage-members/email';
 	$sub_type = ass_get_group_subscription_status( $user_id, $group->id );
-	echo '<div class="ass_manage_members_links"> '.__('Email status:','bp-ass').' ' . ass_subscribe_translate( $sub_type ) . '.';
+	echo '<span class="ass_manage_members_links"> '.__('Email status:','bp-ass').' ' . ass_subscribe_translate( $sub_type ) . '.';
 	echo ' &nbsp; '.__('Change to:','bp-ass').' ';
 	echo '<a href="' . wp_nonce_url( $group_url.'/no/'.$user_id, 'ass_member_email_status' ) . '">'.__('No Email','bp-ass').'</a> | ';
 	echo '<a href="' . wp_nonce_url( $group_url.'/sum/'.$user_id, 'ass_member_email_status' ) . '">'.__('Weekly','bp-ass').'</a> | ';
 	echo '<a href="' . wp_nonce_url( $group_url.'/dig/'.$user_id, 'ass_member_email_status' ) . '">'.__('Daily','bp-ass').'</a> | ';
 	echo '<a href="' . wp_nonce_url( $group_url.'/sub/'.$user_id, 'ass_member_email_status' ) . '">'.__('New Topics','bp-ass').'</a> | ';
 	echo '<a href="' . wp_nonce_url( $group_url.'/supersub/'.$user_id, 'ass_member_email_status' ) . '">'.__('All Email','bp-ass').'</a>';
-	echo '</div>';
+	echo '</span>';
 }
 add_action( 'bp_group_manage_members_admin_item', 'ass_manage_members_email_status' );
 
@@ -1099,7 +1140,7 @@ function ass_change_all_email_sub() {
 	if (! $default_email_sub = ass_get_default_subscription( $group ) )
 		$default_email_sub = 'no';
 
-	echo '<p><br>'.__('Site Admin Only: update email subscription settings for ALL members to the default:', 'bp-ass').' <i>' . ass_subscribe_translate( $default_email_sub ) . '</i>.  '.__('Warning: this is not reversible so use with caution.', 'bp-ass').' <a href="' . wp_nonce_url( bp_get_group_permalink( $group ) . 'admin/manage-members/email-all/'. $default_email_sub, 'ass_change_all_email_sub' ) . '">'.__('Make it so!', 'bp-ass').'</a>';
+	echo '<p><br>'.__('Site Admin Only: update email subscription settings for ALL members to the default:', 'bp-ass').' <i>' . ass_subscribe_translate( $default_email_sub ) . '</i>.  '.__('Warning: this is not reversible so use with caution.', 'bp-ass').' <a href="' . wp_nonce_url( bp_get_group_permalink( $group ) . 'admin/manage-members/email-all/'. $default_email_sub, 'ass_change_all_email_sub' ) . '">'.__('Make it so!', 'bp-ass').'</a></p>';
 }
 add_action( 'bp_after_group_manage_members_admin', 'ass_change_all_email_sub' );
 
@@ -1398,6 +1439,9 @@ To view this group log in and follow the link below:
 If you feel this service is being misused please speak to the website administrator.', 'bp-ass' );
 
 			$user_ids = BP_Groups_Member::get_group_member_ids( $group_id );
+
+			// allow others to perform an action when this type of email is sent, like adding to the activity feed
+			do_action( 'ass_admin_notice', $group_id, $subject, $_POST['ass_admin_notice'] );
 
 			// cycle through all group members
 			foreach ( (array)$user_ids as $user_id ) {
