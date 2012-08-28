@@ -1,0 +1,277 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: customsidebars\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-27 10:59+0100\n"
+"PO-Revision-Date: 2012-01-23 01:47+0100\n"
+"Last-Translator: david pesarin brocato <david.pesarin@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: customsidebars.php:146
+#: customsidebars.php:208
+#: customsidebars.php:691
+msgid "You do not have permission to delete sidebars"
+msgstr "Non ti è permesso cancellare le sidebar"
+
+#: customsidebars.php:171
+#, php-format
+msgid "The sidebar \"%s\" has been deleted."
+msgstr "La sidebar \"%s\" è stata cancellata."
+
+#: customsidebars.php:173
+#, php-format
+msgid "There was not any sidebar called \"%s\" and it could not been deleted."
+msgstr "Non c'era nessuna sidebar chiamata \"%s\" e potrebbe non essere stata cancellata."
+
+#: customsidebars.php:242
+msgid "Custom sidebars"
+msgstr "Sidebar personalizzate"
+
+#: customsidebars.php:327
+msgid "The custom sidebars settings has been updated successfully."
+msgstr "Le impostazioni personali delle sidebar sono state aggiornate con successo."
+
+#: customsidebars.php:438
+msgid "The default sidebars have been updated successfully."
+msgstr "Le sidebar predefinite sono state aggiornate con successo."
+
+#: customsidebars.php:482
+msgid "You have to fill all the fields to create a new sidebar."
+msgstr "Devi riempire tutti i campi per creare una nuova sidebar."
+
+#: customsidebars.php:516
+#: customsidebars.php:546
+msgid "The sidebar has been created successfully."
+msgstr "La sidebar è stata creata con successo."
+
+#: customsidebars.php:521
+msgid "There is already a sidebar registered with that name, please choose a different one."
+msgstr "C'è già una sidebar con lo stesso nome: usane uno diverso."
+
+#: customsidebars.php:568
+#: customsidebars.php:571
+msgid "The operation is not secure and it cannot be completed."
+msgstr "L'operazione non è sicura e non può essere completata."
+
+#: customsidebars.php:594
+#, php-format
+msgid "The sidebar \"%s\" has been updated successfully."
+msgstr "La sidebar \"%s\" è stata aggiornata con successo."
+
+#: customsidebars.php:598
+msgid "Create a new sidebar"
+msgstr "Crea una nuova sidebar"
+
+#: customsidebars.php:722
+msgid "The Custom Sidebars data has been removed successfully,"
+msgstr "Le sidebar personalizzate sono state rimosse con successo,"
+
+#: metabox.php:1
+msgid "You can assign specific sidebars to this post, just select a sidebar and the default one will be replaced, if it is available on your template."
+msgstr "Puoi assegnare a questo articolo delle sidebar specifiche, seleziona una sidebar per sostituire quella predefinita, solo se il tuo tema lo consente."
+
+#: metabox.php:14
+msgid "There are not replaceable sidebars selected. You can define what sidebar will be able for replacement in the <a href=\"themes.php?page=customsidebars\">Custom Sidebars config page</a>."
+msgstr "Non ci sono sidebar sostituibili tra quelle selezionate. Puoi indicare quale sidebar è sostituibile nella <a href=\"themes.php?page=customsidebars\">Pagina di personalizzazione delle sidebar</a>."
+
+#: view-defaults.php:13
+msgid "Default sidebars for posts"
+msgstr "Sidebar standard per gli articoli"
+
+#: view-defaults.php:15
+msgid "These replacements will be applied to every single post that matches a certain post type or category."
+msgstr "Queste sostituzioni saranno applicate ad ogni articolo che corrisponde ad uno specifico tipo di articolo o categoria."
+
+#: view-defaults.php:16
+msgid "The sidebars by categories work in a hierarchycal way, if a post belongs to a parent and a child category it will show the child category sidebars if they are defined, otherwise it will show the parent ones. If no category sidebar for post are defined, the post will show the post post-type sidebar. If none of those sidebars are defined, the theme default sidebar is shown."
+msgstr "Le sidebar per le categorie funzionano in modo gerarichico: se ad un articolo viene assegnata una categoria e una sotto-categoria, sarà mostrata la sidebar della sotto-categoria (se indicata), altrimenti verrà visualizzata la sola categoria. Se nessuna sidebar per le categorie degli articoli è indicata, l'articolo mostrerà solo la sidebar degli articoli. Se nessuna di queste sidebar è indicata, sarà mostrata quella predefinita del tema in uso."
+
+#: view-defaults.php:25
+msgid "By category"
+msgstr "Per categoria"
+
+#: view-defaults.php:44
+#: view-defaults.php:84
+#: view-defaults.php:130
+#: view-defaults.php:160
+#: view-defaults.php:194
+#: view-defaults.php:225
+#: view-defaults.php:250
+msgid "There are no replaceable sidebars selected. You must select some of them in the form above to be able for replacing them in all the post type entries."
+msgstr "Non ci sono sidebar sostituibili. Devi selezionarne qualcuna nel modulo qui sopra per sostituirle in tutte le voci degli articoli."
+
+#: view-defaults.php:51
+#: view-defaults.php:137
+msgid "There are no categories available."
+msgstr "Non ci sono categorie disponibili."
+
+#: view-defaults.php:64
+msgid "By post type"
+msgstr "Per tipo di articolo"
+
+#: view-defaults.php:95
+#: view-defaults.php:257
+#: view-edit.php:52
+#: view.php:61
+msgid "Save Changes"
+msgstr "Registra le modifiche"
+
+#: view-defaults.php:99
+msgid "Default sidebars for pages"
+msgstr "Sidebar predefinite per le pagine"
+
+#: view-defaults.php:101
+msgid "You can define specific sidebars for the different Wordpress pages. Sidebars for lists of posts pages work in the same hierarchycal way than the one for single posts."
+msgstr "Puoi indicare sidebar specifiche per le pagine di Wordpress. Le sidebar per le pagine con elenchi di articoli funzionano nello stesso modo gerarchico di quelle con articolo singolo."
+
+#: view-defaults.php:111
+msgid "Category posts list"
+msgstr "Elenco categoria articoli "
+
+#: view-defaults.php:147
+msgid "Tag pages"
+msgstr "Tag delle pagine"
+
+#: view-defaults.php:174
+msgid "Post-type posts list"
+msgstr "Lista per tipologia di articoli"
+
+#: view-defaults.php:205
+msgid "Blog page"
+msgstr "Pagina del Blog"
+
+#: view-defaults.php:237
+msgid "Author pages"
+msgstr "Pagina dell'autore"
+
+#: view-edit.php:22
+#: view.php:17
+#: view.php:84
+msgid "Name"
+msgstr "Nome"
+
+#: view-edit.php:27
+#: view.php:25
+#: view.php:85
+msgid "Description"
+msgstr "Descrizione"
+
+#: view-edit.php:30
+msgid "<b>Caution:</b> Before-after title-widget properties define the html code that will wrap the widgets and their titles in the sidebars, more info about them on the <a href=\"http://justintadlock.com/archives/2010/11/08/sidebars-in-wordpress?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed %3A+JustinTadlock+%28Justin+Tadlock%29&utm_content=Google+Reader\">Justin Tadlock Blog</a>. Do not use these fields if you are not sure what you are doing, it can break the design of your site. Leave these fields blank to use the theme sidebars design."
+msgstr "<b>Attenzione:</b> Prima e dopo le proprietà del titolo del widget, definisci il codice html che includerà i widget e i loro titoli nelle sidebar, più info sul<a href=\"http://justintadlock.com/archives/2010/11/08/sidebars-in-wordpress?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed %3A+JustinTadlock+%28Justin+Tadlock%29&utm_content=Google+Reader\">blog di Justin Tadlock </a>. Non usare questi campi se non sei sicuro di quello che stai facendo, potrebbe corrompere il layout del tema in uso. Lasciali vuoti per usare il design predefinito del tema in uso."
+
+#: view-edit.php:33
+msgid "After Title"
+msgstr "Dopo il titolo"
+
+#: view-edit.php:36
+msgid "After Widget"
+msgstr "Dopo il Widget"
+
+#: view-edit.php:44
+msgid "Before Title"
+msgstr "Prima del titolo"
+
+#: view-edit.php:47
+msgid "Before Widget"
+msgstr "Prima del Widget"
+
+#: view-footer.php:3
+msgid "Do you like this plugin? Support its development with a donation :)"
+msgstr "Ti piace questo plugin? Contribuisci al suo sviluppo futuro con una donazione :-)"
+
+#: view-tabs.php:20
+msgid "Custom Sidebars"
+msgstr "Sidebar personalizzate"
+
+#: view-tabs.php:21
+msgid "Default Sidebars"
+msgstr "Standard sidebar"
+
+#: view-tabs.php:23
+msgid "Edit Sidebar"
+msgstr "Modifica sidebar"
+
+#: view.php:12
+msgid "New Sidebar"
+msgstr "Nuova sidebar"
+
+#: view.php:13
+msgid "When a custom sidebar is created, it is shown in the widgets page. There you will be able to configure it."
+msgstr "Quando una sidebar personalizzata viene creata è visibile nella pagina dei Widget. Puoi configurarla da lì."
+
+#: view.php:20
+msgid "The name has to be unique."
+msgstr "Il nome deve essere univoco."
+
+#: view.php:31
+msgid "Create Sidebar"
+msgstr "Crea una sidebar"
+
+#: view.php:45
+msgid "Replaceable Sidebars"
+msgstr "Sidebar sostituibili"
+
+#: view.php:46
+msgid "Select here the sidebars available for replacing. They will appear for replace when a post or page is edited or created. They will be also available in the default sidebars page. You can select several bars holding the SHIFT key when clicking on them."
+msgstr "Seleziona le sidebar disponibili per la sostituzione. Appariranno quando un articolo o una pagina vengono create o modificate. Saranno disponibili anche nella pagina predefinita dell sidebar. Puoi fare selezioni multiple tenedo premuto il tasto SHIFT + clic del mouse."
+
+#: view.php:48
+msgid "Select the boxes available for substitution"
+msgstr "Selezionare le caselle disponibili per la sostituzione"
+
+#: view.php:78
+msgid "All the Custom Sidebars"
+msgstr "Tutte le sidebar personalizzate"
+
+#: view.php:79
+msgid "If a sidebar is deleted and is currently on use, the posts and pages which uses it will show the default sidebar instead."
+msgstr "Se una sidebar viene cancellata quando è ancora in uso, le pagine e gli articoli che la usano mostreranno al suo posto quella predefinita."
+
+#: view.php:95
+msgid "Are you sure to delete this sidebar?"
+msgstr "Vuoi cancellare questa sidebar?"
+
+#: view.php:105
+msgid "Configure Widgets"
+msgstr "Configura i widget"
+
+#: view.php:106
+msgid "Edit"
+msgstr "Modifica"
+
+#: view.php:107
+msgid "Delete"
+msgstr "Cancella"
+
+#: view.php:111
+msgid "There are no custom sidebars available. You can create a new one using the left form."
+msgstr "Non ci sono sidebar personalizzate. Puoi crearne una nuova usando il modulo sulla sinistra."
+
+#: view.php:132
+#: view.php:135
+msgid "Reset Sidebars"
+msgstr "Ripristina sidebar"
+
+#: view.php:133
+msgid "Click on the button below to delete all the Custom Sidebars data from the database. Keep in mind that once the button is clicked you will have to create new sidebars and customize them to restore your current sidebars configuration.</p><p>If you are going to uninstall the plugin permanently, you should use this button before, so there will be no track about the plugin left in the database."
+msgstr "Clicca sul tasto qui sotto per cancellare tutti i dati dal database delle sidebar personalizzate. Ricorda che una volta cliccato il tasto dovrai ricreare nuove sidebar e personalizzarle per ripristinare la tua configurazione attuale</p><p>Se stai per disinstallare il plugin permanentemente, dovresti prima usare questo tasto per eliminare completamente le tracce lasciate dal plugin nel database."
+
+#: view.php:135
+msgid "Are you sure to reset the sidebars?"
+msgstr "Sei sicuro di voler ripristinare le sidebar?"
+
+#~ msgid ""
+#~ "When a custom sidebar is created, it is shown in the widgets view and you "
+#~ "can define what the new sidebar will contain. Once the sidebar is setted "
+#~ "up, it is possible to select it for displaying in any post or page."
+#~ msgstr ""
+#~ "When a custom sidebar is created, it is shown in the widgets view and you "
+#~ "can define what the new sidebar will contain. Once the sidebar is setted "
+#~ "up, it is possible to select it for displaying in any post or page."
