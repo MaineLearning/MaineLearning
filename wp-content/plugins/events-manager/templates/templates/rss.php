@@ -31,6 +31,7 @@ echo "<?xml version='1.0' encoding='utf-8' ?>\n";
 				<title><?php echo $EM_Event->output( get_option('dbem_rss_title_format'), "rss" ); ?></title>
 				<link><?php echo $event_url; ?></link>
 				<guid><?php echo $event_url; ?></guid>
+				<pubDate><?php echo date('D, d M Y H:i:s T', $EM_Event->start); ?></pubDate>
 				<description><![CDATA[<?php echo $description; ?>]]></description>
 			</item>
 			<?php

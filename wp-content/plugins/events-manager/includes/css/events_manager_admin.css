@@ -107,8 +107,11 @@ table.events-table .category { color:#888; }
 /* Booking admin area */
 #em-booking-details .inside { padding:5px 10px; }
 .stuffbox .inside h4 { font-size:16px; font-weight:normal; margin:10px 0px 20px; font-weight:bold; }
+	/* Generic Table Info */
+	table.em-form-fields td, table.em-form-fields th { text-align:left; vertical-align:top; }
+	table.em-form-fields th { padding:0px 20px 5px 0px; }
 	/* Ticket table info */
-	table.em-tickets-bookings-table { width:90%; border:1px #efefef solid; margin:10px 0px; }
+	table.em-tickets-bookings-table { width:100%; border:1px #efefef solid; margin:10px 0px; }
 	table.em-tickets-bookings-table th, table.em-tickets-bookings-table td { padding:5px 5px; margin:0px; }
 	table.em-tickets-bookings-table thead th, table.em-tickets-bookings-table tfoot th { background:#cdcdcd; text-align:center }
 	table.em-tickets-bookings-table tbody td.ticket-type { text-align:left; padding-left:10px; }
@@ -128,7 +131,8 @@ table.events-table .category { color:#888; }
 				#em-bookings-export-cols-inactive, #em-bookings-cols-inactive { width:300px; }	
 				#em-bookings-export-cols-inactive li, #em-bookings-cols-inactive li { float:left; }
 	/* Single Booking Edit View */
-		#em-bookings-admin-booking .em-booking-single-info { display:none; }		
+		#em-bookings-admin-booking .em-booking-single-info { display:none; }
+		#em-bookings-admin-booking .em-booking-single-form { padding-right:20px; }
 
 /* Google Map Object */
 #location-balloon-content h3 { background:none; text-shadow:none; }

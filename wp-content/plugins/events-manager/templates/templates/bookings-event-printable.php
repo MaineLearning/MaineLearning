@@ -10,12 +10,12 @@ global $EM_Event;
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Bookings for <?php echo $EM_Event->name; ?></title>
+	<title><?php echo sprintf(__('Bookings for %s','dbem'), $EM_Event->name); ?></title>
 	<link rel="stylesheet" href="<?php echo bloginfo('wpurl') ?>/wp-content/plugins/events-manager/includes/css/events_manager.css" type="text/css" media="screen" />
 </head>
 <body id="printable">
 	<div id="container">
-	<h1>Bookings for <?php echo $EM_Event->name; ?></h1> 
+	<h1><?php echo sprintf(__('Bookings for %s','dbem'), $EM_Event->name); ?></h1> 
 	<p><?php echo $EM_Event->output("#d #M #Y"); ?></p>
 	<p><?php echo $EM_Event->output("#_LOCATION, #_ADDRESS, #_TOWN"); ?></p>   
 	<h2><?php _e('Bookings data', 'dbem');?></h2>
@@ -27,7 +27,9 @@ global $EM_Event;
 			<th scope='col'><?php _e('Spaces', 'dbem')?></th>
 			<th scope='col'><?php _e('Comment', 'dbem')?></th>
 		</tr> 
-		<?php foreach($EM_Event->get_bookings()->bookings as $EM_Booking) {       ?>
+		<?php foreach($EM_Event->get_bookings()->bookings as $EM_Booking) {       
+			if( $EM_Booking->status == 1){
+		    ?>
 		<tr>
 			
 			<td><?php echo $EM_Booking->person->get_name() ?></td> 
@@ -36,7 +38,7 @@ global $EM_Event;
 			<td class='spaces-number'><?php echo $EM_Booking->get_spaces() ?></td>
 			<td><?php echo $EM_Booking->booking_comment ?></td> 
 		</tr>
-	   	<?php } ?>
+	   	<?php }} ?>
 	  	<tr id='booked-spaces'>
 			<td colspan='3'>&nbsp;</td>
 			<td class='total-label'><?php _e('Booked', 'dbem')?>:</td>

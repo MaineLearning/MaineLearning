@@ -39,5 +39,9 @@ $col_count = empty($col_count) ? 1:$col_count;
 		<label><?php _e('Description','dbem') ?></label>
 		<textarea name="em_tickets[<?php echo $col_count; ?>][ticket_description]"><?php echo esc_html(stripslashes($EM_Ticket->ticket_description)) ?></textarea>
 	</div>
+	<div class="members">
+		<label><?php _e('Members Only?','dbem') ?></label>
+		<input type="checkbox" value="1" name="em_tickets[<?php echo $col_count; ?>][ticket_members]" />
+	</div>
 	<?php do_action('em_ticket_edit_form_fields', $col_count, $EM_Ticket); //do not delete, add your extra fields this way, remember to save them too! ?>
 </div>	

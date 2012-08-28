@@ -1,7 +1,8 @@
 Cimy Swift SMTP
 
-This plug-in is developed starting from Swift SMTP 1.0 from Marcus Vanstone that give me the base to do these modifications and have a new great plug-in!
-Basically this plug-in is for all people that have an hosting server that has the php mail function disabled and/or want to use their SMTP servers.
+This plug-in is for all people that have an hosting server with the php default mail function disabled and/or want to use their own SMTP servers.
+Supports SSL/TLS/STARTTLS encryption methods.
+Uses Swift Mailer engine - http://swiftmailer.org/
 
 
 REQUIREMENTS:
@@ -60,6 +61,9 @@ A lot of times I cannot reproduce the problem and I need more details, so if you
 
 
 CHANGELOG:
+v2.2.1 - 23/07/2012
+- Fixed email addresses with format 'Marco Cimmino <email@domain>' were not handled correctly (thanks to Rolf Hillen for the patch)
+
 v2.2.0 - 16/07/2012
 - Updated Swift Mailer to 4.2.1
 

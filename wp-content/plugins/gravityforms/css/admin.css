@@ -169,7 +169,7 @@ label.float_label {
 }
 #gform_fields li{
 	border: 1px solid transparent;
-	padding: 8px 10px 10px 10px;
+	padding: 0px 10px 10px 10px;
 	overflow: hidden
 }
 #gform_fields li ul li {
@@ -236,7 +236,6 @@ label.float_label {
 }
 .field_hover {
 	border: 1px solid #C2D7EF !important;
-	cursor: move;
 	background-image: url(../images/gf_fieldsettings_header.jpg);
 	background-position: 0 0;
 	background-repeat: repeat-x;
@@ -533,7 +532,9 @@ textarea.large {
 	padding: 16px 0 10px 31%
 }
 div.gfield_admin_icons {
-	height: 24px
+	height: 24px;
+    cursor:move;
+    padding-top: 8px;
 }
 div.gform_admin_icons {
 	height: 20px
@@ -892,6 +893,12 @@ div.push-alert-red {
 	overflow: auto;
 	padding: 2px 0 6px
 }
+.field-choice-handle {
+    vertical-align:middle;
+    cursor:move;
+    border-right: 1px solid #CCC;
+}
+
 #gfield_settings_category_container {
 	margin: 8px 0 0;
 	max-height: 230px
@@ -928,7 +935,7 @@ table td.gfield_category_cell {
 	display: none
 }
 .gfield_choice_header_label {
-	padding-left: 30px;
+	padding-left: 51px;
 	display: none !important
 }
 .gfield_choice_header_value {

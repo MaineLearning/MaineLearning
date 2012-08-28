@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.1 WP-ADMIN SECURE .HTACCESS     
+#   BULLETPROOF .47.3 WP-ADMIN SECURE .HTACCESS     
 
-# If you edit the BULLETPROOF .47.1 WP-ADMIN SECURE .HTACCESS text above 
+# If you edit the BULLETPROOF .47.3 WP-ADMIN SECURE .HTACCESS text above 
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # BPS is also checking that the string BPSQSE exists in this file - do not delete it

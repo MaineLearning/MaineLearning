@@ -51,7 +51,7 @@ global $EM_Event, $post;
 						?>
 						<tr valign="top" id="em-tickets-row-<?php echo $count ?>" class="em-tickets-row">
 							<td class="ticket-status"><span class="<?php echo ($EM_Ticket->is_available()) ? 'ticket_on':'ticket_off'; ?>"></span></td>													
-							<td class="ticket-name"><span class="ticket_name"><?php echo wp_kses_data($EM_Ticket->ticket_name); ?></span><br /><span class="ticket_description"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span></td>
+							<td class="ticket-name"><span class="ticket_name"><?php if($EM_Ticket->ticket_members) echo '* ';?><?php echo wp_kses_data($EM_Ticket->ticket_name); ?></span><br /><span class="ticket_description"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span></td>
 							<td class="ticket-price">
 								<span class="ticket_price"><?php echo ($EM_Ticket->ticket_price) ? $EM_Ticket->ticket_price : __('Free','dbem'); ?></span>
 							</td>
@@ -98,6 +98,7 @@ global $EM_Event, $post;
 								<input type="hidden" class="ticket_end" name="em_tickets[<?php echo $count; ?>][ticket_end]" value="<?php echo ( !empty($EM_Ticket->ticket_end) ) ? date("Y-m-d", $EM_Ticket->end_timestamp):''; ?>" />
 								<input type="hidden" class="ticket_min" name="em_tickets[<?php echo $count; ?>][ticket_min]" value="<?php echo $EM_Ticket->ticket_min ?>" />
 								<input type="hidden" class="ticket_max" name="em_tickets[<?php echo $count; ?>][ticket_max]" value="<?php echo $EM_Ticket->ticket_max ?>" />
+								<input type="hidden" class="ticket_members" name="em_tickets[<?php echo $count; ?>][ticket_members]" value="<?php echo $EM_Ticket->ticket_members ?>" />
 								<?php do_action('em_event_edit_ticket_hidden', $EM_Ticket); ?>
 							</td>
 						</tr>
@@ -110,22 +111,24 @@ global $EM_Event, $post;
 				?>
 			</tbody>
 		</table>
-		<p>
-			<label><strong><?php _e('Total Spaces','dbem'); ?></strong></label>
-			<input type="text" name="event_spaces" value="<?php echo $EM_Event->event_spaces; ?>" /><br />
-			<em><?php _e('Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit.','dbem'); ?></em>
-		</p>
-		<p>
-			<label><strong><?php _e('Booking Cut-Off Date','dbem'); ?></strong></label>
-			<span class="em-date-single">
-				<input id="em-bookings-date-loc" class="em-date-input-loc" type="text" />
-				<input id="em-bookings-date" class="em-date-input" type="hidden" name="event_rsvp_date" value="<?php echo $EM_Event->event_rsvp_date; ?>" />
-			</span>
-			<input type="text" name="event_rsvp_time" class="em-time-input" maxlength="8" size="8" value="<?php echo date( em_get_hour_format(), $EM_Event->rsvp_end ); ?>">
-			<br />
-			<em><?php _e('This is the definite date after which bookings will be closed for this event, regardless of individual ticket settings above. Default value will be the event start date.','dbem'); ?></em>
-		</p>
 	<?php } ?>
+	<p>
+		<label><strong><?php _e('Total Spaces','dbem'); ?></strong></label>
+		<input type="text" name="event_spaces" value="<?php echo $EM_Event->event_spaces; ?>" /><br />
+		<em><?php _e('Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit.','dbem'); ?></em>
+	</p>
+	<?php if( !$EM_Event->is_recurring() ): ?>
+	<p>
+		<label><strong><?php _e('Booking Cut-Off Date','dbem'); ?></strong></label>
+		<span class="em-date-single">
+			<input id="em-bookings-date-loc" class="em-date-input-loc" type="text" />
+			<input id="em-bookings-date" class="em-date-input" type="hidden" name="event_rsvp_date" value="<?php echo $EM_Event->event_rsvp_date; ?>" />
+		</span>
+		<input type="text" name="event_rsvp_time" class="em-time-input" maxlength="8" size="8" value="<?php echo date( em_get_hour_format(), $EM_Event->rsvp_end ); ?>">
+		<br />
+		<em><?php _e('This is the definite date after which bookings will be closed for this event, regardless of individual ticket settings above. Default value will be the event start date.','dbem'); ?></em>
+	</p>
+	<?php endif; ?>
 	<?php do_action('em_events_admin_bookings_footer', $EM_Event); ?>
 </div>
 <script type="text/javascript">

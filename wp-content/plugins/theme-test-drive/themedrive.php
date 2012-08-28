@@ -4,7 +4,7 @@
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/theme-test-drive
    Description: Safely test drive any theme while visitors are using the default one. Includes instant theme preview via thumbnail.
    Author: Vladimir Prelovac
-   Version: 2.8.2
+   Version: 2.8.3
    Author URI: http://www.prelovac.com/vladimir/
    
    To-Do:
@@ -15,7 +15,7 @@
   
   // // //  PLUGIN CODE // // //
   
-  $themedrive_localversion = "2.8.2";
+  $themedrive_localversion = "2.8.3";
   
   $wp_themedrive_plugin_url = trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
   
@@ -210,7 +210,7 @@
           $theme = $all['theme'];
       }
       
-      $theme_data = get_theme($theme);
+      $theme_data = wp_get_theme($theme);
       
       if (!empty($theme_data)) {
           // Don't let people peek at unpublished themes
@@ -221,7 +221,7 @@
       }
       
       // perhaps they are using the theme directory instead of title
-      $themes = get_themes();
+      $themes = wp_get_themes();
       
       foreach ($themes as $theme_data) {
           // use Stylesheet as it's unique to the theme - Template could point to another theme's templates
@@ -259,9 +259,9 @@
   
   function themedrive_switcher()
   {
-      $themes = get_themes();
+      $themes = wp_get_themes();
       
-      $default_theme = get_current_theme();
+      $default_theme = wp_get_theme();
       
       if (count($themes) > 1) {
           $theme_names = array_keys($themes);
@@ -279,11 +279,11 @@
               }
               
               if ((themedrive_get_theme() == $theme_name) || ((themedrive_get_theme() == '') && ($theme_name == $default_theme))) {
-                  $ts .= '        <option value="' . $theme_name . '" selected="selected">' . htmlspecialchars($theme_name) . '</option>' . "\n";
+                  $ts .= '        <option value="' . esc_attr( $theme_name ) . '" selected="selected">' . $themes[$theme_name]['Name'] . '</option>' . "\n";
               } else {
-                  $ts .= '        <option value="' . $theme_name . '">' . htmlspecialchars($theme_name) . '</option>' . "\n";
+                  $ts .= '        <option value="' . esc_attr( $theme_name ) . '">' . $themes[$theme_name]['Name'] . '</option>' . "\n";
               }
-              $tp .= '<li><a href="' . trailingslashit(get_option('siteurl')) . '?theme=' . htmlspecialchars($theme_name) . '">' . $theme_name . '</a></li>';
+              $tp .= '<li><a href="' . trailingslashit(get_option('siteurl')) . '?theme=' . esc_url($theme_name) . '">' . $theme_name . '</a></li>';
           }
           $ts .= '    </select>' . "\n\n";
           $tp .= '</ul></div></div>';
@@ -313,7 +313,7 @@
   // Admin Panel
   function themedrive_add_pages()
   {
-      add_theme_page('Theme Test Drive Options', 'Theme Test Drive', 8, __FILE__, 'themedrive_options_page');
+      add_theme_page( 'Theme Test Drive Options', 'Theme Test Drive', 'edit_theme_options', 'themedrive_options_page', 'themedrive_options_page' );
   }
   
   
@@ -327,20 +327,20 @@
   {
       global $themedrive_localversion;
       global $wp_themedrive_plugin_url;
-      
+
       $status = themedrive_getinfo();
       
-      $theVersion = $status[1];
-      $theMessage = $status[3];
+      $theVersion = isset( $status[1] ) ? $status[1] : '';
+      $theMessage = isset( $status[3] ) ? $status[3] : '';
       
       
       
       if ((version_compare(strval($theVersion), strval($themedrive_localversion), '>') == 1)) {
           $msg = 'Latest version available ' . ' <strong>' . $theVersion . '</strong><br />' . $theMessage;
-          _e('<div id="message" class="updated fade"><p>' . $msg . '</p></div>');
+          echo '<div id="message" class="updated fade"><p>' . $msg . '</p></div>';
       }
       
-      if ($_POST['button'] == 'Enable Theme Drive') {
+      if ( isset( $_POST['button'] ) && 'Enable Theme Drive' == $_POST['button']) {
           check_admin_referer('theme-drive');
           $themedrive = $_POST['td_themes'];
           update_option('td_themes', $themedrive);
@@ -352,8 +352,8 @@
           
           
           // Show message
-          _e('<div id="message" class="updated fade"><p>' . $msg_status . '</p></div>');
-      } elseif ($_POST['button'] == 'Disable Theme Drive') {
+          echo '<div id="message" class="updated fade"><p>' . $msg_status . '</p></div>';
+      } elseif ( isset( $_POST['button'] ) && 'Disable Theme Drive' == $_POST['button'] ) {
           check_admin_referer('theme-drive');
           // Delete the option from the DB if it's empty
           delete_option('td_themes');
@@ -361,7 +361,7 @@
           $msg_status = "Theme Test Drive has been disabled.";
           
           // Show message
-          _e('<div id="message" class="updated fade"><p>' . $msg_status . '</p></div>');
+          echo '<div id="message" class="updated fade"><p>' . $msg_status . '</p></div>';
       }
       
       
@@ -385,8 +385,11 @@
  	</div>
   
    <div id="mainblock" style="width:710px">
-   
+	<?php $action_url; ?>
     <div class="dbx-content">
+	<?php if ( ! isset( $action_url) ) 
+		$action_url = '';
+	?>
        <form name="form_apu" method="post" action="<?php
       echo $action_url
 ?>">
@@ -422,7 +425,7 @@
 ?>
 <p>You can specify the level of users to have access to the selected theme preview. By default it is set to 10 (admin only). Level 7 are editors, level 4 are authors and level 1 are contributors. The access level is ignored for accessing the site with ?theme=xxx paramaeter. </p>
 <input style="border:1px solid #D1D1D1;width:100px;" name="access_level" id="access_level" value="<?php
-      echo $access_level
+      echo esc_attr( $access_level )
 ?>" /> Access level<br />
 <p>
 <strong>Disabling:</strong> If you wish to stop using Theme Test Drive, press <em>Disable</em> button.
@@ -477,12 +480,17 @@ Alternatively, disabling this plug-in should also do the trick.
   function themedrive_check_plugin_version($plugin)
   {
       global $plugindir, $themedrive_localversion;
+
+      $theVersion = '';
+      $theMessage = '';
       
       if (strpos($plugin, 'themedrive.php') !== false) {
           $status = themedrive_getinfo();
-          
-          $theVersion = $status[1];
-          $theMessage = $status[3];
+
+          if ( isset( $status[1] ) )
+			$theVersion = $status[1];
+          if ( isset( $status[3] ) )
+          	$theMessage = $status[3];
           
           if ((version_compare(strval($theVersion), strval($themedrive_localversion), '>') == 1)) {
               $msg = 'Latest version available ' . ' <strong>' . $theVersion . '</strong><br />' . $theMessage;
@@ -495,9 +503,9 @@ Alternatively, disabling this plug-in should also do the trick.
   
   function themdrive_js()
   {
-      echo '<script type="text/javascript">var bubbleImagePath="' . get_bloginfo('wpurl') . '/wp-content/plugins/theme-test-drive/bg.png"</script>';
+      echo '<script type="text/javascript">var bubbleImagePath="' . site_url() . '/wp-content/plugins/theme-test-drive/bg.png"</script>';
       echo "\n";
-      echo '<script src="' . get_bloginfo('wpurl') . '/wp-content/plugins/theme-test-drive/previewbubble.js" type="text/javascript"></script>';
+      echo '<script src="' . site_url() . '/wp-content/plugins/theme-test-drive/previewbubble.js" type="text/javascript"></script>';
       echo "\n";
   }
   

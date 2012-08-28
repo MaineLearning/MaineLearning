@@ -14,7 +14,7 @@ if ( !current_user_can('manage_options') ){
 ?>
 
 <div class="wrap">
-<?php $bulletproof_ver = '.47.1'; ?>
+<?php $bulletproof_ver = '.47.3'; ?>
 <div id="bpsUprade"><strong>
 <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link opens in new browser window">Why Upgrade to BulletProof Security Pro?</a></strong></div>
 
@@ -71,7 +71,7 @@ require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 			<div class="bps-star bps-star2"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('2 stars', 'bulletproof-security') ?>" /></div>
 			<div class="bps-star bps-star1"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('1 star', 'bulletproof-security') ?>" /></div>
 		</div>
-		<div class="bps-star-link"><small><?php echo sprintf(__('Average Rating (%s ratings)', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings)); ?> <a target="_blank" title="Rating Link opens in new browser window" href="http://wordpress.org/extend/plugins/<?php echo $bpsapi->slug ?>/"> <?php _e('Rate', 'bulletproof-security') ?></a></small></div>
+		<div class="bps-star-link"><a target="_blank" title="More Star Ratings = more goodies added to BPS" href="http://wordpress.org/extend/plugins/<?php echo $bpsapi->slug ?>/"> <?php _e('Please Rate BPS', 'bulletproof-security'); ?></a> <small><?php echo sprintf(__('%s Ratings', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings)); ?> </small></div>
         <br />
 		<?php endif; 
 	  } // if ( !is_wp_error($bpsapi)
@@ -531,8 +531,8 @@ $bpsSuccessMessageSec = '<font color="green"><strong>'.__('Success! Your BulletP
 
 $bpsFailMessageSec = '<font color="red"><strong>'.__('The file ', 'bulletproof-security')."$bps_auto_write_secure_file" . __(' is not writable or does not exist.', 'bulletproof-security').'</strong></font><br><strong>'.__('Check that the file is named secure.htaccess and that the file exists in the /bulletproof-security/admin/htaccess master folder. If this is not the problem click ', 'bulletproof-security').'<a href="http://www.ait-pro.com/aitpro-blog/2566/bulletproof-security-plugin-support/bulletproof-security-error-messages" target="_blank">'.__('here', 'bulletproof-security').'</a>'.__(' for more help info.', 'bulletproof-security').'</strong><br>';
 
-$bps_secure_content_top = "#   BULLETPROOF .47.1 >>>>>>> SECURE .HTACCESS     \n
-# If you edit the  BULLETPROOF .47.1 >>>>>>> SECURE .HTACCESS text above
+$bps_secure_content_top = "#   BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS     \n
+# If you edit the  BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -664,7 +664,7 @@ RewriteRule . - [S=1]\n
 # Good sites such as W3C use it for their W3C-LinkChecker. 
 # Add or remove user agents temporarily or permanently from the first User Agent filter below.
 # If you want a list of bad bots / User Agents to block then scroll to the end of this file.
-RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (havij|libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} (%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|".'"'."|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
 RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
@@ -708,6 +708,7 @@ RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
 RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
 RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
 RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} \-[sdcr].*(allow_url_include|allow_url_fopen|safe_mode|disable_functions|auto_prepend_file) [NC,OR]
 RewriteCond %{QUERY_STRING} (;|<|>|'|".'"'."|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
 RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
 RewriteRule ^(.*)$ - [F,L]\n";
@@ -757,7 +758,7 @@ $bps_string_replace_maint = array(".");
 $bps_get_IP_maint = str_replace($bps_string_replace_maint, "\.", $_SERVER['REMOTE_ADDR']) . "$";
 $bps_get_wp_root_maint = bps_wp_get_root_folder();
 $bps_auto_write_maint_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
-$bps_maint_top = "#   BULLETPROOF .47.1 MAINTENANCE  .HTACCESS     \n\n";    
+$bps_maint_top = "#   BULLETPROOF .47.3 MAINTENANCE  .HTACCESS     \n\n";    
 $bps_maint_content = "RewriteEngine On
 RewriteBase $bps_get_wp_root_maint\n
 RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
@@ -1304,7 +1305,7 @@ if (@$_GET['settings-updated'] == true) {
   <tr>
     <td class="bps-table_title_SS"><?php _e('File and Folder Permissions - CGI or DSO', 'bulletproof-security'); ?>  <button id="bps-open-modal7" class="bps-modal-button"><?php _e('Read Me', 'bulletproof-security'); ?></button>
     <div id="bps-modal-content7" title="<?php _e('File and Folder Permissions', 'bulletproof-security'); ?>">
-	<p><?php $text = '<strong>'.__('This Read Me Help window is draggable and resizable','bulletproof-security').'</strong><br><br><strong>'.__('CGI And DSO File And Folder Permission Recommendations','bulletproof-security').'</strong><br>'.__('If your Server API (SAPI) is CGI you will see a table displayed with recommendations for file and folder permissions for CGI. If your SAPI is DSO / Apache mod_php you will see a table listing file and folder permission recommendations for DSO. If you Host is using CGI, but they do not allow you to set your folder permissions more restricive to 705 and file permissions more restrictive to 604 then most likely when you change your folder and file permissions they will automatically be changed back to 755 and 644 by your Host. CGI 705 folder permissions have been thoroughly tested with WordPress and no problems have been discovered with WP or with WP Plugins. Changing your folder permissions to 705 helps in protecting against Mass Host Code Injections. CGI 604 file permissions have been thoroughly tested with WordPress and no problems have been discovered with WP or with WP Plugins. Changing your file permissions to 604 helps in protecting your files from Mass Host Code Injections. CGI Mission Critical files should be set to 400 and 404 respectively.','bulletproof-security').'<br><br><strong>'.__('If you have BPS Pro installed then use F-Lock to Lock or Unlock your Mission Critical files. BPS Pro S-Monitor will automatically display warning messages if your files are unlocked.','bulletproof-security').'</strong><br><br><strong>'.__('The wp-content/bps-backup/ folder permission recommendation is 755 for CGI or DSO for compatibility reasons. The /bps-backup folder has a deny all .htaccess file in it so that it cannot be accessed by anyone other than you so the folder permissions for this folder are irrelevant.','bulletproof-security').'</strong><br><br>'.__('Your current file and folder permissions are shown below with suggested / recommended file and folder permissions. ','bulletproof-security').'<strong>'.__('Not all web hosts will allow you to set your folder permissions to these Recommended folder permissions.</strong> If you see 500 errors after changing your folder permissions than change them back to what they were.','bulletproof-security').'<br><br>'.__('I recommend using FileZilla to change your file and folder permissions. FileZilla is a free FTP software that makes changing your file and folder permissions very simple and easy as well as many other very nice FTP features. With FileZilla you can right mouse click on your files or folders and set the permissions with a Numeric value like 755, 644, etc. Takes the confusion out of which attributes to check or uncheck.','bulletproof-security').'<br><br><strong>'.__('BPS Pro Video Tutorial links can be found in the Help & FAQ pages.','bulletproof-security').'</strong>'; echo $text; ?></p>
+	<p><?php $text = '<strong>'.__('This Read Me Help window is draggable and resizable','bulletproof-security').'</strong><br><br><strong>'.__('CGI And DSO File And Folder Permission Recommendations','bulletproof-security').'</strong><br>'.__('If your Server API (SAPI) is CGI you will see a table displayed with recommendations for file and folder permissions for CGI. If your SAPI is DSO / Apache mod_php you will see a table listing file and folder permission recommendations for DSO.', 'bulletproof-security').'<br><br>'.__('If your Host is using CGI, but they do not allow you to set your folder permissions more restrictive to 705 and file permissions more restrictive to 604 then most likely when you change your folder and file permissions they will automatically be changed back to 755 and 644 by your Host or you may see a 403 or 500 error and will need to change the folder permissions back to what they were before. CGI 705 folder permissions have been thoroughly tested with WordPress and no problems have been discovered with WP or with WP Plugins on several different Web Hosts, but all web hosts have different things that they specifically allow or do not allow.', 'bulletproof-security').'<br><br>'.__('You CANNOT typically change your Root folder permissions to 705. You may be able to change the Root folder to 750, but typically 755 is fine for your Root folder. Changing your folder permissions to 705 helps in protecting against Mass Host Code Injections. CGI 604 file permissions have been thoroughly tested with WordPress and no problems have been discovered with WP or with WP Plugins. Changing your file permissions to 604 helps in protecting your files from Mass Host Code Injections. CGI Mission Critical files should be set to 400 and 404 respectively.','bulletproof-security').'<br><br><strong>'.__('If you have BPS Pro installed then use F-Lock to Lock or Unlock your Mission Critical files. BPS Pro S-Monitor will automatically display warning messages if your files are unlocked.','bulletproof-security').'</strong><br><br><strong>'.__('The wp-content/bps-backup/ folder permission recommendation is 755 for CGI or DSO for compatibility reasons. The /bps-backup folder has a deny all htaccess file in it so that it cannot be accessed by anyone other than you so the folder permissions for this folder are irrelevant.','bulletproof-security').'</strong><br><br>'.__('Your current file and folder permissions are shown below with suggested / recommended file and folder permissions. ','bulletproof-security').'<strong>'.__('Not all web hosts will allow you to set your folder permissions to these Recommended folder permissions.', 'bulletproof-security').'</strong> '.__('If you see 500 errors after changing your folder permissions than change them back to what they were.','bulletproof-security').'<br><br>'.__('I recommend using FileZilla to change your file and folder permissions. FileZilla is a free FTP software that makes changing your file and folder permissions very simple and easy as well as many other very nice FTP features. With FileZilla you can right mouse click on your files or folders and set the permissions with a Numeric value like 755, 644, etc. Takes the confusion out of which attributes to check or uncheck.','bulletproof-security').'<br><br><strong>'.__('BPS Pro Video Tutorial links can be found in the Help & FAQ pages.','bulletproof-security').'</strong>'; echo $text; ?></p>
 </div>
 </td>
     <td width="2%">&nbsp;</td>
@@ -2556,19 +2557,19 @@ jQuery(document).ready(function($){
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-backup-restore" target="_blank"><?php _e('Backup & Restore Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/" target="_blank"><?php _e('BPS .47.1 Guide', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/" target="_blank"><?php _e('BPS .47.3 Guide', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2585/bulletproof-security-plugin-support/wordpress-website-maintenance-wordpress-maintenance-mode" target="_blank"><?php _e('Maintenance Mode Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.1 Features', 'bulletproof-security'); ?></a></td>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.1 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.3 Features', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.3 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/319/bulletproof-security-plugin-support/bulletproof-security-comments-questions-problems-wishlist/" target="_blank"><?php _e('Post Questions and Comments for Assistance', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#modifying-htaccess-files" target="_blank"><?php _e('Modifying BPS .htaccess Files for WordPress Subfolders', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.1 Screenshots', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.3 Screenshots', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2185/bulletproof-security-plugin-support/bulletproof-security-file-editing-editing-files-within-the-wordpress-dashboard/" target="_blank"><?php _e('File Editing Within The Dashboard Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
@@ -2607,15 +2608,23 @@ jQuery(document).ready(function($){
   </tr>
  <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('No new .htaccess code was added to either the Root or wp-admin .htaccess files', 'bulletproof-security'); ?></strong><br /><?php _e('You can either manually change the version of your .htaccess file from .46.9 to .47.1 using the BPS File Editor or create new Master .htaccess files with AutoMagic and activate BulletProof Modes.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Automatic htaccess file updating on upgrade installation', 'bulletproof-security'); ?></strong><br /><?php _e('When upgrading/updating the BulletProof Security plugin you will see this WP Dashboard Alert. <strong>BPS Alert! Your site does not appear to be protected by BulletProof Security.</strong> As of BulletProof Security .47.3 WP Dashboard Alerts have been added to check your Root and wp-admin htaccess files to ensure that your website is protected. During the upgrade your htaccess files will be automatically updated and any new htaccess security filters will be automatically added to your htaccess files. In order for BPS to automatically update your htaccess files you will need to stay current with BPS plugin updates and install the latest BPS plugin updates when they are available. Any custom htaccess code or modifications that you have made to your htaccess files will not be altered, modified or changed. Activating BulletProof Modes again after upgrading BPS is no longer necessary.', 'bulletproof-security'); ?></td>
   </tr>
+<tr>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+ <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('New htaccess security filter added automatically during upgrade', 'bulletproof-security'); ?></strong><br /><?php _e('1 new security filter added in .47.2 and 1 new security filter added in .47.3. Upgrades are cumulative for 2 BPS version upgrades only. If you have a BPS version installed that is 2 versions older than the most current BPS version you will need to use AutoMagic and activate BulletProof Modes to get all the newest security filters. Example: upgrading from version .47.1 to .47.3 will include all the newest security filters.', 'bulletproof-security'); ?></td>
+  </tr>    
     <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
     <td class="bps-table_cell_no_border">&nbsp;</td>
   </tr> 
   <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('i18n Language Translation Coding Added / POT File Created', 'bulletproof-security'); ?></strong><br /><?php _e('Translating a plugin into another language is pretty quick, simple and easy using Poedit and Google Translate together. If you would like to translate BPS into another language, a language translation tutorial using Poedit has been created here - ', 'bulletproof-security'); ?><a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Language Translation Tutorial', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Lithuanian Language Translation by Vincent G from Host1Free.com', 'bulletproof-security'); ?></strong><br /><?php _e('If you would like to translate BPS into another language, a language translation tutorial using Poedit has been created here - ', 'bulletproof-security'); ?><a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Language Translation Tutorial', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
@@ -2682,6 +2691,7 @@ jQuery(document).ready(function($){
     <td width="38%" rowspan="10" valign="top" class="bps-table_cell_help">
     <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Vs BPS Free Feature Comparison', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/2837/bulletproof-security-pro/bulletproof-security-pro-screenshots/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Screenshots', 'bulletproof-security'); ?></a><br /><br />
+    <a href="http://www.ait-pro.com/aitpro-blog/4197/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-8/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.8', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4144/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-7/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.7', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4029/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-6/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.6', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/3845/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-5/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.5', 'bulletproof-security'); ?></a><br /><br />
@@ -2694,20 +2704,20 @@ jQuery(document).ready(function($){
     </td>
   </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<font color="green"><strong>'; _e('NEW One Click BPS Pro Upgrade: ', 'bulletproof-security'); echo '</strong></font>'; _e('Install BPS Pro upgrades in exactly the same way that you install all of your other WordPress plugin upgrades. The upgrade notification is also displayed in exactly the same way as all of your other WordPress plugins.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<font color="green"><strong>'; _e('NEW - ARQ Infinity - Core Components: AutoRestore & Quarantine: ', 'bulletproof-security'); echo '</strong></font>'; _e('BulletProof Security Pro takes website security to the ultimate level with ARQ Infinity. This powerful new BPS Pro feature is the first of its kind in website security protection. ARQ Infinity utilizes countermeasure website security that has the capability to protect your individual website files (WordPress and non-WordPress files) even if your Web Host Server is hacked. ARQ Infinity is a real-time File Monitor that automatically autorestores and quarantines files.', 'bulletproof-security'); ?></td>
     </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<font color="green"><strong>'; _e('NEW Automatic File Update: ', 'bulletproof-security'); echo '</strong></font>'; _e('All BPS Pro files are automatically updated during the one click upgrade installation. When you perform the one click BPS Pro upgrade your currently active htaccess files will be automatically updated to your current new version of BPS Pro automatically.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('One Click BPS Pro Upgrade: ', 'bulletproof-security'); echo '</strong>'; _e('Install BPS Pro upgrades in exactly the same way that you install all of your other WordPress plugin upgrades. The upgrade notification is also displayed in exactly the same way as all of your other WordPress plugins.', 'bulletproof-security'); ?></td>
     </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<font color="green"><strong>'; _e('NEW Language Translations: ', 'bulletproof-security'); echo '</strong></font>'; _e('BPS Pro has been translated into Spanish. French, German and Persian / Farsi Language translations will be available in the next BPS Pro upgrade.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Automatic File Update: ', 'bulletproof-security'); echo '</strong>'; _e('All BPS Pro files are automatically updated during the one click upgrade installation. When you perform the one click BPS Pro upgrade your currently active htaccess files will be automatically updated to your current new version of BPS Pro automatically.', 'bulletproof-security'); ?></td>
+    </tr>
+ <tr>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Language Translations: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro has been translated into Spanish. French, German and Persian / Farsi Language translations pending.', 'bulletproof-security'); ?></td>
     </tr>
  <tr>
     <td class="bps-table_cell_help" style="font-size:14px;"><?php  echo '<strong>'; _e('Security Logging / HTTP Error 400, 403 and 404 Error Logging: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro Logs HTTP Errors and hacking attempts against your website. IP address, Host name, Request Method, Referering link, the file name or requested resource, the user agent and the query string are logged.', 'bulletproof-security'); ?></td>
     </tr>
-  <tr>
-     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('AutoRestore: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro Automatically restores your WP Core Root files with good files if they have been altered or tampered with in any way.', 'bulletproof-security'); ?></td>
-    </tr>  
   <tr>
      <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('F-Lock: ', 'bulletproof-security'); echo '</strong>'; _e('Lock and Unlock ALL WordPress Mission Critical files from within your WordPress Dashboard.', 'bulletproof-security'); ?></td>
     </tr>  
@@ -2718,7 +2728,7 @@ jQuery(document).ready(function($){
     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Advanced Real-Time Alerts: ', 'bulletproof-security'); echo '</strong>';  _e('BPS Pro checks and displays error, warning, notifications and alert messages in real time. You can choose how you want these messages displayed to you with S-Monitor Monitoring &amp; Alerting Options - Display in your WP Dashboard, BPS Pro pages only, Turned off, Email Alerts, Logging...', 'bulletproof-security'); ?></td>
     </tr>
   <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('BPS Pro-Tools: ', 'bulletproof-security'); echo '</strong>'; _e('Pro-Tools is a set of versatile website tools that perform tasks such as searching your entire website in one click for a particular string or code anywhere throughout all of your website files in one search, decoding or encoding base64 code, replacing or removing a particular string or code anywhere throughout all of your files simultaneously, searching your entire WordPress Database with one click for a particular string or code anywhere throughout all of database tables simultaneously, DNS Finder, DB Table Cleaner...', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Pro-Tools: ', 'bulletproof-security'); echo '</strong>'; _e('Pro-Tools is a set of versatile website tools that perform tasks such as searching your entire website in one click for a particular string or code anywhere throughout all of your website files in one search, decoding or encoding base64 code, replacing or removing a particular string or code anywhere throughout all of your files simultaneously, searching your entire WordPress Database with one click for a particular string or code anywhere throughout all of database tables simultaneously, DNS Finder, DB Table Cleaner...', 'bulletproof-security'); ?></td>
     </tr>
    <tr>
     <td class="bps-table_cell_help">&nbsp;</td>

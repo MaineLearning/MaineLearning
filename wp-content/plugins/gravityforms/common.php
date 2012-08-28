@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.4.5.4";
+    public static $version = "1.6.5.1";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -676,7 +676,7 @@ class GFCommon{
                 }
 
                 //filter can change merge code variable
-                $value = apply_filters("gform_merge_tag_filter", $value, $input_id, rgar($match,4), $field);
+                $value = apply_filters("gform_merge_tag_filter", $value, $input_id, rgar($match,4), $field, $raw_value);
                 if($value === false)
                     $value = "";
 
@@ -883,7 +883,7 @@ class GFCommon{
                         }
                     }
 
-                    $field_value = apply_filters("gform_merge_tag_filter", $field_value, $merge_tag, $options, $field);
+                    $field_value = apply_filters("gform_merge_tag_filter", $field_value, $merge_tag, $options, $field, $field_label);
 
                     $field_data .= $field_value;
 
@@ -904,8 +904,8 @@ class GFCommon{
                         continue;
                     }
 
-                    $field_value = RGFormsModel::get_lead_field_value($lead, $field);
-                    $field_value = GFCommon::get_lead_field_display($field, $field_value, rgar($lead,"currency"), $use_text, $format, "email");
+                    $raw_field_value = RGFormsModel::get_lead_field_value($lead, $field);
+                    $field_value = GFCommon::get_lead_field_display($field, $raw_field_value, rgar($lead,"currency"), $use_text, $format, "email");
 
                     $display_field = true;
                     //depending on parameters, don't display adminOnly or hidden fields
@@ -918,7 +918,7 @@ class GFCommon{
                     if(!$display_field)
                         $field_value = false;
 
-                    $field_value = apply_filters("gform_merge_tag_filter", $field_value, $merge_tag, $options, $field);
+                    $field_value = apply_filters("gform_merge_tag_filter", $field_value, $merge_tag, $options, $field, $raw_field_value);
 
                     if($field_value === false)
                         continue;
@@ -1112,6 +1112,8 @@ class GFCommon{
         $attachments = apply_filters("gform_user_notification_attachments_{$form_id}", apply_filters("gform_user_notification_attachments", array(), $lead, $form), $lead, $form);
 
         self::send_email($from, $to, $bcc, $reply_to, $subject, $message, $from_name, $message_format, $attachments);
+
+        return compact("to", "from", "bcc", "reply_to", "subject", "message", "from_name", "message_format", "attachments");
     }
 
     public static function send_admin_notification($form, $lead, $override_options = false){
@@ -1151,7 +1153,7 @@ class GFCommon{
             foreach($form["notification"]["routing"] as $routing){
 
                 $source_field = RGFormsModel::get_field($form, $routing["fieldId"]);
-                $field_value = RGFormsModel::get_field_value($source_field, array());
+                $field_value = RGFormsModel::get_lead_field_value($lead, $source_field);
                 $is_value_match = RGFormsModel::is_value_match($field_value, $routing["value"], $routing["operator"], $source_field) && !RGFormsModel::is_field_hidden($form, $source_field, array(), $lead);
 
                 if ($is_value_match)
@@ -1181,6 +1183,8 @@ class GFCommon{
         $attachments = apply_filters("gform_admin_notification_attachments_{$form_id}", apply_filters("gform_admin_notification_attachments", array(), $lead, $form), $lead, $form);
 
         self::send_email($from, $to, $bcc, $replyTo, $subject, $message, $from_name, $message_format, $attachments);
+
+        return compact("to", "from", "bcc", "replyTo", "subject", "message", "from_name", "message_format", "attachments");
     }
 
     public static function has_admin_notification($form){
@@ -2722,7 +2726,7 @@ class GFCommon{
                 $onkeyup = rgar($field,"passwordStrengthEnabled") ? "onkeyup='{$action}'" : "";
 
                 $pass = RGForms::post("input_" . $id ."_2");
-                return sprintf("<div class='ginput_complex$class_suffix ginput_container' id='{$field_id}_container'><span id='" . $field_id . "_1_container' class='ginput_left'><input type='password' name='input_%d' id='%s' {$onkeyup} {$onchange} value='%s' $first_tabindex %s/><label for='%s'>" . apply_filters("gform_password_{$form_id}", apply_filters("gform_password",__("Enter Password", "gravityforms"), $form_id), $form_id) . "</label></span><span id='" . $field_id . "_2_container' class='ginput_right'><input type='password' name='input_%d_2' id='%s_2' {$onkeyup} {$onchange} value='%s' $last_tabindex %s/><label for='%s_2'>" . apply_filters("gform_password_confirm_{$form_id}", apply_filters("gform_password_confirm",__("Confirm Password", "gravityforms"), $form_id), $form_id) . "</label></span></div>{$strength}", $id, $field_id, $value, $disabled_text, $field_id, $id, $field_id, $pass, $disabled_text, $field_id);
+                return sprintf("<div class='ginput_complex$class_suffix ginput_container' id='{$field_id}_container'><span id='" . $field_id . "_1_container' class='ginput_left'><input type='password' name='input_%d' id='%s' {$onkeyup} {$onchange} value='%s' $first_tabindex %s/><label for='%s'>" . apply_filters("gform_password_{$form_id}", apply_filters("gform_password",__("Enter Password", "gravityforms"), $form_id), $form_id) . "</label></span><span id='" . $field_id . "_2_container' class='ginput_right'><input type='password' name='input_%d_2' id='%s_2' {$onkeyup} {$onchange} value='%s' $last_tabindex %s/><label for='%s_2'>" . apply_filters("gform_password_confirm_{$form_id}", apply_filters("gform_password_confirm",__("Confirm Password", "gravityforms"), $form_id), $form_id) . "</label></span></div>{$strength}", $id, $field_id, esc_attr($value), $disabled_text, $field_id, $id, $field_id, esc_attr($pass), $disabled_text, $field_id);
 
             case "name" :
                 $prefix = "";

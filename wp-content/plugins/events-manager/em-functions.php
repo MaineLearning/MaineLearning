@@ -166,7 +166,7 @@ function em_get_countries($add_blank = false){
 		if(is_array($add_blank)){
 			$em_countries_array = $add_blank + $em_countries_array;
 		}else{
-			array_unshift($em_countries_array, $add_blank);
+		    $em_countries_array = array(0 => $add_blank) + $em_countries_array;
 		}
 	}
 	return apply_filters('em_get_countries', $em_countries_array);
@@ -207,7 +207,7 @@ function em_get_currency_formatted($price, $currency=false, $format=false){
 	if(!$currency) $currency = get_option('dbem_bookings_currency');
 	$formatted_price = str_replace('@', em_get_currency_symbol(true,$currency), $format);
 	$formatted_price = str_replace('#', number_format( $price, 2, get_option('dbem_bookings_currency_decimal_point','.'), get_option('dbem_bookings_currency_thousands_sep',',') ), $formatted_price);
-	return $formatted_price;
+	return apply_filters('em_get_currency_formatted', $formatted_price, $price, $currency, $format);
 }
 
 function em_get_currency_symbol($true_symbol = false, $currency = false){
@@ -262,15 +262,15 @@ function em_get_attributes($lattributes = false){
 	$formats =
 		get_option ( 'dbem_placeholders_custom' ).
 		get_option ( 'dbem_location_placeholders_custom' ).
-		get_option ( 'dbem_event_list_item_format' ).
-		get_option ( 'dbem_event_page_title_format' ).
 		get_option ( 'dbem_full_calendar_event_format' ).
+		get_option ( 'dbem_rss_description_format' ).
+		get_option ( 'dbem_rss_title_format' ).
+		get_option ( 'dbem_map_text_format' ).
 		get_option ( 'dbem_location_baloon_format' ).
 		get_option ( 'dbem_location_event_list_item_format' ).
 		get_option ( 'dbem_location_page_title_format' ).
-		get_option ( 'dbem_map_text_format' ).
-		get_option ( 'dbem_rss_description_format' ).
-		get_option ( 'dbem_rss_title_format' ).
+		get_option ( 'dbem_event_list_item_format' ).
+		get_option ( 'dbem_event_page_title_format' ).
 		get_option ( 'dbem_single_event_format' ).
 		get_option ( 'dbem_single_location_format' );
 	//We now have one long string of formats, get all the attribute placeholders
@@ -284,12 +284,14 @@ function em_get_attributes($lattributes = false){
 	foreach($matches[1] as $key => $attribute) {
 		if( !in_array($attribute, $attributes['names']) ){
 			$attributes['names'][] = $attribute ;
-			//check if there's ddm values
-			$attribute_values = array();
-			if(strstr($matches[3][$key], '|') !== false){
-				$attribute_values = explode('|',$matches[3][$key]);
-			}
-			$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute,$attribute_values, $attribute, $matches);
+			$attributes['values'][$attribute] = array();
+		}
+		//check if there's ddm values
+		if( !empty($matches[3][$key]) ){
+		    $new_values = explode('|',$matches[3][$key]);
+		    if( count($new_values) > count($attributes['values'][$attribute]) ){
+				$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute, $new_values, $attribute, $matches);
+		    }
 		}
 	}
 	return apply_filters('em_get_attributes', $attributes, $matches);
@@ -340,10 +342,11 @@ function em_register_new_user( $user_data ) {
 	$errors = apply_filters( 'registration_errors', $errors, $sanitized_user_login, $user_email );
 	ob_clean();
 
-	if ( $errors->get_error_code() )
-		return $errors;
+	if ( $errors->get_error_code() ) return $errors;
 
-	$user_data['user_pass'] = wp_generate_password( 12, false);
+	if(empty($user_data['user_pass'])){
+		$user_data['user_pass'] =  wp_generate_password( 12, false);
+	}
 
 	$user_id = wp_insert_user( $user_data );
 	if( is_numeric($user_id) && !empty($user_data['dbem_phone']) ){

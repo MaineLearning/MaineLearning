@@ -238,10 +238,13 @@ add_action( 'edit_term', 'genesis_term_meta_save', 10, 2 );
  */
 function genesis_term_meta_save( $term_id, $tt_id ) {
 
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+		return;
+
 	$term_meta = (array) get_option( 'genesis-term-meta' );
 
 	$term_meta[$term_id] = isset( $_POST['meta'] ) ? (array) $_POST['meta'] : array();
-	if ( !current_user_can( 'unfiltered_html' ) && isset( $term_meta[$term_id]['archive_description'] ) )
+	if ( ! current_user_can( 'unfiltered_html' ) && isset( $term_meta[$term_id]['archive_description'] ) )
 		$term_meta[$term_id]['archive_description'] = wp_kses( $term_meta[$term_id]['archive_description'], genesis_formatting_allowedtags() );
 
 	update_option( 'genesis-term-meta', $term_meta );
