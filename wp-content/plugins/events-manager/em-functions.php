@@ -262,15 +262,15 @@ function em_get_attributes($lattributes = false){
 	$formats =
 		get_option ( 'dbem_placeholders_custom' ).
 		get_option ( 'dbem_location_placeholders_custom' ).
-		get_option ( 'dbem_event_list_item_format' ).
-		get_option ( 'dbem_event_page_title_format' ).
 		get_option ( 'dbem_full_calendar_event_format' ).
+		get_option ( 'dbem_rss_description_format' ).
+		get_option ( 'dbem_rss_title_format' ).
+		get_option ( 'dbem_map_text_format' ).
 		get_option ( 'dbem_location_baloon_format' ).
 		get_option ( 'dbem_location_event_list_item_format' ).
 		get_option ( 'dbem_location_page_title_format' ).
-		get_option ( 'dbem_map_text_format' ).
-		get_option ( 'dbem_rss_description_format' ).
-		get_option ( 'dbem_rss_title_format' ).
+		get_option ( 'dbem_event_list_item_format' ).
+		get_option ( 'dbem_event_page_title_format' ).
 		get_option ( 'dbem_single_event_format' ).
 		get_option ( 'dbem_single_location_format' );
 	//We now have one long string of formats, get all the attribute placeholders
@@ -284,12 +284,14 @@ function em_get_attributes($lattributes = false){
 	foreach($matches[1] as $key => $attribute) {
 		if( !in_array($attribute, $attributes['names']) ){
 			$attributes['names'][] = $attribute ;
-			//check if there's ddm values
-			$attribute_values = array();
-			if(strstr($matches[3][$key], '|') !== false){
-				$attribute_values = explode('|',$matches[3][$key]);
-			}
-			$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute,$attribute_values, $attribute, $matches);
+			$attributes['values'][$attribute] = array();
+		}
+		//check if there's ddm values
+		if( !empty($matches[3][$key]) ){
+		    $new_values = explode('|',$matches[3][$key]);
+		    if( count($new_values) > count($attributes['values'][$attribute]) ){
+				$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute, $new_values, $attribute, $matches);
+		    }
 		}
 	}
 	return apply_filters('em_get_attributes', $attributes, $matches);

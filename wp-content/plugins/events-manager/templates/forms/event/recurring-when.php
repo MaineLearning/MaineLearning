@@ -69,7 +69,7 @@ $hours_format = em_get_hour_format();
 	<script type="text/javascript">
 		jQuery(document).ready( function($) {
 			//Recurrence Warnings
-			$('#event_form').submit( function(event){
+			$('#event-form').submit( function(event){
 				confirmation = confirm(EM.event_reschedule_warning);
 				if( confirmation == false ){
 					event.preventDefault();

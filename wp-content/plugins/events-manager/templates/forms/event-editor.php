@@ -55,19 +55,6 @@ if( !empty($_REQUEST['success']) ){
 				em_locate_template('forms/event/when-with-recurring.php',true);
 			}elseif( $EM_Event->is_recurring()  ){
 				em_locate_template('forms/event/recurring-when.php',true);
-				?>
-				<script type="text/javascript">
-					jQuery(document).ready( function($) {
-						//Recurrence Warnings
-						$('#event_form').submit( function(event){
-							confirmation = confirm(EM.event_reschedule_warning);
-							if( confirmation == false ){
-								event.preventDefault();
-							}
-						});
-					});		
-				</script>
-				<?php
 			}else{
 				em_locate_template('forms/event/when.php',true);
 			}
@@ -93,65 +80,15 @@ if( !empty($_REQUEST['success']) ){
 				<?php endif; ?>
 			</div>
 			<div class="event-extra-details">
-				<?php if(get_option('dbem_categories_enabled')) :?>
-					<?php $categories = EM_Categories::get(array('orderby'=>'name','hide_empty'=>0)); ?>
-					<?php if( count($categories) > 0 ): ?>
-					<div class="event-cateogries">
-						<!-- START Categories -->
-						<label for="event_categories[]"><?php _e ( 'Category:', 'dbem' ); ?></label>
-						<select name="event_categories[]" multiple size="10">
-						<?php
-						$selected = $EM_Event->get_categories()->get_ids();
-						$walker = new EM_Walker_CategoryMultiselect();
-						$args_em = array( 'hide_empty' => 0, 'name' => 'event_categories[]', 'hierarchical' => true, 'id' => EM_TAXONOMY_CATEGORY, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'walker'=> $walker);
-						echo walk_category_dropdown_tree($categories, 0, $args_em);
-						?></select>
-						<!-- END Categories -->
-					</div>
-					<?php endif; ?>
-				<?php endif; ?>	
-			
-				<?php if(get_option('dbem_attributes_enabled')) : ?>
-					<?php
-					$attributes = em_get_attributes();
-					$has_depreciated = false;
-					?>
-					<?php if( count( $attributes['names'] ) > 0 ) : ?>
-						<?php foreach( $attributes['names'] as $name) : ?>
-						<div class="event-attributes">
-							<label for="em_attributes[<?php echo $name ?>]"><?php echo $name ?></label>
-							<?php if( count($attributes['values'][$name]) > 0 ): ?>
-							<select name="em_attributes[<?php echo $name ?>]">
-								<?php foreach($attributes['values'][$name] as $attribute_val): ?>
-									<?php if( is_array($EM_Event->event_attributes) && array_key_exists($name, $EM_Event->event_attributes) && $EM_Event->event_attributes[$name]==$attribute_val ): ?>
-										<option selected="selected"><?php echo $attribute_val; ?></option>
-									<?php else: ?>
-										<option><?php echo $attribute_val; ?></option>
-									<?php endif; ?>
-								<?php endforeach; ?>
-							</select>
-							<?php else: ?>
-							<input type="text" name="em_attributes[<?php echo $name ?>]" value="<?php echo array_key_exists($name, $EM_Event->event_attributes) ? htmlspecialchars($EM_Event->event_attributes[$name], ENT_QUOTES):''; ?>" />
-							<?php endif; ?>
-						</div>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				<?php endif; ?>
+				<?php if(get_option('dbem_categories_enabled')) { em_locate_template('forms/event/attributes-public.php',true); }  ?>
+				<?php if(get_option('dbem_categories_enabled')) { em_locate_template('forms/event/categories-public.php',true); }  ?>
 			</div>
 		</div>
 		
 		<?php if( $EM_Event->can_manage('upload_event_images','upload_event_images') ): ?>
 		<h4><?php _e ( 'Event Image', 'dbem' ); ?></h4>
 		<div class="inside event-form-image">
-			<?php if ($EM_Event->get_image_url() != '') : ?> 
-				<img src='<?php echo $EM_Event->get_image_url('medium'); ?>' alt='<?php echo $EM_Event->event_name ?>'/>
-			<?php else : ?> 
-				<?php _e('No image uploaded for this event yet', 'dbem') ?>
-			<?php endif; ?>
-			<br /><br />
-			<label for='event_image'><?php _e('Upload/change picture', 'dbem') ?></label> <input id='event-image' name='event_image' id='event_image' type='file' size='40' />
-			<br />
-			<label for='event_image_delete'><?php _e('Delete Image?', 'dbem') ?></label> <input id='event-image-delete' name='event_image_delete' id='event_image_delete' type='checkbox' value='1' />
+			<?php em_locate_template('forms/event/featured-image-public.php',true); ?>
 		</div>
 		<?php endif; ?>
 		

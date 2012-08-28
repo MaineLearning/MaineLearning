@@ -62,6 +62,11 @@ class EM_Event_Post {
 					ob_start();
 					em_locate_template('templates/event-single.php',true);
 					$content = ob_get_clean();
+				}else{
+					$EM_Event = em_get_event($post);
+					if( $EM_Event->event_rsvp ){
+					    $content .= $EM_Event->output('<h2>Bookings</h2>#_BOOKINGFORM');
+					}
 				}
 			}
 		}

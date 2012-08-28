@@ -171,7 +171,6 @@ function em_create_events_meta_table(){
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-	$old_table_name = EM_OLD_LOCATIONS_TABLE;
 	dbDelta($sql);
 	em_sort_out_table_nu_keys($table_name, array('object_id','meta_key'));
 }
@@ -205,8 +204,7 @@ function em_create_locations_table() {
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-	$old_table_name = EM_OLD_LOCATIONS_TABLE; //for 3.0
-	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name && $wpdb->get_var("SHOW TABLES LIKE '$old_table_name'") != $old_table_name) {
+	if( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
 		dbDelta($sql);
 		//Add default values
 		$wpdb->query("INSERT INTO ".$table_name." (location_name, location_address, location_town, location_state, location_country, location_latitude, location_longitude, location_slug, location_owner, location_status, post_id) VALUES ('Arts Millenium Building', 'Newcastle Road','Galway','Galway','IE', 53.275, -9.06532, 'arts-millenium-building','".get_current_user_id()."', 1,0)");
@@ -267,6 +265,7 @@ function em_create_tickets_table() {
 		ticket_min INT( 10 ) NULL ,
 		ticket_max INT( 10 ) NULL ,
 		ticket_spaces INT NULL ,
+		ticket_members INT( 1 ) NULL ,
 		PRIMARY KEY  (ticket_id)
 		) DEFAULT CHARSET=utf8 ;";
 
@@ -309,6 +308,8 @@ function em_add_options() {
 	$event_approved_email_body = __("Dear #_CONTACTNAME, <br/>Your event #_EVENTNAME on #_EVENTDATES has been approved.<br/>You can view your event here: #_EVENTURL",'dbem').$email_footer;
 	$event_submitted_email_body = __("A new event has been submitted by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL to review this event for approval.",'dbem').$email_footer;
 	$event_submitted_email_body = str_replace('#_EDITEVENTURL', admin_url().'post.php?action=edit&post=#_EVENTPOSTID', $event_submitted_email_body);
+	$event_published_email_body = __("A new event has been published by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Edit this event - #_EDITEVENTURL <br/> View this event - #_EVENTURL",'dbem').$email_footer;
+	$event_published_email_body = str_replace('#_EDITEVENTURL', admin_url().'post.php?action=edit&post=#_EVENTPOSTID', $event_published_email_body);
 	$event_resubmitted_email_body = __("A previously published event has been modified by #_CONTACTNAME, and this event is now unpublished and pending your approval.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL to review this event for approval.",'dbem').$email_footer;
 	$event_resubmitted_email_body = str_replace('#_EDITEVENTURL', admin_url().'post.php?action=edit&post=#_EVENTPOSTID', $event_resubmitted_email_body);
 
@@ -354,6 +355,8 @@ function em_add_options() {
 		'dbem_event_submitted_email_body' => str_replace("<br/>", "\n\r", $event_submitted_email_body),
 		'dbem_event_resubmitted_email_subject' => __('Re-Submitted Event Awaiting Approval', 'dbem'),
 		'dbem_event_resubmitted_email_body' => str_replace("<br/>", "\n\r", $event_resubmitted_email_body),
+		'dbem_event_published_email_subject' => __('Published Event', 'dbem').' - #_EVENTNAME',
+		'dbem_event_published_email_body' => str_replace("<br/>", "\n\r", $event_published_email_body),
 		'dbem_event_approved_email_subject' => __("Event Approved",'dbem'). " - #_EVENTNAME" ,
 		'dbem_event_approved_email_body' => str_replace("<br/>", "\n\r", $event_approved_email_body),
 		'dbem_event_reapproved_email_subject' => __("Event Approved",'dbem'). " - #_EVENTNAME" ,
@@ -677,6 +680,12 @@ function em_add_options() {
 	if( get_option('dbem_version') != '' && get_option('dbem_version') < 5.19 ){
 	    update_option('dbem_event_reapproved_email_subject',  get_option('dbem_event_approved_email_subject'));
 	    update_option('dbem_event_reapproved_email_body', get_option('dbem_event_approved_email_body'));
+	}
+	if( get_option('dbem_version') != '' && get_option('dbem_version') <= 5.21 ){
+	    //just remove all rsvp cut-off info
+	    global $wpdb;
+	    $wpdb->query("UPDATE ".$wpdb->postmeta." SET meta_value = NULL WHERE meta_key IN ('_event_rsvp_date','_event_rsvp_time') AND post_id IN (SELECT post_id FROM ".EM_EVENTS_TABLE." WHERE recurrence_id > 0)");
+	    $wpdb->query("UPDATE ".EM_EVENTS_TABLE." SET event_rsvp_time = NULL, event_rsvp_date = NULL WHERE recurrence_id > 0");
 	}
 	if( get_option('dbem_time_24h','not set') == 'not set'){
 		//Localise vars regardless

@@ -323,9 +323,9 @@ function em_admin_options_page() {
 		<h2 class="nav-tab-wrapper">
 			<a href="#general" id="em-menu-general" class="nav-tab nav-tab-active"><?php _e('General','dbem'); ?></a>
 			<a href="#pages" id="em-menu-pages" class="nav-tab"><?php _e('Pages','dbem'); ?></a>
-			<a href="#formats" id="em-menu-formats" class="nav-tab"><?php _e('Formats/Layouts','dbem'); ?></a>
+			<a href="#formats" id="em-menu-formats" class="nav-tab"><?php _e('Formatting','dbem'); ?></a>
 			<?php if( get_option('dbem_rsvp_enabled') ): ?>
-			<a href="#bookings" id="em-menu-bookings" class="nav-tab"><?php _e('Booking Options','dbem'); ?></a>
+			<a href="#bookings" id="em-menu-bookings" class="nav-tab"><?php _e('Bookings','dbem'); ?></a>
 			<?php endif; ?>
 			<a href="#emails" id="em-menu-emails" class="nav-tab"><?php _e('Emails','dbem'); ?></a>
 		</h2>
@@ -992,7 +992,7 @@ function em_admin_options_page() {
 			<!-- FORMAT OPTIONS -->
 		  	<div class="em-menu-formats em-menu-group" style="display:none;">				
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Events format', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Events', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 					 	<tr><td colspan="2">
@@ -1022,7 +1022,7 @@ function em_admin_options_page() {
 				</div> <!-- .postbox -->
 
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Search Form Options', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Search Form', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 					    <?php 
@@ -1046,7 +1046,7 @@ function em_admin_options_page() {
 				</div> <!-- .postbox -->
 
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Date/Time formats', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Date/Time', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 					<p><?php echo sprintf(__('Date and Time formats follow the <a href="%s">WordPress time formatting conventions</a>', 'dbem'), 'http://codex.wordpress.org/Formatting_Date_and_Time'); ?></p>
 					<table class="form-table">
@@ -1065,7 +1065,7 @@ function em_admin_options_page() {
 				</div> <!-- .postbox -->
 				      
 	           	<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Calendar format', 'dbem' ); ?></span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Calendar', 'dbem' ); ?></span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 						<?php
@@ -1132,7 +1132,7 @@ function em_admin_options_page() {
 				
 				<?php if( get_option('dbem_locations_enabled') ): ?>
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Locations format', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Locations', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 					 	<tr><td><strong><?php echo sprintf(__('%s Page','dbem'),__('Locations','dbem')); ?></strong></td></tr>
@@ -1146,7 +1146,6 @@ function em_admin_options_page() {
 					 	<?php
 						em_options_input_text (sprintf( __( 'Single %s title format', 'dbem' ),__('location','dbem')), 'dbem_location_page_title_format', __( 'The format of a single location page title.', 'dbem' ).$locations_placeholder_tip );
 						em_options_textarea ( sprintf(__('Single %s page format', 'dbem' ),__('location','dbem')), 'dbem_single_location_format', __( 'The format of a single location page.', 'dbem' ).$locations_placeholder_tip );
-						em_options_textarea ( __( 'Default location balloon format', 'dbem' ), 'dbem_location_baloon_format', __( 'The format of of the text appearing in the baloon describing the location a single location map.', 'dbem' ).$locations_placeholder_tip );
 						 ?>
 					 	<tr><td><strong><?php echo sprintf(__('%s List Formats','dbem'),__('Event','dbem')); ?></strong></td></tr>
 					 	<?php
@@ -1163,7 +1162,7 @@ function em_admin_options_page() {
 				
 				<?php if( get_option('dbem_categories_enabled') && !(EM_MS_GLOBAL && !is_main_blog()) ): ?>
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Categories format', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Event Categories', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 					 	<tr><td><strong><?php echo sprintf(__('%s Page','dbem'),__('Categories','dbem')); ?></strong></td></tr>
@@ -1193,7 +1192,7 @@ function em_admin_options_page() {
 				
 				<?php if( get_option('dbem_tags_enabled') ): ?>
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Tags format', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Event Tags', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 					 	<tr><td><strong><?php echo sprintf(__('Single %s Page','dbem'),__('Tag','dbem')); ?></strong></td></tr>
@@ -1215,7 +1214,7 @@ function em_admin_options_page() {
 				<?php endif; ?>
 				
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'RSS feed format', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'RSS', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 	            	<table class="form-table">
 						<?php				
@@ -1230,8 +1229,9 @@ function em_admin_options_page() {
 				</div> <!-- .postbox -->
 				
 				<div  class="postbox " >
-				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Maps and geotagging', 'dbem' ); ?> </span></h3>
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Maps', 'dbem' ); ?> </span></h3>
 				<div class="inside">
+					<p><?php echo sprintf(__('You can use Google Maps to show where your events are located. For more information on using maps, <a href="%s">see our documentation</a>.','dbem'),'http://wp-events-plugin.com/documentation/google-maps/'); ?>
 					<table class='form-table'> 
 						<?php $gmap_is_active = get_option ( 'dbem_gmap_is_active' ); ?>
 						<tr valign="top">
@@ -1242,8 +1242,19 @@ function em_admin_options_page() {
 								<em><?php _e ( 'Check this option to enable Goggle Map integration.', 'dbem' )?></em>
 							</td>
 						</tr>
+						<tr><td colspan="2">
+							<strong><?php _e('Global Map Format','dbem'); ?></strong>
+							<p><?php echo sprintf(__('If you use the %s <a href="%s">shortcode</a>, you can display a map of all your locations and events, the settings below will be used.','dbem'), '<code>[locations_map]</code>','http://wp-events-plugin.com/documentation/shortcodes/'); ?></p>
+						</td></tr>
 						<?php
-						em_options_textarea ( __( 'Map text format', 'dbem' ), 'dbem_map_text_format', __( 'The text format inside the map balloons.', 'dbem' ).$events_placeholder_tip );
+						em_options_textarea ( __( 'Location balloon format', 'dbem' ), 'dbem_map_text_format', __( 'The format of of the text appearing in the balloon describing the location and the first upcoming event.', 'dbem' ).' '.__( 'Event.', 'dbem' ).$events_placeholder_tip );
+						?>
+						<tr><td colspan="2">
+							<strong><?php _e('Single Location/Event Map Format','dbem'); ?></strong>
+							<p><?php echo sprintf(_e('If you use the <code>#_LOCATIONMAP</code> <a href="%s">placeholder</a> when displaying individual event and location information, the settings below will be used.','dbem'), '<code>[locations_map]</code>','http://wp-events-plugin.com/documentation/placeholders/'); ?></p>
+						</td></tr>
+						<?php
+						em_options_textarea ( __( 'Location balloon format', 'dbem' ), 'dbem_location_baloon_format', __( 'The format of of the text appearing in the balloon describing the location.', 'dbem' ).$locations_placeholder_tip );
 						echo $save_button;     
 						?> 
 					</table>
@@ -1468,29 +1479,36 @@ function em_admin_options_page() {
 				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Event Submission Templates', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 					<table class='form-table'>
-						<tr><td colspan='2'><strong><?php _e('Event Submitted','dbem') ?></strong></td></tr>
 						<?php 
-						em_options_input_text ( __( 'Administrator Email', 'dbem' ), 'dbem_event_submitted_email_admin', __('If left blank, no email will be sent. Seperate emails with commas for more than one email.','dbem') );
+						em_options_input_text ( __( 'Administrator Email', 'dbem' ), 'dbem_event_submitted_email_admin', __('Event submission notifications will be sent to emails added here.','dbem').' '.__('If left blank, no emails will be sent. Seperate emails with commas for more than one email.','dbem') );
 						?>
-						<tr><td colspan='2'><?php echo __('An email will be sent to the an administrator of your choice when an event is submitted and pending approval.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'><strong><?php _e('Event Submitted','dbem') ?></strong></td></tr>
+						<tr><td colspan='2'><?php echo __('An email will be sent to your administrator emails when an event is submitted and pending approval.','dbem').$bookings_placeholder_tip ?></td></tr>
 						<?php
-						em_options_input_text ( __( 'Event submitted subject', 'dbem' ), 'dbem_event_submitted_email_subject', '' );
+						em_options_input_text ( __( 'Event submitted subject', 'dbem' ), 'dbem_event_submitted_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event submitted email', 'dbem' ), 'dbem_event_submitted_email_body', '' );
 						?>
+						<tr><td colspan='2'><strong><?php _e('Event Re-Submitted','dbem') ?></strong></td></tr>
 						<tr><td colspan='2'><?php echo __('When a user modifies a previously published event, it will be put back into pending review status and will not be publisehd until you re-approve it.','dbem').$bookings_placeholder_tip ?></td></tr>
 						<?php
-						em_options_input_text ( __( 'Event resubmitted subject', 'dbem' ), 'dbem_event_resubmitted_email_subject', '' );
+						em_options_input_text ( __( 'Event resubmitted subject', 'dbem' ), 'dbem_event_resubmitted_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event resubmitted email', 'dbem' ), 'dbem_event_resubmitted_email_body', '' );
+						?>
+						<tr><td colspan='2'><strong><?php _e('Event Published','dbem') ?></strong></td></tr>
+						<tr><td colspan='2'><?php echo __('An email will be sent to an administrator of your choice when an event is published by users who are not administrators.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<?php
+						em_options_input_text ( __( 'Event published subject', 'dbem' ), 'dbem_event_published_email_subject', __('If left blank, this email will not be sent.','dbem') );
+						em_options_textarea ( __( 'Event published email', 'dbem' ), 'dbem_event_published_email_body', '' );
 						?>
 						<tr><td colspan='2'><strong><?php _e('Event Approved','dbem') ?></strong></td></tr>
 						<tr><td colspan='2'><?php echo __('An email will be sent to the event owner when their event is approved. Users requiring event approval do not have the <code>publish_events</code> capability.','dbem').$bookings_placeholder_tip ?></td></tr>
 						<?php
-						em_options_input_text ( __( 'Event approved subject', 'dbem' ), 'dbem_event_approved_email_subject', '' );
+						em_options_input_text ( __( 'Event approved subject', 'dbem' ), 'dbem_event_approved_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event approved email', 'dbem' ), 'dbem_event_approved_email_body', '' );
 						?>
 						<tr><td colspan='2'><?php echo __('When a user modifies a previously published event, it will be put back into pending review status and will not be publisehd until you re-approve it.','dbem').$bookings_placeholder_tip ?></td></tr>
 						<?php
-						em_options_input_text ( __( 'Event reapproved subject', 'dbem' ), 'dbem_event_reapproved_email_subject', '' );
+						em_options_input_text ( __( 'Event reapproved subject', 'dbem' ), 'dbem_event_reapproved_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event reapproved email', 'dbem' ), 'dbem_event_reapproved_email_body', '' );						
 						?>
 						<?php echo $save_button; ?>

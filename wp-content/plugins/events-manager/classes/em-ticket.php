@@ -11,6 +11,7 @@ class EM_Ticket extends EM_Object{
 	var $ticket_min;
 	var $ticket_max;
 	var $ticket_spaces = 10;
+	var $ticket_members = false;
 	var $fields = array(
 		'ticket_id' => array('name'=>'id','type'=>'%d'),
 		'event_id' => array('name'=>'event_id','type'=>'%d'),
@@ -21,7 +22,8 @@ class EM_Ticket extends EM_Object{
 		'ticket_end' => array('name'=>'end','type'=>'%s','null'=>1),
 		'ticket_min' => array('name'=>'min','type'=>'%s','null'=>1),
 		'ticket_max' => array('name'=>'max','type'=>'%s','null'=>1),
-		'ticket_spaces' => array('name'=>'spaces','type'=>'%s','null'=>1)
+		'ticket_spaces' => array('name'=>'spaces','type'=>'%s','null'=>1),
+		'ticket_members' => array('name'=>'members','type'=>'%d','null'=>1)
 	);
 	//Other Vars
 	/**
@@ -143,6 +145,7 @@ class EM_Ticket extends EM_Object{
 		$this->ticket_min = ( !empty($_POST['ticket_min']) ) ? $_POST['ticket_min']:'';
 		$this->ticket_max = ( !empty($_POST['ticket_max']) ) ? $_POST['ticket_max']:'';
 		$this->ticket_spaces = ( !empty($_POST['ticket_spaces']) ) ? $_POST['ticket_spaces']:'';
+		$this->ticket_members = ( !empty($_POST['ticket_members']) ) ? 1:0;
 		$this->compat_keys();
 		do_action('em_ticket_get_post', $this);
 	}	
@@ -178,7 +181,8 @@ class EM_Ticket extends EM_Object{
 		$condition_1 = (empty($this->ticket_start) || $this->start_timestamp <= $timestamp);
 		$condition_2 = $this->end_timestamp + 86400 >= $timestamp || empty($this->ticket_end);
 		$condition_3 = $EM_Event->start > $timestamp || strtotime($EM_Event->event_rsvp_date) > $timestamp;
-		if( $condition_1 && $condition_2 && $condition_3 ){
+		$condition_4 = !$this->ticket_members || ($this->ticket_members && is_user_logged_in());
+		if( $condition_1 && $condition_2 && $condition_3 && $condition_4 ){
 			//Time Constraints met, now quantities
 			if( $available_spaces > 0 && ($available_spaces >= $this->ticket_min || empty($this->ticket_min)) ){
 				return apply_filters('em_ticket_is_available',true,$this);

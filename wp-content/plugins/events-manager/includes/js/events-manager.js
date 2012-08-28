@@ -174,16 +174,29 @@ jQuery(document).ready( function($){
 						slot.show();
 					}
 					var postData = {};
+					var is_checked = false;
 					$.each($('#em-tickets-form form *[name]'), function(index,el){
 						el = $(el);
-						slot.find('input.'+el.attr('name')).attr({
-							'value' : el.attr('value'),
-							'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
-						});
+						if( el.attr('type') == 'checkbox' ){
+							is_checked = el.is(':checked') ? 1:0;
+							slot.find('input.'+el.attr('name')).attr({
+								'value' : is_checked,
+								'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
+							});
+						}else{
+							slot.find('input.'+el.attr('name')).attr({
+								'value' : el.attr('value'),
+								'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
+							});
+						}
 						if( el.attr('name') == 'ticket_start_pub'){
 							slot.find('span.ticket_start').text(el.attr('value'));
 						}else if( el.attr('name') == 'ticket_end_pub' ){
 							slot.find('span.ticket_end').text(el.attr('value'));
+						}else if( el.attr('name') == 'ticket_members' ){
+							if( el.is(':checked') ){
+								slot.find('span.ticket_name').prepend('* ');
+							}
 						}else{
 							slot.find('span.'+el.attr('name')).text(el.attr('value'));
 						}

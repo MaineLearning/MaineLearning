@@ -66,6 +66,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 			$result = $EM_Booking->save(false);
 			if($result){
 				//Success
+			    do_action('em_bookings_added', $EM_Booking);
 				$this->bookings[] = $EM_Booking;
 				$email = $EM_Booking->email();
 				if( get_option('dbem_bookings_approval') == 1 && $EM_Booking->booking_status == 0){
@@ -570,6 +571,13 @@ class EM_Bookings extends EM_Object implements Iterator{
 		if( is_numeric($args['person']) && current_user_can('manage_others_bookings') ){
 			$conditions['person'] = EM_BOOKINGS_TABLE.'.person_id='.$args['person'];
 		}
+		if( EM_MS_GLOBAL && !empty($args['blog']) && is_numeric($args['blog']) ){
+			if( is_main_site($args['blog']) ){
+				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']} OR ".EM_EVENTS_TABLE.".blog_id IS NULL)";
+			}else{
+				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']})";
+			}
+		}
 		return apply_filters('em_bookings_build_sql_conditions', $conditions, $args);
 	}
 	
@@ -589,7 +597,8 @@ class EM_Bookings extends EM_Object implements Iterator{
 	function get_default_search( $array = array() ){
 		$defaults = array(
 			'status' => false,
-			'person' => true //to add later, search by person's bookings...
+			'person' => true, //to add later, search by person's bookings...
+			'blog' => get_current_blog_id()
 		);	
 		if( true || is_admin() ){
 			//figure out default owning permissions
@@ -597,6 +606,11 @@ class EM_Bookings extends EM_Object implements Iterator{
 				$defaults['owner'] = get_current_user_id();
 			}else{
 				$defaults['owner'] = false;
+			}
+		}
+		if( EM_MS_GLOBAL && !is_admin() ){
+			if( empty($array['blog']) && is_main_site() && get_site_option('dbem_ms_global_events') ){
+			    $array['blog'] = false;
 			}
 		}
 		return apply_filters('em_bookings_get_default_search', parent::get_default_search($defaults,$array), $array, $defaults);

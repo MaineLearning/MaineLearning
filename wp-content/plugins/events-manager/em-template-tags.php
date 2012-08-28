@@ -76,17 +76,15 @@ function em_calendar( $args = array() ){ echo em_get_calendar($args); }
  * Generate a grouped list of events by year, month, week or day.
  * @since 4.213
  * @param array $args
- * @param string $format
  * @return string
  */
-function em_get_events_list_grouped($args, $format=''){
+function em_get_events_list_grouped($args){
 	//Reset some args to include pagination for if pagination is requested.
 	$args['limit'] = (!empty($args['limit']) && is_numeric($args['limit']) )? $args['limit'] : false;
 	$args['page'] = (!empty($args['page']) && is_numeric($args['page']) )? $args['page'] : 1;
 	$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : $args['page'];
 	$args['offset'] = ($args['page']-1) * $args['limit'];
 	$args['orderby'] = 'event_start_date,event_start_time,event_name'; // must override this to display events in right cronology.
-	if( !empty($format) ){ $args['date_format'] = html_entity_decode($format); } //accept formats
 	//Reset some vars for counting events and displaying set arrays of events
 	$atts = (array) $args;
 	$atts['pagination'] = false;
@@ -115,7 +113,7 @@ function em_get_events_list_grouped($args, $format=''){
 			$format = (!empty($args['date_format'])) ? $args['date_format']:'M Y';
 			$events_dates = array();
 			foreach($EM_Events as $EM_Event){
-				$events_dates[date_i18n($format,$EM_Event->start)][] = $EM_Event;
+				$events_dates[date_i18n($format, $EM_Event->start)][] = $EM_Event;
 			}
 			foreach ($events_dates as $month => $events){
 				echo '<h2>'.$month.'</h2>';

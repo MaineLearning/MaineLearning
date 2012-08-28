@@ -521,7 +521,7 @@ class EM_Bookings_Table{
 			}elseif($col == 'dbem_phone'){
 				$cols[] = $EM_Booking->get_person()->phone;
 			}elseif($col == 'user_name'){
-				if( $csv ){
+				if( $csv || ( get_option('dbem_bookings_registration_disable') && $EM_Booking->get_person()->ID == get_option('dbem_bookings_registration_user') ) ){
 					$cols[] = $EM_Booking->get_person()->get_name();
 				}else{
 					$cols[] = '<a href="'.add_query_arg(array('person_id'=>$EM_Booking->person_id, 'event_id'=>null), $EM_Booking->get_event()->get_bookings_url()).'">'. $EM_Booking->person->get_name() .'</a>';

@@ -401,8 +401,10 @@ class EM_Event extends EM_Object{
 			$this->get_bookings()->get_tickets()->get_post();
 			$this->event_rsvp = 1;
 			//RSVP cuttoff TIME is set up above where start/end times are as well 
-			$this->event_rsvp_date = ( isset($_POST['event_rsvp_date']) ) ? $_POST['event_rsvp_date'] : $this->event_start_date;
-			if( empty($this->event_rsvp_date) ){ $this->event_rsvp_time = '00:00:00'; }
+			if( !$this->is_recurring() ){
+				$this->event_rsvp_date = ( isset($_POST['event_rsvp_date']) ) ? $_POST['event_rsvp_date'] : $this->event_start_date;
+				if( empty($this->event_rsvp_date) ){ $this->event_rsvp_time = '00:00:00'; }
+			}
 			$this->event_spaces = ( isset($_POST['event_spaces']) ) ? absint($_POST['event_spaces']):0;
 		}else{
 			$this->event_rsvp = 0;
@@ -1095,6 +1097,7 @@ class EM_Event extends EM_Object{
 		}
 		//This is for the custom attributes
 		preg_match_all('/#_ATT\{([^}]+)\}(\{([^}]+)\})?/', $format, $results);
+		$attributes = em_get_attributes();
 		foreach($results[0] as $resultKey => $result) {
 			//Strip string of placeholder and just leave the reference
 			$attRef = substr( substr($result, 0, strpos($result, '}')), 6 );
@@ -1104,6 +1107,8 @@ class EM_Event extends EM_Object{
 			}elseif( !empty($results[3][$resultKey]) ){
 				//Check to see if we have a second set of braces;
 				$attString = $results[3][$resultKey];
+			}elseif( !empty($attributes['values'][$attRef][0]) ){
+			    $attString = $attributes['values'][$attRef][0];
 			}
 			$attString = apply_filters('em_event_output_placeholder', $attString, $this, $result, $target);
 			$event_string = str_replace($result, $attString ,$event_string );
@@ -1710,6 +1715,8 @@ class EM_Event extends EM_Object{
 					//adjust certain meta information
 					$event['event_start_date'] = $meta_fields['_event_start_date'] = date("Y-m-d", $day);
 					$meta_fields['_start_ts'] = $day;
+					$event['event_rsvp_date'] = $meta_fields['_event_rsvp_date'] = $event['event_start_date'];
+					$event['event_rsvp_time'] = $meta_fields['_event_rsvp_time'] = $event['event_start_time'];
 					if($this->recurrence_days > 0){
 						$meta_fields['_end_ts'] = $day + ($this->recurrence_days * 60*60*24);
 						$event['event_end_date'] = $meta_fields['_event_end_date'] = date("Y-m-d", $meta_fields['_end_ts']);

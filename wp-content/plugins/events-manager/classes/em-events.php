@@ -339,7 +339,7 @@ class EM_Events extends EM_Object implements Iterator {
 			'private_only' => false,
 			'post_id' => false
 		);
-		if(EM_MS_GLOBAL){
+		if( EM_MS_GLOBAL && !is_admin() ){
 			if( empty($array['blog']) && is_main_site() && get_site_option('dbem_ms_global_events') ){
 			    $array['blog'] = false;
 			}

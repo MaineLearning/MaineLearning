@@ -3,8 +3,8 @@ Contributors: netweblogic, nutsmuggler
 Donate link: http://wp-events-plugin.com
 Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
 Requires at least: 3.3
-Tested up to: 3.4
-Stable tag: 5.2.1
+Tested up to: 3.4.1
+Stable tag: 5.2.2
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -98,6 +98,21 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.2.2 =
+* added member-only tickets
+* added em_bookings_added action
+* fixed broken grouped events titles
+* fixed some timezone nuances in the ical, simpler and hopefully more reliable dealing with dst
+* fixed pesky recurrence bug not ignoring the new booking cut-off dates intended single events, as a result all recurring event cut-off times will be reset to null to prevent prematurely closed booking forms.
+* simplified some tab and panel names in the settings page, moved location map balloon settings to maps section
+* booking forms will now show under event content if override with formats is set to 'no'
+* fixed some event/location attribute nuances with regards to defaults overriding each other, will document
+* made attributes, categories and featured image sections in public event/location editors their own template parts
+* removed links to person summary page if in no-user booking mode and user isn't registered
+* fixed bad action url in booking form when under subdirectory installs (although not actually used by ajax)
+* fixed MS queries defaulting to global searches, including transactions
+* fixed MS network blog tables not being deleted by WP along with rest of blog
+
 = 5.2.1 =
 * quick fix for fatal error on front-side event submit forms when bp is disabled
 

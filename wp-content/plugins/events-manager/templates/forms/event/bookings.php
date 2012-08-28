@@ -51,7 +51,7 @@ global $EM_Event, $post;
 						?>
 						<tr valign="top" id="em-tickets-row-<?php echo $count ?>" class="em-tickets-row">
 							<td class="ticket-status"><span class="<?php echo ($EM_Ticket->is_available()) ? 'ticket_on':'ticket_off'; ?>"></span></td>													
-							<td class="ticket-name"><span class="ticket_name"><?php echo wp_kses_data($EM_Ticket->ticket_name); ?></span><br /><span class="ticket_description"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span></td>
+							<td class="ticket-name"><span class="ticket_name"><?php if($EM_Ticket->ticket_members) echo '* ';?><?php echo wp_kses_data($EM_Ticket->ticket_name); ?></span><br /><span class="ticket_description"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span></td>
 							<td class="ticket-price">
 								<span class="ticket_price"><?php echo ($EM_Ticket->ticket_price) ? $EM_Ticket->ticket_price : __('Free','dbem'); ?></span>
 							</td>
@@ -98,6 +98,7 @@ global $EM_Event, $post;
 								<input type="hidden" class="ticket_end" name="em_tickets[<?php echo $count; ?>][ticket_end]" value="<?php echo ( !empty($EM_Ticket->ticket_end) ) ? date("Y-m-d", $EM_Ticket->end_timestamp):''; ?>" />
 								<input type="hidden" class="ticket_min" name="em_tickets[<?php echo $count; ?>][ticket_min]" value="<?php echo $EM_Ticket->ticket_min ?>" />
 								<input type="hidden" class="ticket_max" name="em_tickets[<?php echo $count; ?>][ticket_max]" value="<?php echo $EM_Ticket->ticket_max ?>" />
+								<input type="hidden" class="ticket_members" name="em_tickets[<?php echo $count; ?>][ticket_members]" value="<?php echo $EM_Ticket->ticket_members ?>" />
 								<?php do_action('em_event_edit_ticket_hidden', $EM_Ticket); ?>
 							</td>
 						</tr>

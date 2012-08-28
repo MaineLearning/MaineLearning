@@ -38,6 +38,13 @@ function em_event_submission_emails($result, $EM_Event){
 				$EM_Event->email_send( $subject,$message, $admin_emails);
 				update_post_meta($EM_Event->post_id, '_event_approvals_count', $approvals_count+1);
 			}
+		}elseif( !current_user_can('activate_plugins') ){
+		    if( $EM_Event->is_published() && !$EM_Event->previous_status ){
+	        	$subject = $EM_Event->output(get_option('dbem_event_published_email_subject'), 'email');
+	        	$body = $EM_Event->output(get_option('dbem_event_published_email_body'), 'email');
+		        if( $EM_Event->event_owner == "" ) return true;
+		        $EM_Event->email_send( $subject, $body, $EM_Event->get_contact()->user_email);
+		    }
 		}
     }
     return $result;

@@ -936,18 +936,20 @@ class EM_Object {
 	 */
 	function email_send($subject, $body, $email){
 		global $EM_Mailer;
-		if( !is_object($EM_Mailer) ){
-			$EM_Mailer = new EM_Mailer();
-		}
-		if( !$EM_Mailer->send($subject,$body,$email) ){
-			if( is_array($EM_Mailer->errors) ){
-				foreach($EM_Mailer->errors as $error){
-					$this->errors[] = $error;
-				}
-			}else{
-				$this->errors[] = $EM_Mailer->errors;
+		if( !empty($subject) ){
+			if( !is_object($EM_Mailer) ){
+				$EM_Mailer = new EM_Mailer();
 			}
-			return false;
+			if( !$EM_Mailer->send($subject,$body,$email) ){
+				if( is_array($EM_Mailer->errors) ){
+					foreach($EM_Mailer->errors as $error){
+						$this->errors[] = $error;
+					}
+				}else{
+					$this->errors[] = $EM_Mailer->errors;
+				}
+				return false;
+			}
 		}
 		return true;
 	}
