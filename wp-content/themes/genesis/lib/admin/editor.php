@@ -10,7 +10,7 @@
  * @link       http://www.studiopress.com/themes/genesis
  */
 
-add_action( 'admin_notices', 'genesis_theme_files_to_edit' );
+#add_action( 'admin_notices', 'genesis_theme_files_to_edit' );
 /**
  * Remove the Genesis theme files from the Theme Editor, except when Genesis is
  * the current theme.
