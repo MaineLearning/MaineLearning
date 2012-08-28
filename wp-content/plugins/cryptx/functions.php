@@ -268,6 +268,12 @@ function rw_cryptx_mailtocrypt($Match) {
 	} else {				
 			$return = str_replace( $mailto, antispambot($mailto), $return);
 	}	
+	if(!empty($cryptX_var['css_id'])) {
+		$return = preg_replace( '/(.*)(">)/i', '$1" id="'.$cryptX_var['css_id'].'">', $return );
+	}
+	if(!empty($cryptX_var['css_class'])) {
+		$return = preg_replace( '/(.*)(">)/i', '$1" class="'.$cryptX_var['css_class'].'">', $return );
+	}
 	return $return;
 }
 

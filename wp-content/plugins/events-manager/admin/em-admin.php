@@ -222,23 +222,40 @@ function em_updates_check( $transient ) {
 	    //check WP repo for trunk version
 	    $request = wp_remote_get('http://plugins.svn.wordpress.org/events-manager/trunk/events-manager.php');
 	    
-	    preg_match('/Version: ([0-9a-z\.]+)/', $request['body'], $matches);
-	    
-	    if( !empty($matches[1]) ){
-	    	//we have a version number!
-		    if( version_compare($transient->checked[EM_SLUG], $matches[1]) < 0) {
-		    	$response = new stdClass();
-		    	$response->slug = EM_SLUG;
-				$response->new_version = $matches[1] ;
-		        $response->url = 'http://wordpress.org/extend/plugins/events-manager/';
-			    $response->package = 'http://downloads.wordpress.org/plugin/events-manager.zip';
-		       	$transient->response[EM_SLUG] = $response;
+	    if( !is_wp_error($request) ){
+		    preg_match('/Version: ([0-9a-z\.]+)/', $request['body'], $matches);
+		    
+		    if( !empty($matches[1]) ){
+		    	//we have a version number!
+			    if( version_compare($transient->checked[EM_SLUG], $matches[1]) < 0) {
+			    	$response = new stdClass();
+			    	$response->slug = EM_SLUG;
+					$response->new_version = $matches[1] ;
+			        $response->url = 'http://wordpress.org/extend/plugins/events-manager/';
+				    $response->package = 'http://downloads.wordpress.org/plugin/events-manager.zip';
+			       	$transient->response[EM_SLUG] = $response;
+			    }
 		    }
-	    }
-	    delete_option('em_check_dev_version');
+		}
+		
+		delete_option('em_check_dev_version');
     }
     
     return $transient;
 }
 add_filter('pre_set_site_transient_update_plugins', 'em_updates_check'); // Hook into the plugin update check and mod for dev version
+
+function em_user_action_links( $actions, $user ){
+	if ( !is_network_admin() && current_user_can( 'manage_others_bookings' ) ){
+		if( get_option('dbem_edit_bookings_page') && (!is_admin() || !empty($_REQUEST['is_public'])) ){
+			$my_bookings_page = get_permalink(get_option('dbem_edit_bookings_page'));
+			$bookings_link = em_add_get_params($my_bookings_page, array('person_id'=>$user->ID), false);
+		}else{
+			$bookings_link = EM_ADMIN_URL. "&page=events-manager-bookings&person_id=".$user->ID;
+		}
+		$actions['bookings'] = "<a href='$bookings_link'>" . __( 'Bookings','dbem' ) . "</a>";
+	}
+	return $actions;
+}
+add_filter('user_row_actions','em_user_action_links',10,2);
 ?>

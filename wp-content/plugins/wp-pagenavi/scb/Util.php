@@ -40,6 +40,7 @@ class scbUtil {
 			add_action( 'scb_activation_' . plugin_basename( $plugin ), $callback );
 	}
 
+	// For debugging
 	static function do_activation( $plugin ) {
 		do_action( 'scb_activation_' . plugin_basename( $plugin ) );
 	}
@@ -47,11 +48,15 @@ class scbUtil {
 	// Allows more than one uninstall hooks.
 	// Also prevents an UPDATE query on each page load.
 	static function add_uninstall_hook( $plugin, $callback ) {
+		if ( !is_admin() )
+			return;
+
 		register_uninstall_hook( $plugin, '__return_false' );	// dummy
 
 		add_action( 'uninstall_' . plugin_basename( $plugin ), $callback );
 	}
 
+	// For debugging
 	static function do_uninstall( $plugin ) {
 		do_action( 'uninstall_' . plugin_basename( $plugin ) );
 	}
@@ -114,7 +119,7 @@ class scbUtil {
 
 // Return a standard admin notice
 function scb_admin_notice( $msg, $class = 'updated' ) {
-	return "<div class='$class fade'><p>$msg</p></div>\n";
+	return html( "div class='$class fade'", html( "p", $msg ) );
 }
 
 // Transform a list of objects into an associative array
@@ -140,6 +145,8 @@ function scb_list_fold( $list, $key, $value ) {
  */
 if ( ! function_exists( 'html' ) ):
 function html( $tag ) {
+	static $SELF_CLOSING_TAGS = array( 'area', 'base', 'basefont', 'br', 'hr', 'input', 'img', 'link', 'meta' );
+
 	$args = func_get_args();
 
 	$tag = array_shift( $args );
@@ -160,7 +167,7 @@ function html( $tag ) {
 		list( $closing ) = explode( ' ', $tag, 2 );
 	}
 
-	if ( in_array( $closing, array( 'area', 'base', 'basefont', 'br', 'hr', 'input', 'img', 'link', 'meta' ) ) ) {
+	if ( in_array( $closing, $SELF_CLOSING_TAGS ) ) {
 		return "<{$tag} />";
 	}
 

@@ -191,7 +191,7 @@ function bp_em_load_core_component() {
 }
 add_action( 'bp_loaded', 'bp_em_load_core_component' );
 
-if( !is_admin() ){
+if( !is_admin() || ( defined('DOING_AJAX') && !empty($_REQUEST['is_public'])) ){
 	/*
 	 * Links and URL Rewriting
 	 */

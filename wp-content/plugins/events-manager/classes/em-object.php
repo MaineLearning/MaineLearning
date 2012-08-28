@@ -214,8 +214,12 @@ class EM_Object {
 				}
 			}else{
 				//date range
+				if( get_option('dbem_events_current_are_past') ){
+					$conditions['scope'] = "( event_start_date BETWEEN CAST('$date_start' AS DATE) AND CAST('$date_end' AS DATE) )";
+				}else{
+					$conditions['scope'] = "( event_start_date <= CAST('$date_end' AS DATE) AND event_end_date >= CAST('$date_start' AS DATE) )";
+				}
 				//$conditions['scope'] = " ( ( event_start_date <= CAST('$date_end' AS DATE) AND event_end_date >= CAST('$date_start' AS DATE) ) OR (event_start_date BETWEEN CAST('$date_start' AS DATE) AND CAST('$date_end' AS DATE)) OR (event_end_date BETWEEN CAST('$date_start' AS DATE) AND CAST('$date_end' AS DATE)) )";
-				$conditions['scope'] = "( (event_start_date BETWEEN CAST('$date_start' AS DATE) AND CAST('$date_end' AS DATE)) OR (event_end_date BETWEEN CAST('$date_start' AS DATE) AND CAST('$date_end' AS DATE)) )";
 			}
 		} elseif ( preg_match ( "/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $scope ) ) {
 			//Scope can also be a specific date. However, if 'day', 'month', or 'year' are set, that will take precedence
@@ -868,9 +872,9 @@ class EM_Object {
 			$return = array();
 			foreach($this->fields as $fieldName => $fieldArray){
 				if($inverted_array){
-					$return[$fieldName] = $fieldName;
+					$return[$fieldArray['name']] = $fieldName;
 				}else{
-					$return[$fieldName] = $fieldName;
+					$return[$fieldName] = $fieldArray['name'];
 				}
 			}
 			return apply_filters('em_object_get_fields', $return, $this, $inverted_array);
@@ -932,18 +936,20 @@ class EM_Object {
 	 */
 	function email_send($subject, $body, $email){
 		global $EM_Mailer;
-		if( !is_object($EM_Mailer) ){
-			$EM_Mailer = new EM_Mailer();
-		}
-		if( !$EM_Mailer->send($subject,$body,$email) ){
-			if( is_array($EM_Mailer->errors) ){
-				foreach($EM_Mailer->errors as $error){
-					$this->errors[] = $error;
-				}
-			}else{
-				$this->errors[] = $EM_Mailer->errors;
+		if( !empty($subject) ){
+			if( !is_object($EM_Mailer) ){
+				$EM_Mailer = new EM_Mailer();
 			}
-			return false;
+			if( !$EM_Mailer->send($subject,$body,$email) ){
+				if( is_array($EM_Mailer->errors) ){
+					foreach($EM_Mailer->errors as $error){
+						$this->errors[] = $error;
+					}
+				}else{
+					$this->errors[] = $EM_Mailer->errors;
+				}
+				return false;
+			}
 		}
 		return true;
 	}

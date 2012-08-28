@@ -23,6 +23,7 @@
 			</div>
 			<div><label><?php _e('Minimum tickets required per booking','dbem') ?></label><input type="text" name="ticket_min" /></div>
 			<div><label><?php _e('Maximum tickets required per booking','dbem') ?></label><input type="text" name="ticket_max" /></div>
+			<div><label><?php _e('Members Only?','dbem') ?></label> <input type="checkbox" name="ticket_members" value="1" /></div>
 			<?php do_action('em_tickets_edit_form_fields'); //do not delete, add your own fields here ?>
 			<input type="hidden" name="ticket_id" />
 			<input type="hidden" name="event_id" />

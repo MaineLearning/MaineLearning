@@ -4,11 +4,26 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: comments, subscribe, double opt in, kommentar, abonnieren, opt in, optin, kommentare, benachrichtigung
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 6.1.2
+Stable tag: 6.1.5
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Based on the well known Subscribe-to-Comments PlugIn, but now with double-opt-in feature to prevent spam.
 
 == Changelog ==
+
+= 6.1.5 =
+* minor bugfixes
+
+= 6.1.4 =
+* bugfixes
+* more translations
+
+= 6.1.3 =
+* .pot language file updated
+* Screenshot update
+* German translation update
+* Copyright notice could be made invisible for customer projects, donation via paypal is appreciated!
 
 = 6.1.2 =
 * Tested with 3.4.1
@@ -77,6 +92,10 @@ Based on the well known Subscribe-to-Comments PlugIn, but now with double-opt-in
 * Checked 3.0.4 compatibility
 * Bugfix with standalone subscribe
 
+== Upgrade Notice ==
+
+Currently none.
+
 == Description ==
 
 = English =
@@ -128,9 +147,9 @@ Use this code (within the loop) in your template file, to change the place of th
 
 Yes, just place this code snippet in your template (outside the comments form): <code><?php show_manual_subscription_form(); ?></code>
 
-= I use Hosteurope and I cannot send e-mails via this plugin =
+= I use Hosteurope.de as my website hoster and I cannot send e-mails via this plugin =
 
-See this (german) comment for a solution: http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/comment-page-10/#comment-4460
+See this (german) comment for a solution: <a href="http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/comment-page-10/#comment-4460">Go to Comment</a>
 
 == Screenshots ==
 

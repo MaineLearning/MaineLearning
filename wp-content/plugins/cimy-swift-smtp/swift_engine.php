@@ -133,19 +133,43 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array(),
 		$to = explode( ',', $to);
 
 	foreach ((array)$to as $recipient) {
-		$message->addTo(trim($recipient));
+		// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+		$recipient_name = '';
+		if( preg_match( '/(.*)<(.+)>/', $recipient, $matches ) ) {
+			if ( count( $matches ) == 3 ) {
+				$recipient_name = $matches[1];
+				$recipient = $matches[2];
+			}
+		}
+		$message->addTo(trim($recipient), $recipient_name);
 	}
 
 	// Add any CC and BCC recipients
 	if (!empty($cc)) {
 		foreach ((array) $cc as $recipient) {
-			$message->addCc(trim($recipient));
+			// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+			$recipient_name = '';
+			if( preg_match( '/(.*)<(.+)>/', $recipient, $matches ) ) {
+				if ( count( $matches ) == 3 ) {
+					$recipient_name = $matches[1];
+					$recipient = $matches[2];
+				}
+			}
+			$message->addCc(trim($recipient),  $recipient_name);
 		}
 	}
 
-	if ( !empty( $bcc ) ) {
+	if (!empty($bcc)) {
 		foreach ((array) $bcc as $recipient) {
-			$message->addBcc(trim($recipient));
+			// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+			$recipient_name = '';
+			if( preg_match( '/(.*)<(.+)>/', $recipient, $matches ) ) {
+				if ( count( $matches ) == 3 ) {
+					$recipient_name = $matches[1];
+					$recipient = $matches[2];
+				}
+			}
+			$message->addBcc(trim($recipient), $recipient_name);
 		}
 	}
 

@@ -29,6 +29,9 @@ class EM_Category_Taxonomy{
 				$wp_query->post_count = 1;
 				$wp_query->found_posts = 1;
 				$wp_query->max_num_pages = 1;
+				$wp_query->is_page = 1;
+				$wp_query->is_single = 0;
+				$wp_query->is_archive = 0;
 				//echo "<pre>"; print_r($wp_query); echo "</pre>";
 				$template = locate_template(array('page.php','index.php'),false); //category becomes a page
 			}
@@ -37,11 +40,14 @@ class EM_Category_Taxonomy{
 	}
 	
 	function the_content($content){
-		global $wp_query, $EM_Category;
-		$EM_Category = new EM_Category($wp_query->queried_object);
-		ob_start();
-		em_locate_template('templates/category-single.php',true);
-		return ob_get_clean();	
+		global $wp_query, $EM_Category, $post;
+		if( empty($post->ID) ){
+			$EM_Category = new EM_Category($wp_query->queried_object);
+			ob_start();
+			em_locate_template('templates/category-single.php',true);
+			return ob_get_clean();
+		}
+		return $content;
 	}
 	
 	function parse_query( ){

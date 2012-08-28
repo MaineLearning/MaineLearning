@@ -203,7 +203,7 @@ class EM_Locations extends EM_Object implements Iterator {
 			$conditions['owner'] = 'location_owner='.get_current_user_id();
 		}
 		//blog id in events table
-		if( EM_MS_GLOBAL && !empty($args['blog']) ){
+		if( EM_MS_GLOBAL && !empty($args['blog']) && is_numeric($args['blog']) ){
 			if( is_main_site($args['blog']) ){
 				$conditions['blog'] = "($locations_table.blog_id={$args['blog']} OR $locations_table.blog_id IS NULL)";
 			}else{
@@ -261,12 +261,9 @@ class EM_Locations extends EM_Object implements Iterator {
 			'private_only' => false,
 			'post_id' => false
 		);
-		if(EM_MS_GLOBAL){
-			global $bp;
-			if( !is_main_site() && !array_key_exists('blog', $array) ){
-				$array['blog'] = get_current_blog_id();
-			}elseif( array_key_exists('blog', $array) ) {
-				$array['blog'] = $array['blog'];
+		if( EM_MS_GLOBAL && !is_admin() ){
+			if( empty($array['blog']) && is_main_site() && get_site_option('dbem_ms_global_locations') ){
+			    $array['blog'] = false;
 			}
 		}
 		$array['eventful'] = ( !empty($array['eventful']) && $array['eventful'] == true );

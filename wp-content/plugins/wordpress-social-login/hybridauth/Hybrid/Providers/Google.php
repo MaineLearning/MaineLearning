@@ -33,7 +33,16 @@ class Hybrid_Providers_Google extends Hybrid_Provider_Model_OAuth2
 	*/
 	function loginBegin()
 	{
-		Hybrid_Auth::redirect( $this->api->authorizeUrl( array( "scope" => $this->scope, "access_type" => "offline" ) ) ); 
+		$parameters = array("scope" => $this->scope, "access_type" => "offline");
+		$optionals  = array("scope", "access_type", "redirect_uri", "approval_prompt");
+
+		foreach ($optionals as $parameter){
+			if( isset( $this->config[$parameter] ) && ! empty( $this->config[$parameter] ) ){
+				$parameters[$parameter] = $this->config[$parameter];
+			}
+		}
+
+		Hybrid_Auth::redirect( $this->api->authorizeUrl( $parameters ) ); 
 	}
 
 	/**
@@ -82,7 +91,12 @@ class Hybrid_Providers_Google extends Hybrid_Provider_Model_OAuth2
 		// refresh tokens if needed 
 		$this->refreshToken();  
 
-		$response = $this->api->api( "https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=500" ); 
+		if( ! isset( $this->config['contacts_param'] ) ){
+			$this->config['contacts_param'] = array( "max-results" => 500 );
+		}
+
+		$response = $this->api->api( "https://www.google.com/m8/feeds/contacts/default/full?" 
+							. http_build_query( array_merge( array('alt' => 'json'), $this->config['contacts_param'] ) ) ); 
 
 		if( ! $response ){
 			return ARRAY();

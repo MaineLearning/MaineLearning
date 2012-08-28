@@ -34,7 +34,7 @@ class GFWidget extends WP_Widget {
         //creating form
         $form = RGFormsModel::get_form_meta($instance['form_id']);
 
-        if(empty($instance["disable_scripts"])){
+        if(empty($instance["disable_scripts"]) && !is_admin()){
             RGForms::print_form_scripts($form, $instance["ajax"]);
         }
 

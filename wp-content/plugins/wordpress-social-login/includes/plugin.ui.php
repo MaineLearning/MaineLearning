@@ -49,7 +49,17 @@ function wsl_render_login_form()
 
 	if( $nok ){
 		?>
-		<p style="background-color: #FFFFE0;border:1px solid #E6DB55;padding:5px;">No provider registered!<br />Please visit the <strong>Settings\ WP Social Login</strong> administration page to configure this plugin.</p>
+		<p style="background-color: #FFFFE0;border:1px solid #E6DB55;padding:5px;">
+			<strong style="color:red;">WordPress Social Login is not configured yet!</strong>
+			<br />
+			Please visit the <strong>Settings\ WP Social Login</strong> administration page to configure this plugin.
+			<br />
+			For more information please refer to the plugin <a href="http://hybridauth.sourceforge.net/userguide/Plugin_WordPress_Social_Login.html">online user guide</a> 
+			or contact us at <a href="http://hybridauth.sourceforge.net/">hybridauth.sourceforge.net</a>
+		</p>
+		<style>
+			#wp-social-login-connect-with{display:none;}
+		</style>
 		<?php
 	}
 

@@ -18,8 +18,21 @@ jQuery(document).ready(function() {
     jQuery('#gform_fields').sortable({
         axis: 'y',
         cancel: '#field_settings',
+        handle: '.gfield_admin_icons',
         start: function(event, ui){gforms_dragging = ui.item[0].id;}
     });
+
+    jQuery('#field_choices').sortable({
+        axis: 'y',
+        handle: '.field-choice-handle',
+        update: function(event, ui){
+            var fromIndex = ui.item.data("index");
+            var toIndex = ui.item.index();
+            MoveFieldChoice(fromIndex, toIndex);
+        }
+    });
+
+
 
     if(jQuery(document).on){
     jQuery(document).on('change', '.gfield_rule_value_dropdown', function(){
@@ -872,12 +885,16 @@ function ToggleChoiceValue(isInit){
     //removing all classes
     container.removeClass("choice_with_price choice_with_value choice_with_value_and_price");
 
-    if(jQuery('#field_choice_values_enabled').is(":checked")){
+    var isShowValues = jQuery('#field_choice_values_enabled').is(":checked");
+    if(isShowValues){
         container.addClass("choice_with_value" + suffix);
     }
     else if(field.enablePrice){
         container.addClass("choice_with_price");
     }
+
+    /*var label = isShowValues ? gf_vars.hideValues : gf_vars.showValues;
+    jQuery('.gfield_value_label').html(label);*/
 }
 
 function GetConditionalObject(objectType){
@@ -2179,6 +2196,20 @@ function InsertFieldChoice(index){
 function DeleteFieldChoice(index){
     field = GetSelectedField();
     field.choices.splice(index, 1);
+    LoadFieldChoices(field);
+    UpdateFieldChoices(GetInputType(field));
+}
+
+function MoveFieldChoice(fromIndex, toIndex){
+    field = GetSelectedField();
+    var choice = field.choices[fromIndex];
+
+    //deleting from old position
+    field.choices.splice(fromIndex, 1);
+
+    //inserting into new position
+    field.choices.splice(toIndex, 0, choice);
+
     LoadFieldChoices(field);
     UpdateFieldChoices(GetInputType(field));
 }

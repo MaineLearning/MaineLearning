@@ -1,7 +1,7 @@
 <?php
 /*
  
- $Id: sitemap-ui.php 535851 2012-04-24 21:48:23Z arnee $
+ $Id: sitemap-ui.php 583237 2012-08-08 21:06:12Z arnee $
 
 */
 
@@ -734,18 +734,6 @@ class GoogleSitemapGeneratorUI {
 										}
 									}
 									
-									if($status->_usedAsk) {
-										if($status->_askSuccess) {
-											echo "<li>" .__("Ask.com was <b>successfully notified</b> about changes.",'sitemap'). "</li>";
-											$at = $status->GetAskTime();
-											if($at>4) {
-												echo "<li class=\sm_optimize\">" . str_replace("%time%",$at,__("It took %time% seconds to notify Ask.com, maybe you want to disable this feature to reduce the building time.",'sitemap')) . "</li>";
-											}
-										} else {
-											echo "<li class=\"sm_error\">" . str_replace("%s",wp_nonce_url($this->sg->GetBackLink() . "&sm_ping_service=ask&noheader=true",'sitemap'),__('There was a problem while notifying Ask.com. <a href="%s">View result</a>','sitemap')) . "</li>";
-										}
-									}
-									
 									$et = $status->GetTime();
 									$mem = $status->GetMemoryUsage();
 									
@@ -841,11 +829,6 @@ class GoogleSitemapGeneratorUI {
 								<input type="checkbox" id="sm_b_pingmsn" name="sm_b_pingmsn" <?php echo ($this->sg->GetOption("b_pingmsn")==true?"checked=\"checked\"":"") ?> />
 								<label for="sm_b_pingmsn"><?php _e('Notify Bing (formerly MSN Live Search) about updates of your Blog', 'sitemap') ?></label><br />
 								<small><?php echo str_replace("%s",$this->sg->GetRedirectLink('sitemap-lwt'),__('No registration required, but you can join the <a href="%s">Bing Webmaster Tools</a> to check crawling statistics.','sitemap')); ?></small>
-							</li>
-							<li>
-								<input type="checkbox" id="sm_b_pingask" name="sm_b_pingask" <?php echo ($this->sg->GetOption("b_pingask")==true?"checked=\"checked\"":"") ?> />
-								<label for="sm_b_pingask"><?php _e('Notify Ask.com about updates of your Blog', 'sitemap') ?></label><br />
-								<small><?php _e('No registration required.','sitemap'); ?></small>
 							</li>
 							<li>
 								<label for="sm_b_robots">

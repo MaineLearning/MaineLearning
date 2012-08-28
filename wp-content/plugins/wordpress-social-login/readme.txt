@@ -1,9 +1,12 @@
 === WordPress Social Login ===
 Contributors: miled
-Tags:  facebook, google, yahoo, twitter, windows live, myspace, foursquare, linkedin, gowalla, last.fm, goodreads, tumblr, aol, vkontakte, stackoverflow, github, 500px, skyrock, mixi.jp, steam, login, register, comment, social, social networks, social login
+Tags:  facebook, google, yahoo, twitter, windows live, myspace, foursquare, linkedin, gowalla, last.fm, instagram, goodreads, tumblr, aol, vkontakte, stackoverflow, github, 500px, skyrock, mixi.jp, steam, login, register, comment, social, social networks, social login
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
+Donate link: http://bit.ly/OTuFYN
+License: MIT License
+License URI: http://www.opensource.org/licenses/MIT
 
 WordPress Social Login allow your visitors to comment and login with social networks such as Twitter, Facebook, Google, Yahoo and more.
 
@@ -40,6 +43,7 @@ Using <strong>WordPress Social Login</strong>, your blog's users will be able to
  <li>Tumblr</li>  
  <li>Gowalla</li>  
  <li>Last.fm</li>  
+ <li>Instagram</li>  
  <li>Goodreads</li>  
  <li>AOL</li>  
  <li>Vkontakte</li>  

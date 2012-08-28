@@ -314,7 +314,7 @@ function relevanssi_highlight_terms($excerpt, $query) {
 
 	get_option('relevanssi_word_boundaries', 'on') == 'on' ? $word_boundaries = true : $word_boundaries = false;
 	foreach ($terms as $term) {
-		$pr_term = preg_quote($term);
+		$pr_term = preg_quote($term, '/');
 		if ($word_boundaries) {
 			$excerpt = preg_replace("/(\b$pr_term|$pr_term\b)(?!([^<]+)?>)/iu", $start_emp_token . '\\1' . $end_emp_token, $excerpt);
 		}

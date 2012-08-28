@@ -539,13 +539,32 @@ class EM_Location extends EM_Object {
 	
 	function output($format, $target="html") {
 		$location_string = $format;
-		preg_match_all('/\{([a-zA-Z0-9_]+)\}([^{]+)\{\/[a-zA-Z0-9_]+\}/', $format, $conditionals);
-		if( count($conditionals[0]) > 0 ){
-			//Check if the language we want exists, if not we take the first language there
-			foreach($conditionals[1] as $key => $condition){
-				$format = str_replace($conditionals[0][$key], apply_filters('em_location_output_condition', '', $conditionals[0][$key], $condition, $this), $format);
+	 	//First let's do some conditional placeholder removals
+	 	for ($i = 0 ; $i < get_option('dbem_conditional_recursions',1); $i++){ //you can add nested recursions by modifying this setting in your wp_options table
+			preg_match_all('/\{([a-zA-Z0-9_]+)\}(.+?)\{\/\1\}/s', $location_string, $conditionals);
+			if( count($conditionals[0]) > 0 ){
+				//Check if the language we want exists, if not we take the first language there
+				foreach($conditionals[1] as $key => $condition){
+					$show_condition = false;
+					if ($condition == 'has_loc_image'){
+						//does this event have an image?
+						$show_condition = ( $this->get_image_url() != '' );
+					}elseif ($condition == 'no_loc_image'){
+						//does this event have an image?
+						$show_condition = ( $this->get_image_url() == '' );
+					}
+					$show_condition = apply_filters('em_location_output_show_condition', $show_condition, $condition, $conditionals[0][$key], $this); 
+					if($show_condition){
+						//calculate lengths to delete placeholders
+						$placeholder_length = strlen($condition)+2;
+						$replacement = substr($conditionals[0][$key], $placeholder_length, strlen($conditionals[0][$key])-($placeholder_length *2 +1));
+					}else{
+						$replacement = '';
+					}
+					$location_string = str_replace($conditionals[0][$key], apply_filters('em_location_output_condition', $replacement, $condition, $conditionals[0][$key], $this), $location_string);
+				}
 			}
-		}
+	 	}
 		//This is for the custom attributes
 		preg_match_all('/#_LATT\{([^}]+)\}(\{([^}]+)\})?/', $format, $results);
 		foreach($results[0] as $resultKey => $result) {
