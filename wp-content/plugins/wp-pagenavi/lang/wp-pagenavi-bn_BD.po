@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: WP-PageNavi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-04 01:44+0300\n"
-"PO-Revision-Date: 2010-03-22 21:53+0300\n"
-"Last-Translator: FatCow <zhr@tut.by>\n"
+"PO-Revision-Date: 2012-06-16 12:34+0600\n"
+"Last-Translator: Mehdi Akram <mehdi.akram@gmail.com>\n"
 "Language-Team: Marcis G. <by.marcis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,176 +20,176 @@ msgstr ""
 #: pagenavi-options.php:110
 #: pagenavi-options.php:174
 msgid "Page Navigation Options"
-msgstr "Налады спісу старонак"
+msgstr "পেজ নেভিগেশন অপশন"
 
 #: pagenavi-options.php:53
 msgid "Updated"
-msgstr "&mdash; абноўлена"
+msgstr "হালনাগাতকৃত"
 
 #: pagenavi-options.php:58
 msgid "No Page Navigation Option Updated"
-msgstr "Налады спісу старонак не змяніліся"
+msgstr "কোন পেজ নেভিগেশন হালনাগাত হয়নি"
 
 #: pagenavi-options.php:64
 #: pagenavi-options.php:265
 msgid "UNINSTALL WP-PageNavi"
-msgstr "ВЫДАЛІЦЬ WP-PageNavi"
+msgstr "আনইনস্টল WP-PageNavi"
 
 #: pagenavi-options.php:72
 #, php-format
 msgid "Setting Key '%s' has been deleted."
-msgstr "Налада &laquo;%s&raquo; выдалена."
+msgstr "সেটিং কী '%s' ডিলিট করা হয়েছে।"
 
 #: pagenavi-options.php:76
 #, php-format
 msgid "Error deleting Setting Key '%s'."
-msgstr "Памылка пры выдаленні налады &laquo;%s&raquo;."
+msgstr "সেটিং কী '%s' ডিলিটে ত্রুটি।"
 
 #: pagenavi-options.php:98
 #: pagenavi-options.php:233
 msgid "Uninstall WP-PageNavi"
-msgstr "Выдаліць спіс старонак"
+msgstr "আনইনস্টল WP-PageNavi"
 
 #: pagenavi-options.php:99
 #, php-format
 msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-PageNavi Will Be Deactivated Automatically."
-msgstr "<a href=\"%s\">Націсніце тут</a> каб завяршыць выдаленне. WP-PageNavi будзе адключаны аўтаматычна."
+msgstr "<a href=\"%s\">ক্লিক করুন</a> সয়ংক্রিয়ভাবে WP-PageNavi নিষ্কিয় এবং আনইনষ্টল হবে।"
 
 #: pagenavi-options.php:111
 msgid "Page Navigation Text"
-msgstr "Шаблоны спісу старонак"
+msgstr "পেজ নেভিগেশন টেক্সট"
 
 #: pagenavi-options.php:114
 msgid "Text For Number Of Pages"
-msgstr "Шаблон агульнага спісу старонак"
+msgstr "পেজ নম্বরের টেক্সট"
 
 #: pagenavi-options.php:117
 msgid "The current page number."
-msgstr "Нумар бягучай старонкі."
+msgstr "চলতি পেজ নম্বর।"
 
 #: pagenavi-options.php:118
 #: pagenavi-options.php:139
 #: pagenavi-options.php:146
 msgid "The total number of pages."
-msgstr "Агульная колькасць старонак."
+msgstr "মোট পেজ নম্বর।"
 
 #: pagenavi-options.php:122
 msgid "Text For Current Page"
-msgstr "Элемент &laquo;Бягучая старонка&raquo;"
+msgstr "চলতি পেজের টেক্সট"
 
 #: pagenavi-options.php:125
 #: pagenavi-options.php:132
 msgid "The page number."
-msgstr "Нумар старонкі."
+msgstr "পেজ নম্বর।"
 
 #: pagenavi-options.php:129
 msgid "Text For Page"
-msgstr "Элемент &laquo;Старонка&raquo;"
+msgstr "পেজের টেক্সট"
 
 #: pagenavi-options.php:136
 msgid "Text For First Post"
-msgstr "Элемент &laquo;Першы запіс&raquo;"
+msgstr "প্রথম পোষ্টের টেক্সট"
 
 #: pagenavi-options.php:143
 msgid "Text For Last Post"
-msgstr "Элемент &laquo;Апошні запіс&raquo;"
+msgstr "শেষ পোষ্টের টেক্সট"
 
 #: pagenavi-options.php:150
 msgid "Text For Next Post"
-msgstr "Элемент &laquo;Наступны запіс&raquo;"
+msgstr "পরবর্তী পোষ্টের টেক্সট"
 
 #: pagenavi-options.php:156
 msgid "Text For Previous Post"
-msgstr "Элемент &laquo;Папярэдні запіс&raquo;"
+msgstr "পূর্বের পেজের টেক্সট"
 
 #: pagenavi-options.php:162
 msgid "Text For Next ..."
-msgstr "Элемент &laquo;Наступныя&hellip;&raquo;"
+msgstr "পরবর্তীর জন্য টেক্সট..."
 
 #: pagenavi-options.php:168
 msgid "Text For Previous ..."
-msgstr "Элемент &laquo;Папярэднія&hellip;&raquo;"
+msgstr "পূর্বের জন্য টেক্সট..."
 
 #: pagenavi-options.php:177
 msgid "Page Navigation Style"
-msgstr "Стыль спісу старонак"
+msgstr "পেজ নেভিগেশন স্টাইল"
 
 #: pagenavi-options.php:180
 msgid "Normal"
-msgstr "Звычайны"
+msgstr "সাধারণ"
 
 #: pagenavi-options.php:181
 msgid "Drop Down List"
-msgstr "Выпадальны спіс"
+msgstr "ড্রপ-ডাউন তালিকা"
 
 #: pagenavi-options.php:186
 msgid "Number Of Pages To Show?"
-msgstr "Колькі старонак паказваць?"
+msgstr "কত পেজ দেখাবে?"
 
 #: pagenavi-options.php:192
 msgid "Always Show Page Navigation?"
-msgstr "Заўсёды паказваць спіс старонак?"
+msgstr "সবসময় পেজ নেভিগেশন দেখাবে?"
 
 #: pagenavi-options.php:195
 #: pagenavi-options.php:264
 msgid "Yes"
-msgstr "Так"
+msgstr "হ্যা"
 
 #: pagenavi-options.php:196
 msgid "No"
-msgstr "Не"
+msgstr "না"
 
 #: pagenavi-options.php:201
 msgid "Number Of Larger Page Numbers To Show?"
-msgstr "Колькі старонак паказваць у выглядзе дыяпазонаў?"
+msgstr "বড় পেজের ক্ষেত্রে কতগুলো নম্বর দেখাবে?"
 
 #: pagenavi-options.php:205
 msgid "Larger page numbers are in additional to the default page numbers. It is useful for authors who is paginating through many posts."
-msgstr "Дыяпазоны старонак дапаўняюць звычайную нумарацыю і карысныя ў тых выпадках, калі на вашым сайце вельмі шмат запісаў."
+msgstr "বড় পেজ নম্বরগুলো ডিফল্ট পেজ নম্বেরের জন্য অতিরিক্ত। এটা লেখেকের জন্য যে অনেক পোষ্টের নম্বর দেয়।"
 
 #: pagenavi-options.php:207
 msgid "For example, WP-PageNavi will display: Pages 1, 2, 3, 4, 5, 10, 20, 30, 40, 50"
-msgstr "Напрыклад, спіс старонак будзе выглядаць так: Старонкі 1, 2, 3, 4, 5, 10, 20, 30, 40, 50"
+msgstr "উদাহারণ, WP-PageNavi দেখাবে: পেজ ১, ২, ৩, ৪, ৫, ১০, ২০, ৩০, ৪০, ৫০"
 
 #: pagenavi-options.php:209
 msgid "Enter 0 to disable."
-msgstr "Увядзіце 0 каб адключыць гэту функцыю."
+msgstr "ডিজেবলের জন্য ০ টাপুন।"
 
 #: pagenavi-options.php:213
 msgid "Show  Larger Page Numbers In Multiples Of:"
-msgstr "Каэфіцыент для дыяпазонаў старонак:"
+msgstr "অধিকের মধ্যে বড় পেজ  নম্বর দেখাও:"
 
 #: pagenavi-options.php:217
 msgid "If mutiple is in 5, it will show: 5, 10, 15, 20, 25"
-msgstr "Калі каэфіцыент роўны 5, то спіс старонак будзе выглядаць так: 5, 10, 15, 20, 25"
+msgstr "যদি ৫ এর অধিক হয়, তাহলে দেখাবে: ৫, ১০, ১৫, ২০, ২৫"
 
 #: pagenavi-options.php:219
 msgid "If mutiple is in 10, it will show: 10, 20, 30, 40, 50"
-msgstr "А калі 10&nbsp;&mdash; так: 10, 20, 30, 40, 50"
+msgstr "যদি ১০ এর একাধিক তাহলে দেখাবে: ১০, ২০, ৩০, ৪০, ৫০"
 
 #: pagenavi-options.php:224
 msgid "Save Changes"
-msgstr "Захаваць змены"
+msgstr "পরিবর্তন সংরক্ষণ করুন"
 
 #: pagenavi-options.php:235
 msgid "Deactivating WP-PageNavi plugin does not remove any data that may have been created, such as the page navigation options. To completely remove this plugin, you can uninstall it here."
-msgstr "Пры адключэнні ўбудовы адлюстравання спісу старонак створаныя дадзеныя, уключаючы налады, не выдаляюцца. Для таго, каб цалкам выдаліць убудову, адменіце тут яго ўсталёўку."
+msgstr "WP-PageNav প্লাগইনটি নিষ্ক্রয় করলে এর তথ্যগুলো মুছবে না যা পেজ নেভিগেশন অপশনে তৈরী হয়েছে। সম্পূর্ণভাবে প্লাগইনটি মুছে ফেলতে এখান থেকে আনইনষ্টল করুন।"
 
 #: pagenavi-options.php:238
 msgid "WARNING:"
-msgstr "УВАГА:"
+msgstr "সতর্কতা:"
 
 #: pagenavi-options.php:239
 msgid "Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first."
-msgstr "Выдаленне ўбудовы незваротна. Для таго, каб стварыць рэзервовую копію БД WordPress і захаваць вашы дадзеныя, выкарыстоўвайце ўбудову &laquo;Database Backup&raquo;."
+msgstr "যদি আনইনষ্টল করেন তাহলে আর ফিরে পাবেন না। আপনার উচিৎ ডাটাবেজ ব্যাকআপ প্লাগইন ব্যবহার করে ওয়ার্ডপ্রেস ব্যাকআপ করা।"
 
 #: pagenavi-options.php:242
 msgid "The following WordPress Options will be DELETED:"
-msgstr "Будуць ВЫДАЛЕНЫ наступныя налады WordPress:"
+msgstr "ওয়ার্ডপ্রেসের এই অপশনটি মুছে যাবে:"
 
 #: pagenavi-options.php:247
 msgid "WordPress Options"
-msgstr "Налады WordPress"
+msgstr "ওয়ার্ডপ্রেস অপশন"
 
 #: pagenavi-options.php:265
 msgid ""
@@ -198,26 +198,26 @@ msgid ""
 "\\n"
 " Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
-"Вы збіраецеся выдаліць убудову WP-PageNavi.\\n"
-"Гэта дзеянне незваротна.\\n"
+"আপনি WP-PageNavi ওয়ার্ডপেস থেকে আনইনষ্টল করছেন।\\n"
+"এটা আগের অবস্থায় ফিরতে পারবে না।\\n"
 "\\n"
-"Каб спыніць выдаленне, абярыце [Адмена]. Абярыце [OK], калі  вы жадаеце яго працягнуць."
+"বন্ধ করতে [বাতিল] করুন, আনইনষ্টল করতে [ওকে] করুন।"
 
 #: wp-pagenavi.php:42
 msgid "PageNavi"
-msgstr "Спіс старонак"
+msgstr "পেজনেভি"
 
 #: wp-pagenavi.php:201
 msgid "Page %CURRENT_PAGE% of %TOTAL_PAGES%"
-msgstr "Старонка %CURRENT_PAGE% з %TOTAL_PAGES%"
+msgstr "মোট %TOTAL_PAGES% পৃষ্ঠা এর মধ্যে %CURRENT_PAGE%"
 
 #: wp-pagenavi.php:204
 msgid "&laquo; First"
-msgstr "&laquo; Першая"
+msgstr "&laquo; প্রথম"
 
 #: wp-pagenavi.php:205
 msgid "Last &raquo;"
-msgstr "Апошняя &raquo;"
+msgstr "শেষ &raquo;"
 
 #: wp-pagenavi.php:206
 msgid "&raquo;"

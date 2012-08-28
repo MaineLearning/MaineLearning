@@ -22,7 +22,8 @@ function wp_pagenavi( $args = array() ) {
 		'after' => '',
 		'options' => array(),
 		'query' => $GLOBALS['wp_query'],
-		'type' => 'posts'
+		'type' => 'posts',
+		'echo' => true
 	) );
 
 	extract( $args, EXTR_SKIP );
@@ -172,7 +173,12 @@ function wp_pagenavi( $args = array() ) {
 	}
 	$out = $before . "<div class='wp-pagenavi'>\n$out\n</div>" . $after;
 
-	echo apply_filters( 'wp_pagenavi', $out );
+	$out = apply_filters( 'wp_pagenavi', $out );
+
+	if ( !$echo )
+		return $out;
+
+	echo $out;
 }
 
 
@@ -260,13 +266,13 @@ function wp_pagenavi_dropdown() {
 class PageNavi_Core {
 	static $options;
 
-	function init( $options ) {
+	static function init( $options ) {
 		self::$options = $options;
 
 		add_action( 'wp_print_styles', array( __CLASS__, 'stylesheets' ) );
 	}
 
-	function stylesheets() {
+	static function stylesheets() {
 		if ( !self::$options->use_pagenavi_css )
 			return;
 
