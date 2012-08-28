@@ -237,6 +237,9 @@
                         Removed deprecated function call
  2012-04-24     3.2.7   Fixed custom post types, thanks to clearsite of the wordpress.org forum!
                         Fixed broken admin layout on WP 3.4
+ 2012-08-08     3.2.8   Fixed wrong custom taxonomy URLs, thanks to ramon fincken of the wordpress.org forum!
+                        Removed ASK ping since they shut down their service.
+                        Exclude post_format taxonomy from custom taxonomy list
 
  Maybe Todo:
  ==============================================================================

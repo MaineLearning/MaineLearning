@@ -191,7 +191,7 @@ function em_init_actions() {
 				$sql = $wpdb->prepare("
 					SELECT 
 						location_id AS `id`,
-						Concat( location_name, ', ', location_address, ', ', location_town)  AS `label`,
+						Concat( location_name )  AS `label`,
 						location_name AS `value`,
 						location_address AS `address`, 
 						location_town AS `town`, 
@@ -621,8 +621,8 @@ function em_init_actions() {
 		$EM_Bookings_Table->limit = 150; //if you're having server memory issues, try messing with this number
 		$EM_Bookings = $EM_Bookings_Table->get_bookings();
 		$handle = fopen("php://output", "w");
-		while(!empty($EM_Bookings)){
-			foreach( $EM_Bookings as $EM_Booking ) {
+		while(!empty($EM_Bookings->bookings)){
+			foreach( $EM_Bookings->bookings as $EM_Booking ) {
 				//Display all values
 				/* @var $EM_Booking EM_Booking */
 				/* @var $EM_Ticket_Booking EM_Ticket_Booking */

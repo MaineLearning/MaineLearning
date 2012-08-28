@@ -1,12 +1,14 @@
 <?php
 
+// wp-cron job container
+
 class scbCron {
 	protected $schedule;
 	protected $interval;
 	protected $time;
 
 	protected $hook;
-	protected $callback_args;
+	protected $callback_args = array();
 
 	/**
 	 * Create a new cron job
@@ -15,9 +17,9 @@ class scbCron {
 	 * @param array List of args:
 	 		string $action OR callback $callback
 			string $schedule OR number $interval
-			array $callback_args ( optional )
+			array $callback_args (optional)
 	 */
-	function __construct( $file, $args ) {
+	function __construct( $file = false, $args ) {
 		extract( $args, EXTR_SKIP );
 
 		// Set time & schedule
@@ -45,9 +47,9 @@ class scbCron {
 		}
 
 		if ( isset( $callback_args ) )
-			$this->callback_args = ( array ) $callback_args;
+			$this->callback_args = (array) $callback_args;
 
-		if ( $this->schedule ) {
+		if ( $file && $this->schedule ) {
 			scbUtil::add_activation_hook( $file, array( $this, 'reset' ) );
 			register_deactivation_hook( $file, array( $this, 'unschedule' ) );
 		}

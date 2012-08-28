@@ -20,7 +20,7 @@ $has_depreciated = false;
 					<tr valign="top" id="em_attribute_<?php echo $count ?>">
 						<td scope="row"><?php echo $name ?></td>
 						<td>
-							<?php if( count($attributes['values'][$name]) > 0 ): ?>
+							<?php if( count($attributes['values'][$name]) > 1 ): ?>
 							<select name="em_attributes[<?php echo $name ?>]">
 								<?php foreach($attributes['values'][$name] as $attribute_val): ?>
 									<?php if( array_key_exists($name, $EM_Event->event_attributes) && $EM_Event->event_attributes[$name]==$attribute_val ): ?>

@@ -125,7 +125,7 @@ function relevanssi_search_stats() {
 function relevanssi_truncate_logs() {
 	global $wpdb, $relevanssi_variables;
 	
-	$query = "TRUNCATE " . $relevanssi_variables['relevanssi_log_table'];
+	$query = "TRUNCATE " . $relevanssi_variables['log_table'];
 	$wpdb->query($query);
 	
 	echo "<div id='relevanssi-warning' class='updated fade'>Logs clear!</div>";
@@ -491,14 +491,14 @@ EOR;
 
 function relevanssi_total_queries( $title ) {
 	global $wpdb, $relevanssi_variables;
-	$relevanssi_log_table = $relevanssi_variables['relevanssi_log_table'];
+	$log_table = $relevanssi_variables['log_table'];
 
 	$count = array();
 
-	$count['Today and yesterday'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $relevanssi_log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 1;" ) );
-	$count['Last 7 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $relevanssi_log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 7;" ) );
-	$count['Last 30 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $relevanssi_log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 30;" ) );
-	$count['Forever'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $relevanssi_log_table;" ) );
+	$count['Today and yesterday'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 1;" ) );
+	$count['Last 7 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 7;" ) );
+	$count['Last 30 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 30;" ) );
+	$count['Forever'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table;" ) );
 
 	echo "<table class='widefat'><thead><tr><th colspan='2'>$title</th></tr></thead><tbody><tr><th>When</th><th>Searches</th></tr>";
 	foreach ( $count as $when => $searches ) {
@@ -510,11 +510,11 @@ function relevanssi_total_queries( $title ) {
 
 function relevanssi_date_queries($d, $title, $version = 'good') {
 	global $wpdb, $relevanssi_variables;
-	$relevanssi_log_table = $relevanssi_variables['relevanssi_log_table'];
+	$log_table = $relevanssi_variables['log_table'];
 	
 	if ($version == 'good')
 		$queries = $wpdb->get_results("SELECT COUNT(DISTINCT(id)) as cnt, query, hits
-		  FROM $relevanssi_log_table
+		  FROM $log_table
 		  WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= $d
 		  GROUP BY query
 		  ORDER BY cnt DESC
@@ -522,7 +522,7 @@ function relevanssi_date_queries($d, $title, $version = 'good') {
 	
 	if ($version == 'bad')
 		$queries = $wpdb->get_results("SELECT COUNT(DISTINCT(id)) as cnt, query, hits
-		  FROM $relevanssi_log_table
+		  FROM $log_table
 		  WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= $d
 		    AND hits = 0
 		  GROUP BY query
@@ -855,7 +855,17 @@ function relevanssi_options_form() {
 	<input type="submit" name="index" value="<?php _e('Build the index', 'relevanssi') ?>" style="background-color:#007f00; border-color:#5fbf00; border-style:solid; border-width:thick; padding: 5px; color: #fff;" />
 	<input type="submit" name="index_extend" value="<?php _e('Continue indexing', 'relevanssi') ?>"  style="background-color:#e87000; border-color:#ffbb00; border-style:solid; border-width:thick; padding: 5px; color: #fff;" />, <?php _e('add', 'relevanssi'); ?> <input type="text" size="4" name="relevanssi_index_limit" value="<?php echo $index_limit ?>" /> <?php _e('documents.', 'relevanssi'); ?></p>
 
+<?php
+	if (empty($index_post_types)) {
+		echo "<p><strong>" . __("WARNING: You've chosen no post types to index. Nothing will be indexed. <a href='#indexing'>Choose some post types to index</a>.", 'relevanssi') . "</strong></p>";
+	}
+?>
+
 	<p><?php _e("Use 'Build the index' to build the index with current <a href='#indexing'>indexing options</a>. If you can't finish indexing with one go, use 'Continue indexing' to finish the job. You can change the number of documents to add until you find the largest amount you can add with one go. See 'State of the Index' below to find out how many documents actually go into the index.", 'relevanssi') ?></p>
+
+	<p><?php _e("If Relevanssi doesn't index anything and you have upgraded from a 2.x version, it's likely the changes in
+	the database structure haven't gone through in the upgrade. In that case all you need to do is to deactivate the
+	plugin and then activate it again.", 'relevanssi') ?></p>
 	
 	<h3><?php _e("State of the Index", "relevanssi"); ?></h3>
 	<p>
@@ -1244,7 +1254,7 @@ EOH;
 
 	<label for='relevanssi_custom_taxonomies'><?php _e("Custom taxonomies to index:", "relevanssi"); ?>
 	<input type='text' name='relevanssi_custom_taxonomies' size='30' value='<?php echo $custom_taxonomies ?>' /></label><br />
-	<small><?php _e("A comma-separated list of custom taxonomy IDs to include in the index.", "relevanssi"); ?></small>
+	<small><?php _e("A comma-separated list of custom taxonomy names to include in the index.", "relevanssi"); ?></small>
 
 	<br /><br />
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bulletproof-security\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 16:15-0800\n"
-"PO-Revision-Date: 2012-05-10 16:16-0800\n"
+"POT-Creation-Date: 2012-08-12 16:44-0800\n"
+"PO-Revision-Date: 2012-08-12 16:45-0800\n"
 "Last-Translator: Ed Alexander <edward@ait-pro.com>\n"
 "Language-Team: AITpro <info@ait-pro.com>\n"
 "MIME-Version: 1.0\n"
@@ -1955,7 +1955,7 @@ msgid "Backup & Restore Help Info"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2559
-msgid "BPS .47 Guide"
+msgid "BPS .47.1 Guide"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2560
@@ -1963,11 +1963,11 @@ msgid "Maintenance Mode Help Info"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2563
-msgid "BPS .47 Features"
+msgid "BPS .47.1 Features"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2564
-msgid "BPS .47 Coding Modifications Help Info"
+msgid "BPS .47.1 Coding Modifications Help Info"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2567
@@ -1979,7 +1979,7 @@ msgid "Modifying BPS .htaccess Files for WordPress Subfolders"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2571
-msgid "BPS .47 Screenshots"
+msgid "BPS .47.1 Screenshots"
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2572
@@ -2023,7 +2023,7 @@ msgid "No new .htaccess code was added to either the Root or wp-admin .htaccess 
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2610
-msgid "You can either manually change the version of your .htaccess file from .46.9 to .47 using the BPS File Editor or create new Master .htaccess files with AutoMagic and activate BulletProof Modes."
+msgid "You can either manually change the version of your .htaccess file from .46.9 to .47.1 using the BPS File Editor or create new Master .htaccess files with AutoMagic and activate BulletProof Modes."
 msgstr ""
 
 #: C:\BPS47/admin/options.php:2618
@@ -2259,7 +2259,7 @@ msgid "php.ini and php5.ini are .htaccess protected by BPS"
 msgstr ""
 
 #: C:\BPS47/includes/functions.php:159
-msgid "Either a BPS .htaccess file was NOT found in your root folder or you have not activated BulletProof Mode for your Root folder yet, Default Mode is activated, Maintenance Mode is activated or the version of the BPS Pro htaccess file that you are using is not .47 or the BPS QUERY STRING EXPLOITS code does not exist in your root .htaccess file. Please read the Read Me button above."
+msgid "Either a BPS .htaccess file was NOT found in your root folder or you have not activated BulletProof Mode for your Root folder yet, Default Mode is activated, Maintenance Mode is activated or the version of the BPS Pro htaccess file that you are using is not .47.1 or the BPS QUERY STRING EXPLOITS code does not exist in your root .htaccess file. Please read the Read Me button above."
 msgstr ""
 
 #: C:\BPS47/includes/functions.php:172
@@ -2275,7 +2275,7 @@ msgid "The .htaccess file that is activated in your wp-admin folder is:"
 msgstr ""
 
 #: C:\BPS47/includes/functions.php:180
-msgid "A valid BPS .htaccess file was NOT found in your wp-admin folder. Either you have not activated BulletProof Mode for your wp-admin folder yet or the version of the wp-admin htaccess file that you are using is not .47. BulletProof Mode for the wp-admin folder MUST also be activated when you have BulletProof Mode activated for the Root folder. Please read the Read Me button above."
+msgid "A valid BPS .htaccess file was NOT found in your wp-admin folder. Either you have not activated BulletProof Mode for your wp-admin folder yet or the version of the wp-admin htaccess file that you are using is not .47.1. BulletProof Mode for the wp-admin folder MUST also be activated when you have BulletProof Mode activated for the Root folder. Please read the Read Me button above."
 msgstr ""
 
 #: C:\BPS47/includes/functions.php:190

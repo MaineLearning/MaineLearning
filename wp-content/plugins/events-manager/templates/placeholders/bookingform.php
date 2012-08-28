@@ -35,7 +35,7 @@ $can_book = is_user_logged_in() || (get_option('dbem_bookings_anonymous') && !is
 		<?php echo $EM_Notices; ?>
 		<?php if( count($EM_Tickets->tickets) > 0) : ?>
 			<?php //Tickets exist, so we show a booking form. ?>
-			<form id='em-booking-form' class="em-booking-form" name='booking-form' method='post' action='<?php echo apply_filters('em_booking_form_action_url',home_url($_SERVER['REQUEST_URI'])); ?>'>
+			<form id='em-booking-form' class="em-booking-form" name='booking-form' method='post' action='<?php echo apply_filters('em_booking_form_action_url',$_SERVER['REQUEST_URI']); ?>'>
 			 	<input type='hidden' name='action' value='booking_add'/>
 			 	<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
 			 	<input type='hidden' name='_wpnonce' value='<?php echo wp_create_nonce('booking_add'); ?>'/>
@@ -63,7 +63,7 @@ $can_book = is_user_logged_in() || (get_option('dbem_bookings_anonymous') && !is
 							do_action('em_booking_form_before_user_details');
 							if( has_action('em_booking_form_custom') ){ 
 								//Pro Custom Booking Form. You can create your own custom form by hooking into this action and setting the option above to true
-								do_action('em_booking_form_custom'); //do not delete
+								do_action('em_booking_form_custom', $EM_Event); //do not delete
 							}else{
 								//If you just want to modify booking form fields, you could do so here
 								em_locate_template('forms/bookingform/booking-fields.php',true, array('EM_Event'=>$EM_Event, 'EM_Ticket'=>$EM_Ticket));

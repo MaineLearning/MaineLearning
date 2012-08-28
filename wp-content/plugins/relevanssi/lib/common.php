@@ -1,9 +1,4 @@
 <?php
-/**
-Relevanssi common functions library
-- Premium 1.8.3
-- Free 3.0
-*/
 
 // thanks to rvencu
 function relevanssi_wpml_filter($data) {
@@ -101,10 +96,16 @@ function relevanssi_update_log($query, $hits) {
 		if (in_array($user->user_login, $omit)) return;
 	}
 		
-	$q = $wpdb->prepare("INSERT INTO " . $relevanssi_variables['relevanssi_log_table'] . " (query, hits, user_id, ip) VALUES (%s, %d, %d, %s)", $query, intval($hits), $user->ID, $_SERVER['REMOTE_ADDR']);
+	$q = $wpdb->prepare("INSERT INTO " . $relevanssi_variables['log_table'] . " (query, hits, user_id, ip) VALUES (%s, %d, %d, %s)", $query, intval($hits), $user->ID, $_SERVER['REMOTE_ADDR']);
 	$wpdb->query($q);
 }
 
+/**
+ *	Do note that while this function takes $post_ok as a parameter, it actually doesn't care much
+ *  about the previous value, and will instead overwrite it. If you want to make sure your value
+ *  is preserved, either disable this default function, or run your function on a later priority
+ *  (this defaults to 10).
+ */
 function relevanssi_default_post_ok($post_ok, $doc) {
 	$status = relevanssi_get_post_status($doc);
 
@@ -250,7 +251,7 @@ function relevanssi_recognize_phrases($q) {
 			$phrase = $wpdb->escape($phrase);
 			$query = "SELECT ID,post_content,post_title FROM $wpdb->posts 
 				WHERE (post_content LIKE '%$phrase%' OR post_title LIKE '%$phrase%')
-				AND post_status = 'publish'";
+				AND post_status IN ('publish', 'draft', 'private', 'pending', 'future', 'inherit')";
 			
 			$docs = $wpdb->get_results($query);
 
@@ -265,7 +266,7 @@ function relevanssi_recognize_phrases($q) {
 
 			$query = "SELECT ID FROM $wpdb->posts as p, $wpdb->term_relationships as r, $wpdb->term_taxonomy as s, $wpdb->terms as t
 				WHERE r.term_taxonomy_id = s.term_taxonomy_id AND s.term_id = t.term_id AND p.ID = r.object_id
-				AND t.name LIKE '%$phrase%' AND p.post_status = 'publish'";
+				AND t.name LIKE '%$phrase%' AND p.post_status IN ('publish', 'draft', 'private', 'pending', 'future', 'inherit')";
 
 			$docs = $wpdb->get_results($query);
 			if (is_array($docs)) {
@@ -281,7 +282,7 @@ function relevanssi_recognize_phrases($q) {
               FROM $wpdb->posts AS p, $wpdb->postmeta AS m
               WHERE p.ID = m.post_id
               AND m.meta_value LIKE '%$phrase%'
-              AND p.post_status = 'publish'";
+              AND p.post_status IN ('publish', 'draft', 'private', 'pending', 'future', 'inherit')";
 
 			$docs = $wpdb->get_results($query);
 			if (is_array($docs)) {
@@ -353,7 +354,13 @@ function relevanssi_strlen_sort($a, $b) {
 function relevanssi_get_custom_fields() {
 	$custom_fields = get_option("relevanssi_index_fields");
 	if ($custom_fields) {
-		if ($custom_fields != 'all') {
+		if ($custom_fields == 'all') {
+			return $custom_fields;
+		}
+		else if ($custom_fields == 'visible') {
+			return $custom_fields;
+		}
+		else {
 			$custom_fields = explode(",", $custom_fields);
 			for ($i = 0; $i < count($custom_fields); $i++) {
 				$custom_fields[$i] = trim($custom_fields[$i]);

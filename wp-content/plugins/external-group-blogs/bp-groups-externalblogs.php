@@ -191,7 +191,7 @@ function bp_groupblogs_fetch_group_feeds( $group_id = false ) {
 
 
 		$activity_content = '<blockquote>' . strip_tags( bp_create_excerpt( $post['description'], 200 ) ) . ' <a class="exb-view" href="' . attribute_escape( $post['link'] ) . '">' . 'View external post' . '</blockquote>';
-		$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, &$post, &$group );
+		$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, $post, $group );
 
 		/* Fetch an existing activity_id if one exists. */
 		if ( function_exists( 'bp_activity_get_activity_id' ) )

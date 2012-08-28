@@ -1,10 +1,14 @@
 <?php
 /* @var $EM_Event EM_Event */
 global $EM_Event;
-
 //timezone
 $tz = date_default_timezone_get(); // get current PHP timezone
+//correct event start/end timestamps in correct timezone
 date_default_timezone_set( get_option('timezone_string')); // set the PHP timezone to match WordPress
+$EM_Event->start = strtotime($EM_Event->event_start_date." ".$EM_Event->event_start_time);
+$EM_Event->end = strtotime($EM_Event->event_end_date." ".$EM_Event->event_end_time);
+date_default_timezone_set( 'UTC'); // set the PHP timezone to UTC, we already calculated event dates
+
 //send headers
 header('Content-type: text/calendar; charset=utf-8');
 header('Content-Disposition: inline; filename="'.$EM_Event->event_slug.'.ics"');
@@ -14,38 +18,33 @@ $blog_desc = ent2ncr(convert_chars(strip_tags(get_bloginfo()))) . " - " . __('Ca
 			
 echo "BEGIN:VCALENDAR
 VERSION:2.0
-METHOD:PUBLISH
-CALSCALE:GREGORIAN
-PRODID:-//Events Manager//1.0//EN
-X-WR-CALNAME:{$blog_desc}";
+PRODID:-//wp-events-plugin.com//".EM_VERSION."//EN";
 
 	/* @var $EM_Event EM_Event */
-	$offset = 3600 * get_option('gmt_offset');
+	if($EM_Event->event_all_day){
+		$dateStart	= date('Ymd\T000000',$EM_Event->start); //all day
+		$dateEnd	= date('Ymd\T000000',$EM_Event->end + 86400); //add one day
+	}else{
+		$dateStart	= date('Ymd\THis\Z',$EM_Event->start);
+		$dateEnd = date('Ymd\THis\Z',$EM_Event->end);
+	}
+	if( !empty($EM_Event->event_date_modified) && $EM_Event->event_date_modified != '0000-00-00 00:00:00' ){
+		$dateModified = date('Ymd\THis\Z', strtotime($EM_Event->event_date_modified));
+	}else{
+	    $dateModified = date('Ymd\THis\Z', strtotime($EM_Event->post_modified));
+	}
+
+	//correct event start/end timestamps in correct timezone
+	date_default_timezone_set( get_option('timezone_string')); // set the PHP timezone to match WordPress
+	
+	//Formats
 	$description = $EM_Event->output($description_format,'ical');
-	$description = str_replace("\\","\\\\",ent2ncr(convert_chars(strip_tags($description))));
-	//$description = str_replace('"','DQUOTE',$description);
+	$description = str_replace("\\","\\\\",strip_tags($description));
 	$description = str_replace(';','\;',$description);
 	$description = str_replace(',','\,',$description);
 	
-	$start_offset = ( date('I', $EM_Event->start) ) ? 0 : 3600;
-	$end_offset = ( date('I', $EM_Event->end) ) ? 0 : 3600;
-	
-	if($EM_Event->event_all_day && $EM_Event->event_start_date == $EM_Event->event_end_date){
-		$dateStart	= date('Ymd\T000000',$EM_Event->start); //all day
-		$dateEnd	= date('Ymd\T000000',$EM_Event->start + 86400); //add one day
-	}else{
-		$dateStart	= date('Ymd\THis\Z',$EM_Event->start - $offset + $start_offset);
-		$dateEnd = date('Ymd\THis\Z',$EM_Event->end - $offset + $end_offset);
-	}
-	if( !empty($EM_Event->event_date_modified) ){
-		$dateModified = date('Ymd\THis\Z', strtotime($EM_Event->event_date_modified) - $offset + $start_offset);
-	}else{
-		$dateModified = date('Ymd\THis\Z', strtotime($EM_Event->event_date_created) - $offset + $start_offset);
-	}	
-	
-	$location		= $EM_Event->output('#_LOCATION', 'ical');
-	$description = str_replace("\\","\\\\",ent2ncr(convert_chars(strip_tags($description))));
-	//$location = str_replace('"','DQUOTE',$location);
+	$location = $EM_Event->output('#_LOCATION', 'ical');
+	$location = str_replace("\\","\\\\",strip_tags($location));
 	$location = str_replace(';','\;',$location);
 	$location = str_replace(',','\,',$location);
 	
@@ -53,25 +52,9 @@ X-WR-CALNAME:{$blog_desc}";
 	foreach($EM_Event->get_categories() as $EM_Category){
 		$locations[] = $EM_Category->name;
 	}
-	$UID = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        // 32 bits for "time_low"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-        // 16 bits for "time_mid"
-        mt_rand( 0, 0xffff ),
-        // 16 bits for "time_hi_and_version",
-        // four most significant bits holds version number 4
-        mt_rand( 0, 0x0fff ) | 0x4000,
-        // 16 bits, 8 bits for "clk_seq_hi_res",
-        // 8 bits for "clk_seq_low",
-        // two most significant bits holds zero and one for variant DCE1.1
-        mt_rand( 0, 0x3fff ) | 0x8000,
-        // 48 bits for "node"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
-    );
 	
 echo "
 BEGIN:VEVENT
-UID:{$UID}
 DTSTART:{$dateStart}
 DTEND:{$dateEnd}
 DTSTAMP:{$dateModified}

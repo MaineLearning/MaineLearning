@@ -4,7 +4,7 @@ function relevanssi_build_index($extend = false) {
 	global $wpdb, $relevanssi_variables;
 	$relevanssi_table = $relevanssi_variables['relevanssi_table'];
 
-	set_time_limit(0);
+	if (!ini_get('safe_mode')) set_time_limit(0);
 	
 	$post_types = array();
 	$types = get_option("relevanssi_index_post_types");
@@ -105,6 +105,9 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 	$relevanssi_table = $relevanssi_variables['relevanssi_table'];
 	$post_was_null = false;
 	$previous_post = NULL;
+
+	// Check if this is a Jetpack Contact Form entry
+	if (isset($_REQUEST['contact-form-id'])) return;
 
 	if ($bypassglobalpost) {
 		// if $bypassglobalpost is set, relevanssi_index_doc() will index the post object or post
@@ -279,7 +282,7 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 		}
 	}
 
-	if (function_exists('relevanssi_index_mysqL_columns')) {
+	if (function_exists('relevanssi_index_mysql_columns')) {
 		$insert_data = relevanssi_index_mysql_columns($insert_data, $post->ID);
 	}
 
@@ -311,6 +314,7 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 			
 		if ('on' == get_option('relevanssi_expand_shortcodes')) {
 			if (function_exists("do_shortcode")) {
+				remove_shortcode('contact-form');		// Jetpack Contact Form causes an error message
 				$contents = do_shortcode($contents);
 			}
 		}
@@ -396,8 +400,8 @@ function relevanssi_index_taxonomy_terms($post = null, $taxonomy = "", $insert_d
 
 	$n = 0;
 
-	if (null == $post) return 0;
-	if ("" == $taxonomy) return 0;
+	if (null == $post) return $insert_data;
+	if ("" == $taxonomy) return $insert_data;
 	
 	$min_word_length = get_option('relevanssi_min_word_length', 3);
 	$ptagobj = get_the_terms($post->ID, $taxonomy);

@@ -1083,6 +1083,12 @@ class RGFormsModel{
             $field_value = GFCommon::prepare_post_category_value($field_value, $source_field, "conditional_logic");
         }
 
+        if (!empty($field_value) && !is_array($field_value) && $source_field["type"] == "multiselect")
+        {
+			//convert the comma-delimited string into an array
+			$field_value = explode(",", $field_value);
+        }
+
         if(is_array($field_value)){
             foreach($field_value as $val){
                 if(self::matches_operation(GFCommon::get_selection_value($val), $target_value, $operation))
@@ -2439,7 +2445,7 @@ class RGFormsModel{
     public static function get_leads($form_id, $sort_field_number=0, $sort_direction='DESC', $search='', $offset=0, $page_size=30, $star=null, $read=null, $is_numeric_sort = false, $start_date=null, $end_date=null, $status='active'){
         global $wpdb;
 
-        if($sort_field_number == 0)
+        if(empty($sort_field_number))
             $sort_field_number = "date_created";
 
         if(is_numeric($sort_field_number))

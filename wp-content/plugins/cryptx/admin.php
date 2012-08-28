@@ -356,40 +356,6 @@ function rw_cryptx_submenu() {
 	</div>
 	</div>
 
-
-	<div id="rw_cryptx_howto_box" class="postbox">
-	<h3><?php _e("How to use CryptX in your Template",'cryptx'); ?></h3>
-	<div class="inside">
-	<div style="position: absolute; width: 100%; height: 100%; text-align: center; top: 40%; line-height: 200%; font-size: 200%; color: #ff0000;"><strong><?php _e("ATTENTION",'cryptx'); ?></strong><br/><?php _e("This function is deprecated and will be removed in future releases!",'cryptx'); ?></div>
-	<table class="form-table">
-		<tr>
-			<td><?php _e("In your Template you can use the following function to encrypt a email address:",'cryptx'); ?>
-			<p style="border:1px solid #000; background-color: #e9e9e9;padding: 10px;">
-			<i>
-			&lt;?php <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    $mail="name@example.com"; <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    $text="Contact"; <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    $css ="email"; <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    if (function_exists('cryptx')) { <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        cryptx($mail, $text, $css, 1); <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    } else { <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        echo sprintf('&lt;a href="mailto:%s" class="%s"&gt;%s&lt;/a&gt;', $mail, $css, ($text != "" ? $text : $mail)); <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;    } <br/>
-			?&gt;
-			</i></p>
-			<ol>
-			<li><?php _e("parameter is the email address.",'cryptx'); ?></li>
-			<li><?php _e("parameter is the linktext. If none given the email address is used.",'cryptx'); ?></li>
-			<li><?php _e("parameter is a css class added to the link.",'cryptx'); ?></li>
-			<li><?php _e("parameter is 1 for echo the encrypted email address or 0 to return the result to a variable.",'cryptx'); ?></li>
-			</ol>
-			</td>
-		</tr>
-	</table>
-	</div>
-	</div>
-
-
 	</form>
 	<script type="text/javascript">
 	function cryptX_bild_wechsel(select){ 

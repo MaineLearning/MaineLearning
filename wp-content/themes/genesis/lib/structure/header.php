@@ -522,8 +522,10 @@ function genesis_show_theme_info_in_head() {
 	if ( ! is_child_theme() )
 		return;
 
+	global $wp_version;
+
 	/** Show Child Info */
-	$child_info = get_theme_data( CHILD_DIR . '/style.css' );
+	$child_info = version_compare( $wp_version, '3.4', '>=' ) ? wp_get_theme() : get_theme_data( CHILD_DIR . '/style.css' );
 	echo '<meta name="wp_theme" content="' . esc_attr( $child_info['Name'] ) . ' ' . esc_attr( $child_info['Version'] ) . '" />' . "\n";
 
 }
@@ -678,6 +680,11 @@ add_action( 'after_setup_theme', 'genesis_custom_header' );
 function genesis_custom_header() {
 
 	$custom_header = get_theme_support( 'genesis-custom-header' );
+	$wp_custom_header = get_theme_support( 'custom-header' );
+
+	/** If not active (Genesis of WP custom header), do nothing */
+	if ( ! $custom_header && ! $wp_custom_header )
+		return;
 
 	/** If not active, do nothing */
 	if ( ! $custom_header )
@@ -685,6 +692,10 @@ function genesis_custom_header() {
 
 	/** Blog title option is obsolete when custom header is active */
 	add_filter( 'genesis_pre_get_option_blog_title', '__return_empty_array' );
+
+	/** If WP custom header is active, no need to continue */
+	if ( $wp_custom_header )
+		return;
 
 	/** Cast, if necessary */
 	$custom_header = isset( $custom_header[0] ) && is_array( $custom_header[0] ) ? $custom_header[0] : array();
@@ -705,6 +716,27 @@ function genesis_custom_header() {
 			)
 		)
 	);
+
+	/** If running WordPress 3.4 or greater, use new WP custom header */
+	global $wp_version;
+	if ( version_compare( $wp_version, '3.4', '>=' ) ) {
+
+		/** Push $args into theme support array */
+		add_theme_support( 'custom-header', array(
+			'default-image'       => sprintf( $args['header_image'], get_stylesheet_directory_uri() ),
+			'header-text'         => $args['no_header_text'] ? false : true,
+			'default-text-color'  => $args['textcolor'],
+			'width'               => $args['width'],
+			'height'              => $args['height'],
+			'random-default'      => false,
+			'wp-head-callback'    => $args['header_callback'],
+			'admin-head-callback' => $args['admin_header_callback'],
+		) );
+
+		/** Return, so nothing below gets executed */
+		return;
+
+	}
 
 	/** Define all the constants */
 	if ( ! defined( 'HEADER_IMAGE_WIDTH' ) && is_numeric( $args['width'] ) )

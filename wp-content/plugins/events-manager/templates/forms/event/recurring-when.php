@@ -26,7 +26,7 @@ $hours_format = em_get_hour_format();
 		<span class='interval-desc' id="interval-yearly-plural"><?php _e ( 'years', 'dbem' ) ?></span>
 	<p class="alternate-selector" id="weekly-selector">
 		<?php
-			$saved_bydays = ($EM_Event->is_recurring()) ? explode ( ",", $EM_Event->recurrence_byday ) : array(); 
+			$saved_bydays = ($EM_Event->is_recurring() && $EM_Event->recurrence_byday != '' ) ? explode ( ",", $EM_Event->recurrence_byday ) : array(); 
 			em_checkbox_items ( 'recurrence_bydays[]', $days_names, $saved_bydays ); 
 		?>
 	</p>
@@ -69,7 +69,7 @@ $hours_format = em_get_hour_format();
 	<script type="text/javascript">
 		jQuery(document).ready( function($) {
 			//Recurrence Warnings
-			$('#event_form').submit( function(event){
+			$('#event-form').submit( function(event){
 				confirmation = confirm(EM.event_reschedule_warning);
 				if( confirmation == false ){
 					event.preventDefault();
