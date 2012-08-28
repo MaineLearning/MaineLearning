@@ -1,5 +1,7 @@
 <?php
 
+// Various utilities
+
 class scbUtil {
 
 	// Force script enqueue
@@ -23,16 +25,14 @@ class scbUtil {
 
 		ob_start();
 		$wp_styles->do_items( ( array ) $handles );
-		$content = str_replace( array( '"', "\n" ), array( "'", '' ), ob_get_clean() );
+		$content = str_replace( array( "'", "\n" ), array( '"', '' ), ob_get_clean() );
 
 		echo "<script type='text/javascript'>\n";
-		echo "jQuery( document ).ready( function( $ ) {\n";
-		echo "$( 'head' ).prepend( \"$content\" );\n";
-		echo "} );\n";
+		echo "jQuery(function ($) { $('head').prepend('$content'); });\n";
 		echo "</script>";
 	}
 
-	// Enable delayed activation ( to be used with scb_init() )
+	// Enable delayed activation; to be used with scb_init()
 	static function add_activation_hook( $plugin, $callback ) {
 		if ( defined( 'SCB_LOAD_MU' ) )
 			register_activation_hook( $plugin, $callback );
@@ -40,11 +40,25 @@ class scbUtil {
 			add_action( 'scb_activation_' . plugin_basename( $plugin ), $callback );
 	}
 
-	// Have more than one uninstall hooks; also prevents an UPDATE query on each page load
+	// For debugging
+	static function do_activation( $plugin ) {
+		do_action( 'scb_activation_' . plugin_basename( $plugin ) );
+	}
+
+	// Allows more than one uninstall hooks.
+	// Also prevents an UPDATE query on each page load.
 	static function add_uninstall_hook( $plugin, $callback ) {
+		if ( !is_admin() )
+			return;
+
 		register_uninstall_hook( $plugin, '__return_false' );	// dummy
 
 		add_action( 'uninstall_' . plugin_basename( $plugin ), $callback );
+	}
+
+	// For debugging
+	static function do_uninstall( $plugin ) {
+		do_action( 'uninstall_' . plugin_basename( $plugin ) );
 	}
 
 	// Get the current, full URL
@@ -65,24 +79,20 @@ class scbUtil {
 
 	// Extract certain $keys from $array
 	static function array_extract( $array, $keys ) {
-		_deprecated_function( 'scbUtil::array_extract', '3.1', 'wp_array_slice_assoc()' );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'WP 3.1', 'wp_array_slice_assoc()' );
 		return wp_array_slice_assoc( $array, $keys );
 	}
 
 	// Extract a certain value from a list of arrays
 	static function array_pluck( $array, $key ) {
-		_deprecated_function( 'scbUtil::array_pluck', '3.1', 'wp_list_pluck()' );
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'WP 3.1', 'wp_list_pluck()' );
 		return wp_list_pluck( $array, $key );
 	}
 
 	// Transform a list of objects into an associative array
 	static function objects_to_assoc( $objects, $key, $value ) {
-		$r = array();
-
-		foreach ( $objects as $obj )
-			$r[$obj->$key] = $obj->$value;
-
-		return $r;
+		_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'r41', 'scb_list_fold()' );
+		return scb_list_fold( $objects, $key, $value );
 	}
 
 	// Prepare an array for an IN statement
@@ -107,19 +117,36 @@ class scbUtil {
 	}
 }
 
+// Return a standard admin notice
+function scb_admin_notice( $msg, $class = 'updated' ) {
+	return html( "div class='$class fade'", html( "p", $msg ) );
+}
+
+// Transform a list of objects into an associative array
+function scb_list_fold( $list, $key, $value ) {
+	$r = array();
+
+	if ( is_array( reset( $list ) ) ) {
+		foreach ( $list as $item )
+			$r[ $item[ $key ] ] = $item[ $value ];
+	} else {
+		foreach ( $list as $item )
+			$r[ $item->$key ] = $item->$value;
+	}
+
+	return $r;
+}
+
 
 //_____Minimalist HTML framework_____
 
-/*
- * Examples:
- *
- * html( 'p', 'Hello world!' );												<p>Hello world!</p>
- * html( 'a', array( 'href' => 'http://example.com' ), 'A link' );			<a href="http://example.com">A link</a>
- * html( 'img', array( 'src' => 'http://example.com/f.jpg' ) );				<img src="http://example.com/f.jpg" />
- * html( 'ul', html( 'li', 'a' ), html( 'li', 'b' ) );						<ul><li>a</li><li>b</li></ul>
+/**
+ * Generate an HTML tag. Atributes are escaped. Content is NOT escaped.
  */
 if ( ! function_exists( 'html' ) ):
 function html( $tag ) {
+	static $SELF_CLOSING_TAGS = array( 'area', 'base', 'basefont', 'br', 'hr', 'input', 'img', 'link', 'meta' );
+
 	$args = func_get_args();
 
 	$tag = array_shift( $args );
@@ -140,7 +167,7 @@ function html( $tag ) {
 		list( $closing ) = explode( ' ', $tag, 2 );
 	}
 
-	if ( in_array( $closing, array( 'area', 'base', 'basefont', 'br', 'hr', 'input', 'img', 'link', 'meta' ) ) ) {
+	if ( in_array( $closing, $SELF_CLOSING_TAGS ) ) {
 		return "<{$tag} />";
 	}
 
@@ -156,7 +183,7 @@ function html_link( $url, $title = '' ) {
 	if ( empty( $title ) )
 		$title = $url;
 
-	return sprintf( "<a href='%s'>%s</a>", esc_url( $url ), $title );
+	return html( 'a', array( 'href' => $url ), $title );
 }
 endif;
 
