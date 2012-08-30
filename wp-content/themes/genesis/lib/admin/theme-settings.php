@@ -215,7 +215,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		add_meta_box( 'genesis-theme-settings-feeds', __( 'Custom Feeds', 'genesis' ), array( $this, 'feeds_box' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis-theme-settings-layout', __( 'Default Layout', 'genesis' ), array( $this, 'layout_box' ), $this->pagehook, 'main' );
 
-		if ( ! current_theme_supports( 'genesis-custom-header' ) )
+		if ( ! current_theme_supports( 'genesis-custom-header' ) && ! current_theme_supports( 'custom-header' ) )
 			add_meta_box( 'genesis-theme-settings-header', __( 'Header Settings', 'genesis' ), array( $this, 'header_box' ), $this->pagehook, 'main' );
 
 		if ( current_theme_supports( 'genesis-menus' ) )

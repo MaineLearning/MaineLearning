@@ -3,7 +3,7 @@
 Plugin Name: Relevanssi
 Plugin URI: http://www.relevanssi.com/
 Description: This plugin replaces WordPress search with a relevance-sorting search.
-Version: 3.0
+Version: 3.0.4
 Author: Mikko Saari
 Author URI: http://www.mikkosaari.fi/
 */
@@ -44,6 +44,9 @@ $relevanssi_variables['relevanssi_cache'] = $wpdb->prefix . "relevanssi_cache";
 $relevanssi_variables['relevanssi_excerpt_cache'] = $wpdb->prefix . "relevanssi_excerpt_cache";
 $relevanssi_variables['title_boost_default'] = 5;
 $relevanssi_variables['comment_boost_default'] = 0.75;
+$relevanssi_variables['post_type_weight_defaults']['post_tag'] = 0.75;
+$relevanssi_variables['post_type_weight_defaults']['category'] = 0.75;
+$relevanssi_variables['post_type_index_defaults'] = array('post', 'page');
 $relevanssi_variables['database_version'] = 1;
 $relevanssi_variables['file'] = __FILE__;
 $relevanssi_variables['plugin_dir'] = plugin_dir_path(__FILE__);
@@ -216,9 +219,10 @@ function _relevanssi_install() {
 	add_option('relevanssi_word_boundaries', 'on');
 	add_option('relevanssi_default_orderby', 'relevance');
 	add_option('relevanssi_db_version', '0');
-	add_option('relevanssi_post_type_weights', '');
+	add_option('relevanssi_post_type_weights', $relevanssi_variables['post_type_weight_defaults']);
 	add_option('relevanssi_throttle', 'on');
 	add_option('relevanssi_throttle_limit', '500');
+	add_option('relevanssi_index_post_types', $relevanssi_variables['post_type_index_defaults']);
 	
 	relevanssi_create_database_tables($relevanssi_variables['database_version']);
 }
@@ -252,7 +256,6 @@ function relevanssi_remove_doc($id) {
  */
  
 function relevanssi_form_tag_weight($post_type_weights) {
-	$taxonomies = get_taxonomies('', 'names'); 
 	$label = __("Tag weight:", 'relevanssi');
 	$value = $post_type_weights['post_tag'];
 
@@ -263,6 +266,21 @@ function relevanssi_form_tag_weight($post_type_weights) {
 		</td>
 		<td>
 			<input type='text' name='relevanssi_weight_post_tag' size='4' value='$value' />
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+EOH;
+
+	$label = __("Category weight:", 'relevanssi');
+	$value = $post_type_weights['category'];
+
+	echo <<<EOH
+	<tr>
+		<td>
+			$label 
+		</td>
+		<td>
+			<input type='text' name='relevanssi_weight_category' size='4' value='$value' />
 		</td>
 		<td>&nbsp;</td>
 	</tr>

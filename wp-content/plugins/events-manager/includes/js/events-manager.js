@@ -15,7 +15,7 @@ jQuery(document).ready( function($){
 			$(el).data('oldTime', $.timePicker(el).getTime());
 		}).change( function() {
 			var start = $(this);
-			var end = start.next('.em-time-end');
+			var end = start.nextAll('.em-time-end');
 			if (end.val()) { // Only update when second input has a value.
 			    // Calculate duration.
 				var oldTime = start.data('oldTime');
@@ -31,7 +31,7 @@ jQuery(document).ready( function($){
 		// Validate.
 		$(".em-time-range input.em-time-end").change(function() {
 			var end = $(this);
-			var start = end.prev('.em-time-start');
+			var start = end.prevAll('.em-time-start');
 			if( start.val() ){
 				if($.timePicker(start).getTime() > $.timePicker(this).getTime()) { end.addClass("error"); }
 				else { end.removeClass("error"); }
@@ -174,16 +174,29 @@ jQuery(document).ready( function($){
 						slot.show();
 					}
 					var postData = {};
+					var is_checked = false;
 					$.each($('#em-tickets-form form *[name]'), function(index,el){
 						el = $(el);
-						slot.find('input.'+el.attr('name')).attr({
-							'value' : el.attr('value'),
-							'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
-						});
+						if( el.attr('type') == 'checkbox' ){
+							is_checked = el.is(':checked') ? 1:0;
+							slot.find('input.'+el.attr('name')).attr({
+								'value' : is_checked,
+								'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
+							});
+						}else{
+							slot.find('input.'+el.attr('name')).attr({
+								'value' : el.attr('value'),
+								'name' : 'em_tickets['+rowNo+']['+el.attr('name')+']'
+							});
+						}
 						if( el.attr('name') == 'ticket_start_pub'){
 							slot.find('span.ticket_start').text(el.attr('value'));
 						}else if( el.attr('name') == 'ticket_end_pub' ){
 							slot.find('span.ticket_end').text(el.attr('value'));
+						}else if( el.attr('name') == 'ticket_members' ){
+							if( el.is(':checked') ){
+								slot.find('span.ticket_name').prepend('* ');
+							}
 						}else{
 							slot.find('span.'+el.attr('name')).text(el.attr('value'));
 						}
@@ -324,6 +337,16 @@ jQuery(document).ready( function($){
 					$('#em-bookings-table-export-form .em-bookings-col-item-ticket').hide().find('input').val(0);					
 				}
 			};
+			//Sync export overlay with table search field changes
+			$('#em-bookings-table form select').each(function(i, el){
+				$(el).change(function(e){
+					var select_el = $(this);
+					var input_par = $('#em-bookings-table-export-form input[name='+select_el.attr('name')+']');
+					var input_par_selected = select_el.find('option:selected');
+					input_par.val(input_par_selected.val());
+				});
+			});
+			
 			export_overlay_show_tickets();
 			$('#em-bookings-table-export-form input[name=show_tickets]').click(export_overlay_show_tickets);
 			//Sortables
@@ -346,11 +369,11 @@ jQuery(document).ready( function($){
 			el.parents('#em-bookings-table').find('.table-wrap').first().append('<div id="em-loading" />');
 			//ajax call
 			$.post( EM.ajaxurl, el.serializeArray(), function(data){
-				el.parents('#em-bookings-table').first().replaceWith(data);
+				var root = el.parents('#em-bookings-table').first();
+				root.replaceWith(data);
 				//recreate overlays
-				if( $("#em-bookings-table-settings").length > 0 ){
-					setup_sortable();
-				}
+				$('#em-bookings-table-export input[name=scope]').val(root.find('select[name=scope]').val());
+				$('#em-bookings-table-export input[name=status]').val(root.find('select[name=status]').val());
 			});
 			return false;
 		});
@@ -390,47 +413,62 @@ jQuery(document).ready( function($){
 			return false;
 		});
 	}
-		
+	
+	//Manual Booking
+	$('a.em-booking-button').click(function(){
+		var button = $(this);
+		if( button.text() != EM.bb_booked && $(this).text() != EM.bb_booking){
+			button.text(EM.bb_booking);
+			var button_data = button.attr('id').split('_'); 
+			$.ajax({
+				url: EM.ajaxurl,
+				dataType: 'jsonp',
+				data: {
+					event_id : button_data[1],
+					_wpnonce : button_data[2],
+					action : 'booking_add_one'
+				},
+				success : function(response, statusText, xhr, $form) {
+					if(response.result){
+						button.text(EM.bb_booked);
+					}else{
+						button.text(EM.bb_error);					
+					}
+					if(response.message != '') alert(response.message);
+				},
+				error : function(){ button.text(EM.bb_error); }
+			});
+		}
+	});	
+	$('a.em-cancel-button').click(function(){
+		var button = $(this);
+		if( button.text() != EM.bb_cancelled && button.text() != EM.bb_canceling){
+			button.text(EM.bb_canceling);
+			var button_data = button.attr('id').split('_'); 
+			$.ajax({
+				url: EM.ajaxurl,
+				dataType: 'jsonp',
+				data: {
+					booking_id : button_data[1],
+					_wpnonce : button_data[2],
+					action : 'booking_cancel'
+				},
+				success : function(response, statusText, xhr, $form) {
+					if(response.result){
+						button.text(EM.bb_cancelled);
+					}else{
+						button.text(EM.bb_cancel_error);
+					}
+				},
+				error : function(){ button.text(EM.bb_cancel_error); }
+			});
+		}
+	});  
+
 	//Datepicker
 	if( $('.em-date-single, .em-date-range, #em-date-start').length > 0 ){
-		if( EM.locale != 'en' ){
-			$.datepicker.regional['nl']={closeText:'Sluiten',prevText:'←',nextText:'→',currentText:'Vandaag',monthNames:['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],monthNamesShort:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],dayNames:['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],dayNamesShort:['zon','maa','din','woe','don','vri','zat'],dayNamesMin:['zo','ma','di','wo','do','vr','za'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['af']={closeText:'Selekteer',prevText:'Vorige',nextText:'Volgende',currentText:'Vandag',monthNames:['Januarie','Februarie','Maart','April','Mei','Junie','Julie','Augustus','September','Oktober','November','Desember'],monthNamesShort:['Jan','Feb','Mrt','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Des'],dayNames:['Sondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrydag','Saterdag'],dayNamesShort:['Son','Maa','Din','Woe','Don','Vry','Sat'],dayNamesMin:['So','Ma','Di','Wo','Do','Vr','Sa'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['ar']={closeText:'إغلاق',prevText:'<السابق',nextText:'التالي>',currentText:'اليوم',monthNames:['كانون الثاني','شباط','آذار','نيسان','آذار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'],monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],dayNames:['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'],dayNamesShort:['سبت','أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة'],dayNamesMin:['سبت','أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة'],weekHeader:'أسبوع',dateFormat:'dd/mm/yy',firstDay:0,isRTL:true,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['az']={closeText:'Bağla',prevText:'<Geri',nextText:'İrəli>',currentText:'Bugün',monthNames:['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'],monthNamesShort:['Yan','Fev','Mar','Apr','May','İyun','İyul','Avq','Sen','Okt','Noy','Dek'],dayNames:['Bazar','Bazar ertəsi','Çərşənbə axşamı','Çərşənbə','Cümə axşamı','Cümə','Şənbə'],dayNamesShort:['B','Be','Ça','Ç','Ca','C','Ş'],dayNamesMin:['B','B','Ç','С','Ç','C','Ş'],weekHeader:'Hf',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['bg']={closeText:'затвори',prevText:'<назад',nextText:'напред>',nextBigText:'>>',currentText:'днес',monthNames:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],monthNamesShort:['Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Нов','Дек'],dayNames:['Неделя','Понеделник','Вторник','Сряда','Четвъртък','Петък','Събота'],dayNamesShort:['Нед','Пон','Вто','Сря','Чет','Пет','Съб'],dayNamesMin:['Не','По','Вт','Ср','Че','Пе','Съ'],weekHeader:'Wk',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['bs']={closeText:'Zatvori',prevText:'<',nextText:'>',currentText:'Danas',monthNames:['Januar','Februar','Mart','April','Maj','Juni','Juli','August','Septembar','Oktobar','Novembar','Decembar'],monthNamesShort:['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],dayNames:['Nedelja','Ponedeljak','Utorak','Srijeda','Četvrtak','Petak','Subota'],dayNamesShort:['Ned','Pon','Uto','Sri','Čet','Pet','Sub'],dayNamesMin:['Ne','Po','Ut','Sr','Če','Pe','Su'],weekHeader:'Wk',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['ca'] = {closeText: 'Tancar',prevText: '&#x3c;Ant',nextText: 'Seg&#x3e;',currentText: 'Avui',monthNames: ['Gener','Febrer','Mar&ccedil;','Abril','Maig','Juny','Juliol','Agost','Setembre','Octubre','Novembre','Desembre'],monthNamesShort: ['Gen','Feb','Mar','Abr','Mai','Jun','Jul','Ago','Set','Oct','Nov','Des'],dayNames: ['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'],dayNamesShort: ['Dug','Dln','Dmt','Dmc','Djs','Dvn','Dsb'],dayNamesMin: ['Dg','Dl','Dt','Dc','Dj','Dv','Ds'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};
-			$.datepicker.regional['cs']={closeText:'Zavřít',prevText:'<Dříve',nextText:'Později>',currentText:'Nyní',monthNames:['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'],monthNamesShort:['led','úno','bře','dub','kvě','čer','čvc','srp','zář','říj','lis','pro'],dayNames:['neděle','pondělí','úterý','středa','čtvrtek','pátek','sobota'],dayNamesShort:['ne','po','út','st','čt','pá','so'],dayNamesMin:['ne','po','út','st','čt','pá','so'],weekHeader:'Týd',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['da']={closeText:'Luk',prevText:'<Forrige',nextText:'Næste>',currentText:'Idag',monthNames:['Januar','Februar','Marts','April','Maj','Juni','Juli','August','September','Oktober','November','December'],monthNamesShort:['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],dayNames:['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'],dayNamesShort:['Søn','Man','Tir','Ons','Tor','Fre','Lør'],dayNamesMin:['Sø','Ma','Ti','On','To','Fr','Lø'],weekHeader:'Uge',dateFormat:'dd-mm-yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['de']={closeText:'schließen',prevText:'<zurück',nextText:'Vor>',currentText:'heute',monthNames:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],monthNamesShort:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],dayNames:['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],dayNamesShort:['So','Mo','Di','Mi','Do','Fr','Sa'],dayNamesMin:['So','Mo','Di','Mi','Do','Fr','Sa'],weekHeader:'Wo',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['el']={closeText:'Κλείσιμο',prevText:'Προηγούμενος',nextText:'Επόμενος',currentText:'Τρέχων Μήνας',monthNames:['Ιανουάριος','Φεβρουάριος','Μάρτιος','Απρίλιος','Μάιος','Ιούνιος','Ιούλιος','Αύγουστος','Σεπτέμβριος','Οκτώβριος','Νοέμβριος','Δεκέμβριος'],monthNamesShort:['Ιαν','Φεβ','Μαρ','Απρ','Μαι','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'],dayNames:['Κυριακή','Δευτέρα','Τρίτη','Τετάρτη','Πέμπτη','Παρασκευή','Σάββατο'],dayNamesShort:['Κυρ','Δευ','Τρι','Τετ','Πεμ','Παρ','Σαβ'],dayNamesMin:['Κυ','Δε','Τρ','Τε','Πε','Πα','Σα'],weekHeader:'Εβδ',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['en-GB']={closeText:'Done',prevText:'Prev',nextText:'Next',currentText:'Today',monthNames:['January','February','March','April','May','June','July','August','September','October','November','December'],monthNamesShort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dayNames:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],dayNamesShort:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],dayNamesMin:['Su','Mo','Tu','We','Th','Fr','Sa'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['eo']={closeText:'Fermi',prevText:'<Anta',nextText:'Sekv>',currentText:'Nuna',monthNames:['Januaro','Februaro','Marto','Aprilo','Majo','Junio','Julio','Aŭgusto','Septembro','Oktobro','Novembro','Decembro'],monthNamesShort:['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aŭg','Sep','Okt','Nov','Dec'],dayNames:['Dimanĉo','Lundo','Mardo','Merkredo','Ĵaŭdo','Vendredo','Sabato'],dayNamesShort:['Dim','Lun','Mar','Mer','Ĵaŭ','Ven','Sab'],dayNamesMin:['Di','Lu','Ma','Me','Ĵa','Ve','Sa'],weekHeader:'Sb',dateFormat:'dd/mm/yy',firstDay:0,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['et']={closeText:'Sulge',prevText:'Eelnev',nextText:'Järgnev',currentText:'Täna',monthNames:['Jaanuar','Veebruar','Märts','Aprill','Mai','Juuni','Juuli','August','September','Oktoober','November','Detsember'],monthNamesShort:['Jaan','Veebr','Märts','Apr','Mai','Juuni','Juuli','Aug','Sept','Okt','Nov','Dets'],dayNames:['Pühapäev','Esmaspäev','Teisipäev','Kolmapäev','Neljapäev','Reede','Laupäev'],dayNamesShort:['Pühap','Esmasp','Teisip','Kolmap','Neljap','Reede','Laup'],dayNamesMin:['P','E','T','K','N','R','L'],weekHeader:'Sm',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['eu']={closeText:'Egina',prevText:'<Aur',nextText:'Hur>',currentText:'Gaur',monthNames:['Urtarrila','Otsaila','Martxoa','Apirila','Maiatza','Ekaina','Uztaila','Abuztua','Iraila','Urria','Azaroa','Abendua'],monthNamesShort:['Urt','Ots','Mar','Api','Mai','Eka','Uzt','Abu','Ira','Urr','Aza','Abe'],dayNames:['Igandea','Astelehena','Asteartea','Asteazkena','Osteguna','Ostirala','Larunbata'],dayNamesShort:['Iga','Ast','Ast','Ast','Ost','Ost','Lar'],dayNamesMin:['Ig','As','As','As','Os','Os','La'],weekHeader:'Wk',dateFormat:'yy/mm/dd',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['fa']={closeText:'بستن',prevText:'<قبلي',nextText:'بعدي>',currentText:'امروز',monthNames:['فروردين','ارديبهشت','خرداد','تير','مرداد','شهريور','مهر','آبان','آذر','دي','بهمن','اسفند'],monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],dayNames:['يکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'],dayNamesShort:['ي','د','س','چ','پ','ج','ش'],dayNamesMin:['ي','د','س','چ','پ','ج','ش'],weekHeader:'هف',dateFormat:'yy/mm/dd',firstDay:6,isRTL:true,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['fi'] = {closeText: 'Sulje',prevText: '&laquo;Edellinen',nextText: 'Seuraava&raquo;',currentText: 'T&auml;n&auml;&auml;n',monthNames: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kes&auml;kuu','Hein&auml;kuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],monthNamesShort: ['Tammi','Helmi','Maalis','Huhti','Touko','Kes&auml;','Hein&auml;','Elo','Syys','Loka','Marras','Joulu'],dayNamesShort: ['Su','Ma','Ti','Ke','To','Pe','Su'],dayNames: ['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'],dayNamesMin: ['Su','Ma','Ti','Ke','To','Pe','La'],weekHeader: 'Vk',dateFormat: 'dd.mm.yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};
-			$.datepicker.regional['fo']={closeText:'Lat aftur',prevText:'<Fyrra',nextText:'Næsta>',currentText:'Í dag',monthNames:['Januar','Februar','Mars','Apríl','Mei','Juni','Juli','August','September','Oktober','November','Desember'],monthNamesShort:['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Des'],dayNames:['Sunnudagur','Mánadagur','Týsdagur','Mikudagur','Hósdagur','Fríggjadagur','Leyardagur'],dayNamesShort:['Sun','Mán','Týs','Mik','Hós','Frí','Ley'],dayNamesMin:['Su','Má','Tý','Mi','Hó','Fr','Le'],weekHeader:'Vk',dateFormat:'dd-mm-yy',firstDay:0,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['fr-CH']={closeText:'Fermer',prevText:'<Préc',nextText:'Suiv>',currentText:'Courant',monthNames:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],monthNamesShort:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],dayNames:['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],dayNamesShort:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],dayNamesMin:['Di','Lu','Ma','Me','Je','Ve','Sa'],weekHeader:'Sm',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['fr']={closeText:'Fermer',prevText:'<Préc',nextText:'Suiv>',currentText:'Courant',monthNames:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],monthNamesShort:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],dayNames:['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],dayNamesShort:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],dayNamesMin:['Di','Lu','Ma','Me','Je','Ve','Sa'],weekHeader:'Sm',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['he']={closeText:'סגור',prevText:'<הקודם',nextText:'הבא>',currentText:'היום',monthNames:['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'],monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],dayNames:['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'],dayNamesShort:['א\'','ב\'','ג\'','ד\'','ה\'','ו\'','שבת'],dayNamesMin:['א\'','ב\'','ג\'','ד\'','ה\'','ו\'','שבת'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:0,isRTL:true,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['hu']={closeText:'Kész',prevText:'Előző',nextText:'Következő',currentText:'Ma',monthNames:['január','február','március','április','május','június','július','augusztus','szeptember','október','november','cecember'],monthNamesShort:['jan','febr','márc','ápr','máj','jún','júl','aug','szept','okt','nov','dec'],dayNames:['vasárnap','hétfő','kedd','szerda','csütörtök','péntek','szombat'],dayNamesShort:['va','hé','k','sze','csü','pé','szo'],dayNamesMin:['v','h','k','sze','cs','p','szo'],weekHeader:'Wk',dateFormat:'yy.mm.dd.',firstDay:1,isRTL:false,showMonthAfterYear:true,yearSuffix:''};
-			$.datepicker.regional['hr']={closeText:'Zatvori',prevText:'<',nextText:'>',currentText:'Danas',monthNames:['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj','Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'],monthNamesShort:['Sij','Velj','Ožu','Tra','Svi','Lip','Srp','Kol','Ruj','Lis','Stu','Pro'],dayNames:['Nedjelja','Ponedjeljak','Utorak','Srijeda','Četvrtak','Petak','Subota'],dayNamesShort:['Ned','Pon','Uto','Sri','Čet','Pet','Sub'],dayNamesMin:['Ne','Po','Ut','Sr','Če','Pe','Su'],weekHeader:'Tje',dateFormat:'dd.mm.yy.',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['ja']={closeText:'閉じる',prevText:'<前',nextText:'次>',currentText:'今日',monthNames:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],monthNamesShort:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],dayNames:['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],dayNamesShort:['日','月','火','水','木','金','土'],dayNamesMin:['日','月','火','水','木','金','土'],weekHeader:'週',dateFormat:'yy/mm/dd',firstDay:0,isRTL:false,showMonthAfterYear:true,yearSuffix:'年'};
-			$.datepicker.regional['ro']={closeText:'Închide',prevText:'« Luna precedentă',nextText:'Luna următoare »',currentText:'Azi',monthNames:['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],monthNamesShort:['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'],dayNames:['Duminică','Luni','Marţi','Miercuri','Joi','Vineri','Sâmbătă'],dayNamesShort:['Dum','Lun','Mar','Mie','Joi','Vin','Sâm'],dayNamesMin:['Du','Lu','Ma','Mi','Jo','Vi','Sâ'],weekHeader:'Săpt',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['sk']={closeText: 'Zavrieť',prevText: '&#x3c;Predchádzajúci',nextText: 'Nasledujúci&#x3e;',currentText: 'Dnes',monthNames: ['Január','Február','Marec','Apríl','Máj','Jún','Júl','August','September','Október','November','December'],monthNamesShort: ['Jan','Feb','Mar','Apr','Máj','Jún','Júl','Aug','Sep','Okt','Nov','Dec'],dayNames: ['Nedel\'a','Pondelok','Utorok','Streda','Štvrtok','Piatok','Sobota'],dayNamesShort: ['Ned','Pon','Uto','Str','Štv','Pia','Sob'],dayNamesMin: ['Ne','Po','Ut','St','Št','Pia','So'],weekHeader: 'Ty',dateFormat: 'dd.mm.yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};			
-			$.datepicker.regional['sq']={closeText:'mbylle',prevText:'<mbrapa',nextText:'Përpara>',currentText:'sot',monthNames:['Janar','Shkurt','Mars','Prill','Maj','Qershor','Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'],monthNamesShort:['Jan','Shk','Mar','Pri','Maj','Qer','Kor','Gus','Sht','Tet','Nën','Dhj'],dayNames:['E Diel','E Hënë','E Martë','E Mërkurë','E Enjte','E Premte','E Shtune'],dayNamesShort:['Di','Hë','Ma','Më','En','Pr','Sh'],dayNamesMin:['Di','Hë','Ma','Më','En','Pr','Sh'],weekHeader:'Ja',dateFormat:'dd.mm.yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['sr-SR']={closeText:'Zatvori',prevText:'<',nextText:'>',currentText:'Danas',monthNames:['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],monthNamesShort:['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Avg','Sep','Okt','Nov','Dec'],dayNames:['Nedelja','Ponedeljak','Utorak','Sreda','Četvrtak','Petak','Subota'],dayNamesShort:['Ned','Pon','Uto','Sre','Čet','Pet','Sub'],dayNamesMin:['Ne','Po','Ut','Sr','Če','Pe','Su'],weekHeader:'Sed',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['sr']={closeText:'Затвори',prevText:'<',nextText:'>',currentText:'Данас',monthNames:['Јануар','Фебруар','Март','Април','Мај','Јун','Јул','Август','Септембар','Октобар','Новембар','Децембар'],monthNamesShort:['Јан','Феб','Мар','Апр','Мај','Јун','Јул','Авг','Сеп','Окт','Нов','Дец'],dayNames:['Недеља','Понедељак','Уторак','Среда','Четвртак','Петак','Субота'],dayNamesShort:['Нед','Пон','Уто','Сре','Чет','Пет','Суб'],dayNamesMin:['Не','По','Ут','Ср','Че','Пе','Су'],weekHeader:'Сед',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['sv']={closeText:'Stäng',prevText:'«Förra',nextText:'Nästa»',currentText:'Idag',monthNames:['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],monthNamesShort:['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],dayNamesShort:['Sön','Mån','Tis','Ons','Tor','Fre','Lör'],dayNames:['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'],dayNamesMin:['Sö','Må','Ti','On','To','Fr','Lö'],weekHeader:'Ve',dateFormat:'yy-mm-dd',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['ta']={closeText:'மூடு',prevText:'முன்னையது',nextText:'அடுத்தது',currentText:'இன்று',monthNames:['தை','மாசி','பங்குனி','சித்திரை','வைகாசி','ஆனி','ஆடி','ஆவணி','புரட்டாசி','ஐப்பசி','கார்த்திகை','மார்கழி'],monthNamesShort:['தை','மாசி','பங்','சித்','வைகா','ஆனி','ஆடி','ஆவ','புர','ஐப்','கார்','மார்'],dayNames:['ஞாயிற்றுக்கிழமை','திங்கட்கிழமை','செவ்வாய்க்கிழமை','புதன்கிழமை','வியாழக்கிழமை','வெள்ளிக்கிழமை','சனிக்கிழமை'],dayNamesShort:['ஞாயிறு','திங்கள்','செவ்வாய்','புதன்','வியாழன்','வெள்ளி','சனி'],dayNamesMin:['ஞா','தி','செ','பு','வி','வெ','ச'],weekHeader:'Не',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['th']={closeText:'ปิด',prevText:'« ย้อน',nextText:'ถัดไป »',currentText:'วันนี้',monthNames:['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],monthNamesShort:['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],dayNames:['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],dayNamesShort:['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],dayNamesMin:['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:0,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['vi']={closeText:'Đóng',prevText:'<Trước',nextText:'Tiếp>',currentText:'Hôm nay',monthNames:['Tháng Một','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu','Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'],monthNamesShort:['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],dayNames:['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'],dayNamesShort:['CN','T2','T3','T4','T5','T6','T7'],dayNamesMin:['CN','T2','T3','T4','T5','T6','T7'],weekHeader:'Tu',dateFormat:'dd/mm/yy',firstDay:0,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['zh-TW']={closeText:'關閉',prevText:'<上月',nextText:'下月>',currentText:'今天',monthNames:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],monthNamesShort:['一','二','三','四','五','六','七','八','九','十','十一','十二'],dayNames:['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],dayNamesShort:['周日','周一','周二','周三','周四','周五','周六'],dayNamesMin:['日','一','二','三','四','五','六'],weekHeader:'周',dateFormat:'yy/mm/dd',firstDay:1,isRTL:false,showMonthAfterYear:true,yearSuffix:'年'};
-			$.datepicker.regional['es']={closeText:'Cerrar',prevText:'<Ant',nextText:'Sig>',currentText:'Hoy',monthNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],dayNamesShort:['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],dayNamesMin:['Do','Lu','Ma','Mi','Ju','Vi','Sá'],weekHeader:'Sm',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.regional['it']={closeText:'Fatto',prevText:'Precedente',nextText:'Prossimo',currentText:'Oggi',monthNames:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],monthNamesShort:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],dayNames:['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'],dayNamesShort:['Lun','Mar','Mer','Gio','Ven','Sab','Dom'],dayNamesMin:['Do','Lu','Ma','Me','Gi','Ve','Sa'],weekHeader:'Wk',dateFormat:'dd/mm/yy',firstDay:1,isRTL:false,showMonthAfterYear:false,yearSuffix:''};
-			$.datepicker.setDefaults($.datepicker.regional[EM.locale]);
+		if( EM.locale != 'en' && EM.locale_data ){
+			$.datepicker.setDefaults(EM.locale_data);
 		}
 		load_ui_css = true;
 		//default picker vals
@@ -476,10 +514,8 @@ jQuery(document).ready( function($){
 				}
 				//add logic for texts
 				dateInput.change(function(){
-					var dateValue_value = $(this).val();
-					if( !dateValue_value ){
+					if( $(this).val() == '' ){
 						$(this).next('.em-date-input').val('');
-						//this_date_formatted = $.datepicker.formatDate( 'yy-mm-dd', $.datepicker.parseDate(EM.dateFormat, dateValue_value) );
 					}
 				});
 			});
@@ -753,7 +789,6 @@ function em_maps() {
 				marker.setPosition(position);
 				var mapTitle = (jQuery('input#location-name').length > 0) ? jQuery('input#location-name').val():jQuery('input#title').val();
 				marker.setTitle( jQuery('input#location-name input#title, #location-select-id').first().val() );
-				marker.setDraggable(jQuery('input#location-id').val() == '');
 				jQuery('#em-map').show();
 				jQuery('#em-map-404').hide();
 				google.maps.event.trigger(map, 'resize');

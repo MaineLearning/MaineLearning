@@ -84,8 +84,9 @@ function gf_is_match(formId, rule){
             if(!jQuery(inputs[i]).is(":checked"))
                 fieldValue = "";
 
-            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"]))
+            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"])){
                 return true;
+            }
         }
     }
     else{
@@ -95,11 +96,15 @@ function gf_is_match(formId, rule){
         //transform regular value into array to support multi-select (which returns an array of selected items)
         var values = (val instanceof Array) ? val : [val];
 
+        var matchCount = 0;
         for(var i=0; i < values.length; i++){
             var fieldValue = gf_get_value(values[i]);
-            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"]))
-                return true;
+            if(gf_matches_operation(fieldValue, rule["value"], rule["operator"])){
+                matchCount++;
+            }
         }
+        //If operator is Is Not, none of the value can match
+        return rule["operator"] == "isnot" ? matchCount == values.length : matchCount > 0;
     }
     return false;
 }

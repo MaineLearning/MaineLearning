@@ -1,25 +1,30 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.5.4
-    - Replaced }) with } ) to alleviate conflict with some themes that replace }) with ]
+Version 1.6.5.0.1
+    - Fixed issue with routine that checks database permissions causing warning message to be displayed on the screen when upgrading
 
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.5.3
-    - Added space between multiselect values on entry list view
+Version 1.6.5
+	- Fixed sending admin notifications with conditional routing when using PayPal's option to only send when payment is received
+    - Updated gform_merge_tag filter to include the raw field data. To support the Polls Add-On
+    - Updated POT file
+    - Fixed issue where only section headers were displaying in email notifications when using a multi-select with conditional logic
+    - Fixed issue with conditional logic when using "is not" as the operator
+    - Updated field editor so that fields can only be dragged from the title bar
+    - Added drag and drop sorting functionality to selection field choices
+    - Fixed security vulnerability with password field
+    - Fixed conflict with Tabbed Widget plugin that caused the widget page to throw Javascript errors
+    - Fixed issue with field_values not being saved across AJAX validation failures
+    - Added Hungarian translation
+    - Fixed recurring theme conflict by replacing }) with } ) , since some themes create problems by replacing }) with ]
+    - Updated multiselect values so that there is a blank space between values on entry list view
     - Fixed issue on confirmation page causing malformed markup and preventing progress bar from being displayed properly
     - Added swedish translation
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.5.2
     - Fixed issue where submissions (entries) could be created on forms that did not exist or that were inactive.
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.6.4.5.1
     - Fixed issue with number field calculation not rounding correctly when entry is saved
     - Added gform_shortcode_$action filter to allow Add-Ons to implement shortcode actions
         add_filter("gform_shortcode_custom", "custom_action", 10, 3);
         function custom_action($string, $attributes, $content){
             $string = "custom shortcode action";
-
             return $string;
         }
     - Fixed issue with total not being calculated on forms with animation and next button conditional logic

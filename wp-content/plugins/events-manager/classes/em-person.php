@@ -69,13 +69,15 @@ class EM_Person extends WP_User{
 	function display_summary(){
 		ob_start();
 		?>
-		<table>
+		<table class="em-form-fields">
 			<tr>
 				<td><?php echo get_avatar($this->ID); ?></td>
 				<td style="padding-left:10px; vertical-align: top;">
-					<strong><?php _e('Name','dbem'); ?></strong> : <a href="<?php echo EM_ADMIN_URL ?>&amp;page=events-manager-bookings&amp;person_id=<?php echo $this->ID; ?>"><?php echo $this->get_name() ?></a><br /><br />
-					<strong><?php _e('Email','dbem'); ?></strong> : <?php echo $this->user_email; ?><br /><br />
-					<strong><?php _e('Phone','dbem'); ?></strong> : <?php echo $this->phone; ?>
+					<table>
+						<tr><th><?php _e('Name','dbem'); ?> : </th><th><a href="<?php echo EM_ADMIN_URL ?>&amp;page=events-manager-bookings&amp;person_id=<?php echo $this->ID; ?>"><?php echo $this->get_name() ?></a></th></tr>
+						<tr><th><?php _e('Email','dbem'); ?> : </th><td><?php echo $this->user_email; ?></td></tr>
+						<tr><th><?php _e('Phone','dbem'); ?> : </th><td><?php echo $this->phone; ?></td></tr>
+					</table>
 				</td>
 			</tr>
 		</table>

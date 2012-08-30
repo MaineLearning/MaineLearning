@@ -3,8 +3,6 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
-Upgrade BuddyPress database
-Upgrade network after WP update
 Optimize database
 Activate Google Analytics
 Active Super Cache and test
@@ -17,6 +15,9 @@ Remove custom CSS.
 
 ------------------------------------
 DONE
+
+Upgrade BuddyPress database
+Upgrade network after WP update
 
 Remove Custom CSS for Home and Sites
 

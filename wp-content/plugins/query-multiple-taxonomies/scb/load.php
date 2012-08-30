@@ -1,15 +1,20 @@
 <?php
 
-$GLOBALS['_scb_data'] = array( 38, __FILE__, array(
+$GLOBALS['_scb_data'] = array( 56, __FILE__, array(
 	'scbUtil', 'scbOptions', 'scbForms', 'scbTable',
 	'scbWidget', 'scbAdminPage', 'scbBoxesPage',
 	'scbCron', 'scbHooks',
 ) );
 
 if ( !class_exists( 'scbLoad4' ) ) :
+/**
+ * The main idea behind this class is to load the most recent version of the scb classes available.
+ *
+ * It waits until all plugins are loaded and then does some crazy hacks to make activation hooks work.
+ */
 class scbLoad4 {
 
-	private static $candidates;
+	private static $candidates = array();
 	private static $classes;
 	private static $callbacks = array();
 
@@ -27,8 +32,10 @@ class scbLoad4 {
 			add_action( 'activate_plugin',  array( __CLASS__, 'delayed_activation' ) );
 		}
 
-		// TODO: don't load when activating a plugin ?
-		add_action( 'plugins_loaded', array( __CLASS__, 'load' ), 9, 0 );
+		if ( did_action( 'plugins_loaded' ) )
+			self::load();
+		else
+			add_action( 'plugins_loaded', array( __CLASS__, 'load' ), 9, 0 );
 	}
 
 	static function delayed_activation( $plugin ) {

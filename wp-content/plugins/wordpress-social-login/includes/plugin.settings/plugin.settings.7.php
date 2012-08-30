@@ -276,7 +276,7 @@ jQuery(function () {
 				?>
 					<tr>
 						<td width="60%">
-							<img src="<?php echo $assets_base_url . strtolower( $item->meta_value ) . '.png' ?>" style="vertical-align: top;" /> <b><?php echo $item->meta_value; ?></b>
+							<img src="<?php echo $assets_base_url . strtolower( $item->meta_value ) . '.png' ?>" style="vertical-align:top;width:16px;height:16px;" /> <b><?php echo $item->meta_value; ?></b>
 						</td>
 						<td>
 							<?php echo $item->items; ?>

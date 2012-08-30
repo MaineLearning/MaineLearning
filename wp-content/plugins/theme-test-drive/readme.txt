@@ -3,7 +3,7 @@ Contributors: freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=920155875
 Tags: theme, themes, admin, test
 Requires at least: 2.3
-Tested up to: 3.3
+Tested up to: 3.4.1
 Stable tag: trunk
 
 Safely test drive any theme as an administrator, while visitors use the default one. 
@@ -21,6 +21,11 @@ You can also preview any theme by adding "?theme=xxx" to your blog URL. For exam
 Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/services">WordPress Consultant</a>?
 
 == Changelog ==
+
+= 2.8.3 =
+* Update for compatibility to WordPress 3.4.1 by replacing deprecated calls (thanks Lance Willett!)
+* Use new WP_Theme API for loading themes and getting theme information
+* Fix PHP warnings
 
 = 2.8.2 =
 * WordPress 3.2 compatibility

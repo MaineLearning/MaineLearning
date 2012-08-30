@@ -5,14 +5,15 @@ Website link: http://www.marcocimmino.net/cimy-wordpress-plugins/cimy-swift-smtp
 Tags: cimy, email, smtp, gmail, swift, admin
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 
 Send email via SMTP (Compatible with GMAIL)
 
 == Description ==
 
-This plug-in is developed starting from Swift SMTP 1.0 from Marcus Vanstone that give me the base to do these modifications and have a new great plug-in!
-Basically this plug-in is for all people that have an hosting server that has the php mail function disabled and/or want to use their SMTP servers.
+This plug-in is for all people that have an hosting server with the php default mail function disabled and/or want to use their own SMTP servers.
+Supports SSL/TLS/STARTTLS encryption methods.
+Uses Swift Mailer engine - http://swiftmailer.org/
 
 == Frequently Asked Questions ==
 

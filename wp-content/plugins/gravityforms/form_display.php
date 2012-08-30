@@ -728,7 +728,7 @@ class GFFormDisplay{
         $current_page = self::get_current_page($form_id);
         $next_page = $current_page + 1;
         $next_page = $next_page > self::get_max_page_number($form) ? 0 : $next_page;
-        $field_values_str = is_array($field_values) ? http_build_query($field_values) : "";
+        $field_values_str = is_array($field_values) ? http_build_query($field_values) : $field_values;
         $files_input = "";
         if(!empty(RGFormsModel::$uploaded_files[$form_id])){
             $files = GFCommon::json_encode(RGFormsModel::$uploaded_files[$form_id]);
@@ -1789,8 +1789,7 @@ class GFFormDisplay{
         // temporary solution for output gf_global obj until wp min version raised to 3.3
         if(wp_script_is("gforms_gravityforms")) {
             require_once(GFCommon::get_base_path() . '/currency.php');
-            $gf_global_obj = array( 'gf_currency_config' => RGCurrency::get_currency(GFCommon::get_currency()) );
-            $gf_global_script = "if(typeof gf_global == 'undefined') var gf_global = " . json_encode($gf_global_obj) . ";";
+            $gf_global_script = "if(typeof gf_global == 'undefined') var gf_global = {gf_currency_config: " . json_encode(RGCurrency::get_currency(GFCommon::get_currency())) . " };";
         }
 
         /* rendering initialization scripts */
@@ -2043,14 +2042,14 @@ class GFFormDisplay{
             if($field["type"] != "page" && !empty($field["conditionalLogic"])){
                 foreach($field["conditionalLogic"]["rules"] as $rule){
                     if($rule["fieldId"] == $fieldId){
-                        $fields[] = $field["id"];
+                        $fields[] = floatval($field["id"]);
 
                         //if field is a section, add all fields in the section that have conditional logic (to support nesting)
                         if($field["type"] == "section"){
                             $section_fields = GFCommon::get_section_fields($form, $field["id"]);
                             foreach($section_fields as $section_field)
                                 if(!empty($section_field["conditionalLogic"]))
-                                    $fields[] = $section_field["id"];
+                                    $fields[] = floatval($section_field["id"]);
                         }
                         break;
                     }
@@ -2060,7 +2059,7 @@ class GFFormDisplay{
             if(!empty($field["nextButton"]["conditionalLogic"])){
                 foreach($field["nextButton"]["conditionalLogic"]["rules"] as $rule){
                     if($rule["fieldId"] == $fieldId && !in_array($fieldId, $fields)){
-                        $fields[] = $field["id"];
+                        $fields[] = floatval($field["id"]);
                         break;
                     }
                 }

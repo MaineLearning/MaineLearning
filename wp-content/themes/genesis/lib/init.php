@@ -71,9 +71,9 @@ function genesis_constants() {
 
 	/** Define Theme Info Constants */
 	define( 'PARENT_THEME_NAME', 'Genesis' );
-	define( 'PARENT_THEME_VERSION', '1.8.1' );
-	define( 'PARENT_DB_VERSION', '1803' );
-	define( 'PARENT_THEME_RELEASE_DATE', date_i18n( 'F j, Y', '1335762000' ) );
+	define( 'PARENT_THEME_VERSION', '1.8.2' );
+	define( 'PARENT_DB_VERSION', '1804' );
+	define( 'PARENT_THEME_RELEASE_DATE', date_i18n( 'F j, Y', '1340211600' ) );
 	#define( 'PARENT_THEME_RELEASE_DATE', 'TBD' );
 
 	/** Define Directory Location Constants */

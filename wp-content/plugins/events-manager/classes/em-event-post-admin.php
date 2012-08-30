@@ -90,8 +90,6 @@ class EM_Event_Post_Admin{
 					//if this is just published, we need to email the user about the publication, or send to pending mode again for review
 					if( (!$EM_Event->is_recurring() && !current_user_can('publish_events')) || ($EM_Event->is_recurring() && !current_user_can('publish_recurring_events')) ){
 						if( $EM_Event->is_published() ){ $EM_Event->set_status(0, true); } //no publishing and editing... security threat
-					}else{
-						$EM_Event->send_approval_notification();
 					}
 					apply_filters('em_event_save', true, $EM_Event);
 				}
@@ -108,9 +106,6 @@ class EM_Event_Post_Admin{
 					//if this is just published, we need to email the user about the publication, or send to pending mode again for review
 					if( (!$EM_Event->is_recurring() && !current_user_can('publish_events')) || ($EM_Event->is_recurring() && !current_user_can('publish_recurring_events')) ){
 						if( $EM_Event->is_published() ){ $EM_Event->set_status(0, true); } //no publishing and editing... security threat
-					}else{
-						$EM_Event->previous_status = $EM_Event->get_previous_status(); //save previous status into object before approving
-						$EM_Event->send_approval_notification();
 					}
 					//now update the db
 					$wpdb->query("UPDATE ".EM_EVENTS_TABLE." SET event_name='{$EM_Event->event_name}', event_slug='{$EM_Event->event_slug}', event_status={$event_status}, event_private={$EM_Event->event_private} WHERE event_id='{$EM_Event->event_id}'");

@@ -1,7 +1,7 @@
 <?php
 /*
  
- $Id: sitemap-core.php 440117 2011-09-19 13:24:49Z arnee $
+ $Id: sitemap-core.php 583237 2012-08-08 21:06:12Z arnee $
 
 */
 
@@ -186,31 +186,6 @@ class GoogleSitemapGeneratorStatus {
 	
 	function GetGoogleTime() {
 		return round($this->_googleEndTime - $this->_googleStartTime,2);
-	}
-	
-	var $_usedAsk = false;
-	var $_askUrl = '';
-	var $_askSuccess = false;
-	var $_askStartTime = 0;
-	var $_askEndTime = 0;
-	
-	function StartAskPing($url) {
-		$this->_usedAsk = true;
-		$this->_askUrl = $url;
-		$this->_askStartTime = $this->GetMicrotimeFloat();
-		
-		$this->Save();
-	}
-	
-	function EndAskPing($success) {
-		$this->_askEndTime = $this->GetMicrotimeFloat();
-		$this->_askSuccess = $success;
-		
-		$this->Save();
-	}
-	
-	function GetAskTime() {
-		return round($this->_askEndTime - $this->_askStartTime,2);
 	}
 	
 	var $_usedMsn = false;
@@ -721,7 +696,7 @@ class GoogleSitemapGenerator {
 	/**
 	 * @var Version of the generator in SVN
 	*/
-	var $_svnVersion = '$Id: sitemap-core.php 440117 2011-09-19 13:24:49Z arnee $';
+	var $_svnVersion = '$Id: sitemap-core.php 583237 2012-08-08 21:06:12Z arnee $';
 	
 	/**
 	 * @var array The unserialized array with the stored options
@@ -885,7 +860,6 @@ class GoogleSitemapGenerator {
 		$this->_options["sm_b_xml"]=true;					//Create a .xml file
 		$this->_options["sm_b_gzip"]=true;					//Create a gzipped .xml file(.gz) file
 		$this->_options["sm_b_ping"]=true;					//Auto ping Google
-		$this->_options["sm_b_pingask"]=true;				//Auto ping Ask.com
 		$this->_options["sm_b_pingmsn"]=true;				//Auto ping MSN
 		$this->_options["sm_b_manual_enabled"]=false;		//Allow manual creation of the sitemap via GET request
 		$this->_options["sm_b_auto_enabled"]=true;			//Rebuild sitemap when content is changed
@@ -1154,7 +1128,7 @@ class GoogleSitemapGenerator {
 	 */
 	function GetCustomTaxonomies() {
 		$taxonomies = get_object_taxonomies('post');
-		return array_diff($taxonomies,array("category","post_tag"));
+		return array_diff($taxonomies,array("category","post_tag","post_format"));
 	}
 
 	/**
@@ -2145,7 +2119,7 @@ class GoogleSitemapGenerator {
 				$termInfo = $wpdb->get_results($sql);
 				
 				foreach($termInfo AS $term) {
-					$this->AddUrl(get_term_link($term,$term->_taxonomy),$term->_mod_date ,$this->GetOption("cf_tags"),$this->GetOption("pr_tags"));
+					$this->AddUrl(get_term_link($term->slug,$term->_taxonomy),$term->_mod_date ,$this->GetOption("cf_tags"),$this->GetOption("pr_tags"));
 				}
 			}
 
@@ -2204,19 +2178,6 @@ class GoogleSitemapGenerator {
 			}
 		}
 				
-		//Ping Ask.com
-		if($this->GetOption("b_pingask") && !empty($pingUrl)) {
-			$sPingUrl="http://submissions.ask.com/ping?sitemap=" . urlencode($pingUrl);
-			$status->StartAskPing($sPingUrl);
-			$pingres=$this->RemoteOpen($sPingUrl);
-									  
-			if($pingres==NULL || $pingres===false || strpos($pingres,"successfully received and added")===false) { //Ask.com returns 200 OK even if there was an error, so we need to check the content.
-				$status->EndAskPing(false,$this->_lastError);
-				trigger_error("Failed to ping Ask.com: " . htmlspecialchars(strip_tags($pingres)),E_USER_NOTICE);
-			} else {
-				$status->EndAskPing(true);
-			}
-		}
 		
 		//Ping Bing
 		if($this->GetOption("b_pingmsn") && !empty($pingUrl)) {
@@ -2269,10 +2230,7 @@ class GoogleSitemapGenerator {
 				break;
 			case "msn":
 				$url = $status->_msnUrl;
-				break;
-			case "ask":
-				$url = $status->_askUrl;
-				break;			
+				break;		
 		}
 		
 		if(empty($url)) die("Invalid ping url");

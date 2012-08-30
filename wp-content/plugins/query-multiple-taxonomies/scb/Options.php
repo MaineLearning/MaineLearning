@@ -1,12 +1,12 @@
 <?php
 
-// Documentation: http://scribu.net/wordpress/scb-framework/scb-options.html
+// Container for an array of options
 
 class scbOptions {
 
-	protected $key;			// the option name
+	protected $key;		// the option name
 
-	protected $defaults;	// the default value( s )
+	protected $defaults;	// the default values
 
 	public $wp_filter_id;	// used by WP hooks
 
@@ -15,15 +15,16 @@ class scbOptions {
 	 *
 	 * @param string $key Option name
 	 * @param string $file Reference to main plugin file
-	 * @param array $defaults An associative array of default values ( optional )
+	 * @param array $defaults An associative array of default values (optional)
 	 */
-	public function __construct( $key, $file, $defaults = '' ) {
+	public function __construct( $key, $file, $defaults = array() ) {
 		$this->key = $key;
 		$this->defaults = $defaults;
 
-		scbUtil::add_activation_hook( $file, array( $this, '_activation' ) );
-
-		scbUtil::add_uninstall_hook( $file, array( $this, 'delete' ) );
+		if ( $file ) {
+			scbUtil::add_activation_hook( $file, array( $this, '_activation' ) );
+			scbUtil::add_uninstall_hook( $file, array( $this, 'delete' ) );
+		}
 	}
 
 	/**
@@ -34,27 +35,25 @@ class scbOptions {
 	}
 
 	/**
-	 * Get option values for one, many or all fields
+	 * Get option values for one or all fields
 	 *
-	 * @param string|array $field The field(s) to get
+	 * @param string|array $field The field to get
 	 * @return mixed Whatever is in those fields
 	 */
-	public function get( $field = '' ) {
-		$data = get_option( $this->key, array() );
+	public function get( $field = null, $default = null ) {
+		$data = array_merge( $this->defaults, get_option( $this->key, array() ) );
 
-		$data = array_merge( $this->defaults, $data );
-
-		return $this->_get( $field, $data );
+		return scbForms::get_value( $field, $data, $default );
 	}
 
 	/**
-	 * Get default values for one, many or all fields
+	 * Get default values for one or all fields
 	 *
-	 * @param string|array $field The field( s ) to get
+	 * @param string|array $field The field to get
 	 * @return mixed Whatever is in those fields
 	 */
-	public function get_defaults( $field = '' ) {
-		return $this->_get( $field, $this->defaults );
+	public function get_defaults( $field = null ) {
+		return scbForms::get_value( $field, $this->defaults );
 	}
 
 	/**
@@ -88,7 +87,7 @@ class scbOptions {
 	 * @return bool
 	 */
 	public function cleanup() {
-		$this->update( $this->_clean( $this->get() ) );
+		$this->update( $this->get(), true );
 	}
 
 	/**
@@ -102,7 +101,7 @@ class scbOptions {
 		if ( $clean )
 			$newdata = $this->_clean( $newdata );
 
-		update_option( $this->key, $newdata );
+		update_option( $this->key, array_merge( $this->get(), $newdata ) );
 	}
 
 	/**
@@ -125,27 +124,10 @@ class scbOptions {
 
 	// Keep only the keys defined in $this->defaults
 	private function _clean( $data ) {
-		$r = array();
-		foreach ( array_keys( $this->defaults ) as $key )
-			if ( isset( $data[$key] ) )
-				$r[$key] = $data[$key];
-
-		return $r;
+		return wp_array_slice_assoc( $data, array_keys( $this->defaults ) );
 	}
 
-	// Get one, more or all fields from an array
 	private function &_get( $field, $data ) {
-		if ( empty( $field ) )
-			return $data;
-
-		if ( is_string( $field ) )
-			return $data[$field];
-
-		foreach ( $field as $key )
-			if ( isset( $data[$key] ) )
-				$result[] = $data[$key];
-
-		return $result;
 	}
 
 	// Magic method: $options->field

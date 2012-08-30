@@ -5,6 +5,20 @@ require_once("./config.php");
 $wpload = get_gdsr_wpload_path();
 require($wpload);
 
+function gdsr_is_current_user_role($role = 'administrator') {
+    global $current_user;
+
+    if (is_array($current_user->roles)) {
+        return in_array($role, $current_user->roles);
+    } else {
+        return false;
+    }
+}
+
+if (!is_user_logged_in() && !gdsr_is_current_user_role()) {
+    wp_die(__("Only administrators can use export features.", "gd-star-rating"));
+}
+
 global $wpdb;
 
 if (isset($_GET["ex"])) {

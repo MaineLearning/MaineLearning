@@ -342,12 +342,10 @@ function em_bookings_single(){
 										<?php do_action('em_bookings_admin_ticket_totals_footer'); ?>
 									</tfoot>
 								</table>
-								<table cellspacing="0" cellpadding="0">
+								<table class="em-form-fields" cellspacing="0" cellpadding="0">
 									<?php if( !has_action('em_bookings_single_custom') ): //default behaviour ?>
 									<tr>
-										<td>
-											<strong><?php _e('Comment','dbem'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-										</td>
+										<th><?php _e('Comment','dbem'); ?></th>
 										<td>
 											<span class="em-booking-single-info"><?php echo $EM_Booking->booking_comment; ?></span>
 											<div class="em-booking-single-edit"><textarea name="booking_comment"><?php echo $EM_Booking->booking_comment; ?></textarea></div>
@@ -441,7 +439,7 @@ function em_bookings_person(){
 			$has_booking = true;
 		}
 	}
-	if( !$has_booking ){
+	if( !$has_booking && !current_user_can('manage_others_bookings') ){
 		?>
 		<div class="wrap"><h2><?php _e('Unauthorized Access','dbem'); ?></h2><p><?php _e('You do not have the rights to manage this event.','dbem'); ?></p></div>
 		<?php

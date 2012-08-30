@@ -84,13 +84,13 @@ function genesis_update_check() {
  *
  * @uses _genesis_update_settings()
  */
-function genesis_upgrade_1803() {
+function genesis_upgrade_1804() {
 
 	/** Update Settings */
 	_genesis_update_settings(
 		array(
-			'theme_version' => '1.8.1',
-			'db_version'    => '1803',
+			'theme_version' => '1.8.2',
+			'db_version'    => '1804',
 		)
 	);
 
@@ -350,11 +350,11 @@ function genesis_upgrade() {
 		genesis_upgrade_1800();
 		
 	###########################
-	# UPDATE DB TO VERSION 1803
+	# UPDATE DB TO VERSION 1804
 	###########################
 
-	if ( genesis_get_option( 'db_version', null, false ) < '1803' )
-		genesis_upgrade_1803();
+	if ( genesis_get_option( 'db_version', null, false ) < '1804' )
+		genesis_upgrade_1804();
 
 	do_action( 'genesis_upgrade' );
 

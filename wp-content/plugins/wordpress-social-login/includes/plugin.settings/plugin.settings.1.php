@@ -7,7 +7,7 @@
     position: relative;
     width: 250px;
     z-index: 200;
-} 
+}  
 .wsl_help {
     line-height: 1;
     padding: 8px;
@@ -42,8 +42,8 @@
 	padding: 10px;      
 }
 </style>
-
-<div class="wsl_help wsl_aside">
+ 
+<div style="clear:both" class="wsl_help wsl_aside">
     <h3 style="margin: 0 0 5px;">Need Help?</h3>
 
 	<p style="line-height: 19px;" align="justify">
@@ -51,13 +51,23 @@
 		and to make sure your server settings meet this <b><a href="options-general.php?page=wordpress-social-login&amp;wslp=3">Plugin Requirements</a></b>.
 	</p>
 </div> 
-
+ 
 <div style="clear:both" class="wsl_notice wsl_aside">
     <h3 style="margin: 0 0 5px;">Need Support?</h3>
 
 	<p style="line-height: 19px;" align="justify">
 		If you run into any issue, please join us on the <b><a href="options-general.php?page=wordpress-social-login&wslp=8">discussion group</a></b> or feel free to contact me at <b><a href="mailto:hybridauth@gmail.com">hybridauth@gmail.com</a></b>
 	</p>
+</div> 
+ 
+<div style="clear:both" class="wsl_donate wsl_aside">
+    <h3 style="margin: 0 0 5px;">Support us?</h3>
+
+	<p style="line-height: 19px;" align="left"> 
+		Support this plugin development. Donate now using <strong>PayPal</strong>. Thanks you!
+	</p>
+
+	<a href="http://bit.ly/OTuFYN" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
 </div>
 
 <?php 
@@ -73,7 +83,7 @@
 
 	if( $nok ){
 ?>
-<div style="clear:both" class="wsl_alert wsl_aside">
+<div style="clear:both;" class="wsl_alert wsl_aside">
     <h3 style="margin: 0 0 5px;">Important</h3>
 
 	<p style="line-height: 19px;">
@@ -86,7 +96,7 @@
 	}
 ?>
 
-<div style="clear:both;padding-bottom: 0;" class="wsl_donate wsl_aside">
+<div style="clear:both;padding-bottom: 0;display:none;" class="wsl_donate wsl_aside">
     <h3 style="margin: 0 0 5px;">Contribute</h3>
 
 	<p style="line-height: 19px;" align="justify">
@@ -114,6 +124,11 @@
 	<strong>WordPress Social Login</strong> allow your visitors to comment and login with social networks such as Twitter, Facebook, Google, Yahoo and more.
 </p>
  
+<table width="60%" border="0">
+<tr>
+	<td>
+
+
 <div style="margin-top:20px;">
 	<p style="margin:10px;font-size: 14px;">  
 		WordPress Social Login is:
@@ -133,13 +148,16 @@
 
 	<ol style="margin-left:65px;font-size: 14px;">
 		<li><strong>Setup</strong> the social networks you want to use,</li> 
-		<li><strong>Customize</strong> the way you want it to look and behave.</li> 
-<!--		
-		<li>Get an <strong>insight</strong> into users informations and track trends in site registrations</li> 
--->
+		<li><strong>Customize</strong> the way you want it to look and behave.</li>  
+		<!--
+		<li>Get an <strong>insight</strong> into users informations and track trends in site registrations</li>  
+		-->
 	</ol>
 
 	<p style="margin:10px;margin-top:20px;font-size: 14px;">  
 		and that is it!
 	</p> 
 </div>
+	</td> 
+</tr>
+</table>

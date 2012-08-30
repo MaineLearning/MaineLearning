@@ -2,7 +2,7 @@
   /*
    Plugin Name: Subscribe To "Double-Opt-In" Comments
    Plugin URI: http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/
-   Version: 6.1.2
+   Version: 6.1.5
    Description: Allows readers to receive notifications of new comments that are posted to an entry, with Double-Opt-In Feature.  Based on version 2 of "Subscribe to Comments" from Mark Jaquith (http://txfx.net/).
    Author: Tobias Koelligan
    Author URI: http://www.sjmp.de/
@@ -218,9 +218,10 @@
               $update_settings = stripslashes_deep($_POST['sg_subscribe_settings']);
               $sg_subscribe->update_settings($update_settings);
           }
+  
+		  $donationlink = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3736248';
           
-          
-          echo '<h2>' . __('Subscribe to Comments Options', 'subscribe-to-doi-comments') . '</h2>';
+          echo '<h2>' . __('Subscribe to Comments Options', 'subscribe-to-doi-comments') . '</h2> (by Tobias K. from <a href="http://www.sjmp.de/" target="_blank">sjmp.de</a>, please <a href="'.$donationlink.'" target="_blank">donate</a> if you like the plugin!)';
           echo '<ul>';
           
           echo '<li><label for="name">' . __('"From" name for notifications:', 'subscribe-to-doi-comments') . ' <input type="text" size="40" id="name" name="sg_subscribe_settings[name]" value="' . sg_subscribe_settings::form_setting('name') . '" /></label></li>';
@@ -264,6 +265,19 @@
           echo '<li><label for="before_manager">' . __('HTML for before the subscription manager:', 'subscribe-to-doi-comments') . ' </label><br /><textarea style="width: 98%; font-size: 12px;" rows="2" cols="60" id="before_manager" name="sg_subscribe_settings[before_manager]">' . sg_subscribe_settings::textarea_setting('before_manager') . '</textarea></li>';
           echo '<li><label for="after_manager">' . __('HTML for after the subscription manager:', 'subscribe-to-doi-comments') . ' </label><br /><textarea style="width: 98%; font-size: 12px;" rows="2" cols="60" id="after_manager" name="sg_subscribe_settings[after_manager]">' . sg_subscribe_settings::textarea_setting('after_manager') . '</textarea></li>';
           echo '</ul>';
+          echo '</fieldset>';
+		  
+		  echo '<fieldset>';
+          echo '<legend>' . __('Hide copyright notice (please consider a donation via PayPal!)', 'subscribe-to-doi-comments') . '</legend>';
+          
+          echo '<p>' . __('You can hide the copyright notice published on the subscription manager page. This is optional. Please consider a donation via PayPal if you hide the copyright notice!', 'subscribe-to-doi-comments') . '</p>';
+		  echo '<p style="color:darkred;">' . __('Lots of work was and is put into this plugin, so be fair and donate if you hide the copyright notice!', 'subscribe-to-doi-comments');
+		  printf(__(' <a href="%s" target="_blank">Donate here!</a></p>', 'subscribe-to-doi-comments'), $donationlink);
+
+		  echo '<ul>';
+          echo '<li><label for="hideCopyright"><input type="checkbox" id="hideCopyright" name="sg_subscribe_settings[hideCopyright]" value="true"' . sg_subscribe_settings::checkflag('hideCopyright') . ' /> ' . __('Hide the copyright notice from the subscription manager.', 'subscribe-to-doi-comments') . '</label></li>';
+          echo '</ul>';
+          
           echo '</fieldset>';
       }
       
@@ -354,6 +368,7 @@
           $this->site_email = (is_email($this->settings['email']) && $this->settings['email'] != 'email@example.com') ? $this->settings['email'] : get_bloginfo('admin_email');
           $this->site_name = ($this->settings['name'] != 'YOUR NAME' && !empty($this->settings['name'])) ? $this->settings['name'] : get_bloginfo('name');
           $this->default_subscribed = ($this->settings['default_subscribed']) ? true : false;
+		  $this->hideCopyright = ($this->settings['hideCopyright']) ? true : false;
           
 		  if (is_multisite()) {
 			$this->not_subscribed_text = __('Notify me of followup comments via e-mail', 'subscribe-to-doi-comments');
@@ -416,6 +431,11 @@
       
       function add_message($text) {
           $this->messages[] = $text;
+      }
+	  
+	    
+      function hideCopyright() {
+          return $this->hideCopyright;
       }
       
       
@@ -551,7 +571,10 @@
           $email = strtolower($email);
           // add the option if it doesn't exist
           add_option('do_not_mail', '');
-          $blocked = (array)explode(' ', get_settings('do_not_mail'));
+		  $blocked = get_settings('do_not_mail');
+		  if (!is_array(get_settings('do_not_mail'))) {
+			$blocked = (array)explode(' ', get_settings('do_not_mail'));
+		  }
           if (in_array($email, $blocked))
               return true;
           return false;
@@ -569,7 +592,12 @@
           // check to make sure this email isn't already in there
           if (!$this->is_blocked($email)) {
               // email hasn't already been added - so add it
-              $blocked = get_settings('do_not_mail') . ' ' . $email;
+			  if (is_array(get_settings('do_not_mail'))) {
+				$blocked = get_settings('do_not_mail');
+				$blocked[] = $email;
+			  } else {
+				$blocked = get_settings('do_not_mail') . ' ' . $email;
+			  }
               update_option('do_not_mail', $blocked);
               return true;
           }
@@ -585,7 +613,11 @@
           
           if ($this->is_blocked($email)) {
               // e-mail is in the list - so remove it
-              $blocked = str_replace(' ' . $email, '', explode(' ', get_settings('do_not_mail')));
+			  if (is_array(get_settings('do_not_mail'))) {
+				$blocked = str_replace($email, '', get_settings('do_not_mail'));
+			  } else {
+				$blocked = str_replace(' ' . $email, '', explode(' ', get_settings('do_not_mail')));
+			  }
               update_option('do_not_mail', $blocked);
               return true;
           }
@@ -1118,7 +1150,14 @@
   <div class="wrap">
   <h2><?php
               printf(__('%s Comment Subscription Manager', 'subscribe-to-doi-comments'), bloginfo('name'));
-?></h2><b>Plugin by <a href="http://www.sjmp.de/" target="_blank">Webmaster and Security Blog - sjmp.de</a></b>
+?></h2>
+
+<?php
+if (!$sg_subscribe->hideCopyright()) {
+	$_copyright_notice_block = '<b>Plugin by <a href="http://www.sjmp.de/" target="_blank">Webmaster and Security Blog - sjmp.de</a></b>';
+	echo $_copyright_notice_block;
+}
+?>
 
   <?php
               if (!empty($sg_subscribe->ref))

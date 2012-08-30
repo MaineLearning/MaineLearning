@@ -873,12 +873,13 @@ function GetFieldChoices(field){
         if(!price)
             price = "";
 
-        str += "<li>";
-        str += "<input type='" + type + "' class='gfield_choice_" + type + "' name='choice_selected' id='" + inputType + "_choice_selected_" + i + "' " + checked + " onclick=\"SetFieldChoice('" + inputType + "', " + i + ");\" />";
-        str +=     "<input type='text' id='" + inputType + "_choice_text_" + i + "' value=\"" + field.choices[i].text.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-text' />";
-        str +=     "<input type='text' id='"+ inputType + "_choice_value_" + i + "' value=\"" + value.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-value' />";
-        str +=     "<input type='text' id='"+ inputType + "_choice_price_" + i + "' value=\"" + price.replace(/"/g, "&quot;") + "\" onchange=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-price' />";
-        str +=     "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='<?php _e("add another choice", "gravityforms") ?>' alt='<?php _e("add another choice", "gravityforms") ?>' style='cursor:pointer; margin:0 3px;' onclick=\"InsertFieldChoice(" + (i+1) + ");\" />";
+        str += "<li data-index=' " + i + "'>";
+        str += "<img src='" + imagesUrl + "/arrow-handle.png' class='field-choice-handle' alt='<?php _e("Drag to re-order", "gravityforms") ?>' /> ";
+        str += "<input type='" + type + "' class='gfield_choice_" + type + "' name='choice_selected' id='" + inputType + "_choice_selected_" + i + "' " + checked + " onclick=\"SetFieldChoice('" + inputType + "', " + i + ");\" /> ";
+        str += "<input type='text' id='" + inputType + "_choice_text_" + i + "' value=\"" + field.choices[i].text.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-text' />";
+        str += "<input type='text' id='"+ inputType + "_choice_value_" + i + "' value=\"" + value.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-value' />";
+        str += "<input type='text' id='"+ inputType + "_choice_price_" + i + "' value=\"" + price.replace(/"/g, "&quot;") + "\" onchange=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-price' />";
+        str += "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='<?php _e("add another choice", "gravityforms") ?>' alt='<?php _e("add another choice", "gravityforms") ?>' style='cursor:pointer; margin:0 3px;' onclick=\"InsertFieldChoice(" + (i+1) + ");\" />";
 
         if(field.choices.length > 1 )
             str += "<img src='" + imagesUrl + "/remove.png' title='<?php _e("remove this choice", "gravityforms") ?>' alt='<?php _e("remove this choice", "gravityforms") ?>' class='delete_field_choice' style='cursor:pointer;' onclick=\"DeleteFieldChoice(" + i + ");\" />";

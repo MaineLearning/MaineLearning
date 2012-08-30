@@ -4,7 +4,7 @@ Donate link: http://www.relevanssi.com/buy-premium/
 Tags: search, relevance, better search
 Requires at least: 2.7
 Tested up to: 3.4.1
-Stable tag: 3.0
+Stable tag: 3.0.4
 
 Relevanssi replaces the default search with a partial-match search that sorts results by relevance. It also indexes comments and shortcode content.
 
@@ -388,8 +388,35 @@ removing those words helps to make the index smaller and searching faster.
 
 == Changelog ==
 
+= 3.0.4 =
+* AFTER UPGRADING FROM 2.x: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
+* Fixed another problem with the Jetpack Contact Form.
+* Fixed an error message caused by searching for numbers.
+* Phrases are now also recognized in drafts and attachments.
+* You can now set `post_types` to 'any'.
+
+= 3.0.3 =
+* AFTER UPGRADING FROM 2.x: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
+* Fixed a bug that made custom taxonomy term searches fail.
+* New filter: `relevanssi_user_searches_capability` lets you modify the minimum capability required to see the User searches page.
+
+= 3.0.2 =
+* AFTER UPGRADING FROM 2.x: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
+* Fixed the "Cannot use a scalar value as an array" bug in indexing.
+* Role-Scoper users: in order to make Relevanssi work with Role-Scoper, replace the Relevanssi helper file in Role-Scoper with [this file](http://www.relevanssi.com/relevanssi-helper-front_rs.txt).
+* Removed an error message about set_time_limit() under safe_mode.
+* Jetpack Contact Form shortcode caused problems when indexing. Relevanssi will now simply remove the shortcode before indexing.
+* Fixed errors caused by / characters in highlighting.
+
+= 3.0.1 =
+* AFTER UPGRADING FROM 2.x: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
+* Fixed lots of problems in logging searches.
+* Added an alert when user hasn't selected any post types to index (and default values).
+* Custom field setting 'visible' works now.
+* Searching by category title works now, and you can adjust the category weight in the settings.
+
 = 3.0 =
-* AFTER UPGRADING FROM 2.9.14: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
+* AFTER UPGRADING FROM 2.x: Make sure you deactivate and reactivate Relevanssi in order to make the database changes happen.
 * WORD OF WARNING: This is a major update, with lots of changes as you can see, and since I couldn't find any beta testers to help test it out, consider this a beta release, with bugs probable.
 * The database has been updated to match the more advanced structure in Relevanssi Premium. This requires a re-indexing of the database.
 * The indexing process is more efficient now.

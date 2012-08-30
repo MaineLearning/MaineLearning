@@ -1,26 +1,30 @@
 #@ dbem
+# Michal J. Hrdlička <mjajh@sendmail.cz>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Events Manager 4.171\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/events-manager\n"
 "POT-Creation-Date: 2011-09-20 20:44:48+00:00\n"
-"PO-Revision-Date: 2012-02-21 18:53+0100\n"
-"Last-Translator: Marcus Sykes <noreply@wp-events-plugin.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2012-08-16 22:24+0200\n"
+"Last-Translator: Michal J. Hrdlička <mjajh@sendmail.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop"
+":1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
+"Language: cs\n"
+"X-Generator: Lokalize 1.4\n"
 
 # @ dbem
 #: buddypress/bp-em-activity.php:48
 #, php-format
 msgid "%s added the event %s"
-msgstr "%s přidáno akce %s"
+msgstr "%s přidána akce %s"
 
 # @ dbem
 #: buddypress/bp-em-activity.php:86
@@ -32,7 +36,7 @@ msgstr "%s se účastní %s."
 #: buddypress/bp-em-activity.php:88
 #, php-format
 msgid "%s will not be attending %s anymore."
-msgstr "%s nebudou navštěvovat %s ještě."
+msgstr "%s již nebudou navštěvovat %s."
 
 # @ dbem
 #: buddypress/bp-em-activity.php:94
@@ -108,7 +112,7 @@ msgstr "Máte čekající rezervaci"
 #: buddypress/bp-em-notifications.php:26
 #, php-format
 msgid "You have %s pending bookings"
-msgstr "jste %s až Rezervace"
+msgstr "máte %s čekající rezervace"
 
 # @ dbem
 #: buddypress/bp-em-notifications.php:33
@@ -119,12 +123,12 @@ msgstr "Máte potvrzenou rezervaci"
 #: buddypress/bp-em-notifications.php:35
 #, php-format
 msgid "You have %s confirmed bookings"
-msgstr "jste %s potvrzené rezervace"
+msgstr "máte %s potvrzené rezervace"
 
 # @ dbem
 #: buddypress/bp-em-notifications.php:41
 msgid "A user cancelled a booking"
-msgstr "Zrušeno uživatelem rezervaci"
+msgstr "Uživatelem  zrušená rezervace"
 
 # @ dbem
 #: buddypress/bp-em-notifications.php:43
@@ -150,7 +154,7 @@ msgstr "Upravit umístění"
 #: em-events.php:164
 #: em-posts.php:213
 msgid "Add Location"
-msgstr "přidat místo"
+msgstr "přidat místo konání"
 
 # @ dbem
 #: buddypress/screens/group-events.php:20
@@ -160,8 +164,9 @@ msgstr "skupinových akcí"
 
 # @ dbem
 #: buddypress/screens/profile.php:11
-msgid "You are currently viewing your public page, this is what other users will see."
-msgstr "Právě prohlížíte vaší veřejné stránce, to je to, co ostatní uvidí."
+msgid ""
+"You are currently viewing your public page, this is what other users will see."
+msgstr "Právě si prohlížíte veřejnou stránku, tedy to, co ostatní uvidí."
 
 # @ dbem
 #: buddypress/bp-em-core.php:110
@@ -190,13 +195,13 @@ msgstr "přidat událost"
 #: buddypress/screens/attending.php:23
 #: templates/buddypress/profile.php:24
 msgid "Events I'm Attending"
-msgstr "Události jsem Účast"
+msgstr "Události kterých se účastním"
 
 # @ dbem
 #: buddypress/bp-em-core.php:134
 #: buddypress/screens/my-bookings.php:30
 msgid "My Event Bookings"
-msgstr "můj událost rezervace"
+msgstr "moje rezervace na akci"
 
 # @ dbem
 #: buddypress/bp-em-core.php:90
@@ -248,7 +253,7 @@ msgstr "kalendář"
 # @ dbem
 #: widgets/em-calendar.php:17
 msgid "Display your events in a calendar widget."
-msgstr "Display your events in a calendar widget."
+msgstr "Zobrazit událost ve widgetu kalendář."
 
 # @ dbem
 #: widgets/em-calendar.php:18
@@ -265,7 +270,7 @@ msgstr "Titul"
 # @ dbem
 #: widgets/em-calendar.php:64
 msgid "Show Long Events?"
-msgstr "Zobrazit Dlouhá události?"
+msgstr "Zobrazit vícedenní události?"
 
 # @ dbem
 #: widgets/em-calendar.php:68
@@ -282,17 +287,17 @@ msgstr "1,2,3 nebo 2 (0 = všechny)"
 # @ dbem
 #: widgets/em-locations.php:13
 msgid "Event Locations"
-msgstr "akce lokality"
+msgstr "Události v místech"
 
 # @ dbem
 #: widgets/em-locations.php:24
 msgid "Display a list of event locations on Events Manager."
-msgstr "Zobrazit seznam lokalit akce na události ředitel."
+msgstr "Zobrazit seznam míst konání v Events Manageru."
 
 # @ dbem
 #: widgets/em-locations.php:49
 msgid "No locations"
-msgstr "žádná místa"
+msgstr "žádná místa konání"
 
 # @ dbem
 #: widgets/em-locations.php:76
@@ -325,7 +330,7 @@ msgstr "všechny akce"
 # @ dbem
 #: widgets/em-events.php:30
 msgid "Display a list of events on Events Manager."
-msgstr "Zobrazit seznam událostí, o událostech ředitel."
+msgstr "Zobrazit seznam událostí v Events Manageru."
 
 # @ dbem
 #: widgets/em-events.php:70
@@ -406,12 +411,12 @@ msgstr "klesající"
 # @ dbem
 #: widgets/em-events.php:154
 msgid "Show all events link at bottom?"
-msgstr "Zobrazit všechny akce link na dně?"
+msgstr "Zobrazit všechny odkazy na akci na konci stránky?"
 
 # @ dbem
 #: widgets/em-events.php:158
 msgid "All events link text?"
-msgstr "Všechny akce text odkazu?"
+msgstr "Celý text odkazů na akce?"
 
 # @ dbem
 #: admin/bookings/em-events.php:14
@@ -479,45 +484,60 @@ msgstr "Události ve lhůtě 12 měsíců"
 # @ dbem
 #: em-functions.php:224
 msgid "Trying to perform an illegal action."
-msgstr "Snažím se hrát protiprávního jednání."
+msgstr "Nepovolená operace."
 
 # @ dbem
 #: em-functions.php:296
 msgid "<strong>ERROR</strong>: Please enter a username."
-msgstr "<strong>ERROR</strong>:Zadejte prosím uživatelské jméno."
+msgstr "<strong>CHYBA</strong>:Zadejte prosím uživatelské jméno."
 
 # @ dbem
 #: em-functions.php:298
-msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
-msgstr "<strong>ERROR</strong>:Toto uživatelské jméno je neplatné, protože používá nepovolené znaky. Zadejte prosím platné uživatelské jméno."
+msgid ""
+"<strong>ERROR</strong>: This username is invalid because it uses illegal "
+"characters. Please enter a valid username."
+msgstr ""
+"<strong>CHYBA</strong>:Toto uživatelské jméno je neplatné, protože používá "
+"nepovolené znaky. Zadejte prosím platné uživatelské jméno."
 
 # @ default
 #: em-functions.php:301
-msgid "<strong>ERROR</strong>: This username is already registered, please choose another one."
-msgstr "<strong>ERROR</strong>: Toto uživatelské jméno je již registrován, prosím vybrat jinou."
+msgid ""
+"<strong>ERROR</strong>: This username is already registered, please choose "
+"another one."
+msgstr ""
+"<strong>CHYBA</strong>: Toto uživatelské jméno je již registrováno, prosím "
+"vyberte jinou."
 
 # @ dbem
 #: em-actions.php:270
 #: em-functions.php:306
 msgid "<strong>ERROR</strong>: Please type your e-mail address."
-msgstr "<strong>ERROR</strong>: Prosím, zadejte svou e-mailovou adresu."
+msgstr "<strong>CHYBA</strong>: Prosím, zadejte svou e-mailovou adresu."
 
 # @ dbem
 #: em-actions.php:273
 #: em-functions.php:308
 msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
-msgstr "<strong>ERROR</strong>: E-mailová adresa není správná."
+msgstr "<strong>CHYBA</strong>: E-mailová adresa není správná."
 
 # @ default
 #: em-functions.php:311
-msgid "<strong>ERROR</strong>: This email is already registered, please choose another one."
-msgstr "<strong>ERROR</strong>:Tento e-mail je již registrován, prosím vybrat jinou."
+msgid ""
+"<strong>ERROR</strong>: This email is already registered, please choose "
+"another one."
+msgstr ""
+"<strong>CHYBA</strong>:Tento e-mail je již registrován, prosím zadejte jiný."
 
 # @ dbem
 #: em-functions.php:331
 #, php-format
-msgid "<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href=\"mailto:%s\">webmaster</a> !"
-msgstr "<strong>ERROR</strong>: Nelze zaregistrovat si... obraťte se na <a href=\"mailto:%s\">webmaster</a> !"
+msgid ""
+"<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a "
+"href=\"mailto:%s\">webmaster</a> !"
+msgstr ""
+"<strong>CHYBA</strong>:Nemůžete se zaregistrovat... obraťte se na <a "
+"href=\"mailto:%s\">webmastera</a> !"
 
 # @ dbem
 #: em-functions.php:366
@@ -552,7 +572,7 @@ msgstr "[%s]Vaše uživatelské jméno a heslo"
 # @ dbem
 #: classes/em-ticket.php:47
 msgid "Standard Ticket"
-msgstr "standardní vstupenek"
+msgstr "standardní vstupenky"
 
 # @ dbem
 #: classes/em-booking.php:134
@@ -572,7 +592,7 @@ msgstr "Rezervace vstupenek vytvořil"
 #: classes/em-ticket.php:111
 #: classes/em-ticket.php:112
 msgid "There was a problem saving the ticket."
-msgstr "Došlo k problému při ukládání lístek."
+msgstr "Došlo k problému při ukládání vstupenek."
 
 # @ dbem
 # @ default
@@ -590,7 +610,7 @@ msgstr "Nemůžete mazat lístek, který má rezervaci na to."
 # @ dbem
 #: classes/em-location.php:106
 msgid "The location address"
-msgstr "Adresu místa"
+msgstr "Adresa místa"
 
 # @ dbem
 #: classes/em-location.php:106
@@ -608,7 +628,7 @@ msgstr "země"
 #: classes/em-location.php:239
 #: classes/em-location.php:241
 msgid " is required."
-msgstr "Je nutné."
+msgstr "Je vyžadováno."
 
 # @ dbem
 # @ default
@@ -631,7 +651,7 @@ msgstr "Je nutné."
 #: templates/forms/location-editor.php:32
 #: templates/tables/events.php:52
 msgid "Location"
-msgstr "umístění"
+msgstr "Místo konání"
 
 # @ dbem
 #: admin/em-ms-options.php:173
@@ -682,7 +702,7 @@ msgstr "Nemáte oprávnění k vytváření / editaci %s."
 #: events-manager.php:314
 #: events-manager.php:315
 msgid "locations"
-msgstr "míst"
+msgstr "místa konání"
 
 # @ dbem
 #: em-actions.php:104
@@ -711,7 +731,7 @@ msgstr "Došlo k problému při ukládání rezervace."
 #: classes/em-tickets-bookings.php:99
 #: em-install.php:489
 msgid "Booking cannot be made, not enough spaces available!"
-msgstr "Objednávka nemůže být, nestačí prostory k dispozici!"
+msgstr "Objednávka nemůže být uskutečněna, kapacita je naplněna!"
 
 # @ dbem
 #: classes/em-tickets-bookings.php:163
@@ -792,7 +812,7 @@ msgstr "%s vytvořen."
 #: classes/em-bookings.php:262
 #, php-format
 msgid "Bookings %s. Mails Sent."
-msgstr "Rezervace %s. Maily odeslané."
+msgstr "Rezervace %s. Maily byly odeslány."
 
 # @ dbem
 #: classes/em-bookings.php:266
@@ -831,7 +851,7 @@ msgstr "Zrušené"
 # @ dbem
 #: classes/em-booking.php:104
 msgid "Awaiting Online Payment"
-msgstr "Čeká se on-line platby"
+msgstr "Čeká se na on-line platbu"
 
 # @ dbem
 #: classes/em-booking.php:105
@@ -881,7 +901,7 @@ msgstr "Rezervace %s."
 # @ dbem
 #: classes/em-booking.php:473
 msgid "Mail Sent."
-msgstr "pošta odeslán."
+msgstr "Zpráva odeslána."
 
 # @ dbem
 #: classes/em-booking.php:476
@@ -903,20 +923,28 @@ msgstr "Objednávka byla úspěšně přidána poznámka."
 
 # @ dbem
 #: classes/em-booking.php:636
-msgid "Confirmation email could not be sent to contact person. Registrant should have gotten their email (only admin see this warning)."
-msgstr "Potvrzovací e-mail nelze odeslat na kontaktní osobu. Žadatel o registraci by se dostali své e-maily (pouze admin vidět varování)."
+msgid ""
+"Confirmation email could not be sent to contact person. Registrant should "
+"have gotten their email (only admin see this warning)."
+msgstr ""
+"Potvrzovací e-mail nelze odeslat na kontaktní osobu. Žadatel o registraci by "
+"se dostali své e-maily (pouze admin vidět varování)."
 
 # @ dbem
 #: classes/em-booking.php:643
-msgid "Confirmation email could not be sent to admin. Registrant should have gotten their email (only admin see this warning)."
-msgstr "Potvrzovací e-mail nelze odeslat na admin. Žadatel o registraci by se dostali své e-maily (pouze admin vidět varování)."
+msgid ""
+"Confirmation email could not be sent to admin. Registrant should have gotten "
+"their email (only admin see this warning)."
+msgstr ""
+"Potvrzovací e-mail nelze odeslat na admin. Žadatel o registraci by se dostali "
+"své e-maily (pouze admin vidět varování)."
 
 # @ dbem
 #: admin/em-options.php:971
 #: templates/buddypress/group-events.php:112
 #: templates/buddypress/my-group-events.php:106
 msgid "Category"
-msgstr "kategorie"
+msgstr "Kategorie"
 
 # @ dbem
 #: admin/em-options.php:708
@@ -934,8 +962,12 @@ msgstr "kategorie"
 
 # @ dbem
 #: classes/em-tickets.php:98
-msgid "You cannot delete tickets if there are any bookings associated with them. Please delete these bookings first."
-msgstr "Nemůžete mazat Vstupenky Pokud existují nějaké rezervace s nimi. Prosím smazat rezervací napřed."
+msgid ""
+"You cannot delete tickets if there are any bookings associated with them. "
+"Please delete these bookings first."
+msgstr ""
+"Nemůžete mazat Vstupenky Pokud existují nějaké rezervace s nimi. Prosím "
+"smazat rezervací napřed."
 
 # @ dbem
 #: classes/em-tickets.php:124
@@ -954,8 +986,14 @@ msgstr "UPOZORNĚNÍ: Jedná se o opakující se události."
 
 # @ dbem
 #: classes/em-event-post-admin.php:38
-msgid "Modifications to this event will cause all recurrences of this event to be deleted and recreated and previous bookings will be deleted! You can edit individual recurrences and disassociate them with this recurring event."
-msgstr "Změny na tuto událost způsobí, že všechny recidivy této akce bude odstraněn a znovu a předchozí rezervace budou vymazány! Můžete upravovat jednotlivé recidivy a odloučit je s tímto opakované události."
+msgid ""
+"Modifications to this event will cause all recurrences of this event to be "
+"deleted and recreated and previous bookings will be deleted! You can edit "
+"individual recurrences and disassociate them with this recurring event."
+msgstr ""
+"Změny na tuto událost způsobí, že všechny recidivy této akce bude odstraněn a "
+"znovu a předchozí rezervace budou vymazány! Můžete upravovat jednotlivé "
+"recidivy a odloučit je s tímto opakované události."
 
 # @ dbem
 #: classes/em-event-post-admin.php:41
@@ -965,13 +1003,17 @@ msgstr "VAROVÁNÍ: Toto je opakování v souboru opakující se události."
 # @ dbem
 #: classes/em-event-post-admin.php:48
 #, php-format
-msgid "WARNING: This is a event belonging to the group \"%s\". Other group admins can also modify this event."
-msgstr "UPOZORNĚNÍ: Jedná se o akce, které patří do skupiny \"%s\". Druhá skupina administrátoři mohou také změnit tuto událost."
+msgid ""
+"WARNING: This is a event belonging to the group \"%s\". Other group admins "
+"can also modify this event."
+msgstr ""
+"UPOZORNĚNÍ: Jedná se o akce, které patří do skupiny \"%s\". Druhá skupina "
+"administrátoři mohou také změnit tuto událost."
 
 # @ dbem
 #: classes/em-event.php:617
 msgid "Something went wrong with the recurrence update..."
-msgstr "Něco se pokazilo na opakování aktualizovat..."
+msgstr "Něco se pokazilo na opakování události..."
 
 # @ dbem
 #: classes/em-event.php:617
@@ -1004,8 +1046,10 @@ msgstr "Události nelze spustit po ukončení."
 
 # @ dbem
 #: classes/em-event.php:447
-msgid "Dates must have correct formatting. Please use the date picker provided."
-msgstr "Termíny musí mít správné formátování. Použijte ke dni stanovenému pro výběr."
+msgid ""
+"Dates must have correct formatting. Please use the date picker provided."
+msgstr ""
+"Termíny musí mít správné formátování. Použijte ke dni stanovenému pro výběr."
 
 # @ dbem
 #: classes/em-event.php:1255
@@ -1196,12 +1240,12 @@ msgstr "Pošlete svou rezervaci"
 # @ dbem
 #: templates/placeholders/bookingform.php:71
 msgid "No more tickets available at this time."
-msgstr "Žádné další vstupenky k dispozici v tomto okamžiku."
+msgstr "Žádné další vstupenky nejsou v tomto okamžiku k dispozici."
 
 # @ dbem
 #: templates/forms/ticket-form.php:12
 msgid "If blank, there's no space limit."
-msgstr "Pokud je prázdné, není prostor limit."
+msgstr "Pokud je prázdné, není limitováno prostorem/místem."
 
 # @ dbem
 #: templates/forms/ticket-form.php:15
@@ -1222,8 +1266,12 @@ msgstr "na"
 
 # @ dbem
 #: templates/forms/ticket-form.php:21
-msgid "Add a start or end date (or both) to impose time constraints on ticket availability. Leave either blank for no upper/lower limit."
-msgstr "Přidat začátek nebo konec data (nebo obojí) uložit časového omezení dostupnosti vstupenek. Nechte buď prázdné, bez horní / dolní mez."
+msgid ""
+"Add a start or end date (or both) to impose time constraints on ticket "
+"availability. Leave either blank for no upper/lower limit."
+msgstr ""
+"Přidat začátek nebo konec data (nebo obojí) uložit časového omezení "
+"dostupnosti vstupenek. Nechte buď prázdné, bez horní / dolní mez."
 
 # @ dbem
 #: templates/forms/ticket-form.php:24
@@ -1244,7 +1292,7 @@ msgstr "prostory."
 # @ dbem
 #: templates/forms/ticket-form.php:29
 msgid "Leave either blank for no upper/lower limit."
-msgstr "Nechte buď prázdné, bez horní / dolní mez."
+msgstr "Nechte prázdné pro žádný horní / dolní limit."
 
 # @ dbem
 #: admin/em-bookings.php:155
@@ -1262,7 +1310,7 @@ msgstr "popis"
 #: templates/forms/event-editor.php:12
 #: templates/forms/location-editor.php:6
 msgid "Unauthorized Access"
-msgstr "neoprávněnému přístupu"
+msgstr "neoprávněný přístup"
 
 # @ dbem
 #: admin/em-ms-locations.php:39
@@ -1291,8 +1339,16 @@ msgstr "Název místa"
 
 # @ dbem
 #: templates/forms/location/where.php:4
-msgid "If you're using the Google Maps, the more detail you provide, the more accurate Google can be at finding your location. If your address isn't being found, please <a='http://maps.google.com'>try it on maps.google.com</a> by adding all the fields below seperated by commas."
-msgstr "Pokud používáte Google Maps, více detailů, které poskytnete, mohou být přesnější Google při hledání vaší lokalitě. Pokud je vaše adresa není nalezen, prosím <a='http://maps.google.com'>Zkuste to na maps.google.com</a> Přidáním všech níže uvedených polí oddělených čárkou."
+msgid ""
+"If you're using the Google Maps, the more detail you provide, the more "
+"accurate Google can be at finding your location. If your address isn't being "
+"found, please <a='http://maps.google.com'>try it on maps.google.com</a> by "
+"adding all the fields below seperated by commas."
+msgstr ""
+"Pokud používáte Google Maps, můžete zadat více detailů, které pomouhou Googlu "
+"při hledání ve Vaší lokalitě. Pokud Vaše adresa není nalezena, prosím <"
+"a='http://maps.google.com'>Zkuste to na maps.google.com</a> Přidáním všech "
+"níže uvedených polí oddělených čárkou."
 
 # @ dbem
 #: templates/forms/event/location.php:69
@@ -1345,7 +1401,7 @@ msgstr "podrobnosti"
 # @ dbem
 #: templates/forms/location-editor.php:57
 msgid "No image uploaded for this location yet"
-msgstr "Obrázek není k dispozici nahrané na tomto místě ještě"
+msgstr "Pro toto umístění ještě není nahraný obrázek."
 
 # @ dbem
 #: templates/forms/event-editor.php:172
@@ -1362,7 +1418,7 @@ msgstr "Odstranit obrázek?"
 # @ dbem
 #: templates/forms/location-editor.php:71
 msgid "Update location"
-msgstr "aktualizace místo"
+msgstr "aktualizovat místo konání"
 
 # @ dbem
 #: admin/bookings/em-cancelled.php:85
@@ -1377,7 +1433,7 @@ msgstr "E-mail"
 # @ dbem
 #: templates/forms/bookingform/login.php:3
 msgid "Log in if you already have an account with us."
-msgstr "Přihlášení Pokud jste již u nás účet."
+msgstr "Přihlaste se, pokud zde již máte účet."
 
 # @ dbem
 #: templates/forms/bookingform/login.php:5
@@ -1407,7 +1463,7 @@ msgstr "Zaregistrujte se"
 # @ dbem
 #: templates/forms/bookingform/login.php:33
 msgid "Password Lost and Found"
-msgstr "Heslo Ztráty a nálezy"
+msgstr "Heslo - ztráty a nálezy"
 
 # @ dbem
 #: templates/forms/bookingform/login.php:33
@@ -1423,30 +1479,44 @@ msgstr "Název události"
 # @ dbem
 #: templates/forms/event-editor.php:34
 msgid "The event name. Example: Birthday party"
-msgstr "Název akce. Příklad: Oslava narozenin"
+msgstr "Název akce. "
 
 # @ dbem
 #: templates/forms/event/group.php:23
 #: templates/forms/event-editor.php:60
-msgid "Select a group you admin to attach this event to it. Note that all other admins of that group can modify the booking, and you will not be able to unattach the event without deleting it."
-msgstr "Vyberte skupinu, kterou admin připojit tuto akci k tomu. Všimněte si, že všechny ostatní Správci skupiny, které mohou změnit rezervaci, a nebudete moci unattach událost bez jeho odstranění."
+msgid ""
+"Select a group you admin to attach this event to it. Note that all other "
+"admins of that group can modify the booking, and you will not be able to "
+"unattach the event without deleting it."
+msgstr ""
+"Vyberte skupinu, kterou admin připojit tuto akci k tomu. Všimněte si, že "
+"všechny ostatní Správci skupiny, které mohou změnit rezervaci, a nebudete "
+"moci unattach událost bez jeho odstranění."
 
 # @ dbem
 #: classes/em-event-post-admin.php:177
 #: templates/forms/event-editor.php:66
 msgid "When"
-msgstr "kdy"
+msgstr "Datum konání"
 
 # @ dbem
 #: templates/forms/event/when.php:23
-msgid "This event spans every day between the beginning and end date, with start/end times applying to each day."
-msgstr "Tato akce trvá každý den od začátku a na konci dne, se systémem Start / konec doby se vztahují na každý den."
+msgid ""
+"This event spans every day between the beginning and end date, with start/end "
+"times applying to each day."
+msgstr ""
+"Tato akce trvá každý den od počátečního do konečného dne, se systémem začátek "
+"/ konec doby, které se vztahují na každý den."
 
 # @ dbem
 #: templates/forms/event/recurring-when.php:72
 #: templates/forms/event/when-with-recurring.php:78
-msgid "For a recurring event, a one day event will be created on each recurring date within this date range."
-msgstr "Pro opakované události, bude jednodenní akce bude vytvořena na každém opakující den v tomto období."
+msgid ""
+"For a recurring event, a one day event will be created on each recurring date "
+"within this date range."
+msgstr ""
+"Pro opakované události, bude jednodenní akce bude vytvořena na každém "
+"opakujícím se dni v zadaném období."
 
 # @ dbem
 #: templates/forms/event/recurring-when.php:10
@@ -1464,7 +1534,7 @@ msgstr "denně"
 #: templates/forms/event/recurring-when.php:13
 #: templates/forms/event/when-with-recurring.php:35
 msgid "Weekly"
-msgstr "týdenní"
+msgstr "týdně"
 
 # @ dbem
 #: templates/forms/event/recurring-when.php:13
@@ -1561,7 +1631,7 @@ msgstr "kde"
 # @ dbem
 #: templates/forms/event/location.php:28
 msgid "Location:"
-msgstr "umístění:"
+msgstr "Umístění:"
 
 # @ dbem
 #: templates/forms/event/location.php:60
@@ -1570,18 +1640,21 @@ msgstr "jméno:"
 
 # @ dbem
 #: templates/forms/event/location.php:64
-msgid "Create a location or start typing to search a previously created location."
-msgstr "Vytvořit místo, nebo začněte psát pro hledání dříve vytvořené místo."
+msgid ""
+"Create a location or start typing to search a previously created location."
+msgstr ""
+"Vytvořte místo, nebo začněte psát pro hledání již dříve vytvořeného místa "
+"konání."
 
 # @ dbem
 #: templates/forms/event/location.php:65
 msgid "You cannot edit saved locations here."
-msgstr "Nemůžete upravovat uložená místa zde."
+msgstr "Zde Nemůžete upravovat uložená místa."
 
 # @ dbem
 #: templates/forms/event/location.php:65
 msgid "Reset this form to create a location."
-msgstr "Reset tento formulář k vytvoření místa."
+msgstr "Resetujte tento formulář k vytvoření místa konání."
 
 # @ dbem
 #: templates/forms/event/location.php:95
@@ -1591,8 +1664,12 @@ msgstr "kraj:"
 
 # @ dbem
 #: templates/forms/event/location.php:110
-msgid "Filling this in first will allow you to quickly find previously filled states and regions for the country."
-msgstr "Vyplnění tohoto na první vám umožní rychle najít dříve plné státy a regiony v zemi."
+msgid ""
+"Filling this in first will allow you to quickly find previously filled states "
+"and regions for the country."
+msgstr ""
+"Vyplnění tohoto jako první vám umožní rychle najít dříve vytvořené státy a "
+"regiony."
 
 # @ dbem
 #: templates/forms/event-editor.php:107
@@ -1613,7 +1690,7 @@ msgstr "kategorie:"
 # @ dbem
 #: templates/forms/event-editor.php:190
 msgid "Submit Event"
-msgstr "Odeslat akce"
+msgstr "Odeslat akci"
 
 # @ dbem
 #: classes/em-event-post-admin.php:183
@@ -1708,13 +1785,26 @@ msgstr "Zobrazit Rezervace"
 
 # @ dbem
 #: events-manager.php:255
-msgid "Are you sure you want to reschedule this recurring event? If you do this, you will lose all booking information and the old recurring events will be deleted."
-msgstr "Jste si jisti, že chcete změnit plán této opakující se akce? Pokud tak učiníte, ztratíte všechny informace o rezervacích a staré opakující se události budou smazány."
+msgid ""
+"Are you sure you want to reschedule this recurring event? If you do this, you "
+"will lose all booking information and the old recurring events will be "
+"deleted."
+msgstr ""
+"Jste si jisti, že chcete změnit plán této opakující se akce? Pokud tak "
+"učiníte, ztratíte všechny informace o rezervacích a staré opakující se "
+"události budou smazány."
 
 # @ dbem
 #: events-manager.php:256
-msgid "Are you sure you want to disable bookings? If you do this and save, you will lose all previous bookings. If you wish to prevent further bookings, reduce the number of spaces available to the amount of bookings you currently have"
-msgstr "Jste si jisti, že chcete zakázat rezervaci? Pokud tak učiníte a ušetřit, přijdete o všechny předchozí rezervace. Pokud chcete, aby se zabránilo dalšímu rezervace, snížení počtu míst k dispozici množství rezervacích v současné době"
+msgid ""
+"Are you sure you want to disable bookings? If you do this and save, you will "
+"lose all previous bookings. If you wish to prevent further bookings, reduce "
+"the number of spaces available to the amount of bookings you currently have"
+msgstr ""
+"Jste si jisti, že chcete zakázat rezervaci? Pokud tak učiníte a ušetřit, "
+"přijdete o všechny předchozí rezervace. Pokud chcete, aby se zabránilo "
+"dalšímu rezervace, snížení počtu míst k dispozici množství rezervacích v "
+"současné době"
 
 # @ dbem
 #: templates/forms/tickets-form.php:2
@@ -1739,7 +1829,7 @@ msgstr "Datum ukončení dostupnosti vstupenek"
 # @ dbem
 #: templates/forms/tickets-form.php:12
 msgid "Minimum tickets required per booking"
-msgstr "Minimální požadované vstupenky na rezervaci"
+msgstr "Minimální počet vstupenek pro rezervaci"
 
 # @ dbem
 #: templates/forms/tickets-form.php:13
@@ -1789,7 +1879,7 @@ msgstr "můj %s"
 #: templates/tables/locations.php:8
 #: templates/tables/locations.php:11
 msgid "Locations"
-msgstr "míst"
+msgstr "Místa konání"
 
 # @ dbem
 #: templates/tables/locations.php:11
@@ -1819,7 +1909,7 @@ msgstr "odstranit vybrané"
 #: admin/bookings/em-events.php:60
 #: templates/tables/locations.php:21
 msgid "Apply"
-msgstr "platit"
+msgstr "Použít"
 
 # @ dbem
 #: classes/em-location-posts-admin.php:40
@@ -1864,7 +1954,7 @@ msgstr "žádné události"
 # @ dbem
 #: templates/buddypress/profile.php:37
 msgid "Not attending any events yet."
-msgstr "Ne chodit do nějaké události dosud."
+msgstr "Žádné navštěvované události."
 
 # @ dbem
 #: templates/tables/events.php:15
@@ -1913,15 +2003,23 @@ msgstr "rezervovaný"
 #: templates/buddypress/my-group-events.php:99
 #: templates/tables/events.php:108
 msgid "Duplicate this event"
-msgstr "Duplicitní této události"
+msgstr "duplikovat tuto událost"
 
 # @ dbem
 #: classes/em-event-posts-admin.php:144
 #: templates/buddypress/group-events.php:128
 #: templates/buddypress/my-group-events.php:122
 #: templates/tables/events.php:128
-msgid "WARNING! You will delete ALL recurrences of this event, including booking history associated with any event in this recurrence. To keep booking information, go to the relevant single event and save it to detach it from this recurrence series."
-msgstr "VAROVÁNÍ! Budete odstranit všechny recidivy této události, včetně rezervace historie spojené s událostí v tomto opakování. Chcete-li zachovat informace o rezervacích naleznete na příslušné jednorázovou akci a uložte ji odpojit od tohoto opakování seriálu."
+msgid ""
+"WARNING! You will delete ALL recurrences of this event, including booking "
+"history associated with any event in this recurrence. To keep booking "
+"information, go to the relevant single event and save it to detach it from "
+"this recurrence series."
+msgstr ""
+"VAROVÁNÍ! Budete odstranit všechny recidivy této události, včetně rezervace "
+"historie spojené s událostí v tomto opakování. Chcete-li zachovat informace o "
+"rezervacích naleznete na příslušné jednorázovou akci a uložte ji odpojit od "
+"tohoto opakování seriálu."
 
 # @ dbem
 #: templates/templates/bookings-event-printable.php:21
@@ -1946,13 +2044,13 @@ msgstr "dostupný"
 #: templates/placeholders/locationmap.php:15
 #: templates/templates/map-global.php:15
 msgid "Loading Map...."
-msgstr "nakládání mapa...."
+msgstr "nahrávám mapu...."
 
 # @ dbem
 #: templates/templates/csv-event-bookings.php:16
 #, php-format
 msgid "Booking details for \"%s\" as of %s"
-msgstr "Rezervace podrobnosti \"%s\" jak %s"
+msgstr "Podrobnosti rezervacepro  \"%s\" jako %s"
 
 # @ dbem
 #: admin/em-bookings.php:103
@@ -2054,7 +2152,7 @@ msgstr "Objednávka ..."
 # @ dbem
 #: templates/placeholders/bookingbutton.php:4
 msgid "Booking Submitted"
-msgstr "Rezervace Odesláno"
+msgstr "Rezervace odeslána"
 
 # @ dbem
 #: templates/placeholders/bookingbutton.php:5
@@ -2069,8 +2167,11 @@ msgstr "mapa není k dispozici"
 # @ dbem
 #: templates/placeholders/bookingform.php:11
 #, php-format
-msgid "You are currently attending this event. <a href=\"%s\">Manage my bookings</a>"
-msgstr "Ty jsou v současné době účast na této akci. <a href=\"%s\">Správa Moje rezervace</a>"
+msgid ""
+"You are currently attending this event. <a href=\"%s\">Manage my bookings</a>"
+msgstr ""
+"Ty jsou v současné době účast na této akci. <a href=\"%s\">Správa Moje "
+"rezervace</a>"
 
 # @ dbem
 #: templates/placeholders/bookingform.php:13
@@ -2085,7 +2186,7 @@ msgstr "Objednávky jsou uzavřeny pro tuto akci."
 # @ dbem
 #: events-manager.php:250
 msgid "Please wait while the booking is being submitted."
-msgstr "Počkejte prosím, rezervace je předložen."
+msgstr "Počkejte prosím, rezervace je odesílána."
 
 # @ dbem
 #: admin/em-options.php:40
@@ -2097,7 +2198,7 @@ msgstr "Změny uloženy."
 #: admin/em-ms-options.php:52
 #: admin/em-options.php:167
 msgid "Event Related Placeholders"
-msgstr "Událost týkající symboly"
+msgstr "Symboly událostí"
 
 # @ dbem
 #: admin/em-help.php:34
@@ -2174,7 +2275,7 @@ msgstr "Rozbalit všechny"
 #: admin/em-ms-options.php:138
 #: admin/em-options.php:276
 msgid "Event Manager Options"
-msgstr "Možnosti událost ředitel"
+msgstr "Možnosti Events Manageru"
 
 # @ dbem
 #: admin/em-ms-options.php:148
@@ -2215,7 +2316,7 @@ msgstr "Klepněte na tlačítko pro přepnutí"
 # @ dbem
 #: admin/em-ms-options.php:148
 msgid "Multi Site Options"
-msgstr "Více Možnosti webu"
+msgstr "Možnosti Multisite instalace"
 
 # @ dbem
 #: admin/em-ms-options.php:152
@@ -2224,13 +2325,27 @@ msgstr "Povolit globální tabulky režimu?"
 
 # @ dbem
 #: admin/em-ms-options.php:152
-msgid "Setting this to yes will make all events save in the main site event tables (EM must also be activated). This allows you to share events across different blogs, such as showing events in your network whilst allowing users to display and manage their events within their own blog. Bear in mind that activating this will mean old events created on the sub-blogs will not be accessible anymore, and if you switch back they will be but new events created during global events mode will only remain on the main site."
-msgstr "Nastavení to ano, učiní všechny akce s výjimkou hlavních tabulkách místo události (EM musí být aktivní). To umožňuje sdílet události v různých blogů, jako je například Ukázat události v síti a zároveň umožňuje uživatelům zobrazit a spravovat jejich akcí v rámci své vlastní blog. Mějte na paměti, že aktivace této funkce bude znamenat staré události vytvořené na sub-blogy, nebude již více přístupný, a pokud se přepnete zpět budou ale nové události vytvořené v globální události režim zůstane pouze na hlavní stránce."
+msgid ""
+"Setting this to yes will make all events save in the main site event tables "
+"(EM must also be activated). This allows you to share events across different "
+"blogs, such as showing events in your network whilst allowing users to "
+"display and manage their events within their own blog. Bear in mind that "
+"activating this will mean old events created on the sub-blogs will not be "
+"accessible anymore, and if you switch back they will be but new events "
+"created during global events mode will only remain on the main site."
+msgstr ""
+"Nastavení to ano, učiní všechny akce s výjimkou hlavních tabulkách místo "
+"události (EM musí být aktivní). To umožňuje sdílet události v různých blogů, "
+"jako je například Ukázat události v síti a zároveň umožňuje uživatelům "
+"zobrazit a spravovat jejich akcí v rámci své vlastní blog. Mějte na paměti, "
+"že aktivace této funkce bude znamenat staré události vytvořené na sub-blogy, "
+"nebude již více přístupný, a pokud se přepnete zpět budou ale nové události "
+"vytvořené v globální události režim zůstane pouze na hlavní stránce."
 
 # @ dbem
 #: admin/em-ms-options.php:163
 msgid "Display global events on main blog?"
-msgstr "Displej globální události na hlavní blog?"
+msgstr "Zobrazit globální události na hlavní blogu?"
 
 # @ dbem
 #: admin/em-options.php:341
@@ -2239,8 +2354,12 @@ msgstr "Použijte rozbalovací pro umístění?"
 
 # @ dbem
 #: admin/em-options.php:341
-msgid "Select yes to select location from a drow-down menu; location selection will be faster, but you will lose the ability to insert locations with events"
-msgstr "Zvolte Ano pro výběr umístění z drow-down menu, výběr umístění bude rychlejší, ale ztratíte možnost vkládat místa s událostmi"
+msgid ""
+"Select yes to select location from a drow-down menu; location selection will "
+"be faster, but you will lose the ability to insert locations with events"
+msgstr ""
+"Zvolte Ano pro výběr umístění z drow-down menu, výběr umístění bude "
+"rychlejší, ale ztratíte možnost vkládat místa s událostmi"
 
 # @ dbem
 #: admin/em-options.php:297
@@ -2279,13 +2398,15 @@ msgstr "Výchozí kategorie"
 
 # @ dbem
 #: admin/em-options.php:310
-msgid "This option allows you to select the default category when adding an event."
+msgid ""
+"This option allows you to select the default category when adding an event."
 msgstr "Tato volba umožňuje vybrat výchozí kategorii při přidávání události."
 
 # @ dbem
 #: admin/em-options.php:326
 msgid "(not applicable with event ownership on presently, coming soon!)"
-msgstr "(nevztahuje se akce vlastnictví v současné době, již brzy!)"
+msgstr ""
+"(nevztahuje se akce vlastnictví v současné době, ale to brzo přijde :-)"
 
 # @ dbem
 #: admin/em-options.php:321
@@ -2299,79 +2420,111 @@ msgstr "Výchozí umístění"
 
 # @ dbem
 #: admin/em-options.php:326
-msgid "This option allows you to select the default location when adding an event."
+msgid ""
+"This option allows you to select the default location when adding an event."
 msgstr "Tato volba umožňuje nastavit výchozí umístění při přidávání události."
 
 # @ dbem
 #: admin/em-options.php:329
 msgid "Default Location Country"
-msgstr "Výchozí umístění Země"
+msgstr "Výchozí země"
 
 # @ dbem
 #: admin/em-options.php:329
 msgid "no default country"
-msgstr "žádné výchozí země"
+msgstr "žádná výchozí země"
 
 # @ dbem
 #: admin/em-options.php:329
-msgid "If you select a default country, that will be pre-selected when creating a new location."
-msgstr "Vyberete-li výchozí zemi, bude to předem vybraných při vytváření nového umístění."
+msgid ""
+"If you select a default country, that will be pre-selected when creating a "
+"new location."
+msgstr ""
+"Vyberete-li výchozí zemi, bude předvybrána při vytváření nového umístění."
 
 # @ dbem
 #: admin/em-options.php:316
 msgid "Event Attributes"
-msgstr "akce atributy"
+msgstr "Atributy akcí"
 
 # @ dbem
 #: admin/em-options.php:316
 #, php-format
-msgid "You can also add event attributes here, one per line in this format <code>#_ATT{key}</code>. They will not appear on event pages unless you insert them into another template below, but you may want to store extra information about an event for other uses. <a href='%s'>More information on placeholders.</a>"
-msgstr "Můžete také přidat akci atributy tady, jeden na řádku v tomto formátu <code>#_ATT{key}</code>. Ty se nezobrazí na stránkách akce, pokud vložíte do jiné šablony níže, ale můžete uložit další informace o akci pro jiné účely.<a href='%s'>Více informací na vyhrazená místa.</a>"
+msgid ""
+"You can also add event attributes here, one per line in this format <code>"
+"#_ATT{key}</code>. They will not appear on event pages unless you insert them "
+"into another template below, but you may want to store extra information "
+"about an event for other uses. <a href='%s'>More information on "
+"placeholders.</a>"
+msgstr ""
+"Můžete zde přidat atributy akcí, jeden na řádek v tomto formátu <code>"
+"#_ATT{key}</code>. Ty se nezobrazí na stránkách akce, dokud je nevložíte do "
+"jiné šablony níže, ale můžete uložit další informace o akci pro jiné účely.<a "
+"href='%s'>Více informací o zástupných symbolech.</a>"
 
 # @ dbem
 #: admin/em-options.php:350
 msgid "Show some love?"
-msgstr "Ukazují některé láska?"
+msgstr "Ukázat reklamu?"
 
 # @ dbem
 #: admin/em-options.php:350
-msgid "Hundreds of free hours have gone into making this free plugin, show your support and add a small link to the plugin website at the bottom of your event pages."
-msgstr "Stovky volných hodin, šli do tvorby tohoto volného plugin, Projevte nám svou podporu a přidat malou odkaz na plugin stránkách ve spodní části Vaší akce stránek."
+msgid ""
+"Hundreds of free hours have gone into making this free plugin, show your "
+"support and add a small link to the plugin website at the bottom of your "
+"event pages."
+msgstr ""
+"Stovky volných hodin, šli do tvorby tohoto volného pluginu, Projevte nám svou "
+"podporu a přidejte malý odkaz na stránkách ve spodní části Vaší stránky Akce."
 
 # @ dbem
 #: admin/em-options.php:440
 msgid "Events page"
-msgstr "události stránky"
+msgstr "Stránka Události"
 
 # @ dbem
 #: admin/em-options.php:445
 msgid "Show events page in lists?"
-msgstr "Zobrazit stránce Události v seznamech?"
+msgstr "Zobrazit na stránce Události v seznamu?"
 
 # @ dbem
 #: admin/em-options.php:445
-msgid "Check this option if you want the events page to appear together with other pages in pages lists."
-msgstr "Zaškrtněte tuto volbu, chcete-li události, stránky se objeví spolu s ostatními stránkami na stránkách seznamu."
+msgid ""
+"Check this option if you want the events page to appear together with other "
+"pages in pages lists."
+msgstr ""
+"Zaškrtněte tuto volbu, pokud chcete zobrazit stránku Události na seznamu "
+"spolu s ostatními stránkami."
 
 # @ dbem
 #: admin/em-options.php:446
 msgid "Display calendar in events page?"
-msgstr "Zobrazit kalendář akcí stránce?"
+msgstr "Zobrazit kalendář na stránce Události?"
 
 # @ dbem
 #: admin/em-options.php:446
-msgid "This options allows to display the calendar in the events page, instead of the default list. It is recommended not to display both the calendar widget and a calendar page."
-msgstr "Tato volba umožňuje zobrazení kalendáře na stránce Události, místo výchozího seznamu. Doporučuje se, aby i zobrazení kalendáře widget a stránky kalendáře."
+msgid ""
+"This options allows to display the calendar in the events page, instead of "
+"the default list. It is recommended not to display both the calendar widget "
+"and a calendar page."
+msgstr ""
+"Tato volba umožňuje zobrazení kalendáře na stránce Události, místo výchozího "
+"seznamu. Nedoporučuje se, aby se zobrazovaly současně kalendáře widget a "
+"stránky kalendáře."
 
 # @ dbem
 #: admin/em-options.php:446
-msgid "If you would like to show events that span over more than one day, see the Calendar section on this page."
-msgstr "Pokud byste chtěli ukázat, události, které zahrnují více než jeden den, naleznete v sekci Kalendář na této stránce."
+msgid ""
+"If you would like to show events that span over more than one day, see the "
+"Calendar section on this page."
+msgstr ""
+"Pokud byste chtěli ukázat, události, které trvají více než jeden den, "
+"naleznete je v sekci Kalendář na této stránce."
 
 # @ dbem
 #: admin/em-options.php:447
 msgid "Disable title rewriting?"
-msgstr "Zakázat titul přepisování?"
+msgstr "Zakázat přepisování titulu?"
 
 # @ dbem
 #: admin/em-options.php:448
@@ -2380,8 +2533,20 @@ msgstr "Tituly Event Manager"
 
 # @ dbem
 #: admin/em-options.php:448
-msgid "This only setting only matters if you selected 'Yes' to above. You will notice the events page titles aren't being rewritten, and you have a new title underneath the default page name. This is where you control the HTML of this title. Make sure you keep the #_PAGETITLE placeholder here, as that's what is rewritten by events manager. To control what's rewritten in this title, see settings further down for page titles."
-msgstr "Toto nastavení jen záleží jen pokud jste zvolili \"Ano\" výše. Můžete si všimnout, události, názvy stránek nejsou přepsány, a máte nový titul pod názvem výchozí stránku. To je místo, kde můžete ovládat HTML tohoto titulu. Ujistěte se, že budete mít #_PAGETITLE symbol zde, stejně jako je to, co je přepsána událostmi Manager. Kontrolovat, co je přepsán v této hlavě, viz Nastavení níže na stránce titulů."
+msgid ""
+"This only setting only matters if you selected 'Yes' to above. You will "
+"notice the events page titles aren't being rewritten, and you have a new "
+"title underneath the default page name. This is where you control the HTML of "
+"this title. Make sure you keep the #_PAGETITLE placeholder here, as that's "
+"what is rewritten by events manager. To control what's rewritten in this "
+"title, see settings further down for page titles."
+msgstr ""
+"Toto nastavení jen záleží jen pokud jste zvolili \"Ano\" výše. Můžete si "
+"všimnout, události, názvy stránek nejsou přepsány, a máte nový titul pod "
+"názvem výchozí stránku. To je místo, kde můžete ovládat HTML tohoto titulu. "
+"Ujistěte se, že budete mít #_PAGETITLE symbol zde, stejně jako je to, co je "
+"přepsána událostmi Manager. Kontrolovat, co je přepsán v této hlavě, viz "
+"Nastavení níže na stránce titulů."
 
 # @ dbem
 #: admin/em-options.php:568
@@ -2391,27 +2556,38 @@ msgstr "Omezení seznamu událostí"
 # @ dbem
 #: admin/em-options.php:568
 msgid "This will control how many events are shown on one list by default."
-msgstr "To bude určovat, kolik událostí se zobrazují na jednom seznamu ve výchozím nastavení."
+msgstr ""
+"To bude určovat, kolik událostí se zobrazí na jednom seznamu ve výchozím "
+"nastavení."
 
 # @ dbem
 #: admin/em-options.php:501
 msgid "Are current events past events?"
-msgstr "Jsou aktuální události minulých událostí?"
+msgstr "Jsou aktuální události také minulé událostí?"
 
 # @ dbem
 #: admin/em-options.php:501
-msgid "By default, events that are have an end date later than today will be included in searches, set this to yes to consider events that started 'yesterday' as past."
-msgstr "Ve výchozím nastavení událostí, které mají datum ukončení později než dnes být zahrnuta do vyhledávání, nastavit na Ano a za události, která začala \"včera\", jak minulost."
+msgid ""
+"By default, events that are have an end date later than today will be "
+"included in searches, set this to yes to consider events that started "
+"'yesterday' as past."
+msgstr ""
+"Ve výchozím nastavení jsou událostí, které mají datum ukončení později než "
+"dnes zahrnuty do vyhledávání. Nastavte na Ano pro události, která začaly "
+"\"včera\", jako minulost."
 
 # @ dbem
 #: admin/em-options.php:449
 msgid "Show events search?"
-msgstr "Zobrazit události vyhledávání?"
+msgstr "Zobrazit vyhledávání událostí?"
 
 # @ dbem
 #: admin/em-options.php:449
-msgid "If set to yes, a search form will appear just above your list of events."
-msgstr "Pokud je nastavena na hodnotu Ano, bude formulář pro vyhledávání se objeví těsně nad seznamem událostí."
+msgid ""
+"If set to yes, a search form will appear just above your list of events."
+msgstr ""
+"Pokud je nastavena na hodnotu Ano, bude formulář pro vyhledávání se objeví "
+"těsně nad seznamem událostí."
 
 # @ dbem
 #: admin/em-options.php:511
@@ -2431,12 +2607,12 @@ msgstr "Seřadit podle názvu, data zahájení, pak se čas začátku"
 # @ dbem
 #: admin/em-options.php:518
 msgid "Order by name, end date, then end time"
-msgstr "Seřadit dle názvu, datum ukončení, pak se čas ukončení"
+msgstr "Seřadit dle názvu, data ukončení, pak času ukončení"
 
 # @ dbem
 #: admin/em-options.php:519
 msgid "Order by end date, end time, then event name"
-msgstr "Seřadit podle konečného data, čas konce, pak názvu akce"
+msgstr "Seřadit podle konečného data, času konce, pak názvu akce"
 
 # @ dbem
 #: admin/em-options.php:533
@@ -2451,8 +2627,13 @@ msgstr "všechny Sestupně"
 # @ dbem
 #: admin/em-options.php:490
 #: admin/em-options.php:550
-msgid "When Events Manager displays lists of events the default behaviour is ordering by start date in ascending order. To change this, modify the values above."
-msgstr "Při události Manager se zobrazí seznam akcí, výchozí chování je Řazení podle data zahájení ve vzestupném pořadí. Chcete-li změnit, upravte hodnoty výše."
+msgid ""
+"When Events Manager displays lists of events the default behaviour is "
+"ordering by start date in ascending order. To change this, modify the values "
+"above."
+msgstr ""
+"Při události Manager se zobrazí seznam akcí, výchozí chování je Řazení podle "
+"data zahájení ve vzestupném pořadí. Chcete-li změnit, upravte hodnoty výše."
 
 # @ dbem
 #: admin/em-options.php:554
@@ -2461,8 +2642,12 @@ msgstr "Seznam událostí rozsahu"
 
 # @ dbem
 #: admin/em-options.php:564
-msgid "Only show events starting within a certain time limit on the events page. Default is future events with no end time limit."
-msgstr "Zobrazit pouze událostí, které začíná v určitém časovém limitu na stránce Události. Výchozí hodnota je budoucí události bez omezení čas ukončení."
+msgid ""
+"Only show events starting within a certain time limit on the events page. "
+"Default is future events with no end time limit."
+msgstr ""
+"Zobrazit pouze událostí, které začíná v určitém časovém limitu na stránce "
+"Události. Výchozí hodnota je budoucí události bez omezení času ukončení."
 
 # @ dbem
 #: admin/em-options.php:847
@@ -2484,8 +2669,12 @@ msgstr "Výchozí seznam událostí formát záhlaví"
 
 # @ dbem
 #: admin/em-options.php:852
-msgid "This content will appear just above your code for the default event list format. Default is blank"
-msgstr "Tento obsah se zobrazí jen nad kódu pro seznam výchozí událost formátu. Výchozí hodnota je prázdná"
+msgid ""
+"This content will appear just above your code for the default event list "
+"format. Default is blank"
+msgstr ""
+"Tento obsah se zobrazí jen nad kódu pro seznam výchozí událost formátu. "
+"Výchozí hodnota je prázdná"
 
 # @ dbem
 #: admin/em-options.php:853
@@ -2504,8 +2693,12 @@ msgstr "Výchozí seznam událostí ve formátu zápatí"
 
 # @ dbem
 #: admin/em-options.php:854
-msgid "This content will appear just below your code for the default event list format. Default is blank"
-msgstr "Tento obsah se zobrazí přímo pod kód pro seznam výchozí událost formátu. Výchozí hodnota je prázdná"
+msgid ""
+"This content will appear just below your code for the default event list "
+"format. Default is blank"
+msgstr ""
+"Tento obsah se zobrazí přímo pod kód pro seznam výchozí událost formátu. "
+"Výchozí hodnota je prázdná"
 
 # @ dbem
 #: admin/em-options.php:855
@@ -2524,8 +2717,16 @@ msgstr "Seznam událostí podle data titul"
 
 # @ dbem
 #: admin/em-options.php:856
-msgid "If viewing a page for events on a specific date, this is the title that would show up. To insert date values, use <a href=\"http://www.php.net/manual/en/function.date.php\">PHP time format characters</a>  with a <code>#</code> symbol before them, i.e. <code>#m</code>, <code>#M</code>, <code>#j</code>, etc.<br/>"
-msgstr "Je-li zobrazení stránky pro akce k určitému datu, to je titul, který by se ukázal. Pro vložení dat, použijte <a href=\"http://www.php.net/manual/en/function.date.php\">PHP znaky formátu času</a>  s <code>#</code> symbol před nimi, i.e. <code>#m</code>, <code>#M</code>, <code>#j</code>, etc.<br/>"
+msgid ""
+"If viewing a page for events on a specific date, this is the title that would "
+"show up. To insert date values, use <a href=\"http://www.php.net/manual/en/fun"
+"ction.date.php\">PHP time format characters</a>  with a <code>#</code> symbol "
+"before them, i.e. <code>#m</code>, <code>#M</code>, <code>#j</code>, etc.<br/>"
+msgstr ""
+"Je-li zobrazení stránky pro akce k určitému datu, to je titul, který by se "
+"ukázal. Pro vložení dat, použijte <a href=\"http://www.php.net/manual/en/funct"
+"ion.date.php\">PHP znaky formátu času</a>  s <code>#</code> symbol před nimi, "
+"i.e. <code>#m</code>, <code>#M</code>, <code>#j</code>, etc.<br/>"
 
 # @ dbem
 #: admin/em-options.php:858
@@ -2564,22 +2765,30 @@ msgstr "formát kalendáře"
 # @ dbem
 #: admin/em-options.php:913
 msgid "Small calendar title"
-msgstr "Malé Název kalendáře"
+msgstr "Krátký název kalendáře"
 
 # @ dbem
 #: admin/em-options.php:913
-msgid "The format of the title, corresponding to the text that appears when hovering on an eventful calendar day."
-msgstr "Formát titulu, který odpovídá textu, který se zobrazí při najetí na rušný den kalendář."
+msgid ""
+"The format of the title, corresponding to the text that appears when hovering "
+"on an eventful calendar day."
+msgstr ""
+"Formát titulu, který odpovídá textu, který se zobrazí při najetí na rušný den "
+"kalendář."
 
 # @ dbem
 #: admin/em-options.php:914
 msgid "Small calendar title separator"
-msgstr "Malé Název kalendáře separátoru"
+msgstr "Krátký název kalendáře - oddělovač"
 
 # @ dbem
 #: admin/em-options.php:914
-msgid "The separator appearing on the above title when more than one events are taking place on the same day."
-msgstr "Oddělovač se objeví na nad titulem, když více než jeden události se konají ve stejný den."
+msgid ""
+"The separator appearing on the above title when more than one events are "
+"taking place on the same day."
+msgstr ""
+"Oddělovač se objeví na nad titulem, když více než jeden události se konají ve "
+"stejný den."
 
 # @ dbem
 #: admin/em-options.php:915
@@ -2588,18 +2797,28 @@ msgstr "Úplný kalendář událostí formátu"
 
 # @ dbem
 #: admin/em-options.php:915
-msgid "The format of each event when displayed in the full calendar. Remember to include <code>li</code> tags before and after the event."
-msgstr "Formát každé události při zobrazení v plné calenda. Nezapomeňte zahrnout <code>li</code> Tagy před a po události."
+msgid ""
+"The format of each event when displayed in the full calendar. Remember to "
+"include <code>li</code> tags before and after the event."
+msgstr ""
+"Formát každé události při zobrazení v plné calenda. Nezapomeňte zahrnout <"
+"code>li</code> Tagy před a po události."
 
 # @ dbem
 #: admin/em-options.php:916
 msgid "Show long events on calendar pages?"
-msgstr "Zobrazit události v kalendáři dlouho stránkách?"
+msgstr "Zobrazit dlouhotrvající události v kalendáři?"
 
 # @ dbem
 #: admin/em-options.php:916
-msgid "If you are showing a calendar on the events page (see Events format section on this page), you have the option of showing events that span over days on each day it occurs."
-msgstr "Pokud jste Zobrazení kalendáře na stránce Události (viz Akce ve formátu sekci na této stránce), máte možnost ukázat událostí, které trvají několik dní každý den k ní dojde."
+msgid ""
+"If you are showing a calendar on the events page (see Events format section "
+"on this page), you have the option of showing events that span over days on "
+"each day it occurs."
+msgstr ""
+"Pokud jste Zobrazení kalendáře na stránce Události (viz Akce ve formátu sekci "
+"na této stránce), máte možnost ukázat událostí, které trvají několik dní "
+"každý den k ní dojde."
 
 # @ dbem
 #: admin/em-options.php:917
@@ -2608,8 +2827,14 @@ msgstr "Zobrazit seznam v den jednorázová akce?"
 
 # @ dbem
 #: admin/em-options.php:917
-msgid "By default, if a calendar day only has one event, it display a single event when clicking on the link of that calendar date. If you select Yes here, you will get always see a list of events."
-msgstr "Ve výchozím nastavení, pokud je kalendářní den, má pouze jeden případ, zobrazí se událost, při kliknutí na odkaz v tomto kalendářním dni. Zvolíte-li Ano, tady se vám vždy zobrazí seznam událostí."
+msgid ""
+"By default, if a calendar day only has one event, it display a single event "
+"when clicking on the link of that calendar date. If you select Yes here, you "
+"will get always see a list of events."
+msgstr ""
+"Ve výchozím nastavení, pokud je kalendářní den, má pouze jeden případ, "
+"zobrazí se událost, při kliknutí na odkaz v tomto kalendářním dni. Zvolíte-li "
+"Ano, tady se vám vždy zobrazí seznam událostí."
 
 # @ dbem
 #: admin/em-options.php:920
@@ -2634,7 +2859,7 @@ msgstr "omezení iCal"
 # @ dbem
 #: admin/em-options.php:923
 msgid "Limits the number of future events shown (0 = unlimited)."
-msgstr "Omezuje počet budoucích událostí ukazuje (0 = neomezeno)."
+msgstr "Omezuje počet budoucích událostí k zobrazení (0 = neomezeno)."
 
 # @ dbem
 #: admin/em-options.php:932
@@ -2652,8 +2877,12 @@ msgstr "%s záhlaví seznamu Formát"
 #: admin/em-options.php:937
 #: admin/em-options.php:966
 #, php-format
-msgid "This content will appear just above your code for the %s list format below. Default is blank"
-msgstr "Tento obsah se zobrazí jen nad kód %s formát seznamu níže. Výchozí hodnota je prázdná"
+msgid ""
+"This content will appear just above your code for the %s list format below. "
+"Default is blank"
+msgstr ""
+"Tento obsah se zobrazí jen nad kód %s formát seznamu níže. Výchozí hodnota je "
+"prázdná"
 
 # @ dbem
 #: admin/em-options.php:938
@@ -2680,8 +2909,12 @@ msgstr "%s Seznam zápatí ve formátu"
 #: admin/em-options.php:939
 #: admin/em-options.php:968
 #, php-format
-msgid "This content will appear just below your code for the %s list format above. Default is blank"
-msgstr "Tento obsah se zobrazí těsně pod kód %s formát seznamu výše. Výchozí hodnota je prázdná"
+msgid ""
+"This content will appear just below your code for the %s list format above. "
+"Default is blank"
+msgstr ""
+"Tento obsah se zobrazí těsně pod kód %s formát seznamu výše. Výchozí hodnota "
+"je prázdná"
 
 # @ dbem
 #: admin/em-options.php:940
@@ -2691,7 +2924,7 @@ msgstr "Tento obsah se zobrazí těsně pod kód %s formát seznamu výše. Výc
 #: admin/em-options.php:1000
 #, php-format
 msgid "No %s message"
-msgstr "ne %s zpráva"
+msgstr "žádné %s - zpráva"
 
 # @ dbem
 #: admin/em-options.php:940
@@ -2706,7 +2939,7 @@ msgstr "Tato zpráva zobrazí, když ne %s jsou k dispozici."
 #: admin/em-options.php:994
 #, php-format
 msgid "Single %s title format"
-msgstr "jediný %s Název formátu"
+msgstr "samostatná %s - formát titulku"
 
 # @ dbem
 #: admin/em-options.php:944
@@ -2719,7 +2952,7 @@ msgstr "Formát jednoho titulu umístění stránky."
 #: admin/em-options.php:995
 #, php-format
 msgid "Single %s page format"
-msgstr "jediný %s formát stránky"
+msgstr "samostatná %s  - formát stránky"
 
 # @ dbem
 #: admin/em-options.php:945
@@ -2733,8 +2966,11 @@ msgstr "Výchozí místo balónu formátu"
 
 # @ dbem
 #: admin/em-options.php:946
-msgid "The format of of the text appearing in the baloon describing the location a single location map."
-msgstr "Formát textu jsou uvedeny v balón s popisem umístění na jednom místě mapy."
+msgid ""
+"The format of of the text appearing in the baloon describing the location a "
+"single location map."
+msgstr ""
+"Formát textu jsou uvedeny v balón s popisem umístění na jednom místě mapy."
 
 # @ dbem
 #: admin/em-options.php:948
@@ -2750,7 +2986,7 @@ msgstr "%s seznam formátů"
 #: admin/em-options.php:999
 #, php-format
 msgid "Default %s list format"
-msgstr "standardní %s seznam ve formátu"
+msgstr "výchozí seznam %s - formát"
 
 # @ dbem
 #: admin/em-ms-options.php:163
@@ -2783,13 +3019,25 @@ msgstr "události"
 
 # @ dbem
 #: admin/em-options.php:950
-msgid "The format of the events the list inserted in the location page through the <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>#_LOCATIONALLEVENTS</code> element."
-msgstr "Formát událostí seznamu vloženy v místě po stránkách <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> a <code>#_LOCATIONALLEVENTS</code> prvek."
+msgid ""
+"The format of the events the list inserted in the location page through the <"
+"code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>"
+"#_LOCATIONALLEVENTS</code> element."
+msgstr ""
+"Formát událostí seznamu vloženy v místě po stránkách <code>"
+"#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> a <code>"
+"#_LOCATIONALLEVENTS</code> prvek."
 
 # @ dbem
 #: admin/em-options.php:951
-msgid "The message to be displayed in the list generated by <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>#_LOCATIONALLEVENTS</code> when no events are available."
-msgstr "Zprávy se zobrazí v seznamu, vytvořené <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> a <code>#_LOCATIONALLEVENTS</code> Při Žádné akce k dispozici."
+msgid ""
+"The message to be displayed in the list generated by <code>"
+"#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>"
+"#_LOCATIONALLEVENTS</code> when no events are available."
+msgstr ""
+"Zprávy se zobrazí v seznamu, vytvořené <code>#_LOCATIONNEXTEVENTS</code>, <"
+"code>#_LOCATIONNEXTEVENTS</code> a <code>#_LOCATIONALLEVENTS</code> Při Žádné "
+"akce k dispozici."
 
 # @ dbem
 #: admin/em-options.php:961
@@ -2823,13 +3071,25 @@ msgstr "Formát jedné kategorie stránku."
 
 # @ dbem
 #: admin/em-options.php:978
-msgid "The format of the events the list inserted in the category page through the <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>#_CATEGORYALLEVENTS</code> element."
-msgstr "Formát událostí seznamu vloženy do kategorie po stránkách <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> a <code>#_CATEGORYALLEVENTS</code> prvek."
+msgid ""
+"The format of the events the list inserted in the category page through the <"
+"code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>"
+"#_CATEGORYALLEVENTS</code> element."
+msgstr ""
+"Formát událostí seznamu vloženy do kategorie po stránkách <code>"
+"#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> a <code>"
+"#_CATEGORYALLEVENTS</code> prvek."
 
 # @ dbem
 #: admin/em-options.php:979
-msgid "The message to be displayed in the list generated by <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>#_CATEGORYALLEVENTS</code> when no events are available."
-msgstr "Zprávy se zobrazí v seznamu, vytvořené <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> a <code>#_CATEGORYALLEVENTS</code> Při Žádné akce k dispozici."
+msgid ""
+"The message to be displayed in the list generated by <code>"
+"#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>"
+"#_CATEGORYALLEVENTS</code> when no events are available."
+msgstr ""
+"Zprávy se zobrazí v seznamu, vytvořené <code>#_CATEGORYNEXTEVENTS</code>, <"
+"code>#_CATEGORYNEXTEVENTS</code> a <code>#_CATEGORYALLEVENTS</code> Při Žádné "
+"akce k dispozici."
 
 # @ dbem
 #: admin/em-options.php:1009
@@ -2889,12 +3149,12 @@ msgstr "Povolit integraci Google Maps?"
 # @ dbem
 #: admin/em-options.php:1033
 msgid "Check this option to enable Goggle Map integration."
-msgstr "Zaškrtněte tuto volbu, aby brýle Mapa integrace."
+msgstr "Zaškrtněte tuto volbu k integraci map od Googlu."
 
 # @ dbem
 #: admin/em-options.php:1037
 msgid "Map text format"
-msgstr "Mapa textovém formátu"
+msgstr "Mapa - formát textu"
 
 # @ dbem
 #: admin/em-options.php:1037
@@ -2908,7 +3168,8 @@ msgstr "Požadováno schválení?"
 
 # @ dbem
 #: admin/em-options.php:1055
-msgid "Bookings will not be confirmed until the event administrator approves it."
+msgid ""
+"Bookings will not be confirmed until the event administrator approves it."
 msgstr "Rezervace nebude potvrzena, dokud případě správce schválí."
 
 # @ dbem
@@ -2928,8 +3189,12 @@ msgstr "Jednosměrnou letenku režimu?"
 
 # @ dbem
 #: admin/em-options.php:1112
-msgid "In single ticket mode, users can only create one ticket per booking (and will not see options to add more tickets)."
-msgstr "V jednu jízdenku režimu mohou uživatelé vytvořit jen jednu jízdenku na rezervaci (a nebude vidět možnosti přidat více vstupenek)."
+msgid ""
+"In single ticket mode, users can only create one ticket per booking (and will "
+"not see options to add more tickets)."
+msgstr ""
+"V jednu jízdenku režimu mohou uživatelé vytvořit jen jednu jízdenku na "
+"rezervaci (a nebude vidět možnosti přidat více vstupenek)."
 
 # @ dbem
 #: admin/em-options.php:1113
@@ -2938,8 +3203,12 @@ msgstr "Zobrazit vstupenek tabulky v rámci jedné letenky režimu?"
 
 # @ dbem
 #: admin/em-options.php:1113
-msgid "If you prefer a ticket table like with multiple tickets, even for single ticket events, enable this."
-msgstr "Pokud dáváte přednost lístek stole jako s mnoha lístky, a to i pro jednotlivé jízdenky události, umožnit to."
+msgid ""
+"If you prefer a ticket table like with multiple tickets, even for single "
+"ticket events, enable this."
+msgstr ""
+"Pokud dáváte přednost lístek stole jako s mnoha lístky, a to i pro jednotlivé "
+"jízdenky události, umožnit to."
 
 # @ dbem
 #: admin/em-options.php:1114
@@ -2949,7 +3218,8 @@ msgstr "Zobrazit dispozici lístky?"
 # @ dbem
 #: admin/em-options.php:1114
 msgid "You can choose whether or not to show unavailable tickets to visitors."
-msgstr "Můžete si vybrat, zda chcete zobrazovat k dispozici vstupenky na návštěvníky."
+msgstr ""
+"Můžete si vybrat, zda chcete zobrazovat k dispozici vstupenky na návštěvníky."
 
 # @ dbem
 #: admin/em-options.php:1056
@@ -2958,8 +3228,12 @@ msgstr "Vyhrazené prostory nepotvrzených?"
 
 # @ dbem
 #: admin/em-options.php:1056
-msgid "By default, event spaces become unavailable once there are enough CONFIRMED bookings. To reserve spaces even if unnapproved, choose yes."
-msgstr "Ve výchozím nastavení se akce prostory k dispozici, jakmile jsou dostatečně potvrzené rezervace. Pro rezervaci míst, i když unnapproved, zvolte Ano."
+msgid ""
+"By default, event spaces become unavailable once there are enough CONFIRMED "
+"bookings. To reserve spaces even if unnapproved, choose yes."
+msgstr ""
+"Ve výchozím nastavení se akce prostory k dispozici, jakmile jsou dostatečně "
+"potvrzené rezervace. Pro rezervaci míst, i když unnapproved, zvolte Ano."
 
 # @ dbem
 #: admin/em-options.php:1115
@@ -2968,8 +3242,12 @@ msgstr "Zobrazit více lístků, pokud nejste přihlášeni?"
 
 # @ dbem
 #: admin/em-options.php:1115
-msgid "If logged out, a user will be asked to register in order to book. However, we can show available tickets if you have more than one ticket."
-msgstr "Pokud jste přihlášeni ven, bude uživatel vyzván, aby si pro knihy. Nicméně, my můžeme ukázat vstupenky k dispozici, pokud máte více než jeden lístek."
+msgid ""
+"If logged out, a user will be asked to register in order to book. However, we "
+"can show available tickets if you have more than one ticket."
+msgstr ""
+"Pokud jste přihlášeni ven, bude uživatel vyzván, aby si pro knihy. Nicméně, "
+"my můžeme ukázat vstupenky k dispozici, pokud máte více než jeden lístek."
 
 # @ dbem
 #: admin/em-options.php:1058
@@ -2978,8 +3256,14 @@ msgstr "Povolit překnihování při schvalování?"
 
 # @ dbem
 #: admin/em-options.php:1058
-msgid "If you get a lot of pending bookings and you decide to allow more bookings than spaces allow, setting this to yes will allow you to override the event space limit when manually approving."
-msgstr "Pokud se vám hodně čeká rezervací a vy se rozhodnete, aby více rezervací než prostor dovolí, bude toto nastavení změnit Ano, vám umožní přepsat Prostory hranici, kdy ruční schvalování."
+msgid ""
+"If you get a lot of pending bookings and you decide to allow more bookings "
+"than spaces allow, setting this to yes will allow you to override the event "
+"space limit when manually approving."
+msgstr ""
+"Pokud se vám hodně čeká rezervací a vy se rozhodnete, aby více rezervací než "
+"prostor dovolí, bude toto nastavení změnit Ano, vám umožní přepsat Prostory "
+"hranici, kdy ruční schvalování."
 
 # @ dbem
 #: admin/em-options.php:1087
@@ -2988,8 +3272,14 @@ msgstr "Povolit host rezervaci?"
 
 # @ dbem
 #: admin/em-options.php:1087
-msgid "If enabled, guest visitors can supply an email address and a user account will automatically be created for them along with their booking. They will be also be able to log back in with that newly created account."
-msgstr "Pokud je povoleno, může host návštěvníci nabídky e-mailovou adresu a uživatelský účet se automaticky vytvoří pro ně spolu s jejich rezervaci. Budou také moci znovu přihlásit se, že nově vytvořený účet."
+msgid ""
+"If enabled, guest visitors can supply an email address and a user account "
+"will automatically be created for them along with their booking. They will be "
+"also be able to log back in with that newly created account."
+msgstr ""
+"Pokud je povoleno, může host návštěvníci nabídky e-mailovou adresu a "
+"uživatelský účet se automaticky vytvoří pro ně spolu s jejich rezervaci. "
+"Budou také moci znovu přihlásit se, že nově vytvořený účet."
 
 # @ dbem
 #: admin/em-options.php:1059
@@ -3008,8 +3298,12 @@ msgstr "Zobrazení přihlašovací formulář?"
 
 # @ dbem
 #: admin/em-options.php:1088
-msgid "Choose whether or not to display a login form in the booking form area to remind your members to log in before booking."
-msgstr "Vyberte, zda chcete zobrazit přihlašovací formulář v oblasti rezervačního formuláře připomenout své členy přihlásit před provedením rezervace."
+msgid ""
+"Choose whether or not to display a login form in the booking form area to "
+"remind your members to log in before booking."
+msgstr ""
+"Vyberte, zda chcete zobrazit přihlašovací formulář v oblasti rezervačního "
+"formuláře připomenout své členy přihlásit před provedením rezervace."
 
 # @ dbem
 #: admin/em-options.php:1090
@@ -3018,8 +3312,12 @@ msgstr "Rezervační formulář hlášení zpětné vazby"
 
 # @ dbem
 #: admin/em-options.php:1091
-msgid "When a booking is made by a user, a feedback message is shown depending on the result, which can be customized below."
-msgstr "Je-li rezervace provedena uživatelem, je zpětná vazba zpráva na obrázku v závislosti na výsledku, který lze upravit níže."
+msgid ""
+"When a booking is made by a user, a feedback message is shown depending on "
+"the result, which can be customized below."
+msgstr ""
+"Je-li rezervace provedena uživatelem, je zpětná vazba zpráva na obrázku v "
+"závislosti na výsledku, který lze upravit níže."
 
 # @ dbem
 #: admin/em-options.php:1093
@@ -3058,8 +3356,12 @@ msgstr "chyby"
 
 # @ dbem
 #: admin/em-options.php:1096
-msgid "When a booking cannot be made due to an error when filling the form. Below this, there will be a dynamic list of errors."
-msgstr "Když si rezervaci nemělo být kvůli chybě při vyplňování formuláře. Pod tímto, bude dynamický seznam chyb."
+msgid ""
+"When a booking cannot be made due to an error when filling the form. Below "
+"this, there will be a dynamic list of errors."
+msgstr ""
+"Když si rezervaci nemělo být kvůli chybě při vyplňování formuláře. Pod tímto, "
+"bude dynamický seznam chyb."
 
 # @ dbem
 #: admin/em-options.php:1097
@@ -3078,8 +3380,12 @@ msgstr "Chyba mailing uživatele"
 
 # @ dbem
 #: admin/em-options.php:1098
-msgid "If a booking is made and an email cannot be sent, this is added to the success message."
-msgstr "Je-li rezervace provedena, a e-mail nelze odeslat, je to přidal k úspěchu zprávy."
+msgid ""
+"If a booking is made and an email cannot be sent, this is added to the "
+"success message."
+msgstr ""
+"Je-li rezervace provedena, a e-mail nelze odeslat, je to přidal k úspěchu "
+"zprávy."
 
 # @ dbem
 #: admin/em-options.php:1099
@@ -3099,7 +3405,8 @@ msgstr "Bez mezer rezervace"
 # @ dbem
 #: admin/em-options.php:1100
 msgid "If the user tries to make a booking without requesting any spaces."
-msgstr "Pokud se uživatel pokusí provést rezervaci aniž by vyžadovaly žádné mezery."
+msgstr ""
+"Pokud se uživatel pokusí provést rezervaci aniž by vyžadovaly žádné mezery."
 
 # @ dbem
 #: admin/em-options.php:1162
@@ -3113,8 +3420,12 @@ msgstr "Výchozí kontaktní osoba"
 
 # @ dbem
 #: admin/em-options.php:1166
-msgid "Select the default contact person. This user will be employed whenever a contact person is not explicitly specified for an event"
-msgstr "Vyberte výchozí kontaktní osoby. Tento uživatel bude mít vždy, když je zaměstnán kontaktní osoba, která není výslovně uvedeno na akci"
+msgid ""
+"Select the default contact person. This user will be employed whenever a "
+"contact person is not explicitly specified for an event"
+msgstr ""
+"Vyberte výchozí kontaktní osoby. Tento uživatel bude mít vždy, když je "
+"zaměstnán kontaktní osoba, která není výslovně uvedeno na akci"
 
 # @ dbem
 #: admin/em-options.php:1167
@@ -3123,8 +3434,12 @@ msgstr "Email události admin?"
 
 # @ dbem
 #: admin/em-options.php:1167
-msgid "If you would like every event booking confirmation email sent to an administrator write their email here (leave blank to not send an email)."
-msgstr "Pokud byste chtěli všech událostí potvrzení rezervace e-mailem na správce napsat svůj email (nechte prázdné, nechcete-li e-mailem)."
+msgid ""
+"If you would like every event booking confirmation email sent to an "
+"administrator write their email here (leave blank to not send an email)."
+msgstr ""
+"Pokud byste chtěli všech událostí potvrzení rezervace e-mailem na správce "
+"napsat svůj email (nechte prázdné, nechcete-li e-mailem)."
 
 # @ dbem
 #: admin/em-options.php:1168
@@ -3133,8 +3448,14 @@ msgstr "E-mail kontaktní osoby?"
 
 # @ dbem
 #: admin/em-options.php:1168
-msgid "Check this option if you want the event contact to receive an email when someone books places. An email will be sent when a booking is first made (regardless if confirmed or pending)"
-msgstr "Zaškrtněte tuto volbu, pokud chcete událost kontakt obdržíte e-mail, když někdo knih míst.E-mail bude zaslán při rezervaci poprvé provedena (bez ohledu na to, pokud potvrdí nebo v jednání)"
+msgid ""
+"Check this option if you want the event contact to receive an email when "
+"someone books places. An email will be sent when a booking is first made "
+"(regardless if confirmed or pending)"
+msgstr ""
+"Zaškrtněte tuto volbu, pokud chcete událost kontakt obdržíte e-mail, když "
+"někdo knih míst.E-mail bude zaslán při rezervaci poprvé provedena (bez ohledu "
+"na to, pokud potvrdí nebo v jednání)"
 
 # @ dbem
 #: admin/em-options.php:1169
@@ -3148,7 +3469,8 @@ msgstr "Kontaktní osoba rezervace potvrzena"
 
 # @ dbem
 #: admin/em-options.php:1172
-msgid "An email will be sent to the event contact when a booking is first made."
+msgid ""
+"An email will be sent to the event contact when a booking is first made."
 msgstr "E-mail bude zaslán na akci kontaktu, pokud je rezervace hotova."
 
 # @ dbem
@@ -3168,7 +3490,8 @@ msgstr "Kontaktní osoba rezervace zrušena"
 
 # @ dbem
 #: admin/em-options.php:1178
-msgid "An email will be sent to the event contact if someone cancels their booking."
+msgid ""
+"An email will be sent to the event contact if someone cancels their booking."
 msgstr "E-mail bude zaslán na akci kontaktu, když někdo zruší své rezervace."
 
 # @ dbem
@@ -3188,8 +3511,15 @@ msgstr "Potvrzené objednávky e-mailem"
 
 # @ dbem
 #: admin/em-options.php:1184
-msgid "This is sent when a person's booking is confirmed. This will be sent automatically if approvals are required and the booking is approved. If approvals are disabled, this is sent out when a user first submits their booking."
-msgstr "To je vyslán při potvrzení rezervace osoby. To bude odeslána automaticky, pokud jsou nutné povolení a rezervace je schválen. Je-li povolení jsou zakázány, je to poslal, když uživatel poprvé předkládá svou rezervaci."
+msgid ""
+"This is sent when a person's booking is confirmed. This will be sent "
+"automatically if approvals are required and the booking is approved. If "
+"approvals are disabled, this is sent out when a user first submits their "
+"booking."
+msgstr ""
+"To je vyslán při potvrzení rezervace osoby. To bude odeslána automaticky, "
+"pokud jsou nutné povolení a rezervace je schválen. Je-li povolení jsou "
+"zakázány, je to poslal, když uživatel poprvé předkládá svou rezervaci."
 
 # @ dbem
 #: admin/em-options.php:1186
@@ -3208,8 +3538,12 @@ msgstr "Až do rezervace e-mailem"
 
 # @ dbem
 #: admin/em-options.php:1190
-msgid "This will be sent to the person when they first submit their booking. Not relevant if bookings don't require approval."
-msgstr "To bude zaslána osobě, když poprvé podání rezervace. Není relevantní, jestliže rezervace nevyžadují schválení."
+msgid ""
+"This will be sent to the person when they first submit their booking. Not "
+"relevant if bookings don't require approval."
+msgstr ""
+"To bude zaslána osobě, když poprvé podání rezervace. Není relevantní, "
+"jestliže rezervace nevyžadují schválení."
 
 # @ dbem
 #: admin/em-options.php:1192
@@ -3228,8 +3562,12 @@ msgstr "Odmítnuto rezervace e-mailem"
 
 # @ dbem
 #: admin/em-options.php:1196
-msgid "This will be sent automatically when a booking is rejected. Not relevant if bookings don't require approval."
-msgstr "To bude odeslána automaticky, pokud je odmítnuta rezervace. Není relevantní, jestliže rezervace nevyžadují schválení."
+msgid ""
+"This will be sent automatically when a booking is rejected. Not relevant if "
+"bookings don't require approval."
+msgstr ""
+"To bude odeslána automaticky, pokud je odmítnuta rezervace. Není relevantní, "
+"jestliže rezervace nevyžadují schválení."
 
 # @ dbem
 #: admin/em-options.php:1198
@@ -3238,8 +3576,12 @@ msgstr "Rezervace odmítl předmět e-mailu"
 
 # @ dbem
 #: admin/em-options.php:1198
-msgid "The subject of the email sent to the person making a booking that is awaiting administrator approval. Not relevant if bookings don't require approval."
-msgstr "Předmět e-mailu zaslaného osobě, která rezervaci, která je čeká schválení administrátorem. Není relevantní, jestliže rezervace nevyžadují schválení."
+msgid ""
+"The subject of the email sent to the person making a booking that is awaiting "
+"administrator approval. Not relevant if bookings don't require approval."
+msgstr ""
+"Předmět e-mailu zaslaného osobě, která rezervaci, která je čeká schválení "
+"administrátorem. Není relevantní, jestliže rezervace nevyžadují schválení."
 
 # @ dbem
 #: admin/em-options.php:1199
@@ -3248,8 +3590,12 @@ msgstr "Rezervace odmítl e-mail"
 
 # @ dbem
 #: admin/em-options.php:1199
-msgid "The body of the email which will be sent to the person if the booking is rejected. Not relevant if bookings don't require approval."
-msgstr "Tělo e-mailu, který bude odeslán na osobu, pokud je rezervace odmítnut. Není relevantní, jestliže rezervace nevyžadují schválení."
+msgid ""
+"The body of the email which will be sent to the person if the booking is "
+"rejected. Not relevant if bookings don't require approval."
+msgstr ""
+"Tělo e-mailu, který bude odeslán na osobu, pokud je rezervace odmítnut. Není "
+"relevantní, jestliže rezervace nevyžadují schválení."
 
 # @ dbem
 #: admin/em-options.php:1202
@@ -3274,7 +3620,7 @@ msgstr "Nastavení e-mailu"
 # @ dbem
 #: admin/em-options.php:1332
 msgid "Notification sender name"
-msgstr "Oznámení jméno odesílatele"
+msgstr "Oznámení - jméno odesílatele"
 
 # @ dbem
 #: admin/em-options.php:1332
@@ -3284,7 +3630,7 @@ msgstr "Vložte zobrazované jméno oznámení odesílatele."
 # @ dbem
 #: admin/em-options.php:1333
 msgid "Notification sender address"
-msgstr "Oznámení adresu odesílatele"
+msgstr "Oznámení - adresa odesílatele"
 
 # @ dbem
 #: admin/em-options.php:1333
@@ -3293,8 +3639,12 @@ msgstr "Vložte adresu odesílatele oznámení."
 
 # @ dbem
 #: admin/em-options.php:1334
-msgid "The port through which you e-mail notifications will be sent. Make sure the firewall doesn't block this port"
-msgstr "Port, přes který budete e-mailem zaslat. Ujistěte se, že firewall neblokuje tento port"
+msgid ""
+"The port through which you e-mail notifications will be sent. Make sure the "
+"firewall doesn't block this port"
+msgstr ""
+"Port, přes který budete e-mailem zaslat. Ujistěte se, že firewall neblokuje "
+"tento port"
 
 # @ dbem
 #: admin/em-options.php:1335
@@ -3318,13 +3668,21 @@ msgstr "Použít ověření SMTP?"
 
 # @ dbem
 #: admin/em-options.php:1336
-msgid "SMTP authentication is often needed. If you use GMail, make sure to set this parameter to Yes"
-msgstr "SMTP autentizace je často potřeba. Pokud používáte Gmail, ujistěte se, že nastavení tohoto parametru na Ano"
+msgid ""
+"SMTP authentication is often needed. If you use GMail, make sure to set this "
+"parameter to Yes"
+msgstr ""
+"SMTP autentizace je často potřeba. Pokud používáte Gmail, ujistěte se, že "
+"nastavení tohoto parametru na Ano"
 
 # @ dbem
 #: admin/em-options.php:1337
-msgid "The SMTP host. Usually it corresponds to 'localhost'. If you use GMail, set this value to 'ssl://smtp.gmail.com:465'."
-msgstr "SMTP hostitel.Obvykle to odpovídá 'localhost'. Pokud používáte GMail, nastavte tuto hodnotu na 'ssl://smtp.gmail.com:465'."
+msgid ""
+"The SMTP host. Usually it corresponds to 'localhost'. If you use GMail, set "
+"this value to 'ssl://smtp.gmail.com:465'."
+msgstr ""
+"SMTP hostitel.Obvykle to odpovídá 'localhost'. Pokud používáte GMail, "
+"nastavte tuto hodnotu na 'ssl://smtp.gmail.com:465'."
 
 # @ dbem
 #: admin/em-options.php:1338
@@ -3374,27 +3732,38 @@ msgstr "Maximální velikost (bytes)"
 # @ dbem
 #: admin/em-options.php:1311
 msgid "The maximum allowed size for images uploaded, in bytes"
-msgstr "Maximální povolená velikost pro obrazy nahrané v bajtech"
+msgstr "Maximální povolená velikost pro obrázky v bajtech"
 
 # @ dbem
 #: admin/em-options.php:1355
 msgid "User Capabilities"
-msgstr "Uživatel možnosti"
+msgstr "možnosti uživatelů"
 
 # @ dbem
 #: admin/em-options.php:1359
-msgid "Warning: Changing these values may result in exposing previously hidden information to all users."
-msgstr "Upozornění: Změna těchto hodnot může vést k odhalení dosud skrytých informací pro všechny uživatele."
+msgid ""
+"Warning: Changing these values may result in exposing previously hidden "
+"information to all users."
+msgstr ""
+"Upozornění: Změna těchto hodnot může vést k odhalení dosud skrytých informací "
+"pro všechny uživatele."
 
 # @ dbem
 #: admin/em-options.php:1405
-msgid "You can now give fine grained control with regards to what your users can do with events. Each user role can have perform different sets of actions."
-msgstr "Nyní si můžete dát jemnozrnné řízení s ohledem na to, co uživatelé mohou dělat s událostmi. Každý uživatel může mít roli plnit různé typy kroků."
+msgid ""
+"You can now give fine grained control with regards to what your users can do "
+"with events. Each user role can have perform different sets of actions."
+msgstr ""
+"Nyní si můžete dát jemnozrnné řízení s ohledem na to, co uživatelé mohou "
+"dělat s událostmi. Každý uživatel může mít roli plnit různé typy kroků."
 
 # @ dbem
 #: admin/em-options.php:1398
-msgid "User can manage other users individual bookings and event booking settings."
-msgstr "Uživatel může spravovat ostatní uživatele individuálních rezervací a nastavení událostí rezervace."
+msgid ""
+"User can manage other users individual bookings and event booking settings."
+msgstr ""
+"Uživatel může spravovat ostatní uživatele individuálních rezervací a "
+"nastavení událostí rezervace."
 
 # @ dbem
 #: admin/em-options.php:1399
@@ -3404,28 +3773,39 @@ msgstr "Uživatel může použít a spravovat rezervace s jejich akcí."
 # @ dbem
 #: admin/em-options.php:1287
 msgid "Allow anonymous event submissions?"
-msgstr "Povolit anonymní případě podání?"
+msgstr "Povolit anonymní formulář přidání akce?"
 
 # @ dbem
 #: admin/em-options.php:1287
-msgid "Would you like to allow users to submit bookings anonymously? If so, you can use the new [event_form] shortcode or <code>em_event_form()</code> template tag with this enabled."
-msgstr "Chcete umožnit uživatelům, aby předložily rezervace anonymně? Pokud ano, můžete využít nové [event_form] shortcode nebo <code>em_event_form()</code> šablona tag s tímto povolena."
+msgid ""
+"Would you like to allow users to submit bookings anonymously? If so, you can "
+"use the new [event_form] shortcode or <code>em_event_form()</code> template "
+"tag with this enabled."
+msgstr ""
+"Chcete umožnit uživatelům, aby předložily rezervace anonymně? Pokud ano, "
+"můžete využít nové [event_form] shortcode nebo <code>em_event_form()</code> "
+"šablona tag s tímto povolena."
 
 # @ dbem
 #: admin/em-options.php:1288
 msgid "Guest Default User"
-msgstr "Host Default User"
+msgstr "Přiřadit k uživateli"
 
 # @ dbem
 #: admin/em-options.php:1281
 #: admin/em-options.php:1289
 msgid "Success Message"
-msgstr "zprávu o úspěšné operaci"
+msgstr "zpráva o úspěšné operaci"
 
 # @ dbem
 #: admin/em-options.php:1289
-msgid "Anonymous submitters cannot see or modify their event once submitted. You can customize the success message they see here."
-msgstr "Anonymní zadavatelé nemohou vidět nebo měnit jejich akce, jakmile předloženy. Můžete upravit zprávu o úspěšné operaci, které naleznete zde."
+msgid ""
+"Anonymous submitters cannot see or modify their event once submitted. You can "
+"customize the success message they see here."
+msgstr ""
+"Anonymní zadavatelé nemohou vidět nebo měnit jejich akce, jakmile jsou "
+"odeslány. "
+"Můžete upravit zprávu o úspěšné operaci, kterou naleznete zde."
 
 # @ dbem
 #: admin/em-bookings.php:59
@@ -3566,8 +3946,12 @@ msgstr "změnit Rezervace"
 
 # @ dbem
 #: admin/em-bookings.php:307
-msgid "<strong>Note:</strong> ticket availability not taken into account (i.e. you can overbook). Confirmation email is not resent automatically."
-msgstr "<strong>Poznámka:</strong> dostupnosti vstupenek nejsou brány v úvahu (např. si můžete Změnit rezervaci). Potvrzovací e-mail není zlé automaticky."
+msgid ""
+"<strong>Note:</strong> ticket availability not taken into account (i.e. you "
+"can overbook). Confirmation email is not resent automatically."
+msgstr ""
+"<strong>Poznámka:</strong> dostupnosti vstupenek nejsou brány v úvahu (např. "
+"si můžete Změnit rezervaci). Potvrzovací e-mail není zlé automaticky."
 
 # @ dbem
 #: admin/em-bookings.php:323
@@ -3576,8 +3960,12 @@ msgstr "Rezervace Poznámky"
 
 # @ dbem
 #: admin/em-bookings.php:326
-msgid "You can add private notes below for internal reference that only event managers will see."
-msgstr "Můžete přidat soukromé poznámky níže pro interní reference, že jen akce manažerů uvidí."
+msgid ""
+"You can add private notes below for internal reference that only event "
+"managers will see."
+msgstr ""
+"Můžete přidat soukromé poznámky níže pro interní reference, že jen akce "
+"manažerů uvidí."
 
 # @ dbem
 #: admin/em-bookings.php:331
@@ -3602,14 +3990,32 @@ msgstr "Minulost a současnost Rezervace"
 # @ dbem
 #: admin/em-admin.php:124
 #, php-format
-msgid "<p>Events Manager is ready to go! It is highly recommended you read the <a href='%s'>Getting Started</a> guide on our site, as well as checking out the <a href='%s'>Settings Page</a>. <a href='%s' title='Don't show this advice again'>Dismiss</a></p>"
-msgstr "<p>Events Manager je hotovo! Důrazně se doporučuje, abyste si přečetli <a href='%s'>Začínáme</a> průvodci na našich stránkách, stejně jako mimo kontrolu <a href='%s'>nastavení stránky</a>. <a href='%s' title='Nezobrazovat lékaře znovu'>propustit</a></p>"
+msgid ""
+"<p>Events Manager is ready to go! It is highly recommended you read the <a "
+"href='%s'>Getting Started</a> guide on our site, as well as checking out the "
+"<a href='%s'>Settings Page</a>. <a href='%s' title='Don't show this advice "
+"again'>Dismiss</a></p>"
+msgstr ""
+"<p>Events Manager je hotovo! Důrazně se doporučuje, abyste si přečetli <a "
+"href='%s'>Začínáme</a> průvodci na našich stránkách, stejně jako mimo "
+"kontrolu <a href='%s'>nastavení stránky</a>. <a href='%s' title='Nezobrazovat "
+"lékaře znovu'>propustit</a></p>"
 
 # @ dbem
 #: admin/em-admin.php:179
 #, php-format
-msgid "This page corresponds to <strong>Events Manager</strong> events page. Its content will be overriden by Events Manager, although if you include the word CONTENTS (exactly in capitals) and surround it with other text, only CONTENTS will be overwritten. If you want to change the way your events look, go to the <a href='%s'>settings</a> page. "
-msgstr "Tato stránka odpovídá <strong>Events Manager</strong> události stránky. Její obsah bude překryté tím Events Manager, Pokud ale obsahují slovo CONTENTS (přesně ve městech) a obklopují jej s dalším textem, pouze CONTENTS bude přepsán.Pokud chcete změnit způsob, jakým Vaše akce vypadat, přejděte na <a href='%s'>nastavení</a> strana. "
+msgid ""
+"This page corresponds to <strong>Events Manager</strong> events page. Its "
+"content will be overriden by Events Manager, although if you include the word "
+"CONTENTS (exactly in capitals) and surround it with other text, only CONTENTS "
+"will be overwritten. If you want to change the way your events look, go to "
+"the <a href='%s'>settings</a> page. "
+msgstr ""
+"Tato stránka odpovídá <strong>Events Manager</strong> události stránky. Její "
+"obsah bude překryté tím Events Manager, Pokud ale obsahují slovo CONTENTS "
+"(přesně ve městech) a obklopují jej s dalším textem, pouze CONTENTS bude "
+"přepsán.Pokud chcete změnit způsob, jakým Vaše akce vypadat, přejděte na <a "
+"href='%s'>nastavení</a> strana. "
 
 # @ dbem
 #: em-functions.php:74
@@ -3732,13 +4138,21 @@ msgstr "Získání nápovědy pro Events Manager"
 # @ dbem
 #: admin/em-help.php:25
 msgid "Placeholders for customizing event pages"
-msgstr "Vyhrazená místa pro vlastní akci stránky"
+msgstr "Zástupné symboly pro zobrazení na stránkách akce"
 
 # @ dbem
 #: admin/em-help.php:26
 #, php-format
-msgid "In the <a href='%s'>settings page</a>, you'll find various textboxes where you can edit how event information looks, such as for event and location lists. Using the placeholders below, you can choose what information should be displayed."
-msgstr "V <a href='%s'>nastavení stránky</a>, najdete různé textových polí, kde si můžete upravovat, jak vypadá informace o události, jako je například událost a místo seznamu. Použití zástupných symbolů níže, můžete si vybrat, jaké informace by měly být zobrazeny."
+msgid ""
+"In the <a href='%s'>settings page</a>, you'll find various textboxes where "
+"you can edit how event information looks, such as for event and location "
+"lists. Using the placeholders below, you can choose what information should "
+"be displayed."
+msgstr ""
+"V <a href='%s'>nastavení stránky</a>, najdete různé textových polí, kde si "
+"můžete upravovat, jak vypadá informace o události, jako je například událost "
+"a místo seznamu. Použití zástupných symbolů níže, můžete si vybrat, jaké "
+"informace by měly být zobrazeny."
 
 # @ dbem
 #: admin/em-admin.php:90
@@ -3749,37 +4163,37 @@ msgstr "Events Manager"
 # @ default
 #: em-functions.php:213
 msgid "Mon"
-msgstr "Mon"
+msgstr "Po"
 
 # @ default
 #: em-functions.php:213
 msgid "Tue"
-msgstr "út."
+msgstr "Út"
 
 # @ default
 #: em-functions.php:213
 msgid "Wed"
-msgstr "středa"
+msgstr "St"
 
 # @ default
 #: em-functions.php:213
 msgid "Thu"
-msgstr "čt."
+msgstr "Čt"
 
 # @ default
 #: em-functions.php:213
 msgid "Fri"
-msgstr "pá."
+msgstr "Pá"
 
 # @ default
 #: em-functions.php:213
 msgid "Sat"
-msgstr "sobota"
+msgstr "So"
 
 # @ default
 #: em-functions.php:213
 msgid "Sun"
-msgstr "neděle"
+msgstr "Ne"
 
 # @ dbem
 #: classes/em-event-post-admin.php:192
@@ -3833,8 +4247,12 @@ msgstr "atributy"
 # @ dbem
 #: templates/forms/event/attributes.php:43
 #, php-format
-msgid "You don't have any custom attributes defined in any of your Events Manager template settings. Please add them the <a href='%s'>settings page</a>"
-msgstr "Nemáte žádné vlastní atributy definované v některé z vašich akcí Správce nastavení šablony. Prosím, přidejte <a href='%s'>nastavení stránky</a>"
+msgid ""
+"You don't have any custom attributes defined in any of your Events Manager "
+"template settings. Please add them the <a href='%s'>settings page</a>"
+msgstr ""
+"Nemáte žádné vlastní atributy definované v některé z vašich akcí Správce "
+"nastavení šablony. Prosím, přidejte <a href='%s'>nastavení stránky</a>"
 
 # @ dbem
 #: templates/forms/event/attributes.php:50
@@ -3843,13 +4261,26 @@ msgstr "oslabil atributy"
 
 # @ dbem
 #: templates/forms/event/attributes.php:83
-msgid "In order to use attributes, you must define some in your templates, otherwise they'll never show. Go to Events > Settings to add attribute placeholders."
-msgstr "Aby bylo možné použít atributy, je nutné definovat některé v šablonách, jinak se nikdy show. Přejít na události> Nastavení přidat atribut zástupných symbolů."
+msgid ""
+"In order to use attributes, you must define some in your templates, otherwise "
+"they'll never show. Go to Events > Settings to add attribute placeholders."
+msgstr ""
+"Aby bylo možné použít atributy, je nutné definovat některé v šablonách, jinak "
+"se nikdy show. Přejít na události> Nastavení přidat atribut zástupných "
+"symbolů."
 
 # @ dbem
 #: em-install.php:284
-msgid "#_BOOKINGNAME (#_BOOKINGEMAIL) will attend #_NAME on #F #j, #Y. He wants to reserve #_BOOKINGSPACES spaces.<br/> Now there are #_BOOKEDSPACES spaces reserved, #_AVAILABLESPACES are still available.<br/>Yours faithfully,<br/>Events Manager - http://wp-events-plugin.com"
-msgstr "#_BOOKINGNAME (#_BOOKINGEMAIL) se zúčastní #_NAME na #F #j, #Y. Chce rezervy #_BOOKINGSPACES prostory.<br/> Nyní je #_BOOKEDSPACES prostory vyhrazené, #_AVAILABLESPACES jsou stále k dispozici.<br/>S přátelským pozdravem,<br/>Events Manager - http://wp-events-plugin.com"
+msgid ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) will attend #_NAME on #F #j, #Y. He wants to "
+"reserve #_BOOKINGSPACES spaces.<br/> Now there are #_BOOKEDSPACES spaces "
+"reserved, #_AVAILABLESPACES are still available.<br/>Yours faithfully,<br/>"
+"Events Manager - http://wp-events-plugin.com"
+msgstr ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) se zúčastní #_NAME na #F #j, #Y. Chce rezervy "
+"#_BOOKINGSPACES prostory.<br/> Nyní je #_BOOKEDSPACES prostory vyhrazené, "
+"#_AVAILABLESPACES jsou stále k dispozici.<br/>S přátelským pozdravem,<br/>"
+"Events Manager - http://wp-events-plugin.com"
 
 # @ dbem
 #: em-install.php:284
@@ -3860,33 +4291,68 @@ msgstr "#_BOOKINGNAME (#_BOOKINGEMAIL) se zúčastní #_NAME na #F #j, #Y. Chce 
 #: em-install.php:289
 #: em-install.php:290
 #: em-install.php:291
-msgid "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
-msgstr "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
+msgid ""
+"<br/><br/>-------------------------------<br/>Powered by Events Manager - "
+"http://wp-events-plugin.com"
+msgstr ""
+"<br/><br/>-------------------------------<br/>Powered by Events Manager - "
+"http://wp-events-plugin.com"
 
 # @ dbem
 #: em-install.php:285
-msgid "#_BOOKINGNAME (#_BOOKINGEMAIL) cancelled his booking at #_NAME on #F #j, #Y. He wanted to reserve #_BOOKINGSPACES spaces.<br/> Now there are #_BOOKEDSPACES spaces reserved, #_AVAILABLESPACES are still available.<br/>Yours faithfully,<br/>Events Manager - http://wp-events-plugin.com"
-msgstr "#_BOOKINGNAME (#_BOOKINGEMAIL) zrušena jeho rezervace #_NAME na #F #j, #Y. Chtěl rezervy #_BOOKINGSPACES prostory.<br/> Nyní je #_BOOKEDSPACES prostory vyhrazené, #_AVAILABLESPACES jsou stále k dispozici.<br/>S přátelským pozdravem,<br/>Events Manager - http://wp-events-plugin.com"
+msgid ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) cancelled his booking at #_NAME on #F #j, #Y. "
+"He wanted to reserve #_BOOKINGSPACES spaces.<br/> Now there are "
+"#_BOOKEDSPACES spaces reserved, #_AVAILABLESPACES are still available.<br/>"
+"Yours faithfully,<br/>Events Manager - http://wp-events-plugin.com"
+msgstr ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) zrušena jeho rezervace #_NAME na #F #j, #Y. "
+"Chtěl rezervy #_BOOKINGSPACES prostory.<br/> Nyní je #_BOOKEDSPACES prostory "
+"vyhrazené, #_AVAILABLESPACES jsou stále k dispozici.<br/>S přátelským "
+"pozdravem,<br/>Events Manager - http://wp-events-plugin.com"
 
 # @ dbem
 #: em-install.php:286
-msgid "Dear #_BOOKINGNAME, <br/>you have successfully reserved #_BOOKINGSPACES space/spaces for #_NAME.<br/>Yours faithfully,<br/>#_CONTACTNAME"
-msgstr "drahý #_BOOKINGNAME, <br/>Úspěšně jste vyhrazeny #_BOOKINGSPACES prostoru / prostoru pro #_NAME.<br/>S přátelským pozdravem,<br/>#_CONTACTNAME"
+msgid ""
+"Dear #_BOOKINGNAME, <br/>you have successfully reserved #_BOOKINGSPACES "
+"space/spaces for #_NAME.<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+"drahý #_BOOKINGNAME, <br/>Úspěšně jste vyhrazeny #_BOOKINGSPACES prostoru / "
+"prostoru pro #_NAME.<br/>S přátelským pozdravem,<br/>#_CONTACTNAME"
 
 # @ dbem
 #: em-install.php:287
-msgid "Dear #_BOOKINGNAME, <br/>You have requested #_BOOKINGSPACES space/spaces for #_NAME.<br/>Your booking is currently pending approval by our administrators. Once approved you will receive an automatic confirmation.<br/>Yours faithfully,<br/>#_CONTACTNAME"
-msgstr "drahý #_BOOKINGNAME, <br/>Požádali jste #_BOOKINGSPACES prostoru / prostoru pro #_NAME.<br/>Vaše rezervace je v současné době čeká na schválení našimi administrátory. Po schválení obdržíte automatické potvrzení.<br/>S přátelským pozdravem,<br/>#_CONTACTNAME"
+msgid ""
+"Dear #_BOOKINGNAME, <br/>You have requested #_BOOKINGSPACES space/spaces for "
+"#_NAME.<br/>Your booking is currently pending approval by our administrators. "
+"Once approved you will receive an automatic confirmation.<br/>Yours "
+"faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+"drahý #_BOOKINGNAME, <br/>Požádali jste #_BOOKINGSPACES prostoru / prostoru "
+"pro #_NAME.<br/>Vaše rezervace je v současné době čeká na schválení našimi "
+"administrátory. Po schválení obdržíte automatické potvrzení.<br/>S přátelským "
+"pozdravem,<br/>#_CONTACTNAME"
 
 # @ dbem
 #: em-install.php:288
-msgid "Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at #_NAME on #F #j, #Y has been rejected.<br/>Yours faithfully,<br/>#_CONTACTNAME"
-msgstr "drahý #_BOOKINGNAME, <br/>Vaše žádost o rezervaci #_BOOKINGSPACES míst na #_NAME na #F #j, #Y byla zamítnuta.<br/>S přátelským pozdravem,<br/>#_CONTACTNAME"
+msgid ""
+"Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at "
+"#_NAME on #F #j, #Y has been rejected.<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+"drahý #_BOOKINGNAME, <br/>Vaše žádost o rezervaci #_BOOKINGSPACES míst na "
+"#_NAME na #F #j, #Y byla zamítnuta.<br/>S přátelským pozdravem,<br/>"
+"#_CONTACTNAME"
 
 # @ dbem
 #: em-install.php:289
-msgid "Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at #_NAME on #F #j, #Y has been cancelled.<br/>Yours faithfully,<br/>#_CONTACTNAME"
-msgstr "drahý #_BOOKINGNAME, <br/>Vaše žádost o rezervaci #_BOOKINGSPACES míst na #_NAME na #F #j, #Y byla zrušena.<br/>S přátelským pozdravem,<br/>#_CONTACTNAME"
+msgid ""
+"Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at "
+"#_NAME on #F #j, #Y has been cancelled.<br/>Yours faithfully,<br/>"
+"#_CONTACTNAME"
+msgstr ""
+"drahý #_BOOKINGNAME, <br/>Vaše žádost o rezervaci #_BOOKINGSPACES míst na "
+"#_NAME na #F #j, #Y byla zrušena.<br/>S přátelským pozdravem,<br/>"
+"#_CONTACTNAME"
 
 # @ dbem
 #: em-install.php:379
@@ -3909,8 +4375,11 @@ msgstr "<li>Žádné události v této kategorii</li>"
 
 # @ dbem
 #: em-install.php:487
-msgid "Booking successful, pending confirmation (you will also receive an email once confirmed)."
-msgstr "Rezervace úspěšná, až do potvrzení (také obdržíte e-mail, jakmile potvrzeno)."
+msgid ""
+"Booking successful, pending confirmation (you will also receive an email once "
+"confirmed)."
+msgstr ""
+"Rezervace úspěšná, až do potvrzení (také obdržíte e-mail, jakmile potvrzeno)."
 
 # @ dbem
 #: em-install.php:488
@@ -3924,8 +4393,14 @@ msgstr "Musíte se přihlásit nebo zaregistrovat k vytvoření rezervace."
 
 # @ dbem
 #: em-install.php:491
-msgid "However, there were some problems whilst sending confirmation emails to you and/or the event contact person. You may want to contact them directly and letting them know of this error."
-msgstr "Nicméně, tam byly nějaké problémy při odesílání e-mailů Vám potvrzení a / nebo v případě kontaktní osoby. Možná budete chtít kontaktovat přímo a dát jim vědět o této chybě."
+msgid ""
+"However, there were some problems whilst sending confirmation emails to you "
+"and/or the event contact person. You may want to contact them directly and "
+"letting them know of this error."
+msgstr ""
+"Nicméně, tam byly nějaké problémy při odesílání e-mailů Vám potvrzení a / "
+"nebo v případě kontaktní osoby. Možná budete chtít kontaktovat přímo a dát "
+"jim vědět o této chybě."
 
 # @ dbem
 #: em-install.php:492
@@ -3934,17 +4409,27 @@ msgstr "Rezervace nebylo možné vytvořit"
 
 # @ dbem
 #: em-install.php:493
-msgid "This email already exists in our system, please log in to register to proceed with your booking."
-msgstr "Tento e-mail již v našem systému, přihlašte se zaregistrovat pokračovat s vaší rezervaci."
+msgid ""
+"This email already exists in our system, please log in to register to proceed "
+"with your booking."
+msgstr ""
+"Tento e-mail již v našem systému, přihlašte se zaregistrovat pokračovat s "
+"vaší rezervaci."
 
 # @ dbem
 #: em-install.php:494
-msgid "A new user account has been created for you. Please check your email for access details."
-msgstr "Nový uživatelský účet byl vytvořen pro vás. Zkontrolujte prosím e-mail pro přístupové údaje."
+msgid ""
+"A new user account has been created for you. Please check your email for "
+"access details."
+msgstr ""
+"Nový uživatelský účet byl vytvořen pro vás. Zkontrolujte prosím e-mail pro "
+"přístupové údaje."
 
 # @ dbem
 #: em-install.php:495
-msgid "There was a problem creating a user account, please contact a website administrator."
+msgid ""
+"There was a problem creating a user account, please contact a website "
+"administrator."
 msgstr "Tam byl problém vytvořit uživatelský účet, obraťte se na správce webu."
 
 # @ dbem
@@ -3991,8 +4476,12 @@ msgstr "Rezervace - #_NAME"
 # @ default
 #: em-debug.php:44
 #, php-format
-msgid "You are in Events Manager debug mode. To turn debug mode off, go to the <a href=\"%s\">settings</a> page."
-msgstr "Nacházíte se v módu akce Správci ladění. Chcete-li režim ladění vypnout, jít na <a href=\"%s\">nastavení</a> strana."
+msgid ""
+"You are in Events Manager debug mode. To turn debug mode off, go to the <a "
+"href=\"%s\">settings</a> page."
+msgstr ""
+"Nacházíte se v módu akce Správci ladění. Chcete-li režim ladění vypnout, jít "
+"na <a href=\"%s\">nastavení</a> strana."
 
 # @ dbem
 #: em-actions.php:31
@@ -4083,7 +4572,7 @@ msgstr "kategorie událostí"
 # @ dbem
 #: admin/em-admin.php:40
 msgid "Events Manager Settings"
-msgstr "Události Manažer Nastavení"
+msgstr "Nastavení Events-manageru"
 
 # @ dbem
 #: admin/em-admin.php:40
@@ -4109,8 +4598,14 @@ msgstr "celkový (zahrnovat daňové)"
 
 # @ dbem
 #: templates/forms/event/bookings.php:24
-msgid "You can have single or multiple tickets, where certain tickets become availalble under certain conditions, e.g. early bookings, group discounts, maximum bookings per ticket, etc."
-msgstr "Můžete mít jednu nebo více vstupenek, některé lístky se availalble za určitých podmínek, např. časné rezervace, skupinové slevy, maximálně Rezervace na letenku, atd."
+msgid ""
+"You can have single or multiple tickets, where certain tickets become "
+"availalble under certain conditions, e.g. early bookings, group discounts, "
+"maximum bookings per ticket, etc."
+msgstr ""
+"Můžete mít jednu nebo více vstupenek, některé lístky se availalble za "
+"určitých podmínek, např. časné rezervace, skupinové slevy, maximálně "
+"Rezervace na letenku, atd."
 
 # @ dbem
 #: templates/forms/event/bookings.php:24
@@ -4144,8 +4639,12 @@ msgstr "Uživatelé mohou zrušit svou rezervaci?"
 
 # @ dbem
 #: admin/em-options.php:1057
-msgid "If enabled, users can cancel their bookings themselves from their bookings page."
-msgstr "Pokud je povoleno, uživatelé mohou zcela zrušit svůj rezervace se od své rezervace stránku."
+msgid ""
+"If enabled, users can cancel their bookings themselves from their bookings "
+"page."
+msgstr ""
+"Pokud je povoleno, uživatelé mohou zcela zrušit svůj rezervace se od své "
+"rezervace stránku."
 
 # @ dbem
 #: admin/em-options.php:1073
@@ -4154,7 +4653,9 @@ msgstr "Sazba daně"
 
 # @ dbem
 #: admin/em-options.php:1073
-msgid "Add a tax rate to your ticket prices (entering 10 will add 10% to the ticket price)."
+msgid ""
+"Add a tax rate to your ticket prices (entering 10 will add 10% to the ticket "
+"price)."
 msgstr "Přidat sazby daně do cen letenek (vstup 10 přidá 10% k ceně letenky)."
 
 # @ dbem
@@ -4164,8 +4665,11 @@ msgstr "Přidání daň ceně letenky?"
 
 # @ dbem
 #: admin/em-options.php:1074
-msgid "When displaying ticket prices and booking totals, include the tax automatically?"
-msgstr "Při zobrazení Ceny vstupenek a rezervace součty, zahrnuje daň, automaticky?"
+msgid ""
+"When displaying ticket prices and booking totals, include the tax "
+"automatically?"
+msgstr ""
+"Při zobrazení Ceny vstupenek a rezervace součty, zahrnuje daň, automaticky?"
 
 # @ dbem
 #: admin/em-options.php:1122
@@ -4184,13 +4688,27 @@ msgstr "No-uživatelů on-line režimu"
 
 # @ dbem
 #: admin/em-options.php:1134
-msgid "By default, when a booking is made by a user, this booking is tied to a user account, if the user is not registered nor logged in and guest bookings are enabled, an account will be created for them."
-msgstr "Ve výchozím nastavení se při rezervaci provádí uživatel, je tato rezervace vázána na uživatelský účet, v případě, že uživatel není registrován ani přihlášeni a hostující rezervace je povoleno, bude vytvořen účet pro ně."
+msgid ""
+"By default, when a booking is made by a user, this booking is tied to a user "
+"account, if the user is not registered nor logged in and guest bookings are "
+"enabled, an account will be created for them."
+msgstr ""
+"Ve výchozím nastavení se při rezervaci provádí uživatel, je tato rezervace "
+"vázána na uživatelský účet, v případě, že uživatel není registrován ani "
+"přihlášeni a hostující rezervace je povoleno, bude vytvořen účet pro ně."
 
 # @ dbem
 #: admin/em-options.php:1136
-msgid "<strong>Warning : </strong> Various features afforded to users with an account will not be available, e.g. viewing bookings. Once you enable this and select a user, modifying these values will prevent older non-user bookings from displaying the correct information."
-msgstr "<strong>varování: </strong> Různé funkce poskytované uživatelům účtu nebude k dispozici, např. sledování rezervace. Jakmile aktivujete tuto a vyberte uživatele, kterým se mění tyto hodnoty zabrání starší non-uživatele rezervace zobrazování správné informace."
+msgid ""
+"<strong>Warning : </strong> Various features afforded to users with an "
+"account will not be available, e.g. viewing bookings. Once you enable this "
+"and select a user, modifying these values will prevent older non-user "
+"bookings from displaying the correct information."
+msgstr ""
+"<strong>varování: </strong> Různé funkce poskytované uživatelům účtu nebude k "
+"dispozici, např. sledování rezervace. Jakmile aktivujete tuto a vyberte "
+"uživatele, kterým se mění tyto hodnoty zabrání starší non-uživatele rezervace "
+"zobrazování správné informace."
 
 # @ dbem
 #: admin/em-options.php:1139
@@ -4220,8 +4738,14 @@ msgstr "Schválené akce"
 
 # @ dbem
 #: admin/em-options.php:1225
-msgid "An email will be sent to the event owner when their event is approved. Users requiring event approval do not have the <code>publish_events</code> capability."
-msgstr "E-mail bude zaslán na akci vlastníkovi, když je schválena jejich akce. Uživatele, kteří vyžadují případě schválení nemají <code> publish_events </code> funkce."
+msgid ""
+"An email will be sent to the event owner when their event is approved. Users "
+"requiring event approval do not have the <code>publish_events</code> "
+"capability."
+msgstr ""
+"E-mail bude zaslán na akci vlastníkovi, když je schválena jejich akce. "
+"Uživatele, kteří vyžadují případě schválení nemají <code> publish_events <"
+"/code> funkce."
 
 # @ dbem
 #: admin/em-options.php:1221
@@ -4253,8 +4777,12 @@ msgstr "Zadejte prosím platnou jízdenku ceny např. 10.50 (ne znaky měn)"
 
 # @ dbem
 #: em-install.php:290
-msgid "Dear #_CONTACTNAME, <br/>Your event #_NAME on #F #j, #Y has been approved.<br/>You can view your event here: #_EVENTURL"
-msgstr "drahý #_CONTACTNAME, <br/>Vaše akce #_NAME na #F #j, #Y byla schválena.<br/>Můžete si zobrazit akce zde:#_EVENTURL"
+msgid ""
+"Dear #_CONTACTNAME, <br/>Your event #_NAME on #F #j, #Y has been approved.<"
+"br/>You can view your event here: #_EVENTURL"
+msgstr ""
+"drahý #_CONTACTNAME, <br/>Vaše akce #_NAME na #F #j, #Y byla schválena.<br/>"
+"Můžete si zobrazit akce zde:#_EVENTURL"
 
 # @ dbem
 #: templates/placeholders/bookingform.php:17
@@ -4269,25 +4797,53 @@ msgstr "aktualizace Blogy"
 # @ dbem
 #: admin/em-admin.php:139
 #, php-format
-msgid "Uh Oh! For some reason WordPress could not create an events page for you (or you just deleted it). Not to worry though, all you have to do is create an empty page, name it whatever you want, and select it as your events page in your <a href=\"%s\">settings page</a>. Sorry for the extra step! If you know what you are doing, you may have done this on purpose, if so <a href=\"%s\">ignore this message</a>"
-msgstr "Uh Oh! Z nějakého důvodu WordPress Nelze vytvořit události, stránky pro Vás (nebo jste právě odstranili). Není se čeho bát když vše, co musíte udělat, je vytvořit prázdnou stránku, pojmenujte ho jak chcete, a zvolte ji jako svůj stránce Události v <a href=\"%s\"> stránce nastavení </a>. Omlouvám se za další krok! Pokud víte, co děláte, můžete si to udělal schválně, pokud ano, <a href=\"%s\"> tuto zprávu ignorovat </a>"
+msgid ""
+"Uh Oh! For some reason WordPress could not create an events page for you (or "
+"you just deleted it). Not to worry though, all you have to do is create an "
+"empty page, name it whatever you want, and select it as your events page in "
+"your <a href=\"%s\">settings page</a>. Sorry for the extra step! If you know "
+"what you are doing, you may have done this on purpose, if so <a href=\"%s\">"
+"ignore this message</a>"
+msgstr ""
+"Uh Oh! Z nějakého důvodu WordPress nemůže stránku událostí "
+"(nebo jste ji právě odstranili). Není se čeho bát, vše, co musíte udělat, je "
+"vytvořit prázdnou stránku, pojmenujte ji jak chcete, a zvolte ji jako svoji "
+"stránku Události v <a href=\"%s\"> stránce nastavení </a>. Omlouvám se za "
+"další krok! Pokud víte, co děláte, můžete si to sami nastavit a <"
+"a href=\"%s\"> tuto zprávu ignorovat </a>"
 
 # @ dbem
 #: admin/em-admin.php:148
-msgid "There is a newer version of Events Manager Pro which is required for this current version of Events Manager. Please go to the plugin website and download the latest update."
-msgstr "K dispozici je novější verze událostí Manager Pro, která je potřebná pro tuto aktuální verzi událostí Manager. Přejděte na stránky pluginu a stáhněte nejnovější aktualizace."
+msgid ""
+"There is a newer version of Events Manager Pro which is required for this "
+"current version of Events Manager. Please go to the plugin website and "
+"download the latest update."
+msgstr ""
+"K dispozici je novější verze událostí Manager Pro, která je potřebná pro tuto "
+"aktuální verzi událostí Manager. Přejděte na stránky pluginu a stáhněte "
+"nejnovější aktualizace."
 
 # @ dbem
 #: admin/em-admin.php:159
 #, php-format
-msgid "MultiSite options have moved <a href=\"%s\">here</a>. <a href=\"%s\">Dismiss message</a>"
-msgstr "MultiSite volby posunuly <a href=\"%s\"> zde </a>. <a href=\"%s\"> Odmítnout zprávu </a>"
+msgid ""
+"MultiSite options have moved <a href=\"%s\">here</a>. <a href=\"%s\">Dismiss "
+"message</a>"
+msgstr ""
+"MultiSite volby posunuly <a href=\"%s\"> zde </a>. <a href=\"%s\"> Odmítnout "
+"zprávu </a>"
 
 # @ dbem
 #: admin/em-admin.php:171
 #, php-format
-msgid "Whilst they will still appear using placeholders, you need to <a href=\"%s\">migrate your location and event images</a> in order for them to appear in your edit forms and media library. <a href=\"%s\">Dismiss message</a>"
-msgstr "Zatímco oni budou stále zobrazovat pomocí zástupných symbolů, musíte <a href=\"%s\"> migraci umístění a události obrázky </a>, aby pro ně objeví v upravovat formuláře a knihovny médií. <a href=\"%s\"> Odmítnout zprávu </a>"
+msgid ""
+"Whilst they will still appear using placeholders, you need to <a href=\"%s\">"
+"migrate your location and event images</a> in order for them to appear in "
+"your edit forms and media library. <a href=\"%s\">Dismiss message</a>"
+msgstr ""
+"Zatímco oni budou stále zobrazovat pomocí zástupných symbolů, musíte <a "
+"href=\"%s\"> migraci umístění a události obrázky </a>, aby pro ně objeví v "
+"upravovat formuláře a knihovny médií. <a href=\"%s\"> Odmítnout zprávu </a>"
 
 # @ dbem
 #: admin/em-admin.php:213
@@ -4302,8 +4858,12 @@ msgstr "aktualizace sítě"
 
 # @ default
 #: admin/em-ms-options.php:24
-msgid "To update your network blogs with the latest Events Manager automatically, click the update button below."
-msgstr "Chcete-li aktualizovat sítě blogy s posledními událostmi Manager automaticky, klepněte na tlačítko Aktualizovat níže."
+msgid ""
+"To update your network blogs with the latest Events Manager automatically, "
+"click the update button below."
+msgstr ""
+"Chcete-li aktualizovat sítě blogy s posledními událostmi Manager automaticky, "
+"klepněte na tlačítko Aktualizovat níže."
 
 # @ dbem
 #: admin/em-ms-options.php:27
@@ -4315,31 +4875,51 @@ msgstr "aktualizovat"
 #: admin/em-options.php:267
 #: admin/em-options.php:1051
 msgid "General"
-msgstr "obecný"
+msgstr "obecné"
 
 # @ default
 #: admin/em-ms-options.php:157
 #, php-format
-msgid "%s belonging to other sub-sites will have an extra slug preppended to it so that your main site can differentiate between its own %s and those belonging to other sites in your network."
-msgstr "%s patřící k jiným sub-stránky budou mít navíc Slug preppended na to, aby na hlavní stránce je možné rozlišovat mezi vlastní% s, a ti, kteří patří na jiná místa v síti."
+msgid ""
+"%s belonging to other sub-sites will have an extra slug preppended to it so "
+"that your main site can differentiate between its own %s and those belonging "
+"to other sites in your network."
+msgstr ""
+"%s patřící k jiným sub-stránky budou mít navíc Slug preppended na to, aby na "
+"hlavní stránce je možné rozlišovat mezi vlastní% s, a ti, kteří patří na jiná "
+"místa v síti."
 
 # @ dbem
 #: admin/em-ms-options.php:158
 #, php-format
-msgid "When displaying global %s on the main site you have the option of users viewing the %s details on the main site or being directed to the sub-site."
-msgstr "Při zobrazení globální %s na hlavní stránce máte možnost uživatelům, kteří zobrazují %s detaily na hlavní stránce, nebo směřuje k sub-stránky."
+msgid ""
+"When displaying global %s on the main site you have the option of users "
+"viewing the %s details on the main site or being directed to the sub-site."
+msgstr ""
+"Při zobrazení globální %s na hlavní stránce máte možnost uživatelům, kteří "
+"zobrazují %s detaily na hlavní stránce, nebo směřuje k sub-stránky."
 
 # @ dbem
 #: admin/em-ms-options.php:159
 #, php-format
-msgid "Displays %s from all sites on the network by default. You can still restrict %s by blog using shortcodes and template tags coupled with the <code>blog</code> attribute. Requires global tables to be turned on."
-msgstr "Zobrazí %s od všech stránkách v síti ve výchozím nastavení. Stále můžete omezit %s tím, blog pomocí šablon a zkratková slova spolu s <code>blog</code> atribut. Vyžaduje globální tabulky zapnout."
+msgid ""
+"Displays %s from all sites on the network by default. You can still restrict %"
+"s by blog using shortcodes and template tags coupled with the <code>blog<"
+"/code> attribute. Requires global tables to be turned on."
+msgstr ""
+"Zobrazí %s od všech stránkách v síti ve výchozím nastavení. Stále můžete "
+"omezit %s tím, blog pomocí šablon a zkratková slova spolu s <code>blog</code> "
+"atribut. Vyžaduje globální tabulky zapnout."
 
 # @ default
 #: admin/em-ms-options.php:160
 #, php-format
-msgid "You <strong>must</strong> have assigned a %s page in your <a href=\"%s\">main blog settings</a> for this to work."
-msgstr "Můžete <strong>musí</strong> přiřadili %s tránku v <a href=\"%s\"> hlavní nastavení blogu </a> pro tuto práci."
+msgid ""
+"You <strong>must</strong> have assigned a %s page in your <a href=\"%s\">main "
+"blog settings</a> for this to work."
+msgstr ""
+"Můžete <strong>musí</strong> přiřadili %s tránku v <a href=\"%s\"> hlavní "
+"nastavení blogu </a> pro tuto práci."
 
 # @ dbem
 #: admin/em-ms-options.php:162
@@ -4375,12 +4955,18 @@ msgstr "Příklad:"
 # @ dbem
 #: admin/em-ms-options.php:167
 msgid "Locations on main blog?"
-msgstr "Místa na hlavní blog?"
+msgstr "Místa na hlavní straně?"
 
 # @ dbem
 #: admin/em-ms-options.php:167
-msgid "If you would prefer all your locations to belong to your main blog, users in sub-sites will still be able to create locations, but the actual locations are created and reside in the main blog."
-msgstr "Pokud byste raději všechny lokality patří k vaší hlavní blog, budou uživatelé v podstránky stále možnost vytvořit místa, ale že se skutečné umístění jsou vytvářeny a pobývat na území hlavního blogu."
+msgid ""
+"If you would prefer all your locations to belong to your main blog, users in "
+"sub-sites will still be able to create locations, but the actual locations "
+"are created and reside in the main blog."
+msgstr ""
+"Pokud byste raději všechny lokality patří k vaší hlavní blog, budou uživatelé "
+"v podstránky stále možnost vytvořit místa, ale že se skutečné umístění jsou "
+"vytvářeny a pobývat na území hlavního blogu."
 
 # @ dbem
 #: admin/em-ms-options.php:172
@@ -4390,24 +4976,32 @@ msgstr "Displej globální %s na hlavní blog?"
 
 # @ dbem
 #: admin/em-options.php:112
-msgid "Settings have been reset back to default. Your events, locations and categories have not been modified."
-msgstr "Nastavení byly nastaveny zpět do výchozího nastavení. Vaše akce, lokality a kategorie nebyly změněny."
+msgid ""
+"Settings have been reset back to default. Your events, locations and "
+"categories have not been modified."
+msgstr ""
+"Nastavení byly nastaveny zpět do výchozího nastavení. Vaše akce, lokality a "
+"kategorie nebyly změněny."
 
 # @ dbem
 #: admin/em-options.php:125
 #: admin/em-options.php:129
 msgid "Reset Events Manager"
-msgstr "Obnovit Events Manager"
+msgstr "Reset Events Manager"
 
 # @ dbem
 #: admin/em-options.php:126
 msgid "Are you sure you want to reset Events Manager?"
-msgstr "Jste si jisti, že chcete obnovit Events Manager?"
+msgstr "Jste si jisti, že chcete obnovit nastavení Events Manageru?"
 
 # @ dbem
 #: admin/em-options.php:127
-msgid "All your settings, including email templates and template formats for Events Manager will be deleted."
-msgstr "Všechna vaše nastavení, včetně e-mailové šablony a šablony formáty pro manažera akce budou smazány."
+msgid ""
+"All your settings, including email templates and template formats for Events "
+"Manager will be deleted."
+msgstr ""
+"Všechna vaše nastavení, včetně e-mailové šablony a šablony formáty pro "
+"manažera akce budou smazány."
 
 # @ dbem
 #: admin/em-options.php:141
@@ -4421,14 +5015,22 @@ msgstr "Jste si jisti, že chcete odinstalovat Events Manager?"
 
 # @ dbem
 #: admin/em-options.php:143
-msgid "All your settings and events will be permanently deleted. This cannot be undone."
-msgstr "Všechna vaše nastavení a události budou trvale odstraněny. To nelze vrátit zpět."
+msgid ""
+"All your settings and events will be permanently deleted. This cannot be "
+"undone."
+msgstr ""
+"Všechna vaše nastavení a události budou trvale odstraněny. To nelze vrátit "
+"zpět."
 
 # @ dbem
 #: admin/em-options.php:144
 #, php-format
-msgid "If you just want to deactivate the plugin, <a href=\"%s\">go to your plugins page</a>."
-msgstr "Pokud si jen chcete deaktivovat plugin, <a href=\"%s\"> přejděte na stránku pluginy </a>."
+msgid ""
+"If you just want to deactivate the plugin, <a href=\"%s\">go to your plugins "
+"page</a>."
+msgstr ""
+"Pokud si jen chcete deaktivovat plugin, <a href=\"%s\"> přejděte na stránku "
+"pluginy </a>."
 
 # @ dbem
 #: admin/em-options.php:146
@@ -4470,8 +5072,12 @@ msgstr "Zakázat náhledy?"
 
 # @ dbem
 #: admin/em-options.php:290
-msgid "Select yes to disable Events Manager from enabling thumbnails (some themes may already have this enabled, which we cannot be turned off here)."
-msgstr "Zvolte Ano pro vypnutí Události Manager umožňuje miniatur (některá témata již může toto umožnilo, kterou nelze vypnout zde)."
+msgid ""
+"Select yes to disable Events Manager from enabling thumbnails (some themes "
+"may already have this enabled, which we cannot be turned off here)."
+msgstr ""
+"Zvolte Ano pro vypnutí miniatur v Events Manageru (některá témata to nemusí "
+"umožňovat, proto zde nemusí jít vypnout)."
 
 # @ dbem
 #: admin/em-options.php:293
@@ -4479,7 +5085,7 @@ msgstr "Zvolte Ano pro vypnutí Události Manager umožňuje miniatur (některá
 #: admin/em-options.php:346
 #, php-format
 msgid "%s Settings"
-msgstr "%s nastavení"
+msgstr "%s - nastavení"
 
 # @ dbem
 #: admin/em-options.php:297
@@ -4489,57 +5095,78 @@ msgstr "Povolení opakování?"
 # @ dbem
 #: admin/em-options.php:299
 msgid "Enable tags?"
-msgstr "Povolit značky?"
+msgstr "Povolit štítky?"
 
 # @ dbem
 #: admin/em-options.php:299
 msgid "Select yes to enable the tag features"
-msgstr "Zvolte Ano, aby značku funkcí"
+msgstr "Zvolte Ano, pro štítkování"
 
 # @ dbem
 #: admin/em-options.php:301
 msgid "Enable categories?"
-msgstr "Povolit kategorií?"
+msgstr "Povolit kategorie?"
 
 # @ dbem
 #: admin/em-options.php:310
-msgid "If an event does not have a category assigned when editing, this one will be assigned automatically."
-msgstr "Pokud se událost nemá kategorii přiřazen při úpravách bude tento bude přiřazen automaticky."
+msgid ""
+"If an event does not have a category assigned when editing, this one will be "
+"assigned automatically."
+msgstr ""
+"Pokud událost nemá kategorii přiřazenu při úpravách, bude jí tato přiřazena "
+"automaticky."
 
 # @ dbem
 #: admin/em-options.php:313
 msgid "Enable event attributes?"
-msgstr "Povolit akce atributy?"
+msgstr "Povolit atributy akce?"
 
 # @ dbem
 #: admin/em-options.php:314
 msgid "Enable event custom fields?"
-msgstr "Povolit pole událostí na zakázku?"
+msgstr "Povolit custom fields pro události?"
 
 # @ dbem
 #: admin/em-options.php:314
-msgid "Custom fields are the same as attributes, except you cannot restrict specific values, users can add any kind of custom field name/value pair. Only available in the WordPress admin area."
-msgstr "Vlastní pole jsou stejné jako atributy, kromě tebe nemůže omezit určité hodnoty, mohou uživatelé přidávat jakékoliv vlastního pole dvojici název / hodnota. K dispozici pouze v oblasti admin WordPress."
+msgid ""
+"Custom fields are the same as attributes, except you cannot restrict specific "
+"values, users can add any kind of custom field name/value pair. Only "
+"available in the WordPress admin area."
+msgstr ""
+"Vlastní pole jsou stejné jako atributy, kromě tebe nemůže omezit určité "
+"hodnoty, mohou uživatelé přidávat jakékoliv vlastního pole dvojici název / "
+"hodnota. K dispozici pouze v oblasti admin WordPress."
 
 # @ dbem
 #: admin/em-options.php:338
 msgid "Enable locations?"
-msgstr "Povolit míst?"
+msgstr "Povolit místa konání?"
 
 # @ dbem
 #: admin/em-options.php:338
-msgid "If you disable locations, bear in mind that you should remove your location page, shortcodes and related placeholders from your formats."
-msgstr "Pokud zakážete míst, mějte na paměti, že byste měli odstranit vaši polohu stránku, zkratková a související symboly z vašeho formátu."
+msgid ""
+"If you disable locations, bear in mind that you should remove your location "
+"page, shortcodes and related placeholders from your formats."
+msgstr ""
+"Pokud zakážete místa konání, mějte na paměti, že byste měli odstranit vaši "
+"stránku s místy konání, zkratky a související symboly z vašeho formátu."
 
 # @ dbem
 #: admin/em-options.php:340
 msgid "Require locations for events?"
-msgstr "Vyžaduje umístění událostí?"
+msgstr "Vyžadovat umístění pro jednotlivé událostí?"
 
 # @ dbem
 #: admin/em-options.php:340
-msgid "Setting this to no will allow you to submit events without locations. You can use the <code>{no_location}...{/no_location}</code> or <code>{has_location}..{/has_location}</code> conditional placeholder to selectively display location information."
-msgstr "Nastavení to ne vám umožní předkládat události bez umístění. Můžete použít <code>{no_location}...{/no_location}</code> nebo <code>{has_location}..{/has_location}</code> podmíněné zástupný selektivně zobrazit informace o poloze."
+msgid ""
+"Setting this to no will allow you to submit events without locations. You can "
+"use the <code>{no_location}...{/no_location}</code> or <code>"
+"{has_location}..{/has_location}</code> conditional placeholder to selectively "
+"display location information."
+msgstr ""
+"Nastavení tohoto na NE vám umožní vkládat události bez umístění. Můžete "
+"použít <code>{no_location}...{/no_location}</code> nebo <code>"
+"{has_location}..{/has_location}</code> jako podmíněné zobrazení místa konání."
 
 # @ dbem
 #: admin/em-options.php:346
@@ -4550,30 +5177,56 @@ msgstr "další"
 
 # @ dbem
 #: admin/em-options.php:387
-msgid "Many themes display extra meta information on post pages such as 'posted by' or 'post date' information, which may not be desired. Usually, page templates contain less clutter."
-msgstr "Mnoho témat zobrazit další meta informace na příspěvek Stránky jako je \"Vystavil\", nebo \"po dni\" informace, které nemusí být žádoucí. Obvykle šablon stránek obsahuje méně nepořádku."
+msgid ""
+"Many themes display extra meta information on post pages such as 'posted by' "
+"or 'post date' information, which may not be desired. Usually, page templates "
+"contain less clutter."
+msgstr ""
+"Many themes display extra meta information on post pages such as 'posted by' "
+"or 'post date' information, which may not be desired. Usually, page templates "
+"contain less clutter."
 
 # @ dbem
 #: admin/em-options.php:388
 #, php-format
-msgid "Be aware that some themes will not work with this option, if so (or you want to make your own changes), you can create a file named <code>single-%s.php</code> <a href='#'>as shown on the wordpress codex</a>, and leave this set to Posts."
-msgstr "Uvědomte si, že některá témata budou fungovat s touto volbou, pokud ano (nebo chcete-li vytvořit vlastní změny), můžete vytvořit soubor s názvem <code>single-%s.php</code> <a href = '#'> jak je uvedeno na WordPress Codex </a>, a nechat tuto sadu na příspěvky."
+msgid ""
+"Be aware that some themes will not work with this option, if so (or you want "
+"to make your own changes), you can create a file named <code>single-%s.php<"
+"/code> <a href='#'>as shown on the wordpress codex</a>, and leave this set to "
+"Posts."
+msgstr ""
+"Uvědomte si, že některá témata nebudou fungovat s touto volbou, pokud ano "
+"(nebo chcete-li vytvořit vlastní změny), můžete vytvořit soubor s názvem <"
+"code>single-%s.php</code> <a href = '#'> jak je uvedeno na WordPress Codex <"
+"/a>, a nechat tuto sadu na příspěvky."
 
 # @ default
 #: admin/em-options.php:389
 #, php-format
-msgid "By using formats, you can control how your %s are displayed from within the Events Manager <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'>Formats</a> tab above without having to edit your theme files."
-msgstr "Při použití formátu, můžete určit, jak jsou vaše %s zobrazené v rámci akce vedoucí <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'> Formáty </a> záložku výše, aniž by museli upravovat své téma soubory."
+msgid ""
+"By using formats, you can control how your %s are displayed from within the "
+"Events Manager <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'>"
+"Formats</a> tab above without having to edit your theme files."
+msgstr ""
+"Při použití formátu, můžete určit, jak jsou vaše %s zobrazené v rámci akce "
+"vedoucí <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'> "
+"Formáty </a> záložku výše, aniž by museli upravovat své téma soubory."
 
 # @ dbem
 #: admin/em-options.php:392
 msgid "Permalink Slugs"
-msgstr "Slimáci permalink"
+msgstr "Pevné odkazy"
 
 # @ dbem
 #: admin/em-options.php:394
-msgid "You can change the permalink structure of your events, locations, categories and tags here. Be aware that you may want to set up redirects if you change your permalink structures to maintain SEO rankings."
-msgstr "Můžete změnit strukturu permalink vašich akcí, umístění, kategorie a tagy. Uvědomte si, že budete chtít nastavit přesměrování, pokud změníte permalink struktury k udržení SEO žebříčku."
+msgid ""
+"You can change the permalink structure of your events, locations, categories "
+"and tags here. Be aware that you may want to set up redirects if you change "
+"your permalink structures to maintain SEO rankings."
+msgstr ""
+"Můžete změnit strukturu pevných odkazů vašich akcí, umístění, kategorií a "
+"tagů. Uvědomte si, že pokud budete chtít nastavené přesměrovat, může to vést "
+"ke ztrátě na SEO žebříčku."
 
 # @ dbem
 #: admin/em-options.php:397
@@ -4641,13 +5294,27 @@ msgstr "[ne %s strana]"
 
 # @ dbem
 #: admin/em-options.php:440
-msgid "This option allows you to select which page to use as an events page. If you do not select an events page, to display event lists you can enable event archives or use the appropriate shortcodes and/or template tags."
-msgstr "Tato volba umožňuje vybrat, které stránky používají jako události stránky. Pokud si nevyberete stránce Události k zobrazení seznamu událostí můžete povolit archiv akcí nebo použít příslušnou zkratková a / nebo šablony tagy."
+msgid ""
+"This option allows you to select which page to use as an events page. If you "
+"do not select an events page, to display event lists you can enable event "
+"archives or use the appropriate shortcodes and/or template tags."
+msgstr ""
+"Tato volba umožňuje vybrat, které stránky používají jako události stránky. "
+"Pokud si nevyberete stránce Události k zobrazení seznamu událostí můžete "
+"povolit archiv akcí nebo použít příslušnou zkratková a / nebo šablony tagy."
 
 # @ dbem
 #: admin/em-options.php:447
-msgid "Some WordPress themes don't follow best practices when generating navigation menus, and so the automatic title rewriting feature may cause problems, if your menus aren't working correctly on the event pages, try setting this to 'Yes', and provide an appropriate HTML title format below."
-msgstr "Některé WordPress Témata nemusí dodržovat doporučené postupy při generování menu navigace, a tak automatické přepsání názvu funkce může způsobit problémy, pokud vaše nabídky nepracují správně na stránkách akce, zkuste toto nastavení změnit \"Ano\", a poskytnout vhodnou titul ve formátu HTML níže."
+msgid ""
+"Some WordPress themes don't follow best practices when generating navigation "
+"menus, and so the automatic title rewriting feature may cause problems, if "
+"your menus aren't working correctly on the event pages, try setting this to "
+"'Yes', and provide an appropriate HTML title format below."
+msgstr ""
+"Některé WordPress Témata nemusí dodržovat doporučené postupy při generování "
+"menu navigace, a tak automatické přepsání názvu funkce může způsobit "
+"problémy, pokud vaše nabídky nepracují správně na stránkách akce, zkuste toto "
+"nastavení změnit \"Ano\", a poskytnout vhodnou titul ve formátu HTML níže."
 
 # @ dbem
 #: admin/em-options.php:454
@@ -4709,7 +5376,8 @@ msgstr "standardní %s seznam možností"
 #: admin/em-options.php:655
 #: admin/em-options.php:745
 msgid "These can be overriden when using shortcode or template tags."
-msgstr "Ty mohou být překryté při použití krátký kód nebo šablony tagy."
+msgstr ""
+"Tyto nastavení mohou být překryta při použití shortcode nebo template tags."
 
 # @ dbem
 #: admin/em-options.php:595
@@ -4725,22 +5393,32 @@ msgstr "%s strana"
 # @ dbem
 #: admin/em-options.php:595
 #, php-format
-msgid "This option allows you to select which page to use as the %s page. If you do not select no %s page, to display lists you can enable archives or use the appropriate shortcodes and/or template tags."
-msgstr "Tato volba umožňuje vybrat, které stránky k použití jako %s strana. Pokud si nevyberete žádnou %s strana, pro zobrazení seznamu můžete povolit archivy nebo použít příslušnou zkratková a / nebo šablony tagy."
+msgid ""
+"This option allows you to select which page to use as the %s page. If you do "
+"not select no %s page, to display lists you can enable archives or use the "
+"appropriate shortcodes and/or template tags."
+msgstr ""
+"Tato volba umožňuje vybrat, které stránky k použití jako %s strana. Pokud si "
+"nevyberete žádnou %s strana, pro zobrazení seznamu můžete povolit archivy "
+"nebo použít příslušnou zkratková a / nebo šablony tagy."
 
 # @ dbem
 #: admin/em-options.php:599
 #: admin/em-options.php:712
 #, php-format
 msgid "Show %s page in lists?"
-msgstr "Show %s stránky v seznamech?"
+msgstr "Ukázat %s stránky v seznamech?"
 
 # @ dbem
 #: admin/em-options.php:599
 #: admin/em-options.php:712
 #, php-format
-msgid "Check this option if you want the %s page to appear together with other pages in pages lists."
-msgstr "Zaškrtněte tuto volbu, pokud chcete %s strana se objeví spolu s ostatními stránkami na stránkách seznamu."
+msgid ""
+"Check this option if you want the %s page to appear together with other pages "
+"in pages lists."
+msgstr ""
+"Zaškrtněte tuto volbu, pokud chcete %s strana se objeví spolu s ostatními "
+"stránkami na stránkách seznamu."
 
 # @ dbem
 #: admin/em-options.php:609
@@ -4773,14 +5451,16 @@ msgstr "Výchozí seznam objednávání"
 #: admin/em-options.php:693
 #: admin/em-options.php:783
 msgid "List Limits"
-msgstr "seznam limity"
+msgstr "limity seznamu"
 
 # @ dbem
 #: admin/em-options.php:693
 #: admin/em-options.php:783
 #, php-format
 msgid "This will control how many %s are shown on one list by default."
-msgstr "To bude určovat, kolik %s jsou uvedeny na jednom seznamu ve výchozím nastavení."
+msgstr ""
+"To bude určovat, kolik %s jsou uvedeny na jednom seznamu ve výchozím "
+"nastavení."
 
 # @ dbem
 #: admin/em-options.php:708
@@ -4790,7 +5470,9 @@ msgstr "Tato volba umožňuje vybrat, které stránky k použití jako %s strán
 
 # @ default
 #: admin/em-options.php:721
-msgid "Setting this to yes will make categories display as a page rather than an archive."
+msgid ""
+"Setting this to yes will make categories display as a page rather than an "
+"archive."
 msgstr "Nastavení to ano, bude kategorie Zobrazit jako stránku a ne archiv."
 
 # @ dbem
@@ -4800,8 +5482,14 @@ msgstr "tagy"
 
 # @ default
 #: admin/em-options.php:827
-msgid "These pages allow you to provide an event management interface outside the admin area on whatever page you want on your website. Bear in mind that this is overriden by BuddyPress if activated."
-msgstr "Tyto stránky umožňují poskytovat rozhraní pro správu událostí mimo území admin na cokoliv stránku, kterou chcete na svých webových stránkách. Mějte na paměti, že je to tím, překryté BuddyPress pokud je aktivní."
+msgid ""
+"These pages allow you to provide an event management interface outside the "
+"admin area on whatever page you want on your website. Bear in mind that this "
+"is overriden by BuddyPress if activated."
+msgstr ""
+"Tyto stránky umožňují poskytovat rozhraní pro správu událostí mimo území "
+"admin na cokoliv stránku, kterou chcete na svých webových stránkách. Mějte na "
+"paměti, že je to tím, překryté BuddyPress pokud je aktivní."
 
 # @ dbem
 #: admin/em-options.php:831
@@ -4833,7 +5521,8 @@ msgstr "moje rezervace"
 # @ dbem
 #: admin/em-options.php:835
 msgid "Users can view their bookings for other events on this page."
-msgstr "Uživatelé si mohou prohlížet své rezervace na jiné události, na této stránce."
+msgstr ""
+"Uživatelé si mohou prohlížet své rezervace na jiné události, na této stránce."
 
 # @ dbem
 #: admin/em-options.php:869
@@ -4848,7 +5537,7 @@ msgstr "Zobrazit textové vyhledávání?"
 # @ dbem
 #: admin/em-options.php:874
 msgid "Text search label"
-msgstr "Textové vyhledávání štítek"
+msgstr "Textové vyhledávání - popisek tlačítka"
 
 # @ dbem
 #: admin/em-options.php:874
@@ -4868,7 +5557,7 @@ msgstr "Zobrazit kategorií?"
 # @ dbem
 #: admin/em-options.php:877
 msgid "Categories label"
-msgstr "kategorie štítek"
+msgstr "kategorie - popisek"
 
 # @ dbem
 #: admin/em-options.php:877
@@ -4927,8 +5616,12 @@ msgstr "Datum / čas formáty"
 # @ dbem
 #: admin/em-options.php:895
 #, php-format
-msgid "Date and Time formats follow the <a href=\"%s\">WordPress time formatting conventions</a>"
-msgstr "Formáty data a času postupujte podle <a href=\"%s\">WordPress konvence času formátování</a>"
+msgid ""
+"Date and Time formats follow the <a href=\"%s\">WordPress time formatting "
+"conventions</a>"
+msgstr ""
+"Formáty data a času postupujte podle <a href=\"%s\">WordPress konvence času "
+"formátování</a>"
 
 # @ dbem
 #: admin/em-options.php:898
@@ -4951,8 +5644,13 @@ msgstr "Datum oddělovač"
 #: admin/em-options.php:899
 #: admin/em-options.php:901
 #, php-format
-msgid "For when start/end %s are present, this will seperate the two (include spaces here if necessary)."
-msgstr "V případě, kdy začátek / konec %s jsou přítomny, bude to oddělit dvě (včetně mezer zde v případě potřeby)."
+msgid ""
+"For when start/end %s are present, this will seperate the two (include spaces "
+"here if necessary)."
+msgstr ""
+"V případě, kdy začátek / konec %s jsou přítomny, budou odděleny zadaným "
+"symbolem (včetně "
+"mezer zde v případě potřeby)."
 
 # @ dbem
 #: admin/em-options.php:899
@@ -4981,8 +5679,12 @@ msgstr "Úplný kalendář akcí / denní limit"
 
 # @ dbem
 #: admin/em-options.php:918
-msgid "To reduce the clutter on your calendar, you can add a limit to events displayed in one day on the calendar."
-msgstr "Chcete-li snížit nepořádek v kalendáři můžete přidat omezení událostí zobrazených v jeden den v kalendáři."
+msgid ""
+"To reduce the clutter on your calendar, you can add a limit to events "
+"displayed in one day on the calendar."
+msgstr ""
+"Chcete-li snížit nepořádek v kalendáři můžete přidat omezení událostí "
+"zobrazených v jeden den v kalendáři."
 
 # @ dbem
 #: admin/em-options.php:989
@@ -5012,13 +5714,24 @@ msgstr "Formát jedné značky stránku."
 
 # @ dbem
 #: admin/em-options.php:999
-msgid "The format of the events the list inserted in the tag page through the <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> and <code>#_TAGALLEVENTS</code> element."
-msgstr "Formát událostí seznam vložen do stránky pomocí tagu <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> a <code>#_TAGALLEVENTS</code> prvek."
+msgid ""
+"The format of the events the list inserted in the tag page through the <code>"
+"#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> and <code>"
+"#_TAGALLEVENTS</code> element."
+msgstr ""
+"Formát událostí seznam vložen do stránky pomocí tagu <code>#_TAGNEXTEVENTS<"
+"/code>, <code>#_TAGNEXTEVENTS</code> a <code>#_TAGALLEVENTS</code> prvek."
 
 # @ dbem
 #: admin/em-options.php:1000
-msgid "The message to be displayed in the list generated by <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> and <code>#_TAGALLEVENTS</code> when no events are available."
-msgstr "Zprávy se zobrazí v seznamu, vytvořené <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> a <code>#_TAGALLEVENTS</code> Při Žádné akce k dispozici."
+msgid ""
+"The message to be displayed in the list generated by <code>#_TAGNEXTEVENTS<"
+"/code>, <code>#_TAGNEXTEVENTS</code> and <code>#_TAGALLEVENTS</code> when no "
+"events are available."
+msgstr ""
+"Zprávy se zobrazí v seznamu, vytvořené <code>#_TAGNEXTEVENTS</code>, <code>"
+"#_TAGNEXTEVENTS</code> a <code>#_TAGALLEVENTS</code> Při Žádné akce k "
+"dispozici."
 
 # @ dbem
 #: admin/em-options.php:1067
@@ -5037,18 +5750,37 @@ msgstr "jízdenka"
 
 # @ dbem
 #: admin/em-options.php:1135
-msgid "The option below allows you to disable user accounts and assign all bookings to a parent user, yet you will still see the supplied booking personal information for each booking. When this mode is enabled, extra booking information about the person is stored alongside the booking record rather than as a WordPress user."
-msgstr "Z níže uvedených možností můžete vypnout uživatelské účty a přidělit veškeré rezervace na mateřské uživatele, ale stále budete vidět dodaných rezervace osobní údaje pro každou rezervaci. Je-li tato režim, zvláštní rezervace informace o osobě uložena vedle hotelu záznam, nikoli jako uživatel WordPress."
+msgid ""
+"The option below allows you to disable user accounts and assign all bookings "
+"to a parent user, yet you will still see the supplied booking personal "
+"information for each booking. When this mode is enabled, extra booking "
+"information about the person is stored alongside the booking record rather "
+"than as a WordPress user."
+msgstr ""
+"Z níže uvedených možností můžete vypnout uživatelské účty a přidělit veškeré "
+"rezervace na mateřské uživatele, ale stále budete vidět dodaných rezervace "
+"osobní údaje pro každou rezervaci. Je-li tato režim, zvláštní rezervace "
+"informace o osobě uložena vedle hotelu záznam, nikoli jako uživatel WordPress."
 
 # @ dbem
 #: admin/em-options.php:1145
-msgid "Choose a parent user to assign bookings to. People making their booking will be unaware of this and will never have access to those user details. This should be a subscriber user you do not use to log in with yourself."
-msgstr "Vyberte si rodiče uživatel přiřadit rezervací. Lidé, aby jejich rezervace budou vědomi toho a nikdy nebude mít přístup k uživatelským detaily. To by měl být účastník uživatele nechcete použít pro přihlášení sám se sebou."
+msgid ""
+"Choose a parent user to assign bookings to. People making their booking will "
+"be unaware of this and will never have access to those user details. This "
+"should be a subscriber user you do not use to log in with yourself."
+msgstr ""
+"Vyberte si rodiče uživatel přiřadit rezervací. Lidé, aby jejich rezervace "
+"budou vědomi toho a nikdy nebude mít přístup k uživatelským detaily. To by "
+"měl být účastník uživatele nechcete použít pro přihlášení sám se sebou."
 
 # @ dbem
 #: admin/em-options.php:1169
-msgid "Check this option if you want to prevent the WordPress registration email from going out when a user anonymously books an event."
-msgstr "Zaškrtněte tuto volbu, pokud chcete, aby se zabránilo registraci WordPress e-mail od jít ven, když uživatel anonymně knihy událost."
+msgid ""
+"Check this option if you want to prevent the WordPress registration email "
+"from going out when a user anonymously books an event."
+msgstr ""
+"Zaškrtněte tuto volbu, pokud chcete, aby se zabránilo registraci WordPress "
+"e-mail od jít ven, když uživatel anonymně knihy událost."
 
 # @ dbem
 #: admin/em-options.php:1217
@@ -5057,29 +5789,41 @@ msgstr "akce Odesláno"
 
 # @ dbem
 #: admin/em-options.php:1218
-msgid "An email will be sent to the an administrator of your choice when an event is submitted and pending approval."
-msgstr "E-mail bude odeslán na správce vašeho výběru, kdy je událost předložen a čeká na schválení."
+msgid ""
+"An email will be sent to the an administrator of your choice when an event is "
+"submitted and pending approval."
+msgstr ""
+"E-mail bude odeslán na správce vašeho výběru, kdy je událost předložen a čeká "
+"na schválení."
 
 # @ dbem
 #: admin/em-options.php:1220
 msgid "Administrator Email"
-msgstr "správce e-mail"
+msgstr "e-mail administrátora"
 
 # @ dbem
 #: admin/em-options.php:1220
-msgid "If left blank, no email will be sent. Seperate emails with commas for more than one email."
-msgstr "Pokud je prázdné, žádný e-mail odeslán. E-maily oddělené čárkami pro více než jeden e-mail."
+msgid ""
+"If left blank, no email will be sent. Seperate emails with commas for more "
+"than one email."
+msgstr ""
+"Pokud je prázdné, žádný e-mail odeslán. E-maily oddělené čárkami pro více než "
+"jeden e-mail."
 
 # @ dbem
 #: admin/em-options.php:1272
 msgid "Event Submission Forms"
-msgstr "Formuláře případě podání"
+msgstr "Formuláře přidání události"
 
 # @ dbem
 #: admin/em-options.php:1276
 #, php-format
-msgid "You can allow users to publicly submit events on your blog by using the %s shortcode, and enabling anonymous submissions below."
-msgstr "Můžete uživatelům umožnit veřejnosti předkládat události do svého blogu pomocí %s krátký kód, a umožňuje anonymní příspěvky níže."
+msgid ""
+"You can allow users to publicly submit events on your blog by using the %s "
+"shortcode, and enabling anonymous submissions below."
+msgstr ""
+"Můžete uživatelům umožnit veřejnosti předkládat události do svého blogu "
+"pomocí %s krátký kód, a umožňuje anonymní příspěvky níže."
 
 # @ dbem
 #: admin/em-options.php:1279
@@ -5088,8 +5832,12 @@ msgstr "Použití Visual Editor?"
 
 # @ dbem
 #: admin/em-options.php:1279
-msgid "Users can now use the WordPress editor for easy HTML entry in the submission form."
-msgstr "Uživatelé nyní mohou pomocí editoru HTML WordPress pro snadný vstup do formuláře pro podání."
+msgid ""
+"Users can now use the WordPress editor for easy HTML entry in the submission "
+"form."
+msgstr ""
+"Uživatelé nyní mohou pomocí editoru HTML WordPress pro snadný vstup do "
+"formuláře pro podání."
 
 # @ dbem
 #: admin/em-options.php:1280
@@ -5098,8 +5846,10 @@ msgstr "Zobrazit formulář znovu?"
 
 # @ dbem
 #: admin/em-options.php:1280
-msgid "When a user submits their event, you can display a new event form again."
-msgstr "Když uživatel odešle svou akci, můžete zobrazit novou událost formulář znovu."
+msgid ""
+"When a user submits their event, you can display a new event form again."
+msgstr ""
+"Když uživatel odešle svou akci, můžete zobrazit novou událost formulář znovu."
 
 # @ dbem
 #: admin/em-options.php:1281
@@ -5109,12 +5859,20 @@ msgstr "Vlastní zprávu si uživatel uvidí, když předložily své akce."
 # @ dbem
 #: admin/em-options.php:1284
 msgid "Anonymous event submissions"
-msgstr "Anonymní případě podání"
+msgstr "Anonymní formulář přidání"
 
 # @ dbem
 #: admin/em-options.php:1288
-msgid "Events require a user to own them. In order to allow events to be submitted anonymously you need to assign that event a specific user. We recommend you create a \"Anonymous\" subscriber with a very good password and use that. Guests will have the same event permissions as this user when submitting."
-msgstr "Události vyžadují, aby uživatel vlastní. S cílem umožnit událostí má být předložen anonymně musíte přiřadit tuto událost konkrétního uživatele. Doporučujeme vytvořit \"anonymní \" účastník s velmi dobrou heslo a použít. Hosté budou mít stejnou událost oprávnění jako tento uživatel při podání."
+msgid ""
+"Events require a user to own them. In order to allow events to be submitted "
+"anonymously you need to assign that event a specific user. We recommend you "
+"create a \"Anonymous\" subscriber with a very good password and use that. "
+"Guests will have the same event permissions as this user when submitting."
+msgstr ""
+"Události vyžadují, aby uživatel vlastní. S cílem umožnit událostí má být "
+"předložen anonymně musíte přiřadit tuto událost konkrétního uživatele. "
+"Doporučujeme vytvořit \"anonymní \" účastník s velmi dobrou heslo a použít. "
+"Hosté budou mít stejnou událost oprávnění jako tento uživatel při podání."
 
 # @ dbem
 #: admin/em-options.php:1305
@@ -5128,8 +5886,11 @@ msgstr "Poslat HTML e-maily?"
 
 # @ dbem
 #: admin/em-options.php:1331
-msgid "If set to yes, your emails will be sent in HTML format, otherwise plaintext."
-msgstr "Pokud je nastavena na hodnotu Ano, bude vaše e-maily budou zaslány ve formátu HTML, jinak textu."
+msgid ""
+"If set to yes, your emails will be sent in HTML format, otherwise plaintext."
+msgstr ""
+"Pokud je nastavena na hodnotu Ano, bude vaše e-maily budou zaslány ve formátu "
+"HTML, jinak textu."
 
 # @ dbem
 #: admin/em-options.php:1364
@@ -5236,8 +5997,12 @@ msgstr "Odinstalovat / Reset"
 
 # @ dbem
 #: admin/em-options.php:1462
-msgid "Use the buttons below to uninstall Events Manager completely from your system or reset Events Manager to original settings and keep your event data."
-msgstr "Pomocí tlačítek pod odinstalovat Události manažer zcela ze systému nebo resetovat události vedoucí k původnímu nastavení a vaše data události."
+msgid ""
+"Use the buttons below to uninstall Events Manager completely from your system "
+"or reset Events Manager to original settings and keep your event data."
+msgstr ""
+"Pomocí tlačítek pod odinstalovat Události manažer zcela ze systému nebo "
+"resetovat události vedoucí k původnímu nastavení a vaše data události."
 
 # @ dbem
 #: admin/em-options.php:1464
@@ -5265,7 +6030,9 @@ msgstr "naplánovat akce"
 # @ dbem
 #: classes/em-categories-taxonomy.php:35
 #, php-format
-msgid "Choose a color for your category. You can access this using the %s placeholder."
+msgid ""
+"Choose a color for your category. You can access this using the %s "
+"placeholder."
 msgstr "Vyberte si barvu své kategorii. Můžete se pomocí %s zástupný symbol."
 
 # @ dbem
@@ -5276,32 +6043,53 @@ msgstr "Vyberte si / Nahrát obrázek"
 # @ dbem
 #: classes/em-categories-taxonomy.php:47
 #, php-format
-msgid "Choose an image for your category, which can be displayed using the %s placeholder."
-msgstr "Vyberte si image pro své kategorii, které lze zobrazit pomocí %s zástupný symbol."
+msgid ""
+"Choose an image for your category, which can be displayed using the %s "
+"placeholder."
+msgstr ""
+"Vyberte si image pro své kategorii, které lze zobrazit pomocí %s zástupný "
+"symbol."
 
 # @ dbem
 #: classes/em-event-post-admin.php:42
 #, php-format
-msgid "If you update this event data and save, it could get overwritten if you edit the recurring event template. To make it an independent, <a href=\"%s\">detach it</a>."
-msgstr "Máte-li aktualizovat údaje této události a uložit, mohlo by to přepsány Pokud upravíte opakované události šablony. Aby to bylo nezávislé, <a href=\"%s\"> sejmout </a>."
+msgid ""
+"If you update this event data and save, it could get overwritten if you edit "
+"the recurring event template. To make it an independent, <a href=\"%s\">"
+"detach it</a>."
+msgstr ""
+"Máte-li aktualizovat údaje této události a uložit, mohlo by to přepsány Pokud "
+"upravíte opakované události šablony. Aby to bylo nezávislé, <a href=\"%s\"> "
+"sejmout </a>."
 
 # @ dbem
 #: classes/em-event-post-admin.php:43
 #, php-format
-msgid "To manage the whole set, <a href=\"%s\">edit the recurring event template</a>."
-msgstr "Chcete-li spravovat celou sadu, <a href=\"%s\"> upravit opakované události šablony </a>."
+msgid ""
+"To manage the whole set, <a href=\"%s\">edit the recurring event template</a>."
+msgstr ""
+"Chcete-li spravovat celou sadu, <a href=\"%s\"> upravit opakované události "
+"šablony </a>."
 
 # @ dbem
 #: classes/em-event-post-admin.php:83
-msgid "Your event details are incorrect and recurrences cannot be created, please correct these errors first:"
-msgstr "Vaši akci údaje jsou nesprávné a recidiv nemůže být vytvořen, prosím, opravit tyto chyby jako první:"
+msgid ""
+"Your event details are incorrect and recurrences cannot be created, please "
+"correct these errors first:"
+msgstr ""
+"Vaši akci údaje jsou nesprávné a recidiv nemůže být vytvořen, prosím, opravit "
+"tyto chyby jako první:"
 
 # @ dbem
 #: classes/em-event-post-admin.php:85
 #: classes/em-location-post-admin.php:59
 #, php-format
-msgid "Your %s details are incorrect and cannot be published, please correct these errors first:"
-msgstr "Váš %s údaje jsou nesprávné a nemohou být zveřejněny, prosím, opravit tyto chyby jako první:"
+msgid ""
+"Your %s details are incorrect and cannot be published, please correct these "
+"errors first:"
+msgstr ""
+"Váš %s údaje jsou nesprávné a nemohou být zveřejněny, prosím, opravit tyto "
+"chyby jako první:"
 
 # @ dbem
 #: classes/em-event-post-admin.php:195
@@ -5368,8 +6156,16 @@ msgstr "duplikát"
 # @ dbem
 #: classes/em-event-posts-admin.php:187
 #, php-format
-msgid "Modifications to these events will cause all recurrences of each event to be deleted and recreated and previous bookings will be deleted! You can edit individual recurrences and detach them from recurring events by visiting the <a href=\"%s\">events page</a>."
-msgstr "Modifikace těchto událostí způsobí, že všechny recidivy každé události mají být odstraněny a znovu a předchozí rezervace budou vymazány! Můžete upravovat jednotlivé recidivy a oddělit je od opakujících se událostí při návštěvě <a href=\"%s\">události stránky</a>."
+msgid ""
+"Modifications to these events will cause all recurrences of each event to be "
+"deleted and recreated and previous bookings will be deleted! You can edit "
+"individual recurrences and detach them from recurring events by visiting the "
+"<a href=\"%s\">events page</a>."
+msgstr ""
+"Modifikace těchto událostí způsobí, že všechny recidivy každé události mají "
+"být odstraněny a znovu a předchozí rezervace budou vymazány! Můžete upravovat "
+"jednotlivé recidivy a oddělit je od opakujících se událostí při návštěvě <a "
+"href=\"%s\">události stránky</a>."
 
 # @ default
 #: classes/em-event.php:428
@@ -5378,8 +6174,12 @@ msgstr "název akce"
 
 # @ dbem
 #: classes/em-event.php:464
-msgid "Since the event is repeated, you must specify an event end date greater than the start date."
-msgstr "Protože událost se opakuje, je nutné zadat datum ukončení akce větší než počáteční datum."
+msgid ""
+"Since the event is repeated, you must specify an event end date greater than "
+"the start date."
+msgstr ""
+"Protože událost se opakuje, je nutné zadat datum ukončení akce větší než "
+"počáteční datum."
 
 # @ dbem
 # @ default
@@ -5391,15 +6191,23 @@ msgstr "Tam byly některé chyby, uložení polohy."
 # @ default
 #: classes/em-event.php:546
 #, php-format
-msgid "It will not be displayed on the website listings, to correct this you must <a href=\"%s\">edit your location</a> directly."
-msgstr "Nebude se zobrazí na webových stránkách seznamy, opravit to musíte <a href=\"%s\"> upravovat své místo </a> přímo."
+msgid ""
+"It will not be displayed on the website listings, to correct this you must <a "
+"href=\"%s\">edit your location</a> directly."
+msgstr ""
+"Nebude se zobrazí na webových stránkách seznamy, opravit to musíte <a href=\"%"
+"s\"> upravovat své místo </a> přímo."
 
 # @ dbem
 #: classes/em-event.php:582
 #: classes/em-location.php:332
 #, php-format
-msgid "Something went wrong saving your %s to the index table. Please inform a site administrator about this."
-msgstr "Nepodařilo se uložit vaše %s na index tabulky. Informujte prosím správce webu o tom."
+msgid ""
+"Something went wrong saving your %s to the index table. Please inform a site "
+"administrator about this."
+msgstr ""
+"Nepodařilo se uložit vaše %s na index tabulky. Informujte prosím správce webu "
+"o tom."
 
 # @ dbem
 #: classes/em-event.php:587
@@ -5414,8 +6222,12 @@ msgstr "úspěšně uloženo %s"
 #: classes/em-event.php:594
 #: classes/em-location.php:342
 #, php-format
-msgid "Something went wrong updating your %s to the index table. Please inform a site administrator about this."
-msgstr "Něco je špatně aktualizaci vašeho %s na index tabulky. Informujte prosím správce webu o tom."
+msgid ""
+"Something went wrong updating your %s to the index table. Please inform a "
+"site administrator about this."
+msgstr ""
+"Něco je špatně aktualizaci vašeho %s na index tabulky. Informujte prosím "
+"správce webu o tom."
 
 # @ dbem
 #: classes/em-event.php:1159
@@ -5458,8 +6270,14 @@ msgstr "název místa"
 
 # @ dbem
 #: em-install.php:291
-msgid "A new event has been submitted by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL to review this event for approval."
-msgstr "Nové události byly předloženy #_CONTACTNAME.<br/>jméno: #_EVENTNAME <br/>datum: #_EVENTDATES <br/>čas: #_EVENTTIMES <br/>navštivte prosím #_EDITEVENTURL přezkoumání této události ke schválení."
+msgid ""
+"A new event has been submitted by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>"
+"Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL "
+"to review this event for approval."
+msgstr ""
+"Nové události byly předloženy #_CONTACTNAME.<br/>jméno: #_EVENTNAME <br/>"
+"datum: #_EVENTDATES <br/>čas: #_EVENTTIMES <br/>navštivte prosím "
+"#_EDITEVENTURL přezkoumání této události ke schválení."
 
 # @ dbem
 #: em-install.php:321
@@ -5469,8 +6287,11 @@ msgstr "Všechna města / města"
 # @ dbem
 #: em-install.php:325
 #: em-install.php:328
-msgid "You have successfully submitted your event, which will be published pending approval."
-msgstr "Úspěšně jste zadali svou akci, která bude zveřejněna čeká na schválení."
+msgid ""
+"You have successfully submitted your event, which will be published pending "
+"approval."
+msgstr ""
+"Úspěšně jste zadali svou akci, která bude zveřejněna čeká na schválení."
 
 # @ dbem
 #: em-install.php:331
@@ -5775,8 +6596,12 @@ msgstr "Musíte se přihlásit pro zobrazení a správu rezervace."
 
 # @ dbem
 #: events-manager.php:257
-msgid "Are you sure you want to detach this event? By doing so, this event will be independent of the recurring set of events."
-msgstr "Jste si jisti, že chcete uvolnit tuto událost? Tím se tato událost je nezávislá na opakující soubor událostí."
+msgid ""
+"Are you sure you want to detach this event? By doing so, this event will be "
+"independent of the recurring set of events."
+msgstr ""
+"Jste si jisti, že chcete uvolnit tuto událost? Tím se tato událost je "
+"nezávislá na opakující soubor událostí."
 
 # @ dbem
 #: events-manager.php:258
@@ -5813,8 +6638,16 @@ msgstr "Nemáte oprávnění vkládat obrázky"
 
 # @ default
 #: templates/forms/event/attributes.php:51
-msgid "If you see any attributes under here, that means they're not used in Events Manager formats. To add them, you need to add the custom attribute again to a formatting option in the settings page. To remove any of these depreciated attributes, give it a blank value and save."
-msgstr "If you see any attributes under here, that means they're not used in Events Manager formats. To add them, you need to add the custom attribute again to a formatting option in the settings page. To remove any of these depreciated attributes, give it a blank value and save."
+msgid ""
+"If you see any attributes under here, that means they're not used in Events "
+"Manager formats. To add them, you need to add the custom attribute again to a "
+"formatting option in the settings page. To remove any of these depreciated "
+"attributes, give it a blank value and save."
+msgstr ""
+"If you see any attributes under here, that means they're not used in Events "
+"Manager formats. To add them, you need to add the custom attribute again to a "
+"formatting option in the settings page. To remove any of these depreciated "
+"attributes, give it a blank value and save."
 
 # @ dbem
 #: templates/forms/event/group.php:26
@@ -5887,20 +6720,21 @@ msgstr "akce obrázku"
 # @ dbem
 #: templates/forms/location-editor.php:47
 msgid "Details about the location."
-msgstr "Podrobnosti o umístění."
+msgstr "Podrobnosti o místě konání."
 
 # @ dbem
 #: templates/forms/location-editor.php:52
 msgid "Location Image"
-msgstr "umístění obrázku"
+msgstr "Obrázek umístění"
 
 # @ dbem
 #: templates/tables/locations.php:74
 msgid "No locations have been inserted yet!"
-msgstr "Žádné pobočky byly vloženy ještě!"
+msgstr "Nebyly vloženy žádná místa konání!"
 
 # @ dbem
 #: widgets/em-locations.php:21
 msgid "Event start date/time, location name"
-msgstr "Akce datum / čas, místo jména"
+msgstr "Akce datum / čas, místo konání"
+
 
