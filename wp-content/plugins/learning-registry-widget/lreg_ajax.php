@@ -60,12 +60,48 @@ function lreg_get() {
                         }
                 }
         }
-
+//print_r( $paradata );
         $markup = '';
         if ( !empty( $paradata ) ) {
                 $markup .= '<ul>';
                 foreach( $paradata as $pd ) {
-                        $markup .= '<li>' . $pd->activity->content . '</li>';
+
+			// Sometimes things are embedded in Activity
+			if ( isset( $pd->activity ) ) {
+				$item = $pd->activity;
+			} else {
+				$item = $pd;
+			}
+
+			// Isolate content, then cut it at the verb
+			if ( ! empty( $item->content ) ) {
+				$content = $item->content;
+			} else {
+				continue;
+			}
+
+			if ( ! empty( $item->verb->action ) ) {
+				$content = ucwords( $item->verb->action ) . ' ' . array_pop( explode( $item->verb->action, $content ) );
+			} else {
+				continue;
+			}
+
+			// Make sure we don't include items that have been done 0 times
+			if ( isset( $item->verb->measure ) && 'count' == $item->verb->measure->measureType && empty( $item->verb->measure->value ) ) {
+				continue;
+			}
+
+			// Metadata
+			$metadata = '<div class="paradata-meta">';
+
+			// Date - take start dates
+			$date = strtotime( array_pop( array_reverse( explode( '/', $item->verb->date ) ) ) );
+			if ( $date )
+				$metadata .= '<span class="paradata-date">' . date( 'F j, Y', $date ) . '</span>';
+			$metadata .= '</div>';
+			$image = '';
+
+                        $markup .= '<li>' . $content . $metadata . '</li>';
                 }
                 $markup .= '</ul>';
         }
