@@ -3,6 +3,8 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Run BuddyPress upgrade wizard (BP 1.6)
+
 Optimize database
 Activate Google Analytics
 Active Super Cache and test
