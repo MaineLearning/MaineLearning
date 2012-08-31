@@ -1,57 +1,60 @@
-div#icon-buddypress {
-	background: url( ../images/icons32.png ) no-repeat -4px 0px;
-}
 
-div#bp-admin {
+/* General Admin Styling
+------------------------------------------------------------------------------*/
+
+div#bp-wizard {
 	color: #555;
 	min-width: 680px;
-	}
-	div#bp-admin p { line-height: 170%; }
+}
+div#bp-wizard p {
+	line-height: 170%;
+}
 
-form#bp-admin-form {
+form#bp-wizard-form {
 	margin: 0 10px;
 }
 
-div#bp-admin-nav {
+div#bp-wizard-nav {
 	background: #e0e0e0;
 	margin: 15px -10px 10px;
 	padding: 10px 10px 0 10px;
 	height: 30px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
-div#bp-admin-nav div.submit {
+div#bp-wizard-nav div.submit {
 	position: relative;
 	float: right;
 	margin-top: -36px !important;
 }
-div#bp-admin-nav div.submit input {
+div#bp-wizard-nav div.submit input {
 	padding: 6px 10px;
 }
-	div#bp-admin-nav ol {
+	div#bp-wizard-nav ol {
 		list-style-type: decimal;
 		margin: 0;
 		padding: 0;
 	}
-		div#bp-admin-nav ol li {
+		div#bp-wizard-nav ol li {
 			float: left;
 			margin: 0 10px 0 0;
 			color: #666;
 		}
-			div#bp-admin-nav ol li {
+			div#bp-wizard-nav ol li {
 				padding: 8px 12px;
 				display: block;
-				-moz-border-radius: 3px;
-				-webkit-border-radius: 3px;
-				border-radius: 3px;
+				-moz-border-radius: 2px;
+				-webkit-border-radius: 2px;
+				border-radius: 2px;
 				text-decoration: none;
 			}
-				div#bp-admin-nav ol li.current {
-					background: #f9f9f9;
+				div#bp-wizard-nav ol li.current {
+					background: #fff;
 					color: #555;
 				}
-	div#bp-admin-nav ol li span.complete {
+
+	div#bp-wizard-nav ol li span.complete {
 		background: url( ../images/completed.gif ) center left no-repeat;
 		padding: 6px;
 	}
@@ -65,9 +68,9 @@ div.component {
 		position: relative;
 		background: #e0e0e0;
 		padding: 5px 10px;
-		-moz-border-radius: 6px;
-		-webkit-border-radius: 6px;
-		border-radius: 6px;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
 		top: -6px;
 	}
 
@@ -92,53 +95,68 @@ div.component {
 		top: 5px;
 	}
 
-div#bp-admin div.prev-next, div#bp-admin div.prev-next p,
-div#bp-admin div.submit, div#bp-admin div.submit p {
+div#bp-wizard div.prev-next, div#bp-wizard div.prev-next p,
+div#bp-wizard div.submit, div#bp-wizard div.submit p {
 	margin: 0;
 	padding: 0;
 }
-div#bp-admin div.submit { margin-top: 30px; }
-div#bp-admin div.prev-next { text-align: right; margin-top: 0; }
+div#bp-wizard div.submit {
+	margin-top: 30px;
+}
+div#bp-wizard div.prev-next {
+	text-align: right;
+	margin-top: 0;
+}
 
-div#bp-admin div.prev-next {
+div#bp-wizard div.prev-next {
 	margin: 0 -20px;
 	padding: 0 20px 10px;
 }
 
-div#bp-admin table td {
+div#bp-wizard table td {
 	font-family: helvetica, arial, tahoma, sans-serif;
 	vertical-align: top;
 }
 
-div#bp-admin table.form-table th {
+div#bp-wizard table.form-table th {
 	border-right: 1px solid #eee;
 	padding: 15px 25px 15px 0;
 	color: #555;
 	vertical-align: top;
 }
-	div#bp-admin table.form-table tr {
+	div#bp-wizard table.form-table tr {
 		border-bottom: 1px dotted #f0f0f0;
 	}
-	div#bp-admin table.form-table td { padding-left: 25px; font-size: 12px; }
+	div#bp-wizard table.form-table td {
+		padding-left: 25px;
+		font-size: 12px;
+	}
 
-	div#bp-admin table.form-table th h5 {
+	div#bp-wizard table.form-table th h5 {
 		font-size: 14px;
 		margin: 0;
 		line-height: 150%;
 	}
 
-	div#bp-admin table.form-table th img {
+	div#bp-wizard table.form-table th img {
 		margin-top: 5px;
 	}
 
-	div#bp-admin table.form-table th p { margin: 3px 0 0 0; }
+	div#bp-wizard table.form-table th p {
+		margin: 3px 0 0 0;
+	}
 
-div#bp-admin code, div#bp-admin kbd {
+#bp-wizard .widefat th {
+	vertical-align: top;
+	display: table-cell;
+}
+
+div#bp-wizard code, div#bp-wizard kbd {
 	font-size: 12px;
 	background: #f0f0f0;
 }
 
-div#bp-admin div#message code, div#bp-admin div#message kbd {
+div#bp-wizard div#message code, div#bp-wizard div#message kbd {
 	background: #ffe293;
 }
 
@@ -146,7 +164,9 @@ a.button {
 	padding-top: 4px;
 }
 
-a.installed, a.installed:hover, a.installed:active {
+a.installed,
+a.installed:hover,
+a.installed:active {
 	padding-left: 15px;
 	color: #888;
 	border-color: #ccc;
@@ -154,7 +174,7 @@ a.installed, a.installed:hover, a.installed:active {
 }
 
 a.installed span {
-	background: url( ../images/installed.gif) left center no-repeat;
+	background: url( ../images/installed.gif ) left center no-repeat;
 	padding: 6px 10px 7px 6px;
 	margin-left: -5px;
 }
