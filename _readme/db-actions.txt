@@ -3,9 +3,14 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
-Run BuddyPress upgrade wizard (BP 1.6)
+Run BuddyPress upgrade wizard (BP 1.6.1)
 
 Optimize database
+
+
+------------------------------------
+DONE
+
 Activate Google Analytics
 Active Super Cache and test
 
@@ -14,9 +19,6 @@ Search highlight color: ccc066
 
 Remove custom CSS.
 
-
-------------------------------------
-DONE
 
 Upgrade BuddyPress database
 Upgrade network after WP update
