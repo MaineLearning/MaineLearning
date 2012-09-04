@@ -7,6 +7,10 @@ Run BuddyPress upgrade wizard (BP 1.6.1)
 
 Optimize database
 
+Remove this line from wp-config
+
+define('WP_CACHE', true); //Added by WP-Cache Manager
+
 
 ------------------------------------
 DONE
