@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.5.1";
+    public static $version = "1.6.6";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -137,13 +137,13 @@ class GFCommon{
     }
 
     //Returns the url of the plugin's root folder
-    public function get_base_url(){
+    public static function get_base_url(){
         $folder = basename(dirname(__FILE__));
         return plugins_url($folder);
     }
 
     //Returns the physical path of the plugin's root folder
-    public function get_base_path(){
+    public static function get_base_path(){
         $folder = basename(dirname(__FILE__));
         return WP_PLUGIN_DIR . "/" . $folder;
     }
@@ -1276,15 +1276,15 @@ class GFCommon{
         return "";
     }
 
-    function is_pricing_field($field_type){
+    public static function is_pricing_field($field_type){
         return self::is_product_field($field_type) || $field_type == "donation";
     }
 
-    function is_product_field($field_type){
+    public static function is_product_field($field_type){
         return in_array($field_type, array("option", "quantity", "product", "total", "shipping", "calculation"));
     }
 
-    function all_caps(){
+    public static function all_caps(){
         return array(   'gravityforms_edit_forms',
                         'gravityforms_delete_forms',
                         'gravityforms_create_form',
@@ -4126,11 +4126,11 @@ class GFCommon{
         return do_shortcode($content);
     }
 
-    public function has_akismet(){
+    public static function has_akismet(){
         return function_exists('akismet_http_post');
     }
 
-    public function akismet_enabled($form_id) {
+    public static function akismet_enabled($form_id) {
 
         if(!self::has_akismet())
             return false;

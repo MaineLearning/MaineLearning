@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.5.1
+Version: 1.6.6
 Author: rocketgenius
 Author URI: http://www.rocketgenius.com
 
@@ -882,7 +882,7 @@ class RGForms{
     //-------------------------------------------------
     //----------- AJAX --------------------------------
 
-    public function ajax_parse_request($wp) {
+    public static function ajax_parse_request($wp) {
 
         if (isset($_POST["gform_ajax"])) {
             parse_str($_POST["gform_ajax"]);
@@ -908,7 +908,7 @@ class RGForms{
     }
 
     //Action target that displays the popup to insert a form to a post/page
-    function add_mce_popup(){
+    public static function add_mce_popup(){
         ?>
         <script>
             function InsertForm(){

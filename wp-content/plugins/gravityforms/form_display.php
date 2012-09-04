@@ -579,7 +579,7 @@ class GFFormDisplay{
                             "var form_content = jQuery(this).contents().find('#gform_wrapper_{$form_id}');" .
                             "var is_redirect = contents.indexOf('gformRedirect(){') >= 0;".
                             "jQuery('#gform_submit_button_{$form_id}').removeAttr('disabled');" .
-                            "if(form_content.length > 0){" .
+                            "if(form_content.length > 0 && !is_redirect){" .
                                 "jQuery('#gform_wrapper_{$form_id}').html(form_content.html());" .
                                 "{$scroll_position['default']}" .
                                 "if(window['gformInitDatepicker']) {gformInitDatepicker();}" .
@@ -601,7 +601,7 @@ class GFFormDisplay{
                             "}" .
                             "else{" .
                                 "jQuery('#gform_{$form_id}').append(contents);" .
-                                "if(window['gformRedirect']) gformRedirect();" .
+                                "if(window['gformRedirect']) {gformRedirect();}" .
                             "}" .
                             "jQuery(document).trigger('gform_post_render', [{$form_id}, current_page]);" .
                         "} );" .
@@ -742,7 +742,7 @@ class GFFormDisplay{
             <input type='hidden' class='gform_hidden' name='state_{$form_id}' value='" . self::get_state($form, $field_values) . "' />
             <input type='hidden' class='gform_hidden' name='gform_target_page_number_{$form_id}' id='gform_target_page_number_{$form_id}' value='" . $next_page . "' />
             <input type='hidden' class='gform_hidden' name='gform_source_page_number_{$form_id}' id='gform_source_page_number_{$form_id}' value='" . $current_page . "' />
-            <input type='hidden' name='gform_field_values' value='{$field_values_str}' />
+            <input type='hidden' name='gform_field_values' value='" . esc_attr($field_values_str) ."' />
             {$files_input}
         </div>";
 
@@ -1583,7 +1583,7 @@ class GFFormDisplay{
         if(isset($form["button"]["conditionalLogic"]))
             return true;
 
-        foreach($form["fields"] as $field){
+        foreach(rgar($form,"fields") as $field){
             if(!empty($field["conditionalLogic"])){
                 return true;
             }
@@ -1875,7 +1875,7 @@ class GFFormDisplay{
             $field_script = "jQuery(document).ready(function(){ { gformMatchCard(\"{$field_id}_1\"); } } );";
 
             if(rgar($field, "forceSSL") && !GFCommon::is_ssl() && !GFCommon::is_preview())
-                $field_script = "document.location.href='" . esc_js( RGFormsModel::get_current_page_url(true) ) . "'";
+                $field_script = "document.location.href='" . esc_js( RGFormsModel::get_current_page_url(true) ) . "';";
 
             $script .= $field_script;
         }

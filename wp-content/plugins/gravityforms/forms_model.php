@@ -1571,6 +1571,10 @@ class RGFormsModel{
             case "number" :
                 $lead = empty($lead) ? RGFormsModel::get_lead($lead_id) : $lead;
                 $value = GFCommon::has_field_calculation($field) ? GFCommon::round_number(GFCommon::calculate($field, $form, $lead), rgar($field, "calculationRounding")) : GFCommon::clean_number($value, rgar($field, "numberFormat"));
+                //return the value as a string when it is zero and a calc so that the "==" comparison done when checking if the field has changed isn't treated as false
+                if (GFCommon::has_field_calculation($field) && $value == 0){
+					$value = "0";
+                }
             break;
 
             case "website" :
@@ -2085,8 +2089,9 @@ class RGFormsModel{
         $value = self::prepare_value($form, $field, $value, $input_name, rgar($lead, "id"));
 
         //ignore fields that have not changed
-        if($lead != null && $value == rgget($input_id, $lead))
+        if($lead != null && $value == rgget($input_id, $lead)) {
             return;
+		}
 
         if(!empty($value) || $value === "0"){
 
@@ -2582,27 +2587,28 @@ class RGFormsModel{
         if(is_array($results) && sizeof($results) > 0){
             $form_id = $results[0]->form_id;
             $lead = array("id" => $results[0]->id, "form_id" => $results[0]->form_id, "date_created" => $results[0]->date_created, "is_starred" => intval($results[0]->is_starred), "is_read" => intval($results[0]->is_read), "ip" => $results[0]->ip, "source_url" => $results[0]->source_url, "post_id" => $results[0]->post_id, "currency" => $results[0]->currency, "payment_status" => $results[0]->payment_status, "payment_date" => $results[0]->payment_date, "transaction_id" => $results[0]->transaction_id, "payment_amount" => $results[0]->payment_amount, "is_fulfilled" => $results[0]->is_fulfilled, "created_by" => $results[0]->created_by, "transaction_type" => $results[0]->transaction_type, "user_agent" => $results[0]->user_agent, "status" => $results[0]->status);
+
+            $form = RGFormsModel::get_form_meta($form_id);
+            $prev_lead_id=0;
+            foreach($results as $result){
+                if($prev_lead_id <> $result->id && $prev_lead_id > 0){
+                    array_push($leads, $lead);
+                    $lead = array("id" => $result->id, "form_id" => $result->form_id,     "date_created" => $result->date_created,     "is_starred" => intval($result->is_starred),     "is_read" => intval($result->is_read),     "ip" => $result->ip,     "source_url" => $result->source_url,     "post_id" => $result->post_id,     "currency" => $result->currency,     "payment_status" => $result->payment_status,     "payment_date" => $result->payment_date,     "transaction_id" => $result->transaction_id,     "payment_amount" => $result->payment_amount,     "is_fulfilled" => $result->is_fulfilled,     "created_by" => $result->created_by,     "transaction_type" => $result->transaction_type,     "user_agent" => $result->user_agent,    "status" => $result->status);
+                }
+
+                $field_value = $result->value;
+                //using long values if specified
+                if($use_long_values && strlen($field_value) >= (GFORMS_MAX_FIELD_LENGTH-10)){
+                    $field = RGFormsModel::get_field($form, $result->field_number);
+                    $long_text = RGFormsModel::get_field_value_long($lead, $result->field_number, $form, false);
+                    $field_value = !empty($long_text) ? $long_text : $field_value;
+                }
+
+                $lead[$result->field_number] = $field_value;
+                $prev_lead_id = $result->id;
+            }
         }
 
-        $form = RGFormsModel::get_form_meta($form_id);
-        $prev_lead_id=0;
-        foreach($results as $result){
-            if($prev_lead_id <> $result->id && $prev_lead_id > 0){
-                array_push($leads, $lead);
-                $lead = array("id" => $result->id, "form_id" => $result->form_id,     "date_created" => $result->date_created,     "is_starred" => intval($result->is_starred),     "is_read" => intval($result->is_read),     "ip" => $result->ip,     "source_url" => $result->source_url,     "post_id" => $result->post_id,     "currency" => $result->currency,     "payment_status" => $result->payment_status,     "payment_date" => $result->payment_date,     "transaction_id" => $result->transaction_id,     "payment_amount" => $result->payment_amount,     "is_fulfilled" => $result->is_fulfilled,     "created_by" => $result->created_by,     "transaction_type" => $result->transaction_type,     "user_agent" => $result->user_agent,    "status" => $result->status);
-            }
-
-            $field_value = $result->value;
-            //using long values if specified
-            if($use_long_values && strlen($field_value) >= (GFORMS_MAX_FIELD_LENGTH-10)){
-                $field = RGFormsModel::get_field($form, $result->field_number);
-                $long_text = RGFormsModel::get_field_value_long($lead, $result->field_number, $form, false);
-                $field_value = !empty($long_text) ? $long_text : $field_value;
-            }
-
-            $lead[$result->field_number] = $field_value;
-            $prev_lead_id = $result->id;
-        }
         //adding last lead.
         if(sizeof($lead) > 0)
             array_push($leads, $lead);
@@ -2760,7 +2766,7 @@ class RGFormsModel{
         return null;
     }
 
-    function has_input($field, $input_id){
+    public static function has_input($field, $input_id){
         if(!is_array($field["inputs"]))
             return false;
         else{
@@ -2773,7 +2779,7 @@ class RGFormsModel{
         }
     }
 
-    public function get_current_page_url($force_ssl=false) {
+    public static function get_current_page_url($force_ssl=false) {
         $pageURL = 'http';
         if (RGForms::get("HTTPS",$_SERVER) == "on" || $force_ssl)
             $pageURL .= "s";

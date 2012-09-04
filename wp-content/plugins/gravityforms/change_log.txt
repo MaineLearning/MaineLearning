@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.6
+    - Fixed warning thrown in has_conditional_logic when $form["fields"] is empty
+    - Fixed issue with pricing field that didn't support the Validation Message setting for Single Product and User Defined Price.
+    - Fixed bug for when a calculated value was zero and it did not show in the email notifications or on the confirmation page
+    - Fixed issue with Warning message being displayed on new forms with no entries
+	- Fixed bug for multi-page ajax forms with progress bar starting at zero that are sent to PayPal Standard
+	- Fixed bug in get_credit_card_init_script that caused javascript error when Force SSL was turned on
+    - Fixed issue with field choices creating a conflict with the Polls Add-On checkbox poll field
+    - Fixed issue in IE9 where conditional logic reset value function set drop down value to option that did not exist resulting in js errors
+    - Fixed issue with non static method being called statically
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.5.0.1
     - Fixed issue with routine that checks database permissions causing warning message to be displayed on the screen when upgrading
 
