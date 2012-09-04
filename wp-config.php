@@ -39,6 +39,7 @@ require( dirname(__FILE__) . '/env.php' );
  //Added by WP-Cache Manager
 
 /** Database Charset to use in creating database tables. */
+define('WP_CACHE', true); //Added by WP-Cache Manager
 define('DB_CHARSET', 'utf8');
 
 
@@ -144,6 +145,8 @@ define( 'BLOG_ID_CURRENT_SITE', 1 );
 define( 'GF_LICENSE_KEY', 'a96c179746650d383ecfd09f2e9ea776');
 
 define('WPLANG', '');
+
+define( 'WP_CACHE', true );
 
 
 /* That's all, stop editing! Happy blogging. */
