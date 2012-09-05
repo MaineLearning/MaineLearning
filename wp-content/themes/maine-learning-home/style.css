@@ -34,6 +34,10 @@ DO NOT USE BBEDIT TO FORMAT CSS. IT REMOVES THE ALTERNATIVE BG GRADIENTS.
 CONTAINERS
 ----------------------- */
 
+body:not(.wp-admin) {
+padding-top: 0!important;
+}
+
 body
 {
 	background-attachment: scroll;
