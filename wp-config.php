@@ -176,5 +176,9 @@ if ( !defined('ABSPATH') )
 /* Note: This must be the last thing in the file! */
 require_once(ABSPATH . 'wp-settings.php');
 
+/** Retains BP Admin Bar in BP 1.4.1. */
+
+define( 'BP_USE_WP_ADMIN_BAR', false );
+
 
 
