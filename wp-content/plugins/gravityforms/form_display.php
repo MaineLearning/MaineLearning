@@ -579,7 +579,8 @@ class GFFormDisplay{
                             "var form_content = jQuery(this).contents().find('#gform_wrapper_{$form_id}');" .
                             "var is_redirect = contents.indexOf('gformRedirect(){') >= 0;".
                             "jQuery('#gform_submit_button_{$form_id}').removeAttr('disabled');" .
-                            "if(form_content.length > 0 && !is_redirect){" .
+                            "var is_form = !(form_content.length <= 0 || is_redirect);".
+                            "if(is_form){" .
                                 "jQuery('#gform_wrapper_{$form_id}').html(form_content.html());" .
                                 "{$scroll_position['default']}" .
                                 "if(window['gformInitDatepicker']) {gformInitDatepicker();}" .
@@ -1493,7 +1494,7 @@ class GFFormDisplay{
         }
 
         if(self::has_character_counter($form)){
-            wp_enqueue_script("gforms_character_counter", GFCommon::get_base_url() . "/js/jquery.textareaCounter.plugin.js", array("jquery"), GFCommon::$version, true);
+            wp_enqueue_script("gforms_character_counter", GFCommon::get_base_url() . "/js/jquery.textareaCounter.plugin.js", array("jquery"), GFCommon::$version, false);
         }
 
         if(self::has_input_mask($form)){
@@ -1551,7 +1552,7 @@ class GFFormDisplay{
         }
 
         if(self::has_character_counter($form) && !wp_script_is("gforms_character_counter", "queue")){
-            wp_enqueue_script("gforms_character_counter", GFCommon::get_base_url() . "/js/jquery.textareaCounter.plugin.js", array("jquery"), GFCommon::$version, true);
+            wp_enqueue_script("gforms_character_counter", GFCommon::get_base_url() . "/js/jquery.textareaCounter.plugin.js", array("jquery"), GFCommon::$version, false);
             wp_print_scripts(array("gforms_character_counter"));
         }
 

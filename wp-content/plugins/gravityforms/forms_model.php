@@ -1114,8 +1114,8 @@ class RGFormsModel{
 
     public static function matches_operation($val1, $val2, $operation){
 
-        $val1 = !empty($val1) ? strtolower($val1) : "";
-        $val2 = !empty($val2) ? strtolower($val2) : "";
+        $val1 = !rgblank($val1) ? strtolower($val1) : "";
+        $val2 = !rgblank($val2) ? strtolower($val2) : "";
 
         switch($operation){
             case "is" :

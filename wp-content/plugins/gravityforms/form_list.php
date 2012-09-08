@@ -116,7 +116,7 @@ class GFFormList{
 
             <div class="icon32" id="gravity-edit-icon"><br></div>
             <h2>
-                <?php _e("Edit Forms", "gravityforms"); ?>
+                <?php _e("Forms", "gravityforms"); ?>
                 <a class="button add-new-h2" href="admin.php?page=gf_new_form"><?php _e("Add New", "gravityforms") ?></a>
             </h2>
             <form id="forms_form" method="post">

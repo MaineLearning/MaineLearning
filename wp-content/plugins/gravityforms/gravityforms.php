@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.6
+Version: 1.6.7
 Author: rocketgenius
 Author URI: http://www.rocketgenius.com
 
@@ -771,7 +771,7 @@ class RGForms{
             add_object_page(__('Forms', "gravityforms"), __("Forms", "gravityforms") . $update_icon , $has_full_access ? "gform_full_access" : $min_cap, $parent_menu["name"] , $parent_menu["callback"], GFCommon::get_base_url() . '/images/gravity-admin-icon.png');
 
         // Adding submenu pages
-        add_submenu_page($parent_menu["name"], __("Edit Forms", "gravityforms"), __("Edit Forms", "gravityforms"), $has_full_access ? "gform_full_access" : "gravityforms_edit_forms", "gf_edit_forms", array("RGForms", "forms"));
+        add_submenu_page($parent_menu["name"], __("Forms", "gravityforms"), __("Forms", "gravityforms"), $has_full_access ? "gform_full_access" : "gravityforms_edit_forms", "gf_edit_forms", array("RGForms", "forms"));
 
         add_submenu_page($parent_menu["name"], __("New Form", "gravityforms"), __("New Form", "gravityforms"), $has_full_access ? "gform_full_access" : "gravityforms_create_form", "gf_new_form", array("RGForms", "new_form"));
 
