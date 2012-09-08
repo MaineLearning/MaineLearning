@@ -4,7 +4,7 @@ Donate link: http://wp-events-plugin.com
 Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
 Requires at least: 3.3
 Tested up to: 3.4.1
-Stable tag: 5.2.2
+Stable tag: 5.2.3
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -98,6 +98,17 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.2.3 =
+* improvement to ical all-day time format
+* fixed grouped events shortcode not using formats supplied
+* removed 'remove from page lists' options for category/event/location pages, see http://em.cm/rplo
+* added calendar day abbriviations (useful for some languages e.g. Catalan, Welsh)
+* moved events page calendar options to 'pages' tab, event list/archives panel
+* fixed attributes bug using default value even when custom value entered (arose in 5.2.2)
+* added search button custom text setting
+* removed duplicate confirm/error notices in bookings admin area (dashboard-side)
+* fixed #_LOCATIONPOSTID showing location id instead
+
 = 5.2.2 =
 * added member-only tickets
 * added em_bookings_added action

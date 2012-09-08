@@ -222,8 +222,8 @@ add_shortcode ( 'event_search_form', 'em_get_event_search_form_shortcode');
  * @return string
  */
 function em_get_events_list_grouped_shortcode($args = array(), $format = ''){
-	$atts['format'] = ($format != '' || empty($atts['format'])) ? $format : $atts['format']; 
-	$atts['format'] = html_entity_decode($atts['format']); //shorcode doesn't accept html
+	$args['format'] = ($format != '' || empty($args['format'])) ? $format : $args['format']; 
+	$args['format'] = html_entity_decode($args['format']); //shorcode doesn't accept html
 	return em_get_events_list_grouped($args);
 }
 add_shortcode ( 'events_list_grouped', 'em_get_events_list_grouped_shortcode' );

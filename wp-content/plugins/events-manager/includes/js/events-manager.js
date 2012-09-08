@@ -476,6 +476,7 @@ jQuery(document).ready( function($){
 		if( EM.dateFormat != ''){
 			datepicker_vals.dateFormat = EM.dateFormat;
 		}
+		jQuery(document).triggerHandler('em_datepicker', datepicker_vals);
 		
 		//initialize legacy start/end dates, makes the following code compatible
 		if( $('#em-date-start').length > 0 ){

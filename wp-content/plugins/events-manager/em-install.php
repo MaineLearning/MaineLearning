@@ -327,8 +327,8 @@ function em_add_options() {
 		'dbem_events_default_orderby' => 'event_start_date,event_start_time,event_name',
 		'dbem_events_default_order' => 'ASC',
 		'dbem_events_default_limit' => 10,
-		'dbem_list_events_page' => 1,
 		//Event Search Options
+		'dbem_serach_form_submit' => __('Search','dbem'),
 		'dbem_search_form_text' => 1,
 		'dbem_search_form_text_label' => __('Search','dbem'),
 		'dbem_search_form_dates' => 1,
@@ -409,8 +409,6 @@ function em_add_options() {
 		'dbem_event_page_title_format' => '#_EVENTNAME',
 		'dbem_event_all_day_message' => __('All Day','dbem'),
 		'dbem_no_events_message' => sprintf(__( 'No %s', 'dbem' ),__('Events','dbem')),
-		//Location page options
-		'dbem_list_locations_page' => 1,
 		//Location Formatting
 		'dbem_locations_default_orderby' => 'location_name',
 		'dbem_locations_default_order' => 'ASC',
@@ -440,7 +438,6 @@ function em_add_options() {
 		'dbem_location_event_list_item_format' => "<li>#_EVENTLINK - #j #M #Y - #H:#i</li>",
 		'dbem_location_event_list_item_footer_format' => "</ul>",
 		//Category page options
-		'dbem_list_categories_page' => 1,
 		'dbem_categories_default_limit' => 10,
 		'dbem_categories_default_orderby' => 'name',
 		'dbem_categories_default_order' =>  'ASC',
@@ -494,11 +491,13 @@ function em_add_options() {
 		'dbem_list_date_title' => __('Events', 'dbem').' - #j #M #y',
 		'dbem_full_calendar_event_format' => '<li>#_EVENTLINK</li>',
 		'dbem_full_calendar_long_events' => '0',
-		'dbem_full_calendar_initials_length' => 3,
+		'dbem_full_calendar_initials_length' => 0,
+		'dbem_full_calendar_abbreviated_weekdays' => true,
 		'dbem_display_calendar_day_single_yes' => 1,
 		'dbem_small_calendar_event_title_format' => "#_EVENTNAME",
 		'dbem_small_calendar_event_title_separator' => ", ",
 		'dbem_small_calendar_initials_length' => 1,
+		'dbem_small_calendar_abbreviated_weekdays' => false,
 		'dbem_display_calendar_order' => 'ASC',
 		'dbem_display_calendar_orderby' => 'event_name,event_start_time',
 		'dbem_display_calendar_events_limit' => get_option('dbem_full_calendar_events_limit',3),
@@ -516,9 +515,6 @@ function em_add_options() {
 		'dbem_placeholders_custom' => '',
 		'dbem_location_attributes_enabled' => 1,
 		'dbem_location_placeholders_custom' => '',
-		//Title rewriting compatability
-		'dbem_disable_title_rewrites'=> false,
-		'dbem_title_html' => '<h2>#_PAGETITLE</h2>',
 		//Bookings
 		'dbem_bookings_registration_disable' => 0,
 		'dbem_bookings_registration_user' => '',

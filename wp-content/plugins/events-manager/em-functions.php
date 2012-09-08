@@ -290,6 +290,9 @@ function em_get_attributes($lattributes = false){
 		if( !empty($matches[3][$key]) ){
 		    $new_values = explode('|',$matches[3][$key]);
 		    if( count($new_values) > count($attributes['values'][$attribute]) ){
+		    	foreach($new_values as $key => $value){
+		    	    $new_values[$key] = trim($value);
+		    	}
 				$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute, $new_values, $attribute, $matches);
 		    }
 		}

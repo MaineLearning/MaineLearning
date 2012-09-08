@@ -590,7 +590,7 @@ class EM_Location extends EM_Object {
 					$replace = $this->location_id;
 					break;
 				case '#_LOCATIONPOSTID':
-					$replace = $this->location_id;
+					$replace = $this->post_id;
 					break;
 				case '#_NAME': //Depreciated
 				case '#_LOCATION': //Depreciated

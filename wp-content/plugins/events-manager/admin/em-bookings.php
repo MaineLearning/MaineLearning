@@ -58,8 +58,8 @@ function em_bookings_dashboard(){
   		<h2>
   			<?php _e('Event Bookings Dashboard', 'dbem'); ?>
   		</h2>
+  		<?php else: echo $EM_Notices; ?>
   		<?php endif; ?>
-  		<?php echo $EM_Notices; ?>
 		<?php if( is_admin() ): ?>
 		<div class="icon32" id="icon-bookings"><br></div>
 		<?php endif; ?>
@@ -108,7 +108,7 @@ function em_bookings_event(){
   			<?php endif; ?>
   			<?php do_action('em_admin_event_booking_options_buttons'); ?>
   		</h2>
-  		<?php echo $EM_Notices; ?>  
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>  
 		<div>
 			<p><strong><?php _e('Event Name','dbem'); ?></strong> : <?php echo ($EM_Event->event_name); ?></p>
 			<p>
@@ -164,7 +164,7 @@ function em_bookings_ticket(){
   			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="button add-new-h2"><?php _e('View/Edit Event','dbem') ?></a>
   			<a href="<?php echo $EM_Event->get_bookings_url(); ?>" class="button add-new-h2"><?php _e('View Event Bookings','dbem') ?></a>
   		</h2> 
-  		<?php echo $EM_Notices; ?>
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>
 		<div>
 			<table>
 				<tr><td><?php echo __('Name','dbem'); ?></td><td></td><td><?php echo $EM_Ticket->ticket_name; ?></td></tr>
@@ -208,7 +208,7 @@ function em_bookings_single(){
   		<h2>
   			<?php _e('Edit Booking', 'dbem'); ?>
   		</h2>
-  		<?php echo $EM_Notices; ?>
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>
   		<div id="poststuff" class="metabox-holder">
 	  		<div id="post-body">
 				<div id="post-body-content">
@@ -456,7 +456,7 @@ function em_bookings_person(){
   			<a href="<?php admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="button add-new-h2"><?php _e('Edit User','dbem') ?></a>
   			<?php endif; ?>
   		</h2>
-  		<?php echo $EM_Notices; ?>
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>
 		<?php do_action('em_bookings_person_header'); ?>
   		<div id="poststuff" class="metabox-holder has-right-sidebar">
 	  		<div id="post-body">
