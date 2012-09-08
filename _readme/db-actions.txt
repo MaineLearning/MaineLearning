@@ -3,6 +3,11 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+After upgrade to WP 3.4.2, run the "Upgrade Network" process.
+
+------------------------------------
+DONE
+
 Run BuddyPress upgrade wizard (BP 1.6.1)
 
 Optimize database
@@ -11,9 +16,6 @@ Remove this line from wp-config
 
 define('WP_CACHE', true); //Added by WP-Cache Manager
 
-
-------------------------------------
-DONE
 
 Activate Google Analytics
 Active Super Cache and test
