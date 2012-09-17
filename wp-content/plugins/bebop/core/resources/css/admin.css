@@ -1,0 +1,205 @@
+/* Bebop admin style sheet */
+#bebop_admin_container {
+	min-height:400px;
+	width:99%;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	border:0px solid #00FF00;
+	margin:20px 1% 0 0;
+	border:0px solid #000000;
+}
+#bebop_admin_container a {
+	text-decoration:none;
+	color:#000000;
+}
+#bebop_admin_container a:hover {
+	text-decoration:none;
+}
+
+.bebop_error_box, .bebop_success_box {
+	display:inline-block;
+	position:absolute;
+	top:0;
+	min-width:175px;
+	margin:0;
+	padding:5px 10px;
+	text-align:center;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	z-index:5;
+}
+.bebop_error_box {
+	background:#FF6A6A;
+}
+.bebop_success_box {
+	background:#E1FFD6;
+}
+.bebop_admin_box, .postbox h3, .bebop_admin_menu a {
+	background-image:linear-gradient(bottom, #eeeeee 30%, #e5e5e5 70%);
+	background-image:-o-linear-gradient(bottom, #eeeeee 30%, #e5e5e5 70%);
+	background-image:-moz-linear-gradient(bottom, #eeeeee 30%, #e5e5e5 70%);
+	background-image:-webkit-linear-gradient(bottom, #eeeeee 30%, #e5e5e5 70%);
+	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0.30, #eeeeee), color-stop(0.70, #e5e5e5));
+	background-image:-ms-linear-gradient(bottom, #eeeeee 30%, #e5e5e5 70%);
+}
+.bebop_admin_box {
+	padding:10px;
+	border:1px solid #dddddd;
+	font-size:16px;
+	font-weight:normal;
+	line-height:45px;
+	margin:0 1% 0 0;
+	min-height:100px;
+	border-radius:7px;
+	width:99%;
+}
+.bebop_admin_box a {
+	text-decoration:none;
+	color:#aaaaaa;
+}
+.bebop_admin_box a:hover {
+	text-decoration:underline;
+}
+
+.bebop_logo {
+	float:left;
+}
+
+.postbox-container {
+	width:49%;
+	margin-right:1%;
+}
+
+.postbox {
+	margin:22px 0 0 0;
+	border-radius:7px;
+	background:#eeeeee;
+	padding:0px;
+	text-align: justify;
+}
+.postbox h3 {
+	padding:10px;
+	font-size: 16pt;
+	margin:0;
+	font-weight:normal;
+}
+.postbox.inside {
+	padding:0px 2px 8px 2px;
+}
+.postbox a {
+	text-decoration:none;
+}
+.postbox_table {
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	width:100%;
+}
+.postbox_table th {
+	text-align:center;
+}
+.postbox_table td {
+	text-align:center;
+}
+.postbox_table td.content {
+	text-align:left;
+	width:60%;
+}
+.center_margin {
+	margin-left:auto;
+	margin-right:auto;
+}
+.bebop_table, .bebop_settings_table {
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	background-color:#ffffff;
+	width:100%;
+	border:1px solid #cecece;
+	border-radius:7px;
+	border-spacing:0;
+	margin:22px auto;
+	font-size:12px;
+}
+.bebop_table tr.nodata:hover {
+	background:inherit;
+}
+.bebop_table tr:hover {
+	background:#eeeeee;
+}
+.bebop_table td, .bebop_table th, .bebop_settings_table td, .bebop_settings_table th {
+	padding:8px;
+	text-align:center;
+	margin:0px;
+}
+.bebop_table td.content {
+	text-align:left;
+
+}
+.bold {
+	font-weight:bold;
+}
+.bebop_settings_table th {
+	font-weight:normal;
+	font-size:25px;
+	border-bottom:1px solid #cecece;
+	padding:10px;
+	text-align:left;
+}
+
+.bebop_table a {
+	text-decoration:none;
+	color:#000000;
+}
+.width_98 {
+	width:98.5%;
+}
+.margin-bottom_22px {
+	margin-bottom:22px;
+}
+.margin-top_22px {
+	margin-top:22px;
+}
+.margin-top_40px {
+	margin-top:40px;
+}
+.bebop_admin_form {
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	background-color:#ffffff;
+	width:100%;
+	margin:0 auto 22px auto;
+}
+.bebop_admin_form fieldset {
+	border:1px solid #cecece;
+	border-radius:7px;
+	padding:0px 0px 5px 0px;
+	margin:0 auto 22px auto;
+	border-spacing:0;
+}
+.bebop_admin_form fieldset p {
+	padding: 0 10px;
+}
+.bebop_admin_form span.header {
+	display:block;
+	padding:5px 10px;
+	width:inherit;
+	position:relative;
+	font-weight:normal;
+	font-size:20px;
+	line-height:25px;
+	border-bottom:1px solid #cecece;
+	padding:10px;
+	margin:0 0 5px 0;
+	text-align:left;
+}
+
+.bebop_admin_form label {
+	display:inline-block;
+	width:46.5%;
+	text-align:right;
+	margin:5px 0;
+	padding:5px;
+	border:0px solid #000;
+}
+.bebop_admin_form input {
+	padding:5px;
+	margin:5px 0;
+}
+.no_border {
+	border:0px;
+}
