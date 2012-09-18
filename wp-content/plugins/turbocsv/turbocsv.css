@@ -1,0 +1,241 @@
+/* For initial tab contents; Note: display:none interferes with tinyMCE */
+.ti-hidden {
+	display: none;
+}
+
+/* Indicates a field can receive tokens on click; no CSS settings */
+.ti-token-field {
+}
+
+/* Highlight the token field that is currently selected; !important is required to override Wordpress */
+.ti-current-focus {
+	background-color: ghostwhite !important;
+}
+
+.ti-fieldset {
+	border:1px solid lightgrey;
+	padding: 0px 5px 5px 5px;
+	margin: 10px 0px 10px 0px;
+
+}
+
+.ti-legend {
+	font-weight:bold;
+	font-size: 14px;
+}
+
+.ti-twizzler {
+	display: none;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.ti-post-title {
+	width: 80%;
+}
+
+/* Div is only used to draw a border around the tinyMCE box */
+.ti-post-content-div {
+	padding:2px;
+	border:1px solid black;
+}
+
+/* TinyMCE textarea */
+.ti-post-content {
+	width:100%;
+}
+
+.ti-post-excerpt {
+	width: 100%;
+}
+
+.ti-error {
+	background-color: pink !important;
+	border: 1px solid red !important;
+	padding: 5px;
+}
+
+.ti-warning {
+	background-color: rgb(255, 255, 224);
+	border: 1px solid #e6db55;
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.ti-small-scroll {
+	max-height: 200px;
+	overflow: auto;
+	border: 1px solid lightgray;
+	width: auto;
+	display:inline-block;
+	padding-right: 20px;  /* If not provided, the div containing the table will get a horizontal scrollbar */
+}
+
+.ti-large-scroll {
+	max-height: 400px;
+	width: 100%;
+	margin-right: 20px;  /* If not provided, the div containing the table will get a horizontal scrollbar */
+	overflow: auto;
+	border: 1px solid lightgray;
+	display: inline-block;
+}
+
+
+.ti-token-list {
+	overflow: auto;
+}
+
+/* Used to strip tables; no CSS here */
+.ti-odd {
+	background-color: white;
+}
+
+.ti-even {
+	background-color: ghostwhite;
+}
+
+.ti-help {
+	float:right;
+}
+
+/* Default WP tables (using .form-table) are 100% width.  Use this to override with a narrower table */
+.ti-form-table {
+	border-collapse: collapse;
+	clear: both;
+	font-size: 12px;
+	width: 100%;
+}
+
+.ti-form-table th {
+	padding: 10px;
+	text-align: left;
+	vertical-align: top;
+	width: 200px;
+	font-weight: normal;
+}
+
+.ti-form-table td {
+	padding: 10px;
+	text-align: left;
+	vertical-align: top;
+}
+
+table.ti-table {
+	padding: 10px 0px 0px 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	table-layout: auto;
+}
+
+table.ti-table tbody td {
+	padding: 5px 10px 5px 10px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid lightgray;
+	border-spacing: 0px;
+}
+
+table.ti-table thead th {
+	text-align: left;
+	font-weight: bold;
+	background-color: #f1f1f1;
+	padding: 5px 5px 5px 5px;
+	width: auto;
+}
+
+
+.progressbar {
+	position: relative;
+	border: 2px #DFDFDF solid;
+	border-style: inset;
+	background-color: #FFFFFF;
+	width: 300px;
+	height: 20px;
+	margin-bottom: 4px;
+}
+.progressbar div {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 20px;
+	background-color: #2680AA;
+}
+
+/*
+	-----------------------------------------------------------------------------------
+	Editable tables (edt)
+	-----------------------------------------------------------------------------------
+*/
+
+.edt, .edt td {
+	padding: 0;
+	margin: 0;
+}
+
+/*
+	-----------------------------------------------------------------------------------
+	Drop down multiselect (ddms)
+	-----------------------------------------------------------------------------------
+*/
+
+/* Assign this class to your <select> to hide it initially, otherwise the ddms will 'pop' in */
+.ddms {
+	display: none;
+}
+
+/* Container for the entire ddms, including the input element and the dropdown */
+.ddms-container {
+	display: inline-block;
+	vertical-align:top;
+}
+
+/* Input element above the dropdown, showing what was selected */
+.ddms-selected {
+	cursor: default;
+	padding-right: 30px;        /* Webkit browsers put horizontal scrollbar in unless div is widened enough to include the vertical bar! */
+}
+
+/* This wraps the values list with a scrollable div */
+.ddms-dropdown {
+	max-height: 200px;
+	overflow: auto;
+	border: 1px solid lightgray;
+	border: 1px solid gray;
+	background-color: white;
+	white-space: nowrap;
+	padding-right: 30px;        /* Webkit browsers put horizontal scrollbar in unless div is widened enough to include the vertical bar! */
+	padding-top: 5px;
+	display: none;
+}
+
+/* The list of values (a checkbox, label and text inside a div, for each value) */
+.ddms-dropdown input {
+	padding: 0 3px 0 3px;         /* Without this the checkboxes won't align vertically with the text due to WP default settings */
+}
+
+/*
+	-----------------------------------------------------------------------------------
+	Tooltips
+	-----------------------------------------------------------------------------------
+*/
+
+.ttip {
+	border-bottom: 1px dotted;
+}
+.lightTip  {}
+.lightTip .content {
+	width: 310px;
+	padding: 10px;
+	border: 6px solid #e2e2e2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: #ffffff;
+	color: #020202;
+}
+
+.lightTip .bottom {
+	height: 14px;
+	background: url(./images/notch-white.png) top center no-repeat;
+}
+
+
