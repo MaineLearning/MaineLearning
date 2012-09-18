@@ -736,6 +736,12 @@ li li a .sf-sub-indicator
 .sidebar-content-sidebar #content-sidebar-wrap,
 .sidebar-sidebar-content #content-sidebar-wrap { float: right; }
 
+.content-sidebar #content, .sidebar-content #content
+{
+	max-width: 600px;
+	width: 100%;
+}
+
 /* Widget areas
 ------------------------------------------------------------ */
 
