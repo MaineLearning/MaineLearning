@@ -309,7 +309,7 @@ function em_bookings_single(){
 											<?php foreach($EM_Event->get_bookings()->get_tickets()->tickets as $EM_Ticket): ?>
 												<?php if( !in_array($EM_Ticket->ticket_id, $shown_tickets) ): ?>
 												<tr>
-													<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket_Booking->get_ticket()->ticket_id)); ?>"><?php echo $EM_Ticket->ticket_name ?></a></td>
+													<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket->ticket_id)); ?>"><?php echo $EM_Ticket->ticket_name ?></a></td>
 													<td>
 														<span class="em-booking-single-info">0</span>
 														<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket->ticket_id; ?>][spaces]" class="em-ticket-select" value="0" /></div>

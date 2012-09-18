@@ -378,7 +378,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 	 */
 	function get_pending_bookings(){
 		if( get_option('dbem_bookings_approval') == 0 ){
-			return array();
+			return new EM_Bookings();
 		}
 		$pending = array();
 		foreach ( $this->bookings as $booking ){

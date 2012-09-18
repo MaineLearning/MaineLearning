@@ -5,47 +5,7 @@ jQuery(document).ready( function($){
 		$(el).addClass('em-time-input em-time-start').next('#end-time').addClass('em-time-input em-time-end').parent().addClass('em-time-range');
 	});
 	if( $(".em-time-input").length > 0 ){
-		$(".em-time-input").timePicker({
-			show24Hours: EM.show24hours == 1,
-			step:15
-		});
-		
-		// Keep the duration between the two inputs.
-		$(".em-time-range input.em-time-start").each( function(i, el){
-			$(el).data('oldTime', $.timePicker(el).getTime());
-		}).change( function() {
-			var start = $(this);
-			var end = start.nextAll('.em-time-end');
-			if (end.val()) { // Only update when second input has a value.
-			    // Calculate duration.
-				var oldTime = start.data('oldTime');
-			    var duration = ($.timePicker(end).getTime() - oldTime);
-			    var time = $.timePicker(start).getTime();
-			    if( $.timePicker(end).getTime() >= oldTime ){
-				    // Calculate and update the time in the second input.
-				    $.timePicker(end).setTime(new Date(new Date(time.getTime() + duration)));
-				}
-			    start.data('oldTime', time); 
-			}
-		});
-		// Validate.
-		$(".em-time-range input.em-time-end").change(function() {
-			var end = $(this);
-			var start = end.prevAll('.em-time-start');
-			if( start.val() ){
-				if($.timePicker(start).getTime() > $.timePicker(this).getTime()) { end.addClass("error"); }
-				else { end.removeClass("error"); }
-			}
-		});
-		//Sort out all day checkbox
-		$('.em-time-range input.em-time-all-day').change(function(){
-			var allday = $(this);
-			if( allday.is(':checked') ){
-				allday.siblings('.em-time-input').css('background-color','#ccc');
-			}else{
-				allday.siblings('.em-time-input').css('background-color','#fff');
-			}
-		}).trigger('change');
+		em_setup_timepicker('body');
 	}
 	/* Calendar AJAX */
 	$('.em-calendar-wrapper a').unbind("click");
@@ -471,12 +431,6 @@ jQuery(document).ready( function($){
 			$.datepicker.setDefaults(EM.locale_data);
 		}
 		load_ui_css = true;
-		//default picker vals
-		var datepicker_vals = { altFormat: "yy-mm-dd", changeMonth: true, changeYear: true, firstDay : EM.firstDay };
-		if( EM.dateFormat != ''){
-			datepicker_vals.dateFormat = EM.dateFormat;
-		}
-		jQuery(document).triggerHandler('em_datepicker', datepicker_vals);
 		
 		//initialize legacy start/end dates, makes the following code compatible
 		if( $('#em-date-start').length > 0 ){
@@ -495,78 +449,7 @@ jQuery(document).ready( function($){
 				function(i,el){ $(el).prev('.end').insertAfter(el);
 			}); //reverse elements for comapatability
 		}
-		
-		//apply datepickers
-		dateDivs = $('.em-date-single, .em-date-range');
-		if( dateDivs.length > 0 ){
-			//apply datepickers to elements
-			dateDivs.find('input.em-date-input-loc').each(function(i,dateInput){
-				//init the datepicker
-				var dateInput = $(dateInput);
-				var dateValue = dateInput.next('input.em-date-input');
-				var dateValue_value = dateValue.val();
-				dateInput.datepicker(datepicker_vals);
-				dateInput.datepicker('option', 'altField', dateValue);
-				//now set the value
-				if( dateValue_value ){
-					var this_date_formatted = $.datepicker.formatDate( EM.dateFormat, $.datepicker.parseDate('yy-mm-dd', dateValue_value) );
-					dateInput.val(this_date_formatted);
-					dateValue.val(dateValue_value);
-				}
-				//add logic for texts
-				dateInput.change(function(){
-					if( $(this).val() == '' ){
-						$(this).next('.em-date-input').val('');
-					}
-				});
-			});
-			//deal with date ranges
-			$('.em-date-range input.em-date-input-loc').each(function(i,dateInput){
-				//finally, apply start/end logic to this field
-				dateInput = $(dateInput);
-				if( dateInput.hasClass('em-date-start') ){
-					dateInput.datepicker('option','onSelect', function( selectedDate ) {
-						//get corresponding end date input, we expect ranges to be contained in .em-date-range with a start/end input element
-						var startDate = $(this);
-						var endDate = startDate.parents('.em-date-range').find('.em-date-end').first();
-						if( startDate.val() > endDate.val() && endDate.val() != '' ){
-							endDate.datepicker( "setDate" , selectedDate );
-						}
-						endDate.datepicker( "option", 'minDate', selectedDate );
-					});
-				}else if( dateInput.hasClass('em-date-end') ){
-					var startInput = dateInput.parents('.em-date-range').find('.em-date-start').first();
-					if( startInput.val() != '' ){
-						dateInput.datepicker('option', 'minDate', startInput.val());
-					}
-				}
-			});
-		}
-		
-		//for the tickets form too
-		/*
-		$(".em-ticket-form, #em-tickets-form").each(function(i, el){
-			el = $(el);
-			start = el.find('.start-loc');
-			end = el.find('.end-loc');
-			load_ui_css = true;
-			if(start.length > 0){
-				load_ui_css = true;
-				datepicker_vals.altField = el.find('.start').first();
-				start.datepicker(datepicker_vals);
-				start_date_formatted = $.datepicker.formatDate( EM.dateFormat, $.datepicker.parseDate('yy-mm-dd' , datepicker_vals.altField.val()) );
-				el.find(".start-loc").val(start_date_formatted);
-				//end 
-				if(end.length > 0){
-					load_ui_css = true;
-					datepicker_vals.altField = el.find('.end').first();
-					end.first().datepicker(datepicker_vals);
-					end_date_formatted = $.datepicker.formatDate( EM.dateFormat, $.datepicker.parseDate('yy-mm-dd' , datepicker_vals.altField.val()) );
-					el.find(".end-loc").first().val(end_date_formatted);
-				}
-			}
-		});
-		*/
+		em_setup_datepicker('body');
 	}
 	if( load_ui_css ){
 		var script = document.createElement("link");
@@ -691,6 +574,108 @@ jQuery(document).ready( function($){
 	}
 	
 });
+
+function em_setup_datepicker(wrap){	
+	wrap = jQuery(wrap);
+	//default picker vals
+	var datepicker_vals = { altFormat: "yy-mm-dd", changeMonth: true, changeYear: true, firstDay : EM.firstDay };
+	if( EM.dateFormat != ''){
+		datepicker_vals.dateFormat = EM.dateFormat;
+	}
+	jQuery(document).triggerHandler('em_datepicker', datepicker_vals);
+	
+	//apply datepickers
+	dateDivs = wrap.find('.em-date-single, .em-date-range');
+	if( dateDivs.length > 0 ){
+		//apply datepickers to elements
+		dateDivs.find('input.em-date-input-loc').each(function(i,dateInput){
+			//init the datepicker
+			var dateInput = jQuery(dateInput);
+			var dateValue = dateInput.next('input.em-date-input');
+			var dateValue_value = dateValue.val();
+			dateInput.datepicker(datepicker_vals);
+			dateInput.datepicker('option', 'altField', dateValue);
+			//now set the value
+			if( dateValue_value ){
+				var this_date_formatted = jQuery.datepicker.formatDate( EM.dateFormat, jQuery.datepicker.parseDate('yy-mm-dd', dateValue_value) );
+				dateInput.val(this_date_formatted);
+				dateValue.val(dateValue_value);
+			}
+			//add logic for texts
+			dateInput.change(function(){
+				if( jQuery(this).val() == '' ){
+					jQuery(this).next('.em-date-input').val('');
+				}
+			});
+		});
+		//deal with date ranges
+		dateDivs.filter('.em-date-range').find('input.em-date-input-loc').each(function(i,dateInput){
+			//finally, apply start/end logic to this field
+			dateInput = jQuery(dateInput);
+			if( dateInput.hasClass('em-date-start') ){
+				dateInput.datepicker('option','onSelect', function( selectedDate ) {
+					//get corresponding end date input, we expect ranges to be contained in .em-date-range with a start/end input element
+					var startDate = jQuery(this);
+					var endDate = startDate.parents('.em-date-range').find('.em-date-end').first();
+					if( startDate.val() > endDate.val() && endDate.val() != '' ){
+						endDate.datepicker( "setDate" , selectedDate );
+					}
+					endDate.datepicker( "option", 'minDate', selectedDate );
+				});
+			}else if( dateInput.hasClass('em-date-end') ){
+				var startInput = dateInput.parents('.em-date-range').find('.em-date-start').first();
+				if( startInput.val() != '' ){
+					dateInput.datepicker('option', 'minDate', startInput.val());
+				}
+			}
+		});
+	}
+}
+
+function em_setup_timepicker(wrap){
+	wrap = jQuery(wrap);
+	wrap.find(".em-time-input").timePicker({
+		show24Hours: EM.show24hours == 1,
+		step:15
+	});
+	
+	// Keep the duration between the two inputs.
+	wrap.find(".em-time-range input.em-time-start").each( function(i, el){
+		jQuery(el).data('oldTime', jQuery.timePicker(el).getTime());
+	}).change( function() {
+		var start = jQuery(this);
+		var end = start.nextAll('.em-time-end');
+		if (end.val()) { // Only update when second input has a value.
+		    // Calculate duration.
+			var oldTime = start.data('oldTime');
+		    var duration = (jQuery.timePicker(end).getTime() - oldTime);
+		    var time = jQuery.timePicker(start).getTime();
+		    if( jQuery.timePicker(end).getTime() >= oldTime ){
+			    // Calculate and update the time in the second input.
+			    jQuery.timePicker(end).setTime(new Date(new Date(time.getTime() + duration)));
+			}
+		    start.data('oldTime', time); 
+		}
+	});
+	// Validate.
+	wrap.find(".em-time-range input.em-time-end").change(function() {
+		var end = jQuery(this);
+		var start = end.prevAll('.em-time-start');
+		if( start.val() ){
+			if(jQuery.timePicker(start).getTime() > jQuery.timePicker(this).getTime()) { end.addClass("error"); }
+			else { end.removeClass("error"); }
+		}
+	});
+	//Sort out all day checkbox
+	wrap.find('.em-time-range input.em-time-all-day').change(function(){
+		var allday = jQuery(this);
+		if( allday.is(':checked') ){
+			allday.siblings('.em-time-input').css('background-color','#ccc');
+		}else{
+			allday.siblings('.em-time-input').css('background-color','#fff');
+		}
+	}).trigger('change');
+}
 
 /* Useful function for adding the em_ajax flag to a url, regardless of querystring format */
 var em_ajaxify = function(url){

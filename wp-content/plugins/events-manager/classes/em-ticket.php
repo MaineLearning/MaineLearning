@@ -324,7 +324,7 @@ class EM_Ticket extends EM_Object{
 					$min = ($this->ticket_min > 0) ? $this->ticket_min:1;
 					$max = ($this->ticket_max > 0) ? $this->ticket_max:get_option('dbem_bookings_form_max');
 				?>
-				<?php if($zero_value) : ?><option>0</option><?php endif; ?>
+				<?php if($zero_value && $this->ticket_min == 0) : ?><option>0</option><?php endif; ?>
 				<?php for( $i=$min; $i<=$available_spaces && $i<=$max; $i++ ): ?>
 					<option <?php if($i == $default_value){ echo 'selected="selected"'; $shown_default = true; } ?>><?php echo $i ?></option>
 				<?php endfor; ?>
