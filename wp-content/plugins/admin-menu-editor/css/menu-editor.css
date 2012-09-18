@@ -122,6 +122,11 @@ a.ws_edit_link:hover {
 	background-image: url('../images/bullet_arrow_down2.png');
 }
 
+.ws_edit_link:active {
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .ws_edit_link_expanded {
 	background-color: #ffffd0;
 	border-bottom: none;
@@ -383,6 +388,9 @@ to accomodate the dropdown button.
 	padding: 4px;
 	border: 1px solid #c0c0e0;
 	float: left;
+
+    width: 16px;
+    height: 16px;
 	
 	border-radius: 3px;
 	-moz-border-radius: 3px;

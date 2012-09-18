@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 3.2
-Tested up to: 3.4.1
-Stable tag: 1.1.10
+Tested up to: 3.4.2
+Stable tag: 1.1.11
 
 Lets you edit the WordPress admin menu. You can re-order, hide or rename menus, add custom menus and more. 
 
@@ -62,6 +62,14 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 3. Re-ordering menu items via drag and drop
 
 == Changelog ==
+
+= 1.1.11 =
+* Tested on WP 3.4.2 and WP 3.5-alpha-21879.
+* Fixed a visual glitch related to the arrow that's used to expand menu settings. In certain situations clicking it would cause the arrow icon to be briefly replaced with multiple copies of the same icon.
+* Fixed the position of the URL and capability dropdown lists. Now they should show up directly under the corresponding input box instead of appearing some distance down and to the right.
+* Fixed the size of the toolbar buttons - now they're perfectly square.
+* Fixed a rare bug that would sometimes cause the wrong menu to be marked as active/expanded.
+* Only display the survey notice on the menu editor page, not on all admin pages.
 
 = 1.1.10 =
 * Added a new user survey. The notice will only appear for users who didn't complete or hide the previous one.
@@ -164,6 +172,9 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 * Added a readme.txt
 
 == Upgrade Notice ==
+
+= 1.1.11 =
+This version fixes several minor bugs and layout problems.
 
 = 1.1.9 =
 Optional upgrade. Just adds a couple of screenshots for the WordPress.org plugin description.
