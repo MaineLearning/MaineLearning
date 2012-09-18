@@ -37,6 +37,7 @@ CONTAINERS
 body:not(.wp-admin) {
 padding-top: 0!important;
 }
+li#bp-adminbar-blogs-menu { display: none !important; }
 
 body
 {
