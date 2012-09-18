@@ -651,6 +651,8 @@ div#subnav.item-list-tabs
 	margin: 0;
 }
 
+#blogs-personal-li { display: none; }
+
 .generic-button
 {
 	float: right;
