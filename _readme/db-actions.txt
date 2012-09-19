@@ -3,10 +3,13 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
-After upgrade to WP 3.4.2, run the "Upgrade Network" process.
+Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
+
 
 ------------------------------------
 DONE
+
+After upgrade to WP 3.4.2, run the "Upgrade Network" process.
 
 Run BuddyPress upgrade wizard (BP 1.6.1)
 
