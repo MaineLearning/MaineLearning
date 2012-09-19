@@ -212,7 +212,11 @@ NAVIGATION
 	right: auto;
 }
 
-ul#nav { max-width: 70%; }
+ul#nav
+{
+	float: left;
+	max-width: 70%;
+}
 
 #nav li a
 {
