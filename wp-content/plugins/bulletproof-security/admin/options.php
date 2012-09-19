@@ -14,7 +14,7 @@ if ( !current_user_can('manage_options') ){
 ?>
 
 <div class="wrap">
-<?php $bulletproof_ver = '.47.3'; ?>
+<?php $bulletproof_ver = '.47.4'; ?>
 <div id="bpsUprade"><strong>
 <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link opens in new browser window">Why Upgrade to BulletProof Security Pro?</a></strong></div>
 
@@ -71,7 +71,7 @@ require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 			<div class="bps-star bps-star2"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('2 stars', 'bulletproof-security') ?>" /></div>
 			<div class="bps-star bps-star1"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('1 star', 'bulletproof-security') ?>" /></div>
 		</div>
-		<div class="bps-star-link"><a target="_blank" title="More Star Ratings = more goodies added to BPS" href="http://wordpress.org/extend/plugins/<?php echo $bpsapi->slug ?>/"> <?php _e('Please Rate BPS', 'bulletproof-security'); ?></a> <small><?php echo sprintf(__('%s Ratings', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings)); ?> </small></div>
+		<div class="bps-star-link"><a target="_blank" title="Link opens in new browser window" href="http://wordpress.org/extend/plugins/<?php echo $bpsapi->slug ?>/"> <?php _e('Please Rate BPS', 'bulletproof-security'); ?></a> <small><?php echo sprintf(__('%s Ratings', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings)); ?> </small></div>
         <br />
 		<?php endif; 
 	  } // if ( !is_wp_error($bpsapi)
@@ -531,8 +531,8 @@ $bpsSuccessMessageSec = '<font color="green"><strong>'.__('Success! Your BulletP
 
 $bpsFailMessageSec = '<font color="red"><strong>'.__('The file ', 'bulletproof-security')."$bps_auto_write_secure_file" . __(' is not writable or does not exist.', 'bulletproof-security').'</strong></font><br><strong>'.__('Check that the file is named secure.htaccess and that the file exists in the /bulletproof-security/admin/htaccess master folder. If this is not the problem click ', 'bulletproof-security').'<a href="http://www.ait-pro.com/aitpro-blog/2566/bulletproof-security-plugin-support/bulletproof-security-error-messages" target="_blank">'.__('here', 'bulletproof-security').'</a>'.__(' for more help info.', 'bulletproof-security').'</strong><br>';
 
-$bps_secure_content_top = "#   BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS     \n
-# If you edit the  BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS text above
+$bps_secure_content_top = "#   BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS     \n
+# If you edit the  BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -758,7 +758,7 @@ $bps_string_replace_maint = array(".");
 $bps_get_IP_maint = str_replace($bps_string_replace_maint, "\.", $_SERVER['REMOTE_ADDR']) . "$";
 $bps_get_wp_root_maint = bps_wp_get_root_folder();
 $bps_auto_write_maint_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
-$bps_maint_top = "#   BULLETPROOF .47.3 MAINTENANCE  .HTACCESS     \n\n";    
+$bps_maint_top = "#   BULLETPROOF .47.4 MAINTENANCE  .HTACCESS     \n\n";    
 $bps_maint_content = "RewriteEngine On
 RewriteBase $bps_get_wp_root_maint\n
 RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
@@ -1397,7 +1397,7 @@ if (@$_GET['settings-updated'] == true) {
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="bps-system_info_table">
   <tr>
-    <td width="49%" class="bps-table_title"><?php _e('Website / Server / IP Info', 'bulletproof-security'); ?></td>
+    <td width="49%" class="bps-table_title"><?php _e('Website / Server / Opcode Cache / Accelerators / IP Info', 'bulletproof-security'); ?></td>
     <td width="2%">&nbsp;</td>
     <td width="49%" class="bps-table_title"><?php _e('SQL Database / Permalink Structure / WP Installation Folder', 'bulletproof-security'); ?></td>
   </tr>
@@ -1407,93 +1407,160 @@ if (@$_GET['settings-updated'] == true) {
     <td class="bps-table_cell">&nbsp;</td>
   </tr>
   <tr>
-    <td class="bps-table_cell"><?php _e('Website Root Folder', 'bulletproof-security'); ?>: <strong><?php echo get_site_url(); ?></strong></td>
+    <td class="bps-table_cell">
+    <?php 
+	echo __('Website Root Folder', 'bulletproof-security').': <strong>'.get_site_url().'</strong><br>';
+	echo __('Document Root Path', 'bulletproof-security').': <strong>'.esc_html($_SERVER['DOCUMENT_ROOT']).'</strong><br>'; 
+	echo __('WP ABSPATH', 'bulletproof-security').': <strong>'.ABSPATH.'</strong><br>';
+	echo __('Parent Directory', 'bulletproof-security').': <strong>'.dirname(ABSPATH).'</strong><br>';  
+	echo __('Server / Website IP Address', 'bulletproof-security').': <strong>'.esc_html($_SERVER['SERVER_ADDR']).'</strong><br>';    
+	echo __('Host by Address', 'bulletproof-security').': <strong>'.esc_html(gethostbyaddr($_SERVER['SERVER_ADDR'])).'</strong><br>';    
+	echo __('DNS Name Server', 'bulletproof-security').': <strong>'; if ($bpsTargetNS != '') { echo $bpsTargetNS; } else { echo $bpsTarget; } echo '</strong><br>';
+	echo __('Public IP / Your Computer IP Address', 'bulletproof-security').': <strong>'.esc_html($_SERVER['REMOTE_ADDR']).'</strong><br>';
+	echo __('Server Type', 'bulletproof-security').': <strong>'.esc_html($_SERVER['SERVER_SOFTWARE']).'</strong><br>';
+	echo __('Operating System', 'bulletproof-security').': <strong>'.PHP_OS.'</strong><br>';  
+	echo __('Server API', 'bulletproof-security').': <strong>';
+	$sapi_type = php_sapi_name();
+	if (substr($sapi_type, 0, 3) == 'cgi' || substr($sapi_type, 0, 9) == 'litespeed' || substr($sapi_type, 0, 7) == 'caudium' || substr($sapi_type, 0, 8) == 'webjames' || substr($sapi_type, 0, 3) == 'tux' || substr($sapi_type, 0, 5) == 'roxen' || substr($sapi_type, 0, 6) == 'thttpd' || substr($sapi_type, 0, 6) == 'phttpd' || substr($sapi_type, 0, 10) == 'continuity' || substr($sapi_type, 0, 6) == 'pi3web' || substr($sapi_type, 0, 6) == 'milter') {
+    echo $sapi_type.' - '.__('Your Host Server is using CGI.', 'bulletproof-security');
+	} else {
+    echo $sapi_type.' - '.__('Your Host Server is using DSO or another SAPI type.', 'bulletproof-security');
+	}
+	echo '</strong><br>';
+	echo __('Zend Engine Version', 'bulletproof-security').': <strong>'.zend_version().'</strong><br>'; 
+	echo __('Zend Guard/Optimizer', 'bulletproof-security').': <strong>';
+	if (extension_loaded('Zend Optimizer+') && ini_get('zend_optimizerplus.enable') == 1 || ini_get('zend_optimizerplus.enable') == 'On' ) {
+		_e('Zend Optimizer+ Extension is Loaded and Enabled', 'bulletproof-security');
+	}
+	if (extension_loaded('Zend Optimizer')) {
+		_e('Zend Optimizer Extension is Loaded', 'bulletproof-security');
+	}
+	if (extension_loaded('Zend Guard Loader')) {
+		_e('Zend Guard Loader Extension is Loaded', 'bulletproof-security');
+	} else {
+	if (!extension_loaded('Zend Optimizer+') && !extension_loaded('Zend Optimizer') && !extension_loaded('Zend Guard Loader')) {
+		_e('A Zend Extension is Not Loaded', 'bulletproof-security');		
+	}
+	}
+	echo '</strong><br>';    
+	echo __('ionCube Loader', 'bulletproof-security').': <strong>'; 
+	if (extension_loaded('IonCube Loader') && function_exists('ioncube_loader_iversion')) {
+	echo __('ionCube Loader Extension is Loaded ', 'bulletproof-security').__('Version: ', 'bulletproof-security').ioncube_loader_iversion();
+	} else {
+	echo __('ionCube Loader Extension is Not Loaded', 'bulletproof-security');
+	}
+	echo '</strong><br>';
+	echo __('Suhosin', 'bulletproof-security').': <strong>';
+	$bpsconstants = get_defined_constants();
+	if (isset($bpsconstants['SUHOSIN_PATCH']) && $bpsconstants['SUHOSIN_PATCH'] == 1) {
+		_e('The Suhosin-Patch is installed', 'bulletproof-security');
+	}
+	if (extension_loaded('suhosin')) {
+		_e('Suhosin-Extension is Loaded', 'bulletproof-security');	
+	} else {
+	if (!isset($bpsconstants['SUHOSIN_PATCH']) && $bpsconstants['SUHOSIN_PATCH'] != 1 && !extension_loaded('suhosin')) {
+		_e('Suhosin is Not Installed/Loaded', 'bulletproof-security');			
+	}
+	}
+	echo '</strong><br>';
+	echo __('APC', 'bulletproof-security').': <strong>';
+	if (extension_loaded('apc') && ini_get('apc.enabled') == 1 || ini_get('apc.enabled') == 'On' ) {
+		_e('APC Extension is Loaded and Enabled', 'bulletproof-security');
+	} 
+	if (extension_loaded('apc') && ini_get('apc.enabled') == 0 || ini_get('apc.enabled') == 'Off' ) {
+		_e('APC Extension is Loaded but Not Enabled', 'bulletproof-security');
+	} else {
+		_e('APC Extension is Not Loaded', 'bulletproof-security');	
+	}
+	echo '</strong><br>';  	    
+	echo __('eAccelerator', 'bulletproof-security').': <strong>';
+	if (extension_loaded('eaccelerator') && ini_get('eaccelerator.enable') == 1 || ini_get('eaccelerator.enable') == 'On' ) {
+		_e('eAccelerator Extension is Loaded and Enabled', 'bulletproof-security');
+	} 
+	if (extension_loaded('eaccelerator') && ini_get('eaccelerator.enable') == 0 || ini_get('eaccelerator.enable') == 'Off' ) {
+		_e('eAccelerator Extension is Loaded but Not Enabled', 'bulletproof-security');
+	} else {
+		_e('eAccelerator Extension is Not Loaded', 'bulletproof-security');	
+	}	
+	echo '</strong><br>';  	  
+	echo __('XCache', 'bulletproof-security').': <strong>';
+	if (extension_loaded('xcache') && ini_get('xcache.size') > 0 && ini_get('xcache.cacher') == 'On' || ini_get('xcache.cacher') == '1') {
+		_e('XCache Extension is Loaded and Enabled', 'bulletproof-security');
+	} 
+	if (extension_loaded('xcache') && ini_get('xcache.size') <= 0 && ini_get('xcache.cacher') == 'Off' || ini_get('xcache.cacher') == '0') {
+		_e('XCache Extension is Loaded but Not Enabled', 'bulletproof-security');
+	} else {
+		_e('XCache Extension is Not Loaded', 'bulletproof-security');	
+	}	
+	echo '</strong><br>';
+	echo __('Varnish', 'bulletproof-security').': <strong>';
+	if (extension_loaded('varnish')) {
+		_e('Varnish Extension is Loaded', 'bulletproof-security');
+	} else {
+		_e('Varnish Extension is Not Loaded', 'bulletproof-security');	
+	}	
+	echo '</strong><br>';
+	echo __('Memcache', 'bulletproof-security').': <strong>';
+	if (extension_loaded('memcache')) {
+	$memcache = new Memcache;
+	@$memcache->connect('localhost', 11211);
+	echo __('Memcache Extension is Loaded', 'bulletproof-security').__('Version: ', 'bulletproof-security').@$memcache->getVersion();
+	} else {
+		_e('Memcache Extension is Not Loaded', 'bulletproof-security');	
+	}	
+	echo '</strong><br>';
+	echo __('Memcached', 'bulletproof-security').': <strong>';
+	if (extension_loaded('memcached')) {
+	$memcached = new Memcached();
+	@$memcached->addServer('localhost', 11211);
+	echo __('Memcached Extension is Loaded', 'bulletproof-security').__('Version: ', 'bulletproof-security').@$memcached->getVersion();
+	} else {
+		_e('Memcached Extension is Not Loaded', 'bulletproof-security');	
+	}	
+	echo '</strong><br>';
+	?>
+
+    </td>
     <td>&nbsp;</td>
-    <td rowspan="12" class="bps-table_cell">
-	<?php _e('MySQL Database Version', 'bulletproof-security'); ?>: <?php $sqlversion = $wpdb->get_var("SELECT VERSION() AS version"); ?><strong><?php echo $sqlversion; ?></strong><br />
-      <?php _e('MySQL Client Version', 'bulletproof-security'); ?>
-      : <strong><?php echo mysql_get_client_info(); ?></strong><br />
-      <?php _e('Database Host', 'bulletproof-security'); ?>
-      : <strong><?php echo DB_HOST; ?></strong>&nbsp;</strong><br />
-      <?php _e('Database Name', 'bulletproof-security'); ?>
-      : <strong><?php echo DB_NAME; ?></strong>&nbsp;</strong><br />
-      <?php _e('Database User', 'bulletproof-security'); ?>
-      : <strong><?php echo DB_USER; ?></strong><br />
-      <?php _e('SQL Mode', 'bulletproof-security'); ?>
-      : 
-      <?php $mysqlinfo = $wpdb->get_results("SHOW VARIABLES LIKE 'sql_mode'");
-	if (is_array($mysqlinfo)) $sql_mode = $mysqlinfo[0]->Value;
-    if (empty($sql_mode)) $sql_mode = _e('Not Set', 'bulletproof-security');
-	else $sql_mode = _e('Off', 'bulletproof-security'); ?>      <strong><?php echo $sql_mode; ?></strong><br /><br />
-      <?php _e('WordPress Installation Folder', 'bulletproof-security'); ?>
-      : <strong><?php echo bps_wp_get_root_folder(); ?></strong><br />
-      <?php _e('WordPress Installation Type', 'bulletproof-security'); ?>
-      : <strong><?php echo bps_wp_get_root_folder_display_type(); ?></strong><br />
-      <?php _e('WP Permalink Structure', 'bulletproof-security'); ?>
-      : <strong><?php $permalink_structure = get_option('permalink_structure'); echo $permalink_structure; ?></strong><br />
-	  <?php echo bps_check_permalinks(); ?><br />
-      <?php echo bps_check_php_version (); ?>
+    <td rowspan="2" class="bps-table_cell">
+	<?php 
+	echo __('MySQL Database Version', 'bulletproof-security').': ';
+	$sqlversion = $wpdb->get_var("SELECT VERSION() AS version");
+	echo '<strong>'.$sqlversion.'</strong><br>';
+	echo __('MySQL Client Version', 'bulletproof-security').': <strong>'.mysql_get_client_info().'</strong><br>';
+	echo __('Database Host', 'bulletproof-security').': <strong>'.DB_HOST.'</strong><br>';
+	echo __('Database Name', 'bulletproof-security').': <strong>'.DB_NAME.'</strong><br>';
+	echo __('Database User', 'bulletproof-security').': <strong>'.DB_USER.'</strong><br>';
+	echo __('SQL Mode', 'bulletproof-security').': ';
+	$mysqlinfo = $wpdb->get_results("SHOW VARIABLES LIKE 'sql_mode'");
+	if (is_array($mysqlinfo)) { 
+	$sql_mode = $mysqlinfo[0]->Value;
+    if (empty($sql_mode)) { 
+	$sql_mode = '<strong>'.__('Not Set', 'bulletproof-security').'</strong>';
+	} else {
+	$sql_mode = '<strong>'.__('Off', 'bulletproof-security').'</strong>';
+	}}
+	echo $sql_mode;
+	echo '<br><br>';
+	echo __('WordPress Installation Folder', 'bulletproof-security').': <strong>';
+	echo bps_wp_get_root_folder().'</strong><br>';
+	echo __('WordPress Installation Type', 'bulletproof-security').': ';
+	echo bps_wp_get_root_folder_display_type().'<br>';
+	echo __('Network/Multisite', 'bulletproof-security').': ';
+	echo bps_multsite_check().'<br>';
+	echo __('WP Permalink Structure', 'bulletproof-security').': <strong>';
+	$permalink_structure = get_option('permalink_structure'); 
+	echo $permalink_structure.'</strong><br>';
+	echo bps_check_permalinks().'<br>';
+	echo bps_check_php_version().'<br>';
+	echo __('Browser Compression Supported', 'bulletproof-security').': <strong>'.esc_html($_SERVER['HTTP_ACCEPT_ENCODING']).'</strong>';
+	?>
       </td>
   </tr>
   <tr>
-    <td class="bps-table_cell"><?php _e('Document Root Path', 'bulletproof-security'); ?>: <strong><?php echo esc_html($_SERVER['DOCUMENT_ROOT']); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('WP ABSPATH', 'bulletproof-security'); ?>: <strong><?php echo ABSPATH; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Parent Directory', 'bulletproof-security'); ?>: <strong><?php echo dirname(ABSPATH); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Server / Website IP Address', 'bulletproof-security'); ?>: <strong><?php echo esc_html($_SERVER['SERVER_ADDR']); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Host by Address', 'bulletproof-security'); ?>: <strong><?php echo esc_html(gethostbyaddr($_SERVER['SERVER_ADDR'])); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('DNS Name Server', 'bulletproof-security'); ?>: <strong><?php if ($bpsTargetNS != '') { echo $bpsTargetNS; } else { echo $bpsTarget; } ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Public IP / Your Computer IP Address', 'bulletproof-security'); ?>: <strong><?php echo esc_html($_SERVER['REMOTE_ADDR']); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Server Type', 'bulletproof-security'); ?>: <strong><?php echo esc_html($_SERVER['SERVER_SOFTWARE']); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Operating System', 'bulletproof-security'); ?>: <strong><?php echo PHP_OS; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Server API', 'bulletproof-security'); ?>: <strong><?php $sapi_type = php_sapi_name();
-	if (substr($sapi_type, 0, 3) == 'cgi' || substr($sapi_type, 0, 9) == 'litespeed' || substr($sapi_type, 0, 7) == 'caudium' || substr($sapi_type, 0, 8) == 'webjames' || substr($sapi_type, 0, 3) == 'tux' || substr($sapi_type, 0, 5) == 'roxen' || substr($sapi_type, 0, 6) == 'thttpd' || substr($sapi_type, 0, 6) == 'phttpd' || substr($sapi_type, 0, 10) == 'continuity' || substr($sapi_type, 0, 6) == 'pi3web' || substr($sapi_type, 0, 6) == 'milter') {
-    echo $sapi_type.' - '; _e('Your Host Server is using CGI.', 'bulletproof-security');
-	} else {
-    echo $sapi_type.' - '; _e('Your Host Server is using DSO or another SAPI type.', 'bulletproof-security');
-	} ?></strong>
-    </td>
-    <td>&nbsp;</td>
-    </tr>  
-  <tr>
-    <td class="bps-table_cell"><?php echo bps_multsite_check(); ?></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('Browser Compression Supported', 'bulletproof-security'); ?>: <strong><?php echo esc_html($_SERVER['HTTP_ACCEPT_ENCODING']); ?></strong></td>
-    <td>&nbsp;</td>
-    <td class="bps-table_cell">&nbsp;</td>
-    </tr>
-  <tr>
     <td class="bps-table_cell">&nbsp;</td>
     <td>&nbsp;</td>
-    <td class="bps-table_cell">&nbsp;</td>
+    <!-- <td class="bps-table_cell">&nbsp;</td> -->
     </tr>
   <tr>
     <td class="bps-table_title"><?php _e('PHP Server / PHP.ini Info', 'bulletproof-security'); ?></td>
@@ -1506,104 +1573,148 @@ if (@$_GET['settings-updated'] == true) {
     <td class="bps-table_cell">&nbsp;</td>
   </tr>
   <tr>
-    <td class="bps-table_cell"><?php _e('PHP Version', 'bulletproof-security'); ?>: <strong><?php echo PHP_VERSION; ?></strong></td>
+    <td class="bps-table_cell">
+	<?php 
+	echo __('PHP Version', 'bulletproof-security').': <strong>'.PHP_VERSION.'</strong><br>';
+	echo __('PHP Memory Usage', 'bulletproof-security').': <strong>'.round(memory_get_usage() / 1024 / 1024, 2) . __(' MB').'</strong><br>';    
+	echo __('WordPress Admin Memory Limit', 'bulletproof-security').': '; $memory_limit = ini_get('memory_limit');
+	echo '<strong>'.$memory_limit.'</strong><br>';
+	echo __('WordPress Base Memory Limit', 'bulletproof-security').': <strong>'.WP_MEMORY_LIMIT.'</strong><br>';
+	echo __('PHP Actual Configuration Memory Limit', 'bulletproof-security').': <strong>'.get_cfg_var('memory_limit').'</strong><br>';
+	echo __('PHP Max Upload Size', 'bulletproof-security').': '; $upload_max = ini_get('upload_max_filesize');
+	echo '<strong>'.$upload_max.'</strong><br>';
+	echo __('PHP Max Post Size', 'bulletproof-security').': '; $post_max = ini_get('post_max_size');
+	echo '<strong>'.$post_max.'</strong><br>';
+	echo __('PHP Safe Mode', 'bulletproof-security').': ';
+	if (ini_get('safe_mode') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Allow URL fopen', 'bulletproof-security').': ';
+	if (ini_get('allow_url_fopen') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}	
+	echo __('PHP Allow URL Include', 'bulletproof-security').': ';
+	if (ini_get('allow_url_include') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} 
+	echo __('PHP Display Errors', 'bulletproof-security').': ';
+	if (ini_get('display_errors') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Display Startup Errors', 'bulletproof-security').': ';
+	if (ini_get('display_startup_errors') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Expose PHP', 'bulletproof-security').': ';
+	if (ini_get('expose_php') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Register Globals', 'bulletproof-security').': ';
+	if (ini_get('register_globals') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP MySQL Allow Persistent Connections', 'bulletproof-security').': ';
+	if (ini_get('mysql.allow_persistent') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Output Buffering', 'bulletproof-security').': ';
+	$output_buffering = ini_get('output_buffering');
+	if (ini_get('output_buffering') != 0) { 
+	echo '<font color="red"><strong>'.$output_buffering.'</strong></font><br>';
+	} else { 
+	echo '<font color="green"><strong>'.$output_buffering.'</strong></font><br>'; 
+	}
+	echo __('PHP Max Script Execution Time', 'bulletproof-security').': '; $max_execute = ini_get('max_execution_time');
+	echo '<strong>'.$max_execute.' Seconds</strong><br>';
+	echo __('PHP Magic Quotes GPC', 'bulletproof-security').': ';
+	if (ini_get('magic_quotes_gpc') == 1) { 
+	$text = '<font color="red"><strong>'.__('On', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	} else { 
+	$text = '<font color="green"><strong>'.__('Off', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>'; 
+	}
+	echo __('PHP open_basedir', 'bulletproof-security').': ';
+	$open_basedir = ini_get('open_basedir');
+	if ($open_basedir != '') {
+	echo '<strong>'.$open_basedir.'</strong><br>';
+	} else {
+	echo '<strong>'.__('not in use', 'bulletproof-security').'</strong><br>';	
+	}
+	echo __('PHP XML Support', 'bulletproof-security').': ';
+	if (is_callable('xml_parser_create')) { 
+	$text = '<strong>'.__('Yes', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<strong>'.__('No', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP IPTC Support', 'bulletproof-security').': ';
+	if (is_callable('iptcparse')) { 
+	$text = '<strong>'.__('Yes', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<strong>'.__('No', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	echo __('PHP Exif Support', 'bulletproof-security').': ';
+	if (is_callable('exif_read_data')) { 
+	$text = '<strong>'.__('Yes', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	} else { 
+	$text = '<strong>'.__('No', 'bulletproof-security').'</strong></font>';
+	echo $text.'<br>';
+	}
+	?>
+	
+    </td>      
     <td>&nbsp;</td>
-    <td rowspan="18" class="bps-table_cell">
-	<?php // BPS Pro ONLY ?>
-	<?php //echo bpsPro_sysinfo_mod_checks_smon(); ?><br />
-	<?php //echo bpsPro_sysinfo_mod_checks_hud(); ?><br />
-	<?php //echo bpsPro_sysinfo_mod_checks_phpini(); ?><br />
-	<?php //echo bpsPro_sysinfo_mod_checks_elog(); ?><br />
+    <td rowspan="2" class="bps-table_cell">
+	<?php 
+	//echo bpsPro_sysinfo_mod_checks_smon().'<br>';
+	//echo bpsPro_sysinfo_mod_checks_hud().'<br>';
+	//echo bpsPro_sysinfo_mod_checks_phpini().'<br>';
+	//echo bpsPro_sysinfo_mod_checks_elog().'<br>';
+	?>
+    
     </td>
   </tr>
   <tr>
-    <td class="bps-table_cell"><?php _e('PHP Memory Usage', 'bulletproof-security'); ?>: <strong><?php echo round(memory_get_usage() / 1024 / 1024, 2) . __(' MB'); ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Memory Limit', 'bulletproof-security'); ?>: <?php if(ini_get('memory_limit')) $memory_limit = ini_get('memory_limit');
-        else $memory_limit = __('N/A'); ?><strong><?php echo $memory_limit; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Max Upload Size', 'bulletproof-security'); ?>: <?php if(ini_get('upload_max_filesize')) $upload_max = ini_get('upload_max_filesize');
-        else $upload_max = __('N/A'); ?><strong><?php echo $upload_max; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Max Post Size', 'bulletproof-security'); ?>: <?php if(ini_get('post_max_size')) $post_max = ini_get('post_max_size');
-        else $post_max = __('N/A'); ?><strong><?php echo $post_max; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Safe Mode', 'bulletproof-security'); ?>: <strong><?php if(ini_get('safe_mode')) $safe_mode = _e('On', 'bulletproof-security');
-        else $safe_mode = _e('Off', 'bulletproof-security'); ?><?php echo $safe_mode; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Allow URL fopen', 'bulletproof-security'); ?>: <strong><?php if(ini_get('allow_url_fopen')) $allow_url_fopen = _e('On', 'bulletproof-security');
-        else $allow_url_fopen = _e('Off', 'bulletproof-security'); ?><?php echo $allow_url_fopen; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-   <tr>
-    <td class="bps-table_cell"><?php _e('PHP Allow URL Include', 'bulletproof-security'); ?>: <strong><?php if(ini_get('allow_url_include')) $allow_url_include = _e('On', 'bulletproof-security');
-        else $allow_url_include = _e('Off', 'bulletproof-security'); ?><?php echo $allow_url_include; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Display Errors', 'bulletproof-security'); ?>: <strong><?php if(ini_get('display_errors')) $display_errors = _e('On', 'bulletproof-security');
-        else $display_errors = _e('Off', 'bulletproof-security'); ?><?php echo $display_errors; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Display Startup Errors', 'bulletproof-security'); ?>: <strong><?php if(ini_get('display_startup_errors')) $display_startup_errors = _e('On', 'bulletproof-security');
-        else $display_startup_errors = _e('Off', 'bulletproof-security'); ?><?php echo $display_startup_errors; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-   <tr>
-    <td class="bps-table_cell"><?php _e('PHP Expose PHP', 'bulletproof-security'); ?>: <strong><?php if(ini_get('expose_php')) $expose_php = _e('On', 'bulletproof-security');
-        else $expose_php = _e('Off', 'bulletproof-security'); ?><?php echo $expose_php; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Register Globals', 'bulletproof-security'); ?>: <strong><?php if(ini_get('register_globals')) $register_globals = _e('On', 'bulletproof-security');
-        else $register_globals = _e('Off', 'bulletproof-security'); ?><?php echo $register_globals; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Max Script Execution Time', 'bulletproof-security'); ?>: <strong><?php if(ini_get('max_execution_time')) $max_execute = ini_get('max_execution_time');
-        else $max_execute = __('N/A'); ?><?php echo $max_execute; ?> Seconds</strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Magic Quotes GPC', 'bulletproof-security'); ?>: <strong><?php if(ini_get('magic_quotes_gpc')) $magic_quotes_gpc = _e('On', 'bulletproof-security');
-        else $magic_quotes_gpc = _e('Off', 'bulletproof-security'); ?><?php echo $magic_quotes_gpc; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP open_basedir', 'bulletproof-security'); ?>: <strong><?php if(ini_get('open_basedir')) $open_basedir = _e('On', 'bulletproof-security');
-        else $open_basedir = _e('Off', 'bulletproof-security'); ?><?php echo $open_basedir; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP XML Support', 'bulletproof-security'); ?>: <strong><?php if (is_callable('xml_parser_create')) $xml = _e('Yes', 'bulletproof-security');
-        else $xml = _e('No', 'bulletproof-security'); ?><?php echo $xml; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP IPTC Support', 'bulletproof-security'); ?>: <strong><?php if (is_callable('iptcparse')) $iptc = _e('Yes', 'bulletproof-security');
-        else $iptc = _e('No', 'bulletproof-security'); ?><?php echo $iptc; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td class="bps-table_cell"><?php _e('PHP Exif Support', 'bulletproof-security'); ?>: <strong><?php if (is_callable('exif_read_data')) $exif = _e('Yes', 'bulletproof-security'). " ( V" . substr(phpversion('exif'),0,4) . ")" ;
-        else $exif = _e('No', 'bulletproof-security'); ?><?php echo $exif; ?></strong></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
     <td class="bps-table_cell">&nbsp;</td>
     <td>&nbsp;</td>
-    <td class="bps-table_cell">&nbsp;</td>
+    <!-- <td class="bps-table_cell">&nbsp;</td> -->
   </tr>
   <tr>
     <td class="bps-table_cell_bottom">&nbsp;</td>
@@ -2557,19 +2668,19 @@ jQuery(document).ready(function($){
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-backup-restore" target="_blank"><?php _e('Backup & Restore Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/" target="_blank"><?php _e('BPS .47.3 Guide', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/" target="_blank"><?php _e('BPS .47.4 Troubleshooting Guide', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2585/bulletproof-security-plugin-support/wordpress-website-maintenance-wordpress-maintenance-mode" target="_blank"><?php _e('Maintenance Mode Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.3 Features', 'bulletproof-security'); ?></a></td>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.3 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.4 Features', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.4 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/319/bulletproof-security-plugin-support/bulletproof-security-comments-questions-problems-wishlist/" target="_blank"><?php _e('Post Questions and Comments for Assistance', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#modifying-htaccess-files" target="_blank"><?php _e('Modifying BPS .htaccess Files for WordPress Subfolders', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.3 Screenshots', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.4 Screenshots', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2185/bulletproof-security-plugin-support/bulletproof-security-file-editing-editing-files-within-the-wordpress-dashboard/" target="_blank"><?php _e('File Editing Within The Dashboard Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
@@ -2608,7 +2719,7 @@ jQuery(document).ready(function($){
   </tr>
  <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('Automatic htaccess file updating on upgrade installation', 'bulletproof-security'); ?></strong><br /><?php _e('When upgrading/updating the BulletProof Security plugin you will see this WP Dashboard Alert. <strong>BPS Alert! Your site does not appear to be protected by BulletProof Security.</strong> As of BulletProof Security .47.3 WP Dashboard Alerts have been added to check your Root and wp-admin htaccess files to ensure that your website is protected. During the upgrade your htaccess files will be automatically updated and any new htaccess security filters will be automatically added to your htaccess files. In order for BPS to automatically update your htaccess files you will need to stay current with BPS plugin updates and install the latest BPS plugin updates when they are available. Any custom htaccess code or modifications that you have made to your htaccess files will not be altered, modified or changed. Activating BulletProof Modes again after upgrading BPS is no longer necessary.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Automatic htaccess File Updating on Upgrade Installation', 'bulletproof-security'); ?></strong><br /><?php _e('When upgrading/updating the BulletProof Security plugin you will see this WP Dashboard Alert. <strong>BPS Alert! Your site does not appear to be protected by BulletProof Security.</strong> As of BulletProof Security .47.3 WP Dashboard Alerts have been added to check your Root and wp-admin htaccess files to ensure that your website is protected. During the upgrade your htaccess files will be automatically updated and any new htaccess security filters will be automatically added to your htaccess files. Any custom htaccess code or modifications that you have made to your htaccess files will not be altered, modified or changed. Activating BulletProof Modes again after upgrading BPS is no longer necessary.', 'bulletproof-security'); ?></td>
   </tr>
 <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
@@ -2616,7 +2727,7 @@ jQuery(document).ready(function($){
   </tr>
  <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('New htaccess security filter added automatically during upgrade', 'bulletproof-security'); ?></strong><br /><?php _e('1 new security filter added in .47.2 and 1 new security filter added in .47.3. Upgrades are cumulative for 2 BPS version upgrades only. If you have a BPS version installed that is 2 versions older than the most current BPS version you will need to use AutoMagic and activate BulletProof Modes to get all the newest security filters. Example: upgrading from version .47.1 to .47.3 will include all the newest security filters.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Improved & Extended Automatic htaccess File Upgrading', 'bulletproof-security'); ?></strong><br /><?php _e('Automatic htaccess file updating will now update htaccess files from BPS version .46.9 to the current version of BPS.', 'bulletproof-security'); ?></td>
   </tr>    
     <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
@@ -2624,7 +2735,15 @@ jQuery(document).ready(function($){
   </tr> 
   <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('Lithuanian Language Translation by Vincent G from Host1Free.com', 'bulletproof-security'); ?></strong><br /><?php _e('If you would like to translate BPS into another language, a language translation tutorial using Poedit has been created here - ', 'bulletproof-security'); ?><a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Language Translation Tutorial', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Additional System Info Checks Added', 'bulletproof-security'); ?></strong><br /><?php _e('The BPS System Info page now performs and displays these additional System Info Checks: Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache & Memcached. These System Info checks will check if extensions are installed, loaded, enabled or disabled.', 'bulletproof-security'); ?></a></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Additional Memory Limit Checks', 'bulletproof-security'); ?></strong><br /><?php _e('The BPS System Info page now performs and displays these additional Memory Limit Checks: WordPress Admin Memory Limit, WordPress Base Memory Limit and PHP Actual Configuration Memory Limit.', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
@@ -2687,10 +2806,12 @@ jQuery(document).ready(function($){
     <td colspan="2" class="bps-table_title">&nbsp;</td>
   </tr>
   <tr>
-    <td width="62%" class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2835/bulletproof-security-pro/bulletproof-security-pro-features/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Features', 'bulletproof-security'); ?></a></td>
-    <td width="38%" rowspan="10" valign="top" class="bps-table_cell_help">
+    <td width="62%" class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/videos/quick-install/bps-pro-quick-setup.html" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro 5 Minute Installation & Setup Video Tutorial', 'bulletproof-security'); ?></a><br /><br />
+    <a href="http://www.ait-pro.com/aitpro-blog/videos/upgrade/bps-pro-plugin-upgrade.html" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro One Click Upgrade Video Tutorial', 'bulletproof-security'); ?></a></td>
+    <td width="38%" rowspan="11" valign="top" class="bps-table_cell_help">
     <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Vs BPS Free Feature Comparison', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/2837/bulletproof-security-pro/bulletproof-security-pro-screenshots/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Screenshots', 'bulletproof-security'); ?></a><br /><br />
+    <a href="http://www.ait-pro.com/aitpro-blog/4442/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-9/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.9', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4197/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-8/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.8', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4144/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-7/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.7', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4029/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-6/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.6', 'bulletproof-security'); ?></a><br /><br />
@@ -2704,31 +2825,29 @@ jQuery(document).ready(function($){
     </td>
   </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<font color="green"><strong>'; _e('NEW - ARQ Infinity - Core Components: AutoRestore & Quarantine: ', 'bulletproof-security'); echo '</strong></font>'; _e('BulletProof Security Pro takes website security to the ultimate level with ARQ Infinity. This powerful new BPS Pro feature is the first of its kind in website security protection. ARQ Infinity utilizes countermeasure website security that has the capability to protect your individual website files (WordPress and non-WordPress files) even if your Web Host Server is hacked. ARQ Infinity is a real-time File Monitor that automatically autorestores and quarantines files.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('5 Minute Installation and Setup: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro first time installations and setup take only 5 minutes. Click the BPS Pro 5 Minute Installation & Setup Video Tutorial link above.', 'bulletproof-security'); ?></td>
     </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('One Click BPS Pro Upgrade: ', 'bulletproof-security'); echo '</strong>'; _e('Install BPS Pro upgrades in exactly the same way that you install all of your other WordPress plugin upgrades. The upgrade notification is also displayed in exactly the same way as all of your other WordPress plugins.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('One Click Upgrades: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro Plugin upgrade notifications are displayed in your WordPress Dashboard exactly the same way as all other WordPress plugins. All BPS Pro files are automatically updated during the upgrade. Click the BPS Pro One Click Upgrade Video Tutorial link above.', 'bulletproof-security'); ?></td>
     </tr>
  <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Automatic File Update: ', 'bulletproof-security'); echo '</strong>'; _e('All BPS Pro files are automatically updated during the one click upgrade installation. When you perform the one click BPS Pro upgrade your currently active htaccess files will be automatically updated to your current new version of BPS Pro automatically.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('AutoRestore & Quarantine: ', 'bulletproof-security'); echo '</strong>'; _e('ARQ is a real-time file monitor that automatically AutoRestores and/or Quarantines files. ARQ utilizes countermeasure website security that has the capability to protect all of your website files, both WordPress and non-WordPress files, even if your Web Host Server is hacked. Quarantine Options: Restore File, Delete File and View File. Quarantine Logging and Email alerts.', 'bulletproof-security'); ?></td>
     </tr>
- <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Language Translations: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro has been translated into Spanish. French, German and Persian / Farsi Language translations pending.', 'bulletproof-security'); ?></td>
-    </tr>
+
  <tr>
     <td class="bps-table_cell_help" style="font-size:14px;"><?php  echo '<strong>'; _e('Security Logging / HTTP Error 400, 403 and 404 Error Logging: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro Logs HTTP Errors and hacking attempts against your website. IP address, Host name, Request Method, Referering link, the file name or requested resource, the user agent and the query string are logged.', 'bulletproof-security'); ?></td>
     </tr>
   <tr>
-     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('F-Lock: ', 'bulletproof-security'); echo '</strong>'; _e('Lock and Unlock ALL WordPress Mission Critical files from within your WordPress Dashboard.', 'bulletproof-security'); ?></td>
+     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('F-Lock: ', 'bulletproof-security'); echo '</strong>'; _e('Lock and Unlock WordPress Mission Critical files from within your WordPress Dashboard.', 'bulletproof-security'); ?></td>
     </tr>  
   <tr>
-     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Custom php.ini File Creator: ', 'bulletproof-security'); echo '</strong>'; _e('Create a custom php.ini file for your website to increase security and performance with just a few clicks. Additional P-Security Features: All-purpose File Manager, All-purpose File Editor, Protected PHP Error Log, PHP Error Alerts, Secure phpinfo Viewer...', 'bulletproof-security'); ?></td>
+     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Custom php.ini / ini_set Options: ', 'bulletproof-security'); echo '</strong>'; _e('Quickly create a custom php.ini file for your website or use ini_set Options to increase security and performance with just a few clicks. Additional P-Security Features: All-purpose File Manager, All-purpose File Editor, Protected PHP Error Log, PHP Error Alerts, Secure phpinfo Viewer...', 'bulletproof-security'); ?></td>
     </tr>
     <tr>
     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Advanced Real-Time Alerts: ', 'bulletproof-security'); echo '</strong>';  _e('BPS Pro checks and displays error, warning, notifications and alert messages in real time. You can choose how you want these messages displayed to you with S-Monitor Monitoring &amp; Alerting Options - Display in your WP Dashboard, BPS Pro pages only, Turned off, Email Alerts, Logging...', 'bulletproof-security'); ?></td>
     </tr>
   <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Pro-Tools: ', 'bulletproof-security'); echo '</strong>'; _e('Pro-Tools is a set of versatile website tools that perform tasks such as searching your entire website in one click for a particular string or code anywhere throughout all of your website files in one search, decoding or encoding base64 code, replacing or removing a particular string or code anywhere throughout all of your files simultaneously, searching your entire WordPress Database with one click for a particular string or code anywhere throughout all of database tables simultaneously, DNS Finder, DB Table Cleaner...', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('Pro-Tools: ', 'bulletproof-security'); echo '</strong>'; _e('Pro-Tools is a set of versatile website tools: Online Base64 Decoder, Offline Base64 Decode/Encode, Mcrypt ~ Decrypt / Encrypt, Crypt Encryption, Scheduled Crons, String Finder, String Replacer / Remover, DB String Finder, DNS Finder...', 'bulletproof-security'); ?></td>
     </tr>
    <tr>
     <td class="bps-table_cell_help">&nbsp;</td>
