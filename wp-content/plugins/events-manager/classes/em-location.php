@@ -687,7 +687,7 @@ class EM_Location extends EM_Object {
 				case '#_LOCATIONEDITURL':
 				case '#_LOCATIONEDITLINK':
 					$link = esc_url($this->get_edit_url());
-					$replace = ($result == '#_LOCATIONEDITURL') ? $link : '<a href="'.$link.'" title="'.esc_attr($this->location_name).'">'.esc_html(sprintf(__('Edit %s','dbem'),__('Location','dbem'))).'</a>';
+					$replace = ($result == '#_LOCATIONEDITURL') ? $link : '<a href="'.$link.'" title="'.esc_attr($this->location_name).'">'.esc_html(sprintf(__('Edit Location','dbem'))).'</a>';
 					break;
 				case '#_PASTEVENTS': //Depreciated
 				case '#_LOCATIONPASTEVENTS':

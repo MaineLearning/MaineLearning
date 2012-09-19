@@ -55,10 +55,12 @@ class EM_Tag extends EM_Object {
 				$tag = get_term_by('id', $tag_data, EM_TAXONOMY_TAG);
 			}
 		}
-		foreach($tag as $key => $value){
-			$this->$key = $value;
+		if( !empty($tag) ){
+			foreach($tag as $key => $value){
+				$this->$key = $value;
+			}
+			$this->id = $this->term_id; //backward compatability
 		}
-		$this->id = $this->term_id; //backward compatability
 		do_action('em_tag',$this, $tag_data);
 	}
 	

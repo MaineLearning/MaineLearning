@@ -725,26 +725,21 @@ class EM_Event extends EM_Object{
 		//First, duplicate.
 		if( $this->can_manage('edit_events','edit_others_events') ){
 			$EM_Event = clone $this;
+			$EM_Event->get_bookings()->get_tickets(); //in case this wasn't loaded and before we reset ids
 			$EM_Event->event_id = null;
-			//Duplicate Post
-			$fields = $wpdb->get_col("DESCRIBE ".$wpdb->posts);
-			unset($fields[0]);
-			$fields = implode(',',$fields);
-			$sql = "INSERT INTO {$wpdb->posts} ($fields) SELECT $fields FROM {$wpdb->posts} WHERE ID={$this->post_id}";
-			$result = $wpdb->query($sql);
-			//TODO make a post_id refresher function to change all post ids in objects this contains
-			$EM_Event->post_id = $EM_Event->get_categories()->post_id = $EM_Event->ID = $wpdb->insert_id;
-			$EM_Event->get_categories()->save();
-			//Duplicate Event Table index and tickets
-			if( $EM_Event->save_meta() ){
-				//duplicate tickets
-				$EM_Tickets = $this->get_bookings()->get_tickets();
-				foreach($EM_Tickets->tickets as $EM_Ticket){
-					$EM_Ticket->ticket_id = '';
-					$EM_Ticket->event_id = $EM_Event->event_id;
-					$EM_Ticket->save();
-				}
-				$EM_Event->get_bookings(true); //refresh booking tickets
+			$EM_Event->post_id = null;
+			$EM_Event->ID = null;
+			$EM_Event->post_name = '';
+			$EM_Event->location_id = (empty($EM_Event->location_id)  && !get_option('dbem_require_location')) ? 0:$EM_Event->location_id;
+			$EM_Event->get_bookings()->event_id = null;
+			$EM_Event->get_bookings()->get_tickets()->event_id = null;
+			//if bookings reset ticket ids and duplicate tickets
+			foreach($EM_Event->get_bookings()->get_tickets()->tickets as $EM_Ticket){
+				$EM_Ticket->ticket_id = null;
+				$EM_Ticket->event_id = null;
+			}
+			do_action('em_event_duplicate_pre', $EM_Event);
+			if( $EM_Event->save() ){
 				$EM_Event->feedback_message = sprintf(__("%s successfully duplicated.", 'dbem'), __('Event','dbem'));
 			 	//featured images
 			 	$featured_image = get_post_meta( $this->post_id, '_thumbnail_id', true );
@@ -978,6 +973,22 @@ class EM_Event extends EM_Object{
 	 */
 	function get_spaces($force_refresh=false){
 		return $this->get_bookings()->get_spaces($force_refresh);
+	}
+	
+	/* 
+	 * Extends the default EM_Object function by switching blogs as needed if in MS Global mode  
+	 * @param string $size
+	 * @return string
+	 * @see EM_Object::get_image_url()
+	 */
+	function get_image_url($size = 'full'){
+	    if( EM_MS_GLOBAL && get_current_blog_id() != $this->blog_id ){
+	        switch_to_blog($this->blog_id);
+	        $switch_back = true;
+	    }
+		$return = parent::get_image_url($size);
+		if( !empty($switch_back) ){ restore_current_blog(); }
+		return $return;
 	}
 	
 	function get_edit_reschedule_url(){
@@ -1240,14 +1251,14 @@ class EM_Event extends EM_Object{
 							}else{
 								$image_size = explode(',', $placeholders[3][$key]);
 								$image_src = $this->image_url;
-								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
+								if ( is_multisite() ) { //get the direct url as timthumb doesn't support redirect urls
 									global $blog_id;
-									if ( is_multisite() && $blog_id > 0) {
-										$imageParts = explode('/blogs.dir/', $image_src);
-										if (isset($imageParts[1])) {
-											$image_src = network_site_url('/wp-content/blogs.dir/'. $blog_id. '/' . $imageParts[1]);
-										}
+									$imageParts = explode('/blogs.dir/', $image_src);
+									if (isset($imageParts[1])) {
+										$image_src = network_site_url('/wp-content/blogs.dir/'. $imageParts[1]);
 									}
+								}
+								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
 									$replace = "<img src='".esc_url(em_get_thumbnail_url($image_src, $image_size[0], $image_size[1]))."' alt='".esc_attr($this->event_name)."'/>";
 								}else{
 									$replace = "<img src='".esc_url($image_src)."' alt='".esc_attr($this->event_name)."'/>";
@@ -1306,7 +1317,7 @@ class EM_Event extends EM_Object{
 					if( $this->can_manage('edit_events','edit_others_events') ){
 						$link = esc_url($this->get_edit_url());
 						if( $result == '#_EDITEVENTLINK'){
-							$replace = '<a href="'.$link.'">'.esc_html(sprintf(__('Edit %s','dbem'),__('Event','dbem'))).'</a>';
+							$replace = '<a href="'.$link.'">'.esc_html(sprintf(__('Edit Event','dbem'))).'</a>';
 						}else{
 							$replace = $link;
 						}
@@ -1527,8 +1538,8 @@ class EM_Event extends EM_Object{
 						$gcal_url_description = wp_kses_data($matches[0]);
 					}
 					$gcal_url_length = strlen($gcal_url) - 9;
-					if( strlen($gcal_url_description) + $gcal_url_length > 1500 ){
-						$gcal_url_description = substr($gcal_url_description, 0, 1530 - $gcal_url_length - 3 ).'...';
+					if( strlen($gcal_url_description) + $gcal_url_length > 1450 ){
+						$gcal_url_description = substr($gcal_url_description, 0, 1480 - $gcal_url_length - 3 ).'...';
 					}
 					$gcal_url = str_replace('post_content', urlencode($gcal_url_description), $gcal_url);
 					//get the final url
