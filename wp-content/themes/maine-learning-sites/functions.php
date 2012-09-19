@@ -90,18 +90,3 @@ add_filter( 'the_content', 'wpautop',20 );
 /* Includes externally-stored functions */
 
 include_once( "functions/chosen-taxonomy-metabox.php" );
-
-
-
-
-/**
- * Change upload directory for all forms
- * http://code.hyperspatial.com/1171/gravity-forms-upload-path/
-  */
-
-add_filter("gform_upload_path", "change_upload_path", 20, 2);
-function change_upload_path($path_info, $form_id){
-     $path_info["path"] = "/assets/";
-     $path_info["url"] = "http://mainelearning.net/assets/";
-     return $path_info;
-}
