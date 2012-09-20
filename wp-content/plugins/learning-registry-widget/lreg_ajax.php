@@ -100,6 +100,23 @@ function lreg_get() {
 			// Metadata
 			$metadata = '<div class="paradata-meta">';
 
+			// Get the "description" if we have it
+			if ( isset( $item->verb->context ) && isset( $item->verb->context->description ) ) {
+				$url = isset( $item->verb->context->id ) ? $item->verb->context->id : '';
+
+				$metadata .= '<span class="paradata-id">';
+
+				if ( $url )
+					$metadata .= '<a href="' . $url . '">';
+
+				$metadata .= $item->verb->context->description;
+
+				if ( $url )
+					$metadata .= '</a>';
+
+				$metadata .= '</span> ';
+			}
+
 			// Date - take start dates
 			$date = strtotime( array_pop( array_reverse( explode( '/', $item->verb->date ) ) ) );
 			if ( $date )
