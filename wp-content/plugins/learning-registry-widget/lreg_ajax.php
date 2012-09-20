@@ -86,6 +86,9 @@ function lreg_get() {
 				continue;
 			}
 
+			// Wrap the content in a span to make it easier to style
+			$content = '<span class="paradata-description">' . $content . '</span>';
+
 			// Make sure we don't include items that have been done 0 times
 			if ( isset( $item->verb->measure ) && 'count' == $item->verb->measure->measureType && empty( $item->verb->measure->value ) ) {
 				continue;
