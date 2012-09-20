@@ -86,6 +86,9 @@ function lreg_get() {
 				continue;
 			}
 
+			// Lose the Date stuff
+			$content = preg_replace( '/(on|between).*$/', '', $content );
+
 			// Wrap the content in a span to make it easier to style
 			$content = '<span class="paradata-description">' . $content . '</span>';
 
