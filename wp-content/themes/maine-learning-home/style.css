@@ -531,9 +531,15 @@ span.activity-read-more
 
 div.activity-meta { clear: right; }
 
-.bpm-no-images .bpm-inner-text
+.bpm-no-images
 {
 	font-size: 13px;
+	text-decoration: none;
+}
+
+.bpm-inner-text {
+	font-size: 11px !important;
+	margin: 3px 0 0 2px !important;
 	text-decoration: none;
 }
 
