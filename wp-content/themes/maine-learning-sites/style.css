@@ -1267,10 +1267,7 @@ div.widget-wrap li
 	word-wrap: break-word;
 }
 
-.single-object #sidebar { display: none; }
-
-/* MLN */
-.single-object #content { max-width: 900px; }
+.single-object #content { max-width: 600px; }
 
 /* MLN */
 .content-sidebar #content-sidebar-wrap, .full-width-content #content-sidebar-wrap, .sidebar-content #content-sidebar-wrap { max-width: 900px; }
