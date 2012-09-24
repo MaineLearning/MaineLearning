@@ -394,36 +394,6 @@ function wpv_add_parent_taxonomy($args) {
     
 }
 
-class Walker_Category_select extends Walker {
-	var $tree_type = 'category';
-	var $db_fields = array ('parent' => 'parent', 'id' => 'term_id'); //TODO: decouple this
-
-    function __construct($selected_id){
-		$this->selected = $selected_id;
-	}
-	
-	function start_lvl(&$output, $depth, $args) {
-	}
-
-	function end_lvl(&$output, $depth, $args) {
-	}
-
-	function start_el(&$output, $category, $depth, $args) {
-		extract($args);
-		
-		$indent = str_repeat('-', $depth);
-		if ($indent != '') {
-			$indent = '&nbsp;' . str_repeat('&nbsp;', $depth) . $indent;
-		}
-		
-        $selected = $this->selected == $category->term_id ? ' selected="selected"' : '';
-		$output .= '<option value="' . $category->term_id. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
-	}
-
-	function end_el(&$output, $category, $depth, $args) {
-	}
-}
-
 
 function wpv_get_posts_select() {
     if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_posts_select_nonce')) {
@@ -456,7 +426,7 @@ function wpv_show_posts_dropdown($post_type, $name = '_wpv_settings[parent_id]',
 		$r = wp_parse_args( $attr, $defaults );
 		extract( $r, EXTR_SKIP );
 		
-		$pages = get_posts(array('numberposts' => -1, 'post_type' => $post_type));
+		$pages = get_posts(array('numberposts' => -1, 'post_type' => $post_type, 'suppress_filters' => false));
 		$output = '';
 		// Back-compat with old system where both id and name were based on $name argument
 		if ( empty($id) )

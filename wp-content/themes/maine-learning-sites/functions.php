@@ -76,6 +76,16 @@ function b3_custom_search_button_text($text) {
     return esc_attr('Go');
 }
 
+/**
+ * Lower priority of automatic p tags
+ *
+ * http://wordpress.org/extend/plugins/column-matic/faq/
+ */
+
+
+add_filter( 'the_content', 'wpautop',20 );
+
+
 
 /* Includes externally-stored functions */
 

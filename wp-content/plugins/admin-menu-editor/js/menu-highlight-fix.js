@@ -45,12 +45,19 @@ jQuery(function($) {
 		isTopMenu : false
 	};
 
-	$('#adminmenu li > a').each(function(index, link) {
+	//Special case: ".../wp-admin/" should match ".../wp-admin/index.php".
+	if (currentUri.path.match(/\/wp-admin\/$/)) {
+		currentUri.path = currentUri.path + 'index.php';
+	}
+
+    var adminMenu = $('#adminmenu');
+
+	adminMenu.find('li > a').each(function(index, link) {
 		var $link = $(link);
 
 		//Skip "#" links. Some plugins (e.g. S2Member 120703) use such no-op items as menu dividers.
 		if ($link.attr('href') == '#') {
-			return true;
+			return;
 		}
 
 		var uri = parseUri(link.href);
@@ -63,7 +70,7 @@ jQuery(function($) {
 		}
 
 		if (!isCloseMatch) {
-			return true; //Skip to the next link.
+			return; //Skip to the next link.
 		}
 
 		//Calculate the number of matching and different query parameters.
@@ -145,8 +152,10 @@ jQuery(function($) {
 			//Account for users who use a plugin to keep all menus expanded.
 			var shouldCloseOtherMenus = $('li.wp-has-current-submenu', '#adminmenu').length <= 1;
 			if (shouldCloseOtherMenus) {
-				otherHighlightedMenus.removeClass('wp-menu-open');
-                otherHighlightedMenus.removeClass('wp-has-current-submenu current').addClass('wp-not-current-submenu');
+				otherHighlightedMenus
+					.add('> a', otherHighlightedMenus)
+					.removeClass('wp-menu-open wp-has-current-submenu current')
+                	.addClass('wp-not-current-submenu');
 			}
 
 			var parentMenuAndLink = parentMenu.add('> a.menu-top', parentMenu);
@@ -157,7 +166,7 @@ jQuery(function($) {
 		}
 
 		if (isWrongItemHighlighted) {
-			$('#adminmenu .current').removeClass('current');
+			adminMenu.find('.current').removeClass('current');
 			bestMatchLink.addClass('current').closest('li').addClass('current');
 		}
 	}

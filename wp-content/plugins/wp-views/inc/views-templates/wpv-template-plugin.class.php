@@ -262,11 +262,30 @@ class WPV_template_plugin extends WPV_template {
         
 		if (wp_verify_nonce($_POST['wpv_post_type_view_template_loop_nonce'], 'wpv_post_type_view_template_loop_nonce')) {
 			$options = $WP_Views->get_options();
-			$options = $this->submit($options);
 			
-			$WP_Views->save_options($options);
+			$new_options = $this->submit($options);
 			
-			$this->_display_post_type_loop_admin($options);
+			$WP_Views->save_options($new_options);
+
+			// determined what has changed so we can highlight anything that
+			// might need updating.
+	        $post_types = get_post_types(array('public'=>true), 'objects');
+			$changed_types = array();
+			foreach($post_types as $post_type) {
+				$type = $post_type->name;
+				if (!isset($options['views_template_for_' . $type ])) {
+					$options['views_template_for_' . $type ] = 0;
+				}
+				if (!isset($new_options['views_template_for_' . $type ])) {
+					$new_options['views_template_for_' . $type ] = 0;
+				}
+				
+				if ($options['views_template_for_' . $type ] != $new_options['views_template_for_' . $type ]) {
+					$changed_types[] = $type;
+				}
+			}
+			
+			$this->_display_post_type_loop_admin($new_options, $changed_types);
 		}
         die();
         
@@ -336,7 +355,7 @@ class WPV_template_plugin extends WPV_template {
 		<?php
 	}
 	
-	function _display_post_type_loop_admin($options) {
+	function _display_post_type_loop_admin($options, $changed_types = array()) {
 		global $wpdb;
         
 		$items_found = array();
@@ -399,11 +418,15 @@ class WPV_template_plugin extends WPV_template {
 										
 				
 										$set_count = $wpdb->get_var("SELECT COUNT(post_id) FROM {$wpdb->postmeta} WHERE meta_key='_views_template' AND meta_value='{$options['views_template_for_' . $type ]}' AND post_id IN ({$posts})");
-										if ($set_count != $count) {
+										if ($set_count != $count && ($set_count == 0 || $options['views_template_for_' . $type ] == 0)) {
 											echo '<div id="wpv_diff_template_' . $type . '">';
 											echo '<p id="wpv_diff_' . $type . '">';
 											echo sprintf(__('%d %ss use a different template:', 'wpv-views'), abs($count - $set_count), $type);
-											echo '<input type="button" id="wpv_update_now_' . $type . '" class="button-secondary" value="' . esc_html(sprintf(__('Update all %ss now', 'wpv-views'), $type)) . '" />';
+											if (in_array($type, $changed_types)) {
+												echo ' <input type="button" id="wpv_update_now_' . $type . '" class="button-primary wpv-update-now" value="' . esc_html(sprintf(__('Update all %ss now', 'wpv-views'), $type)) . '" />';
+											} else {
+												echo ' <input type="button" id="wpv_update_now_' . $type . '" class="button-secondary wpv-update-now" value="' . esc_html(sprintf(__('Update all %ss now', 'wpv-views'), $type)) . '" />';
+											}
 											echo '<img id="wpv_update_loading_' . $type . '" src="' . WPV_URL . '/res/img/ajax-loader.gif" width="16" height="16" style="display:none" alt="loading" />';
 											echo '</p>';
 											echo '<p id="wpv_updated_' . $type . '" style="display:none">';

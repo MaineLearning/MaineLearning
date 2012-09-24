@@ -13,7 +13,12 @@ jQuery(document).ready(function($){
                         LR.ajaxurl,
                         data,
                         function( response ) {
-                               $("#lr_post_id").parent('.widget-learning_registry').append(response); 
+				var wid = $("#lr_post_id").parent('.widget-learning_registry');
+				$(wid).append(response); 
+
+				// unhide the widget title
+				if ( 0 != response.length )
+					$(wid).find('.widget-title').show();	
                         }
                 );
         }

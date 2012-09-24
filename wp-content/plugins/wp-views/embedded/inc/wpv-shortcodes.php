@@ -181,7 +181,7 @@ function wpv_shortcode_wpv_post_body($atts){
         $post->view_template_override = $atts['view_template'];
     }
     
-    if(!empty($post) && $post->post_type != 'view' && $post->post_type != 'view-template'){
+    if(!empty($post) && isset($post->post_type) && $post->post_type != 'view' && $post->post_type != 'view-template'){
         $wpautop_was_removed = $WPV_templates->is_wpautop_removed();
         if ($wpautop_was_removed) {
             $WPV_templates->restore_wpautop('');

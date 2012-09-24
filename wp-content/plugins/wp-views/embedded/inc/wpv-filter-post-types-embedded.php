@@ -15,10 +15,17 @@ function wpv_filter_get_post_types_arg($query, $view_settings) {
     $query['post_type'] = $post_type;
     
     if (!isset($view_settings['post_type_dont_include_current_page']) || $view_settings['post_type_dont_include_current_page']) {
-    
-        $post_not_in_list = isset($post) ? array($post->ID) : array();
-    
-        $query['post__not_in'] = $post_not_in_list;
+
+        if (is_single() || is_page()) {
+        	global $wp_query;
+            
+            if (isset($wp_query->posts[0])) {
+                $current_post = $wp_query->posts[0];
+                $post_not_in_list = $current_post ? array($current_post->ID) : array();
+            
+                $query['post__not_in'] = $post_not_in_list;
+            }
+        }
     }
     
     return $query;

@@ -149,22 +149,33 @@ function wpv_view_template_post_type_loop_save() {
     jQuery('#wpv_save_view_template_post_type_loop_spinner').show();
     
     data = jQuery('#wpv-view-template-post-type-edit :input').serialize();
-    data += '&action=wpv_get_archive_view_template_post_type_summary';
+    data += '&action=wpv_get_archive_view_template_post_type_edit';
     
-    jQuery.post(ajaxurl, data, function(response) {
+    jQuery.post(ajaxurl, data, function(edit_response) {
     
         data = jQuery('#wpv-view-template-post-type-edit :input').serialize();
-        data += '&action=wpv_get_archive_view_template_post_type_edit';
-        jQuery.post(ajaxurl, data, function(edit_response) {
+        data += '&action=wpv_get_archive_view_template_post_type_summary';
+        jQuery.post(ajaxurl, data, function(summary_response) {
             
-            jQuery('#wpv-view-template-post-type-summary').replaceWith(response);
+            jQuery('#wpv-view-template-post-type-summary').replaceWith(summary_response);
      
             jQuery('#wpv-view-template-post-type-edit').replaceWith(edit_response);
             
             jQuery('#wpv_save_view_template_post_type_loop_spinner').hide();
             jQuery('#wpv-view-template-post-type-summary').show();
             jQuery('#wpv-view-template-post-type-edit').hide();
+            
+            wpv_view_template_post_type_show_admin_if_update_required();
         });
+    });
+}
+
+function wpv_view_template_post_type_show_admin_if_update_required() {
+    jQuery('#wpv-view-template-post-type-edit .wpv-update-now').each(function (index) {
+        if (jQuery(this).hasClass('button-primary')) {
+            jQuery('#wpv-view-template-post-type-summary').hide();
+            jQuery('#wpv-view-template-post-type-edit').show();
+        }
     });
 }
 

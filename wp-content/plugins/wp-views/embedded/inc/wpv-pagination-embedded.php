@@ -466,10 +466,10 @@ function wpv_ajax_get_page($post_data) {
 
     $_GET['wpv_paged'] = $post_data['page'];
     $_GET['wpv_view_count'] = $post_data['view_number'];
-    if (isset($post_data['wpv_column_sort_id'])) {
+    if (isset($post_data['wpv_column_sort_id']) && $post_data['wpv_column_sort_id'] != 'undefined') {
         $_GET['wpv_column_sort_id'] = $post_data['wpv_column_sort_id'];
     }
-    if (isset($post_data['wpv_column_sort_dir'])) {
+    if (isset($post_data['wpv_column_sort_dir']) && $post_data['wpv_column_sort_dir'] != 'undefined') {
         $_GET['wpv_column_sort_dir'] = $post_data['wpv_column_sort_dir'];
     }
     
@@ -488,14 +488,14 @@ function wpv_ajax_get_page($post_data) {
 
     if ($post_data['wpv_view_widget_id'] == 0) {
         // set the view count so we return the right view number after rendering.
-        $WP_Views->set_view_count(intval($post_data['view_number']) - 1);
+        $WP_Views->set_view_count(intval($post_data['view_number']) - 1, null);
 
         echo $WP_Views->short_tag_wpv_view($view_data);
         //echo wpv_do_shortcode($post->post_content);
     } else {
         
         // set the view count so we return the right view number after rendering.
-        $WP_Views->set_view_count(intval($post_data['view_number']) - 1);
+        $WP_Views->set_view_count(intval($post_data['view_number']), $post_data['wpv_view_widget_id']);
         
         $widget = new WPV_Widget();
         

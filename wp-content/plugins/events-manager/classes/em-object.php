@@ -335,7 +335,7 @@ class EM_Object {
 		//Add conditions for category selection
 		//Filter by category, can be id or comma seperated ids
 		$not = '';
-		if ( is_numeric($category) ){
+		if ( !empty($category) && is_numeric($category) ){
 			$not = ( $category < 0 ) ? "NOT":'';
 			//get the term id directly
 			$term = new EM_Category(absint($category));
@@ -345,7 +345,9 @@ class EM_Object {
 				}else{
 					$conditions['category'] = " ".EM_EVENTS_TABLE.".post_id $not IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id={$term->term_taxonomy_id} ) ";
 				}
-			} 
+			}else{
+			    $conditions = array('category'=>'2=1'); //force a false
+			}
 		}elseif( self::array_is_numeric($category) ){
 			$term_ids = array();
 			$term_not_ids = array();
@@ -379,6 +381,8 @@ class EM_Object {
 					}
 					$conditions['category'] = '('. implode(' || ', $cat_conds) .')';
 				}
+			}else{
+			    $conditions = array('tag'=>'2=1'); //force a false
 			}
 		}		
 		//Add conditions for tags
@@ -388,6 +392,8 @@ class EM_Object {
 			$term = new EM_Tag($tag);
 			if( !empty($term->term_id) ){
 				$conditions['tag'] = " ".EM_EVENTS_TABLE.".post_id IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id={$term->term_taxonomy_id} ) ";
+			}else{
+			    $conditions = array('tag'=>'2=1'); //force a false
 			}
 		}elseif( is_array($tag) ){
 			$term_ids = array();
@@ -399,6 +405,8 @@ class EM_Object {
 			}
 			if( count($term_ids) > 0 ){
 				$conditions['tag'] = " ".EM_EVENTS_TABLE.".post_id IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id IN (".implode(',',$term_ids).") ) ";
+			}else{
+			    $conditions = array('tag'=>'2=1'); //force a false
 			}
 		}
 	

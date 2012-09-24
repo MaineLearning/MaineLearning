@@ -2,7 +2,7 @@
   /*
    Plugin Name: Subscribe To "Double-Opt-In" Comments
    Plugin URI: http://www.sjmp.de/internet/subscribe-to-comments-mit-double-opt-in-pruefung/
-   Version: 6.1.5
+   Version: 6.1.6
    Description: Allows readers to receive notifications of new comments that are posted to an entry, with Double-Opt-In Feature.  Based on version 2 of "Subscribe to Comments" from Mark Jaquith (http://txfx.net/).
    Author: Tobias Koelligan
    Author URI: http://www.sjmp.de/
@@ -370,7 +370,7 @@
           $this->default_subscribed = ($this->settings['default_subscribed']) ? true : false;
 		  $this->hideCopyright = ($this->settings['hideCopyright']) ? true : false;
           
-		  if (is_multisite()) {
+		  if (empty($this->settings['not_subscribed_text'])) {
 			$this->not_subscribed_text = __('Notify me of followup comments via e-mail', 'subscribe-to-doi-comments');
 			$this->subscribed_text = __('You are subscribed to this entry.  <a href="[manager_link]">Manage your subscriptions</a>.', 'subscribe-to-doi-comments');
 			$this->author_text = __('You are the author of this entry.  <a href="[manager_link]">Manage subscriptions</a>.', 'subscribe-to-doi-comments');

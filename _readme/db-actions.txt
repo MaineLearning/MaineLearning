@@ -3,7 +3,23 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
+
+
+------------------------------------
+DONE
+
+After upgrade to WP 3.4.2, run the "Upgrade Network" process.
+
+Run BuddyPress upgrade wizard (BP 1.6.1)
+
 Optimize database
+
+Remove this line from wp-config
+
+define('WP_CACHE', true); //Added by WP-Cache Manager
+
+
 Activate Google Analytics
 Active Super Cache and test
 
@@ -12,9 +28,6 @@ Search highlight color: ccc066
 
 Remove custom CSS.
 
-
-------------------------------------
-DONE
 
 Upgrade BuddyPress database
 Upgrade network after WP update

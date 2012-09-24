@@ -13,6 +13,10 @@ function wpv_header_shortcode($atts, $value){
         shortcode_atts( array(), $atts )
     );
 
+    if (isset($atts['name']) && strpos($atts['name'], 'types-field-')) {
+        $atts['name'] = strtolower($atts['name']);
+    }
+    
     global $WP_Views;
     $view_settings = $WP_Views->get_view_settings();
     

@@ -20,8 +20,10 @@ class WP_Views{
         $this->current_page = array();
         
         $this->post_query = null;
+		$this->post_query_stack = array();
         
         $this->view_count = 0;
+        $this->set_view_counts = array();
 		
 		$this->taxonomy_data = array();
 		
@@ -37,7 +39,6 @@ class WP_Views{
         
         add_filter('icl_cf_translate_state', array($this, 'custom_field_translate_state'), 10, 2);
 
-		add_filter('wpv-show-message', array($this, 'wpv_show_message'), 10, 2);
     }
     
 
@@ -65,6 +66,9 @@ class WP_Views{
         add_action('wp_ajax_wpv_get_post_relationship_info', 'wpv_ajax_wpv_get_post_relationship_info');
         add_action('wp_ajax_wpv_view_form_popup', 'wpv_ajax_wpv_view_form_popup');
 		add_action('wp_ajax_wpv_insert_form_shortcode', 'wp_ajax_wpv_insert_form_shortcode');
+		add_action('wp_ajax_wpv_get_show_hidden_custom_fields', array($this, 'wpv_get_show_hidden_custom_fields'));
+		add_action('wp_ajax_wpv_format_date', array($this, 'wpv_format_date'));
+		add_action('wp_ajax_nopriv_wpv_format_date', array($this, 'wpv_format_date'));
         
         if(is_admin()){
 
@@ -76,7 +80,6 @@ class WP_Views{
             add_action('admin_head', array($this, 'settings_box_load'));            
             add_action('admin_footer', array($this, 'hide_view_body_controls'));            
             add_action('save_post', array($this, 'save_view_settings'));
-            add_action('save_post', array($this, 'save_post'), 10, 2);
             //add_action('save_post', array($this, 'save_css'));
 
             global $pagenow;
@@ -104,6 +107,13 @@ class WP_Views{
 
             wp_enqueue_script( 'views-pagination-script' , WPV_URL_EMBEDDED . '/res/js/wpv-pagination-embedded.js', array('jquery'), WPV_VERSION);
             wp_enqueue_style( 'views-pagination-style', WPV_URL_EMBEDDED . '/res/css/wpv-pagination.css', array(), WPV_VERSION);
+            
+			wp_enqueue_script( 'date-picker-script' , WPV_URL_EMBEDDED . '/res/js/jquery.ui.datepicker.min.js', array('jquery-ui-core', 'jquery'), WPV_VERSION);
+			wp_enqueue_style( 'date-picker-style' , WPV_URL_EMBEDDED . '/res/css/datepicker.css', array(), WPV_VERSION);
+			wp_enqueue_script( 'wpv-date-front-end-script' , WPV_URL_EMBEDDED . '/res/js/wpv-date-front-end-control.js', array('jquery'), WPV_VERSION);
+
+            add_action('wp_head', 'wpv_add_front_end_js');
+			
         }        
         
          /*shorttags*/
@@ -493,11 +503,19 @@ class WP_Views{
      */
     
     function get_view_count() {
-        return $this->view_count;
+		if (isset($this->set_view_counts[$this->current_view])) {
+			return $this->set_view_counts[$this->current_view];
+		} else {
+			return $this->view_count;
+		}
     }
 
-    function set_view_count($count) {
-        return $this->view_count = $count;
+    function set_view_count($count, $view_id) {
+		if ($view_id) {
+			$this->set_view_counts[$view_id] = $count;
+		} else {
+			$this->view_count = $count;
+		}
     }
     
     /**
@@ -561,8 +579,14 @@ class WP_Views{
         array_push($this->current_page, isset($post) ? clone $post : null);
         
         array_push($this->view_ids, $this->current_view);
+		
+        if (function_exists('icl_object_id')) {
+            $id = icl_object_id($id, 'view', true);
+        }
         $this->current_view = $id;
 		
+		array_push($this->post_query_stack, $this->post_query);
+        
 		// save original taxonomy term if any
 		$tmp_parent_taxonomy = $this->parent_taxonomy;
 		if (isset($this->taxonomy_data['term'])) {
@@ -585,6 +609,9 @@ class WP_Views{
         }
         
         array_pop($this->current_page);
+		
+		$this->post_query = array_pop($this->post_query_stack);
+        
         
         return $out;
     }
@@ -600,12 +627,7 @@ class WP_Views{
         global $wplogger;
         
         static $processed_views = array();
-        
-        if (function_exists('icl_object_id')) {
-            $view_id = icl_object_id($view_id, 'view', true);
-        }
 
-        
         // increment the view count.
         $this->view_count++;
         
@@ -622,7 +644,7 @@ class WP_Views{
         }
         */
 
-        $view_caller_id = isset($post) ? get_the_ID() : 0; // post or widget
+        $view_caller_id = (isset($post) && isset($post->ID)) ? get_the_ID() : 0; // post or widget
         
         if(!isset($processed_views[$view_caller_id][$hash]) || 0 === $view_caller_id){
             
@@ -798,7 +820,7 @@ class WP_Views{
             }
             
         }
-        
+    
         return $out;
     }
     
@@ -1010,7 +1032,7 @@ class WP_Views{
      * returns an array
      */
     
-    function get_meta_keys() {
+    function get_meta_keys($include_hidden = false) {
         global $wpdb;
         static $cf_keys = null;
         
@@ -1038,17 +1060,29 @@ class WP_Views{
                                         '_icl_translation', '_thumbnail_id', '_views_template', '_wpml_media_duplicate', '_wpml_media_featured',
                                         '_top_nav_excluded', '_cms_nav_minihome',
                                         'wpml_media_duplicate_of', 'wpml_media_lang', 'wpml_media_processed',
-                                        '_wpv_settings');
+                                        '_wpv_settings', '_wpv_layout_settings', '_wpv_view_sync',
+										'_wpv_view_template_fields', '_wpv_view_template_mode' );
             
             $cf_keys = array_diff($cf_keys, $cf_keys_exceptions);
             
-            // exclude hidden fields (starting with an underscore)
-            foreach ($cf_keys as $index => $field) {
-                if (strpos($field, '_') === 0) {
-                    unset($cf_keys[$index]);
-                }
-            }
-            
+			if (!$include_hidden) {
+				
+				$options = $this->get_options();
+				if (isset($options['wpv_show_hidden_fields'])) {
+					$include_these_hidden = explode(',', $options['wpv_show_hidden_fields']);
+				} else {
+					$include_these_hidden = array();
+				}
+				// exclude hidden fields (starting with an underscore)
+				foreach ($cf_keys as $index => $field) {
+					if (strpos($field, '_') === 0) {
+						if (!in_array($field, $include_these_hidden)) {
+							unset($cf_keys[$index]);
+						}
+					}
+				}
+			}
+			
             if ( $cf_keys ) {
                 natcasesort($cf_keys);
             }
@@ -1625,48 +1659,6 @@ jQuery(document).ready(function(){
 		
 	}
 	
-	function save_post($post_id, $post) {
-		// disable the admin messages for now. They are causing problems.
-
-        //if ($post->post_status != 'auto-draft' && in_array($post->post_type, array('view', 'view-template'))) {
-        //    if (defined('WP_CACHE') && WP_CACHE) {
-        //        $message = __("Your site uses caching, so this update might not be visible immediately.",
-        //                        'wpv-views') . '<br />'
-        //                . sprintf(__("%sLearn how to work with Views and caching plugins%s",
-        //                                'wpv-views'),
-        //                        '<a href="http://wp-types.com/faq/working-with-caching-plugins/" target="_blank">',
-        //                        '</a>');
-        //        wpv_add_dismiss_message('caching_plugin_warning', $message);
-        //    }
-        //}
-    }
-	
-	function wpv_show_message($state, $message_id) {
-	
-		if ($message_id == 'caching_plugin_warning') {
-			// only show on views pages.
-			
-			global $pagenow;
-			global $post;
-			
-			$views_page = false;
-			
-			if ($pagenow == 'edit.php' && isset($_GET['post_type']) && in_array($_GET['post_type'], array('view', 'view-template'))) {
-				$views_page = true;
-			}
-			if ($pagenow == 'post.php' && in_array($post->post_type, array('view', 'view-template'))) {
-				$views_page = true;
-			}
-			
-			if (!$views_page) {
-				$state = false;
-			}
-			
-		}
-		return $state;
-	
-	}
-	
 	/**
 	 * See if a view has any enbabled from controls
 	 *
@@ -1675,7 +1667,7 @@ jQuery(document).ready(function(){
 	function does_view_have_form_controls($view_id) {
 		$view_settings = $this->get_view_settings($view_id);
 		
-		if (isset($view_settings['filter_controls_enable'])) {
+		if (isset($view_settings['filter_controls_enable']) && is_array($view_settings['filter_controls_enable'])) {
 			foreach($view_settings['filter_controls_enable'] as $enable) {
 				if ($enable) {
 					return true;
@@ -1695,6 +1687,23 @@ jQuery(document).ready(function(){
 		$view_settings = $this->get_view_settings($view_id);
 
 		return $view_settings['view-query-mode'] == 'archive';
+	}
+	
+	function wpv_format_date() {
+
+		$date_format = $_POST['date-format'];
+		if ($date_format == '') {
+			$date_format = get_option('date_format');
+		}
+		
+		$date = $_POST['date'];
+		$date = mktime(0, 0, 0, substr($date, 2, 2), substr($date, 0, 2), substr($date, 4, 4));
+		
+		echo json_encode(array('display' => date($date_format, intval($date)),
+							   'timestamp' => $date));
+		die();
+		
+		
 	}
 	
 }

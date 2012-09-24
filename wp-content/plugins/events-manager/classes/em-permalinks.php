@@ -90,27 +90,33 @@ if( !class_exists('EM_Permalinks') ){
 			$em_rules = array();
 			if( is_object($events_page) ){
 				$events_slug = preg_replace('/\/$/', '', str_replace( trailingslashit(home_url()), '', get_permalink($events_page_id)) );
-				$events_slug = ( !empty($events_slug) ) ? trailingslashit($events_slug) : $events_slug;		
-				$events_pagename = $events_page->post_name;
-				$em_rules[$events_slug.'(\d{4}-\d{2}-\d{2})$'] = 'index.php?pagename='.$events_pagename.'&calendar_day=$matches[1]'; //event calendar date search
-				$em_rules[$events_slug.'rss$'] = 'index.php?pagename='.$events_pagename.'&rss=1'; //rss page
-				$em_rules[$events_slug.'feed$'] = 'index.php?pagename='.$events_pagename.'&rss=1'; //compatible rss page
-				//make sure we hard-code rewrites for child pages of events, even on home page
-				$child_posts = get_posts(array('post_type'=>'page', 'post_parent'=>$events_page->ID, 'numberposts'=>0));
-				foreach($child_posts as $child_post){
-					$em_rules[$events_pagename.'/'.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+				$events_slug = ( !empty($events_slug) ) ? trailingslashit($events_slug) : $events_slug;
+				$em_rules[$events_slug.'(\d{4}-\d{2}-\d{2})$'] = 'index.php?pagename='.$events_slug.'&calendar_day=$matches[1]'; //event calendar date search
+				$em_rules[$events_slug.'rss$'] = 'index.php?pagename='.$events_slug.'&rss=1'; //rss page
+				$em_rules[$events_slug.'feed$'] = 'index.php?pagename='.$events_slug.'&rss=1'; //compatible rss page
+				if( EM_POST_TYPE_EVENT_SLUG.'/' == $events_slug ){ //won't apply on homepage
+					//make sure we hard-code rewrites for child pages of events
+					$child_posts = get_posts(array('post_type'=>'page', 'post_parent'=>$events_page->ID, 'numberposts'=>0));
+					foreach($child_posts as $child_post){
+						$em_rules[$events_slug.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+					}
+				}elseif( empty($events_slug) ){ //hard code homepage child pages
+					$child_posts = get_posts(array('post_type'=>'page', 'post_parent'=>$events_page->ID, 'numberposts'=>0));
+					foreach($child_posts as $child_post){
+						$em_rules[$events_page->post_name.'/'.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+					}
 				}
 				//global links hard-coded
 				if( EM_MS_GLOBAL && !get_site_option('dbem_ms_global_events_links', true) ){
 					//MS Mode has slug also for global links
-					$em_rules[$events_slug.get_site_option('dbem_ms_events_slug',EM_EVENT_SLUG).'/(.+)$'] = 'index.php?pagename='.$events_pagename.'&em_redirect=1&event_slug=$matches[1]'; //single event from subsite
+					$em_rules[$events_slug.get_site_option('dbem_ms_events_slug',EM_EVENT_SLUG).'/(.+)$'] = 'index.php?pagename='.$events_slug.'&em_redirect=1&event_slug=$matches[1]'; //single event from subsite
 				}
 				//add redirection for backwards compatability
-				$em_rules[$events_slug.EM_EVENT_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_pagename.'&em_redirect=1&event_slug=$matches[1]'; //single event
-				$em_rules[$events_slug.EM_LOCATION_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_pagename.'&em_redirect=1&location_slug=$matches[1]'; //single location page
-				$em_rules[$events_slug.EM_CATEGORY_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_pagename.'&em_redirect=1&category_slug=$matches[1]'; //single category page slug
+				$em_rules[$events_slug.EM_EVENT_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_slug.'&em_redirect=1&event_slug=$matches[1]'; //single event
+				$em_rules[$events_slug.EM_LOCATION_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_slug.'&em_redirect=1&location_slug=$matches[1]'; //single location page
+				$em_rules[$events_slug.EM_CATEGORY_SLUG.'/(.+)$'] = 'index.php?pagename='.$events_slug.'&em_redirect=1&category_slug=$matches[1]'; //single category page slug
 				//add a rule that ensures that the events page is found and used over other pages
-				$em_rules[trim($events_slug,'/').'/?$'] = 'index.php?pagename='.trim($events_pagename,'/') ;
+				$em_rules[trim($events_slug,'/').'/?$'] = 'index.php?pagename='.trim($events_slug,'/') ;
 			}else{
 				$events_slug = EM_POST_TYPE_EVENT_SLUG;
 				$em_rules[$events_slug.'/(\d{4}-\d{2}-\d{2})$'] = 'index.php?post_type='.EM_POST_TYPE_EVENT.'&calendar_day=$matches[1]'; //event calendar date search

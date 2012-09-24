@@ -18,7 +18,8 @@ class TI_Pro extends TI_Frontend {
 		<?php $this->postbox_start(__('Template'), 'layout_settings'); ?>
 		<table class="form-table">
 			<?php
-				$this->option($import, 'template_id');
+				$this->option($import, 'template_load');
+				$this->option($import, 'template_save');
 			?>
 		</table>
 		<?php $this->postbox_end(); ?>
@@ -45,6 +46,14 @@ class TI_Pro extends TI_Frontend {
 					$this->option($import, 'post_author');
 					$this->option($import, 'post_name');
 					$this->option($import, 'post_date');
+				?>
+			</table>
+		<?php $this->postbox_end(); ?>
+
+		<?php $this->postbox_start(__('Featured Images'), 'postpage_settings'); ?>
+			<table class="form-table ti-form-table">
+				<?php
+					$this->option($import, 'thumbnail');
 				?>
 			</table>
 		<?php $this->postbox_end(); ?>
@@ -84,7 +93,7 @@ class TI_Pro extends TI_Frontend {
 		global $wpdb;
 
 		switch ($field) {
-			case 'template_id':
+			case 'template_load':
 				$template_ids = TI_Template::get_list();
 				if ($template_ids)
 					$template_ids = array_combine($template_ids, $template_ids);
@@ -94,14 +103,18 @@ class TI_Pro extends TI_Frontend {
 				else
 					$template_ids = array('' => 'new template');
 
-				$html = __("Load template: ")
-					. $this->dropdown('template_load_id', $import->template->_id, $template_ids)
+				$html = $this->dropdown('template_load_id', $import->template->_id, $template_ids)
 					. "<input type='submit' class='button' name='button_load_template' value='" . __('Load') . "' />"
-					. "<input type='submit' class='button' name='button_delete_template' value='" . __('Delete') . "' />"
-					. "<br/>Save as template: <input type='text' name='template_save_id' value='" . esc_attr($import->template->_id) . "' />"
+					. "<input type='submit' class='button' name='button_delete_template' value='" . __('Delete') . "' />";
+
+				$this->field_setting('template_load', $html);
+				break;
+
+			case 'template_save':
+				$html = "<input type='text' name='template_save_id' value='" . esc_attr($import->template->_id) . "' />"
 					. "<input type='submit' class='button' name='button_save_template' value='" . __('Save') . "' />";
 
-				$this->field_setting('template_id', $html);
+				$this->field_setting('template_save', $html);
 				break;
 
 			case 'blog_id':
@@ -185,8 +198,9 @@ class TI_Pro extends TI_Frontend {
 
 			case 'page_template':
 				$wp_templates = get_page_templates();
+				$templates = array();
 
-				// WP returns the templates as name => key, re-combine them as key => name, as put the key in parentheses in the description so users know what they keys are
+				// WP returns the templates as name => key, transpose to key => name and put the key in parentheses
 				foreach($wp_templates as $value => $key)
 					$templates[$key] = $value . " ($key)";
 
@@ -235,6 +249,11 @@ class TI_Pro extends TI_Frontend {
 				$dates = "<input type='text' name='template[post_date_min]' value='" . esc_attr($import->template->post_date_min) . "' size='10' />"
 					. " to <input type='text' name='template[post_date_max]' value='" . esc_attr($import->template->post_date_max) . "' size='10' />";
 				$this->basic_option($import, 'template[post_date_col]', $import->template->post_date_col, $dates, 'post_date');
+				break;
+
+			case 'thumbnail':
+				$html = $this->dropdown_headers($import, 'template[thumbnail_col]', $import->template->thumbnail_col);
+				$this->field_setting('thumbnail', $html);
 				break;
 
 			case 'postid':
@@ -292,7 +311,7 @@ class TI_Pro extends TI_Frontend {
 				// Add a blank row for new entries
 				$custom_keys = ($import->template->post_custom) ? array_merge($import->template->post_custom, array('' => '')) : array('' => '');
 
-				$html = "<table class='ti-edit-table'><tbody>";
+				$html = "<table class='edt'><tbody>";
 				foreach ($custom_keys as $key => $col) {
 					$meta_keys_dd = $this->dropdown("template[post_custom][key][]", $key, $meta_keys_data, true);
 					$columns_dd =  $this->dropdown("template[post_custom][col][]", $col, $columns_data, true);
