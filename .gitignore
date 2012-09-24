@@ -17,6 +17,8 @@ env.php
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 
+# Don't track feed2js cache
+./_utilities/feed2js/magpie/cache*
 
 # Don't include Espresso metadata
 
