@@ -6,7 +6,9 @@ if (!function_exists('promote_types_and_views')) {
         $promote_views = false;
         if (defined('WPV_VERSION')) {
             global $WP_Views;
-            $promote_views = $WP_Views->is_embedded();
+			if ($WP_Views) {
+				$promote_views = $WP_Views->is_embedded();
+			}
         }
         return $promote_views;        
     }

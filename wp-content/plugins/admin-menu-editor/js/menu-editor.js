@@ -838,20 +838,25 @@ $(document).ready(function(){
 			return;
 		}
 		dropdown.currentOwner = this; //Got ye now!
-		
+
+        //Pre-select the current capability (will clear selection if there's no match)
+        dropdown.list.val(inputBox.val());
+
+        //Show the list before moving it into place. This ensures the position will be calc. properly.
+        dropdown.list.show();
+
 		//Move the dropdown near to the button
 		var inputPos = inputBox.offset();
-		dropdown.list.css({
-			position: 'absolute',
-			left: inputPos.left,
-			top: inputPos.top + inputBox.outerHeight()
-		});
-		
-		//Pre-select the current capability (will clear selection if there's no match)
-		dropdown.list.val(inputBox.val());
-		
-		dropdown.list.show();
-		dropdown.list.focus();
+		dropdown.list
+            .css({
+			    position: 'absolute'
+            })
+            .offset({
+                left: inputPos.left,
+                top: inputPos.top + inputBox.outerHeight()
+            });
+
+        dropdown.list.focus();
 	});
 	
 	//Also show it when the user presses the down arrow in the input field  

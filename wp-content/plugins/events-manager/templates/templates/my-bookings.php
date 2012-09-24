@@ -64,7 +64,7 @@
 									<td>
 										<?php
 										$cancel_link = '';
-										if( !in_array($EM_Booking->status, array(2,3,4)) && get_option('dbem_bookings_user_cancellation') && $EM_Event->get_bookings()->has_open_time() ){
+										if( !in_array($EM_Booking->status, array(2,3)) && get_option('dbem_bookings_user_cancellation') && $EM_Event->get_bookings()->has_open_time() ){
 											$cancel_url = em_add_get_params($_SERVER['REQUEST_URI'], array('action'=>'booking_cancel', 'booking_id'=>$EM_Booking->booking_id, '_wpnonce'=>$nonce));
 											$cancel_link = '<a class="em-bookings-cancel" href="'.$cancel_url.'" onclick="if( !confirm(EM.booking_warning_cancel) ){ return false; }">'.__('Cancel','dbem').'</a>';
 										}

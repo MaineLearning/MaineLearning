@@ -225,19 +225,34 @@ class EM_Ticket extends EM_Object{
 	function get_available_spaces(){
 		$event_available_spaces = $this->get_event()->get_bookings()->get_available_spaces();
 		$ticket_available_spaces = $this->get_spaces() - $this->get_booked_spaces();
+		if( get_option('dbem_bookings_approval_reserved')){
+		    $ticket_available_spaces = $ticket_available_spaces - $this->get_pending_spaces();
+		}
 		$return = ($ticket_available_spaces <= $event_available_spaces) ? $ticket_available_spaces:$event_available_spaces;
 		return apply_filters('em_ticket_get_available_spaces', $return, $this);
 	}
+	
+	function get_pending_spaces(){
+		foreach( $this->get_bookings()->get_pending_bookings()->bookings as $EM_Booking ){ //get_bookings() is used twice so we get the confirmed (or all if confirmation disabled) bookings of this ticket's total bookings.
+			//foreach booking, get this ticket booking info if found
+			foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking){
+				if( $EM_Ticket_Booking->ticket_id == $this->ticket_id ){
+					$spaces += $EM_Ticket_Booking->get_spaces();
+				}
+			}
+		}
+		return apply_filters('em_ticket_get_pending_spaces', $spaces, $this);
+	}
 
 	/**
-	 * Returns the number of available spaces left in this ticket, bearing in mind event-wide restrictions, previous bookings, approvals and other tickets.
+	 * Returns the number of booked spaces in this ticket.
 	 * @return int
 	 */
 	function get_booked_spaces($force_reload=false){
 		//get all bookings for this event
 		$spaces = 0;
 		if( is_object($this->bookings) && $force_reload ){
-			return $this->bookings;
+			//return $this->bookings;
 		}
 		foreach( $this->get_bookings()->get_bookings()->bookings as $EM_Booking ){ //get_bookings() is used twice so we get the confirmed (or all if confirmation disabled) bookings of this ticket's total bookings.
 			//foreach booking, get this ticket booking info if found
@@ -309,7 +324,7 @@ class EM_Ticket extends EM_Object{
 					$min = ($this->ticket_min > 0) ? $this->ticket_min:1;
 					$max = ($this->ticket_max > 0) ? $this->ticket_max:get_option('dbem_bookings_form_max');
 				?>
-				<?php if($zero_value) : ?><option>0</option><?php endif; ?>
+				<?php if($zero_value && $this->ticket_min == 0) : ?><option>0</option><?php endif; ?>
 				<?php for( $i=$min; $i<=$available_spaces && $i<=$max; $i++ ): ?>
 					<option <?php if($i == $default_value){ echo 'selected="selected"'; $shown_default = true; } ?>><?php echo $i ?></option>
 				<?php endfor; ?>

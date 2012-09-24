@@ -113,6 +113,20 @@ function add_url_query_parameters(data) {
     return data;
 }
 
+function wpv_add_url_controls_for_column_sort(form) {
+	var data = Array();
+	data = add_url_query_parameters(data);
+	for (var param in data['get_params']) {
+		if (data['get_params'].hasOwnProperty(param)) {
+			
+			if (form.find('input[name=' + param + ']').length == 0) {
+				// we need to add an input element
+				
+				form.append('<input type="hidden" name="' + param + '" value="' + data['get_params'][param] + '" />');
+			}
+		}
+	}
+}
 
 function add_view_parameters(data, page, view_number) {
     data['action'] = 'wpv_get_page';
@@ -378,7 +392,7 @@ function wpv_pagination_slide(view_number, width, height, next, effect, speed, r
             jQuery('#wpv_slide_loading_img_'+view_number).fadeOut(function(){jQuery(this).remove();});
             wpvPaginatorLayout.parent().delay(500).animate({marginLeft: '-'+width+'px'}, 1000, function(){
                 wpvPaginatorLayout.parent().parent().animate({height: responseView.height()+'px'}, 500, function(){
-                    responseView.css('position', 'static').css('float', 'none');
+                    responseView.css('position', 'static').css('float', 'none').css('height', wpvPaginatorLayout.parent().parent().height()+'px');
                     wpvPaginatorLayout.unwrap().unwrap().remove();
                     window.wpvPaginationAjaxLoaded[view_number] = true;
                     window.wpvPaginationAnimationFinished[view_number] = true;
@@ -398,7 +412,7 @@ function wpv_pagination_slide(view_number, width, height, next, effect, speed, r
             jQuery('#wpv_slide_loading_img_'+view_number).fadeOut(function(){jQuery(this).remove();});
             wpvPaginatorLayout.parent().delay(500).animate({marginLeft: '0px'}, 1000, function(){
                 wpvPaginatorLayout.parent().parent().animate({height: responseView.height()+'px'}, 500, function(){
-                    responseView.css('position', 'static').css('margin', '0px').css('float', 'none');
+                    responseView.css('position', 'static').css('margin', '0px').css('float', 'none').css('height', wpvPaginatorLayout.parent().parent().height()+'px');
                     wpvPaginatorLayout.unwrap().unwrap().remove();
                     window.wpvPaginationAjaxLoaded[view_number] = true;
                     window.wpvPaginationAnimationFinished[view_number] = true;

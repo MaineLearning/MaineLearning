@@ -60,12 +60,71 @@ function lreg_get() {
                         }
                 }
         }
-
+//print_r( $paradata );
         $markup = '';
         if ( !empty( $paradata ) ) {
                 $markup .= '<ul>';
                 foreach( $paradata as $pd ) {
-                        $markup .= '<li>' . $pd->activity->content . '</li>';
+
+			// Sometimes things are embedded in Activity
+			if ( isset( $pd->activity ) ) {
+				$item = $pd->activity;
+			} else {
+				$item = $pd;
+			}
+
+			// Isolate content, then cut it at the verb
+			if ( ! empty( $item->content ) ) {
+				$content = $item->content;
+			} else {
+				continue;
+			}
+
+			if ( ! empty( $item->verb->action ) ) {
+				$content = ucwords( $item->verb->action ) . ' ' . array_pop( explode( $item->verb->action, $content ) );
+			} else {
+				continue;
+			}
+
+			// Lose the Date stuff
+			$content = preg_replace( '/(on|between).*$/', '', $content );
+
+			// Wrap the content in a span to make it easier to style
+			$content = '<span class="paradata-description">' . $content . '</span>';
+
+			// Make sure we don't include items that have been done 0 times
+			if ( isset( $item->verb->measure ) && 'count' == $item->verb->measure->measureType && empty( $item->verb->measure->value ) ) {
+				continue;
+			}
+
+			// Metadata
+			$metadata = '<div class="paradata-meta">';
+
+			// Get the "description" if we have it
+			if ( isset( $item->verb->context ) && isset( $item->verb->context->description ) ) {
+				$url = isset( $item->verb->context->id ) ? $item->verb->context->id : '';
+
+				$metadata .= '<span class="paradata-id">';
+
+				if ( $url )
+					$metadata .= '<a href="' . $url . '">';
+
+				$metadata .= $item->verb->context->description;
+
+				if ( $url )
+					$metadata .= '</a>';
+
+				$metadata .= '</span> ';
+			}
+
+			// Date - take start dates
+			$date = strtotime( array_pop( array_reverse( explode( '/', $item->verb->date ) ) ) );
+			if ( $date )
+				$metadata .= '<span class="paradata-date">' . date( 'F j, Y', $date ) . '</span>';
+			$metadata .= '</div>';
+			$image = '';
+
+                        $markup .= '<li>' . $content . $metadata . '</li>';
                 }
                 $markup .= '</ul>';
         }

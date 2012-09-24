@@ -19,6 +19,11 @@ class WP_Views_plugin extends WP_Views {
         add_action('wp_ajax_wpv_get_types_field_name', array($this, 'wpv_ajax_wpv_get_types_field_name'));
         add_action('wp_ajax_wpv_get_taxonomy_name', array($this, 'wpv_ajax_wpv_get_taxonomy_name'));
 		
+        if(is_admin()){
+            add_action('admin_print_scripts', array($this,'add_views_settings_js'));
+		}
+		
+		
     }
 
     function enable_custom_menu_order($menu_ord) {
@@ -570,9 +575,16 @@ class WP_Views_plugin extends WP_Views {
             
             $options = $WPV_view_archive_loop->submit($options);
             $options = $WPV_templates->submit($options);
+			
+			if (isset($_POST['wpv_show_hidden_fields'])) {
+				// save as comma separated string.
+				$options['wpv_show_hidden_fields'] = implode(',', $_POST['wpv_show_hidden_fields']);
+			} else {
+				$options['wpv_show_hidden_fields'] = '';
+			}
             
             $this->save_options($options);
-            
+
             ?>
                 <div class="updated">
                     <p><?php _e("Settings Saved", 'wpv-views'); ?></p>
@@ -595,10 +607,16 @@ class WP_Views_plugin extends WP_Views {
                 <?php $WPV_view_archive_loop->admin_settings($options); ?>
                 <?php $WPV_templates->admin_settings($options); ?>
                 
+				<div id="wpv_show_hidden_custom_fields">
+					<?php $this->show_hidden_custom_fields($options); ?>
+				</div>
+				
                 <?php wp_nonce_field('wpv_view_templates', 'wpv_view_templates'); ?>
-                <p class="submit" style="margin-left:20px;margin-top:0px;">
+                <p class="submit" style="margin-top:0px;">
                     <input id="submit" class="button-primary" type="submit" value="<?php _e('Save', 'wpv-views'); ?>" name="submit" />
                 </p>
+
+				
 
             </form>
             
@@ -656,13 +674,120 @@ class WP_Views_plugin extends WP_Views {
         <?php
     }
 
+	// called from ajax
+	function wpv_get_show_hidden_custom_fields() {
+        $options = $this->get_options();
+		
+		if (isset($_POST['wpv_show_hidden_fields'])) {
+			// save as comma separated string.
+			$options['wpv_show_hidden_fields'] = implode(',', $_POST['wpv_show_hidden_fields']);
+		} else {
+			$options['wpv_show_hidden_fields'] = '';
+		}
+		
+		$this->save_options($options);
+		
+		$this->show_hidden_custom_fields($options);
+		
+		die();
+	}
+	
+	function show_hidden_custom_fields($options) {
+
+		if (isset($options['wpv_show_hidden_fields']) && $options['wpv_show_hidden_fields'] != '') {
+			$defaults = explode(',', $options['wpv_show_hidden_fields']);
+		} else {
+			$defaults = array();
+		}
+		
+		?>
+			<h3 class="title"><?php _e('Show the following hidden custom fields in the Views GUI', 'wpv-views'); ?></h3>
+
+			<div id="wpv_show_hidden_custom_fields_summary" style="margin-left:20px">
+				<?php
+				
+					if (sizeof($defaults) > 0) {
+						echo sprintf(__('The following private custom fields are showing in the Views GUI: %s', 'wpv-views'), implode(', ', $defaults));
+					} else {
+						_e('No private custom fields are showing in the Views GUI.', 'wpv-views');
+					}
+					
+				?>
+				<br />
+		        <input class="button-secondary" type="button" value="<?php echo __('Edit', 'wpv-views'); ?>" onclick="wpv_show_hidden_custom_fields_edit();"/>
+				
+			</div>
+			<div id="wpv_show_hidden_custom_fields_admin" style="margin-left:20px;display:none">
+
+				<?php
+				$meta_keys = $this->get_meta_keys(true);
+				
+				echo '<table><tr>';
+
+				$count = 0;					
+				foreach($meta_keys as $field) {
+					
+					if (strpos($field, '_') === 0) {
+					
+						$options[$field]['#default_value'] = in_array($field, $defaults);
+						$element = wpv_form_control(array('field' => array(
+									'#type' => 'checkbox',
+									'#name' => 'wpv_show_hidden_fields[]',
+									'#attributes' => array('style' => ''),
+									'#inline' => true,
+									'#title' => $field,
+									'#value' => $field,
+									'#before' => '<td>',
+									'#after' => '</td>',
+									'#default_value' => in_array($field, $defaults)
+							 )));
+						echo $element;
+						
+						$count++;
+						
+						if (!($count % 3)) {
+							echo '</tr><tr>';
+						}
+					}
+				}
+
+				// close the table correctly.
+				if (!($count % 3)) {
+					echo '<td></td><td></td><td></td>';
+				}
+				while(true) {
+					if (!($count % 3)) {
+						echo '</tr>';
+						break;
+					} else {
+						echo '<td></td>';
+					}
+					
+					$count++;
+					
+				}
+				
+				echo '</table>';
+
+				?>
+			
+				<input class="button-primary" type="button" value="<?php echo __('Save', 'wpv-views'); ?>" onclick="wpv_show_hidden_custom_fields_save();"/>
+				<img id="wpv_show_custom_fields_spinner" src="<?php echo WPV_URL; ?>/res/img/ajax-loader.gif" width="16" height="16" style="display:none" alt="loading" />
+		
+				<input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_hidden_custom_fields_cancel();"/>
+				
+			
+			</div>
+		<?php
+		
+	}
 	/**
 	 * Get the available View in a select box
 	 *
 	 */
 	
 	function get_view_select_box($row, $page_selected, $archives_only = false) {
-		global $wpdb;
+		global $wpdb, $sitepress;
 		
 		static $views_available = null;
 		
@@ -693,7 +818,29 @@ class WP_Views_plugin extends WP_Views {
 			$view_box .= '<select class="view_select" name="view_' . $row . '" id="view_' . $row . '">';
 		}
 
+        if (function_exists('icl_object_id')) {
+            $page_selected = icl_object_id($page_selected, 'view', true);
+        }
+
         foreach($views_available as $view) {
+			
+			if (isset($sitepress)) {
+				// See if we should only display the one for the correct lanuage.
+				$lang_details = $sitepress->get_element_language_details($view->ID, 'post_view');
+				if ($lang_details) {
+					$translations = $sitepress->get_element_translations($lang_details->trid, 'post_view');
+					if (count($translations) > 1) {
+						$lang = $sitepress->get_current_language();
+						if (isset($translations[$lang])) {
+							// Only display the one in this language.
+							if ($view->ID != $translations[$lang]->element_id) {
+								continue;
+							}
+						}
+					}
+				}
+			}
+			
             if ($page_selected == $view->ID)
                 $selected = ' selected="selected"';
             else
@@ -764,5 +911,11 @@ class WP_Views_plugin extends WP_Views {
 		die();
 	}
 	
+	function add_views_settings_js() {
+		if (isset($_GET['page']) && $_GET['page'] == 'views-settings') {
+            wp_enqueue_script( 'views-settings-script' , WPV_URL . '/res/js/views_settings.js', array('jquery'), WPV_VERSION);
+		}
+		
+	}
     
 }

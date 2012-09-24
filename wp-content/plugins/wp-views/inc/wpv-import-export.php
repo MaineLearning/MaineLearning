@@ -64,12 +64,34 @@ function wpv_admin_menu_import_export() {
 /**
  * Exports data to XML.
  */
-function wpv_admin_export_data() {
+function wpv_admin_export_data($download = true) {
     global $WP_Views;
     
     require_once WPV_PATH_EMBEDDED . '/common/array2xml.php';
     $xml = new ICL_Array2XML();
     $data = array();
+    
+    // SRDJAN - add siteurl, upload url, record taxonomies old IDs
+    // https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142382866/comments
+    // https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142389966/comments
+    $data['site_url'] = get_site_url();
+    if (is_multisite()) {
+        $data['fileupload_url'] = get_option('fileupload_url');
+    } else {
+        $wp_upload_dir = wp_upload_dir();
+        $data['fileupload_url'] = $wp_upload_dir['baseurl'];
+    }
+    $taxonomies = get_taxonomies('', 'objects');
+    foreach ($taxonomies as $category) {
+        $terms = get_terms($category->name, array('hide_empty' => 0));
+        if (!empty($terms)) {
+            foreach ($terms as $term) {
+                $data['terms_map']['term_' . $term->term_id]['old_id'] = $term->term_id;
+                $data['terms_map']['term_' . $term->term_id]['slug'] = $term->slug;
+                $data['terms_map']['term_' . $term->term_id]['taxonomy'] = $category->name;
+            }
+        }
+    }
 
     // Get the views
     $views = get_posts('post_type=view&post_status=any&posts_per_page=-1');
@@ -169,6 +191,10 @@ function wpv_admin_export_data() {
         $code .= '$affiliate_key="' . $_POST['akey'] . '";' . "\r\n";
     }
     $code .= "\r\n?>";
+    
+    if (!$download) {
+        return $data;
+    }
 
     if (class_exists('ZipArchive')) { 
         $zipname = $sitename . 'views.' . date('Y-m-d') . '.zip';

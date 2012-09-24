@@ -2188,7 +2188,12 @@ function InsertFieldChoice(index){
     field = GetSelectedField();
 
     var price = field["enablePrice"] ? "0.00" : "";
-    field.choices.splice(index, 0, new Choice("", "", price));
+    var new_choice = new Choice("", "", price);
+    if(window["gform_new_choice_" + field.type])
+        new_choice = window["gform_new_choice_" + field.type](field, new_choice);
+
+    field.choices.splice(index, 0, new_choice);
+
     LoadFieldChoices(field);
     UpdateFieldChoices(GetInputType(field));
 }

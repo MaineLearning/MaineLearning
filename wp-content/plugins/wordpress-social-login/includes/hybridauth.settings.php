@@ -138,12 +138,7 @@ $WORDPRESS_SOCIAL_LOGIN_PROVIDERS_CONFIG = ARRAY(
 		"provider_id"       => "500px",
 		"provider_name"     => "px500", 
 		"new_app_link"      => "http://developers.500px.com/", 
-	),
-	// ARRAY( 
-		// "provider_id"       => "Flickr",
-		// "provider_name"     => "Flickr", 
-		// "new_app_link"      => NULL, 
-	// ),
+	), 
 	ARRAY( 
 		"provider_id"       => "Skyrock",
 		"provider_name"     => "Skyrock", 
@@ -153,15 +148,31 @@ $WORDPRESS_SOCIAL_LOGIN_PROVIDERS_CONFIG = ARRAY(
 		"provider_id"       => "Mixi",
 		"provider_name"     => "Mixi", 
 		"new_app_link"      => NULL, 
-	),
-	// ARRAY( 
-		// "provider_id"       => "Hyves",
-		// "provider_name"     => "Hyves", 
-		// "new_app_link"      => NULL, 
-	// ),
+	), 
 	ARRAY( 
 		"provider_id"       => "Steam",
 		"provider_name"     => "Steam", 
 		"new_app_link"      => NULL, 
+	),
+	ARRAY( 
+		"provider_id"       => "Mailru",
+		"provider_name"     => "Mailru", 
+		"require_client_id" => TRUE,
+		"callback"          => TRUE,
+		"new_app_link"      => "http://api.mail.ru/", 
+	),
+	ARRAY( 
+		"provider_id"       => "Yandex",
+		"provider_name"     => "Yandex", 
+		"require_client_id" => TRUE,
+		"callback"          => TRUE,
+		"new_app_link"      => "http://api.yandex.ru", 
+	),
+	ARRAY( 
+		"provider_id"       => "Odnoklassniki",
+		"provider_name"     => "Odnoklassniki", 
+		"require_client_id" => TRUE,
+		"callback"          => TRUE,
+		"new_app_link"      => "http://dev.odnoklassniki.ru/", 
 	),
 );

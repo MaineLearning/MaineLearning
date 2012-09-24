@@ -27,17 +27,12 @@ if(is_admin()){
 			}
 			
 			$taxonomy = $category->name;
-			$terms = get_terms($taxonomy);
+			$name = ( $taxonomy == 'category' ) ? 'post_category' : 'tax_input[' . $taxonomy . ']';
 			
-			if (count($terms) > 0) {
-
-				$name = ( $taxonomy == 'category' ) ? 'post_category' : 'tax_input[' . $taxonomy . ']';
-				
-				$filters[$name] = array('name' => $category->label,
-											'type' => 'callback',
-											'callback' => 'wpv_add_category_checkboxes',
-											'args' => array('name' => $name, 'taxonomy' => $taxonomy));
-			}
+			$filters[$name] = array('name' => $category->label,
+										'type' => 'callback',
+										'callback' => 'wpv_add_category_checkboxes',
+										'args' => array('name' => $name, 'taxonomy' => $taxonomy));
 		}
 
 		// add a nonce field here.

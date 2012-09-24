@@ -27,7 +27,7 @@ foreach( $collumns as $type => $name ): ?>
 		case 'spaces':
 			if( $EM_Ticket->get_available_spaces() > 1 && ( empty($EM_Ticket->ticket_max) || $EM_Ticket->ticket_max > 1 ) ): //more than one space available ?>				
 				<p class="em-tickets-spaces">
-					<label for='em_tickets'><?php _e('Spaces', 'dbem') ?></label>
+					<label for='em_tickets'><?php echo $name; ?></label>
 					<?php 
 						$default = !empty($_REQUEST['em_tickets'][$EM_Ticket->ticket_id]['spaces']) ? $_REQUEST['em_tickets'][$EM_Ticket->ticket_id]['spaces']:0;
 						$spaces_options = $EM_Ticket->get_spaces_options(false,$default);
@@ -38,6 +38,7 @@ foreach( $collumns as $type => $name ): ?>
 						}
 					?>
 				</p>
+				<?php do_action('em_booking_form_ticket_spaces', $EM_Ticket); //do not delete ?>
 			<?php else: //if only one space or ticket max spaces per booking is 1 ?>
 				<input type="hidden" name="em_tickets[<?php echo $EM_Ticket->ticket_id ?>][spaces]" value="1" class="em-ticket-select" />
 			<?php endif;

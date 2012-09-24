@@ -2,8 +2,8 @@
 Contributors: chrisvrichardson
 Tags: excel, spreadsheet, csv, comma, import, importer, importing, data, file, datafile, upload, uploader, uploading, feed, post, posts
 Requires at least: 3.2
-Tested up to: 3.3
-Stable tag: 2.43
+Tested up to: 3.4
+Stable tag: 2.48
 
 TurboCSV is the easiest way to import Excel or CSV data into your WordPress blog to create posts, pages, categories and tags.
 
@@ -50,6 +50,23 @@ See [full installation intructions](http://wphostreviews.com/turbocsv/turbocsv-d
 [FAQ](http://wphostreviews.com/turbocsv/turbocsv-faq)
 
 == Changelog ==
+
+= 2.48 =
+* Changed: TurboCSV calls action 'mappress_update_meta' for compatibility with MapPress 2.38.6 and higher
+* Changed: Map errors are now assumed to be in field 'mappress_error' for compatibility with MapPress 2.38.6 and higher
+
+= 2.47 =
+* Fixed: an error in UTF-8 detection prevented reading some UTF-8 files
+
+= 2.46 =
+* Added: a new option has been added to import thumbnails by ID, image name, or URL.  See the documentation for details.
+* Changed: for hierarchical categories, the plugin now assigns only the BOTTOM category in the imported hierarchy (the WP post editor works the same way)
+
+= 2.45 =
+* Fixed: error when adding additional custom field settings in firefox, could not select value from dropdowns
+
+= 2.44 =
+* Fixed: error selecting from dropdown checkboxes in Firefox
 
 = 2.43 =
 * Fixed: inserting fields in the HTML editor not working if tinyMCE is disabled in WP user settings

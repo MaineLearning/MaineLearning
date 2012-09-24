@@ -41,7 +41,10 @@ class WPV_template{
 				
 				add_filter('user_can_richedit', array($this, 'disable_rich_edit_for_views'));
                 
-            }
+            } elseif ($pagenow == 'admin-ajax.php') {
+				// For when Types saves a child post
+				add_action('save_post', array($this,'save_post_actions'), 10, 2);
+			}
             add_action('admin_head', array($this,'include_admin_css'));
 			
             add_action('wp_ajax_wpv_get_archive_view_template_taxonomy_summary', array($this, '_ajax_get_taxonomy_loop_summary'));
@@ -108,6 +111,7 @@ class WPV_template{
     function meta_box($post) {
             
         global $wpdb, $WP_Views;
+		global $sitepress;
         
         $view_tempates_available = $wpdb->get_results("SELECT ID, post_name, post_title FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
         if (isset($_GET['post'])) {
@@ -119,7 +123,6 @@ class WPV_template{
 
 				if (isset($_GET['trid'])) {
 					// we are creating a translated post
-					global $sitepress;
 					if (isset($sitepress)) {
 						$translations = $sitepress->get_element_translations($_GET['trid'], 'post_' . $post->post_type);
 						
@@ -162,7 +165,29 @@ class WPV_template{
         $none->post_title = __('None', 'wpv-views');
         array_unshift($view_tempates_available, $none);
         
+        if (function_exists('icl_object_id')) {
+            $template_selected = icl_object_id($template_selected, 'view-template', true);
+        }
+		
         foreach($view_tempates_available as $template) {
+			
+			if (isset($sitepress)) {
+				// See if we should only display the one for the correct lanuage.
+				$lang_details = $sitepress->get_element_language_details($template->ID, 'post_view-template');
+				if ($lang_details) {
+					$translations = $sitepress->get_element_translations($lang_details->trid, 'post_view-template');
+					if (count($translations) > 1) {
+						$lang = $sitepress->get_current_language();
+						if (isset($translations[$lang])) {
+							// Only display the one in this language.
+							if ($template->ID != $translations[$lang]->element_id) {
+								continue;
+							}
+						}
+					}
+				}
+			}
+			
             if ($template_selected == $template->ID)
                 $selected = ' selected="selected"';
             else
@@ -186,6 +211,7 @@ class WPV_template{
 	 */
 	
     function save_post_actions($pidd, $post){
+		global $wpdb, $WP_Views;
         
         if (isset($_POST['views_template'])) {
 			// make sure we only update this for the current post.
@@ -195,6 +221,28 @@ class WPV_template{
             
 				update_post_meta($pidd, '_views_template', $template_selected);
 			}
+		} elseif (isset($_POST['wpcf_post_relationship'])) {
+			// handle Types post relationships
+			
+			if (isset($_POST['wpcf_post_relationship'][$pidd]['post_type'])) {
+				// Saving an existing child post
+				$post_type = $_POST['wpcf_post_relationship'][$pidd]['post_type'];
+			} else {
+				// Saving a new child post
+				$post_type = $wpdb->get_var("SELECT post_type FROM {$wpdb->posts} WHERE ID={$pidd}");
+			}
+
+			// set the view template if one hasn't been set.			
+            $template_selected = get_post_meta($pidd, '_views_template', true);
+			if ($template_selected == '') {
+				$options = $WP_Views->get_options();
+					
+				if (isset($options['views_template_for_' . $post_type])) {
+					$template_selected = $options['views_template_for_' . $post_type];
+					update_post_meta($pidd, '_views_template', $template_selected);
+				}
+			}
+					
 		}
     }
     

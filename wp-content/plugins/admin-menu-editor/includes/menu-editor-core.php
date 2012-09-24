@@ -173,7 +173,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			'menu-editor',
 			plugins_url('js/menu-editor.js', $this->plugin_file),
 			array('jquery', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-form'), 
-			'1.1'
+			'20120915'
 		);
 
 		//The editor will need access to some of the plugin data and WP data.
@@ -193,7 +193,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
    * @return void
    */
 	function enqueue_styles(){
-		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20120626');
+		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20120915');
 	}
 
   /**
@@ -1069,6 +1069,16 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	$hint_id = 'ws_sidebar_pro_ad';
 	$show_pro_benefits = !apply_filters('admin_menu_editor_is_pro', false) && (!isset($show_hints[$hint_id]) || $show_hints[$hint_id]);
 	if ( $show_pro_benefits ):
+		$benefit_variations = array(
+			'Simplified, role-based permissions.',
+			'Role-based menu permissions',
+			'Per-role menu permissions',
+		);
+		//Pseudo-randomly select one phrase based on the site URL.
+		$variation_index = hexdec( substr(md5(get_site_url()), -1) ) % count($benefit_variations);
+		$selected_variation = $benefit_variations[$variation_index];
+
+		$pro_version_link = 'http://w-shadow.com/admin-menu-editor-pro/upgrade-to-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=sidebar_link_bv' . $variation_index . '&utm_campaign=Plugins';
 	?>
 		<div class="clear"></div>
 
@@ -1077,11 +1087,11 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			<div class="ws_hint_content">
 				<strong>Upgrade to Pro:</strong>
 				<ul>
-					<li>Menu export & import.</li>
-					<li>Per-role menu permissions.</li>
-					<li>Drag items between menu levels.</li>
+					<li><?php echo $selected_variation; ?></li>
+                    <li>Drag items between menu levels.</li>
+                    <li>Menu export & import.</li>
 				</ul>
-				<a href="http://w-shadow.com/admin-menu-editor-pro/upgrade-to-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=sidebar_link&utm_campaign=Plugins" target="_blank">Learn more</a>
+				<a href="<?php echo esc_attr($pro_version_link); ?>" target="_blank">Learn more</a>
 			</div>
 		</div>
 	<?php
@@ -1342,7 +1352,7 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 			'ame-menu-fix',
 			plugins_url('js/menu-highlight-fix.js', $this->plugin_file),
 			array('jquery'),
-			'20120709',
+			'20120915',
 			true
 		);
 	}
@@ -1369,6 +1379,9 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 			$minimum_usage_period = 3*24*3600;
 			$display_notice = $display_notice && ((time() - $this->options['first_install_time']) > $minimum_usage_period);
 		}
+
+		//Only display the notice on the Menu Editor page.
+		$display_notice = $display_notice && isset($this->get['page']) && ($this->get['page'] == 'menu_editor');
 
 		if ( $display_notice ) {
 			$free_survey_url = 'https://docs.google.com/spreadsheet/viewform?formkey=dERyeDk0OWhlbkxYcEY4QTNaMnlTQUE6MQ';
