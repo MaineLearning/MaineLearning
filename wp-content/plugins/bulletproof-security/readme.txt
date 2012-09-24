@@ -4,7 +4,7 @@ Donate link: http://www.ait-pro.com/aitpro-blog/331/bulletproof-security-plugin-
 Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability, website security, WordPress security
 Requires at least: 3.0 
 Tested up to: 3.5 
-Stable tag: .47.3 
+Stable tag: .47.4 
 
 WordPress Website Security Protection. Website security protection against: XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking... 
 
@@ -16,10 +16,11 @@ bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess sec
 (HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, 
 Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
 
-BulletProof Security uses .htaccess website security files, which are specific to Apache Linux Servers. <strong>Why is .htaccess website 
-security so much better than any other type of website security? The answer is very simple - .htaccess files are processed first 
-before any other code on your website.</strong> In other words, hackers malicious scripts are stopped by BulletProof Security .htaccess 
-files before those scripts even have a chance to reach the php coding in WordPress. Please read the FAQ page for Server compatibility questions. 
+<strong>Why is .htaccess website security so much better than any other type of website security?</strong> 
+The answer is very simple - .htaccess files are processed first before any other code on your website. In other words, 
+hackers malicious scripts are stopped by BulletProof Security .htaccess files before those scripts even have a chance to 
+reach the php coding in WordPress. BulletProof Security uses .htaccess website security files, which are specific to 
+Apache Linux Servers. Please read the FAQ page for Server compatibility questions. 
 
 The BulletProof Security WordPress Security plugin is designed to be a fast, simple and one click security plugin to 
 add .htaccess website security protection for your WordPress website. Activate .htaccess website security and .htaccess 
@@ -68,7 +69,7 @@ have additional website security measures in place as a standard. BulletProof Se
 * WordPress version is not displayed / not shown - WordPress version is removed
 * WP Generator Meta Tag filtered - not displayed / not shown
 * WP DB default admin username / account check
-* System Information Page: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload...
+* System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload, Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache and Memcached
 * Security Status Page - Displays website security status information
 * File and Folder Permission Checking - CGI / DSO SAPI check / display
 * Help & FAQ page - links to BPS Guide and other detailed Help & Info pages
@@ -238,6 +239,16 @@ Yes, BulletProof Security works with Git, but does require some additional set u
 3. BulletProof File Editing, Uploading and Downloading
 
 == Changelog ==
+
+= .47.4 =
+* Improved and Extended Automatic htaccess File Upgrading
+* No need to reactivate BulletProof Modes when upgrading
+* Automatic updating from .46.9 to the current version of BPS
+* Additional System Info Checks Added:
+* Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache and Memcached 
+* System Info Checks: check if extensions are installed, loaded, enabled or disabled
+* Additional Memory Limit Checks: WordPress Admin Memory Limit, WordPress Base Memory Limit and PHP Actual Configuration Memory Limit
+* Enjoy!
 
 = .47.3 =
 * .47.2 Automatic .htaccess file updating on upgrade installation added
@@ -490,12 +501,13 @@ Create new Master .htaccess files with AutoMagic and activate all BulletProof Mo
 
 == Upgrade Notice ==
 
-* .47.2 Automatic .htaccess file updating on upgrade installation added
+* Improved and Extended Automatic htaccess File Upgrading
 * No need to reactivate BulletProof Modes when upgrading
-* .47.2 New htaccess security filter added automatically during upgrade
-* .47.3 New htaccess security filter added automatically during upgrade
-* .47.3 Deny All protection automatically activated for BPS Master /htaccess folder 
-* WP Dashboard Alerts - Root and wp-admin htaccess file checks
+* Automatic updating from .46.9 to the current version of BPS
+* Additional System Info Checks Added:
+* Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache and Memcached 
+* System Info Checks: check if extensions are installed, loaded, enabled or disabled
+* Additional Memory Limit Checks: WordPress Admin Memory Limit, WordPress Base Memory Limit and PHP Actual Configuration Memory Limit
 * Enjoy!
 
 == Help Info ==
@@ -506,12 +518,13 @@ the particular section or page of the BulletProof Security plugin that you are i
 Help and FAQ page contains links to Help pages that will load in a new browser tab so
 that you are not redirected away from your WordPress Dashboard. 
 
-What's New in .47.2
+What's New in .47.4
 
-* .47.2 Automatic .htaccess file updating on upgrade installation added
+* Improved and Extended Automatic htaccess File Upgrading
 * No need to reactivate BulletProof Modes when upgrading
-* .47.2 New htaccess security filter added automatically during upgrade
-* .47.3 New htaccess security filter added automatically during upgrade
-* .47.3 Deny All protection automatically activated for BPS Master /htaccess folder 
-* WP Dashboard Alerts - Root and wp-admin htaccess file checks
+* Automatic updating from .46.9 to the current version of BPS
+* Additional System Info Checks Added:
+* Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache and Memcached 
+* System Info Checks: check if extensions are installed, loaded, enabled or disabled
+* Additional Memory Limit Checks: WordPress Admin Memory Limit, WordPress Base Memory Limit and PHP Actual Configuration Memory Limit
 * Enjoy!

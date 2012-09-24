@@ -1,0 +1,13 @@
+.item-subitem-indicator {
+	float: left;
+	font-size: 1.5em;
+	width: 1.5em;
+	line-height: 3em;
+}
+.item-subitem-indicator a {	text-decoration: none;	}
+.subitem {
+	border: 1px solid #eee;
+	border-left: 3em solid #eee;
+	padding-right: 10px;
+}
+.subitem div.pagination {	margin: 0;	}

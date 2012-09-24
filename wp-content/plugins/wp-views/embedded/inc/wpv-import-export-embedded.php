@@ -151,6 +151,7 @@ function wpv_admin_import_data() {
         }
 
         $import_data = wpv_admin_import_export_simplexml2array($xml);
+        
 
         // import view templates first.   
         $error = wpv_admin_import_view_templates($import_data);
@@ -204,7 +205,8 @@ function wpv_admin_import_view_templates($import_data) {
                                 WHERE post_name = %s AND post_type = %s",
                             $view_template['post_name'], 'view-template'));
 
-            if ($post_to_update) {
+            $id = 0;
+			if ($post_to_update) {
                 $imported_view_templates[] = $post_to_update;
 
                 // only update if we have overwrite enabled.
@@ -271,7 +273,7 @@ function wpv_admin_import_views($import_data) {
     $imported_views = array();
     $overwrite_count = 0;
     $new_count = 0;
-
+    
     if (isset($import_data['views']['view'])) {
         $views = $import_data['views']['view'];
 
@@ -285,6 +287,34 @@ function wpv_admin_import_views($import_data) {
 
             $meta = $view['meta'];
             unset($view['meta']);
+            
+            // SRDJAN - https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142389966/comments
+            // Fix URLs
+            if (!empty($import_data['site_url']) && !empty($import_data['fileupload_url'])) {
+                    if (!empty($meta['_wpv_settings']['pagination']['spinner_image'])) {
+                        $meta['_wpv_settings']['pagination']['spinner_image'] = WPV_URL_EMBEDDED . '/res/img/' . basename($meta['_wpv_settings']['pagination']['spinner_image']);
+                    }
+                    if (!empty($meta['_wpv_settings']['pagination']['spinner_image_uploaded'])) {
+                        $meta['_wpv_settings']['pagination']['spinner_image_uploaded'] = wpv_convert_url($meta['_wpv_settings']['pagination']['spinner_image_uploaded'],
+                                $import_data['site_url'],
+                                $import_data['fileupload_url']);
+                    }
+            }
+            
+            // SRDJAN - fix term_ids
+            // https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142382866/comments
+            if (!empty($meta['_wpv_settings']['taxonomy_terms']['taxonomy_term'])) {
+                foreach ($meta['_wpv_settings']['taxonomy_terms']['taxonomy_term'] as $term_key => $old_term_id) {
+                    if (isset($import_data['terms_map']['term_' . $old_term_id])) {
+                        $new_term = get_term_by('slug',
+                                $import_data['terms_map']['term_' . $old_term_id]['slug'],
+                                $import_data['terms_map']['term_' . $old_term_id]['taxonomy']);
+                        if (!empty($new_term)) {
+                            $meta['_wpv_settings']['taxonomy_terms']['taxonomy_term'][$term_key] = $new_term->term_id;
+                        }
+                    }
+                }
+            }
 
             if (isset($meta['_wpv_settings'])) {
                 $meta['_wpv_settings'] = $WP_Views->convert_names_to_ids_in_settings($meta['_wpv_settings']);
@@ -445,17 +475,24 @@ function wpv_admin_import_export_simplexml2array($element) {
     if (!empty($element) && is_object($element)) {
         $element = (array) $element;
     }
-    if (empty($element)) {
+    // SRDJAN - slider settings that have 0 values are imported as empty string https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142382765/comments
+    if (!is_array($element) && strval($element) == '0') {
+        $element = 0;
+    } else if (empty($element)) {
         $element = '';
     } else if (is_array($element)) {
         foreach ($element as $k => $v) {
             $v = is_string($v) ? trim($v) : $v;
-            if (empty($v)) {
+            if (!is_array($v) && strval($v) == '0') {
+                $element[$k] = 0;
+            } else if (empty($v)) {
                 $element[$k] = '';
                 continue;
             }
             $add = wpv_admin_import_export_simplexml2array($v);
-            if (!empty($add)) {
+            if (!is_array($add) && strval($add) == '0') {
+                $element[$k] = 0;
+            } else if (!empty($add)) {
                 $element[$k] = $add;
             } else {
                 $element[$k] = '';
@@ -463,9 +500,32 @@ function wpv_admin_import_export_simplexml2array($element) {
         }
     }
 
-    if (empty($element)) {
+    if (!is_array($element) && strval($element) == '0') {
+        $element = 0;
+    } else if (empty($element)) {
         $element = '';
     }
 
     return $element;
+}
+
+/**
+ * Converts URLs.
+ * 
+ * @param type $url
+ * @param type $site_url
+ * @param type $upload_url
+ * @return type 
+ */
+function wpv_convert_url($url, $site_url, $upload_url) {
+    // Check if uploaded files URL or other URL
+    if (strpos($url, (string) $upload_url) !== false) {
+        $upload_dir = wp_upload_dir();
+        $url = str_replace((string) $upload_url,
+                $upload_dir['baseurl'], $url);
+    } else if (strpos($url, (string) $site_url) !== false) {
+        $url = str_replace((string) $site_url,
+                get_site_url(), $url);
+    }
+    return $url;
 }

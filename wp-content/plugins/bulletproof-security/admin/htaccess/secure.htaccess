@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS     
+#   BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS     
 
-# If you edit the  BULLETPROOF .47.3 >>>>>>> SECURE .HTACCESS text above
+# If you edit the  BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -54,7 +54,6 @@ ErrorDocument 404 /404.php
 # DENY ACCESS TO PROTECTED SERVER FILES - .htaccess, .htpasswd and all file names starting with dot
 RedirectMatch 403 /\..*$
 
-
 RewriteEngine On
 RewriteBase /
 RewriteRule ^wp-admin/includes/ - [F,L]
@@ -63,11 +62,9 @@ RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
 RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
 RewriteRule ^wp-includes/theme-compat/ - [F,L]
 
-
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
-
 
 # REQUEST METHODS FILTERED
 # This filter is for blocking junk bots and spam bots from making a HEAD request, but may also block some
@@ -174,11 +171,9 @@ RewriteCond %{QUERY_STRING} \-[sdcr].*(allow_url_include|allow_url_fopen|safe_mo
 RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
 RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
 RewriteRule ^(.*)$ - [F,L]
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
-
 
 # DENY BROWSER ACCESS TO THESE FILES 
 # wp-config.php, bb-config.php, php.ini, php5.ini, readme.html
@@ -194,7 +189,6 @@ Deny from all
 
 # IMPORTANT!!! DO NOT DELETE!!! the END WordPress text below
 # END WordPress
-
 
 # BLOCK HOTLINKING TO IMAGES
 # To Test that your Hotlinking protection is working visit http://altlab.com/htaccess_tutorial.html

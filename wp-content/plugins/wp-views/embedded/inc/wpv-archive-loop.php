@@ -82,8 +82,10 @@ class WP_Views_archive_loops{
         add_action('init', array($this, 'init'));
 		
 		$this->header_started = false;
+		$this->in_head = false;
 		
 		$this->in_the_loop = false;
+        $this->loop_found = false;
 		
     }
     
@@ -101,7 +103,7 @@ class WP_Views_archive_loops{
             add_action('wp_ajax_wpv_get_archive_post_type_summary', array($this, '_ajax_get_post_type_loop_summary'));
             add_action('wp_ajax_wpv_get_archive_taxonomy_summary', array($this, '_ajax_get_taxonomy_loop_summary'));
             add_action('wp_ajax_wpv_get_archive_view_edit_summary', array($this, '_ajax_get_view_edit_summary'));
-            
+			
         }
 		
     }
@@ -129,6 +131,11 @@ class WP_Views_archive_loops{
                 add_action('loop_start', array($this, 'loop_start'), 1, 1);
                 add_action('loop_end', array($this, 'loop_end'), 999, 1);
 				add_action('get_header', array($this, 'get_header'));
+
+				// Stop the view being displayed in the head.
+				// JetPack can cause this.
+				add_action( 'wp_head', array( $this, 'html_head_start' ), -100 ); // try to load first
+				add_action( 'wp_head', array( $this, 'html_head_end' ), 999 ); // try to load last
                 
             }
         } 
@@ -146,8 +153,16 @@ class WP_Views_archive_loops{
 		$this->header_started = true;
 	}
 	
+	function html_head_start() {
+		$this->in_head = true;
+	}
+
+	function html_head_end() {
+		$this->in_head = false;
+	}
+
     function loop_start($query) {
-        if ($this->header_started && ($query->query_vars_hash == $this->query->query_vars_hash || $query->request == $this->query->request)) {
+        if (!$this->in_head && $this->header_started && ($query->query_vars_hash == $this->query->query_vars_hash || $query->request == $this->query->request)) {
             ob_start();
             $this->post_count = $query->post_count;
             $query->post_count = 1;
@@ -250,7 +265,12 @@ class WP_Views_archive_loops{
         
         foreach($loops as $loop => $loop_name) {
             if (isset ($options['view_' . $loop]) && $options['view_' . $loop] > 0) {
-                $selected .= '<li type=square style="margin:0;">' . sprintf(__('%s using "%s"', 'wpv-views'), $loop_name, $views_available[$options['view_' . $loop]]) . '</li>';
+				$view_id = $options['view_' . $loop];
+				if (function_exists('icl_object_id')) {
+					$view_id = icl_object_id($view_id, 'view', true);
+				}
+
+                $selected .= '<li type=square style="margin:0;">' . sprintf(__('%s using "%s"', 'wpv-views'), $loop_name, $views_available[$view_id]) . '</li>';
             }
         }
 
@@ -354,7 +374,12 @@ class WP_Views_archive_loops{
             }
             $name = $category->name;
             if (isset ($options['view_taxonomy_loop_' . $name ]) && $options['view_taxonomy_loop_' . $name ] > 0) {
-                $selected .= '<li type=square style="margin:0;">' . sprintf(__('%s using "%s"', 'wpv-views'), $category->labels->name, $views_available[$options['view_taxonomy_loop_' . $name ]]) . '</li>';
+				$view_id = $options['view_taxonomy_loop_' . $name];
+				if (function_exists('icl_object_id')) {
+					$view_id = icl_object_id($view_id, 'view', true);
+				}
+				
+                $selected .= '<li type=square style="margin:0;">' . sprintf(__('%s using "%s"', 'wpv-views'), $category->labels->name, $views_available[$view_id]) . '</li>';
             }
         }
 

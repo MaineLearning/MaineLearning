@@ -395,10 +395,12 @@ if(!class_exists("EasyColumns")){
 				'onehalf_width_type' => '%',
 				'onehalf_margin' =>  '',
 				'onehalf_type' => '%',
+				'onehalf_margin_type' => '%',
 				'threequarter_width' => '',
 				'threequarter_width_type' => '%',
 				'threequarter_margin' =>  '',
 				'threequarter_type' => '%',
+				'threequarter_margin_type' => '%',
 				'onethird_width' => '',
 				'onethird_width_type' => '%',
 				'onethird_margin' =>  '',
@@ -573,8 +575,8 @@ if(!class_exists("EasyColumns")){
 		/*
 		uninstall the plugin - removes options
 		*/
-		function uninstall() {
-			delete_option($this->EasyColumns_DB_option);
+		static function uninstall() {
+			delete_option(self::EasyColumns_DB_option);
 		} // end uninstall
 
 
@@ -592,7 +594,7 @@ if (isset($wp_wp_columns)) {
 	add_action('wp_head', array(&$wp_wp_columns, 'wpcol_add_css'), 100);
 	if (function_exists('register_uninstall_hook'))
 	{
-		register_uninstall_hook(__FILE__, array(&$wp_wp_columns, 'uninstall'));
+		register_uninstall_hook(__FILE__, array('EasyColumns', 'uninstall'));
 	}
 }
 ?>

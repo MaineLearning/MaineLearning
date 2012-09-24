@@ -4,16 +4,16 @@ jQuery(document).ready(function() {
 	// Activate tooltips
 	jQuery('.ttip').tinyTips('light', 'title');
 
-	// Create 'value tables' - i.e. dropdown comboboxes from multiple select lists with class 'ti-value-table'
-	ti_create_vt();
-
-	// Create editable tables
-	ti_create_edit_tables();
-
-	// If hidden 'disabled' field is set, disable all input controls, e.g. when displaying import results
+	// If l10n 'disabled' field is set, disable all input controls, e.g. when displaying import results
 	if (typeof(til10n) != 'undefined' && til10n.disable) {
 		jQuery('#form_import :input').attr('disabled', true);
+	} else {
+		// Create editable tables only if not disabled
+		jQuery('.edt').edt();
 	}
+
+	// Create dropdown multiselects
+	jQuery('.ddms').ddms();
 
 	// Accordion class (e.g. for dropdown info about memory usage)
 	jQuery('.ti-accordion').click(function() {
@@ -147,146 +147,184 @@ function ti_insert(id, value) {
 }
 
 
-/*
-	------------------------------------------------------------
-	Create dropdown value tables
-	------------------------------------------------------------
+/**
+* Plugin for editable tables (with add/delete links)
+*
+* Usage: jQuery('element').edt( options )
+*
+* The element should be an html table
+*
+* Options:
+*   labels : l10n labels, specify as { add : '', del : ''}
+*
 */
-function ti_create_vt() {
-	jQuery('.ti-value-table').each(function() {
-		// Build an array of the options in the original multiple select list
-		var options = new Array();
-		jQuery('option', this).each(function() {
-			options.push({
-				value : jQuery(this).val(),
-				text : jQuery(this).text(),
-				checked : (jQuery(this).attr('selected') == 'selected' ? "checked='checked'" : "")
-			});
-		});
+jQuery.fn.edt = function( options ) {
 
-		// Apply wrappers
-		jQuery(this).wrap("<div class='ti-vt-wrapper'><div class='ti-vt-scroll'>");
+	// Create some defaults, extending them with any options that were provided
+	var settings = jQuery.extend( {
+		l10n    : {add : '+ Add more', del : 'delete'}
+	}, options);
 
-		// Add the trigger <input> element (readonly) - it shows the currently-selected values from the checkboxes
-		jQuery(this).parent().before("<input value='' readonly='readonly' class='ti-vt-selected' style=''/>");
+	return this.each(function() {
 
-		// Get the name of the original dropdown, the same name is used on all of the checkboxes so they'll POST correctly
-		var name = jQuery(this).attr('name');
+		var element = this;
 
-		// Build the list of checkboxes
-		var list = "<div class='ti-vt-list'>";
-		for (var i=0; i < options.length; i++) {
-			var id = name + options[i].value;
-			list += "<div>" +
-				"<input type='checkbox' name='" + name + "' value='" + options[i].value + "' id='" + id + "' " + options[i].checked + "/>" +
-				"<label for='" + id + "'>" + options[i].text + "</label></div>";
-		}
-		list += "</div>";
-		jQuery(this).after(list);
-
-		// Add the 'select all' entry to the top of the dropdown (but above the scrolling 'list' part)
-		var id = name + 'selectall';
-		jQuery(this).after("<div><input type='checkbox' class='ti-vt-select' id='" + id + "'/><label for='" + id + "'>" + til10n.select_all + "</label><hr/></div>");
-
-		// Remove the original dropdown that we've replaced
-		jQuery(this).remove();
-	});
-
-	// Open/close the dropdown when the <input> containing the selected values is clicked
-	jQuery('.ti-vt-selected').click(function() {
-		jQuery(this).parent().find('.ti-vt-scroll').toggle();
-	});
-
-	// Close the dropdown when any other part of the screen is clicked
-	// Unfortunately this doesn't work cross-browser; only IE sets the relatedTarget and there's no other way to detect if the parent element lost focus
-	// For now, users must click the field to open/close instead.  For reference here's the code:
-	// jQuery('.ti-vt-wrapper').focusout(function(e) {
-	// if (e.relatedTarget && jQuery(e.relatedTarget).parents('.ti-vt-wrapper').length == 0) {
-	//	jQuery(this).parent().find('.ti-vt-scroll').hide();
-	// }
-
-	// Select all/none
-	jQuery('.ti-vt-select').click(function(e) {
-		var values = jQuery(this).parent().next('.ti-vt-list');
-		jQuery(':checkbox', values).attr('checked', this.checked);
-
-		// Trigger a change to the list element (just setting the checkboxes won't do it)
-		jQuery(values).change();
-	});
-
-	// On changes to the checkboxes, update the list of values in the trigger element
-	jQuery('.ti-vt-list').change(function() {
-		var checked = new Array();
-
-		jQuery(':checkbox:checked', this).each(function() {
-			// The text for the checkbox is in the next element (assume it's plain text)
-			checked.push(jQuery(this).next().text());
-		});
-
-		var wrapper = jQuery(this).parents('.ti-vt-wrapper');
-		var values = checked.join(", ");
-		if (!values || values == '') {
-			values = til10n.click_to_select;
-		}
-
-		wrapper.children('.ti-vt-selected').val(values);
-	});
-
-	// Trigger an initial change event on all the lists to populate the 'selected' element with the checked checkboxes
-	jQuery('.ti-vt-list').change();
-
-	// Initially hide all of the dropdowns
-	jQuery('.ti-vt-scroll').hide();
-}
-
-/*
-	------------------------------------------------------------
-	Create editable tables with 'add more' and 'delete' links
-	------------------------------------------------------------
-*/
-function ti_create_edit_tables() {
-	// Create editable tables with add/delete buttons
-	jQuery('.ti-edit-table').each(function() {
+		// Set up the add/delete buttons
 		// Create an 'add' button just below the table
-		var addButton = jQuery("<a href='#' class='ti-table-add'>+ Add more</a>");
-		jQuery(this).parent().append(addButton);
+		jQuery(this).parent().append("<a href='#' class='ti-table-add'>" + settings.l10n.add + "</a>");
 
 		// Create a delete button at the end of each row
-		var delButton = jQuery("<td><a href='#' class='ti-table-delete'>delete</a></td>");
-		jQuery('tr', this).append(delButton);
+		var delButton = jQuery("<td><a href='#' class='ti-table-delete'>" + settings.l10n.del + "</a></td>");
+		jQuery('tr', element).append(delButton);
 
-		// If the table has onle 1 row, hide the delete button
-		if (jQuery('tr', this).length < 2) {
-			jQuery('.ti-table-delete', this).hide();
+		// If the table has only 1 row, hide the delete button
+		if (jQuery('tr', element).length < 2) {
+			jQuery('.ti-table-delete', element).hide();
 		}
-	});
 
-	// Process 'add' clicks
-	jQuery('.ti-table-add').click(function() {
-		var t = jQuery(this).prev('table');
-		var newRow = jQuery('tr', t).first().clone();
+		// Process 'add' clicks
+		jQuery(this).next('.ti-table-add').click(function() {
+			var newRow = jQuery('tr', element).first().clone();
 
-		// It's very difficult to completely clear the row; for this application, just remove selected="selected" from the options
-		newRow.find('option').attr('selected', false);
+			// Add the new row to the end of the table
+			jQuery(element).append(newRow);
 
-		// Add the new row to the end of the table
-		jQuery(t).append(newRow);
-
-		// Should be OK to show delete links, since we have > 1 row now
-		jQuery('.ti-table-delete', t).show();
-		return false;
-	});
-
-	// Process other clicks through the table (through bubbling, we caputre row clicks here)
-	jQuery('.ti-edit-table').click(function(e) {
-		if (jQuery(e.target).hasClass('ti-table-delete')) {
-			jQuery(e.target).closest('tr').remove();
-
-			// A row was deleted, if there's only 1 row left then hide the 'delete' links
-			if (jQuery('tr', this).length < 2) {
-				jQuery('.ti-table-delete', this).hide();
-			}
+			// Should be OK to show delete links, since we have > 1 row now
+			jQuery('.ti-table-delete', element).show();
 			return false;
-		}
+		});
+
+		// Process 'delete' clicks within the table rows
+		jQuery(this).click(function(e) {
+			if (jQuery(e.target).hasClass('ti-table-delete')) {
+				jQuery(e.target).closest('tr').remove();
+
+				// if there's only 1 row left then hide the 'delete' links
+				if (jQuery('tr', this).length < 2) {
+					jQuery('.ti-table-delete', this).hide();
+				}
+				return false;
+			}
+		});
 	});
 }
+
+
+/**
+* Plugin for drop-down multi-select
+*
+* Usage: jQuery('element').ddms( options )
+*
+* The element should be a standard select with the 'multiple' attribute:
+* <select multiple="multiple">
+*
+* Options:
+*   labels : l10n labels, specify as { selectAll : '', select : ''}
+*
+*/
+jQuery.fn.ddms = function( options ) {
+
+	// Create some defaults, extending them with any options that were provided
+	var settings = jQuery.extend( {
+		l10n    : {selectAll : 'Select All', select : 'Click to select'}
+	}, options);
+
+	return this.each(function() {
+
+		// Get the name of the original dropdown, we'll use the same name after it's replaced
+		var name = jQuery(this).attr('name');
+		var width = jQuery(this).width();
+
+		// Generate the html.  The input is always readonly, but it's also disabled if the original element was disabled
+		var disabled = (jQuery(this).attr('disabled') == 'disabled') ? "disabled='disabled'" : "";
+		var html = "<div class='ddms-container'>" +
+			"<input value='' readonly='readonly' " + disabled + " class='ddms-selected' />";
+
+		// If the list is empty, there's nothing else to do - just display an empty field
+		if (jQuery('option', this).length == 0) {
+			html += "</div>";
+			jQuery(this).replaceWith(html);
+			return;
+		}
+
+		// Add the 'select all' entry to the top of the dropdown
+		html += "<div class='ddms-dropdown'>";
+		html += "<div><label><input type='checkbox' class='ddms-selectall' />" + settings.l10n.selectAll + "</label><hr/></div>";
+
+		// Build the list of checkboxes as <divs>
+		html += "<div class='ddms-options'>";
+		jQuery('option', this).each(function() {
+			var checked = (jQuery(this).attr('selected') == "selected") ? "checked='checked'" : "";
+
+			// Note that the label for each element is also stored in the title attribute of the <input>, to make it easier to retrieve later
+			var label = jQuery(this).text();
+			html += "<div><label>" +
+				"<input type='checkbox' name='" + name + "' value='" + jQuery(this).val() + "' " + checked + " title='" + label + "' />" +
+				label + "</label></div>";
+		});
+		html += "</div>";
+
+		// Create a container element and replace the original dropdown with it
+		var container = jQuery(html);
+		jQuery(this).replaceWith(container);
+
+		// Select all/none
+		jQuery('.ddms-selectall', container).click(function(e) {
+			jQuery('.ddms-options :checkbox', container).attr('checked', this.checked);
+
+			// Trigger the change event to update the list of values
+			jQuery('.ddms-options :checkbox', container).change();
+		});
+
+		// On changes to the checkboxes, update the list of values
+		jQuery('.ddms-options', container).change(function(event) {
+			var checked = new Array();
+
+			jQuery(':checkbox:checked', this).each(function() {
+				// Assume the text for the checkbox is in the preceding label
+				checked.push(jQuery(this).attr('title'));
+			});
+
+			var values = checked.join(", ");
+			if (!values || values == '') {
+				values = settings.l10n.select;
+			}
+
+			jQuery('.ddms-selected', container).val(values);
+		});
+
+		// Trigger an initial change event on all the list to populate the 'selected' element with the checked checkboxes
+		jQuery('.ddms-options', container).change();
+
+		//
+		// To make the dropdowns open & close properly...
+		// ----------------------------------------------------------
+		//
+
+		// When the document body is clicked, hide the dropdown.
+		jQuery('body').click(function() {
+			jQuery('.ddms-dropdown', container).hide();
+		});
+
+		// Prevent click events on the container (like checkboxes) from propagating up to the body
+		jQuery('.ddms-dropdown', container).click(function(event) {
+			event.stopPropagation();
+		});
+
+		// When the selector is clicked, toggle the dropdown
+		jQuery('.ddms-selected', container).click(function(event) {
+			// Get the current dropdown visibility
+			var display = jQuery('.ddms-dropdown', container).css('display');
+
+			// We want all the OTHER dropdowns on the screen to close, so close all dropdowns here
+			jQuery('.ddms-dropdown').hide();
+
+			// Toggle the dropdown for this ddms
+			if (display == 'none')
+				jQuery('.ddms-dropdown', container).show();
+
+			// The event has to be stopped with return false, otherwise the body will close it again
+			return false;
+		});
+	});
+};

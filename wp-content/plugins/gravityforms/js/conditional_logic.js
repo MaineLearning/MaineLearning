@@ -245,6 +245,10 @@ function gf_reset_to_default(targetId, defaultValue){
 
     target.each(function(){
         var val = "";
+        
+        if(jQuery(this).is('select'))
+            val = jQuery(this).find('option').eq(0).val();
+        
         if(jQuery.isArray(defaultValue)){
             val = defaultValue[target_index];
         }

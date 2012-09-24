@@ -630,7 +630,7 @@ class EM_Booking extends EM_Object{
 
 			//Send user (booker) emails
 			if( !empty($msg['user']['subject']) ){
-				$msg['user']['subject'] = $this->output($msg['user']['subject'], $output_type);
+				$msg['user']['subject'] = $this->output($msg['user']['subject'], 'raw');
 				$msg['user']['body'] = $this->output($msg['user']['body'], $output_type);
 				if( get_option('dbem_smtp_html') && get_option('dbem_smtp_html_br', 1) ){
 					$msg['user']['body'] = nl2br($msg['user']['body']);
@@ -645,7 +645,7 @@ class EM_Booking extends EM_Object{
 			if( $email_admin && !empty($msg['admin']['subject']) && (!$this->can_manage() || (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'booking_add') || $this->manage_override) ){ //emails won't be sent if admin is logged in unless they book themselves
 				if( get_option('dbem_bookings_contact_email') == 1 || get_option('dbem_bookings_notify_admin') ){
 					//Only gets sent if this is a pending booking, unless approvals are disabled.
-					$msg['admin']['subject'] = $this->output($msg['admin']['subject'], $output_type);
+					$msg['admin']['subject'] = $this->output($msg['admin']['subject'],'raw');
 					$msg['admin']['body'] = $this->output($msg['admin']['body'], $output_type); 
 					if( get_option('dbem_smtp_html') && get_option('dbem_smtp_html_br', 1) ){
 						$msg['admin']['body'] = nl2br($msg['admin']['body']);

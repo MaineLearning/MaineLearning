@@ -51,3 +51,13 @@ return get_stylesheet_directory_uri() .'/images/default-avatar.jpg';
 }
 add_filter( 'bp_core_mysteryman_src', 'myavatar_add_default_avatar' );
 
+
+/**
+ * Lower priority of automatic p tags
+ *
+ * http://wordpress.org/extend/plugins/column-matic/faq/
+ */
+
+
+add_filter( 'the_content', 'wpautop',20 );
+

@@ -58,10 +58,12 @@ function wpv_filter_controls_admin($view_settings){
     $select .= '<option value="checkboxes">' . __('Checkboxes', 'wpv-views') . '&nbsp;</option>';
     $select .= '<option value="select">' . __('Select', 'wpv-views') . '&nbsp;</option>';
     $select .= '<option value="textfield">' . __('Text field', 'wpv-views') . '&nbsp;</option>';
+    $select .= '<option value="datepicker">' . __('Date picker', 'wpv-views') . '&nbsp;</option>';
     $select .= '</select>';
 
     $select_tax = '<select name="" >';
     $select_tax .= '<option value="checkboxes">' . __('Checkboxes', 'wpv-views') . '&nbsp;</option>';
+    $select_tax .= '<option value="select">' . __('Select', 'wpv-views') . '&nbsp;</option>';
     $select_tax .= '</select>';
 
     $select_search = '<select name="" >';
@@ -137,6 +139,7 @@ function wpv_filter_controls_admin($view_settings){
                                         switch ($view_settings['filter_controls_type'][$i]) {
                                             case 'types-auto':
                                             case 'textfield':
+											case 'datepicker':
                                                 $show_edit = ' style="display:none" ';
                                                 break;
                                             
@@ -174,7 +177,7 @@ function wpv_filter_controls_admin($view_settings){
                                         <input type="hidden" name="_wpv_settings[filter_controls_mode][]" value="<?php echo $view_settings['filter_controls_mode'][$i]; ?>" />
                                     </td>
                                     <td>
-                                        <input type="hidden" name="_wpv_settings[filter_controls_field_name][]" value="<?php echo $view_settings['filter_controls_field_name'][$i]; ?>" /><span><?php echo $filter; ?></span>
+                                        <input type="hidden" name="_wpv_settings[filter_controls_field_name][]" value="<?php echo sanitize_text_field($view_settings['filter_controls_field_name'][$i]); ?>" /><span><?php echo sanitize_text_field($filter); ?></span>
                                     </td>
                                     <td><input type="text" width="100%" name="_wpv_settings[filter_controls_label][]" value="<?php echo $view_settings['filter_controls_label'][$i]; ?>" /></td>
                                     <td><?php echo $new_select; ?></td>

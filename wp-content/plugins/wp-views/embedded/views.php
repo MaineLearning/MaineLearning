@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '1.1');
+define('WPV_VERSION', '1.1.2');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -70,11 +70,13 @@ if (is_admin()) {
     require WPV_PATH_EMBEDDED . '/inc/wpv-import-export-embedded.php';
 }
 
+global $WP_Views;
 $WP_Views = new WP_Views();
 
 require WPV_PATH . '/inc/views-templates/functions-templates.php';
 require WPV_PATH . '/inc/views-templates/wpv-template.class.php';
 
+global $WPV_templates;
 $WPV_templates = new WPV_template();
 
 function wpv_get_affiliate_url() {

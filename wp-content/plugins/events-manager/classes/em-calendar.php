@@ -134,16 +134,21 @@ class EM_Calendar extends EM_Object {
 		$next_url = "?ajaxCalendar=1&amp;mo={$month_next}&amp;yr={$year_next}&amp;{$link_args}";
 		
 	 	$weekdays = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-	   $n = 0 ;
-		while( $n < $start_of_week ) {   
+	 	if(!empty($args['full'])) {
+ 		    if( get_option('dbem_full_calendar_abbreviated_weekdays') ) $weekdays = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+ 			$day_initials_length =  get_option('dbem_full_calendar_initials_length');
+ 		} else {
+ 		    if ( get_option('dbem_small_calendar_abbreviated_weekdays') ) $weekdays = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+	 		$day_initials_length = get_option('dbem_small_calendar_initials_length');
+ 		}
+ 		
+		for( $n = 0; $n < $start_of_week; $n++ ) {   
 			$last_day = array_shift($weekdays);     
-			$weekdays[]= $last_day; 
-			$n++;
+			$weekdays[]= $last_day;
 		}
 	   
 		$days_initials_array = array();
 		foreach($weekdays as $weekday) {
-		    $day_initials_length = !empty($args['full']) ? get_option('dbem_full_calendar_initials_length',3):get_option('dbem_small_calendar_initials_length',1);
 			$days_initials_array[] = self::translate_and_trim($weekday, $day_initials_length);
 		} 
 		

@@ -517,7 +517,7 @@ function short_code_menu_callback($index, $cf_key, $function_name, $menu, $short
         }
     }
     
-    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . $cf_key . '\', \'' . base64_encode($field_name) . '\')">';
+    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . esc_js($cf_key) . '\', \'' . base64_encode($field_name) . '\')">';
     echo $field_name;
     echo '</a></td>';
     
@@ -557,7 +557,7 @@ function short_code_taxonomy_menu_callback($index, $cf_key, $function_name, $men
         }
         
     }
-    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . $cf_key . '\', \'' . base64_encode($cf_key . $suffix) . '\')">';
+    echo '<td><a style="cursor: pointer" onclick="on_add_field_wpv(\''. $menu . '\', \'' . esc_js($cf_key) . '\', \'' . base64_encode($cf_key . $suffix) . '\')">';
     echo $cf_key;
     echo '</a></td>';
     
@@ -566,7 +566,7 @@ function short_code_taxonomy_menu_callback($index, $cf_key, $function_name, $men
 
 function short_code_variable_callback($index, $cf_key, $function_name, $menu, $shortcode) {
     ?>
-        wpv_shortcodes[<?php echo $index?>] = new Array('<?php echo $cf_key;?>', '<?php echo $shortcode; ?>');
+        wpv_shortcodes[<?php echo $index?>] = new Array('<?php echo esc_js($cf_key);?>', '<?php echo esc_js($shortcode); ?>');
     <?php
 }
 

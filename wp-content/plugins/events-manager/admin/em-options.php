@@ -298,13 +298,6 @@ function em_admin_options_page() {
 					$('tbody.em-location-archive-sub-options').hide();
 				}
 			}).trigger('change');
-			$('select[name="dbem_locations_page"]').change(function(){
-				if( $('select[name="dbem_locations_page"]').val() == 0 ){
-					$('tbody.em-location-page-options').hide();
-				}else{
-					$('tbody.em-location-page-options').show();
-				}
-			}).trigger('change');
 			//For rewrite titles
 			$('input:radio[name=dbem_disable_title_rewrites]').live('change',function(){
 				checked_check = $('input:radio[name=dbem_disable_title_rewrites]:checked');
@@ -516,8 +509,6 @@ function em_admin_options_page() {
 				<div class="inside">
 	            	<table class="form-table">
 	            	<?php //WordPress Pages
-				 	global $em_disable_filter; //Using a flag here instead
-				 	$em_disable_filter = true;     
 				 	$get_pages = get_pages();
 				 	$events_page_options = array();
 				 	$events_page_options[0] = sprintf(__('[No %s Page]', 'dbem'),__('Events','dbem'));
@@ -526,15 +517,13 @@ function em_admin_options_page() {
 				 		$events_page_options[$page->ID] = $page->post_title;
 				 	}
 				   	em_options_select ( __( 'Events page', 'dbem' ), 'dbem_events_page', $events_page_options, __( 'This option allows you to select which page to use as an events page. If you do not select an events page, to display event lists you can enable event archives or use the appropriate shortcodes and/or template tags.','dbem' ) );
-					$em_disable_filter = false;
 					?>
 					<tbody class="em-event-page-options">
 						<?php 
-						em_options_radio_binary ( __( 'Show events page in lists?', 'dbem' ), 'dbem_list_events_page', __( 'Check this option if you want the events page to appear together with other pages in pages lists.', 'dbem' ) ); 
+						em_options_radio_binary ( __( 'Show events search?', 'dbem' ), 'dbem_events_page_search', __( "If set to yes, a search form will appear just above your list of events.", 'dbem' ) );
 						em_options_radio_binary ( __( 'Display calendar in events page?', 'dbem' ), 'dbem_display_calendar_in_events_page', __( 'This options allows to display the calendar in the events page, instead of the default list. It is recommended not to display both the calendar widget and a calendar page.','dbem' ).' '.__('If you would like to show events that span over more than one day, see the Calendar section on this page.','dbem') );
 						em_options_radio_binary ( __( 'Disable title rewriting?', 'dbem' ), 'dbem_disable_title_rewrites', __( "Some WordPress themes don't follow best practices when generating navigation menus, and so the automatic title rewriting feature may cause problems, if your menus aren't working correctly on the event pages, try setting this to 'Yes', and provide an appropriate HTML title format below.",'dbem' ) );
 						em_options_input_text ( __( 'Event Manager titles', 'dbem' ), 'dbem_title_html', __( "This only setting only matters if you selected 'Yes' to above. You will notice the events page titles aren't being rewritten, and you have a new title underneath the default page name. This is where you control the HTML of this title. Make sure you keep the #_PAGETITLE placeholder here, as that's what is rewritten by events manager. To control what's rewritten in this title, see settings further down for page titles.", 'dbem' ) );
-						em_options_radio_binary ( __( 'Show events search?', 'dbem' ), 'dbem_events_page_search', __( "If set to yes, a search form will appear just above your list of events.", 'dbem' ) );
 						?>				
 					</tbody>
 					<tr>
@@ -690,11 +679,6 @@ function em_admin_options_page() {
 				 	$events_page_options[0] = sprintf(__('[No %s Page]', 'dbem'),__('Locations','dbem'));
 	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Locations','dbem')), 'dbem_locations_page', $events_page_options, sprintf(__( 'This option allows you to select which page to use as the %s page. If you do not select no %s page, to display lists you can enable archives or use the appropriate shortcodes and/or template tags.','dbem' ),__('locations','dbem'),__('locations','dbem')) );
 					?>
-					<tbody class="em-location-page-options">
-						<?php 
-						em_options_radio_binary ( sprintf(__( 'Show %s page in lists?', 'dbem' ),__('locations','dbem')), 'dbem_list_locations_page', sprintf(__( 'Check this option if you want the %s page to appear together with other pages in pages lists.', 'dbem' ),__('locations','dbem')) );
-						?>				
-					</tbody>
 					<tr>
 						<td colspan="2">
 							<h4><?php echo sprintf(__('WordPress %s Archives','dbem'), __('Location','dbem')); ?></h4>
@@ -810,11 +794,6 @@ function em_admin_options_page() {
 				 	$events_page_options[0] = sprintf(__('[No %s Page]', 'dbem'),__('Categories','dbem'));
 	            	em_options_select ( sprintf(__( '%s page', 'dbem' ),__('Categories','dbem')), 'dbem_categories_page', $events_page_options, sprintf(__( 'This option allows you to select which page to use as the %s page.','dbem' ),__('categories','dbem'),__('categories','dbem')) );
 					?>
-					<tbody class="em-category-page-options">
-						<?php 
-						em_options_radio_binary ( sprintf(__( 'Show %s page in lists?', 'dbem' ),__('categories','dbem')), 'dbem_list_categories_page', sprintf(__( 'Check this option if you want the %s page to appear together with other pages in pages lists.', 'dbem' ),__('categories','dbem')) );
-						?>				
-					</tbody>
 					<tr>
 						<td colspan="2">
 							<h4><?php echo _e('General settings','dbem'); ?></h4>
@@ -1026,6 +1005,7 @@ function em_admin_options_page() {
 				<div class="inside">
 	            	<table class="form-table">
 					    <?php 
+						em_options_input_text ( __( 'Search button text', 'dbem' ), 'dbem_serach_form_submit' );
 						em_options_radio_binary ( __( 'Show text search?', 'dbem' ), 'dbem_search_form_text', '' );
 						em_options_input_text ( __( 'Text search label', 'dbem' ), 'dbem_search_form_text_label', __('Appears within the input box.','dbem') );
 						em_options_radio_binary ( __( 'Show date range?', 'dbem' ), 'dbem_search_form_dates', '' );
@@ -1068,17 +1048,24 @@ function em_admin_options_page() {
 				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Calendar', 'dbem' ); ?></span></h3>
 				<div class="inside">
 	            	<table class="form-table">
-						<?php
-					    em_options_input_text ( __( 'Small calendar title', 'dbem' ), 'dbem_small_calendar_event_title_format', __( 'The format of the title, corresponding to the text that appears when hovering on an eventful calendar day.', 'dbem' ).$events_placeholder_tip );
-					    em_options_input_text ( __( 'Small calendar initial lengths', 'dbem' ), 'dbem_small_calendar_initials_length', __( 'The calendar headings contain the days of the week, use 0 for the full name.', 'dbem' ).$events_placeholder_tip );
-						em_options_input_text ( __( 'Small calendar title separator', 'dbem' ), 'dbem_small_calendar_event_title_separator', __( 'The separator appearing on the above title when more than one events are taking place on the same day.', 'dbem' ) );         
-					    em_options_input_text ( __( 'Full calendar events format', 'dbem' ), 'dbem_full_calendar_event_format', __( 'The format of each event when displayed in the full calendar. Remember to include <code>li</code> tags before and after the event.', 'dbem' ).$events_placeholder_tip );
-					    em_options_input_text ( __( 'Full calendar initial lengths', 'dbem' ), 'dbem_full_calendar_initials_length', __( 'The calendar headings contain the days of the week, use 0 for the full name.', 'dbem' ).$events_placeholder_tip);
-					    em_options_radio_binary ( __( 'Show long events on calendar pages?', 'dbem' ), 'dbem_full_calendar_long_events', __( "If you are showing a calendar on the events page (see Events format section on this page), you have the option of showing events that span over days on each day it occurs.",'dbem' ) );
+	            		<?php
 					    em_options_radio_binary ( __( 'Link directly to event on day with single event?', 'dbem' ), 'dbem_calendar_direct_links', __( "If a calendar day has only one event, you can force a direct link to the event (recommended to avoid duplicate content).",'dbem' ) );
 					    em_options_radio_binary ( __( 'Show list on day with single event?', 'dbem' ), 'dbem_display_calendar_day_single', __( "By default, if a calendar day only has one event, it display a single event when clicking on the link of that calendar date. If you select Yes here, you will get always see a list of events.",'dbem' ) );
+	            		?>
+	            		<tr><td colspan="2"><strong><?php _e('Small Calendar','dbem'); ?></strong></td></tr>
+						<?php
+					    em_options_input_text ( __( 'Event titles', 'dbem' ), 'dbem_small_calendar_event_title_format', __( 'The format of the title, corresponding to the text that appears when hovering on an eventful calendar day.', 'dbem' ).$events_placeholder_tip );
+					    em_options_input_text ( __( 'Title separator', 'dbem' ), 'dbem_small_calendar_event_title_separator', __( 'The separator appearing on the above title when more than one events are taking place on the same day.', 'dbem' ) );
+					    em_options_radio_binary( __( 'Abbreviated weekdays', 'dbem' ), 'dbem_small_calendar_abbreviated_weekdays', __( 'The calendar headings uses abbreviated weekdays') );
+					    em_options_input_text ( __( 'Initial lengths', 'dbem' ), 'dbem_small_calendar_initials_length', __( 'Shorten the calendar headings containing the days of the week, use 0 for the full name.', 'dbem' ).$events_placeholder_tip );
+					    ?>
+	            		<tr><td colspan="2"><strong><?php _e('Full Calendar','dbem'); ?></strong></td></tr>
+					    <?php         
+					    em_options_input_text ( __( 'Event format', 'dbem' ), 'dbem_full_calendar_event_format', __( 'The format of each event when displayed in the full calendar. Remember to include <code>li</code> tags before and after the event.', 'dbem' ).$events_placeholder_tip );
+					    em_options_radio_binary( __( 'Abbreviated weekdays?', 'dbem' ), 'dbem_full_calendar_abbreviated_weekdays', __( 'Use abbreviations, e.g. Friday = Fri. Useful for certain languages where abbreviations differ from full names.','dbem') );
+					    em_options_input_text ( __( 'Initial lengths', 'dbem' ), 'dbem_full_calendar_initials_length', __( 'Shorten the calendar headings containing the days of the week, use 0 for the full name.', 'dbem' ).$events_placeholder_tip);
 					    ?>		
-					    <tr><td><strong><?php echo __('Calendar Day Event List Settings','dbem'); ?></strong></td></tr>			
+					    <tr><td colspan="2"><strong><?php echo __('Calendar Day Event List Settings','dbem'); ?></strong></td></tr>			
 						<tr valign="top" id='dbem_display_calendar_orderby_row'>
 					   		<th scope="row"><?php _e('Default event list ordering','dbem'); ?></th>
 					   		<td>   

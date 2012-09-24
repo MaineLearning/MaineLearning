@@ -3,7 +3,7 @@
 	Plugin Name: TurboCSV
 	Plugin URI: http://www.wphostreviews.com/turbocsv
 	Description: TurboCSV
-	Version: 2.43
+	Version: 2.48
 	Author: Chris Richardson
 	Author URI: http://www.wphostreviews.com/turbocsv
 */
@@ -12,7 +12,7 @@ require_once dirname( __FILE__ ) . '/ti_import.php';
 @include_once dirname( __FILE__ ) . '/ti_pro.php';
 
 class TI_Frontend {
-	var $version = '2.43',
+	var $version = '2.48',
 		$log_file,
 		$option_defaults = array(
 			'encoding' => 'auto',
@@ -292,6 +292,10 @@ class TI_Frontend {
 				case '!post_date':
 					$col = str_replace('!', '', $header) . '_col';
 					$import->template->$col = $header;
+					break;
+
+				case '!post_thumbnail':
+					$import->template->thumbnail_col = $header;
 					break;
 
 				case '!id':
@@ -872,7 +876,7 @@ class TI_Frontend {
 
 		$encoding_values = array(
 			'auto' => 'Auto-detect',
-			'utf8' => 'UTF-8',
+			'utf-8' => 'UTF-8',
 			'ISO-8859-1' => 'ISO-8859-1',
 			'ISO-8859-2' => 'ISO-8859-2',
 			'Windows-1250' => 'Windows-1250 (Polish, Czech, Slovak, Hungarian, Slovene, Serbian, Croatian, Romanian and Albanian)',
@@ -1123,7 +1127,7 @@ class TI_Frontend {
 
 		$name = esc_attr($name);
 		$multiple = ($multi) ? "multiple='multiple' size='20'" : "";
-		$class = ($multi) ? "class='ti-value-table'" : "";
+		$class = ($multi) ? "class='ddms'" : "";
 		$html = "<select name='$name' $class $multiple >";
 
 		foreach ((array)$keys as $key => $description) {
@@ -1250,7 +1254,7 @@ class TI_Frontend {
 				. "<br/>" . __("You may need to contact your hosting service to make these changes.")
 				. "<br/>";
 
-			$message = __("Your blog's memory is low.  This may prevent you from processing imports.");
+			$message = __("Your blog's memory is low.  This may prevent you from processing large imports.");
 
 			if ($show_as_message)
 				return "<div class='ti-warning'>$message <a href='#' class='ti-accordion'> " . __('(more info)') . "</a><div style='display:none'>$details</div></div>";
@@ -1268,7 +1272,8 @@ class TI_Frontend {
 
 	function get_labels() {
 		return array(
-			'template_id' => array('label' => __('Template'), 'tip' => __('Settings can be saved as a "template" for future imports.  This is the template currently in use.')),
+			'template_load' => array('label' => __('Load template'), 'tip' => __('Load the settings from a saved "template".')),
+			'template_save' => array('label' => __('Save template'), 'tip' => __('Save settings as a "template" for future imports.')),
 			'blog_id' => array('label' => __('Blog ID'), 'field' => '!blog_id', 'tip' => __('Site to import into (default is current site).  This feature is only available from the main site.')),
 			'post_title' => array('label' => __('Title'), 'field' => '!post_title', 'tip' => __("Click on the field names to add them to the post title layout.  During the import they'll be replaced with data from the input file.")),
 			'post_content' => array('label' => __('Body'), 'field' => '!post_content', 'tip' => __("Click on the field names to add them to the post body layout.  During the import they'll be replaced with data from the input file.")),
@@ -1284,7 +1289,8 @@ class TI_Frontend {
 			'post_date' => array('label' => __('Post date'), 'field' => '!post_date', 'tip' => __('Enter a date (WordPress defaults to the current date for new posts).  For random dates enter a value in both date fields.')),
 			'postid' => array('label' => __('Unique ID'), 'field' => '!id', 'tip' => __("Select an input 'ID' column that uniquely identifies each post.  The input column values can be matched to a standard WordPress field (such as 'Post ID') or to a custom field.")),
 			'taxonomies' => array('label' => __('Taxonomies'), 'tip' => __('<p>Choose an input column for this taxonomy or select default values from the list.</p><p>The default column names for categories and tags are <code>!post_category</code> and <code>!tags_input</code>.  Any other column that starts with "!" is treated as a list of values for a custom taxonomy, for example <code>!mytaxonomy</code>.</p>')),
-			'post_custom' => array('label' => __('Existing custom fields'), 'tip' => __('Map columns from the input file to existing WordPress custom fields')),
+			'thumbnail' => array('label' => __('Image ID or URL'), 'field' => '!post_thumbnail', 'tip' => __('<p>WordPress assigns a featured image to a post by setting the hidden field <code>_thumbnail_id</code> to an image ID from the Media Library.</p><p>Use this setting to select a column containing image IDs or image URLs.</p><p>If an ID is provided, TurboCSV will set the featured image for the current post to that ID.  If a URL is provided, TurboCSV will search the Media Library for the image with that URL.  URLs must begin with "http".</p><p>Note that all images must be uploaded to the Media Library <b>before</b> using this setting.</p>')),
+			'post_custom' => array('label' => __('Existing custom fields'), 'tip' => __('Map columns from the input file to existing WordPress custom fields.  NOTE: you won\'t see a field listed here until at least one post has that field!  You may need to create a dummy post and add the field to it before importing.')),
 			'post_custom_new' => array('label' => __('New custom fields'), 'tip' => __("Create new WordPress custom fields for the selected input columns"))
 		);
 	}

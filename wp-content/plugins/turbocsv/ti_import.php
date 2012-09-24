@@ -173,7 +173,7 @@ class TI_Import extends TI_Obj {
 
 				// Stop at maximum # of error lines
 				if ($this->errors >= $max_skip) {
-					$this->log(__('Maximum number lines with errors, stopping import.'));
+					$this->log(__('Import stopped with errors.'));
 					break;
 				}
 			}
@@ -313,6 +313,11 @@ class TI_Import extends TI_Obj {
 		$imported_post->post_id = $post_id;
 		$imported_post->import_id = $this->_id;
 		$result = $imported_post->save();
+		if (is_wp_error($result))
+			return $result;
+
+		// Featured image / thumbnail - update/insert after post is complete
+		$result = $this->import_thumbnail($line, $post_id);
 		if (is_wp_error($result))
 			return $result;
 
@@ -461,12 +466,6 @@ class TI_Import extends TI_Obj {
 		// Add the metadata for new and existing custom fields
 		$all_meta = array_merge((array)$this->template->post_custom, (array)$this->template->post_custom_new);
 
-		// Get MapPress options - note that if importing into another blog, this will be the options in the TARGET blog
-		if (class_exists('Mappress_Pro')) {
-			$map_options = Mappress_Options::get();
-			$metaKeyErrors = $map_options->metaKeyErrors;
-		}
-
 		// Add metadata; each key should have an associated input column
 		foreach ($all_meta as $key => $col) {
 
@@ -518,19 +517,62 @@ class TI_Import extends TI_Obj {
 				return $this->log_line(sprintf(__('Error in add_post_meta for custom field: id="%s", key="%s"'), $post_id, $key));
 		}
 
-		// Check for any mappress errors from geocoding
-		if (isset($metaKeyErrors) && !empty($metaKeyErrors)) {
-			$errors = get_post_meta($post_id, $metaKeyErrors);
-			if ($errors) {
-				foreach($errors as $error) {
-					$this->log_line(sprintf(__('Error in map creation: %s'), $error));
-				}
-				return $this->log_line(sprintf(__('Map is incomplete for post id="%s"'), $post_id));
-			}
-		}
+		// Trigger mappress geocoding
+		do_action('mappress_update_meta', $post_id);
 
+		// Check for any mappress geocoding errors
+		$errors = get_post_meta($post_id, 'mappress_error');
+		if ($errors) {
+			foreach($errors as $error) {
+				$this->log_line(sprintf(__('Error in map creation: %s'), $error));
+			}
+			return $this->log_line(sprintf(__('Map is incomplete for post id="%s"'), $post_id));
+		}
 		return true;
 	}
+
+	function import_thumbnail($line, $post_id) {
+		// If the column is empty or missing, just return
+		$value = $this->read_line_col($line, $this->template->thumbnail_col);
+		if (empty($value) || is_wp_error($value))
+			return;
+
+		// For IDs
+		if (is_numeric ($value)) {
+			update_post_meta( $post_id, '_thumbnail_id', (int) $value );
+			return true;
+		}
+
+		// For URLs - search for the correct attachment ID
+		// URLs are saved in custom field _wp_attached_file.
+		// They are saved *without* the baseurl, e.g. "/myimage.png" is actually in "http://myblog.com/wp-content/uploads/myimage.png"
+
+		// Get upload dir
+		$uploads = wp_upload_dir();
+		if (!$uploads || $uploads['error'])
+			return $this->log_line('Unable to find uploads directory for featured images');
+
+		$baseurl = trailingslashit($uploads['baseurl']);
+
+		// Strip out the upload baseurl (we only need the part starting after /uploads/, since that's all WP stores)
+		$meta_value = str_ireplace($baseurl, '', $value);
+
+		if (empty($meta_value))
+			return $this->log_line(sprintf(__('Invalid attachment URL, it must include the blog home and upload directory: %s'), $value));
+
+		// Now find the (attachment) post with _wp_attached_file set to the given value, or the fist 'like' match
+		$posts = get_posts(array('post_type' => 'attachment', 'numberposts' => 1, 'meta_query' => array(array('key' => '_wp_attached_file', 'value' => $meta_value, 'compare' => 'LIKE'))) );
+
+		// Not used - this is an EXACT match
+		// $posts = get_posts(array('post_type' => 'attachment', 'meta_key' => '_wp_attached_file', 'meta_value' => $meta_value, 'numberposts' => 1));
+
+		if (empty($posts))
+			return $this->log_line(sprintf(__('Unable to find any attachment with URL: %s'), $value));
+
+		update_post_meta( $post_id, '_thumbnail_id', $posts[0]->ID );
+		return true;
+	}
+
 
 	/**
 	* Get the post date for the input file line.  Note that WP requires date in format 'Y-m-d H:i:s'
@@ -657,18 +699,18 @@ class TI_Import extends TI_Obj {
 		// If column data exists, parse it to get the terms and create any missing terms
 		$data = trim($data);
 		if (!empty($data)) {
-			// Split by value separator (comma)
-			// Removed - this didn't consider escaped commas: $term_names1 = preg_split("/[,]+/", $data);
-
-			// Split data by custom field values separator (also allows escaped separators)
+			// Split data by values separator (also allows escaped separators)
 			$term_names1 = $this->explode_escaped($options['values_separator'], $data);
 
 			if ($wp_taxonomy->hierarchical) {
-				// Hierarchical taxonomies: also split by "|" separator
+				// Hierarchical taxonomies are also split by "|" separator
 				foreach($term_names1 as $term_name1) {
 					// Split by hierarchy separator
 					$term_names2 = preg_split("/[" . $options['hierarchy_separator'] . "]+/", $term_name1);
 					$parent_id = null;
+
+					// Track lowest term in hierarchy
+					$last_term = "";
 
 					foreach((array)$term_names2 as $term_name) {
 						// Create the term if it doesn't already exist
@@ -679,9 +721,13 @@ class TI_Import extends TI_Obj {
 						// Use this as parent for next term in hierarchy
 						$parent_id = $result['term_id'];
 
-						// Store array of terms for current post
-						$terms[] = $result['term_id'];
+						// Track final term in the hierarchy
+						$last_term = $result['term_id'];
 					}
+
+					// Store only the final term (a 'leaf') in the hierarchy to the post (this is also how WP post editor does it)
+					if ($last_term)
+						$terms[] = $last_term;
 				}
 			} else {
 				// Flat taxonomies
@@ -761,7 +807,7 @@ class TI_Import extends TI_Obj {
 	*
 	* @param mixed $line
 	* @param mixed $col
-	* @return mixed - column value | false for invalid column name | "" for empty column
+	* @return mixed - column value | wp_error for invalid column name | "" for empty column
 	*/
 	function read_line_col($line, $col=null, $default='') {
 		$value = "";
@@ -770,7 +816,7 @@ class TI_Import extends TI_Obj {
 		if ($col) {
 			$index = array_search($col, $this->headers);
 			if ($index === false || !isset($line[$index]))
-				return $this->log_line(sprintf(__('Invalid column name in import template: %s'), $col));
+				return $this->log_line(sprintf(__('Column %s could not be read.  The file may be unreadable.  If the column name is invalid then remove it from the import template.'), $col));
 
 			$value = $line[$index];
 		}
@@ -898,7 +944,6 @@ class TI_Import extends TI_Obj {
 
 	function read_headers() {
 		$options = get_option('turbocsv');
-		$encoding = isset($options['encoding']) ? $options['encoding'] : null;
 
 		// Read the first line to get headers
 		$fp = $this->file_open();
@@ -911,7 +956,7 @@ class TI_Import extends TI_Obj {
 		// It's an error if there are no headers or if any header is empty
 		if (empty($headers)) {
 			fclose($fp);
-			return $this->log(sprintf(__('Unable to read file %s, check that file still exists.'), $this->fileurl));
+			return $this->log(sprintf(__('Unable to read file %s.  Check that the file exists and verify the encoding in the TurboCSV settings.'), $this->fileurl));
 		}
 
 		// Look for any empty headers
@@ -1035,7 +1080,6 @@ class TI_Import extends TI_Obj {
 	*/
 	function dump_file() {
 		$options = get_option('turbocsv');
-		$encoding = $options['encoding'];
 
 		$fp = $this->file_open();
 		while (!feof($fp)) {
@@ -1083,7 +1127,7 @@ class TI_Import extends TI_Obj {
 		// Use standard fgetcsv() but override the locale just during the fgetcsv() call
 		$old_locale = setlocale(LC_ALL, 0);
 		setlocale(LC_ALL, $locale);
-		$result = fgetcsv($fp, $length, $input_delimiter);          // Don't pass enclosure/escape - even default values cause problems
+		$result = fgetcsv($fp, 0, $input_delimiter);          // Don't pass enclosure/escape - even default values cause problems
 		setlocale(LC_ALL, $old_locale);
 
 		return $result;
@@ -1188,7 +1232,8 @@ class TI_Import extends TI_Obj {
 			return iconv($detected, "UTF-8//IGNORE", $file);
 
 		// If it looks like UTF8 without a header, then return the file unchanged
-		if (utf8_encode(utf8_decode($file)) == $file)
+		//if (utf8_encode(utf8_decode($file)) == $file) -- only works if file consists of iso-8859-1 characters, iconv is better
+		if (@iconv('utf-8', 'utf-8//IGNORE', $file) == $file)
 			return $file;
 
 		// Nothing detected, so just assume 1252
@@ -1310,6 +1355,7 @@ class TI_Template extends TI_Obj {
 		$post_date_min,
 		$post_date_max,
 		$post_date_col,
+		$thumbnail_col,
 		$post_custom,
 		$post_custom_new,
 		$taxonomies

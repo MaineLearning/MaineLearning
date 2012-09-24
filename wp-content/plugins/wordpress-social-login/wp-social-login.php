@@ -3,7 +3,7 @@
 Plugin Name: WordPress Social Login
 Plugin URI: http://wordpress.org/extend/plugins/wordpress-social-login/
 Description: Allow your visitors to comment and login with social networks such as Twitter, Facebook, Google, Yahoo and more.
-Version: 1.2.1
+Version: 1.2.2
 Author: Miled
 Author URI: http://wordpress.org/extend/plugins/wordpress-social-login/
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 @ session_start(); 
 
-$_SESSION["wsl::plugin"] = "WordPress Social Login 1.2.1"; 
+$_SESSION["wsl::plugin"] = "WordPress Social Login 1.2.2"; 
 
 /**
  * Check technical requirements before activating the plugin.
