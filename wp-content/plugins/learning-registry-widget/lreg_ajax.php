@@ -67,7 +67,7 @@ function lreg_get() {
                 $markup .= '<ul>';
                 foreach( $paradata as $pd ) {
 
-			if ( $counter > $number_items ) {
+			if ( $counter >= $number_items ) {
 				break;
 			}
 
