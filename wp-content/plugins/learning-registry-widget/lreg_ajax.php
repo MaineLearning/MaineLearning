@@ -85,8 +85,18 @@ function lreg_get() {
 				continue;
 			}
 
+			// No content, no post
 			if ( ! empty( $item->verb->action ) ) {
 				$content = ucwords( $item->verb->action ) . ' ' . array_pop( explode( $item->verb->action, $content ) );
+			} else {
+				continue;
+			}
+
+			// Get the "description" if we have it
+			// If we don't have it, skip it
+			if ( isset( $item->verb->context ) && isset( $item->verb->context->description ) ) {
+				$description = $item->verb->context->description;
+				$url = isset( $item->verb->context->id ) ? $item->verb->context->id : '';
 			} else {
 				continue;
 			}
@@ -105,22 +115,17 @@ function lreg_get() {
 			// Metadata
 			$metadata = '<div class="paradata-meta">';
 
-			// Get the "description" if we have it
-			if ( isset( $item->verb->context ) && isset( $item->verb->context->description ) ) {
-				$url = isset( $item->verb->context->id ) ? $item->verb->context->id : '';
+			$metadata .= '<span class="paradata-id">';
 
-				$metadata .= '<span class="paradata-id">';
+			if ( $url )
+				$metadata .= '<a href="' . $url . '">';
 
-				if ( $url )
-					$metadata .= '<a href="' . $url . '">';
+			$metadata .= $description;
 
-				$metadata .= $item->verb->context->description;
+			if ( $url )
+				$metadata .= '</a>';
 
-				if ( $url )
-					$metadata .= '</a>';
-
-				$metadata .= '</span> ';
-			}
+			$metadata .= '</span> ';
 
 			// Date - take start dates
 			$date = strtotime( array_pop( array_reverse( explode( '/', $item->verb->date ) ) ) );
