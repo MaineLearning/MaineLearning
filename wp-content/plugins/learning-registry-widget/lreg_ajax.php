@@ -29,7 +29,7 @@ function lreg_get() {
 
         // If there's no data, don't show the widget
         if ( empty( $resource_url ) ) {
-                return;
+                die();
         }
 
         // Get the node URL
