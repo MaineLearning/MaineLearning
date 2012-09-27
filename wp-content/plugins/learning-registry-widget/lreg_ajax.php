@@ -63,8 +63,13 @@ function lreg_get() {
 //print_r( $paradata );
         $markup = '';
         if ( !empty( $paradata ) ) {
+		$counter = 0;
                 $markup .= '<ul>';
                 foreach( $paradata as $pd ) {
+
+			if ( $counter > $number_items ) {
+				break;
+			}
 
 			// Sometimes things are embedded in Activity
 			if ( isset( $pd->activity ) ) {
@@ -125,6 +130,8 @@ function lreg_get() {
 			$image = '';
 
                         $markup .= '<li>' . $content . $metadata . '</li>';
+
+			$counter++;
                 }
                 $markup .= '</ul>';
         }
