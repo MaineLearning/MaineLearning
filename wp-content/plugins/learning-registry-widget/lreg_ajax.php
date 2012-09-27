@@ -60,7 +60,10 @@ function lreg_get() {
                         }
                 }
         }
-//print_r( $paradata );
+
+	// We want to sort by date, in reverse chronological order
+	rsort( $paradata );
+
         $markup = '';
         if ( !empty( $paradata ) ) {
 		$counter = 0;
