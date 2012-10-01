@@ -249,8 +249,11 @@ ul#nav
 	background-color: #444;
 	color: #ccc;
 	font-size: 12px;
+	margin: 8px 0 0 8px;
 	text-transform: none;
 }
+
+#nav li li { width: 150px !important; }
 
 #nav > li > ul.sub-menu
 {
@@ -258,7 +261,6 @@ ul#nav
 	width: 150px;
 }
 
-#nav li li { width: 150px !important; }
 div#content .padder { border-right: 0px solid #fff; }
 
 /* ----------------------
