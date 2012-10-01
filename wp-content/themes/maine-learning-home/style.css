@@ -318,18 +318,6 @@ a, a:link, a:visited, a:hover, a:active
 	/* ML */
 }
 
-ul.item-list li div.item-title, ul.item-list li div.item-title a
-{
-	font-weight: bold;
-	text-decoration: none;
-}
-
-ul.item-list li div.item-desc
-{
-	display: none;
-	height: 0;
-}
-
 /* Images
 ----------------------- */
 
@@ -615,13 +603,25 @@ p.desc { padding-top: 14px; }
 BUDDYPRESS PANELS: TABS
 ----------------------- */
 
+ul.item-list li { border-bottom: 1px solid #cfcfcf; }
+
+ul.item-list li div.item-title, ul.item-list li div.item-title a
+{
+	font-weight: bold;
+	text-decoration: none;
+}
+
+ul.item-list li div.item-desc
+{
+	display: none;
+	height: 0;
+}
+
 div.item-list-tabs
 {
 	background: transparent;
 	margin: 0;
 }
-
-ul.item-list li { border-bottom: 1px solid #cfcfcf; }
 
 div.item-list-tabs ul li
 {
@@ -670,6 +670,7 @@ div#subnav.item-list-tabs
 	margin: 0;
 }
 
+div.item-list-tabs#subnav { margin: 0px -19px 15px -19px; }
 #blogs-personal-li { display: none; }
 
 .generic-button
