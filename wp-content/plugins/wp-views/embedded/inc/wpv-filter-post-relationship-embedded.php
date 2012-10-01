@@ -5,7 +5,7 @@
  *
  */
 
-add_filter('wpv_filter_query', 'wpv_filter_post_relationship', 10, 2);
+add_filter('wpv_filter_query', 'wpv_filter_post_relationship', 11, 2); // run after post types filter
 function wpv_filter_post_relationship($query, $view_settings) {
     
     global $WP_Views, $wpdb;
@@ -39,6 +39,10 @@ function wpv_filter_post_relationship($query, $view_settings) {
             $key = '_wpcf_belongs_' . $post_type . '_id';
             
             $posts_to_include = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '{$key}' AND meta_value = {$post_owner_id}");
+			
+			if (isset($query['post__not_in'])) {
+				$posts_to_include = array_diff($posts_to_include, $query['post__not_in']);
+			}
             
             if (count($posts_to_include)) {
                 if (isset($query['post__in'])) {

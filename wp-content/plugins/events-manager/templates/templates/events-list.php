@@ -23,7 +23,8 @@ if( $events_count > 0 ){
 		$args['pagination'] = false;
 	    if(get_option('dbem_event_list_groupby') ){
 	        $args['mode'] = get_option('dbem_event_list_groupby');
-	        echo em_events_list_grouped($args, get_option('dbem_event_list_groupby_format',''));
+	        $args['date_format'] = get_option('dbem_event_list_groupby_format');
+	        echo em_events_list_grouped($args);
 	    }else{
 			echo EM_Events::output( $args );
 	    }
@@ -37,7 +38,8 @@ if( $events_count > 0 ){
 	}else{
 	    if(get_option('dbem_event_list_groupby') ){
 	        $args['mode'] = get_option('dbem_event_list_groupby');
-	        echo em_events_list_grouped($args, get_option('dbem_event_list_groupby_format',''));
+	        $args['date_format'] = get_option('dbem_event_list_groupby_format');
+	        echo em_events_list_grouped($args);
 	    }else{
 			echo EM_Events::output( $args );
 	    }

@@ -290,6 +290,9 @@ function em_get_attributes($lattributes = false){
 		if( !empty($matches[3][$key]) ){
 		    $new_values = explode('|',$matches[3][$key]);
 		    if( count($new_values) > count($attributes['values'][$attribute]) ){
+		    	foreach($new_values as $key => $value){
+		    	    $new_values[$key] = trim($value);
+		    	}
 				$attributes['values'][$attribute] = apply_filters('em_get_attributes_'.$attribute, $new_values, $attribute, $matches);
 		    }
 		}
@@ -437,8 +440,7 @@ function em_checkbox_items($name, $array, $saved_values, $horizontal = true) {
 	echo $output;
 
 }
-
-function em_options_input_text($title, $name, $description, $default='') {
+function em_options_input_text($title, $name, $description ='', $default='') {
 	?>
 	<tr valign="top" id='<?php echo esc_attr($name);?>_row'>
 		<th scope="row"><?php echo esc_html($title); ?></th>
@@ -449,7 +451,7 @@ function em_options_input_text($title, $name, $description, $default='') {
 	</tr>
 	<?php
 }
-function em_options_input_password($title, $name, $description) {
+function em_options_input_password($title, $name, $description ='') {
 	?>
 	<tr valign="top" id='<?php echo esc_attr($name);?>_row'>
 		<th scope="row"><?php echo esc_html($title); ?></th>
@@ -461,7 +463,7 @@ function em_options_input_password($title, $name, $description) {
 	<?php
 }
 
-function em_options_textarea($title, $name, $description) {
+function em_options_textarea($title, $name, $description ='') {
 	?>
 	<tr valign="top" id='<?php echo esc_attr($name);?>_row'>
 		<th scope="row"><?php echo esc_html($title); ?></th>
@@ -496,7 +498,7 @@ function em_options_radio($name, $options, $title='') {
 <?php
 }
 
-function em_options_radio_binary($title, $name, $description, $option_names = '') {
+function em_options_radio_binary($title, $name, $description='', $option_names = '') {
 	if( empty($option_names) ) $option_names = array(0 => __('No','dbem'), 1 => __('Yes','dbem'));
 	if( substr($name, 0, 7) == 'dbem_ms' ){
 		$list_events_page = get_site_option($name);
@@ -515,7 +517,7 @@ function em_options_radio_binary($title, $name, $description, $option_names = ''
 	<?php
 }
 
-function em_options_select($title, $name, $list, $description, $default='') {
+function em_options_select($title, $name, $list, $description='', $default='') {
 	$option_value = get_option($name, $default);
 	if( $name == 'dbem_events_page' && !is_object(get_page($option_value)) ){
 		$option_value = 0; //Special value

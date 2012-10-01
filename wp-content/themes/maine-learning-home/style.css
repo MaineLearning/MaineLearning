@@ -34,6 +34,9 @@ DO NOT USE BBEDIT TO FORMAT CSS. IT REMOVES THE ALTERNATIVE BG GRADIENTS.
 CONTAINERS
 ----------------------- */
 
+body:not(.wp-admin) { padding-top: 0!important; }
+li#bp-adminbar-blogs-menu { display: none !important; }
+
 body
 {
 	background-attachment: scroll;
@@ -202,13 +205,18 @@ NAVIGATION
 
 #nav
 {
+	float: left !important;
 	margin: 0 20px 0 20px;
 	padding: 0;
 	position: relative;
 	right: auto;
 }
 
-ul#nav { max-width: 70%; }
+ul#nav
+{
+	float: left;
+	max-width: 70%;
+}
 
 #nav li a
 {
@@ -241,10 +249,18 @@ ul#nav { max-width: 70%; }
 	background-color: #444;
 	color: #ccc;
 	font-size: 12px;
+	margin: 8px 0 0 8px;
 	text-transform: none;
 }
 
 #nav li li { width: 150px !important; }
+
+#nav > li > ul.sub-menu
+{
+	background: #444;
+	width: 150px;
+}
+
 div#content .padder { border-right: 0px solid #fff; }
 
 /* ----------------------
@@ -300,18 +316,6 @@ a, a:link, a:visited, a:hover, a:active
 	/* ML */
 	text-decoration: none;
 	/* ML */
-}
-
-ul.item-list li div.item-title, ul.item-list li div.item-title a
-{
-	font-weight: bold;
-	text-decoration: none;
-}
-
-ul.item-list li div.item-desc
-{
-	display: none;
-	height: 0;
 }
 
 /* Images
@@ -523,9 +527,16 @@ span.activity-read-more
 
 div.activity-meta { clear: right; }
 
-.bpm-no-images .bpm-inner-text
+.bpm-no-images
 {
 	font-size: 13px;
+	text-decoration: none;
+}
+
+.bpm-inner-text
+{
+	font-size: 11px !important;
+	margin: 3px 0 0 2px !important;
 	text-decoration: none;
 }
 
@@ -574,7 +585,13 @@ BUDDYPRESS PANELS: ITEMS
 
 .single-item.groups #nav li#menu-item-587 a, .forums li#menu-item-594 a, .settings li#menu-item-594 a, .events li#menu-item-594 a, .my-friends li#menu-item-594 a, .my-profile li#menu-item-594 a, .my-activity li#menu-item-594 a, .my-groups li#menu-item-594 a, .my-blogs li#menu-item-594 a { color: #ddd; }
 #item-body h4 { padding: 4px 0 0 12px; }
-div.pagination { margin: 0; }
+
+#item-body div.pagination
+{
+	margin: 0px -19px 0px -19px;
+	width: 50%;
+}
+
 span.activity, div#message p { background: -moz-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #fff0bf; }
 span.activity, div#message p { border: 1px solid #E1CA82; }
 #message-thread { margin: 10px 10px 10px 14px; }
@@ -586,13 +603,25 @@ p.desc { padding-top: 14px; }
 BUDDYPRESS PANELS: TABS
 ----------------------- */
 
+ul.item-list li { border-bottom: 1px solid #cfcfcf; }
+
+ul.item-list li div.item-title, ul.item-list li div.item-title a
+{
+	font-weight: bold;
+	text-decoration: none;
+}
+
+ul.item-list li div.item-desc
+{
+	display: none;
+	height: 0;
+}
+
 div.item-list-tabs
 {
 	background: transparent;
 	margin: 0;
 }
-
-ul.item-list li { border-bottom: 1px solid #cfcfcf; }
 
 div.item-list-tabs ul li
 {
@@ -640,6 +669,9 @@ div#subnav.item-list-tabs
 	border-bottom: transparent;
 	margin: 0;
 }
+
+div.item-list-tabs#subnav { margin: 0px -19px 15px -19px; }
+#blogs-personal-li { display: none; }
 
 .generic-button
 {
@@ -735,6 +767,14 @@ p:last-child
 
 #topic-post-list .post-content p { font-size: 13px; }
 
+#item-body div.topic-tags
+{
+	line-height: 1.3em;
+	margin-top: -12px;
+	text-align: right;
+	width: 40%;
+}
+
 /* ----------------------
 BP PANELS: ALERT BOXES
 ----------------------- */
@@ -813,6 +853,10 @@ BP PANELS: BP GROUP DOCS
 #bp-group-documents { margin-top: -5px; }
 #bp-group-documents h3 { padding: 20px 0 0 20px; }
 #bp-group-documents-categories, #bp-group-documents-sorting { margin-top: 20px; }
+.group-documents-meta { display: block; }
+.group-documents-description { font-size: 12px; }
+.doctable p { display: none; }
+.doctable td { vertical-align: top; }
 
 /* ----------------------
 GRAVITY FORMS

@@ -153,6 +153,10 @@ function wpv_insert_filter_control(selector) {
                     control += 'type="' + control_style + '" ';
                     break;
         
+                case 'datepicker':
+                    control += 'type="' + control_style + '" date_format="" ';
+                    break;
+        
                 case 'checkbox':
                     control += 'type="' + control_style + '" ';
                     if (values['values'].length) {
@@ -333,11 +337,11 @@ function wpv_add_filter_controls_for_url_params() {
 						var new_tr = jQuery('#view_filter_controls_table tbody').find('tr:last-child');
 						jQuery(new_tr).find('input[name="_wpv_settings\\[filter_controls_label\\]\\[\\]"]').val(response.name);
 						
-						// Taxonomy only allows for checkboxes style.
+						// Taxonomy only allows for select and checkboxes style.
 						var select = jQuery(new_tr).find('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]');
-						select.val('checkboxes');
+						select.val('select');
 						select.find('option').each(function (index) {
-							if (jQuery(this).val() != 'checkboxes') {
+							if (jQuery(this).val() != 'checkboxes' && jQuery(this).val() != 'select') {
 								jQuery(this).remove();
 							}
 							
@@ -405,7 +409,7 @@ function wpv_add_filter_controls_for_url_params() {
 }
 
 function wpv_create_control_value_remove_button() {
-	return '<input type="button" class="button-secondary wpv-remove-value" value="' + wpv_remove + '" onclick="jQuery(this).parent().parent().remove();" />';
+	return '<input type="button" class="button-secondary wpv-remove-value" value="' + wpv_remove + '" onclick="jQuery(this).parent().parent().parent().remove();" />';
 }
 
 function wpv_add_filter_controls_for_search() {
@@ -521,21 +525,31 @@ function wpv_set_input_type_select_size_same() {
 
 function wpv_initialize_input_type_select_change() {
     jQuery('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]').change (function() {
-        var type = jQuery(this).val();
-        
-        switch(type) {
-            case 'checkbox':
-            case 'checkboxes':
-            case 'radios':
-            case 'select':
-                jQuery(this).parent().parent().find('.button-secondary').show();
-                break;
 
-            default:
-                jQuery(this).parent().parent().find('.button-secondary').hide();
-                break;
-                
-        }
+
+	    var mode = jQuery(this).parent().parent().find('input[name="_wpv_settings\\[filter_controls_mode\\]\\[\\]"]').val();
+		
+		if (mode == 'tax') {
+			// Don't show the Edit for input values.
+			jQuery(this).parent().parent().find('.button-secondary').hide();
+		} else {
+			
+			var type = jQuery(this).val();
+			
+			switch(type) {
+				case 'checkbox':
+				case 'checkboxes':
+				case 'radios':
+				case 'select':
+					jQuery(this).parent().parent().find('.button-secondary').show();
+					break;
+	
+				default:
+					jQuery(this).parent().parent().find('.button-secondary').hide();
+					break;
+					
+			}
+		}
     });
     
 }

@@ -89,6 +89,7 @@ function wpv_filter_shortcode_start($atts){
                 function wpv_column_head_click(name, direction) {
                     jQuery('#wpv_column_sort_id').val(name);
                     jQuery('#wpv_column_sort_dir').val(direction);
+                    wpv_add_url_controls_for_column_sort(jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "'));
                     jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "').submit();
                     return false;
                 }
@@ -113,7 +114,7 @@ function wpv_filter_shortcode_start($atts){
     
         // Output the current page ID. This is used for ajax call back in pagination.
         $current_post = $WP_Views->get_top_current_page();
-        if ($current_post) {
+        if ($current_post && isset($current_post->ID)) {
             $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
         }
         add_action('wp_footer', 'wpv_pagination_js');
@@ -403,15 +404,17 @@ function wpv_filter_show_user_interface($name, $values, $selected, $style) {
 * Description: Add filters for View
 *
 * Parameters:
-* type: type of retrieved field layout (radio, checkbox, select, textfield)
+* type: type of retrieved field layout (radio, checkbox, select, textfield, checkboxes, datepicker)
 * url_param: the URL parameter passed as an argument
 * values: Optional. a list of supplied values
 * display_values: Optional. A list of values to display for the corresponding values
 * auto_fill: Optional. When set to a "field-slug" the control will be populated with custom field values from the database.
 * auto_fill_default: Optional. Used to set the default, unselected, value of the control. eg Ignore or Don't care
+* auto_fill_sort: Optional. 'asc', 'desc', 'none'. Defaults to ascending.
 * field: Optional. a Types field to retrieve values from
 * title: Optional. Use for the checkbox title
 * taxonomy: Optional. Use when a taxonomy control should be displayed.
+* date_format: Optional. Used for a datepicker control
 *
 * @param array $atts An associative array of arributes to be used.
  */
@@ -435,7 +438,9 @@ function wpv_shortcode_wpv_control($atts) {
                 'title' => '',
                 'taxonomy' => '',
                 'auto_fill' => '',
-                'auto_fill_default' => ''
+                'auto_fill_default' => '',
+                'auto_fill_sort' => '',
+                'date_format' => ''
 			), $atts)
 	);
 	
@@ -446,7 +451,19 @@ function wpv_shortcode_wpv_control($atts) {
     if ($auto_fill != '') {
         global $wpdb;
         
-        $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
+        switch (strtolower($auto_fill_sort)) {
+            case 'desc':
+                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value DESC" );
+                break;
+            
+            case 'none':
+                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
+                break;
+            
+            default:            
+                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value ASC" );
+                break;
+        }
         
         if ($auto_fill_default != '') {
             $values = '';
@@ -465,7 +482,7 @@ function wpv_shortcode_wpv_control($atts) {
                 }
                 $values .= $value;
                 $display_values .= $value;
-                $first = $false;
+                $first = false;
                 
             }            
         }
@@ -574,8 +591,8 @@ function wpv_shortcode_wpv_control($atts) {
 	else if(!empty($field)) {
 		// check if Types is active
 		if(!function_exists('wpcf_admin_fields_get_field')) {
-			if(defined('WPCF_ABSPATH')) {
-				include WPCF_ABSPATH . '/embedded/includes/fields.php';
+			if(defined('WPCF_EMBEDDED_ABSPATH')) {
+				include WPCF_EMBEDDED_ABSPATH . '/includes/fields.php';
 			} else {
 				return __('Types plugin is required.', 'wpv-views');			
 			}
@@ -599,7 +616,7 @@ function wpv_shortcode_wpv_control($atts) {
 			$field_type = $type;
 		}
         
-        if (!in_array($field_type, array('radio', 'checkbox', 'checkboxes', 'select', 'textfield' ))) {
+        if (!in_array($field_type, array('radio', 'checkbox', 'checkboxes', 'select', 'textfield', 'date', 'datepicker' ))) {
             $field_type = 'textfield';
         }
         
@@ -643,7 +660,7 @@ function wpv_shortcode_wpv_control($atts) {
                         '#attributes' => array('style' => ''),
                         '#inline' => true,
 				 		'#title' => $checkbox_name,
-						'#value' => 1,
+						'#value' => $field_options['data']['set_value'],
 						'#default_value' => 0
                  )));
                         
@@ -731,6 +748,11 @@ function wpv_shortcode_wpv_control($atts) {
 	                 
 	        return $element;
 		}
+		else if($field_type == 'date' || $field_type == 'datepicker') {
+     
+            $out = wpv_render_datepicker($url_param, $date_format);
+            return $out;
+        }
 			
 		return ''; 
 	} else {
@@ -742,7 +764,7 @@ function wpv_shortcode_wpv_control($atts) {
         }
         
         switch ($type) {
-            case 'checkbox';
+            case 'checkbox':
                 $element = array('field' => array(
                                 '#type' => $type,
                                 '#id' => 'wpv_control_' . $type . '_' . $url_param,
@@ -757,8 +779,12 @@ function wpv_shortcode_wpv_control($atts) {
                 $element = wpv_form_control($element);
                 
                 break;
+            
+            case 'datepicker':
+                $element = wpv_render_datepicker($url_param, $date_format);
+                break;
 
-            default;
+            default:
                 
                 $element = array('field' => array(
                                 '#type' => $type,
@@ -775,6 +801,81 @@ function wpv_shortcode_wpv_control($atts) {
         return $element;
     }
 }
+
+function wpv_add_front_end_js() {
+    ?>
+        <script type="text/javascript">
+            var front_ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+            var wpv_calendar_image = '<?php echo WPV_URL_EMBEDDED; ?>/res/img/calendar.gif';
+            var wpv_calendar_text = '<?php echo esc_js(__('Select date', 'wpv-views')); ?>';
+        </script>
+    
+    <?php
+    
+}
+
+function wpv_render_datepicker($url_param, $date_format) {
+    
+    if ($date_format == '') {
+        $date_format = get_option('date_format');
+    }
+    
+    if(isset($_GET[$url_param]) && $_GET[$url_param] != '' && $_GET[$url_param] != '0') {
+        $date = $_GET[$url_param];
+    } else {
+        $date = time();
+    }
+
+    $display_date = date($date_format, intval($date));
+
+    
+    $out = '';
+    $out .= '<span class="wpv_date_input" onclick="jQuery(this).next().next().next().datepicker(\'show\')" >' . $display_date . '</span> ';
+    $out .= '<input type="hidden" name="' . $url_param . '" value="' . $date . '" />';
+    $out .= '<input type="hidden" name="' . $url_param . '-format" value="' . $date_format . '" />';
+
+    $datepicker_date = date('dmy', intval($date));
+    $out .= '<input type="hidden" class="wpv-date-front-end" value="' . $datepicker_date . '"/>';
+
+    return $out;    
+}
+
+class Walker_Category_select extends Walker {
+	var $tree_type = 'category';
+	var $db_fields = array ('parent' => 'parent', 'id' => 'term_id'); //TODO: decouple this
+
+    function __construct($selected_id, $slug_mode = false){
+		$this->selected = $selected_id;
+        $this->slug_mode = $slug_mode;
+	}
+	
+	function start_lvl(&$output, $depth, $args) {
+	}
+
+	function end_lvl(&$output, $depth, $args) {
+	}
+
+	function start_el(&$output, $category, $depth, $args) {
+		extract($args);
+		
+		$indent = str_repeat('-', $depth);
+		if ($indent != '') {
+			$indent = '&nbsp;' . str_repeat('&nbsp;', $depth) . $indent;
+		}
+		
+        if ($this->slug_mode) {
+            $selected = $this->selected == $category->slug ? ' selected="selected"' : '';
+    		$output .= '<option value="' . $category->slug. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
+        } else {
+            $selected = $this->selected == $category->term_id ? ' selected="selected"' : '';
+    		$output .= '<option value="' . $category->term_id. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
+        }
+	}
+
+	function end_el(&$output, $category, $depth, $args) {
+	}
+}
+
 
 function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
     
@@ -906,11 +1007,30 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
     ob_start();
     ?>
         
-		<ul class="categorychecklist form-no-clear">
 
-		<?php wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms)) ?>
+		<?php
+            if ($type == 'select') {
+                $name = $taxonomy;
+                if ($name == 'category') {
+                    $name = 'post_category';
+                }
+        		echo '<select name="' . $name . '">';
+    			echo '<option selected="selected" value="0"></option>';
+                $temp_slug = '0';
+                if (count($terms)) {
+                    $temp_slug = $terms[0];
+                }
+        		$my_walker = new Walker_Category_select($temp_slug, true);
+                wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms, 'walker' => $my_walker));
+                echo '</select>';
+            } else {
+        		echo '<ul class="categorychecklist form-no-clear">';
+                wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms));
+        		echo '</ul>';
+            }
+            
+        ?>
 		
-		</ul>
     <?php
     
     $taxonomy_check_list = ob_get_clean();

@@ -13,8 +13,8 @@ function wpv_order_by_default_settings($view_settings) {
     return $view_settings;
 }
 
-
-add_filter('wpv_filter_query', 'wpv_filter_get_order_arg', 10, 2);
+$orderby_meta = '';
+add_filter('wpv_filter_query', 'wpv_filter_get_order_arg', 100, 2); // Make this happens after custom fields
 function wpv_filter_get_order_arg($query, $view_settings) {
     $orderby = $view_settings['orderby'];
     if (isset($_GET['wpv_column_sort_id']) && $_GET['wpv_column_sort_id'] != 'undefined') {
@@ -49,7 +49,7 @@ function wpv_filter_get_order_arg($query, $view_settings) {
             $query['meta_key'] = substr($field, 11);
             $query['orderby'] = 'meta_value';
         } elseif (strpos($field, 'types-field') === 0) {
-            $query['meta_key'] = substr($field, 12);
+            $query['meta_key'] = strtolower(substr($field, 12));
             if (function_exists('wpcf_types_get_meta_prefix')) {
                 $query['meta_key'] = wpcf_types_get_meta_prefix() . $query['meta_key'];
             }
@@ -78,7 +78,65 @@ function wpv_filter_get_order_arg($query, $view_settings) {
         $query['orderby'] = substr($query['orderby'], 5);
     }
     
+    global $orderby_meta;
+    
+    $orderby_meta = array();
+    // See if the orderby is the same as a custom field filter
+    if (isset($query['meta_key']) && isset($query['meta_query'])) {
+        foreach($query['meta_query'] as $index => $meta) {
+            if (isset($meta['key']) && ($meta['key'] == $query['meta_key'])) {
+                // Found it.
+                // We need to add a post_orderby filter directly to sort by the same field.
+                $orderby_meta['order_by'] = $query['orderby'];
+                $orderby_meta['meta_key'] = $query['meta_key'];
+                $orderby_meta['order'] = $query['order'];
+                unset($query['meta_key']);
+                add_filter('posts_where', 'wpv_post_where_meta', 10, 2);
+                add_filter('posts_orderby', 'wpv_post_order_by_meta', 10, 2);
+                break;
+            }
+        }
+        
+    }
     return $query;
+}
+
+function wpv_post_where_meta($where, $query) {
+    global $orderby_meta;
+    if (isset($orderby_meta['meta_key'])) {
+        $regex = '/([^\(]*)\\.meta_key\s+=\s+\'' . $orderby_meta['meta_key'] . '\'/siU';
+        if(preg_match($regex, $where, $matches)) {
+            $orderby_meta['join'] = $matches[1];
+        }
+    }
+
+    remove_filter('posts_where', 'wpv_post_where_meta', 10, 2);
+
+    return $where;
+}
+
+function wpv_post_order_by_meta($orderby, $query) {
+    global $orderby_meta, $wpdb;
+    if (isset($orderby_meta['meta_key'])) {
+        
+        $order_by_value = 'meta_value';
+        if ($orderby_meta['order_by'] == 'meta_value_num') {
+            $order_by_value .= '+0';
+        }
+
+        // We need to set a specific order.        
+        $post_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key='{$orderby_meta['meta_key']}' ORDER BY {$order_by_value} {$orderby_meta['order']}");
+        $orderby = 'CASE ' . $wpdb->prefix . 'posts.ID ';
+        for ($i = 0; $i < count($post_ids); $i++) {
+            $orderby .= " WHEN '" . $post_ids[$i] . "' THEN " . $i;
+        }
+        $orderby .= ' ELSE ' . $i;
+        $orderby .= ' END, id';
+        
+    }
+    
+    remove_filter('post_orderby', 'wpv_post_order_by_meta');
+    return $orderby;
 }
 
 function _wpv_is_numeric_field($field_name) {

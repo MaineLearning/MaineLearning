@@ -226,41 +226,6 @@ function em_wp_the_title($data){
 }
 add_filter ( 'the_title', 'em_wp_the_title',10,1 );
 
-/**
- * Filters the get_pages functions so it includes the event pages?
- * @param $data
- * @return array
- */
-function em_filter_get_pages($data) {
-	global $em_disable_filter; //Using a flag here instead
-	$show_events_menu = get_option ( 'dbem_list_events_page' );
-	$show_locations_menu = get_option ( 'dbem_list_locations_page' );
-	$show_categories_menu = get_option ( 'dbem_list_categories_page' );
-	if ( (!$show_events_menu || !$show_locations_menu || !$show_categories_menu) && $em_disable_filter !== true ) {
-		$output = array(); 
-		$events_page_id = get_option( 'dbem_events_page' );
-		$locations_page_id = get_option( 'dbem_locations_page' );
-		$categories_page_id = get_option( 'dbem_categories_page' );
-		foreach( $data as $data_id => $page ) {
-			$added = false;
-			if(!$show_events_menu && $page->ID != $events_page_id){
-				$output[] = $page;
-				$added = true;
-			}
-			if(!$show_locations_menu && !$added && $page->ID != $locations_page_id){
-				$output[] = $page;
-				$added = true;
-			}
-			if(!$show_categories_menu && !$added && $page->ID != $categories_page_id){
-				$output[] = $page;
-				$added = true;
-			}
-		}
-		return apply_filters('em_filter_get_pages', $output);
-	}
-	return apply_filters('em_filter_get_pages', $data);
-}
-add_filter ( 'get_pages', 'em_filter_get_pages' );
 
 function em_get_page_type(){
 	global $EM_Location, $EM_Category, $EM_Event, $wp_query, $post;	

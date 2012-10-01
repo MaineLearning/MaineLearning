@@ -22,11 +22,11 @@ foreach ( $EM_Events as $EM_Event ) {
 	/* @var $EM_Event EM_Event */
 	date_default_timezone_set('UTC'); // set the PHP timezone to UTC, we already calculated event    
 	if($EM_Event->event_all_day){
-		$dateStart	= date('Ymd\T000000',$EM_Event->start); //all day
-		$dateEnd	= date('Ymd\T000000',$EM_Event->end + 86400); //add one day
+		$dateStart	= ';VALUE=DATE:'.date('Ymd',$EM_Event->start); //all day
+		$dateEnd	= ';VALUE=DATE:'.date('Ymd',$EM_Event->end + 86400); //add one day
 	}else{
-		$dateStart	= date('Ymd\THis\Z',$EM_Event->start);
-		$dateEnd = date('Ymd\THis\Z',$EM_Event->end);
+		$dateStart	= ':'.date('Ymd\THis\Z',$EM_Event->start);
+		$dateEnd = ':'.date('Ymd\THis\Z',$EM_Event->end);
 	}
 	if( !empty($EM_Event->event_date_modified) && $EM_Event->event_date_modified != '0000-00-00 00:00:00' ){
 		$dateModified = date('Ymd\THis\Z', strtotime($EM_Event->event_date_modified));
@@ -68,8 +68,8 @@ foreach ( $EM_Events as $EM_Event ) {
 echo "
 BEGIN:VEVENT
 UID:{$UID}
-DTSTART:{$dateStart}
-DTEND:{$dateEnd}
+DTSTART{$dateStart}
+DTEND{$dateEnd}
 DTSTAMP:{$dateModified}
 SUMMARY:{$description}
 LOCATION:{$location}

@@ -3,7 +3,7 @@ Contributors: johnbillion
 Donate link: http://lud.icro.us/donations/
 Tags: user, users, profiles, switching, wpmu, multisite, buddypress, become, user control, user management, user access, developer
 Requires at least: 2.7
-Tested up to: 3.4
+Tested up to: 3.4.2
 Stable tag: trunk
 
 Instant switching between user accounts in WordPress.
@@ -32,6 +32,9 @@ This plugin allows you to quickly swap between user accounts in WordPress at the
  * Chinese Simplified by Tunghsiao Liu (Sparanoid)
  * German by Ralph Stenzel
  * Farsi (Persian) by Amin Ab
+ * Slovak by Max Samael
+ * Polish by Bartosz Arendt
+ * Lithuanian by Tommixoft
 
 == Installation ==
 
@@ -78,17 +81,48 @@ Yes, but you'll need to install `user-switching.php` into the root of your `mu-p
 
 A user needs the `edit_users` capability in order to switch user accounts. By default only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
 
+= Are any hooks called when users switch accounts? =
+
+Yes. When a user switches to another account, the `switch_to_user` hook is called with the new and old user IDs passed as parameters.
+
+When a user switches back to their original account, the `switch_back_user` hook is called with the new (original) and old user IDs passed as parameters.
+
+When a user switches off, the `switch_off_user` hook is called with the old user ID as a parameter.
+
 == Screenshots ==
 
 1. The *Switch To* link on the Users screen
 2. The *Switch To* link on a user's profile
 
+== Upgrade Notice ==
+
+= 0.6.3 =
+* Lithuanian, Polish and Slovak translations.
+
+= 0.6 =
+* More intuitive redirecting after switching, a BuddyPress bugfix and some hooks added.
+
 == Changelog ==
+
+= 0.6.3 =
+* Lithuanian translation by Tommixoft.
+
+= 0.6.2 =
+* Polish translation by Bartosz Arendt.
+
+= 0.6.1 =
+* Slovak translation by Max Samael.
+
+= 0.6 =
+* More intuitive redirecting after switching.
+* Avoid a BuddyPress bug preventing Switch To buttons from appearing.
+* Added a template function: `current_user_switched()` which lets you know if the current user switched into their account.
+* Added some hooks: `switch_to_user`, `switch_back_user` and `switch_off_user`, fired when appropriate.
 
 = 0.5.2 =
 * Farsi (Persian) translation by Amin Ab.
-* Display switch back links in Network Admin and login screen
-* Avoid a BuddyPress bug preventing Switch To buttons from appearing
+* Display switch back links in Network Admin and login screen.
+* Avoid a BuddyPress bug preventing Switch To buttons from appearing.
 
 = 0.5.1.2 =
 * German translation by Ralph Stenzel.
@@ -133,26 +167,3 @@ A user needs the `edit_users` capability in order to switch user accounts. By de
 
 = 0.1 =
 * Initial release.
-
-== Upgrade Notice ==
-
-= 0.5.1.3 =
-* Farsi (Persian) translation by Amin Ab, and Network Admin and BuddyPress bugfixes.
-
-= 0.5.1.2 =
-* German translation by Ralph Stenzel.
-
-= 0.5.1.1 =
-* Chinese Simplified translation by Sparanoid.
-
-= 0.5.1 =
-* Toolbar tweaks for WordPress 3.3.
-
-= 0.5 =
-* Introduces the "Switch off" function: Log out and log instantly back in again when needed (see the FAQ).
-
-= 0.4.1 =
-* Support for upcoming changes to the admin bar in WordPress 3.3.
-
-= 0.4 =
-User switching links on Network Admin screens and BuddyPress user screens.

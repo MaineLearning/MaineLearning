@@ -143,32 +143,6 @@ table.ti-table thead th {
 	width: auto;
 }
 
-.ti-metadata-table {
-	padding: 0;
-	margin: 0;
-}
-
-.ti-metadata-table td {
-	padding: 0;
-	margin: 0;
-}
-
-.ti-edit-table, .ti-edit-table tr, .ti-edit-table td {
-	padding: 0;
-	margin: 0;
-}
-.ti-table-delete-icon {
-	background: url('./images/delete.png') no-repeat;
-	width: 16px;
-	height: 16px;
-	vertical-align: middle;
-	display: block;
-	zoom: 1;
-	filter: alpha(opacity=50);
-	opacity: 0.5;
-}
-
-.ti-table-delete-icon span {display:none;}
 
 .progressbar {
 	position: relative;
@@ -188,39 +162,41 @@ table.ti-table thead th {
 }
 
 /*
-	Value tables
-
-	All <select> elements with class '.ti-value-table' are removed and replaced with this:
-
-	<div> .ti-vt-wrapper
-		<input> .ti-vt-selected  (a disabled input that replaces the original listbox element)
-		<div> .ti-vt-scroll
-			<div> .ti-vt-select  ('select all')
-			<div> .ti-vt-list    (list of checkboxes)
-				<div> value 1
-				<div> value 2
-				...
+	-----------------------------------------------------------------------------------
+	Editable tables (edt)
+	-----------------------------------------------------------------------------------
 */
 
-.ti-value-table {
-	display: none;      /* Hide the field initially, otherwise it'll show the selections before the jQuery executes */
+.edt, .edt td {
+	padding: 0;
+	margin: 0;
 }
 
-/* Wrapper for value tables.  Includes both the table and the prepended <input> field, so the they can be displayed as a single block */
-.ti-vt-wrapper {
+/*
+	-----------------------------------------------------------------------------------
+	Drop down multiselect (ddms)
+	-----------------------------------------------------------------------------------
+*/
+
+/* Assign this class to your <select> to hide it initially, otherwise the ddms will 'pop' in */
+.ddms {
+	display: none;
+}
+
+/* Container for the entire ddms, including the input element and the dropdown */
+.ddms-container {
 	display: inline-block;
 	vertical-align:top;
 }
 
-/* The read-only box at the top of the dropdown, showing the selected values */
-.ti-vt-selected {
-	padding-right: 30px;    /* Makes it look the same as the wacky padding added to vt-scroll */
+/* Input element above the dropdown, showing what was selected */
+.ddms-selected {
 	cursor: default;
+	padding-right: 30px;        /* Webkit browsers put horizontal scrollbar in unless div is widened enough to include the vertical bar! */
 }
 
-
 /* This wraps the values list with a scrollable div */
-.ti-vt-scroll {
+.ddms-dropdown {
 	max-height: 200px;
 	overflow: auto;
 	border: 1px solid lightgray;
@@ -229,15 +205,20 @@ table.ti-table thead th {
 	white-space: nowrap;
 	padding-right: 30px;        /* Webkit browsers put horizontal scrollbar in unless div is widened enough to include the vertical bar! */
 	padding-top: 5px;
+	display: none;
 }
 
 /* The list of values (a checkbox, label and text inside a div, for each value) */
-.ti-vt-scroll input {
+.ddms-dropdown input {
 	padding: 0 3px 0 3px;         /* Without this the checkboxes won't align vertically with the text due to WP default settings */
 }
 
+/*
+	-----------------------------------------------------------------------------------
+	Tooltips
+	-----------------------------------------------------------------------------------
+*/
 
-/* tooltips */
 .ttip {
 	border-bottom: 1px dotted;
 }

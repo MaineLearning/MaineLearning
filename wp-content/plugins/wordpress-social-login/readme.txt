@@ -3,7 +3,7 @@ Contributors: miled
 Tags:  facebook, google, yahoo, twitter, windows live, myspace, foursquare, linkedin, gowalla, last.fm, instagram, goodreads, tumblr, aol, vkontakte, stackoverflow, github, 500px, skyrock, mixi.jp, steam, login, register, comment, social, social networks, social login
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 Donate link: http://bit.ly/OTuFYN
 License: MIT License
 License URI: http://www.opensource.org/licenses/MIT
@@ -53,6 +53,9 @@ Using <strong>WordPress Social Login</strong>, your blog's users will be able to
  <li>Skyrock</li>  
  <li>Mixi.jp</li>  
  <li>Steam</li>  
+ <li>Mail.ru</li>  
+ <li>Yandex</li>  
+ <li>Odnoklassniki</li>  
 </ol> 
 	
 <strong>Credits:</strong>
@@ -65,7 +68,8 @@ Using <strong>WordPress Social Login</strong>, your blog's users will be able to
 * [thenbrent](http://profiles.wordpress.org/users/thenbrent/) the talented developer behind the Social Connect plugin
 * [Macky Franklin](http://www.mackyfranklin.com) for all the great help
 * [Pat Anvil](http://patanvil.com) for adding Goodreads
-* [Nicolas Quiénot](https://github.com/niQo) for adding Skyrock
+* [Nicolas Quienot](https://github.com/niQo) for adding Skyrock
+* [Ayrat Belyaev](https://github.com/xbreaker) for adding Mail.ru, Yandex and Odnoklassniki
 
 == Installation ==
 
@@ -91,9 +95,16 @@ If you want to add the social login widget to another location in your theme, yo
 
 == Changelog ==
 
+= 1.2.2 =
+
+* add Mail.ru, Yandex and Odnoklassniki
+* add more customization options
+* improve user guide
+* a bunch of fixes and small improvements
+
 = 1.1.9 =
 
-* some fixes and small iprovements
+* some fixes and small improvements
 
 = 1.1.8 =
 

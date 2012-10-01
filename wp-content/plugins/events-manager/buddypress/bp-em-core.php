@@ -201,8 +201,7 @@ if( !is_admin() || ( defined('DOING_AJAX') && !empty($_REQUEST['is_public'])) ){
 	}
 	if( !get_option('dbem_edit_events_page') ){
 		add_filter('em_event_get_edit_url','em_bp_rewrite_edit_url',10,2);
-	}
-	
+	}	
 	
 	function em_bp_rewrite_bookings_url($url, $EM_Event){
 		global $bp;

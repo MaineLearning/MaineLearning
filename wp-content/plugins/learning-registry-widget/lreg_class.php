@@ -18,6 +18,7 @@ class learning_registry_search extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
+                $widget_title = isset( $instance['widget_title'] ) ? $instance['widget_title'] : '';
                 $url_field = isset( $instance['url_field'] ) ? $instance['url_field'] : '';
                 $number_items = isset( $instance['number_items'] ) ? (int) $instance['number_items'] : 3;
 
@@ -36,6 +37,8 @@ class learning_registry_search extends WP_Widget {
                 // done with AJAX
 		?>
                 <div id='<?php echo $this->get_field_id('widget') ?>' class="widget widget-learning_registry">
+			<?php /* Output a widget title, but hide it. We'll unhide with JS */ ?>
+			<h3 class="widget-title id="<?php echo $this->get_field_id( 'lr_widget_title' ) ?>" style="display:none;"><?php echo esc_html( $widget_title ) ?></h3>
                         <input type="hidden" value="<?php echo esc_attr( $url_field ) ?>" name="lr_url_field" id="lr_url_field" />
                         <input type="hidden" value="<?php echo esc_attr( $number_items ) ?>" name="lr_number_items" id="lr_number_items" />
                         <input type="hidden" value="<?php echo get_the_ID() ?>" name="lr_post_id" id="lr_post_id" />
@@ -46,12 +49,18 @@ class learning_registry_search extends WP_Widget {
 	}
 
 	function form($instance) {
+		$widget_title = isset( $instance['widget_title'] ) ? $instance['widget_title'] : '';
                 $url_field = isset( $instance['url_field'] ) ? $instance['url_field'] : '';
                 $number_items = isset( $instance['number_items'] ) ? $instance['number_items'] : 3;
 
                 ?>
 
                 <div id="<?php echo $this->get_field_id( 'form' ) ?>">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'widget_title' ) ?>">Widget title</label>
+                                <input type="text" name="<?php echo $this->get_field_name( 'widget_title' ) ?>" id="<?php echo $this->get_field_id( 'widget_title' ) ?>" value="<?php echo esc_attr( $widget_title ) ?>" size="25" />
+			</p>
+
                         <p>
                                 <label for="<?php echo $this->get_field_id( 'url_field' ) ?>">URL field</label>
                                 <input type="text" name="<?php echo $this->get_field_name( 'url_field' ) ?>" id="<?php echo $this->get_field_id( 'url_field' ) ?>" value="<?php echo esc_attr( $url_field ) ?>" size="25" />
@@ -72,6 +81,8 @@ class learning_registry_search extends WP_Widget {
 	function update($new_instance, $old_instance) {
 
 		$instance = $old_instance;
+
+		$instance['widget_title'] = $new_instance['widget_title'];
 		$instance['url_field'] = $new_instance['url_field'];
 		$instance['number_items'] = (int) $new_instance['number_items'];
 		return $instance;

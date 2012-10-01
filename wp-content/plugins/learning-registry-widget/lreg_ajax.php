@@ -29,7 +29,7 @@ function lreg_get() {
 
         // If there's no data, don't show the widget
         if ( empty( $resource_url ) ) {
-                return;
+                die();
         }
 
         // Get the node URL
@@ -61,11 +61,85 @@ function lreg_get() {
                 }
         }
 
+	// We want to sort by date, in reverse chronological order
+	rsort( $paradata );
+
         $markup = '';
         if ( !empty( $paradata ) ) {
+		$counter = 0;
                 $markup .= '<ul>';
                 foreach( $paradata as $pd ) {
-                        $markup .= '<li>' . $pd->activity->content . '</li>';
+
+			if ( $counter >= $number_items ) {
+				break;
+			}
+
+			// Sometimes things are embedded in Activity
+			if ( isset( $pd->activity ) ) {
+				$item = $pd->activity;
+			} else {
+				$item = $pd;
+			}
+
+			// Isolate content, then cut it at the verb
+			if ( ! empty( $item->content ) ) {
+				$content = $item->content;
+			} else {
+				continue;
+			}
+
+			// No content, no post
+			if ( ! empty( $item->verb->action ) ) {
+				$content = ucwords( $item->verb->action ) . ' ' . array_pop( explode( $item->verb->action, $content ) );
+			} else {
+				continue;
+			}
+
+			// Get the "description" if we have it
+			// If we don't have it, skip it
+			if ( isset( $item->verb->context ) && isset( $item->verb->context->description ) ) {
+				$description = $item->verb->context->description;
+				$url = isset( $item->verb->context->id ) ? $item->verb->context->id : '';
+			} else {
+				continue;
+			}
+
+			// Lose the Date stuff
+			$content = preg_replace( '/(on|between).*$/', '', $content );
+
+			// Wrap the content in a span to make it easier to style
+			$content = '<span class="paradata-description">' . $content . '</span>';
+
+			// Make sure we don't include items that have been done 0 times
+			if ( isset( $item->verb->measure ) && 'count' == $item->verb->measure->measureType && empty( $item->verb->measure->value ) ) {
+				continue;
+			}
+
+			// Metadata
+			$metadata = '<div class="paradata-meta">';
+
+			$metadata .= '<span class="paradata-id">';
+
+			if ( $url )
+				$metadata .= '<a href="' . $url . '">';
+
+			$metadata .= $description;
+
+			if ( $url )
+				$metadata .= '</a>';
+
+			$metadata .= '</span> ';
+
+			// Date - take start dates
+			$date = strtotime( array_pop( array_reverse( explode( '/', $item->verb->date ) ) ) );
+			if ( $date )
+				$metadata .= '<span class="paradata-date">' . date( 'F j, Y', $date ) . '</span>';
+			$metadata .= '</div>';
+			$image = '';
+
+                        $markup .= '<li>' . $content . $metadata . '</li>';
+
+			$counter++;
                 }
                 $markup .= '</ul>';
         }
