@@ -5,7 +5,7 @@
  */
 
 //replace 'twitter' with the 'name' of your extension, as defined in your config.php file.
-function bebop_twitter_import( $extension ) {
+function bebop_twitter_import( $extension, $user_metas = null ) {
 	global $wpdb, $bp;
 	if ( empty( $extension ) ) {
 		bebop_tables::log_general( 'Importer', 'The $extension parameter is empty.' );
@@ -16,18 +16,29 @@ function bebop_twitter_import( $extension ) {
 		return false;
 	}
 	else {
-		$this_extension = bebop_extensions::get_extension_config_by_name( $extension );
+		$this_extension = bebop_extensions::bebop_get_extension_config_by_name( $extension );
 	}
 	
 	//item counter for in the logs
 	$itemCounter = 0;
-	$user_metas = bebop_tables::get_user_ids_from_meta_name( 'bebop_' . $this_extension['name'] . '_oauth_token' );
-	if ( $user_metas ) {
+	
+	//if no user_metas are supplied, serarch for them.
+	if( ! isset( $user_metas ) ) {
+		$user_metas = bebop_tables::get_user_ids_from_meta_name( 'bebop_' . $this_extension['name'] . '_oauth_token' );
+	}
+	
+	if ( isset( $user_metas ) ) {
 		foreach ( $user_metas as $user_meta ) {
 			$errors = null;
 			$items 	= null;
+			
 			//Ensure the user is currently wanting to import items.
 			if ( bebop_tables::get_user_meta_value( $user_meta->user_id, 'bebop_' . $this_extension['name'] . '_active_for_user' ) == 1 ) {
+				
+				//if it is the first import, update the flag.
+				if ( bebop_tables::check_for_first_import( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_do_initial_import' ) ) {
+					bebop_tables::delete_from_first_importers( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_do_initial_import' );
+				}
 				
 				/* 
 				 * ******************************************************************************************************************
@@ -49,7 +60,6 @@ function bebop_twitter_import( $extension ) {
 				
 				$items = $OAuth->oauth_request( $this_extension['data_feed'] );
 				$items = simplexml_load_string( $items );
-				
 				/* 
 				 * ******************************************************************************************************************
 				 * We can get as far as loading the items, but you will need to adjust the values of the variables below to match 	*
@@ -60,17 +70,17 @@ function bebop_twitter_import( $extension ) {
 				 * ******************************************************************************************************************
 				 * 
 				 * Values you will need to check and update are:
-				 * 		$errors 				- Must point to the error boolean value (true/false)
-				 * 		$username				- Must point to the value holding the username of the person.
-				 *.		$id						- Must be the ID of the item returned through the data API.
-				 * 		$item_content			- The actual content of the imported item.
-				 * 		$item_published			- The time the item was published.
-				 * 		$action_link			- This is where the link will point to - i.e. where the user can click to get more info.
+				 *		$errors 				- Must point to the error boolean value (true/false)
+				 *		$username				- Must point to the value holding the username of the person.
+				 *		$id						- Must be the ID of the item returned through the data API.
+				 *		$item_content			- The actual content of the imported item.
+				 *		$item_published			- The time the item was published.
+				 *		$action_link			- This is where the link will point to - i.e. where the user can click to get more info.
 				 */
 				
 				//Edit the following two variables to point to where the relevant content is being stored in the API:
 				$errors		 = $items->error;
-				$username	 = '' . $items->status->user->screen_name[0];
+				$username	 = $items->status->user->screen_name[0];
 				
 				if ( ! $errors ) {
 					if ( $items ) {
@@ -116,7 +126,7 @@ function bebop_twitter_import( $extension ) {
 					}
 				}
 				else {
-					bebop_tables::log_error( 'Importer - ' . ucfirst( $this_extension['name'] ), 'feed error: ' . $errors );
+					bebop_tables::log_error( sprintf( __( 'Importer - %1$s', 'bebop' ), $this_extension['display_name'] ), sprintf( __( 'Feed Error: %1$s', 'bebop' ), $errors ) );
 				}
 			}
 		}

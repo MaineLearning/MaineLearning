@@ -5,8 +5,10 @@
  */
 
 //replace 'flickr' with the 'name' of your extension, as defined in your config.php file.
-function bebop_flickr_import( $extension ) {
+function bebop_flickr_import( $extension, $user_metas = null ) {
 	global $wpdb, $bp;
+	$itemCounter = 0;
+	
 	if ( empty( $extension ) ) {
 		bebop_tables::log_general( 'Importer', 'The $extension parameter is empty.' );
 		return false;
@@ -16,27 +18,47 @@ function bebop_flickr_import( $extension ) {
 		return false;
 	}
 	else {
-		$this_extension = bebop_extensions::get_extension_config_by_name( $extension );
+		$this_extension = bebop_extensions::bebop_get_extension_config_by_name( $extension );
 	}
 	
-	//item counter for in the logs
-	$itemCounter = 0;
-	$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
-	if ( $user_metas ) {
+	//if user_metas is not defined, get some user meta.
+	if( ! isset( $user_metas ) ) {
+		$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
+	}
+	else {
+		$secondary_importers = true;
+	}
+	if ( isset( $user_metas ) ) {
 		foreach ( $user_metas as $user_meta ) {
 			//Ensure the user is currently wanting to import items.
 			if ( bebop_tables::get_user_meta_value( $user_meta->user_id, 'bebop_' . $this_extension['name'] . '_active_for_user' ) == 1 ) {
 				
-				$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name']);
+				if ( isset( $secondary_importers ) && $secondary_importers === true ) {
+					$user_feeds = bebop_tables::get_initial_import_feeds( $user_meta->user_id , $this_extension['name'] );
+				}
+				else {
+					$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name'] );
+				}
+				
 				foreach ($user_feeds as $user_feed ) {
 					$errors = null;
 					$items 	= null;
 					
-					$username = $user_feed->meta_value;
+					//extract the username as appropriate
+					if ( isset( $secondary_importers ) && $secondary_importers === true ) {
+						$username = $user_feed;
+					}
+					else {
+						$username = $user_feed->meta_value;
+					}
 					
 					$import_username = str_replace( ' ', '_', $username );
 					//Check the user has not gone past their import limit for the day.
 					if ( ! bebop_filters::import_limit_reached( $this_extension['name'], $user_meta->user_id, $import_username ) ) {
+						
+						if ( bebop_tables::check_for_first_import( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' ) ) {
+							bebop_tables::delete_from_first_importers( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' );
+						}
 						
 						/* 
 						 * ******************************************************************************************************************
@@ -53,44 +75,35 @@ function bebop_flickr_import( $extension ) {
 						$data_request = new bebop_data();
 						
 						//send a request to see if we have a username or a user_id.
-						$data_request->set_parameters( 
-									array( 
-												'method'		=> 'flickr.people.getPublicPhotos',
-												'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
-												'user_id'		=> $username,
-												'extras'		=> 'date_upload,url_m,url_t,description',
-									)
+						$params = array(  
+										'method'		=> 'flickr.people.getPublicPhotos',
+										'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
+										'user_id'		=> $username,
+										'extras'		=> 'date_upload,url_m,url_t,description',
 						);
-						$query = $data_request->build_query( $this_extension['data_feed'] );
-						$data = $data_request->execute_request( $query );
+						$data = $data_request->execute_request( $this_extension['data_feed'], $params );
 						$data = simplexml_load_string( $data );
 						
 						//if the previous request failed. we have a username not a user_id.
 						if ( empty ( $data->photos ) ) {
 						
 							//Go and get the user_id
-							$data_request->set_parameters( 
-										array( 
-													'method'		=> 'flickr.urls.lookupuser',
-													'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
-													'url' 			=> 'http://www.flickr.com/photos/' . $username,
-										)
+							$params = array( 
+										'method'		=> 'flickr.urls.lookupuser',
+										'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
+										'url' 			=> 'http://www.flickr.com/photos/' . $username,
 							);
-							$query = $data_request->build_query( $this_extension['data_feed'] );
-							$data = $data_request->execute_request( $query );
+							$data = $data_request->execute_request( $this_extension['data_feed'], $params );
 							$data = simplexml_load_string( $data );
 							
 							//retry the request
-							$data_request->set_parameters( 
-										array( 
-													'method'		=> 'flickr.people.getPublicPhotos',
-													'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
-													'user_id'		=> urldecode($data->user['id']),
-													'extras'		=> 'date_upload,url_m,url_t,description',
-										)
+							$params = array( 
+										'method'		=> 'flickr.people.getPublicPhotos',
+										'api_key' 		=> bebop_tables::get_option_value( 'bebop_' . $this_extension['name'] . '_consumer_key' ),
+										'user_id'		=> urldecode($data->user['id']),
+										'extras'		=> 'date_upload,url_m,url_t,description',
 							);
-							$query = $data_request->build_query( $this_extension['data_feed'] );
-							$data = $data_request->execute_request( $query );
+							$data = $data_request->execute_request( $this_extension['data_feed'], $params );
 							$data = simplexml_load_string( $data );
 						}
 						
@@ -128,7 +141,6 @@ function bebop_flickr_import( $extension ) {
 									
 									//generate an $item_id
 									$item_id = bebop_generate_secondary_id( $user_meta->user_id, $id, $item_published );
-									
 									//check if the secondary_id already exists
 									$secondary = bebop_tables::fetch_individual_oer_data( $item_id );
 									//if the id is not found, import the content.

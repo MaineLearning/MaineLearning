@@ -12,7 +12,7 @@ function get_twitter_config() {
 		'access_token_url' 		=> 'http://api.twitter.com/oauth/access_token',
 		'authorize_url'			=> 'https://api.twitter.com/oauth/authorize',
 		'data_feed' 			=> 'http://api.twitter.com/1/statuses/user_timeline.xml',
-		'content_type' 			=> 'Tweet',
+		'content_type' 			=> __( 'Tweet', 'bebop' ),
 		'content_oembed' 		=> false,
 		'action_link' 			=> 'http://www.twitter.com/bebop_replace_username/status/',
 	);

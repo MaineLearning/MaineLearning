@@ -3,32 +3,32 @@
 <?php include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php' ); ?>
 <div id='bebop_admin_container'>
 	<div class='postbox full_width center_margin margin-bottom_22px'>
-		<h3>Bebop Errors</h3>
+		<h3><?php _e( 'Bebop Errors', 'bebop' ); ?></h3>
 		<div class='inside'>
-			Logs any errors which the plugin has produced. Please report by opening a issue ticket in our <a target="_blank" href="https://github.com/lncd/bebop/wiki">Github Wiki</a>.
+			<p><?php _e( 'Logs any errors which the plugin has produced. Please report by opening a issue ticket in our <a target="_blank" href="https://github.com/lncd/bebop/wiki">Github Wiki</a>.', 'bebop' ); ?></p>
 		</div>
 	</div>
 	<?php
 	$table_row_data = bebop_tables::fetch_table_data( 'bp_bebop_error_log' );
 	if ( count( $table_row_data ) > 0 ) {
 		?>
-		<a class='button-secondary' href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query( $_GET ); ?>&clear_table=true">Flush table data</a>
+		<a class='button-secondary' href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query( $_GET ); ?>&clear_table=true"><?php _e( 'Flush table data', 'bebop' ); ?></a>
 		
 		<table class="widefat margin-top_22px">
 			<thead>
 				<tr>
-					<th>Error ID</th>
-					<th>Timestamp</th>
-					<th>Error Type</th>
-					<th>Error Message</th>
+					<th><?php _e( 'Error ID', 'bebop' ); ?></th>
+					<th><?php _e( 'Timestamp', 'bebop' ); ?></th>
+					<th><?php _e( 'Error Type', 'bebop' ); ?></th>
+					<th><?php _e( 'Error Message', 'bebop' ); ?></th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>Error ID</th>
-					<th>Timestamp</th>
-					<th>Error Type</th>
-					<th>Error Message</th>
+					<th><?php _e( 'Error ID', 'bebop' ); ?></th>
+					<th><?php _e( 'Timestamp', 'bebop' ); ?></th>
+					<th><?php _e( 'Error Type', 'bebop' ); ?></th>
+					<th><?php _e( 'Error Message', 'bebop' ); ?></th>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -47,7 +47,7 @@
 		<?php
 	}
 	else {
-		echo "No data found in the error table.";
+		 _e( 'No data found in the error table.', 'bebop' );
 	}
 	?>
 <!-- End bebop_admin_container -->

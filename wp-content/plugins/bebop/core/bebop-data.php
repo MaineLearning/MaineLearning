@@ -5,31 +5,19 @@
  */
  
 class bebop_data {
-	function set_parameters ( $params ) {
-		$this->paramaters = $params;
-	}
-	function get_parameters () {
-		return $this->paramaters;
-	}
 	
-	function build_query ( $url ) {
-		return $url . '?' . http_build_query( $this->get_parameters() );
-	}
-	
-	function execute_request ( $url ) {
-		$curl = curl_init();
-		curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 30 );
-		curl_setopt( $curl, CURLOPT_TIMEOUT, 30 );
-		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, TRUE );
-		curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, FALSE );
-		curl_setopt( $curl, CURLOPT_HEADER, FALSE );
-		//$_GET
-		curl_setopt( $curl, CURLOPT_HTTPGET, TRUE );
-
-		curl_setopt( $curl, CURLOPT_URL, $url );
-		$response = curl_exec( $curl );
-		curl_close( $curl );
-		return $response;
+	function execute_request( $url, $parameters = null ) {
+		if( isset( $parameters ) ) {
+			$url = $url . '?' . http_build_query( $parameters );
+		}
+		$result = wp_remote_get( $url );
+		if ( is_wp_error( $result ) ) {
+			echo '<pre>';
+			echo $url;
+			var_dump($result['body']);
+			echo '</pre>';
+		}
+		return $result['body'];
 	}
 }
 ?>
