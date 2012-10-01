@@ -5,7 +5,7 @@ add_action( 'bp_init', 'bp_group_hierarchy_load_translations');
 /** This function appears to work when loaded at bp_loaded, but more research is needed */
 add_action( 'bp_loaded', 'bp_group_hierarchy_init' );
 
-add_action( 'bp_loaded', 'bp_group_hierarchy_override_routing' );
+add_action( 'bp_loaded', 'bp_group_hierarchy_load_components' );
 add_action( 'bp_setup_globals', 'bp_group_hierarchy_setup_globals' );
 add_action( 'bp_groups_delete_group', 'bp_group_hierarchy_rescue_child_groups' );
 
@@ -24,7 +24,7 @@ function bp_group_hierarchy_setup_globals() {
 	/* Register this in the active components array */
 	$bp->active_components[$bp->group_hierarchy->slug] = $bp->group_hierarchy->id;
 	
-	do_action('bp_group_hierarchy_globals_loaded');
+	do_action( 'bp_group_hierarchy_globals_loaded' );
 }
 
 /**
@@ -42,15 +42,15 @@ function bp_group_hierarchy_init() {
 /**
  * Add hook for intercepting requests before they're routed by normal BP processes
  */
-function bp_group_hierarchy_override_routing() {
+function bp_group_hierarchy_load_components() {
 
 	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-functions.php' );
 	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-classes.php' );
 	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-template.php' );
 
-	if( is_admin() )	return;
+	if( is_admin() && ! strpos( admin_url('admin-ajax.php'), $_SERVER['REQUEST_URI'] ) ) return;
 	
-	do_action( 'bp_group_hierarchy_route_requests' );
+	do_action( 'bp_group_hierarchy_components_loaded' );
 }
 
 function bp_group_hierarchy_load_translations() {

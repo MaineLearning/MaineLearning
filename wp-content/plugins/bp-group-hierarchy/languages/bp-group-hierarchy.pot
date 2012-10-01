@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-hierarchy\n"
-"POT-Creation-Date: 2012-08-21 03:04:26+00:00\n"
+"POT-Creation-Date: 2012-10-01 00:26:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Invites"
 msgstr ""
 
-#: bp-group-hierarchy-widgets.php:14 extension.php:796
+#: bp-group-hierarchy-widgets.php:14 extension.php:808
 msgid "Toplevel Groups"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgid "created %s"
 msgstr ""
 
 #: bp-group-hierarchy-widgets.php:48 bp-group-hierarchy-widgets.php:162
-#: extension.php:368 templates/tree/tree-loop.php:54
+#: extension.php:381 templates/tree/tree-loop.php:54
 msgid "active %s"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgid ""
 msgstr ""
 
 #: bp-group-hierarchy-widgets.php:197 extension.php:165 extension.php:166
-#: extension.php:259 extension.php:260 extension.php:768
+#: extension.php:272 extension.php:273 extension.php:780
 msgid "Member Groups"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Title when on a group page:"
 msgstr ""
 
-#: extension.php:32 extension.php:852
+#: extension.php:32 extension.php:864
 msgid "Group Hierarchy"
 msgstr ""
 
@@ -157,104 +157,104 @@ msgstr ""
 msgid "only Group Admins"
 msgstr ""
 
-#: extension.php:103 extension.php:143 extension.php:229
+#: extension.php:103 extension.php:143 extension.php:242
 msgid "Parent Group"
 msgstr ""
 
-#: extension.php:128 extension.php:145 extension.php:214
+#: extension.php:128 extension.php:145 extension.php:227
 msgid "Site Root"
 msgstr ""
 
-#: extension.php:166 extension.php:260
+#: extension.php:166 extension.php:273
 msgid "Allow %1$s to create %2$s"
 msgstr ""
 
-#: extension.php:239
+#: extension.php:252
 msgid "Only a site administrator can edit the group hierarchy."
 msgstr ""
 
-#: extension.php:263 extension.php:829
+#: extension.php:276 extension.php:841
 msgid "Save Changes"
 msgstr ""
 
-#: extension.php:302
+#: extension.php:315
 msgid "There was an error saving; please try again."
 msgstr ""
 
-#: extension.php:304
+#: extension.php:317
 msgid "Group hierarchy settings saved successfully."
 msgstr ""
 
-#: extension.php:341
+#: extension.php:354
 msgid "Create a %s"
 msgstr ""
 
-#: extension.php:341
+#: extension.php:354
 msgid "Member Group"
 msgstr ""
 
-#: extension.php:403
+#: extension.php:416
 msgid "No member groups were found."
 msgstr ""
 
-#: extension.php:695 extension.php:725
+#: extension.php:707 extension.php:737
 msgid "Sorry, you are not allowed to create groups."
 msgstr ""
 
-#: extension.php:767 extension.php:822 extension.php:868
+#: extension.php:779 extension.php:834 extension.php:880
 msgid "Group Tree"
 msgstr ""
 
-#: extension.php:772
+#: extension.php:784
 msgid "Settings saved."
 msgstr ""
 
-#: extension.php:773
+#: extension.php:785
 msgid "Group Hierarchy Settings"
 msgstr ""
 
-#: extension.php:778
+#: extension.php:790
 msgid "Show Group Tree"
 msgstr ""
 
-#: extension.php:782
+#: extension.php:794
 msgid ""
 "Show the Group Tree view on the Groups page along with the flat list of "
 "groups."
 msgstr ""
 
-#: extension.php:787
+#: extension.php:799
 msgid "Hide Group List"
 msgstr ""
 
-#: extension.php:791
+#: extension.php:803
 msgid ""
 "Hide the flat list of groups and show ONLY the Group Tree on the Groups page"
 msgstr ""
 
-#: extension.php:806
+#: extension.php:818
 msgid ""
 "Select who is allowed to create toplevel groups. Super admins can always "
 "create toplevel groups."
 msgstr ""
 
-#: extension.php:814
+#: extension.php:826
 msgid "Nav Item"
 msgstr ""
 
-#: extension.php:817
+#: extension.php:829
 msgid "Name of the nav item on an individual group's page."
 msgstr ""
 
-#: extension.php:818
+#: extension.php:830
 msgid "Use <code>%d</code> to include the number of child groups."
 msgstr ""
 
-#: extension.php:825
+#: extension.php:837
 msgid "Name of the Group Tree listing on the main Groups page."
 msgstr ""
 
-#: extension.php:867
+#: extension.php:879
 msgid "Member Groups (%d)"
 msgstr ""
 

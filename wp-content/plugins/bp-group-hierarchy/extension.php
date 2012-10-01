@@ -434,17 +434,16 @@ bp_register_group_extension( 'BP_Groups_Hierarchy_Extension' );
  * Store the ID of the group the user selected as the parent for group creation
  */
 function bp_group_hierarchy_set_parent_id_cookie() {
-	global $current_component, $current_action, $action_variables, $bp;
+	global $bp;
 	
-	/** BP 1.5 compatibility */
-	if(!isset($current_component)) {
-		bp_core_set_uri_globals();
-		$current_component = $bp->current_component;
-		$current_action = $bp->current_action;
-	}
-
-	if(bp_is_groups_component() && $current_action == 'create' && isset($_REQUEST['parent_id']) && $_REQUEST['parent_id'] != 0) {
-		setcookie( 'bp_new_group_parent_id', (int)$_REQUEST['parent_id'], time() + 1000, COOKIEPATH );
+	if( bp_is_groups_component() && $bp->current_action == 'create' && isset( $_REQUEST['parent_id'] ) && $_REQUEST['parent_id'] != 0 ) {
+		
+		if( bp_group_hierarchy_can_create_subgroups( $bp->loggedin_user->id, (int)$_REQUEST['parent_id'] ) ) {
+			setcookie( 'bp_new_group_parent_id', (int)$_REQUEST['parent_id'], time() + 1000, COOKIEPATH );
+		} else {
+			do_action( 'bp_group_hierarchy_unauthorized_parent', (int)$_REQUEST['parent_id'] );
+		}
+		
 	}
 }
 add_action( 'bp_group_hierarchy_route_requests', 'bp_group_hierarchy_set_parent_id_cookie' );
@@ -881,7 +880,7 @@ function bp_group_hierarchy_extension_init() {
 		'group_tree_name'	=> get_site_option( 'bpgh_extension_group_tree_name', __('Group Tree','bp-group-hierarchy') )
 	);
 
-	wp_register_script('bp-group-hierarchy-tree-script', WP_PLUGIN_URL .'/bp-group-hierarchy/includes/hierarchy.js', array('jquery'));
+	wp_register_script( 'bp-group-hierarchy-tree-script', plugins_url( 'includes/hierarchy.js', __FILE__ ), array('jquery') );
 	
 	/** Load the hierarchy.css file from the user's theme, if available */
 	if( $hierarchy_css = apply_filters( 'bp_located_template', locate_template( array( '_inc/css/hierarchy.css' ), false ), '_inc/css/hierarchy.css' ) ) {
