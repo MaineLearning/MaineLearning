@@ -8,8 +8,7 @@ class bebop_tables {
 		global $wpdb;
 		
 		if ( $wpdb->get_results( 'TRUNCATE TABLE ' . bp_core_get_table_prefix() . $table_name ) ) {
-			//if we get results, something has gone wrong...
-			bebop_tables::log_error( 'Table Truncate remove_username_from_provider', 'Could not empty the $table_name table.' );
+			bebop_tables::log_error( __( 'Table Truncate error', 'bebop' ), sprintf( __( 'Could not empty the %1$s table.', 'bebop'), $table_name ) );
 			return false;
 		}
 		else {
@@ -24,7 +23,7 @@ class bebop_tables {
 		return $count;
 	}
 	
-	function count_oers_by_extension( $extension, $status ) {
+	function count_content_by_extension( $extension, $status ) {
 		global $wpdb;
 
 		$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE type = '" . $wpdb->escape( $extension ) . "' AND status = '" . $wpdb->escape( $status ) . "'" ) );
@@ -59,20 +58,9 @@ class bebop_tables {
 	function remove_user_from_provider( $user_id, $provider ) {
 		global $wpdb, $bp;
 		
-		if ( ( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta  WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_type LIKE '%" . $wpdb->escape( $provider ) . "%'" ) ) || 
-		( $wpdb->get_results( 'DELETE FROM ' . $bp->activity->table_name . " WHERE component = 'bebop_oer_plugin' AND type LIKE '%" . $wpdb->escape( $provider ) . "%'" ) ) ||
-		( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND type LIKE '%" . $wpdb->escape( $provider ) . "%'" ) ) ) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	function remove_username_from_provider( $user_id, $provider, $username ) {
-		global $wpdb, $bp;
-		$like_search = $provider . '_' . $username;
-		if ( ( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name LIKE '%" . $wpdb->escape( $like_search ) . "%'" ) ) || 
-		( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_type = '" . $wpdb->escape( $provider ) . "' AND meta_value = '" . $wpdb->escape( $username ) . "'" ) ) ) {
+		if ( ( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta  WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_type LIKE '%" . like_escape( $provider ) . "%'" ) ) || 
+		( $wpdb->get_results( 'DELETE FROM ' . $bp->activity->table_name . " WHERE component = 'bebop_oer_plugin' AND type LIKE '%" . like_escape( $provider ) . "%'" ) ) ||
+		( $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND type LIKE '%" . like_escape( $provider ) . "%'" ) ) ) {
 			return true;
 		}
 		else {
@@ -83,7 +71,7 @@ class bebop_tables {
 	function bebop_check_existing_content_buffer( $user_id, $extension, $content ) {
 		global $wpdb;
 		$content = strip_tags( $content );
-		$content = trim( $content );
+		$content = like_escape( $content );
 		
 		if ( $wpdb->get_row( 'SELECT content FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager user_id = '" . $wpdb->escape( $user_id ) . "' AND type = '" . $wpdb->escape( $extension ) . "' AND content LIKE '%" . $content . "%'" ) ) {
 			return true;
@@ -100,7 +88,7 @@ class bebop_tables {
 		return $result;
 	}
 	 
-	 function admin_fetch_oer_data( $status, $limit = null ) { //function to retrieve all oer data by status in the oer manager table.
+	 function admin_fetch_content_data( $status, $limit = null ) { //function to retrieve all oer data by status in the oer manager table.
 		global $wpdb;
 		
 		if ( $limit != null ) {
@@ -165,14 +153,14 @@ class bebop_tables {
 			return true;
 		}
 		else {
-			bebop_tables::log_error( 'bebop_option_error', "option: '" . $option_name . "' already exists." );
+			bebop_tables::log_error( __( 'bebop_option_error', 'bebop' ), sprintf( __( 'option: %1$s already exists.', 'bebop'), $option_name ) );
 			return false;
 		}
 	}
 	
 	function check_option_exists( $option_name ) { //function to chech whether an option exists in the options table.
 		global $wpdb;
-		$result = $wpdb->get_row( 'SELECT option_name FROM ' . bp_core_get_table_prefix() . "bp_bebop_options WHERE option_name = '" . $wpdb->escape( $option_name ) . "' LIMIT 1" );
+		$result = $wpdb->get_row( 'SELECT option_name FROM ' . bp_core_get_table_prefix() . "bp_bebop_options WHERE option_name = '" . $wpdb->escape( $option_name ) . "'" );
 		if ( ! empty( $result->option_name ) ) {
 			return true;
 		}
@@ -183,8 +171,12 @@ class bebop_tables {
 	
 	function get_option_value( $option_name ) { //function to get an option from the options table.
 		global $wpdb;
-		$result = $wpdb->get_row( 'SELECT option_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_options WHERE option_name = '" . $wpdb->escape( $option_name ) . "' LIMIT 1" );
-		if ( ! empty( $result->option_value ) ) {
+		$result = $wpdb->get_row( 'SELECT option_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_options WHERE option_name = '" . $wpdb->escape( $option_name ) . "'" );
+		
+		if ( isset( $result->option_value ) && is_numeric( $result->option_value ) ) {
+				return $result->option_value;
+			}
+		else if ( ! empty($result->option_value ) ) {
 			return $result->option_value;
 		}
 		else {
@@ -194,7 +186,6 @@ class bebop_tables {
 	
 	function update_option( $option_name, $option_value ) { //function to update an option in the options table.
 		global $wpdb;
-		
 		if ( bebop_tables::check_option_exists( $option_name ) == true ) {
 			$result = $wpdb->query( 'UPDATE ' . bp_core_get_table_prefix() . "bp_bebop_options SET option_value = '"  . $wpdb->escape( $option_value ) . "' WHERE option_name = '" . $wpdb->escape( $option_name ) . "' LIMIT 1" );
 			if ( ! empty( $result ) ) {
@@ -214,11 +205,11 @@ class bebop_tables {
 		global $wpdb;
 		
 		if ( bebop_tables::check_option_exists( $option_name ) == true ) {
-			$wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_options  WHERE option_name = '" . $wpdb->escape( $option_name ) . "' LIMIT 1" );
+			$wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_options WHERE option_name = '" . $wpdb->escape( $option_name ) . "' LIMIT 1" );
 			return true;
 		}
 		else {
-			bebop_tables::log_error( 'bebop_option_error', "option: '" . $option_name . "' does not exist." );
+			bebop_tables::log_error( __( 'bebop_option_error', 'bebop' ),  sprintf( __( 'option: %1$s does not exist.', 'bebop'), $option_name ) );
 			return false;
 		}
 	}
@@ -229,8 +220,8 @@ class bebop_tables {
 	
 	function check_user_meta_exists( $user_id, $meta_name ) { //function to check if user meta name exists in the user_meta table.
 		global $wpdb;
-		$result = $wpdb->get_row( 'SELECT meta_name FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' LIMIT 1" );
-		
+		$meta_name = addslashes( $meta_name );
+		$result = $wpdb->get_row( 'SELECT meta_name FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "'" );
 		if ( ! empty( $result->meta_name ) ) {
 			return true;
 		}
@@ -238,9 +229,9 @@ class bebop_tables {
 			return false;
 		}
 	}
-	function check_user_meta_value_exists( $user_id, $meta_name, $meta_value ) { //function to check if user meta value aready exists for a user and an extension. THis is usd for adding multiple feeds.
+	function check_user_meta_value_exists( $user_id, $meta_name, $meta_value ) { //function to check if user meta value aready exists for a user and an extension. This is used for adding multiple feeds.
 		global $wpdb;
-		$result = $wpdb->get_row( 'SELECT meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' AND meta_value = '" . $wpdb->escape( $meta_value ) . "' LIMIT 1" );
+		$result = $wpdb->get_row( 'SELECT meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' AND meta_value = '" . $wpdb->escape( $meta_value ) . "'" );
 		
 		if ( ! empty( $result->meta_value ) ) {
 			return true;
@@ -267,11 +258,24 @@ class bebop_tables {
 		}
 		return $return;
 	}
+	
 	function get_user_meta_value( $user_id, $meta_name ) {//function to get user meta from the user_meta table.
 		global $wpdb;
-		$result = $wpdb->get_row( 'SELECT meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' LIMIT 1" );
-		if ( ! empty( $result->meta_value ) ) {
-			return $result->meta_value;
+		
+		$meta_name = str_replace( "'", "\\\\\'", $meta_name );
+		$result = $wpdb->get_row( 'SELECT meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $meta_name . "'" );
+		
+		if( ! empty( $result ) ) {
+			
+			if ( is_numeric(  $result->meta_value ) ) {
+				return $result->meta_value;
+			}
+			else if ( ! empty($result->meta_value ) ) {
+				return $result->meta_value;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
 			return false;
@@ -312,9 +316,10 @@ class bebop_tables {
 	
 	function update_user_meta( $user_id, $meta_type, $meta_name, $meta_value ) { //function to update user meta in the user_meta table.
 		global $wpdb;
-		
 		if ( bebop_tables::check_user_meta_exists( $user_id, $meta_name ) == true ) {
-			$result = $wpdb->query( 'UPDATE ' . bp_core_get_table_prefix() . "bp_bebop_user_meta SET meta_value = '"  . $wpdb->escape( $meta_value ) . "' WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' LIMIT 1" );
+			
+			$meta_name = str_replace( "'", "\\\\\'", $meta_name ); //damn quotes.
+			$result = $wpdb->query( 'UPDATE ' . bp_core_get_table_prefix() . "bp_bebop_user_meta SET meta_value = '"  . $wpdb->escape( $meta_value ) . "' WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $meta_name . "' LIMIT 1" );
 			if ( ! empty( $result ) ) {
 				return $result;
 			}
@@ -324,15 +329,33 @@ class bebop_tables {
 		}
 		else {
 			bebop_tables::add_user_meta( $user_id, $meta_type, $meta_name, $meta_value );
-			bebop_tables::update_user_meta( $user_id, $meta_type, $meta_name, $meta_value );
+			return false;
 		}
 	}
 	
 	function remove_user_meta( $user_id, $meta_name ) { //function to remove user meta from the user_meta table.
 		global $wpdb;
-		
 		if ( bebop_tables::check_user_meta_exists( $user_id, $meta_name ) == true ) {
-			$wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta  WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' LIMIT 1" );
+			$meta_name = addslashes( $meta_name );
+			$results = $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_name = '" . $wpdb->escape( $meta_name ) . "' LIMIT 1" );
+			if ( mysql_affected_rows() > 0 ) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	
+	function remove_user_meta_value( $user_id, $meta_value ) { //function to remove user meta value from the user_meta table.
+		global $wpdb;
+		
+		$meta_value = addslashes( $meta_value );
+		$results = $wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND meta_value = '" . $wpdb->escape( $meta_value ) . "' LIMIT 1" );
+		if ( mysql_affected_rows() > 0 ) {
 			return true;
 		}
 		else {
@@ -342,8 +365,8 @@ class bebop_tables {
 	
 	function get_user_feeds( $user_id, $provider ) {
 		global $wpdb;
-		$results = $wpdb->get_results( 'SELECT meta_name, meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE meta_type LIKE '%" . $wpdb->escape( $provider ) . "%' AND user_id = '" . $wpdb->escape( $user_id ) . "'" );
-		//filter out meta we do not want.
+		$results = $wpdb->get_results( 'SELECT meta_name, meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE meta_type LIKE '%" . like_escape( $provider ) . "%' AND user_id = '" . $wpdb->escape( $user_id ) . "'" );
+		//filter out data we do not want.
 		$blacklist = array( 'active', 'counter' );
 		$return = array();
 		
@@ -359,7 +382,84 @@ class bebop_tables {
 				$return[] = $result;
 			}
 		}
-	return $return;
+		return $return;
+	}
+
+	function get_user_feeds_from_array( $user_id, $provider, $feeds ) {
+		global $wpdb;
+		if ( is_array( $feeds ) ) {
+			$return = array();
+			foreach ( $feeds as $feed ) {
+				$feed = addslashes( $feed ) ;
+				$results = $wpdb->get_row( 'SELECT meta_name, meta_value FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE user_id = '" . $wpdb->escape( $user_id ) .
+				"' AND meta_type = '" . $wpdb->escape( $provider . '_' . $feed ) .
+				"' AND meta_name = '" . $wpdb->escape( $feed ) . "'" );
+				$return[] = $results;
+			}
+			return $return;
+		}
+		return false;
+	}
+
+	
+	function add_to_first_importers_list( $user_id, $extension, $name, $value = null ) {
+		global $wpdb;
+		if ( empty( $value ) ) {
+			$wpdb->query(
+									$wpdb->prepare(
+													'INSERT INTO ' . bp_core_get_table_prefix() . 'bp_bebop_first_imports (user_id, extension, name) VALUES (%s, %s, %s)',
+													$wpdb->escape( $user_id ), $wpdb->escape( $extension ), $wpdb->escape( $name )
+									)
+					);
+			return true;
+		}
+		else {
+			$wpdb->query(
+									$wpdb->prepare(
+													'INSERT INTO ' . bp_core_get_table_prefix() . 'bp_bebop_first_imports (user_id, extension, name, value) VALUES (%s, %s, %s, %s)',
+													$wpdb->escape( $user_id ), $wpdb->escape( $extension ), $wpdb->escape( $name ), $wpdb->escape( $value )
+									)
+					);
+			return true;
+			
+		}
+	}
+	function delete_from_first_importers( $user_id, $extension, $name ) {
+		global $wpdb;
+		$name = addslashes( $name );
+		$wpdb->get_results( 'DELETE FROM ' . bp_core_get_table_prefix() . "bp_bebop_first_imports WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND extension = '" . $wpdb->escape( $extension ) . "' 
+		AND name = '" . $wpdb->escape( $name ) . "' LIMIT 1" );
+		return true;
+	}
+	
+	function get_first_importers_by_extension( $extension ) {
+		global $wpdb;
+		$results = $wpdb->get_results( 'SELECT user_id FROM ' . bp_core_get_table_prefix() . "bp_bebop_first_imports WHERE extension = '" . $wpdb->escape( $extension ) ."'" );
+		return $results;
+	}
+	
+	function check_for_first_import( $user_id, $extension, $name ) {
+		global $wpdb;
+		$name = addslashes( $name );
+		$results =  $wpdb->get_results( 'SELECT name FROM ' . bp_core_get_table_prefix() . "bp_bebop_first_imports WHERE user_id = '" . $wpdb->escape( $user_id ) ."' AND extension = '" . $wpdb->escape( $extension ) . 
+		"' AND name = '" . $wpdb->escape( $name ) ."'" );
+		
+		if ( ! empty( $results ) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	function get_initial_import_feeds( $user_id, $extension ) {
+		global $wpdb;
+		$return = array();
+		$results = $wpdb->get_results( 'SELECT value FROM ' . bp_core_get_table_prefix() . "bp_bebop_first_imports WHERE user_id = '" . $wpdb->escape( $user_id ) ."' AND extension = '" . $wpdb->escape( $extension ) . "'" );
+		foreach ( $results as $result ) {
+			$return[] = bebop_tables::sanitise_element( $result->value );
+		}
+		return $return;
 	}
 	
 	function sanitise_element( $data, $allow_tags = null ) {

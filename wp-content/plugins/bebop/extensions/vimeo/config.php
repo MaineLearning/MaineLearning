@@ -9,7 +9,7 @@ function get_vimeo_config() {
 		'pages'					=> array( 'settings', ),
 		'defaultpage'			=> 'settings',
 		'data_feed' 			=> 'http://vimeo.com/api/v2/',
-		'content_type' 			=> 'Vimeo video',
+		'content_type' 			=> __( 'Vimeo video', 'bebop' ),
 		'content_oembed' 		=> true,
 	);
 	return $config;

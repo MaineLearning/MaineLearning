@@ -9,7 +9,7 @@ function get_flickr_config() {
 		'pages'					=> array( 'settings', ),
 		'defaultpage'			=> 'settings',
 		'data_feed' 			=> 'http://api.flickr.com/services/rest/',
-		'content_type' 			=> 'Flickr photo',
+		'content_type' 			=> __( 'Flickr photo', 'bebop' ),
 		'content_oembed' 		=> true,
 		'action_link' 		=> 'http://www.flickr.com/photos/',
 	);

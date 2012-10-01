@@ -7,11 +7,11 @@ add_action( 'bp_actions', 'bebop_feeds' );
 function bebop_feeds() {
 	global $bp, $wp_query, $this_bp_feed;
 	if ( bp_is_activity_component() && bp_displayed_user_id() ) {
-		$active_extensions = bebop_extensions::get_active_extension_names();
+		$active_extensions = bebop_extensions::bebop_get_active_extension_names();
 		$active_extensions[] = 'all_oers';
 		foreach ( $active_extensions as $extension ) {
 			if ( bp_current_action() == $extension ) {
-				 if ( $extension = 'all_oers' ) {
+				 if ( $extension == 'all_oers' ) {
 				 	$this_bp_feed = $extension;
 				 }
 				 else if ( bebop_tables::check_option_exists( 'bebop_' . $extension . '_rss_feed' ) ) {
@@ -34,7 +34,7 @@ function bebop_feeds() {
 }
 
 function bebop_feed_url() {
-	echo bebop_get_feed_url();
+	return bebop_get_feed_url();
 }
 function bebop_get_feed_url() {
 	global $this_bp_feed;
@@ -47,7 +47,7 @@ function bebop_get_feed_url() {
 }
 
 function bebop_feed_type() {
-	echo bebop_get_feed_type();
+	return bebop_get_feed_type();
 }
 function bebop_get_feed_type() {
 	global $this_bp_feed;
@@ -61,7 +61,7 @@ function bebop_get_feed_type() {
 }
 
 function bebop_feed_description() {
-	echo bebop_get_feed_description();
+	return bebop_get_feed_description();
 }
 function bebop_get_feed_description() {
 	global $this_bp_feed;
@@ -74,7 +74,7 @@ function bebop_get_feed_description() {
 }
 
 function bebop_activity_args() {
-	echo bebop_get_activity_args();
+	return bebop_get_activity_args();
 }
 function bebop_get_activity_args() {
 	global $bp, $this_bp_feed;
@@ -114,7 +114,12 @@ function bebop_get_activity_args() {
 				}
 			}
 			if ( ! empty( $import_feeds ) ) {
-				$query_feeds = implode( ',', $import_feeds );
+				if ( count( $import_feeds ) >= 2 ) {
+					$query_feeds = implode( ',', $import_feeds );
+				}
+				else {
+					$query_feeds = $import_feeds;
+				}
 				return 'user_id=' . bp_displayed_user_id() . '&object=bebop_oer_plugin&action=' . $query_feeds . '&max=' . $limit . '&display_comments=stream&';
 			}
 		}

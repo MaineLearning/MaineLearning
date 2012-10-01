@@ -11,7 +11,7 @@ function get_youtube_config() {
 		'defaultpage'		=> 'settings',
 		'data_feed' 		=> 'http://gdata.youtube.com/feeds/api/users/bebop_replace_username/uploads',
 		'sanitise_url'		=> array ( '&feature', '&amp;feature' ),		//remove unwanted/unneeded paremeters from a feed.
-		'content_type'	 	=> 'YouTube video',
+		'content_type'	 	=> __( 'YouTube video', 'bebop' ),
 		'content_oembed'	=> true,
 		'action_link' 		=> 'http://www.youtube.com/watch?v=',
 	);

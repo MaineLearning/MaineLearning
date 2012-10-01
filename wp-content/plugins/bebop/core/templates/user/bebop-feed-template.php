@@ -19,13 +19,13 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'" ?'.'>';
 >
 
 <channel>
-	<title><?php bebop_feed_type(); ?></title>
+	<title><?php echo bebop_feed_type(); ?></title>
 	<atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml" />
-	<link><?php bebop_feed_url() ?></link>
-	<description><?php bebop_feed_description() ?></description>
+	<link><?php echo bebop_feed_url() ?></link>
+	<description><?php echo bebop_feed_description() ?></description>
 	<pubDate><?php echo mysql2date( 'D, d M Y H:i:s O', bp_activity_get_last_updated(), false ); ?></pubDate>
 	<generator>http://buddypress.org/?v=<?php echo BP_VERSION ?></generator>
-	<language>en-uk</language>
+	<language>en_US</language>
 	<?php do_action( 'bp_activity_personal_comment_feed_head' ); ?>
 	
 	<?php
@@ -45,7 +45,7 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'" ?'.'>';
 				<?php 
 				}
 				if ( 'activity_comment' == bp_get_activity_action_name() ) { ?>
-				<br /><strong><?php _e( 'In reply to', 'buddypress' ) ?></strong> - 
+				<br /><strong><?php _e( 'In reply to', 'buddypress' ); ?></strong> - 
 				<?php bp_activity_parent_content();
 				}
 			?>]]></description>
@@ -56,7 +56,8 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'" ?'.'>';
 	}
 	else
 	{
-		echo 'no \'' .  bebop_feed_type() . '\' data found.';
+		echo 'no "' .  bebop_get_feed_type() . '" data found.';
+		echo "\r";
 	}
 	?>
 </channel>

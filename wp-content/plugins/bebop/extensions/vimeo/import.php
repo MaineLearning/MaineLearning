@@ -5,33 +5,58 @@
  */
 
 //replace 'slideshare' with the 'name' of your extension, as defined in your config.php file.
-function bebop_vimeo_import( $extension ) {
+function bebop_vimeo_import( $extension, $user_metas = null ) {
 	global $wpdb, $bp;
+	$itemCounter = 0;
+	
 	if ( empty( $extension ) ) {
 		bebop_tables::log_general( 'Importer', 'The $extension parameter is empty.' );
 		return false;
 	}
 	else {
-		$this_extension = bebop_extensions::get_extension_config_by_name( $extension );
+		$this_extension = bebop_extensions::bebop_get_extension_config_by_name( $extension );
 	}
 	
-	//item counter for in the logs
-	$itemCounter = 0;
-	$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
-	if ( $user_metas ) {
+	//if user_metas is not defined, get some user meta.
+	if( ! isset( $user_metas ) ) {
+		$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
+	}
+	else {
+		$secondary_importers = true;
+	}
+
+	if ( isset( $user_metas ) ) {
 		foreach ( $user_metas as $user_meta ) {
 			//Ensure the user is currently wanting to import items.
 			if ( bebop_tables::get_user_meta_value( $user_meta->user_id, 'bebop_' . $this_extension['name'] . '_active_for_user' ) == 1 ) {
-				$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name']);
+				
+				if ( isset( $secondary_importers ) && $secondary_importers === true ) {
+					$user_feeds = bebop_tables::get_initial_import_feeds( $user_meta->user_id , $this_extension['name'] );
+				}
+				else {
+					$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name'] );
+				}
+				
 				foreach ($user_feeds as $user_feed ) {
 					$errors = null;
 					$items 	= null;
 					
-					$username = $user_feed->meta_value;
+					//extract the username as appropriate
+					if ( isset( $secondary_importers ) && $secondary_importers === true ) {
+						$username = $user_feed;
+					}
+					else {
+						$username = $user_feed->meta_value;
+					}
 					
 					$import_username = str_replace( ' ', '_', $username );
 					//Check the user has not gone past their import limit for the day.
 					if ( ! bebop_filters::import_limit_reached( $this_extension['name'], $user_meta->user_id, $import_username ) ) {
+						
+						if ( bebop_tables::check_for_first_import( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' ) ) {
+							bebop_tables::delete_from_first_importers( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' );
+						}
+						
 						/* 
 						 * ******************************************************************************************************************
 						 * Depending on the data source, you will need to switch how the data is retrieved. If the feed is RSS, use the 	*

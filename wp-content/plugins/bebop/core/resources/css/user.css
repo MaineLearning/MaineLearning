@@ -1,12 +1,8 @@
 #bebop_user_container {
 	min-height:200px;
 	width:100%;
-	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
 	border:0px solid #00FF00;
 	margin:0 auto;
-}
-#bebop_user_container a, #bebop_user_container a:hover {
-	color:#000000;
 }
 #bebop_user_container h3, #bebop_user_container h4 {
 	padding:0px;
@@ -22,7 +18,6 @@
 .standard_button {
 	float:left;
 	display:inline-block;
-	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
 	font-size:15px;
 	margin:0px auto 10px auto;
 	padding:10px;
@@ -49,7 +44,8 @@
 	border:1px solid #1E90FF;
 	color:#FFFFFF !important;
 }
-.standard_button:hover, .provider_button:hover {
+.standard_button:hover,
+.provider_button:hover {
 	background-image:linear-gradient(bottom, #FFD492 50%, #FFFACD 50%);
 	background-image:-o-linear-gradient(bottom, #FBEC5D 50%, #FFFACD 50%);
 	background-image:-moz-linear-gradient(bottom, #FBEC5D 50%, #FFFACD 50%);
@@ -58,6 +54,7 @@
 	background-image:-ms-linear-gradient(bottom, #FBEC5D 50%, #FFFACD 50%); 
 	color:#000000 !important;
 	border:1px solid #FFFACD !important;
+	text-decoration:none;
 }
 .button_container:active {
 	padding-top:4px;
@@ -67,7 +64,6 @@
 	margin-top:20px;
 }
 .bebop_user_form {
-	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
 	width:100%;
 	font-size:12px;
 	margin:0 auto;
@@ -97,7 +93,6 @@
 	margin:2px auto;
 }
 .bebop_user_table {
-	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
 	width:100%;
 	font-size:12px;
 	margin:0 auto;
@@ -140,4 +135,9 @@
 	float:right;
 	margin-right:0;
 	margin-left:15px;
+}
+
+.rss_feed_container {
+	float:left;
+	max-width:82.5%;
 }

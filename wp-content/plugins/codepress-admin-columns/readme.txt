@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.1
-Tested up to: 3.4
-Stable tag: 1.4.6.3
+Tested up to: 3.4.2
+Stable tag: 1.4.6.4
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -36,6 +36,7 @@ The following custom columns are added:
 * Number of Attachments
 * Last Modified 
 * Comment count
+* Before More Tag Content
 * Custom Fields
 
 = User Columns =
@@ -168,7 +169,8 @@ add_filter('cpac_thumbnail_size', function() {
 ?>
 `
 
-**my already uploaded images have a wrong size**
+**my columns thumbnails still have the wrong size**
+
 If you want your already uploaded images to display the newly added size you will need to regenerate the thumbnail for them. Use this plugin to generate the newly added sized thumbnails: http://wordpress.org/extend/plugins/regenerate-thumbnails/.
 
 = How can I enable the use of Hidden Custom Fields? =
@@ -201,7 +203,7 @@ With this filter 'cpac_get_column_value_custom_field' you can control what the v
 
 Filter explained:
 
-* **$value** is the orgignal value which would otherwise be displayed
+* **$value** is the original value which would otherwise be displayed
 * **$internal_field_key** is only used internally to store the column
 * **$custom_field** is the name of your custom field
 * **$type** will return either the posttype or if it is any other type it will return wp-comments, wp-links, wp-users, wp-media.
@@ -231,7 +233,6 @@ add_filter( 'cpac_get_column_value_custom_field', 'my_custom_field_value', 10, 5
 ?>
 `
 
-
 == Screenshots ==
 
 1. Settings page for Post(type) columns.
@@ -243,6 +244,11 @@ add_filter( 'cpac_get_column_value_custom_field', 'my_custom_field_value', 10, 5
 7. Settings page showing the different displaying types for custom field.
 
 == Changelog ==
+
+= 1.4.6.4 =
+* Added 'before more tag' column, which will show the content which is placed before the more-tag
+* bug fix: file images will now also be displayed when they can not be resized.
+* bug fix: the checkbox disappeared when resetting columns and resaving them.
 
 = 1.4.6.3 =
 

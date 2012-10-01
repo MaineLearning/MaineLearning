@@ -5,33 +5,54 @@
  */
 
 //replace 'feed' with the 'name' of your extension, as defined in your config.php file.
-function bebop_feed_import( $extension ) {
+function bebop_rss_import( $extension, $user_metas = null ) {
 	global $wpdb, $bp;
+	
+	$itemCounter = 0;
+	
 	if ( empty( $extension ) ) {
 		bebop_tables::log_general( 'Importer', 'The $extension parameter is empty.' );
 		return false;
 	}
 	else {
-		$this_extension = bebop_extensions::get_extension_config_by_name( $extension );
+		$this_extension = bebop_extensions::bebop_get_extension_config_by_name( $extension );
 	}
 	require_once (ABSPATH . WPINC . '/class-feed.php');
-	$itemCounter = 0;
-	$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
-	if ( $user_metas ) {
+	
+	//if user_metas is not defined, get some user meta.
+	if( ! isset( $user_metas ) ) {
+		$user_metas = bebop_tables::get_user_ids_from_meta_type( $this_extension['name'] );
+	}
+	else {
+		$secondary_importers = true;
+	}
+
+	if ( isset( $user_metas ) ) {
 		foreach ( $user_metas as $user_meta ) {
 			//Ensure the user is wanting to import items.
 			if ( bebop_tables::get_user_meta_value( $user_meta->user_id, 'bebop_' . $this_extension['name'] . '_active_for_user' ) ) {
-				$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name']);
+				
+				if ( isset( $secondary_importers ) && $secondary_importers === true ) {
+					$feeds = bebop_tables::get_initial_import_feeds( $user_meta->user_id , $this_extension['name'] );
+					$user_feeds = bebop_tables::get_user_feeds_from_array( $user_meta->user_id , $this_extension['name'], $feeds );
+				}
+				else {
+					$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name'] );
+				}
 				foreach ($user_feeds as $user_feed ) {
 					$errors = null;
 					$items 	= null;
 					
 					$feed_name = $user_feed->meta_name;
 					$feed_url = $user_feed->meta_value;
+					$import_username = stripslashes( $feed_name );
 					
-					$import_username = str_replace( ' ', '_', $feed_name );
 					//Check the user has not gone past their import limit for the day.
 					if ( ! bebop_filters::import_limit_reached( $this_extension['name'], $user_meta->user_id, $import_username ) ) {
+						
+						if ( bebop_tables::check_for_first_import( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' ) ) {
+							bebop_tables::delete_from_first_importers( $user_meta->user_id, $this_extension['name'], 'bebop_' . $this_extension['name'] . '_' . $import_username . '_do_initial_import' );
+						}
 						
 						/* 
 						 * ******************************************************************************************************************
@@ -125,7 +146,7 @@ function bebop_feed_import( $extension ) {
 							}
 						}
 						else {
-							bebop_tables::log_error( 'Importer - ' . ucfirst( $this_extension['name'] ), 'feed error: ' . $errors );
+							bebop_tables::log_error( sprintf( __( 'Importer - %1$s', 'bebop' ), $this_extension['display_name'] ), sprintf( __( 'RSS Error: %1$s', 'bebop' ), $errors ) );
 						}
 					}
 				}//End foreach ($user_feeds as $user_feed ) {
