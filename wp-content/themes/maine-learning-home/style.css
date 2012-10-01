@@ -252,6 +252,12 @@ ul#nav
 	text-transform: none;
 }
 
+#nav > li > ul.sub-menu
+{
+	background: #444;
+	width: 150px;
+}
+
 #nav li li { width: 150px !important; }
 div#content .padder { border-right: 0px solid #fff; }
 
@@ -537,7 +543,8 @@ div.activity-meta { clear: right; }
 	text-decoration: none;
 }
 
-.bpm-inner-text {
+.bpm-inner-text
+{
 	font-size: 11px !important;
 	margin: 3px 0 0 2px !important;
 	text-decoration: none;
@@ -591,7 +598,7 @@ BUDDYPRESS PANELS: ITEMS
 
 #item-body div.pagination
 {
-	margin: 0;
+	margin: 0px -19px 0px -19px;
 	width: 50%;
 }
 
