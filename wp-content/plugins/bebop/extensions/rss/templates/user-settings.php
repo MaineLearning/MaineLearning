@@ -20,12 +20,12 @@ $extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $
 $active = 'bebop_' . $extension['name'] . '_active_for_user';																//the active boolean name
 $$active = bebop_tables::get_user_meta_value( $bp->loggedin_user->id, 'bebop_' . $extension['name'] . '_active_for_user' );	//the value of the boolean
 
-if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on') && ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' ) ) ) {
+if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on' ) {
 	echo '<h5>' . sprintf( __( '%1$s Settings', 'bebop' ), $extension['display_name'] ) . '</h5>
 	<p>' . sprintf( __( 'Generic settings for %1$s. Here you can select whether content is actively imported into WordPress.', 'bebop' ), $extension['display_name'] ) . '</p>';
 	
-	echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '" method="post">	
-	<label>' . sprintf( __( 'Enable %1$s import', 'bebop' ), $extension['display_name'] ) . ':</label>
+	echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '" method="post">';
+	echo '<label>' . sprintf( __( 'Enable %1$s import', 'bebop' ), $extension['display_name'] ) . ':</label>
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$active == 1 ) {
 		echo 'checked';
 	} echo '>
@@ -35,27 +35,31 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 	} echo '>
 	<label for="no">'; _e( 'No', 'bebop' ); echo '</label><br><br>';
 	
-	echo '<label for="bebop_' . $extension['name'] . '_username">' . sprintf( __( 'New %1$s Username', 'bebop' ), $extension['display_name'] ) . ':</label>
-	<input type="text" name="bebop_' . $extension['name'] . '_username" value="" size="50"><br><br>
+	echo '<label for="bebop_' . $extension['name'] . '_newfeedname">'; _e( 'New Feed Name', 'bebop' ); echo ':</label>
+	<input type="text" name="bebop_' . $extension['name'] . '_newfeedname" size="50"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>';
-	echo '<div class="clear_both"></div>';
+	<label for="bebop_' . $extension['name'] . '_newfeedurl">'; _e( 'New Feed URL', 'bebop' ); echo '</label>
+	<input type="text" name="bebop_' . $extension['name'] . '_newfeedurl" size="75"><br><br>
 	
-	echo '</form>';
+	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>
+	<div class="clear_both"></div>
+	</form>';
 	//table of user feeds
 	$user_feeds = bebop_tables::get_user_feeds( $bp->loggedin_user->id, $extension['name'] );
 	if ( count( $user_feeds ) > 0 ) {
-		echo '<h5>' . sprintf( __( 'Your %1$s Usernames', 'bebop' ), $extension['display_name'] ) . '</h5>';
-		echo '<p>' . sprintf( __( 'These are usernames that are set to be imported for %1$s. To remove a feed, click the "Delete Feed" link.', 'bebop' ), $extension['display_name'] ) . '</p>';
+		echo '<h5>' . sprintf( __( 'Your %1$s feeds', 'bebop' ), $extension['display_name'] ) . '</h5>';
 		echo '<table class="bebop_user_table">
 				<tr class="nodata">
-					<th>'; _e( 'Username', 'bebop' ); echo '</th>
+					<th>'; _e( 'Feed Name', 'bebop' ); echo '</th>
+					<th>'; _e( 'Feed URL', 'bebop' ); echo '</th>
 					<th>'; _e( 'Options', 'bebop' ); echo '</th>
 				</tr>';
 		foreach ( $user_feeds as $user_feed ) {
+			$feed_name =  str_replace('_', ' ', bebop_tables::sanitise_element( $user_feed->meta_name ) );
 			echo '<tr>
-				<td>' . bebop_tables::sanitise_element( $user_feed->meta_value ) . '</td>
-				<td><a href="?provider=' . $extension['name'] . '&remove_username=' . $user_feed->meta_value . '">'; _e( 'Delete Feed', 'bebop' ); echo '</a></td>
+				<td>' . stripslashes( $feed_name ) . '</td>
+				<td>' . substr(bebop_tables::sanitise_element( $user_feed->meta_value ), 0, 150 ) . '</td>
+				<td><a href="?provider=' . $extension['name'] . '&delete_feed=' . urlencode( $feed_name ) . '">'; _e( 'Delete Feed', 'bebop' ); echo '</a></td>
 			</tr>';
 		}
 		echo '</table>';

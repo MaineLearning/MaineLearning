@@ -17,7 +17,8 @@ jQuery(document).ready(function($){
 				$(wid).append(response); 
 
 				// unhide the widget title
-				if ( 0 != response.length )
+				// The '0' check is in case there is an AJAX error
+				if ( 0 != response.length && '0' != response )
 					$(wid).find('.widget-title').show();	
                         }
                 );

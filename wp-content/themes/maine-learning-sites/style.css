@@ -2088,3 +2088,29 @@ ul#object-metadata { margin-top: 20px; }
 
 #field_1_49 { display: none; }
 li#bp-adminbar-blogs-menu, li#bp-adminbar-authors-menu { display: none !important; }
+h2, h2 a, h2 a:visited { font-size: 18px; }
+.summary-object { padding-bottom: 10px; }
+
+/* Learning Registry widget styling 
+------------------------------------------------------------ */
+
+h3.widget-title
+{
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.widget-area .widget-learning_registry ul li
+{
+	border-top: 1px #CCC solid;
+	margin-top: 10px;
+	padding-top: 2px;
+}
+
+span.paradata-description { font-weight: bold; }
+
+.paradata-id a
+{
+	font-weight: normal;
+	margin-top: 20px;
+}

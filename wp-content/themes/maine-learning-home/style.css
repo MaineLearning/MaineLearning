@@ -249,10 +249,18 @@ ul#nav
 	background-color: #444;
 	color: #ccc;
 	font-size: 12px;
+	margin: 8px 0 0 8px;
 	text-transform: none;
 }
 
 #nav li li { width: 150px !important; }
+
+#nav > li > ul.sub-menu
+{
+	background: #444;
+	width: 150px;
+}
+
 div#content .padder { border-right: 0px solid #fff; }
 
 /* ----------------------
@@ -308,18 +316,6 @@ a, a:link, a:visited, a:hover, a:active
 	/* ML */
 	text-decoration: none;
 	/* ML */
-}
-
-ul.item-list li div.item-title, ul.item-list li div.item-title a
-{
-	font-weight: bold;
-	text-decoration: none;
-}
-
-ul.item-list li div.item-desc
-{
-	display: none;
-	height: 0;
 }
 
 /* Images
@@ -537,7 +533,8 @@ div.activity-meta { clear: right; }
 	text-decoration: none;
 }
 
-.bpm-inner-text {
+.bpm-inner-text
+{
 	font-size: 11px !important;
 	margin: 3px 0 0 2px !important;
 	text-decoration: none;
@@ -591,7 +588,7 @@ BUDDYPRESS PANELS: ITEMS
 
 #item-body div.pagination
 {
-	margin: 0;
+	margin: 0px -19px 0px -19px;
 	width: 50%;
 }
 
@@ -606,13 +603,25 @@ p.desc { padding-top: 14px; }
 BUDDYPRESS PANELS: TABS
 ----------------------- */
 
+ul.item-list li { border-bottom: 1px solid #cfcfcf; }
+
+ul.item-list li div.item-title, ul.item-list li div.item-title a
+{
+	font-weight: bold;
+	text-decoration: none;
+}
+
+ul.item-list li div.item-desc
+{
+	display: none;
+	height: 0;
+}
+
 div.item-list-tabs
 {
 	background: transparent;
 	margin: 0;
 }
-
-ul.item-list li { border-bottom: 1px solid #cfcfcf; }
 
 div.item-list-tabs ul li
 {
@@ -661,6 +670,7 @@ div#subnav.item-list-tabs
 	margin: 0;
 }
 
+div.item-list-tabs#subnav { margin: 0px -19px 15px -19px; }
 #blogs-personal-li { display: none; }
 
 .generic-button

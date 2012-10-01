@@ -3,32 +3,32 @@
 <?php include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php' ); ?>
 <div id='bebop_admin_container'>
 	<div class='postbox center_margin margin-bottom_22px'>
-		<h3>Bebop Log</h3>
+		<h3><?php _e( 'Bebop Log', 'bebop' ); ?></h3>
 		<div class="inside">
-			When stuff happens, it is logged here. 
+			<p><?php _e( 'When stuff happens, it is logged here.', 'bebop' ); ?></p>
 		</div>
 	</div>
 	<?php
 	$table_row_data = bebop_tables::fetch_table_data( 'bp_bebop_general_log' );
 	if ( count( $table_row_data ) > 0 ) {
 		?>
-		<a class='button-secondary' href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query( $_GET ); ?>&clear_table=true">Flush table data</a>
+		<a class='button-secondary' href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query( $_GET ); ?>&clear_table=true"><?php _e( 'Flush table data', 'bebop' ); ?></a>
 		
 		<table class="widefat margin-top_22px">
 			<thead>
 				<tr>
-					<th>Log ID</th>
-					<th>Timestamp</th>
-					<th>Log Type</th>
-					<th>Log Message</th>
+					<th><?php _e( 'Log ID', 'bebop' ); ?></th>
+					<th><?php _e( 'Timestamp', 'bebop' ); ?></th>
+					<th><?php _e( 'Log Type', 'bebop' ); ?></th>
+					<th><?php _e( 'Log Message', 'bebop' ); ?></th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>Log ID</th>
-					<th>Timestamp</th>
-					<th>Log Type</th>
-					<th>Log Message</th>
+					<th><?php _e( '>Log ID', 'bebop' ); ?></th>
+					<th><?php _e( 'Timestamp', 'bebop' ); ?></th>
+					<th><?php _e( 'Log Type', 'bebop' ); ?></th>
+					<th><?php _e( 'Log Message', 'bebop' ); ?></th>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -47,7 +47,7 @@
 		<?php
 	}
 	else {
-		echo 'No data found in the general log table.';
+		_e( 'No data found in the general log table.', 'bebop' ); 
 	}
 	?>	
 <!-- End bebop_admin_container -->

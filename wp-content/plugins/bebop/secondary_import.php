@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Importer for bebop
  */
@@ -24,31 +25,30 @@ include_once( 'core/bebop-extensions.php' );
 //Main content file
 include_once( 'core/bebop-core-user.php' );
 
-//if import a specific OER.
-if ( isset( $_GET['extension'] ) ) {
-	$importers[] = $_GET['extension'];
-}
-else {
-	$importers = bebop_extensions::bebop_get_active_extension_names();
-}
+//above code can be moved when this has been tested as working.
 
-//Check that the importers queue isn't empty, then start calling the import functions
-if ( ! empty( $importers[0] ) ) {
-	bebop_tables::log_general( __( 'Main Importer', 'bebop' ), __( 'Main importer service started.', 'bebop' ) ); 
+
+$importers = bebop_extensions::bebop_get_active_extension_names();
+
+if ( ! empty( $importers ) ) {
+	bebop_tables::log_general( __( 'Secondary Importer', 'bebop' ), __( 'Secondary importer service started.', 'bebop' ) ); 
 	$return_array = array();
 	foreach ( $importers as $extension ) {
 		if ( bebop_tables::get_option_value( 'bebop_' . strtolower( $extension ) . '_provider' ) == 'on' ) {
 			if ( file_exists( WP_PLUGIN_DIR . '/bebop/extensions/' . strtolower( $extension ) . '/import.php' ) ) {
 				include_once( WP_PLUGIN_DIR . '/bebop/extensions/' . strtolower( $extension ) . '/import.php' );
 				if ( function_exists( 'bebop_' . strtolower( $extension ) . '_import' ) ) {
-					$return_array[] = call_user_func( 'bebop_' . strtolower( $extension ) . '_import', strtolower( $extension ) );
+					$user_metas = bebop_tables::get_first_importers_by_extension( strtolower( $extension ) );
+					if( count( $user_metas ) > 0 ) {
+						$return_array[] = call_user_func( 'bebop_' . strtolower( $extension ) . '_import', strtolower( $extension ), $user_metas );
+					}
 				}
 				else {
-					bebop_tables::log_error( __( 'Main Importer', 'bebop' ), sprintf( __( 'The function: bebop_%1$s_import does not exist.', 'bebop' ), strtolower( $extension ) ) );
+					bebop_tables::log_error( __( 'Secondary Importer', 'bebop' ), sprintf( __( 'The function: bebop_%1$s_import does not exist.', 'bebop' ), strtolower( $extension ) ) );
 				}
 			}
 			else {
-				bebop_tables::log_error( __( 'Main Importer', 'bebop' ), sprintf( __( 'The function: %1$s/import.php does not exist.', 'bebop'), WP_PLUGIN_DIR . '/bebop/extensions/' . strtolower( $extension ) ) );
+				bebop_tables::log_error( __( 'Secondary Importer', 'bebop' ),  sprintf( __( 'The function: %1$s/import.php does not exist.', 'bebop'), WP_PLUGIN_DIR . '/bebop/extensions/' . strtolower( $extension ) ) );
 			}
 		}
 	}
@@ -61,13 +61,13 @@ if ( ! empty( $importers[0] ) ) {
 	$log_results = implode( ', ', $log_array );
 	
 	if ( ! empty( $log_results ) ) {
-		$message = sprintf( __( 'Main importer service completed. Imported %1$s.', 'bebop' ), $log_results );
+		$message = sprintf( __( 'Secondary importer service completed. Imported %1$s.', 'bebop' ), $log_results );
 		echo $message;
 	}
 	else {
-		
-		$message = __( 'Main importer service completed. Nothing was imported.', 'bebop' );
+		$message = __( 'Secondary importer service completed. Nothing was imported.', 'bebop' );
 		echo $message;
 	}
-	bebop_tables::log_general( __( 'Main Importer', 'bebop' ), $message );
+	bebop_tables::log_general( __( 'Secondary Importer', 'bebop' ), $message );
 }
+?>

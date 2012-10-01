@@ -7,18 +7,25 @@ add_filter( 'bp_get_group_permalink', 'bp_group_hierarchy_fixup_permalink' );
 add_filter( 'bp_forums_get_forum_topics', 'bp_group_hierarchy_fixup_forum_paths', 10, 2 );
 add_filter( 'bp_has_topic_posts', 'bp_group_hierarchy_fixup_forum_links', 10, 2 );
 
-
 /**
  * Catch requests for the groups component and find the requested group
  */
 function group_hierarchy_override_current_action( $current_action ) {
 	global $bp;
 	
+	do_action( 'bp_group_hierarchy_route_requests' );
+
 	/** Only process once - hopefully this won't have any side effects */
 	remove_action( 'bp_current_action', 'group_hierarchy_override_current_action' );
 	
 	/** Abort processing on dashboard pages and when not in groups component */
-	if( is_admin() || ! bp_is_groups_component() ) return $current_action;
+	if( is_admin() && ! strpos( admin_url('admin-ajax.php'), $_SERVER['REQUEST_URI'] ) ) {
+		return $current_action;
+	}
+	
+	if( ! bp_is_groups_component() ) {
+		return $current_action;
+	}
 	
 	$groups_slug = bp_get_groups_root_slug();
 
@@ -170,7 +177,7 @@ function bp_group_hierarchy_fixup_permalink( $permalink ) {
  */
 function bp_group_hierarchy_overload_groups( $components ) {
 	
-	if(is_admin())	return $components;
+	if( is_admin() && ! strpos( admin_url('admin-ajax.php'), $_SERVER['REQUEST_URI'] ) )	return $components;
 	
 	global $bp;
 
