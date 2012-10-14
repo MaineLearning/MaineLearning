@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Events Manager
-Version: 5.2.5
+Version: 5.2.6
 Plugin URI: http://wp-events-plugin.com
 Description: Event registration and booking management for WordPress. Recurring events, locations, google maps, rss, ical, booking registration and more!
 Author: Marcus Sykes
@@ -27,8 +27,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Setting constants
-define('EM_VERSION', 5.23); //self expanatory
-define('EM_PRO_MIN_VERSION', 2.144); //self expanatory
+define('EM_VERSION', 5.252); //self expanatory
+define('EM_PRO_MIN_VERSION', 2.221); //self expanatory
 define('EM_DIR', dirname( __FILE__ )); //an absolute path to this directory
 define('EM_SLUG', plugin_basename( __FILE__ )); //for updates
 
@@ -210,42 +210,50 @@ class EM_Scripts_and_Styles {
 		//Localize
 		$em_localized_js = array(
 			'ajaxurl' => admin_url('admin-ajax.php'),
-			'bookingajaxurl' => admin_url('admin-ajax.php'),
 			'locationajaxurl' => admin_url('admin-ajax.php?action=locations_search'),
 			'firstDay' => get_option('start_of_week'),
 			'locale' => $locale_code,
 			'dateFormat' => get_option('dbem_date_format_js'),
-			'bookingInProgress' => __('Please wait while the booking is being submitted.','dbem'),
 			'ui_css' => plugins_url('includes/css/ui-lightness.css', __FILE__),
 			'show24hours' => get_option('dbem_time_24h'),
 			'is_ssl' => is_ssl(),
-			'tickets_save' => __('Save Ticket','dbem'),
-			'bookings_export_save' => __('Export Bookings','dbem'),
-			'bookings_settings_save' => __('Save Settings','dbem'),
-			'booking_delete' => __("Are you sure you want to delete?",'dbem'),
-			//booking button
-			'bb_full' =>  get_option('dbem_booking_button_msg_full'),
-			'bb_book' => get_option('dbem_booking_button_msg_book'),
-			'bb_booking' => get_option('dbem_booking_button_msg_booking'),
-			'bb_booked' => get_option('dbem_booking_button_msg_booked'),
-			'bb_error' => get_option('dbem_booking_button_msg_error'),
-			'bb_cancel' => get_option('dbem_booking_button_msg_cancel'),
-			'bb_canceling' => get_option('dbem_booking_button_msg_canceling'),
-			'bb_cancelled' => get_option('dbem_booking_button_msg_cancelled'),
-			'bb_cancel_error' => get_option('dbem_booking_button_msg_cancel_error')		
 		);
+		if( get_option('dbem_rsvp_enabled') ){
+		    $em_localized_js = array_merge($em_localized_js, array(
+				'bookingInProgress' => __('Please wait while the booking is being submitted.','dbem'),
+				'tickets_save' => __('Save Ticket','dbem'),
+				'bookingajaxurl' => admin_url('admin-ajax.php'),
+				'bookings_export_save' => __('Export Bookings','dbem'),
+				'bookings_settings_save' => __('Save Settings','dbem'),
+				'booking_delete' => __("Are you sure you want to delete?",'dbem'),
+				//booking button
+				'bb_full' =>  get_option('dbem_booking_button_msg_full'),
+				'bb_book' => get_option('dbem_booking_button_msg_book'),
+				'bb_booking' => get_option('dbem_booking_button_msg_booking'),
+				'bb_booked' => get_option('dbem_booking_button_msg_booked'),
+				'bb_error' => get_option('dbem_booking_button_msg_error'),
+				'bb_cancel' => get_option('dbem_booking_button_msg_cancel'),
+				'bb_canceling' => get_option('dbem_booking_button_msg_canceling'),
+				'bb_cancelled' => get_option('dbem_booking_button_msg_cancelled'),
+				'bb_cancel_error' => get_option('dbem_booking_button_msg_cancel_error')
+			));		
+		}
 		$em_localized_js['txt_search'] = get_option('dbem_search_form_text_label',__('Search','dbem'));
 		$em_localized_js['txt_searching'] = __('Searching...','dbem');
 		$em_localized_js['txt_loading'] = __('Loading...','dbem');
 		
 		//logged in messages that visitors shouldn't need to see
 		if( is_user_logged_in() ){
-			$em_localized_js['event_reschedule_warning'] = __('Are you sure you want to reschedule this recurring event? If you do this, you will lose all booking information and the old recurring events will be deleted.', 'dbem');
-			$em_localized_js['disable_bookings_warning'] = __('Are you sure you want to disable bookings? If you do this and save, you will lose all previous bookings. If you wish to prevent further bookings, reduce the number of spaces available to the amount of bookings you currently have', 'dbem');
-			$em_localized_js['event_detach_warning'] = __('Are you sure you want to detach this event? By doing so, this event will be independent of the recurring set of events.', 'dbem');
-			$delete_text = ( !EMPTY_TRASH_DAYS ) ? __('This cannot be undone.','dbem'):__('All events will be moved to trash.','dbem');
-			$em_localized_js['delete_recurrence_warning'] = __('Are you sure you want to delete all recurrences of this event?', 'dbem').' '.$delete_text;
-			$em_localized_js['booking_warning_cancel'] = get_option('dbem_booking_warning_cancel');
+		    if( get_option('dbem_recurrence_enabled') ){
+				$em_localized_js['event_reschedule_warning'] = __('Are you sure you want to reschedule this recurring event? If you do this, you will lose all booking information and the old recurring events will be deleted.', 'dbem');
+				$em_localized_js['event_detach_warning'] = __('Are you sure you want to detach this event? By doing so, this event will be independent of the recurring set of events.', 'dbem');
+				$delete_text = ( !EMPTY_TRASH_DAYS ) ? __('This cannot be undone.','dbem'):__('All events will be moved to trash.','dbem');
+				$em_localized_js['delete_recurrence_warning'] = __('Are you sure you want to delete all recurrences of this event?', 'dbem').' '.$delete_text;
+		    }
+			if( get_option('dbem_rsvp_enabled') ){
+				$em_localized_js['disable_bookings_warning'] = __('Are you sure you want to disable bookings? If you do this and save, you will lose all previous bookings. If you wish to prevent further bookings, reduce the number of spaces available to the amount of bookings you currently have', 'dbem');
+				$em_localized_js['booking_warning_cancel'] = get_option('dbem_booking_warning_cancel');
+			}
 		}
 		//load admin/public only vars
 		if( is_admin() ){

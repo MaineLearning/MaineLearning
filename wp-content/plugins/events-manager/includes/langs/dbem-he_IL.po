@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Events Manager 4.171\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/events-manager\n"
 "POT-Creation-Date: 2011-09-20 20:44:48+00:00\n"
-"PO-Revision-Date: 2012-07-24 21:00+0200\n"
-"Last-Translator: Michal Lev <kesher@staging.v-heart.com>\n"
+"PO-Revision-Date: 2012-09-13 10:18+0200\n"
+"Last-Translator: \n"
 "Language-Team: Zephyr <studio@zephyrww.co.il>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -544,7 +544,7 @@ msgstr "<strong>שגיאה</strong>: לא הצלחתי לרשום אותך. אנ
 #: em-functions.php:396
 #, php-format
 msgid "New user registration on your blog %s:"
-msgstr "יש לך משתמש חדש באתר %S:"
+msgstr "יש לך משתמש חדש באתר %s:"
 
 # @ dbem
 #: em-functions.php:397
@@ -728,7 +728,7 @@ msgstr "%s נמחק בהצלחה."
 #: em-actions.php:107
 #, php-format
 msgid "%s could not be deleted."
-msgstr "%S לא ניתן למחיקה."
+msgstr "%s לא ניתן למחיקה."
 
 # @ dbem
 #: classes/em-booking.php:144
@@ -753,7 +753,7 @@ msgstr "אין מספיק מקומות בשביל הזמנה זו."
 #: templates/forms/location-editor.php:11
 #, php-format
 msgid "You do not have the rights to manage this %s."
-msgstr "אין לך סמכות לנהל את %S"
+msgstr "אין לך סמכות לנהל את %s"
 
 # @ dbem
 #: classes/em-booking.php:166
@@ -823,14 +823,14 @@ msgstr "קטגוריה"
 #: classes/em-bookings.php:109
 #, php-format
 msgid "%s created."
-msgstr "%S נוצרה"
+msgstr "%s נוצרה"
 
 # @ dbem
 #: classes/em-bookings.php:271
 #: classes/em-bookings.php:277
 #, php-format
 msgid "Bookings %s. Mails Sent."
-msgstr "הזמנות %S. נשלחו מיילים."
+msgstr "הזמנות %s. נשלחו מיילים."
 
 # @ dbem
 #: classes/em-bookings.php:281
@@ -890,7 +890,7 @@ msgstr "ההזמנה שלך נרשמה"
 #: classes/em-booking.php:172
 #, php-format
 msgid "You cannot manage this %s."
-msgstr "אתה לא יכול לנהל את %S"
+msgstr "אתה לא יכול לנהל את %s"
 
 # @ dbem
 #: classes/em-booking.php:223
@@ -901,13 +901,13 @@ msgstr ""
 #: classes/em-booking.php:398
 #, php-format
 msgid "%s deleted"
-msgstr "%S נמחק"
+msgstr "%s נמחק"
 
 # @ dbem
 #: classes/em-booking.php:400
 #, php-format
 msgid "%s could not be deleted"
-msgstr "%S לא ניתן למחיקה"
+msgstr "%s לא ניתן למחיקה"
 
 # @ dbem
 #: classes/em-booking.php:446
@@ -918,7 +918,7 @@ msgstr "לא אושר, המקומות מלאים."
 #: classes/em-booking.php:454
 #, php-format
 msgid "Booking %s."
-msgstr "הזמנה %S"
+msgstr "הזמנה %s"
 
 # @ dbem
 #: classes/em-booking.php:457
@@ -940,7 +940,7 @@ msgstr "שגיאה: לא נשלח מייל."
 #: classes/em-booking.php:468
 #, php-format
 msgid "Booking could not be %s."
-msgstr "הזמנה לא יכולה להיות %S"
+msgstr "הזמנה לא יכולה להיות %s"
 
 # @ dbem
 #: classes/em-booking.php:483
@@ -1028,7 +1028,7 @@ msgstr "היתה בעיה בשמירת האירועים החוזרים"
 #: classes/em-event.php:687
 #, php-format
 msgid "%s successfully duplicated."
-msgstr "%S שוכפל בהצלחה"
+msgstr "%s שוכפל בהצלחה"
 
 # @ dbem
 #: admin/em-ms-options.php:164
@@ -1109,37 +1109,37 @@ msgstr "שבת"
 #: classes/em-event.php:1896
 #, php-format
 msgid "the first %s of the month"
-msgstr "ה- %S הראשון של החודש"
+msgstr "ה- %s הראשון של החודש"
 
 # @ dbem
 #: classes/em-event.php:1896
 #, php-format
 msgid "the second %s of the month"
-msgstr "ה- %S השני של החודש"
+msgstr "ה- %s השני של החודש"
 
 # @ dbem
 #: classes/em-event.php:1896
 #, php-format
 msgid "the third %s of the month"
-msgstr "ה- %S השלישי של החודש"
+msgstr "ה- %s השלישי של החודש"
 
 # @ dbem
 #: classes/em-event.php:1896
 #, php-format
 msgid "the fourth %s of the month"
-msgstr "ה- %S הרביעי של החודש"
+msgstr "ה- %s הרביעי של החודש"
 
 # @ dbem
 #: classes/em-event.php:1896
 #, php-format
 msgid "the last %s of the month"
-msgstr "ה- %S האחרון של החודש"
+msgstr "ה- %s האחרון של החודש"
 
 # @ dbem
 #: classes/em-event.php:1897
 #, php-format
 msgid "From %1$s to %2$s"
-msgstr "מ 1%S עד ל 2%S"
+msgstr "מ 1%s עד ל 2%s"
 
 # @ dbem
 #: classes/em-event.php:1899
@@ -1150,7 +1150,7 @@ msgstr "כל יום"
 #: classes/em-event.php:1901
 #, php-format
 msgid "every %s days"
-msgstr "כל %S ימים"
+msgstr "כל %s ימים"
 
 # @ dbem
 #: classes/em-event.php:1910
@@ -1161,13 +1161,13 @@ msgstr "כל שבוע"
 #: classes/em-event.php:1912
 #, php-format
 msgid "every %s weeks"
-msgstr "כל %S שבועות"
+msgstr "כל %s שבועות"
 
 # @ dbem
 #: classes/em-event.php:1923
 #, php-format
 msgid "every %s months"
-msgstr "כל %S חודשים"
+msgstr "כל %s חודשים"
 
 # @ dbem
 #: classes/em-object.php:1160
@@ -1806,7 +1806,7 @@ msgstr "הוסף חדש"
 #: templates/tables/locations.php:10
 #, php-format
 msgid "My %s"
-msgstr "ה- %S שלי"
+msgstr "ה- %s שלי"
 
 # @ dbem
 #: admin/em-admin.php:45
@@ -1838,7 +1838,7 @@ msgstr "מקומות"
 #: templates/tables/locations.php:13
 #, php-format
 msgid "All %s"
-msgstr "כל %S"
+msgstr "כל %s"
 
 # @ dbem
 # @ default
@@ -2153,7 +2153,7 @@ msgstr "זמני מקום שקשורים לקטגוריה"
 #: admin/em-options.php:191
 #, php-format
 msgid "This accepts %s and %s placeholders."
-msgstr "זה מקבל סמני מקום %S וכן %S."
+msgstr "זה מקבל סמני מקום %s וכן %s."
 
 # @ dbem
 #: admin/em-ms-options.php:57
@@ -2162,14 +2162,14 @@ msgstr "זה מקבל סמני מקום %S וכן %S."
 #: admin/em-options.php:193
 #, php-format
 msgid "This accepts %s placeholders."
-msgstr "זה מקבל סמן מקום %S"
+msgstr "זה מקבל סמן מקום %s"
 
 # @ dbem
 #: admin/em-ms-options.php:59
 #: admin/em-options.php:194
 #, php-format
 msgid "This accepts %s, %s and %s placeholders."
-msgstr "זה מקבל סמני מקום %S, %S וכן %S."
+msgstr "זה מקבל סמני מקום %s, %s וכן %s."
 
 # @ dbem
 # @ default
@@ -2505,7 +2505,7 @@ msgstr "פורמט אירועים"
 #: admin/em-options.php:1108
 #, php-format
 msgid "%s Page"
-msgstr "עמוד %S"
+msgstr "עמוד %s"
 
 # @ dbem
 #: admin/em-options.php:948
@@ -2576,7 +2576,7 @@ msgstr "If viewing a page for events on a specific date, this is the title that 
 #: admin/em-options.php:1138
 #, php-format
 msgid "Single %s Page"
-msgstr "דף %S יחיד"
+msgstr "דף %s יחיד"
 
 # @ dbem
 #: admin/em-options.php:957
@@ -2688,42 +2688,42 @@ msgstr "פורמט מקומות"
 #: admin/em-options.php:1110
 #, php-format
 msgid "%s list header format"
-msgstr "פורמט כותר רשימת %S"
+msgstr "פורמט כותר רשימת %s"
 
 # @ dbem
 #: admin/em-options.php:1079
 #: admin/em-options.php:1110
 #, php-format
 msgid "This content will appear just above your code for the %s list format below. Default is blank"
-msgstr "תוכן זה יופיע ממש מעל הקוד לפורמט רשימת %S שלמטה. ברירת המחדל היא ריק."
+msgstr "תוכן זה יופיע ממש מעל הקוד לפורמט רשימת %s שלמטה. ברירת המחדל היא ריק."
 
 # @ dbem
 #: admin/em-options.php:1080
 #: admin/em-options.php:1111
 #, php-format
 msgid "%s list item format"
-msgstr "פורמט פריט ברשימת %S"
+msgstr "פורמט פריט ברשימת %s"
 
 # @ dbem
 #: admin/em-options.php:1080
 #: admin/em-options.php:1111
 #, php-format
 msgid "The format of a single %s in a list."
-msgstr "הפורמט של %S בודד ברשימה"
+msgstr "הפורמט של %s בודד ברשימה"
 
 # @ dbem
 #: admin/em-options.php:1081
 #: admin/em-options.php:1112
 #, php-format
 msgid "%s list footer format"
-msgstr "פורמט הפוטר של רשימת %S"
+msgstr "פורמט הפוטר של רשימת %s"
 
 # @ dbem
 #: admin/em-options.php:1081
 #: admin/em-options.php:1112
 #, php-format
 msgid "This content will appear just below your code for the %s list format above. Default is blank"
-msgstr "תוכן זה יופיע ממש מתחת לקוד לפורמט רשימת %S. ברירת מחדל ריקה."
+msgstr "תוכן זה יופיע ממש מתחת לקוד לפורמט רשימת %s. ברירת מחדל ריקה."
 
 # @ dbem
 #: admin/em-options.php:1082
@@ -2733,14 +2733,14 @@ msgstr "תוכן זה יופיע ממש מתחת לקוד לפורמט רשימ�
 #: admin/em-options.php:1148
 #, php-format
 msgid "No %s message"
-msgstr "אין הודעת %S"
+msgstr "אין הודעת %s"
 
 # @ dbem
 #: admin/em-options.php:1082
 #: admin/em-options.php:1113
 #, php-format
 msgid "The message displayed when no %s are available."
-msgstr "ההודעה שמוצגת כאשר אין %S"
+msgstr "ההודעה שמוצגת כאשר אין %s"
 
 # @ dbem
 #: admin/em-options.php:1086
@@ -2748,7 +2748,7 @@ msgstr "ההודעה שמוצגת כאשר אין %S"
 #: admin/em-options.php:1140
 #, php-format
 msgid "Single %s title format"
-msgstr "פורמט כותרת %S בודד"
+msgstr "פורמט כותרת %s בודד"
 
 # @ dbem
 #: admin/em-options.php:1086
@@ -2761,7 +2761,7 @@ msgstr "הפורמט של כותרת דף מקום בודד"
 #: admin/em-options.php:1141
 #, php-format
 msgid "Single %s page format"
-msgstr "פורמט עמוד %S בודד"
+msgstr "פורמט עמוד %s בודד"
 
 # @ dbem
 #: admin/em-options.php:1087
@@ -2784,7 +2784,7 @@ msgstr "הפורמט של הטקסט שמופיע בבלון שמתאר מקום
 #: admin/em-options.php:1143
 #, php-format
 msgid "%s List Formats"
-msgstr "פורמט רשימת %S"
+msgstr "פורמט רשימת %s"
 
 # @ dbem
 #: admin/em-options.php:1093
@@ -2792,7 +2792,7 @@ msgstr "פורמט רשימת %S"
 #: admin/em-options.php:1146
 #, php-format
 msgid "Default %s list format"
-msgstr "פורמט ברירת מחדל לרשימת %S"
+msgstr "פורמט ברירת מחדל לרשימת %s"
 
 # @ dbem
 #: admin/em-ms-options.php:163
@@ -3485,7 +3485,7 @@ msgstr "אין לך יכולת לנהל אירועי זה"
 #: admin/em-bookings.php:104
 #, php-format
 msgid "Manage %s Bookings"
-msgstr "נהל אירועי %S"
+msgstr "נהל אירועי %s"
 
 # @ dbem
 #: admin/em-bookings.php:165
@@ -3511,7 +3511,7 @@ msgstr "אין לך יכולת או אישור לנהל את הכרטיס הזה
 #: admin/em-bookings.php:164
 #, php-format
 msgid "Ticket for %s"
-msgstr "כרטיס לאירוע %S"
+msgstr "כרטיס לאירוע %s"
 
 # @ dbem
 #: admin/em-bookings.php:166
@@ -3865,7 +3865,7 @@ msgstr ""
 #: em-install.php:441
 #, php-format
 msgid "No %s"
-msgstr "אין  %S"
+msgstr "אין  %s"
 
 # @ dbem
 #: em-debug.php:18
@@ -3965,13 +3965,13 @@ msgstr "לא ניתן כרטיס"
 #: em-actions.php:181
 #, php-format
 msgid "%s successfully deleted"
-msgstr "%S נמחק בהצלחה"
+msgstr "%s נמחק בהצלחה"
 
 # @ dbem
 #: em-install.php:536
 #, php-format
 msgid "Booking %s"
-msgstr "מזמין %S"
+msgstr "מזמין %s"
 
 # @ dbem
 #: events-manager.php:272
@@ -3979,7 +3979,7 @@ msgstr "מזמין %S"
 #: events-manager.php:286
 #, php-format
 msgid "You do not have permission to publish %s"
-msgstr "אין לך הרשאות לפרסם %S"
+msgstr "אין לך הרשאות לפרסם %s"
 
 # @ dbem
 #: events-manager.php:276
@@ -3988,7 +3988,7 @@ msgstr "אין לך הרשאות לפרסם %S"
 #: events-manager.php:296
 #, php-format
 msgid "You do not have permission to edit %s"
-msgstr "אין לך הרשאות לערוך %S"
+msgstr "אין לך הרשאות לערוך %s"
 
 # @ dbem
 #: events-manager.php:273
@@ -3996,7 +3996,7 @@ msgstr "אין לך הרשאות לערוך %S"
 #: events-manager.php:287
 #, php-format
 msgid "You do not have permission to delete others %s"
-msgstr "אין לך הרשאות למחוק %S של אחרים"
+msgstr "אין לך הרשאות למחוק %s של אחרים"
 
 # @ dbem
 #: events-manager.php:275
@@ -4004,13 +4004,13 @@ msgstr "אין לך הרשאות למחוק %S של אחרים"
 #: events-manager.php:289
 #, php-format
 msgid "You do not have permission to edit others %s"
-msgstr "אין לך הרשאות לערוך %S של אחרים."
+msgstr "אין לך הרשאות לערוך %s של אחרים."
 
 # @ dbem
 #: events-manager.php:269
 #, php-format
 msgid "You do not have permission to manage others %s"
-msgstr "אין לך הרשאות לנהל %S של אחרים."
+msgstr "אין לך הרשאות לנהל %s של אחרים."
 
 # @ dbem
 #: admin/em-options.php:890
@@ -4027,13 +4027,13 @@ msgstr "הזמנות"
 #: events-manager.php:295
 #, php-format
 msgid "You do not have permission to delete %s"
-msgstr "אין לך הרשאות למחוק %S"
+msgstr "אין לך הרשאות למחוק %s"
 
 # @ dbem
 #: events-manager.php:270
 #, php-format
 msgid "You do not have permission to manage %s"
-msgstr "אין לך הרשאות לנהל %S"
+msgstr "אין לך הרשאות לנהל %s"
 
 # @ dbem
 #: admin/em-options.php:443
@@ -4274,13 +4274,13 @@ msgstr "כללי"
 #: admin/em-ms-options.php:157
 #, php-format
 msgid "%s belonging to other sub-sites will have an extra slug preppended to it so that your main site can differentiate between its own %s and those belonging to other sites in your network."
-msgstr "%S  שייך לתת אתרים אחרים והוא יקבל זיהוי מיוחד כך שתוכל להפריד ולהבדיל בינו לבין זה של אתרים אחרים ברשת שלך. "
+msgstr "%s  שייך לתת אתרים אחרים והוא יקבל זיהוי מיוחד כך שתוכל להפריד ולהבדיל בין %s שלו לבין זה של אתרים אחרים ברשת שלך. "
 
 # @ dbem
 #: admin/em-ms-options.php:158
 #, php-format
 msgid "When displaying global %s on the main site you have the option of users viewing the %s details on the main site or being directed to the sub-site."
-msgstr "כאשר מציגים %s כללי באתר המרכזי, ניתן לכוון את הגולשים לצפות בנתונים באתר המרכזי או להעביר אותם לתת-אתר."
+msgstr ""
 
 # @ dbem
 #: admin/em-ms-options.php:159
@@ -4303,14 +4303,14 @@ msgstr ""
 #: admin/em-options.php:1284
 #, php-format
 msgid "%s Options"
-msgstr "אופציות %S"
+msgstr "אופציות %s"
 
 # @ dbem
 #: admin/em-ms-options.php:164
 #: admin/em-ms-options.php:173
 #, php-format
 msgid "Link sub-site %s directly to sub-site?"
-msgstr "לקשר ישירות את תת אתר %S לתת האתר"
+msgstr "לקשר ישירות את תת אתר %s לתת האתר"
 
 # @ dbem
 #: admin/em-ms-options.php:165
@@ -4339,7 +4339,7 @@ msgstr "אם אתה מעדיף שכל המקומות ישוייכו לאתר ה�
 #: admin/em-ms-options.php:172
 #, php-format
 msgid "Display global %s on main blog?"
-msgstr "להציג %S גלובלי באתר המרכזי?"
+msgstr "להציג %s גלובלי באתר המרכזי?"
 
 # @ dbem
 #: admin/em-options.php:112
@@ -4432,7 +4432,7 @@ msgstr "בחר בכן כדי להפסיק שימוש באגודליות על י�
 #: admin/em-options.php:364
 #, php-format
 msgid "%s Settings"
-msgstr "הגדרות %S"
+msgstr "הגדרות %s"
 
 # @ dbem
 #: admin/em-options.php:310
@@ -4526,7 +4526,7 @@ msgstr ""
 #: admin/em-options.php:446
 #, php-format
 msgid "e.g. %s - you can use / seperators too"
-msgstr "כמו למשל $S - אתה יכול להשתמש בלוכסנים כמפרידים גם כן."
+msgstr "כמו למשל %s - אתה יכול להשתמש בלוכסנים כמפרידים גם כן."
 
 # @ dbem
 # @ default
@@ -4543,14 +4543,14 @@ msgstr "תגי אירועים"
 #: admin/em-options.php:882
 #, php-format
 msgid "%s Pages"
-msgstr "%S דפים"
+msgstr "%s דפים"
 
 # @ dbem
 #: admin/em-options.php:459
 #: admin/em-options.php:630
 #, php-format
 msgid "Display %s as"
-msgstr "הצג %S בתור"
+msgstr "הצג %s בתור"
 
 # @ default
 #: admin/em-options.php:459
@@ -4573,7 +4573,7 @@ msgstr "דרוס עם פורמטים?"
 #: admin/em-options.php:640
 #, php-format
 msgid "%s List/Archives"
-msgstr "%S רשומה/ארכיבים"
+msgstr "%s רשומה/ארכיבים"
 
 # @ dbem
 #: admin/em-options.php:477
@@ -4581,7 +4581,7 @@ msgstr "%S רשומה/ארכיבים"
 #: admin/em-options.php:764
 #, php-format
 msgid "[No %s Page]"
-msgstr "[אין עמוד %S]"
+msgstr "[אין עמוד %s]"
 
 # @ dbem
 #: admin/em-options.php:482
@@ -4638,7 +4638,7 @@ msgstr "להכיל בחיפושי וורדפרס?"
 #: admin/em-options.php:707
 #, php-format
 msgid "Allow %s to appear in the built-in search results."
-msgstr "אפשר ל %S להופיע בתוצאות החיפוש המובנה"
+msgstr "אפשר ל %s להופיע בתוצאות החיפוש המובנה"
 
 # @ dbem
 #: admin/em-options.php:555
@@ -4646,7 +4646,7 @@ msgstr "אפשר ל %S להופיע בתוצאות החיפוש המובנה"
 #: admin/em-options.php:801
 #, php-format
 msgid "Default %s list options"
-msgstr "ברירת מחדל לרשימת %S"
+msgstr "ברירת מחדל לרשימת %s"
 
 # @ dbem
 #: admin/em-options.php:556
@@ -4664,7 +4664,7 @@ msgstr ""
 #: admin/em-options.php:929
 #, php-format
 msgid "%s page"
-msgstr "עמוד %S"
+msgstr "עמוד %s"
 
 # @ dbem
 #: admin/em-options.php:645
@@ -4677,14 +4677,14 @@ msgstr ""
 #: admin/em-options.php:769
 #, php-format
 msgid "Show %s page in lists?"
-msgstr "הצג %S ברשימות?"
+msgstr "הצג %s ברשימות?"
 
 # @ dbem
 #: admin/em-options.php:649
 #: admin/em-options.php:769
 #, php-format
 msgid "Check this option if you want the %s page to appear together with other pages in pages lists."
-msgstr "בחר באופציה זאת אם אתה רוצה שדף %S יופיע יחד עם דפים אחרים ברשימות דפים."
+msgstr "בחר באופציה זאת אם אתה רוצה שדף %s יופיע יחד עם דפים אחרים ברשימות דפים."
 
 # @ dbem
 #: admin/em-options.php:666
@@ -4708,7 +4708,7 @@ msgstr "ברירת מחדל לסידור הארכיון"
 #: admin/em-options.php:900
 #, php-format
 msgid "Order by %s"
-msgstr "סדר לפי %S"
+msgstr "סדר לפי %s"
 
 # @ dbem
 #: admin/em-options.php:716
@@ -4728,13 +4728,13 @@ msgstr "גבולות רשימה"
 #: admin/em-options.php:840
 #, php-format
 msgid "This will control how many %s are shown on one list by default."
-msgstr "זה שולט בכמה %S מוצגים ברשימה אחת כברירת מחדל."
+msgstr "זה שולט בכמה %s מוצגים ברשימה אחת כברירת מחדל."
 
 # @ dbem
 #: admin/em-options.php:765
 #, php-format
 msgid "This option allows you to select which page to use as the %s page."
-msgstr "אופציה זו מאפשרת לך להגדיר איזה דף ישמש כדף ה %S."
+msgstr "אופציה זו מאפשרת לך להגדיר איזה דף ישמש כדף ה %s."
 
 # @ dbem
 #: admin/em-options.php:778
@@ -4888,7 +4888,7 @@ msgstr "פורמט תאריך"
 #: admin/em-options.php:998
 #, php-format
 msgid "For use with the %s placeholder"
-msgstr "לשימוש עם שומר המקום %S"
+msgstr "לשימוש עם שומר המקום %s"
 
 # @ dbem
 #: admin/em-options.php:997
@@ -4900,7 +4900,7 @@ msgstr "מפריד תאריכים"
 #: admin/em-options.php:999
 #, php-format
 msgid "For when start/end %s are present, this will seperate the two (include spaces here if necessary)."
-msgstr "לכאשר התחלה/סיום %S נמצא, זה יפריד בין השניים."
+msgstr "לכאשר התחלה/סיום %s נמצא, זה יפריד בין השניים."
 
 # @ dbem
 #: admin/em-options.php:997
@@ -5017,7 +5017,7 @@ msgstr "טפסי הגשת אירוע"
 #: admin/em-options.php:385
 #, php-format
 msgid "You can allow users to publicly submit events on your blog by using the %s shortcode, and enabling anonymous submissions below."
-msgstr "אתה יכול להתיר למשמתמשים להגיש אירועים באתר שלך עד ידי שימוש בקוד %S, ואיפשור הגשות אנונימיות למטה."
+msgstr "אתה יכול להתיר למשמתמשים להגיש אירועים באתר שלך עד ידי שימוש בקוד %s, ואיפשור הגשות אנונימיות למטה."
 
 # @ dbem
 #: admin/em-options.php:388
@@ -5076,7 +5076,7 @@ msgstr "אם תגדיר כן, המיילים שתוציא יהיו בפורמט 
 #: admin/em-options.php:1561
 #, php-format
 msgid "%s Capabilities"
-msgstr "יכולות %S"
+msgstr "יכולות %s"
 
 # @ dbem
 #: admin/em-options.php:1534
@@ -5084,7 +5084,7 @@ msgstr "יכולות %S"
 #: admin/em-options.php:1552
 #, php-format
 msgid "Users can publish %s and skip any admin approval"
-msgstr "משתמשים יכולים לפרסם %S ללא צורך באישור מנהל."
+msgstr "משתמשים יכולים לפרסם %s ללא צורך באישור מנהל."
 
 # @ dbem
 #: admin/em-options.php:1535
@@ -5092,7 +5092,7 @@ msgstr "משתמשים יכולים לפרסם %S ללא צורך באישור �
 #: admin/em-options.php:1553
 #, php-format
 msgid "User can delete other users %s"
-msgstr "משתמש יכול למחוק %S של משתמשים אחרים."
+msgstr "משתמש יכול למחוק %s של משתמשים אחרים."
 
 # @ dbem
 #: admin/em-options.php:1536
@@ -5100,7 +5100,7 @@ msgstr "משתמש יכול למחוק %S של משתמשים אחרים."
 #: admin/em-options.php:1554
 #, php-format
 msgid "User can edit other users %s"
-msgstr "משתמש יכול לערוך %S של משתמשים אחרים."
+msgstr "משתמש יכול לערוך %s של משתמשים אחרים."
 
 # @ dbem
 #: admin/em-options.php:1537
@@ -5108,7 +5108,7 @@ msgstr "משתמש יכול לערוך %S של משתמשים אחרים."
 #: admin/em-options.php:1555
 #, php-format
 msgid "User can delete their own %s"
-msgstr "משתמש יכול למחוק את ה- %S שלו."
+msgstr "משתמש יכול למחוק את ה- %s שלו."
 
 # @ dbem
 #: admin/em-options.php:1538
@@ -5116,14 +5116,14 @@ msgstr "משתמש יכול למחוק את ה- %S שלו."
 #: admin/em-options.php:1556
 #, php-format
 msgid "User can create and edit %s"
-msgstr "משתמש יכול ליצור ולערוך %S שלו."
+msgstr "משתמש יכול ליצור ולערוך %s שלו."
 
 # @ dbem
 #: admin/em-options.php:1539
 #: admin/em-options.php:1557
 #, php-format
 msgid "User can view private %s"
-msgstr "משתמש יכול לראות %S פרטי."
+msgstr "משתמש יכול לראות %s פרטי."
 
 # @ dbem
 #: admin/em-options.php:1542
@@ -5154,13 +5154,13 @@ msgstr "משתמש יכול להשתמש במקומות של אחרים לאיר
 #: admin/em-options.php:1563
 #, php-format
 msgid "User can delete %s categories and tags."
-msgstr "משתמש יכול למחוק קטגוריות ותגי %S."
+msgstr "משתמש יכול למחוק קטגוריות ותגי %s."
 
 # @ dbem
 #: admin/em-options.php:1564
 #, php-format
 msgid "User can edit %s categories and tags."
-msgstr "משתמש יכול לערוך קטגוריות ותגי %S"
+msgstr "משתמש יכול לערוך קטגוריות ותגי %s"
 
 # @ dbem
 #: admin/em-options.php:1568
@@ -5187,13 +5187,13 @@ msgstr "אתחל"
 #: buddypress/bp-em-activity.php:58
 #, php-format
 msgid "%s added the event %s to %s."
-msgstr "$S הוסיף את האירוע %S ל %S"
+msgstr "%s הוסיף את האירוע %s ל %s"
 
 # @ dbem
 #: buddypress/bp-em-core.php:53
 #, php-format
 msgid "Search %s..."
-msgstr "חפש %S..."
+msgstr "חפש %s..."
 
 # @ dbem
 #: buddypress/screens/my-events.php:47
@@ -5205,7 +5205,7 @@ msgstr "תזמן אירועים מחדש"
 #: classes/em-categories-taxonomy.php:55
 #, php-format
 msgid "Choose a color for your category. You can access this using the %s placeholder."
-msgstr "בחר בצבע לקטגוריה שלך. אתה יכול לגשת לכך בעזרת %S."
+msgstr "בחר בצבע לקטגוריה שלך. אתה יכול לגשת לכך בעזרת %s."
 
 # @ dbem
 #: classes/em-categories-taxonomy.php:66
@@ -5216,7 +5216,7 @@ msgstr "בחר או העלה תמונה"
 #: classes/em-categories-taxonomy.php:67
 #, php-format
 msgid "Choose an image for your category, which can be displayed using the %s placeholder."
-msgstr "בחר תמונה לקטגוריה שלך, שאותה ניתן להציג בעזרת מחזיק מקום %S"
+msgstr "בחר תמונה לקטגוריה שלך, שאותה ניתן להציג בעזרת מחזיק מקום %s"
 
 # @ dbem
 #: classes/em-event-post-admin.php:42
@@ -5240,7 +5240,7 @@ msgstr "פרטי האירוע שלך לא נכונים ולא ניתן ליצו�
 #: classes/em-location-post-admin.php:59
 #, php-format
 msgid "Your %s details are incorrect and cannot be published, please correct these errors first:"
-msgstr "פרטי  %S שלך לא נכונים ולא ניתנים לפרסום, אנא תקן את השגיאות האלה קודם:"
+msgstr "פרטי  %s שלך לא נכונים ולא ניתנים לפרסום, אנא תקן את השגיאות האלה קודם:"
 
 # @ dbem
 #: classes/em-event-post-admin.php:197
@@ -5262,7 +5262,7 @@ msgstr "חזרות"
 #: classes/em-event-post.php:121
 #, php-format
 msgid "View all posts in %s"
-msgstr "ראה כל הפוסטים ב %S"
+msgstr "ראה כל הפוסטים ב %s"
 
 # @ default
 #: classes/em-event-posts-admin.php:74
@@ -5299,7 +5299,7 @@ msgstr "נתק"
 #: classes/em-event-posts-admin.php:181
 #, php-format
 msgid "Duplicate %s"
-msgstr "שכפל %S"
+msgstr "שכפל %s"
 
 # @ dbem
 #: classes/em-event-posts-admin.php:181
@@ -5340,7 +5340,7 @@ msgstr "הוא לא יוצג ברשימות האתר שלך, וכדי לתקן �
 #: classes/em-location.php:360
 #, php-format
 msgid "Something went wrong saving your %s to the index table. Please inform a site administrator about this."
-msgstr "משהו קרה בזמן שמירת %S שלך לטבלת האינדקס. אנא הודע למנהל האתר על זה."
+msgstr "משהו קרה בזמן שמירת %s שלך לטבלת האינדקס. אנא הודע למנהל האתר על זה."
 
 # @ dbem
 #: classes/em-event.php:611
@@ -5349,14 +5349,14 @@ msgstr "משהו קרה בזמן שמירת %S שלך לטבלת האינדקס.
 #: classes/em-location.php:372
 #, php-format
 msgid "Successfully saved %s"
-msgstr "שמרת בהצלחה את %S"
+msgstr "שמרת בהצלחה את %s"
 
 # @ dbem
 #: classes/em-event.php:619
 #: classes/em-location.php:370
 #, php-format
 msgid "Something went wrong updating your %s to the index table. Please inform a site administrator about this."
-msgstr "משהו קרה בזמן עדכון ה- %S לטבלת האינדקס. אנא הודע למנהל האתר על כך."
+msgstr "משהו קרה בזמן עדכון ה- %s לטבלת האינדקס. אנא הודע למנהל האתר על כך."
 
 # @ dbem
 #: admin/em-bookings.php:106
@@ -5364,7 +5364,7 @@ msgstr "משהו קרה בזמן עדכון ה- %S לטבלת האינדקס. א
 #: classes/em-location.php:661
 #, php-format
 msgid "Edit %s"
-msgstr "ערוך את %S"
+msgstr "ערוך את %s"
 
 # @ dbem
 #: classes/em-event.php:1549
@@ -5740,13 +5740,13 @@ msgstr "בטוח שאתה רוצה למחוק את כל האירועים החו�
 #: events-manager.php:291
 #, php-format
 msgid "You cannot read private %s"
-msgstr "אתה לא יכול לקרוא %S פרטי."
+msgstr "אתה לא יכול לקרוא %s פרטי."
 
 # @ dbem
 #: events-manager.php:292
 #, php-format
 msgid "You cannot view others %s"
-msgstr "אתה לא יכול לראות %S של אחרים."
+msgstr "אתה לא יכול לראות %s של אחרים."
 
 # @ dbem
 #: events-manager.php:298
@@ -5860,7 +5860,7 @@ msgstr "הזמנות אחרונות"
 #: admin/em-bookings.php:105
 #, php-format
 msgid "View %s"
-msgstr "צפה ב- %S"
+msgstr "צפה ב- %s"
 
 # @ dbem
 #: admin/em-bookings.php:108
@@ -5930,21 +5930,21 @@ msgstr "בודק גרסאות פיתוח."
 #: admin/em-options.php:355
 #, php-format
 msgid "Enable %s attributes?"
-msgstr "לאפשר מאפיינים %S?"
+msgstr "לאפשר מאפיינים %s?"
 
 # @ dbem
 #: admin/em-options.php:327
 #: admin/em-options.php:356
 #, php-format
 msgid "Enable %s custom fields?"
-msgstr "לאפשר שדות יחודיים %S?"
+msgstr "לאפשר שדות יחודיים %s?"
 
 # @ dbem
 #: admin/em-options.php:329
 #: admin/em-options.php:358
 #, php-format
 msgid "%s Attributes"
-msgstr "מאפיינים %S"
+msgstr "מאפיינים %s"
 
 # @ dbem
 #: admin/em-options.php:358
@@ -5963,14 +5963,14 @@ msgstr "לאפשר תגובות?"
 #: admin/em-options.php:632
 #, php-format
 msgid "If you would like to disable comments entirely, disable this, otherwise you can disable comments on each single %s. Note that %s with comments enabled will still be until you resave them."
-msgstr "אם אתה רוצה לא לאפשר תגובות בכלל, בטל כאן. אם לא, תוכל לבטל לכל אירוע בנפרד."
+msgstr ""
 
 # @ dbem
 #: admin/em-options.php:496
 #: admin/em-options.php:654
 #, php-format
 msgid "WordPress %s Archives"
-msgstr "ארכיבי וורדפרס %S"
+msgstr "ארכיבי וורדפרס %s"
 
 # @ default
 #: admin/em-options.php:497
@@ -6012,13 +6012,13 @@ msgstr "דפי ניהול קדמיים"
 #: admin/em-options.php:928
 #, php-format
 msgid "Users can view, add and edit their %s on this page."
-msgstr "משתמשים יכולים לראות ולערות את ה- %S שלהם בדף זה."
+msgstr "משתמשים יכולים לראות ולערות את ה- %s שלהם בדף זה."
 
 # @ dbem
 #: admin/em-options.php:929
 #, php-format
 msgid "Users can manage their %s on this page."
-msgstr "משתמשים יכולים לנהל את ה- %S בדף זה."
+msgstr "משתמשים יכולים לנהל את ה- %s בדף זה."
 
 # @ dbem
 #: admin/em-options.php:1000
@@ -6029,7 +6029,7 @@ msgstr "הודעת כל היום"
 #: admin/em-options.php:1000
 #, php-format
 msgid "If an event lasts all day, this text will show if using the %s placeholder"
-msgstr "אם אירוע נמשך כל היום, הטקסט הזה יראה אם משתמשים בשומר מקום %S."
+msgstr "אם אירוע נמשך כל היום, הטקסט הזה יראה אם משתמשים בשומר מקום %s."
 
 # @ dbem
 #: admin/em-options.php:1001
@@ -6210,7 +6210,7 @@ msgstr "טקסט לכפתור הגש (submit)"
 #: admin/em-options.php:1277
 #, php-format
 msgid "The text used by the submit button. To use an image instead, enter the full url starting with %s or %s."
-msgstr "הטקסט שעל כפתור הגש. אם אתה משתמש בתמונה, הכנס כתובת אינטרנט מלאה מתחילה ב- %S."
+msgstr ""
 
 # @ dbem
 #: admin/em-options.php:1344
@@ -6401,7 +6401,7 @@ msgstr "יצא הזמנות אלה"
 #: classes/em-bookings-table.php:371
 #, php-format
 msgid "%s Rows"
-msgstr "%S שורות"
+msgstr "%s שורות"
 
 # @ dbem
 #: classes/em-bookings-table.php:390
@@ -6439,7 +6439,7 @@ msgstr "ID"
 #: classes/em-location-posts-admin.php:49
 #, php-format
 msgid "%s ID"
-msgstr "%S ID"
+msgstr "%s ID"
 
 # @ default
 #: classes/em-event.php:457
@@ -6455,7 +6455,7 @@ msgstr "כל שנה"
 #: classes/em-event.php:1928
 #, php-format
 msgid "every %s years"
-msgstr "כל %S שנים"
+msgstr "כל %s שנים"
 
 # @ dbem
 #: classes/em-mailer.php:56
@@ -6471,7 +6471,7 @@ msgstr "התמונה קטנה מדי! גודל מינימלי מותר הוא: "
 #: em-actions.php:611
 #, php-format
 msgid "Exported booking on %s"
-msgstr "הזמנות מיוצאות על %S"
+msgstr "הזמנות מיוצאות על %s"
 
 # @ dbem
 #: em-install.php:302
@@ -6602,14 +6602,14 @@ msgstr "הכנס מספר מקומות מקסימלי (חובה)"
 #: templates/placeholders/bookingbutton.php:8
 #, php-format
 msgid "%s Submitted"
-msgstr "הוגש %S"
+msgstr "הוגש %s"
 
 # @ dbem
 #: templates/placeholders/bookingbutton.php:9
 #: templates/placeholders/bookingbutton.php:13
 #, php-format
 msgid "%s Error. Try again?"
-msgstr "שגיאת %S. לנסות שוב?"
+msgstr "שגיאת %s. לנסות שוב?"
 
 # @ dbem
 #: templates/placeholders/bookingbutton.php:11

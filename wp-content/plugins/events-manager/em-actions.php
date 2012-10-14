@@ -237,7 +237,8 @@ function em_init_actions() {
 			ob_start();
 			em_verify_nonce('booking_add');
 			if( !is_user_logged_in() || get_option('dbem_bookings_double') || !$EM_Event->get_bookings()->has_booking(get_current_user_id()) ){
-				$post_validation = $EM_Booking->get_post();
+			    $EM_Booking->get_post();
+				$post_validation = $EM_Booking->validate();
 				do_action('em_booking_add', $EM_Event, $EM_Booking, $post_validation);
 				if( $post_validation ){
 					//Does this user need to be registered first?
@@ -247,8 +248,8 @@ function em_init_actions() {
 						if( (!is_user_logged_in() || defined('EM_FORCE_REGISTRATION')) && get_option('dbem_bookings_anonymous') && !get_option('dbem_bookings_registration_disable') ){
 							//find random username - less options for user, less things go wrong
 							$username_root = explode('@', $_REQUEST['user_email']);
-							$username_rand = $username_root[0].rand(1,1000);
-							while( username_exists($username_root[0].rand(1,1000)) ){
+							$username_rand = $username_root[0];
+							while( username_exists($username_rand) ) {
 								$username_rand = $username_root[0].rand(1,1000);
 							}
 							$_REQUEST['dbem_phone'] = (!empty($_REQUEST['dbem_phone'])) ? $_REQUEST['dbem_phone']:''; //fix to prevent warnings
@@ -435,7 +436,7 @@ function em_init_actions() {
 		}elseif( $_REQUEST['action'] == 'booking_set_status' ){
 			em_verify_nonce('booking_set_status_'.$EM_Booking->booking_id);
 			if( $EM_Booking->can_manage('manage_bookings','manage_others_bookings') && $_REQUEST['booking_status'] != $EM_Booking->booking_status ){
-				if ( $EM_Booking->set_status($_REQUEST['booking_status'], false) ){
+				if ( $EM_Booking->set_status($_REQUEST['booking_status'], false, true) ){
 					if( !empty($_REQUEST['send_email']) ){
 						if( $EM_Booking->email(false) ){
 							$EM_Booking->feedback_message .= " ".__('Mail Sent.','dbem');
@@ -615,6 +616,12 @@ function em_init_actions() {
 		$EM_Bookings_Table = new EM_Bookings_Table($show_tickets);
 		header("Content-Type: application/octet-stream; charset=utf-8");
 		header("Content-Disposition: Attachment; filename=".sanitize_title(get_bloginfo())."-bookings-export.csv");
+		if( !empty($_REQUEST['event_id']) ){
+			$EM_Event = em_get_event($_REQUEST['event_id']);
+			echo __('Event','dbem') . ' : ' . $EM_Event->event_name .  "\n";
+			if( $EM_Event->location_id > 0 ) echo __('Where','dbem') . ' - ' . $EM_Event->get_location()->location_name .  "\n";
+			echo __('When','dbem') . ' : ' . $EM_Event->output('#_EVENTDATES - #_EVENTTIMES') .  "\n";
+		}
 		echo sprintf(__('Exported booking on %s','dbem'), date_i18n('D d M Y h:i', current_time('timestamp'))) .  "\n";
 		echo '"'. implode('","', $EM_Bookings_Table->get_headers(true)). '"' .  "\n";
 		//Rows

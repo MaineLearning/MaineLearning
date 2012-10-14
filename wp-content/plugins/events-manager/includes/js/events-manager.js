@@ -166,13 +166,13 @@ jQuery(document).ready( function($){
 					//sort out dates and localization masking
 					var start_pub = $("#em-tickets-form input[name=ticket_start_pub]").val();
 					var end_pub = $("#em-tickets-form input[name=ticket_end_pub]").val();
-					$('#em-tickets-form *[name]').attr('value','');
+					$('#em-tickets-form *[name]').attr('value','').removeAttr('checked');
 					$('#em-tickets-form .close').trigger('click');
 					$(this).dialog('close');
 				}
 			}]
 		});
-		$("#em-tickets-add").click(function(e){ e.preventDefault(); $('#em-tickets-form *[name]').attr('value',''); $("#em-tickets-form").dialog('open'); });
+		$("#em-tickets-add").click(function(e){ e.preventDefault(); $('#em-tickets-form *[name]').attr('value','').removeAttr('checked'); $("#em-tickets-form").dialog('open'); });
 		//Edit a Ticket
 		$(document).delegate('.ticket-actions-edit', 'click', function(e){
 			//trigger click
@@ -180,11 +180,17 @@ jQuery(document).ready( function($){
 			$('#em-tickets-add').trigger('click');
 			//populate form
 			var rowId = $(this).parents('tr').first().attr('id');
-			$('#em-tickets-form *[name]').attr('value','');
+			$('#em-tickets-form *[name]').attr('value','').removeAttr('checked');
 			$.each( $('#'+rowId+' *[name]'), function(index,el){
 				var el = $(el);
 				var selector = el.attr('class');
-				$('#em-tickets-form *[name='+selector+']').attr('value',el.attr('value'));
+				var input_field = $('#em-tickets-form *[name='+selector+']');
+				if( input_field.attr('type') == 'checkbox' ){
+					if( el.val() == 1 ){ input_field.attr('checked','checked'); }
+					else{ input_field.removeAttr('checked'); }
+				}else{
+					input_field.attr('value',el.attr('value'));	
+				}
 			});
 			$("#em-tickets-form input[name=prev_slot]").attr('value',rowId); //save the current slot number
 			//refresh datepicker and values
@@ -521,7 +527,7 @@ jQuery(document).ready( function($){
 	
 	//Finally, add autocomplete here
 	//Autocomplete
-	if( jQuery( "#em-location-data input#location-name, " ).length > 0 ){
+	if( jQuery( "#em-location-data input#location-name" ).length > 0 ){
 		jQuery( "#em-location-data input#location-name" ).autocomplete({
 			source: EM.locationajaxurl,
 			minLength: 2,
