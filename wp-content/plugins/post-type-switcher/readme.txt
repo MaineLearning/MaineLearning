@@ -1,11 +1,11 @@
 === Post Type Switcher ===
-Contributors: johnjamesjacoby
+Contributors: johnjamesjacoby, beatpanda
 Tags: post type
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.2
 
-A simple way to change a post type in WordPress.
+A simple way to change a post's type in WordPress
 
 == Description ==
 
@@ -18,7 +18,19 @@ Any combination is possible, even custom post types:
 
 Note: Invisible post types (revisions, menus, etc...) are purposely excluded. Filter 'pts_post_type_filter' to adjust the boundaries.
 
+Now with bulk editing, thanks to Matthew Gerring!
+
 == Changelog ==
+
+= Version 1.2 =
+* Add bulk editing to supported post types
+* Props Matthew Gerring for bulk edit contribution
+
+= Version 1.1.1 =
+* Add is_admin() check to prevent theme-side interference
+* Change save_post priority to 999 to avoid plugin compatibility issues
+* Remove ending closing php tag
+* HTML and PHPDoc improvements
 
 = Version 1.1 =
 * Fix revisions being nooped
