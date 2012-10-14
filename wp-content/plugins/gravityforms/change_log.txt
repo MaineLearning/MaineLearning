@@ -1,4 +1,29 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.8.1
+	- Added GFExport::add_default_export_fields($form) to refactor a fragment of duplicate code
+    - Fixed issue with multi-page form validation going to the wrong page
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.8
+    - Fixed issue with conditional logic when configuring multiple "is not" rules with checkboxes as targets
+    - Added hooks on the entry detail page to enable add-ons to create new "boxes" of information
+    - Fixed issue where post category placeholder (for selects) was populating the text as the value when the value should be blank
+    - Fixed issue where fields that are not on the last page of a multi-page form and are marked to not allow duplicates were not going through duplicate validation
+	- Added gform_append_field_choice_option_[field type] JS hook to allow additional options for each choice
+	- Added gform_load_field_choices JS hook to allow help text to be displayed below the choices
+    - Fixed issue where calculation fields hidden via conditional logic were still being processed
+    - Fixed bug where forms with no other Post Field than a "post_custom_field" were not creating posts
+    - Added "gform_before_resend_notifications" filter to allow modification of form object before notifications are resent
+    - Fixed category sorting for manually selected Post Category fields to be case insensitive
+    - Updated AJAX calls using sack and jquery to not pass along a cookie because this caused the loading of admin-ajax.php to be aborted for some users
+    - Fixed notice messages
+    - Fixed issue with spinner not displaying properly when using image buttons
+    - Fixed WordPress minimum version message so that it reflects the correct WordPress minimum version
+    - Fixed issue with number field not trimming value and triggering validation when number is followed by a space character
+    - Fixed issue where quantity was counted as 0 when a product's quantity field was hidden via conditional logic.
+    - Fixed conflict with some popup scripts (i.e. FancyBox) that caused the spinner to be displayed twice
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.7
     - Fixed conflict with raw shortcode that caused a javascript error on AJAX forms
     - Updated German translation file

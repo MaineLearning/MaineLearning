@@ -30,11 +30,8 @@ $form = RGFormsModel::get_form_meta($form_id);
     <head>
         <?php
         wp_print_styles(array("wp-admin", "colors-fresh"));
+        wp_print_scripts(array("jquery-ui-sortable"));
         ?>
-        <script src="<?php echo GFCommon::get_base_url()?>/js/jquery-1.3.2.min.js?ver=<?php echo GFCommon::$version ?>"></script>
-        <script src="<?php echo GFCommon::get_base_url()?>/js/jquery-ui/ui.core.js?ver=<?php echo GFCommon::$version ?>"></script>
-        <script src="<?php echo GFCommon::get_base_url()?>/js/jquery-ui/ui.sortable.js?ver=<?php echo GFCommon::$version ?>"></script>
-
         <style type="text/css">
             body {font-family:"Lucida Grande",Verdana,Arial,sans-serif;}
             #sortable_available, #sortable_selected { list-style-type: none; margin: 0; padding: 2px; height:250px; border:1px solid #eaeaea; -moz-border-radius:4px; -webkit-border-radius:4px; -khtml-border-radius:4px; border-radius:4px  background-color:#FFF;}

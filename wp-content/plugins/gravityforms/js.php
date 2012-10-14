@@ -7,7 +7,7 @@ function DeleteCustomChoice(){
         return;
 
     //Sending AJAX request
-    jQuery.post(ajaxurl, {action:"gf_delete_custom_choice", name: gform_selected_custom_choice , gf_delete_custom_choice: "<?php echo wp_create_nonce("gf_delete_custom_choice") ?>",cookie: encodeURIComponent(document.cookie)});
+    jQuery.post(ajaxurl, {action:"gf_delete_custom_choice", name: gform_selected_custom_choice , gf_delete_custom_choice: "<?php echo wp_create_nonce("gf_delete_custom_choice") ?>"});
 
     //Updating UI
     delete gform_custom_choices[gform_selected_custom_choice];
@@ -35,7 +35,7 @@ function SaveCustomChoices(){
     var choices = jQuery('#gfield_bulk_add_input').val().split('\n');
 
     //Sending AJAX request
-    jQuery.post(ajaxurl, {action:"gf_save_custom_choice", previous_name: gform_selected_custom_choice , new_name: name, choices: jQuery.toJSON(choices), gf_save_custom_choice: "<?php echo wp_create_nonce("gf_save_custom_choice") ?>",cookie: encodeURIComponent(document.cookie)});
+    jQuery.post(ajaxurl, {action:"gf_save_custom_choice", previous_name: gform_selected_custom_choice , new_name: name, choices: jQuery.toJSON(choices), gf_save_custom_choice: "<?php echo wp_create_nonce("gf_save_custom_choice") ?>"});
 
     //deleting existing custom choice
     if(gform_selected_custom_choice.length > 0)
@@ -328,7 +328,6 @@ function SaveForm(isNew){
         mysack.setVar( "rg_save_form", "<?php echo wp_create_nonce("rg_save_form") ?>" );
         mysack.setVar( "id", form.id );
         mysack.setVar( "form", form_json );
-        mysack.encVar( "cookie", document.cookie, false );
         mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while saving form", "gravityforms")) ?>' )};
         mysack.runAJAX();
     }
@@ -348,7 +347,6 @@ function DeleteField(fieldId){
         mysack.setVar( "rg_delete_field", "<?php echo wp_create_nonce("rg_delete_field") ?>" );
         mysack.setVar( "form_id", form.id );
         mysack.setVar( "field_id", fieldId );
-        mysack.encVar( "cookie", document.cookie, false );
         mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while deleting field.", "gravityforms")) ?>' )};
         mysack.runAJAX();
 
@@ -758,7 +756,6 @@ function StartAddField(type){
     mysack.setVar( "action", "rg_add_field" );
     mysack.setVar( "rg_add_field", "<?php echo wp_create_nonce("rg_add_field") ?>" );
     mysack.setVar( "field", jQuery.toJSON(field) );
-    mysack.encVar( "cookie", document.cookie, false );
     mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while adding field", "gravityforms")) ?>' )};
     mysack.runAJAX();
 
@@ -774,7 +771,6 @@ function DuplicateField(field, sourceFieldId){
     mysack.setVar( "rg_duplicate_field", "<?php echo wp_create_nonce("rg_duplicate_field") ?>" );
     mysack.setVar( "field", jQuery.toJSON(field) );
     mysack.setVar( "source_field_id", sourceFieldId);
-    mysack.encVar( "cookie", document.cookie, false );
     mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while duplicating field", "gravityforms")) ?>' )};
     mysack.runAJAX();
 
@@ -799,7 +795,6 @@ function StartChangeInputType(type, field){
     mysack.setVar( "action", "rg_change_input_type" );
     mysack.setVar( "rg_change_input_type", "<?php echo wp_create_nonce("rg_change_input_type") ?>" );
     mysack.setVar( "field", jQuery.toJSON(field));
-    mysack.encVar( "cookie", document.cookie, false );
     mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while changing input type", "gravityforms")) ?>' )};
     mysack.runAJAX();
 
@@ -879,7 +874,11 @@ function GetFieldChoices(field){
         str += "<input type='text' id='" + inputType + "_choice_text_" + i + "' value=\"" + field.choices[i].text.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-text' />";
         str += "<input type='text' id='"+ inputType + "_choice_value_" + i + "' value=\"" + value.replace(/"/g, "&quot;") + "\" onkeyup=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-value' />";
         str += "<input type='text' id='"+ inputType + "_choice_price_" + i + "' value=\"" + price.replace(/"/g, "&quot;") + "\" onchange=\"SetFieldChoice('" + inputType + "', " + i + ");\" class='field-choice-input field-choice-price' />";
-        str += "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='<?php _e("add another choice", "gravityforms") ?>' alt='<?php _e("add another choice", "gravityforms") ?>' style='cursor:pointer; margin:0 3px;' onclick=\"InsertFieldChoice(" + (i+1) + ");\" />";
+        
+		if(window["gform_append_field_choice_option_" + field.type])
+            str += window["gform_append_field_choice_option_" + field.type](field, i);
+
+		str += "<img src='" + imagesUrl + "/add.png' class='add_field_choice' title='<?php _e("add another choice", "gravityforms") ?>' alt='<?php _e("add another choice", "gravityforms") ?>' style='cursor:pointer; margin:0 3px;' onclick=\"InsertFieldChoice(" + (i+1) + ");\" />";
 
         if(field.choices.length > 1 )
             str += "<img src='" + imagesUrl + "/remove.png' title='<?php _e("remove this choice", "gravityforms") ?>' alt='<?php _e("remove this choice", "gravityforms") ?>' class='delete_field_choice' style='cursor:pointer;' onclick=\"DeleteFieldChoice(" + i + ");\" />";

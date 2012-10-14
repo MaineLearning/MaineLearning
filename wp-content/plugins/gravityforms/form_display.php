@@ -33,7 +33,8 @@ class GFFormDisplay{
 
         //don't validate when going to previous page
         if(empty($target_page) || $target_page >= $page_number){
-            $is_valid = self::validate($form, $field_values, $page_number);
+            $failed_validation_page = $page_number;
+            $is_valid = self::validate($form, $field_values, $page_number, $failed_validation_page);
         }
 
         //Upload files to temp folder when going to the next page or when submitting the form and it failed validation
@@ -46,6 +47,10 @@ class GFFormDisplay{
         // Load target page if it did not fail validation or if going to the previous page
         if($is_valid){
             $page_number = $target_page;
+        }
+        else
+        {
+			$page_number = $failed_validation_page;
         }
 
         $confirmation = "";
@@ -565,9 +570,11 @@ class GFFormDisplay{
                 <script type='text/javascript'>" . apply_filters("gform_cdata_open", "") . "" .
                     "function gformInitSpinner_{$form_id}(){" .
                         "jQuery('#gform_{$form_id}').submit(function(){" .
-                            "jQuery('#gform_submit_button_{$form_id}').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
-                            "jQuery('#gform_wrapper_{$form_id} .gform_previous_button').attr('disabled', true); " .
-                            "jQuery('#gform_wrapper_{$form_id} .gform_next_button').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
+                            "if(jQuery('#gform_ajax_spinner_{$form_id}').length == 0){".
+                                "jQuery('#gform_submit_button_{$form_id}').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
+                                "jQuery('#gform_wrapper_{$form_id} .gform_previous_button').attr('disabled', true); " .
+                                "jQuery('#gform_wrapper_{$form_id} .gform_next_button, #gform_wrapper_{$form_id} .gform_image_button').attr('disabled', true).after('<' + 'img id=\"gform_ajax_spinner_{$form_id}\"  class=\"gform_ajax_spinner\" src=\"{$spinner_url}\" alt=\"\" />');" .
+                            "}".
                         "} );" .
                     "}" .
                     "jQuery(document).ready(function($){" .
@@ -800,7 +807,9 @@ class GFFormDisplay{
                 }
 
                 return true;
+
             case 'singleproduct':
+                $value = rgpost("input_" . $field["id"]);
                 $quantity_id = $field["id"] . ".3";
                 $quantity = rgpost($quantity_id, $value);
 
@@ -984,7 +993,7 @@ class GFFormDisplay{
         return checkdate($month, $day, $year);
     }
 
-    public static function validate(&$form, $field_values, $page_number=0){
+    public static function validate(&$form, $field_values, $page_number=0, &$failed_validation_page=0){
 
         // validate form schedule
         if(self::validate_form_schedule($form))
@@ -997,8 +1006,10 @@ class GFFormDisplay{
         foreach($form["fields"] as &$field){
 
             //If a page number is specified, only validates fields that are on current page
-            if($page_number > 0 && $field["pageNumber"] != $page_number)
+	        //always validate when field set to no duplicates
+	        if(($page_number > 0 && $field["pageNumber"] != $page_number) && $field["noDuplicates"] <> "1"){
                 continue;
+			}
 
             //ignore validation if field is hidden or admin only
             if(RGFormsModel::is_field_hidden($form, $field, $field_values) || $field["adminOnly"])
@@ -1014,6 +1025,8 @@ class GFFormDisplay{
             //display error if field does not allow duplicates and the submitted value already exists
             else if($field["noDuplicates"] && RGFormsModel::is_duplicate($form["id"], $field, $value)){
                 $field["failed_validation"] = true;
+                //set page number so the failed field displays if on multi-page form
+                $failed_validation_page = $field["pageNumber"];
 
                 $input_type = RGFormsModel::get_input_type($field);
                 switch($input_type){

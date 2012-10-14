@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 1.6.7
+Version: 1.6.8.1
 Author: rocketgenius
 Author URI: http://www.rocketgenius.com
 
@@ -1123,7 +1123,7 @@ class RGForms{
             <script type="text/javascript">
                 function AlienDismissUpgrade(){
                     jQuery("#gf_dashboard_message").slideUp();
-                    jQuery.post(ajaxurl, {action:"rg_dismiss_upgrade", version:"<?php echo $version_info["version"] ?>", cookie: encodeURIComponent(document.cookie)});
+                    jQuery.post(ajaxurl, {action:"rg_dismiss_upgrade", version:"<?php echo $version_info["version"] ?>"});
                 }
             </script>
             <?php
@@ -1346,7 +1346,8 @@ class RGForms{
         $leads = rgpost('leadIds'); // may be a single ID or an array of IDs
         $leads = !is_array($leads) ? array($leads) : $leads;
 
-        $form = RGFormsModel::get_form_meta(rgpost('formId'));
+        $form_id = rgpost('formId');
+        $form = apply_filters("gform_before_resend_notifications_{$form_id}", apply_filters('gform_before_resend_notifications', RGFormsModel::get_form_meta($form_id), $leads), $leads);
 
         if(empty($leads) || empty($form)) {
             _e("There was an error while resending the notifications.", "gravityforms");
@@ -1497,18 +1498,7 @@ class RGForms{
         $form = RGFormsModel::get_form_meta($form_id);
         $fields = array();
 
-        //Adding default fields
-        array_push($form["fields"],array("id" => "created_by" , "label" => __("Created By (User Id)", "gravityforms")));
-        array_push($form["fields"],array("id" => "id" , "label" => __("Entry Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "date_created" , "label" => __("Entry Date", "gravityforms")));
-        array_push($form["fields"],array("id" => "source_url" , "label" => __("Source Url", "gravityforms")));
-        array_push($form["fields"],array("id" => "transaction_id" , "label" => __("Transaction Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_amount" , "label" => __("Payment Amount", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_date" , "label" => __("Payment Date", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_status" , "label" => __("Payment Status", "gravityforms")));
-        array_push($form["fields"],array("id" => "post_id" , "label" => __("Post Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "user_agent" , "label" => __("User Agent", "gravityforms")));
-        array_push($form["fields"],array("id" => "ip" , "label" => __("User IP", "gravityforms")));
+        $form = GFExport::add_default_export_fields($form);
 
         if(is_array($form["fields"])){
             foreach($form["fields"] as $field){

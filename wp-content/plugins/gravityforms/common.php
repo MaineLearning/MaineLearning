@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.7";
+    public static $version = "1.6.8.1";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -398,7 +398,7 @@ class GFCommon{
         }
     }
 
-    public static function insert_calculation_variables($fields, $element_id, $onchange = '', $callback = '') {
+    public static function insert_calculation_variables($fields, $element_id, $onchange = '', $callback = '', $max_label_size=40) {
 
         if($fields == null)
             $fields = array();
@@ -424,7 +424,7 @@ class GFCommon{
                             <?php
                         }
                     } else {
-                        self::insert_field_variable($field, $max_label_size, $args);
+                        self::insert_field_variable($field, $max_label_size);
                     }
 
                 }
@@ -1377,17 +1377,17 @@ class GFCommon{
             set_transient("gform_update_info", $raw_response, 86400); //caching for 24 hours
         }
 
-         if ( is_wp_error( $raw_response ) || 200 != $raw_response['response']['code'])
+        if ( is_wp_error( $raw_response ) || 200 != $raw_response['response']['code'])
             return array("is_valid_key" => "1", "version" => "", "url" => "");
-         else
-         {
-             $ary = explode("||", $raw_response['body']);
-             $info = array("is_valid_key" => $ary[0], "version" => $ary[1], "url" => $ary[2]);
-             if(count($ary) == 4)
-                $info["expiration_time"] = $ary[3];
+        else {
 
-             return $info;
-         }
+            list($is_valid_key, $version, $url, $exp_time) = array_pad(explode("||", $raw_response['body']), 4, false);
+            $info = array("is_valid_key" => $is_valid_key, "version" => $version, "url" => $url);
+            if($exp_time)
+                $info["expiration_time"] = $exp_time;
+
+            return $info;
+        }
 
     }
 
@@ -1398,7 +1398,7 @@ class GFCommon{
 
     public static function ensure_wp_version(){
         if(!GF_SUPPORTED_WP_VERSION){
-            echo "<div class='error' style='padding:10px;'>Gravity Forms require WordPress 3.0 or greater. You must upgrade WordPress in order to use Gravity Forms</div>";
+            echo "<div class='error' style='padding:10px;'>" . sprintf(__("Gravity Forms require WordPress %s or greater. You must upgrade WordPress in order to use Gravity Forms", "gravityforms"), GF_MIN_WP_VERSION) . "</div>";
             return false;
         }
         return true;
@@ -1820,8 +1820,9 @@ class GFCommon{
         if(is_array(rgar($field, "choices"))){
             foreach($field["choices"] as $choice){
 
-                //needed for users upgrading from 1.0
-                $field_value = !empty($choice["value"]) || rgget("enableChoiceValue", $field) ? $choice["value"] : $choice["text"];
+                // needed for users upgrading from 1.0
+                $field_value = !empty($choice["value"]) || rgget("enableChoiceValue", $field) || $field['type'] == 'post_category' ? $choice["value"] : $choice["text"];
+
                 if(rgget("enablePrice", $field))
                     $field_value .= "|" . GFCommon::to_number(rgar($choice,"price"));
 
@@ -1857,7 +1858,7 @@ class GFCommon{
 
         foreach($fields as $field){
             $val = RGFormsModel::get_lead_field_value($lead, $field);
-            $val = GFCommon::get_lead_field_display($field, $val, $lead["currency"]);
+            $val = GFCommon::get_lead_field_display($field, $val, rgar($lead, 'currency'));
 
             if(!self::is_product_field($field["type"]) && !rgblank($val))
                 return false;
@@ -2237,7 +2238,7 @@ class GFCommon{
 
     public static function get_fields_by_type($form, $types){
         $fields = array();
-        if(!is_array($form["fields"]))
+        if(!is_array(rgar($form,"fields")))
             return $fields;
 
         foreach($form["fields"] as $field){
@@ -2654,7 +2655,7 @@ class GFCommon{
                 if($file_info){
                     $hidden_class = " gform_hidden";
                     $file_label_style = $hidden_style;
-                    $preview = "<span class='ginput_preview'><strong>{$file_info["uploaded_filename"]}</strong> | <a href='javascript:;' onclick='gformDeleteUploadedFile({$form_id}, {$id});'>" . __("delete", "gravityforms") . "</a></span>";
+                    $preview = "<span class='ginput_preview'><strong>" . esc_html($file_info["uploaded_filename"]) . "</strong> | <a href='javascript:;' onclick='gformDeleteUploadedFile({$form_id}, {$id});'>" . __("delete", "gravityforms") . "</a></span>";
                 }
 
                 //in admin, render all meta fields to allow for immediate feedback, but hide the ones not selected
@@ -3016,7 +3017,7 @@ class GFCommon{
                 else{
                     $file_info = RGFormsModel::get_temp_filename($form_id, "input_{$id}");
                     if($file_info && !$field["failed_validation"]){
-                        $preview = "<span class='ginput_preview'><strong>{$file_info["uploaded_filename"]}</strong> | <a href='javascript:;' onclick='gformDeleteUploadedFile({$form_id}, {$id});'>" . __("delete", "gravityforms") . "</a></span>";
+                        $preview = "<span class='ginput_preview'><strong>" . esc_html($file_info["uploaded_filename"]) . "</strong> | <a href='javascript:;' onclick='gformDeleteUploadedFile({$form_id}, {$id});'>" . __("delete", "gravityforms") . "</a></span>";
                         return "<div class='ginput_container'>" . str_replace(" class='", " class='gform_hidden ", $upload) . " {$preview}</div>";
                     }
                     else{
@@ -3982,7 +3983,7 @@ class GFCommon{
                 $lead_value = RGFormsModel::get_lead_field_value($lead, $field);
 
                 $quantity_field = self::get_product_fields_by_type($form, array("quantity"), $id);
-                $quantity = sizeof($quantity_field) > 0 ? RGFormsModel::get_lead_field_value($lead, $quantity_field[0]) : 1;
+                $quantity = sizeof($quantity_field) > 0 && !RGFormsModel::is_field_hidden($form, $quantity_field[0], array(), $lead) ? RGFormsModel::get_lead_field_value($lead, $quantity_field[0]) : 1;
 
                 switch($field["type"]){
 
@@ -4243,10 +4244,9 @@ class GFCommon{
 
     public static function create_post($form, &$lead) {
         $disable_post = apply_filters("gform_disable_post_creation_{$form["id"]}", apply_filters("gform_disable_post_creation", false, $form, $lead), $form, $lead);
-        if(!$disable_post){
-            //creates post if the form has any post fields
-            $post_id = RGFormsModel::create_post($form, $lead);
-        }
+
+        //creates post if the form has any post fields
+        $post_id = !$disable_post ? RGFormsModel::create_post($form, $lead) : 0;
 
         return $post_id;
     }

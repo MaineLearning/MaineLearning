@@ -1938,7 +1938,7 @@ class GFFormDetail{
                                         <?php gform_tooltip("form_field_calculation_formula") ?>
                                     </label>
                                     <div>
-                                        <?php GFCommon::insert_calculation_variables($form["fields"], "field_calculation_formula", '', 'FormulaContentCallback'); ?>
+                                        <?php GFCommon::insert_calculation_variables($form["fields"], "field_calculation_formula", '', 'FormulaContentCallback', 40); ?>
                                         <div class="gf_calculation_buttons">
                                             <?php foreach(array('+', '-', '/', '*', '(', ')', '.') as $button) { ?>
                                                 <input type="button" value="<?php echo in_array($button, array('.')) ? $button : " $button "; ?>" onclick="InsertVariable('field_calculation_formula', 'FormulaContentCallback', this.value);" />

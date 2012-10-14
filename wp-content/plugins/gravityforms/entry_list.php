@@ -259,7 +259,6 @@ class GFEntryList{
                 mysack.setVar( "lead_id", lead_id);
                 mysack.setVar( "name", name);
                 mysack.setVar( "value", value);
-                mysack.encVar( "cookie", document.cookie, false );
                 mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while setting lead property", "gravityforms")) ?>' )};
                 mysack.runAJAX();
 
