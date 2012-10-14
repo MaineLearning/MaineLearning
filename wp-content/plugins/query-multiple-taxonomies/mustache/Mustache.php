@@ -14,7 +14,8 @@
  */
 class Mustache {
 
-	const VERSION = '0.7.1';
+	const VERSION      = '1.0.0';
+	const SPEC_VERSION = '1.1.2';
 
 	/**
 	 * Should this Mustache throw exceptions when it finds unexpected tags?
@@ -89,9 +90,18 @@ class Mustache {
 	 *         // opening and closing delimiters, as an array or a space-separated string
 	 *         'delimiters' => '<% %>',
 	 *
-	 *         // an array of pragmas to enable
+	 *         // an array of pragmas to enable/disable
 	 *         'pragmas' => array(
-	 *             Mustache::PRAGMA_UNESCAPED
+	 *             Mustache::PRAGMA_UNESCAPED => true
+	 *         ),
+	 *
+	 *         // an array of thrown exceptions to enable/disable
+	 *         'throws_exceptions' => array(
+	 *             MustacheException::UNKNOWN_VARIABLE         => false,
+	 *             MustacheException::UNCLOSED_SECTION         => true,
+	 *             MustacheException::UNEXPECTED_CLOSE_SECTION => true,
+	 *             MustacheException::UNKNOWN_PARTIAL          => false,
+	 *             MustacheException::UNKNOWN_PRAGMA           => true,
 	 *         ),
 	 *     );
 	 *
@@ -131,12 +141,18 @@ class Mustache {
 		}
 
 		if (isset($options['pragmas'])) {
-			foreach ($options['pragmas'] as $pragma_name) {
-				if (!in_array($pragma_name, $this->_pragmasImplemented)) {
+			foreach ($options['pragmas'] as $pragma_name => $pragma_value) {
+				if (!in_array($pragma_name, $this->_pragmasImplemented, true)) {
 					throw new MustacheException('Unknown pragma: ' . $pragma_name, MustacheException::UNKNOWN_PRAGMA);
 				}
 			}
 			$this->_pragmas = $options['pragmas'];
+		}
+
+		if (isset($options['throws_exceptions'])) {
+			foreach ($options['throws_exceptions'] as $exception => $value) {
+				$this->_throwsExceptions[$exception] = $value;
+			}
 		}
 	}
 
@@ -188,7 +204,7 @@ class Mustache {
 		}
 
 		$template = $this->_renderPragmas($template);
-		$template = $this->_renderTemplate($template, $this->_context);
+		$template = $this->_renderTemplate($template);
 
 		$this->_otag = $otag_orig;
 		$this->_ctag = $ctag_orig;
@@ -238,7 +254,10 @@ class Mustache {
 
 				// regular section
 				case '#':
-					if ($this->_varIsIterable($val)) {
+					// higher order sections
+					if ($this->_varIsCallable($val)) {
+						$rendered_content = $this->_renderTemplate(call_user_func($val, $content));
+					} else if ($this->_varIsIterable($val)) {
 						foreach ($val as $local_context) {
 							$this->_pushContext($local_context);
 							$rendered_content .= $this->_renderTemplate($content);
@@ -399,7 +418,11 @@ class Mustache {
 		$options_string = $matches['options_string'];
 
 		if (!in_array($pragma_name, $this->_pragmasImplemented)) {
-			throw new MustacheException('Unknown pragma: ' . $pragma_name, MustacheException::UNKNOWN_PRAGMA);
+			if ($this->_throwsException(MustacheException::UNKNOWN_PRAGMA)) {
+				throw new MustacheException('Unknown pragma: ' . $pragma_name, MustacheException::UNKNOWN_PRAGMA);
+			} else {
+				return '';
+			}
 		}
 
 		$options = array();
@@ -444,7 +467,9 @@ class Mustache {
 	 */
 	protected function _getPragmaOptions($pragma_name) {
 		if (!$this->_hasPragma($pragma_name)) {
-			throw new MustacheException('Unknown pragma: ' . $pragma_name, MustacheException::UNKNOWN_PRAGMA);
+			if ($this->_throwsException(MustacheException::UNKNOWN_PRAGMA)) {
+				throw new MustacheException('Unknown pragma: ' . $pragma_name, MustacheException::UNKNOWN_PRAGMA);
+			}
 		}
 
 		return (is_array($this->_localPragmas[$pragma_name])) ? $this->_localPragmas[$pragma_name] : array();
@@ -615,7 +640,8 @@ class Mustache {
 	 * @return string
 	 */
 	protected function _renderEscaped($tag_name, $leading, $trailing) {
-		return $leading . htmlentities($this->_getVariable($tag_name), ENT_COMPAT, $this->_charset) . $trailing;
+		$rendered = htmlentities($this->_renderUnescaped($tag_name, '', ''), ENT_COMPAT, $this->_charset);
+		return $leading . $rendered . $trailing;
 	}
 
 	/**
@@ -647,7 +673,13 @@ class Mustache {
 	 * @return string
 	 */
 	protected function _renderUnescaped($tag_name, $leading, $trailing) {
-		return $leading . $this->_getVariable($tag_name) . $trailing;
+		$val = $this->_getVariable($tag_name);
+
+		if ($this->_varIsCallable($val)) {
+			$val = $this->_renderTemplate(call_user_func($val));
+		}
+
+		return $leading . $val . $trailing;
 	}
 
 	/**
@@ -756,7 +788,7 @@ class Mustache {
 			$first = array_shift($chunks);
 
 			$ret = $this->_findVariableInContext($first, $this->_context);
-			while ($next = array_shift($chunks)) {
+			foreach ($chunks as $next) {
 				// Slice off a chunk of context for dot notation traversal.
 				$c = array($ret);
 				$ret = $this->_findVariableInContext($next, $c);
@@ -808,7 +840,7 @@ class Mustache {
 	 * @return string
 	 */
 	protected function _getPartial($tag_name) {
-		if (is_array($this->_partials) && isset($this->_partials[$tag_name])) {
+		if ((is_array($this->_partials) || $this->_partials instanceof ArrayAccess) && isset($this->_partials[$tag_name])) {
 			return $this->_partials[$tag_name];
 		}
 
@@ -828,6 +860,23 @@ class Mustache {
 	 */
 	protected function _varIsIterable($var) {
 		return $var instanceof Traversable || (is_array($var) && !array_diff_key($var, array_keys(array_keys($var))));
+	}
+
+	/**
+	 * Higher order sections helper: tests whether the section $var is a valid callback.
+	 *
+	 * In Mustache.php, a variable is considered 'callable' if the variable is:
+	 *
+	 *  1. an anonymous function.
+	 *  2. an object and the name of a public function, i.e. `array($SomeObject, 'methodName')`
+	 *  3. a class name and the name of a public static function, i.e. `array('SomeClass', 'methodName')`
+	 *
+	 * @access protected
+	 * @param mixed $var
+	 * @return bool
+	 */
+	protected function _varIsCallable($var) {
+	  return !is_string($var) && is_callable($var);
 	}
 }
 
@@ -859,4 +908,3 @@ class MustacheException extends Exception {
 	const UNKNOWN_PRAGMA           = 4;
 
 }
-

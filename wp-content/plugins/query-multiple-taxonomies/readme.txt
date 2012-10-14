@@ -2,8 +2,8 @@
 Contributors: scribu
 Tags: drill-down, query, widget, navigation, taxonomy
 Requires at least: 3.2
-Tested up to: 3.4
-Stable tag: 1.6.1
+Tested up to: 3.5
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,9 +61,10 @@ The template hierarchy for multitax queries is taxonomy.php -> archive.php -> in
 
 If you need to get specific, you can use the `is_multitax()` conditional tag, which works similarly to `is_tax()`:
 
-`is_multitax()` -> true if more than one taxonomy was queried
+`is_multitax()` -> true if more than one taxonomy was queried.
 
-`is_multitax( array('tax_a', 'tax_b') )` -> true if both tax_a and tax_b were queried
+`is_multitax( array('tax_a', 'tax_b') )` -> true if both tax_a and tax_b were
+queried.
 
 = How can I customize the display even further? =
 
@@ -83,6 +84,11 @@ to
 and change it however you want.
 
 == Changelog ==
+
+= 1.6.2 =
+* {{count}} tag improvements. props tiagoalves83 and jprberlin
+* added {{any-text}} tag. props jprberlin
+* updated to Mustache 1.0.0
 
 = 1.6.1 =
 * fixed activation error
