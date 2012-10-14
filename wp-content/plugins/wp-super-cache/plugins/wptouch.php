@@ -23,7 +23,7 @@ function wp_super_cache_wptouch_admin() {
 		<label><input type="radio" name="cache_wptouch" value="0" <?php if( !$cache_wptouch ) { echo 'checked="checked" '; } ?>/> <?php _e( 'Disabled', 'wp-super-cache' ); ?></label>
 		<p><?php _e( '', 'wp-super-cache' ); ?></p><?php
 		echo '<p>' . __( 'Provides support for <a href="http://wordpress.org/extend/plugins/wptouch/">WPTouch</a> mobile theme and plugin.', 'wp-super-cache' ) . '</p>';
-		if ($changed) {
+		if ( isset( $changed ) && $changed ) {
 			if ( $cache_wptouch )
 				$status = __( "enabled" );
 			else
@@ -63,7 +63,8 @@ function wp_super_cache_maybe_disable_wptouch( $t ) {
 	if ( $cache_wptouch != 1 )
 		return false;
 
-	if ( isset( $_COOKIE[ 'wptouch_switch_toggle' ] ) && $_COOKIE['wptouch_switch_toggle'] == 'normal' )
+	if ( ( isset( $_COOKIE[ 'wptouch_switch_toggle' ] ) && $_COOKIE[ 'wptouch_switch_toggle' ] == 'normal' ) ||
+		( isset( $_COOKIE[ 'wptouch-pro-view' ] ) && $_COOKIE[ 'wptouch-pro-view' ] == 'desktop' ) )
 		return true;
 
 	$ua = explode( ",", $wptouch_exclude_ua );
@@ -103,10 +104,17 @@ function wp_super_cache_wptouch_cookie_check( $cache_key ) {
 	if ( $_COOKIE[ 'wptouch_switch_toggle' ] == 'normal' || $_COOKIE[ 'wptouch_switch_toggle' ] == 'mobile' )
 		return $_COOKIE[ 'wptouch_switch_toggle' ];
 
+	if ( isset( $_COOKIE[ 'wptouch-pro-view' ] ) ) {
+		if ( $_COOKIE[ 'wptouch-pro-view' ] == 'desktop' )
+			return 'normal';
+		else
+			return $_COOKIE[ 'wptouch-pro-view' ];
+	}
+
 	return $cache_key;
 }
 
-if ( $cache_wptouch == 1 ) {
+if ( isset( $cache_wptouch ) && $cache_wptouch == 1 ) {
 	add_cacheaction( 'wp_super_cache_mobile_browsers', 'wp_super_cache_wptouch_browsers' );
 	add_cacheaction( 'wp_super_cache_mobile_prefixes', 'wp_super_cache_wptouch_prefixes' );
 	add_cacheaction( 'wp_cache_check_mobile', 'wp_super_cache_wptouch_cookie_check' );
