@@ -2,7 +2,7 @@
 /**
  * Front Page Module
  *
- * @version $Id: frontpage_module.php 523481 2012-03-25 19:49:08Z qurl $
+ * @version $Id: frontpage_module.php 545908 2012-05-18 17:37:00Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -22,7 +22,7 @@
 				self::$option = array( 'front-page' => 'Posts Page' );
 				self::$question = 'Show widget on the posts page?';
 			}
-			self::mkGUI(self::$type, self::$option[self::$name], self::$question, NULL, self::$except, $list);
+			self::mkGUI(self::$type, self::$option[self::$name], self::$question, self::$info, self::$except, $list);
 		}
 	}
 ?>

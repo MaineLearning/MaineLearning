@@ -2,7 +2,7 @@
 /**
  * dynwid_worker.php - The worker does the actual work.
  *
- * @version $Id: dynwid_worker.php 528159 2012-04-06 15:53:56Z qurl $
+ * @version $Id: dynwid_worker.php 605455 2012-09-28 19:57:21Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -14,15 +14,17 @@
 	DWModule::registerPlugin(DW_CustomPost::$plugin);
 
 	// Template
-	$tpl = get_page_template();
-	if ( $DW->whereami == 'pods' ) {
-		global $pod_page_exists;
-		if (! empty($pod_page_exists['page_template']) ) {
-			$tpl = $pod_page_exists['page_template'];
+	if (! is_archive() ) {
+		$tpl = get_page_template();
+		if ( $DW->whereami == 'pods' ) {
+			global $pod_page_exists;
+			if (! empty($pod_page_exists['page_template']) ) {
+				$tpl = $pod_page_exists['page_template'];
+			}
 		}
+		$DW->template = basename($tpl);
+		$DW->message('Template = ' . $DW->template);
 	}
-	$DW->template = basename($tpl);
-	$DW->message('Template = ' . $DW->template);
 
 	// WPML Plugin support
 	include_once(DW_MODULES . 'wpml_module.php');
@@ -35,9 +37,6 @@
 	if ( DW_QT::detect(FALSE) ) {
 		$curlang = DW_QT::detectLanguage();
 	}
-
-	// Hide title
-	$dw_hide_title = get_option('dw_hide_title');
 
   foreach ( $sidebars as $sidebar_id => $widgets ) {
     // Only processing active sidebars with widgets
@@ -54,6 +53,7 @@
         		$$m = TRUE;
         	}
 
+					// First run > The defaults
           foreach ( $opt as $condition ) {
             if ( empty($condition->name) && $condition->value == '0' && $condition->maintype == $DW->whereami ) {
               $DW->message('Default for ' . $widget_id . ' set to FALSE (rule D1)');
@@ -167,12 +167,53 @@
           	}
           	unset($qt_tmp);
 
-          	// Browser and Template
+          	// Browser, Template, Day, Week and URL
           	foreach ( $opt as $condition ) {
           		if ( $condition->maintype == 'browser' && $condition->name == $DW->useragent ) {
           			(bool) $browser_tmp = $condition->value;
           		} else if ( $condition->maintype == 'tpl' && $condition->name == $DW->template ) {
           			(bool) $tpl_tmp = $condition->value;
+          		} else if ( $condition->maintype == 'day' && $condition->name == date('N') ) {
+          			(bool) $day_tmp = $condition->value;
+          		} else if ( $condition->maintype == 'week' && $condition->name == date('W') ) {
+          			(bool) $week_tmp = $condition->value;
+          		} else if ( $condition->maintype == 'url' && $condition->name == 'url' ) {
+          			$urls = unserialize($condition->value);
+          			$other_url = ( $url ) ? FALSE : TRUE;
+          			foreach ( $urls as $u ) {
+          				$u = $DW->getURLPrefix() . $u;
+          				$like_start = substr($u, 0, 1);
+          				$like_end = substr($u, -1);
+
+          				if ( $like_start == '*' && $like_end == '*' ) {
+          					$u = substr($u, 1, strlen($u) - 2);
+          					if ( stristr($DW->url, $u) !== FALSE ) {
+          						$DW->message('Anywhere within URL found');
+          						$url_tmp = $other_url;
+          					}
+          				} else if ( $like_end == '*' ) {
+          					$u = substr($u, 0, strlen($u) - 1);
+          					$u = addcslashes($u, '/?+.[]{}*^$');
+
+          					if ( preg_match('/^' . $u . '/', $DW->url) ) {
+          						$DW->message('Starts with URL found');
+          						$url_tmp = $other_url;
+          					}
+          				} else if ( $like_start == '*' ) {
+          					$u = substr($u, 1);
+          					$u = addcslashes($u, '/?+.[]{}*^$');
+
+          					if ( preg_match('/' . $u . '$/', $DW->url) ) {
+          						$DW->message('Ends with URL found');
+          						$url_tmp = $other_url;
+          					}
+          				} else {
+          					if ( $DW->url == $u ) {
+          						$DW->message('Exact match URL found');
+          						$url_tmp = $other_url;
+          					}
+          				}
+          			}
           		}
           	}
 
@@ -188,13 +229,31 @@
           	}
           	unset($tpl_tmp);
 
+          	if ( isset($day_tmp) && $day_tmp != $day ) {
+          		$DW->message('Exception triggered for day, sets display to ' . ( ($day_tmp) ? 'TRUE' : 'FALSE' ) . ' (rule EDAY1)');
+          		$day = $day_tmp;
+          	}
+          	unset($day_tmp);
+
+          	if ( isset($week_tmp) && $week_tmp != $week ) {
+          		$DW->message('Exception triggered for day, sets display to ' . ( ($week_tmp) ? 'TRUE' : 'FALSE' ) . ' (rule EWK1)');
+          		$week = $week_tmp;
+          	}
+          	unset($day_tmp);
+
+          	if ( isset($url_tmp) && $url_tmp != $url ) {
+          		$DW->message('Exception triggered for url, sets display to ' . ( ($url_tmp) ? 'TRUE' : 'FALSE' ) . ' (rule EURL1)');
+          		$url = $url_tmp;
+          	}
+          	unset($url_tmp, $other_url);
+
             // For debug messages
             $e = ( isset($other) && $other ) ? 'TRUE' : 'FALSE';
 
             // Display exceptions (custom post type)
             if ( $DW->custom_post_type ) {
               // Custom Post Type behaves the same as a single post
-               $post = $GLOBALS['post'];
+              $post = $GLOBALS['post'];
               if ( count($act) > 0 ) {
                 $id = $post->ID;
                 $DW->message('PostID: ' . $id);
@@ -204,20 +263,11 @@
                 }
 
               	$act_custom = array();
-              	$act_childs = array();
-              	/* foreach ( $opt as $condition ) {
-              		if ( $condition->name != 'default' ) {
-              			switch ( $condition->maintype ) {
-              				case $DW->whereami:
-              					$act_custom[ ] = $condition->name;
-              					break;
-
-              				case $DW->whereami . '-childs':
-              					$act_childs[ ] = $condition->name;
-              					break;
-              			}
+              	foreach ( $opt as $condition ) {
+              		if ( $condition->name != 'default' && $condition->maintype == $DW->whereami . '-post' ) {
+              			$act_custom[ ] = $condition->name;
               		}
-              	} */
+              	}
 
               	// Taxonomies within CPT
               	$act_tax = array();
@@ -237,6 +287,7 @@
              						case $m:
              							$act_tax[$t][ ] = $condition->name;
              							break;
+
              						case $m . '-childs':
              							$act_tax_childs[$t][ ] = $condition->name;
              							break;
@@ -250,12 +301,6 @@
                 if ( in_array($id, $act_custom) ) {
                   $display = $other;
                   $DW->message('Exception triggered for ' . $widget_id . ' sets display to ' . $e . ' (rule ECP1)');
-                } else if ( count($act_childs) > 0 ) {
-                	$parents = $DW->getParents('post', array(), $id);
-                	if ( (bool) array_intersect($act_childs, $parents) ) {
-                		$display = $other;
-                		$DW->message('Exception triggered for ' . $widget_id . ' sets display to ' . $e . ' (rule ECP2)');
-                	}
                 } else if ( count($act_tax) > 0 ) {
                 	// bcause $id has already been moved to default language, term doesn't need to be converted. WPML takes care of default language term
 									foreach ( $term as $t ) {
@@ -404,6 +449,7 @@
                     }
                     /* None or individual checked - individual is not included in the $opt */
                   } else {
+                  	$DW->message('Looking for tags, individual posts or taxonomies');
                     /* Tags */
                     if ( count($act_tag) > 0 ) {
                       if ( (bool) array_intersect($post_tag, $act_tag) ) {
@@ -418,6 +464,52 @@
                         $DW->message('Exception triggered for ' . $widget_id . ' sets display to ' . $e . ' (rule ES5)');
                       }
                     }
+
+                    // Taxonomies
+		                $act_tax = array();
+		              	$act_tax_childs = array();
+		              	foreach ( get_object_taxonomies('post') as $t ) {
+		              		$m = 'single-tax_' . $t;
+		              		foreach ( $opt as $condition ) {
+		              			if ( $condition->maintype == $m ) {
+		              				if (! key_exists($t, $act_tax) ) {
+		              					$act_tax[$t] = array();
+		              					$act_tax_childs[$t] = array();
+		              				}
+		              			}
+
+		             				if ( $condition->name != 'default' ) {
+		             					switch ( $condition->maintype ) {
+		             						case $m:
+		             							$act_tax[$t][ ] = $condition->name;
+		             							break;
+
+		             						case $m . '-childs':
+		             							$act_tax_childs[$t][ ] = $condition->name;
+		             							break;
+		             					} // END switch
+		             				}
+		              		} // END $opt
+		              	} // END object_taxonomies
+
+		              	$term = wp_get_object_terms($post->ID, get_object_taxonomies('post'), array('fields' => 'all'));
+
+		              	if ( count($act_tax) > 0 ) {
+		                	// bcause $id has already been moved to default language, term doesn't need to be converted. WPML takes care of default language term
+											foreach ( $term as $t ) {
+												if ( isset($act_tax[$t->taxonomy]) && is_array($act_tax[$t->taxonomy]) && in_array($t->term_id, $act_tax[$t->taxonomy]) ) {
+													$display = $other;
+													$DW->message('Exception triggered for ' . $widget_id . ' sets display to ' . $e . ' (rule ESTX1)');
+													break;
+												}
+												$parents = $DW->getTaxParents($t->taxonomy, array(), $t->term_id);
+												if ( isset($act_tax_childs[$t->taxonomy]) && is_array($act_tax_childs[$t->taxonomy]) && (bool) array_intersect($act_tax_childs[$t->taxonomy], $parents) ) {
+													$display = $other;
+													$DW->message('Exception triggered for ' . $widget_id . ' sets display to ' . $e . ' (rule ESTX2)');
+												}
+											}
+		                }
+		                unset($act_tax, $act_tax_childs);
                   }
                   break;
 
@@ -489,7 +581,7 @@
                     	}
                     } else {
                     	$term = wp_get_object_terms($id, get_object_taxonomies($DW->whereami), array('fields' => 'all'));
-		              		if ( count($term) > 0 ) {
+		              		if (! is_wp_error($term) && count($term) > 0 ) {
 												foreach ( get_object_taxonomies($DW->whereami) as $t ) {
 		              				$m = $DW->whereami . '-tax_' . $t;
 		              				foreach ( $opt as $condition ) {
@@ -517,7 +609,7 @@
 		              		} // END count($term)
 		              	}
 
-										if (! is_wp_error($term) && ! empty($term) ) {
+										if ( isset($term) && ! is_wp_error($term) && ! empty($term) ) {
 	                  	foreach ( $term as $t ) {
 	                  		if ( isset($page_act_tax[$t->taxonomy]) && is_array($page_act_tax[$t->taxonomy]) && in_array($t->term_id, $page_act_tax[$t->taxonomy]) ) {
 	                  			$display = $other;
@@ -702,11 +794,6 @@
           	}
           }
         } // END if ( in_array($widget_id, $DW->dynwid_list) )
-
-      	// Hide title
-      	/* if ( in_array($widget_id, $dw_hide_title) ) {
-
-      	} */
 
       } // END foreach ( $widgets as $widget_id )
     } // END if ( $sidebar_id != 'wp_inactive_widgets' && count($widgets) > 0 )
