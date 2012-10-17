@@ -383,18 +383,18 @@ function relevanssi_remove_punct($a) {
 		$a = strip_tags($a);
 		$a = stripslashes($a);
 
-		$a = str_replace("’", '', $a);
-		$a = str_replace("‘", '', $a);
-		$a = str_replace("„", '', $a);
 		$a = str_replace("·", '', $a);
-		$a = str_replace("”", '', $a);
-		$a = str_replace("“", '', $a);
 		$a = str_replace("…", '', $a);
 		$a = str_replace("€", '', $a);
 		$a = str_replace("&shy;", '', $a);
 
 		$a = str_replace('&#8217;', ' ', $a);
 		$a = str_replace("'", ' ', $a);
+		$a = str_replace("’", ' ', $a);
+		$a = str_replace("‘", ' ', $a);
+		$a = str_replace("”", ' ', $a);
+		$a = str_replace("“", ' ', $a);
+		$a = str_replace("„", ' ', $a);
 		$a = str_replace("´", ' ', $a);
 		$a = str_replace("—", ' ', $a);
 		$a = str_replace("–", ' ', $a);
