@@ -1,9 +1,9 @@
 === Network Privacy ===
-Contributors: wpmuguru
+Contributors: wpmuguru, cgrymala, scribu
 Tags: privacy, plugin, wordpress, network 
 Requires at least: 3.3
-Tested up to: 3.3.1
-Stable tag: 0.1.3
+Tested up to: 3.5
+Stable tag: 0.1.4
 
 Adds more privacy options to both single Wordpress sites and WordPress networks.
 
@@ -23,6 +23,7 @@ In a WordPress network activated on an individual site adds the following privac
 *	I would like my site to be visible only to Registered network users.
 *	I would like my site to be visible only to Site subscribers.
 *	I would like my site to be visible only to Site administrators.  
+*	I would like my site to be visible only to Site contributors (and above)
 
 When Network Activated or in the mu-plugins folder in a WordPress network adds the following:
 
@@ -30,11 +31,11 @@ When Network Activated or in the mu-plugins folder in a WordPress network adds t
 
 Support can be obtained through:
 
-[Try the Wordpress Forums first](http://wordpress.org/tags/network-privacy?forum_id=10#postform)
+[Try the Wordpress Forums first](http://wordpress.org/support/plugin/network-privacy)
 
 [Twitter](http://twitter.com/wpmuguru)
 
-[WPMU Tutorials](http://wpmututorials.com/contact/)
+[Ron & Andrea](http://ronandandrea.com/contact/)
 
 == Installation ==
 
@@ -43,6 +44,11 @@ Support can be obtained through:
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
+
+= 0.1.4 =
+* add 'ra_network_privacy_caps' filter
+* change default cap for administrators from add_users to promote_users
+* insert fix for BuddyPress [thanks to Simon Wheatley](http://wordpress.org/support/topic/plugin-network-privacy-problem-with-buddypress)
 
 = 0.1.3 =
 * Fix bug in "Network Users" option
@@ -56,8 +62,3 @@ Support can be obtained through:
 
 = 0.1 =
 * Original version.
-
-== Upgrade Notice ==
-
-= 0.1.3 =
-This update should repair the bug in the "Network Users Only" privacy option
