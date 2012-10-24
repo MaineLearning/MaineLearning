@@ -1,0 +1,38 @@
+#dvk-donate-box{
+	display:none;
+	background:url(../img/overlay.png);
+	position:absolute;
+	left:0; top:0;
+	width:100%;
+	height:100%;
+	z-index:999;
+}
+
+#dvk-donate-box-content{
+	position:fixed;
+	left:50%;
+	top:50%;
+	width:300px;
+	height:220px;
+	padding:10px 25px;
+	margin-left:-175px;
+	margin-top:-135px;
+	background:white;
+	border:1px solid #DFDFDF;
+	-moz-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+
+#dvk-donate-box img.dvk-close{
+	position:absolute;
+	right:10px; top:10px;
+	cursor:pointer;
+}
+#dvk-donate-box a.dvk-dontshow{
+	font-size:10px;
+	position:absolute;
+	right:10px;
+	bottom:10px;
+}
