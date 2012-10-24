@@ -1,0 +1,47 @@
+.jqDrag {
+  cursor:move;
+}
+#shoutboxBody {
+  background: #FFF;
+  border-left: 1px solid #888;
+  border-right: 1px solid #888;
+  display: block;
+  position: relative;
+}
+#shoutboxBottom {
+  background: #FFF;
+  text-align: center;
+  border-left: 1px solid #888;
+  border-right: 1px solid #888;
+  display: block;
+  position: relative;
+}
+#moveme {
+  background: #888;
+  text-align: center;
+  width: 164px;
+  display: inline-block;
+  height: 16px;
+  float: left;
+}
+.closeme {
+  text-align: right;
+}
+.closemetop {
+  text-align: right;
+  display: inline-block;
+  cursor: pointer;
+  width: 36px;
+  height: 16px;
+  background: #888;
+}
+
+.minmaxmetop {
+  text-align: right;
+  display: inline-block;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  float: clear;
+  background: #888;
+}

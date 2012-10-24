@@ -1,0 +1,227 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-chat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-26 10:26+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: BNG NET <webmaster@bng.net>\n"
+"Language-Team: BNG NET <webmaster@bng.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-Basepath: C:\\Users\\Tom\\Desktop\\buddypress-ajax-chat\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: bp-chat\n"
+
+#: Added on 2010/12/21
+msgid "Shoutbox always open on login"
+msgstr "シャウトボックスはログインと同時に常に開く"
+
+#: Added on 2010/12/21
+msgid "Shoutbox Options"
+msgstr "シャウトボックスの設定"
+
+#: Added on 2010/12/21
+msgid "Full blown chat open in new window"
+msgstr "全画面チャットは新規ウィンドウ（タブ）で開く"
+
+#: Added on 2010/12/21
+msgid "Chat Settings Updated."
+msgstr "チャットの設定を更新しました。"
+
+#: Added on 2010/12/21
+msgid "Full Blown Chat Options"
+msgstr "全画面チャットの設定"
+
+#: Added on 2010/12/21
+msgid "User login"
+msgstr "ログイン名"
+
+#: Added on 2010/12/21
+msgid "Display Name"
+msgstr "表示名"
+
+#: Added on 2010/12/21
+msgid "Chat username"
+msgstr "チャットで使用する名前"
+
+#: Added on 2010/12/21
+msgid "No"
+msgstr "いいえ"
+
+#: Added on 2010/12/21
+msgid "Yes"
+msgstr "はい"
+
+#: Added on 2010/12/21
+msgid "Disable shoutbox completely"
+msgstr "シャウトボックスを完全に停止する"
+
+#: Added on 2010/12/21
+msgid "Chat Options"
+msgstr "オプション設定"
+
+#: Added on 2010/12/21
+msgid "Admin is online"
+msgstr "管理者はオンラインしています"
+
+#: Added on 2010/12/21
+msgid "Admin is offline"
+msgstr "管理者はオフライン中です"
+
+#: Added on 2010/11/11
+msgid "Full Chat"
+msgstr "全画面チャット"
+
+#: Added on 2010/11/11
+msgid "You're currently logged out."
+msgstr "現在チャットには入れません。"
+
+#: Added on 2010/11/11
+msgid "<p>Notice a popup window will try to appear.<br />  If you are using I.E. you might need to hold down the CTRL key when clicking on chat to allow the popup screen to appear.</p><p>If all else fails you can <a target='_new' href=\""
+msgstr "<p>注意: ポップウィンドウを開こうとしています。<br />ブラウザがInternet Explorerの場合は、ナビゲーションバーのチャットをクリックする際にコントロールキーも同時に押してください。</p><p>それでもチャットが開かない場合や他のブラウザをお使いになられていてチャットが開かない場合は、<a target='_new' href=\""
+
+#: Added on 2010/11/11
+msgid "\"> click here</a> for a new chat window."
+msgstr "\">ここをクリック</a>してください。"
+
+#: Added on 2010/11/11
+msgid "Chat Settings"
+msgstr "チャットの設定"
+
+#: bp-chat/bp-chat-admin.php:30
+#: bp-chat/bp-chat-admin.php:54
+msgid "Chat Admin"
+msgstr "チャット管理人"
+
+#: bp-chat/bp-chat-admin.php:57
+msgid "Settings Updated."
+msgstr "設定を更新しました。"
+
+#: bp-chat/bp-chat-admin.php:63
+msgid "Option One"
+msgstr "オプション１"
+
+#: bp-chat/bp-chat-admin.php:68
+msgid "Option Two"
+msgstr "オプション２"
+
+#: bp-chat/bp-chat-admin.php:75
+msgid "Save Settings"
+msgstr "設定保存"
+
+#: bp-chat/bp-chat-ajax.php:35
+msgid "Friendship could not be canceled."
+msgstr "友好関係は解消できませんでした。"
+
+#: bp-chat/bp-chat-ajax.php:37
+msgid "Add Friend"
+msgstr "友達追加"
+
+#: bp-chat/bp-chat-ajax.php:43
+msgid "Friendship could not be requested."
+msgstr "友好関係を依頼できませんでした。"
+
+#: bp-chat/bp-chat-ajax.php:45
+msgid "Friendship Requested"
+msgstr "友好関係を依頼しました"
+
+#: bp-chat/bp-chat-ajax.php:49
+msgid "Request Pending"
+msgstr "依頼保留"
+
+#: bp-chat/bp-chat-notifications.php:33
+#, php-format
+msgid "%s high-fived you!"
+msgstr "%sがハイタッチしてきました！"
+
+#: bp-chat/bp-chat-notifications.php:36
+#, php-format
+msgid ""
+"%s sent you a high-five! Why not send one back?\n"
+"\n"
+"To see %s's profile: %s\n"
+"\n"
+"To send %s a high five: %s\n"
+"\n"
+"---------------------\n"
+msgstr ""
+"%sさんがハイタッチしてきました！お返ししませんか？\n"
+"\n"
+"%sさんのプロフィールを見る: %s\n"
+"\n"
+"%sさんにハイタッチする: %s\n"
+"\n"
+"---------------------\n"
+
+#: bp-chat/bp-chat-notifications.php:45
+#, php-format
+msgid "To disable these notifications please log in and go to: %s"
+msgstr "これらの通知を停止するには、ログインして次に移動: %s"
+
+#: bp-chat/bp-chat-widgets.php:57
+#: bp-chat/bp-chat-widgets.php:58
+msgid "Cool Chat Widget"
+msgstr "カッコいいチャットウィジェット"
+
+#: bp-chat/bp-chat-widgets.php:142
+msgid "Some Option"
+msgstr "オプション"
+
+#: bp-chat/bp-chat.php:147
+#: bp-chat/bp-chat.php:155
+#: bp-chat/bp-chat.php:532
+#: bp-chat/bp-chat.php:540
+msgid "Chat"
+msgstr "チャット"
+
+#: bp-chat/bp-chat.php:173
+msgid "My Chat"
+msgstr "マイチャット"
+
+#: bp-chat/bp-chat.php:305
+msgid "Only "
+msgstr "だけ"
+
+#: bp-chat/bp-chat.php:305
+msgid " can look at "
+msgstr "みることができます"
+
+#: bp-chat/bp-chat.php:305
+msgid "'s chat."
+msgstr "さんのチャット"
+
+#: bp-chat/bp-chat.php:518
+msgid "Click and drag"
+msgstr "右のクリックでドラッグできます"
+
+#: bp-chat/bp-chat.php:523
+msgid "Go to full chat"
+msgstr "フルチャットへ移動する"
+
+#: bp-chat/bp-chat.php:523
+msgid "Ajax Chat"
+msgstr "Ajax Chat"
+
+#: bp-chat/bp-chat.php:523
+msgid " for "
+msgstr "ため"
+
+#: bp-chat/bp-chat.php:523
+msgid "Buddypress"
+msgstr "Buddypress"
+
+#: bp-chat/bp-chat.php:534
+msgid "Shoutbox"
+msgstr "シャウトボックス"
+
+#: bp-chat/bp-chat.php:536
+msgid "Open"
+msgstr "開く"
+
+#: bp-chat/bp-chat.php:537
+msgid "Close"
+msgstr "閉じる"
+

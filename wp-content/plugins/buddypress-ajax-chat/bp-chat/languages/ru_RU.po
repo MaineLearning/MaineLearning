@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-chat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-26 10:26+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: koshnv <koshnv@izkon.ru>\n"
+"Language-Team: David Aubin <gpfu08@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: bp-chat\n"
+
+#: bp-chat/bp-chat-admin.php:30
+#: bp-chat/bp-chat-admin.php:54
+msgid "Chat Admin"
+msgstr "Администрирование чата"
+
+#: bp-chat/bp-chat-admin.php:57
+msgid "Settings Updated."
+msgstr "Настройки обновлены."
+
+#: bp-chat/bp-chat-admin.php:63
+msgid "Option One"
+msgstr "Первый вариант"
+
+#: bp-chat/bp-chat-admin.php:68
+msgid "Option Two"
+msgstr "Второй вариант"
+
+#: bp-chat/bp-chat-admin.php:75
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: bp-chat/bp-chat-ajax.php:35
+msgid "Friendship could not be canceled."
+msgstr "Дружбу не отменить."
+
+#: bp-chat/bp-chat-ajax.php:37
+msgid "Add Friend"
+msgstr "Добавить друга"
+
+#: bp-chat/bp-chat-ajax.php:43
+msgid "Friendship could not be requested."
+msgstr "Вы не можете предложить дружбу."
+
+#: bp-chat/bp-chat-ajax.php:45
+msgid "Friendship Requested"
+msgstr "Дружбу предложил"
+
+#: bp-chat/bp-chat-ajax.php:49
+msgid "Request Pending"
+msgstr "Запрос ожидания"
+
+#: bp-chat/bp-chat-notifications.php:33
+#, php-format
+msgid "%s high-fived you!"
+msgstr "%s вы получили максимальную оценку!"
+
+#: bp-chat/bp-chat-notifications.php:36
+#, php-format
+msgid ""
+"%s sent you a high-five! Why not send one back?\n"
+"\n"
+"To see %s's profile: %s\n"
+"\n"
+"To send %s a high five: %s\n"
+"\n"
+"---------------------\n"
+msgstr ""
+"%s послал Вам высокую бал! Почему бы не отправить один обратно?\n"
+"\n"
+"Просмотреть %s профиль: %s\n"
+"\n"
+"Чтобы поставить %s оценку: %s\n"
+"\n"
+"---------------------\n"
+
+#: bp-chat/bp-chat-notifications.php:45
+#, php-format
+msgid "To disable these notifications please log in and go to: %s"
+msgstr "Чтобы отключить эти уведомления, войдите в систему, и перейти к: %s"
+
+#: bp-chat/bp-chat-widgets.php:57
+#: bp-chat/bp-chat-widgets.php:58
+msgid "Cool Chat Widget"
+msgstr "Лучший виджет чата"
+
+#: bp-chat/bp-chat-widgets.php:142
+msgid "Some Option"
+msgstr "Некоторые варианты"
+
+#: bp-chat/bp-chat.php:147
+#: bp-chat/bp-chat.php:155
+#: bp-chat/bp-chat.php:532
+#: bp-chat/bp-chat.php:540
+msgid "Chat"
+msgstr "Чат"
+
+#: bp-chat/bp-chat.php:173
+msgid "My Chat"
+msgstr "Мой чат"
+
+#: bp-chat/bp-chat.php:305
+msgid "Only "
+msgstr "Только"
+
+#: bp-chat/bp-chat.php:305
+msgid " can look at "
+msgstr " можете посмотреть на"
+
+#: bp-chat/bp-chat.php:305
+msgid "'s chat."
+msgstr "'s чата."
+
+#: bp-chat/bp-chat.php:518
+msgid "Click and drag"
+msgstr "Нажмите и тащите"
+
+#: bp-chat/bp-chat.php:523
+msgid "Go to full chat"
+msgstr "Открыть полный чат"
+
+#: bp-chat/bp-chat.php:523
+msgid "Ajax Chat"
+msgstr "Аякс Чат"
+
+#: bp-chat/bp-chat.php:523
+msgid " for "
+msgstr " для"
+
+#: bp-chat/bp-chat.php:523
+msgid "Buddypress"
+msgstr "Buddypress"
+
+#: bp-chat/bp-chat.php:534
+msgid "Shoutbox"
+msgstr "Мини-чат"
+
+#: bp-chat/bp-chat.php:536
+msgid "Open"
+msgstr "Открыть"
+
+#: bp-chat/bp-chat.php:537
+msgid "Close"
+msgstr "Закрыть"
+
