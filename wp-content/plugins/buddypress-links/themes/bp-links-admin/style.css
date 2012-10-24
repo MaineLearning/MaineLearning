@@ -1,0 +1,87 @@
+/**
+ * Admin Styles
+ */
+
+/* Icons */
+div#icon-bp-links.icon16 {
+	background: url('images/logo_16.png') no-repeat;
+}
+div#icon-bp-links.icon32 {
+	background: url('images/logo_32.png') no-repeat;
+}
+
+/* Menu */
+span.buddypress-links-admin-menu-header {
+	font-weight: bold;
+	border-top: 1px solid gray;
+	padding-top: 3px;
+}
+span.buddypress-links-admin-menu-item {
+	padding-left: 10px;
+}
+
+/* Content */
+
+div.buddypress-links-admin-sidebar {
+	margin: 0 0 0 580px;
+	padding: 45px 20px 20px 20px;
+	width: 250px;
+}
+
+div.buddypress-links-admin-sidebar > div {
+	margin-bottom: 20px;
+	padding: 5px 10px 10px 10px;
+	background-color: #f9f9f9;
+	border: solid 1px #dfdfdf;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+	div.buddypress-links-admin-sidebar > div h2,
+	div.buddypress-links-admin-sidebar > div h3 {
+		text-align: center;
+	}
+	div.buddypress-links-admin-sidebar > div a {
+		font-weight: bold;
+	}
+	div.buddypress-links-admin-sidebar > div iframe.twitter-follow-button,
+	div.buddypress-links-admin-sidebar > div form#mc-embedded-subscribe-form {
+		margin-top: 15px;
+	}
+
+div.buddypress-links-admin-sidebar ul {
+	list-style: circle;
+	margin-left: 25px;
+}
+
+div.buddypress-links-admin-general,
+div.buddypress-links-admin-settings,
+div.buddypress-links-admin-cats {
+	float: left;
+	width: 550px;
+}
+
+div.buddypress-links-admin-general > h3 {
+	margin-top: 25px;
+}
+
+div.buddypress-links-admin-general table.widefat {
+	width: 400px;
+}
+
+div.buddypress-links-admin-general ul li {
+	margin-left: 30px;
+	list-style: disc;
+}
+
+div.buddypress-links-admin-settings table.form-table th {
+	width: 150px;
+	font-weight: bold;
+}
+
+div.buddypress-links-admin-cats table.widefat{
+	width: 100%;
+}
+
+div.buddypress-links-admin-manage ul {
+	list-style: disc outside none;
+}
