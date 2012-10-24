@@ -1,12 +1,69 @@
+// BPS jQuery Tab Menus with Toggle fx
 jQuery(document).ready(function($){
-
-// BPS jQuery Tab Menus
-	$('#bps-tabs').tabs();
+	$( '#bps-tabs' ).tabs({ 
+		fx: { 
+			opacity: 'toggle', 
+			duration: 'fast' 
+			} 
+	});
 	$('#bps-edittabs').tabs();
+	/* toggle causes undesirable effects/results for inpage tabs
+	$( '#bps-edittabs' ).tabs({ 
+		fx: { 
+			opacity: 'toggle', 
+			duration: 'fast' 
+			} 
+	});
+*/
 });
 
-// single dialog numbered individually per Core section - figure out each + num
-// and add main options variable later on to condense this code
+/**** Example bits of code to play with later ****
+*****************************************************
+
+$('#bps-tabs').tabs({ spinner: "Retrieving data..." });
+
+$('#bps-tabs').tabs({ collapsible: false });
+
+$( '#bps-tabs' ).tabs({ event: "mouseover" });
+
+Example of hiding on load with toggle
+$(".feature-tabs").tabs({
+    disabled: [0, 1, 2],
+    collapsible: true,
+    fx: [{
+        opacity: 'toggle',
+        duration: 'slow',
+        height: 'toggle'}, // hide option  
+         {opacity: 'toggle',
+        duration: 'slow',
+        height: 'toggle'}]
+}); // show option
+
+ui.panel delegation
+$('#bps-tabs').tabs({
+    load: function(event, ui) {
+        $(ui.panel).delegate('a', 'click', function(event) {
+            $(ui.panel).load(this.href);
+            event.preventDefault();
+        });
+    }
+});
+
+Pop up Alert on tab click
+	var tab_select_function = function(event, ui) {
+    // Objects available in the function context:
+    // ui.tab     // anchor element of the selected (clicked) tab
+    // ui.panel   // element, that contains the selected/clicked tab contents
+    // ui.index   // zero-based index of the selected (clicked) tab
+    alert("Tab with index " + ui.index + " clicked!");
+};
+
+	$('#bps-tabs').tabs({
+   		select: tab_select_function
+});
+*************************************************/
+
+// Note: each + num has undesirable results - continue to use per div
 jQuery(document).ready(function($){				
 	$.fx.speeds._default = 400;
 	var $info1 = $("#bps-modal-content1");     
@@ -173,7 +230,7 @@ jQuery(document).ready(function($){
 		 }         
 	}     
 	});
-	$("#bps-open-modal8").click(function(event) {         
+	$("#bps-open-modal8").click(function(event) {      // was right in front of this   
 		event.preventDefault();         
 		$info8.dialog('open');     
 	});
