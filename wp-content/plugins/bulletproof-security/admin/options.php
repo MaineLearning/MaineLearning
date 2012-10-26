@@ -14,7 +14,7 @@ if ( !current_user_can('manage_options') ){
 ?>
 
 <div class="wrap">
-<?php $bulletproof_ver = '.47.4'; ?>
+<?php $bulletproof_ver = '.47.5'; ?>
 <div id="bpsUprade"><strong>
 <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link opens in new browser window">Why Upgrade to BulletProof Security Pro?</a></strong></div>
 
@@ -65,11 +65,11 @@ require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 		<?php if ( !empty($bpsapi->rating) ) : ?>
 		<div class="bps-star-container" title="<?php echo esc_attr(sprintf(__('Average Rating (%s ratings)', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings))); ?>">
 			<div class="bps-star bps-star-rating" style="width: <?php echo esc_attr($bpsapi->rating) ?>px"></div>
-			<div class="bps-star bps-star5"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('5 stars', 'bulletproof-security') ?>" /></div>
-			<div class="bps-star bps-star4"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('4 stars', 'bulletproof-security') ?>" /></div>
-			<div class="bps-star bps-star3"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('3 stars', 'bulletproof-security') ?>" /></div>
-			<div class="bps-star bps-star2"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('2 stars', 'bulletproof-security') ?>" /></div>
-			<div class="bps-star bps-star1"><img src="<?php echo WP_PLUGIN_URL; ?>/bulletproof-security/admin/images/star.png" alt="<?php _e('1 star', 'bulletproof-security') ?>" /></div>
+			<div class="bps-star bps-star5"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/star.png'); ?>" alt="<?php _e('5 stars', 'bulletproof-security') ?>" /></div>
+			<div class="bps-star bps-star4"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/star.png'); ?>" alt="<?php _e('4 stars', 'bulletproof-security') ?>" /></div>
+			<div class="bps-star bps-star3"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/star.png'); ?>" alt="<?php _e('3 stars', 'bulletproof-security') ?>" /></div>
+			<div class="bps-star bps-star2"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/star.png'); ?>" alt="<?php _e('2 stars', 'bulletproof-security') ?>" /></div>
+			<div class="bps-star bps-star1"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/star.png'); ?>" alt="<?php _e('1 star', 'bulletproof-security') ?>" /></div>
 		</div>
 		<div class="bps-star-link"><a target="_blank" title="Link opens in new browser window" href="http://wordpress.org/extend/plugins/<?php echo $bpsapi->slug ?>/"> <?php _e('Please Rate BPS', 'bulletproof-security'); ?></a> <small><?php echo sprintf(__('%s Ratings', 'bulletproof-security'),number_format_i18n($bpsapi->num_ratings)); ?> </small></div>
         <br />
@@ -97,9 +97,9 @@ $bpdefaultroot = 'unchecked';
 if (isset($_POST['submit12']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_root_copy' );
 	
-	$old = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/default.htaccess';
+	$old = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/default.htaccess';
 	$new = ABSPATH . '/.htaccess';
-	$old1 = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/secure.htaccess';
+	$old1 = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/secure.htaccess';
 	$new1 = ABSPATH . '/.htaccess';
 	
 	$selected_radio = $_POST['selection12'];
@@ -138,7 +138,7 @@ if (isset($_POST['submit13']) && current_user_can('manage_options')) {
 	
 	$options = get_option('bulletproof_security_options_customcode_WPA');  
 	
-	$oldadmin1 = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
+	$oldadmin1 = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
 	$newadmin1 = ABSPATH . 'wp-admin/.htaccess';
 	$deleteWpadminHtaccess = ABSPATH . 'wp-admin/.htaccess';
 
@@ -187,8 +187,8 @@ $bps_rename_htaccess_files = 'unchecked';
 if (isset($_POST['submit8']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_denyall_master' );
 	
-	$bps_rename_htaccess = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/deny-all.htaccess';
-	$bps_rename_htaccess_renamed = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/.htaccess';
+	$bps_rename_htaccess = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/deny-all.htaccess';
+	$bps_rename_htaccess_renamed = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/.htaccess';
 		
 	$selected_radio = $_POST['selection8'];
 	if ($selected_radio == 'bps_rename_htaccess_files') {
@@ -209,7 +209,7 @@ $bps_rename_htaccess_files_backup = 'unchecked';
 if (isset($_POST['submit14']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_denyall_bpsbackup' );
 	
-	$bps_rename_htaccess_backup = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/deny-all.htaccess';
+	$bps_rename_htaccess_backup = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/deny-all.htaccess';
 	$bps_rename_htaccess_backup_online = WP_CONTENT_DIR . '/bps-backup/.htaccess';
 	
 	$selected_radio = $_POST['selection14'];
@@ -305,17 +305,17 @@ $backup_master_htaccess_files = 'unchecked';
 if (isset($_POST['submit11']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_backup_master_htaccess_files' );
 
-$default_master = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/default.htaccess';
+$default_master = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/default.htaccess';
 $default_master_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_default.htaccess';
-$secure_master = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/secure.htaccess';
+$secure_master = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/secure.htaccess';
 $secure_master_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_secure.htaccess';
-$wpadmin_master = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
+$wpadmin_master = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
 $wpadmin_master_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_wpadmin-secure.htaccess';
-$maintenance_master = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
+$maintenance_master = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/maintenance.htaccess';
 $maintenance_master_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_maintenance.htaccess';
-$bp_maintenance_master = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/bp-maintenance.php';
+$bp_maintenance_master = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/bp-maintenance.php';
 $bp_maintenance_master_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_bp-maintenance.php';
-$bps_maintenance_values = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
+$bps_maintenance_values = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
 $bps_maintenance_values_backup = WP_CONTENT_DIR . '/bps-backup/master-backups/backup_bps-maintenance-values.php';
 
 	$selected_radio = $_POST['selection11'];
@@ -382,11 +382,11 @@ $bpmaintenance = 'unchecked';
 if (isset($_POST['submit15']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_maintenance_copy' );
 
-$oldmaint = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
+$oldmaint = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/maintenance.htaccess';
 $newmaint = ABSPATH . '/.htaccess';
-$oldmaint1 = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/bp-maintenance.php';
+$oldmaint1 = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/bp-maintenance.php';
 $newmaint1 = ABSPATH . '/bp-maintenance.php';
-$oldmaint_values = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
+$oldmaint_values = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
 $newmaint_values = ABSPATH . '/bps-maintenance-values.php';
 
 	$selected_radio = $_POST['selection15'];
@@ -407,8 +407,9 @@ $newmaint_values = ABSPATH . '/bps-maintenance-values.php';
 }	
 
 // default.htaccess and secure.htaccess fwrite content for all WP site types
+$bps_get_domain_root = bpsGetDomainRoot();
 $bps_get_wp_root_default = bps_wp_get_root_folder();
-$bps_auto_write_default_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/default.htaccess';
+$bps_auto_write_default_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/default.htaccess';
 
 $bpsSuccessMessageDef = '<font color="green"><strong>'.__('Success! Your Default Mode Master htaccess file was created successfully!', 'bulletproof-security').'</strong></font><br><font color="red"><strong>'.__('CAUTION: Default Mode should only be activated for testing or troubleshooting purposes. Default Mode does not protect your website with any security protection.', 'bulletproof-security').'</strong></font><br><font color="black"><strong>'.__('To activate Default Mode select the Default Mode radio button and click Activate to put your website in Default Mode.', 'bulletproof-security').'</strong></font>';
 
@@ -417,6 +418,13 @@ $bpsFailMessageDef = '<font color="red"><strong>'.__('The file ', 'bulletproof-s
 $bpsBeginWP = "\nRewriteEngine On
 RewriteBase $bps_get_wp_root_default
 RewriteRule ^index\.php$ - [L]\n\n";
+
+$ForbidSpamBots = "\n# FORBID EMPTY REFFERER SPAMBOTS
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} (wp-comments-post\.php)
+RewriteCond %{HTTP_REFERER} !^.*$bps_get_domain_root.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^$
+RewriteRule .* - [F]\n\n";
 
 $bps_default_content_top = "#   BULLETPROOF PRO 5.D DEFAULT .HTACCESS      \n
 # If you edit the line of code above you will see error messages on the BPS Security Status page
@@ -525,14 +533,14 @@ if (isset($_POST['bps-auto-write-default-MUSDom']) && current_user_can('manage_o
 
 // secure.htaccess fwrite content for all WP site types
 $bps_get_wp_root_secure = bps_wp_get_root_folder();
-$bps_auto_write_secure_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/secure.htaccess';
+$bps_auto_write_secure_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/secure.htaccess';
 
 $bpsSuccessMessageSec = '<font color="green"><strong>'.__('Success! Your BulletProof Security Root Master htaccess file was created successfully!', 'bulletproof-security').'</strong></font><br><font color="black"><strong>'.__('You can now Activate BulletProof Mode for your Root folder. Select the BulletProof Mode radio button and click Activate to put your website in BulletProof Mode.', 'bulletproof-security').'</strong></font>';
 
 $bpsFailMessageSec = '<font color="red"><strong>'.__('The file ', 'bulletproof-security')."$bps_auto_write_secure_file" . __(' is not writable or does not exist.', 'bulletproof-security').'</strong></font><br><strong>'.__('Check that the file is named secure.htaccess and that the file exists in the /bulletproof-security/admin/htaccess master folder. If this is not the problem click ', 'bulletproof-security').'<a href="http://www.ait-pro.com/aitpro-blog/2566/bulletproof-security-plugin-support/bulletproof-security-error-messages" target="_blank">'.__('here', 'bulletproof-security').'</a>'.__(' for more help info.', 'bulletproof-security').'</strong><br>';
 
-$bps_secure_content_top = "#   BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS     \n
-# If you edit the  BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS text above
+$bps_secure_content_top = "#   BULLETPROOF .47.5 >>>>>>> SECURE .HTACCESS     \n
+# If you edit the  BULLETPROOF .47.5 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -658,6 +666,7 @@ RewriteCond %{QUERY_STRING} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(b
 RewriteCond %{THE_REQUEST} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC]
 RewriteRule .* index.php [F,L]
 RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+RewriteCond %{HTTP_REFERER} ^.*$bps_get_domain_root.*
 RewriteRule . - [S=1]\n
 # BPSQSE BPS QUERY STRING EXPLOITS
 # The libwww-perl User Agent is forbidden - Many bad bots use libwww-perl modules, but some good bots use it too.
@@ -743,6 +752,27 @@ $bps_secure_content_bottom2 = "# BLOCK HOTLINKING TO IMAGES
 #RewriteCond %{HTTP_REFERER} !^https?://(www\.)?add-your-domain-here\.com [NC]
 #RewriteCond %{HTTP_REFERER} !^$
 #RewriteRule .*\.(jpeg|jpg|gif|bmp|png)$ - [F]\n
+# FORBID COMMENT SPAMMERS ACCESS TO YOUR wp-comments-post.php FILE
+# This is a better approach to blocking Comment Spammers so that you do not 
+# accidentally block good traffic to your website. You can add additional
+# Comment Spammer IP addresses on a case by case basis below.
+# Searchable Database of known Comment Spammers http://www.stopforumspam.com/\n
+<FilesMatch ".'"'."^(wp-comments-post\.php)".'"'.">
+Order Allow,Deny
+Deny from 46.119.35.
+Deny from 46.119.45.
+Deny from 91.236.74.
+Deny from 93.182.147.
+Deny from 93.182.187.
+Deny from 94.27.72.
+Deny from 94.27.75.
+Deny from 94.27.76.
+Deny from 193.105.210.
+Deny from 195.43.128.
+Deny from 198.144.105.
+Deny from 199.15.234.
+Allow from all
+</FilesMatch>\n
 # BLOCK MORE BAD BOTS RIPPERS AND OFFLINE BROWSERS
 # If you would like to block more bad bots you can get a blacklist from
 # http://perishablepress.com/press/2007/06/28/ultimate-htaccess-blacklist/
@@ -757,8 +787,8 @@ if (isset($_POST['bps-auto-write-maint']) && current_user_can('manage_options'))
 $bps_string_replace_maint = array(".");
 $bps_get_IP_maint = str_replace($bps_string_replace_maint, "\.", $_SERVER['REMOTE_ADDR']) . "$";
 $bps_get_wp_root_maint = bps_wp_get_root_folder();
-$bps_auto_write_maint_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
-$bps_maint_top = "#   BULLETPROOF .47.4 MAINTENANCE  .HTACCESS     \n\n";    
+$bps_auto_write_maint_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/maintenance.htaccess';
+$bps_maint_top = "#   BULLETPROOF .47.5 MAINTENANCE  .HTACCESS     \n\n";    
 $bps_maint_content = "RewriteEngine On
 RewriteBase $bps_get_wp_root_maint\n
 RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
@@ -848,7 +878,7 @@ if (isset($_POST['bps-auto-write-secure-root']) && current_user_can('manage_opti
 		 echo $text;
          exit;
     }
-    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bps_secure_content_wpadmin.$bpsBeginWP.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bps_secure_content_mid_bottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
+    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bps_secure_content_wpadmin.$bpsBeginWP.$ForbidSpamBots.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bps_secure_content_mid_bottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
         $text = '<font color="red"><strong>'.__('Cannot write to file ', 'bulletproof-security')."$bps_auto_write_secure_file" . '</strong></font>';
 		echo $text;
         exit;
@@ -870,7 +900,7 @@ if (isset($_POST['bps-auto-write-secure-root-MUSDir']) && current_user_can('mana
 		 echo $text;
          exit;
     }
-    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bpsBeginWP.$bpsMUSDirTop.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bpsMUSDirBottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
+    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bpsBeginWP.$ForbidSpamBots.$bpsMUSDirTop.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bpsMUSDirBottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
         $text = '<font color="red"><strong>'.__('Cannot write to file ', 'bulletproof-security')."$bps_auto_write_secure_file" . '</strong></font>';
 		echo $text;
         exit;
@@ -892,7 +922,7 @@ if (isset($_POST['bps-auto-write-secure-root-MUSDom']) && current_user_can('mana
 		 echo $text;
          exit;
     }
-    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bpsBeginWP.$bpsMUSDomTop.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bpsMUSDomBottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
+    if (fwrite($handle, $bps_secure_content_top.$phpiniHCode.$bps_secure_content_top_two.$bpsBeginWP.$ForbidSpamBots.$bpsMUSDomTop.$bps_secure_content_mid_top.$CustomCodeTwo.$bps_secure_content_mid_top2.$bpsMUSDomBottom.$bps_secure_content_bottom.$CustomCodeThree.$bps_secure_content_bottom2) === FALSE) {
         $text = '<font color="red"><strong>'.__('Cannot write to file ', 'bulletproof-security')."$bps_auto_write_secure_file" . '</strong></font>';
 		echo $text;
         exit;
@@ -915,7 +945,7 @@ if (isset($_POST['bps-maintenance-create-values_submit']) && current_user_can('m
 	$bps_message2_write = $options['bps-message-2'];
 	$bps_body_background_image_write = $options['bps-background-image'];
 
-	$bps_auto_write_maint_file_form = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
+	$bps_auto_write_maint_file_form = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/bps-maintenance-values.php';
 $bps_maint_content_form = "<?php".'
 $bps_retry_after'." = '$bps_retry_after_write';\n"
 .'$bps_site_title'." = '$bps_site_title_write';\n"
@@ -948,7 +978,7 @@ if (isset($_POST['submit-bps-upload']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bulletproof_security_upload' );
 	
 	$tmp_file = $_FILES['bps_file_upload']['tmp_name'];
-	$folder_path = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/';
+	$folder_path = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/';
 	$bps_uploaded_file =  str_replace('//','/',$folder_path) . $_FILES['bps_file_upload']['name'];
 	if (!empty($_FILES)) {
 	move_uploaded_file($tmp_file,$bps_uploaded_file);
@@ -965,7 +995,7 @@ if (isset($_POST['bps-enable-download']) && current_user_can('manage_options')) 
 	check_admin_referer( 'bulletproof_security_enable_download' );
 	
 	$bps_get_IP = $_SERVER['REMOTE_ADDR'];
-	$denyall_htaccess_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/.htaccess';
+	$denyall_htaccess_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/.htaccess';
 	$bps_denyall_content = "order deny,allow\ndeny from all\nallow from $bps_get_IP";
 	
 	if (is_writable($denyall_htaccess_file)) {
@@ -1076,7 +1106,7 @@ if (@$_GET['settings-updated'] == true) {
 <!-- jQuery UI Tab Menu -->
 <div id="bps-container">
 	<div id="bps-tabs" class="bps-menu">
-    <div id="bpsHead" style="position:relative; top:0px; left:0px;"><img src="<?php echo get_site_url(); ?>/wp-content/plugins/bulletproof-security/admin/images/bps-security-shield.png" style="float:left; padding:0px 8px 0px 0px; margin:-68px 0px 0px 0px;" /></div>
+    <div id="bpsHead" style="position:relative; top:0px; left:0px;"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/bps-security-shield.png'); ?>" style="float:left; padding:0px 8px 0px 0px; margin:-68px 0px 0px 0px;" /></div>
 		<ul>
 			<li><a href="#bps-tabs-1"><?php _e('Security Modes', 'bulletproof-security'); ?></a></li>
             <li><a href="#bps-tabs-2"><?php _e('Security Status', 'bulletproof-security'); ?></a></li>
@@ -1223,7 +1253,7 @@ if (@$_GET['settings-updated'] == true) {
 <table class="form-table">
    <tr>
 	<th><label><input name="selection8" type="radio" value="bps_rename_htaccess_files" class="tog" <?php checked('', $bps_rename_htaccess_files); ?> /> <?php _e('BulletProof Mode', 'bulletproof-security'); ?></label></th>
-	<td class="url-path"><?php echo get_site_url(); ?>/wp-content/plugins/bulletproof-security/admin/htaccess/<br /><?php $text = '<font color="green">'.__(' Copies the file deny-all.htaccess to the BPS Master htaccess folder and renames the file name to just .htaccess', 'bulletproof-security').'</font>'; echo $text; ?></td>
+	<td class="url-path"><?php echo plugins_url('/bulletproof-security/admin/htaccess/'); ?><br /><?php $text = '<font color="green">'.__(' Copies the file deny-all.htaccess to the BPS Master htaccess folder and renames the file name to just .htaccess', 'bulletproof-security').'</font>'; echo $text; ?></td>
    </tr>
 </table>
 <p class="submit"><input type="submit" name="submit8" class="button" value="<?php esc_attr_e('Activate', 'bulletproof-security') ?>" />
@@ -1458,7 +1488,7 @@ if (@$_GET['settings-updated'] == true) {
 	if (extension_loaded('suhosin')) {
 		_e('Suhosin-Extension is Loaded', 'bulletproof-security');	
 	} else {
-	if (!isset($bpsconstants['SUHOSIN_PATCH']) && $bpsconstants['SUHOSIN_PATCH'] != 1 && !extension_loaded('suhosin')) {
+	if (!isset($bpsconstants['SUHOSIN_PATCH']) && @$bpsconstants['SUHOSIN_PATCH'] != 1 && !extension_loaded('suhosin')) {
 		_e('Suhosin is Not Installed/Loaded', 'bulletproof-security');			
 	}
 	}
@@ -1875,7 +1905,7 @@ echo wpadmin_htaccess_file_check();
 // or nothing at all to end of the htaccess files.
 // If append write test is successful file is writable on submit
 if (current_user_can('manage_options')) {
-$secure_htaccess_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/secure.htaccess';
+$secure_htaccess_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/secure.htaccess';
 $write_test = "";
 	if (is_writable($secure_htaccess_file)) {
     if (!$handle = fopen($secure_htaccess_file, 'a+b')) {
@@ -1911,7 +1941,7 @@ $write_test = "";
 }
 
 if (current_user_can('manage_options')) {
-$default_htaccess_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/default.htaccess';
+$default_htaccess_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/default.htaccess';
 $write_test = "";
 	if (is_writable($default_htaccess_file)) {
     if (!$handle = fopen($default_htaccess_file, 'a+b')) {
@@ -1947,7 +1977,7 @@ $write_test = "";
 }
 
 if (current_user_can('manage_options')) {
-$maintenance_htaccess_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess';
+$maintenance_htaccess_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/maintenance.htaccess';
 $write_test = "";
 	if (is_writable($maintenance_htaccess_file)) {
     if (!$handle = fopen($maintenance_htaccess_file, 'a+b')) {
@@ -1983,7 +2013,7 @@ $write_test = "";
 }
 
 if (current_user_can('manage_options')) {
-$wpadmin_htaccess_file = WP_CONTENT_DIR . '/plugins/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
+$wpadmin_htaccess_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess';
 $write_test = "";
 	if (is_writable($wpadmin_htaccess_file)) {
     if (!$handle = fopen($wpadmin_htaccess_file, 'a+b')) {
@@ -2400,24 +2430,24 @@ if (isset($_POST['bps-master-wpadmin-backup-htaccess-download']) && current_user
 	}	
 ?> 
 
-<form name="bps-master-secure-download" action="<?php echo get_site_url() .'/wp-content/plugins/bulletproof-security/admin/htaccess/secure.htaccess'; ?>" method="post">
+<form name="bps-master-secure-download" action="<?php echo plugins_url('/bulletproof-security/admin/htaccess/secure.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_secure'); ?>
 <input type="submit" name="bps-master-secure-download" class="button" value="<?php esc_attr_e('secure.htaccess', 'bulletproof-security') ?>" onClick="return confirm('<?php _e('Click OK to Download the file now or click Cancel to cancel the download.', 'bulletproof-security'); ?>')" /></p>
 </form>
 
-<form name="bps-master-default-download" action="<?php echo get_site_url() .'/wp-content/plugins/bulletproof-security/admin/htaccess/default.htaccess'; ?>" method="post">
+<form name="bps-master-default-download" action="<?php echo plugins_url('/bulletproof-security/admin/htaccess/default.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_default'); ?>
 <input type="hidden" name="filename" value="bps-default-download" />
 <input type="submit" name="bps-master-default-download" class="button" value="<?php esc_attr_e('default.htaccess', 'bulletproof-security') ?>" /></p>
 </form>
 
-<form name="bps-master-maintenance-download" action="<?php echo get_site_url() .'/wp-content/plugins/bulletproof-security/admin/htaccess/maintenance.htaccess'; ?>" method="post">
+<form name="bps-master-maintenance-download" action="<?php echo plugins_url('/bulletproof-security/admin/htaccess/maintenance.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_maintenance'); ?>
 <input type="hidden" name="filename" value="bps-maintenance-download" />
 <input type="submit" name="bps-master-maintenance-download" class="button" value="<?php esc_attr_e('maintenance.htaccess', 'bulletproof-security') ?>" /></p>
 </form>
 
-<form name="bps-master-wpadmin-secure-download" action="<?php echo get_site_url() .'/wp-content/plugins/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess'; ?>" method="post">
+<form name="bps-master-wpadmin-secure-download" action="<?php echo plugins_url('/bulletproof-security/admin/htaccess/wpadmin-secure.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_wpadmin-secure'); ?>
 <input type="hidden" name="filename" value="bps-wpadmin-secure-download" />
 <input type="submit" name="bps-master-wpadmin-secure-download" class="button" value="<?php esc_attr_e('wpadmin-secure.htaccess', 'bulletproof-security') ?>" /></p>
@@ -2425,13 +2455,13 @@ if (isset($_POST['bps-master-wpadmin-backup-htaccess-download']) && current_user
 
 	<?php  echo '<p class="bps-download_titles">'; _e('Backed Up htaccess Files', 'bulletproof-security'); echo '</p>'; ?>
     
-<form name="bps-master-root-backup-htaccess-download" action="<?php echo get_site_url() . '/wp-content/bps-backup/root.htaccess'; ?>" method="post">
+<form name="bps-master-root-backup-htaccess-download" action="<?php echo content_url('/bps-backup/root.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_root-backup-htaccess'); ?>
 <input type="hidden" name="filename" value="bps-root-backup-htaccess-download" />
 <input type="submit" name="bps-master-root-backup-htaccess-download" class="button" value="<?php esc_attr_e('root.htaccess Backup File', 'bulletproof-security') ?>" /></p>
 </form>
 
-<form name="bps-master-wpadmin-backup-htaccess-download" action="<?php echo get_site_url() . '/wp-content/bps-backup/wpadmin.htaccess'; ?>" method="post">
+<form name="bps-master-wpadmin-backup-htaccess-download" action="<?php echo content_url('/bps-backup/wpadmin.htaccess'); ?>" method="post">
 <?php wp_nonce_field('bulletproof_security_download_wpadmin-backup-htaccess'); ?>
 <input type="hidden" name="filename" value="bps-wpadmin-backup-htaccess-download" />
 <input type="submit" name="bps-master-wpadmin-backup-htaccess-download" class="button" value="<?php esc_attr_e('wpadmin.htaccess Backup File', 'bulletproof-security') ?>" /></p>
@@ -2593,7 +2623,7 @@ jQuery(document).ready(function($){
 </tr>
 <tr valign="top">
 <th scope="row"><label for="bps-background-image"><?php _e('Background Image', 'bulletproof-security') ?></label></th>
-<td><input name="bulletproof_security_options_maint[bps-background-image]" type="text" value="<?php echo $options['bps-background-image']; ?>" class="regular-text" /><span class="description"><?php echo get_site_url(); ?>/wp-content/plugins/bulletproof-security/abstract-blue-bg.png</span></td>
+<td><input name="bulletproof_security_options_maint[bps-background-image]" type="text" value="<?php echo $options['bps-background-image']; ?>" class="regular-text" /><span class="description"><?php echo plugins_url('/bulletproof-security/abstract-blue-bg.png'); ?></span></td>
 </tr>
 </table>
 <p class="submit">
@@ -2610,7 +2640,7 @@ jQuery(document).ready(function($){
 </form>
 
 <!-- this is the Enable Download form reused for maintenance mode Preview -->
-<form name="bps-enable-download" method="POST" action="admin.php?page=bulletproof-security/admin/options.php#bps-tabs-7" target="" onSubmit="window.open('<?php echo get_site_url(); ?>/wp-content/plugins/bulletproof-security/admin/htaccess/bp-maintenance.php','','scrollbars=yes,menubar=yes,width=800,height=600,resizable=yes,status=yes,toolbar=yes')">
+<form name="bps-enable-download" method="POST" action="admin.php?page=bulletproof-security/admin/options.php#bps-tabs-7" target="" onSubmit="window.open('<?php echo plugins_url('/bulletproof-security/admin/htaccess/bp-maintenance.php'); ?>','','scrollbars=yes,menubar=yes,width=800,height=600,resizable=yes,status=yes,toolbar=yes')">
 <?php wp_nonce_field('bulletproof_security_enable_download'); ?>
 <input type="hidden" name="filename" value="bps-enable-download-edit" />
 <p class="submit">
@@ -2668,19 +2698,19 @@ jQuery(document).ready(function($){
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-backup-restore" target="_blank"><?php _e('Backup & Restore Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/" target="_blank"><?php _e('BPS .47.4 Troubleshooting Guide', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/" target="_blank"><?php _e('BPS .47.5 Troubleshooting Guide', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2585/bulletproof-security-plugin-support/wordpress-website-maintenance-wordpress-maintenance-mode" target="_blank"><?php _e('Maintenance Mode Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.4 Features', 'bulletproof-security'); ?></a></td>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.4 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-45-new-features" target="_blank"><?php _e('BPS .47.5 Features', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#bps-advanced-coding-modfications" target="_blank"><?php _e('BPS .47.5 Coding Modifications Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/319/bulletproof-security-plugin-support/bulletproof-security-comments-questions-problems-wishlist/" target="_blank"><?php _e('Post Questions and Comments for Assistance', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1166/bulletproof-security-plugin-support/bulletproof-security-plugin-guide-bps-version-45/#modifying-htaccess-files" target="_blank"><?php _e('Modifying BPS .htaccess Files for WordPress Subfolders', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
-    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.4 Screenshots', 'bulletproof-security'); ?></a></td>
+    <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/1183/bulletproof-security-plugin-support/bulletproof-security-plugin-bps-version-45-screenshots/" target="_blank"><?php _e('BPS .47.5 Screenshots', 'bulletproof-security'); ?></a></td>
     <td class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2185/bulletproof-security-plugin-support/bulletproof-security-file-editing-editing-files-within-the-wordpress-dashboard/" target="_blank"><?php _e('File Editing Within The Dashboard Help Info', 'bulletproof-security'); ?></a></td>
   </tr>
   <tr>
@@ -2716,6 +2746,66 @@ jQuery(document).ready(function($){
    <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
     <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+ <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Coding Improvements & Enhancements:', 'bulletproof-security'); ?></strong><br /><?php _e('BPS Pro .47.5 primarily focuses on coding enhancements and improvements before moving forward with adding new features in the next version release of BPS.', 'bulletproof-security'); ?></td>
+  </tr>
+<tr>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+ <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Primary Focuses:', 'bulletproof-security'); ?></strong><br /><br /></td>
+  </tr>    
+    <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('WordPress 3.5 pre-release coding added', 'bulletproof-security'); ?></strong></td>
+  </tr> 
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Visual Improvements/Enhancements', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('jQuery coding Improvements/Enhancements', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('PHP coding Improvements/Enhancements', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('.htaccess code Additions and Improvements', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('Anti-Comment Spam .htaccess coding added', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('General Overall Coding Improvements/Enhancements/Requests and bugfixes', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('DNS Host Name Check for htaccess file auto-lock', 'bulletproof-security'); ?></strong></td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('BPS Pro Affiliate Program:', 'bulletproof-security'); ?></strong><br /><?php _e('BPS Pro now has an Affiliate Program. Affiliate commission payout is 25%. If you are interested in signing up visit the ', 'bulletproof-security'); ?><a href="http://affiliates.ait-pro.com/" target="_blank"><?php _e('BulletProof Security Pro Affiliate Program website.', 'bulletproof-security'); ?></a></td>
+  </tr>
+   <tr>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+    <td class="bps-table_cell_no_border">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="bps-table_cell_no_border">&bull;</td>
+    <td class="bps-table_cell_no_border"><h2><strong><?php _e('Whats New in BPS .47.4', 'bulletproof-security'); ?></strong></h2></td>
   </tr>
  <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
@@ -2807,10 +2897,11 @@ jQuery(document).ready(function($){
   </tr>
   <tr>
     <td width="62%" class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/videos/quick-install/bps-pro-quick-setup.html" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro 5 Minute Installation & Setup Video Tutorial', 'bulletproof-security'); ?></a><br /><br />
-    <a href="http://www.ait-pro.com/aitpro-blog/videos/upgrade/bps-pro-plugin-upgrade.html" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro One Click Upgrade Video Tutorial', 'bulletproof-security'); ?></a></td>
+    <a href="http://www.ait-pro.com/aitpro-blog/videos/upgrade/bps-pro-plugin-upgrade.html" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro One Click Upgrade Video Tutorial', 'bulletproof-security'); ?></a><br /><br /><a href="http://affiliates.ait-pro.com/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Affiliate Program', 'bulletproof-security'); ?></a></td>
     <td width="38%" rowspan="11" valign="top" class="bps-table_cell_help">
     <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Vs BPS Free Feature Comparison', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/2837/bulletproof-security-pro/bulletproof-security-pro-screenshots/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Screenshots', 'bulletproof-security'); ?></a><br /><br />
+    <a href="http://www.ait-pro.com/aitpro-blog/4563/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-2/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.2', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4442/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-9/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.9', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4197/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-8/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.8', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4144/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-1-7/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.1.7', 'bulletproof-security'); ?></a><br /><br />
@@ -2870,7 +2961,7 @@ jQuery(document).ready(function($){
   </tr>
   <tr>
     <td class="bps-table_cell_help">
-    <div id="SucuriLogo" style="position:relative; top:0px; left:0px;"><img src="<?php echo get_site_url(); ?>/wp-content/plugins/bulletproof-security/admin/images/sucuri-logo.png" style="float:left; padding:0px 10px 0px 0px; margin:0px;" /><h3><?php echo '<em>'.'"'.'...'; _e('the sheer nature of malware makes it very challenging to give you 100% certainty you will not get infected. The good news though is that we are doing everything in our power to ensure that 1 - you do not get infected, but 2 - if you do, we have the best solution to get you back on your feet.', 'bulletproof-security'); echo '"'.'</em><br> -- '; _e('Tony Perez, CFO Sucuri, LLC', 'bulletproof-security'); ?></h3><a href="http://sitecheck.sucuri.net/" target="_blank" title="Link opens in new browser window">Sucuri SiteCheck Scanner</a></div>    
+    <div id="SucuriLogo" style="position:relative; top:0px; left:0px;"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/sucuri-logo.png'); ?>" style="float:left; padding:0px 10px 0px 0px; margin:0px;" /><h3><?php echo '<em>'.'"'.'...'; _e('the sheer nature of malware makes it very challenging to give you 100% certainty you will not get infected. The good news though is that we are doing everything in our power to ensure that 1 - you do not get infected, but 2 - if you do, we have the best solution to get you back on your feet.', 'bulletproof-security'); echo '"'.'</em><br> -- '; _e('Tony Perez, CFO Sucuri, LLC', 'bulletproof-security'); ?></h3><a href="http://sitecheck.sucuri.net/" target="_blank" title="Link opens in new browser window">Sucuri SiteCheck Scanner</a></div>    
     </td>
   </tr>
   <tr>

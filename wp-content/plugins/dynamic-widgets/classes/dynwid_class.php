@@ -20,6 +20,7 @@
 		public  $removelist = array();
 		public  $sidebars;
 		public  $template;
+		public  $url;
 		public  $plugin_url;
 		public  $useragent;
 		public  $userrole;
@@ -49,11 +50,7 @@
 			$query = "SHOW TABLES LIKE '" . $this->dbtable . "'";
 			$result = $this->wpdb->get_var($query);
 
-			if ( is_null($result) ) {
-				$this->enabled = FALSE;
-			} else {
-				$this->enabled = TRUE;
-			}
+			$this->enabled = ( is_null($result) ) ? FALSE : TRUE;
 		}
 
 		/**
@@ -113,7 +110,6 @@
 		 *
 		 * @param string $widget_id ID of the widget
 		 * @param array $dates Dates
-		 * @return
 		 */
 		public function addDate($widget_id, $dates) {
 			$query = "INSERT INTO " . $this->dbtable . "
@@ -129,6 +125,30 @@
                     ('" . $this->wpdb->escape($widget_id) . "', 'date', '" . $this->wpdb->escape($name) . "', '" . $this->wpdb->escape($date) . "')";
 				$this->wpdb->query($query);
 			}
+		}
+
+		/**
+		 * dynWid::addUrls() Saves url options
+		 *
+		 * @param string $widget_id ID of the widget
+		 * @param array $default Default setting
+		 * @param string $urls URLs
+		 */
+		public function addUrls($widget_id, $default, $urls) {
+			$value = serialize($urls);
+			if ( $default == 'no' ) {
+				$query = "INSERT INTO " . $this->dbtable . "
+										(widget_id, maintype, name, value)
+									VALUES
+										('" . $this->wpdb->escape($widget_id) . "', 'url', 'default', '0')";
+				$this->wpdb->query($query);
+			}
+
+			$query = "INSERT INTO " . $this->dbtable . "
+										(widget_id, maintype, name, value)
+									VALUES
+										('" . $this->wpdb->escape($widget_id) . "', 'url', 'url', '" . $value . "')";
+			$this->wpdb->query($query);
 		}
 
 		/**
@@ -150,8 +170,19 @@
 				$opt_act = '0';
 			}
 
-			// Check single-post or single-option coming from post or tag screen
-			if ( $maintype == 'single-post' || $maintype == 'single-tag' ) {
+			// Check single-post or single-option coming from posts or tags screen to prevent database polution
+			$types = array();
+			$args = array(
+								'public'   => TRUE,
+								'_builtin' => FALSE
+							);
+			$post_types = get_post_types($args, 'objects', 'and');
+			foreach ( array_keys($post_types) as $t ){
+				$types[ ] = $t . '-post';
+			}
+			$post_types = array_merge( $types, array('single-post', 'single-tag') );
+
+			if ( in_array($maintype, $post_types) ) {
 				$query = "SELECT COUNT(1) AS total FROM " . $this->dbtable . " WHERE widget_id = '" . $widget_id . "' AND maintype = '" . $maintype . "' AND name = 'default'";
 				$count = $this->wpdb->get_var($this->wpdb->prepare($query));
 				if ( $count > 0 ) {
@@ -252,6 +283,9 @@
 		 * @return string
 		 */
 		public function detectPage() {
+			// First we register the Path URL
+			$this->url = $_SERVER['REQUEST_URI'];
+
 			if ( is_front_page() && get_option('show_on_front') == 'posts' ) {
 				return 'front-page';
 			} else if ( is_home() && get_option('show_on_front') == 'page' ) {
@@ -403,6 +437,7 @@
 			if ( $maintype == 'home' ) {
 				$maintype = 'page';
 			}
+
 			$query = "SELECT widget_id, maintype, name, value FROM " . $this->dbtable . "
                  WHERE widget_id LIKE '" . $widget_id . "'
                    AND maintype LIKE '" . $maintype . "%'
@@ -426,9 +461,9 @@
 			DWModule::registerOption(DW_BP::$option);
 			DWModule::registerOption(DW_Browser::$option);
 			DWModule::registerOption(DW_Category::$option);
-			// DWModule::registerOption(DW_CustomPost::$option);
 			DW_CustomPost::registerOption();
 			DWModule::registerOption(DW_Date::$option);
+			DWModule::registerOption(DW_Day::$option);
 			DWModule::registerOption(DW_E404::$option);
 			DWModule::registerOption(DW_Front_page::$option);
 			DWModule::registerOption(DW_Page::$option);
@@ -439,6 +474,8 @@
 			DWModule::registerOption(DW_Single::$option);
 			DWModule::registerOption(DW_Tag::$option);
 			DWModule::registerOption(DW_Tpl::$option);
+			DWModule::registerOption(DW_URL::$option);
+			DWModule::registerOption(DW_Week::$option);
 			DWModule::registerOption(DW_WPSC::$option);
 			DWModule::registerOption(DW_WPML::$option);
 		}
@@ -586,6 +623,25 @@
 		}
 
 		/**
+		 * dynWid::getURLPrefix() Gets the optionel prefix this blog is under
+		 *
+		 * @return string
+		 */
+		public function getURLPrefix() {
+			$proto = ( is_ssl() ) ? 'https' : 'http';
+			$name = ( isset($_SERVER['HTTP_HOST']) ) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+			$server = $proto . '://' . $name;
+			$prefix = substr( home_url('/'), strlen($server) );
+
+			if ( $prefix != '/' ) {
+				$prefix = substr($prefix, 0, strlen($prefix) - 1 );
+				return $prefix;
+			}
+
+			return;
+		}
+
+		/**
 		 * dynWid::hasOptions() Checks if a widget has options set
 		 *
 		 * @param string $widget_id ID of the widget
@@ -599,9 +655,9 @@
 
 			if ( $count > 0 ) {
 				return TRUE;
-			} else {
-				return FALSE;
 			}
+
+			return FALSE;
 		}
 
 		/**
@@ -632,11 +688,11 @@
 				}
 			}
 		}
-		
+
 		/**
 		 * dynWid::log() Write text to debug log
 		 *
-		 */		
+		 */
 		public function log($text) {
 			if ( WP_DEBUG && DW_DEBUG ) {
 				error_log($text);
@@ -666,12 +722,18 @@
 		public function registerOverrulers() {
 			include_once(DW_MODULES . 'browser_module.php');
 			include_once(DW_MODULES . 'date_module.php');
+			include_once(DW_MODULES . 'day_module.php');
+			include_once(DW_MODULES . 'week_module.php');
 			include_once(DW_MODULES . 'role_module.php');
 			include_once(DW_MODULES . 'tpl_module.php');
+			include_once(DW_MODULES . 'url_module.php');
 			DW_Browser::checkOverrule('DW_Browser');
 			DW_Date::checkOverrule('DW_Date');
+			DW_Day::checkOverrule('DW_Day');
+			DW_Week::checkOverrule('DW_Week');
 			DW_Role::checkOverrule('DW_Role');
 			DW_Tpl::checkOverrule('DW_Tpl');
+			DW_URL::checkOverrule('DW_URL');
 
 			// WPML Plugin Support
 			include_once(DW_MODULES . 'wpml_module.php');

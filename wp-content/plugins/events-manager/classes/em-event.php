@@ -456,9 +456,8 @@ class EM_Event extends EM_Object{
 			$this->get_categories()->get_post(); //it'll know what to do
 		}
 		//validate (optional) and return result
-		$result = $validate ? $this->validate_meta():true;
 		$this->compat_keys(); //compatability
-		return apply_filters('em_event_get_post', $result, $this);
+		return apply_filters('em_event_get_post', count($this->errors) == 0, $this);
 	}
 	
 	function validate(){
@@ -476,9 +475,10 @@ class EM_Event extends EM_Object{
 				$this->add_error( sprintf(__("%s is required.", "dbem"), __('Your name','dbem')) );
 			}
 		}
+		$validate_tickets = $this->get_bookings()->get_tickets()->validate();
 		$validate_image = $this->image_validate();
 		$validate_meta = $this->validate_meta();
-		return apply_filters('em_event_validate', $validate_post && $validate_image && $validate_meta, $this );		
+		return apply_filters('em_event_validate', $validate_post && $validate_image && $validate_meta && $validate_tickets, $this );		
 	}
 	function validate_meta(){
 		$missing_fields = Array ();
@@ -1365,12 +1365,15 @@ class EM_Event extends EM_Object{
 					$min = false;
 					$max = 0;
 					foreach( $this->get_tickets()->tickets as $EM_Ticket ){
-						if($EM_Ticket->get_price() > $max ){
-							$max = $EM_Ticket->get_price();
+						/* @var $EM_Ticket EM_Ticket */
+						if( $EM_Ticket->is_available() || get_option('dbem_bookings_tickets_show_unavailable') ){
+							if($EM_Ticket->get_price() > $max ){
+								$max = $EM_Ticket->get_price();
+							}
+							if($EM_Ticket->get_price() < $min || $min === false){
+								$min = $EM_Ticket->get_price();
+							}						
 						}
-						if($EM_Ticket->get_price() < $min || $min === false){
-							$min = $EM_Ticket->get_price();
-						}						
 					}
 					if( $min === false ) $min = 0;
 					if( $min != $max ){
@@ -1383,8 +1386,11 @@ class EM_Event extends EM_Object{
 					//get the range of prices
 					$min = false;
 					foreach( $this->get_tickets()->tickets as $EM_Ticket ){
-						if( $EM_Ticket->get_price() < $min || $min === false){
-							$min = $EM_Ticket->get_price();
+						/* @var $EM_Ticket EM_Ticket */
+						if( $EM_Ticket->is_available()|| get_option('dbem_bookings_tickets_show_unavailable') ){
+							if( $EM_Ticket->get_price() < $min || $min === false){
+								$min = $EM_Ticket->get_price();
+							}
 						}
 					}
 					if( $min === false ) $min = 0;
@@ -1394,9 +1400,12 @@ class EM_Event extends EM_Object{
 					//get the range of prices
 					$max = 0;
 					foreach( $this->get_tickets()->tickets as $EM_Ticket ){
-						if( $EM_Ticket->get_price() > $max ){
-							$max = $EM_Ticket->get_price();
-						}						
+						/* @var $EM_Ticket EM_Ticket */
+						if( $EM_Ticket->is_available()|| get_option('dbem_bookings_tickets_show_unavailable') ){
+							if( $EM_Ticket->get_price() > $max ){
+								$max = $EM_Ticket->get_price();
+							}
+						}			
 					}
 					$replace = em_get_currency_formatted($max);
 					break;
@@ -1725,16 +1734,15 @@ class EM_Event extends EM_Object{
 					$post_fields['post_name'] = $event['event_slug'] = $meta_fields['_event_slug'] = $post_name.'-'.date($recurring_date_format, $day);
 					//adjust certain meta information
 					$event['event_start_date'] = $meta_fields['_event_start_date'] = date("Y-m-d", $day);
-					$meta_fields['_start_ts'] = $day;
+					$meta_fields['_start_ts'] = strtotime($event['event_start_date'].' '.$event['event_start_time']);
 					$event['event_rsvp_date'] = $meta_fields['_event_rsvp_date'] = $event['event_start_date'];
 					$event['event_rsvp_time'] = $meta_fields['_event_rsvp_time'] = $event['event_start_time'];
 					if($this->recurrence_days > 0){
-						$meta_fields['_end_ts'] = $day + ($this->recurrence_days * 60*60*24);
-						$event['event_end_date'] = $meta_fields['_event_end_date'] = date("Y-m-d", $meta_fields['_end_ts']);
+						$event['event_end_date'] = $meta_fields['_event_end_date'] = date("Y-m-d", $meta_fields['_start_ts'] + ($this->recurrence_days * 60*60*24));
 					}else{
-						$meta_fields['_end_ts'] = $day;
 						$event['event_end_date'] = $meta_fields['_event_end_date'] = $event['event_start_date'];
 					}	
+					$meta_fields['_end_ts'] = strtotime($event['event_end_date'].' '.$event['event_end_time']);
 					//create the event
 					if( $wpdb->insert($wpdb->posts, $post_fields ) ){
 						$event['post_id'] = $meta_fields['_post_id'] = $post_id = $post_ids[] = $wpdb->insert_id; //post id saved into event and also as a var for later user

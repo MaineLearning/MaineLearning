@@ -61,8 +61,7 @@ class GFUpdate{
                 jQuery(document).ready(function(){
                     jQuery.post(ajaxurl,{
                             action:"gf_upgrade_license",
-                            gf_upgrade_license: "<?php echo wp_create_nonce("gf_upgrade_license") ?>",
-                            cookie: encodeURIComponent(document.cookie)},
+                            gf_upgrade_license: "<?php echo wp_create_nonce("gf_upgrade_license") ?>"},
 
                             function(data){
                                 if(data.trim().length > 0)

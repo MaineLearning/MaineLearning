@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Super Cache (Traditional Chinese)\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-super-cache\n"
-"POT-Creation-Date: 2011-02-28 22:08:12+00:00\n"
+"POT-Creation-Date: 2012-06-21 09:44:46+00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Liang, Jih-Kai <privism@gmail.com>\n"
 "Language-Team: privism <privism@gmail.com>\n"
@@ -13,70 +13,227 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ossdl-cdn.php:146
+#: ossdl-cdn.php:151
 msgid "Your website probably uses lots of static files. Image, Javascript and CSS files are usually static files that could just as easily be served from another site or CDN. Therefore this plugin replaces any links in the <code>wp-content</code> and <code>wp-includes</code> directories (except for PHP files) on your site with the URL you provide below. That way you can either copy all the static content to a dedicated host or mirror the files to a CDN by <a href=\"http://knowledgelayer.softlayer.com/questions/365/How+does+Origin+Pull+work%3F\" target=\"_blank\">origin pull</a>."
-msgstr "你的網站可能使用了許多的靜態檔案。圖片、Javascript、CSS檔案通常都是靜態檔案，可以很簡單地使用另一個站台或CDN來服務。所以這個外掛會根據你下面所提供的URL，取代你的網站中<code>wp-content</code>和<code>wp-includes</code>目錄下除了PHP檔案以外的任何連結。用這個方式，你可以把所有的靜態內容拷貝到一個專用的主機或或使用<a href=\"http://knowledgelayer.softlayer.com/questions/365/How+does+Origin+Pull+work%3F\" target=\"_blank\">origin pull</a>鏡射到CDN上。"
+msgstr "你的網站可能使用了許多的靜態檔案。圖片、Javascript、CSS 檔案通常都是靜態檔案，可以很簡單地使用另一個站台或 CDN (內容傳遞網路)來服務。所以這個外掛會根據你下面所提供的 URL，取代你的網站中 <code>wp-content</code> 和 <code>wp-includes</code> 目錄下除了 PHP 檔案以外的任何連結。用這個方式，你可以把所有的靜態內容拷貝到一個專用的主機或或使用 <a href=\"http://knowledgelayer.softlayer.com/questions/365/How+does+Origin+Pull+work%3F\" target=\"_blank\">origin pull</a> 鏡射到 CDN 上。"
 
-#: ossdl-cdn.php:147
-#: wp-cache.php:968
+#: ossdl-cdn.php:152
+#: wp-cache.php:1071
 msgid "The <a href=\"%1$s\">CDN Sync Tool</a> plugin will help upload files to Amazon S3/Cloudfront if you would rather not depend on origin pull. See the <a href=\"%2$s\">plugin support forum</a> if you have any queries about this plugin."
-msgstr "如果你不希望依賴origin pull，<a href=\"%1$s\">CDN Sync Tool</a>是一個幫助你上傳檔案到 Amazon S3/Cloudfront 的外掛。 如果你對此外掛有任何問題，請參見 <a href=\"%2$s\">外掛支援論壇</a>。"
+msgstr "如果你不希望依賴 origin pull，<a href=\"%1$s\">CDN Sync Tool</a> 是一個幫助你上傳檔案到 Amazon S3/Cloudfront 的外掛。 如果你對此外掛有任何問題，請參見 <a href=\"%2$s\">外掛支援論壇</a>。"
 
-#: ossdl-cdn.php:148
+#: ossdl-cdn.php:153
 msgid "<strong style=\"color: red\">WARNING:</strong> Test some static urls e.g., %s  to ensure your CDN service is fully working before saving changes."
-msgstr "<strong style=\"color: red\">警告：</strong> 請先測試一些固定的網址，例如%s。在儲存變更前，確定你的CDN服務完全正常。"
+msgstr "<strong style=\"color: red\">警告：</strong> 請先測試一些固定的網址，例如%s。在儲存變更前，確定你的 CDN 服務完全正常。"
 
-#: ossdl-cdn.php:149
+#: ossdl-cdn.php:154
 msgid "You can define different CDN URLs for each site on a multsite network."
-msgstr "你可以為多站台網路中的每個站台定義不同的CDN URL。"
+msgstr "你可以為多站台網路中的每個站台定義不同的 CDN URL。"
 
-#: ossdl-cdn.php:157
+#: ossdl-cdn.php:162
 msgid "Enable CDN Support"
-msgstr "啟用CDN支援"
+msgstr "啟用 CDN 支援"
 
-#: ossdl-cdn.php:160
+#: ossdl-cdn.php:165
 msgid "Off-site URL"
-msgstr "站外URL"
+msgstr "站外 URL"
 
-#: ossdl-cdn.php:163
+#: ossdl-cdn.php:168
 msgid "The new URL to be used in place of %1$s for rewriting. No trailing <code>/</code> please.<br />Example: <code>%2$s</code>."
-msgstr "這個新的 URL 在會重寫 (rewriting) 時用來取代 %1$s。請不要加上結尾的 <code>/</code>。 <br /> 例： <code>%2$s</code>"
+msgstr "這個新的 URL 在會重寫時用來取代 %1$s。請不要加上結尾的 <code>/</code>。 <br /> 例： <code>%2$s</code>"
 
-#: ossdl-cdn.php:167
+#: ossdl-cdn.php:172
 msgid "Include directories"
 msgstr "包含以下目錄"
 
-#: ossdl-cdn.php:170
+#: ossdl-cdn.php:175
 msgid "Directories to include in static file matching. Use a comma as the delimiter. Default is <code>wp-content, wp-includes</code>, which will be enforced if this field is left empty."
 msgstr "靜態檔案比對包含的目錄。使用逗號作為分隔符號。預設為 <code>wp-content, wp-includes</code> ，當這個欄位空白時會強制套用。"
 
-#: ossdl-cdn.php:174
+#: ossdl-cdn.php:179
 msgid "Exclude if substring"
 msgstr "若含有以下字串則排除"
 
-#: ossdl-cdn.php:177
+#: ossdl-cdn.php:182
 msgid "Excludes something from being rewritten if one of the above strings is found in the match. Use a comma as the delimiter like this, <code>.php, .flv, .do</code>, and always include <code>.php</code> (default)."
 msgstr "若網址中包含以上的字串，則不會被重寫。使用逗號作為分隔符號，像這樣：<code>.php, .flv, .do</code>，並請永遠包含<code>.php</code> (預設值)。"
 
-#: ossdl-cdn.php:181
+#: ossdl-cdn.php:186
 msgid "Additional CNAMES"
 msgstr "額外的正規名稱(CNAMES)"
 
-#: ossdl-cdn.php:184
+#: ossdl-cdn.php:189
 msgid "These <a href=\"http://en.wikipedia.org/wiki/CNAME_record\">CNAMES</a> will be used in place of %1$s for rewriting (in addition to the off-site URL above). Use a comma as the delimiter. For pages with a large number of static files, this can improve browser performance. CNAMEs may also need to be configured on your CDN.<br />Example: %2$s"
-msgstr "這些 <a href=\"http://en.wikipedia.org/wiki/CNAME_record\">正規名稱記錄(CNAMES)</a> 會在重寫時用來取代 %1$s (和上面的站外URL一起)。 使用逗號作為分隔符號。 在有大量靜態檔案的網頁中，這可以增進瀏覽器效能。 這些CNAME可能也需要在你的CDN被設定。<br />例： %2$s"
+msgstr "這些 <a href=\"http://en.wikipedia.org/wiki/CNAME_record\">正規名稱記錄(CNAMES)</a> 會在重寫時用來取代 %1$s (和上面的站外URL一起)。 使用逗號作為分隔符號。 在有大量靜態檔案的網頁中，這可以增進瀏覽器效能。 這些正規名稱可能也需要在你的 CDN 被設定。<br />例： %2$s"
 
-#: ossdl-cdn.php:188
+#: ossdl-cdn.php:193
 msgid "Skip https URLs to avoid \"mixed content\" errors"
-msgstr "跳過https網址以避免「混合的內容」錯誤"
+msgstr "跳過 https 網址以避免「混合的內容」錯誤"
 
-#: ossdl-cdn.php:192
+#: ossdl-cdn.php:197
 msgid "Save Changes"
 msgstr "儲存變更"
 
-#: ossdl-cdn.php:194
+#: ossdl-cdn.php:199
 msgid "CDN functionality provided by <a href=\"http://wordpress.org/extend/plugins/ossdl-cdn-off-linker/\">OSSDL CDN Off Linker</a> by <a href=\"http://mark.ossdl.de/\">Mark Kubacki</a>"
 msgstr "CDN 功能由<a href=\"http://wordpress.org/extend/plugins/ossdl-cdn-off-linker/\">OSSDL CDN Off Linker</a>提供，作者為<a href=\"http://mark.ossdl.de/\">Mark Kubacki</a>"
+
+#: plugins/awaitingmoderation.php:4
+msgid "Your comment is awaiting moderation."
+msgstr "您的迴響正等待審核中。"
+
+#: plugins/awaitingmoderation.php:32
+msgid "Awaiting Moderation"
+msgstr "Awaiting Moderation"
+
+#: plugins/awaitingmoderation.php:34
+#: plugins/badbehaviour.php:65
+#: plugins/domain-mapping.php:75
+#: plugins/searchengine.php:69
+#: plugins/wptouch.php:22
+#: wp-cache.php:1311
+msgid "Enabled"
+msgstr "啟用"
+
+#: plugins/awaitingmoderation.php:35
+#: plugins/badbehaviour.php:66
+#: plugins/domain-mapping.php:76
+#: plugins/searchengine.php:70
+#: plugins/wptouch.php:23
+#: wp-cache.php:1311
+msgid "Disabled"
+msgstr "停用"
+
+#: plugins/awaitingmoderation.php:36
+msgid "Enables or disables plugin to Remove the text \"Your comment is awaiting moderation.\" when someone leaves a moderated comment."
+msgstr "啟動或關閉此外掛，決定當有人發佈需審核的迴響時，是否去除「您的迴響正等待審核中」字樣。"
+
+#: plugins/awaitingmoderation.php:40
+#: plugins/badbehaviour.php:71
+#: plugins/domain-mapping.php:81
+#: plugins/searchengine.php:75
+#: plugins/wptouch.php:28
+#: wp-cache.php:1769
+#: wp-cache.php:1771
+msgid "enabled"
+msgstr "已啟用"
+
+#: plugins/awaitingmoderation.php:42
+#: plugins/badbehaviour.php:73
+#: plugins/domain-mapping.php:83
+#: plugins/searchengine.php:77
+#: plugins/wptouch.php:30
+msgid "disabled"
+msgstr "已停用"
+
+#: plugins/awaitingmoderation.php:43
+msgid "Awaiting Moderation is now %s"
+msgstr "Awaiting Moderation 外掛模組 %s"
+
+#: plugins/awaitingmoderation.php:45
+#: plugins/badbehaviour.php:76
+#: plugins/domain-mapping.php:86
+#: plugins/searchengine.php:80
+#: plugins/wptouch.php:33
+msgid "Update"
+msgstr "更新"
+
+#: plugins/badbehaviour.php:47
+msgid "Bad Behaviour not found. Please check your install."
+msgstr "找不到 Bad Behaviour。請檢查是否正確安裝。"
+
+#: plugins/badbehaviour.php:63
+msgid "Bad Behavior"
+msgstr "Bad Behavior"
+
+#: plugins/badbehaviour.php:68
+msgid "(Only legacy caching supported, disabled compression and requires <a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> in \"%s/plugins/bad-behavior/\") "
+msgstr "（只支援傳統模式，停用壓縮，<a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> 路徑必須為 \"%s/plugins/bad-behavior/\"）"
+
+#: plugins/badbehaviour.php:74
+msgid "Bad Behavior support is now %s"
+msgstr "Bad Behaviour 外掛模組 %s"
+
+#: plugins/badbehaviour.php:83
+#: wp-cache.php:1401
+#: wp-cache.php:1406
+msgid "Warning!"
+msgstr "警告！"
+
+#: plugins/domain-mapping.php:73
+msgid "Domain Mapping"
+msgstr "Domain Mapping"
+
+#: plugins/domain-mapping.php:78
+msgid "Provides support for <a href=\"http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/\">Domain Mapping</a> plugin to map multiple domains to a blog."
+msgstr "<a href=\"http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/\">Domain Mapping</a>外掛支援，映射多個網域至一個 blog。"
+
+#: plugins/domain-mapping.php:84
+msgid "Domain Mapping support is now %s"
+msgstr "Domain Mapping 外掛模組 %s"
+
+#: plugins/domain-mapping.php:98
+msgid "Domain Mapping plugin detected! Please go to the Supercache plugins page and enable the domain mapping helper plugin."
+msgstr "Domain Mapping 外掛模組已被偵測到！請到 Supercache 外掛頁面啟用 domain mapping 支援外掛。"
+
+#: plugins/multisite.php:13
+msgid "Cached"
+msgstr "已快取"
+
+#: plugins/multisite.php:31
+#: wp-cache.php:1324
+msgid "Enable"
+msgstr "啟用"
+
+#: plugins/multisite.php:33
+#: plugins/searchengine.php:61
+#: wp-cache.php:1324
+msgid "Disable"
+msgstr "停用"
+
+#: plugins/multisite.php:39
+msgid "Caching has been disabled on this blog on the Network Admin Sites page."
+msgstr "這個部落格的快取，已經在站台網路管理頁面中被關閉。"
+
+#: plugins/searchengine.php:67
+msgid "No Adverts for Friends"
+msgstr "No Adverts for Friends"
+
+#: plugins/searchengine.php:72
+msgid "Provides support for <a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">No Adverts for Friends</a>."
+msgstr "<a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">No Adverts for Friends</a> 外掛支援。"
+
+#: plugins/searchengine.php:78
+msgid "No Adverts for Friends support is now %s"
+msgstr "No Adverts for Friends 支援 %s"
+
+#: plugins/wptouch.php:20
+msgid "WPTouch"
+msgstr "WPTouch"
+
+#: plugins/wptouch.php:25
+msgid "Provides support for <a href=\"http://wordpress.org/extend/plugins/wptouch/\">WPTouch</a> mobile theme and plugin."
+msgstr "<a href=\"http://wordpress.org/extend/plugins/wptouch/\">WPTouch</a> 行動裝置主題外掛支援。"
+
+#: plugins/wptouch.php:31
+msgid "WPTouch support is now %s"
+msgstr "WPTouch 支援 %s"
+
+#: plugins/wptouch.php:45
+msgid "WPTouch plugin detected! Please go to the Supercache plugins page and enable the WPTouch helper plugin."
+msgstr "WPTouch 外掛模組已被偵測到！請到 Supercache 外掛頁面啟用 WPTouch 支援外掛。"
+
+#: wp-cache-phase2.php:1209
+msgid "Cache expiry cron job failed. Job will run again in 10 seconds."
+msgstr "執行清除過期快取的排程時失敗。將在十秒內再次執行。"
+
+#: wp-cache-phase2.php:1213
+msgid "Cache expiry cron job took more than 30 seconds. You should probably run the garbage collector more often."
+msgstr "定時清除快取花費了超過三十秒以上的時間。你可能需要更常執行垃圾回收功能。"
+
+#: wp-cache-phase2.php:1222
+msgid "[%1$s] WP Super Cache GC Report"
+msgstr "[%1$s] WP Super Cache 垃圾回收報告"
 
 #: wp-cache.php:99
 msgid "Please create %s /wp-cache-config.php from wp-super-cache/wp-cache-config-sample.php"
@@ -108,7 +265,7 @@ msgstr "固定網址結構錯誤"
 
 #: wp-cache.php:177
 msgid "A custom url or permalink structure is required for this plugin to work correctly. Please go to the <a href=\"options-permalink.php\">Permalinks Options Page</a> to configure your permalinks."
-msgstr "外掛要正常運作，必須有自定url或固定網址。請到<a href=\"options-permalink.php\">固定網址選項</a>設定你的固定網址。"
+msgstr "外掛要正常運作，必須有自定 url 或固定網址。請到<a href=\"options-permalink.php\">固定網址選項</a>設定你的固定網址。"
 
 #: wp-cache.php:189
 msgid "Warning! Your hostname \"%s\" resolves to %s"
@@ -116,34 +273,34 @@ msgstr "警告！你的主機名稱 \"%s\" 解析到 %s"
 
 #: wp-cache.php:190
 msgid "Your server thinks your hostname resolves to %s. Some services such as garbage collection by this plugin, and WordPress scheduled posts may not operate correctly."
-msgstr "你的伺服器認為你的主機名稱解析到 %s. WP Super Cache 外掛的某些服務，例如垃圾回收、WordPress 排程文章可能無法正常執行。"
+msgstr "你的伺服器認為你的主機名稱解析到 %s 。 WP Super Cache 外掛的某些服務，例如垃圾回收、WordPress 排程文章可能無法正常執行。"
 
 #: wp-cache.php:191
 #: wp-cache.php:205
 msgid "Please see entry 16 in the <a href=\"%s\">Troubleshooting section</a> of the readme.txt"
-msgstr "請參閱readme.txt第16項<a href=\"%s\">錯誤排除段落</a>"
+msgstr "請參閱 readme.txt 第 16 項<a href=\"%s\">錯誤排除段落</a>"
 
 #: wp-cache.php:204
 msgid "Unfortunately WordPress cannot find the file wp-cron.php. This script is required for the the correct operation of garbage collection by this plugin, WordPress scheduled posts as well as other critical activities."
 msgstr "很抱歉，WordPress 找不到 wp-cron.php 檔案。必須要有這個程式才能正確執行垃圾回收、排程文章及其他重要活動。"
 
-#: wp-cache.php:219
+#: wp-cache.php:218
 msgid "Cannot continue... fix previous problems and retry."
 msgstr "無法繼續... 解決前述問題然後重試。"
 
-#: wp-cache.php:228
+#: wp-cache.php:227
 msgid "Zlib Output Compression Enabled!"
-msgstr "Zlib輸出壓縮已被啟用！"
+msgstr "Zlib 輸出壓縮已被啟用！"
 
-#: wp-cache.php:229
+#: wp-cache.php:228
 msgid "PHP is compressing the data sent to the visitors of your site. Disabling this is recommended as the plugin caches the compressed output once instead of compressing the same page over and over again. Also see #21 in the Troubleshooting section. See <a href=\"http://php.net/manual/en/zlib.configuration.php\">this page</a> for instructions on modifying your php.ini."
-msgstr "PHP頁面壓縮啟用中。建議將它關閉，因為外掛針對一個頁面只需要壓縮一次，而不需要反覆的壓縮。另請參見錯換排除段落第21條。 <a href=\"http://php.net/manual/en/zlib.configuration.php\">這邊</a>有如何修改你的php.ini的說明。"
+msgstr "PHP頁面壓縮啟用中。建議將它關閉，因為外掛針對一個頁面只需要壓縮一次，而不需要反覆的壓縮。另請參見錯換排除段落第21條。 <a href=\"http://php.net/manual/en/zlib.configuration.php\">這邊</a>有如何修改php.ini的說明。"
 
-#: wp-cache.php:233
+#: wp-cache.php:232
 msgid "Mod rewrite may not be installed!"
 msgstr "Mod rewrite 可能沒有安裝！"
 
-#: wp-cache.php:234
+#: wp-cache.php:233
 msgid "It appears that mod_rewrite is not installed. Sometimes this check isn&#8217;t 100% reliable, especially if you are not using Apache. Please verify that the mod_rewrite module is loaded. It is required for serving Super Cache static files. You will still be able to use legacy or PHP modes."
 msgstr "看來 mod_rewrite 沒有安裝。有時候這種檢查並非 100% 可信，特別是當你不是使用 Apache 時。請重新檢查 mod_rewrite 模組已經載入。執行 Super Cache 靜態檔案時必須要有它。但你仍然可以使用傳統或PHP快取模式。"
 
@@ -153,11 +310,11 @@ msgstr "唯讀模式。設定無法變更。"
 
 #: wp-cache.php:240
 msgid "The WP Super Cache configuration file is <code>%s/wp-cache-config.php</code> and cannot be modified. That file must be writeable by the webserver to make any changes."
-msgstr "WP Super Cache 設定檔 <code>%s/wp-cache-config.php</code> 無法修改。該檔案必須可以從伺服器端進行寫入。"
+msgstr "WP Super Cache 設定檔 <code>%s/wp-cache-config.php</code> 無法修改。該檔案必須允許從伺服器端進行寫入以進行設定變更。"
 
 #: wp-cache.php:241
 msgid "A simple way of doing that is by changing the permissions temporarily using the CHMOD command or through your ftp client. Make sure it&#8217;s globally writeable and it should be fine."
-msgstr "最簡單的方式是使用CHMOD指令或透過FTP程式來變更權限。請確保它們正確並可以寫入。"
+msgstr "最簡單的方式是使用 CHMOD 指令或透過 FTP 程式來變更權限。請確保它們正確並可以寫入。"
 
 #: wp-cache.php:242
 #: wp-cache.php:258
@@ -182,7 +339,7 @@ msgstr "你應該變更 %s 權限使其更加嚴密。使用你的FTP程式，�
 
 #: wp-cache.php:267
 msgid "Mobile rewrite rules detected"
-msgstr "行動裝置重寫規則檢測"
+msgstr "偵測到行動裝置重寫規則"
 
 #: wp-cache.php:268
 msgid "For best performance you should enable \"Mobile device support\" or delete the mobile rewrite rules in your .htaccess. Look for the 2 lines with the text \"2.0\\ MMP|240x320\" and delete those."
@@ -190,7 +347,7 @@ msgstr "為了獲得最好的效能，你應該啟用\"行動裝置支援\"，�
 
 #: wp-cache.php:268
 msgid "This will have no affect on ordinary users but mobile users will see uncached pages."
-msgstr "不會對一般使用者造成任何影響，但行動裝置使用者將會看到未快取的頁面。"
+msgstr "這不會對一般使用者造成任何影響，但行動裝置使用者將會看到未快取的頁面。"
 
 #: wp-cache.php:274
 #: wp-cache.php:285
@@ -200,11 +357,11 @@ msgstr "Mod Rewrite 規則必須更新！"
 #: wp-cache.php:275
 #: wp-cache.php:286
 msgid "The rewrite rules required by this plugin have changed or are missing. "
-msgstr "這個外掛所需的rewrite規則已被變更或不存在。"
+msgstr "這個外掛所需的重寫規則已被變更或不存在。"
 
 #: wp-cache.php:276
 msgid "Mobile support requires extra rules in your .htaccess file, or you can set the plugin to legacy mode. Here are your options (in order of difficulty):"
-msgstr "行動裝置支援必須在你的 .htaccess 檔案裡新增額外規則，或是你可以將外掛設定為傳統模式。這是你的選擇（根據個人需求）："
+msgstr "行動裝置支援必須在你的 .htaccess 檔案裡新增額外規則，或是你可以將外掛設定為傳統模式。這是你的選擇（依難易度排列）："
 
 #: wp-cache.php:277
 msgid "Set the plugin to legacy mode and enable mobile support."
@@ -213,27 +370,27 @@ msgstr "將外掛設為傳統模式並開啟行動裝置支援。"
 #: wp-cache.php:278
 #: wp-cache.php:287
 msgid "Scroll down the Advanced Settings page and click the <strong>Update Mod_Rewrite Rules</strong> button."
-msgstr "捲動到進階選項頁面的下方並點擊<strong>更新Mod_Rewrite規則</strong>按鈕。"
+msgstr "捲動到進階選項頁面的下方並點擊<strong>更新 Mod_Rewrite 規則</strong>按鈕。"
 
 #: wp-cache.php:279
 msgid "Delete the plugin mod_rewrite rules in %s.htaccess enclosed by <code># BEGIN WPSuperCache</code> and <code># END WPSuperCache</code> and let the plugin regenerate them by reloading this page."
-msgstr "從 %s.htaccess 內刪除 <code># BEGIN WPSuperCache</code> and <code># END WPSuperCache</code> 原始碼區段的 mod_rewrite 規則，重新載入頁面讓外掛可以再次產生它們。"
+msgstr "從 %s.htaccess 內刪除 <code># BEGIN WPSuperCache</code> 和 <code># END WPSuperCache</code> 之間原始碼區段的 mod_rewrite 規則，之後重新載入本頁讓外掛再次產生規則。"
 
 #: wp-cache.php:280
 msgid "Add the rules yourself. Edit %s.htaccess and find the block of code enclosed by the lines <code># BEGIN WPSuperCache</code> and <code># END WPSuperCache</code>. There are two sections that look very similar. Just below the line <code>%%{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$</code> add these lines: (do it twice, once for each section)"
-msgstr "自行加入規則。編輯 %s.htaccess 並找到 <code># BEGIN WPSuperCache</code> and <code># END WPSuperCache</code> 原始碼區段。這兩部分看起來非常相似。只要在 <code>%%{HTTP:Cookie} !^.*(comment_author_|wordpress|wp-postpass_).*$</code> 下方新增這一行（這動作要做兩次，一個區段一次）："
+msgstr "自行加入規則。編輯 %s.htaccess 並找到 <code># BEGIN WPSuperCache</code> 和 <code># END WPSuperCache</code> 之間的原始碼區段。有兩個區段非常相似。緊接著 <code>%%{HTTP:Cookie} !^.*(comment_author_|wordpress|wp-postpass_).*$</code> 的下方新增這幾行(要做兩次，一個區段一次)："
 
 #: wp-cache.php:293
 msgid "Required to serve compressed supercache files properly."
-msgstr "需要正確的supercache壓縮檔案。"
+msgstr "需要此模組以正確提供 supercache 壓縮檔。"
 
 #: wp-cache.php:293
 msgid "Required to set caching information on supercache pages. IE7 users will see old pages without this module."
-msgstr "需要在supercache頁面設定快取訊息。IE7使用者將會看到沒有這個模組的舊頁面。"
+msgstr "需要此模組以設定在 supercache 頁面的快取資訊。若無此模組，IE7使用者將會看到舊頁面。"
 
 #: wp-cache.php:293
 msgid "Set the expiry date on supercached pages. Visitors may not see new pages when they refresh or leave comments without this module."
-msgstr "設定supercached快取過期時間。沒有這個模組，訪客在重新整理或留下迴響時可能看不到新頁面。"
+msgstr "設定 supercache 快取頁面過期時間。沒有這個模組，訪客在重新整理或留下迴響時可能看不到新頁面。"
 
 #: wp-cache.php:300
 msgid "Missing Apache Modules"
@@ -241,1171 +398,1313 @@ msgstr "Apache 模組遺失"
 
 #: wp-cache.php:301
 msgid "The following Apache modules are missing. The plugin will work in legacy mode without them. In full Supercache mode, your visitors may see corrupted pages or out of date content however."
-msgstr "以下的Apache模組遺失。沒有它們外掛將在傳統模式下工作。若在完整的Supercache模式，你的訪客可能會看到損壞的網頁或是過時的內容。"
+msgstr "以下的 Apache 模組遺失。沒有它們外掛將在傳統模式下工作。若在完整的 Supercache 模式，你的訪客可能會看到損壞的網頁或是過時的內容。"
 
-#: wp-cache.php:459
+#: wp-cache.php:502
 msgid "<strong>Warning!</strong> You attempted to enable compression but <code>zlib.output_compression</code> is enabled. See #21 in the Troubleshooting section of the readme file."
-msgstr "<strong>警告！</strong> 你試著要開啟壓縮，但是<code>zlib.output_compression</code>已被啟用。 參見讀我檔案裡錯誤排除段落第21條。"
+msgstr "<strong>警告！</strong> 你試著要開啟壓縮，但是 <code>zlib.output_compression</code> 已被啟用。 參見讀我檔案裡錯誤排除段落第21條。"
 
-#: wp-cache.php:550
+#: wp-cache.php:598
 msgid "WP Super Cache Settings"
 msgstr "WP Super Cache 狀態"
 
-#: wp-cache.php:561
+#: wp-cache.php:612
 msgid "Notice: <em>Mod_rewrite or Legacy caching enabled</em>. Showing Advanced Settings Page by default."
-msgstr "注意：<em>Mod_rewrite或傳統快取已被開啟。</em> 預設顯示進階選項頁面。"
+msgstr "注意：<em>Mod_rewrite 或傳統快取已被開啟。</em> 預設顯示進階選項頁面。"
 
-#: wp-cache.php:572
+#: wp-cache.php:623
 msgid "Configuration file changed, some values might be wrong. Load the page again from the \"Settings\" menu to reset them."
-msgstr "設定檔已變更。某些數值可能錯誤。再次從\"設定\"選單讀取頁面後重設它們。"
+msgstr "設定檔已變更，某些數值可能錯誤。再次從\"設定\"選單讀取頁面以重設選項。"
 
-#: wp-cache.php:597
+#: wp-cache.php:655
 msgid "Caching must be enabled to use this feature"
 msgstr "必須啟用快取才能使用這個功能"
 
-#: wp-cache.php:615
-#: wp-cache.php:746
+#: wp-cache.php:673
+#: wp-cache.php:813
 msgid "Cancel Cache Preload"
 msgstr "取消快取預先載入"
 
-#: wp-cache.php:623
-#: wp-cache.php:634
+#: wp-cache.php:681
+msgid "Scheduled preloading of cache almost cancelled. It may take up to a minute for it to cancel completely."
+msgstr "預載快取排程即將取消。完全取消可能要花費至一分鐘。"
+
+#: wp-cache.php:692
 msgid "Scheduled preloading of cache cancelled."
 msgstr "預載快取排程已被取消。"
 
-#: wp-cache.php:660
-#: wp-cache.php:744
+#: wp-cache.php:724
+#: wp-cache.php:811
 msgid "Preload Cache Now"
 msgstr "馬上開始預先載入"
 
-#: wp-cache.php:664
+#: wp-cache.php:728
 msgid "Scheduled preloading of cache in 10 seconds."
 msgstr "預載快取將在十秒之後開始。"
 
-#: wp-cache.php:669
+#: wp-cache.php:733
 msgid "Scheduled preloading of cache in %d minutes"
 msgstr "下次預載快取排程時間：%d分鐘後"
 
-#: wp-cache.php:673
+#: wp-cache.php:737
 msgid "This will cache every published post and page on your site. It will create supercache static files so unknown visitors (including bots) will hit a cached page. This will probably help your Google ranking as they are using speed as a metric when judging websites now."
-msgstr "這會快取你網站上所有已發布的文章和頁面。它會產生supercache靜態檔案，匿名訪客(包括機器人)會命中快取頁面。這有可能會對你的Google排名有幫助，因為他們也將網站速度納入衡量項目之一。"
+msgstr "這會快取你網站上所有已發布的文章和頁面。它會產生 supercache 靜態檔案，匿名訪客(包括機器人)會命中快取頁面。這有可能會對你的 Google 排名有幫助，因為他們也將網站速度納入衡量項目之一。"
 
-#: wp-cache.php:674
+#: wp-cache.php:738
 msgid "Preloading creates lots of files however. Caching is done from the newest post to the oldest so please consider only caching the newest if you have lots (10,000+) of posts. This is especially important on shared hosting."
-msgstr "不過預先載入會產生很多檔案。快取會從最新的文章開始做到最早的文章，所以當你有非常多(10,000+)文章的時候，可能只會有新文章被快取到。這在分享主機上特別重要。"
+msgstr "不過預先載入會產生很多檔案。快取會從最新的文章開始做到最早的文章，所以當你有非常多 (10,000+) 文章的時候，可能只會有新文章被快取到。這在共享主機上特別重要。"
 
-#: wp-cache.php:675
+#: wp-cache.php:739
 msgid "In &#8217;Preload Mode&#8217; regular garbage collection will only clean out old legacy files for known users, not the preloaded supercache files. This is a recommended setting when the cache is preloaded."
-msgstr "在「預先載入」模式，通常的垃圾回收只會清除給已知使用者的傳統快取檔案，而不會清除預先載入的supercache檔案。這是預先載入的建議設定。"
+msgstr "在「預先載入」模式，通常的垃圾回收只會清除給已知使用者的傳統快取檔案，而不會清除預先載入的 supercache 檔案。這是預先載入的建議設定。"
 
-#: wp-cache.php:679
+#: wp-cache.php:743
 msgid "Refresh preloaded cache files every %s minutes. (0 to disable, minimum %d minutes.)"
-msgstr "每%s分鐘更新預載快取檔案。(0關閉，最低%d分鐘。)"
+msgstr "每 %s 分鐘更新預載快取檔案。(0 關閉，最低 %d 分鐘。)"
 
-#: wp-cache.php:692
+#: wp-cache.php:756
 msgid "all"
 msgstr "所有"
 
-#: wp-cache.php:705
+#: wp-cache.php:769
 msgid "Preload %s posts."
 msgstr "預先載入 %s 篇文章。"
 
-#: wp-cache.php:712
+#: wp-cache.php:776
 msgid "Preload mode (garbage collection only on legacy cache files. Recommended.)"
 msgstr "預先載入模式(只對傳統模式快取做垃圾回收。建議選項。)"
 
-#: wp-cache.php:715
+#: wp-cache.php:779
+msgid "Preload tags, categories and other taxonomies."
+msgstr "預載標籤，類別，以及其它的分類。"
+
+#: wp-cache.php:782
 msgid "Send me status emails when files are refreshed."
 msgstr "當檔案被更新的時候寄信給我。"
 
-#: wp-cache.php:720
+#: wp-cache.php:787
 msgid "Many emails, 2 emails per 100 posts."
 msgstr "很多信件，每一百篇文章二封信。"
 
-#: wp-cache.php:723
+#: wp-cache.php:790
 msgid "Medium, 1 email per 100 posts."
 msgstr "中等，每一百篇文章一封信。"
 
-#: wp-cache.php:726
+#: wp-cache.php:793
 msgid "Less emails, 1 at the start and 1 at the end of preloading all posts."
 msgstr "較少信件，開始的時候一封還有結束的時候一封。"
 
-#: wp-cache.php:730
+#: wp-cache.php:797
 msgid "Refresh of cache in %d hours %d minutes and %d seconds."
 msgstr "在%d小時%d分鐘%d秒之後更新快取。"
 
-#: wp-cache.php:731
+#: wp-cache.php:798
 msgid "Full refresh of cache in %d hours %d minutes and %d seconds."
-msgstr "完整更新快取，耗費了%d小時%d分鐘%d秒。"
+msgstr "完整更新快取，耗費了 %d 小時 %d 分鐘 %d 秒。"
 
-#: wp-cache.php:737
+#: wp-cache.php:804
 msgid "Currently caching from post %d to %d."
-msgstr "目前正在快取第%d到%d篇文章。"
+msgstr "目前正在快取第 %d 到 %d 篇文章。"
 
-#: wp-cache.php:741
+#: wp-cache.php:808
 msgid "<strong>Page last cached:</strong> %s"
 msgstr "<strong>最新快取頁面：</strong> %s"
 
-#: wp-cache.php:744
+#: wp-cache.php:811
 msgid "Update Settings"
 msgstr "更新狀態"
 
-#: wp-cache.php:752
+#: wp-cache.php:819
 msgid "Preloading of cache disabled. Please disable legacy page caching or talk to your host administrator."
 msgstr "預先載入已被關閉。請關閉傳統模式或和主機管理員連絡。"
 
-#: wp-cache.php:769
-#: wp-cache.php:865
+#: wp-cache.php:836
+#: wp-cache.php:947
 msgid "Caching"
 msgstr "快取"
 
-#: wp-cache.php:773
+#: wp-cache.php:840
 msgid "Cache hits to this website for quick access."
 msgstr "啟用快取以加速對本網站的存取"
 
-#: wp-cache.php:773
-#: wp-cache.php:774
-#: wp-cache.php:791
-#: wp-cache.php:796
-#: wp-cache.php:799
-#: wp-cache.php:800
-#: wp-cache.php:813
-#: wp-cache.php:868
+#: wp-cache.php:840
+#: wp-cache.php:841
+#: wp-cache.php:858
+#: wp-cache.php:867
+#: wp-cache.php:874
+#: wp-cache.php:877
+#: wp-cache.php:894
+#: wp-cache.php:950
 msgid "Recommended"
 msgstr "建議選項"
 
-#: wp-cache.php:774
+#: wp-cache.php:841
 msgid "Use mod_rewrite to serve cache files."
-msgstr "使用mod_rewrite快取"
+msgstr "使用 mod_rewrite 快取"
 
-#: wp-cache.php:775
+#: wp-cache.php:842
 msgid "Use PHP to serve cache files."
-msgstr "使用PHP快取"
+msgstr "使用 PHP 快取"
 
-#: wp-cache.php:776
+#: wp-cache.php:843
 msgid "Legacy page caching."
 msgstr "傳統快取模式"
 
-#: wp-cache.php:777
+#: wp-cache.php:844
 msgid "Mod_rewrite is fastest, PHP is almost as fast and easier to get working, while legacy caching is slower again, but more flexible and also easy to get working. New users should use PHP caching."
-msgstr "Mod_rewrite快取是最快的，PHP快取幾乎一樣快且較容易上手；傳統模式較慢，但是有更多的調性且同樣容易上手。新使用者應該使用PHP快取。"
+msgstr "Mod_rewrite 快取是最快的，PHP 快取幾乎一樣快且較容易上手；傳統模式較慢，但是有更多的彈性且同樣容易上手。新使用者應該使用 PHP 快取。"
 
-#: wp-cache.php:783
+#: wp-cache.php:850
 msgid "Miscellaneous"
 msgstr "雜項"
 
-#: wp-cache.php:789
+#: wp-cache.php:856
 msgid "Warning! Compression is disabled as gzencode() function not found."
-msgstr "警告！因為找不到gzencode()函式，壓縮已被停用。"
+msgstr "警告！因為找不到 gzencode() 函式，壓縮已被停用。"
 
-#: wp-cache.php:791
+#: wp-cache.php:858
 msgid "Compress pages so they&#8217;re served more quickly to visitors."
-msgstr "壓縮網頁，讓使用者能更快觀看"
+msgstr "壓縮網頁，讓訪客能更快速觀看"
 
-#: wp-cache.php:792
+#: wp-cache.php:859
 msgid "Compression is disabled by default because some hosts have problems with compressed files. Switching it on and off clears the cache."
 msgstr "壓縮預設為停用，因為某些主機在壓縮檔案時可能發生問題。啟用或停用這項功能會清除快取。"
 
-#: wp-cache.php:796
+#: wp-cache.php:867
 msgid "304 Not Modified browser caching. Indicate when a page has not been modified since last requested."
 msgstr "304 未修改支援。當一個頁面在上次被要求後沒有被更改的時候送出。"
 
-#: wp-cache.php:797
-msgid "304 support is disabled by default because in the past GoDaddy had problems with some of the headers used."
-msgstr "304支援預設為停用，因為過去GoDaddy在它使用的某些檔頭會產生問題。"
+#: wp-cache.php:870
+msgid "Warning! 304 browser caching is only supported when not using mod_rewrite caching."
+msgstr "警告! 304 瀏覽器快在不使用 mod_rewrite 快取時才能支援。"
 
-#: wp-cache.php:799
+#: wp-cache.php:872
+msgid "304 support is disabled by default because in the past GoDaddy had problems with some of the headers used."
+msgstr "304 支援預設為停用，因為過去GoDaddy在它使用的某些檔頭會產生問題。"
+
+#: wp-cache.php:874
 msgid "Don&#8217;t cache pages for <acronym title=\"Logged in users and those that comment\">known users</acronym>."
 msgstr "不要為<acronym title=\"已登入或有留下迴響的使用者\">已知使用者</acronym>快取。"
 
-#: wp-cache.php:800
+#: wp-cache.php:875
+msgid "Don&#8217;t cache pages with GET parameters. (?x=y at the end of a url)"
+msgstr "不快取使用 GET 參數的頁面。(結尾有 ?x=y 的網址)"
+
+#: wp-cache.php:876
+msgid "Make known users anonymous so they&#8217;re served supercached static files."
+msgstr "讓已知使用者匿名化，以靜態快取檔案服務他們。"
+
+#: wp-cache.php:877
 msgid "Cache rebuild. Serve a supercache file to anonymous users while a new file is being generated."
-msgstr "重建快取。當新檔案重建的時候，提供supercache檔案給匿名使用者。"
+msgstr "重建快取。當新檔案重建的時候，提供 supercache 檔案給匿名使用者。"
 
-#: wp-cache.php:801
-msgid "Proudly tell the world your server is Digg proof! (places a message in your blog&#8217;s footer)"
-msgstr "告訴全世界你的伺服器已使用快取！（在你的部落格底部放置一段訊息）"
+#: wp-cache.php:878
+msgid "Proudly tell the world your server is <a href=\"%s\">Stephen Fry proof</a>! (places a message in your blog&#8217;s footer)"
+msgstr "告訴全世界你的伺服器不怕 <a href=\"%s\">Stephen Fry</a> (一個名人)攻擊！（在你的部落格底部放置一段訊息）"
 
-#: wp-cache.php:807
-#: wp-cache.php:1056
-#: wp-cache.php:1563
+#: wp-cache.php:884
+#: wp-cache.php:1162
+#: wp-cache.php:1778
 msgid "Advanced"
 msgstr "進階選項"
 
-#: wp-cache.php:811
-msgid "Mobile device support."
-msgstr "行動裝置支援。"
+#: wp-cache.php:888
+msgid "Mobile device support. (External plugin or theme required. See the <a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">FAQ</a> for further details.)"
+msgstr "行動裝置支援 (需要外掛或額外的主題來支援。 參見<a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">常見問答</a>以獲得更多資訊。)"
 
-#: wp-cache.php:812
-msgid "Clear all cache files when a post or page is published."
-msgstr "當有文章或網誌分頁發佈時清除所有快取。"
+#: wp-cache.php:890
+msgid "Mobile Browsers"
+msgstr "行動瀏覽器"
 
-#: wp-cache.php:813
+#: wp-cache.php:890
+msgid "Mobile Prefixes"
+msgstr "行動前置字串"
+
+#: wp-cache.php:892
+msgid "Remove UTF8/blog charset support from .htaccess file. Only necessary if you see odd characters or punctuation looks incorrect. Requires rewrite rules update."
+msgstr "從 .htaccess 中移除 UTF8 字元集支援。只在你看到奇怪的字元或錯誤的標點時才需要。必須更新重寫規則。"
+
+#: wp-cache.php:893
+msgid "Clear all cache files when a post or page is published or updated."
+msgstr "當發布或更新文章、網誌分頁時清除所有快取。"
+
+#: wp-cache.php:894
 msgid "Extra homepage checks. (Very occasionally stops homepage caching)"
 msgstr "額外的首頁檢查(有很小的機會導致首頁快取停止)。"
 
-#: wp-cache.php:814
+#: wp-cache.php:895
 msgid "Only refresh current page when comments made."
 msgstr "當迴響發佈時，只更新目前頁面。"
 
-#: wp-cache.php:815
+#: wp-cache.php:896
 msgid "List the newest cached pages on this page."
 msgstr "在本頁列出最新的快取頁面。"
 
-#: wp-cache.php:817
+#: wp-cache.php:898
 msgid "Coarse file locking. You probably don&#8217;t need this but it may help if your server is underpowered. Warning! <em>May cause your server to lock up in very rare cases!</em>"
 msgstr "粗略檔案鎖定。你大概不會用到這個功能，但如果你的伺服器效能較差，開啟後可能會有所幫助。警告！<em>可能在少數情況下鎖死你的伺服器！</em>"
 
-#: wp-cache.php:819
+#: wp-cache.php:900
 msgid "Late init. Display cached files after WordPress has loaded. Most useful in legacy mode."
-msgstr "延遲初始化，在WordPress載入之後再顯示快取。通常使用在傳統模式。"
+msgstr "延遲初始化，在 WordPress 載入之後再顯示快取。通常使用在傳統模式。"
 
-#: wp-cache.php:821
+#: wp-cache.php:902
 msgid "Use object cache to store cached files."
-msgstr "使用object快取來儲存快取檔案。"
+msgstr "使用 object 快取來儲存快取檔案。"
 
-#: wp-cache.php:821
+#: wp-cache.php:902
 msgid "(Experimental)"
 msgstr "(實驗選項)"
 
-#: wp-cache.php:828
+#: wp-cache.php:904
+msgid "<strong>DO NOT CACHE PAGE</strong> secret key: <a href=\"%s\">%s</a>"
+msgstr "<strong>存取非快取頁面</strong> 密鑰： <a href=\"%s\">%s</a>"
+
+#: wp-cache.php:910
 msgid "Note:"
 msgstr "備註："
 
-#: wp-cache.php:830
+#: wp-cache.php:912
 msgid "Uninstall this plugin on the plugins page. It will automatically clean up after itself. If manual intervention is required then simple instructions are provided."
 msgstr "請在外掛頁面反安裝此外掛。它將會在反安裝後將設定清除。如需手動介入，亦會提供簡單的指示。"
 
-#: wp-cache.php:831
+#: wp-cache.php:913
 msgid "If uninstalling this plugin, make sure the directory <em>%s</em> is writeable by the webserver so the files <em>advanced-cache.php</em> and <em>cache-config.php</em> can be deleted automatically. (Making sure those files are writeable too is probably a good idea!)"
 msgstr "如果移除這個外掛，請確認目錄 <em>%s</em> 為伺服器可以寫入，<em>advanced-cache.php</em> 和 <em>cache-config.php</em> 檔案會自動刪除。（確認這些檔案是可寫入的，也是個好主意！）"
 
-#: wp-cache.php:832
+#: wp-cache.php:914
 msgid "Please see the <a href=\"%1$s/wp-super-cache/readme.txt\">readme.txt</a> for instructions on uninstalling this script. Look for the heading, \"How to uninstall WP Super Cache\"."
-msgstr "反安裝資訊請參見<a href=\"%1$s/wp-super-cache/readme.txt\">readme.txt</a>，尋找\"How to uninstall WP Super Cache\"標題。"
+msgstr "反安裝資訊請參見 <a href=\"%1$s/wp-super-cache/readme.txt\">readme.txt</a>，尋找 \"How to uninstall WP Super Cache\" 標題。"
 
-#: wp-cache.php:833
+#: wp-cache.php:915
 msgid "Need help? Check the <a href=\"%1$s\">Super Cache readme file</a>. It includes installation documentation, a FAQ and Troubleshooting tips. The <a href=\"%2$s\">support forum</a> is also available. Your question may already have been answered."
 msgstr "需要幫助？ 看看<a href=\"%1$s\">Super Cache 讀我檔案</a>。 它包含了安裝資訊，常見問題及錯誤排除小技巧。另外在<a href=\"%2$s\">支援論壇</a>上，你的問題可能也已經有人回答過了。"
 
-#: wp-cache.php:836
-#: wp-cache.php:883
+#: wp-cache.php:918
+#: wp-cache.php:965
 msgid "Update Status"
 msgstr "更新狀態"
 
-#: wp-cache.php:843
+#: wp-cache.php:925
 msgid "Accepted Filenames &amp; Rejected URIs"
-msgstr "接受的檔案名稱和拒絕的URI"
+msgstr "接受的檔案名稱和拒絕的 URI"
 
-#: wp-cache.php:868
+#: wp-cache.php:950
 msgid "Caching On"
 msgstr "開啟快取"
 
-#: wp-cache.php:869
+#: wp-cache.php:951
 msgid "Caching Off"
 msgstr "關閉快取"
 
-#: wp-cache.php:870
+#: wp-cache.php:952
 msgid "Note: enables PHP caching, cache rebuild, and mobile support"
-msgstr "啟用PHP快取，重建快取，以及行動裝置支援"
+msgstr "說明：啟用 PHP 快取，重建快取，以及行動裝置支援"
 
-#: wp-cache.php:880
+#: wp-cache.php:962
 msgid "Notice: PHP caching enabled but Supercache mod_rewrite rules detected. Cached files will be served using those rules. If your site is working ok please ignore this message or you can edit the .htaccess file in the root of your install and remove the SuperCache rules."
-msgstr "注意：PHP快取已被啟用，但偵測到Supercache mod_rewrite規則。快取檔案會用這些規則來服務。如果你的網站動作正常，你可以忽略這個訊息，否則請編輯站台安裝根目錄下的.htaccess檔以移除SuperCache規則。"
+msgstr "注意：PHP 快取已被啟用，但偵測到 Supercache mod_rewrite 規則。快取檔案會用這些規則來服務。如果你的網站動作正常，你可以忽略這個訊息，否則請編輯站台安裝根目錄下的 .htaccess 檔以移除 SuperCache 規則。"
 
-#: wp-cache.php:885
+#: wp-cache.php:967
 msgid "Cache Tester"
 msgstr "快取測試"
 
-#: wp-cache.php:886
+#: wp-cache.php:968
 msgid "Test your cached website by clicking the test button below."
 msgstr "請按下面的測試按鈕以測試你的網站快取。"
 
-#: wp-cache.php:892
+#: wp-cache.php:974
 msgid "Fetching %s to prime cache: "
 msgstr "抓取 %s 至主要快取："
 
-#: wp-cache.php:894
-#: wp-cache.php:902
-#: wp-cache.php:910
+#: wp-cache.php:976
+#: wp-cache.php:985
+#: wp-cache.php:997
 msgid "OK"
 msgstr "完成"
 
-#: wp-cache.php:897
+#: wp-cache.php:979
 msgid "Fetching first copy of %s: "
 msgstr "抓取第一份%s："
 
-#: wp-cache.php:905
+#: wp-cache.php:988
+#: wp-cache.php:999
+msgid "FAILED"
+msgstr "失敗"
+
+#: wp-cache.php:991
 msgid "Fetching second copy of %s: "
 msgstr "抓取第二份%s："
 
-#: wp-cache.php:913
+#: wp-cache.php:1003
 msgid "One or more page requests failed:"
 msgstr "一個或以上的頁面要求失敗："
 
-#: wp-cache.php:932
-#: wp-cache.php:933
+#: wp-cache.php:1022
+#: wp-cache.php:1023
 msgid "Page %d: %d (%s)"
 msgstr "頁面 %d: %d (%s)"
 
-#: wp-cache.php:939
+#: wp-cache.php:1029
 msgid "Page 1: %s"
 msgstr "頁面1： %s"
 
-#: wp-cache.php:940
+#: wp-cache.php:1030
 msgid "Page 2: %s"
 msgstr "頁面2： %s"
 
-#: wp-cache.php:941
+#: wp-cache.php:1031
 msgid "The timestamps on both pages match!"
 msgstr "頁面時間標籤相符！"
 
-#: wp-cache.php:943
+#: wp-cache.php:1033
 msgid "The pages do not match! Timestamps differ or were not found!"
-msgstr "無頁面時間標籤或標籤不相符"
+msgstr "無頁面時間標籤或標籤不相符！"
 
-#: wp-cache.php:950
+#: wp-cache.php:1034
+msgid "Things you can do:"
+msgstr "你可以做的事："
+
+#: wp-cache.php:1035
+msgid "Load your homepage in a logged out browser, check the timestamp at the end of the html source. Load the page again and compare the timestamp. Caching is working if the timestamps match."
+msgstr "在已登出的瀏覽器載入你的首頁，檢查html結尾的時間標籤，並再次載入頁面並比較時間標籤。快取如果有效時間標籤會是一致的。"
+
+#: wp-cache.php:1036
+msgid "Enable logging on the Debug page here. That should help you track down the problem."
+msgstr "在本除錯頁面開啟記錄功能，應該可以幫助你找出問題所在。"
+
+#: wp-cache.php:1037
+msgid "You should check Page 1 and Page 2 above for errors. Your local server configuration may not allow your website to access itself."
+msgstr "檢查上面第一頁及第二頁的錯誤。你的本機伺服器設定可能不允許你的網站存取自己本身。"
+
+#: wp-cache.php:1045
 msgid "Send non-secure (non https) request for homepage"
-msgstr "要非加密(非https)傳輸要求首頁"
+msgstr "以非加密 (非 https) 傳輸請求首頁"
 
-#: wp-cache.php:951
+#: wp-cache.php:1046
 msgid "Test Cache"
 msgstr "測試快取"
 
-#: wp-cache.php:955
+#: wp-cache.php:1050
 msgid "Delete Cached Pages"
 msgstr "刪除快取頁面"
 
-#: wp-cache.php:956
+#: wp-cache.php:1051
 msgid "Cached pages are stored on your server as html and PHP files. If you need to delete them use the button below."
-msgstr "快取頁面以html和PHP檔案的形式儲存在你的伺服器上。如果你需要刪除它們，請按下面的按鈕。"
+msgstr "快取頁面以 html 和 PHP 檔案的形式儲存在你的伺服器上。如果你需要刪除它們，請按下面的按鈕。"
 
-#: wp-cache.php:959
-#: wp-cache.php:2093
-#: wp-cache.php:2105
-#: wp-cache.php:2268
+#: wp-cache.php:1054
+#: wp-cache.php:2316
+#: wp-cache.php:2335
+#: wp-cache.php:2506
+#: wp-cache.php:3030
 msgid "Delete Cache"
 msgstr "刪除快取"
 
-#: wp-cache.php:963
+#: wp-cache.php:1061
+#: wp-cache.php:2322
+msgid "Delete Cache On All Blogs"
+msgstr "刪除所有部落格的快取頁面"
+
+#: wp-cache.php:1066
 msgid "Recommended Links and Plugins"
 msgstr "建議連結及外掛"
 
-#: wp-cache.php:964
+#: wp-cache.php:1067
 msgid "Caching is only one part of making a website faster. Here are some other plugins that will help:"
 msgstr "快取只是讓網站變快的方法之一。這邊是一些其它有幫助的外掛："
 
-#: wp-cache.php:965
-msgid "<a href=\"%s\">WP Minify</a> reduces the number of files served by your web server by joining Javascript and CSS files together. Alternatively you can use <a href=\"%s\">WPSCMin</a>, a Supercache plugin that minifies cached pages. It does not however join JS/CSS files together."
-msgstr "<a href=\"%s\">WP Minify</a> 合併Javascript及CSS檔案，以減少網頁伺服器需要服務的檔案數量。 或者你也可以使用 <a href=\"%s\">WPSCMin</a>，一個減少快取面數量的 Supercache 外掛。(但它並不會合併JS/CSS檔案)"
+#: wp-cache.php:1068
+msgid "<a href=\"%s\">WPSCMin</a>, a Supercache plugin that minifies cached pages by removing whitespaces and extra characters "
+msgstr "<a href=\"%s\">WPSCMin</a>，一個 Supercache 的外掛，藉由移除多餘的空白和無用的字元將頁面最小化。"
 
-#: wp-cache.php:966
+#: wp-cache.php:1069
 msgid "<a href=\"%s\">Yahoo! Yslow</a> is an extension for the Firefox add-on Firebug. It analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages. Also try the performance tools online at <a href=\"%s\">GTMetrix</a>."
-msgstr "<a href=\"%s\">Yahoo! Yslow</a> 是Firefox附加元件Firebug的一個延伸套件。它可以分析你的網頁，並根據一些高效率網頁規則，建議你增加效能的方式。 你也可以試試一個線上效能分析工具 <a href=\"%s\">GTMetrix</a>。"
+msgstr "<a href=\"%s\">Yahoo! Yslow</a> 是 Firefox 附加元件 Firebug 的一個延伸套件。它可以分析你的網頁，並根據一些高效率網頁規則，建議你增加效能的方式。 你也可以試試一個線上效能分析工具 <a href=\"%s\">GTMetrix</a>。"
 
-#: wp-cache.php:967
+#: wp-cache.php:1070
 msgid "<a href=\"%s\">Use Google Libraries</a> allows you to load some commonly used Javascript libraries from Google webservers. Ironically it may reduce your Yslow score."
-msgstr "<a href=\"%s\">Use Google Libraries</a>可以讓你從Google的伺服器上載入一些常用的Javascript函式庫。很諷刺的是它會降低你的Yslow分數。"
+msgstr "<a href=\"%s\">Use Google Libraries</a>可以讓你從 Google 的伺服器上載入一些常用的 Javascript 函式庫。很諷刺的是它會降低你的 Yslow 分數。"
 
-#: wp-cache.php:969
+#: wp-cache.php:1072
 msgid "<strong>Advanced users only:</strong> <a href=\"%s\">Speed up your site with Caching and cache-control</a> explains how to make your site more cacheable with .htaccess rules."
-msgstr "<strong>進階使用者專用：</strong> <a href=\"%s\">使用快取及快取控制加速你的網站</a>，解釋怎麼讓你的網站更適用.htaccess規則來進行快取。"
+msgstr "<strong>進階使用者專用：</strong> <a href=\"%s\">使用快取及快取控制加速你的網站</a>，解釋怎麼讓你的網站更適用 .htaccess 規則來進行快取。"
 
-#: wp-cache.php:970
+#: wp-cache.php:1073
 msgid "<strong>Advanced users only:</strong> Install an object cache. Choose from <a href=\"%s\">Memcached</a>, <a href=\"%s\">XCache</a>, <a href=\"%s\">eAcccelerator</a> and others."
-msgstr "<strong>進階使用者專用：</strong> 安裝物件快取。 你可以從<a href=\"%s\">Memcached</a>、<a href=\"%s\">XCache</a>、<a href=\"%s\">eAcccelerator</a>或其它的加速器中選擇一個。"
+msgstr "<strong>進階使用者專用：</strong> 安裝物件快取。 你可以從 <a href=\"%s\">Memcached</a>、<a href=\"%s\">XCache</a>、<a href=\"%s\">eAcccelerator</a> 或其它的加速器中選擇一個。"
 
-#: wp-cache.php:981
+#: wp-cache.php:1074
+msgid "<a href=\"%s\">Cron View</a> is a useful plugin to use when trying to debug garbage collection and preload problems."
+msgstr "<a href=\"%s\">Cron View</a> 外掛，在你想要針對垃圾回收及預先載入問題除錯時相當有用。"
+
+#: wp-cache.php:1085
 msgid "Make WordPress Faster"
 msgstr "讓 WordPress 更快速"
 
-#: wp-cache.php:982
+#: wp-cache.php:1086
 msgid "%1$s is maintained and developed by %2$s with contributions from many others."
 msgstr "%1$s由%2$s開發及維護，並得到許多人的幫助貢獻。"
 
-#: wp-cache.php:983
+#: wp-cache.php:1087
 msgid "He blogs at %1$s and posts photos at %2$s."
-msgstr "我的部落格在 %1$s，相簿在 %2$s."
+msgstr "我的部落格在 %1$s，相簿在 %2$s。繁體中文翻譯問題請洽<a href=\"http://priv.tw/blog/\">priv</a>"
 
-#: wp-cache.php:984
+#: wp-cache.php:1088
 msgid "Please say hi to him on %s too!"
 msgstr "在%s上向我問好！"
 
-#: wp-cache.php:985
+#: wp-cache.php:1089
 msgid "Need Help?"
 msgstr "需要幫助?"
 
-#: wp-cache.php:987
+#: wp-cache.php:1091
+msgid "Use the debug system in the Debug tab above. It will tell you what the plugin is doing."
+msgstr "請使用上方除錯分頁的除錯系統，它會告訴你這個外掛的功能。"
+
+#: wp-cache.php:1092
 msgid "<a href=\"%1$s\">Installation Help</a>"
 msgstr "<a href=\"%1$s\">安裝指南</a>"
 
-#: wp-cache.php:988
+#: wp-cache.php:1093
 msgid "<a href=\"%1$s\">Frequently Asked Questions</a>"
 msgstr "<a href=\"%1$s\">常見問題</a>"
 
-#: wp-cache.php:989
+#: wp-cache.php:1094
 msgid "<a href=\"%1$s\">Support Forum</a>"
 msgstr "<a href=\"%1$s\">支援論壇</a>"
 
-#: wp-cache.php:991
+#: wp-cache.php:1096
 msgid "Rate This Plugin!"
 msgstr "為這個外掛評分！"
 
-#: wp-cache.php:992
+#: wp-cache.php:1097
 msgid "Please <a href=\"%s\">rate</a> this plugin and tell me if it works for you or not. It really helps development."
 msgstr "請為這個外掛<a href=\"%s\">評分</a>，並告訴我它是否運作正常。這對開發非常有幫助。"
 
-#: wp-cache.php:1001
+#: wp-cache.php:1106
 msgid "Cached pages since %1$s : <strong>%2$s</strong>"
 msgstr "快取頁面自 %1$s ：<strong>%2$s</strong>"
 
-#: wp-cache.php:1002
+#: wp-cache.php:1107
 msgid "Newest Cached Pages:"
 msgstr "最新的快取頁面："
 
-#: wp-cache.php:1006
+#: wp-cache.php:1111
 msgid "Cached %s seconds ago"
-msgstr "已快取 %s 秒"
+msgstr "於 %s 秒前快取"
 
-#: wp-cache.php:1009
+#: wp-cache.php:1114
 msgid "(may not always be accurate on busy sites)"
 msgstr "（在忙碌的網站上未必準確）"
 
-#: wp-cache.php:1028
+#: wp-cache.php:1133
 msgid "Cache plugins are PHP scripts that live in a plugins folder inside the wp-super-cache folder. They are loaded when Supercache loads, much sooner than regular WordPress plugins."
-msgstr "快取外掛是wp-super-cache裡plugin資料夾中的一些PHP程式。它們在Supercache載入的時候就會被載入，比一般的WordPress plugin要早得多。"
+msgstr "快取外掛是 wp-super-cache 裡 plugin 資料夾中的一些 PHP 程式。它們在 Supercache 載入的時候就會被載入，比一般的 WordPress plugin 要早得多。"
 
-#: wp-cache.php:1029
+#: wp-cache.php:1134
 msgid "This is strictly an advanced feature only and knowledge of both PHP and WordPress actions is required to create them."
-msgstr "這是一個非常進階的功能，只有對PHP和Wordpress動作都非常了解的人才能撰寫。"
+msgstr "這是一個非常進階的功能，只有對 PHP 和 Wordpress 動作都非常了解的人才能撰寫。"
 
-#: wp-cache.php:1039
+#: wp-cache.php:1135
+msgid "<strong>Warning</strong>! Due to the way WordPress upgrades plugins the plugins you upload to wp-super-cache/plugins/ will be deleted when you upgrade WP Super Cache. You can avoid this by loading the plugins from elsewhere. Set <strong>$wp_cache_plugins_dir</strong> to the new location in wp-config.php and WP Super Cache will look there instead.<br />More info available in the <a href=\"http://ocaoimh.ie/wp-super-cache-developers/\">developer documentation</a>."
+msgstr "<strong>警告</strong>！ 肇因於 WordPress 升級外掛的方式，上傳至 wp-super-cache/plugins 的外掛在升級 WP Super Cache 將會被刪除。你可以把外掛放到別的地方以避免此一問題。在 wp-config.php 中設定 <strong>$wp_cache_plugins_dir</strong> 至新的位置，WP Super Cache 將會改用此一新位置。<br /><a href=\"http://ocaoimh.ie/wp-super-cache-developers/\">開發者文件</a>中有更多的資訊。"
+
+#: wp-cache.php:1145
 msgid "Available Plugins"
 msgstr "可使用的外掛"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "Easy"
 msgstr "簡易模式"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "CDN"
 msgstr "CDN"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "Contents"
 msgstr "內容"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "Preload"
 msgstr "預先載入"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "Plugins"
 msgstr "外掛"
 
-#: wp-cache.php:1056
+#: wp-cache.php:1162
 msgid "Debug"
 msgstr "除錯設定"
 
-#: wp-cache.php:1091
+#: wp-cache.php:1197
 msgid "Notice: WP Super Cache mod_rewrite rule checks disabled unless running on <a href=\"%s\">the main site</a> of this network."
-msgstr "注意：除非在這個網路的<a href=\"%s\">主站</a>上執行，WP Super Cache mod_rewrite規則檢查會被關閉。s"
+msgstr "注意：除非在這個網路的<a href=\"%s\">主站</a>上執行，WP Super Cache mod_rewrite 規則檢查會被關閉。s"
 
-#: wp-cache.php:1100
+#: wp-cache.php:1206
 msgid "Mod Rewrite Rules"
 msgstr "Mod Rewrite 規則"
 
-#: wp-cache.php:1106
+#: wp-cache.php:1212
 msgid "WordPress MU Detected"
-msgstr "WordPress MU 檢測"
+msgstr "偵測到 WordPress MU"
 
-#: wp-cache.php:1106
+#: wp-cache.php:1212
 msgid "Unfortunately the rewrite rules cannot be updated automatically when running WordPress MU. Please open your .htaccess and add the following mod_rewrite rules above any other rules in that file."
 msgstr "抱歉，當執行 WordPress MU 時重寫規則無法自動更新。請開啟你的 .htaccess，並在上述檔案中任何位置加入下方的 mod_rewrite 規則。"
 
-#: wp-cache.php:1108
+#: wp-cache.php:1214
 msgid "Mod Rewrite rules cannot be updated!"
 msgstr "Mod Rewrite 規則無法更新！"
 
-#: wp-cache.php:1109
+#: wp-cache.php:1215
 msgid "You must have <strong>BEGIN</strong> and <strong>END</strong> markers in %s.htaccess for the auto update to work. They look like this and surround the main WordPress mod_rewrite rules:"
-msgstr "要讓它自動工作，你必須在 %s.htaccess 上有 <strong>BEGIN</strong> 和 <strong>END</strong> 標記，它們看起來像這樣，圍繞 WordPress 的 mod_rewrite 規則："
+msgstr "要讓它自動工作，你必須在 %s.htaccess 上有 <strong>BEGIN</strong> 和 <strong>END</strong> 標記，它們看起來像這樣，圍繞 WordPress 的主要 mod_rewrite 規則："
 
-#: wp-cache.php:1111
+#: wp-cache.php:1217
 msgid "Refresh this page when you have updated your .htaccess file."
 msgstr "當你已更新你的 .htaccess 檔案後重新整理此頁。"
 
-#: wp-cache.php:1115
+#: wp-cache.php:1221
 msgid "Thank you for upgrading."
 msgstr "感謝升級。"
 
-#: wp-cache.php:1115
+#: wp-cache.php:1221
 msgid "The mod_rewrite rules changed since you last installed this plugin. Unfortunately you must remove the old supercache rules before the new ones are updated. Refresh this page when you have edited your .htaccess file. If you wish to manually upgrade, change the following line: %1$s so it looks like this: %2$s The only changes are \"HTTP_COOKIE\" becomes \"HTTP:Cookie\" and \"wordpressuser\" becomes \"wordpress\". This is a WordPress 2.5 change but it&#8217;s backwards compatible with older versions if you&#8217;re brave enough to use them."
-msgstr "從你上次安裝此外掛，mod_rewrite 規則已經變更。在新的supercache規則更新前，你必須先刪除舊的supercache規則。在你修改你的 .htaccess 檔案後重新整理此頁。如果你希望手動更新，更改以下幾行：%1$s 使它看起來像這樣：%2$s ，唯一改變的地方是 \"HTTP_COOKIE\" 變成 \"HTTP:Cookie\" 以及 \"wordpressuser\" 變成 \"wordpress\"。這是 WordPress 2.5 的改變，但如果你敢使用，它與舊版本相容。"
+msgstr "從你上次安裝此外掛，mod_rewrite 規則已經變更。在新的 supercache 規則更新前，你必須先刪除舊的 supercache 規則。在你修改你的 .htaccess 檔案後重新整理此頁。如果你希望手動更新，更改以下幾行：%1$s 使它看起來像這樣：%2$s ，唯一改變的地方是 \"HTTP_COOKIE\" 變成 \"HTTP:Cookie\" 以及 \"wordpressuser\" 變成 \"wordpress\"。這是 WordPress 2.5 的改變，但如果你敢使用，它與舊版本相容。"
 
-#: wp-cache.php:1119
+#: wp-cache.php:1225
 msgid "Trailing slash check required."
 msgstr "尾端斜線的檢查是必須的。"
 
-#: wp-cache.php:1119
+#: wp-cache.php:1225
 msgid "It looks like your blog has URLs that end with a \"/\". Unfortunately since you installed this plugin a duplicate content bug has been found where URLs not ending in a \"/\" end serve the same content as those with the \"/\" and do not redirect to the proper URL. To fix, you must edit your .htaccess file and add these two rules to the two groups of Super Cache rules:"
-msgstr "看起來你的部落格有以\"/\"結束的URL。不幸地在你安裝這個外掛後，在URL不是以\"/\"結束的頁面，發現了一個重複內容的bug，也就是相同的內容卻不是被指向正確的URL。你必須修改你的 .htaccess 檔案以修復這個問題，在兩個 Super Cache 規則區段內新增下面兩個規則："
+msgstr "看起來你的部落格有以\"/\"結束的 URL。不幸地在你安裝這個外掛後，在URL不是以\"/\"結束的頁面，發現了一個重複內容的 bug，也就是相同的內容卻不是被指向正確的 URL。你必須修改你的 .htaccess 檔案以修復這個問題，在兩個 Super Cache 規則區段內新增下面兩個規則："
 
-#: wp-cache.php:1121
+#: wp-cache.php:1227
 msgid "You can see where the rules go and examine the complete rules by clicking the \"View mod_rewrite rules\" link below."
 msgstr "你可以看到規則去向，透過點選下方的「查看 mod_rewrite 規則」連結來看到完整的規則"
 
-#: wp-cache.php:1135
+#: wp-cache.php:1241
 msgid "Mod Rewrite rules updated!"
 msgstr "Mod Rewrite 規則已更新！"
 
-#: wp-cache.php:1136
+#: wp-cache.php:1242
 msgid "%s.htaccess has been updated with the necessary mod_rewrite rules. Please verify they are correct. They should look like this:"
 msgstr "%s.htaccess 已更新必要的 mod_rewrite 規則。請確保它們是正確的。它們應該像這樣："
 
-#: wp-cache.php:1138
+#: wp-cache.php:1244
 msgid "Mod Rewrite rules must be updated!"
 msgstr "Mod Rewrite 規則必須更新！"
 
-#: wp-cache.php:1139
+#: wp-cache.php:1245
 msgid "Your %s.htaccess is not writable by the webserver and must be updated with the necessary mod_rewrite rules. The new rules go above the regular WordPress rules as shown in the code below:"
-msgstr "你的%s.htaccess無法由伺服器寫入，必須更新 mod_rewrite 規則。新的規則必須在一般的 WordPress 規則之上，如下面的原始碼所示："
+msgstr "你的 %s.htaccess 無法由伺服器寫入，必須更新 mod_rewrite 規則。新的規則必須在一般的 WordPress 規則之上，如下面的原始碼所示："
 
-#: wp-cache.php:1144
+#: wp-cache.php:1250
 msgid "WP Super Cache mod rewrite rules were detected in your %s.htaccess file.<br /> Click the following link to see the lines added to that file. If you have upgraded the plugin make sure these rules match."
-msgstr "在你的%s.htaccess檔案中已經檢測到WP Super Cache重寫規則。<br />點選以下連結，查看新增到該檔案的內容。如果你已經升級外掛，請確保與這些規則相同。"
+msgstr "在你的 %s.htaccess 檔案中已經檢測到 WP Super Cache 重寫規則。<br />點選以下連結，查看新增到該檔案的內容。如果你已經升級外掛，請確保與這些規則相同。"
 
-#: wp-cache.php:1147
+#: wp-cache.php:1253
 msgid "A difference between the rules in your .htaccess file and the plugin rewrite rules has been found. This could be simple whitespace differences but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Mod_Rewrite Rules&#8217; button to update the rules."
-msgstr "發現.htaccess的rewrite規則和外掛rewrite規則的不一致。有可能只是單純空白字元的差別，但是你應該立即比較以下的規則。 點擊「更新Mod_Rewrite規則」按鈕以更新規則。"
+msgstr "發現 .htaccess 的 rewrite 規則和外掛 rewrite 規則的不一致。有可能只是單純空白字元的差別，但是你應該立即比較以下的規則。 點擊「更新 Mod_Rewrite 規則」按鈕以更新規則。"
 
-#: wp-cache.php:1150
+#: wp-cache.php:1255
 msgid "View Mod_Rewrite Rules"
 msgstr "查看 Mod_Rewrite 規則"
 
-#: wp-cache.php:1154
-#: wp-cache.php:2384
+#: wp-cache.php:1261
+#: wp-cache.php:2622
 msgid "Rules must be added to %s too:"
-msgstr "也必須新增到%s的規則："
+msgstr "也必須新增到 %s 的規則："
 
-#: wp-cache.php:1162
+#: wp-cache.php:1268
 msgid "Gzip encoding rules in %s.htaccess created."
-msgstr "%s.htaccess上Gzip規則建立。"
+msgstr "%s.htaccess 內 gzip 規則建立。"
 
-#: wp-cache.php:1169
+#: wp-cache.php:1275
 msgid "Fix Configuration"
 msgstr "修復設定"
 
-#: wp-cache.php:1172
+#: wp-cache.php:1278
 msgid "Restore Default Configuration"
 msgstr "還原到預設選項"
 
-#: wp-cache.php:1180
+#: wp-cache.php:1286
 msgid "Comment moderation is enabled. Your comment may take some time to appear."
 msgstr "迴響審核已啟用。您的迴響可能需要一些時間才會顯示。"
 
-#: wp-cache.php:1205
+#: wp-cache.php:1311
 msgid "Lock Down:"
 msgstr "鎖定："
 
-#: wp-cache.php:1205
-#: plugins/awaitingmoderation.php:35
-#: plugins/badbehaviour.php:66
-#: plugins/domain-mapping.php:61
-msgid "Disabled"
-msgstr "停用"
-
-#: wp-cache.php:1205
-#: plugins/awaitingmoderation.php:34
-#: plugins/badbehaviour.php:65
-#: plugins/domain-mapping.php:60
-msgid "Enabled"
-msgstr "啟用"
-
-#: wp-cache.php:1206
+#: wp-cache.php:1312
 msgid "Prepare your server for an expected spike in traffic by enabling the lock down. When this is enabled, new comments on a post will not refresh the cached static files."
 msgstr "如果你預測會有流量高峰到來時，可以啟用鎖定功能。當這個功能啟用時，在文章裡發佈新迴響將不會更新靜態快取檔案。"
 
-#: wp-cache.php:1207
+#: wp-cache.php:1313
 msgid "Developers: Make your plugin lock down compatible by checking the \"WPLOCKDOWN\" constant. The following code will make sure your plugin respects the WPLOCKDOWN setting."
-msgstr "開發者：透過檢查\"WPLOCKDOWN\"，讓你的外掛與鎖定功能相容。下面的原始碼將確保你的外掛遵守WPLOCKDOWN設定。"
+msgstr "開發者：透過檢查 \"WPLOCKDOWN\"，讓你的外掛與鎖定功能相容。下面的原始碼將確保你的外掛遵守 WPLOCKDOWN 設定。"
 
-#: wp-cache.php:1209
+#: wp-cache.php:1315
 msgid "Sorry. My blog is locked down. Updates will appear shortly"
 msgstr "抱歉。我的部落格已經鎖定。將會在短時間後更新。"
 
-#: wp-cache.php:1213
+#: wp-cache.php:1319
 msgid "WordPress is locked down. Super Cache static files will not be deleted when new comments are made."
 msgstr "WordPress 已鎖定。新的迴響產生時將不會刪除 Super Cache 靜態快取檔案。"
 
-#: wp-cache.php:1215
+#: wp-cache.php:1321
 msgid "WordPress is not locked down. New comments will refresh Super Cache static files as normal."
 msgstr "WordPress 未鎖定。新的迴響產生時將會正常更新 Super Cache 靜態快取檔案。"
 
-#: wp-cache.php:1218
-#: plugins/searchengine.php:61
-#: plugins/searchengine.php:76
-msgid "Disable"
-msgstr "停用"
-
-#: wp-cache.php:1218
-#: plugins/searchengine.php:74
-msgid "Enable"
-msgstr "啟用"
-
-#: wp-cache.php:1221
+#: wp-cache.php:1327
 msgid "Lock Down"
 msgstr "鎖定"
 
-#: wp-cache.php:1229
+#: wp-cache.php:1335
 msgid "Directly Cached Files"
 msgstr "直接快取檔案"
 
-#: wp-cache.php:1287
+#: wp-cache.php:1393
 msgid "%s removed!"
 msgstr "%s 已移除！"
 
-#: wp-cache.php:1295
-#: wp-cache.php:1297
-#: plugins/badbehaviour.php:83
-msgid "Warning!"
-msgstr "警告！"
-
-#: wp-cache.php:1295
+#: wp-cache.php:1401
 msgid "You must make %s writable to enable this feature. As this is a security risk please make it readonly after your page is generated."
 msgstr "啟用這項功能前必須確認 %s 是可寫入狀態。由於這牽涉到一個安全風險，請在你的網頁產生後把它設為唯讀。"
 
-#: wp-cache.php:1297
+#: wp-cache.php:1406
 msgid "%s is writable. Please make it readonly after your page is generated as this is a security risk."
 msgstr "%s 可寫入。由於這牽涉到一個安全風險，請在你的網頁產生後把它設為唯讀。"
 
-#: wp-cache.php:1311
+#: wp-cache.php:1421
 msgid "Existing direct page"
 msgstr "已存在的直接頁面"
 
-#: wp-cache.php:1311
+#: wp-cache.php:1421
 msgid "Delete cached file"
 msgstr "刪除快取檔案"
 
-#: wp-cache.php:1316
+#: wp-cache.php:1426
 msgid "Add direct page:"
 msgstr "新增直接頁面："
 
-#: wp-cache.php:1318
+#: wp-cache.php:1428
 msgid "Directly cached files are files created directly off %s where your blog lives. This feature is only useful if you are expecting a major Digg or Slashdot level of traffic to one post or page."
 msgstr "直接快取檔案是從你的部落格 %s 產生直接建立的檔案。這項功能只在你預測將會有從 Digg 或 Slashdot 大量流量進入某篇文章或頁面時才有用。"
 
-#: wp-cache.php:1320
+#: wp-cache.php:1430
 msgid "For example: to cache <em>%1$sabout/</em>, you would enter %1$sabout/ or /about/. The cached file will be generated the next time an anonymous user visits that page."
 msgstr "舉例來說：快取 <em>%1$sabout/</em>, 你應該輸入 %1$sabout/ 或 /about/ 。快取檔案將在下一個匿名使用者訪問該頁面時產生。"
 
-#: wp-cache.php:1321
+#: wp-cache.php:1431
 msgid "Make the textbox blank to remove it from the list of direct pages and delete the cached file."
 msgstr "將輸入框清空，就能將它從直接頁面清單中移除並刪除快取檔案。"
 
-#: wp-cache.php:1326
+#: wp-cache.php:1436
 msgid "Update Direct Pages"
 msgstr "更新直接頁面"
 
-#: wp-cache.php:1364
+#: wp-cache.php:1464
+msgctxt "timezone date format"
+msgid "Y-m-d G:i:s"
+msgstr "Y-m-d G:i:s"
+
+#: wp-cache.php:1523
 msgid "Expiry Time &amp; Garbage Collection"
-msgstr "過期時間 &amp; 垃圾收集"
+msgstr "過期時間與垃圾回收"
 
-#: wp-cache.php:1366
-msgid "Expire time:"
-msgstr "過期時間："
+#: wp-cache.php:1525
+msgid "<abbr title=\"Coordinated Universal Time\">UTC</abbr> time is <code>%s</code>"
+msgstr "<abbr title=\"Coordinated Universal Time\">UTC</abbr> 時間是 <code>%s</code>"
 
-#: wp-cache.php:1367
+#: wp-cache.php:1528
+msgid "Local time is <code>%1$s</code>"
+msgstr "本地時間是 <code>%1$s</code>"
+
+#: wp-cache.php:1532
+msgid "Next scheduled garbage collection will be at <strong>%s UTC</strong>"
+msgstr "下次垃圾回收排程時間<strong> %s UTC</strong>"
+
+#: wp-cache.php:1536
+msgid "Warning! <strong>PRELOAD MODE</strong> activated. Supercache files will not be deleted regardless of age."
+msgstr "警告 <strong>預載模式</strong> 已被啟用。Supercache檔案將不會由於過期而被刪除。"
+
+#: wp-cache.php:1553
+msgid "Cache Timeout"
+msgstr "快取逾時"
+
+#: wp-cache.php:1554
+#: wp-cache.php:1557
 msgid "seconds"
 msgstr "秒"
 
-#: wp-cache.php:1368
+#: wp-cache.php:1555
+msgid "How long should cached pages remain fresh? Set to 0 to disable garbage collection. A good starting point is 3600 seconds."
+msgstr "設定快取的有效期限。設定 0 以關閉垃圾回收功能。可以從 3600 秒先開始嘗試。"
+
+#: wp-cache.php:1556
+msgid "Scheduler"
+msgstr "排程器"
+
+#: wp-cache.php:1556
+msgid "Timer:"
+msgstr "計時："
+
+#: wp-cache.php:1557
+msgid "Check for stale cached files every <em>interval</em> seconds."
+msgstr "每隔<em>幾秒</em>檢查失效的快取檔案。"
+
+#: wp-cache.php:1558
+msgid "Clock:"
+msgstr "時刻："
+
+#: wp-cache.php:1559
+msgid "HH:MM"
+msgstr "HH:MM (時:分)"
+
+#: wp-cache.php:1559
+msgid "Check for stale cached files at this time <strong>(UTC)</strong> or starting at this time every <em>interval</em> below."
+msgstr "在下列時間 <strong>(UTC)</strong> 檢查失效快取，或從此時間開始每段<em>間隔</em>檢查。"
+
+#: wp-cache.php:1561
+msgid "Interval:"
+msgstr "間隔："
+
+#: wp-cache.php:1567
+msgid "Notification Emails"
+msgstr "通知郵件"
+
+#: wp-cache.php:1568
+msgid "Email me when the garbage collection runs."
+msgstr "在垃圾回收執行時寄 email 給我。"
+
+#: wp-cache.php:1570
 msgid "Garbage Collection"
-msgstr "垃圾收集"
+msgstr "垃圾回收"
 
-#: wp-cache.php:1368
-msgid "If the expiry time is more than 1800 seconds (half an hour), garbage collection will be done every 10 minutes, otherwise it will happen 10 seconds after the expiry time above."
-msgstr "如果過期時間大於1800秒（半個小時），垃圾回收會每10分鐘進行一次，否則就會在設定到期時間的10秒後進行清理。"
+#: wp-cache.php:1571
+msgid "<em>Garbage collection</em> is the simple act of throwing out your garbage. For this plugin that would be old or <em>stale</em> cached files that may be out of date. New cached files are described as <em>fresh</em>."
+msgstr "<em>垃圾回收</em>就是將你的垃圾丟掉的簡單動作。以此外掛來說，垃圾就是指舊的或<em>失效 (stale) </em>的檔案。新的快取檔案則稱為<em>有效 (fresh) </em>快取。"
 
-#: wp-cache.php:1369
-msgid "Checking for and deleting expired files is expensive, but it&#8217;s expensive leaving them there too. On a very busy site you should set the expiry time to <em>300 seconds</em>. Experiment with different values and visit this page to see how many expired files remain at different times during the day. If you are using legacy caching aim to have less than 500 cached files if possible. You can have many times more cached files when using mod_rewrite or PHP caching."
-msgstr "檢查和刪除過期檔案代價高昂，但把這些檔案留在那裡也一樣。在非常忙碌的網站，你應該將過期時間設定為 <em>300 秒</em>。嘗試使用不同的數值，並注意這些頁面一天裡在不同時段產生多少過期檔案，如果可能的話盡量不讓快取文件數多於500個。"
+#: wp-cache.php:1572
+msgid "Cached files are fresh for a limited length of time. You can set that time in the <em>Cache Timeout</em> text box on this page."
+msgstr "快取檔案有一定限度的有效期限。你可以在本頁的<em>快取逾時</em>文字方塊設定這個期限。"
 
-#: wp-cache.php:1370
+#: wp-cache.php:1573
+msgid "Stale cached files are not removed as soon as they become stale. They have to be removed by the garbage collecter. That is why you have to tell the plugin when the garbage collector should run."
+msgstr "失效的快取檔案並不會在失效的時候馬上就被移除。他們必須被垃圾回收機制移除。這就是為什麼你必須告訴外掛何時執行垃圾回收。"
+
+#: wp-cache.php:1574
+msgid "Use the <em>Timer</em> or <em>Clock</em> schedulers to define when the garbage collector should run."
+msgstr "使用<em>計時</em>或<em>時刻</em>來決定何時執行垃圾回收。"
+
+#: wp-cache.php:1575
+msgid "The <em>Timer</em> scheduler tells the plugin to run the garbage collector at regular intervals. When one garbage collection is done, the next run is scheduled."
+msgstr "<em>計時</em>排程器以一定的時間間隔執行垃圾回收。當一次垃圾回收完成後，就會再度進行下一次的排程。"
+
+#: wp-cache.php:1576
+msgid "Or, the <em>Clock</em> scheduler allows the garbage collection to run at specific times. If set to run hourly or twicedaily the garbage collector will be first scheduled for the time you enter here. It will then run again at the indicated interval. If set to run daily it will run once a day at the time specified."
+msgstr "而<em>時刻</em>排程器，可以讓外掛在指定的時刻執行垃圾回收。如果設定為每小時 (hourly) 或兩天一次 (twicedaily) 執行，垃圾回收會在你輸入的時刻第一次被執行，接下來會在設定的間隔時間後再執次行。如果設定為每日 (daily) 執行，那他會在每天你設定的時刻執行一次。"
+
+#: wp-cache.php:1578
+msgid "There are no best garbage collection settings but here are a few scenarios. Garbage collection is separate to other actions that clear our cached files like leaving a comment or publishing a post."
+msgstr "並沒有最佳的垃圾回收設定，不過這裡列出幾個情境。垃圾回收和其它會造成清除快取的情形，例如留言和發佈文章，是有區別的。"
+
+#: wp-cache.php:1580
+msgid "Sites that want to serve lots of newly generated data should set the <em>Cache Timeout</em> to 60 and use the <em>Timer</em> scheduler set to 90 seconds."
+msgstr "希望提供大量動態資料的站台，應該將<em>快取逾時</em>設定為 60 秒，並使用 90 秒的<em>計時</em>排程。"
+
+#: wp-cache.php:1581
+msgid "Sites with widgets and rss feeds in their sidebar should probably use a timeout of 3600 seconds and set the timer to 600 seconds. Stale files will be caught within 10 minutes of going stale."
+msgstr "在邊欄有小工具及 rss 饋料的站台，也許應該設定 3600 的逾時，以及 600 秒的計時排程。失效的檔案會在失效十分鐘後被清除。"
+
+#: wp-cache.php:1582
+msgid "Sites with lots of static content, no widgets or rss feeds in their sidebar can use a timeout of 86400 seconds or even more and set the timer to something equally long."
+msgstr "有大量靜態內容，邊欄沒有小工具及 rss 饋料的站台，可以使用 86400 或更長的逾時，並將計時排程設定為等長的時間。"
+
+#: wp-cache.php:1583
+msgid "Sites where an external data source updates at a particular time every day should set the timeout to 86400 seconds and use the Clock scheduler set appropriately."
+msgstr "在每天固定時刻使用外部資料來源更新的站台，則應該將逾時設為86400秒，並將時刻排程設定在適當的時間。"
+
+#: wp-cache.php:1585
+msgid "Checking for and deleting expired files is expensive, but it&#8217;s expensive leaving them there too. On a very busy site you should set the expiry time to <em>600 seconds</em>. Experiment with different values and visit this page to see how many expired files remain at different times during the day. If you are using legacy caching aim to have less than 500 cached files if possible. You can have many times more cached files when using mod_rewrite or PHP caching."
+msgstr "檢查和刪除過期檔案代價高昂，但把這些檔案留在那裡也一樣。在非常忙碌的網站，你應該將過期時間設定為 <em>600 秒</em>。嘗試使用不同的數值，並注意這些頁面一天裡在不同時段產生多少過期檔案，如果使用傳統快取，可能的話盡量不要讓快取檔案數多於 500 個。若使用 mod_rewrite 或 PHP 快取，快取數量可以增加數倍。"
+
+#: wp-cache.php:1586
 msgid "Set the expiry time to 0 seconds to disable garbage collection."
-msgstr "把過期時間設定為0以關閉垃圾回收功能"
+msgstr "把過期時間設定為 0 以關閉垃圾回收功能"
 
-#: wp-cache.php:1371
+#: wp-cache.php:1587
 msgid "Change Expiration"
 msgstr "變更過期時間"
 
-#: wp-cache.php:1415
+#: wp-cache.php:1631
 msgid "Rejected User Agents"
 msgstr "被拒絕的使用者代理（User Agents）"
 
-#: wp-cache.php:1416
+#: wp-cache.php:1632
 msgid "Strings in the HTTP &#8217;User Agent&#8217; header that prevent WP-Cache from caching bot, spiders, and crawlers&#8217; requests. Note that super cached files are still sent to these agents if they already exists."
 msgstr "HTTP User Agent；防止快取機器人、蜘蛛或抓取器對於 WP-Cache 的請求。請注意，如果快取檔案已經存在，仍然會發送給這些代理。"
 
-#: wp-cache.php:1423
+#: wp-cache.php:1639
 msgid "Save UA Strings"
-msgstr "儲存UA字串"
+msgstr "儲存 UA 字串"
 
-#: wp-cache.php:1446
+#: wp-cache.php:1662
 msgid "Do not cache the following page types. See the <a href=\"http://codex.wordpress.org/Conditional_Tags\">Conditional Tags</a> documentation for a complete discussion on each type."
 msgstr "不快取以下頁面類型。查看<a href=\"http://codex.wordpress.org/Conditional_Tags\">條件標籤</a>文件中對每個類型的完整探討。"
 
-#: wp-cache.php:1449
+#: wp-cache.php:1665
 msgid "Single Posts"
 msgstr "單篇文章"
 
-#: wp-cache.php:1450
+#: wp-cache.php:1666
 msgid "Pages"
 msgstr "網誌分頁"
 
-#: wp-cache.php:1451
+#: wp-cache.php:1667
 msgid "Front Page"
 msgstr "首頁"
 
-#: wp-cache.php:1452
+#: wp-cache.php:1668
 msgid "Home"
 msgstr "主頁"
 
-#: wp-cache.php:1453
+#: wp-cache.php:1669
 msgid "Archives"
 msgstr "存檔"
 
-#: wp-cache.php:1454
+#: wp-cache.php:1670
 msgid "Tags"
 msgstr "標籤"
 
-#: wp-cache.php:1455
+#: wp-cache.php:1671
 msgid "Category"
 msgstr "分類"
 
-#: wp-cache.php:1456
+#: wp-cache.php:1672
 msgid "Feeds"
 msgstr "訂閱"
 
-#: wp-cache.php:1457
+#: wp-cache.php:1673
 msgid "Search Pages"
 msgstr "搜尋頁面"
 
-#: wp-cache.php:1459
-#: wp-cache.php:1573
+#: wp-cache.php:1674
+msgid "Author Pages"
+msgstr "作者頁面"
+
+#: wp-cache.php:1676
+#: wp-cache.php:1788
 msgid "Save"
 msgstr "儲存"
 
-#: wp-cache.php:1476
+#: wp-cache.php:1693
 msgid "Add here strings (not a filename) that forces a page not to be cached. For example, if your URLs include year and you dont want to cache last year posts, it&#8217;s enough to specify the year, i.e. &#8217;/2004/&#8217;. WP-Cache will search if that string is part of the URI and if so, it will not cache that page."
-msgstr "在下方輸入框內新增字串（不是檔案名稱），控制頁面是否被快取。舉例來說，如果你的URL中包含年份，但你不想快取去年的文章，那麼就指定年份，例如 &#8217;/2004/&#8217; 。WP-Cache 將會搜尋這個字串是否包含在URI之中，如果是的話則不會快取這個頁面。"
+msgstr "在下方輸入框內新增字串（不是檔案名稱），控制不要被快取的頁面。舉例來說，如果你的 URL 中包含年份，但你不想快取去年的文章，那麼就指定年份，例如 &#8217;/2004/&#8217; 。WP-Cache 將會搜尋這個字串是否包含在URI之中，如果是的話則不會快取這個頁面。"
 
-#: wp-cache.php:1482
+#: wp-cache.php:1699
 msgid "Save Strings"
 msgstr "儲存字串"
 
-#: wp-cache.php:1498
+#: wp-cache.php:1715
 msgid "Add here those filenames that can be cached, even if they match one of the rejected substring specified above."
 msgstr "這是可以被快取的檔案名，即使它們與上方設定的拒絕字串相符時也仍將被快取。"
 
-#: wp-cache.php:1504
+#: wp-cache.php:1721
 msgid "Save Files"
 msgstr "儲存檔案"
 
-#: wp-cache.php:1545
+#: wp-cache.php:1762
 msgid "Currently logging to: %s"
-msgstr "當前記錄到：%s"
+msgstr "正在記錄到：%s"
 
-#: wp-cache.php:1548
+#: wp-cache.php:1765
 msgid "Fix problems with the plugin by debugging it here. It can log them to a file in your cache directory."
-msgstr "在這裡使用外掛除錯模式解決問題。它可以在你的快取目錄內產生的紀錄檔。"
+msgstr "在這裡使用外掛除錯模式解決問題。它可以在你的快取目錄內產生紀錄檔。"
 
-#: wp-cache.php:1552
+#: wp-cache.php:1769
 msgid "Debugging"
 msgstr "除錯"
 
-#: wp-cache.php:1552
-#: plugins/awaitingmoderation.php:40
-#: plugins/badbehaviour.php:71
-#: plugins/searchengine.php:69
-#: plugins/domain-mapping.php:66
-msgid "enabled"
-msgstr "已啟用"
-
-#: wp-cache.php:1553
+#: wp-cache.php:1770
 msgid "IP Address"
 msgstr "IP位址"
 
-#: wp-cache.php:1553
+#: wp-cache.php:1770
 msgid "(only log requests from this IP address. Your IP is %s)"
 msgstr "（僅記錄來自此IP位址的請求。你的 IP 是 %s）"
 
-#: wp-cache.php:1554
-msgid "Log level"
-msgstr "記錄等級"
+#: wp-cache.php:1771
+msgid "Cache Status Messages"
+msgstr "快取狀態訊息"
 
-#: wp-cache.php:1560
-msgid "(1 = less, 5 = more, may cause severe server load.)"
-msgstr "（1 = 低，5 = 更多，可能會導致嚴重的伺服器負載）"
+#: wp-cache.php:1772
+msgid "Display comments at the end of every page like this:"
+msgstr "顯在每頁的頁尾顯示像這樣的評論："
 
-#: wp-cache.php:1563
+#: wp-cache.php:1778
 msgid "In very rare cases two problems may arise on some blogs:<ol><li> The front page may start downloading as a zip file.</li><li> The wrong page is occasionally cached as the front page if your blog uses a static front page and the permalink structure is <em>/%category%/%postname%/</em>.</li></ol>"
-msgstr "在極少數的部落格可能會出現兩個問題：<ol><li>在首頁可能會以一個 zip 檔案開始下載。</li><li>如果你的部落格使用一個靜態的首頁，或以 <em>/%category%/%postname%/</em> 作為固定連結架構的話，那麼錯誤的頁面有時候會變成首頁的快取畫面。</li></ol>"
+msgstr "在極少數的部落格可能會出現兩個問題：<ol><li>在首頁可能會以一個 zip 檔案開始下載。</li><li>如果你的部落格使用一個靜態的首頁，或以 <em>/%category%/%postname%/</em> 作為固定網址結架構的話，那麼錯誤的頁面有時候會被當成首頁被快取起來。</li></ol>"
 
-#: wp-cache.php:1564
+#: wp-cache.php:1779
 msgid "I&#8217;m 99% certain that they aren&#8217;t bugs in WP Super Cache and they only happen in very rare cases but you can run a simple check once every 5 minutes to verify that your site is ok if you&#8217;re worried. You will be emailed if there is a problem."
 msgstr "我有十足的把握肯定，它們不是 WP Super Cache 的錯誤。它只會發生在極少數的情況下，但如果你擔心的話，你可以每5分鐘進行一次簡單的檢查，以確保你的網站是正常的。如果有問題，你將會收到電子郵件。"
 
-#: wp-cache.php:1566
+#: wp-cache.php:1781
 msgid "Check front page every 5 minutes."
 msgstr "每五分鐘檢查首頁"
 
-#: wp-cache.php:1567
+#: wp-cache.php:1782
 msgid "Front page text"
 msgstr "首頁文字"
 
-#: wp-cache.php:1567
+#: wp-cache.php:1782
 msgid "Text to search for on your front page. If this text is missing the cache will be cleared. Leave blank to disable."
 msgstr "在你的首頁裡要搜尋的文字。如果缺少這些文字時快取將被清除。保留空白停用這個功能。"
 
-#: wp-cache.php:1568
+#: wp-cache.php:1783
 msgid "Clear cache on error."
 msgstr "清除快取時發生錯誤。"
 
-#: wp-cache.php:1569
+#: wp-cache.php:1784
 msgid "Email the blog admin when checks are made. (useful for testing)"
 msgstr "當檢查時寄送電子郵件給網站管理員。（供測試用）"
 
-#: wp-cache.php:1583
+#: wp-cache.php:1798
 msgid "Error: GZIP compression is enabled, disable it if you want to enable wp-cache."
-msgstr "錯誤：GZIP壓縮已啟用，如果你想啟用wp-cache，請停用它。"
+msgstr "錯誤：GZIP 壓縮已啟用，如果你想啟用 wp-cache，請停用它。"
 
-#: wp-cache.php:1630
-#: wp-cache.php:1796
+#: wp-cache.php:1845
+#: wp-cache.php:1986
+#: wp-cache.php:2022
 msgid "Warning"
 msgstr "警告"
 
-#: wp-cache.php:1630
+#: wp-cache.php:1845
 msgid "GZIP compression is enabled in WordPress, wp-cache will be bypassed until you disable gzip compression."
-msgstr "在 WordPress 上GZIP壓縮已啟用，wp-cache將被繞過，直到你停用gzip壓縮。"
+msgstr "在 WordPress 上 GZIP 壓縮已啟用，wp-cache 將被繞過，直到你停用 gzip 壓縮。"
 
-#: wp-cache.php:1692
-#: wp-cache.php:1697
-#: wp-cache.php:1729
-#: wp-cache.php:1734
-#: wp-cache.php:1740
+#: wp-cache.php:1907
+#: wp-cache.php:1912
+#: wp-cache.php:1945
+#: wp-cache.php:1950
+#: wp-cache.php:1956
 msgid "Error"
 msgstr "錯誤"
 
-#: wp-cache.php:1692
+#: wp-cache.php:1907
 msgid "Your cache directory (<strong>%1$s</strong>) did not exist and couldn&#8217;t be created by the web server. Check %1$s permissions."
 msgstr "你的快取目錄（<strong>%1$s</strong>）不存在，且無法從伺服器端建立。請檢查 %1$s 權限。"
 
-#: wp-cache.php:1697
+#: wp-cache.php:1912
 msgid "Your cache directory (<strong>%1$s</strong>) or <strong>%2$s</strong> need to be writable for this plugin to work. Double-check it."
 msgstr "你的快取目錄（<strong>%1$s</strong>）或 <strong>%2$s</strong> 必須讓外掛可寫入才能正常運作。請重新檢查一次。"
 
-#: wp-cache.php:1729
+#: wp-cache.php:1945
 msgid "Your WP-Cache config file (<strong>%s</strong>) is out of date and not writable by the Web server.Please delete it and refresh this page."
 msgstr "你的 WP-Cache 設定檔（<strong>%s</strong>）已經過期，且無法由伺服器端寫入，請刪除它並重新整理此頁面。"
 
-#: wp-cache.php:1734
+#: wp-cache.php:1950
 msgid "Configuration file missing and %1$s  directory (<strong>%2$s</strong>) is not writable by the Web server.Check its permissions."
 msgstr "設定檔遺失，%1$s 目錄（<strong>%2$s</strong>）也無法被伺服器寫入。請檢查權限。"
 
-#: wp-cache.php:1740
+#: wp-cache.php:1956
 msgid "Sample WP-Cache config file (<strong>%s</strong>) does not exist.Verify you installation."
 msgstr "WP-Cache 設定檔範本（<strong>%s</strong>）不存在。請確認你的安裝。"
 
-#: wp-cache.php:1796
+#: wp-cache.php:1986
+msgid "Could not update %s!</em> WPCACHEHOME must be set in config file."
+msgstr "無法更新 %s！</em> WPCACHEHOME 必須在設定檔中被設定。"
+
+#: wp-cache.php:2022
 msgid "%s/advanced-cache.php</em> does not exist or cannot be updated."
 msgstr "%s/advanced-cache.php</em> 不存在或是無法更新。"
 
-#: wp-cache.php:1797
+#: wp-cache.php:2023
 msgid "1. If it already exists please delete the file first."
 msgstr "1. 如果它已經存在，請先刪除。"
 
-#: wp-cache.php:1798
+#: wp-cache.php:2024
 msgid "2. Make %1$s writable using the chmod command through your ftp or server software. (<em>chmod 777 %1$s</em>) and refresh this page. This is only a temporary measure and you&#8217;ll have to make it read only afterwards again. (Change 777 to 755 in the previous command)"
-msgstr "2. 請使用你的FTP程式或伺服器軟體，以chmod指令使%1$s可寫入。（<em>chmod 777 %1$s</em>），並重新整理此頁面。這只是一個暫時的作法，你事後必須在把它變更為唯讀。（使用前面的指令將權限從 777 變更為 755）"
+msgstr "2. 請使用你的FTP程式或伺服器軟體，以 chmod 指令使%1$s可寫入。（<em>chmod 777 %1$s</em>），並重新整理此頁面。這只是一個暫時的作法，你事後必須再把它變更為唯讀。（使用前面的指令，將權限從 777 變更為 755）"
 
-#: wp-cache.php:1799
+#: wp-cache.php:2025
 msgid "3. Refresh this page to update <em>%s/advanced-cache.php</em>"
 msgstr "3. 重新整理此頁面以更新 <em>%s/advanced-cache.php</em>"
 
-#: wp-cache.php:1800
+#: wp-cache.php:2026
 msgid "If that doesn&#8217;t work, make sure the file <em>%s/advanced-cache.php</em> doesn&#8217;t exist:"
 msgstr "如果無法運作，請確認 <em>%s/advanced-cache.php</em> 檔案不存在："
 
-#: wp-cache.php:1801
+#: wp-cache.php:2027
 msgid "<li>1. Open <em>%1$s$wp_cache_file</em> in a text editor.</li><li>2. Change the text <em>CACHEHOME</em> to <em>%2$s</em></li><li>3. Save the file and copy it to <em>%3$s</em> and refresh this page.</li>"
 msgstr "<li>1. 以文字編輯器開啟 <em>%1$s$wp_cache_file</em>。</li><li>2. 將 <em>CACHEHOME</em> 變更為 <em>%2$s</em></li><li>3. 儲存檔案並複製為 <em>%3$s</em>，然後重新整理此頁面。</li>"
 
-#: wp-cache.php:1824
+#: wp-cache.php:2050
 msgid "<h3>WP_CACHE constant set to false</h3><p>The WP_CACHE constant is used by WordPress to load the code that serves cached pages. Unfortunately it is set to false. Please edit your wp-config.php and add or edit the following line above the final require_once command:<br /><br /><code>define('WP_CACHE', true);</code></p>"
-msgstr "<h3>WP_CACHE變數被設為false</h3><p>WP_CACHE變數被WordPress用來載入快取程式，可是它被設為false(關閉)。請編輯你的wp-config.php檔並把以下的內容放在最後的require_once命令之前。<br /><br /><code>define('WP_CACHE', true);</code></p>"
+msgstr "<h3>WP_CACHE 變數被設為 false</h3><p>WP_CACHE 變數被WordPress用來載入快取程式，可是它被設為 false(關閉)。請編輯你的 wp-config.php 檔並把以下的內容放在最後的 require_once 命令之前。<br /><br /><code>define('WP_CACHE', true);</code></p>"
 
-#: wp-cache.php:1826
+#: wp-cache.php:2052
 msgid "<strong>Error: WP_CACHE is not enabled</strong> in your <code>wp-config.php</code> file and I couldn&#8217;t modify it."
 msgstr "<strong>錯誤：</strong>在你的 <code>wp-config.php</code> 檔案裡 <strong>WP_CACHE 是停用狀態</strong>，且無法修改。"
 
-#: wp-cache.php:1827
+#: wp-cache.php:2053
 msgid "Edit <code>%s</code> and add the following line:<br /> <code>define('WP_CACHE', true);</code><br />Otherwise, <strong>WP-Cache will not be executed</strong> by WordPress core. "
 msgstr "編輯 <code>%s</code> 並加入以下原始碼：<br /> <code>define('WP_CACHE', true);</code><br />否則，<strong>WP-Cache 將無法被 WordPress 核心執行</strong>。"
 
-#: wp-cache.php:1831
-msgid "<h3>WP_CACHE constant added to wp-config.php</h3><p>If you continue to see this warning message please see point 5 of the <a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">FAQ</a>. The WP_CACHE line must be moved up."
-msgstr "<h3>WP_CACHE 不斷被新增到 wp-config.php</h3><p>如果你持續看到此警告訊息，請參閱 <a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">FAQ</a> 第五點。WP_CACHE 原始碼必須往前移動。"
+#: wp-cache.php:2057
+msgid "<h3>WP_CACHE constant added to wp-config.php</h3><p>If you continue to see this warning message please see point 5 of the <a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">Troubleshooting Guide</a>. The WP_CACHE line must be moved up."
+msgstr "<h3>WP_CACHE 不斷被新增到 wp-config.php</h3><p>如果你持續看到此警告訊息，請參閱 <a href=\"http://wordpress.org/extend/plugins/wp-super-cache/faq/\">常見問答</a> 第五點。WP_CACHE 原始碼必須往前移動。"
 
-#: wp-cache.php:1855
+#: wp-cache.php:2085
 msgid "Cache Contents"
 msgstr "快取內容"
 
-#: wp-cache.php:1858
+#: wp-cache.php:2088
 msgid "Object cache in use. No cache listing available."
-msgstr "正在使用Object快取。無法顯示快取清單。"
+msgstr "正在使用 Object 快取。無法顯示快取清單。"
 
-#: wp-cache.php:1882
+#: wp-cache.php:2112
 msgid "Deleting supercache file: <strong>%s</strong><br />"
-msgstr "刪除supercache檔案：<strong>%s</strong><br />"
+msgstr "刪除 supercache 檔案：<strong>%s</strong><br />"
 
-#: wp-cache.php:1899
+#: wp-cache.php:2129
 msgid "Deleting wp-cache file: <strong>%s</strong><br />"
-msgstr "刪除wp-cache檔案：<strong>%s</strong><br />"
+msgstr "刪除 wp-cache 檔案：<strong>%s</strong><br />"
 
-#: wp-cache.php:1964
+#: wp-cache.php:2194
 msgid "Cache stats are not automatically generated. You must click the link below to regenerate the stats on this page."
 msgstr "快取統計不會自動產生，你必須點擊以下的連結，本頁的統計資料才會重新產生。"
 
-#: wp-cache.php:1965
+#: wp-cache.php:2195
 msgid "Regenerate cache stats"
 msgstr "重新產生快取統計"
 
-#: wp-cache.php:1967
+#: wp-cache.php:2197
 msgid "Cache stats last generated: %s minutes ago."
 msgstr "快取統計最後產生時間：%s分鐘以前。"
 
-#: wp-cache.php:1973
+#: wp-cache.php:2203
 msgid "WP-Cache"
 msgstr "WP-Cache"
 
-#: wp-cache.php:1974
-#: wp-cache.php:1989
+#: wp-cache.php:2204
+#: wp-cache.php:2219
 msgid "%s Cached Pages"
 msgstr "%s 個頁面已快取"
 
-#: wp-cache.php:1975
-#: wp-cache.php:1994
+#: wp-cache.php:2205
+#: wp-cache.php:2224
 msgid "%s Expired Pages"
 msgstr "%s 個頁面已過期"
 
-#: wp-cache.php:1988
+#: wp-cache.php:2218
 msgid "WP-Super-Cache"
 msgstr "WP-Super-Cache"
 
-#: wp-cache.php:1998
+#: wp-cache.php:2228
 msgid "Fresh WP-Cached Files"
-msgstr "新的 WP-Cached 檔案"
+msgstr "有效的 WP-Cached 檔案"
 
-#: wp-cache.php:1999
-#: wp-cache.php:2015
-#: wp-cache.php:2031
-#: wp-cache.php:2047
+#: wp-cache.php:2229
+#: wp-cache.php:2245
+#: wp-cache.php:2261
+#: wp-cache.php:2277
 msgid "URI"
 msgstr "URI 網址"
 
-#: wp-cache.php:1999
-#: wp-cache.php:2015
+#: wp-cache.php:2229
+#: wp-cache.php:2245
 msgid "Key"
 msgstr "關鍵字"
 
-#: wp-cache.php:1999
-#: wp-cache.php:2015
-#: wp-cache.php:2031
-#: wp-cache.php:2047
+#: wp-cache.php:2229
+#: wp-cache.php:2245
+#: wp-cache.php:2261
+#: wp-cache.php:2277
 msgid "Age"
 msgstr "時間(秒)"
 
-#: wp-cache.php:1999
-#: wp-cache.php:2015
-#: wp-cache.php:2031
-#: wp-cache.php:2047
+#: wp-cache.php:2229
+#: wp-cache.php:2245
+#: wp-cache.php:2261
+#: wp-cache.php:2277
 msgid "Delete"
 msgstr "刪除"
 
-#: wp-cache.php:2014
+#: wp-cache.php:2244
 msgid "Stale WP-Cached Files"
-msgstr "舊的 WP-Cached 檔案"
+msgstr "失效的 WP-Cached 檔案"
 
-#: wp-cache.php:2030
+#: wp-cache.php:2260
 msgid "Fresh Super Cached Files"
-msgstr "新的 Super Cached 檔案"
+msgstr "有效的 Super Cached 檔案"
 
-#: wp-cache.php:2046
+#: wp-cache.php:2276
 msgid "Stale Super Cached Files"
-msgstr "舊的 Super Cached 檔案"
+msgstr "失效的 Super Cached 檔案"
 
-#: wp-cache.php:2062
+#: wp-cache.php:2292
 msgid "Hide file list"
 msgstr "隱藏檔案清單"
 
-#: wp-cache.php:2064
+#: wp-cache.php:2294
 msgid "Too many cached files, no listing possible."
 msgstr "快取檔案過多，無法列出。"
 
-#: wp-cache.php:2066
+#: wp-cache.php:2296
 msgid "List all cached files"
 msgstr "列出所有快取檔案"
 
-#: wp-cache.php:2072
-msgid "<strong>Garbage Collection</strong><br />Last GC was <strong>%s</strong> minutes ago<br />"
-msgstr "<strong>垃圾收集</strong><br />上次垃圾收集於 <strong>%s</strong> 分鐘前<br />"
-
-#: wp-cache.php:2073
-msgid "Next GC in <strong>%s</strong> minutes"
-msgstr "下次垃圾收集於 <strong>%s</strong> 分鐘後"
-
-#: wp-cache.php:2076
+#: wp-cache.php:2299
 msgid "Expired files are files older than %s seconds. They are still used by the plugin and are deleted periodically."
 msgstr "過期檔案是超過 %s 秒鐘的檔案。它們仍然會被外掛使用並會定期刪除。"
 
-#: wp-cache.php:2087
+#: wp-cache.php:2310
 msgid "Delete Expired"
 msgstr "刪除過期檔案"
 
-#: wp-cache.php:2105
+#: wp-cache.php:2335
 msgid "Delete Super Cache cached files (opens in new window)"
 msgstr "刪除 Super Cache 快取檔案（在新視窗打開）"
 
-#: wp-cache.php:2244
-msgid "%1$s is Digg proof thanks to caching by %2$s"
+#: wp-cache.php:2482
+msgid "%1$s is Stephen Fry proof thanks to caching by %2$s"
 msgstr "%1$s 使用的快取程式為 %2$s"
 
-#: wp-cache.php:2277
+#: wp-cache.php:2515
 msgid "WP Super Cache must be configured. Go to <a href=\"%s\">the admin page</a> to enable and configure the plugin."
 msgstr "WP Super Cache 必須設定。請前往<a href=\"%s\">管理後台</a>啟用和設定外掛。"
 
-#: wp-cache.php:2283
+#: wp-cache.php:2521
 msgid "Settings"
 msgstr "設定"
 
-#: wp-cache.php:2293
+#: wp-cache.php:2531
 msgid "WP Super Cache is disabled. Please go to the <a href=\"%s\">plugin admin page</a> to enable caching."
 msgstr "WP Super Cache 停用。請前往 <a href=\"%s\">外掛管理員</a>啟用快取。"
 
-#: wp-cache.php:2296
+#: wp-cache.php:2534
 msgid "Warning! WP Super Cache caching broken! The script advanced-cache.php could not load wp-cache-phase1.php.<br /><br />Please edit %1$s/advanced-cache.php and make sure the path to %2$swp-cache-phase1.php is correct."
-msgstr "警告！ WP Super Cache快取毀損！ advanced-cache.php 腳本無法載入 wp-cache-phase1.php。<br /><br />請編輯 %1$s/advanced-cache.php 並且確認指向 %2$swp-cache-phase1.php 的路徑是正確的。"
+msgstr "警告！ WP Super Cache 快取毀損！ advanced-cache.php 腳本無法載入 wp-cache-phase1.php。<br /><br />請編輯 %1$s/advanced-cache.php 並且確認指向 %2$swp-cache-phase1.php 的路徑是正確的。"
 
-#: wp-cache.php:2315
+#: wp-cache.php:2553
 msgid "[%s] Front page is gzipped! Please clear cache!"
-msgstr "[%s] 首頁已使用gzip壓縮！請清除快取！"
+msgstr "[%s] 首頁已使用 gzip 壓縮！請清除快取！"
 
-#: wp-cache.php:2315
+#: wp-cache.php:2553
 msgid "Please visit %s to clear the cache as the front page of your site is now downloading!"
 msgstr "請前往 %s 清除快取，網站的首頁正在下載！"
 
-#: wp-cache.php:2318
+#: wp-cache.php:2556
 msgid "[%s] Front page is gzipped! Cache Cleared!"
-msgstr "[%s] 首頁已使用gzip壓縮！快取已清除！"
+msgstr "[%s] 首頁已使用 gzip 壓縮！快取已清除！"
 
-#: wp-cache.php:2318
+#: wp-cache.php:2556
 msgid "The cache on your blog has been cleared because the front page of your site is now downloading. Please visit %s to verify the cache has been cleared."
 msgstr "你的部落格快取已被清除。因為你的部落格首頁正在下載，請前往 %s 確認快取已被清除。"
 
-#: wp-cache.php:2325
+#: wp-cache.php:2563
 msgid "[%s] Front page is not correct! Please clear cache!"
 msgstr "[%s] 首頁不正確！請清除快取！"
 
-#: wp-cache.php:2325
+#: wp-cache.php:2563
 msgid "Please visit %1$s to clear the cache as the front page of your site is not correct and missing the text, \"%2$s\"!"
-msgstr "請前往 %1$s 清除快取，部落格的首頁不正確，遺失文字，\"%2$s\"！"
+msgstr "請前往 %1$s 清除快取，部落格的首頁不正確，缺少文字 \"%2$s\"！"
 
-#: wp-cache.php:2328
+#: wp-cache.php:2566
 msgid "[%s] Front page is not correct! Cache Cleared!"
 msgstr "[%s] 首頁不正確！快取已清除！"
 
-#: wp-cache.php:2328
+#: wp-cache.php:2566
 msgid "The cache on your blog has been cleared because the front page of your site is missing the text \"%2$s\". Please visit %1$s to verify the cache has been cleared."
 msgstr "你的部落格已被清除快取，因為你的部落格首頁缺少文字 \"%2$s\"。請前往 %1$s 確認快取已被清除。"
 
-#: wp-cache.php:2333
+#: wp-cache.php:2571
 msgid "[%s] Front page check!"
 msgstr "[%s] 首頁檢查！"
 
-#: wp-cache.php:2333
+#: wp-cache.php:2571
 msgid "WP Super Cache has checked the front page of your blog. Please visit %s if you would like to disable this."
 msgstr "WP Super Cache 已檢查過你部落格的首頁。如果你想停用這項功能，請前往 %s 。"
 
-#: wp-cache.php:2376
+#: wp-cache.php:2614
 msgid "Cannot update .htaccess"
 msgstr "無法更新 .htaccess"
 
-#: wp-cache.php:2376
+#: wp-cache.php:2614
 msgid "The file <code>%s.htaccess</code> cannot be modified by the web server. Please correct this using the chmod command or your ftp client."
 msgstr "<code>%s.htaccess</code> 檔案無法被網頁伺服器更新。請使用 chmod 指令或透過 FTP 程式修正。"
 
-#: wp-cache.php:2376
+#: wp-cache.php:2614
 msgid "Refresh this page when the file permissions have been modified."
 msgstr "在權限修改後請重新整理這個頁面。"
 
-#: wp-cache.php:2376
+#: wp-cache.php:2614
 msgid "Alternatively, you can edit your <code>%s.htaccess</code> file manually and add the following code (before any WordPress rules):"
 msgstr "或者，你可以手動編輯 <code>%s.htaccess</code> 檔案並加入以下原始碼（在任何 WordPress 規則前）："
 
-#: wp-cache.php:2380
+#: wp-cache.php:2618
 msgid "To serve static html files your server must have the correct mod_rewrite rules added to a file called <code>%s.htaccess</code>"
-msgstr "為了使用靜態的HTML檔案，你的伺服器上必須有正確的mod_rewrite規則，新增到一個名為 <code>%s.htaccess</code> 的檔案。"
+msgstr "為了使用靜態的 HTML 檔案，你的伺服器上必須有正確的 mod_rewrite 規則，新增到一個名為 <code>%s.htaccess</code> 的檔案。"
 
-#: wp-cache.php:2381
+#: wp-cache.php:2619
 msgid "You can edit the file yourself add the following rules."
 msgstr "你可以自行編輯並新增以下規則。"
 
-#: wp-cache.php:2382
+#: wp-cache.php:2620
 msgid " Make sure they appear before any existing WordPress rules. "
 msgstr "確認它們出現在任何已存在的 WordPress 規則之前。"
 
-#: wp-cache.php:2390
+#: wp-cache.php:2628
 msgid "Update Mod_Rewrite Rules"
 msgstr "更新 Mod_Rewrite 規則"
 
-#: wp-cache.php:2515
+#: wp-cache.php:2780
 msgid "[%1$s] Cache Preload Started"
 msgstr "[%1$s] 快取預載已經開始"
 
-#: wp-cache.php:2517
+#: wp-cache.php:2810
+msgid "[%1$s] Refreshing %2$s taxonomy from %3$d to %4$d"
+msgstr "[%1$s] 更新 %2$s 分類第%3$d 到 %4$d 篇文章"
+
+#: wp-cache.php:2856
 msgid "[%1$s] Refreshing posts from %2$d to %3$d"
 msgstr "[%1$s] 更新第 %2$d 到第 %3$d 篇文章"
 
-#: wp-cache.php:2535
+#: wp-cache.php:2877
 msgid "[%1$s] Cache Preload Stopped"
 msgstr "[%1$s] 快取預載已停止"
 
-#: wp-cache.php:2544
+#: wp-cache.php:2887
 msgid "[%1$s] %2$d posts refreshed"
 msgstr "[%1$s]%2$d 篇文章已被更新"
 
-#: wp-cache.php:2544
+#: wp-cache.php:2887
 msgid "Refreshed the following posts:"
 msgstr "已更新下列文章："
 
-#: wp-cache.php:2553
+#: wp-cache.php:2897
 msgid "Scheduling next preload refresh in %d minutes."
 msgstr "下次更新預載快取時間：%d分鐘後"
 
-#: wp-cache.php:2563
+#: wp-cache.php:2908
 msgid "[%s] Cache Preload Completed"
 msgstr "[%s] 預載快取完成"
 
-#: wp-cache.php:2563
+#: wp-cache.php:2908
 msgid "Cleaning up old supercache files."
-msgstr "清除舊的supercache檔案。"
+msgstr "清除舊的 supercache 檔案。"
 
-#: wp-cache.php:2605
+#: wp-cache.php:2951
 msgid "[%s] Preload may have stalled."
 msgstr "[%s] 預先載入可能已經停止"
 
-#: wp-cache.php:2605
+#: wp-cache.php:2951
 msgid ""
 "Preload has been restarted.\n"
 "%s"
@@ -1413,11 +1712,11 @@ msgstr ""
 "預先載入已經被重新啟動.\n"
 "%s"
 
-#: wp-cache.php:2648
+#: wp-cache.php:2994
 msgid "Supercache Uninstall Problems"
-msgstr "Supercache反安裝問題"
+msgstr "Supercache 反安裝問題"
 
-#: wp-cache.php:2648
+#: wp-cache.php:2994
 msgid ""
 "Dear User,\n"
 "\n"
@@ -1435,85 +1734,70 @@ msgid ""
 msgstr ""
 "親愛的使用者，\n"
 "\n"
-"WP Super Cache已從你的部落格被移除，但是.htaccess中的\n"
+"WP Super Cache 已從你的部落格被移除，但是 .htaccess 中的\n"
 "mod_rewrite規則仍然存在。\n"
 "\n"
-"請編輯下列檔案並移除'BEGIN WPSuperCache'及'END WPSupercache'之間的原始碼。\n"
+"請編輯下列檔案並移除 'BEGIN WPSuperCache' 及 'END WPSupercache' 之間的原始碼。\n"
 "請先備份這個檔案！\n"
 "\n"
 "%s\n"
 "\n"
-"WP Super Cache Plugin敬上\n"
+"WP Super Cache Plugin 敬上\n"
 "http://wordpress.org/extend/plugins/wp-super-cache/"
 
-#: plugins/awaitingmoderation.php:4
-msgid "Your comment is awaiting moderation."
-msgstr "您的迴響正等待審核中。"
+#: wp-cache.php:3031
+msgid "Delete cache of the current page"
+msgstr "刪除目前頁面的快取"
 
-#: plugins/awaitingmoderation.php:32
-msgid "Awaiting Moderation"
-msgstr "Awaiting Moderation"
+#~ msgid ""
+#~ "<a href=\"%s\">WP Minify</a> reduces the number of files served by your "
+#~ "web server by joining Javascript and CSS files together. Alternatively "
+#~ "you can use <a href=\"%s\">WPSCMin</a>, a Supercache plugin that minifies "
+#~ "cached pages. It does not however join JS/CSS files together."
+#~ msgstr ""
+#~ "<a href=\"%s\">WP Minify</a> 合併Javascript及CSS檔案，以減少網頁伺服器需要"
+#~ "服務的檔案數量。 或者你也可以使用 <a href=\"%s\">WPSCMin</a>，一個減少快取"
+#~ "面數量的 Supercache 外掛。(但它並不會合併JS/CSS檔案)"
 
-#: plugins/awaitingmoderation.php:36
-msgid "Enables or disables plugin to Remove the text \"Your comment is awaiting moderation.\" when someone leaves a moderated comment."
-msgstr "啟動或關閉此外掛，決定當有人發佈需審核的迴響時，是否去除「您的迴響正等待審核中」字樣。"
+#~ msgid "Log level"
+#~ msgstr "記錄等級"
 
-#: plugins/awaitingmoderation.php:42
-#: plugins/badbehaviour.php:73
-#: plugins/searchengine.php:67
-#: plugins/domain-mapping.php:68
-msgid "disabled"
-msgstr "已停用"
+#~ msgid "(1 = less, 5 = more, may cause severe server load.)"
+#~ msgstr "（1 = 低，5 = 更多，可能會導致嚴重的伺服器負載）"
 
-#: plugins/awaitingmoderation.php:43
-msgid "Awaiting Moderation is now %s"
-msgstr "Awaiting Moderation 外掛模組 %s"
+#~ msgid ""
+#~ "<strong>Garbage Collection</strong><br />Last GC was <strong>%s</strong> "
+#~ "minutes ago<br />"
+#~ msgstr ""
+#~ "<strong>垃圾回收</strong><br />上次垃圾回收於 <strong>%s</strong> 分鐘前"
+#~ "<br />"
 
-#: plugins/awaitingmoderation.php:45
-#: plugins/badbehaviour.php:76
-#: plugins/domain-mapping.php:71
-msgid "Update"
-msgstr "更新"
+#~ msgid "Next GC in <strong>%s</strong> minutes"
+#~ msgstr "下次垃圾回收於 <strong>%s</strong> 分鐘後"
 
-#: plugins/badbehaviour.php:47
-msgid "Bad Behaviour not found. Please check your install."
-msgstr "找不到 Bad Behaviour. 請檢查你的安裝。"
+#~ msgid "Current server time is: %s"
+#~ msgstr "目前的伺服器時間為：%s"
 
-#: plugins/badbehaviour.php:63
-msgid "Bad Behavior"
-msgstr "Bad Behavior"
+#~ msgid ""
+#~ "(requires <a href=\"http://ocaoimh.ie/no-adverts-for-friends/"
+#~ "\">friendsadverts.php</a> too) "
+#~ msgstr ""
+#~ "（必須有 <a href=\"http://ocaoimh.ie/no-adverts-for-friends/"
+#~ "\">friendsadverts.php</a>）"
 
-#: plugins/badbehaviour.php:68
-msgid "(Only legacy caching supported, disabled compression and requires <a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> in \"%s/plugins/bad-behavior/\") "
-msgstr "（只支援傳統模式，停用壓縮，<a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> 路徑必須為 \"%s/plugins/bad-behavior/\"）"
+#~ msgid "Mobile device support."
+#~ msgstr "行動裝置支援。"
 
-#: plugins/badbehaviour.php:74
-msgid "Bad Behavior support is now %s"
-msgstr "Bad Behaviour 外掛模組 %s"
+#~ msgid "Expire time:"
+#~ msgstr "過期時間："
 
-#: plugins/searchengine.php:71
-msgid "<a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">No Adverts for Friends</a> plugin is %s."
-msgstr "<a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">No Adverts for Friends</a> 外掛模組 %s"
-
-#: plugins/searchengine.php:72
-msgid "(requires <a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">friendsadverts.php</a> too) "
-msgstr "（必須有 <a href=\"http://ocaoimh.ie/no-adverts-for-friends/\">friendsadverts.php</a>）"
-
-#: plugins/domain-mapping.php:58
-msgid "Domain Mapping"
-msgstr "Domain Mapping"
-
-#: plugins/domain-mapping.php:63
-msgid "Provides support for <a href=\"http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/\">Domain Mapping</a> plugin to map multiple domains to a blog."
-msgstr "<a href=\"http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/\">Domain Mapping</a>外掛支援，映射多個網域至一個blog。"
-
-#: plugins/domain-mapping.php:69
-msgid "Domain Mapping support is now %s"
-msgstr "Domain Mapping 外掛模組 %s"
-
-#: plugins/domain-mapping.php:83
-msgid "Domain Mapping plugin detected! Please go to the Supercache plugins page and enable the domain mapping helper plugin."
-msgstr "Domain Mapping外掛模組已被偵測到！請到Supercache外掛頁面啟用domain mapping支援外掛。"
+#~ msgid ""
+#~ "If the expiry time is more than 1800 seconds (half an hour), garbage "
+#~ "collection will be done every 10 minutes, otherwise it will happen 10 "
+#~ "seconds after the expiry time above."
+#~ msgstr ""
+#~ "如果過期時間大於1800秒（半個小時），垃圾回收會每10分鐘進行一次，否則就會在"
+#~ "設定到期時間的10秒後進行清理。"
 
 #~ msgid "Tester & Contents"
 #~ msgstr "測試及內容"
@@ -1538,13 +1822,6 @@ msgstr "Domain Mapping外掛模組已被偵測到！請到Supercache外掛頁面
 
 #~ msgid "file"
 #~ msgstr "檔案"
-
-#~ msgid ""
-#~ "Scheduled preloading of cache cancelled. If a job is currently running it "
-#~ "will not shutdown until the current 100 pages are complete."
-#~ msgstr ""
-#~ "預載快取排程已取消。如果一個排程正在執行中，它會在目前的100頁執行完畢之後"
-#~ "才結束。"
 
 #~ msgid "(support for multiple domains on multisite websites) "
 #~ msgstr "(在多站台網站上，支援複數網域名稱)"

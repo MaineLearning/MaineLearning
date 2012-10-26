@@ -2,7 +2,7 @@
 /**
  * dynwid_admin_save.php - Saving options to the database
  *
- * @version $Id: dynwid_admin_save.php 532982 2012-04-18 17:35:12Z qurl $
+ * @version $Id: dynwid_admin_save.php 593381 2012-09-01 14:07:14Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -10,6 +10,9 @@
   $widget_id = ( isset($_POST['widget_id']) && ! empty($_POST['widget_id']) ) ? esc_attr($_POST['widget_id']) : '';
   $returnurl = ( isset($_POST['returnurl']) && ! empty($_POST['returnurl']) ) ? esc_url($_POST['returnurl']) : '';
   
+  // In some cases $widget_id appears not to be global (anymore)
+	$GLOBALS['widget_id'] = $widget_id;
+
   check_admin_referer('plugin-name-action_edit_' . $widget_id);
   if (! array_key_exists($widget_id, $DW->registered_widgets) ) {
   	wp_die('WidgetID is not valid');
@@ -18,7 +21,7 @@
   /* Checking basic stuff */
 	$DW->registerOverrulers();
   foreach ( $DW->overrule_maintype as $o ) {
-  	if ( $o != 'date' ) {
+  	if ( $o != 'date' && $o != 'url' ) {
   		$act_field = $o . '_act';
   		if ( isset($_POST[$act_field]) ) {
 	  		if ( $_POST[$o] == 'no' && count($_POST[$act_field]) == 0 ) {
@@ -60,6 +63,12 @@
     }
   }
 
+  // URL
+  if ( $_POST['url'] == 'no' && empty($_POST['url_value']) ) {
+  	wp_redirect( $_SERVER['REQUEST_URI'] . '&work=none' );
+  	die();
+  }
+
   // Removing already set options
   $DW->resetOptions($widget_id);
 
@@ -81,17 +90,59 @@
     }
   }
 
+  // Day
+  DWModule::save('day', 'complex');
+  
+  // Week
+	DWModule::save('week', 'complex');
+
   // Browser
 	DWModule::save('browser', 'complex');
 
 	// Template
 	DWModule::save('tpl', 'complex');
 
+	// URL
+	if (! empty($_POST['url_value']) ) {
+		$urls = array();
+
+		$url_values = trim($_POST['url_value']);
+		$url_values = str_replace("\r", "", $url_values);
+		$url_values = explode("\n", $url_values);
+
+		foreach ( $url_values as $url ) {
+			$url = trim($url);
+			if (! empty($url) ) {
+				$urls[ ] = $url;
+			}
+		}
+
+		if ( count($urls) > 0 ) {
+			$DW->addUrls($widget_id, $_POST['url'], $urls);
+		}
+	}
+
   // Front Page
   DWModule::save('front-page', 'complex');
 
   // Single Post
 	DWModule::save('single');
+	
+	// -- Post Taxonomies
+	if ( isset($_POST['single_tax_list']) && count($_POST['single_tax_list']) > 0 ) {
+		foreach ( $_POST['single_tax_list'] as $tax ) {
+			$act_tax_field = $tax . '_act';
+			if ( isset($_POST[$act_tax_field]) && count($_POST[$act_tax_field]) > 0 ) {
+				$DW->addMultiOption($widget_id, $tax, $_POST['single'], $_POST[$act_tax_field]);
+			}
+
+			// ---- Childs >> Can't use DWModule::childSave() cause of $name != $tax, but $name == 'post'
+			$act_tax_childs_field = $tax . '_childs_act';
+			if ( isset($_POST[$act_tax_field]) && count($_POST[$act_tax_field]) > 0 && isset($_POST[$act_tax_childs_field]) && count($_POST[$act_tax_childs_field]) > 0 ) {
+				$DW->addChilds($widget_id, $tax . '-childs', $_POST['single'], $_POST[$act_tax_field], $_POST[$act_tax_childs_field]);
+			}
+		}
+	}
 
   // -- Author
   if ( isset($_POST['single_author_act']) && count($_POST['single_author_act']) > 0 ) {
@@ -103,7 +154,7 @@
 
   // -- Category
   if ( isset($_POST['single_category_act']) && count($_POST['single_category_act']) > 0 ) {
-    if ( $_POST['single'] == 'yes' && count($_POST['single_author_act']) == 0 ) {
+    if ( $_POST['single'] == 'yes' && isset($_POST['single_author_act']) && count($_POST['single_author_act']) == 0 ) {
       $DW->addSingleOption($widget_id, 'single', '1');
     }
     $DW->addMultiOption($widget_id, 'single-category', $_POST['single'], $_POST['single_category_act']);
@@ -166,7 +217,7 @@
 			if ( isset($_POST[$act_tax_field]) && count($_POST[$act_tax_field]) > 0 ) {
 				$DW->addMultiOption($widget_id, $tax, $_POST['page'], $_POST[$act_tax_field]);
 			}
-	
+
 			// ---- Childs >> Can't use DWModule::childSave() cause of $name != $tax, but $name == 'page'
 			$act_tax_childs_field = $tax . '_childs_act';
 			if ( isset($_POST[$act_tax_field]) && count($_POST[$act_tax_field]) > 0 && isset($_POST[$act_tax_childs_field]) && count($_POST[$act_tax_childs_field]) > 0 ) {
@@ -197,6 +248,13 @@
   // Custom Types
   if ( isset($_POST['post_types']) ) {
     foreach ( $_POST['post_types'] as $type ) {
+    	
+	    if ( isset($_POST['individual']) && $_POST['individual'] == '1' ) {
+		    if ( isset($_POST[$type . '_act']) && count($_POST[$type . '_act']) > 0 ) {
+		      $DW->addMultiOption($widget_id, $type, $_POST[$type], $_POST[$type . '_act']);
+		    }
+		  }
+    	
     	// Check taxonomies
     	$taxonomy = FALSE;
 

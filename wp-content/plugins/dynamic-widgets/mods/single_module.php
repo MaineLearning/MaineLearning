@@ -2,7 +2,7 @@
 /**
  * Single Post Module
  *
- * @version $Id: single_module.php 523481 2012-03-25 19:49:08Z qurl $
+ * @version $Id: single_module.php 591091 2012-08-27 19:43:17Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -15,10 +15,11 @@
 
 		public static function admin() {
 			$DW = &$GLOBALS['DW'];
+			$widget_id = $GLOBALS['widget_id'];
 
 			parent::admin();
 
-			self::$opt = $DW->getDWOpt($_GET['id'], 'single');
+			self::$opt = $DW->getDWOpt($widget_id, 'single');
 			$authors = DW_Author::getAuthors();
 
 			if ( count($authors) > DW_LIST_LIMIT ) {
@@ -26,7 +27,7 @@
 			}
 
 			$js_count = 0;
-			$opt_single_author = $DW->getDWOpt($_GET['id'], 'single-author');
+			$opt_single_author = $DW->getDWOpt($widget_id, 'single-author');
 			$js_author_array = array();
 			if ( $opt_single_author->count > 0 ) {
 				$js_count = $js_count + $opt_single_author->count - 1;
@@ -47,22 +48,23 @@
 
 			$catmap = DW_Category::getCatChilds(array(), 0, array());
 
-			$opt_single_category = $DW->getDWOpt($_GET['id'], 'single-category');
+			$opt_single_category = $DW->getDWOpt($widget_id, 'single-category');
 			if ( $opt_single_category->count > 0 ) {
 				$js_count = $js_count + $opt_single_category->count - 1;
 			}
 
+			$opt_single_post = $DW->getDWOpt($widget_id, 'single-post');
+			$opt_single_tag = $DW->getDWOpt($widget_id, 'single-tag');
+
+			self::GUIHeader(self::$option[self::$name], self::$question, self::$info);
+			self::GUIOption();
+
 			// -- Individual / Posts / Tags
-			$opt_individual = $DW->getDWOpt($_GET['id'], 'individual');
-			$opt_single_post = $DW->getDWOpt($_GET['id'], 'single-post');
-			$opt_single_tag = $DW->getDWOpt($_GET['id'], 'single-tag');
+/*			$opt_individual = $DW->getDWOpt($_GET['id'], 'individual');
 			if ( $opt_individual->count > 0 ) {
 				$individual = TRUE;
 				$count_individual = '(' . __('Posts: ', DW_L10N_DOMAIN) . $opt_single_post->count . ', ' . __('Tags: ', DW_L10N_DOMAIN) . $opt_single_tag->count . ')';
 			}
-
-			self::GUIHeader(self::$option[self::$name], self::$question, self::$info);
-			self::GUIOption();
 
 			// Individual
 			$DW->dumpOpt($opt_individual);
@@ -70,7 +72,8 @@
 			echo '<input type="checkbox" id="individual" name="individual" value="1" ' . ( (isset($individual) && $individual)  ? 'checked="checked"' : '' ) . ' onclick="chkInPosts()" />';
 			echo '<label for="individual">' . __('Make exception rule available to individual posts and tags.', DW_L10N_DOMAIN) . ' ' . ( ($opt_individual->count > 0)  ? $count_individual : '' ) . '</label>';
 			echo '<img src="' . $DW->plugin_url . 'img/info.gif" alt="info" title="' . __('Click to toggle info', DW_L10N_DOMAIN) . '" onclick="divToggle(\'individual_post_tag\')" />';
-			echo '<div>';
+*/
+/*			echo '<div>';
 			echo '<div id="individual_post_tag" class="infotext">';
 			_e('When you enable this option, you have the ability to apply the exception rule for <em>Single Posts</em> to tags and individual posts.
 								You can set the exception rule for tags in the single Edit Tag Panel (go to <a href="edit-tags.php?taxonomy=post_tag">Post Tags</a>,
@@ -78,7 +81,10 @@
 								Exception rules for tags and individual posts in any combination work independantly, but will always be counted as one exception.<br />
 		  					Please note when exception rules are set for Author and/or Category, these will be removed.
 		  				', DW_L10N_DOMAIN);
-			echo '</div></div>';
+		  echo '<br /><br />';
+		  _e('When you have other individual Custom Post Types rules set, this option will be enabled automatically', DW_L10N_DOMAIN);
+
+			echo '</div></div>'; */
 
 			// Individual posts and tags
 			foreach ( $opt_single_post->act as $singlepost ) {
@@ -102,7 +108,7 @@
   </td>
   <td style="width:10px"></td>
   <td valign="top">
-  	<?php $opt = $DW->getDWOpt($_GET['id'], 'single-category'); ?>
+  	<?php $opt = $DW->getDWOpt($widget_id, 'single-category'); ?>
   	<?php $DW->dumpOpt($opt); ?>
 		<?php DW_Category::GUIComplex(TRUE, $opt); ?>
     </div>
@@ -110,6 +116,49 @@
 </tr>
 </table>
 <?php
+	$type = 'post';
+	$tax_list = get_object_taxonomies($type, 'objects');
+
+	foreach ( $tax_list as $tax_type ) {
+		if ( $tax_type->name != 'post_tag' && $tax_type->name != 'category' ) {
+			// Prepare
+			$opt_tax = $DW->getDWOpt($widget_id, 'single-tax_' . $tax_type->name);
+			if ( $tax_type->hierarchical ) {
+				$opt_tax_childs = $DW->getDWOpt($widget_id, 'single-tax_' . $tax_type->name . '-childs');
+			} else {
+				unset($opt_tax_childs);
+			}
+
+			$tax = get_terms($tax_type->name, array('get' => 'all'));
+			if ( count($tax) > 0 ) {
+				if ( count($tax) > DW_LIST_LIMIT ) {
+					$tax_condition_select_style = DW_LIST_STYLE;
+				}
+
+				$tree = DW_CustomPost::getTaxChilds($tax_type->name, array(), 0, array());
+
+				echo '<br />';
+				$DW->dumpOpt($opt_tax);
+				if ( isset($opt_tax_childs) ) {
+					$DW->dumpOpt($opt_tax_childs);
+				}
+
+				echo '<input type="hidden" name="single_tax_list[]" value="single-tax_' . $tax_type->name . '" />';
+				echo __('Except for', DW_L10N_DOMAIN) . ' ' . $tax_type->label . ':<br />';
+				echo '<div id="single-tax_' . $tax_type->name . '-select" class="condition-select" ' . ( (isset($tax_condition_select_style)) ? $tax_condition_select_style : '' ) . '>';
+				echo '<div style="position:relative;left:-15px">';
+				if (! isset($opt_tax_childs) ) {
+					$childs = FALSE;
+				} else {
+					$childs = $opt_tax_childs->act;
+				}
+				DW_CustomPost::prtTax($tax_type->name, $tree, $opt_tax->act, $childs, 'single-tax_' . $tax_type->name);
+				echo '</div>';
+				echo '</div>';
+			}
+		}
+	}
+
 			self::GUIFooter();
 ?>
 <script type="text/javascript">
@@ -157,6 +206,10 @@
   if ( jQuery('#individual').is(':checked') ) {
     swChb(cAuthors, true);
     swChb(cCat, true);
+  }
+
+  if ( jQuery('#single-yes').is(':checked') && jQuery('#single_conf :checkbox').is(':checked')  ) {
+  	jQuery('#single').append( ' <img src="<?php echo $DW->plugin_url; ?>img/checkmark.gif" alt="Checkmark" />' );
   }
 /* ]]> */
 </script>

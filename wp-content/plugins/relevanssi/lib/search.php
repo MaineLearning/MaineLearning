@@ -810,6 +810,8 @@ function relevanssi_do_query(&$query) {
 function relevanssi_limit_filter($query) {
 	if (get_option('relevanssi_throttle', 'on') == 'on') {
 		$limit = get_option('relevanssi_throttle_limit', 500);
+		if (!is_numeric($limit)) $limit = 500; 		// Backup, if the option is set to something useless.
+		if ($limit < 0) $limit = 500;
 		return $query . " ORDER BY tf DESC LIMIT $limit";
 	}
 	else {

@@ -47,7 +47,7 @@ class EM_Tickets_Bookings extends EM_Object implements Iterator{
 			foreach ($tickets_bookings as $ticket_booking){
 				$EM_Ticket_Booking = new EM_Ticket_Booking($ticket_booking);
 				$EM_Ticket_Booking->booking = $this->booking; //save some calls
-				$this->tickets_bookings[] = $EM_Ticket_Booking;
+				$this->tickets_bookings[$ticket_booking['ticket_id']] = $EM_Ticket_Booking;
 			}
 		}
 		do_action('em_tickets_bookings',$this, $object);

@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-chat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-26 10:26+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: wahwahchris <wahwahchris@gmail.com>\n"
+"Language-Team: madeintorino <admin@madeintorino.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: bp-chat\n"
+
+#: bp-chat/bp-chat-admin.php:30
+#: bp-chat/bp-chat-admin.php:54
+msgid "Chat Admin"
+msgstr "Chat adminsistasjon"
+
+#: bp-chat/bp-chat-admin.php:57
+msgid "Settings Updated."
+msgstr "Instllinger oppdatert."
+
+#: bp-chat/bp-chat-admin.php:63
+msgid "Option One"
+msgstr "Første valg"
+
+#: bp-chat/bp-chat-admin.php:68
+msgid "Option Two"
+msgstr "Andre valg"
+
+#: bp-chat/bp-chat-admin.php:75
+msgid "Save Settings"
+msgstr "Lagre instillinger"
+
+#: bp-chat/bp-chat-ajax.php:35
+msgid "Friendship could not be canceled."
+msgstr "Vennskap kan ikke kanselleres"
+
+#: bp-chat/bp-chat-ajax.php:37
+msgid "Add Friend"
+msgstr "Legg til venn"
+
+#: bp-chat/bp-chat-ajax.php:43
+msgid "Friendship could not be requested."
+msgstr "Vennskapsforespørsel kan ikke bli gjennomført"
+
+#: bp-chat/bp-chat-ajax.php:45
+msgid "Friendship Requested"
+msgstr "Vennskapsforespørsel"
+
+#: bp-chat/bp-chat-ajax.php:49
+msgid "Request Pending"
+msgstr "Vennskapsforespørsel avventes"
+
+#: bp-chat/bp-chat-notifications.php:33
+#, php-format
+msgid "%s high-fived you!"
+msgstr "%s ga degen high-five."
+
+#: bp-chat/bp-chat-notifications.php:36
+#, php-format
+msgid ""
+"%s sent you a high-five! Why not send one back?\n"
+"\n"
+"To see %s's profile: %s\n"
+"\n"
+"To send %s a high five: %s\n"
+"\n"
+"---------------------\n"
+msgstr ""
+"%s sendte deg en high-five! Hvorfo ikke sende en tilbake?\n"
+"\n"
+"For å se %s's profil: %s\n"
+"\n"
+"For å sende %s en high five: %s\n"
+"\n"
+"---------------------\n"
+
+#: bp-chat/bp-chat-notifications.php:45
+#, php-format
+msgid "To disable these notifications please log in and go to: %s"
+msgstr "For å fjerne disse meldingnem, vennlist logg inn å gå til: %s"
+
+#: bp-chat/bp-chat-widgets.php:57
+#: bp-chat/bp-chat-widgets.php:58
+msgid "Cool Chat Widget"
+msgstr "Kul Chat Widget"
+
+#: bp-chat/bp-chat-widgets.php:142
+msgid "Some Option"
+msgstr "Noen instillinger."
+
+#: bp-chat/bp-chat.php:147
+#: bp-chat/bp-chat.php:155
+#: bp-chat/bp-chat.php:532
+#: bp-chat/bp-chat.php:540
+msgid "Chat"
+msgstr "Chat"
+
+#: bp-chat/bp-chat.php:173
+msgid "My Chat"
+msgstr "Min Chat"
+
+#: bp-chat/bp-chat.php:305
+msgid "Only "
+msgstr "Kun"
+
+#: bp-chat/bp-chat.php:305
+msgid " can look at "
+msgstr "kan se på"
+
+#: bp-chat/bp-chat.php:305
+msgid "'s chat."
+msgstr "'s chat."
+
+#: bp-chat/bp-chat.php:518
+msgid "Click and drag"
+msgstr "Klikk å dra"
+
+#: bp-chat/bp-chat.php:523
+msgid "Go to full chat"
+msgstr "Gå til full chatt"
+
+#: bp-chat/bp-chat.php:523
+msgid "Ajax Chat"
+msgstr "Ajax Chat"
+
+#: bp-chat/bp-chat.php:523
+msgid " for "
+msgstr "for"
+
+#: bp-chat/bp-chat.php:523
+msgid "Buddypress"
+msgstr "Buddypress"
+
+#: bp-chat/bp-chat.php:534
+msgid "Shoutbox"
+msgstr "Mini-chat"
+
+#: bp-chat/bp-chat.php:536
+msgid "Open"
+msgstr "Åpne"
+
+#: bp-chat/bp-chat.php:537
+msgid "Close"
+msgstr "Lukk"
+

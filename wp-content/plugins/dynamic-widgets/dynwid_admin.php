@@ -2,7 +2,7 @@
 /**
  * dynwid_admin.php - Startpage for admin
  *
- * @version $Id: dynwid_admin.php 488903 2012-01-12 18:17:27Z qurl $
+ * @version $Id: dynwid_admin.php 580343 2012-08-01 17:34:38Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 ?>
@@ -20,10 +20,10 @@
 	<input type="image" style="vertical-align: middle;" title="Donate for this plugin via PayPal" alt="Donate" name="submit" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" onclick="jQuery('#paypal').submit()">
 </div></h2>
 <div style="border-color: #E3E3E3;border-radius: 6px 6px 6px 6px;border-style: solid;border-width: 1px;padding: 5px;width:360px;float:left;position:relative;top:-7px;">
-<div style="float:left"><a href="<?php echo DW_URL; ?>/"><img src="<?php echo $DW->plugin_url; ?>/img/qurl.png" alt="" title="QURL - Quality and Reliability" /></a></div>
+<div style="float:left"><a href="<?php echo DW_URL_AUTHOR; ?>/"><img src="<?php echo $DW->plugin_url; ?>/img/qurl.png" alt="" title="QURL - Quality and Reliability" /></a></div>
 <div style="float:left;margin-left:7px;">
 <strong>Did you know?</strong><br />
-I also provide other services. See <a href="<?php echo DW_URL; ?>/services/" target="_blank">my website</a> for details.
+I also provide other services. See <a href="<?php echo DW_URL_AUTHOR; ?>/services/" target="_blank">my website</a> for details.
 </div></div>
 
 <br style="clear:both" />
@@ -60,7 +60,7 @@ I also provide other services. See <a href="<?php echo DW_URL; ?>/services/" tar
 <!-- Footer //-->
 <div class="clear"><br /><br /></div>
 <div><small>
-  <a href="<?php echo DW_URL; ?>/dynamic-widgets/" target="_blank">Dynamic Widgets</a> v<?php echo DW_VERSION; ?> (<?php echo ( DW_OLD_METHOD ) ? __('OLD', DW_L10N_DOMAIN)  : __('FILTER', DW_L10N_DOMAIN); ?>)
+  <a href="<?php echo DW_URL_AUTHOR; ?>/dynamic-widgets/" target="_blank">Dynamic Widgets</a> v<?php echo DW_VERSION; ?> (<?php echo ( DW_OLD_METHOD ) ? __('OLD', DW_L10N_DOMAIN)  : __('FILTER', DW_L10N_DOMAIN); ?>)
 </small></div>
 
 </div> <!-- /wrap //-->

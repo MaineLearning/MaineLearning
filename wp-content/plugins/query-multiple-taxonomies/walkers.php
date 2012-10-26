@@ -22,22 +22,45 @@ class QMT_Data_Container {
 	}
 
 	function count() {
-		$old_query = qmt_get_query();
+        $old_query = qmt_get_query();
 
-		if ( $this->data['is-selected'] ) {
-			return $GLOBALS['wp_query']->post_count;
-		}
+        if ( $this->data['is-selected'] ) {
+            return $GLOBALS['wp_query']->post_count;
+        }
 
-		// Considering previous choices
-		if ( isset( $old_query[ $this->taxonomy ] ) ) {
-			$query = $old_query;
-			$query[$this->taxonomy] = $query[$this->taxonomy] . "+" . $this->term->slug;
-		} else {
-			$query = array_merge( $old_query, array( $this->taxonomy => $this->term->slug ) );
-		}
+        $query = array(
+            'tax_query' => array(
+                'relation' => 'AND'
+            )
+        );
+        $count_filter = array();
+        //add info from current item
+        $count_filter[$this->taxonomy] = array($this->term->slug);
+        // Considering previous choices
+        foreach ($old_query as $old_taxonomy => $old_terms){
+            $terms = explode('+', $old_terms);
+            //put it into the count_filter array which we will use to generate our count query
+            if (!isset($count_filter[$old_taxonomy])){
+                //Assure we have this array
+                $count_filter[$old_taxonomy] = $terms;
+            }else{
+                $count_filter[$old_taxonomy] = array_merge ($count_filter[$old_taxonomy] , $terms);
+            }
+        }
+        // now use all this for the query
 
-		return QMT_Count::get( $query );
-	}
+        foreach ($count_filter as $tax => $terms){
+            $query['tax_query'][] = array (
+                'taxonomy' => $tax,
+                'field' => 'slug',
+                'terms' => $terms,
+                'include_children' => 0,
+                'operator' => 'AND'
+            );
+        }
+
+        return QMT_Count::get( $query );
+    }
 }
 
 

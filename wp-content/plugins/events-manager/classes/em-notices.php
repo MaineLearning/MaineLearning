@@ -54,32 +54,58 @@
         function add($string, $type, $static = false){
         	if( is_array($string) ){
         		$result = true;
-        		foreach($string as $string_item){
-        			if( $this->add($string_item, $type, $static) === false ){ $result = false; }
+        		foreach($string as $key => $string_item){
+        		    if( !is_array($string_item) ){
+	        			if( $this->add($string_item, $type, $static) === false ){ $result = false; }
+        			}else{
+	        			if( $this->add_item($string_item, $type, $static) === false ){ $result = false; }
+        			}
         		}
         		return $result;
         	}
             if($string != ''){
-                if( isset($this->notices[$type]) ){
-                	$notice_key = 0;
-                	foreach( $this->notices[$type] as $notice_key => $notice ){
-                		if($string == $notice['string']){
-                			return $notice_key;
-                		}
-                	}
-                    $i = $notice_key+1;
-                    $this->notices[$type][$i]['string'] = $string;
-                    if( $static ){
-                    	$this->notices[$type][$i]['static'] = true;
-                    }
-                    return $i;
-                }else{
-                    return false;
-                }
+                return $this->add_item($string, $type, $static);
             }else{
                 return false;
             }
         }
+
+        function add_item($string, $type, $static = false){
+            if( isset($this->notices[$type]) ){
+            	$notice_key = 0;
+            	foreach( $this->notices[$type] as $notice_key => $notice ){
+            		if($string == $notice['string']){
+            			return $notice_key;
+            		}elseif( is_array($string) && !empty($notice['title']) && $this->get_array_title($string) == $notice['title'] ){
+            		    return $notice_key;
+            		}
+            	}
+            	$i = $notice_key+1;
+            	if( is_array($string) ){
+            		$this->notices[$type][$i]['title'] = $this->get_array_title($string);
+					$this->notices[$type][$i]['string'] = array_shift($string);
+            	}else{
+		            $this->notices[$type][$i]['string'] = $string;
+            	}
+            	if( $static ){
+            		$this->notices[$type][$i]['static'] = true;
+            	}
+            	return $i;
+            }else{
+            	return false;
+            }
+        }
+        
+        /**
+         * Returns title of an array, assumes a assoc array with one item containing title => messages
+         * @param unknown_type $array
+         * @return unknown
+         */
+        function get_array_title($array){
+            foreach($array as $title => $msgs)
+            return $title;
+        }
+        
         function remove($key, $type){
             if( isset($this->notices[$type]) ){
                 unset($this->notices[$type][$key]);
@@ -88,25 +114,32 @@
                 return false;
             }
         }
+        
         function remove_all(){
         	$this->notices = array('errors'=>array(), 'infos'=>array(), 'alerts'=>array(), 'confirms'=>array());
         }
+        
         function get($type){
             if( isset($this->notices[$type]) ){
         		$string = '';
-                foreach ($this->notices[$type] as $key => $error){
-                    $class = substr($type, 0, (strlen($type)-1));
-                    $string .= "<p>{$error['string']}</p>";
-                    /* Disabled for now, pending review due to issues in the_content firing x times e.g. in SFC
-                    if( empty($error['static']) || $error['static'] !== true){
-                        $this->remove($key, $type);
+                foreach ($this->notices[$type] as $message){
+                    if( !is_array($message['string']) ){
+	                    $string .= "<p>{$message['string']}</p>";
+                    }else{
+                        $string .= "<p><strong>".$message['title']."</strong><ul>";
+                        foreach($message['string'] as $msg){
+                            if( trim($msg) != '' ){
+                            	$string .= "<li>$msg</li>";
+                            }
+                        } 
+	                    $string .= "</ul></p>";
                     }
-                    */
                 }
                 return $string;
             }
             return false;
         }
+        
         function count($type){
        		if( isset($this->notices[$type]) ){
         		return count($this->notices[$type]);

@@ -1007,7 +1007,14 @@ function relevanssi_options_form() {
 	<input type='text' name='relevanssi_omit_from_logs' size='20' value='<?php echo $omit_from_logs ?>' /></label>
 	<small><?php _e("Comma-separated list of numeric user IDs or user login names that will not be logged.", "relevanssi"); ?></small>
 
-	<p><?php _e("If you enable logs, you can see what your users are searching for. Logs are also needed to use the 'Did you mean?' feature. You can prevent your own searches from getting in the logs with the omit feature.", "relevanssi"); ?></p>
+<?php
+	if (RELEVANSSI_PREMIUM) {
+		echo "<p>" . __("If you enable logs, you can see what your users are searching for. You can prevent your own searches from getting in the logs with the omit feature.", "relevanssi") . "</p>";
+	}
+	else {
+		echo "<p>" . __("If you enable logs, you can see what your users are searching for. Logs are also needed to use the 'Did you mean?' feature. You can prevent your own searches from getting in the logs with the omit feature.", "relevanssi") . "</p>";
+	}
+?>
 
 	<?php if (function_exists('relevanssi_form_hide_branding')) relevanssi_form_hide_branding($hide_branding); ?>
 
@@ -1027,7 +1034,14 @@ function relevanssi_options_form() {
 
 	<label for='relevanssi_excat'><?php _e('Exclude these posts/pages from search:', 'relevanssi'); ?>
 	<input type='text' name='relevanssi_expst' size='20' value='<?php echo $expst ?>' /></label><br />
-	<small><?php _e("Enter a comma-separated list of post/page IDs that are excluded from search results. This only works here, you can't use the input field option (WordPress doesn't pass custom parameters there). You can also use a checkbox on post/page edit pages to remove posts from index.", 'relevanssi'); ?></small>
+<?php
+	if (RELEVANSSI_PREMIUM) {
+		echo "<small>" . __("Enter a comma-separated list of post/page IDs that are excluded from search results. This only works here, you can't use the input field option (WordPress doesn't pass custom parameters there). You can also use a checkbox on post/page edit pages to remove posts from index.", 'relevanssi') . "</small>";
+	}
+	else {
+		echo "<small>" . __("Enter a comma-separated list of post/page IDs that are excluded from search results. This only works here, you can't use the input field option (WordPress doesn't pass custom parameters there).", 'relevanssi') . "</small>";
+	}
+?>
 
 	<br /><br />
 

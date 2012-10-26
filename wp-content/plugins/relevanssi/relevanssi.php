@@ -3,7 +3,7 @@
 Plugin Name: Relevanssi
 Plugin URI: http://www.relevanssi.com/
 Description: This plugin replaces WordPress search with a relevance-sorting search.
-Version: 3.0.4
+Version: 3.0.5
 Author: Mikko Saari
 Author URI: http://www.mikkosaari.fi/
 */
@@ -104,6 +104,9 @@ function relevanssi_didyoumean($query, $pre, $post, $n = 5) {
 
 function relevanssi_check_old_data() {
 	if (is_admin()) {
+		$limit = get_option('relevanssi_throttle_limit');
+		if (empty($limit)) update_option('relevanssi_throttle_limit', 500);
+
 		global $wpdb;
 
 		// Version 3.0 removed relevanssi_tag_boost

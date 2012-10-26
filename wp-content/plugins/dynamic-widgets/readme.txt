@@ -3,14 +3,14 @@ Contributors: Qurl
 Donate link: http://www.qurl.nl/dynamic-widgets/donate/
 Tags: widget, widgets, dynamic, sidebar, custom, rules, logic, admin, condition, conditional tags, hide, show, wpml, qtranslate, wpec, buddypress, pods, bbpress
 Requires at least: 3.0.0
-Tested up to: 3.3.1
-Stable tag: 1.5.2
+Tested up to: 3.4.2
+Stable tag: 1.5.3
 
 Dynamic Widgets gives you full control on which pages your widgets will appear. It lets you dynamicly show or hide widgets on WordPress pages.
 
 == Description ==
 
-Dynamic Widgets gives you full control on which pages your widgets will appear. It lets you dynamically show or hide widgets on WordPress pages by setting conditional logic rules with just a few mouse clicks. No knowledge of PHP required. No fiddling around with conditional tags. You can set conditional rules by Role, Dates, Browser, Language (WPML or QTranslate), for the Homepage, Single Posts, Attachments, Pages, Authors, Categories, Tags, Archives, Error Page, Search Page, Custom Post Types, Custom Post Type Archives, Custom Taxonomies in Custom Post Types, Custom Taxonomies Archives, WPEC/WPSC Categories, BuddyPress Components, BuddyPress Groups, Pods pages and bbPress.
+Dynamic Widgets gives you full control on which pages your widgets will appear. It lets you dynamically show or hide widgets on WordPress pages by setting conditional logic rules with just a few mouse clicks. No knowledge of PHP required. No fiddling around with conditional tags. You can set conditional rules by Role, Dates, Browser, Theme Template, Language (WPML or QTranslate), URL, for the Homepage, Single Posts, Attachments, Pages, Authors, Categories, Tags, Archives, Error Page, Search Page, Custom Post Types, Custom Post Type Archives, Custom Taxonomies in Custom Post Types, Custom Taxonomies Archives, WPEC/WPSC Categories, BuddyPress Components, BuddyPress Groups, Pods pages and bbPress.
 
 For the latest news about Dynamic Widgets visit [my website](http://www.qurl.nl/).
 
@@ -23,9 +23,12 @@ It is very hard to continue development and support for this plugin without cont
 * Default widget display setting is supported for:
   - User roles
   - Dates
+  - Day of week
+  - Weeknumbers
   - Browsers
   - Theme Templates
   - Languages (WPML or QTranslate)
+  - URL
   - Front page
   - Single post pages
   - Attachment pages
@@ -48,11 +51,14 @@ It is very hard to continue development and support for this plugin without cont
 * Exception rules can be created for:
   - User roles on role, including not logged in (anonymous) users
   - Dates on from, to or range
+  - Day of week on day
+  - Weeknumer on number
   - Browsers on browser name
   - Theme Templates on template name
   - Languages (WPML or QTranslate) on language
+  - URL on URL
   - Front page on first page
-  - Single post pages on Author, Categories (including inheritance from hierarchical parents), Tags and/or Individual posts
+  - Single post pages on Author, Categories (including inheritance from hierarchical parents), Tags, Custom Taxonomies and/or Individual posts
   - Pages on Page Title and Custom Taxonomies, including inheritance from hierarchical parents
   - Author pages on Author
   - Category pages on Category name, including inheritance from hierarchical parents
@@ -75,6 +81,8 @@ It is very hard to continue development and support for this plugin without cont
   - WP Shopping Cart / WP E-Commerce (WPSC / WPEC)
 
 * Language files provided:
+	- Brazil Portuguese (pt_BR) by [Renato Tavares](http://www.renatotavares.com)
+	- Chech (cs_CZ) by [Pavel Bilek](http://chcistranky.eu/zdarma/)
 	- Chinese (Simplified) (zh_CN) by Hanolex
 	- French (fr_FR) by Alexis Nomine
 	- German (de_DE) by Daniel Bihler
@@ -166,6 +174,18 @@ Please check the [Issue Tracker](http://www.qurl.nl/dynamic-widgets/issue-tracke
 * Remove the directory 'dynamic-widgets' underneath to the `/wp-content/plugins/` directory.
 
 == Changelog ==
+
+= Version 1.5.3 =
+* Added URL support.
+* Added Day of the week support.
+* Added Weeknumber support.
+* Added Custom Taxonomies support for Posts.
+* Added Chech language files (locale: cs_CZ) - Dekuji Pavel!
+* Added Brazil Portuguese language files (locale: pt_BR) - Obrigado Renato!
+* Bugfix for Notice: Undefined property: stdClass::$post_name.
+* Bugfix for Missing options (Archive, Error, Search); Stopped using the accordion.
+* Bugfix for Notice: Undefined index: single_author_act in dynwid_admin_save.php on line 138.
+* Bugfix for not showing the green checkmark when an option is set for single posts.
 
 = Version 1.5.2 =
 
@@ -370,8 +390,9 @@ This version has 3 bugs fixed.
 
 == Upgrade Notice ==
 
-= 1.5.2 =
-It's highly recommended to update asap. A possible security vulnerability has been found in all previous versions.
+= 1.5.3 =
+
+This version has 6 features added and 4 bugs fixed.
 
 == Screenshots ==
 

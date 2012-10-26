@@ -12,6 +12,7 @@ class EM_Ticket extends EM_Object{
 	var $ticket_max;
 	var $ticket_spaces = 10;
 	var $ticket_members = false;
+	var $ticket_required = false;
 	var $fields = array(
 		'ticket_id' => array('name'=>'id','type'=>'%d'),
 		'event_id' => array('name'=>'event_id','type'=>'%d'),
@@ -23,7 +24,8 @@ class EM_Ticket extends EM_Object{
 		'ticket_min' => array('name'=>'min','type'=>'%s','null'=>1),
 		'ticket_max' => array('name'=>'max','type'=>'%s','null'=>1),
 		'ticket_spaces' => array('name'=>'spaces','type'=>'%s','null'=>1),
-		'ticket_members' => array('name'=>'members','type'=>'%d','null'=>1)
+		'ticket_members' => array('name'=>'members','type'=>'%d','null'=>1),
+		'ticket_required' => array('name'=>'required','type'=>'%d','null'=>1)
 	);
 	//Other Vars
 	/**
@@ -129,23 +131,27 @@ class EM_Ticket extends EM_Object{
 	 * Get posted data and save it into the object (not db)
 	 * @return boolean
 	 */
-	function get_post(){
+	function get_post($post = array()){
 		//We are getting the values via POST or GET
 		global $allowedposttags;
-		do_action('em_location_get_post_pre', $this);
-		$this->ticket_id = ( !empty($_POST['ticket_id']) ) ? $_POST['ticket_id']:'';
-		$this->event_id = ( !empty($_POST['event_id']) ) ? $_POST['event_id']:'';
-		$this->ticket_name = ( !empty($_POST['ticket_name']) ) ? wp_kses_data(stripslashes($_POST['ticket_name'])):'';
-		$this->ticket_description = ( !empty($_POST['ticket_description']) ) ? wp_kses(stripslashes($_POST['ticket_description']), $allowedposttags):'';
-		$this->ticket_price = ( !empty($_POST['ticket_price']) ) ? $_POST['ticket_price']:'';
-		$this->ticket_start = ( !empty($_POST['ticket_start']) ) ? $_POST['ticket_start']:'';
-		$this->ticket_end = ( !empty($_POST['ticket_end']) ) ? $_POST['ticket_end']:'';
-		$this->start_timestamp = ( !empty($_POST['ticket_start']) ) ? strtotime($_POST['ticket_start']):'';
-		$this->end_timestamp = ( !empty($_POST['ticket_end']) ) ? strtotime($_POST['ticket_end']):'';
-		$this->ticket_min = ( !empty($_POST['ticket_min']) ) ? $_POST['ticket_min']:'';
-		$this->ticket_max = ( !empty($_POST['ticket_max']) ) ? $_POST['ticket_max']:'';
-		$this->ticket_spaces = ( !empty($_POST['ticket_spaces']) ) ? $_POST['ticket_spaces']:'';
-		$this->ticket_members = ( !empty($_POST['ticket_members']) ) ? 1:0;
+		if( empty($post) ){
+		    $post = $_REQUEST;
+		}
+		do_action('em_location_get_post_pre', $this, $post);
+		$this->ticket_id = ( !empty($post['ticket_id']) ) ? $post['ticket_id']:'';
+		$this->event_id = ( !empty($post['event_id']) ) ? $post['event_id']:'';
+		$this->ticket_name = ( !empty($post['ticket_name']) ) ? wp_kses_data(stripslashes($post['ticket_name'])):'';
+		$this->ticket_description = ( !empty($post['ticket_description']) ) ? wp_kses(stripslashes($post['ticket_description']), $allowedposttags):'';
+		$this->ticket_price = ( !empty($post['ticket_price']) ) ? $post['ticket_price']:'';
+		$this->ticket_start = ( !empty($post['ticket_start']) ) ? $post['ticket_start']:'';
+		$this->ticket_end = ( !empty($post['ticket_end']) ) ? $post['ticket_end']:'';
+		$this->start_timestamp = ( !empty($post['ticket_start']) ) ? strtotime($post['ticket_start']):'';
+		$this->end_timestamp = ( !empty($post['ticket_end']) ) ? strtotime($post['ticket_end']):'';
+		$this->ticket_min = ( !empty($post['ticket_min']) ) ? $post['ticket_min']:'';
+		$this->ticket_max = ( !empty($post['ticket_max']) ) ? $post['ticket_max']:'';
+		$this->ticket_spaces = ( !empty($post['ticket_spaces']) ) ? $post['ticket_spaces']:'';
+		$this->ticket_members = ( !empty($post['ticket_members']) ) ? 1:0;
+		$this->ticket_required = ( !empty($post['ticket_required']) ) ? 1:0;
 		$this->compat_keys();
 		do_action('em_ticket_get_post', $this);
 	}	
@@ -171,7 +177,7 @@ class EM_Ticket extends EM_Object{
 			// TODO Create friendly equivelant names for missing fields notice in validation 
 			$this->errors[] = __ ( 'Missing fields: ' ) . implode ( ", ", $missing_fields ) . ". ";
 		}
-		return apply_filters('em_event_validate', count($this->errors) == 0, $this );
+		return apply_filters('em_ticket_validate', count($this->errors) == 0, $this );
 	}
 	
 	function is_available(){
@@ -233,6 +239,7 @@ class EM_Ticket extends EM_Object{
 	}
 	
 	function get_pending_spaces(){
+	    $spaces = 0;
 		foreach( $this->get_bookings()->get_pending_bookings()->bookings as $EM_Booking ){ //get_bookings() is used twice so we get the confirmed (or all if confirmation disabled) bookings of this ticket's total bookings.
 			//foreach booking, get this ticket booking info if found
 			foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking){
@@ -308,7 +315,23 @@ class EM_Ticket extends EM_Object{
 			}
 		}
 		return ( $result !== false );
-	}	
+	}
+
+	/**
+	 * Based on ticket minimums, whether required and if the event has more than one ticket this function will return the absolute minimum required spaces for a booking 
+	 */
+	function get_spaces_minimum(){
+	    $ticket_count = count($this->get_event()->get_bookings()->get_tickets()->tickets);
+	    $min_spaces = 0;
+	    if( $ticket_count > 1 ){
+	        if( $this->ticket_required ){
+	            $min_spaces = ($this->ticket_min > 0) ? $this->ticket_min:1;
+	        }
+	    }else{
+	    	$min_spaces = $this->ticket_min > 0 ? $this->ticket_min : 1;
+	    }
+	    return $min_spaces;
+	}
 
 	/**
 	 * Get the html options for quantities to go within a <select> container
@@ -317,6 +340,8 @@ class EM_Ticket extends EM_Object{
 	function get_spaces_options($zero_value = true, $default_value = 0){
 		$available_spaces = $this->get_available_spaces();
 		if( $this->is_available() ) {
+		    $min_spaces = $this->get_spaces_minimum();
+		    $default_value = $min_spaces > $default_value ? $min_spaces:$default_value;
 			ob_start();
 			?>
 			<select name="em_tickets[<?php echo $this->ticket_id ?>][spaces]" class="em-ticket-select" id="em-ticket-spaces-<?php echo $this->ticket_id ?>">
@@ -324,7 +349,7 @@ class EM_Ticket extends EM_Object{
 					$min = ($this->ticket_min > 0) ? $this->ticket_min:1;
 					$max = ($this->ticket_max > 0) ? $this->ticket_max:get_option('dbem_bookings_form_max');
 				?>
-				<?php if($zero_value && $this->ticket_min == 0) : ?><option>0</option><?php endif; ?>
+				<?php if($zero_value && $min_spaces == 0) : ?><option>0</option><?php endif; ?>
 				<?php for( $i=$min; $i<=$available_spaces && $i<=$max; $i++ ): ?>
 					<option <?php if($i == $default_value){ echo 'selected="selected"'; $shown_default = true; } ?>><?php echo $i ?></option>
 				<?php endfor; ?>

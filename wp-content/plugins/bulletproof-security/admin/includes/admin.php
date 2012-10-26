@@ -15,7 +15,7 @@ function bulletproof_security_admin_init() {
 	register_setting('bulletproof_security_options_mynotes', 'bulletproof_security_options_mynotes', 'bulletproof_security_options_validate_mynotes');
 		
 	// Register BPS js
-	wp_register_script( 'bps-js', WP_PLUGIN_URL . '/bulletproof-security/admin/js/bulletproof-security-admin.js');
+	wp_register_script( 'bps-js', plugins_url('/bulletproof-security/admin/js/bulletproof-security-admin.js'));
 				
 	// Register BPS stylesheet
 	wp_register_style('bps-css', plugins_url('/bulletproof-security/admin/css/bulletproof-security-admin.css'));
@@ -62,7 +62,7 @@ function bulletproof_security_install() {
 	global $bulletproof_security;
 	$previous_install = get_option('bulletproof_security_options');
 	if ( $previous_install ) {
-	if ( version_compare($previous_install['version'], '.47.4', '<') )
+	if ( version_compare($previous_install['version'], '.47.5', '<') )
 	remove_role('denied');
 	}
 }

@@ -19,7 +19,7 @@ add_action('transition_post_status', 'relevanssi_update_child_posts',99,3);
 add_action('init', 'relevanssi_init');
 add_action('init', 'relevanssi_check_old_data', 99);
 add_filter('relevanssi_hits_filter', 'relevanssi_wpml_filter');
-add_filter('posts_request', 'relevanssi_prevent_default_request', 10, 2 );
+add_filter('posts_request', 'relevanssi_prevent_default_request', 9, 2 );
 add_filter('relevanssi_remove_punctuation', 'relevanssi_remove_punct');
 add_filter('relevanssi_post_ok', 'relevanssi_default_post_ok', 10, 2);
 add_filter('relevanssi_query_filter', 'relevanssi_limit_filter');
