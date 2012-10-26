@@ -1,0 +1,50 @@
+#wpbook_admin_header {overflow:hidden;}
+.wpbook_logo {float:right;padding-left:100px;}
+
+h3.div_wpbook_toggle{ cursor:pointer; border-bottom:1px solid #ccc;margin-top:3em; }
+h3 span.div_wpbook_toggle_icon {display:inline-block; text-indent:-9999px; width:22px; height:22px;}
+h3 span.folded{ background: transparent url(images/expand.png) center center no-repeat; }
+h3 span.expanded{ background: transparent url(images/collapse.png) center center no-repeat; }
+
+#help { padding-top:20px;}
+
+.sub_options{
+padding-left:20px;
+}
+
+.sub_child_options {
+padding-left:30px;
+}
+
+.sub_grandchild_options {
+padding-left:50px;
+}
+#wpbook_headerfooter_template{
+background-color:#F9F9F9;
+font-size:12px;
+font-family:"Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+border: 2px solid #DFDFDF;
+padding:5px;
+
+}
+/*
+.tooltip{ 
+   position: absolute; 
+   top: 0; 
+   left: 0; 
+   z-index: 3; 
+   display: none; 
+   
+
+}
+.tooltip_content {
+   background-color: #F9F9F9;
+   padding:10px;
+   font-size:10px;
+   font-family:"Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+   }
+  
+
+*/
+
+
