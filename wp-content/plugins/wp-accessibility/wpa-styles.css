@@ -1,0 +1,4 @@
+/* Admin styles for WP Accessibility */
+#wpa_settings_page .postbox { margin: 0 10px 10px 0;	}
+#wpa_settings_page .meta-box-sortables { min-height: 0; }
+#wpa_settings_page legend { font-weight: 700; }
