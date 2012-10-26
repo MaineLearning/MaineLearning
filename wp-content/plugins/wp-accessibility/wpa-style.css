@@ -1,0 +1,2 @@
+.wpa-hide#skiplinks a, .wpa-hide#skiplinks a:hover, .wpa-hide#skiplinks a:visited { position: absolute; left: -999em; }
+.wpa-hide#skiplinks a:active, .wpa-hide#skiplinks a:focus { position: absolute; }

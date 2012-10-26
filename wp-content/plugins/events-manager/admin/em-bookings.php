@@ -282,10 +282,11 @@ function em_bookings_single(){
 								 	<input type='hidden' name='booking_id' value='<?php echo $EM_Booking->booking_id; ?>'/>
 								 	<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
 								 	<input type='hidden' name='_wpnonce' value='<?php echo wp_create_nonce('booking_set_status_'.$EM_Booking->booking_id); ?>'/>
+									<br /><em><?php _e('<strong>Notes:</strong> Ticket availability not taken into account when approving new bookings (i.e. you can overbook).','dbem'); ?></em>
 								</form>
 							</div>
-							<form action="" method="post">
-								<table class="em-tickets-bookings-table" cellspacing="0" cellpadding="0">
+							<form action="" method="post" class="em-booking-form">
+								<table class="em-tickets-bookings-table" cellpadding="0" cellspacing="0">
 									<thead>
 									<tr>
 										<th><?php _e('Ticket Type','dbem'); ?></th>
@@ -296,14 +297,17 @@ function em_bookings_single(){
 									<tbody>
 										<?php foreach($EM_Booking->get_tickets_bookings()->tickets_bookings as $EM_Ticket_Booking): ?>
 										<tr>
-											<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket_Booking->get_ticket()->ticket_id)); ?>"><?php echo $EM_Ticket_Booking->get_ticket()->ticket_name ?></a></td>
+											<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket_Booking->ticket_id)); ?>"><?php echo $EM_Ticket_Booking->get_ticket()->ticket_name ?></a></td>
 											<td>
 												<span class="em-booking-single-info"><?php echo $EM_Ticket_Booking->get_spaces(); ?></span>
-												<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket_Booking->get_ticket()->ticket_id; ?>][spaces]" class="em-ticket-select" value="<?php echo $EM_Ticket_Booking->get_spaces(); ?>" /></div>
+												<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket_Booking->ticket_id; ?>][spaces]" class="em-ticket-select" id="em-ticket-spaces-<?php echo $EM_Ticket_Booking->ticket_id; ?>" value="<?php echo $EM_Ticket_Booking->get_spaces(); ?>" /></div>
 											</td>
 											<td><?php echo $EM_Ticket_Booking->get_price(true,true); ?></td>
 										</tr>
-										<?php $shown_tickets[] = $EM_Ticket_Booking->ticket_id; ?>
+										<?php 
+											$shown_tickets[] = $EM_Ticket_Booking->ticket_id;
+											do_action('em_bookings_admin_ticket_row', $EM_Ticket_Booking->get_ticket(), $EM_Booking); 
+										?>
 										<?php endforeach; ?>
 										<?php if( count($shown_tickets) < count($EM_Event->get_bookings()->get_tickets()->tickets)): ?><tr>
 											<?php foreach($EM_Event->get_bookings()->get_tickets()->tickets as $EM_Ticket): ?>
@@ -312,10 +316,11 @@ function em_bookings_single(){
 													<td class="ticket-type"><a class="row-title" href="<?php echo em_add_get_params($EM_Event->get_bookings_url(), array('ticket_id'=>$EM_Ticket->ticket_id)); ?>"><?php echo $EM_Ticket->ticket_name ?></a></td>
 													<td>
 														<span class="em-booking-single-info">0</span>
-														<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket->ticket_id; ?>][spaces]" class="em-ticket-select" value="0" /></div>
+														<div class="em-booking-single-edit"><input name="em_tickets[<?php echo $EM_Ticket->ticket_id; ?>][spaces]" class="em-ticket-select" id="em-ticket-spaces-<?php echo $EM_Ticket_Booking->ticket_id; ?>" value="0" /></div>
 													</td>
 													<td><?php echo em_get_currency_symbol() ?>0.00</td>
 												</tr>
+												<?php do_action('em_bookings_admin_ticket_row', $EM_Ticket, $EM_Booking); ?>
 												<?php endif; ?>
 											<?php endforeach; ?>
 										<?php endif; ?>

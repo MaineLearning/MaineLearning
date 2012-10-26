@@ -132,7 +132,7 @@
 		 * @param string $post_title Extra title info
 		 * @param object $opt DWOpt object
 		 */
-		public static function GUIHeader($title, $question, $info, $post_title = NULL, $opt = NULL) {
+		public static function GUIHeader($title, $question, $info, $post_title = NULL, $opt = NULL, $name = NULL) {
 			$DW = &$GLOBALS['DW'];
 
 			// $classname = self::getClassName();
@@ -151,14 +151,18 @@
 				self::$opt = $opt;
 			}
 
-			echo '<!-- ' . $title . '//-->' . "\n";
-			echo '<h4><b>' . __($title, DW_L10N_DOMAIN) . '</b>' . ( (self::$opt->count > 0) ? ' <img src="' . $DW->plugin_url . 'img/checkmark.gif" alt="Checkmark" />' : '' ) . ' ' . ( ($DW->wpml && $wpml) ? DW_WPML::$icon : '' ) . '</h4>' . "\n";
-			echo '<div class="dynwid_conf">' . "\n";
+			if (! is_null($name) ) {
+				self::$name = $name;
+			}
+
+			echo '<!-- ' . $title . ' //-->' . "\n";
+			echo '<h4 id="' . self::$name . '" title=" Click to toggle " class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><b>' . __($title, DW_L10N_DOMAIN) . '</b>' . ( (self::$opt->count > 0) ? ' <img src="' . $DW->plugin_url . 'img/checkmark.gif" alt="Checkmark" />' : '' ) . ' ' . ( ($DW->wpml && $wpml) ? DW_WPML::$icon : '' ) . '</h4>' . "\n";
+			echo '<div id="' . self::$name . '_conf" class="dynwid_conf ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">' . "\n";
 			_e($question, DW_L10N_DOMAIN);
 
 			if ( $info !== FALSE ) {
-				echo ' <img src="' . $DW->plugin_url . 'img/info.gif" alt="info" title="' . __('Click to toggle info', DW_L10N_DOMAIN) . '" onclick="divToggle(\'' . self::$name . '\')" /><br />' . "\n";
-				echo '<div><div id="' . self::$name . '" class="infotext">' . "\n";
+				echo ' <img src="' . $DW->plugin_url . 'img/info.gif" alt="info" title="' . __('Click to toggle info', DW_L10N_DOMAIN) . '" onclick="divToggle(\'' . self::$name . '_info\')" /><br />' . "\n";
+				echo '<div><div id="' . self::$name . '_info" class="infotext">' . "\n";
 				_e($info, DW_L10N_DOMAIN);
 				echo '</div></div>' . "\n";
 			} else {
@@ -201,12 +205,13 @@
 		 */
 		public static function mkGUI($type, $title, $question, $info, $except = FALSE, $list = FALSE, $name = NULL) {
 			$DW = &$GLOBALS['DW'];
+			$widget_id = $GLOBALS['widget_id'];
 
 			if (! is_null($name) ) {
 				self::$name = $name;
 			}
 
-			self::$opt = $DW->getDWOpt($_GET['id'], self::$name);
+			self::$opt = $DW->getDWOpt($widget_id, self::$name);
 
 			self::GUIHeader($title, $question, $info);
 			self::GUIOption();
@@ -223,7 +228,7 @@
 		 */
 		public static function registerOption($dwoption) {
 			$DW = &$GLOBALS['DW'];
-			
+
 			// For some reason when a widget is just added to the sidebar $dwoption is not an array
 			if ( is_array($dwoption) ) {
 				foreach ( $dwoption as $key => $value ) {
@@ -255,35 +260,37 @@
 		 */
 		public static function save($name, $type = 'simple') {
 			$DW = &$GLOBALS['DW'];
+			$widget_id = $GLOBALS['widget_id'];
 
 			switch ( $type ) {
 				case 'complex':
 					$act = $name . '_act';
 
 					if ( isset($_POST[$act]) && count($_POST[$act]) > 0 ) {
-						$DW->addMultiOption($_POST['widget_id'], $name, $_POST[$name], $_POST[$act]);
+						$DW->addMultiOption($widget_id, $name, $_POST[$name], $_POST[$act]);
 					} else if ( isset($_POST[$name]) && $_POST[$name] == 'no' ) {
-						$DW->addSingleOption($_POST['widget_id'], $name);
+						$DW->addSingleOption($widget_id, $name);
 					}
 					break;
 
 					// simple
 				default:
 					if ( isset($_POST[$name]) && $_POST[$name] == 'no' ) {
-						$DW->addSingleOption($_POST['widget_id'], $name);
+						$DW->addSingleOption($widget_id, $name);
 					}
 				} // switch
 		}
 
 		public static function childSave($name) {
 			$DW = &$GLOBALS['DW'];
+			$widget_id = $GLOBALS['widget_id'];
 
 			$act = $name . '_act';
 			$child_act = $name . '_childs_act';
 			$dwtype = $name . '-childs';
 
 			if ( isset($_POST[$act]) && count($_POST[$act]) > 0 && isset($_POST[$child_act]) && count($_POST[$child_act]) > 0 ) {
-				$DW->addChilds($_POST['widget_id'], $dwtype, $_POST[$name], $_POST[$act], $_POST[$child_act]);
+				$DW->addChilds($widget_id, $dwtype, $_POST[$name], $_POST[$act], $_POST[$child_act]);
 			}
 		}
 

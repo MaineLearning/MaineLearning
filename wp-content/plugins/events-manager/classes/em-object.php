@@ -345,7 +345,7 @@ class EM_Object {
 				}else{
 					$conditions['category'] = " ".EM_EVENTS_TABLE.".post_id $not IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id={$term->term_taxonomy_id} ) ";
 				}
-			}else{
+			}elseif( $category > 0 ){
 			    $conditions = array('category'=>'2=1'); //force a false
 			}
 		}elseif( self::array_is_numeric($category) ){
@@ -995,9 +995,13 @@ class EM_Object {
 	function add_error($errors){
 		if(!is_array($errors)){ $errors = array($errors); } //make errors var an array if it isn't already
 		if(!is_array($this->errors)){ $this->errors = array(); } //create empty array if this isn't an array
-		foreach($errors as $error){			
+		foreach($errors as $key => $error){			
 			if( !in_array($error, $this->errors) ){
-				$this->errors[] = $error;
+			    if( !is_array($error) ){
+					$this->errors[] = $error;
+			    }else{
+			        $this->errors[] = array($key => $error);
+			    }
 			}
 		}
 	}

@@ -151,7 +151,6 @@ class GFEntryDetail{
                     mysack.setVar( "rg_delete_file", "<?php echo wp_create_nonce("rg_delete_file") ?>" );
                     mysack.setVar( "lead_id", leadId );
                     mysack.setVar( "field_id", fieldId );
-                    mysack.encVar( "cookie", document.cookie, false );
                     mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while deleting field.", "gravityforms")) ?>' )};
                     mysack.runAJAX();
 
@@ -276,6 +275,7 @@ class GFEntryDetail{
 
             <div id="poststuff" class="metabox-holder has-right-sidebar">
                 <div id="side-info-column" class="inner-sidebar">
+					<?php do_action("gform_entry_detail_sidebar_before", $form, $lead); ?>
                     <div id="submitdiv" class="stuffbox">
                         <h3>
                             <span class="hndle"><?php _e("Info", "gravityforms"); ?></span>
@@ -404,6 +404,7 @@ class GFEntryDetail{
                             </div>
                         </div>
                     </div>
+                    <?php do_action("gform_entry_detail_sidebar_middle", $form, $lead); ?>
 
                     <?php if(GFCommon::current_user_can_any("gravityforms_edit_entry_notes") && (GFCommon::has_admin_notification($form) || GFCommon::has_user_notification($form))) { // TODO: do we need to set a permission for this? ?>
                         <!-- start notifications -->
@@ -451,12 +452,15 @@ class GFEntryDetail{
                        <?php } ?>
                    </div>
                    <!-- end print button -->
-
+				   <?php do_action("gform_entry_detail_sidebar_after", $form, $lead); ?>
                 </div>
 
                 <div id="post-body" class="has-sidebar">
                     <div id="post-body-content" class="has-sidebar-content">
                         <?php
+
+                        do_action("gform_entry_detail_content_before", $form, $lead);
+
                         if($mode == "view")
                             self::lead_detail_grid($form, $lead, true);
                         else
@@ -492,7 +496,9 @@ class GFEntryDetail{
                                     </div>
                                 </form>
                             </div>
-                        <?php } ?>
+                        <?php }
+                        do_action("gform_entry_detail_content_after", $form, $lead);
+                        ?>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS     
+#   BULLETPROOF .47.5 >>>>>>> SECURE .HTACCESS     
 
-# If you edit the  BULLETPROOF .47.4 >>>>>>> SECURE .HTACCESS text above
+# If you edit the  BULLETPROOF .47.5 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -66,6 +66,13 @@ RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 
+# FORBID EMPTY REFFERER SPAMBOTS
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} (wp-comments-post\.php)
+#RewriteCond %{HTTP_REFERER} !^.*demo5.local.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^$
+RewriteRule .* - [F]
+
 # REQUEST METHODS FILTERED
 # This filter is for blocking junk bots and spam bots from making a HEAD request, but may also block some
 # HEAD request from bots that you want to allow in certains cases. This is not a security filter and is just
@@ -111,11 +118,16 @@ RewriteRule . - [S=4]
 RewriteCond %{QUERY_STRING} action=rp&key=(.*) [NC]
 RewriteRule . - [S=3]
 
-# TimThumb Forbid RFI By Host Name But Allow Internal Requests
+# TIMTHUMB FORBID RFI and MISC FILE SKIP/BYPASS RULE
+# Only Allow Internal File Requests From Your Website
+# To Allow Additional Websites Access to a File Use [OR] as shown below.
+# RewriteCond %{HTTP_REFERER} ^.*YourWebsite.com.* [OR]
+# RewriteCond %{HTTP_REFERER} ^.*AnotherWebsite.com.*
 RewriteCond %{QUERY_STRING} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC,OR]
 RewriteCond %{THE_REQUEST} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC]
 RewriteRule .* index.php [F,L]
 RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+#RewriteCond %{HTTP_REFERER} ^.*demo5.local.*
 RewriteRule . - [S=1]
 
 # BPSQSE BPS QUERY STRING EXPLOITS
@@ -196,6 +208,29 @@ Deny from all
 #RewriteCond %{HTTP_REFERER} !^https?://(www\.)?add-your-domain-here\.com [NC]
 #RewriteCond %{HTTP_REFERER} !^$
 #RewriteRule .*\.(jpeg|jpg|gif|bmp|png)$ - [F]
+
+# FORBID COMMENT SPAMMERS ACCESS TO YOUR wp-comments-post.php FILE
+# This is a better approach to blocking Comment Spammers so that you do not
+# accidentally block good traffic to your website. You can add additional
+# Comment Spammer IP addresses on a case by case basis below.
+# Searchable Database of known Comment Spammers http://www.stopforumspam.com/
+
+<FilesMatch "^(wp-comments-post\.php)">
+Order Allow,Deny
+Deny from 46.119.35.
+Deny from 46.119.45.
+Deny from 91.236.74.
+Deny from 93.182.147.
+Deny from 93.182.187.
+Deny from 94.27.72.
+Deny from 94.27.75.
+Deny from 94.27.76.
+Deny from 193.105.210.
+Deny from 195.43.128.
+Deny from 198.144.105.
+Deny from 199.15.234.
+Allow from all
+</FilesMatch>
 
 # BLOCK MORE BAD BOTS RIPPERS AND OFFLINE BROWSERS
 # If you would like to block more bad bots you can get a blacklist from

@@ -86,7 +86,6 @@ class GFFormList{
                 mysack.setVar( "rg_update_form_active", "<?php echo wp_create_nonce("rg_update_form_active") ?>" );
                 mysack.setVar( "form_id", form_id);
                 mysack.setVar( "is_active", is_active ? 0 : 1);
-                mysack.encVar( "cookie", document.cookie, false );
                 mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while update form", "gravityforms")) ?>' )};
                 mysack.runAJAX();
 

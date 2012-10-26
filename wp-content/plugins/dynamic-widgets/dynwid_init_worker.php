@@ -2,7 +2,7 @@
 /**
  * dynwid_init_worker.php
  *
- * @version $Id: dynwid_init_worker.php 488903 2012-01-12 18:17:27Z qurl $
+ * @version $Id: dynwid_init_worker.php 593381 2012-09-01 14:07:14Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -11,14 +11,19 @@
 
 	// Register the overrule maintypes
 	$DW->registerOverrulers();
+	$DW->message('Overrulers registered: ' . implode(', ', $DW->overrule_maintype) );
 
 	// UserAgent detection
 	$DW->message('UserAgent: ' . $DW->useragent);
+
+	$DW->message('Today it is ' . date('l') . ' (' . date('N') . '), Week: ' . date('W'));
 
 	$DW->message('User has role(s): ' . implode(', ', $DW->userrole));
 
 	$DW->whereami = $DW->detectPage();
 	$DW->message('Page is ' . $DW->whereami);
+	$DW->message('Path URL is ' . $DW->url);
+	$DW->message('Prefix is ' . $DW->getURLPrefix());
 
 	if ( $DW->whereami == 'single' ) {
 		$post = $GLOBALS['post'];
