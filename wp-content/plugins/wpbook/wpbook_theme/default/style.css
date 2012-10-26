@@ -1,0 +1,245 @@
+/*  
+Theme Name: WPBook
+Theme URI: http://wpbook.net
+Description: This is a sample custom theme for WPBook if in wp-content/themes it will be shown in the Facebook app view.
+Author: Brooke Dukes
+Author URI: http://bandonrandon.wordpress.com/
+Version: 1.0
+
+Place this theme in your wp-content/theme folder and it will be used instead of the WPBook Default
+
+
+This file is distrubuted as part of the WPBook Plugin for more info see http://wpbook.net
+Based on Facebook styles
+*/
+
+
+html,body{
+
+	margin: 0;
+
+	padding: 0;
+
+	background: #FFFFFF;
+
+}
+
+
+
+body {
+
+	background:#fff;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	font-size:11px;
+	margin:10px;
+	padding:0px;
+	text-align:left;
+
+}
+
+
+
+blockquote {
+
+	border-left: 5px solid #ccc;
+
+	margin-left: 1.5em;
+
+	padding-left: 5px;
+
+}
+
+h1, h2, h3, h4, h5 {
+	font-size:13px;
+	color:#333;
+	margin:0px;
+	padding:0px;
+}
+
+a {
+	color:#3b5998;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+img {
+	border:0px;
+}
+
+ul.pagenav {
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    padding-left: 5px;
+    text-align: left;
+    color: red;
+}
+
+ul.pagenav li {
+    display: inline;
+    margin: 0px;    
+}
+
+/* headings and header tags */
+
+.box_head{padding: 5px 0 0 0;}
+.wpbook_box_header{
+	padding: 1px 6px 0px 8px; 
+	border-top: solid 1px #3B5998; 
+	background: #d8dfea;
+		  }
+.inputsubmit {
+	padding:2px 15px 3px 15px;
+	border-style:solid;
+	border-top-width:1px;
+	border-left-width:1px;
+	border-bottom-width:1px;
+	border-right-width:1px;
+	border-top-color:#D9DFEA;
+	border-left-color:#D9DFEA;
+	border-bottom-color:#0e1f5b;
+	border-right-color:#0e1f5b;
+	background-color:#3b5998;
+	color:#FFFFFF;
+	font-size:11px;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	text-align:center;
+}
+
+.wpbook_share_button,.wpbook_external_post {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    height: 25px;
+}
+
+.wpbook_share_button a ,.wpbook_invite_button a {  
+    background-color: white;
+    background-image: url(images/share_icon_small.gif);
+    background-repeat: repeat-y;
+    background-attachment: scroll;
+    background-position: right center;
+    border: 1px solid #7F93BC;
+    line-height: 11px;
+    padding-top: 0pt;
+    padding-right: 14px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+	height:15px;
+	position:relative;
+	top:-1px;
+} 
+  
+.wpbook_share_button a:hover, .wpbook_invite_button a:hover{
+    color: #ffffff;
+    border: 1px solid #3B5998;
+    text-decoration: none;
+    background-color: #3b5998;
+    background-image: url(images/share_icon_small_hover.gif);
+    background-repeat: repeat-y;
+    background-attachment: scroll;
+    background-position: right center;
+
+}  
+
+.wpbook_external_post a { 
+    background-color: white;
+    background-repeat: repeat-y;
+    background-attachment: scroll;
+    background-position: right center;
+    border: 1px solid #7F93BC;
+    line-height: 11px;
+    padding-top: 0pt;
+    padding-bottom: 1px;
+    padding-left: 5px;
+	padding-right: 5px;
+} 
+  
+.wpbook_external_post a:hover {
+    color: #ffffff;
+    border: 1px solid #3B5998;
+    text-decoration: none;
+    background-color: #3b5998;
+    background-attachment: scroll;
+    background-position: right center;
+}  
+
+.wpbook_header{
+margin-bottom:5px;
+}
+
+.wpbook_comment_author{
+	font-size:14px;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color:#3B5998;
+	font-weight:600;
+	padding:0;
+}
+.wpbook_comment_text{
+	font-size:11px;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color:#333333;
+	padding:0;
+}
+p.wpbook_comment_text{display:none;}
+.wpbook_comment_date {
+	font-size:10px;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color:#777777;
+	margin-bottom:5px;
+}
+.gravatarr{float: left;}
+.gravatarpadding {margin-left:70px;}
+.acomment{clear: both; background-color:#ECEFF5; padding:5px;  margin-bottom:5px; margin-top:5px;}
+.bcomment{clear: both; background-color:#FFFFFF; padding:5px; }
+#commentform{clear: both;}
+.archive{ clear: both; background-color:#ECEFF5; padding:5px; margin-bottom:5px; margin-top:15px;}
+/* pages menu /*
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+#underlinemenu{
+padding:0;
+margin:0;
+padding-bottom:30px;
+}
+
+#underlinemenu ul{
+margin: 0;
+padding-left: 0;
+float: left;
+font-weight: bold;
+width: 100%;
+border: 1px solid #3B5998;
+border-width: 1px 0;
+background-color:#3B5998;
+}
+
+* html #underlinemenu ul{ /*IE only rule. Delete extra margin-bottom*/
+margin-bottom: 0;
+}
+
+#underlinemenu ul li{
+display: inline;
+float: left;
+color: #fff;
+padding: 10px 6px 0px 8px; 
+}
+
+
+#underlinemenu ul li a{
+color: #fff;
+font-weight: bold;
+text-decoration: none;
+padding: 5px;
+}
+
+#underlinemenu ul li a:hover{
+padding: 5px;
+color: #fff;
+background-color: #5C75AA;
+padding-bottom: 0;
+}

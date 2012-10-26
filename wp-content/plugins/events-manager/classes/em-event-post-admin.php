@@ -74,9 +74,10 @@ class EM_Event_Post_Admin{
 				do_action('em_event_save_pre', $EM_Event); //technically, the event is saved... but the meta isn't. wp doesn't give an pre-intervention action for this (or does it?)
 				//Handle Errors by making post draft
 				$get_meta = $EM_Event->get_post_meta();
+				$validate_meta = $EM_Event->validate_meta();
 				$save_meta = $EM_Event->save_meta();
 				$EM_Event->get_categories()->save(); //save categories in case of default category
-				if( !$get_meta || !$save_meta ){
+				if( !$get_meta || !$validate_meta || !$save_meta ){
 					//failed somewhere, set to draft, don't publish
 					$EM_Event->set_status(null, true);
 					if( $EM_Event->is_recurring() ){

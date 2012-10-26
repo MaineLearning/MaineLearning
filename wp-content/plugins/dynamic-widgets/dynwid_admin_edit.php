@@ -2,7 +2,7 @@
 /**
  * dynwid_admin_edit.php - Options settings
  *
- * @version $Id: dynwid_admin_edit.php 532982 2012-04-18 17:35:12Z qurl $
+ * @version $Id: dynwid_admin_edit.php 593381 2012-09-01 14:07:14Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -16,6 +16,9 @@
 	$widget_id = ( isset($_GET['id']) && ! empty($_GET['id']) ) ? esc_attr($_GET['id']) : '';
 	$return_url = ( isset($_GET['returnurl']) && ! empty($_GET['returnurl']) ) ? esc_url($_GET['returnurl']) : '';
 	
+	// In some cases $widget_id appears not to be global (anymore)
+	$GLOBALS['widget_id'] = $widget_id;
+
 	if (! array_key_exists($widget_id, $DW->registered_widgets) ) {
   	wp_die('WidgetID is not valid');
   }
@@ -47,6 +50,7 @@ label {
 
 h4 {
 	text-indent : 30px;
+	cursor: pointer;
 }
 
 .hasoptions {
@@ -58,8 +62,22 @@ h4 {
 	font-size : 13px;
 }
 
+.dynwid_conf {
+	display: none;
+	padding: 15px;
+	padding-left: 30px;
+}
+
 .ui-datepicker {
 	font-size : 10px;
+}
+
+div.settingbox {
+	border-color: #E3E3E3;
+	border-radius: 6px 6px 6px 6px;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
 }
 </style>
 
@@ -127,11 +145,20 @@ h4 {
   	alert('All options set to \'No\'.\nDon\'t forget to make changes, otherwise you\'ll receive an error when saving.');
   }
 
-  jQuery(document).ready(function() {
-		jQuery('#dynwid').accordion({
-			header: 'h4',
-			autoHeight: false,
+  jQuery(document).ready( function() {
+		jQuery( 'h4' ).click( function() {
+			var id = this.id;
+			jQuery( '#' + id + '_conf' ).slideToggle('slow');
 		});
+
+		jQuery( 'h4' ).mouseover( function() {
+			jQuery(this).addClass('ui-state-hover');
+		});
+
+		jQuery( 'h4' ).mouseleave( function() {
+			jQuery(this).removeClass('ui-state-hover');
+		});
+
 	});
 /* ]]> */
 </script>
@@ -157,7 +184,7 @@ h4 {
 <h3><?php _e('Edit options for the widget', DW_L10N_DOMAIN); ?>: <em><?php echo $DW->getName($widget_id); ?></em></h3>
 <?php echo ( DW_DEBUG ) ? '<pre>ID = ' . $widget_id . '</pre><br />' : ''; ?>
 
-<div style="border-color: #E3E3E3;border-radius: 6px 6px 6px 6px;border-style: solid;border-width: 1px;padding: 5px;">
+<div class="settingbox">
 <b><?php _e('Quick settings', DW_L10N_DOMAIN); ?></b>
 <p>
 <a href="#" onclick="setOff(); return false;"><?php _e('Set all options to \'No\'', DW_L10N_DOMAIN); ?></a> (<?php _e('Except overriding options like Role, Date, etc.', DW_L10N_DOMAIN); ?>)
@@ -170,6 +197,31 @@ h4 {
 <input type="hidden" name="widget_id" value="<?php echo $widget_id; ?>" />
 <input type="hidden" id="returnurl" name="returnurl" value="<?php echo ( (! empty($return_url)) ? trailingslashit(admin_url()) . $return_url : '' ); ?>" />
 
+<div class="settingbox">
+<b><?php _e('Individual Posts, Custom Post Types and Tags', DW_L10N_DOMAIN); ?></b>
+<p>
+<?php
+	$opt_individual = $DW->getDWOpt($widget_id, 'individual');
+	$individual = ( $opt_individual->count > 0 ) ? TRUE : FALSE;
+	$DW->dumpOpt($opt_individual);
+
+	echo '<input type="checkbox" id="individual" name="individual" value="1" ' . ( ($individual)  ? 'checked="checked"' : '' ) . ' onclick="chkInPosts()" />';
+	echo ' <label for="individual">' . __('Make exception rule available to individual posts and tags.', DW_L10N_DOMAIN) . '</label>';
+	echo '<img src="' . $DW->plugin_url . 'img/info.gif" alt="info" title="' . __('Click to toggle info', DW_L10N_DOMAIN) . '" onclick="divToggle(\'individual_post_tag\')" />';
+
+	echo '<div>';
+	echo '<div id="individual_post_tag" class="infotext">';
+	_e('When you enable this option, you have the ability to apply an exception rule to tags and individual posts (Posts and Custom Post Types).
+					You can set the exception rule for tags in the single Edit Tag Panel (go to <a href="edit-tags.php?taxonomy=post_tag">Post Tags</a>,
+					click a tag), For individual posts in the <em>New</em> or <em>Edit</em> Posts panel.
+					Exception rules for tags and individual posts in any combination work independantly, but will always be counted as one exception.<br />
+	  					Please note when this is enabled, exception rules which are set within Posts for Author and/or Category will be disabled.
+	  				', DW_L10N_DOMAIN);
+	echo '</div></div>';
+?>
+</p>
+</div><br />
+
 <div id="dynwid">
 <?php
 	$DW_Role = new DW_Role();
@@ -177,6 +229,12 @@ h4 {
 
 	$DW_Date = new DW_Date();
 	$DW_Date->admin();
+
+	$DW_Day = new DW_Day();
+	$DW_Day->admin();
+
+	$DW_Week = new DW_Week();
+	$DW_Week->admin();
 
 	$DW_WPML = new DW_WPML();
 	$DW_WPML->admin();
@@ -189,6 +247,9 @@ h4 {
 
 	$DW_Tpl = new DW_Tpl();
 	$DW_Tpl->admin();
+
+	$DW_URL = new DW_URL();
+	$DW_URL->admin();
 
 	$DW_Front_page = new DW_Front_page();
 	$DW_Front_page->admin();
@@ -228,7 +289,7 @@ h4 {
 
 	$DW_BP = new DW_BP();
 	$DW_BP->admin();
-	
+
 	$DW_bbPress = new DW_bbPress();
 	$DW_bbPress->admin();
 

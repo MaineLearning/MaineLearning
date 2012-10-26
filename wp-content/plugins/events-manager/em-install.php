@@ -266,6 +266,7 @@ function em_create_tickets_table() {
 		ticket_max INT( 10 ) NULL ,
 		ticket_spaces INT NULL ,
 		ticket_members INT( 1 ) NULL ,
+		ticket_required INT( 1 ) NULL ,
 		PRIMARY KEY  (ticket_id)
 		) DEFAULT CHARSET=utf8 ;";
 

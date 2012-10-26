@@ -355,7 +355,6 @@ class GFExport{
                 mysack.setVar( "action", "rg_select_export_form" );
                 mysack.setVar( "rg_select_export_form", "<?php echo wp_create_nonce("rg_select_export_form") ?>" );
                 mysack.setVar( "form_id", formId);
-                mysack.encVar( "cookie", document.cookie, false );
                 mysack.onError = function() { alert('<?php echo esc_js(__("Ajax error while selecting a form", "gravityforms")) ?>' )};
                 mysack.runAJAX();
 
@@ -510,18 +509,7 @@ class GFExport{
         $start_date = $_POST["export_date_start"];
         $end_date = $_POST["export_date_end"];
 
-        //adding default fields
-        array_push($form["fields"],array("id" => "created_by" , "label" => __("Created By (User Id)", "gravityforms")));
-        array_push($form["fields"],array("id" => "id" , "label" => __("Entry Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "date_created" , "label" => __("Entry Date", "gravityforms")));
-        array_push($form["fields"],array("id" => "source_url" , "label" => __("Source Url", "gravityforms")));
-        array_push($form["fields"],array("id" => "transaction_id" , "label" => __("Transaction Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_amount" , "label" => __("Payment Amount", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_date" , "label" => __("Payment Date", "gravityforms")));
-        array_push($form["fields"],array("id" => "payment_status" , "label" => __("Payment Status", "gravityforms")));
-        array_push($form["fields"],array("id" => "post_id" , "label" => __("Post Id", "gravityforms")));
-        array_push($form["fields"],array("id" => "user_agent" , "label" => __("User Agent", "gravityforms")));
-        array_push($form["fields"],array("id" => "ip" , "label" => __("User IP", "gravityforms")));
+        $form = self::add_default_export_fields($form);
 
         $entry_count = RGFormsModel::get_lead_count($form_id, "", null, null, $start_date, $end_date);
 
@@ -573,7 +561,7 @@ class GFExport{
                             }
 
                             $value = !empty($long_text) ? $long_text : $lead[$field_id];
-
+							$value = apply_filters("gform_export_field_value", $value, $form_id, $field_id, $lead);
                         break;
                     }
 
@@ -615,6 +603,25 @@ class GFExport{
         }
     }
 
+	public static function add_default_export_fields($form){
+        
+        //adding default fields
+        array_push($form["fields"],array("id" => "created_by" , "label" => __("Created By (User Id)", "gravityforms")));
+        array_push($form["fields"],array("id" => "id" , "label" => __("Entry Id", "gravityforms")));
+        array_push($form["fields"],array("id" => "date_created" , "label" => __("Entry Date", "gravityforms")));
+        array_push($form["fields"],array("id" => "source_url" , "label" => __("Source Url", "gravityforms")));
+        array_push($form["fields"],array("id" => "transaction_id" , "label" => __("Transaction Id", "gravityforms")));
+        array_push($form["fields"],array("id" => "payment_amount" , "label" => __("Payment Amount", "gravityforms")));
+        array_push($form["fields"],array("id" => "payment_date" , "label" => __("Payment Date", "gravityforms")));
+        array_push($form["fields"],array("id" => "payment_status" , "label" => __("Payment Status", "gravityforms")));
+        array_push($form["fields"],array("id" => "post_id" , "label" => __("Post Id", "gravityforms")));
+        array_push($form["fields"],array("id" => "user_agent" , "label" => __("User Agent", "gravityforms")));
+        array_push($form["fields"],array("id" => "ip" , "label" => __("User IP", "gravityforms")));
+        
+        $form = apply_filters('gform_export_fields', $form);
+        return $form;
+    }
+	
     private function cleanup(&$forms){
         unset($forms["version"]);
 

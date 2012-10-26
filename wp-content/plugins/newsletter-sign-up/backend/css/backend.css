@@ -1,0 +1,44 @@
+.dvk-box{ margin-bottom:20px; }
+.dvk-box h3{ font-family:sans-serif; font-weight:bold;  }
+.dvk-box div.inside{ padding:0 10px 10px; font-size:13px; }
+.dvk-box p,.dvk-box ul, .dvk-box input{ margin:3px 0 7px; }
+.dvk-box ul{ list-style:square; margin-left:20px; }
+.dvk-box li{ margin:0; margin-bottom:4px; }
+
+li.dvk-rss-item{ margin-left:-16px; padding-left:25px;
+	background:url(http://static.dannyvankooten.com/images/dvk-16x16.png) no-repeat left center; list-style:none;
+}
+li.dvk-rss{ margin-top:10px; margin-left:-16px;
+	float:left; padding-left:25px; background:url("../img/rss-icon.png") no-repeat left center;
+	list-style:none; }
+li.dvk-email{ margin:10px 0 0 10px; float:left; padding-left:25px; background:url("../img/email-icon.png") no-repeat left center;
+	list-style:none; }
+li.dvk-twitter{ clear:both; margin:10px 0 0 -16px; float:left; list-style:none; padding-left:25px; background:url("../img/twitter-icon.png") no-repeat left center}
+
+.dvk-box b,.dvk-box strong{ font-weight:bold; }
+
+#ns_settings_page input[type=text]{ width:75%; }
+
+span.ns_small{
+	font-style:italic;
+	font-size:10px;
+	display:block;
+	margin:2px 0;
+}
+
+#dvk-avatar{
+	vertical-align:top;
+	margin-right:10px;
+	display:inline-block;
+	height:32px;
+	width:32px;
+	background:url(http://static.dannyvankooten.com/images/dvk-avatar.png) no-repeat;
+}
+
+.nsu-tip{ font-size: 11px; font-style:italic; }
+html,body{ height:auto !important; position:relative; }
+.nsu-textarea{ width:100% !important; min-height:150px; }
+
+#newsletter-sign-up-donatebox{ border:2px solid green; background:#CFC; }
+#newsletter-sign-up-donatebox h3{ color:green; }
+#newsletter-sign-up-donatebox li{ line-height:22px; }

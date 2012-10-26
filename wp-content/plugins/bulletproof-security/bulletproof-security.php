@@ -5,7 +5,7 @@ Plugin URI: http://www.ait-pro.com/aitpro-blog/297/bulletproof-security-plugin-s
 Text Domain: bulletproof-security
 Domain Path: /languages/
 Description: Website Security Protection: BulletProof Security protects your website against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts. One-click .htaccess WordPress security protection. Protects wp-config.php, bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. One-click Website Maintenance Mode (HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
-Version: .47.4
+Version: .47.5
 Author: Edward Alexander
 Author URI: http://www.ait-pro.com/
 */
@@ -27,8 +27,8 @@ Author URI: http://www.ait-pro.com/
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define( 'BULLETPROOF_VERSION', '.47.4' );
-$bps_version = '.47.4';
+define( 'BULLETPROOF_VERSION', '.47.5' );
+$bps_version = '.47.5';
 
 // Load BPS Global class - not doing anything with this Class in BPS Free
 require_once( WP_PLUGIN_DIR . '/bulletproof-security/includes/class.php' );

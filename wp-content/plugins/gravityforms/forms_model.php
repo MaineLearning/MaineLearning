@@ -843,14 +843,14 @@ class RGFormsModel{
                 continue;
             }
 
-            // process calculation fields after all fields have been saved
-            if(GFCommon::has_field_calculation($field)) {
-                $calculation_fields[] = $field;
-                continue;
-            }
-
             //only save fields that are not hidden (except on entry screen)
             if(RG_CURRENT_VIEW == "entry" || !RGFormsModel::is_field_hidden($form, $field, array()) ){
+
+                // process calculation fields after all fields have been saved
+                if(GFCommon::has_field_calculation($field)) {
+                    $calculation_fields[] = $field;
+                    continue;
+                }
 
                 if($field['type'] == 'post_category')
                     $field = GFCommon::add_categories_as_choices($field, '');
@@ -1085,15 +1085,20 @@ class RGFormsModel{
 
         if (!empty($field_value) && !is_array($field_value) && $source_field["type"] == "multiselect")
         {
-			//convert the comma-delimited string into an array
-			$field_value = explode(",", $field_value);
+            //convert the comma-delimited string into an array
+            $field_value = explode(",", $field_value);
         }
 
         if(is_array($field_value)){
+            $field_value = array_values($field_value); //returning array values, ignoring keys if array is associative
+            $match_count = 0;
             foreach($field_value as $val){
-                if(self::matches_operation(GFCommon::get_selection_value($val), $target_value, $operation))
-                    return true;
+                if(self::matches_operation(GFCommon::get_selection_value($val), $target_value, $operation)){
+                    $match_count++;
+                }
             }
+            //If operation is Is Not, none of the values in the array can match the target value.
+            return $operation == "isnot" ? $match_count == count($field_value) : $match_count > 0;
         }
         else if(self::matches_operation(GFCommon::get_selection_value($field_value), $target_value, $operation)){
             return true;
@@ -1262,6 +1267,11 @@ class RGFormsModel{
             case "list" :
                 $value = self::get_input_value($field, "input_" . $field["id"], rgar($field, "inputName"), $field_values, $get_from_post);
                 $value = self::create_list_array($field, $value);
+            break;
+
+            case "number" :
+                $value = self::get_input_value($field, "input_" . $field["id"], rgar($field, "inputName"), $field_values, $get_from_post);
+                $value = trim($value);
             break;
 
             default:
@@ -1782,7 +1792,7 @@ class RGFormsModel{
         $has_post_field = false;
         foreach($form["fields"] as $field){
             $is_hidden = self::is_field_hidden($form, $field, array(), $lead);
-            if(!$is_hidden && in_array($field["type"], array("post_category","post_title","post_content","post_excerpt","post_tags","post_custom_fields","post_image"))){
+            if(!$is_hidden && in_array($field["type"], array("post_category","post_title","post_content","post_excerpt","post_tags","post_custom_field","post_image"))){
                 $has_post_field = true;
                 break;
             }
