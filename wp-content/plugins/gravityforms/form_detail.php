@@ -1582,7 +1582,7 @@ class GFFormDetail{
                                     <input type="checkbox" id="field_choice_values_enabled" onclick="SetFieldProperty('enableChoiceValue', this.checked); ToggleChoiceValue(); SetFieldChoices();"/>
                                     <label for="field_choice_values_enabled" class="inline gfield_value_label"><?php _e("show values", "gravityforms") ?></label>
                                 </div>
-                                <?php _e("Choices", "gravityforms"); ?> <?php gform_tooltip("form_field_choices") ?><br />
+                                <?php $field_title = __("Choices", "gravityforms"); echo apply_filters("gform_choices_setting_title", $field_title); ?> <?php gform_tooltip("form_field_choices") ?><br />
 
                                 <div id="gfield_settings_choices_container">
                                     <label class="gfield_choice_header_label"><?php _e("Label", "gravityforms") ?></label><label class="gfield_choice_header_value"><?php _e("Value", "gravityforms") ?></label><label class="gfield_choice_header_price"><?php _e("Price", "gravityforms") ?></label>

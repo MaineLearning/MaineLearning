@@ -559,7 +559,8 @@ function gformAddListItem(element, max){
 
     var tr = jQuery(element).parent().parent();
     var clone = tr.clone();
-    clone.find("input, select").val("").attr("tabindex", clone.find('input:last').attr("tabindex"));
+    clone.find("input, select").not(':checkbox').val("").attr("tabindex", clone.find('input:last').attr("tabindex"));
+    clone.find("input:checkbox").prop('checked', false);
     tr.after(clone);
     gformToggleIcons(tr.parent(), max);
     gformAdjustClasses(tr.parent());

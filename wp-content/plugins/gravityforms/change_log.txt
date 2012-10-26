@@ -1,5 +1,12 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.6.8.1
+Version 1.6.9
+	- Fixed register link on multi-site; goes to primary site's Form Settings
+    - Added "gform_column_input_content" hook to allow modifying of list field column input ouput
+    - Updated "gformAddListItem()" function to support the handling of checkboxes when duplicating a list field row
+    - Fixed issue with postAuthor not being set in some instances and preventing form to save
+    - Fixed issue with greater than conditional logic when targeting radio buttons
+	- Added gform_choices_setting_title filter to allow the choice setting title to be changed
+    - Fixed issue with no duplicate validation firing too early on multi-page forms
 	- Added GFExport::add_default_export_fields($form) to refactor a fragment of duplicate code
     - Fixed issue with multi-page form validation going to the wrong page
 

@@ -1006,10 +1006,14 @@ class GFFormDisplay{
         foreach($form["fields"] as &$field){
 
             //If a page number is specified, only validates fields that are on current page
-	        //always validate when field set to no duplicates
-	        if(($page_number > 0 && $field["pageNumber"] != $page_number) && $field["noDuplicates"] <> "1"){
+            $field_in_other_page = $page_number > 0 && $field["pageNumber"] != $page_number;
+
+            //validate fields with "no duplicate" functionality when they are present on pages before the current page.
+            $validate_duplicate_feature = $field["noDuplicates"] && $page_number > 0 && $field["pageNumber"] <= $page_number;
+
+            if($field_in_other_page && !$validate_duplicate_feature){
                 continue;
-			}
+            }
 
             //ignore validation if field is hidden or admin only
             if(RGFormsModel::is_field_hidden($form, $field, $field_values) || $field["adminOnly"])
