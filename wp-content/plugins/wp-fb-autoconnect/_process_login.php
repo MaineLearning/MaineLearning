@@ -31,6 +31,36 @@ $jfb_log .= "WP: Running action wpfb_prelogin\n";
 do_action('wpfb_prelogin');
 
 
+//Check the nonce to make sure this was a valid login attempt (unless the user has disabled nonce checking)
+if( !get_option($opt_jfb_disablenonce) )
+{
+    if( wp_verify_nonce ($_REQUEST[$jfb_nonce_name], $jfb_nonce_name) != 1 )
+    {
+        //If there's already a user logged in, tell the user and give them a link back to where they were.
+        $currUser = wp_get_current_user(); 
+        if( $currUser->ID )
+        {
+            $msg = "User \"$currUser->user_login\" has already logged in via another browser session.\n";
+            $jfb_log .= $msg;
+            j_mail("FB Double-Login: " . $currUser->user_login . " -> " . get_bloginfo('name'));
+            die($msg . "<br /><br /><a href=\"".$_POST['redirectTo']."\">Continue</a>");
+        }
+          
+        j_die("Nonce check failed, login aborted.\nThis usually due to your browser's privacy settings or a server-side caching plugin.  If you get this error on multiple browsers, please contact the site administrator.\n");
+    }
+    $jfb_log .= "WP: nonce check passed\n";
+}
+else
+    $jfb_log .= "WP: nonce check DISABLED\n";
+
+    
+//Get the redirect URL
+if( !isset($_POST['redirectTo']) || !$_POST['redirectTo'] )
+    j_die("Error: Missing POST Data (redirect)");
+$redirectTo = $_POST['redirectTo'];
+$jfb_log .= "WP: Found redirect URL ($redirectTo)\n";
+
+
 //Include Facebook, making sure another plugin didn't already do so
 if( class_exists('Facebook') )
 {
@@ -63,46 +93,6 @@ if(get_option($opt_jfb_app_token) == -1)
 	$response = wp_remote_get("https://graph.facebook.com/oauth/access_token?client_id=" . get_option($opt_jfb_api_key) . "&client_secret=" . get_option($opt_jfb_api_sec) . "&grant_type=client_credentials");
 	update_option( $opt_jfb_app_token, substr($response['body'], 13) );
 }
-
-//Check the nonce to make sure this was a valid login attempt (unless the user has disabled nonce checking)
-if( !get_option($opt_jfb_disablenonce) )
-{
-    if( wp_verify_nonce ($_REQUEST[$jfb_nonce_name], $jfb_nonce_name) != 1 )
-    {
-        //If there's already a user logged in, tell the user and give them a link back to where they were.
-        $currUser = wp_get_current_user(); 
-        if( $currUser->ID )
-        {
-            $msg = "User \"$currUser->user_login\" has already logged in via another browser session.\n";
-            $jfb_log .= $msg;
-            j_mail("FB Double-Login: " . $currUser->user_login . " -> " . get_bloginfo('name'));
-            die($msg . "<br /><br /><a href=\"".$_POST['redirectTo']."\">Continue</a>");
-        }
-          
-        //If the nonce failed for some other reason, report the error.
-        $jfb_log .= "WP: nonce check failed (expected '" . wp_create_nonce( $jfb_nonce_name ) . "', received '" . $_REQUEST['_wpnonce'] . "')\n" .
-                    "    Original Components) " . get_option($opt_jfb_generated_nonce) . "\n" .
-                    "    Current Components)  " . jfb_debug_nonce_components() . "\n";
-        if( function_exists('get_plugins') )
-        {
-            $plugins = get_plugins();
-            $jfb_log .= "    Active Plugins:\n";
-            foreach($plugins as $plugin) $jfb_log .= "      " . $plugin['Name'] . ' ' . $plugin['Version'] . "\n";
-        }
-        
-        j_die("Nonce check failed, login aborted.\nThis usually due to your browser's privacy settings or a server-side caching plugin.  If you get this error on multiple browsers, please contact the site administrator.\n");
-    }
-    $jfb_log .= "WP: nonce check passed\n";
-}
-else
-    $jfb_log .= "WP: nonce check DISABLED\n";
-
-    
-//Get the redirect URL
-if( !isset($_POST['redirectTo']) || !$_POST['redirectTo'] )
-    j_die("Error: Missing POST Data (redirect)");
-$redirectTo = $_POST['redirectTo'];
-$jfb_log .= "WP: Found redirect URL ($redirectTo)\n";
 
 
 //Get the user info from FB
