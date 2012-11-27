@@ -3,16 +3,16 @@ Contributors: toddhalfpenny
 Donate link: http://gingerbreaddesign.co.uk/wordpress/plugins/plugins.php
 Tags: widgets, sidebar, pages, post, shortcode, inline
 Requires at least: 2.8
-Tested up to: 3.2.1
-Stable tag: 0.0.11
+Tested up to: 3.4.2
+Stable tag: 0.0.12
 
-Allows 'in-page' widget areas so widgets can be defined via shortcode straight into page/post content. The widgets/sidebars can also be added through the use of template tags.
+The easy way to Add Widgets or Sidebars to Posts and Pages by shortcodes or template tags.
 
 == Description ==
 
 ''NOTE'' Apologies but you may lose the widgets in your customised sidebars if upgrading from pre 0.0.8 version. The cause of this loss is required to enhance functionality and reduce further possible loss of config when changing/modifying themes. The choice to to do this was not easy but hopefully will make the plugin more stable going forward.
 
-Allows 'in-page' widget areas so widgets can be defined via shortcut straight into page/post content.
+The easy way to Add Widgets to Posts and/or Pages.  Allows 'in-page' widget areas so widgets can be defined via shortcut straight into page/post content.
 There is one default widget area that can be used or you can add more from the settings menu. You can currently have an unlimited number of sidebars.
 Each sidebar can be called indepentenly by  a shortcode and you can call more than one per post/page.
 Sidebars can be included in the post/page by using a shortcode like `[widgets_on_pages id=x]` where `x` is the number of the sidebar.
@@ -30,9 +30,10 @@ Sidebars can also be named via the Widgets on Pages options page and that name c
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the widgets you want to the `Widgets on Pages` widget area in the admin screens
 1. Add the shortcut `[widgets_on_pages id=x]` to the page or post in the place where you'd like your widgets to appear (where 'x' = the id of the sidebar to use (or the name if you have named it such as `[widgets_on_pages id=TagCloud]`). If using only the default sidebar then no 'id' argument is needed (i.e. `[widgets_on_pages]`).
-1. To add a sidebar into a theme you can add the following type of code to the relevant PHP theme file. `&lt;?php widgets_on_template("wop_1"); ?>`
+1. To add a sidebar into a theme you can add the following type of code to the relevant PHP theme file. `<?php widgets_on_template("wop_1"); ?>`
 1. If you see bullet points/images next to the widget titles when using this plugin use the 'Enable Styling' setting in the options page
-
+1. For further info check out these ace videos put together by Jessica Barnard 
+[youtube http://www.youtube.com/watch?v=h957U96SFYE]
 
 == Frequently Asked Questions ==
 
@@ -40,6 +41,9 @@ Sidebars can also be named via the Widgets on Pages options page and that name c
 
 Simply select the 'Enable Styling' setting in the Widgets on Pages options page.
 
+= I did the above but the bullets still show, what now =
+
+Your theme's CSS is probably overriding your setting... you could try using your browsers ''inspect element" function to see what part of the CSS is setting the list-style.
 
 = Can I have more than one defined sidebar area =
 
@@ -53,6 +57,11 @@ Yes... you can have an unlimited number of sidebars defined. The number availabl
 
 
 == Changelog ==
+
+= 0.0.12 = 
+
+1. Updated intermals to "re-hide" options screen from non Administrators (thanks to fran klin for spotting this)
+1. Removed some potential name conflicts
 
 = 0.0.11 = 
 
