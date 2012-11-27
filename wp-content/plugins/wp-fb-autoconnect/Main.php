@@ -2,7 +2,7 @@
 /* Plugin Name: WP-FB-AutoConnect
  * Description: A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible. Supports BuddyPress.
  * Author: Justin Klein
- * Version: 2.3.8
+ * Version: 2.4.1
  * Author URI: http://www.justin-klein.com/
  * Plugin URI: http://www.justin-klein.com/projects/wp-fb-autoconnect
  */
@@ -63,6 +63,17 @@ require_once("Widget.php");
 /**********************************************************************/
 /*******************************GENERAL********************************/
 /**********************************************************************/
+
+/**
+  * Enqueue some basic styles
+  */
+add_action('wp_enqueue_scripts', 'jfb_enqueue_styles');
+function jfb_enqueue_styles()
+{
+    global $jfb_version;
+    wp_enqueue_style('jfb', plugins_url(dirname(plugin_basename(__FILE__))).'/style.css', array(), $jfb_version );  
+}
+
 
 /*
  * Output a Facebook Connect Button.  Note that the button will not function until you've called 
@@ -183,8 +194,7 @@ add_action('wp_footer', 'jfb_output_facebook_callback');
 function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
 {
      //Make sure the plugin is setup properly before doing anything
-     global $jfb_name, $jfb_version;
-     global $opt_jfb_ask_perms, $opt_jfb_valid, $jfb_nonce_name;
+     global $jfb_name, $jfb_version, $opt_jfb_ask_perms, $opt_jfb_valid, $jfb_nonce_name;
      global $jfb_js_callbackfunc, $opt_jfb_ask_stream, $jfb_callback_list;
      if( !get_option($opt_jfb_valid) ) return;
      
@@ -203,40 +213,36 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
         array_push($jfb_callback_list, $callbackName);
      
      //Output an html form that we'll submit via JS once the FB login is complete; it redirects us to the PHP script that logs us into WP.  
-?>
-  
-  <form id="wp-fb-ac-fm" name="<?php echo $callbackName ?>_form" method="post" action="<?php echo plugins_url(dirname(plugin_basename(__FILE__))) . "/_process_login.php"?>" >
-      <input type="hidden" name="redirectTo" value="<?php echo $redirectTo?>" />
-<?php 
-      //An action to allow the user to inject additional data in the form, to be transferred to the login script
-      do_action('wpfb_add_to_form');
-?>
-      <?php wp_nonce_field ($jfb_nonce_name, $jfb_nonce_name) ?>   
-    </form>
-<?php
+     ?><form id="wp-fb-ac-fm" name="<?php echo $callbackName ?>_form" method="post" action="<?php echo plugins_url(dirname(plugin_basename(__FILE__))) . "/_process_login.php"?>" >
+          <input type="hidden" name="redirectTo" value="<?php echo $redirectTo?>" />
+          <input type="hidden" name="accessToken" id="jfb_accessToken" value="0" />
+          <?php wp_nonce_field ($jfb_nonce_name, $jfb_nonce_name) ?>
+          <?php do_action('wpfb_add_to_form'); ?>   
+     </form>
 
-    //Output the JS callback function, which Facebook will automatically call once it's been logged in.
-    ?><script type="text/javascript">//<!--
+    <?php //Output the JS callback, which Facebook will automatically call once it's been logged in. ?>
+    <script type="text/javascript">//<!--
     function <?php echo $callbackName ?>()
     {
-<?php 
-		//An action to allow the user to inject additional javascript to get executed before the login takes place
-		do_action('wpfb_add_to_js', $callbackName);
+        //wpfb_add_to_js: An action to allow the user to inject additional JS to be executed before the login takes place
+        <?php do_action('wpfb_add_to_js', $callbackName); ?>
+        //wpfb_add_to_js: Finished
 
-        //First, make sure the user logged into Facebook (didn't click "cancel" in the login prompt)
-        echo    "    //Make sure the user logged in\n".
-            	"    FB.getLoginStatus(function(response)\n".
-                "    {\n".
-                "      if (!response.authResponse)\n".
-                "      {\n".
-                apply_filters('wpfb_login_rejected', '').
-                "      return;\n".
-                "      }\n\n";
-                
-        //Submit the login and close the FB.getLoginStatus call
-        echo apply_filters('wpfb_submit_loginfrm', "      document." . $callbackName . "_form.submit();\n" );
-        echo "    });\n";
-        ?>
+        //Make sure the user logged into Facebook (didn't click "cancel" in the login prompt)
+        FB.getLoginStatus(function(response)
+        {
+            if (!response.authResponse)
+            {
+                <?php echo apply_filters('wpfb_login_rejected', ''); ?>
+                return;
+            }
+            
+            //Set the access token to be sent in to our login script
+            jQuery('#jfb_accessToken').val(response.authResponse.accessToken);
+        
+            //Submit the login and close the FB.getLoginStatus call
+            <?php echo apply_filters('wpfb_submit_loginfrm', "document." . $callbackName . "_form.submit();\n" ); ?>
+        })
     }
     //--></script>
     <?php
