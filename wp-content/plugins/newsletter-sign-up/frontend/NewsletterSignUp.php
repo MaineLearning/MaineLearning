@@ -39,6 +39,24 @@ class NewsletterSignUp {
 		
 		return self::$instance;
 	}
+
+	public function enqueue_styles()
+	{
+		// Build stylesheet url --------------
+		$stylesheet_opts = '?';
+
+		// Load CSS to reset the checkbox' position?
+		if(isset($this->options['checkbox']['css_reset']) && $this->options['checkbox']['css_reset'] == 1) {
+			$stylesheet_opts .= 'checkbox_reset=1&';
+		}
+
+		// Load CSS to reset label and input fields for the sign-up form?
+		if(isset($this->options['form']['load_form_css']) && $this->options['form']['load_form_css'] == 1) {
+			$stylesheet_opts .= 'form_css=1&';
+		}
+
+		wp_enqueue_style('ns_checkbox_style', plugins_url("/frontend/css/newsletter-sign-up.php$stylesheet_opts", dirname(__FILE__)));
+	}
 	
 	/**
 	* Add all the various WP filters and actions
@@ -53,23 +71,19 @@ class NewsletterSignUp {
 		add_shortcode('newsletter-sign-up-form',array(&$this,'form_shortcode'));
 		add_shortcode('nsu-form',array(&$this,'form_shortcode'));
 		
-                // Build stylesheet url --------------
-		$stylesheet_opts = '?';
         $enqueue = false;
 
 		// Load CSS to reset the checkbox' position?
 		if(isset($this->options['checkbox']['css_reset']) && $this->options['checkbox']['css_reset'] == 1) {
-			$stylesheet_opts .= 'checkbox_reset=1&';
             $enqueue = true;
 		}
 		// Load CSS to reset label and input fields for the sign-up form?
 		if(isset($this->options['form']['load_form_css']) && $this->options['form']['load_form_css'] == 1) {
-			$stylesheet_opts .= 'form_css=1&';
             $enqueue = true;
 		}
 		
         // Only enqueue stylesheet if asked to by user.
-        if($enqueue) { wp_enqueue_style('ns_checkbox_style', plugins_url("/frontend/css/newsletter-sign-up.php$stylesheet_opts",dirname(__FILE__))); }
+        if($enqueue) { add_action('wp_enqueue_scripts', array(&$this, 'enqueue_styles')); }
 		
 		// Add to comment form? If so, add necessary actions. Try to add automatically.
 		if(isset($this->options['checkbox']['add_to_comment_form']) && $this->options['checkbox']['add_to_comment_form'] == 1) {
@@ -207,6 +221,11 @@ class NewsletterSignUp {
 					$request_uri .= "&GroupID=" . $opts['ymlp_groupid'];
 					$request_uri .= $this->add_additional_data(array('format' => 'query_string', 'api' => 'ymlp', 'email' => $email, 'name' => $name));
 					$result = wp_remote_get($request_uri);
+
+					if(isset($_POST['_nsu_debug']) || isset($_GET['_nsu_debug'])) {
+						var_dump($result); die();
+					}  
+
 				break;
 				
 				/* Send data using the MailChimp API */
@@ -241,7 +260,11 @@ class NewsletterSignUp {
 					$result = wp_remote_post(
 						'http://'.substr($opts['mc_api_key'],-3).'.api.mailchimp.com/1.3/?output=php&method=listSubscribe', 
 						array( 'body' => json_encode($request))
-					);                                       
+					);      
+
+					if(isset($_POST['_nsu_debug']) || isset($_GET['_nsu_debug'])) {
+						var_dump($result); die();
+					}                             
 					
 				break;
 			
@@ -282,6 +305,10 @@ class NewsletterSignUp {
 			$result = wp_remote_post($opts['form_action'],
 				array( 'body' => $post_data ) 
 			);	
+
+			if(isset($_POST['_nsu_debug']) || isset($_GET['_nsu_debug'])) {
+				var_dump($result); die();
+			} 
 			
 		}
 		
@@ -321,7 +348,7 @@ class NewsletterSignUp {
 				foreach($opts['extra_data'] as $key => $value) {
 					if($args['api'] == 'ymlp') $value['name'] = str_replace('YMP','Field', $value['name']);
 
-					$value['value'] = str_replace("%%NAME%%", $name, $value['value']);
+					$value['value'] = str_replace("%%NAME%%", $args['name'], $value['value']);
 					$value['value'] = str_replace("%%IP%%", $_SERVER['REMOTE_ADDR'], $value['value']);
 					$add_data .= "&".$value['name']."=".$value['value'];
 				}		
@@ -332,7 +359,7 @@ class NewsletterSignUp {
 		$add_data = array();
 		if(isset($opts['extra_data']) && is_array($opts['extra_data'])) {
 			foreach($opts['extra_data'] as $key => $value) {
-				$value['value'] = str_replace("%%NAME%%", $name, $value['value']);
+				$value['value'] = str_replace("%%NAME%%", $args['name'], $value['value']);
 				$value['value'] = str_replace("%%IP%%", $_SERVER['REMOTE_ADDR'], $value['value']);
 				$add_data[$value['name']] = $value['value'];
 			}		
@@ -477,6 +504,8 @@ class NewsletterSignUp {
 		if(isset($opts['mailinglist']['extra_data']) && is_array($opts['mailinglist']['extra_data'])) :
 			$additional_fields = '<div class="hidden">';
 			foreach($opts['mailinglist']['extra_data'] as $ed) : 
+				if($ed['value'] == '%%NAME%%') continue;
+				$ed['value'] = str_replace("%%IP%%", $_SERVER['REMOTE_ADDR'], $ed['value']);
 				$additional_fields .= "<input type=\"hidden\" name=\"{$ed['name']}\" value=\"{$ed['value']}\" />";
 			endforeach; 
 			$additional_fields .= "</div>";
