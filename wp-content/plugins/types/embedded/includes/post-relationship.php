@@ -5,7 +5,7 @@
 require_once WPCF_EMBEDDED_INC_ABSPATH . '/editor-support/post-relationship-editor-support.php';
 
 add_action('wpcf_admin_post_init', 'wpcf_pr_admin_post_init_action', 10, 4);
-//add_action('save_post', 'wpcf_pr_admin_save_post_hook', 10, 2);
+add_action('save_post', 'wpcf_pr_admin_save_post_hook', 10, 2);
 add_filter('get_post_metadata', 'wpcf_pr_meta_belongs_filter', 10, 4);
 
 /**
@@ -282,7 +282,7 @@ function wpcf_pr_admin_post_meta_box_has_form_headers($post, $post_type,
         }
     } else {
         $item = new stdClass();
-        $item->ID = 'new_' . mt_rand();
+        $item->ID = 'new_' . wpcf_unique_id(serialize($post));
         $item->post_title = '';
         $item->post_content = '';
         $item->post_type = $post_type;
@@ -524,7 +524,7 @@ function wpcf_pr_admin_post_meta_box_has_row($post, $post_type, $data,
     // Set item
     if (empty($item)) {
         $item = new stdClass();
-        $item->ID = 'new_' . mt_rand();
+        $item->ID = 'new_' . wpcf_unique_id(serialize($post));
         $item->post_title = '';
         $item->post_content = '';
         $item->post_type = $post_type;
@@ -964,6 +964,9 @@ function wpcf_pr_admin_update_belongs($post_id, $data) {
         update_post_meta($post_id, '_wpcf_belongs_' . $post_type . '_id',
                 $post_owner_id);
         return __('Post updated', 'wpcf');
+    } else if (intval($post_owner_id) == 0) {
+        delete_post_meta($post_id, '_wpcf_belongs_' . $post_type . '_id');
+        return __('Post updated', 'wpcf');
     }
     return __('Passed wrong parameters', 'wpcf');
 }
@@ -1075,6 +1078,10 @@ function wpcf_pr_admin_save_post_hook($parent_post_id) {
     }
     // Save child items
     if (defined('DOING_AJAX') && !isset($_REQUEST['wpcf_action'])) {
+        return array();
+    }
+    // ONLY AJAX
+    if (!defined('DOING_AJAX') || !isset($_REQUEST['wpcf_action'])) {
         return array();
     }
     remove_action('save_post', 'wpcf_pr_admin_save_post_hook', 10, 2);

@@ -380,17 +380,23 @@ function wpcf_admin_import_export_simplexml2array($element) {
     if (!empty($element) && is_object($element)) {
         $element = (array) $element;
     }
-    if (empty($element)) {
+    if (!is_array($element) && strval($element) == '0') {
+        $element = 0;
+    } else if (empty($element)) {
         $element = '';
     } else if (is_array($element)) {
         foreach ($element as $k => $v) {
             $v = is_string($v) ? trim($v) : $v;
-            if (empty($v)) {
+            if (!is_array($v) && strval($v) == '0') {
+                $element[$k] = 0;
+            } else if (empty($v)) {
                 $element[$k] = '';
                 continue;
             }
             $add = wpcf_admin_import_export_simplexml2array($v);
-            if (!empty($add)) {
+            if (!is_array($add) && strval($add) == '0') {
+                $element[$k] = 0;
+            } else if (!empty($add)) {
                 $element[$k] = $add;
             } else {
                 $element[$k] = '';
@@ -398,7 +404,9 @@ function wpcf_admin_import_export_simplexml2array($element) {
         }
     }
 
-    if (empty($element)) {
+    if (!is_array($element) && strval($element) == '0') {
+        $element = 0;
+    } else if (empty($element)) {
         $element = '';
     }
 

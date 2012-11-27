@@ -123,7 +123,8 @@ function wpcf_admin_help($page, $contextual_help) {
                             'wpcf')
                     . '</li><li>'
                     . __('You can drag and drop the order of your custom fields using the blue icon',
-                            'wpcf');
+                            'wpcf')
+                    . '</li></ul>';
             break;
 
         // Add/Edit custom type form page

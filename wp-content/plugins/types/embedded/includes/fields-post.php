@@ -43,10 +43,30 @@ function wpcf_admin_post_init($post = false) {
     }
 
     // Add marketing box
-    if (!in_array($post_type, array('post', 'page'))) {
-        add_meta_box('wpcf-marketing',
-                __('How-To Display Custom Content', 'wpcf'),
-                'wpcf_admin_post_marketing_meta_box', $post_type, 'side', 'high');
+    if (!in_array($post_type, array('post', 'page'))
+            && !defined('WPCF_RUNNING_EMBEDDED')) {
+        $hide_help_box = true;
+        $help_box = wpcf_get_settings('help_box');
+        $custom_types = get_option('wpcf-custom-types', array());
+        if ($help_box != 'no') {
+            if ($help_box == 'by_types' && array_key_exists($post_type,
+                            $custom_types)) {
+                $hide_help_box = false;
+            }
+            if (function_exists('wprc_is_logged_to_repo') && wprc_is_logged_to_repo(WPCF_REPOSITORY)) {
+                $hide_help_box = true;
+            }
+            if ($help_box == 'all') {
+                $hide_help_box = false;
+            }
+
+            if (!$hide_help_box) {
+                add_meta_box('wpcf-marketing',
+                        __('How-To Display Custom Content', 'wpcf'),
+                        'wpcf_admin_post_marketing_meta_box', $post_type,
+                        'side', 'high');
+            }
+        }
     }
 
     // Get groups
@@ -97,6 +117,15 @@ function wpcf_admin_post_init($post = false) {
  * @param type $group 
  */
 function wpcf_admin_post_meta_box($post, $group) {
+
+    static $nonce_added = false;
+    
+    if (!$nonce_added) {
+        $nonce_action = 'update-' . $post->post_type . '_' . $post->ID;
+        wp_nonce_field($nonce_action, '_wpcf_post_wpnonce');
+        $nonce_added = true;
+    }
+
     if (!empty($group['args']['_conditional_display'])) {
         if ($group['args']['_conditional_display'] == 'failed') {
             echo '<div class="wpcf-cd-group wpcf-cd-group-failed" style="display:none;">';
@@ -158,7 +187,7 @@ function wpcf_admin_post_meta_box($post, $group) {
  * @param type $post 
  */
 function wpcf_admin_post_save_post_hook($post_ID, $post) {
-    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'],
+    if (!isset($_POST['_wpcf_post_wpnonce']) || !wp_verify_nonce($_POST['_wpcf_post_wpnonce'],
                     'update-' . $post->post_type . '_' . $post_ID)) {
         return false;
     }
@@ -284,6 +313,8 @@ function wpcf_admin_post_save_post_hook($post_ID, $post) {
 function wpcf_admin_post_save_field($post_ID, $meta_key, $field, $field_value,
         $add = false) {
     // Apply filters
+    if (is_string($field_value))
+        $field_value = trim($field_value);
     $field_value = apply_filters('wpcf_fields_value_save', $field_value,
             $field['type'], $field['slug'], $field);
     $field_value = apply_filters('wpcf_fields_slug_' . $field['slug']
@@ -322,13 +353,13 @@ function wpcf_admin_post_js_validation() {
 
     ?>", url);
         }
-                                                        
+                                                                            
         var wpcfFieldsEditorCallback_redirect = null;
-                                                        
+                                                                            
         function wpcfFieldsEditorCallback_set_redirect(function_name, params) {
             wpcfFieldsEditorCallback_redirect = {'function' : function_name, 'params' : params};
         }
-                                                        
+                                                                            
         //]]>
     </script>
     <?php
@@ -443,7 +474,7 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
             } else {
                 $temp_flag = true;
             }
-            
+
             // Get repetitive fields values
             if ($temp_flag && !empty($post->ID)) {
                 $temp_flag = false;
@@ -456,7 +487,7 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
                         '#type' => 'markup',
                         '#markup' => '<div id="wpcf_'
                         . $field['id']
-                        . '_repetitive_wrapper_' . mt_rand()
+                        . '_repetitive_wrapper_' . wpcf_unique_id(serialize($field))
                         . '" class="wpcf-repetitive-wrapper">',
                         '#id' => $field['id'] . '_repetitive_wrapper_open',
                     );
@@ -513,7 +544,7 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
                         '#type' => 'markup',
                         '#markup' => '<div id="wpcf_'
                         . $field['id']
-                        . '_repetitive_wrapper_' . mt_rand()
+                        . '_repetitive_wrapper_' . wpcf_unique_id(serialize($field))
                         . '" class="wpcf-repetitive-wrapper">',
                         '#id' => $field['id'] . '_repetitive_wrapper_open',
                     );
@@ -609,7 +640,8 @@ function wpcf_admin_post_process_field($post = false, $field_unedited = array(),
         $field['value'] = isset($field_unedited['value']) ? maybe_unserialize($field_unedited['value']) : '';
         $field['wpml_action'] = isset($field_unedited['wpml_action']) ? $field_unedited['wpml_action'] : '';
 
-        $field_id = 'wpcf-' . $field['type'] . '-' . $field['slug'] . '-' . mt_rand();
+        $field_id = 'wpcf-' . $field['type'] . '-' . $field['slug'] . '-'
+                . wpcf_unique_id(serialize($field));
         $field_init_data = wpcf_fields_type_action($field['type']);
 
         // Get inherited field
@@ -716,7 +748,8 @@ function wpcf_admin_post_process_field($post = false, $field_unedited = array(),
                         // If no ID
                         if (!isset($element_specific_fields_value['#id'])) {
                             $element_specific_fields_value['#id'] = 'wpcf-'
-                                    . $field['slug'] . '-' . mt_rand();
+                                    . $field['slug'] . '-'
+                                    . wpcf_unique_id(serialize($field));
                         }
                         // Set validation element
                         if (!empty($element_specific_fields_value['#_validate_this']) && isset($field['data']['validate'])) {
@@ -725,7 +758,8 @@ function wpcf_admin_post_process_field($post = false, $field_unedited = array(),
                         if ($element_specific_fields_key != 'skypename') {
                             if (!isset($element_specific_fields_value['#name'])) {
                                 $element_specific_fields_value['#name'] = 'wpcf[ignore]['
-                                        . mt_rand() . ']';
+                                        . wpcf_unique_id(serialize($element_specific_fields_value))
+                                        . ']';
                             }
                             $skype_element[$element_specific_fields_value['#id']] = $element_specific_fields_value;
                             continue;
@@ -893,9 +927,9 @@ function wpcf_admin_post_get_post_groups_fields($post = false,
                 }
                 $support_terms = true;
                 $terms = wp_get_post_terms($post->ID, $tax_slug,
-                        array('fields' => 'ids'));
+                        array('fields' => 'all'));
                 foreach ($terms as $term_id) {
-                    $post->_wpcf_post_terms[] = $term_id;
+                    $post->_wpcf_post_terms[] = $term_id->term_taxonomy_id;
                 }
             }
         }
@@ -1368,6 +1402,9 @@ function wpcf_admin_post_process_repetitive_field_skype($post, $field,
     foreach ($skype_element as $element_key_temp => &$element) {
         $element_key = $element['__element_key'];
         if (!isset($field['value'][$element_key])) {
+            if (!is_array($field['value'])) {
+                $field['value'] = array();
+            }
             $field['value'][$element_key] = '';
         }
 
@@ -1469,7 +1506,15 @@ function wpcf_admin_post_process_repetitive_field_skype($post, $field,
  */
 function wpcf_admin_post_marketing_meta_box() {
     $output = '';
+
+    $views_plugin_available = false;
+
     if (defined('WPV_VERSION')) {
+        global $WP_Views;
+        $views_plugin_available = !$WP_Views->is_embedded();
+    }
+
+    if ($views_plugin_available) {
         $output .= '<p>' . sprintf(__("%sViews%s let's you create templates, query content from the database and display it.",
                                 'wpcf'),
                         '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/?utm_source=types&utm_medium=plugin&utm_term=views&utm_content=promobox&utm_campaign=types" title="Views" target="_blank">',
@@ -1491,7 +1536,7 @@ function wpcf_admin_post_marketing_meta_box() {
                 . '</a></li>'
                 . '</ul>'
                 . '<p style="margin-top:2em;"><a class="button button-highlighted" href="http://wp-types.com/buy/?utm_source=types&utm_medium=plugin&utm_term=buy&utm_content=post-edit-sidebar&utm_campaign=types" target="_blank">'
-                . __('Buy Views ($49)', 'wpcf')
+                . __('Buy Views Toolset', 'wpcf')
                 . '</a></p>'
                 . '<p style="font-size: 90%;">'
                 . __('Risk free - 30 days money back guarantee', 'wpcf')

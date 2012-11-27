@@ -10,16 +10,17 @@ if (isset($_GET['page']) && in_array($_GET['page'],
     add_action('wpcf_admin_page_init', 'wpcf_footer_credit_message_init');
 }
 
+if (!is_admin()) {
+    wpcf_footer_credits_init();
+}
+
 /**
  * Init function. 
  */
 function wpcf_footer_credits_init() {
     $template = get_template();
     $option = get_option('wpcf_footer_credit', false);
-    if ($option == false) {
-        $option['active'] = wpcf_footer_credits_check_new();
-    }
-    if ($option['active']) {
+    if (!empty($option['active'])) {
         if (in_array($template, array('twentyten', 'twentyeleven'))) {
             add_action($template . '_credits', 'wpcf_footer_credit_render');
         } else if ($template == 'canvas') {
@@ -34,37 +35,6 @@ function wpcf_footer_credits_init() {
             add_action('wp_footer', 'wpcf_footer_credit_render');
         }
     }
-}
-
-/**
- * Check if it's fresh install
- */
-function wpcf_footer_credits_check_new() {
-    $options = array(
-        'wpcf-custom-taxonomies',
-        'wpcf-custom-types',
-        'wpcf-fields',
-    );
-    $data = wpcf_footer_credit_defaults();
-    shuffle($data);
-    $message = rand(0, count($data));
-    $check = defined('WPCF_SRC') && WPCF_SRC == 'wporg' ? 0 : 1;
-    foreach ($options as $option) {
-        $option = get_option($option, false);
-        if ($option != false) {
-            $check = false;
-            $active = get_option('wpcf_footer_credit', false);
-            if ($active == false) {
-                update_option('wpcf_footer_credit',
-                        array('active' => 0, 'message' => $message));
-            }
-            return $check;
-            break;
-        }
-    }
-    update_option('wpcf_footer_credit',
-            array('active' => $check, 'message' => $message));
-    return $check;
 }
 
 /**
@@ -93,33 +63,33 @@ function wpcf_footer_credit_defaults() {
  * Renders credits in footer. 
  */
 function wpcf_footer_credit_render() {
-    $active = defined('WPCF_SRC') && WPCF_SRC == 'wporg' ? 0 : 1;
-    $option = get_option('wpcf_footer_credit', array('active' => $active));
-    // Set message
-    $data = wpcf_footer_credit_defaults();
-    if (isset($option['message']) && isset($data[$option['message']])) {
-        $message = $data[$option['message']];
-    } else {
-        $message = $data[0];
-    }
-    $template = get_template();
-    if ($template == 'canvas') {
-        echo '<p style="margin-bottom:10px;">' . $message . '</p>';
-    } else if ($template == 'genesis') {
-        echo '<div id="types-credits" class="creds"><p>' . $message . '</p></div>';
-    } else if ($template == 'thesis_18') {
-        echo '<p>' . $message . '</p>';
-    } else if ($template == 'headway') {
-        echo '<p style="float:none;" class="footer-left footer-headway-link footer-link">' . $message . '</p>';
-    } else if ($template == 'twentyeleven') {
-        echo $message . '<br />';
-    } else if ($template == 'twentyten') {
-        echo str_replace('<a ', '<a style="background:none;" ', $message) . '<br />';
-    } else {
-        echo '<div id="types-credits" style="margin: 10px 0 10px 0;width:95%;text-align:center;font-size:0.9em;">' . $message . '</div>';
+    $option = get_option('wpcf_footer_credit', false);
+    if (!empty($option['active'])) {
+        // Set message
+        $data = wpcf_footer_credit_defaults();
+        if (isset($option['message']) && isset($data[$option['message']])) {
+            $message = $data[$option['message']];
+        } else {
+            $message = $data[0];
+        }
+        $template = get_template();
+        if ($template == 'canvas') {
+            echo '<p style="margin-bottom:10px;">' . $message . '</p>';
+        } else if ($template == 'genesis') {
+            echo '<div id="types-credits" class="creds"><p>' . $message . '</p></div>';
+        } else if ($template == 'thesis_18') {
+            echo '<p>' . $message . '</p>';
+        } else if ($template == 'headway') {
+            echo '<p style="float:none;" class="footer-left footer-headway-link footer-link">' . $message . '</p>';
+        } else if ($template == 'twentyeleven') {
+            echo $message . '<br />';
+        } else if ($template == 'twentyten') {
+            echo str_replace('<a ', '<a style="background:none;" ', $message) . '<br />';
+        } else {
+            echo '<div id="types-credits" style="margin: 10px 0 10px 0;width:95%;text-align:center;font-size:0.9em;">' . $message . '</div>';
+        }
     }
 }
-
 
 /**
  * Support message init.
@@ -139,18 +109,19 @@ function wpcf_footer_credit_message() {
     if (in_array('footer_credit_support_message', $dismissed)) {
         return false;
     }
-    $option = get_option('wpcf_footer_credit', array('active' => 0));
-    if (defined('WPCF_SRC') && WPCF_SRC == 'wporg' && empty($option['active'])) {
+    $option = get_option('wpcf_footer_credit', false);
+    if (empty($option['active'])) {
         $message = __('You too can support Types! Would you like to add a small credit link, saying that you\'re using Types for custom fields or custom post types?',
                         'wpcf')
                 . '<br /><br />'
                 . '<a onclick="jQuery(this).parent().parent().fadeOut();" class="wpcf-ajax-link button-primary" href="'
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=footer_credit_activate_message&amp;_wpnonce='
-                        . wp_create_nonce('footer_credit_activate_message')) . '" class="button-primary">' . __('Yes', 'wpcf') . '</a>'
+                        . wp_create_nonce('footer_credit_activate_message')) . '" class="button-primary">' . __('Yes',
+                        'wpcf') . '</a>'
                 . "&nbsp;<a onclick=\"jQuery(this).parent().parent().fadeOut();\" class=\"wpcf-ajax-link button-secondary\" href=\""
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=dismiss_message&amp;id='
                         . 'footer_credit_support_message' . '&amp;_wpnonce=' . wp_create_nonce('dismiss_message')) . "\">"
                 . __('No, thanks', 'wpcf') . '</a>';
         echo '<div class="message updated"><p>' . $message . '</p></div>';
     }
- }
+}

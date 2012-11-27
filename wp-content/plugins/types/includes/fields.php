@@ -41,10 +41,10 @@ function wpcf_admin_get_taxonomies_by_group($group_id) {
                     t.term_id, t.slug, t.name
                     FROM {$wpdb->prefix}term_taxonomy tt
             JOIN {$wpdb->prefix}terms t
-            WHERE t.term_id = tt.term_id AND tt.term_id="
+            WHERE t.term_id = tt.term_id AND tt.term_taxonomy_id="
                     . intval($term), ARRAY_A);
             if (!empty($term)) {
-                $taxonomies[$term['taxonomy']][$term['term_id']] = $term;
+                $taxonomies[$term['taxonomy']][$term['term_taxonomy_id']] = $term;
             }
         }
     } else {
@@ -632,8 +632,8 @@ function wpcf_admin_fields_get_groups_by_field($field_id) {
         if (array_key_exists($field_id, $fields)) {
             $return[$group['id']] = $group;
         }
+        $cache['groups'][$group_id] = $fields;
     }
-    $cache['groups'][$group_id] = $fields;
     return $return;
 }
 

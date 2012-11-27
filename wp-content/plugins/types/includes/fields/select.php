@@ -23,7 +23,7 @@
  * @return type 
  */
 function wpcf_fields_select_insert_form($form_data = array(), $parent_name = '') {
-    $id = 'wpcf-fields-select-' . mt_rand();
+    $id = 'wpcf-fields-select-' . wpcf_unique_id(serialize($form_data));
     $form['name'] = array(
         '#type' => 'textfield',
         '#title' => __('Name of custom field', 'wpcf'),
@@ -43,7 +43,12 @@ function wpcf_fields_select_insert_form($form_data = array(), $parent_name = '')
     $form['options-markup-open'] = array(
         '#type' => 'markup',
         '#markup' => '<strong>' . __('Options', 'wpcf')
-        . '</strong><br /><br /><div id="' . $id . '-sortable"'
+        . '</strong><br /><br />'
+        . '<div class="wpcf-form-options-header-title">'
+        . '<em>' . __('Display text', 'wpcf') . '</em>'
+        . '</div><div class="wpcf-form-options-header-value">'
+        . '<em>' . __('Custom field content', 'wpcf') . '<em></div>'
+        . '<div id="' . $id . '-sortable"'
         . ' class="wpcf-fields-select-sortable wpcf-compare-unique-value-wrapper">',
     );
     $options = !empty($form_data['options']) ? $form_data['options'] : array();
@@ -85,13 +90,15 @@ function wpcf_fields_select_insert_form($form_data = array(), $parent_name = '')
 }
 
 function wpcf_fields_select_get_option($parent_name = '', $form_data = array()) {
-    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-select-option-' . mt_rand();
+    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-select-option-'
+            . wpcf_unique_id(serialize($form_data));
     $form = array();
     $value = isset($_GET['count']) ? __('Option title', 'wpcf') . ' ' . $_GET['count'] : __('Option title',
                     'wpcf') . ' 1';
     $value = isset($form_data['title']) ? $form_data['title'] : $value;
     $form[$id . '-title'] = array(
         '#type' => 'textfield',
+        '#id' => $id . '-title',
         '#name' => $parent_name . '[options][' . $id . '][title]',
         '#value' => $value,
         '#inline' => true,
@@ -110,6 +117,7 @@ function wpcf_fields_select_get_option($parent_name = '', $form_data = array()) 
     $value = isset($form_data['value']) ? $form_data['value'] : $value;
     $form[$id . '-value'] = array(
         '#type' => 'textfield',
+        '#id' => $id . '-value',
         '#name' => $parent_name . '[options][' . $id . '][value]',
         '#value' => $value,
         '#inline' => true,
@@ -120,6 +128,7 @@ function wpcf_fields_select_get_option($parent_name = '', $form_data = array()) 
     );
     $form[$id . '-default'] = array(
         '#type' => 'radio',
+        '#id' => $id . '-default',
         '#inline' => true,
         '#title' => __('Default', 'wpcf'),
         '#after' => '</div>',
