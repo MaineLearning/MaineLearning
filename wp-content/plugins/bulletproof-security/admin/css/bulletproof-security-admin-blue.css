@@ -17,7 +17,85 @@
 
 #messageinner {}
 .updatedinner {border:1px solid #999999; background-color: #ffffe0; width:80%; padding:2px 2px 2px 4px; margin:0px 0px 10px 0px;}
-/* #FFFFCC; /*
+/* #FFFFCC; */
+
+/********* Buttons ***********************/
+#message .bps-message-button, #messageinner .bps-message-button {
+	border-color:#bbb;color:#464646;
+	background:#f2f2f2 url(../images/white-grad-active.png) repeat-x scroll left top;
+	color:#fff;
+	font-weight:bold;
+	text-align:center;
+	/* width:100px; */
+ 	/* text-shadow:rgba(255,255,255,1) 0 1px 0; */
+	/* text-shadow:rgba(0,0,0,0.4) 0 1px 0; */
+	border-width:1px;
+ 	text-decoration:none;
+ 	font-size:12px!important;
+ 	line-height:12px;
+ 	padding:5px 8px;
+ 	cursor:pointer;
+ 	border-width:1px;
+ 	border-style:solid;
+ 	-moz-border-radius:11px;
+ 	-khtml-border-radius:11px;
+ 	-webkit-border-radius:11px;
+ 	border-radius:11px;
+ 	-moz-box-sizing:content-box;
+ 	-webkit-box-sizing:content-box;
+ 	-khtml-box-sizing:content-box;
+ 	box-sizing:content-box;
+	}
+
+#message .bps-message-button:hover, #messageinner .bps-message-button:hover {
+	color:#000;
+	border-color:#666;
+	text-shadow:rgba(255,255,255,1) 0 1px 0;
+	background:#f2f2f2 url(../images/white-grad.png) repeat-x scroll left top;
+	}
+	
+#message .bps-message-button:active, #messageinner .bps-message-button:active {
+	background:#eee url(../images/white-grad-active.png) repeat-x scroll left top;
+	}	
+
+#bps-container .bps-blue-button, #bps-container .bps-blue-button a {
+	border-color:#bbb;color:#464646;
+	background:#f2f2f2 url(../images/table_title_bg.png) repeat-x scroll left top;
+	color:#fff;
+	font-weight:bold;
+	/* text-align:center; */
+	/* width:100px; */
+ 	/* text-shadow:rgba(255,255,255,1) 0 1px 0; */
+	text-shadow:rgba(0,0,0,0.4) 0 1px 0;
+	border-width:1px;
+ 	text-decoration:none;
+ 	font-size:12px!important;
+	line-height:12px;
+ 	padding:5px 10px;
+ 	cursor:pointer;
+ 	border-width:1px;
+ 	border-style:solid;
+ 	-moz-border-radius:11px;
+ 	-khtml-border-radius:11px;
+ 	-webkit-border-radius:11px;
+ 	border-radius:11px;
+ 	-moz-box-sizing:content-box;
+ 	-webkit-box-sizing:content-box;
+ 	-khtml-box-sizing:content-box;
+ 	box-sizing:content-box;
+	}
+
+#bps-container .bps-blue-button:hover {
+	color:#000;
+	font-weight:bold;
+	border-color:#666;
+	text-shadow: 0 0 0.2em #00CCFF;
+	background:#f2f2f2 url(../images/menu_btn_over.png) repeat-x scroll left top;
+	}
+	
+#bps-container .bps-blue-button:active {
+	background:#eee url(../images/white-grad-active.png) repeat-x scroll left top;
+	}
 
 /********* IE Hacks ***********************/
 
@@ -37,10 +115,11 @@
 
 /**********************************************/
 
-/************** BPS Menu *********************/
+/************** BPS Menu **********************/
 .bps-menu {}
-.bps-menu ul li { border:1px solid #EBEBEB; font-size: 1.25em; font-weight:700;}
-.bps-menu ul li a { color:#FFFFFF; background-image:url(../images/menu_btn.png); background-repeat:none;}
+.bps-menu ul { border:1px solid #999; background-image:url(../images/menu_bg.png); background-repeat:repeat; background-position: left bottom; }
+.bps-menu ul li { border:1px solid #EBEBEB; font-size: 1.25em; font-weight:700; }
+.bps-menu ul li a { color:#FFFFFF; background-color: #fff; background-image:url(../images/menu_btn.png); background-repeat:none;}
 .bps-menu ul li a:hover {color:#000000; background-image:url(../images/menu_btn_over.png); background-repeat:none;}
 .bps-menu ul li a:active {color:#FFFFFF; background-image:url(../images/menu_btn_over.png); background-repeat:none;}
 
@@ -80,6 +159,8 @@
 	border:1px solid #999999;
 	padding:0px 10px 5px 10px;
 }
+
+/* #bps-edittabs-1, #bps-edittabs-2, #bps-edittabs-3, #bps-edittabs-4, #bps-edittabs-5, #bps-edittabs-6 {z-index:500;} */
 
 /* controlled by Interaction States Defunct CSS - delete
 #bps-tabs .ui-tabs-nav li.ui-tabs-selected a:link,
@@ -325,6 +406,7 @@
 
 /************* BPS File Editor ************/
 #bps_file_editor {width:700px;}
+#bps-edittabs {width:700px;position:relative;left:0px;top:0px; z-index:500;}
 #bps-enable_bu_file_dl_button {position:relative; top:-15px; left:0px; }
 #bps-download_buttons_table {position:relative; top:-25px; left:0px; }
 .bps_file_editor_update { background-color:#ffffe0;border:1px solid #999999; padding:5px 0px 5px 5px;}
@@ -391,13 +473,13 @@ font-family:Arial, Helvetica, sans-serif;
 	color:#fff;
 	font-weight:bold;
  	/* text-shadow:rgba(255,255,255,1) 0 1px 0; */
-	/* text-shadow:rgba(0,0,0,0.4) 0 1px 0; */
+	text-shadow:rgba(0,0,0,0.4) 0 1px 0;
 	border-width:1px;
  	text-decoration:none;
- 	font-size:14px!important;
- 	line-height:13px;
- 	padding:5px 8px;
- 	cursor:pointer;
+ 	font-size:12px!important;
+	line-height:12px;
+ 	padding:5px 10px;
+	cursor:pointer;
  	border-width:1px;
  	border-style:solid;
  	-moz-border-radius:11px;
@@ -413,8 +495,10 @@ font-family:Arial, Helvetica, sans-serif;
 #bps-open-modal input[type="button"]:hover,.bps-modal-button:hover {
 	color:#000;
 	border-color:#666;
-	text-shadow:rgba(255,255,255,1) 0 1px 0;
-	background:#f2f2f2 url(../images/white-grad.png) repeat-x scroll left top;
+/*	text-shadow:rgba(255,255,255,1) 0 1px 0;
+	background:#f2f2f2 url(../images/white-grad.png) repeat-x scroll left top; */
+	text-shadow: 0 0 0.2em #00CCFF;
+	background:#f2f2f2 url(../images/menu_btn_over.png) repeat-x scroll left top;
 	}
 	
 #bps-open-modal input[type="button"]:active,.bps-modal-button:active {
