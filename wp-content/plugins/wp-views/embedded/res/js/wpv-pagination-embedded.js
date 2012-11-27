@@ -7,6 +7,13 @@ jQuery(document).ready(function(){
         var max_pages = jQuery('#wpv_paged_max-'+view_number).val();
         wpv_pagination_preload_pages(view_number, 1, max_pages, false, true);
     });
+	
+	// Move the wpv_view_hash, wpv_paged_max and wpv_widget_view_id from the forms as it's only needed during ajax pagination
+	jQuery('input[name=wpv_view_hash], input[name=wpv_paged_max], input[name=wpv_widget_view_id]').each(function(index) {
+		jQuery(this).parent().after(this);
+	});
+
+
 });
 
 function encodeToHex(str){
@@ -131,7 +138,9 @@ function wpv_add_url_controls_for_column_sort(form) {
 function add_view_parameters(data, page, view_number) {
     data['action'] = 'wpv_get_page';
     data['page'] = page;
-    data['post_id'] = jQuery('input[name=wpv_post_id]').val();
+	if (jQuery('input[name=wpv_post_id]').length > 0) {
+		data['post_id'] = jQuery('input[name=wpv_post_id]').val();
+	}
     data['view_number'] = view_number;
     data['wpv_column_sort_id'] = jQuery('input[name=wpv_column_sort_id]').val();
     data['wpv_column_sort_dir'] = jQuery('input[name=wpv_column_sort_dir]').val();
@@ -174,19 +183,28 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
         data = {};
         data = add_url_query_parameters(data);
         for (var prop in data['get_params']) {
-            if (!(jQuery('#wpv-filter-' + view_number + ' > input[name=' + prop + ']').length > 0)) {
+            if (!(jQuery('form[name=wpv-filter-' + view_number + '] > input[name=' + prop + ']').length > 0)) {
                
             	jQuery('<input>').attr({
                                     type: 'hidden',
                                     name: prop,
                                     value: data['get_params'][prop]
-                                }).appendTo('#wpv-filter-' + view_number);
+                                }).appendTo('form[name=wpv-filter-' + view_number + ']');
 
             }
         }
         
-        jQuery('#wpv_paged-'+view_number).val(page);
-        jQuery('#wpv-filter-'+view_number).submit();
+		if (jQuery('input[name=wpv_paged]').length > 0) {
+			jQuery('input[name=wpv_paged]').attr('value', page);
+		} else {
+			jQuery('<input>').attr({
+							type: 'hidden',
+							name: 'wpv_paged',
+							value: page
+						}).appendTo('form[name=wpv-filter-' + view_number + ']');
+		}
+		
+        jQuery('form[name=wpv-filter-' + view_number + ']')[0].submit();
         return false;
     }
                 
@@ -203,7 +221,7 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
     }
                 
     var wpvPaginatorLayout = jQuery('#wpv-view-layout-'+view_number);
-    var wpvPaginatorFilter = jQuery('#wpv-filter-'+view_number);
+    var wpvPaginatorFilter = jQuery('form[name=wpv-filter-' + view_number + ']');
     var wpvPaginatorPageSelector = jQuery('#wpv-page-selector-'+view_number);
     var responseCached = '';
                 
@@ -348,7 +366,7 @@ function wpv_pagination_get_page(view_number, next, effect, speed, response, wpv
     var responseObj = jQuery('<div></div>').append(response);
     var responseView = responseObj.find('#wpv-view-layout-'+view_number);
     responseView.attr('id', 'wpv-view-layout-'+view_number).css('visibility', 'hidden').css('width', width);
-    var responseFilter = responseObj.find('#wpv-filter-'+view_number).html();
+    var responseFilter = responseObj.find('form[name=wpv-filter-' + view_number + ']').html();
 //    wpvPaginatorFilter.html(responseFilter);
                     
     if (wpvPaginatorLayout.hasClass('wpv-pagination-preload-images')) {
@@ -374,6 +392,12 @@ function wpv_pagination_get_page(view_number, next, effect, speed, response, wpv
         wpv_pagination_slide(view_number, width, height, next, effect, speed, responseView, wpvPaginatorLayout, wpvPaginatorFilter, callback_next);
     }
     wpvPaginatorFilter.html(responseFilter);
+	// Move the wpv_view_hash, wpv_paged_max and wpv_widget_view_id from the forms as it's only needed during ajax pagination
+	jQuery('input[name=wpv_view_hash], input[name=wpv_paged_max], input[name=wpv_widget_view_id]').each(function(index) {
+		jQuery(this).parent().after(this);
+	});
+
+	
 }
                 
 function wpv_pagination_slide(view_number, width, height, next, effect, speed, responseView, wpvPaginatorLayout, wpvPaginatorFilter, callback_next) {
@@ -562,8 +586,8 @@ jQuery.fn.wpvRollover = function(){
 
 function wpvPaginationQueueTrigger(view_number, next, wpvPaginatorFilter) {
     if (view_number in window.wpvPaginationQueue && window.wpvPaginationQueue[view_number].length > 0) {
-        var page = wpvPaginatorFilter.find('#wpv_paged-'+view_number).val();
-        var max_pages = wpvPaginatorFilter.find('#wpv_paged_max-'+view_number).val();
+        var page = wpvPaginatorFilter[0].find('#wpv_paged-'+view_number).val();
+        var max_pages = wpvPaginatorFilter[0].find('#wpv_paged_max-'+view_number).val();
         if (next) {
             page++;
         } else {

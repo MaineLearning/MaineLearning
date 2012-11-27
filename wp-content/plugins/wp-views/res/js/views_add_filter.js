@@ -20,9 +20,20 @@ function wpv_initialize_filter_select(filter) {
             });
             
             var type = jQuery('#' + filter + '_select').val();
-            type = type.replace('[', '\\[');
-            type = type.replace(']', '\\]');
-            jQuery('#' + filter + '_con_' + type).show();
+			if (type == -1) {
+				// Hide the "Condition:" text and the "Add field" button
+				jQuery('#' + filter + '_select').next().next().hide();
+				jQuery('#' + filter + '_select').parent().find('#wpv_add_filters_button').hide();
+				jQuery('#' + filter + '_select').parent().find('#wpv_add_filters_taxonomy_button').hide();
+			} else {
+				type = type.replace('[', '\\[');
+				type = type.replace(']', '\\]');
+				jQuery('#' + filter + '_con_' + type).show();
+				// Show the "Condition:" text and the "Add field" button
+				jQuery('#' + filter + '_select').next().next().show();
+				jQuery('#' + filter + '_select').parent().find('#wpv_add_filters_button').show();
+				jQuery('#' + filter + '_select').parent().find('#wpv_add_filters_taxonomy_button').show();
+			}			
         });
     }
     
@@ -148,12 +159,13 @@ function wpv_add_filter_submit(div_id) {
 
         var taxonomy_terms = Array();
         jQuery('.taxonomy-term-div input').each( function(index) {
-            if (jQuery(this).attr('checked')) {
+            if (jQuery(this).is(':checkbox') && jQuery(this).attr('checked')) {
                 taxonomy_terms.push(jQuery(this).attr('value'));
             }
         });
         
         data['taxonomy_term_checks'] = taxonomy_terms;
+		data['taxonomy_terms_mode'] = jQuery('.taxonomy_terms_mode').val();
     }
         
     
@@ -176,8 +188,13 @@ function wpv_add_filter_submit(div_id) {
     
     // Remove option
     jQuery('option[value="'+type+'"]').hide();
-    jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
-    jQuery('#popup_add_filter_select').trigger('change');
+    if (query_type == 'posts') {
+		jQuery('#popup_add_filter_select option:visible:first').attr('selected', 'selected');
+		jQuery('#popup_add_filter_select').trigger('change');
+    } else if (query_type == 'taxonomy') {
+		jQuery('#popup_add_filter_taxonomy_select option:visible:first').attr('selected', 'selected');
+		jQuery('#popup_add_filter_taxonomy_select').trigger('change');
+	}
 
     tb_remove();
  

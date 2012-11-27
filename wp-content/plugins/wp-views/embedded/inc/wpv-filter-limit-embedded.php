@@ -49,7 +49,7 @@ function wpv_filter_limit_query_post_process_filter($query, $view_settings) {
         } else {
             $posts = array_slice($query->posts, $offset, $limit);
         }
-        add_filter('wpv_filter_query', 'wpv_filter_limit_arg_post_in', 10, 2);
+        add_filter('wpv_filter_query', 'wpv_filter_limit_arg_post_in', 12, 2); // needs to be after post relationships filter
         global $wpv_limit_post_in;
         if (!empty($posts)) {
             $wpv_limit_post_in = array();
@@ -60,7 +60,7 @@ function wpv_filter_limit_query_post_process_filter($query, $view_settings) {
             $wpv_limit_post_in = array(0);
         }
         $query = wpv_filter_get_posts($view_settings['view_id']);
-        remove_filter('wpv_filter_query', 'wpv_filter_limit_arg_post_in', 10, 2);
+        remove_filter('wpv_filter_query', 'wpv_filter_limit_arg_post_in', 12, 2);
 
         add_filter('wpv_filter_query', 'wpv_filter_limit_arg', 10, 2);
 

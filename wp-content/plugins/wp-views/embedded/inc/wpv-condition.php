@@ -74,5 +74,57 @@ function wpv_shortcode_wpv_if($args, $content) {
     }
 }
 
-
 add_shortcode('wpv-if', 'wpv_shortcode_wpv_if');
+
+//////////////////////////////
+//////////////////////////////
+/**
+ * Handle wpv-if inside wpv-if
+ *
+ */
+//////////////////////////////
+//////////////////////////////
+
+function wpv_resolve_wpv_if_shortcodes($content) {
+	$content = wpv_parse_wpv_if_shortcodes($content);
+	
+	return $content;
+}
+
+// adding filter with priority before do_shortcode and other WP standard filters
+add_filter('the_content', 'wpv_resolve_wpv_if_shortcodes', 9);
+
+/**
+ * Search for the inner [wpv-if] [/wpv-if] pairs and process the inner ones first
+ */
+
+function wpv_parse_wpv_if_shortcodes($content) {
+	$expression = '/\\[wpv-if((?!\\[wpv-if).)*\\[\\/wpv-if\\]/isU';
+	$counts = preg_match_all($expression, $content, $matches);
+	
+	while ($counts) {
+		foreach($matches[0] as $match) {
+			$shortcode = do_shortcode($match);
+			$content = str_replace($match, $shortcode, $content);
+		}
+		
+		$counts = preg_match_all($expression, $content, $matches);
+	}
+	return $content;
+}
+
+// register filter for the wpv_do_shortcode Views rendering
+add_filter('wpv-pre-do-shortcode', 'wpv_parse_wpv_if_shortcodes');
+
+
+// Special handling to get shortcodes rendered in widgets.
+function wpv_resolve_wpv_if_shortcodes_for_widgets($content) {
+	$content = wpv_parse_wpv_if_shortcodes($content);
+	
+	return do_shortcode($content);
+}
+
+add_filter('widget_text', 'wpv_resolve_wpv_if_shortcodes_for_widgets');
+
+
+

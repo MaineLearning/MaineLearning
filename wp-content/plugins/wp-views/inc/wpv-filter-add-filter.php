@@ -34,11 +34,12 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
     ?>
     
         <div id="<?php echo $id; ?>" style="display:none">
-            <div id="<?php echo $id; ?>_controls">
+            <div id="<?php echo $id; ?>_controls" style="margin:20px;">
 
                 <strong><?php _e('Select what to filter by:', 'wpv-views'); ?></strong>
                 
                 <select id="<?php echo $id; ?>_select">
+                    <option value="-1"><?php echo __('--- Please select ---', 'wpv-views'); ?></option>
                 <?php
                     foreach($filters as $type => $filter) {
                         ?>
@@ -48,7 +49,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
                     }
                 ?>
                 </select>
-                <br />
+                <br style="margin: 20px 0;"/>
                 <strong><?php _e('Condition:', 'wpv-views'); ?></strong>
                 <?php
                     foreach($filters as $type => $filter) {
@@ -82,7 +83,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
                 
                 <br />
                 <br />
-                <input class="button-secondary" type="button" value="<?php echo __('Add filter', 'wpv-views'); ?>" name="<?php echo __('Add filter', 'wpv-views'); ?>" onclick="wpv_add_filter_submit('<?php echo $id; ?>')" />
+                <input class="button-secondary" type="button" id="<?php echo $filter_type; ?>_button" value="<?php echo __('Add filter', 'wpv-views'); ?>" name="<?php echo __('Add filter', 'wpv-views'); ?>" onclick="wpv_add_filter_submit('<?php echo $id; ?>')" />
                 
             </div>  
         </div>

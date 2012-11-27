@@ -1,5 +1,6 @@
 <?php
 
+global $wpv_shortcodes;
 $wpv_shortcodes = array();
 
 $wpv_shortcodes['wpv-post-id'] = array('wpv-post-id', __('ID', 'wpv-views'), 'wpv_shortcode_wpv_post_id');
@@ -58,7 +59,11 @@ function wpv_get_shortcode($name) {
     }
     
     if ($name == 'Taxonomy View') {
-        return 'wpv-view';
+        return WPV_TAXONOMY_VIEW;
+    }
+
+    if ($name == 'Post View') {
+        return WPV_POST_VIEW;
     }
     
     return null;
@@ -1011,6 +1016,7 @@ function wpv_post_taxonomies_shortcode() {
  * 'separator' => Separator to use when there are multiple taxonomy terms for the post. The default is a comma.
  * 'format' => 'link', 'text' or 'url'. Defaults to 'link'
  * 'show' => 'name', 'description', 'slug' or 'count'. Defaults to 'name'
+ * 'order' => 'asc', 'desc'. Defaults to 'asc'
  *
  */
 
@@ -1020,7 +1026,9 @@ function wpv_post_taxonomies_shortcode_render($atts) {
 
     extract(
         shortcode_atts( array('format' => 'link',
-                              'show' => 'name'), $atts )
+                              'show' => 'name',
+                              'order' => 'asc'),
+                       $atts )
     );
 
     global $wplogger;
@@ -1064,16 +1072,22 @@ function wpv_post_taxonomies_shortcode_render($atts) {
                 }
                 
                 if ($format == 'text') {
-                    $out_terms[] = $text;
+                    $out_terms[$term->name] = $text;
                 } else if ($format == 'url') {
-                    $out_terms[] = $term_link;
+                    $out_terms[$term->name] = $term_link;
                 } else {
-                    $out_terms[] = '<a href="' . $term_link . '">' . $text . '</a>';
+                    $out_terms[$term->name] = '<a href="' . $term_link . '">' . $text . '</a>';
                 }
             }
         }
     }
     if (!empty($out_terms)) {
+        if ($order == 'asc') {
+            ksort($out_terms);
+        } elseif ($order == 'desc') {
+            ksort($out_terms);
+            $out_terms = array_reverse($out_terms);
+        }
         $out = implode($separator, $out_terms);
     }
 
@@ -1088,7 +1102,7 @@ function wpv_post_taxonomies_editor_addon_menus_wpv_views_filter($items) {
                 || $taxonomy_slug == 'post_format') {
             continue;
         }
-        $add[__('Taxonomy', 'wpv-views')][$taxonomy->label] = array($taxonomy->label, 'wpv-post-taxonomy type="' . $taxonomy_slug . '" separator=", " format="link" show="name"', __('Category', 'wpv-views'), '');
+        $add[__('Taxonomy', 'wpv-views')][$taxonomy->label] = array($taxonomy->label, 'wpv-post-taxonomy type="' . $taxonomy_slug . '" separator=", " format="link" show="name" sort="none"', __('Category', 'wpv-views'), '');
     }
 
     $part_one = array_slice($items, 0, 1);
@@ -1200,7 +1214,7 @@ $wpv_for_each_index = array(); // global for storing the current wpv-for-each in
  * Example usage:
  *
  * Output the field values as an ordered list
- * <ol>[wpv-for-each field="my-field"]<li>[wpv-post-field name="my-field]</li>[/wpv-for-each]<ol>
+ * <ol>[wpv-for-each field="my-field"]<li>[wpv-post-field name="my-field"]</li>[/wpv-for-each]<ol>
  *
  **/
 

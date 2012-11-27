@@ -1,5 +1,6 @@
 <?php
 
+global $taxonomy_checkboxes_defaults;
 $taxonomy_checkboxes_defaults = array(
     'taxonomy_hide_empty' => true,
     'taxonomy_include_non_empty_decendants' => true,
@@ -26,6 +27,10 @@ function wpv_taxonomy_default_settings($view_settings) {
     
     if (!isset($view_settings['taxonomy_terms'])) {
         $view_settings['taxonomy_terms'] = array();
+    }
+
+    if (!isset($view_settings['taxonomy_terms_mode'])) {
+        $view_settings['taxonomy_terms_mode'] = 'THESE';
     }
 
     return $view_settings;
@@ -104,15 +109,36 @@ function get_taxonomy_query($view_settings) {
         }
     }
     
-    if (sizeof($view_settings['taxonomy_terms'])) {
-        // filter by indiviual taxonomy terms.
+    if ($view_settings['taxonomy_terms_mode'] == 'THESE') {
+        if (sizeof($view_settings['taxonomy_terms'])) {
+            // filter by indiviual taxonomy terms.
+            
+            $filtered_terms = array();
+            
+            foreach($items as $item) {
+                if (in_array($item->term_id, $view_settings['taxonomy_terms'])) {
+                    // only add the terms in the 'taxonomy_terms' array.
+                    $filtered_terms[] = $item;
+                }
+            }
+            
+            $items = $filtered_terms;
+            
+        }
+    } else {
+        // get the terms from the current page.
+
+        global $post;
+        $terms = get_the_terms($post->ID, $view_settings['taxonomy_type'][0]);
         
         $filtered_terms = array();
         
         foreach($items as $item) {
-            if (in_array($item->term_id, $view_settings['taxonomy_terms'])) {
-                // only add the terms in the 'taxonomy_terms' array.
-                $filtered_terms[] = $item;
+            foreach($terms as $term) {
+                if ($item->term_id == $term->term_id) {
+                    // only add the terms in the 'taxonomy_terms' array.
+                    $filtered_terms[] = $item;
+                }
             }
         }
         
@@ -173,3 +199,15 @@ function wpv_no_taxonomy_found($atts, $value){
     
 }
     
+add_filter('wpv_filter_requires_current_page', 'wpv_filter_tax_requires_current_page', 10, 2);
+function wpv_filter_tax_requires_current_page($state, $view_settings) {
+	if ($state) {
+		return $state; // Already set
+	}
+    if (isset($view_settings['taxonomy_terms_mode']) && $view_settings['taxonomy_terms_mode'] == 'CURRENT_PAGE') {
+        $state = true;
+    }
+	
+	return $state;
+	
+}

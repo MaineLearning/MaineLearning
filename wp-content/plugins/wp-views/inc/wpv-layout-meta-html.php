@@ -56,14 +56,14 @@ function wpv_layout_meta_html_admin($post, $view_layout_settings) {
                     </div>
            
                     <?php
-                        $show = $view_settings['query_type'][0] == 'posts' ? '' : 'style="display:none"';
+                        $show = $view_settings['query_type'][0] == 'posts' ? 'style="display:inline"' : 'style="display:none"';
                     ?>
                     <div id="wpv-layout-v-icon-posts" <?php echo $show;?>>
-                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_layout_meta_html_content'); ?>
+                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_layout_meta_html_content', true, true); ?>
                     </div>
                     
                     <?php
-                        $show = $view_settings['query_type'][0] == 'taxonomy' ? '' : 'style="display:none"';
+                        $show = $view_settings['query_type'][0] == 'taxonomy' ? 'style="display:inline"' : 'style="display:none"';
                     ?>
                     <div id="wpv-layout-v-icon-taxonomy" <?php echo $show;?>>
                     <?php
@@ -78,12 +78,16 @@ function wpv_layout_meta_html_admin($post, $view_layout_settings) {
                     ?>
                     </div>
                     
-                    <textarea name="_wpv_layout_settings[layout_meta_html]" id="wpv_layout_meta_html_content" cols="40" rows="10" style="width:100%;margin-top:10px"><?php echo $view_layout_settings['layout_meta_html']; ?></textarea>
+                    <!--<div style="display:inline">-->
+                    <?php echo apply_filters('wpv_meta_html_add_form_button', '', '#wpv_layout_meta_html_content'); ?>
+                    <!--</div>-->
+                    
+                    <textarea name="_wpv_layout_settings[layout_meta_html]" id="wpv_layout_meta_html_content" cols="40" rows="16" style="width:100%;margin-top:10px"><?php echo $view_layout_settings['layout_meta_html']; ?></textarea>
                     <div id="wpv_layout_meta_html_content_old_div" style="display:none">
                         <div class="wpv_form_notice"><?php _e('<strong>Your edits are shown below:</strong>', 'wpv-views'); ?> <a style="cursor:pointer;margin-bottom:10px;" onclick="wpv_layout_meta_html_old_dismiss()"><strong><?php echo __('dismiss', 'wpv-views'); ?></strong></a></div>
-                        <textarea id="wpv_layout_meta_html_content_old" cols="40" rows="10" style="width:100%;margin-top:10px"></textarea>
+                        <textarea id="wpv_layout_meta_html_content_old" cols="40" rows="16" style="width:100%;margin-top:10px"></textarea>
                     </div>
-                    <textarea name="_wpv_layout_settings[generated_layout_meta_html]" id="wpv_generated_layout_meta_html_content" cols="40" rows="10" style="display:none"><?php echo $view_layout_settings['generated_layout_meta_html']; ?></textarea>
+                    <textarea name="_wpv_layout_settings[generated_layout_meta_html]" id="wpv_generated_layout_meta_html_content" cols="40" rows="16" style="display:none"><?php echo $view_layout_settings['generated_layout_meta_html']; ?></textarea>
                     <div id="wpv_layout_meta_html_notice" class="wpv_form_notice" style="display:none;"><?php _e('* These updates will take effect when you save the view.', 'wpv-views'); ?></div>
                     <p><a style="cursor:pointer;margin-bottom:10px;" onclick="wpv_view_layout_meta_html_close()"><strong><?php _e('Close', 'wpv-views'); ?></strong></a></p>
                 </div>

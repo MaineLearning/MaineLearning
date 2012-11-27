@@ -196,28 +196,25 @@ class WP_Views_archive_loops{
         
         $loops = $this->_get_post_type_loops();
 
-        ?>
-        
-        <h3 class="title"><?php _e('Views for Post Type archive loops', 'wpv-views'); ?></h3>
-        
-        <?php
+		$WP_Views->admin_section_start(__('Views for Post Type archive loops', 'wpv-views'),
+									   'http://wp-types.com/documentation/user-guides/normal-vs-archive-views/',
+									   __('All about archive Views', 'wpv-views'));
+	
+		$this->_display_post_type_loop_summary($loops, $options);
+		$this->_display_post_type_loop_admin($loops, $options);
+	
+		$WP_Views->admin_section_end();
+		
+				
+		// Display controls for the Taxonomy archive loops
+		
+		$WP_Views->admin_section_start(__('Views for Taxonomy archive loops', 'wpv-views'));
+						
+		$this->_display_taxonomy_loop_summary($options);
+		$this->_display_taxonomy_loop_admin($options);
+		
+		$WP_Views->admin_section_end();
 
-        $this->_display_post_type_loop_summary($loops, $options);
-        $this->_display_post_type_loop_admin($loops, $options);
-        
-        
-        // Display controls for the Taxonomy archive loops
-
-        ?>
-        
-        <h3 class="title"><?php _e('Views for Taxonomy archive loops', 'wpv-views'); ?></h3>
-        
-        <?php
-        
-        
-        $this->_display_taxonomy_loop_summary($options);
-        $this->_display_taxonomy_loop_admin($options);
-        
     }
 
     function _get_post_type_loops() {
@@ -275,7 +272,7 @@ class WP_Views_archive_loops{
         }
 
         if ($selected == '') {
-            $selected = __('There are no Views being used for Post Type archive loops.', 'wpv-views');
+            $selected = __('There are no Views being used for Post Type archive loops.', 'wpv-views') . '<br />';
         } else {
             $selected = '<ul style="margin-left:20px">' . $selected . '</ul>';
         }
@@ -384,7 +381,7 @@ class WP_Views_archive_loops{
         }
 
         if ($selected == '') {
-            $selected = __('There are no Views being used for Taxonomy archive loops.', 'wpv-views');
+            $selected = __('There are no Views being used for Taxonomy archive loops.', 'wpv-views') . '<br />';
         } else {
             $selected = '<ul style="margin-left:20px">' . $selected . '</ul>';
         }

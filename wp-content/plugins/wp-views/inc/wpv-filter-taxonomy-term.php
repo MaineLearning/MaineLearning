@@ -32,7 +32,9 @@ if(is_admin()){
      */
     
     function wpv_add_filter_taxonomy_term_table_row($view_settings) {
-        if (isset($view_settings['taxonomy_terms']) && sizeof($view_settings['taxonomy_terms']) > 0) {
+        if (isset($view_settings['taxonomy_terms']) &&
+					(sizeof($view_settings['taxonomy_terms']) > 0) ||
+					$view_settings['taxonomy_terms_mode'] == 'CURRENT_PAGE') {
             global $view_settings_table_row;
             $td = wpv_get_table_row_ui_taxonomy_term($view_settings_table_row, null, $view_settings);
         
@@ -63,6 +65,12 @@ if(is_admin()){
             } else {
                 $defaults['taxonomy_terms'] = array();
             }
+			
+			if (isset($_POST['taxonomy_terms_mode'])) {
+				$defaults['taxonomy_terms_mode'] = $_POST['taxonomy_terms_mode'];
+			} else {
+				$defaults['taxonomy_terms_mode'] = 'THESE';
+			}
             
             $view_settings = wp_parse_args($view_settings, $defaults);
         }
@@ -99,21 +107,26 @@ if(is_admin()){
         
         ob_start();
         
-    	echo __('Taxonomy is <strong>One</strong> of these', 'wpv-views');
-        echo '<strong> (';
-		$cat_text = '';
-        $category_selected = $view_settings['taxonomy_terms'];
-        $taxonomy = $view_settings['taxonomy_type'];
-        
-		foreach($category_selected as $cat) {
-			$term = get_term($cat, $taxonomy);
-			if ($cat_text != '') {
-				$cat_text .= ', ';
+		if ($view_settings['taxonomy_terms_mode'] == 'THESE') {
+			echo __('Taxonomy is <strong>One</strong> of these', 'wpv-views');
+			echo '<strong> (';
+			$cat_text = '';
+			$category_selected = $view_settings['taxonomy_terms'];
+			$taxonomy = $view_settings['taxonomy_type'];
+			
+			foreach($category_selected as $cat) {
+				$term = get_term($cat, $taxonomy);
+				if ($cat_text != '') {
+					$cat_text .= ', ';
+				}
+				$cat_text .= $term->name;
 			}
-			$cat_text .= $term->name;
+			echo $cat_text;
+			echo ')</strong>';
+		} else {
+			echo __('Taxonomy set by the current page', 'wpv-views');
 		}
-		echo $cat_text;
-		?>)</strong>
+		?>
 
         <br />
         <input class="button-secondary" type="button" value="<?php echo __('Edit', 'wpv-views'); ?>" name="<?php echo __('Edit', 'wpv-views'); ?>" onclick="wpv_show_taxonomy_term_edit()"/>
@@ -142,7 +155,8 @@ function wpv_add_term_taxonomy($args) {
     
     $view_settings = isset($args['view_settings']) ? $args['view_settings'] : array();
     
-    $defaults = array('taxonomy_terms' => array());
+    $defaults = array('taxonomy_terms' => array(),
+					  'taxonomy_terms_mode' => 'THESE');
     $view_settings = wp_parse_args($view_settings, $defaults);
 
     wp_nonce_field('wpv_get_taxonomy_term_check_nonce', 'wpv_get_taxonomy_term_check_nonce');
@@ -157,11 +171,24 @@ function wpv_add_term_taxonomy($args) {
             } else {
                 $taxonomy = 'category';
             }
-            
+
         ?>
+		<div>
+			<?php echo __('Taxonomy: ', 'wpv-views'); ?>
+			<?php if ($edit) { ?>
+				<select class="taxonomy_terms_mode" name="_wpv_settings[taxonomy_terms_mode]">
+			<?php } else { ?>
+				<select class="taxonomy_terms_mode" name="taxonomy_terms_mode">
+			<?php } ?>
+			
+				<option value="THESE"><?php echo __('is one of these', 'wpv-views'); ?></option>
+				<option value="CURRENT_PAGE" <?php if($view_settings['taxonomy_terms_mode'] == 'CURRENT_PAGE') {echo 'selected="selected"';} ?>><?php echo __('set by the current page', 'wpv-views'); ?></option>
+			</select>
+		</div>
+
         <input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>">
         
-		<ul class="categorychecklist form-no-clear">
+		<ul class="categorychecklist form-no-clear" <?php if($view_settings['taxonomy_terms_mode'] == 'CURRENT_PAGE') {echo 'style="display:none;"';}?>>
         
         <?php
             ob_start();
@@ -194,15 +221,25 @@ function wpv_add_term_taxonomy($args) {
 function wpv_get_taxonomy_term_check() {
     if (wp_verify_nonce($_POST['wpv_nonce'], 'wpv_get_taxonomy_term_check_nonce')) {
 			
-	$taxonomy = $_POST['taxonomy'];
-	
-        ?>
-	<input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>">
-	<ul class="categorychecklist form-no-clear">
-	<?php
-        echo wp_terms_checklist(0, array('taxonomy' => $taxonomy));
+		$taxonomy = $_POST['taxonomy'];
+				
+		?>
+		<div>
+			<?php echo __('Taxonomy: ', 'wpv-views'); ?>
+			<select class="taxonomy_terms_mode" name="taxonomy_terms_mode">
+				<option value="THESE"><?php echo __('is one of these', 'wpv-views'); ?></option>
+				<option value="CURRENT_PAGE"><?php echo __('set by the current page', 'wpv-views'); ?></option>
+			</select>
+		</div>
+		
+		<input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>">
+		<ul class="categorychecklist form-no-clear">
+		
+		<?php
+		
+		echo wp_terms_checklist(0, array('taxonomy' => $taxonomy));
+	    echo '</ul>';
     }
-    echo '</ul>';
     die();
 	
 }

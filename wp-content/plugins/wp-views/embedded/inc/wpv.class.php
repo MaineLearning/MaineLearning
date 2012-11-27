@@ -22,7 +22,8 @@ class WP_Views{
         $this->post_query = null;
 		$this->post_query_stack = array();
         
-        $this->view_count = 0;
+		$this->view_depth = 0;
+        $this->view_count = array();
         $this->set_view_counts = array();
 		
 		$this->taxonomy_data = array();
@@ -69,7 +70,8 @@ class WP_Views{
 		add_action('wp_ajax_wpv_get_show_hidden_custom_fields', array($this, 'wpv_get_show_hidden_custom_fields'));
 		add_action('wp_ajax_wpv_format_date', array($this, 'wpv_format_date'));
 		add_action('wp_ajax_nopriv_wpv_format_date', array($this, 'wpv_format_date'));
-        
+        add_action('wp_ajax_wpv_save_theme_debug_settings', array($this, 'wpv_save_theme_debug_settings'));
+		
         if(is_admin()){
 
             if (function_exists('wpv_admin_menu_import_export_hook')) {
@@ -108,7 +110,7 @@ class WP_Views{
             wp_enqueue_script( 'views-pagination-script' , WPV_URL_EMBEDDED . '/res/js/wpv-pagination-embedded.js', array('jquery'), WPV_VERSION);
             wp_enqueue_style( 'views-pagination-style', WPV_URL_EMBEDDED . '/res/css/wpv-pagination.css', array(), WPV_VERSION);
             
-			wp_enqueue_script( 'date-picker-script' , WPV_URL_EMBEDDED . '/res/js/jquery.ui.datepicker.min.js', array('jquery-ui-core', 'jquery'), WPV_VERSION);
+			wp_enqueue_script( 'jquery-ui-datepicker' , WPV_URL_EMBEDDED . '/res/js/jquery.ui.datepicker.min.js', array('jquery-ui-core', 'jquery'), WPV_VERSION);
 			wp_enqueue_style( 'date-picker-style' , WPV_URL_EMBEDDED . '/res/css/datepicker.css', array(), WPV_VERSION);
 			wp_enqueue_script( 'wpv-date-front-end-script' , WPV_URL_EMBEDDED . '/res/js/wpv-date-front-end-control.js', array('jquery'), WPV_VERSION);
 
@@ -352,19 +354,9 @@ class WP_Views{
         // do nothing in the theme version.
     }
     
-    
-    /**
-     * Process the view shortcode
-     *
-     * eg. [wpv-view name='my-view']
-     *
-     */
-    
-    function short_tag_wpv_view($atts){
+
+    function get_view_id($atts){
         global $wpdb;
-        
-        global $wplogger;
-        $wplogger->log($atts);
         
         extract(
             shortcode_atts( array(
@@ -381,6 +373,23 @@ class WP_Views{
                 $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type='view' AND post_title=%s", $name));
             }
         }
+
+		return $id;
+	}
+    
+    /**
+     * Process the view shortcode
+     *
+     * eg. [wpv-view name='my-view']
+     *
+     */
+    
+    function short_tag_wpv_view($atts){
+        
+        global $wplogger;
+        $wplogger->log($atts);
+		
+		$id = $this->get_view_id($atts);
         
         if(empty($id)){
             return sprintf('<!- %s ->', __('View not found', 'wpv-views'));
@@ -404,7 +413,7 @@ class WP_Views{
      */
     
     function short_tag_wpv_view_form($atts){
-        global $wpdb;
+        global $wpdb, $sitepress;
         
         global $wplogger;
         $wplogger->log($atts);
@@ -438,6 +447,10 @@ class WP_Views{
 	    if (isset($view_settings['filter_meta_html'])) {
 
 			$url = get_permalink($target_id);
+			if(isset($sitepress)){
+				$url = $sitepress->convert_url($url);
+			}
+			
 	        $out .= '<form action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
 			
 			// add hidden inputs for any url parameters.
@@ -506,7 +519,7 @@ class WP_Views{
 		if (isset($this->set_view_counts[$this->current_view])) {
 			return $this->set_view_counts[$this->current_view];
 		} else {
-			return $this->view_count;
+			return 10000 * ($this->view_depth - 1) + $this->view_count[$this->view_depth];
 		}
     }
 
@@ -514,7 +527,7 @@ class WP_Views{
 		if ($view_id) {
 			$this->set_view_counts[$view_id] = $count;
 		} else {
-			$this->view_count = $count;
+			$this->view_count[$this->view_depth] = $count;
 		}
     }
     
@@ -572,6 +585,8 @@ class WP_Views{
         
         global $post;
 		
+		$this->view_depth++;
+		
         if ($this->top_current_page == null) {
             $this->top_current_page = isset($post) ? clone $post : null;
         }
@@ -612,6 +627,7 @@ class WP_Views{
 		
 		$this->post_query = array_pop($this->post_query_stack);
         
+		$this->view_depth--;
         
         return $out;
     }
@@ -629,7 +645,10 @@ class WP_Views{
         static $processed_views = array();
 
         // increment the view count.
-        $this->view_count++;
+		if (!isset($this->view_count[$this->view_depth])) {
+			$this->view_count[$this->view_depth] = 0;
+		}
+        $this->view_count[$this->view_depth]++;
         
         $view = get_post($view_id);
         
@@ -660,6 +679,8 @@ class WP_Views{
                 if (isset($view_layout_settings['layout_meta_html'])) {
                     $post_content = str_replace('[wpv-layout-meta-html]', $view_layout_settings['layout_meta_html'], $post_content);
                 }
+
+		        $post_content = wpml_content_fix_links_to_translated_content($post_content);
 				
 				$view_settings = $this->get_view_settings();
                 
@@ -691,11 +712,15 @@ class WP_Views{
 					if ($view_settings['query_type'][0] == 'posts') {
 						// get the posts using the query settings for this view.
 						
-						// check for an archive loop
-						global $WPV_view_archive_loop;
 						$archive_query = null;
-						if (isset($WPV_view_archive_loop)) {
-							$archive_query = $WPV_view_archive_loop->get_archive_loop_query();
+						if ($view_settings['view-query-mode'] == 'archive') {
+
+							// check for an archive loop
+							global $WPV_view_archive_loop;
+							if (isset($WPV_view_archive_loop)) {
+								$archive_query = $WPV_view_archive_loop->get_archive_loop_query();
+							}
+						
 						}
 						
 						if ($archive_query) {
@@ -1592,16 +1617,21 @@ jQuery(document).ready(function(){
 		return $this->parent_taxonomy;
 	}
 
-	function get_taxonomy_view_select_box($row, $view_selected) {
+	/**
+	 * type should be 'taxonomy' or 'post'
+	 *
+	 */
+	
+	function get_add_field_view_select_box($row, $view_selected, $type) { 
 		global $wpdb;
 		
         $views_available = $wpdb->get_results("SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type='view' AND post_status in ('publish')");
 
-        $taxonomy_view = '';
+        $view_select_box = '';
 		if ($row === '') {
-			$taxonomy_view .= '<select class="taxonomy_view_select" name="taxonomy_view" id="taxonomy_view">';
+			$view_select_box .= '<select class="' . $type . '_view_select" name="' . $type . '_view" id="' . $type . '_view">';
 		} else {
-			$taxonomy_view .= '<select class="taxonomy_view_select" name="taxonomy_view_' . $row . '" id="taxonomy_view_' . $row . '">';
+			$view_select_box .= '<select class="' . $type . '_view_select" name="' . $type . '_view_' . $row . '" id="' . $type . '_view_' . $row . '">';
 		}
 
         foreach($views_available as $view) {
@@ -1616,11 +1646,11 @@ jQuery(document).ready(function(){
 				$title = $view->post_title . ' - ' . __('Taxonomy View', 'wpv-views');
 			}
 			
-            $taxonomy_view .= '<option value="' . $view->ID . '"' . $selected . '>' . $title . '</option>';
+            $view_select_box .= '<option value="' . $view->ID . '"' . $selected . '>' . $title . '</option>';
         }
-        $taxonomy_view .= '</select>';
+        $view_select_box .= '</select>';
         
-        return $taxonomy_view;
+        return $view_select_box;
 	}
     
     function set_widget_view_id($id) {
@@ -1774,3 +1804,23 @@ function wpv_views_plugin_action_links($links, $file) {
     }
     return $links;
 }
+
+/**
+ * WPML translate call.
+ * 
+ * @param type $name
+ * @param type $string
+ * @return type 
+ */
+function wpv_translate($name, $string, $register = false, $context = 'plugin Views') {
+    if (!function_exists('icl_t')) {
+        return $string;
+    }
+	
+    if ($register) {
+		icl_register_string($context, $name, $string);
+	}
+	
+    return icl_t($context, $name, stripslashes($string));
+}
+
