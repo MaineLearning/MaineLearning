@@ -1,0 +1,1078 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WATS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-26 17:42+0100\n"
+"PO-Revision-Date: \n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: Romania\n"
+"Language-Team: Web Geeks\n"
+"Last-Translator: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wats-dashboard.php:13
+#: wats-dashboard.php:73
+msgid "Global stats :"
+msgstr "Statisticile globale:"
+
+#: wats-dashboard.php:14
+#: wats-dashboard.php:22
+msgid "Tickets created :"
+msgstr "Bilete creat:"
+
+#: wats-dashboard.php:16
+#: wats-dashboard.php:24
+msgid "Tickets closed :"
+msgstr "Bilete închis:"
+
+#: wats-dashboard.php:21
+#: wats-dashboard.php:79
+msgid "Your stats :"
+msgstr "Statistici dvs.:"
+
+#: wats-dashboard.php:43
+#: wats-dashboard.php:58
+#: wats-head.php:126
+#: wats-head.php:132
+msgid "Tickets"
+msgstr "Bilete"
+
+#: wats-dashboard.php:74
+#: wats-dashboard.php:80
+msgid "Number of tickets created : "
+msgstr "Numărul de bilete creat: "
+
+#: wats-dashboard.php:76
+#: wats-dashboard.php:82
+msgid "Number of tickets closed : "
+msgstr "Numărul de bilete închis: "
+
+#: wats-edit-form-advanced.php:14
+#, php-format
+msgid "Ticket updated. <a href=\"%s\">View ticket</a>"
+msgstr "Bilet de actualizat. <a href=\"%s\">Vezi bilet </a>"
+
+#: wats-edit-form-advanced.php:15
+msgid "Custom field updated."
+msgstr "Câmp particularizat actualizate."
+
+#: wats-edit-form-advanced.php:16
+msgid "Custom field deleted."
+msgstr "Câmp particularizat de şters."
+
+#: wats-edit-form-advanced.php:17
+msgid "Ticket updated."
+msgstr "Bilet actualizate."
+
+#: wats-edit-form-advanced.php:18
+#, php-format
+msgid "Ticket published. <a href=\"%s\">View ticket</a>"
+msgstr "Bilet de publicat. <a href=\"%s\">Vezi bilet </a>"
+
+#: wats-edit-form-advanced.php:19
+msgid "Post saved."
+msgstr "Post salvate."
+
+#: wats-edit-form-advanced.php:20
+#, php-format
+msgid "Ticket submitted. <a href=\"%s\">Preview ticket</a>"
+msgstr "Bilet prezentate. <a href=\"%s\"> Examinare bilet </a>"
+
+#: wats-edit-form-advanced.php:23
+#, php-format
+msgid "Ticket restored to revision from %s"
+msgstr "Bilet restaurat la revizuirea din %s"
+
+#: wats-edit-form-advanced.php:26
+#, php-format
+msgid "There is an autosave of this ticket that is more recent than the version below.  <a href=\"%s\">View the autosave</a>."
+msgstr "Există o autosalvare a acestui bilet, care este mai recentă decât versiunea de mai jos. <a href=\"%s\">Vezi salvarea automata </a>."
+
+#: wats-edit-form-advanced.php:86
+msgid "Preview Changes"
+msgstr "Previzualizare modificări"
+
+#: wats-edit-form-advanced.php:89
+#: wats-edit-post-rows.php:197
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: wats-edit-form-advanced.php:101
+msgid "Status:"
+msgstr "Stare:"
+
+#: wats-edit-form-advanced.php:106
+#: wats-edit-form-advanced.php:132
+msgid "Privately Published"
+msgstr "Publicat privat"
+
+#: wats-edit-form-advanced.php:109
+#: wats-edit-form-advanced.php:130
+#: wats-edit-post-rows.php:169
+#: wats-edit.php:17
+msgid "Published"
+msgstr "Publicat"
+
+#: wats-edit-form-advanced.php:112
+#: wats-edit-form-advanced.php:134
+#: wats-edit-post-rows.php:174
+#: wats-edit.php:18
+msgid "Scheduled"
+msgstr "Programată"
+
+#: wats-edit-form-advanced.php:115
+#: wats-edit-form-advanced.php:136
+#: wats-edit.php:19
+msgid "Pending Review"
+msgstr "În curs de revizuire"
+
+#: wats-edit-form-advanced.php:118
+#: wats-edit-form-advanced.php:137
+#: wats-edit.php:20
+msgid "Draft"
+msgstr "Proiectul"
+
+#: wats-edit-form-advanced.php:124
+#: wats-edit-form-advanced.php:164
+#: wats-edit-form-advanced.php:213
+#: wats-edit-post-rows.php:191
+#: wats-edit-post-rows.php:279
+#: wats-edit.php:254
+#: wats-edit.php:334
+msgid "Edit"
+msgstr "Editare"
+
+#: wats-edit-form-advanced.php:139
+#: wats-edit-form-advanced.php:179
+msgid "OK"
+msgstr "ok"
+
+#: wats-edit-form-advanced.php:140
+#: wats-edit-form-advanced.php:180
+msgid "Cancel"
+msgstr "Revocare"
+
+#: wats-edit-form-advanced.php:147
+msgid "Visibility:"
+msgstr "Vizibilitate:"
+
+#: wats-edit-form-advanced.php:152
+#: wats-edit-form-advanced.php:176
+#: wats-edit.php:21
+msgid "Private"
+msgstr "Privat"
+
+#: wats-edit-form-advanced.php:155
+#: wats-edit-form-advanced.php:174
+msgid "Password protected"
+msgstr "Protejat prin parolă"
+
+#: wats-edit-form-advanced.php:158
+msgid "Public, Sticky"
+msgstr "Publice, lipicios"
+
+#: wats-edit-form-advanced.php:161
+#: wats-edit-form-advanced.php:172
+msgid "Public"
+msgstr "Publice"
+
+#: wats-edit-form-advanced.php:173
+msgid "Stick this post to the front page"
+msgstr "Stick acest post la pagina de faţă"
+
+#: wats-edit-form-advanced.php:175
+msgid "Password:"
+msgstr "Parola:"
+
+#: wats-edit-form-advanced.php:190
+msgid "M j, Y @ G:i"
+msgstr "J M, Y @ G:i"
+
+#: wats-edit-form-advanced.php:193
+#, php-format
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr "Programată pentru: <b>%1$ s</b>"
+
+#: wats-edit-form-advanced.php:195
+#, php-format
+msgid "Published on: <b>%1$s</b>"
+msgstr "Publicată în: <b>%1$ s</b>"
+
+#: wats-edit-form-advanced.php:197
+#: wats-edit-form-advanced.php:205
+msgid "Publish <b>immediately</b>"
+msgstr "Publică <b>imediat</b>"
+
+#: wats-edit-form-advanced.php:199
+#, php-format
+msgid "Schedule for: <b>%1$s</b>"
+msgstr "Programul pentru: <b>%1$ s</b>"
+
+#: wats-edit-form-advanced.php:201
+#, php-format
+msgid "Publish on: <b>%1$s</b>"
+msgstr "Publica pe: <b>%1$ s</b>"
+
+#: wats-edit-form-advanced.php:227
+#, php-format
+msgid ""
+"You are about to delete this draft '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Sunteţi pe cale să ştergeţi acest proiect '%s'\n"
+"   \"Anulaţi\" pentru a opri, \"OK\" pentru a şterge."
+
+#: wats-edit-form-advanced.php:227
+#, php-format
+msgid ""
+"You are about to delete this post '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Sunteţi pe cale să ştergeţi acest mesaj '%s'\n"
+"   \"Anulaţi\" pentru a opri, \"OK\" pentru a şterge."
+
+#: wats-edit-form-advanced.php:227
+#: wats-edit-post-rows.php:193
+#: wats-edit-post-rows.php:285
+#: wats-edit.php:255
+#: wats-edit.php:335
+msgid "Delete"
+msgstr "Ştergere"
+
+#: wats-edit-form-advanced.php:248
+#: wats-edit-form-advanced.php:249
+msgid "Update Ticket"
+msgstr "Bilet de actualizare"
+
+#: wats-edit-form-advanced.php:259
+msgid "Publish"
+msgstr "Publică"
+
+#: wats-edit-form-advanced.php:271
+msgid "Separate tags with commas."
+msgstr "Tag-uri separate prin virgule."
+
+#: wats-edit-form-advanced.php:276
+msgid "Add or remove tags"
+msgstr "Adăugarea sau eliminarea Tag-uri"
+
+#: wats-edit-form-advanced.php:287
+#, php-format
+msgid "Choose from the most used tags in %s"
+msgstr "Alegeţi Tag-uri cele mai utilizate în %s"
+
+#: wats-edit-form-advanced.php:311
+msgid "All Categories"
+msgstr "Toate categoriile"
+
+#: wats-edit-form-advanced.php:312
+msgid "Most Used"
+msgstr "Cele mai utilizate"
+
+#: wats-edit-form-advanced.php:329
+msgid "+ Add New Category"
+msgstr "+ Adauga categorie nouă"
+
+#: wats-edit-form-advanced.php:331
+msgid "Add New Category"
+msgstr "Adăugaţi noua categorie"
+
+#: wats-edit-form-advanced.php:332
+msgid "Parent category"
+msgstr "Categoria părinte"
+
+#: wats-edit-form-advanced.php:341
+#: wats-template.php:393
+msgid "Categories"
+msgstr "Categorii"
+
+#: wats-edit-form-advanced.php:352
+msgid "Keep this post private"
+msgstr "Păstraţi acest post privat"
+
+#: wats-edit-form-advanced.php:353
+msgid "Post Password"
+msgstr "Post parola"
+
+#: wats-edit-form-advanced.php:354
+msgid "Password Protect This Post"
+msgstr "Password a proteja acest Post"
+
+#: wats-edit-form-advanced.php:355
+msgid "Setting a password will require people who visit your blog to enter the above password to view this post and its comments."
+msgstr "Setarea unei parole va necesita oameni care vizitează blog-ul pentru a introduce parola mai sus pentru a vedea acest post şi comentariile sale."
+
+#: wats-edit-form-advanced.php:369
+#: wats-edit-form-advanced.php:373
+msgid "Excerpt"
+msgstr "Fragment"
+
+#: wats-edit-form-advanced.php:370
+msgid "Excerpts are optional hand-crafted summaries of your content that can be used in your theme. <a href=\"http://codex.wordpress.org/Excerpt\" target=\"_blank\">Learn more about manual excerpts.</a>"
+msgstr "Extrase sunt opţionale artizanale rezumate de conţinut, care pot fi utilizate in tema. <a href=\"http://codex.wordpress.org/Excerpt\" target=\"_blank\"> Aflaţi mai multe despre extrase manual. </a>"
+
+#: wats-edit-form-advanced.php:385
+msgid "Already pinged:"
+msgstr "Deja pinged:"
+
+#: wats-edit-form-advanced.php:394
+msgid "Send trackbacks to:"
+msgstr "Trimite Urmăritori la:"
+
+#: wats-edit-form-advanced.php:394
+msgid "Separate multiple URLs with spaces"
+msgstr "Separaţi mai multe URL-uri cu spaţii"
+
+#: wats-edit-form-advanced.php:395
+msgid "Trackbacks are a way to notify legacy blog systems that you’ve linked to them. If you link other WordPress blogs they’ll be notified automatically using <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pingbacks</a>, no other action necessary."
+msgstr "Urmăritori sunt o modalitate de a notifica sistemele moştenite blog care le-aţi legate de acestea. Dacă legaţi alte bloguri WordPress acestea vor fi notificate automat folosind <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" Pingbacks target=\"_blank\"> </a>, nu de alte măsurile de acţiune necesare."
+
+#: wats-edit-form-advanced.php:400
+msgid "Send Trackbacks"
+msgstr "Trimite Urmăritori"
+
+#: wats-edit-form-advanced.php:418
+msgid "Custom fields can be used to add extra metadata to a post that you can <a href=\"http://codex.wordpress.org/Using_Custom_Fields\" target=\"_blank\">use in your theme</a>."
+msgstr "Câmpuri personalizate pot fi folosite pentru a adăuga metadate în plus la un post de pe care puteţi <a href=\"http://codex.wordpress.org/Using_Custom_Fields\" target=\"_blank\"> utilizarea în tema </a> ."
+
+#: wats-edit-form-advanced.php:421
+msgid "Custom Fields"
+msgstr "Câmpuri particularizate"
+
+#: wats-edit-form-advanced.php:436
+msgid "Allow comments on this post"
+msgstr "Permite comentarii pe acest post"
+
+#: wats-edit-form-advanced.php:437
+msgid "Allow <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">trackbacks and pingbacks</a> on this post"
+msgstr "Permiteţi <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">trackback şi Pingbacks </a> de pe acest post"
+
+#: wats-edit-form-advanced.php:440
+msgid "Discussion"
+msgstr "Discuţie"
+
+#: wats-edit-form-advanced.php:455
+msgid "No comments yet."
+msgstr "Nu există comentarii încă."
+
+#: wats-edit-form-advanced.php:464
+#: wats-template.php:170
+msgid "Author"
+msgstr "Autor"
+
+#: wats-edit-form-advanced.php:470
+msgid "Show comments"
+msgstr "Afişare comentarii"
+
+#: wats-edit-form-advanced.php:479
+msgid "Comments"
+msgstr "Comentarii"
+
+#: wats-edit-form-advanced.php:490
+#: wats-edit-form-advanced.php:494
+msgid "Post Slug"
+msgstr "Post Slug"
+
+#: wats-edit-form-advanced.php:513
+#: wats-edit-form-advanced.php:516
+msgid "Post Author"
+msgstr "Autor de post"
+
+#: wats-edit-form-advanced.php:530
+msgid "Post Revisions"
+msgstr "Revizii post"
+
+#: wats-edit-form-advanced.php:589
+#: wats-template.php:168
+msgid "Title"
+msgstr "Titlul"
+
+#: wats-edit-form-advanced.php:620
+#, php-format
+msgid "Last edited by %1$s on %2$s at %3$s"
+msgstr "Last edited by %1$s în %2$s în %3$s"
+
+#: wats-edit-form-advanced.php:622
+#, php-format
+msgid "Last edited on %1$s at %2$s"
+msgstr "Last edited pe %1$s în %2$s"
+
+#: wats-edit-post-rows.php:13
+#: wats-options.php:482
+#: wats-template.php:173
+msgid "Type"
+msgstr "Tip"
+
+#: wats-edit-post-rows.php:14
+#: wats-options.php:491
+#: wats-template.php:174
+msgid "Priority"
+msgstr "Prioritate"
+
+#: wats-edit-post-rows.php:15
+#: wats-options.php:500
+#: wats-template.php:175
+msgid "Status"
+msgstr "Statutul"
+
+#: wats-edit-post-rows.php:16
+msgid "Ticket"
+msgstr "Bilet"
+
+#: wats-edit-post-rows.php:138
+msgid "Unpublished"
+msgstr "Nepublicate"
+
+#: wats-edit-post-rows.php:140
+msgid "Y/m/d g:i:s A"
+msgstr "Y/m/d g:i:s a"
+
+#: wats-edit-post-rows.php:148
+#, php-format
+msgid "%s from now"
+msgstr "%s de acum"
+
+#: wats-edit-post-rows.php:156
+#, php-format
+msgid "%s ago"
+msgstr "%s în urmă"
+
+#: wats-edit-post-rows.php:158
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: wats-edit-post-rows.php:172
+msgid "Missed schedule"
+msgstr "Programul ratat"
+
+#: wats-edit-post-rows.php:176
+msgid "Last Modified"
+msgstr "Modificat ultima dată"
+
+#: wats-edit-post-rows.php:184
+#, php-format
+msgid "Edit \"%s\""
+msgstr "Edit \"%s\""
+
+#: wats-edit-post-rows.php:191
+msgid "Edit this post"
+msgstr "Editaţi acest post"
+
+#: wats-edit-post-rows.php:193
+msgid "Delete this post"
+msgstr "Ştergeţi acest post"
+
+#: wats-edit-post-rows.php:193
+#, php-format
+msgid ""
+"You are about to delete this draft '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Sunteţi pe cale să ştergeţi acest proiect '%s'\n"
+"   \"Anulaţi\" pentru a opri, \"OK\" pentru a şterge."
+
+#: wats-edit-post-rows.php:193
+#, php-format
+msgid ""
+"You are about to delete this post '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Sunteţi pe cale să ştergeţi acest mesaj '%s'\n"
+"   \"Anulaţi\" pentru a opri, \"OK\" pentru a şterge."
+
+#: wats-edit-post-rows.php:197
+#, php-format
+msgid "Preview \"%s\""
+msgstr "Anunţ \"%s\""
+
+#: wats-edit-post-rows.php:199
+#, php-format
+msgid "View \"%s\""
+msgstr "Vezi \"%s\""
+
+#: wats-edit-post-rows.php:199
+#: wats-edit-post-rows.php:273
+msgid "View"
+msgstr "Vizualizare"
+
+#: wats-edit-post-rows.php:228
+#: wats-template.php:202
+msgid "Uncategorized"
+msgstr "Uncategorized"
+
+#: wats-edit-post-rows.php:244
+msgid "No Tags"
+msgstr "Tag-uri nu"
+
+#: wats-edit-post-rows.php:254
+#, php-format
+msgid "%s pending"
+msgstr "%s până la"
+
+#: wats-edit-post-rows.php:257
+msgid "0"
+msgstr "0"
+
+#: wats-edit-post-rows.php:257
+msgid "1"
+msgstr "1"
+
+#: wats-edit-post-rows.php:257
+msgid "%"
+msgstr "%"
+
+#: wats-edit.php:17
+msgid "Published posts"
+msgstr "Mesajele publicate"
+
+#: wats-edit.php:18
+msgid "Scheduled posts"
+msgstr "Posturi programată"
+
+#: wats-edit.php:19
+msgid "Pending posts"
+msgstr "Posturi de aşteptare"
+
+#: wats-edit.php:21
+msgid "Private posts"
+msgstr "Posturile private"
+
+#: wats-edit.php:82
+msgid "You are not allowed to delete this post."
+msgstr "Tu nu sunt permise pentru a şterge acest post."
+
+#: wats-edit.php:86
+#: wats-edit.php:89
+#: wats-ticket.php:179
+#: wats-ticket.php:182
+msgid "Error in deleting..."
+msgstr "Eroare la ştergerea..."
+
+#: wats-edit.php:131
+#: wats-head.php:133
+msgid "Edit Tickets"
+msgstr "Editare bilete"
+
+#: wats-edit.php:156
+#, php-format
+msgid "Search results for “%s”"
+msgstr "Rezultatele cautarii pentru “ %s ”"
+
+#: wats-edit.php:161
+msgid "Your ticket has been saved."
+msgstr "Biletul a fost salvat."
+
+#: wats-edit.php:161
+msgid "View post"
+msgstr "View post"
+
+#: wats-edit.php:161
+msgid "Edit ticket"
+msgstr "Editare bilet"
+
+#: wats-edit.php:224
+#: wats-edit.php:226
+msgid "Search Tickets"
+msgstr "Căutare bilete"
+
+#: wats-edit.php:243
+msgid "«"
+msgstr "«"
+
+#: wats-edit.php:244
+msgid "»"
+msgstr "»"
+
+#: wats-edit.php:253
+#: wats-edit.php:333
+msgid "Bulk Actions"
+msgstr "Acţiuni în masă"
+
+#: wats-edit.php:257
+#: wats-edit.php:337
+msgid "Apply"
+msgstr "Aplică"
+
+#: wats-edit.php:272
+msgid "Show all dates"
+msgstr "Arată toate datele"
+
+#: wats-edit.php:293
+msgid "View all categories"
+msgstr "Vizualizaţi toate categoriile"
+
+#: wats-edit.php:298
+#: wats-template.php:84
+msgid "Filter"
+msgstr "Filtru"
+
+#: wats-edit.php:304
+#, php-format
+msgid "Displaying %s–%s of %s"
+msgstr "Afişarea %s – %s din %s"
+
+#: wats-edit.php:313
+msgid "List View"
+msgstr "Vizualizarea listă"
+
+#: wats-edit.php:314
+msgid "Excerpt View"
+msgstr "Extras de vizualizare"
+
+#: wats-edit.php:345
+msgid "No ticket found"
+msgstr "Nici un bilet găsit"
+
+#: wats-head.php:126
+msgid "New Ticket"
+msgstr "Nou bilet"
+
+#: wats-head.php:127
+#: wats-head.php:136
+msgid "New ticket"
+msgstr "Nou bilet"
+
+#: wats-head.php:132
+msgid "Modify"
+msgstr "Modifica"
+
+#: wats-link-template.php:66
+msgid "Edit post"
+msgstr "Editare post"
+
+#: wats-options-ajax.php:4
+msgid "Error : there is nothing to remove!"
+msgstr "Eroare: nu este nimic pentru a elimina!"
+
+#: wats-options-ajax.php:5
+msgid "Error : please select an entry to remove!"
+msgstr "Eroare: vă rugăm să selectaţi o intrare pentru a elimina!"
+
+#: wats-options-ajax.php:6
+#: wats-options.php:337
+#: wats-template.php:220
+msgid "No entry"
+msgstr "Nici o intrare"
+
+#: wats-options-ajax.php:7
+msgid "Please correct the errors"
+msgstr "Vă rugăm să corectaţi erorile"
+
+#: wats-options-ajax.php:8
+msgid "Adding entry"
+msgstr "Adăugarea de intrare"
+
+#: wats-options-ajax.php:9
+msgid "Error : the string contains invalid caracters!"
+msgstr "Eroare: şirul conţine caracters incorect!"
+
+#: wats-options.php:95
+#: wats-options.php:109
+#: wats-options.php:206
+msgid "Error : please enter an entry!"
+msgstr "Eroare: vă rugăm să introduceţi o intrare!"
+
+#: wats-options.php:127
+msgid "Error : entry not found!"
+msgstr "Eroare: intrare nu a întemeia!"
+
+#: wats-options.php:131
+msgid "Error : another entry has the same value!"
+msgstr "Eroare: o altă intrare are aceeaşi valoare!"
+
+#: wats-options.php:140
+msgid "Entry successfully updated!"
+msgstr "Intrare actualizat cu succes!"
+
+#: wats-options.php:144
+#: wats-options.php:245
+msgid "Error : the entry contains invalid characters!"
+msgstr "Eroare: intrarea conţine caractere invalide!"
+
+#: wats-options.php:176
+msgid "Entry successfully removed!"
+msgstr "Intrare eliminat cu succes!"
+
+#: wats-options.php:180
+msgid "Error : entry not existing!"
+msgstr "Eroare: intrare nu există!"
+
+#: wats-options.php:228
+msgid "Error : already existing entry!"
+msgstr "Eroare: există deja intrare!"
+
+#: wats-options.php:241
+msgid "Entry successfully added!"
+msgstr "Intrare adăugat cu succes!"
+
+#: wats-options.php:263
+#: wats-options.php:289
+msgid "Remove"
+msgstr "Eliminare"
+
+#: wats-options.php:275
+#: wats-options.php:294
+msgid "Add"
+msgstr "Adăuga"
+
+#: wats-options.php:398
+msgid "Ticket numerotation"
+msgstr "Bilet numerotation"
+
+#: wats-options.php:402
+#: wats-options.php:468
+#: wats-template.php:210
+#: wats-ticket-metas.php:294
+msgid "None"
+msgstr "Nici unul"
+
+#: wats-options.php:405
+msgid "Dated"
+msgstr "Datat"
+
+#: wats-options.php:408
+msgid "Numbered"
+msgstr "Numerotate"
+
+#: wats-options.php:412
+msgid "Latest ticket ID"
+msgstr "Cele mai recente bilet de ID-ul"
+
+#: wats-options.php:415
+msgid "Tickets display"
+msgstr "Bilete de afişare"
+
+#: wats-options.php:420
+msgid "Include tickets on homepage together with posts"
+msgstr "Include bilete pe pagina împreună cu posturi"
+
+#: wats-options.php:422
+msgid "Notification"
+msgstr "Notificarea"
+
+#: wats-options.php:427
+msgid "Notify admin by email upon new ticket submission"
+msgstr "Anunta admin prin e-mail la nou bilet prezentarea"
+
+#: wats-options.php:430
+msgid "Tickets visibility"
+msgstr "Bilete de vizibilitate"
+
+#: wats-options.php:434
+msgid "Everybody can see all tickets"
+msgstr "Toată lumea poate vedea toate biletele"
+
+#: wats-options.php:437
+msgid "Only registered users can see tickets"
+msgstr "Doar utilizatorii înregistraţi pot vedea bilete"
+
+#: wats-options.php:440
+msgid "Only ticket creator and admins can see tickets"
+msgstr "Numai creatorul bilet şi administratori pot vedea bilete"
+
+#: wats-options.php:442
+msgid "Tickets assignment"
+msgstr "Bilete de asociere"
+
+#: wats-options.php:446
+msgid "No assignment possible"
+msgstr "Nici o atribuire posibil"
+
+#: wats-options.php:449
+msgid "Everybody can assign a ticket"
+msgstr "Toată lumea poate asocia un bilet"
+
+#: wats-options.php:452
+msgid "Only registered users can assign a ticket"
+msgstr "Doar utilizatorii înregistraţi pot asocia un bilet"
+
+#: wats-options.php:454
+msgid "Ticket assignment capability minimum level requirement"
+msgstr "Bilet de atribuire capacitatea de nivel cerință minimă"
+
+#: wats-options.php:466
+msgid "Guest user"
+msgstr "Comentarii utilizator"
+
+#: wats-options.php:479
+msgid "Ticket types"
+msgstr "Tipuri de bilet"
+
+#: wats-options.php:483
+#: wats-options.php:492
+#: wats-options.php:501
+#: wats-options.php:510
+msgid "Selection"
+msgstr "Selecţie"
+
+#: wats-options.php:488
+msgid "Ticket priorities"
+msgstr "Priorităţile bilet"
+
+#: wats-options.php:497
+msgid "Ticket statuses"
+msgstr "Stările bilet"
+
+#: wats-options.php:506
+msgid "Categories opened to submission"
+msgstr "Categorii deschis prezentarea"
+
+#: wats-options.php:509
+#: wats-template.php:169
+msgid "Category"
+msgstr "Categoria"
+
+#: wats-options.php:516
+msgid "Save"
+msgstr "Salvare"
+
+#: wats-template.php:55
+#: wats-ticket-metas.php:258
+msgid "Ticket type"
+msgstr "Tipul de bilet"
+
+#: wats-template.php:57
+#: wats-template.php:64
+#: wats-template.php:71
+#: wats-template.php:77
+#: wats-template.php:125
+msgid "Any"
+msgstr "Orice"
+
+#: wats-template.php:62
+#: wats-ticket-metas.php:269
+msgid "Ticket priority"
+msgstr "Bilet de prioritate"
+
+#: wats-template.php:69
+#: wats-ticket-metas.php:280
+msgid "Ticket status"
+msgstr "Statutul de bilet"
+
+#: wats-template.php:76
+#: wats-ticket-metas.php:293
+msgid "Ticket owner"
+msgstr "Bilet proprietar"
+
+#: wats-template.php:171
+msgid "Owner"
+msgstr "Proprietar"
+
+#: wats-template.php:172
+msgid "Creation date"
+msgstr "Data fondarii"
+
+#: wats-ticket-list-ajax.php:4
+msgid "Filtering table..."
+msgstr "Filtrare tabel..."
+
+#: wats-ticket-metas.php:17
+msgid "Current ticket owner : "
+msgstr "Proprietar actual bilet: "
+
+#: wats-ticket-metas.php:166
+msgid "New ticket submitted"
+msgstr "Nou bilet transmise"
+
+#: wats-ticket-metas.php:167
+msgid "Hello "
+msgstr "bună "
+
+#: wats-ticket-metas.php:168
+msgid "A new ticket has been submitted into the system."
+msgstr "Un nou bilet a fost prezentată în sistem."
+
+#: wats-ticket-metas.php:169
+msgid "You can view it there :"
+msgstr "Aveţi posibilitatea să vizualizaţi acolo:"
+
+#: wats-ticket-metas.php:170
+msgid "+ Frontend side : "
+msgstr "+ Laterale Frontend: "
+
+#: wats-ticket-metas.php:171
+msgid "+ Admin side : "
+msgstr "+ Admin side: "
+
+#: wats-ticket-metas.php:172
+msgid "Regards"
+msgstr "Cu stimă"
+
+#: wats-ticket-metas.php:173
+msgid "WATS Notification engine"
+msgstr "Notificarea WATS motor"
+
+#: wats-ticket-metas.php:201
+msgid "Ticket details"
+msgstr "Bilet detalii"
+
+#: wats-ticket-metas.php:232
+msgid "Here is the ticket history"
+msgstr "Aici este istoria bilet"
+
+#: wats-ticket-metas.php:310
+msgid "Ticket originator : "
+msgstr "Bilet emitent: "
+
+#: wats-ticket-new.php:3
+msgid "Add New Ticket"
+msgstr "Adăugare nou bilet"
+
+#: wats-ticket-new.php:18
+#, php-format
+msgid ""
+"Since you’re a newcomer, you’ll have to wait for an admin to add the <code>edit_posts</code> capability to your user, in order to be authorized to post.<br />\n"
+"You can also <a href=\"mailto:%s?subject=Promotion?\">e-mail the admin</a> to ask for a promotion.<br />\n"
+"When you’re promoted, just reload this page and you’ll be able to blog. :)"
+msgstr ""
+"Din moment ce eşti un nou venit, va trebui să aşteptaţi pentru un admin pentru a adăuga edit_posts <code> </code> capacitatea de a dvs. de utilizator, în scopul de a fi autorizate pentru a posta. <br />\n"
+"Puteţi, de asemenea, <a href=\"mailto:%s?subject=Promotion?\"> de e-mail admin </a> pentru a cere o promovare. <br />\n"
+"Cand esti promovat, reîncărcaţi doar această pagină şi veţi fi în măsură să blog. :)"
+
+#: wats-ticket.php:107
+msgid "You attempted to edit a ticket that doesn't exist. Perhaps it was deleted?"
+msgstr "Aţi încercat să editaţi un bilet care nu există. Poate că a fost sters?"
+
+#: wats-ticket.php:120
+msgid "Somebody"
+msgstr "Cineva"
+
+#: wats-ticket.php:121
+#, php-format
+msgid "Warning: %s is currently editing this ticket"
+msgstr "AVERTISMENT: %s este în prezent editarea acest bilet"
+
+#: wats-ticket.php:130
+msgid "Edit Ticket"
+msgstr "Editare bilet"
+
+#: wats-ticket.php:133
+msgid "You are not allowed to edit this ticket."
+msgstr "Nu aveţi voie să editaţi acest bilet."
+
+#: wats-ticket.php:175
+msgid "You are not allowed to delete this ticket."
+msgstr "Nu aveţi voie să ştergeţi acest bilet."
+
+#: theme/comments-ticket.php:53
+msgid "Leave an update"
+msgstr "Lasă o actualizare"
+
+#: theme/comments-ticket.php:53
+#, php-format
+msgid "Leave an update for %s"
+msgstr "Lasă o actualizare pentru %s"
+
+#: theme/comments-ticket.php:60
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post an update."
+msgstr "You must be <a href=\"%s\"> logat</a> pentru a posta o actualizare."
+
+#: theme/comments-ticket.php:67
+#, php-format
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
+msgstr "Conectat ca <a href=\"%1$s\"> %2$s </a>."
+
+#: theme/comments-ticket.php:67
+msgid "Log out of this account"
+msgstr "Log din acest cont"
+
+#: theme/comments-ticket.php:67
+msgid "Log out »"
+msgstr "Conectaţi-vă»"
+
+#: theme/comments-ticket.php:72
+msgid "Name"
+msgstr "nume"
+
+#: theme/comments-ticket.php:72
+#: theme/comments-ticket.php:75
+msgid "(required)"
+msgstr "(obligatoriu)"
+
+#: theme/comments-ticket.php:75
+msgid "Mail (will not be published)"
+msgstr "Mail (nu va fi publicat)"
+
+#: theme/comments-ticket.php:78
+msgid "Website"
+msgstr "Site-ul Web"
+
+#: theme/comments-ticket.php:82
+#, php-format
+msgid "<strong>XHTML:</strong> You can use these tags: <code>%s</code>"
+msgstr "<strong>XHTML:</strong> Aveţi posibilitatea să utilizaţi aceste Tag-uri: <code>%s</code>"
+
+#: theme/comments-ticket.php:88
+msgid "Submit update"
+msgstr "Prezinte update"
+
+#: theme/single-ticket.php:18
+msgid "Current priority : "
+msgstr "Prioritate curentă: "
+
+#: theme/single-ticket.php:19
+msgid "Current status : "
+msgstr "Stare curentă: "
+
+#: theme/single-ticket.php:20
+msgid "Ticket type : "
+msgstr "Bilet de tip: "
+
+#: theme/single-ticket.php:29
+#, php-format
+msgid "This entry was submited %1$s on %2$s at %3$s and is filed under %4$s."
+msgstr "Această intrare a fost înscris %1$s în %2$s în %3$s şi este filed under %4$s."
+
+#: theme/single-ticket.php:29
+msgid "l, F jS, Y"
+msgstr "l, F jS, Y"
+
+#: theme/single-ticket.php:30
+#, php-format
+msgid "You can follow any responses to this entry through the <a href='%s'>RSS 2.0</a> feed."
+msgstr "Tu poţi a urma orice răspuns la spre this intrare prin <a href='%s'> RSS 2.0</a> feed."
+
+#: theme/single-ticket.php:33
+#, php-format
+msgid "You can <a href=\"#respond\">leave an update</a>, or <a href=\"%s\" rel=\"trackback\">trackback</a> from your own site."
+msgstr "Puteţi <a href=\"#respond\">lăsa o actualizare </a>, sau <a href=\"%s\" rel=\"trackback\"> trackback </a> de la site-ul tau."
+
+#: theme/single-ticket.php:37
+#, php-format
+msgid "Responses are currently closed, but you can <a href=\"%s\" rel=\"trackback\">trackback</a> from your own site."
+msgstr "Răspunsurile sunt în prezent închise, dar puteţi trackback de <a href=\"%s\" rel=\"trackback\"> </a> de la site-ul tau."
+
+#: theme/single-ticket.php:41
+msgid "You can skip to the end and leave an update. Pinging is currently not allowed."
+msgstr "Puteţi trece la sfârşitul şi a lăsa o actualizare. Pinging este în prezent nu sunt acceptate."
+
+#: theme/single-ticket.php:45
+msgid "Both comments and pings are currently closed."
+msgstr "Ambele comentarii şi de ping sunt în prezent închisă."
+
+#: theme/single-ticket.php:47
+msgid "Edit this entry"
+msgstr "Editaţi această intrare"
+
+#: theme/single-ticket.php:57
+msgid "Sorry, you don't have the rights to browse this ticket."
+msgstr "Ne pare rău, nu aveţi dreptul de a parcurge acest bilet."
+
+#: theme/single-ticket.php:62
+msgid "Sorry, no tickets matched your criteria."
+msgstr "Ne pare rău, nu bilete potrivit criteriilor."
+
+#~ msgid "Page generated by "
+#~ msgstr "Pagina generate de "
+
+#~ msgid "Ticket history"
+#~ msgstr "Istoria bilet"
+
+#~ msgid "Ticket title"
+#~ msgstr "Titlul bilet"
