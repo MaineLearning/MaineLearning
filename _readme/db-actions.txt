@@ -3,6 +3,8 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Migrate BuddyPress Docs after upgrade.
+
 Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
 
 
