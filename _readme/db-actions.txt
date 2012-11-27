@@ -5,6 +5,8 @@ TO DO
 
 Migrate BuddyPress Docs after upgrade.
 
+Update Network (Network Admin > Updates) after push to production.
+
 Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
 
 
