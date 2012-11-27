@@ -412,6 +412,11 @@ var wpNavMenu;
 					}
 				}
 			});
+			
+			// Activate spinner when adding a new group
+			$('#group-organizer-meta').find('input[type="submit"]').click(function() {
+				$('#group-organizer-meta .spinner').show();
+			});
 		},
 
 		addItemToMenu : function(menuItem, processMethod, callback) {
@@ -524,9 +529,9 @@ var wpNavMenu;
 				$.post( ajaxurl , params, function(data) {
 					console.log(data);
 					if(data == 'success') {
-						$('<div id="message" class="updated fade"><p>' + OrganizerL10n.groupDeleted  + '</p></div>').insertAfter('h2');
+						$('<div class="updated fade"><p>' + OrganizerL10n.groupDeleted  + '</p></div>').insertAfter('h2').delay(1000).fadeOut(1000);
 					} else {
-						$('<div id="message" class="error fade"><p>' + OrganizerL10n.groupDeleteFailed  + '</p></div>').insertAfter('h2');
+						$('<div class="error"><p>' + OrganizerL10n.groupDeleteFailed  + '</p></div>').insertAfter('h2');
 					}
 					api.menusChanged = false;
 				});
