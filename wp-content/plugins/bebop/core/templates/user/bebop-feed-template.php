@@ -29,26 +29,21 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'" ?'.'>';
 	<?php do_action( 'bp_activity_personal_comment_feed_head' ); ?>
 	
 	<?php
-	
-	if ( bp_has_activities( bebop_get_activity_args() ) ) {
+	if ( bp_has_activities( bebop_activity_args() ) ) {
 		while ( bp_activities() ) : bp_the_activity();
 		?><item>
 			<dbid><?php echo bp_activity_id(); ?></dbid>
 			<guid><?php echo bp_activity_thread_permalink(); ?></guid>
 			<type><?php echo bp_activity_action_name(); ?></type>
-			<title><![CDATA[<?php bp_activity_feed_item_title() ?>]]></title>
-			<link><?php echo bp_activity_thread_permalink() ?></link>
-			<pubDate><?php echo mysql2date( 'D, d M Y H:i:s O', bp_activity_feed_item_date(), false ); ?></pubDate>
-			<description><![CDATA[<?php bp_activity_feed_item_description();
-			if ( bp_activity_can_comment() ) { ?>
-				<p><?php printf( __( 'Comments: %s', 'buddypress' ), bp_activity_get_comment_count() ); ?></p>
-				<?php 
-				}
-				if ( 'activity_comment' == bp_get_activity_action_name() ) { ?>
-				<br /><strong><?php _e( 'In reply to', 'buddypress' ); ?></strong> - 
-				<?php bp_activity_parent_content();
-				}
-			?>]]></description>
+			<title><?php bp_activity_feed_item_title(); ?></title>
+			<link><![CDATA[
+			<?php echo bp_activity_thread_permalink(); ?>
+			]]></link>
+			<wpPubDate><?php echo mysql2date( 'D, d M Y H:i:s O', bp_activity_feed_item_date(), false ); ?></wpPubDate>
+			<pubDate><?php echo bebop_feed_date_recorded( bp_get_activity_secondary_item_id() ); ?></pubDate>
+			<description><![CDATA[
+				<?php echo strip_tags( bp_get_activity_feed_item_description(), '<a>' );?>
+			]]></description>
 			<?php do_action( 'bp_activity_personal_feed_item' ); ?>
 		</item>
 		<?php
@@ -56,7 +51,7 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'" ?'.'>';
 	}
 	else
 	{
-		echo 'no "' .  bebop_get_feed_type() . '" data found.';
+		echo 'no "' .  bebop_feed_type() . '" data found.';
 		echo "\r";
 	}
 	?>

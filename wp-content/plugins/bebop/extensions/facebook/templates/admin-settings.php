@@ -8,7 +8,6 @@
  * For information on bebop_tables:: functions, please see bebop/core/bebop-tables.php				*
  * **************************************************************************************************
  */
-
 /*
  * '$extension' controls content on this page and is set to whatever admin-settings.php file is being viewed.
  * i.e. if you extension name is 'my_extension', the value of $extension will be 'my_extension'.
@@ -36,7 +35,7 @@ include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php'
 			<label for='bebop_<?php echo $extension['name']; ?>_consumer_key'><?php echo sprintf( __( '%1$s API Token', 'bebop' ), $extension['display_name'] );?>:</label>
 			<input type='text' id='bebop_<?php echo $extension['name']; ?>_consumer_key' name='bebop_<?php echo $extension['name']; ?>_consumer_key' value='<?php echo bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' ); ?>' size='50'><br><br>
 			
-			<label for='bebop_<?php echo $extension['name']; ?>_consumer_secret'><?php echo sprintf( __( '%1$s API Secret', 'bebop' ), $extension['display_name'] );?>:</label>
+			<label for='bebop_<?php echo $extension; ?>_consumer_secret'><?php echo $extension['display_name']; ?> API Secret:</label>
 			<input type='text' id='bebop_<?php echo $extension['name']; ?>_consumer_secret' name='bebop_<?php echo $extension['name']; ?>_consumer_secret' value='<?php echo bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_secret' ); ?>' size='50'><br><br>
 			
 			<?php $should_users_verify_content = bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_content_user_verification' ); ?>
@@ -63,7 +62,7 @@ include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php'
 			<span class='header'><?php echo sprintf( __( '%1$s RSS Settings', 'bebop' ), $extension['display_name'] );?></span>
 			<?php
 			if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on' ) {
-				echo "<label for='bebop_" . $extension['name'] . "_rss_feed'>" . __( 'RSS Enabled', 'bebop' ) . ":</label><input id='bebop_" .$extension['name'] . "_rss_feed' name='bebop_".$extension['name'] . "_rss_feed' type='checkbox'";
+				echo "<label for='bebop_" . $extension['name'] . "_rss_feed'>" . __( 'RSS Enabled', 'bebop' ) . "</label><input id='bebop_" .$extension['name'] . "_rss_feed' name='bebop_".$extension['name'] . "_rss_feed' type='checkbox'";
 				if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_rss_feed' ) == 'on' ) {
 					echo 'CHECKED';
 				}
@@ -115,17 +114,11 @@ include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php'
 				 */
 				foreach ( $user_metas as $user ) {
 					$this_user = get_userdata( $user->user_id );
-					$user_feeds = bebop_tables::get_user_feeds( $user->user_id , $extension['name'] );
-					$feed_array = array();
-					foreach ( $user_feeds as $user_feed ) {
-						$feed_array[] = $user_feed->meta_value;
-					}
-					$user_feeds = implode( ',', $feed_array );
 					echo '<tr>
 						<td>' . bebop_tables::sanitise_element( $user->user_id ) . '</td>
 						<td>' . bebop_tables::sanitise_element( $this_user->user_login ) . '</td>
 						<td>' . bebop_tables::sanitise_element( $this_user->user_email ) . '</td>
-						<td>' . bebop_tables::sanitise_element( $user_feeds ) . "</td>
+						<td>' . bebop_tables::sanitise_element( bebop_tables::get_user_meta_value( $user->user_id, 'bebop_' . $extension['name'] . '_username' ) ) . "</td>
 						<td><a href='?page=bebop_providers&provider=" . $extension['name'] . "&reset_user_id=" . bebop_tables::sanitise_element( $user->user_id ) . "'>" . __( 'Reset User', 'bebop' ) . "</a></td>
 					</tr>";
 				}

@@ -30,11 +30,11 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$variable_name == 1 ) {
 			echo 'checked';
 		} echo '>
-		<label for="yes">' . __( 'Yes', 'bebop' ) . '</label>
+		<label for="yes">'; _e( 'Yes', 'bebop' ); echo '</label>
 		<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="0"'; if ( $$variable_name == 0 ) {
 			echo 'checked';
 		} echo '>
-		<label for="no">' . __( 'No', 'bebop' ) . '</label><br><br>
+		<label for="no">'; _e( 'No', 'bebop' ); echo '</label><br><br>
 		<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="Save Changes"></div>';
 		
 		wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
@@ -42,7 +42,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		echo '<div class="clear_both"></div>';
 			
 		if ( bebop_tables::get_user_meta_value( $bp->loggedin_user->id, 'bebop_' . $extension['name'] . '_oauth_token' ) ) {
-			echo '<div class="button_container"><a class="auto button" href="?provider=' . $extension['name'] . '&reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
+			echo '<div class="button_container"><a class="auto button" href="?provider=' . $extension['name'] . '&reset=true">'; _e(' Remove Authorisation', 'bebop'); echo '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		echo '</form>';
@@ -52,32 +52,30 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		<p>' . sprintf( __( 'You can setup %1$s integration here.', 'bebop' ), $extension['display_name'] ) . '</p>
 		</p>' . sprintf( __( 'Before you can begin using %1$s with this site you must authorise on %1$s by clicking the link below.', 'bebop' ), $extension['display_name'] ) . '</p>';
 		
-		//oauth
-		$OAuth = new bebop_oauth();
-		$OAuth->set_request_token_url( $extension['request_token_url'] );
-		$OAuth->set_access_token_url( $extension['access_token_url'] );
-		$OAuth->set_authorize_url( $extension['authorize_url'] );
-		$OAuth->set_callback_url( $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] );
-		$OAuth->set_consumer_key( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' ) );
-		$OAuth->set_consumer_secret( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_secret' ) );
+		$app_id = bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' );
+		$app_secret = bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_secret' );
+		$my_url = urlencode( $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '&scope=read_stream' );
 		
-		//get the oauth token
-		$requestToken = $OAuth->request_token();
 		
-		$OAuth->set_request_token( $requestToken['oauth_token'] );
-		$OAuth->set_request_token_secret( $requestToken['oauth_token_secret'] );
-		
-		bebop_tables::update_user_meta( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_oauth_token_temp','' . $requestToken['oauth_token'].'' );
-		bebop_tables::update_user_meta( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_oauth_token_secret_temp','' . $requestToken['oauth_token_secret'].'' );
-		
-		//get the redirect url for the user
-		$redirectUrl = $OAuth->get_redirect_url();
-		if ( $redirectUrl ) {
-			echo '<div class="button_container"><a class="auto button" href="' . $redirectUrl . '">' . __(' Start Authorisation', 'bebop') . '</a></div>';
+		if ( ! isset( $_REQUEST['code'] ) ) {
+			
+			// Redirect to Login Dialog
+			$_SESSION['facebook_state'] = md5( uniqid( rand(), TRUE ) );
+			
+			$redirectUrl = str_replace( 'APP_ID', $app_id, $extension['request_token_url'] );
+			$redirectUrl = str_replace( 'REDIRECT_URI', $my_url, $redirectUrl );
+			$redirectUrl = str_replace( 'STATE', $_SESSION['facebook_state'], $redirectUrl );
+
+			echo '<div class="button_container"><a class="auto button" href="' . $redirectUrl . '">'. __(' Start Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
-		else {
-			_e( 'authentication is all broken :(', 'bebop' );
+		else if ( isset( $_GET['error_reason'] ) ) {
+			if ( isset( $_GET['state'] ) && $_SESSION['facebook_state'] == $_GET['state'] ) {
+				echo 'You denied the request.';
+			}
+			else {
+				echo 'You are a victim of CSRF';
+			}
 		}
 	}
 }// if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on') && ( bebop_tables::check_option_exists( 'bebop_' . $extension['name'] . '_consumer_key' ) ) ) {

@@ -13,7 +13,7 @@
 	if ( isset( $_GET['type'] ) ) {
 		if ( strtolower( strip_tags( $_GET['type'] == 'unverified' ) ) ) {
 			$type = 'unverified';
-			$message = __( 'This content has not bee verified by your users.', 'bebop' );
+			$message = __( 'This content has not been verified by your users.', 'bebop' );
 		}
 		else if ( strtolower( strip_tags( $_GET['type'] == 'verified' ) ) ) {
 			$type = 'verified';
@@ -26,42 +26,46 @@
 	}
 	else {
 		$type = 'verified';
-		$message = __( 'This content has not bee verified by your users.', 'bebop' );
+		$message = __( 'This content has been verified by your users.', 'bebop' );
 	}
-	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=unverified">'; _e( 'Unverified Content', 'bebop' ); echo '</a>';
-	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=verified">'; _e( 'Verified Content', 'bebop' ); echo '</a>';
-	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=deleted">'; _e( 'Deleted Content', 'bebop' ); echo '</a>';
+	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=unverified">' . __( 'Unverified Content', 'bebop' ) . '</a>';
+	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=verified">' . __( 'Verified Content', 'bebop' ) . '</a>';
+	echo '<a class="button-secondary" href="' . $_SERVER['PHP_SELF'] . '?page=bebop_content&type=deleted">' . __( 'Deleted Content', 'bebop' ) . '</a>';
 	
-	$contents = bebop_tables::admin_fetch_content_data( $type );
+	$number_of_rows = bebop_tables::admin_count_content_rows( $type );
+	$page_vars = bebop_pagination_vars( 30 );
+	$bebop_pagination = bebop_pagination( $number_of_rows, $page_vars['per_page'] );
 	
+	$contents = bebop_tables::admin_fetch_content_data( $type, $page_vars['page_number'], $page_vars['per_page'] );
 	if ( count( $contents ) > 0 ) {
-		echo '<h4>' . ucfirst( $type ) . ' '; _e( 'Content', 'bebop' ); echo '</h4>';
+		echo '<h4>' . ucfirst( $type ) . ' ' . __( 'Content', 'bebop' ) . '</h4>';
 		echo $message;
 		
+		echo $bebop_pagination;
 		
 		echo '<table class="widefat margin-top_22px">
 			<thead>
 				<tr>
-					<th>'; _e( 'Buffer ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Secondary ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Activity Stream ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Username', 'bebop'); echo '</th>
-					<th>'; _e( 'Type', 'bebop'); echo '</th>
-					<th>'; _e( 'Imported', 'bebop'); echo '</th>
-					<th>'; _e( 'Published', 'bebop'); echo '</th>
-					<th>'; _e( 'Content', 'bebop'); echo '</th>
+					<th>' . __( 'Buffer ID', 'bebop') . '</th>
+					<th>' . __( 'Secondary ID', 'bebop') . '</th>
+					<th>' . __( 'Activity Stream ID', 'bebop'). '</th>
+					<th>' . __( 'Username', 'bebop'). '</th>
+					<th>' . __( 'Type', 'bebop'). '</th>
+					<th>' . __( 'Imported', 'bebop'). '</th>
+					<th>' . __( 'Published', 'bebop'). '</th>
+					<th>' . __( 'Content', 'bebop'). '</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>'; _e( 'Buffer ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Secondary ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Activity Stream ID', 'bebop'); echo '</th>
-					<th>'; _e( 'Username', 'bebop'); echo '</th>
-					<th>'; _e( 'Type', 'bebop'); echo '</th>
-					<th>'; _e( 'Imported', 'bebop'); echo '</th>
-					<th>'; _e( 'Published', 'bebop'); echo '</th>
-					<th>'; _e( 'Content', 'bebop'); echo '</th>
+					<th>' . __( 'Buffer ID', 'bebop'). '</th>
+					<th>' . __( 'Secondary ID', 'bebop'). '</th>
+					<th>' . __( 'Activity Stream ID', 'bebop'). '</th>
+					<th>' . __( 'Username', 'bebop'). '</th>
+					<th>' . __( 'Type', 'bebop'). '</th>
+					<th>' . __( 'Imported', 'bebop'). '</th>
+					<th>' . __( 'Published', 'bebop'). '</th>
+					<th>' . __( 'Content', 'bebop'). '</th>
 				</tr>
 			</tfoot>
 			<tbody>';
@@ -82,10 +86,11 @@
 			echo '
 			</tbody>
 		</table>';
+		echo $bebop_pagination;
 	}
 	else {
-		echo '<h4>' . ucfirst( $type ) . ' '; _e( 'Content', 'bebop' ); echo '</h4>';
-		echo '<p>'; _e( 'No content was found in the content manager.', 'bebop' ); echo '</p>';
+		echo '<h4>' . ucfirst( $type ) . ' ' . __( 'Content', 'bebop' ) . '</h4>';
+		echo '<p>' . __( 'No content was found in the content manager.', 'bebop' ) . '</p>';
 	}
 		
 	?>

@@ -9,18 +9,18 @@
 add_action( 'bp_actions', 'bebop_manage_oers' );
 function bebop_manage_oers() {
 	if ( bp_is_current_component( 'bebop' ) && bp_is_current_action('manager' ) ) {
-		$should_users_verify_content = bebop_tables::get_option_value( 'bebop_content_user_verification' );
-		if ( $should_users_verify_content != 'no' ) { 
-			if ( isset( $_POST['action'] ) ) {
-				global $bp;
-				$oer_count = 0;
-				$success = false;
-				//Add OER's to the activity stream.
-				if ( $_POST['action'] == 'verify' ) {
-					foreach ( array_keys( $_POST ) as $oer ) {
-						if ( $oer != 'action' ) {
-							$data = bebop_tables::fetch_individual_oer_data( $oer ); //go and fetch data from the activity buffer table.
-							if ( ! empty( $data->secondary_item_id ) ) {
+		if ( isset( $_POST['action'] ) ) {
+			global $bp;
+			$oer_count = 0;
+			$success = false;
+			//Add OER's to the activity stream.
+			if ( $_POST['action'] == 'verify' ) {
+				foreach ( array_keys( $_POST ) as $oer ) {
+					if ( $oer != 'action' ) {
+						$data = bebop_tables::fetch_individual_oer_data( $oer ); //go and fetch data from the activity buffer table.
+						if ( ! empty( $data->secondary_item_id ) ) {
+							$should_users_verify_content = bebop_tables::get_option_value( 'bebop_' . $data->type . '_content_user_verification' );
+							if ( $should_users_verify_content != 'no' ) { 
 								global $wpdb;
 								if ( ! bp_has_activities( 'secondary_id=' . $data->secondary_item_id ) ) {
 									$new_activity_item = array (
@@ -39,31 +39,34 @@ function bebop_manage_oers() {
 										$oer_count++;
 									}
 									else {
-										bebop_tables::log_error( __( 'Activity Stream', 'bebop' ),  __( 'Could not update the oer buffer status.', 'bebop' ) );
+										bebop_tables::log_error( __( 'Activity Stream', 'bebop' ),  __( 'Could not update the content status.', 'bebop' ) );
 									}
 								}
 								else {
 									bebop_tables::log_error(  __( 'Activity Stream', 'bebop'),  __( 'This content already exists in the activity stream.', 'bebop' ) );
 								}
-							}
+							}//End if ( $should_users_verify_content != 'no' ) { 
 						}
-					}//End foreach ( array_keys($_POST) as $oer ) {
-					if ( $oer_count > 1 ) {
-						$success = true;
-						$message = __( 'Resources verified.', 'bebop' );
 					}
-					else {
-						$success = true;
-						$message = __( 'Resource verified.', 'bebop' );
-					}
-				}//End if ( $_POST['action'] == 'verify' ) {
-				else if ( $_POST['action'] == 'delete' ) {
-					foreach ( array_keys( $_POST ) as $oer ) {
-						if ( $oer != 'action' ) {
-							$data = bebop_tables::fetch_individual_oer_data( $oer );//go and fetch data from the activity buffer table.
-							if ( ! empty( $data->id ) ) {
-								//delete the activity, let the filter update the tables.
-								if ( ! empty( $data->activity_stream_id ) ) {
+				}//End foreach ( array_keys($_POST) as $oer ) {
+				if ( $oer_count > 1 ) {
+					$success = true;
+					$message = __( 'Resources verified.', 'bebop' );
+				}
+				else {
+					$success = true;
+					$message = __( 'Resource verified.', 'bebop' );
+				}
+			}//End if ( $_POST['action'] == 'verify' ) {
+			else if ( $_POST['action'] == 'delete' ) {
+				foreach ( array_keys( $_POST ) as $oer ) {
+					if ( $oer != 'action' ) {
+						$data = bebop_tables::fetch_individual_oer_data( $oer );//go and fetch data from the activity buffer table.
+						if ( ! empty( $data->id ) ) {
+							//delete the activity, let the filter update the tables.
+							if ( ! empty( $data->activity_stream_id ) ) {
+								$should_users_verify_content = bebop_tables::get_option_value( 'bebop_' . $data->type . '_content_user_verification' );
+								if ( $should_users_verify_content != 'no' ) { 
 									bp_activity_delete(
 													array(
 														'id' => $data->activity_stream_id,
@@ -71,50 +74,53 @@ function bebop_manage_oers() {
 									);
 									$oer_count++;
 								}
-								else {
-									//else just update the status
-									bebop_tables::update_oer_data( $data->secondary_item_id, 'status', 'deleted' );
-									$oer_count++;
-								}
+							}
+							else {
+								//else just update the status
+								bebop_tables::update_oer_data( $data->secondary_item_id, 'status', 'deleted' );
+								$oer_count++;
 							}
 						}
-					} //End foreach ( array_keys( $_POST ) as $oer ) {
-					if ( $oer_count > 1 ) {
-						$success = true;
-						$message = __( 'Resources deleted.', 'bebop' );
 					}
-					else {
-						$success = true;
-						$message = __( 'Resource deleted.', 'bebop' );
-					}
+				} //End foreach ( array_keys( $_POST ) as $oer ) {
+				if ( $oer_count > 1 ) {
+					$success = true;
+					$message = __( 'Resources deleted.', 'bebop' );
 				}
-				else if ( $_POST['action'] == 'undelete' ) {
-					foreach ( array_keys( $_POST ) as $oer ) {
-						$exclude_array = array( 'action', 'submit' );
-						if ( ! in_array( $oer, $exclude_array ) ) {
-							$data = bebop_tables::fetch_individual_oer_data( $oer );//go and fetch data from the activity buffer table.
+				else {
+					$success = true;
+					$message = __( 'Resource deleted.', 'bebop' );
+				}
+			}
+			else if ( $_POST['action'] == 'undelete' ) {
+				foreach ( array_keys( $_POST ) as $oer ) {
+					$exclude_array = array( 'action', 'submit' );
+					if ( ! in_array( $oer, $exclude_array ) ) {
+						$data = bebop_tables::fetch_individual_oer_data( $oer );//go and fetch data from the activity buffer table.
+						$should_users_verify_content = bebop_tables::get_option_value( 'bebop_' . $data->type . '_content_user_verification' );
+						if ( $should_users_verify_content != 'no' ) { 
 							bebop_tables::update_oer_data( $data->secondary_item_id, 'status', 'unverified' );
 							$oer_count++;
 						}
 					}
-					if ( $oer_count > 1 ) {
-						$success = true;
-						$message =  __( 'Resources undeleted.', 'bebop' );
-					}
-					else {
-						$success = true;
-						$message = __( 'Resource undeleted.', 'bebop' );
-					}
 				}
-				if ( $success ) {
-					bp_core_add_message( $message );
+				if ( $oer_count > 1 ) {
+					$success = true;
+					$message =  __( 'Resources undeleted.', 'bebop' );
 				}
 				else {
-					bp_core_add_message( __( 'We couldnt do that for you. Please try again.', 'bebop' ), 'error' );
+					$success = true;
+					$message = __( 'Resource undeleted.', 'bebop' );
 				}
-				bp_core_redirect( $bp->loggedin_user->domain  .'/' . bp_current_component() . '/' . bp_current_action() . '/' );
-			}//End if ( isset( $_POST['action'] ) ) {
-		}//End if ( $should_users_verify_content == 'yes' ) {
+			}
+			if ( $success ) {
+				bp_core_add_message( $message );
+			}
+			else {
+				bp_core_add_message( __( 'We couldnt do that for you. Please try again.', 'bebop' ), 'error' );
+			}
+			bp_core_redirect( $bp->loggedin_user->domain  .'/' . bp_current_component() . '/' . bp_current_action() . '/' );
+		}//End if ( isset( $_POST['action'] ) ) {
 	}//End if ( bp_is_current_component( 'bebop' ) && bp_is_current_action('manager' ) ) {
 	add_action( 'wp_enqueue_scripts', 'bebop_oer_js' ); //enqueue  selectall/none script
 }//End function bebop_manage_oers() {
@@ -129,6 +135,9 @@ function bebop_manage_provider() {
 			global $bp;
 			$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $_GET['provider'] ) );
 			if ( isset( $_POST['submit'] ) ) {
+				
+				check_admin_referer( 'bebop_' . $extension['name'] . '_user_settings' );
+				
 				if ( isset( $_POST['bebop_' . $extension['name'] . '_active_for_user'] ) ) {
 					bebop_tables::update_user_meta( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_active_for_user', $_POST['bebop_' . $extension['name'] . '_active_for_user'] );
 					bp_core_add_message( 'Settings for ' . $extension['display_name'] . ' have been saved.' );
@@ -141,7 +150,7 @@ function bebop_manage_provider() {
 						bp_core_add_message( sprintf( __( '%1$s has been added to the %2$s feed.', 'bebop' ), $new_name, $extension['display_name'] ) );
 					}
 					else {
-						bp_core_add_message( sprintf( __( '%1$s  already exists in the %2$s feed; you cannot add it again.', 'bebop' ), $new_name, $extension['display_name'] ), 'error' );
+						bp_core_add_message( sprintf( __( '%1$s already exists in the %2$s feed; you cannot add it again.', 'bebop' ), $new_name, $extension['display_name'] ), 'error' );
 					}
 				}
 				
@@ -171,7 +180,7 @@ function bebop_manage_provider() {
 				bp_core_redirect( $bp->loggedin_user->domain  .'/' . bp_current_component() . '/' . bp_current_action() . '/' );
 			}//End if ( isset( $_POST['submit'] ) ) {
 			
-			//Oauth stuff
+			//Twitter Oauth stuff
 			if ( isset( $_GET['oauth_token'] ) ) {
 				//Handle the oAuth requests
 				$OAuth = new bebop_oauth();
@@ -196,6 +205,52 @@ function bebop_manage_provider() {
 				bp_core_add_message( sprintf( __( 'You have successfully authenticated your %1$s account.', 'bebop' ), $extension['display_name'] ) );
 				bp_core_redirect( $bp->loggedin_user->domain  .'/' . bp_current_component() . '/' . bp_current_action() . '/' );
 			}
+			
+			//Facebook oAuth stuff.
+			if ( isset( $_REQUEST['code'] ) ) {
+				
+				$app_id = bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' );
+				$app_secret = bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_secret' );
+				$my_url = urlencode( $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '&scope=read_stream' );
+				
+				if ( $_SESSION['facebook_state'] == $_GET['state'] ) {
+					
+					$code = $_GET['code'];
+					
+					$accessTokenUrl = str_replace( 'APP_ID', $app_id, $extension['access_token_url'] );
+					$accessTokenUrl = str_replace( 'REDIRECT_URI', $my_url, $accessTokenUrl );
+					$accessTokenUrl = str_replace( 'APP_SECRET', $app_secret, $accessTokenUrl );
+					$accessTokenUrl = str_replace( 'CODE', $code, $accessTokenUrl );
+					
+					$response = file_get_contents( $accessTokenUrl );
+					parse_str( $response, $params );
+					
+					//extend access token
+					$extendedAccessTokenUrl = str_replace( 'APP_ID', $app_id, $extension['extend_access_token_url'] );
+					$extendedAccessTokenUrl = str_replace( 'APP_SECRET', $app_secret, $extendedAccessTokenUrl );
+					$extendedAccessTokenUrl = str_replace( 'SHORT_TOKEN', $params['access_token'], $extendedAccessTokenUrl );
+					
+					$response = file_get_contents( $accessTokenUrl );
+					parse_str( $response, $params );
+					
+					//save the extnded access token
+					if ( isset( $params['access_token'] ) ) {
+						
+						bebop_tables::update_user_meta( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_oauth_token', $params['access_token'] );
+						bebop_tables::update_user_meta( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_active_for_user', 1 );
+						bebop_tables::add_to_first_importers_list( $bp->loggedin_user->id, $extension['name'], 'bebop_' . $extension['name'] . '_do_initial_import', 1 );
+						
+						unset( $_SESSION['facebook_state'] );
+						
+						bp_core_add_message( sprintf( __( 'You have successfully authenticated your %1$s account.', 'bebop' ), $extension['display_name'] ) );
+						bp_core_redirect( $bp->loggedin_user->domain  .'/' . bp_current_component() . '/' . bp_current_action() . '/' );
+					}
+				}
+				else {
+					echo 'You are a victim of CSRF';
+				}
+			}
+			
 			
 			//delete a user's feed
 			if ( isset( $_GET['delete_feed'] ) ) {
@@ -258,11 +313,11 @@ function bebop_get_oer_type() {
 		}
 	}
 }
-function bebop_get_oers( $type ) {
+function bebop_get_oers( $type, $page_number, $per_page ) {
 	global $bp, $wpdb;
 	$active_extensions = bebop_extensions::bebop_get_active_extension_names( $addslashes = true );
 	$extension_names   = join( ',' ,$wpdb->escape( $active_extensions ) );
-	return bebop_tables::fetch_oer_data( $bp->loggedin_user->id, $extension_names, $type );
+	return bebop_tables::fetch_oer_data( $bp->loggedin_user->id, $extension_names, $type, $page_number, $per_page );
 }
 
 
@@ -288,10 +343,7 @@ function bebop_oer_js() {
 	wp_register_script( 'bebop-oer-js', plugins_url() . '/bebop/core/resources/js/bebop-oers.js' );
 	wp_enqueue_script( 'bebop-oer-js' );
 }
-/*function bebop_loop_js() {
-	wp_register_script( 'bebop-loop-js', plugins_url() . '/bebop/core/resources/js/bebop-loop.js' );
-	wp_enqueue_script( 'bebop-loop-js' );
-}*/
+
 
 /*
  * Gets the url of a page
@@ -343,7 +395,6 @@ function bebop_create_buffer_item( $params ) {
 				$action .= '<a href="' . $params['actionlink'] . '" target="_blank" rel="external"> '.__( $params['type'], 'bebop_' . $params['extension'] );
 				$action .= '</a>: ';
 				
-				$oer_hide_sitewide = 0;
 				$date_imported = gmdate( 'Y-m-d H:i:s', time() );
 				
 				//extra check to be sure we don't have an empty activity
@@ -351,13 +402,21 @@ function bebop_create_buffer_item( $params ) {
 				$clean_comment = trim( strip_tags( $content ) );
 				
 				//controls how user content is verified.
-				$should_users_verify_content = bebop_tables::get_option_value( 'bebop_content_user_verification' );
+				$should_users_verify_content = bebop_tables::get_option_value( 'bebop_' . $params['extension'] . '_content_user_verification' );
 				
 				if ( $should_users_verify_content == 'no' ) {
 					$oer_status = 'verified';
 				}
 				else {
 					$oer_status = 'unverified';
+				}
+				
+				$hide_sitewide = bebop_tables::get_option_value( 'bebop_' . $params['extension'] . '_hide_sitewide' );
+				if( $hide_sitewide == 'yes' ) {
+					$oer_hide_sitewide = 1;
+				}
+				else {
+					$oer_hide_sitewide = 0;
 				}
 				
 				if ( ! empty( $clean_comment ) ) {
@@ -445,10 +504,10 @@ function bebop_load_filter_options() {
 	
 	//Ensures the All OER only shows if there are two or more OER's to choose from.
 	if ( count( $store ) >= 2 ) {
-		echo '<option value="all_oer">'; _e( 'All OERs', 'bebop' ); echo '</option>';
+		echo '<option value="all_oer">' . __( 'All OERs', 'bebop' ) . '</option>';
 	}
 	else if ( count( $store ) === 0 ) {
-		echo '<option>'; _e( 'No Extensions are active - please enable them in the admin panel', 'bebop' ); echo '</option>';
+		echo '<option>' . __( 'No Extensions are active - please enable them in the admin panel', 'bebop' ) . '</option>';
 	}
 	//Outputs the options
 	foreach ( $store as $option ) {
@@ -461,6 +520,7 @@ function bebop_load_filter_options() {
  * to pull from the database needs to be created manually. */
 function bebop_dropdown_query_checker( $query_string ) {
 	global $bp;
+	
 	$new_query_string = '';
 	//Checks if this is the oer page
 	if ( $bp->current_component == 'bebop' ) {
@@ -505,10 +565,8 @@ function bebop_dropdown_query_checker( $query_string ) {
 		if ( empty( $new_query_string ) ) {
 			$new_query_string = 'type=thisisadelightfulplugin&action=soitisitsamazing';
 		}
-		else {
-		}
 		//Sets the page number for the bebop page.
-		$new_query_string .= '&per_page=10';
+		$new_query_string .= '&per_page=10&show_hidden=true';
 		
 		//sets the reset session variable to allow for resetting activty stream if they have come from the oer page.
 		if ( isset( $_SESSION['bebop_area'] ) ) {
@@ -573,7 +631,6 @@ function bebop_dropdown_query_checker( $query_string ) {
 			$_SESSION['bebop_area'] = 'not_bebop_oer_plugin';
 		}
 	}
-	//Returns the query string.
 	return $new_query_string;
 }
 
@@ -585,6 +642,7 @@ add_action( 'bp_activity_filter_options', 'bebop_load_filter_options' );
 
 //This adds a hook before the loading of the activity data to adjust if all_oer is selected.
 add_action( 'bp_before_activity_loop', 'bebop_access_ajax' );
+
 function bebop_access_ajax() {
 	//Adds the filter to the function to check for all_oer and rebuild the query if so.
 	add_filter( 'bp_ajax_querystring', 'bebop_dropdown_query_checker' );
@@ -618,4 +676,57 @@ function bebop_rss_buttons() {
 
 	echo '</div>';
 }
+
+//pagination
+function bebop_pagination_vars( $custom_per_page = null ) {
+	if ( isset( $_GET['page_number'] ) ) {
+		$page_number = substr( strip_tags( $_GET['page_number'] ), 0 , 4 );
+	}
+	if ( empty( $page_number ) || ! is_numeric( $page_number ) ) {
+		$page_number = 1;
+	}
+	
+	if ( isset( $_GET['per_page'] ) ) {
+		$per_page = substr( strip_tags( $_GET['per_page'] ), 0 , 4 );
+	}
+	if ( empty( $per_page ) || ! is_numeric( $per_page ) ) {
+		if ( ! empty( $custom_per_page ) || ! is_numeric( $custom_per_page ) ) {
+			$per_page = $custom_per_page;
+		}
+		else {
+			$per_page = 30;
+		}
+	}
+	
+	return array(
+		'page_number'	=> $page_number,
+		'per_page'		=> $per_page,
+	);
+}
+function bebop_pagination( $number_of_rows, $per_page ) {
+	$number_of_pages = (int)ceil( $number_of_rows / $per_page );
+	if( isset( $_GET['page_number'] ) ) {
+		$this_page_number = $_GET['page_number'];
+		unset($_GET['page_number']);
+		unset($_GET['per_page']);
+	}
+		
+	$return = '<div class="margin-top_22px clear_above">';
+	for ( $i = 1; $i <= $number_of_pages; $i++ ) {
+		
+		$return .= '<a href="?' . http_build_query( $_GET ) . '&page_number=' . $i . '&per_page=' . $per_page . '">';
+		
+		if ( ( isset( $this_page_number ) && $this_page_number == $i )  ||
+		( ( ! isset( $this_page_number ) ) && $i == 1 ) ) {
+			$return .= '<strong>' . $i . '</strong>';
+		}
+		else {
+			$return .= $i;
+		}
+		$return .= '</a> ';
+	}
+	$return .= '</div>';
+	return $return;
+}
+	
 ?>
