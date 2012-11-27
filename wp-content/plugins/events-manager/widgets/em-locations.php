@@ -14,7 +14,7 @@ class EM_Locations_Widget extends WP_Widget {
     		'scope' => 'future',
     		'order' => 'ASC',
     		'limit' => 5,
-    		'format' => '#_LOCATIONLINK<ul><li>#_ADDRESS</li><li>#_TOWN</li></ul>',
+    		'format' => '#_LOCATIONLINK<ul><li>#_LOCATIONADDRESS</li><li>#_LOCATIONTOWN</li></ul>',
     		'orderby' => 'event_start_date,event_start_time,location_name'
     	);
     	$this->em_orderby_options = array(

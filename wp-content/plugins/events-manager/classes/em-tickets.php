@@ -36,16 +36,18 @@ class EM_Tickets extends EM_Object implements Iterator{
 			foreach ($tickets as $ticket){
 				$EM_Ticket = new EM_Ticket($ticket);
 				$EM_Ticket->event_id = $this->event_id;
-				$this->tickets[] = $EM_Ticket;
+				$this->tickets[$EM_Ticket->ticket_id] = $EM_Ticket;
 			}
 		}elseif( is_array($object) ){ //expecting an array of EM_Ticket objects or ticket db array
 			if( is_object(current($object)) && get_class(current($object)) == 'EM_Ticket' ){
-				$this->tickets = $object;
+			    foreach($object as $EM_Ticket){
+					$this->tickets[$EM_Ticket->ticket_id] = $EM_Ticket;
+			    }
 			}else{
 				foreach($object as $ticket){
 					$EM_Ticket = new EM_Ticket($ticket);
 					$EM_Ticket->event_id = $this->event_id;
-					$this->tickets[] = $EM_Ticket;				
+					$this->tickets[$EM_Ticket->ticket_id] = $EM_Ticket;				
 				}
 			}
 		}

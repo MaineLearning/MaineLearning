@@ -187,6 +187,15 @@ function em_init_actions() {
 			$results = array();
 			if( is_user_logged_in() || ( get_option('dbem_events_anonymous_submissions') && user_can(get_option('dbem_events_anonymous_user'), 'read_others_locations') ) ){
 				$location_cond = (is_user_logged_in() && !current_user_can('read_others_locations')) ? "AND location_owner=".get_current_user_id() : '';
+				if( !is_user_logged_in() && get_option('dbem_events_anonymous_submissions') ){
+					if( !user_can(get_option('dbem_events_anonymous_user'),'read_private_locations') ){
+						$location_cond = " AND location_private=0";	
+					}
+				}elseif( is_user_logged_in() && !current_user_can('read_private_locations') ){
+				    $location_cond = " AND location_private=0";
+				}elseif( !is_user_logged_in() ){
+					$location_cond = " AND location_private=0";		    
+				}
 				$term = (isset($_REQUEST['term'])) ? '%'.$_REQUEST['term'].'%' : '%'.$_REQUEST['q'].'%';
 				$sql = $wpdb->prepare("
 					SELECT 
@@ -261,6 +270,7 @@ function em_init_actions() {
 								$EM_Booking->person_id = $id;
 								$feedback = get_option('dbem_booking_feedback_new_user');
 								$EM_Notices->add_confirm( $feedback );
+								add_action('em_bookings_added', 'em_new_user_notification');
 							}else{
 								$registration = false;
 								if( is_object($id) && get_class($id) == 'WP_Error'){
@@ -320,7 +330,11 @@ function em_init_actions() {
 						}
 					}
 					$EM_Bookings = $EM_Event->get_bookings();
+					$registration = apply_filters('em_booking_add_registration_result', $registration, $EM_Booking, $EM_Notices);
 					if( $registration && $EM_Bookings->add($EM_Booking) ){
+					    if( is_user_logged_in() && is_multisite() && !is_user_member_of_blog(get_current_user_id(), get_current_blog_id()) ){
+					        add_user_to_blog(get_current_blog_id(), get_current_user_id(), get_option('default_role'));
+					    }
 						$result = true;
 						$EM_Notices->add_confirm( $EM_Bookings->feedback_message );		
 						$feedback = $EM_Bookings->feedback_message;
@@ -329,6 +343,7 @@ function em_init_actions() {
 						$EM_Notices->add_error( $EM_Bookings->get_errors() );			
 						$feedback = $EM_Bookings->feedback_message;				
 					}
+					global $em_temp_user_data; $em_temp_user_data = false; //delete registered user temp info (if exists)
 				}else{
 					$result = false;
 					$EM_Notices->add_error( $EM_Booking->get_errors() );
@@ -616,6 +631,7 @@ function em_init_actions() {
 		$EM_Bookings_Table = new EM_Bookings_Table($show_tickets);
 		header("Content-Type: application/octet-stream; charset=utf-8");
 		header("Content-Disposition: Attachment; filename=".sanitize_title(get_bloginfo())."-bookings-export.csv");
+		do_action('em_csv_header_output');
 		if( !empty($_REQUEST['event_id']) ){
 			$EM_Event = em_get_event($_REQUEST['event_id']);
 			echo __('Event','dbem') . ' : ' . $EM_Event->event_name .  "\n";

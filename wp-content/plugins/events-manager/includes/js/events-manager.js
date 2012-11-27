@@ -500,11 +500,14 @@ jQuery(document).ready( function($){
 	$("#localised-date").show();
 	$("#localised-end-date").show();
 	
-	$('input.select-all').change(function(){
-	 	if($(this).is(':checked'))
-	 	$('input.row-selector').attr('checked', true);
-	 	else
-	 	$('input.row-selector').attr('checked', false);
+	$('#em-wrapper input.select-all').change(function(){
+	 	if($(this).is(':checked')){
+			$('input.row-selector').attr('checked', true);
+			$('input.select-all').attr('checked', true);
+	 	}else{
+			$('input.row-selector').attr('checked', false);
+			$('input.select-all').attr('checked', false);
+		}
 	}); 
 	
 	updateIntervalDescriptor(); 
@@ -597,7 +600,7 @@ function em_setup_datepicker(wrap){
 		dateDivs.find('input.em-date-input-loc').each(function(i,dateInput){
 			//init the datepicker
 			var dateInput = jQuery(dateInput);
-			var dateValue = dateInput.next('input.em-date-input');
+			var dateValue = dateInput.nextAll('input.em-date-input').first();
 			var dateValue_value = dateValue.val();
 			dateInput.datepicker(datepicker_vals);
 			dateInput.datepicker('option', 'altField', dateValue);
@@ -610,7 +613,7 @@ function em_setup_datepicker(wrap){
 			//add logic for texts
 			dateInput.change(function(){
 				if( jQuery(this).val() == '' ){
-					jQuery(this).next('.em-date-input').val('');
+					jQuery(this).nextAll('.em-date-input').first().val('');
 				}
 			});
 		});
@@ -668,7 +671,7 @@ function em_setup_timepicker(wrap){
 		var end = jQuery(this);
 		var start = end.prevAll('.em-time-start');
 		if( start.val() ){
-			if(jQuery.timePicker(start).getTime() > jQuery.timePicker(this).getTime()) { end.addClass("error"); }
+			if( jQuery.timePicker(start).getTime() > jQuery.timePicker(this).getTime() && ( jQuery('.em-date-end').val().length == 0 || jQuery('.em-date-start').val() == jQuery('.em-date-end').val() ) ) { end.addClass("error"); }
 			else { end.removeClass("error"); }
 		}
 	});
@@ -801,38 +804,6 @@ function em_maps() {
 			}
 		}
 		
-		//Load map
-		if(jQuery('#em-map').length > 0){
-			var em_LatLng = new google.maps.LatLng(0, 0);
-			var map = new google.maps.Map( document.getElementById('em-map'), {
-			    zoom: 14,
-			    center: em_LatLng,
-			    mapTypeId: google.maps.MapTypeId.ROADMAP,
-			    mapTypeControl: false
-			});
-			var marker = new google.maps.Marker({
-			    position: em_LatLng,
-			    map: map,
-			    draggable: true
-			});
-			var infoWindow = new google.maps.InfoWindow({
-			    content: ''
-			});
-			var geocoder = new google.maps.Geocoder();
-			google.maps.event.addListener(infoWindow, 'domready', function() { 
-				document.getElementById('location-balloon-content').parentNode.style.overflow=''; 
-				document.getElementById('location-balloon-content').parentNode.parentNode.style.overflow=''; 
-			});
-			google.maps.event.addListener(marker, 'dragend', function() {
-				var position = marker.getPosition();
-				jQuery('#location-latitude').val(position.lat());
-				jQuery('#location-longitude').val(position.lng());
-				map.setCenter(position);
-				map.panBy(40,-55);
-			});
-		    refresh_map_location();
-		}
-		
 		//Add listeners for changes to address
 		var get_map_by_id = function(id){
 			if(jQuery('#em-map').length > 0){
@@ -880,6 +851,42 @@ function em_maps() {
 				});
 			}
 		});
+		
+		//Load map
+		if(jQuery('#em-map').length > 0){
+			var em_LatLng = new google.maps.LatLng(0, 0);
+			var map = new google.maps.Map( document.getElementById('em-map'), {
+			    zoom: 14,
+			    center: em_LatLng,
+			    mapTypeId: google.maps.MapTypeId.ROADMAP,
+			    mapTypeControl: false
+			});
+			var marker = new google.maps.Marker({
+			    position: em_LatLng,
+			    map: map,
+			    draggable: true
+			});
+			var infoWindow = new google.maps.InfoWindow({
+			    content: ''
+			});
+			var geocoder = new google.maps.Geocoder();
+			google.maps.event.addListener(infoWindow, 'domready', function() { 
+				document.getElementById('location-balloon-content').parentNode.style.overflow=''; 
+				document.getElementById('location-balloon-content').parentNode.parentNode.style.overflow=''; 
+			});
+			google.maps.event.addListener(marker, 'dragend', function() {
+				var position = marker.getPosition();
+				jQuery('#location-latitude').val(position.lat());
+				jQuery('#location-longitude').val(position.lng());
+				map.setCenter(position);
+				map.panBy(40,-55);
+			});
+			if( jQuery('#location-select-id').length > 0 ){
+				jQuery('#location-select-id').trigger('change');
+			}else{
+				refresh_map_location();
+			}
+		}
 	}
 }
   

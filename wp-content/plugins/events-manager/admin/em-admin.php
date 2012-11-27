@@ -142,10 +142,10 @@ function em_admin_warnings() {
 			}
 		}
 		
-		if( defined('EMP_VERSION') && EMP_VERSION < EM_PRO_MIN_VERSION ){ 
+		if( defined('EMP_VERSION') && EMP_VERSION < EM_PRO_MIN_VERSION && !defined('EMP_DISABLE_WARNINGS')){ 
 			?>
 			<div id="em_page_error" class="updated">
-				<p><?php _e('There is a newer version of Events Manager Pro which is required for this current version of Events Manager. Please go to the plugin website and download the latest update.','dbem'); ?></p>
+				<p><?php _e('There is a newer version of Events Manager Pro which is recommended for this current version of Events Manager as new features have been added. Please go to the plugin website and download the latest update.','dbem'); ?></p>
 			</div>
 			<?php
 		}

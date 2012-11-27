@@ -25,10 +25,10 @@
 	add_action ( 'init', 'em_ical' );
 	
 	function em_ical_event(){
-		global $wpdb;
+		global $wpdb, $wp_query;
 		//add endpoints to events
-		if( get_query_var(EM_POST_TYPE_EVENT) && get_query_var('ical') ){
-			$event_id = $wpdb->get_var('SELECT event_id FROM '.EM_EVENTS_TABLE." WHERE event_slug='".get_query_var(EM_POST_TYPE_EVENT)."' AND event_status=1 LIMIT 1");
+		if( !empty($wp_query) && $wp_query->get(EM_POST_TYPE_EVENT) && $wp_query->get('ical') ){
+			$event_id = $wpdb->get_var('SELECT event_id FROM '.EM_EVENTS_TABLE." WHERE event_slug='".$wp_query->get(EM_POST_TYPE_EVENT)."' AND event_status=1 LIMIT 1");
 			if( !empty($event_id) ){
 				global $EM_Event;
 				$EM_Event = em_get_event($event_id);

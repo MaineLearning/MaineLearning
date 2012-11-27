@@ -160,6 +160,95 @@ class BP_EM_Component extends BP_Component {
 		add_action( 'bp_init', array(&$this, 'setup_group_nav') );
 	}
 	
+	function setup_admin_bar() {
+		global $bp, $blog_id;
+	
+		// Prevent debug notices
+		$wp_admin_nav = array();
+	
+		// Menus for logged in user
+		if ( is_user_logged_in() ) {
+			//check multisite or normal mode for correct permission checking
+			if(is_multisite() && $blog_id != BP_ROOT_BLOG){
+				//FIXME MS mode doesn't seem to recognize cross subsite caps, using the proper functions, for now we use switch_blog.
+				$current_blog = $blog_id;
+				switch_to_blog(BP_ROOT_BLOG);
+				$can_manage_events = current_user_can_for_blog(BP_ROOT_BLOG, 'edit_events');
+				$can_manage_locations = current_user_can_for_blog(BP_ROOT_BLOG, 'edit_locations');
+				$can_manage_bookings = current_user_can_for_blog(BP_ROOT_BLOG, 'manage_bookings');
+				switch_to_blog($current_blog);
+			}else{
+				$can_manage_events = current_user_can('edit_events');
+				$can_manage_locations = current_user_can('edit_locations');
+				$can_manage_bookings = current_user_can('manage_bookings');
+			}
+
+			$em_link = trailingslashit( bp_loggedin_user_domain() . em_bp_get_slug() );
+			
+			/* Add 'Events' to the main user profile navigation */
+			$wp_admin_nav[] = array(
+				'parent' => $bp->my_account_menu_id,
+				'id'     => 'my-em-' . $this->id,
+				'title'  => __( 'Events', 'dbem' ),
+				'href'   => $em_link
+			);
+			
+			/* Create SubNav Items */
+			$wp_admin_nav[] = array(
+				'parent' => 'my-em-' . $this->id,
+				'id'     => 'my-em-' . $this->id .'-profile',
+				'title'  => __( 'My Profile', 'dbem' ),
+				'href'   => $em_link.'profile/'
+			);
+			
+			$wp_admin_nav[] = array(
+				'parent' => 'my-em-' . $this->id,
+				'id'     => 'my-em-' . $this->id .'-attending',
+				'title'  => __( 'Events I\'m Attending', 'dbem' ),
+				'href'   => $em_link.'attending/'
+			);
+			
+			if( $can_manage_events ){
+				$wp_admin_nav[] = array(
+					'parent' => 'my-em-' . $this->id,
+					'id'     => 'my-em-' . $this->id .'-my-events',
+					'title'  => __( 'My Events', 'dbem' ),
+					'href'   => $em_link.'my-events/'
+				);
+			}
+			
+			if( $can_manage_locations && get_option('dbem_locations_enabled') ){
+				$wp_admin_nav[] = array(
+					'parent' => 'my-em-' . $this->id,
+					'id'     => 'my-em-' . $this->id .'-my-locations',
+					'title'  => __( 'My Locations', 'dbem' ),
+					'href'   => $em_link.'my-locations/'
+				);
+			}
+			
+			if( $can_manage_bookings && get_option('dbem_rsvp_enabled') ){
+				$wp_admin_nav[] = array(
+					'parent' => 'my-em-' . $this->id,
+					'id'     => 'my-em-' . $this->id .'-my-bookings',
+					'title'  => __( 'My Event Bookings', 'dbem' ),
+					'href'   => $em_link.'my-bookings/'
+				);
+			}
+			
+			if( bp_is_active('groups') ){
+				/* Create Profile Group Sub-Nav */
+				$wp_admin_nav[] = array(
+					'parent' => 'my-account-groups',
+					'id'     => 'my-account-groups-' . $this->id ,
+					'title'  => __( 'Events', 'dbem' ),
+					'href'   => trailingslashit( bp_loggedin_user_domain() . bp_get_groups_slug() ) . 'group-events/'
+				);
+			}			
+		}
+	
+		parent::setup_admin_bar( $wp_admin_nav );
+	}
+	
 	function setup_group_nav(){
 		global $bp;	
 		/* Add some group subnav items */

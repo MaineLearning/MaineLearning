@@ -15,7 +15,7 @@ class EM_Widget extends WP_Widget {
     		'order' => 'ASC',
     		'limit' => 5,
     		'category' => 0,
-    		'format' => '#_LINKEDNAME<ul><li>#j #M #y</li><li>#_TOWN</li></ul>',
+    		'format' => '#_EVENTLINK<ul><li>#j #M #y</li><li>#_LOCATIONTOWN</li></ul>',
     		'nolistwrap' => false,
     		'orderby' => 'event_start_date,event_start_time,event_name',
 			'all_events' => 0,

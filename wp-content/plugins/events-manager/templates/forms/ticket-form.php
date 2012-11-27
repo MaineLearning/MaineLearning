@@ -46,7 +46,7 @@ $col_count = empty($col_count) ? 1:$col_count;
 	<div class="required">
 		<label><?php _e('Required?','dbem') ?></label>
 		<input type="checkbox" value="1" name="em_tickets[<?php echo $col_count; ?>][ticket_required]" <?php if($EM_Ticket->ticket_required) echo 'checked="checked"'; ?> />
-		<a href="#" title="<?php _e('If checked every booking must select one or the minimum number of this ticket.'); ?>">?</a>
+		<a href="#" onclick="return false;" title="<?php _e('If checked every booking must select one or the minimum number of this ticket.'); ?>">?</a>
 	</div>
 	<?php do_action('em_ticket_edit_form_fields', $col_count, $EM_Ticket); //do not delete, add your extra fields this way, remember to save them too! ?>
 </div>	

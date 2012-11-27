@@ -76,7 +76,7 @@ if( !empty($_REQUEST['success']) ){
 				<?php else: ?>
 					<textarea name="content" rows="10" style="width:100%"><?php echo $EM_Event->post_content ?></textarea>
 					<br />
-					<?php _e ( 'Details about the event.', 'dbem' )?><?php _e ( 'HTML Allowed.', 'dbem' )?>
+					<?php _e ( 'Details about the event.', 'dbem' )?> <?php _e ( 'HTML allowed.', 'dbem' )?>
 				<?php endif; ?>
 			</div>
 			<div class="event-extra-details">
@@ -113,4 +113,8 @@ if( !empty($_REQUEST['success']) ){
 	<input type="hidden" name="redirect_to" value="<?php echo $_REQUEST['redirect_to']; ?>" />
 	<?php endif; ?>
 </form>
-<?php em_locate_template('forms/tickets-form.php', true); //put here as it can't be in the add event form ?>
+<?php
+if( get_option('dbem_rsvp_enabled') && !(get_option('dbem_bookings_tickets_single') && count($EM_Tickets->tickets) == 1) ){ 
+	em_locate_template('forms/tickets-form.php', true); //put here as it can't be in the add event form
+} 
+?>

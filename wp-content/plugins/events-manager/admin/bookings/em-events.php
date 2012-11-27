@@ -79,7 +79,6 @@ function em_bookings_events_table() {
 					echo $events_nav;
 				}
 				?>
-				<br class="clear" />
 			</div>
 				
 			<?php

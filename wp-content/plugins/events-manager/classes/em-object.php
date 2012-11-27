@@ -314,7 +314,7 @@ class EM_Object {
 			//we can accept country codes or names
 			if( in_array($args['country'], $countries) ){
 				//we have a country name, 
-				$conditions['country'] = "location_country='".array_search($args['country'])."'";	
+				$conditions['country'] = "location_country='".array_search($args['country'], $countries)."'";	
 			}elseif( array_key_exists($args['country'], $countries) ){
 				//we have a country code
 				$conditions['country'] = "location_country='".$args['country']."'";					
@@ -771,14 +771,15 @@ class EM_Object {
 		if( $is_owner && (current_user_can($owner_capability) || (!empty($user) && $user->has_cap($owner_capability))) ){
 			//user owns the object and can therefore manage it
 			$can_manage = true;
-		}elseif( array_key_exists($owner_capability, $em_capabilities_array) ){
+		}elseif( $owner_capability && array_key_exists($owner_capability, $em_capabilities_array) ){
 			//currently user is not able to manage as they aren't the owner
 			$error_msg = $em_capabilities_array[$owner_capability];
 		}
 		//admins have special rights
+		if( !admin_capability ) $admin_capability = $owner_capability;
 		if( current_user_can($admin_capability) || (!empty($user) && $user->has_cap($admin_capability)) ){
 			$can_manage = true;
-		}elseif( array_key_exists($admin_capability, $em_capabilities_array) ){
+		}elseif( $admin_capability && array_key_exists($admin_capability, $em_capabilities_array) ){
 			$error_msg = $em_capabilities_array[$admin_capability];
 		}
 		
@@ -1012,6 +1013,7 @@ class EM_Object {
 	 * @return string
 	 */
 	function json_encode($array){
+	    $array = apply_filters('em_object_json_encode_pre',$array);
 		if( function_exists("json_encode") ){
 			$return = json_encode($array);
 		}else{
