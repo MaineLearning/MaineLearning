@@ -81,18 +81,57 @@ class bebop_tables {
 		}
 	}
 	
-	function fetch_oer_data( $user_id, $extensions, $status ) { //function to retrieve oer data from the oer manager table.
+	function count_content_rows( $user_id, $status ) {
+		global $wpdb;
+		$result = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND status= '" . $status . "'" );
+		return $result;
+		
+	}
+	function fetch_oer_data( $user_id, $extensions, $status, $page = null, $per_page = null ) { //function to retrieve oer data from the oer manager table.
 		global $wpdb;
 		
-		$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND status = '" . $wpdb->escape( $status ) . "' AND type IN ( ". stripslashes( $extensions ) . ') ORDER BY date_imported DESC' );
+		if ( isset( $page ) ) {
+			if ( ! isset( $per_page ) ) {
+				$per_page = 20;
+			}
+			
+			if ( $page >= 2 ) {
+				$query_from = ( $page * $per_page ) - $per_page; 
+			}
+			else {
+				$query_from = 0;
+			}
+			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
+			"' AND status = '" . $wpdb->escape( $status ) . "' AND type IN ( ". stripslashes( $extensions ) . ') ORDER BY date_imported DESC LIMIT ' . $query_from . ',' . $per_page );
+		}
+		else {
+			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
+			"' AND status = '" . $wpdb->escape( $status ) . "' AND type IN ( ". stripslashes( $extensions ) . ') ORDER BY date_imported DESC' );
+		}
 		return $result;
 	}
-	 
-	 function admin_fetch_content_data( $status, $limit = null ) { //function to retrieve all oer data by status in the oer manager table.
+	
+	function admin_count_content_rows( $status ) {
+		global $wpdb;
+		$result = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE status= '" . $status . "'" );
+		return $result;
+		
+	}
+	function admin_fetch_content_data( $status, $page = null, $per_page = null ) { //function to retrieve stuff from tables
 		global $wpdb;
 		
-		if ( $limit != null ) {
-			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE status = '" . $wpdb->escape( $status ) . "' ORDER BY date_imported DESC LIMIT $limit");
+		if ( isset( $page ) ) {
+			if ( ! isset( $per_page ) ) {
+				$per_page = 20;
+			}
+			
+			if ( $page >= 2 ) {
+				$query_from = ( $page * $per_page ) - $per_page; 
+			}
+			else {
+				$query_from = 0;
+			}
+			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE status = '" . $wpdb->escape( $status ) . "' ORDER BY date_imported DESC LIMIT " . $query_from . ',' . $per_page );
 		}
 		else {
 			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE status = '" . $wpdb->escape( $status ) . "' ORDER BY date_imported DESC");
@@ -106,6 +145,9 @@ class bebop_tables {
 		if ( ! empty( $result[0]->secondary_item_id ) ) {
 			return $result[0];
 		}
+		else {
+			return 'error';
+		} 
 	}
 	
 	function update_oer_data( $secondary_item_id, $column, $value ) {
@@ -135,16 +177,38 @@ class bebop_tables {
 
 		$wpdb->query( $wpdb->prepare( 'INSERT INTO ' . bp_core_get_table_prefix() . 'bp_bebop_general_log (type, message) VALUES (%s, %s)', $wpdb->escape( $type ), $wpdb->escape( $message ) ) );
 	}
+
+	function count_table_rows( $table_name ) {
+		global $wpdb;
+		$result = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . $table_name );
+		return $result;
+		
+	}
+	function fetch_table_data( $table_name, $page = null, $per_page = null ) { //function to retrieve stuff from tables
+		global $wpdb;
+		
+		if ( isset( $page ) ) {
+			if ( ! isset( $per_page ) ) {
+				$per_page = 20;
+			}
+			
+			if ( $page >= 2 ) {
+				$query_from = ( $page * $per_page ) - $per_page; 
+			}
+			else {
+				$query_from = 0;
+			}
+			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . $table_name . ' ORDER BY id DESC LIMIT ' . $query_from . ',' . $per_page );
+		}
+		else {
+			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . $table_name . ' ORDER BY id DESC' );
+		}
+		return $result;
+	}
 	
 	/*
 	* Options
 	*/
-	function fetch_table_data( $table_name ) { //function to retrieve stuff from tables
-		global $wpdb;
-		
-		$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . $table_name . ' ORDER BY id DESC' );
-		return $result;
-	}
 	
 	function add_option( $option_name, $option_value ) { //function to add option to the options table.
 		global $wpdb;

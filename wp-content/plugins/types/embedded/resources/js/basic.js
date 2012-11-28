@@ -7,6 +7,7 @@ jQuery(document).ready(function(){
     jQuery('.wpcf-fields-add-ajax-link').click(function(){
         jQuery.ajax({
             url: jQuery(this).attr('href'),
+            cache: false,
             beforeSend: function() {
                 jQuery('#wpcf-fields-under-title').hide();
                 jQuery('#wpcf-ajax-response').addClass('wpcf-ajax-loading');
@@ -61,19 +62,21 @@ jQuery(document).ready(function(){
             if (jQuery(this).parents('form').hasClass('wpcf-fields-form')) {
                 // Get group id
                 var group_id = false;
-                if (jQuery('input:[name="group_id"]').length > 0) {
-                    group_id = jQuery('input:[name="group_id"]').val();
+                if (jQuery('input[name="group_id"]').length > 0) {
+                    group_id = jQuery('input[name="group_id"]').val();
                 } else {
                     group_id = -1;
                 }
                 jQuery.ajax({
                     url: ajaxurl,
+                    cache: false,
                     type: 'get',
                     data: 'action=wpcf_ajax&wpcf_action=group_form_collapsed&id='+collapsed+'&toggle='+toggle+'&group_id='+group_id+'&_wpnonce='+wpcf_nonce_toggle_group
                 });
             } else {
                 jQuery.ajax({
                     url: ajaxurl,
+                    cache: false,
                     type: 'get',
                     data: 'action=wpcf_ajax&wpcf_action=form_fieldset_toggle&id='+collapsed+'&toggle='+toggle+'&_wpnonce'+wpcf_nonce_toggle_fieldset
                 });
@@ -269,35 +272,35 @@ jQuery(document).ready(function(){
     }
     
     // Types form
-    jQuery('input:[name="ct[public]"]').change(function(){
+    jQuery('input[name="ct[public]"]').change(function(){
         if (jQuery(this).val() == 'public') {
             jQuery('#wpcf-types-form-visiblity-toggle').slideDown();
         } else {
             jQuery('#wpcf-types-form-visiblity-toggle').slideUp();
         }
     });
-    jQuery('input:[name="ct[rewrite][custom]"]').change(function(){
+    jQuery('input[name="ct[rewrite][custom]"]').change(function(){
         if (jQuery(this).val() == 'custom') {
             jQuery('#wpcf-types-form-rewrite-toggle').slideDown();
         } else {
             jQuery('#wpcf-types-form-rewrite-toggle').slideUp();
         }
     });
-    jQuery('.wpcf-tax-form input:[name="ct[rewrite][enabled]"]').change(function(){
+    jQuery('.wpcf-tax-form input[name="ct[rewrite][enabled]"]').change(function(){
         if (jQuery(this).is(':checked')) {
             jQuery('#wpcf-types-form-rewrite-toggle').slideDown();
         } else {
             jQuery('#wpcf-types-form-rewrite-toggle').slideUp();
         }
     });
-    jQuery('input:[name="ct[show_in_menu]"]').change(function(){
+    jQuery('input[name="ct[show_in_menu]"]').change(function(){
         if (jQuery(this).is(':checked')) {
             jQuery('#wpcf-types-form-showinmenu-toggle').slideDown();
         } else {
             jQuery('#wpcf-types-form-showinmenu-toggle').slideUp();
         }
     });
-    jQuery('input:[name="ct[query_var_enabled]"]').change(function(){
+    jQuery('input[name="ct[query_var_enabled]"]').change(function(){
         if (jQuery(this).is(':checked')) {
             jQuery('#wpcf-types-form-queryvar-toggle').slideDown();
         } else {

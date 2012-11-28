@@ -9,6 +9,7 @@
  * **************************************************************************************************
  */
 global $bp;
+
 /*
  * '$extension' controls content on this page and is set to whatever admin-settings.php file is being viewed.
  * i.e. if you extension name is 'my_extension', the value of $extension will be 'my_extension'.
@@ -29,20 +30,23 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$active == 1 ) {
 		echo 'checked';
 	} echo '>
-	<label for="yes">'; _e( 'Yes', 'bebop' ); echo '</label>
+	<label for="yes">' . __( 'Yes', 'bebop' ) . '</label>
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="0"'; if ( $$active == 0 ) {
 		echo 'checked';
 	} echo '>
-	<label for="no">'; _e( 'No', 'bebop' ); echo '</label><br><br>';
+	<label for="no">' . __( 'No', 'bebop' ) . '</label><br><br>';
 	
-	echo '<label for="bebop_' . $extension['name'] . '_newfeedname">'; _e( 'New Feed Name', 'bebop' ); echo ':</label>
+	echo '<label for="bebop_' . $extension['name'] . '_newfeedname">' . __( 'New Feed Name', 'bebop' ) . ':</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_newfeedname" size="50"><br><br>
 	
-	<label for="bebop_' . $extension['name'] . '_newfeedurl">'; _e( 'New Feed URL', 'bebop' ); echo '</label>
+	<label for="bebop_' . $extension['name'] . '_newfeedurl">' . __( 'New Feed URL', 'bebop' ) . '</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_newfeedurl" size="75"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>
-	<div class="clear_both"></div>
+	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
+	
+	wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
+	
+	echo '<div class="clear_both"></div>
 	</form>';
 	//table of user feeds
 	$user_feeds = bebop_tables::get_user_feeds( $bp->loggedin_user->id, $extension['name'] );
@@ -50,16 +54,16 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 		echo '<h5>' . sprintf( __( 'Your %1$s feeds', 'bebop' ), $extension['display_name'] ) . '</h5>';
 		echo '<table class="bebop_user_table">
 				<tr class="nodata">
-					<th>'; _e( 'Feed Name', 'bebop' ); echo '</th>
-					<th>'; _e( 'Feed URL', 'bebop' ); echo '</th>
-					<th>'; _e( 'Options', 'bebop' ); echo '</th>
+					<th>' . __( 'Feed Name', 'bebop' ) . '</th>
+					<th>' . __( 'Feed URL', 'bebop' ) . '</th>
+					<th>' . __( 'Options', 'bebop' ) . '</th>
 				</tr>';
 		foreach ( $user_feeds as $user_feed ) {
 			$feed_name =  str_replace('_', ' ', bebop_tables::sanitise_element( $user_feed->meta_name ) );
 			echo '<tr>
 				<td>' . stripslashes( $feed_name ) . '</td>
 				<td>' . substr(bebop_tables::sanitise_element( $user_feed->meta_value ), 0, 150 ) . '</td>
-				<td><a href="?provider=' . $extension['name'] . '&delete_feed=' . urlencode( $feed_name ) . '">'; _e( 'Delete Feed', 'bebop' ); echo '</a></td>
+				<td><a href="?provider=' . $extension['name'] . '&delete_feed=' . urlencode( $feed_name ) . '">' . __( 'Delete Feed', 'bebop' ) . '</a></td>
 			</tr>';
 		}
 		echo '</table>';

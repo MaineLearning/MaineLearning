@@ -182,25 +182,24 @@ class Walker_Group_Edit extends Walker_Group  {
  */
 function bp_get_groups_to_edit() {
 
-	$groups_list = groups_get_groups(array(
-		'per_page'	=> 10000
-	));
+	// TODO: verify whether this is needed
+//	$groups_list = groups_get_groups(array(
+//		'per_page'	=> groups_get_total_group_count()
+//	));
 	
-	if(defined( 'BP_GROUP_HIERARCHY_IS_INSTALLED' ) && method_exists('BP_Groups_Hierarchy','get_tree')) {
+	if( bpgo_is_hierarchy_available() ) {
 		$groups_list = array(
 			'groups' => BP_Groups_Hierarchy::get_tree()
 		);
-		$groups_list['total'] = count($groups_list['groups']);
-	} else if(floatval(BP_VERSION) > 1.3) {
-		$groups_list = BP_Groups_Group::get('alphabetical');
+		$groups_list['total'] = count( $groups_list['groups'] );
 	} else {
-		$groups_list = BP_Groups_Group::get_alphabetically();
+		$groups_list = BP_Groups_Group::get( 'alphabetical' );
 	}
 	
 
 	$result = '<div id="menu-instructions" class="post-body-plain';
 	$result .= ( ! empty($menu_items) ) ? ' menu-instructions-inactive">' : '">';
-	$result .= '<p>' . __('Add groups using the box to the left, or arrange groups below.', 'bp-group-organizer' ) . '</p>';
+	$result .=  __('Add groups using the box to the left, or arrange groups below.', 'bp-group-organizer' );
 	$result .= '</div>';
 
 	if($groups_list['total'] == 0)

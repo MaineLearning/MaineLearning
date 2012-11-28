@@ -54,7 +54,8 @@ class WPV_template{
         } else {
 			add_filter('edit_post_link', array($this, 'edit_post_link'), 10, 2);
         }
-        
+		
+		add_action('save_post', array($this, 'set_default_template'), 10, 2);
         
     }
 	
@@ -290,6 +291,10 @@ class WPV_template{
 	
     function the_content($content) {
         global $id, $post, $wpdb, $WP_Views, $wp_query, $wplogger;
+
+		if ( post_password_required($post) ) {
+			return $content;
+		}
 		
 		// core functions that we except calls from.
 		static $the_content_core = array('the_content', 'wpv_shortcode_wpv_post_body');
@@ -417,6 +422,9 @@ class WPV_template{
         }
 
 		unset($in_progress[$id]);
+		
+		$content = wpml_content_fix_links_to_translated_content($content);
+		
 		return $content;
     
     }
@@ -513,7 +521,7 @@ class WPV_template{
                                                    WPV_URL . '/res/js/views_editor_plugin.js',
                                                    WPV_URL . '/res/img/bw_icon16.png');
             
-            add_short_codes_to_js(array('post', 'view'), $this->editor_addon);
+            add_short_codes_to_js(array('post', 'view', 'view-form'), $this->editor_addon);
         }
     }
  
@@ -625,4 +633,26 @@ class WPV_template{
 	function disable_rich_edit_for_views($state) {
 		return $state;
 	}
+	
+	function set_default_template($pidd, $post) {
+		global $WP_Views;
+
+		if (!isset($_POST['views_template'])) {
+	
+			// set the view template if one hasn't been set.			
+			$template_selected = get_post_meta($pidd, '_views_template', true);
+			if ($template_selected == '') {
+				$options = $WP_Views->get_options();
+	
+				if (isset($options['views_template_for_' . $post->post_type])) {
+					$template_selected = $options['views_template_for_' . $post->post_type];
+					update_post_meta($pidd, '_views_template', $template_selected);
+				}
+			}
+					
+		}
+		
+	}		
+			
+	
 }

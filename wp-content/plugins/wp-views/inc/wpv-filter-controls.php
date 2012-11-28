@@ -90,7 +90,7 @@ function wpv_filter_controls_admin($view_settings){
             <br />
             <p>
                 <strong><?php _e('Filter controls settings', 'wpv-views') ?></strong>
-                <?php echo '<a href="' . WPV_ADD_FILTER_CONTROLS_LINK . '" target="_blank">' . sprintf(__('Learn more about filter controls', 'wpv-views')) . ' &raquo;</a>'; ?>
+                <?php echo '&nbsp;<a class="wpv-help-link" href="' . WPV_ADD_FILTER_CONTROLS_LINK . '" target="_blank">' . sprintf(__('Learn more about filter controls', 'wpv-views')) . ' &raquo;</a>'; ?>
             </p>
             <table id="view_filter_controls_table" class="widefat fixed">
                 <thead>
@@ -341,7 +341,8 @@ function wpv_ajax_wpv_view_form_popup() {
                 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
                 <title></title>
                 <?php
-                if (wpcf_compare_wp_version('3.2.1', '<=')) {
+				global $wp_version;
+                if (version_compare($wp_version, '3.2.1', '<=')) {
                     wp_admin_css('global');
                 }
                 wp_admin_css();
@@ -393,7 +394,7 @@ function wpv_ajax_wpv_view_form_popup() {
                 <br />
                 
                 <?php
-                    if (count($post) == 0) {
+                    if (count($posts) == 0) {
                         
                         echo '<strong>' . __('No target posts were found that use this View', 'wpv-views') . '</strong>';
                         echo '<br /><br />';

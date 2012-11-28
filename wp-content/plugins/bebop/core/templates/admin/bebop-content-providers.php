@@ -21,7 +21,7 @@ else {
 			<table class="widefat margin-top_22px margin-bottom_22px">
 				<thead>
 					<tr>
-						<th><?php _e( 'Extension Name<', 'bebop' ); ?>/th>
+						<th><?php _e( 'Extension Name', 'bebop' ); ?></th>
 						<th><?php _e( 'Active Users', 'bebop' ); ?></th>
 						<th><?php _e( 'Inactive Users', 'bebop' ); ?></th>
 						<th colspan=><?php _e( 'Unverified Content', 'bebop' ); ?></th>
@@ -53,7 +53,7 @@ else {
 						<td><a href="?page=bebop_content&type=verified">' . bebop_tables::count_content_by_extension( $extension['name'], 'verified' ) . '</a></td>
 						<td><a href="?page=bebop_content&type=deleted">' . bebop_tables::count_content_by_extension( $extension['name'], 'deleted' ) . '</a></td>
 						<td>';
-						echo "<label for='bebop_" . $extension['name'] . "_provider'>";  _e( 'Enabled:', 'bebop' ); echo "</label><input id='bebop_" .$extension['name'] . "_provider' name='bebop_".$extension['name'] . "_provider' type='checkbox'";
+						echo "<label class='alt' for='bebop_" . $extension['name'] . "_provider'>";  _e( 'Enabled:', 'bebop' ); echo "</label><input id='bebop_" .$extension['name'] . "_provider' name='bebop_".$extension['name'] . "_provider' type='checkbox'";
 						if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on' ) {
 							echo 'CHECKED';
 						}
@@ -64,6 +64,9 @@ else {
 				?>
 				</tbody>
 			</table>
+			
+			<?php wp_nonce_field( 'bebop_content_provider_settings' ); ?>
+			
 			<input class='button-primary' type='submit' id='submit' name='submit' value='<?php _e( 'Save Changes', 'bebop' ); ?>'>
 		</form>
 	<!-- End bebop_admin_container -->

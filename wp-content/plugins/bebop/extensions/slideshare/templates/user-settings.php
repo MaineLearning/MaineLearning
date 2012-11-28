@@ -30,16 +30,19 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$active == 1 ) {
 		echo 'checked';
 	} echo '>
-	<label for="yes">'; _e( 'Yes', 'bebop' ); echo '</label>
+	<label for="yes">' . __( 'Yes', 'bebop' ) . '</label>
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="0"'; if ( $$active == 0 ) {
 		echo 'checked';
 	} echo '>
-	<label for="no">'; _e( 'No', 'bebop' ); echo '</label><br><br>';
+	<label for="no">' . __( 'No', 'bebop' ) . '</label><br><br>';
 	
-	echo '<label for="bebop_' . $extension['name'] . '_username">'; _e( 'New Username', 'bebop' ); echo ':</label>
+	echo '<label for="bebop_' . $extension['name'] . '_username">' . __( 'New Username', 'bebop' ) . ':</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_username" value="" size="50"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>';
+	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
+	
+	wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
+	
 	echo '<div class="clear_both"></div>';
 	
 	echo '</form>';
@@ -49,13 +52,13 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		echo '<h5>Your ' . $extension['display_name'] . ' feeds</h5>';
 		echo '<table class="bebop_user_table">
 				<tr class="nodata">
-					<th>'; _e( 'Userame', 'bebop' ); echo '</th>
-					<th>'; _e( 'Options', 'bebop' ); echo '</th>
+					<th>' . __( 'Username', 'bebop' ) . '</th>
+					<th>' . __( 'Options', 'bebop' ) . '</th>
 				</tr>';
 		foreach ( $user_feeds as $user_feed ) {
 			echo '<tr>
 				<td>' . bebop_tables::sanitise_element( $user_feed->meta_value ) . '</td>
-				<td><a href="?provider=' . $extension['name'] . '&remove_username=' . $user_feed->meta_value . '">'; _e( 'Delete Feed', 'bebop' ); echo '</a></td>
+				<td><a href="?provider=' . $extension['name'] . '&remove_username=' . $user_feed->meta_value . '">' . __( 'Delete Feed', 'bebop' ) . '</a></td>
 			</tr>';
 		}
 		echo '</table>';

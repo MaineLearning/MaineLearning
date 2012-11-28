@@ -7,7 +7,7 @@ add_action('admin_menu', 'jfb_add_admin_page', 99);
 function jfb_add_admin_page()
 { 
     global $jfb_name;
-    add_options_page("$jfb_name Options", 'WP-FB AutoConn', 'administrator', "wp-fb-autoconnect", 'jfb_admin_page');
+    add_options_page("$jfb_name Options", 'WP-FB AutoConn' . (defined('JFB_PREMIUM')?"+":""), 'administrator', "wp-fb-autoconnect", 'jfb_admin_page');
 }
 
 
@@ -105,57 +105,39 @@ function jfb_admin_page()
     //Update options
     if( isset($_POST['fb_opts_updated']) )
     {
-        //When saving the Facebook options, make sure the key and secret are valid.
-        $fbValid = jfb_validate_key($_POST[$opt_jfb_api_key], $_POST[$opt_jfb_api_sec]);
-        if( $fbValid && method_exists($fbValid->api_client, 'admin_getAppProperties') )
-        {
-            $appInfo = $fbValid->api_client->admin_getAppProperties(array('app_id', 'application_name'));
-            if( is_array($appInfo) )
-            {
-                $appID = sprintf("%.0f", $appInfo['app_id']);
-                $message = '"' . $appInfo['application_name'] . '" (ID ' . $appID . ')'; 
-            }
-            else if( $appInfo->app_id )
-            {   //Why does this happen? Presumably because another plugin includes a different version of the API that uses objects instead of arrays
-                $appID = sprintf("%.0f", $appInfo->app_id);
-                $message = '"' . $appInfo->application_name . '" (ID ' . $appID . ')';
-            }
-            else
-            {
-                $fbValid = false;
-            }
-        }
-        if( $fbValid )
-        {            
-            $shownTab = 2;
-            update_option( $opt_jfb_valid, 1 );
-            if( get_option($opt_jfb_api_key) != $_POST[$opt_jfb_api_key] )
-               jfb_auth($jfb_name, $jfb_version, 2, "SET: " . $message );
-			
-			//Also fetch an app token and store it in the options table.  App tokens never expire unless the app secret is refreshed.
-			//Note: this plugin doesn't actually use the app-token; I simply cache it so it can be accessible to users wishing to further
-			//interact with Facebook via hooks & filters.
+        //When saving the Facebook options, make sure the key and secret are valid...
+        update_option( $opt_jfb_valid, 0 );
+        $shownTab = 1;
+        $result = jfb_get("https://graph.facebook.com/" . $_POST[$opt_jfb_api_key]);
+        if(!$result):
+            ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: Empty Reply.<br />Are you sure you entered your App ID correctly?</p></div><?php
+        elseif (isset($result->error)):
+            ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: <?php echo (isset($result->error->message)?$result->error->message:"Unknown"); ?>.<br />Are you sure you entered your App ID correctly?</p></div><?php
+        elseif($result->id != $_POST[$opt_jfb_api_key]):
+            ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: ID Mismatch.</p></div><?php
+        else:
+			//If we got here, we know the App ID is correct.  Now try to get an app token and store it in the options table; if this works we know the secret is correct too.  
+			//Note: this plugin doesn't actually use the app-token; I simply cache it so it can be accessible to users wishing to further interact with Facebook via hooks & filters.
+			//Note: App tokens never expire unless the app secret is refreshed.
 			$response = wp_remote_get("https://graph.facebook.com/oauth/access_token?client_id=" . $_POST[$opt_jfb_api_key] . "&client_secret=" . $_POST[$opt_jfb_api_sec] . "&grant_type=client_credentials");
 			if( is_array($response) && strpos($response['body'], 'access_token=') !== FALSE )
 			{
-				update_option( $opt_jfb_app_token, substr($response['body'], 13) );
-				?><div class="updated"><p><strong>Successfully connected with <?php echo $message ?></strong></p></div><?php
+                //We're valid!
+                $shownTab = 2;
+                update_option( $opt_jfb_valid, 1 );
+                update_option( $opt_jfb_app_token, substr($response['body'], 13) );
+                if( get_option($opt_jfb_api_key) != $_POST[$opt_jfb_api_key] )
+                   jfb_auth($jfb_name, $jfb_version, 2, "SET: " . $message );
+				?><div class="updated"><p><strong>Successfully connected with "<?php echo $result->name ?>" (ID <?php echo $result->id; ?>)</strong></p></div><?php
 			}
 			else
 			{
-				update_option($opt_jfb_app_token, 0);
-				?><div class="updated"><p><strong>Successfully connected with <?php echo $message ?>,</strong> <i>but the app token could not be obtained.</i><br />This will not affect the plugin's functionality if you have not implemented any custom add-ons - it's safe to ignore this warning.</p></div><?php
+                ?><div class="error"><p>Error: Failed to validate your App ID and Secret.<br />Are you sure you entered your App Secret correctly?</p></div><?php
 			}
-        }
-        else
-        {
-            $shownTab = 1;
-            update_option( $opt_jfb_valid, 0 );
-            $message = "ERROR: Facebook could not validate your session key and secret!  Are you sure you've entered them correctly?";
-            ?><div class="updated"><p><?php echo $message ?></p></div><?php
-        }
+        endif;
+
         //We can save these either way, because if "valid" isn't set, a button won't be shown.
-        update_option( $opt_jfb_app_id, $appID);
+        update_option( $opt_jfb_app_id, $result->id);
         update_option( $opt_jfb_api_key, $_POST[$opt_jfb_api_key] );
         update_option( $opt_jfb_api_sec, $_POST[$opt_jfb_api_sec] );
     }
@@ -338,13 +320,16 @@ function jfb_admin_page()
         <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab5Id?>" style="display:<?php echo ($shownTab==5?"block":"none")?>">
             <h3>Support Information</h3>
             <div style="width:600px;">
-            Before submitting a support request, please make sure to carefully read all the documentation and FAQs on the <a href="<?php echo $jfb_homepage; ?>" target="_support">plugin homepage</a>.  Every problem that's ever been reported has a solution posted there.<br /><br />            
-            If you're still having trouble, you may submit a request (on the <a href="<?php echo $jfb_homepage; ?>" target="_support">same homepage</a>), but please <i><u>specifically mention</u></i> that you've tried it with all other plugins disabled and the default theme (see <a href="<?php echo $jfb_homepage ?>#FAQ100">FAQ100</a>).  Also, be sure to include the following information about your Wordpress environment:
+            Before submitting a support request, please make sure to carefully read all the documentation and FAQs on the <a href="<?php echo $jfb_homepage; ?>#faq" target="_support">plugin homepage</a>.  Every problem that's ever been reported has a solution posted there.<br /><br />                        
+            If you do choose to submit a request, please do so via the <a href="<?php echo $jfb_homepage; ?>#feedback" target="_support">plugin homepage</a>, <i><b><u>not</u></b></i> on Wordpress.org (which I rarely check).  Also, please <i><u>specifically mention</u></i> that you've tried it with all other plugins disabled and the default theme (see <a href="<?php echo $jfb_homepage ?>#faq100" target="_faq100">FAQ100</a>) and include the following information about your Wordpress environment:<br /><br />            
             </div>
             <div style="width:600px; padding:5px; margin:2px 0; background-color:#EEEDDA; border:1px solid #CCC;">
+                Host URL: <b><?php echo $_SERVER["HTTP_HOST"] ?></b><br />
+                Site URL: <b><?php echo get_bloginfo('url') ?></b><br />
+                Wordpress URL: <b><?php echo get_bloginfo('wpurl') ?></b><br />
             	Wordpress Version: <b><?php echo $GLOBALS['wp_version']; ?></b><br />
             	BuddyPress Version: <b><?php echo defined('BP_VERSION')?BP_VERSION:"Not Detected"; ?></b><br />
-            	MultiSite Status: <b> <?php echo (defined('WP_ALLOW_MULTISITE')?"Allowed":"Not Allowed") . " / " . (function_exists('is_multisite')?(is_multisite()?"Enabled":"Disabled"):"Undefined"); ?></b><br />
+            	MultiSite Status: <b> <?php echo (defined('WP_ALLOW_MULTISITE')?"Allowed":"Off") . " / " . (function_exists('is_multisite')?(is_multisite()?"Enabled":"Disabled"):"Undefined"); ?></b><br />
             	Browser Version: <b><?php $browser = jfb_get_browser(); echo $browser['shortname'] . " " . $browser['version'] . " for " . $browser['platform']; ?></b><br />
             	Plugin Version: <b><?php echo $jfb_version ?></b><br />
     			Addon Version: <b><?php echo defined('JFB_PREMIUM_VER')?JFB_PREMIUM_VER:"Not Detected";?></b><br />
@@ -386,25 +371,6 @@ function jfb_admin_page()
 <?php
 }
 
-/*
- * Use the key and secret to generate an auth_token, just to test if they're valid.
- * If so, return a Facebook API instance.  Otherwise, return null.
- */
-function jfb_validate_key($key, $secret)
-{
-      require_once('facebook-platform/php/facebook.php');
-      $facebook = new Facebook($key, $secret, null, true);
-      $facebook->api_client->session_key = 0;
-      try
-      {
-         $token = $facebook->api_client->auth_createToken();
-         return $facebook;
-      }
-      catch(Exception $e)
-      {
-          return null;
-      }
-}
 
 /*
  * I use this for bug-finding; you can remove it if you want, but I'd appreciate it if you didn't.
@@ -463,13 +429,18 @@ function jfb_output_premium_panel_tease()
     global $opt_jfbp_buttonsize, $opt_jfbp_buttontext, $opt_jfbp_requirerealmail;
     global $opt_jfbp_redirect_new, $opt_jfbp_redirect_new_custom, $opt_jfbp_redirect_existing, $opt_jfbp_redirect_existing_custom, $opt_jfbp_redirect_logout, $opt_jfbp_redirect_logout_custom;
     global $opt_jfbp_restrict_reg, $opt_jfbp_restrict_reg_url, $opt_jfbp_restrict_reg_uid, $opt_jfbp_restrict_reg_pid, $opt_jfbp_restrict_reg_gid;
-    global $opt_jfbp_show_spinner, $jfb_data_url;
+    global $opt_jfbp_show_spinner, $opt_jfbp_allow_disassociate, $opt_jfbp_autoregistered_role, $jfb_data_url;
     global $opt_jfbp_wordbooker_integrate, $opt_jfbp_signupfrmlogin, $opt_jfbp_localize_facebook;
     global $opt_jfbp_xprofile_map, $opt_jfbp_xprofile_mappings, $jfb_xprofile_field_prefix;
-	global $opt_jfbp_bpstream_login, $opt_jfbp_bpstream_logincontent, $opt_jfbp_bpstream_register, $opt_jfbp_bpstream_registercontent;
+    global $opt_jfbp_bpstream_login, $opt_jfbp_bpstream_logincontent, $opt_jfbp_bpstream_register, $opt_jfbp_bpstream_registercontent;
+    global $opt_jfbp_latestversion;
     function disableatt() { echo (defined('JFB_PREMIUM')?"":"disabled='disabled'"); }
     ?>
-    <h3>Premium Options <?php echo (defined('JFB_PREMIUM_VER')?"<small>(Version " . JFB_PREMIUM_VER . ")</small>":""); ?></h3>
+    <!--Show the Premium version number along with a link to immediately check for updates-->
+    <form name="formPremUpdateCheck" method="post" action="">
+        <h3>Premium Options <?php echo (defined('JFB_PREMIUM_VER')?"<small>(<a href=\"javascript:document.formPremUpdateCheck.submit();\">Version " . JFB_PREMIUM_VER . "</a>)</small>":""); ?></h3>
+        <input type="hidden" name="<?php echo $opt_jfbp_latestversion?>" value="1" />
+    </form>
     
     <?php 
     if( !defined('JFB_PREMIUM') )
@@ -479,24 +450,24 @@ function jfb_output_premium_panel_tease()
     <form name="formPremOptions" method="post" action="">
     
         <b>MultiSite Support:</b><br/>
-		<input disabled='disabled' type="checkbox" name="musupport" value="1" <?php echo ((defined('JFB_PREMIUM')&&function_exists('is_multisite')&&is_multisite())?"checked='checked'":"")?> >
-		Automatically enabled when a MultiSite install is detected
-		<dfn title="The free plugin is not aware of users registered on other sites in your WPMU installation, which can result in problems i.e. if someone tries to register on more than one site.  The Premium version will actively detect and handle existing users across all your sites.">(Mouseover for more info)</dfn><br /><br />
-        		
-		<b>Double Logins:</b><br />
+        <input disabled='disabled' type="checkbox" name="musupport" value="1" <?php echo ((defined('JFB_PREMIUM')&&function_exists('is_multisite')&&is_multisite())?"checked='checked'":"")?> >
+        Automatically enabled when a MultiSite install is detected
+        <dfn title="The free plugin is not aware of users registered on other sites in your WPMU installation, which can result in problems i.e. if someone tries to register on more than one site.  The Premium version will actively detect and handle existing users across all your sites.">(Mouseover for more info)</dfn><br /><br />
+                
+        <b>Double Logins:</b><br />
         <input disabled='disabled' type="checkbox" name="doublelogin" value="1" <?php echo (defined('JFB_PREMIUM')?"checked='checked'":"")?> />
         Automatically handle double logins 
         <dfn title="If a visitor opens two browser windows, logs into one, then logs into the other, the security nonce check will fail.  This is because in the second window, the current user no longer matches the user for which the nonce was generated.  The free version of the plugin reports this to the visitor, giving them a link to their desired redirect page.  The premium version will transparently handle such double-logins: to visitors, it'll look like the page has just been refreshed and they're now logged in.  For more information on nonces, please visit http://codex.wordpress.org/WordPress_Nonces.">(Mouseover for more info)</dfn><br /><br />
-		
-		<!-- Facebook's OAuth 2.0 migration BROKE my ability to localize the XFBML-generated dialog.  I've reported a bug, and will do my best to fix it as soon as possible.
-		 <b>Facebook Localization:</b><br />
-		<?php add_option($opt_jfbp_localize_facebook, 1); ?>
-		<input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_localize_facebook?>" value="1" <?php echo get_option($opt_jfbp_localize_facebook)?"checked='checked'":""?> >
-		Translate Facebook prompts to the same locale as your Wordpress blog (Detected locale: <i><?php echo ( (defined('WPLANG')&&WPLANG!="") ? WPLANG : "en_US" ); ?></i>)
-		<dfn title="The Wordpress locale is specified in wp-config.php, where valid language codes are of the form 'en_US', 'ja_JP', 'es_LA', etc.  Please see http://codex.wordpress.org/Installing_WordPress_in_Your_Language for more information on localizing Wordpress, and http://developers.facebook.com/docs/internationalization/ for a list of locales supported by Facebook.">(Mouseover for more info)</dfn><br /><br />
-		 -->
-						
-   		<b>E-Mail Permissions:</b><br />
+        
+        <!-- Facebook's OAuth 2.0 migration BROKE my ability to localize the XFBML-generated dialog.  I've reported a bug, and will do my best to fix it as soon as possible.
+         <b>Facebook Localization:</b><br />
+        <?php add_option($opt_jfbp_localize_facebook, 1); ?>
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_localize_facebook?>" value="1" <?php echo get_option($opt_jfbp_localize_facebook)?"checked='checked'":""?> >
+        Translate Facebook prompts to the same locale as your Wordpress blog (Detected locale: <i><?php echo ( (defined('WPLANG')&&WPLANG!="") ? WPLANG : "en_US" ); ?></i>)
+        <dfn title="The Wordpress locale is specified in wp-config.php, where valid language codes are of the form 'en_US', 'ja_JP', 'es_LA', etc.  Please see http://codex.wordpress.org/Installing_WordPress_in_Your_Language for more information on localizing Wordpress, and http://developers.facebook.com/docs/internationalization/ for a list of locales supported by Facebook.">(Mouseover for more info)</dfn><br /><br />
+         -->
+                        
+        <b>E-Mail Permissions:</b><br />
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_requirerealmail?>" value="1" <?php echo get_option($opt_jfbp_requirerealmail)?'checked="checked"':''?> /> Enforce access to user's real (unproxied) email
         <dfn title="The basic option to request user emails will prompt your visitors, but they can still hide their true addresses by using a Facebook proxy (click 'change' in the permissions dialog, and select 'xxx@proxymail.facebook.com').  This option performs a secondary check to enforce that they allow access to their REAL e-mail.  Note that the check requires several extra queries to Facebook's servers, so it could result in a slightly longer delay before the login initiates.">(Mouseover for more info)</dfn><br /><br />
 
@@ -518,13 +489,31 @@ function jfb_output_premium_panel_tease()
         <b>Wordbooker Avatar Integration:</b><br />
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_wordbooker_integrate?>" value="1" <?php echo get_option($opt_jfbp_wordbooker_integrate)?'checked="checked"':''?> /> Use Facebook avatars for <a href="http://wordpress.org/extend/plugins/wordbooker/">Wordbooker</a>-imported comments
         <dfn title="The Wordbooker plugin allows you to push blog posts to your Facebook wall, and also to import comments on these posts back to your blog.  This option will display real Facebook avatars for imported comments, provided the commentor logs into your site at least once.">(Mouseover for more info)</dfn><br /><br />
+        
+        <b>Disassociation:</b><br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_allow_disassociate?>" value="1" <?php echo get_option($opt_jfbp_allow_disassociate)?'checked="checked"':''?> /> Allow users to disassociate their Wordpress accounts from Facebook
+        <dfn title="This will add a button to each connected user's Wordpress profile page, allowing them to disassociate their blog account from their Facebook profile.  User accounts which are not connected to Facebook will display 'Not Connected' in place of a button.">(Mouseover for more info)</dfn><br />
+        <input disabled='disabled' type="checkbox" name="admindisassociate" value="1" <?php echo (defined('JFB_PREMIUM')?"checked='checked'":"")?> /> Allow administrators to disassociate Wordpress user accounts from Facebook
+        <dfn title="This option is always enabled for administrators.">(Mouseover for more info)</dfn><br /><br />
+
+        <b>Autoregistered User Role:</b><br />
+        <?php
+        add_option($opt_jfbp_autoregistered_role, get_option('default_role'));
+        $currSelection = get_option($opt_jfbp_autoregistered_role);
+        $editable_roles = get_editable_roles();
+        if ( empty( $editable_roles[$currSelection] ) ) $currSelection = get_option('default_role');
+        ?>
+        Users who are autoregistered with Facebook will be created with the role: 
+        <select <?php disableatt() ?> name="<?php echo $opt_jfbp_autoregistered_role?>" id="<?php echo $opt_jfbp_autoregistered_role?>">
+            <?php wp_dropdown_roles( $currSelection ); ?>
+        </select><br /><br />
 
         <b>Widget Appearance:</b><br />
         Please use the <a href="<?php echo admin_url('widgets.php') ?>" target="widgets">WP-FB AutoConnect <b><i>Premium</i></b> Widget</a> if you'd like to:<br />
         &bull; Customize the Widget's text <dfn title="You can customize the text of: User, Pass, Login, Remember, Forgot, Logout, Edit Profile, Welcome.">(Mouseover for more info)</dfn><br />
         &bull; Hide the User/Pass fields (leaving Facebook as the only way to login)<br />
         &bull; Show the user's avatar (when logged in)<br />
-		&bull; Show a "Remember" tickbox<br />      
+        &bull; Show a "Remember" tickbox<br />      
         &bull; Allow the user to simultaneously logout of your site <i>and</i> Facebook<br /><br />
         
         <b>Button Appearance:</b><br />
@@ -553,9 +542,9 @@ function jfb_output_premium_panel_tease()
         <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="0" <?php echo (get_option($opt_jfbp_restrict_reg)==0?"checked='checked'":"")?>>Open: Anyone can login (Default)<br />
         <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="1" <?php echo (get_option($opt_jfbp_restrict_reg)==1?"checked='checked'":"")?>>Closed: Only login existing blog users<br />
         <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="2" <?php echo (get_option($opt_jfbp_restrict_reg)==2?"checked='checked'":"")?>>Invitational: Only login users who've been invited via the <a href="http://wordpress.org/extend/plugins/wordpress-mu-secure-invites/">Secure Invites</a> plugin <dfn title="For invites to work, the connecting user's Facebook email must be accessible, and it must match the email to which the invitation was sent.">(Mouseover for more info)</dfn><br />
-		<input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="3" <?php echo (get_option($opt_jfbp_restrict_reg)==3?"checked='checked'":"")?>>Friendship: Only login users who are friends with uid <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_uid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_uid) ?>" /> on Facebook <dfn title="To find your Facebook uid, login and view your Profile Pictures album.  The URL will be something like 'http://www.facebook.com/media/set/?set=a.123.456.789'.  In this example, your uid would be 789 (the numbers after the last decimal point).">(Mouseover for more info)</dfn><br />
-		<input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="4" <?php echo (get_option($opt_jfbp_restrict_reg)==4?"checked='checked'":"")?>>Membership: Only login users who are members of group id <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_gid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_gid); ?>" /> on Facebook <dfn title="To find a groups's id, view its URL.  It will be something like 'http://www.facebook.com/group.php?gid=12345678'.  In this example, the group id would be 12345678.">(Mouseover for more info)</dfn><br />
-		<input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="5" <?php echo (get_option($opt_jfbp_restrict_reg)==5?"checked='checked'":"")?>>Fanpage: Only login users who are fans of page id <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_pid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_pid); ?>" /> on Facebook <dfn title="To find a page's id, view one of its photo albums.  The URL will be something like 'http://www.facebook.com/media/set/?set=a.123.456.789'.  In this example, the id would be 789 (the numbers after the last decimal point).">(Mouseover for more info)</dfn><br />
+        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="3" <?php echo (get_option($opt_jfbp_restrict_reg)==3?"checked='checked'":"")?>>Friendship: Only login users who are friends with uid <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_uid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_uid) ?>" /> on Facebook <dfn title="To find your Facebook uid, login and view your Profile Pictures album.  The URL will be something like 'http://www.facebook.com/media/set/?set=a.123.456.789'.  In this example, your uid would be 789 (the numbers after the last decimal point).">(Mouseover for more info)</dfn><br />
+        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="4" <?php echo (get_option($opt_jfbp_restrict_reg)==4?"checked='checked'":"")?>>Membership: Only login users who are members of group id <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_gid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_gid); ?>" /> on Facebook <dfn title="To find a groups's id, view its URL.  It will be something like 'http://www.facebook.com/group.php?gid=12345678'.  In this example, the group id would be 12345678.">(Mouseover for more info)</dfn><br />
+        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_restrict_reg; ?>" value="5" <?php echo (get_option($opt_jfbp_restrict_reg)==5?"checked='checked'":"")?>>Fanpage: Only login users who are fans of page id <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_restrict_reg_pid?>" value="<?php echo get_option($opt_jfbp_restrict_reg_pid); ?>" /> on Facebook <dfn title="To find a page's id, view one of its photo albums.  The URL will be something like 'http://www.facebook.com/media/set/?set=a.123.456.789'.  In this example, the id would be 789 (the numbers after the last decimal point).">(Mouseover for more info)</dfn><br />
         Redirect URL for denied logins: <input <?php disableatt() ?> type="text" size="30" name="<?php echo $opt_jfbp_restrict_reg_url?>" value="<?php echo get_option($opt_jfbp_restrict_reg_url) ?>" /><br /><br />
                 
         <b>Custom Redirects:</b><br />
@@ -587,15 +576,15 @@ function jfb_output_premium_panel_tease()
         <?php add_option($opt_jfbp_bpstream_registercontent, "%user% registered with Facebook"); ?>
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_bpstream_register?>" value="1" <?php echo get_option($opt_jfbp_bpstream_register)?'checked="checked"':''?> /> When a new user autoconnects to your site, post to the BP Activity Stream:
         <input <?php disableatt() ?> type="text" size="50" name="<?php echo $opt_jfbp_bpstream_registercontent?>" value="<?php echo get_option($opt_jfbp_bpstream_registercontent) ?>" /><br />
-		<input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_bpstream_login?>" value="1" <?php echo get_option($opt_jfbp_bpstream_login)?'checked="checked"':''?> /> When an existing user returns to your site, post to the BP Activity Stream:
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_bpstream_login?>" value="1" <?php echo get_option($opt_jfbp_bpstream_login)?'checked="checked"':''?> /> When an existing user returns to your site, post to the BP Activity Stream:
         <input <?php disableatt() ?> type="text" size="50" name="<?php echo $opt_jfbp_bpstream_logincontent?>" value="<?php echo get_option($opt_jfbp_bpstream_logincontent) ?>" /><br /><br />
  
-		<b>BuddyPress X-Profile Mappings</b><br />
-		This section will let you automatically fill in your Buddypress users' X-Profile data from their Facebook profiles.<br />
-		<small>&bull; Facebook fields marked with an asterisk (i.e. Birthday*) require the user to approve extra permissions during login.</small><br />
-		<small>&bull; Some limitations exist regarding which X-Profile fields can be populated <dfn title="Only 'Text Box,' 'Multi-Line Text Box,' and 'Date Selector'-type profile fields can be mapped at this time.  Due to unpredictability in matching freeform values from Facebook to pre-defined values on BuddyPress, support for dropdowns, radiobuttons, and checkboxes MAY be added in the future.">(Mouseover for more info)</dfn></small><br />
-		<small>&bull; Some limitations exist regarding which Facebook fields can be imported <dfn title="Because some Facebook fields are formatted differently, each one needs to be explicitly implemented.  I've included an initial selection of fields (i.e. Name, Gender, Birthday, Bio, etc), but if you need another field to be available, please request it on the support page and I'll do my best to add it to the next update.">(Mouseover for more info)</dfn></small><br /><br />
-		
+        <b>BuddyPress X-Profile Mappings</b><br />
+        This section will let you automatically fill in your Buddypress users' X-Profile data from their Facebook profiles.<br />
+        <small>&bull; Facebook fields marked with an asterisk (i.e. Birthday*) require the user to approve extra permissions during login.</small><br />
+        <small>&bull; Some limitations exist regarding which X-Profile fields can be populated <dfn title="Only 'Text Box,' 'Multi-Line Text Box,' and 'Date Selector'-type profile fields can be mapped at this time.  Due to unpredictability in matching freeform values from Facebook to pre-defined values on BuddyPress, support for dropdowns, radiobuttons, and checkboxes MAY be added in the future.">(Mouseover for more info)</dfn></small><br />
+        <small>&bull; Some limitations exist regarding which Facebook fields can be imported <dfn title="Because some Facebook fields are formatted differently, each one needs to be explicitly implemented.  I've included an initial selection of fields (i.e. Name, Gender, Birthday, Bio, etc), but if you need another field to be available, please request it on the support page and I'll do my best to add it to the next update.">(Mouseover for more info)</dfn></small><br /><br />
+        
          <?php
          //If people report problems with Buddypress detection, use this more robust method: http://codex.buddypress.org/plugin-development/checking-buddypress-is-active/
          if( !function_exists('bp_has_profile') ) echo "<i>BuddyPress Not Found.  This section is only available on BuddyPress-enabled sites.</i>";
@@ -610,10 +599,17 @@ function jfb_output_premium_panel_tease()
             //Make a list of which Facebook fields may be mapped to each type of xProfile field.  Omitted types (i.e. checkbox) are treated as "unmappable."
             //The format is "xprofile_field_type"->"(fbfieldname1, fbfieldDisplayname1), (fbfieldname2, fbfieldDisplayname2), ..."
             //(Available FB fields are documented at: https://developers.facebook.com/docs/reference/api/user/)
-            $allowed_mappings = array('textbox'       =>array('id'=>"ID", 'name'=>"Name", 'first_name'=>"First Name", 'middle_name'=>"Middle Name", 'last_name'=>"Last Name", 'username'=>"Username", 'gender'=>"Gender", 'link'=>"Profile URL", "website"=>"Website*", 'bio'=>"Bio*", 'political'=>"Political*", "religion"=>"Religion*", 'relationship_status'=>"Relationship*", "location"=>"City*", "hometown"=>"Hometown*", 'languages'=>"Languages*"),
-                                      'textarea'      =>array('id'=>"ID", 'name'=>"Name", 'first_name'=>"First Name", 'middle_name'=>"Middle Name", 'last_name'=>"Last Name", 'username'=>"Username", 'gender'=>"Gender", 'link'=>"Profile URL", "website"=>"Website*", 'bio'=>"Bio*", 'political'=>"Political*", "religion"=>"Religion*", 'relationship_status'=>"Relationship*", "location"=>"City*", "hometown"=>"Hometown*", 'languages'=>"Languages*"),
-                         		      'datebox'       =>array('birthday'=>'Birthday*'));
-			$allowed_mappings = apply_filters('wpfb_xprofile_allowed_mappings', $allowed_mappings);
+            $allowed_mappings = array(
+                'textbox' =>array('id'=>"ID", 'name'=>"Name", 'first_name'=>"First Name", 'middle_name'=>"Middle Name", 'last_name'=>"Last Name",
+                                  'username'=>"Username", 'gender'=>"Gender", 'link'=>"Profile URL", "website"=>"Website*", 'bio'=>"Bio*", 
+                                  'political'=>"Political*", "religion"=>"Religion*", 'relationship_status'=>"Relationship*", "location"=>"City*",
+                                  'hometown'=>"Hometown*", 'languages'=>"Languages*", 'music'=>'Music*', 'interests'=>'Interests*'),
+                'textarea'=>array('id'=>"ID", 'name'=>"Name", 'first_name'=>"First Name", 'middle_name'=>"Middle Name", 'last_name'=>"Last Name", 
+                                  'username'=>"Username", 'gender'=>"Gender", 'link'=>"Profile URL", "website"=>"Website*", 'bio'=>"Bio*",
+                                  'political'=>"Political*", "religion"=>"Religion*", 'relationship_status'=>"Relationship*", "location"=>"City*", 
+                                  'hometown'=>"Hometown*", 'languages'=>"Languages*", 'music'=>'Music*', 'interests'=>'Interests*'),
+                'datebox' =>array('birthday'=>'Birthday*'));
+            $allowed_mappings = apply_filters('wpfb_xprofile_allowed_mappings', $allowed_mappings);
 
             //Go through all of the XProfile fields and offer possible Facebook mappings for each (in a dropdown).
             //(current_mappings is used to set the initial state of the panel, i.e. based on what mappings are already in the db)
@@ -645,10 +641,10 @@ function jfb_output_premium_panel_tease()
                     
                     //Otherwise, list all of the available mappings in a dropdown.
                     ?><select name="<?php echo $jfb_xprofile_field_prefix . $field->id?>">
-                    	<option value="0">(No Mapping)</option><?php
+                        <option value="0">(No Mapping)</option><?php
                         foreach($allowed_mappings[$field->type] as $fbname => $userfriendlyname)
                             echo "<option " . ($current_mappings[$field->id]==$fbname?"selected":"") . " value=\"$fbname\">$userfriendlyname</option>";
-    			    ?></select><br /><?php
+                    ?></select><br /><?php
                 }
                 ?></div><?php
             }

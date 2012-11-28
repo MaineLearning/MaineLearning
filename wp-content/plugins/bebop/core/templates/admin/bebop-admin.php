@@ -4,8 +4,8 @@
 <div id='bebop_admin_container'>
 	<div class='bebop_admin_box'>
 		<img class='bebop_logo' src="<?php echo plugins_url() . '/bebop/core/resources/images/bebop_logo.png';?>">
-		<p><?php _e( 'Welcome to the Bebop plugin for BuddyPress. Developed by <a href="http://www.lncd.lincoln.ac.uk">LNCD @ the University of Lincoln</a>.', 'bebop' ); ?></p>
-		<p><?php _e( 'Bebop was designed for academic institutions who want to incorporate Open Educational Resources into BuddyPress Profiles. This plugin aids the discovery of OERs in the BuddyPress environment', 'bebop' ); ?></p>
+		<p><?php _e( 'Welcome to the Bebop plugin for BuddyPress. Developed by <a target="_blank" href="http://www.lncd.lincoln.ac.uk">LNCD @ the University of Lincoln</a>.', 'bebop' ); ?></p>
+		<p><?php _e( 'Bebop was designed for academic institutions who want to incorporate Open Educational Resources into BuddyPress Profiles. This plugin aids the discovery of OERs in the BuddyPress environment.', 'bebop' ); ?></p>
 		<p><?php _e( 'As requested by several users, we have also made the terminology more suitable to those who are using Bebop as a social media aggregator.', 'bebop' ); ?></p>
 		<div class="clear"></div>
 	</div>
@@ -14,9 +14,11 @@
 		<div id="normal-sortables" class="meta-box-sortables ui-sortable"><div class='postbox'>
 			<h3><?php _e( 'Latest News' ); ?></h3>
 			<div class='inside'>
+				<p><?php _e( 'Version 1.2.1 is a minor release which fixes a bug which inadvertently made all content visible in the sitewide activity steam.', 'bebop' ); ?></p>
+				<p><?php _e( 'Version 1.2 of Bebop has landed. Say hello to the new Facebook extension, pagination, and many security updates. See the README.txt for a full list of changes.', 'bebop' ); ?></p>
 				<p><?php _e( 'Version 1.1.1 of Bebop has been released. This minor release fixes some bugs related to the wordpress cron time, and some redirection issues. See the README.txt file for a full list of updates.', 'bebop' ); ?></p>
 				<p><?php _e( 'Version 1.1 of Bebop has been released. Many requested features have been implemented, bugs have been fixed, and issues resolved. For more details, please see the changelog in README.txt.', 'bebop' ); ?></p>
-				<p><?php _e( 'Version 1.0 of Bebop has now been released. This BuddyPress plugin allows users to import Open Educational Resources from around the web, into their BuddyPress activity stream.</p>', 'bebop' ); ?>
+				<p><?php _e( 'Version 1.0 of Bebop has now been released. This BuddyPress plugin allows users to import content from around the web, into their BuddyPress activity stream.', 'bebop' ); ?></p>
 			</div>
 		</div></div>
 
@@ -34,16 +36,16 @@
 			<h3><a href="?page=bebop_content&type=verified"><?php _e( 'Recently Verified Content', 'bebop' ); ?></a></h3>
 			<div class='inside'>
 				<?php
-				$contents = bebop_tables::admin_fetch_content_data( 'verified', 20 );
+				$contents = bebop_tables::admin_fetch_content_data( 'verified', 0, 20 );
 				
 				if ( count( $contents ) > 0 ) {
 					echo '<table class="postbox_table">
 						<tr class="nodata">
-							<th>'; _e( 'Username', 'bebop' );  echo '</th>
-							<th>'; _e( 'Type', 'bebop' );  echo '</th>
-							<th>'; _e( 'Imported', 'bebop' );  echo '</th>
-							<th>'; _e( 'Published', 'bebop' );  echo '</th>
-							<th>'; _e( 'Content', 'bebop' );  echo '</th>
+							<th>' . __( 'Username', 'bebop' ) . '</th>
+							<th>' . __( 'Type', 'bebop' ) . '</th>
+							<th>' . __( 'Imported', 'bebop' ) . '</th>
+							<th>' . __( 'Published', 'bebop' ) . '</th>
+							<th>' . __( 'Content', 'bebop' ) . '</th>
 						</tr>';
 					
 					foreach ( $contents as $content ) {
@@ -58,7 +60,7 @@
 					echo '</table>';
 				}
 				else {
-					echo '<p>'; _e( 'No verified content exist in the content manager.', 'bebop' );  echo '</p>';
+					echo '<p>' . __( 'No verified content exist in the content manager.', 'bebop' ) . '</p>';
 				}
 				?>
 				

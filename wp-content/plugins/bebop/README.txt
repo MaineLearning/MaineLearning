@@ -18,6 +18,8 @@ Bebop is a BuddyPress plugin which allows you to connect your BuddyPress profile
 
 Bebop was developed by the University of Lincoln for a JISC-funded 'Open Educational Resources' project, to allow teachers to select and aggregate teaching resources they have shared on third-party sites into their BuddyPress profile. BuddyPress and Bebop are being used at the University of Lincoln to power staff and student profiles.
 
+German (de_DE) Language pack courtesy of HansRuedi Keller (http://www.info.ch)
+
 == Installation ==
 
 Requirements:
@@ -41,6 +43,36 @@ Please read the documentation on Github: http://github.com/lncd/bebop/wiki
 Please report any bugs or issues on Github: http://github.com/lncd/bebop/issues
 
 == Changelog ==
+
+v1.2.1 - 08.11.2012 - Minor Release
+
+This update addresses an issue which accidentally allowed hidden content from groups to be displayed on the activity stream. 
+
+v1.2 - 02.11.2012 - Major Release
+
+This is a Major release, providing a new Facebook extension, and adding pagination where required. This release also fixes bugs with RSS feeds, user removal, and corrects many spelling mistakes. Enjoy!
+
+Feature Updates:
+* A brand new Facebook extension is added in this release, allowing content from facebook to be displayed in the activity stream.
+* Increased RSS output limit from 250 to 500.
+* Moved the user verification option from the general settings to the extension settings, allowing content from certain extensions to be posted to the activity stream automatically, while other extensions can still be verified.
+* Added admin option in each extension to hide content for that extension form the sitewide activity stream.
+* Added pagination to all admin and user content where needed, such as admin backend logs, content, and user content manager.
+* Added German (de_DE) languae pack, courtesy of HansRuedi Keller (http://www.info.ch)
+
+
+Bug Fixes:
+* RSS - Fixed a bug which only allowed 20 items to be returned at a time fro RSS feeds.
+* RSS - Redefined pubDate in the RSS feeds as the date the item was uploaded to the original source.
+* RSS - Added wpPubDate the the RSS feeds and defined it as the date it was added to BuddyPress.
+* Content Stream - had to allow bebop-core-user.php to be included on every page so the new 'hide_sitewide' feature works as expected.
+* Admin Area - forced checkboxes in forms to be on same line as text.
+* Admin Area - Fixed the user removal bug, so admins can actually remove users from extensions now...
+
+
+Other:
+* Corrected various spelling mistakes.
+
 
 v1.1.1 - 25.09.2012 - Minor Release
 

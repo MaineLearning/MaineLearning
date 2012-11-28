@@ -124,6 +124,25 @@ function wpv_condition($atts) {
 			$evaluate = str_replace($matches[0][$i], $is_empty, $evaluate);
    		 }
     }
+
+    // find variables that are to be used as strings.
+	// eg '$f1'
+	// will replace $f1 with the actual field value
+	$strings_count = preg_match_all('/(\'[\$\w^\']*\')/', $evaluate, $matches);
+	if($strings_count && $strings_count > 0) {
+	    for($i = 0; $i < $strings_count; $i++) {
+	    	$string = $matches[1][$i];
+	    	// remove single quotes from string literals to get value only
+	    	$string = (strpos($string, '\'') === 0) ? substr($string, 1, strlen($string) - 2) : $string;
+	    	if(strpos($string, '$') === 0) {
+	    		$variable_name = substr($string, 1); // omit dollar sign
+	    		if (isset($atts[$variable_name])) {
+					$string = get_post_meta($post->ID, $atts[$variable_name], true);
+					$evaluate = str_replace($matches[1][$i], "'" . $string . "'", $evaluate);
+				}
+	    	}
+		}
+	}
     
     // find string variables and evaluate
 	$strings_count = preg_match_all('/((\$\w+)|(\'[^\']*\'))\s*([\!<>\=]+)\s*((\$\w+)|(\'[^\']*\'))/', $evaluate, $matches);
@@ -137,19 +156,27 @@ function wpv_condition($atts) {
 	    	$second_string = $matches[5][$i];
 	    	$math_sign =  $matches[4][$i];
 	    	
-	    	// replace variables with text representation
-	    	if(strpos($first_string, '$') === 0) {
-	    		$variable_name = substr($first_string, 1); // omit dollar sign
-	    		$first_string = get_post_meta($post->ID, $atts[$variable_name], true);
-	    	}
-	    	if(strpos($second_string, '$') === 0) {
-	    		$variable_name = substr($second_string, 1);
-	    		$second_string = get_post_meta($post->ID, $atts[$variable_name], true);
-	    	}
-	    	
 	    	// remove single quotes from string literals to get value only
 	    	$first_string = (strpos($first_string, '\'') === 0) ? substr($first_string, 1, strlen($first_string) - 2) : $first_string;
 	    	$second_string = (strpos($second_string, '\'') === 0) ? substr($second_string, 1, strlen($second_string) - 2) : $second_string; 
+	    	
+	    	// replace variables with text representation
+	    	if(strpos($first_string, '$') === 0) {
+	    		$variable_name = substr($first_string, 1); // omit dollar sign
+	    		if (isset($atts[$variable_name])) {
+					$first_string = get_post_meta($post->ID, $atts[$variable_name], true);
+				} else {
+					$first_string = '';
+				}
+	    	}
+	    	if(strpos($second_string, '$') === 0) {
+	    		$variable_name = substr($second_string, 1);
+	    		if (isset($atts[$variable_name])) {
+		    		$second_string = get_post_meta($post->ID, $atts[$variable_name], true);
+				} else {
+					$second_string = '';
+				}
+	    	}
 	    	
 	    	// don't do string comparison if variables are numbers 
 	    	if(!(is_numeric($first_string) && is_numeric($second_string))) {
@@ -161,10 +188,28 @@ function wpv_condition($atts) {
 		    	} else {
 		    		$evaluate = str_replace($matches[0][$i], '1=0', $evaluate);
 		    	}
-	    	}
+	    	} else {
+				$evaluate = str_replace($matches[1][$i], $first_string, $evaluate);
+				$evaluate = str_replace($matches[5][$i], $second_string, $evaluate);
+			}
 		}
     }
-    
+
+	// find remaining strings that maybe numeric values.
+	// This handles 1='1'
+	$strings_count = preg_match_all('/(\'[^\']*\')/', $evaluate, $matches);
+	if($strings_count && $strings_count > 0) {
+	    for($i = 0; $i < $strings_count; $i++) {
+	    	$string = $matches[1][$i];
+	    	// remove single quotes from string literals to get value only
+	    	$string = (strpos($string, '\'') === 0) ? substr($string, 1, strlen($string) - 2) : $string;
+			if (is_numeric($string)) {
+				$evaluate = str_replace($matches[1][$i], $string, $evaluate);
+			}
+		}
+	}
+	
+
     // find all variable placeholders in expression
     $count = preg_match_all('/\$(\w+)/', $evaluate, $matches);
     
@@ -176,10 +221,14 @@ function wpv_condition($atts) {
     	$matches[1] = wpv_sort_matches_by_length($matches[1]);
     	
 	    foreach($matches[1] as $match) {
-            $meta = get_post_meta($post->ID, $atts[$match], true);
-            if (empty($meta)) {
-                $meta = "0";
-            }
+			if (isset($atts[$match])) {
+				$meta = get_post_meta($post->ID, $atts[$match], true);
+				if (empty($meta)) {
+					$meta = "0";
+				}
+			} else {
+				$meta = "0";
+			}
 	    	$evaluate = str_replace('$'.$match, $meta, $evaluate);
 	    }
     }

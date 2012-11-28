@@ -143,7 +143,7 @@ class EM_Category extends EM_Object {
 							}else{
 								$image_size = explode(',', $placeholders[3][$key]);
 								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
-									$replace = "<img src='".em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1])."' alt='".esc_attr($this->name)."'/>";
+									$replace = "<img src='".em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1])."' alt='".esc_attr($this->name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
 								}else{
 									$replace = "<img src='".esc_url($this->get_image_url())."' alt='".esc_attr($this->name)."'/>";
 								}

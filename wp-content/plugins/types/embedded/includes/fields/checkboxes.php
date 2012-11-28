@@ -33,7 +33,8 @@ function wpcf_fields_checkboxes_meta_box_form($field, $data) {
                 '#default_value' => (!empty($data['#value'][$option_key])// Also check new post
                 || ($pagenow == 'post-new.php' && !empty($option['checked']))) ? 1 : 0,
                 '#name' => 'wpcf[' . $field['id'] . '][' . $option_key . ']',
-                '#id' => $option_key . '_' . mt_rand(),
+                '#id' => $option_key . '_'
+                . wpcf_unique_id(serialize($field) . serialize($data)),
             );
         }
     }
@@ -138,7 +139,7 @@ function wpcf_fields_checkboxes_editor_submit() {
             if ($_POST['display'] == 'display_all') {
                 $separator = !empty($_POST['separator']) ? $_POST['separator'] : '';
                 $shortcode .= '[types field="' . $field['slug'] . '" separator="'
-                                . $separator . '"]' . '[/types] ';
+                        . $separator . '"]' . '[/types] ';
             } else {
                 $i = 0;
                 foreach ($_POST['options'] as $option_key => $option) {

@@ -5,12 +5,12 @@ Plugin URI: http://wp-types.com/
 Description: When you need to create lists of items, Views is the solution. Views will query the content from the database, iterate through it and let you display it with flair. You can also enable pagination, search, filtering and sorting by site visitors.
 Author: ICanLocalize
 Author URI: http://wpml.org
-Version: 1.1.2
+Version: 1.1.3
 */
 
 if(defined('WPV_VERSION')) return;
 
-define('WPV_VERSION', '1.1.2');
+define('WPV_VERSION', '1.1.3');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__) . '/embedded');
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -61,7 +61,6 @@ require_once( WPV_PATH . '/inc/wpv-filter-post-relationship.php');
 require WPV_PATH . '/inc/wpv-plugin.class.php';
 
 if (is_admin()) {
-    require WPV_PATH . '/inc/upgrade_plugin.php';
     require WPV_PATH_EMBEDDED . '/inc/wpv-import-export-embedded.php';
     require WPV_PATH . '/inc/wpv-import-export.php';
 }
@@ -69,6 +68,7 @@ if (is_admin()) {
 require WPV_PATH_EMBEDDED . '/inc/wpv-condition.php';
 
 require WPV_PATH_EMBEDDED . '/common/WPML/wpml-string-shortcode.php';
+require WPV_PATH_EMBEDDED . '/inc/WPML/wpv_wpml.php';
 
 $WP_Views = new WP_Views_plugin;
 

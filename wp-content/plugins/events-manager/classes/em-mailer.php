@@ -28,6 +28,9 @@ class EM_Mailer {
 		}else{
 			$emails_ok = is_email($receiver);
 		}
+		if( get_option('dbem_smtp_html') && get_option('dbem_smtp_html_br') ){
+			$body = nl2br($body);
+		}
 		if ( $emails_ok && get_option('dbem_rsvp_mail_send_method') == 'wp_mail' ){
 			$from = get_option('dbem_mail_sender_address');
 			$headers = get_option('dbem_mail_sender_name') ? 'From: '.get_option('dbem_mail_sender_name').' <'.$from.'>':'From: '.$from;
@@ -47,7 +50,9 @@ class EM_Mailer {
 			$headers = '';
 			if( get_option('dbem_smtp_html') ){
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				$headers .= 'Content-type: text/html; charset="UTF-8"' . "\r\n";
+			}else{
+			    $headers = 'Content-Type: text/plain; charset="UTF-8"' . "\r\n";
 			}
 			$from = get_option('dbem_mail_sender_address');
 			$headers .= get_option('dbem_mail_sender_name') ? 'From: '.get_option('dbem_mail_sender_name').' <'.$from.'>':'From: '.$from;

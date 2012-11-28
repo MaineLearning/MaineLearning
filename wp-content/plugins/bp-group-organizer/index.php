@@ -3,10 +3,10 @@
 Plugin Name: BP Group Organizer
 Plugin URI: http://www.generalthreat.com/projects/buddypress-group-organizer
 Description: Easily create, edit, and delete BuddyPress groups - with drag and drop simplicity
-Version: 1.0.5
-Revision Date: 08/27/2012
+Version: 1.0.7
+Revision Date: 11/18/2012
 Requires at least: WP 3.1, BuddyPress 1.5
-Tested up to: WP 3.4.1 , BuddyPress 1.7-bleeding
+Tested up to: WP 3.5-beta3 , BuddyPress 1.7-bleeding
 License: Example: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
 Author: David Dean
 Author URI: http://www.generalthreat.com/
@@ -23,7 +23,12 @@ if( file_exists( dirname( __FILE__ ) . '/languages/' . dirname(plugin_basename(_
 }
 
 function bp_group_organizer_admin() {
-	$page = add_submenu_page( 'bp-general-settings', __('Group Organizer', 'bp-group-organizer'), __('Group Organizer', 'bp-group-organizer'), 'manage_options', 'group_organizer', 'bp_group_organizer_admin_page' );
+
+	if( bpgo_has_groups_menu() ) {
+		$page = add_submenu_page( 'bp-groups', __('Group Organizer', 'bp-group-organizer'), __('Organizer', 'bp-group-organizer'), 'manage_options', 'group_organizer', 'bp_group_organizer_admin_page' );
+	} else {
+		$page = add_submenu_page( 'bp-general-settings', __('Group Organizer', 'bp-group-organizer'), __('Group Organizer', 'bp-group-organizer'), 'manage_options', 'group_organizer', 'bp_group_organizer_admin_page' );
+	}
 	add_action('admin_print_scripts-' . $page, 'bp_group_organizer_load_scripts');
 	add_action('admin_print_styles-' . $page, 'bp_group_organizer_load_styles');
 }
@@ -32,6 +37,7 @@ function bp_group_organizer_register_admin() {
 
 	add_action( 'network_admin_menu', 'bp_group_organizer_admin' );
 	add_action( 'admin_menu', 'bp_group_organizer_admin' );	// fix issue with BP 1.2 and admin URL
+	add_action( 'admin_init', 'bp_group_organizer_handle_export' );
 	add_action( 'admin_init', 'bp_group_organizer_register_scripts' );
 
 }
@@ -78,7 +84,6 @@ function bp_group_organizer_load_styles() {
 		wp_admin_css( 'nav-menu' );
 	}
 	
-	
 }
 
 function bp_group_organizer_admin_page() {
@@ -102,7 +107,9 @@ function bp_group_organizer_admin_page() {
 	
 	// Allowed actions: add, update, delete
 	$action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : 'edit';
-
+	
+	$errored = false;
+	
 	switch ( $action ) {
 		case 'add-group':
 			check_admin_referer( 'add-group', 'group-settings-column-nonce' );
@@ -115,33 +122,82 @@ function bp_group_organizer_admin_page() {
 			$group['date_created']	= date('Y-m-d H:i:s');
 	
 			if($group['slug'] != $_POST['group_slug']) {
-				$messages[] = '<div id="message" class="warning"><p>' . sprintf(__('The group slug you specified was unavailable or invalid. This group was created with the slug: <code>%s</code>.', 'bp-group-organizer'),$group['slug']) . '</p></div>';
+				$messages[] = '<div class="updated warning"><p>' . sprintf(__('The group slug you specified was unavailable or invalid. This group was created with the slug: <code>%s</code>.', 'bp-group-organizer'),$group['slug']) . '</p></div>';
 			}
 			
-			$group_id = groups_create_group( $group );
-			if( ! $group_id ) {
-				$wpdb->show_errors();
-				$wpdb->print_error();
-				$messages[] = '<div id="message" class="error"><p>' . __('Group was not successfully created.', 'bp-group-organizer') . '</p></div>';
-			} else {
-				$messages[] = '<div id="message" class="updated"><p>' . __('Group was created successfully.', 'bp-group-organizer') . '</p></div>';
+			if( empty( $group['name'] ) ) {
+				$messages[] = '<div class="error"><p>' . __( 'Group could not be created because one or more required fields were not filled in', 'bp-group-organizer' ) . '</p></div>';
+				$errored = true;
 			}
 			
-			groups_update_groupmeta( $group_id, 'total_member_count', 1);
-			
-			if( defined( 'BP_GROUP_HIERARCHY_IS_INSTALLED' ) ) {
-				$obj_group = new BP_Groups_Hierarchy( $group_id );
-				$obj_group->parent_id = (int)$_POST['group_parent'];
-				$obj_group->save();
+			if( ! $errored ) {
+				
+				$group_id = groups_create_group( $group );
+				
+				if( ! $group_id ) {
+					$wpdb->show_errors();
+					$wpdb->print_error();
+					$messages[] = '<div class="error"><p>' . __('Group was not successfully created.', 'bp-group-organizer') . '</p></div>';
+				} else {
+					$messages[] = '<div class="updated"><p>' . __('Group was created successfully.', 'bp-group-organizer') . '</p></div>';
+				}
 			}
 			
-			// Create the forum if enable_forum is checked, group forums are activated, and group does not already have a forum
-			if ( $group_id && $group['enable_forum'] && bp_is_active( 'forums' ) && ! groups_get_groupmeta( $group_id, 'forum_id' ) ) {
-				groups_new_group_forum( $group_id, $group['name'], $group['description'] );
+			if( ! empty( $group_id ) ) {
+				
+				groups_update_groupmeta( $group_id, 'total_member_count', 1);
+				
+				if( bpgo_is_hierarchy_available() ) {
+					$obj_group = new BP_Groups_Hierarchy( $group_id );
+					$obj_group->parent_id = (int)$_POST['group_parent'];
+					$obj_group->save();
+				}
+			
+				// Create the forum if enable_forum is checked
+				if ( $group['enable_forum'] ) {
+					
+					// Ensure group forums are activated, and group does not already have a forum
+					if( bp_is_active( 'forums' ) ) {
+						// Check for BuddyPress group forums
+						if( ! groups_get_groupmeta( $group_id, 'forum_id' ) ) {
+							groups_new_group_forum( $group_id, $group['name'], $group['description'] );
+						}
+					} else if ( function_exists('bbp_is_group_forums_active') && bbp_is_group_forums_active() ) {
+						// Check for bbPress group forums
+						if( count( bbp_get_group_forum_ids( $group_id ) ) == 0 ) {
+							
+							// Create the group forum - implementation from BBP_Forums_Group_Extension:create_screen_save
+							
+							// Set the default forum status
+							switch ( $group['status'] ) {
+								case 'hidden'  :
+									$status = bbp_get_hidden_status_id();
+									break;
+								case 'private' :
+									$status = bbp_get_private_status_id();
+									break;
+								case 'public'  :
+								default        :
+									$status = bbp_get_public_status_id();
+									break;
+							}
+			
+							// Create the initial forum
+							$forum_id = bbp_insert_forum( array(
+								'post_parent'  => bbp_get_group_forums_root_id(),
+								'post_title'   => $group['name'],
+								'post_content' => $group['description'],
+								'post_status'  => $status
+							) );
+							
+							bbp_add_forum_id_to_group( $group_id, $forum_id );
+							bbp_add_group_id_to_forum( $forum_id, $group_id );
+						}
+					}
+				}
+				
+				do_action( 'bp_group_organizer_save_new_group_options', $group_id );
 			}
-			
-			do_action( 'bp_group_organizer_save_new_group_options', $group_id );
-			
 			break;
 		case 'delete-group':
 			$group_id = (int) $_REQUEST['group_id'];
@@ -212,6 +268,39 @@ function bp_group_organizer_admin_page() {
 				
 			}
 			break;
+		case 'import':
+			
+			if( ! isset( $_FILES['import_groups'] ) ) {
+				// No files was uploaded
+			}
+			
+			if( ! is_uploaded_file( $_FILES['import_groups']['tmp_name'] ) ) {
+				// Not an uploaded file
+				
+				$errors = array(
+					UPLOAD_ERR_OK        => sprintf(__( 'File uploaded successfully, but there is a problem. (%d)', 'bp-group-organizer' ), UPLOAD_ERR_OK ),
+					UPLOAD_ERR_INI_SIZE  => sprintf(__( 'File exceeded PHP\'s maximum upload size. (%d)', 'bp-group-organizer' ), UPLOAD_ERR_INI_SIZE ),
+					UPLOAD_ERR_FORM_SIZE => sprintf(__( 'File exceeded the form\'s maximum upload size. (%d)', 'bp-group-organizer' ), UPLOAD_ERR_FORM_SIZE ),
+					UPLOAD_ERR_PARTIAL   => sprintf(__( 'File was only partially uploaded. (%d)', 'bp-group-organizer' ), UPLOAD_ERR_PARTIAL ),
+					UPLOAD_ERR_NO_FILE   => sprintf(__( 'No uploaded file was found. (%d)', 'bp-group-organizer' ), UPLOAD_ERR_NO_FILE ),
+					6	=> sprintf(__( 'No temporary folder could be found for the uploaded file. (%d)', 'bp-group-organizer' ), 6 ),
+					7	=> sprintf(__( 'Could not write uploaded file to disk. (%d)', 'bp-group-organizer' ), 7 ),
+					8	=> sprintf(__( 'Upload was stopped by a PHP extension. (%d)', 'bp-group-organizer' ), 8 )	// upload was stopped by a PHP extension
+				);
+				
+				$messages[] = '<div class="error"><p>' . sprintf( __('', 'bp-group-organizer'), $errors[$_FILES['import_groups']['error']] ) . '</p></div>';
+				break;
+			}
+			
+			require_once dirname( __FILE__ ) . '/includes/group-organizer-import.php';
+			
+			if( $result = bp_group_organizer_import_csv_file( $_FILES['import_groups']['tmp_name'], $_POST['import'] ) ) {
+				$messages[] = '<div class="updated"><p>' . implode( '<br />', $result ) . '</p></div>';
+			} else {
+				$messages[] = '<div class="error"><p>' . 'ERROR - IMPORT FAILED COMPLETELY' . '</p></div>';
+			}
+			
+			break;
 	}
 	
 	// Ensure the user will be able to scroll horizontally
@@ -219,7 +308,17 @@ function bp_group_organizer_admin_page() {
 	global $_wp_nav_menu_max_depth;
 	$_wp_nav_menu_max_depth = 0;
 	
-	$edit_markup = bp_get_groups_to_edit( );
+	if( isset( $_REQUEST['screen'] ) && $_REQUEST['screen'] == 'import') {
+		$action = 'import';
+	} else {
+		$action = 'organize';
+	}
+	
+	if( $action == 'import') {
+		$edit_markup = bp_group_organizer_import_export_page();
+	} else {
+		$edit_markup = bp_get_groups_to_edit( );
+	}
 
 ?>
 <div class="wrap">
@@ -229,18 +328,43 @@ function bp_group_organizer_admin_page() {
 		echo $message . "\n";
 	endforeach;
 	?>
-	<div id="nav-menus-frame">
-	<div id="menu-settings-column" class="metabox-holder">
-		<form id="nav-menu-meta" action="" class="nav-menu-meta" method="post" enctype="multipart/form-data">
+	<div <?php if( $action == 'organize' ) echo 'id="nav-menus-frame"'; ?>>
+	<div id="menu-settings-column" class="metabox-holder nav-menus-php">
+		<form id="group-organizer-meta" action="" class="group-organizer-meta" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="action" value="add-group" />
 			<?php wp_nonce_field( 'add-group', 'group-settings-column-nonce' ); ?>
-			<?php do_meta_boxes( 'group-organizer', 'side', null ); ?>
+			<?php if( $action == 'organize' )
+				do_meta_boxes( 'group-organizer', 'side', null ); 
+			?>
 		</form>
 	</div><!-- /#menu-settings-column -->
 	<div id="menu-management-liquid">
 		<div id="menu-management" class="nav-menus-php">
+
+			<div class="nav-tabs-wrapper">
+			<div class="nav-tabs">
+				<a href="<?php
+					echo esc_url( remove_query_arg( array(
+							'screen'
+					) ) );
+					?>" class="nav-tab <?php if( $action == 'organize' ) echo 'nav-tab-active'; ?>">
+					<?php printf( '<abbr title="%s">%s</abbr>', esc_html__( 'Drag and drop your groups', 'bp-group-hierarchy' ), __( 'Organize', 'bp-group-organizer' ) ); ?>
+				</a>
+				<a href="<?php
+					echo esc_url( add_query_arg( array(
+							'screen' => 'import'
+					) ) );
+					?>" class="nav-tab <?php if( $action == 'import' ) echo 'nav-tab-active'; ?>">
+					<?php printf( '<abbr title="%s">%s</abbr>', esc_html__( 'Import or export groups in bulk', 'bp-group-organizer' ), __( 'Import / Export', 'bp-group-organizer' ) ); ?>
+				</a>
+			</div>
+			</div>
+
+
 			<div class="menu-edit">
+				<?php if( $action == 'organize' ) : ?>
 				<form id="update-nav-menu" action="" method="post" enctype="multipart/form-data">
+				<?php endif; ?>
 					<div id="nav-menu-header">
 						<div id="submitpost" class="submitbox">
 							<div class="major-publishing-actions">
@@ -248,7 +372,9 @@ function bp_group_organizer_admin_page() {
 									<span><?php _e('Group Organizer', 'bp-group-organizer'); ?></span>
 								</label>
 								<div class="publishing-action">
-									<?php submit_button( __( 'Save Groups', 'bp-group-organizer' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_header' ) ); ?>
+									<?php if( $action == 'organize' )
+										submit_button( __( 'Save Groups', 'bp-group-organizer' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_header' ) ); 
+									?>
 								</div><!-- END .publishing-action -->
 							</div><!-- END .major-publishing-actions -->
 						</div><!-- END #submitpost .submitbox -->
@@ -276,11 +402,15 @@ function bp_group_organizer_admin_page() {
 					<div id="nav-menu-footer">
 						<div class="major-publishing-actions">
 						<div class="publishing-action">
-							<?php submit_button( __( 'Save Groups', 'bp-group-organizer' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_footer' ) ); ?>
+							<?php if( $action == 'organize' )
+								submit_button( __( 'Save Groups', 'bp-group-organizer' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_header' ) ); 
+							?>
 						</div>
 						</div>
 					</div><!-- /#nav-menu-footer -->
+				<?php if( $action == 'organize' ) : ?>
 				</form><!-- /#update-nav-menu -->
+				<?php endif; ?>
 			</div><!-- /.menu-edit -->
 		</div><!-- /#menu-management -->
 	</div><!-- /#menu-management-liquid -->
@@ -288,6 +418,86 @@ function bp_group_organizer_admin_page() {
 </div><!-- /.wrap-->
 
 <?php	
+}
+
+function bp_group_organizer_import_export_page() {
+	
+	ob_start();
+	?>
+	<h2><?php _e( 'Import', 'bp-group-organizer' ) ?></h2>
+	<form method="post" enctype="multipart/form-data">
+		<p><?php printf( __('Import groups from a CSV file &mdash; see %s for details on the format.', 'bp-group-organizer' ), __( 'Notes', 'bp-group-organizer' ) ) ?></p>
+		<input type="hidden" name="action" value="import" />
+		<?php wp_nonce_field( 'import', 'importnonce' ); ?>
+		<label for="import_groups"><?php _e( 'Import from File', 'bp-group-organizer' ) ?></label>
+		<input type="file" name="import_groups" id="import_groups" />
+		<br /><br />
+		<fieldset>
+			<legend><?php _e( 'Import Options', '' ); ?></legend>
+			<input type="checkbox" name="import[continue_on_error]" id="continue-on-error" /> <label for="continue-on-error"><?php _e( 'Continue import even if some groups cannot be created', 'bp-group-organizer' ); ?></label><br />
+			<?php do_action( 'group_organizer_import_options' ); ?>
+		</fieldset>
+		<h4><?php _e('Notes', 'bp-group-organizer' ) ?></h4>
+		<ul>
+			<li><?php printf(__( 'CSV files may supply any of these fields: %s', 'bp-group-organizer' ), '<code>id, creator_id, name, path, slug, description, status, enable_forum, date_created, parent_id</code>' ); ?></li>
+			<li><?php printf(__( 'CSV files must have ONE of these fields: %s or %s', 'bp-group-organizer' ), '<code>slug</code>', '<code>path</code>' ); ?></li>
+			<li><?php printf(__( 'If you are trying to recreate a hierarchy, CSV files must have either %s or all of %s', 'bp-group-organizer' ), '<code>path</code>', '<code>group_id, slug, parent_id</code>' ) ?></li>
+			<li><?php _e( 'If a group slug is taken, a new one will be chosen by BuddyPress. This is not currently configurable.', 'bp-group-organizer' ); ?></li>
+		</ul>
+		<?php submit_button( __( 'Import Groups', 'bp-group-hierarchy' ) ); ?>
+	</form>
+	
+	<h2><?php _e( 'Export', 'bp-group-organizer' ) ?></h2>
+	<form method="post">
+		<input type="hidden" name="action" value="export" />
+		<?php wp_nonce_field( 'export', 'exportnonce' ); ?>
+		<label for="organizer_export_format"><?php _e( 'Export Format', 'bp-group-organizer' ); ?></label>
+		<select name="export_format" id="organizer_export_format">
+			<option value="no_type" disabled="true" selected="true"><?php _e('Select a Format', 'bp-group-organizer' ) ?></option>
+			<option value="csv_slug"><?php printf( __( 'CSV (%s)', 'bp-group-organizer' ), sprintf('%s, %s, %s', __('group ID', 'bp-group-organizer'), __('group slug', 'bp-group-organizer' ), __( 'parent ID' ,'bp-group-organizer' ) ) ) ?></option>
+			<option value="csv_path"><?php printf( __( 'CSV (%s)', 'bp-group-organizer' ), __('group path', 'bp-group-organizer') ) ?></option>
+			<?php do_action( 'group_organizer_list_export_types' ); ?>
+		</select>
+		<?php submit_button( __( 'Export Groups', 'bp-group-hierarchy' ) ); ?>
+	</form>
+	<?php
+	$result = ob_get_clean();
+	return $result;
+}
+
+/**
+ * Serve group export directly to browser
+ */
+function bp_group_organizer_handle_export() {
+
+	// Only handle requests for the group organizer admin page
+	if( ! isset( $_REQUEST['page'] ) || $_REQUEST['page'] != 'group_organizer' )
+		return false;
+
+	// Only handle requests for the 'export' action
+	if( ! isset( $_REQUEST['action'] ) || $_REQUEST['action'] != 'export' )
+		return false;
+
+	include dirname(__FILE__) . '/includes/group-organizer-import.php';
+
+	switch( $_POST['export_format'] ) {
+		case 'csv_slug':
+			bp_group_organizer_export_csv('slug');
+			break;
+		case 'csv_path':
+			bp_group_organizer_export_csv('path');
+			break;
+		case 'sitemap':
+			bp_group_organizer_export_sitemap('xml');
+			break;
+		case 'no_type':
+			return false;
+			break;
+		default:
+			do_action( 'bp_group_organizer_export_' . $_POST['export_format'] );
+			break;
+	}
+	
 }
 
 function bp_organizer_delete_group() {

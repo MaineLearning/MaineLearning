@@ -2,7 +2,7 @@
 /*
 Plugin Name: Login Logo
 Description: Drop a PNG file named <code>login-logo.png</code> into your <code>wp-content</code> directory. This simple plugin takes care of the rest, with zero configuration. Transparent backgrounds work best. Crop it tight, with a width of 312 pixels, for best results.
-Version: 0.6
+Version: 0.7
 License: GPL
 Plugin URI: http://txfx.net/wordpress-plugins/login-logo/
 Author: Mark Jaquith
@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 class CWS_Login_Logo_Plugin {
 	static $instance;
-	const cutoff = 312;
+	const CUTOFF = 312;
 	var $logo_locations;
 	var $logo_location;
 	var $width = 0;
@@ -51,7 +51,7 @@ class CWS_Login_Logo_Plugin {
 			// First, see if there is one for this specific site (blog)
 			$this->logo_locations['site'] = array(
 				'path' => WP_CONTENT_DIR . '/login-logo-site-' . $blog_id . '.png',
-				'url' => $this->maybe_ssl( WP_CONTENT_URL . '/login-logo-site-' . $blog_id . '.png' )
+				'url' => $this->maybe_ssl( content_url( 'login-logo-site-' . $blog_id . '.png' ) )
 			);
 
 			// Next, we see if there is one for this specific network
@@ -59,14 +59,14 @@ class CWS_Login_Logo_Plugin {
 			if ( $site && isset( $site->id ) ) {
 				$this->logo_locations['network'] = array(
 					'path' => WP_CONTENT_DIR . '/login-logo-network-' . $site->id . '.png',
-					'url' => $this->maybe_ssl( WP_CONTENT_URL . '/login-logo-network-' . $site->id . '.png' )
+					'url' => $this->maybe_ssl( content_url( 'login-logo-network-' . $site->id . '.png' ) )
 					);
 			}
 		}
 		// Finally, we do a global lookup
 		$this->logo_locations['global'] =  array(
 			'path' => WP_CONTENT_DIR . '/login-logo.png',
-			'url' => $this->maybe_ssl( WP_CONTENT_URL . '/login-logo.png' )
+			'url' => $this->maybe_ssl( content_url( 'login-logo.png' ) )
 			);
 	}
 
@@ -93,8 +93,10 @@ class CWS_Login_Logo_Plugin {
 
 	private function get_location( $what = '' ) {
 		if ( $this->logo_file_exists() ) {
-			if ( 'path' == $what || 'url' == $what )
+			if ( 'path' == $what )
 				return $this->logo_location[$what];
+			elseif ( 'url' == $what )
+				return $this->logo_location[$what] . '?v=' . filemtime( $this->logo_location['path'] );
 			else
 				return $this->logo_location;
 		}
@@ -131,11 +133,11 @@ class CWS_Login_Logo_Plugin {
 				$this->height = $sizes[1];
 				$this->original_height = $this->height;
 				$this->original_width = $this->width;
-				if ( $this->width > self::cutoff ) {
+				if ( $this->width > self::CUTOFF ) {
 					// Use CSS 3 scaling
 					$ratio = $this->height / $this->width;
-					$this->height = ceil( $ratio * self::cutoff );
-					$this->width = self::cutoff;
+					$this->height = ceil( $ratio * self::CUTOFF );
+					$this->width = self::CUTOFF;
 				}
 			} else {
 				$this->logo_file_exists = false;
@@ -151,7 +153,11 @@ class CWS_Login_Logo_Plugin {
 	}
 
 	public function login_headerurl() {
-		return trailingslashit( get_bloginfo( 'url' ) );
+		return esc_url( trailingslashit( get_bloginfo( 'url' ) ) );
+	}
+
+	public function login_headertitle() {
+		return esc_attr( get_bloginfo( 'name' ) );
 	}
 
 	public function login_head() {
@@ -159,24 +165,25 @@ class CWS_Login_Logo_Plugin {
 		if ( !$this->logo_file_exists() )
 			return;
 		add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
+		add_filter( 'login_headertitle', array( $this, 'login_headertitle' ) );
 	?>
 	<!-- Login Logo plugin for WordPress: http://txfx.net/wordpress-plugins/login-logo/ -->
 	<style type="text/css">
 		.login h1 a {
 			background: url(<?php echo esc_url_raw( $this->get_location( 'url' ) ); ?>) no-repeat top center;
-			width: <?php echo self::cutoff; ?>px;
+			width: <?php echo self::CUTOFF; ?>px;
 			height: <?php echo $this->get_height(); ?>px;
 			margin-left: 8px;
 			padding-bottom: 16px;
 			<?php
-			if ( self::cutoff < $this->get_original_width() )
+			if ( self::CUTOFF < $this->get_original_width() )
 				$this->css3( 'background-size', 'contain' );
 			else
 				$this->css3( 'background-size', 'auto' );
 			?>
 		}
 	</style>
-<?php if ( self::cutoff < $this->get_width() ) { ?>
+<?php if ( self::CUTOFF < $this->get_width() ) { ?>
 <!--[if lt IE 9]>
 	<style type="text/css">
 		height: <?php echo $this->get_original_height() + 3; ?>px;

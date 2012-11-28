@@ -156,7 +156,7 @@ function wpcf_fields_radio_editor_submit() {
  * @param type $params 
  */
 function wpcf_fields_radio_view($params) {
-    if ($params['style'] == 'raw') {
+    if (isset($params['style']) && $params['style'] == 'raw') {
         return '';
     }
     $field = wpcf_fields_get_field_by_slug($params['field']['slug']);

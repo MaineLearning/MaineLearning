@@ -36,7 +36,15 @@ class BP_Groups_Hierarchy_Template extends BP_Groups_Template {
 			array_push( $args, '' );
 			array_push( $args, '' );
 			
-			call_user_func_array( array( 'parent', '__construct' ), $args );
+			/**
+			 * BP 1.7 switched to a single array param from the painstakingly-arranged series of params above
+			 */
+			if( (float)bp_get_version() >= 1.7 ) {
+				parent::__construct( $args );
+			} else {
+				call_user_func_array( array( 'parent', '__construct' ), $args );
+			}
+			
 			$this->synchronize();
 		} else {
 			$this->params = array();

@@ -37,3 +37,18 @@ function wpcf_admin_custom_taxonomies_get_ajax_deactivation_link($taxonomy) {
             . $taxonomy . '">'
             . __('Deactivate', 'wpcf') . '</a>';
 }
+
+/**
+ * Returns only active taxonomies.
+ * 
+ * @return type 
+ */
+function wpcf_get_active_custom_taxonomies() {
+    $taxonomies = get_option('wpcf-custom-taxonomies', array());
+    foreach ($taxonomies as $taxonomy => $data) {
+        if (!empty($data['disabled'])) {
+            unset($taxonomies[$taxonomy]);
+        }
+    }
+    return $taxonomies;
+}

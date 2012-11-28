@@ -55,10 +55,9 @@ if( !class_exists('EM_Permalinks') ){
 		
 		/**
 		 * will redirect old links to new link structures.
-		 * @return mixed
 		 */
 		function redirection(){
-			global $wpdb, $wp_rewrite, $post, $wp_query;
+			global $wpdb, $wp_query;
 			if( is_object($wp_query) && $wp_query->get('em_redirect') ){
 				//is this a querystring url?
 				if( $wp_query->get('event_slug') ){
@@ -81,7 +80,8 @@ if( !class_exists('EM_Permalinks') ){
 					exit();
 				}
 			}
-		}		
+		}
+
 		// Adding a new rule
 		function rewrite_rules_array($rules){
 			//get the slug of the event page
@@ -98,12 +98,24 @@ if( !class_exists('EM_Permalinks') ){
 					//make sure we hard-code rewrites for child pages of events
 					$child_posts = get_posts(array('post_type'=>'page', 'post_parent'=>$events_page->ID, 'numberposts'=>0));
 					foreach($child_posts as $child_post){
-						$em_rules[$events_slug.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+						$em_rules[$events_slug.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug    //check if child page has children
+					    $grandchildren = get_pages('child_of='.$child_post->ID);
+					    if( count( $grandchildren ) != 0 ) { 
+					        foreach($grandchildren as $grandchild) {
+					            $em_rules[$events_slug.$child_post->post_name.'/'.$grandchild->post_name.'/?$'] = 'index.php?page_id='.$grandchild->ID;
+					        }
+					    }
 					}
 				}elseif( empty($events_slug) ){ //hard code homepage child pages
 					$child_posts = get_posts(array('post_type'=>'page', 'post_parent'=>$events_page->ID, 'numberposts'=>0));
 					foreach($child_posts as $child_post){
-						$em_rules[$events_page->post_name.'/'.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+						$em_rules[$events_page->post_name.'/'.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug    //check if child page has children
+					    $grandchildren = get_pages('child_of='.$child_post->ID);
+					    if( count( $grandchildren ) != 0 ) { 
+					        foreach($grandchildren as $grandchild) {
+					            $em_rules[$events_slug.$child_post->post_name.'/'.$grandchild->post_name.'/?$'] = 'index.php?page_id='.$grandchild->ID;
+					        }
+					    }
 					}
 				}
 				//global links hard-coded
@@ -133,6 +145,13 @@ if( !class_exists('EM_Permalinks') ){
 						$child_posts = get_posts(array('post_type'=>'any', 'post_parent'=>$conflicting_post->ID, 'numberposts'=>0));
 						foreach($child_posts as $child_post){
 							$em_rules[EM_POST_TYPE_EVENT_SLUG.'/'.$child_post->post_name.'/?$'] = 'index.php?page_id='.$child_post->ID; //single event booking form with slug
+							//check if child page has children
+							$grandchildren = get_pages('child_of='.$child_post->ID);
+							if( count( $grandchildren ) != 0 ) {
+								foreach($grandchildren as $grandchild) {
+									$em_rules[$events_slug.$child_post->post_name.'/'.$grandchild->post_name.'/?$'] = 'index.php?page_id='.$grandchild->ID;
+								}
+							}
 						}
 					}
 				}
@@ -155,7 +174,8 @@ if( !class_exists('EM_Permalinks') ){
 				$locations_page = get_post($locations_page_id);
 				if( is_object($locations_page) ){
 					$locations_slug = preg_replace('/\/$/', '', str_replace( trailingslashit(home_url()), '', get_permalink($locations_page_id) ));
-					$em_rules[$locations_slug.'/'.get_site_option('dbem_ms_locations_slug',EM_LOCATION_SLUG).'/(.+)$'] = 'index.php?pagename='.$locations_page->page_name.'&location_slug=$matches[1]'; //single event booking form with slug
+					$locations_slug_slashed = ( !empty($locations_slug) ) ? trailingslashit($locations_slug) : $locations_slug;
+					$em_rules[$locations_slug.'/'.get_site_option('dbem_ms_locations_slug',EM_LOCATION_SLUG).'/(.+)$'] = 'index.php?pagename='.$locations_slug_slashed.'&location_slug=$matches[1]'; //single event booking form with slug
 				}					
 			}
 			//add ical endpoint
@@ -166,7 +186,7 @@ if( !class_exists('EM_Permalinks') ){
 		/**
 		 * Depreciated, use get_post_permalink() from now on or the output function with a placeholder
 		 * Generate a URL. Pass each section of a link as a parameter, e.g. EM_Permalinks::url('event',$event_id); will create an event link.
-		 * @param mixed 
+		 * @return string 
 		 */
 		function url(){
 			global $wp_rewrite;
@@ -199,10 +219,10 @@ if( !class_exists('EM_Permalinks') ){
 		}
 		
 		/**
-		 * Not the "WP way" but for now this'll do! 
+		 * Not the "WP way" but for now this'll do!
 		 */
 		function init_objects(){
-			global $wp_query, $wp_rewrite;
+			global $wp_rewrite, $wp_query;
 			//check some homepage conditions
 			$events_page_id = get_option ( 'dbem_events_page' );
 			if( is_object($wp_query) && $wp_query->is_home && !$wp_query->is_posts_page && 'page' == get_option('show_on_front') && get_option('page_on_front') == $events_page_id ){

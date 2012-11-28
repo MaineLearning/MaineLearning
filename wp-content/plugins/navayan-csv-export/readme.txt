@@ -1,57 +1,48 @@
-=== Plugin Name ===
-
+=== Navayan CSV Export ===
 Contributors: Amol Nirmala Waman
-
-Donate link: 
 Tags: navayan, wordpress, csv, export, wp table, wp_comments csv export, wp_links csv export, wp_options csv export, wp_postmeta csv export, post csv export, wp_terms csv export, wp_usermeta csv export, wp_users csv export
-
 Requires at least: 3
+Tested up to: 3.5-beta3-22631
+Stable tag: 1.0.9
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=amolnw2778@gmail.com&item_name=NavayanCSVExport
 
-Tested up to: 3.3.1
-
-Stable tag: 1.0.6
-
-
+Exports wordpress table data in CSV (Comma Separate Value) format with 'table_YYYYMMDD_HHMMSS.csv' file format
 
 == Description ==
+[Navayan CSV Export](http://blog.navayan.com/navayan-csv-export-easiest-way-to-export-all-wordpress-table-data-to-csv-format/) will export all your table data in CSV (Comma Separate Value) format. When you click on any of 'Export' buttons you will get a prompt dialogue to save or open an exported CSV file of that table. The exported CSV file format is 'table_YYYYMMDD_HHMMSS.csv'
 
-Navayan CSV Export is a wordpress plugin to export all your table data in CSV (Comma Separate Value) format. When you click on any of 'Export to CSV' buttons you will get a prompt message to save an exported CSV file of that table. The exported CSV file format is 'table_name_YYYYMMDD_Hi.csv'
+**Requirement:** PHP > 5.3.0, WordPress > 3
 
+[Plugin's Homepage](http://blog.navayan.com/navayan-csv-export-easiest-way-to-export-all-wordpress-table-data-to-csv-format/)
 
 
 == Installation ==
-
 1. Download Navayan CSV Export wordpress plugin
-
 2. Upload and Extract in 'wp-content/plugins/' directory. Make sure that 'wp-content' has write permission
+3. Go to 'Dashboard -> Plugins -> Inactive' to activate the plugin
+4. Then go to 'Dashboard -> Tools -> Navayan CSV Export'
 
-3. To activate plugin go to 'Dashboard -> Plugins -> Inactive'
-
-4. After activating you will find plugin name under 'Dashboard -> Tools -> Navayan CSV Export'
-
-
-
-== Frequently Asked Questions ==
-
-Q. What 'Navayan CSV Export' plugin is?
-
-ANS. 'Navayan CSV Export' is a wordpress plugin which helps you to export your wordpress table data into CSV format. It generates a CSV file with table name and current date time stamp and asks you to either save or open it.
-
+[Read plugin description in detail](http://blog.navayan.com/navayan-csv-export-easiest-way-to-export-all-wordpress-table-data-to-csv-format/)
 
 
 == Screenshots ==
-
-1. screenshot-1.jpg - plugin listed in plugins list
-
-2. screenshot-2.jpg - activated plugin's location in 'Tools' menu
-
-3. screenshot-3.jpg - plugin's page in wordpress
-
-4. screenshot-4.jpg - opening generated CSV file in OpenOffice
-
+1. Activated plugin's location in 'Tools' menu
+2. Tables ready to export
+3. Opening generated CSV file in OpenOffice
 
 
 == Changelog ==
+
+= 1.0.9 (20121118) =
+* NEW: Code Refactored
+
+= 1.0.8 (20121117) =
+* NEW: WordPress version check
+
+= 1.0.7 (20121116) =
+* NEW: Simplified code
+* NEW: Removed dependent files
+* NEW: PHP version check
 
 = 1.0.6 =
 * Added compatibility with wordpress 3.3+
@@ -80,3 +71,9 @@ ANS. 'Navayan CSV Export' is a wordpress plugin which helps you to export your w
 
 = 1.0 =
 * First release
+
+
+== Donate ==
+
+We call 'Donation' as 'Dhammadana'. It help us to contribute more to open source community.
+[Donate ie. Dhammadana](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=amolnw2778@gmail.com&item_name=NavayanCSVExport)

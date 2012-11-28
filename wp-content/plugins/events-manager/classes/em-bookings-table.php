@@ -202,8 +202,9 @@ class EM_Bookings_Table{
 				}
 			}elseif( $EM_Ticket !== false ){
 				//searching bookings with a specific ticket
-				$this->bookings = $EM_Ticket->get_bookings();
-				$this->bookings_count = (is_array($this->bookings->bookings)) ? count($this->bookings->bookings):0;
+				$args = array('ticket_id'=>$EM_Ticket->ticket_id, 'order'=>$this->order,'orderby'=>$this->orderby);
+				$this->bookings_count = EM_Bookings::count($args);
+				$this->bookings = EM_Bookings::get(array_merge($args, array('limit'=>$this->limit,'offset'=>$this->offset)));
 				$this->events[$EM_Ticket->event_id] = $EM_Ticket->get_event();
 			}elseif( $EM_Event !== false ){
 				//bookings for an event
@@ -413,7 +414,6 @@ class EM_Bookings_Table{
 						echo $bookings_nav;
 					}
 					?>
-					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
 				<div class='table-wrap'>

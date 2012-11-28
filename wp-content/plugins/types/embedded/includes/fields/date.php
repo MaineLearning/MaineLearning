@@ -235,9 +235,11 @@ function wpcf_fields_date_view($params) {
 
     $defaults = array(
         'format' => get_option('date_format'),
+        'style' =>'' // add default value
     );
     $params = wp_parse_args($params, $defaults);
     $output = '';
+    
     switch ($params['style']) {
         case 'calendar':
             $output .= wpcf_fields_date_get_calendar($params, true, false);
@@ -267,9 +269,9 @@ function wpcf_fields_date_view($params) {
 
             $day = date('w', intval($params['field_value']));
             $day_full = $wp_locale->get_weekday($day);
-            $date_out = str_replace('#333333#', $day_full, $date_out);
+            $date_out = str_replace('#444444#', $day_full, $date_out);
             $day_short = $wp_locale->get_weekday_abbrev($day_full);
-            $date_out = str_replace('#444444#', $day_short, $date_out);
+            $date_out = str_replace('#333333#', $day_short, $date_out);
 
             $output = $date_out;
             break;
@@ -524,7 +526,7 @@ function wpcf_fields_date_editor_form_script() {
                     jQuery('#wpcf-toggle').slideUp();
                 }
             });
-            if (jQuery('input:radio[name="wpcf[style]"]:checked').val() == 'text') {
+            if (jQuery('input[name="wpcf[style]"]:checked').val() == 'text') {
                 jQuery('#wpcf-toggle').show();
             }
         });

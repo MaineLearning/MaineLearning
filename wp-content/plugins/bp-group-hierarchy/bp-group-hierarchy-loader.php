@@ -19,7 +19,8 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 	 */
 	function includes() {
 		
-		if(floatval(BP_VERSION) >= 1.6) {
+		if( floatval( bp_get_version() ) >= 1.6 ) {
+		
 			$includes = array(
 				'cache',
 				'forums',
@@ -47,9 +48,8 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 		global $bp;
 
 		// Define a slug, if necessary
-		if ( !defined( 'BP_GROUPS_SLUG' ) ) {
+		if ( !defined( 'BP_GROUPS_SLUG' ) )
 			define( 'BP_GROUPS_SLUG', $this->id );
-		}
 
 		// Global tables for messaging component
 		$global_tables = array(
@@ -57,7 +57,7 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 			'table_name_members'   => $bp->table_prefix . 'bp_groups_members',
 			'table_name_groupmeta' => $bp->table_prefix . 'bp_groups_groupmeta'
 		);
-		
+
 		// All globals for messaging component.
 		// Note that global_tables is included in this array.
 		$globals = array(
@@ -73,7 +73,7 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 		call_user_func(array(get_parent_class(get_parent_class($this)),'setup_globals'), $globals );
 
 		/** Single Group Globals **********************************************/
-		
+
 		// Are we viewing a single group?
 		if ( bp_is_groups_component() && $group_id = BP_Groups_Hierarchy::group_exists( bp_current_action() ) ) {
 			
@@ -83,22 +83,22 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 
 			// When in a single group, the first action is bumped down one because of the
 			// group name, so we need to adjust this and set the group name to current_item.
-			$bp->current_item   = isset( $bp->current_action ) ? $bp->current_action : false;
+			$bp->current_item   = bp_current_action();
 			$bp->current_action = bp_action_variable( 0 );
 			array_shift( $bp->action_variables );
 
 			// Using "item" not "group" for generic support in other components.
-			if ( is_super_admin() )
+			if ( is_super_admin() || ( function_exists( 'bp_current_user_can' ) && bp_current_user_can( 'bp_moderate' ) ) )
 				bp_update_is_item_admin( true, 'groups' );
 			else
-				bp_update_is_item_admin( groups_is_user_admin( $bp->loggedin_user->id, $this->current_group->id ), 'groups' );
+				bp_update_is_item_admin( groups_is_user_admin( bp_loggedin_user_id(), $this->current_group->id ), 'groups' );
 
 			// If the user is not an admin, check if they are a moderator
 			if ( !bp_is_item_admin() )
-				bp_update_is_item_mod  ( groups_is_user_mod  ( $bp->loggedin_user->id, $this->current_group->id ), 'groups' );
+				bp_update_is_item_mod  ( groups_is_user_mod  ( bp_loggedin_user_id(), $this->current_group->id ), 'groups' );
 
 			// Is the logged in user a member of the group?
-			if ( ( is_user_logged_in() && groups_is_user_member( $bp->loggedin_user->id, $this->current_group->id ) ) )
+			if ( ( is_user_logged_in() && groups_is_user_member( bp_loggedin_user_id(), $this->current_group->id ) ) )
 				$this->current_group->is_user_member = true;
 			else
 				$this->current_group->is_user_member = false;
@@ -111,7 +111,7 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 
 			// If this is a private or hidden group, does the user have access?
 			if ( 'private' == $this->current_group->status || 'hidden' == $this->current_group->status ) {
-				if ( $this->current_group->is_user_member && is_user_logged_in() || is_super_admin() )
+				if ( $this->current_group->is_user_member && is_user_logged_in() || is_super_admin() || ( function_exists( 'bp_current_user_can' ) && bp_current_user_can( 'bp_moderate' ) ) )
 					$this->current_group->user_has_access = true;
 				else
 					$this->current_group->user_has_access = false;
@@ -147,50 +147,87 @@ class BP_Groups_Hierarchy_Component extends BP_Groups_Component {
 			bp_do_404();
 			return;
 		}
-		
-		if ( ! bp_current_action() && !empty( $this->current_group ) ) {
-			$bp->current_action = apply_filters( 'bp_groups_default_extension', defined( 'BP_GROUPS_DEFAULT_EXTENSION' ) ? BP_GROUPS_DEFAULT_EXTENSION : 'home' );
+
+		if ( bp_is_groups_component() && !empty( $this->current_group ) ) {
+
+			$this->default_extension = apply_filters( 'bp_groups_default_extension', defined( 'BP_GROUPS_DEFAULT_EXTENSION' ) ? BP_GROUPS_DEFAULT_EXTENSION : 'home' );
+
+			if ( !bp_current_action() ) {
+				$bp->current_action = $this->default_extension;
+			}
+
+			// Prepare for a redirect to the canonical URL
+			$bp->canonical_stack['base_url'] = bp_get_group_permalink( $this->current_group );
+
+			if ( bp_current_action() ) {
+				$bp->canonical_stack['action'] = bp_current_action();
+			}
+
+			if ( !empty( $bp->action_variables ) ) {
+				$bp->canonical_stack['action_variables'] = bp_action_variables();
+			}
+
+			// When viewing the default extension, the canonical URL should not have
+			// that extension's slug, unless more has been tacked onto the URL via
+			// action variables
+			if ( bp_is_current_action( $this->default_extension ) && empty( $bp->action_variables ) )  {
+				unset( $bp->canonical_stack['action'] );
+			}
+
 		}
 
 		// Group access control
 		if ( bp_is_groups_component() && !empty( $this->current_group ) ) {
 			if ( !$this->current_group->user_has_access ) {
+
+				// Hidden groups should return a 404 for non-members.
+				// Unset the current group so that you're not redirected
+				// to the default group tab
 				if ( 'hidden' == $this->current_group->status ) {
-					// Hidden groups should return a 404 for non-members.
-					// Unset the current group so that you're not redirected
-					// to the default group tab
 					$this->current_group = 0;
 					$bp->is_single_item  = false;
 					bp_do_404();
 					return;
+
+				// Skip the no_access check on home and membership request pages
 				} elseif ( ! in_array( bp_current_action(), apply_filters( 'bp_group_hierarchy_allow_anon_access', array( 'home', 'request-membership', BP_GROUP_HIERARCHY_SLUG ) ) ) ) {
+					
+					// Off-limits to this user. Throw an error and redirect to the group's home page
 					if ( is_user_logged_in() ) {
-						// Off-limits to this user. Throw an error and redirect to the group's home page
 						bp_core_no_access( array(
 							'message'  => __( 'You do not have access to this group.', 'buddypress' ),
 							'root'     => bp_get_group_permalink( $bp->groups->current_group ),
 							'redirect' => false
 						) );
+
+					// User does not have access, and does not get a message
 					} else {
-						// Allow the user to log in
 						bp_core_no_access();
 					}
 				}
+			}
+
+			// Protect the admin tab from non-admins
+			if ( bp_is_current_action( 'admin' ) && !bp_is_item_admin() ) {
+				bp_core_no_access( array(
+					'message'  => __( 'You are not an admin of this group.', 'buddypress' ),
+					'root'     => bp_get_group_permalink( $bp->groups->current_group ),
+					'redirect' => false
+				) );
 			}
 		}
 
 		// Preconfigured group creation steps
 		$this->group_creation_steps = apply_filters( 'groups_create_group_steps', array(
-				'group-details'  => array(
-					'name'       => __( 'Details',  'buddypress' ),
-					'position'   => 0
-				),
-				'group-settings' => array(
-					'name'       => __( 'Settings', 'buddypress' ),
-					'position'   => 10
-				)
-			) 
-		);
+			'group-details'  => array(
+				'name'       => __( 'Details',  'buddypress' ),
+				'position'   => 0
+			),
+			'group-settings' => array(
+				'name'       => __( 'Settings', 'buddypress' ),
+				'position'   => 10
+			)
+		) );
 
 		// If avatar uploads are not disabled, add avatar option
 		if ( !(int)bp_get_option( 'bp-disable-avatar-uploads' ) ) {

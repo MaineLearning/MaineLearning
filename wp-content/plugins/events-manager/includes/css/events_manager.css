@@ -69,6 +69,7 @@
 	table.em-form-fields th { padding:0px 20px 5px 0px; }		
 	/* Bookings Table */
 		.em_obj { position:relative; }
+		.em_obj .table-wrap { clear:left; padding-top:5px; }
 		.em-bookings-table .em-bookings-table-export, .em-bookings-table .em-bookings-table-settings { float:left; display:block; margin:2px 5px; width:25px; height:25px;  }
 		.em-bookings-table .em-bookings-table-export { background:url(../images/csv.png) 0px 0px no-repeat; }
 		.em-bookings-table .em-bookings-table-settings { background:url(../images/settings.png) 0px 0px no-repeat; }

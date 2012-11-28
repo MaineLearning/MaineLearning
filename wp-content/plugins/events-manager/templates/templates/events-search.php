@@ -46,7 +46,9 @@
 		<!-- START Category Search -->
 			<?php 
 				$selected = !empty($_REQUEST['category']) ? $_REQUEST['category'] : 0;
-				wp_dropdown_categories(array( 'hide_empty' => 0, 'name' => 'category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'show_option_none' => get_option('dbem_search_form_categories_label'), 'class'=>'em-events-search-category'));		
+				EM_Object::ms_global_switch(); //in case in global tables mode of MultiSite, grabs main site categories, if not using MS Global, nothing happens
+				wp_dropdown_categories(array( 'hide_empty' => 0, 'name' => 'category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'show_option_none' => get_option('dbem_search_form_categories_label'), 'class'=>'em-events-search-category'));
+				EM_Object::ms_global_switch_back(); //if switched above, switch back
 			?>
 		<!-- END Category Search -->
 		<?php endif; ?>

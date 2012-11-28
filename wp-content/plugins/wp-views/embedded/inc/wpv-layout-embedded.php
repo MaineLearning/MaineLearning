@@ -48,7 +48,7 @@ function wpv_header_shortcode($atts, $value){
         } else {
             $dir = "asc";
         }
-        $link = '<a href="#" class="' . $order_class . '" onclick=" return wpv_column_head_click(\'' . $atts['name'] . '\', \'' . $dir . '\')">' . $value . '<span class="wpv-sorting-indicator"></span></a>';
+        $link = '<a href="#" class="' . $order_class . '" onclick=" return wpv_column_head_click_' . $WP_Views->get_view_count() . '(\'' . $atts['name'] . '\', \'' . $dir . '\')">' . $value . '<span class="wpv-sorting-indicator"></span></a>';
         return $link;
     } else {
         return $value;
@@ -131,7 +131,10 @@ function wpv_layout_meta_html($atts) {
     $view_layout_settings = $WP_Views->get_view_layout_settings();
     
     if (isset($view_layout_settings['layout_meta_html'])) {
-        return wpv_do_shortcode($view_layout_settings['layout_meta_html']);
+        
+        $content = wpml_content_fix_links_to_translated_content($view_layout_settings['layout_meta_html']);
+        
+        return wpv_do_shortcode($content);
     } else {
         return '';
     }

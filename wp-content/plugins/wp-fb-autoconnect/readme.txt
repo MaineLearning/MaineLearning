@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook connect, login with facebook, facebook autoconnect, facebook, connect, widget, login, logon, wordpress, buddypress
 Requires at least: 2.5
 Tested up to: 3.4.2
-Stable tag: 2.3.7
+Stable tag: 2.4.1
 
 A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible.  Supports BuddyPress.
 
@@ -60,6 +60,34 @@ For more information on exactly how this plugin's login process works and how it
 
 
 == Changelog ==
+= 2.4.1 (2012-11-27) =
+* Explicitly pass & check for the user access token in _process_login.php
+* Provide the user access token to wpfb_session_established, wpfb_connect, wpfb_existing_user, wpfb_inserting_user, wpfb_inserted_user, and wpfb_login (so you can use it to query the Graph API in your addons)
+* Cleanup jfb_output_facebook_callback()
+* Fix a harmless notice that may appear if you have WP_DEBUG defined
+
+= 2.4.0 (2012-11-26) =
+* I've eliminated the old REST PHP library, which was only being used to validate the AppID & Secret in the admin panel; validation is now done with Graph.  IMPORTANT: If you've been using this plugin since the old "App Key" days (over a year ago) and the AppID in your admin panel is an old alphanumeric value, you should replace it with the new numeric-only AppID shown in your App's settings on Facebook.
+* Include the AppID in login logs
+
+= 2.3.11 (2012-11-19) =
+* Add a few more things to the Support Info tab
+* Update the Premium Options tab to reflect the latest addon version
+
+= 2.3.10 (2012-11-11) =
+* Fix error reporting for a rare login bug
+* Use wp_mail() instead of php mail() to send login logs (for servers with custom mail configurations)
+* Include a stylesheet with some default widget styles
+* Show "WP-FB AutoConn+" in the admin menu if the Premium addon is installed
+
+= 2.3.9 (2012-11-01) =
+* Improve browser detection for login logs (+ add detection for Android & iPad)
+* Login logs include the full useragent string
+
+= 2.3.8 (2012-10-27) =
+* Get rid of old nonce debugging code
+* Move the nonce check back to before the Facebook connection
+
 = 2.3.7 (2012-10-22) =
 * Bug fix when error-detecting the token in the admin panel
 

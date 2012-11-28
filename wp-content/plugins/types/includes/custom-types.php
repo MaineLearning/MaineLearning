@@ -36,3 +36,18 @@ function wpcf_admin_custom_types_get_ajax_deactivation_link($post_type) {
             . $post_type . '">'
             . __('Deactivate', 'wpcf') . '</a>';
 }
+
+/**
+ * Returns active custom post types.
+ * 
+ * @return type 
+ */
+function wpcf_get_active_custom_types() {
+    $types = get_option('wpcf-custom-types', array());
+    foreach ($types as $type => $data) {
+        if (!empty($data['disabled'])) {
+            unset($types[$type]);
+        }
+    }
+    return $types;
+}

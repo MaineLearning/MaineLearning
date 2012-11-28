@@ -424,9 +424,22 @@ function wpcf_ajax() {
             break;
 
         case 'footer_credits':
-            require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
-            wpcf_footer_credit_settings();
-            break;
+            // TODO Remove
+//            require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
+//            wpcf_footer_credit_settings();
+//            break;
+
+        case 'footer_credit_activate_message':
+            // TODO Remove
+//            require_once WPCF_EMBEDDED_INC_ABSPATH . '/footer-credit.php';
+//            $option = get_option('wpcf_footer_credit', array());
+//            if (!isset($option['message'])) {
+//                $data = wpcf_footer_credit_defaults();
+//                shuffle($data);
+//                $option['message'] = rand(0, count($data));
+//            }
+//            update_option('wpcf_footer_credit',
+//                    array('active' => 1, 'message' => $option['message']));
 
         case 'cb_save_empty_migrate':
             $output = '<span style="color:red;">'

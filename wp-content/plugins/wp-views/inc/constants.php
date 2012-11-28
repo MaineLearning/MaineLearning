@@ -10,3 +10,12 @@ define('WPV_FILTER_BY_TAXONOMY_LINK', 'http://wp-types.com/documentation/user-gu
 define('WPV_FILTER_BY_CUSTOM_FIELD_LINK', 'http://wp-types.com/documentation/user-guides/filtering-views-by-custom-fields/');
 
 define('WPV_ADD_FILTER_CONTROLS_LINK', 'http://wp-types.com/documentation/user-guides/front-page-filters/');
+
+
+// Views layout constants.
+
+define('WPV_TAXONOMY_VIEW', 'wpv-view'); // A view used inside another taxonomy view
+define('WPV_POST_VIEW', 'wpv-post-view'); // A view used inside another post view
+
+$view_fields = array(WPV_TAXONOMY_VIEW => 'taxonomy_view_',
+               WPV_POST_VIEW => 'post_view_');

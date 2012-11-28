@@ -89,7 +89,7 @@ if (!class_exists('Editor_addon')) {
          * @param string $text_area
          * @param boolean $standard_v is this a standard V button
          */
-        function add_form_button($context, $text_area = 'textarea#content', $standard_v = TRUE) {
+        function add_form_button($context, $text_area = 'textarea#content', $standard_v = true, $add_views = false) {
             global $wp_version;
             // WP 3.3 changes ($context arg is actually a editor ID now)
             if (version_compare($wp_version, '3.1.4', '>') && !empty($context)) {
@@ -127,8 +127,15 @@ if (!class_exists('Editor_addon')) {
 
             // add View Template links to the "Add Field" button
             if(!$standard_v) {
-            	$this->add_view_templates($menus);
+            	$this->add_view_type($menus, 'view-template', __('View templates', 'wpv-views'));
+                $this->add_view_type($menus, 'view', __('Post View', 'wpv-views'));
+                $this->add_view_type($menus, 'view', __('Taxonomy View', 'wpv-views'));
 			}
+
+            if ($standard_v && $add_views) {
+                $this->add_view_type($menus, 'view', __('Post View', 'wpv-views'));
+                $this->add_view_type($menus, 'view', __('Taxonomy View', 'wpv-views'));
+            }
 
             // Sort menus
             if(is_array($menus)) {
@@ -197,13 +204,20 @@ if (!class_exists('Editor_addon')) {
                         		}
                         	}
                         } else {
-                            $short_code = '[' . $menu_item[1] . ']';
-                            $short_code = base64_encode($short_code);
-//                             echo "<pre>";
-//                             var_dump($menu);
-//                             echo "</pre>"; 
                             if($standard_v) {
-                            	$out .= '<a href="#" class="item" onclick="insert_b64_shortcode_to_editor(\'' . $short_code . '\', \'' . $text_area . '\'); return false;">' . $menu_item[0] . "</a>\n";
+                                $short_code = $menu_item[1];
+                                $link_text = $menu_item[0];
+
+                                if ($menu_item[2] == __('Post View', 'wpv-views') || $menu_item[2] == __('Taxonomy View', 'wpv-views')) {
+                                    $short_code = 'wpv-view name="' . $short_code . '"';
+                                    $link_text = str_replace(' - ' . __('Post View'), '', $link_text);
+                                    $link_text = str_replace(' - ' . __('Taxonomy View'), '', $link_text);
+                                    
+                                }
+                                $short_code = '[' . $short_code . ']';
+                                $short_code = base64_encode($short_code);
+                                
+                            	$out .= '<a href="#" class="item" onclick="insert_b64_shortcode_to_editor(\'' . $short_code . '\', \'' . $text_area . '\'); return false;">' . $link_text . "</a>\n";
                             } else {
                             	$out .= $this->wpv_parse_menu_item_from_addfield($menu_item);
                             }
@@ -272,6 +286,9 @@ if (!class_exists('Editor_addon')) {
         	if($menu_item[2] == __('View templates', 'wpv-views')) {
         		$param1 = 'View template';
         	}
+        	if($menu_item[2] == __('Post View', 'wpv-views') || $menu_item[2] == __('Taxonomy View', 'wpv-views')) {
+        		$param1 = 'Child View';
+        	}
         	if(strpos($slug, 'wpv-post-field') !== false) {
         		$param1 = 'Field';
         		$slug = $menu_item[0];
@@ -290,7 +307,12 @@ if (!class_exists('Editor_addon')) {
         		$slug = str_replace('wpv-post-taxonomy', 'wpv-taxonomy', $slug); */
         	}
         	
-        	return '<a href="javascript:void(0);" class="item" onclick="on_add_field_wpv(\''. $param1 . '\', \'' . esc_js($slug) . '\', \'' . base64_encode($menu_item[0]) . '\')">' . $menu_item[0] . "</a>\n";
+            $link_text = $menu_item[0];
+            if ($param1 == 'Child View') {
+                $link_text = str_replace(' - ' . __('Post View'), '', $link_text);
+                $link_text = str_replace(' - ' . __('Taxonomy View'), '', $link_text);
+            }
+        	return '<a href="javascript:void(0);" class="item" onclick="on_add_field_wpv(\''. $param1 . '\', \'' . esc_js($slug) . '\', \'' . base64_encode($menu_item[0]) . '\')">' . $link_text . "</a>\n";
         }
         
         // add parent items for Views and View Templates
@@ -387,25 +409,33 @@ if (!class_exists('Editor_addon')) {
          */
 	    function sort_menus_alphabetically($menus) {
     		// keep main references if set (not set on every screen)
-   			$menu_basic[__('Basic', 'wpv-views')] = isset($menus[__('Basic', 'wpv-views')]) ? $menus[__('Basic', 'wpv-views')] : array();
- 			$menu_taxonomy[__('Taxonomy', 'wpv-views')] = isset($menus[__('Taxonomy', 'wpv-views')]) ? $menus[__('Taxonomy', 'wpv-views')] : array();
- 			$menu_field[__('Other Fields', 'wpv-views')] = isset($menus[__('Field', 'wpv-views')]) ? $menus[__('Field', 'wpv-views')] : array();
-			$menu_vtemplate[__('View templates', 'wpv-views')] = isset($menus[__('View templates', 'wpv-views')]) ? $menus[__('View templates', 'wpv-views')] : array();
+            $menu_temp = array();
+            $menu_names = array(
+                                __('Taxonomy View', 'wpv-views'),
+                                __('Post View', 'wpv-views'),
+                                __('View', 'wpv-views'),
+                                __('View templates', 'wpv-views'),
+                                __('Taxonomy', 'wpv-views'),
+                                __('Basic', 'wpv-views'),
+                                __('Other Fields', 'wpv-views')
+                                );
+            
+            foreach ($menu_names as $name) {
+                $menu_temp[$name] = isset($menus[$name]) ? $menus[$name] : array();
+            }
  			
  			// remove them to preserve correct listing
- 			unset($menus[__('Basic', 'wpv-views')]);
- 			unset($menus[__('Taxonomy', 'wpv-views')]);
- 			unset($menus[__('Field', 'wpv-views')]);
- 			unset($menus[__('View templates', 'wpv-views')]);
-
+            foreach ($menu_names as $name) {
+     			unset($menus[$name]);
+            }
+            
  			// sort all elements by key
             ksort($menus);
             
            	// add main elements in the correct order
-            $menus = !empty($menu_taxonomy[__('Taxonomy', 'wpv-views')]) ? array_merge($menu_taxonomy, $menus) : $menus;
-            $menus = !empty($menu_vtemplate[__('View templates', 'wpv-views')]) ? array_merge($menu_vtemplate, $menus) : $menus;
-            $menus = !empty($menu_basic[__('Basic', 'wpv-views')]) ? array_merge($menu_basic, $menus): $menus;
-            $menus = !empty($menu_field[__('Other Fields', 'wpv-views')]) ? array_merge($menus, $menu_field) : $menus;
+            foreach ($menu_names as $name) {
+                $menus = !empty($menu_temp[$name]) ? array_merge(array($name => $menu_temp[$name]), $menus) : $menus;
+            }
             
             // sort inner elements in the submenus
             foreach($menus as $key=>$menu_group) {
@@ -427,22 +457,40 @@ if (!class_exists('Editor_addon')) {
 	    	return $searchbar;
 	    }
 	    
-	    function add_view_templates(&$menus) {
+	    function add_view_type(&$menus, $post_type, $post_name) {
 	    	global $wpdb;
             $all_post_types = implode(' ', get_post_types(array('public' => true)));
 	    	
-	    	$view_templates_available = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='view-template' AND post_status in ('publish')");
-	    	$menus[__('View templates', 'wpv-views')] = array();
-            $menus[__('View templates', 'wpv-views')]['css'] = $all_post_types;
+	    	$view_templates_available = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='{$post_type}' AND post_status in ('publish')");
+	    	$menus[$post_name] = array();
+            $menus[$post_name]['css'] = $all_post_types;
 	    	
 	    	$vtemplate_index = 0;
 	    	foreach($view_templates_available as $vtemplate) {
-	    		 $menus[__('View templates', 'wpv-views')][$vtemplate_index] = array();
-				 $menus[__('View templates', 'wpv-views')][$vtemplate_index][] = $vtemplate->post_title;
-				 $menus[__('View templates', 'wpv-views')][$vtemplate_index][] = $vtemplate->post_name;
-				 $menus[__('View templates', 'wpv-views')][$vtemplate_index][] = __('View templates', 'wpv-views');
-				 $menus[__('View templates', 'wpv-views')][$vtemplate_index][] = '';
-				 $vtemplate_index++; 
+                
+                $title = $vtemplate->post_title;
+                
+                if ($post_type == 'view') {
+                    $view_settings = get_post_meta($vtemplate->ID, '_wpv_settings', true);
+                    $title = $vtemplate->post_title . ' - ' . __('Post View', 'wpv-views');
+                    if (isset($view_settings['query_type'][0]) && $view_settings['query_type'][0] == 'taxonomy') {
+                        $title = $vtemplate->post_title . ' - ' . __('Taxonomy View', 'wpv-views');
+                        if ($post_name == __('Post View', 'wpv-views')) {
+                            continue;
+                        }
+                    } else {
+                        if ($post_name == __('Taxonomy View', 'wpv-views')) {
+                            continue;
+                        }
+                    }
+                }
+                
+                $menus[$post_name][$vtemplate_index] = array();
+                $menus[$post_name][$vtemplate_index][] = $title;
+                $menus[$post_name][$vtemplate_index][] = $vtemplate->post_name;
+                $menus[$post_name][$vtemplate_index][] = $post_name;
+                $menus[$post_name][$vtemplate_index][] = '';
+                $vtemplate_index++; 
 	    	}
 	    }
 	    

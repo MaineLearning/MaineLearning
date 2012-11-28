@@ -86,19 +86,19 @@ class WP_Views_plugin extends WP_Views {
 
     function admin_menu(){
 
-		add_utility_page(__('Views', 'wpv-views'), __('Views', 'wpv-views'), 'manage_options', 'edit.php?post_type=view', '', WPV_URL .'/res/img/views-18.png');
+		add_utility_page(__('Views', 'wpv-views'), __('Views', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view', '', WPV_URL .'/res/img/views-18.png');
 
         // remove the default menus and then add a Help menu
         remove_submenu_page('edit.php?post_type=view', 'edit.php?post_type=view');
         remove_submenu_page('edit.php?post_type=view', 'post-new.php?post_type=view');
         
                 // Add the default menus after the Help menu
-        add_submenu_page('edit.php?post_type=view', __('Views', 'wpv-views'), __('Views', 'wpv-views'), 'manage_options', 'edit.php?post_type=view');
-        add_submenu_page('edit.php?post_type=view', __('New View', 'wpv-views'), __('New View', 'wpv-views'), 'manage_options', 'post-new.php?post_type=view');
+        add_submenu_page('edit.php?post_type=view', __('Views', 'wpv-views'), __('Views', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view');
+        add_submenu_page('edit.php?post_type=view', __('New View', 'wpv-views'), __('New View', 'wpv-views'), 'edit_posts', 'post-new.php?post_type=view');
 
         // Add the view template menus.        
-        add_submenu_page('edit.php?post_type=view', __('View Templates', 'wpv-views'), __('View Templates', 'wpv-views'), 'manage_options', 'edit.php?post_type=view-template');
-        add_submenu_page('edit.php?post_type=view', __('New View Template', 'wpv-views'), __('New View Template', 'wpv-views'), 'manage_options', 'post-new.php?post_type=view-template');
+        add_submenu_page('edit.php?post_type=view', __('View Templates', 'wpv-views'), __('View Templates', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view-template');
+        add_submenu_page('edit.php?post_type=view', __('New View Template', 'wpv-views'), __('New View Template', 'wpv-views'), 'edit_posts', 'post-new.php?post_type=view-template');
 
         // add settings menu.        
         add_submenu_page('edit.php?post_type=view', __('Settings', 'wpv-views'), __('Settings', 'wpv-views'), 'manage_options', 'views-settings',
@@ -111,9 +111,7 @@ class WP_Views_plugin extends WP_Views {
 
         }
         
-        add_submenu_page('edit.php?post_type=view', __('Views Subscription','wp-wiews'), __('Views Subscription','wp-wiews'), 'manage_options', WPV_FOLDER . '/menu/main.php', null, WPV_URL . '/res/img/icon16.png');
-        
-        add_submenu_page('edit.php?post_type=view', __('Help', 'wpv-views'), __('Help', 'wpv-views'), 'manage_options', WPV_FOLDER . '/menu/help.php', null, WPV_URL . '/res/img/icon16.png');
+        add_submenu_page('edit.php?post_type=view', __('Help', 'wpv-views'), __('Help', 'wpv-views'), 'edit_posts' , WPV_FOLDER . '/menu/help.php', null, WPV_URL . '/res/img/icon16.png');
     }
 
     function settings_box_load(){
@@ -263,7 +261,12 @@ class WP_Views_plugin extends WP_Views {
                     <thead>
                         <tr>
                             <th width="20px"></th>
-                            <th width="100%"><?php _e('Filter', 'wpv-views'); ?></th>
+                            <th width="100%">
+								<?php _e('Filter', 'wpv-views'); ?>
+								&nbsp;&nbsp<a class="wpv-help-link" target="_blank" href="http://wp-types.com/documentation/user-guides/views/">
+									<?php _e('Querying the database', 'wpv-views'); ?>
+								</a>
+							</th>
                         </tr>
                     </thead>
                     
@@ -422,6 +425,13 @@ class WP_Views_plugin extends WP_Views {
 	
 	function edit_post_link($link, $post_id) {
 
+		$post_type_object = get_post_type_object( 'view' );
+		if ( !$post_type_object )
+			return $link;
+	
+		if ( !current_user_can( $post_type_object->cap->edit_post, $this->current_view ) )
+			return $link;
+		
         if ($this->current_view) {		
 			remove_filter('edit_post_link', array($this, 'edit_post_link'), 10, 2);
 			
@@ -561,6 +571,40 @@ class WP_Views_plugin extends WP_Views {
         }
 	}
  
+	function admin_section_start($title, $help_link = null, $help_text = null) {
+		if ($help_link) {
+			$title .= '&nbsp;&nbsp;<a class="wpv-help-link" href="' . $help_link . '" target="_blank">' . $help_text . '</a>';
+		}
+		?>
+		
+		
+		<table class="widefat">
+			<thead>
+				<tr>
+					<th><?php echo $title; ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						
+		<?php
+	}
+	
+	function admin_section_end() {
+		?>
+		
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<br />
+
+		<?php
+	}
+	
+ 
     function views_settings_admin() {
         
         global $WPV_templates, $wpdb, $WPV_view_archive_loop;
@@ -570,29 +614,6 @@ class WP_Views_plugin extends WP_Views {
         $defaults = array('views_template_loop_blog' => '0');
         $options = wp_parse_args($options, $defaults);
         
-        if (isset($_POST['submit']) && $_POST['submit'] == __('Save', 'wpv-views') &&
-                            wp_verify_nonce($_POST['wpv_view_templates'], 'wpv_view_templates')) {
-            
-            $options = $WPV_view_archive_loop->submit($options);
-            $options = $WPV_templates->submit($options);
-			
-			if (isset($_POST['wpv_show_hidden_fields'])) {
-				// save as comma separated string.
-				$options['wpv_show_hidden_fields'] = implode(',', $_POST['wpv_show_hidden_fields']);
-			} else {
-				$options['wpv_show_hidden_fields'] = '';
-			}
-            
-            $this->save_options($options);
-
-            ?>
-                <div class="updated">
-                    <p><?php _e("Settings Saved", 'wpv-views'); ?></p>
-                </div>
-            <?php
-            
-        }
-
         ?>
         
         <div class="wrap">
@@ -601,24 +622,17 @@ class WP_Views_plugin extends WP_Views {
             <h2><?php _e('Views Settings', 'wpv-views') ?></h2>
     
             <br />
-            
-            <form method="post" action="edit.php?post_type=view&page=views-settings">
-                
-                <?php $WPV_view_archive_loop->admin_settings($options); ?>
-                <?php $WPV_templates->admin_settings($options); ?>
-                
-				<div id="wpv_show_hidden_custom_fields">
-					<?php $this->show_hidden_custom_fields($options); ?>
-				</div>
-				
-                <?php wp_nonce_field('wpv_view_templates', 'wpv_view_templates'); ?>
-                <p class="submit" style="margin-top:0px;">
-                    <input id="submit" class="button-primary" type="submit" value="<?php _e('Save', 'wpv-views'); ?>" name="submit" />
-                </p>
 
-				
-
-            </form>
+		<h3><?php _e('Need Help?','wpv-views') ?></h3>
+		<p><?php _e('You can customize the output for the blog, archives, taxonomy, single pages and anything else that WordPress produces.','wpv-views') ?></p>
+		<p><?php printf(__('Before you get started, we recommend that you read the %sintroduction to customizing WordPress output with Views%s.','wpv-views'), '<a href="" target="_blank">','</a>') ?></p>
+			<?php $WPV_view_archive_loop->admin_settings($options); ?>
+			<?php $WPV_templates->admin_settings($options); ?>
+			
+			<div id="wpv_show_hidden_custom_fields">
+				<?php $this->show_hidden_custom_fields($options); ?>
+			</div>
+			
             
             <?php
                 // change the preview url when the selector changes.
@@ -673,6 +687,26 @@ class WP_Views_plugin extends WP_Views {
         
         <?php
     }
+	
+	function wpv_save_theme_debug_settings() {
+
+		global $WPV_templates;
+		
+        $options = $this->get_options();
+        
+        $defaults = array('views_template_loop_blog' => '0');
+        $options = wp_parse_args($options, $defaults);
+        
+        if (wp_verify_nonce($_POST['wpv_view_templates'], 'wpv_view_templates')) {
+            
+            $options = $WPV_templates->submit($options);
+			
+            $this->save_options($options);
+
+        }
+		
+		die();
+	}
 
 	// called from ajax
 	function wpv_get_show_hidden_custom_fields() {
@@ -700,8 +734,10 @@ class WP_Views_plugin extends WP_Views {
 			$defaults = array();
 		}
 		
+
+		$this->admin_section_start(__('Show the following hidden custom fields in the Views GUI', 'wpv-views'));
+		
 		?>
-			<h3 class="title"><?php _e('Show the following hidden custom fields in the Views GUI', 'wpv-views'); ?></h3>
 
 			<div id="wpv_show_hidden_custom_fields_summary" style="margin-left:20px">
 				<?php
@@ -779,6 +815,8 @@ class WP_Views_plugin extends WP_Views {
 			
 			</div>
 		<?php
+		
+		$this->admin_section_end();
 		
 	}
 	/**

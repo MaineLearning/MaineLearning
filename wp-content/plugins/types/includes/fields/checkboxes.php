@@ -14,8 +14,6 @@
  * 'raw' => 'true'|'false' (display raw data stored in DB, default false)
  * 'output' => 'html' (wrap data in HTML, optional)
  * 'show_name' => 'true' (show field name before value e.g. My checkbox: $value)
- * 'checked_html' => base64_encode('<img src="image-on.png" />')
- * 'unchecked_html' => base64_encode('<img src="image-off.png" />')
  *
  * Example usage:
  * With a short code use [types field="my-checkboxes"]
@@ -29,7 +27,7 @@
  * @return type 
  */
 function wpcf_fields_checkboxes_insert_form($form_data, $parent_name = '') {
-    $id = 'wpcf-fields-checkboxes-' . mt_rand();
+    $id = 'wpcf-fields-checkboxes-' . wpcf_unique_id(serialize($form_data). $parent_name);
     $form = array();
     $form['name'] = array(
         '#type' => 'textfield',
@@ -134,7 +132,7 @@ function wpcf_fields_checkboxes_insert_form($form_data, $parent_name = '') {
  */
 function wpcf_fields_checkboxes_get_option($parent_name = '',
         $form_data = array()) {
-    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-checkboxes-option-' . mt_rand();
+    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-checkboxes-option-' . wpcf_unique_id(serialize($form_data) . $parent_name);
     $form = array();
     $count = isset($_GET['count']) ? $_GET['count'] : 1;
     $title = isset($_GET['count']) ? __('Checkbox title', 'wpcf') . ' ' . $_GET['count'] : __('Checkbox title',
@@ -179,7 +177,7 @@ function wpcf_fields_checkboxes_get_option($parent_name = '',
         '#value' => isset($form_data['set_value']) ? $form_data['set_value'] : 1,
     );
     $form[$id]['checked'] = array(
-        '#id' => 'checkboxes-' . mt_rand(),
+        '#id' => 'checkboxes-' . wpcf_unique_id(serialize($form_data) . $parent_name),
         '#type' => 'checkbox',
         '#title' => __('Set checked by default (on new post)?', 'wpcf'),
         '#name' => $parent_name . '[options][' . $id . '][checked]',

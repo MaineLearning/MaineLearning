@@ -84,14 +84,14 @@ class EM_Tickets_Bookings extends EM_Object implements Iterator{
 		//Does the ticket we want to book have enough spaeces? 
 		if ( $override || $EM_Ticket_Booking->get_ticket()->get_available_spaces() >= $EM_Ticket_Booking->get_spaces() ) {  
 			$ticket_booking_key = $this->has_ticket($EM_Ticket_Booking->ticket_id);
-			if( $ticket_booking_key !== false && is_object($this->tickets_bookings[$ticket_booking_key]) ){
+			if( $ticket_booking_key !== false && is_object($this->tickets_bookings[$EM_Ticket_Booking->ticket_id]) ){
 				//previously booked ticket, so let's just replace it
-				$this->tickets_bookings[$ticket_booking_key]->ticket_booking_spaces = $EM_Ticket_Booking->get_spaces();
-				$this->tickets_bookings[$ticket_booking_key]->get_price(true);
+				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id]->ticket_booking_spaces = $EM_Ticket_Booking->get_spaces();
+				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id]->get_price(true);
 				return apply_filters('em_tickets_bookings_add',true,$this);
 			}elseif( $EM_Ticket_Booking->get_spaces() > 0 ){
 				//new ticket in booking
-				$this->tickets_bookings[] = $EM_Ticket_Booking;
+				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id] = $EM_Ticket_Booking;
 				$this->get_spaces(true);
 				$this->get_price(true);
 				return apply_filters('em_tickets_bookings_add',true,$this);

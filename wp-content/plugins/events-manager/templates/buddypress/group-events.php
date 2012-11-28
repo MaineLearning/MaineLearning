@@ -55,8 +55,8 @@
 					$rowno++;
 					$class = ($rowno % 2) ? 'alternate' : '';
 					// FIXME set to american
-					$localised_start_date = date_i18n('D d M Y', $event->start);
-					$localised_end_date = date_i18n('D d M Y', $event->end);
+					$localised_start_date = date_i18n(get_option('dbem_date_format'), $event->start);
+					$localised_end_date = date_i18n(get_option('dbem_date_format'), $event->end);
 					$style = "";
 					$today = date ( "Y-m-d" );
 					$location_summary = "<b>" . $event->get_location()->name . "</b><br/>" . $event->get_location()->address . " - " . $event->get_location()->town;

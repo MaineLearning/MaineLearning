@@ -157,7 +157,7 @@ function wpv_show_type_edit_ok() {
     
     jQuery.post(ajaxurl, data, function(response) {
         jQuery('#wpv-filter-type-show').html(response);
-        wpv_filter_hide_edit_mode('type')
+        wpv_filter_hide_edit_mode('type');
         
     });
 	
@@ -206,7 +206,7 @@ function wpv_select_post_type_filter() {
     jQuery('#wpv-layout-help-posts').show();
     jQuery('#wpv-layout-help-taxonomy').hide();
     
-    jQuery('#wpv-layout-v-icon-posts').show();
+    jQuery('#wpv-layout-v-icon-posts').css('display', 'inline-block');
     jQuery('#wpv-layout-v-icon-taxonomy').hide();
 
     // Generate the layout 
@@ -238,7 +238,7 @@ function wpv_select_taxonomy_type_filter() {
     jQuery('#wpv-layout-help-taxonomy').show();
 
     jQuery('#wpv-layout-v-icon-posts').hide();
-    jQuery('#wpv-layout-v-icon-taxonomy').show();
+    jQuery('#wpv-layout-v-icon-taxonomy').css('display', 'inline-block');
 
     // Generate the layout 
     on_generate_wpv_layout(true);
@@ -284,6 +284,13 @@ function wpv_filter_hide_edit_mode(id) {
     jQuery('#wpv-filter-' + id + '-edit').parent().parent().css('background-color', '');
     jQuery('#wpv-filter-' + id + '-edit').hide();
     jQuery('#wpv-filter-' + id + '-show').show();
+	
+	var offset = jQuery('#wpv-filter-' + id + '-show').offset();
+	
+	jQuery('html, body').animate({
+		scrollTop : offset.top - 40
+	});
+	
 }
 
 var post_status_selected = Array();

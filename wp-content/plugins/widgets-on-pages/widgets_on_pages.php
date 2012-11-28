@@ -20,9 +20,9 @@
 /*
 Plugin Name: Widgets on Pages
 Plugin URI: http://gingerbreaddesign.co.uk/wordpress/plugins/widgets-on-pages.php
-Description: Allows 'in-page' widget areas so widgets can be defined via shortcut straight into page/post content or through the use of a template tag. 
+Description: The easy way to Add Widgets or Sidebars to Posts and Pages by shortcodes or template tags.
 Author: Todd Halfpenny
-Version: 0.0.11
+Version: 0.0.12
 Author URI: http://gingerbreaddesign.co.uk/todd
 */
 
@@ -34,8 +34,9 @@ Author URI: http://gingerbreaddesign.co.uk/todd
 add_action('admin_menu', 'wop_menu');
 
 function wop_menu() {
-  add_options_page('Widgets on Pages options', 'Widgets on Pages', 7, 'wop_options', 'wop_plugin_options');
-  add_action( 'admin_init', 'register_wop_settings' );
+	global $wop_plugin_hook;
+ 	$wop_plugin_hook = add_options_page('Widgets on Pages options', 'Widgets on Pages', 'manage_options', 'wop_options', 'wop_plugin_options');
+	add_action( 'admin_init', 'register_wop_settings' );
 
 }
 
@@ -135,7 +136,10 @@ function wop_plugin_options() {
       <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
       </p>
     </td></tr>
-    <input type="hidden" name="action" value="update" />
+    <tr><td></td><td><input type="hidden" name="action" value="update" />    
+	</td></tr>
+    <tr><td colspan='2'><h3>Rate this plugin</h3><p><a href="http://wordpress.org/support/view/plugin-reviews/widgets-on-pages?rate=5#postform" title="Rate me">If you like me, please rate me</a>... or maybe even <a href="http://gingerbreaddesign.co.uk/wordpress/" title="Show you love">donate to the author</a>... <p><p>or perhaps just spread the good word <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/widgets-on-pages/" data-text="Using the Widgets on Pages WordPress plugin and lovin' it" data-via="toddhalfpenny" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></p></td></tr>
   </form>
   </div>
 <?php
@@ -155,9 +159,10 @@ function wop_install() {
 /* ===============================
   C O N T E X T U A L    H E L P
 ================================*/
-function my_contextual_help($text) {
-  $screen = $_GET['page'];
-	if ($screen == 'wop_options') {
+function wop_plugin_help($text, $screen_id, $screen) {
+	global $wop_plugin_hook;
+	if ($screen_id == $wop_plugin_hook) {
+
 	$text = "<h5>Need help with the Widgets on Pages plugin?</h5>";
 	$text .= "<p>Check out the documentation and support forums for help with this plugin.</p>";
 	$text .= "<a href=\"http://wordpress.org/extend/plugins/widgets-on-pages/installation/\">Documentation</a><br /><a href=\"http://wordpress.org/tags/widgets-on-pages?forum_id=10\">Support forums</a>";
@@ -165,7 +170,7 @@ function my_contextual_help($text) {
 	return $text;
 }
 	 
-add_action('contextual_help', 'my_contextual_help', 10, 1);
+add_filter('contextual_help', 'wop_plugin_help', 10, 3);
 
 
 /* ===============================

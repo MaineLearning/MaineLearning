@@ -462,7 +462,6 @@ function wpv_ajax_get_page($post_data) {
         }
     }
 
-    $post_id = $post_data['post_id'];
 
     $_GET['wpv_paged'] = $post_data['page'];
     $_GET['wpv_view_count'] = $post_data['view_number'];
@@ -475,20 +474,27 @@ function wpv_ajax_get_page($post_data) {
     
     if (isset($post_data['get_params'])) {
         foreach($post_data['get_params'] as $key => $param) {
-            $_GET[$key] = $param;
+            if (!isset($_GET[$key])) {
+                $_GET[$key] = $param;
+            }
         }
     }
 
+    $view_data = unserialize(base64_decode($post_data['view_hash']));
+
     global $post, $authordata, $id;
 
-    $view_data = unserialize(base64_decode($post_data['view_hash']));
-    $post = get_post($post_id);
-    $authordata = new WP_User($post->post_author);
-    $id = $post->ID;
+    if (isset($post_data['post_id'])) {
+        $post_id = $post_data['post_id'];
+        $post = get_post($post_id);
+        $authordata = new WP_User($post->post_author);
+        $id = $post->ID;
+    }
 
     if ($post_data['wpv_view_widget_id'] == 0) {
         // set the view count so we return the right view number after rendering.
-        $WP_Views->set_view_count(intval($post_data['view_number']) - 1, null);
+        $view_id = $WP_Views->get_view_id($view_data);
+        $WP_Views->set_view_count(intval($post_data['view_number']), $view_id);
 
         echo $WP_Views->short_tag_wpv_view($view_data);
         //echo wpv_do_shortcode($post->post_content);

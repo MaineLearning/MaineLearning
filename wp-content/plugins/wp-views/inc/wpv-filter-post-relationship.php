@@ -218,6 +218,11 @@ function wpv_add_post_relationship($args) {
                 <img id="wpv_update_post_relationship" src="<?php echo WPV_URL; ?>/res/img/ajax-loader.gif" width="16" height="16" style="display:none" alt="loading" />
                 
             </li>
+			<li>
+				<a class="wpv-help-link" target="_blank" href="http://wp-types.com/documentation/user-guides/querying-and-displaying-child-posts/">
+					<?php _e('Querying and Displaying Child Posts', 'wpv-views'); ?>
+				</a>
+			</li>
         </ul>
         
 	</div>

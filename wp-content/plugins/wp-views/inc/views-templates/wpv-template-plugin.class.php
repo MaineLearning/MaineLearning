@@ -52,9 +52,9 @@ class WPV_template_plugin extends WPV_template {
 
     function view_settings_help() {
 		?>
-		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/view-templates/"><?php _e('What is a View Template', 'wpv-views')?> &raquo;</a></p>
-		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/editing-view-templates/"><?php _e('Editing instructions', 'wpv-views')?>  &raquo;</a></p>
-		<p><a target=_"blank" href="http://wp-types.com/documentation/user-guides/setting-view-templates-for-single-pages/"><?php _e('How to apply View Templates to content', 'wpv-views')?>  &raquo;</a></p>
+		<p><a class="wpv-help-link" target=_"blank" href="http://wp-types.com/documentation/user-guides/view-templates/"><?php _e('What is a View Template', 'wpv-views')?> &raquo;</a></p>
+		<p><a class="wpv-help-link" target=_"blank" href="http://wp-types.com/documentation/user-guides/editing-view-templates/"><?php _e('Editing instructions', 'wpv-views')?>  &raquo;</a></p>
+		<p><a class="wpv-help-link" target=_"blank" href="http://wp-types.com/documentation/user-guides/setting-view-templates-for-single-pages/"><?php _e('How to apply View Templates to content', 'wpv-views')?>  &raquo;</a></p>
 		
 		<?php
 		printf(__('Go to the %sSettings page%s to apply this template to content types.'), '<a href="' . admin_url('edit.php?post_type=view&page=views-settings') . '">', '</a>');
@@ -108,7 +108,14 @@ class WPV_template_plugin extends WPV_template {
 	
 	function edit_post_link($link, $post_id) {
 		
+		$post_type_object = get_post_type_object( 'view-template' );
+		if ( !$post_type_object )
+			return $link;
+
 		$template_selected = get_post_meta($post_id, '_views_template', true);
+	
+		if ( !current_user_can( $post_type_object->cap->edit_post, $template_selected ) )
+			return $link;
         
         if ($template_selected) {
 			remove_filter('edit_post_link', array($this, 'edit_post_link'), 10, 2);
@@ -187,7 +194,7 @@ class WPV_template_plugin extends WPV_template {
     }
     
     function admin_settings($options) {
-        global $wpdb;
+        global $wpdb, $WP_Views;
         
         $items_found = array();
         
@@ -199,29 +206,28 @@ class WPV_template_plugin extends WPV_template {
 		if (!isset($options['wpv-theme-function-debug'])) {
 			$options['wpv-theme-function-debug'] = false;
 		}
-		
-        ?>
 
-        <h3 class="title"><?php _e('View Template for Post Types', 'wpv-views'); ?></h3>
+		$WP_Views->admin_section_start(__('View Template for Post Types', 'wpv-views'),
+										'http://wp-types.com/documentation/user-guides/using-view-templates-for-archive-and-taxonomy-pages',
+										__('Using View Templates for Archive and Taxonomy Pages', 'wpv-views'));
 
-		<?php 		
         $this->_display_post_type_loop_summary($options);
         $this->_display_post_type_loop_admin($options);
+
+		$WP_Views->admin_section_end();
 		
-		?>
-		
-        <h3 class="title"><?php _e('View Template settings for Taxonomy archive loops', 'wpv-views'); ?></h3>
-		
-        <?php
+		$WP_Views->admin_section_start(__('View Template settings for Taxonomy archive loops', 'wpv-views'));
         
         $this->_display_taxonomy_loop_summary($options);
         $this->_display_taxonomy_loop_admin($options);
 
-		?>
+		$WP_Views->admin_section_end();
+
+		$WP_Views->admin_section_start(__('Theme support for View Templates', 'wpv-views'))
 		
-		<br />
-        <h3 class="title"><?php _e('Theme support for View Templates', 'wpv-views'); ?></h3>
-        <div style="margin-left:20px;">
+		?>
+									   
+        <div id="wpv_theme_debug" style="margin-left:20px;">
 			<p>
 				<?php _e("View Templates modify the content when called from 'the_content' function. Some themes don't use 'the_content' function but define their own function.", 'wpv-views');?>
 			</p>
@@ -236,10 +242,17 @@ class WPV_template_plugin extends WPV_template {
 
 				<label><input type="checkbox" name="wpv-theme-function-debug" value="1" <?php echo $checked;?> /> <?php _e("Enable debugging and go to a page that should display a View Template and Views will display the call function name.", 'wpv-views');?></label>
 			</p>
+			
+			<?php wp_nonce_field('wpv_view_templates', 'wpv_view_templates'); ?>
+			<input id="submit" type="button" class="button-primary" value="<?php _e('Save', 'wpv-views'); ?>" onclick="wpv_save_theme_debug_settings();" />
+			<img id="wpv_theme_debug_spinner" src="<?php echo WPV_URL; ?>/res/img/ajax-loader.gif" width="16" height="16" style="display:none" alt="saving" />
+			<span id="wpv_theme_debug_message" style="display:none;"><?php _e('Settings saved', 'wpv-views'); ?></span>
+			
 
 		</div>
 			
-		<?php		
+		<?php
+		$WP_Views->admin_section_end();
 	}
 
     function _ajax_get_post_type_loop_summary() {
@@ -400,7 +413,7 @@ class WPV_template_plugin extends WPV_template {
                                         if ($post_id) {
                                             $link = get_permalink($post_id);
                                             ?>
-                                            <a id="views_template_for_preview_<?php echo $type?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-views'); ?></a>
+                                            <a id="views_template_for_preview_<?php echo $type?>" class="button" target="_blank" href="<?php echo $link; ?>" ><?php _e('Preview', 'wpv-views'); ?></a>
                                             <?php
                                         }
                                         ?>
@@ -547,7 +560,7 @@ class WPV_template_plugin extends WPV_template {
         }
 
         if ($selected == '') {
-            $selected = __('There are no View Templates being used for Taxonomy archive loops.', 'wpv-views');
+            $selected = __('There are no View Templates being used for Taxonomy archive loops.', 'wpv-views') . '<br />';
         } else {
             $selected = '<ul style="margin-left:20px">' . $selected . '</ul>';
         }
@@ -607,7 +620,7 @@ class WPV_template_plugin extends WPV_template {
                                         if ($most_popular_term) {
                                             $link = get_term_link(intval($most_popular_term), $name);
                                             ?>
-                                            <a id="views_template_loop_preview_<?php echo $name?>" class="button" target="_blank" href="<?php echo $link; ?>" ><? _e('Preview', 'wpv-views'); ?></a>
+                                            <a id="views_template_loop_preview_<?php echo $name?>" class="button" target="_blank" href="<?php echo $link; ?>" ><?php _e('Preview', 'wpv-views'); ?></a>
                                             <?php
                                         }
                                     ?>
