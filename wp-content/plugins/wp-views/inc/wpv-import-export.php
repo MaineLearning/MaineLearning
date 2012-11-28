@@ -81,17 +81,6 @@ function wpv_admin_export_data($download = true) {
         $wp_upload_dir = wp_upload_dir();
         $data['fileupload_url'] = $wp_upload_dir['baseurl'];
     }
-    $taxonomies = get_taxonomies('', 'objects');
-    foreach ($taxonomies as $category) {
-        $terms = get_terms($category->name, array('hide_empty' => 0));
-        if (!empty($terms)) {
-            foreach ($terms as $term) {
-                $data['terms_map']['term_' . $term->term_id]['old_id'] = $term->term_id;
-                $data['terms_map']['term_' . $term->term_id]['slug'] = $term->slug;
-                $data['terms_map']['term_' . $term->term_id]['taxonomy'] = $category->name;
-            }
-        }
-    }
 
     // Get the views
     $views = get_posts('post_type=view&post_status=any&posts_per_page=-1');
@@ -115,9 +104,24 @@ function wpv_admin_export_data($download = true) {
                     foreach ($meta as $meta_key => $meta_value) {
                         if ($meta_key == '_wpv_settings') {
                             $value = maybe_unserialize($meta_value[0]);
+
+                            // Add any taxonomy terms so we can re-map when we import.                            
+                            if (!empty($value['taxonomy_terms'])) {
+                    			$taxonomy = $value['taxonomy_type'][0];
+                                
+                                foreach ($value['taxonomy_terms'] as $term_id) {
+                                    $term = get_term($term_id, $taxonomy);
+                                    $data['terms_map']['term_' . $term->term_id]['old_id'] = $term->term_id;
+                                    $data['terms_map']['term_' . $term->term_id]['slug'] = $term->slug;
+                                    $data['terms_map']['term_' . $term->term_id]['taxonomy'] = $taxonomy;
+                                }
+                            }
+                            
                             $value = $WP_Views->convert_ids_to_names_in_settings($value);
                             
                             $data['views']['view-' . $post['ID']]['meta'][$meta_key] = $value;
+
+                            
                         }
                         if ($meta_key == '_wpv_layout_settings') {
                             $value = maybe_unserialize($meta_value[0]);

@@ -101,7 +101,7 @@ if(is_admin()){
 			?>
 				<?php
 					$filters = wpv_add_filter_category(array());
-					wpv_filter_add_filter_admin($view_settings, $filters, 'popup_add_category_field', 'Add another category');
+					wpv_filter_add_filter_admin($view_settings, $filters, 'popup_add_category_field', 'Add another taxonomy');
 				?>
 				<hr />
 				<div class="wpv_taxonomy_param_missing_ok"><?php echo __('A taxonomy parameter is missing or incorrect.', 'wpv-views'); ?></div>
@@ -109,7 +109,7 @@ if(is_admin()){
 				<input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" name="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_filter_taxonomy_edit_cancel()"/>
 				<span class="wpv-taxonomy-help"><i>
 					<?php echo sprintf(__('%sLearn about filtering by taxonomy%s', 'wpv-views'),
-								   '<a href="' . WPV_FILTER_BY_TAXONOMY_LINK . '" target="_blank">',
+								   '<a class="wpv-help-link" href="' . WPV_FILTER_BY_TAXONOMY_LINK . '" target="_blank">',
 								   ' &raquo;</a>'
 								   ); ?>
 				</i></span>
@@ -271,10 +271,12 @@ function wpv_get_taxonomy_summary($type, $view_settings, $category_selected) {
 		$cat_text = '';
 		foreach($category_selected as $cat) {
 			$term = get_term($cat, $taxonomy);
-			if ($cat_text != '') {
-				$cat_text .= ', ';
+			if ($term) {
+				if ($cat_text != '') {
+					$cat_text .= ', ';
+				}
+				$cat_text .= $term->name;
 			}
-			$cat_text .= $term->name;
 		}
 		echo $cat_text;
 		?>)</strong>
@@ -451,7 +453,7 @@ function wpv_add_category_checkboxes($args) {
 		<br />
 		<span class="wpv-taxonomy-help"><i>
 			<?php echo sprintf(__('%sLearn about filtering by taxonomy%s', 'wpv-views'),
-						   '<a href="' . WPV_FILTER_BY_TAXONOMY_LINK . '" target="_blank">',
+						   '<a class="wpv-help-link" href="' . WPV_FILTER_BY_TAXONOMY_LINK . '" target="_blank">',
 						   ' &raquo;</a>'
 						   ); ?>
 		</i></span>

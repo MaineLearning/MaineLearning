@@ -9,7 +9,6 @@ add_action( 'bp_loaded', 'bp_group_hierarchy_load_components' );
 add_action( 'bp_setup_globals', 'bp_group_hierarchy_setup_globals' );
 add_action( 'bp_groups_delete_group', 'bp_group_hierarchy_rescue_child_groups' );
 
-
 /**
  * Set up global variables
  */
@@ -17,6 +16,7 @@ function bp_group_hierarchy_setup_globals() {
 	global $bp, $wpdb;
 
 	/* For internal identification */
+	$bp->group_hierarchy = new stdClass();
 	$bp->group_hierarchy->id = 'group_hierarchy';
 	$bp->group_hierarchy->table_name = $wpdb->base_prefix . 'bp_group_hierarchy';
 	$bp->group_hierarchy->slug = BP_GROUP_HIERARCHY_SLUG;
@@ -35,6 +35,8 @@ function bp_group_hierarchy_init() {
 	/** Enable logging with WP Debug Logger */
 	$GLOBALS['wp_log_plugins'][] = 'bp_group_hierarchy';
 	
+	/** Ensure BP is loaded before loading admin portion */
+	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-admin.php' );
 	require ( dirname( __FILE__ ) . '/extension.php' );
 	
 }
@@ -44,7 +46,6 @@ function bp_group_hierarchy_init() {
  */
 function bp_group_hierarchy_load_components() {
 
-	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-functions.php' );
 	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-classes.php' );
 	require ( dirname( __FILE__ ) . '/bp-group-hierarchy-template.php' );
 
@@ -87,6 +88,5 @@ function bp_group_hierarchy_rescue_child_groups( &$parent_group ) {
 		}
 	}
 }
-
 
 ?>

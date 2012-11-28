@@ -31,10 +31,12 @@ function wpv_filter_post_category($query, $view_settings) {
 				$current_page = $WP_Views->get_current_page();
 				if ($current_page) {
 					$terms = wp_get_post_terms($current_page->ID, $category->name, array("fields" => "ids"));
-					$query['tax_query'][] = array('taxonomy' => $category->name,
-											  'field' => 'id',
-											  'terms' => _wpv_get_translated_terms($terms, $category->name),
-											  'operator' => "IN");
+					if (count($terms)) {
+						$query['tax_query'][] = array('taxonomy' => $category->name,
+												  'field' => 'id',
+												  'terms' => _wpv_get_translated_terms($terms, $category->name),
+												  'operator' => "IN");
+					}
 				}
 			} else if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM ATTRIBUTE") {
 				$attribute = $view_settings['taxonomy-' . $category->name . '-attribute-url'];
@@ -150,4 +152,26 @@ function _wpv_get_translated_terms($term_ids, $category_name) {
 	}
 
 	return $term_ids;	
+}
+
+add_filter('wpv_filter_requires_current_page', 'wpv_filter_cat_requires_current_page', 10, 2);
+function wpv_filter_cat_requires_current_page($state, $view_settings) {
+	if ($state) {
+		return $state; // Already set
+	}
+
+	$taxonomies = get_taxonomies('', 'objects');
+	foreach ($taxonomies as $category_slug => $category) {
+		$relationship_name = ( $category->name == 'category' ) ? 'tax_category_relationship' : 'tax_' . $category->name . '_relationship';
+		
+		if (isset($view_settings[$relationship_name])) {
+			if ($view_settings['tax_' . $category->name . '_relationship'] == "FROM PAGE") {
+				$state = true;
+				break;
+			}
+		}
+	}
+	
+	return $state;
+	
 }

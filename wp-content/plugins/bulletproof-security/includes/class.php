@@ -10,7 +10,7 @@ if (!function_exists ('add_action')) {
 if ( !class_exists('Bulletproof_Security') ) {
 	
 	if ( !defined('BULLETPROOF_VERSION' ) )
-	define( 'BULLETPROOF_VERSION', '.47.5' );
+	define( 'BULLETPROOF_VERSION', '.47.6' );
 	
 	class Bulletproof_Security {
 	

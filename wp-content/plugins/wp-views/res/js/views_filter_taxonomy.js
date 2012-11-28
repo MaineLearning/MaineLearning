@@ -5,7 +5,26 @@ jQuery(document).ready(function($){
     jQuery('input[name="_wpv_settings\\[taxonomy_type\\]\\[\\]"]').click(function () {
         update_taxonomy_term_check();
     });
+
+
+    jQuery('.taxonomy_terms_mode').change(function () {
+        wpv_tax_term_mode_change(this);
+    });
 });
+
+function wpv_tax_term_mode_change(selector) {
+    var relationship = jQuery(selector).val();
+    
+    var checkboxes = jQuery(selector).parent().parent().children('.categorychecklist');
+    
+    // Show or hide the term checkboxes.
+    
+    if (relationship == 'THESE') {
+        checkboxes.show();
+    } else {
+        checkboxes.hide();
+    }
+}
 
 function wvp_tax_relationship_change(selector) {
     var relationship = jQuery(selector).val();
@@ -329,9 +348,9 @@ function wpv_update_categories_in_select(select_id) {
 
     if (select_id == 'popup_add_category_field_select') {
         if (show_count > 0) {    
-            jQuery('input[name="Add another category"]').removeAttr("disabled");
+            jQuery('input[name="Add another taxonomy"]').removeAttr("disabled");
         } else {
-            jQuery('input[name="Add another category"]').attr("disabled", "disabled");
+            jQuery('input[name="Add another taxonomy"]').attr("disabled", "disabled");
         }
     }
     
@@ -351,6 +370,7 @@ function update_taxonomy_term_check() {
         var data = {
             action : 'wpv_get_taxonomy_term_check',
             taxonomy : taxonomy,
+            mode : jQuery('input[name="_wpv_settings\\[taxonomy_type_mode\\]"]').val(),
             wpv_nonce : jQuery('#wpv_get_taxonomy_term_check_nonce').attr('value')
         };
         
@@ -359,16 +379,28 @@ function update_taxonomy_term_check() {
             
             jQuery('.taxonomy-term-div').html(response);
             jQuery('#wpv_update_taxonomy_term').hide();
+            
+            jQuery('.taxonomy_terms_mode').change(function () {
+                wpv_tax_term_mode_change(this);
+            });
+            
         });
     }
 }
 
 var taxonomy_terms_selected = Array();
+var taxonomy_terms_mode;
 
 function wpv_show_taxonomy_term_edit() {
+    
+    jQuery('.taxonomy_terms_mode').change(function () {
+        wpv_tax_term_mode_change(this);
+    });
+
 
     // record checked items just in case the operation is cancelled.    
     taxonomy_terms_selected = jQuery('input[name="_wpv_settings\\[taxonomy_terms\\]\\[\\]"]:checked');
+    taxonomy_terms_mode = jQuery('select[name="_wpv_settings\\[taxonomy_terms_mode\\]"]').val();
 
     // Show the edit div for selecting terms
     jQuery('#wpv-filter-taxonomy-term-show').hide();
@@ -405,6 +437,11 @@ function wpv_show_taxonomy_term_edit_cancel() {
     taxonomy_terms_selected.each( function(index) {
         jQuery(this).attr('checked', true);
     });
+    
+    select = jQuery('select[name="_wpv_settings\\[taxonomy_terms_mode\\]"]');
+    jQuery(select).val(taxonomy_terms_mode);
+    wpv_tax_term_mode_change(select);
+    
     jQuery('#wpv-filter-taxonomy-term-show').show();
     jQuery('#wpv-filter-taxonomy-term-edit').hide();
 }

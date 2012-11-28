@@ -2,7 +2,7 @@
     background: url(../images/logo-32.png) no-repeat;
 }
 #icon-wpcf-access {
-    background: url(../images/access_36x34.png) no-repeat;
+    background: url(../images/access-icon-32x32.png) no-repeat;
 }
 #icon-wpcf-search {
     background: url(../images/search_36x34.png) no-repeat;
@@ -137,7 +137,7 @@ input.wpcf-form-error {
 .wpcf-form-fields-align-right a.wpcf-fields-add-ajax-link {
 /*    line-height: 30px;*/
     margin: 3px 5px 2px 0;
-    height: 15px;
+    /*height: 15px;*/
     float: left;
 }
 .wpcf-fields-form .ui-draggable .wpcf-form-fieldset .wpcf-form-fieldset legend {
@@ -313,4 +313,36 @@ input.wpcf-form-error {
     margin-top: -15px;
     z-index: 9;
     text-align: right;*/
+}
+
+.wpcf-help-link {
+    display:inline-block;
+    min-height:19px;
+    height:19px;
+    font-size:11px !important;
+    line-height:19px;
+    min-width:19px;
+    padding-left:20px;
+    padding-top:4px;
+    background:url(../../common/res/images/question.png) no-repeat 0 6px;
+    text-decoration:none !important;
+    position:relative;
+    z-index:100;
+    color:#FFFFFF !important;
+    float:right;
+}
+
+.wpcf-help-link:hover {
+    text-decoration:underline !important;
+    color:#d54e21 !important;
+    background-position:0 -19px;
+}
+
+.wpcf-form-options-header-title {
+    position: absolute;
+    margin: -18px 0 0 40px;
+}
+.wpcf-form-options-header-value {
+    position: absolute;
+    margin: -18px 0 0 125px;
 }

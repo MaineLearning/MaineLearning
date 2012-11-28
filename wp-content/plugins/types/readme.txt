@@ -5,7 +5,7 @@ Tags: CMS, custom field, custom fields, custom post type, custom post types, pos
 License: GPLv2
 Requires at least: 3.1
 Tested up to: 3.4.1
-Stable tag: 1.0.4
+Stable tag: 1.1.3.1
 
 The complete and reliable plugin for managing custom post types, custom taxonomy and custom fields.
 
@@ -79,7 +79,7 @@ By default, WordPress will either display your blog posts or a specific page on 
 To display custom post types on the home-page, you have two options:
 
 1. If you're comfortable with PHP and WordPress API, edit the site's template files (probably index.php) and load the custom post types there. Different themes do this differently, so we can't really say what single approach works best. You should look at [get_posts](http://codex.wordpress.org/Template_Tags/get_posts), which is part of the WordPress Template Tags system.
-2. If you want to build sites right away, without becoming an expert in WordPress API and you can afford $49 (USD), try [Views](http://wp-types.com/home/views-create-elegant-displays-for-your-content/). You'll be able to load whatever content you need from the database and display it anywhere and in whatever way you choose.
+2. If you want to build sites right away, without becoming an expert in WordPress API and try our [Views Toolset](http://wp-types.com/). You'll be able to load whatever content you need from the database and display it anywhere and in whatever way you choose.
 
 We're sorry, but we don't know of any third option which is both free and requires no coding.
 
@@ -207,6 +207,16 @@ Additionally, Types is the only plugin that lets you define parent/child relatio
 * Some fixes for WPML compatibility
 * Support for Views 1.1.1
 
+= 1.1.3 =
+* Add support for resizing remote images
+* Fix long and short date formats
+* Fixed many small bugs and glitches
+* Sync with Views 1.1.3
+
+= 1.1.3.1 =
+* Fix saving fields in WP 3.5
+* Fixed a bug displaying Types credit footer when not asked to do so
+
 == Upgrade Notice ==
 
 = 0.9.1 =
@@ -241,3 +251,9 @@ Small bugfix release
 
 = 1.0.2 =
 Better support for multilingual sites with repeating fields
+
+= 1.1.3 =
+Includes support for resizing remote images
+
+= 1.1.3.1 =
+Fix for WP 3.5

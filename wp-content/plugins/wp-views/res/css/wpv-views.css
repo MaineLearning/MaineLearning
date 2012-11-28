@@ -117,3 +117,42 @@
 .wpv-custom-field-date {
 	display:none;
 }
+
+.wpv-help-link {
+    display:inline-block;
+    min-height:19px;
+    height:19px;
+    line-height:19px;
+    min-width:19px;
+    padding-left:20px;
+    padding-top:4px;
+    background:url(../../embedded/common/res/images/question.png) no-repeat 0 6px;
+    position:relative;
+}
+
+.wpv_cyan_box{
+    border: 1px solid #8cceea;
+    background-color: #eff8fc;
+    padding:10px;    
+    margin-bottom:0px;
+    margin-top:0px;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    border-bottom-left-radius: 5px 5px;
+    border-bottom-right-radius: 5px 5px;
+    border-top-left-radius: 5px 5px;
+    border-top-right-radius: 5px 5px;
+}
+
+.wpv_cyan_box p{
+line-height: 100%; margin: 5px 0;   
+}
+.wpv_cyan_box H3 { margin-top: 2px; }
+
+.wpv_cyan_box ul{
+    margin-top:5px;
+    font-size: 11px;
+}
+

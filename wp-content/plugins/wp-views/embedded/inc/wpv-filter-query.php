@@ -42,6 +42,11 @@ function wpv_filter_get_posts($id) {
         $query['posts_per_page'] = $view_settings['rollover']['posts_per_page'];
     }
     
+	// Add special check for media (attachments) as their default status in not usually published
+	if (sizeof($post_type) == 1 && $post_type[0] == 'attachment') {
+		$query['post_status'] = 'any'; // Note this can be overriden by adding a status filter.
+	}
+	
     $query = apply_filters('wpv_filter_query', $query, $view_settings);
     
     $post_query = new WP_Query($query);

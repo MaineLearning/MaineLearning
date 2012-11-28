@@ -68,7 +68,7 @@ class EM_Event_Post_Admin{
 		$is_post_type = $post_type == EM_POST_TYPE_EVENT || $post_type == 'event-recurring';
 		$saving_status = !in_array(get_post_status($post_id), array('trash','auto-draft')) && !defined('DOING_AUTOSAVE');
 		if(!defined('UNTRASHING_'.$post_id) && $is_post_type && $saving_status ){
-			if( wp_verify_nonce($_REQUEST['_emnonce'], 'edit_event') ){ 
+			if( !empty($_REQUEST['_emnonce']) && wp_verify_nonce($_REQUEST['_emnonce'], 'edit_event') ){ 
 				//this is only run if we know form data was submitted, hence the nonce
 				$EM_Event = em_get_event($post_id, 'post_id');
 				do_action('em_event_save_pre', $EM_Event); //technically, the event is saved... but the meta isn't. wp doesn't give an pre-intervention action for this (or does it?)
@@ -336,8 +336,7 @@ class EM_Event_Recurring_Post_Admin{
 			global $wpdb;
 			//set a constant so we know this event doesn't need 'saving'
 			if(!defined('UNTRASHING_'.$post_id)) define('UNTRASHING_'.$post_id, true);
-			$EM_Event = em_get_event($post_id,'post_id');			
-			$wpdb->query('UPDATE '.EM_EVENTS_TABLE.' SET event_status='.$EM_Event->event_status.' WHERE event_id='.$EM_Event->event_id);
+			$EM_Event = em_get_event($post_id,'post_id');
 			$events_array = EM_Events::get( array('recurrence_id'=>$EM_Event->event_id, 'scope'=>'all', 'status'=>'all' ) );
 			foreach($events_array as $event){
 				/* @var $event EM_Event */

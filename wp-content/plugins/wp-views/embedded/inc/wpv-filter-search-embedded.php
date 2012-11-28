@@ -11,7 +11,7 @@ function wpv_filter_post_search($query, $view_settings) {
     if (isset($view_settings['post_search_value']) && $view_settings['post_search_value'] != '') {
         $query['s'] = $view_settings['post_search_value'];
     }
-    if (isset($_GET['wpv_post_search'])) {
+    if (isset($view_settings['search_mode']) && isset($_GET['wpv_post_search'])) {
         $query['s'] = $_GET['wpv_post_search'];
     }
     
@@ -29,7 +29,7 @@ function wpv_filter_taxonomy_search($query, $view_settings) {
     if (isset($view_settings['taxonomy_search_value']) && $view_settings['taxonomy_search_value'] != '') {
         $query['search'] = $view_settings['taxonomy_search_value'];
     }
-    if (isset($_GET['wpv_taxonomy_search'])) {
+    if (isset($view_settings['taxonomy_search_mode']) && isset($_GET['wpv_taxonomy_search'])) {
         $query['search'] = $_GET['wpv_taxonomy_search'];
     }
     

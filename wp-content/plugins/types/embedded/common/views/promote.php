@@ -6,7 +6,9 @@ if (!function_exists('promote_types_and_views')) {
         $promote_views = false;
         if (defined('WPV_VERSION')) {
             global $WP_Views;
-            $promote_views = $WP_Views->is_embedded();
+			if ($WP_Views) {
+				$promote_views = $WP_Views->is_embedded();
+			}
         }
         return $promote_views;        
     }
@@ -52,7 +54,7 @@ if (!function_exists('promote_types_and_views')) {
             <p style="font-size: 130%;"><?php _e('Your theme was created using <strong>Types</strong> and <strong>Views</strong>. Developers use these two plugins to build complex websites, without coding.', 'wpv-views'); ?></p>
             <p style="font-size: 120%;"><?php _e("Right now, you're using the embedded version, which creates the layout but doesn't include the editing interface. You can upgrade to the full version and customize your site yourself - you don't even need to know how to program!", 'wpv-views'); ?></p>
 
-            <p style="font-size: 120%;"><?php echo sprintf(__('<a href="%s" target="_blank">Types</a> is available for free and <a href="%s">Views</a> costs only $49. Once you have installed the full versions of Types and Views you\'ll be able to create and edit your own content types, layouts and listings.', 'wpv-views'),
+            <p style="font-size: 120%;"><?php echo sprintf(__('Once you have installed the full versions of Types and Views you\'ll be able to create and edit your own content types, layouts and listings.', 'wpv-views'),
                                 'http://wordpress.org/extend/plugins/types/',
 								'http://wp-types.com' . $affiliate_url); ?></p>
 

@@ -1,0 +1,195 @@
+.wats_loading {
+	background: url('../img/indicator.gif') left center no-repeat;
+        margin-left:10px;
+        padding-left:20px;
+}
+
+.wats_stop_loading {
+        margin-left:10px;
+        padding-left:20px;
+}
+
+.wats_tip {
+	background: url('../img/help.png') left center no-repeat;
+	display:none;
+	padding-left:25px;
+}
+
+.wats_tip_visible {
+	background: url('../img/help.png') left center no-repeat;
+	padding-left:25px;
+}
+
+.wats_editable {
+	background: url('../img/modify.png') right center no-repeat;
+}
+
+.wats_editableaccept {
+	background: url('../img/accept.png') right center no-repeat;
+}
+
+#respond input {
+	width:auto;
+}
+
+li.wats {
+	margin-left:20px;
+}
+
+.alternate {
+	background-color:#edfbfc;
+}
+
+.wats_table {
+	border-color: #dfdfdf;
+	border-width: 1px;
+	border-style: solid;
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+	clear: both;
+}
+
+.wats_table * {
+	word-wrap: break-word;
+}
+
+.wats_table td,
+.wats_table th {
+	border-color: #dfdfdf !important;
+	border-bottom-width: 1px !important;
+	border-bottom-style: solid !important;
+	font-size: 11px !important;
+}
+
+.wats_table td {
+	padding: 3px 5px !important;
+	vertical-align: top;
+}
+
+.wats_table thead {
+	background: #dfdfdf url(../img/blue-grad.png) repeat-x scroll left top;
+	line-height: 1.3em;height:100%;
+	text-shadow: rgba(255,255,255,0.8) 0 1px 0;
+}
+
+.wats_table thead tr th,
+.wats_table tfoot tr th {
+	background: url(../img/small.gif) no-repeat center right;
+	color:#000000 !important;
+	_background-color: #C6DDF1;
+	cursor: pointer;
+	padding-right:12px !important;
+	padding-left:0px !important;
+	padding-top:0px !important;
+	padding-bottom:0px !important;
+	border-right: 1px solid #dfdfdf !important;
+	vertical-align: middle !important;
+}
+
+.wats_table thead tr th.headerSortUp {
+	background: url(../img/smallasc.gif) no-repeat center right;
+	background-color: #8dbdd8;
+}
+
+.wats_table thead tr th.headerSortDown {
+	background: url(../img/smalldesc.gif) no-repeat center right;
+	background-color: #8dbdd8;
+}
+
+.wats_table tbody tr:hover {
+  background-color: #DDEAFF;
+}
+
+
+.wats_edit_table th.column-title {
+	width:200px;
+}
+
+.widefat th.column-title {
+	width:200px;
+}
+
+.wats_ticket_form_title {
+	font-weight:bold;
+}
+
+#adminmenu #toplevel_page_wats-wats-edit:hover div.wp-menu-image,
+#adminmenu #toplevel_page_wats-wats-edit div.wp-menu-image,
+#adminmenu #toplevel_page_wats-wats-edit.wp-has-current-submenu div.wp-menu-image,
+#adminmenu #toplevel_page_wats-wats-edit.current div.wp-menu-image {
+    background:transparent url(../img/support.png) no-repeat 6px 6px;
+}
+
+select.wats_select {
+	margin-bottom:0;
+}
+
+.wats_select_ticket_type_frontend,
+.wats_select_ticket_status_frontend,
+.wats_select_ticket_priority_frontend {
+}
+
+.wats_select_ticket_details_frontend {
+}
+
+ul.wats-options-menu {
+	border:1px solid #d1e5ee;
+	background:#eff8ff;
+	width:175px;
+	text-align:center;
+	margin-right:20px;
+	margin-left:20px;
+	font-size:12px;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+}
+
+ul.wats-options-menu li {
+	padding-right:10px;
+	padding-left:10px;
+	background:#ffffff;
+	margin-bottom:0px;
+	padding-top:1px;
+	padding-bottom:3px;
+}
+
+ul.wats-options-menu li.selected, ul.wats-options-menu li.selected a {
+	background:#EFEDE7;
+	color:#333333;
+	font-weight:bold;
+}
+
+ul.wats-options-menu a {
+	text-decoration:none;
+}
+
+.wats-form-table td {
+	font-size:11px;
+	line-height:20px;
+	padding:8px 10px;
+	border-collapse:collapse;
+}
+
+.wats-form-table th {
+	color:#222;
+	font-weight:normal;
+	font-size:13px;
+	width:200px;
+}
+
+#wats_frontend_ticket_listing_div div {
+	margin-bottom:24px;
+}
+
+#wats_frontend_ticket_listing_div input {
+	margin-bottom:0px;
+}
+
+#wats_tickets_per_page_selector {
+	margin-bottom:10px;
+}
+
+.ui-autocomplete-loading { 
+	background: white url('../img/ajax-loader.gif') right center no-repeat;
+}

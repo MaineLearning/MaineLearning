@@ -46,6 +46,15 @@ function bebop_get_feed_url() {
 	}
 }
 
+function bebop_feed_date_recorded( $secondary_item_id ) {
+	return bebop_feed_get_date_recorded( $secondary_item_id );
+}
+function bebop_feed_get_date_recorded( $secondary_item_id ) {
+	$data = bebop_tables::fetch_individual_oer_data( $secondary_item_id );
+	return $data->date_recorded;
+}
+
+
 function bebop_feed_type() {
 	return bebop_get_feed_type();
 }
@@ -81,8 +90,8 @@ function bebop_get_activity_args() {
 	
 	//get the count limit
 	$action_variables = bp_action_variables();
-	$standard_limit = 25;
-	$max_limit = 250;
+	$standard_limit = 40;
+	$max_limit = 500;
 	
 	if ( $action_variables[0] == 'feed' ) {
 		if ( isset( $action_variables[1]) ) {
@@ -105,7 +114,7 @@ function bebop_get_activity_args() {
 		if ( $this_bp_feed == 'all_oers' ) {
 			//only want to import active feeds
 			$import_feeds = array();
-			$active_extensions = bebop_extensions::get_active_extension_names();
+			$active_extensions = bebop_extensions::bebop_get_active_extension_names();
 			foreach ( $active_extensions as $extension ) {
 				if ( bebop_tables::check_option_exists( 'bebop_' . $extension . '_rss_feed' ) ) {
 					if ( bebop_tables::get_option_value( 'bebop_' . $extension . '_rss_feed' ) == 'on' ) { 
@@ -113,17 +122,18 @@ function bebop_get_activity_args() {
 					}
 				}
 			}
+			
 			if ( ! empty( $import_feeds ) ) {
 				if ( count( $import_feeds ) >= 2 ) {
 					$query_feeds = implode( ',', $import_feeds );
 				}
 				else {
-					$query_feeds = $import_feeds;
+					$query_feeds = $import_feeds[0];
 				}
-				return 'user_id=' . bp_displayed_user_id() . '&object=bebop_oer_plugin&action=' . $query_feeds . '&max=' . $limit . '&display_comments=stream&';
+				return 'user_id=' . bp_displayed_user_id() . '&object=bebop_oer_plugin&action=' . $query_feeds . '&per_page=' . $limit . '&max=' . $limit . '&show_hidden=true&display_comments=stream';
 			}
 		}
-		return 'user_id=' . bp_displayed_user_id() . '&object=bebop_oer_plugin&action=' . $this_bp_feed . '&max=' .$limit . '&display_comments=stream';
+		return 'user_id=' . bp_displayed_user_id() . '&object=bebop_oer_plugin&action=' . $this_bp_feed . '&per_page=' . $limit . '&max=' . $limit . '&show_hidden=true&display_comments=stream';
 	}
 	else {
 		return false;

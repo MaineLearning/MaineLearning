@@ -61,14 +61,14 @@
 						/* @var $event EM_Event */
 						$rowno++;
 						$class = ($rowno % 2) ? 'alternate' : '';
-						// FIXME set to american
-						$localised_start_date = date_i18n('D d M Y', $event->start);
-						$localised_end_date = date_i18n('D d M Y', $event->end);
+						// FIXME set to american						
+						$localised_start_date = date_i18n(get_option('dbem_date_format'), $event->start);
+						$localised_end_date = date_i18n(get_option('dbem_date_format'), $event->end);
 						$style = "";
-						$today = date ( "Y-m-d" );
-						$location_summary = "<b>" . $event->get_location()->name . "</b><br/>" . $event->get_location()->address . " - " . $event->get_location()->town;
+						$today = current_time('timestamp');
+						$location_summary = "<b>" . $event->get_location()->location_name . "</b><br/>" . $event->get_location()->location_address . " - " . $event->get_location()->location_town;
 						
-						if ($event->start_date < $today && $event->end_date < $today){
+						if ($event->start < $today && $event->end < $today){						
 							$class .= " past";
 						}
 						//Check pending approval events
@@ -117,8 +117,11 @@
 								<?php echo ($localised_end_date != $localised_start_date) ? " - $localised_end_date":'' ?>
 								<br />
 								<?php
-									//TODO Should 00:00 - 00:00 be treated as an all day event? 
-									echo substr ( $event->start_time, 0, 5 ) . " - " . substr ( $event->end_time, 0, 5 ); 
+									if(!$event->event_all_day){
+										echo date_i18n(get_option('time_format'), $event->start) . " - " . date_i18n(get_option('time_format'), $event->end);
+									}else{
+										echo get_option('dbem_event_all_day_message');
+									}
 								?>
 							</td>
 							<td>

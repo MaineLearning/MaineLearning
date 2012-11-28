@@ -85,7 +85,7 @@ if(is_admin()){
 				<input class="button-secondary" type="button" value="<?php echo __('Cancel', 'wpv-views'); ?>" name="<?php echo __('Cancel', 'wpv-views'); ?>" onclick="wpv_show_filter_custom_field_edit_cancel()"/>
 				<span class="wpv-custom-fields-help"><i>
 					<?php echo sprintf(__('%sLearn about filtering by custom fields%s', 'wpv-views'),
-								   '<a href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
+								   '<a class="wpv-help-link" href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
 								   ' &raquo;</a>'
 								   ); ?>
 				</i></span>
@@ -362,7 +362,7 @@ function wpv_add_meta_key($args, $view_settings = null) {
 		<br />
 		<span class="wpv-custom-fields-help"><i>
 			<?php echo sprintf(__('%sLearn about filtering by custom fields%s', 'wpv-views'),
-						   '<a href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
+						   '<a class="wpv-help-link" href="' . WPV_FILTER_BY_CUSTOM_FIELD_LINK . '" target="_blank">',
 						   ' &raquo;</a>'
 						   ); ?>
 		</i></span>

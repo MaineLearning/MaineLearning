@@ -3,8 +3,8 @@ Contributors: netweblogic, nutsmuggler
 Donate link: http://wp-events-plugin.com
 Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
 Requires at least: 3.3
-Tested up to: 3.4.1
-Stable tag: 5.2.6
+Tested up to: 3.4.2
+Stable tag: 5.3
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -98,6 +98,89 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.3 =
+* corrected date_format/dbem_date_format typo on templates/templates/my-bookings.php
+* fixed calendar links with extra search args if using non-permalinks
+* fixed some non-translated strings
+* updated pot file
+* added em_booking_add_registration_result filter
+* fixed add_user_to_blog on MS bookings not providing a default role
+* fixed navbar issue for blogs with events page assigned to homepage
+* updated Dutch translation, thanks to Arnout Eykelhoff
+* partially-updated Russian translation, thanks to Evgeniy Efimenko
+* fixed #_EVENTNOTES being converted before other placeholders, which potentially caused problems if using shortcodes with formats
+* updated Chinese thanks to Leo Losoviz
+* added #_ATTENDEESPENDINGLIST
+* improved JS compatability with booking form (spinner and jumping up to errors/confirmation feedback)
+* fixed reserved pending spaces not being approvable if event is full
+* fixed categories and other plugin postmeta not being duplicated with event
+* reverted to previous use of global $wp_query in parse_query filters with additional fix to prevent clash with Pods framework
+
+= 5.2.9 =
+* added spaces to comma seperators of location on locations admin table
+* improved user deletion hook, bookings now get deleted along with user
+* replaced depreciated placeholders in default widget values
+* added booking form anchor to action url
+* updated POT file and Swedish
+* added Japanese, kudos to Kenta Sakamoto
+* fixed minimum ticket space value not allowing 0 spaces even if ticket not required
+* added em_event_save_events_slug filter
+* added $EM_Event to all do_action parameters on templates/placeholders/bookingform.php
+* changed #_MAP to #_LOCATIONMAP on installation defaults
+* wrapped bookings dashboard sections into divs with class names
+* fixed formatting links/texts in settings page tips
+* added em_options_booking_form_options action and save button on settings page > bookings > booking form options
+* fixed use of global $wp_query when passed within parse_query action - thx Scott @ Pods framework plugin
+* added wp_dropdown_pages instead of manual page select generation
+* fixed useage of outdated user_firstname/user_lastname property for EM_Person::get_name()
+* improved ticket minimum calculation (takes into account if ticket is only ticket in event, therefore required)
+* fixed EM_Tickets and EM_Tickets_Bookings not storing ticket/ticket_bookings array key by ticket id
+* locations list format header and footer now install ul by default, if blank no wrapped ul is used (which previously contained an 'a' outside an li)
+* small fix to em_content_categories_args, now applied to EM_Categories::get() and EM_Categories::output() in templates/categories-list.php
+* shortened gcal link some more to prevent some (rare) "404 url too long" errors
+* added login redirection to same page in login link of my bookings page
+
+= 5.2.8 =
+* fixed js bug arsing from 5.2.7 js 'fix' for datepickers
+* fixed categories not showing up on single category pages
+* fixed php warning when quick-saving
+
+= 5.2.7 =
+* fixed min ticket space number calculation issues in booking forms
+* fixed multiple admin emails for event submission by members with publish rights
+* added em_bookings_ajax_complete/error jquery events/hooks
+* updated/added Swedish, Chinese, and Finnish translations, kudos to Tommy Wahlund, Leonardo Losoviz and @Daedalon respectively
+* fixed mailer charset problem in SMTP mails
+* added dbem to some __ functions
+* added ticket-price class to single ticket booking form html
+* fixed datepicker breaking on themes inserting br tags into search/booking forms
+* fixed html email setting not working in MultiSite
+* added Guadaloupe to countries list
+* added em_csv_header_output action (e.g. for Excel hack)
+* changed/prevented registration email going out until after booking is completely saved
+* added filter em_object_json_encode_pre
+* fixed country searches on events page/search form
+* added conditional placeholders is_private not_private is_recurrence not_recurrence
+* fixed #_EVENTEXCERPT not having formatting filters applied
+* changed the_content run at priority 9 for category pages
+* fixed private location autocomplete/search issues
+* fixed recurrences not being deleted when done from front-end
+* fixed edit user link on booking admin area
+* fixed edit location link showing to all
+* fixed typo in map balloon hint on settings page
+* removed default contact person setting (used in < v5.0, now uses author)
+* added width/height property to thumbnail img html
+* fixed deleted MS subsites not deleting events/locations from global tables
+* fixed maps showing undefined fields on first load of edit event with location ddm enabled
+* fixed non-registered attendees not being included in no-user mode for #_ATTENDEE and #_ATTENDEELIST
+* fixed front-end location admin pagination
+* reduced sql statements for county my/all locations on front-end locations admin page
+* fixed select all ui problem (thx @Daedalon)
+* fixed array_key_exists php warning in EM_Object::can_manage
+* changed is_main_blog to is_main_site
+* added grandchildren detection when generating permalink rules for events page
+* added auto br to emails option in email settings
+
 = 5.2.6 =
 * changed validation order for bookings (no validation done in EM_Event::get_post())
 * EM_Tickets_Bookings::$tickets_bookings now an associative array, keys are ticket id

@@ -206,7 +206,7 @@ class WPCF_Custom_Fields_Control_Table extends WP_List_Table
     }
 
     function column_cf_name($item) {
-        return $item['name'];
+        return stripcslashes($item['name']);
     }
 
     function column_group($item) {

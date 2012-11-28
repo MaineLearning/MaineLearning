@@ -22,7 +22,7 @@ include_once( 'core/bebop-pages.php' );
 include_once( 'core/bebop-extensions.php' );
 
 //Main content file
-include_once( 'core/bebop-core-user.php' );
+include_once( 'core/bebop-core.php' );
 
 //if import a specific OER.
 if ( isset( $_GET['extension'] ) ) {

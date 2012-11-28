@@ -52,49 +52,18 @@ jQuery(window).load(function(){
 		dropdown_list.css('top', pos.top + jQuery('.wpv_add_fields_button').height() - 470 + 'px');
 		dropdown_list.css('left', pos.left + jQuery('.wpv_add_fields_button').width() + 'px');
 
-		
-		//
-		//jQuery('#add_field_popup .editor_addon_wrapper .close').css('display', 'none');
-		//
-		//wpv_hide_top_groups(jQuery(dropdown_list).parent());
-		//
-		//var ajaxWrapper = jQuery(dropdown_list).parent().parent().parent();
-		//ajaxWrapper.css('padding', '0px');
-		//ajaxWrapper.css('margin', '0px');
-		
 	});
 	
-	// second (backup) lightbox behavior for add field
-	jQuery('#addfields2').click(function() {
-//		var add_field_popup = jQuery('#add_field_popup');
-//		
-//		add_field_popup.css("position","absolute");
-//	    add_field_popup.css('width', '700px');
-//	    add_field_popup.css('height', '500px');
-//	    add_field_popup.css('z-index', '10000px');
-//	    
-//	    add_field_popup.css('top', '-100px');
-//	    add_field_popup.css('left', '150px');
-//	    
-////	    add_field_popup.css("top", ((jQuery(window).height() - add_field_popup.outerHeight()) / 2) + 
-////	                                                jQuery(window).scrollTop() + "px");
-////	    add_field_popup.css("left", ((jQuery(window).width() - add_field_popup.outerWidth()) / 2) + 
-////		                                                jQuery(window).scrollLeft() + "px");
-//		if(jQuery('#add_field_popup').css('display') == 'block') {
-//			jQuery('#add_field_popup').css('display', 'none');
-//		}
-//		else {
-//			jQuery('#add_field_popup').css('display', 'block');
-//		}
-	});
 	
 	// this manages the "V" button 
     jQuery('.editor_addon_wrapper img').click(function(e){
-        if (jQuery(this).parent().find('.editor_addon_dropdown').css('visibility') == 'hidden') {
+		var drop_down = jQuery(this).parent().find('.editor_addon_dropdown');
+        if (drop_down.css('visibility') == 'hidden') {
             // Close others possibly opened
         	wpv_hide_top_groups(jQuery(this).parent());
             jQuery('.editor_addon_dropdown').css('visibility', 'hidden').hide().css('display', 'inline');
             jQuery(this).parent().find('.editor_addon_dropdown').css('visibility', 'visible').show().css('display', 'inline');
+			icl_editor_resize_popup(drop_down);
             jQuery(document.body).bind('click',function(e){
                 if (jQuery(e.target).parents('.editor_addon_wrapper').length < 1) {
                     jQuery('.editor_addon_dropdown').css('visibility', 'hidden').hide().css('display', 'inline');
@@ -120,34 +89,12 @@ jQuery(window).load(function(){
         jQuery('.editor_addon_dropdown').css('visibility', 'hidden').hide().css('display', 'inline');
     });
     // Resize dropdowns if necessary (in #media-buttons)
-    jQuery('#media-buttons .editor_addon_dropdown, #wp-content-media-buttons .editor_addon_dropdown').each(function(){
-        var width = jQuery(this).width();
-        var height = jQuery(this).height();
-        var screenHeight = jQuery(window).height();
-        var offset = jQuery(this).offset();
-
-        if (offset.top+height > screenHeight) {
-            var resizedHeight = Math.round(screenHeight-offset.top-20);
-            if (resizedHeight < 200) {
-                resizedHeight = 200;
-            }
-            jQuery(this).height(resizedHeight);
-            jQuery(this).css('height', resizedHeight+'px');
-            var scrollHeight = Math.round(resizedHeight-jQuery(this).find('.direct-links').height()-50);
-            jQuery(this).find('.scroll').css('height', scrollHeight+'px');
-        } else {
-            jQuery(this).find('.direct-links').hide();
-            jQuery(this).find('.editor-addon-link-to-top').hide();
-        }
-
-		// make sure the popup is not to wide.		
-        var screenWidth = jQuery(window).width();
-        if (offset.left + width > screenWidth) {
-			jQuery(this).css('width', screenWidth - offset.left - 20 + 'px');
-		}
-        
+    jQuery('#media-buttons .editor_addon_dropdown, ' +
+		   '#wp-content-media-buttons .editor_addon_dropdown, ' +
+		   '#wpv-layout-v-icon-posts .editor_addon_dropdown').each(function(){
 		
-    //        jQuery(this).find('.scroll').jScrollPane();
+		icl_editor_resize_popup(jQuery(this));
+		
     });
     // For hidden in Meta HTML set scroll when visible
     jQuery('#wpv_layout_meta_html_admin_show a, #wpv_filter_meta_html_admin_show a').click(function(){
@@ -177,11 +124,6 @@ jQuery(window).load(function(){
     });
     // Direct links
     jQuery('.editor-addon-top-link').bind('click', function(){
-        //        var api = jQuery(this).parents('.editor_addon_dropdown').find('.scroll').data('jsp');
-        //        if (typeof api != 'undefined') {
-        //            var wpcfScrollToElement = jQuery(this).attr('id')+'-target';
-        //            api.scrollToElement(jQuery('#'+wpcfScrollToElement).parent(), true, true);
-        //        }
         // get position of elements
         var positionNested = jQuery('#'+jQuery(this).attr('id')+'-target').offset();
         var positionParent = jQuery('#'+jQuery(this).attr('id')+'-target').parent().parent().offset();
@@ -193,13 +135,36 @@ jQuery(window).load(function(){
         jQuery(this).parents('.editor_addon_dropdown').find('.scroll').animate({scrollTop:Math.round(scrollTo)}, 'fast');
         return false;
     });
-//    jQuery('.editor-addon-link-to-top').click(function(){
-//        var api = jQuery(this).parents('.editor_addon_dropdown').find('.scroll').data('jsp');
-//        var scrollToElement = jQuery(this).parents('.editor_addon_dropdown').find('.group');
-//        api.scrollToElement(scrollToElement, true, true);
-//        return false;
-//    });
 });
+
+
+function icl_editor_resize_popup(element) {
+	var width = jQuery(element).width();
+	var height = jQuery(element).height();
+	var document_height = jQuery(document).height();
+	var offset = jQuery(element).offset();
+
+	if (offset.top+height > document_height) {
+		var resizedHeight = Math.round(document_height-offset.top-20);
+		if (resizedHeight < 250) {
+			resizedHeight = 250;
+		}
+		jQuery(element).height(resizedHeight);
+		jQuery(element).css('height', resizedHeight+'px');
+		var scrollHeight = Math.round(resizedHeight-jQuery(element).find('.direct-links').height()-50);
+		jQuery(element).find('.scroll').css('height', scrollHeight+'px');
+	} else {
+		jQuery(element).find('.direct-links').hide();
+		jQuery(element).find('.editor-addon-link-to-top').hide();
+	}
+
+	// make sure the popup is not too wide.		
+	var screenWidth = jQuery(window).width();
+	if (offset.left + width > screenWidth) {
+		jQuery(element).css('width', screenWidth - offset.left - 20 + 'px');
+	}
+}
+	
 
 var keyStr = "ABCDEFGHIJKLMNOP" +
 "QRSTUVWXYZabcdef" +
@@ -246,7 +211,37 @@ function editor_decode64(input) {
     
     } while (i < input.length);
     
-    return unescape(output);
+    return unescape(editor_utf8_decode(output));
+}
+
+function editor_utf8_decode(utftext) {
+	var string = "";
+	var i = 0;
+	var c = c1 = c2 = 0;
+
+	while ( i < utftext.length ) {
+
+		c = utftext.charCodeAt(i);
+
+		if (c < 128) {
+			string += String.fromCharCode(c);
+			i++;
+		}
+		else if((c > 191) && (c < 224)) {
+			c2 = utftext.charCodeAt(i+1);
+			string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+			i += 2;
+		}
+		else {
+			c2 = utftext.charCodeAt(i+1);
+			c3 = utftext.charCodeAt(i+2);
+			string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+			i += 3;
+		}
+
+	}
+
+	return string;
 }
 
 function insert_b64_shortcode_to_editor(b64_shortcode, text_area) {

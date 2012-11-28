@@ -23,7 +23,7 @@ include_once( 'core/bebop-pages.php' );
 include_once( 'core/bebop-extensions.php' );
 
 //Main content file
-include_once( 'core/bebop-core-user.php' );
+include_once( 'core/bebop-core.php' );
 
 //above code can be moved when this has been tested as working.
 

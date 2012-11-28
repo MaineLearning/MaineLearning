@@ -518,7 +518,7 @@ function wpcf_admin_import_export_settings($data) {
 /**
  * Exports data to XML.
  */
-function wpcf_admin_export_data() {
+function wpcf_admin_export_data($download = true) {
     require_once WPCF_EMBEDDED_ABSPATH . '/common/array2xml.php';
     $xml = new ICL_Array2XML();
     $data = array();
@@ -620,6 +620,10 @@ function wpcf_admin_export_data() {
     $code .= (isset($_POST['embedded-settings']) && $_POST['embedded-settings'] == 'ask') ? 0 : 1;
     $code .= ';' . "\r\n";
     $code .= "\r\n?>";
+    
+    if (!$download) {
+        return $data;
+    }
 
     if (class_exists('ZipArchive')) {
         $zipname = $sitename . 'types.' . date('Y-m-d') . '.zip';

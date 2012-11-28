@@ -258,7 +258,7 @@ class EM_Calendar extends EM_Object {
 				global $wp_rewrite;
 				if( count($events) > 1 || !get_option('dbem_calendar_direct_links') ){
 					if( get_option("dbem_events_page") > 0 ){
-						$event_page_link = trailingslashit(get_permalink(get_option("dbem_events_page"))); //PAGE URI OF EM
+						$event_page_link = get_permalink(get_option("dbem_events_page")); //PAGE URI OF EM
 					}else{
 						if( $wp_rewrite->using_permalinks() ){
 							$event_page_link = trailingslashit(home_url()).EM_POST_TYPE_EVENT_SLUG.'/'; //don't use EM_URI here, since ajax calls this before EM_URI is defined.
@@ -267,7 +267,7 @@ class EM_Calendar extends EM_Object {
 						}
 					}
 					if( $wp_rewrite->using_permalinks() && !defined('EM_DISABLE_PERMALINKS') ){
-						$calendar_array['cells'][$day_key]['link'] = $event_page_link.$day_key."/";
+						$calendar_array['cells'][$day_key]['link'] = trailingslashit($event_page_link).$day_key."/";
 						if( !empty($day_link_args) ){
 							$calendar_array['cells'][$day_key]['link'] .= '?'.$day_link_args;
 						}
@@ -275,7 +275,7 @@ class EM_Calendar extends EM_Object {
 						$joiner = (stristr($event_page_link, "?")) ? "&amp;" : "?";				
 						$calendar_array['cells'][$day_key]['link'] = $event_page_link.$joiner."calendar_day=".$day_key;
 						if( !empty($day_link_args) ){
-							$calendar_array['cells'][$day_key]['link'] .= 'amp;'.$day_link_args;
+							$calendar_array['cells'][$day_key]['link'] .= '&amp;'.$day_link_args;
 						}
 					}
 				}else{

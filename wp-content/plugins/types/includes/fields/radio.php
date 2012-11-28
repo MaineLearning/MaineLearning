@@ -23,7 +23,7 @@
  * @return type 
  */
 function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') {
-    $id = 'wpcf-fields-radio-' . mt_rand();
+    $id = 'wpcf-fields-radio-' . wpcf_unique_id(serialize($form_data));
     $form['name'] = array(
         '#type' => 'textfield',
         '#title' => __('Name of custom field', 'wpcf'),
@@ -43,7 +43,12 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
     $form['options-markup-open'] = array(
         '#type' => 'markup',
         '#markup' => '<strong>' . __('Options', 'wpcf')
-        . '</strong><br /><br /><div id="' . $id . '-sortable"'
+        . '</strong><br /><br />'
+        . '<div class="wpcf-form-options-header-title">'
+        . '<em>' . __('Display text', 'wpcf') . '</em>'
+        . '</div><div class="wpcf-form-options-header-value">'
+        . '<em>' . __('Custom field content', 'wpcf') . '<em></div>'
+        . '<div id="' . $id . '-sortable"'
         . ' class="wpcf-fields-radio-sortable wpcf-compare-unique-value-wrapper">',
     );
 
@@ -92,7 +97,7 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
         '#markup' => '<div id="'
         . $id . '-add-option"></div><br /><a href="'
         . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=add_radio_option&amp;_wpnonce='
-                . wp_create_nonce('add_radio_option') .'&amp;wpcf_ajax_update_add='
+                . wp_create_nonce('add_radio_option') . '&amp;wpcf_ajax_update_add='
                 . $id . '-sortable&amp;parent_name=' . urlencode($parent_name)
                 . '&amp;count=' . $count)
         . '" onclick="wpcfFieldsFormCountOptions(jQuery(this));"'
@@ -152,7 +157,8 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
  * @return type 
  */
 function wpcf_fields_radio_get_option($parent_name = '', $form_data = array()) {
-    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-radio-option-' . mt_rand();
+    $id = isset($form_data['key']) ? $form_data['key'] : 'wpcf-fields-radio-option-'
+            . wpcf_unique_id(serialize($form_data));
     $form = array();
     $value = isset($_GET['count']) ? __('Option title', 'wpcf') . ' ' . $_GET['count'] : __('Option title',
                     'wpcf') . ' 1';

@@ -11,7 +11,7 @@ echo wpcf_add_admin_header(__('Help', 'wpcf'));
 
 <h3 style="margin-top:3em;"><?php _e('Documentation and Support', 'wpcf'); ?></h3>
 <ul>
-    <li><?php printf(__('%sUser Guides%s  - everything you need to know about using Types', 'wpcf'), '<a target="_blank" href="http://wp-types.com/documentation/user-guides/#1?utm_source=typesplugin&utm_medium=intro&utm_campaign=types"><strong>', ' &raquo;</strong></a>'); ?></li>
+    <li><?php printf(__('%sUser Guides%s  - everything you need to know about using Types', 'wpcf'), '<a target="_blank" href="http://wp-types.com/documentation/user-guides/?utm_source=typesplugin&utm_medium=intro&utm_campaign=types#Types"><strong>', ' &raquo;</strong></a>'); ?></li>
     <li><?php printf(__('%sTypes fields API%s (for developers) - Learn how to insert Types fields to PHP templates', 'wpcf'), '<a target="_blank" href="http://wp-types.com/documentation/functions/?utm_source=typesplugin&utm_medium=intro&utm_campaign=types"><strong>', ' &raquo;</strong></a>'); ?></li>
     <li><?php printf(__('%sSupport forum%s - register in our forum to receive support', 'wpcf'), '<a target="_blank" href="http://wp-types.com/support/register/?utm_source=typesplugin&utm_medium=intro&utm_campaign=types"><strong>', ' &raquo;</strong></a>'); ?></li>
 </ul>

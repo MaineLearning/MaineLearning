@@ -4,7 +4,7 @@ Donate link: http://www.ait-pro.com/aitpro-blog/331/bulletproof-security-plugin-
 Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability, website security, WordPress security
 Requires at least: 3.0 
 Tested up to: 3.5 
-Stable tag: .47.5 
+Stable tag: .47.6 
 
 WordPress Website Security Protection. Website security protection against: XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking... 
 
@@ -56,17 +56,21 @@ have additional website security measures in place as a standard. BulletProof Se
 = Translations =
 
 * Lithuanian by <a href="http://www.Host1Free.com" title="Lithuanian Language Translation by Vincent G from Host1Free.com" target="_blank">Vincent G from Host1Free.com</a>
+* Filipino/Tagalog by <a href="http://pointen.dk/" title="Filipino/Tagalog Language Translation by pointen.dk" target="_blank">pointen.dk</a>
 * If you would like to translate the BPS plugin to your language see this <a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" title="BPS Plugin Language Translation Tutorial" rel="nofollow" target="_blank">BPS Plugin Language Translation Tutorial</a>. Please include a link to your website so that we can add it here. Thank you.
+* Tip: If you use the Google Chrome Browser you can right mouse click in plugin pages and then click on Translate to... To translate plugin text into your Language.
 
 = BulletProof Security Features =
 
 * One-click .htaccess website security protection from within the WP Dashboard
 * .htaccess security protection against XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking attempts
+* .htaccess file backup and restore
+* .htaccess Lock / Unlock (404 Read-Only)
+* .htaccess AutoLock On or Off
 * Automatic .htaccess file updating on upgrade installation
 * New .htaccess security filters automatically added during upgrade
 * No need to reactivate BulletProof Modes when upgrading
 * WP Dashboard Alerts - Root and wp-admin .htaccess file checks
-* .htaccess file backup and restore
 * Anti Comment Spam .htaccess code - works together with Akismet or other Spam plugins to keep Comment Spam at a minimum
 * Anti Comment Spambot .htaccess code - Forbid Empty Referrer Spambots
 * TimThumb Vulnerability/Exploit .htaccess coding
@@ -83,7 +87,7 @@ have additional website security measures in place as a standard. BulletProof Se
 * Security Status Page - Displays website security status information
 * File and Folder Permission Checking - CGI / DSO SAPI check / display
 * Help & FAQ page - links to BPS Guide and other detailed Help & Info pages
-* Extensive Read Me! jQuery Dialog Help Windows throughout the BulletProof Security plugin pages
+* Extensive Read Me! jQuery Dialog Help buttons throughout the BulletProof Security plugin pages
 * Backup and Restore existing .htaccess files
 * Backup and Restore customized / modified .htaccess files
 * Add to, Edit, Modify the provided BulletProof Security .htaccess Master files
@@ -142,7 +146,7 @@ be altered, modified or changed. Activating BulletProof Modes again after upgrad
 
 = Where can I find BulletProof Security troubleshooting steps & support? =
 
-Please see the <a href="http://www.ait-pro.com/aitpro-blog/297/bulletproof-security-plugin-support/bulletproof-security-wordpress-plugin-support/" title="BulletProof Security WordPress Support" rel="nofollow" target="_blank">BulletProof Security WordPress Support page.</a>
+Please see the <a href="http://forum.ait-pro.com/forums/forum/bulletproof-security-free/" title="BulletProof Security Forum" rel="nofollow" target="_blank">BulletProof Security Forum.</a>
 
 = Does BulletProof Security work on every type of Server? =
 
@@ -179,19 +183,21 @@ Please check the BulletProof Security <a href="http://www.ait-pro.com/aitpro-blo
 
 = BulletProof Security Pro Feature Highlights =
 
-1. File Monitor - All WordPress and non-WordPress Files
-2. AutoRestore - Automatic File Restore
-3. Quarantine - Automatic File Quarantine
-4. .htaccess Website Security Protection
-5. Custom php.ini Website Security Protection
-6. F-Lock - Read Only File Locking
-7. Security Logging
-8. HTTP Error Logging
-9. PHP Error Logging
-10. Email Alerts
-11. Versatile Set of Pro-Tools
-12. Base64 Decoder / Encoder
-13. <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" title="BulletProof Security Features" rel="nofollow" target="_blank">View All BulletProof Security Pro Feature Details</a>
+1. AutoRestore - Automatic File Restore
+2. Quarantine - Automatic File Quarantine
+3. Plugins Folder Firewall
+4. Uploads Folder Anti-Exploit Guard
+5. Real-time File Monitor - All WordPress and non-WordPress Files
+6. .htaccess Website Security Protection
+7. Custom php.ini Website Security Protection
+8. F-Lock - Read Only File Locking
+9. Security Logging
+10. HTTP Error Logging
+11. PHP Error Logging
+12. Email Alerts
+13. Versatile Set of Pro-Tools
+14. Base64 Decoder / Encoder
+15. <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" title="BulletProof Security Features" rel="nofollow" target="_blank">View All BulletProof Security Pro Feature Details</a>
 
 = Is BulletProof Security Network / MU / Multisite Compatible? =
 
@@ -245,11 +251,20 @@ Yes, BulletProof Security works with Git, but does require some additional set u
 
 == Screenshots ==
 
-1. BulletProof Security Modes page
-2. BulletProof Security Status page
-3. BulletProof File Editing, Uploading and Downloading
+1. BulletProof Security - Security Modes page
+2. BulletProof Security - Security Status page
+3. BulletProof Security - System Info page
+4. BulletProof Security - Edit/Upload/Download page
 
 == Changelog ==
+
+= .47.6 =
+* BPS Master htaccess Folder Deny All .htaccess security protection automated
+* BPS Backup Folder Deny All .htaccess security protection automated
+* Turn On AutoLock / Turn Off AutoLock options/buttons added
+* General Coding Improvements & Enhancements
+* Visual Improvements/Enhancements
+* Enjoy!
 
 = .47.5 =
 * General Coding Improvements & Enhancements:
@@ -523,6 +538,14 @@ Create new Master .htaccess files with AutoMagic and activate all BulletProof Mo
 
 == Upgrade Notice ==
 
+= .47.6 =
+* BPS Master htaccess Folder Deny All .htaccess security protection automated
+* BPS Backup Folder Deny All .htaccess security protection automated
+* Turn On AutoLock / Turn Off AutoLock options/buttons added
+* General Coding Improvements & Enhancements
+* Visual Improvements/Enhancements
+* Enjoy!
+
 = .47.5 =
 * General Coding Improvements & Enhancements:
 * WordPress 3.5 pre-release coding added
@@ -542,20 +565,11 @@ the particular section or page of the BulletProof Security plugin that you are i
 Help and FAQ page contains links to Help pages that will load in a new browser tab so
 that you are not redirected away from your WordPress Dashboard. 
 
-What's New in .47.5
+What's New in .47.6
 
-* Coding Improvements & Enhancements:
-* BPS Pro .47.5 primarily focuses on coding enhancements and improvements before moving forward with adding new features in the next version release of BPS.
-* Primary Focuses:
-* WordPress 3.5 pre-release coding added
-* Visual Improvements/Enhancements
-* jQuery coding Improvements/Enhancements
-* PHP coding Improvements/Enhancements
-* .htaccess code Additions and Improvements
-* Anti-Comment Spam .htaccess coding added
-* General Overall Coding Improvements/Enhancements/Requests and bugfixes
-* DNS Host Name Check for htaccess file auto-lock
-* Screenshot image files moved to the assets folder to reduce plugin size = speedier upgrades
-* BPS Pro Affiliate Program:
-* BPS Pro now has an Affiliate Program. Affiliate commission payout is 25%. If you are interested in signing up visit the <a href="http://affiliates.ait-pro.com/" title="BulletProof Security Pro Affiliate Program" rel="nofollow" target="_blank">BulletProof Security Pro Affiliate Program website.</a>
+* BPS Master htaccess Folder Deny All .htaccess security protection automated: The BPS Master htaccess Folder Deny All .htaccess security file is now automatically created if it does not already exist. Manual controls are still available on the Security Modes page to manually Activate Deny All htaccess Folder Protection For The BPS Master htaccess Folder.
+* BPS Backup Folder Deny All .htaccess security protection automated: The BPS Backup Folder Deny All .htaccess security file is now automatically created if it does not already exist. Manual controls are still available on the Security Modes page to manually Activate Deny All htaccess Folder Protection For The BPS Backup Folder.
+* Turn On AutoLock / Turn Off AutoLock options/buttons added: AutoLock is designed to automatically lock your root .htaccess file to save you an additional step of locking your root .htaccess file when performing certain actions, tasks or functions and AutoLock also automatically locks your root .htaccess during BPS Pro upgrades. This can be a problem for some folks whose Web Hosts do not allow locking the root .htaccess file with 404 file permissions and can cause 403 errors and/or cause a website to crash. For 99.99% of folks leaving AutoLock turned On will work fine. If your Web Host ONLY allows 644 file permissions for your root .htaccess file then click the Turn Off AutoLock button. This turns Off AutoLocking for all BPS actions, tasks, functions and also for BPS upgrades.
+* General Coding Improvements & Enhancements: Of course, but why not mention it anyway.
+* Visual Improvements & Enhancements: The buttons throughout BPS are now a shiny blue gel on hover and other visual improvements and enhancements.
 * Enjoy!

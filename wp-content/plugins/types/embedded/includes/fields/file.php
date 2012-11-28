@@ -40,7 +40,7 @@ function wpcf_fields_file_meta_box_form($field, $element, $image = false) {
     WHERE post_type = 'attachment' AND guid=%s",
                         $field['value']));
     }
-
+	
     // Set preview
     $preview = '';
     if (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy') {
@@ -48,7 +48,11 @@ function wpcf_fields_file_meta_box_form($field, $element, $image = false) {
             $preview = wp_get_attachment_image($attachment_id, 'thumbnail');
         } else {
             // If external image set preview
-            $file = pathinfo($field['value']);
+            $file_path=parse_url($field['value']);
+            if ($file_path && isset($file_path['path']))
+                $file=pathinfo($file_path['path']);
+            else
+                $file = pathinfo($field['value']);
             if (isset($file['extension'])
                     && in_array($file['extension'],
                             array('jpg', 'jpeg', 'gif', 'png'))) {

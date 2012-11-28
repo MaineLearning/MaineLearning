@@ -25,8 +25,8 @@ function wpcf_access_teaser_init() {
  * Teaser menu hook. 
  */
 function wpcf_access_teaser_admin_menu() {
-    $hook = add_submenu_page('wpcf', __('Access', 'wpcf'),
-            __('Access', 'wpcf'), 'manage_options', 'wpcf-access',
+    $hook = add_submenu_page('wpcf', __('Access Control and User Roles', 'wpcf'),
+            __('Access Control and User Roles', 'wpcf'), 'manage_options', 'wpcf-access',
             'wpcf_access_teaser_admin_menu_page');
     add_action('load-' . $hook, 'wpcf_access_teaser_admin_menu_load');
 }
@@ -40,6 +40,8 @@ function wpcf_access_teaser_admin_menu_load() {
             array(), WPCF_VERSION);
     wp_enqueue_style('wpcf-access', WPCF_ACCESS_RELPATH . '/css/basic.css',
             array(), WPCF_VERSION);
+    wp_enqueue_style('wpcf-access-suggest', WPCF_ACCESS_RELPATH . '/css/suggest.css',
+            array(), WPCF_VERSION);
     wp_enqueue_script('wpcf-access', WPCF_ACCESS_RELPATH . '/js/basic.js',
             array('jquery'));
 }
@@ -49,12 +51,11 @@ function wpcf_access_teaser_admin_menu_load() {
  */
 function wpcf_access_teaser_admin_menu_page() {
     echo wpcf_add_admin_header(__('Access', 'wpcf'), 'icon-wpcf-access');
-    echo '<p>' . __('Access management is part of the <strong>Types Plus</strong> package.',
+    echo '<p>' . __('To enjoy access management for your site, you need to have the Access plugin.',
             'wpcf')
-    . '<br />' . __('It lets you quickly set access rules for different user types and grant access to specific users.',
-            'wpcf')
-    . '<br /><br /><a href="http://www.wp-types.com" class="button-primary" target="_blank">'
-    . __('Buy Types Plus') . '</a>' . '<br /><br /></p>';
+    . '<br /><br /><a href="http://wp-types.com/home/types-access/?utm_source=typesplugin&utm_medium=accessadmin&utm_term=Meet&utm_campaign=typesplugin" class="button-primary" target="_blank">'
+    . __('Meet Access') . '</a>&nbsp;<a href="http://wp-types.com/buy/?utm_source=typesplugin&utm_medium=accessadmin&utm_term=Pricing&utm_campaign=typesplugin" class="button-primary" target="_blank">'
+    . __('Pricing') . '</a>' . '<br /><br /></p>';
     require_once WPCF_ACCESS_INC . '/admin-edit-access.php';
     wpcf_access_admin_edit_access(false);
     echo wpcf_add_admin_footer();

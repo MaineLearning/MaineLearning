@@ -66,7 +66,7 @@ class EF_User_Groups extends EF_Module {
 				),
 			'settings_help_sidebar' => __( '<p><strong>For more information:</strong></p><p><a href="http://editflow.org/features/user-groups/">User Groups Documentation</a></p><p><a href="http://wordpress.org/tags/edit-flow?forum_id=10">Edit Flow Forum</a></p><p><a href="https://github.com/danielbachhuber/Edit-Flow">Edit Flow on Github</a></p>', 'edit-flow' ),
 		);
-		$this->module = $edit_flow->register_module( 'user_groups', $args );
+		$this->module = EditFlow()->register_module( 'user_groups', $args );
 		
 	}
 	
@@ -162,7 +162,7 @@ class EF_User_Groups extends EF_Module {
 			$wpdb->update( $wpdb->term_taxonomy, array( 'taxonomy' => self::taxonomy_key ), array( 'taxonomy' => 'following_usergroups' ) );
 
 			// Get all of the users who are a part of user groups and assign them to their new user group values
-			$query = $wpdb->prepare( "SELECT * FROM $wpdb->usermeta WHERE meta_key='wp_ef_usergroups';" );
+			$query = "SELECT * FROM $wpdb->usermeta WHERE meta_key='wp_ef_usergroups';";
 			$usergroup_users = $wpdb->get_results( $query );
 
 			// Sort all of the users based on their usergroup(s)
@@ -190,7 +190,12 @@ class EF_User_Groups extends EF_Module {
 			$edit_flow->update_module_option( $this->module->name, 'loaded_once', true );
 
 		}
-		
+		// Upgrade path to v0.7.4
+		if ( version_compare( $previous_version, '0.7.4', '<' ) ) {
+			// Usergroup descriptions become base64_encoded, instead of maybe json_encoded.
+			$this->upgrade_074_term_descriptions( self::taxonomy_key );
+		}
+
 	}
 	
 	/**
@@ -381,7 +386,7 @@ class EF_User_Groups extends EF_Module {
 		);
 		// Gracefully handle the case where all users have been unsubscribed from the user group
 		$users = isset( $_POST['usergroup_users'] ) ? (array)$_POST['usergroup_users'] : array();
-		array_map( 'intval', $users );
+		$users = array_map( 'intval', $users );
 		$usergroup = $this->update_usergroup( $existing_usergroup->term_id, $args, $users );
 		if ( is_wp_error( $usergroup ) )
 			wp_die( __( 'Error updating user group.', 'edit-flow' ) );

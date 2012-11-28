@@ -3,8 +3,8 @@ Contributors: ddean
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=6BKDCMJRYPKNN&lc=US&item_name=BP%20Group%20Organizer&currency_code=USD
 Tags: buddypress, group, groups, edit, organize, move, drag and drop
 Requires at least: 3.1
-Tested up to: 3.4.1
-Stable tag: 1.0.5
+Tested up to: 3.5
+Stable tag: 1.0.7
 
 Easily create, edit, and delete BuddyPress groups - with drag and drop simplicity
 
@@ -40,6 +40,15 @@ No questions yet.
 
 == Changelog ==
 
+= 1.0.7 =
+* Fixed: short open tag introduced in 1.0.6 - thanks, nfocom
+
+= 1.0.6 =
+* Added: Import / export group structure to CSV
+* Added: support for bbPress group forums
+* Added: support for BP 1.7 Groups admin menu
+* Changed: updated buttons for WP 3.5
+
 = 1.0.5 =
 * Fixed: group forums were not fully initialized for groups created in the Organizer - thanks, thosch
 * Changed: dropped BP 1.2 compatibility; no code was removed, but this release is not tested against BP 1.2
@@ -71,6 +80,12 @@ No questions yet.
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.0.7 =
+Fixed short open tag - all users with short_open_tag off should upgrade immediately
+
+= 1.0.6 =
+Import / export group structure, other updates
 
 = 1.0.5 =
 Bug fix for group forums

@@ -146,6 +146,8 @@ way to fit your requirements.
 
 .editor_addon_dropdown .group {
     margin-bottom: 20px;
+    display:block;
+    width:100%;
 }
 
 .editor_addon_dropdown .group .group .group-title {
