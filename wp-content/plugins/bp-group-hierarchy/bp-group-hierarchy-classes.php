@@ -22,7 +22,7 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 	function __construct( $id, $parent_id = 0 ) {
 		
 		global $bp, $wpdb;
-		
+
 		if(!isset($bp->table_prefix)) {
 			bp_group_hierarchy_debug('BP not loaded');
 			return;
@@ -247,10 +247,15 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 	
 	/**
 	 * Compatibility function for BP 1.2 - 1.5
+	 * This function will be removed soon
 	 */
 	function get_active() {
 		_deprecated_function( 'BP_Groups_Hierarchy::get_active()', '1.3.4', 'BP_Groups_Hierarchy::get()' );
 		if(method_exists('BP_Groups_Group','get')) {
+			
+			if( (float)bp_get_version() >= 1.7 ) {
+				return self::get( array( 'type'=>'active' ) );
+			}
 			return self::get('active');
 		}
 	}
@@ -271,7 +276,9 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 		
 		if ( $limit && $page ) {
 			$pag_sql = $wpdb->prepare( " LIMIT %d, %d", intval( ( $page - 1 ) * $limit), intval( $limit ) );
-			$total_groups = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(DISTINCT g.id) FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql}" ) );
+			$total_groups = $wpdb->get_var( "SELECT COUNT(DISTINCT g.id) FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql}" );
+		} else {
+			$pag_sql = '';
 		}
 		
 		switch($type) {
@@ -295,9 +302,9 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 		}
 		
 		if($type == 'prolific') {
-			$paged_groups = $wpdb->get_results( $wpdb->prepare( "SELECT g.*, (SELECT COUNT(id)FROM wp_bp_groups g2 WHERE g2.parent_id = g.id) AS child_groups, gm1.meta_value as total_member_count, gm2.meta_value as last_activity FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql} {$order_sql} {$pag_sql}"  ) );
+			$paged_groups = $wpdb->get_results( "SELECT g.*, (SELECT COUNT(id)FROM wp_bp_groups g2 WHERE g2.parent_id = g.id) AS child_groups, gm1.meta_value as total_member_count, gm2.meta_value as last_activity FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql} {$order_sql} {$pag_sql}" );
 		} else {
-			$paged_groups = $wpdb->get_results( $wpdb->prepare( "SELECT g.*, gm1.meta_value as total_member_count, gm2.meta_value as last_activity FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql} {$order_sql} {$pag_sql}"  ) );
+			$paged_groups = $wpdb->get_results( "SELECT g.*, gm1.meta_value as total_member_count, gm2.meta_value as last_activity FROM {$bp->groups->table_name_groupmeta} gm1, {$bp->groups->table_name_groupmeta} gm2, {$bp->groups->table_name} g WHERE g.id = gm1.group_id AND g.id = gm2.group_id AND gm2.meta_key = 'last_activity' AND gm1.meta_key = 'total_member_count' AND g.parent_id = $parent_id {$hidden_sql} {$search_sql} {$order_sql} {$pag_sql}" );
 		}
 
 		foreach ( (array)$paged_groups as $key => $group ) {
@@ -312,7 +319,11 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 			$group_ids = $wpdb->escape( join( ',', (array)$group_ids ) );
 			$paged_groups = self::get_group_extras( $paged_groups, $group_ids, 'newest' );
 		}
-
+		
+		if( ! isset( $total_groups ) ) {
+			$total_groups = count( $paged_groups );
+		}
+		
 		return array( 'groups' => $paged_groups, 'total' => $total_groups );
 	}
 
@@ -336,7 +347,7 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 
 	function get_tree() {
 		global $wpdb, $bp;
-		$groups = $wpdb->get_results( $wpdb->prepare( "SELECT g.* FROM {$bp->groups->table_name} g ORDER BY g.parent_id"  ) );
+		$groups = $wpdb->get_results( "SELECT g.* FROM {$bp->groups->table_name} g ORDER BY g.parent_id" );
 		return $groups;
 		
 	}

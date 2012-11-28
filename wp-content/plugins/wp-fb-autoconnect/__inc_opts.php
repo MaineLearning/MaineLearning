@@ -3,7 +3,7 @@
 //General Info
 global $jfb_name, $jfb_version, $jfb_homepage;
 $jfb_name       = "WP-FB AutoConnect";
-$jfb_version    = "2.3.7";
+$jfb_version    = "2.4.1";
 $jfb_homepage   = "http://www.justin-klein.com/projects/wp-fb-autoconnect";
 $jfb_data_url   = plugins_url(dirname(plugin_basename(__FILE__)));
 
@@ -48,6 +48,25 @@ $jfb_default_email  = '@unknown.com';
 $jfb_callback_list = array(); 
 
 
+//A wrapper function to pull data from the Facebook Graph API
+function jfb_get($url)
+{
+    //Try to access the URL
+    $result = wp_remote_get($url, array( 'sslverify' => false ));
+    
+    //In some rare situations, Wordpress may unexpectedly return WP_Error.  If so, I'll create a Facebook-style error object
+    //so my Facebook-style error handling will pick it up without special cases everywhere.
+    if(is_wp_error($result))
+    {
+        $result->error->message = "wp_remote_get() failed!";
+        if( method_exists($result, 'get_error_message')) $result->error->message .= " Message: " . $result->get_error_message();
+        return $result;
+    }
+    
+    //Otherwise, we're OK - decode the JSON text provided by Facebook into a PHP object.
+    return json_decode($result['body']);
+}
+
 //Error reporting function
 function j_die($msg)
 {
@@ -90,9 +109,10 @@ function j_mail($subj, $msg='')
 			else      $msg .= sprintf("%-9s", $keys[$i]) . ") " . round( $value / (1024*1024), 2) . "M (+".round(($value-$jfb_debug_array[$keys[$i-1]]['mem'])/(1024*1024),2)."M)\n";
 		}
 		$msg .= "LIMIT    ) " . ini_get('memory_limit') . "\n";
-		        
+		
+		$msg .= "\n---USER AGENT:---\n" . $_SERVER['HTTP_USER_AGENT'] . "\n";
         $msg .= "\n---REQUEST:---\n" . print_r($_REQUEST, true);
-        mail(get_option($opt_jfb_email_to), $subj, $msg);
+        wp_mail(get_option($opt_jfb_email_to), $subj, $msg);
     }
 }
 
@@ -123,54 +143,44 @@ function jfb_premium()
 
 /**
  * Simple browser detection, for logging (from http://php.net/manual/en/function.get-browser.php)
+ * (Doesn't require browscap.ini to be installed on the server, like standard PHP get_browser())
  */
 function jfb_get_browser()
 {
     $u_agent = $_SERVER['HTTP_USER_AGENT'];
     $bname = 'Unknown';
+    $shortname = 'Unknown';
     $platform = 'Unknown';
     $version= "";
-    if (preg_match('/linux/i', $u_agent))                                                       $platform = 'Linux';
+	
+	//Get platform
+	if     (preg_match('/android/i', $u_agent))                                                 $platform = 'Android';	//Must come BEFORE 'linux'
+	elseif (preg_match('/linux/i', $u_agent))                                                   $platform = 'Linux';
+    elseif (preg_match('/iphone/i',$u_agent))                                                   $platform = 'iPhone'; 	//Must come BEFORE 'mac'
+	elseif (preg_match('/ipad/i',$u_agent))                                                     $platform = 'iPad';		//Must come BEFORE 'mac'
     elseif (preg_match('/macintosh|mac os x/i', $u_agent) && !preg_match('/iPhone/i',$u_agent)) $platform = 'Mac';
-    elseif (preg_match('/iPhone/i',$u_agent))                                                   $platform = 'iPhone';
     elseif (preg_match('/windows|win32/i', $u_agent))                                           $platform = 'Windows';
-    if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) {$bname = 'Internet Explorer'; $ub = "MSIE"; }
-    elseif(preg_match('/Firefox/i',$u_agent))                              {$bname = 'Mozilla Firefox'; $ub = "Firefox"; }
-    elseif(preg_match('/Chrome/i',$u_agent))                               {$bname = 'Google Chrome'; $ub = "Chrome"; }
-    elseif(preg_match('/Safari/i',$u_agent))                               {$bname = 'Apple Safari'; $ub = "Safari"; }
-    elseif(preg_match('/Opera/i',$u_agent))                                {$bname = 'Opera'; $ub = "Opera"; }
-    elseif(preg_match('/Netscape/i',$u_agent))                             {$bname = 'Netscape'; $ub = "Netscape"; }
-    $known = array('Version', $ub, 'other');
+	
+	//Get name and shortname
+    if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) {$bname = 'Internet Explorer'; $shortname = "MSIE"; }
+    elseif(preg_match('/Firefox/i',$u_agent))                              {$bname = 'Mozilla Firefox'; $shortname = "Firefox"; }
+    elseif(preg_match('/Chrome/i',$u_agent))                               {$bname = 'Google Chrome'; $shortname = "Chrome"; }
+    elseif(preg_match('/Safari/i',$u_agent))                               {$bname = 'Apple Safari'; $shortname = "Safari"; }
+    elseif(preg_match('/Opera/i',$u_agent))                                {$bname = 'Opera'; $shortname = "Opera"; }
+    elseif(preg_match('/Netscape/i',$u_agent))                             {$bname = 'Netscape'; $shortname = "Netscape"; }
+
+	//Get version
+    $known = array('Version', $shortname, 'other');
     $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-    if (!@preg_match_all($pattern, $u_agent, $matches)) {}
+    @preg_match_all($pattern, $u_agent, $matches);
     $i = count($matches['browser']);
-    if ($i != 1 && strripos($u_agent,"Version") < strripos($u_agent,$ub))  $version= $matches['version'][0]; 
-    else if($i != 1)                                                       $version= $matches['version'][1];
-    else                                                                   $version= $matches['version'][0];
+    if ($i != 1 && strripos($u_agent,"Version") < strripos($u_agent,$shortname))$version= $matches['version'][0]; 
+    else if($i != 1)                                                       		$version= $matches['version'][1];
+    else                                                                   		$version= $matches['version'][0];
     if ($version==null || $version=="") {$version="?";}
-    return array('userAgent'=>$u_agent, 'name'=>$bname, 'shortname'=>$ub, 'version'=>$version, 'platform'=>$platform, 'pattern'=>$pattern );
+	
+	//Done - return!
+    return array('name'=>$bname, 'shortname'=>$shortname, 'version'=>$version, 'platform'=>$platform );
 } 
 
-
-//This is TEMPORARY DEBUG code. In order to try and figure out that strange "nonce check failed" bug,
-//I'll log the components used to generate the nonce (see wp_create_nonce()).  Then if the check fails,
-//I can compare what's changed from when the form was submitted until _process_login.php started.
-//Hopefully this'll reveal the cause of the problem...
-global $opt_jfb_generated_nonce;
-$opt_jfb_generated_nonce = "jfb_nonce_debugging";
-function jfb_debug_nonce_components()
-{
-    global $opt_jfb_generated_nonce;
-    $user = wp_get_current_user();
-	$uid = (int) $user->id;
-	
-	$nonce_life = apply_filters('nonce_life', 86400);
-	$time = time();
-	$nonce_tick = ceil(time() / ( $nonce_life / 2 ));
-	$tick_verify = wp_nonce_tick();
-	
-	$hash = wp_hash($i . $action . $uid, 'nonce');
-    $nonce = substr($hash, -12, 10);
-    return "NONCE: $nonce, uid: $uid, life: $nonce_life, time: $time, tick: $nonce_tick, verify: $tick_verify, hash: $hash";
-}
 ?>

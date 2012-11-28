@@ -50,7 +50,7 @@ function em_bookings_page(){
 function em_bookings_dashboard(){
 	global $EM_Notices;
 	?>
-	<div class='wrap'>
+	<div class='wrap em-bookings-dashboard'>
 		<?php if( is_admin() ): ?>
 		<div id='icon-users' class='icon32'>
 			<br/>
@@ -60,22 +60,26 @@ function em_bookings_dashboard(){
   		</h2>
   		<?php else: echo $EM_Notices; ?>
   		<?php endif; ?>
-		<?php if( is_admin() ): ?>
-		<div class="icon32" id="icon-bookings"><br></div>
-		<?php endif; ?>
-		<h2><?php _e('Recent Bookings','dbem'); ?></h2>	
-  		<?php
-		$EM_Bookings_Table = new EM_Bookings_Table();
-		$EM_Bookings_Table->status = get_option('dbem_bookings_approval') ? 'needs-attention':'confirmed';
-		$EM_Bookings_Table->output();
-  		?>
+  		<div class="em-bookings-recent">
+			<?php if( is_admin() ): ?>
+			<div class="icon32" id="icon-bookings"><br></div>
+			<?php endif; ?>
+			<h2><?php _e('Recent Bookings','dbem'); ?></h2>	
+	  		<?php
+			$EM_Bookings_Table = new EM_Bookings_Table();
+			$EM_Bookings_Table->status = get_option('dbem_bookings_approval') ? 'needs-attention':'confirmed';
+			$EM_Bookings_Table->output();
+	  		?>
+  		</div>
   		<br class="clear" />
-		<?php if( is_admin() ): ?>
-		<div class="icon32" id="events"><br></div>
-		<?php endif; ?>
-		<h2><?php _e('Events With Bookings Enabled','dbem'); ?></h2>		
-		<?php em_bookings_events_table(); ?>
-		<?php do_action('em_bookings_dashboard'); ?>
+  		<div class="em-bookings-events">
+			<?php if( is_admin() ): ?>
+			<div class="icon32" id="events"><br></div>
+			<?php endif; ?>
+			<h2><?php _e('Events With Bookings Enabled','dbem'); ?></h2>		
+			<?php em_bookings_events_table(); ?>
+			<?php do_action('em_bookings_dashboard'); ?>
+		</div>
 	</div>
 	<?php		
 }
@@ -458,7 +462,10 @@ function em_bookings_person(){
   		<h2>
   			<?php _e('Manage Person\'s Booking', 'dbem'); ?>
   			<?php if( current_user_can('edit_users') ) : ?>
-  			<a href="<?php admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="button add-new-h2"><?php _e('Edit User','dbem') ?></a>
+  			<a href="<?php echo admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="button add-new-h2"><?php _e('Edit User','dbem') ?></a>
+  			<?php endif; ?>
+  			<?php if( current_user_can('delete_users') ) : ?>
+  			<a href="<?php echo wp_nonce_url( "users.php?action=delete&amp;user=$EM_Person->ID", 'bulk-users' ); ?>" class="button add-new-h2"><?php _e('Delete User','dbem') ?></a>
   			<?php endif; ?>
   		</h2>
   		<?php if( !is_admin() ) echo $EM_Notices; ?>

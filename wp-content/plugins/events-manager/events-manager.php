@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Events Manager
-Version: 5.2.6
+Version: 5.3
 Plugin URI: http://wp-events-plugin.com
 Description: Event registration and booking management for WordPress. Recurring events, locations, google maps, rss, ical, booking registration and more!
 Author: Marcus Sykes
@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Setting constants
-define('EM_VERSION', 5.252); //self expanatory
+define('EM_VERSION', 5.292); //self expanatory
 define('EM_PRO_MIN_VERSION', 2.221); //self expanatory
 define('EM_DIR', dirname( __FILE__ )); //an absolute path to this directory
 define('EM_SLUG', plugin_basename( __FILE__ )); //for updates
@@ -418,7 +418,7 @@ function em_load_event(){
 			$EM_Event = new EM_Event($_REQUEST['event_id']);
 		}elseif( isset($_REQUEST['post']) && (get_post_type($_REQUEST['post']) == 'event' || get_post_type($_REQUEST['post']) == 'event-recurring') ){
 			$EM_Event = em_get_event($_REQUEST['post'], 'post_id');
-		}elseif ( !empty($_REQUEST['event_slug']) && EM_MS_GLOBAL && is_main_blog() && !get_site_option('dbem_ms_global_events_links')) {
+		}elseif ( !empty($_REQUEST['event_slug']) && EM_MS_GLOBAL && is_main_site() && !get_site_option('dbem_ms_global_events_links')) {
 			// single event page for a subsite event being shown on the main blog
 			global $wpdb;
 			$matches = array();
@@ -433,7 +433,7 @@ function em_load_event(){
 			$EM_Location = new EM_Location($_REQUEST['location_id']);
 		}elseif( isset($_REQUEST['post']) && get_post_type($_REQUEST['post']) == 'location' ){
 			$EM_Location = em_get_location($_REQUEST['post'], 'post_id');
-		}elseif ( !empty($_REQUEST['location_slug']) && EM_MS_GLOBAL && is_main_blog() && !get_site_option('dbem_ms_global_locations_links')) {
+		}elseif ( !empty($_REQUEST['location_slug']) && EM_MS_GLOBAL && is_main_site() && !get_site_option('dbem_ms_global_locations_links')) {
 			// single event page for a subsite event being shown on the main blog
 			global $wpdb;
 			$matches = array();
@@ -490,7 +490,7 @@ class EM_MS_Globals {
 			'dbem_ms_global_events', 'dbem_ms_global_events_links','dbem_ms_events_slug',
 			'dbem_ms_global_locations','dbem_ms_global_locations_links','dbem_ms_locations_slug','dbem_ms_mainblog_locations',
 			//mail
-			'dbem_rsvp_mail_port', 'dbem_mail_sender_address', 'dbem_smtp_password', 'dbem_smtp_username','dbem_smtp_host', 'dbem_mail_sender_name','dbem_smtp_host','dbem_rsvp_mail_send_method','dbem_rsvp_mail_SMTPAuth',
+			'dbem_rsvp_mail_port', 'dbem_mail_sender_address', 'dbem_smtp_password', 'dbem_smtp_username','dbem_smtp_host', 'dbem_mail_sender_name','dbem_smtp_html','dbem_smtp_html_br','dbem_smtp_host','dbem_rsvp_mail_send_method','dbem_rsvp_mail_SMTPAuth',
 			//images
 			'dbem_image_max_width','dbem_image_max_height','dbem_image_max_size'
 		);
@@ -616,6 +616,11 @@ function em_delete_blog( $blog_id ){
 	$wpdb->query('DROP TABLE '.$prefix.'em_tickets');
 	$wpdb->query('DROP TABLE '.$prefix.'em_tickets_bookings');
 	$wpdb->query('DROP TABLE '.$prefix.'em_meta');
+	//delete events if MS Global
+	if( EM_MS_GLOBAL ){
+	    EM_Events::delete(array('limit'=>0, 'blog'=>$blog_id));
+	    EM_Locations::delete(array('limit'=>0, 'blog'=>$blog_id));
+	}
 }
 add_action('delete_blog','em_delete_blog');
 

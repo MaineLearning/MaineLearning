@@ -60,4 +60,25 @@ function bp_get_groups_hierarchy_root_slug() {
 
 }
 
+/**
+ * Detect whether the new BP 1.7+ "Groups" menu item is available
+ */
+function bpgh_has_groups_admin_menu() {
+
+	/**
+	 * Hack to detect new toplevel Groups menu item
+	 */
+	global $admin_page_hooks;
+	return isset( $admin_page_hooks['bp-groups'] );
+}
+
+/**
+ * Compatibility function for getting BP version on BP 1.5-1.7
+ */
+if( ! function_exists( 'bp_get_version' ) ) {
+	function bp_get_version() {
+		return BP_VERSION;
+	}
+}
+
 ?>

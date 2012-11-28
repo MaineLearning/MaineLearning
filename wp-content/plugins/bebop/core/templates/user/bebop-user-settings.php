@@ -22,12 +22,12 @@ if ( bp_is_my_profile() ) {
 			$active_extensions = bebop_extensions::bebop_get_active_extension_names();
 			if ( count( $active_extensions ) == 0 ) {
 				echo '<p>';
-				_e( 'No extensions are currently active. Please activate them in the bebop OER providers admin panel.', 'bebop' );
+				_e( 'No extensions are currently active. Please activate them in the bebop content providers admin panel.', 'bebop' );
 				echo '</p>';
 			}
 			else {
 				echo '<div class="help"><p>';
-				_e( 'Bebop allows you to add content from external accounts to your profile. This means you can pull in content from sites such as YouTube, Vimeo, Flickr and others. This content is then added you your activity stream, once you have verified it in the OER manager.', 'bebop' );
+				_e( 'Bebop allows you to add content from external accounts to your profile. This means you can pull in content from sites such as YouTube, Vimeo, Flickr and others. This content is then added to your activity stream, once you have verified it in the content manager.', 'bebop' );
 				echo '</p>
 				<p>';
 				_e( 'To add an account, click on the relevant button below. You will then be guided through the setup process.', 'bebop' );

@@ -1078,7 +1078,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$variation_index = hexdec( substr(md5(get_site_url()), -1) ) % count($benefit_variations);
 		$selected_variation = $benefit_variations[$variation_index];
 
-		$pro_version_link = 'http://w-shadow.com/admin-menu-editor-pro/upgrade-to-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=sidebar_link_bv' . $variation_index . '&utm_campaign=Plugins';
+		$pro_version_link = 'http://adminmenueditor.com/upgrade-to-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=sidebar_link_bv' . $variation_index . '&utm_campaign=Plugins';
 	?>
 		<div class="clear"></div>
 
@@ -1089,7 +1089,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 				<ul>
 					<li><?php echo $selected_variation; ?></li>
                     <li>Drag items between menu levels.</li>
-                    <li>Menu export & import.</li>
+                    <li>Menu export &amp; import.</li>
 				</ul>
 				<a href="<?php echo esc_attr($pro_version_link); ?>" target="_blank">Learn more</a>
 			</div>
@@ -1282,7 +1282,7 @@ window.wsMenuEditorPro = false; //Will be overwritten if extras are loaded
 		(function($){
 			$('#screen-meta-links').append(
 				'<div id="ws-pro-version-notice">' +
-					'<a href="http://w-shadow.com/admin-menu-editor-pro/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=top_upgrade_link&utm_campaign=Plugins" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
+					'<a href="http://adminmenueditor.com/?utm_source=Admin%2BMenu%2BEditor%2Bfree&utm_medium=text_link&utm_content=top_upgrade_link&utm_campaign=Plugins" id="ws-pro-version-notice-link" class="show-settings" target="_blank" title="View Pro version details">Upgrade to Pro</a>' +
 				'</div>'
 			);
 		})(jQuery);

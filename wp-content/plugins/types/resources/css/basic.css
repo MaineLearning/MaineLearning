@@ -273,3 +273,13 @@ input.wpcf-form-error {
 #wpcf-types-form-rewrite-toggle {
     margin: 0 0 20px 0;
 }
+
+/* SETTINGS PAGE */
+.horlist {
+    margin-bottom: 12px;
+}
+.horlist li {
+    float: left;
+    line-height: 20px;
+    margin-right: 10px;
+}

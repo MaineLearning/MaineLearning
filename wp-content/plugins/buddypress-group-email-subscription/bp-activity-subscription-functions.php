@@ -101,8 +101,7 @@ function ass_group_notification_forum_posts( $post_id ) {
 		$action = $activity->action  = sprintf( __( '%s started the forum topic "%s" in the group "%s"', 'bp-ass' ), bp_core_get_user_displayname( $post->poster_id ), $topic->topic_title, $group->name );
 
 		$subject     = apply_filters( 'bp_ass_new_topic_subject', $action . ' ' . $blogname, $action, $blogname );
-		$the_content = apply_filters( 'bp_ass_new_topic_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $activity );
-
+		$the_content = apply_filters( 'bp_ass_new_topic_content', $post->post_text, $activity );
 	}
 	// this is a forum reply
 	else {
@@ -124,8 +123,11 @@ function ass_group_notification_forum_posts( $post_id ) {
 		$activity->primary_link = $primary_link;
 
 		$subject     = apply_filters( 'bp_ass_forum_reply_subject', $action . ' ' . $blogname, $action, $blogname );
-		$the_content = apply_filters( 'bp_ass_forum_reply_content', html_entity_decode( strip_tags( stripslashes( $post->post_text ) ), ENT_QUOTES ), $activity );
+		$the_content = apply_filters( 'bp_ass_forum_reply_content', $post->post_text, $activity );
 	}
+
+	// Convert entities and do other cleanup
+	$the_content = ass_clean_content( $the_content );
 
 	// setup the email meessage
 	$message = sprintf(__('%s
@@ -318,7 +320,12 @@ function ass_group_forum_record_digest( $activity ) {
 add_action( 'bp_activity_after_save', 'ass_group_forum_record_digest' );
 
 /**
- * The email notification function for all other activity
+ * Records group activity items in GES for all activity except:
+ *  - group forum posts (handled in ass_group_notification_forum_posts())
+ *  - created and joined group entries (irrelevant)
+ *
+ * You can do more fine-grained activity filtering with the
+ * 'ass_block_group_activity_types' filter.
  */
 function ass_group_notification_activity( $content ) {
 	global $bp;
@@ -326,10 +333,6 @@ function ass_group_notification_activity( $content ) {
 	$type      = $content->type;
 	$component = $content->component;
 	$sender_id = $content->user_id;
-
-	// the first two are handled above, the last is skipped entirely
-	if ( $type == 'new_forum_topic' || $type == 'new_forum_post' || $type == 'created_group' )
-		return;
 
 	// get group activity update replies to work (there is no group id passed in $content, but we can get it from $bp)
 	if ( $type == 'activity_comment' && bp_is_groups_component() && $component == 'activity' )
@@ -339,10 +342,12 @@ function ass_group_notification_activity( $content ) {
 	if ( $component != 'groups' )
 		return;
 
-	if ( !ass_registered_long_enough( $sender_id ) )
+	// if you want to conditionally block certain activity types from appearing,
+	// use the filter below
+	if ( false === apply_filters( 'ass_block_group_activity_types', true, $type ) )
 		return;
 
-	if ( $type == 'joined_group' )	// TODO: in the future, it might be nice for admins to optionally get this message
+	if ( !ass_registered_long_enough( $sender_id ) )
 		return;
 
 	$group_id = $content->item_id;
@@ -364,7 +369,8 @@ function ass_group_notification_activity( $content ) {
 	/* Subject & Content */
 	$blogname    = '[' . get_blog_option( BP_ROOT_BLOG, 'blogname' ) . ']';
 	$subject     = apply_filters( 'bp_ass_activity_notification_subject', $action . ' ' . $blogname, $action, $blogname );
-	$the_content = apply_filters( 'bp_ass_activity_notification_content', html_entity_decode( strip_tags( stripslashes( $content->content ) ), ENT_QUOTES ), $content );
+	$the_content = apply_filters( 'bp_ass_activity_notification_content', $content->content, $content );
+	$the_content = ass_clean_content( $the_content );
 
 	/* If it's an activity item, switch the activity permalink to the group homepage rather than the user's homepage */
 	$activity_permalink = ( isset( $content->primary_link ) && $content->primary_link != bp_core_get_user_domain( $content->user_id ) ) ? $content->primary_link : bp_get_group_permalink( $group );
@@ -454,7 +460,66 @@ To view or reply, log in and go to:
 }
 add_action( 'bp_activity_after_save' , 'ass_group_notification_activity' , 50 );
 
+/**
+ * Activity edit checker.
+ *
+ * Catch attempts to save activity entries to see if they already exist.
+ * If they do exist, stop GES from doing its thang.
+ *
+ * @since 3.2.2
+ */
+function ass_group_activity_edits( $activity ) {
+	// hack to avoid duplicate action firing during activity saving
+	// @see https://buddypress.trac.wordpress.org/ticket/3980
+	static $run_once = false;
 
+	if ( ! empty( $run_once ) )
+		return;
+
+	// if the activity doesn't match the groups component, stop now
+	if ( $activity->component != 'groups' )
+		return;
+
+	// if the activity ID already exists, this means this is an edit
+	// we don't want GES to send emails for edits!
+	if ( ! empty( $activity->id ) ) {
+		// Make sure GES doesn't fire
+		remove_action( 'bp_activity_after_save', 'ass_group_notification_activity', 50 );
+	}
+}
+add_action( 'bp_activity_before_save', 'ass_group_activity_edits' );
+
+/**
+ * Block some activity types from being sent / recorded in groups.
+ *
+ * @since 3.2.2
+ */
+function ass_default_block_group_activity_types( $retval, $type ) {
+
+	switch( $type ) {
+		/** ACTIVITY TYPES TO BLOCK **************************************/
+
+		// we handle these in ass_group_notification_forum_posts()
+		case 'new_forum_topic' :
+		case 'new_forum_post' :
+
+		// @todo in the future, it might be nice for admins to optionally get this message
+		case 'joined_group' :
+
+		case 'created_group' :
+			return false;
+
+			break;
+
+		/** ALL OTHER TYPES **********************************************/
+
+		default :
+			return $retval;
+
+			break;
+	}
+}
+add_filter( 'ass_block_group_activity_types', 'ass_default_block_group_activity_types', 5, 2 );
 
 
 // this funciton is used to include important activity updates from plugins for Topic only and Weekly Summary emails
@@ -833,6 +898,21 @@ function ass_get_default_subscription( $group = false ) {
 //	!TOPIC SUBSCRIPTION
 //
 
+/**
+ * Disables bbPress 2's subscription block.
+ *
+ * GES already covers group email subscription, so disable bbPress 2's
+ * functionality when on a BuddyPress group page.
+ *
+ * @since 3.2.2
+ */
+function ass_disable_bbp_subscriptions( $retval ) {
+	if ( bp_is_group() )
+		return false;
+
+	return $retval;
+}
+add_filter( 'bbp_is_subscriptions_active', 'ass_disable_bbp_subscriptions' );
 
 function ass_get_topic_subscription_status( $user_id, $topic_id ) {
 	global $bp;
@@ -995,7 +1075,22 @@ function ass_get_group_admins_mods( $group_id ) {
 }
 */
 
-
+/**
+ * Cleans up the email content
+ *
+ * By default we do the following to outgoing email content:
+ *   - strip slashes
+ *   - strip HTML tags
+ *   - convert HTML entities
+ *
+ * @uses apply_filters() Filter 'ass_clean_content' to modify our cleaning routine
+ * @param string $content The email content
+ * @return string $clean_content The email content, cleaned up for plaintext email
+ */
+function ass_clean_content( $content ) {
+	$clean_content = html_entity_decode( strip_tags( stripslashes( $content ) ), ENT_QUOTES );
+	return apply_filters( 'ass_clean_content', $clean_content, $content );
+}
 
 // cleans up the subject for email, strips trailing colon, add quotes to topic name, strips html
 function ass_clean_subject( $subject ) {

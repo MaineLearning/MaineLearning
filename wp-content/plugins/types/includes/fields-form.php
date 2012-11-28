@@ -5,6 +5,16 @@
 require_once WPCF_EMBEDDED_ABSPATH . '/classes/validate.php';
 require_once WPCF_ABSPATH . '/includes/conditional-display.php';
 
+global $wp_version;
+$wpcf_button_style='';
+$wpcf_button_style30='';
+
+if (version_compare($wp_version,'3.5','<'))
+{
+    $wpcf_button_style='style="line-height: 35px;"';
+    $wpcf_button_style30='style="line-height: 30px;"';
+}
+
 /**
  * Saves fields and groups.
  * 
@@ -172,6 +182,9 @@ function wpcf_admin_fields_form() {
             '\'' . wp_create_nonce('form_fieldset_toggle') . '\'');
     $default = array();
 
+    global $wpcf_button_style;
+    global $wpcf_button_style30;
+    
     // If it's update, get data
     $update = false;
     if (isset($_REQUEST['group_id'])) {
@@ -398,7 +411,7 @@ function wpcf_admin_fields_form() {
         . ' style="font-style:italic;font-weight:bold;display:inline-block;">'
         . __('Post Types:', 'wpcf') . ' ' . implode(', ',
                 $post_types_currently_supported) . '</span>'
-        . '&nbsp;&nbsp;<a href="javascript:void(0);" style="line-height: 30px;"'
+        . '&nbsp;&nbsp;<a href="javascript:void(0);" '.$wpcf_button_style30.' '
         . ' class="button-secondary" onclick="'
         . 'window.wpcfPostTypesText = new Array(); window.wpcfFormGroupsSupportPostTypesState = new Array(); '
         . 'jQuery(this).next().slideToggle()'
@@ -410,7 +423,7 @@ function wpcf_admin_fields_form() {
         . '});'
         . ' jQuery(this).css(\'visibility\', \'hidden\');">'
         . __('Edit', 'wpcf') . '</a>' . '<div class="hidden" id="wpcf-form-fields-post_types">',
-        '#after' => '<a href="javascript:void(0);" style="line-height: 35px;" '
+        '#after' => '<a href="javascript:void(0);" '.$wpcf_button_style.' '
         . 'class="button-primary wpcf-groups-form-ajax-update-post-types-ok"'
         . ' onclick="window.wpcfPostTypesText = new Array(); window.wpcfFormGroupsSupportPostTypesState = new Array(); '
         . 'jQuery(this).parent().slideUp().find(\'.checkbox\').each(function(index){'
@@ -427,7 +440,7 @@ function wpcf_admin_fields_form() {
         . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
         . '">'
         . __('OK', 'wpcf') . '</a>&nbsp;'
-        . '<a href="javascript:void(0);" style="line-height: 35px;" '
+        . '<a href="javascript:void(0);" '.$wpcf_button_style.' '
         . 'class="button-secondary wpcf-groups-form-ajax-update-post-types-cancel"'
         . ' onclick="jQuery(this).parent().slideUp().find(\'input\').removeAttr(\'checked\');'
         . 'if (window.wpcfFormGroupsSupportPostTypesState.length > 0) { '
@@ -446,6 +459,8 @@ function wpcf_admin_fields_form() {
     $form_tax = array();
     $form_tax_single = array();
 
+    //print_r($update);
+    //echo '<hr />';
     foreach ($taxonomies as $category_slug => $category) {
         if ($category_slug == 'nav_menu' || $category_slug == 'link_category'
                 || $category_slug == 'post_format') {
@@ -456,27 +471,29 @@ function wpcf_admin_fields_form() {
             $options = array();
             $add_title = '<div class="taxonomy-title">' . $category->labels->name . '</div>';
             $title = '';
+            //print_r($terms);
+            //echo '<hr />';
             foreach ($terms as $term) {
                 $checked = 0;
                 if ($update && !empty($update['taxonomies']) && array_key_exists($category_slug,
                                 $update['taxonomies'])) {
-                    if (array_key_exists($term->term_id,
+                    if (array_key_exists($term->term_taxonomy_id,
                                     $update['taxonomies'][$category_slug])) {
                         $checked = 1;
-                        $tax_currently_supported[$term->term_id] = $title . $term->name;
+                        $tax_currently_supported[$term->term_taxonomy_id] = $title . $term->name;
                         $title = '';
                     }
                 }
-                $options[$term->term_id]['#name'] = 'wpcf[group][taxonomies]['
-                        . $category_slug . '][' . $term->term_id . ']';
-                $options[$term->term_id]['#title'] = $term->name;
-                $options[$term->term_id]['#default_value'] = $checked;
-                $options[$term->term_id]['#value'] = $term->term_id;
-                $options[$term->term_id]['#inline'] = true;
-                $options[$term->term_id]['#prefix'] = $add_title;
-                $options[$term->term_id]['#suffix'] = '<br />';
-                $options[$term->term_id]['#id'] = 'wpcf-form-groups-support-tax-' . $term->term_id;
-                $options[$term->term_id]['#attributes'] = array('class' => 'wpcf-form-groups-support-tax');
+                $options[$term->term_taxonomy_id]['#name'] = 'wpcf[group][taxonomies]['
+                        . $category_slug . '][' . $term->term_taxonomy_id . ']';
+                $options[$term->term_taxonomy_id]['#title'] = $term->name;
+                $options[$term->term_taxonomy_id]['#default_value'] = $checked;
+                $options[$term->term_taxonomy_id]['#value'] = $term->term_taxonomy_id;
+                $options[$term->term_taxonomy_id]['#inline'] = true;
+                $options[$term->term_taxonomy_id]['#prefix'] = $add_title;
+                $options[$term->term_taxonomy_id]['#suffix'] = '<br />';
+                $options[$term->term_taxonomy_id]['#id'] = 'wpcf-form-groups-support-tax-' . $term->term_taxonomy_id;
+                $options[$term->term_taxonomy_id]['#attributes'] = array('class' => 'wpcf-form-groups-support-tax');
                 $add_title = '';
             }
             $form_tax_single['taxonomies-' . $category_slug] = array(
@@ -501,7 +518,7 @@ function wpcf_admin_fields_form() {
         '#markup' => '<span id="wpcf-group-form-update-tax-ajax-response" '
         . 'style="font-style:italic;font-weight:bold;display:inline-block;">'
         . __('Terms:', 'wpcf') . ' ' . implode(', ', $tax_currently_supported) . '</span>'
-        . '&nbsp;&nbsp;<a href="javascript:void(0);" style="line-height: 30px;" '
+        . '&nbsp;&nbsp;<a href="javascript:void(0);" '.$wpcf_button_style30.' '
         . 'class="button-secondary" onclick="'
         . 'window.wpcfTaxText = new Array(); window.wpcfFormGroupsSupportTaxState = new Array(); '
         . 'jQuery(this).next().slideToggle()'
@@ -519,7 +536,7 @@ function wpcf_admin_fields_form() {
 
     $form_tax['taxonomies-close'] = array(
         '#type' => 'markup',
-        '#markup' => '<a href="javascript:void(0);" style="line-height: 35px;" '
+        '#markup' => '<a href="javascript:void(0);" '.$wpcf_button_style.' '
         . 'class="button-primary wpcf-groups-form-ajax-update-tax-ok"'
         . ' onclick="window.wpcfTaxText = new Array(); window.wpcfFormGroupsSupportTaxState = new Array(); '
         . 'jQuery(this).parent().slideUp().find(\'.checkbox\').each(function(index){'
@@ -537,7 +554,7 @@ function wpcf_admin_fields_form() {
         . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
         . '">'
         . __('OK', 'wpcf') . '</a>&nbsp;'
-        . '<a href="javascript:void(0);" style="line-height: 35px;" '
+        . '<a href="javascript:void(0);" '.$wpcf_button_style.' '
         . 'class="button-secondary wpcf-groups-form-ajax-update-tax-cancel"'
         . ' onclick="jQuery(this).parent().slideUp().find(\'input\').removeAttr(\'checked\');'
         . 'if (window.wpcfFormGroupsSupportTaxState.length > 0) { '
@@ -1124,7 +1141,7 @@ function wpcf_admin_fields_form_validation($name, $field, $form_data = array()) 
                 foreach ($form_validate as $key => $element) {
                     if (isset($element['#type'])) {
                         $form_validate[$key]['#id'] = $element['#type'] . '-'
-                                . mt_rand();
+                                . wpcf_unique_id(serialize($element));
                     }
                     if (isset($element['#name']) && strpos($element['#name'],
                                     '[message]') !== FALSE) {
@@ -1168,11 +1185,16 @@ function wpcf_admin_fields_form_save_open_fieldset($action, $fieldset,
     if ($group_id && $action == 'open') {
         $data[intval($group_id)][$fieldset] = 1;
     } else if ($group_id && $action == 'close') {
-        unset($data[intval($group_id)][$fieldset]);
+        $group_id = intval($group_id);
+        if (isset($data[$group_id][$fieldset])) {
+            unset($data[$group_id][$fieldset]);
+        }
     } else if ($action == 'open') {
         $data[-1][$fieldset] = 1;
     } else if ($action == 'close') {
-        unset($data[-1][$fieldset]);
+        if (isset($data[-1][$fieldset])) {
+            unset($data[-1][$fieldset]);
+        }
     }
     update_user_meta(get_current_user_id(), 'wpcf-group-form-toggle', $data);
 }
@@ -1209,6 +1231,8 @@ function wpcf_admin_fields_form_fieldset_is_collapsed($fieldset) {
  */
 function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
         $empty_txt) {
+    global $wpcf_button_style;
+    global $wpcf_button_style30;
     $form = array();
     $form = $element;
     $id = strtolower(strval($id));
@@ -1216,7 +1240,7 @@ function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
     $form['#before'] = '<span id="wpcf-group-form-update-' . $id . '-ajax-response"'
             . ' style="font-style:italic;font-weight:bold;display:inline-block;">'
             . esc_html($title) . ' ' . $list . '</span>'
-            . '&nbsp;&nbsp;<a href="javascript:void(0);" style="line-height: 30px;"'
+            . '&nbsp;&nbsp;<a href="javascript:void(0);" '.$wpcf_button_style30.' '
             . ' class="button-secondary" onclick="'
             . 'window.wpcf' . ucfirst($id) . 'Text = new Array(); window.wpcfFormGroups' . ucfirst($id) . 'State = new Array(); '
             . 'jQuery(this).next().slideToggle()'
@@ -1229,7 +1253,7 @@ function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
             . ' jQuery(this).css(\'visibility\', \'hidden\');">'
             . __('Edit', 'wpcf') . '</a>' . '<div class="hidden" id="wpcf-form-fields-' . $id . '">';
 
-    $form['#after'] = '<a href="javascript:void(0);" style="line-height: 35px;" '
+    $form['#after'] = '<a href="javascript:void(0);" '.$wpcf_button_style.' '
             . 'class="button-primary wpcf-groups-form-ajax-update-' . $id . '-ok"'
             . ' onclick="window.wpcf' . ucfirst($id) . 'Text = new Array(); window.wpcfFormGroups' . ucfirst($id) . 'State = new Array(); '
             . 'jQuery(this).parent().slideUp().find(\'.checkbox\').each(function(index){'
@@ -1246,7 +1270,7 @@ function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
             . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
             . '">'
             . __('OK', 'wpcf') . '</a>&nbsp;'
-            . '<a href="javascript:void(0);" style="line-height: 35px;" '
+            . '<a href="javascript:void(0);" '.$wpcf_button_style.' '
             . 'class="button-secondary wpcf-groups-form-ajax-update-' . $id . '-cancel"'
             . ' onclick="jQuery(this).parent().slideUp().find(\'input\').removeAttr(\'checked\');'
             . 'if (window.wpcfFormGroups' . ucfirst($id) . 'State.length > 0) { '

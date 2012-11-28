@@ -101,7 +101,9 @@ function wpcf_admin_custom_types_form() {
         '#validate' => array(
             'required' => array('value' => 'true'),
             'nospecialchars' => array('value' => 'true'),
+            'maxlength' => array('value' => '20'),
         ),
+        '#attributes' => array('maxlength' => '20'),
     );
     $form['description'] = array(
         '#type' => 'textarea',
@@ -244,6 +246,12 @@ function wpcf_admin_custom_types_form() {
         '#markup' => '<table id="wpcf-types-form-supports-table" class="wpcf-types-form-table widefat"><thead><tr><th>' . __('Display Sections',
                 'wpcf') . '</th></tr></thead><tbody><tr><td>',
     );
+    $form['title-editor-warning'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div id="wpcf-types-title-editor-warning" class="wpcf-form-error" style="display:none;">'
+        . __('WordPress does not allow disabling both the title and the editor. Please enable at least one of these.',
+                'wpcf') . '</div>',
+    );
     $options = array(
         'title' => array(
             '#name' => 'ct[supports][title]',
@@ -252,6 +260,10 @@ function wpcf_admin_custom_types_form() {
             '#description' => __('Text input field to create a post title.',
                     'wpcf'),
             '#inline' => true,
+            '#id' => 'wpcf-supports-title',
+            '#attributes' => array(
+                'onclick' => 'wpcfTitleEditorCheck();',
+            ),
         ),
         'editor' => array(
             '#name' => 'ct[supports][editor]',
@@ -259,6 +271,10 @@ function wpcf_admin_custom_types_form() {
             '#title' => __('Editor', 'wpcf'),
             '#description' => __('Content input box for writing.', 'wpcf'),
             '#inline' => true,
+            '#id' => 'wpcf-supports-editor',
+            '#attributes' => array(
+                'onclick' => 'wpcfTitleEditorCheck();',
+            ),
         ),
         'comments' => array(
             '#name' => 'ct[supports][comments]',
@@ -579,6 +595,13 @@ function wpcf_admin_custom_types_form_submit($form) {
     $data['slug'] = $post_type;
     $custom_types = get_option('wpcf-custom-types', array());
 
+    // Check reserved name
+    if (wpcf_is_reserved_name($post_type)) {
+        wpcf_admin_message(sprintf(__('The name %s is reserved in WordPress and cannot be used in custom types. Please use a different name.',
+                                'wpcf'), $post_type), 'error');
+        return false;
+    }
+
     // Check overwriting
     if (!$update && array_key_exists($post_type, $custom_types)) {
         wpcf_admin_message(__('Custom post type already exists', 'wpcf'),
@@ -595,8 +618,14 @@ function wpcf_admin_custom_types_form_submit($form) {
                 array('post_type' => $data['wpcf-post-type']), array('%s'),
                 array('%s')
         );
+        // Set protected data
+        $protected_data_check = $custom_types[$data['wpcf-post-type']];
         // Delete old type
         unset($custom_types[$data['wpcf-post-type']]);
+        $data['wpcf-post-type'] = $post_type;
+    } else {
+        // Set protected data
+        $protected_data_check = !empty($custom_types[$post_type]) ? $custom_types[$post_type] : array();
     }
 
     // Check if active
@@ -617,7 +646,16 @@ function wpcf_admin_custom_types_form_submit($form) {
         update_option('wpcf-custom-taxonomies', $taxes);
     }
 
-    $custom_types[$post_type] = $data;
+    // Preserve protected data
+    foreach ($protected_data_check as $key => $value) {
+        if (strpos($key, '_') !== 0) {
+            unset($protected_data_check[$key]);
+        }
+    }
+
+    // Merging protected data
+    $custom_types[$post_type] = array_merge($protected_data_check, $data);
+
     update_option('wpcf-custom-types', $custom_types);
 
     // WPML register strings
@@ -652,11 +690,13 @@ function wpcf_custom_types_register_translation($post_type, $data) {
     }
     foreach ($data['labels'] as $label => $string) {
         if ($label == 'name' || $label == 'singular_name') {
-            wpcf_translate_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-CPT',
+                    $post_type . ' ' . $label, $string);
             continue;
         }
         if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
-            wpcf_translate_register_string('Types-CPT', $post_type . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-CPT',
+                    $post_type . ' ' . $label, $string);
         }
     }
 }

@@ -578,6 +578,12 @@ class EM_Bookings extends EM_Object implements Iterator{
 				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']})";
 			}
 		}
+		if( is_numeric($args['ticket_id']) ){
+		    $EM_Ticket = new EM_Ticket($args['ticket_id']);
+		    if( $EM_Ticket->can_manage() ){
+				$conditions['ticket'] = EM_BOOKINGS_TABLE.'.booking_id IN (SELECT booking_id FROM '.EM_TICKETS_BOOKINGS_TABLE." WHERE ticket_id='{$args['ticket_id']}')";
+		    }
+		}
 		return apply_filters('em_bookings_build_sql_conditions', $conditions, $args);
 	}
 	
@@ -598,7 +604,8 @@ class EM_Bookings extends EM_Object implements Iterator{
 		$defaults = array(
 			'status' => false,
 			'person' => true, //to add later, search by person's bookings...
-			'blog' => get_current_blog_id()
+			'blog' => get_current_blog_id(),
+			'ticket_id' => false
 		);	
 		if( true || is_admin() ){
 			//figure out default owning permissions

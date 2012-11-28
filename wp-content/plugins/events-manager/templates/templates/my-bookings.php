@@ -56,7 +56,7 @@
 								?>
 								<tr>
 									<td><?php echo $EM_Event->output("#_EVENTLINK"); ?></td>
-									<td><?php echo date_i18n( get_option('date_format'), $EM_Event->start ); ?></td>
+									<td><?php echo date_i18n( get_option('dbem_date_format'), $EM_Event->start ); ?></td>
 									<td><?php echo $EM_Booking->get_spaces() ?></td>
 									<td>
 										<?php echo $EM_Booking->get_status(); ?>
@@ -92,6 +92,6 @@
 			<?php endif; ?>
 		</div>	
 <?php else: ?>
-	<p><?php echo sprintf(__('Please <a href="%s">Log In</a> to view your bookings.','dbem'),site_url('wp-login.php', 'login'))?></p>
+	<p><?php echo sprintf(__('Please <a href="%s">Log In</a> to view your bookings.','dbem'),site_url('wp-login.php?redirect_to=' . urlencode(get_permalink()), 'login'))?></p>
 <?php endif; ?>
 <?php do_action('em_template_my_bookings_footer', $EM_Bookings); ?>

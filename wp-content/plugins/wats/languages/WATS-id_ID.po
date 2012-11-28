@@ -1,0 +1,1660 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WATS\n"
+"POT-Creation-Date: 2010-06-13 10:18+0100\n"
+"PO-Revision-Date: 2010-07-17 21:44+0700\n"
+"Last-Translator: fauzievolute <hello@fauzievolute.com>\n"
+"Language-Team: eZone Developer <dev@tokoezone.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
+"X-Poedit-KeywordsList: __\n"
+
+#: wats-options.php:576
+msgid " By making a donation, you recognize my work and encourage me to go on with the development and support of WATS. Thanks for this!"
+msgstr " Dengan memberikan donasi, anda memudahkan pekerjaan saya dan mendorong saya untuk melanjutkan pengembangan dan support di WATS. Terima kasih!"
+
+#: wats-options.php:589
+msgid " contact me"
+msgstr " hubungi saya"
+
+#: wats-template.php:526
+msgid " has been successfully created!"
+msgstr "telah berhasil dibuat!"
+
+#: wats-ticket-metas.php:243
+#: wats-ticket-metas.php:263
+#: wats-ticket-metas.php:291
+msgid " has been updated"
+msgstr "telah diperbarui"
+
+#: wats-ticket-metas.php:245
+#: wats-ticket-metas.php:265
+#: wats-ticket-metas.php:293
+msgid " has been updated."
+msgstr "telah diperbarui."
+
+#: wats-options.php:575
+msgid " It still requires a huge amount of time in order to provide technical support for users and new releases with bugfixes and new features."
+msgstr " Ini membutuhkan waktu lebih banyak lagi untuk memberikan dukungan teknis bagi pengguna dan rilis baru dengan perbaikan bug dan fitur baru."
+
+#: wats-options.php:672
+msgid " This option will also affect author and owner selectors filters display for the ticket listing table which will be available for everybody, only logged in users or only admins based on the selected option."
+msgstr " Pilihan ini juga akan mempengaruhi penulis dan pemilik penyeleksi filter untuk menampilkan tabel daftar tiket yang akan tersedia bagi semua orang, hanya berdasarkan login pengguna atau admin pada pilihan yang dipilih."
+
+#: wats-edit-post-rows.php:157
+msgid "%s ago"
+msgstr "%s yang lalu"
+
+#: wats-edit-post-rows.php:149
+msgid "%s from now"
+msgstr "%s dari sekarang"
+
+#: wats-edit-post-rows.php:255
+msgid "%s pending"
+msgstr "%s tertunda"
+
+#: wats-edit.php:285
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: wats-edit.php:286
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: wats-template.php:386
+#: wats-template.php:387
+msgid "(required)"
+msgstr "(penting)"
+
+#: wats-edit-form-advanced.php:329
+msgid "+ Add New Category"
+msgstr "+ Tambah Kategori Baru"
+
+#: wats-ticket-metas.php:248
+#: wats-ticket-metas.php:268
+#: wats-ticket-metas.php:296
+#: wats-ticket-metas.php:338
+msgid "+ Admin side : "
+msgstr "+ Bagian Admin :"
+
+#: wats-ticket-metas.php:247
+#: wats-ticket-metas.php:267
+#: wats-ticket-metas.php:295
+#: wats-ticket-metas.php:337
+msgid "+ Frontend side : "
+msgstr "+ bagian Frontend :"
+
+#: theme/comments-ticket.php:87
+msgid "<strong>XHTML:</strong> You can use these tags: <code>%s</code>"
+msgstr "<strong>XHTML:</strong> Anda dapat menggunakan tag ini: <code>%s</code>"
+
+#: wats-ticket-metas.php:335
+msgid "A new ticket has been submitted into the system."
+msgstr "Sebuah tiket baru telah dimasukkan ke dalam sistem."
+
+#: wats-edit-form-advanced.php:331
+msgid "Add New Category"
+msgstr "Tambahkan Kategori Baru"
+
+#: wats-ticket-new.php:3
+msgid "Add New Ticket"
+msgstr "Tambahkan Tiket Baru"
+
+#: wats-edit-form-advanced.php:276
+msgid "Add or remove tags"
+msgstr "Tambah atau hapus tag"
+
+#: wats-options.php:448
+msgid "Add this category"
+msgstr "Tambahkan kategori ini"
+
+#: wats-options.php:467
+msgid "Add this entry"
+msgstr "Tambahkan entri ini"
+
+#: wats-head.php:197
+msgid "Adding entry"
+msgstr "Menambah entri"
+
+#: wats-options.php:714
+msgid "Admin menu access"
+msgstr "Akses menu admin"
+
+#: wats-edit-form-advanced.php:311
+msgid "All Categories"
+msgstr "Semua Kategori"
+
+#: wats-options.php:804
+msgid "All tickets submitted will be in 'pending' status"
+msgstr "Semua tiket yang dimasukkan akan di status 'pending'"
+
+#: wats-options.php:813
+msgid "All tickets submitted will be in 'publish' status"
+msgstr "Semua tiket yang dimasukkan akan di status 'diterbitkan'"
+
+#: wats-edit-form-advanced.php:437
+msgid "Allow <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">trackbacks and pingbacks</a> on this post"
+msgstr "Membolehkan <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pelacakan dan pingback</a> pada posting ini"
+
+#: wats-options.php:851
+msgid "Allow admins to create a ticket on behalf of any user"
+msgstr "Mengizinkan admin membuat tiket atas nama user"
+
+#: wats-options.php:889
+msgid "Allow admins to filter tickets through author user meta key selector"
+msgstr "Mengizinkan admin untuk menyaring tiket melalui meta penulis pengguna tombol pemilih"
+
+#: wats-options.php:907
+msgid "Allow admins to get another column filled with author meta value in the tickets listing table"
+msgstr "Mengizinkan admin untuk mendapatkan kolom lain diisi dengan isi meta penulis di daftar tabel tiket"
+
+#: wats-edit-form-advanced.php:436
+msgid "Allow comments on this post"
+msgstr "Izinkan komentar di posting ini"
+
+#: wats-options.php:737
+msgid "Allow custom fields association to tickets"
+msgstr "Izinkan asosiasi bidang kustom untuk tiket"
+
+#: wats-options.php:767
+msgid "Allow media library browsing during media upload"
+msgstr "Izinkan media library dijelajahi selama upload di media"
+
+#: wats-options.php:758
+msgid "Allow media upload on ticket creation and edition pages"
+msgstr "Izinkan upload ke media pada pembuatan tiket dan halaman"
+
+#: wats-options.php:823
+msgid "Allow ticket submission through email"
+msgstr "Izinkan pengiriman tiket melalui email"
+
+#: wats-options.php:728
+msgid "Allow tickets tagging"
+msgstr "Izinkan penandaan tiket"
+
+#: wats-edit-form-advanced.php:385
+msgid "Already pinged:"
+msgstr "Sudah di ping:"
+
+#: wats-options.php:873
+msgid "And then"
+msgstr "Dan kemudian"
+
+#: wats-template.php:141
+#: wats-template.php:154
+#: wats-template.php:165
+msgid "Any"
+msgstr "Apa pun"
+
+#: wats-options.php:692
+msgid "Any registered user"
+msgstr "Setiap pengguna terdaftar"
+
+#: wats-edit.php:299
+#: wats-edit.php:379
+msgid "Apply"
+msgstr "Berlakukan"
+
+#: wats-edit-form-advanced.php:464
+#: wats-template.php:283
+msgid "Author"
+msgstr "Penulis"
+
+#: wats-options.php:719
+msgid "Block comments menu access for users without moderate_comments capability"
+msgstr "Blok akses komentar menu untuk pengguna tanpa moderate_comments kapabilitas"
+
+#: theme/single-ticket.php:45
+msgid "Both comments and pings are currently closed."
+msgstr "Antara komentar dan ping sedang ditutup."
+
+#: wats-edit.php:295
+#: wats-edit.php:375
+msgid "Bulk Actions"
+msgstr "Aksi Massal"
+
+#: wats-options.php:846
+msgid "Call center ticket creation"
+msgstr "Call center untuk pembuatan tiket"
+
+#: wats-edit-form-advanced.php:140
+#: wats-edit-form-advanced.php:180
+msgid "Cancel"
+msgstr "Batal"
+
+#: wats-edit-form-advanced.php:341
+#: wats-template.php:708
+msgid "Categories"
+msgstr "Kategori"
+
+#: wats-options.php:964
+msgid "Categories opened to submission"
+msgstr "Kategori dibukan untuk dimasuki"
+
+#: wats-options.php:967
+#: wats-template.php:282
+msgid "Category"
+msgstr "Kategori"
+
+#: wats-options.php:642
+msgid "Check the options according to the notifications you want the system to send to users after specific events happened. "
+msgstr "Cek pilihan sesuai dengan pemberitahuan yang anda inginkan di sistem untuk mengirimkan kepada pengguna lain setelah event tertentu selesai."
+
+#: wats-options.php:853
+msgid "Check this option if you want to allow admins to create tickets on behalf of any user. This will allow them to set the ticket originator while submitting a new ticket."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan admin untuk membuat tiket atas nama user. Ini akan memungkinkan mereka untuk mengatur pemilik tiket ketika memasukkan tiket baru."
+
+#: wats-options.php:900
+msgid "Check this option if you want to allow admins to filter tickets through an additionnal selector which will be filled in with meta values attached to the selected meta key."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan admin untuk menyaring tiket melalui pilihan tambahan yang akan diisi dengan isi meta yang ada pada tombol meta yang dipilih."
+
+#: wats-options.php:917
+msgid "Check this option if you want to allow admins to get another column in the tickets listing table that will be filled in with user meta values attached to the selected meta key."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan admin untuk mendapatkan kolom lain di dalam tabel daftar tiket yang akan diisi dengan isi meta yang ada pada tombol meta yang dipilih."
+
+#: wats-options.php:739
+msgid "Check this option if you want to allow custom fields association to tickets."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan hubungan di bagian kustom field untuk tiket."
+
+#: wats-options.php:769
+msgid "Check this option if you want to allow media library browsing during media upload while creating and editing tickets. This will allow users to view the library and insert files directly from it."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan media library dijelajahi selama upload media dibuat dan ketika mengedit tiket. Hal ini akan memungkinkan pengguna untuk melihat library dan memasukkan file langsung dari situ."
+
+#: wats-options.php:760
+msgid "Check this option if you want to allow media upload while creating and editing tickets. This will allow users to attach media files to tickets."
+msgstr "Cek pilihan ini jika anda ingin memperbolehkan upload ke media ketika membuat dan mengedit tiket. Hal ini akan memungkinkan pengguna untuk melampirkan file di media untuk tiket."
+
+#: wats-options.php:730
+msgid "Check this option if you want to allow tag association to tickets."
+msgstr "Cek pilihan ini jika anda ingin menghubungkan tag untuk di tiket."
+
+#: wats-options.php:621
+msgid "Check this option if you want to display tickets on homepage along with usual posts. If the option is unchecked, only posts will be displayed."
+msgstr "Cek pilihan ini jika anda ingin menampilkan tiket di situs bersama dengan postingan. Jika opsi ini tidak dicentang, hanya posting biasa yang akan ditampilkan."
+
+#: wats-options.php:721
+msgid "Check this option if you want to prevent users without the comments moderation capability to browse the comments list page (on this page, they could see updates on all tickets)."
+msgstr "Cek pilihan ini jika anda ingin mencegah pengguna tanpa izin untuk moderasi komentar untuk melihat daftar di halaman komentar (pada halaman ini, mereka bisa melihat update semua tiket)."
+
+#: wats-edit-form-advanced.php:287
+msgid "Choose from the most used tags in %s"
+msgstr "Pilih tag yang paling banyak digunakan dalam %s"
+
+#: wats-options.php:595
+#: wats-options.php:614
+#: wats-options.php:623
+#: wats-options.php:651
+#: wats-options.php:659
+#: wats-options.php:674
+#: wats-options.php:688
+#: wats-options.php:702
+#: wats-options.php:714
+#: wats-options.php:723
+#: wats-options.php:732
+#: wats-options.php:741
+#: wats-options.php:753
+#: wats-options.php:762
+#: wats-options.php:771
+#: wats-options.php:785
+#: wats-options.php:800
+#: wats-options.php:818
+#: wats-options.php:833
+#: wats-options.php:846
+#: wats-options.php:855
+#: wats-options.php:863
+#: wats-options.php:884
+#: wats-options.php:902
+#: wats-options.php:949
+msgid "Click to get some help!"
+msgstr "Klik untuk mendapatkan bantuan!"
+
+#: wats-options.php:949
+msgid "Closed status"
+msgstr "Status ditutup"
+
+#: wats-edit-form-advanced.php:479
+msgid "Comments"
+msgstr "Komentar"
+
+#: wats-template.php:287
+msgid "Creation date"
+msgstr "Tanggal pembuatan"
+
+#: theme/single-ticket.php:18
+msgid "Current priority : "
+msgstr "Current priority : "
+
+#: theme/single-ticket.php:19
+msgid "Current status : "
+msgstr "Current status :"
+
+#: wats-ticket-metas.php:17
+msgid "Current ticket owner : "
+msgstr "Pemilik tiket saat ini :"
+
+#: wats-edit-form-advanced.php:16
+msgid "Custom field deleted."
+msgstr "Custom field dihapus."
+
+#: wats-edit-form-advanced.php:15
+msgid "Custom field updated."
+msgstr "Custom field diperbarui."
+
+#: wats-options.php:732
+msgid "Custom fields"
+msgstr "Custom fields"
+
+#: wats-edit-form-advanced.php:421
+msgid "Custom Fields"
+msgstr "Custom Fields"
+
+#: wats-edit-form-advanced.php:418
+msgid "Custom fields can be used to add extra metadata to a post that you can <a href=\"http://codex.wordpress.org/Using_Custom_Fields\" target=\"_blank\">use in your theme</a>."
+msgstr "Custom field dapat digunakan untuk menambahkan metadata tambahan untuk posting yang dapat anda <a href=\"http://codex.wordpress.org/Using_Custom_Fields\" target=\"_blank\">gunakan dalam tema anda</a> ."
+
+#: wats-options.php:602
+msgid "Dated"
+msgstr "Tanggal"
+
+#: wats-options.php:833
+msgid "Default author for unregistered visitors tickets"
+msgstr "Penulis default untuk pengunjung yang tidak terdaftar di situs"
+
+#: wats-edit-form-advanced.php:227
+#: wats-edit-post-rows.php:194
+#: wats-edit-post-rows.php:288
+#: wats-edit.php:297
+#: wats-edit.php:377
+msgid "Delete"
+msgstr "Hapus"
+
+#: wats-edit-post-rows.php:194
+msgid "Delete this post"
+msgstr "Hapus posting ini"
+
+#: wats-options.php:789
+msgid "Disable frontend ticket submission form"
+msgstr "Nonaktifkan pengiriman formulir tiket di frontend"
+
+#: wats-edit-form-advanced.php:440
+msgid "Discussion"
+msgstr "Diskusi"
+
+#: wats-edit.php:346
+msgid "Displaying %s&#8211;%s of %s"
+msgstr "Menampilkan%s&#8211;%s dari %s"
+
+#: wats-options.php:573
+msgid "Donation"
+msgstr "Donasi"
+
+#: wats-edit-form-advanced.php:118
+#: wats-edit-form-advanced.php:137
+#: wats-edit.php:62
+msgid "Draft"
+msgstr "Konsep"
+
+#: wats-options.php:588
+msgid "Drop me a mail"
+msgstr "Berikan saya email"
+
+#: wats-edit-form-advanced.php:124
+#: wats-edit-form-advanced.php:164
+#: wats-edit-form-advanced.php:213
+#: wats-edit-post-rows.php:192
+#: wats-edit-post-rows.php:282
+#: wats-edit.php:296
+#: wats-edit.php:376
+msgid "Edit"
+msgstr "Edit"
+
+#: wats-edit-post-rows.php:185
+msgid "Edit \"%s\""
+msgstr "Edit \"%s\""
+
+#: wats-link-template.php:44
+msgid "Edit post"
+msgstr "Edit posting"
+
+#: theme/single-ticket.php:47
+msgid "Edit this entry"
+msgstr "Edit entri ini"
+
+#: wats-edit-post-rows.php:192
+msgid "Edit this post"
+msgstr "Edit posting ini"
+
+#: wats-edit.php:203
+msgid "Edit ticket"
+msgstr "Edit tiket"
+
+#: wats-ticket.php:130
+msgid "Edit Ticket"
+msgstr "Edit Tiket"
+
+#: wats-edit.php:173
+#: wats-head.php:164
+msgid "Edit Tickets"
+msgstr "Edit Tiket"
+
+#: wats-options.php:818
+msgid "Email ticket submission"
+msgstr "Email masukan tiket"
+
+#: wats-options.php:792
+msgid "Enable frontend ticket submission form for any visitor with a valid email address"
+msgstr "Aktifkan pengiriman formulir tiket di frontend kepada setiap pengunjung dengan alamat email yang valid"
+
+#: wats-options.php:795
+msgid "Enable frontend ticket submission form for registered users only"
+msgstr "Aktifkan pengiriman formulir tiket di frontend hanya untuk pengguna terdaftar"
+
+#: wats-options.php:640
+msgid "Enable local user profile notifications options to allow bypass of global options."
+msgstr "Aktifkan pemberitahuan ke profil pengguna terdaftar untuk memungkinkan melewati pilihan global."
+
+#: wats-options.php:657
+msgid "Enter the signature to be put into every notification email sent by the system."
+msgstr "Masukkan tanda tangan yang akan dimasukkan ke setiap email pemberitahuan yang di dikirim oleh sistem."
+
+#: wats-options.php:419
+msgid "Entry successfully added!"
+msgstr "Entry berhasil ditambahkan!"
+
+#: wats-options.php:356
+msgid "Entry successfully removed!"
+msgstr "Entry berhasil dihapus!"
+
+#: wats-options.php:325
+msgid "Entry successfully updated!"
+msgstr "Entry berhasil diperbarui!"
+
+#: wats-template.php:504
+msgid "Error : "
+msgstr "Kesalahan :"
+
+#: wats-options.php:408
+msgid "Error : already existing entry!"
+msgstr "Kesalahan : entri yang dimasukkan sudah ada!"
+
+#: wats-options.php:318
+msgid "Error : another entry has the same value!"
+msgstr "Kesalahan : entri yang lain memiliki nilai yang sama!"
+
+#: wats-template.php:539
+msgid "Error : can't submit form"
+msgstr "Kesalahan : Tidak dapat mengirimkan formulir"
+
+#: wats-options.php:360
+msgid "Error : entry not existing!"
+msgstr "Kesalahan : entri tidak ada!"
+
+#: wats-options.php:314
+msgid "Error : entry not found!"
+msgstr "Kesalahan : entri tidak ditemukan!"
+
+#: wats-options.php:282
+#: wats-options.php:296
+#: wats-options.php:386
+msgid "Error : please enter an entry!"
+msgstr "Kesalahan : silakan masukkan entri!"
+
+#: wats-head.php:194
+msgid "Error : please select an entry to remove!"
+msgstr "Error : silahkan pilih entri untuk di hapus!"
+
+#: wats-head.php:198
+msgid "Error : the string contains invalid caracters!"
+msgstr "Kesalahan : string berisi Karakter yang tidak valid!"
+
+#: wats-head.php:193
+msgid "Error : there is nothing to remove!"
+msgstr "Kesalahan : tidak ada yang harus di hapus!"
+
+#: wats-edit.php:128
+#: wats-edit.php:131
+msgid "Error in deleting..."
+msgstr "Kesalahan ketika menghapus..."
+
+#: wats-options.php:681
+msgid "Everybody can assign a ticket"
+msgstr "Semua orang dapat mengirimkan tiket"
+
+#: wats-options.php:663
+msgid "Everybody can see all tickets"
+msgstr "Tiap orang bisa melihat semua tiket"
+
+#: wats-edit-form-advanced.php:369
+#: wats-edit-form-advanced.php:373
+msgid "Excerpt"
+msgstr "Kutipan"
+
+#: wats-edit.php:356
+msgid "Excerpt View"
+msgstr "Lihat Kutipan"
+
+#: wats-edit-form-advanced.php:370
+msgid "Excerpts are optional hand-crafted summaries of your content that can be used in your theme. <a href=\"http://codex.wordpress.org/Excerpt\" target=\"_blank\">Learn more about manual excerpts.</a>"
+msgstr "Kutipan adalah ringkasan buatan anda yang dapat digunakan dalam tema anda. <a href=\"http://codex.wordpress.org/Excerpt\" target=\"_blank\">Pelajari lebih lanjut tentang kutipan manual.</a>"
+
+#: wats-edit.php:340
+#: wats-template.php:175
+msgid "Filter"
+msgstr "Penyaring"
+
+#: wats-head.php:32
+msgid "Filtering table..."
+msgstr "Penyaringan tabel ..."
+
+#: wats-options.php:857
+msgid "Format : "
+msgstr "Format :"
+
+#: wats-options.php:785
+msgid "Frontend submission form access"
+msgstr "Pengiriman formulir akses di frontend"
+
+#: wats-options.php:800
+msgid "Frontend submission form ticket status"
+msgstr "Status tiket untuk pengiriman formulir di frontend"
+
+#: wats-lib.php:222
+msgid "Get a mail notification when a new ticket is submitted (admin only)"
+msgstr "Dapatkan pemberitahuan melalui email bila tiket baru dimasukkan (hanya admin)"
+
+#: wats-lib.php:224
+msgid "Get a mail notification when a ticket originated by me is updated"
+msgstr "Dapatkan pemberitahuan melalui email ketika tiket yang berasal dari saya telah diperbarui"
+
+#: wats-lib.php:223
+msgid "Get a mail notification when any ticket is updated"
+msgstr "Dapatkan pemberitahuan melalui email ketika semua tiket diperbarui"
+
+#: wats-options.php:741
+msgid "Global statistics dashboad widget visibility"
+msgstr "Widget statistik global dashboad diperlihatkan"
+
+#: wats-dashboard.php:13
+#: wats-dashboard.php:75
+msgid "Global stats :"
+msgstr "Global statistik:"
+
+#: wats-ticket-metas.php:244
+#: wats-ticket-metas.php:264
+#: wats-ticket-metas.php:292
+#: wats-ticket-metas.php:334
+msgid "Hello "
+msgstr "Halo"
+
+#: wats-options.php:582
+msgid "Help"
+msgstr "Bantuan"
+
+#: wats-template.php:530
+#: wats-template.php:532
+msgid "here"
+msgstr "di sini"
+
+#: wats-ticket-metas.php:401
+msgid "Here is the ticket history"
+msgstr "Berikut adalah riwayat tiket"
+
+#: wats-options.php:590
+msgid "I can perform theme customization, Wordpress installation and configuration, plugin customization and even more..."
+msgstr "Saya dapat melakukan penyesuaian dengan tema, instalasi Wordpress dan konfigurasi, kustomisasi plugin dan bahkan lebih ..."
+
+#: wats-options.php:648
+msgid "If the bypass option isn't set, only global notifications options will be relevant and user profile options couldn't be modified. "
+msgstr "Jika pilihan untuk melewati tidak di set, hanya pilihan pemberitahuan global akan dihubungkan dan pilihan profil pengguna terdaftar tidak dapat diubah."
+
+#: wats-options.php:645
+msgid "If the option is disabled here, then it will be disabled for everybody and it couldn't be enabled individually. "
+msgstr "Jika pilihan ini dinonaktifkan, maka akan dinonaktifkan untuk semua orang dan tidak dapat diaktifkan secara individual."
+
+#: wats-options.php:643
+msgid "If the option is enabled here, then by default, it will be enabled for the user but he can disable it under his profile. "
+msgstr "Jika pilihan ini diaktifkan, maka secara default, ini akan diaktifkan untuk pengguna tapi dia bisa menonaktifkan di dalam profilnya."
+
+#: wats-options.php:589
+msgid "If you are looking for a Wordpress expert, please "
+msgstr "Jika Anda mencari seorang ahli Wordpress, silakan"
+
+#: wats-options.php:585
+msgid "If you need some help with the plugin setup, you can :"
+msgstr "Jika Anda perlu bantuan dengan setup plugin, Anda dapat:"
+
+#: wats-options.php:583
+msgid "If you want to get some details about an option, just click on the option title, this will display some inline details."
+msgstr "Jika Anda ingin mendapatkan beberapa rincian tentang pilihan, klik pada pilihan judul, ini akan menampilkan beberapa detil dalam satu baris."
+
+#: wats-options.php:584
+msgid "In the tables, you can directly edit items by clicking on the following icon : "
+msgstr "Pada tabel, anda langsung dapat mengedit item dengan mengklik ikon berikut:"
+
+#: wats-options.php:619
+msgid "Include tickets on homepage together with posts"
+msgstr "Masukkan tiket di situs bersama dengan posting"
+
+#: wats-edit-form-advanced.php:352
+msgid "Keep this post private"
+msgstr "Simpan ini sebagai postingan rahasia"
+
+#: theme/single-ticket.php:29
+msgid "l, F jS, Y"
+msgstr "l, F JS, Y"
+
+#: wats-edit-form-advanced.php:620
+msgid "Last edited by %1$s on %2$s at %3$s"
+msgstr "Terakhir diubah oleh %1$ pada %2$ di %3$"
+
+#: wats-edit-form-advanced.php:622
+msgid "Last edited on %1$s at %2$s"
+msgstr "Terakhir diubah pada %1$ di %2$"
+
+#: wats-edit-post-rows.php:177
+msgid "Last Modified"
+msgstr "Terakhir Diperbaharui"
+
+#: wats-options.php:611
+msgid "Latest ticket ID"
+msgstr "ID Tiket Terbaru"
+
+#: wats-options.php:587
+msgid "Leave a comment"
+msgstr "Tinggalkan komentar"
+
+#: theme/comments-ticket.php:58
+msgid "Leave an update"
+msgstr "Tinggalkan update"
+
+#: theme/comments-ticket.php:58
+msgid "Leave an update for %s"
+msgstr "Tinggalkan update untuk %s"
+
+#: wats-options.php:703
+msgid "Level"
+msgstr "Tingkatan"
+
+#: wats-edit.php:355
+msgid "List View"
+msgstr "Lihat Daftar"
+
+#: theme/comments-ticket.php:72
+msgid "Log out &raquo;"
+msgstr "Log Keluar &raquo;"
+
+#: theme/comments-ticket.php:72
+msgid "Log out of this account"
+msgstr "Log keluar dari account ini"
+
+#: wats-template.php:383
+msgid "Logged in as "
+msgstr "Log masuk sebagai"
+
+#: theme/comments-ticket.php:72
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
+msgstr "Log masuk sebagai <a href=\"%1$s\"> %2$s</a> ."
+
+#: wats-options.php:826
+msgid "Login : "
+msgstr "Masuk :"
+
+#: wats-edit-form-advanced.php:190
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G: i"
+
+#: wats-template.php:387
+msgid "Mail"
+msgstr "Surat"
+
+#: theme/comments-ticket.php:80
+msgid "Mail (will not be published)"
+msgstr "Mail (tidak akan dipublikasikan)"
+
+#: wats-options.php:651
+msgid "Mail notifications signature"
+msgstr "Tanda tangan mail pemberitahuan"
+
+#: wats-options.php:753
+msgid "Media upload"
+msgstr "Upload media"
+
+#: wats-options.php:762
+msgid "Media upload tabs"
+msgstr "Tab upload media"
+
+#: wats-options.php:890
+#: wats-options.php:908
+msgid "Meta key"
+msgstr "Kunci meta"
+
+#: wats-options.php:742
+msgid "Minimum required level"
+msgstr "Tingkatan minimum yang diperlukan"
+
+#: wats-edit-post-rows.php:173
+msgid "Missed schedule"
+msgstr "Jadwal terjawab"
+
+#: wats-head.php:163
+msgid "Modify"
+msgstr "Memodifikasi"
+
+#: wats-edit-form-advanced.php:312
+msgid "Most Used"
+msgstr "Paling banyak digunakan"
+
+#: wats-template.php:386
+msgid "Name"
+msgstr "Nama"
+
+#: wats-head.php:143
+#: wats-head.php:167
+msgid "New ticket"
+msgstr "Tiket baru"
+
+#: wats-head.php:142
+msgid "New Ticket"
+msgstr "Tiket Baru"
+
+#: wats-ticket-metas.php:333
+msgid "New ticket submitted"
+msgstr "Tiket baru telah dikirim"
+
+#: wats-profile.php:90
+#: wats-profile.php:107
+msgid "No"
+msgstr "Tidak"
+
+#: wats-options.php:678
+msgid "No assignment possible"
+msgstr "Tidak ada tugas yang memungkinkan"
+
+#: wats-dashboard.php:151
+#: wats-edit-form-advanced.php:455
+msgid "No comments yet."
+msgstr "Belum ada komentar."
+
+#: wats-head.php:195
+#: wats-options.php:510
+#: wats-template.php:346
+msgid "No entry"
+msgstr "Tidak ada masukkan"
+
+#: wats-edit-post-rows.php:245
+msgid "No Tags"
+msgstr "Tidak ada Tag"
+
+#: wats-edit.php:387
+msgid "No ticket found"
+msgstr "Tidak menemukan tiket"
+
+#: wats-options.php:599
+#: wats-options.php:773
+#: wats-template.php:166
+#: wats-template.php:336
+#: wats-ticket-metas.php:479
+#: wats-ticket-metas.php:483
+#: wats-ticket-metas.php:493
+msgid "None"
+msgstr "Tidak ada"
+
+#: wats-profile.php:110
+msgid "Note : you can't set an option if it has been disabled globally by the admin."
+msgstr "Catatan: Anda tidak dapat mengatur pilihan ini jika telah dinonaktifkan secara global oleh admin."
+
+#: wats-options.php:623
+msgid "Notifications"
+msgstr "Pemberitahuan"
+
+#: wats-options.php:628
+msgid "Notify admin by email upon new ticket submission"
+msgstr "Beritahu admin melalui email ketika tiket baru telah dikirimkan"
+
+#: wats-options.php:636
+msgid "Notify user by email when ticket is updated. Applies only to tickets originated by the user and will notify only ticket originator and updaters."
+msgstr "Beritahu pengguna dengan email ketika tiket diperbarui. Berlaku hanya untuk tiket berasal dari pengguna dan akan memberitahukan hanya kepada pemilik tiket dan yang memperbaharui."
+
+#: wats-options.php:632
+msgid "Notify user by email when ticket is updated. Applies to all tickets and will notify all users."
+msgstr "Beritahu pengguna dengan email ketika tiket diperbarui. Berlaku untuk semua tiket dan akan memberitahu semua pengguna."
+
+#: wats-dashboard.php:78
+#: wats-dashboard.php:85
+msgid "Number of tickets closed : "
+msgstr "Jumlah tiket ditutup:"
+
+#: wats-dashboard.php:76
+#: wats-dashboard.php:83
+msgid "Number of tickets created : "
+msgstr "Jumlah tiket dibuat:"
+
+#: wats-options.php:605
+msgid "Numbered"
+msgstr "Nomor"
+
+#: wats-edit-form-advanced.php:139
+#: wats-edit-form-advanced.php:179
+msgid "OK"
+msgstr "Oke"
+
+#: wats-options.php:684
+msgid "Only registered users can assign a ticket"
+msgstr "Hanya pengguna terdaftar yang dapat menetapkan tiket"
+
+#: wats-options.php:666
+msgid "Only registered users can see tickets"
+msgstr "Hanya pengguna terdaftar yang dapat melihat tiket"
+
+#: wats-options.php:669
+msgid "Only ticket creator and admins can see tickets"
+msgstr "Hanya pembuat tiket dan admin dapat melihat tiket"
+
+#: wats-template.php:286
+msgid "Owner"
+msgstr "Pemilik"
+
+#: wats-edit-form-advanced.php:332
+msgid "Parent category"
+msgstr "Kategori Induk"
+
+#: wats-template.php:408
+msgid "Password"
+msgstr "Kata Sandi"
+
+#: wats-options.php:827
+msgid "Password : "
+msgstr "Kata Sandi :"
+
+#: wats-edit-form-advanced.php:354
+msgid "Password Protect This Post"
+msgstr "Post ini di lindungi kata sandi"
+
+#: wats-edit-form-advanced.php:155
+#: wats-edit-form-advanced.php:174
+msgid "Password protected"
+msgstr "Di lindungi kata sandi"
+
+#: wats-edit-form-advanced.php:175
+msgid "Password:"
+msgstr "Kata Sandi:"
+
+#: wats-edit.php:61
+msgid "Pending posts"
+msgstr "Posting yang tertunda"
+
+#: wats-edit-form-advanced.php:115
+#: wats-edit-form-advanced.php:136
+#: wats-edit.php:61
+msgid "Pending Review"
+msgstr "Pending Review"
+
+#: wats-template.php:404
+msgid "Please authenticate yourself to be able to access the form."
+msgstr "Silakan masuk untuk dapat mengakses formulir."
+
+#: wats-head.php:196
+msgid "Please correct the errors"
+msgstr "Harap perbaiki kesalahan"
+
+#: wats-options.php:825
+msgid "Port : "
+msgstr "Port:"
+
+#: wats-edit-form-advanced.php:513
+#: wats-edit-form-advanced.php:516
+msgid "Post Author"
+msgstr "Penulis Post"
+
+#: wats-edit-form-advanced.php:353
+msgid "Post Password"
+msgstr "Post Password"
+
+#: wats-edit-form-advanced.php:530
+msgid "Post Revisions"
+msgstr "Revisi Posting"
+
+#: wats-edit-form-advanced.php:19
+msgid "Post saved."
+msgstr "Post disimpan."
+
+#: wats-edit-form-advanced.php:490
+#: wats-edit-form-advanced.php:494
+msgid "Post Slug"
+msgstr "Post Slug"
+
+#: wats-template.php:709
+msgid "Post Tags"
+msgstr "Post Tag"
+
+#: wats-edit-form-advanced.php:89
+#: wats-edit-post-rows.php:198
+msgid "Preview"
+msgstr "Pratayang"
+
+#: wats-edit-post-rows.php:198
+msgid "Preview \"%s\""
+msgstr "Pratayang \"%s\""
+
+#: wats-edit-form-advanced.php:86
+msgid "Preview Changes"
+msgstr "Pratayang Perubahan"
+
+#: wats-edit-post-rows.php:14
+#: wats-options.php:934
+#: wats-template.php:289
+msgid "Priority"
+msgstr "Prioritas"
+
+#: wats-edit-form-advanced.php:152
+#: wats-edit-form-advanced.php:176
+#: wats-edit.php:63
+msgid "Private"
+msgstr "Rahasia"
+
+#: wats-edit.php:63
+msgid "Private posts"
+msgstr "Postingan rahasia"
+
+#: wats-edit-form-advanced.php:106
+#: wats-edit-form-advanced.php:132
+msgid "Privately Published"
+msgstr "Diterbitkan Rahasia"
+
+#: wats-edit-form-advanced.php:161
+#: wats-edit-form-advanced.php:172
+msgid "Public"
+msgstr "Publik"
+
+#: wats-edit-form-advanced.php:158
+msgid "Public, Sticky"
+msgstr "Publik, Ditandai"
+
+#: wats-edit-form-advanced.php:259
+msgid "Publish"
+msgstr "Terbitkan"
+
+#: wats-edit-form-advanced.php:197
+#: wats-edit-form-advanced.php:205
+msgid "Publish <b>immediately</b>"
+msgstr "Terbitkan <b>segera</b>"
+
+#: wats-edit-form-advanced.php:201
+msgid "Publish on: <b>%1$s</b>"
+msgstr "Diterbitkan pada: <b>%1$s</b>"
+
+#: wats-edit-form-advanced.php:109
+#: wats-edit-form-advanced.php:130
+#: wats-edit-post-rows.php:170
+#: wats-edit.php:59
+msgid "Published"
+msgstr "Diterbitkan"
+
+#: wats-edit-form-advanced.php:195
+msgid "Published on: <b>%1$s</b>"
+msgstr "Diterbitkan pada: <b>%1$s</b>"
+
+#: wats-edit.php:59
+msgid "Published posts"
+msgstr "Posting diterbitkan"
+
+#: wats-options.php:586
+msgid "Read the documentation"
+msgstr "Baca dokumentasi"
+
+#: wats-dashboard.php:169
+msgid "Recent Comments"
+msgstr "Komentar Terbaru"
+
+#: wats-options.php:436
+msgid "Remove selected categories"
+msgstr "Hapus kategori yang dipilih"
+
+#: wats-options.php:462
+msgid "Remove selected items"
+msgstr "Hapus item yang dipilih"
+
+#: theme/single-ticket.php:37
+msgid "Responses are currently closed, but you can <a href=\"%s\" rel=\"trackback\">trackback</a> from your own site."
+msgstr "masukan untuk tanggapan sedang di tutup, tapi anda dapat pengirimkan <a href=\"%s\" rel=\"trackback\">umpan balik</a> dari situs anda sendiri."
+
+#: wats-options.php:920
+#: wats-options.php:974
+msgid "Save the options"
+msgstr "Simpan pilihan"
+
+#: wats-edit-form-advanced.php:199
+msgid "Schedule for: <b>%1$s</b>"
+msgstr "Dijadwalkan untuk: <b>%1$s</b>"
+
+#: wats-edit-form-advanced.php:112
+#: wats-edit-form-advanced.php:134
+#: wats-edit-post-rows.php:175
+#: wats-edit.php:60
+msgid "Scheduled"
+msgstr "Terjadwal"
+
+#: wats-edit-form-advanced.php:193
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr "Dijadwalkan untuk: <b>%1$s</b>"
+
+#: wats-edit.php:60
+msgid "Scheduled posts"
+msgstr "Postingan Terjadwal"
+
+#: wats-edit.php:198
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Hasil pencarian untuk &#8220;%s&#8221;"
+
+#: wats-edit.php:266
+#: wats-edit.php:268
+msgid "Search Tickets"
+msgstr "Cari Tiket"
+
+#: wats-options.php:712
+msgid "Select the level. Only users with this minimum level value will be able to assign tickets. To learn more about users levels, check out this page : "
+msgstr "Pilih tingkatan. Hanya pengguna dengan tingkatan paling kecil akan dapat menetapkan tiket. Untuk mempelajari lebih lanjut tentang tingkatan pengguna, periksa halaman ini:"
+
+#: wats-options.php:751
+msgid "Select the level. Only users with this minimum level value will be able to view the global statistics under the stats widget on the dashboard. To learn more about users levels, check out this page : "
+msgstr "Pilih tingkatan. Hanya pengguna dengan tingkatan paling kecil akan dapat melihat statistik global di bawah widget statistik di dasbor. Untuk mempelajari lebih lanjut tentang tingkat pengguna, periksa halaman ini:"
+
+#: wats-options.php:882
+msgid "Select the meta keys used to sort the user selectors."
+msgstr "Pilih tombol meta untuk mengurutkan pemilihan pengguna."
+
+#: wats-options.php:607
+msgid "Select the preferred option. Based on this, a number will be associated to a ticket and displayed at the beginning of the title."
+msgstr "Pilih pilihan yang disukai. Berdasarkan ini, banyak yang akan dihubungkan dengan tiket dan ditampilkan pada awal judul."
+
+#: wats-options.php:700
+msgid "Select the preferred option. The list of users a ticket can be assigned to will be adjusted based on this option. The wats_ticket_ownership capability can be granted under user profile by admins."
+msgstr "Pilih pilihan yang disukai. Daftar pengguna tiket dapat ditugaskan untuk akan disesuaikan berdasarkan pada pilihan ini. Kemampuan wats_ticket_ownership dapat diberikan di bawah profil pengguna oleh admin."
+
+#: wats-options.php:671
+msgid "Select the preferred option. Tickets access and display in frontend and admin sides will be adjusted based on this option and user privileges."
+msgstr "Pilih pilihan yang disukai. Akses dan menampilkan tiket di bagian frontend dan admin akan menyesuaikan pilihan berdasarkan hak pengguna."
+
+#: wats-options.php:686
+msgid "Select the preferred option. Tickets assignment possibilities in frontend and admin sides will be adjusted based on this option and user privileges."
+msgstr "Pilih pilihan yang disukai. kemungkinan pemasukan tiket di bagian frontend dan admin akan menyesuaikan berdasarkan pilihan dan hak pengguna."
+
+#: wats-options.php:962
+msgid "Select the status associated to the ticket closure."
+msgstr "Pilih status yang terkait untuk tiket yang ditutup."
+
+#: wats-options.php:926
+#: wats-options.php:935
+#: wats-options.php:944
+#: wats-options.php:968
+msgid "Selection"
+msgstr "Terpilih"
+
+#: wats-edit-form-advanced.php:400
+msgid "Send Trackbacks"
+msgstr "Kirim Umpan Balik"
+
+#: wats-edit-form-advanced.php:394
+msgid "Send trackbacks to:"
+msgstr "Kirim umpan balik ke:"
+
+#: wats-edit-form-advanced.php:394
+msgid "Separate multiple URLs with spaces"
+msgstr "Pisahkan beberapa URL dengan spasi"
+
+#: wats-edit-form-advanced.php:271
+msgid "Separate tags with commas."
+msgstr "Pisahkan penanda dengan koma."
+
+#: wats-options.php:824
+msgid "Server : "
+msgstr "Server :"
+
+#: wats-options.php:797
+msgid "Set this option to allow users to use a ticket submission form in the frontend to submit new tickets."
+msgstr "Tetapkan pilihan ini untuk memungkinkan pengguna menggunakan formulir pengajuan tiket di frontend dan untuk menyerahkan tiket baru."
+
+#: wats-options.php:815
+msgid "Set this option to define the ticket publications status upon ticket submission. It is advisable to set unauthenticated users tickets status to 'pending' to allow admin moderation before publication and limit SPAM."
+msgstr "Tetapkan pilihan ini untuk menentukan status tiket ketika tiket dikirimkan. Dianjurkan untuk mengatur pengguna yang tidak berkepentingan status tiket ke 'pending' untuk memungkinkan moderasi admin sebelum publikasi dan membatasi SPAM."
+
+#: wats-edit-form-advanced.php:355
+msgid "Setting a password will require people who visit your blog to enter the above password to view this post and its comments."
+msgstr "Atur password yang akan digunakan orang ketika mengunjungi blog anda untuk memasukkan sandi untuk melihat postingan ini dan komentarnya."
+
+#: wats-options.php:771
+msgid "Shared guest user"
+msgstr "Dibagikan dengan tamu"
+
+#: wats-edit.php:314
+msgid "Show all dates"
+msgstr "Tampilkan semua tanggal"
+
+#: wats-edit-form-advanced.php:470
+msgid "Show comments"
+msgstr "Tampilkan Komentar"
+
+#: wats-ticket-new.php:18
+msgid ""
+"Since you&#8217;re a newcomer, you&#8217;ll have to wait for an admin to add the <code>edit_posts</code> capability to your user, in order to be authorized to post.<br />\n"
+"You can also <a href=\"mailto:%s?subject=Promotion?\">e-mail the admin</a> to ask for a promotion.<br />\n"
+"When you&#8217;re promoted, just reload this page and you&#8217;ll be able to blog. :)"
+msgstr "Karena anda pendatang baru, anda harus menunggu admin untuk menambahkan kemampuan <code>edit_posts</code> kepada anda, agar berwenang untuk memposting. <br /> Anda juga dapat <a href=\"mailto:%s?subject=Promotion?\">e-mail admin</a> untuk meminta promosi. <br /> Bila Anda telah dipromosikan, hanya reload halaman ini dan Anda akan bisa memposting di blog. :)"
+
+#: wats-ticket.php:120
+msgid "Somebody"
+msgstr "Seseorang"
+
+#: theme/single-ticket.php:62
+msgid "Sorry, no tickets matched your criteria."
+msgstr "Maaf, tidak ada tiket yang cocok dengan kriteria anda."
+
+#: wats-template.php:415
+msgid "Sorry, the ticket submission form access has been disabled by the admin."
+msgstr "Maaf, akses penyerahan formulir tiket telah dinonaktifkan oleh admin."
+
+#: theme/single-ticket.php:57
+msgid "Sorry, you don't have the rights to browse this ticket."
+msgstr "Maaf, anda tidak punya hak untuk melihat tiket ini."
+
+#: wats-options.php:865
+msgid "Sort by"
+msgstr "Urutkan menurut"
+
+#: wats-edit-post-rows.php:15
+#: wats-options.php:943
+#: wats-options.php:952
+#: wats-template.php:290
+msgid "Status"
+msgstr "Status"
+
+#: wats-edit-form-advanced.php:101
+msgid "Status:"
+msgstr "Status:"
+
+#: wats-edit-form-advanced.php:173
+msgid "Stick this post to the front page"
+msgstr "Tandai postingan ini ke halaman depan"
+
+#: wats-template.php:398
+msgid "Submit ticket"
+msgstr "Kirim tiket"
+
+#: theme/comments-ticket.php:93
+msgid "Submit update"
+msgstr "Kirim pembaruan"
+
+#: wats-head.php:33
+msgid "Submitting ticket..."
+msgstr "Mengirimkan tiket..."
+
+#: wats-options.php:688
+msgid "Target users for tickets assignment"
+msgstr "Target pengguna untuk tiket"
+
+#: wats-template.php:473
+msgid "The email address is empty or contains invalid characters. "
+msgstr "Alamat email kosong atau berisi karakter yang tidak valid."
+
+#: wats-template.php:460
+msgid "The name is empty or contains invalid characters. "
+msgstr "Nama kosong atau berisi karakter yang tidak valid."
+
+#: wats-options.php:782
+msgid "The shared guest user is a user that must have at least contributor user level. This user will only have access to the ticket creation page on the admin side. You can share the guest user login/password with your visitors so that they can submit tickets without having to register first. This is a shared account."
+msgstr "Pengunjung adalah pengguna yang harus memiliki minimal tingkat kontributor pengguna. pengguna ini hanya akan memiliki akses ke halaman pembuatan tiket di sisi admin. Anda dapat berbagi guest login / password dengan pengunjung Anda sehingga mereka dapat menyerahkan tiket tanpa harus mendaftar terlebih dahulu. Ini adalah account bersama."
+
+#: wats-options.php:646
+msgid "The update notification is fired upon the following events : new comment added to a ticket, ownership, priority, status or type change in the ticket edition admin page."
+msgstr "Pemberitahuan pembaharuan di lepaskan dengan alasan sebagai berikut: komentar baru ditambahkan ke tiket, kepemilikan, prioritas, status atau jenis diubah di halaman tiket admin."
+
+#: wats-edit-form-advanced.php:26
+msgid "There is an autosave of this ticket that is more recent than the version below.  <a href=\"%s\">View the autosave</a>."
+msgstr "Berikut adalah autosave tiket ini pada waktu sebelumnya. <a href=\"%s\">Lihat semua autosave</a> ."
+
+#: wats-options.php:647
+msgid "These are global options which can be enabled or disabled individually under user profile if the bypass option is set. "
+msgstr "Ini adalah opsi global yang dapat diaktifkan atau dinonaktifkan oleh individu dengan profil pengguna jika pilihan bypass diatur."
+
+#: theme/single-ticket.php:29
+msgid "This entry was submited %1$s on %2$s at %3$s and is filed under %4$s."
+msgstr "Entri ini telah dimasukkan %1$s pada %2$s di %3$s dalam %4$s."
+
+#: wats-options.php:829
+msgid "This feature allows users to submit tickets directly through email. You have to define a secret email on a POP3 server."
+msgstr "Fitur ini memungkinkan pengguna untuk mengirimkan tiket secara langsung melalui email. Anda harus mendefinisikan sebuah email rahasia di server POP3."
+
+#: wats-options.php:844
+msgid "This option will be used to set the author of tickets submitted through the frontend submit form or through email by unregistered users."
+msgstr "Pilihan ini akan digunakan untuk mengatur penulisan tiket dikirimkan melalui formulir di frontend atau melalui email oleh pengguna terdaftar."
+
+#: wats-edit-post-rows.php:16
+msgid "Ticket"
+msgstr "Tiket"
+
+#: wats-template.php:526
+#: wats-ticket-metas.php:243
+#: wats-ticket-metas.php:245
+#: wats-ticket-metas.php:263
+#: wats-ticket-metas.php:265
+#: wats-ticket-metas.php:291
+#: wats-ticket-metas.php:293
+msgid "Ticket "
+msgstr "Tiket"
+
+#: wats-options.php:702
+msgid "Ticket assignment capability minimum level requirement"
+msgstr "Persyaratan minimum untuk memasukkan tiket"
+
+#: wats-template.php:140
+#: wats-template.php:151
+msgid "Ticket author"
+msgstr "Penulis tiket"
+
+#: wats-ticket-metas.php:555
+msgid "Ticket author email : "
+msgstr "Email penulis tiket:"
+
+#: wats-ticket-metas.php:551
+msgid "Ticket author name : "
+msgstr "Nama penulis tiket:"
+
+#: wats-ticket-metas.php:559
+msgid "Ticket author url : "
+msgstr "URL penulis tiket:"
+
+#: wats-options.php:902
+msgid "Ticket author user meta key column for tickets listing table"
+msgstr "Kolom kunci meta penulis tiket untuk tabel tiket yang dilihat"
+
+#: wats-options.php:884
+msgid "Ticket author user meta key selector for ticket listing filtering"
+msgstr "Kolom kunci meta penulis tiket untuk tabel tiket yang disaring"
+
+#: wats-template.php:395
+msgid "Ticket description"
+msgstr "Deskripsi tiket"
+
+#: wats-template.php:390
+#: wats-ticket-metas.php:370
+msgid "Ticket details"
+msgstr "Rincian tiket"
+
+#: wats-template.php:528
+msgid "Ticket has been successfully created!"
+msgstr "Tiket telah berhasil dibuat!"
+
+#: wats-options.php:595
+msgid "Ticket numerotation"
+msgstr "Penomoran tiket"
+
+#: wats-ticket-metas.php:516
+#: wats-ticket-metas.php:536
+msgid "Ticket originator : "
+msgstr "Pembuat tiket :"
+
+#: wats-options.php:695
+msgid "Ticket originator and admins"
+msgstr "Pembuat tiket dan admin"
+
+#: wats-options.php:698
+msgid "Ticket originator and any user with wats_ticket_ownership capability"
+msgstr "Pembuat tiket dan setiap pengguna dengan kemampuan wats_ticket_ownership"
+
+#: wats-template.php:162
+#: wats-ticket-metas.php:476
+msgid "Ticket owner"
+msgstr "Pemilik tiket"
+
+#: wats-ticket-metas.php:227
+msgid "Ticket owner has been assigned to : "
+msgstr "Pemilik tiket telah ditugaskan untuk:"
+
+#: wats-ticket-metas.php:225
+msgid "Ticket owner has been removed"
+msgstr "Pemilik tiket telah dihapus"
+
+#: wats-options.php:931
+msgid "Ticket priorities"
+msgstr "Proiritas tiket"
+
+#: wats-template.php:120
+#: wats-ticket-metas.php:446
+msgid "Ticket priority"
+msgstr "Prioritas tiket"
+
+#: wats-ticket-metas.php:220
+msgid "Ticket priority has been changed to : "
+msgstr "Prioritas tiket telah diubah ke:"
+
+#: wats-edit-form-advanced.php:18
+msgid "Ticket published. <a href=\"%s\">View ticket</a>"
+msgstr "Tiket telah diterbitkan. <a href=\"%s\">Lihat Tiket</a>"
+
+#: wats-edit-form-advanced.php:23
+msgid "Ticket restored to revision from %s"
+msgstr "Tiket dikembalikan ke revisi %s"
+
+#: wats-template.php:127
+#: wats-ticket-metas.php:459
+msgid "Ticket status"
+msgstr "Status tiket"
+
+#: wats-ticket-metas.php:210
+msgid "Ticket status has been changed to : "
+msgstr "Status tiket telah diubah ke:"
+
+#: wats-options.php:940
+msgid "Ticket statuses"
+msgstr "Status Tiket"
+
+#: wats-edit-form-advanced.php:20
+msgid "Ticket submitted. <a href=\"%s\">Preview ticket</a>"
+msgstr "Tiket telah diajukan. <a href=\"%s\">Pratayang Tiket</a>"
+
+#: wats-profile.php:81
+msgid "Ticket system capabilities"
+msgstr "Sistem kemampuan tiket"
+
+#: wats-profile.php:96
+msgid "Ticket system notifications"
+msgstr "Pemberitahuan sistem tiket"
+
+#: wats-template.php:393
+msgid "Ticket title"
+msgstr "Judul tiket"
+
+#: wats-template.php:113
+#: wats-ticket-metas.php:433
+msgid "Ticket type"
+msgstr "Jenis tiket"
+
+#: theme/single-ticket.php:20
+msgid "Ticket type : "
+msgstr "Jenis tiket:"
+
+#: wats-ticket-metas.php:215
+msgid "Ticket type has been changed to : "
+msgstr "Jenis tiket telah diubah ke:"
+
+#: wats-options.php:922
+msgid "Ticket types"
+msgstr "Jenis tiket"
+
+#: wats-edit-form-advanced.php:17
+msgid "Ticket updated."
+msgstr "Tiket telah diperbarui."
+
+#: wats-edit-form-advanced.php:14
+msgid "Ticket updated. <a href=\"%s\">View ticket</a>"
+msgstr "Tiket telah diperbarui. <a href=\"%s\">Lihat Tiket</a>"
+
+#: wats-dashboard.php:43
+#: wats-dashboard.php:58
+#: wats-head.php:142
+#: wats-head.php:163
+msgid "Tickets"
+msgstr "Tiket"
+
+#: wats-options.php:674
+msgid "Tickets assignment"
+msgstr "Pengajuan tiket"
+
+#: wats-lib.php:197
+msgid "Tickets can be assigned to this user"
+msgstr "Tiket dapat diajukan untuk pengguna ini"
+
+#: wats-dashboard.php:16
+#: wats-dashboard.php:24
+msgid "Tickets closed :"
+msgstr "Tiket di tutup:"
+
+#: wats-dashboard.php:14
+#: wats-dashboard.php:22
+msgid "Tickets created :"
+msgstr "Tiket dibuat:"
+
+#: wats-options.php:614
+msgid "Tickets display"
+msgstr "Tampilan tiket"
+
+#: wats-options.php:807
+msgid "Tickets from unauthenticated users will be submitted in 'pending' status and tickets from authenticated users will be in 'publish' status"
+msgstr "Tiket dari pengguna yang tidak berkepentingan akan masukkan ke dalam status 'pending' dan tiket dari pengguna terdaftar akan berada dalam status 'diterbitkan'"
+
+#: wats-options.php:810
+msgid "Tickets from unauthenticated users will be submitted in 'pending' status and tickets from authenticated users will be set according to user level capability"
+msgstr "Tiket dari pengguna yang tidak berkepentingan akan dimasukkan ke dalam status 'pending' dan tiket dari pengguna terdaftar akan disesuaikan dengan tingkat kemampuan pengguna"
+
+#: wats-options.php:723
+msgid "Tickets tagging"
+msgstr "Penandaan tiket"
+
+#: wats-options.php:659
+msgid "Tickets visibility"
+msgstr "Visibilitas tiket"
+
+#: wats-edit-form-advanced.php:589
+#: wats-template.php:281
+msgid "Title"
+msgstr "Judul"
+
+#: wats-edit-form-advanced.php:395
+msgid "Trackbacks are a way to notify legacy blog systems that you&#8217;ve linked to them. If you link other WordPress blogs they&#8217;ll be notified automatically using <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pingbacks</a>, no other action necessary."
+msgstr "Trackbacks adalah cara untuk memberitahu riwayat sistem blog anda bahwa anda telah terhubung ke mereka. Jika Anda menghubungkan ke blog Wordpress lain yang mereka akan diberitahu secara otomatis menggunakan <a href=\"http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pingbacks</a>, tidak ada tindakan lainnya yang diperlukan disini."
+
+#: wats-edit-post-rows.php:13
+#: wats-options.php:925
+#: wats-template.php:288
+msgid "Type"
+msgstr "Jenis"
+
+#: wats-edit-post-rows.php:229
+#: wats-template.php:321
+msgid "Uncategorized"
+msgstr "Uncategorized"
+
+#: wats-edit-post-rows.php:139
+msgid "Unpublished"
+msgstr "Unpublished"
+
+#: wats-edit-form-advanced.php:248
+#: wats-edit-form-advanced.php:249
+msgid "Update Ticket"
+msgstr "Perbaharui Tiket"
+
+#: wats-options.php:772
+#: wats-options.php:834
+#: wats-template.php:407
+msgid "User"
+msgstr "Pengguna"
+
+#: wats-lib.php:205
+msgid "User can attach files to tickets"
+msgstr "Pengguna dapat melampirkan file pada tiket"
+
+#: wats-template.php:381
+msgid "User details"
+msgstr "Rincian Pengguna"
+
+#: wats-options.php:855
+msgid "User selector format"
+msgstr "Format pilihan pengguna"
+
+#: wats-options.php:863
+msgid "User selector order"
+msgstr "Urutkan pilihan pengguna"
+
+#: wats-options.php:859
+msgid "Using user meta keys, set the user format you would like to use for user selectors. This format will be applied to all user selectors. If it is empty, the default key \"user_login\" will be applied. The following user meta keys can be used : user_login, "
+msgstr "Menggunakan kunci meta pengguna, mengatur format pengguna yang ingin Anda gunakan untuk penyeleksi pengguna. Format ini akan diterapkan ke semua penyeleksian pengguna. Jika kosong, default \"user_login\" akan diterapkan. Kunci pengguna berikut meta dapat digunakan: user_login,"
+
+#: wats-edit-post-rows.php:200
+#: wats-edit-post-rows.php:276
+msgid "View"
+msgstr "Lihat"
+
+#: wats-edit-post-rows.php:200
+msgid "View \"%s\""
+msgstr "Lihat \"%s\""
+
+#: wats-dashboard.php:146
+msgid "View all"
+msgstr "Lihat semua"
+
+#: wats-edit.php:335
+msgid "View all categories"
+msgstr "Lihat semua kategori"
+
+#: wats-edit.php:203
+msgid "View post"
+msgstr "Lihat posting"
+
+#: wats-edit-form-advanced.php:147
+msgid "Visibility:"
+msgstr "Visibilitas:"
+
+#: wats-options.php:830
+msgid "Warning : every email received on this account will result in a ticket. Therefore, make sure that your email adress isn't known by SPAM robots."
+msgstr "Peringatan: setiap email yang diterima di akun ini akan menjadi tiket. Karena itu, pastikan bahwa alamat email anda tidak dikenali oleh SPAM."
+
+#: wats-options.php:798
+msgid "Warning : if option is selected, users will have the opportunity to submit tickets without being authenticated. This could result in large amount of SPAM."
+msgstr "Peringatan: jika opsi ini dipilih, pengguna akan memiliki kesempatan untuk menyerahkan tiket tanpa dikonfirmasi. Hal ini dapat mengakibatkan banyak SPAM."
+
+#: wats-options.php:783
+msgid "Warning : if you set the current user (your admin account) as the guest user, you won't be able to access the admin options anymore after the save. So please make sure that you understand what it is about before setting this option."
+msgstr "Peringatan: jika Anda menetapkan pengguna saat ini (account admin anda) sebagai guest, anda tidak akan dapat mengakses pengaturan admin lagi setelah di simpan. Jadi, pastikan Anda memahami tentang pengaturan opsi ini."
+
+#: wats-options.php:649
+msgid "Warning : with these options enabled, the system may send a lot of emails, especially if you have many users. So please make sure that you really understand the implications before enabling these."
+msgstr "Peringatan: dengan pilihan ini diaktifkan, sistem akan mengirimkan banyak email, terutama jika Anda memiliki banyak pengguna. Jadi, pastikan Anda benar-benar memahami pengaturan ini sebelum di aktifkan."
+
+#: wats-options.php:860
+msgid "Warning : you need to make sure that the combination of keys used will make each entry unique and different from each other. Therefore, it is a good idea to use user_login as this key is unique for each user."
+msgstr "Peringatan: Anda perlu memastikan bahwa kombinasi tombol yang digunakan akan membuat setiap entri yang unik dan berbeda satu sama lain. Oleh karena itu, ide yang baik untuk menggunakan user_login sebagai kunci ini adalah unik untuk setiap pengguna."
+
+#: wats-ticket.php:121
+msgid "Warning: %s is currently editing this ticket"
+msgstr "Peringatan: Saat ini %s sedang mengedit tiket"
+
+#: wats-options.php:574
+msgid "WATS is free to use, cool isn't it? It has however required hundreds of hours to be developed."
+msgstr "WATS bebas untuk digunakan, keren kan? Karena itu kami memerlukan ratusan jam untuk mengembangkan ini."
+
+#: wats-template.php:388
+msgid "Website"
+msgstr "Situs web"
+
+#: wats-options.php:644
+msgid "When a new user is added, the profile option is disabled by default. "
+msgstr "Ketika user baru ditambahkan, pilihan profil dinonaktifkan secara default."
+
+#: wats-template.php:532
+msgid "when an admin would have approved it"
+msgstr "ketika admin telah menyetujui ini"
+
+#: wats-edit-post-rows.php:159
+msgid "Y/m/d"
+msgstr "d/m/Y"
+
+#: wats-edit-post-rows.php:141
+msgid "Y/m/d g:i:s A"
+msgstr "d/m/Y g:i:s A"
+
+#: wats-profile.php:88
+#: wats-profile.php:105
+msgid "Yes"
+msgstr "Ya"
+
+#: wats-edit-form-advanced.php:227
+msgid ""
+"You are about to delete this draft '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Anda akan menghapus konsep ini '%s'\n"
+"  'Batalkan' untuk menghentikan ini, 'OK' untuk menghapus ini."
+
+#: wats-edit-post-rows.php:194
+msgid ""
+"You are about to delete this draft '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Anda akan menghapus konsep ini '%s'\n"
+"  'Batalkan' untuk menghentikan ini, 'OK' untuk menghapus ini."
+
+#: wats-edit-form-advanced.php:227
+msgid ""
+"You are about to delete this post '%s'\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Anda akan menghapus posting ini '%s'\n"
+"  'Batalkan' untuk menghentikan ini, 'OK' untuk menghapus ini."
+
+#: wats-edit-post-rows.php:194
+msgid ""
+"You are about to delete this post '%s'\n"
+" 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Anda akan menghapus posting ini '%s'\n"
+"  'Batalkan' untuk menghentikan ini, 'OK' untuk menghapus ini."
+
+#: wats-edit.php:124
+msgid "You are not allowed to delete this post."
+msgstr "Anda tidak diizinkan untuk menghapus posting ini."
+
+#: wats-ticket.php:175
+msgid "You are not allowed to delete this ticket."
+msgstr "Anda tidak diizinkan untuk menghapus tiket ini."
+
+#: wats-ticket.php:133
+msgid "You are not allowed to edit this ticket."
+msgstr "Anda tidak diizinkan mengedit tiket ini."
+
+#: wats-ticket.php:107
+msgid "You attempted to edit a ticket that doesn't exist. Perhaps it was deleted?"
+msgstr "Anda mencoba untuk mengedit tiket yang tidak tersedia. Mungkin itu telah dihapus?"
+
+#: theme/single-ticket.php:33
+msgid "You can <a href=\"#respond\">leave an update</a>, or <a href=\"%s\" rel=\"trackback\">trackback</a> from your own site."
+msgstr "Anda dapat <a href=\"#respond\">meninggalkan update</a>, atau <a href=\"%s\" rel=\"trackback\">Pelacakan</a> di situs Anda sendiri."
+
+#: wats-template.php:530
+msgid "You can access it "
+msgstr "Anda dapat mengaksesnya"
+
+#: theme/single-ticket.php:30
+msgid "You can follow any responses to this entry through the <a href='%s'>RSS 2.0</a> feed."
+msgstr "Anda dapat mengikuti respon untuk entri ini melalui <a href='%s'>RSS 2.0</a> feed."
+
+#: theme/single-ticket.php:41
+msgid "You can skip to the end and leave an update. Pinging is currently not allowed."
+msgstr "Anda dapat melompat ke akhir dan meninggalkan pembaruan. Ping saat ini tidak diperbolehkan."
+
+#: wats-ticket-metas.php:246
+#: wats-ticket-metas.php:266
+#: wats-ticket-metas.php:294
+#: wats-ticket-metas.php:336
+msgid "You can view it here :"
+msgstr "Anda dapat melihatnya di sini :"
+
+#: theme/comments-ticket.php:65
+msgid "You must be <a href=\"%s\">logged in</a> to post an update."
+msgstr "Anda harus <a href=\"%s\">log masuk</a> untuk mengirimkan pembaruan."
+
+#: wats-template.php:532
+msgid "You will be able to access it "
+msgstr "Anda akan dapat mengaksesnya"
+
+#: wats-dashboard.php:21
+#: wats-dashboard.php:82
+msgid "Your stats :"
+msgstr "Statistik anda : "
+
+#: wats-edit.php:203
+msgid "Your ticket has been saved."
+msgstr "tiket anda telah disimpan."
+

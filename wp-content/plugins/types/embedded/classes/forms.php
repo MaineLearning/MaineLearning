@@ -339,7 +339,8 @@ class Enlimbo_Forms_Wpcf
             if (isset($element['#attributes']['id'])) {
                 $element['#id'] = $element['#attributes']['id'];
             } else {
-                $element['#id'] = 'form-' . mt_rand();
+                $element['#id'] = 'form-' . md5(serialize($element)) . '-'
+                            . $this->_count($element['#type']);
             }
         }
         $element['_attributes_string'] = $this->_setElementAttributes($element);
@@ -371,9 +372,8 @@ class Enlimbo_Forms_Wpcf
      */
     private function _pattern($pattern, $element)
     {
-        $pattern = strtolower($pattern);
         foreach ($element['_render'] as $key => $value) {
-            $pattern = str_replace('<' . strtolower($key) . '>', $value,
+            $pattern = str_replace('<' . strtoupper($key) . '>', $value,
                     $pattern);
         }
         return $pattern;

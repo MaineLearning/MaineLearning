@@ -66,6 +66,7 @@ function wpcf_admin_custom_taxonomies_form() {
         '#value' => isset($ct['labels']['name']) ? $ct['labels']['name'] : '',
         '#validate' => array(
             'required' => array('value' => true),
+            'maxlength' => array('value' => 30),
 //            'alphanumeric' => array('value' => true),
         ),
         '#pattern' => $table_row,
@@ -83,6 +84,7 @@ function wpcf_admin_custom_taxonomies_form() {
         '#value' => isset($ct['labels']['singular_name']) ? $ct['labels']['singular_name'] : '',
         '#validate' => array(
             'required' => array('value' => true),
+            'maxlength' => array('value' => 30),
 //            'alphanumeric' => array('value' => true),
         ),
         '#pattern' => $table_row,
@@ -102,6 +104,7 @@ function wpcf_admin_custom_taxonomies_form() {
         '#validate' => array(
             'required' => array('value' => true),
             'nospecialchars' => array('value' => true),
+            'maxlength' => array('value' => 30),
         ),
     );
     $form['description'] = array(
@@ -412,6 +415,13 @@ function wpcf_admin_custom_taxonomies_form_submit($form) {
     $data['slug'] = $tax;
     $custom_taxonomies = get_option('wpcf-custom-taxonomies', array());
 
+    // Check reserved name
+    if (wpcf_is_reserved_name($tax)) {
+        wpcf_admin_message(sprintf(__('The name %s is reserved in WordPress and cannot be used in custom taxonomies. Please use a different name.',
+                                'wpcf'), $tax), 'error');
+        return false;
+    }
+
     // Check if exists
     if ($update && !array_key_exists($data['wpcf-tax'], $custom_taxonomies)) {
         wpcf_admin_message(__("Custom taxonomy do not exist", 'wpcf'), 'error');
@@ -424,16 +434,9 @@ function wpcf_admin_custom_taxonomies_form_submit($form) {
         return false;
     }
 
-    $built_in_tax = array('category', 'post_tag', 'post-tag', 'link_category', 'link-category');
-
     // Check if our tax overwrites some tax outside
     $tax_exists = get_taxonomy($tax);
-    if (!$update && (!empty($tax_exists) || in_array($tax, $built_in_tax))) {
-        wpcf_admin_message(__('Taxonomy already exists', 'wpcf'), 'error');
-        return false;
-    }
-    if ($update && (in_array($data['wpcf-tax'], $built_in_tax) || in_array($tax,
-                    $built_in_tax))) {
+    if (!$update && !empty($tax_exists)) {
         wpcf_admin_message(__('Taxonomy already exists', 'wpcf'), 'error');
         return false;
     }
@@ -499,11 +502,13 @@ function wpcf_custom_taxonimies_register_translation($taxonomy, $data) {
     }
     foreach ($data['labels'] as $label => $string) {
         if ($label == 'name' || $label == 'singular_name') {
-            wpcf_translate_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-TAX',
+                    $taxonomy . ' ' . $label, $string);
             continue;
         }
         if (!isset($default['labels'][$label]) || $string !== $default['labels'][$label]) {
-            wpcf_translate_register_string('Types-TAX', $taxonomy . ' ' . $label, $string);
+            wpcf_translate_register_string('Types-TAX',
+                    $taxonomy . ' ' . $label, $string);
         }
     }
 }

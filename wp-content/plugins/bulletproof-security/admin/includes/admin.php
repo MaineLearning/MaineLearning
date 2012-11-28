@@ -9,16 +9,17 @@ if (!function_exists ('add_action')) {
 function bulletproof_security_admin_init() {
 	// whitelist BPS DB options 
 	register_setting('bulletproof_security_options', 'bulletproof_security_options', 'bulletproof_security_options_validate');
+	register_setting('bulletproof_security_options_autolock', 'bulletproof_security_options_autolock', 'bulletproof_security_options_validate_autolock');
 	register_setting('bulletproof_security_options_customcode', 'bulletproof_security_options_customcode', 'bulletproof_security_options_validate_customcode');
 	register_setting('bulletproof_security_options_customcode_WPA', 'bulletproof_security_options_customcode_WPA', 'bulletproof_security_options_validate_customcode_WPA');
-	register_setting('bulletproof_security_options_maint', 'bulletproof_security_options_maint', 'bulletproof_security_options_validate_maint');
 	register_setting('bulletproof_security_options_mynotes', 'bulletproof_security_options_mynotes', 'bulletproof_security_options_validate_mynotes');
-		
+	register_setting('bulletproof_security_options_maint', 'bulletproof_security_options_maint', 'bulletproof_security_options_validate_maint');
+			
 	// Register BPS js
 	wp_register_script( 'bps-js', plugins_url('/bulletproof-security/admin/js/bulletproof-security-admin.js'));
 				
 	// Register BPS stylesheet
-	wp_register_style('bps-css', plugins_url('/bulletproof-security/admin/css/bulletproof-security-admin.css'));
+	wp_register_style('bps-css', plugins_url('/bulletproof-security/admin/css/bulletproof-security-admin-blue.css'));
 
 	// Create BPS Backup Folder structure - suppressing errors on activation - errors displayed in HUD
 	if( !is_dir (WP_CONTENT_DIR . '/bps-backup')) {
@@ -55,24 +56,33 @@ function bulletproof_security_load_settings_page() {
 	wp_enqueue_script('bps-js');
 	  	
 	// Engueue BPS stylesheet
-	wp_enqueue_style('bps-css', plugins_url('/bulletproof-security/admin/css/bulletproof-security-admin.css'));
+	wp_enqueue_style('bps-css', plugins_url('/bulletproof-security/admin/css/bulletproof-security-admin-blue.css'));
 }
 
 function bulletproof_security_install() {
 	global $bulletproof_security;
 	$previous_install = get_option('bulletproof_security_options');
 	if ( $previous_install ) {
-	if ( version_compare($previous_install['version'], '.47.5', '<') )
+	if ( version_compare($previous_install['version'], '.47.6', '<') )
 	remove_role('denied');
 	}
 }
 
-// unregister_setting( $option_group, $option_name, $sanitize_callback );
+// Deactivation - remove/delete nothing at this point
+function bulletproof_security_deactivation() {
+// nothing needs to removed on deactivation for now
+}
 
+// Uninstall - do not unlink .htaccess files on uninstall to prevent catastrophic user errors
 function bulletproof_security_uninstall() {
 	require_once( ABSPATH . 'wp-admin/includes/plugin.php');
 	$options = get_option('bulletproof_security_options');
 	delete_option('bulletproof_security_options');
+	delete_option('bulletproof_security_options_customcode');
+	delete_option('bulletproof_security_options_customcode_WPA');
+	delete_option('bulletproof_security_options_maint');
+	delete_option('bulletproof_security_options_mynotes');
+	delete_option('bulletproof_security_options_autolock');
 }
 
 // Validate BPS options 
@@ -91,6 +101,14 @@ function bulletproof_security_options_validate_maint($input) {
 	$options['bps-message-2'] = wp_filter_nohtml_kses($input['bps-message-2']);
 	$options['bps-retry-after'] = wp_filter_nohtml_kses($input['bps-retry-after']);
 	$options['bps-background-image'] = wp_filter_nohtml_kses($input['bps-background-image']);
+		
+	return $options;  
+}
+
+// Validate BPS options - Options.php - Edit/Uploads/Downloads page - Root .htaccess file AutoLock 
+function bulletproof_security_options_validate_autolock($input) {  
+	$options = get_option('bulletproof_security_options_autolock');  
+	$options['bps_root_htaccess_autolock'] = wp_filter_nohtml_kses($input['bps_root_htaccess_autolock']);
 		
 	return $options;  
 }

@@ -1,6 +1,7 @@
 <?php
 add_filter('wpcf_fields_type_image_value_get', 'wpcf_fields_image_value_filter');
 add_filter('wpcf_fields_type_image_value_save', 'wpcf_fields_image_value_filter');
+add_filter('upload_dir', 'wpcf_fields_image_uploads_realpath');
 
 /**
  * Register data (called automatically).
@@ -187,31 +188,23 @@ function wpcf_fields_image_editor_callback() {
         '#value' => isset($last_settings['style']) ? $last_settings['style'] : '',
     );
 
-    if (!in_array($post_type, array('view', 'view-template'))) {
-        $attributes_outsider = $image_data['is_outsider'] ? array('disabled' => 'disabled') : array();
-        $attributes_attachment = !$image_data['is_attachment'] ? array('disabled' => 'disabled') : array();
-    } else {
-        $attributes_outsider = array();
-        $attributes_attachment = array();
+    $attributes_outsider = array();
+    $attributes_attachment = array();
+    $fetch_remote = (bool) wpcf_get_settings('images_remote');
+    if ($image_data['is_outsider'] && !$fetch_remote) {
+        $form['notice'] = array(
+            '#type' => 'markup',
+            '#markup' => '<div class="message error" style="margin:0 0 20px 0;"><p>'
+            . sprintf(__('Remote image resize is currently disabled, so Types will only resize images that you upload. To change, go to the %sTypes settings page%s.',
+                            'wpcf'),
+                    '<a href="' . admin_url('admin.php?page=wpcf-custom-settings#types-image-settings') . '" target="_blank">',
+                    '</a>')
+            . '</p></div>',
+        );
+        $attributes_outsider = array('disabled' => 'disabled');
+        $attributes_attachment = array('disabled' => 'disabled');
     }
 
-    if (!in_array($post_type, array('view', 'view-template')) && $image_data['is_outsider']) {
-        $form['notice'] = array(
-            '#type' => 'markup',
-            '#markup' => '<div class="message error" style="margin:0 0 20px 0;"><p>'
-            . __('Types can only resize images that you upload to this site and not images from other domains.',
-                    'wpcf')
-            . '</p></div>',
-        );
-    } else if ($image_data['is_outsider']) {
-        $form['notice'] = array(
-            '#type' => 'markup',
-            '#markup' => '<div class="message error" style="margin:0 0 20px 0;"><p>'
-            . __('Types will be able to resize images that are uploaded to the post. If you specify URLs of images on other sites, Types will not resize them.',
-                    'wpcf')
-            . '</p></div>',
-        );
-    }
     if ($image_data['is_attachment']) {
         $default_value = isset($last_settings['image-size']) ? $last_settings['image-size'] : 'thumbnail';
     } else if (!$image_data['is_outsider']) {
@@ -289,14 +282,14 @@ function wpcf_fields_image_editor_callback() {
     <script type="text/javascript">
         //<![CDATA[
         jQuery(document).ready(function(){
-            jQuery('input:radio[name="image-size"]').change(function(){
+            jQuery('input[name="image-size"]').change(function(){
                 if (jQuery(this).val() == 'wpcf-custom') {
                     jQuery('#wpcf-toggle').slideDown();
                 } else {
                     jQuery('#wpcf-toggle').slideUp();
                 }
             });
-            if (jQuery('input:radio[name="image-size"]:checked').val() == 'wpcf-custom') {
+            if (jQuery('input[name="image-size"]:checked').val() == 'wpcf-custom') {
                 jQuery('#wpcf-toggle').show();
             }
         });
@@ -364,6 +357,8 @@ function wpcf_fields_image_view($params) {
     // Get image data
     $image_data = wpcf_fields_image_get_data($params['field_value']);
 
+    //print_r($image_data);
+    //print_r($params);
     // Display error to admin only
     if (!empty($image_data['error'])) {
         if (current_user_can('administrator')) {
@@ -402,7 +397,9 @@ function wpcf_fields_image_view($params) {
 
     // Pre-configured size (use WP function)
     if ($image_data['is_attachment'] && !empty($params['size'])) {
+        //print_r('is_attachment');
         if (isset($params['url']) && $params['url'] == 'true') {
+            //print_r('is_url');
             $image_url = wp_get_attachment_image_src($image_data['is_attachment'],
                     $params['size']);
             if (!empty($image_url[0])) {
@@ -411,6 +408,7 @@ function wpcf_fields_image_view($params) {
                 $output = $params['field_value'];
             }
         } else {
+            //print_r('is_not_url');
             $output = wp_get_attachment_image($image_data['is_attachment'],
                     $params['size'], false,
                     array(
@@ -422,19 +420,51 @@ function wpcf_fields_image_view($params) {
             );
         }
     } else { // Custom size
+        //print_r('custom_size');
         $width = !empty($params['width']) ? intval($params['width']) : null;
         $height = !empty($params['height']) ? intval($params['height']) : null;
         $crop = (!empty($params['proportional']) && $params['proportional'] == 'true') ? false : true;
 
+
+        //////////////////////////
+        // If width and height are not set then check the size parameter.
+        // This handles the case when the image is not an attachment.
+        if (!$width && !$height && !empty($params['size'])) {
+            //print_r('no_width_no_height_and_size');
+            switch ($params['size']) {
+                case 'thumbnail':
+                    $width = get_option('thumbnail_size_w');
+                    $height = get_option('thumbnail_size_h');
+                    if (empty($params['proportional'])) {
+                        $crop = get_option('thumbnail_crop');
+                    }
+                    break;
+
+                case 'medium':
+                    $width = get_option('medium_size_w');
+                    $height = get_option('medium_size_h');
+                    break;
+
+                case 'large':
+                    $width = get_option('large_size_w');
+                    $height = get_option('large_size_h');
+                    break;
+            }
+        }
+
+
         // Check if image is outsider
         if (!$image_data['is_outsider']) {
+            //print_r('Not is_outsider');
             $resized_image = wpcf_fields_image_resize_image(
                     $params['field_value'], $width, $height, 'relpath', false,
                     $crop
             );
             if (!$resized_image) {
+                //print_r('Not resized image');
                 $resized_image = $params['field_value'];
             } else {
+                //print_r('resized image add to lib');
                 // Add to library
                 $image_abspath = wpcf_fields_image_resize_image(
                         $params['field_value'], $width, $height, 'abspath',
@@ -442,6 +472,7 @@ function wpcf_fields_image_view($params) {
                 );
                 $add_to_library = wpcf_get_settings('add_resized_images_to_library');
                 if ($add_to_library) {
+                    //print_r('add to lib');
                     global $wpdb;
                     $attachment_exists = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
     WHERE post_type = 'attachment' AND guid=%s",
@@ -471,11 +502,14 @@ function wpcf_fields_image_view($params) {
                 }
             }
         } else {
+            //print_r('is_outsider');
             $resized_image = $params['field_value'];
         }
         if (isset($params['url']) && $params['url'] == 'true') {
+            //print_r('return');
             return $resized_image;
         }
+        //print_r('output');
         $output = '<img alt="';
         $output .= $alt !== false ? $alt : $resized_image;
         $output .= '" title="';
@@ -511,6 +545,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
         $dest_path = NULL, $quality = 75) {
 
     if (empty($url_path)) {
+        //print_r('return url path');
         return $url_path;
     }
 
@@ -518,6 +553,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     $image_data = wpcf_fields_image_get_data($url_path);
 
     if (empty($image_data['fullabspath']) || !empty($image_data['error'])) {
+        //print_r('return url path no full or error');
         return $url_path;
     }
 
@@ -527,6 +563,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
 
     // Check if cached in this call
     if (!$refresh && isset($cached[$cache_key][$return])) {
+        //print_r('return cached');
         return $cached[$cache_key][$return];
     }
 
@@ -536,11 +573,13 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
     // Get size of new file
     $size = @getimagesize($image_data['fullabspath']);
     if (!$size) {
+        //print_r('not size');
         return $url_path;
     }
     list($orig_w, $orig_h, $orig_type) = $size;
     $dims = image_resize_dimensions($orig_w, $orig_h, $width, $height, $crop);
     if (!$dims) {
+        //print_r('not dims');
         return $url_path;
     }
     list($dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) = $dims;
@@ -563,6 +602,7 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
 
     // Check if already resized
     if (!$refresh && file_exists($image_abspath)) {
+        //print_r('file exists');
         // Cache it
         $cached[$cache_key]['relpath'] = $image_relpath;
         $cached[$cache_key]['abspath'] = $image_abspath;
@@ -571,17 +611,20 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
 
     // If original file don't exists
     if (!file_exists($image_data['fullabspath'])) {
+        //print_r('not file exists');
         return $url_path;
     }
 
     // Resize image
-    $resized_image = @image_resize(
+    $resized_image = @wpcf_image_resize(
                     $image_data['fullabspath'], $width, $height, $crop, $suffix,
                     $dest_path, $quality
     );
 
     // Check if error
     if (is_wp_error($resized_image)) {
+        //print_r('resized wp error');
+        //print_r($resized_image);
         return $url_path;
     }
 
@@ -603,11 +646,28 @@ function wpcf_fields_image_resize_image($url_path, $width = 300, $height = 200,
  */
 function wpcf_fields_image_get_data($image) {
 
+    global $current_user;
+
     // Check if already cached
     static $cache = array();
     if (isset($cache[md5($image)])) {
         return $cache[md5($image)];
     }
+
+    // Defaults
+    $data = array(
+        'image' => basename($image),
+        'image_name' => '',
+        'extension' => '',
+        'abspath' => '',
+        'relpath' => dirname($image),
+        'fullabspath' => '',
+        'fullrelpath' => $image,
+        'is_outsider' => 1,
+        'is_in_upload_path' => 0,
+        'is_attachment' => 0,
+        'error' => '',
+    );
 
     // Strip GET vars
     $image = strtok($image, '?');
@@ -617,98 +677,113 @@ function wpcf_fields_image_get_data($image) {
         return array('error' => sprintf(__('Image %s not valid', 'wpcf'), $image));
     }
     // Extension check
-    $extension = pathinfo($image, PATHINFO_EXTENSION);
-    if (!in_array(strtolower($extension), array('jpg', 'jpeg', 'gif', 'png'))) {
+    $data['extension'] = pathinfo($image, PATHINFO_EXTENSION);
+    if (!in_array(strtolower($data['extension']),
+                    array('jpg', 'jpeg', 'gif', 'png'))) {
         return array('error' => sprintf(__('Image %s not valid', 'wpcf'), $image));
     }
-
-    // Defaults
-    $abspath = '';
-    $relpath = '';
-    $is_outsider = 1;
-    $is_in_upload_path = 0;
-    $is_attachment = 0;
-    $error = '';
-
-    // Check if it's on domain or subdomain
-    $url = get_bloginfo('url');
-    $check_image_url = explode('//', $image);
-    $check_image_url = explode('/', $check_image_url[1]);
-    $check_dir_url = explode('//', $url);
-    $check_dir_url = explode('/', $check_dir_url[1]);
-    // Check in both ways
-    if (@strpos($check_image_url[0], $check_dir_url[0]) !== false
-            || @strpos($check_dir_url[0], $check_image_url[0]) !== false) {
-        $is_outsider = 0;
+    // Parse URL
+    $parsed = parse_url($image);
+    $parsed_wp = parse_url(get_site_url());
+    if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i',
+                    $parsed['host'], $regs)) {
+        $parsed['domain'] = $regs['domain'];
+    } else {
+        $parsed['domain'] = $parsed['host'];
+    }
+    if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i',
+                    $parsed_wp['host'], $regs)) {
+        $parsed_wp['domain'] = $regs['domain'];
+    } else {
+        $parsed_wp['domain'] = $parsed_wp['host'];
     }
 
-    // Check if it's in upload path
-    $upload_dir = wp_upload_dir();
-    unset($check_image_url[0]);
-    if (empty($upload_dir['error'])) {
-        $check_upload_dir = explode('//', trim($upload_dir['baseurl']));
-        $check_upload_dir = explode('/', $check_upload_dir[1]);
-        unset($check_upload_dir[0]);
-        if (strpos(implode('/', $check_image_url),
-                        implode('/', $check_upload_dir)) !== false) {
-            $is_in_upload_path = 1;
+    // Check if it's on same domain
+    $data['is_outsider'] = $parsed['domain'] == $parsed_wp['domain'] ? 0 : 1;
+
+    if (!$data['is_outsider']) {
+        // Check if it's in upload path
+        $upload_dir = wp_upload_dir();
+        $upload_dir_parsed = parse_url($upload_dir['baseurl']);
+
+        // Determine if in upload path and calculate abspath
+        // 
+        // This works for regular installation and main blog on multisite
+        if ((!is_multisite() || is_main_site())
+                && strpos($parsed['path'], $upload_dir_parsed['path']) === 0) {
+            $data['is_in_upload_path'] = 1;
+            if (!empty($parsed_wp['path'])) {
+                $data['abspath'] = dirname(str_replace($parsed_wp['path'] . '/',
+                                ABSPATH, $parsed['path']));
+            } else {
+                $data['abspath'] = ABSPATH . dirname($parsed['path']);
+            }
+            $data['fullabspath'] = $data['abspath'] . DIRECTORY_SEPARATOR . basename($image);
+
+            //
+            // Check Multisite
+        } else if (is_multisite() && !is_main_site()) {
+            if (strpos($parsed['path'], $upload_dir_parsed['path']) === 0) {
+                $data['is_in_upload_path'] = 1;
+            }
+            $multisite_parsed = explode('/files/', $parsed['path']);
+            if (isset($multisite_parsed[1])) {
+                $data['is_in_upload_path'] = 1;
+                $data['abspath'] = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . dirname($multisite_parsed[1]);
+                $data['fullabspath'] = $data['abspath'] . DIRECTORY_SEPARATOR . basename($image);
+            }
         }
-    }
 
-    if (!$is_outsider) {
+        // Manual upload
+        if (empty($data['abspath'])) {
+            if (!empty($parsed_wp['path'])) {
+                $data['abspath'] = dirname(str_replace($parsed_wp['path'] . '/',
+                                ABSPATH, $parsed['path']));
+            } else {
+                $data['abspath'] = ABSPATH . dirname($parsed['path']);
+            }
+            $data['fullabspath'] = $data['abspath'] . DIRECTORY_SEPARATOR . basename($image);
+        }
+
         // Check if it's attachment
         global $wpdb;
-        $attachment_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
+        $data['is_attachment'] = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts}
     WHERE post_type = 'attachment' AND guid=%s",
                         $image));
-        // Calculate abspath
-        // Uploaded
-        if ($is_in_upload_path) {
-            $info = pathinfo($image);
-            $path = parse_url($image);
-            if (!is_multisite()) {
-                $temp = parse_url(network_home_url());
-            } else {
-                $temp = parse_url(get_bloginfo('url'));
-            }
-            $port = isset($path['port']) ? ':' . $path['port'] : '';
-            $info['dirname'] = $temp['scheme'] . '://' . $temp['host'] . $port . dirname($path['path']);
-            $abspath = str_replace(
-                    $upload_dir['baseurl'], $upload_dir['basedir'],
-                    $info['dirname']
-            );
-        } else {// Manually uploaded
-            unset($check_image_url[1]);
-            if (!is_multisite()) {
-                $abspath = dirname(ABSPATH . implode(DIRECTORY_SEPARATOR,
-                                $check_image_url));
-            } else {
-                $network_url = network_home_url();
-                $network_url = explode('//', $network_url);
-                $network_url = explode('/', $network_url[1]);
-                unset($network_url[0], $network_url[1], $check_image_url[1]);
-                $abspath = dirname(ABSPATH . implode(DIRECTORY_SEPARATOR,
-                                $network_url + $check_image_url));
-            }
+    }
+
+    // Set remote if enabled
+    if ($data['is_outsider'] && wpcf_get_settings('images_remote')) {
+        $remote = wpcf_fields_image_get_remote($image);
+        if (!is_wp_error($remote)) {
+            $data['is_outsider'] = 0;
+            $data['is_in_upload_path'] = 1;
+            $data['abspath'] = dirname($remote['abspath']);
+            $data['fullabspath'] = $remote['abspath'];
+            $data['image'] = $remote['relpath'];
+            $data['relpath'] = dirname($remote['relpath']);
+            $data['fullrelpath'] = $remote['relpath'];
         }
     }
 
-    $data = array(
-        'image' => basename($image),
-        'image_name' => basename($image, '.' . $extension),
-        'extension' => $extension,
-        'abspath' => realpath($abspath),
-        'relpath' => dirname($image),
-        'fullabspath' => realpath($abspath . DIRECTORY_SEPARATOR . basename($image)),
-        'fullrelpath' => $image,
-        'is_outsider' => $is_outsider,
-        'is_in_upload_path' => $is_in_upload_path,
-        'is_attachment' => !empty($attachment_id) ? $attachment_id : 0,
-        'error' => $error,
-    );
-
+    // Set rest of data
+    $data['image_name'] = basename($data['image'], '.' . $data['extension']);
+    $abspath_realpath = realpath($data['abspath']);
+    $data['abspath'] = $abspath_realpath ? $abspath_realpath : $data['abspath'];
+    $fullabspath_realpath = realpath($data['fullabspath']);
+    $data['fullabspath'] = $fullabspath_realpath ? $fullabspath_realpath : $data['fullabspath'];
+    //$user = wp_get_current_user();
+    if (isset($current_user->user_email) && $current_user->user_email == 'jocics@gmail.comrr') {
+        echo '<pre>';
+        print_r($parsed);
+        print_r($parsed_wp);
+        print_r($upload_dir);
+        print_r($upload_dir_parsed);
+        print_r($data);
+        die();
+    }
     // Cache it
-    $cache[md5($image)] = $data;
+    $cache[md5($data['image'])] = $data;
 
     return $data;
 }
@@ -721,4 +796,262 @@ function wpcf_fields_image_get_data($image) {
  */
 function wpcf_fields_image_value_filter($value) {
     return strtok($value, '?');
+}
+
+/**
+ * Gets cache directory.
+ * 
+ * @return \WP_Error 
+ */
+function wpcf_fields_image_get_cache_directory($suppress_filters = false) {
+    $wp_upload_dir = wp_upload_dir();
+    if (!empty($wp_upload_dir['error'])) {
+        return new WP_Error('wpcf_image_cache_dir', $wp_upload_dir['error']);
+    } else {
+        $cache_dir = $wp_upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'types_image_cache';
+    }
+    if (!$suppress_filters) {
+        $cache_dir = apply_filters('types_image_cache_dir', $cache_dir);
+        if (!wp_mkdir_p($cache_dir)) {
+            return new WP_Error('wpcf_image_cache_dir', sprintf(__('Image cache directory %s could not be created',
+                                            'wpcf'),
+                                    '<strong>' . $cache_dir . '</strong>'));
+        }
+    }
+    return $cache_dir;
+}
+
+function wpcf_image_http_request_timeout($timeout) {
+    return 20;
+}
+
+/**
+ * Fetches remote images.
+ * 
+ * @param type $url
+ * @return \WP_Error 
+ */
+function wpcf_fields_image_get_remote($url) {
+
+    $refresh = false;
+
+    // Set directory
+    $cache_dir = wpcf_fields_image_get_cache_directory();
+    if (is_wp_error($cache_dir)) {
+        return $cache_dir;
+    }
+
+    // Validate image
+    $extension = pathinfo($url, PATHINFO_EXTENSION);
+    if (!in_array(strtolower($extension), array('jpg', 'jpeg', 'gif', 'png'))) {
+        return new WP_Error('wpcf_image_cache_not_valid', sprintf(__('Image %s not valid',
+                                        'wpcf'), $url));
+    }
+
+    $image = $cache_dir . DIRECTORY_SEPARATOR . md5($url) . '.' . $extension;
+
+    // Refresh if necessary
+    $refresh_time = intval(wpcf_get_settings('images_remote_cache_time'));
+    if ($refresh_time != 0 && file_exists($image)) {
+        $time_modified = filemtime($image);
+        if (time() - $time_modified > $refresh_time * 60 * 60) {
+            $refresh = true;
+            $files = glob($cache_dir . DIRECTORY_SEPARATOR . md5($url) . "-*");
+            if ($files) {
+                foreach ($files as $filename) {
+                    @unlink($filename);
+                }
+            }
+        }
+    }
+
+    // Check if image is fetched
+    if ($refresh || !file_exists($image)) {
+
+        // fetch the remote url and write it to the placeholder file
+        add_filter('http_request_timeout', 'wpcf_image_http_request_timeout',
+                10, 1);
+        $resp = wp_remote_get($url);
+        remove_filter('http_request_timeout', 'wpcf_image_http_request_timeout',
+                10, 1);
+        // make sure the fetch was successful
+        if ($resp['response']['code'] != '200') {
+            return new WP_Error('wpcf_image_cache_file_error', sprintf(__('Remote server returned error response %1$d %2$s',
+                                            'wpcf'),
+                                    esc_html($resp['response']),
+                                    get_status_header_desc($resp['response'])));
+        }
+        if (strlen($resp['body']) != $resp['headers']['content-length']) {
+            return new WP_Error('wpcf_image_cache_file_error', __('Remote file is incorrect size',
+                                    'wpcf'));
+        }
+
+        $out_fp = fopen($image, 'w');
+        if (!$out_fp) {
+            return new WP_Error('wpcf_image_cache_file_error', __('Could not create cache file',
+                                    'wpcf'));
+        }
+
+        fwrite($out_fp, $resp['body']);
+        fclose($out_fp);
+
+        $max_size = (int) apply_filters('import_attachment_size_limit', 0);
+        $filesize = filesize($image);
+        if (!empty($max_size) && $filesize > $max_size) {
+            @unlink($image);
+            return new WP_Error('wpcf_image_cache_file_error', sprintf(__('Remote file is too large, limit is %s',
+                                            'wpcf'), size_format($max_size)));
+        }
+    }
+
+    return array(
+        'abspath' => $image,
+        'relpath' => icl_get_file_relpath($image) . '/' . basename($image)
+    );
+}
+
+/**
+ * Clears remote image cache.
+ * 
+ * @param type $action 
+ */
+function wpcf_fields_image_clear_cache($cache_dir = null, $action = 'outdated') {
+    if (is_null($cache_dir)) {
+        $cache_dir = wpcf_fields_image_get_cache_directory();
+    }
+    $refresh_time = intval(wpcf_get_settings('images_remote_cache_time'));
+    if ($refresh_time == 0 && $action != 'all') {
+        return true;
+    }
+    foreach (glob($cache_dir . DIRECTORY_SEPARATOR . "*") as $filename) {
+        if ($action == 'all') {
+            @unlink($filename);
+        } else {
+            $time_modified = filemtime($filename);
+            if (time() - $time_modified > $refresh_time * 60 * 60) {
+                @unlink($filename);
+                // Clear resized images
+                $path = pathinfo($filename);
+                foreach (glob($path['dirname'] . DIRECTORY_SEPARATOR . $path['filename'] . "-*") as $resized) {
+                    @unlink($resized);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Filters upload paths (to fix Windows issues).
+ * 
+ * @param type $args
+ * @return type
+ */
+function wpcf_fields_image_uploads_realpath($args) {
+    $fixes = array('path', 'subdir', 'basedir');
+    foreach ($fixes as $fix) {
+        if (isset($args[$fix])) {
+            $args[$fix] = realpath($args[$fix]);
+        }
+    }
+    return $args;
+}
+
+/**
+ * i18n friendly version of basename(), copy from wp-includes/formatting.php to solve bug with windows
+ *
+ * @since 3.1.0
+ *
+ * @param string $path A path.
+ * @param string $suffix If the filename ends in suffix this will also be cut off.
+ * @return string
+ */
+function wpcf_basename( $path, $suffix = '' ) {
+    return urldecode( basename( str_replace( array( '%2F', '%5C' ), '/', urlencode( $path ) ), $suffix ) ); 
+}
+
+/**
+ * Copy from wp-includes/media.php
+ * Scale down an image to fit a particular size and save a new copy of the image.
+ *
+ * The PNG transparency will be preserved using the function, as well as the
+ * image type. If the file going in is PNG, then the resized image is going to
+ * be PNG. The only supported image types are PNG, GIF, and JPEG.
+ *
+ * Some functionality requires API to exist, so some PHP version may lose out
+ * support. This is not the fault of WordPress (where functionality is
+ * downgraded, not actual defects), but of your PHP version.
+ *
+ * @since 2.5.0
+ *
+ * @param string $file Image file path.
+ * @param int $max_w Maximum width to resize to.
+ * @param int $max_h Maximum height to resize to.
+ * @param bool $crop Optional. Whether to crop image or resize.
+ * @param string $suffix Optional. File suffix.
+ * @param string $dest_path Optional. New image file path.
+ * @param int $jpeg_quality Optional, default is 90. Image quality percentage.
+ * @return mixed WP_Error on failure. String with new destination path.
+ */
+function wpcf_image_resize( $file, $max_w, $max_h, $crop = false, $suffix = null, $dest_path = null, $jpeg_quality = 90 ) {
+
+	$image = wp_load_image( $file );
+	if ( !is_resource( $image ) )
+		return new WP_Error( 'error_loading_image', $image, $file );
+
+	$size = @getimagesize( $file );
+	if ( !$size )
+		return new WP_Error('invalid_image', __('Could not read image size'), $file);
+	list($orig_w, $orig_h, $orig_type) = $size;
+
+	$dims = image_resize_dimensions($orig_w, $orig_h, $max_w, $max_h, $crop);
+	if ( !$dims )
+		return new WP_Error( 'error_getting_dimensions', __('Could not calculate resized image dimensions') );
+	list($dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) = $dims;
+
+	$newimage = wp_imagecreatetruecolor( $dst_w, $dst_h );
+
+	imagecopyresampled( $newimage, $image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+
+	// convert from full colors to index colors, like original PNG.
+	if ( IMAGETYPE_PNG == $orig_type && function_exists('imageistruecolor') && !imageistruecolor( $image ) )
+		imagetruecolortopalette( $newimage, false, imagecolorstotal( $image ) );
+
+	// we don't need the original in memory anymore
+	imagedestroy( $image );
+
+	// $suffix will be appended to the destination filename, just before the extension
+	if ( !$suffix )
+		$suffix = "{$dst_w}x{$dst_h}";
+
+	$info = pathinfo($file);
+	$dir = $info['dirname'];
+	$ext = $info['extension'];
+	$name = wpcf_basename($file, ".$ext"); // use fix here for windows
+
+	if ( !is_null($dest_path) and $_dest_path = realpath($dest_path) )
+		$dir = $_dest_path;
+	$destfilename = "{$dir}/{$name}-{$suffix}.{$ext}";
+
+	if ( IMAGETYPE_GIF == $orig_type ) {
+		if ( !imagegif( $newimage, $destfilename ) )
+			return new WP_Error('resize_path_invalid', __( 'Resize path invalid' ));
+	} elseif ( IMAGETYPE_PNG == $orig_type ) {
+		if ( !imagepng( $newimage, $destfilename ) )
+			return new WP_Error('resize_path_invalid', __( 'Resize path invalid' ));
+	} else {
+		// all other formats are converted to jpg
+		if ( 'jpg' != $ext && 'jpeg' != $ext )
+			$destfilename = "{$dir}/{$name}-{$suffix}.jpg";
+		if ( !imagejpeg( $newimage, $destfilename, apply_filters( 'jpeg_quality', $jpeg_quality, 'image_resize' ) ) )
+			return new WP_Error('resize_path_invalid', __( 'Resize path invalid' ));
+	}
+
+	imagedestroy( $newimage );
+
+	// Set correct file permissions
+	$stat = stat( dirname( $destfilename ));
+	$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
+	@ chmod( $destfilename, $perms );
+
+	return $destfilename;
 }

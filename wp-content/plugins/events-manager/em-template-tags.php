@@ -360,27 +360,41 @@ function em_locations_admin($args = array()){
 			}
 			em_location_form();
 		}else{
-			$url = empty($url) ? $_SERVER['REQUEST_URI']:$url; //url to this page
 			$limit = ( !empty($_REQUEST['limit']) ) ? $_REQUEST['limit'] : 20;//Default limit
 			$page = ( !empty($_REQUEST['pno']) ) ? $_REQUEST['pno']:1;
 			$offset = ( $page > 1 ) ? ($page-1)*$limit : 0;
-			$args = array('limit'=>$limit, 'offset'=>$offset, 'status'=>false, 'blog'=>false);
+			$order = ( !empty($_REQUEST ['order']) ) ? $_REQUEST ['order']:'ASC';
+			if( array_key_exists('status', $_REQUEST) ){
+				$status = ($_REQUEST['status']) ? 1:0;
+			}else{
+				$status = false;
+			}
+			$blog = false;
+			if( EM_MS_GLOBAL ){
+			    if( get_site_option('dbem_ms_mainblog_locations') ){
+			    	$blog = get_current_site()->blog_id;
+			    }elseif( !is_main_site() ){
+			    	$blog = get_current_blog_id();
+			    }
+			}
+			$args = array('limit'=>$limit, 'offset'=>$offset, 'status'=>$status, 'blog'=>$blog);
+			//count locations
+			$locations_mine_count = EM_Locations::count( array('owner'=>get_current_user_id(), 'blog'=>$blog, 'status'=>false) );
+			$locations_all_count = current_user_can('read_others_locations') ? EM_Locations::count(array('blog'=>$blog, 'status'=>false, 'owner'=>false)):0;
+			//get set of locations
 			if( !empty($_REQUEST['view']) && $_REQUEST['view'] == 'others' && current_user_can('read_others_locations') ){
 				$locations = EM_Locations::get($args);
-				$locations_count = EM_Locations::count(array('status'=>false, 'blog'=>false, 'owner'=>false));
+				$locations_count = $locations_all_count;
 			}else{
 				$locations = EM_Locations::get( array_merge($args, array('owner'=>get_current_user_id())) );
-				$locations_count = EM_Locations::count(array('status'=>false, 'blog'=>false, 'owner'=>get_current_user_id()));
+				$locations_count = $locations_mine_count;
 			}
-			$locations_mine_count = EM_Locations::count( array('owner'=>get_current_user_id(), 'blog'=>false, 'status'=>false) );
-			$locations_all_count = current_user_can('read_others_locations') ? EM_Locations::count(array('blog'=>false, 'status'=>false)):0;
 			em_locate_template('tables/locations.php',true, array(
 				'args'=>$args, 
 				'locations'=>$locations, 
 				'locations_count'=>$locations_count, 
 				'locations_mine_count'=>$locations_mine_count,
 				'locations_all_count'=>$locations_all_count,
-				'url' => $url,
 				'page' => $page,
 				'limit' => $limit,
 				'offset' => $offset,

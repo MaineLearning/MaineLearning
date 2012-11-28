@@ -11,7 +11,10 @@ function wpv_filter_meta_html($atts) {
     $view_settings = $WP_Views->get_view_settings();
     
     if (isset($view_settings['filter_meta_html'])) {
-        return wpv_do_shortcode($view_settings['filter_meta_html']);
+		
+        $content = wpml_content_fix_links_to_translated_content($view_settings['filter_meta_html']);
+        
+        return wpv_do_shortcode($content);
     } else {
         return '';
     }

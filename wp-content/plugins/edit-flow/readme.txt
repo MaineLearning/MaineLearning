@@ -3,8 +3,8 @@ Contributors: batmoo, danielbachhuber, sbressler, automattic
 Donate link: http://editflow.org/contribute/
 Tags: edit flow, workflow, editorial, newsroom, management, journalism, post status, custom status, notifications, email, comments, editorial comments, usergroups, calendars, editorial calendar, story budget
 Requires at least: 3.1
-Tested up to: 3.4.1
-Stable tag: 0.7.3
+Tested up to: 3.4.2
+Stable tag: 0.7.4
 
 Redefining your editorial workflow.
 
@@ -42,6 +42,9 @@ For support questions, feedback and ideas, please use the [WordPress.org forums]
 
 == Upgrade Notice ==
 
+= 0.7.4 =
+Support for non-Latin characters in custom statuses and editorial metadata; various bug fixes
+
 = 0.7.3 =
 Support PHP 5.2.x by removing the anonymous functions we mistakenly added
 
@@ -73,6 +76,17 @@ Proper support for custom post types. We removed the option to enable/disable Cu
 New features, including story budget and editorial metadata, a completely rewritten calendar view, and many bug fixes, including one for editorial comments appearing in the admin.
 
 == Changelog ==
+
+= 0.7.4 (Nov. 21, 2012) =
+* Added 'Scheduled' as one of the statuses you see in the 'Posts At A Glance' widget. 'Private' and other core statuses can be added with a filter
+* Sort posts on the Manage Posts view by visible editorial metadata date fields
+* Modify email notifications with two filters
+* Bug fix: Proper support for unicode characters in custom status and editorial metadata descriptions
+* Bug fix: Show the proper last modified value on the story budget when the server's timezone is not set to GMT. Props [danls](https://github.com/danls)
+* Bug fix: Make the jQuery UI theme for Edit Flow more specific so it doesn't conflict with core modals
+* Bug fix: Use the proper singlular label for a post type when generating notification text
+* Bug fix: Post slug now updates when the post has a custom status.
+* Bug fix: When determining whether a user can change a post's status, check the 'edit_posts' cap for the post type.
 
 = 0.7.3 (Jul. 3, 2012) =
 * Bug fix: Support PHP 5.2.x by removing the anonymous functions we mistakenly added

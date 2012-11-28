@@ -14,12 +14,14 @@
  * 'raw' => 'true'|'false' (display raw data stored in DB, default false)
  * 'output' => 'html' (wrap data in HTML, optional)
  * 'show_name' => 'true' (show field name before value e.g. My checkbox: $value)
- * 'checked_html' => base64_encode('<img src="image-on.png" />')
- * 'unchecked_html' => base64_encode('<img src="image-off.png" />')
+ * 'state' => 'checked' or 'unchecked' (display the content of the shortcode depending on the state)
  *
  * Example usage:
  * With a short code use [types field="my-checkbox"]
  * In a theme use types_render_field("my-checkbox", $parameters)
+ *
+ * Link:
+ * <a href="http://wp-types.com/documentation/functions/checkbox/">Types checkbox custom field</a>
  * 
  */
 
@@ -62,16 +64,17 @@ function wpcf_fields_checkbox_insert_form($form_data) {
         '#default_value' => !empty($form_data['data']['save_empty']) ? $form_data['data']['save_empty'] : 'no',
         '#options' => array(
             'yes' => array(
-                '#title' => __('When unchecked, save 0 to the database', 'wpcf'),
+                '#title' => __('save 0 to the database', 'wpcf'),
                 '#value' => 'yes',
                 '#attributes' => array('class' => 'wpcf-cb-save-empty-migrate', 'onclick' => $cb_migrate_save),
             ),
             'no' => array(
-                '#title' => __("When unchecked, don't save anything to the database", 'wpcf'),
+                '#title' => __("don't save anything to the database", 'wpcf'),
                 '#value' => 'no',
                 '#attributes' => array('class' => 'wpcf-cb-save-empty-migrate', 'onclick' => $cb_migrate_do_not_save),
             ),
         ),
+        '#description' => '<strong>' . __('When unchecked:', 'wpcf') . '</strong>',
         '#after' => $update_response,
     );
     $form['checked'] = array(
@@ -113,6 +116,10 @@ function wpcf_fields_checkbox_insert_form($form_data) {
         '#title' => __('Selected:', 'wpcf'),
         '#name' => 'display_value_selected',
         '#value' => '',
+    );
+    $form['help'] = array(
+        '#type' => 'markup',
+        '#markup' => '<p style="text-align:right"><a href="http://wp-types.com/documentation/functions/checkbox/" target="_blank">' . __('Checkbox help', 'wpcf') . '</a></p>',
     );
     return $form;
 }

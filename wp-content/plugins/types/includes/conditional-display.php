@@ -11,6 +11,16 @@ add_filter('wpcf_fields_form_additional_filters',
 add_action('wpcf_save_group', 'wpcf_cd_save_group_action');
 add_action('admin_footer', 'wpcf_cd_admin_form_js');
 
+global $wp_version;
+$wpcf_button_style='';
+$wpcf_button_style30='';
+
+if (version_compare($wp_version,'3.5','<'))
+{
+    $wpcf_button_style='style="line-height: 35px;"';
+    $wpcf_button_style30='style="line-height: 30px;"';
+}
+
 /**
  * Filters group field form.
  * 
@@ -59,6 +69,8 @@ function wpcf_cd_field_pre_save_filter($data) {
  * @return type 
  */
 function wpcf_cd_admin_form_filter($data, $group = false) {
+    global $wpcf_button_style30;
+    
     if ($group) {
         $name = 'wpcf[group][conditional_display]';
     } else {
@@ -80,7 +92,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
                     'wpcf') . '</strong><br />'
             . __("Specify additional filters that control this group's display, based on values of custom fields.",
                     'wpcf')
-            . '<br /><a class="button-secondary" onclick="jQuery(this).css(\'visibility\',\'hidden\').next().slideToggle();" style="line-height: 30px;" href="javascript:void(0);">'
+            . '<br /><a class="button-secondary" onclick="jQuery(this).css(\'visibility\',\'hidden\').next().slideToggle();" '.$wpcf_button_style30.'  href="javascript:void(0);">'
             . __('Edit', 'wpcf') . '</a><div id="wpcf-cd-group" style="display:none;">',
         );
     }
@@ -204,7 +216,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
     if ($group) {
         $form['cd']['wrap_close'] = array(
             '#type' => 'markup',
-            '#markup' => '<br /><a class="button-primary" onclick="jQuery(this).parent().slideUp().prev().css(\'visibility\',\'visible\');" style="line-height: 30px;" href="javascript:void(0);">'
+            '#markup' => '<br /><a class="button-primary" onclick="jQuery(this).parent().slideUp().prev().css(\'visibility\',\'visible\');" '.$wpcf_button_style30.'  href="javascript:void(0);">'
             . __('OK', 'wpcf') . '</a></div>',
         );
     }
@@ -242,7 +254,7 @@ function wpcf_cd_admin_form_single_filter($data, $condition, $key = null,
         }
         $options[$field_id] = array(
             '#value' => $field_id,
-            '#title' => $field['name'],
+            '#title' => stripslashes($field['name']),
             '#attributes' => array('class' => 'wpcf-conditional-select-' . $field['type']),
         );
     }
@@ -255,7 +267,7 @@ function wpcf_cd_admin_form_single_filter($data, $condition, $key = null,
             )
         );
     }
-    $id = !is_null($key) ? $key : strval('condition_' . mt_rand());
+    $id = !is_null($key) ? $key : strval('condition_' . wpcf_unique_id(serialize($data) . serialize($condition) . $key . $group));
     $form = array();
     $before = '<div class="wpcf-cd-entry"><br />';
     $form['cd']['field_' . $id] = array(
@@ -303,7 +315,7 @@ function wpcf_cd_admin_form_single_filter($data, $condition, $key = null,
  */
 function wpcf_cd_fields_form_additional_filters($filters, $update) {
     $data = array();
-    $data['id'] = !empty($update) ? $update['name'] : mt_rand();
+    $data['id'] = !empty($update) ? $update['name'] : wpcf_unique_id(serialize($filters));
     if ($update) {
         $data['data']['conditional_display'] = get_post_meta($update['id'],
                 '_wpcf_conditional_display', true);

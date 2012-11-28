@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '1.1.2');
+define('WPV_VERSION', '1.1.3');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -65,6 +65,8 @@ require WPV_PATH_EMBEDDED . '/inc/wpv.class.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-condition.php';
 
 require WPV_PATH_EMBEDDED . '/common/WPML/wpml-string-shortcode.php';
+require WPV_PATH_EMBEDDED . '/inc/WPML/wpv_wpml.php';
+
 
 if (is_admin()) {
     require WPV_PATH_EMBEDDED . '/inc/wpv-import-export-embedded.php';

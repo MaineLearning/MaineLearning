@@ -284,12 +284,20 @@ class EM_Events extends EM_Object implements Iterator {
 		}elseif( !empty($args['private_only']) ){
 			$conditions['private_only'] = "(`event_private`=1)";
 		}
-		if( EM_MS_GLOBAL && !empty($args['blog']) && is_numeric($args['blog']) ){
-			if( is_main_site($args['blog']) ){
-				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']} OR ".EM_EVENTS_TABLE.".blog_id IS NULL)";
-			}else{
-				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']})";
-			}
+		if( EM_MS_GLOBAL && !empty($args['blog']) ){
+		    if( is_numeric($args['blog']) ){
+				if( is_main_site($args['blog']) ){
+					$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']} OR ".EM_EVENTS_TABLE.".blog_id IS NULL)";
+				}else{
+					$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']})";
+				}
+		    }else{
+		        if( !is_array($args['blog']) && preg_match('/^([\-0-9],?)+$/', $args['blog']) ){
+		            $conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id IN ({$args['blog']}) )";
+			    }elseif( is_array($args['blog']) && $this->array_is_numeric($args['blog']) ){
+			        $conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id IN (".implode(',',$args['blog']).") )";
+			    }
+		    }
 		}
 		if( $args['bookings'] === 'user' && is_user_logged_in()){
 			//get bookings of user

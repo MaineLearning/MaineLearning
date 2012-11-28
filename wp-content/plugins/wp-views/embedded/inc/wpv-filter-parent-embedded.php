@@ -33,5 +33,21 @@ function wpv_filter_post_parent($query, $view_settings) {
     return $query;
 }
 
+add_filter('wpv_filter_requires_current_page', 'wpv_filter_parent_requires_current_page', 10, 2);
+function wpv_filter_parent_requires_current_page($state, $view_settings) {
+	if ($state) {
+		return $state; // Already set
+	}
+
+    if (isset($view_settings['parent_mode'][0])) {
+        if ($view_settings['parent_mode'][0] == 'current_page') {
+            $state = true;
+        }
+    }
+    
+    return $state;
+}
+
+    
 
 

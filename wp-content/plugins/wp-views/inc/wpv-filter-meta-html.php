@@ -38,7 +38,9 @@ function wpv_filter_meta_html_admin($view_settings) {
                         <input type="button" class="button-primary" value="<?php echo __('Apply', 'wpv-views'); ?>" onclick="wpv_filter_control_apply_changes()" />
                     </div>
 
-                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_filter_meta_html_content'); ?>
+                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_filter_meta_html_content', true, true); ?>
+
+                    <?php echo apply_filters('wpv_meta_html_add_form_button', '', '#wpv_filter_meta_html_content'); ?>
                     
                     <div id="wpv-add-filter-controls-popup" style="display:none">
                         <div id="wpv-add-filter-controls-content">

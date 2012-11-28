@@ -37,7 +37,7 @@ function wpv_filter_shortcode_start($atts){
         }
         
         $url = get_permalink();
-        $out = '<form style="margin:0; padding:0;' . $hide . '" id="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
+        $out = '<form style="margin:0; padding:0;' . $hide . '" name="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
         
         // add hidden inputs for any url parameters.
         // We need these for when the form is submitted.
@@ -86,23 +86,17 @@ function wpv_filter_shortcode_start($atts){
             
             $out .= "
             <script type=\"text/javascript\">
-                function wpv_column_head_click(name, direction) {
+                function wpv_column_head_click_" . $WP_Views->get_view_count() . "(name, direction) {
                     jQuery('#wpv_column_sort_id').val(name);
                     jQuery('#wpv_column_sort_dir').val(direction);
                     wpv_add_url_controls_for_column_sort(jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "'));
-                    jQuery('#wpv-filter-" . $WP_Views->get_view_count() . "').submit();
+                    jQuery('form[name=\"wpv-filter-" . $WP_Views->get_view_count() . "\"]').submit();
                     return false;
                 }
             </script>
             ";
         }
         
-        // add a hidden input for the current page.
-        $page = '1';
-        if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && $_GET['wpv_view_count'] == $WP_Views->get_view_count()) {
-            $page = $_GET['wpv_paged'];
-        }
-        $out .= '<input id="wpv_paged-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged" value="' . $page . '">' . "\n";
         $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($WP_Views->get_max_pages()) . '">' . "\n";
         
         $out .= '<input id="wpv_widget_view-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_widget_view_id" value="' . intval($WP_Views->get_widget_view_id()) . '">' . "\n";
@@ -112,10 +106,15 @@ function wpv_filter_shortcode_start($atts){
         //$view_data['view_id'] = $WP_Views->get_current_view();
         $out .= '<input id="wpv_view_hash-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_hash" value="' . base64_encode(serialize($view_data)) . '">' . "\n";
     
-        // Output the current page ID. This is used for ajax call back in pagination.
-        $current_post = $WP_Views->get_top_current_page();
-        if ($current_post && isset($current_post->ID)) {
-            $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
+        $requires_current_page = false;
+        $requires_current_page = apply_filters('wpv_filter_requires_current_page', $requires_current_page, $view_settings);
+        
+        if ($requires_current_page) {
+            // Output the current page ID. This is used for ajax call back in pagination.
+            $current_post = $WP_Views->get_top_current_page();
+            if ($current_post && isset($current_post->ID)) {
+                $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
+            }
         }
         add_action('wp_footer', 'wpv_pagination_js');
         
@@ -177,7 +176,9 @@ function _wpv_filter_is_form_required() {
 
     $meta_html = $view_settings['filter_meta_html'];
     if(preg_match('#\\[wpv-filter-controls\\](.*?)\\[\/wpv-filter-controls\\]#is', $meta_html, $matches)) {
-        return true;
+        if ($matches[1] != '') {
+            return true;
+        }
     }
 
 
@@ -214,8 +215,9 @@ function wpv_filter_shortcode_submit($atts){
             $hide = ' style="display:none"';
         }
         
+        $name = wpv_translate('wpv-filter-submit-' . $atts['name'], $atts['name'], true);
         $out = '';
-        $out .= '<input type="submit" value="' . $atts['name'] . '" name="wpv_filter_submit"' . $hide . '>';
+        $out .= '<input type="submit" value="' . $name . '" name="wpv_filter_submit"' . $hide . '>';
         return $out;
     } else {
         return '';
@@ -399,24 +401,24 @@ function wpv_filter_show_user_interface($name, $values, $selected, $style) {
 
 /**
  * 
- *Views-Shortcode: wpv-control
-*
-* Description: Add filters for View
-*
-* Parameters:
-* type: type of retrieved field layout (radio, checkbox, select, textfield, checkboxes, datepicker)
-* url_param: the URL parameter passed as an argument
-* values: Optional. a list of supplied values
-* display_values: Optional. A list of values to display for the corresponding values
-* auto_fill: Optional. When set to a "field-slug" the control will be populated with custom field values from the database.
-* auto_fill_default: Optional. Used to set the default, unselected, value of the control. eg Ignore or Don't care
-* auto_fill_sort: Optional. 'asc', 'desc', 'none'. Defaults to ascending.
-* field: Optional. a Types field to retrieve values from
-* title: Optional. Use for the checkbox title
-* taxonomy: Optional. Use when a taxonomy control should be displayed.
-* date_format: Optional. Used for a datepicker control
-*
-* @param array $atts An associative array of arributes to be used.
+ * Views-Shortcode: wpv-control
+ *
+ * Description: Add filters for View
+ *
+ * Parameters:
+ * type: type of retrieved field layout (radio, checkbox, select, textfield, checkboxes, datepicker)
+ * url_param: the URL parameter passed as an argument
+ * values: Optional. a list of supplied values
+ * display_values: Optional. A list of values to display for the corresponding values
+ * auto_fill: Optional. When set to a "field-slug" the control will be populated with custom field values from the database.
+ * auto_fill_default: Optional. Used to set the default, unselected, value of the control. eg Ignore or Don't care
+ * auto_fill_sort: Optional. 'asc', 'desc', 'ascnum', 'descnum', 'none'. Defaults to ascending.
+ * field: Optional. a Types field to retrieve values from
+ * title: Optional. Use for the checkbox title
+ * taxonomy: Optional. Use when a taxonomy control should be displayed.
+ * date_format: Optional. Used for a datepicker control
+ *
+ * @param array $atts An associative array of arributes to be used.
  */
 function wpv_shortcode_wpv_control($atts) {
 	
@@ -449,20 +451,81 @@ function wpv_shortcode_wpv_control($atts) {
     }
     
     if ($auto_fill != '') {
-        global $wpdb;
         
-        switch (strtolower($auto_fill_sort)) {
-            case 'desc':
-                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value DESC" );
-                break;
+        // See if we should handle types checkboxes
+        $types_checkboxes_field = false;
+        if(_wpv_is_field_of_type($auto_fill, 'checkboxes')) {
+            if (!function_exists('wpcf_admin_fields_get_fields')) {
+                if(defined('WPCF_EMBEDDED_ABSPATH')) {
+                    include WPCF_EMBEDDED_ABSPATH . '/includes/fields.php';
+                }
+            }
+            if (function_exists('wpcf_admin_fields_get_fields')) {
+                $fields = wpcf_admin_fields_get_fields();
+                
+                $field_name = substr($auto_fill, 5);
+                if (isset($fields[$field_name])) {
+                    $types_checkboxes_field = true;
+                    
+                    $db_values = array();
+                    
+                    $options = $fields[$field_name]['data']['options'];
+                    
+                    foreach($options as $option) {
+                        $db_values[] = $option['title'];
+                    }
+
+                    switch (strtolower($auto_fill_sort)) {
+                        case 'desc':
+                            sort($db_values);
+                            $db_values = array_reverse($db_values);
+                            break;
+                        
+                        case 'descnum':
+                            sort($db_values, SORT_NUMERIC);
+                            $db_values = array_reverse($db_values);
+                            break;
+                        
+                        case 'none':
+                            break;
+                        
+                        case 'ascnum':            
+                            sort($db_values, SORT_NUMERIC);
+                            break;
             
-            case 'none':
-                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
-                break;
+                        default:            
+                            sort($db_values);
+                            break;
+                    }
+                    
+                }
+            }
+        }
+        
+        if (!$types_checkboxes_field) {
+            global $wpdb;
             
-            default:            
-                $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value ASC" );
-                break;
+            switch (strtolower($auto_fill_sort)) {
+                case 'desc':
+                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value DESC" );
+                    break;
+                
+                case 'descnum':
+                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 DESC" );
+                    break;
+                
+                case 'none':
+                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
+                    break;
+                
+                case 'ascnum':            
+                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 ASC" );
+                    break;
+    
+                default:            
+                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value ASC" );
+                    break;
+            }
         }
         
         if ($auto_fill_default != '') {
@@ -606,7 +669,7 @@ function wpv_shortcode_wpv_control($atts) {
 		if(empty($field_options)) {
 			return __('Empty field values or incorrect field defined. ', 'wpv-views');
 		}
-			
+        $field_options['name'] = wpcf_translate('field ' . $field_options['id'] . ' name', $field_options['name']);
 			
 		// get the type of custom field (radio, checkbox, other)
 		$field_type = $field_options['type'];
@@ -800,6 +863,22 @@ function wpv_shortcode_wpv_control($atts) {
 
         return $element;
     }
+}
+
+function _wpv_is_field_of_type($field_name, $type) {
+    $opt = get_option('wpcf-fields');
+    if($opt && mb_ereg('^wpcf-',$field_name)) {
+        $field_name = substr($field_name,5);
+        if (isset($opt[$field_name]['type'])) {
+            $field_type = strtolower($opt[$field_name]['type']);
+            if ( $field_type == $type) {
+                return true;
+            }
+        }
+        
+    }
+    
+    return false;
 }
 
 function wpv_add_front_end_js() {

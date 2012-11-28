@@ -42,6 +42,9 @@ function wpcf_fields_checkbox_meta_box_form($field) {
  * Editor callback form.
  */
 function wpcf_fields_checkbox_editor_callback() {
+    
+    wp_enqueue_script('jquery');
+    
     $form = array();
     $value_not_selected = '';
     $value_selected = '';
@@ -71,12 +74,17 @@ function wpcf_fields_checkbox_editor_callback() {
                 '#after' => '<br />'
             ),
             'display_values' => array(
-                '#title' => __('Show one of these two values:', 'wpcf'),
+                '#title' => __('Enter values for \'selected\' and \'not selected\' states', 'wpcf'),
                 '#name' => 'display',
                 '#value' => 'value',
             ),
         ),
         '#inline' => true,
+    );
+    
+    $form['states-start'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div id="wpcf-checkbox-states" style="display:none;margin-left:20px">',
     );
     $form['display-value-1'] = array(
         '#type' => 'textfield',
@@ -94,21 +102,54 @@ function wpcf_fields_checkbox_editor_callback() {
         . __('Selected:', 'wpcf') . '</td><td>',
         '#name' => 'display_value_selected',
         '#value' => $value_selected,
+        '#before' => '<tr>',
         '#after' => '</tr></table>'
     );
-    $form['submit'] = array(
-        '#type' => 'submit',
-        '#name' => 'submit',
-        '#value' => __('Save Changes'),
-        '#attributes' => array('class' => 'button-primary'),
+    $form['states-end'] = array(
+        '#type' => 'markup',
+        '#markup' => '</div>',
     );
+
+    $form = wpcf_form_popup_add_optional($form);
+    
+    $help = array('url' => "http://wp-types.com/documentation/functions/checkbox/",
+                  'text' => __('Checkbox help', 'wpcf'));
+    
+    $form = wpcf_form_popup_helper($form, __('Insert', 'wpcf'), __('Cancel', 'wpcf'), $help);
+    
     $f = wpcf_form('wpcf-form', $form);
+    add_action('admin_head_wpcf_ajax', 'wpcf_fields_checkbox_form_script');
     wpcf_admin_ajax_head('Insert checkbox', 'wpcf');
     echo '<form method="post" action="">';
     echo $f->renderForm();
     echo '</form>';
     wpcf_admin_ajax_footer();
 }
+
+/**
+ * AJAX window JS.
+ */
+function wpcf_fields_checkbox_form_script() {
+
+    ?>
+    <script type="text/javascript">
+        // <![CDATA[
+        jQuery(document).ready(function(){
+            jQuery('input[name="display"]').change(function(){
+                if (jQuery(this).val() == 'value') {
+                    jQuery('#wpcf-checkbox-states').slideDown();
+                } else {
+                    jQuery('#wpcf-checkbox-states').slideUp();
+                }
+            });
+        });
+        // ]]>
+    </script>
+    
+    <?php
+    
+}
+
 
 /**
  * Editor callback form submit.
@@ -127,6 +168,8 @@ function wpcf_fields_checkbox_editor_submit() {
         } else {
             $shortcode = wpcf_fields_get_shortcode($field, $add);
         }
+        
+        $shortcode = wpcf_fields_add_optionals_to_shortcode($shortcode);
         echo editor_admin_popup_insert_shortcode_js($shortcode);
         die();
     }

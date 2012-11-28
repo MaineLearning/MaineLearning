@@ -17,13 +17,6 @@ function bebop_general_admin_update_settings() {
 		$current_page = $_GET['page'];
 		if ( $current_page == 'bebop_admin_settings' ) {
 			$edited = false;
-			if ( isset( $_POST['bebop_content_user_verification'] ) ) {
-				bebop_tables::update_option( 'bebop_content_user_verification', trim( strip_tags( strtolower( $_POST['bebop_content_user_verification'] ) ) ) );
-				$_SESSION['bebop_admin_notice'] = true;
-				
-				$edited = true;
-			}
-			
 			if ( isset( $_POST['bebop_general_crontime'] ) ) {
 				$crontime = trim( strip_tags( strtolower( $_POST['bebop_general_crontime'] ) ) );
 				$result = bebop_tables::update_option( 'bebop_general_crontime', $crontime );
@@ -36,10 +29,11 @@ function bebop_general_admin_update_settings() {
 				
 				$edited = true;
 			}
-			//var_dump($edited);
 			if ( $edited == true ) {
+				
+				check_admin_referer( 'bebop_admin_settings' );
+				
 				wp_safe_redirect( wp_get_referer() );
-				exit();
 			}
 		}
 	}
@@ -52,7 +46,10 @@ function bebop_oer_providers_update_active() {
 		$current_page = $_GET['page'];
 		if ( $current_page == 'bebop_providers' ) {
 			if ( empty( $_GET['provider'] ) ) {
-				if ( isset( $_POST['submit'] ) ){
+				if ( isset( $_POST['submit'] ) ) {
+					
+					check_admin_referer( 'bebop_content_provider_settings' );
+					
 					//reset the importer queue
 					bebop_tables::update_option( 'bebop_importers_queue', '' );
 					
@@ -76,7 +73,6 @@ function bebop_oer_providers_update_active() {
 					bebop_tables::update_option( 'bebop_importers_queue', implode( ',', $importerQueue ) );
 					$_SESSION['bebop_admin_notice'] = true;
 					wp_safe_redirect( wp_get_referer() );
-					exit();
 				}
 			}
 		}
@@ -93,12 +89,21 @@ function bebop_extension_admin_update_settings() {
 				$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $_GET['provider'] ) );
 				
 				if ( isset( $_POST['submit'] ) ) {
+					
+					check_admin_referer( 'bebop_' . $extension['name'] . '_admin_settings' );
+					
 					$success = true;
 					if ( isset( $_POST['bebop_' . $extension['name'] . '_consumer_key'] ) ) {
 						bebop_tables::update_option( 'bebop_' . $extension['name'] . '_consumer_key', trim( $_POST['bebop_' . $extension['name'] . '_consumer_key'] ) );
 					}
 					if ( isset( $_POST['bebop_' . $extension['name'] . '_consumer_secret'] ) ) {
 						bebop_tables::update_option( 'bebop_' . $extension['name'] . '_consumer_secret', trim( $_POST['bebop_' . $extension['name'] . '_consumer_secret'] ) );
+					}
+					if ( isset( $_POST['bebop_' . $extension['name'] . '_content_user_verification'] ) ) {
+						bebop_tables::update_option( 'bebop_' . $extension['name'] . '_content_user_verification', trim( strip_tags( strtolower( $_POST['bebop_' . $extension['name'] . '_content_user_verification'] ) ) ) );
+					}
+					if ( isset( $_POST['bebop_' . $extension['name'] . '_hide_sitewide'] ) ) {
+						bebop_tables::update_option( 'bebop_' . $extension['name'] . '_hide_sitewide', trim( strip_tags( strtolower( $_POST['bebop_' . $extension['name'] . '_hide_sitewide'] ) ) ) );
 					}
 					if ( isset( $_POST['bebop_' . $extension['name'] . '_maximport'] ) ) {
 						if ( empty( $_POST['bebop_' . $extension['name'] . '_maximport'] ) || is_numeric( $_POST['bebop_' . $extension['name'] . '_maximport'] ) ) {
@@ -108,13 +113,14 @@ function bebop_extension_admin_update_settings() {
 							$success = '"Imports per day" must be a number (or blank).';
 						}
 					}
+					
 					/*rss stuff, dont touch */
 					if ( isset( $_POST['bebop_' . $extension['name'] . '_rss_feed'] ) ) {
 						if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider' ) == 'on' ) {
 							bebop_tables::update_option( 'bebop_' . $extension['name'] . '_rss_feed', trim( $_POST['bebop_' . $extension['name'] . '_rss_feed'] ) );
 						}
 						else {
-							$success = __( 'RSS feeds cannot be modified while the extension is not enabled.', 'bebop');
+							$success = __( 'RSS feeds cannot be enabled while the extension is inactive.', 'bebop');
 						}
 					}
 					else {
@@ -126,7 +132,6 @@ function bebop_extension_admin_update_settings() {
 					
 					$_SESSION['bebop_admin_notice'] = $success;
 					wp_safe_redirect( wp_get_referer() );
-					exit();
 				}
 				/*
 				 * Mechanics to remove a user from your extension is already provided - you do not need to modify this.

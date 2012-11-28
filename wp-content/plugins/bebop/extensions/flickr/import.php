@@ -64,7 +64,7 @@ function bebop_flickr_import( $extension, $user_metas = null ) {
 						 * ******************************************************************************************************************
 						 * Depending on the data source, you will need to switch how the data is retrieved. If the feed is RSS, use the 	*
 						 * SimplePie method, as shown in the youtube extension. If the feed is oAuth API based, use the oAuth implementation*
-						 * as shown in thr twitter extension. If the feed is an API without oAuth authentication, use SlideShare			*
+						 * as shown in the twitter extension. If the feed is an API without oAuth authentication, use SlideShare			*
 						 * ******************************************************************************************************************
 						 */
 						 

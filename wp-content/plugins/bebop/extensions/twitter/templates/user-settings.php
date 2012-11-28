@@ -30,16 +30,19 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$variable_name == 1 ) {
 			echo 'checked';
 		} echo '>
-		<label for="yes">'; _e( 'Yes', 'bebop' ); echo '</label>
+		<label for="yes">' . __( 'Yes', 'bebop' ) . '</label>
 		<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="0"'; if ( $$variable_name == 0 ) {
 			echo 'checked';
 		} echo '>
-		<label for="no">'; _e( 'No', 'bebop' ); echo '</label><br><br>
+		<label for="no">' . __( 'No', 'bebop' ) . '</label><br><br>
 		<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="Save Changes"></div>';
+		
+		wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
+		
 		echo '<div class="clear_both"></div>';
 			
 		if ( bebop_tables::get_user_meta_value( $bp->loggedin_user->id, 'bebop_' . $extension['name'] . '_oauth_token' ) ) {
-			echo '<div class="button_container"><a class="auto button" href="?provider=' . $extension['name'] . '&reset=true">'; _e(' Remove Authorisation', 'bebop'); echo '</a></div>';
+			echo '<div class="button_container"><a class="auto button" href="?provider=' . $extension['name'] . '&reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		echo '</form>';
@@ -70,7 +73,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		//get the redirect url for the user
 		$redirectUrl = $OAuth->get_redirect_url();
 		if ( $redirectUrl ) {
-			echo '<div class="button_container"><a class="auto button" href="' . $redirectUrl . '">'; _e(' Start Authorisation', 'bebop'); echo '</a></div>';
+			echo '<div class="button_container"><a class="auto button" href="' . $redirectUrl . '">' . __(' Start Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		else {

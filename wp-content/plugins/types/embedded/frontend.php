@@ -54,7 +54,11 @@ function wpcf_shortcode($atts, $content = null, $code = '') {
 function types_render_field($field_id, $params, $content = null, $code = '') {
     require_once WPCF_EMBEDDED_INC_ABSPATH . '/fields.php';
     global $post;
-
+    //set post_id 
+    $post_id = $post->ID; 
+    if(isset($params['post_id']) && !empty($params['post_id']))
+    { $post_id = $params['post_id']; }
+    
     // Get field
     $field = wpcf_fields_get_field_by_slug($field_id);
     if (empty($field)) {
@@ -69,7 +73,7 @@ function types_render_field($field_id, $params, $content = null, $code = '') {
 
     // See if repetitive
     if (wpcf_admin_is_repetitive($field)) {
-        $meta = get_post_meta($post->ID,
+        $meta = get_post_meta($post_id ,
                 wpcf_types_get_meta_prefix($field) . $field['slug'], false);
         // Sometimes if meta is empty - array(0 => '') is returned
         if ((count($meta) == 1 && strval($meta[0]) == '')) {
@@ -117,7 +121,7 @@ function types_render_field($field_id, $params, $content = null, $code = '') {
             return '';
         }
     } else {
-        $params['field_value'] = get_post_meta($post->ID,
+        $params['field_value'] = get_post_meta($post_id ,
                 wpcf_types_get_meta_prefix($field) . $field['slug'], true);
         if ($params['field_value'] == '' && $field['type'] != 'checkbox') {
             return '';
@@ -150,11 +154,15 @@ function types_render_field_single($field, $params, $content = null, $code = '')
     $type = wpcf_fields_type_action($field['type']);
 
     // If 'class' or 'style' parameters are set - force HTML output
-    if ((!empty($params['class']) || !empty($params['style'])) && $field['type'] != 'date') {
+    if (((isset($params['class'])&&!empty($params['class'])) || (isset($params['style'])&&!empty($params['style']))) && $field['type'] != 'date') {
         $params['output'] = 'html';
     }
 
     // Apply filters to field value
+    if (is_string($params['field_value'])) {
+        $params['field_value'] = trim($params['field_value']);
+    }
+    
     $params['field_value'] = apply_filters('wpcf_fields_value_display',
             $params['field_value'], $params);
     $params['field_value'] = apply_filters('wpcf_fields_slug_' . $field['slug'] . '_value_display',
@@ -324,6 +332,11 @@ function wpcf_frontend_wrap_field_value($field, $content, $params = array()) {
                         array('file', 'image', 'email', 'url', 'wysiwyg'))) {
             $class[] = $params['class'];
         }
+        
+        // add some default
+        if (!array_key_exists('style',$params))
+            $params['style']='';
+            
         $class[] = 'wpcf-field-value wpcf-field-' . $field['type']
                 . '-value wpcf-field-' . $field['slug'] . '-value';
         if ($field['type'] == 'skype' || $field['type'] == 'image' || ($field['type'] == 'date' && $params['style'] == 'calendar')
