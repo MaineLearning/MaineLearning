@@ -767,13 +767,6 @@ p:last-child
 
 #topic-post-list .post-content p { font-size: 13px; }
 
-#item-body div.topic-tags
-{
-	line-height: 1.3em;
-	margin-top: -12px;
-	text-align: right;
-	width: 40%;
-}
 
 /* ----------------------
 BP PANELS: ALERT BOXES
