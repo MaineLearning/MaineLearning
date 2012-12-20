@@ -1,4 +1,39 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.6.11
+    - Fixed warnings messages thrown by $wpdb->prepare()
+    - Fixed issue with sorting choices that prevents form from being saved
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.10.1
+    - Fixed issue with wpList script in WP 3.5 causing entry list trash and spam links not to work
+    - Updated form button UI to include text on WP 3.5+
+    - Fixed several styling issues in form editor
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.10.0.2
+    - Fixed Javascript error when resetting drop down values during the conditional logic processing
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.10.0.1
+    - Fixed issue with duplicating a text area with a new line in the default value
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.6.10
+    - Fixed issue with post category checkbox field always returning validation error when field is set to required (even when an item is checked)
+    - Fixed issue saving multi-input fields on instalations with locales that use comma as the decimal separator
+    - Added is_default_column to the gform_entry_meta filter allow developers to define default columns for the entry list
+    - Fixed a warning notice with gform_get_meta when no key is found
+    - Added gform_field_added and gform_field_deleted jQuery event actions
+    - Fixed issue with calculating fields throwing errors on IE7/8
+	- Fixed an issue which was causing gform_update_meta to insert multiple values for the same key
+	- Fixed an issue with conditional logic when using "Is Not" as the operator
+	- Updated entry export to prompt user when no fields have been chosen
+	- Fixed notice "Undefined index: gf_form_id" displayed when exporting forms and no form chosen
+    - Added gform_entry_meta filter to allow developers to add custom propeties to the lead object. Allows lead meta data to be added as sortable columns to the entry list and export entries file. Added the following functions to assist: GFFormsModel::get_entry_meta(), GFFormsModel::update_entry_meta(), GFSelectColumns::get_selectable_entry_meta, GFExport::get_entry_meta() and gform_get_meta_values_for_entries($entry_ids, $meta_keys)
+    - Fixed issue where default option was being selected for multi-selects when displayed via conditional logic
+    - Updated media button hook to "media_button" instead of "media_button_context"
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.6.9
 	- Fixed register link on multi-site; goes to primary site's Form Settings
     - Added "gform_column_input_content" hook to allow modifying of list field column input ouput

@@ -815,6 +815,8 @@ class GFFormDisplay{
 
         }
 
+
+
         if(is_array($field["inputs"]))
         {
             foreach($field["inputs"] as $input){
@@ -886,6 +888,7 @@ class GFFormDisplay{
         //reading entry that was just saved
         $lead = RGFormsModel::get_lead($lead["id"]);
 
+        $lead = GFFormsModel::set_entry_meta($lead, $form);
         do_action('gform_entry_created', $lead, $form);
 
         //if Akismet plugin is installed, run lead through Akismet and mark it as Spam when appropriate
@@ -2395,7 +2398,6 @@ class GFFormDisplay{
         }
 
     }
-
 }
 
 ?>

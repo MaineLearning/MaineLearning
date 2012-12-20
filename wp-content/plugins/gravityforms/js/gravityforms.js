@@ -673,13 +673,13 @@ var GFCalc = function(formId, formulaFields){
     this.init = function(formId, formulaFields) {
         var calc = this;
         jQuery(document).bind("gform_post_conditional_logic", function(){
-            for(var i in formulaFields) {
+            for(var i=0; i<formulaFields.length; i++) {
                 var formulaField = jQuery.extend({}, formulaFields[i]);
                 calc.runCalc(formulaField, formId);
             }
         });
 
-        for(var i in formulaFields) {
+        for(var i=0; i<formulaFields.length; i++) {
             var formulaField = jQuery.extend({}, formulaFields[i]);
             this.runCalc(formulaField, formId);
             this.bindCalcEvents(formulaField, formId);
