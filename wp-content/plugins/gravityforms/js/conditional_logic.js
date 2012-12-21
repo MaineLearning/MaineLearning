@@ -76,8 +76,9 @@ function gf_is_match(formId, rule){
         for(var i=0; i< inputs.length; i++){
             var fieldValue = gf_get_value(jQuery(inputs[i]).val());
 
-            //find specific checkbox item
-            if(fieldValue != rule["value"] && !jQuery.inArray(rule["operator"], ["<", ">"]))
+            //find specific checkbox/radio item. Skip if this is not the specific item and the operator is not one that targets a range of values (i.e. greater than and less than)
+            var isRangeOperator = jQuery.inArray(rule["operator"], ["<", ">"]) >= 0;
+            if(fieldValue != rule["value"] && !isRangeOperator)
                 continue;
 
             //blank value if item isn't checked
@@ -246,7 +247,7 @@ function gf_reset_to_default(targetId, defaultValue){
     target.each(function(){
         var val = "";
 
-        if(jQuery(this).is('select'))
+        if(jQuery(this).is('select:not([multiple])'))
             val = jQuery(this).find('option').eq(0).val();
 
         if(jQuery.isArray(defaultValue)){

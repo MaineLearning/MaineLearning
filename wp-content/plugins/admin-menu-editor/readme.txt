@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 3.2
-Tested up to: 3.4.2
-Stable tag: 1.1.12
+Tested up to: 3.5
+Stable tag: 1.1.13
 
 Lets you edit the WordPress admin menu. You can re-order, hide or rename menus, add custom menus and more. 
 
@@ -19,7 +19,7 @@ Admin Menu Editor lets you manually edit the Dashboard menu. You can reorder the
 * Move a menu item to a different submenu. 
 * Create custom menus that point to any part of the Dashboard or an external URL.
 
-The [Pro version](http://w-shadow.com/AdminMenuEditor/) lets you set per-role [menu permissions](http://w-shadow.com/admin-menu-editor-pro/documentation/permissions/), hide a menu from everyone except a specific user, export your admin menu, drag items between menu levels, make menus open in a new window and more.
+The [Pro version](http://w-shadow.com/AdminMenuEditor/) lets you set per-role menu permissions, hide a menu from everyone except a specific user, export your admin menu, drag items between menu levels, make menus open in a new window and more. [Try live demo](http://amedemo.com/wpdemo/demo.php).
 
 **Notes**
 
@@ -62,6 +62,11 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 3. Re-ordering menu items via drag and drop
 
 == Changelog ==
+
+= 1.1.13 =
+* Fixed a layout glitch that would cause the editor sidebar to display incorrectly in WP 3.5.
+* When trying to determine the current menu, the plugin will now ignore all links that contain nothing but an "#anchor". Various plugins use such links as separators and it wouldn't make sense to highlight them.
+* Tested on WP 3.5 (RC6).
 
 = 1.1.12 =
 * Fixed several more small CPT-related bugs that would cause the wrong menu to be marked as current. 

@@ -63,11 +63,11 @@ class GFEntryDetail{
             case "update" :
                 check_admin_referer('gforms_save_entry', 'gforms_save_entry');
                 RGFormsModel::save_lead($form, $lead);
-
                 do_action("gform_after_update_entry", $form, $lead["id"]);
                 do_action("gform_after_update_entry_{$form["id"]}", $form, $lead["id"]);
 
                 $lead = RGFormsModel::get_lead($lead["id"]);
+                $lead = GFFormsModel::set_entry_meta($lead, $form);
 
             break;
 

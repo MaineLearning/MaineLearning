@@ -180,8 +180,9 @@ class GFFormDetail{
                 float:left;
                 width:50%;
             }
-            .field_type input{
-                width:100px;
+            .field_type input {
+                width: 120px;
+                padding: 0 10px 2px !important;
             }
 
             .description-list { margin: 10px 0; padding: 0 20px; }
@@ -2320,7 +2321,7 @@ class GFFormDetail{
 
                             $button_text = rgar($form,"id") > 0 ? __("Update Form", "gravityforms") : __("Save Form", "gravityforms");
                             $isNew = rgar($form, "id") > 0 ? 0 : 1;
-                            $save_button = '<input type="button" class="button-primary gfbutton" value="' . $button_text . '" onclick="SaveForm(' . $isNew . ');" />';
+                            $save_button = '<input type="button" class="button button-primary button-large update-form" value="' . $button_text . '" onclick="SaveForm(' . $isNew . ');" />';
                             $save_button = apply_filters("gform_save_form_button", $save_button);
                             echo $save_button;
                             ?>
@@ -2506,6 +2507,7 @@ class GFFormDetail{
 
         require_once(GFCommon::get_base_path() . "/form_display.php");
         $field_html = GFFormDisplay::get_field($field, "", true);
+        $field_html = str_replace("\n", "\\n", $field_html);
         $field_html = str_replace('"', '\"', $field_html);
         die("EndDuplicateField($field_json, \"$field_html\", $source_field_id);");
     }
@@ -2547,11 +2549,15 @@ class GFFormDetail{
     public static function save_form_info($id, $form_json){
         global $wpdb;
         $form_json = stripslashes($form_json);
-
-        //$form_json = preg_replace('|\r\n?|', '\n', $form_json);
         $form_json = nl2br($form_json);
 
-        $form_meta = GFCommon::json_decode($form_json, true);
+        GFCommon::log_debug("form meta json:" . $form_json);
+
+        $form_meta = json_decode($form_json, true);
+
+        GFCommon::log_debug("form meta:");
+        GFCommon::log_debug(print_r($form_json, true));
+
         if(!$form_meta)
             return array("status" => "invalid_json", "meta"=> null);
 

@@ -55,12 +55,22 @@ jQuery(function($) {
 	adminMenu.find('li > a').each(function(index, link) {
 		var $link = $(link);
 
-		//Skip "#" links. Some plugins (e.g. S2Member 120703) use such no-op items as menu dividers.
-		if ($link.attr('href') == '#') {
+		//Skip links that contain nothing but an "#anchor". Both AME and some
+		//other plugins (e.g. S2Member 120703) use them as separators.
+		if ($link.attr('href').substring(0, 1) == '#') {
 			return;
 		}
 
 		var uri = parseUri(link.href);
+
+		//Special case: if post_type is not specified for edit.php and post-new.php,
+		//WordPress assumes it is "post". Here we make this explicit.
+		if ( (uri.file === 'edit.php') || (uri.file === 'post-new.php') ) {
+			if ( !uri.queryKey.hasOwnProperty('post_type') ) {
+				uri.queryKey['post_type'] = 'post';
+			}
+		}
+		//TODO: Consider using get_current_screen and the current_screen filter to get post types and taxonomies.
 
 		//Check for a close match - everything but query and #anchor.
 		var components = ['protocol', 'host', 'port', 'user', 'password', 'path'];
@@ -68,7 +78,6 @@ jQuery(function($) {
 		for (var i = 0; (i < components.length) && isCloseMatch; i++) {
 			isCloseMatch = isCloseMatch && (uri[components[i]] == currentUri[components[i]]);
 		}
-        //TODO: Consider using get_current_screen and the current_screen filter to get post types and taxonomies.
 
 		if (!isCloseMatch) {
 			return; //Skip to the next link.

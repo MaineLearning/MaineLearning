@@ -1391,6 +1391,8 @@ function EndDeleteField(fieldId){
         }
     }
     TogglePageBreakSettings();
+	
+	jQuery(document).trigger('gform_field_deleted', [form, fieldId]);
 }
 
 function StartDuplicateField(element) {
@@ -1521,6 +1523,8 @@ function EndAddField(field, fieldString){
     newFieldElement.removeClass("field_selected");
 
     UpdateDescriptionPlacement();
+	
+	jQuery(document).trigger('gform_field_added', [form, field]);
 }
 
 function StartChangeNameFormat(format){

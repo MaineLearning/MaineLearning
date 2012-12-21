@@ -6,6 +6,11 @@ class GFExport{
     public static function maybe_export(){
         if(isset($_POST["export_lead"])){
             check_admin_referer("rg_start_export", "rg_start_export_nonce");
+            //see if any fields chosen
+            if (empty($_POST["export_field"])){
+				echo "<div class='error' style='padding:15px;'>" . __("Please select the fields to be exported", "gravityforms") . "</div>";
+                return;
+            }
             $form_id=$_POST["export_form"];
             $form = RGFormsModel::get_form_meta($form_id);
 
@@ -21,7 +26,7 @@ class GFExport{
         }
         else if(isset($_POST["export_forms"])){
             check_admin_referer("gf_export_forms", "gf_export_forms_nonce");
-            $selected_forms = $_POST["gf_form_id"];
+            $selected_forms = rgpost("gf_form_id");
             if(empty($selected_forms)){
                 echo "<div class='error' style='padding:15px;'>" . __("Please select the forms to be exported", "gravityforms") . "</div>";
                 return;
@@ -206,6 +211,7 @@ class GFExport{
                         "creditCard"=> array("unserialize_as_array" => true),
                         "routin"=> array("unserialize_as_array" => true) //routin is for backwards compatibility
                         );
+        $options = apply_filters('gform_import_form_xml_options', $options);
         $xml = new RGXML($options);
         $forms = $xml->unserialize($xmlstr);
 
@@ -544,7 +550,7 @@ class GFExport{
         //paging through results for memory issues
         while($entry_count > 0){
             $leads = RGFormsModel::get_leads($form_id,"date_created", "DESC", "", $offset, $page_size, null, null, false, $start_date, $end_date);
-
+            
             foreach($leads as $lead){
                 foreach($fields as $field_id){
                     switch($field_id){
@@ -553,7 +559,6 @@ class GFExport{
                             $lead_local_time = GFCommon::get_local_timestamp($lead_gmt_time);
                             $value = date_i18n("Y-m-d H:i:s", $lead_local_time);
                         break;
-
                         default :
                             $long_text = "";
                             if(strlen($lead[$field_id]) >= (GFORMS_MAX_FIELD_LENGTH-10)){
@@ -617,7 +622,7 @@ class GFExport{
         array_push($form["fields"],array("id" => "post_id" , "label" => __("Post Id", "gravityforms")));
         array_push($form["fields"],array("id" => "user_agent" , "label" => __("User Agent", "gravityforms")));
         array_push($form["fields"],array("id" => "ip" , "label" => __("User IP", "gravityforms")));
-        
+        $form = self::get_entry_meta($form);
         $form = apply_filters('gform_export_fields', $form);
         return $form;
     }
@@ -651,6 +656,15 @@ class GFExport{
                 }
             }
         }
+    }
+    
+    private static function get_entry_meta($form){
+            $entry_meta = GFFormsModel::get_entry_meta($form["id"]);
+            $keys = array_keys($entry_meta);
+            foreach ($keys as $key){
+                array_push($form["fields"],array("id" => $key , "label" => $entry_meta[$key]['label']));
+            }
+            return $form;
     }
 }
 ?>

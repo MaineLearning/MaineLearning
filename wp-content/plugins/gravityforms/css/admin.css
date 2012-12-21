@@ -1598,6 +1598,9 @@ a.button-primary.gfbutton {
 	border-radius: 16px;
 	padding: 3px 8px 4px 8px !important
 }
+
+    .update-form { float: right; }
+
 .menu.collapsible ol.field_type li input.button:hover {
 	color: #D54E21;
 	border-color: #8F8F8F;
