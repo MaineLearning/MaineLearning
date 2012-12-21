@@ -31,25 +31,23 @@
  */
 
 #ws_editor_sidebar {
-	width: 138px;
+	width: auto;
 	padding: 2px;
 }
 
-.ws_main_button {
+#ws_editor_sidebar .ws_main_button {
 	clear: both;
 	display: block;
 	margin: 4px;
-	margin-left: auto;
-	margin-right: auto;
 	width: 120px;
-	padding: 4px !important;
+	padding: 4px;
 }
 
-#ws_save_menu {
+#ws_editor_sidebar #ws_save_menu {
 	margin-bottom: 20px;
 }
 
-#ws_export_menu {
+#ws_editor_sidebar #ws_export_menu {
 	margin-top: 12px;
 }
 

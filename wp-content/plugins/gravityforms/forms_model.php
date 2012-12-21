@@ -4,7 +4,7 @@ require_once(ABSPATH . "/wp-includes/post.php");
 
 define("GFORMS_MAX_FIELD_LENGTH", 200);
 
-class RGFormsModel{
+class GFFormsModel{
 
     public static $uploaded_files = array();
 
@@ -1221,7 +1221,7 @@ class RGFormsModel{
         update_option("gform_custom_choices", $all_choices);
     }
 
-    public static function get_field_value($field, $field_values = array(), $get_from_post=true){
+    public static function get_field_value(&$field, $field_values = array(), $get_from_post=true){
 
         if($field['type'] == 'post_category')
             $field = GFCommon::add_categories_as_choices($field, '');
@@ -2133,7 +2133,7 @@ class RGFormsModel{
 
             }
             else{
-                $wpdb->insert($lead_detail_table, array("lead_id" => $lead["id"], "form_id" => $form["id"], "field_number" => $input_id, "value" => $truncated_value), array("%d", "%d", "%f", "%s"));
+                $wpdb->insert($lead_detail_table, array("lead_id" => $lead["id"], "form_id" => $form["id"], "field_number" => $input_id, "value" => $truncated_value), array("%d", "%d", "%F", "%s"));
 
                 if(strlen($value) > GFORMS_MAX_FIELD_LENGTH){
 
@@ -2550,6 +2550,7 @@ class RGFormsModel{
 
         $lead_detail_table_name = self::get_lead_details_table_name();
         $lead_table_name = self::get_lead_table_name();
+		$lead_meta_table_name = self::get_lead_meta_table_name();
 
         $search_term = "%$search%";
         $search_filter = empty($search) ? "" : $wpdb->prepare(" AND value LIKE %s", $search_term);
@@ -2560,6 +2561,24 @@ class RGFormsModel{
 
         $start_date_filter = empty($start_date) ? "" : " AND datediff(date_created, '$start_date') >=0";
         $end_date_filter = empty($end_date) ? "" : " AND datediff(date_created, '$end_date') <=0";
+
+		$entry_meta = self::get_entry_meta($form_id);
+        $entry_meta_sql_join = "";
+        if ( false === empty( $entry_meta ) && array_key_exists( $sort_field, $entry_meta ) ) {
+            $entry_meta_sql_join = $wpdb->prepare("INNER JOIN
+                                                    (
+                                                    SELECT
+                                                         lead_id, meta_value as $sort_field
+                                                         from $lead_meta_table_name
+                                                         WHERE meta_key=%s
+                                                    ) lead_meta_data ON lead_meta_data.lead_id = l.id
+                                                    ", $sort_field);
+            $is_numeric_sort = $entry_meta[$sort_field]['is_numeric'];
+        }
+        $grid_columns = RGFormsModel::get_grid_columns($form_id);
+        if ( $sort_field != "date_created" && false === array_key_exists($sort_field, $grid_columns) )
+            $sort_field = "date_created";
+        $orderby = $is_numeric_sort ? "ORDER BY ($sort_field+0) $sort_direction" : "ORDER BY $sort_field $sort_direction";
 
         $sql = "
             SELECT filtered.sort, l.*, d.field_number, d.value
@@ -2573,14 +2592,15 @@ class RGFormsModel{
                     SELECT distinct l.id
                     FROM $lead_table_name l
                     INNER JOIN $lead_detail_table_name d ON d.lead_id = l.id
-                    WHERE l.form_id=$form_id
+                    $entry_meta_sql_join
+					WHERE l.form_id=$form_id
                     $search_filter
                     $star_filter
                     $read_filter
                     $status_filter
                     $start_date_filter
                     $end_date_filter
-                    ORDER BY $sort_field $sort_direction
+                    $orderby
                     LIMIT $offset,$page_size
                 ) page
             ) filtered ON filtered.id = l.id
@@ -2634,6 +2654,24 @@ class RGFormsModel{
                 else{
 
                     $lead[$field["id"]] = apply_filters("gform_get_input_value", rgar($lead, (string)$field["id"]), $lead, $field, "");
+                }
+            }
+        }
+
+        //adding custom entry properties
+        $entry_ids = array();
+        foreach($leads as $l){
+            $entry_ids[] = $l["id"];
+        }
+        $entry_meta = GFFormsModel::get_entry_meta($form_id);
+        $meta_keys = array_keys($entry_meta);
+        $entry_meta_data_rows = gform_get_meta_values_for_entries($entry_ids, $meta_keys);
+        foreach($leads as &$lead){
+            foreach($entry_meta_data_rows as $entry_meta_data_row){
+                if($entry_meta_data_row->lead_id == $lead["id"]){
+                    foreach($meta_keys as $meta_key){
+                        $lead[$meta_key] = $entry_meta_data_row->$meta_key;
+                    }
                 }
             }
         }
@@ -2704,7 +2742,7 @@ class RGFormsModel{
                         $field_ids[] = $field["id"] . '.3'; //adding first name
                         $field_ids[] = $field["id"] . '.6'; //adding last name
                     }
-                    else{
+                    else if(isset($field["inputs"][0])){
                         $field_ids[] = $field["inputs"][0]["id"]; //getting first input
                     }
                 }
@@ -2712,9 +2750,16 @@ class RGFormsModel{
                     $field_ids[] = $field["id"];
                 }
             }
+			//adding default entry meta columns
+            $entry_metas = GFFormsModel::get_entry_meta($form_id);
+            foreach ($entry_metas as $key => $entry_meta){
+            	if (rgar($entry_meta,"is_default_column"))
+            		$field_ids[] = $key;
+        }
         }
 
         $columns = array();
+        $entry_meta = self::get_entry_meta($form_id);
         foreach($field_ids as $field_id){
 
             switch($field_id){
@@ -2744,6 +2789,9 @@ class RGFormsModel{
                 break;
                 case "created_by" :
                     $columns[$field_id] = array("label" => "User", "type" => "created_by");
+                break;
+				case ((is_string($field_id) || is_int($field_id)) && array_key_exists($field_id, $entry_meta)) :
+                    $columns[$field_id] = array("label" => $entry_meta[$field_id]["label"], "type" => $field_id);
                 break;
                 default :
                     $field = self::get_field($form, $field_id);
@@ -2830,7 +2878,35 @@ class RGFormsModel{
     public static function is_html5_enabled(){
         return get_option("rg_gforms_enable_html5");
     }
+
+	public static function get_entry_meta($form_id){
+        global $_entry_meta;
+        if(!isset($_entry_meta[$form_id])){
+            $_entry_meta = array();
+            $_entry_meta[$form_id] = apply_filters('gform_entry_meta', array(), $form_id);
+        }
+
+        return $_entry_meta[$form_id];
+    }
+
+
+    public static function set_entry_meta($lead, $form){
+        $entry_meta = self::get_entry_meta($form["id"]);
+        $keys = array_keys($entry_meta);
+        foreach ($keys as $key){
+            if (isset($entry_meta[$key]['update_entry_meta_callback'])){
+                $callback = $entry_meta[$key]['update_entry_meta_callback'];
+                $value = call_user_func_array($callback, array($key, $lead, $form));
+
+                gform_update_meta($lead["id"], $key, $value);
+                $lead[$key] = $value;
+            }
+        }
+        return $lead;
+    }
 }
+
+class RGFormsModel extends GFFormsModel { }
 
 global $_gform_lead_meta;
 $_gform_lead_meta = array();
@@ -2845,16 +2921,55 @@ function gform_get_meta($entry_id, $meta_key){
         return $_gform_lead_meta[$cache_key];
 
     $table_name = RGFormsModel::get_lead_meta_table_name();
-    $value = $wpdb->get_var($wpdb->prepare("SELECT meta_value FROM {$table_name} WHERE lead_id=%d AND meta_key=%s", $entry_id, $meta_key));
+    $results = $wpdb->get_results($wpdb->prepare("SELECT meta_value FROM {$table_name} WHERE lead_id=%d AND meta_key=%s", $entry_id, $meta_key));
+    $value = isset($results[0]) ? $results[0]->meta_value : null;
     $meta_value = $value == null ? false : maybe_unserialize($value);
     $_gform_lead_meta[$cache_key] = $meta_value;
     return $meta_value;
 }
 
+function gform_get_meta_values_for_entries($entry_ids, $meta_keys){
+    global $wpdb;
+
+    if (empty($meta_keys))
+        return array();
+
+    $table_name = RGFormsModel::get_lead_meta_table_name();
+    $meta_value_array = array();
+    $select_meta_keys = join(",", $meta_keys);
+    $meta_key_select_array = array();
+
+    foreach($meta_keys as $meta_key){
+        $meta_key_select_array[] = $wpdb->prepare("max(case when meta_key=%s then meta_value end) as $meta_key", $meta_key);
+    }
+
+    $entry_ids_str = join(",", $entry_ids);
+
+    $meta_key_select = join(",", $meta_key_select_array);
+
+    $sql_query = "  SELECT
+                    lead_id, $meta_key_select
+                    FROM $table_name
+                    WHERE lead_id IN ($entry_ids_str)
+                    GROUP BY lead_id
+                    ";
+
+    $results = $wpdb->get_results($sql_query);
+
+    foreach($results as $result){
+        foreach($meta_keys as $meta_key){
+            $result->$meta_key = $result->$meta_key == null ? false : maybe_unserialize($result->$meta_key);
+        }
+    }
+
+    $meta_value_array = $results;
+    return $meta_value_array;
+}
 function gform_update_meta($entry_id, $meta_key, $meta_value){
     global $wpdb, $_gform_lead_meta;
     $table_name = RGFormsModel::get_lead_meta_table_name();
-
+    if (false === $meta_value)
+         $meta_value = "0";
     $meta_value = maybe_serialize($meta_value);
     $meta_exists = gform_get_meta($entry_id, $meta_key) !== false;
     if($meta_exists){
@@ -2869,6 +2984,8 @@ function gform_update_meta($entry_id, $meta_key, $meta_value){
     if(array_key_exists($cache_key, $_gform_lead_meta))
         $_gform_lead_meta[$cache_key] = maybe_unserialize($meta_value);
 }
+
+
 
 function gform_delete_meta($entry_id, $meta_key=""){
     global $wpdb, $_gform_lead_meta;

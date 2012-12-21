@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.6.9";
+    public static $version = "1.6.11";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -4412,7 +4412,6 @@ class GFCommon{
         } else {
 
             $choices = array_merge($choices, $field['choices']);
-
         }
 
         if(empty($choices))

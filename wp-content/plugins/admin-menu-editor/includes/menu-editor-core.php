@@ -193,7 +193,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
    * @return void
    */
 	function enqueue_styles(){
-		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20120915');
+		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20121210');
 	}
 
   /**

@@ -114,7 +114,7 @@ class GFEntryList{
         $sort_direction = empty($_GET["dir"]) ? "DESC" : $_GET["dir"];
         $search = RGForms::get("s");
         $page_index = empty($_GET["paged"]) ? 0 : intval($_GET["paged"]) - 1;
-        
+
         $star = $filter == "star" ? 1 : null; // is_numeric(RGForms::get("star")) ? intval(RGForms::get("star")) : null;
         $read = $filter == "unread" ? 0 : null; //is_numeric(RGForms::get("read")) ? intval(RGForms::get("read")) : null;
 
@@ -186,8 +186,8 @@ class GFEntryList{
         ?>
 
         <script src="<?php echo GFCommon::get_base_url() ?>/js/jquery.json-1.3.js?ver=<?php echo GFCommon::$version ?>"></script>
-        <script src="<?php echo includes_url() ?>/js/wp-lists.dev.js" type="text/javascript"></script>
-        <script src="<?php echo includes_url() ?>/js/wp-ajax-response.dev.js" type="text/javascript"></script>
+        <script src="<?php echo includes_url() ?>/js/wp-lists.js" type="text/javascript"></script>
+        <script src="<?php echo includes_url() ?>/js/wp-ajax-response.js" type="text/javascript"></script>
 
         <script type="text/javascript">
 
@@ -486,20 +486,19 @@ class GFEntryList{
 
 
                 var list = jQuery("#gf_entry_list").wpList( { alt: '<?php echo esc_js(__('Entry List', 'gravityforms')) ?>'} );
-                list.bind('wpListDelEnd', function(e, s){
+                list.bind('wpListDelEnd', function(e, s, list){
 
                     var currentStatus = "<?php echo $filter == "trash" || $filter == "spam" ? $filter : "active" ?>";
                     var filter = "<?php echo $filter ?>";
                     var movingTo = "active";
-                    if(s.target.className.indexOf(':status=trash') != -1)
+                    if(s.data.status == "trash")
                         movingTo = "trash";
-                    else if(s.target.className.indexOf(':status=spam') != -1)
+                    else if(s.data.status == "spam")
                         movingTo = "spam";
-                    else if(s.target.className.indexOf(':status=delete') != -1)
+                    else if(s.data.status == "delete")
                         movingTo = "delete";
 
                     var id = s.data.entry;
-
                     var title = jQuery("#lead_row_" + id);
                     var isUnread = title.hasClass("lead_unread");
                     var isStarred = title.hasClass("lead_starred");
@@ -529,12 +528,12 @@ class GFEntryList{
                         //adjust paging counts
                         if (filter == "spam")
                         {
-                        	UpdatePagingCounts(1);
-						}
-						else
-						{
-							UpdatePagingCounts(spamCount);
-						}
+                            UpdatePagingCounts(1);
+                        }
+                        else
+                        {
+                            UpdatePagingCounts(spamCount);
+                        }
                     }
 
                     //Updating trash count
@@ -544,12 +543,12 @@ class GFEntryList{
                         //adjust paging counts
                         if (filter == "trash")
                         {
-                        	UpdatePagingCounts(1);
-						}
-						else
-						{
-							UpdatePagingCounts(trashCount);
-						}
+                            UpdatePagingCounts(1);
+                        }
+                        else
+                        {
+                            UpdatePagingCounts(trashCount);
+                        }
                     }
 
                 });;
@@ -786,7 +785,7 @@ class GFEntryList{
                     </tr>
                 </tfoot>
 
-                <tbody class="list:gf_entry user-list" id="gf_entry_list">
+                <tbody data-wp-lists="list:gf_entry user-list" id="gf_entry_list">
                     <?php
                     if(sizeof($leads) > 0){
                         $field_ids = array_keys($columns);
@@ -813,9 +812,9 @@ class GFEntryList{
 
                                 $nowrap_class="entry_nowrap";
                                 foreach($field_ids as $field_id){
-                                    
+
                                     /* maybe move to function */
-                                    
+
                                     $field = RGFormsModel::get_field($form, $field_id);
                                     $value = rgar($lead, $field_id);
 
@@ -943,20 +942,19 @@ class GFEntryList{
                                                 $value = $userdata->user_login;
                                             }
                                         break;
-                                        
+
                                         case "multiselect":
                                             // add space after comma-delimited values
                                             $value = implode(', ', explode(',', $value));
                                             break;
-                                        
+
                                         default:
                                             $value = esc_html($value);
                                     }
+									$value = apply_filters("gform_entries_field_value", $value, $form_id, $field_id, $lead);
 
-                                    $value = apply_filters("gform_entries_field_value", $value, $form_id, $field_id, $lead);
-                                    
                                     /* ^ maybe move to function */
-                                    
+
                                     $query_string = "gf_entries&view=entry&id={$form_id}&lid={$lead["id"]}{$search_qs}{$sort_qs}{$dir_qs}{$filter_qs}&paged=" . ($page_index + 1);
                                     if($is_first_column){
                                         ?>
@@ -973,7 +971,7 @@ class GFEntryList{
                                                         </span>
 
                                                         <span class="edit">
-                                                            <a class='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=active&entry=<?php echo $lead["id"] ?>' title="<?php echo _e("Restore this entry", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Restore", "gravityforms"); ?></a>
+                                                            <a data-wp-lists='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=active&entry=<?php echo $lead["id"] ?>' title="<?php echo _e("Restore this entry", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Restore", "gravityforms"); ?></a>
                                                             <?php echo GFCommon::current_user_can_any("gravityforms_delete_entries") ? "|" : "" ?>
                                                         </span>
 
@@ -983,7 +981,7 @@ class GFEntryList{
                                                             ?>
                                                             <span class="delete">
                                                                 <?php
-                                                                $delete_link ='<a class="delete:gf_entry_list:lead_row_' . $lead["id"] . '::status=delete&entry=' . $lead["id"] . '" title="' . __("Delete this entry permanently", "gravityforms"). '"  href="' . wp_nonce_url("?page=gf_entries", "gf_delete_entry") . '">' . __("Delete Permanently", "gravityforms") .'</a>';
+                                                                $delete_link ='<a data-wp-lists="delete:gf_entry_list:lead_row_' . $lead["id"] . '::status=delete&entry=' . $lead["id"] . '" title="' . __("Delete this entry permanently", "gravityforms"). '"  href="' . wp_nonce_url("?page=gf_entries", "gf_delete_entry") . '">' . __("Delete Permanently", "gravityforms") .'</a>';
                                                                 echo apply_filters("gform_delete_entry_link", $delete_link);
                                                                 ?>
                                                             </span>
@@ -999,7 +997,7 @@ class GFEntryList{
                                                         </span>
 
                                                         <span class="unspam">
-                                                            <a class='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=unspam&entry=<?php echo $lead["id"] ?>' title="<?php echo _e("Mark this entry as not spam", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Not Spam", "gravityforms"); ?></a>
+                                                            <a data-wp-lists='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=unspam&entry=<?php echo $lead["id"] ?>' title="<?php echo _e("Mark this entry as not spam", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Not Spam", "gravityforms"); ?></a>
                                                             <?php echo GFCommon::current_user_can_any("gravityforms_delete_entries") ? "|" : "" ?>
                                                         </span>
 
@@ -1009,7 +1007,7 @@ class GFEntryList{
                                                             ?>
                                                             <span class="delete">
                                                                 <?php
-                                                                $delete_link ='<a class="delete:gf_entry_list:lead_row_' . $lead["id"] . '::status=delete&entry=' . $lead["id"] . '" title="' . __("Delete this entry permanently", "gravityforms"). '"  href="' . wp_nonce_url("?page=gf_entries", "gf_delete_entry") . '">' . __("Delete Permanently", "gravityforms") .'</a>';
+                                                                $delete_link ='<a data-wp-lists="delete:gf_entry_list:lead_row_' . $lead["id"] . '::status=delete&entry=' . $lead["id"] . '" title="' . __("Delete this entry permanently", "gravityforms"). '"  href="' . wp_nonce_url("?page=gf_entries", "gf_delete_entry") . '">' . __("Delete Permanently", "gravityforms") .'</a>';
                                                                 echo apply_filters("gform_delete_entry_link", $delete_link);
                                                                 ?>
                                                             </span>
@@ -1032,7 +1030,7 @@ class GFEntryList{
                                                         if(GFCommon::akismet_enabled($form_id)){
                                                             ?>
                                                             <span class="spam">
-                                                                <a class='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=spam&entry=<?php echo $lead["id"] ?>' title="<?php _e("Mark this entry as spam", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Spam", "gravityforms"); ?></a>
+                                                                <a data-wp-lists='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=spam&entry=<?php echo $lead["id"] ?>' title="<?php _e("Mark this entry as spam", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Spam", "gravityforms"); ?></a>
                                                                 <?php echo GFCommon::current_user_can_any("gravityforms_delete_entries") ? "|" : "" ?>
                                                             </span>
 
@@ -1042,7 +1040,7 @@ class GFEntryList{
                                                         {
                                                             ?>
                                                             <span class="trash">
-                                                                <a class='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=trash&entry=<?php echo $lead["id"] ?>' title="<?php _e("Move this entry to the trash", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Trash", "gravityforms"); ?></a>
+                                                                <a data-wp-lists='delete:gf_entry_list:lead_row_<?php echo $lead["id"] ?>::status=trash&entry=<?php echo $lead["id"] ?>' title="<?php _e("Move this entry to the trash", "gravityforms") ?>" href="<?php echo wp_nonce_url("?page=gf_entries", "gf_delete_entry") ?>"><?php _e("Trash", "gravityforms"); ?></a>
                                                             </span>
                                                             <?php
                                                         }
@@ -1322,7 +1320,8 @@ class GFEntryList{
 		}
 		return $paging_html;
     }
-    
+
+
 }
 
 ?>
