@@ -4,8 +4,8 @@ Name: Children Index Shortcode Plugin
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: children, index, shortcode, plugin
 Requires at least: 2.9
-Tested up to: 3.3
-Stable tag: 1.0
+Tested up to: 3.5
+Stable tag: 1.1
 
 
 
@@ -54,4 +54,11 @@ Developer Website: http://MyWebsiteAdvisor.com
 
 = 1.0 =
 * Initial release
+
+= 1.0.1 =
+* added outside ul tags to encluse the output.
+* added order and order by arguments to the shortcode.
+
+= 1.1 = 
+* added id attribute to shortcode so you can display an index on any page or post not just on the actual parent
 
