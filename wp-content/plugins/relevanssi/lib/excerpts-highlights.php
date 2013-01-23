@@ -17,22 +17,22 @@ function relevanssi_do_excerpt($t_post, $query) {
 	$old_global_post = NULL;
 	if ($post != NULL) $old_global_post = $post;
 	$post = $t_post;
-	
+
 	$remove_stopwords = false;
 	$terms = relevanssi_tokenize($query, $remove_stopwords);
 	
 	$content = apply_filters('relevanssi_pre_excerpt_content', $post->post_content, $post, $query);
-	$content = apply_filters('the_content', $post->post_content);
+	$content = apply_filters('the_content', $content);
 	$content = apply_filters('relevanssi_excerpt_content', $content, $post, $query);
 	
 	$content = relevanssi_strip_invisibles($content); // removes <script>, <embed> &c with content
 	$content = strip_tags($content, get_option('relevanssi_excerpt_allowable_tags', '')); // this removes the tags, but leaves the content
 	
 	$content = preg_replace("/\n\r|\r\n|\n|\r/", " ", $content);
-	$content = trim(preg_replace("/\s\s+/", " ", $content));
+//	$content = trim(preg_replace("/\s\s+/", " ", $content));
 	
 	$excerpt_data = relevanssi_create_excerpt($content, $terms);
-	
+
 	if (get_option("relevanssi_index_comments") != 'none') {
 		$comment_content = relevanssi_get_comments($post->ID);
 		$comment_excerpts = relevanssi_create_excerpt($comment_content, $terms);
@@ -52,7 +52,24 @@ function relevanssi_do_excerpt($t_post, $query) {
 	$start = $excerpt_data[2];
 
 	$excerpt = $excerpt_data[0];	
+	if (function_exists('twentyten_custom_excerpt_more')) {
+		// Hack to fix a problem with Twenty Ten custom excerpts
+		remove_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
+	}
+	if (function_exists('twentyeleven_custom_excerpt_more')) {
+		// Hack to fix a problem with Twenty Eleven custom excerpts
+		remove_filter( 'get_the_excerpt', 'twentyeleven_custom_excerpt_more' );
+	}
+
 	$excerpt = apply_filters('get_the_excerpt', $excerpt);
+
+	if (function_exists('twentyten_custom_excerpt_more')) {
+		add_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
+	}
+	if (function_exists('twentyeleven_custom_excerpt_more')) {
+		add_filter( 'get_the_excerpt', 'twentyeleven_custom_excerpt_more' );
+	}
+
 	$excerpt = trim($excerpt);
 
 	$ellipsis = apply_filters('relevanssi_ellipsis', '...');
@@ -63,12 +80,12 @@ function relevanssi_do_excerpt($t_post, $query) {
 			$excerpt = relevanssi_highlight_terms($excerpt, $query);
 		}
 	}
-	
+
 	if (!$start) {
 		$excerpt = $ellipsis . $excerpt;
 		// do not add three dots to the beginning of the post
 	}
-	
+
 	$excerpt = $excerpt . $ellipsis;
 
 	if (relevanssi_s2member_level($post->ID) == 1) $excerpt = $post->post_excerpt;
@@ -92,7 +109,18 @@ function relevanssi_create_excerpt($content, $terms) {
 	$best_excerpt_term_hits = -1;
 	$excerpt = "";
 
-	$content = " $content";	
+	$content = " $content";
+	
+/*
+	$highlight = get_option('relevanssi_highlight');
+	if ("none" != $highlight) {
+		if (!is_admin()) {
+			$content = html_entity_decode($content, ENT_QUOTES, 'UTF-8');
+			// html_entity_decode to avoid highlighting from breaking HTML entities
+		}
+	}
+*/
+	
 	$start = false;
 	if ("chars" == $type) {
 		$term_hits = 0;
@@ -101,7 +129,7 @@ function relevanssi_create_excerpt($content, $terms) {
 			if (function_exists('mb_stripos')) {
 				$pos = ("" == $content) ? false : mb_stripos($content, $term);
 			}
-			else if (function_exists('mb_strpos')) {
+			else if (function_exists('mb_strpos') && function_exists('mb_strtoupper') && function_exists('mb_substr')) {
 				$pos = mb_strpos($content, $term);
 				if (false === $pos) {
 					$titlecased = mb_strtoupper(mb_substr($term, 0, 1)) . mb_substr($term, 1);
@@ -222,19 +250,21 @@ function relevanssi_create_excerpt($content, $terms) {
 
 function relevanssi_highlight_in_docs($content) {
 	if (is_singular()) {
-		$referrer = preg_replace('@(http|https)://@', '', stripslashes(urldecode($_SERVER['HTTP_REFERER'])));
-		$args     = explode('?', $referrer);
-		$query    = array();
+		if (isset($_SERVER['HTTP_REFERER'])) {
+			$referrer = preg_replace('@(http|https)://@', '', stripslashes(urldecode($_SERVER['HTTP_REFERER'])));
+			$args     = explode('?', $referrer);
+			$query    = array();
 	
-		if ( count( $args ) > 1 )
-			parse_str( $args[1], $query );
+			if ( count( $args ) > 1 )
+				parse_str( $args[1], $query );
 	
-		if (substr($referrer, 0, strlen($_SERVER['SERVER_NAME'])) == $_SERVER['SERVER_NAME'] && (isset($query['s']) || strpos($referrer, '/search/') !== false)) {
-			// Local search
-			$content = relevanssi_highlight_terms($content, $query['s']);
-		}
-		if (function_exists('relevanssi_nonlocal_highlighting')) {
-			$content = relevanssi_nonlocal_highlighting($referrer, $content, $query['q']);
+			if (substr($referrer, 0, strlen($_SERVER['SERVER_NAME'])) == $_SERVER['SERVER_NAME'] && (isset($query['s']) || strpos($referrer, '/search/') !== false)) {
+				// Local search
+				$content = relevanssi_highlight_terms($content, $query['s']);
+			}
+			if (function_exists('relevanssi_nonlocal_highlighting')) {
+				$content = relevanssi_nonlocal_highlighting($referrer, $content, $query);
+			}
 		}
 	}
 	
@@ -325,7 +355,12 @@ function relevanssi_highlight_terms($excerpt, $query) {
 	}
 	
 	$excerpt = relevanssi_remove_nested_highlights($excerpt, $start_emp_token, $end_emp_token);
-	
+
+/*
+	$excerpt = htmlentities($excerpt, ENT_QUOTES, 'UTF-8');
+	// return the HTML entities that were stripped before
+*/
+
 	$excerpt = str_replace($start_emp_token, $start_emp, $excerpt);
 	$excerpt = str_replace($end_emp_token, $end_emp, $excerpt);
 	$excerpt = str_replace($end_emp . $start_emp, "", $excerpt);

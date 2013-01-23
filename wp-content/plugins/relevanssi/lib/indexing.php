@@ -123,7 +123,7 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 			$post = get_post($post['ID']);
 		}
 		
-		if (!isset($post)) {
+		if (empty($post)) {
 			// No $post set, so we need to use $indexpost, if it's a post object
 			$post_was_null = true;
 			if (is_object($indexpost)) {
@@ -257,18 +257,21 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 			$custom_fields = get_post_custom_keys($post->ID);
 			$remove_underscore_fields = true;
 		}
-		foreach ($custom_fields as $field) {
-			if ($remove_underscore_fields) {
-				if (substr($field, 0, 1) == '_') continue;
-			}
-			$values = get_post_meta($post->ID, $field, false);
-			if ("" == $values) continue;
-			foreach ($values as $value) {
-				$value_tokens = relevanssi_tokenize($value, true, $min_word_length);
-				foreach ($value_tokens as $token => $count) {
-					isset($insert_data[$token]['customfield']) ? $insert_data[$token]['customfield'] += $count : $insert_data[$token]['customfield'] = $count;
-					if (function_exists('relevanssi_customfield_detail')) {
-						$insert_data = relevanssi_customfield_detail($insert_data, $token, $count, $field);
+		$custom_fields = apply_filters('relevanssi_index_custom_fields', $custom_fields);
+		if (is_array($custom_fields)) {
+			foreach ($custom_fields as $field) {
+				if ($remove_underscore_fields) {
+					if (substr($field, 0, 1) == '_') continue;
+				}
+				$values = get_post_meta($post->ID, $field, false);
+				if ("" == $values) continue;
+				foreach ($values as $value) {
+					$value_tokens = relevanssi_tokenize($value, true, $min_word_length);
+					foreach ($value_tokens as $token => $count) {
+						isset($insert_data[$token]['customfield']) ? $insert_data[$token]['customfield'] += $count : $insert_data[$token]['customfield'] = $count;
+						if (function_exists('relevanssi_customfield_detail')) {
+							$insert_data = relevanssi_customfield_detail($insert_data, $token, $count, $field);
+						}
 					}
 				}
 			}
@@ -292,7 +295,6 @@ function relevanssi_index_doc($indexpost, $remove_first = false, $custom_fields 
 
 		if (count($titles) > 0) {
 			foreach ($titles as $title => $count) {
-				if (strlen($title) < 2) continue;
 				$n++;
 				isset($insert_data[$title]['title']) ? $insert_data[$title]['title'] += $count : $insert_data[$title]['title'] = $count;
 			}
