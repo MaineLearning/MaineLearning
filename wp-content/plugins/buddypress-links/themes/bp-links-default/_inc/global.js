@@ -82,7 +82,17 @@ jQuery(document).ready( function() {
 					j.fn.colorbox({
 						html: rs[1],
 						maxWidth: '90%',
-						maxHeight: '90%'
+						maxHeight: '90%',
+						scalePhotos: false,
+						onComplete: function(){
+							var children = j('#cboxLoadedContent').children();
+							if ( children.length == 1 && children.first().is('img') ) {
+								j.colorbox.resize({
+									innerHeight: j('#cboxLoadedContent > img').outerHeight() + 18,
+									innerWidth: j('#cboxLoadedContent > img').outerWidth() + 18
+								});
+							}
+						}
 					});
 				}
 			});

@@ -220,14 +220,12 @@ class BP_Links_Link {
 
 		$this->_is_new = false;
 
-		$sql_parts['select'] =
-			$wpdb->prepare( 'SELECT l.*' );
+		$sql_parts['select'] = 'SELECT l.*';
 
 		$sql_parts['select_x'] =
 			apply_filters( 'bp_links_link_populate_select_x', '' );
 
-		$sql_parts['from'] =
-			$wpdb->prepare( "FROM {$bp->links->table_name} AS l" );
+		$sql_parts['from'] = "FROM {$bp->links->table_name} AS l";
 
 		$sql_parts['from_x'] =
 			apply_filters( 'bp_links_link_populate_from_x', '' );
@@ -670,7 +668,7 @@ class BP_Links_Link {
 	function get_last_updated() {
 		global $bp, $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare( "SELECT date_created FROM {$bp->links->table_name} ORDER BY date_created DESC LIMIT 1" ) );
+		return $wpdb->get_var( "SELECT date_created FROM {$bp->links->table_name} ORDER BY date_created DESC LIMIT 1" );
 	}
 
 	function delete_all_for_user( $user_id ) {
@@ -700,7 +698,7 @@ class BP_Links_Link {
 		$join_sql = apply_filters( 'bp_links_link_by_column_join', '', $args );
 
 		if ( $meta_key ) {
-			$join_sql .= $wpdb->prepare( " INNER JOIN {$bp->links->table_name_linkmeta} lm ON l.id = lm.link_id" );
+			$join_sql .= " INNER JOIN {$bp->links->table_name_linkmeta} lm ON l.id = lm.link_id";
 		}
 
 		$status_sql = self::get_status_sql( $user_id, ' AND %s' );
@@ -741,9 +739,9 @@ class BP_Links_Link {
 			$pag_sql = $wpdb->prepare( " LIMIT %d, %d", intval( ( $page - 1 ) * $per_page), intval( $per_page ) );
 
 		if ( $user_id ) {
-			$paged_sql = $wpdb->prepare( "SELECT l.id AS link_id, l.slug FROM {$bp->links->table_name} l{$join_sql} WHERE {$profile_sql}{$status_sql}{$filter_sql}{$category_sql}{$extra_sql}{$order_by_sql} {$pag_sql}" );
+			$paged_sql = "SELECT l.id AS link_id, l.slug FROM {$bp->links->table_name} l{$join_sql} WHERE {$profile_sql}{$status_sql}{$filter_sql}{$category_sql}{$extra_sql}{$order_by_sql} {$pag_sql}";
 			$paged_links = $wpdb->get_results( $paged_sql );
-			$total_sql = $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->links->table_name} l{$join_sql} WHERE {$profile_sql}{$status_sql}{$category_sql}{$extra_sql}{$filter_sql}" );
+			$total_sql = "SELECT COUNT(*) FROM {$bp->links->table_name} l{$join_sql} WHERE {$profile_sql}{$status_sql}{$category_sql}{$extra_sql}{$filter_sql}";
 			$total_links = $wpdb->get_var( $total_sql );
 		} else {
 			$paged_sql = $wpdb->prepare( "SELECT l.id AS link_id, l.slug FROM {$bp->links->table_name} l{$join_sql} WHERE l.status = %d{$filter_sql}{$category_sql}{$extra_sql}{$order_by_sql} {$pag_sql}", self::STATUS_PUBLIC );
@@ -802,7 +800,7 @@ class BP_Links_Link {
 		if ( !is_super_admin() )
 			$hidden_sql = sprintf( "WHERE status = %s", self::STATUS_PUBLIC );
 
-		return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$bp->links->table_name} {$hidden_sql}" ) );
+		return $wpdb->get_var( "SELECT COUNT(id) FROM {$bp->links->table_name} {$hidden_sql}" );
 	}
 
 	function get_total_link_count_for_user( $user_id = false ) {
@@ -811,14 +809,12 @@ class BP_Links_Link {
 		if ( !$user_id )
 			$user_id = ( $bp->displayed_user->id ) ? $bp->displayed_user->id : $bp->loggedin_user->id;
 
-		$sql_parts['select'] =
-			$wpdb->prepare( 'SELECT COUNT(*)' );
+		$sql_parts['select'] = 'SELECT COUNT(*)';
 		
 		$sql_parts['select_x'] =
 			apply_filters( 'bp_links_link_count_for_user_select_x', '', $user_id );
 
-		$sql_parts['from'] =
-			$wpdb->prepare( "FROM {$bp->links->table_name} AS l" );
+		$sql_parts['from'] = "FROM {$bp->links->table_name} AS l";
 			
 		$sql_parts['from_x'] =
 			apply_filters( 'bp_links_link_count_for_user_from_x', '', $user_id );
@@ -1048,7 +1044,7 @@ class BP_Links_Category {
 
 		return
 			$wpdb->get_results(
-				$wpdb->prepare( "SELECT id as category_id FROM {$bp->links->table_name_categories} ORDER BY priority" )
+				"SELECT id as category_id FROM {$bp->links->table_name_categories} ORDER BY priority"
 			);
 	}
 
@@ -1064,8 +1060,8 @@ class BP_Links_Category {
 		if ( $limit && $page )
 			$pag_sql = $wpdb->prepare( " LIMIT %d, %d", intval( ( $page - 1 ) * $limit), intval( $limit ) );
 
-		$paged_categories = $wpdb->get_results( $wpdb->prepare( "SELECT id as category_id, slug FROM {$bp->links->table_name_categories}{$filter_sql} ORDER BY priority {$pag_sql}" ) );
-		$total_categories = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->links->table_name_categories}{$filter_sql}" ) );
+		$paged_categories = $wpdb->get_results( "SELECT id as category_id, slug FROM {$bp->links->table_name_categories}{$filter_sql} ORDER BY priority {$pag_sql}" );
+		$total_categories = $wpdb->get_var( "SELECT COUNT(*) FROM {$bp->links->table_name_categories}{$filter_sql}" );
 
 		return array( 'categories' => $paged_categories, 'total' => $total_categories );
 	}
