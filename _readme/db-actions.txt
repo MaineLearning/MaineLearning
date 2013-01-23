@@ -3,15 +3,18 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+Enable comments and trackbacks on Resources: Objects (via no page comment)
+
 Migrate BuddyPress Docs after upgrade.
 
 Update Network (Network Admin > Updates) after push to production.
 
-Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
 
 
 ------------------------------------
 DONE
+
+Create /assets/ directory at the root level. (To hold Gravity Forms uploads). Exclude from GIT.
 
 After upgrade to WP 3.4.2, run the "Upgrade Network" process.
 
