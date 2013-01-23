@@ -214,7 +214,7 @@
 }
 #general-cpac-settings .cpac-option-list li .cpac-type-inside input,
 #general-cpac-settings .cpac-option-list li .cpac-type-inside select {
-	min-width: 184px;
+	width: 184px;
 }
 #general-cpac-settings .cpac-option-list li .cpac-type-inside input.input-width {
 	min-width: 25px;
@@ -301,6 +301,27 @@
 	border-bottom: none;
 	border-top: none;
 }
+#cpac-box-plugin_settings .button {
+	position: relative;
+}
+#cpac-box-plugin_settings .button.loading {
+	padding-right: 25px;
+}
+#cpac-box-plugin_settings .button.loading span {
+	position: absolute;
+	top: 2px;
+	right: 6px;
+	background: transparent url('../images/loading.gif') no-repeat right 50%;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+#cpac-box-plugin_settings td.first-col {
+	width: 18%;
+}
+
+/* =Addon settings
+-------------------------------------------------------------- */
 #cpac-box-plugin_settings table.addons {
 	/* max-width: 620px; */	
 }
@@ -362,21 +383,6 @@
 	float: left;
 	width: 220px;
 }
-#cpac-box-plugin_settings table.addons .button {
-	position: relative;
-}
-#cpac-box-plugin_settings table.addons .button.loading {
-	padding-right: 25px;
-}
-#cpac-box-plugin_settings table.addons .button.loading span {
-	position: absolute;
-	top: 2px;
-	right: 6px;
-	background: transparent url('../images/loading.gif') no-repeat right 50%;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-}
 
 /* =Restore settings
 -------------------------------------------------------------- */
@@ -405,8 +411,14 @@
 -------------------------------------------------------------- */
 #addons-cpac-settings {
 	overflow: hidden;
-	background-color: #CCFFCC;
-	background-image: -moz-linear-gradient(center top , #c3f5c2, #CCFFCC );
+	background: #ccffcc;
+	background: -moz-linear-gradient(top,  #c3f5c2 1%, #ccffcc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#c3f5c2), color-stop(100%,#ccffcc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #c3f5c2 1%,#ccffcc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #c3f5c2 1%,#ccffcc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #c3f5c2 1%,#ccffcc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #c3f5c2 1%,#ccffcc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3f5c2', endColorstr='#ccffcc',GradientType=0 ); /* IE6-9 */
     border-color: green;
 }
 #addons-cpac-settings h3 {
@@ -499,6 +511,50 @@
 	color: #CC0000;
 	line-height: 20px;
 	padding: 0 6px;
+}
+
+/* =Import / Export
+-------------------------------------------------------------- */
+div.cpac_export {
+	width: 20%;
+	float: left;
+}
+#cpac_export_output {
+	width: 80%;
+	float: left;	
+	display: none;
+}
+#cpac_export_output textarea {
+	width: 100%;
+	height: 80%;	
+}
+#cpac_export_submit {
+	display: inline-block;
+	margin: 10px 0;
+}
+#cpac_import_input {}
+#cpac_import_input textarea {
+	width: 100%;
+	height: 80%;	
+}
+#cpac_import_submit {
+	display: inline-block;
+	margin: 10px 0;
+}
+.export-message,
+.import-message {
+	background-color: #FFFFE0;
+    border: 1px solid #E6DB55;
+	padding: 4px 6px;
+	border-radius: 3px;
+	display: none;
+}
+
+/* =WP Pointer
+-------------------------------------------------------------- */
+.wp-pointer-content ol {
+    margin-left: 1.5em;
+    padding: 0 15px;
 }
 
 /* =Tooltip
