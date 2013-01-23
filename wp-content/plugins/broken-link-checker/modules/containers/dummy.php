@@ -73,5 +73,3 @@ class blcDummyManager extends blcContainerManager {
 		//Do nothing.
 	}
 }
-
-?>

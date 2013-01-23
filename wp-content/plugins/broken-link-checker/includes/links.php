@@ -457,7 +457,7 @@ class blcLink {
    * @return array
    */
 	function to_db_format($values){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb  */
 		
 		$dbvalues = array();
 		
@@ -614,7 +614,7 @@ class blcLink {
 						__('Failed to create a DB entry for the new URL.', 'broken-link-checker')
 					)
 				)
-			);;
+			);
 		}
 		
 		$cnt_okay = $cnt_error = 0;

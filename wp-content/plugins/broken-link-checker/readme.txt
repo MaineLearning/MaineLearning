@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: links, broken, maintenance, blogroll, custom fields, admin, comments, posts
 Requires at least: 3.2
-Tested up to: 3.4.1
-Stable tag: 1.6.2
+Tested up to: 3.5
+Stable tag: 1.7.1
 
 This plugin will check your posts, comments and other content for broken links and missing images, and notify you if any are found. 
 
@@ -43,14 +43,16 @@ You can also click on the contents of the "Status" or "Link Text" columns to get
 
 **Translations**
 
+* Arabic - [Yaser Maadan](http://englize.com/)
 * Belorussian - [M. Comfi](http://www.comfi.com/)
 * Bulgarian - [Ajoft Technologes](http://www.ajoft.com/)
-* Chinese Simplified - [Hank Yang](http://wenzhu.org/)
+* Chinese Simplified - Kaijia Feng
 * Chinese Traditional - [YILIN](http://sh2153.com)
 * Czech - [Lelkoun](http://lelkoun.cz/)
 * Danish - [Georg S. Adamsen](http://wordpress.blogos.dk/)
 * Dutch - [Gideon van Melle](http://www.gvmelle.com/)
-* French - [Whiler](http://blogs.wittwer.fr/whiler/), Luc Capronnier
+* Finnish - [Jani Alha](http://www.wysiwyg.fi)
+* French - [Whiler](http://blogs.wittwer.fr/whiler/), Luc Capronnier, [Guillaume Boda](http://www.michtoblog.com/)
 * German - [Ivan Graf](http://blog.bildergallery.com/)
 * Hindi - [Outshine Solutions](http://outshinesolutions.com/)
 * Irish - [Ray Gren](http://letsbefamous.com/)
@@ -90,6 +92,26 @@ To upgrade your installation
 1. Reactivate the plugin. Your settings will be retained from the previous version.
 
 == Changelog ==
+
+= 1.7.1 =
+* Added an Arabic translation.
+* Updated Portuguese translation.
+* Updated French translation.
+* Fixed MySQL errors caused by the plugin converting table names to lowercase.
+* Fixed a bug where the plugin would sometimes report broken Twitter links as working.
+* Fixed the plugin author URL.
+
+= 1.7 =
+* Added support for youtu.be shortlinks.
+* Added a Finnish translation.
+* Fixed a graphical bug where the currently selected settings tab would not be highlighted in WordPress 3.5.
+* Removed the "Blogroll items" module from the list of link containers enabled by default. The WordPress developer team is planning to remove Link Manager from core, and the "Links" menu will be hidden by default in new WP 3.5 installs.
+* Removed the Admin Menu Editor Pro ad from the "Settings -> Link Checker" and the "Tools -> Broken Links" pages. 
+* Disabled the news link (if any) for users who have donated.
+* Removed support for pre-WP 2.9 post meta actions.
+* Minor styling changes of screen meta links.
+* Updated Danish, Germa, Italian, French and Simplified Chinese translations.
+* Tested on WordPress 3.5.
 
 = 1.6.2 =
 * Another attempt to fix the "database not up to date" that some users are still experiencing even with 1.6.1.

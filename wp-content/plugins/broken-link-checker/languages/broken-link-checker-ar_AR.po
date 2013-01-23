@@ -8,212 +8,221 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-12-21 02:48+0400\n"
+"Last-Translator: Yaser Maadan | Englize.com <yaser@englize.com>\n"
+"Language-Team: Yaser Maadan | Englize.com <yaser@englize.com>\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: Arabic\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+# Done By Yaser Maadan - Englize.com 
+# Friday, 21 Dec, 2012
 #: core/core.php:151 includes/admin/links-page-js.php:37
 msgid "Loading..."
-msgstr ""
+msgstr "تحميل..."
 
 #: core/core.php:175 includes/admin/options-page-js.php:18
 msgid "[ Network error ]"
-msgstr ""
+msgstr "[ خطأ في الشبكة ]"
 
 #: core/core.php:202
 msgid "Automatically expand the widget if broken links have been detected"
-msgstr ""
+msgstr "توسيع المربع تلقائياً في حال استكشاف روابط معطوبة"
 
 #: core/core.php:292
 msgid "Link Checker Settings"
-msgstr ""
+msgstr "إعدادات الإضافة"
 
 #: core/core.php:293
 msgid "Link Checker"
-msgstr ""
+msgstr "فاحص الروابط"
 
 #: core/core.php:298 includes/link-query.php:27
 msgid "Broken Links"
-msgstr ""
+msgstr "اللنكات المعطوبة"
 
 #: core/core.php:314
 msgid "View Broken Links"
-msgstr ""
+msgstr "عرض اللنكات المعطوبة"
 
 #: core/core.php:329
 msgid "Feedback"
-msgstr ""
+msgstr "التغذية الراجعة"
 
 #: core/core.php:368
 msgid "Go to Broken Links"
-msgstr ""
+msgstr "الذهاب الى الروابط المعطوبة"
 
 #: core/core.php:397
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
 #: core/core.php:554
 msgid "Settings saved."
-msgstr ""
+msgstr "تم حفظ الإعدادت"
 
 #: core/core.php:560
 msgid "Thank you for your donation!"
-msgstr ""
+msgstr "شكراً لدعمك!"
 
 #: core/core.php:568
 msgid "Complete site recheck started."
-msgstr ""
+msgstr "الفحص الكامل للموقع بدأ."
 
 #: core/core.php:577
 msgid "Details"
-msgstr ""
+msgstr "التفاصيل"
 
 #: core/core.php:591
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: core/core.php:592
 msgid "Look For Links In"
-msgstr ""
+msgstr "فحص الروابط في"
 
 #: core/core.php:593
 msgid "Which Links To Check"
-msgstr ""
+msgstr "أيّ الروابط المُراد فحصها"
 
 #: core/core.php:594
 msgid "Protocols & APIs"
-msgstr ""
+msgstr "البروتوكولات والآيه بي آي"
 
 #: core/core.php:595
 msgid "Advanced"
-msgstr ""
+msgstr "متقدم"
 
 #: core/core.php:610
 msgid "Broken Link Checker Options"
-msgstr ""
+msgstr "إعدادات  فاحص الروابط المعطوبة"
 
 #: core/core.php:652 includes/admin/table-printer.php:197
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #: core/core.php:654 includes/admin/options-page-js.php:56
 msgid "Show debug info"
-msgstr ""
+msgstr "عرض معلومات المطورين"
 
 #: core/core.php:682
 msgid "Check each link"
-msgstr ""
+msgstr "فحص كل رابط"
 
 #: core/core.php:687
 msgid "Every %s hours"
-msgstr ""
+msgstr "كل %s ساعة"
 
 #: core/core.php:696
 msgid ""
 "Existing links will be checked this often. New links will usually be checked "
 "ASAP."
 msgstr ""
+"الروابط الحالية سيتم فحصها الآن. الروابط الجديدة سيتم فحصها بأقرب فرصة ممكنة."
 
 #: core/core.php:703
 msgid "E-mail notifications"
-msgstr ""
+msgstr "التنبيهات على البريد الإلكتروني"
 
 #: core/core.php:709
 msgid "Send me e-mail notifications about newly detected broken links"
 msgstr ""
+"أرسل لي بريد إلكتروني تنبيهي عن الروابط المعطوبة الجديدة التي يتم اكتشافها"
 
 #: core/core.php:717
 msgid "Send authors e-mail notifications about broken links in their posts"
-msgstr ""
+msgstr "أرسل لكتّاب التدوينات والمُحررين تنبيه بريدي بالروابط الجديدة المعطوبة"
 
 #: core/core.php:724
 msgid "Link tweaks"
-msgstr ""
+msgstr "إعدادات الروابط"
 
 #: core/core.php:730
 msgid "Apply custom formatting to broken links"
-msgstr ""
+msgstr "تطبيق التهيئة الخاصة للروابط المعطوبة"
 
 #: core/core.php:734 core/core.php:765
 msgid "Edit CSS"
-msgstr ""
+msgstr "تحرير CSS"
 
 #: core/core.php:750
 msgid "Example : Lorem ipsum <a %s>broken link</a>, dolor sit amet."
-msgstr ""
+msgstr "Example : Lorem ipsum <a %s>broken link</a>, dolor sit amet."
 
 #: core/core.php:753 core/core.php:784
 msgid "Click \"Save Changes\" to update example output."
-msgstr ""
+msgstr "اضغط  \"حفظ التغييرات\" لتحديث المثال."
 
 #: core/core.php:761
 msgid "Apply custom formatting to removed links"
-msgstr ""
+msgstr "طبّق التهيئة المُخصصة لإزالة الروابط"
 
 #: core/core.php:781
 msgid "Example : Lorem ipsum <span %s>removed link</span>, dolor sit amet."
-msgstr ""
+msgstr "مثال: Lorem ipsum <span %s>removed link</span>, dolor sit amet."
 
 #: core/core.php:794
 msgid "Stop search engines from following broken links"
-msgstr ""
+msgstr "إيقاف محركات البحث من تتبع الروابط المعطوبة"
 
 #: core/core.php:811
 msgid "Look for links in"
-msgstr ""
+msgstr "العثور على روابط في"
 
 #: core/core.php:822
 msgid "Post statuses"
-msgstr ""
+msgstr "حالات التدوينة"
 
 #: core/core.php:855
 msgid "Link types"
-msgstr ""
+msgstr "أنواع الروابط"
 
 #: core/core.php:861
 msgid "Error : All link parsers missing!"
-msgstr ""
+msgstr "خطأ : كل عبارات الرابط مفقودة!"
 
 #: core/core.php:868
 msgid "Exclusion list"
-msgstr ""
+msgstr "قائمة الإستبعاد"
 
 #: core/core.php:869
 msgid ""
 "Don't check links where the URL contains any of these words (one per line) :"
 msgstr ""
+"لا تفحص الروابط عندما تحتوي تلك الروابط على إحدى الكلمات التالية (كلمة في كل "
+"سطر) :"
 
 #: core/core.php:887
 msgid "Check links using"
-msgstr ""
+msgstr "فحص الروابط بإستخدام"
 
 #: core/core.php:906 includes/links.php:856
 msgid "Timeout"
-msgstr ""
+msgstr "المهلة الزمنيّة"
 
 #: core/core.php:912 core/core.php:958 core/core.php:2801
 msgid "%s seconds"
-msgstr ""
+msgstr "%s ثانية"
 
 #: core/core.php:921
 msgid "Links that take longer than this to load will be marked as broken."
-msgstr ""
+msgstr "الروابط التي تأخذ زمن طويل للتحميل سوف تُعتبر معطوبة."
 
 #: core/core.php:928
 msgid "Link monitor"
-msgstr ""
+msgstr "مراقبة رابط"
 
 #: core/core.php:936
 msgid "Run continuously while the Dashboard is open"
-msgstr ""
+msgstr "تشغيل بشكل مستمر عند فتح اللوحة الرئيسية للتحكم."
 
 #: core/core.php:944
 msgid "Run hourly in the background"
-msgstr ""
+msgstr "تشغيله كل ساعة بدون أن تشعر - في الخلفية"
 
 #: core/core.php:952
 msgid "Max. execution time"
-msgstr ""
+msgstr "أقصى زمن للتنفيذ"
 
 #: core/core.php:969
 msgid ""
@@ -222,120 +231,129 @@ msgid ""
 "consuming tasks. Here you can set for how long, at most, the link monitor "
 "may run each time before stopping."
 msgstr ""
+"الإضافة تعمل على فترات في الخلفية لتقوم بفحص تدويناتك جيداً للبحث عن أي "
+"روابط، ثم تقوم بإستكشاف الروابط المعثور عليها . هُنا تستطيع تحديد الفترة "
+"المُراد جعل الإضافة تعمل في إطارها قبل التوقف."
 
 #: core/core.php:978
 msgid "Server load limit"
-msgstr ""
+msgstr "حدود تحمّل السيرفر"
 
 #: core/core.php:993
 msgid "Current load : %s"
-msgstr ""
+msgstr "الحمل الحالي :  %s"
 
 #: core/core.php:998
 msgid ""
 "Link checking will be suspended if the average <a href=\"%s\">server load</"
 "a> rises above this number. Leave this field blank to disable load limiting."
 msgstr ""
+"فحص الروابط سوف يتوقف إذا معدل <a href=\"%s\">تحمّل السيرفر</a> فاق هذا "
+"الرقم. أترك هذا الحقل فارغاً لتعطيل حدود التحمّل."
 
 #: core/core.php:1007
 msgid "Not available"
-msgstr ""
+msgstr "غير متوفر"
 
 #: core/core.php:1009
 msgid ""
 "Load limiting only works on Linux-like systems where <code>/proc/loadavg</"
 "code> is present and accessible."
 msgstr ""
+"خاصيّة حدود التحمّل تعمل فقط في أنظمة لينوكس عندما يكون المسار <code>/proc/"
+"loadavg</code> موجود ومُتاح."
 
 #: core/core.php:1017
 msgid "Forced recheck"
-msgstr ""
+msgstr "إعادة فحص من البداية"
 
 #: core/core.php:1020
 msgid "Re-check all pages"
-msgstr ""
+msgstr "اعادة فحص كل الصفحات"
 
 #: core/core.php:1024
 msgid ""
 "The \"Nuclear Option\". Click this button to make the plugin empty its link "
 "database and recheck the entire site from scratch."
 msgstr ""
+"إنه \"الخيار النووي\". قم بالضغط على هذا الزر لجعل الإضافة تقوم بتفريغ كل "
+"الروابط المسجلة في قاعدة البيانات وتعيد فحص الموقع بالكامل من الصفر."
 
 #: core/core.php:1035
 msgid "Save Changes"
-msgstr ""
+msgstr "حفظ التعديلات"
 
 #: core/core.php:1086
 msgid "Configure"
-msgstr ""
+msgstr "إعداد"
 
 #: core/core.php:1168
 msgid "Check URLs entered in these custom fields (one per line) :"
-msgstr ""
+msgstr "افحص الروابط المُدخلة في هذا الحقل المُخصص (رابط في كل سطر) :"
 
 #: core/core.php:1296 core/core.php:1378 core/core.php:1410
 msgid "Database error : %s"
-msgstr ""
+msgstr "خطأ في قاعدة البيانات: %s"
 
 #: core/core.php:1360
 msgid "You must enter a filter name!"
-msgstr ""
+msgstr "يجب إدخال اسم الفلتر!"
 
 #: core/core.php:1364
 msgid "Invalid search query."
-msgstr ""
+msgstr "إستعلام خاطئ للبحث."
 
 #: core/core.php:1373
 msgid "Filter \"%s\" created"
-msgstr ""
+msgstr "الفلتر  \"%s\" تم إنشاءه"
 
 #: core/core.php:1400
 msgid "Filter ID not specified."
-msgstr ""
+msgstr "رقم الفلتر لم يحدد"
 
 #: core/core.php:1407
 msgid "Filter deleted"
-msgstr ""
+msgstr "تم مسح الفلتر"
 
 #: core/core.php:1454
 msgid "Replaced %d redirect with a direct link"
 msgid_plural "Replaced %d redirects with direct links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "تم استبدال %d  إحالة بروابط مباشرة"
+msgstr[1] "تم استبدال %d  إحالة بروابط مباشرة"
 
 #: core/core.php:1465
 msgid "Failed to fix %d redirect"
 msgid_plural "Failed to fix %d redirects"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "فشل في إصلاح %d إحالة"
+msgstr[1] "فشل في إصلاح %d إحالة"
 
 #: core/core.php:1476
 msgid "None of the selected links are redirects!"
-msgstr ""
+msgstr "لا توجد روابط مُحولة من الذين تم اختيارهم!"
 
 #: core/core.php:1554
 msgid "%d link updated."
 msgid_plural "%d links updated."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط تم تحديثه."
+msgstr[1] "%d رابط تم تحديثه."
 
 #: core/core.php:1565
 msgid "Failed to update %d link."
 msgid_plural "Failed to update %d links."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "فشل في تحديث %d رابط."
+msgstr[1] "فشل في تحديث %d رابط."
 
 #: core/core.php:1619
 msgid "%d link removed"
 msgid_plural "%d links removed"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط تمت ازالته"
+msgstr[1] "%d رابط تمت ازالته"
 
 #: core/core.php:1630
 msgid "Failed to remove %d link"
 msgid_plural "Failed to remove %d links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "فشل في إزالة %d رابط"
+msgstr[1] "فشل في إزالة %d رابط"
 
 #: core/core.php:1739
 msgid ""
@@ -345,334 +363,342 @@ msgid_plural ""
 "%d items were skipped because they can't be moved to the Trash. You need to "
 "delete them manually."
 msgstr[0] ""
+"%d كائن تم تجاوزهم لأن لا يمكن نقلهم إلى سلة المهملات. يجب أن تقوم بحذفهم "
+"يدوياً."
 msgstr[1] ""
+"%d كائن تم تجاوزهم لأن لا يمكن نقلهم إلى سلة المهملات. يجب أن تقوم بحذفهم "
+"يدوياً."
 
 #: core/core.php:1761
 msgid "Didn't find anything to delete!"
-msgstr ""
+msgstr "لا يعثر على أي شيء للحذف!"
 
 #: core/core.php:1789
 msgid "%d link scheduled for rechecking"
 msgid_plural "%d links scheduled for rechecking"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط تم جدولته للفحص"
+msgstr[1] "%d رابط تم جدولته للفحص"
 
 #: core/core.php:1835 core/core.php:2444
 msgid "This link was manually marked as working by the user."
-msgstr ""
+msgstr "هذا الرابط حُدد يدوياً للعمل من قبل المستخدم."
 
 #: core/core.php:1842
 msgid "Couldn't modify link %d"
-msgstr ""
+msgstr "لا يمكن تعديل الرابط %d"
 
 #: core/core.php:1852
 msgid "%d link marked as not broken"
 msgid_plural "%d links marked as not broken"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط مُحدد على أنه غير معطوب"
+msgstr[1] "%d رابط مُحدد على أنه غير معطوب"
 
 #: core/core.php:1892
 msgid "Table columns"
-msgstr ""
+msgstr "أعمدة الجدول"
 
 #: core/core.php:1911
 msgid "Show on screen"
-msgstr ""
+msgstr "عرض في الشاشة"
 
 #: core/core.php:1918
 msgid "links"
-msgstr ""
+msgstr "روباط"
 
 #: core/core.php:1919 includes/admin/table-printer.php:165
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 #: core/core.php:1923
 msgid "Misc"
-msgstr ""
+msgstr "منوعات"
 
 #: core/core.php:1938
 msgid "Highlight links broken for at least %s days"
-msgstr ""
+msgstr "تحديد الروابط المعطوبة على الأقل لـ %s يوم"
 
 #: core/core.php:1947
 msgid "Color-code status codes"
-msgstr ""
+msgstr "الكود اللوني للحالات"
 
 #: core/core.php:1964 core/core.php:2429 core/core.php:2469 core/core.php:2502
 #: core/core.php:2565
 msgid "You're not allowed to do that!"
-msgstr ""
+msgstr "غير مصّرح لك بعمل هذا!"
 
 #: core/core.php:2299
 msgid "View broken links"
-msgstr ""
+msgstr "عرض الروابط المعطوبة"
 
 #: core/core.php:2300
 msgid "Found %d broken link"
 msgid_plural "Found %d broken links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "عُثر على %d رابط معطوب"
+msgstr[1] "عُثر على %d رابط معطوب"
 
 #: core/core.php:2306
 msgid "No broken links found."
-msgstr ""
+msgstr "لا توجد روابط معطوبة"
 
 #: core/core.php:2313
 msgid "%d URL in the work queue"
 msgid_plural "%d URLs in the work queue"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط في صف الإنتظار"
+msgstr[1] "%d رابط في صف الإنتظار"
 
 #: core/core.php:2316
 msgid "No URLs in the work queue."
-msgstr ""
+msgstr "لا روابط في صف الإنتظار."
 
 #: core/core.php:2322
 msgctxt "for the \"Detected X unique URLs in Y links\" message"
 msgid "%d unique URL"
 msgid_plural "%d unique URLs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط مميز"
+msgstr[1] "%d روابط مميزة"
 
 #: core/core.php:2326
 msgctxt "for the \"Detected X unique URLs in Y links\" message"
 msgid "%d link"
 msgid_plural "%d links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط"
+msgstr[1] "%d رابط"
 
 #: core/core.php:2332
 msgid "Detected %1$s in %2$s and still searching..."
-msgstr ""
+msgstr "تم رصد %1$s في %2$s و لازال البحث جاري..."
 
 #: core/core.php:2338
 msgid "Detected %1$s in %2$s."
-msgstr ""
+msgstr "تم رصد %1$s في %2$s."
 
 #: core/core.php:2345
 msgid "Searching your blog for links..."
-msgstr ""
+msgstr "البحث في مدونتك على روابط..."
 
 #: core/core.php:2347
 msgid "No links detected."
-msgstr ""
+msgstr "لا توجد روابط."
 
 #: core/core.php:2373
 msgctxt "current load"
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 #: core/core.php:2437 core/core.php:2477 core/core.php:2512 core/core.php:2575
 msgid "Oops, I can't find the link %d"
-msgstr ""
+msgstr "عفواً، لا أستطيع العثور على الرابط %d"
 
 #: core/core.php:2450 core/core.php:2487
 msgid "Oops, couldn't modify the link!"
-msgstr ""
+msgstr "عفواً، لا أستطيع تعديل الرابط!"
 
 #: core/core.php:2453 core/core.php:2490 core/core.php:2601
 msgid "Error : link_id not specified"
-msgstr ""
+msgstr "خطأ : link_id لم يحدد"
 
 #: core/core.php:2522
 msgid "Oops, the new URL is invalid!"
-msgstr ""
+msgstr "عفواً"
 
 #: core/core.php:2533 core/core.php:2584
 msgid "An unexpected error occured!"
-msgstr ""
+msgstr "حدث خطأ غير متوقع!"
 
 #: core/core.php:2551
 msgid "Error : link_id or new_url not specified"
-msgstr ""
+msgstr "خطأ :  link_id أو new_url لم يُحدد"
 
 #: core/core.php:2610
 msgid "You don't have sufficient privileges to access this information!"
-msgstr ""
+msgstr "لا تملك الصلاحيات الكافية للوصول الى هذه المعلومات!"
 
 #: core/core.php:2623
 msgid "Error : link ID not specified"
-msgstr ""
+msgstr "خطأ : رقم الرابط لم يحُدد"
 
 #: core/core.php:2637
 msgid "Failed to load link details (%s)"
-msgstr ""
+msgstr "فشل في تحميل تفاصيل الرابط (%s)"
 
 #. #-#-#-#-#  plugin.pot (Broken Link Checker 1.6.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: core/core.php:2690
 msgid "Broken Link Checker"
-msgstr ""
+msgstr "فاحص الرابط المعطوب"
 
 #: core/core.php:2710
 msgid "PHP version"
-msgstr ""
+msgstr "اصدار بي اتش بي"
 
 #: core/core.php:2716
 msgid "MySQL version"
-msgstr ""
+msgstr "اصدار MySQL"
 
 #: core/core.php:2729
 msgid ""
 "You have an old version of CURL. Redirect detection may not work properly."
-msgstr ""
+msgstr "لديك نسخة CURL قديمة. راصد الإحالات قد لا يعمل بشكل صحيح."
 
 #: core/core.php:2741 core/core.php:2757 core/core.php:2762
 msgid "Not installed"
-msgstr ""
+msgstr "لم ينصّب."
 
 #: core/core.php:2744
 msgid "CURL version"
-msgstr ""
+msgstr "CURL اصدار"
 
 #: core/core.php:2750
 msgid "Installed"
-msgstr ""
+msgstr "منصّب"
 
 #: core/core.php:2763
 msgid "You must have either CURL or Snoopy installed for the plugin to work!"
-msgstr ""
+msgstr "يجب أن يكون لديك CURL او Snoopy مسبق التنصيب، لتعمل لديك الإضافة."
 
 #: core/core.php:2774
 msgid "On"
-msgstr ""
+msgstr "تشغيل"
 
 #: core/core.php:2775
 msgid "Redirects may be detected as broken links when safe_mode is on."
-msgstr ""
+msgstr "الإحالات قد تُرصد كروابط معطوبة إذا كان الوضع الآمن مفعلاً."
 
 #: core/core.php:2780 core/core.php:2794
 msgid "Off"
-msgstr ""
+msgstr "تعطيل"
 
 #: core/core.php:2788
 msgid "On ( %s )"
-msgstr ""
+msgstr "تشغيل ( %s )"
 
 #: core/core.php:2789
 msgid "Redirects may be detected as broken links when open_basedir is on."
-msgstr ""
+msgstr "الإحالات قد تُرصد كروابط معطوبة عندما تكون الدالة  open_basedir مفعلة."
 
 #: core/core.php:2818
 msgid ""
 "If this value is zero even after several page reloads you have probably "
 "encountered a bug."
 msgstr ""
+"اذا كانت هذه القيمة صفر، بعد عدّة مرات من اعادة تحميل الصفحة من المحتمل أن "
+"تواجه مشكلة."
 
 #: core/core.php:2909 core/core.php:3007
 msgid "[%s] Broken links detected"
-msgstr ""
+msgstr "[%s] رابط معطوب تم رصده."
 
 #: core/core.php:2914
 msgid "Broken Link Checker has detected %d new broken link on your site."
 msgid_plural ""
 "Broken Link Checker has detected %d new broken links on your site."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "فاحص الروابط المعطوبة رصد %d رابط جديد ومعطوب في موقعك."
+msgstr[1] "فاحص الروابط المعطوبة رصد %d رابط جديد ومعطوب في موقعك."
 
 #: core/core.php:2937
 msgid "Here's a list of the first %d broken links:"
 msgid_plural "Here's a list of the first %d broken links:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "هُنا قائمة تحتوي على أول %d رابط معطوب:"
+msgstr[1] "هُنا قائمة تحتوي على أول %d رابط معطوب:"
 
 #: core/core.php:2946
 msgid "Here's a list of the new broken links: "
-msgstr ""
+msgstr "هُنا قائمة بالروابط المعطوبة الجديدة:"
 
 #: core/core.php:2955
 msgid "Link text : %s"
-msgstr ""
+msgstr "نص الرابط : %s"
 
 #: core/core.php:2956
 msgid "Link URL : <a href=\"%s\">%s</a>"
-msgstr ""
+msgstr "رابط الوصلة: <a href=\"%s\">%s</a>"
 
 #: core/core.php:2957
 msgid "Source : %s"
-msgstr ""
+msgstr "المصدر : %s"
 
 #: core/core.php:2970
 msgid "You can see all broken links here:"
-msgstr ""
+msgstr "تستطيع رؤية كل الروابط المعطوبة هنا:"
 
 #: core/core.php:3012
 msgid "Broken Link Checker has detected %d new broken link in your posts."
 msgid_plural ""
 "Broken Link Checker has detected %d new broken links in your posts."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " %d رابط جديد معطوب في تدويناتك."
+msgstr[1] " %d رابط جديد معطوب في تدويناتك."
 
 #: core/init.php:235
 msgid "Once Weekly"
-msgstr ""
+msgstr "مرة أسبوعياً"
 
 #: core/init.php:241
 msgid "Twice a Month"
-msgstr ""
+msgstr "مرتين شهرياً"
 
 #: core/init.php:317
 msgid ""
 "Broken Link Checker installation failed. Try deactivating and then "
 "reactivating the plugin."
-msgstr ""
+msgstr "فشل في تنصيب الإضافة. حاول تعطيلها وإعادة تفعيلها."
 
 #: includes/admin/db-upgrade.php:95
 msgid "Failed to delete old DB tables. Database error : %s"
-msgstr ""
+msgstr "فشل في حذف جداول قاعدة البيانات القديمة . خطأ في قاعدة البيانات: %s"
 
 #: includes/admin/links-page-js.php:55 includes/admin/links-page-js.php:403
 msgid "Wait..."
-msgstr ""
+msgstr "لحظة ..."
 
 #: includes/admin/links-page-js.php:100 includes/admin/table-printer.php:630
 msgid "Not broken"
-msgstr ""
+msgstr "غير معطوب"
 
 #: includes/admin/links-page-js.php:315
 msgid "%d instances of the link were successfully modified."
-msgstr ""
+msgstr "%d طلب مربوط تم تعديله بنجاح."
 
 #: includes/admin/links-page-js.php:321
 msgid ""
 "However, %d instances couldn't be edited and still point to the old URL."
-msgstr ""
+msgstr "على كل حال، %d طلب لم يتم تعديله ويظل يشير الى الرابط القديم."
 
 #: includes/admin/links-page-js.php:327
 msgid "The link could not be modified."
-msgstr ""
+msgstr "هذا الرابط قد لم يتم تعديله."
 
 #: includes/admin/links-page-js.php:330 includes/admin/links-page-js.php:455
 msgid "The following error(s) occured :"
-msgstr ""
+msgstr "الأخطاء التالية حصلت: "
 
 #: includes/admin/links-page-js.php:441
 msgid "%d instances of the link were successfully unlinked."
-msgstr ""
+msgstr "%d طلب مربوط تم تفكيك ربطه بنجاح."
 
 #: includes/admin/links-page-js.php:447
 msgid "However, %d instances couldn't be removed."
-msgstr ""
+msgstr "عموماً، %d طلب لم يزالوا."
 
 #: includes/admin/links-page-js.php:452
 msgid "The plugin failed to remove the link."
-msgstr ""
+msgstr "الإضافة فشلت في إزالة الرابط."
 
 #: includes/admin/links-page-js.php:463 includes/admin/table-printer.php:273
 #: includes/admin/table-printer.php:624
 msgid "Unlink"
-msgstr ""
+msgstr "إلغاء ربط"
 
 #: includes/admin/links-page-js.php:507
 msgid "Enter a name for the new custom filter"
-msgstr ""
+msgstr "أدخل اسم الفلتر المخصص الجديد"
 
 #: includes/admin/links-page-js.php:518
 msgid ""
 "You are about to delete the current filter.\n"
 "'Cancel' to stop, 'OK' to delete"
 msgstr ""
+"أنت على وشك حذف الفلتر الحالي.\n"
+"\v\"إلغاء\" لإيقاف العملية, \"موافق\" للحذف"
 
 #: includes/admin/links-page-js.php:538
 msgid ""
@@ -680,6 +706,9 @@ msgid ""
 "contain any of the selected links? This action can't be undone.\n"
 "'Cancel' to stop, 'OK' to delete"
 msgstr ""
+"هل أنت متأكد من رغبتك في إزالة كل التدوينات، المفضلات أو أي كائنات أخرى "
+"تحتوي على إحدى الروابط المخُتارة؟ هذا الخيار نهائي ولا يمكن التراجع عنه.\n"
+"\v\"إلغاء\" للإيقاف، \"موفق\" للحذف"
 
 #: includes/admin/links-page-js.php:548
 msgid ""
@@ -687,942 +716,953 @@ msgid ""
 "undone.\n"
 "'Cancel' to stop, 'OK' to remove"
 msgstr ""
+"هل أنت متأكد من رغبتك في إزالة الروابط المُحددة؟ لا يمكنك التراجع عن هذه "
+"الخطوة لاحقاً.\n"
+"\"إلغاء\" لإيقاف العملية، \"موافق\" للإزالة"
 
 #: includes/admin/links-page-js.php:657
 msgid "Enter a search string first."
-msgstr ""
+msgstr "أدخل عبارة البحث أولاً."
 
 #: includes/admin/links-page-js.php:664
 msgid "Select one or more links to edit."
-msgstr ""
+msgstr "اختر رابط أو اكثر للتحرير."
 
 #: includes/admin/options-page-js.php:54
 msgid "Hide debug info"
-msgstr ""
+msgstr "إخفاء معلومات المطورين"
 
 #: includes/admin/search-form.php:16
 msgid "Save This Search As a Filter"
-msgstr ""
+msgstr "حفظ هذا البحث كفلتر"
 
 #: includes/admin/search-form.php:26
 msgid "Delete This Filter"
-msgstr ""
+msgstr "حذف هذا الفلتر"
 
 #: includes/admin/search-form.php:32 includes/link-query.php:65
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #: includes/admin/search-form.php:42
 msgid "Link text"
-msgstr ""
+msgstr "نص الرابط"
 
 #: includes/admin/search-form.php:45 includes/admin/table-printer.php:202
 msgid "URL"
-msgstr ""
+msgstr "الرابط"
 
 #: includes/admin/search-form.php:48 includes/admin/table-printer.php:491
 msgid "HTTP code"
-msgstr ""
+msgstr "كود HTTP"
 
 #: includes/admin/search-form.php:51
 msgid "Link status"
-msgstr ""
+msgstr "حالة الرابط"
 
 #: includes/admin/search-form.php:68 includes/admin/search-form.php:85
 msgid "Link type"
-msgstr ""
+msgstr "نوع الرابط"
 
 #: includes/admin/search-form.php:70
 msgid "Any"
-msgstr ""
+msgstr "أي"
 
 #: includes/admin/search-form.php:74
 msgid "Links used in"
-msgstr ""
+msgstr "الروابط مستخدمة في"
 
 #: includes/admin/search-form.php:112
 msgid "Search Links"
-msgstr ""
+msgstr "البحث عن الروابط"
 
 #: includes/admin/search-form.php:113 includes/admin/table-printer.php:349
 #: includes/admin/table-printer.php:652 includes/admin/table-printer.php:658
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: includes/admin/sidebar.php:28 includes/admin/sidebar.php:68
 msgid "More plugins by Janis Elsts"
-msgstr ""
+msgstr "المزيد من الإضافات مقدمة من  Janis Elsts"
 
 #: includes/admin/sidebar.php:85
 msgid "Donate $10, $20 or $50!"
-msgstr ""
+msgstr "تبرّغ 10$, 20$, او 50$!"
 
 #: includes/admin/sidebar.php:88
 msgid ""
 "If you like this plugin, please donate to support development and "
 "maintenance!"
-msgstr ""
+msgstr "اذا أحببت هذه الإضافة، الرجاء تبرّع للمساهمة في تطويرها وصيانتها!"
 
 #: includes/admin/sidebar.php:106
 msgid "Return to WordPress Dashboard"
-msgstr ""
+msgstr "العودة للوحة الرئيسية لووردبريس"
 
 #: includes/admin/table-printer.php:179
 msgid "Compact View"
-msgstr ""
+msgstr "العرض المدمّج"
 
 #: includes/admin/table-printer.php:180
 msgid "Detailed View"
-msgstr ""
+msgstr "العرض المفصّل"
 
 #: includes/admin/table-printer.php:209
 msgid "Source"
-msgstr ""
+msgstr "مصدر"
 
 #: includes/admin/table-printer.php:215
 msgid "Link Text"
-msgstr ""
+msgstr "نص الرابط"
 
 #: includes/admin/table-printer.php:220
 msgid "Redirect URL"
-msgstr ""
+msgstr "إحالة الرابط"
 
 #: includes/admin/table-printer.php:268
 msgid "Bulk Actions"
-msgstr ""
+msgstr "إجراء بالجملة"
 
 #: includes/admin/table-printer.php:269 includes/admin/table-printer.php:621
 msgid "Edit URL"
-msgstr ""
+msgstr "تحرير الرابط"
 
 #: includes/admin/table-printer.php:270
 msgid "Recheck"
-msgstr ""
+msgstr "إعادة فحص"
 
 #: includes/admin/table-printer.php:271
 msgid "Fix redirects"
-msgstr ""
+msgstr "إصلاح الإحالات"
 
 #: includes/admin/table-printer.php:272
 msgid "Mark as not broken"
-msgstr ""
+msgstr "إجعله كـغير معطوب"
 
 #: includes/admin/table-printer.php:276
 msgid "Move sources to Trash"
-msgstr ""
+msgstr "نقل المصادر الى سلة المهملات"
 
 #: includes/admin/table-printer.php:278
 msgid "Delete sources"
-msgstr ""
+msgstr "حذف المصادر"
 
 #: includes/admin/table-printer.php:293
 msgid "&laquo;"
-msgstr ""
+msgstr "&laquo;"
 
 #: includes/admin/table-printer.php:294
 msgid "&raquo;"
-msgstr ""
+msgstr "&raquo;"
 
 #: includes/admin/table-printer.php:302
 msgid "Displaying %s&#8211;%s of <span class=\"current-link-count\">%s</span>"
-msgstr ""
+msgstr "عرض %s&#8211;%s من <span class=\"current-link-count\">%s</span>"
 
 #: includes/admin/table-printer.php:325
 msgid "Bulk Edit URLs"
-msgstr ""
+msgstr "تحرير الروابط بالجملة"
 
 #: includes/admin/table-printer.php:327
 msgid "Find"
-msgstr ""
+msgstr "أعثر"
 
 #: includes/admin/table-printer.php:331
 msgid "Replace with"
-msgstr ""
+msgstr "استبدل بـ"
 
 #: includes/admin/table-printer.php:339
 msgid "Case sensitive"
-msgstr ""
+msgstr "متحسس لحالة الأحرف"
 
 #: includes/admin/table-printer.php:343
 msgid "Regular expression"
-msgstr ""
+msgstr "التعبير العادي"
 
 #: includes/admin/table-printer.php:351
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 #: includes/admin/table-printer.php:476
 msgid "Post published on"
-msgstr ""
+msgstr "نشر الموضوع في"
 
 #: includes/admin/table-printer.php:481
 msgid "Link last checked"
-msgstr ""
+msgstr "آخر فحص للروابط"
 
 #: includes/admin/table-printer.php:485
 msgid "Never"
-msgstr ""
+msgstr "أبداً"
 
 #: includes/admin/table-printer.php:496
 msgid "Response time"
-msgstr ""
+msgstr "زمن الإستجابة"
 
 #: includes/admin/table-printer.php:498
 msgid "%2.3f seconds"
-msgstr ""
+msgstr "%2.3f ثانية"
 
 #: includes/admin/table-printer.php:501
 msgid "Final URL"
-msgstr ""
+msgstr "الرابط النهائي"
 
 #: includes/admin/table-printer.php:506
 msgid "Redirect count"
-msgstr ""
+msgstr "عدّاد الإحالة"
 
 #: includes/admin/table-printer.php:511
 msgid "Instance count"
-msgstr ""
+msgstr "عدّاد الطلب"
 
 #: includes/admin/table-printer.php:520
 msgid "This link has failed %d time."
 msgid_plural "This link has failed %d times."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "هذا الرابط فشل %d مرّة."
+msgstr[1] "هذا الروابط فشلت %d مرّة."
 
 #: includes/admin/table-printer.php:528
 msgid "This link has been broken for %s."
-msgstr ""
+msgstr "هذا الرابط قد عطب لـ %s."
 
 #: includes/admin/table-printer.php:539
 msgid "Log"
-msgstr ""
+msgstr "سجل"
 
 #: includes/admin/table-printer.php:564
 msgid "Show more info about this link"
-msgstr ""
+msgstr "عرض المزيد من المعلومات عن الرابط"
 
 #: includes/admin/table-printer.php:582
 msgctxt "checked how long ago"
 msgid "Checked"
-msgstr ""
+msgstr "مفحوص"
 
 #: includes/admin/table-printer.php:598
 msgid "Broken for"
-msgstr ""
+msgstr "معطوب لـ"
 
 #: includes/admin/table-printer.php:621
 msgid "Edit link URL"
-msgstr ""
+msgstr "تحرير الرابط"
 
 #: includes/admin/table-printer.php:623
 msgid "Remove this link from all posts"
-msgstr ""
+msgstr "إزالة هذا الرابط من كل التدوينات"
 
 #: includes/admin/table-printer.php:629
 msgid "Remove this link from the list of broken links and mark it as valid"
-msgstr ""
+msgstr "إزالة هذا الرابط من قائمة الروابط المعطوبة وتحديده كرابط صالح"
 
 #: includes/admin/table-printer.php:637
 msgid "Hide this link and do not report it again unless its status changes"
-msgstr ""
+msgstr "إخفاء هذا الرابط و عدم إظهاره مُجددا إلا في حالة تغير حالته"
 
 #: includes/admin/table-printer.php:638
 msgid "Dismiss"
-msgstr ""
+msgstr "صرف النظر"
 
 #: includes/admin/table-printer.php:643
 msgid "Undismiss this link"
-msgstr ""
+msgstr "عدم صرف النظر لهذا الرابط"
 
 #: includes/admin/table-printer.php:644
 msgid "Undismiss"
-msgstr ""
+msgstr "عدم صرف النظر"
 
 #: includes/admin/table-printer.php:652
 msgid "Cancel URL editing"
-msgstr ""
+msgstr "إلغاء تحرير الرابط"
 
 #: includes/admin/table-printer.php:659
 msgid "Update URL"
-msgstr ""
+msgstr "تحديث الرابط"
 
 #: includes/admin/table-printer.php:686
 msgid "[An orphaned link! This is a bug.]"
-msgstr ""
+msgstr "[رابط يتيم! هذه مشكلة.]"
 
 #: includes/any-post.php:397 modules/containers/blogroll.php:46
 #: modules/containers/comment.php:153 modules/containers/custom_field.php:197
 msgid "Edit"
-msgstr ""
+msgstr "تحرير"
 
 #: includes/any-post.php:405 modules/containers/custom_field.php:203
 msgid "Move this item to the Trash"
-msgstr ""
+msgstr "نقل هذا الكائن الى سلة المهملات"
 
 #: includes/any-post.php:407 modules/containers/custom_field.php:205
 msgid "Trash"
-msgstr ""
+msgstr "سلة المهملات"
 
 #: includes/any-post.php:412 modules/containers/custom_field.php:210
 msgid "Delete this item permanently"
-msgstr ""
+msgstr "حذف هذا الكائن نهائياً"
 
 #: includes/any-post.php:414 modules/containers/blogroll.php:47
 #: modules/containers/custom_field.php:212
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: includes/any-post.php:427
 msgid "Preview &#8220;%s&#8221;"
-msgstr ""
+msgstr "عرض  &#8220;%s&#8221;"
 
 #: includes/any-post.php:428
 msgid "Preview"
-msgstr ""
+msgstr "عرض"
 
 #: includes/any-post.php:435
 msgid "View &#8220;%s&#8221;"
-msgstr ""
+msgstr "مشاهدة &#8220;%s&#8221;"
 
 #: includes/any-post.php:436 modules/containers/comment.php:166
 #: modules/containers/custom_field.php:217
 msgid "View"
-msgstr ""
+msgstr "مشاهدة"
 
 #: includes/any-post.php:455 modules/containers/custom_field.php:197
 msgid "Edit this item"
-msgstr ""
+msgstr "تحرير هذا الكائن"
 
 #: includes/any-post.php:519 modules/containers/blogroll.php:83
 #: modules/containers/comment.php:43
 msgid "Nothing to update"
-msgstr ""
+msgstr "لا شيء للتحديث"
 
 #: includes/any-post.php:529
 msgid "Updating post %d failed"
-msgstr ""
+msgstr "فشل في تحديث التدوينة %d"
 
 #: includes/any-post.php:564 modules/containers/custom_field.php:284
 msgid "Failed to delete post \"%s\" (%d)"
-msgstr ""
+msgstr "فشل في حذف التدوينة \"%s\" (%d)"
 
 #: includes/any-post.php:583 modules/containers/custom_field.php:303
 msgid ""
 "Can't move post \"%s\" (%d) to the trash because the trash feature is "
 "disabled"
 msgstr ""
+"لا يمكن نقل التدوينة  \"%s\" (%d) الى سلة المهملات بسبب أنّ خاصية سلة "
+"المهملات معطلة"
 
 #: includes/any-post.php:603 modules/containers/custom_field.php:322
 msgid "Failed to move post \"%s\" (%d) to the trash"
-msgstr ""
+msgstr "فشل في نقل التدوينة الى \"%s\" (%d) الى سلة المهملات"
 
 #: includes/any-post.php:711
 msgid "%d post deleted."
 msgid_plural "%d posts deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d تدوينة محذوفة."
+msgstr[1] "%d تدوينة محذوفة."
 
 #: includes/any-post.php:713
 msgid "%d page deleted."
 msgid_plural "%d pages deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d صفحة محذوفة."
+msgstr[1] "%d صفحة محذوفة."
 
 #: includes/any-post.php:715
 msgid "%d \"%s\" deleted."
 msgid_plural "%d \"%s\" deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d \"%s\" محذوفة."
+msgstr[1] "%d \"%s\" محذوفة."
 
 #: includes/any-post.php:734
 msgid "%d post moved to the Trash."
 msgid_plural "%d posts moved to the Trash."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d تدوينة نقلت الى سلة المهملات."
+msgstr[1] "%d تدوينة نقلت الى سلة المهملات."
 
 #: includes/any-post.php:736
 msgid "%d page moved to the Trash."
 msgid_plural "%d pages moved to the Trash."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d صفحة نقلت الى سلة المهملات."
+msgstr[1] "%d صفحة نقلت الى سلة المهملات."
 
 #: includes/any-post.php:738
 msgid "%d \"%s\" moved to the Trash."
 msgid_plural "%d \"%s\" moved to the Trash."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d \"%s\" نقلت الى سلة المهملات."
+msgstr[1] "%d \"%s\" نقلت الى سلة المهملات."
 
 #: includes/containers.php:122
 msgid "%d '%s' has been deleted"
 msgid_plural "%d '%s' have been deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d '%s' تم حذفها"
+msgstr[1] "%d '%s' تم حذفها"
 
 #: includes/containers.php:873 includes/containers.php:891
 msgid "Container type '%s' not recognized"
-msgstr ""
+msgstr "نوع الحاوي '%s'  غير معترف بها."
 
 #: includes/extra-strings.php:2
 msgctxt "module name"
 msgid "Basic HTTP"
-msgstr ""
+msgstr "HTTP أساسي"
 
 #: includes/extra-strings.php:3
 msgctxt "module name"
 msgid "Blogroll items"
-msgstr ""
+msgstr "روابط المواقع الصديقة"
 
 #: includes/extra-strings.php:4
 msgctxt "module name"
 msgid "Comments"
-msgstr ""
+msgstr "التعليقات"
 
 #: includes/extra-strings.php:5
 msgctxt "module name"
 msgid "Custom fields"
-msgstr ""
+msgstr "الحقول المُخصصة"
 
 #: includes/extra-strings.php:6
 msgctxt "module name"
 msgid "Embedded DailyMotion videos"
-msgstr ""
+msgstr "متضمنة بفيديوهات دايلي موشن"
 
 #: includes/extra-strings.php:7
 msgctxt "module name"
 msgid "Embedded GoogleVideo videos"
-msgstr ""
+msgstr "متضمنة بفيديوهات جوجل فيديو"
 
 #: includes/extra-strings.php:8
 msgctxt "module name"
 msgid "Embedded Megavideo videos"
-msgstr ""
+msgstr "متضمنة بفيديوهات ميجا فيديو"
 
 #: includes/extra-strings.php:9
 msgctxt "module name"
 msgid "Embedded Vimeo videos"
-msgstr ""
+msgstr "متضمنة بفيديوهات فيميو"
 
 #: includes/extra-strings.php:10
 msgctxt "module name"
 msgid "Embedded YouTube videos"
-msgstr ""
+msgstr "متضمنة بفيديوهات يوتيوب"
 
 #: includes/extra-strings.php:11
 msgctxt "module name"
 msgid "Embedded YouTube videos (old embed code)"
-msgstr ""
+msgstr "متضمنة بفيديوهات يوتيوب (الكود القديم)"
 
 #: includes/extra-strings.php:12
 msgctxt "module name"
 msgid "FileServe API"
-msgstr ""
+msgstr "FileServe API"
 
 #: includes/extra-strings.php:13
 msgctxt "module name"
 msgid "HTML images"
-msgstr ""
+msgstr "HTML صور"
 
 #: includes/extra-strings.php:14
 msgctxt "module name"
 msgid "HTML links"
-msgstr ""
+msgstr "HTML روابط"
 
 #: includes/extra-strings.php:15
 msgctxt "module name"
 msgid "MediaFire API"
-msgstr ""
+msgstr "MediaFire API"
 
 #: includes/extra-strings.php:16
 msgctxt "module name"
 msgid "MegaUpload API"
-msgstr ""
+msgstr "MegaUpload API"
 
 #: includes/extra-strings.php:17
 msgctxt "module name"
 msgid "Plaintext URLs"
-msgstr ""
+msgstr " نصّية روابط"
 
 #: includes/extra-strings.php:18
 msgctxt "module name"
 msgid "RapidShare API"
-msgstr ""
+msgstr "RapidShare API"
 
 #: includes/extra-strings.php:19
 msgctxt "module name"
 msgid "YouTube API"
-msgstr ""
+msgstr "YouTube API"
 
 #: includes/extra-strings.php:20
 msgctxt "module name"
 msgid "Posts"
-msgstr ""
+msgstr "تدوينات"
 
 #: includes/extra-strings.php:21
 msgctxt "module name"
 msgid "Pages"
-msgstr ""
+msgstr "صفحات"
 
 #: includes/instances.php:102 includes/instances.php:158
 msgid "Container %s[%d] not found"
-msgstr ""
+msgstr "الحاوي %s[%d]  لم يتم العثور عليه"
 
 #: includes/instances.php:111 includes/instances.php:167
 msgid "Parser '%s' not found."
-msgstr ""
+msgstr "المحلل  '%s'  لم يتم العثور عليه."
 
 #: includes/link-query.php:26
 msgid "Broken"
-msgstr ""
+msgstr "معطوب"
 
 #: includes/link-query.php:28
 msgid "No broken links found"
-msgstr ""
+msgstr "لا توجد روابط معطوبة"
 
 #: includes/link-query.php:36
 msgid "Redirects"
-msgstr ""
+msgstr "إحالات"
 
 #: includes/link-query.php:37
 msgid "Redirected Links"
-msgstr ""
+msgstr "الروابط المُحالة"
 
 #: includes/link-query.php:38
 msgid "No redirects found"
-msgstr ""
+msgstr "لا روابط مُحالة"
 
 #: includes/link-query.php:46
 msgid "Dismissed"
-msgstr ""
+msgstr "تم صرف النظر عنه"
 
 #: includes/link-query.php:47
 msgid "Dismissed Links"
-msgstr ""
+msgstr "روابط تم صرف النظر عنها"
 
 #: includes/link-query.php:48
 msgid "No dismissed links found"
-msgstr ""
+msgstr "لا روابط مصروف النظر عنها"
 
 #: includes/link-query.php:56
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #: includes/link-query.php:57
 msgid "Detected Links"
-msgstr ""
+msgstr "الروابط المرصودة"
 
 #: includes/link-query.php:58
 msgid "No links found (yet)"
-msgstr ""
+msgstr "لا روابط معثورٌ عليها حتى الآن"
 
 #: includes/link-query.php:66
 msgid "Search Results"
-msgstr ""
+msgstr "نتيجة البحث"
 
 #: includes/link-query.php:67 includes/link-query.php:114
 msgid "No links found for your query"
-msgstr ""
+msgstr "لا توجد روابط تم العثور عليها من خلال استعلامك"
 
 #: includes/links.php:218
 msgid "The plugin script was terminated while trying to check the link."
-msgstr ""
+msgstr "سكربت الإضافة تم إنهاءهُ بينما كان يحاول فحص الرابط."
 
 #: includes/links.php:264
 msgid "The plugin doesn't know how to check this type of link."
-msgstr ""
+msgstr "الإضافة لم تستطيع معرفة كيف تقوم بفحص هذا النوع من الروبط."
 
 #: includes/links.php:357
 msgid "Link is valid."
-msgstr ""
+msgstr "الرابط صالح."
 
 #: includes/links.php:359
 msgid "Link is broken."
-msgstr ""
+msgstr "الرابط معطوب."
 
 #: includes/links.php:571 includes/links.php:673 includes/links.php:700
 msgid "Link is not valid"
-msgstr ""
+msgstr "الرابط غير صالح"
 
 #: includes/links.php:588
 msgid ""
 "This link can not be edited because it is not used anywhere on this site."
-msgstr ""
+msgstr "هذا الرابط لا يمكن تحريره لأنه غير مستخدم في أي مكان بهذا الموقع."
 
 #: includes/links.php:614
 msgid "Failed to create a DB entry for the new URL."
-msgstr ""
+msgstr "فشل في إنشاء مدخل جديد في قاعدة البيانات للرابط الجديد."
 
 #: includes/links.php:680
 msgid "This link is not a redirect"
-msgstr ""
+msgstr "هذا الرابط ليس مُحال."
 
 #: includes/links.php:727 includes/links.php:764
 msgid "Couldn't delete the link's database record"
-msgstr ""
+msgstr "لا يمكن حذف سجلات الرابط من قاعدة البيانات"
 
 #: includes/links.php:838
 msgctxt "link status"
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 #: includes/links.php:852 modules/checkers/http.php:264
 #: modules/extras/mediafire.php:101
 msgid "Unknown Error"
-msgstr ""
+msgstr "خطأ مجهول"
 
 #: includes/links.php:876
 msgid "Not checked"
-msgstr ""
+msgstr "لم يفحص"
 
 #: includes/links.php:879
 msgid "False positive"
-msgstr ""
+msgstr "تبليغ خاطئ"
 
 #: includes/links.php:882 modules/extras/fileserve.php:121
 #: modules/extras/megaupload.php:115 modules/extras/rapidshare.php:145
 #: modules/extras/rapidshare.php:151 modules/extras/rapidshare.php:178
 msgctxt "link status"
 msgid "OK"
-msgstr ""
+msgstr "موافق"
 
 #: includes/parsers.php:109
 msgid "Editing is not implemented in the '%s' parser"
-msgstr ""
+msgstr "التحرير لا ينطبق في '%s' محلل"
 
 #: includes/parsers.php:124
 msgid "Unlinking is not implemented in the '%s' parser"
-msgstr ""
+msgstr "لم يتم تنفيذ إلغاء الرابط في '%s' محلل"
 
 #: includes/utility-class.php:245
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ثانية"
+msgstr[1] "%d ثانية"
 
 #: includes/utility-class.php:246
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ثانية مضت"
+msgstr[1] "%d ثانية مضت"
 
 #: includes/utility-class.php:249
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d دقيقة"
+msgstr[1] "%d دقيقة"
 
 #: includes/utility-class.php:250
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d دقيقة مضت"
+msgstr[1] "%d دقيقة مضت"
 
 #: includes/utility-class.php:253
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ساعة"
+msgstr[1] "%d ساعة"
 
 #: includes/utility-class.php:254
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ساعة مضت"
+msgstr[1] "%d ساعة مضت"
 
 #: includes/utility-class.php:257
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d يوم"
+msgstr[1] "%d يوم"
 
 #: includes/utility-class.php:258
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d يوم مضى"
+msgstr[1] "%d يوم مضى"
 
 #: includes/utility-class.php:261
 msgid "%d month"
 msgid_plural "%d months"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d شهر"
+msgstr[1] "%d شهر"
 
 #: includes/utility-class.php:262
 msgid "%d month ago"
 msgid_plural "%d months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d شهر مضى"
+msgstr[1] "%d شهر مضى"
 
 #: modules/checkers/http.php:243
 msgid "Server Not Found"
-msgstr ""
+msgstr "لم يتم العثور على السيرفر"
 
 #: modules/checkers/http.php:258
 msgid "Connection Failed"
-msgstr ""
+msgstr "فشل في الإتصال"
 
 #: modules/checkers/http.php:293 modules/checkers/http.php:363
 msgid "HTTP code : %d"
-msgstr ""
+msgstr "كود الـ HTTP: %d"
 
 #: modules/checkers/http.php:295 modules/checkers/http.php:365
 msgid "(No response)"
-msgstr ""
+msgstr "(لا استجابة)"
 
 #: modules/checkers/http.php:301
 msgid "Most likely the connection timed out or the domain doesn't exist."
-msgstr ""
+msgstr "من المحتمل أن الإتصال قد انتتهت مهلته أو النطاق غير موجود أصلاً."
 
 #: modules/checkers/http.php:372
 msgid "Request timed out."
-msgstr ""
+msgstr "انتهت مهلة انتظار الطلب."
 
 #: modules/checkers/http.php:390
 msgid "Using Snoopy"
-msgstr ""
+msgstr "استخدام سنووبي"
 
 #: modules/containers/blogroll.php:21
 msgid "Bookmark"
-msgstr ""
+msgstr "المفضلة"
 
 #: modules/containers/blogroll.php:27 modules/containers/blogroll.php:46
 msgid "Edit this bookmark"
-msgstr ""
+msgstr "تحرير هذه المفضلة"
 
 #: modules/containers/blogroll.php:47
 msgid ""
 "You are about to delete this link '%s'\n"
 "  'Cancel' to stop, 'OK' to delete."
 msgstr ""
+"أنت على وشك أن تحذف هذا الرابط  '%s'\n"
+"\v \"إلغاء\" لإيقاف هذه العملية, \"موافق\" للحذف."
 
 #: modules/containers/blogroll.php:97
 msgid "Updating bookmark %d failed"
-msgstr ""
+msgstr "تحديث المفضلة %d لم يكتمل"
 
 #: modules/containers/blogroll.php:128
 msgid "Failed to delete blogroll link \"%s\" (%d)"
-msgstr ""
+msgstr "فشل في حذف رابط المواقع الصديقة \"%s\" (%d)"
 
 #: modules/containers/blogroll.php:298
 msgid "%d blogroll link deleted."
 msgid_plural "%d blogroll links deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d رابط صديق حذف"
+msgstr[1] "%d روابط صديقة حذفت"
 
 #: modules/containers/comment.php:53
 msgid "Updating comment %d failed"
-msgstr ""
+msgstr "تحديث التعليق %d لم يكتمل"
 
 #: modules/containers/comment.php:74
 msgid "Failed to delete comment %d"
-msgstr ""
+msgstr "فشل في حذف التعليق %d"
 
 #: modules/containers/comment.php:95
 msgid "Can't move comment %d to the trash"
-msgstr ""
+msgstr "لا يمكن نقل التعليق %d الى سلة المهملات"
 
 #: modules/containers/comment.php:153 modules/containers/comment.php:195
 msgid "Edit comment"
-msgstr ""
+msgstr "تحرير التعليق"
 
 #: modules/containers/comment.php:160
 msgid "Delete Permanently"
-msgstr ""
+msgstr "حذف نهائي"
 
 #: modules/containers/comment.php:162
 msgid "Move this comment to the trash"
-msgstr ""
+msgstr "انقل هذا التعليق الى سلة المهملات"
 
 #: modules/containers/comment.php:162
 msgctxt "verb"
 msgid "Trash"
-msgstr ""
+msgstr "إرمٍ"
 
 #: modules/containers/comment.php:166
 msgid "View comment"
-msgstr ""
+msgstr "عرض التعليق"
 
 #: modules/containers/comment.php:183
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
 #: modules/containers/comment.php:355
 msgid "%d comment has been deleted."
 msgid_plural "%d comments have been deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d تعليق قد حذف"
+msgstr[1] "%d تعليقات قد حذفت"
 
 #: modules/containers/comment.php:374
 msgid "%d comment moved to the Trash."
 msgid_plural "%d comments moved to the Trash."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d تعليق نقل الى سلة المهملات."
+msgstr[1] "%d تعليق نقل الى سلة المهملات."
 
 #: modules/containers/custom_field.php:84
 msgid "Failed to update the meta field '%s' on %s [%d]"
-msgstr ""
+msgstr "فشل في تحديث حقل الميتا '%s' في %s [%d]"
 
 #: modules/containers/custom_field.php:110
 msgid "Failed to delete the meta field '%s' on %s [%d]"
-msgstr ""
+msgstr "فشل في حذف حقل الميتا '%s' في  %s [%d]"
 
 #: modules/containers/custom_field.php:187
 msgid "Edit this post"
-msgstr ""
+msgstr "تحرير هذه التدوينة"
 
 #: modules/containers/custom_field.php:217
 msgid "View \"%s\""
-msgstr ""
+msgstr "عرض  \"%s\""
 
 #: modules/containers/dummy.php:34 modules/containers/dummy.php:45
 msgid "I don't know how to edit a '%s' [%d]."
-msgstr ""
+msgstr "لا أعرف كيف أحرر '%s' [%d]."
 
 #: modules/extras/dailymotion-embed.php:23
 msgid "DailyMotion Video"
-msgstr ""
+msgstr "دايلي موشن فيديو"
 
 #: modules/extras/dailymotion-embed.php:24
 msgid "Embedded DailyMotion video"
-msgstr ""
+msgstr "تضمين فيديوهات دايلي موشن"
 
 #: modules/extras/embed-parser-base.php:196
 msgid ""
 "Embedded videos can't be edited using Broken Link Checker. Please edit or "
 "replace the video in question manually."
 msgstr ""
+"الفيديوهات المضمنة لا يمكن أن تحرر بإستخدام هذه الإضافة. الرجاء تحرير أو "
+"استبدال الفيديو يدوياً."
 
 #: modules/extras/fileserve.php:55
 msgid "Using FileServe API"
-msgstr ""
+msgstr "استخدام FileServe API"
 
 #: modules/extras/fileserve.php:112 modules/extras/mediafire.php:91
 #: modules/extras/mediafire.php:96 modules/extras/megaupload.php:81
 #: modules/extras/megaupload.php:123 modules/extras/rapidshare.php:139
 msgid "Not Found"
-msgstr ""
+msgstr "لم يعثر عليه"
 
 #: modules/extras/fileserve.php:115
 msgid "FileServe : %d %s"
-msgstr ""
+msgstr "FileServe : %d %s"
 
 #: modules/extras/googlevideo-embed.php:24
 msgid "GoogleVideo Video"
-msgstr ""
+msgstr "فيديوهات جوجل فيديو"
 
 #: modules/extras/googlevideo-embed.php:25
 msgid "Embedded GoogleVideo video"
-msgstr ""
+msgstr "تضمين فيديوهات جوجل فيديو"
 
 #: modules/extras/megaupload.php:130
 msgid "File Temporarily Unavailable"
-msgstr ""
+msgstr "الملف غير متوفر مؤقتاً"
 
 #: modules/extras/megaupload.php:136
 msgid "API Error"
-msgstr ""
+msgstr "خطأ API "
 
 #: modules/extras/megavideo-embed.php:24
 msgid "Megavideo Video"
-msgstr ""
+msgstr "فيديوهات ميجا فيديو"
 
 #: modules/extras/megavideo-embed.php:25
 msgid "Embedded Megavideo video"
-msgstr ""
+msgstr "تضمين فيديوهات ميجا فيديو"
 
 #: modules/extras/rapidshare.php:51
 msgid "Using RapidShare API"
-msgstr ""
+msgstr "استخدام RapidShare API"
 
 #: modules/extras/rapidshare.php:158
 msgid "RS Server Down"
-msgstr ""
+msgstr "سيرفر RS لا يعمل بكفاءة"
 
 #: modules/extras/rapidshare.php:165
 msgid "File Blocked"
-msgstr ""
+msgstr "ملف محظور"
 
 #: modules/extras/rapidshare.php:172
 msgid "File Locked"
-msgstr ""
+msgstr "ملف مقفول"
 
 #: modules/extras/rapidshare.php:183
 msgid "RapidShare : %s"
-msgstr ""
+msgstr "RapidShare : %s"
 
 #: modules/extras/rapidshare.php:189
 msgid "RapidShare API error: %s"
-msgstr ""
+msgstr "خطأ RapidShare API: %s"
 
 #: modules/extras/vimeo-embed.php:24
 msgid "Vimeo Video"
-msgstr ""
+msgstr "فيديوهات فيميو"
 
 #: modules/extras/vimeo-embed.php:25
 msgid "Embedded Vimeo video"
-msgstr ""
+msgstr "تضمين فيديوهات فيميو"
 
 #: modules/extras/youtube-embed.php:24 modules/extras/youtube-iframe.php:25
 msgid "YouTube Video"
-msgstr ""
+msgstr "فيديوهات يوتيوب"
 
 #: modules/extras/youtube-embed.php:25 modules/extras/youtube-iframe.php:26
 msgid "Embedded YouTube video"
-msgstr ""
+msgstr "تضمين فيديوهات يوتيوب"
 
 #: modules/extras/youtube.php:73 modules/extras/youtube.php:76
 msgid "Video Not Found"
-msgstr ""
+msgstr "الفيديم لم يتم العثور عليه"
 
 #: modules/extras/youtube.php:84
 msgid "Video Removed"
-msgstr ""
+msgstr "تم ازالة الفيديو"
 
 #: modules/extras/youtube.php:92
 msgid "Invalid Video ID"
-msgstr ""
+msgstr "رقم الآي دي الخاص بالفيديو غير صالح"
 
 #: modules/extras/youtube.php:104
 msgid "Video OK"
-msgstr ""
+msgstr "الفيديو يبدو جيداً!"
 
 #: modules/extras/youtube.php:105 modules/extras/youtube.php:132
 msgid "OK"
-msgstr ""
+msgstr "موافق"
 
 #: modules/extras/youtube.php:118
 msgid "Video status : %s%s"
-msgstr ""
+msgstr "حالة الفيديو:  %s%s"
 
 #: modules/extras/youtube.php:137
 msgid "Video Restricted"
-msgstr ""
+msgstr "الفيديو محظور"
 
 #: modules/extras/youtube.php:154
 msgid "Unknown YouTube API response received."
-msgstr ""
+msgstr "رد غير معروف تم استلامه من YouTube API "
 
 #: modules/parsers/image.php:159
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 #: modules/parsers/metadata.php:117
 msgid "Custom field"
-msgstr ""
+msgstr "حقل مُخصص"
 
 #. Plugin URI of the plugin/theme
 msgid "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
-msgstr ""
+msgstr "http://w-shadow.com/blog/2007/08/05/broken-link-checker-for-wordpress/"
 
 #. Description of the plugin/theme
 msgid ""
 "Checks your blog for broken links and missing images and notifies you on the "
 "dashboard if any are found."
 msgstr ""
+"فحص شامل لمدونتك عن الروابط والصور المفقودة والمعطوبة، وتنبيهك في اللوحة "
+"الرئيسية عن أي روابط يتم العثور عليها."
 
 #. Author of the plugin/theme
 msgid "Janis Elsts"
-msgstr ""
+msgstr "Janis Elsts"
 
 #. Author URI of the plugin/theme
 msgid "http://w-shadow.com/blog/"
-msgstr ""
+msgstr "http://w-shadow.com/blog/"

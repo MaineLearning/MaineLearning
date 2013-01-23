@@ -423,5 +423,3 @@ class blcCommentManager extends blcContainerManager {
 		return $containers;
 	}	
 }
-
-?>

@@ -76,7 +76,7 @@ class blcDatabaseUpgrader {
 	 * @return bool
 	 */
 	function drop_tables(){
-		global $wpdb, $blclog;
+		global $wpdb, $blclog; /** @var wpdb $wpdb */
 		
 		$blclog->info('Deleting the plugin\'s database tables'); 
 		$tables = array(
@@ -163,7 +163,7 @@ class blcTableDelta {
 	 * @return array   
 	 */
 	static function delta($queries, $execute = true, $drop_columns = true, $drop_indexes = true){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 	
 		// Separate individual queries into an array
 		if ( !is_array($queries) ) {
@@ -177,7 +177,7 @@ class blcTableDelta {
 		// Create a tablename index for an array ($cqueries) of queries
 		foreach($queries as $qry) {
 			if (preg_match("|CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?([^\s(]+)|i", $qry, $matches)) {
-				$table = trim( strtolower($matches[1]), '`' );
+				$table = trim( $matches[1], '`' );
 				$cqueries[$table] = $qry;
 				$for_update[$table] = 'Create table `'.$table.'`';
 			}
@@ -187,8 +187,7 @@ class blcTableDelta {
 		if ($tables = $wpdb->get_col('SHOW TABLES;')) {
 			// For every table in the database
 			foreach ($tables as $table) {
-				$table = strtolower($table);
-	
+
 				// If a table query exists for the database table...
 				if ( array_key_exists($table, $cqueries) ) {
 					
@@ -270,8 +269,8 @@ class blcTableDelta {
 	
 					if ($tableindices) {
 						// Clear the index array
-						unset($index_ary);
-	
+						$index_ary = array();
+
 						// For every index in the table
 						foreach ($tableindices as $tableindex) {
 							// Add the index to the index data array
@@ -321,8 +320,8 @@ class blcTableDelta {
 					}
 	
 					// Remove the original table creation query from processing
-					unset($cqueries[strtolower($table)]);
-					unset($for_update[strtolower($table)]);
+					unset($cqueries[$table]);
+					unset($for_update[$table]);
 				} else {
 					// This table exists in the database, but not in the creation queries?
 				}

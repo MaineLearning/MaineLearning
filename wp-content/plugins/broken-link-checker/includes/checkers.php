@@ -30,7 +30,7 @@ class blcChecker extends blcModule {
    * Check if this checker knows how to check a particular URL.
    *
    * @param string $url
-   * @param array|false $parsed_url The result of parsing $url with parse_url(). See PHP docs for details.
+   * @param array|bool $parsed_url The result of parsing $url with parse_url(). See PHP docs for details.
    * @return bool  
    */
 	function can_check($url, $parsed_url){

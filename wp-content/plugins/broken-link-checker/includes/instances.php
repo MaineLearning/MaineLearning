@@ -27,6 +27,7 @@ class blcLinkInstance {
 	
 	var $_container = null;
 	var $_parser = null;
+	/** @var blcLink|null */
 	var $_link = null;
 	
   /**
@@ -37,7 +38,8 @@ class blcLinkInstance {
    * @return void
    */
 	function __construct($arg = null){
-		
+		global $wpdb; /** @var wpdb $wpdb */
+
 		if (is_int($arg)){
 			//Load an instance with ID = $arg from the DB.
 			$q = $wpdb->prepare("SELECT * FROM {$wpdb->prefix}blc_instances WHERE instance_id=%d LIMIT 1", $arg);
@@ -183,7 +185,7 @@ class blcLinkInstance {
    * @return mixed 1 on success, 0 if the instance wasn't found, false on error
    */
 	function forget(){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		if ( !empty($this->instance_id) ) {
 			$rez = $wpdb->query( $wpdb->prepare("DELETE FROM {$wpdb->prefix}blc_instances WHERE instance_id=%d", $this->instance_id) );
@@ -200,7 +202,7 @@ class blcLinkInstance {
    * @return bool TRUE on success, FALSE on error
    */
 	function save(){
-		global $wpdb;
+		global $wpdb; /** @var wpdb $wpdb */
 		
 		//Refresh the locally cached link & container properties, in case 
 		//the objects have changed since they were set.
@@ -477,10 +479,10 @@ class blcLinkInstance {
  * @param bool $load_containers Preload containers regardless of purpose. Defaults to false.
  * @param bool $load_wrapped_objects Preload wrapped objects regardless of purpose. Defaults to false.
  * @param bool $include_invalid Include instances that refer to not-loaded containers or parsers. Defaults to false.
- * @return array An array indexed by link ID. Each item of the array will be an array of blcLinkInstance objects.
+ * @return blcLinkInstance[] An array indexed by link ID. Each item of the array will be an array of blcLinkInstance objects.
  */ 
 function blc_get_instances( $link_ids, $purpose = '', $load_containers = false, $load_wrapped_objects = false, $include_invalid = false ){
-	global $wpdb;
+	global $wpdb; /** @var wpdb $wpdb */
 	
 	if ( empty($link_ids) ){
 		return array();
