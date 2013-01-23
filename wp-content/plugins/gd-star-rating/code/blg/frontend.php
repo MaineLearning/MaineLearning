@@ -108,7 +108,7 @@ class gdsrFront {
     }
 
     function render_google_rich_snippet($post, $settings = array()) {
-        $hidden = isset($settings["hidden"]) ? $settings["hidden"] : $this->g->o["google_rich_snippets_hidden"] == 1;
+        $hidden = false;
 
         $datasource = isset($settings["source"]) ? $settings["source"] : $this->g->o["google_rich_snippets_datasource"];
         if (isset($settings["format"]) && is_object($this->g->rSnippets)) $this->g->rSnippets->snippet_type = $settings["format"];
@@ -402,10 +402,11 @@ class gdsrFront {
     * @param int $avg_stars_size set size to use for rendering of average value
     * @param string $avg_stars_set_ie6 set to use for rendering of average value in ie6
     */
-    function comment_integrate_multi_result($comment_id, $post_id, $multi_set_id, $template_id, $stars_set = "oxygen", $stars_size = 20, $stars_set_ie6 = "oxygen_gif", $avg_stars_set = "oxygen", $avg_stars_size = 20, $avg_stars_set_ie6 = "oxygen_gif") {
+    function comment_integrate_multi_result($comment_id, $post_id, $multi_set_id, $template_id, $stars_set = 'oxygen', $stars_size = 20, $stars_set_ie6 = 'oxygen_gif', $avg_stars_set = 'oxygen', $avg_stars_size = 20, $avg_stars_set_ie6 = 'oxygen_gif') {
         if (!$this->g->is_cached_integration_mur) {
             global $gdsr_cache_integation_mur;
-            $data = GDSRDBCache::get_integration($post_id, "multis");
+            $data = GDSRDBCache::get_integration($post_id, 'multis');
+
             foreach ($data as $row) {
                 $id = $row->multi_id."_".$row->comment_id;
                 $gdsr_cache_integation_mur->set($id, $row);
@@ -421,22 +422,27 @@ class gdsrFront {
             $weight_norm = array_sum($set->weight);
             $avg_rating = $i = 0;
             $votes = array();
+
             foreach ($value as $md) {
                 $single_vote = array();
-                $single_vote["votes"] = 1;
-                $single_vote["score"] = $md;
-                $single_vote["rating"] = $md;
+                $single_vote['votes'] = 1;
+                $single_vote['score'] = $md;
+                $single_vote['rating'] = $md;
                 $avg_rating += ($md * $set->weight[$i]) / $weight_norm;
                 $votes[] = $single_vote;
                 $i++;
             }
+
             $avg_rating = @number_format($avg_rating, 1);
+
             if ($avg_rating > 0) {
-                $style = $stars_set == "" ? $this->g->o["mur_style"] : $stars_set;
-                $style = $this->g->is_ie6 ? ($stars_set_ie6 == "" ? $this->g->o["mur_style_ie6"] : $stars_set_ie6) : $style;
-                return GDSRRenderT2::render_rmb($template_id, array("votes" => $votes, "post_id" => $post_id, "set" => $set, "avg_rating" => $avg_rating, "style" => $style, "size" => $stars_size, "avg_style" => $this->g->is_ie6 ? $avg_stars_set_ie6 : $avg_stars_set, "avg_size" => $avg_stars_size));
-            } else return "";
-        } else return "";
+                $style = $stars_set == '' ? $this->g->o['mur_style'] : $stars_set;
+                $style = $this->g->is_ie6 ? ($stars_set_ie6 == "" ? $this->g->o['mur_style_ie6'] : $stars_set_ie6) : $style;
+                return GDSRRenderT2::render_rmb($template_id, array('votes' => $votes, 'post_id' => $post_id, 'set' => $set, 'avg_rating' => $avg_rating, 'style' => $style, 'size' => $stars_size, 'avg_style' => $this->g->is_ie6 ? $avg_stars_set_ie6 : $avg_stars_set, 'avg_size' => $avg_stars_size));
+            } else {
+                return '';
+            }
+        } else return '';
     }
 
     /**

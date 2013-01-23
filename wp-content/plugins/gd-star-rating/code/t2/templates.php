@@ -118,7 +118,7 @@ $t->add_element("%MUR_RATING_STARS%", __("multi rating stars", "gd-star-rating")
 $t->add_element("%MUR_CSS_BLOCK%", __("css class for whole block", "gd-star-rating"));
 $t->add_element("%MUR_CSS_HEADER%", __("css class for header", "gd-star-rating"));
 $t->add_element("%MUR_CSS_TEXT%", __("css class for rating text", "gd-star-rating"));
-$t->add_element("%MUR_CSS_BUTTON%", __("css class for rating text", "gd-star-rating"));
+$t->add_element("%MUR_CSS_BUTTON%", __("css class for rating button", "gd-star-rating"));
 $t->add_element("%BUTTON%", __("rating button", "gd-star-rating"));
 $t->add_element("%AVG_RATING%", __("average rating", "gd-star-rating"));
 $t->add_element("%AVG_RATING_STARS%", __("average rating stars", "gd-star-rating"));

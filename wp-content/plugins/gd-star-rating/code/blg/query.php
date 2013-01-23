@@ -3,48 +3,51 @@
 class gdsrQuery {
     var $sort = '';
     var $type = '';
+    var $order = '';
+    var $set_id = 0;
 
     var $keys_sort = array(
-        "rating",
-        "review",
-        "thumbs",
-        "votes",
-        "thumbs_votes",
-        "last_voted"
+        'rating',
+        'review',
+        'thumbs',
+        'votes',
+        'thumbs_votes',
+        'last_voted'
     );
 
     var $keys_order = array(
-        "desc",
-        "asc"
+        'desc',
+        'asc'
     );
 
     function gdsrQuery() { }
 
     function query_vars($qvar) {
-        $qvar[] = "gdsr_sort";
-        $qvar[] = "gdsr_order";
-        $qvar[] = "gdsr_multi";
-        $qvar[] = "gdsr_fsvmin";
-        $qvar[] = "gdsr_ftvmin";
+        $qvar[] = 'gdsr_sort';
+        $qvar[] = 'gdsr_order';
+        $qvar[] = 'gdsr_multi';
+        $qvar[] = 'gdsr_fsvmin';
+        $qvar[] = 'gdsr_ftvmin';
 
         return $qvar;
     }
 
     function pre_get_posts($wpq) {
-        $this->sort = $wpq->get("gdsr_sort");
-        $this->order = $wpq->get("gdsr_order");
-        $this->type = intval($wpq->get("gdsr_multi")) > 0 ? "multis" : "standard";
+        $this->sort = $wpq->get('gdsr_sort');
+        $this->order = $wpq->get('gdsr_order');
+        $this->set_id = intval($wpq->get('gdsr_multi'));
+        $this->type = $this->set_id > 0 ? 'multis' : 'standard';
  
         if (in_array(strtolower($this->sort), $this->keys_sort)) {
-            add_filter('posts_fields', array(&$this, $this->type."_fields"));
-            add_filter('posts_join', array(&$this, $this->type."_join"));
-            add_filter('posts_orderby', array(&$this, $this->type."_orderby"));
-            add_filter('posts_where', array(&$this, $this->type."_where"));
+            add_filter('posts_fields', array(&$this, $this->type.'_fields'));
+            add_filter('posts_join', array(&$this, $this->type.'_join'));
+            add_filter('posts_orderby', array(&$this, $this->type.'_orderby'));
+            add_filter('posts_where', array(&$this, $this->type.'_where'));
         } else {
-            remove_filter('posts_fields', array(&$this, $this->type."_fields"));
-            remove_filter('posts_join', array(&$this, $this->type."_join"));
-            remove_filter('posts_orderby', array(&$this, $this->type."_orderby"));
-            remove_filter('posts_where', array(&$this, $this->type."_where"));
+            remove_filter('posts_fields', array(&$this, $this->type.'_fields'));
+            remove_filter('posts_join', array(&$this, $this->type.'_join'));
+            remove_filter('posts_orderby', array(&$this, $this->type.'_orderby'));
+            remove_filter('posts_where', array(&$this, $this->type.'_where'));
         }
     }
 
@@ -64,6 +67,7 @@ class gdsrQuery {
         global $table_prefix;
 
         $x = sprintf(" LEFT JOIN %sgdsr_data_article gdsra ON gdsra.post_id = %sposts.ID", $table_prefix, $table_prefix);
+
         $x = apply_filters("gdsr_wpquery_standard_join", $x);
 
         return $c.$x;
@@ -141,10 +145,13 @@ class gdsrQuery {
     }
 
     function multis_where($c) {
-        $set = intval(trim(addslashes(get_query_var('gdsr_multi'))));
-        $x = " AND gdsrm.multi_id = ".$set;
+        $x = " AND (gdsrm.multi_id = ".$this->set_id.' OR gdsrm.multi_id is NULL)';
         $filter_min_votes = intval(trim(addslashes(get_query_var('gdsr_fsvmin'))));
-        if ($filter_min_votes > 0) $x.= " AND (gdsrm.total_votes_users + gdsrm.total_votes_visitors) > ".$filter_min_votes;
+
+        if ($filter_min_votes > 0) {
+            $x.= " AND (gdsrm.total_votes_users + gdsrm.total_votes_visitors) > ".$filter_min_votes;
+        }
+
         $x = apply_filters("gdsr_wpquery_multis_where", $x);
         return $c.$x;
     }
@@ -152,21 +159,21 @@ class gdsrQuery {
     function multis_orderby($default) {
         global $table_prefix;
 
-        $order = in_array($this->order, $this->keys_order) ? $order : "desc";
+        $order = in_array($this->order, $this->keys_order) ? $this->order : "desc";
 
         $c = '';
         switch ($this->sort) {
-            case "rating":
+            case 'rating':
                 $c = sprintf(" (gdsrm.average_rating_users * gdsrm.total_votes_users + gdsrm.average_rating_visitors * gdsrm.total_votes_visitors)/(gdsrm.total_votes_users + gdsrm.total_votes_visitors) ".$order);
                 $c.= sprintf(", (gdsrm.total_votes_users + gdsrm.total_votes_visitors) ".$order);
                 break;
-            case "votes":
+            case 'votes':
                 $c = sprintf(" (gdsrm.total_votes_users + gdsrm.total_votes_visitors) ".$order);
                 break;
-            case "review":
+            case 'review':
                 $c = sprintf(" gdsrm.average_review ".$order);
                 break;
-            case "last_voted":
+            case 'last_voted':
                 $c = sprintf(" gdsrm.last_voted ".$order);
                 break;
         }

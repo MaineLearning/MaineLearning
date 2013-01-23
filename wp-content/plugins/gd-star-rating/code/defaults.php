@@ -2,9 +2,9 @@
 
 class GDSRDefaults {
     var $default_options = array(
-        "version" => "1.9.20",
-        "date" => "2012.07.25.",
-        "build" => 1166,
+        "version" => "1.9.22",
+        "date" => "2012.12.18.",
+        "build" => 1171,
         "code_name" => "Prelude",
         "revision" => 0,
         "status" => "Stable",
@@ -14,7 +14,7 @@ class GDSRDefaults {
         "google_rich_snippets_format" => "microformat",
         "google_rich_snippets_active" => 1,
         "google_rich_snippets_datasource" => "standard_rating",
-        "google_rich_snippets_hidden" => 1,
+        "google_rich_snippets_hidden" => 0,
         "google_rich_snippets_location" => "bottom",
         "no_votes_percentage" => 100,
         "update_report_usage" => 1,
