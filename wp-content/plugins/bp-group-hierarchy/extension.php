@@ -652,8 +652,11 @@ function bp_group_hierarchy_get_groups_tree( $groups, $params, $parent_id = 0 ) 
 		$parent_id = (int)$parent_id;
 	}
 	
-	/** group list processing */
-	if(!isset($bp->groups->current_group->id)) {
+	/** 
+	 * Replace retrieved list with toplevel groups
+	 * unless on a group page (member groups list) or viewing "My Groups" 
+	 */
+	if( ! isset( $bp->groups->current_group->id ) && ! $params['user_id'] ) {
 
 		/** remove search placeholder text for BP 1.5 */
 		if( function_exists( 'bp_get_search_default_text' ) && trim( $params['search_terms'] ) == bp_get_search_default_text( 'groups' ) )	$params['search_terms'] = '';
