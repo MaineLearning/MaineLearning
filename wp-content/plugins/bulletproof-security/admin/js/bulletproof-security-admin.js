@@ -444,4 +444,47 @@ jQuery(document).ready(function($){
 		event.preventDefault();         
 		$info18.dialog('open');     
 	});
+
+	var $info19 = $("#bps-modal-content19");     
+		$info19.dialog({                            
+		 'dialogClass'   : 'wp-dialog',                    
+		 'modal'         : false,         
+		 'autoOpen'      : false,          
+		 'closeOnEscape' : true,
+		 'width'		 : 400,
+		 'height'	 	 : 500,
+		 'show'			 : 'blind',
+		 'hide'			 : 'blind',
+		 'position'		 : 'center',
+		 'buttons'       : {             
+		 "Close": function() {                 
+		 $(this).dialog('close');             
+		 }         
+	}     
+	});
+	$("#bps-open-modal19").click(function(event) {         
+		event.preventDefault();         
+		$info19.dialog('open');     
+	});
+	var $info20 = $("#bps-modal-content20");     
+		$info20.dialog({                            
+		 'dialogClass'   : 'wp-dialog',                    
+		 'modal'         : false,         
+		 'autoOpen'      : false,          
+		 'closeOnEscape' : true,
+		 'width'		 : 400,
+		 'height'	 	 : 500,
+		 'show'			 : 'blind',
+		 'hide'			 : 'blind',
+		 'position'		 : 'center',
+		 'buttons'       : {             
+		 "Close": function() {                 
+		 $(this).dialog('close');             
+		 }         
+	}     
+	});
+	$("#bps-open-modal20").click(function(event) {         
+		event.preventDefault();         
+		$info20.dialog('open');     
+	});
 });
