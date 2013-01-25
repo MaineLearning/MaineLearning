@@ -2,10 +2,12 @@
 
 	class Related_Items {
 
+		public $version = '1.1.2';
     
-          	protected $_options             = array(
-                  'related-items-selected-types'       => array()
-                 
+		protected $_options  = array(
+			'related_items_options' 		=> array(),
+			'related-items-selected-types'  => array()
+		 
 		);
           
           
@@ -20,10 +22,16 @@
 			// Start the plugin
 			add_action('admin_menu', array(&$this, 'start') );
 			
-			//automatically add the related items to the bottom of each page
-			add_filter('the_content', array(&$this,'displayRelatedItems') );
-                  
-            		add_action('wp_head', array(&$this, 'loadCSS'));
+			$ri_options = get_option('related_items_options');
+			if( isset($ri_options['automatic_after_content'])){ 
+				//automatically add the related items to the bottom of each page
+				add_filter('the_content', array(&$this,'display_related_items') );
+			}
+				  
+            add_action('wp_head', array(&$this, 'loadCSS'));
+			
+			add_shortcode( 'related-items', array($this, 'display_related_items') );
+  
 		}
 		
 	
@@ -39,7 +47,7 @@
 		}
 
 		
-		public function displayRelatedItems($content){
+		public function display_related_items($content){
 
 			return $content . $this->show(get_the_ID());
 		}
@@ -55,17 +63,16 @@
 			add_action('admin_print_styles', array(&$this, 'loadCSS'));
                   	
 			// Adds a meta box for related posts to the edit screen of each post type in WordPress
-                  	foreach (get_post_types() as $post_type){
+			foreach (get_post_types() as $post_type){
 				add_meta_box($post_type . '-related-items-box', 'Related Items', array(&$this, 'displayMetaBox'), $post_type, 'normal', 'high');
-                  	}
+			}
 		}
           
           
-                // Load CSS
-                public function loadCSS() {
-                
-                        wp_enqueue_style('related-css', RELATED_URLPATH .'/styles.css', false, RELATED_VERSION, 'all');
-                }
+		// Load CSS
+		public function loadCSS() {
+			wp_enqueue_style('related-css', RELATED_URLPATH .'/styles.css', false, RELATED_VERSION, 'all');
+		}
 
           
 		// Load Javascript
@@ -84,16 +91,15 @@
 			
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
-			if (!isset($_POST['related-items']) || empty($_POST['related-items'])) :
+			if (!isset($_POST['related-items']) || empty($_POST['related-items'])){
 				delete_post_meta($id, 'related_items');
-			else :
+			}else{
 				update_post_meta($id, 'related_items', $_POST['related-items']);
-			endif;			
+			}			
 		}
 
 
-          
-         
+     
           
           
           
@@ -106,7 +112,7 @@
                   
                   echo "<p>Select items to add a relationship, drag and drop related items to change the order.</p>";
                   
-                                 //add new relationship meta box
+                 //add new relationship meta box
                   
                  echo "<div class='new_relationship_form'>";
                  //echo "<h3>Add a New Relationship</h3>";
@@ -142,7 +148,7 @@
                   
                   
 			//echo '<p>';
-                          echo '   Select an Item: <select id="related-items-select" name="related-items-select" >
+            echo '   Select an Item: <select id="related-items-select" name="related-items-select" >
 						<option value="0">Select</option>';
 			
 			$query = array(
@@ -167,7 +173,7 @@
 			wp_reset_query();
 								
 			echo '</select>  ';
-                  	echo "  <input type='button' id='add_relationship' value='Add Relationship'>";
+                  	echo "  <input type='button' class='button-primary' id='add_relationship' value='Add Relationship'>";
 			echo '</div>';
                   
                   
@@ -180,20 +186,30 @@
                   
                   //display existing relationships meta box
                   echo "<div id='related-items-box' class='related-items-box'>";
-                  
+                  echo '<script type="text/javascript">var wpurl = "'. get_option("siteurl").'";</script>';
+				  $siteurl = get_option("siteurl");
                   if (!empty($related_items)) {
                     
-                    
+                    $item_data = array();
                     foreach($related_items as $related_item){
                           $related_post = get_post($related_item);
                       	$type_info = get_post_type_object($related_post->post_type);
                        
-                      	
-                          $item_data[$type_info->labels->name] .= '<div class="related-item" id="related-item-' . $r . '" title="Drag and Drop to Reorder">
-                            <img src="/wp-content/plugins/related-items/images/bullet_green.png" title="This Relationship is Saved!">
-                                  <input type="hidden" name="related-items[]" value="' . $related_item . '">
-                                  <span class="related-item-title">' . $related_post->post_title . ' (' . ucfirst(get_post_type($related_post->ID)) . ')</span>
-                                  <a href="#" title="Remove from list"><img src="/wp-content/plugins/related-items/images/delete.png"></a></div>';
+					   
+					   
+                      	if(isset($type_info->labels->name) && isset($related_post)){
+							$index = $type_info->labels->name;
+							
+							if(!isset($item_data[$index])){
+								$item_data[$index] = "";
+							}
+							
+                          	$item_data[$index] .= "<div class='related-item' id='related-item' title='Drag and Drop to Reorder'>";
+                            $item_data[$index] .= '<img src="'.$siteurl.'/wp-content/plugins/related-items/images/bullet_green.png" title="This Relationship is Saved!">';
+                           	$item_data[$index] .= ' <input type="hidden" name="related-items[]" value="' . $related_item . '">';
+                           	$item_data[$index] .= ' <span class="related-item-title">' . $related_post->post_title . ' (' . ucfirst(get_post_type($related_post->ID)) . ')</span>';
+                            $item_data[$index] .= '<a href="#" title="Remove from list"><img src="'.$siteurl.'/wp-content/plugins/related-items/images/delete.png"></a></div>';
+						}
                      }
                     
                     
@@ -225,6 +241,8 @@
 		public function show($id, $return = false) {
 
 			global $wpdb;
+			
+			$list_data = array();
 
                   	if (!empty($id) && is_numeric($id)) {
 				$related_posts = get_post_meta($id, 'related_items', true);
@@ -247,7 +265,14 @@
                                                 foreach ($rel as $related_post) {
                                                      $type = get_post_type_object($related_post->post_type);
                                                      //echo $type->labels->name;
-                                                     $list_data[$type->labels->name] .= '<li><a href="' . get_permalink($related_post->ID) . '">' . $related_post->post_title . '</a></li>';
+													 if(isset($type)){
+													 
+													 	if(!isset($list_data[$type->labels->name])){
+															$list_data[$type->labels->name] = "";
+														}
+													 
+                                                     	$list_data[$type->labels->name] .= '<li><a href="' . get_permalink($related_post->ID) . '">' . $related_post->post_title . '</a></li>';
+													}	
                 				}
                   
                                                 foreach($list_data as $type=>$data){

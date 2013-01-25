@@ -1,10 +1,11 @@
 === Related Items ===
 Contributors: MyWebsiteAdvisor, ChrisHurst
-Donate link: http://mywebsiteadvisor.com/
+Donate link: http://MyWebsiteAdvisor.com/donations/
 Tags: related items, related pages, related posts, related, post, custom post type, relationship
 Requires at least: 2.9
-Tested up to: 3.3.1
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.1.2
+
 
 Related Items plugin lets you relate a page, post or custom post type to other pages, posts and custom post types.
 
@@ -81,12 +82,23 @@ If we choose your testimonial or website we can link to your site and generate s
 
 == Changelog ==
 
-= 1.0 =
-* Initial release. 
+= 1.1.2 =
+* several minor fixes to resolve notices in debug.log
+
+
+= 1.1.1 =
+* Resolved issues with wordpress subdirectory installations
+* added short code and template tag to allow for customized display of output.
+* made automatic display of output optional
+* improved plugin admin interface UI with plugin support links, etc...
+* added contextual help menu
+
 
 = 1.1 =
 * Minor Bug Fix 
 
+= 1.0 =
+* Initial release. 
 
-== Upgrade Notice ==
+
 
