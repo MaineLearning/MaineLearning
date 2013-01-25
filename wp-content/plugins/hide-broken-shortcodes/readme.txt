@@ -5,9 +5,9 @@ Tags: shortcode, shortcodes, content, post, page, coffee2code
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 2.5
-Tested up to: 3.4
-Stable tag: 1.5
-Version: 1.5
+Tested up to: 3.5
+Stable tag: 1.6
+Version: 1.6
 
 Prevent broken shortcodes from appearing in posts and pages.
 
@@ -100,6 +100,12 @@ function hbs_filter( $filters_array ) {
 
 == Changelog ==
 
+= 1.6 =
+* Update regex to allow hyphens in shortcode names (syncing changes made in WP 3.5)
+* Add check to prevent execution of code if file is directly accessed
+* Note compatibility through WP 3.5+
+* Update copyright date (2013)
+
 = 1.5 =
 * Recursively hide nested broken shortcodes
 * Re-license as GPLv2 or later (from X11)
@@ -152,6 +158,9 @@ function hbs_filter( $filters_array ) {
 
 
 == Upgrade Notice ==
+
+= 1.6 =
+Recommended minor update: updated regex used to parse shortcodes to allow for hyphens in shortcode names; noted compatibility through WP 3.5+
 
 = 1.5 =
 Recommended minor update: recursively hide nested broken shortcodes; noted compatibility through WP 3.4+; explicitly stated license
