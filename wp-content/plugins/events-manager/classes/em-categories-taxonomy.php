@@ -45,7 +45,8 @@ class EM_Categories_Taxonomy{
 		if( $tag != EM_TAXONOMY_CATEGORY ){ //not an add new tag form
 			$EM_Category = new EM_Category($tag);
 			$category_color = $EM_Category->get_color();
-			$category_image = $EM_Category->get_image_url();				
+			$category_image = $EM_Category->get_image_url();
+			$category_image_id = $EM_Category->get_image_id();
 		}
 		?>
 	    <tr class="form-field">
@@ -57,12 +58,13 @@ class EM_Categories_Taxonomy{
 	        </td>
 	    </tr>
 	    <tr class="form-field">
-	        <th scope="row" valign="top"><label for="product_package_unit_price">Image</label></th>
+	        <th scope="row" valign="top"><label for="category-image">Image</label></th>
 	        <td>
 	        	<?php if( !empty($category_image) ): ?>
 	        	<p><img src="<?php echo $category_image; ?>" /></p>
 	        	<?php endif; ?>
 	            <input type="text" name="category_image" id="category-image" value="<?php echo esc_attr($category_image); ?>" style="width:300px;" />
+	            <input type="hidden" name="category_image_id" id="category-image-id" value="<?php echo esc_attr($category_image); ?>" />
 	            <input id="upload_image_button" type="button" value="<?php _e('Choose/Upload Image','dbem'); ?>" class="button-secondary" style="width:auto;" /><br />
 	            <p class="description"><?php echo sprintf(__('Choose an image for your category, which can be displayed using the %s placeholder.','dbem'),'<code>#_CATEGORYIMAGE</code>'); ?></p>
 	        </td>
@@ -89,6 +91,15 @@ class EM_Categories_Taxonomy{
 				$wpdb->update(EM_META_TABLE, array('object_id'=>$term_id,'meta_value'=>$_POST['category_image']), array('object_id'=>$term_id,'meta_key'=>'category-image'));
 			}else{
 				$wpdb->insert(EM_META_TABLE, array('object_id'=>$term_id,'meta_key'=>'category-image','meta_value'=>$_POST['category_image']));
+			}
+			if( !empty($_POST['category_image_id']) && is_numeric($_POST['category_image_id']) ){
+				//get results and save/update
+				$prev_settings = $wpdb->get_results('SELECT meta_value FROM '.EM_META_TABLE." WHERE object_id='{$term_id}' AND meta_key='category-image-id'");
+				if( count($prev_settings) > 0 ){
+					$wpdb->update(EM_META_TABLE, array('object_id'=>$term_id,'meta_value'=>$_POST['category_image_id']), array('object_id'=>$term_id,'meta_key'=>'category-image-id'));
+				}else{
+					$wpdb->insert(EM_META_TABLE, array('object_id'=>$term_id,'meta_key'=>'category-image-id','meta_value'=>$_POST['category_image_id']));
+				}
 			}
 		}
 	}

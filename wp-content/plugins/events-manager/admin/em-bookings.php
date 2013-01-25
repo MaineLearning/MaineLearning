@@ -29,6 +29,7 @@ add_action('admin_init','em_admin_actions_bookings',100);
  */
 function em_bookings_page(){
 	//First any actions take priority
+	if( !empty($_REQUEST['_wpnonce']) ){ $_REQUEST['_wpnonce'] = $_GET['_wpnonce'] = $_POST['_wpnonce'] = esc_attr($_REQUEST['_wpnonce']); } //XSS fix just in case here too
 	if( !empty($_REQUEST['action']) && substr($_REQUEST['action'],0,7) != 'booking' ){ //actions not starting with booking_
 		do_action('em_bookings_'.$_REQUEST['action']);
 	}elseif( !empty($_REQUEST['booking_id']) ){

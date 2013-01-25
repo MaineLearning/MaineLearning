@@ -131,9 +131,11 @@ function em_docs_init($force_init = false){
 							'#_SPACES' => array( 'desc' => 'Shows the total spaces for the event.' ),
 							'#_ATTENDEES' => array( 'desc' => 'Shows the list of user avatars attending the event.' ),
 							'#_ATTENDEESLIST' => array( 'desc' => 'Shows the list of people attending the event.' ),
+							'#_ATTENDEESPENDINGLIST' => array( 'desc' => 'Shows the list of people with a pending booking for the event.' ),
 							'#_BOOKINGSURL' => array( 'desc' => 'Shows the url to the admin, front-end or buddypress (if activated) bookings management page for this event. Only shown if user is logged in and able to manage bookings.' ),
 							'#_BOOKINGSLINK' => array( 'desc' => 'Shows a link to the admin, front-end or buddypress (if activated) bookings management page for this event. Only shown if user is logged in and able to manage bookings.' ),
-							'#_EVENTPRICERANGE' => array( 'desc' => 'Shows a "maximum - minimum" price range, or a single price if there is no range. Price is formatted according to currency formatting in your settings page.' ),
+							'#_EVENTPRICERANGE' => array( 'desc' => 'Shows a "maximum - minimum" price range for available tickets at the time of display, or a single price if there is no range. Once bookings are closed this will show a 0 value, if you have enabled \'Show unavailable tickets\' in your booking settings these will be included. Price is formatted according to currency formatting in your settings page.' ),
+							'#_EVENTPRICERANGEALL' => array( 'desc' => 'Like #_EVENTPRICERANGE but shows all tickets price range whether or not bookings or individual tickets are available.' ),
 							'#_EVENTPRICEMIN' => array( 'desc' => 'Shows the lowest ticket price for this event.' ),
 							'#_EVENTPRICEMAX' => array( 'desc' => 'Shows the highest ticket price for this event.' ),								
 						)
@@ -163,11 +165,13 @@ function em_docs_init($force_init = false){
 				),
 				'categories' => array(
 					'Category Details' => array(
+						'desc' => 'You can use these when displaying categories or for showing the first available category in an event format.',
 						'placeholders' => array(
-							'#_CATEGORYNAME' => array( 'desc' => 'Shows the category name of the event.' ),
-							'#_CATEGORYID' => array( 'desc' => 'Shows the category ID of the event.' ),
-							'#_CATEGORYIMAGE' => array( 'desc' => 'Shows the event image, if available.' ),
-							'#_CATEGORYIMAGE{x,y}' => array( 'desc' => 'Shows the category image thumbnail, x and y are width and height respectively, both being numbers e.g. <code>#_CATEGORYIMAGE{100,100}</code>' ),
+							'#_CATEGORYNAME' => array( 'desc' => 'Shows the category name.' ),
+							'#_CATEGORYID' => array( 'desc' => 'Shows the category ID.' ),
+							'#_CATEGORYSLUG' => array( 'desc' => 'Shows the category slug.' ),
+							'#_CATEGORYIMAGE' => array( 'desc' => 'Shows the category image, if available.' ),
+							'#_CATEGORYIMAGE{x,y}' => array( 'desc' => 'Shows the category image thumbnail if available, x and y are width and height respectively, both being numbers e.g. <code>#_CATEGORYIMAGE{100,100}</code>' ),
 							'#_CATEGORYIMAGEURL' => array( 'desc' => 'Shows the category image url, if available.' ),
 							'#_CATEGORYNOTES' => array( 'desc' => 'Shows the location description.' )
 						)
@@ -194,6 +198,8 @@ function em_docs_init($force_init = false){
 							'#_LOCATIONPOSTCODE' => array( 'desc' => 'Displays the postcode.' ),
 							'#_LOCATIONREGION' => array( 'desc' => 'Displays the region.' ),
 							'#_LOCATIONCOUNTRY' => array( 'desc' => 'Displays the country.' ),
+							'#_LOCATIONLONGITUDE' => array( 'desc' => 'Displays the longitude, used for locating in Google Maps.' ),
+							'#_LOCATIONLATITUDE' => array( 'desc' => 'Displays the latitude, used for locating in Google Maps.' ),
 							'#_LOCATIONMAP' => array( 'desc' => 'Displays a google map showing where the event is located (Will not show if maps are disabled in the settings page)' ),
 							'#_LOCATIONNOTES' => array( 'desc' => 'Shows the location description.' ),
 							'#_LOCATIONEXCERPT' => array( 'desc' => 'If you added a <a href="http://en.support.wordpress.com/splitting-content/more-tag/">more tag</a> to your location description, only the content before this tag will show (currently, no read more link is added).' ),
@@ -231,7 +237,7 @@ function em_docs_init($force_init = false){
 					),
 				),
 				'bookings' => array(
-					'Booking Person Information' => array(
+					'Individual Booking Information' => array(
 						'desc' => 'When a specific booking is displayed (on screen and on email), you can use these placeholders to show specific information about the booking. Event and Location placeholders are also available in these cases.',
 						'placeholders' => array(
 							'#_BOOKINGID' => array( 'desc' => 'The unique ID of this booking, useful if you are making your own customizations to this plugin.' ),
@@ -244,9 +250,10 @@ function em_docs_init($force_init = false){
 							'#_BOOKINGTICKETDESCRIPTION' => array( 'desc' => 'Description of the ticket booked. Useful in single ticket mode, if multiple tickets are booked a random ticket is used.' ),
 							'#_BOOKINGTICKETPRICE' => array( 'desc' => 'Booked ticket price with currency symbol (e.g. $ 10.00). Useful in single ticket mode, if multiple tickets are booked a random ticket is used.' ),
 							'#_BOOKINGTICKETS' => array( 'desc' => 'A list of booked tickets. You can modify this by using template files and modifying templates/emails/bookingtickets.php' ),
-							'#_BOOKINGFORMCUSTOM{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/upgrade/') ),
-							'#_BOOKINGFORMCUSTOMREG{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields that are used for guest user registration. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/upgrade/') ),
-							'#_BOOKINGFORMCUSTOMFIELDS' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Generates a list of booking form custom fields that are used in the booking.','http://wp-events-plugin.com/upgrade/') )
+							'#_BOOKINGFORMCUSTOM{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/features/') ),
+							'#_BOOKINGFORMCUSTOMREG{field_id}' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Shows booking form custom fields that are used for guest user registration. The field_id value must match that of your custom booking form field.','http://wp-events-plugin.com/features/') ),
+							'#_BOOKINGFORMCUSTOMFIELDS' => array( 'desc' => sprintf('(<a href="%s">pro only</a>) Generates a list of booking form custom fields that are used in the booking.','http://wp-events-plugin.com/features/') ),
+							'#_BOOKINGATTENDEES' => array('desc' => sprintf('(<a href="%s">pro only</a>) Generates a list of attendee information displaying the filled in form data for each attendee (requires individual attendee forms enabled for the event). This list is split by ticket type, then by individual attendee.','http://wp-events-plugin.com/features/')), //coupons too!
 						)
 					),
 					'Pricing Information' => array(
@@ -276,9 +283,19 @@ function em_docs_init($force_init = false){
 						)
 					),
 					'Gateway-Specific Information' => array(
-						'desc' => '',
+						'desc' => 'Information pertaining to speicifc gateways. '. sprintf('Requires <a href="%s">Events Manager Pro</a>','http://wp-events-plugin.com/features/'),
 						'placeholders' => array(
 							'#_BOOKINGTXNID' => array( 'desc' => '<em>Online Payments Only</em> - Prints the transaction ID of this booking if available.' )
+						)
+					),
+					'Coupon Information' => array(
+						'desc' => 'When a booking has been made with a coupon, you can display coupon information using these placeholders. If no coupon is used, nothing will be shown. '.sprintf('Requires <a href="%s">Events Manager Pro</a>','http://wp-events-plugin.com/features/'),
+						'placeholders' => array(
+							'#_BOOKINGCOUPON' => array('desc' => 'Displays the coupon code followed by the amount/percentage discounted.'),
+							'#_BOOKINGCOUPONCODE' => array('desc' => 'Displays the coupon code used.'),
+							'#_BOOKINGCOUPONNAME' => array('desc' => 'Displays the name given to this coupon.'),
+							'#_BOOKINGCOUPONDISCOUNT' => array('desc' => 'Displays amount/percentage discounted (e.g. 25% Off).'),
+							'#_BOOKINGCOUPONDESCRIPTION' => array('desc' => 'Displays the coupon description.'),
 						)
 					),
 				),

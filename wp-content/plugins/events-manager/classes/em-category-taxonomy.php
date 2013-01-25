@@ -13,36 +13,44 @@ class EM_Category_Taxonomy{
 	 * @return string
 	 */
 	function template($template){
-		global $wp_query, $EM_Category;
-		if( is_archive() ){
-			if( !empty($wp_query->queried_object->taxonomy) && $wp_query->queried_object->taxonomy == EM_TAXONOMY_CATEGORY && get_option('dbem_cp_categories_formats', true)){
-				$EM_Category = em_get_category($wp_query->queried_object->term_id);
-				add_filter('the_content', array('EM_Category_Taxonomy','the_content')); //come in slightly early and consider other plugins
-				$wp_query->posts = array();
-				$wp_query->posts[0] = new stdClass();
-				$wp_query->posts[0]->post_title = $EM_Category->output(get_option('dbem_category_page_title_format'));
-				$post_array = array('ID', 'post_author', 'post_date','post_date_gmt','post_content','post_excerpt','post_status','comment_status','ping_status','post_password','post_name','to_ping','pinged','post_modified','post_modified_gmt','post_content_filtered','post_parent','guid','menu_order','post_type','post_mime_type','comment_count','filter');
-				foreach($post_array as $post_array_item){
-					$wp_query->posts[0]->$post_array_item = '';
-				}
-				$wp_query->post = $wp_query->posts[0];
-				$wp_query->post_count = 1;
-				$wp_query->found_posts = 1;
-				$wp_query->max_num_pages = 1;
-				$wp_query->is_page = 1;
-				$wp_query->is_single = 0;
-				$wp_query->is_archive = 0;
-				//echo "<pre>"; print_r($wp_query); echo "</pre>";
-				$template = locate_template(array('page.php','index.php'),false); //category becomes a page
+		global $wp_query, $EM_Category, $em_category_id;
+		if( is_tax(EM_TAXONOMY_CATEGORY) && get_option('dbem_cp_categories_formats', true) ){
+			$EM_Category = em_get_category($wp_query->queried_object->term_id);
+			if( get_option('dbem_categories_page') ){
+			    //less chance for things to go wrong with themes etc. so just reset the WP_Query to think it's a page rather than taxonomy
+				$wp_query = new WP_Query(array('page_id'=> get_option('dbem_categories_page')));
+				$wp_query->posts[0]->post_title = $wp_query->queried_object->post_title = $EM_Category->output(get_option('dbem_category_page_title_format'));
+			}else{
+			    //we don't have a categories page, so we create a fake page
+			    $wp_query->posts = array();
+			    $wp_query->posts[0] = new stdClass();
+			    $wp_query->posts[0]->post_title = $wp_query->queried_object->post_title = $EM_Category->output(get_option('dbem_category_page_title_format'));
+			    $post_array = array('ID', 'post_author', 'post_date','post_date_gmt','post_content','post_excerpt','post_status','comment_status','ping_status','post_password','post_name','to_ping','pinged','post_modified','post_modified_gmt','post_content_filtered','post_parent','guid','menu_order','post_type','post_mime_type','comment_count','filter');
+			    foreach($post_array as $post_array_item){
+			    	$wp_query->posts[0]->$post_array_item = '';
+			    }
+			    $wp_query->post = $wp_query->posts[0];
+			    $wp_query->post_count = 1;
+			    $wp_query->found_posts = 1;
+			    $wp_query->max_num_pages = 1;
+			    //tweak flags for determining page type
+			    $wp_query->is_tax = 0;
+			    $wp_query->is_page = 1;
+			    $wp_query->is_single = 0;
+			    $wp_query->is_singular = 1;
+			    $wp_query->is_archive = 0;
 			}
+			add_filter('the_content', array('EM_Category_Taxonomy','the_content')); //come in slightly early and consider other plugins
+			$wp_query->em_category_id = $em_category_id = $EM_Category->term_id; //we assign $em_category_id just in case other themes/plugins do something out of the ordinary to WP_Query
+			$template = locate_template(array('page.php','index.php'),false); //category becomes a page
 		}
 		return $template;
 	}
 	
 	function the_content($content){
-		global $wp_query, $EM_Category, $post;
-		if( empty($post->ID) ){
-			$EM_Category = new EM_Category($wp_query->queried_object);
+		global $wp_query, $EM_Category, $post, $em_category_id;
+		if( !empty($wp_query->em_category_id) || ($post->ID == get_option('dbem_categories_page') && !empty($em_category_id)) ){
+			$EM_Category = empty($wp_query->em_category_id) ? em_get_category($em_category_id):em_get_category($wp_query->em_category_id);
 			ob_start();
 			em_locate_template('templates/category-single.php',true);
 			return ob_get_clean();
@@ -52,7 +60,7 @@ class EM_Category_Taxonomy{
 	
 	function parse_query( ){
 	    global $wp_query;
-		if( !empty($wp_query->tax_query->queries[0]['taxonomy']) &&  $wp_query->tax_query->queries[0]['taxonomy'] == EM_TAXONOMY_CATEGORY) {
+		if( is_tax(EM_TAXONOMY_CATEGORY) ){
 			//Scope is future
 			$today = strtotime(date('Y-m-d', current_time('timestamp')));
 			if( get_option('dbem_events_current_are_past') ){

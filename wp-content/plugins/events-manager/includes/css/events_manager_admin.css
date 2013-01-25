@@ -140,6 +140,11 @@ table.events-table .category { color:#888; }
 /* Options Page */
 #dbem_options_form td, #dbem_options_form th { vertical-align:top; }
 table.em-caps-table th, table.em-caps-table td { width:auto !important; }
+.em-translatable { display:inline-block; width:16px; height:16px; background:url(../images/globe.png) 0px 0px no-repeat; padding:0px 5px 0px 0px; cursor:pointer; }
+.em-ml-options { display:none; }
+.em-ml-options table { width:95%; }
+.em-ml-options table td { padding:0px 0px 5px; margin:0px; }
+.em-ml-options .lang { width:100px; }
 
 /* Widget Tables CSS */
 .em_obj .table-wrap{

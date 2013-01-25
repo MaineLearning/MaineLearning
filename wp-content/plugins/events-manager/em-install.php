@@ -347,6 +347,7 @@ function em_add_options() {
 		'dbem_events_form_editor' => 1,
 		'dbem_events_form_reshow' => 1,
 		'dbem_events_form_result_success' => __('You have successfully submitted your event, which will be published pending approval.','dbem'),
+		'dbem_events_form_result_success_updated' => __('You have successfully updated your event, which will be republished pending approval.','dbem'),
 		'dbem_events_anonymous_submissions' => 0,
 		'dbem_events_anonymous_user' => 0,
 		'dbem_events_anonymous_result_success' => __('You have successfully submitted your event, which will be published pending approval.','dbem'),
@@ -440,6 +441,7 @@ function em_add_options() {
 		'dbem_location_event_list_item_header_format' => "<ul>",
 		'dbem_location_event_list_item_format' => "<li>#_EVENTLINK - #_EVENTDATES - #_EVENTTIMES</li>",
 		'dbem_location_event_list_item_footer_format' => "</ul>",
+		'dbem_location_event_list_limit' => 20,
 		//Category page options
 		'dbem_categories_default_limit' => 10,
 		'dbem_categories_default_orderby' => 'name',
@@ -454,6 +456,7 @@ function em_add_options() {
 		'dbem_category_event_list_item_header_format' => '<ul>',
 		'dbem_category_event_list_item_format' => "<li>#_EVENTLINK - #_EVENTDATES - #_EVENTTIMES</li>",
 		'dbem_category_event_list_item_footer_format' => '</ul>',
+		'dbem_category_event_list_limit' => 20,
 		//Tag Formatting
 		'dbem_tag_page_title_format' => '#_TAGNAME',
 		'dbem_tag_page_format' => '<h3>Upcoming Events</h3>#_TAGNEXTEVENTS',

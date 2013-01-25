@@ -115,7 +115,7 @@ global $EM_Event, $post;
 	<?php } ?>
 	<p>
 		<label><strong><?php _e('Total Spaces','dbem'); ?></strong></label>
-		<input type="text" name="event_spaces" value="<?php echo $EM_Event->event_spaces; ?>" /><br />
+		<input type="text" name="event_spaces" value="<?php if( $EM_Event->event_spaces > 0 ){ echo $EM_Event->event_spaces; } ?>" /><br />
 		<em><?php _e('Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit.','dbem'); ?></em>
 	</p>
 	<?php if( !$EM_Event->is_recurring() ): ?>

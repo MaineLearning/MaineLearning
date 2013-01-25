@@ -90,6 +90,7 @@ class EM_Locations extends EM_Object implements Iterator {
 		
 		if( EM_MS_GLOBAL ){
 			foreach ( $results as $location ){
+			    if( empty($location['blog_id']) ) $location['blog_id'] = get_current_site()->blog_id;
 				$locations[] = em_get_location($location['post_id'], $location['blog_id']);
 			}
 		}else{
@@ -267,13 +268,9 @@ class EM_Locations extends EM_Object implements Iterator {
 			'private_only' => false,
 			'post_id' => false
 		);
-		if( EM_MS_GLOBAL && !is_admin() ){
-		    if( get_site_option('dbem_ms_mainblog_locations') ){
+		if( EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations') ){
+		    if( empty($array['blog']) && !is_main_site() ){
 		        $array['blog'] = get_current_site()->blog_id;
-		    }else{
-				if( empty($array['blog']) && is_main_site() && get_site_option('dbem_ms_global_locations') ){
-				    $array['blog'] = false;
-				}		        
 		    }
 		}
 		$array['eventful'] = ( !empty($array['eventful']) && $array['eventful'] == true );

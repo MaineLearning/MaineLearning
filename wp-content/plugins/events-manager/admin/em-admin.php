@@ -180,6 +180,17 @@ function em_admin_warnings() {
 			</div>
 			<?php
 		}
+		if( class_exists('SitePress') && !class_exists('EM_WPML') && !get_site_option('disable_em_wpml_warning') ){
+			if( !empty($_REQUEST['disable_em_wpml_warning']) ){
+				update_site_option('disable_em_wpml_warning',1);
+			}else{
+				?>
+				<div id="message" class="updated">
+					<p><?php echo sprintf(__('It looks like you have WPML enabled on your site. We advise you also install our extra <a href="%s">Events Manager WPML Connector</a> plugin which helps the two work better together. <a href="%s">Dismiss message</a>','em-pro'),'http://wordpress.org/extend/plugins/events-manager-wpml/', add_query_arg(array('disable_em_wpml_warning'=>1))); ?></p>
+				</div>
+				<?php
+			}
+		}
 	}
 	//Warn about EM page edit
 	if ( preg_match( '/(post|page).php/', $_SERVER ['SCRIPT_NAME']) && isset ( $_GET ['action'] ) && $_GET ['action'] == 'edit' && isset ( $_GET ['post'] ) && $_GET ['post'] == "$events_page_id") {

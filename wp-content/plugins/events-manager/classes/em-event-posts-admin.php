@@ -76,7 +76,7 @@ class EM_Event_Posts_Admin{
 				//Categories
 	            $selected = !empty($_GET['event-categories']) ? $_GET['event-categories'] : 0;
 				wp_dropdown_categories(array( 'hide_empty' => 1, 'name' => 'event-categories',
-                              'hierarchical' => true, 'id' => EM_TAXONOMY_CATEGORY,
+                              'hierarchical' => true, 'orderby'=>'name', 'id' => EM_TAXONOMY_CATEGORY,
                               'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected,
                               'show_option_all' => __('View all categories')));
 			}

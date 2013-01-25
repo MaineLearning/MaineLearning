@@ -828,7 +828,7 @@ function em_maps() {
 			}
 		}
 		jQuery('#location-select-id, input#location-id').change( function(){get_map_by_id(jQuery(this).val())} );
-		jQuery('#location-town, #location-address, #location-state, #location-postcode, #location-country').change( function(){
+		jQuery('#location-name, #location-town, #location-address, #location-state, #location-postcode, #location-country').change( function(){
 			//build address
 			var addresses = [ jQuery('#location-address').val(), jQuery('#location-town').val(), jQuery('#location-state').val(), jQuery('#location-postcode').val() ];
 			var address = '';
@@ -837,6 +837,11 @@ function em_maps() {
 					address = ( address == '' ) ? address+val:address+', '+val;
 				}
 			});
+			if( address == '' ){ //in case only name is entered, no address
+				jQuery('#em-map').hide();
+				jQuery('#em-map-404').show();
+				return false;
+			}
 			//do country last, as it's using the text version
 			if( jQuery('#location-country option:selected').val() != 0 ){
 				address = ( address == '' ) ? address+jQuery('#location-country option:selected').text():address+', '+jQuery('#location-country option:selected').text();

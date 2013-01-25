@@ -84,6 +84,15 @@ class EM_Category extends EM_Object {
 		return $this->image_url;
 	}
 	
+	function get_image_id(){
+		if( empty($this->image_id) ){
+			global $wpdb;
+			$image_id = $wpdb->get_var('SELECT meta_value FROM '.EM_META_TABLE." WHERE object_id='{$this->term_id}' AND meta_key='category-image-id' LIMIT 1");
+			$this->image_id = ($image_id != '') ? $image_id:'';
+		}
+		return $this->image_id;
+	}
+	
 	function get_url(){
 		if( empty($this->link) ){
 			$this->ms_global_switch();
@@ -143,7 +152,14 @@ class EM_Category extends EM_Object {
 							}else{
 								$image_size = explode(',', $placeholders[3][$key]);
 								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
-									$replace = "<img src='".em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1])."' alt='".esc_attr($this->name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
+								    if( get_option('dbem_disable_timthumb') && $this->get_image_id() ){
+								        //since we previously didn't store image ids along with the url to the image (since taxonomies don't allow normal featured images), sometimes we won't be able to do this, which is why we check there's a valid image id first
+								    	$this->ms_global_switch();
+								    	$replace = wp_get_attachment_image($this->get_image_id(), $image_size);
+								    	$this->ms_global_switch_back();
+								    }else{
+										$replace = "<img src='".em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1])."' alt='".esc_attr($this->name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
+								    }
 								}else{
 									$replace = "<img src='".esc_url($this->get_image_url())."' alt='".esc_attr($this->name)."'/>";
 								}
@@ -159,6 +175,9 @@ class EM_Category extends EM_Object {
 					$link = $this->get_url();
 					$replace = ($result == '#_CATEGORYURL') ? $link : '<a href="'.$link.'">'.esc_html($this->name).'</a>';
 					break;
+				case '#_CATEGORYSLUG':
+					$replace = $this->slug;
+					break;
 				case '#_CATEGORYEVENTSPAST': //depreciated, erroneous documentation, left for compatability
 				case '#_CATEGORYEVENTSNEXT': //depreciated, erroneous documentation, left for compatability
 				case '#_CATEGORYEVENTSALL': //depreciated, erroneous documentation, left for compatability
@@ -173,13 +192,15 @@ class EM_Category extends EM_Object {
 					if ($result == '#_CATEGORYPASTEVENTS'){ $scope = 'past'; }
 					elseif ( $result == '#_CATEGORYNEXTEVENTS' ){ $scope = 'future'; }
 					else{ $scope = 'all'; }					
-					$events = EM_Events::get( array('category'=>$this->term_id, 'scope'=>$scope) );
-					if ( count($events) > 0 ){
-						$replace .= get_option('dbem_category_event_list_item_header_format','<ul>');
-						foreach($events as $EM_Event){
-							$replace .= $EM_Event->output(get_option('dbem_category_event_list_item_format'));
-						}
-						$replace .= get_option('dbem_category_event_list_item_footer_format');
+					$events_count = EM_Events::count( array('category'=>$this->term_id, 'scope'=>$scope) );
+					if ( $events_count > 0 ){
+					    $args = array('category'=>$this->term_id, 'scope'=>$scope, 'pagination'=>1);
+					    $args['format_header'] = get_option('dbem_category_event_list_item_header_format');
+					    $args['format_footer'] = get_option('dbem_category_event_list_item_footer_format');
+					    $args['format'] = get_option('dbem_category_event_list_item_format');
+						$args['limit'] = get_option('dbem_category_event_list_limit');
+						$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : 1;
+					    $replace = EM_Events::output($args);
 					} else {
 						$replace = get_option('dbem_category_no_events_message','</ul>');
 					}
