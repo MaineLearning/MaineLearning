@@ -5,14 +5,14 @@
   Description: Define custom post types, custom taxonomy and custom fields.
   Author: ICanLocalize
   Author URI: http://wp-types.com
-  Version: 1.1.3.1
+  Version: 1.1.3.4
  */
 // Added check because of activation hook and theme embedded code
 if (!defined('WPCF_VERSION')) {
-    define('WPCF_VERSION', '1.1.3.1');
+    define('WPCF_VERSION', '1.1.3.4');
 }
 
-define('WPCF_REPOSITORY','http://api.wp-types.com/');
+define('WPCF_REPOSITORY', 'http://api.wp-types.com/');
 
 define('WPCF_ABSPATH', dirname(__FILE__));
 define('WPCF_RELPATH', plugins_url() . '/' . basename(WPCF_ABSPATH));
@@ -46,13 +46,28 @@ function wpcf_init() {
 
 /**
  * Include embedded code if not used in theme.
+ * 
+ * add_action('after_setup_theme', 'wpcf_init_embedded_code', 999);
+ * 'after_setup_theme' hook is performed just before 'init' hook.
  */
 function wpcf_init_embedded_code() {
-    if (!defined('WPCF_EMBEDDED_ABSPATH')) {
+    if (!defined('WPCF_RUNNING_EMBEDDED')) {
         require_once WPCF_ABSPATH . '/embedded/types.php';
+
+        // TODO Monitor this
+        // Reviewed
+        // Not sure why earlier we did not always forced 'init' hook
+        // Maybe there was some reason but may not be obstacle anymore
+        // Check if it runs OK with embedded code
+        //
+        // PROPOSAL
+        //add_action('init', 'wpcf_embedded_init');
         wpcf_embedded_init();
     } else {// Added because if plugin is active - theme embedded code won't fire
         require_once WPCF_EMBEDDED_ABSPATH . '/types.php';
+        //
+        // PROPOSAL
+        //add_action('init', 'wpcf_embedded_init');
         wpcf_embedded_init();
     }
 }
@@ -208,5 +223,13 @@ function wpcf_reserved_names() {
     );
 
     return apply_filters('wpcf_reserved_names', $reserved);
+}
+
+add_action('icl_pro_translation_saved', 'wpcf_fix_translated_post_relationships');
+
+function wpcf_fix_translated_post_relationships($post_id) {
+    require_once WPCF_EMBEDDED_ABSPATH . '/includes/post-relationship.php';
+    wpcf_post_relationship_set_translated_parent($post_id);
+    wpcf_post_relationship_set_translated_children($post_id);
 }
 

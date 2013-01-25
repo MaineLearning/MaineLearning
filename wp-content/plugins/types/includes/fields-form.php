@@ -423,7 +423,7 @@ function wpcf_admin_fields_form() {
         . '});'
         . ' jQuery(this).css(\'visibility\', \'hidden\');">'
         . __('Edit', 'wpcf') . '</a>' . '<div class="hidden" id="wpcf-form-fields-post_types">',
-        '#after' => '<a href="javascript:void(0);" '.$wpcf_button_style.' '
+        '#after' => '<br /><a href="javascript:void(0);" '.$wpcf_button_style.' '
         . 'class="button-primary wpcf-groups-form-ajax-update-post-types-ok"'
         . ' onclick="window.wpcfPostTypesText = new Array(); window.wpcfFormGroupsSupportPostTypesState = new Array(); '
         . 'jQuery(this).parent().slideUp().find(\'.checkbox\').each(function(index){'
@@ -450,7 +450,7 @@ function wpcf_admin_fields_form() {
         . __('Post Types:', 'wpcf') . ' \'+window.wpcfPostTypesText.join(\', \'));'
         . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
         . '">'
-        . __('Cancel', 'wpcf') . '</a>' . '</div></div><br />',
+        . __('Cancel', 'wpcf') . '</a>' . '</div></div><br /><br />',
     );
 
     $taxonomies = get_taxonomies('', 'objects');
@@ -565,7 +565,7 @@ function wpcf_admin_fields_form() {
         . ' \'+window.wpcfTaxText.join(\', \'));'
         . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
         . '">'
-        . __('Cancel', 'wpcf') . '</a>' . '</div><br />',
+        . __('Cancel', 'wpcf') . '</a>' . '</div><br /><br />',
     );
 
     $form['supports-table-open'] = array(
@@ -574,7 +574,7 @@ function wpcf_admin_fields_form() {
         . __('Where to display this group', 'wpcf')
         . '</th></tr></thead><tbody><tr><td>'
         . __('Each custom fields group can display on different content types or different taxonomy.',
-                'wpcf') . '<br />',
+                'wpcf') . '<br /><br />',
     );
 
     $form['types'] = $form_types;
@@ -685,7 +685,7 @@ function wpcf_admin_fields_form() {
 
     $form['supports-table-close'] = array(
         '#type' => 'markup',
-        '#markup' => '</td></tr></tbody></table><br />',
+        '#markup' => '<br /><br /></td></tr></tbody></table><br />',
     );
 
     // Group fields
@@ -1253,7 +1253,7 @@ function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
             . ' jQuery(this).css(\'visibility\', \'hidden\');">'
             . __('Edit', 'wpcf') . '</a>' . '<div class="hidden" id="wpcf-form-fields-' . $id . '">';
 
-    $form['#after'] = '<a href="javascript:void(0);" '.$wpcf_button_style.' '
+    $form['#after'] = '<br /><a href="javascript:void(0);" '.$wpcf_button_style.' '
             . 'class="button-primary wpcf-groups-form-ajax-update-' . $id . '-ok"'
             . ' onclick="window.wpcf' . ucfirst($id) . 'Text = new Array(); window.wpcfFormGroups' . ucfirst($id) . 'State = new Array(); '
             . 'jQuery(this).parent().slideUp().find(\'.checkbox\').each(function(index){'
@@ -1280,7 +1280,7 @@ function wpcf_admin_fields_form_nested_elements($id, $element, $title, $list,
             . esc_html($title) . ' \'+window.wpcf' . ucfirst($id) . 'Text.join(\', \'));'
             . ' jQuery(this).parent().parent().children(\'a\').css(\'visibility\', \'visible\');'
             . '">'
-            . __('Cancel', 'wpcf') . '</a>' . '</div></div><br />';
+            . __('Cancel', 'wpcf') . '</a>' . '</div></div><br /><br />';
 
     return $form;
 }

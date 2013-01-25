@@ -210,7 +210,9 @@ jQuery(function(){
 }
 
 if (function_exists('wprc_is_logged_to_repo') && !wprc_is_logged_to_repo(WPCF_REPOSITORY)) {
-    _e('Already purchased our Toolset package? Log-in to wp-types.com to remove this information box.', 'wpcf');
-} else if (function_exists('wprc_is_logged_to_repo')) {
-    _e('Already purchased our Toolset package? See how to remove this information box.', 'wpcf');
+    echo '<p>' . sprintf(__('Already purchased our Toolset package? %sLog-in to wp-types.com%s to remove this information box.', 'wpcf'), '<a href="' . admin_url('options-general.php?page=installer/pages/repositories.php') . '">', '</a>') . '</p>';
+} else {
+    if (!function_exists('wprc_is_logged_to_repo')) {
+        echo '<p>' . sprintf(__('Already purchased our Toolset package? Install our Installer plugin and login to wp-types to remove this information box. %sInstructions &raquo;%s', 'wpcf'), '<a href="http://wp-types.com/documentation/installation/#2" target="_blank">', '</a>'). '</p>';
+    }
 }

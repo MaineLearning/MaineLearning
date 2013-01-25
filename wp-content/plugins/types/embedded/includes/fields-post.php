@@ -901,7 +901,16 @@ function wpcf_admin_post_get_post_groups_fields($post = false,
         $context = 'group') {
 
     // Get post_type
-    if (!empty($post)) {
+    /*
+     * 
+     * 
+     * Since WP 3.5
+     * Looks like $post is altered with get_post_type()
+     * We do not want that
+     */
+    if (!empty($post->post_type)) {
+        $post_type = $post->post_type;
+    } else if (!empty($post)) {
         $post_type = get_post_type($post);
     } else {
         if (!isset($_GET['post_type'])) {

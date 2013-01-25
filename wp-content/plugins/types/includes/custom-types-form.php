@@ -121,6 +121,11 @@ function wpcf_admin_custom_types_form() {
         '#type' => 'markup',
         '#markup' => '</tbody></table>',
     );
+    
+    global $sitepress;
+    if ($update && isset($sitepress) && version_compare(ICL_SITEPRESS_VERSION, '2.6.2', '>=')) {
+        $form['table-1-close']['#markup'] .= wpml_custom_post_translation_options($id);
+    }
 
     $form['table-2-open'] = array(
         '#type' => 'markup',

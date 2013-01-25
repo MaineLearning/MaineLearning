@@ -53,7 +53,7 @@ function wpcf_embedded_init() {
 
     // Define necessary constants if plugin is not present
     if (!defined('WPCF_VERSION')) {
-        define('WPCF_VERSION', '1.1.3.1');
+        define('WPCF_VERSION', '1.1.3.4');
         define('WPCF_META_PREFIX', 'wpcf-');
         define('WPCF_EMBEDDED_RELPATH', icl_get_file_relpath(__FILE__));
     } else {
@@ -407,12 +407,17 @@ function types_child_posts($post_type, $args = array()) {
             if (!empty($group['fields'])) {
                 // Process fields
                 foreach ($group['fields'] as $k => $field) {
-                    $child_posts[$child_post_key]->fields[$k] = get_post_meta($child_post->ID,
-                            wpcf_types_get_meta_prefix($field) . $field['slug'],
-                            false /*true*/); // get all field instances
+                    if (isset($field['data']['repetitive'])&&$field['data']['repetitive'])
+                        $child_posts[$child_post_key]->fields[$k] = get_post_meta($child_post->ID,
+                                wpcf_types_get_meta_prefix($field) . $field['slug'],
+                                false); // get all field instances
+                    else
+                        $child_posts[$child_post_key]->fields[$k] = get_post_meta($child_post->ID,
+                                wpcf_types_get_meta_prefix($field) . $field['slug'],
+                                true); // get single field instance
                     // handle checkboxes which are one value serialized
-                    if ($field['type']=='checkboxes' && isset($child_posts[$child_post_key]->fields[$k][0]))
-                        $child_posts[$child_post_key]->fields[$k]=maybe_unserialize($child_posts[$child_post_key]->fields[$k][0]);
+                    if ($field['type']=='checkboxes' && isset($child_posts[$child_post_key]->fields[$k]))
+                        $child_posts[$child_post_key]->fields[$k]=maybe_unserialize($child_posts[$child_post_key]->fields[$k]);
                 }
             }
         }

@@ -2,8 +2,14 @@
 /*
  * Admin functions
  */
+// TODO Monitor this
+// Check if it is called anyway
 add_action('init', 'wpcf_admin_init_hook');
+
 add_action('admin_menu', 'wpcf_admin_menu_hook');
+
+
+
 /* add_filter( 'contextual_help', 'wptuts_contextual_help', 10, 3 );
   function wptuts_contextual_help( $contextual_help, $screen_id, $screen ) {
   // Only add to certain screen(s). The add_help_tab function for screen was introduced in WordPress 3.3.

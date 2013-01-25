@@ -88,11 +88,11 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
     } else {
         $form['cd']['wrap'] = array(
             '#type' => 'markup',
-            '#markup' => '<strong>' . __('Data-dependent display filters',
+            '#markup' => '<br /><strong>' . __('Data-dependent display filters',
                     'wpcf') . '</strong><br />'
             . __("Specify additional filters that control this group's display, based on values of custom fields.",
                     'wpcf')
-            . '<br /><a class="button-secondary" onclick="jQuery(this).css(\'visibility\',\'hidden\').next().slideToggle();" '.$wpcf_button_style30.'  href="javascript:void(0);">'
+            . '<br /><br /><a class="button-secondary" onclick="jQuery(this).css(\'visibility\',\'hidden\').next().slideToggle();" '.$wpcf_button_style30.'  href="javascript:void(0);">'
             . __('Edit', 'wpcf') . '</a><div id="wpcf-cd-group" style="display:none;">',
         );
     }
@@ -105,7 +105,7 @@ function wpcf_cd_admin_form_filter($data, $group = false) {
     $add = $group ? 'true' : 'false';
     $form['cd']['add'] = array(
         '#type' => 'markup',
-        '#markup' => '<br /><a class="wpcf-ajax-link button-secondary" onclick="wpcfCdAddCondition(jQuery(this),' . $add . ');" href="javascript:void(0);">'
+        '#markup' => '<a class="wpcf-ajax-link button-secondary" onclick="wpcfCdAddCondition(jQuery(this),' . $add . ');" href="javascript:void(0);">'
         . __('Add condition', 'wpcf') . '</a><br /><br /><div class="wpcf-cd-entries">',
     );
     if (!empty($data['data']['conditional_display']['conditions'])) {

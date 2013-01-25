@@ -159,13 +159,43 @@ function wpcf_custom_types_register($post_type, $data) {
                     get_stylesheet_directory_uri(), $data['menu_icon']);
         }
     }
+
     if (!empty($data['rewrite']['enabled'])) {
         $data['rewrite']['with_front'] = !empty($data['rewrite']['with_front']);
         $data['rewrite']['feeds'] = !empty($data['rewrite']['feeds']);
         $data['rewrite']['pages'] = !empty($data['rewrite']['pages']);
-        if (!empty($data['rewrite']['custom']) && $data['rewrite']['custom'] != 'custom') {
-            unset($data['rewrite']['slug']);
+
+        // TODO Monitor this and re-test
+        // 
+        // REVISED 1.1.3.2
+        // We force slugs now. Submitted and sanitized slug.
+        //
+        // Set slugs localized (WPML)
+        // 
+        // 
+        // If slug is not submitted use default slug
+        if (empty($data['rewrite']['slug'])) {
+            $data['rewrite']['slug'] = $data['slug'];
         }
+
+        // Also force default slug if rewrite mode is 'normal'
+        if (!empty($data['rewrite']['custom']) && $data['rewrite']['custom'] != 'normal') {
+            $data['rewrite']['slug'] = $data['rewrite']['slug'];
+        }
+
+        // Register with _x()
+        $data['rewrite']['slug'] = _x($data['rewrite']['slug'], 'URL slug',
+                'wpcf');
+        //
+        // CHANGED leave it for reference if we need
+        // to return handling slugs back to WP.
+        // 
+        // We unset slug settings and leave WP to handle it himself.
+        // Let WP decide what slugs should be!
+//        if (!empty($data['rewrite']['custom']) && $data['rewrite']['custom'] != 'normal') {
+//            unset($data['rewrite']['slug']);
+//        }
+        // Just discard non-WP property
         unset($data['rewrite']['custom']);
     } else {
         $data['rewrite'] = false;
@@ -176,7 +206,8 @@ function wpcf_custom_types_register($post_type, $data) {
         $data['permalink_epmask'] = constant($data['permalink_epmask']);
     }
 
-    $args = register_post_type($post_type, apply_filters('wpcf_type', $data, $post_type));
+    $args = register_post_type($post_type,
+            apply_filters('wpcf_type', $data, $post_type));
     do_action('wpcf_type_registered', $args);
 
     // Add the standard tags and categoires if the're set.

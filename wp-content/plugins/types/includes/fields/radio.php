@@ -47,7 +47,7 @@ function wpcf_fields_radio_insert_form($form_data = array(), $parent_name = '') 
         . '<div class="wpcf-form-options-header-title">'
         . '<em>' . __('Display text', 'wpcf') . '</em>'
         . '</div><div class="wpcf-form-options-header-value">'
-        . '<em>' . __('Custom field content', 'wpcf') . '<em></div>'
+        . '<em>' . __('Custom field content', 'wpcf') . '</em></div>'
         . '<div id="' . $id . '-sortable"'
         . ' class="wpcf-fields-radio-sortable wpcf-compare-unique-value-wrapper">',
     );
