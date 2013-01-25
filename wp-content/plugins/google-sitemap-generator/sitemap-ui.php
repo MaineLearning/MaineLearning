@@ -1,7 +1,7 @@
 <?php
 /*
- 
- $Id: sitemap-ui.php 583237 2012-08-08 21:06:12Z arnee $
+
+ $Id: sitemap-ui.php 651444 2013-01-11 19:54:39Z arnee $
 
 */
 
@@ -13,18 +13,18 @@ class GoogleSitemapGeneratorUI {
 	 * @var GoogleSitemapGenerator
 	 */
 	var $sg = null;
-	
+
 	var $mode = 21;
 
 	function GoogleSitemapGeneratorUI(&$sitemapBuilder) {
 		global $wp_version;
 		$this->sg = &$sitemapBuilder;
-		
+
 		if(floatval($wp_version) >= 2.7) {
 			$this->mode = 27;
 		}
 	}
-	
+
 	function HtmlPrintBoxHeader($id, $title, $right = false) {
 		if($this->mode == 27) {
 			?>
@@ -38,13 +38,13 @@ class GoogleSitemapGeneratorUI {
 				<?php if(!$right): ?><div class="dbx-h-andle-wrapper"><?php endif; ?>
 				<h3 class="dbx-handle"><?php echo $title ?></h3>
 				<?php if(!$right): ?></div><?php endif; ?>
-				
+
 				<?php if(!$right): ?><div class="dbx-c-ontent-wrapper"><?php endif; ?>
 					<div class="dbx-content">
 			<?php
 		}
 	}
-	
+
 	function HtmlPrintBoxFooter( $right = false) {
 			if($this->mode == 27) {
 			?>
@@ -59,7 +59,7 @@ class GoogleSitemapGeneratorUI {
 			<?php
 		}
 	}
-	
+
 	/**
 	 * Displays the option page
 	 *
@@ -69,27 +69,27 @@ class GoogleSitemapGeneratorUI {
 	 */
 	function HtmlShowOptionsPage() {
 		global $wp_version;
-		
+
 		$snl = false; //SNL
-		
+
 		$this->sg->Initate();
-			
+
 		$message="";
-		
+
 		if(!empty($_REQUEST["sm_rebuild"])) { //Pressed Button: Rebuild Sitemap
 			check_admin_referer('sitemap');
-			
+
 			//Clear any outstanding build cron jobs
 			if(function_exists('wp_clear_scheduled_hook')) wp_clear_scheduled_hook('sm_build_cron');
-			
+
 			if(isset($_GET["sm_do_debug"]) && $_GET["sm_do_debug"]=="true") {
-				
+
 				//Check again, just for the case that something went wrong before
 				if(!current_user_can("administrator")) {
 					echo '<p>Please log in as admin</p>';
 					return;
 				}
-				
+
 				$oldErr = error_reporting(E_ALL);
 				$oldIni = ini_set("display_errors",1);
 
@@ -116,7 +116,7 @@ class GoogleSitemapGeneratorUI {
 					$os = $wpdb->get_results( "SELECT option_name, option_value FROM $wpdb->options");
 					foreach ( (array) $os as $o ) $opts[$o->option_name] = $o->option_value;
 				}
-				
+
 				$popts = array();
 				foreach($opts as $k=>$v) {
 					//Try to filter out passwords etc...
@@ -138,7 +138,7 @@ class GoogleSitemapGeneratorUI {
 					echo '<pre>';
 					var_dump($GLOBALS['wpdb']->queries);
 					echo '</pre>';
-					
+
 					$total = 0;
 					foreach($GLOBALS['wpdb']->queries as $q) {
 						$total+=$q[1];
@@ -161,7 +161,7 @@ class GoogleSitemapGeneratorUI {
 			} else {
 				$this->sg->BuildSitemap();
 				$redirURL = $this->sg->GetBackLink() . '&sm_fromrb=true';
-				
+
 				//Redirect so the sm_rebuild GET parameter no longer exists.
 				@header("location: " . $redirURL);
 				//If there was already any other output, the header redirect will fail
@@ -171,23 +171,28 @@ class GoogleSitemapGeneratorUI {
 			}
 		} else if (!empty($_POST['sm_update'])) { //Pressed Button: Update Config
 			check_admin_referer('sitemap');
-			
+
 			if(isset($_POST['sm_b_style']) && $_POST['sm_b_style'] == $this->sg->getDefaultStyle()) {
 				$_POST['sm_b_style_default'] = true;
 				$_POST['sm_b_style'] = '';
 			}
-			
+
 			foreach($this->sg->_options as $k=>$v) {
 				//Check vor values and convert them into their types, based on the category they are in
 				if(!isset($_POST[$k])) $_POST[$k]=""; // Empty string will get false on 2bool and 0 on 2float
-				
+
 				//Options of the category "Basic Settings" are boolean, except the filename and the autoprio provider
 				if(substr($k,0,5)=="sm_b_") {
 					if($k=="sm_b_filename" || $k=="sm_b_fileurl_manual" || $k=="sm_b_filename_manual" || $k=="sm_b_prio_provider" || $k=="sm_b_manual_key" || $k == "sm_b_style" || $k == "sm_b_memory") {
+
+						if($k=="sm_b_filename" || $k=="sm_b_filename_manual") {
+							if(substr($_POST[$k],-4)!=".xml") $_POST[$k].=".xml";
+						}
+
 						if($k=="sm_b_filename_manual" && strpos($_POST[$k],"\\")!==false){
 							$_POST[$k]=stripslashes($_POST[$k]);
 						}
-						
+
 						$this->sg->_options[$k]=(string) $_POST[$k];
 					} else if($k=="sm_b_location_mode") {
 						$tmp=(string) $_POST[$k];
@@ -222,7 +227,7 @@ class GoogleSitemapGeneratorUI {
 					if($k=='sm_in_tax') {
 
 						$enabledTaxonomies = array();
-						
+
 						foreach(array_keys((array) $_POST[$k]) AS $taxName) {
 							if(empty($taxName) || !is_taxonomy($taxName)) continue;
 
@@ -230,11 +235,11 @@ class GoogleSitemapGeneratorUI {
 						}
 
 						$this->sg->_options[$k] = $enabledTaxonomies;
-												
+
 					} else if($k=='sm_in_customtypes') {
 
 						$enabledPostTypes = array();
-						
+
 						foreach(array_keys((array) $_POST[$k]) AS $postTypeName) {
 							if(empty($postTypeName) || !post_type_exists($postTypeName)) continue;
 
@@ -242,44 +247,46 @@ class GoogleSitemapGeneratorUI {
 						}
 
 						$this->sg->_options[$k] = $enabledPostTypes;
-												
+
 					} else $this->sg->_options[$k]=(bool) $_POST[$k];
 				//Options of the category "Change frequencies" are string
 				} else if(substr($k,0,6)=="sm_cf_") {
-					$this->sg->_options[$k]=(string) $_POST[$k];
+					if(array_key_exists($_POST[$k],$this->sg->_freqNames)) {
+						$this->sg->_options[$k]=(string) $_POST[$k];
+					}
 				//Options of the category "Priorities" are float
 				} else if(substr($k,0,6)=="sm_pr_") {
 					$this->sg->_options[$k]=(float) $_POST[$k];
 				}
 			}
-			
+
 			//No Mysql unbuffered query for WP < 2.2
 			if(floatval($wp_version) < 2.2) {
 				$this->sg->SetOption('b_safemode',true);
 			}
-			
+
 			//No Wp-Cron for WP < 2.1
 			if(floatval($wp_version) < 2.1) {
 				$this->sg->SetOption('b_auto_delay',false);
 			}
-			
+
 			//Apply page changes from POST
 			$this->sg->_pages=$this->sg->HtmlApplyPages();
-			
+
 			if($this->sg->SaveOptions()) $message.=__('Configuration updated', 'sitemap') . "<br />";
 			else $message.=__('Error while saving options', 'sitemap') . "<br />";
-			
+
 			if($this->sg->SavePages()) $message.=__("Pages saved",'sitemap') . "<br />";
 			else $message.=__('Error while saving pages', 'sitemap'). "<br />";
-			
+
 		} else if(!empty($_POST["sm_reset_config"])) { //Pressed Button: Reset Config
 			check_admin_referer('sitemap');
 			$this->sg->InitOptions();
 			$this->sg->SaveOptions();
-			
+
 			$message.=__('The default configuration was restored.','sitemap');
 		}
-		
+
 		//Print out the message to the user, if any
 		if($message!="") {
 			?>
@@ -287,10 +294,10 @@ class GoogleSitemapGeneratorUI {
 			echo $message;
 			?></p></strong></div><?php
 		}
-		
-		
+
+
 		if(!$snl) {
-		
+
 			if(isset($_GET['sm_hidedonate'])) {
 				$this->sg->SetOption('i_hide_donated',true);
 				$this->sg->SaveOptions();
@@ -311,8 +318,8 @@ class GoogleSitemapGeneratorUI {
 				$this->sg->SetOption('i_hide_works',true);
 				$this->sg->SaveOptions();
 			}
-			
-			
+
+
 			if(isset($_GET['sm_donated']) || ($this->sg->GetOption('i_donated')===true && $this->sg->GetOption('i_hide_donated')!==true)) {
 				?>
 				<div class="updated">
@@ -335,7 +342,7 @@ class GoogleSitemapGeneratorUI {
 				<?php
 			}
 		}
-		
+
 		if(function_exists("wp_next_scheduled")) {
 			$next = wp_next_scheduled('sm_build_cron');
 			if($next) {
@@ -353,29 +360,29 @@ class GoogleSitemapGeneratorUI {
 				<?php
 			}
 		}
-		
-		
+
+
 		?>
-				
+
 		<style type="text/css">
-		
+
 		li.sm_hint {
 			color:green;
 		}
-		
+
 		li.sm_optimize {
 			color:orange;
 		}
-		
+
 		li.sm_error {
 			color:red;
 		}
-		
+
 		input.sm_warning:hover {
 			background: #ce0000;
 			color: #fff;
 		}
-		
+
 		a.sm_button {
 			padding:4px;
 			display:block;
@@ -385,7 +392,7 @@ class GoogleSitemapGeneratorUI {
 			text-decoration:none;
 			border:none;
 		}
-		
+
 		a.sm_button:hover {
 			border-bottom-width:1px;
 		}
@@ -393,52 +400,52 @@ class GoogleSitemapGeneratorUI {
 		a.sm_donatePayPal {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-paypal.gif);
 		}
-		
+
 		a.sm_donateAmazon {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-amazon.gif);
 		}
-		
+
 		a.sm_pluginHome {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-arne.gif);
 		}
-		
+
 		a.sm_pluginList {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-email.gif);
 		}
-		
+
 		a.sm_pluginSupport {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-wordpress.gif);
 		}
-		
+
 		a.sm_pluginBugs {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-trac.gif);
 		}
-		
+
 		a.sm_resGoogle {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-google.gif);
 		}
-		
+
 		a.sm_resBing {
 			background-image:url(<?php echo $this->sg->GetPluginUrl(); ?>img/icon-bing.gif);
 		}
-		
+
 		div.sm-update-nag p {
 			margin:5px;
 		}
-		
+
 		</style>
-		
+
 		<?php
 			if($this->mode == 27): ?>
 			<style type="text/css">
-		
+
 				.sm-padded .inside {
 					margin:12px!important;
 				}
 				.sm-padded .inside ul {
 					margin:6px 0 12px 0;
 				}
-				
+
 				.sm-padded .inside input {
 					padding:1px;
 					margin:0;
@@ -477,7 +484,7 @@ class GoogleSitemapGeneratorUI {
 
 
 			</style>
-				
+
 			<?php elseif(version_compare($wp_version,"2.5",">=")): ?>
 				<style type="text/css">
 					div#moremeta {
@@ -496,7 +503,7 @@ class GoogleSitemapGeneratorUI {
 					fieldset.dbx-box {
 						margin-bottom:5px;
 					}
-					
+
 					div.sm-update-nag {
 						margin-top:10px!important;
 					}
@@ -508,7 +515,7 @@ class GoogleSitemapGeneratorUI {
 						}
 					</style>
 				<![endif]-->
-				
+
 			<?php else: ?>
 				<style type="text/css">
 					div.updated-message {
@@ -517,21 +524,21 @@ class GoogleSitemapGeneratorUI {
 				</style>
 			<?php endif;
 		?>
-		
+
 		<div class="wrap" id="sm_div">
 			<form method="post" action="<?php echo $this->sg->GetBackLink() ?>">
 				<h2><?php _e('XML Sitemap Generator for WordPress', 'sitemap'); echo " " . $this->sg->GetVersion() ?> </h2>
 				<?php
 				if(function_exists("wp_update_plugins") && (!defined('SM_NO_UPDATE') || SM_NO_UPDATE == false)) {
-					
+
 					wp_update_plugins();
-					
+
 					$file = GoogleSitemapGeneratorLoader::GetBaseName();
-					
+
 					$plugin_data = get_plugin_data(GoogleSitemapGeneratorLoader::GetPluginFile());
-					
+
 					$current = function_exists('get_transient')?get_transient('update_plugins'):get_option('update_plugins');
-					
+
 					if(isset($current->response[$file])) {
 						$r = $current->response[$file];
 						?><div id="update-nag" class="sm-update-nag"><?php
@@ -541,16 +548,16 @@ class GoogleSitemapGeneratorUI {
 							printf( __('There is a new version of %1$s available. <a href="%2$s">Download version %3$s here</a> <em>automatic upgrade unavailable for this plugin</em>.','default'), $plugin_data['Name'], $r->url, $r->new_version);
 						else
 							printf( __('There is a new version of %1$s available. <a href="%2$s">Download version %3$s here</a> or <a href="%4$s">upgrade automatically</a>.','default'), $plugin_data['Name'], $r->url, $r->new_version, wp_nonce_url("update.php?action=upgrade-plugin&amp;plugin=$file", 'upgrade-plugin_' . $file) );
-		
+
 						?></div><?php
 					}
 				}
-				
-				
+
+
 				if(get_option('blog_public')!=1) {
 					?><div class="error"><p><?php echo str_replace("%s","options-privacy.php",__('Your blog is currently blocking search engines! Visit the <a href="%s">privacy settings</a> to change this.','sitemap')); ?></p></div><?php
 				}
-				
+
 				?>
 
 				<?php if(version_compare($wp_version,"2.5","<")): ?>
@@ -559,7 +566,7 @@ class GoogleSitemapGeneratorUI {
 				//<![CDATA[
 				addLoadEvent( function() {
 					var manager = new dbxManager('sm_sitemap_meta_33');
-					
+
 					//create new docking boxes group
 					var meta = new dbxGroup(
 						'grabit', 		// container ID [/-_a-zA-Z0-9/]
@@ -600,7 +607,7 @@ class GoogleSitemapGeneratorUI {
 				<?php endif; ?>
 
 				<?php if($this->mode == 27): ?>
-				
+
 					<?php if(!$snl): ?>
 						<div id="poststuff" class="metabox-holder has-right-sidebar">
 							<div class="inner-sidebar">
@@ -617,22 +624,22 @@ class GoogleSitemapGeneratorUI {
 						<div>
 					<?php endif; ?>
 				<?php endif; ?>
-				
+
 					<?php if(!$snl): ?>
-				
+
 							<?php $this->HtmlPrintBoxHeader('sm_pnres',__('About this Plugin:','sitemap'),true); ?>
 								<a class="sm_button sm_pluginHome"    href="<?php echo $this->sg->GetRedirectLink('sitemap-home'); ?>"><?php _e('Plugin Homepage','sitemap'); ?></a>
 								<a class="sm_button sm_pluginHome"    href="<?php echo $this->sg->GetRedirectLink('sitemap-feedback'); ?>"><?php _e('Suggest a Feature','sitemap'); ?></a>
 								<a class="sm_button sm_pluginList"    href="<?php echo $this->sg->GetRedirectLink('sitemap-list'); ?>"><?php _e('Notify List','sitemap'); ?></a>
 								<a class="sm_button sm_pluginSupport" href="<?php echo $this->sg->GetRedirectLink('sitemap-support'); ?>"><?php _e('Support Forum','sitemap'); ?></a>
 								<a class="sm_button sm_pluginBugs"    href="<?php echo $this->sg->GetRedirectLink('sitemap-bugs'); ?>"><?php _e('Report a Bug','sitemap'); ?></a>
-								
+
 								<a class="sm_button sm_donatePayPal"  href="<?php echo $this->sg->GetRedirectLink('sitemap-paypal'); ?>"><?php _e('Donate with PayPal','sitemap'); ?></a>
 								<a class="sm_button sm_donateAmazon"  href="<?php echo $this->sg->GetRedirectLink('sitemap-amazon'); ?>"><?php _e('My Amazon Wish List','sitemap'); ?></a>
 								<?php if(__('translator_name','sitemap')!='translator_name') {?><a class="sm_button sm_pluginSupport" href="<?php _e('translator_url','sitemap'); ?>"><?php _e('translator_name','sitemap'); ?></a><?php } ?>
 							<?php $this->HtmlPrintBoxFooter(true); ?>
-						
-						
+
+
 							<?php $this->HtmlPrintBoxHeader('sm_smres',__('Sitemap Resources:','sitemap'),true); ?>
 								<a class="sm_button sm_resGoogle"    href="<?php echo $this->sg->GetRedirectLink('sitemap-gwt'); ?>"><?php _e('Webmaster Tools','sitemap'); ?></a>
 								<a class="sm_button sm_resGoogle"    href="<?php echo $this->sg->GetRedirectLink('sitemap-gwb'); ?>"><?php _e('Webmaster Blog','sitemap'); ?></a>
@@ -644,7 +651,7 @@ class GoogleSitemapGeneratorUI {
 								<a class="sm_button sm_resGoogle"    href="<?php echo $this->sg->GetRedirectLink('sitemap-ofaq'); ?>"><?php _e('Official Sitemaps FAQ','sitemap'); ?></a>
 								<a class="sm_button sm_pluginHome"   href="<?php echo $this->sg->GetRedirectLink('sitemap-afaq'); ?>"><?php _e('My Sitemaps FAQ','sitemap'); ?></a>
 							<?php $this->HtmlPrintBoxFooter(true); ?>
-							
+
 							<?php $this->HtmlPrintBoxHeader('dm_donations',__('Recent Donations:','sitemap'),true); ?>
 								<?php if($this->sg->GetOption('i_hide_donors')!==true) { ?>
 									<iframe border="0" frameborder="0" scrolling="no" allowtransparency="yes" style="width:100%; height:80px;" src="<?php echo $this->sg->GetRedirectLink('sitemap-donorlist'); ?>">
@@ -656,22 +663,22 @@ class GoogleSitemapGeneratorUI {
 								<span><small><?php _e('Thanks for your support!','sitemap'); ?></small></span>
 								<div style="clear:left; height:1px;"></div>
 							<?php $this->HtmlPrintBoxFooter(true); ?>
-							
-						
+
+
 						</div>
 					</div>
 					<?php endif; ?>
-					
+
 					<?php if($this->mode == 27): ?>
 						<div class="has-sidebar sm-padded" >
-					
+
 							<div id="post-body-content" class="<?php if(!$snl): ?>has-sidebar-content<?php endif; ?>">
-						
+
 								<div class="meta-box-sortabless">
 					<?php else: ?>
 						<div id="advancedstuff" class="dbx-group" >
 					<?php endif; ?>
-					
+
 					<!-- Rebuild Area -->
 					<?php
 						$status = &GoogleSitemapGeneratorStatus::Load();
@@ -680,11 +687,11 @@ class GoogleSitemapGeneratorUI {
 							$st=$status->GetStartTime();
 							$head=str_replace("%date%",date(get_option('date_format'),$st) . " " . date(get_option('time_format'),$st),__("Result of the last build process, started on %date%.",'sitemap'));
 						}
-			
+
 						$this->HtmlPrintBoxHeader('sm_rebuild',$head); ?>
 						<ul>
 							<?php
-	
+
 
 							if($status == null) {
 								echo "<li>" . str_replace("%s",wp_nonce_url($this->sg->GetBackLink() . "&sm_rebuild=true&noheader=true",'sitemap'),__('The sitemap wasn\'t built yet. <a href="%s">Click here</a> to build it the first time.','sitemap')) . "</li>";
@@ -699,7 +706,7 @@ class GoogleSitemapGeneratorUI {
 											echo "<li class=\"sm_error\">" . str_replace("%url%",$this->sg->GetRedirectLink('sitemap-help-files'),__("There was a problem writing your sitemap file. Make sure the file exists and is writable. <a href=\"%url%\">Learn more</a>",'sitemap')) . "</li>";
 										}
 									}
-									
+
 									if($status->_usedZip) {
 										if($status->_zipSuccess) {
 											$ft = is_readable($status->_zipPath)?filemtime($status->_zipPath):false;
@@ -709,7 +716,7 @@ class GoogleSitemapGeneratorUI {
 											echo "<li class=\"sm_error\">" . str_replace("%url%",$this->sg->GetRedirectLink('sitemap-help-files'),__("There was a problem writing your zipped sitemap file. Make sure the file exists and is writable. <a href=\"%url%\">Learn more</a>",'sitemap')) . "</li>";
 										}
 									}
-									
+
 									if($status->_usedGoogle) {
 										if($status->_gooogleSuccess) {
 											echo "<li>" .__("Google was <b>successfully notified</b> about changes.",'sitemap'). "</li>";
@@ -733,20 +740,20 @@ class GoogleSitemapGeneratorUI {
 											echo "<li class=\"sm_error\">" . str_replace("%s",wp_nonce_url($this->sg->GetBackLink() . "&sm_ping_service=msn&noheader=true",'sitemap'),__('There was a problem while notifying Bing. <a href="%s">View result</a>','sitemap')) . "</li>";
 										}
 									}
-									
+
 									$et = $status->GetTime();
 									$mem = $status->GetMemoryUsage();
-									
+
 									if($mem > 0) {
 										echo "<li>" .str_replace(array("%time%","%memory%"),array($et,$mem),__("The building process took about <b>%time% seconds</b> to complete and used %memory% MB of memory.",'sitemap')). "</li>";
 									} else {
 										echo "<li>" .str_replace("%time%",$et,__("The building process took about <b>%time% seconds</b> to complete.",'sitemap')). "</li>";
 									}
-									
+
 									if(!$status->_hasChanged) {
 										echo "<li>" . __("The content of your sitemap <strong>didn't change</strong> since the last time so the files were not written and no search engine was pinged.",'sitemap'). "</li>";
 									}
-													
+
 								} else {
 									if($this->sg->GetOption("b_auto_delay")) {
 										$st = ($status->GetStartTime() - time()) * -1;
@@ -759,11 +766,11 @@ class GoogleSitemapGeneratorUI {
 									if($status->_memoryUsage > 0) {
 										echo '<li class="sm_error">'. str_replace(array("%memused%","%memlimit%"),array($status->GetMemoryUsage(),ini_get('memory_limit')),__("The last known memory usage of the script was %memused%MB, the limit of your server is %memlimit%.",'sitemap')) . '</li>';
 									}
-									
+
 									if($status->_lastTime > 0) {
 										echo '<li class="sm_error">'. str_replace(array("%timeused%","%timelimit%"),array($status->GetLastTime(),ini_get('max_execution_time')),__("The last known execution time of the script was %timeused% seconds, the limit of your server is %timelimit% seconds.",'sitemap')) . '</li>';
 									}
-									
+
 									if($status->GetLastPost() > 0) {
 										echo '<li class="sm_optimize">'. str_replace("%lastpost%",$status->GetLastPost(),__("The script stopped around post number %lastpost% (+/- 100)",'sitemap')) . '</li>';
 									}
@@ -779,10 +786,10 @@ class GoogleSitemapGeneratorUI {
 
 						</ul>
 					<?php $this->HtmlPrintBoxFooter(); ?>
-						
+
 					<!-- Basic Options -->
 					<?php $this->HtmlPrintBoxHeader('sm_basic_options',__('Basic Options', 'sitemap')); ?>
-					
+
 						<b><?php _e('Sitemap files:','sitemap'); ?></b> <a href="<?php echo $this->sg->GetRedirectLink('sitemap-help-options-files'); ?>"><?php _e('Learn more','sitemap'); ?></a>
 						<ul>
 							<li>
@@ -873,11 +880,11 @@ class GoogleSitemapGeneratorUI {
 								</label>
 							</li>
 						</ul>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					<?php $this->HtmlPrintBoxHeader('sm_pages',__('Additional pages', 'sitemap')); ?>
-		
+
 						<?php
 						_e('Here you can specify files or URLs which should be included in the sitemap, but do not belong to your Blog/WordPress.<br />For example, if your domain is www.foo.com and your blog is located on www.foo.com/blog you might want to include your homepage at www.foo.com','sitemap');
 						echo "<ul><li>";
@@ -892,10 +899,10 @@ class GoogleSitemapGeneratorUI {
 						echo "</li><li>";
 						echo "<strong>" . __('Last Changed','sitemap'). "</strong>: ";
 						_e("Enter the date of the last change as YYYY-MM-DD (2005-12-31 for example) (optional).",'sitemap');
-						
+
 						echo "</li></ul>";
-						
-						
+
+
 						?>
 						<script type="text/javascript">
 							//<![CDATA[
@@ -906,9 +913,9 @@ class GoogleSitemapGeneratorUI {
 
 							var changeFreqVals = new Array( <?php echo $freqVals; ?> );
 							var changeFreqNames= new Array( <?php echo $freqNames; ?> );
-							
+
 							var priorities= new Array(0 <?php for($i=0.1; $i<1; $i+=0.1) { echo "," .  number_format($i,1,".",""); } ?>);
-							
+
 							var pages = [ <?php
 								if(count($this->sg->_pages)>0) {
 									for($i=0; $i<count($this->sg->_pages); $i++) {
@@ -939,11 +946,11 @@ class GoogleSitemapGeneratorUI {
 						</table>
 						<a href="javascript:void(0);" onclick="sm_addPage();"><?php _e("Add new page",'sitemap'); ?></a>
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
-					
+
+
 					<!-- AutoPrio Options -->
 					<?php $this->HtmlPrintBoxHeader('sm_postprio',__('Post Priority', 'sitemap')); ?>
-	
+
 						<p><?php _e('Please select how the priority of each post should be calculated:', 'sitemap') ?></p>
 						<ul>
 							<li><p><input type="radio" name="sm_b_prio_provider" id="sm_b_prio_provider__0" value="" <?php echo $this->sg->HtmlGetChecked($this->sg->GetOption("b_prio_provider"),"") ?> /> <label for="sm_b_prio_provider__0"><?php _e('Do not use automatic priority calculation', 'sitemap') ?></label><br /><?php _e('All posts will have the same priority which is defined in &quot;Priorities&quot;', 'sitemap') ?></p></li>
@@ -954,11 +961,11 @@ class GoogleSitemapGeneratorUI {
 							?>
 						</ul>
 					<?php $this->HtmlPrintBoxFooter(); ?>
-				
-						
+
+
 					<!-- Location Options -->
 					<?php $this->HtmlPrintBoxHeader('sm_location',__('Location of your sitemap file', 'sitemap')); ?>
-		
+
 						<div>
 							<b><label for="sm_location_useauto"><input type="radio" id="sm_location_useauto" name="sm_b_location_mode" value="auto" <?php echo ($this->sg->GetOption("b_location_mode")=="auto"?"checked=\"checked\"":"") ?> /> <?php _e('Automatic detection','sitemap') ?></label></b>
 							<ul>
@@ -994,9 +1001,9 @@ class GoogleSitemapGeneratorUI {
 								</li>
 							</ul>
 						</div>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					<!-- Includes -->
 					<?php $this->HtmlPrintBoxHeader('sm_includes',__('Sitemap Content', 'sitemap')); ?>
 						<b><?php _e('WordPress standard content', 'sitemap') ?>:</b>
@@ -1052,20 +1059,20 @@ class GoogleSitemapGeneratorUI {
 							</li>
 							<?php endif; ?>
 						</ul>
-							
-						<?php 
-						
+
+						<?php
+
 						if($this->sg->IsTaxonomySupported()) {
 							$taxonomies = $this->sg->GetCustomTaxonomies();
-							
+
 							$enabledTaxonomies = $this->sg->GetOption('in_tax');
-							
+
 							if(count($taxonomies)>0) {
-								?><b><?php _e('Custom taxonomies', 'sitemap') ?>:</b><ul><?php 
-								
-							
+								?><b><?php _e('Custom taxonomies', 'sitemap') ?>:</b><ul><?php
+
+
 								foreach ($taxonomies as $taxName) {
-										
+
 									$taxonomy = get_taxonomy($taxName);
 									$selected = in_array($taxonomy->name, $enabledTaxonomies);
 									?>
@@ -1077,24 +1084,24 @@ class GoogleSitemapGeneratorUI {
 									</li>
 									<?php
 								}
-								
-								?></ul><?php 
-								
+
+								?></ul><?php
+
 							}
 						}
-						
-		
+
+
 						if($this->sg->IsCustomPostTypesSupported()) {
 							$custom_post_types = $this->sg->GetCustomPostTypes();
-						
+
 							$enabledPostTypes = $this->sg->GetOption('in_customtypes');
-						
+
 							if(count($custom_post_types)>0) {
-								?><b><?php _e('Custom post types', 'sitemap') ?>:</b><ul><?php 
-							
+								?><b><?php _e('Custom post types', 'sitemap') ?>:</b><ul><?php
+
 								foreach ($custom_post_types as $post_type) {
 									$post_type_object = get_post_type_object($post_type);
-									
+
 									if (is_array($enabledPostTypes)) $selected = in_array($post_type_object->name, $enabledPostTypes);
 
 									?>
@@ -1106,13 +1113,13 @@ class GoogleSitemapGeneratorUI {
 									</li>
 									<?php
 								}
-								
-								?></ul><?php 
+
+								?></ul><?php
 							}
 						}
-						
+
 						?>
-						
+
 						<b><?php _e('Further options', 'sitemap') ?>:</b>
 						<ul>
 							<li>
@@ -1123,12 +1130,12 @@ class GoogleSitemapGeneratorUI {
 								<small><?php _e('This is highly recommended and helps the search engines to know when your content has changed. This option affects <i>all</i> sitemap entries.', 'sitemap') ?></small>
 							</li>
 						</ul>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					<!-- Excluded Items -->
 					<?php $this->HtmlPrintBoxHeader('sm_excludes',__('Excluded items', 'sitemap')); ?>
-					
+
 						<b><?php _e('Excluded categories', 'sitemap') ?>:</b>
 						<?php if(version_compare($wp_version,"2.5.1",">=")): ?>
 							<cite style="display:block; margin-left:40px;"><?php _e("Note","sitemap") ?>: <?php _e("Using this feature will increase build time and memory usage!","sitemap"); ?></cite>
@@ -1140,16 +1147,16 @@ class GoogleSitemapGeneratorUI {
 						<?php else: ?>
 							<ul><li><?php  echo sprintf(__("This feature requires at least WordPress 2.5.1, you are using %s","sitemap"),$wp_version); ?></li></ul>
 						<?php endif; ?>
-						
+
 						<b><?php _e("Exclude posts","sitemap"); ?>:</b>
 						<div style="margin:5px 0 13px 40px;">
 							<label for="sm_b_exclude"><?php _e('Exclude the following posts or pages:', 'sitemap') ?> <small><?php _e('List of IDs, separated by comma', 'sitemap') ?></small><br />
 							<input name="sm_b_exclude" id="sm_b_exclude" type="text" style="width:400px;" value="<?php echo implode(",",$this->sg->GetOption("b_exclude")); ?>" /></label><br />
 							<cite><?php _e("Note","sitemap") ?>: <?php _e("Child posts won't be excluded automatically!","sitemap"); ?></cite>
 						</div>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					<!-- Change frequencies -->
 					<?php $this->HtmlPrintBoxHeader('sm_change_frequencies',__('Change frequencies', 'sitemap')); ?>
 
@@ -1209,9 +1216,9 @@ class GoogleSitemapGeneratorUI {
 								</label>
 							</li>
 						</ul>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					<!-- Priorities -->
 					<?php $this->HtmlPrintBoxHeader('sm_priorities',__('Priorities', 'sitemap')); ?>
 						<ul>
@@ -1266,9 +1273,9 @@ class GoogleSitemapGeneratorUI {
 								</label>
 							</li>
 						</ul>
-						
+
 					<?php $this->HtmlPrintBoxFooter(); ?>
-					
+
 					</div>
 					<div>
 						<p class="submit">
@@ -1277,7 +1284,7 @@ class GoogleSitemapGeneratorUI {
 							<input type="submit" onclick='return confirm("Do you really want to reset your configuration?");' class="sm_warning" name="sm_reset_config" value="<?php _e('Reset options', 'sitemap'); ?>" />
 						</p>
 					</div>
-				
+
 				<?php if($this->mode == 27): ?>
 				</div>
 				</div>

@@ -3,18 +3,14 @@ Contributors: arnee
 Donate link: http://www.arnebrachhold.de/redir/sitemap-paypal
 Tags: seo, google, sitemaps, google sitemaps, yahoo, msn, ask, live, xml sitemap, xml
 Requires at least: 2.1
-Tested up to: 3.4
-Stable tag: 3.2.7
+Tested up to: 3.5
+Stable tag: 3.2.8
 
 This plugin will generate a special XML sitemap which will help search engines to better index your blog.
 
 == Description ==
 
 This plugin will generate a special XML sitemap which will help search engines like Google, Bing, Yahoo and Ask.com to better index your blog. With such a sitemap, it's much easier for the crawlers to see the complete structure of your site and retrieve it more efficiently. The plugin supports all kinds of WordPress generated pages as well as custom URLs. Additionally it notifies all major search engines every time you create a post about the new content.
-
-
-> #### Try out the brand new Beta version!
-> Download the new beta version and try the new features like dynamic sitemap generation, full support for network activation, reduced memory usage and much more! <a href="http://www.arnebrachhold.de/redir/sitemap-dl-beta/">Download the beta version here!</a>
 
 Related Links:
 
