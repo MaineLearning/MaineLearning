@@ -3,7 +3,7 @@
 Plugin Name: WP Accessibility
 Plugin URI: http://www.joedolson.com/articles/wp-accessibility/
 Description: Provides options to improve accessibility in your WordPress site, including removing title attributes.
-Version: 1.1.1
+Version: 1.1.2
 Author: Joe Dolson
 Author URI: http://www.joedolson.com/
 
@@ -38,7 +38,7 @@ function add_wpa_admin_menu() {
 
 // ACTIVATION
 function wpa_install() {
-	$wpa_version = '1.1.1';
+	$wpa_version = '1.1.2';
 	if ( get_option('wpa_installed') != 'true' ) {
 		add_option('rta_from_nav_menu', 'on');
 		add_option('rta_from_page_lists', 'on');
@@ -173,7 +173,7 @@ function wpa_jquery_asl() {
 	$html .= ( $sitemap != '' )?"$sep <a href=\"$sitemap\">".__('Site map','wp-accessibility')."</a>":'';
 		if ( $html != '' && $visibility == 'wpa-visible' ) { $sep = "<span> &bull; </span>"; } else { $sep = ''; }	
 	$html .= ( $extra != '' && $extra_text != '' )?"$sep <a href=\"$extra\">$extra_text</a>":'';
-	$output = ($html != '')?"<div class=\"$visibility\" id=\"skiplinks\">$html</div>":'';
+	$output = ($html != '')?"<div class=\"$visibility\" id=\"skiplinks\" role=\"navigation\">$html</div>":'';
 		$skiplinks_js = ( $output )?"$('body').prepend('$output');":'';
 	// attach language to html element
 	$lang = ( get_option( 'wpa_lang' ) == 'on' )?get_bloginfo('language'):false;
@@ -619,6 +619,10 @@ if ( $l_contrast ) {
 			<div class="postbox">
 				<h3><?php _e('Support this Plugin','wp-accessibility'); ?></h3>
 				<div class="inside">
+					<p>
+					<a href="https://twitter.com/intent/tweet?screen_name=joedolson&text=WP%20Accessibility" class="twitter-mention-button" data-size="large" data-related="joedolson">Tweet to @joedolson</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</p>
 					<p><?php _e("If you've found WP Accessibility useful, then please consider <a href='http://wordpress.org/extend/plugins/wp-accessibility/'>rating it five stars</a>, <a href='http://www.joedolson.com/donate.php'>making a donation</a>, or <a href='http://translate.joedolson.com/projects/wp-accessibility'>helping with translation</a>.",'wp-accessibility'); ?></p>
 							<div>
 					<p><?php _e('<a href="http://www.joedolson.com/donate.php">Make a donation today!</a> Every donation counts - donate $2, $10, or $100 and help me keep this plug-in running!','wp-to-twitter'); ?></p>
@@ -793,7 +797,7 @@ get_currentuserinfo();
 	// send fields for all plugins
 	$wp_version = get_bloginfo('version');
 	$home_url = home_url();
-	$wp_url = get_bloginfo('wpurl');
+	$wp_url = site_url();
 	$language = get_bloginfo('language');
 	$charset = get_bloginfo('charset');
 	// server
