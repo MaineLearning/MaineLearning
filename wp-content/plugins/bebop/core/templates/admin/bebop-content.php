@@ -38,7 +38,7 @@
 	
 	$contents = bebop_tables::admin_fetch_content_data( $type, $page_vars['page_number'], $page_vars['per_page'] );
 	if ( count( $contents ) > 0 ) {
-		echo '<h4>' . ucfirst( $type ) . ' ' . __( 'Content', 'bebop' ) . '</h4>';
+		echo '<h4>' . ucfirst( __( $type, 'bebop' ) ) . ' ' . __( 'Content', 'bebop' ) . '</h4>';
 		echo $message;
 		
 		echo $bebop_pagination;

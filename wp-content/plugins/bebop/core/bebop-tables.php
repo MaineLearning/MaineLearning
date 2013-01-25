@@ -8,7 +8,7 @@ class bebop_tables {
 		global $wpdb;
 		
 		if ( $wpdb->get_results( 'TRUNCATE TABLE ' . bp_core_get_table_prefix() . $table_name ) ) {
-			bebop_tables::log_error( __( 'Table Truncate error', 'bebop' ), sprintf( __( 'Could not empty the %1$s table.', 'bebop'), $table_name ) );
+			bebop_tables::log_error( __( 'Table Truncate error', 'bebop' ), sprintf( __( 'Could not empty the %1$s table.', 'bebop' ), $table_name ) );
 			return false;
 		}
 		else {
@@ -19,14 +19,15 @@ class bebop_tables {
 	function count_users_using_extension( $extension, $status ) {
 		global $wpdb;
 		
-		$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE meta_name = 'bebop_" . $wpdb->escape( $extension ) . "_active_for_user' AND meta_value='" . $wpdb->escape( $status ) . "'" ) );
+		$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_user_meta WHERE meta_name = %s AND meta_value = %s", 
+		'bebop_' . $wpdb->escape( $extension ) . '_active_for_user', $wpdb->escape( $status ) ) );
 		return $count;
 	}
 	
 	function count_content_by_extension( $extension, $status ) {
 		global $wpdb;
-
-		$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE type = '" . $wpdb->escape( $extension ) . "' AND status = '" . $wpdb->escape( $status ) . "'" ) );
+		
+		$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE type = %s AND status = %s", $wpdb->escape( $extension ), $wpdb->escape( $status ) ) );
 		return $count;
 	}
 	
@@ -101,14 +102,13 @@ class bebop_tables {
 			else {
 				$query_from = 0;
 			}
-			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
+			return $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
 			"' AND status = '" . $wpdb->escape( $status ) . "' AND type IN ( ". stripslashes( $extensions ) . ') ORDER BY date_imported DESC LIMIT ' . $query_from . ',' . $per_page );
 		}
 		else {
-			$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
+			return $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . 
 			"' AND status = '" . $wpdb->escape( $status ) . "' AND type IN ( ". stripslashes( $extensions ) . ') ORDER BY date_imported DESC' );
 		}
-		return $result;
 	}
 	
 	function admin_count_content_rows( $status ) {

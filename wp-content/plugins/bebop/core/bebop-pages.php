@@ -4,9 +4,7 @@
 * User settings
 */
 if ( isset( $_get['action'] ) ) {
-	if ( $_GET['action'] == 'logout' ) {
-	}
-	else {
+	if ( $_GET['action'] != 'logout' ) {
 		add_action( 'bp_setup_nav', 'bebop_setup_user_nav', 20 );
 	}
 }
@@ -27,14 +25,14 @@ function bebop_setup_user_nav() {
 						'position' => 30,
 						'show_for_displayed_user' => true,
 						'screen_function' => 'bebop_user_settings',
-						'default_subnav_slug' => 'content',
+						'default_subnav_slug' => 'bebop-content',
 					)
 	);
 
 	bp_core_new_subnav_item(
 					array(
 						'name' =>  __( 'Content', 'bebop' ),
-						'slug' => 'content',
+						'slug' => 'bebop-content',
 						'parent_url' => bp_displayed_user_domain() . 'bebop/',
 						'parent_slug' => 'bebop',
 						'screen_function' => 'bebop_user_settings',
@@ -48,7 +46,7 @@ function bebop_setup_user_nav() {
 			bp_core_new_subnav_item(
 							array(
 								'name' => __( 'Content Manager', 'bebop' ),
-								'slug' => 'manager',
+								'slug' => 'bebop-manager',
 								'parent_url' => $bp->loggedin_user->domain . 'bebop/',
 								'parent_slug' => 'bebop',
 								'screen_function' => 'bebop_user_settings',
@@ -60,7 +58,7 @@ function bebop_setup_user_nav() {
 		bp_core_new_subnav_item(
 								array(
 								'name' => __( 'Accounts', 'bebop' ),
-								'slug' => 'accounts',
+								'slug' => 'bebop-accounts',
 								'parent_url' => $bp->loggedin_user->domain . 'bebop/',
 								'parent_slug' => 'bebop',
 								'screen_function' => 'bebop_user_settings',
@@ -88,6 +86,7 @@ function bebop_admin_menu() {
 	if ( ! is_super_admin() ) {
 		return false;
 	}
+	
 	add_menu_page(
 					__( 'Bebop Admin', 'bebop' ),
 					__( 'Bebop', 'bebop' ),
@@ -103,7 +102,6 @@ function bebop_admin_menu() {
 	add_submenu_page( 'bebop_admin', __( 'Content' ), __( 'Content' ), 'manage_options', 'bebop_content', 'bebop_admin_pages' );
 	add_submenu_page( 'bebop_admin', __( 'Error Log' ), __( 'Error Log' ), 'manage_options', 'bebop_error_log', 'bebop_admin_pages' );
 	add_submenu_page( 'bebop_admin', __( 'General Log' ), __( 'General Log' ), 'manage_options', 'bebop_general_log', 'bebop_admin_pages' );
-	
 }
 
 //This deals with the bebop page loaders based on the link selected.

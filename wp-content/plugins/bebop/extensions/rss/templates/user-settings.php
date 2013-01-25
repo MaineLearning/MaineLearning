@@ -15,7 +15,12 @@ global $bp;
  * i.e. if you extension name is 'my_extension', the value of $extension will be 'my_extension'.
  * The extension has to exist if this page is being included.
  */
-$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $_GET['provider'] ) );
+
+$query_string = bp_action_variables();
+if ( ! empty( $query_string ) ) {
+	$provider = $query_string[0];
+}
+$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $provider ) );
 
 //put some options into variables
 $active = 'bebop_' . $extension['name'] . '_active_for_user';																//the active boolean name
@@ -25,7 +30,7 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 	echo '<h5>' . sprintf( __( '%1$s Settings', 'bebop' ), $extension['display_name'] ) . '</h5>
 	<p>' . sprintf( __( 'Generic settings for %1$s. Here you can select whether content is actively imported into WordPress.', 'bebop' ), $extension['display_name'] ) . '</p>';
 	
-	echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '" method="post">';
+	echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '" method="post">';
 	echo '<label>' . sprintf( __( 'Enable %1$s import', 'bebop' ), $extension['display_name'] ) . ':</label>
 	<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$active == 1 ) {
 		echo 'checked';
@@ -63,7 +68,7 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 			echo '<tr>
 				<td>' . stripslashes( $feed_name ) . '</td>
 				<td>' . substr(bebop_tables::sanitise_element( $user_feed->meta_value ), 0, 150 ) . '</td>
-				<td><a href="?provider=' . $extension['name'] . '&delete_feed=' . urlencode( $feed_name ) . '">' . __( 'Delete Feed', 'bebop' ) . '</a></td>
+				<td><a href="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '?delete_feed=' . urlencode( $feed_name ) . '">' . __( 'Delete Feed', 'bebop' ) . '</a></td>
 			</tr>';
 		}
 		echo '</table>';

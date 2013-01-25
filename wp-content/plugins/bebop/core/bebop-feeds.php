@@ -39,7 +39,7 @@ function bebop_feed_url() {
 function bebop_get_feed_url() {
 	global $this_bp_feed;
 	if ( ! empty( $this_bp_feed ) ) {
-		return bp_displayed_user_domain() . bp_get_activity_slug() . '/' . $this_bp_feed . '/feed';
+		return bp_displayed_user_domain() . bp_get_activity_slug() . '/' . $this_bp_feed;
 	}
 	else {
 		return false;

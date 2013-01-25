@@ -11,13 +11,8 @@ class bebop_data {
 			$url = $url . '?' . http_build_query( $parameters );
 		}
 		$result = wp_remote_get( $url );
-		if ( is_wp_error( $result ) ) {
-			echo '<pre>';
-			echo $url;
-			var_dump($result['body']);
-			echo '</pre>';
-		}
 		return $result['body'];
 	}
+	
 }
 ?>

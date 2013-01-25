@@ -110,7 +110,7 @@ function bebop_extension_admin_update_settings() {
 							bebop_tables::update_option( 'bebop_' . $extension['name'] . '_maximport', trim( $_POST['bebop_' . $extension['name'] . '_maximport'] ) );
 						}
 						else {
-							$success = '"Imports per day" must be a number (or blank).';
+							$success = __( '"Imports per day" must be a number (or blank).', 'bebop' );
 						}
 					}
 					
@@ -120,7 +120,7 @@ function bebop_extension_admin_update_settings() {
 							bebop_tables::update_option( 'bebop_' . $extension['name'] . '_rss_feed', trim( $_POST['bebop_' . $extension['name'] . '_rss_feed'] ) );
 						}
 						else {
-							$success = __( 'RSS feeds cannot be enabled while the extension is inactive.', 'bebop');
+							$success = __( 'RSS feeds cannot be enabled while the extension is inactive.', 'bebop' );
 						}
 					}
 					else {
@@ -139,7 +139,7 @@ function bebop_extension_admin_update_settings() {
 				if ( isset( $_GET['reset_user_id'] ) ) {
 					$user_id = trim( $_GET['reset_user_id'] );
 					bebop_tables::remove_user_from_provider( $user_id, $extension['name'] );
-					$success = 'User has been removed';
+					$success = __( 'User has been removed', 'bebop' );
 					$_SESSION['bebop_admin_notice'] = $success;
 					wp_safe_redirect( wp_get_referer() );
 					exit();
@@ -156,9 +156,7 @@ function bebop_admin_notice() {
 	if ( isset( $_SESSION['bebop_admin_notice'] ) ) {
 		$success = $_SESSION['bebop_admin_notice'];
 		if ( $success === true ) {
-			echo '<div class="bebop_success_box">';
-			_e( 'Settings Saved', 'bebop');
-			echo '</div>';
+			echo '<div class="bebop_success_box">' . __( 'Settings Saved', 'bebop') .'</div>';
 		}
 		else {
 			echo '<div class="bebop_error_box">' . ucfirst( $success ) . '</div>';
@@ -181,7 +179,7 @@ function bebop_admin_flush_table() {
 						
 					}
 					else {
-						$_SESSION['bebop_admin_notice'] = __( 'Error clearing table data.', 'bebop');
+						$_SESSION['bebop_admin_notice'] = __( 'Error clearing table data.', 'bebop' );
 					}
 					wp_safe_redirect( $_SERVER['PHP_SELF'] . '?page=' . $current_page );
 					exit();
