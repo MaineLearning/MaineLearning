@@ -108,18 +108,18 @@ function jfb_admin_page()
         //When saving the Facebook options, make sure the key and secret are valid...
         update_option( $opt_jfb_valid, 0 );
         $shownTab = 1;
-        $result = jfb_get("https://graph.facebook.com/" . $_POST[$opt_jfb_api_key]);
+        $result = jfb_api_get("https://graph.facebook.com/" . $_POST[$opt_jfb_api_key]);
         if(!$result):
             ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: Empty Reply.<br />Are you sure you entered your App ID correctly?</p></div><?php
-        elseif (isset($result->error)):
-            ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: <?php echo (isset($result->error->message)?$result->error->message:"Unknown"); ?>.<br />Are you sure you entered your App ID correctly?</p></div><?php
-        elseif($result->id != $_POST[$opt_jfb_api_key]):
+        elseif (isset($result['error'])):
+            ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: <?php echo (isset($result['error']['message'])?$result['error']['message']:"Unknown"); ?>.<br />Are you sure you entered your App ID correctly?</p></div><?php
+        elseif($result['id'] != $_POST[$opt_jfb_api_key]):
             ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: ID Mismatch.</p></div><?php
         else:
 			//If we got here, we know the App ID is correct.  Now try to get an app token and store it in the options table; if this works we know the secret is correct too.  
 			//Note: this plugin doesn't actually use the app-token; I simply cache it so it can be accessible to users wishing to further interact with Facebook via hooks & filters.
 			//Note: App tokens never expire unless the app secret is refreshed.
-			$response = wp_remote_get("https://graph.facebook.com/oauth/access_token?client_id=" . $_POST[$opt_jfb_api_key] . "&client_secret=" . $_POST[$opt_jfb_api_sec] . "&grant_type=client_credentials");
+			$response = wp_remote_get("https://graph.facebook.com/oauth/access_token?client_id=" . $_POST[$opt_jfb_api_key] . "&client_secret=" . $_POST[$opt_jfb_api_sec] . "&grant_type=client_credentials", array( 'sslverify' => false ));
 			if( is_array($response) && strpos($response['body'], 'access_token=') !== FALSE )
 			{
                 //We're valid!
@@ -128,7 +128,7 @@ function jfb_admin_page()
                 update_option( $opt_jfb_app_token, substr($response['body'], 13) );
                 if( get_option($opt_jfb_api_key) != $_POST[$opt_jfb_api_key] )
                    jfb_auth($jfb_name, $jfb_version, 2, "SET: " . $message );
-				?><div class="updated"><p><strong>Successfully connected with "<?php echo $result->name ?>" (ID <?php echo $result->id; ?>)</strong></p></div><?php
+				?><div class="updated"><p><strong>Successfully connected with "<?php echo $result['name'] ?>" (ID <?php echo $result['id']; ?>)</strong></p></div><?php
 			}
 			else
 			{
@@ -137,7 +137,7 @@ function jfb_admin_page()
         endif;
 
         //We can save these either way, because if "valid" isn't set, a button won't be shown.
-        update_option( $opt_jfb_app_id, $result->id);
+        update_option( $opt_jfb_app_id, $result['id']);
         update_option( $opt_jfb_api_key, $_POST[$opt_jfb_api_key] );
         update_option( $opt_jfb_api_sec, $_POST[$opt_jfb_api_sec] );
     }
