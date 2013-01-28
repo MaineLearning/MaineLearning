@@ -3,6 +3,8 @@ DATABASE ACTIONS
 ------------------------------------
 TO DO
 
+If WTI Like Post is acceptable, activate it on Learning Resources and make Voting Period 2 months, Style 2, and remove shadow on those images.
+
 Enable comments and trackbacks on Resources: Objects (via no page comment)
 
 Migrate BuddyPress Docs after upgrade.
