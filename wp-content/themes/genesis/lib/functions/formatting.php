@@ -5,7 +5,7 @@
  * @category   Genesis
  * @package    Formatting
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -16,7 +16,7 @@
  * string. In this function the word separator is a single space (' ').
  * Other white space characters (like newlines and tabs) are ignored.
  *
- * If the first $max_characters of the string do contain a space
+ * If the first $max_characters of the string does not contain a space
  * character, an empty string will be returned.
  *
  * @since 1.4.0
@@ -60,7 +60,7 @@ function get_the_content_limit( $max_characters, $more_link_text = '(more...)', 
 	/** Strip tags and shortcodes so the content truncation count is done correctly */
 	$content = strip_tags( strip_shortcodes( $content ), apply_filters( 'get_the_content_limit_allowedtags', '<script>,<style>' ) );
 
-	/** Inline styles / scripts */
+	/** Remove inline styles / scripts */
 	$content = trim( preg_replace( '#<(s(cript|tyle)).*?</\1>#si', '', $content ) );
 
 	/** Truncate $content to $max_char */
@@ -68,10 +68,11 @@ function get_the_content_limit( $max_characters, $more_link_text = '(more...)', 
 
 	/** More link? */
 	if ( $more_link_text ) {
-		$link   = apply_filters( 'get_the_content_more_link', sprintf( '%s <a href="%s" class="more-link">%s</a>', g_ent( '&hellip;' ), get_permalink(), $more_link_text ), $more_link_text );
+		$link   = apply_filters( 'get_the_content_more_link', sprintf( '&#x02026; <a href="%s" class="more-link">%s</a>', get_permalink(), $more_link_text ), $more_link_text );
 		$output = sprintf( '<p>%s %s</p>', $content, $link );
 	} else {
 		$output = sprintf( '<p>%s</p>', $content );
+		$link = '';
 	}
 
 	return apply_filters( 'get_the_content_limit', $output, $content, $link, $max_characters );
@@ -317,7 +318,7 @@ function genesis_human_time_diff( $older_date, $newer_date = false ) {
 	$ii = $i + 1;
 
 	/** Step two: the second unit */
-	if ( $ii <= $j ) {
+	if ( $ii < $j ) {
 		$seconds2 = $units[$ii][0];
 
 		/** Check if this second unit has a value > 0 */

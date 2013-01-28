@@ -6,7 +6,7 @@
  * @category Genesis
  * @package  Widgets
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -16,8 +16,6 @@ require_once( GENESIS_WIDGETS_DIR . '/enews-widget.php' );
 require_once( GENESIS_WIDGETS_DIR . '/featured-post-widget.php' );
 require_once( GENESIS_WIDGETS_DIR . '/featured-page-widget.php' );
 require_once( GENESIS_WIDGETS_DIR . '/latest-tweets-widget.php' );
-require_once( GENESIS_WIDGETS_DIR . '/menu-pages-widget.php' );
-require_once( GENESIS_WIDGETS_DIR . '/menu-categories-widget.php' );
 
 add_action( 'widgets_init', 'genesis_load_widgets' );
 /**
@@ -34,8 +32,6 @@ function genesis_load_widgets() {
 	register_widget( 'Genesis_Featured_Page' );
 	register_widget( 'Genesis_Featured_Post' );
 	register_widget( 'Genesis_Latest_Tweets_Widget' );
-	register_widget( 'Genesis_Widget_Menu_Categories' );
-	register_widget( 'Genesis_Menu_Pages_Widget' );
 	register_widget( 'Genesis_User_Profile_Widget' );
 
 }
@@ -67,7 +63,7 @@ function genesis_remove_default_widgets_from_header_right() {
 	$widgets  = get_option( 'sidebars_widgets' );
 	$defaults = array( 0 => 'search-2', 1 => 'recent-posts-2', 2 => 'recent-comments-2', 3 => 'archives-2', 4 => 'categories-2', 5 => 'meta-2', );
 
-	if ( $defaults == $widgets['header-right'] ) {
+	if ( isset( $widgets['header-right'] ) && $defaults == $widgets['header-right'] ) {
 		$widgets['header-right'] = array();
 		update_option( 'sidebars_widgets', $widgets );
 	}

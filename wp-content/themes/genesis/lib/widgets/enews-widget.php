@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Widgets
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -35,8 +35,8 @@ class Genesis_eNews_Updates extends WP_Widget {
 			'title'       => '',
 			'text'        => '',
 			'id'          => '',
-			'input_text'  => '',
-			'button_text' => '',
+			'input_text'  => __( 'Enter your email address ...', 'genesis' ),
+			'button_text' => __( 'Go', 'genesis' ),
 		);
 
 		$widget_ops = array(
@@ -110,35 +110,20 @@ class Genesis_eNews_Updates extends WP_Widget {
 		/** Merge with defaults */
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
 
-?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'genesis' ); ?>:</label><br />
-			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
-		</p>
+		if ( ! current_user_can( 'install_plugins' ) ) {
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text To Show', 'genesis' ); ?>:</label><br />
-			<textarea id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" class="widefat" rows="6" cols="4"><?php echo htmlspecialchars( $instance['text'] ); ?></textarea>
-		</p>
+			echo '<p class="description">' . __( 'This widget has been deprecated, and should no longer be used.', 'genesis' ) . '</p>';
+			echo '<p class="description">' . sprintf( __( 'If you would like to continue to use the eNews widget functionality, please have a site administrator <a href="%s" target="_blank">install this plugin</a> and replace this widget with the Genesis eNews Extended widget.', 'genesis' ), esc_url( 'http://wordpress.org/extend/plugins/genesis-enews-extended/' ) ) . '</p>';
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Google/Feedburner ID', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'id' ); ?>" name="<?php echo $this->get_field_name( 'id' ); ?>" value="<?php echo esc_attr( $instance['id'] ); ?>" class="widefat" />
-		</p>
+			return;
 
-		<p>
-			<?php $input_text = empty( $instance['input_text'] ) ? __( 'Enter your email address...', 'genesis' ) : $instance['input_text']; ?>
-			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Input Text', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'input_text' ); ?>" name="<?php echo $this->get_field_name( 'input_text' ); ?>" value="<?php echo esc_attr( $input_text ); ?>" class="widefat" />
-		</p>
+		}
 
-		<p>
-			<?php $button_text = empty( $instance['button_text'] ) ? __( 'Go', 'genesis' ) : $instance['button_text']; ?>
-			<label for="<?php echo $this->get_field_id( 'button_text' ); ?>"><?php _e( 'Button Text', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'button_text' ); ?>" name="<?php echo $this->get_field_name( 'button_text' ); ?>" value="<?php echo esc_attr( $button_text ); ?>" class="widefat" />
-		</p>
+		add_thickbox();
 
-	<?php
+		echo '<p class="description">' . __( 'This widget has been deprecated, and should no longer be used.', 'genesis' ) . '</p>';
+		echo '<p class="description">' . sprintf( __( 'If you would like to continue to use the eNews widget functionality, please <a href="%s" class="thickbox" title="Install Genesis eNews Extended">install this plugin</a> and replace this widget with the Genesis eNews Extended widget.', 'genesis' ), esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=genesis-enews-extended&TB_iframe=true&width=660&height=550' ) ) ) . '</p>';
+
 	}
 
 }

@@ -6,10 +6,11 @@
  * @package    Structure
  * @subpackage Archives
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
+add_filter( 'genesis_term_intro_text_output', 'wpautop' );
 add_action( 'genesis_before_loop', 'genesis_do_taxonomy_title_description', 15 );
 /**
  * Add custom headline and / or description to category / tag / taxonomy archive pages.
@@ -46,15 +47,16 @@ function genesis_do_taxonomy_title_description() {
 	$headline = $intro_text = '';
 
 	if ( $term->meta['headline'] )
-		$headline = sprintf( '<h1>%s</h1>', $term->meta['headline'] );
+		$headline = sprintf( '<h1 class="archive-title">%s</h1>', strip_tags( $term->meta['headline'] ) );
 	if ( $term->meta['intro_text'] )
-		$intro_text = wpautop( $term->meta['intro_text'] );
+		$intro_text = apply_filters( 'genesis_term_intro_text_output', $term->meta['intro_text'] );
 
 	if ( $headline || $intro_text )
 		printf( '<div class="taxonomy-description">%s</div>', $headline . $intro_text );
 
 }
 
+add_filter( 'genesis_author_intro_text_output', 'wpautop' );
 add_action( 'genesis_before_loop', 'genesis_do_author_title_description', 15 );
 /**
  * Add custom headline and description to author archive pages.
@@ -81,8 +83,8 @@ function genesis_do_author_title_description() {
 	$headline   = get_the_author_meta( 'headline', (int) get_query_var( 'author' ) );
 	$intro_text = get_the_author_meta( 'intro_text', (int) get_query_var( 'author' ) );
 
-	$headline   = $headline ? sprintf( '<h1>%s</h1>', esc_html( $headline ) ) : '';
-	$intro_text = $intro_text ? wpautop( wp_kses( $intro_text, genesis_formatting_allowedtags() ) ) : '';
+	$headline   = $headline ? sprintf( '<h1 class="archive-title">%s</h1>', strip_tags( $headline ) ) : '';
+	$intro_text = $intro_text ? apply_filters( 'genesis_author_intro_text_output', $intro_text ) : '';
 
 	if ( $headline || $intro_text )
 		printf( '<div class="author-description">%s</div>', $headline . $intro_text );

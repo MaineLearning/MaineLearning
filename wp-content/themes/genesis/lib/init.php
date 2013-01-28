@@ -39,9 +39,14 @@ function genesis_theme_support() {
 	add_theme_support( 'genesis-import-export-menu' );
 	add_theme_support( 'genesis-readme-menu' );
 	add_theme_support( 'genesis-auto-updates' );
-	
+	add_theme_support( 'genesis-breadcrumbs' );
+
+	/** Maybe add support for Genesis menus */
 	if ( ! current_theme_supports( 'genesis-menus' ) )
-		add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ), 'secondary' => __( 'Secondary Navigation Menu', 'genesis' ) ) );
+		add_theme_support( 'genesis-menus', array(
+			'primary'   => __( 'Primary Navigation Menu', 'genesis' ),
+			'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
+		) );
 
 	if ( ! current_theme_supports( 'genesis-structural-wraps' ) )
 		add_theme_support( 'genesis-structural-wraps', array( 'header', 'nav', 'subnav', 'footer-widgets', 'footer' ) );
@@ -71,9 +76,10 @@ function genesis_constants() {
 
 	/** Define Theme Info Constants */
 	define( 'PARENT_THEME_NAME', 'Genesis' );
-	define( 'PARENT_THEME_VERSION', '1.8.2' );
-	define( 'PARENT_DB_VERSION', '1804' );
-	define( 'PARENT_THEME_RELEASE_DATE', date_i18n( 'F j, Y', '1340211600' ) );
+	define( 'PARENT_THEME_VERSION', '1.9.1' );
+	define( 'PARENT_THEME_BRANCH', '1.9' );
+	define( 'PARENT_DB_VERSION', '1904' );
+	define( 'PARENT_THEME_RELEASE_DATE', date_i18n( 'F j, Y', '1357682400' ) );
 	#define( 'PARENT_THEME_RELEASE_DATE', 'TBD' );
 
 	/** Define Directory Location Constants */
@@ -146,7 +152,7 @@ function genesis_load_framework() {
 
 	/** Load Classes */
 	require_once( GENESIS_CLASSES_DIR . '/admin.php' );
-	require_once( GENESIS_CLASSES_DIR . '/breadcrumb.php' );
+	require_if_theme_supports( 'genesis-breadcrumbs', GENESIS_CLASSES_DIR . '/breadcrumb.php' );
 	require_once( GENESIS_CLASSES_DIR . '/sanitization.php' );
 
 	/** Load Functions */
@@ -160,7 +166,6 @@ function genesis_load_framework() {
 	require_once( GENESIS_FUNCTIONS_DIR . '/seo.php' );
 	require_once( GENESIS_FUNCTIONS_DIR . '/widgetize.php' );
 	require_once( GENESIS_FUNCTIONS_DIR . '/feed.php' );
-	require_once( GENESIS_FUNCTIONS_DIR . '/i18n.php' );
 	require_once( GENESIS_FUNCTIONS_DIR . '/deprecated.php' );
 
 	/** Load Shortcodes */
@@ -188,6 +193,7 @@ function genesis_load_framework() {
 	require_once( GENESIS_ADMIN_DIR . '/import-export.php' );
 	require_once( GENESIS_ADMIN_DIR . '/readme-menu.php' );
 	require_once( GENESIS_ADMIN_DIR . '/inpost-metaboxes.php' );
+	require_once( GENESIS_ADMIN_DIR . '/whats-new.php' );
 	endif;
 	require_once( GENESIS_ADMIN_DIR . '/term-meta.php' );
 	require_once( GENESIS_ADMIN_DIR . '/user-meta.php' );
@@ -207,6 +213,21 @@ function genesis_load_framework() {
 
 	global $_genesis_formatting_allowedtags;
 	$_genesis_formatting_allowedtags = genesis_formatting_allowedtags();
+
+}
+
+add_action( 'genesis_init', 'genesis_i18n' );
+/**
+ * Load the Genesis textdomain for internationalization.
+ *
+ * @since 1.9.0
+ *
+ * @uses load_theme_textdomain()
+ *
+ */
+function genesis_i18n() {
+
+	load_theme_textdomain( 'genesis', GENESIS_LANGUAGES_DIR );
 
 }
 

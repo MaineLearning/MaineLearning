@@ -108,14 +108,8 @@ class Genesis_Featured_Post extends WP_Widget {
 		if ( $featured_posts->have_posts() ) : while ( $featured_posts->have_posts() ) : $featured_posts->the_post();
 			echo '<div class="' . implode( ' ', get_post_class() ) . '">';
 
-			if ( ! empty( $instance['show_image'] ) )
-				printf(
-					'<a href="%s" title="%s" class="%s">%s</a>',
-					get_permalink(),
-					the_title_attribute( 'echo=0' ),
-					esc_attr( $instance['image_alignment'] ),
-					genesis_get_image( array( 'format' => 'html', 'size' => $instance['image_size'], ) )
-				);
+			if ( ! empty( $instance['show_image'] ) && $image = genesis_get_image( array( 'format' => 'html', 'size' => $instance['image_size'] ) ) )
+				printf( '<a href="%s" title="%s" class="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), esc_attr( $instance['image_alignment'] ), $image );
 
 			if ( ! empty( $instance['show_gravatar'] ) ) {
 				echo '<span class="' . esc_attr( $instance['gravatar_alignment'] ) . '">';
@@ -309,7 +303,7 @@ class Genesis_Featured_Post extends WP_Widget {
 
 				<p>
 					<label for="<?php echo $this->get_field_id( 'image_size' ); ?>"><?php _e( 'Image Size', 'genesis' ); ?>:</label>
-					<select id="<?php echo $this->get_field_id( 'image_size' ); ?>" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
+					<select id="<?php echo $this->get_field_id( 'image_size' ); ?>" class="genesis-image-size-selector" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
 						<option value="thumbnail">thumbnail (<?php echo get_option( 'thumbnail_size_w' ); ?>x<?php echo get_option( 'thumbnail_size_h' ); ?>)</option>
 						<?php
 						$sizes = genesis_get_additional_image_sizes();

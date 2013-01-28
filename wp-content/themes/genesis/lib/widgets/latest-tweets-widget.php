@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Widgets
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -176,51 +176,19 @@ class Genesis_Latest_Tweets_Widget extends WP_Widget {
 		/** Merge with defaults */
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
 
-		?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
-		</p>
+		if ( ! current_user_can( 'install_plugins' ) ) {
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_id' ); ?>"><?php _e( 'Twitter Username', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'twitter_id' ); ?>" name="<?php echo $this->get_field_name( 'twitter_id' ); ?>" value="<?php echo esc_attr( $instance['twitter_id'] ); ?>" class="widefat" />
-		</p>
+			echo '<p class="description">' . __( 'This widget has been deprecated, and should no longer be used.', 'genesis' ) . '</p>';
+			echo '<p class="description">' . sprintf( __( 'If you would like to continue to use the Latest Tweets widget functionality, please have a site administrator <a href="%s" target="_blank">install this plugin</a>.', 'genesis' ), esc_url( 'http://wordpress.org/extend/plugins/genesis-latest-tweets/' ) ) . '</p>';
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_num' ); ?>"><?php _e( 'Number of Tweets to Show', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'twitter_num' ); ?>" name="<?php echo $this->get_field_name( 'twitter_num' ); ?>" value="<?php echo esc_attr( $instance['twitter_num'] ); ?>" size="3" />
-		</p>
+			return;
 
-		<p>
-			<input id="<?php echo $this->get_field_id( 'twitter_hide_replies' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'twitter_hide_replies' ); ?>" value="1" <?php checked( $instance['twitter_hide_replies'] ); ?>/>
-			<label for="<?php echo $this->get_field_id( 'twitter_hide_replies' ); ?>"><?php _e( 'Hide @ Replies', 'genesis' ); ?></label>
-		</p>
+		}
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_duration' ); ?>"><?php _e( 'Load new Tweets every', 'genesis' ); ?></label>
-			<select name="<?php echo $this->get_field_name( 'twitter_duration' ); ?>" id="<?php echo $this->get_field_id( 'twitter_duration' ); ?>">
-				<option value="5" <?php selected( 5, $instance['twitter_duration'] ); ?>><?php _e( '5 Min.' , 'genesis' ); ?></option>
-				<option value="15" <?php selected( 15, $instance['twitter_duration'] ); ?>><?php _e( '15 Minutes' , 'genesis' ); ?></option>
-				<option value="30" <?php selected( 30, $instance['twitter_duration'] ); ?>><?php _e( '30 Minutes' , 'genesis' ); ?></option>
-				<option value="60" <?php selected( 60, $instance['twitter_duration'] ); ?>><?php _e( '1 Hour' , 'genesis' ); ?></option>
-				<option value="120" <?php selected( 120, $instance['twitter_duration'] ); ?>><?php _e( '2 Hours' , 'genesis' ); ?></option>
-				<option value="240" <?php selected( 240, $instance['twitter_duration'] ); ?>><?php _e( '4 Hours' , 'genesis' ); ?></option>
-				<option value="720" <?php selected( 720, $instance['twitter_duration'] ); ?>><?php _e( '12 Hours' , 'genesis' ); ?></option>
-				<option value="1440" <?php selected( 1440, $instance['twitter_duration'] ); ?>><?php _e( '24 Hours' , 'genesis' ); ?></option>
-			</select>
-		</p>
+		add_thickbox();
 
-		<p>
-			<input id="<?php echo $this->get_field_id( 'follow_link_show' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'follow_link_show' ); ?>" value="1" <?php checked( $instance['follow_link_show'] ); ?>/>
-			<label for="<?php echo $this->get_field_id( 'follow_link_show' ); ?>"><?php _e( 'Include link to twitter page?', 'genesis' ); ?></label>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'follow_link_text' ); ?>"><?php _e( 'Link Text (required)', 'genesis' ); ?>:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'follow_link_text' ); ?>" name="<?php echo $this->get_field_name( 'follow_link_text' ); ?>" value="<?php echo esc_attr( $instance['follow_link_text'] ); ?>" class="widefat" />
-		</p>
-		<?php
+		echo '<p class="description">' . __( 'This widget has been deprecated, and should no longer be used.', 'genesis' ) . '</p>';
+		echo '<p class="description">' . sprintf( __( 'If you would like to continue to use the Latest Tweets widget functionality, please <a href="%s" class="thickbox" title="Install Genesis Latest Tweets">install this plugin</a>.', 'genesis' ), esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=genesis-latest-tweets&TB_iframe=true&width=660&height=550' ) ) ) . '</p>';
 
 	}
 
