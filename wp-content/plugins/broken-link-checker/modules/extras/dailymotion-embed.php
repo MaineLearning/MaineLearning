@@ -35,5 +35,3 @@ class blcDailyMotionEmbed extends blcEmbedParserBase {
 		return $url;
 	}
 }
-
-?>

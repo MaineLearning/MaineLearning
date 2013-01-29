@@ -2,7 +2,7 @@
 /**
  * WPML Module
  *
- * @version $Id: wpml_module.php 523481 2012-03-25 19:49:08Z qurl $
+ * @version $Id: wpml_module.php 626578 2012-11-18 09:27:57Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -78,7 +78,7 @@
 			if ( is_array($lang) ) {
 				$id = $lang[$language_code];
 			} else {
-				$id = 0;
+				$id = $content_id;
 			}
 
 			return $id;

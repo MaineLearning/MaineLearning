@@ -14,7 +14,12 @@ global $bp;
  * i.e. if you extension name is 'my_extension', the value of $extension will be 'my_extension'.
  * The extension has to exist if this page is being included.
  */
-$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $_GET['provider'] ) );
+
+$query_string = bp_action_variables();
+if ( ! empty( $query_string ) ) {
+	$provider = $query_string[0];
+}
+$extension = bebop_extensions::bebop_get_extension_config_by_name( strtolower( $provider ) );
 
 //put some options into variables
 $variable_name = 'bebop_' . $extension['name'] . '_active_for_user';																//the name of the variable
@@ -25,7 +30,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		echo '<h5>' . sprintf( __( '%1$s Settings', 'bebop' ), $extension['display_name'] ) . '</h5>
 		<p>' . sprintf( __( 'Generic settings for %1$s. Here you can select whether content is actively imported into WordPress.', 'bebop' ), $extension['display_name'] ) . '</p>';
 	
-		echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] . '" method="post">
+		echo '<form id="settings_form" action="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '" method="post">
 		<label>' . sprintf( __( 'Enable %1$s import', 'bebop' ), $extension['display_name'] ) . ':</label>
 		<input type="radio" name="bebop_' . $extension['name'] . '_active_for_user" id="bebop_' . $extension['name'] . '_active_for_user" value="1"';  if ( $$variable_name == 1 ) {
 			echo 'checked';
@@ -42,7 +47,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		echo '<div class="clear_both"></div>';
 			
 		if ( bebop_tables::get_user_meta_value( $bp->loggedin_user->id, 'bebop_' . $extension['name'] . '_oauth_token' ) ) {
-			echo '<div class="button_container"><a class="auto button" href="?provider=' . $extension['name'] . '&reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
+			echo '<div class="button_container"><a class="auto button" href="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '?reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		echo '</form>';
@@ -57,7 +62,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		$OAuth->set_request_token_url( $extension['request_token_url'] );
 		$OAuth->set_access_token_url( $extension['access_token_url'] );
 		$OAuth->set_authorize_url( $extension['authorize_url'] );
-		$OAuth->set_callback_url( $bp->loggedin_user->domain . 'bebop/accounts/?provider=' . $extension['name'] );
+		$OAuth->set_callback_url( $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] );
 		$OAuth->set_consumer_key( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_key' ) );
 		$OAuth->set_consumer_secret( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_consumer_secret' ) );
 		

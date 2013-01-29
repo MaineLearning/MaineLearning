@@ -2,11 +2,11 @@
 /**
  * @package Hide_Broken_Shortcodes
  * @author Scott Reilly
- * @version 1.5
+ * @version 1.6
  */
 /*
 Plugin Name: Hide Broken Shortcodes
-Version: 1.5
+Version: 1.6
 Plugin URI: http://coffee2code.com/wp-plugins/hide-broken-shortcodes/
 Author: Scott Reilly
 Author URI: http://coffee2code.com/
@@ -14,7 +14,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Description: Prevent broken shortcodes from appearing in posts and pages.
 
-Compatible with WordPress 2.5 through 3.4+.
+Compatible with WordPress 2.5 through 3.5+.
 
 =>> Read the accompanying readme.txt file for instructions and documentation.
 =>> Also, visit the plugin's homepage for additional information and updates.
@@ -26,7 +26,7 @@ TODO:
 */
 
 /*
-	Copyright (c) 2009-2012 by Scott Reilly (aka coffee2code)
+	Copyright (c) 2009-2013 by Scott Reilly (aka coffee2code)
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -43,6 +43,8 @@ TODO:
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+defined( 'ABSPATH' ) or die();
+
 if ( ! class_exists( 'c2c_HideBrokenShortcodes' ) ) :
 
 class c2c_HideBrokenShortcodes {
@@ -53,7 +55,7 @@ class c2c_HideBrokenShortcodes {
 	 * @since 1.4
 	 */
 	public static function version() {
-		return '1.5';
+		return '1.6';
 	}
 
 	/**
@@ -97,7 +99,7 @@ class c2c_HideBrokenShortcodes {
 			  '\\['                              // Opening bracket
 			. '(\\[?)'                           // 1: Optional second opening bracket for escaping shortcodes: [[tag]]
 			. "($tagregexp)"                     // 2: Shortcode name
-			. '\\b'                              // Word boundary
+			. '(?![\\w-])'                       // Not followed by word character or hyphen
 			. '('                                // 3: Unroll the loop: Inside the opening shortcode tag
 			.     '[^\\]\\/]*'                   // Not a closing bracket or forward slash
 			.     '(?:'

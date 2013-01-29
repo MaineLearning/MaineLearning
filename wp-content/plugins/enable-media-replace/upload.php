@@ -38,25 +38,6 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 	$new_filesize = $_FILES["userfile"]["size"];
 	$new_filetype = $filedata["type"];
 	
-/**
-*	Keeping old method in code for posterity 
-*
-	if (function_exists("mime_content_type")) {
-		// More reliable way of determining file type
-		$new_filetype = mime_content_type($_FILES["userfile"]["tmp_name"]);
-	}
-	else {
-		$new_filetype = $_FILES['userfile']['type'];
-	}
-	
-	// Check that mime type is allowed 
-	$allowed_mime_types = get_allowed_mime_types();
-	if (!in_array($new_filetype, $allowed_mime_types)) {
-		echo __("File type does not meet security guidelines. Try another.");
-		exit;
-	}
-**/
-
 	if ($replace_type == "replace") {
 		// Drop-in replace and we don't even care if you uploaded something that is the wrong file-type.
 		// That's your own fault, because we warned you!
@@ -69,8 +50,21 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		$prefix = substr($current_file, 0, (strlen($current_file)-4));
 		$imgAr = array(".png", ".gif", ".jpg");
 		if (in_array($suffix, $imgAr)) {
-			$mask = $prefix . "-*x*" . $suffix;
-			array_map( "unlink", glob( $mask ) );
+			// Get thumbnail filenames from metadata
+			$metadata = wp_get_attachment_metadata($_POST["ID"]);
+			foreach($metadata["sizes"] AS $thissize) {
+				// Get all filenames and do an unlink() on each one;
+				$thisfile = $thissize["file"];
+				if (strlen($thisfile)) {
+					$thisfile = $current_path . "/" . $thissize["file"];
+					if (file_exists($thisfile)) {
+						unlink($thisfile);
+					}
+				}
+			}
+			// Old (brutal) method, left here for now
+			//$mask = $prefix . "-*x*" . $suffix;
+			//array_map( "unlink", glob( $mask ) );
 		}
 
 		// Move new file to old location/name
@@ -95,8 +89,21 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
 		$prefix = substr($current_file, 0, (strlen($current_file)-4));
 		$imgAr = array(".png", ".gif", ".jpg");
 		if (in_array($suffix, $imgAr)) {
-			$mask = $prefix . "-*x*" . $suffix;
-			array_map( "unlink", glob( $mask ) );
+			// Get thumbnail filenames from metadata
+			$metadata = wp_get_attachment_metadata($_POST["ID"]);
+			foreach($metadata["sizes"] AS $thissize) {
+				// Get all filenames and do an unlink() on each one;
+				$thisfile = $thissize["file"];
+				if (strlen($thisfile)) {
+					$thisfile = $current_path . "/" . $thissize["file"];
+					if (file_exists($thisfile)) {
+						unlink($thisfile);
+					}
+				}
+			}
+			// Old (brutal) method, left here for now
+			//$mask = $prefix . "-*x*" . $suffix;
+			//array_map( "unlink", glob( $mask ) );
 		}		
 
 		// Massage new filename to adhere to WordPress standards

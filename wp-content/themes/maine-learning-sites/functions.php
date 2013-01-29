@@ -36,14 +36,16 @@ function wpmu_body_class( $class ) {
 }
 
 /** MLN: Change comments invite copy */
-/** http://www.studiopress.com/tutorials/comments 
+/** http://my.studiopress.com/snippets/comments/#speak-your-mind
 */
 
-/** Modify the comment link text */
-add_filter( 'genesis_post_meta', 'post_meta_filter' );
-function post_meta_filter( $post_meta ) {
-    return '[post_comments zero="Share your recommendation" one="1 Comment" more="% Comments"]';
+/** Modify the speak your mind text */
+add_filter( 'genesis_comment_form_args', 'custom_comment_form_args' );
+function custom_comment_form_args($args) {
+    $args['title_reply'] = 'Share your Evaluation';
+    return $args;
 }
+
 
 /** MLN: Add home featured widgitized area */
 

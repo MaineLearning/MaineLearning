@@ -39,8 +39,15 @@ jQuery(document).ready(function($) {
 
 		if (formfield != null) {
 			fileurl = $('img',html).attr('src');
-
 			$('#category-image').val(fileurl);
+			//get the attachment id if possible
+			var fileIdClass = $('img',html).attr('class');
+			var pattern = /wp\-image\-[0-9]+/;
+			var fileIdFull = pattern.exec(fileIdClass);
+			if( fileIdFull[0] != '' ){
+				var fileId = fileIdFull[0].replace('wp-image-','');
+				$('#category-image-id').val(fileId);
+			}			
 
 			tb_remove();
 

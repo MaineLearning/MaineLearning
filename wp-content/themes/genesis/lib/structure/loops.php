@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Loops
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -173,7 +173,7 @@ function genesis_custom_loop( $args = array() ) {
 function genesis_grid_loop( $args = array() ) {
 
 	/** Global vars */
-	global $_genesis_loop_args, $query_string;
+	global $_genesis_loop_args;
 
 	/** Parse args */
 	$args = apply_filters(
@@ -181,7 +181,6 @@ function genesis_grid_loop( $args = array() ) {
 		wp_parse_args(
 			$args,
 			array(
-				'loop'					=> 'standard',
 				'features'				=> 2,
 				'features_on_all'		=> false,
 				'feature_image_size'	=> 0,
@@ -190,25 +189,25 @@ function genesis_grid_loop( $args = array() ) {
 				'grid_image_size'		=> 'thumbnail',
 				'grid_image_class'		=> 'alignleft post-image',
 				'grid_content_limit'	=> 0,
-				'more'					=> g_ent( __( 'Read more&hellip;', 'genesis' ) ),
-				'posts_per_page'		=> get_option( 'posts_per_page' ),
-				'paged'					=> get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
+				'more'					=> __( 'Read more', 'genesis' ) . '&#x02026;',
 			)
 		)
 	);
 
-	/** Error handler */
-	if ( $args['posts_per_page'] < $args['features'] ) {
-		trigger_error( sprintf( __( 'You are using invalid arguments with the %s function.', 'genesis' ), __FUNCTION__ ) );
-		return;
+	/** If user chose more features than posts per page, adjust features */
+	if ( get_option( 'posts_per_page' ) < $args['features'] ) {
+		$args['features'] = get_option( 'posts_per_page' );
 	}
 
+	/** What page are we on? */
+	$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
 	/** Potentially remove features on page 2+ */
-	if ( ! $args['features_on_all'] && $args['paged'] > 1 )
+	if ( ! $args['features_on_all'] && $paged > 1 )
 		$args['features'] = 0;
 
 	/** Set global loop args */
-	$_genesis_loop_args = wp_parse_args( $args, $query_string );
+	$_genesis_loop_args = $args;
 
 	/** Remove some unnecessary stuff from the grid loop */
 	remove_action( 'genesis_before_post_title', 'genesis_do_post_format_image' );
@@ -218,19 +217,9 @@ function genesis_grid_loop( $args = array() ) {
 	/** Custom loop output */
 	add_filter( 'post_class', 'genesis_grid_loop_post_class' );
 	add_action( 'genesis_post_content', 'genesis_grid_loop_content' );
-	
-	/** Set query args */
-	$args = $_genesis_loop_args;
-	if ( isset( $args['features'] ) && is_numeric( $args['features'] ) )
-		unset( $args['features'] );
 
 	/** The loop */
-	if ( 'custom' == $_genesis_loop_args['loop'] ) {
-		genesis_custom_loop( $args );
-	} else {
-		query_posts( $args );
-		genesis_standard_loop();
-	}
+	genesis_standard_loop();
 
 	/** Reset loops */
 	genesis_reset_loops();

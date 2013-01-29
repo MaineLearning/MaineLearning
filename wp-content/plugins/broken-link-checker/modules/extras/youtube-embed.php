@@ -36,5 +36,3 @@ class blcYouTubeEmbed extends blcEmbedParserBase {
 		return $url;
 	}
 }
-
-?>

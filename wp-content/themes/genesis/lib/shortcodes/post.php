@@ -9,7 +9,7 @@
  * @category Genesis
  * @package  Shortcodes
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -137,7 +137,7 @@ function genesis_post_author_link_shortcode( $atts ) {
 
 	/** If there's a URL, build the link */
 	if ( get_the_author_meta( 'url' ) )
-		$author = '<a href="' . get_the_author_meta( 'url' ) . '" title="' . esc_attr( sprintf( __( 'Visit %s&#8217;s website', 'genesis' ), $author ) ) . '" rel="author external">' . $author . '</a>';
+		$author = '<a href="' . get_the_author_meta( 'url' ) . '" title="' . esc_attr( sprintf( __( 'Visit %s&#x02019;s website', 'genesis' ), $author ) ) . '" rel="author external">' . $author . '</a>';
 
 	$output = sprintf( '<span class="author vcard">%2$s<span class="fn">%1$s</span>%3$s</span>', $author, $atts['before'], $atts['after'] );
 

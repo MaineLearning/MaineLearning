@@ -1,10 +1,10 @@
 === BulletProof Security ===
 Contributors: AITpro
 Donate link: http://www.ait-pro.com/aitpro-blog/331/bulletproof-security-plugin-support/bulletproof-security-donations-page/
-Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability, website security, WordPress security
+Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability, website security, WordPress security, security log, logging, HTTP log, error log
 Requires at least: 3.0 
 Tested up to: 3.5 
-Stable tag: .47.6 
+Stable tag: .47.8 
 
 WordPress Website Security Protection. Website security protection against: XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking... 
 
@@ -12,13 +12,13 @@ WordPress Website Security Protection. Website security protection against: XSS,
 
 WordPress Website Security Protection: BulletProof Security protects your WordPress website against XSS, RFI, CRLF, CSRF, Base64, 
 Code Injection and SQL Injection hacking attempts. One-click .htaccess WordPress security protection. Protects wp-config.php, 
-bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. One-click Website Maintenance Mode 
-(HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... System Info: PHP, MySQL, OS, 
-Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
+bb-config.php, php.ini, php5.ini, install.php and readme.html with .htaccess security protection. Security Logging. HTTP Error Logging.
+One-click Website Maintenance Mode (HTTP 503). Additional website security checks: DB errors off, file and folder permissions check... 
+System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload... Built-in .htaccess file editing, uploading and downloading.
 
 = Why is .htaccess Website Security So Much Better Than Any Other Type of Website Security? =
 
-The answer is very simple - .htaccess files are processed first before any other code on your website. In other words, 
+The answer is very simple - .htaccess files (distributed configuration files) are processed first before any other code on your website. In other words, 
 hackers malicious scripts are stopped by BulletProof Security .htaccess files before those scripts even have a chance to 
 reach the php coding in WordPress. BulletProof Security uses .htaccess website security files, which are specific to 
 Apache Linux Servers. Please read the FAQ page for Server compatibility questions. 
@@ -67,6 +67,7 @@ have additional website security measures in place as a standard. BulletProof Se
 * .htaccess file backup and restore
 * .htaccess Lock / Unlock (404 Read-Only)
 * .htaccess AutoLock On or Off
+* Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors
 * Automatic .htaccess file updating on upgrade installation
 * New .htaccess security filters automatically added during upgrade
 * No need to reactivate BulletProof Modes when upgrading
@@ -83,7 +84,7 @@ have additional website security measures in place as a standard. BulletProof Se
 * WordPress version is not displayed / not shown - WordPress version is removed
 * WP Generator Meta Tag filtered - not displayed / not shown
 * WP DB default admin username / account check
-* System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload, Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, Memcache and Memcached
+* System Info: PHP, MySQL, OS, Server, Memory Usage, IP, SAPI, DNS, Max Upload, Zend Engine Version, Zend Guard/Optimizer, ionCube Loader, Suhosin, APC, eAccelerator, XCache, Varnish, cURL, Memcache and Memcached
 * Security Status Page - Displays website security status information
 * File and Folder Permission Checking - CGI / DSO SAPI check / display
 * Help & FAQ page - links to BPS Guide and other detailed Help & Info pages
@@ -134,6 +135,12 @@ and nothing else is modified on your website. So simply deleting the .htaccess f
 removes BPS website security and will allow you to log back in, use the AutoMagic buttons and activate 
 BulletProof Mode again to protect your website again.
 
+= Will BulletProof Security cause my website to run slower? =
+
+No, BulletProof Security will not cause a website to run slower. BulletProof Security is website performance optimized 
+and uses very little/low website resources and very little Server memory. If you would like to check your plugins to check 
+how much website resource and Server memory each of your plugins is using install the P3 (Plugin Performance Profiler) plugin.
+
 = When I upgraded/updated BulletProof Security I saw an Alert. What does the Alert mean? =
 
 When upgrading/updating the BulletProof Security plugin you will see this WP Dashboard Alert. <strong>BPS Alert! Your site does not 
@@ -175,6 +182,20 @@ Occaisonally issues or conflicts do occur with other plugins, but they are alway
 other Plugins and Themes. An .htaccess bypass / skip rule is all that is required to allow a plugin to do something that is blocked by BPS.
 Please check the BulletProof Security <a href="http://www.ait-pro.com/aitpro-blog/2252/bulletproof-security-plugin-support/checking-plugin-compatibility-with-bps-plugin-testing-to-do-list/" title="BPS Plugin Testing and Fixes" rel="nofollow" target="_blank">Plugin Compatibility Testing and Fixes</a> page for the latest plugin bypass / skip rules.
 
+= I am seeing Security Log entries in my BulletProof Security Log. What do they mean? =
+
+Your Security Log will log 400, 403 and 404 (requires copying the 404 logging code to your Theme\'s 404.php Template) Errors. 
+The Security Log logs 400 and 403 HTTP Response Status Codes by default. You can also log 404 HTTP Response Status Codes by opening this BPS 
+404 Template file - /bulletproof-security/404.php and copying the logging code into your Theme's 404 Template file. When you open the BPS Pro 
+404.php file you will see simple instructions on how to add the 404 logging code to your Theme's 404 Template file.
+
+HTTP Response Status Codes
+400 Bad Request - The request could not be understood by the server due to malformed syntax.
+
+403 Forbidden - The Server understood the request, but is refusing to fulfill it.
+
+404 Not Found - The server has not found anything matching the Request-URI / URL. No indication is given of whether the condition is temporary or permanent.
+
 = What is the difference between BulletProof Security free and BulletProof Security Pro? =
 
 = BulletProof Security =
@@ -194,7 +215,7 @@ Please check the BulletProof Security <a href="http://www.ait-pro.com/aitpro-blo
 9. Security Logging
 10. HTTP Error Logging
 11. PHP Error Logging
-12. Email Alerts
+12. Email Alerts / Log Files Automatically Emailed
 13. Versatile Set of Pro-Tools
 14. Base64 Decoder / Encoder
 15. <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" title="BulletProof Security Features" rel="nofollow" target="_blank">View All BulletProof Security Pro Feature Details</a>
@@ -257,6 +278,21 @@ Yes, BulletProof Security works with Git, but does require some additional set u
 4. BulletProof Security - Edit/Upload/Download page
 
 == Changelog ==
+
+= .47.8 =
+* Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors
+* Security Logging / HTTP Error Logging Dashboard Alert - log file size
+* IMPORTANT: NEW root .htacess file code automatically created/modified on upgrade
+* Additional System Info Check Added: cURL Extension
+* General Coding Improvements & Enhancements
+* Enjoy!
+
+= .47.7 =
+* IMPORTANT UPDATE: .htaccess FILE UPDATE FOR WordPress 3.5
+* 3.5 BUG FIX: visual and text editor display blank boxes
+* Problem: Square Bracket filters are blocking the visual and text editor
+* Solution: Square Brackets are automatically removed from .htaccess files/filters on upgrade to .47.7
+* Enjoy!
 
 = .47.6 =
 * BPS Master htaccess Folder Deny All .htaccess security protection automated
@@ -538,6 +574,21 @@ Create new Master .htaccess files with AutoMagic and activate all BulletProof Mo
 
 == Upgrade Notice ==
 
+= .47.8 =
+* Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors
+* Security Logging / HTTP Error Logging Dashboard Alert - log file size
+* IMPORTANT: NEW root .htacess file code automatically created/modified on upgrade
+* Additional System Info Check Added: cURL Extension
+* General Coding Improvements & Enhancements
+* Enjoy!
+
+= .47.7 =
+* IMPORTANT UPDATE: .htaccess FILE UPDATE FOR WordPress 3.5
+* 3.5 BUG FIX: visual and text editor display blank boxes
+* Problem: Square Bracket filters are blocking the visual and text editor
+* Solution: Square Brackets are automatically removed from .htaccess files/filters on upgrade to .47.7
+* Enjoy!
+
 = .47.6 =
 * BPS Master htaccess Folder Deny All .htaccess security protection automated
 * BPS Backup Folder Deny All .htaccess security protection automated
@@ -565,11 +616,27 @@ the particular section or page of the BulletProof Security plugin that you are i
 Help and FAQ page contains links to Help pages that will load in a new browser tab so
 that you are not redirected away from your WordPress Dashboard. 
 
-What's New in .47.6
+What's New in .47.8
 
-* BPS Master htaccess Folder Deny All .htaccess security protection automated: The BPS Master htaccess Folder Deny All .htaccess security file is now automatically created if it does not already exist. Manual controls are still available on the Security Modes page to manually Activate Deny All htaccess Folder Protection For The BPS Master htaccess Folder.
-* BPS Backup Folder Deny All .htaccess security protection automated: The BPS Backup Folder Deny All .htaccess security file is now automatically created if it does not already exist. Manual controls are still available on the Security Modes page to manually Activate Deny All htaccess Folder Protection For The BPS Backup Folder.
-* Turn On AutoLock / Turn Off AutoLock options/buttons added: AutoLock is designed to automatically lock your root .htaccess file to save you an additional step of locking your root .htaccess file when performing certain actions, tasks or functions and AutoLock also automatically locks your root .htaccess during BPS Pro upgrades. This can be a problem for some folks whose Web Hosts do not allow locking the root .htaccess file with 404 file permissions and can cause 403 errors and/or cause a website to crash. For 99.99% of folks leaving AutoLock turned On will work fine. If your Web Host ONLY allows 644 file permissions for your root .htaccess file then click the Turn Off AutoLock button. This turns Off AutoLocking for all BPS actions, tasks, functions and also for BPS upgrades.
-* General Coding Improvements & Enhancements: Of course, but why not mention it anyway.
-* Visual Improvements & Enhancements: The buttons throughout BPS are now a shiny blue gel on hover and other visual improvements and enhancements.
+= .47.8 =
+
+* Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors:
+Your Security Log file is a plain text static file and not a dynamic file or dynamic display to keep your website resource usage at a 
+bare minimum and keep your website performance at a maximum.
+ 	 
+* Security Logging / HTTP Error Logging Dashboard Alert:
+When your log file gets larger than 500KB you will see a WP Dashboard Alert displayed. Copy and paste the Security Log file contents 
+into a Notepad text file on your computer and save it. Then click the Delete Log button to delete the contents of this Log file.
+ 	 
+* NEW root .htacess file code automatically created/modified on upgrade:
+The new ErrorDocument Error log htaccess code is automatically added to your Root .htaccess file when you upgrade to .47.8. 
+The FORBID EMPTY REFFERER SPAMBOTS .htaccess code is automatically deleted from your Root .htaccess file. This code has been problematic 
+on a number of websites and this htaccess code is not really effective against blocking empty referrer spambots anymore.
+ 	 
+* Additional System Info Check Added: cURL Extension:
+You will see an additional System Information check on the System Info tab page that checks whether or not the cURL Extension is loaded on your website.
+ 	 
+* Coding Improvements & Enhancements:
+Of course, but why not mention it anyway.
+
 * Enjoy!

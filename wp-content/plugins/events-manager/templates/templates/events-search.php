@@ -34,10 +34,10 @@
 		<span class="em-events-search-dates em-date-range">
 			<?php _e('between','dbem'); ?>:
 			<input type="text" class="em-date-input-loc em-date-start" />
-			<input type="hidden" class="em-date-input" name="scope[0]" value="<?php if( !empty($_REQUEST['scope'][0]) ) echo $_REQUEST['scope'][0]; ?>" />
+			<input type="hidden" class="em-date-input" name="scope[0]" value="<?php if( !empty($_REQUEST['scope'][0]) ) echo esc_attr($_REQUEST['scope'][0]); ?>" />
 			<?php _e('and','dbem'); ?>
 			<input type="text" class="em-date-input-loc em-date-end" />
-			<input type="hidden" class="em-date-input" name="scope[1]" value="<?php if( !empty($_REQUEST['scope'][1]) ) echo $_REQUEST['scope'][1]; ?>" />
+			<input type="hidden" class="em-date-input" name="scope[1]" value="<?php if( !empty($_REQUEST['scope'][1]) ) echo esc_attr($_REQUEST['scope'][1]); ?>" />
 		</span>
 		<!-- END Date Search -->
 		<?php endif; ?>
@@ -47,7 +47,7 @@
 			<?php 
 				$selected = !empty($_REQUEST['category']) ? $_REQUEST['category'] : 0;
 				EM_Object::ms_global_switch(); //in case in global tables mode of MultiSite, grabs main site categories, if not using MS Global, nothing happens
-				wp_dropdown_categories(array( 'hide_empty' => 0, 'name' => 'category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'show_option_none' => get_option('dbem_search_form_categories_label'), 'class'=>'em-events-search-category'));
+				wp_dropdown_categories(array( 'hide_empty' => 0, 'orderby' =>'name', 'name' => 'category', 'hierarchical' => true, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'show_option_none' => get_option('dbem_search_form_categories_label'), 'class'=>'em-events-search-category'));
 				EM_Object::ms_global_switch_back(); //if switched above, switch back
 			?>
 		<!-- END Category Search -->
@@ -62,9 +62,14 @@
 			global $wpdb;
 			$countries = em_get_countries();
 			$em_countries = $wpdb->get_results("SELECT DISTINCT location_country FROM ".EM_LOCATIONS_TABLE." WHERE location_country IS NOT NULL AND location_country != '' AND location_status=1 ORDER BY location_country ASC", ARRAY_N);
-			foreach($em_countries as $em_country): 
+			$ddm_countries = array();
+			foreach($em_countries as $em_country){
+				$ddm_countries[$em_country[0]] = $countries[$em_country[0]];
+			}
+			asort($ddm_countries);
+			foreach( $ddm_countries as $country_code => $country_name ):
 			?>
-			 <option value="<?php echo $em_country[0]; ?>" <?php echo (!empty($country) && $country == $em_country[0]) ? 'selected="selected"':''; ?>><?php echo $countries[$em_country[0]]; ?></option>
+			<option value="<?php echo $country_code; ?>" <?php echo (!empty($country) && $country == $country_code) ? 'selected="selected"':''; ?>><?php echo $country_name; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<!-- END Country Search -->	

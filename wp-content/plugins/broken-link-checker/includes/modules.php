@@ -18,7 +18,6 @@ $blc_module_manager = blcModuleManager::getInstance(array(
 		'image',            //HTML image parser
 		'metadata',         //Metadata (custom field) parser
 		'url_field',        //URL field parser
-		'blogroll',         //Blogroll container
 		'comment',          //Comment container
 		'custom_field',     //Post metadata container (aka custom fields)
 		'post',             //Post content container
@@ -27,5 +26,3 @@ $blc_module_manager = blcModuleManager::getInstance(array(
 ));
 
 require 'any-post.php';
-
-?>

@@ -2,8 +2,6 @@
 <tr><th scope="row"><?php _e("Google Rich Snippets", "gd-star-rating"); ?></th>
     <td>
         <input type="checkbox" name="gdsr_grs" id="gdsr_grs"<?php if ($gdsr_options["google_rich_snippets_active"] == 1) echo " checked"; ?> /><label style="margin-left: 5px;" for="gdsr_grs"><?php _e("Automatically Embed Google Rich Snippets.", "gd-star-rating"); ?></label>
-        <br/>
-        <input type="checkbox" name="gdsr_grs_hidden" id="gdsr_grs_hidden"<?php if ($gdsr_options["google_rich_snippets_hidden"] == 1) echo " checked"; ?> /><label style="margin-left: 5px;" for="gdsr_grs_hidden"><?php _e("Snippet will be renedered hidden on the page (style display set to none).", "gd-star-rating"); ?></label>
         <div class="gdsr-table-split"></div>
         <table cellpadding="0" cellspacing="0" class="previewtable">
             <tr>

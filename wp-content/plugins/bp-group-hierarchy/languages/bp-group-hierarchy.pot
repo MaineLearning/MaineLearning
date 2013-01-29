@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-hierarchy\n"
-"POT-Creation-Date: 2012-11-26 03:46:44+00:00\n"
+"POT-Creation-Date: 2012-12-11 22:34:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +21,7 @@ msgid "Group Hierarchy"
 msgstr ""
 
 #: bp-group-hierarchy-admin.php:65 bp-group-hierarchy-admin.php:120
-#: extension.php:766
+#: extension.php:769
 msgid "Group Tree"
 msgstr ""
 
@@ -259,11 +259,11 @@ msgstr ""
 msgid "No member groups were found."
 msgstr ""
 
-#: extension.php:711 extension.php:741
+#: extension.php:714 extension.php:744
 msgid "Sorry, you are not allowed to create groups."
 msgstr ""
 
-#: extension.php:765
+#: extension.php:768
 msgid "Member Groups (%d)"
 msgstr ""
 

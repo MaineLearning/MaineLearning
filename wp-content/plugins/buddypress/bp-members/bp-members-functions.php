@@ -478,7 +478,7 @@ function bp_core_get_total_member_count() {
 
 	if ( !$count = wp_cache_get( 'bp_total_member_count', 'bp' ) ) {
 		$status_sql = bp_core_get_status_sql();
-		$count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM $wpdb->users WHERE {$status_sql}" ) );
+		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->users WHERE {$status_sql}" );
 		wp_cache_set( 'bp_total_member_count', $count, 'bp' );
 	}
 
@@ -496,15 +496,15 @@ function bp_core_get_active_member_count() {
 	if ( !$count = get_transient( 'bp_active_member_count' ) ) {
 		// Avoid a costly join by splitting the lookup
 		if ( is_multisite() ) {
-			$sql = $wpdb->prepare( "SELECT ID FROM $wpdb->users WHERE (user_status != 0 OR deleted != 0 OR user_status != 0)" );
+			$sql = "SELECT ID FROM $wpdb->users WHERE (user_status != 0 OR deleted != 0 OR user_status != 0)";
 		} else {
-			$sql = $wpdb->prepare( "SELECT ID FROM $wpdb->users WHERE user_status != 0" );
+			$sql = "SELECT ID FROM $wpdb->users WHERE user_status != 0";
 		}
 
 		$exclude_users = $wpdb->get_col( $sql );
-		$exclude_users_sql = !empty( $exclude_users ) ? $wpdb->prepare( "AND user_id NOT IN (" . implode( ',', wp_parse_id_list( $exclude_users ) ) . ")" ) : '';
+		$exclude_users_sql = !empty( $exclude_users ) ? "AND user_id NOT IN (" . implode( ',', wp_parse_id_list( $exclude_users ) ) . ")" : '';
 
-		$count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(user_id) FROM $wpdb->usermeta WHERE meta_key = %s {$exclude_users_sql}", bp_get_user_meta_key( 'last_activity' ) ) );
+		$count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(user_id) FROM {$wpdb->usermeta} WHERE meta_key = %s {$exclude_users_sql}", bp_get_user_meta_key( 'last_activity' ) ) );
 		set_transient( 'bp_active_member_count', $count );
 	}
 
@@ -770,7 +770,7 @@ function bp_core_get_all_posts_for_user( $user_id = 0 ) {
 	if ( empty( $user_id ) )
 		$user_id = bp_displayed_user_id();
 
-	return apply_filters( 'bp_core_get_all_posts_for_user', $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_author = %d AND post_status = 'publish' AND post_type = 'post'", $user_id ) ) );
+	return apply_filters( 'bp_core_get_all_posts_for_user', $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_author = %d AND post_status = 'publish' AND post_type = 'post'", $user_id ) ) );
 }
 
 /**
@@ -970,7 +970,57 @@ function bp_core_get_illegal_names( $value = '', $oldvalue = '' ) {
 add_filter( 'pre_update_site_option_illegal_names', 'bp_core_get_illegal_names', 10, 2 );
 
 /**
+ * Check that an email address is valid for use
+ *
+ * Performs the following checks:
+ *   - Is the email address well-formed?
+ *   - Is the email address already used?
+ *   - If there's an email domain blacklist, is the current domain on it?
+ *   - If there's an email domain whitelest, is the current domain on it?
+ *
+ * @since 1.6.2
+ *
+ * @param string $user_email The email being checked
+ * @return bool|array True if the address passes all checks; otherwise an array
+ *   of error codes
+ */
+function bp_core_validate_email_address( $user_email ) {
+	$errors = array();
+
+	$user_email = sanitize_email( $user_email );
+
+	// Is the email well-formed?
+	if ( ! is_email( $user_email ) )
+		$errors['invalid'] = 1;
+
+	// Is the email on the Banned Email Domains list?
+	// Note: This check only works on Multisite
+	if ( function_exists( 'is_email_address_unsafe' ) && is_email_address_unsafe( $user_email ) )
+		$errors['domain_banned'] = 1;
+
+	// Is the email on the Limited Email Domains list?
+	// Note: This check only works on Multisite
+	$limited_email_domains = get_site_option( 'limited_email_domains' );
+	if ( is_array( $limited_email_domains ) && empty( $limited_email_domains ) == false ) {
+		$emaildomain = substr( $user_email, 1 + strpos( $user_email, '@' ) );
+		if ( ! in_array( $emaildomain, $limited_email_domains ) ) {
+			$errors['domain_not_allowed'] = 1;
+		}
+	}
+
+	// Is the email alreday in use?
+	if ( email_exists( $user_email ) )
+		$errors['in_use'] = 1;
+
+	$retval = ! empty( $errors ) ? $errors : true;
+
+	return apply_filters( 'bp_core_validate_email_address', $retval, $user_email );
+}
+
+/**
  * Validate a user name and email address when creating a new user.
+ *
+ * @todo Refactor to use bp_core_validate_email_address()
  *
  * @param string $user_name Username to validate
  * @param string $user_email Email address to validate
@@ -1073,7 +1123,7 @@ function bp_core_signup_user( $user_login, $user_password, $user_email, $usermet
 		}
 
 		// Update the user status to '2' which we will use as 'not activated' (0 = active, 1 = spam, 2 = not active)
-		$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->users SET user_status = 2 WHERE ID = %d", $user_id ) );
+		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->users} SET user_status = 2 WHERE ID = %d", $user_id ) );
 
 		// Set any profile data
 		if ( bp_is_active( 'xprofile' ) ) {
@@ -1163,13 +1213,13 @@ function bp_core_activate_signup( $key ) {
 	} else {
 
 		// Get the user_id based on the $key
-		$user_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'activation_key' AND meta_value = %s", $key ) );
+		$user_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = 'activation_key' AND meta_value = %s", $key ) );
 
 		if ( empty( $user_id ) )
 			return new WP_Error( 'invalid_key', __( 'Invalid activation key', 'buddypress' ) );
 
 		// Change the user's status so they become active
-		if ( !$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->users SET user_status = 0 WHERE ID = %d", $user_id ) ) )
+		if ( !$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->users} SET user_status = 0 WHERE ID = %d", $user_id ) ) )
 			return new WP_Error( 'invalid_key', __( 'Invalid activation key', 'buddypress' ) );
 
 		// Notify the site admin of a new user registration
@@ -1184,7 +1234,7 @@ function bp_core_activate_signup( $key ) {
 
 	// Set the password on multisite installs
 	if ( is_multisite() && !empty( $user['meta']['password'] ) )
-		$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->users SET user_pass = %s WHERE ID = %d", $user['meta']['password'], $user_id ) );
+		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->users} SET user_pass = %s WHERE ID = %d", $user['meta']['password'], $user_id ) );
 
 	do_action( 'bp_core_activated_user', $user_id, $key, $user );
 

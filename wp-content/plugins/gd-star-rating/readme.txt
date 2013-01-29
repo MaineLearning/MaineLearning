@@ -1,6 +1,6 @@
 === GD Star Rating ===
 Contributors: GDragoN
-Version: 1.9.20
+Version: 1.9.22
 Donate link: http://www.dev4press.com/plugins/gd-star-rating/
 Tags: vote, ratings, post, page, widget, thumb, rating, star, gdragon, ajax, cache, integration, templates, trends, comments, review, multi, wpmu, network
 Requires at least: 2.8
@@ -170,10 +170,18 @@ I can't guarantee that plugin will work on every WordPress setup. In 99.9% of th
 7. Example multi rating block
 
 == Upgrade Notice ==
-= 1.9.20 =
-Fixed potential security issue with plugin export features.
+= 1.9.21 =
+Improvements to the query sorting with multi ratings. Removed option for hidden Google Rich Snippets. Few minor templates and rendering changes.
 
 == Changelog ==
+= 1.9.22 =
+* Fixed potential SQL injection vulnerability ( thanks to Jacek Sowinski: https://twitter.com/theDzaku )
+
+= 1.9.21 =
+* Improvements to the query sorting with multi ratings
+* Removed option for hidden Google Rich Snippets
+* Few minor templates and rendering changes
+
 = 1.9.19 - 1.9.20 =
 * Fixed potential security issue with plugin export features
 

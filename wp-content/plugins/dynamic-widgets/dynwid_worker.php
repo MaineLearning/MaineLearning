@@ -2,7 +2,7 @@
 /**
  * dynwid_worker.php - The worker does the actual work.
  *
- * @version $Id: dynwid_worker.php 605455 2012-09-28 19:57:21Z qurl $
+ * @version $Id: dynwid_worker.php 618242 2012-10-28 14:00:39Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -114,7 +114,7 @@
 									}
 								}
 							}
-							$now = time();
+							$now = current_time('timestamp', 0);
 							if (! empty($date_end) ) {
 								@list($date_end_year, $date_end_month, $date_end_day) = explode('-', $date_end);
 								if ( mktime(23, 59, 59, $date_end_month, $date_end_day, $date_end_year) > $now ) {
@@ -173,9 +173,9 @@
           			(bool) $browser_tmp = $condition->value;
           		} else if ( $condition->maintype == 'tpl' && $condition->name == $DW->template ) {
           			(bool) $tpl_tmp = $condition->value;
-          		} else if ( $condition->maintype == 'day' && $condition->name == date('N') ) {
+          		} else if ( $condition->maintype == 'day' && $condition->name == date('N', current_time('timestamp', 0)) ) {
           			(bool) $day_tmp = $condition->value;
-          		} else if ( $condition->maintype == 'week' && $condition->name == date('W') ) {
+          		} else if ( $condition->maintype == 'week' && $condition->name == date('W', current_time('timestamp', 0)) ) {
           			(bool) $week_tmp = $condition->value;
           		} else if ( $condition->maintype == 'url' && $condition->name == 'url' ) {
           			$urls = unserialize($condition->value);

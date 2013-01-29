@@ -3,8 +3,8 @@ Contributors: Olivier
 Donate link: http://www.ticket-system.net/
 Tags: ticket,case,system,support,taxonomy,help,cms,crm,customer,helpdesk,community,contact,social,member,company,trouble,issue,post,problem,contact,contact form,feedback,form,custom fields,custom post,post type,ticket system,support system,wats
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 1.0.56
+Tested up to: 3.5
+Stable tag: 1.0.57
 
 == Description ==
 
@@ -35,7 +35,7 @@ WATS key features :
 * unlimited number of text input and drop down selector custom fields for tickets, fully integrated with total control over read/write rights (Premium release)
 * internal comments support for private exchanges between admins (Premium release)
 * mail notification upon new ticket submission for admins (Premium release)
-* mail notification based on key rules (product, priority, status and ticket types as well as author company and country) upon new ticket submission for selected distribution list (Premium release)
+* mail notification based on key rules (product, priority, status and ticket types as well as author company and country) upon new ticket submission and ticket update for selected distribution list (Premium release)
 * mail notification upon ticket update for ticket originator, updaters and admins (Premium release)
 * complete control over mail notifications format through the API (Premium release)
 * ticket list filtering, sorting and export to Excel in the frontend (Premium release)
@@ -74,7 +74,7 @@ Translations :
 * Romanian (Minimum release : 1.0.56, Originator : Alex from http://webhostinggeeks.com/ )
 * Dutch (Minimum release : 1.0.56, Originator : Anita Berghoef from http://www.ab-ct.nl/ )
 * Hindi (Minimum release : 1.0.56, Originator : Outshine Solutions from http://outshinesolutions.com/ )
-
+* Slovak (Minimum release : 1.0.57, Originator : Branco from http://webhostinggeeks.com/ )
 
 == Installation ==
 
@@ -100,8 +100,18 @@ THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
 
 == Changelog ==
 
+= V1.0.57 (13/12/2012) =
+* enhanced ticket age details in frontend ticket listing
+* fixed a limitation with ticket listing owner filter while no owner has been set
+* modified rules format to allow filtering on all categories
+* added a value for target user list for ticket assignment to allow tickets to be assigned only to admins and users with wats_ticket_ownership capability
+* added an option to reinitialize the frontend submission form elements upon successfull submission
+* added an option to redirect to a success page upon frontend submission form successfull submission
+* added an option to define notification rules for ticket update
+* added Slovak translation (provided by Branco from http://webhostinggeeks.com/ )
+* added WP 3.5 compatibility
 
-= V1.0.56 (13/07/2012) =
+= V1.0.56 (28/06/2012) =
 * added CSS ID to single ticket page meta keys in the ticket content
 * fixed a bug with source email address on new ticket notifications for admin when the ticket was submitted by email
 * added CSS ID to custom fields in frontend submission form

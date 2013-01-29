@@ -1,5 +1,7 @@
-#   BULLETPROOF .47.6 MAINTENANCE  .HTACCESS
+#   BULLETPROOF .47.8 MAINTENANCE  .HTACCESS
    
+# BEGIN WordPress
+
 RewriteEngine On
 RewriteBase /
 
@@ -46,7 +48,7 @@ RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
 RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
 RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
 RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
-RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\(|\)|<|>).* [NC,OR]
 RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
 RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
 RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]

@@ -268,8 +268,8 @@ td.column-link-text, td.column-new-link-text {
 #bulk-edit label {
 	display: block;
 	margin-bottom: 0.2em;
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-left: 0;
+	margin-right: 0;
 	margin-top: 0.2em;
 }
 
@@ -309,7 +309,7 @@ td.column-link-text, td.column-new-link-text {
 
 .blc-search-container .ui-dialog-titlebar {
 	display: none;
-	margin: 0px;
+	margin: 0;
 }
 
 #search-links-dialog {
@@ -339,9 +339,9 @@ td.column-link-text, td.column-new-link-text {
 div.search-box{
 	float: right;
 	margin-top: -5px;
-	margin-right: 0pt;
-	margin-bottom: 0pt;
-	margin-left: 0pt;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
 }
 
 #s_link_type optgroup {
@@ -368,16 +368,20 @@ div.search-box{
 
 /* Miscellaneous styles */
 
-#blc-more-plugins-link-wrap {
+#blc-more-plugins-link-wrap,
+#blc-plugin-news-link-wrap {
 	background: #00C31F none;
 }
 
-#screen-meta-links #blc-more-plugins-link {
+#screen-meta-links #blc-more-plugins-link,
+#screen-meta-links #blc-plugin-news-link {
 	font-weight: bold;
 	color: #DEFFD8;
 	text-shadow: none;
 }
 
-#screen-meta-links #blc-more-plugins-link-wrap a.show-settings:hover {
+#screen-meta-links #blc-more-plugins-link-wrap a.show-settings:hover,
+#screen-meta-links #blc-plugin-news-link-wrap a.show-settings:hover
+{
 	color: white;
 }

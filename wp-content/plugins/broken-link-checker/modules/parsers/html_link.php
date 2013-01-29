@@ -37,7 +37,7 @@ class blcHTMLLink extends blcParser {
 			'base_url' => $base_url,
 			'default_link_text' => $default_link_text,
 		);
-		$instances = $this->map($content, array(&$this, 'parser_callback'), $params);
+		$instances = $this->map($content, array($this, 'parser_callback'), $params);
 		
 		//The parser callback returns NULL when it finds an invalid link. Filter out those nulls
 		//from the list of instances.
@@ -56,7 +56,7 @@ class blcHTMLLink extends blcParser {
    * @return blcLinkInstance|null
    */
 	function parser_callback($link, $params){
-		extract($params);
+		$base_url = $params['base_url'];
 		
 		$url = $raw_url = $link['href'];
 		$url = trim($url);
@@ -341,5 +341,3 @@ class blcHTMLLink extends blcParser {
 		return $link;
 	}	
 }
-
-?>

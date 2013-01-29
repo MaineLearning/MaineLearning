@@ -265,7 +265,7 @@ class BP_Groups_Hierarchy extends BP_Groups_Group {
 		
 		$hidden_sql = '';
 		if ( !is_super_admin() )
-			$hidden_sql = $wpdb->prepare( " AND status != 'hidden'");
+			$hidden_sql = " AND status != 'hidden'";
 		
 		if( !empty($search_terms)) {
 			$search_terms = like_escape( $wpdb->escape( $search_terms ) );

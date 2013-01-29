@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Widgets
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -86,14 +86,8 @@ class Genesis_Featured_Page extends WP_Widget {
 		if ( $featured_page->have_posts() ) : while ( $featured_page->have_posts() ) : $featured_page->the_post();
 			echo '<div class="' . implode( ' ', get_post_class() ) . '">';
 
-			if ( ! empty( $instance['show_image'] ) )
-				printf(
-					'<a href="%s" title="%s" class="%s">%s</a>',
-					get_permalink(),
-					the_title_attribute( 'echo=0' ),
-					esc_attr( $instance['image_alignment'] ),
-					genesis_get_image( array( 'format' => 'html', 'size' => $instance['image_size'], ) )
-				);
+			if ( ! empty( $instance['show_image'] ) && $image = genesis_get_image( array( 'format' => 'html', 'size' => $instance['image_size'] ) ) )
+				printf( '<a href="%s" title="%s" class="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), esc_attr( $instance['image_alignment'] ), $image );
 
 			if ( ! empty( $instance['show_title'] ) )
 				printf( '<h2><a href="%s" title="%s">%s</a></h2>', get_permalink(), the_title_attribute( 'echo=0' ), get_the_title() );
@@ -103,7 +97,7 @@ class Genesis_Featured_Page extends WP_Widget {
 				the_time( 'F j, Y' );
 				echo ' ' . __( 'by', 'genesis' ) . ' ';
 				the_author_posts_link();
-				echo g_ent( ' &middot; ' );
+				echo '&#x02026;';
 				comments_popup_link( __( 'Leave a Comment', 'genesis' ), __( '1 Comment', 'genesis' ), __( '% Comments', 'genesis' ) );
 				echo ' ';
 				edit_post_link( __( '(Edit)', 'genesis' ), '', '' );
@@ -180,12 +174,12 @@ class Genesis_Featured_Page extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image_size' ); ?>"><?php _e( 'Image Size', 'genesis' ); ?>:</label>
-			<select id="<?php echo $this->get_field_id( 'image_size' ); ?>" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
-				<option value="thumbnail">thumbnail (<?php echo get_option( 'thumbnail_size_w' ); ?>x<?php echo get_option( 'thumbnail_size_h' ); ?>)</option>
+			<select id="<?php echo $this->get_field_id( 'image_size' ); ?>" class="genesis-image-size-selector" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
+				<option value="thumbnail">thumbnail (<?php echo absint( get_option( 'thumbnail_size_w' ) ); ?>x<?php echo absint( get_option( 'thumbnail_size_h' ) ); ?>)</option>
 				<?php
 				$sizes = genesis_get_additional_image_sizes();
 				foreach ( (array) $sizes as $name => $size )
-					echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . $name . ' (' . $size['width'] . 'x' . $size['height'] . ')</option>';
+					echo '<option value="' . esc_attr( $name ) . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' (' . absint( $size['width'] ) . 'x' . absint( $size['height'] ) . ')</option>';
 				?>
 			</select>
 		</p>

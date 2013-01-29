@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Scripts-Styles
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -23,11 +23,10 @@ function genesis_load_scripts() {
 	if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
 		wp_enqueue_script( 'comment-reply' );
 
-	/** If a superfish option is enabled or showing a menu of any type, load superfish and the arguments for it in the footer */
-	if ( genesis_get_option( 'nav_superfish' ) || genesis_get_option( 'subnav_superfish' ) ||
-		is_active_widget( 0, 0, 'menu-categories' ) || is_active_widget( 0, 0, 'menu-pages' ) || is_active_widget( 0, 0, 'nav_menu' ) ) {
-			wp_enqueue_script( 'superfish', GENESIS_JS_URL . '/menu/superfish.js', array( 'jquery' ), '1.4.8', true );
-			wp_enqueue_script( 'superfish-args', GENESIS_JS_URL . '/menu/superfish.args.js', array( 'superfish' ), PARENT_THEME_VERSION, true );
+	/** If superfish is enabled  */
+	if ( genesis_superfish_enabled() ) {
+		wp_enqueue_script( 'superfish', GENESIS_JS_URL . '/menu/superfish.js', array( 'jquery' ), '1.4.8', true );
+		wp_enqueue_script( 'superfish-args', GENESIS_JS_URL . '/menu/superfish.args.js', array( 'superfish' ), PARENT_THEME_VERSION, true );
 	}
 
 }

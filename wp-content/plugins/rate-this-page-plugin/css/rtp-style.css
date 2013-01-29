@@ -1,0 +1,230 @@
+/*-- Layout for Rate This Page Plugin --*/
+
+/*-- Main Layout --*/
+.rtp-feedback {
+	display: inline-block;
+	position: relative;
+	width: 522px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.rtp-feedback .rtp-feedback-panel {
+	float: left;
+}
+
+.rtp-feedback .rtp-feedback-panel, #rtp-feedback-wpanel {
+	background-color: #263248;
+	padding: 10px 0px 10px 10px;
+	text-shadow: none;
+	
+	box-shadow: 3px 5px 5px #353536;
+	-moz-box-shadow: 3px 5px 5px #353536;
+	-webkit-box-shadow: 3px 5px 5px #353536;
+	-khtml-box-shadow: 3px 5px 5px #353536;
+}
+
+.rtp-feedback .rtp-feedback-buffer {
+	color: #fff;
+	font-family: Verdana;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 17px;
+	text-align: left;
+}
+
+.rtp-feedback .feedback-title {
+	color: #fff;
+	font-size: 1.4em;
+	font-family: Verdana;
+	text-align: left;
+}
+
+.rtp-feedback .feedback-ratings {
+	color: #fff;
+    float: left;
+    font-size: 10px;
+    height: 85px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+	width: 128px;
+}
+
+.rtp-feedback .feedback-label {
+	color: #fff;
+    cursor: pointer;
+    font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+	padding-left: 10px;
+	position: relative;
+	top: -2px;
+	
+	word-wrap: break-word;
+}
+
+.rtp-feedback label.feedback-label {
+	display: inline;
+}
+
+.rtp-feedback #feedback-trustworthy img, .rtp-feedback #feedback-objective img, .rtp-feedback #feedback-complete img, .rtp-feedback #feedback-wellwritten img {
+	border: 0 none;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+}
+
+.rtp-feedback .feedback-options {
+	float: left;
+	font-size: 14px;
+	line-height: 0;
+	text-align: left;
+	width: 502px;
+}
+
+.rtp-feedback .feedback-options-selection {
+	line-height: 0;
+}
+
+.rtp-feedback input#feedback-options-general {
+	display: inline;
+	margin: 0 0 4px;
+}
+
+.rtp-feedback .feeback-helpimprove-hidden {
+	line-height: 0;
+}
+
+.rtp-feedback .feeback-helpimprove-hidden input {
+	display: inline;
+	margin: 0 0 7px;
+}
+
+.rtp-feedback ul#feedback-helpimprove {
+	margin: 5px 0;
+	padding: 0 0 0 30px;
+}
+
+.rtp-feedback ul#feedback-helpimprove li {
+	background: none;
+	line-height: 1px;
+	list-style-type: none;
+	padding: 0;
+}
+
+.rtp-feedback #rtp-loading {
+	background:url('../img/success.png') left top no-repeat;	
+	color: #b91313;
+	display: none;
+	float: right;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	height: 24px;
+	padding-left: 30px;
+	/*padding-right: 10px;*/
+	position: relative;
+	top: 9px;
+}
+/*-- End of Main Layout --*/
+
+/*-- Button Layout --*/
+.rtp-feedback button.rtp-button {
+	background: url('../img/btn-submit.png') repeat-x;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	height: 30px;
+	margin: 5px 10px 0;
+	padding: 0;
+	float: right;
+	
+	border-radius: 4px 4px;
+	-moz-border-radius: 4px 4px;
+	-webkit-border-radius: 4px 4px;
+	-khtml-border-radius: 4px 4px;
+}
+
+.rtp-feedback button.rtp-button:hover {
+	background: url('../img/btn-submit-hover.png') repeat-x;
+}
+
+.rtp-feedback button.rtp-button:active, .rtp-feedback button.rtp-button:focus {
+	background: url('../img/btn-submit-active.png') repeat-x;
+}
+
+.rtp-feedback span#rtp-button-label {
+	padding: 9px 10px 7px;
+}
+
+.hidden {
+	visibility: hidden;
+}
+/*-- End of Button Layout --*/
+
+/* BETA MODE v1.2*/
+.rtp-switch {
+	cursor: pointer;
+    float: right;
+    font-weight: normal;
+    padding-right: 10px;
+}
+.rtp-switch:hover {
+    text-decoration: underline;
+}
+.rtp-switch-form {
+	/*background-image: url('../img/square-gray-right.gif');*/
+}
+.rtp-switch-form:hover {
+    /*background-image: url('../img/square-gray-right.gif');*/
+}
+
+.rtp-switch-report {
+	/*background-image: url('../img/square-gray-right.gif');*/
+}
+.rtp-switch-report:hover {
+    /*background-image: url('../img/square-gray-right.gif');*/
+}
+
+.feedback-title span{
+	font-size: 13px;
+	position: relative;
+    top: 5px;
+}
+
+.rtp-average-report, .rtp-rating-count {
+	float: left;
+    font-size: 9px;
+    font-weight: normal;
+    text-align: right;
+}
+
+.rtp-rating-count {
+	float: right;
+	margin-right: 12px;
+}
+
+#rtp-trustworthy-bar, #rtp-objective-bar, #rtp-complete-bar, #rtp-wellwritten-bar {
+	margin-left: 20px;
+}
+
+/* -- Widget Layout -- */
+#rtp-feedback-wpanel {
+	list-style: none;
+	width: auto;
+}
+
+#rtp-feedback-wpanel li {
+	list-style: none;
+	margin: 0;
+}
+
+#rtp-feedback-wpanel li a {
+	color: #BBBBBB;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+/*-- End of Widget Layout --*/

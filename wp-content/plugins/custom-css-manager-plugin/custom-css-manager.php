@@ -6,7 +6,7 @@ class Custom_CSS_Manager {
 	 *
 	 * @var string
 	 */
-	public $version                 = '1.3';
+	public $version                 = '1.4.2';
 	
 	/**
 	 * Array with default options

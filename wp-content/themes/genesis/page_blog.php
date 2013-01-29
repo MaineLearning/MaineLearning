@@ -11,6 +11,8 @@
  *
  * This file is a core Genesis file and should not be edited.
  *
+ * The blog page loop logic is located in lib/structure/loops.php
+ *
  * @category Genesis
  * @package  Templates
  * @author   StudioPress

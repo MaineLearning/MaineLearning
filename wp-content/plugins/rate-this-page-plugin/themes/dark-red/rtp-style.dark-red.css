@@ -1,0 +1,35 @@
+/*
+ *	Rate This Page Layout
+ *	- Dark Red
+ *
+ */
+ 
+.rtp-feedback .rtp-feedback-panel, #rtp-feedback-wpanel {
+	background-color: #780005;
+	
+	box-shadow: 3px 3px 5px #353536;
+	-moz-box-shadow: 3px 3px 5px #353536;
+	-webkit-box-shadow: 3px 3px 5px #353536;
+	-khtml-box-shadow: 3px 3px 5px #353536;
+}
+
+.rtp-feedback .feedback-title, .rtp-feedback .feedback-ratings, .rtp-feedback .feedback-label, .rtp-feedback .rtp-feedback-buffer {
+	color: #E8DCDC;
+}
+
+.rtp-feedback button.rtp-button {
+	background: url('btn-submit.png') repeat-x;
+	color: #E8DCDC;
+}
+
+.rtp-feedback button.rtp-button:hover {
+	background: url('btn-submit-hover.png') repeat-x;
+}
+
+.rtp-feedback button.rtp-button:active, .rtp-feedback button.rtp-button:focus {
+	background: url('btn-submit-active.png') repeat-x;
+}
+
+.rtp-feedback #rtp-loading {	
+	color: #000E26;
+}

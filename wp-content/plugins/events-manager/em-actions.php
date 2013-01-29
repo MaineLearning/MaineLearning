@@ -68,7 +68,11 @@ function em_init_actions() {
 				$events_result = true;
 				//Success notice
 				if( is_user_logged_in() ){
-					$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success')), true);
+					if( empty($_REQUEST['event_id']) ){
+						$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success')), true);
+					}else{
+					    $EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success_updated')), true);
+					}
 				}else{
 					$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_anonymous_result_success')), true);
 				}
@@ -196,6 +200,7 @@ function em_init_actions() {
 				}elseif( !is_user_logged_in() ){
 					$location_cond = " AND location_private=0";		    
 				}
+				$location_cond = apply_filters('em_actions_locations_search_cond', $location_cond);
 				$term = (isset($_REQUEST['term'])) ? '%'.$_REQUEST['term'].'%' : '%'.$_REQUEST['q'].'%';
 				$sql = $wpdb->prepare("
 					SELECT 
@@ -244,7 +249,7 @@ function em_init_actions() {
 		if ( $_REQUEST['action'] == 'booking_add') {
 			//ADD/EDIT Booking
 			ob_start();
-			em_verify_nonce('booking_add');
+			if( !defined('WP_CACHE') || !WP_CACHE ) em_verify_nonce('booking_add');
 			if( !is_user_logged_in() || get_option('dbem_bookings_double') || !$EM_Event->get_bookings()->has_booking(get_current_user_id()) ){
 			    $EM_Booking->get_post();
 				$post_validation = $EM_Booking->validate();
@@ -632,13 +637,15 @@ function em_init_actions() {
 		header("Content-Type: application/octet-stream; charset=utf-8");
 		header("Content-Disposition: Attachment; filename=".sanitize_title(get_bloginfo())."-bookings-export.csv");
 		do_action('em_csv_header_output');
-		if( !empty($_REQUEST['event_id']) ){
-			$EM_Event = em_get_event($_REQUEST['event_id']);
-			echo __('Event','dbem') . ' : ' . $EM_Event->event_name .  "\n";
-			if( $EM_Event->location_id > 0 ) echo __('Where','dbem') . ' - ' . $EM_Event->get_location()->location_name .  "\n";
-			echo __('When','dbem') . ' : ' . $EM_Event->output('#_EVENTDATES - #_EVENTTIMES') .  "\n";
+		if( !defined('EM_CSV_DISABLE_HEADERS') || !EM_CSV_DISABLE_HEADERS ){
+			if( !empty($_REQUEST['event_id']) ){
+				$EM_Event = em_get_event($_REQUEST['event_id']);
+				echo __('Event','dbem') . ' : ' . $EM_Event->event_name .  "\n";
+				if( $EM_Event->location_id > 0 ) echo __('Where','dbem') . ' - ' . $EM_Event->get_location()->location_name .  "\n";
+				echo __('When','dbem') . ' : ' . $EM_Event->output('#_EVENTDATES - #_EVENTTIMES') .  "\n";
+			}
+			echo sprintf(__('Exported booking on %s','dbem'), date_i18n('D d M Y h:i', current_time('timestamp'))) .  "\n";
 		}
-		echo sprintf(__('Exported booking on %s','dbem'), date_i18n('D d M Y h:i', current_time('timestamp'))) .  "\n";
 		echo '"'. implode('","', $EM_Bookings_Table->get_headers(true)). '"' .  "\n";
 		//Rows
 		$EM_Bookings_Table->limit = 150; //if you're having server memory issues, try messing with this number

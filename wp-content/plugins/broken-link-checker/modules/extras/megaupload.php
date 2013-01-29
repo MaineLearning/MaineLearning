@@ -265,5 +265,3 @@ class blcMegaUploadChecker extends blcChecker {
     }
 	
 }
-
-?>

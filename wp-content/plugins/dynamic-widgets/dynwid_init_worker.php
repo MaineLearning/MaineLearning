@@ -2,7 +2,7 @@
 /**
  * dynwid_init_worker.php
  *
- * @version $Id: dynwid_init_worker.php 593381 2012-09-01 14:07:14Z qurl $
+ * @version $Id: dynwid_init_worker.php 618242 2012-10-28 14:00:39Z qurl $
  * @copyright 2011 Jacco Drabbe
  */
 
@@ -16,7 +16,7 @@
 	// UserAgent detection
 	$DW->message('UserAgent: ' . $DW->useragent);
 
-	$DW->message('Today it is ' . date('l') . ' (' . date('N') . '), Week: ' . date('W'));
+	$DW->message('Today it is ' . date('l', current_time('timestamp', 0)) . ' (' . date('N', current_time('timestamp', 0)) . '), Week: ' . date('W', current_time('timestamp', 0)));
 
 	$DW->message('User has role(s): ' . implode(', ', $DW->userrole));
 

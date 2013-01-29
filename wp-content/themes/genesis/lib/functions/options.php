@@ -6,7 +6,7 @@
  * @category Genesis
  * @package  Options
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -189,6 +189,63 @@ function genesis_get_custom_field( $field ) {
 
 }
 
+/**
+ * Saves post meta / custom field data for a post or page.
+ *
+ * It verifies the nonce, then checks we're not doing autosave, ajax or a future
+ * post request. It then checks the current user's permissions, before finally
+ * either updating the post meta, or deleting the field if the value was not
+ * truthy.
+ *
+ * By passing an array of fields => values from the same metabox (and therefore same nonce)
+ * into the $data argument, repeated checks against the nonce, request and
+ * permissions are avoided.
+ *
+ * @since 1.9.0
+ *
+ * @param array        $data         Key/Value pairs of data to save in '_field_name' => 'value' format.
+ * @param string       $nonce_action Nonce action for use with wp_verify_nonce().
+ * @param string       $nonce_name   Name of the nonce to check for permissions.
+ * @param integer      $post_id      ID of the post to save custom field value to.
+ * @param stdClass     $post         Post object.
+ *
+ * @return mixed Returns null if permissions incorrect, doing autosave,
+ *               ajax or future post, false if update or delete failed, and true
+ *               on success.
+ */
+function genesis_save_custom_fields( $data, $nonce_action, $nonce_name, $post, $post_id ) {
+
+	/**	Verify the nonce */
+	if ( ! isset( $_POST[ $nonce_name ] ) || ! wp_verify_nonce( $_POST[ $nonce_name ], $nonce_action ) )
+		return;
+
+	/**	Don't try to save the data under autosave, ajax, or future post. */
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		return;
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+		return;
+	if ( defined( 'DOING_CRON' ) && DOING_CRON )
+		return;
+
+	/* Don't save if WP is creating a revision (same as DOING_AUTOSAVE?) */
+	if ( 'revision' == $post->post_type )
+		return;
+
+	/**	Check the user allowed to edit the post or page */
+	if ( ( 'page' == $post->post_type && ! current_user_can( 'edit_page' ) ) || ! current_user_can( 'edit_post' ) )
+		return;
+
+	/** Cycle through $data, insert value or delete field */
+	foreach ( (array) $data as $field => $value ) {
+		/** Save $value, or delete if the $value is empty */
+		if ( $value )
+			update_post_meta( $post_id, $field, $value );
+		else
+			delete_post_meta( $post_id, $field );
+	}
+
+}
+
 add_filter( 'get_term', 'genesis_get_term_filter', 10, 2 );
 /**
  * Genesis is forced to create its own term-meta data structure in
@@ -206,22 +263,19 @@ function genesis_get_term_filter( $term, $taxonomy ) {
 	$db = get_option( 'genesis-term-meta' );
 	$term_meta = isset( $db[$term->term_id] ) ? $db[$term->term_id] : array();
 
-	$term->meta = wp_parse_args(
-		$term_meta,
-		array(
-			'headline'            => '',
-			'intro_text'          => '',
-			'display_title'       => 0, /** vestigial */
-			'display_description' => 0, /** vestigial */
-			'doctitle'            => '',
-			'description'         => '',
-			'keywords'            => '',
-			'layout'              => '',
-			'noindex'             => 0,
-			'nofollow'            => 0,
-			'noarchive'           => 0,
-		)
-	);
+	$term->meta = wp_parse_args( $term_meta, apply_filters( 'genesis_term_meta_defaults', array(
+		'headline'            => '',
+		'intro_text'          => '', 
+		'display_title'       => 0, /** vestigial */
+		'display_description' => 0, /** vestigial */
+		'doctitle'            => '',
+		'description'         => '',
+		'keywords'            => '',
+		'layout'              => '',
+		'noindex'             => 0,
+		'nofollow'            => 0,
+		'noarchive'           => 0,
+	) ) );
 
 	/** Sanitize term meta */
 	foreach ( $term->meta as $field => $value )

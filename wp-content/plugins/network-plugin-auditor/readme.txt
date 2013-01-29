@@ -3,7 +3,7 @@ Contributors: ksemel
 Donate Link: http://bonsaibudget.com/donate/
 Tags: network, multisite, plugin management, theme management, admin
 Requires at least: 3.2.1
-Tested up to: 3.4.1
+Tested up to: 3.5
 Stable tag: trunk
 
 For multisite/network installations only.  Adds columns to your network admin to show which sites are using each plugin and theme.
@@ -20,6 +20,19 @@ This plugin adds a column to your network admin to show which sites have each pl
 2. Network Activate the plugin through the 'Network Plugins' menu in WordPress
 
 == Changelog ==
+
+= 1.3.2 =
+
+- Reduced transient name length to under 45 characters
+
+= 1.3.1 =
+
+- Fixed a bug where the primary blog would show all available themes as active even if they were not.
+- Fix over-long transient names in db fields
+
+= 1.3 =
+
+- Fixed Wordpress 3.5 compatibility issues
 
 = 1.2 =
 
@@ -41,6 +54,19 @@ Bug fix: Check column_name before adding the output (Thanks to gabriel-reguly fo
 Initial release
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+
+- Reduced transient name length to under 45 characters
+
+= 1.3.1 =
+
+- Fixed a bug where the primary blog would show all available themes as active even if they were not.
+- Fix over-long transient names in db fields
+
+= 1.3 =
+
+- Fixed Wordpress 3.5 compatibility issues
 
 = 1.2 =
 

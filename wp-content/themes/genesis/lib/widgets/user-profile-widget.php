@@ -39,7 +39,7 @@ class Genesis_User_Profile_Widget extends WP_Widget {
 			'author_info'    => '',
 			'bio_text'       => '',
 			'page'           => '',
-			'page_link_text' => sprintf( __( '[Read More %s]', 'genesis' ), g_ent( '&hellip;' ) ),
+			'page_link_text' => __( 'Read More', 'genesis' ) . '&#x02026;',
 			'posts_link'     => '',
 		);
 
@@ -114,7 +114,7 @@ class Genesis_User_Profile_Widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 
 		$new_instance['title']          = strip_tags( $new_instance['title'] );
-		$new_instance['bio_text']       = wp_kses( $new_instance['bio_text'], genesis_formatting_allowedtags() );
+		$new_instance['bio_text']       = current_user_can( 'unfiltered_html' ) ? $new_instance['bio_text'] : genesis_formatting_kses( $new_instance['bio_text'] );
 		$new_instance['page_link_text'] = strip_tags( $new_instance['page_link_text'] );
 
 		return $new_instance;

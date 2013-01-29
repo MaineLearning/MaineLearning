@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Updates
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -78,21 +78,51 @@ function genesis_update_check() {
 }
 
 /**
- * Upgrade the database to version 1802.
+ * Upgrade the database to version 1904.
  *
- * @since 1.8.0
+ * @since 1.9.0
  *
  * @uses _genesis_update_settings()
  */
-function genesis_upgrade_1804() {
+function genesis_upgrade_1904() {
 
 	/** Update Settings */
-	_genesis_update_settings(
-		array(
-			'theme_version' => '1.8.2',
-			'db_version'    => '1804',
-		)
-	);
+	_genesis_update_settings( array(
+		'theme_version' => '1.9.1',
+		'db_version'    => '1904',
+	) );
+
+}
+
+/**
+ * Upgrade the database to version 1901.
+ *
+ * @since 1.9.0
+ *
+ * @uses _genesis_update_settings()
+ */
+function genesis_upgrade_1901() {
+
+	/** Get menu locations */
+	$menu_locations = get_theme_mod( 'nav_menu_locations' );
+
+	/** Clear assigned nav if nav disabled */
+	if ( ! genesis_get_option( 'nav' ) && $menu_locations['primary'] ) {
+		$menu_locations['primary'] = 0;
+		set_theme_mod( 'nav_menu_locations', $menu_locations );
+	}
+
+	/** Clear assigned subnav if subnav disabled */
+	if ( ! genesis_get_option( 'subnav' ) && $menu_locations['secondary'] ) {
+		$menu_locations['secondary'] = 0;
+		set_theme_mod( 'nav_menu_locations', $menu_locations );
+	}
+
+	/** Update Settings */
+	_genesis_update_settings( array(
+		'theme_version' => '1.9.0-alpha1901',
+		'db_version'    => '1901',
+	) );
 
 }
 
@@ -120,30 +150,9 @@ function genesis_upgrade_1800() {
 	update_option( 'genesis-term-meta', $term_meta );
 
 	/** Update Settings */
-	_genesis_update_settings(
-		array(
-			'db_version'    => '1800',
-		)
-	);
-
-}
-
-/**
- * Upgrade the database to version 1702.
- *
- * @since 1.7.0
- *
- * @uses _genesis_update_settings()
- */
-function genesis_upgrade_1702() {
-
-	/** Update Settings */
-	_genesis_update_settings(
-		array(
-			'theme_version' => '1.7',
-			'db_version'    => '1702',
-		)
-	);
+	_genesis_update_settings( array(
+		'db_version'    => '1800',
+	) );
 
 }
 
@@ -167,12 +176,10 @@ function genesis_upgrade_1700() {
 	$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->usermeta SET meta_value = %s WHERE meta_key = %s OR meta_key = %s", '1', 'screen_layout_toplevel_page_genesis', 'screen_layout_genesis_page_seosettings' ) );
 
 	/** Update Settings */
-	_genesis_update_settings(
-		array(
-			'theme_version' => '1.7-alpha-1700',
-			'db_version'    => '1700',
-		)
-	);
+	_genesis_update_settings( array(
+		'theme_version' => '1.7-alpha-1700',
+		'db_version'    => '1700',
+	) );
 
 }
 
@@ -336,25 +343,25 @@ function genesis_upgrade() {
 		genesis_upgrade_1700();
 
 	###########################
-	# UPDATE DB TO VERSION 1702
-	###########################
-
-	if ( genesis_get_option( 'db_version', null, false ) < '1702' )
-		genesis_upgrade_1702();
-
-	###########################
 	# UPDATE DB TO VERSION 1800
 	###########################
 
 	if ( genesis_get_option( 'db_version', null, false ) < '1800' )
 		genesis_upgrade_1800();
-		
+
 	###########################
-	# UPDATE DB TO VERSION 1804
+	# UPDATE DB TO VERSION 1901
 	###########################
 
-	if ( genesis_get_option( 'db_version', null, false ) < '1804' )
-		genesis_upgrade_1804();
+	if ( genesis_get_option( 'db_version', null, false ) < '1901' )
+		genesis_upgrade_1901();
+		
+	###########################
+	# UPDATE DB TO VERSION 1904
+	###########################
+
+	if ( genesis_get_option( 'db_version', null, false ) < '1904' )
+		genesis_upgrade_1904();
 
 	do_action( 'genesis_upgrade' );
 
@@ -373,10 +380,11 @@ add_action( 'genesis_upgrade', 'genesis_upgrade_redirect' );
  */
 function genesis_upgrade_redirect() {
 
-	if ( ! is_admin() )
+	if ( ! is_admin() || ! current_user_can( 'edit_theme_options' ) )
 		return;
 
-	genesis_admin_redirect( 'genesis', array( 'upgraded' => 'true' ) );
+	#genesis_admin_redirect( 'genesis', array( 'upgraded', 'true' ) );
+	genesis_admin_redirect( 'genesis-upgraded' );
 	exit;
 
 }
@@ -385,6 +393,8 @@ add_action( 'admin_notices', 'genesis_upgraded_notice' );
 /**
  * Displays the notice that the theme settings were successfully updated to the
  * latest version.
+ *
+ * Currently, only used for pre-release update notices.
  *
  * @since 1.2.0
  *

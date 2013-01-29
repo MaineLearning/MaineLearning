@@ -28,8 +28,8 @@ function em_event_submission_emails($result, $EM_Event){
 				$approvals_count = get_post_meta($EM_Event->post_id,'_event_approvals_count', true);
 				$approvals_count = $approvals_count > 0 ? $approvals_count:0;
 				update_post_meta($EM_Event->post_id, '_event_approvals_count', $approvals_count+1);
-				$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
-				if( empty($admin_emails) ) return true;
+				$admin_emails = explode(',', str_replace(' ', '', get_option('dbem_event_submitted_email_admin'))); //admin emails are in an array, single or multiple
+	        	if( empty($admin_emails) ) return true;
 				if( $approvals_count > 1 ){
 					$subject = $EM_Event->output(get_option('dbem_event_resubmitted_email_subject'), 'raw');
 					$message = $EM_Event->output(get_option('dbem_event_resubmitted_email_body'), $output_type);
@@ -42,7 +42,7 @@ function em_event_submission_emails($result, $EM_Event){
 			}
 		}elseif( !current_user_can('activate_plugins') ){
 		    if( $EM_Event->is_published() && !$EM_Event->previous_status ){
-	        	$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
+	        	$admin_emails = explode(',', str_replace(' ', '', get_option('dbem_event_submitted_email_admin'))); //admin emails are in an array, single or multiple
 	        	if( empty($admin_emails) ) return true;
 	        	$subject = $EM_Event->output(get_option('dbem_event_published_email_subject'), 'raw');
 	        	$body = $EM_Event->output(get_option('dbem_event_published_email_body'), $output_type);

@@ -3,8 +3,8 @@ Contributors: Qurl
 Donate link: http://www.qurl.nl/dynamic-widgets/donate/
 Tags: widget, widgets, dynamic, sidebar, custom, rules, logic, admin, condition, conditional tags, hide, show, wpml, qtranslate, wpec, buddypress, pods, bbpress
 Requires at least: 3.0.0
-Tested up to: 3.4.2
-Stable tag: 1.5.3
+Tested up to: 3.5
+Stable tag: 1.5.4
 
 Dynamic Widgets gives you full control on which pages your widgets will appear. It lets you dynamicly show or hide widgets on WordPress pages.
 
@@ -84,6 +84,7 @@ It is very hard to continue development and support for this plugin without cont
 	- Brazil Portuguese (pt_BR) by [Renato Tavares](http://www.renatotavares.com)
 	- Chech (cs_CZ) by [Pavel Bilek](http://chcistranky.eu/zdarma/)
 	- Chinese (Simplified) (zh_CN) by Hanolex
+	- Danish (da_DK) by Morten Nalholm
 	- French (fr_FR) by Alexis Nomine
 	- German (de_DE) by Daniel Bihler
 	- Lithuanian (lt_LT) by Liudas Ališauskas
@@ -175,7 +176,18 @@ Please check the [Issue Tracker](http://www.qurl.nl/dynamic-widgets/issue-tracke
 
 == Changelog ==
 
+= Version 1.5.4 =
+
+* Added Danish language file (locale: da_DK) - Tak Morten!
+* Bugfix for WPML postID finder reports 0 when WPML language is unknown.
+* Bugfix for Single Post Rules are lost when autosave of single post is made
+* Bugfix for Warning: Missing argument 2 for wpdb::prepare().
+* Upgraded the Pods module to support Pods version 2. - Thanks Scott for the help!
+* Widend the widget_id space because of looooong widget names.
+* Moved to WordPress time in stead of server time for the date/time based modules.
+
 = Version 1.5.3 =
+
 * Added URL support.
 * Added Day of the week support.
 * Added Weeknumber support.
@@ -390,9 +402,9 @@ This version has 3 bugs fixed.
 
 == Upgrade Notice ==
 
-= 1.5.3 =
+= 1.5.4 =
 
-This version has 6 features added and 4 bugs fixed.
+This version has 3 bugs fixed. Upgrade before you upgrade to WordPress 3.5.
 
 == Screenshots ==
 

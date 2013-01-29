@@ -94,5 +94,3 @@ class blcUrlField extends blcParser {
 		return '';
 	}
 }
-
-?>

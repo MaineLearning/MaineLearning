@@ -43,7 +43,7 @@ class BP_EM_Component extends BP_Component {
 		global $bp, $wpdb;
 		// Define a slug constant that will be used to view this components pages
 		if ( !defined( 'BP_EM_SLUG' ) )
-			define ( 'BP_EM_SLUG', EM_POST_TYPE_EVENT_SLUG );
+			define ( 'BP_EM_SLUG', str_replace('/','-', EM_POST_TYPE_EVENT_SLUG) );
 
 		// Set up the $globals array to be passed along to parent::setup_globals()
 		$globals = array(
@@ -308,6 +308,15 @@ if( !is_admin() || ( defined('DOING_AJAX') && !empty($_REQUEST['is_public'])) ){
 		add_filter('em_location_get_edit_url','em_bp_rewrite_edit_location_url',10,2);
 	}
 }
+
+//CSS and JS Loading
+function bp_em_enqueue_scripts( ){
+	if( bp_is_current_component('events') || (bp_is_current_component('groups') && bp_is_current_action('group-events')) ){
+	    add_filter('option_dbem_js_limit', create_function('$args','return false;'));
+	    add_filter('option_dbem_css_limit', create_function('$args','return false;'));
+	}
+}
+add_action('wp_enqueue_scripts','bp_em_enqueue_scripts',1);
 
 /**
  * Delete events when you delete a user.

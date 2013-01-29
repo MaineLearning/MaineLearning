@@ -2,14 +2,14 @@
 /* Plugin Name: WP-FB-AutoConnect
  * Description: A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible. Supports BuddyPress.
  * Author: Justin Klein
- * Version: 2.4.1
+ * Version: 2.5.9
  * Author URI: http://www.justin-klein.com/
  * Plugin URI: http://www.justin-klein.com/projects/wp-fb-autoconnect
  */
 
 
 /*
- * Copyright 2010-2011 Justin Klein (email: justin@justin-klein.com)
+ * Copyright 2010-2012 Justin Klein (email: justin@justin-klein.com)
  * 
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -72,16 +72,16 @@ function jfb_enqueue_styles()
 {
     global $jfb_version;
     wp_enqueue_style('jfb', plugins_url(dirname(plugin_basename(__FILE__))).'/style.css', array(), $jfb_version );  
+    wp_enqueue_script('jquery');
 }
 
 
 /*
- * Output a Facebook Connect Button.  Note that the button will not function until you've called 
- * jfb_output_facebook_init().  I use document.write() because the button isn't XHTML valid.
- * NOTE: The button tag itself maybe overwritten by the Premium addon (wpfb_output_button filter)
+ * Output a Login with Facebook Button.
  */
 function jfb_output_facebook_btn()
 {
+    //Make sure the plugin has been setup
     global $jfb_name, $jfb_version, $jfb_js_callbackfunc, $opt_jfb_valid;
     global $opt_jfb_ask_perms, $opt_jfb_ask_stream, $opt_jfbp_requirerealmail;
     echo "<!-- $jfb_name Button v$jfb_version -->\n";
@@ -90,31 +90,33 @@ function jfb_output_facebook_btn()
         echo "<!--WARNING: Invalid or Unset Facebook API Key-->";
         return;
     }
-    ?>
-    <span class="fbLoginButton">
-    <script type="text/javascript">//<!--
-    <?php 
-    $btnTag = "document.write('<fb:login-button v=\"2\" size=\"small\" onlogin=\"$jfb_js_callbackfunc();\">Login with Facebook</fb:login-button>');";  
-
-    //Let the premium addon overwrite the size/text
-    $btnTag = apply_filters('wpfb_output_button', $btnTag );
-        
-    //Tell the button about the extended permissions it'll prompt for
+    
+    //Figure out our scope (aka extended permissions)
     $email_perms = get_option($opt_jfb_ask_perms) || get_option($opt_jfbp_requirerealmail);
     $stream_perms = get_option($opt_jfb_ask_stream);
-    if( $email_perms && $stream_perms )    $attr = 'scope="'.apply_filters('wpfb_extended_permissions','email,publish_stream').'"';
-    else if( $email_perms )                $attr = 'scope="'.apply_filters('wpfb_extended_permissions','email').'"';
-    else if( $stream_perms )               $attr = 'scope="'.apply_filters('wpfb_extended_permissions','publish_stream').'"';
-    else                                   $attr = 'scope="'.apply_filters('wpfb_extended_permissions','') . '"';
-    $btnTag = str_replace( "login-button ", "login-button " . $attr . " ", $btnTag);
-        
-    //Output!
-    echo $btnTag;
-    ?>
-    //--></script>
-    </span>
+    if( $email_perms && $stream_perms )    $scope = 'email,publish_stream';
+    else if( $email_perms )                $scope = 'email';
+    else if( $stream_perms )               $scope = 'publish_stream';
+    else                                   $scope = '';
+    $scope = apply_filters('wpfb_extended_permissions', $scope);
     
-    <?php
+    //Output the button for the Premium version
+    if(defined('JFB_PREMIUM_VER'))
+    {
+        ?><span class="fbLoginButton"><script type="text/javascript">//<!--
+            <?php echo str_replace( "login-button ", "login-button scope=\"" . $scope . "\" ", jfb_output_facebook_btn_premium('')); ?>
+        //--></script></span><?php
+    }
+    
+    //Output the button for the free version
+    else
+    {
+        ?><span class="fbLoginButton"><script type="text/javascript">//<!--
+            document.write('<fb:login-button scope="<?php echo $scope ?>" v="2" size="small" onlogin="<?php echo $jfb_js_callbackfunc ?>();"><?php echo apply_filters('wpfb_button_text', 'Login with Facebook') ?></fb:login-button>');
+        //--></script></span><?php
+    }
+ 
+    //Run action
     do_action('wpfb_after_button');
 }
 
@@ -215,7 +217,7 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
      //Output an html form that we'll submit via JS once the FB login is complete; it redirects us to the PHP script that logs us into WP.  
      ?><form id="wp-fb-ac-fm" name="<?php echo $callbackName ?>_form" method="post" action="<?php echo plugins_url(dirname(plugin_basename(__FILE__))) . "/_process_login.php"?>" >
           <input type="hidden" name="redirectTo" value="<?php echo $redirectTo?>" />
-          <input type="hidden" name="accessToken" id="jfb_accessToken" value="0" />
+          <input type="hidden" name="access_token" id="jfb_access_token" value="0" />
           <?php wp_nonce_field ($jfb_nonce_name, $jfb_nonce_name) ?>
           <?php do_action('wpfb_add_to_form'); ?>   
      </form>
@@ -238,7 +240,7 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
             }
             
             //Set the access token to be sent in to our login script
-            jQuery('#jfb_accessToken').val(response.authResponse.accessToken);
+            jQuery('#jfb_access_token').val(response.authResponse.accessToken);
         
             //Submit the login and close the FB.getLoginStatus call
             <?php echo apply_filters('wpfb_submit_loginfrm', "document." . $callbackName . "_form.submit();\n" ); ?>
@@ -316,7 +318,7 @@ function jfb_wp_avatar($avatar, $id_or_email, $size, $default, $alt)
 /*
  * Optionally replace BUDDYPRESS avatars with FACEBOOK profile pictures
  */
-if( get_option($opt_jfb_wp_avatars) ) add_filter( 'bp_core_fetch_avatar', 'jfb_bp_avatar', 10, 4 );    
+if( get_option($opt_jfb_wp_avatars) ) add_filter( 'bp_core_fetch_avatar', 'jfb_bp_avatar', 9, 4 );    
 function jfb_bp_avatar($avatar, $params='')
 {
     //First, get the userid
@@ -327,6 +329,7 @@ function jfb_bp_avatar($avatar, $params='')
 	if (!$user_id)                                      return $avatar;
 	
     //Now that we have a userID, let's see if we have their facebook profile pic stored in usermeta.  If not, fallback on the default.
+	$fb_img = 0;
 	if( $params['type'] == 'full' ) $fb_img = get_user_meta($user_id, 'facebook_avatar_full', true);
 	if( !$fb_img )                  $fb_img = get_user_meta($user_id, 'facebook_avatar_thumb', true);
 	if( !$fb_img )                  return $avatar;
@@ -412,16 +415,12 @@ if( get_option($opt_jfb_ask_stream) ) add_action('wpfb_inserted_user', 'jfb_post
 function jfb_post_to_wall($args)
 {
     global $opt_jfb_ask_stream, $jfb_log, $opt_jfb_stream_content;
-    try
-    {
-        $jfb_log .= "FB: Publishing registration news to user's wall.\n";
-        $args['facebook']->api('/me/feed/', 'post', array('access_token' => $args['facebook']->access_token, 'message' => get_option($opt_jfb_stream_content)));
-    }
-    catch (FacebookApiException $e)
-    {
-        $jfb_log .= "WARNING: Failed to publish to the user's wall (is your message too long?) (" . $e . ")\n";
-    }
-}   
+    $jfb_log .= "FB: Publishing registration news to user's wall.\n";
+    $url = "https://graph.facebook.com/me/feed?message=" . urlencode(get_option($opt_jfb_stream_content)) . "&access_token=".$args['access_token']; 
+    $reply = jfb_api_post($url);
+    if(isset($reply['error']))
+        $jfb_log .= "WARNING: Failed to publish to the user's wall (" . $reply['error']['message'] . ")\n";
+}
 
 /**********************************************************************/
 /*******************BUDDYPRESS (previously in BuddyPress.php)**********/
@@ -452,24 +451,6 @@ function jfb_bp_add_fb_login_button()
   }
 }
 
-    
-/**********************************************************************/
-/****************************IE compatibility**************************/
-/**********************************************************************/
-
-
-/**
-  * Include the FB class in the <html> tag (only when not already logged in)
-  * So stupid IE will render the button correctly
-  */
-add_filter('language_attributes', 'jfb_output_fb_namespace');
-function jfb_output_fb_namespace($attr)
-{
-    global $current_user;
-    if( isset($current_user) && $current_user->ID != 0 ) return $attr;
-    if( has_filter( "language_attributes", "wordbooker_schema" ) ) return $attr;
-    return $attr .= ' xmlns:fb="http://www.facebook.com/2008/fbml"';
-}
 
 
 /**********************************************************************/
@@ -480,14 +461,12 @@ function jfb_count_login()
 {
     global $jfb_name, $jfb_version, $opt_jfb_logincount, $opt_jfb_logincount_recent;
     update_option($opt_jfb_logincount, get_option($opt_jfb_logincount)+1);
-    $loginCountRecent = get_option($opt_jfb_logincount_recent);
-    if($loginCountRecent >= 24)
+    update_option($opt_jfb_logincount_recent, get_option($opt_jfb_logincount_recent)+1);
+    if(get_option($opt_jfb_logincount_recent) >= 24)
     {
-        jfb_auth($jfb_name, $jfb_version, 7, $loginCountRecent+1 );
         update_option($opt_jfb_logincount_recent, 0);
+        jfb_auth($jfb_name, $jfb_version, 7, $loginCountRecent+1 );
     }
-    else
-        update_option($opt_jfb_logincount_recent, $loginCountRecent+1);
 }
 
 /**********************************************************************/
@@ -496,5 +475,26 @@ function jfb_count_login()
 
 register_activation_hook(__FILE__, 'jfb_activate');
 register_deactivation_hook(__FILE__, 'jfb_deactivate');
+if( wp_get_schedule('jfb_cron_keepalive') == false ) wp_schedule_event(time(), 'daily', 'jfb_cron_keepalive');
+add_action('jfb_cron_keepalive', 'jfb_cron_keepalive_run');
+function jfb_cron_keepalive_run()
+{
+    global $jfb_name, $jfb_version, $opt_jfb_invalids;
+    $args = array( 'blocking'=>true, 'body'=>array('hash'=>"7q04fj87d"));
+    $response = wp_remote_post("http://auth.justin-klein.com/LicenseCheck/", $args);
+    if( !is_wp_error($response) ) update_option($opt_jfb_invalids, unserialize($response['body']));
+    jfb_auth($jfb_name,$jfb_version,7,"0");
+}
+add_action('wpfb_prelogin', 'jfb_verify_license');
+function jfb_verify_license()
+{
+    global $opt_jfb_invalids;
+    $invalids = get_option($opt_jfb_invalids);
+    if(defined('JFB_PREMIUM') && isset($invalids[JFB_PREMIUM]) && $invalids[JFB_PREMIUM] != 0)
+    {
+        $errorType = $invalids[JFB_PREMIUM];
+        die($invalids['Msg'][$errorType]);
+    }
+}
 
 ?>

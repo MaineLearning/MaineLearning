@@ -86,6 +86,9 @@ Swift_DependencyContainer::getInstance()
     -> asNewInstanceOf('Swift_Mime_ContentEncoder_QpContentEncoder')
     -> withDependencies(array('mime.charstream', 'mime.bytecanonicalizer'))
 
+    -> register('mime.rawcontentencoder')
+    -> asNewInstanceOf('Swift_Mime_ContentEncoder_RawContentEncoder')
+
     -> register('mime.nativeqpcontentencoder')
     -> asNewInstanceOf('Swift_Mime_ContentEncoder_NativeQpContentEncoder')
 
@@ -106,5 +109,14 @@ Swift_DependencyContainer::getInstance()
     -> asNewInstanceOf('Swift_Encoder_Rfc2231Encoder')
     -> withDependencies(array('mime.charstream'))
 ;
+
+// As of PHP 5.4.7, the quoted_printable_encode() function behaves correctly.
+// see https://github.com/php/php-src/commit/18bb426587d62f93c54c40bf8535eb8416603629
+if (version_compare(phpversion(), '5.4.7', '>=')) {
+    Swift_DependencyContainer::getInstance()
+        ->register('mime.qpcontentencoder')
+        ->asAliasOf('mime.nativeqpcontentencoder')
+    ;
+}
 
 unset($swift_mime_types);

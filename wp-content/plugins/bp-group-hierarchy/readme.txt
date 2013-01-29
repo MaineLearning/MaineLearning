@@ -3,8 +3,8 @@ Contributors: ddean
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=6BKDCMJRYPKNN&lc=US&item_name=BP%20Group%20Hierarchy&currency_code=USD
 Tags: buddypress, groups, subgroups, hierarchy, parent group
 Requires at least: WP 3.2, BuddyPress 1.5
-Tested up to: WP 3.5
-Stable tag: 1.3.6
+Tested up to: WP 3.5, BuddyPress 1.7-bleeding
+Stable tag: 1.3.7
 
 Allows BuddyPress groups to have subgroups.
 
@@ -52,6 +52,11 @@ No. There is currently no way to have activity propagate up without creating dup
 3. Hierarchy options when creating new groups
 
 == Changelog ==
+
+= 1.3.7 =
+* Fixed: Hiding the flat group list affected the My Groups view - thanks, Jay Collier
+* Fixed: one last $wpdb->prepare error - thanks, Prometheus Fire
+* Changed: improved support for BP 1.7
 
 = 1.3.6 =
 * Added: support for BP 1.7, including the new Groups admin menu
@@ -254,6 +259,9 @@ No. There is currently no way to have activity propagate up without creating dup
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.3.7 =
+Improve compatibility with WP 3.5 and bug fix for My Groups
 
 = 1.3.6 =
 Compatibility release for WP 3.5

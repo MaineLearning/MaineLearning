@@ -32,6 +32,14 @@ class BP_Links_Template {
 		$slug = null;
 		$avatar_size = null;
 
+		// handle query string overrides
+		if ( isset( $_REQUEST['lpage'] ) ) {
+			$args['page'] = intval( $_REQUEST['lpage'] );
+		}
+		if ( isset( $_REQUEST['num'] ) ) {
+			$args['per_page'] = intval( $_REQUEST['num'] );
+		}
+
 		// extract 'em
 		extract( $args );
 
@@ -39,8 +47,8 @@ class BP_Links_Template {
 		$this->avatar_display_size( $avatar_size );
 
 		// set paging props
-		$this->pag_page = isset( $_REQUEST['lpage'] ) ? intval( $_REQUEST['lpage'] ) : $page;
-		$this->pag_num = ( isset( $_REQUEST['num'] ) ) ? intval( $_REQUEST['num'] ) : $per_page;
+		$this->pag_page = $page;
+		$this->pag_num = $per_page;
 
 		switch ( $type ) {
 

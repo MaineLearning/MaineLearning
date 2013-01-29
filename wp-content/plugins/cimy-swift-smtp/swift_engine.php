@@ -203,7 +203,14 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array(),
 
 	if (!empty($attachments)) {
 		foreach ($attachments as $attachment) {
-			$message->attach(Swift_Attachment::fromPath($attachment));
+			// bug in Swift Mailer https://github.com/swiftmailer/swiftmailer/issues/274
+			if (empty($attachment))
+				continue;
+			try {
+				$message->attach(Swift_Attachment::fromPath($attachment));
+			} catch (Swift_IoException $e) {
+				continue;
+			}
 		}
 	}
 

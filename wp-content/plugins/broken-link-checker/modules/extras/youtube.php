@@ -13,7 +13,7 @@ ModuleLazyInit: true
 ModuleClassName: blcYouTubeChecker
 ModulePriority: 100
 
-ModuleCheckerUrlPattern: @^http://([\w\d]+\.)*youtube\.[^/]+/watch\?.*v=[^/#]@i
+ModuleCheckerUrlPattern: @^http://(?:([\w\d]+\.)*youtube\.[^/]+/watch\?.*v=[^/#]|youtu\.be/[^/#\?]+)@i
 */
 
 class blcYouTubeChecker extends blcChecker {
@@ -43,9 +43,13 @@ class blcYouTubeChecker extends blcChecker {
 		
 		//Extract the video ID from the URL
 		$components = @parse_url($url);
-		parse_str($components['query'], $query);
-		$video_id = $query['v'];
-		
+		if ( strtolower($components['host']) === 'youtu.be' ) {
+			$video_id = trim($components['path'], '/');
+		} else {
+			parse_str($components['query'], $query);
+			$video_id = $query['v'];
+		}
+
 		//Fetch video data from the YouTube API
 		$api_url = 'http://gdata.youtube.com/feeds/api/videos/' . $video_id . '?key=' . urlencode($this->youtube_developer_key);
 		$conf = blc_get_configuration();
@@ -155,7 +159,7 @@ class blcYouTubeChecker extends blcChecker {
 					break;
 			}			
 		}
-		
+
 		//The hash should contain info about all pieces of data that pertain to determining if the 
 		//link is working.  
         $result['result_hash'] = implode('|', array(
@@ -171,5 +175,3 @@ class blcYouTubeChecker extends blcChecker {
 	}
 
 }
-
-?>

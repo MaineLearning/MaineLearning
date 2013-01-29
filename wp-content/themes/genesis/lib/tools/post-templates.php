@@ -10,7 +10,7 @@
  * @subpackage SinglePostTemplate
  * @author     Nathan Rice
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -105,10 +105,10 @@ function get_post_template( $template ) {
 	/** Prevent directory traversal */
 	$custom_field = str_replace( '..', '', $custom_field );
 
-	if( file_exists( STYLESHEETPATH . "/{$custom_field}" ) )
-		$template = STYLESHEETPATH . "/{$custom_field}";
-	elseif( file_exists( TEMPLATEPATH . "/{$custom_field}" ) )
-		$template = TEMPLATEPATH . "/{$custom_field}";
+	if( file_exists( get_stylesheet_directory() . "/{$custom_field}" ) )
+		$template = get_stylesheet_directory() . "/{$custom_field}";
+	elseif( file_exists( get_template_directory() . "/{$custom_field}" ) )
+		$template = get_template_directory() . "/{$custom_field}";
 
 	return $template;
 
