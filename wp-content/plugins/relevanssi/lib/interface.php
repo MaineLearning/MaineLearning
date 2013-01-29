@@ -190,6 +190,10 @@ function update_relevanssi_options() {
 		$_REQUEST['relevanssi_log_queries'] = "off";
 	}
 
+	if (!isset($_REQUEST['relevanssi_log_queries_with_ip'])) {
+		$_REQUEST['relevanssi_log_queries_with_ip'] = "off";
+	}
+
 	if (!isset($_REQUEST['relevanssi_disable_or_fallback'])) {
 		$_REQUEST['relevanssi_disable_or_fallback'] = "off";
 	}
@@ -273,6 +277,7 @@ function update_relevanssi_options() {
 	if (isset($_REQUEST['relevanssi_excerpt_type'])) update_option('relevanssi_excerpt_type', $_REQUEST['relevanssi_excerpt_type']);	
 	if (isset($_REQUEST['relevanssi_excerpt_allowable_tags'])) update_option('relevanssi_excerpt_allowable_tags', $_REQUEST['relevanssi_excerpt_allowable_tags']);
 	if (isset($_REQUEST['relevanssi_log_queries'])) update_option('relevanssi_log_queries', $_REQUEST['relevanssi_log_queries']);	
+	if (isset($_REQUEST['relevanssi_log_queries_with_ip'])) update_option('relevanssi_log_queries_with_ip', $_REQUEST['relevanssi_log_queries_with_ip']);	
 	if (isset($_REQUEST['relevanssi_highlight'])) update_option('relevanssi_highlight', $_REQUEST['relevanssi_highlight']);
 	if (isset($_REQUEST['relevanssi_highlight_docs'])) update_option('relevanssi_highlight_docs', $_REQUEST['relevanssi_highlight_docs']);
 	if (isset($_REQUEST['relevanssi_highlight_comments'])) update_option('relevanssi_highlight_comments', $_REQUEST['relevanssi_highlight_comments']);
@@ -474,15 +479,11 @@ function relevanssi_query_log() {
 
 		echo '<div style="clear: both"></div>';
 		$nonce = wp_nonce_field('relevanssi_reset_logs', '_relresnonce', true, false);
-		echo <<<EOR
-<h3>Reset Logs</h3>
-
-<form method="post">
-$nonce
-<p>To reset the logs, type 'reset' into the box here <input type="text" name="relevanssi_reset_code" />
-and click <input type="submit" name="relevanssi_reset" value="Reset" class="button" /></p>
-</form>
-EOR;
+		echo '<h3>' . __('Reset Logs', 'relevanssi') . "</h3>\n";
+		echo "<form method='post'>\n$nonce";
+		echo "<p>";
+		printf(__('To reset the logs, type "reset" into the box here %s and click %s', 'relevanssi'), ' <input type="text" name="relevanssi_reset_code" />', 'and click <input type="submit" name="relevanssi_reset" value="Reset" class="button" />');
+		echo "</p></form>";
 
 	}
 
@@ -495,13 +496,13 @@ function relevanssi_total_queries( $title ) {
 
 	$count = array();
 
-	$count['Today and yesterday'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 1;" ) );
-	$count['Last 7 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 7;" ) );
-	$count['Last 30 days'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 30;" ) );
-	$count['Forever'] = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM $log_table;" ) );
+	$count[__('Today and yesterday', 'relevanssi')] = $wpdb->get_var("SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 1;");
+	$count[__('Last 7 days', 'relevanssi')] = $wpdb->get_var("SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 7;");
+	$count[__('Last 30 days', 'relevanssi')] = $wpdb->get_var("SELECT COUNT(id) FROM $log_table WHERE TIMESTAMPDIFF(DAY, time, NOW()) <= 30;");
+	$count[__('Forever', 'relevanssi')] = $wpdb->get_var("SELECT COUNT(id) FROM $log_table;");
 
-	echo "<table class='widefat'><thead><tr><th colspan='2'>$title</th></tr></thead><tbody><tr><th>When</th><th>Searches</th></tr>";
-	foreach ( $count as $when => $searches ) {
+	echo "<table class='widefat'><thead><tr><th colspan='2'>$title</th></tr></thead><tbody><tr><th>" . __('When', 'relevanssi') . "</th><th>" . __('Searches', 'relevanssi') . "</th></tr>";
+	foreach ($count as $when => $searches) {
 		echo "<tr><td style='padding: 3px 5px'>$when</td><td style='padding: 3px 5px;'>$searches</td></tr>";
 	}
 	echo "</tbody></table>";
@@ -530,7 +531,7 @@ function relevanssi_date_queries($d, $title, $version = 'good') {
 		  LIMIT 20");
 
 	if (count($queries) > 0) {
-		echo "<table class='widefat'><thead><tr><th colspan='3'>$title</th></tr></thead><tbody><tr><th>Query</th><th>#</th><th>Hits</th></tr>";
+		echo "<table class='widefat'><thead><tr><th colspan='3'>$title</th></tr></thead><tbody><tr><th>" . __('Query', 'relevanssi') . "</th><th>#</th><th>" . __('Hits', 'relevanssi') . "</th></tr>";
 		foreach ($queries as $query) {
 			$url = get_bloginfo('url');
 			$u_q = urlencode($query->query);
@@ -604,6 +605,15 @@ function relevanssi_options_form() {
 	}
 	else {
 		$log_queries = '';
+	}
+
+	$log_queries_with_ip = get_option('relevanssi_log_queries_with_ip');
+	$serialize_options['relevanssi_log_queries_with_ip'] = $log_queries_with_ip;
+	if ('on' == $log_queries_with_ip) {
+		$log_queries_with_ip = 'checked="checked"';
+	}
+	else {
+		$log_queries_with_ip = '';
 	}
 
 	$hide_branding = get_option('relevanssi_hide_branding'); 
@@ -881,13 +891,13 @@ function relevanssi_options_form() {
 ?>
 
 	<label for='relevanssi_admin_search'><?php _e('Use search for admin:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_admin_search' <?php echo $admin_search ?> /></label>
+	<input type='checkbox' name='relevanssi_admin_search' id='relevanssi_admin_search' <?php echo $admin_search ?> /></label>
 	<small><?php _e('If checked, Relevanssi will be used for searches in the admin interface', 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_implicit_operator'><?php _e("Default operator for the search?", "relevanssi"); ?>
-	<select name='relevanssi_implicit_operator'>
+	<select name='relevanssi_implicit_operator' id='relevanssi_implicit_operator'>
 	<option value='AND' <?php echo $implicit_and ?>><?php _e("AND - require all terms", "relevanssi"); ?></option>
 	<option value='OR' <?php echo $implicit_or ?>><?php _e("OR - any term present is enough", "relevanssi"); ?></option>
 	</select></label><br />
@@ -896,13 +906,13 @@ function relevanssi_options_form() {
 	<br /><br />
 
 	<label for='relevanssi_disable_or_fallback'><?php _e("Disable OR fallback:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_disable_or_fallback' <?php echo $disablefallback ?> /></label><br />
+	<input type='checkbox' name='relevanssi_disable_or_fallback' id='relevanssi_disable_or_fallback' <?php echo $disablefallback ?> /></label><br />
 	<small><?php _e("If you don't want Relevanssi to fall back to OR search when AND search gets no hits, check this option. For most cases, leave this one unchecked.", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_default_orderby'><?php _e('Default order for results:', 'relevanssi'); ?>
-	<select name='relevanssi_default_orderby'>
+	<select name='relevanssi_default_orderby' id='relevanssi_default_orderby'>
 	<option value='relevance' <?php echo $orderby_relevance ?>><?php _e("Relevance (highly recommended)", "relevanssi"); ?></option>
 	<option value='post_date' <?php echo $orderby_date ?>><?php _e("Post date", "relevanssi"); ?></option>
 	</select></label><br />
@@ -911,7 +921,7 @@ function relevanssi_options_form() {
 	<br /><br />
 
 	<label for='relevanssi_fuzzy'><?php _e('When to use fuzzy matching?', 'relevanssi'); ?>
-	<select name='relevanssi_fuzzy'>
+	<select name='relevanssi_fuzzy' id='relevanssi_fuzzy'>
 	<option value='sometimes' <?php echo $fuzzy_sometimes ?>><?php _e("When straight search gets no hits", "relevanssi"); ?></option>
 	<option value='always' <?php echo $fuzzy_always ?>><?php _e("Always", "relevanssi"); ?></option>
 	<option value='never' <?php echo $fuzzy_never ?>><?php _e("Don't use fuzzy search", "relevanssi"); ?></option>
@@ -925,13 +935,13 @@ function relevanssi_options_form() {
 ?>
 	
 	<label for='relevanssi_throttle'><?php _e("Limit searches:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_throttle' <?php echo $throttle ?> /></label><br />
+	<input type='checkbox' name='relevanssi_throttle' id='relevanssi_throttle' <?php echo $throttle ?> /></label><br />
 	<small><?php _e("If this option is checked, Relevanssi will limit search results to at most 500 results per term. This will improve performance, but may cause some relevant documents to go unfound. However, Relevanssi tries to prioritize the most relevant documents. <strong>This does not work well when sorting results by date.</strong> The throttle can end up cutting off recent posts to favour more relevant posts.", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_throttle_limit'><?php _e("Limit:", "relevanssi"); ?>
-	<input type='text' size='4' name='relevanssi_throttle_limit' value='<?php echo $throttle_limit ?>' /></label><br />
+	<input type='text' size='4' name='relevanssi_throttle_limit' id='relevanssi_throttle_limit' value='<?php echo $throttle_limit ?>' /></label><br />
 	<small><?php _e("For better performance, adjust the limit to a smaller number. Adjusting the limit to 100 - or even lower - should be safe for good results, and might bring a boost in search speed.", 'relevanssi'); ?></small>
 
 	<br /><br />
@@ -957,7 +967,7 @@ function relevanssi_options_form() {
 			<?php _e('Post titles', 'relevanssi'); ?>
 		</td>
 		<td>
-			<input type='text' name='relevanssi_title_boost' size='4' value='<?php echo $title_boost ?>' />
+			<input type='text' name='relevanssi_title_boost' id='relevanssi_title_boost' size='4' value='<?php echo $title_boost ?>' />
 		</td>
 		<td>
 			<?php echo $relevanssi_variables['title_boost_default']; ?>
@@ -969,7 +979,7 @@ function relevanssi_options_form() {
 			<?php _e('Comment text', 'relevanssi'); ?> 
 		</td>
 		<td>
-			<input type='text' name='relevanssi_comment_boost' size='4' value='<?php echo $comment_boost ?>' />
+			<input type='text' name='relevanssi_comment_boost' id='relevanssi_comment_boost' size='4' value='<?php echo $comment_boost ?>' />
 		</td>
 		<td>
 			<?php echo $relevanssi_variables['comment_boost_default']; ?>
@@ -990,7 +1000,7 @@ function relevanssi_options_form() {
 	<h3 id="wpml"><?php _e('WPML compatibility', 'relevanssi'); ?></h3>
 	
 	<label for='relevanssi_wpml_only_current'><?php _e("Limit results to current language:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_wpml_only_current' <?php echo $wpml_only_current ?> /></label>
+	<input type='checkbox' name='relevanssi_wpml_only_current' id='relevanssi_wpml_only_current' <?php echo $wpml_only_current ?> /></label>
 	<small><?php _e("If this option is checked, Relevanssi will only return results in the current active language. Otherwise results will include posts in every language.", "relevanssi");?></small>
 	
 	<?php endif; ?>
@@ -998,13 +1008,19 @@ function relevanssi_options_form() {
 	<h3 id="logs"><?php _e('Logs', 'relevanssi'); ?></h3>
 	
 	<label for='relevanssi_log_queries'><?php _e("Keep a log of user queries:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_log_queries' <?php echo $log_queries ?> /></label>
+	<input type='checkbox' name='relevanssi_log_queries' id='relevanssi_log_queries' <?php echo $log_queries ?> /></label>
 	<small><?php _e("If checked, Relevanssi will log user queries. The log appears in 'User searches' on the Dashboard admin menu.", 'relevanssi'); ?></small>
 
 	<br /><br />
 
+	<label for='relevanssi_log_queries_with_ip'><?php _e("Log the user's IP with the queries:", "relevanssi"); ?>
+	<input type='checkbox' name='relevanssi_log_queries_with_ip' id='relevanssi_log_queries_with_ip' <?php echo $log_queries_with_ip ?> /></label>
+	<small><?php _e("If checked, Relevanssi will log user's IP-Adress with the queries.", 'relevanssi'); ?></small>
+
+	<br /><br />
+
 	<label for='relevanssi_omit_from_logs'><?php _e("Don't log queries from these users:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_omit_from_logs' size='20' value='<?php echo $omit_from_logs ?>' /></label>
+	<input type='text' name='relevanssi_omit_from_logs' id='relevanssi_omit_from_logs' size='20' value='<?php echo $omit_from_logs ?>' /></label>
 	<small><?php _e("Comma-separated list of numeric user IDs or user login names that will not be logged.", "relevanssi"); ?></small>
 
 <?php
@@ -1021,19 +1037,19 @@ function relevanssi_options_form() {
 	<h3 id="exclusions"><?php _e("Exclusions and restrictions", "relevanssi"); ?></h3>
 	
 	<label for='relevanssi_cat'><?php _e('Restrict search to these categories and tags:', 'relevanssi'); ?>
-	<input type='text' name='relevanssi_cat' size='20' value='<?php echo $cat ?>' /></label><br />
+	<input type='text' name='relevanssi_cat' id='relevanssi_cat' size='20' value='<?php echo $cat ?>' /></label><br />
 	<small><?php _e("Enter a comma-separated list of category and tag IDs to restrict search to those categories or tags. You can also use <code>&lt;input type='hidden' name='cats' value='list of cats and tags' /&gt;</code> in your search form. The input field will 	overrun this setting.", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_excat'><?php _e('Exclude these categories and tags from search:', 'relevanssi'); ?>
-	<input type='text' name='relevanssi_excat' size='20' value='<?php echo $excat ?>' /></label><br />
+	<input type='text' name='relevanssi_excat' id='relevanssi_excat' size='20' value='<?php echo $excat ?>' /></label><br />
 	<small><?php _e("Enter a comma-separated list of category and tag IDs that are excluded from search results. You can exclude categories with the 'cat' input field by using negative values.", 'relevanssi'); ?></small>
 
 	<br /><br />
 
-	<label for='relevanssi_excat'><?php _e('Exclude these posts/pages from search:', 'relevanssi'); ?>
-	<input type='text' name='relevanssi_expst' size='20' value='<?php echo $expst ?>' /></label><br />
+	<label for='relevanssi_expst'><?php _e('Exclude these posts/pages from search:', 'relevanssi'); ?>
+	<input type='text'  name='relevanssi_expst' id='relevanssi_expst' size='20' value='<?php echo $expst ?>' /></label><br />
 <?php
 	if (RELEVANSSI_PREMIUM) {
 		echo "<small>" . __("Enter a comma-separated list of post/page IDs that are excluded from search results. This only works here, you can't use the input field option (WordPress doesn't pass custom parameters there). You can also use a checkbox on post/page edit pages to remove posts from index.", 'relevanssi') . "</small>";
@@ -1046,20 +1062,20 @@ function relevanssi_options_form() {
 	<br /><br />
 
 	<label for='relevanssi_respect_exclude'><?php _e('Respect exclude_from_search for custom post types:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_respect_exclude' <?php echo $respect_exclude ?> /></label><br />
+	<input type='checkbox' name='relevanssi_respect_exclude' id='relevanssi_respect_exclude' <?php echo $respect_exclude ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi won't display posts of custom post types that have 'exclude_from_search' set to true. If not checked, Relevanssi will display anything that is indexed.", 'relevanssi'); ?></small>
 
 	<h3 id="excerpts"><?php _e("Custom excerpts/snippets", "relevanssi"); ?></h3>
 	
 	<label for='relevanssi_excerpts'><?php _e("Create custom search result snippets:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_excerpts' <?php echo $excerpts ?> /></label><br />
+	<input type='checkbox' name='relevanssi_excerpts' id='relevanssi_excerpts' <?php echo $excerpts ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will create excerpts that contain the search term hits. To make them work, make sure your search result template uses the_excerpt() to display post excerpts.", 'relevanssi'); ?></small>
 	
-	<br /><br />
+	<p><?php _e('Note: Building custom excerpts can be slow. If you are not actually using the excerpts, make sure you disable the option.', 'relevanssi'); ?></p>
 	
 	<label for='relevanssi_excerpt_length'><?php _e("Length of the snippet:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_excerpt_length' size='4' value='<?php echo $excerpt_length ?>' /></label>
-	<select name='relevanssi_excerpt_type'>
+	<input type='text' name='relevanssi_excerpt_length' id='relevanssi_excerpt_length' size='4' value='<?php echo $excerpt_length ?>' /></label>
+	<select name='relevanssi_excerpt_type' id='relevanssi_excerpt_type'>
 	<option value='chars' <?php echo $excerpt_chars ?>><?php _e("characters", "relevanssi"); ?></option>
 	<option value='words' <?php echo $excerpt_words ?>><?php _e("words", "relevanssi"); ?></option>
 	</select><br />
@@ -1068,20 +1084,20 @@ function relevanssi_options_form() {
 	<br /><br />
 
 	<label for='relevanssi_excerpt_allowable_tags'><?php _e("Allowable tags in excerpts:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_excerpt_allowable_tags' size='20' value='<?php echo $excerpt_allowable_tags ?>' /></label>
+	<input type='text' name='relevanssi_excerpt_allowable_tags' id='relevanssi_excerpt_allowable_tags' size='20' value='<?php echo $excerpt_allowable_tags ?>' /></label>
 	<br />
 	<small><?php _e("List all tags you want to allow in excerpts, without any whitespace. For example: '&lt;p&gt;&lt;a&gt;&lt;strong&gt;'.", "relevanssi"); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_show_matches'><?php _e("Show breakdown of search hits in excerpts:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_show_matches' <?php echo $show_matches ?> /></label>
+	<input type='checkbox' name='relevanssi_show_matches' id='relevanssi_show_matches' <?php echo $show_matches ?> /></label>
 	<small><?php _e("Check this to show more information on where the search hits were made. Requires custom snippets to work.", "relevanssi"); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_show_matches_text'><?php _e("The breakdown format:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_show_matches_text' value="<?php echo $show_matches_text ?>" size='20' /></label>
+	<input type='text' name='relevanssi_show_matches_text' id='relevanssi_show_matches_text' value="<?php echo $show_matches_text ?>" size='20' /></label>
 	<small><?php _e("Use %body%, %title%, %tags% and %comments% to display the number of hits (in different parts of the post), %total% for total hits, %score% to display the document weight and %terms% to show how many hits each search term got. No double quotes (\") allowed!", "relevanssi"); ?></small>
 
 	<h3 id="highlighting"><?php _e("Search hit highlighting", "relevanssi"); ?></h3>
@@ -1090,7 +1106,7 @@ function relevanssi_options_form() {
 
 	<div style='margin-left: 2em'>
 	<label for='relevanssi_highlight'><?php _e("Highlight query terms in search results:", 'relevanssi'); ?>
-	<select name='relevanssi_highlight'>
+	<select name='relevanssi_highlight' id='relevanssi_highlight'>
 	<option value='no' <?php echo $highlight_none ?>><?php _e('No highlighting', 'relevanssi'); ?></option>
 	<option value='mark' <?php echo $highlight_mark ?>>&lt;mark&gt;</option>
 	<option value='em' <?php echo $highlight_em ?>>&lt;em&gt;</option>
@@ -1105,13 +1121,13 @@ function relevanssi_options_form() {
 	<br />
 
 	<label for='relevanssi_hilite_title'><?php _e("Highlight query terms in result titles too:", 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_hilite_title' <?php echo $hititle ?> /></label>
+	<input type='checkbox' name='relevanssi_hilite_title' id='relevanssi_hilite_title' <?php echo $hititle ?> /></label>
 	<small><?php _e("", 'relevanssi'); ?></small>
 
 	<br />
 
 	<label for='relevanssi_highlight_docs'><?php _e("Highlight query terms in documents from local searches:", 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_highlight_docs' <?php echo $highlight_docs ?> /></label>
+	<input type='checkbox' name='relevanssi_highlight_docs' id='relevanssi_highlight_docs' <?php echo $highlight_docs ?> /></label>
 	<small><?php _e("Highlights hits when user opens the post from search results. This is based on HTTP referrer, so if that's blocked, there'll be no highlights.", "relevanssi"); ?></small>
 
 	<br />
@@ -1119,13 +1135,13 @@ function relevanssi_options_form() {
 	<?php if (function_exists('relevanssi_form_highlight_external')) relevanssi_form_highlight_external($highlight_docs_ext); ?>
 	
 	<label for='relevanssi_highlight_comments'><?php _e("Highlight query terms in comments:", 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_highlight_comments' <?php echo $highlight_coms ?> /></label>
+	<input type='checkbox' name='relevanssi_highlight_comments' id='relevanssi_highlight_comments' <?php echo $highlight_coms ?> /></label>
 	<small><?php _e("Highlights hits in comments when user opens the post from search results.", "relevanssi"); ?></small>
 
 	<br />
 	
 	<label for='relevanssi_word_boundaries'><?php _e("Uncheck this if you use non-ASCII characters:", 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_word_boundaries' <?php echo $word_boundaries ?> /></label>
+	<input type='checkbox' name='relevanssi_word_boundaries' id='relevanssi_word_boundaries' <?php echo $word_boundaries ?> /></label>
 	<small><?php _e("If you use non-ASCII characters (like Cyrillic alphabet) and the highlights don't work, uncheck this option to make highlights work.", "relevanssi"); ?></small>
 
 	<br /><br />
@@ -1136,25 +1152,25 @@ function relevanssi_options_form() {
 	<div style='margin-left: 2em'>
 	
 	<label for='relevanssi_txt_col'><?php _e("Text color for highlights:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_txt_col' size='7' value='<?php echo $txt_col ?>' /></label>
+	<input type='text' name='relevanssi_txt_col' id='relevanssi_txt_col' size='7' value='<?php echo $txt_col ?>' /></label>
 	<small><?php _e("Use HTML color codes (#rgb or #rrggbb)", "relevanssi"); ?></small>
 
 	<br />
 	
 	<label for='relevanssi_bg_col'><?php _e("Background color for highlights:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_bg_col' size='7' value='<?php echo $bg_col ?>' /></label>
+	<input type='text' name='relevanssi_bg_col' id='relevanssi_bg_col' size='7' value='<?php echo $bg_col ?>' /></label>
 	<small><?php _e("Use HTML color codes (#rgb or #rrggbb)", "relevanssi"); ?></small>
 
 	<br />
 	
 	<label for='relevanssi_css'><?php _e("CSS style for highlights:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_css' size='30' value='<?php echo $css ?>' /></label>
+	<input type='text' name='relevanssi_css' id='relevanssi_css' size='30' value='<?php echo $css ?>' /></label>
 	<small><?php _e("You can use any CSS styling here, style will be inserted with a &lt;span&gt;", "relevanssi"); ?></small>
 
 	<br />
 	
-	<label for='relevanssi_css'><?php _e("CSS class for highlights:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_class' size='10' value='<?php echo $class ?>' /></label>
+	<label for='relevanssi_class'><?php _e("CSS class for highlights:", "relevanssi"); ?>
+	<input type='text' name='relevanssi_class' id='relevanssi_class' size='10' value='<?php echo $class ?>' /></label>
 	<small><?php _e("Name a class here, search results will be wrapped in a &lt;span&gt; with the class", "relevanssi"); ?></small>
 
 	</div>
@@ -1199,7 +1215,7 @@ function relevanssi_options_form() {
 			$label 
 		</td>
 		<td>
-			<input type='checkbox' name='relevanssi_index_type_$type' $checked />
+			<input type='checkbox' name='relevanssi_index_type_$type' id='relevanssi_index_type_$type' $checked />
 		</td>
 		<td>
 			$public
@@ -1213,7 +1229,7 @@ EOH;
 	<br /><br />
 	
 	<label for='relevanssi_min_word_length'><?php _e("Minimum word length to index", "relevanssi"); ?>:
-	<input type='text' name='relevanssi_min_word_length' size='30' value='<?php echo $min_word_length ?>' /></label><br />
+	<input type='text' name='relevanssi_min_word_length' id='relevanssi_min_word_length' size='30' value='<?php echo $min_word_length ?>' /></label><br />
 	<small><?php _e("Words shorter than this number will not be indexed.", "relevanssi"); ?></small>
 
 	<br /><br />
@@ -1221,37 +1237,37 @@ EOH;
 	<?php if (function_exists('relevanssi_form_thousep')) relevanssi_form_thousep($thousand_separator); ?>
 
 	<label for='relevanssi_expand_shortcodes'><?php _e("Expand shortcodes in post content:", "relevanssi"); ?>
-	<input type='checkbox' name='relevanssi_expand_shortcodes' <?php echo $expand_shortcodes ?> /></label><br />
+	<input type='checkbox' name='relevanssi_expand_shortcodes' id='relevanssi_expand_shortcodes' <?php echo $expand_shortcodes ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will expand shortcodes in post content before indexing. Otherwise shortcodes will be stripped. If you use shortcodes to include dynamic content, Relevanssi will not keep the index updated, the index will reflect the status of the shortcode content at the moment of indexing.", "relevanssi"); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_inctags'><?php _e('Index and search your posts\' tags:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_inctags' <?php echo $inctags ?> /></label><br />
+	<input type='checkbox' name='relevanssi_inctags' id='relevanssi_inctags' <?php echo $inctags ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will also index and search the tags of your posts. Remember to rebuild the index if you change this option!", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_inccats'><?php _e('Index and search your posts\' categories:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_inccats' <?php echo $inccats ?> /></label><br />
+	<input type='checkbox' name='relevanssi_inccats' id='relevanssi_inccats' <?php echo $inccats ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will also index and search the categories of your posts. Category titles will pass through 'single_cat_title' filter. Remember to rebuild the index if you change this option!", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_index_author'><?php _e('Index and search your posts\' authors:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_index_author' <?php echo $index_author ?> /></label><br />
+	<input type='checkbox' name='relevanssi_index_author' id='relevanssi_index_author' <?php echo $index_author ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will also index and search the authors of your posts. Author display name will be indexed. Remember to rebuild the index if you change this option!", 'relevanssi'); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_index_excerpt'><?php _e('Index and search post excerpts:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_index_excerpt' <?php echo $index_excerpt ?> /></label><br />
+	<input type='checkbox' name='relevanssi_index_excerpt' id='relevanssi_index_excerpt' <?php echo $index_excerpt ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will also index and search the excerpts of your posts.Remember to rebuild the index if you change this option!", 'relevanssi'); ?></small>
 
 	<br /><br />
 	
 	<label for='relevanssi_index_comments'><?php _e("Index and search these comments:", "relevanssi"); ?>
-	<select name='relevanssi_index_comments'>
+	<select name='relevanssi_index_comments' id='relevanssi_index_comments'>
 	<option value='none' <?php echo $incom_type_none ?>><?php _e("none", "relevanssi"); ?></option>
 	<option value='normal' <?php echo $incom_type_normal ?>><?php _e("normal", "relevanssi"); ?></option>
 	<option value='all' <?php echo $incom_type_all ?>><?php _e("all", "relevanssi"); ?></option>
@@ -1261,13 +1277,13 @@ EOH;
 	<br /><br />
 
 	<label for='relevanssi_index_fields'><?php _e("Custom fields to index:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_index_fields' size='30' value='<?php echo $index_fields ?>' /></label><br />
+	<input type='text' name='relevanssi_index_fields' id='relevanssi_index_fields' size='30' value='<?php echo $index_fields ?>' /></label><br />
 	<small><?php _e("A comma-separated list of custom fields to include in the index. Set to 'visible' to index all visible custom fields and to 'all' to index all custom fields, also those starting with a '_' character.", "relevanssi"); ?></small>
 
 	<br /><br />
 
 	<label for='relevanssi_custom_taxonomies'><?php _e("Custom taxonomies to index:", "relevanssi"); ?>
-	<input type='text' name='relevanssi_custom_taxonomies' size='30' value='<?php echo $custom_taxonomies ?>' /></label><br />
+	<input type='text' name='relevanssi_custom_taxonomies' id='relevanssi_custom_taxonomies' size='30' value='<?php echo $custom_taxonomies ?>' /></label><br />
 	<small><?php _e("A comma-separated list of custom taxonomy names to include in the index.", "relevanssi"); ?></small>
 
 	<br /><br />
@@ -1288,13 +1304,13 @@ EOH;
 	activate cache unless you have a good reason to do so.", 'relevanssi'); ?></p>
 	
 	<label for='relevanssi_enable_cache'><?php _e('Enable result and excerpt caching:', 'relevanssi'); ?>
-	<input type='checkbox' name='relevanssi_enable_cache' <?php echo $enable_cache ?> /></label><br />
+	<input type='checkbox' name='relevanssi_enable_cache' id='relevanssi_enable_cache' <?php echo $enable_cache ?> /></label><br />
 	<small><?php _e("If checked, Relevanssi will cache search results and post excerpts.", 'relevanssi'); ?></small>
 
 	<br /><br />
 	
 	<label for='relevanssi_cache_seconds'><?php _e("Cache expire (in seconds):", "relevanssi"); ?>
-	<input type='text' name='relevanssi_cache_seconds' size='30' value='<?php echo $cache_seconds ?>' /></label><br />
+	<input type='text' name='relevanssi_cache_seconds' id='relevanssi_cache_seconds' size='30' value='<?php echo $cache_seconds ?>' /></label><br />
 	<small><?php _e("86400 = day", "relevanssi"); ?></small>
 
 	<br /><br />
@@ -1303,11 +1319,11 @@ EOH;
 
 	<br /><br />
 	
-	<input type='submit' name='truncate' value='<?php _e('Clear all caches', 'relevanssi'); ?>' class='button' />
+	<input type='submit' name='truncate' id='truncate' value='<?php _e('Clear all caches', 'relevanssi'); ?>' class='button' />
 
 	<h3 id="synonyms"><?php _e("Synonyms", "relevanssi"); ?></h3>
 	
-	<p><textarea name='relevanssi_synonyms' rows='9' cols='60'><?php echo $synonyms ?></textarea></p>
+	<p><textarea name='relevanssi_synonyms' id='relevanssi_synonyms' rows='9' cols='60'><?php echo $synonyms ?></textarea></p>
 
 	<p><small><?php _e("Add synonyms here in 'key = value' format. When searching with the OR operator, any search of 'key' will be expanded to include 'value' as well. Using phrases is possible. The key-value pairs work in one direction only, but you can of course repeat the same pair reversed.", "relevanssi"); ?></small></p>
 
@@ -1334,7 +1350,7 @@ function relevanssi_show_stopwords() {
 
 	_e("<p>Enter a word here to add it to the list of stopwords. The word will automatically be removed from the index, so re-indexing is not necessary. You can enter many words at the same time, separate words with commas.</p>", 'relevanssi');
 
-?><label for="addstopword"><p><?php _e("Stopword(s) to add: ", 'relevanssi'); ?><textarea name="addstopword" rows="2" cols="40"></textarea>
+?><label for="addstopword"><p><?php _e("Stopword(s) to add: ", 'relevanssi'); ?><textarea name="addstopword" id="addstopword" rows="2" cols="40"></textarea>
 <input type="submit" value="<?php _e("Add", 'relevanssi'); ?>" class='button' /></p></label>
 <?php
 
@@ -1372,7 +1388,7 @@ function relevanssi_show_stopwords() {
 ?>
 <p><?php _e("Here's a list of stopwords you can use to export the stopwords to another blog.", "relevanssi"); ?></p>
 
-<textarea name="stopwords" rows="2" cols="40"><?php echo $exportlist; ?></textarea>
+<textarea name="stopwords" id="stopwords" rows="2" cols="40"><?php echo $exportlist; ?></textarea>
 <?php
 
 }

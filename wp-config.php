@@ -176,6 +176,9 @@ define( 'BP_DOCS_SLUG', 'wiki-page' );
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
+/** Activates Wordpress Domain Mapping */
+define( 'SUNRISE', 'on' );
+
 /** Sets up WordPress vars and included files. */
 /* Note: This must be the last thing in the file! */
 require_once(ABSPATH . 'wp-settings.php');

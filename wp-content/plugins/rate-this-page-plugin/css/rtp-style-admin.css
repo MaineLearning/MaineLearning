@@ -1,0 +1,324 @@
+div#rtp-configuration {
+	font-family: Arial, sans-serif;
+	font-size: 0.9em;
+}
+
+#rtp-config-form, #rtp-custom-form {
+	border: 1px solid #3E606F;
+    margin-top: 25px;
+    padding: 0 10px 10px;
+	
+	border-radius: 6px 6px 6px 6px;
+	-moz-border-radius: 6px 6px 6px 6px;
+	-webkit-border-radius: 6px 6px 6px 6px;
+	-khtml-border-radius: 6px 6px 6px 6px;
+}
+
+div#note {
+	background-color: #F9F9F9;
+	border:#DFDFDF 1px solid;
+	width: 384px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+div#note p {
+	margin-top: 0;
+}
+
+div#note, div#note p {
+	font-family: Verdana;
+	font-weight: normal;
+	font-size: 9px;
+}
+
+div#rtp-logo-title {
+    background: url("../img/AFT_icon32.png") no-repeat scroll left top transparent;
+}
+
+.icon32 {
+    float: left;
+    height: 34px;
+    margin: 7px 8px 0 0;
+    width: 36px;
+}
+
+ul.aft-tab-navigation a {
+	font-family: Arial, sans-serif;
+	font-size: 0.9em;
+}
+
+.pg-normal {
+	color: black;
+	font-family: Arial;
+	font-weight: normal;
+	font-size: 11px; 
+	text-decoration: none;    
+	cursor: pointer;
+}
+
+.pg-selected {
+	color: black;
+	font-family: Arial;
+	font-weight: bold;        
+	font-size: 11px;        
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.widefat {
+    background-color: #F9F9F9;
+    border-color: #DFDFDF;
+    border-spacing: 0;
+    border-style: solid;
+    border-width: 1px;
+    clear: both;
+    margin: 0;
+    width: 100%;
+	
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	-khtml-border-radius: 3px 3px 3px 3px;
+}
+
+.rtp-label-top {
+	font-weight: bold;
+	padding-bottom: 9px;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+}
+	
+.aft-insertion-scrollbox {
+	width: 180px;
+	height: 100px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-color: #DFDFDF;
+	border-width: 1px;
+	border-style: solid;
+	float: left;
+	overflow: auto;
+	background-color: #F9F9F9;
+}
+
+.rtp-title {
+	color: #21759b;
+	margin: 4px 0 2px;
+	padding: 0 0 0 3px;
+}
+
+a.rtp-post-title {
+	font-family: Arial;
+	font-weight: bold;
+	color: #21759b;
+}
+
+a:hover, a:active, a:focus {
+    color: #D54E21;
+}
+
+.corners {
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+
+	-khtml-border-radius: 5px 5px 5px 5px;
+	
+	-moz-border-radius: 5px 5px 5px 5px;
+
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.rtp-form-table {
+    border-collapse: collapse;
+    clear: both;
+	font-family: Arial;
+    font-size: 12px;
+}
+
+.rtp-form-table td {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    padding: 8px 10px;
+}
+
+.rtp-form-table th.th-full {
+    width: auto;
+}
+
+p.rtp-p, th.rtp-p {
+	font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+	color: #CC0000;
+}
+
+.rtp-form-table th.rtp-p {
+	color: #ff0000;
+	width: 130px;
+}
+
+.rtp-bg {
+    background-color: #FAFBD2;
+    border: medium solid #FF0000;
+    padding: 10px;
+    width: 65%;
+}
+
+#rtp-questions, #rtp-plugin-config, #rtp-themes {
+	background-color: #62BBE8;
+	margin: 0 0 10px;
+	padding-bottom: 5px;
+    padding-top: 5px;
+	width: 100%;
+	
+	
+	border-radius: 4px 4px;
+	-moz-border-radius: 4px 4px;
+	-webkit-border-radius: 4px 4px;
+	-khtml-border-radius: 4px 4px;
+}
+
+.rtp-form-table th {
+	color: #FFFFFF;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 10px 0 10px 20px;
+    text-align: left;
+    vertical-align: text-top;
+    width: 200px;
+}
+
+#rtp-configuration h4 {
+	font-size: 16px;
+	margin: 10px 0;
+}
+
+#rtp-questions textarea {
+	padding: 5px;
+}
+
+#rtp-questions textarea, #rtp-questions select, #rtp-questions select option {
+	font-family: Arial;
+	font-size: 12px;
+}
+
+#rtp-questions th span, #rtp-plugin-config th span {
+	color: #c10202;
+	display: block;
+	font-size: 10px;
+}
+
+#rtp-questions input[type="text"] {
+	width: 220px;
+}
+
+.rtp-label-config {
+	font-style: italic;
+}
+
+#rtp-questions .rtp-error {
+	color: #C10202;
+    font-style: italic;
+    padding: 2px 10px;
+}
+
+/*-- Customized jQuery UI --*/
+.ui-widget {
+	font-size: 12px;
+}
+
+/*-- Insertion Style --*/
+#rtp-insertion td.rtp-ins-id {
+	width: 15%;
+}
+
+#rtp-insertion td.rtp-ins-name {
+	width: 45%;
+}
+
+#rtp-insertion td.rtp-ins-slug {
+	width: 35%;
+}
+
+/*-- Pagination Style --*/
+#rtp-insertion tfoot, #rtp-reporting tfoot, #rtp-log-report tfoot {
+	text-align: center;
+}
+
+#rtp-insertion tfoot td, #rtp-reporting tfoot td, #rtp-log-report tfoot td {
+	background-color: #E5E5E5;
+}
+
+#rtp-insertion tfoot td img, #rtp-reporting tfoot td img, #rtp-log-report tfoot td img {
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+#rtp-insertion tfoot .pagedisplay, #rtp-reporting tfoot .pagedisplay, #rtp-log-report tfoot .pagedisplay {
+	background-color: #E5E5E5;
+	border: 0;
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	width: 40px;
+}
+
+/*-- Reporting Style --*/
+#rtp-reporting thead th {
+	text-align: center;
+    word-wrap: break-word;
+}
+
+#rtp-reporting td.rtp-rpt-name {
+	width: 36%;
+}
+
+#rtp-reporting td.rtp-rpt-rate {
+	width: 12%;
+}
+
+#rtp-reporting td.rtp-rpt-average {
+	font-size: 11px;
+	width: 10%;
+}
+
+#rtp-reporting td.rtp-rpt-rate {
+	font-size: 11px;
+    text-align: left;
+}
+
+/*-- Table Sorter Custom --*/
+table.tablesorter tbody td {
+	font-size: 12px;
+}
+
+table.tablesorter thead tr th{
+	font-family: Arial;
+	font-size: 12px;
+}
+
+table.tablesorter thead tr .header {
+	background-image: url('../img/bg.gif');
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url('../img/asc.gif');
+}
+
+table.tablesorter thead tr .headerSortDown {
+	background-image: url('../img/desc.gif');
+}
+
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+	background-color: #E5E5E5;
+}

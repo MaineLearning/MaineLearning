@@ -19,19 +19,19 @@ add_action('transition_post_status', 'relevanssi_update_child_posts',99,3);
 add_action('init', 'relevanssi_init');
 add_action('init', 'relevanssi_check_old_data', 99);
 add_filter('relevanssi_hits_filter', 'relevanssi_wpml_filter');
-add_filter('posts_request', 'relevanssi_prevent_default_request', 9, 2 );
+add_filter('posts_request', 'relevanssi_prevent_default_request', 10, 2 );
 add_filter('relevanssi_remove_punctuation', 'relevanssi_remove_punct');
-add_filter('relevanssi_post_ok', 'relevanssi_default_post_ok', 10, 2);
+add_filter('relevanssi_post_ok', 'relevanssi_default_post_ok', 9, 2);
 add_filter('relevanssi_query_filter', 'relevanssi_limit_filter');
 add_filter('query_vars', 'relevanssi_query_vars');
 
 global $relevanssi_variables;
 register_activation_hook($relevanssi_variables['file'], 'relevanssi_install');
-$plugin_dir = dirname(plugin_basename($relevanssi_variables['file']));
-load_plugin_textdomain('relevanssi', false, $plugin_dir);
 
 function relevanssi_init() {
 	global $pagenow, $relevanssi_variables;
+	$plugin_dir = dirname(plugin_basename($relevanssi_variables['file']));
+	load_plugin_textdomain('relevanssi', false, $plugin_dir);
 
 	isset($_POST['index']) ? $index = true : $index = false;
 	if (!get_option('relevanssi_indexed') && !$index) {
@@ -77,7 +77,7 @@ function relevanssi_menu() {
 	add_options_page(
 		$name,
 		$name,
-		'manage_options',
+		apply_filters('relevanssi_options_capability', 'manage_options'),
 		$relevanssi_variables['file'],
 		'relevanssi_options'
 	);
@@ -161,6 +161,9 @@ function relevanssi_create_database_tables($relevanssi_db_version) {
 		$wpdb->query($sql);
 
 		$sql = "CREATE INDEX docs ON $relevanssi_table (doc)";
+		$wpdb->query($sql);
+
+		$sql = "CREATE INDEX typeitem ON $relevanssi_table (type, item)";
 		$wpdb->query($sql);
 
 		$sql = "CREATE TABLE " . $relevanssi_stopword_table . " (stopword varchar(50) $charset_collate_bin_column NOT NULL,

@@ -73,5 +73,3 @@ class blcYouTubeIframe extends blcEmbedParserBase {
 		return $url;
 	}
 }
-
-?>

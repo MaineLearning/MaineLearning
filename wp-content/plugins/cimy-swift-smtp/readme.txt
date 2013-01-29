@@ -4,8 +4,8 @@ Donate link: http://www.marcocimmino.net/cimy-wordpress-plugins/support-the-cimy
 Website link: http://www.marcocimmino.net/cimy-wordpress-plugins/cimy-swift-smtp/
 Tags: cimy, email, smtp, gmail, swift, admin
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 2.2.1
+Tested up to: 3.5
+Stable tag: 2.3.0
 
 Send email via SMTP (Compatible with GMAIL)
 

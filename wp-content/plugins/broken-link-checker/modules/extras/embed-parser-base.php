@@ -199,5 +199,3 @@ class blcEmbedParserBase extends blcParser {
 }
 
 endif;
-
-?>

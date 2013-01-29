@@ -259,8 +259,8 @@ class EM_Bookings_Table{
 				<p><?php _e('Modify what information is displayed in this booking table.','dbem') ?></p>
 				<div id="em-bookings-table-settings-form-cols">
 					<p>
-						<strong><?php _e('Collumns to show','dbem')?></strong><br />
-						<?php _e('Drag items to or from the left collumn to add or remove them.','dbem'); ?>
+						<strong><?php _e('Columns to show','dbem')?></strong><br />
+						<?php _e('Drag items to or from the left column to add or remove them.','dbem'); ?>
 					</p>
 					<ul id="em-bookings-cols-active" class="em-bookings-cols-sortable">
 						<?php foreach( $this->cols as $col_key ): ?>
@@ -292,7 +292,7 @@ class EM_Bookings_Table{
 				<?php endif; ?>
 				<?php do_action('em_bookings_table_export_options'); ?>
 				<div id="em-bookings-table-settings-form-cols">
-					<p><strong><?php _e('Collumns to export','dbem')?></strong></p>
+					<p><strong><?php _e('Columns to export','dbem')?></strong></p>
 					<ul id="em-bookings-export-cols-active" class="em-bookings-cols-sortable">
 						<?php foreach( $this->cols as $col_key ): ?>
 							<li class="ui-state-highlight">
@@ -363,7 +363,7 @@ class EM_Bookings_Table{
 				<input type="hidden" name="pno" value='<?php echo $this->page ?>' />
 				<input type="hidden" name="order" value='<?php echo $this->order ?>' />
 				<input type="hidden" name="orderby" value='<?php echo $this->orderby ?>' />
-				<input type="hidden" name="_wpnonce" value="<?php echo ( !empty($_REQUEST['_wpnonce']) ) ? $_REQUEST['_wpnonce']:wp_create_nonce('em_bookings_table'); ?>" />
+				<input type="hidden" name="_wpnonce" value="<?php echo ( !empty($_REQUEST['_wpnonce']) ) ? esc_attr($_REQUEST['_wpnonce']):wp_create_nonce('em_bookings_table'); ?>" />
 				<input type="hidden" name="action" value="em_bookings_table" />
 				<input type="hidden" name="cols" value="<?php echo implode(',', $this->cols); ?>" />
 				
@@ -543,7 +543,11 @@ class EM_Bookings_Table{
 			}elseif($col == 'event_time'){
 				$cols[] = $EM_Booking->get_event()->output('#_EVENTTIMES');
 			}elseif($col == 'booking_price'){
-				$cols[] = ($this->show_tickets && !empty($EM_Ticket)) ? $EM_Ticket_Booking->get_price(false,true,true):$EM_Booking->get_price(false,true,true);
+				if($this->show_tickets && !empty($EM_Ticket)){ 
+					$cols[] = em_get_currency_formatted(apply_filters('em_bookings_table_row_booking_price_ticket', $EM_Ticket_Booking->get_price(false,false, true), $EM_Booking, true));
+				}else{
+					$cols[] = $EM_Booking->get_price(false,true,true);
+				}
 			}elseif($col == 'booking_status'){
 				$cols[] = $EM_Booking->get_status(true);
 			}elseif($col == 'booking_date'){

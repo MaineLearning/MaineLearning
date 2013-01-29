@@ -79,7 +79,7 @@ function wats_admin_scripts()
 
 	$editableurl = $plugin_url.'js/jquery.editable.js';
 	wp_enqueue_script('editable',$editableurl,array('jquery'));
-	
+
 	return;
 }
 
@@ -137,7 +137,6 @@ function wats_add_admin_page()
 	{
 		$page = add_options_page(__('Wats Options','WATS'), __('Wats Options','WATS'),'administrator', basename(__FILE__), 'wats_options_admin_menu');
 		add_action('admin_print_scripts-'.$page,'wats_options_admin_head');
-
 	}
 
 	if (function_exists('add_menu_page') && function_exists('add_submenu_page'))
@@ -167,6 +166,7 @@ function wats_add_admin_page()
 			{
 				add_action('manage_posts_custom_column','wats_edit_post_custom_column', 10, 2);
 				add_action('manage_posts_columns','wats_edit_post_column');
+				//add_filter('list_terms_exclusions','wats_list_terms_exclusions');
 				add_action('admin_print_scripts','wats_ticket_edit_admin_head');
 	
 				if ($wats_settings['ticket_edition_media_upload'] == 0)
@@ -243,7 +243,6 @@ function wats_ticket_edit_admin_head()
 		</script>
 		<?php
 	}
-
 	
 	return;
 }
@@ -258,7 +257,7 @@ function wats_media_upload_tabs($tabs)
 {
 	global $wats_settings;
 	
-	if (get_post_type($_GET['post_id']) == 'ticket' && $wats_settings['ticket_edition_media_upload_tabs'] == 0)
+	if (isset($_GET['post_id']) && get_post_type($_GET['post_id']) == 'ticket' && $wats_settings['ticket_edition_media_upload_tabs'] == 0)
 	{
 		unset($tabs['gallery']);
 		unset($tabs['library']);

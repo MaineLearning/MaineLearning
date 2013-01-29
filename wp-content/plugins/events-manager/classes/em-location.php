@@ -617,16 +617,16 @@ class EM_Location extends EM_Object {
 				case '#_LOCATIONPOSTID':
 					$replace = $this->post_id;
 					break;
-				case '#_NAME': //Depreciated
-				case '#_LOCATION': //Depreciated
+				case '#_NAME': //Depricated
+				case '#_LOCATION': //Depricated
 				case '#_LOCATIONNAME':
 					$replace = $this->location_name;
 					break;
-				case '#_ADDRESS': //Depreciated
+				case '#_ADDRESS': //Depricated
 				case '#_LOCATIONADDRESS': 
 					$replace = $this->location_address;
 					break;
-				case '#_TOWN': //Depreciated
+				case '#_TOWN': //Depricated
 				case '#_LOCATIONTOWN':
 					$replace = $this->location_town;
 					break;
@@ -656,14 +656,20 @@ class EM_Location extends EM_Object {
 					$replace .= empty($this->location_postcode) ? '':'<br />'.$this->location_postcode;
 					$replace .= empty($this->location_region) ? '':'<br />'.$this->location_region;
 					break;
-				case '#_MAP': //Depreciated
+				case '#_MAP': //Depricated
 				case '#_LOCATIONMAP':
 					ob_start();
 					$template = em_locate_template('placeholders/locationmap.php', true, array('EM_Location'=>$this));
 					$replace = ob_get_clean();	
 					break;
-				case '#_DESCRIPTION':  //Depreciated
-				case '#_EXCERPT': //Depreciated
+				case '#_LOCATIONLONGITUDE':
+					$replace = $this->location_longitude;
+					break;
+				case '#_LOCATIONLATITUDE':
+					$replace = $this->location_latitude;
+					break;
+				case '#_DESCRIPTION':  //Depricated
+				case '#_EXCERPT': //Depricated
 				case '#_LOCATIONNOTES':
 				case '#_LOCATIONEXCERPT':	
 					$replace = $this->post_content;
@@ -688,14 +694,23 @@ class EM_Location extends EM_Object {
 							}else{
 								$image_size = explode(',', $placeholders[3][$key]);
 								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
-									global $blog_id;
-									if ( is_multisite() && $blog_id > 0) {
-										$imageParts = explode('/blogs.dir/', $image_url);
-										if (isset($imageParts[1])) {
-											$image_url = network_site_url('/wp-content/blogs.dir/'. $blog_id. '/' . $imageParts[1]);
+								    if( get_option('dbem_disable_timthumb') ){
+									    if( EM_MS_GLOBAL && get_current_blog_id() != $this->blog_id ){
+									        switch_to_blog($this->blog_id);
+									        $switch_back = true;
+									    }
+								    	$replace = get_the_post_thumbnail($this->ID, $image_size);
+										if( !empty($switch_back) ){ restore_current_blog(); }
+								    }else{
+										global $blog_id;
+										if ( is_multisite() && $blog_id > 0) {
+											$imageParts = explode('/blogs.dir/', $image_url);
+											if (isset($imageParts[1])) {
+												$image_url = network_site_url('/wp-content/blogs.dir/'. $blog_id. '/' . $imageParts[1]);
+											}
 										}
-									}
-									$replace = "<img src='".esc_url(em_get_thumbnail_url($image_url, $image_size[0], $image_size[1]))."' alt='".esc_attr($this->location_name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
+										$replace = "<img src='".esc_url(em_get_thumbnail_url($image_url, $image_size[0], $image_size[1]))."' alt='".esc_attr($this->location_name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
+								    }
 								}else{
 									$replace = "<img src='".$image_url."' alt='".esc_attr($this->location_name)."'/>";
 								}
@@ -705,7 +720,7 @@ class EM_Location extends EM_Object {
 					break;
 				case '#_LOCATIONURL':
 				case '#_LOCATIONLINK':
-				case '#_LOCATIONPAGEURL': //Depreciated
+				case '#_LOCATIONPAGEURL': //Depricated
 					$link = esc_url($this->get_permalink());
 					$replace = ($result == '#_LOCATIONURL' || $result == '#_LOCATIONPAGEURL') ? $link : '<a href="'.$link.'" title="'.esc_attr($this->location_name).'">'.esc_html($this->location_name).'</a>';
 					break;
@@ -716,11 +731,11 @@ class EM_Location extends EM_Object {
 						$replace = ($result == '#_LOCATIONEDITURL') ? $link : '<a href="'.$link.'" title="'.esc_attr($this->location_name).'">'.esc_html(sprintf(__('Edit Location','dbem'))).'</a>';
 				    }
 					break;
-				case '#_PASTEVENTS': //Depreciated
+				case '#_PASTEVENTS': //Depricated
 				case '#_LOCATIONPASTEVENTS':
-				case '#_NEXTEVENTS': //Depreciated
+				case '#_NEXTEVENTS': //Depricated
 				case '#_LOCATIONNEXTEVENTS':
-				case '#_ALLEVENTS': //Depreciated
+				case '#_ALLEVENTS': //Depricated
 				case '#_LOCATIONALLEVENTS':
 					//TODO: add limit to lists of events
 					//convert depreciated placeholders for compatability
@@ -731,13 +746,15 @@ class EM_Location extends EM_Object {
 					if ( $result == '#_LOCATIONPASTEVENTS'){ $scope = 'past'; }
 					elseif ( $result == '#_LOCATIONNEXTEVENTS' ){ $scope = 'future'; }
 					else{ $scope = 'all'; }
-					$events = EM_Events::get( array('location'=>$this->location_id, 'scope'=>$scope) );
-					if ( count($events) > 0 ){
-						$replace .= get_option('dbem_location_event_list_item_header_format');
-						foreach($events as $event){
-							$replace .= $event->output(get_option('dbem_location_event_list_item_format'));
-						}
-						$replace .= get_option('dbem_location_event_list_item_footer_format');
+					$events_count = EM_Events::count( array('location'=>$this->location_id, 'scope'=>$scope) );
+					if ( $events_count > 0 ){
+					    $args = array('location'=>$this->location_id, 'scope'=>$scope, 'pagination'=>1);
+					    $args['format_header'] = get_option('dbem_location_event_list_item_header_format');
+					    $args['format_footer'] = get_option('dbem_location_event_list_item_footer_format');
+					    $args['format'] = get_option('dbem_location_event_list_item_format');
+						$args['limit'] = get_option('dbem_location_event_list_limit');
+						$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : 1;
+					    $replace = EM_Events::output($args);
 					} else {
 						$replace = get_option('dbem_location_no_events_message');
 					}

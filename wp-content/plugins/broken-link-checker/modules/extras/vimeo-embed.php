@@ -45,5 +45,3 @@ class blcVimeoEmbed extends blcEmbedParserBase {
 		return $url;
 	}
 }
-
-?>

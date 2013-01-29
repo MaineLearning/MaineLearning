@@ -1,14 +1,14 @@
 <div class="postbox gdrgrid frontleft">
         <small style="float: right; margin-right:6px; margin-top:6px;">
-            <a target="_blank" href="http://www.gdstarrating.com/"><?php _e("See All", "gd-star-rating"); ?></a> | <a href="http://feeds2.feedburner.com/GdStarRating">RSS</a>
+            <a target="_blank" href="http://www.dev4press.com/category/blog/"><?php _e("See All", "gd-star-rating"); ?></a> | <a href="http://feeds2.feedburner.com/GdStarRating">RSS</a>
         </small>
         <h3 class="hndle"><span><?php _e("Latest News", "gd-star-rating"); ?></span></h3>
         <div class="gdsrclear"></div>
     <div class="inside">
         <?php
 
-        if ($options["news_feed_active"] == 1) {
-            $feed = fetch_feed('http://www.gdstarrating.com/feed/');
+        if ($options['news_feed_active'] == 1) {
+            $feed = fetch_feed('http://www.dev4press.com/feed/');
                 if (!is_wp_error( $feed )) {
                     $items = $feed->get_items(0, 4);
                     if (! empty($items)) {

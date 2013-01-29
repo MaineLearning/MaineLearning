@@ -485,7 +485,27 @@ function em_is_calendar_day_page(){
  * Is this a a single category page?
  * @return boolean
  */
-function em_is_category_page(){
+function em_is_category_page( $category = false ){
+    if( !empty($category) ){
+        global $wp_query, $post, $em_category_id;
+        if( is_tax(EM_TAXONOMY_CATEGORY, $category) ){ return true; }
+        if( !empty($wp_query->em_category_id) || ($post->ID == get_option('dbem_categories_page') && !empty($em_category_id)) ){
+			$cat_id = !empty($wp_query->em_category_id) ? $wp_query->em_category_id:$em_category_id;
+            $EM_Category = em_get_category($cat_id);
+            if( is_array($category) ){
+                $is_category = array();
+                foreach( $category as $id_or_term ){
+                    $is_category[] = is_numeric($id_or_term) ? $EM_Category->id == $id_or_term : ($EM_Category->slug == $id_or_term || $EM_Category->name == $id_or_term);
+                }
+                return in_array(true, $is_category);
+            }else{
+                $is_category = is_numeric($category) ? $EM_Category->id == $category : ($EM_Category->slug == $category  || $EM_Category->name == $category);
+                return $is_category;
+            }
+            return false;
+        }
+        return false;
+    }
 	return em_get_page_type() == 'category';
 }
 /**
@@ -494,6 +514,34 @@ function em_is_category_page(){
  */
 function em_is_categories_page(){
 	return em_get_page_type() == 'categories';
+}
+
+/**
+ * Is this a a single category page?
+ * @return boolean
+ */
+function em_is_tag_page( $tag = false ){
+	if( !empty($tag) ){
+		global $wp_query, $post, $em_tag_id;
+		if( is_tax(EM_TAXONOMY_TAG, $tag) ){ return true; }
+		if( !empty($wp_query->em_tag_id) || !empty($em_tag_id) ){
+			$tag_id = !empty($wp_query->em_tag_id) ? $wp_query->em_tag_id:$em_tag_id;
+			$EM_Tag = em_get_tag($tag_id);
+			if( is_array($tag) ){
+				$is_tag = array();
+				foreach( $tag as $id_or_term ){
+					$is_tag[] = is_numeric($id_or_term) ? $EM_Tag->id == $id_or_term : ($EM_Tag->slug == $id_or_term || $EM_Tag->name == $id_or_term);
+				}
+				return in_array(true, $is_tag);
+			}else{
+				$is_tag = is_numeric($tag) ? $EM_Tag->id == $tag : ($EM_Tag->slug == $tag || $EM_Tag->name == $tag);
+				return $is_tag;
+			}
+			return false;
+		}
+		return false;
+	}
+	return em_get_page_type() == 'tag';
 }
 
 /**

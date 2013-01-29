@@ -3,8 +3,8 @@ Name: Children Excerpt Shortcode
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Children, Excerpt, Shortcode, Plugin
 Requires at least: 2.9
-Tested up to: 3.3
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.2
 
 
 
@@ -55,4 +55,7 @@ Developer Website: http://MyWebsiteAdvisor.com
 
 = 1.1 =
 * Minor Bug Fix
+
+= 1.2 = 
+* added id attribute to shortcode so you can display an excerpt index on any page or post not just on the actual parent
 

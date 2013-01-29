@@ -4,7 +4,7 @@
  * Plugin URI: http://www.qurl.nl/dynamic-widgets/
  * Description: Dynamic Widgets gives you full control on which pages your widgets will appear. It lets you dynamicly show or hide widgets on WordPress pages.
  * Author: Qurl
- * Version: 1.5.3
+ * Version: 1.5.4
  * Author URI: http://www.qurl.nl/
  * Tags: widget, widgets, dynamic, sidebar, custom, rules, logic, admin, condition, conditional tags, hide, show, wpml, qtranslate, wpec, buddypress, pods
  *
@@ -15,7 +15,7 @@
  *
  * Released under the GPL v.2, http://www.gnu.org/copyleft/gpl.html
  *
- * @version $Id: dynamic-widgets.php 605455 2012-09-28 19:57:21Z qurl $
+ * @version $Id: dynamic-widgets.php 639724 2012-12-15 16:23:24Z qurl $
  * @copyright 2011 Jacco Drabbe
  *
  * Thanks to Alexis Nomine for the contribution of the French (fr_FR) language files, several L10N fixes and change of the edit options UI.
@@ -24,6 +24,11 @@
  * Thanks to Hanolex for the contribution of the Chinese (Simplified) (zh_CN) language files.
  * Thanks to Liudas Ališauskas for the contribution of the Lithuanian (lt_LT) language files.
  * Thanks to Pedro Nave for the contribution of the Portuguese (pt_PT) language files.
+ * Thanks to Renato Tavares for the contribution of the Brazil Portuguese (pt_BR) language files.
+ * Thanks to Pavel Bilek for the contribution of the Chech (cs_CZ) language files.
+ * Thanks to Morten Nalholm for the contribution of the Danish (da_DK) language files.
+ * Thanks to Scott Kingsley Clark for the help to get the Pods module upgraded to support Pods v2.
+ *
  *
  * WPML Plugin support via API
  * Using constants	ICL_PLUGIN_PATH > mods/wpml_module.php
@@ -67,7 +72,7 @@
   define('DW_PLUGIN', dirname(__FILE__) . '/' . 'plugin/');
   define('DW_TIME_LIMIT', 86400);				// 1 day
   define('DW_URL_AUTHOR', 'http://www.qurl.nl');
-  define('DW_VERSION', '1.5.3');
+  define('DW_VERSION', '1.5.4');
   define('DW_VERSION_URL_CHECK', DW_URL_AUTHOR . '/wp-content/uploads/php/dw_version.php?v=' . DW_VERSION . '&n=');
 	define('DW_WPML_API', '/inc/wpml-api.php');			// WPML Plugin support - API file relative to ICL_PLUGIN_PATH
 	define('DW_WPML_ICON', 'img/wpml_icon.png');	// WPML Plugin support - WPML icon
@@ -88,7 +93,7 @@
 
 		$query = "CREATE TABLE IF NOT EXISTS " . $dbtable . " (
                 id int(11) NOT NULL auto_increment,
-                widget_id varchar(40) NOT NULL,
+                widget_id varchar(60) NOT NULL,
                 maintype varchar(50) NOT NULL,
                 `name` varchar(40) NOT NULL,
                 `value` longtext NOT NULL,
@@ -145,6 +150,15 @@
 					$query = "INSERT INTO " . $dbtable . "(widget_id, maintype, value) VALUES ('" . $myrow->widget_id . "', 'tag', '0')";
 					$wpdb->query($query);
 				}
+			}
+			
+			/*
+			1.5.3.1 > Widgets seems to be started using longer classnames to avoid clashing.
+			Widend up the width for widget_id from 40 to 60.
+			*/
+			if ( version_compare($version, '1.5.3.1', '<') ) {
+				$query = "ALTER TABLE " . $dbtable . " CHANGE `widget_id` `widget_id` VARCHAR(60) NOT NULL";
+				$wpdb->query($query);
 			}
 
 		}
@@ -657,48 +671,53 @@
 	 */
 	function dynwid_save_postdata($post_id) {
 	  $DW = &$GLOBALS['DW'];
+	  
+	  if ( $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] != 'autosave' ) {
+	  	$post_id = ( isset($_POST['post_ID']) && ! empty($_POST['post_ID']) ) ? intval($_POST['post_ID']) : 0;
+	  	
+	  	if ( $parent_id = wp_is_post_revision($post_id) ) {
+				$post_id = $parent_id;
+			}
 
-    // Using parent post_id to prevent cluttering up the database with revision numbers
-	  if ( array_key_exists('post_ID', $_POST) ) {
-	    $post_id = $_POST['post_ID'];
-	  }
-
-		$post_type = get_post_type($post_id);
-		if ( $post_type == 'post') {
-			$post_type = 'single';
-			$maintype = 'single-post';
-		} else {
-			$maintype = $post_type . '-post';
-		}
-
-	  // Housekeeping
-	  $opt = $DW->getOpt('%','individual');
-	  foreach ( $opt as $widget ) {
-	    $DW->deleteOption($widget->widget_id, $maintype, $post_id);
-	  }
-
-	  if ( array_key_exists('dw-single-post', $_POST) ) {
-	    $opt = $_POST['dw-single-post'];
-	    $default = 'yes';
-	    $default_single = '1';
-
-	    foreach ( $opt as $widget_id ) {
-	      $opt_single = $DW->getOpt($widget_id, $post_type);
-	      if ( count($opt_single) > 0 ) {
-	        foreach ( $opt_single as $widget ) {
-	          if ( $widget->maintype == $post_type ) {
-	            $default_single = $widget->value;
-	          }
-	        }
-
-	        if ( $default_single == '0' ) {
-	          $default = 'no';
-	        }
-	      }
-
-	      $DW->addMultiOption($widget_id, $maintype, $default, array($post_id));
-	    }
-	  } // END if array_key_exists
+			if ( $post_id > 0 ) {
+				$post_type = get_post_type($post_id);
+				if ( $post_type == 'post') {
+					$post_type = 'single';
+					$maintype = 'single-post';
+				} else {
+					$maintype = $post_type . '-post';
+				}
+		
+			  // Housekeeping
+			  $opt = $DW->getOpt('%','individual');
+			  foreach ( $opt as $widget ) {
+			    $DW->deleteOption($widget->widget_id, $maintype, $post_id);
+			  }
+		
+			  if ( array_key_exists('dw-single-post', $_POST) ) {
+			    $opt = $_POST['dw-single-post'];
+			    $default = 'yes';
+			    $default_single = '1';
+		
+			    foreach ( $opt as $widget_id ) {
+			      $opt_single = $DW->getOpt($widget_id, $post_type);
+			      if ( count($opt_single) > 0 ) {
+			        foreach ( $opt_single as $widget ) {
+			          if ( $widget->maintype == $post_type ) {
+			            $default_single = $widget->value;
+			          }
+			        }
+		
+			        if ( $default_single == '0' ) {
+			          $default = 'no';
+			        }
+			      }
+		
+			      $DW->addMultiOption($widget_id, $maintype, $default, array($post_id));
+			    }
+			  } // END if array_key_exists
+			} // END if $post_id > 0 
+		} // END if ! autosave AND ! quick edit
 	}
 
 	/**

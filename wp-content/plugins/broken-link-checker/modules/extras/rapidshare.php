@@ -211,5 +211,3 @@ class blcRapidShareChecker extends blcChecker {
 	}
 	
 }
-
-?>

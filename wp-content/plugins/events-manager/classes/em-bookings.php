@@ -333,7 +333,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 	function get_booked_spaces($force_refresh = false){
 		$booked_spaces = 0;
 		foreach ( $this->bookings as $EM_Booking ){
-			if( $EM_Booking->booking_status == 1 ){
+			if( $EM_Booking->booking_status == 1 || (!get_option('dbem_bookings_approval') && $EM_Booking->booking_status == 0 ) ){
 				$booked_spaces += $EM_Booking->get_spaces($force_refresh);
 			}
 		}

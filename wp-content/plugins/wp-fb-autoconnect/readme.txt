@@ -3,8 +3,8 @@ Contributors: Justin_K
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T88Y2AZ53836U
 Tags: facebook connect, login with facebook, facebook autoconnect, facebook, connect, widget, login, logon, wordpress, buddypress
 Requires at least: 2.5
-Tested up to: 3.4.2
-Stable tag: 2.4.1
+Tested up to: 3.5
+Stable tag: 2.5.9
 
 A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible.  Supports BuddyPress.
 
@@ -60,6 +60,52 @@ For more information on exactly how this plugin's login process works and how it
 
 
 == Changelog ==
+= 2.5.9 (2013-01-15) =
+* Fix the login button jumping around on initialization (thanks to yet another bug introduced by Facebook)   
+* Compatibility fix for BP Avatar Bubble
+
+= 2.5.8 (2012-12-25) =
+* Fix compatibility with woocommerce (wp_login action was supposed to take 2 parameters)
+* Remove xmlns:fb from the header tag.  It doesn't seem to be necessary for any modern browsers, and breaks validation for HTML5.  If you find it necessary, you can always re-add it with a simple filter.
+
+= 2.5.7 (2012-12-23) =
+* Fix for validating the API key/secret on servers with invalid SSL cert
+
+= 2.5.6 (2012-12-23) =
+* jQuery is not working for some users on WP3.5.  I explicitly enqueue it now.
+* Fix mistake with prelogin error check
+
+= 2.5.5 (2012-12-22) =
+* Fix double-counting of logins (hopefully)
+* Add a keepalive event & prelogin error check
+
+= 2.5.4 (2012-12-20) =
+* Fix a minor bug with new user notifications in WP3.5
+* Update WP compatibility number
+
+= 2.5.3 (2012-12-18) =
+* Fix a harmless warning that appears on BP when WP_DEBUG is defined
+* Another minor cleanup to the button-outputting code
+* Add new filter
+
+= 2.5.2 (2012-12-10) =
+* Oops - very minor revision from 2.5.1 :)
+
+= 2.5.1 (2012-12-10) =
+* Combine the two profile picture queries into one (shave ~0.3s off of login time)
+* Eliminate action wpfb_output_button, and cleanup jfb_output_facebook_btn for clarity (and in prep for a future change)
+
+= 2.5.0 (2012-11-29) =
+* I've eliminated the need for the Facebook PHP SDK entirely.  Although it's still included and passed to the actions/filters for backwards-compatibility, calls to the Graph API should now performed via jfb_api_get() and jfb_api_post(), using the access_token provided.  Specific changes:
+* Rename jfb_get() to jfb_api_get()
+* Add jfb_api_post() for API calls requiring HTTP POST
+* Facebook JSON responses are decoded to associative arrays rather than objects (to match the format of the PHP SDK)
+* Rename "accessToken" to "access_token" to better match the naming convention used by the Graph API
+* Update jfb_post_to_wall() to avoid using the $facebook class
+* Update all queries & error checks in _process_login.php to avoid using the $facebook class
+* Rearrange things in _process_login.php, putting the $facebook initialization code into a "to deprecate" block
+* Get rid of the 2.3.6 'one-time update' code to store the app access token in the DB
+
 = 2.4.1 (2012-11-27) =
 * Explicitly pass & check for the user access token in _process_login.php
 * Provide the user access token to wpfb_session_established, wpfb_connect, wpfb_existing_user, wpfb_inserting_user, wpfb_inserted_user, and wpfb_login (so you can use it to query the Graph API in your addons)

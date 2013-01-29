@@ -6,7 +6,7 @@
  * @category Genesis
  * @package  Admin
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  **/
 
@@ -52,10 +52,28 @@ function genesis_admin_redirect( $page, $query_args = array() ) {
 			unset( $query_args[$key] );
 		}
 	}
-	
-	$url = add_query_arg( $query_args, $url ); 
+
+	$url = add_query_arg( $query_args, $url );
 
 	wp_redirect( esc_url_raw( $url ) );
+
+}
+
+/**
+ * Return a specific value from the associative array passed as the second argument to <code>add_theme_support()</code>
+ *
+ * @param string $feature The theme feature.
+ * @param string $arg The theme feature argument.
+ * @return mixed Returns false if theme doesn't support $feature or $arg key doesn't exist.
+ */
+function genesis_get_theme_support_arg( $feature, $arg ) {
+
+	$support = get_theme_support( $feature );
+
+	if ( ! $support || ! isset( $support[0] ) || ! array_key_exists( $arg, (array) $support[0] ) )
+		return false;
+
+	return $support[0][ $arg ];
 
 }
 
@@ -124,5 +142,31 @@ function genesis_is_menu_page( $pagehook = '' ) {
 		return true;
 
 	return false;
+
+}
+
+/**
+ * Helper function to output markup conditionally.
+ *
+ * If the child theme supports HTML5, then this function will output the $html5_tag. Otherwise,
+ * it will output the xHTML tag.
+ *
+ * @since 1.9.0
+ *
+ * @param string $html5_tag Markup to output if HTML5 is supported.
+ * @param string $xhtml_tag Markup to output if HTML5 is not supported.
+ * @param boolean $echo Conditional to determine output or return.
+ */
+function genesis_markup( $html5_tag = '', $xhtml_tag = '', $echo = true ) {
+
+	if ( ! $html5_tag || ! $xhtml_tag )
+		return;
+
+	$tag = current_theme_supports( 'genesis-html5' ) ? $html5_tag : $xhtml_tag;
+
+	if ( $echo )
+		echo $tag;
+	else
+		return $tag;
 
 }

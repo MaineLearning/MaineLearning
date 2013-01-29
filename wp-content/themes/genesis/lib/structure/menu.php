@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Menus
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -24,7 +24,8 @@ function genesis_register_nav_menus() {
 		return;
 
 	$menus = get_theme_support( 'genesis-menus' );
-	
+
+	/** Register supported menus */
 	foreach ( (array) $menus[0] as $id => $name ) {
 		register_nav_menu( $id , $name );
 	}
@@ -56,36 +57,24 @@ function genesis_do_nav() {
 	if ( ! genesis_nav_menu_supported( 'primary' ) )
 		return;
 
-	if ( genesis_get_option( 'nav' ) ) {
-		if ( has_nav_menu( 'primary' ) ) {
-			$args = array(
-				'theme_location' => 'primary',
-				'container'      => '',
-				'menu_class'     => genesis_get_option( 'nav_superfish' ) ? 'menu menu-primary superfish' : 'menu menu-primary',
-				'echo'           => 0,
-			);
+	/** If menu is assigned to theme location, output */
+	if ( has_nav_menu( 'primary' ) ) {
 
-			$nav = wp_nav_menu( $args );
-		} elseif ( 'nav-menu' != genesis_get_option( 'nav_type', 'genesis-vestige' ) ) {
-			$args = array(
-				'theme_location' => 'primary',
-				'menu_class'     => genesis_get_option( 'nav_superfish' ) ? 'menu menu-primary superfish' : 'menu menu-primary',
-				'show_home'      => genesis_get_option( 'nav_home', 'genesis-vestige' ),
-				'type'           => genesis_get_option( 'nav_type', 'genesis-vestige' ),
-				'sort_column'    => genesis_get_option( 'nav_pages_sort', 'genesis-vestige' ),
-				'orderby'        => genesis_get_option( 'nav_categories_sort', 'genesis-vestige' ),
-				'depth'          => genesis_get_option( 'nav_depth', 'genesis-vestige' ),
-				'exclude'        => genesis_get_option( 'nav_exclude', 'genesis-vestige' ),
-				'include'        => genesis_get_option( 'nav_include', 'genesis-vestige' ),
-				'echo'           => false,
-			);
+		$args = array(
+			'theme_location' => 'primary',
+			'container'      => '',
+			'menu_class'     => genesis_get_option( 'nav_superfish' ) ? 'menu genesis-nav-menu menu-primary superfish' : 'menu genesis-nav-menu menu-primary',
+			'echo'           => 0,
+		);
 
-			$nav = genesis_nav( $args );
-		}
+		$nav = wp_nav_menu( $args );
 
-		$nav_output = sprintf( '<div id="nav">%2$s%1$s%3$s</div>', $nav, genesis_structural_wrap( 'nav', 'open', 0 ), genesis_structural_wrap( 'nav', 'close', 0 ) );
+		$pattern = genesis_markup( '<nav class="primary">%2$s%1$s%3$s</nav>', '<div id="nav">%2$s%1$s%3$s</div>', 0 );
+
+		$nav_output = sprintf( $pattern, $nav, genesis_structural_wrap( 'nav', 'open', 0 ), genesis_structural_wrap( 'nav', 'close', 0 ) );
 
 		echo apply_filters( 'genesis_do_nav', $nav_output, $nav, $args );
+
 	}
 
 }
@@ -113,42 +102,28 @@ function genesis_do_subnav() {
 	if ( ! genesis_nav_menu_supported( 'secondary' ) )
 		return;
 
-	if ( genesis_get_option( 'subnav' ) ) {
-		if ( has_nav_menu( 'secondary' ) ) {
-			$args = array(
-				'theme_location' => 'secondary',
-				'container'      => '',
-				'menu_class'     => genesis_get_option( 'subnav_superfish' ) ? 'menu menu-secondary superfish' : 'menu menu-secondary',
-				'echo'           => 0,
-			);
+	/** If menu is assigned to theme location, output */
+	if ( has_nav_menu( 'secondary' ) ) {
 
-			$subnav = wp_nav_menu( $args );
-		} elseif ( 'nav-menu' != genesis_get_option( 'subnav_type', 'genesis-vestige' ) ) {
-			$args = array(
-				'theme_location' => 'secondary',
-				'menu_class'     => 'menu menu-secondary',
-				'show_home'      => genesis_get_option( 'subnav_home', 'genesis-vestige' ),
-				'type'           => genesis_get_option( 'subnav_type', 'genesis-vestige' ),
-				'sort_column'    => genesis_get_option( 'subnav_pages_sort', 'genesis-vestige' ),
-				'orderby'        => genesis_get_option( 'subnav_categories_sort', 'genesis-vestige' ),
-				'depth'          => genesis_get_option( 'subnav_depth', 'genesis-vestige' ),
-				'exclude'        => genesis_get_option( 'subnav_exclude', 'genesis-vestige' ),
-				'include'        => genesis_get_option( 'subnav_include', 'genesis-vestige' ),
-				'echo'           => false,
-			);
+		$args = array(
+			'theme_location' => 'secondary',
+			'container'      => '',
+			'menu_class'     => genesis_get_option( 'subnav_superfish' ) ? 'menu genesis-nav-menu menu-secondary superfish' : 'menu genesis-nav-menu menu-secondary',
+			'echo'           => 0,
+		);
 
-			$subnav = genesis_nav( $args );
-		}
+		$subnav = wp_nav_menu( $args );
 
-		$subnav_output = sprintf( '<div id="subnav">%2$s%1$s%3$s</div>', $subnav, genesis_structural_wrap( 'subnav', 'open', 0 ), genesis_structural_wrap( 'subnav', 'close', 0 ) );
+		$pattern = genesis_markup( '<nav class="secondary">%2$s%1$s%3$s</nav>', '<div id="subnav">%2$s%1$s%3$s</div>', 0 );
+
+		$subnav_output = sprintf( $pattern, $subnav, genesis_structural_wrap( 'subnav', 'open', 0 ), genesis_structural_wrap( 'subnav', 'close', 0 ) );
 
 		echo apply_filters( 'genesis_do_subnav', $subnav_output, $subnav, $args );
+
 	}
 
 }
 
-
-add_filter( 'genesis_nav_items', 'genesis_nav_right', 10, 2 );
 add_filter( 'wp_nav_menu_items', 'genesis_nav_right', 10, 2 );
 /**
  * Filters the Primary Navigation menu items, appending either RSS links,

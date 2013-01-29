@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.6 WP-ADMIN SECURE .HTACCESS     
+#   BULLETPROOF .47.8 WP-ADMIN SECURE .HTACCESS     
 
-# If you edit the BULLETPROOF .47.6 WP-ADMIN SECURE .HTACCESS text above 
+# If you edit the BULLETPROOF .47.8 WP-ADMIN SECURE .HTACCESS text above 
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # BPS is also checking that the string BPSQSE exists in this file - do not delete it
@@ -138,7 +138,7 @@ RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
 RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
 RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
 RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
-RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\(|\)|<|>).* [NC,OR]
 RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
 RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
 RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]

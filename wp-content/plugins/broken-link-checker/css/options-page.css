@@ -81,7 +81,7 @@ Sidebar
 	border-color: gray;
 	border-style: solid;
 	
-	border-spacing: 0px;
+	border-spacing: 0;
 	border-collapse: collapse;
 }
 
@@ -164,7 +164,9 @@ ul.ui-tabs-nav li {
 	max-width: 25%;
 }
 
-ul.ui-tabs-nav li.ui-tabs-selected {
+ul.ui-tabs-nav li.ui-tabs-selected,
+ul.ui-tabs-nav li.ui-tabs-active
+{
 	background: white;
 	color: black;
 	border-bottom-color: white;
@@ -178,8 +180,14 @@ ul.ui-tabs-nav li a {
 	padding: 0.5em 1em 0.6em 1em;
 }
 
-ul.ui-tabs-nav li.ui-tabs-selected a {
+ul.ui-tabs-nav li a:focus {
+	outline: none;
+}
+
+ul.ui-tabs-nav li.ui-tabs-selected a,
+ul.ui-tabs-nav li.ui-tabs-active a {
 	color: black;
+	outline: none;
 }
 
 /* Tab panels */

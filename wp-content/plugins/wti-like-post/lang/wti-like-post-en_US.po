@@ -1,0 +1,679 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WTI Like Post\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-01 20:55+0530\n"
+"PO-Revision-Date: 2012-04-01 20:55+0530\n"
+"Last-Translator: Webtechideas <webtechideas@gmail.com>\n"
+"Language-Team: Webtechideas <webtechideas@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;_;gettext;gettext_noop\n"
+"X-Poedit-Basepath: D:\\Program Files\\xampp\\htdocs\\wordpress32\\wp-content\\plugins\\wti-like-post\\\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SearchPath-0: D:\\Program Files\\xampp\\htdocs\\wordpress32\\wp-content\\plugins\\wti-like-post\n"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like.php:48
+msgid "You can vote after"
+msgstr "You can vote after"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like.php:48
+msgid "day(s)"
+msgstr "day(s)"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like.php:100
+msgid "Could not process your vote."
+msgstr "Could not process your vote."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:7
+msgid "Widget to display most liked posts for a given time range."
+msgstr "Widget to display most liked posts for a given time range."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:8
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:19
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:519
+msgid "Most Liked Posts"
+msgstr "Most Liked Posts"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:37
+msgid "All time"
+msgstr "All time"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:38
+msgid "Last one day"
+msgstr "Last one day"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:39
+msgid "Last two days"
+msgstr "Last two days"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:40
+msgid "Last three days"
+msgstr "Last three days"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:41
+msgid "Last one week"
+msgstr "Last one week"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:42
+msgid "Last two weeks"
+msgstr "Last two weeks"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:43
+msgid "Last three weeks"
+msgstr "Last three weeks"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:44
+msgid "Last one month"
+msgstr "Last one month"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:45
+msgid "Last two months"
+msgstr "Last two months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:46
+msgid "Last three months"
+msgstr "Last three months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:47
+msgid "Last six months"
+msgstr "Last six months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:48
+msgid "Last one year"
+msgstr "Last one year"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:51
+msgid "Most Liked"
+msgstr "Most Liked"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:51
+msgid "Recently Liked"
+msgstr "Recently Liked"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:54
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:182
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:912
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:969
+msgid "Title"
+msgstr "Title"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:58
+msgid "Number of posts to show"
+msgstr "Number of posts to show"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:62
+msgid "Time range"
+msgstr "Time range"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:73
+msgid "Show like count"
+msgstr "Show like count"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:137
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:243
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:591
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:929
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:983
+msgid "No posts liked yet."
+msgstr "No posts liked yet."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:156
+msgid "Widget to show recently liked posts."
+msgstr "Widget to show recently liked posts."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:157
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:167
+msgid "Recently Liked Posts"
+msgstr "Recently Liked Posts"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:186
+msgid "Number of entries to show"
+msgstr "Number of entries to show"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_class.php:187
+msgid "Default"
+msgstr "Default"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:53
+msgid "Settings"
+msgstr "Settings"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:96
+msgid "Please login to vote."
+msgstr "Please login to vote."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:97
+msgid "Thanks for your vote."
+msgstr "Thanks for your vote."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:98
+msgid "You have already voted."
+msgstr "You have already voted."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:145
+msgid "WTI Like Post"
+msgstr "WTI Like Post"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:189
+msgid "WTI Like Post Options"
+msgstr "WTI Like Post Options"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:194
+msgid "Donation"
+msgstr "Donation"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:197
+msgid "There has been a lot of effort put behind the development of this plugin. Please consider donating towards this plugin development."
+msgstr "There has been a lot of effort put behind the development of this plugin. Please consider donating towards this plugin development."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:199
+msgid "Amount"
+msgstr "Amount"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:218
+msgid "Configuration"
+msgstr "Configuration"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:224
+msgid "jQuery Framework"
+msgstr "jQuery Framework"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:227
+msgid "Enabled"
+msgstr "Enabled"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:228
+msgid "Disabled"
+msgstr "Disabled"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:230
+msgid "Disable it if you already have the jQuery framework enabled in your theme."
+msgstr "Disable it if you already have the jQuery framework enabled in your theme."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:234
+msgid "Voting Period"
+msgstr "Voting Period"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:240
+msgid "Always can vote"
+msgstr "Always can vote"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:241
+msgid "Only once"
+msgstr "Only once"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:242
+msgid "One day"
+msgstr "One day"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:243
+msgid "Two days"
+msgstr "Two days"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:244
+msgid "Three days"
+msgstr "Three days"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:245
+msgid "One week"
+msgstr "One week"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:246
+msgid "Two weeks"
+msgstr "Two weeks"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:247
+msgid "Three weeks"
+msgstr "Three weeks"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:248
+msgid "One month"
+msgstr "One month"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:249
+msgid "Two months"
+msgstr "Two months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:250
+msgid "Three months"
+msgstr "Three months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:251
+msgid "Six Months"
+msgstr "Six Months"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:252
+msgid "One Year"
+msgstr "One Year"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:254
+msgid "Select the voting period after which user can vote again."
+msgstr "Select the voting period after which user can vote again."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:258
+msgid "Voting Style"
+msgstr "Voting Style"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:264
+msgid "Style1"
+msgstr "Style1"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:265
+msgid "Style2"
+msgstr "Style2"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:266
+msgid "Style3"
+msgstr "Style3"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:268
+msgid "Select the voting style from 3 available options with 3 different sets of images."
+msgstr "Select the voting style from 3 available options with 3 different sets of images."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:272
+msgid "Login required to vote"
+msgstr "Login required to vote"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:274
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:303
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:353
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:384
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:392
+msgid "Yes"
+msgstr "Yes"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:275
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:304
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:354
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:385
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:393
+msgid "No"
+msgstr "No"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:276
+msgid "Select whether only logged in users can vote or not."
+msgstr "Select whether only logged in users can vote or not."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:280
+msgid "Login required message"
+msgstr "Login required message"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:283
+msgid "Message to show in case login required and user is not logged in."
+msgstr "Message to show in case login required and user is not logged in."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:287
+msgid "Thank you message"
+msgstr "Thank you message"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:290
+msgid "Message to show after successful voting."
+msgstr "Message to show after successful voting."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:294
+msgid "Already voted message"
+msgstr "Already voted message"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:297
+msgid "Message to show if user has already voted."
+msgstr "Message to show if user has already voted."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:301
+msgid "Show on pages"
+msgstr "Show on pages"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:305
+msgid "Select yes if you want to show the like option on pages as well."
+msgstr "Select yes if you want to show the like option on pages as well."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:309
+msgid "Exclude on selected sections"
+msgstr "Exclude on selected sections"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:311
+msgid "Home"
+msgstr "Home"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:312
+msgid "Archive"
+msgstr "Archive"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:313
+msgid "Check the sections where you do not want to avail the like/dislike options. This has higher priority than the \"Exclude post/page IDs\" setting."
+msgstr "Check the sections where you do not want to avail the like/dislike options. This has higher priority than the \"Exclude post/page IDs\" setting."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:317
+msgid "Exclude selected categories"
+msgstr "Exclude selected categories"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:333
+msgid "Select categories where you do not want to show the like option. It has higher priority than \"Exclude post/page IDs\" setting."
+msgstr "Select categories where you do not want to show the like option. It has higher priority than \"Exclude post/page IDs\" setting."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:337
+msgid "Allow post IDs"
+msgstr "Allow post IDs"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:340
+msgid "Suppose you have a post which belongs to more than one categories and you have excluded one of those categories. So the like/dislike will not be available for that post. Enter comma separated those post ids where you want to show the like/dislike option irrespective of that post category being excluded."
+msgstr "Suppose you have a post which belongs to more than one categories and you have excluded one of those categories. So the like/dislike will not be available for that post. Enter comma separated those post ids where you want to show the like/dislike option irrespective of that post category being excluded."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:344
+msgid "Exclude post/page IDs"
+msgstr "Exclude post/page IDs"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:347
+msgid "Enter comma separated post/page ids where you do not want to show the like option. If Show on pages setting is set to Yes but you have added the page id here, then like option will not be shown for the same page."
+msgstr "Enter comma separated post/page ids where you do not want to show the like option. If Show on pages setting is set to Yes but you have added the page id here, then like option will not be shown for the same page."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:351
+msgid "Show excluded posts/pages on widget"
+msgstr "Show excluded posts/pages on widget"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:355
+msgid "Select yes if you want to show the excluded posts/pages on widget."
+msgstr "Select yes if you want to show the excluded posts/pages on widget."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:359
+msgid "Position Setting"
+msgstr "Position Setting"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:361
+msgid "Top of Content"
+msgstr "Top of Content"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:362
+msgid "Bottom of Content"
+msgstr "Bottom of Content"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:363
+msgid "Select the position where you want to show the like options."
+msgstr "Select the position where you want to show the like options."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:367
+msgid "Alignment Setting"
+msgstr "Alignment Setting"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:369
+msgid "Left"
+msgstr "Left"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:370
+msgid "Right"
+msgstr "Right"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:371
+msgid "Select the alignment whether to show on left or on right."
+msgstr "Select the alignment whether to show on left or on right."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:375
+msgid "Title text for like/unlike images"
+msgstr "Title text for like/unlike images"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:378
+msgid "Enter both texts separated by \"/\" to show when user puts mouse over like/unlike images."
+msgstr "Enter both texts separated by \"/\" to show when user puts mouse over like/unlike images."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:382
+msgid "Show dislike option"
+msgstr "Show dislike option"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:386
+msgid "Select the option whether to show or hide the dislike option."
+msgstr "Select the option whether to show or hide the dislike option."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:390
+msgid "Show +/- symbols"
+msgstr "Show +/- symbols"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:394
+msgid "Select the option whether to show or hide the plus or minus symbols before like/unlike count."
+msgstr "Select the option whether to show or hide the plus or minus symbols before like/unlike count."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:400
+msgid "Save Options"
+msgstr "Save Options"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:401
+msgid "Reset Options"
+msgstr "Reset Options"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:413
+msgid "Are you sure to reset the options to default settings?"
+msgstr "Are you sure to reset the options to default settings?"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:453
+msgid "Are you sure to reset all the counts present in the database?"
+msgstr "Are you sure to reset all the counts present in the database?"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:467
+msgid "Are you sure to reset selected counts present in the database?"
+msgstr "Are you sure to reset selected counts present in the database?"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:485
+msgid "All counts have been reset successfully."
+msgstr "All counts have been reset successfully."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:489
+msgid "All counts could not be reset."
+msgstr "All counts could not be reset."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:500
+msgid "counts have been reset successfully."
+msgstr "counts have been reset successfully."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:502
+msgid "count has been reset successfully."
+msgstr "count has been reset successfully."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:507
+msgid "Selected counts could not be reset."
+msgstr "Selected counts could not be reset."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:512
+msgid "Please select posts to reset count."
+msgstr "Please select posts to reset count."
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:540
+msgid "Reset All Counts"
+msgstr "Reset All Counts"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:541
+msgid "Reset Selected Counts"
+msgstr "Reset Selected Counts"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:546
+msgid "items"
+msgstr "items"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:551
+msgid "Prev"
+msgstr "Prev"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:552
+msgid "Next"
+msgstr "Next"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:567
+msgid "Post Title"
+msgstr "Post Title"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:569
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:913
+msgid "Like Count"
+msgstr "Like Count"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:646
+msgid "Like"
+msgstr "Like"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:647
+msgid "Unlike"
+msgstr "Unlike"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:1016
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:1017
+msgid "WTI Like Post Exclude Option"
+msgstr "WTI Like Post Exclude Option"
+
+#: D:\Program
+#: Files\xampp\htdocs\wordpress32\wp-content\plugins\wti-like-post/wti_like_post.php:1037
+msgid "Check to disable like/unlike functionality"
+msgstr "Check to disable like/unlike functionality"
+
+#~ msgid "Show"
+#~ msgstr "Show"
+
+#~ msgid "True"
+#~ msgstr "True"
+
+#~ msgid "False"
+#~ msgstr "False"
+
+#~ msgid "Up"
+#~ msgstr "Up"
+
+#~ msgid "Down"
+#~ msgstr "Down"
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid "Yes/No"
+#~ msgstr "Yes/No"
+
+#~ msgid "+/-"
+#~ msgstr "+/-"
+
+#~ msgid "No posts liked yet"
+#~ msgstr "No posts liked yet"
+
+#~ msgid "&laquo; Prev"
+#~ msgstr "&laquo; Prev"

@@ -2057,12 +2057,14 @@ class GDStarRating {
 
     function check_ajax_votes_string($vote) {
         $vote = strtolower($vote);
-        $restrict = array("+union+", "+select+", "+limit+", "+order+", " union ", " select ", " limit ", " order ");
+        $restrict = array("+union+", "benchmark", "rand", "+select+", "+limit+", "+order+", " union ", " select ", " limit ", " order ");
+
         foreach ($restrict as $key) {
             if (strpos($vote, $key) !== false) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -2073,8 +2075,9 @@ class GDStarRating {
         $rendered = $alls = array();
         foreach ($votes as $vote) {
             $valid = $this->check_ajax_votes_string($vote);
+
             if ($valid) {
-                $settings = explode(".", $vote);
+                $settings = explode('.', $vote);
                 $alls[$vote] = $settings;
                 $this->c[$settings[1]] = 0;
             }
@@ -2084,20 +2087,23 @@ class GDStarRating {
         $this->f->render_wait_multis();
         $this->f->render_wait_article_thumb();
         $this->cache_posts($user_id);
+
         foreach ($alls as $vote => $settings) {
             $cde = substr($vote, 0, 3);
-            $html = "";
+            $html = '';
+
             switch ($cde) {
-                case "asr":
+                case 'asr':
                     $html = $this->f->render_article_actual($settings);
                     break;
-                case "atr":
+                case 'atr':
                     $html = $this->f->render_thumb_article_actual($settings);
                     break;
-                case "amr":
+                case 'amr':
                     $html = $this->f->render_multi_rating_actual($settings);
                     break;
             }
+
             $html = str_replace('"', '\"', $html);
             $rendered[] = '{"id": "gdsrc_'.$vote.'", "html": "'.$html.'"}';
         }
@@ -2110,27 +2116,41 @@ class GDStarRating {
 
         foreach ($votes as $vote) {
             $valid = $this->check_ajax_votes_string($vote);
+
             if ($valid) {
-                $settings = explode(".", $vote);
+                $settings = explode('.', $vote);
                 $alls[$vote] = $settings;
-                if (!in_array($settings[1], $postids)) $postids[] = $settings[1];
+
+                if (!in_array($settings[1], $postids)) {
+                    $post_id = intval($settings[1]);
+
+                    if ($post_id > 0) {
+                        $postids[] = $post_id;
+                    }
+                }
             }
         }
 
         $this->f->render_wait_comment();
         $this->f->render_wait_comment_thumb();
-        foreach ($postids as $post_id) $this->cache_comments($post_id);
+
+        foreach ($postids as $post_id) {
+            $this->cache_comments($post_id);
+        }
+
         foreach ($alls as $vote => $settings) {
             $cde = substr($vote, 0, 3);
-            $html = "";
+            $html = '';
+
             switch ($cde) {
-                case "csr":
+                case 'csr':
                     $html = $this->f->render_comment_actual($settings);
                     break;
-                case "ctr":
+                case 'ctr':
                     $html = $this->f->render_thumb_comment_actual($settings);
                     break;
             }
+
             $html = str_replace('"', '\"', $html);
             $rendered[] = '{"id": "gdsrc_'.$vote.'", "html": "'.$html.'"}';
         }

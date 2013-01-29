@@ -45,7 +45,7 @@
  * @example $.cookie('the_cookie');
  * @desc Get the value of a cookie.
  *
- * @param String name The name of the cookie.
+ * @param {String} name The name of the cookie.
  * @return The value of the cookie.
  * @type String
  *

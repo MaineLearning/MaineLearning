@@ -6,7 +6,7 @@
  * @category   Genesis
  * @package    SEO
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -36,6 +36,7 @@ function genesis_disable_seo() {
 	remove_action( 'genesis_meta','genesis_seo_meta_keywords' );
 	remove_action( 'genesis_meta','genesis_robots_meta' );
 	remove_action( 'wp_head','genesis_canonical', 5 );
+	remove_action( 'wp_head', 'genesis_rel_author' );
 
 	remove_action( 'admin_menu', 'genesis_add_inpost_seo_box' );
 	remove_action( 'save_post', 'genesis_inpost_seo_save', 1, 2 );
@@ -44,6 +45,7 @@ function genesis_disable_seo() {
 
 	remove_action( 'show_user_profile', 'genesis_user_seo_fields' );
 	remove_action( 'edit_user_profile', 'genesis_user_seo_fields' );
+	remove_filter( 'user_contactmethods', 'genesis_user_contactmethods' );
 
 	remove_theme_support( 'genesis-seo-settings-menu' );
 	add_filter( 'pre_option_' . GENESIS_SEO_SETTINGS_FIELD, '__return_empty_array' );
@@ -114,10 +116,10 @@ function genesis_scribe_nag() {
 	if ( ! genesis_is_menu_page( 'seo-settings' ) )
 		return;
 
-	if ( class_exists( 'Ecordia' ) || get_option( 'genesis-scribe-nag-disabled' ) )
+	if ( genesis_detect_plugin( array( 'classes' => array( 'Ecordia' ) ) ) || get_option( 'genesis-scribe-nag-disabled' ) )
 		return;
 
-	$copy = sprintf( __( 'Have you tried our Scribe SEO software? Do keyword research, content optimization, and link building without leaving WordPress. <b>Genesis owners save over 50&#37; using the promo code FIRST when you sign up</b>. <a href="%s" target="_blank">Click here for more info</a>.', 'genesis' ), 'http://scribeseo.com/genesis-owners-only' );
+	$copy = sprintf( __( 'Have you tried our Scribe content marketing software? Do research, content and website optimization, and relationship building without leaving WordPress. <b>Genesis owners save big when using the special link on the special page we\'ve created just for you</b>. <a href="%s" target="_blank">Click here for more info</a>.', 'genesis' ), 'http://scribecontent.com/genesis-owners-only' );
 
 	printf( '<div class="updated" style="overflow: hidden;"><p class="alignleft">%s</p> <p class="alignright"><a href="%s">%s</a></p></div>', $copy, add_query_arg( 'dismiss-scribe', 'true', menu_page_url( 'seo-settings', false ) ), __( 'Dismiss', 'genesis' ) );
 
@@ -175,10 +177,11 @@ function genesis_detect_seo_plugins() {
 
 				// Classes to detect.
 				'classes' => array(
-					'wpSEO',
 					'All_in_One_SEO_Pack',
+					'All_in_One_SEO_Pack_p',
 					'HeadSpace_Plugin',
 					'Platinum_SEO_Pack',
+					'wpSEO',
 				),
 
 				// Functions to detect.

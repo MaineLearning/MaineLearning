@@ -229,7 +229,10 @@ class BP_Docs_Component extends BP_Component {
 	function setup_nav() {
 
 		$main_nav = array(
-			'name' 		      => sprintf( __( 'Docs <span>%d</span>', 'bp-docs' ), bp_docs_get_doc_count( bp_displayed_user_id(), 'user' ) ),
+			'name' 		      => __( 'Docs', 'bp-docs' ),
+
+			// Disabled count for now. See https://github.com/boonebgorges/buddypress-docs/issues/261
+			//'name' 		      => sprintf( __( 'Docs <span>%d</span>', 'bp-docs' ), bp_docs_get_doc_count( bp_displayed_user_id(), 'user' ) ),
 			'slug' 		      => bp_docs_get_slug(),
 			'position' 	      => 80,
 			'screen_function'     => array( &$this, 'template_loader' ),
@@ -330,7 +333,7 @@ class BP_Docs_Component extends BP_Component {
 				// the lock interval always returns as in process
 				add_filter( 'wp_check_post_lock_window', create_function( false, 'return time();' ) );
 
-				$lock = wp_check_post_lock( $doc->ID );
+				$lock = bp_docs_check_post_lock( $doc->ID );
 
 				if ( $lock ) {
 					bp_core_add_message( sprintf( __( 'This doc is currently being edited by %s. To prevent overwrites, you cannot edit until that user has finished. Please try again in a few minutes.', 'bp-docs' ), bp_core_get_user_displayname( $lock ) ), 'error' );
@@ -559,6 +562,8 @@ class BP_Docs_Component extends BP_Component {
 		// Set the type, to be used in activity filtering
 		$type = 'bp_doc_comment';
 
+		$hide_sitewide = bp_docs_hide_sitewide_for_doc( $doc_id );
+
 		$args = array(
 			'user_id'		=> $commenter_id,
 			'action'		=> $action,
@@ -569,7 +574,7 @@ class BP_Docs_Component extends BP_Component {
 			'item_id'		=> $item, // Set to the group/user/etc id, for better consistency with other BP components
 			'secondary_item_id'	=> $comment_id, // The id of the doc itself. Note: limitations in the BP activity API mean I don't get to store the doc_id, but at least it can be abstracted from the comment_id
 			'recorded_time'		=> bp_core_current_time(),
-			'hide_sitewide'		=> apply_filters( 'bp_docs_hide_sitewide', false, $comment, $doc, $item, $component ) // Filtered to allow plugins and integration pieces to dictate
+			'hide_sitewide'		=> apply_filters( 'bp_docs_hide_sitewide', $hide_sitewide, $comment, $doc, $item, $component ) // Filtered to allow plugins and integration pieces to dictate
 		);
 
 		do_action( 'bp_docs_before_comment_activity_save', $args );
@@ -727,6 +732,8 @@ class BP_Docs_Component extends BP_Component {
 
 		$action	= apply_filters( 'bp_docs_activity_action', $action, $user_link, $doc_link, $query->is_new_doc, $query );
 
+		$hide_sitewide = bp_docs_hide_sitewide_for_doc( $doc_id );
+
 		// Get a canonical name for the component. This is a nightmare because of the way
 		// the current component and root slug relate in BP 1.3+
 		$component = bp_current_component();
@@ -751,7 +758,7 @@ class BP_Docs_Component extends BP_Component {
 			'item_id'		=> $query->item_id, // Set to the group/user/etc id, for better consistency with other BP components
 			'secondary_item_id'	=> $doc_id, // The id of the doc itself
 			'recorded_time'		=> bp_core_current_time(),
-			'hide_sitewide'		=> apply_filters( 'bp_docs_hide_sitewide', false, false, $doc, $item, $component ) // Filtered to allow plugins and integration pieces to dictate
+			'hide_sitewide'		=> apply_filters( 'bp_docs_hide_sitewide', $hide_sitewide, false, $doc, $item, $component ) // Filtered to allow plugins and integration pieces to dictate
 		);
 
 		do_action( 'bp_docs_before_activity_save', $args );

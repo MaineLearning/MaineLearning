@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Footer
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -68,7 +68,7 @@ add_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
  */
 function genesis_footer_markup_open() {
 
-	echo '<div id="footer" class="footer">';
+	genesis_markup( '<footer class="site-footer">', '<div id="footer" class="footer">' );
 	genesis_structural_wrap( 'footer', 'open' );
 
 }
@@ -84,7 +84,7 @@ add_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 function genesis_footer_markup_close() {
 
 	genesis_structural_wrap( 'footer', 'close' );
-	echo '</div><!-- end #footer -->' . "\n";
+	genesis_markup( '</footer>', '</div><!-- end #footer -->' . "\n" );
 
 }
 
@@ -102,20 +102,19 @@ add_action( 'genesis_footer', 'genesis_do_footer' );
  *
  * @since 1.0.1
  *
- * @uses g_ent() Pass entities through a filter
  */
 function genesis_do_footer() {
 
 	/** Build the text strings. Includes shortcodes */
 	$backtotop_text = '[footer_backtotop]';
-	$creds_text     = sprintf( '[footer_copyright before="%s "] &middot; [footer_childtheme_link before="" after=" %s"] [footer_genesis_link url="http://www.studiopress.com/" before=""] &middot; [footer_wordpress_link] &middot; [footer_loginout]', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) );
+	$creds_text     = sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] [footer_genesis_link url="http://www.studiopress.com/" before=""] &#x000B7; [footer_wordpress_link] &#x000B7; [footer_loginout]', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) );
 
 	/** Filter the text strings */
 	$backtotop_text = apply_filters( 'genesis_footer_backtotop_text', $backtotop_text );
 	$creds_text     = apply_filters( 'genesis_footer_creds_text', $creds_text );
 
 	$backtotop = $backtotop_text ? sprintf( '<div class="gototop"><p>%s</p></div>', $backtotop_text ) : '';
-	$creds     = $creds_text ? sprintf( '<div class="creds"><p>%s</p></div>', g_ent( $creds_text ) ) : '';
+	$creds     = $creds_text ? sprintf( '<div class="creds"><p>%s</p></div>', $creds_text ) : '';
 
 	$output = $backtotop . $creds;
 

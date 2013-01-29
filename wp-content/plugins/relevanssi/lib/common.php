@@ -95,8 +95,12 @@ function relevanssi_update_log($query, $hits) {
 		if (in_array($user->ID, $omit)) return;
 		if (in_array($user->user_login, $omit)) return;
 	}
-		
-	$q = $wpdb->prepare("INSERT INTO " . $relevanssi_variables['log_table'] . " (query, hits, user_id, ip) VALUES (%s, %d, %d, %s)", $query, intval($hits), $user->ID, $_SERVER['REMOTE_ADDR']);
+	
+	if (get_option('relevanssi_log_queries_with_ip') == "on") {
+		$q = $wpdb->prepare("INSERT INTO " . $relevanssi_variables['log_table'] . " (query, hits, user_id, ip) VALUES (%s, %d, %d, %s)", $query, intval($hits), $user->ID, $_SERVER['REMOTE_ADDR']);
+	} else {
+		$q = $wpdb->prepare("INSERT INTO " . $relevanssi_variables['log_table'] . " (query, hits, user_id, ip) VALUES (%s, %d, %d, '')", $query, intval($hits), $user->ID, $_SERVER['REMOTE_ADDR']);
+	}		
 	$wpdb->query($q);
 }
 
@@ -533,6 +537,28 @@ function relevanssi_get_post_type($id) {
 	else {
 		return get_post_type($id);
 	}
+}
+
+function relevanssi_the_tags($sep = ', ', $echo = true) {
+	$tags = relevanssi_highlight_terms(get_the_tag_list('', $sep), get_search_query());
+	if ($echo) {
+		echo $tags;
+	}
+	else {
+		return $tags;
+	}
+}
+
+function relevanssi_get_the_tags($sep = ', ') {
+	return relevanssi_the_tags($sep, false);
+}
+
+function relevanssi_get_term_tax_id($field, $id, $taxonomy) {
+	global $wpdb;
+	return $wpdb->get_var(
+					"SELECT term_taxonomy_id
+					FROM $wpdb->term_taxonomy
+					WHERE term_id = $id AND taxonomy = '$taxonomy'");
 }
 
 ?>

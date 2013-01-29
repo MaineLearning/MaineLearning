@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Children Excerpt Shortcode
-Plugin URI: http://MyWebsiteAdvisor.com
-Description: Children Excerpt Shortcode Plugin
-Version: 1.1
+Plugin URI: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/children-excerpt-shortcode/
+Description: Shortcode creates an index-like list of child pages displaying exceprts of each page
+Version: 1.2
 Author: MyWebsiteAdvisor
 Author URI: http://MyWebsiteAdvisor.com
 */
@@ -42,8 +42,15 @@ function sc_show_children_excerpt($atts, $content = null){
 		$atts['length'] = 50;
 	}
 
-	//get the id of the current article that is calling the shortcode
-	$parent_id = get_the_ID();
+
+	if(isset($atts['id']) && is_numeric($atts['id'])){
+		//id specified by shortcode attribute
+		$parent_id = $atts['id'];
+	}else{
+		//get the id of the current article that is calling the shortcode
+		$parent_id = get_the_ID();
+	}
+	
 	
 	$output = "";
 	

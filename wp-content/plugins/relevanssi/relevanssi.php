@@ -3,7 +3,7 @@
 Plugin Name: Relevanssi
 Plugin URI: http://www.relevanssi.com/
 Description: This plugin replaces WordPress search with a relevance-sorting search.
-Version: 3.0.5
+Version: 3.1.3
 Author: Mikko Saari
 Author URI: http://www.mikkosaari.fi/
 */
@@ -47,7 +47,7 @@ $relevanssi_variables['comment_boost_default'] = 0.75;
 $relevanssi_variables['post_type_weight_defaults']['post_tag'] = 0.75;
 $relevanssi_variables['post_type_weight_defaults']['category'] = 0.75;
 $relevanssi_variables['post_type_index_defaults'] = array('post', 'page');
-$relevanssi_variables['database_version'] = 1;
+$relevanssi_variables['database_version'] = 3;
 $relevanssi_variables['file'] = __FILE__;
 $relevanssi_variables['plugin_dir'] = plugin_dir_path(__FILE__);
 
@@ -107,7 +107,12 @@ function relevanssi_check_old_data() {
 		$limit = get_option('relevanssi_throttle_limit');
 		if (empty($limit)) update_option('relevanssi_throttle_limit', 500);
 
-		global $wpdb;
+		global $wpdb, $relevanssi_variables;
+
+		if ($relevanssi_variables['database_version'] == 3) {
+			$res = $wpdb->query("SHOW INDEX FROM " . $relevanssi_variables['relevanssi_table'] . " WHERE Key_name = 'typeitem'");
+			if ($res == 0) $wpdb->query("ALTER TABLE " . $relevanssi_variables['relevanssi_table'] . " ADD INDEX `typeitem` (`type`, `item`)");
+		}
 
 		// Version 3.0 removed relevanssi_tag_boost
 		$tag_boost = get_option('relevanssi_tag_boost', 'nothing');
@@ -268,7 +273,7 @@ function relevanssi_form_tag_weight($post_type_weights) {
 			$label 
 		</td>
 		<td>
-			<input type='text' name='relevanssi_weight_post_tag' size='4' value='$value' />
+			<input type='text' name='relevanssi_weight_post_tag' id='relevanssi_weight_post_tag' size='4' value='$value' />
 		</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -283,7 +288,7 @@ EOH;
 			$label 
 		</td>
 		<td>
-			<input type='text' name='relevanssi_weight_category' size='4' value='$value' />
+			<input type='text' id='relevanssi_weight_category' name='relevanssi_weight_category' size='4' value='$value' />
 		</td>
 		<td>&nbsp;</td>
 	</tr>

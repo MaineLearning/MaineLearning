@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Children Index Shortcode
-Plugin URI: http://MyWebsiteAdvisor.com
-Description: Children Index Shortcode Plugin
-Version: 1.0
+Plugin URI: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/children-index-shortcode/
+Description: Shortcode Creates an Index of the child pages.
+Version: 1.1
 Author: MyWebsiteAdvisor
 Author URI: http://MyWebsiteAdvisor.com
 */
@@ -33,15 +33,28 @@ add_shortcode("children-index", "sc_show_children_index");
 
 function sc_show_children_index($atts, $content = null){
 		
-	$parent_id = get_the_ID();
+	if(isset($atts['id']) && is_numeric($atts['id'])){
+		//id specified by shortcode attribute
+		$parent_id = $atts['id'];
+	}else{
+		//get the id of the current article that is calling the shortcode
+		$parent_id = get_the_ID();
+	}
+	
 	$output = "";
 	
 	$i = 0;
-	
-	if ( $children = get_children(array(
+	$args = array(
 		'post_parent' => $parent_id,
-		'post_type' => 'page')))
+		'post_type' => 'page'
+	);
+	
+	if(isset($atts['order'])) $args['order'] = $atts['order'];
+	if(isset($atts['orderby'])) $args['orderby'] = $atts['orderby'];
+	
+	if ( $children = get_children($args))
 	{
+		$output .= "<ul>";
 		foreach( $children as $child ) {
 			$title = $child->post_title;
 			$link = get_permalink($child->ID);	
@@ -50,6 +63,7 @@ function sc_show_children_index($atts, $content = null){
 			
 			if ( $grandchildren = get_children(array(
 				'post_parent' => $child->ID,
+				'order' => 'ASC',
 				'post_type' => 'page')))
 			{
 				$output .= '<ul>' . "\n";
@@ -62,6 +76,7 @@ function sc_show_children_index($atts, $content = null){
 				$output .= '</ul>' . "\n";
 			} 
 		}
+		$output .= "</ul>";
 	} 
 
 	return  $output;

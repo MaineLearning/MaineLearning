@@ -1,27 +1,27 @@
 ﻿ Google XML Sitemaps Generator for WordPress
  ==============================================================================
- 
+
  This generator will create a sitemaps.org compliant sitemap of your WordPress blog.
  Currently homepage, posts, static pages, categories, archives and author pages are supported.
- 
+
  The priority of a post depends on its comments. You can choose the way the priority
  is calculated in the options screen.
- 
+
  Feel free to visit my website under www.arnebrachhold.de or contact me at
  himself [at] arnebrachhold [dot] de
- 
- Have fun! 
+
+ Have fun!
    Arne
- 
+
  Installation:
  ==============================================================================
  1. Upload the full directory into your wp-content/plugins directory
- 2. Make your blog directory writeable OR create two files called sitemap.xml 
+ 2. Make your blog directory writeable OR create two files called sitemap.xml
     and sitemap.xml.gz and make them writeable via CHMOD In most cases, your blog directory is already writeable.
  2. Activate it in the Plugin options
  3. Edit or publish a post or click on Rebuild Sitemap on the Sitemap Administration Interface
-  
- 
+
+
  Additional contributors:
  ==============================================================================
  Inspiration            Michael Nguyen      http://www.socialpatterns.com/
@@ -33,16 +33,16 @@
  Simpl.Chinese File     june6               http://www.june6.cn/
  Swedish Lang. File     Tobias Bergius      http://tobiasbergius.se/
  Czech Lang. File       Peter Kahoun        http://kahi.cz
- Finnish Lang. File     Olli Jarva          http://kuvat.blog.olli.jarva.fi/ 
+ Finnish Lang. File     Olli Jarva          http://kuvat.blog.olli.jarva.fi/
  Belorussian Lang. File Marcis Gasuns
  Bulgarian Lang. File   Alexander Dichev    http://dichev.com
- 
- Thanks to all contributors and bug reporters! There were much more people involved 
+
+ Thanks to all contributors and bug reporters! There were much more people involved
  in testing this plugin and reporting bugs, either by email or in the WordPress forums.
- 
+
  Unfortunately I can't maintain a whole list here, but thanks again to everybody not listed here!
- 
- 
+
+
  Release History:
  ==============================================================================
  2005-06-05     1.0     First release
@@ -57,7 +57,7 @@
                         Fixed bug which ignored different post/page priorities
                         Should support now different wordpress/admin directories
  2005-06-07     2.11    Fixed bug with hardcoded table table names instead of the $wpd vars
- 2005-06-07     2.12    Changed SQL Statement of the categories to get it work on MySQL 3 
+ 2005-06-07     2.12    Changed SQL Statement of the categories to get it work on MySQL 3
  2005-06-08     2.2     Added language file support:
                         - Japanese Language Files and code modifications by hiromasa (http://hiromasa.zone.ne.jp/)
                         - German Language File by Arne Brachhold (http://www.arnebrachhold.de)
@@ -212,7 +212,7 @@
  2009-11-13     3.1.9   Fixed MySQL Error if author pages were included
  2009-11-23     3.2     Added function to show the actual results of a ping instead of only linking to the url
                         Added new hook (sm_rebuild) for third party plugins to start building the sitemap
-                        Fixed bug which showed the wrong URL for the latest Google ping result 
+                        Fixed bug which showed the wrong URL for the latest Google ping result
                         Added some missing phpdoc documentation
                         Removed hardcoded php name for sitemap file for admin urls
                         Uses KSES for showing ping test results
@@ -240,12 +240,13 @@
  2012-08-08     3.2.8   Fixed wrong custom taxonomy URLs, thanks to ramon fincken of the wordpress.org forum!
                         Removed ASK ping since they shut down their service.
                         Exclude post_format taxonomy from custom taxonomy list
+ 2013-01-11     3.2.9   Fixed security issue with change frequencies and filename of sitemap file. Exploit was only possible for admin accounts.
 
  Maybe Todo:
  ==============================================================================
  - Your wishes :)
- 
- 
+
+
  License:
  ==============================================================================
  Copyright 2005 - 2012 ARNE BRACHHOLD  (email : himself - arnebrachhold - de)
@@ -254,7 +255,7 @@
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -263,33 +264,33 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
- 
+
+
  Developer Documentation
  ==============================================================================
- 
+
  Adding other pages to the sitemap via other plugins
- 
+
   This plugin uses the action system of WordPress to allow other plugins
   to add urls to the sitemap. Simply add your function with add_action to
   the list and the plugin will execute yours every time the sitemap is build.
-  Use the static method "GetInstance" to get the generator and AddUrl method 
+  Use the static method "GetInstance" to get the generator and AddUrl method
   to add your content.
-  
+
   Sample:
-  
+
   function your_pages() {
 	$generatorObject = &GoogleSitemapGenerator::GetInstance(); //Please note the "&" sign for PHP4!
 	if($generatorObject!=null) $generatorObject->AddUrl("http://blog.uri/tags/hello/",time(),"daily",0.5);
   }
   add_action("sm_buildmap","your_pages");
-  
+
   Parameters:
   - The URL to the page
   - The last modified data, as a UNIX timestamp (optional)
   - The Change Frequency (daily, hourly, weekly and so on) (optional)
   - The priority 0.0 to 1.0 (optional)
- 
+
 
  Rebuilding the sitemap on request
 
@@ -298,38 +299,38 @@
   All other methods, like calling the Build method directly are highly unrecommended and might
   not work anymore with the next version of the plugin. Using this hook, the sitemap plugin will
   take care of everything like loading the required classes and so on.
-  
+
   Sample:
-  
+
   do_action("sm_rebuild");
-  
+
   The sitemap might not be rebuild immediately, since newer versions use a background WP-Cron
   job by default to prevent that the user has to wait and avoid multiple rebuilds within a very short time.
   In case the sitemap plugin is not installed, nothing will happen and no errors will be thrown.
- 
+
  ===============================================
- 
+
  Adding additional PriorityProviders
- 
+
   This plugin uses several classes to calculate the post priority.
   You can register your own provider and choose it at the options screen.
-  
+
   Your class has to extend the GoogleSitemapGeneratorPrioProviderBase class
   which has a default constructor and a method called GetPostPriority
   which you can override.
-  
+
   Look at the GoogleSitemapGeneratorPrioByPopularityContestProvider class
   for an example.
-  
+
   To register your provider to the sitemap generator, use the following filter:
-  
+
   add_filter("sm_add_prio_provider","AddMyProvider");
-  
+
   Your function could look like this:
-  
+
   function AddMyProvider($providers) {
 	array_push($providers,"MyProviderClass");
 	return $providers;
   }
-  
-  Note that you have to return the modified list!  
+
+  Note that you have to return the modified list!

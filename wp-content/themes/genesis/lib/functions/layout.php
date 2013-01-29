@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Layout
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -291,12 +291,29 @@ function genesis_get_default_layout() {
  * @uses genesis_get_default_layout() Get default from registered layouts
  *
  * @global WP_Query $wp_query
+ * @param boolean $use_cache Conditional to use cache or get fresh.
  * @return string
  */
-function genesis_site_layout() {
+function genesis_site_layout( $use_cache = true ) {
 
-	/** Reset the query, so we always get the right layout */
-	wp_reset_query();
+	/** Allow child theme to short-circuit this function */
+	$pre = apply_filters( 'genesis_site_layout', null );
+	if ( null !== $pre )
+		return $pre;
+
+	/** If we're supposed to use the cache, setup cache. Use if value exists. */
+	if ( $use_cache ) {
+
+		/** Setup cache */
+		static $layout_cache = '';
+
+		/** If cache is populated, return value */
+		if ( $layout_cache !== '' )
+			return esc_attr( $layout_cache );
+
+	}
+
+	global $wp_query;
 
 	/** If viewing a singular page or post */
 	if ( is_singular() ) {
@@ -306,8 +323,6 @@ function genesis_site_layout() {
 
 	/** If viewing a taxonomy archive */
 	elseif ( is_category() || is_tag() || is_tax() ) {
-		global $wp_query;
-
 		$term = $wp_query->get_queried_object();
 
 		$site_layout = $term && isset( $term->meta['layout'] ) && $term->meta['layout'] ? $term->meta['layout'] : genesis_get_option( 'site_layout' );
@@ -327,7 +342,12 @@ function genesis_site_layout() {
 	if ( ! genesis_get_layout( $site_layout ) )
 		$site_layout = genesis_get_default_layout();
 
-	return esc_attr( apply_filters( 'genesis_site_layout', $site_layout ) );
+	/** Push layout into cache, if caching turned on */
+	if ( $use_cache )
+		$layout_cache = $site_layout;
+
+	/** Return site layout */
+	return esc_attr( $site_layout );
 
 }
 

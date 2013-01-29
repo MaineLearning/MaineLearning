@@ -59,16 +59,27 @@ add_shortcode ( 'events_list', 'em_get_events_list_shortcode' );
  * @return string
  */
 function em_get_event_shortcode($atts, $format='') {
+    global $EM_Event, $post;
+    $the_event = is_object($EM_Event) ? clone($EM_Event):null; //save global temporarily
 	$atts = (array) $atts;
 	$atts['format'] = ($format != '' || empty($atts['format'])) ? $format : $atts['format']; 
 	$atts['format'] = html_entity_decode($atts['format']); //shorcode doesn't accept html
 	if( !empty($atts['event']) && is_numeric($atts['event']) ){
 		$EM_Event = em_get_event($atts['event']);
-		return ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
+		$return = ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
 	}elseif( !empty($atts['post_id']) && is_numeric($atts['post_id']) ){
 		$EM_Event = em_get_event($atts['post_id'], 'post_id');
-		return ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
+		$return = ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
 	}
+	//no specific event or post id supplied, check globals
+	if( !empty($EM_Event) ){
+	    $return = ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
+	}elseif( $post->post_type == EM_POST_TYPE_EVENT ){
+	    $EM_Event = em_get_event($post->ID, 'post_id');
+	    $return = ( !empty($atts['format']) ) ? $EM_Event->output($atts['format']) : $EM_Event->output_single();
+	}
+    $EM_Event = is_object($the_event) ? $the_event:$EM_Event; //reset global
+    return $return;
 }
 add_shortcode ( 'event', 'em_get_event_shortcode' );
 
@@ -101,6 +112,14 @@ function em_get_location_shortcode($atts, $format='') {
 		return ( !empty($atts['format']) ) ? $EM_Location->output($atts['format']) : $EM_Location->output_single();
 	}elseif( !empty($atts['post_id']) && is_numeric($atts['post_id']) ){
 		$EM_Location = em_get_location($atts['post_id'],'post_id');
+		return ( !empty($atts['format']) ) ? $EM_Location->output($atts['format']) : $EM_Location->output_single();
+	}
+	//no specific location or post id supplied, check globals
+	global $EM_Location, $post;
+	if( !empty($EM_Location) ){
+		return ( !empty($atts['format']) ) ? $EM_Location->output($atts['format']) : $EM_Location->output_single();
+	}elseif( $post->post_type == EM_POST_TYPE_LOCATION ){
+		$EM_Location = em_get_location($post->ID,'post_id');
 		return ( !empty($atts['format']) ) ? $EM_Location->output($atts['format']) : $EM_Location->output_single();
 	}
 }

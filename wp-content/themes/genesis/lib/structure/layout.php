@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Layout
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -25,7 +25,7 @@ add_filter( 'content_width', 'genesis_content_width', 10, 3 );
  */
 function genesis_content_width( $default, $small, $large ) {
 
-	switch ( genesis_site_layout() ) {
+	switch ( genesis_site_layout( 0 ) ) {
 		case 'full-width-content':
 			$width = $large;
 			break;
@@ -39,21 +39,6 @@ function genesis_content_width( $default, $small, $large ) {
 	}
 
 	return $width;
-
-}
-
-add_action( 'genesis_meta', 'genesis_load_stylesheet' );
-/**
- * Echo reference to the style sheet.
- *
- * If a child theme is active, it loads the child theme's stylesheet,
- * otherwise, it loads the Genesis stylesheet.
- *
- * @since 0.2.2
- */
-function genesis_load_stylesheet() {
-
-	echo '<link rel="stylesheet" href="'.get_bloginfo( 'stylesheet_url' ).'" type="text/css" media="screen" />'."\n";
 
 }
 
@@ -98,11 +83,24 @@ add_filter( 'body_class', 'genesis_header_body_classes' );
  */
 function genesis_header_body_classes( $classes ) {
 
-	if ( ! is_active_sidebar( 'header-right' ) && ! has_action( 'genesis_header_right' ) )
-		$classes[] = 'header-full-width';
+	if ( current_theme_supports( 'custom-header' ) ) {
+		if ( get_theme_support( 'custom-header', 'default-text-color' ) != get_header_textcolor() || get_theme_support( 'custom-header', 'default-image' ) != get_header_image() )
+			$classes[] = 'custom-header';
+	}
 
 	if ( 'image' == genesis_get_option( 'blog_title' ) || 'blank' == get_header_textcolor() )
 		$classes[] = 'header-image';
+
+	if ( ! is_active_sidebar( 'header-right' ) && ! has_action( 'genesis_header_right' ) )
+		$classes[] = 'header-full-width';
+
+	return $classes;
+
+	if ( 'image' == genesis_get_option( 'blog_title' ) || 'blank' == get_header_textcolor() )
+		$classes[] = 'header-image';
+
+	if ( ! is_active_sidebar( 'header-right' ) && ! has_action( 'genesis_header_right' ) )
+		$classes[] = 'header-full-width';
 
 	return $classes;
 

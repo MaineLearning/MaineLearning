@@ -4,13 +4,23 @@ Plugin Name: Wats
 Plugin URI: http://www.ticket-system.net/
 Description: Wats is a ticket system. Wats stands for Wordpress Advanced Ticket System.
 Author: Olivier
-Version: 1.0.56
+Version: 1.0.57
 Author URI: http://www.ticket-system.net/
 */
 
 /*
 1/ Release history :
-- V1.0.56 (13/07/2012) :
+- V1.0.57 (13/12/2012) :
++ enhanced ticket age details in frontend ticket listing
++ fixed a limitation with ticket listing owner filter while no owner has been set
++ modified rules format to allow filtering on all categories
++ added a value for target user list for ticket assignment to allow tickets to be assigned only to admins and users with wats_ticket_ownership capability
++ added an option to reinitialize the frontend submission form elements upon successfull submission
++ added an option to redirect to a success page upon frontend submission form successfull submission
++ added an option to define notification rules for ticket update
++ added Slovak translation (provided by Branco from http://webhostinggeeks.com/ )
++ added WP 3.5 compatibility
+- V1.0.56 (28/06/2012) :
 + added CSS ID to single ticket page meta keys in the ticket content
 + fixed a bug with source email address on new ticket notifications for admin when the ticket was submitted by email
 + added CSS ID to custom fields in frontend submission form
@@ -388,7 +398,7 @@ define('WATS_BACKLINK','http://www.ticket-system.net/');
 define('WATS_ANCHOR','ticket system');
 
 $wats_settings = array();
-$wats_version = '1.0.56';
+$wats_version = '1.0.57';
 $wats_printing_inline_data = false;
 $wats_current_post_author = 0;
 
@@ -397,6 +407,7 @@ $wats_default_ticket_status = array(1 => "Newly open", 2 => "Under investigation
 $wats_default_ticket_type = array(1 => "Question", 2 => "SW Bug", 3 => "Installation request", 4 => "Feature request");
 $wats_default_sla = array(1 => "Gold", 2 => "Silver", 3 => "Bronze");
 $wats_default_ticket_listing_columns = array("id" => "ID","title" => "Title","category" => "Category","author" => "Author","owner" => "Owner","creation_date" => "Creation date","modification_date" => "Last modification date","last_updater" => "Last modification author","ticket_age" => "Ticket age","closure_date" => "Closure date","type" => "Type","priority" => "Priority","status" => "Status","product" => "Product");
+$wats_rule_scope = array(0 => __('New ticket and ticket update','WATS'), 1 => __('New ticket only','WATS'), 2 => __('Ticket update only','WATS'));
 
 $wats_custom_fields_selectors;
 
@@ -409,7 +420,7 @@ $wats_custom_fields_selectors;
 function wats_init()
 {
 	wats_register_taxonomy();
-	
+
 	return;
 }
 

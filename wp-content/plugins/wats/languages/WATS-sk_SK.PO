@@ -1,0 +1,2159 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WATS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-11 08:33+0100\n"
+"PO-Revision-Date: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_AR\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wats-company.php:26 wats-company.php:79 wats-company.php:122
+#: wats-company.php:158
+msgid "Error : entry not found in the DB!"
+msgstr "Chyba: Položka nebola nájdená v NR!"
+
+#: wats-company.php:39
+msgid "SLA succesfully assigned!"
+msgstr "SLA úspešne priradené!"
+
+#: wats-company.php:45
+msgid "SLA succesfully removed!"
+msgstr "SLA úspešne odstránený!"
+
+#: wats-company.php:50
+msgid "Error : can't assign this SLA!"
+msgstr "Chyba: nemožno priradiť toto SLA!"
+
+#: wats-company.php:84 wats-company.php:369 wats-options.php:1154
+#: wats-options.php:1216 wats-template.php:650
+msgid "User"
+msgstr "Používateľ"
+
+#: wats-company.php:128 wats-options.php:470
+msgid "Entry successfully removed!"
+msgstr "Položka úspešne odstránený!"
+
+#: wats-company.php:162 wats-company.php:234
+msgid "Error : please enter a company!"
+msgstr "Chyba: Zadajte spoločnosť!"
+
+#: wats-company.php:168 wats-options.php:436
+msgid "Entry successfully updated!"
+msgstr "Položka úspešne aktualizovaný!"
+
+#: wats-company.php:230
+msgid "Error : please select a user!"
+msgstr "Chyba: vyberte užívateľa!"
+
+#: wats-company.php:244 wats-options.php:536
+msgid "Entry successfully added!"
+msgstr "Položka úspešne pridaný!"
+
+#: wats-company.php:267 wats-company.php:273 wats-company.php:364
+#: wats-company.php:387 wats-options.php:962 wats-options.php:1155
+#: wats-profile.php:164 wats-profile.php:203 wats-template.php:291
+#: wats-template.php:543
+msgid "None"
+msgstr "Žiadny"
+
+#: wats-company.php:312 wats-company.php:391 wats-options.php:715
+#: wats-profile.php:181
+msgid "Company"
+msgstr "Spoločnosť"
+
+#: wats-company.php:313
+msgid "Users"
+msgstr "Užívatelia"
+
+#: wats-company.php:314 wats-options.php:1363 wats-options.php:1373
+#: wats-options.php:1383 wats-options.php:1408 wats-options.php:1417
+#: wats-options.php:1427 wats-options.php:1440
+msgid "Selection"
+msgstr "Výber"
+
+#: wats-company.php:333 wats-head.php:248 wats-head.php:271
+#: wats-options.php:813 wats-options.php:862 wats-template.php:563
+#: wats-template.php:569
+msgid "No entry"
+msgstr "Žiadna položka"
+
+#: wats-company.php:351
+msgid "WATS Company Management"
+msgstr "Vedenie spoločnosti WATS"
+
+#: wats-company.php:357 wats-company.php:383 wats-options.php:958
+#: wats-options.php:977 wats-options.php:986 wats-options.php:1014
+#: wats-options.php:1022 wats-options.php:1031 wats-options.php:1052
+#: wats-options.php:1066 wats-options.php:1080 wats-options.php:1094
+#: wats-options.php:1103 wats-options.php:1112 wats-options.php:1121
+#: wats-options.php:1135 wats-options.php:1144 wats-options.php:1153
+#: wats-options.php:1167 wats-options.php:1182 wats-options.php:1200
+#: wats-options.php:1215 wats-options.php:1228 wats-options.php:1237
+#: wats-options.php:1245 wats-options.php:1266 wats-options.php:1284
+#: wats-options.php:1301 wats-options.php:1333 wats-options.php:1388
+#: wats-options.php:1422
+msgid "Click to get some help!"
+msgstr "Kliknite si pomoct!"
+
+#: wats-company.php:357
+msgid "Associate user with a company"
+msgstr "Spolupracovník používateľa so spoločnosťou"
+
+#: wats-company.php:358
+msgid "Company name"
+msgstr "Názov spoločnosti"
+
+#: wats-company.php:362 wats-company.php:385 wats-profile.php:201
+msgid "Service level agreement"
+msgstr "Service level agreement"
+
+#: wats-company.php:377
+msgid "Associate user with company"
+msgstr "Spolupracovník používateľa so spoločnosťou"
+
+#: wats-company.php:379
+msgid ""
+"The selected user will be associated with the company name entered. If the "
+"user was already associated with a company, the existing entry will be "
+"updated and therefore previous company will disappear."
+msgstr ""
+"Vybratý používateľ bude spojená s zadaný názov spoločnosti. Ak používateľ už "
+"bola spojená s firmou, aktualizuje existujúcu položku a teda predchádzajúca "
+"spoločnosť zmizne."
+
+#: wats-company.php:383
+msgid "Assign SLA to all users of a company"
+msgstr "Priradiť SLA všetkým užívateľom spoločnosti"
+
+#: wats-company.php:399
+msgid "Assign SLA to users of company"
+msgstr "SLA priradiť používateľov spoločnosti"
+
+#: wats-company.php:401
+msgid ""
+"All users associated to the selected company will have their SLA updated. If "
+"the value \"None\" is selected, the SLA associated to the users is removed."
+msgstr " je vybratá, SLA Spojené užívateľom je odstránený."
+
+#: wats-company.php:404
+msgid "Manage existing companies"
+msgstr "Spravovať existujúce spoločnosti"
+
+#: wats-company.php:406 wats-options.php:768
+msgid "Remove selected items"
+msgstr "Odstrániť vybraté položky"
+
+#: wats-company.php:409
+msgid "Statistics and exceptions"
+msgstr "Štatistiky a výnimky"
+
+#: wats-company.php:411
+msgid "Number of companies"
+msgstr "Počet spoločností"
+
+#: wats-company.php:413
+msgid "Number of users associated to a company"
+msgstr "Počet užívateľov spojené spoločnosti"
+
+#: wats-company.php:427
+msgid "List of users not associated to any company"
+msgstr "Zoznam užívateľov nie je pridružená k akejkoľvek spoločnosti"
+
+#: wats-dashboard.php:13 wats-dashboard.php:80
+msgid "Global stats :"
+msgstr "Globálne štatistiky:"
+
+#: wats-dashboard.php:14 wats-dashboard.php:22
+msgid "Tickets created :"
+msgstr "Vstupenky, vytvorená:"
+
+#: wats-dashboard.php:16 wats-dashboard.php:24
+msgid "Tickets closed :"
+msgstr "Vstupenky zatvorené:"
+
+#: wats-dashboard.php:21 wats-dashboard.php:87
+msgid "Your stats :"
+msgstr "Vaše štatistiky:"
+
+#: wats-dashboard.php:43 wats-dashboard.php:58 wats-template.php:933
+msgid "Tickets"
+msgstr "Vstupenky"
+
+#: wats-dashboard.php:81 wats-dashboard.php:88
+msgid "Number of tickets created : "
+msgstr "Počet vstupeniek vytvorené: "
+
+#: wats-dashboard.php:83 wats-dashboard.php:90
+msgid "Number of tickets closed : "
+msgstr "Počet lístkov zatvorené: "
+
+#: wats-dashboard.php:151
+msgid "View all"
+msgstr "Zobraziť všetko"
+
+#: wats-dashboard.php:156
+msgid "No comments yet."
+msgstr "Zatiaľ žiadne komentáre."
+
+#: wats-dashboard.php:174
+msgid "Recent Comments"
+msgstr "Nedávne komentáre"
+
+#: wats-head.php:24
+msgid "<strong>ERROR</strong> : this user account is locked."
+msgstr "<strong>Chyba</strong>: Toto používateľské konto je uzamknuté."
+
+#: wats-head.php:64
+msgid "Filtering table..."
+msgstr "Filtrovanie tabuľky..."
+
+#: wats-head.php:65
+msgid "Submitting ticket..."
+msgstr "Predloženie letenky..."
+
+#: wats-head.php:220
+msgid "You are not allowed to edit this item."
+msgstr "Nie sú povolené upravovať túto položku."
+
+#: wats-head.php:246 wats-head.php:269
+msgid "Error : there is nothing to remove!"
+msgstr "Chyba: nie je nič odstrániť!"
+
+#: wats-head.php:247 wats-head.php:270
+msgid "Error : please select an entry to remove!"
+msgstr "Chyba: vyberte položku odstrániť!"
+
+#: wats-head.php:249 wats-head.php:272
+msgid "Please correct the errors"
+msgstr "Opravte chyby"
+
+#: wats-head.php:250 wats-head.php:273
+msgid "Adding entry"
+msgstr "Pridanie položky"
+
+#: wats-head.php:251 wats-head.php:274
+msgid "Error : the string contains invalid caracters!"
+msgstr "Chyba: reťazec obsahuje neplatný caracters!"
+
+#: wats-lib.php:208
+msgid "Tickets can be assigned to this user"
+msgstr "Lístky môžu byť priradené tomuto používateľovi"
+
+#: wats-lib.php:210
+msgid "All tickets can be browsed by this user (read only access)"
+msgstr ""
+"Všetky vstupenky možno prezerať tohto užívateľa (Prečítajte si iba prístup)"
+
+#: wats-lib.php:218
+msgid "User can attach files to tickets"
+msgstr "Užívateľ môžu priložiť súbory k vstupenky"
+
+#: wats-lib.php:235
+msgid "Get a mail notification when a new ticket is submitted (admin only)"
+msgstr "Dostať mail oznámenia keď nový lístok je predložené (administrátor)"
+
+#: wats-lib.php:236
+msgid "Get a mail notification when any ticket is updated (admin only)"
+msgstr ""
+"Dostať mail oznámenia keď akékoľvek vstupenka je aktualizovaný "
+"(administrátor)"
+
+#: wats-lib.php:237
+msgid ""
+"Get a mail notification when a ticket originated or updated by me is updated"
+msgstr ""
+"Upozorňovanie mail lístok vznikol alebo aktualizované podľa mňa pri "
+"aktualizácii"
+
+#: wats-lib.php:530
+msgid " AND "
+msgstr " A "
+
+#: wats-lib.php:544 wats-options.php:702 wats-options.php:717
+#: wats-template.php:264 wats-template.php:277 wats-template.php:290
+msgid "Any"
+msgstr "Akékoľvek"
+
+#: wats-link-template.php:44
+msgid "Edit post"
+msgstr "Upraviť príspevok"
+
+#: wats-options.php:390 wats-options.php:406 wats-options.php:503
+#: wats-options.php:603
+msgid "Error : please enter an entry!"
+msgstr "Chyba: Zadajte položku!"
+
+#: wats-options.php:424
+msgid "Error : entry not found!"
+msgstr "Chyba: polo┼╛ka sa Nena┼íla!"
+
+#: wats-options.php:428
+msgid "Error : another entry has the same value!"
+msgstr "Chyba: ďalší záznam má rovnakú hodnotu!"
+
+#: wats-options.php:474
+msgid "Error : entry not existing!"
+msgstr "Chyba: vstup nie existujúce!"
+
+#: wats-options.php:525
+msgid "Error : already existing entry!"
+msgstr "Chyba: už existujúce položky!"
+
+#: wats-options.php:565
+msgid "Rule successfully removed!"
+msgstr "Pravidlo úspešne odstránený!"
+
+#: wats-options.php:569
+msgid "Error : rule not existing!"
+msgstr "Chyba: pravidlo neexistujúce!"
+
+#: wats-options.php:628
+msgid "Rule successfully added!"
+msgstr "Pravidlo sa úspešne pridalo!"
+
+#: wats-options.php:650
+msgid "Remove selected rules"
+msgstr "Odstrániť vybraté pravidlá"
+
+#: wats-options.php:655 wats-template.php:215
+msgid "Ticket type"
+msgstr "Typ lístka"
+
+#: wats-options.php:666 wats-template.php:226
+msgid "Ticket priority"
+msgstr "Lístok prioritou"
+
+#: wats-options.php:677 wats-template.php:237
+msgid "Ticket status"
+msgstr "Letenky stavu"
+
+#: wats-options.php:688 wats-template.php:252
+msgid "Ticket product"
+msgstr "Lístok výrobku"
+
+#: wats-options.php:700 wats-profile.php:162
+msgid "Country"
+msgstr "Krajiny"
+
+#: wats-options.php:726 wats-options.php:1426
+msgid "Mailing list"
+msgstr "Mailing list"
+
+#: wats-options.php:728
+msgid "Add this rule"
+msgstr "Pridať toto pravidlo"
+
+#: wats-options.php:742
+msgid "Remove selected categories"
+msgstr "Odstrániť vybraté kategórie"
+
+#: wats-options.php:754
+msgid "Add this category"
+msgstr "Pridať túto kategóriu"
+
+#: wats-options.php:773
+msgid "Add this entry"
+msgstr "Pridať tento záznam"
+
+#: wats-options.php:951
+msgid "Help"
+msgstr "pomoc"
+
+#: wats-options.php:952
+msgid ""
+"If you want to get some details about an option, just click on the option "
+"title, this will display some inline details."
+msgstr ""
+"Ak chcete získať nejaké Podrobnosti o možnosť, stačí kliknúť na názov "
+"možnosť, zobrazí sa niektoré detaily inline."
+
+#: wats-options.php:953
+msgid ""
+"In the tables, you can directly edit items by clicking on the following "
+"icon : "
+msgstr ""
+"V tabuľkách, môžete priamo upravovať položky kliknutím na ikonu nasledujúce: "
+
+#: wats-options.php:958
+msgid "Ticket numerotation"
+msgstr "Lístok numerotation"
+
+#: wats-options.php:965
+msgid "Dated"
+msgstr "Zo dňa"
+
+#: wats-options.php:968
+msgid "Numbered"
+msgstr "Očíslované"
+
+#: wats-options.php:970
+msgid ""
+"Select the preferred option. Based on this, a number will be associated to a "
+"ticket and displayed at the beginning of the title."
+msgstr ""
+"Vyberte uprednostňovanou možnosťou. Na tomto základe číslo sa súvisiace "
+"lístok a zobrazí na začiatku názvu."
+
+#: wats-options.php:974
+msgid "Latest ticket ID"
+msgstr "Najnovšie ID lístok"
+
+#: wats-options.php:977
+msgid "Tickets display"
+msgstr "Vstupenky displej"
+
+#: wats-options.php:982
+msgid "Include tickets on homepage together with posts"
+msgstr "Zahŕňajú vstupenky na domovskej stránke spolu s príspevkov"
+
+#: wats-options.php:984
+msgid ""
+"Check this option if you want to display tickets on homepage along with "
+"usual posts. If the option is unchecked, only posts will be displayed."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete zobraziť vstupenky na domovskej stránke "
+"spolu s obvyklým príspevkov. Ak voľba zaškrtnutá, budú zobrazené iba "
+"príspevky."
+
+#: wats-options.php:986
+msgid "Notifications"
+msgstr "Oznámenia"
+
+#: wats-options.php:991
+msgid "Notify admin by email upon new ticket submission"
+msgstr "Admin elektronickou poštou po predložení nový lístok"
+
+#: wats-options.php:995
+msgid ""
+"Notify admin by email when ticket is updated. Applies to all tickets and "
+"will notify all admins."
+msgstr ""
+"Elektronickou poštou admin, keď lístok je aktualizovaný. Platí pre všetky "
+"vstupenky a oznámi všetky administrátorov."
+
+#: wats-options.php:999
+msgid ""
+"Notify user by email when ticket is updated. Applies only to tickets "
+"originated by the user and will notify only ticket originator and updaters."
+msgstr ""
+"Upozorniť užívateľa mailom, keď lístok je aktualizovaný. Platí len vstupenky "
+"vznikli užívateľovi a upozorní len lístok pôvodcu a updaters."
+
+#: wats-options.php:1003
+msgid ""
+"Enable local user profile notifications options to allow bypass of global "
+"options."
+msgstr ""
+"Povoliť lokálne používateľské profily oznámenia možnosti, ktoré umožnia "
+"obísť globálnych možností."
+
+#: wats-options.php:1005
+msgid ""
+"Check the options according to the notifications you want the system to send "
+"to users after specific events happened. "
+msgstr ""
+"Skontrolujte možnosti podľa oznámenia má systém posielať užívateľom po "
+"konkrétnych udalostí sa stalo. "
+
+#: wats-options.php:1006
+msgid ""
+"If the option is enabled here, then by default, it will be enabled for the "
+"user but administrators can disable it under user profile. "
+msgstr ""
+"Ak tu je aktivovaná voľba, potom v predvolenom nastavení, bude mať možnosť "
+"pre užívateľa, ale správcov môžete vypnúť podľa profilu používateľa. "
+
+#: wats-options.php:1007
+msgid "When a new user is added, the profile option is disabled by default. "
+msgstr ""
+"Po pridaní nového používateľa profil možnosť je vypnutá v predvolenom "
+"nastavení. "
+
+#: wats-options.php:1008
+msgid ""
+"If the option is disabled here, then it will be disabled for everybody and "
+"it couldn't be enabled individually. "
+msgstr ""
+"Ak je voľba vypnutá tu, potom to bude zakázaný pre každého a nemohol byť "
+"povolené individuálne. "
+
+#: wats-options.php:1009
+msgid ""
+"The update notification is fired upon the following events : new comment "
+"added to a ticket, ownership, priority, status or type change in the ticket "
+"edition admin page."
+msgstr ""
+"Oznámenia o aktualizáciu je vyhodený po týchto udalostiach: nový komentár "
+"pridaný lístok, vlastníctvo, priority, stav alebo typ zmeny lístok edition "
+"admin stránky."
+
+#: wats-options.php:1010
+msgid ""
+"These are global options which can be enabled or disabled individually under "
+"user profile if the bypass option is set. "
+msgstr ""
+"Toto sú globálne možnosti, ktoré môžete povoliť alebo zakázať jednotlivo "
+"podľa profilu používateľa, ak je nastavená možnosť obísť. "
+
+#: wats-options.php:1011
+msgid ""
+"If the bypass option isn't set, only global notifications options will be "
+"relevant and user profile options couldn't be modified. "
+msgstr ""
+"Ak nie je nastavená možnosť obísť, len globálne oznámenia možnosti budú "
+"relevantné a nemohol upraviť možnosti používateľského profilu. "
+
+#: wats-options.php:1012
+msgid ""
+"Warning : with these options enabled, the system may send a lot of emails, "
+"especially if you have many users. So please make sure that you really "
+"understand the implications before enabling these."
+msgstr ""
+"Upozornenie: tieto možnosti zapnutá, systém môže poslať veľa e-mailov, najmä "
+"ak máte mnoho užívateľov. Takže uistite sa, že ste naozaj rozumieť dôsledky "
+"pred povolením toto."
+
+#: wats-options.php:1014
+msgid "Mail notifications signature"
+msgstr "Mail oznámenia podpis"
+
+#: wats-options.php:1020
+msgid ""
+"Enter the signature to be put into every notification email sent by the "
+"system."
+msgstr "Zadať podpis do každej notifikačný e-mail bol poslaný do systému."
+
+#: wats-options.php:1022
+msgid "Source email address for notifications"
+msgstr "Zdroj e-mailovú adresu pre oznámenia"
+
+#: wats-options.php:1027
+msgid "Use users email address as source address"
+msgstr "Použiť používateľov e-mailovú adresu ako zdrojová adresa"
+
+#: wats-options.php:1029
+msgid ""
+"Check this option if you want notification messages to use the user email as "
+"the source address. Otherwise, the global wordpress email address will be "
+"used."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete oznámenia správy použiť používateľ e-"
+"mailu ako zdrojovú adresu. V opačnom prípade sa použije global wordpress e-"
+"mailovú adresu."
+
+#: wats-options.php:1031
+msgid "Tickets visibility"
+msgstr "Vstupenky viditeľnosť"
+
+#: wats-options.php:1035
+msgid "Everybody can see all tickets"
+msgstr "Všetci môžete vidieť všetky vstupenky"
+
+#: wats-options.php:1038
+msgid "Only registered users can see tickets"
+msgstr "Iba registrovaní užívatelia môžu vidieť vstupenky"
+
+#: wats-options.php:1041
+msgid "Only ticket creator and admins can see tickets"
+msgstr "Len lístok tvorca a admini vidia vstupenky"
+
+#: wats-options.php:1045
+msgid ""
+"Grant read only access to all tickets for users with \"wats_ticket_read_only"
+"\" capability"
+msgstr " schopnosť"
+
+#: wats-options.php:1047
+msgid ""
+"Select the preferred option. Tickets access and display in frontend and "
+"admin sides will be adjusted based on this option and user privileges."
+msgstr ""
+"Vyberte uprednostňovanou možnosťou. Prístup vstupeniek a displej v frontend "
+"a admin strany bude upravená na základe tejto možnosti a používateľ "
+"privilégiá."
+
+#: wats-options.php:1048
+msgid ""
+" This option will also affect author and owner selectors filters display for "
+"the ticket listing table which will be available for everybody, only logged "
+"in users or only admins based on the selected option."
+msgstr ""
+" Táto možnosť ovplyvní aj autor a vlastník selektory filtre zobrazenie pre "
+"výpis tabuľky lístok, ktorý bude k dispozícii pre každého, iba prihlásení "
+"užívatelia alebo len administrátori založené na vybratú možnosť."
+
+#: wats-options.php:1049
+msgid ""
+"If the third option is selected (ticket creator and admins), you can also "
+"enable the wats_ticket_read_only capability that you can then assign to "
+"specific users under the user profile page to allow them to view all tickets "
+"with a read only access (no edition, no update)."
+msgstr ""
+"Ak je vybratá možnosť tretej (vstupenka tvorca a administrátorov), môžete "
+"tiež zapnúť wats_ticket_read_only schopnosti, ktoré si môžete potom priradiť "
+"konkrétnym používateľom podľa profilovej stránky užívateľa umožní prezrieť "
+"všetky lístky s čítanie iba prístup (žiadne edition, žiadna aktualizácia)."
+
+#: wats-options.php:1052
+msgid "Tickets assignment"
+msgstr "Vstupenky priradenia"
+
+#: wats-options.php:1056
+msgid "No assignment possible"
+msgstr "Žiadne priradenie možné"
+
+#: wats-options.php:1059
+msgid "Everybody can assign a ticket"
+msgstr "Všetci môžete priradiť lístok"
+
+#: wats-options.php:1062
+msgid "Only registered users can assign a ticket"
+msgstr "Iba registrovaní užívatelia môžu priradiť lístok"
+
+#: wats-options.php:1064
+msgid ""
+"Select the preferred option. Tickets assignment possibilities in frontend "
+"and admin sides will be adjusted based on this option and user privileges."
+msgstr ""
+"Vyberte uprednostňovanou možnosťou. Vstupenky priradenia možnosti v admin a "
+"frontend strany bude upravená na základe tejto možnosti a používateľ "
+"privilégiá."
+
+#: wats-options.php:1066
+msgid "Target users for tickets assignment"
+msgstr "Cieľoví užívatelia prideľovania vstupeniek"
+
+#: wats-options.php:1070
+msgid "Any registered user"
+msgstr "Každý registrovaný užívateľ"
+
+#: wats-options.php:1073
+msgid "Ticket originator and admins"
+msgstr "Lístok pôvodcu a adminy"
+
+#: wats-options.php:1076
+msgid "Ticket originator and any user with wats_ticket_ownership capability"
+msgstr "Lístok pôvodcu a každý používateľ s wats_ticket_ownership schopnosti"
+
+#: wats-options.php:1078
+msgid ""
+"Select the preferred option. The list of users a ticket can be assigned to "
+"will be adjusted based on this option. The wats_ticket_ownership capability "
+"can be granted under user profile by admins."
+msgstr ""
+"Vyberte uprednostňovanou možnosťou. Zoznam užívateľov lístok môže byť "
+"priradená bude upravená na základe tejto možnosti. Wats_ticket_ownership "
+"schopnosť môže udeliť podľa profilu používateľa Admins."
+
+#: wats-options.php:1080
+msgid "Roles with ticket assignment capability"
+msgstr "Úlohy s možnosťou nasadenia lístok"
+
+#: wats-options.php:1092
+msgid ""
+"Select the roles. Only selected roles would be able to assign tickets. To "
+"learn more about users roles, check out this page : "
+msgstr ""
+"Vyberte roly. Len vybraté role by mohli priradiť vstupenky. Dozvedieť viac o "
+"roly používateľov, pozrite sa na túto stránku: "
+
+#: wats-options.php:1094
+msgid "Admin menu access"
+msgstr "Admin menu prístup"
+
+#: wats-options.php:1099
+msgid ""
+"Block comments menu access for users without moderate_comments capability"
+msgstr ""
+"Blok komentáre menu prístup pre užívateľov bez moderate_comments schopnosti"
+
+#: wats-options.php:1101
+msgid ""
+"Check this option if you want to prevent users without the comments "
+"moderation capability to browse the comments list page (on this page, they "
+"could see updates on all tickets)."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete zabrániť používateľom bez schopnosti "
+"moderovanie komentárov prejdite na stránku zoznamu komentáre (na tejto "
+"stránke mohli vidieť aktualizácie na všetky vstupenky)."
+
+#: wats-options.php:1103
+msgid "Tickets tagging"
+msgstr "Vstupenky značkovanie"
+
+#: wats-options.php:1108
+msgid "Allow tickets tagging"
+msgstr "Povoliť vstupenky značkovanie"
+
+#: wats-options.php:1110
+msgid "Check this option if you want to allow tag association to tickets."
+msgstr "Začiarknite túto možnosť, ak chcete povoliť tag združenia vstupenky."
+
+#: wats-options.php:1112
+msgid "Custom fields"
+msgstr "Vlastné polia"
+
+#: wats-options.php:1117
+msgid "Allow custom fields association to tickets"
+msgstr "Povoliť vlastné polia združenia vstupenky"
+
+#: wats-options.php:1119
+msgid ""
+"Check this option if you want to allow custom fields association to tickets."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť vlastné polia združenia "
+"vstupenky."
+
+#: wats-options.php:1121
+msgid "Global statistics dashboard widget roles visibility"
+msgstr "Globálne štatistiky dashboard widget roly viditeľnosť"
+
+#: wats-options.php:1133
+msgid ""
+"Select the roles. Only selected roles would be able to view the global "
+"statistics under the stats widget on the dashboard. To learn more about "
+"users roles, check out this page : "
+msgstr ""
+"Vyberte roly. Len vybraté role bude môcť prezerať súhrnné štatistiky podľa "
+"štatistiky widget na prístrojovej doske. Dozvedieť viac o roly používateľov, "
+"pozrite sa na túto stránku: "
+
+#: wats-options.php:1135
+msgid "Media upload"
+msgstr "Media upload"
+
+#: wats-options.php:1140
+msgid "Allow media upload on ticket creation and edition pages"
+msgstr "Povoliť media nahrať na stránkach miest a vydanie lístok"
+
+#: wats-options.php:1142
+msgid ""
+"Check this option if you want to allow media upload while creating and "
+"editing tickets. This will allow users to attach media files to tickets."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť media nahrať počas vytvárania a "
+"úpravy vstupenky. To umožní používateľom pripojiť mediálne súbory na lístky."
+
+#: wats-options.php:1144
+msgid "Media upload tabs"
+msgstr "Nahrať médií karty"
+
+#: wats-options.php:1149
+msgid "Allow media library browsing during media upload"
+msgstr "Povoliť knižnicu médií prehliadania počas media upload"
+
+#: wats-options.php:1151
+msgid ""
+"Check this option if you want to allow media library browsing during media "
+"upload while creating and editing tickets. This will allow users to view the "
+"library and insert files directly from it."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť knižnicu médií prehliadania "
+"počas media upload počas vytvárania a úpravy vstupenky. To umožní "
+"používateľom Zobraziť knižnicu a vložiť súbory priamo z neho."
+
+#: wats-options.php:1153
+msgid "Shared guest user"
+msgstr "Spoločné Hodnotenie užívateľa"
+
+#: wats-options.php:1164
+msgid ""
+"The shared guest user is a user that must have at least contributor user "
+"level. This user will only have access to the ticket creation page on the "
+"admin side. You can share the guest user login/password with your visitors "
+"so that they can submit tickets without having to register first. This is a "
+"shared account."
+msgstr ""
+"Spoločné Hodnotenie užívateľa je používateľom, ktorý musí mať aspoň "
+"prispievateľ užívateľskej úrovni. Tento používateľ bude mať prístup na "
+"stránku vytvorenia lístok len na strane admin. Hodnotenie užívateľské meno a "
+"heslo s návštevníkmi môžete zdieľať tak, že môže odoslať vstupenky bez toho, "
+"aby najprv zaregistrovať. To je zdieľaného účtu."
+
+#: wats-options.php:1165
+msgid ""
+"Warning : if you set the current user (your admin account) as the guest "
+"user, you won't be able to access the admin options anymore after the save. "
+"So please make sure that you understand what it is about before setting this "
+"option."
+msgstr ""
+"Upozornenie: Ak nastavíte aktuálneho používateľa (účtu admin) ako \"guest "
+"user\", nebudete mať prístup k admin možnosti už po uložiť. Takže uistite "
+"sa, že chápete, čo to je asi pred nastavenie tejto možnosti."
+
+#: wats-options.php:1167
+msgid "Frontend submission form access"
+msgstr "Frontend predloženia formulára prístup"
+
+#: wats-options.php:1171
+msgid "Disable frontend ticket submission form"
+msgstr "Zakázať frontend lístok odosielací formulár"
+
+#: wats-options.php:1174
+msgid ""
+"Enable frontend ticket submission form for any visitor with a valid email "
+"address"
+msgstr ""
+"Povoliť frontend lístok odosielací formulár pre každého návštevníka s platnú "
+"emailovú adresu"
+
+#: wats-options.php:1177
+msgid "Enable frontend ticket submission form for registered users only"
+msgstr ""
+"Povoliť frontend lístok odosielací formulár len pre registrovaných užívateľov"
+
+#: wats-options.php:1179
+msgid ""
+"Set this option to allow users to use a ticket submission form in the "
+"frontend to submit new tickets."
+msgstr ""
+"Nastavenie tejto možnosti umožníte používateľom používať lístok odosielací "
+"formulár v rozhraní predkladať nové lístky."
+
+#: wats-options.php:1180
+msgid ""
+"Warning : if option is selected, users will have the opportunity to submit "
+"tickets without being authenticated. This could result in large amount of "
+"SPAM."
+msgstr ""
+"Upozornenie: Ak je vybratá možnosť používatelia budú mať príležitosť "
+"predložiť vstupenky bez je overený. To mohlo mať za následok veľké množstvo "
+"spamu."
+
+#: wats-options.php:1182
+msgid "Frontend submission form ticket status"
+msgstr "Frontend predloženia formulára letenky stavu"
+
+#: wats-options.php:1186
+msgid "All tickets submitted will be in 'pending' status"
+msgstr "Všetky vstupenky posielajú bude v stave Čakajúca"
+
+#: wats-options.php:1189
+msgid ""
+"Tickets from unauthenticated users will be submitted in 'pending' status and "
+"tickets from authenticated users will be in 'publish' status"
+msgstr ""
+"Vstupenky z neoverených používateľov bude predložený v stave Čakajúca a "
+"vstupenky od overených používateľov bude v \"publikovať\" status"
+
+#: wats-options.php:1192
+msgid ""
+"Tickets from unauthenticated users will be submitted in 'pending' status and "
+"tickets from authenticated users will be set according to user level "
+"capability"
+msgstr ""
+"Vstupenky z neoverených používateľov bude predložený v stave Čakajúca a "
+"letenky od overených používateľov budú stanovené podľa úrovne schopnosti "
+"používateľa"
+
+#: wats-options.php:1195
+msgid "All tickets submitted will be in 'publish' status"
+msgstr "Všetky vstupenky posielajú bude v \"publikovať\" status"
+
+#: wats-options.php:1197
+msgid ""
+"Set this option to define the ticket publications status upon ticket "
+"submission. It is advisable to set unauthenticated users tickets status to "
+"'pending' to allow admin moderation before publication and limit SPAM."
+msgstr ""
+"Nastavte túto možnosť definovať lístok publikácie stav po predložení ticket. "
+"Odporúča sa nastaviť neoverených používateľov vstupenky stav \"čakajúce\" "
+"povoliť admin moderovanie pred publikácie a limit SPAM."
+
+#: wats-options.php:1200
+msgid "Email ticket submission"
+msgstr "Odoslaním e-mailu"
+
+#: wats-options.php:1205
+msgid "Allow ticket submission through email"
+msgstr "Povoliť odosielanie ticket prostredníctvom e-mailu"
+
+#: wats-options.php:1206
+msgid "Server : "
+msgstr "Server: "
+
+#: wats-options.php:1207
+msgid "Port : "
+msgstr "Port: "
+
+#: wats-options.php:1208
+msgid "Login : "
+msgstr "Login: "
+
+#: wats-options.php:1209
+msgid "Password : "
+msgstr "Heslo: "
+
+#: wats-options.php:1211
+msgid ""
+"This feature allows users to submit tickets directly through email. You have "
+"to define a secret email on a POP3 server."
+msgstr ""
+"Táto funkcia umožňuje používateľom odosielať vstupenky priamo "
+"prostredníctvom e-mailu. Musíte definovať tajné e-mail na serveri POP3."
+
+#: wats-options.php:1212
+msgid ""
+"Warning : every email received on this account will result in a ticket. "
+"Therefore, make sure that your email address isn't known by SPAM robots."
+msgstr ""
+"Upozornenie: každý e-mail dostal na tomto účte spôsobia lístok. Preto sa "
+"uistite, že Vaša emailová adresa nie je známa SPAM roboty."
+
+#: wats-options.php:1215
+msgid "Default author for unregistered visitors tickets"
+msgstr "Predvoleným autorom pre neregistrovaných návštevníkov vstupenky"
+
+#: wats-options.php:1226
+msgid ""
+"This option will be used to set the author of tickets submitted through the "
+"frontend submit form or through email by unregistered users."
+msgstr ""
+"Táto možnosť sa použije nastaviť autor vstupenky Neregistrovaní užívatelia "
+"posielajú frontend Odoslať formulár alebo cez e-mail."
+
+#: wats-options.php:1228
+msgid "Call center ticket creation"
+msgstr "Call centrum lístok vytvorenie"
+
+#: wats-options.php:1233
+msgid "Allow admins to create a ticket on behalf of any user"
+msgstr "Umožniť správcovi vytvoriť lístok ktorýmkoľvek používateľom"
+
+#: wats-options.php:1235
+msgid ""
+"Check this option if you want to allow admins to create tickets on behalf of "
+"any user. This will allow them to set the ticket originator while submitting "
+"a new ticket."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť správcovi vytvoriť vstupenky "
+"ktorýmkoľvek používateľom. To umožní im, aby nastaviť lístok pôvodcu počas "
+"odovzdávania novej letenky."
+
+#: wats-options.php:1237
+msgid "User selector format"
+msgstr "Užívateľský výber formát"
+
+#: wats-options.php:1239
+msgid "Format : "
+msgstr "Formát: "
+
+#: wats-options.php:1241
+msgid ""
+"Using user meta keys, set the user format you would like to use for user "
+"selectors. This format will be applied to all user selectors. If it is "
+"empty, the default key \"user_login\" will be applied. The following user "
+"meta keys can be used : user_login, "
+msgstr ""
+" bude uplatňovať. Nasledovné klávesy meta užívateľ môže byť použitý: "
+"user_login, "
+
+#: wats-options.php:1242
+msgid ""
+"Warning : you need to make sure that the combination of keys used will make "
+"each entry unique and different from each other. Therefore, it is a good "
+"idea to use user_login as this key is unique for each user."
+msgstr ""
+"Upozornenie: budete musieť uistite sa, že kombinácia kľúče používané bude "
+"každá položka jedinečné a odlišné od seba navzájom. Preto je dobré použiť "
+"user_login, ako tento kľúč je jedinečný pre každého používateľa."
+
+#: wats-options.php:1245
+msgid "User selector order"
+msgstr "Užívateľ výber objednávky"
+
+#: wats-options.php:1247
+msgid "Sort by"
+msgstr "Zoradiť podľa"
+
+#: wats-options.php:1255
+msgid "And then"
+msgstr "A potom"
+
+#: wats-options.php:1264
+msgid "Select the meta keys used to sort the user selectors."
+msgstr "Vyberte meta klávesy na triediť používateľa selektory."
+
+#: wats-options.php:1266
+msgid "Ticket author user meta key selector for ticket listing filtering"
+msgstr "Lístok autor používateľa meta kľúčový volič lístka výpis, filtrovanie"
+
+#: wats-options.php:1271
+msgid "Allow admins to filter tickets through author user meta key selector"
+msgstr "Povoliť adminom filter vstupenky cez autor používateľa meta kľúč"
+
+#: wats-options.php:1272 wats-options.php:1290
+msgid "Meta key"
+msgstr "Meta kľúča"
+
+#: wats-options.php:1282
+msgid ""
+"Check this option if you want to allow admins to filter tickets through an "
+"additionnal selector which will be filled in with meta values attached to "
+"the selected meta key."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť adminom filter vstupenky cez "
+"dodatočné selektor, ktorý vyplnia meta hodnoty pripojené k vybranému "
+"tlaèidlu meta."
+
+#: wats-options.php:1284
+msgid "Ticket author user meta key column for tickets listing table"
+msgstr ""
+"Lístok autor používateľa meta kľúčový stĺpec pre vstupenky Výpis tabuľky"
+
+#: wats-options.php:1289
+msgid ""
+"Allow admins to get another column filled with author meta value in the "
+"tickets listing table"
+msgstr ""
+"Umožňujú administrátorom získať ďalší stĺpec naplnené autor meta hodnotu "
+"vstupenky Výpis tabuľky"
+
+#: wats-options.php:1299
+msgid ""
+"Check this option if you want to allow admins to get another column in the "
+"tickets listing table that will be filled in with user meta values attached "
+"to the selected meta key."
+msgstr ""
+"Začiarknite túto možnosť, ak chcete povoliť správcovi dostať iný stĺpec v "
+"vstupenky Výpis tabuľky, ktoré vyplnia používateľa meta hodnoty pripojené k "
+"vybranému tlaèidlu meta."
+
+#: wats-options.php:1301
+msgid "User profile administration"
+msgstr "Správu profilov používateľov"
+
+#: wats-options.php:1306
+msgid ""
+"Prevent regular users (non admins) from modifying their profile email address"
+msgstr ""
+"Zabrániť pravidelnými používateľmi (non admini) úpravou ich profil e-mailovú "
+"adresu"
+
+#: wats-options.php:1310
+msgid "Allow admins to set an expiration date for each user account"
+msgstr ""
+"Umožňujú administrátorom nastaviť dátum skončenia platnosti pre každé "
+"používateľské konto"
+
+#: wats-options.php:1314
+msgid "Allow admins to associate each user with a country. Country meta key : "
+msgstr ""
+"Umožniť správcovia priradiť každému používateľovi s krajinou. Kľúč krajiny "
+"meta: "
+
+#: wats-options.php:1318
+msgid ""
+"Allow admins to associate each user with a company name. Company name key : "
+msgstr ""
+"Umožniť správcovia priradiť každému používateľovi názov firmy. Spoločnosť "
+"názov kľúča: "
+
+#: wats-options.php:1322
+msgid ""
+"Allow admins to associate each user with a service level agreement (SLA)"
+msgstr ""
+"Umožniť správcovia priradiť každému používateľovi service level agreement "
+"(SLA)"
+
+#: wats-options.php:1324
+msgid "These options provide you additionnal control on the user profile :"
+msgstr ""
+"Tieto možnosti poskytnúť dodatočné kontroly na používateľského profilu:"
+
+#: wats-options.php:1325
+msgid ""
+"- Email option : check this option if you want to prevent regular users from "
+"modifying their email address under the user profile page. If checked, only "
+"administrators could update it."
+msgstr ""
+"-Email možnosť: začiarknite toto políčko, ak chcete zabrániť pravidelnými "
+"používateľmi úpravou ich e-mailovú adresu pod profilovej stránky užívateľa. "
+"Ak je políčko začiarknuté, iba správcovia mohli aktualizovať."
+
+#: wats-options.php:1326
+msgid ""
+"- Expiration option : check this option to allow administrators to set an "
+"account expiration date for each user. User won't be able to authenticate "
+"after the expiration date."
+msgstr ""
+"-Uplynutím možnosť: začiarknite túto možnosť umožniť správcom stanoviť "
+"expirácie účet pre každého užívateľa. Používateľ nebude môcť overenie po "
+"uplynutí dátumu."
+
+#: wats-options.php:1327
+msgid ""
+"- Country option : check this option to allow administrators to associate "
+"each user with a country. You can then customize the country meta key."
+msgstr ""
+"-Krajiny možnosť: začiarknite túto možnosť umožniť správcom priradiť každému "
+"používateľovi s krajinou. Potom môžete prispôsobiť meta kľúčové krajiny."
+
+#: wats-options.php:1328
+msgid ""
+"- Company option : check this option to allow administrators to associate "
+"each user with a company name. You can then customize the company name meta "
+"key. When this option is enabled, you can create and manage companies "
+"through the company management page."
+msgstr ""
+"-Spoločnosť možnosť: začiarknite túto možnosť umožniť správcom každému "
+"používateľovi priradiť názov firmy. Potom môžete prispôsobiť kľúč meta názov "
+"spoločnosti. Ak je táto možnosť zapnutá, môžete vytvoriť a spravovať "
+"spoločnosti prostredníctvom stránky riadenia spoločnosti."
+
+#: wats-options.php:1329
+msgid ""
+"- SLA option : check this option to allow administrators to associate each "
+"user with a service level agreement. When this option is enabled, you can "
+"assign SLA to companies through the company management page or individually "
+"under the user profile page."
+msgstr ""
+"-SLA možnosť: začiarknite túto možnosť umožniť správcom priradiť každému "
+"používateľovi service level agreement. Ak je táto možnosť zapnutá, môžete "
+"priradiť SLA spoločnostiam prostredníctvom stránke správa spoločnosti alebo "
+"jednotlivo podľa profilu používateľa."
+
+#: wats-options.php:1330
+msgid ""
+"Warning : if you modify the meta key names at a point, existing mapping will "
+"be lost so it is better to set these originally and then not modify these "
+"afterwards."
+msgstr ""
+"Upozornenie: Ak upravíte meta kľúčové mená v bode, existujúce priradenie sa "
+"stratí tak je lepšie nastaviť toto pôvodne a potom nebude meniť toto potom."
+
+#: wats-options.php:1333
+msgid "Ticket keys"
+msgstr "Lístok kľúče"
+
+#: wats-options.php:1338
+msgid "Type key"
+msgstr "Typ kľúč"
+
+#: wats-options.php:1342
+msgid "Priority key"
+msgstr "Prioritou kľúč"
+
+#: wats-options.php:1346
+msgid "Status key"
+msgstr "Stav kľúč"
+
+#: wats-options.php:1350
+msgid "Product key"
+msgstr "Kód Product key"
+
+#: wats-options.php:1352
+msgid ""
+"Check the keys you would like to enable. Selected ones will then appear in "
+"the ticket creation, edition and listing pages."
+msgstr ""
+"Skontrolujte kľúče chcete povoliť. Vybrané tie sa potom zobrazí na lístok "
+"stvorenia, vydanie a zoznam stránok."
+
+#: wats-options.php:1356 wats-options.php:1447
+msgid "Save the options"
+msgstr "Ukladanie – možnosti"
+
+#: wats-options.php:1358
+msgid "Ticket types"
+msgstr "Typy vstupeniek"
+
+#: wats-options.php:1361 wats-template.php:456 wats-template.php:1079
+msgid "Type"
+msgstr "Typ"
+
+#: wats-options.php:1362 wats-options.php:1372 wats-options.php:1382
+#: wats-options.php:1407
+msgid "Default"
+msgstr "Predvolené"
+
+#: wats-options.php:1368
+msgid "Ticket priorities"
+msgstr "Lístok priority"
+
+#: wats-options.php:1371 wats-template.php:461 wats-template.php:1081
+msgid "Priority"
+msgstr "Prioritou"
+
+#: wats-options.php:1378
+msgid "Ticket statuses"
+msgstr "Lístok stavy"
+
+#: wats-options.php:1381 wats-options.php:1391 wats-template.php:466
+#: wats-template.php:1083
+msgid "Status"
+msgstr "Stav"
+
+#: wats-options.php:1388
+msgid "Closed status"
+msgstr "Uzavretom stave"
+
+#: wats-options.php:1401
+msgid "Select the status associated to the ticket closure."
+msgstr "Vyberte stav priradené k uzavretiu lístok."
+
+#: wats-options.php:1403
+msgid "Ticket products"
+msgstr "Lístok produkty"
+
+#: wats-options.php:1406 wats-template.php:471 wats-template.php:1086
+msgid "Product"
+msgstr "Produkt"
+
+#: wats-options.php:1413
+msgid "Categories opened to submission"
+msgstr "Kategórie otvoril na predkladanie"
+
+#: wats-options.php:1416 wats-template.php:444 wats-template.php:626
+msgid "Category"
+msgstr "Kategória"
+
+#: wats-options.php:1422
+msgid "New ticket notification rules"
+msgstr "Nové pravidlá oznamovania lístok"
+
+#: wats-options.php:1425
+msgid "Rule"
+msgstr "Pravidlo"
+
+#: wats-options.php:1432
+msgid ""
+"Associate specific priority, status and type with an email distribution "
+"list. Those will get a mail when a new ticket is raised with the specified "
+"values."
+msgstr ""
+"Priradiť špecifické priority, stav a typ e-mail distribučného zoznamu. Tých "
+"dostane e-mail, keď nový lístok je zvýšený so zadaným hodnotám."
+
+#: wats-options.php:1433
+msgid ""
+"Warning : if you enter multiple email addresses, please separate them with a "
+"comma \",\"."
+msgstr "."
+
+#: wats-options.php:1436
+msgid "Service level agreement list"
+msgstr "Service level agreement zoznam"
+
+#: wats-options.php:1439
+msgid "SLA"
+msgstr "SLA"
+
+#: wats-profile.php:117
+msgid "Ticket system capabilities"
+msgstr "Ticket systému schopnosti"
+
+#: wats-profile.php:124 wats-profile.php:141
+msgid "Yes"
+msgstr "áno"
+
+#: wats-profile.php:126 wats-profile.php:143
+msgid "No"
+msgstr "nie"
+
+#: wats-profile.php:132
+msgid "Ticket system notifications"
+msgstr "Lístok Systémové oznámenia"
+
+#: wats-profile.php:146
+msgid ""
+"Note : you can't set an option if it has been disabled globally by the admin."
+msgstr "Poznámka: nemôžete nastaviť možnosť ak to globálne zakázal admin."
+
+#: wats-profile.php:150
+msgid "Account options"
+msgstr "Možnosti účtu"
+
+#: wats-profile.php:154
+msgid "Expiration date (yyyy-mm-dd)"
+msgstr "Dátum exspirácie (rrrr-mm-dd)"
+
+#: wats-template.php:17
+msgid "The ticket is closed. Only administrators could reopen it."
+msgstr "Lístok je uzavretý. Iba správcovia by mohli otvoriť."
+
+#: wats-template.php:22
+msgid "Only admins and ticket author can update this ticket."
+msgstr "Iba správcovia a lístok autor môžete aktualizovať tento lístok."
+
+#: wats-template.php:79
+msgid "Tickets listing"
+msgstr "Vstupenky výpis"
+
+#: wats-template.php:263 wats-template.php:274
+msgid "Ticket author"
+msgstr "Autor lístok"
+
+#: wats-template.php:287
+msgid "Ticket owner"
+msgstr "Majiteľom vstupeniek"
+
+#: wats-template.php:301
+msgid "Filter"
+msgstr "Filter"
+
+#: wats-template.php:302
+msgid "Export"
+msgstr "Export"
+
+#: wats-template.php:443
+msgid "Title"
+msgstr "Názov"
+
+#: wats-template.php:445
+msgid "Author"
+msgstr "Autor"
+
+#: wats-template.php:450
+msgid "Owner"
+msgstr "Majiteľ"
+
+#: wats-template.php:453
+msgid "Creation date"
+msgstr "Dátum vytvorenia"
+
+#: wats-template.php:526
+msgid "Uncategorized"
+msgstr "Nekategorizované"
+
+#: wats-template.php:579
+msgid "Ticket Listing"
+msgstr "Lístok výpis"
+
+#: wats-template.php:615
+msgid "User details"
+msgstr "Údaje používateľa"
+
+#: wats-template.php:617
+msgid "Logged in as "
+msgstr "Prihlásený ako "
+
+#: wats-template.php:620
+msgid "Name"
+msgstr "meno"
+
+#: wats-template.php:620 wats-template.php:621
+msgid "(required)"
+msgstr "(povinné)"
+
+#: wats-template.php:621
+msgid "Mail"
+msgstr "Mail"
+
+#: wats-template.php:622
+msgid "Website"
+msgstr "Webové stránky"
+
+#: wats-template.php:624
+msgid "Ticket details"
+msgstr "Lístok Podrobnosti"
+
+#: wats-template.php:636
+msgid "Ticket title"
+msgstr "Lístok titul"
+
+#: wats-template.php:638
+msgid "Ticket description"
+msgstr "Popis lístok"
+
+#: wats-template.php:641
+msgid "Submit ticket"
+msgstr "Predložiť lístok"
+
+#: wats-template.php:647
+msgid "Please authenticate yourself to be able to access the form."
+msgstr "Prosím, overenie si môcť pristupovať k forme."
+
+#: wats-template.php:651
+msgid "Password"
+msgstr "Heslo"
+
+#: wats-template.php:652
+msgid "Log In"
+msgstr "prihlásiť sa"
+
+#: wats-template.php:658
+msgid ""
+"Sorry, the ticket submission form access has been disabled by the admin."
+msgstr "Sorry, lístok predloženie formulára prístup zakázal admin."
+
+#: wats-template.php:701
+msgid "The name is empty or contains invalid characters. "
+msgstr "Názov je prázdny alebo obsahuje neplatné znaky. "
+
+#: wats-template.php:714
+msgid "The email address is empty or contains invalid characters. "
+msgstr "E-mailová adresa je prázdna alebo obsahuje neplatné znaky. "
+
+#: wats-template.php:745
+msgid "Error : "
+msgstr "Chyba: "
+
+#: wats-template.php:775
+msgid "Ticket "
+msgstr "Lístok "
+
+#: wats-template.php:775
+msgid " has been successfully created!"
+msgstr " bol úspešne vytvorený!"
+
+#: wats-template.php:777
+msgid "Ticket has been successfully created!"
+msgstr "Lístok bol úspešne vytvorený!"
+
+#: wats-template.php:779
+msgid "You can access it "
+msgstr "Máte prístup "
+
+#: wats-template.php:779 wats-template.php:781
+msgid "here"
+msgstr "tu"
+
+#: wats-template.php:781
+msgid "You will be able to access it "
+msgstr "Budete môcť pristupovať "
+
+#: wats-template.php:781
+msgid "when an admin would have approved it"
+msgstr "Kedy admin by ju schválili"
+
+#: wats-template.php:788
+msgid "Error : can't submit form"
+msgstr "Chyba: nemožno odoslať formulár"
+
+#: wats-template.php:934
+msgid "ticket"
+msgstr "lístok"
+
+#: wats-template.php:935
+msgid "Add New"
+msgstr "Pridať nové"
+
+#: wats-template.php:936
+msgid "Add New Ticket"
+msgstr "Pridať nový lístok"
+
+#: wats-template.php:937
+msgid "Edit Ticket"
+msgstr "Upraviť lístok"
+
+#: wats-template.php:938
+msgid "New Ticket"
+msgstr "Nový lístok"
+
+#: wats-template.php:939
+msgid "View Ticket"
+msgstr "Zobrazenie lístok"
+
+#: wats-template.php:940
+msgid "Search Ticket"
+msgstr "Hľadať letenku"
+
+#: wats-template.php:941
+msgid "No tickets found"
+msgstr "Žiadne vstupenky našiel"
+
+#: wats-template.php:942
+msgid "No tickets found in Trash"
+msgstr "Žiadne vstupenky, nachádza v koši"
+
+#: wats-template.php:1084
+msgid "Ticket"
+msgstr "Lístok"
+
+#: wats-ticket-metas.php:17
+msgid "Current ticket owner : "
+msgstr "Súčasný majiteľ lístok: "
+
+#: wats-ticket-metas.php:144
+msgid "Sorry, you can't update this ticket."
+msgstr "Ospravedlňujeme sa, tento lístok sa nedá aktualizovať."
+
+#: wats-ticket-metas.php:146
+msgid "Sorry, you must be logged in to update this ticket."
+msgstr "Prepáčte, musíte byť prihlásený aktualizovať tento lístok."
+
+#: wats-ticket-metas.php:148
+msgid "Sorry, you don't have the rights to update this ticket."
+msgstr "Ospravedlňujeme sa, že nemáte práva na aktualizovať tento lístok."
+
+#: wats-ticket-metas.php:327
+msgid "Ticket status has been changed to : "
+msgstr "Letenky stavu bol zmenený na: "
+
+#: wats-ticket-metas.php:332
+msgid "Ticket type has been changed to : "
+msgstr "Typ lístka bol zmenený na: "
+
+#: wats-ticket-metas.php:337
+msgid "Ticket priority has been changed to : "
+msgstr "Prioritou lístok bol zmenený na: "
+
+#: wats-ticket-metas.php:342
+msgid "Ticket product has been changed to : "
+msgstr "Lístok produkt bol zmenený na: "
+
+#: wats-ticket-metas.php:347
+msgid "Ticket owner has been removed"
+msgstr "Majiteľ lístok bol odstránený"
+
+#: wats-ticket-metas.php:349
+msgid "Ticket owner has been assigned to : "
+msgstr "Lístok majiteľ má priradené: "
+
+#: wats-ticket-metas.php:367 wats-ticket-metas.php:387
+#: wats-ticket-metas.php:408 wats-ticket-metas.php:445
+msgid " has been updated"
+msgstr " bola aktualizovaná"
+
+#: wats-ticket-metas.php:368 wats-ticket-metas.php:388
+#: wats-ticket-metas.php:409 wats-ticket-metas.php:446
+#: wats-ticket-metas.php:580
+msgid "Hello "
+msgstr "dobrý deň "
+
+#: wats-ticket-metas.php:369 wats-ticket-metas.php:389
+#: wats-ticket-metas.php:410 wats-ticket-metas.php:447
+msgid " has been updated."
+msgstr " bol aktualizovaný."
+
+#: wats-ticket-metas.php:370 wats-ticket-metas.php:390
+#: wats-ticket-metas.php:411 wats-ticket-metas.php:448
+#: wats-ticket-metas.php:518 wats-ticket-metas.php:583
+msgid "You can view it here :"
+msgstr "Môžete si prezrieť to tu:"
+
+#: wats-ticket-metas.php:373 wats-ticket-metas.php:414
+#: wats-ticket-metas.php:451 wats-ticket-metas.php:519
+#: wats-ticket-metas.php:584
+msgid "+ Frontend side : "
+msgstr "+ Frontend strane: "
+
+#: wats-ticket-metas.php:374 wats-ticket-metas.php:415
+#: wats-ticket-metas.php:452 wats-ticket-metas.php:520
+#: wats-ticket-metas.php:585
+msgid "+ Admin side : "
+msgstr "+ Admin strane: "
+
+#: wats-ticket-metas.php:514 wats-ticket-metas.php:579
+msgid "New ticket submitted"
+msgstr "Nový lístok posielajú"
+
+#: wats-ticket-metas.php:515
+msgid "Hello"
+msgstr "dobrý deň"
+
+#: wats-ticket-metas.php:516 wats-ticket-metas.php:581
+msgid "A new ticket has been submitted into the system."
+msgstr "Nový lístok bol odoslaný do systému."
+
+#: wats-ticket-metas.php:548
+msgid "Here are the ticket details :"
+msgstr "Tu sú Podrobnosti lístok:"
+
+#: wats-ticket-metas.php:550
+msgid "+ Ticket type : "
+msgstr "+ Typ lístka: "
+
+#: wats-ticket-metas.php:552
+msgid "+ Ticket priority : "
+msgstr "+ Priorita lístok: "
+
+#: wats-ticket-metas.php:554
+msgid "+ Ticket status : "
+msgstr "+ Letenky stavu: "
+
+#: wats-ticket-metas.php:556
+msgid "+ Ticket product : "
+msgstr "+ Lístok výrobok: "
+
+#: wats-ticket-metas.php:557
+msgid "+ Ticket number : "
+msgstr "+ Lístok číslo: "
+
+#: wats-ticket-metas.php:558
+msgid "+ Ticket title : "
+msgstr "+ Názov lístok: "
+
+#: wats-ticket-metas.php:610
+msgid "Categories"
+msgstr "Kategórie"
+
+#: wats-ticket-metas.php:612
+msgid "Custom Fields"
+msgstr "Vlastné polia"
+
+#: wats-ticket-metas.php:614
+msgid "Tags"
+msgstr "Tagy"
+
+#: wats-ticket-metas.php:628
+msgid "Here is the ticket history"
+msgstr "Tu je história tiketov"
+
+#: wats-ticket-metas.php:810 wats-ticket-metas.php:853
+#: theme/single-ticket.php:27
+msgid "Ticket originator : "
+msgstr "Pôvodca lístok: "
+
+#: wats-ticket-metas.php:861
+msgid "Ticket author name : "
+msgstr "Meno autora lístok: "
+
+#: wats-ticket-metas.php:865
+msgid "Ticket author email : "
+msgstr "Lístok email Autor: "
+
+#: wats-ticket-metas.php:869
+msgid "Ticket author url : "
+msgstr "Lístok autor url: "
+
+#: theme/comments-ticket.php:21
+msgid "No Responses"
+msgstr "Žiadne reakcie"
+
+#: theme/comments-ticket.php:21
+msgid "One Response"
+msgstr "Jedna reakcia"
+
+#: theme/comments-ticket.php:21
+msgid "% Responses"
+msgstr "% Reakcie"
+
+#: theme/comments-ticket.php:21
+msgid " to "
+msgstr " na "
+
+#: theme/comments-ticket.php:57
+msgid "Leave an update"
+msgstr "Nechajte aktualizáciu"
+
+#: theme/comments-ticket.php:57
+#, php-format
+msgid "Leave an update for %s"
+msgstr "Opustiť aktualizácie pre %s"
+
+#: theme/comments-ticket.php:64
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post an update."
+msgstr "You must be <a href=\"%s\">logged in</a> to post an update."
+
+#: theme/comments-ticket.php:71
+#, php-format
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
+msgstr "Prihlásený ako <a href=\"%1$s\">%2$s</a>."
+
+#: theme/comments-ticket.php:71
+msgid "Log out of this account"
+msgstr "Log z tohto účtu"
+
+#: theme/comments-ticket.php:71
+msgid "Log out »"
+msgstr "Odhlásiť»"
+
+#: theme/comments-ticket.php:79
+msgid "Mail (will not be published)"
+msgstr "Mail (nebude zverejnený)"
+
+#: theme/comments-ticket.php:86
+#, php-format
+msgid "<strong>XHTML:</strong> You can use these tags: <code>%s</code>"
+msgstr "<strong>XHTML:</strong> Môžete použiť tieto Tagy: <code>%s</code>"
+
+#: theme/comments-ticket.php:92
+msgid "Submit update"
+msgstr "Odošlite aktualizáciu"
+
+#: theme/single-ticket.php:20
+msgid "Current priority : "
+msgstr "Aktuálna priorita: "
+
+#: theme/single-ticket.php:22
+msgid "Current status : "
+msgstr "Aktuálny stav: "
+
+#: theme/single-ticket.php:24
+msgid "Ticket type : "
+msgstr "Typ lístka: "
+
+#: theme/single-ticket.php:26
+msgid "Ticket product : "
+msgstr "Lístok výrobok: "
+
+#: theme/single-ticket.php:35
+#, php-format
+msgid "This entry was submited on %1$s at %2$s and is filed under %3$s."
+msgstr ""
+"Táto položka bola zapísaná na %1$ s na %2$ s a je podaný v rámci %3$ s."
+
+#: theme/single-ticket.php:35
+msgid "l, F jS, Y"
+msgstr "l, F jS, Y"
+
+#: theme/single-ticket.php:36
+#, php-format
+msgid ""
+"You can follow any responses to this entry through the <a href='%s'>RSS 2.0</"
+"a> feed."
+msgstr ""
+"Môžete sledovať všetky reakcie na tento vstup pomocou <a href='%s'> RSS 2.0</"
+"a> feed."
+
+#: theme/single-ticket.php:39
+#, php-format
+msgid ""
+"You can <a href=\"#respond\">leave an update</a>, or <a href=\"%s\" rel="
+"\"trackback\">trackback</a> from your own site."
+msgstr ""
+"You can <a href=\"#respond\">leave an update</a>, or <a href=\"%s\" rel="
+"\"trackback\">trackback</a> from your own site."
+
+#: theme/single-ticket.php:43
+#, php-format
+msgid ""
+"Responses are currently closed, but you can <a href=\"%s\" rel=\"trackback"
+"\">trackback</a> from your own site."
+msgstr ""
+"Responses are currently closed, but you can <a href=\"%s\" rel=\"trackback"
+"\">trackback</a> from your own site."
+
+#: theme/single-ticket.php:47
+msgid ""
+"You can skip to the end and leave an update. Pinging is currently not "
+"allowed."
+msgstr ""
+"Môžete preskočiť na koniec a zanechať aktualizáciu. Ping nie je v súčasnosti "
+"povolená."
+
+#: theme/single-ticket.php:51
+msgid "Both comments and pings are currently closed."
+msgstr "Oba komentáre a ping sú v súčasnosti zatvorený."
+
+#: theme/single-ticket.php:53
+msgid "Edit this entry"
+msgstr "Upraviť túto položku"
+
+#: theme/single-ticket.php:63
+msgid "Sorry, you don't have the rights to browse this ticket."
+msgstr "Ospravedlňujeme sa, že nemáte práva na Prehľadávať tento lístok."
+
+#: theme/single-ticket.php:68
+msgid "Sorry, no tickets matched your criteria."
+msgstr "Ospravedlňujeme sa, váš kritériám nevyhovujú žiadne vstupenky."
+
+#~ msgid "Ticket updated. <a href=\"%s\">View ticket</a>"
+#~ msgstr "> Zobraziť lístok</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Vlastné pole aktualizuje."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Vlastné pole odstráni."
+
+#~ msgid "Ticket updated."
+#~ msgstr "Lístok aktualizované."
+
+#~ msgid "Ticket published. <a href=\"%s\">View ticket</a>"
+#~ msgstr "> Zobraziť lístok</a>"
+
+#~ msgid "Post saved."
+#~ msgstr "Príspevok uložené."
+
+#~ msgid "Ticket submitted. <a href=\"%s\">Preview ticket</a>"
+#~ msgstr "> Náhľad lístok</a>"
+
+#~ msgid "Ticket restored to revision from %s"
+#~ msgstr "Lístok obnovená revízie z %s"
+
+#~ msgid ""
+#~ "There is an autosave of this ticket that is more recent than the version "
+#~ "below.  <a href=\"%s\">View the autosave</a>."
+#~ msgstr ""
+#~ "Hay un guardado automático de este ticket que es mas reciente que esta "
+#~ "versión.  <a href=\"%s\">Ver el guardado</a>."
+
+#~ msgid "Preview Changes"
+#~ msgstr "Náhľad zmeny"
+
+#~ msgid "Preview"
+#~ msgstr "Náhľad"
+
+#~ msgid "Status:"
+#~ msgstr "Stav:"
+
+#~ msgid "Privately Published"
+#~ msgstr "Súkromne Publikované"
+
+#~ msgid "Published"
+#~ msgstr "Uverejnené"
+
+#~ msgid "Scheduled"
+#~ msgstr "Naplánované"
+
+#~ msgid "Pending Review"
+#~ msgstr "Čaká na prehľad"
+
+#~ msgid "Draft"
+#~ msgstr "Návrh"
+
+#~ msgid "Edit"
+#~ msgstr "Upraviť"
+
+#~ msgid "OK"
+#~ msgstr "ok"
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušiť"
+
+#~ msgid "Visibility:"
+#~ msgstr "Viditeľnosť:"
+
+#~ msgid "Private"
+#~ msgstr "Súkromné"
+
+#~ msgid "Password protected"
+#~ msgstr "Chránené heslom"
+
+#~ msgid "Public, Sticky"
+#~ msgstr "Verejnosti, lepkavé"
+
+#~ msgid "Public"
+#~ msgstr "Verejnosti"
+
+#~ msgid "Stick this post to the front page"
+#~ msgstr "Držať tento post na prednej strane"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "M j, Y @ G:i"
+
+#~ msgid "Scheduled for: <b>%1$s</b>"
+#~ msgstr "Naplánované na: <b>%1$ s</b>"
+
+#~ msgid "Published on: <b>%1$s</b>"
+#~ msgstr "Zverejnené na: <b>%1$ s</b>"
+
+#~ msgid "Publish <b>immediately</b>"
+#~ msgstr "Publikovať <b>okamžite</b>"
+
+#~ msgid "Schedule for: <b>%1$s</b>"
+#~ msgstr "Harmonogram: <b>%1$ s</b>"
+
+#~ msgid "Publish on: <b>%1$s</b>"
+#~ msgstr "Publikovať na: <b>%1$ s</b>"
+
+#~ msgid ""
+#~ "You are about to delete this draft '%s'\n"
+#~ "  'Cancel' to stop, 'OK' to delete."
+#~ msgstr ""
+#~ "Va a eliminar este borrador '%s'\n"
+#~ "  'Cancelar', 'OK' para eliminar."
+
+#~ msgid ""
+#~ "You are about to delete this post '%s'\n"
+#~ "  'Cancel' to stop, 'OK' to delete."
+#~ msgstr ""
+#~ "Va a eliminar esta entrada '%s'\n"
+#~ "  'Cancelar', 'OK' para eliminar."
+
+#~ msgid "Update Ticket"
+#~ msgstr "Aktualizácia lístok"
+
+#~ msgid "Publish"
+#~ msgstr "Publikovať"
+
+#~ msgid "Separate tags with commas."
+#~ msgstr "Tagy oddelených čiarkami."
+
+#~ msgid "Add or remove tags"
+#~ msgstr "Pridať alebo odstrániť značky"
+
+#~ msgid "Choose from the most used tags in %s"
+#~ msgstr "Vyberať najčastejšie používané značky v %s"
+
+#~ msgid "All Categories"
+#~ msgstr "Všetky kategórie"
+
+#~ msgid "Most Used"
+#~ msgstr "Najpoužívanejšie"
+
+#~ msgid "+ Add New Category"
+#~ msgstr "+ Pridať novú kategóriu"
+
+#~ msgid "Add New Category"
+#~ msgstr "Pridať novú kategóriu"
+
+#~ msgid "Parent category"
+#~ msgstr "Nadradená Kategória"
+
+#~ msgid "Keep this post private"
+#~ msgstr "Udržať tento príspevok súkromných"
+
+#~ msgid "Post Password"
+#~ msgstr "Príspevok heslo"
+
+#~ msgid "Password Protect This Post"
+#~ msgstr "Heslo chrániť tento príspevok"
+
+#~ msgid ""
+#~ "Setting a password will require people who visit your blog to enter the "
+#~ "above password to view this post and its comments."
+#~ msgstr ""
+#~ "Poner una contraseña requerirá que las personas ingresen esta contraseña "
+#~ "para ver esta entrada y sus comentarios."
+
+#~ msgid ""
+#~ "Excerpts are optional hand-crafted summaries of your content that can be "
+#~ "used in your theme. <a href=\"http://codex.wordpress.org/Excerpt\" target="
+#~ "\"_blank\">Learn more about manual excerpts.</a>"
+#~ msgstr ""
+#~ "Los extractos son opcionales hand-crafted resúmenes del contenido que "
+#~ "puede ser usado en su tema. <a href=\"http://codex.wordpress.org/Excerpt"
+#~ "\" target=\"_blank\">Leer mas acerca de extractos manuales.</a>"
+
+#~ msgid "Already pinged:"
+#~ msgstr "Už pinged:"
+
+#~ msgid "Send trackbacks to:"
+#~ msgstr "Poslať odkazy na:"
+
+#~ msgid "Separate multiple URLs with spaces"
+#~ msgstr "Viac adries oddeľte priestory"
+
+#~ msgid ""
+#~ "Trackbacks are a way to notify legacy blog systems that you’ve linked to "
+#~ "them. If you link other WordPress blogs they’ll be notified automatically "
+#~ "using <a href=\"http://codex.wordpress.org/"
+#~ "Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pingbacks</"
+#~ "a>, no other action necessary."
+#~ msgstr ""
+#~ "Trackbacks son una forma de notificar a los sistemas de blogs estandar "
+#~ "que tienes un enlace con ellos. Si enlazas otros blogs wordpress serán "
+#~ "notificados automáticamente usando <a href=\"http://codex.wordpress.org/"
+#~ "Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">pingbacks</"
+#~ "a>, no necesitas hacer nada mas."
+
+#~ msgid "Send Trackbacks"
+#~ msgstr "Poslať odkazy"
+
+#~ msgid ""
+#~ "Custom fields can be used to add extra metadata to a post that you can <a "
+#~ "href=\"http://codex.wordpress.org/Using_Custom_Fields\" target=\"_blank"
+#~ "\">use in your theme</a>."
+#~ msgstr ""
+#~ "Los Campos de usuario pueden ser usados para agregar datos extras a una "
+#~ "entrada que puedes <a href=\"http://codex.wordpress.org/"
+#~ "Using_Custom_Fields\" target=\"_blank\">usar en tu tema</a>."
+
+#~ msgid "Allow comments on this post"
+#~ msgstr "Povoliť komentáre k tomuto príspevku"
+
+#~ msgid ""
+#~ "Allow <a href=\"http://codex.wordpress.org/"
+#~ "Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">trackbacks "
+#~ "and pingbacks</a> on this post"
+#~ msgstr ""
+#~ "Permitir <a href=\"http://codex.wordpress.org/"
+#~ "Introduction_to_Blogging#Managing_Comments\" target=\"_blank\">trackbacks "
+#~ "y pingbacks</a> en esta entrada"
+
+#~ msgid "Discussion"
+#~ msgstr "Diskusia"
+
+#~ msgid "Show comments"
+#~ msgstr "Zobraziť komentáre"
+
+#~ msgid "Comments"
+#~ msgstr "Komentáre"
+
+#~ msgid "Post Author"
+#~ msgstr "Príspevok Autor"
+
+#~ msgid "Last edited by %1$s on %2$s at %3$s"
+#~ msgstr "Naposledy upravil %1$ s na %2$ s v %3$ s"
+
+#~ msgid "Last edited on %1$s at %2$s"
+#~ msgstr "Naposledy upravil na %1$ s na %2$ s"
+
+#~ msgid "Unpublished"
+#~ msgstr "Nepublikované"
+
+#~ msgid "Y/m/d g:i:s A"
+#~ msgstr "Y/m/d g:i:s a"
+
+#~ msgid "%s from now"
+#~ msgstr "%s od teraz"
+
+#~ msgid "%s ago"
+#~ msgstr "%s pred"
+
+#~ msgid "Y/m/d"
+#~ msgstr "Y/m/d"
+
+#~ msgid "Last Modified"
+#~ msgstr "Naposledy upravil"
+
+#~ msgid "Edit this post"
+#~ msgstr "Upraviť tento post"
+
+#~ msgid "Delete this post"
+#~ msgstr "Zmazať tento príspevok"
+
+#~ msgid ""
+#~ "You are about to delete this draft '%s'\n"
+#~ " 'Cancel' to stop, 'OK' to delete."
+#~ msgstr ""
+#~ "Vas a eliminar este borrador '%s'\n"
+#~ " 'Cancel' cancela, 'OK' lo elimina."
+
+#~ msgid ""
+#~ "You are about to delete this post '%s'\n"
+#~ " 'Cancel' to stop, 'OK' to delete."
+#~ msgstr ""
+#~ "Vas a eliminar esta entrada '%s'\n"
+#~ " 'Cancel' cancela, 'OK' la elimina."
+
+#~ msgid "View"
+#~ msgstr "Zobrazenie"
+
+#~ msgid "%s pending"
+#~ msgstr "%s až"
+
+#~ msgid "Published posts"
+#~ msgstr "Uverejnené príspevky"
+
+#~ msgid "Scheduled posts"
+#~ msgstr "Naplánovaných miest"
+
+#~ msgid "Pending posts"
+#~ msgstr "Čakajúce príspevkov"
+
+#~ msgid "Private posts"
+#~ msgstr "Súkromných príspevkov"
+
+#~ msgid "You are not allowed to delete this post."
+#~ msgstr "Vám nie je dovolené odstrániť tento post."
+
+#~ msgid "Error in deleting..."
+#~ msgstr "Chyba pri mazaní..."
+
+#~ msgid "Edit Tickets"
+#~ msgstr "Upraviť vstupenky"
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Výsledky hľadania pre “ %s ”"
+
+#~ msgid "Your ticket has been saved."
+#~ msgstr "Letenky sa uložil."
+
+#~ msgid "View post"
+#~ msgstr "Zobraziť príspevok"
+
+#~ msgid "Edit ticket"
+#~ msgstr "Upraviť lístok"
+
+#~ msgid "«"
+#~ msgstr "«"
+
+#~ msgid "»"
+#~ msgstr "»"
+
+#~ msgid "Bulk Actions"
+#~ msgstr "Hromadné akcie"
+
+#~ msgid "Apply"
+#~ msgstr "Uplatňovať"
+
+#~ msgid "Show all dates"
+#~ msgstr "Zobraziť všetky dátumy"
+
+#~ msgid "View all categories"
+#~ msgstr "Zobraziť všetky kategórie"
+
+#~ msgid "Displaying %s–%s of %s"
+#~ msgstr "Zobrazenie %s – %s %s"
+
+#~ msgid "List View"
+#~ msgstr "Zobrazenie zoznamu"
+
+#~ msgid "Excerpt View"
+#~ msgstr "Ukážka zobrazenia"
+
+#~ msgid "New ticket"
+#~ msgstr "Nový lístok"
+
+#~ msgid "Modify"
+#~ msgstr "Upraviť"
+
+#~ msgid "Get a mail notification when any ticket is updated"
+#~ msgstr "Upozorňovanie mail aktualizácii letenky"
+
+#~ msgid "Error : the entry contains invalid characters!"
+#~ msgstr "Chyba: položka obsahuje neplatné znaky!"
+
+#~ msgid "Donation"
+#~ msgstr "Darovanie"
+
+#~ msgid ""
+#~ "WATS is free to use, cool isn't it? It has however required hundreds of "
+#~ "hours to be developed."
+#~ msgstr ""
+#~ "WATS es gratis, está bueno, ¿no? Sin embargo ha requerido cientos de "
+#~ "horas para ser desarrollado."
+
+#~ msgid ""
+#~ " It still requires a huge amount of time in order to provide technical "
+#~ "support for users and new releases with bugfixes and new features."
+#~ msgstr ""
+#~ "Además esto requiere un cantidad de horas para poder proveer soporte "
+#~ "técnico para usuarios y nuevas versiones con correxiones y nuevas "
+#~ "caracteristicas."
+
+#~ msgid ""
+#~ " By making a donation, you recognize my work and encourage me to go on "
+#~ "with the development and support of WATS. Thanks for this!"
+#~ msgstr ""
+#~ "Haciendo una donación, reconoces mi trabajo y me alientas a seguir con el "
+#~ "desarrollo y el soporte de WATS.  Gracias!"
+
+#~ msgid "Ticket assignment capability minimum level requirement"
+#~ msgstr "Lístok nasadenie schopnosti minimálna úroveň požiadavka"
+
+#~ msgid "Level"
+#~ msgstr "Úroveň"
+
+#~ msgid "Minimum required level"
+#~ msgstr "Minimálne požadovanej úrovni"
+
+#~ msgid "The ticket title is empty or contains invalid characters. "
+#~ msgstr "Lístok názov je prázdny alebo obsahuje neplatné znaky. "
+
+#~ msgid "The ticket description is empty or contains invalid characters. "
+#~ msgstr ""
+#~ "Lístok opis je prázdne alebo obsahuje neplatné znaky. La descripción del "
+#~ "ticket esta vacía o contiene caracteres inválidos."
+
+#~ msgid "Post Tags"
+#~ msgstr "Tagy príspevok"
+
+#~ msgid ""
+#~ "You attempted to edit a ticket that doesn't exist. Perhaps it was deleted?"
+#~ msgstr ""
+#~ "Has intentado editar un ticket que no existe.  Tal vez fue eliminado?"
+
+#~ msgid "Somebody"
+#~ msgstr "Niekto"
+
+#~ msgid "Warning: %s is currently editing this ticket"
+#~ msgstr "Upozornenie: %s momentálne upravuje tento lístok"
+
+#~ msgid "You are not allowed to delete this ticket."
+#~ msgstr "Vám nie je dovolené odstrániť tento lístok."

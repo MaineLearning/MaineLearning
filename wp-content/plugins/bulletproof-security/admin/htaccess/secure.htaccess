@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.6 >>>>>>> SECURE .HTACCESS     
+#   BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS     
 
-# If you edit the  BULLETPROOF .47.6 >>>>>>> SECURE .HTACCESS text above
+# If you edit the  BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -11,7 +11,7 @@
 # To restore this file use BPS Restore or activate BulletProof Mode for your Root folder again.
 
 # BEGIN WordPress
-# IMPORTANT!!! DO NOT DELETE!!! - BEGIN Wordpress above or END WordPress - text in this file
+# IMPORTANT!!! DO NOT DELETE!!! - B E G I N Wordpress above or E N D WordPress - text in this file
 # They are reference points for WP, BPS and other plugins to write to this htaccess file.
 # IMPORTANT!!! DO NOT DELETE!!! - BPSQSE BPS QUERY STRING EXPLOITS - text
 # BPS needs to find the - BPSQSE - text string in this file to validate that your security filters exist
@@ -32,23 +32,22 @@ Options -Indexes
 # index.html will be ignored will not load.
 DirectoryIndex index.php index.html /index.php
 
-# BPS PRO ERROR LOGGING AND TRACKING - Available in BPS Pro only
-# BPS Pro has premade 403 Forbidden, 400 Bad Request and 404 Not Found files that are used 
+# BPS ERROR LOGGING AND TRACKING
+# BPS has premade 403 Forbidden, 400 Bad Request and 404 Not Found files that are used 
 # to track and log 403, 400 and 404 errors that occur on your website. When a hacker attempts to
 # hack your website the hackers IP address, Host name, Request Method, Referering link, the file name or
 # requested resource, the user agent of the hacker and the query string used in the hack attempt are logged.
-# BPS Pro Log files are added to the P-Security All Purpose File Manager to view them.
-# All BPS Pro log files are htaccess protected so that only you can view them. 
+# All BPS log files are htaccess protected so that only you can view them. 
 # The 400.php, 403.php and 404.php files are located in /wp-content/plugins/bulletproof-security/
 # The 400 and 403 Error logging files are already set up and will automatically start logging errors
-# after you install BPS Pro and have activated BulletProof Mode for your Root folder.
+# after you install BPS and have activated BulletProof Mode for your Root folder.
 # If you would like to log 404 errors you will need to copy the logging code in the BPS Pro 404.php file
 # to your Theme's 404.php template file. Simple instructions are included in the BPS Pro 404.php file.
 # You can open the BPS Pro 404.php file using the WP Plugins Editor or by using the BPS Pro File Manager.
 # NOTE: By default WordPress automatically looks in your Theme's folder for a 404.php template file.
 
-# ErrorDocument 400 /wp-content/plugins/bulletproof-security/400.php
-# ErrorDocument 403 /wp-content/plugins/bulletproof-security/403.php
+ErrorDocument 400 /wp-content/plugins/bulletproof-security/400.php
+ErrorDocument 403 /wp-content/plugins/bulletproof-security/403.php
 ErrorDocument 404 /404.php
 
 # DENY ACCESS TO PROTECTED SERVER FILES - .htaccess, .htpasswd and all file names starting with dot
@@ -65,13 +64,6 @@ RewriteRule ^wp-includes/theme-compat/ - [F,L]
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
-
-# FORBID EMPTY REFFERER SPAMBOTS
-RewriteCond %{REQUEST_METHOD} POST
-RewriteCond %{REQUEST_URI} (wp-comments-post\.php)
-#RewriteCond %{HTTP_REFERER} !^.*demo5.local.* [OR]
-RewriteCond %{HTTP_USER_AGENT} ^$
-RewriteRule .* - [F]
 
 # REQUEST METHODS FILTERED
 # This filter is for blocking junk bots and spam bots from making a HEAD request, but may also block some
@@ -118,16 +110,12 @@ RewriteRule . - [S=4]
 RewriteCond %{QUERY_STRING} action=rp&key=(.*) [NC]
 RewriteRule . - [S=3]
 
-# TIMTHUMB FORBID RFI and MISC FILE SKIP/BYPASS RULE
-# Only Allow Internal File Requests From Your Website
-# To Allow Additional Websites Access to a File Use [OR] as shown below.
-# RewriteCond %{HTTP_REFERER} ^.*YourWebsite.com.* [OR]
-# RewriteCond %{HTTP_REFERER} ^.*AnotherWebsite.com.*
+# TimThumb Forbid RFI By Host Name But Allow Internal Requests
 RewriteCond %{QUERY_STRING} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC,OR]
 RewriteCond %{THE_REQUEST} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC]
 RewriteRule .* index.php [F,L]
 RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
-#RewriteCond %{HTTP_REFERER} ^.*demo5.local.*
+RewriteCond %{HTTP_REFERER} ^.*demo6.local.*
 RewriteRule . - [S=1]
 
 # BPSQSE BPS QUERY STRING EXPLOITS
@@ -170,8 +158,8 @@ RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
 RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
 RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
 RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
-RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|%3c|%3e|%5b|%5d).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(\x00|\x04|\x08|\x0d|\x1b|\x20|\x3c|\x3e|\x5b|\x5d|\x7f).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\(|\)|<|>|%3c|%3e).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\x00|\x04|\x08|\x0d|\x1b|\x20|\x3c|\x3e|\x7f).* [NC,OR]
 RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
 RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
 RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]
@@ -210,7 +198,7 @@ Deny from all
 #RewriteRule .*\.(jpeg|jpg|gif|bmp|png)$ - [F]
 
 # FORBID COMMENT SPAMMERS ACCESS TO YOUR wp-comments-post.php FILE
-# This is a better approach to blocking Comment Spammers so that you do not
+# This is a better approach to blocking Comment Spammers so that you do not 
 # accidentally block good traffic to your website. You can add additional
 # Comment Spammer IP addresses on a case by case basis below.
 # Searchable Database of known Comment Spammers http://www.stopforumspam.com/

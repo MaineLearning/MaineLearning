@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Post
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -39,6 +39,25 @@ function genesis_reset_loops() {
 	$_genesis_loop_args = array();
 
 	do_action( 'genesis_reset_loops' );
+
+}
+
+add_filter( 'post_class', 'genesis_entry_post_class' );
+/**
+ * Adds .entry post class.
+ * 
+ * @since 1.9.0
+ * @todo remove .hentry with GHTML5 in 2.0
+ *
+ * @param  array Array of post classes.
+ * @return array Modified array of post classes.
+ */
+function genesis_entry_post_class( $classes ) {
+
+	/** Add "entry" to the post class array */
+	$classes[] = 'entry';
+	
+	return $classes;
 
 }
 
@@ -113,17 +132,19 @@ add_action( 'genesis_post_title', 'genesis_do_post_title' );
  */
 function genesis_do_post_title() {
 
-	$title = get_the_title();
+	$title = apply_filters( 'genesis_post_title_text', get_the_title() );
 
-	if ( strlen( $title ) == 0 )
+	if ( 0 == strlen( $title ) )
 		return;
 
 	if ( is_singular() )
-		$title = sprintf( '<h1 class="entry-title">%s</h1>', apply_filters( 'genesis_post_title_text', $title ) );
-	else
+		$title = sprintf( '<h1 class="entry-title">%s</h1>', $title );
+	elseif ( apply_filters( 'genesis_link_post_title', true ) )
 		$title = sprintf( '<h2 class="entry-title"><a href="%s" title="%s" rel="bookmark">%s</a></h2>', get_permalink(), the_title_attribute( 'echo=0' ), apply_filters( 'genesis_post_title_text', $title ) );
+	else
+		$title = sprintf( '<h2 class="entry-title">%s</h2>', $title );
 
-	echo apply_filters( 'genesis_post_title_output', $title ) . "\n";
+	echo apply_filters( 'genesis_post_title_output', "$title \n" );
 
 }
 
@@ -145,7 +166,9 @@ function genesis_do_post_image() {
 
 	if ( ! is_singular() && genesis_get_option( 'content_archive_thumbnail' ) ) {
 		$img = genesis_get_image( array( 'format' => 'html', 'size' => genesis_get_option( 'image_size' ), 'attr' => array( 'class' => 'alignleft post-image' ) ) );
-		printf( '<a href="%s" title="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), $img );
+		
+		if( ! empty( $img ) )
+			printf( '<a href="%s" title="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), $img );
 	}
 
 }
@@ -169,10 +192,12 @@ add_action( 'genesis_post_content', 'genesis_do_post_content' );
  */
 function genesis_do_post_content() {
 
+	global $post;
+
 	if ( is_singular() ) {
 		the_content();
 
-		if ( is_single() && 'open' == get_option( 'default_ping_status' ) ) {
+		if ( is_single() && 'open' == get_option( 'default_ping_status' ) && post_type_supports( $post->post_type, 'trackbacks' ) ) {
 			echo '<!--';
 			trackback_rdf();
 			echo '-->' . "\n";
@@ -228,10 +253,10 @@ function genesis_post_info() {
 
 	global $post;
 
-	if ( is_page( $post->ID ) )
+	if ( 'page' == get_post_type( $post->ID ) )
 		return;
 
-	$post_info = '[post_date] ' . __( 'By', 'genesis' ) . ' [post_author_posts_link] [post_comments] [post_edit]';
+	$post_info = '[post_date] ' . __( 'by', 'genesis' ) . ' [post_author_posts_link] [post_comments] [post_edit]';
 	printf( '<div class="post-info">%s</div>', apply_filters( 'genesis_post_info', $post_info ) );
 
 }
@@ -255,7 +280,7 @@ function genesis_post_meta() {
 
 	global $post;
 
-	if ( is_page( $post->ID ) )
+	if ( 'page' == get_post_type( $post->ID ) )
 		return;
 
 	$post_meta = '[post_categories] [post_tags]';
@@ -297,8 +322,9 @@ function genesis_do_author_box_single() {
  * @global WP_User $authordata Author (user) object
  * @param string $context Optional. Allows different author box markup for
  * different contexts, specifically 'single'. Default is empty string.
+ * @param bool $echo Optional. If true, the author box will echo. If falls, it will be returned.
  */
-function genesis_author_box( $context = '' ) {
+function genesis_author_box( $context = '', $echo = true ) {
 
 	global $authordata;
 
@@ -311,7 +337,13 @@ function genesis_author_box( $context = '' ) {
 	/** The author box markup, contextual */
 	$pattern = $context == 'single' ? '<div class="author-box"><div>%s %s<br />%s</div></div><!-- end .authorbox-->' : '<div class="author-box">%s<h1>%s</h1><div>%s</div></div><!-- end .authorbox-->';
 
-	echo apply_filters( 'genesis_author_box', sprintf( $pattern, $gravatar, $title, $description ), $context, $pattern, $gravatar, $title, $description );
+	$output = apply_filters( 'genesis_author_box', sprintf( $pattern, $gravatar, $title, $description ), $context, $pattern, $gravatar, $title, $description );
+	
+	/** Echo or return */
+	if ( $echo )
+		echo $output;
+	else
+		return $output;
 
 }
 
@@ -341,12 +373,11 @@ function genesis_posts_nav() {
  *
  * @since 0.2.2
  *
- * @uses g_ent() Pass entities through filter
  */
 function genesis_older_newer_posts_nav() {
 
-	$older_link = get_next_posts_link( apply_filters( 'genesis_older_link_text', g_ent( '&laquo; ' ) . __( 'Older Posts', 'genesis' ) ) );
-	$newer_link = get_previous_posts_link( apply_filters( 'genesis_newer_link_text', __( 'Newer Posts', 'genesis' ) . g_ent( ' &raquo;' ) ) );
+	$older_link = get_next_posts_link( apply_filters( 'genesis_older_link_text', '&#x000AB;' . __( 'Older Posts', 'genesis' ) ) );
+	$newer_link = get_previous_posts_link( apply_filters( 'genesis_newer_link_text', __( 'Newer Posts', 'genesis' ) . '&#x000BB;' ) );
 
 	$older = $older_link ? '<div class="alignleft">' . $older_link . '</div>' : '';
 	$newer = $newer_link ? '<div class="alignright">' . $newer_link . '</div>' : '';
@@ -363,12 +394,11 @@ function genesis_older_newer_posts_nav() {
  *
  * @since 0.2.2
  *
- * @uses g_ent() Pass entities through filter
  */
 function genesis_prev_next_posts_nav() {
 
-	$prev_link = get_previous_posts_link( apply_filters( 'genesis_prev_link_text', g_ent( '&laquo; ' ) . __( 'Previous Page', 'genesis' ) ) );
-	$next_link = get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . g_ent( ' &raquo;' ) ) );
+	$prev_link = get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '&#x000AB;' . __( 'Previous Page', 'genesis' ) ) );
+	$next_link = get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . '&#x000BB;' ) );
 
 	$prev = $prev_link ? '<div class="alignleft">' . $prev_link . '</div>' : '';
 	$next = $next_link ? '<div class="alignright">' . $next_link . '</div>' : '';
@@ -392,8 +422,6 @@ function genesis_prev_next_posts_nav() {
  *   next page arrow.
  *
  * @since 0.2.3
- *
- * @uses g_ent() Pass entities through filter
  *
  * @global WP_Query $wp_query Query object
  * @return null Returns early if on a single post or page, or only 1 page present
@@ -431,7 +459,7 @@ function genesis_numeric_posts_nav() {
 
 	/**	Previous Post Link */
 	if ( get_previous_posts_link() )
-		printf( '<li>%s</li>' . "\n", get_previous_posts_link( apply_filters( 'genesis_prev_link_text', g_ent( '&laquo; ' ) . __( 'Previous Page', 'genesis' ) ) ) );
+		printf( '<li>%s</li>' . "\n", get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '&#x000AB;' . __( 'Previous Page', 'genesis' ) ) ) );
 
 	/**	Link to first page, plus ellipses if necessary */
 	if ( ! in_array( 1, $links ) ) {
@@ -440,7 +468,7 @@ function genesis_numeric_posts_nav() {
 		printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
 
 		if ( ! in_array( 2, $links ) )
-			echo g_ent( '<li>&hellip;</li>' );
+			echo '<li>&#x02026;</li>';
 	}
 
 	/**	Link to current page, plus 2 pages in either direction if necessary */
@@ -453,7 +481,7 @@ function genesis_numeric_posts_nav() {
 	/**	Link to last page, plus ellipses if necessary */
 	if ( ! in_array( $max, $links ) ) {
 		if ( ! in_array( $max - 1, $links ) )
-			echo g_ent( '<li>&hellip;</li>' ) . "\n";
+			echo '<li>&#x02026;</li>' . "\n";
 
 		$class = $paged == $max ? ' class="active"' : '';
 		printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
@@ -461,7 +489,7 @@ function genesis_numeric_posts_nav() {
 
 	/**	Next Post Link */
 	if ( get_next_posts_link() )
-		printf( '<li>%s</li>' . "\n", get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . g_ent( ' &raquo;' ) ) ) );
+		printf( '<li>%s</li>' . "\n", get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . '&#x000BB;' ) ) );
 
 	echo '</ul></div>' . "\n";
 

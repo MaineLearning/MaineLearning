@@ -395,9 +395,10 @@ jQuery(document).ready(function() {
 		var idcountry = jQuery('#notification_rules_select_ticket_country option:selected').val();
 		var idcompany = jQuery('#notification_rules_select_ticket_company option:selected').val();
 		var idcategorie = jQuery('#notification_rules_select_category option:selected').val();
+		var idrulescope = jQuery('#notification_rules_select_rule_scope option:selected').val();
 		var listvalue = jQuery("#rule_mailing_list").val();
 		wats_loading(document.getElementById("resultaddrule"),watsmsg[4]);
-		jQuery.post(ajaxurl, {action:"wats_admin_insert_notification_rule_entry", _ajax_nonce:jQuery("#_wpnonce").val(), 'cookie': encodeURIComponent(document.cookie), idtype:idtype, idpriority:idpriority, idstatus:idstatus, idproduct:idproduct, idcountry:idcountry, idcompany:idcompany, idcategorie:idcategorie, listvalue:listvalue},
+		jQuery.post(ajaxurl, {action:"wats_admin_insert_notification_rule_entry", _ajax_nonce:jQuery("#_wpnonce").val(), 'cookie': encodeURIComponent(document.cookie), idtype:idtype, idpriority:idpriority, idstatus:idstatus, idproduct:idproduct, idcountry:idcountry, idcompany:idcompany, idcategorie:idcategorie, listvalue:listvalue, idrulescope:idrulescope},
 		function(res)
 		{
 			jQuery('#idaddrule').removeAttr('disabled');
@@ -584,6 +585,73 @@ jQuery(document).ready(function() {
 	});
 	
 	jQuery('#wats_custom_fields_selector').change();
+	
+	var selected_guestlist_ac = 0;
+	jQuery('#guestlist_ac').autocomplete({
+						source: function(request,response)  {
+						jQuery.ajax({
+							url: ajaxurl+"?action=wats_ajax_admin_get_user_list",
+							dataType: "json",
+							data: {	
+								value:jQuery('#guestlist_ac').val(),
+								type:'guestlist',
+								_ajax_nonce:jQuery("#_wpnonce").val(),
+								'cookie': encodeURIComponent(document.cookie)
+							},
+							success: function(data) {
+								if (jQuery.isEmptyObject(data) == true)
+									jQuery('#guestlist').val("-1");
+								response( jQuery.map(data, function(item)
+								{ return{value:item.label,label:item.label,hidden:item.value} }));
+							}
+							});
+						},
+						select: function(event,ui) {
+							selected_guestlist_ac = 1;
+							jQuery('#guestlist').val(ui.item.hidden);
+						},
+						close : function(event,ui) {
+							if (selected_guestlist_ac == 0)	
+								jQuery('#defaultauthorlist').val("-1");
+							selected_guestlist_ac = 0;
+						},
+						minLength:3,
+						delay:300
+	});
+
+	var selected_defaultauthorlist_ac = 0;
+	jQuery('#defaultauthorlist_ac').autocomplete({
+						source: function(request,response)  {
+						jQuery.ajax({
+							url: ajaxurl+"?action=wats_ajax_admin_get_user_list",
+							dataType: "json",
+							data: {	
+								value:jQuery('#defaultauthorlist_ac').val(),
+								type:'defaultauthorlist',
+								_ajax_nonce:jQuery("#_wpnonce").val(),
+								'cookie': encodeURIComponent(document.cookie)
+							},
+							success: function(data) {
+								if (jQuery.isEmptyObject(data) == true)
+									jQuery('#defaultauthorlist').val("-1");
+								response(
+								jQuery.map(data, function(item)
+								{ return{value:item.label,label:item.label,hidden:item.value} }));
+							}
+							});
+						},
+						select: function(event,ui) {
+							selected_defaultauthorlist_ac = 1;
+							jQuery('#defaultauthorlist').val(ui.item.hidden);
+						},
+						close : function(event,ui) {
+							if (selected_defaultauthorlist_ac == 0)	
+								jQuery('#defaultauthorlist').val("-1");
+							selected_defaultauthorlist_ac = 0;
+						},
+						minLength:3,
+						delay:300
+	});
 	
 function wats_js_options_bind_edit_custom_field()
 {

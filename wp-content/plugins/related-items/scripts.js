@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
           title = $('#related-items-select :selected').text();
 		
 		if ($('#related-item-' + id).length == 0 && title !== "Select") {
-			container.append('<div class="related-item" id="related-item-' + id + '"><img src="/wp-content/plugins/related-items/images/bullet_red.png" title="Remember to save this post when you are finished making changes"><input type="hidden" name="related-items[]" value="' + id + '"><span class="related-item-title">' + title + '</span><a href="#" title="Remove from list"><img src="/wp-content/plugins/related-items/images/delete.png"></a></div>');
+			container.append('<div class="related-item" id="related-item-' + id + '"><img src="'+wpurl+'/wp-content/plugins/related-items/images/bullet_red.png" title="Remember to save this post when you are finished making changes"><input type="hidden" name="related-items[]" value="' + id + '"><span class="related-item-title">' + title + '</span><a href="#" title="Remove from list"><img src="'+wpurl+'/wp-content/plugins/related-items/images/delete.png"></a></div>');
 		}
 	});
   

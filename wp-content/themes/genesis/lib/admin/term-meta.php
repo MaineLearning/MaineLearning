@@ -6,7 +6,7 @@
  * @package    Admin
  * @subpackage Term-Meta
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -244,8 +244,9 @@ function genesis_term_meta_save( $term_id, $tt_id ) {
 	$term_meta = (array) get_option( 'genesis-term-meta' );
 
 	$term_meta[$term_id] = isset( $_POST['meta'] ) ? (array) $_POST['meta'] : array();
+
 	if ( ! current_user_can( 'unfiltered_html' ) && isset( $term_meta[$term_id]['archive_description'] ) )
-		$term_meta[$term_id]['archive_description'] = wp_kses( $term_meta[$term_id]['archive_description'], genesis_formatting_allowedtags() );
+		$term_meta[$term_id]['archive_description'] = genesis_formatting_kses( $term_meta[$term_id]['archive_description'] );
 
 	update_option( 'genesis-term-meta', $term_meta );
 

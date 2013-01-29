@@ -8,17 +8,6 @@ require ( BP_LINKS_PLUGIN_DIR . '/bp-links-widgets.php' );
 require ( BP_LINKS_PLUGIN_DIR . '/bp-links-filters.php' );
 require ( BP_LINKS_PLUGIN_DIR . '/bp-links-dtheme.php' );
 
-function bp_links_add_cron_schedules() {
-	return array(
-		'5_min' => array( 'interval' => 5*60, 'display' => sprintf( __( 'Every %1$d minutes', 'buddypress-links' ), 5 ) ),
-		'10_min' => array( 'interval' => 10*60, 'display' => sprintf( __( 'Every %1$d minutes', 'buddypress-links' ), 10 ) ),
-		'15_min' => array( 'interval' => 15*60, 'display' => sprintf( __( 'Every %1$d minutes', 'buddypress-links' ), 15 ) ),
-		'20_min' => array( 'interval' => 20*60, 'display' => sprintf( __( 'Every %1$d minutes', 'buddypress-links' ), 20 ) ),
-		'30_min' => array( 'interval' => 30*60, 'display' => sprintf( __( 'Every %1$d minutes', 'buddypress-links' ), 30 ) )
-	);
-}
-add_filter( 'cron_schedules', 'bp_links_add_cron_schedules' );
-
 /**
  * Return the links unique component id
  * 
@@ -295,7 +284,7 @@ function bp_links_setup_admin()
 
 	// set up cron for popularity recalc
 	if ( !wp_next_scheduled( 'bp_links_cron_popularity' ) ) {
-		wp_schedule_event( time(), '15_min', 'bp_links_cron_popularity' );
+		wp_schedule_event( time(), 'hourly', 'bp_links_cron_popularity' );
 	}
 
 	do_action( 'bp_links_setup_admin' );

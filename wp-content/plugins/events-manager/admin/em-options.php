@@ -14,11 +14,17 @@ function em_options_save(){
 			if( substr($postKey, 0, 5) == 'dbem_' ){
 				//TODO some more validation/reporting
 				$numeric_options = array('dbem_locations_default_limit','dbem_events_default_limit');
+				if( in_array($postKey, array('dbem_bookings_notify_admin','dbem_event_submitted_email_admin','dbem_js_limit_events_form','dbem_js_limit_search','dbem_js_limit_general','dbem_css_limit_include','dbem_css_limit_exclude')) ){ $postValue = str_replace(' ', '', $postValue); } //clean up comma seperated emails, no spaces needed
 				if( in_array($postKey,$numeric_options) && !is_numeric($postValue) ){
 					//Do nothing, keep old setting.
 				}else{
 					//TODO slashes being added?
-					update_option($postKey, stripslashes($postValue));
+					if( is_array($postValue) ){
+					    foreach($postValue as $postValue_key=>$postValue_val) $postValue[$postValue_key] = stripslashes($postValue_val);
+					}else{
+					    $postValue = stripslashes($postValue);
+					}
+					update_option($postKey, $postValue);
 				}
 			}
 		}
@@ -238,7 +244,7 @@ function em_admin_options_page() {
 	$bookings_placeholder_tip = " ". sprintf(__('This accepts %s, %s and %s placeholders.','dbem'), $bookings_placeholders, $events_placeholders, $locations_placeholders);
 	
 	global $save_button;
-	$save_button = '<tr><th>&nbsp;</th><td><p class="submit" style="margin:0px; padding:0px; text-align:right;"><input type="submit" id="dbem_options_submit" name="Submit" value="'. __( 'Save Changes', 'dbem') .' ('. __('All','dbem') .')" /></p></ts></td></tr>';
+	$save_button = '<tr><th>&nbsp;</th><td><p class="submit" style="margin:0px; padding:0px; text-align:right;"><input type="submit" class="button-primary" id="dbem_options_submit" name="Submit" value="'. __( 'Save Changes', 'dbem') .' ('. __('All','dbem') .')" /></p></ts></td></tr>';
 	?>
 	<script type="text/javascript" charset="utf-8">
 		jQuery(document).ready(function($){
@@ -308,6 +314,10 @@ function em_admin_options_page() {
 				}
 			});
 			$('input:radio[name=dbem_disable_title_rewrites]').trigger('change');
+			//ML Stuff
+			$('.em-translatable').click(function(){
+				$(this).nextAll('.em-ml-options').toggle();
+			});
 		});
 	</script>
 	<style type="text/css">.postbox h3 { cursor:pointer; }</style>
@@ -427,6 +437,7 @@ function em_admin_options_page() {
 							em_options_radio_binary ( __( 'Use Visual Editor?', 'dbem' ), 'dbem_events_form_editor', __( 'Users can now use the WordPress editor for easy HTML entry in the submission form.', 'dbem' ) );
 							em_options_radio_binary ( __( 'Show form again?', 'dbem' ), 'dbem_events_form_reshow', __( 'When a user submits their event, you can display a new event form again.', 'dbem' ) );
 							em_options_textarea ( __( 'Success Message', 'dbem' ), 'dbem_events_form_result_success', __( 'Customize the message your user sees when they submitted their event.', 'dbem' ).$events_placeholder_tip );
+							em_options_textarea ( __( 'Successfully Updated Message', 'dbem' ), 'dbem_events_form_result_success_updated', __( 'Customize the message your user sees when they resubmit/update their event.', 'dbem' ).$events_placeholder_tip );
 						?>
 			            <tr><td colspan="2">
 			            	<strong><?php echo sprintf(__('Anonymous event submissions','dbem'), '<code>[event_form]</code>'); ?></strong>
@@ -442,6 +453,85 @@ function em_admin_options_page() {
 				</div> <!-- .postbox --> 
 
 				<?php do_action('em_options_page_footer'); ?>
+				
+				<div  class="postbox" >
+				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Performance Optimization', 'dbem' ); ?> (<?php _e('Advanced','dbem'); ?>) <em>Beta</em></span></h3>
+				<div class="inside">
+					<?php 
+						$performance_opt_page_instructions = __('In the boxes below, you are expected to write the page IDs. For multiple pages, use comma-seperated values e.g. 1,2,3. Entering 0 means EVERY page, -1 means the home page.','dbem');
+					?>
+					<p><?php _e('This section allows you to configure parts of this plugin that will improve performance on your site and increase page speeds by reducing extra files from being unnecessarily included on pages as well as reducing server loads where possible. This only applies to pages outside the admin area.','dbem'); ?></p>
+					<p><em><strong><?php _e('Warning!','dbem'); ?></strong> <?php echo sprintf(__('This is for advanced users, you should know what you\'re doing here or things will not work properly. For more information on how these options work see our <a href="%s" target="_blank">optimization recommendations</a>','dbem'), 'http://wp-events-plugin.com/documentation/optimization-recommendations/'); ?></em></p>
+			            <table class="form-table">
+			            <tr><td colspan="2">
+			            	<strong><?php _e('JavaScript Files','dbem'); ?></strong>
+			            	<p><?php echo sprintf(__('If you are not using it already, we recommend you try the <a href="%s" target="_blank">Use Google Libraries</a> plugin, because without further optimization options below it already significantly reduces the number of files needed to display your Event pages and will most likely speed up your overall website loading time.' ,'dbem'),'http://wordpress.org/extend/plugins/use-google-libraries/'); ?>
+						</td></tr>
+						<?php
+							em_options_radio_binary ( __( 'Limit JS file loading?', 'dbem' ), 'dbem_js_limit', __( 'Prevent unnecessary loading of JavaScript files on pages where they are not needed.', 'dbem' ) );
+						?>
+						<tbody id="dbem-js-limit-options">
+							<tr><td colspan="2">
+				            	<?php 
+				            	_e('Aside from pages we automatically generate and include certain jQuery files, if you are using Widgets, Shortcode or PHP to display specific items you may need to tell us where you are using them for them to work properly. Below are options for you to include specific jQuery dependencies only on certain pages.','dbem');
+				            	echo $performance_opt_page_instructions;
+				            	?>
+							</td></tr>
+							<?php
+							em_options_input_text( __( 'General JS', 'dbem' ), 'dbem_js_limit_general', __( 'Loads our own JS file if no other dependencies are already loaded, which is still needed for many items generated by EM using JavaScript such as Calendars, Maps and Booking Forms/Buttons', 'dbem' ), 0 );
+							em_options_input_text( __( 'Search Forms', 'dbem' ), 'dbem_js_limit_search', __( 'Include pages where you use shortcodes or widgets to display event search forms.', 'dbem' ) );
+							em_options_input_text( __( 'Event Edit and Submission Forms', 'dbem' ), 'dbem_js_limit_events_form', __( 'Include pages where you use shortcode or PHP to display event submission forms.', 'dbem' ) );
+							em_options_input_text( __( 'Booking Management Pages', 'dbem' ), 'dbem_js_limit_edit_bookings', __( 'Include pages where you use shortcode or PHP to display event submission forms.', 'dbem' ) );
+							?>
+						</tbody>
+			            <tr><td colspan="2" style="font-weight:bold;">
+			            	<?php _e('CSS File','dbem'); ?>
+						</td></tr>
+			            <?php
+							em_options_radio_binary ( __( 'Limit loading of our CSS files?', 'dbem' ), 'dbem_css_limit', __( 'Enabling this will prevent us from loading our CSS file on every page, and will only load on specific pages generated by Events Manager.', 'dbem' ) );
+							?>
+							<tbody id="dbem-css-limit-options">
+							<tr><td colspan="2">
+				            	<?php echo $performance_opt_page_instructions; ?>
+							</td></tr>
+							<?php
+							em_options_input_text( __( 'Include on', 'dbem' ), 'dbem_css_limit_include', __( 'Our CSS file will only be INCLUDED on all of these pages.', 'dbem' ), 0 );
+							em_options_input_text( __( 'Exclude on', 'dbem' ), 'dbem_css_limit_exclude', __( 'Our CSS file will be EXCLUDED on all of these pages. Takes precedence over inclusion rules.', 'dbem' ), 0 );
+			            	?>
+			            	</tbody>
+			            	<?php
+						?>
+			            <tr><td colspan="2">
+			            	<strong><?php _e('Thumbnails','dbem'); ?></strong>
+			            	<p><?php _e('By default we used to use TimThumb (in some cases we still do), which is supplied with our plugin, to generate all your thumbnails, alternatively you can use the default WordPress thumbnail generator which is less resource intensive.' ,'dbem'); ?>
+						</td></tr>
+			            <?php
+						em_options_radio_binary ( __( 'Use WordPress thumbnails?', 'dbem' ), 'dbem_disable_timthumb', __( 'Recommended you enable this, as it will speed up your site page loading times if displaying many thumbnails on your pages.', 'dbem' ) );
+						?>
+				        <?php echo $save_button; ?>
+					</table>
+					<script type="text/javascript">
+						jQuery(document).ready(function($){
+							$('input:radio[name="dbem_js_limit"]').change(function(){
+								if( $('input:radio[name="dbem_js_limit"]:checked').val() == 1 ){
+									$('tbody#dbem-js-limit-options').show();
+								}else{
+									$('tbody#dbem-js-limit-options').hide();					
+								}
+							}).trigger('change');
+						});
+						jQuery(document).ready(function($){
+							$('input:radio[name="dbem_css_limit"]').change(function(){
+								if( $('input:radio[name="dbem_css_limit"]:checked').val() == 1 ){
+									$('tbody#dbem-css-limit-options').show();
+								}else{
+									$('tbody#dbem-css-limit-options').hide();					
+								}
+							}).trigger('change');
+						});
+					</script>
+				</div> <!-- . inside --> 
+				</div> <!-- .postbox --> 
 				
 				<?php if ( !is_multisite() ) { em_admin_option_box_uninstall(); } ?>
 				
@@ -663,6 +753,7 @@ function em_admin_options_page() {
 	            	em_options_radio_binary ( sprintf(__( 'Display %s as', 'dbem' ),__('locations','dbem')), 'dbem_cp_locations_template_page', sprintf($template_page_tip, EM_POST_TYPE_LOCATION), array(__('Posts'),__('Pages')) );
 	            	em_options_radio_binary ( __( 'Override with Formats?', 'dbem' ), 'dbem_cp_locations_formats', sprintf($format_override_tip,__('locations','dbem')));
 	            	em_options_radio_binary ( __( 'Enable Comments?', 'dbem' ), 'dbem_cp_locations_comments', sprintf(__('If you would like to disable comments entirely, disable this, otherwise you can disable comments on each single %s. Note that %s with comments enabled will still be until you resave them.','dbem'),__('location','dbem'),__('locations','dbem')));
+					em_options_input_text ( __( 'Event List Limits', 'dbem' ), 'dbem_location_event_list_limit', sprintf(__( "Controls how many events being held at a location are shown per page when using placeholders such as %s. Leave blank for no limit.", 'dbem' ), '<code>#_LOCATIONNEXTEVENTS</code>') );
 	            	echo $save_button;
 					?>
 	            	</table>
@@ -873,6 +964,7 @@ function em_admin_options_page() {
 				   	</tr>
 					<?php
 					em_options_input_text ( __( 'List Limits', 'dbem' ), 'dbem_categories_default_limit', sprintf(__( "This will control how many %s are shown on one list by default.", 'dbem' ),__('categories','dbem')) );
+					em_options_input_text ( __( 'Event List Limits', 'dbem' ), 'dbem_category_event_list_limit', sprintf(__( "Controls how many events belonging to a category are shown per page when using placeholders such as %s. Leave blank for no limit.", 'dbem' ), '<code>#_CATEGORYNEXTEVENTS</code>') );
 	            	echo $save_button;
 					?>
 	            	</table>
@@ -1168,9 +1260,9 @@ function em_admin_options_page() {
 					 	<tr><td><strong><?php echo sprintf(__('%s List Formats','dbem'),__('Event','dbem')); ?></strong></td></tr>
 					 	<?php
 					 	em_options_input_text ( __( 'Default event list format header', 'dbem' ), 'dbem_location_event_list_item_header_format', __( 'This content will appear just above your code for the default event list format. Default is blank', 'dbem' ) );
-					 	em_options_textarea ( sprintf(__( 'Default %s list format', 'dbem' ),__('events','dbem')), 'dbem_location_event_list_item_format', __( 'The format of the events the list inserted in the location page through the <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>#_LOCATIONALLEVENTS</code> element.', 'dbem' ).$locations_placeholder_tip );
+					 	em_options_textarea ( sprintf(__( 'Default %s list format', 'dbem' ),__('events','dbem')), 'dbem_location_event_list_item_format', sprintf(__( 'The format of the events the list inserted in the location page through the %s element.', 'dbem' ).$locations_placeholder_tip, '<code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONPASTEVENTS</code>, <code>#_LOCATIONALLEVENTS</code>') );
 						em_options_input_text ( __( 'Default event list format footer', 'dbem' ), 'dbem_location_event_list_item_footer_format', __( 'This content will appear just below your code for the default event list format. Default is blank', 'dbem' ) );
-						em_options_textarea ( sprintf(__( 'No %s message', 'dbem' ),__('events','dbem')), 'dbem_location_no_events_message', __( 'The message to be displayed in the list generated by <code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONNEXTEVENTS</code> and <code>#_LOCATIONALLEVENTS</code> when no events are available.', 'dbem' ) );
+						em_options_textarea ( sprintf(__( 'No %s message', 'dbem' ),__('events','dbem')), 'dbem_location_no_events_message', sprintf(__( 'The message to be displayed in the list generated by %s when no events are available.', 'dbem' ), '<code>#_LOCATIONNEXTEVENTS</code>, <code>#_LOCATIONPASTEVENTS</code>, <code>#_LOCATIONALLEVENTS</code>') );
 						echo $save_button;
 						?>
 					</table>
@@ -1198,9 +1290,9 @@ function em_admin_options_page() {
 					 	<tr><td><strong><?php echo sprintf(__('%s List Formats','dbem'),__('Event','dbem')); ?></strong></td></tr>
 					 	<?php
 					 	em_options_input_text ( __( 'Default event list format header', 'dbem' ), 'dbem_category_event_list_item_header_format', __( 'This content will appear just above your code for the default event list format. Default is blank', 'dbem' ) );
-					 	em_options_textarea ( sprintf(__( 'Default %s list format', 'dbem' ),__('events','dbem')), 'dbem_category_event_list_item_format', __( 'The format of the events the list inserted in the category page through the <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>#_CATEGORYALLEVENTS</code> element.', 'dbem' ).$categories_placeholder_tip );
+					 	em_options_textarea ( sprintf(__( 'Default %s list format', 'dbem' ),__('events','dbem')), 'dbem_category_event_list_item_format', sprintf(__( 'The format of the events the list inserted in the category page through the %s element.', 'dbem' ).$categories_placeholder_tip, '<code>#_CATEGORYPASTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYALLEVENTS</code>') );
 						em_options_input_text ( __( 'Default event list format footer', 'dbem' ), 'dbem_category_event_list_item_footer_format', __( 'This content will appear just below your code for the default event list format. Default is blank', 'dbem' ) );
-						em_options_textarea ( sprintf(__( 'No %s message', 'dbem' ),__('events','dbem')), 'dbem_category_no_events_message', __( 'The message to be displayed in the list generated by <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code> and <code>#_CATEGORYALLEVENTS</code> when no events are available.', 'dbem' ) );
+						em_options_textarea ( sprintf(__( 'No %s message', 'dbem' ),__('events','dbem')), 'dbem_category_no_events_message', sprintf(__( 'The message to be displayed in the list generated by %s when no events are available.', 'dbem' ), '<code>#_CATEGORYPASTEVENTS</code>, <code>#_CATEGORYNEXTEVENTS</code>, <code>#_CATEGORYALLEVENTS</code>') );
 						echo $save_button;
 						?>
 					</table>
@@ -1553,7 +1645,7 @@ function em_admin_options_page() {
 			*/ ?>
 
 			<p class="submit">
-				<input type="submit" id="dbem_options_submit" name="Submit" value="<?php _e ( 'Save Changes' )?>" />
+				<input type="submit" id="dbem_options_submit" class="button-primary" name="Submit" value="<?php _e ( 'Save Changes' )?>" />
 				<input type="hidden" name="em-submitted" value="1" />
 				<input type="hidden" name="_wpnonce" value="<?php echo wp_create_nonce('events-manager-options'); ?>" />
 			</p>  
@@ -1775,6 +1867,7 @@ function em_admin_option_box_caps(){
 }
 
 function em_admin_option_box_uninstall(){
+	global $save_button;
 	if( is_multisite() ){
 		$uninstall_url = admin_url().'network/admin.php?page=events-manager-options&amp;action=uninstall&amp;_wpnonce='.wp_create_nonce('em_uninstall_'.get_current_user_id().'_wpnonce');
 		$reset_url = admin_url().'network/admin.php?page=events-manager-options&amp;action=reset&amp;_wpnonce='.wp_create_nonce('em_reset_'.get_current_user_id().'_wpnonce');
@@ -1788,7 +1881,7 @@ function em_admin_option_box_uninstall(){
 	}
 	?>
 	<div  class="postbox" >
-		<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Admin Tools', 'dbem' ); ?> (<?php _e ( 'Uninstall/Reset', 'dbem' ); ?>)</span></h3>
+		<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Admin Tools', 'dbem' ); ?> (<?php _e ( 'Advanced', 'dbem' ); ?>)</span></h3>
 		<div class="inside">
 			<h4 style="font-size:1.1em;"><?php _e ( 'Development Versions &amp; Updates', 'dbem' ); ?></h4>
 			<p><?php _e('We\'re always making improvements, adding features and fixing bugs between releases. We incrementally make these changes in between updates and make it available as a development version. You can download these manually, but we\'ve made it easy for you. <strong>Warning:</strong> Development versions are not always fully tested before release, use wisely!'); ?></p>
@@ -1802,6 +1895,9 @@ function em_admin_option_box_uninstall(){
 			<p><?php _e('Use the buttons below to uninstall Events Manager completely from your system or reset Events Manager to original settings and keep your event data.','dbem'); ?></p>
 			<a href="<?php echo $uninstall_url; ?>" class="button-secondary"><?php _e('Uninstall','dbem'); ?></a>
 			<a href="<?php echo $reset_url; ?>" class="button-secondary"><?php _e('Reset','dbem'); ?></a>
+			
+			<?php do_action('em_options_page_panel_admin_tools'); ?>
+			<?php echo $save_button; ?>
 		</div>
 	</div>
 	<?php	

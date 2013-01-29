@@ -59,12 +59,12 @@ $hours_format = em_get_hour_format();
 			<input id="end-time" class="em-time-input em-time-end" type="text" size="8" maxlength="8" name="event_end_time" value="<?php echo date( $hours_format, $EM_Event->end ); ?>" />
 			<?php _e('All day','dbem'); ?> <input type="checkbox" class="em-time-allday" name="event_all_day" id="em-time-all-day" value="1" <?php if(!empty($EM_Event->event_all_day)) echo 'checked="checked"'; ?> />
 		</p>
-		<p>
+		<p class="em-duration-range">
 			<?php _e('Each event lasts','dbem'); ?>
 			<input id="end-days" type="text" size="8" maxlength="8" name="recurrence_days" value="<?php echo $EM_Event->recurrence_days; ?>" />
 			<?php _e('day(s)','dbem'); ?>
 		</p>
-		<p><em><?php _e( 'For a recurring event, a one day event will be created on each recurring date within this date range.', 'dbem' ); ?></em></p>
+		<p class="em-range-description"><em><?php _e( 'For a recurring event, a one day event will be created on each recurring date within this date range.', 'dbem' ); ?></em></p>
 	</div> 
 	<script type="text/javascript">
 		jQuery(document).ready( function($) {

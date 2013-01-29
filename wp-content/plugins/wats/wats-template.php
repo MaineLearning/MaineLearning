@@ -66,7 +66,6 @@ function wats_check_visibility_rights()
 	return false;
 }
 
-
 /********************************************************************************/
 /*                                                                              */
 /* Fonction de filtrage sur le contenu pour l'affichage de la table des tickets */

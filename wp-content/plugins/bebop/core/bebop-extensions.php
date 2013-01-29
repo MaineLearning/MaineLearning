@@ -154,11 +154,7 @@ class bebop_extensions {
 			include $extension_path . 'templates/admin-settings.php';
 		}
 		else {
-			echo '<div class="bebop_error_box"><b>';
-			_e('Bebop Error', 'bebop' );
-			echo ':</b> ';
-			sprintf( __( '%1$s is not a valid extension.', 'bebop' ), $extension_name );
-			echo '</div>';
+			echo '<div class="bebop_error_box"><b>' . __( 'Bebop Error', 'bebop' ) . ':</b> ' . sprintf( __( '%1$s is not a valid extension.', 'bebop' ), $extension_name ) .'</div>';
 			include_once( WP_PLUGIN_DIR . '/bebop/core/templates/admin/bebop-admin-menu.php' );
 		}
 	}

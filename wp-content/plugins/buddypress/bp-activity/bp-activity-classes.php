@@ -56,7 +56,7 @@ class BP_Activity_Activity {
 	}
 
 	function save() {
-		global $wpdb, $bp, $current_user;
+		global $wpdb, $bp;
 
 		$this->id                = apply_filters_ref_array( 'bp_activity_id_before_save',                array( $this->id,                &$this ) );
 		$this->item_id           = apply_filters_ref_array( 'bp_activity_item_id_before_save',           array( $this->item_id,           &$this ) );
@@ -83,21 +83,23 @@ class BP_Activity_Activity {
 			$this->primary_link = bp_loggedin_user_domain();
 
 		// If we have an existing ID, update the activity item, otherwise insert it.
-		if ( $this->id )
-			$q = $wpdb->prepare( "UPDATE {$bp->activity->table_name} SET user_id = %d, component = %s, type = %s, action = %s, content = %s, primary_link = %s, date_recorded = %s, item_id = %s, secondary_item_id = %s, hide_sitewide = %d, is_spam = %d WHERE id = %d", $this->user_id, $this->component, $this->type, $this->action, $this->content, $this->primary_link, $this->date_recorded, $this->item_id, $this->secondary_item_id, $this->hide_sitewide, $this->is_spam, $this->id );
-		else
-			$q = $wpdb->prepare( "INSERT INTO {$bp->activity->table_name} ( user_id, component, type, action, content, primary_link, date_recorded, item_id, secondary_item_id, hide_sitewide, is_spam ) VALUES ( %d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %d )", $this->user_id, $this->component, $this->type, $this->action, $this->content, $this->primary_link, $this->date_recorded, $this->item_id, $this->secondary_item_id, $this->hide_sitewide, $this->is_spam );
+		if ( $this->id ) {
+			$q = $wpdb->prepare( "UPDATE {$bp->activity->table_name} SET user_id = %d, component = %s, type = %s, action = %s, content = %s, primary_link = %s, date_recorded = %s, item_id = %d, secondary_item_id = %d, hide_sitewide = %d, is_spam = %d WHERE id = %d", $this->user_id, $this->component, $this->type, $this->action, $this->content, $this->primary_link, $this->date_recorded, $this->item_id, $this->secondary_item_id, $this->hide_sitewide, $this->is_spam, $this->id );
+		} else {
+			$q = $wpdb->prepare( "INSERT INTO {$bp->activity->table_name} ( user_id, component, type, action, content, primary_link, date_recorded, item_id, secondary_item_id, hide_sitewide, is_spam ) VALUES ( %d, %s, %s, %s, %s, %s, %s, %d, %d, %d, %d )", $this->user_id, $this->component, $this->type, $this->action, $this->content, $this->primary_link, $this->date_recorded, $this->item_id, $this->secondary_item_id, $this->hide_sitewide, $this->is_spam );
+		}
 
 		if ( false === $wpdb->query( $q ) )
 			return false;
 
 		// If this is a new activity item, set the $id property
-		if ( empty( $this->id ) )
+		if ( empty( $this->id ) ) {
 			$this->id = $wpdb->insert_id;
 
 		// If an existing activity item, prevent any changes to the content generating new @mention notifications.
-		else
+		} else {
 			add_filter( 'bp_activity_at_name_do_notifications', '__return_false' );
+		}
 
 		do_action_ref_array( 'bp_activity_after_save', array( &$this ) );
 
@@ -216,7 +218,7 @@ class BP_Activity_Activity {
 		}
 
 		if ( !empty( $the_index ) ) {
-			$index_hint_sql = $wpdb->prepare( "USE INDEX ({$the_index})" ); 
+			$index_hint_sql = "USE INDEX ({$the_index})";
 		} else {
 			$index_hint_sql = '';
 		}
@@ -228,12 +230,12 @@ class BP_Activity_Activity {
 			$per_page = absint( $per_page );
 
 			$pag_sql    = $wpdb->prepare( "LIMIT %d, %d", absint( ( $page - 1 ) * $per_page ), $per_page );
-			$activities = $wpdb->get_results( apply_filters( 'bp_activity_get_user_join_filter', $wpdb->prepare( "{$select_sql} {$from_sql} {$where_sql} ORDER BY a.date_recorded {$sort} {$pag_sql}" ), $select_sql, $from_sql, $where_sql, $sort, $pag_sql ) );
+			$activities = $wpdb->get_results( apply_filters( 'bp_activity_get_user_join_filter', "{$select_sql} {$from_sql} {$where_sql} ORDER BY a.date_recorded {$sort} {$pag_sql}", $select_sql, $from_sql, $where_sql, $sort, $pag_sql ) );
 		} else {
-			$activities = $wpdb->get_results( apply_filters( 'bp_activity_get_user_join_filter', $wpdb->prepare( "{$select_sql} {$from_sql} {$where_sql} ORDER BY a.date_recorded {$sort}" ), $select_sql, $from_sql, $where_sql, $sort ) );
+			$activities = $wpdb->get_results( apply_filters( 'bp_activity_get_user_join_filter', "{$select_sql} {$from_sql} {$where_sql} ORDER BY a.date_recorded {$sort}", $select_sql, $from_sql, $where_sql, $sort ) );
 		}
 
-		$total_activities_sql = apply_filters( 'bp_activity_total_activities_sql', $wpdb->prepare( "SELECT count(a.id) FROM {$bp->activity->table_name} a {$index_hint_sql} {$where_sql} ORDER BY a.date_recorded {$sort}" ), $where_sql, $sort );
+		$total_activities_sql = apply_filters( 'bp_activity_total_activities_sql', "SELECT count(a.id) FROM {$bp->activity->table_name} a {$index_hint_sql} {$where_sql} ORDER BY a.date_recorded {$sort}", $where_sql, $sort );
 
 		$total_activities = $wpdb->get_var( $total_activities_sql );
 
@@ -247,7 +249,7 @@ class BP_Activity_Activity {
 
 			$activity_user_ids = implode( ',', array_unique( (array) $activity_user_ids ) );
 			if ( !empty( $activity_user_ids ) ) {
-				if ( $names = $wpdb->get_results( $wpdb->prepare( "SELECT user_id, value AS user_fullname FROM {$bp->profile->table_name_data} WHERE field_id = 1 AND user_id IN ({$activity_user_ids})" ) ) ) {
+				if ( $names = $wpdb->get_results( "SELECT user_id, value AS user_fullname FROM {$bp->profile->table_name_data} WHERE field_id = 1 AND user_id IN ({$activity_user_ids})" ) ) {
 					foreach ( (array) $names as $name )
 						$tmp_names[$name->user_id] = $name->user_fullname;
 
@@ -401,9 +403,9 @@ class BP_Activity_Activity {
 			return false;
 
 		// Fetch the activity IDs so we can delete any comments for this activity item
-		$activity_ids = $wpdb->get_col( $wpdb->prepare( "SELECT id FROM {$bp->activity->table_name} {$where_sql}" ) );
+		$activity_ids = $wpdb->get_col( "SELECT id FROM {$bp->activity->table_name} {$where_sql}" );
 
-		if ( !$wpdb->query( $wpdb->prepare( "DELETE FROM {$bp->activity->table_name} {$where_sql}" ) ) )
+		if ( !$wpdb->query( "DELETE FROM {$bp->activity->table_name} {$where_sql}" ) )
 			return false;
 
 		if ( $activity_ids ) {
@@ -424,7 +426,7 @@ class BP_Activity_Activity {
 		else
 			$activity_ids = implode ( ',', array_map( 'absint', explode ( ',', $activity_ids ) ) );
 
-		return $wpdb->query( $wpdb->prepare( "DELETE FROM {$bp->activity->table_name} WHERE type = 'activity_comment' AND item_id IN ({$activity_ids})" ) );
+		return $wpdb->query( "DELETE FROM {$bp->activity->table_name} WHERE type = 'activity_comment' AND item_id IN ({$activity_ids})" );
 	}
 
 	function delete_activity_meta_entries( $activity_ids ) {
@@ -435,7 +437,7 @@ class BP_Activity_Activity {
 		else
 			$activity_ids = implode ( ',', array_map( 'absint', explode ( ',', $activity_ids ) ) );
 
-		return $wpdb->query( $wpdb->prepare( "DELETE FROM {$bp->activity->table_name_meta} WHERE activity_id IN ({$activity_ids})" ) );
+		return $wpdb->query( "DELETE FROM {$bp->activity->table_name_meta} WHERE activity_id IN ({$activity_ids})" );
 	}
 
 	/**
@@ -560,7 +562,7 @@ class BP_Activity_Activity {
 	function get_recorded_components() {
 		global $wpdb, $bp;
 
-		return $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT component FROM {$bp->activity->table_name} ORDER BY component ASC" ) );
+		return $wpdb->get_col( "SELECT DISTINCT component FROM {$bp->activity->table_name} ORDER BY component ASC" );
 	}
 
 	function get_sitewide_items_for_feed( $limit = 35 ) {
@@ -647,7 +649,7 @@ class BP_Activity_Activity {
 	function get_last_updated() {
 		global $bp, $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare( "SELECT date_recorded FROM {$bp->activity->table_name} ORDER BY date_recorded DESC LIMIT 1" ) );
+		return $wpdb->get_var( "SELECT date_recorded FROM {$bp->activity->table_name} ORDER BY date_recorded DESC LIMIT 1" );
 	}
 
 	function total_favorite_count( $user_id ) {

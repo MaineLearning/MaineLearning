@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Widget-Areas
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -17,11 +17,11 @@
  *
  * A typical usage is:
  * <code>
- * genesis_register_sidebar(
+ * genesis_register_sidebar( array(
  *     'id'          => 'my-sidebar',
  *     'name'        => __( 'My Sidebar', 'my-theme-text-domain' ),
  *     'description' => __( 'A description of the intended purpose or location', 'my-theme-text-domain' ),
- * );
+ * ) );
  * </code>
  *
  * @since 1.0.1

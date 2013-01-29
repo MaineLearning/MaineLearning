@@ -233,8 +233,7 @@ class BP_Docs_Query {
 				$wp_query_args['post__in'] = $this->get_edited_by_post_ids();
 			}
 
-			// Access
-			$wp_query_args['tax_query'] = array_merge( $wp_query_args['tax_query'], $this->get_access_tax_query() );
+			// Access queries are handled at pre_get_posts, using bp_docs_general_access_protection()
 
 			// Set the taxonomy query. Filtered so that plugins can alter the query
 			// Filtering by groups also happens in this way
@@ -425,6 +424,7 @@ class BP_Docs_Query {
 		}
 
 		// Check group associations
+		// @todo Move into group integration piece
 		if ( ! empty( $_POST['associated_group_id'] ) ) {
 			if ( ! BP_Docs_Groups_Integration::user_can_associate_doc_with_group( bp_loggedin_user_id(), intval( $_POST['associated_group_id'] ) ) ) {
 				bp_core_add_message( __( 'You are not allowed to associate a Doc with that group.', 'bp-docs' ), 'error' );

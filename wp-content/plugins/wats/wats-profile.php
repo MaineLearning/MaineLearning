@@ -56,7 +56,7 @@ function wats_admin_edit_user_profile()
     wp_set_current_user($user_id);
 
 	$wats_capabilities_table = wats_init_capabilities_table();
-		
+	
 	echo '<h3>'.__('Ticket system capabilities','WATS').'</h3><table class="form-table"><tbody>';
 	foreach ($wats_capabilities_table as $key => $value)
 	{

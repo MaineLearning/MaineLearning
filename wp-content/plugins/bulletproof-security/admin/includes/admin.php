@@ -28,6 +28,27 @@ function bulletproof_security_admin_init() {
 		@chmod (WP_CONTENT_DIR . '/bps-backup/master-backups/', 0755);
 	}
 	
+	// Create the BPS Backup folder Deny all .htaccess file - recursive will protect all /bps-backup subfolders
+	$bps_denyall_htaccess = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/deny-all.htaccess';
+	$bps_ARHtaccess = WP_CONTENT_DIR . '/bps-backup/.htaccess';
+	
+	if (!file_exists($bps_ARHtaccess)) {
+	@copy($bps_denyall_htaccess, $bps_ARHtaccess);
+	}
+
+	// Create logs folder
+	if( !is_dir (WP_CONTENT_DIR . '/bps-backup/logs')) {
+		@mkdir (WP_CONTENT_DIR . '/bps-backup/logs', 0755, true);
+		@chmod (WP_CONTENT_DIR . '/bps-backup/logs/', 0755);
+	}
+
+	// Create the Security / HTTP error log in /logs
+	$bpsProLog = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/http_error_log.txt';
+	$bpsProLogARQ = WP_CONTENT_DIR . '/bps-backup/logs/http_error_log.txt';
+	if (!file_exists($bpsProLogARQ)) {
+	@copy($bpsProLog, $bpsProLogARQ);
+	}	
+
 	// Load scripts and styles only on BPS specified pages
 	add_action('load-bulletproof-security/admin/options.php', 'bulletproof_security_load_settings_page');
 
@@ -63,7 +84,7 @@ function bulletproof_security_install() {
 	global $bulletproof_security;
 	$previous_install = get_option('bulletproof_security_options');
 	if ( $previous_install ) {
-	if ( version_compare($previous_install['version'], '.47.6', '<') )
+	if ( version_compare($previous_install['version'], '.47.8', '<') )
 	remove_role('denied');
 	}
 }

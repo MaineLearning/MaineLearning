@@ -111,6 +111,8 @@ function wats_load_settings()
 		$default['drop_down_user_selector_format'] = 0;
 		$default['wats_ticket_custom_fields'] = array();
 		$default['wats_categories'] = array();
+		$default['fsf_success_init'] = 1;
+		$default['fsf_success_redirect_url'] = '';
 		
    	    add_option('wats', $default);
 	}
@@ -446,6 +448,21 @@ function wats_load_settings()
 			$wats_settings['wats_categories'] = array();
 		}
 		
+		if (!isset($wats_settings['fsf_success_init']))
+		{
+			$wats_settings['fsf_success_init'] = 1;
+		}
+		
+		if (!isset($wats_settings['fsf_success_redirect_url']))
+		{
+			$wats_settings['fsf_success_redirect_url'] = '';
+		}
+		
+		if ($wats_settings['wats_version'] < '1.0.58')
+		{
+			wats_update_notification_rules_format();
+		}
+		
 		$wats_settings['wats_version'] = $wats_version;
 		update_option('wats', $wats_settings);
 	}
@@ -757,6 +774,8 @@ function wats_admin_insert_notification_rule_entry()
 
 	$listvalue = stripslashes_deep($_POST['listvalue']);
 	
+	$idrulescope = stripslashes_deep($_POST['idrulescope']);
+	
 	if ($wats_settings['ticket_type_key_enabled'] == 1)
 		$idtype = stripslashes_deep($_POST['idtype']);
 	
@@ -790,6 +809,7 @@ function wats_admin_insert_notification_rule_entry()
     {
 		$wats_notification_rules = get_option('wats_notification_rules');
 		$rule = "";
+		$rule .= "scope:".$idrulescope.";";
 		if ($wats_settings['ticket_type_key_enabled'] == 1)
 			$rule .= "type:".$idtype.";";
 		if ($wats_settings['ticket_priority_key_enabled'] == 1)
@@ -1011,15 +1031,15 @@ function wats_admin_remove_ticket_custom_field()
 	exit;
 }
 
-/*************************************************************/
-/*                                                           */
+/**************************************************************************/
+/*                                                                        */
 /* Fonction d'affichage de l'interface d'ajout des règles de notification */
-/*                                                           */
-/*************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 function wats_admin_add_notification_rules_interface($resultsup,$resultadd,$idsup,$idadd,$value,$input)
 {
-	global $wats_settings;
+	global $wats_settings,$wats_rule_scope;
 	
 	$wats_ticket_priority = isset($wats_settings['wats_priorities']) ? $wats_settings['wats_priorities'] : 0;
 	$wats_ticket_type = isset($wats_settings['wats_types']) ? $wats_settings['wats_types'] : 0;
@@ -1028,6 +1048,12 @@ function wats_admin_add_notification_rules_interface($resultsup,$resultadd,$idsu
 	
 	echo '<input type="submit" class="button-primary" id="'.$idsup.'" value="'.__('Remove selected rules','WATS').'" /><div id="'.$resultsup.'"></div><br /><br />';
 	echo '<table class="wats-form-table" cellspacing="1" cellpadding="1">';
+	
+	echo '<tr><th><label>'.__('Rule scope','WATS').'</label></th><td>';
+	echo '<select name="notification_rules_select_rule_scope" id="notification_rules_select_rule_scope">';
+	foreach ($wats_rule_scope as $key => $value)
+		echo '<option value="'.$key.'">'.esc_html($value).'</option>';
+	echo '</select></td><td></td></tr>';
 	
 	if ($wats_settings['ticket_type_key_enabled'] == 1)
 	{
@@ -1104,6 +1130,7 @@ function wats_admin_add_notification_rules_interface($resultsup,$resultadd,$idsu
 	
 	echo '<tr><th><label>'.__('Category','WATS').'</label></th>';
 	echo '<td><select name="notification_rules_select_category" id="notification_rules_select_category">';
+	echo '<option value="0">'.__('Any','WATS').'</option>';
 	add_filter('list_terms_exclusions','wats_list_terms_exclusions');
 	$categories = get_categories('type=post&hide_empty=0');
 	foreach ($categories as $category)
@@ -1589,7 +1616,7 @@ function wats_options_manage_notification_options()
 	echo '<div class="wats_tip" id="wats_source_email_tip">';
 	echo __('Check this option if you want notification messages to use the user email as the source address. Otherwise, the global wordpress email address will be used.','WATS').'</div></td></tr></table><br />';
 
-	echo '<br /><h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("notification_rule_tip");>'.__('New ticket notification rules','WATS').' :</a></h3><br />';
+	echo '<br /><h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("notification_rule_tip");>'.__('Ticket notification rules','WATS').' :</a></h3><br />';
 	echo '<table class="widefat" cellspacing="0" id="tablerules" style="text-align:center;"><thead><tr class="thead">';
 	echo '<th scope="col" class="manage-column" width="10%" style="text-align:center;">ID</th>';
 	echo '<th scope="col" class="manage-column" style="text-align:center;">'.__('Rule','WATS').'</th>';
@@ -1601,7 +1628,7 @@ function wats_options_manage_notification_options()
 	echo '<br />';
 	wats_options_premium_only();
 	echo '<br /><br /><div class="wats_tip" id="notification_rule_tip">';
-	echo __('Associate specific priority, status and type with an email distribution list. Those will get a mail when a new ticket is raised with the specified values.','WATS').'<br /><br />';
+	echo __('Associate specific priority, status and type with an email distribution list. Those will get a mail when a new ticket is raised or an existing ticket is updated with the specified values.','WATS').'<br /><br />';
 	echo __('Warning : if you enter multiple email addresses, please separate them with a comma ",".','WATS');
 	echo '</div>';
 	
@@ -1638,6 +1665,8 @@ function wats_options_manage_ticket_submission_options()
 	
 	echo '<h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("guestlist_tip");>'.__('Shared guest user','WATS').' : </a></h3>';
 	echo '<table class="wats-form-table"><tr><td>'.__('User','WATS').' : ';
+	if ($wats_settings['drop_down_user_selector_format'] == 0)
+	{
 		echo '<select name="guestlist" id="guestlist" class="wats_select">';
 		$userlist = wats_build_user_list(__("None",'WATS'),'edit_posts');
 		foreach ($userlist AS $userlogin => $username)
@@ -1650,6 +1679,24 @@ function wats_options_manage_ticket_submission_options()
 			}
 		}
 		echo '</select></td></tr><tr><td>';
+	}
+	else
+	{
+		if ($wats_settings['wats_guest_user'] === -1)
+		{
+			$guest_user = __('None','WATS');
+			$guest_user_hidden = -1;
+		}
+		else
+		{
+			$guest_user = get_user_by('login',$wats_settings['wats_guest_user']);
+			$guest_user = wats_build_formatted_name($guest_user->ID);
+			$guest_user = $guest_user[$wats_settings['wats_guest_user']];
+			$guest_user_hidden = $wats_settings['wats_guest_user'];
+		}
+		echo '<input class="ui-autocomplete-input" type="text" name="guestlist_ac" id="guestlist_ac" value="'.esc_attr($guest_user).'" />';
+		echo '<input type="hidden" name="guestlist" id="guestlist" value="'.esc_attr($guest_user_hidden).'" /></td></tr><tr><td>';
+	}
 	echo '<div class="wats_tip" id="guestlist_tip">';
 	echo __('The shared guest user is a user that must have at least contributor user level. This user will only have access to the ticket creation page on the admin side. You can share the guest user login/password with your visitors so that they can submit tickets without having to register first. This is a shared account.','WATS');
 	echo '</div></td></tr></table><br />';
@@ -1689,6 +1736,18 @@ function wats_options_manage_ticket_submission_options()
 	echo __('Set this option to define the ticket publications status upon ticket submission. It is advisable to set unauthenticated users tickets status to \'pending\' to allow admin moderation before publication and limit SPAM.','WATS');
 	echo '</div></td></tr></table><br />';
 	
+	echo '<h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("frontendsubformsubmission_tip");>'.__('Frontend submission form successfull submission','WATS').' : </a></h3>';
+	echo '<table class="wats-form-table">';
+	echo '<tr><td><input type="checkbox" name="fsf_success_init" ';
+	echo ($wats_settings['fsf_success_init'] == 1) ? 'checked' : '';
+	echo '> '.__('Reinitiliaze the form upon successfull submission','WATS').' </td></tr>';
+	echo '<tr><td>'.__('Redirect user to this URL upon successfull submission','WATS').': <input type="text" name="fsf_success_redirect_url" id="fsf_success_redirect_url" size="30" value="'.esc_attr($wats_settings['fsf_success_redirect_url']).'" /></td></tr>';
+	echo '<tr><td>';
+	wats_options_premium_only();
+	echo '<div class="wats_tip" id="frontendsubformsubmission_tip">';
+	echo __('The first option allows to initialize the form upon successfull submission of a ticket. The second option allows to redirect user to success page upon successfull submission.','WATS');
+	echo '</div></td></tr></table><br />';
+	
 	echo '<h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("email_ticket_submission_tip");>'.__('Email ticket submission','WATS').' : </a></h3>';
 	echo '<table class="wats-form-table">';
 	echo '<tr><td><input type="checkbox" name="ms_ticket_submission"';
@@ -1707,6 +1766,8 @@ function wats_options_manage_ticket_submission_options()
 	
 	echo '<h3><a style="cursor:pointer;" title="'.__('Click to get some help!', 'WATS').'" onclick=javascript:wats_invert_visibility("submitformdefaultauthor_tip");>'.__('Default author for unregistered visitors tickets','WATS').' : </a></h3>';
 	echo '<table class="wats-form-table"><tr><td>'.__('User','WATS').' : ';
+	if ($wats_settings['drop_down_user_selector_format'] == 0)
+	{
 		echo '<select name="defaultauthorlist" id="defaultauthorlist" class="wats_select">';
 		$userlist = wats_build_user_list(0,0);
 		foreach ($userlist AS $userlogin => $username)
@@ -1716,6 +1777,14 @@ function wats_options_manage_ticket_submission_options()
 				echo '>'.$username.'</option>';
 		}
 		echo '</select></td></tr><tr><td>';
+	}
+	else
+	{
+		$author = get_user_by('login',$wats_settings['submit_form_default_author']);
+		$author = wats_build_formatted_name($author->ID);
+		echo '<input type="text" name="defaultauthorlist_ac" id="defaultauthorlist_ac" value="'.esc_attr($author[$wats_settings['submit_form_default_author']]).'" />';
+		echo '<input type="hidden" name="defaultauthorlist" id="defaultauthorlist" value="'.esc_attr($wats_settings['submit_form_default_author']).'" /></td></tr><tr><td>';
+	}
 	wats_options_premium_only();
 	echo '<div class="wats_tip" id="submitformdefaultauthor_tip">';
 	echo __('This option will be used to set the author of tickets submitted through the frontend submit form or through email by unregistered users.','WATS').'</div></td></tr></table><br />';
@@ -2240,7 +2309,10 @@ function wats_options_manage_ticket_assign_options()
 	echo '>'.__('Ticket originator and admins','WATS').'</td></tr>';
 	echo '<tr><td><input type="radio" name="group4" value="2" ';
 	echo ($wats_settings['ticket_assign_user_list'] == 2) ? 'checked' : '';
-	echo '>'.__('Ticket originator and any user with wats_ticket_ownership capability','WATS').'</td></tr><tr><td>';
+	echo '>'.__('Ticket originator and any user with wats_ticket_ownership capability','WATS').'</td></tr>';
+	echo '<tr><td><input type="radio" name="group4" value="3" ';
+	echo ($wats_settings['ticket_assign_user_list'] == 3) ? 'checked' : '';
+	echo '>'.__('Any user with wats_ticket_ownership capability and admins','WATS').'</td></tr><tr><td>';
 	wats_options_premium_only();
 	echo '<div class="wats_tip" id="group4_tip">';
 	echo __('Select the preferred option. The list of users a ticket can be assigned to will be adjusted based on this option. The wats_ticket_ownership capability can be granted under user profile by admins.','WATS').'</div></td></tr></table><br />';
@@ -2338,7 +2410,6 @@ function wats_options_manage_troubleshoot_options()
 	echo '> '.__('Turn drop down user list into text input with auto complete (better for sites with more than 1.000 users)','WATS').'</td></tr><tr><td>';
 	echo '<div class="wats_tip" id="drop_down_user_selector_format_tip">';
 	echo __('Check this option if you want to turn drop down user list into text input with auto complete.','WATS').'</div></td></tr></table><br />';
-	wats_options_premium_only();
 	
 	$result_users = count_users();
 	echo '<h3>'.__('Site configuration details','WATS').'</h3>';
@@ -2519,6 +2590,8 @@ function wats_options_admin_menu()
 			$wats_settings['ms_port_server'] = wats_is_numeric(stripslashes($_POST['ms_port_server'])) ? esc_html(stripslashes($_POST['ms_port_server'])) : '110';
 			$wats_settings['ms_mail_address'] = wats_is_string(stripslashes($_POST['ms_mail_address'])) ? esc_html(stripslashes($_POST['ms_mail_address'])) : 'login@example.com';
 			$wats_settings['ms_mail_password'] = wats_is_string(stripslashes($_POST['ms_mail_password'])) ? esc_html(stripslashes($_POST['ms_mail_password'])) : 'password';
+			$wats_settings['fsf_success_init'] = isset($_POST['fsf_success_init']) ? 1 : 0;
+			$wats_settings['fsf_success_redirect_url'] = esc_url($_POST['fsf_success_redirect_url']);
 		}
 		else if ($submenu == 'ticket-display')
 		{

@@ -2,16 +2,16 @@
 Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
-Requires at least: 2.8
-Tested up to: 3.3.1
-Stable tag: 0.24
+Requires at least: 3.3
+Tested up to: 3.5
+Stable tag: 0.28
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
 
-The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
+The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page. Please **read the [documentation on how to use it](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
 
-**New feature**: The different elements to display con now be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
+**Customization**: The different elements to display con be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
@@ -24,6 +24,8 @@ Please, read the information on [Other Notes](http://wordpress.org/extend/plugin
 **Usage**
 
 `[catlist argument1=value1 argument2=value2]`
+
+Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) on how to use it.
 
 **Support the plugin**
 
@@ -43,8 +45,10 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Other notes==
 
-**Selecting the category**
+==INSTRUCTIONS How to use the plugin==
 
+
+**Selecting the category**
 The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category name or slug* and *detecting the current post's category*.
 When using List Category Posts inside a post, if you don't pass the category id, name or slug, it will post the latest posts from every category. 
 You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
@@ -58,9 +62,9 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 **Other parameters**
 
-* **tags** - Tag support, you can display posts from a certain tag. 
+* **tags** - Tag support, you can display posts from a certain tag.
 
-* **orderby** - To customize the order. Valid values are: 
+* **orderby** - To customize the order. Valid values are:
   * **author** - Sort by the numeric author IDs.
   * **category** - Sort by the numeric category IDs.
   * **content** - Sort by content.
@@ -83,15 +87,21 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **numberposts** - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5. Ex: [catlist name=mycategory numberposts=10]
 
+* **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 month=12]` will list posts from December 2012.
+
+* **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
+
 * **date** - Display post's date next to the title. Default is 'no', use date=yes to activate it.
 
 * **author** - Display the post's author next to the title. Default is 'no', use author=yes to activate it.
 
-* **dateformat** - Format of the date output. Default is get_option('date_format'). Check http://codex.wordpress.org/Formatting_Date_and_Time for possible formats.
+* **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
-* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
+* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its html tags and shortcodes. The limit is set by the *excerpt_size* parameter (55 words by default).
 
-* **excerpt_size** - Set the number of characters to display from the excerpt. Default is 255. Eg: `excerpt_size = 300`
+* **excerpt_size**
+  * If you are using WordPress >= 3.3: Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size = 30`
+  * If for some reason you can't update your WordPress and are still using WordPress < 3.3, this will use a fallback function instead of `wp_trim_words` where you'll have to set the number of *characters* insted of words with this parameter.
 
 * **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
 
@@ -111,6 +121,18 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
 
+* **post_status** - use post status, default value is 'publish'. Valid values:
+  * **publish** - a published post or page.
+  * **pending** - post is pending review.
+  * **draft** - a post in draft status.
+  * **auto-draft** - a newly created post, with no content.
+  * **future** - a post to publish in the future.
+  * **private** - not visible to users who are not logged in.
+  * **inherit** - a revision. see get_children.
+  * **trash** - post is in trashbin (available with Version 2.9).
+  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true. 
+
+
 * **post_parent** - Show only the children of the post with this ID. Default: None.
 
 * **class** - CSS class for the default UL generated by the plugin.
@@ -123,13 +145,15 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: [catlist id=38 morelink="Read more"]
 
+* **posts_morelink** - Include a "read more" link after each post. It receives a string of characters as a parameter which will be used as the text of the link. Example: [catlist id=38 posts_morelink="Read more about this post"]
+
 == HTML & CSS Customization ==
 
 You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element. The customizable elements are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
 The parameters are:
 `autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class, 
-excerpt_tag, excerpt_class, morelink_class, thumbnail_class, title_tag, title_class`
+excerpt_tag, excerpt_class, morelink_class, thumbnail_class, title_tag, title_class, posts_morelink_class`
 
 So for example, let's say you want to wrap the displayed comments count with the p tag and a "lcp_comments" class, you would do:
 `[catlist id=7 comments=yes comments_tag=p comments_class=lcp_comments]`
@@ -153,7 +177,7 @@ If the template file were templatename.php.
 You can have as many different templates as you want, and use them in different pages and posts. The template code is pretty well documented, so if you're a bit familiar with HTML and PHP, you'll have no problems creating your own template. I'm planning on reworking the template system in order to have a really user friendly way to create templates.
 
 == Frequently Asked Questions ==
-* **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/
+* **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/ - **Read it**.
 * **Template system** how to customize the way the posts are shown: http://wordpress.org/extend/plugins/list-category-posts/other_notes/. I am aware the Template System is not really friendly right now, I'll work on this whenever I get the time to work on the plugin for a while.
 * **New feature requests, Bug fixes, enhancements** - You can post them on [GitHub Issues](https://github.com/picandocodigo/List-Category-Posts/issues).
 * **Questions** If you have any usage questions, go to [WordPress Answers](http://wordpress.stackexchange.com/) for support. It's a great place with a large community of WordPress users and developers. Just [ask your question](http://wordpress.stackexchange.com/questions/ask?tags=plugin-list-category-posts) using the 'plugin-list-category-post' tag.
@@ -166,7 +190,29 @@ You can have as many different templates as you want, and use them in different 
 Please check:
 http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
 
+**How to not display the title**
+
+You have to add a CSS class to the title with the `title_class` parameter. Then edit the title_class class in your theme's CSS file. Something like this:
+
+In the post:
+`[catlist id=3 title_class=lcp_title numberposts=1]`
+
+And in your theme's CSS:
+
+`.lcp_title{
+  display: none;
+}`
+
+**How to insert the shortcode on the theme and not a post or page**
+
+`<?php echo do_shortcode("[catlist id=3]"); ?>`
+
+**Please do not ask for support when you are having issues with your CSS**. I can't solve every user's CSS problems. Feel free to ask on the forums or WP Answers. But please, **[read the instructions first](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
+
 == Upgrade Notice ==
+
+= 0.25 =
+* Translation support.
 
 = 0.18 =
 Template system was upgraded with new options. Backwards compatible, but you can better customize the way the post contents are displayed. Check templates/default.php.
@@ -187,6 +233,39 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.28 =
+ * Improvements on readme, faqs.
+ * New posts_morelink param: adds a 'read more' link to each post.
+
+= 0.27.1 =
+
+ * Sets minimum version to WordPress 3.3, since wp_trim_words was introduced in that version. Adds workaround for people using WordPress < 3.3.
+ * Adds Slovak translation by Branco from [WebHostingGeeks.com](http://webhostinggeeks.com/blog/).
+ * Removes Debug PHP warnings.
+ * Checkboxes on Widget save state, i18n for widget.
+ * Adds excerpt size to widget.
+
+= 0.27 =
+
+ * Fixes to widget.
+ * Adds year and month parameters to list posts from a certain year and/or month.
+ * Adds search parameter to display posts that match a search term.
+
+= 0.26 =
+
+ * Adds i18n, German and Spanish translations. All credit to [cfoellmann](https://github.com/cfoellmann) for implementing this and writing the German translation. Thanks! :)
+
+= 0.25.1 =
+
+ * Changed excerpt limit, it uses word count, and is working for WordPress' excerpt and auto generated ones.
+
+= 0.25 =
+
+ * Better excerpt
+ * Applies title filter, should work with qTranslate
+ * Adds post status parameter
+ * Adds meta links to plugin page - most importantly: INSTRUCTIONS (please read them).
 
 = 0.24 =
 

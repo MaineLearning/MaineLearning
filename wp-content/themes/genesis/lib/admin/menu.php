@@ -6,7 +6,7 @@
  * @package    Admin
  * @subpackage Menu
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -94,5 +94,8 @@ function genesis_add_admin_submenus() {
 	/** Add README file submenu item, if it exists */
 	if ( current_theme_supports( 'genesis-readme-menu' ) && file_exists( CHILD_DIR . '/README.txt' ) )
 		$_genesis_admin_readme = new Genesis_Admin_Readme;
+
+	/** Add the upgraded page (no menu) */
+	new Genesis_Admin_Upgraded;
 
 }

@@ -7,7 +7,7 @@
  * @category Genesis
  * @package  Admin
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -51,7 +51,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 					'page_title' => 'Theme Settings',
 					'menu_title' => 'Genesis',
 					'capability' => 'edit_theme_options',
-					'icon_url'   => PARENT_URL . '/images/genesis.gif',
+					'icon_url'   => PARENT_URL . '/images/favicon.png',
 					'position'   => '58.996',
 				),
 				'first_submenu' => array( /** Do not use without 'main_menu' */
@@ -99,6 +99,8 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 				'trackbacks_pages'          => 0,
 				'trackbacks_posts'          => 1,
 				'breadcrumb_home'           => 0,
+				'breadcrumb_front_page'     => 0,
+				'breadcrumb_posts_page'     => 0,
 				'breadcrumb_single'         => 0,
 				'breadcrumb_page'           => 0,
 				'breadcrumb_archive'        => 0,
@@ -177,6 +179,15 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 			)
 		);
 
+		genesis_add_option_filter(
+			'url',
+			$this->settings_field,
+			array(
+				'feed_uri',
+				'comments_feed_uri',
+			)
+		);
+
 	}
 
 	/**
@@ -216,15 +227,17 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		add_meta_box( 'genesis-theme-settings-layout', __( 'Default Layout', 'genesis' ), array( $this, 'layout_box' ), $this->pagehook, 'main' );
 
 		if ( ! current_theme_supports( 'genesis-custom-header' ) && ! current_theme_supports( 'custom-header' ) )
-			add_meta_box( 'genesis-theme-settings-header', __( 'Header Settings', 'genesis' ), array( $this, 'header_box' ), $this->pagehook, 'main' );
+			add_meta_box( 'genesis-theme-settings-header', __( 'Header', 'genesis' ), array( $this, 'header_box' ), $this->pagehook, 'main' );
 
 		if ( current_theme_supports( 'genesis-menus' ) )
-			add_meta_box( 'genesis-theme-settings-nav', __( 'Navigation Settings', 'genesis' ), array( $this, 'nav_box' ), $this->pagehook, 'main' );
+			add_meta_box( 'genesis-theme-settings-nav', __( 'Navigation', 'genesis' ), array( $this, 'nav_box' ), $this->pagehook, 'main' );
 
-		add_meta_box( 'genesis-theme-settings-breadcrumb', __( 'Breadcrumbs', 'genesis' ), array( $this, 'breadcrumb_box' ), $this->pagehook, 'main' );
+		if ( current_theme_supports( 'genesis-breadcrumbs' ) )
+			add_meta_box( 'genesis-theme-settings-breadcrumb', __( 'Breadcrumbs', 'genesis' ), array( $this, 'breadcrumb_box' ), $this->pagehook, 'main' );
+
 		add_meta_box( 'genesis-theme-settings-comments', __( 'Comments and Trackbacks', 'genesis' ), array( $this, 'comments_box' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis-theme-settings-posts', __( 'Content Archives', 'genesis' ), array( $this, 'post_archives_box' ), $this->pagehook, 'main' );
-		add_meta_box( 'genesis-theme-settings-blogpage', __( 'Blog Page', 'genesis' ), array( $this, 'blogpage_box' ), $this->pagehook, 'main' );
+		add_meta_box( 'genesis-theme-settings-blogpage', __( 'Blog Page Template', 'genesis' ), array( $this, 'blogpage_box' ), $this->pagehook, 'main' );
 
 		if ( current_user_can( 'unfiltered_html' ) )
 			add_meta_box( 'genesis-theme-settings-scripts', __( 'Header and Footer Scripts', 'genesis' ), array( $this, 'scripts_box' ), $this->pagehook, 'main' );
@@ -268,13 +281,14 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 	function info_box() {
 
 		?>
-		<p><strong><?php _e( 'Version:', 'genesis' ); ?></strong> <?php echo $this->get_field_value( 'theme_version' ); ?> <?php echo g_ent( '&middot;' ); ?> <strong><?php _e( 'Released:', 'genesis' ); ?></strong> <?php echo PARENT_THEME_RELEASE_DATE; ?></p>
+		<p><strong><?php _e( 'Version:', 'genesis' ); ?></strong> <?php echo $this->get_field_value( 'theme_version' ); ?> &#x000B7; <strong><?php _e( 'Released:', 'genesis' ); ?></strong> <?php echo PARENT_THEME_RELEASE_DATE; ?></p>
 
 		<p>
 			<input type="checkbox" name="<?php echo $this->get_field_name( 'show_info' ); ?>" id="<?php echo $this->get_field_id( 'show_info' ); ?>" value="1"<?php checked( $this->get_field_value( 'show_info' ) ); ?> />
 			<label for="<?php echo $this->get_field_id( 'show_info' ); ?>"><?php _e( 'Display Theme Information in your document source', 'genesis' ); ?></label>
 		</p>
 
+		<?php if ( current_theme_supports( 'genesis-auto-updates' ) ) : ?>
 		<p><span class="description"><?php sprintf( __( 'This can be helpful for diagnosing problems with your theme when seeking assistance in the <a href="%s" target="_blank">support forums</a>.', 'genesis' ), 'http://www.studiopress.com/support/' ); ?></span></p>
 
 		<p>
@@ -292,6 +306,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 			<p><span class="description"><?php _e( 'If you provide an email address above, your blog can email you when a new version of Genesis is available.', 'genesis' ); ?></span></p>
 		</div>
 		<?php
+		endif;
 
 	}
 
@@ -371,11 +386,12 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 	function header_box() {
 		?>
 
-		<p><?php _e( 'Use for blog title/logo:', 'genesis' ); ?>
+		<p><?php _e( 'Use for site title/logo:', 'genesis' ); ?>
 			<select name="<?php echo $this->get_field_name( 'blog_title' ); ?>">
 				<option value="text"<?php selected( $this->get_field_value( 'blog_title' ), 'text' ); ?>><?php _e( 'Dynamic text', 'genesis' ); ?></option>
 				<option value="image"<?php selected( $this->get_field_value( 'blog_title' ), 'image' ); ?>><?php _e( 'Image logo', 'genesis' ); ?></option>
-			</select></p>
+			</select>
+		</p>
 
 		<?php
 
@@ -398,45 +414,43 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 	function nav_box() {
 
 		?>
+		
+		<p><span class="description"><?php printf( __( 'In order to use the navigation menus, you must build a <a href="%s">custom menu</a>, then assign it to the proper Menu Location.', 'genesis' ), admin_url( 'nav-menus.php' ) ); ?></span></p>
+		
+		<hr class="div" />
+		
 		<?php if ( genesis_nav_menu_supported( 'primary' ) ) : ?>
 		<h4><?php _e( 'Primary Navigation', 'genesis' ); ?></h4>
 
 		<p>
-			<input type="checkbox" name="<?php echo $this->get_field_name( 'nav' ); ?>" id="<?php echo $this->get_field_id( 'nav' ); ?>" value="1"<?php checked( $this->get_field_value( 'nav' ) ); ?> />
-			<label for="<?php echo $this->get_field_id( 'nav' ); ?>"><?php _e( 'Include Primary Navigation Menu?', 'genesis' ); ?></label>
+			<input type="checkbox" name="<?php echo $this->get_field_name( 'nav_superfish' ); ?>" id="<?php echo $this->get_field_id( 'nav_superfish' ); ?>" value="1"<?php checked( $this->get_field_value( 'nav_superfish' ) ); ?> />
+			<label for="<?php echo $this->get_field_id( 'nav_superfish' ); ?>"><?php _e( 'Enable Fancy Dropdowns?', 'genesis' ); ?></label>
 		</p>
 
-		<div id="genesis_nav_settings">
-			<p>
-				<input type="checkbox" name="<?php echo $this->get_field_name( 'nav_superfish' ); ?>" id="<?php echo $this->get_field_id( 'nav_superfish' ); ?>" value="1"<?php checked( $this->get_field_value( 'nav_superfish' ) ); ?> />
-				<label for="<?php echo $this->get_field_id( 'nav_superfish' ); ?>"><?php _e( 'Enable Fancy Dropdowns?', 'genesis' ); ?></label>
-			</p>
+		<p>
+			<input type="checkbox" name="<?php echo $this->get_field_name( 'nav_extras_enable' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_enable' ); ?>" value="1"<?php checked( $this->get_field_value( 'nav_extras_enable' ) ); ?> />
+			<label for="<?php echo $this->get_field_id( 'nav_extras_enable' ); ?>"><?php _e( 'Enable Extras on Right Side?', 'genesis' ); ?></label>
+		</p>
 
+		<div id="genesis_nav_extras_settings">
 			<p>
-				<input type="checkbox" name="<?php echo $this->get_field_name( 'nav_extras_enable' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_enable' ); ?>" value="1"<?php checked( $this->get_field_value( 'nav_extras_enable' ) ); ?> />
-				<label for="<?php echo $this->get_field_id( 'nav_extras_enable' ); ?>"><?php _e( 'Enable Extras on Right Side?', 'genesis' ); ?></label>
+				<label for="<?php echo $this->get_field_id( 'nav_extras' ); ?>"><?php _e( 'Display the following:', 'genesis' ); ?></label>
+				<select name="<?php echo $this->get_field_name( 'nav_extras' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras' ); ?>">
+					<option value="date"<?php selected( $this->get_field_value( 'nav_extras' ), 'date' ); ?>><?php _e( 'Today\'s date', 'genesis' ); ?></option>
+					<option value="rss"<?php selected( $this->get_field_value( 'nav_extras' ), 'rss' ); ?>><?php _e( 'RSS feed links', 'genesis' ); ?></option>
+					<option value="search"<?php selected( $this->get_field_value( 'nav_extras' ), 'search' ); ?>><?php _e( 'Search form', 'genesis' ); ?></option>
+					<option value="twitter"<?php selected( $this->get_field_value( 'nav_extras' ), 'twitter' ); ?>><?php _e( 'Twitter link', 'genesis' ); ?></option>
+				</select>
 			</p>
-
-			<div id="genesis_nav_extras_settings">
+			<div id="genesis_nav_extras_twitter">
 				<p>
-					<label for="<?php echo $this->get_field_id( 'nav_extras' ); ?>"><?php _e( 'Display the following:', 'genesis' ); ?></label>
-					<select name="<?php echo $this->get_field_name( 'nav_extras' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras' ); ?>">
-						<option value="date"<?php selected( $this->get_field_value( 'nav_extras' ), 'date' ); ?>><?php _e( 'Today\'s date', 'genesis' ); ?></option>
-						<option value="rss"<?php selected( $this->get_field_value( 'nav_extras' ), 'rss' ); ?>><?php _e( 'RSS feed links', 'genesis' ); ?></option>
-						<option value="search"<?php selected( $this->get_field_value( 'nav_extras' ), 'search' ); ?>><?php _e( 'Search form', 'genesis' ); ?></option>
-						<option value="twitter"<?php selected( $this->get_field_value( 'nav_extras' ), 'twitter' ); ?>><?php _e( 'Twitter link', 'genesis' ); ?></option>
-					</select>
+					<label for="<?php echo $this->get_field_id( 'nav_extras_twitter_id' ); ?>"><?php _e( 'Enter Twitter ID:', 'genesis' ); ?></label>
+					<input type="text" name="<?php echo $this->get_field_name( 'nav_extras_twitter_id' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_twitter_id' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'nav_extras_twitter_id' ) ); ?>" size="27" />
 				</p>
-				<div id="genesis_nav_extras_twitter">
-					<p>
-						<label for="<?php echo $this->get_field_id( 'nav_extras_twitter_id' ); ?>"><?php _e( 'Enter Twitter ID:', 'genesis' ); ?></label>
-						<input type="text" name="<?php echo $this->get_field_name( 'nav_extras_twitter_id' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_twitter_id' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'nav_extras_twitter_id' ) ); ?>" size="27" />
-					</p>
-					<p>
-						<label for="<?php echo $this->get_field_id( 'nav_extras_twitter_text' ); ?>"><?php _e( 'Twitter Link Text:', 'genesis' ); ?></label>
-						<input type="text" name="<?php echo $this->get_field_name( 'nav_extras_twitter_text' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_twitter_text' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'nav_extras_twitter_text' ) ); ?>" size="27" />
-					</p>
-				</div>
+				<p>
+					<label for="<?php echo $this->get_field_id( 'nav_extras_twitter_text' ); ?>"><?php _e( 'Twitter Link Text:', 'genesis' ); ?></label>
+					<input type="text" name="<?php echo $this->get_field_name( 'nav_extras_twitter_text' ); ?>" id="<?php echo $this->get_field_id( 'nav_extras_twitter_text' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'nav_extras_twitter_text' ) ); ?>" size="27" />
+				</p>
 			</div>
 		</div>
 
@@ -447,22 +461,12 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		<h4><?php _e( 'Secondary Navigation', 'genesis' ); ?></h4>
 
 		<p>
-			<input type="checkbox" name="<?php echo $this->get_field_name( 'subnav' ); ?>" id="<?php echo $this->get_field_id( 'subnav' ); ?>" value="1"<?php checked( $this->get_field_value( 'subnav' ) ); ?> />
-			<label for="<?php echo $this->get_field_id( 'subnav' ); ?>"><?php _e( 'Include Secondary Navigation Menu?', 'genesis' ); ?></label>
+			<input type = "checkbox" name="<?php echo $this->get_field_name( 'subnav_superfish' ); ?>" id="<?php echo $this->get_field_id( 'subnav_superfish' ); ?>" value="1"<?php checked( $this->get_field_value( 'subnav_superfish' ) ); ?> />
+			<label for  = "<?php echo $this->get_field_id( 'subnav_superfish' ); ?>"><?php _e( 'Enable Fancy Dropdowns?', 'genesis' ); ?></label>
 		</p>
-
-		<div id="genesis_subnav_settings">
-			<p>
-				<input type="checkbox" name="<?php echo $this->get_field_name( 'subnav_superfish' ); ?>" id="<?php echo $this->get_field_id( 'subnav_superfish' ); ?>" value="1"<?php checked( $this->get_field_value( 'subnav_superfish' ) ); ?> />
-				<label for="<?php echo $this->get_field_id( 'subnav_superfish' ); ?>"><?php _e( 'Enable Fancy Dropdowns?', 'genesis' ); ?></label>
-			</p>
-		</div>
-
-		<hr class="div" />
-		<?php endif; ?>
-
-		<p><span class="description"><?php printf( __( 'In order to use the navigation menus, you must build a <a href="%s">custom menu</a>, then assign it to the proper Menu Location.', 'genesis' ), admin_url( 'nav-menus.php' ) ); ?></span></p>
+		
 		<?php
+		endif;
 
 	}
 
@@ -551,8 +555,16 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		?>
 		<h4><?php _e( 'Enable on:', 'genesis' ); ?></h4>
 		<p>
-			<input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_home' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_home' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_home' ) ); ?> />
-			<label for="<?php echo $this->get_field_id( 'breadcrumb_home' ); ?>"><?php _e( 'Front Page', 'genesis' ); ?></label>
+			<?php if ( 'page' == get_option( 'show_on_front' ) ) : ?>
+				<input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_front_page' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_front_page' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_front_page' ) ); ?> />
+				<label for="<?php echo $this->get_field_id( 'breadcrumb_front_page' ); ?>"><?php _e( 'Front Page', 'genesis' ); ?></label>
+				
+				<input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_posts_page' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_posts_page' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_posts_page' ) ); ?> />
+				<label for="<?php echo $this->get_field_id( 'breadcrumb_posts_page' ); ?>"><?php _e( 'Posts Page', 'genesis' ); ?></label>
+			<?php else : ?>
+				<input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_home' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_home' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_home' ) ); ?> />
+				<label for="<?php echo $this->get_field_id( 'breadcrumb_home' ); ?>"><?php _e( 'Homepage', 'genesis' ); ?></label>
+			<?php endif; ?>
 
 			<input type="checkbox" name="<?php echo $this->get_field_name( 'breadcrumb_single' ); ?>" id="<?php echo $this->get_field_id( 'breadcrumb_single' ); ?>" value="1"<?php checked( $this->get_field_value( 'breadcrumb_single' ) ); ?> />
 			<label for="<?php echo $this->get_field_id( 'breadcrumb_single' ); ?>"><?php _e( 'Posts', 'genesis' ); ?></label>
@@ -627,7 +639,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 			<?php
 			$sizes = genesis_get_image_sizes();
 			foreach ( (array) $sizes as $name => $size )
-				echo '<option value="' . $name . '"' . selected( $this->get_field_value( 'image_size' ), $name, FALSE ) . '>' . $name . ' (' . $size['width'] . ' &#215; ' . $size['height'] . ')</option>' . "\n";
+				echo '<option value="' . esc_attr( $name ) . '"' . selected( $this->get_field_value( 'image_size' ), $name, FALSE ) . '>' . esc_html( $name ) . ' (' . absint( $size['width'] ) . ' &#x000D7; ' . absint( $size['height'] ) . ')</option>' . "\n";
 			?>
 			</select>
 		</p>
@@ -647,7 +659,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 	}
 
 	/**
-	 * Callback for Theme Settings Blog Page meta box.
+	 * Callback for Theme Settings Blog page template meta box.
 	 *
 	 * @since 1.0.0
 	 *
@@ -659,6 +671,10 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 	function blogpage_box() {
 
 		?>
+		<p><span class="description"><?php _e( 'These settings apply to any page given the "Blog" page template, not the homepage or post archive pages.', 'genesis' ); ?></span></p>
+		
+		<hr class="div" />
+		
 		<p>
 			<label for="<?php echo $this->get_field_id( 'blog_cat' ); ?>"><?php _e( 'Display which category:', 'genesis' ); ?></label>
 			<?php wp_dropdown_categories( array( 'selected' => $this->get_field_value( 'blog_cat' ), 'name' => $this->get_field_name( 'blog_cat' ), 'orderby' => 'Name', 'hierarchical' => 1, 'show_option_all' => __( 'All Categories', 'genesis' ), 'hide_empty' => '0' ) ); ?>
@@ -706,7 +722,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 			<label for="<?php echo $this->get_field_id( 'footer_scripts' ); ?>"><?php printf( __( 'Enter scripts or code you would like output to %s:', 'genesis' ), '<code>wp_footer()</code>' ); ?></label>
 		</p>
 
-		<textarea name="<?php echo $this->get_field_name( 'footer_scripts' ); ?>" id="<?php echo $this->get_field_id( 'header_scripts' ); ?>" cols="78" rows="8"><?php echo esc_textarea( $this->get_field_value( 'footer_scripts' ) ); ?></textarea>
+		<textarea name="<?php echo $this->get_field_name( 'footer_scripts' ); ?>" id="<?php echo $this->get_field_id( 'footer_scripts' ); ?>" cols="78" rows="8"><?php echo esc_textarea( $this->get_field_value( 'footer_scripts' ) ); ?></textarea>
 
 		<p><span class="description"><?php printf( __( 'The %1$s hook executes immediately before the closing %2$s tag in the document source.', 'genesis' ), '<code>wp_footer()</code>', '<code>&lt;/body&gt;</code>' ); ?></span></p>
 		<?php

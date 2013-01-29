@@ -184,7 +184,7 @@
 
 			if ( in_array($maintype, $post_types) ) {
 				$query = "SELECT COUNT(1) AS total FROM " . $this->dbtable . " WHERE widget_id = '" . $widget_id . "' AND maintype = '" . $maintype . "' AND name = 'default'";
-				$count = $this->wpdb->get_var($this->wpdb->prepare($query));
+				$count = $this->wpdb->get_var($query);
 				if ( $count > 0 ) {
 					$insert = FALSE;
 				}
@@ -651,7 +651,7 @@
 			$query = "SELECT COUNT(1) AS total FROM " . $this->dbtable . "
                   WHERE widget_id = '" . $widget_id . "' AND
                         maintype != 'individual'";
-			$count = $this->wpdb->get_var($this->wpdb->prepare($query));
+			$count = $this->wpdb->get_var($query);
 
 			if ( $count > 0 ) {
 				return TRUE;

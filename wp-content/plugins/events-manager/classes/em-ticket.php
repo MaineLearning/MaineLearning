@@ -49,9 +49,9 @@ class EM_Ticket extends EM_Object{
 	 */
 	function EM_Ticket( $ticket_data = false ){
 		$this->ticket_name = __('Standard Ticket','dbem');
+		$ticket = array();
 		if( $ticket_data !== false ){
 			//Load ticket data
-			$ticket = array();
 			if( is_array($ticket_data) ){
 				$ticket = $ticket_data;
 			}elseif( is_numeric($ticket_data) ){
@@ -186,7 +186,7 @@ class EM_Ticket extends EM_Object{
 		$available_spaces = $this->get_available_spaces();
 		$condition_1 = (empty($this->ticket_start) || $this->start_timestamp <= $timestamp);
 		$condition_2 = $this->end_timestamp + 86400 >= $timestamp || empty($this->ticket_end);
-		$condition_3 = $EM_Event->start > $timestamp || strtotime($EM_Event->event_rsvp_date) > $timestamp;
+		$condition_3 = $EM_Event->start > $timestamp || strtotime($EM_Event->event_rsvp_date. ' '. $EM_Event->event_rsvp_time) > $timestamp;
 		$condition_4 = !$this->ticket_members || ($this->ticket_members && is_user_logged_in());
 		if( $condition_1 && $condition_2 && $condition_3 && $condition_4 ){
 			//Time Constraints met, now quantities

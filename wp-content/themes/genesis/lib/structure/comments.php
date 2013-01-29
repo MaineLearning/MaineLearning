@@ -6,7 +6,7 @@
  * @package    Structure
  * @subpackage Comments
  * @author     StudioPress
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://www.studiopress.com/themes/genesis
  */
 
@@ -23,9 +23,16 @@ add_action( 'genesis_after_post', 'genesis_get_comments_template' );
  */
 function genesis_get_comments_template() {
 
-	if ( is_single() && ( genesis_get_option( 'trackbacks_posts' ) || genesis_get_option( 'comments_posts' ) ) )
+	global $post;
+
+	if ( ! post_type_supports( $post->post_type, 'comments' ) )
+		return;
+
+	if ( is_singular() && ! in_array( $post->post_type, array( 'post', 'page' ) ) )
 		comments_template( '', true );
-	elseif ( is_page() && ( genesis_get_option( 'trackbacks_pages' ) || genesis_get_option( 'comments_pages' ) ) )
+	elseif ( is_singular( 'post' ) && ( genesis_get_option( 'trackbacks_posts' ) || genesis_get_option( 'comments_posts' ) ) )
+		comments_template( '', true );
+	elseif ( is_singular( 'page' ) && ( genesis_get_option( 'trackbacks_pages' ) || genesis_get_option( 'comments_pages' ) ) )
 		comments_template( '', true );
 
 }
@@ -167,22 +174,24 @@ function genesis_comment_callback( $comment, $args, $depth ) {
 
 	$GLOBALS['comment'] = $comment; ?>
 
-	<li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 
 		<?php do_action( 'genesis_before_comment' ); ?>
 
-		<div class="comment-author vcard">
-			<?php echo get_avatar( $comment, $size = $args['avatar_size'] ); ?>
-			<?php printf( __( '<cite class="fn">%s</cite> <span class="says">%s:</span>', 'genesis' ), get_comment_author_link(), apply_filters( 'comment_author_says_text', __( 'says', 'genesis' ) ) ); ?>
-	 	</div><!-- end .comment-author -->
+		<div class="comment-header">
+			<div class="comment-author vcard">
+				<?php echo get_avatar( $comment, $size = $args['avatar_size'] ); ?>
+				<?php printf( __( '<cite class="fn">%s</cite> <span class="says">%s:</span>', 'genesis' ), get_comment_author_link(), apply_filters( 'comment_author_says_text', __( 'says', 'genesis' ) ) ); ?>
+		 	</div><!-- end .comment-author -->
 
-		<div class="comment-meta commentmetadata">
-			<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'genesis' ), get_comment_date(), get_comment_time() ); ?></a>
-			<?php edit_comment_link( __( 'Edit', 'genesis' ), g_ent( '&bull; ' ), '' ); ?>
-		</div><!-- end .comment-meta -->
+			<div class="comment-meta commentmetadata">
+				<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'genesis' ), get_comment_date(), get_comment_time() ); ?></a>
+				<?php edit_comment_link( __( '(Edit)', 'genesis' ), '' ); ?>
+			</div><!-- end .comment-meta -->
+		</div>
 
 		<div class="comment-content">
-			<?php if ($comment->comment_approved == '0') : ?>
+			<?php if ( $comment->comment_approved == '0' ) : ?>
 				<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
 			<?php endif; ?>
 

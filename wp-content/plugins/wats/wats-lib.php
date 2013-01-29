@@ -171,7 +171,7 @@ function wats_get_latest_ticket_number()
 {
 	global $wpdb;
 	
-	$value = $wpdb->get_var($wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = 'wats_ticket_number' ORDER BY ABS(meta_value) DESC LIMIT 0,1"));
+	$value = $wpdb->get_var($wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = 'wats_ticket_number' ORDER BY ABS(meta_value) DESC LIMIT 0,1",0));
 
 	if (!$value)
 		$value = 0;
@@ -189,7 +189,7 @@ function wats_get_number_of_tickets()
 {
 	global $wpdb;
 	
-	$value = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = 'wats_ticket_number'"));
+	$value = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = 'wats_ticket_number'",0));
 
 	if (!$value)
 		$value = 0;
@@ -216,7 +216,7 @@ function wats_get_number_of_tickets_by_status($status,$userid)
 	if ($userid != 0)
 		$query .= " AND $wpdb->posts.post_author = $userid";
 
-	$value = $wpdb->get_var($wpdb->prepare($query));
+	$value = $wpdb->get_var($wpdb->prepare($query,0));
 
 	if (!$value)
 		$value = 0;
@@ -276,7 +276,7 @@ function wats_get_first_admin_login()
 {
     global $wpdb;
 
-	$users = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->users"));
+	$users = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->users",0));
 	
 	foreach ($users AS $user)
 	{
@@ -315,7 +315,7 @@ function wats_build_user_list($firstitem,$cap)
 	$order1 = $wats_settings['user_selector_order_1'];
 	$order2 = $wats_settings['user_selector_order_2'];
 	
-    $users = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->users LEFT JOIN $wpdb->usermeta AS wp1 ON ($wpdb->users.ID = wp1.user_id AND wp1.meta_key = '$order1') LEFT JOIN $wpdb->usermeta AS wp2 ON ($wpdb->users.ID = wp2.user_id AND wp2.meta_key = '$order2') ORDER BY wp1.meta_value, wp2.meta_value"));
+    $users = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->users LEFT JOIN $wpdb->usermeta AS wp1 ON ($wpdb->users.ID = wp1.user_id AND wp1.meta_key = '$order1') LEFT JOIN $wpdb->usermeta AS wp2 ON ($wpdb->users.ID = wp2.user_id AND wp2.meta_key = '$order2') ORDER BY wp1.meta_value, wp2.meta_value",0));
     $userlist = array();
 	if ($firstitem !== 0)
 		$userlist[0] = $firstitem;
@@ -396,7 +396,7 @@ function wats_get_list_of_user_meta_keys($view)
 {
 	global $wpdb;
 	
-	$keys = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT meta_key FROM $wpdb->usermeta"));
+	$keys = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT meta_key FROM $wpdb->usermeta",0));
 	if ($view == 0)
 	{
 		$list = '';
@@ -497,7 +497,7 @@ function wats_get_mail_notification_signature()
 
 function wats_admin_display_notification_rule($rule)
 {
-	global $wats_settings;
+	global $wats_settings,$wats_rule_scope;
 	
 	$output = '';
 	
@@ -514,6 +514,7 @@ function wats_admin_display_notification_rule($rule)
 		{
 			switch ($key)
 			{
+				case "scope" : $output .= $key." : ".$wats_rule_scope[$value]; break;
 				case "priority" : $output .= $key." : ".$listepriority[$value]; break;
 				case "type" : $output .= $key." : ".$listetype[$value]; break;
 				case "status" : $output .= $key." : ".$listestatus[$value]; break;
@@ -551,12 +552,41 @@ function wats_admin_build_notification_rule($rule)
 	return $ruleset;
 }
 
+/****************************************************************/
+/*                                                              */
+/* Fonction de mise à jour du format des règles de notification */
+/*                                                              */
+/****************************************************************/
+
+function wats_update_notification_rules_format()
+{
+	$wats_notification_rules = get_option('wats_notification_rules');
+
+	if (is_array($wats_notification_rules))
+	{
+		foreach ($wats_notification_rules AS $key => $rulesentry)
+		{
+			foreach ($rulesentry as $rule => $list)
+			{
+				if (strstr($rule,'scope') == false)
+				{
+					$rule = "scope:1;".$rule;
+				}
+			}
+			$wats_notification_rules[$key] = array($rule => $list);
+		}
+	
+		update_option('wats_notification_rules', $wats_notification_rules);
+	}
+		
+	return;
+}
 
 function wats_get_posts_with_shortcode($shortcode)
 {
 	global $wpdb;
 	
-	$posts = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_content LIKE %s AND post_status='publish'",'%'.like_escape($shortcode).'%'));
+	$posts = $wpdb->get_results($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_content LIKE %s AND post_status='publish'",'%'.like_escape($shortcode).'%',0));
 	
 	return $posts;
 }

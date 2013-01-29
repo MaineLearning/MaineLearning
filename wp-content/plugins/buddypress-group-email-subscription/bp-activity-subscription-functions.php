@@ -70,7 +70,8 @@ function ass_group_notification_forum_posts( $post_id ) {
 	}
 
 	$primary_link = trailingslashit( bp_get_group_permalink( $group ) . 'forum/topic/' . $topic->topic_slug );
-	$blogname     = '[' . get_blog_option( BP_ROOT_BLOG, 'blogname' ) . ']';
+
+	$blogname = '[' . get_blog_option( BP_ROOT_BLOG, 'blogname' ) . ']';
 
 	$is_topic = false;
 
@@ -129,16 +130,34 @@ function ass_group_notification_forum_posts( $post_id ) {
 	// Convert entities and do other cleanup
 	$the_content = ass_clean_content( $the_content );
 
+	// if group is not public, change primary link to login URL to verify
+	// authentication and for easier redirection after logging in
+	if ( $group->status != 'public' ) {
+		$query_args = array(
+			'action'      => 'bpnoaccess',
+			'auth'        => 1,
+			'redirect_to' => urlencode( $primary_link )
+		);
+
+		$primary_link = add_query_arg( $query_args, wp_login_url() );
+
+		$text_before_primary = __( 'To view or reply to this topic, go to:', 'bp-ass' );
+
+	// if public, show standard text
+	} else {
+		$text_before_primary = __( 'To view or reply to this topic, log in and go to:', 'bp-ass' );
+	}
+
 	// setup the email meessage
 	$message = sprintf(__('%s
 
 "%s"
 
-To view or reply to this topic, log in and go to:
+%s
 %s
 
 ---------------------
-', 'bp-ass'), $action . ':', $the_content, $primary_link);
+', 'bp-ass'), $action . ':', $the_content, $text_before_primary, $primary_link);
 
 	// get subscribed users
 	$subscribed_users = groups_get_groupmeta( $group->id, 'ass_subscribed_users' );
@@ -344,7 +363,7 @@ function ass_group_notification_activity( $content ) {
 
 	// if you want to conditionally block certain activity types from appearing,
 	// use the filter below
-	if ( false === apply_filters( 'ass_block_group_activity_types', true, $type ) )
+	if ( false === apply_filters( 'ass_block_group_activity_types', true, $type, $content ) )
 		return;
 
 	if ( !ass_registered_long_enough( $sender_id ) )
@@ -399,7 +418,17 @@ To view or reply, log in and go to:
 ', 'bp-ass' ), $action, $the_content, $activity_permalink );
 	}
 
+	// get subscribed users for the group
 	$subscribed_users = groups_get_groupmeta( $group_id , 'ass_subscribed_users' );
+
+	// this is used if a user is subscribed to the "Weekly Summary" option.
+	// the weekly summary shouldn't record everything, so we have a filter:
+	//
+	// 'ass_this_activity_is_important'
+	//
+	// this hook can be used by plugin authors to record important activity items
+	// into the weekly summary
+	// @see ass_default_weekly_summary_activity_types()
 	$this_activity_is_important = apply_filters( 'ass_this_activity_is_important', false, $type );
 
 	// cycle through subscribed users
@@ -436,9 +465,9 @@ To view or reply, log in and go to:
 			}
 		}
 
-		// activity update notifications only go to Email and Digest. However plugin authors can make important activity updates get emailed out to Weekly summary and New topics by using the ass_group_notification_activity action hook.
-
-		if ( $group_status == 'supersub' || $group_status == 'sub' && $this_activity_is_important ) {
+		// User is subscribed to "All Mail"
+		// OR user is subscribed to "New Topics" (bbPress 2) so send email about this item now!
+		if ( $group_status == 'supersub' || ( $group_status == 'sub' && $type == 'bbp_topic_create' ) ) {
 			/* Content footer */
 			$footer = ass_group_unsubscribe_links( $user_id );
 
@@ -449,7 +478,11 @@ To view or reply, log in and go to:
 				wp_mail( $user->user_email, $subject, $message . $footer . $notice );  // Send the email
 
 			//echo '<br>EMAIL: ' . $user->user_email . "<br>";
-		} elseif ( $group_status == 'dig' || $group_status == 'sum' && $this_activity_is_important ) {
+
+		// User is subscribed to "Daily Digest" so record item in digest!
+		// OR user is subscribed to "Weekly Summary" and activity item is important
+		// enough to be recorded
+		} elseif ( $group_status == 'dig' || ( $group_status == 'sum' && $this_activity_is_important ) ) {
 			ass_digest_record_activity( $content->id, $user_id, $group_id, $group_status );
 			//echo '<br>DIGEST: ' . $user_id . "<br>";
 		}
@@ -486,6 +519,8 @@ function ass_group_activity_edits( $activity ) {
 		// Make sure GES doesn't fire
 		remove_action( 'bp_activity_after_save', 'ass_group_notification_activity', 50 );
 	}
+
+	$run_once = true;
 }
 add_action( 'bp_activity_before_save', 'ass_group_activity_edits' );
 
@@ -494,7 +529,7 @@ add_action( 'bp_activity_before_save', 'ass_group_activity_edits' );
  *
  * @since 3.2.2
  */
-function ass_default_block_group_activity_types( $retval, $type ) {
+function ass_default_block_group_activity_types( $retval, $type, $activity ) {
 
 	switch( $type ) {
 		/** ACTIVITY TYPES TO BLOCK **************************************/
@@ -511,6 +546,49 @@ function ass_default_block_group_activity_types( $retval, $type ) {
 
 			break;
 
+		/** bbPress 2 ****************************************************/
+
+		// groan! bbPress 2 hacks!
+		//
+		// when bbPress first records an item into the group activity stream, it is
+		// incomplete as it is first recorded on the 'wp_insert_post' action
+		//
+		// it is later updated on the 'bbp_new_reply' / 'bbp_new_topic' action
+		//
+		// we want to block the first instance, so GES doesn't record or send this
+		// incomplete activity item
+
+		// reply
+		case 'bbp_reply_create' :
+
+			// to determine if the reply activity item is incomplete, the primary link
+			// will be missing the scheme (HTTP) and host (example.com), so our hack does
+			// a search for '://' because the site could be using HTTPS.
+			if ( strpos( $activity->primary_link, '://' ) === false ) {
+				return false;
+
+			// we're okay again!
+			} else {
+				return $retval;
+			}
+
+			break;
+
+		// topic
+		case 'bbp_topic_create' :
+
+			// to determine if the topic activity item is incomplete, the primary link
+			// will be missing the groups root slug
+			if ( strpos( $activity->primary_link, '/' . bp_get_groups_root_slug() . '/' ) === false ) {
+				return false;
+
+			// we're okay again!
+			} else {
+				return $retval;
+			}
+
+			break;
+
 		/** ALL OTHER TYPES **********************************************/
 
 		default :
@@ -519,20 +597,78 @@ function ass_default_block_group_activity_types( $retval, $type ) {
 			break;
 	}
 }
-add_filter( 'ass_block_group_activity_types', 'ass_default_block_group_activity_types', 5, 2 );
+add_filter( 'ass_block_group_activity_types', 'ass_default_block_group_activity_types', 5, 3 );
 
+/**
+ * Allow certain activity types to be recorded for users subscribed to the
+ * "Weekly Summary" option.
+ *
+ * The rationale behind this is the weekly summary shouldn't record every
+ * single activity item because the summary could get rather long.
+ *
+ * @since 3.2.4
+ */
+function ass_default_weekly_summary_activity_types( $retval, $type ) {
 
-// this funciton is used to include important activity updates from plugins for Topic only and Weekly Summary emails
-// plugin developers can write a similar one to include important updates such as adding documents, wiki pages, calenar events
-// editing of these itmes or comments on them SHOULD NOT be included
-function ass_default_important_things( $is_important, $type ) {
-	// group documents send out their own email for adding new docs
-	if ( $type == 'wiki_group_page_create' || $type == 'new_calendar_event' )
-		$is_important = true;
+	switch( $type ) {
+		/** ACTIVITY TYPES TO RECORD FOR WEEKLY SUMMARY ******************/
 
-	return $is_important;
+		// backpat items
+		case 'wiki_group_page_create' :
+		case 'new_calendar_event' :
+
+		// bbPress 2 forum topic
+		case 'bbp_topic_create' :
+
+		// activity update
+		case 'activity_update' :
+
+			return true;
+
+			break;
+
+		/** ALL OTHER TYPES **********************************************/
+
+		default :
+			return $retval;
+
+			break;
+	}
+
 }
-add_filter( 'ass_this_activity_is_important', 'ass_default_important_things', 1, 2 );
+add_filter( 'ass_this_activity_is_important', 'ass_default_weekly_summary_activity_types', 1, 2 );
+
+/**
+ * Login redirector.
+ *
+ * If group is not public, the group link in the email will use {@link wp_login_url()}.
+ *
+ * If a user clicks on this link and is already logged in, we should attempt
+ * to redirect the user to the authorized content instead of forcing the user
+ * to re-authenticate.
+ *
+ * @since 3.2.4
+ *
+ * @uses bp_loggedin_user_id() To see if a user is logged in
+ */
+function ass_login_redirector() {
+	// see if a redirect link was passed
+	if ( empty( $_GET['redirect_to'] ) )
+		return;
+
+	// see if our special 'auth' variable was passed
+	if( empty( $_GET['auth'] ) )
+		return;
+
+	// if user is *not* logged in, stop now!
+	if ( ! bp_loggedin_user_id() )
+		return;
+
+	// user is logged in, so let's redirect them to the content
+	wp_safe_redirect( esc_url_raw( $_GET['redirect_to'] ) );
+	exit;
+}
+add_action( 'login_init', 'ass_login_redirector', 1 );
 
 
 
@@ -1703,7 +1839,7 @@ function ass_self_post_notification( $user_id = false ) {
 function ass_admin_menu() {
 	add_submenu_page( 'bp-general-settings', __("Group Email Options", 'bp-ass'), __("Group Email Options", 'bp-ass'), 'manage_options', 'ass_admin_options', "ass_admin_options" );
 }
-add_action( is_multisite() && function_exists( 'is_network_admin' ) ? 'network_admin_menu' : 'admin_menu', 'ass_admin_menu' );
+add_action( bp_core_admin_hook(), 'ass_admin_menu' );
 
 
 // function to create the back end admin form

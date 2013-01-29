@@ -5,7 +5,7 @@
  * @category Genesis
  * @package  Sanitizer
  * @author   StudioPress
- * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link     http://www.studiopress.com/themes/genesis
  */
 
@@ -123,6 +123,7 @@ class Genesis_Settings_Sanitizer {
 			'no_html'                  => array( $this, 'no_html'                  ),
 			'safe_html'                => array( $this, 'safe_html'                ),
 			'requires_unfiltered_html' => array( $this, 'requires_unfiltered_html' ),
+			'url'                      => array( $this, 'url'                      ),
 		);
 
 		return apply_filters( 'genesis_available_sanitizer_filters', $default_filters );
@@ -192,6 +193,20 @@ class Genesis_Settings_Sanitizer {
 	function no_html( $new_value ) {
 
 		return strip_tags( $new_value );
+
+	}
+
+	/**
+	 * Makes URLs safe
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param string $new_value String, a URL, possibly unsafe
+	 * @return string String a safe URL
+	 */
+	function url( $new_value ) {
+
+		return esc_url_raw( $new_value );
 
 	}
 
