@@ -26,8 +26,7 @@
         <tr>
             <th scope="row">&nbsp;</th>
             <td><?php _e( 'Select the library to use:', WP_TABLE_RELOADED_TEXTDOMAIN ); ?> <select id="options_tablesorter_script" name="options[tablesorter_script]"<?php disabled( $this->options['enable_tablesorter'], false ); ?>>
-                <option<?php selected( $this->options['tablesorter_script'], 'datatables' ); ?> value="datatables">DataTables (<?php _e( 'recommended', WP_TABLE_RELOADED_TEXTDOMAIN ); ?>)</option>
-                <option<?php selected( $this->options['tablesorter_script'], 'datatables-tabletools' ); ?> value="datatables-tabletools">DataTables+TableTools</option>
+                <option<?php selected( in_array( $this->options['tablesorter_script'], array( 'datatables', 'datatables-tabletools' ), true ), true ); ?> value="datatables">DataTables (<?php _e( 'recommended', WP_TABLE_RELOADED_TEXTDOMAIN ); ?>)</option>
                 <option<?php selected( $this->options['tablesorter_script'], 'tablesorter' ); ?> value="tablesorter">Tablesorter</option>
                 <option<?php selected( $this->options['tablesorter_script'], 'tablesorter_extended' ); ?> value="tablesorter_extended">Tablesorter Extended</option>
         </select> <?php printf( __( '(You can read more about each library\'s features on the <a href="%s">plugin\'s website</a>.)', WP_TABLE_RELOADED_TEXTDOMAIN ), 'http://tobias.baethge.com/go/wp-table-reloaded/website/' ); ?></td>

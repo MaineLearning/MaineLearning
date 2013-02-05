@@ -8,3 +8,9 @@
 	direction: rtl;
 	text-align: right;	
 }
+
+.wp-table-reloaded .sorting,
+.wp-table-reloaded .sorting_asc,
+.wp-table-reloaded .sorting_desc {
+	background-position: left!important;
+}

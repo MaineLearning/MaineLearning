@@ -7,14 +7,14 @@
  * @author Tobias B&auml;thge
  * @since 0.9.2
  */
- 
+
 // should be included by WP_Table_Reloaded_Controller_Admin!
 class WP_Table_Reloaded_Export {
 
     // ###################################################################################################################
     var $export_formats = array();
     var $delimiters = array();
-    
+
     var $export_format = '';
     var $delimiter = ';';
     var $table_to_export = array();
@@ -41,12 +41,13 @@ class WP_Table_Reloaded_Export {
     // ###################################################################################################################
     function export_table() {
         $output = '';
-        
+
         $data = $this->table_to_export['data'];
-        
+		$data = stripslashes_deep( $data );
+
         $rows = count( $data );
         $cols = (0 < $rows) ? count( $data[0] ) : 0;
-        
+
         switch( $this->export_format ) {
             case 'csv':
                 if ( 0 < $rows && 0 < $cols) {
@@ -88,7 +89,6 @@ class WP_Table_Reloaded_Export {
 
     // ###################################################################################################################
     function xml_wrap_and_escape( $string ) {
-        $string = stripslashes( $string );
         if ( $string != htmlspecialchars( $string ) )
             $string = "<![CDATA[{$string}]]>";
         return "\t\t<col>" . $string . "</col>\n";
@@ -96,7 +96,6 @@ class WP_Table_Reloaded_Export {
 
     // ###################################################################################################################
     function html_wrap_and_escape( $string ) {
-        $string = stripslashes( $string );
         return "\t\t<td>" . $string . "</td>\n";
     }
 

@@ -121,7 +121,7 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
 
         $field = $atts['field'];
         $format = $atts['format'];
-        
+
         $table = $this->load_table( $table_id );
 
         // generate output, depending on what information (field) was asked for
@@ -179,7 +179,6 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
             'datatables_lengthchange' => -1,
             'datatables_filter' => -1,
             'datatables_info' => -1,
-            'datatables_tabletools' => -1,
             'datatables_customcommands' => -1,
             'row_offset' => 1, // ATTENTION: MIGHT BE DROPPED IN FUTURE VERSIONS!
             'row_count' => null, // ATTENTION: MIGHT BE DROPPED IN FUTURE VERSIONS!
@@ -218,7 +217,7 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
 
         $rows = count( $table['data'] );
         $columns = count( $table['data'][0] );
-        
+
         // explode from string to array
         $atts['column_widths'] = ( !empty( $atts['column_widths'] ) ) ? explode( '|', $atts['column_widths'] ) : array();
 
@@ -254,7 +253,7 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
             else
                 $output_options[ $key ] = ( -1 !== $value ) ? $value : $table['options'][ $key ] ;
         }
-        
+
         // generate unique HTML ID, depending on how often this table has already been shown on this page
         $count = ( isset( $this->shown_tables[ $table_id ] ) ) ? $this->shown_tables[ $table_id ] : 0;
         $count = $count + 1;
@@ -271,7 +270,6 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
             'datatables_lengthchange' => $output_options['datatables_lengthchange'],
             'datatables_filter' => $output_options['datatables_filter'],
             'datatables_info' => $output_options['datatables_info'],
-            'datatables_tabletools' => $output_options['datatables_tabletools'],
             'datatables_customcommands' => $output_options['datatables_customcommands']
         );
         $js_options = apply_filters( 'wp_table_reloaded_table_js_options', $js_options, $table_id, $output_options );
@@ -400,7 +398,7 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
             // add name and description to searched items, if they are displayed with the table
             $table_name = ( isset( $table['options']['print_name'] ) && $table['options']['print_name'] ) ? $table['name'] : '';
             $table_description = ( isset( $table['options']['print_description'] ) && $table['options']['print_description'] ) ? $table['description'] : '';
-            
+
             $search_tables[ $table_id ] = array(
                 'data' => $table['data'],
                 'name' => $table_name,
@@ -469,11 +467,7 @@ class WP_Table_Reloaded_Controller_Frontend extends WP_Table_Reloaded_Controller
 
             if ( $this->options['enable_tablesorter'] ) {
                 switch ( $this->options['tablesorter_script'] ) {
-                    case 'datatables-tabletools':
-                        $url_css_tabletools = $plugin_path . 'js/tabletools/tabletools.css' . '?ver=' . $this->options['installed_version'];
-                        $url_css_tabletools = apply_filters( 'wp_table_reloaded_url_css_tabletools', $url_css_tabletools );
-                        if ( !empty( $url_css_tabletools ) )
-                            $default_css['tabletools.css'] = "@import url(\"{$url_css_tabletools}\");";
+                    case 'datatables-tabletools': // keep this for backward compatibility
                     case 'datatables': // this also applies to the above, because there is no "break;" above
                         $url_css_datatables = $plugin_path . 'css/datatables.css' . '?ver=' . $this->options['installed_version'];
                         $url_css_datatables = apply_filters( 'wp_table_reloaded_url_css_datatables', $url_css_datatables );
@@ -522,14 +516,10 @@ CSSSTYLE;
     function add_frontend_js() {
         if ( 0 == count( $this->tablesorter_tables ) )
             return; // no tables with script enabled shown
-            
+
         switch ( $this->options['tablesorter_script'] ) {
+            case 'datatables-tabletools': // keep this for backward compatibility
             case 'datatables':
-                $jsfile =  'jquery.datatables.min.js';
-                $js_command = 'dataTable';
-                break;
-            case 'datatables-tabletools':
-                $include_tabletools = true;
                 $jsfile =  'jquery.datatables.min.js';
                 $js_command = 'dataTable';
                 break;
@@ -551,25 +541,6 @@ CSSSTYLE;
         wp_register_script( 'wp-table-reloaded-frontend-js', $js_script_url, array( 'jquery' ), $this->options['installed_version'] );
         wp_print_scripts( 'wp-table-reloaded-frontend-js' );
 
-        if ( isset( $include_tabletools ) && $include_tabletools ) {
-            $js_zeroclipboard_url = plugins_url( 'js/tabletools/zeroclipboard.js', WP_TABLE_RELOADED__FILE__ );
-            $js_zeroclipboard_url = apply_filters( 'wp_table_reloaded_url_js_zeroclipboard', $js_zeroclipboard_url );
-            // no need to explicitely check for dependencies ( 'wp-table-reloaded-frontend-js' and 'jquery' ) again
-            wp_register_script( 'wp-table-reloaded-zeroclipboard-js', $js_zeroclipboard_url, array(), $this->options['installed_version'] );
-            wp_print_scripts( 'wp-table-reloaded-zeroclipboard-js' );
-
-            $js_tabletools_url = plugins_url( 'js/tabletools/tabletools.min.js', WP_TABLE_RELOADED__FILE__ );
-            $js_tabletools_url = apply_filters( 'wp_table_reloaded_url_js_tabletools', $js_tabletools_url );
-            wp_register_script( 'wp-table-reloaded-tabletools-js', $js_tabletools_url, array(), $this->options['installed_version'] );
-            $swf_zeroclipboard_url = plugins_url( 'js/tabletools/zeroclipboard.swf', WP_TABLE_RELOADED__FILE__ );
-            $swf_zeroclipboard_url = apply_filters( 'wp_table_reloaded_url_swf_zeroclipboard', $swf_zeroclipboard_url );
-            wp_localize_script( 'wp-table-reloaded-tabletools-js', 'WP_Table_Reloaded_TableTools', array(
-                'swf_path' => $swf_zeroclipboard_url,
-                'l10n_print_after' => 'try{convertEntities(WP_Table_Reloaded_TableTools);}catch(e){};'
-            ) );
-            wp_print_scripts( 'wp-table-reloaded-tabletools-js' );
-        }
-
         // generate the specific commands for the JS library, depending on chosen features on the "Edit Table" screen
         $commands = array();
         foreach ( $this->tablesorter_tables as $tablesorter_table ) {
@@ -579,9 +550,7 @@ CSSSTYLE;
 
             $parameters = array();
             switch ( $this->options['tablesorter_script'] ) {
-                case 'datatables-tabletools':
-                    if ( $js_options['datatables_tabletools'] )
-                        $parameters['sDom'] = "\"sDom\": 'T<\"clear\">lfrtip'";
+                case 'datatables-tabletools': // Keep this for backward-compatibility
                 case 'datatables':
                     $datatables_locale = get_locale();
                     $datatables_locale = apply_filters( 'wp_table_reloaded_datatables_locale', $datatables_locale );

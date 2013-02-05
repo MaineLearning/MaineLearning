@@ -61,7 +61,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         'use_datatables_on_table_list' => true,
         'add_target_blank_to_links' => false,
         'enable_tablesorter' => true,
-        'tablesorter_script' => 'datatables', // others are 'datatables-tabletools', 'tablesorter', and 'tablesorter_extended'
+        'tablesorter_script' => 'datatables', // others are 'tablesorter' and 'tablesorter_extended'
         'use_default_css' => true,
         'use_custom_css' => true,
         'custom_css' => '',
@@ -76,7 +76,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         'update_message' => array(),
         'last_id' => 0
     );
-    
+
     /**
      * Default list of tables (empty, because there are no tables right after installation)
      * @var array
@@ -94,7 +94,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
      * @var object
      */
     var $export_instance;
-    
+
     /**
      * Instance of the WP_Table_Reloaded_Import class
      * @var object
@@ -194,7 +194,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         );
         $min_capability = isset( $capabilities[ $user_group ] ) ? $capabilities[ $user_group ] : 'manage_options';
         $min_capability = apply_filters( 'wp_table_reloaded_min_needed_capability', $min_capability ); // plugins may filter/change this though
-        
+
         $display_name = 'WP-Table Reloaded'; // the name that is displayed in the admin menu on the left
         $display_name = apply_filters( 'wp_table_reloaded_plugin_display_name', $display_name ); // can be filtered to something shorter maybe
 
@@ -243,7 +243,10 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $this->add_manage_page_css(); // needs to be added to the header
 
         // done after determining the action, because needs action parameter to load correct help string
-        add_contextual_help( $this->hook, $this->helper->get_contextual_help_string() );
+        if ( version_compare( $GLOBALS['wp_version'] , '3.3', '>' ) )
+			WP_Screen::add_old_compat_help( convert_to_screen( $this->hook ), $this->helper->get_contextual_help_string() );
+		else
+			add_contextual_help( $this->hook, $this->helper->get_contextual_help_string() );
     }
 
     /**
@@ -263,6 +266,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             'fr_FR' => __( 'French', WP_TABLE_RELOADED_TEXTDOMAIN ),
             'he_IL' => __( 'Hebrew', WP_TABLE_RELOADED_TEXTDOMAIN ),
             'hi_IN' => __( 'Hindi', WP_TABLE_RELOADED_TEXTDOMAIN ),
+            'hr'    => __( 'Croatian', WP_TABLE_RELOADED_TEXTDOMAIN ),
             'id_ID' => __( 'Indonesian', WP_TABLE_RELOADED_TEXTDOMAIN ),
             'it_IT' => __( 'Italian', WP_TABLE_RELOADED_TEXTDOMAIN ),
             'ja'    => __( 'Japanese', WP_TABLE_RELOADED_TEXTDOMAIN ),
@@ -286,12 +290,12 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $overwrite = apply_filters( 'wp_table_reloaded_action_pre_' . $this->action, false );
         if ( $overwrite )
             return;
-    
+
         // call appropriate action, $this->action is populated in load_manage_page
         if ( is_callable( array( &$this, 'do_action_' . $this->action ) ) )
             call_user_func( array( &$this, 'do_action_' . $this->action ) );
     }
-    
+
     // ###################################################################################################################
     // ##########################################                   ######################################################
     // ##########################################      ACTIONS      ######################################################
@@ -326,9 +330,13 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             );
         }
 
+		// Add WP-Table Reloaded deprecation notice
+		if ( current_user_can( 'install_plugins' ) )
+			$this->helper->print_header_message( __( 'Important note: WP-Table Reloaded is being discontinued and will no longer be developed.<br /><span style="font-weight:normal">Instead, it will be officially replaced with <a href="http://wordpress.org/extend/plugins/tablepress/">TablePress</a>, which not only fixed many problems, but also has better and new features.<br />Please <a href="http://tobias.baethge.com/2013/01/tablepress-replaces-wp-table-reloaded/" style="font-weight:bold">read this announcement</a> for more information and switch from WP-Table Reloaded to TablePress soon.</span>', WP_TABLE_RELOADED_TEXTDOMAIN ) );
+
         $this->load_view( 'list' );
     }
-    
+
     /**
      * "Add new Table" action handler
      */
@@ -364,10 +372,10 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
     function do_action_edit() {
         if ( isset( $_POST['submit'] ) && isset( $_POST['table'] ) ) {
             check_admin_referer( $this->get_nonce( 'edit' ) );
-            
+
             $subactions = array_keys( $_POST['submit'] );
             $subaction = $subactions[0];
-            
+
             switch( $subaction ) {
             case 'update':
             case 'save_back':
@@ -403,7 +411,6 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
                 $table['options']['datatables_lengthchange'] = isset( $_POST['table']['options']['datatables_lengthchange'] );
                 $table['options']['datatables_filter'] = isset( $_POST['table']['options']['datatables_filter'] );
                 $table['options']['datatables_info'] = isset( $_POST['table']['options']['datatables_info'] );
-                $table['options']['datatables_tabletools'] = isset( $_POST['table']['options']['datatables_tabletools'] );
                 $table['options']['datatables_paginate_entries'] = ( is_numeric( $table['options']['datatables_paginate_entries'] ) ) ? absint( $table['options']['datatables_paginate_entries'] ) : $this->default_table['options']['datatables_paginate_entries'];
                 // $table['options']['datatables_customcommands'] is an input type=text field that is always submitted
                 // $table['options']['print_name|description_position'] are select fields that are always submitted
@@ -608,7 +615,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
                     array_splice( $table['visibility']['rows'], $row_id, 0, false );
                     $row_change++;
                 }
-                
+
                 $this->save_table( $table );
                 $message = _n( 'Row inserted successfully.', 'Rows inserted successfully.', count( $insert_rows ), WP_TABLE_RELOADED_TEXTDOMAIN );
                 break;
@@ -754,14 +761,14 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
                         $this->import_instance->import_table();
                         $imported_table = $this->import_instance->imported_table;
                         $table = array_merge( $this->default_table, $imported_table );
-                        
+
                         $rows = count( $table['data'] );
                         $cols = (0 < $rows) ? count( $table['data'][0] ) : 0;
                         $rows = ( 0 < $rows ) ? $rows : 1;
                         $cols = ( 0 < $cols ) ? $cols : 1;
                         $table['visibility']['rows'] = array_fill( 0, $rows, false );
                         $table['visibility']['columns'] = array_fill( 0, $cols, false );
-                        
+
                         $table['id'] = $this->get_new_table_id();
                         $this->save_table( $table );
                     }
@@ -903,7 +910,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
                 $this->load_view( 'import' );
                 return;
             }
-            
+
             // do import with the config set above
             $this->import_instance->import_format = $_POST['import_format'];
             $this->import_instance->import_table();
@@ -963,14 +970,14 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             $this->load_view( 'edit', compact( 'table_id' ) );
         } elseif ( isset( $_POST['import_wp_table_reloaded_dump_file'] ) ) {
             check_admin_referer( $this->get_nonce( 'import_dump' ), $this->get_nonce( 'import_dump' ) );
-            
+
             // check if user is admin
             if ( !current_user_can( 'manage_options' ) ) {
                 $this->helper->print_header_message( __( 'You do not have sufficient rights to perform this action.', WP_TABLE_RELOADED_TEXTDOMAIN ) );
                 $this->load_view( 'options' );
                 return;
             }
-            
+
             // check if file was uploaded
             if ( empty( $_FILES['dump_file']['tmp_name'] ) ) {
                 $this->helper->print_header_message( __( 'You did not upload a WP-Table Reloaded dump file.', WP_TABLE_RELOADED_TEXTDOMAIN ) );
@@ -1026,7 +1033,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             check_admin_referer( $this->get_nonce( 'export' ) );
 
             $table_to_export = $this->load_table( $_POST['table_id'] );
-            
+
             $this->export_instance->table_to_export = $table_to_export;
             $this->export_instance->export_format = $_POST['export_format'];
             $this->export_instance->delimiter = $_POST['delimiter'];
@@ -1049,7 +1056,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             $this->load_view( 'export', compact( 'table_id' ) );
         }
     }
-    
+
     /**
      * "Export" action handler, for Dump Files, stores all plugin data, like tables, options, etc. in a single array,
      * serializes it and offers the resulting string for download in a Dump File
@@ -1065,7 +1072,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
                 $export['tables'][ $table_id ] = $dump_table;
             }
             $export['options'] = $this->options;
-            
+
             $export_dump = serialize( $export );
 
             $filename = 'wp-table-reloaded-export-' . date( 'Y-m-d' ) . '.dump';
@@ -1090,7 +1097,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             }
 
             $new_options = $_POST['options'];
-            
+
             // checkboxes: option value is defined by whether option isset (e.g. was checked) or not
             $this->options['show_exit_warning'] = isset( $new_options['show_exit_warning'] );
             $this->options['growing_textareas'] = isset( $new_options['growing_textareas'] );
@@ -1152,7 +1159,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         }
         $this->load_view( 'options' );
     }
-    
+
     /**
      * "Plugin Uninstall" action handler, checks if an admin is performing it, sets uninstall to true and deactivates the plugin
      * (which executes the plugin_deactivation_hook() which then deletes all options from the DB
@@ -1177,7 +1184,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
 
         $this->load_view( 'uninstall', array(), false );
     }
-    
+
     /**
      * "About" action handler, only calls the view
      */
@@ -1196,7 +1203,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
 
         exit; // necessary to stop page building here!
     }
-    
+
     /**
      * "AJAX Table Preview" action handler
      */
@@ -1227,7 +1234,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $this->update_options();
         $this->do_action_list();
     }
-    
+
     /**
      * "Hide Donate Message" action handler
      */
@@ -1242,10 +1249,10 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         } else {
             $this->helper->print_header_message( sprintf( __( 'No problem! I still hope you enjoy the benefits that WP-Table Reloaded brings to you. If you should want to change your mind, you\'ll always find the &quot;%s&quot; button on the <a href="%s">WP-Table Reloaded website</a>.', WP_TABLE_RELOADED_TEXTDOMAIN ), __( 'Donate', WP_TABLE_RELOADED_TEXTDOMAIN ), 'http://tobias.baethge.com/go/wp-table-reloaded/website/' ) );
         }
-        
+
         $this->do_action_list();
     }
-    
+
     // ###################################################################################################################
     // ##########################################                     ####################################################
     // ##########################################   Page Generation   ####################################################
@@ -1337,7 +1344,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         <br class="clear" />
         <?php
     }
-    
+
     /**
      * Decide whether a donate message can be shown on the "List Tables" screen, depending on passed days since installation and whether it was shown before
      *
@@ -1381,7 +1388,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $options_updated = apply_filters( 'wp_table_reloaded_update_options', false, $this->options );
         if ( $options_updated )
             return;
-    
+
         update_option( $this->optionname['options'], $this->options );
     }
 
@@ -1390,12 +1397,12 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
      */
     function update_tables() {
         ksort( $this->tables, SORT_NUMERIC ); // sort for table IDs, as one with a small ID might have been appended
-        
+
         // possibility to overwrite tables updating (i.e. to update them in own DB table)
         $tables_updated = apply_filters( 'wp_table_reloaded_update_tables', false, $this->tables );
         if ( $tables_updated )
             return;
-            
+
         update_option( $this->optionname['tables'], $this->tables );
     }
 
@@ -1422,7 +1429,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             // delete the transient that caches the table output
             $cache_name = "wp_table_reloaded_table_output_{$table['id']}";
             delete_transient( $cache_name );
-            
+
             $this->tables[ $table['id'] ] = ( isset( $this->tables[ $table['id'] ] ) ) ? $this->tables[ $table['id'] ] : $this->optionname['table'] . '_' . $table['id'];
             update_option( $this->tables[ $table['id'] ], $table );
             $this->update_tables();
@@ -1450,7 +1457,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
     // #########################################      URL Support     ####################################################
     // #########################################                      ####################################################
     // ###################################################################################################################
-    
+
     /**
      * Generate the complete nonce string, from the nonce base, the action and an item, e.g. wp-table-reloaded-nonce_delete_table
      *
@@ -1483,7 +1490,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $action_url = esc_url( $action_url );
         return $action_url;
     }
-    
+
     // ###################################################################################################################
     // #######################################                         ###################################################
     // #######################################    Plugin Management    ###################################################
@@ -1559,6 +1566,8 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         if ( ! version_compare( $this->options['installed_version'], WP_TABLE_RELOADED_PLUGIN_VERSION, '<' ) )
             return;
 
+		$previous_version = $this->options['installed_version'];
+
 		$new_options = array();
 
         // 1b. step: update new default options before possibly adding them
@@ -1583,28 +1592,38 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         if ( 'top-level' == $this->options['admin_menu_parent_page'] )
             $new_options['admin_menu_parent_page'] = 'admin.php';
 
+        // 2f., TableTools was removed in 1.9.4
+        if ( version_compare( $this->options['installed_version'] , '1.9.4', '<' ) ) {
+			if ( isset( $this->options['tablesorter_script'] ) && 'datatables-tabletools' == $this->options['tablesorter_script'] )
+				$new_options['tablesorter_script'] = 'datatables';
+		}
+
         // 3. step: update installed version number, empty update message cache, set welcome message
         $new_options['installed_version'] = WP_TABLE_RELOADED_PLUGIN_VERSION;
         $new_options['update_message'] = array();
         $new_options['show_welcome_message'] = 2; // 2 = update message
-        
+
         // 4. step: save the new options
         $this->options = $new_options;
         $this->update_options();
+
+		// (temporary) 5. step: Bail, if we are updating from 1.9.3 or higher, to not touch tables
+        if ( version_compare( $previous_version , '1.9.3', '>=' ) )
+        	return;
 
         // update individual tables and their options
 		$this->tables = $this->load_tables();
         foreach ( $this->tables as $id => $tableoptionname ) {
             $table = $this->load_table( $id );
-            
+
             $temp_table = $this->default_table;
-            
+
             // if table doesn't have visibility information, add them
             $rows = count( $table['data'] );
             $cols = (0 < $rows) ? count( $table['data'][0] ) : 0;
             $temp_table['visibility']['rows'] = array_fill( 0, $rows, false );
             $temp_table['visibility']['columns'] = array_fill( 0, $cols, false );
-            
+
             foreach ( $temp_table as $key => $value )
                 $new_table[ $key ] = ( isset( $table[ $key ] ) ) ? $table[ $key ] : $temp_table[ $key ] ;
 
@@ -1634,7 +1653,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         $has_access = apply_filters( 'wp_table_reloaded_user_access_' . $screen, $has_access, $this->options['user_access_plugin_options'] );
         return $has_access;
     }
-    
+
     /**
      * Get the plugin update message from the remote server, if there is an update available
      *
@@ -1674,7 +1693,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
 	function add_plugin_row_meta( $links, $file ) {
 		if ( WP_TABLE_RELOADED_BASENAME != $file )
             return $links;
-				
+
 		$links[] = '<a href="' . $this->get_action_url() . '" title="' . __( 'WP-Table Reloaded Plugin Page', WP_TABLE_RELOADED_TEXTDOMAIN ) . '">' . __( 'Plugin Page', WP_TABLE_RELOADED_TEXTDOMAIN ) . '</a>';
 		$links[] = '<a href="http://tobias.baethge.com/go/wp-table-reloaded/faq/" title="' . __( 'Frequently Asked Questions', WP_TABLE_RELOADED_TEXTDOMAIN ) . '">' . __( 'FAQ', WP_TABLE_RELOADED_TEXTDOMAIN ) . '</a>';
 		$links[] = '<a href="http://tobias.baethge.com/go/wp-table-reloaded/support/" title="' . __( 'Support', WP_TABLE_RELOADED_TEXTDOMAIN ) . '">' . __( 'Support', WP_TABLE_RELOADED_TEXTDOMAIN ) . '</a>';
@@ -1693,7 +1712,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         load_plugin_textdomain( WP_TABLE_RELOADED_TEXTDOMAIN, false, $language_directory );
         remove_filter( 'locale', array( &$this, 'get_plugin_locale' ) );
     }
-    
+
     /**
      * Retrieve the locale the plugin shall be shown in, applied as a filter in get_locale()
      */
@@ -1704,7 +1723,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             else
                 return $locale;
         }
-        
+
         $locale = ( !empty( $this->options['plugin_language'] ) && 'auto' != $this->options['plugin_language'] ) ? $this->options['plugin_language'] : $locale;
         return $locale;
     }
@@ -1752,8 +1771,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
             'option_growing_textareas' => $this->options['growing_textareas'],
             'option_add_target_blank_to_links' => $this->options['add_target_blank_to_links'],
             'option_tablesorter_enabled' => $this->options['enable_tablesorter'],
-            'option_datatables_active' => $this->options['enable_tablesorter'] && ( 'datatables' == $this->options['tablesorter_script'] || 'datatables-tabletools' == $this->options['tablesorter_script'] ),
-            'option_tabletools_active' => $this->options['enable_tablesorter'] && ( 'datatables-tabletools' == $this->options['tablesorter_script'] ),
+            'option_datatables_active' => $this->options['enable_tablesorter'] && ( 'datatables' == $this->options['tablesorter_script'] ),
             'l10n_print_after' => 'try{convertEntities(WP_Table_Reloaded_Admin);}catch(e){};'
         ) );
     }
@@ -1779,7 +1797,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
     function add_editor_button() {
         if ( 0 == count( $this->tables ) )
             return;
-            
+
         $this->init_language_support();
         add_thickbox(); // we need thickbox to show the list
 
@@ -1807,7 +1825,7 @@ class WP_Table_Reloaded_Controller_Admin extends WP_Table_Reloaded_Controller_Ba
         	add_filter( 'mce_external_plugins', array( &$this, 'add_tinymce_plugin' ) );
         	add_filter( 'mce_buttons', array( &$this, 'add_tinymce_button' ) );
         }
-        
+
         add_action( 'admin_print_footer_scripts', array( &$this, '_print_editor_button' ), 100 );
     }
 

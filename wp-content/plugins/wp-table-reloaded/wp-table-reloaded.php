@@ -4,14 +4,14 @@
  *
  * @package WP-Table Reloaded
  * @author Tobias Bäthge
- * @version 1.9.3
+ * @version 1.9.4
  */
 
 /*
 Plugin Name: WP-Table Reloaded
 Plugin URI: http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/
 Description: This plugin allows you to create and easily manage tables in the admin-area of WordPress. A comfortable backend allows an easy manipulation of table data. You can then include the tables into your posts, on your pages or in text widgets by using a shortcode or a template tag function. Tables can be imported and exported from/to CSV, XML and HTML.
-Version: 1.9.3
+Version: 1.9.4
 Author: Tobias Bäthge
 Author URI: http://tobias.baethge.com/
 Author eMail: wordpress@tobias.baethge.com
@@ -21,7 +21,7 @@ License: GPL 2
 Donate URI: http://tobias.baethge.com/donate/
 */
 
-/*  Copyright 2009-2012 Tobias Bäthge
+/*  Copyright 2009-2013 Tobias Bäthge
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -47,7 +47,7 @@ if ( !defined( 'WP_TABLE_RELOADED_BASENAME' ) )
 if ( !defined( 'WP_TABLE_RELOADED__FILE__' ) )
     define( 'WP_TABLE_RELOADED__FILE__', __FILE__ );
 if ( !defined( 'WP_TABLE_RELOADED_PLUGIN_VERSION' ) )
-    define( 'WP_TABLE_RELOADED_PLUGIN_VERSION', '1.9.3' );
+    define( 'WP_TABLE_RELOADED_PLUGIN_VERSION', '1.9.4' );
 
 /**
  * Decide whether admin controller or frontend controller is loaded
@@ -58,7 +58,7 @@ if ( is_admin() ) {
 } else {
     include_once ( WP_TABLE_RELOADED_ABSPATH . 'controllers/controller-frontend.php' );
     add_action( 'init', '_wp_table_reloaded_controller_frontend_constructor' );
-    
+
     /**
      * Call constructor on init hook
      */

@@ -28,7 +28,7 @@ jQuery(document).ready( function( $ ) {
         }
         return false;
 	} );
-	
+
     $( '#a-hide-columns' ).click( function() {
         var cols_selected = $( '#table_contents .table-foot :checked' ).length;
         if ( cols_selected == 0 ) {
@@ -53,7 +53,7 @@ jQuery(document).ready( function( $ ) {
         }
         return false;
 	} );
-	
+
 	$( '#button-insert-rows' ).click( function() {
         var rows_selected = $( '#table_contents tr:not(".table-foot") :checked' ).length;
         if ( rows_selected == 0 ) {
@@ -175,14 +175,12 @@ jQuery(document).ready( function( $ ) {
         $( '#table_options_use_tablesorter' ).change( function() {
             if( this.checked ) {
                 $( '.wp-table-reloaded-datatables-options input' ).removeAttr( 'disabled' );
-                if ( !WP_Table_Reloaded_Admin.option_tabletools_active )
-                    $( '#table_options_datatables_tabletools' ).attr( 'disabled', 'disabled' );
                 $( '#table_options_datatables_paginate' ).change();
             } else {
                 $( '.wp-table-reloaded-datatables-options input' ).attr( 'disabled', 'disabled' );
             }
         } );
-        
+
         $( '#table_options_datatables_paginate' ).change( function() {
             if( this.checked ) {
                 $( '#table_options_datatables_paginate_entries' ).removeAttr( 'disabled' );
@@ -311,7 +309,7 @@ jQuery(document).ready( function( $ ) {
             }
         }
     } );
-    
+
     $( '#button-delete-columns' ).click( function() {
         var cols_cb = $( '#table_contents .table-foot :checkbox' ).length;
         var cols_selected = $( '#table_contents .table-foot :checked' ).length;
@@ -328,7 +326,7 @@ jQuery(document).ready( function( $ ) {
             }
         }
     } );
-    
+
     $( 'a.import_wptable_link' ).click( function() {
     	return confirm( WP_Table_Reloaded_Admin.str_ImportwpTableLink );
     } );
@@ -353,7 +351,7 @@ jQuery(document).ready( function( $ ) {
     	var dummy = prompt( WP_Table_Reloaded_Admin.str_TableShortcodeMessage, $(this).attr('title') );
     	return false;
     } );
-    
+
     // toggling of boxes
     $( '.postbox h3, .postbox .handlediv' ).click( function() {
         $( $(this).parent().get(0) ).toggleClass('closed');
@@ -363,7 +361,7 @@ jQuery(document).ready( function( $ ) {
 	function set_table_data_changed() {
 		if ( ! WP_Table_Reloaded_Admin.option_show_exit_warning )
 			return;
-			
+
 		window.onbeforeunload = function() {
 			return WP_Table_Reloaded_Admin.str_saveAlert;
 		};

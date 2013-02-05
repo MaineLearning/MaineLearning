@@ -136,11 +136,20 @@ class WP_Table_Reloaded_Render {
 
             $tbody_class = ( $this->output_options['row_hover'] ) ? ' class="row-hover"' : '';
 
-            $caption = '';
-            if ( !empty( $this->output_options['edit_table_url'] ) ) {
-                $edit_table_link = "<a href=\"{$this->output_options['edit_table_url']}\" title=\"" . __( 'Edit', 'default' ) . "\">" . __( 'Edit', 'default' ) . "</a>";
-                $caption = "<caption style=\"caption-side: bottom; text-align: left; border:none; background: none;\">{$edit_table_link}</caption>\n";
-            }
+			// <caption> tag
+			$caption = apply_filters( 'wp_table_reloaded_table_caption_arg', '', $table );
+			$caption_style = $caption_class = '';
+			if ( ! empty( $caption ) )
+				$caption_class = "wp-table-reloaded-table-caption wp-table-reloaded-table-caption-id-{$table['id']}";
+			if ( ! empty( $this->output_options['edit_table_url'] ) ) {
+				if ( ! empty( $caption ) )
+					$caption .= '<br/>';
+				else
+					$caption_style = ' style="caption-side:bottom;text-align:left;border:none;background:none;"';
+				$caption .= "<a href=\"{$this->output_options['edit_table_url']}\" title=\"" . __( 'Edit', 'default' ) . "\">" . __( 'Edit', 'default' ) . "</a>";
+			}
+			if ( ! empty( $caption ) )
+				$caption = "<caption{$caption_class}{$caption_style}>\n{$caption}</caption>\n";
 
             $colgroup = ( !empty( $colgroup ) ) ? "<colgroup>\n{$colgroup}</colgroup>\n" : '';
             $thead = ( !empty( $thead ) ) ? "<thead>\n{$thead}</thead>\n" : '';

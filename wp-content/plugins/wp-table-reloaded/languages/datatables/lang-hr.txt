@@ -1,0 +1,16 @@
+﻿{
+	"sProcessing":   "Pričekajte...",
+	"sLengthMenu":   "Prikaži _MENU_ unose",
+	"sZeroRecords":  "Nema nikakvih rezultata.",
+	"sInfo":         "Prikazujem _TOTAL_ od (_START_-_END_) unosa",
+	"sInfoEmpty":    "Prikazujem 0 do 0 od 0 unosa",
+	"sInfoFiltered": "(filtrirano od _MAX_ ukupnih unosa)",
+	"sInfoPostFix":  "",
+	"sSearch":       "Pretraga:",
+	"oPaginate": {
+		"sFirst":      "Prvi",
+		"sPrevious":   "Prijašnji",
+		"sNext":       "Sljedeći",
+		"sLast":       "Posljednji"
+	}
+}

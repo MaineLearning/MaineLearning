@@ -1,0 +1,2957 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Table Reloaded\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-table-reloaded\n"
+"POT-Creation-Date: 2011-01-11 18:13:11+00:00\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: KatanaSwords.info <admin@katanaswords.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"Language: hr\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:3 views/view-list.php:2
+msgid "This is a list of all available tables."
+msgstr "Ovo je popis svih dostupnih tablica."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:3
+msgid "You may insert a table into a post or page here."
+msgstr "Ovdje možete unijeti tablicu u članak ili stranicu."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:4
+#, php-format
+msgid ""
+"Click the &quot;%s&quot; link after the desired table and the corresponding "
+"shortcode will be inserted into the editor (<strong>[table id=&lt;ID&gt; /]</"
+"strong>)."
+msgstr ""
+"Kliknite &quot;%s&quot; link poslje tablice i vezani skraćeni kod će biti "
+"unesen u editor (<strong>[table id=&lt;ID&gt; /]</strong>)."
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:4 views/view-ajax_list.php:44
+msgid "Insert"
+msgstr "Unesi"
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:13 views/view-ajax_list.php:21
+#: views/view-import.php:99 views/view-import.php:108 views/view-list.php:13
+#: views/view-list.php:23
+msgid "ID"
+msgstr "ID"
+
+# @ wp-table-reloaded
+#: views/view-add.php:13 views/view-ajax_list.php:14
+#: views/view-ajax_list.php:22 views/view-edit.php:23 views/view-edit.php:283
+#: views/view-import.php:100 views/view-import.php:109 views/view-list.php:15
+#: views/view-list.php:25
+msgid "Table Name"
+msgstr "Ime Tablice"
+
+# @ wp-table-reloaded
+#: views/view-add.php:17 views/view-ajax_list.php:15
+#: views/view-ajax_list.php:23 views/view-edit.php:27
+#: views/view-import.php:101 views/view-import.php:110 views/view-list.php:16
+#: views/view-list.php:26
+msgid "Description"
+msgstr "Opis"
+
+# @ wp-table-reloaded
+#: views/view-ajax_list.php:16 views/view-ajax_list.php:24
+#: views/view-edit.php:434 views/view-import.php:102 views/view-import.php:111
+msgid "Action"
+msgstr "Radnja"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1860 views/view-ajax_list.php:53
+#: views/view-export.php:72 views/view-list.php:87
+msgid "No tables were found."
+msgstr "Nije pronađena nijedna tablica."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+msgid "You may add, edit, copy, delete or preview tables here."
+msgstr ""
+"Ovdje možete dodati, editirati, kopirati, izbrisati ili pregledati tablice."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14 views/view-ajax_preview.php:5 views/view-edit.php:9
+#: views/view-list.php:2
+#, php-format
+msgid ""
+"To insert the table into a page, post or text-widget, copy the shortcode "
+"<strong>[table id=%s /]</strong> and paste it into the corresponding place "
+"in the editor."
+msgstr ""
+"Da biste unijeli tablicu u stranicu, članak ili tekstualni widget, kopitajte "
+"skraćeni kod <strong>[table id=%s /]</strong> i unesite ga na željeno mjesto "
+"u editoru."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+msgid "Each table has a unique ID that needs to be adjusted in that shortcode."
+msgstr ""
+"Svaka tablica ima unikatni ID koji treba biti podešen u tom skraćenom kodu."
+
+# @ wp-table-reloaded
+#: views/view-list.php:2
+#, php-format
+msgid ""
+"You can also click the button &quot;%s&quot; in the editor toolbar to select "
+"and insert a table."
+msgstr ""
+"Također možete kliknuti &quot;%s&quot; dugme u editoru da biste odabrali i "
+"unijeli tablicu."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14 views/view-list.php:2
+msgid "Table"
+msgstr "Tablica"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:32 views/view-list.php:17 views/view-list.php:27
+msgid "Last Modified"
+msgstr "Posljednja Izmjena"
+
+# @ wp-table-reloaded
+#: views/view-list.php:39
+msgid "(no name)"
+msgstr "(nema imena)"
+
+# @ wp-table-reloaded
+#: views/view-list.php:40
+msgid "(no description)"
+msgstr "(nema opisa)"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:33 views/view-list.php:44
+msgid "by"
+msgstr "od"
+
+# @ wp-table-reloaded
+#: views/view-list.php:58
+#, php-format
+msgid "Edit %s"
+msgstr "Izmijeni %s"
+
+# @ default
+# @ wp-table-reloaded
+#: classes/render.class.php:141 views/view-list.php:60
+msgid "Edit"
+msgstr "Izmijeni"
+
+# @ wp-table-reloaded
+#: views/view-list.php:62
+msgid "Shortcode"
+msgstr "Skraćeni kod"
+
+# @ wp-table-reloaded
+#: views/view-list.php:63
+msgid "Copy"
+msgstr "Kopiraj"
+
+# @ wp-table-reloaded
+#: views/view-list.php:64
+msgid "Export"
+msgstr "Export"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:156 views/view-edit.php:160 views/view-list.php:65
+msgid "Delete"
+msgstr "Izbriši"
+
+# @ wp-table-reloaded
+#: views/view-list.php:66
+#, php-format
+msgid "Preview of Table %s"
+msgstr "Pregled Tablice %s"
+
+# @ wp-table-reloaded
+#: views/view-list.php:67
+msgid "Preview"
+msgstr "Pregled"
+
+# @ wp-table-reloaded
+#: views/view-import.php:140 views/view-list.php:78
+msgid "Bulk actions:"
+msgstr "Multi izmjena:"
+
+# @ wp-table-reloaded
+#: views/view-list.php:78
+msgid "Copy Tables"
+msgstr "Kopiraj Tablice"
+
+# @ wp-table-reloaded
+#: views/view-list.php:78
+msgid "Delete Tables"
+msgstr "Izbriši Tablice"
+
+# @ wp-table-reloaded
+#: views/view-export.php:72 views/view-list.php:87
+#, php-format
+msgid ""
+"You should <a href=\"%s\">add</a> or <a href=\"%s\">import</a> a table to "
+"get started!"
+msgstr ""
+"Trebali biste <a href=\"%s\">dodati</a> ili <a href=\"%s\">importirati</a> "
+"tablicu da bi započeli!"
+
+# @ wp-table-reloaded
+#: views/view-add.php:4
+msgid ""
+"To add a new table, enter its name, a description (optional) and the number "
+"of rows and columns."
+msgstr ""
+"Da biste dodali novu tablicu, unesite njeno ime, opis (opcionalno) i broj "
+"redaka i stupaca."
+
+# @ wp-table-reloaded
+#: views/view-add.php:4
+msgid "You may also add, insert or delete rows and columns later."
+msgstr "Također možete dodati, unijeti ili izbrisati retke i stupce kasnije."
+
+# @ wp-table-reloaded
+#: views/view-add.php:14
+msgid "Enter Table Name"
+msgstr "Unesite Ime Tablice"
+
+# @ wp-table-reloaded
+#: views/view-add.php:18
+msgid "Enter Description"
+msgstr "Unesite Opis"
+
+# @ wp-table-reloaded
+#: views/view-add.php:21
+msgid "Number of Rows"
+msgstr "Broj Redaka"
+
+# @ wp-table-reloaded
+#: views/view-add.php:25
+msgid "Number of Columns"
+msgstr "Broj Stupaca"
+
+# @ wp-table-reloaded
+#: views/view-add.php:32
+msgid "Add Table"
+msgstr "Dodaj Tablicu"
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "WP-Table Reloaded can import tables from existing data."
+msgstr "WP-Table Reloaded može importirati tablice iz postojećih podataka."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid "This may be a CSV, XML or HTML file, each with a certain structure."
+msgstr ""
+"Ovo može biti CSV, XML ili HTML datoteka, svaka sa zasebnom strukturom."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid ""
+"To import an existing table, please select its format and the source for the "
+"import."
+msgstr ""
+"Da biste importirali postojeću tablicu, molimo da odaberete njen format i "
+"izvornu datoteku za upload."
+
+# @ wp-table-reloaded
+#: views/view-import.php:3
+msgid ""
+"You can also decide, if you want to import it as a new table or replace an "
+"existing table."
+msgstr ""
+"Ujedno možete odlučiti ukoliko želite importirati kao novu tablicu ili "
+"zamijeniti postojeću."
+
+# @ wp-table-reloaded
+#: views/view-import.php:10
+msgid "Select Import Format"
+msgstr "Odaberite Import Format"
+
+# @ wp-table-reloaded
+#: views/view-import.php:21
+msgid "Add or Replace Table?"
+msgstr "Dodaj ili Zamijeni Tablicu?"
+
+# @ wp-table-reloaded
+#: views/view-import.php:23
+msgid "Add as new Table"
+msgstr "Dodaj kao novu tablicu"
+
+# @ wp-table-reloaded
+#: views/view-import.php:24
+msgid "Replace existing Table"
+msgstr "Zamijeni postojeću tablicu"
+
+# @ wp-table-reloaded
+#: views/view-import.php:28
+msgid "Select existing Table to Replace"
+msgstr "Odaberite postojeću tablicu za zamijeniti"
+
+# @ wp-table-reloaded
+#: views/view-import.php:45
+msgid "Select source for Import"
+msgstr "Odaberite izvornu datoteku za import"
+
+# @ wp-table-reloaded
+#: views/view-import.php:47
+msgid "File upload"
+msgstr "Upload datoteke"
+
+# @ wp-table-reloaded
+#: views/view-import.php:48
+msgid "URL"
+msgstr "URL"
+
+# @ wp-table-reloaded
+#: views/view-import.php:49
+msgid "Manual input"
+msgstr "Ručni unos"
+
+# @ wp-table-reloaded
+#: views/view-import.php:50
+msgid "File on server"
+msgstr "Datoteka na serveru"
+
+# @ wp-table-reloaded
+#: views/view-import.php:54
+msgid "Select File with Table to Import"
+msgstr "Odaberite datoteku s tablicom za import"
+
+# @ wp-table-reloaded
+#: views/view-import.php:58
+msgid "URL to Import Table from"
+msgstr "URL za importiranje tablice"
+
+# @ wp-table-reloaded
+#: views/view-import.php:62
+msgid "Path to file on server"
+msgstr "Putanja do datoteke na serveru"
+
+# @ wp-table-reloaded
+#: views/view-import.php:66
+msgid "Paste data with Table to Import"
+msgstr "Unesite podatke s tablicom za import"
+
+# @ wp-table-reloaded
+#: views/view-import.php:72
+msgid "Import Table"
+msgstr "Import Tablice"
+
+# @ wp-table-reloaded
+#: views/view-import.php:86
+msgid "Import from original wp-Table plugin"
+msgstr "Import iz originalnog wp-Table plugina"
+
+# @ wp-table-reloaded
+#: views/view-import.php:132
+msgid "Import"
+msgstr "Import"
+
+# @ wp-table-reloaded
+#: views/view-import.php:140
+msgid "Import Tables"
+msgstr "Importaj Tablice"
+
+# @ wp-table-reloaded
+#: views/view-import.php:146
+msgid "wp-Table by Alex Rabe seems to be installed, but no tables were found."
+msgstr ""
+"Plugin wp-Table od Alex Rabe je instaliran, ali nisu pronađene nikakve "
+"tablice."
+
+# @ wp-table-reloaded
+#: views/view-uninstall.php:3
+msgid "Plugin deactivated successfully."
+msgstr "Plugin uspješno deaktiviran."
+
+# @ wp-table-reloaded
+#: views/view-uninstall.php:4
+msgid ""
+"All tables, data and options were deleted. You may now manually remove the "
+"plugin's subfolder from your WordPress plugin folder or use the \"Delete\" "
+"link on the Plugins page."
+msgstr ""
+"Sve tablice, podaci i postavke su izbrisane. Sada možete ručno maknuti "
+"direktorij plugina iz vašeg Wordpress plugin direktorija ili korisiti "
+"\"Izbriši\" link na stranici za Plugin-ove."
+
+# @ wp-table-reloaded
+#: views/view-options.php:3
+msgid ""
+"WP-Table Reloaded has several options which affect the plugin behavior in "
+"different areas."
+msgstr ""
+"WP-Table Reloaded ima nekoliko opcija koje utječu na ponašanje plugina u "
+"različitim situacijama."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+msgid ""
+"Frontend Options influence the output and used features of tables in pages, "
+"posts or text-widgets."
+msgstr ""
+"Opcije Sučelja utječu na izgled i mogućnosti tablica na stranicama, člancima "
+"ili tekstualnim widgetima."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+#, php-format
+msgid ""
+"The Backend Options control the plugin's admin area, e.g. the &quot;%s&quot; "
+"screen."
+msgstr ""
+"Pozadinske Opcije utječu na administratorsko sučelje plugina, npr. &quot;"
+"%s&quot; ekran."
+
+# @ wp-table-reloaded
+#: views/view-options.php:4 views/view-options.php:55
+#: views/view-options.php:75 views/view-options.php:79
+msgid "Edit Table"
+msgstr "Editiraj Tablicu"
+
+# @ wp-table-reloaded
+#: views/view-options.php:4
+msgid "Administrators have access to further Admin Options."
+msgstr "Administratori imaju pristup dodatnim Admin Opcijama."
+
+# @ wp-table-reloaded
+#: views/view-options.php:19
+msgid "Frontend Options"
+msgstr "Opcije Sučelja"
+
+# @ wp-table-reloaded
+#: views/view-about.php:91 views/view-edit.php:15 views/view-edit.php:51
+#: views/view-edit.php:104 views/view-edit.php:262 views/view-edit.php:361
+#: views/view-edit.php:422 views/view-options.php:19 views/view-options.php:70
+#: views/view-options.php:91 views/view-options.php:185
+#: views/view-options.php:196
+msgctxt "expand"
+msgid "Hide"
+msgstr "Sakrij"
+
+# @ wp-table-reloaded
+#: views/view-about.php:91 views/view-edit.php:15 views/view-edit.php:51
+#: views/view-edit.php:104 views/view-edit.php:262 views/view-edit.php:361
+#: views/view-edit.php:422 views/view-options.php:19 views/view-options.php:70
+#: views/view-options.php:91 views/view-options.php:185
+#: views/view-options.php:196
+msgid "Expand"
+msgstr "Proširi"
+
+# @ wp-table-reloaded
+#: views/view-options.php:23
+msgid "JavaScript library"
+msgstr "JavaScript biblioteka"
+
+# @ wp-table-reloaded
+#: views/view-options.php:24
+msgid "Yes, enable the use of a JavaScript library."
+msgstr "Da, aktiviraj korištenje JavaScript biblioteke."
+
+# @ wp-table-reloaded
+#: views/view-options.php:24
+msgid ""
+"WP-Table Reloaded includes three JavaScript libraries that can add useful "
+"features, like sorting, pagination, and filtering, to a table."
+msgstr ""
+"WP-Table Reloaded sadrži tri JavaScript biblioteke koje mogu dodati "
+"mogućnosti, poput sortiranja, paginacije i filtriranja na tablicu."
+
+# @ wp-table-reloaded
+#: views/view-options.php:28
+msgid "Select the library to use:"
+msgstr "Odaberite biblioteku za korištenje:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:29 views/view-options.php:131
+msgid "recommended"
+msgstr "preporučeno"
+
+# @ wp-table-reloaded
+#: views/view-options.php:33
+#, php-format
+msgid ""
+"(You can read more about each library's features on the <a href=\"%s"
+"\">plugin's website</a>.)"
+msgstr ""
+"(Možete pročitati više o mogućnostima svake biblioteke na <a href=\"%s"
+"\">Plugin web stranici</a>.)"
+
+# @ wp-table-reloaded
+#: views/view-options.php:36
+msgid "Default CSS"
+msgstr "Standardni CSS"
+
+# @ wp-table-reloaded
+#: views/view-options.php:38
+msgid ""
+"Yes, include and load the plugin's default CSS Stylesheets. This is highly "
+"recommended, if you use one of the JavaScript libraries!"
+msgstr ""
+"Da, uključi standardne CSS stilove od plugina. Ovo je preporučeno ukoliko "
+"koristite neki od JavaScript biblioteka."
+
+# @ wp-table-reloaded
+#: views/view-options.php:42
+msgid "Custom CSS"
+msgstr "Proizvoljni CSS"
+
+# @ wp-table-reloaded
+#: views/view-options.php:44
+msgid "Yes, include and load the following custom CSS commands."
+msgstr "Da, uključi sljedeće proizvoljne CSS komande."
+
+# @ wp-table-reloaded
+#: views/view-options.php:44
+msgid "This should be used to change the table layout and styling."
+msgstr "Ovo se koristi da biste promijenili izgled i stil tablice."
+
+# @ wp-table-reloaded
+#: views/view-options.php:50
+#, php-format
+msgid "You can get styling examples from the <a href=\"%s\">FAQ</a>."
+msgstr ""
+"U <a href=\"%s\">često postavljanim pitanjima</a> možete pronaći primjere "
+"stiliziranja tablica."
+
+# @ wp-table-reloaded
+#: views/view-options.php:50
+#, php-format
+msgid ""
+"Information on available CSS selectors can be found in the <a href=\"%s"
+"\">documentation</a>."
+msgstr ""
+"Informacije o dostupnim CSS selektorima možete pronaći u <a href=\"%s"
+"\">Dokumentaciji</a>."
+
+# @ wp-table-reloaded
+#: views/view-options.php:54
+msgid "Links in new window"
+msgstr "Linkovi u novom prozoru"
+
+# @ wp-table-reloaded
+#: views/view-options.php:55
+#, php-format
+msgid ""
+"Yes, open links that are inserted with the &quot;%s&quot; button on the "
+"&quot;%s&quot; screen in a new browser window <strong>from now on</strong>."
+msgstr ""
+"Da, otvori linkove koji su unešeni sa &quot;%s&quot; dugmetom na &quot;"
+"%s&quot; ekranu u novom prozoru internet preglednika <strong>od sad nadalje</"
+"strong>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:114 views/view-options.php:55
+msgid "Insert Link"
+msgstr "Unesi Link"
+
+# @ wp-table-reloaded
+#: views/view-options.php:62 views/view-options.php:169
+msgid "Save Options"
+msgstr "Snimi Postavke"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:45 views/view-edit.php:257 views/view-edit.php:417
+#: views/view-edit.php:468 views/view-options.php:65
+#: views/view-options.php:172
+msgid "Cancel"
+msgstr "Prekini"
+
+# @ wp-table-reloaded
+#: views/view-options.php:70
+msgid "Backend Options"
+msgstr "Opcije Pozadinskog Sučelja"
+
+# @ wp-table-reloaded
+#: views/view-options.php:74
+msgid "Exit warning"
+msgstr "Upozorenje za izlaz"
+
+# @ wp-table-reloaded
+#: views/view-options.php:75
+#, php-format
+msgid ""
+"Yes, show a warning message, if I leave the &quot;%s&quot; screen and have "
+"not yet saved my changes."
+msgstr ""
+"Da, prikaži poruku upozorenja, ukoliko izlazite iz &quot;%s&quot; i još "
+"niste snimili postavke."
+
+# @ wp-table-reloaded
+#: views/view-options.php:78
+msgid "Growing textareas"
+msgstr "Rastuće tekst polje"
+
+# @ wp-table-reloaded
+#: views/view-options.php:79
+#, php-format
+msgid ""
+"Yes, enlarge the textareas on the &quot;%s&quot; screen when they are "
+"focussed."
+msgstr ""
+"Da, povećaj tekstualno polje na &quot;%s&quot; ekranu kad je fokusiran."
+
+# @ wp-table-reloaded
+#: views/view-options.php:82
+msgid "List of Tables features"
+msgstr "Popis Mogućnosti Tablica"
+
+# @ wp-table-reloaded
+#: views/view-options.php:83
+#, php-format
+msgid ""
+"Yes, use the DataTables JavaScript features (sorting, pagination, filtering) "
+"on the &quot;%s&quot; screen."
+msgstr ""
+"Da, koristi DataTables JavaScript mogućnosti (sortiranje, paginacija, "
+"filtriranje) na &quot;%s&quot; ekranu."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1302 views/view-options.php:83
+msgid "List Tables"
+msgstr "Popis Tablica"
+
+# @ wp-table-reloaded
+#: views/view-options.php:91
+msgid "Admin Options"
+msgstr "Admin Opcije"
+
+# @ wp-table-reloaded
+#: views/view-options.php:93 views/view-options.php:210
+#: views/view-options.php:224
+msgid "This area are only available to site administrators!"
+msgstr "Ovaj dio je dostupan samo administratorima web stranice."
+
+# @ wp-table-reloaded
+#: views/view-options.php:93
+msgid "You can therefore not change these options."
+msgstr "To znači da ne možete mijenjati ove opcije."
+
+# @ wp-table-reloaded
+#: views/view-options.php:98
+msgid "Plugin Access"
+msgstr "Plugin Pristup"
+
+# @ wp-table-reloaded
+#: views/view-options.php:99
+msgid "To access WP-Table Reloaded, a user needs to be:"
+msgstr "Da bi mogao pristupiti WP-Table Reloaded, korisnik mora biti:"
+
+# @ default
+#: views/view-options.php:100 views/view-options.php:111
+msgctxt "User role"
+msgid "Administrator"
+msgstr "Administrator"
+
+# @ default
+#: views/view-options.php:101 views/view-options.php:112
+msgctxt "User role"
+msgid "Editor"
+msgstr "Editor"
+
+# @ default
+#: views/view-options.php:102 views/view-options.php:113
+msgctxt "User role"
+msgid "Author"
+msgstr "Autor"
+
+# @ default
+#: views/view-options.php:103
+msgctxt "User role"
+msgid "Contributor"
+msgstr "Pisac"
+
+# @ wp-table-reloaded
+#: views/view-options.php:109
+msgid "Plugin Options Access"
+msgstr "Pristup Plugin Opcijama"
+
+# @ wp-table-reloaded
+#: views/view-options.php:110
+msgid "To access the Plugin Options of WP-Table Reloaded, a user needs to be:"
+msgstr ""
+"Da bi mogao pristupiti WP-Table Reloaded Plugin Opcijama, korisnik mora biti:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:114
+msgid ""
+"Admin Options, Dump file Import, and Manual Plugin Uninstall are always "
+"accessible by Administrators only, regardless of this setting."
+msgstr ""
+"Admin Opcije, import datoteka, i ručno deinstaliranje plugina je uvijek "
+"dostupno samo administratorima, bez obzira na ovu postavku."
+
+# @ wp-table-reloaded
+#: views/view-options.php:118
+msgid "Plugin Language"
+msgstr "Jezik Plugina"
+
+# @ wp-table-reloaded
+#: views/view-options.php:119
+msgid "WP-Table Reloaded shall be shown in this language:"
+msgstr "WP-Table Reloaded će biti prikazan u ovom jeziku:"
+
+# @ wp-table-reloaded
+#: views/view-options.php:120
+#, php-format
+msgid "WordPress Default (currently %s)"
+msgstr "WordPress Postavka (trenutno %s)"
+
+# @ wp-table-reloaded
+#: views/view-options.php:129
+msgid "Admin menu entry"
+msgstr "Admin meni stavka"
+
+# @ wp-table-reloaded
+#: views/view-options.php:130
+msgid "WP-Table Reloaded shall be shown in this section of the admin menu:"
+msgstr ""
+"WP-Table Reloaded će biti prikazan u ovoj sekciji na administratorskom "
+"meniju:"
+
+# @ default
+#: views/view-options.php:131
+msgid "Tools"
+msgstr "Alati"
+
+# @ default
+#: views/view-options.php:132
+msgid "Posts"
+msgstr "Članci"
+
+# @ default
+#: views/view-options.php:139
+msgid "Pages"
+msgstr "Stranice"
+
+# @ default
+#: views/view-options.php:140
+msgid "Plugins"
+msgstr "Pluginovi"
+
+# @ default
+#: views/view-options.php:141
+msgid "Settings"
+msgstr "Postavke"
+
+# @ default
+#: views/view-options.php:142
+msgid "Dashboard"
+msgstr "Kontrolna Ploča"
+
+# @ wp-table-reloaded
+#: views/view-options.php:143
+msgid "Top-Level"
+msgstr "Viši Nivo"
+
+# @ wp-table-reloaded
+#: views/view-options.php:148
+msgid "Frontend Edit Link"
+msgstr "Edit Link na Stranici"
+
+# @ wp-table-reloaded
+#: views/view-options.php:149
+msgid ""
+"Yes, show an \"Edit\" link to users with sufficient rights near every table "
+"on the frontend."
+msgstr ""
+"Da, prikaži \"Izmijeni\" link korisnicima sa mogućnostima izmjene pored "
+"svake tablice na stranici."
+
+# @ wp-table-reloaded
+#: views/view-options.php:153
+msgid "WordPress Search"
+msgstr "WordPress Pretraga"
+
+# @ wp-table-reloaded
+#: views/view-options.php:154
+msgid ""
+"Yes, the WordPress Search shall also find posts and pages that contain the "
+"search term inside a table."
+msgstr ""
+"Da, Wordpress Pretraga će također pretraživati članke i stranice koje sadrže "
+"ključne riječi unutar tablice."
+
+# @ wp-table-reloaded
+#: views/view-options.php:158
+msgid "Remove upon Deactivation"
+msgstr "Makni kod Deaktivacije"
+
+# @ wp-table-reloaded
+#: views/view-options.php:159
+msgid ""
+"Yes, remove all plugin related data from the database when the plugin is "
+"deactivated."
+msgstr ""
+"Da, makni sve podatke od plugina (tablice, postavke) iz baze podataka kada "
+"je plugin deaktiviran."
+
+# @ wp-table-reloaded
+#: views/view-options.php:159
+msgid "Should be activated directly before deactivation only!"
+msgstr "Treba biti aktivirano isključivo prije same deaktivacije!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:179
+msgid "WP-Table Reloaded Data Export and Backup"
+msgstr "WP-Table Reloaded Import i Backup Podataka"
+
+# @ wp-table-reloaded
+#: views/view-options.php:182
+msgid ""
+"WP-Table Reloaded can export and import a so-called dump file that contains "
+"all tables, their settings and the plugin's options."
+msgstr ""
+"WP-Table Reloaded može exportirati i importirati takozvanu dump-datoteku "
+"koja sadrži sve tablice, njene postavke i ostale postavke plugina."
+
+# @ wp-table-reloaded
+#: views/view-options.php:182
+msgid ""
+"This file can be used as a backup or to move all data to another WordPress "
+"site."
+msgstr ""
+"Ova datoteka se može koristiti kao backup ili da biste premjestili podatke "
+"na drugu Wordpress stranicu."
+
+# @ wp-table-reloaded
+#: views/view-options.php:185
+msgid "Export a dump file"
+msgstr "Exportiraj dump datoteku"
+
+# @ wp-table-reloaded
+#: views/view-options.php:187
+msgid ""
+"To export all Tables and their settings, click the button below to generate "
+"and download a dump file."
+msgstr ""
+"Da biste eksportirali sve tablice i postavke, kliknite dugme dolje da biste "
+"generirali i preuzeli dump datoteku."
+
+# @ wp-table-reloaded
+#: views/view-options.php:187
+msgid ""
+"<strong>Warning</strong>: Do <strong>not</strong> edit the content of that "
+"file under any circumstances as you will destroy the file!"
+msgstr ""
+"<strong>Upozorenje:</strong> nipošto nemojte direktno mijenjati podatke u "
+"datoteci jer će biti neiskoristiva!"
+
+# @ wp-table-reloaded
+#: views/view-export.php:10 views/view-options.php:190
+msgid "Create and Download Dump File"
+msgstr "Stvori i Preuzmi Dump Datoteku"
+
+# @ wp-table-reloaded
+#: views/view-options.php:196
+msgid "Import a dump file"
+msgstr "Importiraj dump datoteku"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid ""
+"To import a WP-Table Reloaded dump file and restore the included data, "
+"upload the file from your computer."
+msgstr ""
+"Da biste importirali WP-Table Reloaded dump datoteku, uploadajte je sa "
+"svojeg računala."
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid ""
+"All current data of this WP-Table Reloaded installation (Tables, Options, "
+"Settings) <strong>WILL BE OVERWRITTEN</strong> with the data from the file!"
+msgstr ""
+"Svi postojeći podatci u ovoj instalaciji WP-Table Reloaded će <strong>BITI "
+"PREBRISANI</strong> s podacima iz datoteke!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid "Do not proceed, if you do not understand this!"
+msgstr "Ukoliko ne razumijete ovu opciju, nemojte nastaviti!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:198
+msgid ""
+"It is highly recommended to export and backup the data of this installation "
+"before importing another dump file (see above)."
+msgstr ""
+"Veoma je preporučeno da eksportirate i napravite backup podataka trenutne "
+"instalacije prije nego unosite podatke iz dump datoteke (pogledaj iznad)."
+
+# @ wp-table-reloaded
+#: views/view-options.php:204
+msgid "Select Dump File"
+msgstr "Odaberi Dump Datoteku"
+
+# @ wp-table-reloaded
+#: views/view-options.php:206
+msgid "Import Dump File"
+msgstr "Importaj Dump Datoteku"
+
+# @ wp-table-reloaded
+#: views/view-options.php:216
+msgid "Manually Uninstall WP-Table Reloaded"
+msgstr "Ručno Deinstaliraj WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid ""
+"Uninstalling <strong>will permanently delete</strong> all tables, data, and "
+"options, that belong to WP-Table Reloaded from the database, including all "
+"tables you added or imported."
+msgstr ""
+"Deinstalacija će <strong>trajno izbrisati</strong> sve tablice, podatke i "
+"postavke koje pripadaju WP-Table Reloaded iz baze podataka, uključujući sve "
+"tablice koje ste dodali ili importirali."
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid ""
+"You will manually need to remove the plugin's files from the plugin folder "
+"afterwards."
+msgstr ""
+"Kasnije morate ručno maknuti datoteke plugina iz Wordpress Plugins "
+"direktorija."
+
+# @ wp-table-reloaded
+#: views/view-options.php:218
+msgid ""
+"Be very careful with this and only click the button if you know what you are "
+"doing!"
+msgstr ""
+"Budite veoma oprezni s ovim i kliknite dugme samo ako znate što radite!"
+
+# @ wp-table-reloaded
+#: views/view-options.php:222
+msgid "Uninstall Plugin WP-Table Reloaded"
+msgstr "Deinstaliraj Plugin WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1087 views/view-options.php:233
+msgid "You do not have sufficient rights to access the Plugin Options."
+msgstr "Nemate omogućen pristup da biste vidjeli Opcije Plugina."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid ""
+"It is recommended to export and backup the data of important tables "
+"regularly."
+msgstr ""
+"Preporučeno je da eksportirate i radite backup važnih tablica učestalo."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid ""
+"Select the table, the desired export format and (for CSV only) a delimiter."
+msgstr ""
+"Odaberite tablicu, željeni format za eksportiranje i delimiter (razdjeljnik, "
+"najčešće zarez) ukoliko se radi o CSV datoteci."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid ""
+"You may choose to download the export file. Otherwise it will be shown on "
+"this page."
+msgstr ""
+"Možete preuzeti eksportiranu datoteku. Ukoliko je ne preuzmete biti će "
+"prikazana na ovoj stranici."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+msgid ""
+"Be aware that only the table data, but no options or settings are exported."
+msgstr ""
+"Napomena: samo tablice i njeni podaci će biti eksportirani, bez opcija i "
+"postavki."
+
+# @ wp-table-reloaded
+#: views/view-export.php:10
+#, php-format
+msgid ""
+"To backup all tables, including their settings, at once use the &quot;"
+"%s&quot; button in the &quot;%s&quot;."
+msgstr ""
+"Da biste napravili backup svih tablica uključujući i postavke odjednom, "
+"možete korisitit &quot;%s&quot; dugme u &quot;%s&quot;."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1270 controllers/controller-admin.php:1312
+#: views/view-edit.php:350 views/view-edit.php:365 views/view-export.php:10
+msgid "Plugin Options"
+msgstr "Opcije Plugina"
+
+# @ wp-table-reloaded
+#: views/view-export.php:18
+msgid "Select Table to Export"
+msgstr "Odaberite Tablicu za Export"
+
+# @ wp-table-reloaded
+#: views/view-export.php:34
+msgid "Select Export Format"
+msgstr "Odaberite Format Export Datoteke"
+
+# @ wp-table-reloaded
+#: views/view-export.php:44
+msgid "Select Delimiter to use"
+msgstr "Odaberite Razdjeljnik podataka"
+
+# @ wp-table-reloaded
+#: views/view-export.php:51
+msgid "Only needed for CSV export."
+msgstr "Potrebno samo za CSV datoteke."
+
+# @ wp-table-reloaded
+#: views/view-export.php:54
+msgid "Download file"
+msgstr "Preuzmi datoteku"
+
+# @ wp-table-reloaded
+#: views/view-export.php:55
+msgid "Yes, I want to download the export file."
+msgstr "Da, želim preuzeti export datoteku."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:477 views/view-export.php:60
+msgid "Export Table"
+msgstr "Export Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:8
+msgid "On this page, you can edit the content of the table."
+msgstr "Na ovoj stranici možete mijenjati sadržaj tablice."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:8
+msgid ""
+"It is also possible to change the table structure by inserting, deleting, "
+"moving, and swapping columns and rows."
+msgstr ""
+"Također je moguće mijenjati strukturu tablice dodavanjem, brisanjem, "
+"premještanjem i razmjenom redaka i stupaca."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:15
+msgid "Table Information"
+msgstr "Informacije Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:19
+msgid "Table ID"
+msgstr "ID Tablice"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1750 views/view-edit.php:41
+#: views/view-edit.php:253 views/view-edit.php:413 views/view-edit.php:464
+msgid "Update Changes"
+msgstr "Snimi Promjene"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:42 views/view-edit.php:254 views/view-edit.php:414
+#: views/view-edit.php:465
+msgid "Save and go back"
+msgstr "Snimi i idi nazad"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:51
+msgid "Table Contents"
+msgstr "Sadržaj Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:104
+msgid "Data Manipulation"
+msgstr "Rukovanje Podacima"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:115
+msgid "Insert Image"
+msgstr "Unesi Sliku"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:124
+msgid "ascending"
+msgstr "uzlaznom"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:125
+msgid "descending"
+msgstr "silaznom"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:128
+#, php-format
+msgid "Sort table by column %s in %s order"
+msgstr "Sortiraj tablicu sa stupcem %s u %s poretku"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:130
+msgid "Sort"
+msgstr "Sortiranje"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:135 views/view-edit.php:139
+msgctxt "item"
+msgid "Hide"
+msgstr "Sakrij"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:136 views/view-edit.php:140
+msgctxt "item"
+msgid "Unhide"
+msgstr "Prikaži"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:137
+#, php-format
+msgctxt "hide_unhide"
+msgid "Selected rows: %s %s"
+msgstr "Označeni redovi: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:141
+#, php-format
+msgctxt "hide_unhide"
+msgid "Selected columns: %s %s"
+msgstr "Označeni stupci: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:144
+msgid "Combine cells in a row:"
+msgstr "Spoji ćelije u retku:"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:145
+msgid "Add colspan"
+msgstr "Produži ćeliju kroz stupce"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:148
+msgid "Combine cells in a column:"
+msgstr "Spoji ćelije u stupcu:"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:149
+msgid "Add rowspan"
+msgstr "Produži ćeliju kroz redak"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:155
+msgid "Insert row"
+msgstr "Dodaj redak"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:157
+#, php-format
+msgctxt "insert_delete"
+msgid "Selected rows: %s %s"
+msgstr "Označeni redovi: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:159
+msgid "Insert column"
+msgstr "Dodaj stupac"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:161
+#, php-format
+msgctxt "insert_delete"
+msgid "Selected columns: %s %s"
+msgstr "Označeni stupci: %s %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:171
+#, php-format
+msgid "Add %s row(s)"
+msgstr "Dodaj %s redova"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:172 views/view-edit.php:175 views/view-edit.php:459
+msgid "Add"
+msgstr "Dodaj"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:174
+#, php-format
+msgid "Add %s column(s)"
+msgstr "Dodaj %s stupaca"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:189
+#, php-format
+msgid "Swap rows %s and %s"
+msgstr "Razmjesti retke %s i %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:191 views/view-edit.php:206
+msgid "Swap"
+msgstr "Razmjesti"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:204
+#, php-format
+msgid "Swap columns %s and %s"
+msgstr "Razmjesti stupce %s i %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:219 views/view-edit.php:239
+msgid "before"
+msgstr "prije"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:220 views/view-edit.php:240
+msgid "after"
+msgstr "poslije"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:223
+#, php-format
+msgid "Move row %s %s row %s"
+msgstr "Premjesti redak %s %s retka %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:225 views/view-edit.php:245
+msgid "Move"
+msgstr "Premjesti"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:243
+#, php-format
+msgid "Move column %s %s column %s"
+msgstr "Premjesti stupac %s %s stupca %s"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:262
+msgid "Table Styling Options"
+msgstr "Opcije Stila Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:264
+msgid "These settings will only be used for this table."
+msgstr "Ove postavke će biti korištene samo za ovu tablicu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:267
+msgid "Alternating row colors"
+msgstr "Alternativne boje redaka"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:268
+msgid "Every second row has an alternating background color."
+msgstr "Svaki drugi redak ima drukčiju pozadinsku boju."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:271
+msgid "Row Highlighting"
+msgstr "Istaknuti Redak"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:272
+msgid ""
+"Highlight a row by changing its background color while the mouse cursor "
+"hovers above it."
+msgstr ""
+"Možete istaknuti redak mijenjanjem pozadinske boje kada je miš iznad njega."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:275
+msgid "Table head"
+msgstr "Zaglavlje tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:276
+msgid ""
+"The first row of your table is the table head (HTML tags &lt;thead&gt; and "
+"&lt;th&gt;)."
+msgstr ""
+"Prvi redak tablice je zaglavlje (HTML oznake &lt;thead&gt; i &lt;th&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:279
+msgid "Table footer"
+msgstr "Podnožje tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:280
+msgid ""
+"The last row of your table is the table footer (HTML tags &lt;tfoot&gt; and "
+"&lt;th&gt;)."
+msgstr ""
+"Posljednji redak u tablici je podnožje (HTML oznake &lt;tfoot&gt; i &lt;"
+"th&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:289 views/view-edit.php:306
+msgid "above"
+msgstr "iznad"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:291 views/view-edit.php:308
+msgid "below"
+msgstr "ispod"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:294
+#, php-format
+msgid "The Table Name shall be written %s the table (HTML tag &lt;h2&gt;)."
+msgstr "Ime tablice će biti prikazano %s tablice (HTML oznaka &lt;h2&gt;)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:300
+msgid "Table Description"
+msgstr "Opis Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:311
+#, php-format
+msgid "The Table Description shall be written %s the table."
+msgstr "Opis tablice će biti prikazan %s tablice."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:317
+msgid "Cache Table Output"
+msgstr "Cache Prikaza Tablice"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:318
+msgid ""
+"The resulting HTML output of the table shall be cached in the WordPress "
+"database cache for faster page generation."
+msgstr ""
+"HTML kod za prikaz vaše tablice će biti cache-an (snimljen u memoriju) u "
+"Wordpress bazi podataka da bi se stranica brže prikazala."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:322
+msgid ""
+"Enter a string that will be given to the table as an additional class for "
+"styling with CSS."
+msgstr ""
+"Unesite string koji će biti dodan tablici kao dodatna klasa koji možete "
+"stilizirati putem CSS-a."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:325
+msgid "Use JavaScript library"
+msgstr "Koristi JavaScript biblioteku"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:331 views/view-edit.php:335 views/view-edit.php:347
+msgid "You can change further settings for this library below."
+msgstr "Možete dodatno promijeniti postavke za ovu biblioteku dolje."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:339 views/view-edit.php:343
+msgid "The table will then be sortable by the visitor."
+msgstr "Ovu tablicu će posjetitelji moći sortirati."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:350
+#, php-format
+msgid "Yes, use the &quot;%s&quot; JavaScript library with this table."
+msgstr "Da, koristi &quot;%s&quot; JavaScript biblioteku s ovom tablicom."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:350
+#, php-format
+msgid ""
+"You must enable the use of a JavaScript library on the &quot;%s&quot; screen "
+"first."
+msgstr ""
+"Prvo morate omogućiti korištenje JavaScript biblioteke na &quot;%s&quot; "
+"ekranu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:361
+msgid "DataTables JavaScript Features"
+msgstr "DataTables JavaScript Mogućnosti"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:363
+msgid ""
+"You can enable certain features for the DataTables JavaScript library here."
+msgstr ""
+"Ovdje možete uključiti određene mogućnosti DataTables JavaScript biblioteke."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:363
+msgid ""
+"More information on these features can be found on the <a href=\"http://www."
+"datatables.net/\">DataTables website</a>."
+msgstr ""
+"Više informacija o ovom mogućnostima možete pronaći na <a href=\"http://www."
+"datatables.net/\">DataTables web stranici</a>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:365
+#, php-format
+msgid ""
+"You can currently not change these options, because you have not enabled the "
+"&quot;DataTables&quot; or the &quot;DataTables+TableTools&quot; JavaScript "
+"library on the &quot;%s&quot; screen."
+msgstr ""
+"Trenutno ne možete mijenjati ove postavke jer niste omogućili &quot;"
+"DataTables&quot; ili &quot;DataTables+TableTools&quot; JavaScript biblioteku "
+"na &quot;%s&quot; ekranu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:365
+msgid ""
+"It is not possible to use these features with the &quot;Tablesorter&quot; or "
+"&quot;Tablesorter Extended&quot; libraries."
+msgstr ""
+"Nije moguće koristiti ove mogućnosti sa &quot;Tablesorter&quot;- ili &quot;"
+"Tablesorter Extended&quot; bibliotekama."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:369
+msgid "Sorting"
+msgstr "Sortiranje"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:370
+msgid "Yes, enable sorting of table data by the visitor."
+msgstr "Da, omogući korisnicima sortiranje podataka u tablici."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:373
+msgid "Pagination"
+msgstr "Paginacija"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:378
+msgid ""
+"Yes, enable pagination (showing only a certain number of rows) of the table "
+"by the visitor."
+msgstr ""
+"Da, omogući paginaciju (prikazuje se samo određeni broj redaka) tablice "
+"posjetiteljima."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:380
+#, php-format
+msgid "Show %1$s rows of the table per page."
+msgstr "Prikaži %1$s redaka tablice po stranici."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:386
+msgid "Length Change"
+msgstr "Promjena Duljine"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:387
+msgid ""
+"Yes, allow the visitor to change the number of rows shown when using "
+"pagination."
+msgstr ""
+"Da, omogući posjetiteljima da promijene broj prikazanih redaka kada se "
+"koristi paginacija."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:391
+msgid ""
+"Yes, enable the visitor to filter or search the table. Only rows with the "
+"search word in them are shown."
+msgstr ""
+"Da, omogući posjetiteljima da filtriraju i pretražuju tablicu. Samo redovi s "
+"ključnim riječima za pretraživanje se prikazuju."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:394
+msgid "Info Bar"
+msgstr "Info Bar"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:395
+msgid ""
+"Yes, show the table information display. This shows information and "
+"statistics about the currently visible data, including filtering."
+msgstr ""
+"Da, prikaži informacije o tablici. Ovo prikazuje informacije i statistike o "
+"trenutno vidljivim podacima, uključujući filtriranje."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:398
+msgid "TableTools"
+msgstr "TableTools"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:400
+msgid ""
+"Yes, activate the TableTools functions (Copy to Clipboard, Save to CSV, Save "
+"to XLS, Print Table) for this table."
+msgstr ""
+"Da, aktiviraj TableTools funkcije (kopiranje u međuspremnik, snimanje u CSV, "
+"XLS, ispis) za ovu tablicu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:401
+msgid ""
+"This option can only be used with the &quot;DataTables+TableTools&quot; "
+"JavaScript library."
+msgstr ""
+"Ova opcija može samo biti korištena sa &quot;DataTables+TableTools&quot; "
+"JavaScript bibliotekom."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:405
+msgid "Custom Commands"
+msgstr "Proizvoljne Komande"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:406
+msgid ""
+"Enter additional DataTables JavaScript parameters that will be included with "
+"the script call here."
+msgstr ""
+"Unesite dodatne DataTables JavaScript parametre koji će biti uključeni sa "
+"skriptom ovdje."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:406
+msgid ""
+"For advanced use only. Read the <a href=\"http://www.datatables.net/"
+"\">DataTables documentation</a> before."
+msgstr ""
+"Samo za napredne korisnike. Pročitajte <a href=\"http://www.datatables.net/"
+"\">DataTables Dokumentaciju</a> prije."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:422
+msgid "Custom Data Fields"
+msgstr "Proizvoljna Podatkovna Polja"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:424
+msgid "Custom Data Fields can be used to add extra metadata to a table."
+msgstr ""
+"Proizvoljna podatkovna polja mogu se koristiti da biste unijeli dodatne "
+"podatke u tablicu."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:424
+msgid ""
+"For example, this could be information about the source or the creator of "
+"the data."
+msgstr "Na primjer, ovo može biti informacija o izvoru ili autoru podataka."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:426
+#, php-format
+msgid ""
+"You can show this data in the same way as tables by using the shortcode "
+"<strong>[table-info id=%s field=\"&lt;field-name&gt;\" /]</strong>."
+msgstr ""
+"Ove podatke možete prikazati na isti način kao i tablice koristeći skraćeni "
+"kod <strong>[table-info id=%s field=\"&lt;ime-polja&gt;\" /]</strong>."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:432
+msgid "Field Name"
+msgstr "Ime Polja"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:433
+msgid "Value"
+msgstr "Vrijednost"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:447
+msgid "Delete Field"
+msgstr "Izbriši Polje"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:449
+msgid "View shortcode"
+msgstr "Vidi skraćeni kod"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:458
+msgid ""
+"To add a new Custom Data Field, enter its name (only lowercase letters, "
+"numbers, _ and -)."
+msgstr ""
+"Da biste dodali novo proizvoljno podatkovno polje, unesite ime (samo mala "
+"slova, brojevi, _ i -)."
+
+# @ wp-table-reloaded
+#: views/view-edit.php:459
+msgid "Custom Data Field Name"
+msgstr "Ime Proizvoljnog Podatkovnog Polja"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:473
+msgid "Other actions"
+msgstr "Ostale Akcije"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:476
+msgid "Delete Table"
+msgstr "Izbriši Tablicu"
+
+# @ wp-table-reloaded
+#: views/view-about.php:5
+msgid "Plugin Purpose"
+msgstr "Svrha Plugina"
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid ""
+"WP-Table Reloaded allows you to create and manage tables in the admin-area "
+"of WordPress."
+msgstr ""
+"WP-Table Reloaded vam omogućuje da stvarate i upravljate tablicama u "
+"administratorskom sučelju Wordpress-a."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid ""
+"Those tables may contain strings, numbers and even HTML (e.g. to include "
+"images or links)."
+msgstr ""
+"Tablice mogu sadržavati stringove, brojeve pa čak i HTML (npr. da biste "
+"dodali slike ili linkove)."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid ""
+"You can then show the tables in your posts, on your pages or in text-widgets "
+"by using a shortcode."
+msgstr ""
+"Tada možete prikazati tablice u vašim člancima, stranicama ili tekstualnim "
+"widgetima koristeći skraćeni kod."
+
+# @ wp-table-reloaded
+#: views/view-about.php:7
+msgid ""
+"If you want to show your tables anywhere else in your theme, you can use a "
+"template tag function."
+msgstr ""
+"Ukoliko želite prikazivati vaše tablice drugdje u temi, možete koristiti "
+"posebni tag/funkciju."
+
+# @ wp-table-reloaded
+#: views/view-about.php:12
+msgid "Usage"
+msgstr "Upute"
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "At first you should add or import a table."
+msgstr "Za početak trebate dodati ili importirati tablicu."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid ""
+"This means that you either let the plugin create an empty table for you or "
+"that you load an existing table from either a CSV, XML or HTML file."
+msgstr ""
+"To znači da možete dopustiti pluginu da kreira praznu tablicu za vas ili da "
+"možete importirati postojeću tablicu iz CSV, XML ili HTML datoteke."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid ""
+"Then you can edit your data or change the structure of your table (e.g. by "
+"inserting or deleting rows or columns, swaping rows or columns or sorting "
+"them) and select specific table options like alternating row colors or "
+"whether to print the name or description, if you want."
+msgstr ""
+"Tada možete mijenjati vaše podatke ili promijeniti strukturu vaše tablice "
+"(npr. dodavanjem ili brisanjem redaka ili stupaca, njihovim razmještanjem "
+"ili sortiranjem), i odabrati posebne opcije tabice poput alternativnih boja "
+"redaka ili opcija prikaza imena ili opisa tablice, ukoliko to želite."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid ""
+"To easily add a link or an image to a cell, use the provided buttons. Those "
+"will ask you for the URL and a title. Then you can click into a cell and the "
+"corresponding HTML will be added to it for you."
+msgstr ""
+"Da biste lako dodali link ili sliku u ćeliju, koristite dostupnu dugmad koja "
+"će vas tražiti URL i naziv. Tada možete kliknuti na ćeliju i potrebni HTML "
+"kod će biti dodan za vas."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+#, php-format
+msgid ""
+"You can also select the desired table from a list (after clicking the button "
+"&quot;%s&quot; in the editor toolbar) and the corresponding shortcode will "
+"be added for you."
+msgstr ""
+"Također možete odabrati željenu tablicu iz liste (nakon klika na dugme &quot;"
+"%s&quot; u Editor-u) i potrebni skraćeni kod će automatski biti dodan."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid "Tables can be styled by changing and adding CSS commands."
+msgstr "Tablice se mogu stilizirati mijenjanjem ili dodavanjem CSS komandi."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid ""
+"The plugin ships with default CSS Stylesheets, which can be customized with "
+"own code or replaced with other Stylesheets."
+msgstr ""
+"Plugin ima već postavljene CSS stilove, koje možete promijeniti s vašim "
+"kodom ili zamijeniti s nekim drugim."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+msgid ""
+"For this, each table is given certain CSS classes that can be used as CSS "
+"selectors."
+msgstr ""
+"Za ovo, svakoj tablici je dana određena CSS klasa koja može biti korištena "
+"kao CSS selektor."
+
+# @ wp-table-reloaded
+#: views/view-about.php:14
+#, php-format
+msgid ""
+"Please see the <a href=\"%s\">documentation</a> for a list of these "
+"selectors and for styling examples."
+msgstr ""
+"Molimo pogledajte <a href=\"%s\">Dokumentaciju</a> za popis ovih selektora i "
+"primjere stiliziranja."
+
+# @ wp-table-reloaded
+#: views/view-about.php:19
+msgid "More Information and Documentation"
+msgstr "Više Informacija i Dokumentacija"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:40 views/view-about.php:21
+#, php-format
+msgid ""
+"More information about WP-Table Reloaded can be found on the <a href=\"%s"
+"\">plugin's website</a> or on its page in the <a href=\"%s\">WordPress "
+"Plugin Directory</a>."
+msgstr ""
+"Više informacija o WP-Table Reloaded možete pronaći na <a href=\"%s\">Plugin "
+"Web stranici</a> ili na stranici u <a href=\"%s\">WordPress Plugin "
+"direktoriju</a>."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:41 views/view-about.php:21
+#, php-format
+msgid "For technical information, see the <a href=\"%s\">documentation</a>."
+msgstr "Za tehničke informacije, pogledajte <a href=\"%s\">Dokumentaciju</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:26
+msgid "Help and Support"
+msgstr "Pomoć i Podrška"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:42 views/view-about.php:28
+#, php-format
+msgid ""
+"<a href=\"%s\">Support</a> is provided through the <a href=\"%s\">WordPress "
+"Support Forums</a>."
+msgstr ""
+"<a href=\"%s\">Podrška</a> je dana kroz <a href=\"%s\">WordPress Podrška "
+"Forum</a>."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:43 views/view-about.php:28
+#, php-format
+msgid ""
+"Before asking for support, please carefully read the <a href=\"%s"
+"\">Frequently Asked Questions</a> where you will find answered to the most "
+"common questions, and search through the forums."
+msgstr ""
+"Prije nego zatražite korisničku podršku, molimo da pažljivo pročitate <a "
+"href=\"%s\">Učestalo Postavljana Pitanja (FAQ)</a> gdje možete pronaći "
+"većinu rješenja, te također možete pretražiti forum."
+
+# @ wp-table-reloaded
+#: views/view-about.php:28
+#, php-format
+msgid ""
+"If you do not find an answer there, please <a href=\"%s\">open a new thread</"
+"a> in the WordPress Support Forums with the tag &quot;wp-table-"
+"reloaded&quot;."
+msgstr ""
+"Ako ne nađete odgovor tamo, molimo da <a href=\"%s\">otvorite novu temu</a> "
+"na WordPress Podršci Forumu sa tagom &quot;wp-table-reloaded&quot;."
+
+# @ wp-table-reloaded
+#: views/view-about.php:33
+msgid "Author and License"
+msgstr "Autor i Licenca"
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+#, php-format
+msgid "This plugin was written by <a href=\"%s\">Tobias B&auml;thge</a>."
+msgstr "Ovaj plugin je napisao <a href=\"%s\">Tobias B&auml;thge</a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid "It is licensed as Free Software under GPL 2."
+msgstr "Licenciran je kao <em>besplatni software</em> pod GPL 2 licencom."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:44 views/view-about.php:35
+#, php-format
+msgid ""
+"If you like the plugin, <a href=\"%s\"><strong>a donation</strong></a> is "
+"recommended."
+msgstr ""
+"Ako vam se sviđa plugin, <strong><a href=\"%s\">donacije</a></strong> su "
+"dobrodošle."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+#, php-format
+msgid ""
+"Please rate the plugin in the <a href=\"%s\">WordPress Plugin Directory</a>."
+msgstr ""
+"Molimo da ocijenite plugin na <a href=\"%s\">WordPress Plugin Direktoriju</"
+"a>."
+
+# @ wp-table-reloaded
+#: views/view-about.php:35
+msgid ""
+"Donations and good ratings encourage me to further develop the plugin and to "
+"provide countless hours of support. Any amount is appreciated! Thanks!"
+msgstr ""
+"Donacije i dobre ocjene me podržavaju da dalje razvijam plugin i dajem "
+"podršku korisnicima. Bilo koji iznos je cijenjen! Hvala!"
+
+# @ wp-table-reloaded
+#: views/view-about.php:40
+msgid "Credits and Thanks"
+msgstr "Zasluge i Zahvale"
+
+# @ wp-table-reloaded
+#: views/view-about.php:43
+msgid ""
+"Thanks go to <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> for "
+"the original wp-Table plugin,"
+msgstr ""
+"Hvala <a href=\"http://alexrabe.boelinger.com/\">Alex Rabe</a> za originalni "
+"wp-Table plugin,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:44
+msgid ""
+"Allan Jardine for the <a href=\"http://www.datatables.net/\">DataTables "
+"jQuery plugin</a>,"
+msgstr ""
+"Allan Jardine za <a href=\"http://www.datatables.net/\">DataTables jQuery "
+"plugin</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:45
+msgid ""
+"Christian Bach for the <a href=\"http://www.tablesorter.com/\">Tablesorter "
+"jQuery plugin</a>,"
+msgstr ""
+"Christian Bach za <a href=\"http://www.tablesorter.com/\">Tablesorter jQuery "
+"plugin</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:46
+msgid ""
+"Soeren Krings for its extension <a href=\"http://tablesorter.openwerk.de/"
+"\">Tablesorter Extended</a>,"
+msgstr ""
+"Soeren Krings za ekstenziju <a href=\"http://tablesorter.openwerk.de/"
+"\">Tablesorter Extended</a>,"
+
+# @ wp-table-reloaded
+#: views/view-about.php:47
+msgid "the submitters of translations:"
+msgstr "prevoditelji:"
+
+# @ wp-table-reloaded
+#: views/view-about.php:82
+#, php-format
+msgid "%s (thanks to %s)"
+msgstr "%s (hvala %s)"
+
+# @ wp-table-reloaded
+#: views/view-about.php:85
+msgid ""
+"and to all donors, contributors, supporters, reviewers and users of the "
+"plugin!"
+msgstr ""
+"i svim donorima, onima koji podržavaju i doprinose pluginu te naravno "
+"korisnicima!"
+
+# @ wp-table-reloaded
+#: views/view-about.php:91
+msgid "Debug and Version Information"
+msgstr "Debug i Informacije o Verziji"
+
+# @ wp-table-reloaded
+#: views/view-about.php:94
+msgid "You are using the following versions of the software."
+msgstr "Vi koristite sljedeće verzije software-a."
+
+# @ wp-table-reloaded
+#: views/view-about.php:94
+msgid "Please provide this information in bug reports."
+msgstr "Molimo da pošaljete ove podatke u vašim pitanjima podršci."
+
+# @ wp-table-reloaded
+#: views/view-about.php:97
+msgid "Plugin installed"
+msgstr "Plugin instaliran"
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:3
+msgid "This is a preview of your table."
+msgstr "Ovo je pregled vaše tablice."
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:4
+msgid "Because of CSS styling, the table might look different on your page!"
+msgstr ""
+"Zbog CSS stiliziranja, tablica može izgledati drukčije na vašoj stranici!"
+
+# @ wp-table-reloaded
+#: views/view-ajax_preview.php:4
+msgid "The JavaScript libraries are also not available in this preview."
+msgstr "JavaScript biblioteke također nisu dostupne u ovom pregledu."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:256
+msgid "Belarusian"
+msgstr "Bjeloruski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:258
+msgid "Czech"
+msgstr "Češki"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:259
+msgid "German"
+msgstr "Njemački"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:260
+msgid "English"
+msgstr "Engleski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:261
+msgid "Spanish"
+msgstr "Španjolski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:262
+msgid "Finnish"
+msgstr "Finski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:263
+msgid "French"
+msgstr "Francuski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:265
+msgid "Hindi"
+msgstr "Indijski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:267
+msgid "Italian"
+msgstr "Talijanski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:268
+msgid "Japanese"
+msgstr "Japanski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:269
+msgid "Dutch"
+msgstr "Nizozemski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:270
+msgid "Polish"
+msgstr "Poljski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:271
+msgid "Brazilian Portuguese"
+msgstr "Brazilsko-Portugalski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:273
+msgid "Russian"
+msgstr "Ruski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:274
+msgid "Slovak"
+msgstr "Slovački"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:275
+msgid "Swedish"
+msgstr "Švedski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:276
+msgid "Ukrainian"
+msgstr "Ukrajinski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:277
+msgid "Chinese (Simplified)"
+msgstr "Kineski (pojednostavljen)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:307
+#, php-format
+msgid ""
+"Welcome to WP-Table Reloaded %s. If you encounter any questions or problems, "
+"please refer to the <a href=\"%s\">FAQ</a>, the <a href=\"%s"
+"\">documentation</a>, and the <a href=\"%s\">support</a> section."
+msgstr ""
+"Dobrodošli na WP-Table Reloaded %s. Ukoliko naiđete na problem ili imate "
+"pitanje, molimo da pogledate <a href=\"%s\">FAQ</a>,  <a href=\"%s"
+"\">Dokumentaciju</a> i <a href=\"%s\">podršku</a>."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:308
+#, php-format
+msgid "Thank you for upgrading to WP-Table Reloaded %s."
+msgstr "Hvala što ste preuzeli WP-Table Reloaded %s."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:308
+#, php-format
+msgid ""
+"Please read the <a href=\"%s\">release announcement</a> for more information."
+msgstr ""
+"Molimo pročitajte <a href=\"%s\">objavu verzije</a> za dodatne informacije."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:308
+#, php-format
+msgid ""
+"If you like the new features and enhancements, I would appreciate a small <a "
+"href=\"%s\">donation</a>. Thank you."
+msgstr ""
+"Ako vam se sviđaju nove mogućnosti i promjene, vaše <a href=\"%s\">donacije</"
+"a> su dobrodošle. Hvala vam."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:313
+msgid "Hide this message"
+msgstr "Sakrij ovu poruku"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:321
+msgid ""
+"Thanks for using this plugin! You've installed WP-Table Reloaded over a "
+"month ago."
+msgstr ""
+"Hvala što koristite ovaj plugin! Instalirali ste WP-Table Reloaded prije "
+"više od mjesec dana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:321
+#, php-format
+msgid ""
+"If it works and you are satisfied with the results of managing your %s "
+"table, isn't it worth at least one dollar or euro?"
+msgid_plural ""
+"If it works and you are satisfied with the results of managing your %s "
+"tables, isn't it worth at least one dollar or euro?"
+msgstr[0] ""
+"Ukoliko vam plugin radi i zadovoljni ste rezultatima upravljanja vaše %s "
+"tablice, možda je to vrijedno barem jedan euro?"
+msgstr[1] ""
+"Ukoliko vam plugin radi i zadovoljni ste rezultatima upravljanja vaših %s "
+"tablica, možda je to vrijedno barem jedan euro?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:322
+#, php-format
+msgid ""
+"<a href=\"%s\">Donations</a> help me to continue support and development of "
+"this <i>free</i> software - things for which I spend countless hours of my "
+"free time! Thank you!"
+msgstr ""
+"<a href=\"%s\">Donacije</a> mi pomažu nastaviti s korisničkom podrškom i "
+"razvojem ovog <i>besplatnog</i> software-a na koji trošim nebrojene sate "
+"svojeg slobodnog vremena. Hvala vam!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:323
+msgid "Sure, no problem!"
+msgstr "Naravno, nema problema!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:324
+msgid "I already donated."
+msgstr "Već sam donirao/la!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:325
+msgid "No, thanks. Don't ask again."
+msgstr "Ne, hvala. Ne pitaj opet."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:353
+#, php-format
+msgid "Table &quot;%s&quot; added successfully."
+msgstr "Tablica &quot;%s&quot; je uspješno dodana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:384
+#, php-format
+msgid ""
+"Table edited successfully. This Table now has the ID %s. You'll need to "
+"adjust existing shortcodes accordingly."
+msgstr ""
+"Tablica je uspješno izmijenjena. Ova tablica sada ima ID %s. Trebate "
+"promijeniti vaše skraćene kodove prema tome."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:386
+#, php-format
+msgid ""
+"The ID could not be changed from %s to %s, because there already is a Table "
+"with that ID."
+msgstr ""
+"ID tablice ne može biti promijenjen iz %s u %s, jer već postoji tablica s "
+"tim ID-om."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:389
+msgid "Table edited successfully."
+msgstr "Tablica uspješno izmijenjena."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:438
+msgid "Rows swapped successfully."
+msgstr "Redovi uspješno zamijenjeni."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:459
+msgid "Columns swapped successfully."
+msgstr "Stupci uspješno zamijenjeni."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:500
+msgid "Table sorted successfully."
+msgstr "Tablica uspješno sortirana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:523
+msgid "Row moved successfully."
+msgstr "Redak uspješno premješten."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:550
+msgid "Column moved successfully."
+msgstr "Stupac uspješno premješten."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:558
+msgid "Row could not be deleted."
+msgid_plural "Rows could not be deleted."
+msgstr[0] "Redak ne može biti obrisan."
+msgstr[1] "Redovi ne mogu biti obrisani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:567
+msgid "Row deleted successfully."
+msgid_plural "Rows deleted successfully."
+msgstr[0] "Redak uspješno izbrisan."
+msgstr[1] "Redovi uspješno izbrisani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:577
+msgid "Column could not be deleted."
+msgid_plural "Columns could not be deleted."
+msgstr[0] "Stupac ne može biti izbrisan."
+msgstr[1] "Stupci ne mogu biti izbrisani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:590
+msgid "Column deleted successfully."
+msgid_plural "Columns deleted successfully."
+msgstr[0] "Stupac uspješno izbrisan."
+msgstr[1] "Stupci uspješno izbrisani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:613
+msgid "Row inserted successfully."
+msgid_plural "Rows inserted successfully."
+msgstr[0] "Redak uspješno dodan."
+msgstr[1] "Redovi uspješno dodani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:640
+msgid "Column inserted successfully."
+msgid_plural "Columns inserted successfully."
+msgstr[0] "Stupac uspješno dodan."
+msgstr[1] "Stupci uspješno dodani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:655
+msgid "Row added successfully."
+msgid_plural "Rows added successfully."
+msgstr[0] "Redak uspješno dodan."
+msgstr[1] "Redovi uspješno dodani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:669
+msgid "Column added successfully."
+msgid_plural "Columns added successfully."
+msgstr[0] "Stupac uspješno dodan."
+msgstr[1] "Stupci uspješno dodani."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:676
+msgid "Could not add Custom Data Field, because you did not enter a name."
+msgstr ""
+"Nije moguće dodati Proizvoljno Podatkovno Polje, jer niste unijeli ime."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:681
+msgid ""
+"Could not add Custom Data Field, because the name you entered is reserved "
+"for other table data."
+msgstr ""
+"Nije moguće dodati Proizvoljno Podatkovno Polje, jer je ime koje ste unijeli "
+"rezervirano za druge podatke u tablici."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:687
+msgid ""
+"Could not add Custom Data Field, because the name contained illegal "
+"characters."
+msgstr ""
+"Nije moguće dodati Proizvoljno Podatkovno Polje, jer ime ima neželjene "
+"znakove."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:691
+msgid ""
+"Could not add Custom Data Field, because a Field with that name already "
+"exists."
+msgstr ""
+"Nije moguće dodati Proizvoljno Podatkovno Polje, jer polje s tim imenom već "
+"postoji."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:697
+msgid "Custom Data Field added successfully."
+msgstr "Proizvoljno Podatkovno Polje uspješno dodano."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:737 controllers/controller-admin.php:793
+msgid "Copy of"
+msgstr "Kopija od"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:741
+msgid "Table copied successfully."
+msgid_plural "Tables copied successfully."
+msgstr[0] "Tablica uspješno kopirana."
+msgstr[1] "Tablice uspješno kopirane."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:747
+msgid "Table deleted successfully."
+msgid_plural "Tables deleted successfully."
+msgstr[0] "Tablica uspješno izbrisana."
+msgstr[1] "Tablice uspješno izbrisane."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:768 controllers/controller-admin.php:923
+#: controllers/controller-admin.php:961
+msgid "Table imported successfully."
+msgid_plural "Tables imported successfully."
+msgstr[0] "Tablica importirana uspješno."
+msgstr[1] "Tablice importirane uspješno."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:775
+msgid "You did not select any tables!"
+msgstr "Niste odabrali nijednu tablicu!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:798
+#, php-format
+msgid "Table &quot;%s&quot; copied successfully."
+msgstr "Tablica &quot;%s&quot; je uspješno kopirana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:816
+#, php-format
+msgid "Table &quot;%s&quot; deleted successfully."
+msgstr "Tablica &quot;%s&quot; je uspješno izbrisana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:824
+msgid "Custom Data Field deleted successfully."
+msgstr "Proizvoljno Podatkovno Polje uspješno izbrisano."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:826
+msgid "Custom Data Field could not be deleted."
+msgstr "Proizvoljno Podatkovno Polje ne može biti izbrisano."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:832
+msgid "Delete failed."
+msgstr "Brisanje nije uspjelo."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:864 controllers/controller-admin.php:874
+#: controllers/controller-admin.php:885
+msgid "Imported Table"
+msgstr "Importirana Tablica"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:865 controllers/controller-admin.php:886
+#, php-format
+msgid "from %s"
+msgstr "iz %s"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:875
+msgid "via form"
+msgstr "sa formom"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:902 controllers/controller-admin.php:939
+msgid "Table could not be imported."
+msgstr "Tablica nije mogla biti importana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:919
+#, php-format
+msgid "Table %s (%s) replaced successfully."
+msgstr "Tablica %s (%s) uspješno zamijenjena."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:969 controllers/controller-admin.php:1164
+msgid "You do not have sufficient rights to perform this action."
+msgstr "Nemate dovoljno prava za ovu akciju."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:976
+msgid "You did not upload a WP-Table Reloaded dump file."
+msgstr "Niste uploadali WP-Table Reloaded dump datoteku."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:985
+msgid "The uploaded dump file is empty. Please upload a valid dump file."
+msgstr ""
+"Dump datoteka koju ste uploadali je prazna. Molimo uploadajte važeću dump "
+"datoteku."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1013
+msgid "All Tables, Settings and Options were successfully imported."
+msgstr "Sve tablice, postavke i opcije su uspješno importirane."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1042
+#, php-format
+msgid "Table &quot;%s&quot; exported successfully."
+msgstr "Tablice &quot;%s&quot; je uspješno eksportirana."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1145
+msgid "Options saved successfully."
+msgstr "Postavke uspješno snimljene."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1148
+#, php-format
+msgid "<a href=\"%s\">Click here to Proceed.</a>"
+msgstr "<a href=\"%s\">Kliknite ovdje za nastavak</a>."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1214
+msgid "There is no table with this ID!"
+msgstr "Ne postoji tablica s ovim ID-em."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1241
+msgid ""
+"Thank you very much! Your donation is highly appreciated. You just "
+"contributed to the further development of WP-Table Reloaded!"
+msgstr ""
+"Mnogo vam hvala! Vaša donacija je veoma cijenjena. Upravo ste doprinijeli "
+"daljnjem razvoju WP-Table Reloaded plugina!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1243
+#, php-format
+msgid ""
+"No problem! I still hope you enjoy the benefits that WP-Table Reloaded "
+"brings to you. If you should want to change your mind, you'll always find "
+"the &quot;%s&quot; button on the <a href=\"%s\">WP-Table Reloaded website</"
+"a>."
+msgstr ""
+"Nema problema! I dalje se nadam da ćete uživati u prednostima koje vam WP-"
+"Table Reloaded donosi. Ako se predomislite, uvijek možete pronaći &quot;"
+"%s&quot; link na <a href=\"%s\">WP-Table Reloaded web stranici</a>."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1243 controllers/controller-admin.php:1682
+msgid "Donate"
+msgstr "Donirajte"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1266 controllers/controller-admin.php:1273
+msgid "List of Tables"
+msgstr "Popis Tablica"
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'Name'
+#: controllers/controller-admin.php:1266 controllers/controller-admin.php:1270
+#: controllers/controller-admin.php:1272 wp-table-reloaded.php:0
+msgid "WP-Table Reloaded"
+msgstr "WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1267 controllers/controller-admin.php:1303
+msgid "Add new Table"
+msgstr "Dodaj novu Tablicu"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1268 controllers/controller-admin.php:1304
+msgid "Import a Table"
+msgstr "Import Tablice"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1269 controllers/controller-admin.php:1305
+msgid "Export a Table"
+msgstr "Export Tablice"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1271
+msgid "About WP-Table Reloaded"
+msgstr "Više o WP-Table Reloaded"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1279
+#, php-format
+msgid "Edit Table &quot;%s&quot; (ID %s)"
+msgstr "Izmjena Tablice &quot;%s&quot; (ID %s)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1280
+#, php-format
+msgid "Preview of Table &quot;%s&quot; (ID %s)"
+msgstr "Pregled Tablice &quot;%s&quot; (ID %s)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1313
+msgid "About the plugin"
+msgstr "Više o pluginu"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1678
+msgid "WP-Table Reloaded Plugin Page"
+msgstr "WP-Table Reloaded Plugin Stranica"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1678
+msgid "Plugin Page"
+msgstr "Plugin Stranica"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1679
+msgid "Frequently Asked Questions"
+msgstr "Često Postavljana Pitanja"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1679
+msgid "FAQ"
+msgstr "FAQ"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1680
+msgid "Support"
+msgstr "Podrška"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1681
+msgid "Plugin Documentation"
+msgstr "Dokumentacija Plugina"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1681
+msgid "Documentation"
+msgstr "Dokumentacija"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1682
+msgid "Support WP-Table Reloaded with your donation!"
+msgstr "Podržite WP-Table Reloaded sa donacijom!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1721
+msgid ""
+"Do you really want to activate this? You should only do that right before "
+"uninstallation!"
+msgstr ""
+"Da li stvarno želite aktivirati ovo? To biste trebali samo prije "
+"deinstalacije."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1722
+msgid "URL of link to insert"
+msgstr "URL linka za unos"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1723
+msgid "Text of link"
+msgstr "Tekst linka"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1724
+msgid ""
+"To insert the following HTML code for a link into a cell, just click the "
+"cell after closing this dialog."
+msgstr ""
+"Da biste unijeli sljedeći HTML kod za link u ćeliju, samo kliknite na ćeliju "
+"nakon zatvaranja ovog dijaloga."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1725
+msgid ""
+"To insert an image, click &quot;OK&quot; and then click into the cell into "
+"which you want to insert the image."
+msgstr ""
+"Da biste unijeli sliku, kliknite &quot;OK&quot; i tada na ćeliju u koju "
+"želite unijeti sliku."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1725
+msgid ""
+"The Media Library will open, from which you can select the desired image or "
+"insert the image URL."
+msgstr ""
+"Media Library će se otvoriti, iz kojeg možete odabrati željene slike ili "
+"unijeti URL na sliku."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1725
+#, php-format
+msgid "Click the &quot;%s&quot; button to insert the image."
+msgstr "Kliknite na &quot;%s&quot; dugme da biste unijeli sliku."
+
+# @ default
+#: controllers/controller-admin.php:1725
+msgid "Insert into Post"
+msgstr "Unesi u Članak"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1726
+msgid ""
+"To combine cells within a row, click into the cell to the right of the cell "
+"that has the content the combined cells shall have."
+msgstr ""
+"Da biste spojili ćelije u retku, kliknite u ćeliju desno od ćelije koja ima "
+"sadržaj koji će naknadno spojene ćelije imati."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1727
+msgid ""
+"To combine cells within a column, click into the cell below the cell that "
+"has the content the combined cells shall have."
+msgstr ""
+"Da biste spojili ćelije u stupcu, kliknite na ćeliju ispod ćelije koja ima "
+"sadržaj koju će naknadno spojene ćelije imati."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1728
+msgid "Do you want to copy the selected tables?"
+msgstr "Želite li kopirati označene tablice?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1729
+msgid ""
+"The selected tables and all content will be erased. Do you really want to "
+"delete them?"
+msgstr ""
+"Označene tablice i sav sadržaj biti će izbrisan. Da li ih stvarno želite "
+"obrisati?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1730
+msgid ""
+"Do you really want to import the selected tables from the wp-Table plugin?"
+msgstr "Da li stvarno želite importirati označene tablice iz wp-Table plugina?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1731
+msgid "Do you want to copy this table?"
+msgstr "Želite li kopirati ovu tablicu?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1732
+msgid ""
+"The complete table and all content will be erased. Do you really want to "
+"delete it?"
+msgstr ""
+"Cijela tablica i sav sadržaj biti će izbrisan. Da li ju stvarno želite "
+"izbrisati?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1733
+msgid "Do you really want to delete the selected rows?"
+msgstr "Da li stvarno želite izbrisati odabrane redove?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1734
+msgid "Do you really want to delete the selected columns?"
+msgstr "Da li stvarno želite izbrisati označene stupce?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1735 controllers/controller-admin.php:1739
+#: controllers/controller-admin.php:1741
+msgid "You have not selected any rows."
+msgstr "Niste odabrali nijedan redak."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1736 controllers/controller-admin.php:1740
+#: controllers/controller-admin.php:1742
+msgid "You have not selected any columns."
+msgstr "Niste odabrali nijedan stupac."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1737
+msgid "You can not delete all rows of the table at once!"
+msgstr "Ne možete izbrisati sve redove iz tablice odjednom!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1738
+msgid "You can not delete all columns of the table at once!"
+msgstr "Ne možete izbrisati sve stupce iz tablice odjednom!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1743
+msgid "Do you really want to import this table from the wp-Table plugin?"
+msgstr "Da li stvarno želite importirati ovu tablicu iz wp-Table plugina?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1744
+msgid "Do you really want to uninstall the plugin and delete ALL data?"
+msgstr ""
+"Da li stvarno želite deinstalirati plugin i izbrisati SVE njegove podatke?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1745
+msgid "Are you really sure?"
+msgstr "Jeste li stvarno sigurni?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1746
+msgid "Do you really want to change the ID of the table?"
+msgstr "Da li stvarno želite promijeniti ID tablice?"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1747
+msgid "To show this Custom Data Field, use this shortcode:"
+msgstr ""
+"Da biste prikazali ovo Proizvoljno Podatkovno Polje, koristite ovaj skraćeni "
+"kod:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1748
+msgid "To show this table, use this shortcode:"
+msgstr "Da biste prikazali ovu tablicu, koristite ovaj skraćeni kod:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1749
+msgid ""
+"Warning: You will lose all current Tables and Settings! You should create a "
+"backup first. Be warned!"
+msgstr ""
+"Upozorenje: Izgubiti ćete sve trenutne tablice i postavke! Prvo biste "
+"trebali napraviti backup. Upozoreni ste!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1750
+msgid ""
+"You have made changes to the content of this table and not yet saved them."
+msgstr "Napravili ste promjene u sadržaju ove tablice i niste ih spremili."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1750
+#, php-format
+msgid ""
+"You should first click &quot;%s&quot; or they will be lost if you navigate "
+"away from this page."
+msgstr ""
+"Prvo biste trebali kliknuti na &quot;%s&quot; u protivnom se promjene neće "
+"spremiti."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1800
+msgid "Insert a Table"
+msgstr "Dodaj Tablicu"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1857
+msgid "Please wait..."
+msgstr "Molimo pričekajte..."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1858
+msgid "Show _MENU_ Tables"
+msgstr "Prikaži _MENU_ Tablice"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1859
+msgid "All"
+msgstr "Sve"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1861
+msgid "_START_ to _END_ of _TOTAL_ Tables"
+msgstr "_POČETAK_ do _KRAJ_ od _TOTAL_ Tablica"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1862
+msgid "(filtered from _MAX_ Tables)"
+msgstr "(filtrirano iz  _MAX_ Tablica)"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1863
+msgid "Filter:"
+msgstr "Filter:"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1864
+msgid "First"
+msgstr "Prvo"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1865
+msgid "Back"
+msgstr "Natrag"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1866
+msgid "Next"
+msgstr "Dalje"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:1867
+msgid "Last"
+msgstr "Posljednje"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:28 classes/import.class.php:36
+msgid "CSV - Character-Separated Values"
+msgstr "CSV - Character-Separated Values"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:29 classes/import.class.php:37
+msgid "HTML - Hypertext Markup Language"
+msgstr "HTML - Hypertext Markup Language"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:30 classes/import.class.php:38
+msgid "XML - eXtended Markup Language"
+msgstr "XML - eXtended Markup Language"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:33
+msgid "; (semicolon)"
+msgstr "; (točka-zarez)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:34
+msgid ", (comma)"
+msgstr ", (zarez)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:35
+msgid ": (colon)"
+msgstr ": (dvotočka)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:36
+msgid ". (dot)"
+msgstr ". (točka)"
+
+# @ wp-table-reloaded
+#: classes/export.class.php:37
+msgid "| (pipe)"
+msgstr "| (linija)"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:74
+msgid ""
+"Thank you for using <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-"
+"table-reloaded-english/\">WP-Table Reloaded</a>."
+msgstr ""
+"Hvala što koristite <a href=\"http://tobias.baethge.com/wordpress-plugins/wp-"
+"table-reloaded-english/\">WP-Table Reloaded</a>."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:74
+#, php-format
+msgid "Support the plugin with your <a href=\"%s\">donation</a>!"
+msgstr "Podržite plugin s vašom <a href=\"%s\">donacijom</a>!"
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104 classes/helper.class.php:109
+msgid "Table cells can span across more than one column or row."
+msgstr "Ćelije tablice mogu biti prikazane kroz više stupaca ili redaka."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+msgid ""
+"Combining consecutive cells within the same row is called \"colspanning\"."
+msgstr "Kombiniranje uzastopnih ćelija u istom retku se zove \"colspanning\"."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104
+msgid ""
+"To combine cells, add the keyword #colspan# to the cell to the right of the "
+"one with the content for the combined cell by using the corresponding button."
+msgstr ""
+"Da biste kombinirali ćelije, dodajte ključnu riječ #colspan# u ćeliju desno "
+"od ćelije sa sadržajem koji će preostati prikazan koristeći predviđeno dugme."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104 classes/helper.class.php:109
+msgid "Repeat this to add the keyword to all cells that shall be connected."
+msgstr ""
+"Ponavljajte ovo da biste dodali ključnu riječ u sve ćelije koje želite "
+"povezati."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:104 classes/helper.class.php:109
+msgid ""
+"Be aware that the JavaScript libraries will not work on tables which have "
+"combined cells."
+msgstr ""
+"Zapamtite da JavaScript biblioteke neće raditi na tablicama sa spojenim "
+"ćelijama."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:109
+msgid ""
+"Combining consecutive cells within the same column is called \"rowspanning\"."
+msgstr "Kombiniranje uzastopnih ćelija u istom stupcu se zove \"rowspanning\"."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:109
+msgid ""
+"To combine cells, add the keyword #rowspan# to the cell below the one with "
+"the content for the combined cell by using the corresponding button."
+msgstr ""
+"Da biste kombinirali ćelije, dodajte ključnu riječ #rowspan# u ćeliju ispod "
+"ćelije sa sadržajem koji će preostati prikazan koristeći predviđeno dugme."
+
+# @ wp-table-reloaded
+#: classes/helper.class.php:118
+msgid "Help"
+msgstr "Pomoć"
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'PluginURI'
+#: wp-table-reloaded.php:0
+msgid "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+msgstr "http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/"
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'Description'
+#: wp-table-reloaded.php:0
+msgid ""
+"This plugin allows you to create and easily manage tables in the admin-area "
+"of WordPress. A comfortable backend allows an easy manipulation of table "
+"data. You can then include the tables into your posts, on your pages or in "
+"text widgets by using a shortcode or a template tag function. Tables can be "
+"imported and exported from/to CSV, XML and HTML."
+msgstr ""
+"Ovaj plugin vam omogućuje stvaranje i jednostavno upravljanje tablicama u "
+"administratorskom sučelju Wordpress-a. Ugodno sučelje vam omogućava lako "
+"manipuliranje podacima u tablici. Možete dodati tablice u vaše članke, "
+"stranice ili u tekstualne widgete koristeći skraćeni kod ili kod za "
+"predložak. Tablice mogu biti importirane iz i u CSV, XML i HTML."
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'AuthorURI'
+#: wp-table-reloaded.php:0
+msgid "http://tobias.baethge.com/"
+msgstr "http://tobias.baethge.com/"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:266
+msgid "Indonesian"
+msgstr "Indonezijski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:272
+msgid "Portuguese (Portugal)"
+msgstr "Portugalski (Portugal)"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:321
+msgid "Extra CSS Class"
+msgstr "Dodatna CSS Klasa"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:322
+msgid "This is not the place to enter \"Custom CSS\" code!"
+msgstr "Ovo nije mjesto za unos \"Custom CSS\" koda!"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:308
+msgid "This version includes several bugfixes and a few enhancements."
+msgstr "Ova verzija sadrži nekoliko ispravaka grešaka i nekoliko poboljšanja."
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:257
+msgid "Bulgarian"
+msgstr "Bugarski"
+
+# @ wp-table-reloaded
+#: controllers/controller-admin.php:264
+msgid "Hebrew"
+msgstr "Hebrejski"
+
+# @ wp-table-reloaded
+#: views/view-edit.php:390
+msgid "Filtering/Search"
+msgstr "Filtriranje/Pretraga"
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'Author'
+#: wp-table-reloaded.php:0
+msgid "Tobias Bäthge"
+msgstr "Tobias Bäthge"
+
+# @ wp-table-reloaded
+#. translators: plugin header field 'Version'
+#: wp-table-reloaded.php:0
+msgid "1.9.3-dev"
+msgstr "1.9.3-dev"

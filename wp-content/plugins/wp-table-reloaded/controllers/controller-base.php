@@ -68,7 +68,6 @@ class WP_Table_Reloaded_Controller_Base {
             'datatables_lengthchange' => true,
             'datatables_filter' => true,
             'datatables_info' => true,
-            'datatables_tabletools' => false,
             'datatables_customcommands' => ''
         ),
         'custom_fields' => array()

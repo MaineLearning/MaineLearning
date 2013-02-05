@@ -1,14 +1,18 @@
-﻿=== WP-Table Reloaded ===
-Contributors: TobiasBg 
+=== WP-Table Reloaded ===
+Contributors: TobiasBg
 Donate link: http://tobias.baethge.com/donate/
 Tags: html,table,data,editor,csv,import,export,excel,widget,admin,sidebar
 Requires at least: 3.1
-Tested up to: 3.3.1
-Stable tag: 1.9.3
+Tested up to: 3.5.1
+Stable tag: 1.9.4
 
 WP-Table Reloaded enables you to create and manage tables, without having to write HTML code, and it adds valuable functions for your visitors.
 
 == Description ==
+
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
 
 WP-Table Reloaded enables you to create and manage tables in your WP's admin area. No HTML knowledge is needed. A comfortable backend allows to easily edit table data. Tables can contain any type of data and additional JavaScript libraries can be used to extend it with features like sorting, pagination, filtering, and more. You can include the tables into your posts, on your pages or in text widgets by using a shortcode or a template tag function. Tables can be imported and exported from/to CSV, XML and HTML.
 
@@ -26,9 +30,17 @@ Wenn dir das Plugin gefällt, bewerte es bitte hier im WordPress Plugin Director
 
 == Screenshots ==
 
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
+
 Screenshots are available on http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/ .
 
 == Installation ==
+
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
 
 The easiest way is through your WordPress Admin area. Go to the plugin section and search for "WP-Table Reloaded" in the WordPress Plugin Directory. Then you can click "Install" and the following steps will be done for you automatically. You just have to activate the plugin (step 5).
 
@@ -46,6 +58,10 @@ Manual Installation works just as for most other WordPress plugins:
 
 == Frequently Asked Questions ==
 
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
+
 = Where can I find answers to Frequently Asked Questions? =
 
 A wide group of questions, regarding different features or styling has been answered in the [FAQ section](http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-english/faq/) on the plugin's website.
@@ -57,11 +73,11 @@ If WP-Table Reloaded finds the wp-Table database tables, it can import the found
 
 = Support? =
 
-For support questions, bug reports, or feature requests, please use the [WordPress Support Forums](http://wordpress.org/tags/wp-table-reloaded). Please [search](http://wordpress.org/support/) through the forums first, then [open a new thread](http://wordpress.org/tags/wp-table-reloaded) with the tag "wp-table-reloaded". Thank you!
+For support questions, bug reports, or feature requests, please use the [WordPress Support Forums](http://wordpress.org/support/plugin/wp-table-reloaded). Please [search](http://wordpress.org/support/) through the forums first, and then only [open a new thread](http://wordpress.org/support/plugin/wp-table-reloaded) if you don't find an existing answer. Thank you!
 
 = Requirements? =
 
-In short: WordPress 3.1 or higher, the latest version of WordPress is recommended
+In short: WordPress 3.1 or higher, the latest version of WordPress is recommended.
 
 = Languages and Localization? =
 
@@ -78,6 +94,10 @@ Please visit the [official plugin website](http://tobias.baethge.com/wordpress-p
 Die Webseite des Plugins ist auch [auf Deutsch](http://tobias.baethge.com/wordpress-plugins/wp-table-reloaded-deutsch/) verfügbar.
 
 == Usage ==
+
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
 
 After installing the plugin, you can add, import, export, edit, copy, delete, ... tables via the "WP-Table Reloaded" screen which appears under the "Tools" section in your Admin menu.
 Everything should be self-explaining there.
@@ -103,6 +123,14 @@ I kindly ask you for link somewhere on your website to http://tobias.baethge.com
 I'm also happy about [donations](http://tobias.baethge.com/donate/) or something from [my wishlist](http://tobias.baethge.com/wishlist)! Thanks!
 
 == Changelog ==
+
+> #### Attention: WP-Table Reloaded is being replaced with TablePress!
+> If you are starting a new project, please do not use WP-Table Reloaded anymore! Instead, please use the [TablePress](http://wordpress.org/extend/plugins/tablepress/) plugin, which is the official and designated successor of WP-Table Reloaded.
+> For users of WP-Table Reloaded, no immediate action is necessary, but it is recommended that you [migrate](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
+
+= Version 1.9.4 =
+* bugfix: Remove TableTools for DataTables, due to incompatibility
+* Important note: WP-Table Reloaded is outdated! Please [switch](http://tablepress.org/migration-from-wp-table-reloaded/) to TablePress soon.
 
 = Version 1.9.3 =
 * enhancement: reduce problems with blank space below tables, caused by a no-longer necessary minimum height
@@ -263,6 +291,9 @@ I'm also happy about [donations](http://tobias.baethge.com/donate/) or something
 
 == Upgrade Notice ==
 
+= 1.9.4 =
+This upgrade includes an important bugfix and removes the TableTools. It is a strongly recommended maintenance release.
+
 = 1.9.3 =
 This upgrade includes several bugfixes and a few enhancements, and is a recommended maintenance release.
 
@@ -276,7 +307,7 @@ This upgrade includes a few new features, like output caching and a custom table
 This upgrade includes a few new features, like output caching and a custom table CSS class, and several enhancements.
 
 = 1.8 =
-This upgrade includes an updated DataTables library, enhances several features and fixes a few small issues. 
+This upgrade includes an updated DataTables library, enhances several features and fixes a few small issues.
 
 = 1.7 =
 This upgrade includes an updated DataTables library, adds a "Table" button in the toolbar of the visual editor, and enhances several other things.
