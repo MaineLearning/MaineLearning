@@ -6,7 +6,7 @@ Description: BuddyPress Links is a link sharing component for BuddyPress.
 Author: Marshall Sorenson (MrMaz)
 Author URI: http://marshallsorenson.com
 License: GNU GENERAL PUBLIC LICENSE 3.0 http://www.gnu.org/licenses/gpl.txt
-Version: 0.7.1
+Version: 0.7.2
 Text Domain: buddypress-links
 */
 
@@ -20,6 +20,10 @@ Text Domain: buddypress-links
 // Define the slug for the component
 if ( !defined( 'BP_LINKS_SLUG' ) )
 	define( 'BP_LINKS_SLUG', 'links' );
+
+// Define the capability required to manage links
+if ( !defined( 'BP_LINKS_CAPABILITY' ) )
+	define( 'BP_LINKS_CAPABILITY', 'manage_options' );
 
 // Define a custom theme name to completely bypass any core links themes
 // For example, if your active WordPress theme is 'bluesky', and you wanted
@@ -43,7 +47,7 @@ if ( !defined( 'BP_LINKS_EMBED_FOTOGLIF_PUBID' ) )
 // *** DO NOT MODIFY THESE ***
 
 // Configuration
-define( 'BP_LINKS_VERSION', '0.7.1' );
+define( 'BP_LINKS_VERSION', '0.7.2' );
 define( 'BP_LINKS_DB_VERSION', '7' );
 define( 'BP_LINKS_PLUGIN_NAME', 'buddypress-links' );
 define( 'BP_LINKS_PLUGIN_TEXTDOMAIN', 'buddypress-links' );
