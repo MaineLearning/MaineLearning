@@ -39,7 +39,7 @@ class Widget_LoginLogout extends WP_Widget
         //Otherwise, show the login form (with Facebook Connect button)
         else:
         ?>
-            <form name='loginform' id='loginform' action='<?php echo get_option('siteurl')?>/wp-login.php' method='post'>
+            <form name='loginform' id='loginform' action='<?php echo site_url( 'wp-login.php', 'login_post' )?>' method='post'>
                 <label>User:</label><br />
                 <input type='text' name='log' id='user_login' class='input' tabindex='20' /><input type='submit' name='wp-submit' id='wp-submit' value='Login' tabindex='23' /><br />
                 <label>Pass:</label><br />
