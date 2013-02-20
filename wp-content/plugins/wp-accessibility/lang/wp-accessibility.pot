@@ -1,0 +1,385 @@
+# Copyright (C) 2012 WP Accessibility
+# This file is distributed under the same license as the WP Accessibility package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Accessibility 1.1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-accessibility\n"
+"POT-Creation-Date: 2012-10-27 16:47:27+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: wp-accessibility.php:73
+msgid "Accessibility Settings"
+msgstr ""
+
+#: wp-accessibility.php:164
+msgid "Skip to content"
+msgstr ""
+
+#: wp-accessibility.php:166
+msgid "Skip to navigation"
+msgstr ""
+
+#: wp-accessibility.php:168
+msgid "Site map"
+msgstr ""
+
+#: wp-accessibility.php:328
+msgid "Remove Title Attributes Settings Updated"
+msgstr ""
+
+#: wp-accessibility.php:348
+msgid ""
+"WP Accessibility does not provide any styles for visible skiplinks. You can "
+"still set the look of the links using the textareas provided, but all other "
+"layout must be assigned in your theme."
+msgstr ""
+
+#: wp-accessibility.php:352
+msgid "Add Skiplinks Settings Updated"
+msgstr ""
+
+#: wp-accessibility.php:374
+msgid "Miscellaneous Accessibility Settings Updated"
+msgstr ""
+
+#: wp-accessibility.php:456
+msgid "WP Accessibility: Settings"
+msgstr ""
+
+#: wp-accessibility.php:461
+msgid "Remove Title Attributes"
+msgstr ""
+
+#: wp-accessibility.php:465
+msgid "Remove title attributes from:"
+msgstr ""
+
+#: wp-accessibility.php:467
+msgid "Nav menus"
+msgstr ""
+
+#: wp-accessibility.php:468
+msgid "Page lists"
+msgstr ""
+
+#: wp-accessibility.php:469
+msgid "Category lists"
+msgstr ""
+
+#: wp-accessibility.php:470
+msgid "Archive links"
+msgstr ""
+
+#: wp-accessibility.php:471
+msgid "Tag clouds"
+msgstr ""
+
+#: wp-accessibility.php:472
+msgid "Category links"
+msgstr ""
+
+#: wp-accessibility.php:473
+msgid "Post edit links"
+msgstr ""
+
+#: wp-accessibility.php:474
+msgid "Edit comment links"
+msgstr ""
+
+#: wp-accessibility.php:481
+msgid "Update Title Attribute Settings"
+msgstr ""
+
+#: wp-accessibility.php:487
+msgid "Add Skiplinks"
+msgstr ""
+
+#: wp-accessibility.php:491
+msgid "Configure Skiplinks"
+msgstr ""
+
+#: wp-accessibility.php:493
+msgid "Enable Skiplinks"
+msgstr ""
+
+#: wp-accessibility.php:494
+msgid "Skiplinks always visible"
+msgstr ""
+
+#: wp-accessibility.php:495
+msgid "Skip to Content link target (ID of your main content container)"
+msgstr ""
+
+#: wp-accessibility.php:496
+msgid "Skip to Navigation link target (ID of your main navigation container)"
+msgstr ""
+
+#: wp-accessibility.php:497
+msgid "Site Map link target (URL for your site map)"
+msgstr ""
+
+#: wp-accessibility.php:498
+msgid "Add your own link (link or container ID)"
+msgstr ""
+
+#: wp-accessibility.php:498
+msgid "Link text for your link"
+msgstr ""
+
+#: wp-accessibility.php:499
+msgid "Styles for Skiplinks when they have focus"
+msgstr ""
+
+#: wp-accessibility.php:501
+msgid "(Not currently visible)"
+msgstr ""
+
+#: wp-accessibility.php:502
+msgid "Styles for Skiplinks without focus"
+msgstr ""
+
+#: wp-accessibility.php:510
+msgid "Update Skiplink Settings"
+msgstr ""
+
+#: wp-accessibility.php:516
+msgid "Miscellaneous Accessibility Settings"
+msgstr ""
+
+#: wp-accessibility.php:520
+msgid "Miscellaneous"
+msgstr ""
+
+#: wp-accessibility.php:522
+msgid "Add Site Language and text direction to HTML element"
+msgstr ""
+
+#: wp-accessibility.php:523
+msgid "Remove target attribute from links"
+msgstr ""
+
+#: wp-accessibility.php:524
+msgid ""
+"Force search error on empty search submission (theme must have search.php "
+"template)"
+msgstr ""
+
+#: wp-accessibility.php:525
+msgid "Remove tabindex from focusable elements"
+msgstr ""
+
+#: wp-accessibility.php:526
+msgid ""
+"Remove title attribute from images inserted into post content and featured "
+"images."
+msgstr ""
+
+#: wp-accessibility.php:527
+msgid "Add post title to \"more\" links."
+msgstr ""
+
+#: wp-accessibility.php:528
+msgid "Continue reading text"
+msgstr ""
+
+#: wp-accessibility.php:529
+msgid "Add outline to elements on keyboard focus"
+msgstr ""
+
+#: wp-accessibility.php:529
+msgid "Outline color (hexadecimal, optional)"
+msgstr ""
+
+#: wp-accessibility.php:536
+msgid "Update Miscellaneous Settings"
+msgstr ""
+
+#: wp-accessibility.php:541
+msgid "Color Contrast Tester"
+msgstr ""
+
+#: wp-accessibility.php:558
+msgid ""
+"Luminosity Contrast Ratio for <code>#%2$s</code> and <code>#%3$s</code> is "
+"<strong>%1$s</strong> (Threshold: greater than 7:1 for AAA, 4.5:1 for AA)"
+msgstr ""
+
+#: wp-accessibility.php:560
+msgid ""
+"The colors compared <strong>pass</strong> the relative luminosity test at "
+"level AAA."
+msgstr ""
+
+#: wp-accessibility.php:563
+msgid ""
+"The colors compared <strong>pass</strong> the relative luminosity test at "
+"level AA."
+msgstr ""
+
+#: wp-accessibility.php:566
+msgid ""
+"The colors compared pass the relative luminosity test <strong>only when used "
+"in large print</strong> situations (greater than 18pt text or 14pt bold "
+"text.)"
+msgstr ""
+
+#: wp-accessibility.php:569
+msgid ""
+"The colors compared <strong>do not pass</strong> the relative luminosity "
+"test."
+msgstr ""
+
+#: wp-accessibility.php:571
+msgid "Test another set of colors"
+msgstr ""
+
+#: wp-accessibility.php:586
+msgid "Test of relative luminosity"
+msgstr ""
+
+#: wp-accessibility.php:588
+msgid "Foreground color"
+msgstr ""
+
+#: wp-accessibility.php:589
+msgid "Background color"
+msgstr ""
+
+#: wp-accessibility.php:596
+msgid "Check Color Contrast"
+msgstr ""
+
+#: wp-accessibility.php:601
+msgid "Get Plug-in Support"
+msgstr ""
+
+#: wp-accessibility.php:614
+msgid "Support this Plugin"
+msgstr ""
+
+#: wp-accessibility.php:616
+msgid ""
+"If you've found WP Accessibility useful, then please consider <a "
+"href='http://wordpress.org/extend/plugins/wp-accessibility/'>rating it five "
+"stars</a>, <a href='http://www.joedolson.com/donate.php'>making a donation</"
+"a>, or <a href='http://translate.joedolson.com/projects/wp-"
+"accessibility'>helping with translation</a>."
+msgstr ""
+
+#: wp-accessibility.php:618
+msgid ""
+"<a href=\"http://www.joedolson.com/donate.php\">Make a donation today!</a> "
+"Every donation counts - donate $2, $10, or $100 and help me keep this plug-"
+"in running!"
+msgstr ""
+
+#: wp-accessibility.php:634
+msgid "Accessibility References"
+msgstr ""
+
+#: wp-accessibility.php:649
+msgid "Contributing References"
+msgstr ""
+
+#: wp-accessibility.php:702
+msgid "The most recent posts on your blog"
+msgstr ""
+
+#: wp-accessibility.php:703
+msgid "WP A11y: Recent Posts"
+msgstr ""
+
+#: wp-accessibility.php:725
+msgid "Recent Posts"
+msgstr ""
+
+#: wp-accessibility.php:768
+msgid "Title:"
+msgstr ""
+
+#: wp-accessibility.php:771
+msgid "Number of posts to show:"
+msgstr ""
+
+#: wp-accessibility.php:865
+msgid ""
+"Please read the FAQ and other Help documents before making a support request."
+msgstr ""
+
+#: wp-accessibility.php:867
+msgid "Please describe your problem. I'm not psychic."
+msgstr ""
+
+#: wp-accessibility.php:871
+msgid ""
+"Thank you for supporting the continuing development of this plug-in! I'll "
+"get back to you as soon as I can."
+msgstr ""
+
+#: wp-accessibility.php:873
+msgid ""
+"I cannot provide free support, but will treat your request as a bug report, "
+"and will incorporate any permanent solutions I discover into the plug-in."
+msgstr ""
+
+#: wp-accessibility.php:885
+msgid ""
+"<strong>Please note</strong>: I do keep records of those who have donated, "
+"but if your donation came from somebody other than your account at this web "
+"site, you must note this in your message."
+msgstr ""
+
+#: wp-accessibility.php:889
+msgid "From:"
+msgstr ""
+
+#: wp-accessibility.php:892
+msgid ""
+"I have read <a href=\"%1$s\">the FAQ for this plug-in</a> <span>(required)</"
+"span>"
+msgstr ""
+
+#: wp-accessibility.php:895
+msgid ""
+"I have <a href=\"%1$s\">made a donation to help support this plug-in</a>"
+msgstr ""
+
+#: wp-accessibility.php:898
+msgid "Support Request:"
+msgstr ""
+
+#: wp-accessibility.php:901
+msgid "Send Support Request"
+msgstr ""
+
+#: wp-accessibility.php:904
+msgid ""
+"The following additional information will be sent with your support request:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Accessibility"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.joedolson.com/articles/wp-accessibility/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Provides options to improve accessibility in your WordPress site, including "
+"removing title attributes."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Joe Dolson"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.joedolson.com/"
+msgstr ""

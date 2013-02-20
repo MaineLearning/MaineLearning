@@ -7,13 +7,13 @@ Tested up to: 3.5.0
 Stable tag: trunk
 License: GPLv2 or later
 
-WP Accessibility provides features that fix accessibility issues in your WordPress site. 
+WP Accessibility provides fixes for common accessibility issues in your WordPress site.
 
 == Description ==
 
-This plug-in is targeted at correcting a variety of common accessibility issues encountered in WordPress themes. This plug-in will probably change frequently, as I add support for additional issues or (hopefully) remove features that are no longer needed. 
+This plug-in is for correcting a variety of common accessibility issues encountered in WordPress themes. While most accessibility issues can't be easily addressed using abstracted code, WP Accessibility can provide a number of accessibility features with a minimum mount of setup and expert knowledge.
 
-All features can be disabled according to your theme's needs.
+All features can be disabled according to your theme's needs. All of the functions based on modifying stylesheets can be customized using your own custom styles by placing the appropriate stylesheet in your theme directory.
 
 At the moment, the plug-in can:
 
@@ -27,6 +27,8 @@ At the moment, the plug-in can:
 * Strip title attributes from images inserted into content. 
 * Add post titles to standard "read more" links.
 * Add an outline to the keyboard focus state for focusable elements. 
+* Add a toolbar toggling between high contrast, large print, and desaturated (grayscale) views of your theme.
+* Fix certain accessibility issues in the WordPress admin styles
 * Show the color contrast between two provided hexadecimal color values.
 * Read more about <a href="http://make.wordpress.org/accessibility/wp-accessibility-plugin/">the accessibility problems corrected</a>
 
@@ -42,6 +44,17 @@ Translating my plug-ins is always appreciated. Visit <a href="http://translate.j
 2. Customise your settings on the Settings > WP Accessibility page.
 
 == Changelog ==
+
+= 1.2.0 =
+
+* Added space between content output and continue reading text in excerpt context.
+* Added German translation
+* Added Accessibility Toolbar (<a href="http://www.usableinteractions.com/2012/11/accessibility-toolbar/">Source</a>)
+* Added WP admin stylesheet:
+* Some contrast improvements.
+* Placed post row action links (Edit, Quick Edit, Trash, View) into screen reader visible and keyboard usable position.
+* Added underlines to links on hover
+* Supports your own custom wp-admin stylesheet via your Theme directory. 
 
 = 1.1.2 =
 
