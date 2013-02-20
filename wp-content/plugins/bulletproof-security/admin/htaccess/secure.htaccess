@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS     
+#   BULLETPROOF .47.9 >>>>>>> SECURE .HTACCESS     
 
-# If you edit the  BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS text above
+# If you edit the  BULLETPROOF .47.9 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -41,9 +41,9 @@ DirectoryIndex index.php index.html /index.php
 # The 400.php, 403.php and 404.php files are located in /wp-content/plugins/bulletproof-security/
 # The 400 and 403 Error logging files are already set up and will automatically start logging errors
 # after you install BPS and have activated BulletProof Mode for your Root folder.
-# If you would like to log 404 errors you will need to copy the logging code in the BPS Pro 404.php file
-# to your Theme's 404.php template file. Simple instructions are included in the BPS Pro 404.php file.
-# You can open the BPS Pro 404.php file using the WP Plugins Editor or by using the BPS Pro File Manager.
+# If you would like to log 404 errors you will need to copy the logging code in the BPS 404.php file
+# to your Theme's 404.php template file. Simple instructions are included in the BPS 404.php file.
+# You can open the BPS 404.php file using the WP Plugins Editor.
 # NOTE: By default WordPress automatically looks in your Theme's folder for a 404.php template file.
 
 ErrorDocument 400 /wp-content/plugins/bulletproof-security/400.php
@@ -115,7 +115,7 @@ RewriteCond %{QUERY_STRING} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(b
 RewriteCond %{THE_REQUEST} ^.*(http|https|ftp)(%3A|:)(%2F|/)(%2F|/)(w){0,3}.?(blogger|picasa|blogspot|tsunami|petapolitik|photobucket|imgur|imageshack|wordpress\.com|img\.youtube|tinypic\.com|upload\.wikimedia|kkc|start-thegame).*$ [NC]
 RewriteRule .* index.php [F,L]
 RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
-RewriteCond %{HTTP_REFERER} ^.*demo6.local.*
+RewriteCond %{HTTP_REFERER} ^.*demo5.local.*
 RewriteRule . - [S=1]
 
 # BPSQSE BPS QUERY STRING EXPLOITS

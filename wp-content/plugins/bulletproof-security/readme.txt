@@ -4,7 +4,7 @@ Donate link: http://www.ait-pro.com/aitpro-blog/331/bulletproof-security-plugin-
 Tags: bulletproof, security, secure, htaccess, chmod, maintenance, plugin, private, privacy, protection, permissions, 503, base64, injection, code, encode, script, attack, hack, hackers, block, blocked, prevent, prevention, RFI, XSS, CRLF, CSRF, SQL Injection, vulnerability, website security, WordPress security, security log, logging, HTTP log, error log
 Requires at least: 3.0 
 Tested up to: 3.5 
-Stable tag: .47.8 
+Stable tag: .47.9 
 
 WordPress Website Security Protection. Website security protection against: XSS, RFI, CRLF, CSRF, Base64, Code Injection and SQL Injection hacking... 
 
@@ -57,6 +57,7 @@ have additional website security measures in place as a standard. BulletProof Se
 
 * Lithuanian by <a href="http://www.Host1Free.com" title="Lithuanian Language Translation by Vincent G from Host1Free.com" target="_blank">Vincent G from Host1Free.com</a>
 * Filipino/Tagalog by <a href="http://pointen.dk/" title="Filipino/Tagalog Language Translation by pointen.dk" target="_blank">pointen.dk</a>
+* Russian (??????? ????) by EyeFinity
 * If you would like to translate the BPS plugin to your language see this <a href="http://www.ait-pro.com/aitpro-blog/4074/wordpress-tips-tricks-fixes/wordpress-plugin-language-translation-tutorial-translating-a-wordpress-plugin-using-poedit/" title="BPS Plugin Language Translation Tutorial" rel="nofollow" target="_blank">BPS Plugin Language Translation Tutorial</a>. Please include a link to your website so that we can add it here. Thank you.
 * Tip: If you use the Google Chrome Browser you can right mouse click in plugin pages and then click on Translate to... To translate plugin text into your Language.
 
@@ -278,6 +279,13 @@ Yes, BulletProof Security works with Git, but does require some additional set u
 4. BulletProof Security - Edit/Upload/Download page
 
 == Changelog ==
+
+= .47.9 =
+* Security Logging / HTTP Error Logging On / Off buttons added
+* Turn Security Logging / HTTP Error Logging On or Off on the Security Log page
+* Russian (??????? ????) Translation by EyeFinity
+* General Coding Improvements & Enhancements
+* Enjoy!
 
 = .47.8 =
 * Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors
@@ -574,6 +582,13 @@ Create new Master .htaccess files with AutoMagic and activate all BulletProof Mo
 
 == Upgrade Notice ==
 
+= .47.9 =
+* Security Logging / HTTP Error Logging On / Off buttons added
+* Turn Security Logging / HTTP Error Logging On or Off on the Security Log page
+* Russian (??????? ????) Translation by EyeFinity
+* General Coding Improvements & Enhancements
+* Enjoy!
+
 = .47.8 =
 * Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors
 * Security Logging / HTTP Error Logging Dashboard Alert - log file size
@@ -616,25 +631,20 @@ the particular section or page of the BulletProof Security plugin that you are i
 Help and FAQ page contains links to Help pages that will load in a new browser tab so
 that you are not redirected away from your WordPress Dashboard. 
 
-What's New in .47.8
+What's New in .47.9
 
-= .47.8 =
+= .47.9 =
+* Security Logging / HTTP Error Logging On / Off buttons added
+* Turn Security Logging / HTTP Error Logging On or Off on the Security Log page
+* Russian (??????? ????) Translation by EyeFinity
+* General Coding Improvements & Enhancements
+* Enjoy!
 
-* Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors:
-Your Security Log file is a plain text static file and not a dynamic file or dynamic display to keep your website resource usage at a 
-bare minimum and keep your website performance at a maximum.
+* Security Logging / HTTP Error Logging On / Off buttons added:
+You can turn Security Logging / HTTP Error Logging On or Off on the Security Log page.
  	 
-* Security Logging / HTTP Error Logging Dashboard Alert:
-When your log file gets larger than 500KB you will see a WP Dashboard Alert displayed. Copy and paste the Security Log file contents 
-into a Notepad text file on your computer and save it. Then click the Delete Log button to delete the contents of this Log file.
- 	 
-* NEW root .htacess file code automatically created/modified on upgrade:
-The new ErrorDocument Error log htaccess code is automatically added to your Root .htaccess file when you upgrade to .47.8. 
-The FORBID EMPTY REFFERER SPAMBOTS .htaccess code is automatically deleted from your Root .htaccess file. This code has been problematic 
-on a number of websites and this htaccess code is not really effective against blocking empty referrer spambots anymore.
- 	 
-* Additional System Info Check Added: cURL Extension:
-You will see an additional System Information check on the System Info tab page that checks whether or not the cURL Extension is loaded on your website.
+* Russian (??????? ????) Translation by EyeFinity
+Thank you!
  	 
 * Coding Improvements & Enhancements:
 Of course, but why not mention it anyway.
