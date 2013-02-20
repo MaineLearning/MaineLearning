@@ -48,8 +48,9 @@ function group_hierarchy_override_current_action( $current_action ) {
 
 	if( ! $group->id && ( ! isset( $bp->current_item ) || ! $bp->current_item ) ) {
 		$current_action = '';
-		bp_group_hierarchy_debug('Redirecting to groups root.');
-		bp_core_redirect( $bp->root_domain . '/' . $groups_slug . '/');
+		bp_group_hierarchy_debug( 'Group not found - returning 404.' );
+		bp_do_404();
+		return;
 	}
 
 	if( $group->has_children() ) {
@@ -162,7 +163,7 @@ function bp_group_hierarchy_fixup_permalink( $permalink ) {
 	
 	$group_id = BP_Groups_Group::get_id_from_slug( $group_slug );
 	
-	if( !is_null($group_id) ) {
+	if( $group_id ) {
 		$group_path = BP_Groups_Hierarchy::get_path( $group_id );
 		return str_replace( '/' . $group_slug . '/', '/' . $group_path . '/', $permalink );
 	}

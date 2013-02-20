@@ -1,0 +1,313 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-hierarchy\n"
+"POT-Creation-Date: 2012-12-11 22:34:20+00:00\n"
+"PO-Revision-Date: 2012-12-16 16:59+0400\n"
+"Last-Translator: Roman Leonov <lrvspb@gmail.com>\n"
+"Language-Team: team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: bp-group-hierarchy-admin.php:18
+msgid "Hierarchy Settings"
+msgstr "Настройки иерархии"
+
+#: bp-group-hierarchy-admin.php:20
+#: extension.php:37
+msgid "Group Hierarchy"
+msgstr "Иерархия Групп"
+
+#: bp-group-hierarchy-admin.php:65
+#: bp-group-hierarchy-admin.php:120
+#: extension.php:769
+msgid "Group Tree"
+msgstr "Дерево групп"
+
+#: bp-group-hierarchy-admin.php:66
+#: bp-group-hierarchy-widgets.php:197
+#: extension.php:170
+#: extension.php:171
+#: extension.php:276
+#: extension.php:277
+msgid "Member Groups"
+msgstr "Подгруппы"
+
+#: bp-group-hierarchy-admin.php:70
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+#: bp-group-hierarchy-admin.php:71
+msgid "Group Hierarchy Settings"
+msgstr "Настройки иерархии групп"
+
+#: bp-group-hierarchy-admin.php:76
+msgid "Show Group Tree"
+msgstr "Показать Дерево групп"
+
+#: bp-group-hierarchy-admin.php:80
+msgid "Show the Group Tree view on the Groups page along with the flat list of groups."
+msgstr "Показать деревево групп на странице групп наряду с плоским списком групп."
+
+#: bp-group-hierarchy-admin.php:85
+msgid "Hide Group List"
+msgstr "Скрыть список групп"
+
+#: bp-group-hierarchy-admin.php:89
+msgid "Hide the flat list of groups and show ONLY the Group Tree on the Groups page"
+msgstr "Скрыть плоский список групп и показать ТОЛЬКО  деревево групп на странице групп"
+
+#: bp-group-hierarchy-admin.php:94
+#: bp-group-hierarchy-widgets.php:14
+msgid "Toplevel Groups"
+msgstr "Группы верхнего уровня"
+
+#: bp-group-hierarchy-admin.php:104
+msgid "Select who is allowed to create toplevel groups. Super admins can always create toplevel groups."
+msgstr "Выберите, кто может создавать группы верхнего уровня. Администраторы всегда могут создавать группы верхнего уровня."
+
+#: bp-group-hierarchy-admin.php:112
+msgid "Nav Item"
+msgstr "Навигационные элементы"
+
+#: bp-group-hierarchy-admin.php:115
+msgid "Name of the nav item on an individual group's page."
+msgstr "Название навигационных элементов на странице отдельной группы."
+
+#: bp-group-hierarchy-admin.php:116
+msgid "Use <code>%d</code> to include the number of child groups."
+msgstr "Используйте <code>%d</ code>, чтобы добавить количество дочерних групп."
+
+#: bp-group-hierarchy-admin.php:123
+msgid "Name of the Group Tree listing on the main Groups page."
+msgstr "Название каталога деревева групп на главной странице группы."
+
+#: bp-group-hierarchy-admin.php:127
+#: extension.php:280
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: bp-group-hierarchy-loader.php:11
+msgid "User Groups"
+msgstr "Пользовательские группы"
+
+#: bp-group-hierarchy-loader.php:69
+msgid "Search Groups..."
+msgstr "Поиск групп ..."
+
+#: bp-group-hierarchy-loader.php:198
+msgid "You do not have access to this group."
+msgstr "Вы не имеете доступа к этой группе."
+
+#: bp-group-hierarchy-loader.php:213
+msgid "You are not an admin of this group."
+msgstr "Вы не администратор этой группы."
+
+#: bp-group-hierarchy-loader.php:223
+msgid "Details"
+msgstr "Детали"
+
+#: bp-group-hierarchy-loader.php:227
+msgid "Settings"
+msgstr "Настройки"
+
+#: bp-group-hierarchy-loader.php:235
+msgid "Avatar"
+msgstr "Аватар"
+
+#: bp-group-hierarchy-loader.php:243
+msgid "Invites"
+msgstr "Приглашения"
+
+#: bp-group-hierarchy-widgets.php:14
+msgid "A list of top-level BuddyPress groups"
+msgstr "Список групп верхнего уровня BuddyPress"
+
+#: bp-group-hierarchy-widgets.php:27
+#: bp-group-hierarchy-widgets.php:141
+msgid "You must enable Groups component to use this widget."
+msgstr "Вы должны включить компонент Группы для использования этого виджета."
+
+#: bp-group-hierarchy-widgets.php:44
+#: bp-group-hierarchy-widgets.php:158
+msgid "created %s"
+msgstr "создана %s"
+
+#: bp-group-hierarchy-widgets.php:48
+#: bp-group-hierarchy-widgets.php:162
+#: extension.php:385
+#: templates/tree/tree-loop.php:54
+msgid "active %s"
+msgstr "Активный %s"
+
+#: bp-group-hierarchy-widgets.php:54
+#: bp-group-hierarchy-widgets.php:168
+msgid "%d member group"
+msgid_plural "%d member groups"
+msgstr[0] "%d подгруппа"
+msgstr[1] "%d подгруппы"
+
+#: bp-group-hierarchy-widgets.php:73
+#: bp-group-hierarchy-widgets.php:187
+msgid "There are no groups to display."
+msgstr "Нет  групп для отображения."
+
+#: bp-group-hierarchy-widgets.php:93
+#: bp-group-hierarchy-widgets.php:197
+msgid "Groups"
+msgstr "Группы"
+
+#: bp-group-hierarchy-widgets.php:100
+#: bp-group-hierarchy-widgets.php:205
+msgid "Title:"
+msgstr "Название:"
+
+#: bp-group-hierarchy-widgets.php:101
+#: bp-group-hierarchy-widgets.php:207
+msgid "Max groups to show:"
+msgstr "Максимум групп, для отображения:"
+
+#: bp-group-hierarchy-widgets.php:104
+#: bp-group-hierarchy-widgets.php:210
+msgid "Order by:"
+msgstr "Упорядочить по:"
+
+#: bp-group-hierarchy-widgets.php:106
+#: bp-group-hierarchy-widgets.php:212
+#: templates/tree/index.php:60
+msgid "Alphabetical"
+msgstr "Алфавиту"
+
+#: bp-group-hierarchy-widgets.php:107
+#: bp-group-hierarchy-widgets.php:213
+#: templates/tree/index.php:59
+msgid "Newly Created"
+msgstr "Дате созданнния"
+
+#: bp-group-hierarchy-widgets.php:108
+#: bp-group-hierarchy-widgets.php:214
+#: templates/tree/index.php:57
+msgid "Last Active"
+msgstr "Последняя активность"
+
+#: bp-group-hierarchy-widgets.php:109
+#: bp-group-hierarchy-widgets.php:215
+msgid "Most Popular"
+msgstr "Популярности"
+
+#: bp-group-hierarchy-widgets.php:110
+#: bp-group-hierarchy-widgets.php:216
+msgid "Most Member Groups"
+msgstr "Количеству участников"
+
+#: bp-group-hierarchy-widgets.php:114
+#: bp-group-hierarchy-widgets.php:220
+msgid "Show descriptions:"
+msgstr "Показать описания:"
+
+#: bp-group-hierarchy-widgets.php:122
+msgid "Group Navigator"
+msgstr "Навигатор группы"
+
+#: bp-group-hierarchy-widgets.php:122
+msgid "A list of member groups of the current group, or top-level groups anywhere else."
+msgstr "Список подгрупп текущей группе, или _ групп где-либо еще."
+
+#: bp-group-hierarchy-widgets.php:206
+msgid "Title when on a group page:"
+msgstr "Название на странице группы:"
+
+#: extension.php:38
+msgid "Member Groups %d"
+msgstr "Подгруппы  %d"
+
+#: extension.php:63
+msgid "Anybody"
+msgstr "любому"
+
+#: extension.php:64
+msgid "Nobody"
+msgstr "никому"
+
+#: extension.php:65
+msgid "only Group Members"
+msgstr "только участникам группы"
+
+#: extension.php:66
+msgid "only Group Admins"
+msgstr "только администраторам группы"
+
+#: extension.php:108
+#: extension.php:148
+#: extension.php:246
+msgid "Parent Group"
+msgstr "Родительская группа"
+
+#: extension.php:133
+#: extension.php:150
+#: extension.php:231
+msgid "Site Root"
+msgstr "Корень сайта"
+
+#: extension.php:171
+#: extension.php:277
+msgid "Allow %1$s to create %2$s"
+msgstr "Разрешить %1$s создавать %2$s"
+
+#: extension.php:256
+msgid "Only a site administrator can edit the group hierarchy."
+msgstr "Только администратор сайта может редактировать иерархию группы."
+
+#: extension.php:319
+msgid "There was an error saving; please try again."
+msgstr "произошла ошибка сохранения; пожалуйста, попробуйте еще раз. "
+
+#: extension.php:321
+msgid "Group hierarchy settings saved successfully."
+msgstr "Параметры иерархии групп успешно сохранены."
+
+#: extension.php:358
+msgid "Create a %s"
+msgstr "Новая %s"
+
+#: extension.php:358
+msgid "Member Group"
+msgstr "Подгруппа"
+
+#: extension.php:420
+msgid "No member groups were found."
+msgstr "Ни одного из участников групп не было найдено."
+
+#: extension.php:714
+#: extension.php:744
+msgid "Sorry, you are not allowed to create groups."
+msgstr "Извините, но вам не разрешено создавать группы."
+
+#: extension.php:768
+msgid "Member Groups (%d)"
+msgstr "Подгруппы  %d"
+
+#: templates/tree/index.php:21
+msgid "Create a Group"
+msgstr "Создать группу"
+
+#: templates/tree/index.php:39
+msgid "My Groups <span>%s</span>"
+msgstr "Мои группы <span>%s</span>"
+
+#: templates/tree/index.php:55
+msgid "Order By:"
+msgstr "Упорядочить по:"
+
+#: templates/tree/index.php:58
+msgid "Most Members"
+msgstr "Количеству участников"
+
+#: templates/tree/tree-loop.php:98
+msgid "There were no groups found."
+msgstr "Группы не найдены."
+
