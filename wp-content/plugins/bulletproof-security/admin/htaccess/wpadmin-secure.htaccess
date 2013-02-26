@@ -1,6 +1,6 @@
-#   BULLETPROOF .47.9 WP-ADMIN SECURE .HTACCESS     
+#   BULLETPROOF .48 WP-ADMIN SECURE .HTACCESS     
 
-# If you edit the BULLETPROOF .47.9 WP-ADMIN SECURE .HTACCESS text above 
+# If you edit the BULLETPROOF .48 WP-ADMIN SECURE .HTACCESS text above 
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # BPS is also checking that the string BPSQSE exists in this file - do not delete it
@@ -78,7 +78,7 @@ Deny from all
 # EXAMPLE:
 #AuthUserFile /dev/null
 #AuthGroupFile /dev/null
-#AuthName “Password Protected Area”
+#AuthName "Password Protected Area"
 #AuthType Basic
 #order deny,allow
 #deny from all
