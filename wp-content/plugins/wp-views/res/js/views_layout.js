@@ -386,12 +386,12 @@ function on_generate_wpv_layout(force) {
     var no_results_text = '';
     if (query_type == 'posts') {
         no_results_text = no_post_results_text;
+	data = "\[wpv-layout-start\]\n\[wpv-posts-found\]\n<!-- wpv-loop-start -->\n" + data + "<!-- wpv-loop-end -->\n\[/wpv-posts-found\]\n" + no_results_text + "\n\[wpv-layout-end\]\n";
     } else if (query_type == 'taxonomy') {
         no_results_text = no_taxonomy_results_text;
+	data = "\[wpv-layout-start\]\n\<!-- wpv-loop-start -->\n" + data + "<!-- wpv-loop-end -->\n" + no_results_text + "\n\[wpv-layout-end\]\n";
     }
     
-    data = "\[wpv-layout-start\]\n<!-- wpv-loop-start -->\n" + data + "\n<!-- wpv-loop-end -->\n" + no_results_text + "\n\[wpv-layout-end\]\n";
-
     c = jQuery('textarea#wpv_layout_meta_html_content').val();
     
     if (force || check_previous_layout_has_changed(c)) {

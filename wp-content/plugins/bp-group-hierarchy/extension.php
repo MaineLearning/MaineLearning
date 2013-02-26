@@ -698,6 +698,8 @@ function bp_group_hierarchy_group_tree_title( $full_title, $title, $sep_location
 
 /**
  * If the user doesn't have any place to create a new group, don't let him create a group
+ * @param boolean Return control behavior if user cannot create groups - if TRUE, return FALSE; if FALSE, die
+ * TODO: this parameter is poorly named / implemented
  */
 function bp_group_hierarchy_assert_parent_available( $return = false ) {
 	global $bp;
@@ -705,10 +707,10 @@ function bp_group_hierarchy_assert_parent_available( $return = false ) {
 	if(is_super_admin())	return true;
 	
 	if( $cache_result = wp_cache_get( $bp->loggedin_user->id, 'bpgh_has_available_parent_group' ) ) {
-		if($cache_result == 'true') {
+		if( $cache_result == 'true' ) {
 			return true;
 		}
-		if($return) {
+		if( $return ) {
 			return false;
 		} else {
 			wp_die( __( 'Sorry, you are not allowed to create groups.', 'buddypress' ), __( 'Sorry, you are not allowed to create groups.', 'buddypress' ) );
@@ -751,7 +753,6 @@ add_action( 'bp_before_create_group', 'bp_group_hierarchy_assert_parent_availabl
  * (BP 1.5.x) Hide the Create a New Group buton if the user doesn't have a place to create new groups
  */
 function bp_group_hierarchy_can_create_any_group( $permitted, $global_setting ) {
-	global $bp;
 	return $permitted && bp_group_hierarchy_assert_parent_available(true);
 }
 add_filter( 'bp_user_can_create_groups', 'bp_group_hierarchy_can_create_any_group', 10, 2 );

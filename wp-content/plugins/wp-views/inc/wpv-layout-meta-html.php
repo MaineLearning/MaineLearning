@@ -59,7 +59,7 @@ function wpv_layout_meta_html_admin($post, $view_layout_settings) {
                         $show = $view_settings['query_type'][0] == 'posts' ? 'style="display:inline"' : 'style="display:none"';
                     ?>
                     <div id="wpv-layout-v-icon-posts" <?php echo $show;?>>
-                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_layout_meta_html_content', true, true); ?>
+                    <?php echo $WP_Views->editor_addon->add_form_button('', 'wpv_layout_meta_html_content', true, true); ?>
                     </div>
                     
                     <?php

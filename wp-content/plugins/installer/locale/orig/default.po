@@ -1,0 +1,1095 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Repository Client / Extension Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-20 01:36+0200\n"
+"PO-Revision-Date: 2012-10-20 01:36+0200\n"
+"Last-Translator: Nikos M. <nikosms0@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: c:\\xampp\\htdocs\\extman34\\wp-content\\plugins"
+"\\installer\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wprc-loader.php:19
+#, php-format
+msgid "File \"%s\" doesn't exist!"
+msgstr ""
+
+#: classes/class-wp-theme.php:207
+msgid "The theme directory does not exist."
+msgstr ""
+
+#: classes/class-wp-theme.php:209
+msgid "Stylesheet is missing."
+msgstr ""
+
+#: classes/class-wp-theme.php:213
+msgid ""
+"ERROR: The themes directory is either empty or doesn&#8217;t exist. Please "
+"check your installation."
+msgstr ""
+
+#: classes/class-wp-theme.php:217
+msgid "Stylesheet is not readable."
+msgstr ""
+
+#: classes/class-wp-theme.php:235
+msgid "Template is missing."
+msgstr ""
+
+#: classes/class-wp-theme.php:254
+#, php-format
+msgid "The parent theme is missing. Please install the \"%s\" parent theme."
+msgstr ""
+
+#: classes/class-wp-theme.php:265 classes/class-wp-theme.php:269
+#, php-format
+msgid "The \"%s\" theme is not a valid parent theme."
+msgstr ""
+
+#: classes/class-wp-theme.php:654
+msgid "Anonymous"
+msgstr ""
+
+#: classes/class-wp-theme.php:661
+msgid ", "
+msgstr ""
+
+#: classes/wprc-admin-notifier.php:124
+msgid "Dismiss"
+msgstr ""
+
+#: classes/wprc-installer.php:82
+msgid "Unknown Error"
+msgstr ""
+
+#: classes/wprc-installer.php:83
+msgid "Connection Timeout"
+msgstr ""
+
+#: classes/wprc-installer.php:84
+#, php-format
+msgid "%d extension(s) were updated"
+msgstr ""
+
+#: classes/wprc-installer.php:85
+msgid "No extensions updated, probably up to date"
+msgstr ""
+
+#: classes/wprc-installer.php:86
+msgid "Username and Password were reset"
+msgstr ""
+
+#: classes/wprc-installer.php:87
+msgid "Username and Password reset Failed"
+msgstr ""
+
+#: classes/wprc-installer.php:88
+#, php-format
+msgid ""
+"Are you sure you want to reset the login details to %s repository? Use that "
+"only when you need to change the login details"
+msgstr ""
+
+#: classes/wprc-installer.php:267 pages/wprc-index.php:28
+msgid "Installer"
+msgstr ""
+
+#: classes/wprc-installer.php:269
+#, php-format
+msgid "Repositories %s"
+msgstr ""
+
+#: classes/wprc-installer.php:271 pages/repositories.php:170
+msgid "Repositories"
+msgstr ""
+
+#: classes/wprc-installer.php:278 pages/repositories.php:219
+#: pages/templates/uninstall-view.tpl.php:11
+#: pages/templates/uninstall-view.tpl.php:58
+msgid "Uninstall Installer"
+msgstr ""
+
+#: classes/wprc-installer.php:412
+msgid "Error"
+msgstr ""
+
+#: classes/wprc-installer.php:628
+#: tables/wprc-plugin-install-list-table.php:268
+#, php-format
+msgid "Check compatibility status for \"%s\" plugin"
+msgstr ""
+
+#: classes/wprc-installer.php:628 classes/wprc-installer.php:652
+#: tables/wprc-plugin-install-list-table.php:268
+msgid "Check compatibility"
+msgstr ""
+
+#: classes/wprc-installer.php:652 languages/wprc-language-container.php:35
+msgid "Check compatibility status for the theme"
+msgstr ""
+
+#: classes/wprc-installer.php:856
+msgid "Repositories Page"
+msgstr ""
+
+#: classes/wprc-installer.php:857
+#, php-format
+msgid "%d Repositories were added/updated. Go to %s to manage them."
+msgstr ""
+
+#: classes/wprc-repository-connector.php:136
+#: classes/api/wprc-extensions-api.php:584
+msgid "An unknown error occurred."
+msgstr ""
+
+#: classes/api/wprc-extensions-api.php:78
+#: languages/wprc-language-container.php:19
+#: tables/wprc-plugin-install-list-table.php:168
+#: tables/wprc-theme-install-list-table.php:206
+#: tables/wprc-theme-install-list-table.php:269
+msgid "Free"
+msgstr ""
+
+#: classes/api/wprc-extensions-api.php:79
+#: languages/wprc-language-container.php:20
+msgid "Paid"
+msgstr ""
+
+#: classes/api/wprc-extensions-api.php:569
+#: models/wprc-model-repositories.php:529
+msgid "An unexpected HTTP Error occurred during the API request."
+msgstr ""
+
+#: classes/api/wprc-plugins-api.php:102
+msgid "Hot Tags request returned empty result."
+msgstr ""
+
+#: classes/api/wprc-plugins-api.php:163
+msgid "You do not have sufficient permissions to install plugins on this site."
+msgstr ""
+
+#: classes/api/wprc-plugins-api.php:174
+msgid "Install Plugins"
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:155
+msgid "Install Themes"
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:172
+#, php-format
+msgid ""
+"You can find additional themes for your site by using the Theme Browser/"
+"Installer on this screen, which will display themes from the <a href=\"%s\" "
+"target=\"_blank\">WordPress.org Theme Directory</a>. These themes are "
+"designed and developed by third parties, are available free of charge, and "
+"are compatible with the license WordPress uses."
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:173
+msgid ""
+"You can Search for themes by keyword, author, or tag, or can get more "
+"specific and search by criteria listed in the feature filter. Alternately, "
+"you can browse the themes that are Featured, Newest, or Recently Updated. "
+"When you find a theme you like, you can preview it or install it."
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:174
+msgid ""
+"You can Upload a theme manually if you have already downloaded its ZIP "
+"archive onto your computer (make sure it is from a trusted and original "
+"source). You can also do it the old-fashioned way and copy a downloaded "
+"theme&#8217;s folder via FTP into your <code>/wp-content/themes</code> "
+"directory."
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:178
+msgid "Overview"
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:183
+msgid "For more information:"
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:184
+msgid ""
+"<a href=\"http://codex.wordpress.org/Using_Themes#Adding_New_Themes\" target="
+"\"_blank\">Documentation on Adding New Themes</a>"
+msgstr ""
+
+#: classes/api/wprc-themes-api.php:185
+msgid ""
+"<a href=\"http://wordpress.org/support/\" target=\"_blank\">Support Forums</"
+"a>"
+msgstr ""
+
+#: classes/requesters/wprc-correct-work-reporter.php:327
+msgid "Please set extension_type"
+msgstr ""
+
+#: languages/wprc-language-container.php:7
+msgid "Please check the option"
+msgstr ""
+
+#: languages/wprc-language-container.php:8
+msgid "Please check the problem themes"
+msgstr ""
+
+#: languages/wprc-language-container.php:9
+msgid "Please check the problem plugins"
+msgstr ""
+
+#: languages/wprc-language-container.php:10
+msgid "Select plugins"
+msgstr ""
+
+#: languages/wprc-language-container.php:11
+msgid "Select themes"
+msgstr ""
+
+#: languages/wprc-language-container.php:12
+msgid "Please check the child option"
+msgstr ""
+
+#: languages/wprc-language-container.php:13
+msgid "Warning"
+msgstr ""
+
+#: languages/wprc-language-container.php:14
+msgid "Enter repository name please"
+msgstr ""
+
+#: languages/wprc-language-container.php:15
+msgid "Enter repository end point url please"
+msgstr ""
+
+#: languages/wprc-language-container.php:17
+msgid "Select repositories"
+msgstr ""
+
+#: languages/wprc-language-container.php:18
+msgid "Search in # repositories"
+msgstr ""
+
+#: languages/wprc-language-container.php:22
+msgid "Search plugins (Free or Paid)"
+msgstr ""
+
+#: languages/wprc-language-container.php:23
+msgid "Search Free plugins"
+msgstr ""
+
+#: languages/wprc-language-container.php:24
+msgid "Search Paid plugins"
+msgstr ""
+
+#: languages/wprc-language-container.php:25
+msgid "Search Free & Paid plugins"
+msgstr ""
+
+#: languages/wprc-language-container.php:27
+msgid "Search themes (Free or Paid)"
+msgstr ""
+
+#: languages/wprc-language-container.php:28
+msgid "Search Free themes"
+msgstr ""
+
+#: languages/wprc-language-container.php:29
+msgid "Search Paid themes"
+msgstr ""
+
+#: languages/wprc-language-container.php:30
+msgid "Search Free & Paid themes"
+msgstr ""
+
+#: languages/wprc-language-container.php:32
+msgid "Repository has # type(-s)"
+msgstr ""
+
+#: languages/wprc-language-container.php:33
+msgid "Choose repository types"
+msgstr ""
+
+#: languages/wprc-language-container.php:34
+msgid "Choose repository types please"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:67
+msgid "I don't need what this plugin is doing"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:68
+msgid "I don't like how the plugin performs its tasks"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:69
+msgid "The plugin is not working right on my site"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:70
+msgid "Please describe the reasons for uninstalling:"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:71
+msgid "Report & Deactivate"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:77
+msgid "I don't need what this theme is doing"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:78
+msgid "I don't like how the theme performs its tasks"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:79
+msgid "The theme is not working right on my site"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:80
+msgid "Please describe the reasons for switching from the current theme:"
+msgstr ""
+
+#: pages/deactivation-reason-form.php:81
+msgid "Report & switch the theme"
+msgstr ""
+
+#: pages/deleted-repositories.php:62 pages/repositories.php:163
+msgid ""
+"HTTPS is not provided by server. Please connect with your site administrator"
+msgstr ""
+
+#: pages/deleted-repositories.php:69
+msgid "Deleted Repositories"
+msgstr ""
+
+#: pages/login.php:19
+#, php-format
+msgid "The repository %s was not found. Perhaps deleted?"
+msgstr ""
+
+#: pages/login.php:24
+#, php-format
+msgid "Please enter the login details for %s"
+msgstr ""
+
+#: pages/login.php:36
+msgid "Username"
+msgstr ""
+
+#: pages/login.php:44 pages/templates/repository-view.tpl.php:99
+msgid "Password"
+msgstr ""
+
+#: pages/login.php:56 tables/wprc-plugin-install-list-table.php:243
+#: tables/wprc-repositories-list-table.php:256
+#: tables/wprc-theme-install-list-table.php:369
+#: tables/wprc-theme-install-list-table.php:442
+#: tables/wprc-theme-install-list-table.php:816
+msgid "Login"
+msgstr ""
+
+#: pages/login.php:57 tables/wprc-theme-information.php:99
+msgid "Cancel"
+msgstr ""
+
+#: pages/login.php:68
+#, php-format
+msgid "Credentials for %s have been saved"
+msgstr ""
+
+#: pages/login.php:69
+msgid "Close"
+msgstr ""
+
+#: pages/repositories.php:17 pages/repositories.php:22 pages/wprc-index.php:13
+#: pages/wprc-index.php:18
+msgid "Settings are saved"
+msgstr ""
+
+#: pages/repositories.php:170
+msgid "Add New"
+msgstr ""
+
+#: pages/repositories.php:190
+msgid "Installing themes and plugins from these sources"
+msgstr ""
+
+#: pages/repositories.php:193
+msgid ""
+"This page defines which repositories your site uses for themes and plugins."
+msgstr ""
+
+#: pages/repositories.php:197
+#, php-format
+msgid "To install themes, go to <a href=\"%1$s\">%2$s</a>"
+msgstr ""
+
+#: pages/repositories.php:197
+msgid "Themes Install Page"
+msgstr ""
+
+#: pages/repositories.php:200
+#, php-format
+msgid "To install plugins, go to <a href=\"%1$s\">%2$s</a>"
+msgstr ""
+
+#: pages/repositories.php:200
+msgid "Plugins Install Page"
+msgstr ""
+
+#: pages/repositories.php:203
+#, php-format
+msgid ""
+"<a onclick=\"%1$s\" href=\"%2$s\">Check from which repository themes and "
+"plugins come from.</a>"
+msgstr ""
+
+#: pages/repositories.php:210 pages/wprc-index.php:29
+msgid "Settings"
+msgstr ""
+
+#: pages/repositories.php:213 pages/wprc-index.php:38
+msgid ""
+"Enable sending compatibility reports. (Explicit confirmation will be "
+"prompted for each report)"
+msgstr ""
+
+#: pages/repositories.php:215 pages/wprc-index.php:40
+#: pages/templates/repository-view.tpl.php:23
+msgid "Save changes"
+msgstr ""
+
+#: pages/repositories.php:221
+#, php-format
+msgid ""
+"If you want to uninstall Installer Plugin click <a href=\"%1$s\">%2$s</a>"
+msgstr ""
+
+#: pages/repositories.php:221
+msgid "Uninstall"
+msgstr ""
+
+#: pages/uninstall.php:31 pages/templates/uninstall-view.tpl.php:51
+msgid "UNINSTALL Installer"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:16
+msgid "Indication about problems"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:87
+msgid "There is a problem with themes"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:109
+msgid "There is a problem with plugins"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:129
+msgid "I'm not sure what's causing the problem"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:144
+msgid "Something else"
+msgstr ""
+
+#: pages/templates/deactivation-reason-form.tpl.php:161
+msgid "Skip"
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:7
+#, php-format
+msgid "Compatibility information of \"%s\""
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:11
+msgid "There is no compatibility information for specified extension"
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:19
+msgid "Is compatible with"
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:20
+msgid "Works"
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:21
+msgid "Broken"
+msgstr ""
+
+#: pages/templates/extension-compatibility-information.tpl.php:22
+msgid "Compatibility score"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:16
+#: pages/templates/repository-view.tpl.php:17
+msgid "Add repository"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:22
+msgid "Edit repository"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:29
+#: tables/wprc-plugin-install-list-table.php:243
+#: tables/wprc-repositories-list-table.php:256
+#: tables/wprc-theme-install-list-table.php:369
+#: tables/wprc-theme-install-list-table.php:442
+#: tables/wprc-theme-install-list-table.php:816
+msgid "Log in"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:31
+msgid "Reset Username and Password"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:58
+msgid "Repository name*"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:67
+msgid "Repository end point url*"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:72
+msgid "Repository types"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:79
+#: tables/wprc-deleted-repositories-list-table.php:36
+#: tables/wprc-repositories-list-table.php:43
+msgid "Repository enabled"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:94
+msgid "User name"
+msgstr ""
+
+#: pages/templates/repository-view.tpl.php:100
+msgid "Encrypted and Saved"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:13
+msgid "WARNING:"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:14
+msgid ""
+"Once uninstalled, this cannot be undone. All stored data related to "
+"Installer will be deleted. You should use a Database Backup plugin of "
+"WordPress to back up all the data first."
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:17
+msgid "The following WordPress Options/Tables will be DELETED:"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:22
+#: pages/templates/uninstall-view.tpl.php:65
+msgid "WordPress Options"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:23
+#: pages/templates/uninstall-view.tpl.php:66
+msgid "WordPress Tables"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:50
+#: tables/wprc-deleted-repositories-list-table.php:159
+#: tables/wprc-repositories-list-table.php:269
+#: tables/wprc-repositories-list-table.php:328
+msgid "Yes"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:51
+msgid ""
+"You Are About To Uninstall Installer From WordPress.\\nThis Action Is Not "
+"Reversible.\\n\\n Choose [Cancel] To Stop, [OK] To Uninstall."
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:60
+msgid "The following WordPress Options/Tables are DELETED:"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:75
+#: pages/templates/uninstall-view.tpl.php:87
+msgid "Deleted"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:77
+#: pages/templates/uninstall-view.tpl.php:89
+msgid "Not Deleted"
+msgstr ""
+
+#: pages/templates/uninstall-view.tpl.php:97
+#, php-format
+msgid ""
+"<a href=\"%s\">Click Here</a> To Finish The Uninstallation And Installer "
+"Will Be Deactivated Automatically."
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:24
+msgid "No deleted repositories were found."
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:34
+#: tables/wprc-repositories-list-table.php:41
+msgid "Name"
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:35
+#: tables/wprc-repositories-list-table.php:42
+msgid "End point url"
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:147
+#: tables/wprc-repositories-list-table.php:316
+#, php-format
+msgid ""
+"Are you sure that you want to undelete this repository '%s'?\n"
+"\n"
+" Click 'Cancel' to stop, 'OK' to undelete."
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:147
+#: tables/wprc-repositories-list-table.php:316
+msgid "UnDelete"
+msgstr ""
+
+#: tables/wprc-deleted-repositories-list-table.php:163
+#: tables/wprc-repositories-list-table.php:273
+#: tables/wprc-repositories-list-table.php:332
+msgid "No"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:23
+msgid "Description"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:24
+msgid "Installation"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:25
+msgid "FAQ"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:26
+msgid "Screenshots"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:27
+msgid "Changelog"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:28
+msgid "Other Notes"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:43
+msgid "Plugin Install"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:70
+#: tables/wprc-plugin-install-list-table.php:223
+#: tables/wprc-theme-information.php:109
+#: tables/wprc-theme-install-list-table.php:328
+msgid "Install Now"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:74 tables/wprc-theme-information.php:117
+msgid "Install Update Now"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:77
+#, php-format
+msgid "Newer Version (%s) Installed"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:80
+msgid "Latest Version Installed"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:105
+#: tables/wprc-plugin-install-list-table.php:240
+#: tables/wprc-theme-information.php:156
+#: tables/wprc-theme-install-list-table.php:367
+#: tables/wprc-theme-install-list-table.php:440
+#: tables/wprc-theme-install-list-table.php:650
+#: tables/wprc-theme-install-list-table.php:814
+#, php-format
+msgid "Buy %s"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:110
+#: tables/wprc-theme-information.php:169
+#: tables/wprc-theme-install-list-table.php:654
+msgid "Authorization Failed!"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:112
+msgid "FYI"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:115
+#: tables/wprc-theme-install-list-table.php:462
+#: tables/wprc-theme-install-list-table.php:666
+#: tables/wprc-theme-install-list-table.php:838
+msgid "Version:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:117
+#: tables/wprc-theme-install-list-table.php:463
+#: tables/wprc-theme-install-list-table.php:839
+msgid "Author:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:119
+#: tables/wprc-theme-install-list-table.php:465
+#: tables/wprc-theme-install-list-table.php:841
+msgid "Last Updated:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:120
+#: tables/wprc-theme-install-list-table.php:465
+#: tables/wprc-theme-install-list-table.php:841
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:122
+#: tables/wprc-theme-install-list-table.php:467
+#: tables/wprc-theme-install-list-table.php:843
+msgid "Requires WordPress Version:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:122
+#: tables/wprc-theme-install-list-table.php:467
+#: tables/wprc-theme-install-list-table.php:843
+#, php-format
+msgid "%s or higher"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:124
+#: tables/wprc-theme-install-list-table.php:469
+#: tables/wprc-theme-install-list-table.php:845
+msgid "Compatible up to:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:126
+#: tables/wprc-theme-install-list-table.php:471
+#: tables/wprc-theme-install-list-table.php:847
+msgid "Downloaded:"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:126
+#: tables/wprc-theme-install-list-table.php:471
+#: tables/wprc-theme-install-list-table.php:847
+#, php-format
+msgid "%s time"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:128
+msgid "WordPress.org Plugin Page &#187;"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:130
+msgid "Plugin Homepage &#187;"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:135
+#: tables/wprc-plugin-information.php:141
+msgid "Average Rating"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:136
+#: tables/wprc-plugin-information.php:139
+#: tables/wprc-plugin-information.php:142
+#: tables/wprc-plugin-information.php:150
+#: tables/wprc-plugin-install-list-table.php:289
+#: tables/wprc-plugin-install-list-table.php:305
+#: tables/wprc-theme-install-list-table.php:479
+#: tables/wprc-theme-install-list-table.php:564
+#: tables/wprc-theme-install-list-table.php:855
+#, php-format
+msgid "(based on %s rating)"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:157
+msgid ""
+"<strong>Warning:</strong> This plugin has <strong>not been tested</strong> "
+"with your current version of WordPress."
+msgstr ""
+
+#: tables/wprc-plugin-information.php:160
+msgid ""
+"<strong>Warning:</strong> This plugin has <strong>not been marked as "
+"compatible</strong> with your version of WordPress."
+msgstr ""
+
+#: tables/wprc-plugin-information.php:562
+#: tables/wprc-theme-information.php:450
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox"
+"\" title=\"%3$s\">View version %4$s details</a>."
+msgstr ""
+
+#: tables/wprc-plugin-information.php:564
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox"
+"\" title=\"%3$s\">View version %4$s details</a>. <em>Automatic update is "
+"unavailable for this plugin.</em>"
+msgstr ""
+
+#: tables/wprc-plugin-information.php:566
+#: tables/wprc-theme-information.php:454
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox"
+"\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update "
+"now</a>."
+msgstr ""
+
+#: tables/wprc-plugin-information.php:592
+#: tables/wprc-theme-information.php:481
+#, php-format
+msgid "Upgrade %s"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:33
+#: tables/wprc-theme-install-list-table.php:62
+msgid "Search"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:35
+#: tables/wprc-theme-install-list-table.php:64
+msgid "Search Results"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:36
+#: tables/wprc-theme-install-list-table.php:65
+msgid "Upload"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:37
+#: tables/wprc-theme-install-list-table.php:66
+msgid "Featured"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:38
+msgid "Popular"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:39
+#: tables/wprc-theme-install-list-table.php:68
+msgid "Newest"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:40
+#: tables/wprc-theme-install-list-table.php:69
+msgid "Recently Updated"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:92
+#: tables/wprc-theme-install-list-table.php:135
+msgid "Try again"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:104
+msgid "No plugins match your request."
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:111
+msgid "Source"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:112
+msgid "Price"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:158
+#: tables/wprc-theme-install-list-table.php:382
+#: tables/wprc-theme-install-list-table.php:657
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:165
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:165
+#: tables/wprc-theme-install-list-table.php:389
+#: tables/wprc-theme-install-list-table.php:460
+#: tables/wprc-theme-install-list-table.php:836
+msgid "Details"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:223
+#: tables/wprc-theme-install-list-table.php:328
+#, php-format
+msgid "Install %s"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:227
+#: tables/wprc-theme-install-list-table.php:334
+#: tables/wprc-theme-install-list-table.php:615
+#: tables/wprc-theme-install-list-table.php:783
+#, php-format
+msgid "Update to version %s"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:227
+msgid "Update Now"
+msgstr ""
+
+#: tables/wprc-plugin-install-list-table.php:248
+#: tables/wprc-theme-install-list-table.php:338
+#: tables/wprc-theme-install-list-table.php:619
+#: tables/wprc-theme-install-list-table.php:787
+msgid "Installed"
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:31
+msgid "No repositories were found."
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:200
+#, php-format
+msgid "Active <span class=\"count\">(%s)</span>"
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:201
+#, php-format
+msgid "Trash <span class=\"count\">(%s)</span>"
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:252
+msgid "Edit"
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:253
+#, php-format
+msgid ""
+"Are you sure that you want to delete this repository '%s'?\n"
+"\n"
+" Click 'Cancel' to stop, 'OK' to delete."
+msgstr ""
+
+#: tables/wprc-repositories-list-table.php:253
+msgid "Delete"
+msgstr ""
+
+#: tables/wprc-theme-information.php:16 tables/wprc-theme-information.php:37
+msgid "Theme Install"
+msgstr ""
+
+#: tables/wprc-theme-information.php:46
+msgid ""
+"<strong>Warning:</strong> This theme has <strong>not been tested</strong> "
+"with your current version of WordPress."
+msgstr ""
+
+#: tables/wprc-theme-information.php:48
+msgid ""
+"<strong>Warning:</strong> This theme has not been marked as "
+"<strong>compatible</strong> with your version of WordPress."
+msgstr ""
+
+#: tables/wprc-theme-information.php:95
+#, php-format
+msgid "by %s"
+msgstr ""
+
+#: tables/wprc-theme-information.php:96
+#, php-format
+msgid "Version: %s"
+msgstr ""
+
+#: tables/wprc-theme-information.php:122
+#, php-format
+msgid "Newer version (%s) is installed."
+msgstr ""
+
+#: tables/wprc-theme-information.php:127
+msgid "This version is already installed."
+msgstr ""
+
+#: tables/wprc-theme-information.php:452
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox"
+"\" title=\"%3$s\">View version %4$s details</a>. <em>Automatic update is "
+"unavailable for this theme.</em>"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:149
+msgid "No themes match your request."
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:160
+msgid "Check Compatibility"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:299
+#: tables/wprc-theme-install-list-table.php:446
+#: tables/wprc-theme-install-list-table.php:453
+#: tables/wprc-theme-install-list-table.php:821
+#: tables/wprc-theme-install-list-table.php:829
+#, php-format
+msgid "Preview &#8220;%s&#8221;"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:334
+#: tables/wprc-theme-install-list-table.php:615
+#: tables/wprc-theme-install-list-table.php:783
+msgid "Update"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:372
+#, php-format
+msgid "Preview %s"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:372
+#: tables/wprc-theme-install-list-table.php:446
+#: tables/wprc-theme-install-list-table.php:821
+msgid "Preview"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:413
+#: tables/wprc-theme-install-list-table.php:780
+#, php-format
+msgid "Install &#8220;%s&#8221;"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:413
+#: tables/wprc-theme-install-list-table.php:589
+#: tables/wprc-theme-install-list-table.php:780
+msgid "Install"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:514
+msgid "&larr; Close"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:521
+msgid "Collapse"
+msgstr ""
+
+#: tables/wprc-theme-install-list-table.php:814
+#, php-format
+msgid "Buy &#8220;%s&#8221;"
+msgstr ""

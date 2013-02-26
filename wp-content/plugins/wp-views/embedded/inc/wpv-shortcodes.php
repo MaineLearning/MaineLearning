@@ -397,7 +397,7 @@ function wpv_shortcode_wpv_post_url($atts) {
  * Description: Display the current post type
  *
  * Parameters:
- * 'show' => 'slug', 'singular' or 'plural'. Defaults to 'slug'
+ * 'show' => 'slug', 'single' or 'plural'. Defaults to 'slug'
  *
  */
 
@@ -1102,7 +1102,7 @@ function wpv_post_taxonomies_editor_addon_menus_wpv_views_filter($items) {
                 || $taxonomy_slug == 'post_format') {
             continue;
         }
-        $add[__('Taxonomy', 'wpv-views')][$taxonomy->label] = array($taxonomy->label, 'wpv-post-taxonomy type="' . $taxonomy_slug . '" separator=", " format="link" show="name" sort="none"', __('Category', 'wpv-views'), '');
+        $add[__('Taxonomy', 'wpv-views')][$taxonomy->label] = array($taxonomy->label, 'wpv-post-taxonomy type="' . $taxonomy_slug . '" separator=", " format="link" show="name" order="asc"', __('Category', 'wpv-views'), '');
     }
 
     $part_one = array_slice($items, 0, 1);

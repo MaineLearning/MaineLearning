@@ -614,7 +614,7 @@ class WP_Views_archive_loops{
             <?php wp_nonce_field('wpv_view_edit_nonce', 'wpv_view_edit_nonce'); ?>
             
             <div style="margin-left:10px;margin-top:10px;margin-bottom:10px;">
-                <input type="hidden" value="<?php echo $view_id; ?>" name="wpv-archive-view-id">
+                <input type="hidden" value="<?php echo $view_id; ?>" name="wpv-archive-view-id" />
                 <br />
                 <?php _e('Use this View for these archive loops:', 'wpv-views');?>
                 <br />

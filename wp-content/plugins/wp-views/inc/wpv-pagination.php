@@ -183,14 +183,14 @@ function wpv_pagination_admin($view_settings) {
 
                             <p>
                             <?php $checked = (isset($view_settings['include_page_selector_control']) && $view_settings['include_page_selector_control']) ? ' checked="checked"' : '';?>
-                            <label><input id="_wpv_settings_include_page_selector_control" type="checkbox" name="_wpv_settings[include_page_selector_control]"<?php echo $checked; ?>>&nbsp;<?php _e('Include a page selector', 'wpv-views'); ?></label>
+                            <label><input id="_wpv_settings_include_page_selector_control" type="checkbox" name="_wpv_settings[include_page_selector_control]"<?php echo $checked; ?> />&nbsp;<?php _e('Include a page selector', 'wpv-views'); ?></label>
                             <select id="_wpv_settings_page_selector_control_type" name="_wpv_settings[pagination][page_selector_control_type]">
                                 <option value="drop_down"<?php if ($view_settings['pagination']['page_selector_control_type'] == 'drop_down') { echo ' selected="selected"'; } ?>><?php _e('Drop down',  'wpv-views'); ?></option>
                                 <option value="link"<?php if ($view_settings['pagination']['page_selector_control_type'] == 'link') { echo ' selected="selected"'; } ?>><?php _e('Links',  'wpv-views'); ?></option>
                             </select>
                             <br />
                             <?php $checked = (isset($view_settings['include_prev_next_page_controls']) && $view_settings['include_prev_next_page_controls']) ? ' checked="checked"' : '';?>
-                            <label><input id="_wpv_settings_include_prev_next_page_controls" type="checkbox" name="_wpv_settings[include_prev_next_page_controls]"<?php echo $checked; ?>>&nbsp;<?php _e('Include next page and previous page controls', 'wpv-views'); ?></label>
+                            <label><input id="_wpv_settings_include_prev_next_page_controls" type="checkbox" name="_wpv_settings[include_prev_next_page_controls]"<?php echo $checked; ?> />&nbsp;<?php _e('Include next page and previous page controls', 'wpv-views'); ?></label>
                             </p>
                         </div>
                         <p>
@@ -199,9 +199,9 @@ function wpv_pagination_admin($view_settings) {
                         <div style="margin-left:20px;">
                             <ul>
                                 <?php $checked = $view_settings['ajax_pagination'][0] == 'disable' ? ' checked="checked"' : ''; ?>
-                                <li><label><input type="radio"  value="disable" name="_wpv_settings[ajax_pagination][]" onclick="jQuery('.wpv_pagination_ajax_toggle').slideUp();"<?php echo $checked; ?>>&nbsp;<?php _e('Pagination updates the entire page', 'wpv-views'); ?></label></li>
+                                <li><label><input type="radio"  value="disable" name="_wpv_settings[ajax_pagination][]" onclick="jQuery('.wpv_pagination_ajax_toggle').slideUp();"<?php echo $checked; ?> />&nbsp;<?php _e('Pagination updates the entire page', 'wpv-views'); ?></label></li>
                                 <?php $checked = $view_settings['ajax_pagination'][0] == 'enable' ? ' checked="checked"' : ''; ?>
-                                <li><label><input type="radio"  value="enable" name="_wpv_settings[ajax_pagination][]" onclick="jQuery('.wpv_pagination_ajax_toggle').slideDown();"<?php echo $checked; ?>>&nbsp;<?php _e('Pagination updates only the view (use AJAX)', 'wpv-views'); ?></label></li>
+                                <li><label><input type="radio"  value="enable" name="_wpv_settings[ajax_pagination][]" onclick="jQuery('.wpv_pagination_ajax_toggle').slideDown();"<?php echo $checked; ?> />&nbsp;<?php _e('Pagination updates only the view (use AJAX)', 'wpv-views'); ?></label></li>
                                 <li class="wpv_pagination_ajax_toggle"<?php if ($view_settings['ajax_pagination'][0] == 'disable') { echo ' style="display:none;"'; } ?>><label><select name="_wpv_settings[ajax_pagination][style]">
                                                 <option value="fade"<?php if ($view_settings['ajax_pagination']['style'] == 'fade') { echo ' selected="selected"'; } ?>><?php _e('Fade',  'wpv-views'); ?></option>
                                                 <option value="fadefast"<?php if ($view_settings['ajax_pagination']['style'] == 'fadefast') { echo ' selected="selected"'; } ?>><?php _e('Fade fast',  'wpv-views'); ?></option>

@@ -1,0 +1,444 @@
+.wprc.box {
+	width:300px;
+	height:100px;
+}
+
+.wprc.details-boxes {
+	display:none;
+	margin:5px 0 0 19px;
+}
+
+.wprc.subdetails-boxes {
+	display:none;
+	margin:0 0 5px 19px;
+}
+
+.wprc.option-wrap {
+	width:100%;
+	height:100%;
+	padding:5px;
+}
+
+.wprc.option-wrap.selected {
+	background-color:#FAFAFA;
+	border:1px solid #EEE;
+}
+
+.wprc.validation-errors{
+	color: red;
+	margin:5px 0 0 18px;
+}
+
+/* table list */
+table.list{border-width: 1px;border-spacing: 2px;border-style: solid;border-color: #EFEFEF;border-collapse: collapse;background-color: #ffffff;color: #21759B;}
+table.list tr.new{background-color: #F5F5F5;}
+table.list th{border-width: 1px;padding: 3px;border-style: solid;color: #21759B;font-size:14px;background-color: #ECECEC;border: 1px solid #DFDFDF;}
+table.list td{border-width: 1px;padding: 0px;border-style: solid;border-color: #DFDFDF;padding:3px;font-size:14px;}
+
+#wprc-loader,.wprc-loader
+{
+    width:50px;
+    height:50px;
+    background:url(290.gif);
+}
+#deactivation_report_form #wprc-loader {
+    width:20px;
+    height:20px;
+    background:url(290_20x20.gif);
+    display:inline-block;
+    margin-left:15px;
+    vertical-align:top;
+}
+
+.wprc-message-icon
+{
+display:inline-block;
+background:url(../images/notice-sprite.png);
+margin:3px;
+position:relative;
+vertical-align:middle;
+}
+.wprc-notify-icon
+{
+width:40px;
+height:37px;
+background-position:0 0;
+}
+.wprc-security-icon
+{
+width:40px;
+height:40px;
+background-position:0 -50px;
+}
+.wprc-admin-message
+{
+position:relative;
+}
+.wprc-admin-message-hide
+{
+right:0;
+bottom:0;
+}
+
+.wprc-repository-hightlight
+{
+background-color:#ffffa0;
+}
+
+.wprc-box
+{
+width:50%;
+position:relative;
+min-width:200px;
+margin:20px auto;
+background:#FFFBCC !important;
+}
+
+.wprc-box .inside
+{
+background:#FFFBCC;
+}
+
+.wprc-notify-icon
+{
+width:40px;
+height:37px;
+background-position:0 0;
+}
+
+#icon-repositories-installer,
+#icon-uninstall-installer {
+	background:url(../images/wp-compatibility-32x32.png) no-repeat 0 0 transparent;
+}
+
+
+.installer-pages-repositories-php .tablenav {
+    margin-top: 53px;
+    margin-bottom:20px;
+}
+.installer-pages-repositories-php hr {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid #e5e5e5;
+    margin: 1em 0; padding: 0
+}
+
+
+
+
+.available-repository {
+    margin: 60px 0 40px 0;
+    padding: 0 0 20px;
+    overflow: hidden;
+    padding-left: 330px;
+    position:relative;
+    max-width: 630px;
+    min-height:140px;
+    overflow: visible;
+}
+    .rtl .available-repository {
+        padding-right: 330px;
+        padding-left:0;
+    }
+    .available-repository .screenshot{
+        width: 300px;
+        margin-right:28px;
+        position:absolute;
+        outline: 0;
+        text-decoration:none;
+        height:0px;
+        border:none;
+
+    }
+    .rtl .available-repository .screenshot {
+        margin-left:28px;
+        margin-right:0;
+    }
+
+        .visit-link-wrap {
+           position:absolute;
+            left:-330px;
+            top:150px; 
+            width:318px ;
+            text-align:center;
+        }
+        .rtl .visit-link-wrap {
+            right:-330px;
+            left:0;
+        }
+        
+        .available-repository .screenshot .logo-wrap {
+            float: left;
+            padding:8px 8px;
+            width: 287px;
+            height:117px;
+            margin-left: -330px;
+            background-color: #F1F1F1;
+            border:1px solid #DDD !important;
+            overflow:hidden;
+        }
+        .rtl .available-repository .screenshot .logo-wrap {
+            float:right;
+            margin-right: -330px;
+            margin-left: 0;
+        }
+            .available-repository .screenshot .logo-wrap img
+             {
+                float: left;
+                max-width: 285px;
+                border: 0 !important;
+            }
+            .rtl .available-repository .screenshot .logo-wrap img {
+                float:right;
+            }
+        .available-repository .repository-link {
+            float: left;
+            width:300px;
+            text-align:center;
+            margin-left: -330px;
+            border: none !important;
+            position:absolute;
+            margin-top:200px;
+        }
+        .rtl .available-repository .repository-link {
+            float:right;
+        }
+        .available-repository .visit-text {
+            color:grey;
+        }
+        .available-repository .link-text {
+            text-decoration: underline;
+        }
+
+    .available-repository h2 {
+        margin: 0px 0 16px;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        padding-top:0px;
+        max-width:60%;
+        float:left;
+    }
+    .rtl .available-repository h2 {
+        float:right;
+    }
+
+    .repository-log-details {
+        float:right;
+        width:182px;
+        margin-top:5px;
+    }  
+    .rtl .repository-log-details  {
+        float:left;
+    }
+        .repository-log-details .logged-message {
+                float:right;
+            }
+        .rtl .repository-log-details .logged-message {
+            float:left;
+        }
+            .repository-log-details .img-logged-in {
+                background:url(../images/repositories-sprites.png) no-repeat -8px -31px transparent;
+                width:15px;
+                height:16px;
+                display:inline-block;
+            }
+            .repository-log-details .img-not-logged-in {
+                background:url(../images/repositories-sprites.png) no-repeat -8px 1px transparent;
+                width:15px;
+                height:16px;
+                display:inline-block;
+            }
+            .repository-log-details .button-primary,
+            .repository-log-details .button-secondary {
+                float:right;
+            }
+            .rtl .repository-log-details .button-primary,
+            .rtl .repository-log-details .button-secondary {
+                float:left;
+            }
+            .repository-log-details .logged-in {
+                color:#1f9217;
+                margin-right:25px;
+            }
+            .rtl .repository-log-details .logged-in {
+                margin-left:25px;
+                margin-right:0;
+            }
+            .repository-log-details .not-logged-in {
+                color:#9d9d9d;
+                margin-right:25px;
+            }
+            .rtl .repository-log-details .not-logged-in {
+                margin-left:25px;
+                margin-right:0;
+            }
+
+        
+        
+            
+            
+        .repository-content p {
+            line-height:26px;
+            max-width: 600px;
+        }
+        
+        .repository-footer .install-links {
+            float:left;
+            width:300px;
+        }
+        .rtl .repository-footer .install-links {
+            float:right;
+        }
+            .repository-footer .install-links .plugin-install {
+            	background: url(../images/repositories-sprites.png) no-repeat -5px -97px transparent;
+				width: 25px;
+				height: 20px;
+				display: inline-block;
+            }
+            .repository-footer .install-links .theme-install {
+            	background:url(../images/repositories-sprites.png) no-repeat -5px -59px transparent;
+                width:25px;
+                height:21px;
+                display:inline-block; 
+            }
+            .rtl .repository-footer .install-links .theme-install,
+            .rtl .repository-footer .install-links .plugin-install {
+                margin-left:10px;
+            }
+            .repository-footer .install-links a {
+                font-size: 14px;
+            }
+        .repository-footer .edit-links {
+            float:right;
+        }
+        .rtl .repository-footer .edit-links {
+            float:left;
+        }
+          .repository-footer .edit-links a,
+          .repository-footer .edit-links span {
+                text-decoration:none;
+                color:#aaaaaa;
+            }
+                .repository-footer .edit-links a:hover,
+                .repository-footer .edit-links a:active,
+                .repository-footer .edit-links a:focus {
+                    text-decoration:underline;
+                }
+
+.repository-options {
+	margin-top:20px;
+}
+.repository-options .wprc-block {
+	float:left;
+	width:30%;
+	margin-bottom:30px;
+	margin-left:40px;
+}
+
+
+.installer-pages-repositories-php .search-box {
+	float:left;
+}
+.rtl .installer-repositories-list .search-box {
+    float:right;
+}
+
+
+
+#wprc_repository_login_form table {
+    font-family: Arial, sans-serif;
+}
+#wprc_repository_login_form table th {
+    padding-bottom:65px;
+    font-size:14px;
+    font-weight:normal;
+    
+}
+    #wprc_repository_login_form table th span {
+        color:#166185;
+        font-weight:bold;
+    }
+
+#wprc_repository_login_form table label {
+	font-size: 12px;
+}
+
+#wprc_repository_login_form table td {
+    padding-bottom: 15px;
+}
+#wprc_repository_login_form table #wprc-loader {
+    background:none;
+    width: auto;
+    height:auto;
+    text-align: center;
+}
+#wprc_repository_login_form table #wprc-loader img {
+    width:25px;
+    height:25px;
+}
+#wprc_repository_login_success,
+#wprc_repository_login_fail {
+    display:none;
+}
+#login_success_messages_wrap {
+    padding:30px;
+    min-height:60px;
+}
+
+
+
+
+#repositories_form input[type=text] {
+    width:350px;
+}
+#repositories_form textarea {
+    width:720px;
+}
+    #repositories_form .logo_preview {
+        padding: 8px 8px;
+        width: 287px;
+        height: 117px;
+        background:#f4f4f4;
+        border:1px solid #e4e4e4;
+        margin-bottom:20px;
+        overflow: hidden;
+        position:relative;
+    }
+
+    #repositories_form .logo_preview img {
+        max-width:100%;
+    }
+
+
+#clear-results-loading {
+    width:15px;
+    height:15px;
+    display:none;
+    background:url('290_15x15.gif') no-repeat top center transparent;
+}
+#clear_extension_search_cache {
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.installer-drop-container {
+    display:inline-block;
+}
+.installer-drop-container .installer-drop-button {
+    font-size:11px;
+    margin-right:5px;
+    height: 22px;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+.installer-drop-container .ui-widget {
+    font-size:11px;
+}
+
+#deactivation_report_form .installer-drop-container {
+    margin-top:15px;
+}
+#deactivation_report_form .installer-drop-container > div {
+    min-width:200px;
+}
+

@@ -93,11 +93,11 @@ function wpv_get_layout_label_by_slug($wpv_layout_settings) {
 
 	$layout_box .= '</td></tr><tr><td width="34" style="border-bottom-color:#FFFFFF;">';
 	switch($style) {
-		case 'unformatted': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-unformated-48.png">&nbsp;'; break;
-		case 'ordered_list': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-ordered-list-48.png">&nbsp;'; break;
-		case 'un_ordered_list': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-un-ordered-list-48.png">&nbsp;'; break;
-		case 'table': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-grid-48.png">&nbsp;'; break;
-		case 'table_of_fields': $layout_box .= '<img align="left" src="' . WPV_URL . '/res/img/layout-table-48.png">&nbsp;'; break;
+		case 'unformatted': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-unformated-48.png" />&nbsp;'; break;
+		case 'ordered_list': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-ordered-list-48.png" />&nbsp;'; break;
+		case 'un_ordered_list': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-un-ordered-list-48.png" />&nbsp;'; break;
+		case 'table': $layout_box .= '<img src="' . WPV_URL . '/res/img/layout-grid-48.png" />&nbsp;'; break;
+		case 'table_of_fields': $layout_box .= '<img align="left" src="' . WPV_URL . '/res/img/layout-table-48.png" />&nbsp;'; break;
 	}
 	
 	$layout_box .= '</td><td style="border-bottom-color:#FFFFFF;">';

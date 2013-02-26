@@ -93,7 +93,6 @@ function wpv_filter_meta_html_admin($view_settings) {
                                  'filter_url_hint',
                                  'wpv_filter_url_hint',
                                  true);
-
     
     $wpv_wp_pointer->add_show_hints_ui("jQuery('#wpv_views_help .inside')");
     

@@ -79,7 +79,12 @@ function wpv_filter_post_custom_field($query, $view_settings) {
 					
 				}
 				
-				$value = str_replace($no_parameter_found, '', $value); // just in case we have more than on parameter
+				$value = str_replace($no_parameter_found, '', $value); // just in case we have more than one parameter
+				
+				if ($compare_mode == 'IN' || $compare_mode == 'NOT IN') { // WordPress query expects an array in this case
+					$value = explode(',', $value); // make it an array and separate values, for multiple values in shortcode mode
+					$value = array_map('trim',$value); // delete empty spaces at beginning and end, for shortcode mode error prevention
+				}
 
 				if (!isset($query['meta_query']) && isset($view_settings['custom_fields_relationship'])) {
 					$query['meta_query'] = array('relation' => $view_settings['custom_fields_relationship']);

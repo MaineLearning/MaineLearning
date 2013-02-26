@@ -73,7 +73,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-post_relationship-show\">\n";
         $td .= wpv_get_filter_post_relationship_summary($view_settings);
@@ -173,17 +173,17 @@ function wpv_add_post_relationship($args) {
             <?php $radio_name = $edit ? '_wpv_settings[post_relationship_mode][]' : 'post_relationship_mode[]' ?>
             <li>
                 <?php $checked = $view_settings['post_relationship_mode'] == 'current_page' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_page" <?php echo $checked; ?>>&nbsp;<?php _e('Post where this View is inserted', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_page" <?php echo $checked; ?> />&nbsp;<?php _e('Post where this View is inserted', 'wpv-views'); ?></label>
             </li>
             
             <li>
                 <?php $checked = $view_settings['post_relationship_mode'] == 'parent_view' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="parent_view" <?php echo $checked; ?>>&nbsp;<?php _e('Post set by parent View', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="parent_view" <?php echo $checked; ?> />&nbsp;<?php _e('Post set by parent View', 'wpv-views'); ?></label>
             </li>
             
             <li>
                 <?php $checked = $view_settings['post_relationship_mode'] == 'this_page' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_page" <?php echo $checked; ?>>&nbsp;<?php _e('Specific:', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_page" <?php echo $checked; ?> />&nbsp;<?php _e('Specific:', 'wpv-views'); ?></label>
                 
                 <?php $select_id = $edit ? 'wpv_post_relationship_post_type' : 'wpv_post_relationship_post_type_add' ?>
                 <select id="<?php echo $select_id; ?>">

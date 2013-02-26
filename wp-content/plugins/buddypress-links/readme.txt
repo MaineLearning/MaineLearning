@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: buddypress, social, networking, links, rich media, embed, youtube, flickr, metacafe
 Requires at least: 3.4
 Tested up to: 3.4.2
-Stable tag: 0.7.1
+Stable tag: 0.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,9 +139,14 @@ This version contains the first support for rich media embedding. *Please make s
 
 == Changelog ==
 
+= 0.7.2 =
+
+* Updated URL patterns to support secure links (https)
+* Changed default management capability and make it an overridable constant
+
 = 0.7.1 =
 
-* Removed custom cron scheduling due to theme conflicts
+* Removed custom cron scheduling due to plugin conflicts
 * Fixed pagination of links manager admin screen
 * Killed colorbox dynamic image window sizing in favor of fixed size
 * Minor fixes to resolve issues related to WordPress 3.5

@@ -85,7 +85,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-parent-show\">\n";
         $td .= wpv_get_filter_parent_summary($view_settings);
@@ -203,7 +203,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-taxonomy-parent-show\">\n";
         $td .= wpv_get_filter_taxonomy_parent_summary($view_settings);
@@ -283,12 +283,12 @@ function wpv_add_parent($args) {
             <?php $radio_name = $edit ? '_wpv_settings[parent_mode][]' : 'parent_mode[]' ?>
             <li>
                 <?php $checked = $view_settings['parent_mode'] == 'current_page' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_page" <?php echo $checked; ?>>&nbsp;<?php _e('Parent is the current page', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_page" <?php echo $checked; ?> />&nbsp;<?php _e('Parent is the current page', 'wpv-views'); ?></label>
             </li>
             
             <li>
                 <?php $checked = $view_settings['parent_mode'] == 'this_page' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_page" <?php echo $checked; ?>>&nbsp;<?php _e('Parent is:', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_page" <?php echo $checked; ?> />&nbsp;<?php _e('Parent is:', 'wpv-views'); ?></label>
                 
                 <?php $select_id = $edit ? 'wpv_parent_post_type' : 'wpv_parent_post_type_add' ?>
                 <select id="<?php echo $select_id; ?>">
@@ -355,12 +355,12 @@ function wpv_add_parent_taxonomy($args) {
             <?php $radio_name = $edit ? '_wpv_settings[taxonomy_parent_mode][]' : 'taxonomy_parent_mode[]' ?>
             <li>
                 <?php $checked = $view_settings['taxonomy_parent_mode'] == 'current_view' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_view" <?php echo $checked; ?>>&nbsp;<?php _e('Parent is the taxonomy selected by the <strong>parent view</strong>', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="current_view" <?php echo $checked; ?> />&nbsp;<?php _e('Parent is the taxonomy selected by the <strong>parent view</strong>', 'wpv-views'); ?></label>
             </li>
             
             <li>
                 <?php $checked = $view_settings['taxonomy_parent_mode'] == 'this_parent' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_parent" <?php echo $checked; ?>>&nbsp;<?php _e('Parent is:', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="this_parent" <?php echo $checked; ?> />&nbsp;<?php _e('Parent is:', 'wpv-views'); ?></label>
 
 				<?php
 					if (isset($view_settings['taxonomy_type']) && $view_settings['taxonomy_type'] != '') {
@@ -371,7 +371,7 @@ function wpv_add_parent_taxonomy($args) {
 					$parent_select_name = $edit ? '_wpv_settings[taxonomy_parent_id]' : 'wpv_taxonomy_parent_id'
 					
 				?>
-				<input type="hidden" id="wpv-current-taxonomy-parent" value="<?php echo $taxonomy; ?>">
+				<input type="hidden" id="wpv-current-taxonomy-parent" value="<?php echo $taxonomy; ?>" />
 				
 				<select name="<?php echo $parent_select_name; ?>">
 					<option value="0"><?php echo __('None', 'wpv-views'); ?></option>

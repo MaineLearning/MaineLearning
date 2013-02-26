@@ -21,11 +21,104 @@ class WP_Views_plugin extends WP_Views {
 		
         if(is_admin()){
             add_action('admin_print_scripts', array($this,'add_views_settings_js'));
+            
+            /* Add hooks for Module Manager Integration */
+            if (defined('MODMAN_PLUGIN_NAME'))
+            {
+                add_filter('wpmodules_register_sections', array($this,'register_modules_sections'),10,1);
+                add_filter('wpmodules_register_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'register_modules_views_items'), 10, 1);
+                add_filter('wpmodules_export_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'export_modules_views_items'), 10, 2);
+                add_filter('wpmodules_import_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'import_modules_views_items'), 10, 2);
+                add_filter('wpmodules_register_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'register_modules_view_templates_items'), 10, 1);
+                add_filter('wpmodules_export_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'export_modules_view_templates_items'), 10, 2);
+                add_filter('wpmodules_import_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'import_modules_view_templates_items'), 10, 2);
+            }
 		}
 		
 		
     }
 
+    function register_modules_sections($sections)
+    {
+        $sections[_VIEWS_MODULE_MANAGER_KEY_]=array(
+           'title'=>__('Views','wpv-views'),
+           'icon'=>WPV_URL . '/res/img/icon12.png'
+        );
+        
+        $sections[_VIEW_TEMPLATES_MODULE_MANAGER_KEY_]=array(
+           'title'=>__('View Templates','wpv-views'),
+           'icon'=>WPV_URL . '/res/img/icon12.png'
+        );
+        
+        return $sections;
+    }
+    
+    function register_modules_views_items($items)
+    {
+        $views = $this->get_views();
+        
+        foreach ($views as $view)
+        {
+            $items[]=array(
+                'id'=>_VIEWS_MODULE_MANAGER_KEY_.$view->ID,
+                'title'=>$view->post_title
+            );
+        }
+        return $items;
+    }
+    
+    function export_modules_views_items($res, $items)
+    {
+        foreach ($items as $ii=>$item)
+        {
+            $items[$ii]=intval(str_replace(_VIEWS_MODULE_MANAGER_KEY_,'',$item));
+        }
+        $xmlstring=wpv_admin_export_selected_data($items,'view');
+        return $xmlstring;
+    }
+    
+    function import_modules_views_items($result, $xmlstring)
+    {
+        $result2=wpv_admin_import_data_from_xmlstring($xmlstring);
+        if (false===$result2 || is_wp_error($result2))
+            return (false===$result2)?__('Error during View import','wpv-views'):$result2->get_error_message($result2->get_error_code());
+            
+        return $result;
+    }
+    
+    function register_modules_view_templates_items($items)
+    {
+        $viewtemplates = $this->get_view_templates();
+        
+        foreach ($viewtemplates as $view)
+        {
+            $items[]=array(
+                'id'=>_VIEW_TEMPLATES_MODULE_MANAGER_KEY_.$view->ID,
+                'title'=>$view->post_title
+            );
+        }
+        return $items;
+    }
+    
+    function export_modules_view_templates_items($res, $items)
+    {
+        foreach ($items as $ii=>$item)
+        {
+            $items[$ii]=intval(str_replace(_VIEW_TEMPLATES_MODULE_MANAGER_KEY_,'',$item));
+        }
+        $xmlstring=wpv_admin_export_selected_data($items,'view-template');
+        return $xmlstring;
+    }
+    
+    function import_modules_view_templates_items($result, $xmlstring)
+    {
+        $result2=wpv_admin_import_data_from_xmlstring($xmlstring);
+        if (false===$result2 || is_wp_error($result2))
+            return (false===$result2)?__('Error during View Template import','wpv-views'):$result2->get_error_message($result2->get_error_code());
+            
+        return $result;
+    }
+    
     function enable_custom_menu_order($menu_ord) {
         return true;
     }
@@ -85,42 +178,50 @@ class WP_Views_plugin extends WP_Views {
     }
 
     function admin_menu(){
+		
+		$cap = 'manage_options';
 
-		add_utility_page(__('Views', 'wpv-views'), __('Views', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view', '', WPV_URL .'/res/img/views-18.png');
+		add_utility_page(__('Views', 'wpv-views'), __('Views', 'wpv-views'), $cap, 'edit.php?post_type=view', '', WPV_URL .'/res/img/views-18.png');
 
         // remove the default menus and then add a Help menu
         remove_submenu_page('edit.php?post_type=view', 'edit.php?post_type=view');
         remove_submenu_page('edit.php?post_type=view', 'post-new.php?post_type=view');
         
                 // Add the default menus after the Help menu
-        add_submenu_page('edit.php?post_type=view', __('Views', 'wpv-views'), __('Views', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view');
-        add_submenu_page('edit.php?post_type=view', __('New View', 'wpv-views'), __('New View', 'wpv-views'), 'edit_posts', 'post-new.php?post_type=view');
+        add_submenu_page('edit.php?post_type=view', __('Views', 'wpv-views'), __('Views', 'wpv-views'), $cap, 'edit.php?post_type=view');
+        add_submenu_page('edit.php?post_type=view', __('New View', 'wpv-views'), __('New View', 'wpv-views'), $cap, 'post-new.php?post_type=view');
 
         // Add the view template menus.        
-        add_submenu_page('edit.php?post_type=view', __('View Templates', 'wpv-views'), __('View Templates', 'wpv-views'), 'edit_posts', 'edit.php?post_type=view-template');
-        add_submenu_page('edit.php?post_type=view', __('New View Template', 'wpv-views'), __('New View Template', 'wpv-views'), 'edit_posts', 'post-new.php?post_type=view-template');
+        add_submenu_page('edit.php?post_type=view', __('View Templates', 'wpv-views'), __('View Templates', 'wpv-views'), $cap, 'edit.php?post_type=view-template');
+        add_submenu_page('edit.php?post_type=view', __('New View Template', 'wpv-views'), __('New View Template', 'wpv-views'), $cap, 'post-new.php?post_type=view-template');
 
         // add settings menu.        
-        add_submenu_page('edit.php?post_type=view', __('Settings', 'wpv-views'), __('Settings', 'wpv-views'), 'manage_options', 'views-settings',
+        add_submenu_page('edit.php?post_type=view', __('Settings', 'wpv-views'), __('Settings', 'wpv-views'), $cap, 'views-settings',
                     array($this, 'views_settings_admin'));
         
         // Add import export menu.
         if (function_exists('wpv_admin_menu_import_export')) {
-            add_submenu_page('edit.php?post_type=view', __('Import/Export', 'wpv-views'), __('Import/Export', 'wpv-views'), 'manage_options', 'views-import-export',
+            add_submenu_page('edit.php?post_type=view', __('Import/Export', 'wpv-views'), __('Import/Export', 'wpv-views'), $cap, 'views-import-export',
                     'wpv_admin_menu_import_export');
 
         }
         
-        add_submenu_page('edit.php?post_type=view', __('Help', 'wpv-views'), __('Help', 'wpv-views'), 'edit_posts' , WPV_FOLDER . '/menu/help.php', null, WPV_URL . '/res/img/icon16.png');
+        add_submenu_page('edit.php?post_type=view', __('Help', 'wpv-views'), __('Help', 'wpv-views'), $cap , WPV_FOLDER . '/menu/help.php', null, WPV_URL . '/res/img/icon16.png');
     }
 
     function settings_box_load(){
-        add_meta_box('wpv_settings', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Query - Choose what content to load', 'wpv-views'), array($this, 'settings_box'), 'view', 'normal', 'high');    
-        add_meta_box('wpv_layout', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('View Layout - Edit the layout', 'wpv-views'), 'view_layout_box', 'view', 'normal', 'high');
+        add_meta_box('wpv_settings', '<img src="' . WPV_URL . '/res/img/icon16.png" />&nbsp;&nbsp;' . __('View Query - Choose what content to load', 'wpv-views'), array($this, 'settings_box'), 'view', 'normal', 'high');    
+        add_meta_box('wpv_layout', '<img src="' . WPV_URL . '/res/img/icon16.png" />&nbsp;&nbsp;' . __('View Layout - Edit the layout', 'wpv-views'), 'view_layout_box', 'view', 'normal', 'high');
 
-        add_meta_box('wpv_views_help', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('Views Help', 'wpv-views'), array($this, 'view_help_box'), 'view', 'side', 'high');
-
-        //add_meta_box('wpv_css', '<img src="' . WPV_URL . '/res/img/icon16.png">&nbsp;&nbsp;' . __('CSS for view', 'wpv-views'), array($this, 'css_box'), 'view', 'normal', 'high');    
+        add_meta_box('wpv_views_help', '<img src="' . WPV_URL . '/res/img/icon16.png" />&nbsp;&nbsp;' . __('Views Help', 'wpv-views'), array($this, 'view_help_box'), 'view', 'side', 'high');
+        
+        if (defined('MODMAN_PLUGIN_NAME'))
+        {
+            // module manager sidebar meta box
+            add_meta_box('wpv_modulemanager_box',__('Module Manager','wpv-views'),array($this, 'modulemanager_views_box'),'view','side','high');
+            add_meta_box('wpv_modulemanager_box',__('Module Manager','wpv-views'),array($this, 'modulemanager_view_templates_box'),'view-template','side','high');
+        }
+        //add_meta_box('wpv_css', '<img src="' . WPV_URL . '/res/img/icon16.png" />&nbsp;&nbsp;' . __('CSS for view', 'wpv-views'), array($this, 'css_box'), 'view', 'normal', 'high');    
         
         global $pagenow;
         if ($pagenow == 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'view') {
@@ -156,7 +257,7 @@ class WP_Views_plugin extends WP_Views {
                     <?php printf(__('Learn about %sediting Views HTML%s', 'wpv-views'),
                                  '<a href="http://wp-types.com/documentation/user-guides/digging-into-view-outputs/" target="_blank">',
                                  ' &raquo;</a>'); ?>
-                    <input class="button-secondary" type="button" value="<?php echo __('Hide this editor', 'wpv-views'); ?>" onclick="wpv_hide_post_body()">
+                    <input class="button-secondary" type="button" value="<?php echo __('Hide this editor', 'wpv-views'); ?>" onclick="wpv_hide_post_body()" />
                 </div>
 
                 <script type="text/javascript">
@@ -251,9 +352,9 @@ class WP_Views_plugin extends WP_Views {
 'wpv-views'); ?></a></p>
             <ul style="margin-bottom:10px">
                 <?php $checked = $view_settings['view-query-mode'] == 'normal' ? 'checked="checked"' : ''; ?>
-                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="normal" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').show();jQuery('#wpv-archive-view-mode').hide()">&nbsp;<?php _e('<strong>Normal View:</strong> This View queries content from the database (good for inserting Views into content or widgets)', 'wpv-views'); ?></label></li>
+                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="normal" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').show();jQuery('#wpv-archive-view-mode').hide()" />&nbsp;<?php _e('<strong>Normal View:</strong> This View queries content from the database (good for inserting Views into content or widgets)', 'wpv-views'); ?></label></li>
                 <?php $checked = $view_settings['view-query-mode'] == 'archive' ? 'checked="checked"' : ''; ?>
-                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="archive" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').hide();jQuery('#wpv-archive-view-mode').show()">&nbsp;<?php _e('<strong>Archive View:</strong> This View displays results for an existing WordPress query (good for archive pages, taxonomy listing, search, etc.)', 'wpv-views'); ?></label></li>
+                <li><label><input type="radio" name="_wpv_settings[view-query-mode]" value="archive" <?php echo $checked; ?> onclick="jQuery('#wpv-normal-view-mode').hide();jQuery('#wpv-archive-view-mode').show()" />&nbsp;<?php _e('<strong>Archive View:</strong> This View displays results for an existing WordPress query (good for archive pages, taxonomy listing, search, etc.)', 'wpv-views'); ?></label></li>
             </ul>
             
             <div id="wpv-normal-view-mode"<?php if($view_settings['view-query-mode'] != 'normal') {echo ' style="display:none;"';} ?>>
@@ -310,6 +411,18 @@ class WP_Views_plugin extends WP_Views {
         </div>
         <?php
     }
+    
+   function modulemanager_views_box($post)
+   {
+        $element=array('id'=>_VIEWS_MODULE_MANAGER_KEY_.$post->ID, 'title'=>$post->post_title, 'section'=>_VIEWS_MODULE_MANAGER_KEY_);
+        do_action('wpmodules_inline_element_gui',$element);
+   }
+    
+   function modulemanager_view_templates_box($post)
+   {
+        $element=array('id'=>_VIEW_TEMPLATES_MODULE_MANAGER_KEY_.$post->ID, 'title'=>$post->post_title, 'section'=>_VIEW_TEMPLATES_MODULE_MANAGER_KEY_);
+        do_action('wpmodules_inline_element_gui',$element);
+   }
     
     function view_help_box($post){
         
@@ -425,11 +538,7 @@ class WP_Views_plugin extends WP_Views {
 	
 	function edit_post_link($link, $post_id) {
 
-		$post_type_object = get_post_type_object( 'view' );
-		if ( !$post_type_object )
-			return $link;
-	
-		if ( !current_user_can( $post_type_object->cap->edit_post, $this->current_view ) )
+		if ( !current_user_can( 'manage_options' ) )
 			return $link;
 		
         if ($this->current_view) {		
@@ -625,7 +734,7 @@ class WP_Views_plugin extends WP_Views {
 
 		<h3><?php _e('Need Help?','wpv-views') ?></h3>
 		<p><?php _e('You can customize the output for the blog, archives, taxonomy, single pages and anything else that WordPress produces.','wpv-views') ?></p>
-		<p><?php printf(__('Before you get started, we recommend that you read the %sintroduction to customizing WordPress output with Views%s.','wpv-views'), '<a href="" target="_blank">','</a>') ?></p>
+		<p><?php printf(__('Before you get started, we recommend that you read the %sintroduction to customizing WordPress output with Views%s.','wpv-views'), '<a href="http://wp-types.com/documentation/user-guides/getting-started-with-views/" target="_blank">','</a>') ?></p>
 			<?php $WPV_view_archive_loop->admin_settings($options); ?>
 			<?php $WPV_templates->admin_settings($options); ?>
 			

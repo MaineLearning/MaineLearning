@@ -3,7 +3,7 @@
 //General Info
 global $jfb_name, $jfb_version, $jfb_homepage;
 $jfb_name       = "WP-FB AutoConnect";
-$jfb_version    = "2.5.9";
+$jfb_version    = "2.5.11";
 $jfb_homepage   = "http://www.justin-klein.com/projects/wp-fb-autoconnect";
 $jfb_data_url   = plugins_url(dirname(plugin_basename(__FILE__)));
 

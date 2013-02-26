@@ -1,0 +1,110 @@
+API: stdClass Object
+(
+    [name] => New Page In Section Links
+    [slug] => new-page-w-parent-links
+    [version] => 0.1
+    [author] => Theo Ephraim
+    [author_profile] => http://wordpress.org/extend/plugins/profile/theozero
+    [contributors] => Array
+        (
+            [Theo Ephraim] => 
+        )
+
+    [requires] => 2.7.0
+    [tested] => 2.7.1
+    [compatibility] => Array
+        (
+            [3.2.1] => Array
+                (
+                    [0.1] => Array
+                        (
+                            [0] => 0
+                            [1] => 1
+                            [2] => 0
+                        )
+
+                )
+
+        )
+
+    [rating] => 100
+    [num_ratings] => 1
+    [downloaded] => 332
+    [last_updated] => 2010-12-15
+    [added] => 2010-12-15
+    [homepage] => http://www.theoephraim.com/
+    [sections] => Array
+        (
+            [description] => 
+With this plugin you can create a link to post-new.php (the place to create a new page) that includes the desired parent_id of the new page. This allows you to create links in the front end of the website like "Add a new page to this section" or "Create a new sub-page". This is extremely useful when developing custom themes to add useful backend links on the front end of the site for users who have editing access. For using wordpress as a CMS, you really want to let the user avoid going through the clunky manage pages interface...
+
+
+
+Features
+
+
+
+
+This should be a feature of wordpress
+
+I can't believe this isn't built into wordpress
+
+This has to rely on javascript because there's no suitable hook to do it another way
+
+Did I mention this should be built into wordpress?
+
+
+
+Feedback
+
+
+
+Doubt you'll have any, but if you do, you can go to my website (http://theoephraim.com)
+I was thinking about making some functions to actually spit out the links, but since were talking about developing custom themes, you may as well just hardcode it.
+
+
+            [installation] => 
+Very straightforward. Download, copy into plugins folder, activate.
+In your theme, create a link like this: Add a page to this section
+
+
+            [changelog] => 
+1.0
+
+
+
+
+Initial release.
+
+
+            [other_notes] => 
+License
+
+
+Copyright (C) 2010 by Theo Ephraim
+
+
+
+You may use, redistribute and/or modify this programm under the terms of the GNU General Public License by the Free Software Foundation.
+
+
+
+The programm is distributed as free software without any warranty.
+
+
+        )
+
+    [download_link] => http://downloads.wordpress.org/plugin/new-page-w-parent-links.zip
+    [tags] => Array
+        (
+            [cms] => cms
+            [id] => id
+            [new] => new
+            [page] => page
+            [pages] => pages
+            [parent] => parent
+            [post-newphp] => post-new.php
+            [section] => section
+        )
+
+)

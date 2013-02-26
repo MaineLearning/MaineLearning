@@ -124,7 +124,7 @@ final class BP_Links_Embed_Service_WebPage
 
 	final public function from_url_pattern()
 	{
-		return '/^http:\/\/([a-z0-9-]+\.)+[a-z0-9-]{2,4}\/?.*/i';
+		return '/^https?:\/\/([a-z0-9-]+\.)+[a-z0-9-]{2,4}\/?.*/i';
 	}
 
 	final public function image_selection()
@@ -1004,7 +1004,7 @@ final class BP_Links_Embed_Service_YouTube
 
 	public function from_url_pattern()
 	{
-		return '/^http:\/\/(www\.)?youtube.com\/watch/';
+		return '/^https?:\/\/(www\.)?youtube.com\/watch/';
 	}
 
 	//
@@ -1022,7 +1022,7 @@ final class BP_Links_Embed_Service_YouTube
 
 	private function check_url( $url )
 	{
-		return preg_match( '/^http:\/\/(www\.)?youtube\.com\/watch.+$/', $url );
+		return preg_match( '/^https?:\/\/(www\.)?youtube\.com\/watch.+$/', $url );
 	}
 
 	private function parse_url( $url )
@@ -1228,7 +1228,7 @@ final class BP_Links_Embed_Service_Flickr
 
 	final public function from_url_pattern()
 	{
-		return '/^http:\/\/(www\.)?flickr\.com\/photos\/[^\/]+\/\d+\//';
+		return '/^https?:\/\/(www\.)?flickr\.com\/photos\/[^\/]+\/\d+\//';
 	}
 
 	//
@@ -1453,7 +1453,7 @@ final class BP_Links_Embed_Service_MetaCafe
 
 	public function from_url_pattern()
 	{
-		return '/^http:\/\/(www\.)?metacafe.com\/watch\//';
+		return '/^https?:\/\/(www\.)?metacafe.com\/watch\//';
 	}
 
 	//

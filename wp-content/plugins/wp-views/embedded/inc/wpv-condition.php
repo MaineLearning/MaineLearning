@@ -46,6 +46,8 @@
  * 'debug' => Enable debug to display error messages in the shortcode 
  * 'fieldX' => Define fields to be taken into account during evaluation 
  *
+ * Link:
+ * <a href="http://wp-types.com/documentation/user-guides/conditional-html-output-in-views/">Conditional HTML output in Views</a>
  */
 
 function wpv_shortcode_wpv_if($args, $content) {
@@ -99,17 +101,33 @@ add_filter('the_content', 'wpv_resolve_wpv_if_shortcodes', 9);
  */
 
 function wpv_parse_wpv_if_shortcodes($content) {
+	global $shortcode_tags;
+
+	// Back up current registered shortcodes and clear them all out
+	$orig_shortcode_tags = $shortcode_tags;
+	remove_all_shortcodes();
+
+	// only do wpv-if				
+	add_shortcode('wpv-if', 'wpv_shortcode_wpv_if');
+
 	$expression = '/\\[wpv-if((?!\\[wpv-if).)*\\[\\/wpv-if\\]/isU';
 	$counts = preg_match_all($expression, $content, $matches);
 	
 	while ($counts) {
 		foreach($matches[0] as $match) {
+
+			// this will only processes the [wpv-if] shortcode
 			$shortcode = do_shortcode($match);
 			$content = str_replace($match, $shortcode, $content);
+			
 		}
 		
 		$counts = preg_match_all($expression, $content, $matches);
 	}
+
+	// Put the original shortcodes back
+	$shortcode_tags = $orig_shortcode_tags;
+	
 	return $content;
 }
 

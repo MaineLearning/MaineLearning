@@ -3,8 +3,8 @@ Contributors: ModernTribe, peterchester
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TWM2GF6BQZGSN
 Tags: copy, duplicate, replicate, blog, site, duplicator, replicator, moderntribe, tribe, wpmu, multisite, network, superadmin
 Requires at least: 3.0
-Tested up to: 3.3.1
-Stable tag: 1.0.2
+Tested up to: 3.6
+Stable tag: 1.0.3
 
 Enables superusers to copy existing sub blogs to new sub blogs.
 
@@ -56,6 +56,13 @@ It's pretty straight forward. Select the blog you want to copy. Set a new domain
 This DOES NOT copy blogs across networks, back up blogs off the network, or copy the master blog. This also does NOT copy users from one blog to another.
 
 == Changelog ==
+
+= 1.0.3 =
+
+* Fixed a wildcard table selection bug that was causing some real problems.
+* Fixed a minor bug that caused required empty options to not get copied from the source blog.
+* Remove superfluous db prepare() functions.
+Thanks @jbrinley!
 
 = 1.0.2 =
 

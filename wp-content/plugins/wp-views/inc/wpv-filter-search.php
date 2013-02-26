@@ -86,7 +86,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td .= '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td .= '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-search-show\">\n";
         $td .= wpv_get_filter_search_summary($view_settings);
@@ -210,7 +210,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td .= '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td .= '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-taxonomy-search-show\">\n";
         $td .= wpv_get_filter_taxonomy_search_summary($view_settings);
@@ -289,7 +289,7 @@ function wpv_add_search($args) {
             <?php $radio_name = $edit ? '_wpv_settings[search_mode][]' : 'post_search_mode[]' ?>
             <li>
                 <?php $checked = $view_settings['search_mode'] == 'specific' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="specific" <?php echo $checked; ?>>&nbsp;<?php _e('Search for a specific text:', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="specific" <?php echo $checked; ?> />&nbsp;<?php _e('Search for a specific text:', 'wpv-views'); ?></label>
                 <?php $name = $edit ? '_wpv_settings[post_search_value]' : 'post_search_value' ?>
                 <?php if ($edit): ?>
                     <input type="hidden" name="_wpv_settings[post_search]" value="1"/>
@@ -298,11 +298,11 @@ function wpv_add_search($args) {
             </li>
             <li>
                 <?php $checked = $view_settings['search_mode'] == 'visitor' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="visitor" <?php echo $checked; ?>>&nbsp;<?php _e('Add a search box for visitors', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="visitor" <?php echo $checked; ?> />&nbsp;<?php _e('Add a search box for visitors', 'wpv-views'); ?></label>
             </li>
             <li>
                 <?php $checked = $view_settings['search_mode'] == 'manual' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="manual" <?php echo $checked; ?>>&nbsp;<?php _e('I’ll add the search box to the HTML manually', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="manual" <?php echo $checked; ?> />&nbsp;<?php _e('I’ll add the search box to the HTML manually', 'wpv-views'); ?></label>
             </li>
         </ul>
         
@@ -334,7 +334,7 @@ function wpv_add_search_taxonomy($args) {
             <?php $radio_name = $edit ? '_wpv_settings[taxonomy_search_mode][]' : 'taxonomy_search_mode[]' ?>
             <li>
                 <?php $checked = $view_settings['taxonomy_search_mode'] == 'specific' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="specific" <?php echo $checked; ?>>&nbsp;<?php _e('Search for a specific text:', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="specific" <?php echo $checked; ?> />&nbsp;<?php _e('Search for a specific text:', 'wpv-views'); ?></label>
                 <?php $name = $edit ? '_wpv_settings[taxonomy_search_value]' : 'taxonomy_search_value' ?>
                 <?php if ($edit): ?>
                     <input type="hidden" name="_wpv_settings[taxonomy_search]" value="1"/>
@@ -343,11 +343,11 @@ function wpv_add_search_taxonomy($args) {
             </li>
             <li>
                 <?php $checked = $view_settings['taxonomy_search_mode'] == 'visitor' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="visitor" <?php echo $checked; ?>>&nbsp;<?php _e('Add a search box for visitors', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="visitor" <?php echo $checked; ?> />&nbsp;<?php _e('Add a search box for visitors', 'wpv-views'); ?></label>
             </li>
             <li>
                 <?php $checked = $view_settings['taxonomy_search_mode'] == 'manual' ? 'checked="checked"' : ''; ?>
-                <label><input type="radio" name="<?php echo $radio_name; ?>" value="manual" <?php echo $checked; ?>>&nbsp;<?php _e('I’ll add the search box to the HTML manually', 'wpv-views'); ?></label>
+                <label><input type="radio" name="<?php echo $radio_name; ?>" value="manual" <?php echo $checked; ?> />&nbsp;<?php _e('I’ll add the search box to the HTML manually', 'wpv-views'); ?></label>
             </li>
         </ul>
         

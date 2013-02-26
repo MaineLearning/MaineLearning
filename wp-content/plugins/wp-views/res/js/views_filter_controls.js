@@ -79,29 +79,40 @@ function wpv_filter_controls_code() {
     
     var controls = '';
     
-    jQuery('#view_filter_controls_table tbody tr').each( function(index) {
-        if (jQuery(this).find('input[name="_wpv_settings\\[filter_controls_enable\\]\\[\\]"]').attr('checked') == 'checked') {
+    var query_type = jQuery('input[name="_wpv_settings\\[query_type\\]\\[\\]"]:checked').val();
+    if (query_type == 'posts') {
+		jQuery('#view_filter_controls_table tbody tr').each( function(index) {
+			if (jQuery(this).find('input[name="_wpv_settings\\[filter_controls_enable\\]\\[\\]"]').attr('checked') == 'checked') {
+	
+				var mode = jQuery(this).find('input[name="_wpv_settings\\[filter_controls_mode\\]\\[\\]"]').val();
+				var label = jQuery(this).find('input[name="_wpv_settings\\[filter_controls_label\\]\\[\\]"]').val();
+				
+				controls += '<p>';
+				if (mode == 'submit') {
+	
+					controls += '[wpv-filter-submit name="' + label + '"]';
+		
+				} else {
+					
+		
+					controls += label;
+		
+					controls += wpv_insert_filter_control(this);
+					
+				}
+				controls += '</p>\n';
+			}
+		});
+    } else if (query_type == 'taxonomy') {
 
-            var mode = jQuery(this).find('input[name="_wpv_settings\\[filter_controls_mode\\]\\[\\]"]').val();
-            var label = jQuery(this).find('input[name="_wpv_settings\\[filter_controls_label\\]\\[\\]"]').val();
-            
-            controls += '<p>';
-            if (mode == 'submit') {
-
-                controls += '[wpv-filter-submit name="' + label + '"]';
-    
-            } else {
-                
-    
-                controls += label;
-    
-                controls += wpv_insert_filter_control(this);
-                
-            }
-            controls += '</p>\n';
-        }
-    });
-                                                                
+		// Check for taxonomy search
+		search = wpv_search_box_code();
+		if (search != '') {
+			controls += search;                                                                
+			controls += '[wpv-filter-submit name="Search"]';
+		}
+	}
+	
 	controls = '[wpv-filter-controls]' + controls + '[/wpv-filter-controls]\n';
     
     return controls;

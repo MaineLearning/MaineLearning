@@ -1,0 +1,47 @@
+pre {
+/*    width: 500px;                           specify width  */
+    white-space: pre-wrap;                 /* CSS3 browsers  */
+    white-space: -moz-pre-wrap !important; /* 1999+ Mozilla  */
+    white-space: -pre-wrap;                /* Opera 4 thru 6 */
+    white-space: -o-pre-wrap;              /* Opera 7 and up */
+    word-wrap: break-word;                 /* IE 5.5+ and up */
+    /* overflow-x: auto; */                /* Firefox 2 only */
+    /* width: 99%; */		       /* only if needed */
+    text-indent: 150px;
+}
+
+pre {
+    overflow: auto;
+/*    width: 500px;*/
+}
+/*pre:hover {
+    position: relative;
+    width: 700px;
+    z-index: 99;
+}*/
+
+/* no vertical scrollbars for standards-compliant browsers */
+pre {
+    overflow: auto; 
+/*    width: 500px;*/
+}
+/* no vertical scrollbars for IE 7 */
+*:first-child+html pre {
+    padding-bottom: 20px;
+    overflow-y: hidden;
+    overflow: visible;
+    overflow-x: auto; 
+}
+/* no vertical scrollbars for IE 6 */
+* html pre { 
+    padding-bottom: 20px;
+    overflow: visible;
+    overflow-x: auto;
+}
+
+pre code[class]:after {
+    content: 'highlight: ' attr(class);
+    display: block; text-align: right;
+    font-size: smaller;
+    padding-top: 5px;
+}

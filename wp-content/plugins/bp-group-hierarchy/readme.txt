@@ -3,8 +3,8 @@ Contributors: ddean
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=6BKDCMJRYPKNN&lc=US&item_name=BP%20Group%20Hierarchy&currency_code=USD
 Tags: buddypress, groups, subgroups, hierarchy, parent group
 Requires at least: WP 3.2, BuddyPress 1.5
-Tested up to: WP 3.5, BuddyPress 1.7-bleeding
-Stable tag: 1.3.7
+Tested up to: WP 3.5.1, BuddyPress 1.7-bleeding
+Stable tag: 1.3.8
 
 Allows BuddyPress groups to have subgroups.
 
@@ -19,6 +19,8 @@ Every group and subgroup is a normal BuddyPress group and can have members and a
 = Translation =
 
 * Spanish translation generously provided by <a href="http://dorsvenabili.com">_DorsVenabili</a>
+* Russian translation generously provided by Roman
+* Slovak translation generously provided by Branco, (<a href="http://webhostinggeeks.com/blog/">WebHostingGeeks.com</a>)
 
 == Installation ==
 
@@ -52,6 +54,13 @@ No. There is currently no way to have activity propagate up without creating dup
 3. Hierarchy options when creating new groups
 
 == Changelog ==
+
+= 1.3.8 =
+* Added: Russian translation contributed by Roman
+* Added: Slovak translation contributed by Branco, (<a href="http://webhostinggeeks.com/blog/">WebHostingGeeks.com</a>)
+* Changed: Return a 404 instead of redirecting non-existent group URLs to main group list
+* Fixed: Hide the main `Create a Group` button when the user cannot create any groups - thanks, investoreports
+* Fixed: Improved detection of bogus groups in permalink rewrite function
 
 = 1.3.7 =
 * Fixed: Hiding the flat group list affected the My Groups view - thanks, Jay Collier
@@ -259,6 +268,9 @@ No. There is currently no way to have activity propagate up without creating dup
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.3.8 =
+Added translations and bug fix for adding groups
 
 = 1.3.7 =
 Improve compatibility with WP 3.5 and bug fix for My Groups

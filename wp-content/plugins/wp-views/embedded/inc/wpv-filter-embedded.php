@@ -37,7 +37,7 @@ function wpv_filter_shortcode_start($atts){
         }
         
         $url = get_permalink();
-        $out = '<form style="margin:0; padding:0;' . $hide . '" name="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
+        $out = '<form style="margin:0; padding:0;' . $hide . '" name="wpv-filter-' . $WP_Views->get_view_count() . '" action="' . $url . '" method="get" class="wpv-filter-form"' . ">\n";
         
         // add hidden inputs for any url parameters.
         // We need these for when the form is submitted.
@@ -47,7 +47,7 @@ function wpv_filter_shortcode_start($atts){
             foreach($query_parts as $param) {
                 $item = explode('=', $param);
                 if (strpos($item[0], 'wpv_') !== 0) {
-                    $out .= '<input id="wpv_param_' . $item[0] . '" type="hidden" name="' . $item[0] . '" value="' . $item[1] . '">' . "\n";
+                    $out .= '<input id="wpv_param_' . $item[0] . '" type="hidden" name="' . $item[0] . '" value="' . $item[1] . '" />' . "\n";
                 }
             }
         }
@@ -81,8 +81,8 @@ function wpv_filter_shortcode_start($atts){
                 $sort_dir = $_GET['wpv_column_sort_dir'];
             }
             
-            $out .= '<input id="wpv_column_sort_id" type="hidden" name="wpv_column_sort_id" value="' . $sort_id . '">' . "\n";
-            $out .= '<input id="wpv_column_sort_dir" type="hidden" name="wpv_column_sort_dir" value="' . $sort_dir . '">' . "\n";
+            $out .= '<input id="wpv_column_sort_id" type="hidden" name="wpv_column_sort_id" value="' . $sort_id . '" />' . "\n";
+            $out .= '<input id="wpv_column_sort_dir" type="hidden" name="wpv_column_sort_dir" value="' . $sort_dir . '" />' . "\n";
             
             $out .= "
             <script type=\"text/javascript\">
@@ -97,14 +97,14 @@ function wpv_filter_shortcode_start($atts){
             ";
         }
         
-        $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($WP_Views->get_max_pages()) . '">' . "\n";
+        $out .= '<input id="wpv_paged_max-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_paged_max" value="' . intval($WP_Views->get_max_pages()) . '" />' . "\n";
         
-        $out .= '<input id="wpv_widget_view-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_widget_view_id" value="' . intval($WP_Views->get_widget_view_id()) . '">' . "\n";
-        $out .= '<input id="wpv_view_count-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_count" value="' . $WP_Views->get_view_count() . '">' . "\n";
+        $out .= '<input id="wpv_widget_view-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_widget_view_id" value="' . intval($WP_Views->get_widget_view_id()) . '" />' . "\n";
+        $out .= '<input id="wpv_view_count-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_count" value="' . $WP_Views->get_view_count() . '" />' . "\n";
 
         $view_data = $WP_Views->get_view_shortcodes_attributes();
         //$view_data['view_id'] = $WP_Views->get_current_view();
-        $out .= '<input id="wpv_view_hash-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_hash" value="' . base64_encode(serialize($view_data)) . '">' . "\n";
+        $out .= '<input id="wpv_view_hash-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_view_hash" value="' . base64_encode(serialize($view_data)) . '" />' . "\n";
     
         $requires_current_page = false;
         $requires_current_page = apply_filters('wpv_filter_requires_current_page', $requires_current_page, $view_settings);
@@ -113,7 +113,7 @@ function wpv_filter_shortcode_start($atts){
             // Output the current page ID. This is used for ajax call back in pagination.
             $current_post = $WP_Views->get_top_current_page();
             if ($current_post && isset($current_post->ID)) {
-                $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '">' . "\n";
+                $out .= '<input id="wpv_post_id-' . $WP_Views->get_view_count() . '" type="hidden" name="wpv_post_id" value="' . $current_post->ID . '" />' . "\n";
             }
         }
         add_action('wp_footer', 'wpv_pagination_js');
@@ -217,7 +217,7 @@ function wpv_filter_shortcode_submit($atts){
         
         $name = wpv_translate('wpv-filter-submit-' . $atts['name'], $atts['name'], true);
         $out = '';
-        $out .= '<input type="submit" value="' . $name . '" name="wpv_filter_submit"' . $hide . '>';
+        $out .= '<input type="submit" value="' . $name . '" name="wpv_filter_submit"' . $hide . ' />';
         return $out;
     } else {
         return '';
@@ -366,7 +366,7 @@ function wpv_filter_show_user_interface($name, $values, $selected, $style) {
                 } else {
                     $checked = $v == $selected ? ' checked="checked"' : '';
                 }
-                $out .= '<label><input type="checkbox" name="' . $name. '[]" value="' . $v . '" ' . $checked . '>&nbsp;' . $v . "</label>\n";
+                $out .= '<label><input type="checkbox" name="' . $name. '[]" value="' . $v . '" ' . $checked . ' />&nbsp;' . $v . "</label>\n";
                 break;
 
             case "radios":
@@ -375,7 +375,7 @@ function wpv_filter_show_user_interface($name, $values, $selected, $style) {
                 } else {
                     $checked = $v == $selected ? ' checked="checked"' : '';
                 }
-                $out .= '<label><input type="radio" name="' . $name. '[]" value="' . $v . '" ' . $checked . '>&nbsp;' . $v . "</label>\n";
+                $out .= '<label><input type="radio" name="' . $name. '[]" value="' . $v . '" ' . $checked . ' />&nbsp;' . $v . "</label>\n";
                 break;
 
             case "drop_down":
@@ -579,6 +579,7 @@ function wpv_shortcode_wpv_control($atts) {
                     $original_get = $_GET[$url_param];
                     
                     $defaults = $_GET[$url_param];
+                    if (is_string($defaults)) $defaults = explode(',',$defaults);
                     unset($_GET[$url_param]);
                 }
                 for($i = 0; $i < count($values_arr); $i++) {
@@ -737,6 +738,7 @@ function wpv_shortcode_wpv_control($atts) {
                 $original_get = $_GET[$url_param];
 
                 $defaults = $_GET[$url_param];
+                if (is_string($defaults)) $defaults = explode(',',$defaults);
                 unset($_GET[$url_param]);
             }
             foreach($field_options['data']['options'] as $value) {
@@ -867,7 +869,7 @@ function wpv_shortcode_wpv_control($atts) {
 
 function _wpv_is_field_of_type($field_name, $type) {
     $opt = get_option('wpcf-fields');
-    if($opt && mb_ereg('^wpcf-',$field_name)) {
+    if($opt && strpos($field_name, 'wpcf-') === 0) {
         $field_name = substr($field_name,5);
         if (isset($opt[$field_name]['type'])) {
             $field_type = strtolower($opt[$field_name]['type']);
@@ -894,6 +896,18 @@ function wpv_add_front_end_js() {
 }
 
 function wpv_render_datepicker($url_param, $date_format) {
+    
+    static $support_loaded = false;
+    if (!$support_loaded) {
+        ?>
+            <script type="text/javascript">
+                jQuery(document).ready(function () {
+                    jQuery('head').append('<link rel="stylesheet" href="<?php echo WPV_URL_EMBEDDED . '/res/css/datepicker.css';?>" type="text/css" />');
+                });
+            </script>
+        <?php
+        $support_loaded = true;
+    }
     
     if ($date_format == '') {
         $date_format = get_option('date_format');
@@ -946,8 +960,8 @@ class Walker_Category_select extends Walker {
             $selected = $this->selected == $category->slug ? ' selected="selected"' : '';
     		$output .= '<option value="' . $category->slug. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
         } else {
-            $selected = $this->selected == $category->term_id ? ' selected="selected"' : '';
-    		$output .= '<option value="' . $category->term_id. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
+            $selected = $this->selected == $category->name ? ' selected="selected"' : '';
+    		$output .= '<option value="' . $category->name. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
         }
 	}
 
@@ -957,6 +971,15 @@ class Walker_Category_select extends Walker {
 
 
 function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
+
+    // We need to know what attribute url format are we using
+    // to make the control filter use values of names or slugs for values.
+    // If using names, $url_format=false and if using slugs, $url_format=true
+
+    global $WP_Views;
+    $view_settings = $WP_Views->get_view_settings();
+    $url_format = false;
+    if (isset($view_settings['taxonomy-'. $taxonomy .'-attribute-url-format']) && 'slug' == $view_settings['taxonomy-'.$taxonomy . '-attribute-url-format'][0]) $url_format = true;
     
     if(!class_exists('Walker_Category_Checklist')){
     
@@ -966,7 +989,11 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
         class Walker_Category_Checklist extends Walker {
             var $tree_type = 'category';
             var $db_fields = array ('parent' => 'parent', 'id' => 'term_id'); //TODO: decouple this
-         
+                              
+            function __construct($slug_mode = false) {
+		$this->slug_mode = $slug_mode;
+	    }
+	    
             function start_lvl(&$output, $depth, $args) {
                 $indent = str_repeat("\t", $depth);
                 $output .= "$indent<ul class='children'>\n";
@@ -992,7 +1019,11 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
                 $class = in_array( $category->term_id, $popular_cats ) ? ' class="popular-category"' : '';
                 // NOTE: were outputing the "slug" and not the "term-id".
                 // WP outputs the "term-id"
-                $output .= "\n<li id='{$taxonomy}-{$category->term_id}'$class>" . '<label class="selectit"><input value="' . $category->slug . '" type="checkbox" name="'.$name.'[]" id="in-'.$taxonomy.'-' . $category->term_id . '"' . checked( in_array( $category->slug, $selected_cats ), true, false ) . disabled( empty( $args['disabled'] ), false, false ) . ' /> ' . esc_html( apply_filters('the_category', $category->name )) . '</label>';
+                if ($this->slug_mode) {
+		    $output .= "\n<li id='{$taxonomy}-{$category->term_id}'$class>" . '<label class="selectit"><input value="' . $category->slug . '" type="checkbox" name="'.$name.'[]" id="in-'.$taxonomy.'-' . $category->term_id . '"' . checked( in_array( $category->slug, $selected_cats ), true, false ) . disabled( empty( $args['disabled'] ), false, false ) . ' /> ' . esc_html( apply_filters('the_category', $category->name )) . '</label>';
+		} else {
+		    $output .= "\n<li id='{$taxonomy}-{$category->term_id}'$class>" . '<label class="selectit"><input value="' . $category->name . '" type="checkbox" name="'.$name.'[]" id="in-'.$taxonomy.'-' . $category->term_id . '"' . checked( in_array( $category->name, $selected_cats ), true, false ) . disabled( empty( $args['disabled'] ), false, false ) . ' /> ' . esc_html( apply_filters('the_category', $category->name )) . '</label>';
+		}
             }
          
             function end_el(&$output, $category, $depth, $args) {
@@ -1016,13 +1047,14 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
                 'selected_cats' => false,
                 'popular_cats' => false,
                 'walker' => null,
+                'url_format' => false,
                 'taxonomy' => 'category',
                 'checked_ontop' => false
             );
             extract( wp_parse_args($args, $defaults), EXTR_SKIP );
          
             if ( empty($walker) || !is_a($walker, 'Walker') )
-                $walker = new Walker_Category_Checklist;
+                $walker = new Walker_Category_Checklist($url_format);
          
             $descendants_and_self = (int) $descendants_and_self;
          
@@ -1099,12 +1131,12 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
                 if (count($terms)) {
                     $temp_slug = $terms[0];
                 }
-        		$my_walker = new Walker_Category_select($temp_slug, true);
+        		$my_walker = new Walker_Category_select($temp_slug, $url_format);
                 wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms, 'walker' => $my_walker));
                 echo '</select>';
             } else {
         		echo '<ul class="categorychecklist form-no-clear">';
-                wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms));
+                wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'selected_cats' => $terms, 'url_format' => $url_format));
         		echo '</ul>';
             }
             

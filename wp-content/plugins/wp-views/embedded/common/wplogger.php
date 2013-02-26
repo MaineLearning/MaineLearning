@@ -121,7 +121,7 @@ class WPV_WPLogger
         {           
             print '<script type="text/javascript">'."\n";
             print 'var $j=jQuery.noConflict();'."\n";
-            print 'if ($j.browser.safari && window.console) {'."\n";
+            print 'if (($j.browser.safari || $j.browser.webkit) && window.console) {'."\n";
             foreach ( $this->_buffer as $line )
             {
                 printf( 'window.console.%s("%s");', $line[0], $line[1] );

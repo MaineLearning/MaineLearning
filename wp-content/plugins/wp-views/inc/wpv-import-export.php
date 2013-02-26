@@ -162,7 +162,7 @@ function wpv_admin_export_data($download = true) {
     }
     
     // Get settings
-    $options = $WP_Views->get_options();
+    $options = get_option('wpv_options');
     if (!empty($options)) {
         foreach ($options as $option_name => $option_value) {
             if (strpos($option_name, 'view_') === 0
@@ -230,3 +230,162 @@ function wpv_admin_export_data($download = true) {
     }
 }
 
+/*
+*
+*   Custom Export function for Module Manager
+*   Exports selected items (by ID) and of specified type (eg views, view-templates)
+*   Returns xml string
+*/
+function wpv_admin_export_selected_data($items, $type='view') {
+    global $WP_Views;
+    
+    require_once WPV_PATH_EMBEDDED . '/common/array2xml.php';
+    $xml = new ICL_Array2XML();
+    $data = array();
+    
+    // SRDJAN - add siteurl, upload url, record taxonomies old IDs
+    // https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142382866/comments
+    // https://icanlocalize.basecamphq.com/projects/7393061-wp-views/todo_items/142389966/comments
+    $data['site_url'] = get_site_url();
+    if (is_multisite()) {
+        $data['fileupload_url'] = get_option('fileupload_url');
+    } else {
+        $wp_upload_dir = wp_upload_dir();
+        $data['fileupload_url'] = $wp_upload_dir['baseurl'];
+    }
+
+    $args=array(
+        'posts_per_page' => -1,
+        'post_status' => 'any'
+    );
+    
+    $export=false;
+    $view_types=array(
+        'view'=>array('key'=>'views'),
+        'view-template'=>array('key'=>'view-templates')
+    );
+    
+    if (is_string($items) && 'all'===$items)
+    {
+        $export=true;
+    }
+    elseif (is_array($items) && !empty($items))
+    {
+        $args['post__in']=$items;
+        $export=true;
+    }
+    
+    if (!in_array($type, array_keys($view_types)))
+        $export=false;
+    else
+    {
+        $args['post_type']=$type;
+        $vkey=$view_types[$type]['key'];
+    }
+    if (!$export) return '';
+    
+    // Get settings
+    $options = $WP_Views->get_options();
+    if (!empty($options)) {
+        foreach ($options as $option_name => $option_value) {
+            if (strpos($option_name, 'view_') === 0
+                    || strpos($option_name, 'views_template_') === 0) {
+                $post = get_post($option_value);
+                if (!empty($post)) {
+                    $options[$option_name] = $post->post_name;
+                }
+            }
+        }
+        $data['settings'] = $options;
+    }
+    
+    switch($type)
+    {
+         case 'view':
+            // Get the views
+            $views = get_posts($args);
+            if (!empty($views)) {
+                $data['views'] = array('__key' => 'view');
+                foreach ($views as $key => $post) {
+                    $post = (array) $post;
+                    if ($post['post_name']) {
+                        $post_data = array();
+                        $copy_data = array('ID', 'post_content', 'post_title', 'post_name',
+                            'post_excerpt', 'post_type', 'post_status');
+                        foreach ($copy_data as $copy) {
+                            if (isset($post[$copy])) {
+                                $post_data[$copy] = $post[$copy];
+                            }
+                        }
+                        $data['views']['view-' . $post['ID']] = $post_data;
+                        $meta = get_post_custom($post['ID']);
+                        if (!empty($meta)) {
+                            $data['view']['view-' . $post['ID']]['meta'] = array();
+                            foreach ($meta as $meta_key => $meta_value) {
+                                if ($meta_key == '_wpv_settings') {
+                                    $value = maybe_unserialize($meta_value[0]);
+
+                                    // Add any taxonomy terms so we can re-map when we import.                            
+                                    if (!empty($value['taxonomy_terms'])) {
+                                        $taxonomy = $value['taxonomy_type'][0];
+                                        
+                                        foreach ($value['taxonomy_terms'] as $term_id) {
+                                            $term = get_term($term_id, $taxonomy);
+                                            $data['terms_map']['term_' . $term->term_id]['old_id'] = $term->term_id;
+                                            $data['terms_map']['term_' . $term->term_id]['slug'] = $term->slug;
+                                            $data['terms_map']['term_' . $term->term_id]['taxonomy'] = $taxonomy;
+                                        }
+                                    }
+                                    
+                                    $value = $WP_Views->convert_ids_to_names_in_settings($value);
+                                    
+                                    $data['views']['view-' . $post['ID']]['meta'][$meta_key] = $value;
+
+                                    
+                                }
+                                if ($meta_key == '_wpv_layout_settings') {
+                                    $value = maybe_unserialize($meta_value[0]);
+                                    $value = $WP_Views->convert_ids_to_names_in_layout_settings($value);
+                                    $data['views']['view-' . $post['ID']]['meta'][$meta_key] = $value;
+                                }
+                            }
+                            if (empty($data['views']['view-' . $post['ID']]['meta'])) {
+                                unset($data['views']['view-' . $post['ID']]['meta']);
+                            }
+                        }
+                    }
+                }
+            }
+        break;
+        
+        case 'view-template':
+            // Get the view templates
+            $view_templates = get_posts($args);
+            if (!empty($view_templates)) {
+                $data['view-templates'] = array('__key' => 'view-template');
+                foreach ($view_templates as $key => $post) {
+                    $post = (array) $post;
+                    if ($post['post_name']) {
+                        $post_data = array();
+                        $copy_data = array('ID', 'post_content', 'post_title', 'post_name',
+                            'post_excerpt', 'post_type', 'post_status');
+                        foreach ($copy_data as $copy) {
+                            if (isset($post[$copy])) {
+                                $post_data[$copy] = $post[$copy];
+                            }
+                        }
+                        $output_mode = get_post_meta($post['ID'], '_wpv_view_template_mode', true);
+                        
+                        $post_data['template_mode'] = $output_mode;
+
+                        $data['view-templates']['view-template-' . $post['ID']] = $post_data;
+                    }
+                }
+            }
+        break;
+    }
+    
+    // Offer for download
+    $data = $xml->array2xml($data, 'views');
+    return $data;
+}

@@ -58,16 +58,15 @@ p {
 </div>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' || 'GET' || 'HEAD' || 'PUT' || 'DELETE' || 'TRACE' || 'TRACK' || 'DEBUG' || 'OPTIONS' || 'CONNECT' || 'PATCH') {
-	require_once('../../../wp-load.php');
-	
-	$bpsProLog = WP_CONTENT_DIR . '/bps-backup/logs/http_error_log.txt';
-	//$timestamp = '['.date('m/d/Y g:i A').']';
-	$timestamp = date_i18n(get_option('date_format'), strtotime("11/15-1976")) . ' - ' . date_i18n(get_option('time_format'), strtotime($date)); 	
-	$hostname = @gethostbyaddr($_SERVER['REMOTE_ADDR']);
+require_once('../../../wp-load.php');
+$bpsProLog = WP_CONTENT_DIR . '/bps-backup/logs/http_error_log.txt';
+$timestamp = date_i18n(get_option('date_format'), strtotime("11/15-1976")) . ' - ' . date_i18n(get_option('time_format'), strtotime($date)); 	
+$hostname = @gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$fh = @fopen($bpsProLog, 'a');
- 	@fwrite($fh, "\r\n>>>>>>>>>>> 403 Error Logged - $timestamp <<<<<<<<<<<\r\n");
+ 	@fwrite($fh, "\r\n>>>>>>>>>>> 403 POST Request Error Logged - $timestamp <<<<<<<<<<<\r\n");
 	@fwrite($fh, 'REMOTE_ADDR: '.$_SERVER['REMOTE_ADDR']."\r\n");
 	@fwrite($fh, 'Host Name: '."$hostname\r\n");
 	@fwrite($fh, 'HTTP_CLIENT_IP: '.$_SERVER['HTTP_CLIENT_IP']."\r\n");
@@ -81,10 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || 'GET' || 'HEAD' || 'PUT' || 'DELETE'
 	@fwrite($fh, 'HTTP_USER_AGENT: '.$_SERVER['HTTP_USER_AGENT']."\r\n");
  	@fclose($fh);
 	
-	} else  {
-	// log anything else that triggered a 403 Error
+}
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST' && !preg_match('/facebookexternalhit(.*)/s', $_SERVER['HTTP_USER_AGENT'], $matches) ) {
+
 	$fh = @fopen($bpsProLog, 'a');
- 	@fwrite($fh, "\r\n>>>>>>>>>>> 403 Error Logged - $timestamp <<<<<<<<<<<\r\n");
+ 	@fwrite($fh, "\r\n>>>>>>>>>>> 403 GET or Other Request Error Logged - $timestamp <<<<<<<<<<<\r\n");
 	@fwrite($fh, 'REMOTE_ADDR: '.$_SERVER['REMOTE_ADDR']."\r\n");
 	@fwrite($fh, 'Host Name: '."$hostname\r\n");
 	@fwrite($fh, 'HTTP_CLIENT_IP: '.$_SERVER['HTTP_CLIENT_IP']."\r\n");

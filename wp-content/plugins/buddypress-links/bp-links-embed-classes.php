@@ -113,7 +113,7 @@ interface BP_Links_Embed_From_Url
 	 *
 	 * This pattern must be compatible with PHP PCRE and the Javascript RegExp() object
 	 *
-	 * @example /^http:\/\/(www\.)?foo.org\/view/
+	 * @example /^https?:\/\/(www\.)?foo.org\/view/
 	 * @return string
 	 */
 	public function from_url_pattern();

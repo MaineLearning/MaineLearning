@@ -24,11 +24,11 @@ add_action( 'admin_print_styles', 'bp_links_admin_menu_css' );
  * Admin menus action
  */
 function bp_links_add_admin_menu() {
-	add_menu_page( __( 'BuddyPress Links', 'buddypress-links'), __( 'BP Links', 'buddypress-links' ), 'manage_links', 'buddypress-links-admin', 'bp_links_admin_index', BP_LINKS_ADMIN_THEME_URL . '/images/logo_16.png' );
-	add_submenu_page( 'buddypress-links-admin', __( 'General Info', 'buddypress-links'), __( 'General Info', 'buddypress-links' ), 'manage_links', 'buddypress-links-admin', 'bp_links_admin_index' );
-	add_submenu_page( 'buddypress-links-admin', __( 'Edit Settings', 'buddypress-links'), __( 'Edit Settings', 'buddypress-links' ), 'manage_links', 'buddypress-links-admin-settings', 'bp_links_admin_manage_settings' );
-	add_submenu_page( 'buddypress-links-admin', __( 'Edit Categories', 'buddypress-links'), __( 'Edit Categories', 'buddypress-links' ), 'manage_links', 'buddypress-links-admin-cats', 'bp_links_admin_manage_categories' );
-	add_submenu_page( 'buddypress-links-admin', __( 'Manage Links', 'buddypress-links'), __( 'Manage Links', 'buddypress-links' ), 'manage_links', 'buddypress-links-admin-links', 'bp_links_admin_manage_links' );
+	add_menu_page( __( 'BuddyPress Links', 'buddypress-links'), __( 'BP Links', 'buddypress-links' ), BP_LINKS_CAPABILITY, 'buddypress-links-admin', 'bp_links_admin_index', BP_LINKS_ADMIN_THEME_URL . '/images/logo_16.png' );
+	add_submenu_page( 'buddypress-links-admin', __( 'General Info', 'buddypress-links'), __( 'General Info', 'buddypress-links' ), BP_LINKS_CAPABILITY, 'buddypress-links-admin', 'bp_links_admin_index' );
+	add_submenu_page( 'buddypress-links-admin', __( 'Edit Settings', 'buddypress-links'), __( 'Edit Settings', 'buddypress-links' ), BP_LINKS_CAPABILITY, 'buddypress-links-admin-settings', 'bp_links_admin_manage_settings' );
+	add_submenu_page( 'buddypress-links-admin', __( 'Edit Categories', 'buddypress-links'), __( 'Edit Categories', 'buddypress-links' ), BP_LINKS_CAPABILITY, 'buddypress-links-admin-cats', 'bp_links_admin_manage_categories' );
+	add_submenu_page( 'buddypress-links-admin', __( 'Manage Links', 'buddypress-links'), __( 'Manage Links', 'buddypress-links' ), BP_LINKS_CAPABILITY, 'buddypress-links-admin-links', 'bp_links_admin_manage_links' );
 }
 add_action( 'admin_menu', 'bp_links_add_admin_menu', 12 );
 

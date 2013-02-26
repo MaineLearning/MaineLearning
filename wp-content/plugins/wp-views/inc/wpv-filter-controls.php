@@ -80,7 +80,7 @@ function wpv_filter_controls_admin($view_settings){
     
     ?>
     
-    <div id="wpv_filter_controls_admin_summary" <?php echo count($view_settings['filter_controls_param']) > 0 ? '' : 'style="display:none"'; ?>>
+    <div id="wpv_filter_controls_admin_summary" <?php echo ($view_settings['query_type'][0] == 'posts' && count($view_settings['filter_controls_param'])) > 0 ? '' : 'style="display:none"'; ?>>
         <strong><?php _e('Filter controls: ', 'wpv-views') ?></strong>
         <input class="button-secondary" type="button" value="<?php echo __('Edit', 'wpv-views'); ?>" name="<?php echo __('Edit', 'wpv-views'); ?>" onclick="wpv_filter_controls_edit()"/>
     </div>
@@ -362,7 +362,7 @@ function wpv_ajax_wpv_view_form_popup() {
                 echo sprintf(__('Insert the filter section from View - %s', 'wpv-views'), '<strong>' . $title . '</strong>');
 
                 ?>
-                <input type="hidden" value="<?php echo $view_id; ?>" id="wpv_view_id">
+                <input type="hidden" value="<?php echo $view_id; ?>" id="wpv_view_id" />
                 <br />
                 
                 <br />

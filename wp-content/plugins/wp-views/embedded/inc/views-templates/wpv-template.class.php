@@ -373,6 +373,8 @@ class WPV_template{
 	
 				} else if (is_post_type_archive($post->post_type)) {
 					$archive_loop = 'views_template_archive_for_' . $post->post_type;
+				} else if ('post' == $post->post_type) {
+					$archive_loop = 'views_template_archive_for_post';
 				}
 			}
 		}
@@ -390,15 +392,19 @@ class WPV_template{
 				} else {
 					$template_selected = $this->get_template_id($post->view_template_override);
 				}
-			} else if ($taxonomy_loop && isset($view_options[$taxonomy_loop]) && $view_options[$taxonomy_loop] > 0) {
-				if (!isset($post->view_template_override_loop_setting)) {
-					$template_selected = $view_options[$taxonomy_loop];
-					$post->view_template_override_loop_setting = true;
+			} else if ($taxonomy_loop) {
+				if (isset($view_options[$taxonomy_loop]) && $view_options[$taxonomy_loop] > 0) {
+					if (!isset($post->view_template_override_loop_setting)) {
+						$template_selected = $view_options[$taxonomy_loop];
+						$post->view_template_override_loop_setting = true;
+					}
 				}
-			} else if ($archive_loop && isset($view_options[$archive_loop]) && $view_options[$archive_loop] > 0) {
-				if (!isset($post->view_template_override_loop_setting)) {
-					$template_selected = $view_options[$archive_loop];
-					$post->view_template_override_loop_setting = true;
+			} else if ($archive_loop) {
+				if (isset($view_options[$archive_loop]) && $view_options[$archive_loop] > 0) {
+					if (!isset($post->view_template_override_loop_setting)) {
+						$template_selected = $view_options[$archive_loop];
+						$post->view_template_override_loop_setting = true;
+					}
 				}
 			} else {
 				$template_selected = get_post_meta($id, '_views_template', true);
