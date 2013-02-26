@@ -1,369 +1,367 @@
-# Translation of WP Accessibility in German
+# Translation of WP Accessibility in Polish
 # This file is distributed under the same license as the WP Accessibility package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-02-22 01:04:46+0000\n"
+"PO-Revision-Date: 2013-02-22 01:05:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/0.1\n"
 "Project-Id-Version: WP Accessibility\n"
 
 #: wp-accessibility.php:159
 msgid "Toggle High Contrast"
-msgstr "Umschalten auf hohe Kontraste"
+msgstr "Zmień wysoki kontrast"
 
 #: wp-accessibility.php:160
 msgid "Toggle Grayscale"
-msgstr "Umschalten zu Graustufen"
+msgstr "Zmień na skalę szarości"
 
 #: wp-accessibility.php:161
 msgid "Toggle Font size"
-msgstr "Schrift vergrößern"
+msgstr "Zmień rozmiar czcionek"
 
 #: wp-accessibility.php:601
 msgid "Enable WordPress Admin stylesheet"
-msgstr "Aktiviere WordPress Admin Stylesheet"
+msgstr "Włącz style panelu administracyjnego Wordpressa"
 
 #: wp-accessibility.php:603
 msgid "Add Accessibility toolbar with fontsize adjustment, contrast toggle, and grayscale switch. (Grayscale not available for Firefox)"
-msgstr ""
-"Aktiviere die Accessibility Toolbar mit Schriftvergrößerung und dem Umschalter auf hohe Kontraste und Graustufen.\n"
-"(Graustufen sind für den Firefox nicht verfügbar)"
+msgstr "Dodaj pasek dostępności umożliwiający dostosowanie wielkości czcionek, zmianę kontrastu i włączenie skali szarości. (skala szarości nie jest dostępna dla przeglądarki Firefox)"
 
 #: wp-accessibility.php:747
 msgid "Accessibility Toolbar Notes"
-msgstr "Anmerkungen zur Accessibility Toolbar"
+msgstr "Uwaga o pasku dostępności"
 
 #: wp-accessibility.php:750
 msgid "It is almost impossible for the Accessibility Toolbar to guarantee a good result for large text or high contrast modes. You can author your own high-contrast styles by placing a stylesheet called <code>a11y-contrast.css</code> in your Theme's stylesheet directory."
-msgstr "Es ist unmöglich für die Accessibility Toolbar zu garantieren, dass für die Schriftvergrößerung und hohe Kontraste gute Ergebnisse herauskommen. Du kannst für die hohen Kontraste ein eigenes Stylesheet mit dem Namen <code>a11y-contrast.css</code> in Deinem Theme-Verzeichnis hinterlegen. "
+msgstr "Pasek dostępności nie gwarantuje dobrego efektu dla dużych czcionek lub trybu wysokiego kontrastu. Możesz utworzyć własny arkusz stylów dla trybu wysokiego kontrastu i umieścić go pod nazwą <code>a11y-contrast.css</code> w katalogu stylów skórki."
 
 #: wp-accessibility.php:753
 msgid "You can define custom styles for the large print view by defining them under the body class <code>.fontsize</code> in your theme stylesheet."
-msgstr "Du kannst für die Darstellung der großen Schrift eigene Definitionen unter Deiner Body-Class <code>.fontsize</code> in Deinem Theme-Stylesheet hinterlegen."
+msgstr "Możesz zdefiniować własne style dla powiększonej czcionki poprzez zdefiniowanie ich dla klasy body <code>.fontsize</code> w Twoim arkuszu stylów."
 
 #: wp-accessibility.php:72
 msgid "Accessibility Settings"
-msgstr "Einstellungen zur Barrierearmut"
+msgstr "Ustawienia dostępności"
 
 #: wp-accessibility.php:599
 msgid "Force search error on empty search submission (theme must have search.php template)"
-msgstr "Bessere Fehlermeldung bei leeren Suchergebnissen (Dein Theme muss ein search.php Template haben)"
+msgstr "Wymuś stronę błędu wyszukiwania przy braku wyników (skórka musi posiadać szablon search.php)"
 
 #: wp-accessibility.php:606
 msgid "Add outline to elements on keyboard focus"
-msgstr "Zeige eine Außenlinie um Keyboard aktivierte Elemente"
+msgstr "Dodaj obrys do elementów z fokusem klawiatury"
 
 #: wp-accessibility.php:606
 msgid "Outline color (hexadecimal, optional)"
-msgstr "Farbe der Außenlinie"
+msgstr "Kolor obrysowania (heksadecymalnie, opcjonalnie)"
 
 #: wp-accessibility.php:618
 msgid "Color Contrast Tester"
-msgstr "Farbkontrast-Tester"
+msgstr "Tester kontrastu kolorów"
 
 #: wp-accessibility.php:635
 msgid "Luminosity Contrast Ratio for <code>#%2$s</code> and <code>#%3$s</code> is <strong>%1$s</strong> (Threshold: greater than 7:1 for AAA, 4.5:1 for AA)"
-msgstr "Helligkeits-Kontrast Verhältnis für <code>#%2$s</code> und <code>#%3$s</code> ist <strong>%1$s</strong> (Grenzwert: größer als 7:1 für AAA, 4.5:1 für AA)"
+msgstr "Wskaźnik kontrastu luminancji dla <code>#%2$s</code> i <code>#%3$s</code> wynosi <strong>%1$s</strong> (Poziom: większy niż 7:1 dla AAA, 4.5:1 dla AA)"
 
 #: wp-accessibility.php:637
 msgid "The colors compared <strong>pass</strong> the relative luminosity test at level AAA."
-msgstr "Die verglichenen Farben <strong>sind besser als </strong> der Helligkeits-Kontrastwert für die Stufe AAA."
+msgstr "Porównywane kolory <strong>przechodzą</strong> test relatywnej luminancji dla poziomu AAA."
 
 #: wp-accessibility.php:640
 msgid "The colors compared <strong>pass</strong> the relative luminosity test at level AA."
-msgstr "Die verglichenen Farben <strong>sind besser als </strong> der Helligkeits-Kontrast Wert für die Stufe AA."
+msgstr "Porównywane kolory <strong>przechodzą</strong> test relatywnej luminancji dla poziomu AA."
 
 #: wp-accessibility.php:643
 msgid "The colors compared pass the relative luminosity test <strong>only when used in large print</strong> situations (greater than 18pt text or 14pt bold text.)"
-msgstr "Die verglichenen Farben bestehen den Test <strong>nur mit hohem Schriftgrad</strong>, (größer als 18pt oder 14pt fett.)"
+msgstr "Porównywane kolory <strong>przechodzą</strong> test relatywnej luminancji w wypadku powiększonej czcionki (18 punktów lub 14 punktów pogrubiona)."
 
 #: wp-accessibility.php:646
 msgid "The colors compared <strong>do not pass</strong> the relative luminosity test."
-msgstr "Die verglichenen Farben <strong>bestehen den </strong> Helligkeits-Kontrast-Test nicht."
+msgstr "Porównywane kolory <strong>nie przechodzą</strong> testu relatywnej luminancji."
 
 #: wp-accessibility.php:648
 msgid "Test another set of colors"
-msgstr "Teste ein anderes Farbpaar."
+msgstr "Przetestuj inny zestaw kolorów"
 
 #: wp-accessibility.php:663
 msgid "Test of relative luminosity"
-msgstr "Helligkeits-Kontrast-Test"
+msgstr "Test relatywnej luminancji"
 
 #: wp-accessibility.php:665
 msgid "Foreground color"
-msgstr "Vordergrundfarbe"
+msgstr "Kolor tekstu"
 
 #: wp-accessibility.php:666
 msgid "Background color"
-msgstr "Hintergrundfarbe"
+msgstr "Kolor tła"
 
 #: wp-accessibility.php:673
 msgid "Check Color Contrast"
-msgstr "Prüfe den Farbkontrast"
+msgstr "Sprawdź kontrast pomiędzy kolorami"
 
 #: wp-accessibility.php:697
 msgid "If you've found WP Accessibility useful, then please consider <a href='http://wordpress.org/extend/plugins/wp-accessibility/'>rating it five stars</a>, <a href='http://www.joedolson.com/donate.php'>making a donation</a>, or <a href='http://translate.joedolson.com/projects/wp-accessibility'>helping with translation</a>."
-msgstr "Wenn Du WP Accessibilty nützlich findest, <a href='http://wordpress.org/extend/plugins/wp-accessibility/'>bewerte es bitte mit fünf Sternen</a>, <a href='http://www.joedolson.com/donate.php'>spende etwas</a>, oder <a href='http://translate.joedolson.com/projects/wp-accessibility'>hilf es zu übersetzen</a>."
+msgstr "Jeżeli uważasz wtyczkę WP Accessibility za przydatną, poprzyj ją <a href='http://wordpress.org/extend/plugins/wp-accessibility/'>dając jej pięć gwiazdek</a>, <a href='http://www.joedolson.com/donate.php'>przekazując dotację</a>, lub <a href='http://translate.joedolson.com/projects/wp-accessibility'>pomagając w tłumaczeniu</a>."
 
 #: wp-accessibility.php:232
 msgid "Skip to content"
-msgstr "Direkt zum Inhalt"
+msgstr "Przeskocz do treści"
 
 #: wp-accessibility.php:234
 msgid "Skip to navigation"
-msgstr "Direkt zur Navigation"
+msgstr "Przeskocz do nawigacji"
 
 #: wp-accessibility.php:236
 msgid "Site map"
-msgstr "Sitemap"
+msgstr "Mapa serwisu"
 
 #: wp-accessibility.php:398
 msgid "Remove Title Attributes Settings Updated"
-msgstr "Einstellung gespeichert: Entferne Title-Attribute "
+msgstr "Ustawienia usuwania atrybutów TITLE zostały uaktualnione"
 
 #: wp-accessibility.php:418
 msgid "WP Accessibility does not provide any styles for visible skiplinks. You can still set the look of the links using the textareas provided, but all other layout must be assigned in your theme."
-msgstr "WP Accessibility bietet keine Möglichkeit die Direktlinks zu gestalten. Du kannst die angebotenen Optionen nutzen, aber das Layout musst Du in Deinem Theme festlegen."
+msgstr "WP Accessibility nie zapewnia stylów dla widocznych skiplinków. Możesz to zrobić korzystając z pola tekstowego, ale resztę wyglądu musisz włączyć samodzielnie."
 
 #: wp-accessibility.php:422
 msgid "Add Skiplinks Settings Updated"
-msgstr "Einstellung gespeichert: Direktlinks"
+msgstr "Ustawienia dodawania skiplinków zostały uaktualnione."
 
 #: wp-accessibility.php:448
 msgid "Miscellaneous Accessibility Settings Updated"
-msgstr "Weitere Einstellungen wurden gespeichert"
+msgstr "Ustawienia różne dostępności zostały uaktualnione."
 
 #: wp-accessibility.php:531
 msgid "WP Accessibility: Settings"
-msgstr "WP Accessibilty: Einstellungen"
+msgstr "WP Accessibility: ustawienia"
 
 #: wp-accessibility.php:536
 msgid "Remove Title Attributes"
-msgstr "Entferne Title-Attribute"
+msgstr "Usuwanie atrybutów TITLE"
 
 #: wp-accessibility.php:540
 msgid "Remove title attributes from:"
-msgstr "Entferne Title-Attribute von:"
+msgstr "Usuń atrybuty TITLE z:"
 
 #: wp-accessibility.php:542
 msgid "Nav menus"
-msgstr "Navigationsmenüs"
+msgstr "menu nawigacyjnych"
 
 #: wp-accessibility.php:543
 msgid "Page lists"
-msgstr "Seitenlisten"
+msgstr "list stron"
 
 #: wp-accessibility.php:544
 msgid "Category lists"
-msgstr "Kategorienlisten"
+msgstr "list kategorii"
 
 #: wp-accessibility.php:545
 msgid "Archive links"
-msgstr "Archivlisten"
+msgstr "list archiwum"
 
 #: wp-accessibility.php:546
 msgid "Tag clouds"
-msgstr "Schlagwort-Wolken"
+msgstr "chmurek tagów"
 
 #: wp-accessibility.php:547
 msgid "Category links"
-msgstr "Kategorielinks"
+msgstr "linków kategorii"
 
 #: wp-accessibility.php:548
 msgid "Post edit links"
-msgstr "Beitrag bearbeiten Links"
+msgstr "linków edycji wpisów"
 
 #: wp-accessibility.php:549
 msgid "Edit comment links"
-msgstr "Kommentare bearbeiten Links"
+msgstr "linków edycji komentarzy"
 
 #: wp-accessibility.php:556
 msgid "Update Title Attribute Settings"
-msgstr "Aktualisiere Einstellungen: Title-Attribute "
+msgstr "Aktualizuj ustawienia atrybutów TITLE"
 
 #: wp-accessibility.php:562
 msgid "Add Skiplinks"
-msgstr "Direktlinks hinzufügen"
+msgstr "Dodaj skiplinki"
 
 #: wp-accessibility.php:566
 msgid "Configure Skiplinks"
-msgstr "Einstellungen für Direktlinks festlegen"
+msgstr "Konfiguruj skiplinki"
 
 #: wp-accessibility.php:568
 msgid "Enable Skiplinks"
-msgstr "Aktiviere Direktlinks"
+msgstr "Włącz skiplinki"
 
 #: wp-accessibility.php:569
 msgid "Skiplinks always visible"
-msgstr "Zeige Direktlinks immer an"
+msgstr "Skiplinki zawsze widoczne"
 
 #: wp-accessibility.php:570
 msgid "Skip to Content link target (ID of your main content container)"
-msgstr "Ziel des Direktlinks zum Inhalt (ID des Inhalts-Containers)"
+msgstr "Przeskocz do treści (ID kontenera głównej treści)"
 
 #: wp-accessibility.php:571
 msgid "Skip to Navigation link target (ID of your main navigation container)"
-msgstr "Ziel des Direktlinks zur Navigation (ID des Navigations-Containers)"
+msgstr "Przeskocz do nawigacji (ID kontenera menu nawigacyjnego)"
 
 #: wp-accessibility.php:572
 msgid "Site Map link target (URL for your site map)"
-msgstr "Link zur Sitemap (URL Deiner Sitemap)"
+msgstr "Przejdź do mapy serwisu (adres URL mapy serwisu)"
 
 #: wp-accessibility.php:573
 msgid "Add your own link (link or container ID)"
-msgstr "Hinzufügen eines selbstdefinierten Links (Link oder Container-ID)"
+msgstr "Dodaj własny (link lub ID kontenera)"
 
 #: wp-accessibility.php:573
 msgid "Link text for your link"
-msgstr "Text für Deinen Link"
+msgstr "Tekst własnego linka"
 
 #: wp-accessibility.php:574
 msgid "Styles for Skiplinks when they have focus"
-msgstr "Aussehen Deines Direktlinks, wenn er fokussiert ist."
+msgstr "style dla skiplinków, gdy mają fokus."
 
 #: wp-accessibility.php:576
 msgid "(Not currently visible)"
-msgstr "(Zur Zeit nicht sichtbar)"
+msgstr "(aktualnie niewidoczne)"
 
 #: wp-accessibility.php:577
 msgid "Styles for Skiplinks without focus"
-msgstr "Aussehen des Direktlinks wenn er nicht fokussiert ist."
+msgstr "style dla skiplinków bez fokusu"
 
 #: wp-accessibility.php:585
 msgid "Update Skiplink Settings"
-msgstr "Aktualisiere Einstellungen der Direktlinks"
+msgstr "Aktualizuj ustawienia skiplinków"
 
 #: wp-accessibility.php:591
 msgid "Miscellaneous Accessibility Settings"
-msgstr "Weitere Einstellungen"
+msgstr "Różne ustawienia dostępności"
 
 #: wp-accessibility.php:595
 msgid "Miscellaneous"
-msgstr "Verschiedenes"
+msgstr "Różne"
 
 #: wp-accessibility.php:597
 msgid "Add Site Language and text direction to HTML element"
-msgstr "Füge die Sprache der Seite und Leserichtung zum HTML-Element hinzu."
+msgstr "Dodaj język i kierunek tekstu do elementu HTML"
 
 #: wp-accessibility.php:598
 msgid "Remove target attribute from links"
-msgstr "Entferne das Target-Attribut von Links"
+msgstr "Usuń atrybut TARGET z linków"
 
 #: wp-accessibility.php:600
 msgid "Remove tabindex from focusable elements"
-msgstr "Entferne den Tabindex"
+msgstr "Usuń TABINDEX z elementów przechwytujących fokus"
 
 #: wp-accessibility.php:602
 msgid "Remove title attribute from images inserted into post content and featured images."
-msgstr "Entferne das Title-Attribut von Bildern im Inhalt und von den Beitragsbildern (ehemals Artikelbilder)."
+msgstr "Usuń atrybut TITLE z grafik umieszczonych we wpisach i grafikach dekoracyjnych."
 
 #: wp-accessibility.php:604
 msgid "Add post title to \"more\" links."
-msgstr "Füge den Beitragstitel zum Weiterlesen-Link hinzu"
+msgstr "Dodaj tytuł wpisu do linków \"czytaj więcej\""
 
 #: wp-accessibility.php:605
 msgid "Continue reading text"
-msgstr "Weiter lesen Text"
+msgstr "Tekst kontynuowania czytania postu"
 
 #: wp-accessibility.php:613
 msgid "Update Miscellaneous Settings"
-msgstr "Aktualisiere weitere Einstellungen"
+msgstr "Aktualizuj ustawienia różne"
 
 #: wp-accessibility.php:678
 msgid "Get Plug-in Support"
-msgstr "Erhalte Unterstützung zum Plugin"
+msgstr "Wsparcie dla wtyczki"
 
 #: wp-accessibility.php:691
 msgid "Support this Plugin"
-msgstr "Unterstütze dieses Plugin"
+msgstr "Wesprzyj tą wtyczkę"
 
 #: wp-accessibility.php:699
 msgid "<a href=\"http://www.joedolson.com/donate.php\">Make a donation today!</a> Every donation counts - donate $2, $10, or $100 and help me keep this plug-in running!"
-msgstr "<a href=\"http://www.joedolson.com/donate.php\">Spende jetzt!</a> Jede Spende zählt - spende $2, $10, oder $100 und helfe mir das Plugin weiter zu entwickeln!"
+msgstr "<a href=\"http://www.joedolson.com/donate.php\">Przekaż dotację już dzisiaj!</a> Każda dotacja się liczy - przekaż 2, 10, lub 100 dolarów i pomóż mi rozwijać tą wtyczkę."
 
 #: wp-accessibility.php:715
 msgid "Accessibility References"
-msgstr "Quellen zur Accessibilty"
+msgstr "Źródła na temat dostępności"
 
 #: wp-accessibility.php:730
 msgid "Contributing References"
-msgstr "Weitergehende Empfehlungen"
+msgstr "Źródła o współpracy"
 
 #: wp-accessibility.php:798
 msgid "The most recent posts on your blog"
-msgstr "Der letzte Beitrag in Deinem Blog"
+msgstr "Najnowsze wpisy na Twoim blogu"
 
 #: wp-accessibility.php:799
 msgid "WP A11y: Recent Posts"
-msgstr "WP A11y: Letzte Beiträge"
+msgstr "WP A11Y: najnowsze wpisy"
 
 #: wp-accessibility.php:821
 msgid "Recent Posts"
-msgstr "Letzte Beiträge"
+msgstr "Najnowsze wpisy"
 
 #: wp-accessibility.php:864
 msgid "Title:"
-msgstr "Titel:"
+msgstr "Tytuł:"
 
 #: wp-accessibility.php:867
 msgid "Number of posts to show:"
-msgstr "Anzahl der anzuzeigenden Beiträge:"
+msgstr "Liczba wyświetlanych wpisów:"
 
 #: wp-accessibility.php:961
 msgid "Please read the FAQ and other Help documents before making a support request."
-msgstr "Bitte lese die FAQ (Häufige Fragen) und Hilfe-Dokumente bevor Du um eine Anfrage stellst."
+msgstr "Przeczytaj FAQ i inne dokumenty pomocy zanim zapytasz o udzielenie wsparcia. TECHNICZNEGO"
 
 #: wp-accessibility.php:963
 msgid "Please describe your problem. I'm not psychic."
-msgstr "Bitte beschreibe Dein Problem möglichst genau. Ich bin kein Hellseher."
+msgstr "Proszę - opisz swój problem. Nie mam zdolności parapsychicznych."
 
 #: wp-accessibility.php:967
 msgid "Thank you for supporting the continuing development of this plug-in! I'll get back to you as soon as I can."
-msgstr "Danke, dass Du die Weiterentwicklung des Plugins unterstützt! Ich melde mich so schnell wie möglich wieder bei Dir."
+msgstr "Dziękuję za udzielenie wsparcia w kontynuowaniu rozwoju wtyczki! Zwrócę Ci to tak szybko, jak będę mógł."
 
 #: wp-accessibility.php:969
 msgid "I cannot provide free support, but will treat your request as a bug report, and will incorporate any permanent solutions I discover into the plug-in."
-msgstr "Ich kann keinen kostenlosen Support anbieten, aber Fehler nehme ich in den BUG-Report auf und behebe grundsätzliche Probleme."
+msgstr "Nie mogę zapewnić bezpłatnego wsparcia, ale dodam Twój problem do listy błędów i odkryte rozwiązanie dołączę do wtyczki."
 
 #: wp-accessibility.php:981
 msgid "<strong>Please note</strong>: I do keep records of those who have donated, but if your donation came from somebody other than your account at this web site, you must note this in your message."
-msgstr "<strong>Bitte beachte</strong>: Ich speichere die Daten der Spender/innen, aber wenn die Anfrage von einem Mitarbeitenden in Deinem Projekt (Deiner Website) gestellt wird, muss das in der Nachricht vermerkt werden."
+msgstr "<strong>Proszę pamiętaj</strong>: mam odnotowanych wszystkich donatorów, ale jeżeli dotacja została udzielona z innego konta, niż ten serwis, przekaż mi o tym wiadomość."
 
 #: wp-accessibility.php:985
 msgid "From:"
-msgstr "Absender:"
+msgstr "Od:"
 
 #: wp-accessibility.php:988
 msgid "I have read <a href=\"%1$s\">the FAQ for this plug-in</a> <span>(required)</span>"
-msgstr "Ich habe <a href=\"%1$s\">die FAQ dieses Plugins gelesen</a> <span>(Pflichtfeld)</span>"
+msgstr "Przeczytałem <a href=\"%1$s\">FAQ dla tej wtyczki</a> <span>(wymagane)</span>"
 
 #: wp-accessibility.php:991
 msgid "I have <a href=\"%1$s\">made a donation to help support this plug-in</a>"
-msgstr "Ich habe <a href=\"%1$s\">gespendet, um dieses Plugin zu unterstützen.</a>"
+msgstr "<a href=\"%1$s\">przekazałem dotację na wsparciewtyczki </a>"
 
 #: wp-accessibility.php:994
 msgid "Support Request:"
-msgstr "Anfrage:"
+msgstr "Prośba o wsparcie techniczne:"
 
 #: wp-accessibility.php:997
 msgid "Send Support Request"
-msgstr "Anfrage absenden"
+msgstr "Wyślij prośbę o wsparcie techniczne"
 
 #: wp-accessibility.php:1000
 msgid "The following additional information will be sent with your support request:"
-msgstr "Die folgenden zusätzlichen Informationen werden mit Deiner Anfrage versendet:"
+msgstr "Razem z Twoją prośbą o wsparcie zostaną wysłane następujące informacje:"
 
 msgid "WP Accessibility"
-msgstr "WP Accessibility"
+msgstr "I have <a href=\"%1$s\">made a donation to help support this plug-in</a>"
 
 msgid "http://www.joedolson.com/articles/wp-accessibility/"
 msgstr "http://www.joedolson.com/articles/wp-accessibility/"
 
 msgid "Provides options to improve accessibility in your WordPress site, including removing title attributes."
-msgstr "Bietet zusätzliche Optionen zur Verbesserung der Zugänglichkeit Deiner Website, inkl. dem Entfernen von Title-Attributen."
+msgstr "Dostarcza opcji podwyższających dostępność twojego serwisu na Wordpress, w tym usuwając atrybuty TITLE."
 
 msgid "Joe Dolson"
 msgstr "Joe Dolson"

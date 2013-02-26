@@ -45,6 +45,12 @@ Translating my plug-ins is always appreciated. Visit <a href="http://translate.j
 
 == Changelog ==
 
+= 1.2.1 =
+
+* Disabled grayscale toggle in Accessibility toolbar by default due to poor browser support and low functional value. (Can still be enabled by user.)
+* Removed php notice in title-free recent posts widget
+* Updated German and added Polish translations
+
 = 1.2.0 =
 
 * Added space between content output and continue reading text in excerpt context.
