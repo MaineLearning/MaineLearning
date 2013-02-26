@@ -9,7 +9,9 @@ if (class_exists('WPMenuEditor')){
 }
 
 //Load the "framework"
-require 'shadow_plugin_framework.php';
+$thisDirectory = dirname(__FILE__);
+require $thisDirectory . '/shadow_plugin_framework.php';
+require $thisDirectory . '/menu-item.php';
 
 if ( !class_exists('WPMenuEditor') ) :
 
@@ -167,13 +169,18 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		wp_enqueue_script('jquery-sort', plugins_url('js/jquery.sort.js', $this->plugin_file), array('jquery'));
 		//jQuery UI Droppable
 		wp_enqueue_script('jquery-ui-droppable');
+
+		//We use WordPress media uploader to let the user upload custom menu icons (WP 3.5+).
+		if ( function_exists('wp_enqueue_media') ) {
+			wp_enqueue_media();
+		}
 		
 		//Editor's scipts
         wp_enqueue_script(
 			'menu-editor',
 			plugins_url('js/menu-editor.js', $this->plugin_file),
 			array('jquery', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-form'), 
-			'20120915'
+			'20130221'
 		);
 
 		//The editor will need access to some of the plugin data and WP data.
@@ -187,13 +194,28 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		);
 	}
 	
+	/**
+	 * Compatibility workaround for Participants Database 1.4.5.2.
+	 *
+	 * Participants Database loads its settings JavaScript on every page in the "Settings" menu,
+	 * not just its own. It doesn't bother to also load the script's dependencies, though, so
+	 * the script crashes *and* it breaks the menu editor by way of collateral damage.
+	 *
+	 * Fix by forcibly removing the offending script from the queue.
+	 */
+	public function dequeue_pd_scripts() {
+		if ( is_plugin_active('participants-database/participants-database.php') ) {
+			wp_dequeue_script('settings_script');
+		}
+	}
+	
   /**
    * Add the editor's CSS file to the page header
    *
    * @return void
    */
 	function enqueue_styles(){
-		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20121210');
+		wp_enqueue_style('menu-editor-style', plugins_url('css/menu-editor.css', $this->plugin_file), array(), '20130221');
 	}
 
   /**
@@ -224,6 +246,9 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			//Output our JS & CSS on that page only
 			add_action("admin_print_scripts-$page", array(&$this, 'enqueue_scripts'));
 			add_action("admin_print_styles-$page", array(&$this, 'enqueue_styles'));
+			
+			//Compatibility fix for Participants Database.
+			add_action("admin_print_scripts-$page", array($this, 'dequeue_pd_scripts'));
 			
 			//Make a placeholder for our screen options (hacky)
 			add_meta_box("ws-ame-screen-options", "You should never see this", array(&$this, 'noop'), $page);
@@ -796,11 +821,24 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			if ( !empty($topmenu['separator']) && !$first_nonseparator_found ) continue;
 			
 			$first_nonseparator_found = true;
+
+			//Menus that have both a custom icon URL and a "menu-icon-*" class will get two overlapping icons.
+			//Fix this by automatically removing the class. The user can set a custom class attr. to override.
+			if (
+				ameMenuItem::is_default($topmenu, 'css_class')
+				&& !ameMenuItem::is_default($topmenu, 'icon_url')
+				&& !in_array($topmenu['icon_url'], array('', 'none', 'div')) //Skip "no custom icon" icons.
+			) {
+				$new_classes = preg_replace('@\bmenu-icon-[^\s]+\b@', '', $topmenu['defaults']['css_class']);
+				if ( $new_classes !== $topmenu['defaults']['css_class'] ) {
+					$topmenu['css_class'] = $new_classes;
+				}
+			}
 			
 			//Apply defaults & filters
 			$topmenu = $this->apply_defaults($topmenu);
 			$topmenu = $this->apply_menu_filters($topmenu, 'menu');
-			
+
 			//Skip hidden entries
 			if (!empty($topmenu['hidden'])) continue;
 			
@@ -1160,6 +1198,55 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
  	$pageSelector[] = '</select>';
  	echo implode("\n", $pageSelector);
 ?>
+
+<!-- Menu icon selector widget -->
+<div id="ws_icon_selector" style="display: none;">
+	<?php
+	//Let the user select a custom icon via the media uploader.
+	//We only support the new WP 3.5+ media API. Hence the function_exists() check.
+	if ( function_exists('wp_enqueue_media') ):
+	?>
+		<input type="button" class="button"
+		   id="ws_choose_icon_from_media"
+		   title="Upload an image or choose one from your media library"
+		   value="Choose Icon">
+		<div class="clear"></div>
+	<?php
+	endif;
+	?>
+
+	<?php
+	$defaultWpIcons = array(
+		'generic', 'dashboard', 'post', 'media', 'links', 'page', 'comments',
+		'appearance', 'plugins', 'users', 'tools', 'settings', 'site',
+	);
+	foreach($defaultWpIcons as $icon) {
+		printf(
+			'<div class="ws_icon_option" title="%1$s" data-icon-class="menu-icon-%2$s">
+				<div class="ws_icon_image icon16 icon-%2$s"><br></div>
+			</div>',
+			esc_attr(ucwords($icon)),
+			$icon
+		);
+	}
+
+	$defaultIconImages = array(
+		'images/generic.png',
+	);
+	foreach($defaultIconImages as $icon) {
+		printf(
+			'<div class="ws_icon_option" data-icon-url="%1$s">
+				<img src="%1$s">
+			</div>',
+			esc_attr($icon)
+		);
+	}
+	?>
+	<div class="ws_icon_option ws_custom_image_icon" title="Custom image" style="display: none;">
+		<img src="<?php echo esc_attr(admin_url('images/loading.gif')); ?>" alt="Custom image">
+	</div>
+	<div class="clear"></div>
+</div>
 
 <span id="ws-ame-screen-meta-contents" style="display:none;">
 <label for="ws-hide-advanced-settings">
