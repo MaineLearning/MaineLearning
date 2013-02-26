@@ -223,6 +223,38 @@ function bp_docs_info_header() {
 	}
 
 /**
+ * Echoes the content of a Doc
+ *
+ * @since 1.3
+ */
+function bp_docs_the_content() {
+	echo bp_docs_get_the_content();
+}
+	/**
+	 * Returns the content of a Doc
+	 *
+	 * We need to use this special function, because the BP theme compat
+	 * layer messes with the filters on the_content, and we can't rely on
+	 * using that theme function within the context of a Doc
+	 *
+	 * @since 1.3
+	 *
+	 * @return string $content
+	 */
+	function bp_docs_get_the_content() {
+		if ( function_exists( 'bp_restore_all_filters' ) ) {
+			bp_restore_all_filters( 'the_content' );
+		}
+
+		$content = apply_filters( 'the_content', get_queried_object()->post_content );
+
+		if ( function_exists( 'bp_remove_all_filters' ) ) {
+			bp_remove_all_filters( 'the_content' );
+		}
+
+		return $content;
+	}
+/**
  * Filters the output of the doc list header for search terms
  *
  * @package BuddyPress Docs
@@ -854,7 +886,7 @@ function bp_docs_doc_action_links() {
 		$links[] = '<a href="' . bp_docs_get_doc_link() . BP_DOCS_EDIT_SLUG . '">' . __( 'Edit', 'bp-docs' ) . '</a>';
 	}
 
-	if ( bp_docs_current_user_can( 'view_history', get_the_ID() ) ) {
+	if ( bp_docs_current_user_can( 'view_history', get_the_ID() ) && defined( 'WP_POST_REVISIONS' ) && WP_POST_REVISIONS ) {
 		$links[] = '<a href="' . bp_docs_get_doc_link() . BP_DOCS_HISTORY_SLUG . '">' . __( 'History', 'bp-docs' ) . '</a>';
 	}
 
@@ -1202,7 +1234,7 @@ function bp_docs_slug() {
  * At the moment, the group-specific stuff is hard coded in here.
  * @todo Get the group stuff out
  */
-function bp_docs_tabs() {
+function bp_docs_tabs( $show_create_button = true ) {
 	$current_view = '';
 
 	?>
@@ -1224,7 +1256,9 @@ function bp_docs_tabs() {
 
 		<?php endif ?>
 
-		<?php bp_docs_create_button() ?>
+		<?php if ( $show_create_button ) : ?>
+			<?php bp_docs_create_button() ?>
+		<?php endif ?>
 
 	</ul>
 	<?php
@@ -1237,7 +1271,7 @@ function bp_docs_tabs() {
  */
 function bp_docs_create_button() {
 	if ( ! bp_docs_is_doc_create() && bp_docs_current_user_can( 'create' ) ) {
-		echo '<a class="button" id="bp-create-doc-button" href="' . bp_docs_get_create_link() . '">' . __( "Create New Doc", 'bp-docs' ) . '</a>';
+		echo apply_filters( 'bp_docs_create_button', '<a class="button" id="bp-create-doc-button" href="' . bp_docs_get_create_link() . '">' . __( "Create New Doc", 'bp-docs' ) . '</a>' );
 	}
 }
 
@@ -1247,8 +1281,9 @@ function bp_docs_create_button() {
  * @since 1.2.1
  */
 function bp_docs_member_create_button() {
-	if ( bp_docs_is_docs_component() ) {
-		bp_docs_create_button();
+	if ( bp_docs_is_docs_component() ) { ?>
+		<?php bp_docs_create_button(); ?>
+	<?php
 	}
 }
 add_action( 'bp_member_plugin_options_nav', 'bp_docs_member_create_button' );
@@ -1260,8 +1295,16 @@ add_action( 'bp_member_plugin_options_nav', 'bp_docs_member_create_button' );
  *
  * @since 1.2
  */
-function bp_docs_doc_permissions_snapshot() {
+function bp_docs_doc_permissions_snapshot( $args = array() ) {
 	$html = '';
+
+	$defaults = array(
+		'summary_before_content' => '',
+		'summary_after_content' => ''
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+	extract( $args, EXTR_SKIP );
 
 	$doc_group_ids = bp_docs_get_associated_group_id( get_the_ID(), false, true );
 	$doc_groups = array();
@@ -1276,7 +1319,14 @@ function bp_docs_doc_permissions_snapshot() {
 	if ( ! empty( $doc_groups ) ) {
 		$group_link = bp_get_group_permalink( $doc_groups[0] );
 		$html .= '<div id="doc-group-summary">';
-		$html .=   sprintf( __( 'Group: %s', 'bp-docs' ), '<a href="' . $group_link . '">' . bp_core_fetch_avatar( 'item_id=' . $doc_groups[0]->id . '&object=group&type=thumb&width=25&height=25' ) . '</a> ' . '<a href="' . $group_link . '">' . esc_html( $doc_groups[0]->name ) . '</a>' );
+
+		$html .= $summary_before_content ;
+		$html .= '<span>' . __('Group: ', 'bp-docs') . '</span>';
+
+		$html .= sprintf( __( ' %s', 'bp-docs' ), '<a href="' . $group_link . '">' . bp_core_fetch_avatar( 'item_id=' . $doc_groups[0]->id . '&object=group&type=thumb&width=25&height=25' ) . '</a> ' . '<a href="' . $group_link . '">' . esc_html( $doc_groups[0]->name ) . '</a>' );
+
+		$html .= $summary_after_content;
+
 		$html .= '</div>';
 	}
 
@@ -1369,17 +1419,19 @@ function bp_docs_doc_permissions_snapshot() {
 	}
 
 	$html .= '<div id="doc-permissions-summary" class="doc-' . $summary . '">';
-	$html .=   sprintf( __( 'Access: <strong>%s</strong>', 'bp-docs' ), $summary_label );
+	$html .= $summary_before_content;
+ $html .=   sprintf( __( 'Access: <strong>%s</strong>', 'bp-docs' ), $summary_label );
 	$html .=   '<a href="#" class="doc-permissions-toggle" id="doc-permissions-more">' . __( 'Show Details', 'bp-docs' ) . '</a>';
-	$html .= '</div>';
+	$html .= $summary_after_content;
+ $html .= '</div>';
 
 	$html .= '<div id="doc-permissions-details">';
 	$html .=   '<ul>';
-	$html .=     '<li class="bp-docs-can-read ' . $read_class . '"><span class="bp-docs-level-icon"></span>' . $read_text . '</li>';
-	$html .=     '<li class="bp-docs-can-edit ' . $edit_class . '"><span class="bp-docs-level-icon"></span>' . $edit_text . '</li>';
-	$html .=     '<li class="bp-docs-can-read_comments ' . $read_comments_class . '"><span class="bp-docs-level-icon"></span>' . $read_comments_text . '</li>';
-	$html .=     '<li class="bp-docs-can-post_comments ' . $post_comments_class . '"><span class="bp-docs-level-icon"></span>' . $post_comments_text . '</li>';
-	$html .=     '<li class="bp-docs-can-view_history ' . $view_history_class . '"><span class="bp-docs-level-icon"></span>' . $view_history_text . '</li>';
+	$html .=     '<li class="bp-docs-can-read ' . $read_class . '"><span class="bp-docs-level-icon"></span>' . '<span class="perms-text">' . $read_text . '</span></li>';
+	$html .=     '<li class="bp-docs-can-edit ' . $edit_class . '"><span class="bp-docs-level-icon"></span>' . '<span class="perms-text">' . $edit_text . '</span></li>';
+	$html .=     '<li class="bp-docs-can-read_comments ' . $read_comments_class . '"><span class="bp-docs-level-icon"></span>' . '<span class="perms-text">' . $read_comments_text . '</span></li>';
+	$html .=     '<li class="bp-docs-can-post_comments ' . $post_comments_class . '"><span class="bp-docs-level-icon"></span>' . '<span class="perms-text">' . $post_comments_text . '</span></li>';
+	$html .=     '<li class="bp-docs-can-view_history ' . $view_history_class . '"><span class="bp-docs-level-icon"></span>' . '<span class="perms-text">' . $view_history_text . '</span></li>';
 	$html .=   '</ul>';
 
 	if ( bp_docs_current_user_can( 'manage' ) )
@@ -1620,3 +1672,21 @@ function bp_docs_get_sidebar() {
 		get_sidebar( 'buddypress' );
 	}
 }
+
+/**
+ * Renders the Permissions Snapshot
+ *
+ * @since 1.3
+ */
+function bp_docs_render_permissions_snapshot() {
+	$show_snapshot = is_user_logged_in();
+
+	if ( apply_filters( 'bp_docs_allow_access_settings', $show_snapshot ) )  {
+		?>
+		<div class="doc-permissions">
+			<?php bp_docs_doc_permissions_snapshot() ?>
+		</div>
+		<?php
+	}
+}
+add_action( 'bp_docs_single_doc_header_fields', 'bp_docs_render_permissions_snapshot' );
