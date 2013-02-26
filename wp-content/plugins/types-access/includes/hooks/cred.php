@@ -1,0 +1,9 @@
+<?php
+/*
+ * 
+ * 
+ * ADD GENERAL SETTINGS
+ * 
+ * 
+ */
+?>
