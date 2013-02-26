@@ -34,7 +34,7 @@ function wpv_filter_add_filter_admin($view_settings, $filters = null, $id = 'pop
     ?>
     
         <div id="<?php echo $id; ?>" style="display:none">
-            <div id="<?php echo $id; ?>_controls" style="margin:20px;">
+            <div id="<?php echo $id; ?>_controls" style="margin:20px 10px 20px 20px;">
 
                 <strong><?php _e('Select what to filter by:', 'wpv-views'); ?></strong>
                 

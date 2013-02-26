@@ -3,11 +3,11 @@
 Plugin Name: Blog Copier
 Plugin URI: http://wordpress.org/extend/plugins/blog-copier/
 Description: Enables superusers to copy existing sub blogs to new sub blogs.
-Version: 1.0.2
+Version: 1.0.3
 Author: Modern Tribe, Inc.
 Network: true
 Author URI: http://tri.be
- 
+
 Copyright: (C) 2012 Modern Tribe derived from (C) 2010 Ron Rennick, All rights reserved.
 
 See http://wpebooks.com/replicator/ for original code.
@@ -33,11 +33,16 @@ if ( !defined('ABSPATH') )
 
 if ( !class_exists('BlogCopier') ) {
 
+	/**
+	 * Blog Copier
+	 *
+	 * @package BlogCopier
+	 */
 	class BlogCopier {
-		
+
 		private $_name;
 		private $_domain = 'blog-copier';
-		
+
 		/**
 		 * Main constructor function
 		 */
@@ -45,7 +50,7 @@ if ( !class_exists('BlogCopier') ) {
 			add_action( 'network_admin_menu', array( $this, 'ms_add_page' ) );
 			add_filter( 'manage_sites_action_links', array( $this, 'add_site_action' ), 10, 2 );
 		}
-		
+
 		/**
 		 * Add admin page to network admin menu
 		 */
@@ -53,12 +58,12 @@ if ( !class_exists('BlogCopier') ) {
 			$this->setup_localization();
 			add_submenu_page( 'sites.php', $this->_name, $this->_name, 'manage_sites', $this->_domain, array( $this, 'admin_page' ) );
 		}
-		
+
 		/**
 		 * Add "Copy Blog" link under each site in the sites list view.
 		 *
-		 * @param array $actions 
-		 * @param int $blog_id 
+		 * @param array $actions
+		 * @param int $blog_id
 		 * @return array $actions
 		 */
 		public function add_site_action( $actions, $blog_id ) {
@@ -94,8 +99,7 @@ if ( !class_exists('BlogCopier') ) {
 					$from_blog = false;
 				}
 			}
-			if( isset( $_POST['source_blog'] ) )
-				$from_blog_id = (int) $_POST['source_blog'];
+			$from_blog_id = ( isset( $_POST['source_blog'] ) ) ? (int) $_POST['source_blog'] : -1;
 
 			if( isset($_POST[ 'action' ]) && $_POST[ 'action' ] == $this->_domain ) {
 				check_admin_referer( $this->_domain );
@@ -134,14 +138,14 @@ if ( !class_exists('BlogCopier') ) {
 				<form method="POST">
 					<input type="hidden" name="action" value="<?php echo $this->_domain; ?>" />
 						<table class="form-table">
-							
+
 							<?php if( $from_blog ) { ?>
 							<tr>
 								<th scope='row'><?php _e( 'Source Blog to Copy', $this->_domain ); ?></th>
 								<td><strong><?php printf( '<a href="%s" target="_blank">%s</a>', $from_blog->siteurl, $from_blog->blogname ); ?></strong>
 								<input type="hidden" name="source_blog" value="<?php echo $copy_id; ?>" />
 								</td>
-							</tr>								
+							</tr>
 							<?php } else { ?>
 							<tr class="form-required">
 								<th scope='row'><?php _e( 'Choose Source Blog to Copy', $this->_domain ); ?></th>
@@ -154,7 +158,7 @@ if ( !class_exists('BlogCopier') ) {
 								</td>
 							</tr>
 							<?php } ?>
-							
+
 							<tr class="form-required">
 								<th scope='row'><?php _e( 'New Blog Address', $this->_domain ); ?></th>
 								<td>
@@ -218,7 +222,7 @@ if ( !class_exists('BlogCopier') ) {
 				$newdomain = $current_site->domain;
 				$path = trailingslashit($base.$domain);
 			}
-			
+
 			// The new domain that will be created for the destination blog.
 			$newdomain = apply_filters('copy_blog_domain', $newdomain, $domain);
 
@@ -236,15 +240,15 @@ if ( !class_exists('BlogCopier') ) {
 
 				// now copy
 				if( $from_blog_id ) {
-					
-					$this->copy_blog_data( $from_blog_id, $to_blog_id );					
-					
+
+					$this->copy_blog_data( $from_blog_id, $to_blog_id );
+
 					if ($copy_files) {
-					
+
 						$this->copy_blog_files( $from_blog_id, $to_blog_id );
 						$this->replace_content_urls( $from_blog_id, $to_blog_id );
-					
-					}						
+
+					}
 					$msg = sprintf(__( 'Copied: %s in %s seconds', $this->_domain ),'<a href="http://'.$newdomain.'" target="_blank">'.$title.'</a>', number_format_i18n(timer_stop()));
 					do_action( 'log', __( 'Copy Complete!', $this->_domain ), $this->_domain, $msg );
 				}
@@ -267,6 +271,7 @@ if ( !class_exists('BlogCopier') ) {
 				$to_blog_prefix = $this->get_blog_prefix( $to_blog_id );
 				$from_blog_prefix_length = strlen($from_blog_prefix);
 				$to_blog_prefix_length = strlen($to_blog_prefix);
+				$from_blog_escaped_prefix = str_replace( '_', '\_', $from_blog_prefix );
 
 				// Grab key options from new blog.
 				$saved_options = array(
@@ -285,7 +290,7 @@ if ( !class_exists('BlogCopier') ) {
 				}
 
 				// Copy over ALL the tables.
-				$query = $wpdb->prepare('SHOW TABLES LIKE %s',$from_blog_prefix.'%');
+				$query = $wpdb->prepare('SHOW TABLES LIKE %s',$from_blog_escaped_prefix.'%');
 				do_action( 'log', $query, $this->_domain);
 				$old_tables = $wpdb->get_col($query);
 
@@ -293,15 +298,15 @@ if ( !class_exists('BlogCopier') ) {
 					$raw_table_name = substr( $table, $from_blog_prefix_length );
 					$newtable = $to_blog_prefix . $raw_table_name;
 
-					$query = $wpdb->prepare("DROP TABLE IF EXISTS {$newtable}");
+					$query = "DROP TABLE IF EXISTS {$newtable}";
 					do_action( 'log', $query, $this->_domain);
 					$wpdb->get_results($query);
 
-					$query = $wpdb->prepare("CREATE TABLE IF NOT EXISTS {$newtable} LIKE {$table}");
+					$query = "CREATE TABLE IF NOT EXISTS {$newtable} LIKE {$table}";
 					do_action( 'log', $query, $this->_domain);
 					$wpdb->get_results($query);
 
-					$query = $wpdb->prepare("INSERT {$newtable} SELECT * FROM {$table}");
+					$query = "INSERT {$newtable} SELECT * FROM {$table}";
 					do_action( 'log', $query, $this->_domain);
 					$wpdb->get_results($query);
 				}
@@ -309,30 +314,28 @@ if ( !class_exists('BlogCopier') ) {
 				// apply key opptions from new blog.
 				switch_to_blog( $to_blog_id );
 				foreach( $saved_options as $option_name => $option_value ) {
-					if (!empty( $option_value )) {
-						update_option( $option_name, $option_value );
-					}
+					update_option( $option_name, $option_value );
 				}
 
 				/// fix all options with the wrong prefix...
-				$query = $wpdb->prepare("SELECT * FROM {$wpdb->options} WHERE option_name LIKE %s",$from_blog_prefix.'%');
+				$query = $wpdb->prepare("SELECT * FROM {$wpdb->options} WHERE option_name LIKE %s",$from_blog_escaped_prefix.'%');
 				$options = $wpdb->get_results( $query );
 				do_action( 'log', $query, $this->_domain, count($options).' results found.');
-				if( $options ) {			
+				if( $options ) {
 					foreach( $options as $option ) {
 						$raw_option_name = substr($option->option_name,$from_blog_prefix_length);
 						$wpdb->update( $wpdb->options, array( 'option_name' => $to_blog_prefix . $raw_option_name ), array( 'option_id' => $option->option_id ) );
 					}
 					wp_cache_flush();
 				}
-				
+
 				// Fix GUIDs on copied posts
 				$this->replace_guid_urls( $from_blog_id, $to_blog_id );
-				
+
 				restore_current_blog();
 			}
 		}
-		
+
 		/**
 		 * Copy files from one blog to another.
 		 *
@@ -341,7 +344,7 @@ if ( !class_exists('BlogCopier') ) {
 		 */
 		private function copy_blog_files( $from_blog_id, $to_blog_id ) {
 			set_time_limit( 600 ); // 60 seconds x 10 minutes
-			@ini_set('memory_limit','1024M');
+			@ini_set('memory_limit','2048M');
 			$base = WP_CONTENT_DIR . '/blogs.dir/';
 			// Path to source blog files.
 			$from = apply_filters('copy_blog_files_from', trailingslashit( $base . $from_blog_id ), $base, $from_blog_id);
@@ -383,7 +386,7 @@ if ( !class_exists('BlogCopier') ) {
 			do_action( 'log', $query, $this->_domain);
 			$wpdb->query( $query );
 		}
-		
+
 		/**
 		 * Get the database prefix for a blog
 		 *
@@ -399,7 +402,7 @@ if ( !class_exists('BlogCopier') ) {
 			}
 			return $prefix;
 		}
-		
+
 		/**
 		 * Load the localization file
 		 */
@@ -409,9 +412,9 @@ if ( !class_exists('BlogCopier') ) {
 				$this->_name = __( 'Blog Copier', $this->_domain );
 			}
 		}
-				
+
 	}
-	
+
 	global $BlogCopier;
 	$BlogCopier = new BlogCopier();
 }

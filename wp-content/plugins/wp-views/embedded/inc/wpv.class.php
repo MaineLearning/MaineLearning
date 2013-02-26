@@ -111,7 +111,7 @@ class WP_Views{
             wp_enqueue_style( 'views-pagination-style', WPV_URL_EMBEDDED . '/res/css/wpv-pagination.css', array(), WPV_VERSION);
             
 			wp_enqueue_script( 'jquery-ui-datepicker' , WPV_URL_EMBEDDED . '/res/js/jquery.ui.datepicker.min.js', array('jquery-ui-core', 'jquery'), WPV_VERSION);
-			wp_enqueue_style( 'date-picker-style' , WPV_URL_EMBEDDED . '/res/css/datepicker.css', array(), WPV_VERSION);
+			//wp_enqueue_style( 'date-picker-style' , WPV_URL_EMBEDDED . '/res/css/datepicker.css', array(), WPV_VERSION);
 			wp_enqueue_script( 'wpv-date-front-end-script' , WPV_URL_EMBEDDED . '/res/js/wpv-date-front-end-control.js', array('jquery'), WPV_VERSION);
 
             add_action('wp_head', 'wpv_add_front_end_js');
@@ -451,7 +451,7 @@ class WP_Views{
 				$url = $sitepress->convert_url($url);
 			}
 			
-	        $out .= '<form action="' . $url . '" method="GET" class="wpv-filter-form"' . ">\n";
+	        $out .= '<form action="' . $url . '" method="get" class="wpv-filter-form"' . ">\n";
 			
 			// add hidden inputs for any url parameters.
 			// We need these for when the form is submitted.
@@ -461,7 +461,7 @@ class WP_Views{
 				foreach($query_parts as $param) {
 					$item = explode('=', $param);
 					if (strpos($item[0], 'wpv_') !== 0) {
-						$out .= '<input id="wpv_param_' . $item[0] . '" type="hidden" name="' . $item[0] . '" value="' . $item[1] . '">' . "\n";
+						$out .= '<input id="wpv_param_' . $item[0] . '" type="hidden" name="' . $item[0] . '" value="' . $item[1] . '" />' . "\n";
 					}
 				}
 			}
@@ -974,7 +974,17 @@ class WP_Views{
         return $views;
     }
 
-	function get_view_titles() {
+    // new method to get view templates for module manager
+    function get_view_templates(){
+        $view_templates = get_posts(array(
+            'post_type'         => 'view-template',
+            'post_status'       => 'publish',
+			'numberposts'		=> -1
+        ));        
+        return $view_templates;
+    }
+	
+    function get_view_titles() {
         global $wpdb;
         
         static $views_available = null;

@@ -77,7 +77,7 @@ function view_layout_style($post, $view_layout_settings) {
             <div id="_wpv_layout_table_of_fields_style"<?php if($view_layout_settings['style']!='table_of_fields'):?> style="display:none;"<?php endif; ?>>
                 <p><?php _e('Create a table of items with a column for each field', 'wpv-views')?></p>
                 <?php $checked = $view_layout_settings['include_field_names'] ? ' checked="checked"' : '';?>
-                <label><input id="_wpv_layout_include_field_names" type="checkbox" name="_wpv_layout_settings[include_field_names]"<?php echo $checked; ?>>&nbsp;<?php _e('Include field names in table headings', 'wpv-views'); ?></label>
+                <label><input id="_wpv_layout_include_field_names" type="checkbox" name="_wpv_layout_settings[include_field_names]"<?php echo $checked; ?> />&nbsp;<?php _e('Include field names in table headings', 'wpv-views'); ?></label>
                 
             </div>
 
@@ -180,9 +180,9 @@ class View_layout_field {
                     echo $view_select_box;
                 }
             ?>
-            <input id="wpv_field_name_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo $name; ?>" name="_wpv_layout_settings[fields][name_<?php echo $index; ?>]">
-            <input id="wpv_types_field_name_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo $this->types_field_name; ?>" name="_wpv_layout_settings[fields][types_field_name_<?php echo $index; ?>]">
-            <input id="wpv_types_field_data_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo esc_js($this->types_field_data); ?>" name="_wpv_layout_settings[fields][types_field_data_<?php echo $index; ?>]">
+            <input id="wpv_field_name_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo $name; ?>" name="_wpv_layout_settings[fields][name_<?php echo $index; ?>]" />
+            <input id="wpv_types_field_name_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo $this->types_field_name; ?>" name="_wpv_layout_settings[fields][types_field_name_<?php echo $index; ?>]" />
+            <input id="wpv_types_field_data_hidden_<?php echo $index; ?>" type="hidden" value="<?php echo esc_js($this->types_field_data); ?>" name="_wpv_layout_settings[fields][types_field_data_<?php echo $index; ?>]" />
         </td>
         <?php
         $row_title = $this->row_title;
@@ -316,7 +316,7 @@ function view_layout_fields($post, $view_layout_settings) {
                     ?>
                     <tr id="wpv_field_row_<?php echo $index; ?>" <?php echo $field->render_table_row_attributes($view_settings); ?>>
                     
-                        <td width="20px"><img src="<?php echo WPV_URL . '/res/img/delete.png'; ?>" onclick="on_delete_wpv(<?php echo $index; ?>)" style="cursor: pointer"></td><?php $field->render_to_table($index); ?><td width="16px"><img src="<?php echo WPV_URL; ?>/res/img/move.png" class="move" style="cursor: move;" /></td>
+                        <td width="20px"><img src="<?php echo WPV_URL . '/res/img/delete.png'; ?>" onclick="on_delete_wpv(<?php echo $index; ?>)" style="cursor: pointer" /></td><?php $field->render_to_table($index); ?><td width="16px"><img src="<?php echo WPV_URL; ?>/res/img/move.png" class="move" style="cursor: move;" /></td>
                     
                     </tr>
                     <?php
@@ -331,7 +331,7 @@ function view_layout_fields($post, $view_layout_settings) {
     <?php
         $show = $view_settings['query_type'][0] == 'posts';
     ?>
-    <input class="button-secondary wpv_add_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="wpv-layout-add-field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?>>
+    <input class="button-secondary wpv_add_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="wpv-layout-add-field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?> />
     <div id="add_field_popup" style="display:none; overflow: auto;">
 
         <?php
@@ -375,7 +375,7 @@ function view_layout_fields($post, $view_layout_settings) {
     <?php
         $show = $view_settings['query_type'][0] == 'taxonomy';
     ?>
-    <input alt="#TB_inline?inlineId=add_taxonomy_field_popup" class="thickbox button-secondary wpv_add_taxonomy_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="Add a taxonomy field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?>>
+    <input alt="#TB_inline?inlineId=add_taxonomy_field_popup" class="thickbox button-secondary wpv_add_taxonomy_fields_button" type="button" value="<?php echo __('Add field', 'wpv-views'); ?>" name="Add a taxonomy field" <?php if($show) {echo '';} else {echo ' style="display:none"';} ?> />
     
     <?php
         $show = $view_settings['query_type'][0] == 'posts' ? '' : 'style="display:none"';

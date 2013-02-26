@@ -187,7 +187,7 @@ if(is_admin()){
 					if (isset($_POST['taxonomy_attribute_url_format'][$i])) {
 						$taxonomy['taxonomy-' . $name . '-attribute-url-format'] = $_POST['taxonomy_attribute_url_format'][$i];
 					} else {
-						$taxonomy['taxonomy-' . $name . '-attribute-url-format'] = 'name';
+						$taxonomy['taxonomy-' . $name . '-attribute-url-format'] = 'slug';
 					}
 				}
 				
@@ -324,7 +324,7 @@ function wpv_get_table_row_ui_post_category($row, $type, $cats_selected, $not_us
 	ob_start();
 	?>
 	<td>
-		<img src="<?php echo WPV_URL; ?>/res/img/delete.png" onclick="on_delete_wpv_filter('<?php echo $row; ?>')" style="cursor: pointer">
+		<img src="<?php echo WPV_URL; ?>/res/img/delete.png" onclick="on_delete_wpv_filter('<?php echo $row; ?>')" style="cursor: pointer" />
 	</td>
 	<td class="wpv_td_filter">
 		<fieldset>
@@ -388,18 +388,18 @@ function wpv_get_table_row_ui_post_category($row, $type, $cats_selected, $not_us
 				<div  id="taxonomy-<?php echo $taxonomy_name; ?>-attribute-url" <?php echo $show; ?>>
 					<span class="attribute"<?php if ($view_settings['tax_' . $taxonomy . '_relationship'] != 'FROM ATTRIBUTE') {echo ' style="display:none;"';}?>><?php echo __('Shortcode attribute', 'wpv-views');?></span>
 					<span class="url"<?php if ($view_settings['tax_' . $taxonomy . '_relationship'] != 'FROM URL') {echo ' style="display:none;"';}?>><?php echo __('URL parameter', 'wpv-views');?></span>
-					: <input type="text" class="wpv_taxonomy_param" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url]" value="<?php echo $view_settings['taxonomy-' . $taxonomy . '-attribute-url']; ?>">
+					: <input type="text" class="wpv_taxonomy_param" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url]" value="<?php echo $view_settings['taxonomy-' . $taxonomy . '-attribute-url']; ?>" />
 					<span class="wpv_taxonomy_param_missing"><?php echo __('<- Please enter a value here', 'wpv-views'); ?></span>
 					<?php echo __('Using : ');?>
 					<?php
 						if (!isset($view_settings['taxonomy-' . $taxonomy . '-attribute-url-format'])) {
-							$view_settings['taxonomy-' . $taxonomy . '-attribute-url-format'] = 'name';
+							$view_settings['taxonomy-' . $taxonomy . '-attribute-url-format'] = 'slug';
 						}
 					?>
 					<?php $checked = $view_settings['taxonomy-' . $taxonomy . '-attribute-url-format'] == 'name' ? 'checked="checked"' : ''; ?>
-					<label><input type="radio" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url-format][]" value="name" <?php echo $checked;?>><?php echo __('Taxonomy name', 'wpv-views');?></label>
+					<label><input type="radio" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url-format][]" value="name" <?php echo $checked;?> /><?php echo __('Taxonomy name', 'wpv-views');?></label>
 					<?php $checked = $view_settings['taxonomy-' . $taxonomy . '-attribute-url-format'] == 'slug' ? 'checked="checked"' : ''; ?>
-					<label><input type="radio" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url-format][]" value="slug" <?php echo $checked;?>><?php echo __('Taxonomy slug', 'wpv-views');?></label>
+					<label><input type="radio" name="_wpv_settings[taxonomy-<?php echo $taxonomy; ?>-attribute-url-format][]" value="slug" <?php echo $checked;?> /><?php echo __('Taxonomy slug', 'wpv-views');?></label>
 					
 				</div>
 
@@ -447,7 +447,7 @@ function wpv_add_category_checkboxes($args) {
 			</ul>
 		</div>
 		
-		<input type="text" class="wpv_taxonomy_param" name="tax_<?php echo $args['taxonomy']; ?>_attribute_url" style="display:none;">
+		<input type="text" class="wpv_taxonomy_param" name="tax_<?php echo $args['taxonomy']; ?>_attribute_url" style="display:none;" />
 		<span class="wpv_taxonomy_param_missing"><?php echo __('<- Please enter a value here', 'wpv-views'); ?></span>
 
 		<br />

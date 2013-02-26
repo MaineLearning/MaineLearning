@@ -4,12 +4,19 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 0.28
+Stable tag: 0.29
 
 == Description ==
-List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
+List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The **basic** usage would be something like this:
 
-The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page. Please **read the [documentation on how to use it](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
+`[catlist id=1]`
+
+`[catlist name="news"]`
+
+The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page. You can add a lot more parameters according to what and how you want to show your post's list:
+`[catlist id=1 numberposts=10]`
+
+**Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn what parameters are available and how to use them.
 
 **Customization**: The different elements to display con be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 
@@ -17,15 +24,7 @@ Great to use WordPress as a CMS, and create pages with several categories posts.
 
 **Widget**: It includes a widget which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
 
-Since version 0.18, **this plugins does not work on servers with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 will be the last version to support PHP 4, from 3.2 and forward, only PHP 5 will be supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
-
 Please, read the information on [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
-
-**Usage**
-
-`[catlist argument1=value1 argument2=value2]`
-
-Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) on how to use it.
 
 **Support the plugin**
 
@@ -45,22 +44,30 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Other notes==
 
-==INSTRUCTIONS How to use the plugin==
+==INSTRUCTIONS on how to use the plugin==
 
 
-**Selecting the category**
-The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category name or slug* and *detecting the current post's category*.
-When using List Category Posts inside a post, if you don't pass the category id, name or slug, it will post the latest posts from every category. 
-You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
- The parameters for choosing the category id are:
+==Selecting the category==
+The plugin can figure out the category from which you want to list posts in several ways. **You should use only one of these methods** since these are all mutually exclusive, weird results are expected when using more than one:
 
-* **name** - To display posts from a category using the category's name or slug. Ex: [catlist name=mycategory]
+* Using the *category id*.
+  * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`.
+* The *category name or slug*.
+  * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
+* *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
+  * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
 
-* **id** - To display posts from a category using the category's id. Ex: [catlist id=24]. You can **include several categories**: Ex: [catlist id=17,24,32] or **exclude** a category with the minus (-)
+When using List Category Posts whithout a category id, name or slug, it will post the latest posts from every category.
 
-* **categorypage** - Set it to "yes" if you want to list the posts from the current post's category.
+==Using several categories==
 
-**Other parameters**
+* **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
+* **include** posts from several categories with **OR** relationship, posts that belong to either one of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
+* **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`.
+
+
+
+==Other parameters==
 
 * **tags** - Tag support, you can display posts from a certain tag.
 
@@ -185,6 +192,8 @@ You can have as many different templates as you want, and use them in different 
 
 * **FAQ**
 
+Since version 0.18, **this plugins does not work on servers with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
+
 **Plugin could not be activated because it triggered a fatal error.**
 *Parse error: syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php on line 10*
 Please check:
@@ -229,10 +238,15 @@ Template system has changed. Now the posts loop must be defined inside the templ
 = 0.8 =
 Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use the widget.
 
-= 0.9 = 
+= 0.9 =
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.29 =
+ * Adds turkish translation, thanks [Hakan Er](http://hakanertr.wordpress.com/) for writing this translation! :)
+ * Adds "AND" relationship to several categories. Thanks to [hvianna](http://wordpress.org/support/profile/hvianna) from the WordPress forums who [implemented this feature](http://wordpress.org/support/topic/list-only-posts-that-belong-to-two-or-more-categories-solution) :D
+ * More improvements on readme.
 
 = 0.28 =
  * Improvements on readme, faqs.
@@ -295,7 +309,7 @@ This update is dedicated to [Michelle K McGinnis](http://friendlywebconsulting.c
 
  * Fixed thumbnail size parameter, added usage example on README.
  * Added space after author and date http://wordpress.org/support/topic/plugin-list-category-posts-space-required-after
- 
+
 = 0.22.2 =
 
  * Fixed bug with  the categorypage=yes param.

@@ -40,7 +40,6 @@
 	display: block;
 	margin: 4px;
 	width: 120px;
-	padding: 4px;
 }
 
 #ws_editor_sidebar #ws_save_menu {
@@ -245,7 +244,7 @@ a.ws_edit_link:hover {
 	float: left;
 	
 	width: 20px;
-	height: 20px;
+	height: 22px;
 	
 	margin: 1px 1px 1px 0;
 	padding: 0;
@@ -429,6 +428,108 @@ a.ws_button:hover {
 
 #wpbody select.ws_dropdown optgroup option {
 	padding-left: 10px;
+}
+
+/************************************
+           Icon selector
+*************************************/
+
+#ws_icon_selector {
+	border: 1px solid silver;
+	border-radius: 3px;
+	background-color: white;
+	width: 144px;
+	padding: 2px;
+}
+
+#ws_icon_selector .ws_icon_option {
+	float: left;
+	height: 30px;
+
+	margin: 2px;
+	cursor: pointer;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+
+	/* Gradients and colours cribbed from WP 3.5.1 button styles */
+	background: #f3f3f3;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#f4f4f4));
+	background-image: -webkit-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:    -moz-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:      -o-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:   linear-gradient(to bottom, #fefefe, #f4f4f4);
+}
+
+#ws_icon_selector .ws_icon_option:hover {
+	/* Gradients and colours cribbed from WP 3.5.1 button styles */
+	border-color: #999;
+	background: #f3f3f3;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f3f3f3));
+	background-image: -webkit-linear-gradient(top, #fff, #f3f3f3);
+	background-image:    -moz-linear-gradient(top, #fff, #f3f3f3);
+	background-image:     -ms-linear-gradient(top, #fff, #f3f3f3);
+	background-image:      -o-linear-gradient(top, #fff, #f3f3f3);
+	background-image:   linear-gradient(to bottom, #fff, #f3f3f3);
+}
+
+#ws_icon_selector .ws_icon_option.ws_selected_icon {
+	border-color: green;
+	background-color: #deffca;
+	background-image: none;
+}
+
+#ws_icon_selector .icon16 {
+	float: none;
+	margin: 0;
+}
+
+#ws_icon_selector .ws_icon_option img {
+	display: inline-block;
+	margin: 0;
+	padding: 7px;
+
+	width: 16px;
+	height: 16px;
+}
+
+#ws_menu_editor .ws_edit_field-icon_url input.ws_field_value {
+	width: 220px;
+	margin-right: 5px;
+}
+
+/* The icon button that displays the pop-up icon selector. */
+#ws_menu_editor .ws_select_icon {
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+/* Current icon node (CSS class version, for the built-in WP icon sprites) */
+.ws_select_icon .icon16 {
+	margin: 0;
+	float: none;
+	padding: 3px;
+
+	/*
+	The default .icon16 style has a 6px padding which would normally make it too large
+	to fit in the button. We can't change the padding without making the background-position
+	look wrong, so lets offset the icon so that it fits.
+	*/
+	position: relative;
+	top: -3px;
+	left: -3px;
+}
+
+/* Current icon node (image version) */
+.ws_select_icon img {
+	margin: 0;
+	padding: 4px;
+	width: 16px;
+	height: 16px;
+}
+
+#ws_choose_icon_from_media {
+	margin: 2px;
 }
 
 /************************************

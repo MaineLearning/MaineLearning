@@ -532,8 +532,8 @@ $bpsSuccessMessageSec = '<font color="green"><strong>'.__('Success! Your BulletP
 
 $bpsFailMessageSec = '<font color="red"><strong>'.__('The file ', 'bulletproof-security')."$bps_auto_write_secure_file" . __(' is not writable or does not exist.', 'bulletproof-security').'</strong></font><br><strong>'.__('Check that the file is named secure.htaccess and that the file exists in the /bulletproof-security/admin/htaccess master folder. If this is not the problem click ', 'bulletproof-security').'<a href="http://www.ait-pro.com/aitpro-blog/2566/bulletproof-security-plugin-support/bulletproof-security-error-messages" target="_blank">'.__('here', 'bulletproof-security').'</a>'.__(' for more help info.', 'bulletproof-security').'</strong><br>';
 
-$bps_secure_content_top = "#   BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS     \n
-# If you edit the  BULLETPROOF .47.8 >>>>>>> SECURE .HTACCESS text above
+$bps_secure_content_top = "#   BULLETPROOF .48 >>>>>>> SECURE .HTACCESS     \n
+# If you edit the  BULLETPROOF .48 >>>>>>> SECURE .HTACCESS text above
 # you will see error messages on the BPS Security Status page
 # BPS is reading the version number in the htaccess file to validate checks
 # If you would like to change what is displayed above you
@@ -780,7 +780,7 @@ $bps_string_replace_maint = array(".");
 $bps_get_IP_maint = str_replace($bps_string_replace_maint, "\.", $_SERVER['REMOTE_ADDR']) . "$";
 $bps_get_wp_root_maint = bps_wp_get_root_folder();
 $bps_auto_write_maint_file = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/maintenance.htaccess';
-$bps_maint_top = "#   BULLETPROOF .47.8 MAINTENANCE  .HTACCESS     \n\n";    
+$bps_maint_top = "#   BULLETPROOF .48 MAINTENANCE  .HTACCESS     \n\n";    
 $bps_maint_content = "# BEGIN WordPress\n\n
 RewriteEngine On
 RewriteBase $bps_get_wp_root_maint\n
@@ -1093,6 +1093,57 @@ if (@$_GET['settings-updated'] == true) {
 	echo $text;
 	}
 }
+
+// Form - Security Log page - Turn Error Logging Off
+if (isset($_POST['Submit-Error-Log-Off']) && current_user_can('manage_options')) {
+	check_admin_referer( 'bps-error-log-off' );
+
+	$filename = ABSPATH . '.htaccess';
+	$stringReplace = file_get_contents($filename);
+	$pattern = '/ErrorDocument\s400(.*)ErrorDocument\s404\s(.*)\/404\.php/s';
+	$bps_get_wp_root_secure = bps_wp_get_root_folder();		
+	
+	if ( file_exists($filename) && preg_match($pattern, $stringReplace, $matches) ) {
+		chmod($filename, 0644);
+		
+		$stringReplace = preg_replace('/ErrorDocument\s400(.*)ErrorDocument\s404\s(.*)\/404\.php/s', "#ErrorDocument 400 $bps_get_wp_root_secure"."wp-content/plugins/bulletproof-security/400.php\n#ErrorDocument 403 $bps_get_wp_root_secure"."wp-content/plugins/bulletproof-security/403.php\n#ErrorDocument 404 $bps_get_wp_root_secure"."404.php", $stringReplace);
+		
+		file_put_contents($filename, $stringReplace);
+		$text = '<p><font color="green"><strong>'.__('Error Logging has been turned Off', 'bulletproof-security').'</strong></font></p>';
+		echo $text;
+	
+	} else {
+		
+		$text = '<p><font color="red"><strong>'.__('Error: Unable to turn Error Logging Off. Either the root .htaccess file is not writable or it does not exist. Check that the root .htaccess file exists and that file permissions allow writing.', 'bulletproof-security').'</strong></font></p>';
+		echo $text;
+	}
+}
+
+// Form - Security Log page - Turn Error Logging On
+if (isset($_POST['Submit-Error-Log-On']) && current_user_can('manage_options')) {
+	check_admin_referer( 'bps-error-log-on' );
+
+	$filename = ABSPATH . '.htaccess';
+	$stringReplace = file_get_contents($filename);
+	$pattern = '/#ErrorDocument\s400(.*)ErrorDocument\s404\s(.*)\/404\.php/s';
+	$bps_get_wp_root_secure = bps_wp_get_root_folder();	
+	
+	if ( file_exists($filename) && preg_match($pattern, $stringReplace, $matches) ) {
+		chmod($filename, 0644);
+		
+		$stringReplace = preg_replace('/#ErrorDocument\s400(.*)ErrorDocument\s404\s(.*)\/404\.php/s', "ErrorDocument 400 $bps_get_wp_root_secure"."wp-content/plugins/bulletproof-security/400.php\nErrorDocument 403 $bps_get_wp_root_secure"."wp-content/plugins/bulletproof-security/403.php\nErrorDocument 404 $bps_get_wp_root_secure"."404.php", $stringReplace);
+		
+		file_put_contents($filename, $stringReplace);
+		$text = '<p><font color="green"><strong>'.__('Error Logging has been turned On', 'bulletproof-security').'</strong></font></p>';
+		echo $text;
+
+	} else {
+		
+		$text = '<p><font color="red"><strong>'.__('Error: Unable to turn Error Logging On. Either the root .htaccess file is not writable or it does not exist. Check that the root .htaccess file exists and that file permissions allow writing.', 'bulletproof-security').'</strong></font></p>';
+		echo $text;
+	}
+}
+
 $bpsSpacePop = '-------------------------------------------------------------';
 ?>
 </div>
@@ -1417,12 +1468,12 @@ $bpsSpacePop = '-------------------------------------------------------------';
 </div>
             
 <div id="bps-tabs-3" class="bps-tab-page">
-<h2><?php _e('Security Log', 'bulletproof-security'); ?></h2>
+<h2><?php _e('Security Log / HTTP Error Log', 'bulletproof-security'); ?></h2>
 <div id="bpsAutoProtect" style="border-top:1px solid #999999;">
 
-<h3><?php _e('Security Log', 'bulletproof-security'); ?>  <button id="bps-open-modal9" class="bps-modal-button"><?php _e('Read Me', 'bulletproof-security'); ?></button></h3>
-<div id="bps-modal-content9" title="<?php _e('Security Log', 'bulletproof-security'); ?>">
-	<p><?php $text = '<strong>'.__('This Read Me Help window is draggable (top) and resizable (bottom right corner)', 'bulletproof-security').'</strong><br><br><strong>'.__('Security Log General Information', 'bulletproof-security').'</strong><br>'.__('Your Security Log file is a plain text static file and not a dynamic file or dynamic display to keep your website resource usage at a bare minimum and keep your website performance at a maximum.', 'bulletproof-security').'<br><br>'.__('Log entries are logged in descending order by Date and Time. You can copy, edit and delete this plain text file.', 'bulletproof-security').'<strong>'.__(' NOTE: ', 'bulletproof-security').'</strong>'.__('500KB is the maximum recommended log file size. If your log file reaches 500KB in size then copy it to your computer and click the Delete button to delete it.', 'bulletproof-security').'<br><br>'.__('The Security Log logs 400 and 403 HTTP Response Status Codes by default. You can also log 404 HTTP Response Status Codes by opening this BPS 404 Template file - /bulletproof-security/404.php and copying the logging code into your Theme\'s 404 Template file. When you open the BPS Pro 404.php file you will see simple instructions on how to add the 404 logging code to your Theme\'s 404 Template file.', 'bulletproof-security').'<br><br><strong>'.__('HTTP Response Status Codes', 'bulletproof-security').'</strong><br>'.__('400 Bad Request - The request could not be understood by the server due to malformed syntax.', 'bulletproof-security').'<br><br>'.__('403 Forbidden - The Server understood the request, but is refusing to fulfill it.', 'bulletproof-security').'<br><br>'.__('404 Not Found - The server has not found anything matching the Request-URI / URL. No indication is given of whether the condition is temporary or permanent.', 'bulletproof-security').'<br><br><strong>'.__('Security Log File Size', 'bulletproof-security').'</strong><br>'.__('Displays the size of your Security Log file. If your log file is larger than 500KB you will see a Red warning message displayed: Your Security Log file is very large which will cause the BPS Options page to load much slower. Copy and paste the Security Log file contents into a Notepad text file on your computer and save it. Then click the Delete Log button to delete the contents of this Log file.', 'bulletproof-security').'<br><br><strong>'.__('Security Log Last Modified Time:', 'bulletproof-security').'</strong><br>'.__('Displays the last time a Security Log entry was logged.', 'bulletproof-security').'<br><br><strong>'.__('Delete Log Button', 'bulletproof-security').'</strong><br>'.__('Clicking the Delete Log button will delete the entire contents of your Security Log File.', 'bulletproof-security'); echo $text; ?></p>
+<h3><?php _e('Security Log / HTTP Error Log', 'bulletproof-security'); ?>  <button id="bps-open-modal9" class="bps-modal-button"><?php _e('Read Me', 'bulletproof-security'); ?></button></h3>
+<div id="bps-modal-content9" title="<?php _e('Security Log / HTTP Error Log', 'bulletproof-security'); ?>">
+	<p><?php $text = '<strong>'.__('This Read Me Help window is draggable (top) and resizable (bottom right corner)', 'bulletproof-security').'</strong><br><br><strong>'.__('Security Log General Information', 'bulletproof-security').'</strong><br>'.__('Your Security Log file is a plain text static file and not a dynamic file or dynamic display to keep your website resource usage at a bare minimum and keep your website performance at a maximum.', 'bulletproof-security').'<br><br>'.__('Log entries are logged in descending order by Date and Time. You can copy, edit and delete this plain text file.', 'bulletproof-security').'<strong>'.__(' NOTE: ', 'bulletproof-security').'</strong>'.__('500KB is the maximum recommended log file size. If your log file reaches 500KB in size then copy it to your computer and click the Delete button to delete it.', 'bulletproof-security').'<br><br>'.__('The Security Log logs 400 and 403 HTTP Response Status Codes by default. You can also log 404 HTTP Response Status Codes by opening this BPS 404 Template file - /bulletproof-security/404.php and copying the logging code into your Theme\'s 404 Template file. When you open the BPS Pro 404.php file you will see simple instructions on how to add the 404 logging code to your Theme\'s 404 Template file.', 'bulletproof-security').'<br><br><strong>'.__('HTTP Response Status Codes', 'bulletproof-security').'</strong><br>'.__('400 Bad Request - The request could not be understood by the server due to malformed syntax.', 'bulletproof-security').'<br><br>'.__('403 Forbidden - The Server understood the request, but is refusing to fulfill it.', 'bulletproof-security').'<br><br>'.__('404 Not Found - The server has not found anything matching the Request-URI / URL. No indication is given of whether the condition is temporary or permanent.', 'bulletproof-security').'<br><br><strong>'.__('Security Log File Size', 'bulletproof-security').'</strong><br>'.__('Displays the size of your Security Log file. If your log file is larger than 500KB you will see a Red warning message displayed: Your Security Log file is very large which will cause the BPS Options page to load much slower. Copy and paste the Security Log file contents into a Notepad text file on your computer and save it. Then click the Delete Log button to delete the contents of this Log file.', 'bulletproof-security').'<br><br><strong>'.__('Security Log Last Modified Time:', 'bulletproof-security').'</strong><br>'.__('Displays the last time a Security Log entry was logged.', 'bulletproof-security').'<br><br><strong>'.__('Security Log Status:', 'bulletproof-security').'</strong><br>'.__('Displays whether your Security Log / Error Log is turned On or Off.', 'bulletproof-security').'<br><br><strong>'.__('Turn Off Error Logging button', 'bulletproof-security').'</strong><br>'.__('Turns off Error Logging.', 'bulletproof-security').'<br><br><strong>'.__('Turn On Error Logging button', 'bulletproof-security').'</strong><br>'.__('Turns On Error Logging.', 'bulletproof-security').'<br><br><strong>'.__('Delete Log Button', 'bulletproof-security').'</strong><br>'.__('Clicking the Delete Log button will delete the entire contents of your Security Log File.', 'bulletproof-security'); echo $text; ?></p>
 </div>
 
 <?php
@@ -1447,12 +1498,29 @@ echo getSecurityLogSize().'<br>';
 function getSecurityLogLastMod() {
 $filename = WP_CONTENT_DIR . '/bps-backup/logs/http_error_log.txt';
 if (file_exists($filename)) {
+
 	$last_modified = date ("F d Y H:i:s", filemtime($filename));
-	$text = '<strong>'. __('Security Log Last Modified Time: ', 'bulletproof-security').'<font color="blue">'. $last_modified . '</font></strong><br>';
+	$text = '<strong>'. __('Security Log Last Modified Time: ', 'bulletproof-security').'<font color="blue">'. $last_modified .'</font></strong><br>';
 		echo $text;
 	}
 }
 echo getSecurityLogLastMod();
+
+// Echo Error Logging On or Off
+function bpsErrorLoggingOnOff() {
+$filename = ABSPATH . '.htaccess';
+$check_string = file_get_contents($filename);
+$pattern = '/#ErrorDocument\s400(.*)ErrorDocument\s404\s(.*)\/404\.php/s';	
+
+	if ( file_exists($filename) && preg_match($pattern, $check_string, $matches) ) {
+		$text = '<br><strong>'.__('Security Log Status: ', 'bulletproof-security').'<font color="blue">'.__('Error Logging is Turned Off', 'bulletproof-security').'</font></strong><br>';
+		echo $text;
+	} else {
+		$text = '<br><strong>'.__('Security Log Status: ', 'bulletproof-security').'<font color="blue">'.__('Error Logging is Turned On', 'bulletproof-security').'</font></strong><br>';
+		echo $text;		
+	}
+}
+echo bpsErrorLoggingOnOff();
 
 if (isset($_POST['Submit-Delete-Log']) && current_user_can('manage_options')) {
 	check_admin_referer( 'bps-delete-security-log' );
@@ -1461,7 +1529,25 @@ if (isset($_POST['Submit-Delete-Log']) && current_user_can('manage_options')) {
 	$SecurityLogMaster = WP_PLUGIN_DIR . '/bulletproof-security/admin/htaccess/http_error_log.txt'; 
 	copy($SecurityLogMaster, $SecurityLog);
 }
+
+
 ?>
+
+<div id="BPSErrorLog1" style="position:relative; top:0px; left:0px; float:left; margin:0px 15px 0px 0px;">
+<form name="BPSErrorLogOff" action="admin.php?page=bulletproof-security/admin/options.php#bps-tabs-3" method="post">
+<?php wp_nonce_field('bps-error-log-off'); ?>
+<p class="submit">
+<input type="submit" name="Submit-Error-Log-Off" value="<?php esc_attr_e('Turn Off Error Logging', 'bulletproof-security') ?>" class="bps-blue-button" onclick="return confirm('<?php $text = __('Click OK to Turn Off Error Logging or click Cancel.', 'bulletproof-security'); echo $text; ?>')" /></p>
+</form>
+</div>
+
+<div id="BPSErrorLog2" style="position:relative; top:0px; left:0px; float:left; margin:0px 30px 0px 0px;">
+<form name="BPSErrorLogOn" action="admin.php?page=bulletproof-security/admin/options.php#bps-tabs-3" method="post">
+<?php wp_nonce_field('bps-error-log-on'); ?>
+<p class="submit">
+<input type="submit" name="Submit-Error-Log-On" value="<?php esc_attr_e('Turn On Error Logging', 'bulletproof-security') ?>" class="bps-blue-button" onclick="return confirm('<?php $text = __('Click OK to Turn On Error Logging or click Cancel.', 'bulletproof-security'); echo $text; ?>')" /></p>
+</form>
+</div>
 
 <form name="DeleteLogForm" action="admin.php?page=bulletproof-security/admin/options.php#bps-tabs-3" method="post">
 <?php wp_nonce_field('bps-delete-security-log'); ?>
@@ -2874,31 +2960,7 @@ jQuery(document).ready(function($){
   </tr>
  <tr>
     <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('Security Logging / HTTP Error Logging - Log 400, 403 and 404 Errors:', 'bulletproof-security'); ?></strong><br /><?php _e('Your Security Log file is a plain text static file and not a dynamic file or dynamic display to keep your website resource usage at a bare minimum and keep your website performance at a maximum.', 'bulletproof-security'); ?></td>
-  </tr>
-   <tr>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-  </tr>
- <tr>
-    <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('Security Logging / HTTP Error Logging Dashboard Alert:', 'bulletproof-security'); ?></strong><br /><?php _e('When your log file gets larger than 500KB you will see a WP Dashboard Alert displayed. Copy and paste the Security Log file contents into a Notepad text file on your computer and save it. Then click the Delete Log button to delete the contents of this Log file.', 'bulletproof-security'); ?></td>
-  </tr>
-   <tr>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-  </tr>
- <tr>
-    <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('NEW root .htacess file code automatically created/modified on upgrade:', 'bulletproof-security'); ?></strong><br /><?php _e('The new ErrorDocument Error log htaccess code is automatically added to your Root .htaccess file when you upgrade to .47.8. The FORBID EMPTY REFFERER SPAMBOTS .htaccess code is automatically deleted from your Root .htaccess file. This code has been problematic on a number of websites and this htaccess code is not really effective against blocking empty referrer spambots anymore.', 'bulletproof-security'); ?></td>
-  </tr>
-   <tr>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-    <td class="bps-table_cell_no_border">&nbsp;</td>
-  </tr>
- <tr>
-    <td class="bps-table_cell_no_border">&bull;</td>
-    <td class="bps-table_cell_no_border"><strong><?php _e('Additional System Info Check Added: cURL Extension:', 'bulletproof-security'); ?></strong><br /><?php _e('You will see an additional System Information check on the System Info tab page that checks whether or not the cURL Extension is loaded on your website.', 'bulletproof-security'); ?></td>
+    <td class="bps-table_cell_no_border"><strong><?php _e('400, 403 and 404 Error Logging templates modified/updated:', 'bulletproof-security'); ?></strong><br /><?php _e('New coding has been added in the 403.php Error Logging file to prevent facebook externalhit_uatext.php script 403 errors from being logged. The 400 and 404 error logging templates files were also modified/updated.', 'bulletproof-security'); ?></td>
   </tr>
    <tr>
     <td class="bps-table_cell_no_border">&nbsp;</td>
@@ -2973,13 +3035,14 @@ jQuery(document).ready(function($){
     <td colspan="2" class="bps-table_title">&nbsp;</td>
   </tr>
   <tr>
-    <td width="62%" class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2841/bulletproof-security-pro/bulletproof-security-pro-overview-video-tutorial/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro 10 Minute Installation & Setup Video Tutorial', 'bulletproof-security'); ?></a><br /><br />
+    <td width="62%" class="bps-table_cell_help"><a href="http://www.ait-pro.com/aitpro-blog/2841/bulletproof-security-pro/bulletproof-security-pro-overview-video-tutorial/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Installation & Setup Video Tutorial', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://affiliates.ait-pro.com/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Affiliate Program', 'bulletproof-security'); ?></a>
     </td>
     <!-- if a new link is added you need to increase the rowspan number for each new row / link -->
-    <td width="38%" rowspan="12" valign="top" class="bps-table_cell_help">
+    <td width="38%" rowspan="11" valign="top" class="bps-table_cell_help">
     <a href="http://www.ait-pro.com/aitpro-blog/3395/bulletproof-security-pro/bps-free-vs-bps-pro-feature-comparison/" target="_blank" title="Link Opens in New Browser Window"><?php _e('BPS Pro Vs BPS Free Feature Comparison', 'bulletproof-security'); ?></a><br /><br />
-	<a href="http://www.ait-pro.com/aitpro-blog/4683/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-5/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.5', 'bulletproof-security'); ?></a><br /><br />	
+	<a href="http://www.ait-pro.com/aitpro-blog/4709/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-6/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.6', 'bulletproof-security'); ?></a><br /><br />	
+    <a href="http://www.ait-pro.com/aitpro-blog/4683/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-5/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.5', 'bulletproof-security'); ?></a><br /><br />	
     <a href="http://www.ait-pro.com/aitpro-blog/4653/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-4/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.4', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4628/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-3/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.3', 'bulletproof-security'); ?></a><br /><br />
     <a href="http://www.ait-pro.com/aitpro-blog/4563/bulletproof-security-pro/whats-new-in-bulletproof-security-pro-5-2/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.2', 'bulletproof-security'); ?></a><br /><br />
@@ -2996,9 +3059,6 @@ jQuery(document).ready(function($){
     <a href="http://www.ait-pro.com/aitpro-blog/2835/bulletproof-security-pro/bulletproof-security-pro-features/" target="_blank" title="Link Opens in New Browser Window"><?php _e('Whats New in BPS Pro 5.0', 'bulletproof-security'); ?></a>
     </td>
   </tr>
- <tr>
-    <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('10 Minute Installation and Setup: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro first time installations and setup take only 10 minutes. Click the BPS Pro 10 Minute Installation & Setup Video Tutorial link above.', 'bulletproof-security'); ?></td>
-    </tr>
  <tr>
     <td class="bps-table_cell_help" style="font-size:14px;"><?php echo '<strong>'; _e('One Click Upgrades: ', 'bulletproof-security'); echo '</strong>'; _e('BPS Pro Plugin upgrade notifications are displayed in your WordPress Dashboard exactly the same way as all other WordPress plugins. All BPS Pro files are automatically updated during the upgrade and no additional setup steps are required when upgrading.', 'bulletproof-security'); ?></td>
     </tr>
@@ -3073,7 +3133,7 @@ jQuery(document).ready(function($){
   <tr>
     <td class="bps-table_cell_help">
     <div id="SucuriLogo" style="position:relative; top:0px; left:0px;"><img src="<?php echo plugins_url('/bulletproof-security/admin/images/themes-plugins-logo.png'); ?>" style="float:left; padding:0px 10px 0px 0px; margin:0px;" />
-    <h3><?php echo '<em>'.'"'.'...'; _e('We Test, Review & Rate Premium, Free and Paid WordPress Themes, Templates & Plugins Daily. 440 themes and 158 plugins have been tested to date....', 'bulletproof-security'); echo '"'.'</em><br> -- '; _e('Reza Shadpay, founder of themesplugins.com', 'bulletproof-security'); ?></h3>
+    <h3><?php echo '<em>'.'"'.'...'; _e('We Test, Review & Rate Premium, Free and Paid WordPress Themes, Templates & Plugins Daily. 452 themes and 169 plugins have been tested to date....', 'bulletproof-security'); echo '"'.'</em><br> -- '; _e('Reza Shadpay, founder of themesplugins.com', 'bulletproof-security'); ?></h3>
     <a href="http://www.themesplugins.com/" target="_blank" title="Link opens in new browser window">ThemesPlugins.com</a>
 	<div id="ThemesPlugins" style="position:relative; top:0px; left:0px;">
     <h3><?php echo '<em>'.'"'.'...'; _e('SEO explained for Beginners to Experienced website owners. Simple and fully explained WhiteHat SEO techniques and methods that will get your website top Google page ranking positions.', 'bulletproof-security'); echo '"'.'</em><br> -- '; _e('Reza Shadpay, founder of themesplugins.com', 'bulletproof-security'); ?></h3>

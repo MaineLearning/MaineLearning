@@ -41,9 +41,9 @@ class WPV_template_plugin extends WPV_template {
         <ul>
             
             <?php $checked = $output_mode == 'WP_mode' ? ' checked="checked"' : ''; ?>
-            <li><label><input type="radio" name="_wpv_view_template_mode[]" value="WP_mode" <?php echo $checked; ?> >&nbsp;<?php _e('Normal WordPress output - add paragraphs an breaks and resolve shortcodes', 'wpv-views'); ?></label></li>
+            <li><label><input type="radio" name="_wpv_view_template_mode[]" value="WP_mode" <?php echo $checked; ?> />&nbsp;<?php _e('Normal WordPress output - add paragraphs an breaks and resolve shortcodes', 'wpv-views'); ?></label></li>
             <?php $checked = $output_mode == 'raw_mode' ? ' checked="checked"' : ''; ?>
-            <li><label><input type="radio" name="_wpv_view_template_mode[]" value="raw_mode" <?php echo $checked; ?> >&nbsp;<?php _e('Raw output - only resolve shortcodes without adding line breaks or paragraphs'); ?></label></li>
+            <li><label><input type="radio" name="_wpv_view_template_mode[]" value="raw_mode" <?php echo $checked; ?> />&nbsp;<?php _e('Raw output - only resolve shortcodes without adding line breaks or paragraphs'); ?></label></li>
         </ul>
         
         <?php
@@ -108,13 +108,9 @@ class WPV_template_plugin extends WPV_template {
 	
 	function edit_post_link($link, $post_id) {
 		
-		$post_type_object = get_post_type_object( 'view-template' );
-		if ( !$post_type_object )
-			return $link;
-
 		$template_selected = get_post_meta($post_id, '_views_template', true);
 	
-		if ( !current_user_can( $post_type_object->cap->edit_post, $template_selected ) )
+		if ( !current_user_can( 'manage_options' ) )
 			return $link;
         
         if ($template_selected) {

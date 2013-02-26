@@ -272,20 +272,20 @@ var knownMenuFields = {
 		defaultValue: '',
 		visible: true
 	},
+	'icon_url' : {
+		caption: 'Icon URL',
+        standardCaption : true,
+		advanced : true,
+		type : 'icon_selector',
+		defaultValue: 'div',
+		visible: true
+	},
 	'hookname' : {
 		caption: 'Hook name',
         standardCaption : true,
 		advanced : true,
 		type : 'text',
 		defaultValue: '',
-		visible: true
-	},
-	'icon_url' : {
-		caption: 'Icon URL',
-        standardCaption : true,
-		advanced : true,
-		type : 'text',
-		defaultValue: 'div',
 		visible: true
 	},
     'custom' : {
@@ -312,6 +312,9 @@ function buildEditboxFields(containerNode, entry){
     }
 	
 	for (var field_name in fields){
+		if (!fields.hasOwnProperty(field_name)) {
+			continue;
+		}
 		var field = buildEditboxField(entry, field_name, fields[field_name]);
 		if (field){
             if (fields[field_name].advanced){
@@ -319,6 +322,10 @@ function buildEditboxFields(containerNode, entry){
             } else {
                 basicFields.append(field);
             }
+
+			if (field_name == 'icon_url') {
+				updateIconField(field.find('.ws_field_value'));
+			}
 		}
 	}
 	
@@ -344,6 +351,7 @@ function buildEditboxField(entry, field_name, field_settings){
 	
 	//Build a form field of the appropriate type 
 	var inputBox = null;
+	var basicTextField = '<input type="text" class="ws_field_value">';
 	switch(field_settings.type){
 		case 'select':
 			inputBox = $('<select class="ws_field_value">');
@@ -353,7 +361,7 @@ function buildEditboxField(entry, field_name, field_settings){
 					.val(field_settings.options[optionTitle])
 					.text(optionTitle);
 				if ( field_settings.options[optionTitle] == value ){
-					option.attr('selected', 'selected');
+					option.prop('selected', 'selected');
 				}
 				option.appendTo(inputBox);
 			}
@@ -364,10 +372,15 @@ function buildEditboxField(entry, field_name, field_settings){
                 field_settings.caption+'</label>'
             );
             break;
+
+		case 'icon_selector':
+			inputBox = $(basicTextField).val(value)
+                .add('<button class="button ws_select_icon" title="Select icon"><div class="icon16 icon-settings"></div><img src="" style="display:none;"></button>');
+			break;
             
 		case 'text':
 		default:
-			inputBox = $('<input type="text" class="ws_field_value">').val(value);
+			inputBox = $(basicTextField).val(value);
 	}
 	
 	
@@ -409,6 +422,32 @@ function buildEditboxField(entry, field_name, field_settings){
 	}
 		
 	return editField;	
+}
+
+function updateIconField(input) {
+	//Display the current icon in the selector.
+	var container = input.closest('.ws_container');
+	var cssClass = container.find('.ws_edit_field-css_class .ws_field_value').val();
+	var iconUrl = input.val();
+
+	var selectButton = input.closest('.ws_edit_field').find('.ws_select_icon');
+	var cssIcon = selectButton.find('.icon16');
+	var imageIcon = selectButton.find('img');
+
+	var matches = cssClass.match(/\bmenu-icon-([^\s]+)\b/);
+	//Icon URL take precedence over icon class.
+	if ( iconUrl && iconUrl !== 'none' && iconUrl !== 'div' ) {
+		cssIcon.hide();
+		imageIcon.prop('src', iconUrl).show();
+	} else if ( matches ) {
+		imageIcon.hide();
+		cssIcon.removeClass().addClass('icon16 icon-' + matches[1]).show();
+	} else {
+		//This menu has no icon at all. This is actually a valid state
+		//and WordPress will display a menu like that correctly.
+		imageIcon.hide();
+		cssIcon.removeClass().addClass('icon16').show();
+	}
 }
 
 /*
@@ -671,6 +710,7 @@ $(document).ready(function(){
 	/***************************************************************************
 	                  Event handlers for editor widgets
 	 ***************************************************************************/
+	var menuEditorNode = $('#ws_menu_editor');
 	
 	//Highlight the clicked menu item and show it's submenu
 	var currentVisibleSubmenu = null;
@@ -737,7 +777,7 @@ $(document).ready(function(){
 			input.change();
 		}	
 	}));
-	
+
 	//When a field is edited, change it's appearance if it's contents don't match the default value.
     function fieldValueChange(){
         var input = $(this);
@@ -771,19 +811,14 @@ $(document).ready(function(){
 			if ( value == '' ){
 				field.find('.ws_reset_button').click();
 			}
+		} else if (fieldName == 'icon_url') {
+			updateIconField(input);
+		} else if (fieldName == 'css_class') {
+			updateIconField(input.closest('.ws_container').find('.ws_edit_field-icon_url .ws_field_value'));
 		}
     }
-	$('#ws_menu_editor .ws_field_value').live('click', fieldValueChange);
-	//jQuery 1.3.x can't catch 'change' events with live(), 
-	//so we handle that by using event delegation instead.
-	//TODO: Update for jQuery 1.4.2 in WP 3.0
-	$('#ws_menu_editor').change(function(event){
-		var target = $(event.target);
-		if ( target.is('.ws_field_value') ){
-			fieldValueChange.call(target, event);
-		}
-	});
-	
+	menuEditorNode.on('click change', '.ws_field_value', fieldValueChange);
+
 	//Show/hide advanced fields
 	$('#ws_menu_editor .ws_toggle_advanced_fields').live('click', function(){
 		var self = $(this);
@@ -949,7 +984,178 @@ $(document).ready(function(){
 		if ( !option.attr('selected') && option.attr('value')){
 			option.attr('selected', 'selected');
 		}
-	});	
+	});
+
+	/*************************************************************************
+	                           Icon selector
+	 *************************************************************************/
+	var iconSelector = $('#ws_icon_selector');
+	var currentIconButton = null; //Keep track of the last clicked icon button.
+
+	//When the user clicks one of the available icons, update the menu item.
+	iconSelector.on('click', '.ws_icon_option', function() {
+		var selectedIcon = $(this).addClass('ws_selected_icon');
+		iconSelector.hide();
+
+		//Assign the selected icon to the menu.
+		if (currentIconButton) {
+			var container = currentIconButton.closest('.ws_container');
+			var cssClassField = container.find('.ws_edit_field-css_class .ws_field_value');
+			var iconUrlField = container.find('.ws_edit_field-icon_url .ws_field_value');
+
+			//Remove the existing icon class, if any.
+			var cssClass = cssClassField.val();
+			cssClass = jsTrim( cssClass.replace(/\bmenu-icon-[^\s]+\b/, '') );
+
+			if (selectedIcon.data('icon-class')) {
+				//Add the new class.
+				cssClass = selectedIcon.data('icon-class') + ' ' + cssClass;
+				//Can't have both a class and an image or we'll get two overlapping icons.
+				iconUrlField.val('');
+			} else if (selectedIcon.data('icon-url')) {
+				iconUrlField.val(selectedIcon.data('icon-url'));
+			}
+			cssClassField.val(cssClass).change();
+			iconUrlField.change();
+		}
+
+		currentIconButton = null;
+	});
+
+	//Show/hide the icon selector when the user clicks the icon button.
+	menuEditorNode.on('click', '.ws_select_icon', function() {
+		var button = $(this);
+		//Clicking the same button a second time hides the icon list.
+		if ( currentIconButton && button.is(currentIconButton) ) {
+			iconSelector.hide();
+			//noinspection JSUnusedAssignment
+			currentIconButton = null;
+			return;
+		}
+
+		currentIconButton = button;
+
+		var container = currentIconButton.closest('.ws_container');
+		var cssClassField = container.find('.ws_edit_field-css_class .ws_field_value');
+		var iconUrlField = container.find('.ws_edit_field-icon_url .ws_field_value');
+		var cssClass = cssClassField.val();
+		var iconUrl = iconUrlField.val();
+
+		var customImageOption = iconSelector.find('.ws_custom_image_icon').hide();
+
+		//Highlight the currently selected icon.
+		iconSelector.find('.ws_selected_icon').removeClass('ws_selected_icon');
+		var matches = cssClass.match(/\bmenu-icon-([^\s]+)\b/);
+		if ( iconUrl && iconUrl !== 'none' && iconUrl !== 'div' ) {
+			var currentIcon = iconSelector.find('.ws_icon_option img[src="' + iconUrl + '"]').first().closest('.ws_icon_option');
+			if ( currentIcon.length > 0 ) {
+				currentIcon.addClass('ws_selected_icon').show();
+			} else {
+				//Display and highlight the custom image.
+				customImageOption.find('img').prop('src', iconUrl);
+				customImageOption.addClass('ws_selected_icon').show().data('icon-url', iconUrl);
+			}
+		} else if ( matches ) {
+			//Highlight the icon that corresponds to the current CSS class.
+			iconSelector.find('.icon-' + matches[1]).closest('.ws_icon_option').addClass('ws_selected_icon');
+		}
+
+		iconSelector.show();
+		iconSelector.position({ //Requires jQuery UI.
+			my: 'right top',
+			at: 'right bottom',
+			of: button
+		});
+	});
+
+	//Alternatively, use the WordPress media uploader to select a custom icon.
+	//This code is based on the header selection script in /wp-admin/js/custom-header.js.
+	$('#ws_choose_icon_from_media').click(function(event) {
+		event.preventDefault();
+		var frame = null;
+
+		//This option is not usable on the demo site since the filesystem is usually read-only.
+		if (wsEditorData.isDemoMode) {
+			alert('Sorry, image upload is disabled in demo mode!');
+			return;
+		}
+
+        //If the media frame already exists, reopen it.
+        if ( frame ) {
+            frame.open();
+            return;
+        }
+
+        //Create a custom media frame.
+        frame = wp.media.frames.customAdminMenuIcon = wp.media({
+            //Set the title of the modal.
+            title: 'Choose a Custom Icon (16x16)',
+
+            //Tell it to show only images.
+            library: {
+                type: 'image'
+            },
+
+            //Customize the submit button.
+            button: {
+                text: 'Set as icon', //Button text.
+                close: true //Clicking the button closes the frame.
+            }
+        });
+
+        //When an image is selected, set it as the menu icon.
+        frame.on( 'select', function() {
+            //Grab the selected attachment.
+            var attachment = frame.state().get('selection').first();
+            //TODO: Warn the user if the image exceeds 16x16 pixels.
+
+	        //Set the menu icon to the attachment URL.
+            if (currentIconButton) {
+                var container = currentIconButton.closest('.ws_container');
+	            var cssClassField = container.find('.ws_edit_field-css_class .ws_field_value');
+                var iconUrlField = container.find('.ws_edit_field-icon_url .ws_field_value');
+                var cssClass = cssClassField.val();
+                var iconUrl = iconUrlField.val();
+
+                //Remove the existing icon class, if any.
+	            cssClass = jsTrim( cssClass.replace(/\bmenu-icon-[^\s]+\b/, '') );
+	            cssClassField.val(cssClass);
+
+	            //Set the new icon URL.
+	            iconUrlField.val(attachment.attributes.url);
+
+	            cssClassField.change();
+	            iconUrlField.change();
+            }
+
+            currentIconButton = null;
+        });
+
+		//If the user closes the frame by via Esc or the "X" button, clear up state.
+		frame.on('escape', function(){
+			currentIconButton = null;
+		});
+
+        frame.open();
+		iconSelector.hide();
+	});
+
+	//Hide the icon selector if the user clicks outside of it.
+	//Exception: Clicks on "Select icon" buttons are handled above.
+	$(document).on('mouseup', function(event) {
+		if ( !iconSelector.is(':visible') ) {
+			return;
+		}
+
+		if (
+			!iconSelector.is(event.target)
+			&& iconSelector.has(event.target).length === 0
+			&& $(event.target).closest('.ws_select_icon').length == 0
+		) {
+			iconSelector.hide();
+			currentIconButton = null;
+		}
+	});
 	
     
     /*************************************************************************
@@ -1220,6 +1426,10 @@ $(document).ready(function(){
 		//The items's editbox is always open
 		menu.find('.ws_edit_link').click();
 	});
+
+	function jsTrim(str){
+		return str.replace(/^\s+|\s+$/g, "");
+	}
 	
 	function compareMenus(a, b){
 		function jsTrim(str){

@@ -174,7 +174,7 @@ function wpv_get_table_row_ui_post_custom_field($row, $type, $not_used, $custom_
 	
 	?>
 	<td>
-		<img src="<?php echo WPV_URL; ?>/res/img/delete.png" onclick="on_delete_wpv_filter('<?php echo $row; ?>')" style="cursor: pointer">
+		<img src="<?php echo WPV_URL; ?>/res/img/delete.png" onclick="on_delete_wpv_filter('<?php echo $row; ?>')" style="cursor: pointer" />
 	</td>
 	<td class="wpv_td_filter">
 		<fieldset>

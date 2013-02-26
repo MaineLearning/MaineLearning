@@ -2,14 +2,14 @@
 /* Plugin Name: WP-FB-AutoConnect
  * Description: A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible. Supports BuddyPress.
  * Author: Justin Klein
- * Version: 2.5.9
+ * Version: 2.5.11
  * Author URI: http://www.justin-klein.com/
  * Plugin URI: http://www.justin-klein.com/projects/wp-fb-autoconnect
  */
 
 
 /*
- * Copyright 2010-2012 Justin Klein (email: justin@justin-klein.com)
+ * Copyright 2010-2013 Justin Klein (email: justin@justin-klein.com)
  * 
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -213,11 +213,14 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
      }
      else
         array_push($jfb_callback_list, $callbackName);
-     
-     //Output an html form that we'll submit via JS once the FB login is complete; it redirects us to the PHP script that logs us into WP.  
-     ?><form id="wp-fb-ac-fm" name="<?php echo $callbackName ?>_form" method="post" action="<?php echo plugins_url(dirname(plugin_basename(__FILE__))) . "/_process_login.php"?>" >
+
+     //Output an html form that we'll submit via JS once the FB login is complete; it redirects us to the PHP script that logs us into WP.
+     $login_script = plugins_url(dirname(plugin_basename(__FILE__))) . "/_process_login.php";
+     if(force_ssl_login()) $login_script = str_replace("http://", "https://", $login_script);
+     ?><form id="wp-fb-ac-fm" name="<?php echo $callbackName ?>_form" method="post" action="<?php echo $login_script;?>" >
           <input type="hidden" name="redirectTo" value="<?php echo $redirectTo?>" />
           <input type="hidden" name="access_token" id="jfb_access_token" value="0" />
+          <input type="hidden" name="fbuid" id="jfb_fbuid" value="0" />
           <?php wp_nonce_field ($jfb_nonce_name, $jfb_nonce_name) ?>
           <?php do_action('wpfb_add_to_form'); ?>   
      </form>
@@ -239,8 +242,9 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
                 return;
             }
             
-            //Set the access token to be sent in to our login script
+            //Set the uid & access token to be sent in to our login script
             jQuery('#jfb_access_token').val(response.authResponse.accessToken);
+            jQuery("#jfb_fbuid").val(response.authResponse.userID);
         
             //Submit the login and close the FB.getLoginStatus call
             <?php echo apply_filters('wpfb_submit_loginfrm', "document." . $callbackName . "_form.submit();\n" ); ?>
@@ -305,8 +309,11 @@ function jfb_wp_avatar($avatar, $id_or_email, $size, $default, $alt)
 	//If the usermeta doesn't contain an absolute path, prefix it with the path to the uploads dir
 	if( strpos($fb_img, "http") === FALSE )
 	{
-	    $uploads_url = wp_upload_dir();
-	    $uploads_url = $uploads_url['baseurl'];
+	    if(function_exists('jfb_p_get_avatar_cache_dir'))
+	       $ud = jfb_p_get_avatar_cache_dir();
+        else
+           $ud = wp_upload_dir();
+	    $uploads_url = $ud['baseurl'];
 	    $fb_img = trailingslashit($uploads_url) . $fb_img;
 	}
 	

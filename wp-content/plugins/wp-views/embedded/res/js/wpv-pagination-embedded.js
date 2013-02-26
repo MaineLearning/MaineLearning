@@ -101,7 +101,16 @@ function add_url_query_parameters(data) {
         {
             var p=a[i].split('=');
             if (p.length != 2) continue;
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	    p[0] = p[0].replace("[]",""); // needed for pagination on the author filter to work
+            if (b.hasOwnProperty(p[0])){
+	      if (b[p[0]] != decodeURIComponent(p[1].replace(/\+/g, " "))) {
+		b[p[0]] += ','+decodeURIComponent(p[1].replace(/\+/g, " "));
+	      } else {
+		 b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	      }
+	    } else {
+	      b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	    }
         }
         return b;
     })(window.location.search.substr(1).split('&'));
@@ -111,7 +120,8 @@ function add_url_query_parameters(data) {
     	
         if (qs.hasOwnProperty(prop)) {
             if (!data.hasOwnProperty(prop)) {
-                data['get_params'][prop] = qs[prop];
+		var prop2 = prop.replace("%5B%5D","");
+                data['get_params'][prop2] = qs[prop];
             }
 
         }
@@ -394,7 +404,10 @@ function wpv_pagination_get_page(view_number, next, effect, speed, response, wpv
     wpvPaginatorFilter.html(responseFilter);
 	// Move the wpv_view_hash, wpv_paged_max and wpv_widget_view_id from the forms as it's only needed during ajax pagination
 	jQuery('input[name=wpv_view_hash], input[name=wpv_paged_max], input[name=wpv_widget_view_id]').each(function(index) {
-		jQuery(this).parent().after(this);
+		var parent = jQuery(this).parent();
+		if (parent.is('form')) {
+			parent.after(this);
+		}
 	});
 
 	

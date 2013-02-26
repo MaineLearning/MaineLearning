@@ -80,7 +80,7 @@ if(is_admin()){
                              'view_settings' => $view_settings));
         $data = ob_get_clean();
         
-        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+        $td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
         $td .= '<td class="wpv_td_filter">';
         $td .= "<div id=\"wpv-filter-taxonomy-term-show\">\n";
         $td .= wpv_get_filter_taxonomy_term_summary($view_settings);
@@ -186,7 +186,7 @@ function wpv_add_term_taxonomy($args) {
 			</select>
 		</div>
 
-        <input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>">
+        <input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>" />
         
 		<ul class="categorychecklist form-no-clear" <?php if($view_settings['taxonomy_terms_mode'] == 'CURRENT_PAGE') {echo 'style="display:none;"';}?>>
         
@@ -232,7 +232,7 @@ function wpv_get_taxonomy_term_check() {
 			</select>
 		</div>
 		
-		<input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>">
+		<input type="hidden" id="wpv-current-taxonomy-term" value="<?php echo $taxonomy; ?>" />
 		<ul class="categorychecklist form-no-clear">
 		
 		<?php

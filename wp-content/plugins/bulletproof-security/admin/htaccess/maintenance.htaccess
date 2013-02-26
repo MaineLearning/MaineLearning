@@ -1,12 +1,11 @@
-#   BULLETPROOF .47.8 MAINTENANCE  .HTACCESS
-   
+#   BULLETPROOF .48 MAINTENANCE  .HTACCESS     
+
 # BEGIN WordPress
+
 
 RewriteEngine On
 RewriteBase /
 
-# REQUEST METHODS FILTERED
-RewriteEngine On
 RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
 RewriteRule ^(.*)$ - [F,L]
 
@@ -18,13 +17,13 @@ RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) 
 RewriteRule . - [S=1]
 
 # BPSQSE BPS QUERY STRING EXPLOITS
+RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} (%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
 RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
 RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
 RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
 RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
-RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
 RewriteCond %{REQUEST_URI} owssvr\.dll [NC,OR]
 RewriteCond %{HTTP_REFERER} (%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
 RewriteCond %{HTTP_REFERER} \.opendirviewer\. [NC,OR]
@@ -60,7 +59,7 @@ RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|uni
 RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
 RewriteRule ^(.*)$ - [F,L]
 
-RewriteCond %{REMOTE_ADDR} !^88\.55\.66\.200$
+RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
 RewriteCond %{REQUEST_URI} !^/bp-maintenance\.php$
 RewriteCond %{REQUEST_URI} !^/wp-content/plugins/bulletproof-security/abstract-blue-bg\.png$
 RewriteRule ^(.*)$ /bp-maintenance.php [L]

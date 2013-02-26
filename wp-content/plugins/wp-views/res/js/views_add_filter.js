@@ -60,6 +60,40 @@ function wpv_add_filter_submit(div_id) {
 
     var type = jQuery('#' + div_id + '_select').val();
     
+    if (jQuery('input[name=author_mode\\[\\]]:checked').val() == 'by_url') {
+	if (jQuery('input[name=author_url]').val() == '') {
+		jQuery('.wpv_author_url_param_missing').show();
+		jQuery('.wpv_author_shortcode_param_missing').hide();
+		return;
+	} else {
+		var pat = /^[a-z0-9\-\_]+$/;
+		var t = jQuery('input[name=author_url]').val();
+		if(pat.test(t) == false)
+		{
+		  jQuery('.wpv_author_helper').html('');
+		  jQuery('.wpv_author_url_param_ilegal').show();
+		  return;
+		}
+	}
+    }
+    
+    if (jQuery('input[name=author_mode\\[\\]]:checked').val() == 'shortcode') {
+	if (jQuery('input[name=author_shortcode]').val() == '') {
+		jQuery('.wpv_author_url_param_missing').hide();
+		jQuery('.wpv_author_shortcode_param_missing').show();
+		return;
+	} else {
+		var pat = /^[a-z0-9]+$/;
+		var t = jQuery('input[name=author_shortcode]').val();
+		if(pat.test(t) == false)
+		{
+		  jQuery('.wpv_author_helper').html('');
+		  jQuery('.wpv_author_shortcode_param_ilegal').show();
+		  return;
+		}
+	}
+    }
+    
     if (type.substr(0, 13) == 'custom-field-') {
         if (wpv_add_edit_custom_field(div_id, type, 'add')) {
 			jQuery('option[value="'+type+'"]').hide();

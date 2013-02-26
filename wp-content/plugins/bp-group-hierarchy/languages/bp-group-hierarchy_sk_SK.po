@@ -1,0 +1,296 @@
+# Copyright (C) 2012 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-group-hierarchy\n"
+"POT-Creation-Date: 2012-12-11 22:34:20+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-01-22 23:18+0300\n"
+"Last-Translator: Serg\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: bp-group-hierarchy-admin.php:18
+msgid "Hierarchy Settings"
+msgstr "Hierarchia nastavenia"
+
+#: bp-group-hierarchy-admin.php:20 extension.php:37
+msgid "Group Hierarchy"
+msgstr "Skupina hierarchie"
+
+#: bp-group-hierarchy-admin.php:65 bp-group-hierarchy-admin.php:120
+#: extension.php:769
+msgid "Group Tree"
+msgstr "Skupina strom"
+
+#: bp-group-hierarchy-admin.php:66 bp-group-hierarchy-widgets.php:197
+#: extension.php:170 extension.php:171 extension.php:276 extension.php:277
+msgid "Member Groups"
+msgstr "Člen skupiny"
+
+#: bp-group-hierarchy-admin.php:70
+msgid "Settings saved."
+msgstr "Nastavenia uložené."
+
+#: bp-group-hierarchy-admin.php:71
+msgid "Group Hierarchy Settings"
+msgstr "Nastavenia skupinovej hierarchie"
+
+#: bp-group-hierarchy-admin.php:76
+msgid "Show Group Tree"
+msgstr "Zobraziť skupiny stromov"
+
+#: bp-group-hierarchy-admin.php:80
+msgid ""
+"Show the Group Tree view on the Groups page along with the flat list of "
+"groups."
+msgstr ""
+"Zobraziť skupiny stromovom zobrazení na stránke skupiny spolu s plochý "
+"zoznam skupiny."
+
+#: bp-group-hierarchy-admin.php:85
+msgid "Hide Group List"
+msgstr "Skryť zoznam skup├¡n"
+
+#: bp-group-hierarchy-admin.php:89
+msgid ""
+"Hide the flat list of groups and show ONLY the Group Tree on the Groups page"
+msgstr ""
+"Skryť plochý zoznam skupín a Ukázať len skupina strom na stránke skupiny"
+
+#: bp-group-hierarchy-admin.php:94 bp-group-hierarchy-widgets.php:14
+msgid "Toplevel Groups"
+msgstr "Produkujúci skupín"
+
+#: bp-group-hierarchy-admin.php:104
+msgid ""
+"Select who is allowed to create toplevel groups. Super admins can always "
+"create toplevel groups."
+msgstr ""
+"Vyberte, kto smie vytvoriť produkujúci skupiny. Super admini môžu vždy "
+"vytvoriť produkujúci skupiny."
+
+#: bp-group-hierarchy-admin.php:112
+msgid "Nav Item"
+msgstr "NAV tovaru"
+
+#: bp-group-hierarchy-admin.php:115
+msgid "Name of the nav item on an individual group's page."
+msgstr "Názov položky nav na stránke jednotlivé skupiny."
+
+#: bp-group-hierarchy-admin.php:116
+msgid "Use <code>%d</code> to include the number of child groups."
+msgstr "Použitie <code>%d</code> zahrnúť počet skupín detí."
+
+#: bp-group-hierarchy-admin.php:123
+msgid "Name of the Group Tree listing on the main Groups page."
+msgstr "Názov skupiny strom výpis na hlavnej stránke skupiny."
+
+#: bp-group-hierarchy-admin.php:127 extension.php:280
+msgid "Save Changes"
+msgstr "Uložiť zmeny"
+
+#: bp-group-hierarchy-loader.php:11
+msgid "User Groups"
+msgstr "Skupiny užívateľov"
+
+#: bp-group-hierarchy-loader.php:69
+msgid "Search Groups..."
+msgstr "Skupiny Hľadať..."
+
+#: bp-group-hierarchy-loader.php:198
+msgid "You do not have access to this group."
+msgstr "Nemáte prístup k tejto skupine."
+
+#: bp-group-hierarchy-loader.php:213
+msgid "You are not an admin of this group."
+msgstr "Nie ste správcom tejto skupiny."
+
+#: bp-group-hierarchy-loader.php:223
+msgid "Details"
+msgstr "Podrobnosti"
+
+#: bp-group-hierarchy-loader.php:227
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: bp-group-hierarchy-loader.php:235
+msgid "Avatar"
+msgstr "Avatar"
+
+#: bp-group-hierarchy-loader.php:243
+msgid "Invites"
+msgstr "Pozýva"
+
+#: bp-group-hierarchy-widgets.php:14
+msgid "A list of top-level BuddyPress groups"
+msgstr "Zoznam najvyššej úrovne BuddyPress skupín"
+
+#: bp-group-hierarchy-widgets.php:27 bp-group-hierarchy-widgets.php:141
+msgid "You must enable Groups component to use this widget."
+msgstr "Musíte povoliť skupiny zložky použiť tento widget."
+
+#: bp-group-hierarchy-widgets.php:44 bp-group-hierarchy-widgets.php:158
+msgid "created %s"
+msgstr "vytvorené %s"
+
+#: bp-group-hierarchy-widgets.php:48 bp-group-hierarchy-widgets.php:162
+#: extension.php:385 templates/tree/tree-loop.php:54
+msgid "active %s"
+msgstr "aktívny %s"
+
+#: bp-group-hierarchy-widgets.php:54 bp-group-hierarchy-widgets.php:168
+msgid "%d member group"
+msgid_plural "%d member groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#: bp-group-hierarchy-widgets.php:73 bp-group-hierarchy-widgets.php:187
+msgid "There are no groups to display."
+msgstr "Neexistujú žiadne skupiny zobrazíte."
+
+#: bp-group-hierarchy-widgets.php:93 bp-group-hierarchy-widgets.php:197
+msgid "Groups"
+msgstr "Skupiny"
+
+#: bp-group-hierarchy-widgets.php:100 bp-group-hierarchy-widgets.php:205
+msgid "Title:"
+msgstr "Názov:"
+
+#: bp-group-hierarchy-widgets.php:101 bp-group-hierarchy-widgets.php:207
+msgid "Max groups to show:"
+msgstr "Max skupiny Ukázať:"
+
+#: bp-group-hierarchy-widgets.php:104 bp-group-hierarchy-widgets.php:210
+msgid "Order by:"
+msgstr "Zoraď podľa:"
+
+#: bp-group-hierarchy-widgets.php:106 bp-group-hierarchy-widgets.php:212
+#: templates/tree/index.php:60
+msgid "Alphabetical"
+msgstr "Abecedný"
+
+#: bp-group-hierarchy-widgets.php:107 bp-group-hierarchy-widgets.php:213
+#: templates/tree/index.php:59
+msgid "Newly Created"
+msgstr "Novo vytvorené"
+
+#: bp-group-hierarchy-widgets.php:108 bp-group-hierarchy-widgets.php:214
+#: templates/tree/index.php:57
+msgid "Last Active"
+msgstr "Poslednej aktívnej"
+
+#: bp-group-hierarchy-widgets.php:109 bp-group-hierarchy-widgets.php:215
+msgid "Most Popular"
+msgstr "Najobľúbenejšie"
+
+#: bp-group-hierarchy-widgets.php:110 bp-group-hierarchy-widgets.php:216
+msgid "Most Member Groups"
+msgstr "Väčšina skupín členských"
+
+#: bp-group-hierarchy-widgets.php:114 bp-group-hierarchy-widgets.php:220
+msgid "Show descriptions:"
+msgstr "Zobraziť popisy:"
+
+#: bp-group-hierarchy-widgets.php:122
+msgid "Group Navigator"
+msgstr "Skupina Navigator"
+
+#: bp-group-hierarchy-widgets.php:122
+msgid ""
+"A list of member groups of the current group, or top-level groups anywhere "
+"else."
+msgstr ""
+"Zoznam členských skupín aktuálnu skupinu, alebo najvyššej úrovne skupiny "
+"kdekoľvek inde."
+
+#: bp-group-hierarchy-widgets.php:206
+msgid "Title when on a group page:"
+msgstr "Názov keď na stránke skupiny:"
+
+#: extension.php:38
+msgid "Member Groups %d"
+msgstr "Člen skupiny %d"
+
+#: extension.php:63
+msgid "Anybody"
+msgstr "Niekto"
+
+#: extension.php:64
+msgid "Nobody"
+msgstr "Nikto"
+
+#: extension.php:65
+msgid "only Group Members"
+msgstr "len členovia skupiny"
+
+#: extension.php:66
+msgid "only Group Admins"
+msgstr "iba skupina administrátorov"
+
+#: extension.php:108 extension.php:148 extension.php:246
+msgid "Parent Group"
+msgstr "Nadradenej skupine"
+
+#: extension.php:133 extension.php:150 extension.php:231
+msgid "Site Root"
+msgstr "Stránky koreň"
+
+#: extension.php:171 extension.php:277
+msgid "Allow %1$s to create %2$s"
+msgstr "Povoliť %1$ s na vytvorenie %2$ s"
+
+#: extension.php:256
+msgid "Only a site administrator can edit the group hierarchy."
+msgstr "Iba Správca lokality môže upraviť skupinovej hierarchie."
+
+#: extension.php:319
+msgid "There was an error saving; please try again."
+msgstr "Došlo k chybe ukladanie; prosím skúste to znova."
+
+#: extension.php:321
+msgid "Group hierarchy settings saved successfully."
+msgstr "Skupina nastavení hierarchie úspešne uložený."
+
+#: extension.php:358
+msgid "Create a %s"
+msgstr "Vytvoriť %s"
+
+#: extension.php:358
+msgid "Member Group"
+msgstr "Člen skupiny"
+
+#: extension.php:420
+msgid "No member groups were found."
+msgstr "Nenašli sa žiadne členské skupiny."
+
+#: extension.php:714 extension.php:744
+msgid "Sorry, you are not allowed to create groups."
+msgstr "Sorry, vám nie je dovolené vytvoriť skupiny."
+
+#: extension.php:768
+msgid "Member Groups (%d)"
+msgstr "Člen skupiny (% d)"
+
+#: templates/tree/index.php:21
+msgid "Create a Group"
+msgstr "Vytvoriť skupinu"
+
+#: templates/tree/index.php:39
+msgid "My Groups <span>%s</span>"
+msgstr "Môj skupiny <span>%s</span>"
+
+#: templates/tree/index.php:55
+msgid "Order By:"
+msgstr "Zoraď podľa:"
+
+#: templates/tree/index.php:58
+msgid "Most Members"
+msgstr "Väčšina členov"
+
+#: templates/tree/tree-loop.php:98
+msgid "There were no groups found."
+msgstr "Tam boli žiadne skupiny našiel."

@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------------------------------------------
+Version 1.1.4.1
+	- Fixed taxonomy query using name instead of slug
+    
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.1.4
+    - Fixed WP 3.5 Filter forms - taxonomy filter doesn't work when there is a space in taxonomy term name
+    - Fixed Missing links in Settings page
+    - Fixed Paginating looses filter control values
+    - Fixed Display usage tips for filter by author
+    - Fixed Add colons before inputs
+    - Fixed Check/handle spaces in URL parameters
+    - Fixed Validate that the URL argument name or shortcode attribute name is specified and show an error message otherwise
+    - Fixed When inserting author filter via the popup, it's saved incorrectly
+    - Fixed New Pages Overridden by Post View Template
+    - Fixed Pagination looses frontend filter values
+    - Add filtering by author
+    - Fixed Don't use mb_ereg
+    - Fixed HTML validation errors with View filter
+    - Fixed Javascript error when inserting shortcodes
+    - Add Wrap View loop in [wpv-posts-found] shortcode
+    - Fixed Conditional with empty not working
+

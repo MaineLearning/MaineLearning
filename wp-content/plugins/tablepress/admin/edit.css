@@ -1,0 +1,222 @@
+/**
+ * CSS code for the "Edit" screen
+ *
+ * @package TablePress
+ * @subpackage Views CSS
+ * @author Tobias Bäthge
+ * @since 1.0.0
+ */
+
+/* hour glass cursor, while waiting for AJAX */
+body.wait * {
+	cursor: wait !important;
+}
+
+/* container for preview and advanced editor */
+.hidden-container {
+	display: none;
+}
+
+/* Margin in Help boxes */
+.hidden-help-box-container p {
+	margin: 6px;
+}
+
+/* allow wide tables to scroll sideways, only on "Edit" screen */
+#wpbody-content {
+	overflow: visible !important; /* !important is necessary to override an inline style that postboxes.js sets via JS */
+}
+
+/* move Thickbox more to the front, so that it's always above a jQuery UI dialog */
+#TB_HideSelect {
+	z-index: 301099;
+}
+#TB_overlay,
+.media-modal {
+	z-index: 301100;
+}
+#TB_window {
+	z-index: 301102;
+}
+#TB_load {
+	z-index: 301103;
+}
+
+/* Table Preview (CSS for actual preview is directly in the preview HTML) */
+#table-preview-iframe {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	border: none;
+}
+/* To account for additional padding of #TB_WindowContent in direct preview */
+#table-preview {
+	height: 100%;
+	margin: -2px -15px -15px -15px;
+}
+
+/* Content of the Advanced Editor jQueryUI dialog */
+#advanced-editor {
+	padding: 3px;
+}
+#advanced-editor .submitbox {
+	padding: 6px 6px 0px;
+	font-size: 11px;
+	overflow: auto;
+	height: 30px;
+}
+#advanced-editor-confirm {
+	float: right;
+}
+#advanced-editor-cancel {
+	line-height: 30px;
+}
+
+/* spinner/loading animation while saving/preview preparation */
+.spinner.animation-saving,
+.spinner.animation-preview {
+	display: inline-block;
+	float: none;
+	margin: 7px 0 0 7px;
+	vertical-align: top;
+}
+
+/* Margins from dynamically created (inline) .error/.updated messages */
+#tablepress-page div.save-changes-success,
+#tablepress-page div.save-changes-error,
+#tablepress-page div.preview-error {
+	margin: 0 0 15px;
+}
+
+/* make postboxes at least as wide as their contents, to prevent overlapping elements */
+#tablepress-page .postbox {
+	min-width: 836px; /* sum of inner table width, padding, border, ... */
+}
+#tablepress-page #tablepress_edit-table-data {
+	display: inline-block; /* stretch to the width of the table */
+	min-width: 99.9%; /* but use the full width, bus minus like 1px as the box is wider than the others otherwise */
+}
+
+/* table cells */
+#edit-form-body td {
+	padding: 2px 2px 2px 0px;
+	height: 32px;
+}
+
+/* cells of currently focussed row/autogrow, and automatically increase cells if JS is disabled */
+.no-js #edit-form-body td,
+#edit-form-body .focus td {
+	height: 64px;
+}
+
+/* alternating row colors */
+#edit-form-body .odd {
+	background-color: #eeeeee;
+}
+/* alternating row colors for the blue color scheme */
+.admin-color-classic #edit-form-body .odd {
+	background-color: #e5f6ff;
+}
+
+#edit-form-body textarea {
+	display: block;
+	min-width: 150px;
+	width: 100%;
+	width: auto\0/IE; /* IE hack, as cells will otherwise shrink and overlap instead of horizontal scrolling kicking in */
+	height: 100%;
+}
+#edit-form-body textarea:focus {
+	border-color: #000000;
+}
+
+#edit-form-body input[type="checkbox"] {
+	margin-right: 3px;
+}
+#edit-form-foot input[type="checkbox"] {
+	margin-top: 6px;
+}
+
+#edit-form {
+	border-collapse: collapse;
+	margin-bottom: 5px; /* spacing for the scroll bar */
+}
+
+/* row and column moving with jQueryUI sortable */
+#edit-form .move-handle {
+	display: block;
+	margin: auto;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	font-weight: bold;
+}
+.js #edit-form .move-handle {
+	cursor: move;
+}
+#edit-form-body .move-handle {
+	margin: auto 3px;
+	min-width: 16px;
+	width: auto;
+}
+
+#edit-form .move-hover {
+	position: absolute;
+	z-index: 1000;
+	height: 26px; /* height of "#edit-form-body td" - 6px */
+}
+
+#edit-form .focus .move-hover {
+	height: 54px; /* height of "#edit-form-body .focus td" - 6px */
+}
+
+/* hightlighting of table head and foot in table cells */
+#edit-form-body .head-row,
+#edit-form-body .foot-row,
+.admin-color-classic #edit-form-body .head-row,
+.admin-color-classic #edit-form-body .foot-row {
+	background-color: #d9edf7;
+}
+
+/* head cells (column letters) and sorting */
+#edit-form-head th {
+	height: 16px;
+	vertical-align: top;
+}
+#edit-form-head .sort-control {
+	float: right;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+	margin: 2px 3px 0 0;
+}
+#edit-form-head .sorting-indicator {
+	display: block;
+	margin: 4px 2px 0 0;
+}
+#edit-form-head .sort-asc .sorting-indicator {
+	background-position: 0 0;
+}
+#edit-form-head .sort-desc .sorting-indicator {
+	background-position: -7px 0;
+}
+
+/* (red) highlighting of hidden rows and columns */
+#edit-form .row-hidden td,
+/* #edit-form .row-hidden th, */
+#edit-form .row-hidden textarea,
+#edit-form .column-hidden,
+#edit-form .column-hidden textarea {
+	background-color: #ffe0e0;
+}
+
+#tablepress_edit-table-manipulation .column-1 {
+	width: 45%;
+}
+#tablepress_edit-table-manipulation .column-2 {
+	width: 55%;
+}
+
+/* gray background for disabled "Pagination entries" field */
+#option-datatables-paginate_entries[disabled] {
+	background-color: #eeeeee;
+}

@@ -42,6 +42,10 @@ function wpml_content_fix_links_to_translated_content($body){
             $old_body = $body;
             $alp_broken_links = array();
             $body = $icl_abs_links->_process_generic_text($body, $alp_broken_links);
+            
+            // Restore the language as the above call can change the current language.
+            $sitepress->switch_lang($target_lang_code);
+            
             if ($body == '') {
                 // Handle a problem with abs links occasionally return empty.
                 $body = $old_body;

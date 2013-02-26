@@ -176,6 +176,54 @@ function wpv_admin_import_data() {
     }
 }
 
+/*
+*
+*   Custom Import function for Module Manager
+*   Imports given xml string
+*/
+function wpv_admin_import_data_from_xmlstring($xmlstring) {
+    global $WP_Views;
+
+
+    
+    if (!empty($xmlstring)) {
+
+        if (!function_exists('simplexml_load_string')) {
+            return new WP_Error('xml_missing', __('The Simple XML library is missing.',
+                                    'wpv-views'));
+        }
+        $xml = simplexml_load_string($xmlstring);
+
+        if (!$xml) {
+            return new WP_Error('not_xml_file', sprintf(__('The XML could not be read.',
+                                            'wpv-views')));
+        }
+
+        $import_data = wpv_admin_import_export_simplexml2array($xml);
+        
+
+        // import view templates first.   
+        $error = wpv_admin_import_view_templates($import_data);
+        if ($error) {
+            return $error;
+        }
+
+        // import views next.   
+        $error = wpv_admin_import_views($import_data);
+        if ($error) {
+            return $error;
+        }
+
+        // import views next.   
+        $error = wpv_admin_import_settings($import_data);
+        if ($error) {
+            return $error;
+        }
+    } 
+    return true;
+}
+
+
 function wpv_admin_import_view_templates($import_data) {
 
     global $wpdb, $import_messages;

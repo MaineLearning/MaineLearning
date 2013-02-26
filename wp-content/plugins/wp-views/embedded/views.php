@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '1.1.3');
+define('WPV_VERSION', '1.1.4.1');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -49,6 +49,7 @@ require WPV_PATH_EMBEDDED . '/inc/wpv-filter-order-by-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-types-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-search-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-status-embedded.php';
+require WPV_PATH_EMBEDDED . '/inc/wpv-filter-author-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-parent-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-types-embedded.php';
 require WPV_PATH_EMBEDDED . '/inc/wpv-filter-post-relationship-embedded.php';

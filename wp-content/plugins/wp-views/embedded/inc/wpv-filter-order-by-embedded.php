@@ -135,13 +135,13 @@ function wpv_post_order_by_meta($orderby, $query) {
         
     }
     
-    remove_filter('post_orderby', 'wpv_post_order_by_meta');
+    remove_filter('posts_orderby', 'wpv_post_order_by_meta');
     return $orderby;
 }
 
 function _wpv_is_numeric_field($field_name) {
     $opt = get_option('wpcf-fields');
-    if($opt && mb_ereg('^field-wpcf-',$field_name)) {
+    if($opt && strpos($field_name, 'field-wpcf-') === 0) {
         $field_name = substr($field_name,11);
         if (isset($opt[$field_name]['type'])) {
             $field_type = strtolower($opt[$field_name]['type']);

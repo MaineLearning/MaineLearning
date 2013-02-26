@@ -65,7 +65,7 @@ function wpv_render_checkboxes($values, $selected, $name) {
 
 function wpv_render_filter_td($row, $id, $name, $summary_function, $selected, $data) {
 
-	$td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer">';
+	$td = '<td><img src="' . WPV_URL . '/res/img/delete.png" onclick="on_delete_wpv_filter(\'' . $row . '\')" style="cursor: pointer" />';
 	$td .= '<td class="wpv_td_filter">';
 	$td .= "<div id=\"wpv-filter-" . $id . "-show\">\n";
 	$td .= call_user_func($summary_function, $selected);
