@@ -35,6 +35,7 @@ function jfb_admin_styles()
     		'.jfb-admin_tabs        {width:100%; clear:both; float:left; margin:0 0 -0.1em 0; padding:0;}'.
             '.jfb-admin_tabs li     {list-style:none; float:left; margin:0; padding:0.2em 0.5em 0.2em 0.5em; }'.
             '.jfb-admin_tab_selected{background-color:#FFFEEB; border-left:1px solid #CCC; border-right:1px solid #CCC; border-top:1px solid #CCC;}'.
+            '.jfb-greybox           {width:600px; padding:5px; margin:2px 0; background-color:#EEEDDA; border:1px solid #CCC;}'.
          '</style>';
 }
 
@@ -96,18 +97,24 @@ function jfb_admin_page()
     {
         ?><div class="error"><p><strong>Warning:</strong> Wordpress MultiSite is only fully supported by the premium version of this plugin; please see <a href="<?php echo $jfb_homepage ?>#premium"><b>here</b></a> for details.</p></div><?php
     }
+    if( file_exists(realpath(dirname(__FILE__))."/WP-FB-AutoConnect-Premium.php" ) )
+    {
+        ?><div class="error"><p><strong>Notice:</strong> You seem to've uploaded the premium addon to the wrong directory.<br/><br/>
+            As per the <a target="instructs" href="<?php echo $jfb_homepage ?>#premium"><b>setup instructions</b></a>, the "WP-FB-AutoConnect-Premium.php" file goes in your <i>plugins</i> directory (i.e. wp-content/plugins/WP-FB-AutoConnect-Premium.php), not the WP-FB-AutoConnect directory (i.e. wp-content/plugins/wp-fb-autoconnect/WP-FB-AutoConnect-Premium.php). This is to prevent it from getting overwritten when you auto-update the core plugin.</p></div>
+        <?php
+    }
 	
     do_action('wpfb_admin_messages');
     
     //Which tab to show by default
-    $shownTab = get_option($opt_jfb_valid)?2:1;
+    $shownTab = get_option($opt_jfb_valid)?1:0;
       
     //Update options
     if( isset($_POST['fb_opts_updated']) )
     {
         //When saving the Facebook options, make sure the key and secret are valid...
         update_option( $opt_jfb_valid, 0 );
-        $shownTab = 1;
+        $shownTab = 0;
         $result = jfb_api_get("https://graph.facebook.com/" . $_POST[$opt_jfb_api_key]);
         if(!$result):
             ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: Empty Reply.<br />Are you sure you entered your App ID correctly?</p></div><?php
@@ -123,7 +130,7 @@ function jfb_admin_page()
 			if( is_array($response) && strpos($response['body'], 'access_token=') !== FALSE )
 			{
                 //We're valid!
-                $shownTab = 2;
+                $shownTab = 1;
                 update_option( $opt_jfb_valid, 1 );
                 update_option( $opt_jfb_app_token, substr($response['body'], 13) );
                 if( get_option($opt_jfb_api_key) != $_POST[$opt_jfb_api_key] )
@@ -143,7 +150,7 @@ function jfb_admin_page()
     }
     if( isset($_POST['main_opts_updated']) )
     {
-        $shownTab = 2;
+        $shownTab = 1;
         update_option( $opt_jfb_ask_perms, $_POST[$opt_jfb_ask_perms] );
         update_option( $opt_jfb_ask_stream, $_POST[$opt_jfb_ask_stream] );
         update_option( $opt_jfb_wp_avatars, $_POST[$opt_jfb_wp_avatars] );
@@ -159,12 +166,12 @@ function jfb_admin_page()
     }
     if( isset($_POST['prem_opts_updated']) && function_exists('jfb_update_premium_opts'))
     {
-        $shownTab = 3;
+        $shownTab = 2;
         jfb_update_premium_opts();
     }
     if( isset($_POST['remove_all_settings']) )
     {
-        $shownTab = 1;
+        $shownTab = 0;
         delete_option($opt_jfb_api_key);
         delete_option($opt_jfb_api_sec);
         delete_option($opt_jfb_email_to);
@@ -199,18 +206,19 @@ function jfb_admin_page()
     <!-- Tab Navigation -->
     <?php 
     //Define some variables that'll be used for our tab-switching
-    $allTabsClass = "jfb_admin_tab";
+    $allTabsClass    = "jfb_admin_tab";
     $allTabBtnsClass = "jfb_admin_tab_btn";
-    $tab1Id = "jfb_admin_fbsetup";
-    $tab2Id = "jfb_admin_basicoptions";
-    $tab3Id = "jfb_admin_premiumoptions";
-    $tab4Id = "jfb_admin_uninstall";
-    $tab5Id = "jfb_admin_supportinfo";
+    $tabIds          = array("jfb_admin_fbsetup", "jfb_admin_basicoptions", "jfb_admin_premiumoptions", "jfb_admin_uninstall", "jfb_admin_supportinfo");
+    $tabNames        = array("Facebook Setup",    "Basic Options",          "Premium Options",          "Uninstall",           "Support Info");
     ?>
     
     <script type="text/javascript">
-        function jfb_swap_tabs(show_tab_id) 
+        function jfb_swap_tabs(show_tab_num) 
         {
+            //Find the ID of the tab we want to show
+            var tabIds = <?php echo json_encode($tabIds);?>;
+            var show_tab_id = tabIds[show_tab_num];
+            
             //Hide all the tabs, then show just the one specified
         	jQuery(".<?php echo $allTabsClass ?>").hide();
         	jQuery("#" + show_tab_id).show();
@@ -219,20 +227,31 @@ function jfb_admin_page()
         	jQuery(".<?php echo $allTabBtnsClass?>").attr("class", "<?php echo $allTabBtnsClass?>");
         	jQuery("#" + show_tab_id + "_btn").addClass("jfb-admin_tab_selected");
 		}
+		
+		//When the page is loaded, if there's a hash like "#1, #2, etc" in the URL, switch to that tab.
+		//This handles restoring the previously-displayed tab after a page refresh.
+		jQuery(document).ready(function() 
+		{
+    		if(window.location.hash)
+    		{
+    		    var num = parseInt(window.location.hash.substr(1));
+    		    if( !isNaN(num) )
+    		      jfb_swap_tabs(num);
+    		}
+        });
 	</script>
 	        
     <div>     
-         <ul class="jfb-admin_tabs">
-         	<li id="<?php echo $tab1Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==1?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab1Id?>');">Facebook Setup</a></li>
-         	<li id="<?php echo $tab2Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==2?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab2Id?>')";>Basic Options</a></li>
-         	<li id="<?php echo $tab3Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==3?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab3Id?>');">Premium Options</a></li>
-         	<li id="<?php echo $tab4Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==4?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab4Id?>');">Uninstall</a></li>
-         	<li id="<?php echo $tab5Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==5?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab5Id?>');">Support Info</a></li>
-         </ul>
+         <ul class="jfb-admin_tabs"><?php
+             for($i=0; $i < count($tabIds); $i++)
+             {
+                 ?><li id="<?php echo $tabIds[$i]?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==$i?"jfb-admin_tab_selected":"")?>"><a href="#<?php echo $i;?>" onclick="jfb_swap_tabs('<?php echo $i?>');"><?php echo $tabNames[$i];?></a></li><?php
+             }
+       ?></ul>
      </div>
      
     <div class="jfb-admin_wrapper">
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab1Id?>" style="display:<?php echo ($shownTab==1?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[0]?>" style="display:<?php echo ($shownTab==0?"block":"none")?>">
         	<h3>Setup Instructions</h3>
             To allow your users to login with their Facebook accounts, you must first setup a Facebook Application for your website:<br /><br />
             <ol>
@@ -259,7 +278,7 @@ function jfb_admin_page()
             </form>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab2Id?>" style="display:<?php echo ($shownTab==2?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[1]?>" style="display:<?php echo ($shownTab==1?"block":"none")?>">
             <?php
             if(!get_option($opt_jfb_valid))
                 echo "<div class=\"jfb-admin_warning\"><i><b>You must enter a valid APP ID and Secret under the \"Facebook Setup\" tab before this plugin will function.</b></i></div>";    
@@ -297,7 +316,7 @@ function jfb_admin_page()
             </form>
     	</div><!-- End Tab -->
     
-    	<div class="<?php echo $allTabsClass ?>" id="<?php echo $tab3Id?>" style="display:<?php echo ($shownTab==3?"block":"none")?>">
+    	<div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[2]?>" style="display:<?php echo ($shownTab==2?"block":"none")?>">
             <?php
             if(!get_option($opt_jfb_valid))
                 echo "<div class=\"jfb-admin_warning\"><i><b>You must enter a valid APP ID and Secret under the \"Facebook Setup\" tab before this plugin will function.</b></i></div>";    
@@ -308,7 +327,7 @@ function jfb_admin_page()
             ?>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab4Id?>" style="display:<?php echo ($shownTab==4?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[3]?>" style="display:<?php echo ($shownTab==3?"block":"none")?>">
             <h3>Delete All Plugin Options</h3>
             The following button will <i>permanently</i> delete all of this plugin's options from your Wordpress database, as if it had never been installed.  Use with care!
             <form name="formDebugOptions" method="post" action="">
@@ -317,13 +336,13 @@ function jfb_admin_page()
             </form>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab5Id?>" style="display:<?php echo ($shownTab==5?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[4]?>" style="display:<?php echo ($shownTab==4?"block":"none")?>">
             <h3>Support Information</h3>
             <div style="width:600px;">
             Before submitting a support request, please make sure to carefully read all the documentation and FAQs on the <a href="<?php echo $jfb_homepage; ?>#faq" target="_support">plugin homepage</a>.  Every problem that's ever been reported has a solution posted there.<br /><br />                        
             If you do choose to submit a request, please do so via the <a href="<?php echo $jfb_homepage; ?>#feedback" target="_support">plugin homepage</a>, <i><b><u>not</u></b></i> on Wordpress.org (which I rarely check).  Also, please <i><u>specifically mention</u></i> that you've tried it with all other plugins disabled and the default theme (see <a href="<?php echo $jfb_homepage ?>#faq100" target="_faq100">FAQ100</a>) and include the following information about your Wordpress environment:<br /><br />            
             </div>
-            <div style="width:600px; padding:5px; margin:2px 0; background-color:#EEEDDA; border:1px solid #CCC;">
+            <div class="jfb-greybox">
                 Host URL: <b><?php echo $_SERVER["HTTP_HOST"] ?></b><br />
                 Site URL: <b><?php echo get_bloginfo('url') ?></b><br />
                 Wordpress URL: <b><?php echo get_bloginfo('wpurl') ?></b><br />

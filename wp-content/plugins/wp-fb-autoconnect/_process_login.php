@@ -62,7 +62,7 @@ $jfb_log .= "WP: Found redirect URL ($redirectTo)\n";
 
 //Get the Facebook access token
 if( !isset($_POST['access_token']) || !$_POST['access_token'] )
-    j_die("Error: Missing POST Data (access_token)");
+    j_die("Error: Missing POST Data (access_token).\n\nIf you're receiving this notice via e-mail as a site administrator, it's nearly always safe to ignore (these errors are due to spambots automatically hitting your site).  If you're seeing this as a real person attempting to login, please report it to the plugin author at " . $jfb_homepage.".");
 $access_token = $_POST['access_token'];
 $jfb_log .= "FB: Found access token (" . substr($access_token, 0, 30) . "...)\n";
 
