@@ -6,7 +6,6 @@
 function em_admin_ms_locations() {  
 	//TODO EM_Location is globalized, use it fully here
 	global $EM_Location;
-	EM_Object::ms_global_switch();
 	//Take actions
 	if( !empty($_REQUEST['action']) && ($_REQUEST['action'] == "edit" || $_REQUEST['action'] == "location_save")) { 
 		em_admin_location();
@@ -14,7 +13,6 @@ function em_admin_ms_locations() {
 		// no action, just a locations list
 		em_admin_locations();
   	}
-	EM_Object::ms_global_switch_back();
 }  
 
 function em_admin_locations($message='', $fill_fields = false) {
@@ -33,7 +31,7 @@ function em_admin_locations($message='', $fill_fields = false) {
 }
 
 function em_admin_location($message = "") {
-	global $EM_Location, $EM_Notices;
+	global $EM_Location;
 	if( empty($EM_Location) || !is_object($EM_Location) ){
 		$title = __('Add location', 'dbem');
 		$EM_Location = new EM_Location();

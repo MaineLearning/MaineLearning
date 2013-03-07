@@ -10,19 +10,19 @@ function em_get_event($id = false, $search_by = 'event_id') {
 	//check if it's not already global so we don't instantiate again
 	if( is_object($EM_Event) && get_class($EM_Event) == 'EM_Event' ){
 		if( is_object($id) && $EM_Event->post_id == $id->ID ){
-			return $EM_Event;
+			return apply_filters('em_get_event', $EM_Event);
 		}elseif( !is_object($id) ){
 			if( $search_by == 'event_id' && $EM_Event->event_id == $id ){
-				return $EM_Event;
+				return apply_filters('em_get_event', $EM_Event);
 			}elseif( $search_by == 'post_id' && $EM_Event->post_id == $id ){
-				return $EM_Event;
+				return apply_filters('em_get_event', $EM_Event);
 			}
 		}
 	}
 	if( is_object($id) && get_class($id) == 'EM_Event' ){
-		return $id;
+		return apply_filters('em_get_event', $id);
 	}else{
-		return new EM_Event($id,$search_by);
+		return apply_filters('em_get_event', new EM_Event($id,$search_by));
 	}
 }
 /**
@@ -346,8 +346,8 @@ class EM_Event extends EM_Object{
 		//anonymous submissions and guest basic info
 		if( !is_user_logged_in() && get_option('dbem_events_anonymous_submissions') && empty($this->event_id) ){
 			$this->event_owner_anonymous = 1;
-			$this->event_owner_name = !empty($_POST['event_owner_name']) ? stripslashes($_POST['event_owner_name']):'';
-			$this->event_owner_email = !empty($_POST['event_owner_email']) ? $_POST['event_owner_email']:'';
+			$this->event_owner_name = !empty($_POST['event_owner_name']) ? wp_kses_data(stripslashes($_POST['event_owner_name'])):'';
+			$this->event_owner_email = !empty($_POST['event_owner_email']) ? wp_kses_data($_POST['event_owner_email']):'';
 		}
 		//get the rest and validate (optional)
 		$this->get_post_meta(false);
@@ -362,8 +362,8 @@ class EM_Event extends EM_Object{
 	 */
 	function get_post_meta($validate = true){
 		//Grab POST data	
-		$this->event_start_date = ( !empty($_POST['event_start_date']) ) ? $_POST['event_start_date'] : '';
-		$this->event_end_date = ( !empty($_POST['event_end_date']) ) ? $_POST['event_end_date'] : $this->event_start_date;
+		$this->event_start_date = ( !empty($_POST['event_start_date']) ) ? wp_kses_data($_POST['event_start_date']) : '';
+		$this->event_end_date = ( !empty($_POST['event_end_date']) ) ? wp_kses_data($_POST['event_end_date']) : $this->event_start_date;
 		//check if this is recurring or not
 		if( !empty($_POST['recurring']) ){
 			$this->recurrence = 1;
@@ -408,7 +408,7 @@ class EM_Event extends EM_Object{
 			$this->event_rsvp = 1;
 			//RSVP cuttoff TIME is set up above where start/end times are as well 
 			if( !$this->is_recurring() ){
-				$this->event_rsvp_date = ( isset($_POST['event_rsvp_date']) ) ? $_POST['event_rsvp_date'] : $this->event_start_date;
+				$this->event_rsvp_date = ( isset($_POST['event_rsvp_date']) ) ? wp_kses_data($_POST['event_rsvp_date']) : $this->event_start_date;
 				if( empty($this->event_rsvp_date) ){ $this->event_rsvp_time = '00:00:00'; }
 			}
 			$this->event_spaces = ( isset($_POST['event_spaces']) ) ? absint($_POST['event_spaces']):0;
@@ -451,10 +451,10 @@ class EM_Event extends EM_Object{
 			if( !empty($_POST['recurrence_bydays']) && $this->recurrence_freq == 'weekly' && self::array_is_numeric($_POST['recurrence_bydays']) ){
 				$this->recurrence_byday = implode( ",", $_POST['recurrence_bydays'] );
 			}elseif( !empty($_POST['recurrence_byday']) && $this->recurrence_freq == 'monthly' ){
-				$this->recurrence_byday = $_POST['recurrence_byday'];
+				$this->recurrence_byday = wp_kses_data($_POST['recurrence_byday']);
 			}
 			$this->recurrence_interval = ( !empty($_POST['recurrence_interval']) && is_numeric($_POST['recurrence_interval']) ) ? $_POST['recurrence_interval']:1;
-			$this->recurrence_byweekno = ( !empty($_POST['recurrence_byweekno']) ) ? $_POST['recurrence_byweekno']:'';
+			$this->recurrence_byweekno = ( !empty($_POST['recurrence_byweekno']) ) ? wp_kses_data($_POST['recurrence_byweekno']):'';
 			$this->recurrence_days = ( !empty($_POST['recurrence_days']) && is_numeric($_POST['recurrence_days']) ) ? (int) $_POST['recurrence_days']:0;
 		}
 		//categories in MS GLobal
@@ -617,7 +617,6 @@ class EM_Event extends EM_Object{
 			do_action('em_event_save_meta_pre', $this);
 			//first save location
 			if( empty($this->location_id) && !($this->location_id === 0 && !get_option('dbem_require_location',true)) ){
-				if( get_site_option('dbem_ms_mainblog_locations') ){ $this->ms_global_switch(); }
 				if( !$this->get_location()->save() ){ //soft fail
 					global $EM_Notices;
 					if( !empty($this->get_location()->location_id) ){
@@ -627,7 +626,6 @@ class EM_Event extends EM_Object{
 						$EM_Notices->add_error( __('There were some errors saving your location.'), true);
 					}
 				}
-				if( get_site_option('dbem_ms_mainblog_locations') ){ $this->ms_global_switch_back(); }
 				if( !empty($this->location->location_id) ){ //only case we don't use get_location(), since it will fail as location has an id, whereas location_id isn't set in this object
 					$this->location_id = $this->location->location_id;
 				}
@@ -1085,11 +1083,14 @@ class EM_Event extends EM_Object{
 		}
 	}
 	
-	function is_free(){
+	function is_free( $now = false ){
 		$free = true;
 		foreach($this->get_tickets() as $EM_Ticket){
+		    /* @var $EM_Ticket EM_Ticket */
 			if( $EM_Ticket->get_price() > 0 ){
-				$free = false;
+				if( !$now || $EM_Ticket->is_available() ){	
+				    $free = false;
+				}
 			}
 		}
 		return apply_filters('em_event_is_free',$free,$this);
@@ -1196,6 +1197,12 @@ class EM_Event extends EM_Object{
 					}elseif ($condition == 'fully_booked'){
 						//is it an all day event
 						$show_condition = $this->event_rsvp && $this->get_bookings()->get_available_spaces() <= 0;
+					}elseif ($condition == 'is_free' || $condition == 'is_free_now'){
+						//is it a free day event, if _now then free right now
+						$show_condition = !$this->event_rsvp || $this->is_free( $condition == 'is_free_now' );
+					}elseif ($condition == 'not_free' || $condition == 'not_free_now'){
+						//is it a paid event, if _now then paid right now
+						$show_condition = $this->event_rsvp && !$this->is_free( $condition == 'not_free_now' );
 					}elseif ($condition == 'is_long'){
 						//is it an all day event
 						$show_condition = $this->event_start_date != $this->event_end_date;
@@ -1379,26 +1386,7 @@ class EM_Event extends EM_Object{
 					if( get_option('dbem_rsvp_enabled')){
 						ob_start();
 						$template = em_locate_template('placeholders/bookingform.php', true, array('EM_Event'=>$this));
-						if( !defined('EM_BOOKING_JS_LOADED') ){
-							//this kicks off the Javascript required by booking forms. This is fired once for all booking forms on a page load and appears at the bottom of the page
-							//your theme must call the wp_footer() function for this to work (as required by many other plugins too) 
-							function em_booking_js_footer(){
-								?>		
-								<script type="text/javascript">
-									jQuery(document).ready( function($){	
-										<?php
-											//we call the segmented JS files and include them here
-											include(WP_PLUGIN_DIR.'/events-manager/includes/js/bookingsform.js'); 
-											do_action('em_gateway_js'); 
-										?>							
-									});
-								</script>
-								<?php
-							}
-							add_action('wp_footer','em_booking_js_footer');
-							add_action('admin_footer','em_booking_js_footer');
-							define('EM_BOOKING_JS_LOADED',true);
-						}
+						EM_Bookings::enqueue_js();
 						$replace = ob_get_clean();
 					}
 					break;
@@ -2172,6 +2160,7 @@ add_filter('dbem_notes', 'convert_smilies');
 add_filter('dbem_notes', 'convert_chars');
 add_filter('dbem_notes', 'wpautop');
 add_filter('dbem_notes', 'prepend_attachment');
+add_filter('dbem_notes', 'do_shortcode');
 // RSS content filter
 add_filter('dbem_notes_rss', 'convert_chars', 8);
 add_filter('dbem_general_rss', 'esc_html', 8);

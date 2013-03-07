@@ -180,7 +180,7 @@ class EM_Events extends EM_Object implements Iterator {
 			$events_count = count($events);
 		}else{
 			//Firstly, let's check for a limit/offset here, because if there is we need to remove it and manually do this
-			$args = apply_filters('em_events_output_args', self::get_default_search($args) );
+			$args = apply_filters('em_events_output_args', $args );
 			$limit = ( !empty($args['limit']) && is_numeric($args['limit']) ) ? $args['limit']:false;
 			$offset = ( !empty($args['offset']) && is_numeric($args['offset']) ) ? $args['offset']:0;
 			$page = ( !empty($args['page']) && is_numeric($args['page']) ) ? $args['page']:$page;

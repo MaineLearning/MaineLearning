@@ -573,6 +573,11 @@ class EM_Bookings_Table{
 				$cols[] = apply_filters('em_bookings_table_rows_col', $val, $col, $EM_Booking, $this, $csv);
 			}
 		}
+		//clean up the cols to prevent nasty html or xss
+		global $allowedposttags;
+		foreach($cols as $key => $col){
+			$cols[$key] = wp_kses($col, $allowedposttags);
+		}
 		return $cols;
 	}
 	

@@ -1,6 +1,6 @@
 var em_booking_doing_ajax = false;
 $('#em-booking-form').addClass('em-booking-form'); //backward compatability
-$('.em-booking-form').submit( function(e){
+$(document).on('submit', '.em-booking-form', function(e){
 	e.preventDefault();
 	var em_booking_form = $(this);
 	$.ajax({
