@@ -5,13 +5,13 @@ Plugin URI: http://premium.wpmudev.org/project/anti-splog
 Description: The ultimate plugin and service to stop and kill splogs in WordPress Multisite and BuddyPress
 Author: Aaron Edwards (Incsub)
 Author URI: http://premium.wpmudev.org
-Version: 2.0.1
+Version: 2.1
 Network: true
-WDP ID: 120
+
 */
 
 /*
-Copyright 2010-2011 Incsub (http://incsub.com)
+Copyright 2010-2013 Incsub (http://incsub.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 //------------------------------------------------------------------------//
 
-$ust_current_version = '2.0.1';
+$ust_current_version = '2.1';
 $ust_api_url = 'http://premium.wpmudev.org/ust-api.php';
 
 //------------------------------------------------------------------------//
@@ -239,6 +239,7 @@ function ust_global_install() {
 	  $ust_settings['certainty'] = 80;
     $ust_settings['post_certainty'] = 90;
 	  $ust_settings['num_signups'] = '';
+		$ust_settings['ip_blocking'] = 1;
 	  $ust_settings['strip'] = 0;
 	  $ust_settings['paged_blogs'] = 15;
 	  $ust_settings['paged_posts'] = 3;
@@ -752,7 +753,7 @@ function ust_check_post($tmp_post_ID) {
 	$tags = wp_get_object_terms($tmp_post_ID, 'post_tag');
 	if ( !empty( $tags ) ) {
 		if ( !is_wp_error( $tags ) ) {
-			foreach ( $product_terms as $term ) {
+			foreach ( $tags as $term ) {
 				$api_data['post_content'] .= ' ' . $term->name; 
 			}
 		}
@@ -1197,6 +1198,15 @@ function ust_pre_signup_check($content) {
     if ($ips > $ust_settings['num_signups'])
       $content['errors']->add('blogname', __("A limited number of signups can be done in a short period of time from your Internet connection. If you are not a spammer please try again in 24 hours.", 'ust'));
   }
+	
+	//check signup history for this IP
+	if ($ust_settings['ip_blocking']) {
+		$ip_splogs = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} l LEFT JOIN {$wpdb->blogs} b ON l.blog_id = b.blog_id WHERE l.IP = '{$_SERVER['REMOTE_ADDR']}' AND b.spam = 1");
+		$ip_total = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} WHERE IP = '{$_SERVER['REMOTE_ADDR']}'");
+		$splog_percent = ($ip_splogs / $ip_total) * 100;
+		if ($splog_percent >= $ust_settings['ip_blocking'])
+			$content['errors']->add('blogname', __("Our automated systems think you might be a spambot. If you are not a spammer please contact us.", 'ust'));
+	}
 
 	//check patterns
 	$ust_patterns = get_site_option("ust_patterns");
@@ -1247,6 +1257,15 @@ function ust_pre_signup_check_bp() {
     if ($ips > $ust_settings['num_signups'])
       $bp->signup->errors['multicheck'] = __("A limited number of signups can be done in a short period of time from your Internet connection. If you are not a spammer please try again in 24 hours.", 'ust');
   }
+	
+	//check signup history for this IP
+	if ($ust_settings['ip_blocking']) {
+		$ip_splogs = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} l LEFT JOIN {$wpdb->blogs} b ON l.blog_id = b.blog_id WHERE l.IP = '{$_SERVER['REMOTE_ADDR']}' AND b.spam = 1");
+		$ip_total = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} WHERE IP = '{$_SERVER['REMOTE_ADDR']}'");
+		$splog_percent = ($ip_splogs / $ip_total) * 100;
+		if ($splog_percent >= $ust_settings['ip_blocking'])
+			$bp->signup->errors['multicheck'] = __("Our automated systems think you might be a spambot. If you are not a spammer please contact us.", 'ust');
+	}
 	
 	//only check for blog signups
 	if ( !(isset($_POST['signup_with_blog']) && $_POST['signup_with_blog']) )
