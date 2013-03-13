@@ -1,0 +1,56 @@
+-------------------------------------------------------------------------------------------------------------------
+Version 1.2
+	- Fixed Views filter appears to have a problem with Asian characters - allow asian characters in values
+	- Fixed Change the order of View results - allow adding aditional manual sorting
+	- Fixed The default option not working for Select type fields
+	- Fixed Filter controls: There is no way to set Default label for taxonomies, only for custom fields
+	- Fixed Fix generation of table header layout Meta HTML
+	- Fixed Debug to console is not working in WP 3.5
+	- Fixed Some items in the V popup are centered and some not
+	- Fixed Passing arguments using views short code attribute - fix for example text
+	- Fixed Both in frontend and backend: Calendar always shows in english, even with another default language - fixed frontend
+	- Fixed Open_basedir restriction in effect when exporting
+	- Fixed View not get correct translated CPT slug in LOOP
+	- Fixed Archive View settings still in effect after changing View to Normal
+	- Fixed Search filter mixes specific and visitor modes
+	- Fixed Archive views not working when no posts found
+	- New Syntax highlighter in Views Meta HTML and View Templates editor
+	- New Add a media section to the View edit
+	- New Add CSS editor to Views and View templates
+	- New Add JS editor to Views and View templates
+	- New Make meta HTML, CSS and JS boxes open-state persistent
+	- New Export CSS, JS and images
+	- New Add View template name to body classes
+	- New Check if we receive a complete form when editing Views
+	- New Raw output for [wpv-post-featured-image]
+	- New Shortcode for get_currentuserinfo()
+	- New Add [wpv-current-user] to wpv-if processing
+	- New Shortcode for bloginfo()
+	- New Shortcode for get_post_type_archive_link($post_type)
+	- New Add taxonomy shortcodes to shortcodes-in-shortcodes
+
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.1.4.1
+	- Fixed taxonomy query using name instead of slug
+    
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.1.4
+    - Fixed WP 3.5 Filter forms - taxonomy filter doesn't work when there is a space in taxonomy term name
+    - Fixed Missing links in Settings page
+    - Fixed Paginating looses filter control values
+    - Fixed Display usage tips for filter by author
+    - Fixed Add colons before inputs
+    - Fixed Check/handle spaces in URL parameters
+    - Fixed Validate that the URL argument name or shortcode attribute name is specified and show an error message otherwise
+    - Fixed When inserting author filter via the popup, it's saved incorrectly
+    - Fixed New Pages Overridden by Post View Template
+    - Fixed Pagination looses frontend filter values
+    - Add filtering by author
+    - Fixed Don't use mb_ereg
+    - Fixed HTML validation errors with View filter
+    - Fixed Javascript error when inserting shortcodes
+    - Add Wrap View loop in [wpv-posts-found] shortcode
+    - Fixed Conditional with empty not working
+
