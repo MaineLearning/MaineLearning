@@ -36,8 +36,7 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 				else {
 					$user_feeds = bebop_tables::get_user_feeds( $user_meta->user_id , $this_extension['name'] );
 				}
-				
-				foreach ($user_feeds as $user_feed ) {
+				foreach ( $user_feeds as $user_feed ) {
 					$errors = null;
 					$items 	= null;
 					
@@ -50,6 +49,7 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 					}
 					
 					$import_username = str_replace( ' ', '_', $username );
+					
 					//Check the user has not gone past their import limit for the day.
 					if ( ! bebop_filters::import_limit_reached( $this_extension['name'], $user_meta->user_id, $import_username ) ) {
 						
@@ -72,6 +72,7 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 						$data_request = new bebop_data();
 						
 						$query = $this_extension['data_feed'] . $import_username . '/' . 'videos.php';
+						
 						$data = $data_request->execute_request( $query );
 						$data = unserialize( $data );
 						
@@ -99,8 +100,7 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 						
 						foreach ( $items as $item ) {
 							//vimeo returns the item as an array, so cast it to an object for simplicity.
-							$item = (object)$item; //
-							
+							$item = (object)$item;
 							if ( ! bebop_filters::import_limit_reached( $this_extension['name'], $user_meta->user_id, $import_username ) ) {
 								
 								//Edit the following variables to point to where the relevant content is being stored:
@@ -110,15 +110,11 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 								$item_published 	= gmdate( 'Y-m-d H:i:s', strtotime( $item->upload_date ) );
 								//Stop editing - you should be all done.
 								
-								
 								//generate an $item_id
 								$item_id = bebop_generate_secondary_id( $user_meta->user_id, $id, $item_published );
 								
-								//check if the secondary_id already exists
-								$secondary = bebop_tables::fetch_individual_oer_data( $item_id );
 								//if the id is not found, import the content.
-								if ( empty( $secondary->secondary_item_id ) ) {
-									
+								if ( ! bebop_tables::check_existing_content_id( $user_meta->user_id, $this_extension['name'], $item_id ) ) {
 									//Only for content which has a description.
 									if( ! empty( $description) ) {
 										//This manually puts the link and description together with a line break, which is needed for oembed.
@@ -145,10 +141,12 @@ function bebop_vimeo_import( $extension, $user_metas = null ) {
 										$itemCounter++;
 									}
 								}//End if ( ! empty( $secondary->secondary_item_id ) ) {
+								unset($item);
 							}
 						}
 					}
 				}
+				unset($user_meta);
 			}
 		}
 	}

@@ -123,17 +123,17 @@ way to fit your requirements.
     cursor: pointer;
 }
 
-.editor_addon_dropdown .scroll {
+/*.editor_addon_dropdown .scroll {
     width: 100%;
     height: auto;
     overflow: auto;
     overflow-x: hidden;
     -ms-overflow-x: hidden;
-}
+}*/
 
-.editor_addon_dropdown .scroll .wrapper {
+/*.editor_addon_dropdown .scroll .wrapper {
     position: relative;
-}
+}*/
 
 .editor_addon_dropdown .group-title {
     font-weight: bold;
@@ -146,8 +146,10 @@ way to fit your requirements.
 
 .editor_addon_dropdown .group {
     margin-bottom: 20px;
+    margin-left:0;
     display:block;
     width:100%;
+    text-align:left;
 }
 
 .editor_addon_dropdown .group .group .group-title {

@@ -157,7 +157,20 @@ else
 				</select>
 				<br /><em><?php _e('Splog bots and users often register a large number of blogs in a short amount of time. This setting will limit the number of blog signups per 24 hours per IP, which can drastically reduce the splogs you have to deal with if they get past other filters (human sploggers). Remember that an IP is not necessarily tied to a single user. For example employees behind a company firewall may share a single IP.', 'ust'); ?></em></td>
 				</tr>
-
+				
+				<tr valign="top">
+				<th scope="row"><?php _e('Blacklist Splogger IPs', 'ust') ?></th>
+				<td><select name="ust[ip_blocking]">
+				<?php
+					echo '<option value="0"' . ($ust_settings['ip_blocking']=='' ? ' selected="selected"' : '') . '>' . __('Never Block', 'ust') . '</option>' . "\n";
+					for ( $counter = 1; $counter <= 250; $counter += 1 ) {
+						echo '<option value="' . $counter . '"' . ($ust_settings['ip_blocking']==$counter ? ' selected="selected"' : '') . '>' . $counter . '</option>' . "\n";
+					}
+				?>
+				</select>
+				<br /><em><?php _e('This setting will block signups from IPs that are associated with blog signups you have marked as spam. A strict setting of "1" is usually ok, unless you want to weaken the check in case of false spam marking. Remember that an IP is not necessarily tied to a single user. For example employees behind a company firewall may share a single IP.', 'ust'); ?></em></td>
+				</tr>
+				
 				<tr valign="top">
 				<th scope="row"><?php _e('Rename wp-signup.php', 'ust') ?>
 				<br /><em><small><?php _e('(Not Buddypress compatible)', 'ust') ?></small></em>

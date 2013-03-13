@@ -23,12 +23,21 @@ function wpv_header_shortcode($atts, $value){
     //'wpv_column_sort_id'
     $order_class = 'wpv-header-no-sort';
     
-    if ($view_settings['view-query-mode'] == 'normal' && $atts['name'] != 'post-body') {
+    if ($view_settings['view-query-mode'] == 'normal' && $atts['name'] != 'post-body' && $atts['name'] != 'wpv-post-taxonomy') {
+	
+	$head_name = $atts['name'];
+	if ( strpos( $head_name, 'types-field') === 0 ) {
+		$field_name = 'wpcf-' . strtolower( substr( $head_name, 12 ) );
+		if ( !function_exists( '_wpv_is_field_of_type' ) ) include_once( WPV_PATH_EMBEDDED . '/inc/wpv-filter-embedded.php');
+		if ( _wpv_is_field_of_type( $field_name, 'checkboxes' ) || _wpv_is_field_of_type( $field_name, 'skype' ) ) {
+			return $value;
+		}
+	}
 
-        if (isset($_GET['wpv_column_sort_id']) && $_GET['wpv_column_sort_id'] == $atts['name']) {
+        if (isset($_GET['wpv_column_sort_id']) && esc_attr($_GET['wpv_column_sort_id']) == $atts['name']) {
             
             if (isset($_GET['wpv_column_sort_dir'])) {
-                if ($_GET['wpv_column_sort_dir'] == 'asc') {
+                if (esc_attr($_GET['wpv_column_sort_dir']) == 'asc') {
                     $order_class = 'wpv-header-asc';
                 } else {
                     $order_class = 'wpv-header-desc';

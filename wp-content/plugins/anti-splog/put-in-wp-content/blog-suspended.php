@@ -9,7 +9,7 @@ Version: 1.1
 */
 
 //return header to remove from search engines
-header('HTTP/1.1 410 Gone');
+status_header(410);
 
 //don't display spam form if archived
 if ($current_blog->archived == '1')

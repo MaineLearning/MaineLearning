@@ -557,8 +557,9 @@ if (!class_exists('Enlimbo_Forms_Wpcf')) {
                     . $element['#id'] . '" name="'
                     . $element['#name'] . '" value="';
             // Specific: if value is empty force 1 to be rendered
+            // Juan: removed this 1 forced value since it broke the default value in checkboxes filter controls
             $element['_render']['element'] .=
-                    !empty($element['#value']) ? htmlspecialchars($element['#value']) : 1;
+                    !empty($element['#value']) ? htmlspecialchars($element['#value']) : '';
             $element['_render']['element'] .= '"' . $element['_attributes_string'];
             $element['_render']['element'] .= ((!$this->isSubmitted()
                     && !empty($element['#default_value']))

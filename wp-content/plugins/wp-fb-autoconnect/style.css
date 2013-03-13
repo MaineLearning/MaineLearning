@@ -58,3 +58,8 @@
 	float:none;
 	margin:0;
 }
+
+.wpfbac-button:hover{
+    text-decoration:none;
+    border-bottom:0 !important;
+}

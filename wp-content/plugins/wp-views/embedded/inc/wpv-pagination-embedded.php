@@ -68,6 +68,12 @@ function wpv_pager_defaults_save($view_settings) {
  * Parameters:
  * This has no parameters.
  *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 add_shortcode('wpv-pagination', 'wpv_pagination_shortcode');
@@ -97,6 +103,12 @@ function wpv_pagination_shortcode($atts, $value) {
  * Parameters:
  * This has no parameters.
  *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 add_shortcode('wpv-pager-num-page', 'wpv_pager_num_page_shortcode');
 
@@ -114,10 +126,16 @@ function wpv_pager_num_page_shortcode($atts) {
  * Views-Shortcode: wpv-pager-prev-page
  *
  * Description: Display a "Previous" link to move to the previous page.
- * eg. [wpv-pager-prev-page]Previous[/wpv-pager-prev-page]
  *
  * Parameters:
  * This has no parameters.
+ *
+ * Example usage:
+ * [wpv-pager-prev-page]Previous[/wpv-pager-prev-page]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 add_shortcode('wpv-pager-prev-page', 'wpv_pager_prev_page_shortcode');
@@ -185,10 +203,16 @@ function wpv_pager_prev_page_shortcode($atts, $value) {
  * Views-Shortcode: wpv-pager-next-page
  *
  * Description: Display a "Next" link to move to the next page.
- * eg. [wpv-pager-next-page]Next[/wpv-pager-next-page]
  *
  * Parameters:
  * This has no parameters.
+ *
+ * Example usage:
+ * [wpv-pager-next-page]Next[/wpv-pager-next-page]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 add_shortcode('wpv-pager-next-page', 'wpv_pager_next_page_shortcode');
@@ -261,7 +285,13 @@ function wpv_pager_next_page_shortcode($atts, $value) {
  * Parameters:
  * 'style' => leave empty to display a number.
  * 'style' => 'drop_down' to display a selector to select another page.
- * 'stile' => 'link' to display a series of links to each page
+ * 'style' => 'link' to display a series of links to each page
+ *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 add_shortcode('wpv-pager-current-page', 'wpv_pager_current_page_shortcode');
@@ -435,8 +465,8 @@ function wpv_pagination_rollover_js() {
 add_filter('icl_current_language', 'wpv_ajax_pagination_lang');
 
 function wpv_ajax_pagination_lang($lang) {
-    if (isset($_POST['action']) && $_POST['action'] == 'wpv_get_page' && isset($_POST['lang'])) {
-        $lang = $_POST['lang'];
+    if (isset($_POST['action']) && esc_attr($_POST['action']) == 'wpv_get_page' && isset($_POST['lang'])) {
+        $lang = esc_attr($_POST['lang']);
     }
 
     return $lang;
@@ -463,19 +493,19 @@ function wpv_ajax_get_page($post_data) {
     }
 
 
-    $_GET['wpv_paged'] = $post_data['page'];
-    $_GET['wpv_view_count'] = $post_data['view_number'];
-    if (isset($post_data['wpv_column_sort_id']) && $post_data['wpv_column_sort_id'] != 'undefined') {
-        $_GET['wpv_column_sort_id'] = $post_data['wpv_column_sort_id'];
+    $_GET['wpv_paged'] = esc_attr($post_data['page']);
+    $_GET['wpv_view_count'] = esc_attr($post_data['view_number']);
+    if (isset($post_data['wpv_column_sort_id']) && esc_attr($post_data['wpv_column_sort_id']) != 'undefined') {
+        $_GET['wpv_column_sort_id'] = esc_attr($post_data['wpv_column_sort_id']);
     }
-    if (isset($post_data['wpv_column_sort_dir']) && $post_data['wpv_column_sort_dir'] != 'undefined') {
-        $_GET['wpv_column_sort_dir'] = $post_data['wpv_column_sort_dir'];
+    if (isset($post_data['wpv_column_sort_dir']) && esc_attr($post_data['wpv_column_sort_dir']) != 'undefined') {
+        $_GET['wpv_column_sort_dir'] = esc_attr($post_data['wpv_column_sort_dir']);
     }
     
     if (isset($post_data['get_params'])) {
         foreach($post_data['get_params'] as $key => $param) {
             if (!isset($_GET[$key])) {
-                $_GET[$key] = $param;
+                $_GET[$key] = esc_attr($param);
             }
         }
     }
@@ -485,23 +515,23 @@ function wpv_ajax_get_page($post_data) {
     global $post, $authordata, $id;
 
     if (isset($post_data['post_id'])) {
-        $post_id = $post_data['post_id'];
+        $post_id = esc_attr($post_data['post_id']);
         $post = get_post($post_id);
         $authordata = new WP_User($post->post_author);
         $id = $post->ID;
     }
 
-    if ($post_data['wpv_view_widget_id'] == 0) {
+    if (esc_attr($post_data['wpv_view_widget_id']) == 0) {
         // set the view count so we return the right view number after rendering.
         $view_id = $WP_Views->get_view_id($view_data);
-        $WP_Views->set_view_count(intval($post_data['view_number']), $view_id);
+        $WP_Views->set_view_count(intval(esc_attr($post_data['view_number'])), $view_id);
 
         echo $WP_Views->short_tag_wpv_view($view_data);
         //echo wpv_do_shortcode($post->post_content);
     } else {
         
         // set the view count so we return the right view number after rendering.
-        $WP_Views->set_view_count(intval($post_data['view_number']), $post_data['wpv_view_widget_id']);
+        $WP_Views->set_view_count(intval(esc_attr($post_data['view_number'])), esc_attr($post_data['wpv_view_widget_id']));
         
         $widget = new WPV_Widget();
         
@@ -511,7 +541,7 @@ function wpv_ajax_get_page($post_data) {
                      'after_widget' => '');
         
         $widget->widget($args, array('title' => '',
-                                     'view' => $post_data['wpv_view_widget_id']));
+                                     'view' => esc_attr($post_data['wpv_view_widget_id'])));
         
         echo $WP_Views->get_max_pages();
     }
@@ -527,7 +557,7 @@ add_action('template_redirect', 'wpv_pagination_router');
 
 function wpv_pagination_router() {
     global $wp_query;
-    $bits =explode("/",$_SERVER['REQUEST_URI']);
+    $bits =explode("/",esc_attr($_SERVER['REQUEST_URI']));
     for ($i = 0; $i < count($bits) - 1; $i++) {
     
         if ($bits[$i] == 'wpv-ajax-pagination') {

@@ -37,6 +37,8 @@ class WP_Views{
 		$this->variables = array();
 
 		$this->rendering_views_form_in_progress = false;
+		
+	$this->view_used_ids = array();
         
         add_filter('icl_cf_translate_state', array($this, 'custom_field_translate_state'), 10, 2);
 
@@ -71,6 +73,8 @@ class WP_Views{
 		add_action('wp_ajax_wpv_format_date', array($this, 'wpv_format_date'));
 		add_action('wp_ajax_nopriv_wpv_format_date', array($this, 'wpv_format_date'));
         add_action('wp_ajax_wpv_save_theme_debug_settings', array($this, 'wpv_save_theme_debug_settings'));
+        
+        add_action('wp_ajax_wpv_view_media_manager', array($this, 'wp_ajax_wpv_view_media_manager'));
 		
         if(is_admin()){
 
@@ -111,11 +115,24 @@ class WP_Views{
             wp_enqueue_style( 'views-pagination-style', WPV_URL_EMBEDDED . '/res/css/wpv-pagination.css', array(), WPV_VERSION);
             
 			wp_enqueue_script( 'jquery-ui-datepicker' , WPV_URL_EMBEDDED . '/res/js/jquery.ui.datepicker.min.js', array('jquery-ui-core', 'jquery'), WPV_VERSION);
+			
+			$lang = get_locale();
+			$lang = str_replace('_', '-', $lang);
+			
+			if ( file_exists( WPV_PATH_EMBEDDED . '/res/js/i18n/jquery.ui.datepicker-' . $lang . '.js' ) ) {
+				wp_enqueue_script( 'jquery-ui-datepicker-local' , WPV_URL_EMBEDDED . '/res/js/i18n/jquery.ui.datepicker-' . $lang . '.js', array('jquery-ui-core', 'jquery', 'jquery-ui-datepicker'), WPV_VERSION);
+			} else {
+				$lang = substr($lang, 0, 2);
+				if ( file_exists( WPV_PATH_EMBEDDED . '/res/js/i18n/jquery.ui.datepicker-' . $lang . '.js' ) ) {
+					wp_enqueue_script( 'jquery-ui-datepicker-local' , WPV_URL_EMBEDDED . '/res/js/i18n/jquery.ui.datepicker-' . $lang . '.js', array('jquery-ui-core', 'jquery', 'jquery-ui-datepicker'), WPV_VERSION);
+				}
+			}
 			//wp_enqueue_style( 'date-picker-style' , WPV_URL_EMBEDDED . '/res/css/datepicker.css', array(), WPV_VERSION);
 			wp_enqueue_script( 'wpv-date-front-end-script' , WPV_URL_EMBEDDED . '/res/js/wpv-date-front-end-control.js', array('jquery'), WPV_VERSION);
 
             add_action('wp_head', 'wpv_add_front_end_js');
-			
+	    add_action('wp_footer', array($this, 'wpv_meta_html_extra'));
+	    
         }        
         
          /*shorttags*/
@@ -394,6 +411,8 @@ class WP_Views{
         if(empty($id)){
             return sprintf('<!- %s ->', __('View not found', 'wpv-views'));
         }
+        
+        $this->view_used_ids[] = $id;
 
 		array_push($this->view_shortcode_attributes, $atts);
 		
@@ -438,6 +457,8 @@ class WP_Views{
         if(empty($id)){
             return sprintf('<!- %s ->', __('View not found', 'wpv-views'));
         }
+        
+        $this->view_used_ids[] = $id;
 		
 		$this->rendering_views_form_in_progress = true;
 		
@@ -651,6 +672,7 @@ class WP_Views{
         $this->view_count[$this->view_depth]++;
         
         $view = get_post($view_id);
+        $this->view_used_ids[] = $view_id;
         
         $out = '';
         
@@ -1739,10 +1761,77 @@ jQuery(document).ready(function(){
 		$date = $_POST['date'];
 		$date = mktime(0, 0, 0, substr($date, 2, 2), substr($date, 0, 2), substr($date, 4, 4));
 		
-		echo json_encode(array('display' => date($date_format, intval($date)),
+		echo json_encode(array('display' => date_i18n($date_format, intval($date)),
 							   'timestamp' => $date));
 		die();
 		
+		
+	}
+	
+	function wpv_meta_html_extra() {
+		$view_ids = array_unique( $this->view_used_ids );
+		$jsout = '';
+		$cssout = '';
+		foreach ( $view_ids as $view_id ) {
+			$meta = get_post_custom( $view_id );
+			if ( isset( $meta['_wpv_settings'] ) ) $meta = maybe_unserialize($meta['_wpv_settings'][0]);
+			if ( isset( $meta['filter_meta_html_js'] ) ) {
+				$jsout .= $meta["filter_meta_html_js"];
+			}
+			if ( isset( $meta['filter_meta_html_css'] ) ) {
+				$cssout .= $meta["filter_meta_html_css"];
+			}
+			if ( isset( $meta['layout_meta_html_js'] ) ) {
+				$jsout .= $meta["layout_meta_html_js"];
+			}
+			if ( isset( $meta['layout_meta_html_css'] ) ) {
+				$cssout .= $meta["layout_meta_html_css"];
+			}
+		}
+		if ( '' != $jsout ) {
+			echo "\n<script type=\"text/javascript\">\n$jsout\n</script>\n";
+		}
+		if ( '' != $cssout ) {
+			echo "\n<style type=\"text/css\" media=\"screen\">\n$cssout\n</style>\n";
+		}
+	}
+	
+	function wp_ajax_wpv_view_media_manager() {
+
+		if (wp_verify_nonce($_POST['_wpnonce'], 'wpv_media_manager_callback')) {
+
+			global $wpdb;
+			
+			$view_id = $_POST['view_id'];
+			$table = '';
+		
+			$args = array(
+				'post_type' => 'attachment',
+				'numberposts' => null,
+				'post_status' => null,
+				'post_parent' => $view_id
+			);
+			$attachments = get_posts($args);
+			if ($attachments) {
+			$table = '<table class="wpv_table_attachments widefat"><thead><tr><th>' . __('Thumbnail', 'wpv-views') . '</th><th>' . __('URL', 'wpv-views') . '</th></thead>';
+				foreach ($attachments as $attachment) {
+					$guid = $attachment->guid;
+					$title = $attachment->post_title;
+					$type = get_post_mime_type($attachment->ID);
+					$icon = wp_mime_type_icon($type);
+					if ( $type == 'image/gif' || $type == 'image/jpeg' || $type == 'image/png' ) {
+						$thumb = '<img src="' .  $attachment->guid . '" alt="' . $attachment->post_title . '" width="60" height="60" />';
+					} else {
+						$thumb = '<img src="' . $icon . '" />';
+					}
+					$table .= "<tr><td>$thumb</td><td><a href='$guid'>$guid</a></td></tr>";
+				}
+			$table .= '</table>';
+			}
+			echo $table;
+		}
+		
+		die();
 		
 	}
 	

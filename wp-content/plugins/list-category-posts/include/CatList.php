@@ -16,11 +16,12 @@ class CatList{
    */
   public function __construct($atts) {
     $this->params = $atts;
-
     //Get the category posts:
     $this->get_lcp_category();
     $this->set_lcp_parameters();
   }
+
+
 
   /**
    * Order the parameters and query the DB for posts
@@ -40,41 +41,36 @@ class CatList{
     ));
 
     //Exclude
-    if(isset($this->params['excludeposts']) &&
-       $this->params['excludeposts'] != '0'){
+    if( $this->lcp_not_empty('excludeposts') ):
       $args['exclude'] = $this->params['excludeposts'];
       if (strpos($args['exclude'], 'this') !== FALSE) :
         $args['exclude'] = $args['exclude'] .
           ",". $this->lcp_get_current_post_id();
       endif;
-    }
+    endif;
 
     // Post type, status, parent params:
-    if(isset($this->params['post_type']) && $this->params['post_type'] != ''):
+    if($this->lcp_not_empty('post_type')):
       $args['post_type'] = $this->params['post_type'];
     endif;
 
-    if(isset($this->params['post_status']) && $this->params['post_status'] != ''):
+    if($this->lcp_not_empty('post_status')):
       $args['post_status'] = $this->params['post_status'];
     endif;
 
-    if(isset($this->params['post_parent']) &&
-      $this->params['post_parent'] != '0'):
+    if($this->lcp_not_empty('post_parent')):
       $args['post_parent'] = $this->params['post_parent'];
     endif;
 
-    if(isset($this->params['year']) &&
-      $this->params['year'] != ''):
+    if($this->lcp_not_empty('year')):
       $args['year'] = $this->params['year'];
     endif;
 
-    if(isset($this->params['monthnum']) &&
-      $this->params['monthnum'] != ''):
+    if($this->lcp_not_empty('monthnum')):
       $args['monthnum'] = $this->params['monthnum'];
     endif;
 
-    if(isset($this->params['search']) &&
-      $this->params['search'] != ''):
+    if($this->lcp_not_empty('search')):
       $args['s'] = $this->params['search'];
     endif;
 
@@ -83,7 +79,7 @@ class CatList{
      * Custom fields 'customfield_name' & 'customfield_value'
      * should both be defined
      */
-    if( !empty($this->params['customfield_value']) ):
+    if( $this->lcp_not_empty('customfield_value') ):
       $args['meta_key'] = $this->params['customfield_name'];
       $args['meta_value'] = $this->params['customfield_value'];
     endif;
@@ -93,18 +89,38 @@ class CatList{
       $args['post_status'] = array('publish','private');
     endif;
 
+    if ( $this->lcp_not_empty('exclude_tags') ):
+      $excluded_tags = explode(",", $this->params['exclude_tags']);
+      $tag_ids = array();
+      foreach ( $excluded_tags as $excluded):
+        $tag_ids[] = get_term_by('slug', $excluded, 'post_tag')->term_id;
+      endforeach;
+      $args['tag__not_in'] = $tag_ids;
+    endif;
+
     // Added custom taxonomy support
-    if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ):
+    if ( $this->lcp_not_empty('taxonomy') && $this->lcp_not_empty('tags') ):
       $args['tax_query'] = array(array(
-                            'taxonomy' => $this->params['taxonomy'],
-                            'field' => 'slug',
-                            'terms' => explode(",",$this->params['tags'])
-                                       ));
+                               'taxonomy' => $this->params['taxonomy'],
+                               'field' => 'slug',
+                               'terms' => explode(",",$this->params['tags'])
+                                 ));
     elseif ( !empty($this->params['tags']) ):
       $args['tag'] = $this->params['tags'];
     endif;
 
     $this->lcp_categories_posts = get_posts($args);
+  }
+
+  private function lcp_not_empty($param){
+    if ( ( isset($this->params[$param]) ) &&
+         ( !empty($this->params[$param]) ) &&
+         ( $this->params[$param] != '0' ) &&
+         ( $this->params[$param] != '') ) :
+      return true;
+    else:
+      return false;
+    endif;
   }
 
 
@@ -115,12 +131,11 @@ class CatList{
 
 
   private function get_lcp_category(){
-    if ( isset($this->params['categorypage']) &&
+    if ( $this->lcp_not_empty('categorypage') &&
          $this->params['categorypage'] == 'yes' ):
 
       $this->lcp_category_id = $this->lcp_get_current_category();
-
-    elseif ( !empty($this->params['name']) ):
+    elseif ( $this->lcp_not_empty('name') ):
       if (preg_match('/\+/', $this->params['name'])):
         $categories = array();
         $cat_array = explode("+", $this->params['name']);
@@ -287,22 +302,35 @@ class CatList{
         !($this->params['content']=='yes' &&
         $single->post_content) ):
 
-      if($single->post_excerpt):
-        $lcp_excerpt = $single->post_excerpt;
-      else:
-        $lcp_excerpt = strip_shortcodes(strip_tags($single->post_content));
+      if($single->post_excerpt && $this->params['excerpt_overwrite'] != 'yes'):
+        return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
       endif;
 
-      $excerpt_length = intval($this->params['excerpt_size']);
-      if (function_exists('wp_trim_words')):
-        return wp_trim_words($lcp_excerpt, $excerpt_length);
-      else:
-        $exc_lim = intval($excerpt_length);
-        return mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
-      endif;
+      return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
     else:
       return null;
     endif;
+  }
+
+  private function lcp_trim_excerpt($text = ''){
+    $excerpt_length = intval($this->params['excerpt_size']);
+
+    $text = strip_shortcodes($text);
+    $text = apply_filters('the_content', $text);
+    $text = str_replace(']]>',']]&gt;', $text);
+
+    if( $this->lcp_not_empty('excerpt_strip') &&
+        $this->params['excerpt_strip'] == 'yes'):
+      $text = strip_tags($text);
+    endif;
+
+    $words = explode(' ', $text, $excerpt_length + 1);
+    if(count($words) > $excerpt_length) :
+      array_pop($words);
+      array_push($words, '...');
+      $text = implode(' ', $words);
+    endif;
+    return $text;
   }
 
   /**

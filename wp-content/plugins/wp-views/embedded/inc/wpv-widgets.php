@@ -218,7 +218,7 @@ function widget_view_link($view_id) {
 		
 	ob_start();
 		
-	edit_post_link(__('Edit view', 'wpv-views'), '', '', $view_id);
+	edit_post_link(__('Edit view', 'wpv-views').' "'.get_the_title($view_id).'" ', '', '', $view_id);
 		
 	$link = ob_get_clean();
 		

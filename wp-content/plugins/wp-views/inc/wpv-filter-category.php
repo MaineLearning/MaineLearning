@@ -259,7 +259,7 @@ function wpv_get_taxonomy_summary($type, $view_settings, $category_selected) {
 		echo '<strong>' . $taxonomy_name . ' </strong>' . $relationship;
 		echo '<strong>"' . $view_settings['taxonomy-' . $taxonomy . '-attribute-url'] . '"</strong> ';
 		if ($view_settings['tax_' . $taxonomy . '_relationship'] == "FROM ATTRIBUTE") {
-			echo sprintf(__('eg. [wpv-views name="view-name" <strong>%s="xxxx"</strong>]', 'wpv-views'), $view_settings['taxonomy-' . $taxonomy . '-attribute-url']);
+			echo sprintf(__('eg. [wpv-view name="view-name" <strong>%s="xxxx"</strong>]', 'wpv-views'), $view_settings['taxonomy-' . $taxonomy . '-attribute-url']);
 		} else {
 			echo sprintf(__('eg. http://www.example.com/page/?<strong>%s="xxxx"</strong>', 'wpv-views'), $view_settings['taxonomy-' . $taxonomy . '-attribute-url']);
 		}

@@ -4,18 +4,30 @@ Donate link: http://wp-types.com
 Tags: CMS, custom field, custom fields, custom post type, custom post types, post, post type, post types, cck, taxonomy, fields
 License: GPLv2
 Requires at least: 3.1
-Tested up to: 3.5.0
-Stable tag: 1.1.3.4
+Tested up to: 3.5.1
+Stable tag: 1.2
 
 The complete and reliable plugin for managing custom post types, custom taxonomy and custom fields.
 
 == Description ==
 
-Types makes it easy to customize the WordPress admin. Define your own content using **custom post types** and **custom taxonomy**. Redesign editing screens using **custom fields**.
-
-The integration between custom post types, taxonomy and fields lets you do things that no other custom-fields plugin can do.
+Types let's you customize the WordPress admin by adding content types, custom fields and taxonomy. You will be able to craft the WordPress admin and turn it into your very own content management system.
 
 [vimeo http://vimeo.com/43104695]
+
+= POWERFUL PHP API, SIMPLE GUI FOR NON-CODERS =
+If you're an experienced PHP developer, you'll appreciate Types comprehensive [PHP API](http://wp-types.com/documentation/functions/) and [documentation](http://wp-types.com/documentation/user-guides/).
+
+Types and the other [Toolset](http://wp-types.com) plugins let you build complete sites without coding.
+
+* [Views](http://wp-types.com/home/views-create-elegant-displays-for-your-content/) - a powerful content display engine
+* [CRED](http://wp-types.com/home/cred/) - front-end form builder for content creation and editing
+* [Access](http://wp-types.com/home/types-access/) - roles and access control management
+
+The [Toolset](http://wp-types.com) package will let you build powerful WordPress sites right from within the admin dashboard, without any PHP.
+
+= RELIABLE SUPPORT =
+To get support for Types, please join our [technical support forum](http://wp-types.com/forums/). You will receive support directly from our developers, helping you deliver great sites on time and correctly.
 
 = CUSTOM FIELDS =
 
@@ -52,24 +64,13 @@ Types lets you easily setup custom post types and taxonomy. You can create new p
 
 Types lets you define parent / child relationship between different post types. You'll easily setup one-to-many and many-to-many relationships and build powerful sites.
 
-= MADE FOR EXPERIENCED PHP DEVELOPERS AND FOR NON-CODERS =
-If you're an experienced PHP developer, you'll appreciate Types comprehensive [PHP API](http://wp-types.com/documentation/functions/) and [documentation](http://wp-types.com/documentation/user-guides/).
-
-Even without being a WordPress guro or an expert PHP developer, you can still build complete WordPress sites using the complete [Toolset](http://wp-types.com) package. Besides Types, you'll find:
-
-* [Views](http://wp-types.com/home/views-create-elegant-displays-for-your-content/) - a powerful content display engine
-* [CRED](http://wp-types.com/home/cred/) - front-end form builder for content creation and editing
-* [Access](http://wp-types.com/home/types-access/) - roles and access control management
-
-The [Toolset](http://wp-types.com) package will let you build powerful WordPress sites right from within the admin dashboard, without any PHP.
-
 = MULTILINGUAL READY =
 
 Types is the only custom fields and post types plugin that's built multilingual-ready. It plays perfectly with [WPML](http://wpml.org). You'll be able to translate everything, including texts and labels in the WordPress admin and user-content for front-page.
 
 = BUILT FOR STABILITY =
 
-Types is part of a family of plugins, developed and maintained by [OnTheGoSystems](http://www.onthegosystems.com). Our plugins power over 100,000 commercial sites, using WordPress as a complete CMS. While we love features, we know that stability, performance, usability and security are critical. All our plugins go through comprehensive testing, QA and security analysis before every release.
+Types is part of a family of plugins, including WPML and Toolset, developed and maintained by [OnTheGoSystems](http://www.onthegosystems.com). Our plugins power over 100,000 commercial sites, using WordPress as a complete CMS. While we love features, we know that stability, performance, usability and security are critical. All our plugins go through comprehensive testing, QA and security analysis before every release.
 
 == Installation ==
 
@@ -134,6 +135,23 @@ Additionally, Types is the only plugin that lets you define parent/child relatio
 5. Bulk editing child content using Field Tables
 
 == Changelog ==
+
+= 1.2 =
+* Added allowing ordering of repeater fields
+* Added allow duplicate repeater fields
+* Added support for translating Custom Post Type slugs
+* Added control of the number of children displayed in the Fields table
+* Added optional hour and minutes to the Date field
+* Added check to make sure the single and plural names of a Custom Post Type are different
+* Fix handling of required conditional fields
+* Remove use of mb_ereg and mb_string functions
+* Fix JavaScript escaping
+* Fix rendering of shortcodes inside types shortcode
+* Fix Open_basedir restriction
+* Fix AJAX popup CSS and JS
+* Fix translation of "Add another field" and "Delete field" buttons
+* Fix exporting and importing of Types Taxonomy
+* Fix exporting and importing of conditional settings for groups
 
 = 1.1.3.4 =
 * Fix adding child posts for WordPress 3.5
@@ -277,3 +295,6 @@ You can have localized slugs for custom post types
 
 = 1.1.3.4 =
 Fix adding child posts for WordPress 3.5
+
+= 1.2 =
+Drag and Drop ordering of repeating fields

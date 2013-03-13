@@ -10,6 +10,7 @@ if ( isset( $_get['action'] ) ) {
 }
 else {
 	add_action( 'bp_setup_nav', 'bebop_setup_user_nav', 20 );
+	add_filter( 'wp_before_admin_bar_render', 'bebop_admin_bar_resources', 999 );
 }
 
 function bebop_setup_user_nav() {
@@ -132,3 +133,38 @@ function bebop_admin_stylesheets() {
 	wp_enqueue_style( 'bebop-admin-styles' );
 }
 add_action( bp_core_admin_hook(), 'bebop_admin_stylesheets' );
+
+//wp_adminbar
+function bebop_admin_bar_resources() {
+	
+	global $wp_admin_bar;
+	global $bp;
+	
+	$wp_admin_bar->add_node( array(
+		'id'	=> 'my-account-buddypress-bebop',
+		'title'	=> __( 'Resources', 'bebop' ),
+		'href'	=> bp_displayed_user_domain() . 'bebop/',
+		'parent' => 'my-account-buddypress'
+	) );
+	
+	$wp_admin_bar->add_node( array(
+		'id'	=> 'my-account-buddypress-bebop-content',
+		'title'	=> __( 'Content', 'bebop' ),
+		'href'	=> bp_displayed_user_domain() . 'bebop/bebop-content',
+		'parent' => 'my-account-buddypress-bebop'
+	) );
+	
+	$wp_admin_bar->add_node( array(
+		'id'	=> 'my-account-buddypress-bebop-content-manager',
+		'title'	=> __( 'Content Manager', 'bebop' ),
+		'href'	=> bp_displayed_user_domain() . 'bebop/bebop-manager',
+		'parent' => 'my-account-buddypress-bebop'
+	) );
+	
+	$wp_admin_bar->add_node( array(
+		'id'	=> 'my-account-buddypress-bebop-accounts',
+		'title'	=>  __( 'Accounts', 'bebop' ),
+		'href'	=> bp_displayed_user_domain() . 'bebop/bebop-accounts',
+		'parent' => 'my-account-buddypress-bebop'
+	) );
+}

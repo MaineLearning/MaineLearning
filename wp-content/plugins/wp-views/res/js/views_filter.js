@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
     var c = jQuery('textarea#wpv_filter_meta_html_content').val();
-    
+    var old_content_normal = '';
+    var old_content_archive = '';
     if (c == '') {
 
         var data = wpv_get_filter_code();
@@ -36,6 +37,40 @@ jQuery(document).ready(function($){
     });
 	
     jQuery('input[name=_wpv_settings\\[view-query-mode\\]]').change(function(event) {
+        var mode = jQuery('input[name=_wpv_settings\\[view-query-mode\\]]:checked').val()
+        if(mode=='normal'){
+            if(old_content_normal!=''){
+                // changed for correct work with CodeMirror
+                //old_content_normal = jQuery('#wpv_layout_meta_html_content').val();
+                old_content_normal = HTMLEditor['wpv_layout_meta_html_content'].getValue();
+                //jQuery('#wpv_layout_meta_html_content').val(old_content_normal);
+                HTMLEditor['wpv_layout_meta_html_content'].setValue(old_content_normal);
+                HTMLEditor['wpv_layout_meta_html_content'].refresh();
+                HTMLEditor['wpv_layout_meta_html_content'].focus();
+                
+            }else{
+                // changed for correct work with CodeMirror
+                //old_content_normal = jQuery('#wpv_layout_meta_html_content').val();
+                old_content_normal = HTMLEditor['wpv_layout_meta_html_content'].getValue();
+                on_generate_wpv_layout(true);
+            }
+        };
+        if(mode=='archive'){
+            if(old_content_archive!=''){
+                // changed for correct work with CodeMirror
+                //old_content_archive = jQuery('#wpv_layout_meta_html_content').val();
+                old_content_normal = HTMLEditor['wpv_layout_meta_html_content'].getValue();
+                //jQuery('#wpv_layout_meta_html_content').val(old_content_archive);
+                HTMLEditor['wpv_layout_meta_html_content'].setValue(old_content_normal);
+                HTMLEditor['wpv_layout_meta_html_content'].refresh();
+                HTMLEditor['wpv_layout_meta_html_content'].focus();
+            }else{
+                // changed for correct work with CodeMirror
+                //old_content_archive = jQuery('#wpv_layout_meta_html_content').val();
+                old_content_normal = HTMLEditor['wpv_layout_meta_html_content'].getValue();
+                on_generate_wpv_layout(true);
+            }
+        };
        	show_view_changed_message();
     });
 	
@@ -57,12 +92,16 @@ function on_generate_wpv_filter(force) {
     
     var data = wpv_get_filter_code();
 
-    var c = jQuery('textarea#wpv_filter_meta_html_content').val();
+    // changed for correct work with CodeMirror
+    // var c = jQuery('textarea#wpv_filter_meta_html_content').val();
+    c = HTMLEditor['wpv_filter_meta_html_content'].getValue(); 
     
     if (force || check_if_previous_filter_has_changed(c)) {
     
         c = add_wpv_filter_data_to_content(c, data);
-        jQuery('textarea#wpv_filter_meta_html_content').val(c);
+	// changed for correct work with CodeMirror
+	// jQuery('textarea#wpv_filter_meta_html_content').val(c);
+	HTMLEditor['wpv_filter_meta_html_content'].setValue(c);
     }
     
     // save the generated value so we can compare later.

@@ -103,7 +103,7 @@ class Wpcf_Cake_Validation
     function &getInstance() {
         static $instance = array();
 
-        if (!$instance) {
+        if ( !$instance ) {
             $instance[0] = new Wpcf_Cake_Validation();
         }
         return $instance[0];
@@ -121,16 +121,16 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function notEmpty($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function notEmpty( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (empty($_this->check) && $_this->check != '0') {
+        if ( empty( $_this->check ) && $_this->check != '0' ) {
             return false;
         }
         $_this->regex = '/[^\s]+/m';
@@ -149,22 +149,22 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function alphaNumeric($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function alphaNumeric( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (empty($_this->check) && $_this->check != '0') {
+        if ( empty( $_this->check ) && $_this->check != '0' ) {
             return false;
         }
         $_this->regex = '/^[a-zA-Z0-9]*$/mu';
         $return = $_this->_check();
 
-        if (!$return) {
+        if ( !$return ) {
             $_this->regex = '/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/mu';
             $return = $_this->_check();
         }
@@ -172,22 +172,22 @@ class Wpcf_Cake_Validation
         return $_this->_check();
     }
 
-    function alphaNumericWhitespaces($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function alphaNumericWhitespaces( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (empty($_this->check) && $_this->check != '0') {
+        if ( empty( $_this->check ) && $_this->check != '0' ) {
             return false;
         }
         $_this->regex = '/^[a-zA-Z0-9\s\-\_]*$/mu';
         $return = $_this->_check();
 
-        if (!$return) {
+        if ( !$return ) {
             $_this->regex = '/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}\s\-\_]+$/mu';
             $return = $_this->_check();
         }
@@ -206,8 +206,8 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function between($check, $min, $max) {
-        $length = mb_strlen($check);
+    function between( $check, $min, $max ) {
+        $length = strlen( $check );
         return ($length >= $min && $length <= $max);
     }
 
@@ -222,17 +222,17 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function blank($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function blank( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
         $_this->regex = '/[^\\s]/';
-        return!$_this->_check();
+        return !$_this->_check();
     }
 
     /**
@@ -249,25 +249,25 @@ class Wpcf_Cake_Validation
      * @access public
      * @see Wpcf_Cake_Validation::_luhn()
      */
-    function cc($check, $type = 'fast', $deep = false, $regex = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function cc( $check, $type = 'fast', $deep = false, $regex = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
         $_this->type = $type;
         $_this->deep = $deep;
         $_this->regex = $regex;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
-        $_this->check = str_replace(array('-', ' '), '', $_this->check);
+        $_this->check = str_replace( array('-', ' '), '', $_this->check );
 
-        if (mb_strlen($_this->check) < 13) {
+        if ( strlen( $_this->check ) < 13 ) {
             return false;
         }
 
-        if (!is_null($_this->regex)) {
-            if ($_this->_check()) {
+        if ( !is_null( $_this->regex ) ) {
+            if ( $_this->_check() ) {
                 return $_this->_luhn();
             }
         }
@@ -290,26 +290,26 @@ class Wpcf_Cake_Validation
             'fast' => '/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})$/'
         );
 
-        if (is_array($_this->type)) {
-            foreach ($_this->type as $value) {
-                $_this->regex = $cards['all'][strtolower($value)];
+        if ( is_array( $_this->type ) ) {
+            foreach ( $_this->type as $value ) {
+                $_this->regex = $cards['all'][strtolower( $value )];
 
-                if ($_this->_check()) {
+                if ( $_this->_check() ) {
                     return $_this->_luhn();
                 }
             }
-        } elseif ($_this->type == 'all') {
-            foreach ($cards['all'] as $value) {
+        } elseif ( $_this->type == 'all' ) {
+            foreach ( $cards['all'] as $value ) {
                 $_this->regex = $value;
 
-                if ($_this->_check()) {
+                if ( $_this->_check() ) {
                     return $_this->_luhn();
                 }
             }
         } else {
             $_this->regex = $cards['fast'];
 
-            if ($_this->_check()) {
+            if ( $_this->_check() ) {
                 return $_this->_luhn();
             }
         }
@@ -327,54 +327,54 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function comparison($check1, $operator = null, $check2 = null) {
-        if (is_array($check1)) {
-            extract($check1, EXTR_OVERWRITE);
+    function comparison( $check1, $operator = null, $check2 = null ) {
+        if ( is_array( $check1 ) ) {
+            extract( $check1, EXTR_OVERWRITE );
         }
-        $operator = str_replace(array(' ', "\t", "\n", "\r", "\0", "\x0B"), '',
-                strtolower($operator));
+        $operator = str_replace( array(' ', "\t", "\n", "\r", "\0", "\x0B"), '',
+                strtolower( $operator ) );
 
-        switch ($operator) {
+        switch ( $operator ) {
             case 'isgreater':
             case '>':
-                if ($check1 > $check2) {
+                if ( $check1 > $check2 ) {
                     return true;
                 }
                 break;
             case 'isless':
             case '<':
-                if ($check1 < $check2) {
+                if ( $check1 < $check2 ) {
                     return true;
                 }
                 break;
             case 'greaterorequal':
             case '>=':
-                if ($check1 >= $check2) {
+                if ( $check1 >= $check2 ) {
                     return true;
                 }
                 break;
             case 'lessorequal':
             case '<=':
-                if ($check1 <= $check2) {
+                if ( $check1 <= $check2 ) {
                     return true;
                 }
                 break;
             case 'equalto':
             case '==':
-                if ($check1 == $check2) {
+                if ( $check1 == $check2 ) {
                     return true;
                 }
                 break;
             case 'notequal':
             case '!=':
-                if ($check1 != $check2) {
+                if ( $check1 != $check2 ) {
                     return true;
                 }
                 break;
             default:
-                $_this = & Wpcf_Cake_Validation::getInstance();
-                $_this->errors[] = __('You must define the $operator parameter for Wpcf_Cake_Validation::comparison()',
-                        'wpcf');
+                $_this = &Wpcf_Cake_Validation::getInstance();
+                $_this->errors[] = __( 'You must define the $operator parameter for Wpcf_Cake_Validation::comparison()',
+                        'wpcf' );
                 break;
         }
         return false;
@@ -389,17 +389,17 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function custom($check, $regex = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function custom( $check, $regex = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
         $_this->regex = $regex;
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
-        if ($_this->regex === null) {
-            $_this->errors[] = __('You must define a regular expression for Wpcf_Cake_Validation::custom()',
-                    'wpcf');
+        if ( $_this->regex === null ) {
+            $_this->errors[] = __( 'You must define a regular expression for Wpcf_Cake_Validation::custom()',
+                    'wpcf' );
             return false;
         }
         return $_this->_check();
@@ -422,7 +422,7 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function date($check, $format = 'ymd', $regex = null) {
+    function date( $check, $format = 'ymd', $regex = null ) {
 
         $date_format = wpcf_get_date_format();
         $cake_date_formats = array('F j, Y' => 'Mdy',
@@ -432,12 +432,12 @@ class Wpcf_Cake_Validation
         );
         $format = $cake_date_formats[$date_format];
 
-        $_this = & Wpcf_Cake_Validation::getInstance();
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
         $_this->regex = $regex;
 
-        if (!is_null($_this->regex)) {
+        if ( !is_null( $_this->regex ) ) {
             return $_this->_check();
         }
 
@@ -449,11 +449,11 @@ class Wpcf_Cake_Validation
         $regex['My'] = '%^(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\\b|t)t?|Nov|Dec)(ember)?)[ /]((1[6-9]|[2-9]\\d)\\d{2})$%';
         $regex['my'] = '%^(((0[123456789]|10|11|12)([- /.])(([1][9][0-9][0-9])|([2][0-9][0-9][0-9]))))$%';
 
-        $format = (is_array($format)) ? array_values($format) : array($format);
-        foreach ($format as $key) {
+        $format = (is_array( $format )) ? array_values( $format ) : array($format);
+        foreach ( $format as $key ) {
             $_this->regex = $regex[$key];
 
-            if ($_this->_check() === true) {
+            if ( $_this->_check() === true ) {
                 return true;
             }
         }
@@ -469,8 +469,8 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function time($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function time( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
         $_this->regex = '%^((0?[1-9]|1[012])(:[0-5]\d){0,2}([AP]M|[ap]m))$|^([01]\d|2[0-3])(:[0-5]\d){0,2}$%';
@@ -484,9 +484,9 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function boolean($check) {
+    function boolean( $check ) {
         $booleanList = array(0, 1, '0', '1', true, false);
-        return in_array($check, $booleanList, true);
+        return in_array( $check, $booleanList, true );
     }
 
     /**
@@ -499,14 +499,14 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function decimal($check, $places = null, $regex = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function decimal( $check, $places = null, $regex = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->regex = $regex;
         $_this->check = $check;
 
-        if (is_null($_this->regex)) {
-            if (is_null($places)) {
+        if ( is_null( $_this->regex ) ) {
+            if ( is_null( $places ) ) {
                 $_this->regex = '/^[-+]?[0-9]*\\.{1}[0-9]+(?:[eE][-+]?[0-9]+)?$/';
             } else {
                 $_this->regex = '/^[-+]?[0-9]*\\.{1}[0-9]{' . $places . '}$/';
@@ -524,35 +524,35 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function email($check, $deep = false, $regex = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function email( $check, $deep = false, $regex = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__reset();
         $_this->check = $check;
         $_this->regex = $regex;
         $_this->deep = $deep;
 
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (is_null($_this->regex)) {
+        if ( is_null( $_this->regex ) ) {
             $_this->regex = '/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@' . $_this->__pattern['hostname'] . '$/i';
         }
         $return = $_this->_check();
 
-        if ($_this->deep === false || $_this->deep === null) {
+        if ( $_this->deep === false || $_this->deep === null ) {
             return $return;
         }
 
-        if ($return === true && preg_match('/@(' . $_this->__pattern['hostname'] . ')$/i',
-                        $_this->check, $regs)) {
-            if (function_exists('getmxrr') && getmxrr($regs[1], $mxhosts)) {
+        if ( $return === true && preg_match( '/@(' . $_this->__pattern['hostname'] . ')$/i',
+                        $_this->check, $regs ) ) {
+            if ( function_exists( 'getmxrr' ) && getmxrr( $regs[1], $mxhosts ) ) {
                 return true;
             }
-            if (function_exists('checkdnsrr') && checkdnsrr($regs[1], 'MX')) {
+            if ( function_exists( 'checkdnsrr' ) && checkdnsrr( $regs[1], 'MX' ) ) {
                 return true;
             }
-            return is_array(gethostbynamel($regs[1]));
+            return is_array( gethostbynamel( $regs[1] ) );
         }
         return false;
     }
@@ -565,7 +565,7 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function equalTo($check, $comparedTo) {
+    function equalTo( $check, $comparedTo ) {
         return ($check === $comparedTo);
     }
 
@@ -577,14 +577,14 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function extension($check, $extensions = array('gif', 'jpeg', 'png', 'jpg')) {
-        if (is_array($check)) {
-            return Wpcf_Cake_Validation::extension(array_shift($check),
-                            $extensions);
+    function extension( $check, $extensions = array('gif', 'jpeg', 'png', 'jpg') ) {
+        if ( is_array( $check ) ) {
+            return Wpcf_Cake_Validation::extension( array_shift( $check ),
+                            $extensions );
         }
-        $extension = strtolower(array_pop(explode('.', $check)));
-        foreach ($extensions as $value) {
-            if ($extension == strtolower($value)) {
+        $extension = strtolower( array_pop( explode( '.', $check ) ) );
+        foreach ( $extensions as $value ) {
+            if ( $extension == strtolower( $value ) ) {
                 return true;
             }
         }
@@ -604,15 +604,15 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function ip($check, $type = 'both') {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function ip( $check, $type = 'both' ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $success = false;
-        $type = strtolower($type);
-        if ($type === 'ipv4' || $type === 'both') {
-            $success |= $_this->_ipv4($check);
+        $type = strtolower( $type );
+        if ( $type === 'ipv4' || $type === 'both' ) {
+            $success |= $_this->_ipv4( $check );
         }
-        if ($type === 'ipv6' || $type === 'both') {
-            $success |= $_this->_ipv6($check);
+        if ( $type === 'ipv6' || $type === 'both' ) {
+            $success |= $_this->_ipv6( $check );
         }
         return $success;
     }
@@ -624,10 +624,10 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access protected
      */
-    function _ipv4($check) {
-        if (function_exists('filter_var')) {
-            return filter_var($check, FILTER_VALIDATE_IP,
-                            array('flags' => FILTER_FLAG_IPV4)) !== false;
+    function _ipv4( $check ) {
+        if ( function_exists( 'filter_var' ) ) {
+            return filter_var( $check, FILTER_VALIDATE_IP,
+                            array('flags' => FILTER_FLAG_IPV4) ) !== false;
         }
         $this->__populateIp();
         $this->check = $check;
@@ -642,10 +642,10 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access protected
      */
-    function _ipv6($check) {
-        if (function_exists('filter_var')) {
-            return filter_var($check, FILTER_VALIDATE_IP,
-                            array('flags' => FILTER_FLAG_IPV6)) !== false;
+    function _ipv6( $check ) {
+        if ( function_exists( 'filter_var' ) ) {
+            return filter_var( $check, FILTER_VALIDATE_IP,
+                            array('flags' => FILTER_FLAG_IPV6) ) !== false;
         }
         $this->__populateIp();
         $this->check = $check;
@@ -661,8 +661,8 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function minLength($check, $min) {
-        $length = mb_strlen($check);
+    function minLength( $check, $min ) {
+        $length = strlen( $check );
         return ($length >= $min);
     }
 
@@ -674,8 +674,8 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function maxLength($check, $max) {
-        $length = mb_strlen($check);
+    function maxLength( $check, $max ) {
+        $length = strlen( $check );
         return ($length <= $max);
     }
 
@@ -687,11 +687,11 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function money($check, $symbolPosition = 'left') {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function money( $check, $symbolPosition = 'left' ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->check = $check;
 
-        if ($symbolPosition == 'right') {
+        if ( $symbolPosition == 'right' ) {
             $_this->regex = '/^(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{2})?(?<!\x{00a2})\p{Sc}?$/u';
         } else {
             $_this->regex = '/^(?!\x{00a2})\p{Sc}?(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{2})?$/u';
@@ -713,22 +713,22 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function multiple($check, $options = array()) {
+    function multiple( $check, $options = array() ) {
         $defaults = array('in' => null, 'max' => null, 'min' => null);
-        $options = array_merge($defaults, $options);
-        $check = array_filter((array) $check);
-        if (empty($check)) {
+        $options = array_merge( $defaults, $options );
+        $check = array_filter( (array) $check );
+        if ( empty( $check ) ) {
             return false;
         }
-        if ($options['max'] && count($check) > $options['max']) {
+        if ( $options['max'] && count( $check ) > $options['max'] ) {
             return false;
         }
-        if ($options['min'] && count($check) < $options['min']) {
+        if ( $options['min'] && count( $check ) < $options['min'] ) {
             return false;
         }
-        if ($options['in'] && is_array($options['in'])) {
-            foreach ($check as $val) {
-                if (!in_array($val, $options['in'])) {
+        if ( $options['in'] && is_array( $options['in'] ) ) {
+            foreach ( $check as $val ) {
+                if ( !in_array( $val, $options['in'] ) ) {
                     return false;
                 }
             }
@@ -743,8 +743,8 @@ class Wpcf_Cake_Validation
      * @return boolean Succcess
      * @access public
      */
-    function numeric($check) {
-        return is_numeric($check);
+    function numeric( $check ) {
+        return is_numeric( $check );
     }
 
     /**
@@ -756,17 +756,17 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function phone($check, $regex = null, $country = 'all') {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function phone( $check, $regex = null, $country = 'all' ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->check = $check;
         $_this->regex = $regex;
         $_this->country = $country;
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (is_null($_this->regex)) {
-            switch ($_this->country) {
+        if ( is_null( $_this->regex ) ) {
+            switch ( $_this->country ) {
                 case 'us':
                 case 'all':
                 case 'can':
@@ -775,8 +775,8 @@ class Wpcf_Cake_Validation
                     break;
             }
         }
-        if (empty($_this->regex)) {
-            return $_this->_pass('phone', $check, $country);
+        if ( empty( $_this->regex ) ) {
+            return $_this->_pass( 'phone', $check, $country );
         }
         return $_this->_check();
     }
@@ -790,20 +790,20 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function postal($check, $regex = null, $country = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function postal( $check, $regex = null, $country = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->check = $check;
         $_this->regex = $regex;
         $_this->country = $country;
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
-        if (empty($country)) {
+        if ( empty( $country ) ) {
             $_this->country = 'us';
         }
 
-        if (is_null($_this->regex)) {
-            switch ($_this->country) {
+        if ( is_null( $_this->regex ) ) {
+            switch ( $_this->country ) {
                 case 'uk':
                     $_this->regex = '/\\A\\b[A-Z]{1,2}[0-9][A-Z0-9]? [0-9][ABD-HJLNP-UW-Z]{2}\\b\\z/i';
                     break;
@@ -822,8 +822,8 @@ class Wpcf_Cake_Validation
                     break;
             }
         }
-        if (empty($_this->regex)) {
-            return $_this->_pass('postal', $check, $country);
+        if ( empty( $_this->regex ) ) {
+            return $_this->_pass( 'postal', $check, $country );
         }
         return $_this->_check();
     }
@@ -839,14 +839,14 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function range($check, $lower = null, $upper = null) {
-        if (!is_numeric($check)) {
+    function range( $check, $lower = null, $upper = null ) {
+        if ( !is_numeric( $check ) ) {
             return false;
         }
-        if (isset($lower) && isset($upper)) {
+        if ( isset( $lower ) && isset( $upper ) ) {
             return ($check > $lower && $check < $upper);
         }
-        return is_finite($check);
+        return is_finite( $check );
     }
 
     /**
@@ -858,17 +858,17 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function ssn($check, $regex = null, $country = null) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function ssn( $check, $regex = null, $country = null ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->check = $check;
         $_this->regex = $regex;
         $_this->country = $country;
-        if (is_array($check)) {
-            $_this->_extract($check);
+        if ( is_array( $check ) ) {
+            $_this->_extract( $check );
         }
 
-        if (is_null($_this->regex)) {
-            switch ($_this->country) {
+        if ( is_null( $_this->regex ) ) {
+            switch ( $_this->country ) {
                 case 'dk':
                     $_this->regex = '/\\A\\b[0-9]{6}-[0-9]{4}\\b\\z/i';
                     break;
@@ -880,8 +880,8 @@ class Wpcf_Cake_Validation
                     break;
             }
         }
-        if (empty($_this->regex)) {
-            return $_this->_pass('ssn', $check, $country);
+        if ( empty( $_this->regex ) ) {
+            return $_this->_pass( 'ssn', $check, $country );
         }
         return $_this->_check();
     }
@@ -893,8 +893,8 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function uuid($check) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function uuid( $check ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->check = $check;
         $_this->regex = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i';
         return $_this->_check();
@@ -918,12 +918,12 @@ class Wpcf_Cake_Validation
      * @return boolean Success
      * @access public
      */
-    function url($check, $strict = false) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
+    function url( $check, $strict = false ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
         $_this->__populateIp();
         $_this->check = $check;
-        $validChars = '([' . preg_quote('!"$&\'()*+,-.@_:;=~[]') . '\/0-9a-z\p{L}\p{N}]|(%[0-9a-f]{2}))';
-        $_this->regex = '/^(?:(?:https?|ftps?|file|news|gopher):\/\/)' . (!empty($strict) ? '' : '?') .
+        $validChars = '([' . preg_quote( '!"$&\'()*+,-.@_:;=~[]' ) . '\/0-9a-z\p{L}\p{N}]|(%[0-9a-f]{2}))';
+        $_this->regex = '/^(?:(?:https?|ftps?|file|news|gopher):\/\/)' . (!empty( $strict ) ? '' : '?') .
                 '(?:' . $_this->__pattern['IPv4'] . '|\[' . $_this->__pattern['IPv6'] . '\]|' . $_this->__pattern['hostname'] . ')' .
                 '(?::[1-9][0-9]{0,4})?' .
                 '(?:\/?|\/' . $validChars . '*)?' .
@@ -940,8 +940,8 @@ class Wpcf_Cake_Validation
      * @return boolean Succcess
      * @access public
      */
-    function inList($check, $list) {
-        return in_array($check, $list);
+    function inList( $check, $list ) {
+        return in_array( $check, $list );
     }
 
     /**
@@ -954,17 +954,17 @@ class Wpcf_Cake_Validation
      * @return mixed user-defined class class method returns
      * @access public
      */
-    function userDefined($check, $object, $method, $args = null) {
-        return call_user_func_array(array(&$object, $method),
-                        array($check, $args));
+    function userDefined( $check, $object, $method, $args = null ) {
+        return call_user_func_array( array(&$object, $method),
+                        array($check, $args) );
     }
 
-    function noSpecialChars($check) {
-        return preg_match('#[^a-zA-Z0-9\s\_\-]#', $check) ? false : true;
+    function noSpecialChars( $check ) {
+        return preg_match( '#[^a-zA-Z0-9\s\_\-]#', $check ) ? false : true;
     }
-    
-    function rewriteSlug($check) {
-        return preg_match('#[^a-zA-Z0-9\s\_\-\%]#', $check) ? false : true;
+
+    function rewriteSlug( $check ) {
+        return preg_match( '#[^a-zA-Z0-9\s\_\-\%]#', $check ) ? false : true;
     }
 
     /**
@@ -978,20 +978,21 @@ class Wpcf_Cake_Validation
      * @return mixed Return of Passed method, false on failure
      * @access protected
      * */
-    function _pass($method, $check, $classPrefix) {
-        $className = ucwords($classPrefix) . 'Validation';
-        if (!class_exists($className)) {
-            trigger_error(sprintf(__('Could not find %s class, unable to complete validation.',
-                                    true), $className), E_USER_WARNING);
+    function _pass( $method, $check, $classPrefix ) {
+        $className = ucwords( $classPrefix ) . 'Validation';
+        if ( !class_exists( $className ) ) {
+            trigger_error( sprintf( __( 'Could not find %s class, unable to complete validation.',
+                                    true ), $className ), E_USER_WARNING );
             return false;
         }
-        if (!is_callable(array($className, $method))) {
-            trigger_error(sprintf(__('Method %s does not exist on %s unable to complete validation.',
-                                    true), $method, $className), E_USER_WARNING);
+        if ( !is_callable( array($className, $method) ) ) {
+            trigger_error( sprintf( __( 'Method %s does not exist on %s unable to complete validation.',
+                                    true ), $method, $className ),
+                    E_USER_WARNING );
             return false;
         }
         $check = (array) $check;
-        return call_user_func_array(array($className, $method), $check);
+        return call_user_func_array( array($className, $method), $check );
     }
 
     /**
@@ -1001,8 +1002,8 @@ class Wpcf_Cake_Validation
      * @access protected
      */
     function _check() {
-        $_this = & Wpcf_Cake_Validation::getInstance();
-        if (preg_match($_this->regex, $_this->check)) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
+        if ( preg_match( $_this->regex, $_this->check ) ) {
             $_this->error[] = false;
             return true;
         } else {
@@ -1019,23 +1020,23 @@ class Wpcf_Cake_Validation
      * @return void
      * @access protected
      */
-    function _extract($params) {
-        $_this = & Wpcf_Cake_Validation::getInstance();
-        extract($params, EXTR_OVERWRITE);
+    function _extract( $params ) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
+        extract( $params, EXTR_OVERWRITE );
 
-        if (isset($check)) {
+        if ( isset( $check ) ) {
             $_this->check = $check;
         }
-        if (isset($regex)) {
+        if ( isset( $regex ) ) {
             $_this->regex = $regex;
         }
-        if (isset($country)) {
-            $_this->country = mb_strtolower($country);
+        if ( isset( $country ) ) {
+            $_this->country = strtolower( $country );
         }
-        if (isset($deep)) {
+        if ( isset( $deep ) ) {
             $_this->deep = $deep;
         }
-        if (isset($type)) {
+        if ( isset( $type ) ) {
             $_this->type = $type;
         }
     }
@@ -1048,21 +1049,21 @@ class Wpcf_Cake_Validation
      * @access protected
      */
     function _luhn() {
-        $_this = & Wpcf_Cake_Validation::getInstance();
-        if ($_this->deep !== true) {
+        $_this = &Wpcf_Cake_Validation::getInstance();
+        if ( $_this->deep !== true ) {
             return true;
         }
-        if ($_this->check == 0) {
+        if ( $_this->check == 0 ) {
             return false;
         }
         $sum = 0;
-        $length = strlen($_this->check);
+        $length = strlen( $_this->check );
 
-        for ($position = 1 - ($length % 2); $position < $length; $position += 2) {
+        for ( $position = 1 - ($length % 2); $position < $length; $position += 2 ) {
             $sum += $_this->check[$position];
         }
 
-        for ($position = ($length % 2); $position < $length; $position += 2) {
+        for ( $position = ($length % 2); $position < $length; $position += 2 ) {
             $number = $_this->check[$position] * 2;
             $sum += ($number < 10) ? $number : $number - 9;
         }
@@ -1078,7 +1079,7 @@ class Wpcf_Cake_Validation
      */
 
     function __populateIp() {
-        if (!isset($this->__pattern['IPv6'])) {
+        if ( !isset( $this->__pattern['IPv6'] ) ) {
             $pattern = '((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}';
             $pattern .= '(:|((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})';
             $pattern .= '|(:[0-9A-Fa-f]{1,4})))|(([0-9A-Fa-f]{1,4}:){5}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})';
@@ -1096,7 +1097,7 @@ class Wpcf_Cake_Validation
 
             $this->__pattern['IPv6'] = $pattern;
         }
-        if (!isset($this->__pattern['IPv4'])) {
+        if ( !isset( $this->__pattern['IPv4'] ) ) {
             $pattern = '(?:(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])';
             $this->__pattern['IPv4'] = $pattern;
         }

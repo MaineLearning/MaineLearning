@@ -35,6 +35,7 @@ function jfb_admin_styles()
     		'.jfb-admin_tabs        {width:100%; clear:both; float:left; margin:0 0 -0.1em 0; padding:0;}'.
             '.jfb-admin_tabs li     {list-style:none; float:left; margin:0; padding:0.2em 0.5em 0.2em 0.5em; }'.
             '.jfb-admin_tab_selected{background-color:#FFFEEB; border-left:1px solid #CCC; border-right:1px solid #CCC; border-top:1px solid #CCC;}'.
+            '.jfb-greybox           {width:600px; padding:5px; margin:2px 0; background-color:#EEEDDA; border:1px solid #CCC;}'.
          '</style>';
 }
 
@@ -47,9 +48,9 @@ function jfb_admin_notices()
 {
 	//Version 2.1.0 moved to a new version of the Facebook API that required changes on both the free and premium plugins;
  	//warn Premium users who have upgraded their free plugin, but not their addon.
-	if( defined('JFB_PREMIUM') && version_compare(JFB_PREMIUM_VER, 24) == -1 )
+	if( defined('JFB_PREMIUM') && version_compare(JFB_PREMIUM_VER, 30) == -1 )
 	{
-	    ?><div class="error"><p><strong>Warning:</strong> This version of WP-FB-AutoConnect requires Premium addon version 24 or better (you're currently using version <?php echo JFB_PREMIUM_VER; ?>).  Please login to your account on <a target="store" href="http://www.justin-klein.com/store">justin-klein.com/store</a> to obtain the latest version.  I apologize for the inconvenience, but it was unavoidable due to a sudden change in Facebook's security policies.</p></div><?php
+	    ?><div class="error"><p><strong>Warning:</strong> This version of WP-FB-AutoConnect is only compatible with Premium addon version 30 or better (you're currently using version <?php echo JFB_PREMIUM_VER; ?>).  If you haven't done so already, please read the important information in <a target="store" href="http://www.justin-klein.com/projects/wp-fb-autoconnect/#faq46">FAQ46</a> of the plugin documentation.</p><p>If you'd like to revert to the previous version of the free plugin until you're ready to update the addon, previous versions can be downloaded from <a href="http://wordpress.org/extend/plugins/wp-fb-autoconnect/developers/">here</a>.</p></div><?php
 	}
 	
 	//Warn if the user's server doesn't have cURL
@@ -96,18 +97,24 @@ function jfb_admin_page()
     {
         ?><div class="error"><p><strong>Warning:</strong> Wordpress MultiSite is only fully supported by the premium version of this plugin; please see <a href="<?php echo $jfb_homepage ?>#premium"><b>here</b></a> for details.</p></div><?php
     }
+    if( file_exists(realpath(dirname(__FILE__))."/WP-FB-AutoConnect-Premium.php" ) )
+    {
+        ?><div class="error"><p><strong>Notice:</strong> You seem to've uploaded the premium addon to the wrong directory.<br/><br/>
+            As per the <a target="instructs" href="<?php echo $jfb_homepage ?>#premium"><b>setup instructions</b></a>, the "WP-FB-AutoConnect-Premium.php" file goes in your <i>plugins</i> directory (i.e. wp-content/plugins/WP-FB-AutoConnect-Premium.php), not the WP-FB-AutoConnect directory (i.e. wp-content/plugins/wp-fb-autoconnect/WP-FB-AutoConnect-Premium.php). This is to prevent it from getting overwritten when you auto-update the core plugin.</p></div>
+        <?php
+    }
 	
     do_action('wpfb_admin_messages');
     
     //Which tab to show by default
-    $shownTab = get_option($opt_jfb_valid)?2:1;
+    $shownTab = get_option($opt_jfb_valid)?1:0;
       
     //Update options
     if( isset($_POST['fb_opts_updated']) )
     {
         //When saving the Facebook options, make sure the key and secret are valid...
         update_option( $opt_jfb_valid, 0 );
-        $shownTab = 1;
+        $shownTab = 0;
         $result = jfb_api_get("https://graph.facebook.com/" . $_POST[$opt_jfb_api_key]);
         if(!$result):
             ?><div class="error"><p>Error: Failed to validate your App ID and Secret.  Response: Empty Reply.<br />Are you sure you entered your App ID correctly?</p></div><?php
@@ -123,7 +130,7 @@ function jfb_admin_page()
 			if( is_array($response) && strpos($response['body'], 'access_token=') !== FALSE )
 			{
                 //We're valid!
-                $shownTab = 2;
+                $shownTab = 1;
                 update_option( $opt_jfb_valid, 1 );
                 update_option( $opt_jfb_app_token, substr($response['body'], 13) );
                 if( get_option($opt_jfb_api_key) != $_POST[$opt_jfb_api_key] )
@@ -143,7 +150,7 @@ function jfb_admin_page()
     }
     if( isset($_POST['main_opts_updated']) )
     {
-        $shownTab = 2;
+        $shownTab = 1;
         update_option( $opt_jfb_ask_perms, $_POST[$opt_jfb_ask_perms] );
         update_option( $opt_jfb_ask_stream, $_POST[$opt_jfb_ask_stream] );
         update_option( $opt_jfb_wp_avatars, $_POST[$opt_jfb_wp_avatars] );
@@ -159,12 +166,12 @@ function jfb_admin_page()
     }
     if( isset($_POST['prem_opts_updated']) && function_exists('jfb_update_premium_opts'))
     {
-        $shownTab = 3;
+        $shownTab = 2;
         jfb_update_premium_opts();
     }
     if( isset($_POST['remove_all_settings']) )
     {
-        $shownTab = 1;
+        $shownTab = 0;
         delete_option($opt_jfb_api_key);
         delete_option($opt_jfb_api_sec);
         delete_option($opt_jfb_email_to);
@@ -199,18 +206,19 @@ function jfb_admin_page()
     <!-- Tab Navigation -->
     <?php 
     //Define some variables that'll be used for our tab-switching
-    $allTabsClass = "jfb_admin_tab";
+    $allTabsClass    = "jfb_admin_tab";
     $allTabBtnsClass = "jfb_admin_tab_btn";
-    $tab1Id = "jfb_admin_fbsetup";
-    $tab2Id = "jfb_admin_basicoptions";
-    $tab3Id = "jfb_admin_premiumoptions";
-    $tab4Id = "jfb_admin_uninstall";
-    $tab5Id = "jfb_admin_supportinfo";
+    $tabIds          = array("jfb_admin_fbsetup", "jfb_admin_basicoptions", "jfb_admin_premiumoptions", "jfb_admin_uninstall", "jfb_admin_supportinfo");
+    $tabNames        = array("Facebook Setup",    "Basic Options",          "Premium Options",          "Uninstall",           "Support Info");
     ?>
     
     <script type="text/javascript">
-        function jfb_swap_tabs(show_tab_id) 
+        function jfb_swap_tabs(show_tab_num) 
         {
+            //Find the ID of the tab we want to show
+            var tabIds = <?php echo json_encode($tabIds);?>;
+            var show_tab_id = tabIds[show_tab_num];
+            
             //Hide all the tabs, then show just the one specified
         	jQuery(".<?php echo $allTabsClass ?>").hide();
         	jQuery("#" + show_tab_id).show();
@@ -219,20 +227,31 @@ function jfb_admin_page()
         	jQuery(".<?php echo $allTabBtnsClass?>").attr("class", "<?php echo $allTabBtnsClass?>");
         	jQuery("#" + show_tab_id + "_btn").addClass("jfb-admin_tab_selected");
 		}
+		
+		//When the page is loaded, if there's a hash like "#1, #2, etc" in the URL, switch to that tab.
+		//This handles restoring the previously-displayed tab after a page refresh.
+		jQuery(document).ready(function() 
+		{
+    		if(window.location.hash)
+    		{
+    		    var num = parseInt(window.location.hash.substr(1));
+    		    if( !isNaN(num) )
+    		      jfb_swap_tabs(num);
+    		}
+        });
 	</script>
 	        
     <div>     
-         <ul class="jfb-admin_tabs">
-         	<li id="<?php echo $tab1Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==1?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab1Id?>');">Facebook Setup</a></li>
-         	<li id="<?php echo $tab2Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==2?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab2Id?>')";>Basic Options</a></li>
-         	<li id="<?php echo $tab3Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==3?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab3Id?>');">Premium Options</a></li>
-         	<li id="<?php echo $tab4Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==4?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab4Id?>');">Uninstall</a></li>
-         	<li id="<?php echo $tab5Id?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==5?"jfb-admin_tab_selected":"")?>"><a href="javascript:void(0);" onclick="jfb_swap_tabs('<?php echo $tab5Id?>');">Support Info</a></li>
-         </ul>
+         <ul class="jfb-admin_tabs"><?php
+             for($i=0; $i < count($tabIds); $i++)
+             {
+                 ?><li id="<?php echo $tabIds[$i]?>_btn" class="<?php echo $allTabBtnsClass?> <?php echo ($shownTab==$i?"jfb-admin_tab_selected":"")?>"><a href="#<?php echo $i;?>" onclick="jfb_swap_tabs('<?php echo $i?>');"><?php echo $tabNames[$i];?></a></li><?php
+             }
+       ?></ul>
      </div>
      
     <div class="jfb-admin_wrapper">
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab1Id?>" style="display:<?php echo ($shownTab==1?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[0]?>" style="display:<?php echo ($shownTab==0?"block":"none")?>">
         	<h3>Setup Instructions</h3>
             To allow your users to login with their Facebook accounts, you must first setup a Facebook Application for your website:<br /><br />
             <ol>
@@ -259,7 +278,7 @@ function jfb_admin_page()
             </form>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab2Id?>" style="display:<?php echo ($shownTab==2?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[1]?>" style="display:<?php echo ($shownTab==1?"block":"none")?>">
             <?php
             if(!get_option($opt_jfb_valid))
                 echo "<div class=\"jfb-admin_warning\"><i><b>You must enter a valid APP ID and Secret under the \"Facebook Setup\" tab before this plugin will function.</b></i></div>";    
@@ -297,7 +316,7 @@ function jfb_admin_page()
             </form>
     	</div><!-- End Tab -->
     
-    	<div class="<?php echo $allTabsClass ?>" id="<?php echo $tab3Id?>" style="display:<?php echo ($shownTab==3?"block":"none")?>">
+    	<div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[2]?>" style="display:<?php echo ($shownTab==2?"block":"none")?>">
             <?php
             if(!get_option($opt_jfb_valid))
                 echo "<div class=\"jfb-admin_warning\"><i><b>You must enter a valid APP ID and Secret under the \"Facebook Setup\" tab before this plugin will function.</b></i></div>";    
@@ -308,7 +327,7 @@ function jfb_admin_page()
             ?>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab4Id?>" style="display:<?php echo ($shownTab==4?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[3]?>" style="display:<?php echo ($shownTab==3?"block":"none")?>">
             <h3>Delete All Plugin Options</h3>
             The following button will <i>permanently</i> delete all of this plugin's options from your Wordpress database, as if it had never been installed.  Use with care!
             <form name="formDebugOptions" method="post" action="">
@@ -317,13 +336,13 @@ function jfb_admin_page()
             </form>
         </div> <!-- End Tab -->
         
-        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tab5Id?>" style="display:<?php echo ($shownTab==5?"block":"none")?>">
+        <div class="<?php echo $allTabsClass ?>" id="<?php echo $tabIds[4]?>" style="display:<?php echo ($shownTab==4?"block":"none")?>">
             <h3>Support Information</h3>
             <div style="width:600px;">
             Before submitting a support request, please make sure to carefully read all the documentation and FAQs on the <a href="<?php echo $jfb_homepage; ?>#faq" target="_support">plugin homepage</a>.  Every problem that's ever been reported has a solution posted there.<br /><br />                        
             If you do choose to submit a request, please do so via the <a href="<?php echo $jfb_homepage; ?>#feedback" target="_support">plugin homepage</a>, <i><b><u>not</u></b></i> on Wordpress.org (which I rarely check).  Also, please <i><u>specifically mention</u></i> that you've tried it with all other plugins disabled and the default theme (see <a href="<?php echo $jfb_homepage ?>#faq100" target="_faq100">FAQ100</a>) and include the following information about your Wordpress environment:<br /><br />            
             </div>
-            <div style="width:600px; padding:5px; margin:2px 0; background-color:#EEEDDA; border:1px solid #CCC;">
+            <div class="jfb-greybox">
                 Host URL: <b><?php echo $_SERVER["HTTP_HOST"] ?></b><br />
                 Site URL: <b><?php echo get_bloginfo('url') ?></b><br />
                 Wordpress URL: <b><?php echo get_bloginfo('wpurl') ?></b><br />
@@ -415,8 +434,8 @@ function jfb_auth($name, $version, $event, $message=0)
 function jfb_output_premium_panel_tease()
 {
     global $jfb_homepage;
-    global $opt_jfbp_notifyusers, $opt_jfbp_notifyusers_subject, $opt_jfbp_notifyusers_content, $opt_jfbp_commentfrmlogin, $opt_jfbp_wploginfrmlogin, $opt_jfbp_registrationfrmlogin, $opt_jfbp_cache_avatars, $opt_jfbp_cache_avatars_fullsize, $opt_jfbp_cache_avatar_dir;
-    global $opt_jfbp_buttonsize, $opt_jfbp_buttontext, $opt_jfbp_requirerealmail;
+    global $opt_jfbp_notifyusers, $opt_jfbp_notifyusers_subject, $opt_jfbp_notifyusers_content, $opt_jfbp_commentfrmlogin, $opt_jfbp_wploginfrmlogin, $opt_jfbp_registrationfrmlogin, $opt_jfbp_cache_avatars, $opt_jfbp_cache_avatars_fullsize, $opt_jfbp_cache_avatar_dir, $opt_jfbp_cachedir_changetoblog;
+    global $opt_jfbp_buttonstyle, $opt_jfbp_buttonsize, $opt_jfbp_buttontext, $opt_jfbp_buttonimg, $opt_jfbp_requirerealmail;
     global $opt_jfbp_redirect_new, $opt_jfbp_redirect_new_custom, $opt_jfbp_redirect_existing, $opt_jfbp_redirect_existing_custom, $opt_jfbp_redirect_logout, $opt_jfbp_redirect_logout_custom;
     global $opt_jfbp_restrict_reg, $opt_jfbp_restrict_reg_url, $opt_jfbp_restrict_reg_uid, $opt_jfbp_restrict_reg_pid, $opt_jfbp_restrict_reg_gid;
     global $opt_jfbp_show_spinner, $opt_jfbp_allow_disassociate, $opt_jfbp_autoregistered_role, $jfb_data_url;
@@ -443,12 +462,39 @@ function jfb_output_premium_panel_tease()
         <input disabled='disabled' type="checkbox" name="musupport" value="1" <?php echo ((defined('JFB_PREMIUM')&&function_exists('is_multisite')&&is_multisite())?"checked='checked'":"")?> >
         Automatically enabled when a MultiSite install is detected
         <dfn title="The free plugin is not aware of users registered on other sites in your WPMU installation, which can result in problems i.e. if someone tries to register on more than one site.  The Premium version will actively detect and handle existing users across all your sites.">(Mouseover for more info)</dfn><br /><br />
-                
-        <b>Double Logins:</b><br />
-        <input disabled='disabled' type="checkbox" name="doublelogin" value="1" <?php echo (defined('JFB_PREMIUM')?"checked='checked'":"")?> />
-        Automatically handle double logins 
-        <dfn title="If a visitor opens two browser windows, logs into one, then logs into the other, the security nonce check will fail.  This is because in the second window, the current user no longer matches the user for which the nonce was generated.  The free version of the plugin reports this to the visitor, giving them a link to their desired redirect page.  The premium version will transparently handle such double-logins: to visitors, it'll look like the page has just been refreshed and they're now logged in.  For more information on nonces, please visit http://codex.wordpress.org/WordPress_Nonces.">(Mouseover for more info)</dfn><br /><br />
+
+        <b>Button Style:</b><br />
+        <?php add_option($opt_jfbp_buttontext, "Login with Facebook");
+        add_option($opt_jfbp_buttonsize, "2");
+        $btnDefault = $jfb_data_url . "/assets/btn01.png";
+        add_option($opt_jfbp_buttonimg, $btnDefault);
+        $btnPreview = get_option($opt_jfbp_buttonimg);
+        if(!$btnPreview) $btnPreview = $btnDefault;
+        ?>
+
+        <input <?php disableatt() ?> type="radio" style="float:left;" name="<?php echo $opt_jfbp_buttonstyle; ?>" value="0" <?php echo (get_option($opt_jfbp_buttonstyle)==0?"checked='checked'":"")?>>
+        <div class="jfb-greybox" style="float:left;">
+            <b>Original (xfbml):</b><br/>
+            Text: <input <?php disableatt() ?> type="text" size="30" name="<?php echo $opt_jfbp_buttontext; ?>" value="<?php echo get_option($opt_jfbp_buttontext); ?>" /><br />
+            Style: 
+            <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="2" <?php echo (get_option($opt_jfbp_buttonsize)==2?"checked='checked'":"")?>>Small
+            <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="3" <?php echo (get_option($opt_jfbp_buttonsize)==3?"checked='checked'":"")?>>Medium
+            <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="4" <?php echo (get_option($opt_jfbp_buttonsize)==4?"checked='checked'":"")?>>Large
+            <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="5" <?php echo (get_option($opt_jfbp_buttonsize)==5?"checked='checked'":"")?>>X-Large<br />
+        </div><br clear="all"/>
+        <input <?php disableatt() ?> type="radio" style="float:left;" name="<?php echo $opt_jfbp_buttonstyle; ?>" value="1" <?php echo (get_option($opt_jfbp_buttonstyle)==1?"checked='checked'":"")?>>
+        <div class="jfb-greybox" style="float:left;">
+            <b>Image (styleable):</b><br/>
+            URL: <input <?php disableatt() ?> type="text" size="80" name="<?php echo $opt_jfbp_buttonimg; ?>" value="<?php echo get_option($opt_jfbp_buttonimg); ?>" /><br/>
+            Preview: <img style="vertical-align:middle;margin-top:5px;" src="<?php echo $btnPreview?>" alt="(Login Button)" />
+        </div><br clear="all"/><br/>
         
+        <b>Additional Buttons:</b><br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_commentfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_commentfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button below the comment form<br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_wploginfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_wploginfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the standard Login page (wp-login.php)<br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_registrationfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_registrationfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the Registration page (wp-login.php)<br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_signupfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_signupfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the Signup page (wp-signup.php) (WPMU Only)<br /><br />
+                        
         <!-- Facebook's OAuth 2.0 migration BROKE my ability to localize the XFBML-generated dialog.  I've reported a bug, and will do my best to fix it as soon as possible.
          <b>Facebook Localization:</b><br />
         <?php add_option($opt_jfbp_localize_facebook, 1); ?>
@@ -457,25 +503,55 @@ function jfb_output_premium_panel_tease()
         <dfn title="The Wordpress locale is specified in wp-config.php, where valid language codes are of the form 'en_US', 'ja_JP', 'es_LA', etc.  Please see http://codex.wordpress.org/Installing_WordPress_in_Your_Language for more information on localizing Wordpress, and http://developers.facebook.com/docs/internationalization/ for a list of locales supported by Facebook.">(Mouseover for more info)</dfn><br /><br />
          -->
                         
-        <b>E-Mail Permissions:</b><br />
-        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_requirerealmail?>" value="1" <?php echo get_option($opt_jfbp_requirerealmail)?'checked="checked"':''?> /> Enforce access to user's real (unproxied) email
-        <dfn title="The basic option to request user emails will prompt your visitors, but they can still hide their true addresses by using a Facebook proxy (click 'change' in the permissions dialog, and select 'xxx@proxymail.facebook.com').  This option performs a secondary check to enforce that they allow access to their REAL e-mail.  Note that the check requires several extra queries to Facebook's servers, so it could result in a slightly longer delay before the login initiates.">(Mouseover for more info)</dfn><br /><br />
-
         <b>Avatar Caching:</b><br />  
         <?php add_option($opt_jfbp_cache_avatars_fullsize, get_option($opt_jfbp_cache_avatars)); ?>       
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_cache_avatars?>" value="1" <?php echo get_option($opt_jfbp_cache_avatars)?'checked="checked"':''?> />
         Cache Facebook avatars locally (thumbnail) <dfn title="This will make a local copy of Facebook avatars, so they'll always load reliably, even if Facebook's servers go offline or if a user deletes their photo from Facebook. They will be fetched and updated whenever a user logs in.">(Mouseover for more info)</dfn><br />
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_cache_avatars_fullsize?>" value="1" <?php echo get_option($opt_jfbp_cache_avatars_fullsize)?'checked="checked"':''?> />
         Cache Facebook avatars locally (fullsize) <dfn title="Because most themes only utilize thumbnail-sized avatars, caching full-sized images is often unnecessary.  If you're not actually using full-sized avatars I recommend disabling this option, as doing so will speed up logins and save space on your server (there's a small per-login performance cost to copying the files locally).">(Mouseover for more info)</dfn><br />
-        Cache directory:
-        <span style="background-color:#FFFFFF; color:#aaaaaa; padding:2px 0;"><?php 
-        add_option($opt_jfbp_cache_avatar_dir, 'facebook-avatars');
-        $ud = wp_upload_dir();
-        echo "<i>" . $ud['basedir'] . "/</i>";         
-        ?></span>
-        <input <?php disableatt() ?> type="text" size="20" name="<?php echo $opt_jfbp_cache_avatar_dir; ?>" value="<?php echo get_option($opt_jfbp_cache_avatar_dir); ?>" />
+        
+        <?php add_option($opt_jfbp_cache_avatar_dir, 'facebook-avatars'); ?>
+        Cache dir:
+            <?php
+            //If this is multisite, we'll allow the use of the uploaddir of *any* blog in the network (not just the current one).
+            //This way, all the blogs can share the same avatar cache if desired.
+            if(function_exists('is_multisite') && is_multisite())
+            {
+                global $wpdb;
+                $blogs = $wpdb->get_results( $wpdb->prepare("SELECT blog_id, domain, path FROM $wpdb->blogs WHERE site_id = %d AND public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0' ORDER BY registered ASC", $wpdb->siteid), ARRAY_A );
+                echo "<select name='".$opt_jfbp_cachedir_changetoblog."'>";
+                foreach ($blogs AS $blog)
+                {
+                    switch_to_blog($blog['blog_id']);
+                    $path = wp_upload_dir();
+                    restore_current_blog();
+                    $selectedBlogID = get_option($opt_jfbp_cachedir_changetoblog);
+                    if($selectedBlogID == 0) $selectedBlogID = get_current_blog_id();
+                    $selected = ($selectedBlogID == $blog['blog_id'])?" selected='true' ":'';
+                    echo '<option '.$selected.' value="'.$blog['blog_id'].'">'.$path['basedir'].'</option>';
+                }
+                echo "</select>\\";
+            }
+            //If this is NOT multisite, we'll always use the current blog's upload_dir as the basedir for our avatar cache
+            else
+            {
+                $path = wp_upload_dir();
+                update_option($opt_jfbp_cachedir_changetoblog, 0);
+                ?><span style="background-color:#FFFFFF; color:#aaaaaa; padding:2px 0;"><i><?php echo $path['basedir']; ?>/</i></span><?php
+            }
+            ?>
+        <input <?php disableatt() ?> type="text" size="15" name="<?php echo $opt_jfbp_cache_avatar_dir; ?>" value="<?php echo get_option($opt_jfbp_cache_avatar_dir); ?>" />
         <dfn title="Changing the cache directory will not move existing avatars or update existing users; it only applies to subsequent logins.  It's therefore recommended that you choose a cache directory once, then leave it be.">(Mouseover for more info)</dfn><br /><br />
 
+        <b>Double Logins:</b><br />
+        <input disabled='disabled' type="checkbox" name="doublelogin" value="1" <?php echo (defined('JFB_PREMIUM')?"checked='checked'":"")?> />
+        Automatically handle double logins 
+        <dfn title="If a visitor opens two browser windows, logs into one, then logs into the other, the security nonce check will fail.  This is because in the second window, the current user no longer matches the user for which the nonce was generated.  The free version of the plugin reports this to the visitor, giving them a link to their desired redirect page.  The premium version will transparently handle such double-logins: to visitors, it'll look like the page has just been refreshed and they're now logged in.  For more information on nonces, please visit http://codex.wordpress.org/WordPress_Nonces.">(Mouseover for more info)</dfn><br /><br />
+
+        <b>E-Mail Permissions:</b><br />
+        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_requirerealmail?>" value="1" <?php echo get_option($opt_jfbp_requirerealmail)?'checked="checked"':''?> /> Enforce access to user's real (unproxied) email
+        <dfn title="The basic option to request user emails will prompt your visitors, but they can still hide their true addresses by using a Facebook proxy (click 'change' in the permissions dialog, and select 'xxx@proxymail.facebook.com').  This option performs a secondary check to enforce that they allow access to their REAL e-mail.  Note that the check requires several extra queries to Facebook's servers, so it could result in a slightly longer delay before the login initiates.">(Mouseover for more info)</dfn><br /><br />
+        
         <b>Wordbooker Avatar Integration:</b><br />
         <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_wordbooker_integrate?>" value="1" <?php echo get_option($opt_jfbp_wordbooker_integrate)?'checked="checked"':''?> /> Use Facebook avatars for <a href="http://wordpress.org/extend/plugins/wordbooker/">Wordbooker</a>-imported comments
         <dfn title="The Wordbooker plugin allows you to push blog posts to your Facebook wall, and also to import comments on these posts back to your blog.  This option will display real Facebook avatars for imported comments, provided the commentor logs into your site at least once.">(Mouseover for more info)</dfn><br /><br />
@@ -501,31 +577,18 @@ function jfb_output_premium_panel_tease()
         <b>Widget Appearance:</b><br />
         Please use the <a href="<?php echo admin_url('widgets.php') ?>" target="widgets">WP-FB AutoConnect <b><i>Premium</i></b> Widget</a> if you'd like to:<br />
         &bull; Customize the Widget's text <dfn title="You can customize the text of: User, Pass, Login, Remember, Forgot, Logout, Edit Profile, Welcome.">(Mouseover for more info)</dfn><br />
-        &bull; Hide the User/Pass fields (leaving Facebook as the only way to login)<br />
-        &bull; Show the user's avatar (when logged in)<br />
-        &bull; Show a "Remember" tickbox<br />      
+        &bull; Show/Hide the User/Pass fields (leaving Facebook as the only way to login)<br />
+        &bull; Show/Hide the user's avatar (when logged in)<br />
+        &bull; Show/Hide a "Remember" tickbox<br />
+        &bull; Show/Hide the "Register" link (only applicable if registration is enabled on the site/network)<br/>
+        &bull; Show/Hide the "Edit Profile" link<br/>
+        &bull; Point the "Edit Profile" link to the BP profile, rather than WP (if available)<br/>
         &bull; Allow the user to simultaneously logout of your site <i>and</i> Facebook<br /><br />
-        
-        <b>Button Appearance:</b><br />
-        <?php add_option($opt_jfbp_buttontext, "Login with Facebook"); ?>
-        <?php add_option($opt_jfbp_buttonsize, "2"); ?>
-        Text: <input <?php disableatt() ?> type="text" size="30" name="<?php echo $opt_jfbp_buttontext; ?>" value="<?php echo get_option($opt_jfbp_buttontext); ?>" /> <dfn title="This setting applies to ALL of your Facebook buttons (in the widget, wp-login.php, comment forms, etc).">(Mouseover for more info)</dfn><br />
-        Style: 
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="2" <?php echo (get_option($opt_jfbp_buttonsize)==2?"checked='checked'":"")?>>Small
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="3" <?php echo (get_option($opt_jfbp_buttonsize)==3?"checked='checked'":"")?>>Medium
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="4" <?php echo (get_option($opt_jfbp_buttonsize)==4?"checked='checked'":"")?>>Large
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_buttonsize; ?>" value="5" <?php echo (get_option($opt_jfbp_buttonsize)==5?"checked='checked'":"")?>>X-Large<br /><br />
-        
-        <b>Additional Buttons:</b><br />
-        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_commentfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_commentfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button below the comment form<br />
-        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_wploginfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_wploginfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the standard Login page (wp-login.php)<br />
-        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_registrationfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_registrationfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the Registration page (wp-login.php)<br />
-        <input <?php disableatt() ?> type="checkbox" name="<?php echo $opt_jfbp_signupfrmlogin?>" value="1" <?php echo get_option($opt_jfbp_signupfrmlogin)?'checked="checked"':''?> /> Add a Facebook Login button to the Signup page (wp-signup.php) (WPMU Only)<br /><br />
             
         <b>AJAX Spinner:</b><br />
         <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_show_spinner; ?>" value="0" <?php echo (get_option($opt_jfbp_show_spinner)==0?"checked='checked'":"")?> >Don't show an AJAX spinner<br />
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_show_spinner; ?>" value="1" <?php echo (get_option($opt_jfbp_show_spinner)==1?"checked='checked'":"")?> >Show a white AJAX spinner to indicate the login process has started (<img src=" <?php echo $jfb_data_url ?>/spinner/spinner_white.gif" alt="spinner" />)<br />
-        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_show_spinner; ?>" value="2" <?php echo (get_option($opt_jfbp_show_spinner)==2?"checked='checked'":"")?> >Show a black AJAX spinner to indicate the login process has started (<img src=" <?php echo $jfb_data_url ?>/spinner/spinner_black.gif" alt="spinner" />)<br /><br />
+        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_show_spinner; ?>" value="1" <?php echo (get_option($opt_jfbp_show_spinner)==1?"checked='checked'":"")?> >Show a white AJAX spinner to indicate the login process has started (<img src=" <?php echo $jfb_data_url ?>/assets/spinner_white.gif" alt="spinner" />)<br />
+        <input <?php disableatt() ?> type="radio" name="<?php echo $opt_jfbp_show_spinner; ?>" value="2" <?php echo (get_option($opt_jfbp_show_spinner)==2?"checked='checked'":"")?> >Show a black AJAX spinner to indicate the login process has started (<img src=" <?php echo $jfb_data_url ?>/assets/spinner_black.gif" alt="spinner" />)<br /><br />
                 
         <b>AutoRegistration Restrictions:</b><br />
         <?php add_option($opt_jfbp_restrict_reg_url, '/') ?>

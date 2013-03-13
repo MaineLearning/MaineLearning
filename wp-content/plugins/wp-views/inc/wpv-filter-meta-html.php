@@ -1,5 +1,66 @@
 <?php
 
+/**
+ * Media popup functions and filters.
+ */
+
+if ( isset( $_GET['wpv-media-insert'] ) || isset( $_GET['wpv-media-edit'] ) ) { // Button "Add Media"
+	// Remove unwanted tabs
+	add_filter('media_upload_tabs', 'wpv_media_upload_tabs_filter');
+	// Remove "Insert into post" button and add button-secondary class to Delete link
+	add_action( 'admin_head-media-upload-popup', 'wpv_media_popup_changes' );
+}
+
+function wpv_media_popup_changes() { ?>
+<script type="text/javascript">
+        jQuery(document).ready(function(){
+		var idview = window.parent.jQuery('#post_ID').val();
+		jQuery('.savesend input').hide();
+		jQuery('tr.align').hide();
+		jQuery('tr.image-size').hide();
+		jQuery('tr.url').hide();
+		jQuery('.savesend a').addClass('button-secondary').css('color', '#333333');
+		jQuery('.media-upload-form').append('<p><a class="wpv-save-media button button-primary">Save all changes</a></p>');
+		jQuery('.savesend input.save').click(function(){
+			wpv_view_media_manager(idview);
+		});
+		jQuery('.wpv-save-media').click(function(){
+			wpv_view_media_manager(idview);
+		});
+        });
+        function wpv_view_media_manager(idview) {
+		window.parent.jQuery('.media-list').hide();
+		var data = '&action=wpv_view_media_manager';
+		data += '&_wpnonce=<?php echo wp_create_nonce('wpv_media_manager_callback'); ?>';
+                data += '&view_id=' + idview;
+		jQuery.post(ajaxurl, data, function(response) {
+			if (response != '') {
+				window.parent.jQuery('.wpv_table_attachments').html(response);
+				window.parent.jQuery('.media-list').show();
+			}
+			self.parent.tb_remove();
+		});
+        
+	}
+</script>
+<style type="text/css">
+<?php if ( isset( $_GET['wpv-media-insert'] ) ) { // Button "Edit media items"
+	?> 
+	tr.submit { display: none; }
+<?php } ?>
+	#gallery-settings, .ml-submit {display:none !important;}
+	</style>
+<?php
+}
+
+function wpv_media_upload_tabs_filter($tabs) {
+	unset($tabs['type_url']);
+	unset( $tabs['library'] );
+	if ( isset( $_GET['wpv-media-edit'] ) ) { // Button "Edit media items"
+		unset( $tabs['type'] );
+	}
+	return $tabs;
+}
 
 /*
   
@@ -16,6 +77,7 @@ function wpv_filter_meta_html_admin($view_settings) {
     
     ?>
         <div id="wpv_filter_meta_html_admin">
+	    <input type="hidden" name="_wpv_settings[filter_meta_html_state][html]" id="wpv_filter_meta_html_state" value="<?php echo isset($view_settings['filter_meta_html_state']['html']) ? $view_settings['filter_meta_html_state']['html'] : 'off'; ?>" />
             <div id="wpv_filter_meta_html_admin_show">
                 <p><i><?php echo __('The pagination and filter control settings generate meta HTML. This meta HTML includes shortcodes and HTML, which you can edit, to fully customize the appearance of this View\'s filter section.', 'wpv-views'); ?></i></p>
                 <input type="button" class="button-secondary" onclick="wpv_view_filter_meta_html()" value="<?php _e('View/Edit Meta HTML', 'wpv-views'); ?>" />
@@ -38,9 +100,11 @@ function wpv_filter_meta_html_admin($view_settings) {
                         <input type="button" class="button-primary" value="<?php echo __('Apply', 'wpv-views'); ?>" onclick="wpv_filter_control_apply_changes()" />
                     </div>
 
-                    <?php echo $WP_Views->editor_addon->add_form_button('', '#wpv_filter_meta_html_content', true, true); ?>
+                    <?php echo $WP_Views->editor_addon->add_form_button('', 'wpv_filter_meta_html_content', true, true); ?>
 
-                    <?php echo apply_filters('wpv_meta_html_add_form_button', '', '#wpv_filter_meta_html_content'); ?>
+                    <span style="position: relative; top:-5px;">
+                        <?php echo apply_filters('wpv_meta_html_add_form_button', '', '#wpv_filter_meta_html_content'); ?>
+                    </span>
                     
                     <div id="wpv-add-filter-controls-popup" style="display:none">
                         <div id="wpv-add-filter-controls-content">
@@ -57,6 +121,80 @@ function wpv_filter_meta_html_admin($view_settings) {
                     <div id="wpv_filter_meta_html_notice" class="wpv_form_notice" style="display:none;"><?php _e('* These updates will take effect when you save the view.', 'wpv-views'); ?></div>
                     <p><a style="cursor:pointer;margin-bottom:10px;" onclick="wpv_view_filter_meta_html_close()"><strong><?php _e('Close', 'wpv-views'); ?></strong></a></p>
                 </div>
+            </div>
+            <div id="wpv_filter_meta_html_extra_css" style="margin-top:15px;">
+		<input type="hidden" name="_wpv_settings[filter_meta_html_state][css]" id="wpv_filter_meta_html_extra_css_state" value="<?php echo isset($view_settings['filter_meta_html_state']['css']) ? $view_settings['filter_meta_html_state']['css'] : 'off'; ?>" />
+		<input type="button" class="button-secondary wpv_filter_meta_html_extra_css_edit" onclick="wpv_view_filter_meta_html_extra(this)" value="<?php _e('Edit CSS', 'wpv-views'); ?>" />
+		<div id ="wpv_filter_meta_html_extra_css_edit" style="background:<?php echo WPV_EDIT_BACKGROUND; ?>">
+		    <p><?php _e('<strong>CSS</strong> - This is used to add custom CSS to a View query.', 'wpv-views'); ?></p>
+		    <textarea name="_wpv_settings[filter_meta_html_css]" id="wpv_filter_meta_html_css" cols="97" rows="10"><?php echo isset($view_settings['filter_meta_html_css']) ? $view_settings['filter_meta_html_css'] : ''; ?></textarea>
+		    <div id="wpv_filter_meta_html_extra_css_notice" class="wpv_form_notice" style="display:none;"><?php _e('* These updates will take effect when you save the view.', 'wpv-views'); ?></div>
+		    <p><a style="cursor:pointer;margin-bottom:10px;" id="wpv_filter_meta_html_extra_css_close" onclick="wpv_view_filter_meta_html_extra_css_close()"><strong><?php _e('Close CSS editor', 'wpv-views'); ?></strong></a></p>
+		</div>
+            </div>
+            <div id="wpv_filter_meta_html_extra_js" style="margin-top:15px;">
+		<input type="hidden" name="_wpv_settings[filter_meta_html_state][js]" id="wpv_filter_meta_html_extra_js_state" value="<?php echo isset($view_settings['filter_meta_html_state']['js']) ? $view_settings['filter_meta_html_state']['js'] : 'off'; ?>" />
+		<input type="button" class="button-secondary wpv_filter_meta_html_extra_js_edit" onclick="wpv_view_filter_meta_html_extra(this)" value="<?php _e('Edit JS', 'wpv-views'); ?>" />
+		<div id ="wpv_filter_meta_html_extra_js_edit" style="background:<?php echo WPV_EDIT_BACKGROUND; ?>">
+		    <p><?php _e('<strong>JS</strong> - This is used to add custom javascript to a View query.', 'wpv-views'); ?></p>
+		    <textarea name="_wpv_settings[filter_meta_html_js]" id="wpv_filter_meta_html_js" cols="97" rows="10"><?php echo isset($view_settings['filter_meta_html_js']) ? $view_settings['filter_meta_html_js'] : ''; ?></textarea>
+                    <div id="wpv_filter_meta_html_extra_js_notice" class="wpv_form_notice" style="display:none;"><?php _e('* These updates will take effect when you save the view.', 'wpv-views'); ?></div>
+                    <p><a style="cursor:pointer;margin-bottom:10px;" id="wpv_filter_meta_html_extra_js_close" onclick="wpv_view_filter_meta_html_extra_js_close()"><strong><?php _e('Close JS editor', 'wpv-views'); ?></strong></a></p>
+		</div>
+            </div>
+            <div id="wpv_filter_meta_html_extra_img" style="margin-top:15px;">
+            <?php global $post; ?>
+		<input type="hidden" name="_wpv_settings[filter_meta_html_state][img]" id="wpv_filter_meta_html_extra_img_state" value="<?php echo isset($view_settings['filter_meta_html_state']['img']) ? $view_settings['filter_meta_html_state']['img'] : 'off'; ?>" />
+		<input type="button" class="button-secondary wpv_filter_meta_html_extra_img_edit" onclick="wpv_view_filter_meta_html_extra(this)" value="<?php _e('Manage Media', 'wpv-views'); ?>" />
+		<div id ="wpv_filter_meta_html_extra_img_edit" style="background:<?php echo WPV_EDIT_BACKGROUND; ?>">
+		    <p><?php _e('<strong>Media</strong> - This is used to add images to a View output.', 'wpv-views'); ?></p>
+		    <input type="button" class="button-secondary wpv_filter_meta_html_extra_img_upload" onclick="tb_show('<?php _e('Upload images'); ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&wpv-media-insert=1&TB_iframe=true');return false;" value="<?php _e('Add Media', 'wpv-views'); ?>" />
+		    <?php 
+			$args = array(
+				'post_type' => 'attachment',
+				'numberposts' => null,
+				'post_status' => null,
+				'post_parent' => $post->ID
+			); 
+			$attachments = get_posts($args);
+			if ($attachments) { ?>
+			<div class="media-list">
+				<p>Copy the links of the media items and paste into the meta HTML and CSS editors. You can use full URLs. When exporting and importing this View to another site, all URLs will be adjusted.</p>
+				<table class="wpv_table_attachments widefat">
+				<thead>
+				<tr>
+				<th><?php _e('Thumbnail', 'wpv-views'); ?></th>
+				<th><?php _e('URL', 'wpv-views'); ?></th>
+				</tr>
+				</thead>
+				<?php
+					foreach ($attachments as $attachment) {
+						$type = get_post_mime_type($attachment->ID);
+						$icon = wp_mime_type_icon($type);
+						if ( $type == 'image/gif' || $type == 'image/jpeg' || $type == 'image/png' ) {
+							$thumb = '<img src="' .  $attachment->guid . '" alt="' . $attachment->post_title . '" width="60" height="60" />';
+						} else {
+							$thumb = '<img src="' . $icon . '" />';
+						}
+						?>
+						<tr>
+						<td><?php echo $thumb; ?></td>
+						<td><a href="<?php echo $attachment->guid;?>"><?php echo $attachment->guid;?></a></td>
+						</tr>
+					<?php } ?>
+				</table>
+				<p><input type="button" class="button-secondary wpv_filter_meta_html_extra_img_edit_existing" onclick="tb_show('<?php _e('Edit media items'); ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&tab=gallery&wpv-media-edit=1&TB_iframe=true');return false;" value="<?php _e('Edit media items', 'wpv-views'); ?>" /></p>
+			</div>
+			<?php } else { ?>
+				<div class="media-list" style="display:none;">
+				<p>Copy the links of the media items and paste into the meta HTML and CSS editors. You can use full URLs. When exporting and importing this View to another site, all URLs will be adjusted.</p>
+				<table class="wpv_table_attachments widefat"></table>
+				<p><input type="button" class="button-secondary wpv_filter_meta_html_extra_img_edit_existing" onclick="tb_show('<?php _e('Edit media items'); ?>', 'media-upload.php?post_id=<?php echo $post->ID; ?>&type=image&tab=gallery&wpv-media-edit=1&TB_iframe=true');return false;" value="<?php _e('Edit media items', 'wpv-views'); ?>" /></p>
+				</div>			
+			<?php } ?>
+                    <div id="wpv_filter_meta_html_extra_img_notice" class="wpv_form_notice" style="display:none;"><?php _e('* These updates will take effect when you save the view.', 'wpv-views'); ?></div>
+                    <p><a style="cursor:pointer;margin-bottom:10px;" id="wpv_filter_meta_html_extra_img_close" onclick="wpv_view_filter_meta_html_extra_img_close()"><strong><?php _e('Close Media manager', 'wpv-views'); ?></strong></a></p>
+		</div>
             </div>
         </div>
 

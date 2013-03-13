@@ -6,7 +6,7 @@ add_action( 'bp_actions', 'bebop_feeds' );
 
 function bebop_feeds() {
 	global $bp, $wp_query, $this_bp_feed;
-	if ( bp_is_activity_component() && bp_displayed_user_id() ) {
+	if ( bp_is_activity_component() ) {
 		$active_extensions = bebop_extensions::bebop_get_active_extension_names();
 		$active_extensions[] = 'all_oers';
 		foreach ( $active_extensions as $extension ) {

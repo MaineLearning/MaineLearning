@@ -33,8 +33,8 @@
 function wpcf_fields_image_insert_form() {
     $filename = WPCF_INC_ABSPATH . '/fields/file.php';
     require_once $filename;
-    
-    if (function_exists('wpcf_fields_file_insert_form')) {
+
+    if ( function_exists( 'wpcf_fields_file_insert_form' ) ) {
         return wpcf_fields_file_insert_form();
     }
 }

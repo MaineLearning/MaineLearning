@@ -22,8 +22,7 @@ add_filter('the_content', 'wpv_resolve_internal_shortcodes', 9);
 function wpv_parse_content_shortcodes($content) {
 	$inner_expressions = array();
 	$inner_expressions[] = "/\\[types.*?\\].*?\\[\\/types\\]/i";
-	$inner_expressions[] = "/\\[(wpv-post-|types).*?\\]/i";
-	
+	$inner_expressions[] = "/\\[(wpv-post-|wpv-taxonomy-|types|wpv-current-user).*?\\]/i";
 	// search for shortcodes
 	$matches = array();
 	$counts = _find_outer_brackets($content, $matches);
@@ -93,4 +92,4 @@ function wpv_resolve_internal_shortcodes_for_widgets($content) {
 	return do_shortcode($content);
 }
 
-add_filter('widget_text', 'wpv_resolve_internal_shortcodes_for_widgets');
+add_filter('widget_text', 'wpv_resolve_internal_shortcodes_for_widgets', 9, 1); 

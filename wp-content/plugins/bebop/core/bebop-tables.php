@@ -74,7 +74,17 @@ class bebop_tables {
 		$content = strip_tags( $content );
 		$content = like_escape( $content );
 		
-		if ( $wpdb->get_row( 'SELECT content FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager user_id = '" . $wpdb->escape( $user_id ) . "' AND type = '" . $wpdb->escape( $extension ) . "' AND content LIKE '%" . $content . "%'" ) ) {
+		if ( $wpdb->get_row( 'SELECT content FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND type = '" . $wpdb->escape( $extension ) . "' AND content LIKE '%" . $content . "%'" ) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	function check_existing_content_id( $user_id, $extension, $secondary_item_id ) {
+		global $wpdb;
+		if ( $wpdb->get_row( 'SELECT secondary_item_id FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE user_id = '" . $wpdb->escape( $user_id ) . "' AND type = '" . $wpdb->escape( $extension ) . "' AND secondary_item_id = '" . $wpdb->escape( $secondary_item_id ) . "'" ) ) {
 			return true;
 		}
 		else {
@@ -139,10 +149,10 @@ class bebop_tables {
 		return $result;
 	}
 
-	function fetch_individual_oer_data( $secondary_item_id ) {
+	function fetch_individual_oer_data( $id ) {
 		global $wpdb;
-		$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE secondary_item_id = '" . $wpdb->escape( $secondary_item_id ) . "'" );
-		if ( ! empty( $result[0]->secondary_item_id ) ) {
+		$result = $wpdb->get_results( 'SELECT * FROM ' . bp_core_get_table_prefix() . "bp_bebop_oer_manager WHERE id = '" . $wpdb->escape( $id ) . "'" );
+		if ( ! empty( $result[0]->id ) ) {
 			return $result[0];
 		}
 		else {
@@ -150,10 +160,10 @@ class bebop_tables {
 		} 
 	}
 	
-	function update_oer_data( $secondary_item_id, $column, $value ) {
+	function update_oer_data( $id, $column, $value ) {
 		global $wpdb;
 		
-		$result = $wpdb->query( 'UPDATE ' . bp_core_get_table_prefix() . 'bp_bebop_oer_manager SET ' . $column . " = '"  . $wpdb->escape( $value ) . "' WHERE secondary_item_id = '" . $wpdb->escape( $secondary_item_id ) . "' LIMIT 1" );
+		$result = $wpdb->query( 'UPDATE ' . bp_core_get_table_prefix() . 'bp_bebop_oer_manager SET ' . $column . " = '"  . $wpdb->escape( $value ) . "' WHERE id = '" . $wpdb->escape( $id ) . "' LIMIT 1" );
 		if ( ! empty( $result ) ) {
 			return $result;
 		}

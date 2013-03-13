@@ -34,10 +34,13 @@ class EM_Bookings extends EM_Object implements Iterator{
 		if( is_object($data) && get_class($data) == "EM_Event" ){ //Creates a blank bookings object if needed
 			global $wpdb;
 			$this->event_id = $data->event_id;
-			$sql = "SELECT * FROM ". EM_BOOKINGS_TABLE ." WHERE event_id ='{$this->event_id}' ORDER BY booking_date";
-			$bookings = $wpdb->get_results($sql, ARRAY_A);
+			$bookings = array();
+			if( $this->event_id > 0 ){
+				$sql = "SELECT * FROM ". EM_BOOKINGS_TABLE ." WHERE event_id ='{$this->event_id}' ORDER BY booking_date";
+				$bookings = $wpdb->get_results($sql, ARRAY_A);
+			}
 			foreach ($bookings as $booking){
-				$this->bookings[] = new EM_Booking($booking);
+				$this->bookings[] = em_get_booking($booking);
 			}
 			$this->spaces = $this->get_spaces();
 		}elseif( is_array($data) ){
@@ -50,52 +53,48 @@ class EM_Bookings extends EM_Object implements Iterator{
 	}
 	
 	/**
-	 * Add a booking into this event (or add spaces if person already booked this), checking that there's enough space for the event
+	 * Add a booking into this event (or add spaces if person already booked this). We assume at this point that the booking has already been validated usin $EM_Booking->validate()
 	 * @param EM_Booking $EM_Booking
 	 * @return boolean
 	 */
 	function add( $EM_Booking ){
 		global $wpdb,$EM_Mailer;
-		if ( $this->get_available_spaces() >= $EM_Booking->get_spaces(true) ) {
-			//Save the booking
-			$email = false;
-			//set status depending on approval settings
-			if( empty($EM_Booking->booking_status) ){ //if status is not set, give 1 or 0 depending on approval settings
-				$EM_Booking->booking_status = get_option('dbem_bookings_approval') ? 0:1;
+		//Save the booking
+		$email = false;
+		//set status depending on approval settings
+		if( empty($EM_Booking->booking_status) ){ //if status is not set, give 1 or 0 depending on approval settings
+			$EM_Booking->booking_status = get_option('dbem_bookings_approval') ? 0:1;
+		}
+		$result = $EM_Booking->save(false);
+		if($result){
+			//Success
+		    do_action('em_bookings_added', $EM_Booking);
+			$this->bookings[] = $EM_Booking;
+			$email = $EM_Booking->email();
+			if( get_option('dbem_bookings_approval') == 1 && $EM_Booking->booking_status == 0){
+				$this->feedback_message = get_option('dbem_booking_feedback_pending');
+			}else{
+				$this->feedback_message = get_option('dbem_booking_feedback');
 			}
-			$result = $EM_Booking->save(false);
-			if($result){
-				//Success
-			    do_action('em_bookings_added', $EM_Booking);
-				$this->bookings[] = $EM_Booking;
-				$email = $EM_Booking->email();
-				if( get_option('dbem_bookings_approval') == 1 && $EM_Booking->booking_status == 0){
-					$this->feedback_message = get_option('dbem_booking_feedback_pending');
-				}else{
-					$this->feedback_message = get_option('dbem_booking_feedback');
-				}
-				if(!$email){
-					$EM_Booking->email_not_sent = true;
-					$this->feedback_message .= ' '.get_option('dbem_booking_feedback_nomail');
-					if( current_user_can('activate_plugins') ){
-						if( count($EM_Booking->get_errors()) > 0 ){
-							$this->feedback_message .= '<br/><strong>Errors:</strong> (only admins see this message)<br/><ul><li>'. implode('</li><li>', $EM_Booking->get_errors()).'</li></ul>';
-						}else{
-							$this->feedback_message .= '<br/><strong>No errors returned by mailer</strong> (only admins see this message)';
-						}
+			if(!$email){
+				$EM_Booking->email_not_sent = true;
+				$this->feedback_message .= ' '.get_option('dbem_booking_feedback_nomail');
+				if( current_user_can('activate_plugins') ){
+					if( count($EM_Booking->get_errors()) > 0 ){
+						$this->feedback_message .= '<br/><strong>Errors:</strong> (only admins see this message)<br/><ul><li>'. implode('</li><li>', $EM_Booking->get_errors()).'</li></ul>';
+					}else{
+						$this->feedback_message .= '<br/><strong>No errors returned by mailer</strong> (only admins see this message)';
 					}
 				}
-				return apply_filters('em_bookings_add', true, $EM_Booking);
-			}else{
-				//Failure
-				$this->errors[] = "<strong>".get_option('dbem_booking_feedback_error')."</strong><br />". implode('<br />', $EM_Booking->errors);
 			}
-		} else {
-			 $this->add_error(get_option('dbem_booking_feedback_full'));
-		} 
+			return apply_filters('em_bookings_add', true, $EM_Booking);
+		}else{
+			//Failure
+			$this->errors[] = "<strong>".get_option('dbem_booking_feedback_error')."</strong><br />". implode('<br />', $EM_Booking->errors);
+		}
 		return apply_filters('em_bookings_add', false, $EM_Booking);
 	}
-	
+
 	/**
 	 * Get POST data and create a booking for each ticket requested. If successful, a booking object is returned, false if not.
 	 * @return false|object
@@ -268,13 +267,12 @@ class EM_Bookings extends EM_Object implements Iterator{
 	 */
 	function set_status($status, $booking_ids){
 		//FIXME status should work with instantiated object
-		//FIXME there is a vulnerability where any user can approve/reject bookings if they know the ID
 		if( $this->array_is_numeric($booking_ids) ){
 			//Get all the bookings
 			$results = array();
 			$mails = array();
 			foreach( $booking_ids as $booking_id ){
-				$EM_Booking = new EM_Booking($booking_id);
+				$EM_Booking = em_get_booking($booking_id);
 				if( !$EM_Booking->can_manage() ){
 					$this->feedback_message = __('Bookings %s. Mails Sent.', 'dbem');
 					return false;
@@ -290,7 +288,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 				return false;
 			}
 		}elseif( is_numeric($booking_ids) || is_object($booking_ids) ){
-			$EM_Booking = ( is_object($booking_ids) && get_class($booking_ids) == 'EM_Booking') ? $booking_ids : new EM_Booking($booking_ids);
+			$EM_Booking = ( is_object($booking_ids) && get_class($booking_ids) == 'EM_Booking') ? $booking_ids : em_get_booking($booking_ids);
 			$result = $EM_Booking->set_status($status);
 			$this->feedback_message = $EM_Booking->feedback_message;
 			return $result;
@@ -479,7 +477,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 			$results = $wpdb->get_results(apply_filters('em_bookings_get_sql',$sql),ARRAY_A);
 			$bookings = array();
 			foreach($results as $result){
-				$bookings[] = new EM_Booking($result);
+				$bookings[] = em_get_booking($result);
 			}
 			return $bookings; //We return all the bookings matched as an EM_Booking array. 
 		}
@@ -495,7 +493,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 		$where = ( count($conditions) > 0 ) ? " WHERE " . implode ( " AND ", $conditions ):'';
 		
 		//Get ordering instructions
-		$EM_Booking = new EM_Booking();
+		$EM_Booking = em_get_booking();
 		$accepted_fields = $EM_Booking->get_fields(true);
 		$orderby = self::build_sql_orderby($args, $accepted_fields);
 		//Now, build orderby sql
@@ -527,7 +525,7 @@ class EM_Bookings extends EM_Object implements Iterator{
 		$results = (is_array($results)) ? $results:array();
 		$bookings = array();
 		foreach ( $results as $booking ){
-			$bookings[] = new EM_Booking($booking);
+			$bookings[] = em_get_booking($booking);
 		}
 		$EM_Bookings = new EM_Bookings($bookings);
 		return apply_filters('em_bookings_get', $EM_Bookings);
@@ -556,6 +554,32 @@ class EM_Bookings extends EM_Object implements Iterator{
 		exit();
 	}
 	
+	static function enqueue_js(){
+        if( !defined('EM_BOOKING_JS_LOADED') ){ //request loading of JS file in footer of page load
+        	add_action('wp_footer','EM_Bookings::em_booking_js_footer');
+        	add_action('admin_footer','EM_Bookings::em_booking_js_footer');
+        	define('EM_BOOKING_JS_LOADED',true);
+        }
+	}
+	
+	static function em_booking_js_footer(){
+		?>		
+		<script type="text/javascript">
+			jQuery(document).ready( function($){	
+				<?php
+					//we call the segmented JS files and include them here
+					$include_path = dirname(dirname(__FILE__)); //get path to parent directory
+					include($include_path.'/includes/js/bookingsform.js'); 
+					do_action('em_gateway_js'); 
+				?>							
+			});
+			<?php
+			do_action('em_booking_js_footer');
+			?>
+		</script>
+		<?php
+	}
+	
 	/* Overrides EM_Object method to apply a filter to result
 	 * @see wp-content/plugins/events-manager/classes/EM_Object#build_sql_conditions()
 	 */
@@ -577,6 +601,9 @@ class EM_Bookings extends EM_Object implements Iterator{
 			}else{
 				$conditions['blog'] = "(".EM_EVENTS_TABLE.".blog_id={$args['blog']})";
 			}
+		}
+		if( empty($conditions['event']) && $args['event'] === false ){
+		    $conditions['event'] = EM_BOOKINGS_TABLE.'.event_id != 0';
 		}
 		if( is_numeric($args['ticket_id']) ){
 		    $EM_Ticket = new EM_Ticket($args['ticket_id']);

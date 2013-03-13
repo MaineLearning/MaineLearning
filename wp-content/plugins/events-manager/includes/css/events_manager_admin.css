@@ -90,14 +90,8 @@ table.events-table .category { color:#888; }
 	div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF url(../images/loading.gif) 50% 50% no-repeat; left:0px; top:0px; opacity:0.8; filter:alpha(opacity=80)}
 	.em-booking { margin:15px 0px 10px 0px; position:relative; }
 	.em-booking-form  { position:relative; clear:left; }
-	.em-booking-form-details  { padding:10px; width:360px; float:left; }  
-	.em-booking-form-details input.input, .em-booking-form-details textarea { width:250px; }
-	.em-booking-form-details p { clear:left; }
-	.em-booking-form-details label { display:block; float:left; }
-	.em-booking-form-details span.input-group input { margin-left:-20px; }
-	.em-booking-form-details span.input-group { display:block; margin-left:120px; }
-	.em-booking-form-details .em-booking-submit { width:auto; }	
 	.em-booking-form label  { display:inline-block; width:100px; }
+	.em-booking-form table.em-form-fields td, .em-booking-form table.em-form-fields th { padding:10px 10px 0px 0px; text-align:left; }
 	/* Message Errors */
 		div.em-booking-message { margin:10px 0px; padding:10px; color:#333; border-radius:3px; }
 		div.em-booking-message p { margin:10px 0px !important; padding:0px; color:#333; }

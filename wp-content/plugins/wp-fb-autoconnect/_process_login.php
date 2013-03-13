@@ -62,38 +62,16 @@ $jfb_log .= "WP: Found redirect URL ($redirectTo)\n";
 
 //Get the Facebook access token
 if( !isset($_POST['access_token']) || !$_POST['access_token'] )
-    j_die("Error: Missing POST Data (access_token)");
+    j_die("Error: Missing POST Data (access_token).\n\nIf you're receiving this notice via e-mail as a site administrator, it's nearly always safe to ignore (these errors are due to spambots automatically hitting your site).  If you're seeing this as a real person attempting to login, please report it to the plugin author at " . $jfb_homepage.".");
 $access_token = $_POST['access_token'];
-$jfb_log .= "FB: Found access token (" . substr($access_token, 0, 30) . "...)\n";
-
-
-////DEPRECATED CODE////
-//As of 2.5.0, this plugin uses jfb_api_get() and jfb_api_post() to access Facebook Graph URLs directly.
-//I'm in the process of retiring the FB PHP SDK; it's still included here for backwards compatibility,
-//but you should NOT use "$facebook" when developing your addons from now on.
-if( class_exists('Facebook') )
-{
-    $jfb_log .= "WARNING: Another plugin has already included the Facebook API. "
-             .  "If the login fails, please contact the other plugin's author and ask them not to "
-             .  "include Facebook for every page throughout Wordpress.\n";
-}
-else
-{
-    require_once('facebook-platform/php-sdk-3.1.1/facebook.php');
-}  
-$facebook = new Facebook(array('appId'=>get_option($opt_jfb_app_id), 'secret'=>get_option($opt_jfb_api_sec), 'cookie'=>true ));
-try                              { $uid = $facebook->getUser(); }
-catch (FacebookApiException $e)  { $jfb_log .= "Warning: Exception when getting the Facebook userid. Please verify your API Key and Secret.\n"; }
-if (!$uid)                       { $jfb_log .= "Warning: Failed to get the Facebook user session. Please see FAQ37 on the plugin documentation page. UID: $uid\n"; } 
-do_action('wpfb_session_established', array('FB_ID' => $uid, 'facebook' => $facebook, 'access_token'=>$access_token) );
-////DEPRECATED CODE////
-
+$jfb_log .= "FB: Found access token (" . substr($access_token, 0, 30) . "...)\n"; 
 
 //Get the basic user info and make sure the access_token is valid  
 $jfb_log .= "FB: Initiating Facebook connection...\n";
 $fbuser = jfb_api_get("https://graph.facebook.com/me?access_token=$access_token");
 if( isset($fbuser['error']) ) j_die("Error: Failed to get the Facebook user session (" . $fbuser['error']['message'] . ")");
 $fb_uid = $fbuser['id'];
+do_action('wpfb_session_established', array('FB_ID' => $fb_uid, 'access_token'=>$access_token) );
 $jfb_log .= "FB: Connected to session (uid $fb_uid)\n";
 
 //Get some extra stuff (TODO: I should combine these into one query with the above, for better efficiency)
@@ -128,7 +106,7 @@ else
 //to limit logins based on friendship status - if someone isn't your friend, you could redirect them
 //to an error page (and terminate this script).
 $jfb_log .= "WP: Running action wpfb_connect\n";
-do_action('wpfb_connect', array('FB_ID' => $fb_uid, 'facebook' => $facebook, 'access_token'=>$access_token) );
+do_action('wpfb_connect', array('FB_ID' => $fb_uid, 'access_token'=>$access_token) );
 
 
 //Examine all existing WP users to see if any of them match this Facebook user. 
@@ -206,7 +184,7 @@ if( $user_login_id )
     
     //Run a hook when an existing user logs in
     $jfb_log .= "WP: Running action wpfb_existing_user\n";
-    do_action('wpfb_existing_user', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'facebook' => $facebook, 'WP_UserData' => $user_data, 'access_token'=>$access_token) );
+    do_action('wpfb_existing_user', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'WP_UserData' => $user_data, 'access_token'=>$access_token) );
 }
 
 
@@ -230,7 +208,7 @@ if( !$user_login_id )
     //NOTE: If the user has selected "pretty names", this'll change FB_xxx to i.e. "John.Smith"
     $jfb_log .= "WP: Applying filters wpfb_insert_user/wpfb_inserting_user\n";
     $user_data = apply_filters('wpfb_insert_user', $user_data, $fbuser );
-    $user_data = apply_filters('wpfb_inserting_user', $user_data, array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'facebook' => $facebook, 'FB_UserData' => $fbuser, 'access_token'=>$access_token) );
+    $user_data = apply_filters('wpfb_inserting_user', $user_data, array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'FB_UserData' => $fbuser, 'access_token'=>$access_token) );
     
     //Insert a new user to our database and make sure it worked
     $user_login_id   = wp_insert_user($user_data);
@@ -250,7 +228,7 @@ if( !$user_login_id )
     
     //Run an action so i.e. usermeta can be added to a user after registration
     $jfb_log .= "WP: Running action wpfb_inserted_user\n";
-    do_action('wpfb_inserted_user', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'facebook' => $facebook, 'WP_UserData' => $user_data, 'access_token'=>$access_token) );
+    do_action('wpfb_inserted_user', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'WP_UserData' => $user_data, 'access_token'=>$access_token) );
 }
 
 //Tag the user with our meta so we can recognize them next time, without resorting to email hashes
@@ -283,7 +261,7 @@ wp_set_auth_cookie( $user_login_id, $rememberme );
 //Run a custom action.  You can use this to modify a logging-in user however you like,
 //i.e. add them to a "Recent FB Visitors" log, assign a role if they're friends with you on Facebook, etc.
 $jfb_log .= "WP: Running action wpfb_login\n";
-do_action('wpfb_login', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'facebook' => $facebook, 'access_token'=>$access_token) );
+do_action('wpfb_login', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'access_token'=>$access_token) );
 do_action('wp_login', $user_login_name, get_userdata($user_login_id));
 
 

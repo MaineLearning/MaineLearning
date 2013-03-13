@@ -2,6 +2,7 @@ var current_index_wpv = -1;
 var current_timer_wpv = -1;
 var original_color_wpv = Array();
 var highlight_color_wpv = '#aaf8aa';
+var HTMLEditor = [];
 
 function on_delete_wpv(index) {
     index = Number(index);
@@ -105,6 +106,7 @@ function on_add_field_wpv(menu, name, text) {
 	
 	if(menu.indexOf('Types-!-Complete-!-') != 0) {
 		text = editor_decode64(text);
+                		
 	}
 	
     var view_template = '';
@@ -136,7 +138,9 @@ function on_add_field_wpv(menu, name, text) {
     	name = 'wpv-taxonomy type="' + name + '" separator=", " format="link" show="name"'; 
     }
 	else if(menu.indexOf('Types-!-Complete-!-') == 0) {
-        title = 'Types - ' + name;
+		m = text.match(/&quot;(.*?)&quot;/);
+		mfix = m[0].replace("&quot;", "").replace("&quot;", "");
+		title = 'Types - ' + mfix;
 		types_field_name = name;
 		types_field_data = text;
 		text = name;
@@ -149,6 +153,7 @@ function on_add_field_wpv(menu, name, text) {
     else if (menu != '') {
         name = menu.split('-!')[0] + ' - ' + name;
         title = name;
+        
     }
     
  
@@ -245,10 +250,21 @@ function on_add_field_wpv_types_callback_action(shortcode, params) {
 }
 
 jQuery(document).ready(function($){
+    HTMLEditor['wpv_layout_meta_html_content'] = CodeMirror.fromTextArea(document.getElementById("wpv_layout_meta_html_content"), {mode: "myshortcodes", tabMode: "indent", lineWrapping: true, lineNumbers: true, autofocus:true});
+    HTMLEditor['wpv_layout_meta_html_content'].refresh();
+    HTMLEditor['wpv_layout_meta_html_content'].focus();
+    
+    jQuery('#wpv_layout_meta_html_content').bind('paste', function(e){
+        if(HTMLCodeMirrorActive){
+            InsertAtCursor(this.value, 'wpv_layout_meta_html_content');
+        }
+    });
     
     show_view_and_view_template_controls();
     
-    var c = jQuery('textarea#wpv_layout_meta_html_content').val();
+    // changed for correct work with CodeMirror
+    // var c = jQuery('textarea#wpv_layout_meta_html_content').val();
+    var c = HTMLEditor['wpv_layout_meta_html_content'].getValue();
     
     if (c == '') {
 
@@ -282,8 +298,11 @@ function on_generate_wpv_layout(force) {
             field_type = '[wpv-post-field name="' + field_type.substring(wpv_field_text.length) + '"]';
         }
 		else if (jQuery('#wpv_field_name_hidden_' + temp_index).val() == 'types-field') {
-            add_type = 'custom';
-			header_name = 'types-field-' + field_type.substring('Types - '.length);
+			add_type = 'custom';
+			text = jQuery('#wpv_types_field_data_hidden_' + temp_index).val();
+			m = text.match(/"(.*?)"/);
+			mfix = m[0].replace('"', '').replace('"', '');
+			header_name = 'types-field-' + mfix;
 			field_type = jQuery('#wpv_types_field_data_hidden_' + temp_index).val();
 		}
         else if (field_type.indexOf('Types - ') == 0) {
@@ -298,6 +317,7 @@ function on_generate_wpv_layout(force) {
         	add_type = 'posts';
         	field_type = field_type.substring(field_type.indexOf('wpvtax-') + 7);
         	// handle taxonomies
+			header_name = 'wpv-post-taxonomy'; // dummy header name to make this column not sortable
 			field_type = '[wpv-post-taxonomy type="' + field_type + '" separator=", " format="link" show="name"]';
         	
         } else {
@@ -392,12 +412,18 @@ function on_generate_wpv_layout(force) {
 	data = "\[wpv-layout-start\]\n\<!-- wpv-loop-start -->\n" + data + "<!-- wpv-loop-end -->\n" + no_results_text + "\n\[wpv-layout-end\]\n";
     }
     
-    c = jQuery('textarea#wpv_layout_meta_html_content').val();
+    // changed for correct work with CodeMirror
+    // c = jQuery('textarea#wpv_layout_meta_html_content').val();
+    c = HTMLEditor['wpv_layout_meta_html_content'].getValue();    
     
     if (force || check_previous_layout_has_changed(c)) {
     
         c = add_wpv_layout_data_to_content(c, data);
-        jQuery('textarea#wpv_layout_meta_html_content').val(c);
+        // changed for correct work with CodeMirror
+        //jQuery('textarea#wpv_layout_meta_html_content').val(c);
+        HTMLEditor['wpv_layout_meta_html_content'].setValue(c);
+        HTMLEditor['wpv_layout_meta_html_content'].refresh();
+        HTMLEditor['wpv_layout_meta_html_content'].focus();
     }
 
     // save the generated value so we can compare later.

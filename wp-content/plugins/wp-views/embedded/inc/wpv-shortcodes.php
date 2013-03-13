@@ -34,7 +34,12 @@ $wpv_shortcodes['wpv-taxonomy-post-count'] = array('wpv-taxonomy-post-count', __
 
 // $wpv_shortcodes['wpv-control'] = array('wpv-control', __('Filter control', 'wpv-views'), 'wpv_shortcode_wpv_control');
 
-
+$wpv_shortcodes['wpv-bloginfo'] = array('wpv-bloginfo', __('Bloginfo value', 'wpv-views'), 'wpv_bloginfo');
+$wpv_shortcodes['wpv-archive-link'] = array('wpv-archive-link', __('Archive link', 'wpv-views'), 'wpv_archive_link');
+$wpv_shortcodes['wpv-current-user'] = array('wpv-current-user', __('Current user info', 'wpv-views'), 'wpv_current_user');
+if (defined('WPV_WOOCOMERCE_VIEWS_SHORTCODE')) {
+$wpv_shortcodes['wpv-wooaddcart'] = array('wpv-wooaddcart', __('Add to cart button', 'wpv-views'), 'wpv-wooaddcart');
+}
 // register the short codes
 foreach ($wpv_shortcodes as $shortcode) {
     if (function_exists($shortcode[2])) {
@@ -48,6 +53,7 @@ wpv_post_taxonomies_shortcode();
 /*
   Get the short code via name
 */
+
 
 function wpv_get_shortcode($name) {
     global $wpv_shortcodes;
@@ -69,6 +75,155 @@ function wpv_get_shortcode($name) {
     return null;
 }
 
+/**
+ * Views-Shortcode: wpv-bloginfo
+ * 
+ * Description: Display bloginfo values.
+ * 
+ * Parameters:
+ * 'show' => parameter for show.
+ *   "name" displays site title (Ex. "Testpilot")(Default)
+ *   "description" displays tagline (Ex. Just another WordPress blog)
+ *   "admin_email" displays (Ex. admin@example.com)
+ *   "url" displays site url (Ex. http://example/home)
+ *   "wpurl" displays home url (Ex. http://example/home/wp)
+ *   "stylesheet_directory" displays stylesheet directory (Ex. http://example/home/wp/wp-content/themes/child-theme)
+ *   "stylesheet_url" displays stylesheet url (Ex. http://example/home/wp/wp-content/themes/child-theme/style.css)
+ *   "template_directory" displays template directory (Ex. http://example/home/wp/wp-content/themes/parent-theme)
+ *   "template_url" displays template url (Ex. http://example/home/wp/wp-content/themes/parent-theme)
+ *   "atom_url" displays url to feed in atom format (Ex. http://example/home/feed/atom)
+ *   "rss2_url" displays url to feed in rss2 format (Ex. http://example/home/feed)
+ *   "rss_url" displays url to feed in rss format (Ex. http://example/home/feed/rss)
+ *   "pingback_url" displays pingback url (Ex. http://example/home/wp/xmlrpc.php)
+ *   "rdf_url" displays rdf url(Ex. http://example/home/feed/rdf)
+ *   "comments_atom_url" displays comments atom url (Ex. http://example/home/comments/feed/atom)
+ *   "comments_rss2_url" displays comments rss2 url (Ex. http://example/home/comments/feed)
+ *   "charset" displays site charset (Ex. UTF-8)
+ *   "html_type" displays site html type (Ex. text/html)
+ *   "language" displays site language (Ex. en-US)
+ *   "text_direction" displays site text direction (Ex. ltr)
+ *   "version" displays WordPress version (Ex. 3.1)
+ *
+ * Example usage:
+ * url: [vpw-bloginfo show="url"]
+ *
+ * Link:
+ * List of available parameters <a href="http://codex.wordpress.org/Function_Reference/bloginfo#Parameters">http://codex.wordpress.org/Function_Reference/bloginfo#Parameters</a>
+ * 
+ * Note:
+ *
+ */
+
+function wpv_bloginfo($attr){
+    extract(
+        shortcode_atts( array('show' => 'name'), $attr )
+    );
+    $out = '';
+    $available_codes = array(
+        'name', 'description', 'admin_email', 'url', 'wpurl', 'stylesheet_directory', 
+        'stylesheet_url', 'template_directory', 'template_url', 'atom_url', 'rss2_url',
+        'rss_url','pingback_url','rdf_url','comments_atom_url','comments_rss2_url',
+        'charset','html_type','language','text_direction','version'
+    );
+    if(in_array($show, $available_codes)){
+        $out = get_bloginfo( $show, 'display' );
+    }
+    return $out;
+}
+
+
+/**
+ * Views-Shortcode: wpv-archive-link
+ * 
+ * Description: Display archive link for selected post type. 
+ * 
+ * Parameters:
+ * 'name' => post_type_name for show (Default = current post type).
+ *
+ * Example usage:
+ * Archive link for places is on [wpv-archive-link name="places"]
+ *
+ * Link:
+ *
+ * Note:
+ *
+ */
+function wpv_archive_link($attr){
+    extract(
+        shortcode_atts( array('name' => ''), $attr )
+    );
+    $out = '';
+    if($name != ''){
+        $out  = get_post_type_archive_link($name);
+    }
+    if($out==''){
+        global $post;
+        if(isset($post->post_type) and $post->post_type!=''){
+            $out  = get_post_type_archive_link($post->post_type);
+        }
+    }
+    
+    return $out;
+}
+
+/**
+ * Views-Shortcode: wpv-current-user
+ * 
+ * Description: Display information about current user.
+ * 
+ * Parameters:
+ * 'info' => parameter for show.
+ *   "display_name" displays user's display name (Default)
+ *   "login" displays user's login
+ *   "firstname" displays user's first name
+ *   "lastname" displays user's last name
+ *   "email" displays user's email
+ *   "id" displays user's user_id
+ *
+ * Example usage:
+ * Current user is [wpv-current-user info="display_name"]
+ *
+ * Link:
+ *
+ * Note:
+ *
+ */
+
+function wpv_current_user($attr){
+    global $current_user;
+    extract(
+        shortcode_atts( array('info' => 'display_name'), $attr )
+    );
+    $out = '';
+    
+    if($current_user->ID>0){
+        switch ($info) {
+            case 'login':
+                $out = $current_user->user_login;
+                break;
+            case 'firstname':
+                $out = $current_user->user_firstname;
+                break;
+            case 'lastname':
+                $out = $current_user->user_lastname;
+                break;
+            case 'email':
+                $out = $current_user->user_email;
+                break;
+            case 'id':
+                $out = $current_user->ID;
+                break;
+            case 'display_name':
+                $out = $current_user->display_name;
+                break;
+            default:
+                $out = $current_user->user_login;
+                break;
+        }
+    }
+    return $out;
+}
+
 
 /**
  * Views-Shortcode: wpv-post-id
@@ -77,6 +232,13 @@ function wpv_get_shortcode($name) {
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * ID is [wpv-post-id]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -106,6 +268,13 @@ function wpv_shortcode_wpv_post_id($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * You are reading [wpv-post-title]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 function wpv_shortcode_wpv_post_title($atts){
@@ -134,6 +303,13 @@ function wpv_shortcode_wpv_post_title($atts){
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * Permalink to [wpv-post-link]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -166,6 +342,13 @@ function wpv_shortcode_wpv_post_link($atts){
  *
  * Parameters:
  * 'view_template' => The name of a view template to use when displaying the post content.
+ *
+ * Example usage:
+ * [wpv-post-body view_template="None"]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 function wpv_shortcode_wpv_post_body($atts){
@@ -221,6 +404,29 @@ function wpv_shortcode_wpv_post_body($atts){
     return $out;
 }
 
+/**
+ * Display the text after apply content filter. Ignore not native filters. 
+ *
+ * Params:
+ * content => Content for applying
+ * 
+ * NOTE: This needs further testing because breaks [wpv-post-body] shortcode inside Views layout
+ *
+ */
+function wpv_the_clean_content($content){
+    $available_filters_list = array('do_shortcode');
+    $current_filters = $GLOBALS['wp_filter']['the_content'];
+    foreach ($GLOBALS['wp_filter']['the_content'] as $filter_level=>$filter_level_list){
+        foreach ($filter_level_list as $filter_id => $filter_data){
+            if(!in_array($filter_id, $available_filters_list)){
+                unset($GLOBALS['wp_filter']['the_content'][$filter_level][$filter_id]);
+            }
+        }
+    }
+    apply_filters('the_content', $post->post_content);
+    $GLOBALS['wp_filter']['the_content'] = $current_filters;
+    return $content;
+}
 
 /**
  * Views-Shortcode: wpv-post-excerpt
@@ -230,7 +436,16 @@ function wpv_shortcode_wpv_post_body($atts){
  * Parameters:
  * length => the length of the excerpt. Default is 252 or the excerpt length defined by the theme.
  *
+ * Example usage:
+ * [wpv-post-excerpt length="150"]
+ *
+ * Link:
+ *
+ * Note:
+ * If manual excerpt is set then length parameter is ignored - full manual excerpt is displayed
+ *
  */
+ 
 function wpv_shortcode_wpv_post_excerpt($atts){
     $post_id_atts = new WPV_wpcf_switch_post_from_attr_id($atts);
 
@@ -302,9 +517,15 @@ function wpv_shortcode_wpv_post_excerpt($atts){
  *   "link" displays the author's name as a link
  *   "url" displays the url for the author
  *   "meta" displays the author meta info
- * 
  * meta => The meta field to display when format="meta"
- *   see http://codex.wordpress.org/Function_Reference/get_the_author_meta
+ *
+ * Example usage:
+ * Posted by [wpv-post-author format="name"]
+ *
+ * Link:
+ * For info about the author meta fields, see <a href="http://codex.wordpress.org/Function_Reference/get_the_author_meta">http://codex.wordpress.org/Function_Reference/get_the_author_meta</a>)
+ *
+ * Note:
  *
  */
 
@@ -350,7 +571,13 @@ function wpv_shortcode_wpv_post_author($atts) {
  * Parameters:
  * format => Format string for the date. Defaults to F jS, Y
  * 
- * format parameter is the same as here - http://codex.wordpress.org/Formatting_Date_and_Time
+ * Example usage:
+ * Published on [wpv-post-date format="F jS, Y"]
+ *
+ * Link:
+ * Format parameter is the same as here - <a href="http://codex.wordpress.org/Formatting_Date_and_Time">http://codex.wordpress.org/Formatting_Date_and_Time</a>
+ *
+ * Note:
  *
  */
 
@@ -377,6 +604,13 @@ function wpv_shortcode_wpv_post_date($atts) {
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * [wpv-post-url]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 function wpv_shortcode_wpv_post_url($atts) {
@@ -398,6 +632,13 @@ function wpv_shortcode_wpv_post_url($atts) {
  *
  * Parameters:
  * 'show' => 'slug', 'single' or 'plural'. Defaults to 'slug'
+ *
+ * Example usage:
+ * [wpv-post-type show="single"]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -425,6 +666,11 @@ function wpv_shortcode_wpv_post_type($atts){
             case 'plural':
                 $out = $post_object->labels->name;
                 break;
+                
+            case 'slug':
+		$rewrite = $post_object->rewrite;
+                $out = isset( $rewrite['slug'] ) ? $rewrite['slug'] : $post->post_type;
+                break;
             
             default:
                 $out = $post->post_type;
@@ -446,7 +692,15 @@ function wpv_shortcode_wpv_post_type($atts){
  *
  * Parameters:
  * 'size' => Image size - thumbnail, medium, large or full - defaults to thumbnail
+ * 'raw' => Show url (true) or HTML tag (false) - default to false (HTML tag) 
  * 
+ * Example usage:
+ * [wpv-post-featured-image size="medium" raw="false"]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 function wpv_shortcode_wpv_post_featured_image($atts) {
@@ -455,13 +709,19 @@ function wpv_shortcode_wpv_post_featured_image($atts) {
     extract(
         shortcode_atts( array(
             'size'  => 'thumbnail',
+            'raw'   => false,
             'attr'  => ''
         ), $atts )
     );
-
-    $out = get_the_post_thumbnail( null, $size, $attr );
-    $out = apply_filters('wpv-post-featured-image', $out);
     
+    if($raw){
+	$post_thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+        $out_array = wp_get_attachment_image_src($post_thumbnail_id, $size );
+        $out = apply_filters('wpv-post-featured-image', $out_array[0]);
+    }else{
+        $out = get_the_post_thumbnail( null, $size, $attr );
+        $out = apply_filters('wpv-post-featured-image', $out);
+    }    
     return $out;
 }
 
@@ -473,7 +733,13 @@ function wpv_shortcode_wpv_post_featured_image($atts) {
 * Parameters:
 * label: Optional. What to show in the edit link. ie: 'Edit Video'
 *
-* @param array $atts An associative array of arributes to be used.
+* Example usage:
+* [wpv-post-edit-link]
+*
+* Link:
+*
+* Note:
+*
 */
 function wpv_shortcode_wpv_post_edit_link($atts){
     $post_id_atts = new WPV_wpcf_switch_post_from_attr_id($atts);
@@ -507,6 +773,13 @@ function wpv_shortcode_wpv_post_edit_link($atts){
  * 'name' => The name of the custom field to display
  * 'index' => The array index to use if the meta key has multiple values. If index is not set then all values will be output
  * 'separator' => The separator between multiple values. Defaults to ', '
+ *
+ * Example usage:
+ * [wpv-post-field name="customfield"]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -553,7 +826,7 @@ function wpv_shortcode_wpv_post_field($atts) {
 }
 
 /**
- * Views-Shortcode: wpv-comments-number
+ * Views-Shortcode: wpv-post-comments-number
  *
  * Description: Displays the number of comments for the current post
  *
@@ -561,6 +834,14 @@ function wpv_shortcode_wpv_post_field($atts) {
  * 'none' => Text if there are no comments. Default - "No Comments"
  * 'one'  => Text if there is only one comment. Default - "1 Comment"
  * 'more' => Text if there is more than one comment. Default "% Comments"
+ *
+ * Example usage:
+ * This post has [wpv-post-comments-number none="No Comments" one="1 Comment" more="% Comments"]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 $wpv_comments_defaults = array('none' => __('No Comments', 'wpv-views'),
@@ -616,6 +897,13 @@ function wpv_shortcode_wpv_comment_date($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * [wpv-taxonomy-title]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 function wpv_shortcode_wpv_tax_title($atts){
@@ -639,6 +927,13 @@ function wpv_shortcode_wpv_tax_title($atts){
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-taxonomy-link]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -666,6 +961,13 @@ function wpv_shortcode_wpv_tax_title_link($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * [wpv-taxonomy-slug]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 function wpv_shortcode_wpv_tax_slug($atts){
 
@@ -688,6 +990,13 @@ function wpv_shortcode_wpv_tax_slug($atts){
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-taxonomy-url]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -714,6 +1023,13 @@ function wpv_shortcode_wpv_tax_url($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * [wpv-taxonomy-description]
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
 
 function wpv_shortcode_wpv_tax_description($atts){
@@ -738,6 +1054,13 @@ function wpv_shortcode_wpv_tax_description($atts){
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-taxonomy-post-count]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -804,11 +1127,11 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
     
     $index = 0;
     foreach($wpv_shortcodes as $shortcode) {
-        
-        if (in_array('post', $types) && strpos($shortcode[0], 'wpv-post-') === 0 && function_exists($shortcode[2])) {
             
+        if (in_array('post', $types) && strpos($shortcode[0], 'wpv-post-') === 0 && function_exists($shortcode[2])) {
+             
             if ($shortcode[0] == 'wpv-post-field') {
-                
+                               
                 // we need to output the custom fields to a sub menu.
 
                 // first we output the view templates.
@@ -884,10 +1207,23 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
         	if (isset($shortcode[3])) {
                       $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0], __('Basic', 'wpv-views'), $shortcode[3]);
                  } else {
-                      $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0], __('Basic', 'wpv-views'));
+                     switch ($shortcode[0]) {
+                         case 'wpv-archive-link':
+                            $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0].' name=""', __('Basic', 'wpv-views'));
+                             break;
+                         case 'wpv-bloginfo':
+                            $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0].' show="name"', __('Basic', 'wpv-views'));
+                             break;
+                         case 'wpv-current-user':
+                            $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0].' info="login"', __('Basic', 'wpv-views'));
+                             break;
+                         default:
+                             $editor->add_insert_shortcode_menu($shortcode[1], $shortcode[0], __('Basic', 'wpv-views'));
+                             break;
+                     }
                  }
         }
-        
+                         
         if (in_array('taxonomy', $types) && strpos($shortcode[0], 'wpv-taxonomy-') === 0 && function_exists($shortcode[2])) {
             if ($call_back) {
                 call_user_func($call_back, $index, $shortcode[1], $shortcode[1], "", $shortcode[0]);
@@ -916,7 +1252,7 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
         $view_available = $wpdb->get_results("SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type='view' AND post_status in ('publish')");
         foreach($view_available as $view) {
             
-            if ($WP_Views->does_view_have_form_controls($view->ID) && !$WP_Views->is_archive_view($view->ID)) {
+            if ($WP_Views->does_view_have_form_controls($view->ID) && !$WP_Views->is_archive_view($view->ID)) {               
                 $editor->add_insert_shortcode_menu($view->post_title,
                                                     'wpv-form-view name="' . $view->post_title . '"',
                                                     __('View Form', 'wpv-views'),
@@ -994,8 +1330,8 @@ function add_short_codes_to_js($types, $editor, $call_back = null){
             $editor->add_insert_shortcode_menu('Yoast SEO breadcrumbs', 'yoast-breadcrumbs', 'Yoast SEO');
             $index += 1;
         }
+
     }
-    
     
     
     return $index;
@@ -1017,6 +1353,13 @@ function wpv_post_taxonomies_shortcode() {
  * 'format' => 'link', 'text' or 'url'. Defaults to 'link'
  * 'show' => 'name', 'description', 'slug' or 'count'. Defaults to 'name'
  * 'order' => 'asc', 'desc'. Defaults to 'asc'
+ *
+ * Example usage:
+ * Filed under [wpv-post-taxonomy type="category" separator=", " format="link" show="name" order="asc"]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
 
@@ -1174,7 +1517,7 @@ function wpv_filter_search_box($atts){
     $view_settings = $WP_Views->get_view_settings();
 
     if ($view_settings['query_type'][0] == 'posts') {
-        if ($view_settings && isset($view_settings['post_search_value'])) {
+        if ($view_settings && isset($view_settings['post_search_value']) && isset($view_settings['search_mode']) && $view_settings['search_mode'] == 'specific') {
             $value = 'value="' . $view_settings['post_search_value'] . '"';
         } else {
             $value = '';
@@ -1187,7 +1530,7 @@ function wpv_filter_search_box($atts){
     }        
 
     if ($view_settings['query_type'][0] == 'taxonomy') {
-        if ($view_settings && isset($view_settings['taxonomy_search_value'])) {
+        if ($view_settings && isset($view_settings['taxonomy_search_value'])  && isset($view_settings['taxonomy_search_mode']) && $view_settings['taxonomy_search_mode'] == 'specific') {
             $value = 'value="' . $view_settings['taxonomy_search_value'] . '"';
         } else {
             $value = '';
@@ -1212,9 +1555,13 @@ $wpv_for_each_index = array(); // global for storing the current wpv-for-each in
  * 'field' => The name of post meta field.
  *
  * Example usage:
- *
  * Output the field values as an ordered list
  * <ol>[wpv-for-each field="my-field"]<li>[wpv-post-field name="my-field"]</li>[/wpv-for-each]<ol>
+ *
+ * Link:
+ *
+ * Note:
+ * <a href="#wpv-if">wpv-if</a> shortcode won't work inside a wpv-for-each shortcode
  *
  **/
 

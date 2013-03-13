@@ -244,15 +244,14 @@ function view_layout_fields_to_classes($fields) {
                                           isset($fields["types_field_data_{$i}"]) ? $fields["types_field_data_{$i}"] : '');
         
     }
-    
+
     return $output;
 }
 
 function view_layout_fields($post, $view_layout_settings) {
-    
+
     global $WP_Views;
     $view_settings = $WP_Views->get_view_settings($post->ID);
-    
     if (isset($view_layout_settings['fields'])) {
         $view_layout_settings['fields'] = view_layout_fields_to_classes($view_layout_settings['fields']);
     } else {
@@ -337,7 +336,7 @@ function view_layout_fields($post, $view_layout_settings) {
         <?php
         global $link_layout_number;
         $link_layout_number = 0;
-        $WP_Views->editor_addon->add_form_button('', '#wpv_layout_meta_html_content', false);
+        $WP_Views->editor_addon->add_form_button('', 'wpv_layout_meta_html_content', false);
         ?>
 
     </div>  
@@ -365,7 +364,14 @@ function view_layout_fields($post, $view_layout_settings) {
             $current_index = add_short_codes_to_js(array('post', 'taxonomy', 'taxonomy-view', 'post-view'), null, 'short_code_variable_callback');
         ?>
         wpv_shortcodes[<?php echo $current_index++; ?>] = new Array('Taxonomy View', '<?php echo WPV_TAXONOMY_VIEW; ?>');
-        wpv_shortcodes[<?php echo $current_index; ?>] = new Array('Post View', '<?php echo WPV_POST_VIEW; ?>');
+        wpv_shortcodes[<?php echo $current_index++; ?>] = new Array('Post View', '<?php echo WPV_POST_VIEW; ?>');
+        <?php 
+        if (defined('WPV_WOOCOMERCE_VIEWS_SHORTCODE')) {
+        ?>
+        wpv_shortcodes[<?php echo $current_index; ?>] = new Array('Add to cart button', '<?php echo WPV_WOOCOMERCE_VIEWS_SHORTCODE; ?>');
+        <?php 
+        }
+        ?>
         var wpv_view_template_text = "<?php echo __('View template', 'wpv-views'); ?>";
         var wpv_taxonomy_view_text = "<?php echo __('Taxonomy View', 'wpv-views'); ?>";
         var wpv_post_view_text = "<?php echo __('Post View', 'wpv-views'); ?>";

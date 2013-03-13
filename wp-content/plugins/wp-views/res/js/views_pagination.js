@@ -43,7 +43,9 @@ function wpv_get_pagination_code() {
             }
             if (jQuery('input[name="_wpv_settings\\[rollover\\]\\[include_page_selector\\]"]').attr('checked')) {
                 controls += '[wpv-pager-current-page style="link"]\n';
-            }
+	    } else {
+		    controls += ' ';
+	    }
             if (jQuery('input[name="_wpv_settings\\[rollover\\]\\[include_prev_next_page_controls\\]"]').attr('checked')) {
                 controls += '[wpv-pager-next-page]' + page_next + '[/wpv-pager-next-page]';
             }

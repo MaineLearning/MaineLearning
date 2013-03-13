@@ -205,6 +205,7 @@ function wp_events_plugin_init(){
 			'public' => true,
 			'hierarchical' => false,
 			'show_in_admin_bar' => true,
+			//if in MS Global mode with locations shown on main blog, then the ui shouldn't be available on network blogs:
 			'show_ui' => !(EM_MS_GLOBAL && !is_main_site() && get_site_option('dbem_ms_mainblog_locations')),
 			'show_in_menu' => 'edit.php?post_type='.EM_POST_TYPE_EVENT,
 			'show_in_nav_menus'=>true,

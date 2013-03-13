@@ -53,7 +53,7 @@ function array2json(arr) {
             if(typeof value == "number") str += value; //Numbers
             else if(value === false) str += 'false'; //The booleans
             else if(value === true) str += 'true';
-            else str += '"' + value + '"'; //All other things
+	    else str += '"' + utf8_encode(value) + '"'; //All other things
             // :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
 
             parts.push(str);
@@ -69,6 +69,58 @@ function array2json(arr) {
 function wpv_serialize_array(data) {
 	
     return encodeToHex(array2json(data));
+}
+
+function utf8_encode(argString) {
+	// http://kevin.vanzonneveld.net
+	// +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
+	// +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	// +   improved by: sowberry
+	// +    tweaked by: Jack
+	// +   bugfixed by: Onno Marsman
+	// +   improved by: Yves Sucaet
+	// +   bugfixed by: Onno Marsman
+	// +   bugfixed by: Ulrich
+	// +   bugfixed by: Rafal Kukawski
+	// +   improved by: kirilloid
+	// *     example 1: utf8_encode('Kevin van Zonneveld');
+	// *     returns 1: 'Kevin van Zonneveld'
+	
+	if (argString === null || typeof argString === "undefined") {
+		return "";
+	}
+	
+	var string = (argString + ''); // .replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	var utftext = '',
+	start, end, stringl = 0;
+	
+	start = end = 0;
+	stringl = string.length;
+	for (var n = 0; n < stringl; n++) {
+		var c1 = string.charCodeAt(n);
+		var enc = null;
+		
+		if (c1 < 128) {
+			end++;
+		} else if (c1 > 127 && c1 < 2048) {
+			enc = String.fromCharCode((c1 >> 6) | 192, (c1 & 63) | 128);
+		} else {
+			enc = String.fromCharCode((c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
+		}
+		if (enc !== null) {
+			if (end > start) {
+				utftext += string.slice(start, end);
+			}
+			utftext += enc;
+			start = end = n + 1;
+		}
+	}
+	
+	if (end > start) {
+		utftext += string.slice(start, stringl);
+	}
+	
+	return utftext;
 }
 
 function wpv_pagination_init_preload_images() {
@@ -216,6 +268,21 @@ function wpv_pagination_replace_view(view_number, page, ajax, effect, max_pages,
 		
         jQuery('form[name=wpv-filter-' + view_number + ']')[0].submit();
         return false;
+    } else {
+	    // add url sorting parameters to allow custom sorting using ajax and table sorting parameters
+	    data = {};
+	    data = add_url_query_parameters(data);
+	    for (var prop in data['get_params']) {
+		    if (!(jQuery('form[name=wpv-filter-' + view_number + '] > input[name=' + prop + ']').length > 0)) {
+			    
+			    jQuery('<input>').attr({
+				    type: 'hidden',
+			      name: prop,
+			      value: data['get_params'][prop]
+			    }).appendTo('form[name=wpv-filter-' + view_number + ']');
+			    
+		    }
+	    }
     }
                 
     window.wpvPaginationAjaxLoaded[view_number] = false;

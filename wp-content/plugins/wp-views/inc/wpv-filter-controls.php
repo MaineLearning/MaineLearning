@@ -61,7 +61,7 @@ function wpv_filter_controls_admin($view_settings){
     $select .= '<option value="datepicker">' . __('Date picker', 'wpv-views') . '&nbsp;</option>';
     $select .= '</select>';
 
-    $select_tax = '<select name="" >';
+    $select_tax = '<select name="" class="tax-filter">'; // add a classname to taxonomy filter control input type
     $select_tax .= '<option value="checkboxes">' . __('Checkboxes', 'wpv-views') . '&nbsp;</option>';
     $select_tax .= '<option value="select">' . __('Select', 'wpv-views') . '&nbsp;</option>';
     $select_tax .= '</select>';
@@ -139,7 +139,7 @@ function wpv_filter_controls_admin($view_settings){
                                         switch ($view_settings['filter_controls_type'][$i]) {
                                             case 'types-auto':
                                             case 'textfield':
-											case 'datepicker':
+					    case 'datepicker':
                                                 $show_edit = ' style="display:none" ';
                                                 break;
                                             
@@ -150,7 +150,13 @@ function wpv_filter_controls_admin($view_settings){
                                     
                                     case 'tax':
                                         $new_select = str_replace('name=""', 'name="_wpv_settings[filter_controls_type][]"', $select_tax);
-                                        $show_edit = ' style="display:none" ';
+                                        switch ($view_settings['filter_controls_type'][$i]) {
+                                            case 'checkboxes':
+                                                $show_edit = ' style="display:none" ';
+                                                break;
+                                            default: // keep the Edit button for select input type
+                                                break;
+                                        }
                                         break;
                                     
                                     case 'search':

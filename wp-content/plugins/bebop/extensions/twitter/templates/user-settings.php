@@ -40,14 +40,14 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 			echo 'checked';
 		} echo '>
 		<label for="no">' . __( 'No', 'bebop' ) . '</label><br><br>
-		<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="Save Changes"></div>';
+		<div class="button_container"><input class="button" type="submit" id="submit" name="submit" value="Save Changes"></div>';
 		
 		wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
 		
 		echo '<div class="clear_both"></div>';
 			
 		if ( bebop_tables::get_user_meta_value( $bp->loggedin_user->id, 'bebop_' . $extension['name'] . '_oauth_token' ) ) {
-			echo '<div class="button_container"><a class="auto button" href="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '?reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
+			echo '<div class="button_container"><a class="button" href="' . $bp->loggedin_user->domain . bp_current_component() . '/' . bp_current_action() . '/' . $extension['name'] . '?reset=true">' . __(' Remove Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		echo '</form>';
@@ -78,7 +78,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 		//get the redirect url for the user
 		$redirectUrl = $OAuth->get_redirect_url();
 		if ( $redirectUrl ) {
-			echo '<div class="button_container"><a class="auto button" href="' . $redirectUrl . '">' . __(' Start Authorisation', 'bebop') . '</a></div>';
+			echo '<div class="button_container"><a class="button" href="' . $redirectUrl . '">' . __(' Start Authorisation', 'bebop') . '</a></div>';
 			echo '<div class="clear_both"></div>';
 		}
 		else {

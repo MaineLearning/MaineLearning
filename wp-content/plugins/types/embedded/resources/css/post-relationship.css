@@ -3,7 +3,7 @@
     /*    border-bottom: 2px solid #FFF600 !important;*/
 }
 #wpcf-post-relationship table {
-    margin: 10px 0 10px 0;
+    margin: 0;
     clear: both;
     background-color: #FFFFFF;
     border: 1px solid #DFDFDF;
@@ -19,11 +19,11 @@
     background-color: #EBEBEB;
 }
 #wpcf-post-relationship .wpcf-pr-has-entries {
-    margin-bottom: 20px;
+    margin: 0;
 }
 #wpcf-post-relationship table .wpcf-fields-image-upload-link,
 #wpcf-post-relationship table .wpcf-fields-file-upload-link {
-    line-height: 30px;
+    /*line-height: 30px;*/
 }
 .wpcf-pr-sort-DESC,
 .wpcf-pr-sort-ASC {
@@ -49,7 +49,7 @@
 }
 #wpcf-post-relationship .wpcf-pr-ajax-link,
 #wpcf-post-relationship .wpcf-pr-save-all-link {
-    margin: -27px 0 10px 10px;
+    margin: -15px 0 10px 10px;
     float: right;
     line-height: 20px !important;
 }
@@ -58,10 +58,10 @@
 }
 #wpcf-post-relationship .wpcf-pr-has-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 #wpcf-post-relationship .actions a {
-    line-height: 25px;
+    /*line-height: 25px;*/
 /*    margin-top: 10px;*/
 }
 #wpcf-post-relationship table .textarea {
@@ -74,4 +74,11 @@
 #wpcf-post-relationship table .form-item-radio {
     white-space: nowrap;
     margin: 0;
+}
+#wpcf-post-relationship hr {
+    color: #DFDFDF;
+    background-color: #DFDFDF;
+    height: 1px;
+    border: 0px;
+    margin: 20px 0;
 }

@@ -14,6 +14,10 @@ class WP_Views_plugin extends WP_Views {
             add_action('admin_head-post.php', array($this, 'admin_add_help'));
             add_action('admin_head-post-new.php', array($this, 'admin_add_help'));
         }
+        
+        add_action('admin_head-post.php', array($this, 'admin_add_errors'));
+        add_action('admin_head-post-new.php', array($this, 'admin_add_errors'));
+        
         parent::init();
 		
         add_action('wp_ajax_wpv_get_types_field_name', array($this, 'wpv_ajax_wpv_get_types_field_name'));
@@ -21,21 +25,22 @@ class WP_Views_plugin extends WP_Views {
 		
         if(is_admin()){
             add_action('admin_print_scripts', array($this,'add_views_settings_js'));
-            
-            /* Add hooks for Module Manager Integration */
-            if (defined('MODMAN_PLUGIN_NAME'))
-            {
-                add_filter('wpmodules_register_sections', array($this,'register_modules_sections'),10,1);
-                add_filter('wpmodules_register_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'register_modules_views_items'), 10, 1);
-                add_filter('wpmodules_export_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'export_modules_views_items'), 10, 2);
-                add_filter('wpmodules_import_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'import_modules_views_items'), 10, 2);
-                add_filter('wpmodules_register_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'register_modules_view_templates_items'), 10, 1);
-                add_filter('wpmodules_export_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'export_modules_view_templates_items'), 10, 2);
-                add_filter('wpmodules_import_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'import_modules_view_templates_items'), 10, 2);
-            }
+            add_action('admin_print_scripts', array($this,'add_views_syntax_highlighting_js'));
 		}
 		
-		
+        /* Add hooks for Module Manager Integration */
+        if (defined('MODMAN_PLUGIN_NAME'))
+        {
+            add_filter('wpmodules_register_sections', array($this,'register_modules_sections'),10,1);
+            add_filter('wpmodules_register_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'register_modules_views_items'), 10, 1);
+            add_filter('wpmodules_export_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'export_modules_views_items'), 10, 2);
+            add_filter('wpmodules_import_items_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'import_modules_views_items'), 10, 3);
+            add_filter('wpmodules_items_check_'._VIEWS_MODULE_MANAGER_KEY_, array($this,'check_modules_views_items'), 10,1);
+            add_filter('wpmodules_register_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'register_modules_view_templates_items'), 10, 1);
+            add_filter('wpmodules_export_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'export_modules_view_templates_items'), 10, 2);
+            add_filter('wpmodules_import_items_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'import_modules_view_templates_items'), 10, 3);
+            add_filter('wpmodules_items_check_'._VIEW_TEMPLATES_MODULE_MANAGER_KEY_, array($this,'check_modules_view_templates_items'), 10,1);
+        }
     }
 
     function register_modules_sections($sections)
@@ -58,10 +63,23 @@ class WP_Views_plugin extends WP_Views {
         $views = $this->get_views();
         
         foreach ($views as $view)
-        {
+        {		$summary = '';
+			$view_settings = get_post_meta($view->ID, '_wpv_settings', true);
+			switch ($view_settings['view-query-mode']) {
+				case 'normal':
+					$summary .= '<h5>' . __('Content to load', 'wpv-views') . '</h5><p>' . apply_filters('wpv-view-get-content-summary', $summary, $view->ID, $view_settings) .'</p>';
+					$summary .= '<h5>' . __('Filter', 'wpv-views') . '</h5>';
+					$summary .= wpv_create_summary_for_listing($view->ID);
+					break;
+				
+				case 'archive':
+					$summary .= '<h5>' . __('Content to load', 'wpv-views') . '</h5><p>'. __('This View displays results for an <strong>existing WordPress query</strong>', 'wpv-views') . '</p>';
+					break;
+			}
             $items[]=array(
                 'id'=>_VIEWS_MODULE_MANAGER_KEY_.$view->ID,
-                'title'=>$view->post_title
+                'title'=>$view->post_title,
+                'details'=> '<div style="padding:0 5px 5px;">' . $summary . '</div>'
             );
         }
         return $items;
@@ -69,32 +87,80 @@ class WP_Views_plugin extends WP_Views {
     
     function export_modules_views_items($res, $items)
     {
+	$newitems=array();
+        // items is now, whole array, not just IDs
         foreach ($items as $ii=>$item)
         {
-            $items[$ii]=intval(str_replace(_VIEWS_MODULE_MANAGER_KEY_,'',$item));
+            $newitems[$ii]=str_replace(_VIEWS_MODULE_MANAGER_KEY_,'',$item['id']);
         }
-        $xmlstring=wpv_admin_export_selected_data($items,'view');
-        return $xmlstring;
+        $export_data_pre = wpv_admin_export_selected_data( $newitems, 'view', 'module_manager' );
+        $hashes = $export_data_pre['items_hash'];
+        foreach ( $items as $jj =>$item ) {
+		$id=str_replace(_VIEWS_MODULE_MANAGER_KEY_,'',$item['id']);
+		$items[$jj]['hash'] = $hashes[$id];
+        
+        }
+        return array(
+		'xml' => $export_data_pre['xml'],
+		'items' => $items
+        );
     }
     
-    function import_modules_views_items($result, $xmlstring)
+    function import_modules_views_items($result, $xmlstring, $items)
     {
-        $result2=wpv_admin_import_data_from_xmlstring($xmlstring);
-        if (false===$result2 || is_wp_error($result2))
-            return (false===$result2)?__('Error during View import','wpv-views'):$result2->get_error_message($result2->get_error_code());
+        $result=wpv_admin_import_data_from_xmlstring($xmlstring, $items, 'views');
+        if (false===$result || is_wp_error($result))
+            return (false===$result)?__('Error during View import','wpv-views'):$result->get_error_message($result->get_error_code());
             
         return $result;
+    }
+    
+    function check_modules_views_items( $items )
+    {
+		foreach ( $items as $key=>$item )
+		{
+			$view_exists = get_page_by_title( $item['title'], OBJECT, 'view');
+			if ( $view_exists )
+			{
+				$items[$key]['exists'] = true;
+				$new_item_export = wpv_admin_export_selected_data( array($view_exists->ID), 'view', 'module_manager');
+				$new_item_hash = $new_item_export['items_hash'][$view_exists->ID];
+				if ( $new_item_hash != $items[$key]['hash'] ) {
+					$items[$key]['is_different'] = true;
+				} else {
+					$items[$key]['is_different'] = false;
+					$items[$key]['new_hash'] = $new_item_hash;
+				}
+			}
+			else
+			{
+				$items[$key]['exists'] = false;
+			}	
+		}
+		return $items;
     }
     
     function register_modules_view_templates_items($items)
     {
         $viewtemplates = $this->get_view_templates();
+		$wpv_options = get_option('wpv_options');
         
         foreach ($viewtemplates as $view)
         {
+			$summary = '';
+			$used_as = wpv_get_view_template_defaults($wpv_options, $view->ID);
+			if ($used_as != '<div class="view_template_default_box"></div>') {
+				$summary .= '<h5>' . __('How this View Template is used', 'wpv-views') . '</h5><p>' . $used_as . '</p>';
+			}
+			$fields_used = wpv_get_view_template_fields_list($view->ID);
+			if ($fields_used != '<div class="view_template_fields_box"></div>') {
+				$summary .= '<h5>' . __('Fields used', 'wpv-views') . '</h5><p>' . $fields_used . '</p>';
+			}
+			if ( '' == $summary ) $summary = '<p>' . __('View template', 'wpv-views') . '</p>';
             $items[]=array(
                 'id'=>_VIEW_TEMPLATES_MODULE_MANAGER_KEY_.$view->ID,
-                'title'=>$view->post_title
+                'title'=>$view->post_title,
+                'details'=>'<div style="padding:0 5px 5px;">' . $summary . '</div>'
             );
         }
         return $items;
@@ -102,21 +168,57 @@ class WP_Views_plugin extends WP_Views {
     
     function export_modules_view_templates_items($res, $items)
     {
+	$newitems=array();
+        // items is now, whole array, not just IDs
         foreach ($items as $ii=>$item)
         {
-            $items[$ii]=intval(str_replace(_VIEW_TEMPLATES_MODULE_MANAGER_KEY_,'',$item));
+            $newitems[$ii]=str_replace(_VIEW_TEMPLATES_MODULE_MANAGER_KEY_,'',$item['id']);
         }
-        $xmlstring=wpv_admin_export_selected_data($items,'view-template');
-        return $xmlstring;
+        $export_data_pre = wpv_admin_export_selected_data( $newitems, 'view-template', 'module_manager');
+        $hashes = $export_data_pre['items_hash'];
+        foreach ( $items as $jj =>$item ) {
+		$id=str_replace(_VIEW_TEMPLATES_MODULE_MANAGER_KEY_,'',$item['id']);
+		$items[$jj]['hash'] = $hashes[$id];
+        }
+        return array(
+		'xml' => $export_data_pre['xml'],
+		'items' => $items
+        );
     }
     
-    function import_modules_view_templates_items($result, $xmlstring)
+    function import_modules_view_templates_items($result, $xmlstring, $items)
     {
-        $result2=wpv_admin_import_data_from_xmlstring($xmlstring);
-        if (false===$result2 || is_wp_error($result2))
-            return (false===$result2)?__('Error during View Template import','wpv-views'):$result2->get_error_message($result2->get_error_code());
+        $result=wpv_admin_import_data_from_xmlstring($xmlstring, $items, 'view-templates');
+        if (false===$result || is_wp_error($result))
+            return (false===$result)?__('Error during View Template import','wpv-views'):$result->get_error_message($result->get_error_code());
             
         return $result;
+    }
+    
+    function check_modules_view_templates_items( $items )
+    {
+	foreach ( $items as $key=>$item )
+	{
+		$view_template_exists = get_page_by_title( $item['title'], OBJECT, 'view-template');
+		if ( $view_template_exists )
+		{
+			$items[$key]['exists'] = true;
+			$new_item_export = wpv_admin_export_selected_data( array($view_template_exists->ID), 'view-template', 'module_manager');
+			$new_item_hash = $new_item_export['items_hash'][$view_template_exists->ID];
+			if ( $new_item_hash != $items[$key]['hash'] ) {
+				$items[$key]['is_different'] = true;
+				$items[$key]['new_hash'] = $new_item_hash;
+				$items[$key]['old_hash'] = $items[$key]['hash'];
+			} else {
+				$items[$key]['is_different'] = false;
+			}
+		}
+		else
+		{
+			$items[$key]['exists'] = false;
+		}	
+	}
+	return $items;
     }
     
     function enable_custom_menu_order($menu_ord) {
@@ -251,6 +353,8 @@ class WP_Views_plugin extends WP_Views {
             ?>
                 <div id="wpv-customize-link" style="display:none;margin-bottom:15px">
                     <a href="#" onclick="wpv_show_post_body()"><?php _e('Fully customize the View HTML output', 'wpv-views'); ?></a>
+                    <?php $last_modified = get_post_meta($post->ID, '_wpv_last_modified', true); ?>
+                    <input type="hidden" name="full_view" id="full_view" value="<?php echo ( '' != $last_modified ) ? $last_modified : 'no-data'; ?>"/>
                 </div>
                 
                 <div id="wpv-learn-about-views-editing" style="display:none;margin-bottom:15px">
@@ -495,6 +599,11 @@ class WP_Views_plugin extends WP_Views {
                     $this->duplicate_view($source_id, $target_id, $icl_trid);
                 }
             }
+            if(isset($_POST['full_view'])) {
+		$blogtime = current_time('timestamp');
+		$last_saved = date('dmYHi',current_time('timestamp'));
+		update_post_meta($post_id, '_wpv_last_modified', $last_saved);
+	    }
         }        
     }
     
@@ -546,7 +655,7 @@ class WP_Views_plugin extends WP_Views {
 			
 			ob_start();
 			
-			edit_post_link(__('Edit view', 'wpv-views'), '', '', $this->current_view);
+			edit_post_link(__('Edit view', 'wpv-views').' "'.get_the_title($this->current_view).'" ', '', '', $this->current_view);
 			
 			$link = $link . ' ' . ob_get_clean();
 			
@@ -638,6 +747,34 @@ class WP_Views_plugin extends WP_Views {
         } else {
             return $contextual_help;
         }
+    }
+    
+    // Add important errors right after the View name
+    
+    function admin_add_errors() {
+    global $post;
+    if (empty($post->ID)) { 
+	return;
+    }
+    $post_type = $post->post_type;
+    if( 'view' != $post_type ) {
+	return;
+    }
+    $last_saved = get_the_modified_time( 'dmYHi' );
+    $last_modified = get_post_meta( $post->ID, '_wpv_last_modified', true );
+    $view_not_complete = '<div class="wpv_form_errors" style="width:98.7%;">' . sprintf(  __( 'This View was not saved correctly. You may need to increase the number of post variables allowed in PHP. <a href="%s">How to increase max_post_vars setting</a>.', 'wpv-views' ), 'http://wp-types.com/faq/why-do-i-get-a-500-server-error-when-editing-a-view/' ) . '</div>';
+    ?>
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		var last_saved = <?php echo $last_saved; ?>;
+		var last_modified = <?php echo ('' != $last_modified) ? $last_modified : '""'; ?>;
+		if (!jQuery('#full_view').length || (last_modified.length && last_saved != last_modified)) {
+			jQuery('#titlediv').after('<?php echo $view_not_complete; ?>');
+		}
+	});
+	</script>
+    
+    <?php
     }
  
 	// Add WPML sync options.
@@ -1063,6 +1200,21 @@ class WP_Views_plugin extends WP_Views {
             wp_enqueue_script( 'views-settings-script' , WPV_URL . '/res/js/views_settings.js', array('jquery'), WPV_VERSION);
 		}
 		
+	}
+	
+	function add_views_syntax_highlighting_js() {
+		global $post;
+		if (isset($post->post_type)) {
+			if ($post->post_type == 'view' || $post->post_type == 'view-template') {
+				wp_enqueue_script( 'views-layout-meta-html-codemirror-script' , WPV_URL . '/res/js/codemirror234/lib/codemirror.js', array(), WPV_VERSION);
+				wp_enqueue_script( 'views-layout-meta-html-codemirror-overlay-script' , WPV_URL . '/res/js/codemirror234/lib/util/overlay.js', array('views-layout-meta-html-codemirror-script'), WPV_VERSION);
+				wp_enqueue_script( 'views-layout-meta-html-codemirror-xml-script' , WPV_URL . '/res/js/codemirror234/mode/xml/xml.js', array('views-layout-meta-html-codemirror-overlay-script'), WPV_VERSION);
+				wp_enqueue_script( 'views-layout-meta-html-codemirror-css-script' , WPV_URL . '/res/js/codemirror234/mode/css/css.js', array('views-layout-meta-html-codemirror-overlay-script'), WPV_VERSION);
+				wp_enqueue_script( 'views-layout-meta-html-codemirror-js-script' , WPV_URL . '/res/js/codemirror234/mode/javascript/javascript.js', array('views-layout-meta-html-codemirror-overlay-script'), WPV_VERSION);
+                                wp_enqueue_script( 'views-codemirror-script' , WPV_URL . '/res/js/views_codemirror_conf.js', array('jquery'), WPV_VERSION);
+				wp_enqueue_style( 'views-layout-meta-html-codemirror-css' , WPV_URL . '/res/js/codemirror234/lib/codemirror.css', array(), WPV_VERSION);
+			}
+		}
 	}
     
 }

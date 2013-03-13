@@ -16,7 +16,9 @@ function wpv_filter_controls_edit() {
 
 function wpv_filter_controls_edit_ok() {
 
-    var c = jQuery('textarea#wpv_filter_meta_html_content').val();
+    //changed to work with CodeMirror
+    // var c = jQuery('textarea#wpv_filter_meta_html_content').val();
+    var c = HTMLEditor['wpv_filter_meta_html_content'].getValue();
     
     if (!check_if_previous_filter_has_changed(c)) {
 		jQuery('#wpv_filter_control_meta_html_content_error').show();
@@ -147,6 +149,7 @@ function wpv_insert_filter_control(selector) {
 	var field_name = jQuery(selector).find('input[name="_wpv_settings\\[filter_controls_field_name\\]\\[\\]"]').val();
     var url_param = jQuery(selector).find('input[name="_wpv_settings\\[filter_controls_param\\]\\[\\]"]').val();
     var values = _wpv_get_filter_controls_values(jQuery(selector).find('input[name="_wpv_settings\\[filter_controls_values\\]\\[\\]"]'));
+    var filterclass = jQuery(selector).find('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]').attr('class'); // get the classname of the select for input type: for taxonomies, it's tax-filter
     
     var control = '[wpv-control ';
     switch (mode) {
@@ -218,6 +221,9 @@ function wpv_insert_filter_control(selector) {
         case 'tax':
         	control += 'taxonomy="' + field_name + '" ';
             control += 'type="' + control_style + '" ';
+	    if (filterclass == 'tax-filter' && control_style == 'select' && values['values'] && values['values'][0] && values['values'][0][1]) { // add the new shortcode attribute to the Meta HTML textarea
+		    control += 'default_label="' + values['values'][0][1] + '" ';
+	    }
             break;
         
         case 'search':
@@ -336,7 +342,7 @@ function wpv_add_filter_controls_for_url_params() {
 					jQuery(new_tr).find('input[name="_wpv_settings\\[filter_controls_param\\]\\[\\]"]').val(url_param);
 					jQuery(new_tr).find('input[name="_wpv_settings\\[filter_controls_field_name\\]\\[\\]"]').val(key);
 					jQuery(new_tr).find('input[name="_wpv_settings\\[filter_controls_field_name\\]\\[\\]"]').next().html(key + ' (' + url_param + ')');
-					jQuery(new_tr).find('.button-secondary').hide();
+				//	jQuery(new_tr).find('.button-secondary').hide();  // keep the Edit button by default, as "select" is the default input type
 				
 					// Fetch the types field name.
 					var data = '&action=wpv_get_taxonomy_name&wpv_nonce='+jQuery('#wpv_get_types_field_name_nonce').attr('value');
@@ -351,6 +357,7 @@ function wpv_add_filter_controls_for_url_params() {
 						// Taxonomy only allows for select and checkboxes style.
 						var select = jQuery(new_tr).find('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]');
 						select.val('select');
+						select.addClass('tax-filter');
 						select.find('option').each(function (index) {
 							if (jQuery(this).val() != 'checkboxes' && jQuery(this).val() != 'select') {
 								jQuery(this).remove();
@@ -541,8 +548,17 @@ function wpv_initialize_input_type_select_change() {
 	    var mode = jQuery(this).parent().parent().find('input[name="_wpv_settings\\[filter_controls_mode\\]\\[\\]"]').val();
 		
 		if (mode == 'tax') {
-			// Don't show the Edit for input values.
-			jQuery(this).parent().parent().find('.button-secondary').hide();
+			var type = jQuery(this).val();
+			switch(type) {
+				case 'select':  // only show Edit button if it's a select
+					jQuery(this).parent().parent().find('.button-secondary').show();
+					break;
+					
+				default:
+					jQuery(this).parent().parent().find('.button-secondary').hide();
+					break;
+					
+			}
 		} else {
 			
 			var type = jQuery(this).val();
@@ -571,7 +587,8 @@ function wpv_initialize_input_edit_click() {
         var td = jQuery(this).parent();
         var type = td.parent().find('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]').val();
         var values = _wpv_get_filter_controls_values(td.parent().find('input[name="_wpv_settings\\[filter_controls_values\\]\\[\\]"]'));
-
+	var filterclass = td.parent().find('select[name="_wpv_settings\\[filter_controls_type\\]\\[\\]"]').attr('class'); // get the classname of the select for input type: for taxonomies, it's tax-filter
+	
         jQuery(td).append('<div id="wpv_filter_controls_edit" style="background:' + wpv_edit_background + ';"></div>');
         
         var div = jQuery('#wpv_filter_controls_edit');
@@ -579,7 +596,7 @@ function wpv_initialize_input_edit_click() {
         if (type == 'checkbox') {
             var title = '';
             if (values['values'].length) {
-                title = values[0][1]
+		    title = values['values'][0][0] // fix for the default value for checkboxes
             }
             jQuery(div).append(wpv_title + ' : ');
             jQuery(div).append('<input class="view_field_control_vals" type="text" value="' + title + '" />');
@@ -604,7 +621,35 @@ function wpv_initialize_input_edit_click() {
                 });
             });
                 
-        } else {
+	} else if (filterclass == 'tax-filter') {  // If this is a taxonomy row, copy the flow from checkbox to define the default value
+		var title = '';
+		if (values['values'].length) {
+			title = values['values'][0][0];
+		}
+		jQuery(div).append(wpv_auto_fill_default + ' : ');
+		jQuery(div).append('<input class="view_field_control_vals" type="text" value="' + title + '" />');
+		
+		jQuery(div).append('<hr />');
+		jQuery(div).append('<input class="button-primary wpv-values-ok" type="button" value="' + wpv_ok + '" />');
+		
+		jQuery(div).find('.wpv-values-ok').click( function () {
+			
+			var title = jQuery(this).parent().find('.view_field_control_vals').val();
+			var control_values = Array();
+			control_values.push(Array(title,title));
+			control_values = JSON.stringify({'values' : control_values});
+			
+			jQuery(this).parent().parent().parent().find('input[name="_wpv_settings\\[filter_controls_values\\]\\[\\]"]').val(control_values);
+			jQuery(this).parent().parent().find('.button-secondary').show();
+			jQuery(this).parent().remove();
+			
+			// enable controls
+			jQuery('#wpv_filter_controls_admin_edit').find('input,select').each( function(index) {
+				jQuery(this).attr('disabled', false);
+			});
+		});
+		
+	} else {
 
             var checked = values['auto_fill'] == "1" ? ' checked="checked"' : '';
             jQuery(div).append('<label><input type="radio" value="1" name="wpv_auto_fill" class="wpv_auto_fill"' + checked + ' />' + wpv_auto_fill_on + '</label>');
