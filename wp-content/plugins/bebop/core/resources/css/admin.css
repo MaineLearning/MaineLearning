@@ -207,18 +207,18 @@
 	float:left;
 	width:46.5%;
 	text-align:right;
-	margin:0px 0px !important;
+	margin:10px 0px !important;
 	padding:0px 14px !important;
 	border:0px solid #000;
-	white-space:nowrap;background:inherit;
+	white-space:nowrap;
+	background:inherit;
 }
-#bebop_admin_container .bebop_admin_form td {
+#bebop_admin_container .bebop_admin_form table td {
 	margin:0;
 	padding:8px 0 8px 5px !important;
 }
-#bebop_admin_container .bebop_admin_form input[type=chekbox] {
-	padding:10px;
-	margin:2px 0;
+#bebop_admin_container .bebop_admin_form table td input[type='checkbox'] {
+	margin:10px auto !important;
 }
 #bebop_admin_container .bebop_admin_form .auto {
 	display:inline !important;

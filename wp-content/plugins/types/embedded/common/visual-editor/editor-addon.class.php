@@ -148,10 +148,10 @@ if (!class_exists('Editor_addon')) {
             
             $direct_links = implode(' ', $this->_media_menu_direct_links);
             
-            $addon_button = '<img src="' . $this->media_button_image . '">';
+            $addon_button = '<img src="' . $this->media_button_image . '" />';
             if(!$standard_v) {
-            	$addon_button = '<img src="' . $this->media_button_image . '" class="vicon">';
-            	// $addon_button = '<input id="addingbutton" alt="#TB_inline?inlineId=add_field_popup" class="thickbox wpv_add_fields_button button-primary field_adder" type="button" value="'. __('Add field', 'wpv-views') .'" name="">';
+            	$addon_button = '<img src="' . $this->media_button_image . '" class="vicon" />';
+            	// $addon_button = '<input id="addingbutton" alt="#TB_inline?inlineId=add_field_popup" class="thickbox wpv_add_fields_button button-primary field_adder" type="button" value="'. __('Add field', 'wpv-views') .'" name="" />';
             	//$addon_button = '<span class="wpv_add_fields_button button-primary field_adder">'. __('Add field', 'wpv-views') .'</span>';
             }
             
@@ -160,15 +160,25 @@ if (!class_exists('Editor_addon')) {
             
             // generate output content
             $out = '
-<ul class="editor_addon_wrapper"><li>' . $addon_button . '<ul class="editor_addon_dropdown"><li><div class="title">'
-                    . $this->button_text
-                    . '</div><div class="close">&nbsp;</div></li><li><div>'
-                    . apply_filters('editor_addon_dropdown_top_message_' . $this->name, '')
-                    . '</div><div class="direct-links">'
-                    . $direct_links . '</div>' .$searchbar. '<div class="scroll"><div class="wrapper">'
-                    . $menus_output . '</div><div></div>'
-                    . apply_filters('editor_addon_dropdown_bottom_message' . $this->name, '')
-                    . '</div></li></ul></li></ul>';
+<ul class="editor_addon_wrapper">
+<li>' . $addon_button . '
+    <ul class="editor_addon_dropdown" id="editor_addon_dropdown_' . md5(serialize(debug_backtrace())) . '">
+        <li>
+            <div class="title">' . $this->button_text . '</div>
+            <div class="close">&nbsp;</div>
+        </li>
+                        
+        <li>
+            ' . apply_filters('editor_addon_dropdown_top_message_' . $this->name, '') . '
+            <div class="direct-links">' . $direct_links . '</div>
+            ' . $searchbar . '
+            ' . $menus_output . '
+            ' . apply_filters('editor_addon_dropdown_bottom_message' . $this->name, '') . 
+                '
+        </li>
+    </ul>
+</li>
+</ul>';
 
             // WP 3.3 changes
             if (version_compare($wp_version, '3.1.4', '>')) {
@@ -224,12 +234,24 @@ if (!class_exists('Editor_addon')) {
                         }
                     } else {
                         // a sum menu.
-                        $css_classes = isset($menu_item['css']) ? $menu_item['css'] : '';
-                        if($key == __('Taxonomy', 'wpv-views') || $key == __('Basic', 'wpv-views')) {
-                        	$css_classes = $all_post_types;
-                        }
-                        $this->_media_menu_direct_links[] = '<a href="#" class="editor-addon-top-link" id="editor-addon-link-' . md5($key) . '">' . $key . ' </a>';
-                        $out .= '<div class="group '. $css_classes .'"><div class="group-title" id="editor-addon-link-' . md5($key) . '-target">' . $key . "&nbsp;&nbsp;\n</div>\n";
+                        /*
+                         * SRDJAN
+                         * Avoid using all classes.
+                         * It will add generic classes that can messup our code.
+                         */
+                        $css_classes = '';
+//                        $css_classes = isset($menu_item['css']) ? $menu_item['css'] : '';
+//                        if($key == __('Taxonomy', 'wpv-views') || $key == __('Basic', 'wpv-views')) {
+//                        	$css_classes = $all_post_types;
+//                        }
+                        $this->_media_menu_direct_links[] = '<a href="javascript:void(0);" class="editor-addon-top-link" data-editor_addon_target="editor-addon-link-' . md5($key) . '">' . $key . ' </a>';
+                        /*
+                         * SRDJAN
+                         * Hmmmm, multiple IDs
+                         * Changed ID to class
+                         */
+//                        $out .= '<div class="group '. $css_classes .'"><div class="group-title" id="editor-addon-link-' . md5($key) . '-target">' . $key . "&nbsp;&nbsp;\n</div>\n";
+                        $out .= '<div class="group '. $css_classes .'"><div class="group-title  editor-addon-link-' . md5($key) . '-target">' . $key . "&nbsp;&nbsp;\n</div>\n";
                         $out .= $this->_output_media_menu($menu_item, $text_area, $standard_v);
                         $out .= "</div>\n";
                     }
@@ -536,28 +558,70 @@ if (!class_exists('Editor_addon')) {
             //<![CDATA[
             window.parent.jQuery('#TB_closeWindowButton').trigger('click');
             
+            
+            
+            
             if (window.parent.wpcfFieldsEditorCallback_redirect) {
+                
+            
                 eval(window.parent.wpcfFieldsEditorCallback_redirect['function'] + '(\'<?php echo esc_js($shortcode); ?>\', window.parent.wpcfFieldsEditorCallback_redirect[\'params\'])');
             } else {
             
+                if (window.parent.HTMLCodeMirrorActive){
+                    var container = window.parent.wpcfInsertMetaHTML;
+                    if(!container){container="content";}
+                
+                    window.parent.InsertAtCursor('<?php echo $shortcode; ?>',container);
+                }else if (window.parent.cred_cred) {
+                    window.parent.cred_cred.insert('<?php echo $shortcode; ?>');
+                }
+            
                 if (window.parent.wpcfActiveEditor != false) {
+                    
+                
                     if (window.parent.jQuery('textarea#'+window.parent.wpcfActiveEditor+':visible').length) {
                         // HTML editor
                         window.parent.jQuery('textarea#'+window.parent.wpcfActiveEditor).insertAtCaret('<?php echo $shortcode; ?>');
                     } else {
+                        
+                    
+                        // Visual editor or CodeMirror
+                        if(window.parent.tinyMCE==undefined){
+                            if (HTMLCodeMirrorActive){
+                                InsertAtCursor('<?php echo $shortcode; ?>',window.parent.wpcfInsertMetaHTML);
+                            }else if (window.parent.cred_cred) {
+                                window.parent.cred_cred.insert('<?php echo $shortcode; ?>');
+                            }else{
+
+                            }
+                        }else{
+                            window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
+                        }
                         // Visual editor
-                        window.parent.tinyMCE.execCommand('mceFocus', false, window.parent.wpcfActiveEditor);
-                        window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
+                        //window.parent.tinyMCE.execCommand('mceFocus', false, window.parent.wpcfActiveEditor);
+                        //window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
                     }
                 } else if (window.parent.wpcfInsertMetaHTML == false) {
+                    
                     if (window.parent.jQuery('textarea#content:visible').length) {
                         // HTML editor
                         window.parent.jQuery('textarea#content').insertAtCaret('<?php echo $shortcode; ?>');
                     } else {
-                        // Visual editor
-                        window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
+                        // Visual editor or CodeMirror
+                        if(window.parent.tinyMCE==undefined){
+                            if (HTMLCodeMirrorActive){
+                                InsertAtCursor('<?php echo $shortcode; ?>', 'content');
+                            }else if (window.parent.cred_cred) {
+                                window.parent.cred_cred.insert('<?php echo $shortcode; ?>');
+                            }else{
+
+                            }
+                        }else{
+                            window.parent.tinyMCE.activeEditor.execCommand('mceInsertContent', false, '<?php echo $shortcode; ?>');
+                        }
                     }
                 } else {
+                
                     window.parent.jQuery('#'+window.parent.wpcfInsertMetaHTML).insertAtCaret('<?php echo $shortcode; ?>');
                     window.parent.wpcfInsertMetaHTML = false;
                 }

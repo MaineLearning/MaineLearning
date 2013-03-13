@@ -237,6 +237,10 @@ add_action( 'admin_menu', 'bp_group_documents_setup_nav', 2 );
  * (doing this in the template object with the rest of the filtering/sorting is too late)
  */
 function bp_group_documents_set_cookies() {
+	if ( is_admin() ) {
+		return;
+	}
+
 	if( isset( $_GET['order'] ) ){
 		setcookie('bp-group-documents-order',$_GET['order'],time()+60*60+24); //expires in one day
 	}

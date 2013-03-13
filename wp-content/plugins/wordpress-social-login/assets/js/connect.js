@@ -1,12 +1,10 @@
 /* Based on http://wordpress.org/extend/plugins/social-connect/ */
-jQuery.noConflict();
 
-(function($)
-{ 
+(function($){ 
 	$(function(){
 		$(".wsl_connect_with_provider").click(function(){
 			popupurl = $("#wsl_popup_base_url").val();
-			provider = $(this).attr("provider");
+			provider = $(this).attr("data-provider");
 
 			window.open(
 				popupurl+"provider="+provider,

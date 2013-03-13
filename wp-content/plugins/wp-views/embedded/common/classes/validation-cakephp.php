@@ -208,7 +208,7 @@ if(!class_exists('Wpcf_Cake_Validation')) {
 	     * @access public
 	     */
 	    function between($check, $min, $max) {
-	        $length = mb_strlen($check);
+	        $length = strlen($check);
 	        return ($length >= $min && $length <= $max);
 	    }
 	
@@ -263,7 +263,7 @@ if(!class_exists('Wpcf_Cake_Validation')) {
 	        }
 	        $_this->check = str_replace(array('-', ' '), '', $_this->check);
 	
-	        if (mb_strlen($_this->check) < 13) {
+	        if (strlen($_this->check) < 13) {
 	            return false;
 	        }
 	
@@ -663,7 +663,7 @@ if(!class_exists('Wpcf_Cake_Validation')) {
 	     * @access public
 	     */
 	    function minLength($check, $min) {
-	        $length = mb_strlen($check);
+	        $length = strlen($check);
 	        return ($length >= $min);
 	    }
 	
@@ -676,7 +676,7 @@ if(!class_exists('Wpcf_Cake_Validation')) {
 	     * @access public
 	     */
 	    function maxLength($check, $max) {
-	        $length = mb_strlen($check);
+	        $length = strlen($check);
 	        return ($length <= $max);
 	    }
 	
@@ -1031,7 +1031,7 @@ if(!class_exists('Wpcf_Cake_Validation')) {
 	            $_this->regex = $regex;
 	        }
 	        if (isset($country)) {
-	            $_this->country = mb_strtolower($country);
+	            $_this->country = strtolower($country);
 	        }
 	        if (isset($deep)) {
 	            $_this->deep = $deep;

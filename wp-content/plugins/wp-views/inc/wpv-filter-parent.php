@@ -375,7 +375,7 @@ function wpv_add_parent_taxonomy($args) {
 				
 				<select name="<?php echo $parent_select_name; ?>">
 					<option value="0"><?php echo __('None', 'wpv-views'); ?></option>
-					<?php $my_walker = new Walker_Category_select($view_settings['taxonomy_parent_id']);
+					<?php $my_walker = new Walker_Category_id_select($view_settings['taxonomy_parent_id']);
 					
 	
 					echo wp_terms_checklist(0, array('taxonomy' => $taxonomy, 'walker' => $my_walker));
@@ -450,7 +450,7 @@ function wpv_get_taxonomy_parents_select() {
 		?>
 		<select name="wpv_taxonomy_parent_id">
 			<option selected="selected" value="0"><?php echo __('None', 'wpv-views'); ?></option>
-			<?php $my_walker = new Walker_Category_select(0);
+			<?php $my_walker = new Walker_Category_id_select(0);
 			
 			$taxonomy = $_POST['taxonomy'];
 	

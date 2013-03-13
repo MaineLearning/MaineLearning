@@ -29,6 +29,7 @@ add_action('admin_init','em_admin_actions_bookings',100);
  */
 function em_bookings_page(){
 	//First any actions take priority
+	do_action('em_bookings_admin_page');
 	if( !empty($_REQUEST['_wpnonce']) ){ $_REQUEST['_wpnonce'] = $_GET['_wpnonce'] = $_POST['_wpnonce'] = esc_attr($_REQUEST['_wpnonce']); } //XSS fix just in case here too
 	if( !empty($_REQUEST['action']) && substr($_REQUEST['action'],0,7) != 'booking' ){ //actions not starting with booking_
 		do_action('em_bookings_'.$_REQUEST['action']);
@@ -199,7 +200,7 @@ function em_bookings_ticket(){
  * Shows a single booking for a single person. 
  */
 function em_bookings_single(){
-	global $EM_Booking, $EM_Notices;
+	global $EM_Booking, $EM_Notices; /* @var $EM_Booking EM_Booking */
 	//check that user can access this page
 	if( is_object($EM_Booking) && !$EM_Booking->can_manage() ){
 		?>
@@ -246,7 +247,38 @@ function em_bookings_single(){
 							<?php _e ( 'Personal Details', 'dbem' ); ?>
 						</h3>
 						<div class="inside">
-							<?php echo $EM_Booking->get_person()->display_summary(); ?>
+							<?php $no_user = get_option('dbem_bookings_registration_disable') && $EM_Booking->get_person()->ID == get_option('dbem_bookings_registration_user'); ?>
+							<div class="em-booking-person-details">
+								<?php echo $EM_Booking->get_person()->display_summary(); ?>
+								<?php if( $no_user ): ?>
+								<input type="button" id="em-booking-person-modify" value="<?php esc_attr_e('Edit Details','dbem'); ?>" />
+								<?php endif; ?>
+							</div>
+							<?php if( $no_user ): ?>
+							<form action="" method="post" class="em-booking-person-form">
+								<div class="em-booking-person-editor" style="display:none;">
+									<?php echo $EM_Booking->get_person_editor(); ?>
+								 	<input type='hidden' name='action' value='booking_modify_person'/>
+								 	<input type='hidden' name='booking_id' value='<?php echo $EM_Booking->booking_id; ?>'/>
+								 	<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
+								 	<input type='hidden' name='_wpnonce' value='<?php echo wp_create_nonce('booking_modify_person_'.$EM_Booking->booking_id); ?>'/>
+									<input type="submit" class="em-booking-person-modify-submit" id="em-booking-person-modify-submit" value="<?php _e('Submit Changes', 'dbem'); ?>" />
+									<input type="button" id="em-booking-person-modify-cancel" value="<?php esc_attr_e('Cancel','dbem'); ?>" />
+								</div>
+							</form>	
+							<script type="text/javascript">
+								jQuery(document).ready( function($){
+									$('#em-booking-person-modify').click(function(){
+										$('.em-booking-person-details').hide();
+										$('.em-booking-person-editor').show();
+									});
+									$('#em-booking-person-modify-cancel').click(function(){
+										$('.em-booking-person-details').show();
+										$('.em-booking-person-editor').hide();
+									});
+								});
+							</script>				
+							<?php endif; ?>
 							<?php do_action('em_bookings_admin_booking_person', $EM_Booking); ?>
 						</div>
 					</div> 	

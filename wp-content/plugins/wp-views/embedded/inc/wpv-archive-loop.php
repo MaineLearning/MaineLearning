@@ -87,6 +87,7 @@ class WP_Views_archive_loops{
 		$this->in_the_loop = false;
         $this->loop_found = false;
 		
+		$this->loop_has_no_posts = false;
     }
     
 
@@ -118,6 +119,19 @@ class WP_Views_archive_loops{
     
     function initialize_archive_loop($post_id) {
         global $post, $wp_query;
+		
+        if (!have_posts()) {
+			
+			// We need to handle empty loops and force the loop processing
+			// Create a dummy entry and set the post count to 1 so that
+			// we recieve the loop_start and loop_end hooks
+			
+			$wp_query->post_count = 1;
+			$wp_query->posts = array(0);
+			$this->loop_has_no_posts = true;
+		}
+				
+		
         if (have_posts()) {
             
             $output_post = get_post($post_id);
@@ -174,6 +188,22 @@ class WP_Views_archive_loops{
         if ($this->loop_found) {
             ob_end_clean();
     
+			if ($this->loop_has_no_posts) {
+				// Reset everything if the loop has no posts.
+				// Then the View will render with no posts.
+				
+				global $post, $wp_query;
+
+				$this->post_count = 0;
+				$this->query->post_count = 0;
+				$wp_query->post_count = 0;
+				
+				$wp_query->posts = array();
+				$this->query->posts = array();
+				
+				$post = null;
+			}
+			
             $query->post_count = $this->post_count;
     
             $this->in_the_loop = true;

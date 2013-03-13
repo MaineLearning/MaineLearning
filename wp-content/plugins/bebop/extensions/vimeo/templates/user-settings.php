@@ -43,7 +43,7 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 	echo '<label for="bebop_' . $extension['name'] . '_username">'; _e( 'New Username', 'bebop' ); echo ':</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_username" value="" size="50"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>';
+	<div class="button_container"><input class="button" type="submit" id="submit" name="submit" value="'; _e( 'Save Changes', 'bebop' ); echo '"></div>';
 	
 	wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
 	

@@ -20,6 +20,12 @@
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
   
 add_shortcode('wpv-filter-start', 'wpv_filter_shortcode_start');
@@ -63,7 +69,7 @@ function wpv_filter_shortcode_start($atts){
     
         $view_settings = $WP_Views->get_view_settings();
         
-        if ($view_layout_settings['style'] == 'table_of_fields') {
+        if ($view_layout_settings['style'] == 'table_of_fields' or $view_layout_settings['style'] == 'table') {
             
             if ($view_settings['query_type'][0] == 'posts') {
                 $sort_id = $view_settings['orderby'];
@@ -75,10 +81,10 @@ function wpv_filter_shortcode_start($atts){
             }
 
             if (isset($_GET['wpv_column_sort_id'])) {
-                $sort_id = $_GET['wpv_column_sort_id'];
+                $sort_id = esc_attr($_GET['wpv_column_sort_id']);
             }
             if (isset($_GET['wpv_column_sort_dir'])) {
-                $sort_dir = $_GET['wpv_column_sort_dir'];
+                $sort_dir = esc_attr($_GET['wpv_column_sort_dir']);
             }
             
             $out .= '<input id="wpv_column_sort_id" type="hidden" name="wpv_column_sort_id" value="' . $sort_id . '" />' . "\n";
@@ -136,6 +142,12 @@ function wpv_filter_shortcode_start($atts){
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
  *
  */
   
@@ -200,6 +212,12 @@ function _wpv_filter_is_form_required() {
  * 'hide' => 'true'|'false'
  * 'name' => The text to be used on the button.
  *
+ * Example usage:
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
   
 add_shortcode('wpv-filter-submit', 'wpv_filter_shortcode_submit');
@@ -233,6 +251,13 @@ function wpv_filter_shortcode_submit($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * Showing [wpv-post-count] posts
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
   
 
@@ -262,6 +287,13 @@ function wpv_post_count($atts){
  * Parameters:
  * This takes no parameters.
  *
+ * Example usage:
+ * [wpv-found-count] posts found
+ *
+ * Link:
+ *
+ * Note:
+ *
  */
   
 add_shortcode('wpv-found-count', 'wpv_found_count');
@@ -286,10 +318,16 @@ function wpv_found_count($atts){
  *
  * Description: The wpv-posts-found shortcode will display the text inside
  * the shortcode if there are posts found by the Views query.
- * eg. [wpv-posts-found]<strong>Some posts were found</strong>[/wpv-posts-found]
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-posts-found]Some posts were found[/wpv-posts-found]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
   
@@ -317,10 +355,16 @@ function wpv_posts_found($atts, $value){
  *
  * Description: The wpv-no-posts-found shortcode will display the text inside
  * the shortcode if there are no posts found by the Views query.
- * eg. [wpv-no-posts-found]<strong>No posts found</strong>[/wpv-no-posts-found]
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-no-posts-found]No posts found[/wpv-no-posts-found]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
   
@@ -416,9 +460,16 @@ function wpv_filter_show_user_interface($name, $values, $selected, $style) {
  * field: Optional. a Types field to retrieve values from
  * title: Optional. Use for the checkbox title
  * taxonomy: Optional. Use when a taxonomy control should be displayed.
+ * default_label: Optional. Use when a taxonomy control should be displayed using select input type.
  * date_format: Optional. Used for a datepicker control
  *
- * @param array $atts An associative array of arributes to be used.
+ * Example usage:
+ *
+ * Link:
+ * More details about this shortcode here: <a href="http://wp-types.com/documentation/wpv-control-fields-in-front-end-filters/" title="wpv-control – Displaying fields in front-end filters">http://wp-types.com/documentation/wpv-control-fields-in-front-end-filters/</a>
+ *
+ * Note:
+ *
  */
 function wpv_shortcode_wpv_control($atts) {
 	
@@ -439,6 +490,7 @@ function wpv_shortcode_wpv_control($atts) {
 				'url_param' => '',
                 'title' => '',
                 'taxonomy' => '',
+                'default_label' => '', // new shortcode attribute for default label for taxonomies filter controls when using select input type
                 'auto_fill' => '',
                 'auto_fill_default' => '',
                 'auto_fill_sort' => '',
@@ -446,8 +498,8 @@ function wpv_shortcode_wpv_control($atts) {
 			), $atts)
 	);
 	
-    if ($taxonomy != '') {
-        return _wpv_render_taxonomy_control($taxonomy, $type, $url_param);
+    if ($taxonomy != '') { // pass the new shortcode attribute $default_label
+        return _wpv_render_taxonomy_control($taxonomy, $type, $url_param, $default_label);
     }
     
     if ($auto_fill != '') {
@@ -503,29 +555,53 @@ function wpv_shortcode_wpv_control($atts) {
         }
         
         if (!$types_checkboxes_field) {
-            global $wpdb;
-            
-            switch (strtolower($auto_fill_sort)) {
-                case 'desc':
-                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value DESC" );
-                    break;
-                
-                case 'descnum':
-                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 DESC" );
-                    break;
-                
-                case 'none':
-                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
-                    break;
-                
-                case 'ascnum':            
-                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 ASC" );
-                    break;
-    
-                default:            
-                    $db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value ASC" );
-                    break;
-            }
+		if ( !function_exists( 'wpcf_admin_fields_get_fields' ) ) {
+			if( defined( 'WPCF_EMBEDDED_ABSPATH' ) ) {
+			include WPCF_EMBEDDED_ABSPATH . '/includes/fields.php';
+			}
+		}
+		if ( function_exists( 'wpcf_admin_fields_get_fields' ) ) {
+			$fields = wpcf_admin_fields_get_fields();
+		}
+		$field_name = substr($auto_fill, 5);
+		if ( isset( $fields ) && isset( $fields[$field_name] ) && isset( $fields[$field_name]['data']['options'] ) ) {
+			$display_text = array();
+			$options = $fields[$field_name]['data']['options'];
+			if ( isset( $options['default'] ) ) unset($options['default']); // remove the default option from the array
+			if ( isset( $fields[$field_name]['data']['display'] ) ) $display_option =  $fields[$field_name]['data']['display'];
+			foreach ( $options as $option ) {
+				if ( isset( $option['value'] ) ) $db_values[] = $option['value'];
+				if ( isset( $display_option ) && 'value' == $display_option && isset( $option['display_value'] ) ) {
+					$display_text[$option['value']] = $option['display_value']; // fill an array with the actual display values
+				} else {
+					$display_text[$option['value']] = $option['title'];
+				}
+			}
+		} else {
+			global $wpdb;
+			
+			switch ( strtolower( $auto_fill_sort ) ) {
+				case 'desc':
+				$db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value DESC" );
+				break;
+					
+				case 'descnum':
+				$db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 DESC" );
+				break;
+				
+				case 'none':
+				$db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}'" );
+				break;
+				
+				case 'ascnum':            
+				$db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value + 0 ASC" );
+				break;
+	
+				default:            
+				$db_values = $wpdb->get_col("SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = '{$auto_fill}' ORDER BY meta_value ASC" );
+				break;
+			}
+		}
         }
         
         if ($auto_fill_default != '') {
@@ -544,7 +620,11 @@ function wpv_shortcode_wpv_control($atts) {
                     $display_values .= ',';
                 }
                 $values .= $value;
-                $display_values .= $value;
+                if ( isset( $display_text[$value] ) ) {
+			$display_values .= $display_text[$value];
+                } else {
+			$display_values .= $value;
+		}
                 $first = false;
                 
             }            
@@ -574,6 +654,17 @@ function wpv_shortcode_wpv_control($atts) {
             case 'checkboxes':
                 $defaults = array();
                 $original_get = null;
+                if ( isset( $auto_fill_default ) ) { // check if the defaul value already exists and set the appropriate arrays and values
+			$num_auto_fill_default_display = array_count_values($display_values);
+			if ( ( isset( $num_auto_fill_default_display[$auto_fill_default] ) && $num_auto_fill_default_display[$auto_fill_default] > 1) 
+				|| 
+				in_array( $auto_fill_default, $values_arr ) ) { // if the default value is an existing display value or stored value
+			$values_arr_def = array_shift( $values_arr );
+			$display_values_def = array_shift( $display_values );
+			}
+			$defaults = explode( ',', $auto_fill_default );
+			$defaults = array_map( 'trim',$defaults );
+                }
                 if (isset($_GET[$url_param])) {
                     
                     $original_get = $_GET[$url_param];
@@ -595,7 +686,7 @@ function wpv_shortcode_wpv_control($atts) {
                     $options[$value]['#name'] = $url_param . '[]';
                     $options[$value]['#title'] = $display_value;
                     $options[$value]['#value'] = $value;
-                    $options[$value]['#default_value'] = in_array($value, $defaults);
+                    $options[$value]['#default_value'] = in_array($value, $defaults) || in_array($options[$value]['#title'], $defaults); // set default using option titles too
 //                    $options[$value]['#inline'] = true;
 //                    $options[$value]['#after'] = '&nbsp;&nbsp;';
                 }
@@ -629,7 +720,11 @@ function wpv_shortcode_wpv_control($atts) {
                     $options[$display_value] = $value;
                 }
 
-                $default_value = $values_arr[0];
+                if ( count( $values_arr ) != count( $options ) ) { // if the $values_arr has one more item than $options, there is a repeating value reset on creation: the existing default
+			$default_value = reset($options);
+		} else { // so the default value in this case is the first element in $values_arr
+			$default_value = $values_arr[0];
+                }
                 if(isset($_GET[$url_param]) && in_array($_GET[$url_param], $options)) {
                     $default_value = $_GET[$url_param];
                 }
@@ -691,7 +786,11 @@ function wpv_shortcode_wpv_control($atts) {
 				
 			foreach($field_radio_options as $key=>$opts) {
 				if(is_array($opts)) {
-					$options[$opts['title']] = $opts['value'];
+					if ( isset( $field_options['data']['display'] ) && 'value' == $field_options['data']['display'] && isset( $opts['display_value'] ) ) {
+						$options[$opts['display_value']] = $opts['value']; // if we have an actual display value and is set to be used, use it
+					} else {
+						$options[$opts['title']] = $opts['value']; // else, use the field value title
+					}
 				} 
 			}
 
@@ -799,7 +898,7 @@ function wpv_shortcode_wpv_control($atts) {
 		else if($field_type == 'textfield') {
 			$default_value = '';
 			if(isset($_GET[$url_param])) {
-				$default_value = $_GET[$url_param];
+				$default_value = esc_attr($_GET[$url_param]);
 			}
 			
 			$element = wpv_form_control(array('field' => array(
@@ -919,7 +1018,7 @@ function wpv_render_datepicker($url_param, $date_format) {
         $date = time();
     }
 
-    $display_date = date($date_format, intval($date));
+    $display_date = date_i18n($date_format, intval($date));
 
     
     $out = '';
@@ -969,8 +1068,38 @@ class Walker_Category_select extends Walker {
 	}
 }
 
+class Walker_Category_id_select extends Walker {
+	var $tree_type = 'category';
+	var $db_fields = array ('parent' => 'parent', 'id' => 'term_id'); //TODO: decouple this
 
-function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
+    function __construct($selected_id){
+		$this->selected = $selected_id;
+	}
+	
+	function start_lvl(&$output, $depth, $args) {
+	}
+
+	function end_lvl(&$output, $depth, $args) {
+	}
+
+	function start_el(&$output, $category, $depth, $args) {
+		extract($args);
+		
+		$indent = str_repeat('-', $depth);
+		if ($indent != '') {
+			$indent = '&nbsp;' . str_repeat('&nbsp;', $depth) . $indent;
+		}
+		
+        $selected = $this->selected == $category->term_id ? ' selected="selected"' : '';
+    		$output .= '<option value="' . $category->term_id. '"' . $selected . '>' . $indent . $category->name . "</option>\n";
+	}
+
+	function end_el(&$output, $category, $depth, $args) {
+	}
+}
+
+
+function _wpv_render_taxonomy_control($taxonomy, $type, $url_param, $default_label) {
 
     // We need to know what attribute url format are we using
     // to make the control filter use values of names or slugs for values.
@@ -1126,7 +1255,7 @@ function _wpv_render_taxonomy_control($taxonomy, $type, $url_param) {
                     $name = 'post_category';
                 }
         		echo '<select name="' . $name . '">';
-    			echo '<option selected="selected" value="0"></option>';
+    			echo "<option selected='selected' value='0'>$default_label</option>"; // set the label for the default option
                 $temp_slug = '0';
                 if (count($terms)) {
                     $temp_slug = $terms[0];

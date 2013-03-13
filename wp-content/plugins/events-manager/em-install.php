@@ -566,6 +566,7 @@ function em_add_options() {
 			'dbem_booking_button_msg_book' => __('Book Now', 'dbem'),
 			'dbem_booking_button_msg_booking' => __('Booking...','dbem'),
 			'dbem_booking_button_msg_booked' => sprintf(__('%s Submitted','dbem'), __('Booking','dbem')),
+			'dbem_booking_button_msg_already_booked' => __('Already Booked','dbem'),
 			'dbem_booking_button_msg_error' => sprintf(__('%s Error. Try again?','dbem'), __('Booking','dbem')),
 			'dbem_booking_button_msg_full' => __('Sold Out', 'dbem'),
 			'dbem_booking_button_msg_cancel' => __('Cancel', 'dbem'),

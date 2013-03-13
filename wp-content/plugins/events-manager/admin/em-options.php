@@ -7,7 +7,7 @@ function em_options_save(){
 	 * Here's the idea, we have an array of all options that need super admin approval if in multi-site mode
 	 * since options are only updated here, its one place fit all
 	 */
-	if( current_user_can('activate_plugins') && !empty($_POST['em-submitted']) && check_admin_referer('events-manager-options','_wpnonce') ){
+	if( current_user_can('list_users') && !empty($_POST['em-submitted']) && check_admin_referer('events-manager-options','_wpnonce') ){
 		//Build the array of options here
 		$post = $_POST;
 		foreach ($_POST as $postKey => $postValue){
@@ -82,7 +82,7 @@ function em_options_save(){
 		delete_option('dbem_migrate_images');
 	}
 	//Uninstall
-	if( !empty($_REQUEST['action']) && $_REQUEST['action'] == 'uninstall' && !empty($_REQUEST['confirmed']) && check_admin_referer('em_uninstall_'.get_current_user_id().'_wpnonce') && is_super_admin() ){
+	if( !empty($_REQUEST['action']) && $_REQUEST['action'] == 'uninstall' && current_user_can('activate_plugins') && !empty($_REQUEST['confirmed']) && check_admin_referer('em_uninstall_'.get_current_user_id().'_wpnonce') && is_super_admin() ){
 		if( check_admin_referer('em_uninstall_'.get_current_user_id().'_confirmed','_wpnonce2') ){
 			//We have a go to uninstall
 			global $wpdb;
@@ -519,8 +519,7 @@ function em_admin_options_page() {
 									$('tbody#dbem-js-limit-options').hide();					
 								}
 							}).trigger('change');
-						});
-						jQuery(document).ready(function($){
+							
 							$('input:radio[name="dbem_css_limit"]').change(function(){
 								if( $('input:radio[name="dbem_css_limit"]:checked').val() == 1 ){
 									$('tbody#dbem-css-limit-options').show();
@@ -1451,6 +1450,7 @@ function em_admin_options_page() {
 						em_options_input_text ( __( 'User can book', 'dbem' ), 'dbem_booking_button_msg_book', '');
 						em_options_input_text ( __( 'Booking in progress', 'dbem' ), 'dbem_booking_button_msg_booking', '');
 						em_options_input_text ( __( 'Booking complete', 'dbem' ), 'dbem_booking_button_msg_booked', '');
+						em_options_input_text ( __( 'Booking already made', 'dbem' ), 'dbem_booking_button_msg_already_booked', '');
 						em_options_input_text ( __( 'Booking error', 'dbem' ), 'dbem_booking_button_msg_error', '');
 						em_options_input_text ( __( 'Event fully booked', 'dbem' ), 'dbem_booking_button_msg_full', '');
 						em_options_input_text ( __( 'Cancel', 'dbem' ), 'dbem_booking_button_msg_cancel', '');
@@ -1544,38 +1544,52 @@ function em_admin_options_page() {
 						em_options_radio_binary ( __( 'Email event owner?', 'dbem' ), 'dbem_bookings_contact_email', __( 'Check this option if you want the event contact to receive an email when someone books places. An email will be sent when a booking is first made (regardless if confirmed or pending)', 'dbem' ) );
 						em_options_radio_binary ( __( 'Disable new registration email?', 'dbem' ), 'dbem_email_disable_registration', __( 'Check this option if you want to prevent the WordPress registration email from going out when a user anonymously books an event.', 'dbem' ) );
 						?>
-						<tr><td colspan='2'><h4><?php _e('Contact person booking confirmed','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __('An email will be sent to the event contact when a booking is first made.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'><strong style="font-size:1.2em"><?php _e('Event Admin/Owner Emails', 'dbem'); ?></strong></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Contact person booking confirmed','dbem') ?></strong></p>
+							<em><?php echo __('An email will be sent to the event contact when a booking is first made.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Contact person email subject', 'dbem' ), 'dbem_bookings_contact_email_subject', $email_subject_tip );
 						em_options_textarea ( __( 'Contact person email', 'dbem' ), 'dbem_bookings_contact_email_body', '' );
 						?>
-						<tr><td colspan='2'><h4><?php _e('Contact person booking cancelled','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __('An email will be sent to the event contact if someone cancels their booking.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Contact person booking cancelled','dbem') ?></strong></p>
+							<em><?php echo __('An email will be sent to the event contact if someone cancels their booking.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Contact person cancellation subject', 'dbem' ), 'dbem_contactperson_email_cancelled_subject', $email_subject_tip );
 						em_options_textarea ( __( 'Contact person cancellation email', 'dbem' ), 'dbem_contactperson_email_cancelled_body', '' );
 						?>
-						<tr><td colspan='2'><h4><?php _e('Confirmed booking email','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __('This is sent when a person\'s booking is confirmed. This will be sent automatically if approvals are required and the booking is approved. If approvals are disabled, this is sent out when a user first submits their booking.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'><strong style="font-size:1.2em"><?php _e('Booked User Emails', 'dbem'); ?></strong></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Confirmed booking email','dbem') ?></strong></p>
+							<em><?php echo __('This is sent when a person\'s booking is confirmed. This will be sent automatically if approvals are required and the booking is approved. If approvals are disabled, this is sent out when a user first submits their booking.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Booking confirmed email subject', 'dbem' ), 'dbem_bookings_email_confirmed_subject', $email_subject_tip );
 						em_options_textarea ( __( 'Booking confirmed email', 'dbem' ), 'dbem_bookings_email_confirmed_body', '' );
 						?>
-						<tr><td colspan='2'><h4><?php _e('Pending booking email','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __( 'This will be sent to the person when they first submit their booking. Not relevant if bookings don\'t require approval.', 'dbem' ).$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Pending booking email','dbem') ?></strong></p>
+							<em><?php echo __( 'This will be sent to the person when they first submit their booking. Not relevant if bookings don\'t require approval.', 'dbem' ).$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Booking pending email subject', 'dbem' ), 'dbem_bookings_email_pending_subject', $email_subject_tip);
 						em_options_textarea ( __( 'Booking pending email', 'dbem' ), 'dbem_bookings_email_pending_body','') ;
 						?>
-						<tr><td colspan='2'><h4><?php _e('Rejected booking email','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __( 'This will be sent automatically when a booking is rejected. Not relevant if bookings don\'t require approval.', 'dbem' ).$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Rejected booking email','dbem') ?></strong></p>
+							<em><?php echo __( 'This will be sent automatically when a booking is rejected. Not relevant if bookings don\'t require approval.', 'dbem' ).$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Booking rejected email subject', 'dbem' ), 'dbem_bookings_email_rejected_subject', $email_subject_tip );
 						em_options_textarea ( __( 'Booking rejected email', 'dbem' ), 'dbem_bookings_email_rejected_body', '' );
 						?>
-						<tr><td colspan='2'><h4><?php _e('Booking cancelled','dbem') ?></h4></td></tr>
-						<tr><td colspan='2'><?php echo __('This will be sent when a user cancels their booking.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Booking cancelled','dbem') ?></strong></p>
+							<em><?php echo __('This will be sent when a user cancels their booking.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Booking cancelled email subject', 'dbem' ), 'dbem_bookings_email_cancelled_subject', $email_subject_tip );
 						em_options_textarea ( __( 'Booking cancelled email', 'dbem' ), 'dbem_bookings_email_cancelled_body', '' );
@@ -1590,29 +1604,39 @@ function em_admin_options_page() {
 				<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Event Submission Templates', 'dbem' ); ?> </span></h3>
 				<div class="inside">
 					<table class='form-table'>
+						<tr><td colspan='2'><strong style="font-size:1.2em"><?php _e('Event Admin Emails', 'dbem'); ?></strong></td></tr>
 						<?php 
 						em_options_input_text ( __( 'Administrator Email', 'dbem' ), 'dbem_event_submitted_email_admin', __('Event submission notifications will be sent to emails added here.','dbem').' '.__('If left blank, no emails will be sent. Seperate emails with commas for more than one email.','dbem') );
 						?>
-						<tr><td colspan='2'><strong><?php _e('Event Submitted','dbem') ?></strong></td></tr>
-						<tr><td colspan='2'><?php echo __('An email will be sent to your administrator emails when an event is submitted and pending approval.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Event Submitted','dbem') ?></strong></p>
+							<em><?php echo __('An email will be sent to your administrator emails when an event is submitted and pending approval.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Event submitted subject', 'dbem' ), 'dbem_event_submitted_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event submitted email', 'dbem' ), 'dbem_event_submitted_email_body', '' );
 						?>
-						<tr><td colspan='2'><strong><?php _e('Event Re-Submitted','dbem') ?></strong></td></tr>
-						<tr><td colspan='2'><?php echo __('When a user modifies a previously published event, it will be put back into pending review status and will not be publisehd until you re-approve it.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Event Re-Submitted','dbem') ?></strong></p>
+							<em><?php echo __('When a user modifies a previously published event, it will be put back into pending review status and will not be publisehd until you re-approve it.','dbem').$bookings_placeholder_tip ?></em>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Event resubmitted subject', 'dbem' ), 'dbem_event_resubmitted_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event resubmitted email', 'dbem' ), 'dbem_event_resubmitted_email_body', '' );
 						?>
-						<tr><td colspan='2'><strong><?php _e('Event Published','dbem') ?></strong></td></tr>
-						<tr><td colspan='2'><?php echo __('An email will be sent to an administrator of your choice when an event is published by users who are not administrators.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Event Published','dbem') ?></strong></p>
+							<em><?php echo __('An email will be sent to an administrator of your choice when an event is published by users who are not administrators.','dbem').$bookings_placeholder_tip ?>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Event published subject', 'dbem' ), 'dbem_event_published_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event published email', 'dbem' ), 'dbem_event_published_email_body', '' );
 						?>
-						<tr><td colspan='2'><strong><?php _e('Event Approved','dbem') ?></strong></td></tr>
-						<tr><td colspan='2'><?php echo __('An email will be sent to the event owner when their event is approved. Users requiring event approval do not have the <code>publish_events</code> capability.','dbem').$bookings_placeholder_tip ?></td></tr>
+						<tr><td colspan='2'><strong style="font-size:1.2em"><?php _e('Event Submitter Emails', 'dbem'); ?></strong></td></tr>
+						<tr><td colspan='2'>
+							<p><strong><?php _e('Event Approved','dbem') ?></strong></p>
+							<em><?php echo __('An email will be sent to the event owner when their event is approved. Users requiring event approval do not have the <code>publish_events</code> capability.','dbem').$bookings_placeholder_tip ?>
+						</td></tr>
 						<?php
 						em_options_input_text ( __( 'Event approved subject', 'dbem' ), 'dbem_event_approved_email_subject', __('If left blank, this email will not be sent.','dbem') );
 						em_options_textarea ( __( 'Event approved email', 'dbem' ), 'dbem_event_approved_email_body', '' );
@@ -1688,12 +1712,14 @@ function em_admin_option_box_image_sizes(){
  */
 function em_admin_option_box_email(){
 	global $save_button;
+	$current_user = get_user_by('id', get_current_user_id());
 	?>
 	<div  class="postbox " >
 	<div class="handlediv" title="<?php __('Click to toggle', 'dbem'); ?>"><br /></div><h3><span><?php _e ( 'Email Settings', 'dbem' ); ?></span></h3>
 	<div class="inside em-email-form">
 		<p class="em-email-settings-check">
-			<?php _e('Before you save your changes, you can quickly send yourself a test email by clicking this button.'); ?>
+			<em><?php _e('Before you save your changes, you can quickly send yourself a test email by clicking this button.','dbem'); ?>
+			<?php echo sprintf(__('A test email will be sent to your account email - %s','dbem'), $current_user->user_email); ?></em><br />
 			<input type="button" id="em-admin-check-email" class="secondary-button" value="<?php _e('Test Email Settings','dbem'); ?>" />
 			<input type="hidden" name="_check_email_nonce" value="<?php echo wp_create_nonce('check_email'); ?>" />
 			<span id="em-email-settings-check-status"></span>

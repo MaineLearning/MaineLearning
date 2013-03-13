@@ -29,7 +29,7 @@ class EM_Object {
 			'category' => 0,
 			'tag' => 0,
 			'location' => 0,
-			'event' => 0, 
+			'event' => false, 
 			'offset'=>0,
 			'page'=>1,//basically, if greater than 0, calculates offset at end
 			'recurrence'=>0,
@@ -59,7 +59,7 @@ class EM_Object {
 		
 			//Clean all id lists
 			$array = self::clean_id_atts($array, array('location', 'event', 'category', 'post_id'));
-			if( !empty($array['tag']) && strstr(',', $array['tag']) !== false ){
+			if( !empty($array['tag']) && !is_array($array['tag']) && strstr($array['tag'],',') !== false ){ //accepts numbers or words
 				$array['tag'] = explode(',',$array['tag']);
 			}
 			
@@ -356,27 +356,38 @@ class EM_Object {
 		}elseif( self::array_is_numeric($category) ){
 			$term_ids = array();
 			$term_not_ids = array();
-			foreach($category as $category_id){
-				$term = new EM_Category(absint($category_id));
-				if( !empty($term->term_taxonomy_id) ){
+			if( EM_MS_GLOBAL ){
+			    //we're directly looking for category ids from within the em_meta table
+				foreach($category as $category_id){
 					if( $category_id > 0 ){
-						$term_ids[] = $term->term_taxonomy_id;
+						$term_ids[] = $category_id;
 					}else{
-						$term_not_ids[] = $term->term_taxonomy_id;
+						$term_not_ids[] = absint($category_id);
 					}
 				}
-			}
-			if( count($term_ids) > 0 || count($term_not_ids) > 0 ){
-				if( EM_MS_GLOBAL ){
-					$cat_conds = array();
-					if( count($term_ids) > 0 ){
-						$cat_conds[] = EM_EVENTS_TABLE.".event_id IN ( SELECT object_id FROM ".EM_META_TABLE." WHERE meta_value IN (".implode(',',$term_ids).") AND meta_name='event-category' )";
+				$cat_conds = array();
+				if( count($term_ids) > 0 ){
+					$cat_conds[] = EM_EVENTS_TABLE.".event_id IN ( SELECT object_id FROM ".EM_META_TABLE." WHERE meta_value IN (".implode(',',$term_ids).") AND meta_key='event-category' )";
+				}
+				if( count($term_not_ids) > 0 ){
+					$cat_conds[] = EM_EVENTS_TABLE.".event_id NOT IN ( SELECT object_id FROM ".EM_META_TABLE." WHERE meta_value IN (".implode(',',$term_not_ids).") AND meta_key='event-category' )";			
+				}
+				if( count($cat_conds) > 0 ){
+					$conditions['category'] = '('. implode(' AND ', $cat_conds) .')';
+				}
+			}else{
+			    //normal taxonomy filtering
+				foreach($category as $category_id){
+					$term = new EM_Category(absint($category_id));
+					if( !empty($term->term_taxonomy_id) ){
+						if( $category_id > 0 ){
+							$term_ids[] = $term->term_taxonomy_id;
+						}else{
+							$term_not_ids[] = $term->term_taxonomy_id;
+						}
 					}
-					if( count($term_not_ids) > 0 ){
-						$cat_conds[] = EM_EVENTS_TABLE.".event_id NOT IN ( SELECT object_id FROM ".EM_META_TABLE." WHERE meta_value IN (".implode(',',$term_not_ids).") AND meta_name='event-category' )";			
-					}
-					$conditions['category'] = '('. implode(' || ', $cat_conds) .')';
-				}else{
+				}
+				if( count($term_ids) > 0 || count($term_not_ids) > 0 ){
 					$cat_conds = array();
 					if( count($term_ids) > 0 ){
 						$cat_conds[] = EM_EVENTS_TABLE.".post_id IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id IN (".implode(',',$term_ids).") )";
@@ -384,10 +395,12 @@ class EM_Object {
 					if( count($term_not_ids) > 0 ){
 						$cat_conds[] = EM_EVENTS_TABLE.".post_id NOT IN ( SELECT object_id FROM ".$wpdb->term_relationships." WHERE term_taxonomy_id IN (".implode(',',$term_not_ids).") )";			
 					}
-					$conditions['category'] = '('. implode(' || ', $cat_conds) .')';
+					if( count($cat_conds) > 0 ){
+						$conditions['category'] = '('. implode(' AND ', $cat_conds) .')';
+					}
+				}else{
+				    $conditions = array('tag'=>'2=1'); //force a false
 				}
-			}else{
-			    $conditions = array('tag'=>'2=1'); //force a false
 			}
 		}		
 		//Add conditions for tags
@@ -763,17 +776,18 @@ class EM_Object {
 	 */
 	function can_manage( $owner_capability = false, $admin_capability = false, $user_to_check = false ){
 		global $em_capabilities_array;
-		if( $user_to_check ){
-			$user = new WP_User($user_to_check);
-			if( empty($user->ID) ) $user = false;
-		} 
-		//if multisite and supoer admin, just return true
+		//if multisite and super admin, just return true
 		if( is_multisite() && is_super_admin() ){ return true; }
+		//set user to the desired user we're verifying, otherwise default to current user
+	    if( $user_to_check ){
+	    	$user = new WP_User($user_to_check);	
+	    }
+	    if( empty($user->ID) ) $user = wp_get_current_user();
 		//do they own this?
 		$is_owner = ( (!empty($this->owner) && ($this->owner == get_current_user_id()) || empty($this->id) || (!empty($user) && $this->owner == $user->ID)) );
 		//now check capability
 		$can_manage = false;
-		if( $is_owner && (current_user_can($owner_capability) || (!empty($user) && $user->has_cap($owner_capability))) ){
+		if( $is_owner && $owner_capability && $user->has_cap($owner_capability) ){
 			//user owns the object and can therefore manage it
 			$can_manage = true;
 		}elseif( $owner_capability && array_key_exists($owner_capability, $em_capabilities_array) ){
@@ -782,7 +796,7 @@ class EM_Object {
 		}
 		//admins have special rights
 		if( !$admin_capability ) $admin_capability = $owner_capability;
-		if( current_user_can($admin_capability) || (!empty($user) && $user->has_cap($admin_capability)) ){
+		if( $admin_capability && $user->has_cap($admin_capability) ){
 			$can_manage = true;
 		}elseif( $admin_capability && array_key_exists($admin_capability, $em_capabilities_array) ){
 			$error_msg = $em_capabilities_array[$admin_capability];
@@ -796,8 +810,8 @@ class EM_Object {
 
 	
 	function ms_global_switch(){
-		if( EM_MS_GLOBAL && !is_main_site() ){
-			//If in multisite global, then get the main blog categories
+		if( EM_MS_GLOBAL ){
+			//If in multisite global, then get the main blog
 			global $current_site;
 			switch_to_blog($current_site->blog_id);
 		}
@@ -1241,4 +1255,18 @@ class EM_Object {
 	/*
 	 * END IMAGE UPlOAD FUNCTIONS
 	 */
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	function has_taxes(){
+	    //TODO make all functions use this to check tax availability (using extended object for function access)
+	    //TODO override this function in e.g. events to allow custom tax values
+	    return !get_option('dbem_bookings_tax_auto_add') && is_numeric(get_option('dbem_bookings_tax')) && $this->get_tax_rate() > 0;
+	}
+	
+	function get_tax_rate(){
+		return get_option('dbem_bookings_tax');
+	}
 }

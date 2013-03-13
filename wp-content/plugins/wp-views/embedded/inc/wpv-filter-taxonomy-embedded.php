@@ -51,7 +51,7 @@ function get_taxonomy_query($view_settings) {
     $tax_query_settings = apply_filters('wpv_filter_taxonomy_query', $tax_query_settings, $view_settings);
     
     if (isset($_GET['wpv_column_sort_id'])) {
-        $field = $_GET['wpv_column_sort_id'];
+        $field = esc_attr($_GET['wpv_column_sort_id']);
         if ($field == 'taxonomy-link') {
             $tax_query_settings['orderby'] = 'name';
         } 
@@ -65,7 +65,7 @@ function get_taxonomy_query($view_settings) {
     }
     
     if (isset($_GET['wpv_column_sort_dir'])) {
-        $tax_query_settings['order'] = strtoupper($_GET['wpv_column_sort_dir']);
+        $tax_query_settings['order'] = strtoupper(esc_attr($_GET['wpv_column_sort_dir']));
 
     }    
     
@@ -175,10 +175,16 @@ function _wpv_taxonomy_sort_dec($a, $b) {
  *
  * Description: The [wpv-no-taxonomy-found] shortcode will display the text inside
  * the shortcode if there are no taxonomys found by the Views query.
- * eg. [wpv-no-taxonomy-found]<strong>No taxonomy found</strong>[/wpv-no-taxonomy-found]
  *
  * Parameters:
  * This takes no parameters.
+ *
+ * Example usage:
+ * [wpv-no-taxonomy-found]No taxonomy found[/wpv-no-taxonomy-found]
+ *
+ * Link:
+ *
+ * Note:
  *
  */
   

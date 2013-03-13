@@ -130,7 +130,8 @@ function wpv_get_layout_label_by_slug($wpv_layout_settings) {
 }
 
 function wpv_get_view_template_defaults($wpv_options, $post_id) {
-	$result = '<div class="view_template_default_box">';
+
+	$result = '';
 	
 	if ($wpv_options) {
 		foreach($wpv_options as $option=>$value) {
@@ -149,7 +150,9 @@ function wpv_get_view_template_defaults($wpv_options, $post_id) {
 		}
 	}
 	
-	$result .= '</div>';
+	if ($result != '') {
+		$result = '<div class="view_template_default_box">' . $result . '</div>';
+	}
 	
 	return $result;
 }
@@ -164,7 +167,7 @@ function wpv_create_content_summary_for_listing($post_id) {
 	
 	switch ($view_settings['view-query-mode']) {
 		case 'normal':
-			$summary .= apply_filters('wpv-view-get-content-summary', $summary, $post_id, $view_settings);
+			$summary .= apply_filters('wpv-view-get-content-summary', '', $post_id, $view_settings);
 			break;
 		
 		case 'archive':

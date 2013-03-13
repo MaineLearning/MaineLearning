@@ -1,8 +1,8 @@
 <p><?php _e( 'Here you can manage your content. Recently imported content is categorised as unverified, items that appear in your activity stream are categorised as verified. The deleted category holds items which you do not want to show in your activity stream.', 'bebop' ); ?>
 </p><br>
-<div class="button_container"><a class="auto button min_width_100" href="?type=unverified"><?php _e( 'Unverified', 'bebop' ); ?></a></div>
-<div class="button_container"><a class="auto button min_width_100" href="?type=verified"><?php _e( 'Verified', 'bebop' ); ?></a></div>
-<div class="button_container"><a class="auto button min_width_100" href="?type=deleted"><?php _e( 'Deleted', 'bebop' ); ?></a></div>
+<div class="button_container"><a class="button min_width_100" href="?type=unverified"><?php _e( 'Unverified', 'bebop' ); ?></a></div>
+<div class="button_container"><a class="button min_width_100" href="?type=verified"><?php _e( 'Verified', 'bebop' ); ?></a></div>
+<div class="button_container"><a class="button min_width_100" href="?type=deleted"><?php _e( 'Deleted', 'bebop' ); ?></a></div>
 <div class="clear_both"></div>
 <?php
 $type = bebop_get_oer_type();
@@ -18,8 +18,8 @@ if ( ! empty( $type ) ) {
 		echo '<form id="oer_table" class="bebop_user_form" method="post">';
 		echo '<h5>' . ucfirst( $type ) . ' ' . __( 'Content', 'bebop' ) . '</h5>';
 		echo $bebop_pagination;
-		echo '<div class="button_container button_right"><a class="auto button" rel="#oer_table" href="#select_all">' . __( 'Select All', 'bebop' ) . '</a></div>';
-		echo '<div class="button_container button_right"><a class="auto button" rel="#oer_table" href="#select_none">' . __( 'Select None', 'bebop' ) . '</a></div>';
+		echo '<div class="button_container button_right"><a class="button" rel="#oer_table" href="#select_all">' . __( 'Select All', 'bebop' ) . '</a></div>';
+		echo '<div class="button_container button_right"><a class="button" rel="#oer_table" href="#select_none">' . __( 'Select None', 'bebop' ) . '</a></div>';
 		echo '<div class="clear_both"></div>';
 		
 		echo '<table class="bebop_user_table">
@@ -33,16 +33,16 @@ if ( ! empty( $type ) ) {
 		
 		foreach ( $oers as $oer ) {
 			echo '<tr>' .
-				'<td><label for="' . $oer->secondary_item_id . '">' . bebop_tables::sanitise_element( $oer->type ) . '</label></td>' .
-				'<td><label for="' . $oer->secondary_item_id . '">' . bebop_tables::sanitise_element( bp_core_time_since( $oer->date_imported ) ) . '</label></td>' .
-				'<td><label for="' . $oer->secondary_item_id . '">' . bp_core_time_since( $oer->date_recorded ) . '</label></td>' .
-				'<td class="content"><label for="' . $oer->secondary_item_id . '">' . bebop_tables::sanitise_element( $oer->content, $allow_tags = true ) . '</label></td>' .
-				"<td class='checkbox_container'><label for='" . $oer->secondary_item_id . "'><div class='checkbox'><input type='checkbox' id='" . $oer->secondary_item_id . "' name='" . $oer->secondary_item_id ."'></div></label></td>" .
+				'<td><label for="' . $oer->id . '">' . bebop_tables::sanitise_element( $oer->type ) . '</label></td>' .
+				'<td><label for="' . $oer->id . '">' . bebop_tables::sanitise_element( bp_core_time_since( $oer->date_imported ) ) . '</label></td>' .
+				'<td><label for="' . $oer->id . '">' . bp_core_time_since( $oer->date_recorded ) . '</label></td>' .
+				'<td class="content"><label for="' . $oer->id . '">' . bebop_tables::sanitise_element( $oer->content, $allow_tags = true ) . '</label></td>' .
+				"<td class='checkbox_container'><label for='" . $oer->id . "'><div class='checkbox'><input type='checkbox' id='" . $oer->id . "' name='" . $oer->id ."'></div></label></td>" .
 			'</tr>';
 		}
 		echo '</table>';
-		echo '<div class="button_container button_right"><a class="auto button" rel="#oer_table" href="#select_all">' . __( 'Select All', 'bebop' ) . '</a></div>';
-		echo '<div class="button_container button_right"><a class="auto button" rel="#oer_table" href="#select_none">' . __( 'Select None', 'bebop' ) . '</a></div>';
+		echo '<div class="button_container button_right"><a class="button" rel="#oer_table" href="#select_all">' . __( 'Select All', 'bebop' ) . '</a></div>';
+		echo '<div class="button_container button_right"><a class="button" rel="#oer_table" href="#select_none">' . __( 'Select None', 'bebop' ) . '</a></div>';
 		
 		echo '<h5>' . __( 'Action', 'bebop' ) . '</h5>';
 		$verify_oer_option = '<label class="alt" for="verify">' . __( 'Verify', 'bebop' ) . ':</label><input type="radio" name="action" id="verify" value="verify"><br>';
@@ -59,7 +59,7 @@ if ( ! empty( $type ) ) {
 			echo $undelete_oer_option;
 		}
 			
-		echo '<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>
+		echo '<div class="button_container"><input class="button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>
 		</form>';
 		echo $bebop_pagination;
 	}

@@ -127,7 +127,7 @@ class WPV_WPLogger
                 printf( 'window.console.%s("%s");', $line[0], $line[1] );
                 print "\n";
             }
-            print '} else if ($j.browser.mozilla && (\'console\' in window) && (\'firebug\' in console)) {'."\n";
+            print '} else if ($j.browser.mozilla && (\'console\' in window)) {'."\n";
             foreach ( $this->_buffer as $line )
             {
                 printf( 'console.%s("%s");', $line[0], $line[1] );

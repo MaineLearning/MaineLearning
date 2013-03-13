@@ -18,7 +18,7 @@ if(defined('WPV_VERSION')) {
 
 // THEME VERSION
 
-define('WPV_VERSION', '1.1.4.1');
+define('WPV_VERSION', '1.2');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__));
 define('WPV_FOLDER', basename(WPV_PATH));

@@ -58,7 +58,7 @@ else {
 							echo 'CHECKED';
 						}
 						echo '></td>
-						<td><a class="button auto" style="display:inline-block;margin:6px 0 6px 0;" href="?page=bebop_providers&provider=' . strtolower( $extension['name'] ) . '">' . __( 'Settings', 'bebop' ) . '</a></td>
+						<td><a class="button-secondary" style="display:inline-block;margin:6px 0 6px 0;" href="?page=bebop_providers&provider=' . strtolower( $extension['name'] ) . '">' . __( 'Settings', 'bebop' ) . '</a></td>
 					</tr>';
 					}
 				?>

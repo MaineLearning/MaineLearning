@@ -5,6 +5,7 @@ Tags: user, users, profiles, switching, wpmu, multisite, buddypress, become, use
 Requires at least: 3.1
 Tested up to: 3.5
 Stable tag: trunk
+License: GPL v2 or later
 
 Instant switching between user accounts in WordPress.
 
@@ -18,7 +19,7 @@ This plugin allows you to quickly swap between user accounts in WordPress at the
  * Switch back: Instantly switch back to your originating account.
  * Switch off: Log out of your account but retain the ability to instantly switch back in again.
  * It's completely secure (see the *Security* section below).
- * Compatible with WordPress, WordPress Multisite, BuddyPress and WordPress MU.
+ * Compatible with WordPress, WordPress Multisite and BuddyPress.
 
 = Security =
 
@@ -34,6 +35,8 @@ This plugin allows you to quickly swap between user accounts in WordPress at the
  * Farsi (Persian) by Amin Ab
  * Slovak by Max Samael
  * Polish by Bartosz Arendt
+ * Lithuanian by Tommixoft
+ * Arabic by Hassan Hisham
 
 == Installation ==
 
@@ -48,7 +51,7 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 = Usage =
 
-Visit the *Users* menu in WordPress and you'll see a *Switch To* link next to each user. Clicking this will switch you into that user account. Once switched, you can switch back to your originating account via the *Switch back* link on each dashboard screen.
+Visit the *Users* menu in WordPress and you'll see a *Switch To* link next to each user. Clicking this will immediately switch you into that user account. Once switched, you can switch back to your originating account via the *Switch back* link on each dashboard screen and in your profile menu in the WordPress toolbar.
 
 See the FAQ for information about the *Switch Off* feature.
 
@@ -56,7 +59,7 @@ See the FAQ for information about the *Switch Off* feature.
 
 = What does "Switch off" mean? =
 
-Switching off logs you out of your account but retains your current user ID in a cookie so you can switch straight back (ie. log straight back in) without having to log in with your username and password. It's akin to switching to no user, and being able to switch back.
+Switching off logs you out of your account but retains your user ID in an authorisation cookie so you can switch straight back without having to log in again manually. It's akin to switching to no user, and being able to switch back.
 
 The *Switch Off* link can be found in your profile menu in the WordPress toolbar. Once you've switched off you'll see a *Switch back* link in the footer of your site.
 
@@ -68,10 +71,6 @@ Yes, and you'll also be able to switch users from the Users screen in Network Ad
 
 Yes, and you'll also be able to switch users from the Members screens.
 
-= Does this plugin work with WordPress MU? =
-
-Yes, but you should really update to Multisite.
-
 = Does this work as a mu-plugin? =
 
 Yes, but you'll need to install `user-switching.php` into the root of your `mu-plugins` directory, not in the `user-switching` subdirectory. This is a restriction of WordPress.
@@ -79,6 +78,10 @@ Yes, but you'll need to install `user-switching.php` into the root of your `mu-p
 = What capability does a user need in order to switch accounts? =
 
 A user needs the `edit_users` capability in order to switch user accounts. By default only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
+
+= Can regular admins on Multisite installs switch accounts? =
+
+No. This can be enabled though by installing the [User Switching for Regular Admins](https://github.com/johnbillion/user-switching-for-regular-admins) plugin.
 
 = Are any hooks called when users switch accounts? =
 
@@ -95,10 +98,17 @@ When a user switches off, the `switch_off_user` hook is called with the old user
 
 == Upgrade Notice ==
 
+= 0.7.1 =
+* Arabic translation by Hassan Hisham. Minor code tweaks.
+
 = 0.7 =
 * More intuitive redirecting after switching. Always show a 'Switch back' link in the footer when the admin toolbar isn't showing.
 
 == Changelog ==
+
+= 0.7.1 =
+* Arabic translation by Hassan Hisham.
+* Minor code tweaks.
 
 = 0.7 =
 * Always show a 'Switch back' link in the footer when the admin toolbar isn't showing.

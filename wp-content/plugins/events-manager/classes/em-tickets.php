@@ -23,15 +23,18 @@ class EM_Tickets extends EM_Object implements Iterator{
 	
 	
 	/**
-	 * Creates an EM_Tickets instance, 
-	 * @param EM_Event $event
-	 * @return null
+	 * Creates an EM_Tickets instance
+	 * @param mixed $event
 	 */
 	function EM_Tickets( $object = false ){
 		global $wpdb;
 		if( is_numeric($object) || (is_object($object) && in_array(get_class($object), array("EM_Event","EM_Booking"))) ){
 			$this->event_id = (is_object($object)) ? $object->event_id:$object;
-			$sql = "SELECT * FROM ". EM_TICKETS_TABLE ." WHERE event_id ='{$this->event_id}' ORDER BY ".get_option('dbem_bookings_tickets_orderby');
+		    if( is_object($object) && get_class($object) == 'EM_Booking' ){
+				$sql = "SELECT * FROM ". EM_TICKETS_TABLE ." WHERE ticket_id IN (SELECT ticket_id FROM ".EM_TICKETS_BOOKINGS_TABLE." WHERE booking_id='{$object->booking_id}') ORDER BY ".get_option('dbem_bookings_tickets_orderby');
+		    }else{
+		        $sql = "SELECT * FROM ". EM_TICKETS_TABLE ." WHERE event_id ='{$this->event_id}' ORDER BY ".get_option('dbem_bookings_tickets_orderby');
+		    }
 			$tickets = $wpdb->get_results($sql, ARRAY_A);
 			foreach ($tickets as $ticket){
 				$EM_Ticket = new EM_Ticket($ticket);

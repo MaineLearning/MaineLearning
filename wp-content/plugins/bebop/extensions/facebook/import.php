@@ -107,9 +107,6 @@ function bebop_facebook_import( $extension, $user_metas = null ) {
 									$id					= $item->id;
 									$item_content		= $item->message;
 									$item_published		= gmdate( 'Y-m-d H:i:s', strtotime( $item->created_time ) );
-									echo '<pre>';
-									var_dump($item);
-									echo '</pre>';
 									if ( isset( $item->actions[0]->link ) ) {
 										$action_link = $item->actions[0]->link;
 									}
@@ -122,11 +119,9 @@ function bebop_facebook_import( $extension, $user_metas = null ) {
 									//generate an $item_id
 									$item_id = bebop_generate_secondary_id( $user_meta->user_id, $id, $item_published );
 									
-									//check if the secondary_id already exists
-									$secondary = bebop_tables::fetch_individual_oer_data( $item_id );
 									//if the id is not found, import the content.
-									if ( empty( $secondary->secondary_item_id ) ) {
-										
+									if ( ! bebop_tables::check_existing_content_id( $user_meta->user_id, $this_extension['name'], $item_id ) ) {
+											
 										if ( bebop_create_buffer_item(
 														array(
 															'user_id'			=> $user_meta->user_id,
@@ -146,9 +141,11 @@ function bebop_facebook_import( $extension, $user_metas = null ) {
 								}
 								
 							}//End if ( isset( $item->message ) ) {
+							unset($item);
 						}
 					}
 				}//End else
+				unset($user_meta);
 			}
 		}
 	}

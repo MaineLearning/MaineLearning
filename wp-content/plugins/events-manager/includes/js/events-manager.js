@@ -767,7 +767,7 @@ function em_maps() {
 				  var bounds = new google.maps.LatLngBounds(minLatLng,maxLatLng);
 				  maps[map_id].fitBounds(bounds);
 				//Call a hook if exists
-				jQuery(document).triggerHandler('em_maps_locations_hook', [maps[map_id]]);
+				jQuery(document).triggerHandler('em_maps_locations_hook', [maps[map_id]], data);
 			}else{
 				el.children().first().html('No locations found');
 			}

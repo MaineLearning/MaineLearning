@@ -370,12 +370,9 @@ function em_locations_admin($args = array()){
 				$status = false;
 			}
 			$blog = false;
-			if( EM_MS_GLOBAL ){
-			    if( get_site_option('dbem_ms_mainblog_locations') ){
-			    	$blog = get_current_site()->blog_id;
-			    }elseif( !is_main_site() ){
-			    	$blog = get_current_blog_id();
-			    }
+			if( EM_MS_GLOBAL && !get_site_option('dbem_ms_mainblog_locations') && !is_main_site() ){
+			    //set current blog id if not on main site and using global mode whilst not forcing all locations to be on main blog
+			    $blog = get_current_blog_id();
 			}
 			$args = array('limit'=>$limit, 'offset'=>$offset, 'status'=>$status, 'blog'=>$blog);
 			//count locations

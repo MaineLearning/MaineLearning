@@ -7,9 +7,9 @@
  */
 function em_get_location($id = false, $search_by = 'location_id') {
 	if( is_object($id) && get_class($id) == 'EM_Location' ){
-		return $id;
+		return apply_filters('em_get_location', $id);
 	}else{
-		return new EM_Location($id,$search_by);
+		return apply_filters('em_get_location', new EM_Location($id,$search_by));
 	}
 }
 /**
@@ -112,7 +112,10 @@ class EM_Location extends EM_Object {
 				//search by location_id, get post_id and blog_id (if in ms mode) and load the post
 				$results = $wpdb->get_row($wpdb->prepare("SELECT post_id, blog_id FROM ".EM_LOCATIONS_TABLE." WHERE location_id=%d",$id), ARRAY_A);
 				if( !empty($results['post_id']) ){
-					if( is_multisite() && is_numeric($results['blog_id']) ){
+					if( is_multisite() ){
+					    if( empty($results['blog_id']) || (EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations')) ){
+							$results['blog_id'] = get_current_site()->blog_id;					        
+					    }
 						$location_post = get_blog_post($results['blog_id'], $results['post_id']);
 						$search_by = $results['blog_id'];
 					}else{
@@ -121,7 +124,11 @@ class EM_Location extends EM_Object {
 				}
 			}else{
 				if(!$is_post){
-					if( is_numeric($search_by) && is_multisite() ){
+				    if( EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations') ){
+				        //blog_id will always be the main blog id if global locations are restricted only to the main blog
+				        $search_by = get_current_site()->blog_id;
+				    }
+				    if( is_numeric($search_by) && is_multisite() ){
 						//we've been given a blog_id, so we're searching for a post id
 						$location_post = get_blog_post($search_by, $id);
 					}else{
@@ -209,10 +216,6 @@ class EM_Location extends EM_Object {
 		$this->location_country = ( !empty($_POST['location_country']) ) ? wp_kses(stripslashes($_POST['location_country']), array()):'';
 		$this->location_latitude = ( !empty($_POST['location_latitude']) && is_numeric($_POST['location_latitude']) ) ? $_POST['location_latitude']:'';
 		$this->location_longitude = ( !empty($_POST['location_longitude']) && is_numeric($_POST['location_longitude']) ) ? $_POST['location_longitude']:'';
-		//Set Blog ID
-		if( is_multisite() && empty($this->blog_id) ){
-			$this->blog_id = get_current_blog_id();
-		}
 		//Sort out event attributes - note that custom post meta now also gets inserted here automatically (and is overwritten by these attributes)
 		if(get_option('dbem_location_attributes_enabled')){
 			global $allowedtags;
@@ -267,6 +270,7 @@ class EM_Location extends EM_Object {
 	function save(){
 		global $wpdb, $current_user, $blog_id;
 		//TODO shuffle filters into right place
+		if( get_site_option('dbem_ms_mainblog_locations') ){ $this->ms_global_switch(); }
 		if( !$this->can_manage('edit_locations', 'edit_others_locations') && !( get_option('dbem_events_anonymous_submissions') && empty($this->location_id)) ){
 			return apply_filters('em_location_save', false, $this);
 		}
@@ -276,8 +280,12 @@ class EM_Location extends EM_Object {
 		//Deal with updates to a location
 		if( !empty($this->post_id) ){
 			//get the full array of post data so we don't overwrite anything.
-			if( !empty($this->blog_id) && is_multisite() ){
-				$post_array = (array) get_blog_post($this->blog_id, $this->post_id);
+			if( EM_MS_GLOBAL ){
+			    if( !empty($this->blog_id) ){
+					$post_array = (array) get_blog_post($this->blog_id, $this->post_id);
+			    }else{
+			        $post_array = (array) get_blog_post(get_current_site()->blog_id, $this->post_id);
+			    }
 			}else{
 				$post_array = (array) get_post($this->post_id);
 			}
@@ -291,10 +299,11 @@ class EM_Location extends EM_Object {
 			if( EM_MS_GLOBAL && !is_main_site() && get_site_option('dbem_ms_mainblog_locations') ){
 				//if in global ms mode and user is a valid role to publish on their blog, then we will publish the location on the main blog
 				restore_current_blog();
-				$switch_back = true;
-			}
-			$post_array['post_status'] = $this->can_manage('publish_locations') ? 'publish':'pending';
-			if(!empty($switch_back) && get_site_option('dbem_ms_mainblog_locations') ) EM_Object::ms_global_switch(); //switch 'back' to main blog
+				$post_array['post_status'] = $this->can_manage('publish_locations') ? 'publish':'pending'; 
+				EM_Object::ms_global_switch(); //switch 'back' to main blog
+			}else{
+			    $post_array['post_status'] = $this->can_manage('publish_locations') ? 'publish':'pending';
+			} 
 		}else{
 			$post_array['post_status'] = 'draft';
 		}
@@ -325,6 +334,7 @@ class EM_Location extends EM_Object {
 			//location not saved, add an error
 			$this->add_error($post_id->get_error_message());
 		}
+		if( get_site_option('dbem_ms_mainblog_locations') ){ $this->ms_global_switch_back(); }
 		return apply_filters('em_location_save', $post_save && $meta_save && $image_save, $this);
 	}
 	
@@ -333,7 +343,12 @@ class EM_Location extends EM_Object {
 		global $wpdb, $current_user;
 		if( $this->can_manage('edit_locations','edit_others_locations') || ( get_option('dbem_events_anonymous_submissions') && empty($this->location_id)) ){
 			do_action('em_location_save_meta_pre', $this);
-			$data = $this->to_array();
+			//Set Blog ID if in multisite mode
+			if( EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations') ){
+			    $this->blog_id = get_current_site()->blog_id; //global locations restricted to main blog must have main site id
+			}elseif( is_multisite() && empty($this->blog_id) ){
+				$this->blog_id = get_current_blog_id();
+			}
 			//Update Post Meta
 			foreach( array_keys($this->fields) as $key ){
 				if( !in_array($key, $this->post_fields) ){
@@ -491,7 +506,15 @@ class EM_Location extends EM_Object {
 		if( $this->location_id == '' && !is_user_logged_in() && get_option('dbem_events_anonymous_submissions') ){
 			$user_to_check = get_option('dbem_events_anonymous_user');
 		}
-		return apply_filters('em_location_can_manage', parent::can_manage($owner_capability, $admin_capability, $user_to_check), $this, $owner_capability, $admin_capability, $user_to_check);
+		if( $admin_capability && EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations') ){
+			//if in global mode with locations restricted to main blog, we check capabilities against the main blog
+		    $this->ms_global_switch();
+		    $return = parent::can_manage($owner_capability, $admin_capability, $user_to_check);
+		    $this->ms_global_switch_back();
+		}else{
+		    $return = parent::can_manage($owner_capability, $admin_capability, $user_to_check);
+		}
+		return apply_filters('em_location_can_manage', $return, $this, $owner_capability, $admin_capability, $user_to_check);
 	}
 	
 	function get_permalink(){	
@@ -530,7 +553,7 @@ class EM_Location extends EM_Object {
 						$link = em_add_get_params(get_blog_permalink(get_option('dbem_edit_locations_page')), array('action'=>'edit','location_id'=>$this->location_id), false);
 					}
 			        if( empty($link) && !is_main_site() ){
-			        	$link = get_admin_url($current_blog->blog_id, "edit.php?post_type=event&page=locations&action=edit&location_id={$this->location_id}");
+			            $link = get_admin_url($current_blog->blog_id, "edit.php?post_type=event&page=locations&action=edit&location_id={$this->location_id}");
 			        }elseif( empty($link) && is_main_site() ){
 			            $link = get_admin_url($current_site->blog_id, "post.php?post={$this->post_id}&action=edit");
 			        }
@@ -696,11 +719,13 @@ class EM_Location extends EM_Object {
 								if( $this->array_is_numeric($image_size) && count($image_size) > 1 ){
 								    if( get_option('dbem_disable_timthumb') ){
 									    if( EM_MS_GLOBAL && get_current_blog_id() != $this->blog_id ){
+									        //location belongs to another blog, so switch blog then call the default wp fucntion
 									        switch_to_blog($this->blog_id);
-									        $switch_back = true;
+								    		$replace = get_the_post_thumbnail($this->ID, $image_size);
+								    		restore_current_blog();
+									    }else{
+									    	$replace = get_the_post_thumbnail($this->ID, $image_size);
 									    }
-								    	$replace = get_the_post_thumbnail($this->ID, $image_size);
-										if( !empty($switch_back) ){ restore_current_blog(); }
 								    }else{
 										global $blog_id;
 										if ( is_multisite() && $blog_id > 0) {

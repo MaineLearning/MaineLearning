@@ -2,7 +2,7 @@
 /*
  * Anchor Utils
  * Author: Denis de Bernardy <http://www.mesoconcepts.com>
- * Version: 1.0.1
+ * Version: 1.1
  */
 
 if ( @ini_get('pcre.backtrack_limit') <= 750000 )
@@ -175,7 +175,7 @@ class anchor_utils {
 		$anchor['attr'] = shortcode_parse_atts($match[1]);
 		
 		if ( !is_array($anchor['attr']) || empty($anchor['attr']['href']) # parser error or no link
-			|| $anchor['attr']['href'] != clean_url($anchor['attr']['href'], null, 'db') ) # likely a script
+			|| $anchor['attr']['href'] != esc_url($anchor['attr']['href'], null, 'db') ) # likely a script
 			return false;
 		
 		foreach ( array('class', 'rel') as $attr ) {
@@ -203,7 +203,7 @@ class anchor_utils {
 	 **/
 
 	function build_anchor($anchor) {
-		$anchor['attr']['href'] = clean_url($anchor['attr']['href']);
+		$anchor['attr']['href'] = esc_url($anchor['attr']['href']);
 		
 		$str = '<a ';
 		foreach ( $anchor['attr'] as $k => $v ) {

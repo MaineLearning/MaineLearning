@@ -1,0 +1,39 @@
+NOTES ON DUPLICATING WP INSTANCES
+
+
+MaineLearning.net is powered by numerous plugins, themes, settings, and other customizations. The codebase can be distributed via Github. But much of the config data is stored in the database and thus is not under version control. However, simply copying an existing database means dealing with large amounts of existing data - at best, this is cumbersome, and at worst, it's a privacy problem.
+
+I see two main strategies:
+
+1) Creating a default database
+
+Start with a fresh installation of WordPress and BuddyPress. Configure it as desired, installing whatever themes, plugins, etc you think are necessary. Create default content if you'd like. Then:
+	i) Put the codebase under version control. New installations will get their filesystem setup by cloning the Git repository.
+	ii) Export the database to a .sql dump file. When setting up new installations, you'll import the database into a blank db, and run something like https://github.com/interconnectit/Search-Replace-DB/ to swap out the domain-specific content info with the new domain nwame.
+
+This method has a number of advantages:
+	- Setting up the barebones installation is pretty easy to do. Not much technical knowledge needed - you just need to know how to initiate a Git repo, how to abstract your WP installation (using an environment file), and how to export databases.
+	- Spinning up new instances is also pretty easy. No special tools needed, other than Git, a method for importing a database file (the mysql command line utility, PHPMyAdmin, etc), and the search-replace-db tool mentioned above.
+
+Disadvantages:
+	- The installation will get stale. WordPress, BuddyPress, and other plugins get new versions all the time. That means you'll constantly have to monitor your base setup to make sure that it's up-to-date.
+	- While initial setup is pretty easy, a certain amount of work will be required every time you want to use the default data to spin up a new site. The steps are not difficult (create new db, clone git repo, etc etc etc), but they take time.
+
+2) Writing a setup script
+
+There's a really fantastic tool for managing WordPress from the command line: http://wp-cli.org/. Using this tool, you could write a bash script that would do the following:
+
+- install WP
+- install latest versions of a list of plugins and themes from the
+wordpress.org repo
+- configure settings
+- insert sample content as needed
+
+Advantages:
+	- Spinning up new instances will be very fast. Just a matter of creating a blank database and running a single command-line command
+	- You can tell wp-cli to use the latest version of a given plugin, so that you don't have to update this stuff down the road
+
+Disadvantages/challenges:
+	- Some customizations/themes etc are not hosted in the wordpress.org repo, so wp-cli won't be able to install them quite as easily. Would have to figure out a way to package them up.
+	- Requires wp-cli. It's easy to install, but probably can't be done on super-cheap hosting (you need shell access)
+	- It'll take up-front dev time. Hard to judge off the top of my head, but I'm guessing it'd take me 5-10 hours to get this system up and wrunning. You save time in the long run, of course.

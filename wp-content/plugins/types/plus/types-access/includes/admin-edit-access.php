@@ -158,7 +158,7 @@ function wpcf_access_admin_edit_access($enabled = true) {
             $output .= '<div class="wpcf-access-type-item">';
             $output .= '<strong>' . $tax_data['labels']['name'] . '</strong>';
             // Add warning if shared and settings are different
-            $disable_same_as_parent = false; //debug($supports_check, false);
+            $disable_same_as_parent = false;
             if ($enabled && isset($supports_check[$tax_slug])
                     && count($supports_check[$tax_slug]) > 1) {
                 $txt = array();

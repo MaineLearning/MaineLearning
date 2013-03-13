@@ -1,5 +1,5 @@
 <?php
-
+if (!function_exists('wpv_filter_parse_date')) {
 /**
  * Helper function for parsing dates.
  * 
@@ -24,13 +24,12 @@
 function wpv_filter_parse_date($date_format) {
 	$occurences = preg_match_all('/(\\w+)\(([\\d,-]*)\)/', $date_format, $matches);
 	
-	$resulting_date = false;
 	
 	if($occurences > 0) {
 		for($i = 0; $i < $occurences; $i++) { 
 			$date_func = $matches[1][$i];
 			$date_value = $matches[2][$i];
-			
+			$resulting_date = false;
 			switch(strtoupper($date_func)) {
 					case "NOW": $resulting_date = time(); break;
 					case "TODAY": $resulting_date = mktime(0, 0, 0, date('m'), date('d'), date('Y')); break;
@@ -47,10 +46,13 @@ function wpv_filter_parse_date($date_format) {
 					case "YEARS_FROM_NOW": $resulting_date = mktime(0, 0, 0, date('m'), date('d'), date('Y') + $date_value); break;
 					case "DATE": $date_parts = explode(',', $date_value); $resulting_date = mktime(0, 0, 0, $date_parts[1], $date_parts[0], $date_parts[2]); break;  
 				}
-				
-				$date_format = str_replace($matches[0][$i], $resulting_date, $date_format);
+				if($resulting_date!=false){
+                                    $date_format = str_replace($matches[0][$i], $resulting_date, $date_format);
+                                }
 		}
 	} 
 	
 	return $date_format;
+}
+
 }

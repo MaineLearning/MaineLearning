@@ -5,16 +5,109 @@ require WPV_PATH_EMBEDDED . '/inc/views-templates/wpv-template.class.php';
 class WPV_template_plugin extends WPV_template {
 
 	function add_view_template_settings() {
-        
+            wp_enqueue_script( 'views-pagination-script' , WPV_URL . '/res/js/views_codemirror_conf.js', array('jquery'), WPV_VERSION);
         ?>
-        <script type="text/javascript">
+        <script type="text/javascript">                        
+            
+            function CodeMirror_fix_toolbar(){
+                            jQuery('#ed_toolbar').append('<input type="button" value="<?php _e("Syntax Highlight On", 'wpv-views'); ?>" title="<?php _e("Syntax Highlight On", 'wpv-views'); ?>" class="ed_button cred_qt_codemirror_on" id="qt_content_cred_syntax_highlight">');
+                            HTMLEditor["content"] = CodeMirror.fromTextArea(document.getElementById("content"), {mode: "myshortcodes", tabMode: "indent", lineWrapping: true, lineNumbers: true, autofocus:true});
+                            var HTMLCodeMirrorActive = true;
+                            jQuery('.ed_button').hide();
+                            jQuery('.insert-media.add_media').hide();
+                            
+                            jQuery('#qt_content_cred_syntax_highlight').show();
+                            
+                            jQuery('#content').bind('paste', function(e){
+                                if(HTMLCodeMirrorActive){
+                                    InsertAtCursor(this.value, 'content');
+                                }
+                            });
+                            
+                            jQuery('#qt_content_cred_syntax_highlight').click(function() {
+                                if (jQuery(this).hasClass('cred_qt_codemirror_on')){
+                                        jQuery('.ed_button').show(); 
+                                        jQuery('.insert-media.add_media').show();
+                                        jQuery(this).removeClass('cred_qt_codemirror_on').addClass('cred_qt_codemirror_off').attr('title','<?php _e("Syntax Highlight Off", 'wpv-views'); ?>').val('<?php _e("Syntax Highlight Off", 'wpv-views'); ?>');
+                                        var content_text = HTMLEditor["content"].getValue();
+                                        
+                                        jQuery('#content').val(content_text);
+                                        jQuery('.CodeMirror.CodeMirror-wrap').hide();
+                                        jQuery('#content').show();
+                                        jQuery('#publish').click(function() {
+                                            var content_text = jQuery('#content').val();
+                                            HTMLEditor["content"].setValue(content_text);
+                                        })
+                                        HTMLCodeMirrorActive = false;
+                                    }else{
+                                        
+                                        jQuery('.ed_button').hide();
+                                        jQuery('.insert-media.add_media').hide();
+                                        jQuery('#qt_content_cred_syntax_highlight').show();
+                                        jQuery(this).addClass('cred_qt_codemirror_on').removeClass('cred_qt_codemirror_off').attr('title','<?php _e("Syntax Highlight On", 'wpv-views'); ?>').val('<?php _e("Syntax Highlight On", 'wpv-views'); ?>');
+                                        var content_text = jQuery('#content').val();
+                                        HTMLEditor["content"].setValue(content_text);
+                                        jQuery('.CodeMirror.CodeMirror-wrap').show();
+                                        jQuery('#content').hide();
+                                        HTMLCodeMirrorActive = true;
+                                        HTMLEditor["content"].refresh();
+                                        HTMLEditor["content"].focus();
+                                    }
+                                });
+                        }
+            
 			jQuery(document).ready(function($){
 				
 				// remove the "Save Draft" and "Preview" buttons.
 				jQuery('#minor-publishing-actions').hide();
 				jQuery('#misc-publishing-actions').hide();
 				jQuery('#publishing-action input[name=publish]').val('<?php _e("Save", 'wpv-views'); ?>');
+				if (jQuery('#views_template_html_extra').hasClass("closed")) {
+				    jQuery('#views_template_html_extra').removeClass("closed");
+				}
+				// add the CodeMirror textareas and metabox behaviour
+                                
+				var CSSEditor = CodeMirror.fromTextArea(document.getElementById("_wpv_view_template_extra_css"), {mode: "css", tabMode: "indent", lineWrapping: true, lineNumbers: true});
+				var JSEditor = CodeMirror.fromTextArea(document.getElementById("_wpv_view_template_extra_js"), {mode: "javascript", tabMode: "indent", lineWrapping: true, lineNumbers: true});
+				jQuery('.CodeMirror').css({'background-color': '#fff', 'border': '1px solid #999999'});
 				
+				jQuery('.wpv_template_meta_html_extra_css_edit').css({'height': '0', 'padding': '0'});
+				jQuery('.wpv_template_meta_html_extra_js_edit').css({'height': '0', 'padding': '0'});
+				if ('' != jQuery('#_wpv_view_template_extra_css').val()) {
+					if ('on' == jQuery('#wpv_template_meta_html_extra_css_state').val()) {
+						jQuery('.wpv_template_meta_html_extra_css_edit').css({'height': 'auto', 'padding': '0 10px'});
+						jQuery('#wpv_template_meta_html_extra_css').css('display', 'none');
+					}
+				} else {
+					jQuery('#wpv_template_meta_html_extra_css_state').val('off');
+				}
+				if ('' != jQuery('#_wpv_view_template_extra_js').val()) {
+					if ('on' == jQuery('#wpv_template_meta_html_extra_js_state').val()) {
+						jQuery('.wpv_template_meta_html_extra_js_edit').css({'height': 'auto', 'padding': '0 10px'});
+						jQuery('#wpv_template_meta_html_extra_js').css('display', 'none');
+					}
+				} else {
+					jQuery('#wpv_template_meta_html_extra_js_state').val('off');
+				}
+				
+				jQuery('.template_meta_html_extra_edit > input').click( function() {
+					var id = this.id;
+					jQuery(this).css('display', 'none');
+					jQuery('#'+ id + '_state').val('on');
+					jQuery('.'+ id + '_edit').css({'height': 'auto', 'padding': '0 10px'});
+				});
+				jQuery('.template_meta_html_extra_edit p a').click(function() {
+					var where = this.className;
+					jQuery('#' + where).css('display', 'inline');
+					jQuery('.' + where + '_edit').css({'height': '0', 'padding': '0'});
+					jQuery('#' + where + '_state').val('off');
+				});
+                                
+                                setTimeout(CodeMirror_fix_toolbar, 500);
+                                
+               
+               
+               
 			});
         </script>
 
@@ -24,8 +117,41 @@ class WPV_template_plugin extends WPV_template {
         
         add_meta_box('views_template_help', __('View Template Help', 'wpv-views'), array($this,'view_settings_help'), $post->post_type, 'side', 'high');
         add_meta_box('views_template', __('View Template Settings', 'wpv-views'), array($this,'view_settings_meta_box'), $post->post_type, 'side', 'high');
-        
+                add_meta_box('views_template_html_extra', __('View Template CSS and JS', 'wpv-views'), array($this,'view_settings_meta_html_extra'), $post->post_type, 'normal', 'high');
+
     }
+    
+    function view_settings_meta_html_extra(){
+	/**
+	 * Add admin metabox for custom CSS and javascript
+	 */
+	global $post;
+        $template_extra_css = '';
+        $template_extra_css = get_post_meta($post->ID, '_wpv_view_template_extra_css', true);
+        $template_extra_js = '';
+        $template_extra_js = get_post_meta($post->ID, '_wpv_view_template_extra_js', true);
+        $template_extra_state = array();
+        $template_extra_state = get_post_meta($post->ID, '_wpv_view_template_extra_state', true);
+	?>
+	<p><?php _e('Here you can modify specific CSS and javascript to be used with this View Template.', 'wpv-views'); ?>
+	</p>
+	<div class="template_meta_html_extra_edit">
+		<input type="button" class="button-secondary" id="wpv_template_meta_html_extra_css" value="<?php _e('Edit CSS', 'wpv-views'); ?>" />
+		<input type="hidden" name="_wpv_view_template_extra_state[css]" id="wpv_template_meta_html_extra_css_state" value="<?php echo isset($template_extra_state['css']) ? $template_extra_state['css'] : 'off'; ?>" />
+		<div class="wpv_template_meta_html_extra_css_edit" style="margin-bottom:15px;overflow:hidden;background:<?php echo WPV_EDIT_BACKGROUND;?>;">
+			<p><strong>CSS</strong> - This is used to add custom CSS to a View Template.</p>
+			<textarea name="_wpv_view_template_extra_css" id="_wpv_view_template_extra_css" cols="97" rows="10"><?php echo $template_extra_css; ?></textarea>
+			<p class="template_meta_html_extra_close"><a style="cursor:pointer;" class="wpv_template_meta_html_extra_css"><strong><?php _e('Close CSS editor', 'wpv-views'); ?></strong></a></p>
+		</div>
+		<input type="button" class="button-secondary" id="wpv_template_meta_html_extra_js" value="<?php _e('Edit JS', 'wpv-views'); ?>" />
+		<input type="hidden" name="_wpv_view_template_extra_state[js]" id="wpv_template_meta_html_extra_js_state" value="<?php echo isset($template_extra_state['js']) ? $template_extra_state['js'] : 'off'; ?>" />
+		<div class="wpv_template_meta_html_extra_js_edit" style="overflow:hidden;background:<?php echo WPV_EDIT_BACKGROUND;?>;">
+			<p><strong>JS</strong> - This is used to add custom javascript to a View Template.</p>
+			<textarea name="_wpv_view_template_extra_js" id="_wpv_view_template_extra_js" cols="97" rows="10"><?php echo $template_extra_js; ?></textarea>
+			<p class="template_meta_html_extra_close"><a style="cursor:pointer;" class="wpv_template_meta_html_extra_js"><strong><?php _e('Close JS editor', 'wpv-views'); ?></strong></a></p>
+		</div>
+	</div>
+    <?php }
     
     function view_settings_meta_box() {
 
@@ -95,6 +221,23 @@ class WPV_template_plugin extends WPV_template {
 
 	            wpv_view_template_update_field_values($pidd);
             }
+            if (isset($_POST['_wpv_view_template_extra_css'])) {
+		update_post_meta($pidd, '_wpv_view_template_extra_css', $_POST['_wpv_view_template_extra_css']);
+            }
+            if (isset($_POST['_wpv_view_template_extra_js'])) {
+		update_post_meta($pidd, '_wpv_view_template_extra_js', $_POST['_wpv_view_template_extra_js']);
+            }
+            $template_meta_html_state = array();
+            if (isset($_POST['_wpv_view_template_extra_state']['css'])) {
+                $template_meta_html_state['css'] = $_POST['_wpv_view_template_extra_state']['css'];
+            }
+            if (isset($_POST['_wpv_view_template_extra_state']['js'])) {
+                $template_meta_html_state['js'] = $_POST['_wpv_view_template_extra_state']['js'];
+            }
+            if ( !empty( $template_meta_html_state ) ) {
+		update_post_meta($pidd, '_wpv_view_template_extra_state', $template_meta_html_state);
+            }
+            
         }
         
         // pass to the base class.
@@ -118,7 +261,7 @@ class WPV_template_plugin extends WPV_template {
 			
 			ob_start();
 			
-			edit_post_link(__('Edit view template', 'wpv-views'), '', '', $template_selected);
+			edit_post_link(__('Edit view template', 'wpv-views').' "'.get_the_title($template_selected).'" ', '', '', $template_selected);
 			
 			$link = $link . ' ' . ob_get_clean();
 			
@@ -698,7 +841,7 @@ class WPV_template_plugin extends WPV_template {
 			$close_tags = substr_count($post->post_content, '[/types');
 			if ($close_tags < $open_tags) {
 				echo '<div id="message" class="error">';
-				echo sprintf(__('<strong>This template includes single-ended shortcodes</strong>. Pleae close all shortcodes to avoid processing errors. %sRead more%s', 'wpv-views'),
+				echo sprintf(__('<strong>This template includes single-ended shortcodes</strong>. Please close all shortcodes to avoid processing errors. %sRead more%s', 'wpv-views'),
 							 '<a href="http://wp-types.com/faq/why-do-types-shortcodes-have-to-be-closed/" target="_blank">',
 							 ' &raquo;</a>');
 				echo '</div>';

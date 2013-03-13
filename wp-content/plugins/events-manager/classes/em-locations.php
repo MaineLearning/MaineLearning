@@ -166,9 +166,12 @@ class EM_Locations extends EM_Object implements Iterator {
 	}
 	
 	function delete( $args = array() ){
-		if( !is_object(current($args)) && get_class((current($args))) != 'EM_Location' ){
+	    $locations = array();
+		if( !is_object(current($args)) ){
+		    //we've been given an array or search arguments to find the relevant locations to delete
 			$locations = self::get($args);
-		}else{
+		}elseif( get_class(current($args)) == 'EM_Location' ){
+		    //we're deleting an array of locations
 			$locations = $args;
 		}
 		$results = array();
@@ -269,9 +272,8 @@ class EM_Locations extends EM_Object implements Iterator {
 			'post_id' => false
 		);
 		if( EM_MS_GLOBAL && get_site_option('dbem_ms_mainblog_locations') ){
-		    if( empty($array['blog']) && !is_main_site() ){
-		        $array['blog'] = get_current_site()->blog_id;
-		    }
+		    //when searching in MS Global mode with all locations being stored on the main blog, blog_id becomes redundant as locations are stored in one blog table set
+		    $array['blog'] = false;
 		}
 		$array['eventful'] = ( !empty($array['eventful']) && $array['eventful'] == true );
 		$array['eventless'] = ( !empty($array['eventless']) && $array['eventless'] == true );

@@ -1,10 +1,12 @@
 === Autolink URI ===
-Contributors: Denis-de-Bernardy
+Contributors: Denis-de-Bernardy, Mike_Koepke
 Donate link: http://www.semiologic.com/partners/
 Tags: autolink, link, auto-link, semiologic
-Requires at least: 2.8
-Tested up to: 3.1
+Requires at least: 3.1
+Tested up to: 3.5.1
 Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The Autolink URI plugin for WordPress automatically converts urls to hyperlinked urls.
 
@@ -31,10 +33,23 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 == Installation ==
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 
 == Change Log ==
+
+= 2.1 =
+
+- Added support for port numbers in url
+- Fix localhost urls
+
+= 2.0.4 =
+
+- Allow colons (:) in url matching
+
+= 2.0.3 = 
+
+- Don't check inside of quotes.  Some shortcodes have urls as parameters
 
 = 2.0.2 =
 

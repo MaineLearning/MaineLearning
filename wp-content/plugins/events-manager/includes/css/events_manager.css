@@ -11,12 +11,12 @@
 	.em-booking-form  { position:relative; clear:left; }
 	.em-booking-form-details  { padding:10px; width:360px; float:left; }  
 	.em-booking-form-details input.input, .em-booking-form-details textarea { width:250px; }
-	.em-booking-form-details p { clear:left; }
-	.em-booking-form-details label { display:block; float:left; }
-	.em-booking-form-details span.input-group input { margin-left:-20px; }
-	.em-booking-form-details span.input-group { display:block; margin-left:120px; }
-	.em-booking-form-details .em-booking-submit { width:auto; }	
+	.em-booking-form p { clear:left; }
+	.em-booking-form label { display:block; float:left; }
+	.em-booking-form span.input-group input { margin-left:-20px; }
+	.em-booking-form span.input-group { display:block; margin-left:120px; }
 	.em-booking-form label  { display:inline-block; width:100px; }	
+	.em-booking-form-details .em-booking-submit { width:auto; }	
 	/* Tickets */
 		.em-tickets { margin-bottom:20px; }
 	/* Message Errors */

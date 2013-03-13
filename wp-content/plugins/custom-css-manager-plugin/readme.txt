@@ -3,18 +3,22 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: custom, css, plugin, admin, theme, cascading style sheet
 Requires at least: 2.9
 Tested up to: 3.5
-Stable tag: 1.4.2
-Donate link: http://MyWebsiteAdvisor.com/donations
+Stable tag: 1.5
+Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Simple plugin to manage Custom CSS Code!
 
 
 == Description ==
 
-Simple plugin to manage custom css and is stored in WordPress options database.
+Simple plugin to manage Custom CSS Code to change the appearance of your WordPress website.
+This Plugin stores the CSS Code in the WordPress Options Database, very useful if you do not want to edit your theme css files.
 
 
-Developer Website: http://MyWebsiteAdvisor.com
+
+Developer Website: http://MyWebsiteAdvisor.com/
+
+Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://mywebsiteadvisor.com/tools/wordpress-plugins/custom-css-manager-plugin/
 
@@ -23,7 +27,8 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/custom-css-
 
 
 Requirements:
-
+PHP v5.0+
+WordPress v3.3+
 
 
 
@@ -35,7 +40,9 @@ To-do:
 
 1. Upload 'custom-css-manager/' to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to plugin settings and select fonts.
+1. Go to plugin settings and setup your custom CSS code.
+
+
 
 
 == Frequently Asked Questions ==
@@ -48,13 +55,22 @@ Also please send us screenshots of any errors you are receiving.
 
 
 
+
 == Screenshots ==
 
 1. Plugin Screenshot
 
 
 
+
 == Changelog ==
+
+= 1.5 =
+* updated plugin to use WordPress settings API
+* reorganized entire plugin file layout
+* updated plugin screenshot
+
+
 
 = 1.4.2 =
 * fixed issues with quotes in the CSS

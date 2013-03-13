@@ -3,13 +3,13 @@ session_start();
 /*
 Plugin Name: Bebop
 Plugin URI: http://bebop.blogs.lincoln.ac.uk/
-Description: Bebop is the name of a rapid innovation project funded by the Joint Information Systems Committee (JISC) and developed by the University of Lincoln. The project involved the utilisation of OER's from 3rd party providers such as YouTube, Vimeo, SlideShare and Flickr.
-Version: 1.2.2
+Description: Bebop provides your BuddyPress users with the ability to import and share content from a wide range of online content providers, such as Facebook, Twitter, Vimeo, Youtube and Flickr. Bebop was originally developed as a method of sharing Open Educational Resources, but has since been opened up to the wider community.
+Version: 1.3.1
 Text Domain: bebop
 Author: Dale Mckeown
 Author URI: http://www.dalemckeown.co.uk
 License: GNU General Public Licence - https://www.gnu.org/copyleft/gpl.html
-Copyright 2012 The University of Lincoln - http://www.lincoln.ac.uk.
+Copyright 2013 The University of Lincoln - http://www.lincoln.ac.uk.
 Credits: BuddySteam - buddystream.net
 */
 // This plugin is intended for use on BuddyPress only.
@@ -26,7 +26,7 @@ function bebop_init() {
 	
 	load_plugin_textdomain( 'bebop' , false, basename( dirname( __FILE__ ) ) . '/languages' );
 	
-	//include files from core. (also edit in import.php)
+	//include files from core. (also edit in import.php/secondary_import.php)
 	include_once( 'core/bebop-oauth.php' );
 	include_once( 'core/bebop-tables.php' );
 	include_once( 'core/bebop-filters.php' );
@@ -38,6 +38,13 @@ function bebop_init() {
 		include_once( 'core/bebop-core-admin.php' );
 	}
 	include_once( 'core/bebop-core.php' );
+	
+	//Plugin activation/deactivation hooks do not fire on plugin update, so check the current DB version and update as necessary.
+	$db_version = bebop_tables::get_option_value( 'bebop_db_version' );
+	if ( empty( $db_version ) || $db_version != '1.3.1' ) {
+		include_once( 'core/bebop-activate.php' );
+	}
+	
 
 	//fire crons
 	add_action( 'bebop_main_import_cron', 'bebop_main_import_function' );
@@ -68,76 +75,12 @@ function bebop_init() {
 function bebop_activate() {
 	global $wpdb;
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	include_once( 'core/bebop-tables.php' );
 	if ( is_plugin_active( 'buddypress/bp-loader.php' ) ) {
-		//define table sql
-		$bebop_error_log = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_error_log ( 
-			id int(10) NOT NULL auto_increment PRIMARY KEY, 
-			timestamp timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-			error_type varchar(40) NOT NULL,
-			error_message text NOT NULL
-		);';
-		$bebop_general_log = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_general_log ( 
-			id int(10) NOT NULL auto_increment PRIMARY KEY,
-			timestamp timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-			type varchar(40) NOT NULL,
-			message text NOT NULL
-		);';
-	
-		$bebop_options = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_options ( 
-			timestamp timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,	
-			option_name varchar(100) NOT NULL PRIMARY KEY,
-			option_value longtext NOT NULL
-		);';
-		
-		$bebop_user_meta = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_user_meta ( 
-			id int(10) NOT NULL auto_increment PRIMARY KEY,
-			user_id int(10) NOT NULL,
-			meta_type varchar(255) NOT NULL,
-			meta_name varchar(255) NOT NULL,
-			meta_value longtext NOT NULL
-		);';
-		
-		$bebop_oer_manager = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_oer_manager ( 
-			id int(10) NOT NULL auto_increment PRIMARY KEY,
-			user_id int(10) NOT NULL,
-			status varchar(75) NOT NULL,
-			type varchar(255) NOT NULL,
-			action text NOT NULL,
-			content longtext NOT NULL,
-			activity_stream_id bigint(20),
-			secondary_item_id bigint(20),
-			date_imported datetime,
-			date_recorded datetime,
-			hide_sitewide tinyint(1)
-		);';
-		
-		$bebop_first_import = 'CREATE TABLE IF NOT EXISTS ' . bp_core_get_table_prefix() . 'bp_bebop_first_imports ( 
-			id int(10) NOT NULL auto_increment PRIMARY KEY,
-			user_id int(10) NOT NULL,
-			extension varchar(255) NOT NULL,
-			name varchar(255) NOT NULL,
-			value longtext NOT NULL
-		);'; 
-		//run queries
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $bebop_error_log );
-		dbDelta( $bebop_general_log );
-		dbDelta( $bebop_options );
-		dbDelta( $bebop_user_meta );
-		dbDelta( $bebop_oer_manager );
-		dbDelta( $bebop_first_import );
-		
-		//cleanup
-		unset( $bebop_error_log );
-		unset( $bebop_general_log );
-		unset( $bebop_options );
-		unset( $bebop_user_meta );
-		unset( $bebop_oer_manager );
-		unset( $bebop_first_import );
+		include_once( 'core/bebop-activate.php' );
 	}
 	else {
 		//BuddyPress is not installed, stop Bebop form activating and kill the script with an error message.
-		include_once( 'core/bebop-tables.php' );
 		deactivate_plugins( basename( __FILE__ ) ); // Deactivate this plugin
 		wp_die( _e( 'You cannot enable Bebop because BuddyPress is not active. Please install and activate BuddyPress before trying to activate Bebop again.', 'bebop') );
 	}
@@ -196,7 +139,7 @@ function bebop_secondary_import_function() {
 	require_once( 'secondary_import.php' );
 }
 
-define( 'BP_BEBOP_VERSION', '1.2.2' );
+define( 'BP_BEBOP_VERSION', '1.3.1' );
 
 //hooks into activation and deactivation of the plugin.
 register_activation_hook( __FILE__, 'bebop_activate' );

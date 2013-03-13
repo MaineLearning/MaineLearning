@@ -10,8 +10,10 @@ class WPV_template{
         add_filter('icl_cf_translate_state', array($this, 'custom_field_translate_state'), 10, 2);
         
 		$this->wpautop_removed = false;
+		
+	$this->view_template_used_ids = array();
     }
-
+    
     function __destruct(){
         
     }
@@ -53,12 +55,24 @@ class WPV_template{
 			
         } else {
 			add_filter('edit_post_link', array($this, 'edit_post_link'), 10, 2);
+                        add_filter('body_class', array($this, 'body_class'), 10, 2);
+                        add_action('wp_footer', array($this, 'wpv_meta_html_extra'));
         }
 		
 		add_action('save_post', array($this, 'set_default_template'), 10, 2);
         
     }
 	
+    function body_class($body_class){
+	if (!is_singular()) {return $body_class;}
+        $template_selected = get_post_meta(get_the_ID(), '_views_template', true);
+        if($template_selected == 0){ return $body_class;}
+        $template_class_title = preg_replace("/[^A-Za-z_ ]/",'', get_the_title($template_selected));
+        $template_class = 'views-template-'.strtolower(str_replace(' ', '-', $template_class_title));
+        $body_class[]=$template_class;
+        return $body_class;
+    }
+    
     function custom_field_translate_state($state, $field_name) {
         switch($field_name) {
             case '_views_template':
@@ -415,7 +429,7 @@ class WPV_template{
 			if (function_exists('icl_object_id')) {
 				$template_selected = icl_object_id($template_selected, 'view-template', true);
 			}
-
+			$this->view_template_used_ids[] = $template_selected;
 			$wplogger->log('Using view template: ' . $template_selected . ' on post: ' . $post->ID);
 
             $content = $this->get_template_content($template_selected);
@@ -660,5 +674,30 @@ class WPV_template{
 		
 	}		
 			
-	
+	/**
+	* Add extra CSS and javascript to wp_footer
+	* This renders CSS and JS added by the user on the View Template settings
+	*/
+
+	function wpv_meta_html_extra() {
+		$view_templates_ids = array_unique( $this->view_template_used_ids );
+		$jsout = '';
+		$cssout = '';
+		foreach ( $view_templates_ids as $view_template_id ) {
+			$extra_js = get_post_meta($view_template_id, '_wpv_view_template_extra_js', true);
+			$extra_css = get_post_meta($view_template_id, '_wpv_view_template_extra_css', true);
+			if ( isset( $extra_js ) ) {
+				$jsout .= $extra_js;
+			}
+			if ( isset( $extra_css ) ) {
+				$cssout .= $extra_css;
+			}
+		}
+		if ( '' != $jsout ) {
+			echo "\n<script type=\"text/javascript\">\n$jsout\n</script>\n";
+		}
+		if ( '' != $cssout ) {
+			echo "\n<style type=\"text/css\" media=\"screen\">\n$cssout\n</style>\n";
+		}
+	}
 }

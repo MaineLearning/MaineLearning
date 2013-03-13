@@ -238,12 +238,13 @@ function wpv_add_edit_taxonomy(div_id, type, mode) {
             }
         });
         taxonomy_value.push(current_taxonomy_value);
-        taxonomy_relationship.push(jQuery('select[name="tax_' + taxonomy_name[0] + '_relationship"]').val());
-
-        // Add the attribute or url filter.
-        taxonomy_attribute_url.push(jQuery('input[name="tax_' + taxonomy_name[0] + '_attribute_url"]').val());
-        taxonomy_attribute_url_format.push(jQuery('input[name="tax-' + taxonomy_name[0] + '-attribute-url-format"]:checked').val());
-
+	var newtax = taxonomy_name.slice(-1)[0];
+	taxonomy_relationship.push(jQuery('#TB_ajaxContent select[name="tax_' + newtax + '_relationship"]').val());
+	
+	// Add the attribute or url filter.
+	taxonomy_attribute_url.push(jQuery('#TB_ajaxContent input[name="tax_' + newtax + '_attribute_url"]').val());
+	taxonomy_attribute_url_format.push(jQuery('#TB_ajaxContent input[name="tax-' + newtax + '-attribute-url-format"]:checked').val());
+	
     }
 
     var temp_index = -1;

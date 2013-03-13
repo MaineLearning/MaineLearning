@@ -9,7 +9,6 @@
  * **************************************************************************************************
  */
 global $bp;
-
 /*
  * '$extension' controls content on this page and is set to whatever admin-settings.php file is being viewed.
  * i.e. if you extension name is 'my_extension', the value of $extension will be 'my_extension'.
@@ -47,7 +46,7 @@ if ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provider'
 	<label for="bebop_' . $extension['name'] . '_newfeedurl">' . __( 'New Feed URL', 'bebop' ) . '</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_newfeedurl" size="75"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
+	<div class="button_container"><input class="button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
 	
 	wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
 	

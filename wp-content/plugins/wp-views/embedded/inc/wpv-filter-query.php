@@ -21,8 +21,8 @@ function wpv_filter_get_posts($id) {
 	$view_settings['view_id'] = $id;
     extract($view_settings, EXTR_OVERWRITE);
     
-    if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && $_GET['wpv_view_count'] == $WP_Views->get_view_count()) {
-        $paged = intval($_GET['wpv_paged']);
+    if (isset($_GET['wpv_paged']) && isset($_GET['wpv_view_count']) && esc_attr($_GET['wpv_view_count']) == $WP_Views->get_view_count()) {
+        $paged = intval(esc_attr($_GET['wpv_paged']));
     }
     
     $query = array(

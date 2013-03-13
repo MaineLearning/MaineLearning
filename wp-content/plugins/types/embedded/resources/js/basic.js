@@ -1,6 +1,16 @@
+/**
+ *
+ * Embedded JS.
+ * For now full and embedded version use this script.
+ * Before moving full-version-only code - make sure it's not needed here.
+ */
+
 var wpcfFormGroupsSupportPostTypeState = new Array();
 var wpcfFormGroupsSupportTaxState = new Array();
 var wpcfFormGroupsSupportTemplatesState = new Array();
+
+// TODO document this
+var wpcfFieldsEditorCallback_redirect = null;
 
 jQuery(document).ready(function(){
     // Only for adding group
@@ -113,7 +123,8 @@ jQuery(document).ready(function(){
             jQuery(this).find('.wpcf-compare-unique-value').each(function(index, value){
                 var parentID = jQuery(this).parents('.wpcf-compare-unique-value-wrapper').first().attr('id');
                 var currentValue = jQuery(this).val();
-                if (jQuery.inArray(currentValue, checkedArr[parentID]) > -1) {
+                if (currentValue != ''
+                    && jQuery.inArray(currentValue, checkedArr[parentID]) > -1) {
                     passed = false;
                     jQuery('#'+parentID).children('.wpcf-form-error-unique-value').remove();
                     jQuery('#'+parentID).append('<div class="wpcf-form-error-unique-value wpcf-form-error">'+wpcfFormUniqueValuesCheckText+'</div>');
@@ -138,7 +149,8 @@ jQuery(document).ready(function(){
         checkedArr = new Array();
         jQuery('.wpcf-forms-field-name').each(function(index){
             var currentValue = jQuery(this).val().toLowerCase();
-            if (jQuery.inArray(currentValue, checkedArr) > -1) {
+            if (currentValue != ''
+                && jQuery.inArray(currentValue, checkedArr) > -1) {
                 passed = false;
                 if (!jQuery(this).hasClass('wpcf-name-checked-error')) {
                     jQuery(this).before('<div class="wpcf-form-error-unique-value wpcf-form-error">'+wpcfFormUniqueNamesCheckText+'</div>').addClass('wpcf-name-checked-error');
@@ -164,7 +176,8 @@ jQuery(document).ready(function(){
         checkedArr = new Array();
         jQuery('.wpcf-forms-field-slug').each(function(index){
             var currentValue = jQuery(this).val().toLowerCase();
-            if (jQuery.inArray(currentValue, checkedArr) > -1) {
+            if (currentValue != ''
+                && jQuery.inArray(currentValue, checkedArr) > -1) {
                 passed = false;
                 if (!jQuery(this).hasClass('wpcf-slug-checked-error')) {
                     jQuery(this).before('<div class="wpcf-form-error-unique-value wpcf-form-error">'+wpcfFormUniqueSlugsCheckText+'</div>').addClass('wpcf-slug-checked-error');
@@ -307,7 +320,7 @@ jQuery(document).ready(function(){
             jQuery('#wpcf-types-form-queryvar-toggle').slideUp();
         }
     });
-    wpcfFieldsFormFiltersSummary();
+
     jQuery('.wpcf-groups-form-ajax-update-tax-ok, .wpcf-groups-form-ajax-update-post-types-ok, .wpcf-groups-form-ajax-update-templates-ok').click(function(){
         var count = 0;
         if (jQuery('.wpcf-groups-form-ajax-update-tax-ok').parent().find("input:checked").length > 0) {
@@ -325,6 +338,11 @@ jQuery(document).ready(function(){
             jQuery('#wpcf-fields-form-filters-association-form').hide();
         }
         wpcfFieldsFormFiltersSummary();
+    });
+    
+    // Loading submit button
+    jQuery('.wpcf-tax-form, .wpcf-fields-form, .wpcf-types-form').submit(function(){
+        wpcfLoadingButton();
     });
 });
 
@@ -363,39 +381,6 @@ function wpcfFieldsFormCountOptions(obj) {
 
 function wpcfRefresh() {
     window.location.reload();
-}
-
-function wpcfFieldsFormFiltersSummary() {
-    if (jQuery('#wpcf-fields-form-filters-association-form').find("input:checked").val() == 'all') {
-        var string = wpcf_filters_association_and;
-    } else {
-        var string = wpcf_filters_association_or;
-    }
-    var pt = new Array();
-    jQuery('#wpcf-form-fields-post_types').find("input:checked").each(function(){
-        pt.push(jQuery(this).next().html());
-    });
-    var tx = new Array();
-    jQuery('#wpcf-form-fields-taxonomies').find("input:checked").each(function(){
-        tx.push(jQuery(this).next().html());
-    });
-    var vt = new Array();
-    jQuery('#wpcf-form-fields-templates').find("input:checked").each(function(){
-        vt.push(jQuery(this).next().html());
-    });
-    if (pt.length < 1) {
-        pt.push(wpcf_filters_association_all_pages);
-    }
-    if (tx.length < 1) {
-        tx.push(wpcf_filters_association_all_taxonomies);
-    }
-    if (vt.length < 1) {
-        vt.push(wpcf_filters_association_all_templates);
-    }
-    string = string.replace('%pt%', pt.join(', '));
-    string = string.replace('%tx%', tx.join(', '));
-    string = string.replace('%vt%', vt.join(', '));
-    jQuery('#wpcf-fields-form-filters-association-summary').html(string);
 }
 
 // Migrate checkboxes
@@ -451,4 +436,50 @@ function wpcfCdCheckDateCustomized(object) {
     } else {
         object.parent().find('.wpcf-cd-notice-date').show();
     }
+}
+
+/**
+ * Adds spinner graphics and disable button.
+ */
+function wpcfLoadingButton() {
+    jQuery('.wpcf-disabled-on-submit').attr('disabled', 'disabled').each(function(){
+        jQuery(this).after('<div id="'+jQuery(this).attr('id')+'-loading" class="wpcf-loading">&nbsp;</div>');
+    });
+}
+/**
+ * Counter loading.
+ */
+function wpcfLoadingButtonStop() {
+    jQuery('.wpcf-disabled-on-submit').removeAttr('disabled');
+    jQuery('.wpcf-loading').fadeOut();
+}
+
+/**
+ * Controls supports title or body Warning.
+ */
+function wpcfTitleEditorCheck() {
+    if (!jQuery('#wpcf-supports-title').is(':checked') && !jQuery('#wpcf-supports-editor').is(':checked')) {
+        jQuery('#wpcf-types-title-editor-warning').fadeIn();
+    } else {
+        jQuery('#wpcf-types-title-editor-warning').fadeOut();
+    }
+}
+
+/**
+ * Editor callback func.
+ */
+function wpcfFieldsEditorCallback(field_id) {
+    var url = ajaxurl+'?action=wpcf_ajax&wpcf_action=editor_callback&_wpnonce='+window.wpcfEditorCallbackNonce+'&field_id='+field_id+'&keepThis=true&TB_iframe=true&height=400&width=400'
+    tb_show(window.wpcfEditorTbTitle, url);
+}
+
+/**
+ * TODO Document this!
+ * 1.1.5
+ */
+function wpcfFieldsEditorCallback_set_redirect(function_name, params) {
+    wpcfFieldsEditorCallback_redirect = {
+        'function' : function_name, 
+        'params' : params
+    };
 }

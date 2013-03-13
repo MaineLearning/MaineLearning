@@ -5,12 +5,12 @@ Plugin URI: http://wp-types.com/
 Description: When you need to create lists of items, Views is the solution. Views will query the content from the database, iterate through it and let you display it with flair. You can also enable pagination, search, filtering and sorting by site visitors.
 Author: ICanLocalize
 Author URI: http://wpml.org
-Version: 1.1.4.1
+Version: 1.2
 */
 
 if(defined('WPV_VERSION')) return;
 
-define('WPV_VERSION', '1.1.4.1');
+define('WPV_VERSION', '1.2');
 define('WPV_PATH', dirname(__FILE__));
 define('WPV_PATH_EMBEDDED', dirname(__FILE__) . '/embedded');
 define('WPV_FOLDER', basename(WPV_PATH));
@@ -66,10 +66,10 @@ require_once( WPV_PATH . '/inc/wpv-filter-post-relationship.php');
 
 require WPV_PATH . '/inc/wpv-plugin.class.php';
 
-if (is_admin()) {
+//if (is_admin()) {
     require WPV_PATH_EMBEDDED . '/inc/wpv-import-export-embedded.php';
     require WPV_PATH . '/inc/wpv-import-export.php';
-}
+//}
 
 require WPV_PATH_EMBEDDED . '/inc/wpv-condition.php';
 
@@ -88,3 +88,24 @@ register_deactivation_hook(__FILE__, 'wpv_views_plugin_deactivate');
 add_action('admin_init', 'wpv_views_plugin_redirect');
 
 add_filter('plugin_action_links', 'wpv_views_plugin_action_links', 10, 2);
+
+//for inline documentation plugin support
+
+if( did_action( 'inline_doc_help_viewquery' ) == 0){
+	do_action('inline_doc_help_viewquery', 'admin_screen_view_query_init');
+}
+if( did_action( 'inline_doc_help_viewfilter' )== 0){
+	do_action('inline_doc_help_viewfilter', 'admin_screen_view_filter_init');
+}
+if( did_action( 'inline_doc_help_viewpagination' )== 0){
+	do_action('inline_doc_help_viewpagination', 'admin_screen_view_pagination_init');
+}	
+if( did_action( 'inline_doc_help_viewlayout' )== 0){
+	do_action('inline_doc_help_viewlayout', 'admin_screen_view_layout_init');
+}	
+if( did_action( 'inline_doc_help_viewlayoutmetahtml' )== 0){
+	do_action('inline_doc_help_viewlayoutmetahtml', 'admin_screen_view_layoutmetahtml_init');
+}	
+if( did_action( 'inline_doc_help_viewtemplate' )== 0){
+	do_action('inline_doc_help_viewtemplate', 'admin_screen_view_template_init');
+}	
