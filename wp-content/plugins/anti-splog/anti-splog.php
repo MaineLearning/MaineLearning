@@ -5,7 +5,7 @@ Plugin URI: http://premium.wpmudev.org/project/anti-splog
 Description: The ultimate plugin and service to stop and kill splogs in WordPress Multisite and BuddyPress
 Author: Aaron Edwards (Incsub)
 Author URI: http://premium.wpmudev.org
-Version: 2.1
+Version: 2.1.1
 Network: true
 
 */
@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 //------------------------------------------------------------------------//
 
-$ust_current_version = '2.1';
+$ust_current_version = '2.1.1';
 $ust_api_url = 'http://premium.wpmudev.org/ust-api.php';
 
 //------------------------------------------------------------------------//
@@ -812,7 +812,8 @@ function ust_user_deleted($user_id) {
 
 function ust_blog_updated($blog_id) {
   global $wpdb, $current_user;
-  $wpdb->query("UPDATE `" . $wpdb->base_prefix . "ust` SET last_user_id = '".$current_user->ID."', last_ip = '".$_SERVER['REMOTE_ADDR']."', last_user_agent = '".addslashes($_SERVER['HTTP_USER_AGENT'])."' WHERE blog_id = '$blog_id' LIMIT 1");
+	if (!empty($current_user->ID))
+		$wpdb->query("UPDATE `" . $wpdb->base_prefix . "ust` SET last_user_id = '".$current_user->ID."', last_ip = '".$_SERVER['REMOTE_ADDR']."', last_user_agent = '".addslashes($_SERVER['HTTP_USER_AGENT'])."' WHERE blog_id = '$blog_id' LIMIT 1");
 }
 
 function ust_plug_pages() {
@@ -1202,10 +1203,8 @@ function ust_pre_signup_check($content) {
 	//check signup history for this IP
 	if ($ust_settings['ip_blocking']) {
 		$ip_splogs = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} l LEFT JOIN {$wpdb->blogs} b ON l.blog_id = b.blog_id WHERE l.IP = '{$_SERVER['REMOTE_ADDR']}' AND b.spam = 1");
-		$ip_total = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} WHERE IP = '{$_SERVER['REMOTE_ADDR']}'");
-		$splog_percent = ($ip_splogs / $ip_total) * 100;
-		if ($splog_percent >= $ust_settings['ip_blocking'])
-			$content['errors']->add('blogname', __("Our automated systems think you might be a spambot. If you are not a spammer please contact us.", 'ust'));
+		if ($ip_splogs >= $ust_settings['ip_blocking'])
+			$content['errors']->add('blogname', __("Our automated systems think you might be a spambot. If you are not a spammer please contact us and give us this IP: ", 'ust') . $_SERVER['REMOTE_ADDR']);
 	}
 
 	//check patterns
@@ -1261,10 +1260,8 @@ function ust_pre_signup_check_bp() {
 	//check signup history for this IP
 	if ($ust_settings['ip_blocking']) {
 		$ip_splogs = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} l LEFT JOIN {$wpdb->blogs} b ON l.blog_id = b.blog_id WHERE l.IP = '{$_SERVER['REMOTE_ADDR']}' AND b.spam = 1");
-		$ip_total = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->registration_log} WHERE IP = '{$_SERVER['REMOTE_ADDR']}'");
-		$splog_percent = ($ip_splogs / $ip_total) * 100;
-		if ($splog_percent >= $ust_settings['ip_blocking'])
-			$bp->signup->errors['multicheck'] = __("Our automated systems think you might be a spambot. If you are not a spammer please contact us.", 'ust');
+		if ($ip_splogs >= $ust_settings['ip_blocking'])
+			$bp->signup->errors['multicheck'] = __("Our automated systems think you might be a spambot. If you are not a spammer please contact us and give us this IP: ", 'ust') . $_SERVER['REMOTE_ADDR'];
 	}
 	
 	//only check for blog signups
