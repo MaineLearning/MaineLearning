@@ -1,7 +1,7 @@
 <?php
 /*
  * IMPORTANT - PLEASE READ **************************************************************************
- * All the mechanics to control this plugin are automatically generated from the extension name.	*
+ * All the mechanics to control this plugin are automatically generated from the extension name		*
  * You do not need to modify this page, unless you wish to add additional customisable parameters	*
  * for the extension. Removing/changing any of the pre defined functions will cause import errors,	*
  * and possible other unexpected or unwanted behaviour.												*
@@ -44,7 +44,7 @@ if ( ( bebop_tables::get_option_value( 'bebop_' . $extension['name'] . '_provide
 	echo '<label for="bebop_' . $extension['name'] . '_username">' . __( 'New Username', 'bebop' ) . ':</label>
 	<input type="text" name="bebop_' . $extension['name'] . '_username" value="" size="50"><br><br>
 	
-	<div class="button_container"><input class="auto button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
+	<div class="button_container"><input class="button" type="submit" id="submit" name="submit" value="' . __( 'Save Changes', 'bebop' ) . '"></div>';
 	
 	wp_nonce_field( 'bebop_' . $extension['name'] . '_user_settings' );
 	

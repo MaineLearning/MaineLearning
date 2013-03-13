@@ -2,6 +2,10 @@
 /**
  * Importer for bebop
  */
+
+if ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) {
+	gc_enable();
+}
 set_time_limit( 60 );
 ini_set( 'max_execution_time', 60 );
 
@@ -51,6 +55,7 @@ if ( ! empty( $importers[0] ) ) {
 				bebop_tables::log_error( __( 'Main Importer', 'bebop' ), sprintf( __( 'The function: %1$s/import.php does not exist.', 'bebop'), WP_PLUGIN_DIR . '/bebop/extensions/' . strtolower( $extension ) ) );
 			}
 		}
+		unset($extension);
 	}
 	$log_array = array();
 	foreach ( $return_array as $key => $value ) {
@@ -71,3 +76,7 @@ if ( ! empty( $importers[0] ) ) {
 	}
 	bebop_tables::log_general( __( 'Main Importer', 'bebop' ), $message );
 }
+if ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) {
+	gc_disable();
+}
+?>

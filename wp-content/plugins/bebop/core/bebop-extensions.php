@@ -30,7 +30,7 @@ class bebop_extensions {
 	
 	function bebop_get_extension_path_from_name( $extension_name ) {
 		$extensions = bebop_extensions::bebop_gather_extensions();
-		foreach( $extensions as $extension) {
+		foreach( $extensions as $extension ) {
 			if ( strrpos( $extension, $extension_name ) ) {
 				return $extension;
 			}

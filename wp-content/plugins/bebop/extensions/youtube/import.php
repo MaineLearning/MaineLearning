@@ -130,10 +130,8 @@ function bebop_youtube_import( $extension, $user_metas = null ) {
 										//generate an $item_id
 										$item_id = bebop_generate_secondary_id( $user_meta->user_id, $id, $item_published );
 										
-										//check if the secondary_id already exists
-										$secondary = bebop_tables::fetch_individual_oer_data( $item_id );
 										//if the id is not found, import the content.
-										if ( empty( $secondary->secondary_item_id ) ) {
+										if ( ! bebop_tables::check_existing_content_id( $user_meta->user_id, $this_extension['name'], $item_id ) ) {
 											
 											//Only for content which has a description.
 											if ( ! empty( $description ) ) {

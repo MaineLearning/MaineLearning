@@ -1,30 +1,30 @@
 === Bebop ===
 
 Contributors: Dale Mckeown
-Tags: WordPress, BuddyPress, OER, Open Educational Resources, ukeor, oerri, Rapid Innovation, JISC, LNCD, The University of Lincoln.
+Tags: WordPress, BuddyPress, OER, Open Educational Resources, ukeor, oerri, Rapid Innovation, JISC, LNCD, The University of Lincoln, Facebook, Twitter, SlideShare, Youtube, Vimeo, RSS.
 
-Tested on: WordPress 3.4.2, BuddyPress 1.6.1
+Tested up to: WordPress 3.5.1, BuddyPress 1.6.4
 
 
 == Licence ==
 
 Released under the GNU General Public Licence - https://www.gnu.org/copyleft/gpl.html
-Copyright 2012 The University of Lincoln - http://www.lincoln.ac.uk.
+Copyright 2013 The University of Lincoln - http://www.lincoln.ac.uk.
 
 
 == Description ==
 
-Bebop is a BuddyPress plugin which allows you to connect your BuddyPress profile to other social media platforms such as Twitter, Flickr, Slideshare, Youtube and Vimeo. Bebop is an aggregator and curatorial tool, pulling content from other web services into your BuddyPress activity timeline. It will also pull in content from RSS/Atom feeds, so will work with sites like Tumblr, WordPress and Blogger. Bebop gives you control over exactly what items of content appear in your activity stream and works on WordPress network installs, too.
-
+Bebop is a BuddyPress plugin which allows you to connect your BuddyPress profile to other social media platforms such as Twitter, Flickr, Slideshare, Youtube and Vimeo. Bebop is an aggregator and curatorial tool, pulling content from other web services into your BuddyPress activity timeline. It will also pull in content from RSS/Atom feeds, so will work with sites like Tumblr, WordPress and Blogger.
+Bebop gives you control over exactly what items of content appear in your activity stream and works on WordPress network installs, too.
 Bebop was developed by the University of Lincoln for a JISC-funded 'Open Educational Resources' project, to allow teachers to select and aggregate teaching resources they have shared on third-party sites into their BuddyPress profile. BuddyPress and Bebop are being used at the University of Lincoln to power staff and student profiles.
 
 German (de_DE) Language pack courtesy of HansRuedi Keller (http://www.info.ch)
+=======
 
 == Installation ==
 
-Requirements:
+Requirements.
 - PHP 5.2.1+
-Bebop is compatible with WordPress Networks as well as standalone sites.
 
 Instructions:
 1. Upload this plugin to your '/wp-content/plugins/' directory.
@@ -32,7 +32,7 @@ Instructions:
 
 OR
 
-Install via the 'Add New' button in your plugins page.
+Install via the 'Add New' button on your plugins page.
 
 THEN
 
@@ -41,12 +41,32 @@ Configure extensions in the 'OER Provider' admin menu.
 Please read the documentation on Github: http://github.com/lncd/bebop/wiki
 
 Please report any bugs or issues on Github: http://github.com/lncd/bebop/issues
+=======
 
 == Changelog ==
 
+v1.3.1 - 11.03.2013 - Minor release, but please backup your database before upgrading!
+* Fixed the upgrade error in 1.3.0.
+* Rewrote database checks for checking secondary ids.
+* added twitter developer link.
+* Fixed multiple spelling mistakes and language file inconsistencies.
+
+
+v1.3.0 - 07.03.2013 - Major release - Please backup your database before upgrading!
+* Rewrote all secondary id's to be universal. Also fixed icompatability issues with 32bit operating systems.
+* Fixed some minor WP 3.5.1 and BP 1.6.4 compatability issues.
+* Better garbage collection on PHP 5.3
+* Added 'Resources' tab to the wp-buddypress admin bar.
+* Added tutorials for obtaining and installing API keys.
+
+
+v1.2.2 - 21.12.2012 - Minor Release
+
+* Fixed WP 3.5 compatability issues.
+
 v1.2.1 - 08.11.2012 - Minor Release
 
-This update addresses an issue which accidentally allowed hidden content from groups to be displayed on the activity stream. 
+* This update addresses an issue which accidentally allowed hidden content from groups to be displayed on the activity stream.
 
 v1.2 - 02.11.2012 - Major Release
 
@@ -96,6 +116,7 @@ Other:
 * Updated the readme.txt file.
 * Changed feed back to RSS
 * Changes some admin terminology so that it suites our social media users a little better.
+
 
 v1.1 - 24.09.2012 - Major Release
 

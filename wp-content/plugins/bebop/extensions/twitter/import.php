@@ -100,10 +100,8 @@ function bebop_twitter_import( $extension, $user_metas = null ) {
 								//generate an $item_id
 								$item_id = bebop_generate_secondary_id( $user_meta->user_id, $id, $item_published );
 								
-								//check if the secondary_id already exists
-								$secondary = bebop_tables::fetch_individual_oer_data( $item_id );
 								//if the id is not found, import the content.
-								if ( empty( $secondary->secondary_item_id ) ) {
+								if ( ! bebop_tables::check_existing_content_id( $user_meta->user_id, $this_extension['name'], $item_id ) ) {
 									
 									if ( bebop_create_buffer_item(
 													array(
@@ -122,12 +120,14 @@ function bebop_twitter_import( $extension, $user_metas = null ) {
 									}
 								}
 							}
+							unset($item);
 						}
 					}
 				}
 				else {
 					bebop_tables::log_error( sprintf( __( 'Importer - %1$s', 'bebop' ), $this_extension['display_name'] ), sprintf( __( 'Feed Error: %1$s', 'bebop' ), $errors ) );
 				}
+				unset($user_meta);
 			}
 		}
 	}
