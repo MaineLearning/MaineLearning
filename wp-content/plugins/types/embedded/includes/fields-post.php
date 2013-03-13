@@ -1,384 +1,513 @@
 <?php
 /*
  * Edit post page functions
+ * 
+ * Core file with stable and working functions.
+ * Please add hooks if adjustment needed, do not add any more new code here.
+ * 
+ * Consider this file half-locked since Types 1.2
  */
+
+// Include conditional field code
 require_once WPCF_EMBEDDED_ABSPATH . '/includes/conditional-display.php';
 
 /**
  * Init functions for post edit pages.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @param type $upgrade 
  */
-function wpcf_admin_post_init($post = false) {
+function wpcf_admin_post_init( $post = false ) {
 
-    wpcf_admin_add_js_settings('wpcf_nonce_toggle_group',
-            '\'' . wp_create_nonce('group_form_collapsed') . '\'');
-    wpcf_admin_add_js_settings('wpcf_nonce_toggle_fieldset',
-            '\'' . wp_create_nonce('form_fieldset_toggle') . '\'');
+    global $wpcf;
+
+    wpcf_admin_add_js_settings( 'wpcf_nonce_toggle_group',
+            '\'' . wp_create_nonce( 'group_form_collapsed' ) . '\'' );
+    wpcf_admin_add_js_settings( 'wpcf_nonce_toggle_fieldset',
+            '\'' . wp_create_nonce( 'form_fieldset_toggle' ) . '\'' );
 
     // Get post_type
-    if ($post) {
-        $post_type = get_post_type($post);
+    if ( $post ) {
+        $post_type = get_post_type( $post );
     } else {
-        if (!isset($_GET['post_type'])) {
+        if ( !isset( $_GET['post_type'] ) ) {
             $post_type = 'post';
-        } else if (in_array($_GET['post_type'],
-                        get_post_types(array('show_ui' => true)))) {
+        } else if ( in_array( $_GET['post_type'],
+                        get_post_types( array('show_ui' => true) ) ) ) {
             $post_type = $_GET['post_type'];
         } else {
             return false;
         }
     }
 
+    // Set global $wpcf post object
+    // CHECKPOINT
+    $wpcf->post = $post;
+    $wpcf->post_types->set( $post_type );
+
     // Add items to View dropdown
-    if (in_array($post_type, array('view', 'view-template'))) {
-        add_filter('editor_addon_menus_wpv-views',
-                'wpcf_admin_post_editor_addon_menus_filter');
-        add_action('admin_footer', 'wpcf_admin_post_js_validation');
+    if ( in_array( $post_type, array('view', 'view-template') ) ) {
+        add_filter( 'editor_addon_menus_wpv-views',
+                'wpcf_admin_post_editor_addon_menus_filter' );
+        add_action( 'admin_footer', 'wpcf_admin_post_js_validation' );
+        wpcf_enqueue_scripts();
     }
 
     // Never show on 'Views' and 'View Templates'
-    if (in_array($post_type, array('view', 'view-template'))) {
+    // CRED should pass this check
+    if ( in_array( $post_type, array('view', 'view-template') ) ) {
         return false;
     }
 
     // Add marketing box
-    if (!in_array($post_type, array('post', 'page'))
-            && !defined('WPCF_RUNNING_EMBEDDED')) {
+    if ( !in_array( $post_type, array('post', 'page', 'cred-form') )
+            && !defined( 'WPCF_RUNNING_EMBEDDED' ) ) {
         $hide_help_box = true;
-        $help_box = wpcf_get_settings('help_box');
-        $custom_types = get_option('wpcf-custom-types', array());
-        if ($help_box != 'no') {
-            if ($help_box == 'by_types' && array_key_exists($post_type,
-                            $custom_types)) {
+        $help_box = wpcf_get_settings( 'help_box' );
+        $custom_types = get_option( 'wpcf-custom-types', array() );
+        if ( $help_box != 'no' ) {
+            if ( $help_box == 'by_types' && array_key_exists( $post_type,
+                            $custom_types ) ) {
                 $hide_help_box = false;
             }
-            if (function_exists('wprc_is_logged_to_repo') && wprc_is_logged_to_repo(WPCF_REPOSITORY)) {
+            if ( function_exists( 'wprc_is_logged_to_repo' ) && wprc_is_logged_to_repo( WPCF_REPOSITORY ) ) {
                 $hide_help_box = true;
             }
-            if ($help_box == 'all') {
+            if ( $help_box == 'all' ) {
                 $hide_help_box = false;
             }
 
-            if (!$hide_help_box) {
-                add_meta_box('wpcf-marketing',
-                        __('How-To Display Custom Content', 'wpcf'),
+            if ( !$hide_help_box ) {
+                add_meta_box( 'wpcf-marketing',
+                        __( 'Display Custom Content', 'wpcf' ),
                         'wpcf_admin_post_marketing_meta_box', $post_type,
-                        'side', 'high');
+                        'side', 'high' );
             }
         }
     }
 
-    // Get groups
-    $groups = wpcf_admin_post_get_post_groups_fields($post);
+    // Are Types active?
     $wpcf_active = false;
-    foreach ($groups as $key => $group) {
-        if (!empty($group['fields'])) {
+
+    // Get groups
+    $groups = wpcf_admin_post_get_post_groups_fields( $post );
+    foreach ( $groups as $group ) {
+        if ( !empty( $group['fields'] ) ) {
             $wpcf_active = true;
             // Process fields
-            $group['fields'] = wpcf_admin_post_process_fields($post,
-                    $group['fields'], true);
+            $group['fields'] = wpcf_admin_post_process_fields( $post,
+                    $group['fields'], true );
         }
-        // Add meta boxes
-        add_meta_box($group['slug'],
-                wpcf_translate('group ' . $group['id'] . ' name', $group['name']),
-                'wpcf_admin_post_meta_box', $post_type,
-                $group['meta_box_context'], 'high', $group);
+        // Specially for CRED
+        /*
+         * 
+         * TODO Setting some specific for CRED is wrong
+         * Use hooks
+         */
+        if ( !in_array( $post_type, array('cred-form') ) ) {
+            // Add meta boxes
+            add_meta_box( $group['slug'],
+                    wpcf_translate( 'group ' . $group['id'] . ' name',
+                            $group['name'] ), 'wpcf_admin_post_meta_box',
+                    $post_type, $group['meta_box_context'], 'high', $group );
+        }
     }
 
     // Activate scripts
-    if ($wpcf_active) {
-        wp_enqueue_script('wpcf-fields-post',
+    if ( $wpcf_active ) {
+        wp_enqueue_script( 'wpcf-fields-post',
                 WPCF_EMBEDDED_RES_RELPATH . '/js/fields-post.js',
-                array('jquery'), WPCF_VERSION);
-        wp_enqueue_script('wpcf-form-validation',
+                array('jquery'), WPCF_VERSION );
+        wp_enqueue_script( 'wpcf-form-validation',
                 WPCF_EMBEDDED_RES_RELPATH . '/js/'
                 . 'jquery-form-validation/jquery.validate.min.js',
-                array('jquery'), WPCF_VERSION);
-        wp_enqueue_script('wpcf-form-validation-additional',
+                array('jquery'), WPCF_VERSION );
+        wp_enqueue_script( 'wpcf-form-validation-additional',
                 WPCF_EMBEDDED_RES_RELPATH . '/js/'
                 . 'jquery-form-validation/additional-methods.min.js',
-                array('jquery'), WPCF_VERSION);
-        wp_enqueue_style('wpcf-fields-basic',
+                array('jquery'), WPCF_VERSION );
+        wp_enqueue_style( 'wpcf-fields-basic',
                 WPCF_EMBEDDED_RES_RELPATH . '/css/basic.css', array(),
-                WPCF_VERSION);
-        wp_enqueue_style('wpcf-fields-post',
+                WPCF_VERSION );
+        wp_enqueue_style( 'wpcf-fields-post',
                 WPCF_EMBEDDED_RES_RELPATH . '/css/fields-post.css',
-                array('wpcf-fields-basic'), WPCF_VERSION);
-        add_action('admin_footer', 'wpcf_admin_post_js_validation');
+                array('wpcf-fields-basic'), WPCF_VERSION );
+        wpcf_enqueue_scripts();
     }
-    do_action('wpcf_admin_post_init', $post_type, $post, $groups, $wpcf_active);
+    
+    // Add validation
+    // TODO Move to wpcf_enqueue_scripts()
+    add_action( 'admin_footer', 'wpcf_admin_post_js_validation' );
+
+    do_action( 'wpcf_admin_post_init', $post_type, $post, $groups, $wpcf_active );
 }
 
 /**
  * Renders meta box content.
  * 
+ * Core function. Works and stable.
+ * If required, add hooks only.
+ * 
+ * @todo Revise this 1.1.5
+ * 
  * @param type $post
  * @param type $group 
  */
-function wpcf_admin_post_meta_box($post, $group) {
+function wpcf_admin_post_meta_box( $post, $group ) {
+
+    global $wpcf;
 
     static $nonce_added = false;
-    
-    if (!$nonce_added) {
+
+    /*
+     * TODO Document where this is used
+     */
+    if ( !$nonce_added ) {
         $nonce_action = 'update-' . $post->post_type . '_' . $post->ID;
-        wp_nonce_field($nonce_action, '_wpcf_post_wpnonce');
+        wp_nonce_field( $nonce_action, '_wpcf_post_wpnonce' );
         $nonce_added = true;
     }
 
-    if (!empty($group['args']['_conditional_display'])) {
-        if ($group['args']['_conditional_display'] == 'failed') {
+    /*
+     * TODO Move to Conditional code
+     * 
+     * This is already checked. Use hook to add wrapper DIVS and apply CSS.
+     */
+    if ( !empty( $group['args']['_conditional_display'] ) ) {
+        if ( $group['args']['_conditional_display'] == 'failed' ) {
             echo '<div class="wpcf-cd-group wpcf-cd-group-failed" style="display:none;">';
         } else {
             echo '<div class="wpcf-cd-group wpcf-cd-group-passed">';
         }
     }
-    if (!empty($group['args']['fields'])) {
+
+    /*
+     * TODO Move this into Field code
+     * Process fields
+     */
+    if ( !empty( $group['args']['fields'] ) ) {
         // Display description
-        if (!empty($group['args']['description'])) {
+        if ( !empty( $group['args']['description'] ) ) {
             echo '<div class="wpcf-meta-box-description">'
-            . wpautop(wpcf_translate('group ' . $group['args']['id'] . ' description',
-                            $group['args']['description'])) . '</div>';
+            . wpautop( wpcf_translate( 'group ' . $group['args']['id'] . ' description',
+                            $group['args']['description'] ) ) . '</div>';
         }
-        foreach ($group['args']['fields'] as $field_slug => $field) {
-            if (empty($field)) {
+        foreach ( $group['args']['fields'] as $field_slug => $field ) {
+            if ( empty( $field ) || !is_array( $field ) ) {
                 continue;
             }
+
+            $field = $wpcf->field->_parse_cf_form_element( $field );
+
+            if ( !isset( $field['#id'] ) ) {
+                $field['#id'] = wpcf_unique_id( serialize( $field ) );
+            }
             // Render form elements
-            if (wpcf_compare_wp_version() && $field['#type'] == 'wysiwyg') {
+            if ( wpcf_compare_wp_version() && $field['#type'] == 'wysiwyg' ) {
                 // Especially for WYSIWYG
                 echo '<div class="wpcf-wysiwyg">';
                 echo '<div id="wpcf-textarea-textarea-wrapper" class="form-item form-item-textarea wpcf-form-item wpcf-form-item-textarea">';
-                echo isset($field['#before']) ? $field['#before'] : '';
+                echo isset( $field['#before'] ) ? $field['#before'] : '';
                 echo '
 <label class="wpcf-form-label wpcf-form-textarea-label">' . $field['#title'] . '</label>';
                 echo '<div class="description wpcf-form-description wpcf-form-description-textarea description-textarea">
-' . wpautop($field['#description']) . '</div>';
-                wp_editor($field['#value'], $field['#id'],
-                        $field['#editor_settings']);
-                $field['slug'] = str_replace(WPCF_META_PREFIX . 'wysiwyg-', '',
-                        $field_slug);
+' . wpautop( $field['#description'] ) . '</div>';
+                wp_editor( $field['#value'], $field['#id'],
+                        $field['#editor_settings'] );
+                $field['slug'] = str_replace( WPCF_META_PREFIX . 'wysiwyg-', '',
+                        $field_slug );
                 $field['type'] = 'wysiwyg';
                 echo '</div>';
-                echo isset($field['#after']) ? $field['#after'] : '';
+                echo isset( $field['#after'] ) ? $field['#after'] : '';
                 echo '</div><br /><br />';
             } else {
-                if ($field['#type'] == 'wysiwyg') {
+                if ( $field['#type'] == 'wysiwyg' ) {
                     $field['#type'] = 'textarea';
                 }
-                echo wpcf_form_simple(array($field['#id'] => $field));
+                echo wpcf_form_simple( array($field['#id'] => $field) );
             }
-            do_action('wpcf_fields_' . $field_slug . '_meta_box_form', $field);
-            if (isset($field['wpcf-type'])) { // May be ignored
-                do_action('wpcf_fields_' . $field['wpcf-type'] . '_meta_box_form',
-                        $field);
+            do_action( 'wpcf_fields_' . $field_slug . '_meta_box_form', $field );
+            if ( isset( $field['wpcf-type'] ) ) { // May be ignored
+                do_action( 'wpcf_fields_' . $field['wpcf-type'] . '_meta_box_form',
+                        $field );
             }
         }
     }
-    if (!empty($group['args']['_conditional_display'])) {
+
+    /*
+     * TODO Move to Conditional code
+     * 
+     * This is already checked. Use hook to add wrapper DIVS and apply CSS.
+     */
+    if ( !empty( $group['args']['_conditional_display'] ) ) {
         echo '</div>';
     }
 }
 
 /**
- * save_post hook.
+ * Important save_post hook.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
+ * @internal breakpoint
  * @param type $post_ID
  * @param type $post 
  */
-function wpcf_admin_post_save_post_hook($post_ID, $post) {
-    if (!isset($_POST['_wpcf_post_wpnonce']) || !wp_verify_nonce($_POST['_wpcf_post_wpnonce'],
-                    'update-' . $post->post_type . '_' . $post_ID)) {
+function wpcf_admin_post_save_post_hook( $post_ID, $post ) {
+
+    global $wpcf;
+
+    // Basic cheks
+    /*
+     * Allow this hook to be triggered only if Types form is submitted
+     */
+    if ( !isset( $_POST['_wpcf_post_wpnonce'] )
+            || !wp_verify_nonce( $_POST['_wpcf_post_wpnonce'],
+                    'update-' . $post->post_type . '_' . $post_ID ) ) {
         return false;
     }
-    if (in_array($post->post_type,
-                    array('revision', 'attachment', 'wp-types-group', 'view',
-                'view-template'))) {
+    /*
+     * Do not save post if is type of:
+     * revision
+     * attachment
+     * wp-types-group
+     * view
+     * view-template
+     * cred-form
+     */
+    if ( in_array( $post->post_type, $wpcf->excluded_post_types ) ) {
         return false;
     }
 
-    // Get groups
-    $groups = wpcf_admin_post_get_post_groups_fields($post);
-    if (empty($groups)) {
+    /*
+     * 
+     * 
+     * Get all groups connected to this $post
+     */
+    $groups = wpcf_admin_post_get_post_groups_fields( $post );
+    if ( empty( $groups ) ) {
         return false;
     }
     $all_fields = array();
-    foreach ($groups as $group) {
+    $_not_valid = array();
+    $_error = false;
+
+    /*
+     * 
+     * 
+     * Loop over each group
+     * 
+     * TODO Document this
+     * Connect 'wpcf-invalid-fields' with all fields
+     */
+    foreach ( $groups as $group ) {
         // Process fields
-        $fields = wpcf_admin_post_process_fields($post, $group['fields'], true,
-                false, 'validation');
+        $fields = wpcf_admin_post_process_fields( $post, $group['fields'], true,
+                false, 'validation' );
         // Validate fields
-        $form = wpcf_form_simple_validate($fields);
+        $form = wpcf_form_simple_validate( $fields );
         $all_fields = $all_fields + $fields;
-        $error = $form->isError();
-        // Trigger form error
-        if ($error) {
-            wpcf_admin_message_store(
-                    __('Please check your input data', 'wpcf'), 'error');
+        // Collect all not valid fields
+        if ( $form->isError() ) {
+            $_error = true; // Set error only to true
+            $_not_valid = array_merge( $_not_valid,
+                    (array) $form->get_not_valid() );
         }
     }
-
-    // Save invalid elements so user can be informed after redirect
-    if (!empty($all_fields)) {
-        update_post_meta($post_ID, 'wpcf-invalid-fields', $all_fields);
-    }
-
-    // Save meta fields
-    if (!empty($_POST['wpcf'])) {
-        foreach ($_POST['wpcf'] as $field_slug => $field_value) {
-            // Skip copied fields
-            if (isset($_POST['wpcf_repetitive_copy'][$field_slug])) {
-                continue;
-            }
-            $field = wpcf_fields_get_field_by_slug($field_slug);
-            if (empty($field)) {
-                continue;
-            }
-            $meta_key = wpcf_types_get_meta_prefix($field) . $field_slug;
-            // Don't save invalid
-            if (isset($all_fields[$meta_key]['#error'])) {
-                continue;
-            }
-            // Repetitive fields
-            if (isset($_POST['wpcf_repetitive'][$field_slug])) {
-                delete_post_meta($post_ID, $meta_key);
-                foreach ($field_value as $temp_id => $repetitive_data) {
-                    // Skype specific
-                    if ($field['type'] == 'skype') {
-                        unset($repetitive_data['old_value']);
-                        wpcf_admin_post_save_field($post_ID, $meta_key, $field,
-                                $repetitive_data, true);
-                    } else {
-                        wpcf_admin_post_save_field($post_ID, $meta_key, $field,
-                                $repetitive_data['new_value'], true);
-                    }
-                }
-            } else {
-                wpcf_admin_post_save_field($post_ID, $meta_key, $field,
-                        $field_value);
-            }
-        }
-    }
-
-    // Process checkboxes
-    foreach ($all_fields as $field) {
-        if (!isset($field['#type'])) {
+    // Set fields
+    foreach ( $all_fields as $k => $v ) {
+        // only Types field
+        if ( empty( $v['wpcf-id'] ) ) {
             continue;
         }
-        if ($field['#type'] == 'checkbox'
-                && !isset($_POST['wpcf'][$field['wpcf-slug']])) {
-            $field_data = wpcf_admin_fields_get_field($field['wpcf-id']);
-            if (isset($field_data['data']['save_empty'])
-                    && $field_data['data']['save_empty'] == 'yes') {
-                update_post_meta($post_ID,
-                        wpcf_types_get_meta_prefix($field) . $field['wpcf-slug'],
-                        0);
-            } else {
-                delete_post_meta($post_ID,
-                        wpcf_types_get_meta_prefix($field) . $field['wpcf-slug']);
-            }
+        $_temp = new WPCF_Field();
+        $_temp->set( $wpcf->post, $v['wpcf-id'] );
+        $all_fields[$k]['_field'] = $_temp;
+    }
+    foreach ( $_not_valid as $k => $v ) {
+        // only Types field
+        if ( empty( $v['wpcf-id'] ) ) {
+            continue;
         }
-        if ($field['#type'] == 'checkboxes') {
-            $field_data = wpcf_admin_fields_get_field($field['wpcf-id']);
-            if (!empty($field_data['data']['options'])) {
+        $_temp = new WPCF_Field();
+        $_temp->set( $wpcf->post, $v['wpcf-id'] );
+        $_not_valid[$k]['_field'] = $_temp;
+    }
+
+    /*
+     * 
+     * Allow interaction here.
+     * Conditional will set $error to false if field is conditional
+     * and not submitted.
+     */
+    $error = apply_filters( 'wpcf_post_form_error', $_error, $_not_valid,
+            $all_fields );
+    $not_valid = apply_filters( 'wpcf_post_form_not_valid', $_not_valid,
+            $_error, $all_fields );
+
+    // Notify user about error
+    if ( $error ) {
+        wpcf_admin_message_store(
+                __( 'Please check your input data', 'wpcf' ), 'error' );
+    }
+
+    /*
+     * Save invalid elements so user can be informed after redirect.
+     */
+    if ( !empty( $not_valid ) ) {
+        update_post_meta( $post_ID, 'wpcf-invalid-fields', $not_valid );
+    }
+
+    /*
+     * 
+     * 
+     * 
+     * 
+     * Save meta fields
+     */
+    if ( !empty( $_POST['wpcf'] ) ) {
+        foreach ( $_POST['wpcf'] as $field_slug => $field_value ) {
+
+            // Get field by slug
+            $field = wpcf_fields_get_field_by_slug( $field_slug );
+            if ( empty( $field ) ) {
+                continue;
+            }
+
+            // Set field
+            $wpcf->field->set( $post_ID, $field );
+
+            // Skip copied fields
+            // CHECKPOINT
+            if ( isset( $_POST['wpcf_repetitive_copy'][$field['slug']] ) ) {
+                continue;
+            }
+
+            // Don't save invalid
+            // CHECKPOINT
+            if ( isset( $not_valid[$field['slug']] ) ) {
+                continue;
+            }
+
+
+            /*
+             * 
+             * 
+             * Saving fields
+             * @since 1.2
+             * 
+             * We changed way repetitive fields are saved.
+             * On each save fields are rewritten and order is saved in
+             * '_$slug-sort-order' meta field.
+             */
+
+            /*
+             * 
+             * We marked fields as repetitive in POST['__wpcf_repetitive']
+             * Without this check we won't save any.
+             * @see WPCF_Repeater::get_fields_form()
+             */
+            if ( isset( $_POST['__wpcf_repetitive'][$wpcf->field->slug] ) ) {
+                /*
+                 * Use here WPCF_Repeater class.
+                 * WPCF_Repeater::set() - switches to current post
+                 * WPCF_Repeater::save() - saves repetitive field
+                 */
+                $wpcf->repeater->set( $post_ID, $field );
+                $wpcf->repeater->save();
+            } else {
+                /*
+                 * Use WPCF_Field::save()
+                 */
+                $wpcf->field->save();
+            }
+            
+            do_action('wpcf_post_field_saved', $post_ID, $field);
+        }
+    }
+
+    /*
+     * Process checkboxes
+     * 
+     * TODO Revise and remove
+     * Since Types 1.1.5 we moved this check to embedded/includes/checkbox.php
+     * checkbox.php added permanently to bootstrap.
+     */
+    foreach ( $all_fields as $field ) {
+        if ( !isset( $field['#type'] ) ) {
+            continue;
+        }
+//        if ( $field['#type'] == 'checkbox'
+//                && !isset( $_POST['wpcf'][$field['wpcf-slug']] ) ) {
+//            $field_data = wpcf_admin_fields_get_field( $field['wpcf-id'] );
+//            if ( isset( $field_data['data']['save_empty'] )
+//                    && $field_data['data']['save_empty'] == 'yes' ) {
+//                update_post_meta( $post_ID,
+//                        wpcf_types_get_meta_prefix( $field ) . $field['wpcf-slug'],
+//                        0 );
+//            } else {
+//                delete_post_meta( $post_ID,
+//                        wpcf_types_get_meta_prefix( $field ) . $field['wpcf-slug'] );
+//            }
+//        }
+        if ( $field['#type'] == 'checkboxes' ) {
+            $field_data = wpcf_admin_fields_get_field( $field['wpcf-id'] );
+            if ( !empty( $field_data['data']['options'] ) ) {
                 $update_data = array();
-                foreach ($field_data['data']['options'] as $option_id => $option_data) {
-                    if (!isset($_POST['wpcf'][$field['wpcf-slug']][$option_id])) {
-                        if (isset($field_data['data']['save_empty'])
-                                && $field_data['data']['save_empty'] == 'yes') {
+                foreach ( $field_data['data']['options'] as $option_id =>
+                            $option_data ) {
+                    if ( !isset( $_POST['wpcf'][$field['wpcf-slug']][$option_id] ) ) {
+                        if ( isset( $field_data['data']['save_empty'] )
+                                && $field_data['data']['save_empty'] == 'yes' ) {
                             $update_data[$option_id] = 0;
                         }
                     } else {
                         $update_data[$option_id] = $_POST['wpcf'][$field['wpcf-slug']][$option_id];
                     }
                 }
-                update_post_meta($post_ID,
-                        wpcf_types_get_meta_prefix($field) . $field['wpcf-slug'],
-                        $update_data);
+                update_post_meta( $post_ID,
+                        wpcf_types_get_meta_prefix( $field ) . $field['wpcf-slug'],
+                        $update_data );
             }
         }
     }
-}
-
-/**
- * Saves single field.
- * 
- * @param type $post_ID
- * @param type $all_fields
- * @param type $field_slug
- * @param type $field_value
- * @param string $old_value
- * @return boolean 
- */
-function wpcf_admin_post_save_field($post_ID, $meta_key, $field, $field_value,
-        $add = false) {
-    // Apply filters
-    if (is_string($field_value))
-        $field_value = trim($field_value);
-    $field_value = apply_filters('wpcf_fields_value_save', $field_value,
-            $field['type'], $field['slug'], $field);
-    $field_value = apply_filters('wpcf_fields_slug_' . $field['slug']
-            . '_value_save', $field_value, $field);
-    $field_value = apply_filters('wpcf_fields_type_' . $field['type']
-            . '_value_save', $field_value, $field);
-
-    // Save field
-    if ($add) {
-        add_post_meta($post_ID, $meta_key, $field_value);
-    } else {
-        update_post_meta($post_ID, $meta_key, $field_value);
-    }
-
-    do_action('wpcf_fields_save', $field_value, $field);
-    do_action('wpcf_fields_slug_' . $field['slug'] . '_save', $field_value,
-            $field);
-    do_action('wpcf_fields_type_' . $field['type'] . '_save', $field_value,
-            $field);
+    
+    do_action('wpcf_post_saved', $post_ID);
 }
 
 /**
  * Renders JS validation script.
  */
 function wpcf_admin_post_js_validation() {
-    wpcf_form_render_js_validation('#post');
-
-    ?>
-    <script type="text/javascript">
-        //<![CDATA[
-        function wpcfFieldsEditorCallback(field_id) {
-
-            var url = "<?php echo admin_url('admin-ajax.php'); ?>?action=wpcf_ajax&wpcf_action=editor_callback&_wpnonce=<?php echo wp_create_nonce('editor_callback'); ?>&field_id="+field_id+"&keepThis=true&TB_iframe=true&height=400&width=400";
-            tb_show("<?php
-    _e('Insert field', 'wpcf');
-
-    ?>", url);
-        }
-                                                                            
-        var wpcfFieldsEditorCallback_redirect = null;
-                                                                            
-        function wpcfFieldsEditorCallback_set_redirect(function_name, params) {
-            wpcfFieldsEditorCallback_redirect = {'function' : function_name, 'params' : params};
-        }
-                                                                            
-        //]]>
-    </script>
-    <?php
+    wpcf_form_render_js_validation( '#post' );
 }
 
 /**
  * Creates form elements.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @param type $post
  * @param type $fields
  * @return type 
  */
-function wpcf_admin_post_process_fields($post = false, $fields = array(),
-        $use_cache = true, $add_to_editor = true, $context = 'group') {
+function wpcf_admin_post_process_fields( $post = false, $fields = array(),
+        $use_cache = true, $add_to_editor = true, $context = 'group' ) {
+
+    global $wpcf;
+
+    // TODO Document this properties
+    $wpcf->repeater->use_cache = $use_cache;
+    $wpcf->repeater->add_to_editor = $add_to_editor;
 
     // Get cached
     static $cache = array();
-    $cache_key = !empty($post->ID) ? $post->ID . md5(serialize($fields)) : false;
-    if ($use_cache && $cache_key && isset($cache[$cache_key])) {
+    $cache_key = !empty( $post->ID ) ? $post->ID . md5( serialize( $fields ) ) : false;
+    if ( $use_cache && $cache_key && isset( $cache[$cache_key] ) ) {
         return $cache[$cache_key];
     }
 
@@ -386,230 +515,132 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
 
     // Get invalid fields (if submitted)
     $invalid_fields = array();
-    if (!empty($post->ID)) {
-        $invalid_fields = get_post_meta($post->ID, 'wpcf-invalid-fields', true);
-        delete_post_meta($post->ID, 'wpcf-invalid-fields');
+    if ( !empty( $post->ID ) ) {
+        $invalid_fields = get_post_meta( $post->ID, 'wpcf-invalid-fields', true );
+        delete_post_meta( $post->ID, 'wpcf-invalid-fields' );
+
+        /*
+         * 
+         * Add it to global $wpcf
+         * From now on take it there.
+         */
+        $wpcf->field->invalid_fields = $invalid_fields;
     }
 
+    // Get WPML original fields
     $original_cf = array();
-    if (function_exists('wpml_get_copied_fields_for_post_edit')) {
+    if ( function_exists( 'wpml_get_copied_fields_for_post_edit' ) ) {
         $original_cf = wpml_get_copied_fields_for_post_edit();
+
+        /*
+         * 
+         * Add it to global $wpcf
+         * From now on take it there.
+         */
+        $wpcf->field->wpml_copied_fields = $original_cf;
     }
 
-    foreach ($fields as $field) {
+    foreach ( $fields as $field ) {
 
         // Repetitive fields
-        if (wpcf_admin_is_repetitive($field) && $context != 'post_relationship') {
-            $temp_flag = false;
-
+        if ( wpcf_admin_is_repetitive( $field ) && $context != 'post_relationship' ) {
             // First check if repetitive fields are copied using WPML
-            if (!empty($original_cf['fields'])) {
-
+            /*
+             * TODO All WPML specific code needs moving to
+             * /embedded/includes/wpml.php
+             * 
+             * @since Types 1.2
+             */
+            if ( !empty( $original_cf['fields'] ) ) {
                 // Check if marked
-                if (in_array(wpcf_types_get_meta_prefix($field) . $field['slug'],
-                                $original_cf['fields'])) {
+                if ( in_array( wpcf_types_get_meta_prefix( $field ) . $field['slug'],
+                                $original_cf['fields'] ) ) {
 
-                    // Get original post field values
-                    $temp_fields = get_post_meta($original_cf['original_post_id'],
-                            wpcf_types_get_meta_prefix($field) . $field['slug'],
-                            false);
-
-                    // If there are original field values stored
-                    if (!empty($temp_fields)) {
-                        foreach ($temp_fields as $temp_key => $temp_field) {
-                            $single_field = $field;
-                            $single_field['wpml_action'] = 'copy';
-                            $single_field['value'] = $temp_field;
-                            $temp_processed = wpcf_admin_post_process_field($post,
-                                    $single_field, $use_cache, $add_to_editor,
-                                    $context);
-                            if ($temp_processed) {
-                                $single_field = $temp_processed['field'];
-                                $element = $temp_processed['element'];
-                                if ($field['type'] == 'skype') {
-                                    foreach ($element as $temp_element_key => $temp_element_value) {
-                                        $fields_processed[$temp_element_value['#id']] = apply_filters('wpcf_post_edit_field',
-                                                $temp_element_value, $field,
-                                                $post, $context, $original_cf,
-                                                $invalid_fields);
-                                    }
-                                } else {
-                                    $fields_processed[$element['#id']] = apply_filters('wpcf_post_edit_field',
-                                            $element, $single_field, $post,
-                                            $context, $original_cf,
-                                            $invalid_fields);
-                                }
-                            }
-                        }
-
-                        // If there are no original fields stored
-                        // display empty element
-                    } else {
-                        $single_field = $field;
-                        $single_field['wpml_action'] = 'copy';
-                        $single_field['value'] = null;
-                        $temp_processed = wpcf_admin_post_process_field($post,
-                                $single_field, $use_cache, $add_to_editor,
-                                $context);
-                        if ($temp_processed) {
-                            $single_field = $temp_processed['field'];
-                            $element = $temp_processed['element'];
-                            if ($field['type'] == 'skype') {
-                                foreach ($element as $temp_element_key => $temp_element_value) {
-                                    $fields_processed[$temp_element_value['#id']] = apply_filters('wpcf_post_edit_field',
-                                            $temp_element_value, $field, $post,
-                                            $context, $original_cf,
-                                            $invalid_fields);
-                                }
-                            } else {
-                                $fields_processed[$element['#id']] = apply_filters('wpcf_post_edit_field',
-                                        $element, $single_field, $post,
-                                        $context, $original_cf, $invalid_fields);
-                            }
-                        }
-                    }
-                } else {
-                    $temp_flag = true;
+                    /*
+                     * See if repeater can handle copied fields
+                     */
+                    // Set WPML action
+                    $field['wpml_action'] = 'copy';
+                    $wpcf->repeater->set( $original_cf['original_post_id'],
+                            $field );
+                    $fields_processed = $fields_processed + $wpcf->repeater->get_fields_form();
                 }
             } else {
-                $temp_flag = true;
+                // Set repeater
+                /*
+                 * 
+                 * 
+                 * @since Types 1.2
+                 * Now we're using repeater class to handle repetitive forms.
+                 * Main change is - use form from $field_meta_box_form() without
+                 * re-processing form elements.
+                 * 
+                 * Field should pass form as array:
+                 * 'my_checkbox' => array('#type' => 'checkbox' ...),
+                 * 'my_textfield' => array('#type' => 'textfield' ...),
+                 * 
+                 * In form it should set values to be stored.
+                 * Use hooks to adjust saved data.
+                 */
+                $wpcf->repeater->set( $post, $field );
+                $fields_processed = $fields_processed + $wpcf->repeater->get_fields_form();
             }
-
-            // Get repetitive fields values
-            if ($temp_flag && !empty($post->ID)) {
-                $temp_flag = false;
-                $temp_fields = get_post_meta($post->ID,
-                        wpcf_types_get_meta_prefix($field) . $field['slug'],
-                        false);
-                if (!empty($temp_fields)) {
-                    $temp_start = true;
-                    $fields_processed[$field['id'] . '_repetitive_wrapper_open'] = array(
-                        '#type' => 'markup',
-                        '#markup' => '<div id="wpcf_'
-                        . $field['id']
-                        . '_repetitive_wrapper_' . wpcf_unique_id(serialize($field))
-                        . '" class="wpcf-repetitive-wrapper">',
-                        '#id' => $field['id'] . '_repetitive_wrapper_open',
-                    );
-                    foreach ($temp_fields as $temp_key => $temp_field) {
-                        $single_field = $field;
-                        $single_field['value'] = $temp_field;
-                        $temp_processed = wpcf_admin_post_process_field($post,
-                                $single_field, $use_cache, $add_to_editor,
-                                $context);
-                        if ($temp_processed) {
-                            $single_field = $temp_processed['field'];
-                            $element = $temp_processed['element'];
-                            if ($field['type'] == 'skype') {
-                                foreach ($element as $temp_element_key => $temp_element_value) {
-                                    if (!$temp_start && !in_array($field['type'],
-                                                    array('checkbox'))) {
-                                        unset($temp_element_value['#title']);
-                                    }
-                                    $temp_start = false;
-                                    $fields_processed[$temp_element_value['#id']] = apply_filters('wpcf_post_edit_field',
-                                            $temp_element_value, $field, $post,
-                                            $context, $original_cf,
-                                            $invalid_fields);
-                                }
-                            } else {
-                                if (!$temp_start && !in_array($field['type'],
-                                                array('checkbox'))) {
-                                    unset($element['#title']);
-                                }
-                                $temp_start = false;
-                                $fields_processed[$element['#id']] = apply_filters('wpcf_post_edit_field',
-                                        $element, $single_field, $post,
-                                        $context, $original_cf, $invalid_fields);
-                            }
-                        }
-                    }
-                    $fields_processed[$field['id'] . '_repetitive_wrapper_close'] = array(
-                        '#type' => 'markup',
-                        '#markup' => '</div>',
-                        '#id' => $field['id'] . '_repetitive_wrapper_close',
-                    );
-                } else {
-                    $temp_flag = true;
-                }
-            }
-
-            // Temp flag for repetitive field is triggered if post is new
-            // and field is not marked to be copied
-            if ($temp_flag == true) {
-                $temp_processed = wpcf_admin_post_process_field($post, $field,
-                        $use_cache, $add_to_editor, $context);
-                if ($temp_processed) {
-                    $fields_processed[$field['id'] . '_repetitive_wrapper_open'] = array(
-                        '#type' => 'markup',
-                        '#markup' => '<div id="wpcf_'
-                        . $field['id']
-                        . '_repetitive_wrapper_' . wpcf_unique_id(serialize($field))
-                        . '" class="wpcf-repetitive-wrapper">',
-                        '#id' => $field['id'] . '_repetitive_wrapper_open',
-                    );
-                    $field = $temp_processed['field'];
-                    $element = $temp_processed['element'];
-                    if ($field['type'] == 'skype') {
-                        foreach ($element as $temp_element_key => $temp_element_value) {
-                            $fields_processed[$temp_element_value['#id']] = apply_filters('wpcf_post_edit_field',
-                                    $temp_element_value, $field, $post,
-                                    $context, $original_cf, $invalid_fields);
-                        }
-                    } else {
-                        $fields_processed[$element['#id']] = apply_filters('wpcf_post_edit_field',
-                                $element, $field, $post, $context, $original_cf,
-                                $invalid_fields);
-                    }
-                    $fields_processed[$field['id'] . '_repetitive_wrapper_close'] = array(
-                        '#type' => 'markup',
-                        '#markup' => '</div>',
-                        '#id' => $field['id'] . '_repetitive_wrapper_close',
-                    );
-                }
-            }
-
-
-
-            // Non-repetitive fields
+            /*
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * Non-repetitive fields
+             */
         } else {
-            if (!empty($post->ID)) {
-                $field['value'] = get_post_meta($post->ID,
-                        wpcf_types_get_meta_prefix($field) . $field['slug'],
-                        true);
-            }
+
+            /*
+             * meta_form will be treated as normal form.
+             * See if any obstacles prevent us from using completed
+             * form from config files.
+             * 
+             * Main change is - use form from $field_meta_box_form() without
+             * re-processing form elements.
+             * 
+             * Field should pass form as array:
+             * 'my_checkbox' => array('#type' => 'checkbox' ...),
+             * 'my_textfield' => array('#type' => 'textfield' ...),
+             * 
+             * In form it should set values to be stored.
+             * Use hooks to adjust saved data.
+             */
+            $wpcf->field->set( $post, $field );
+
             // Check if repetitive field is copied using WPML
-            if (!empty($original_cf['fields'])) {
-                if (in_array(wpcf_types_get_meta_prefix($field) . $field['slug'],
-                                $original_cf['fields'])) {
+            if ( !empty( $original_cf['fields'] ) ) {
+                if ( in_array( wpcf_types_get_meta_prefix( $field ) . $field['slug'],
+                                $original_cf['fields'] ) ) {
                     $field['wpml_action'] = 'copy';
-                    $field['value'] = get_post_meta($original_cf['original_post_id'],
-                            wpcf_types_get_meta_prefix($field) . $field['slug'],
-                            true);
+                    $field['value'] = get_post_meta( $original_cf['original_post_id'],
+                            wpcf_types_get_meta_prefix( $field ) . $field['slug'],
+                            true );
                 }
             }
-            $temp_processed = wpcf_admin_post_process_field($post, $field,
-                    $use_cache, $add_to_editor, $context);
-            if ($temp_processed) {
-                $field = $temp_processed['field'];
-                $element = $temp_processed['element'];
-                if ($field['type'] == 'skype') {
-                    foreach ($element as $temp_element_key => $temp_element_value) {
-                        $fields_processed[$temp_element_value['#id']] = apply_filters('wpcf_post_edit_field',
-                                $temp_element_value, $field, $post, $context,
-                                $original_cf, $invalid_fields);
-                    }
-                } else {
-                    $fields_processed[$element['#id']] = apply_filters('wpcf_post_edit_field',
-                            $element, $field, $post, $context, $original_cf,
-                            $invalid_fields);
-                }
-            }
+            /*
+             * From Types 1.2 use complete form setup
+             */
+            $fields_processed = $fields_processed + $wpcf->field->_get_meta_form();
         }
     }
 
     // Cache results
-    if ($cache_key) {
+    if ( $cache_key ) {
         $cache[$cache_key] = $fields_processed;
     }
 
@@ -619,271 +650,272 @@ function wpcf_admin_post_process_fields($post = false, $fields = array(),
 /**
  * Processes single field.
  * 
+ * Since Types 1.2 this function changed. It handles single form element.
+ * Form element is already fetched, also meta values using class WPCF_Field.
+ * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
+ * @todo gradually remove usage of inherited fields
+ * @todo Cleanup
+ * 
  * @staticvar array $repetitive_started
- * @param type $post
- * @param type $field
- * @param type $use_cache
- * @param type $add_to_editor
- * @param type $context
- * @param type $original_cf
- * @param type $invalid_fields
+ * @param type $field_object
  * @return mixed boolean|array
  */
-function wpcf_admin_post_process_field($post = false, $field_unedited = array(),
-        $use_cache = true, $add_to_editor = true, $context = 'group',
-        $original_cf = array(), $invalid_fields = array()) {
+function wpcf_admin_post_process_field( $field_object ) {
 
-    $field = wpcf_admin_fields_get_field($field_unedited['id']);
-    if (!empty($field)) {
+    /*
+     * Since Types 1.2
+     * All data we need is stored in global $wpcf
+     */
+    global $wpcf;
+    $post = $wpcf->post;
+    $field_unedited = $field = (array) $field_object->cf;
+    $context = $field_object->context;
+    $invalid_fields = $wpcf->field->invalid_fields;
 
-        // Set values
-        $field['value'] = isset($field_unedited['value']) ? maybe_unserialize($field_unedited['value']) : '';
-        $field['wpml_action'] = isset($field_unedited['wpml_action']) ? $field_unedited['wpml_action'] : '';
+    if ( !empty( $field ) ) {
+        /*
+         * TODO Move to WPML code separate files
+         * For now leave WPML action here
+         */
+        $field['wpml_action'] = isset( $field_unedited['wpml_action'] ) ? $field_unedited['wpml_action'] : '';
 
+        /*
+         * Set Unique ID
+         */
         $field_id = 'wpcf-' . $field['type'] . '-' . $field['slug'] . '-'
-                . wpcf_unique_id(serialize($field));
-        $field_init_data = wpcf_fields_type_action($field['type']);
+                . wpcf_unique_id( serialize( $field_object->__current_form_element ) );
 
-        // Get inherited field
+        /*
+         * Get inherited field
+         * 
+         * TODO Deprecated
+         * 
+         * Since Types 1.2 we encourage developers to completely define fields.
+         */
         $inherited_field_data = false;
-        if (isset($field_init_data['inherited_field_type'])) {
-            $inherited_field_data = wpcf_fields_type_action($field_init_data['inherited_field_type']);
+        if ( isset( $field_object->config->inherited_field_type ) ) {
+            $_allowed = array(
+                'image' => 'file',
+                'numeric' => 'textfield',
+                'email' => 'textfield',
+                'phone' => 'textfield',
+                'url' => 'textfield',
+            );
+            if ( !array_key_exists( $field_object->cf['type'], $_allowed ) ) {
+                _deprecated_argument( 'inherited_field_type', '1.2',
+                        'Since Types 1.2 we encourage developers to completely define fields' );
+            }
+            $inherited_field_data = wpcf_fields_type_action( $field_object->config->inherited_field_type );
         }
 
-        // Apply filters
-        $field['value'] = apply_filters('wpcf_fields_value_get',
-                $field['value'], $field, $field_init_data);
-        $field['value'] = apply_filters('wpcf_fields_slug_' . $field['slug']
-                . '_value_get', $field['value'], $field, $field_init_data);
-        $field['value'] = apply_filters('wpcf_fields_type_' . $field['type']
-                . '_value_get', $field['value'], $field, $field_init_data);
 
-        wpcf_admin_post_field_load_js_css($field_init_data);
 
-        $element = array();
+        /*
+         * CHECKPOINT
+         * APPLY FILTERS
+         * 
+         * 
+         * Moved to WPCF_Field
+         * Field value should be already filtered
+         * 
+         * Explanation:
+         * When WPCF_Field::set() is called, all these properties are set.
+         * WPCF_Field::$cf['value']
+         * WPCF_Field::$__meta (single value from DB)
+         * WPCF_Field::$meta (single or multiple values if single/repetitive)
+         * 
+         * TODO Make sure value is already filtered and not overwritten
+         */
 
-        // Set generic values
-        $element = array(
-            '#type' => isset($field_init_data['inherited_field_type']) ? $field_init_data['inherited_field_type'] : $field['type'],
+        /*
+         * Set generic values
+         * 
+         * FUTURE BREAKPOINT
+         * Since Types 1.2 we do not encourage relying on generic field data.
+         * Only core fields should use this.
+         * 
+         * TODO Open 3rd party fields dir
+         */
+        $_element = array(
+            '#type' => isset( $field_object->config->inherited_field_type ) ? $field_object->config->inherited_field_type : $field['type'],
             '#id' => $field_id,
-            '#title' => wpcf_translate('field ' . $field['id'] . ' name',
-                    $field['name']),
-            '#description' => wpautop(wpcf_translate('field ' . $field['id'] . ' description',
-                            $field['description'])),
+            '#title' => $field['name'],
             '#name' => 'wpcf[' . $field['slug'] . ']',
-            '#value' => isset($field['value']) ? $field['value'] : '',
+            '#value' => isset( $field['value'] ) ? $field['value'] : '',
             'wpcf-id' => $field['id'],
             'wpcf-slug' => $field['slug'],
             'wpcf-type' => $field['type'],
         );
 
-        // Set inherited values
-        $element_inherited = array();
-        if ($inherited_field_data) {
-            if (function_exists('wpcf_fields_'
-                            . $field_init_data['inherited_field_type']
-                            . '_meta_box_form')) {
-                $element_inherited = call_user_func_array('wpcf_fields_'
-                        . $field_init_data['inherited_field_type']
-                        . '_meta_box_form', array($field, $element));
-            }
-        }
+        /*
+         * TODO Add explanation about creating duplicated fields
+         * 
+         * NOT USED YET
+         * 
+         * Explain users that fields are added if slug is changed
+         */
+        wpcf_admin_add_js_settings( 'wpcfFieldNewInstanceWarning',
+                __( 'If you change slug, new field will be created', 'wpcf' ) );
 
-        $element = array_merge($element, $element_inherited);
+        /*
+         * Merge with default element
+         * 
+         * Deprecated from Types 1.2
+         * Only core fields use this.
+         */
+        $element = array_merge( $_element, $field_object->__current_form_element );
 
-        if (isset($field['description_extra'])) {
-            $element['#description'] .= wpautop($field['description_extra']);
+
+        /*
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * TODO From this point code should be simplified.
+         */
+
+        if ( isset( $field['description_extra'] ) ) {
+            $element['#description'] .= wpautop( $field['description_extra'] );
         }
 
         // Set atributes #1
-        if (isset($field['disable'])) {
+        if ( isset( $field['disable'] ) ) {
             $field['#disable'] = $field['disable'];
         }
-        if (!empty($field['disable'])) {
+        if ( !empty( $field['disable'] ) ) {
             $field['#attributes']['disabled'] = 'disabled';
         }
-        if (!empty($field['readonly'])) {
+        if ( !empty( $field['readonly'] ) ) {
             $field['#attributes']['readonly'] = 'readonly';
         }
 
-        // Set specific values
-        if (defined('WPCF_INC_ABSPATH')
-                && file_exists(WPCF_INC_ABSPATH . '/fields/' . $field['type']
-                        . '.php')) {
-            require_once WPCF_INC_ABSPATH . '/fields/' . $field['type']
-                    . '.php';
+        // Format description
+        if ( !empty( $element['#description'] ) ) {
+            $element['#description'] = wpautop( $element['#description'] );
         }
 
-        // Load field
-        if (function_exists('wpcf_fields_' . $field['type']
-                        . '_meta_box_form')) {
-            $element_specific = call_user_func_array('wpcf_fields_'
-                    . $field['type'] . '_meta_box_form', array($field, $element));
-            // Check if it's single
-            if (isset($element_specific['#type'])) {
-                // Format description
-                if (!empty($element_specific['#description'])) {
-                    $element_specific['#description'] = wpautop($element_specific['#description']);
-                }
-                $element = array_merge($element, $element_specific);
-                // Set validation element
-                if (isset($field['data']['validate'])) {
-                    $element['#validate'] = $field['data']['validate'];
-                }
-                // Repetitive fields
-                if (wpcf_admin_is_repetitive($field) && $context != 'post_relationship') {
-                    $element = wpcf_admin_post_process_repetitive_field($post,
-                            $field, $element);
-                }
-            } else { // More fields, loop all
-                // Only Skype for now have multiple fields, so process only that
-                if ($field['type'] == 'skype') {
-                    $skype_element = array();
-                    foreach ($element_specific as $element_specific_fields_key => $element_specific_fields_value) {
-                        $element_specific_fields_value['__element_key'] = $element_specific_fields_key;
-                        // Format description
-                        if (!empty($element_specific_fields_value['#description'])) {
-                            $element_specific_fields_value['#description'] = wpautop($element_specific_fields_value['#description']);
-                        }
-                        // If no ID
-                        if (!isset($element_specific_fields_value['#id'])) {
-                            $element_specific_fields_value['#id'] = 'wpcf-'
-                                    . $field['slug'] . '-'
-                                    . wpcf_unique_id(serialize($field));
-                        }
-                        // Set validation element
-                        if (!empty($element_specific_fields_value['#_validate_this']) && isset($field['data']['validate'])) {
-                            $element_specific_fields_value['#validate'] = $field['data']['validate'];
-                        }
-                        if ($element_specific_fields_key != 'skypename') {
-                            if (!isset($element_specific_fields_value['#name'])) {
-                                $element_specific_fields_value['#name'] = 'wpcf[ignore]['
-                                        . wpcf_unique_id(serialize($element_specific_fields_value))
-                                        . ']';
-                            }
-                            $skype_element[$element_specific_fields_value['#id']] = $element_specific_fields_value;
-                            continue;
-                        }
-                        // This one is actually value and keep it (#name is required)
-                        $element = array_merge($element,
-                                $element_specific_fields_value);
-                        // Add it here to keep order
-                        $skype_element[$element['#id']] = $element;
-                    }
-                    // Repetitive fields
-                    if (wpcf_admin_is_repetitive($field) && $context != 'post_relationship') {
-                        list($element, $skype_element) = wpcf_admin_post_process_repetitive_field_skype($post,
-                                $field, $skype_element);
-                    }
-                }
-            }
-        } else {
-            // Repetitive fields
-            if (wpcf_admin_is_repetitive($field) && $context != 'post_relationship') {
-                $element = wpcf_admin_post_process_repetitive_field($post,
-                        $field, $element);
+        // Set validation element
+        if ( isset( $field['data']['validate'] ) ) {
+            /*
+             * 
+             * 
+             * TODO First two check are not needed anymore
+             */
+            // If array has more than one field - see which one is marked
+            if ( $field_object->__multiple && isset( $element['#_validate_this'] ) ) {
+                $element['#validate'] = $field['data']['validate'];
+            } else if ( !$field_object->__multiple ) {
+                $element['#validate'] = $field['data']['validate'];
             }
         }
 
         // Set atributes #2 (override)
-        if (isset($field['disable'])) {
+        if ( isset( $field['disable'] ) ) {
             $element['#disable'] = $field['disable'];
         }
-        if (!empty($field['disable'])) {
+        if ( !empty( $field['disable'] ) ) {
             $element['#attributes']['disabled'] = 'disabled';
         }
-        if (!empty($field['readonly'])) {
+        if ( !empty( $field['readonly'] ) ) {
             $element['#attributes']['readonly'] = 'readonly';
-            if (!empty($element['#options'])) {
-                foreach ($element['#options'] as $key => $option) {
-                    if (!is_array($option)) {
+            if ( !empty( $element['#options'] ) ) {
+                foreach ( $element['#options'] as $key => $option ) {
+                    if ( !is_array( $option ) ) {
                         $element['#options'][$key] = array(
                             '#title' => $key,
                             '#value' => $option,
                         );
                     }
                     $element['#options'][$key]['#attributes']['readonly'] = 'readonly';
-                    if ($element['#type'] == 'select') {
+                    if ( $element['#type'] == 'select' ) {
                         $element['#options'][$key]['#attributes']['disabled'] = 'disabled';
                     }
                 }
             }
-            if ($element['#type'] == 'select') {
+            if ( $element['#type'] == 'select' ) {
                 $element['#attributes']['disabled'] = 'disabled';
             }
         }
 
-        // Set validation element
-        if ($field['type'] != 'skype' && empty($element['#validate']) && isset($field['data']['validate'])) {
-            $element['#validate'] = $field['data']['validate'];
-        }
-
         // Check if it was invalid on submit and add error message
-        if ($post && !empty($invalid_fields)) {
-            if (isset($invalid_fields[$element['#id']]['#error'])) {
+        if ( $post && !empty( $invalid_fields ) ) {
+            if ( isset( $invalid_fields[$element['#id']]['#error'] ) ) {
                 $element['#error'] = $invalid_fields[$element['#id']]['#error'];
             }
         }
 
         // Set WPML locked icon
-        if (isset($field['wpml_action']) && $field['wpml_action'] == 'copy') {
+        if ( isset( $field['wpml_action'] ) && $field['wpml_action'] == 'copy' ) {
             $element['#title'] .= '<img src="' . WPCF_EMBEDDED_RES_RELPATH . '/images/locked.png" alt="'
-                    . __('This field is locked for editing because WPML will copy its value from the original language.',
-                            'wpcf') . '" title="'
-                    . __('This field is locked for editing because WPML will copy its value from the original language.',
-                            'wpcf') . '" style="position:relative;left:2px;top:2px;" />';
-        }
-
-        // Add to editor
-        if ($add_to_editor) {
-            wpcf_admin_post_add_to_editor($field);
+                    . __( 'This field is locked for editing because WPML will copy its value from the original language.',
+                            'wpcf' ) . '" title="'
+                    . __( 'This field is locked for editing because WPML will copy its value from the original language.',
+                            'wpcf' ) . '" style="position:relative;left:2px;top:2px;" />';
         }
 
         // Add repetitive class
-        // @TODO Why not add repetitive class if copied?
-        if (wpcf_admin_is_repetitive($field) && $context != 'post_relationship'
-                && (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy')) {
-            if (!empty($element['#options']) && $element['#type'] != 'select') {
-                foreach ($element['#options'] as $temp_key => $temp_value) {
-                    $element['#options'][$temp_key]['#attributes']['class'] = isset($element['#attributes']['class']) ? $element['#attributes']['class'] . ' wpcf-repetitive' : 'wpcf-repetitive';
+        // TODO Check if this is covered by Repeater and move/remove 1.1.5
+        // TODO Check why not add repetitive class if copied 1.1.5
+        if ( wpcf_admin_is_repetitive( $field ) && $context != 'post_relationship'
+                && (!isset( $field['wpml_action'] ) || $field['wpml_action'] != 'copy') ) {
+            if ( !empty( $element['#options'] ) && $element['#type'] != 'select' ) {
+                foreach ( $element['#options'] as $temp_key => $temp_value ) {
+                    $element['#options'][$temp_key]['#attributes']['class'] = isset( $element['#attributes']['class'] ) ? $element['#attributes']['class'] . ' wpcf-repetitive' : 'wpcf-repetitive';
                 }
             } else {
-                $element['#attributes']['class'] = isset($element['#attributes']['class']) ? $element['#attributes']['class'] . ' wpcf-repetitive' : 'wpcf-repetitive';
+                $element['#attributes']['class'] = isset( $element['#attributes']['class'] ) ? $element['#attributes']['class'] . ' wpcf-repetitive' : 'wpcf-repetitive';
             }
-            wpcf_admin_add_js_settings('wpcfFormRepetitiveUniqueValuesCheckText',
-                    '\'' . __('Warning: same values set', 'wpcf') . '\'');
+            /*
+             * 
+             * 
+             * Since Types 1.2 we allow same field values
+             * 
+             * TODO Remove
+             * 
+             * wpcf_admin_add_js_settings('wpcfFormRepetitiveUniqueValuesCheckText',
+              '\'' . __('Warning: same values set', 'wpcf') . '\'');
+             */
         }
 
         // Set read-only if copied by WPML
-        if (isset($field['wpml_action']) && $field['wpml_action'] == 'copy') {
-            if (isset($element['#options'])) {
-                foreach ($element['#options'] as $temp_key => $temp_value) {
-                    if (isset($temp_value['#attributes'])) {
+        // TODO Move this to separate WPML code and use only hooks 1.1.5
+        if ( isset( $field['wpml_action'] ) && $field['wpml_action'] == 'copy' ) {
+            if ( isset( $element['#options'] ) ) {
+                foreach ( $element['#options'] as $temp_key => $temp_value ) {
+                    if ( isset( $temp_value['#attributes'] ) ) {
                         $element['#options'][$temp_key]['#attributes']['readonly'] = 'readonly';
                     } else {
                         $element['#options'][$temp_key]['#attributes'] = array('readonly' => 'readonly');
                     }
                 }
             }
-            if ($field['type'] == 'select') {
-                if (isset($element['#attributes'])) {
+            if ( $field['type'] == 'select' ) {
+                if ( isset( $element['#attributes'] ) ) {
                     $element['#attributes']['disabled'] = 'disabled';
                 } else {
                     $element['#attributes'] = array('disabled' => 'disabled');
                 }
             } else {
-                if (isset($element['#attributes'])) {
+                if ( isset( $element['#attributes'] ) ) {
                     $element['#attributes']['readonly'] = 'readonly';
                 } else {
                     $element['#attributes'] = array('readonly' => 'readonly');
                 }
             }
-        }
-
-        // Specific for Skype
-        if ($field['type'] == 'skype') {
-            $skype_element[$element['#id']] = $element;
-            $element = $skype_element;
         }
 
         return array('field' => $field, 'element' => $element);
@@ -894,29 +926,32 @@ function wpcf_admin_post_process_field($post = false, $field_unedited = array(),
 /**
  * Gets all groups and fields for post.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @param type $post_ID
  * @return type 
  */
-function wpcf_admin_post_get_post_groups_fields($post = false,
-        $context = 'group') {
+function wpcf_admin_post_get_post_groups_fields( $post = false,
+        $context = 'group' ) {
 
     // Get post_type
     /*
      * 
      * 
-     * Since WP 3.5
+     * Since WP 3.5 | Types 1.2
      * Looks like $post is altered with get_post_type()
-     * We do not want that
+     * We do not want that if post is already set
      */
-    if (!empty($post->post_type)) {
+    if ( !empty( $post->post_type ) ) {
         $post_type = $post->post_type;
-    } else if (!empty($post)) {
-        $post_type = get_post_type($post);
+    } else if ( !empty( $post ) ) {
+        $post_type = get_post_type( $post );
     } else {
-        if (!isset($_GET['post_type'])) {
+        if ( !isset( $_GET['post_type'] ) ) {
             $post_type = 'post';
-        } else if (in_array($_GET['post_type'],
-                        get_post_types(array('show_ui' => true)))) {
+        } else if ( in_array( $_GET['post_type'],
+                        get_post_types( array('show_ui' => true) ) ) ) {
             $post_type = $_GET['post_type'];
         } else {
             $post_type = 'post';
@@ -925,19 +960,19 @@ function wpcf_admin_post_get_post_groups_fields($post = false,
 
     // Get post terms
     $support_terms = false;
-    if (!empty($post)) {
+    if ( !empty( $post ) ) {
         $post->_wpcf_post_terms = array();
-        $taxonomies = get_taxonomies('', 'objects');
-        if (!empty($taxonomies)) {
-            foreach ($taxonomies as $tax_slug => $tax) {
-                $temp_tax = get_taxonomy($tax_slug);
-                if (!in_array($post_type, $temp_tax->object_type)) {
+        $taxonomies = get_taxonomies( '', 'objects' );
+        if ( !empty( $taxonomies ) ) {
+            foreach ( $taxonomies as $tax_slug => $tax ) {
+                $temp_tax = get_taxonomy( $tax_slug );
+                if ( !in_array( $post_type, $temp_tax->object_type ) ) {
                     continue;
                 }
                 $support_terms = true;
-                $terms = wp_get_post_terms($post->ID, $tax_slug,
-                        array('fields' => 'all'));
-                foreach ($terms as $term_id) {
+                $terms = wp_get_post_terms( $post->ID, $tax_slug,
+                        array('fields' => 'all') );
+                foreach ( $terms as $term_id ) {
                     $post->_wpcf_post_terms[] = $term_id->term_taxonomy_id;
                 }
             }
@@ -945,109 +980,112 @@ function wpcf_admin_post_get_post_groups_fields($post = false,
     }
 
     // Get post template
-    if (empty($post)) {
+    if ( empty( $post ) ) {
         $post = new stdClass();
         $post->_wpcf_post_template = false;
         $post->_wpcf_post_views_template = false;
     } else {
-        $post->_wpcf_post_template = get_post_meta($post->ID,
-                '_wp_page_template', true);
-        $post->_wpcf_post_views_template = get_post_meta($post->ID,
-                '_views_template', true);
+        $post->_wpcf_post_template = get_post_meta( $post->ID,
+                '_wp_page_template', true );
+        $post->_wpcf_post_views_template = get_post_meta( $post->ID,
+                '_views_template', true );
     }
 
-    if (empty($post->_wpcf_post_terms)) {
+    if ( empty( $post->_wpcf_post_terms ) ) {
         $post->_wpcf_post_terms = array();
     }
 
     // Filter groups
     $groups = array();
     $groups_all = wpcf_admin_fields_get_groups();
-    foreach ($groups_all as $temp_key => $temp_group) {
-        if (empty($temp_group['is_active'])) {
-            unset($groups_all[$temp_key]);
+    foreach ( $groups_all as $temp_key => $temp_group ) {
+        if ( empty( $temp_group['is_active'] ) ) {
+            unset( $groups_all[$temp_key] );
             continue;
         }
         // Get filters
-        $groups_all[$temp_key]['_wp_types_group_post_types'] = explode(',',
-                trim(get_post_meta($temp_group['id'],
-                                '_wp_types_group_post_types', true), ','));
-        $groups_all[$temp_key]['_wp_types_group_terms'] = explode(',',
-                trim(get_post_meta($temp_group['id'], '_wp_types_group_terms',
-                                true), ','));
-        $groups_all[$temp_key]['_wp_types_group_templates'] = explode(',',
-                trim(get_post_meta($temp_group['id'],
-                                '_wp_types_group_templates', true), ','));
+        $groups_all[$temp_key]['_wp_types_group_post_types'] = explode( ',',
+                trim( get_post_meta( $temp_group['id'],
+                                '_wp_types_group_post_types', true ), ',' ) );
+        $groups_all[$temp_key]['_wp_types_group_terms'] = explode( ',',
+                trim( get_post_meta( $temp_group['id'], '_wp_types_group_terms',
+                                true ), ',' ) );
+        $groups_all[$temp_key]['_wp_types_group_templates'] = explode( ',',
+                trim( get_post_meta( $temp_group['id'],
+                                '_wp_types_group_templates', true ), ',' ) );
 
         $post_type_filter = $groups_all[$temp_key]['_wp_types_group_post_types'][0] == 'all' ? -1 : 0;
         $taxonomy_filter = $groups_all[$temp_key]['_wp_types_group_terms'][0] == 'all' ? -1 : 0;
         $template_filter = $groups_all[$temp_key]['_wp_types_group_templates'][0] == 'all' ? -1 : 0;
 
         // See if post type matches
-        if ($post_type_filter == 0 && in_array($post_type,
-                        $groups_all[$temp_key]['_wp_types_group_post_types'])) {
+        if ( $post_type_filter == 0 && in_array( $post_type,
+                        $groups_all[$temp_key]['_wp_types_group_post_types'] ) ) {
             $post_type_filter = 1;
         }
 
         // See if terms match
-        if ($taxonomy_filter == 0) {
-            foreach ($post->_wpcf_post_terms as $temp_post_term) {
-                if (in_array($temp_post_term,
-                                $groups_all[$temp_key]['_wp_types_group_terms'])) {
+        if ( $taxonomy_filter == 0 ) {
+            foreach ( $post->_wpcf_post_terms as $temp_post_term ) {
+                if ( in_array( $temp_post_term,
+                                $groups_all[$temp_key]['_wp_types_group_terms'] ) ) {
                     $taxonomy_filter = 1;
                 }
             }
         }
 
         // See if template match
-        if ($template_filter == 0) {
-            if ((!empty($post->_wpcf_post_template) && in_array($post->_wpcf_post_template,
-                            $groups_all[$temp_key]['_wp_types_group_templates']))
-                    || (!empty($post->_wpcf_post_views_template) && in_array($post->_wpcf_post_views_template,
-                            $groups_all[$temp_key]['_wp_types_group_templates']))) {
+        if ( $template_filter == 0 ) {
+            if ( (!empty( $post->_wpcf_post_template ) && in_array( $post->_wpcf_post_template,
+                            $groups_all[$temp_key]['_wp_types_group_templates'] ))
+                    || (!empty( $post->_wpcf_post_views_template ) && in_array( $post->_wpcf_post_views_template,
+                            $groups_all[$temp_key]['_wp_types_group_templates'] )) ) {
                 $template_filter = 1;
             }
         }
         // Filter by association
-        if (empty($groups_all[$temp_key]['filters_association'])) {
+        if ( empty( $groups_all[$temp_key]['filters_association'] ) ) {
             $groups_all[$temp_key]['filters_association'] = 'any';
         }
         // If context is post_relationship allow all groups that match post type
-        if ($context == 'post_relationships_header') {
+        if ( $context == 'post_relationships_header' ) {
             $groups_all[$temp_key]['filters_association'] = 'any';
         }
-        if ($post_type_filter == -1 && $taxonomy_filter == -1 && $template_filter == -1) {
+        if ( $post_type_filter == -1 && $taxonomy_filter == -1 && $template_filter == -1 ) {
             $passed = 1;
-        } else if ($groups_all[$temp_key]['filters_association'] == 'any') {
+        } else if ( $groups_all[$temp_key]['filters_association'] == 'any' ) {
             $passed = $post_type_filter == 1 || $taxonomy_filter == 1 || $template_filter == 1;
         } else {
             $passed = $post_type_filter != 0 && $taxonomy_filter != 0 && $template_filter != 0;
         }
-        if (!$passed) {
-            unset($groups_all[$temp_key]);
+        if ( !$passed ) {
+            unset( $groups_all[$temp_key] );
         } else {
-            $groups_all[$temp_key]['fields'] = wpcf_admin_fields_get_fields_by_group($temp_group['id'],
-                    'slug', true, false, true);
+            $groups_all[$temp_key]['fields'] = wpcf_admin_fields_get_fields_by_group( $temp_group['id'],
+                    'slug', true, false, true );
         }
     }
-    $groups = apply_filters('wpcf_post_groups', $groups_all, $post, $context);
+    $groups = apply_filters( 'wpcf_post_groups', $groups_all, $post, $context );
     return $groups;
 }
 
 /**
  * Stores fields for editor menu.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @staticvar array $fields
  * @param type $field
  * @return array 
  */
-function wpcf_admin_post_add_to_editor($field) {
+function wpcf_admin_post_add_to_editor( $field ) {
     static $fields = array();
-    if ($field == 'get') {
+    if ( $field == 'get' ) {
         return $fields;
     }
-    if (empty($fields)) {
-        add_action('admin_enqueue_scripts', 'wpcf_admin_post_add_to_editor_js');
+    if ( empty( $fields ) ) {
+        add_action( 'admin_enqueue_scripts', 'wpcf_admin_post_add_to_editor_js' );
     }
     $fields[$field['id']] = $field;
 }
@@ -1055,42 +1093,45 @@ function wpcf_admin_post_add_to_editor($field) {
 /**
  * Renders JS for editor menu.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @return type 
  */
 function wpcf_admin_post_add_to_editor_js() {
     global $post;
-    $fields = wpcf_admin_post_add_to_editor('get');
-    $groups = wpcf_admin_post_get_post_groups_fields($post);
-    if (empty($fields) || empty($groups)) {
+    $fields = wpcf_admin_post_add_to_editor( 'get' );
+    $groups = wpcf_admin_post_get_post_groups_fields( $post );
+    if ( empty( $fields ) || empty( $groups ) ) {
         return false;
     }
-    $editor_addon = new Editor_addon('types',
-                    __('Insert Types Shortcode', 'wpcf'),
+    $editor_addon = new Editor_addon( 'types',
+                    __( 'Insert Types Shortcode', 'wpcf' ),
                     WPCF_EMBEDDED_RES_RELPATH . '/js/types_editor_plugin.js',
-                    WPCF_EMBEDDED_RES_RELPATH . '/images/bw-logo-16.png');
+                    WPCF_EMBEDDED_RES_RELPATH . '/images/bw-logo-16.png' );
 
-    foreach ($groups as $group) {
-        if (empty($group['fields'])) {
+    foreach ( $groups as $group ) {
+        if ( empty( $group['fields'] ) ) {
             continue;
         }
-        foreach ($group['fields'] as $group_field_id => $group_field) {
-            if (!isset($fields[$group_field_id])) {
+        foreach ( $group['fields'] as $group_field_id => $group_field ) {
+            if ( !isset( $fields[$group_field_id] ) ) {
                 continue;
             }
             $field = $fields[$group_field_id];
-            $data = wpcf_fields_type_action($field['type']);
+            $data = wpcf_fields_type_action( $field['type'] );
             $callback = '';
-            if (isset($data['editor_callback'])) {
-                $callback = sprintf($data['editor_callback'], $field['id']);
+            if ( isset( $data['editor_callback'] ) ) {
+                $callback = sprintf( $data['editor_callback'], $field['id'] );
             } else {
                 // Set callback if function exists
                 $function = 'wpcf_fields_' . $field['type'] . '_editor_callback';
-                $callback = function_exists($function) ? 'wpcfFieldsEditorCallback(\'' . $field['id'] . '\')' : '';
+                $callback = function_exists( $function ) ? 'wpcfFieldsEditorCallback(\'' . $field['id'] . '\')' : '';
             }
 
-            $editor_addon->add_insert_shortcode_menu(stripslashes($field['name']),
-                    trim(wpcf_fields_get_shortcode($field), '[]'),
-                    $group['name'], $callback);
+            $editor_addon->add_insert_shortcode_menu( stripslashes( $field['name'] ),
+                    trim( wpcf_fields_get_shortcode( $field ), '[]' ),
+                    $group['name'], $callback );
         }
     }
 }
@@ -1098,80 +1139,68 @@ function wpcf_admin_post_add_to_editor_js() {
 /**
  * Adds items to view dropdown.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @param type $items
  * @return type 
  */
-function wpcf_admin_post_editor_addon_menus_filter($items) {
+function wpcf_admin_post_editor_addon_menus_filter( $items ) {
+
+    global $wpcf;
+
     $groups = wpcf_admin_fields_get_groups();
-    $all_post_types = implode(' ', get_post_types(array('public' => true)));
+    $all_post_types = implode( ' ', get_post_types( array('public' => true) ) );
     $add = array();
-    if (!empty($groups)) {
+    if ( !empty( $groups ) ) {
         // $group_id is blank therefore not equal to $group['id']
         // use array for item key and CSS class
         $item_styles = array();
 
-        foreach ($groups as $group_id => $group) {
-            $fields = wpcf_admin_fields_get_fields_by_group($group['id'],
-                    'slug', true, false, true);
-            if (!empty($fields)) {
+        foreach ( $groups as $group_id => $group ) {
+            $fields = wpcf_admin_fields_get_fields_by_group( $group['id'],
+                    'slug', true, false, true );
+            if ( !empty( $fields ) ) {
                 // code from Types used here without breaking the flow
                 // get post types list for every group or apply all
-                $post_types = get_post_meta($group['id'],
-                        '_wp_types_group_post_types', true);
-                if ($post_types == 'all') {
+                $post_types = get_post_meta( $group['id'],
+                        '_wp_types_group_post_types', true );
+                if ( $post_types == 'all' ) {
                     $post_types = $all_post_types;
                 }
-                $post_types = trim(str_replace(',', ' ', $post_types));
+                $post_types = trim( str_replace( ',', ' ', $post_types ) );
                 $item_styles[$group['name']] = $post_types;
 
-                foreach ($fields as $field_id => $field) {
-                    // Get field data
-                    $data = wpcf_fields_type_action($field['type']);
+                foreach ( $fields as $field_id => $field ) {
 
+                    // Use field class
+                    $wpcf->field->set( $wpcf->post, $field );
+
+                    // Get field data
+                    $data = (array) $wpcf->field->config;
                     // Get inherited field
-                    if (isset($data['inherited_field_type'])) {
-                        $inherited_field_data = wpcf_fields_type_action($data['inherited_field_type']);
+                    if ( isset( $data['inherited_field_type'] ) ) {
+                        $inherited_field_data = wpcf_fields_type_action( $data['inherited_field_type'] );
                     }
 
                     $callback = '';
-                    if (isset($data['editor_callback'])) {
-                        $callback = sprintf($data['editor_callback'],
-                                $field['id']);
+                    if ( isset( $data['editor_callback'] ) ) {
+                        $callback = sprintf( $data['editor_callback'],
+                                $field['id'] );
                     } else {
                         // Set callback if function exists
                         $function = 'wpcf_fields_' . $field['type'] . '_editor_callback';
-                        $callback = function_exists($function) ? 'wpcfFieldsEditorCallback(\'' . $field['id'] . '\')' : '';
+                        $callback = function_exists( $function ) ? 'wpcfFieldsEditorCallback(\'' . $field['id'] . '\')' : '';
                     }
-                    $add[$group['name']][stripslashes($field['name'])] = array(stripslashes($field['name']), trim(wpcf_fields_get_shortcode($field),
-                                '[]'), $group['name'], $callback);
+                    $add[$group['name']][stripslashes( $field['name'] )] = array(stripslashes( $field['name'] ), trim( wpcf_fields_get_shortcode( $field ),
+                                '[]' ), $group['name'], $callback);
 
-                    // Process JS
-                    if (!empty($data['meta_box_js'])) {
-                        foreach ($data['meta_box_js'] as $handle => $data_script) {
-                            if (isset($data_script['inline'])) {
-                                add_action('admin_footer',
-                                        $data_script['inline']);
-                                continue;
-                            }
-                            $deps = !empty($data_script['deps']) ? $data_script['deps'] : array();
-                            wp_enqueue_script($handle, $data_script['src'],
-                                    $deps, WPCF_VERSION);
-                        }
-                    }
-
-                    // Process CSS
-                    if (!empty($data['meta_box_css'])) {
-                        foreach ($data['meta_box_css'] as $handle => $data_script) {
-                            $deps = !empty($data_script['deps']) ? $data_script['deps'] : array();
-                            if (isset($data_script['inline'])) {
-                                add_action('admin_header',
-                                        $data_script['inline']);
-                                continue;
-                            }
-                            wp_enqueue_style($handle, $data_script['src'],
-                                    $deps, WPCF_VERSION);
-                        }
-                    }
+                    /*
+                     * Since Types 1.2
+                     * We use field class to enqueue JS and CSS
+                     */
+                    $wpcf->field->enqueue_script();
+                    $wpcf->field->enqueue_style();
                 }
             }
         }
@@ -1180,32 +1209,32 @@ function wpcf_admin_post_editor_addon_menus_filter($items) {
     $search_key = '';
 
     // Iterate all items to be displayed in the "V" menu
-    foreach ($items as $key => $item) {
-        if ($key == __('Basic', 'wpv-views')) {
+    foreach ( $items as $key => $item ) {
+        if ( $key == __( 'Basic', 'wpv-views' ) ) {
             $search_key = 'found';
             continue;
         }
-        if ($search_key == 'found') {
+        if ( $search_key == 'found' ) {
             $search_key = $key;
         }
 
-        if ($key == __('Field', 'wpv-views') && isset($item[trim(wpcf_types_get_meta_prefix(),
-                                '-')])) {
-            unset($items[$key][trim(wpcf_types_get_meta_prefix(), '-')]);
+        if ( $key == __( 'Field', 'wpv-views' ) && isset( $item[trim( wpcf_types_get_meta_prefix(),
+                                '-' )] ) ) {
+            unset( $items[$key][trim( wpcf_types_get_meta_prefix(), '-' )] );
         }
     }
-    if (empty($search_key) || $search_key == 'found') {
-        $search_key = count($items);
+    if ( empty( $search_key ) || $search_key == 'found' ) {
+        $search_key = count( $items );
     }
 
-    $insert_position = array_search($search_key, array_keys($items));
-    $part_one = array_slice($items, 0, $insert_position);
-    $part_two = array_slice($items, $insert_position);
+    $insert_position = array_search( $search_key, array_keys( $items ) );
+    $part_one = array_slice( $items, 0, $insert_position );
+    $part_two = array_slice( $items, $insert_position );
     $items = $part_one + $add + $part_two;
 
     // apply CSS styles to each item based on post types
-    foreach ($items as $key => $value) {
-        if (isset($item_styles[$key])) {
+    foreach ( $items as $key => $value ) {
+        if ( isset( $item_styles[$key] ) ) {
             $items[$key]['css'] = $item_styles[$key];
         } else {
             $items[$key]['css'] = $all_post_types;
@@ -1218,338 +1247,72 @@ function wpcf_admin_post_editor_addon_menus_filter($items) {
 /**
  * Load JS and CSS for field type.
  * 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
+ * 
  * @staticvar array $cache
- * @param type $field_init_data
+ * @param type $config
  * @return string 
  */
-function wpcf_admin_post_field_load_js_css($field_init_data) {
+function wpcf_admin_post_field_load_js_css( $post, $config ) {
+
+    // Check if cached
     static $cache = array();
-    if (isset($cache[$field_init_data['id']])) {
-        return '';
-    }
-    // Process JS
-    if (!empty($field_init_data['meta_box_js'])) {
-        foreach ($field_init_data['meta_box_js'] as $handle => $data) {
-            if (isset($data['inline'])) {
-                add_action('admin_footer', $data['inline']);
-                continue;
-            }
-            $deps = !empty($data['deps']) ? $data['deps'] : array();
-            $in_footer = !empty($data['in_footer']) ? $data['in_footer'] : false;
-            wp_register_script($handle, $data['src'], $deps, WPCF_VERSION,
-                    $in_footer);
-            wp_enqueue_script($handle);
-        }
+    if ( isset( $cache[$config['id']] ) ) {
+        return $cache[$config['id']];
     }
 
-    // Process CSS
-    if (!empty($field_init_data['meta_box_css'])) {
-        foreach ($field_init_data['meta_box_css'] as $handle => $data) {
-            if (isset($data['src'])) {
-                $deps = !empty($data['deps']) ? $data['deps'] : array();
-                wp_enqueue_style($handle, $data['src'], $deps, WPCF_VERSION);
-            } else if (isset($data['inline'])) {
-                add_action('admin_head', $data['inline']);
-            }
-        }
-    }
-    $cache[$field_init_data['id']] = 1;
+    // Use field object
+    global $wpcf;
+    $wpcf->field->enqueue_script( $config );
+    $wpcf->field->enqueue_style( $config );
+
+    $cache[$config['id']] = $config;
+    return $config;
 }
 
 /**
- * Processes repetitive field.
+ * Marketing meta-box
  * 
- * @staticvar array $repetitive_started
- * @staticvar array $repetitive_index
- * @param string $field
- * @param type $element
- * @return string 
- */
-function wpcf_admin_post_process_repetitive_field($post, $field, $element) {
-    static $repetitive_started = array();
-    static $repetitive_index = array();
-    if (defined('DOING_AJAX')) {
-        if ($field['type'] == 'skype') {
-            $field['value'] = array();
-        } else {
-            $field['value'] = '__wpcf_repetitive_new_field';
-        }
-    }
-    $field['value'] = apply_filters('wpcf_repetitive_field_old_value',
-            $field['value'], $field, $post, $element);
-
-    if (!isset($repetitive_index[$field['id']])) {
-        if (defined('DOING_AJAX') && isset($_POST['count'])) {
-            $repetitive_index[$field['id']] = $_POST['count'];
-        } else {
-            $repetitive_index[$field['id']] = 1;
-        }
-    }
-    // Add hidden fields old_value and mark field repetitive
-    $repetitive_form = '<input type="hidden" name="wpcf_repetitive['
-            . $field['id'] . '][' . $repetitive_index[$field['id']]
-            . ']" value="1" />';
-    $repetitive_form .= '<input type="hidden" name="' . $element['#name']
-            . '[' . $repetitive_index[$field['id']] . '][old_value]" value="'
-            . base64_encode($field['value']) . '" />';
-
-    // Alter element name
-    $element['#name'] = $element['#name'] . '['
-            . $repetitive_index[$field['id']] . '][new_value]';
-
-    // Add repetitive control buttons if not copied by WPML
-    if (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy') {
-        if (!isset($repetitive_started[$field['id']]) && !defined('DOING_AJAX')) {
-            // Add 'Add' button
-            $repetitive_form .= '<div class="wpcf-repetitive-buttons" style="margin-top:10px;">';
-            $repetitive_form .= '<a href="'
-                    . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=repetitive_add&amp;_wpnonce=' . wp_create_nonce('repetitive_add'))
-                    . '&amp;field_id=' . $field['id'] . '&amp;field_id_md5='
-                    . md5($field['id'])
-                    . '" class="wpcf-repetitive-add button-primary">Add Another Field</a>';
-            $repetitive_form .= '</div>';
-        } else {
-            $repetitive_form .= '<div class="wpcf-repetitive-buttons" style="margin-top:10px;">';
-
-            // Add 'Delete' button
-            if (!empty($post->ID) && !defined('DOING_AJAX')) {
-                $repetitive_form .= '&nbsp;<a href="'
-                        . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=repetitive_delete&amp;_wpnonce=' . wp_create_nonce('repetitive_delete')
-                                . '&amp;post_id=' . $post->ID . '&amp;field_id='
-                                . $field['id'] . '&amp;old_value='
-                                . base64_encode($field['value']))
-                        . '&amp;wpcf_warning=' . __('Are you sure?', 'wpcf')
-                        . '&amp;field_id_md5='
-                        . md5($field['id'])
-                        . '" class="wpcf-repetitive-delete button-secondary">Delete Field</a>';
-            } else {
-                $repetitive_form .= '&nbsp;<a href="javascript:void(0);" onclick="jQuery(this).parent().parent().fadeOut(function(){jQuery(this).remove();});" class="wpcf-repetitive-delete button-secondary">Delete Field</a>';
-            }
-            $repetitive_form .= '</div>';
-        }
-
-        // Prepend to form element
-        if (isset($element['#before'])) {
-            $element['#before'] .= $repetitive_form;
-        } else {
-            $element['#before'] = $repetitive_form;
-        }
-
-        // Append AJAX response area to element
-        if (!isset($repetitive_started[$field['id']]) && !defined('DOING_AJAX')) {
-            if (isset($element['#after'])) {
-                $element['#after'] .= '<div class="wpcf-repetitive-response"></div>';
-            } else {
-                $element['#after'] = '<div class="wpcf-repetitive-response"></div>';
-            }
-        }
-
-        // Date trigger
-        if (defined('DOING_AJAX') && $field['type'] == 'date') {
-            $date_trigger = '<script type="text/javascript">
-            wpcfFieldsDateInit("#"+jQuery("#' . $element['#id'] . '").parent().attr("id"));
-    </script>';
-            if (isset($element['#after'])) {
-                $element['#after'] .= $date_trigger;
-            } else {
-                $element['#after'] = $date_trigger;
-            }
-        }
-
-        // If copied with WPML add hidden element that will be used to skip field
-    } else if (isset($field['wpml_action']) && $field['wpml_action'] == 'copy') {
-        if (isset($element['#after'])) {
-            $element['#after'] .= '<input type="hidden" name="wpcf_repetitive_copy['
-                    . $field['id'] . '][' . $repetitive_index[$field['id']]
-                    . ']" value="1" />';
-        } else {
-            $element['#after'] = '<input type="hidden" name="wpcf_repetitive_copy['
-                    . $field['id'] . '][' . $repetitive_index[$field['id']]
-                    . ']" value="1" />';
-        }
-    }
-
-    // Mark that first repetitive field is processed
-    $repetitive_started[$field['id']] = true;
-    $repetitive_index[$field['id']] += 1;
-
-    // Set JS var for counting repetitive fields
-    wpcf_admin_add_js_settings('wpcf_repetitive_count_' . md5($field['id']),
-            $repetitive_index[$field['id']]);
-
-    return $element;
-}
-
-/**
- * Processes repetitive Skype field.
- * 
- * @staticvar array $repetitive_started
- * @staticvar array $repetitive_index
- * @param type $post
- * @param string $field
- * @param type $skype_element
- * @return string 
- */
-function wpcf_admin_post_process_repetitive_field_skype($post, $field,
-        $skype_element) {
-    static $repetitive_started = array();
-    static $repetitive_index = array();
-    $repetitive_form = '';
-    if (defined('DOING_AJAX')) {
-        $field['value'] = '__wpcf_repetitive_new_field';
-    }
-
-    // Set index
-    if (!isset($repetitive_index[$field['id']])) {
-        if (defined('DOING_AJAX') && isset($_POST['count'])) {
-            $repetitive_index[$field['id']] = $_POST['count'];
-        } else {
-            $repetitive_index[$field['id']] = 1;
-        }
-    }
-
-    foreach ($skype_element as $element_key_temp => &$element) {
-        $element_key = $element['__element_key'];
-        if (!isset($field['value'][$element_key])) {
-            if (!is_array($field['value'])) {
-                $field['value'] = array();
-            }
-            $field['value'][$element_key] = '';
-        }
-
-        if ($element_key != 'markup') {
-            // Alter element name
-            $element['#name'] = 'wpcf[' . $field['slug'] . ']['
-                    . $repetitive_index[$field['id']] . ']['
-                    . $element_key . ']';
-        }
-
-        // If not marked as copied by WPML add control buttons
-        if (!isset($field['wpml_action']) || $field['wpml_action'] != 'copy') {
-
-            if ($element_key == 'skypename') {
-                // Add hidden fields old_value and mark field repetitive
-                $repetitive_form .= '<input type="hidden" name="wpcf_repetitive['
-                        . $field['id'] . '][' . $repetitive_index[$field['id']]
-                        . ']" value="1" />';
-                $repetitive_form .= '<input type="hidden" name="wpcf[' . $field['slug']
-                        . '][' . $repetitive_index[$field['id']] . '][old_value]" value="'
-                        . base64_encode(serialize($field['value'])) . '" />';
-            }
-
-            if ($element_key == 'skypename' && !isset($repetitive_started[$field['id']]) && !defined('DOING_AJAX')) {
-                // Add 'Add' button
-                $repetitive_form .= '<div class="wpcf-repetitive-buttons" style="margin-top:10px;">';
-                $repetitive_form .= '<a href="'
-                        . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=repetitive_add&amp;_wpnonce=' . wp_create_nonce('repetitive_add'))
-                        . '&amp;field_id=' . $field['id'] . '&amp;field_id_md5='
-                        . md5($field['id'])
-                        . '" class="wpcf-repetitive-add button-primary">Add Another Field</a>';
-                $repetitive_form .= '</div>';
-            } else if ($element_key == 'skypename') {
-                $repetitive_form .= '<div class="wpcf-repetitive-buttons" style="margin-top:10px;">';
-
-                // Add 'Delete' button
-                if (!empty($post->ID)) {
-                    $repetitive_form .= '&nbsp;<a href="'
-                            . admin_url('admin-ajax.php?action=wpcf_ajax&amp;wpcf_action=repetitive_delete&amp;_wpnonce=' . wp_create_nonce('repetitive_delete')
-                                    . '&amp;post_id=' . $post->ID . '&amp;field_id='
-                                    . $field['id'] . '&amp;field_id_md5='
-                                    . md5($field['id']) . '&amp;old_value='
-                                    . base64_encode(serialize($field['value'])))
-                            . '&amp;wpcf_warning=' . __('Are you sure?', 'wpcf')
-                            . '" class="wpcf-repetitive-delete button-secondary">Delete Field</a>';
-                } else {
-                    $repetitive_form .= '&nbsp;<a href="javascript:void(0);" onclick="jQuery(this).parent().parent().fadeOut(function(){jQuery(this).remove();});" class="wpcf-repetitive-delete button-secondary">Delete Field</a>';
-                }
-                $repetitive_form .= '</div>';
-            }
-
-
-            // Prepend to form element
-            if ($element_key == 'skypename' && isset($element['#before'])) {
-                $element['#before'] .= $repetitive_form;
-            } else if ($element_key == 'skypename') {
-                $element['#before'] = $repetitive_form;
-            }
-
-            // Append AJAX response area to element
-            if ($element_key == 'markup'
-                    && !isset($repetitive_started[$field['id']])
-                    && !defined('DOING_AJAX')) {
-                $element['#markup'] .= '<div class="wpcf-repetitive-response"></div>';
-            }
-
-            // If marked as copied by WPML add hidden field
-        } else if ($element_key == 'skypename'
-                && isset($field['wpml_action']) && $field['wpml_action'] == 'copy') {
-            if (isset($element['#after'])) {
-                $element['#after'] .= '<input type="hidden" name="wpcf_repetitive_copy['
-                        . $field['id'] . '][' . $repetitive_index[$field['id']]
-                        . ']" value="1" />';
-            } else {
-                $element['#after'] = '<input type="hidden" name="wpcf_repetitive_copy['
-                        . $field['id'] . '][' . $repetitive_index[$field['id']]
-                        . ']" value="1" />';
-            }
-        }
-
-        if ($element_key == 'skypename') {
-            $main_element = $element;
-        }
-    }
-
-    // Mark that first repetitive field is processed
-    $repetitive_started[$field['id']] = true;
-    $repetitive_index[$field['id']] += 1;
-
-    // Set JS var for counting repetitive fields
-    wpcf_admin_add_js_settings('wpcf_repetitive_count_' . md5($field['id']),
-            $repetitive_index[$field['id']]);
-
-    return array($main_element, $skype_element);
-}
-
-/**
- * Marketing meta-box 
+ * Core function. Works and stable. Do not move or change.
+ * If required, add hooks only.
  */
 function wpcf_admin_post_marketing_meta_box() {
     $output = '';
 
     $views_plugin_available = false;
 
-    if (defined('WPV_VERSION')) {
+    if ( defined( 'WPV_VERSION' ) ) {
         global $WP_Views;
         $views_plugin_available = !$WP_Views->is_embedded();
     }
 
-    if ($views_plugin_available) {
-        $output .= '<p>' . sprintf(__("%sViews%s let's you create templates, query content from the database and display it.",
-                                'wpcf'),
+    if ( $views_plugin_available ) {
+        $output .= '<p><strong>' . sprintf( __( "Build this site with %sViews%s",
+                                'wpcf' ),
                         '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/?utm_source=types&utm_medium=plugin&utm_term=views&utm_content=promobox&utm_campaign=types" title="Views" target="_blank">',
-                        '</a>') . '</p>';
-        $output .= '<p><a href="' . admin_url('edit.php?post_type=view-template') . '">' . __('Create <strong>View Templates</strong> for single pages &raquo;',
-                        'wpcf') . '</a></p>';
-        $output .= '<p><a href="' . admin_url('edit.php?post_type=view') . '">' . __('Create <strong>Views</strong> for content lists &raquo;',
-                        'wpcf') . '</a></p>';
+                        '</a>' ) . '</strong></p>';
+        $output .= '<p><a href="' . admin_url( 'edit.php?post_type=view-template' ) . '">' . __( 'Create <strong>View Templates</strong> for single pages &raquo;',
+                        'wpcf' ) . '</a></p>';
+        $output .= '<p><a href="' . admin_url( 'edit.php?post_type=view' ) . '">' . __( 'Create <strong>Views</strong> for content lists &raquo;',
+                        'wpcf' ) . '</a></p>';
     } else {
-        $output .= '<p>' . __('Views makes it easy to display custom posts and fields on your site.',
-                        'wpcf') . '</p>'
-                . '<p>' . __('Learn how to:', 'wpcf') . '</p>'
-                . '<ul>'
-                . '<li><a href="http://wp-types.com/documentation/user-guides/view-templates/?utm_source=types&utm_medium=plugin&utm_term=view-templates&utm_content=post-edit-sidebar&utm_campaign=types" target="_blank">'
-                . __('Display custom fields in templates &raquo;', 'wpcf')
-                . '</a></li>'
-                . '<li><a href="http://wp-types.com/documentation/user-guides/views/?utm_source=types&utm_medium=plugin&utm_term=views&utm_content=post-edit-sidebar&utm_campaign=types" target="_blank">'
-                . __('Show custom content anywhere in the site &raquo;', 'wpcf')
-                . '</a></li>'
+        $output .= '<p><strong>' . sprintf( __( "%sViews%s let's you build complete websites without coding.",
+                                'wpcf' ),
+                        '<a href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/?utm_source=types&utm_medium=plugin&utm_term=views&utm_content=promobox&utm_campaign=types" title="Views" target="_blank">',
+                        '</a>' )
+                . '</strong></p>'
+                . '<ul style="list-style:disc; margin-left: 2em;">'
+                . '<li>' . __( 'Design templates for single pages', 'wpcf' ) . '</li>'
+                . '<li>' . __( 'Query content and display anywhere', 'wpcf' ) . '</li>'
+                . '<li>' . __( 'Build parametric searches', 'wpcf' ) . '</li>'
+                . '<li>' . __( 'Create your own widgets', 'wpcf' ) . '</li>'
+                . '<li>' . __( 'No coding necessary', 'wpcf' ) . '</li>'
                 . '</ul>'
-                . '<p style="margin-top:2em;"><a class="button button-highlighted" href="http://wp-types.com/buy/?utm_source=types&utm_medium=plugin&utm_term=buy&utm_content=post-edit-sidebar&utm_campaign=types" target="_blank">'
-                . __('Buy Views Toolset', 'wpcf')
-                . '</a></p>'
-                . '<p style="font-size: 90%;">'
-                . __('Risk free - 30 days money back guarantee', 'wpcf')
-                . '</p>';
+                . '<p style="margin-top:2em;"><a class="button button-highlighted" href="http://wp-types.com/home/views-create-elegant-displays-for-your-content/?utm_source=types&utm_medium=plugin&utm_term=views&utm_content=promobox&utm_campaign=types" target="_blank">'
+                . __( 'Get Views', 'wpcf' )
+                . '</a></p>';
     }
     echo $output;
 }
+

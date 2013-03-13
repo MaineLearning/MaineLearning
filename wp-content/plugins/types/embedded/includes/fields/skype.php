@@ -16,6 +16,7 @@ function wpcf_fields_skype() {
 
 add_filter('wpcf_pr_fields_type_skype_value_save',
         'wpcf_pr_fields_type_skype_value_save_filter', 10, 3);
+add_filter('wpcf_repetitive_field', 'wpcf_field_skype_repetitive', 10, 4);
 
 /**
  * Form data for post edit page.
@@ -63,7 +64,7 @@ function wpcf_fields_skype_meta_box_form($field) {
             || (isset($field['wpml_action']) && $field['wpml_action'] == 'copy')) {
         $edit_button = '';
     } else {
-        $edit_button = '<br />'
+        $edit_button = ''
                 . '<a href="'
                 . admin_url('admin-ajax.php?action=wpcf_ajax&amp;'
                         . 'wpcf_action=insert_skype_button&amp;_wpnonce='
@@ -81,7 +82,7 @@ function wpcf_fields_skype_meta_box_form($field) {
 
     $form['markup'] = array(
         '#type' => 'markup',
-        '#markup' => '<br /><div class="wpcf-form-item">'
+        '#markup' => '<div class="wpcf-form-item">'
         . '<div id="wpcf-fields-skype-'
         . $field['slug'] . '-' . $rand . '-preview">' . $preview . '</div>'
         . $edit_button . '</div>',
@@ -170,17 +171,17 @@ function wpcf_fields_skype_meta_box_ajax() {
                 if ($_GET['style'] == 'btn1')
                     echo 'checked="checked" ';
 
-                ?>id="btn1" name="buttonstyle" tabindex="2" value="btn1" type="radio" />  
+    ?>id="btn1" name="buttonstyle" tabindex="2" value="btn1" type="radio" />  
                                         <img alt="" id="btn1-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/call_green_white_153x63.png" height="63" width="153" /> 
                                     </label> 
                                 </td>
                                 <td colspan="1" rowspan="1"> 
                                     <label for="btn2"> 
                                         <input <?php
-                if ($_GET['style'] == 'btn2')
-                    echo 'checked="checked" ';
+                                        if ($_GET['style'] == 'btn2')
+                                            echo 'checked="checked" ';
 
-                ?>id="btn2" name="buttonstyle" tabindex="3" value="btn2" type="radio" />  
+    ?>id="btn2" name="buttonstyle" tabindex="3" value="btn2" type="radio" />  
                                         <img alt="" id="btn2-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/call_blue_white_124x52.png" height="52" width="125" /> 
                                     </label> 
                                 </td>
@@ -190,20 +191,20 @@ function wpcf_fields_skype_meta_box_ajax() {
                                 <td colspan="1" rowspan="1"> 
                                     <label for="btn3"> 
                                         <input <?php
-                if ($_GET['style'] == 'btn3')
-                    echo 'checked="checked" ';
+                                        if ($_GET['style'] == 'btn3')
+                                            echo 'checked="checked" ';
 
-                ?>id="btn3" name="buttonstyle" tabindex="4" value="btn3" type="radio" />  
+    ?>id="btn3" name="buttonstyle" tabindex="4" value="btn3" type="radio" />  
                                         <img alt="" id="btn3-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/call_green_white_92x82.png" height="82" width="92" /> 
                                     </label> 
                                 </td>
                                 <td colspan="1" rowspan="1"> 
                                     <label for="btn4"> 
                                         <input <?php
-                if ($_GET['style'] == 'btn4')
-                    echo 'checked="checked" ';
+                                        if ($_GET['style'] == 'btn4')
+                                            echo 'checked="checked" ';
 
-                ?>id="btn4" name="buttonstyle" tabindex="5" value="btn4" type="radio" />  
+    ?>id="btn4" name="buttonstyle" tabindex="5" value="btn4" type="radio" />  
                                         <img alt="" id="btn4-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/call_blue_transparent_34x34.png" height="34" width="34" /> 
                                     </label> 
                                 </td>
@@ -212,14 +213,14 @@ function wpcf_fields_skype_meta_box_ajax() {
                         </tbody></table> 
                 </div>  
                 <h2><?php
-                _e('Skype buttons with status', 'wpcf');
+                                        _e('Skype buttons with status', 'wpcf');
 
     ?></h2>  
                 <p><?php
                 _e('If you choose to show your Skype status, your Skype button will always reflect your availability on Skype. This status will be shown to everyone, whether they’re in your contact list or not.',
                         'wpcf');
 
-                ?></p>  
+    ?></p>  
                 <div id="status-buttons"> 
                     <table border="0" cellpadding="0" cellspacing="0" width="445">
                         <colgroup><col span="1" width="223">
@@ -232,17 +233,17 @@ function wpcf_fields_skype_meta_box_ajax() {
                 if ($_GET['style'] == 'btn5')
                     echo 'checked="checked" ';
 
-                ?>id="btn5" name="buttonstyle" tabindex="6" value="btn5" type="radio" />  
+    ?>id="btn5" name="buttonstyle" tabindex="6" value="btn5" type="radio" />  
                                         <img alt="" id="btn5-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/anim_balloon.gif" height="60" width="150" /> 
                                     </label> 
                                 </td>
                                 <td colspan="1" rowspan="1"> 
                                     <label for="btn6"> 
                                         <input <?php
-                if ($_GET['style'] == 'btn6')
-                    echo 'checked="checked" ';
+                                        if ($_GET['style'] == 'btn6')
+                                            echo 'checked="checked" ';
 
-                ?>id="btn6" name="buttonstyle" tabindex="7" value="btn6" type="radio" />  
+    ?>id="btn6" name="buttonstyle" tabindex="7" value="btn6" type="radio" />  
                                         <img alt="" id="btn6-img" src="http://www.skypeassets.com/i/legacy/images/share/buttons/anim_rectangle.gif" height="44" width="182" /> 
                                     </label> 
                                 </td>
@@ -250,18 +251,19 @@ function wpcf_fields_skype_meta_box_ajax() {
                         </tbody></table> 
                 </div>
             </div>
-                               <?php
-                               wp_nonce_field('wpcf-form', '_wpnonce_wpcf_form');
+            <?php
+            wp_nonce_field('wpcf-form', '_wpnonce_wpcf_form');
 
-                               ?>
+            ?>
             <br /><br /><input type="submit" class="button-primary" value="<?php
-    _e('Insert skype button', 'wpcf');
+        _e('Insert skype button', 'wpcf');
 
-                               ?>" />
+            ?>" />
     </form>
     <?php
-        $update = esc_attr($_GET['update']);
-        ?>
+    $update = esc_attr($_GET['update']);
+
+    ?>
     <script type="text/javascript">
         //<![CDATA[
         jQuery(document).ready(function(){
@@ -393,7 +395,7 @@ function wpcf_fields_skype_view($params) {
     if (!isset($params['field_value']['style'])) {
         $params['field_value']['style'] = '';
     }
-    $style = (isset($params['style'])&&!empty($params['style']) && $params['style'] != 'default') ? $params['style'] : $params['field_value']['style'];
+    $style = (isset($params['style']) && !empty($params['style']) && $params['style'] != 'default') ? $params['style'] : $params['field_value']['style'];
     $content = wpcf_fields_skype_get_button($params['field_value']['skypename'],
             $style);
     return $content;
@@ -413,4 +415,59 @@ function wpcf_pr_fields_type_skype_value_save_filter($data, $meta_key = null,
     $meta['skypename'] = $data;
     $data = $meta;
     return $data;
+}
+
+/**
+ * Processes repetitive Skype fields.
+ * 
+ * Each form element is sent separately.
+ * Determine which is which and process it.
+ * 
+ * @staticvar array $repetitive_started
+ * @staticvar array $repetitive_index
+ * @param type $post
+ * @param string $field
+ * @param type $skype_element
+ * @return string 
+ */
+function wpcf_field_skype_repetitive($element, $post, $field, $array_key) {
+    
+    global $wpcf;
+    
+    if ($field['type'] != 'skype') {
+        return $element;
+    }
+
+
+    switch ($array_key) {
+        case 'skypename':
+            /*
+             * Mark as copied because of WPML
+             * Do this on first field only
+             * 
+             * TODO Revise this
+             * Why do we need this?
+             */
+            if (isset($field['wpml_action']) && $field['wpml_action'] == 'copy') {
+                $element['#after'] .= '<input type="hidden" name="wpcf_repetitive_copy['
+                        . $field['id'] . '][' . $wpcf->repeater->index
+                        . ']" value="1" />';
+            }
+
+            /*
+             * 
+             * If added via AJAX set value
+             */
+            if (defined('DOING_AJAX')) {
+                $field['value'] = '__wpcf_repetitive_new_field';
+                $element['#value'] = '';
+            }
+            break;
+
+
+        default:
+            break;
+    }
+    
+    return $element;
 }

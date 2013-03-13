@@ -1,19 +1,26 @@
+/*
+Embedded CSS
+
+Before moving to full version - check twice!
+NO DUPLICATES
+*/
+
 #icon-wpcf {
-    background: url(../images/logo-32.png) no-repeat;
+    background: url('../images/logo-32.png') no-repeat;
 }
 #icon-wpcf-access {
-    background: url(../images/access-icon-32x32.png) no-repeat;
+    background: url('../images/access-icon-32x32.png') no-repeat;
 }
 #icon-wpcf-search {
-    background: url(../images/search_36x34.png) no-repeat;
+    background: url('../images/search_36x34.png') no-repeat;
 }
 .wpcf-ajax-loading {
-    background: url(../images/ajax-loader-big.gif) no-repeat;
+    background: url('../images/ajax-loader-big.gif') no-repeat;
     width: 32px;
     height: 32px;
 }
 .wpcf-ajax-loading-small {
-    background: url(../images/ajax-loader-small.gif) no-repeat;
+    background: url('../images/ajax-loader-small.gif') no-repeat;
     width: 16px;
     height: 16px;
 }
@@ -37,14 +44,14 @@
 }
 .wpcf-form-fieldset .legend-collapsed {
     padding-left: 15px;
-    background-image: url(../images/expand.png);
+    background-image: url('../images/expand.png');
     background-repeat: no-repeat;
     background-position: 0px 2px;
     cursor: pointer;
 }
 .wpcf-form-fieldset .legend-expanded {
     padding-left: 15px;
-    background-image: url(../images/collapse.png);
+    background-image: url('../images/collapse.png');
     background-repeat: no-repeat;
     background-position: 0px 3px;
     cursor: pointer;
@@ -120,24 +127,25 @@
 }
 input.wpcf-form-error {
     background-color: #F8F8F8;
+    border-color: Red !important;
 }
 .wpcf-form-fields-align-right {
     float: left;
     width: 250px;
     margin-top: 0;
     margin-left: 450px;
-/*    position: absolute;*/
+    /*    position: absolute;*/
     position: fixed;
-/*    THIS IS ALSO SET IN JS AFTER ADDING SCROLL */
+    /*    THIS IS ALSO SET IN JS AFTER ADDING SCROLL */
     clear: both;
+    z-index: 12;
 }
 .wpcf-form-fields-align-right fieldset {
     width: 250px;
+    background-color: #ffffff;
 }
 .wpcf-form-fields-align-right a.wpcf-fields-add-ajax-link {
-/*    line-height: 30px;*/
     margin: 3px 5px 2px 0;
-    /*height: 15px;*/
     float: left;
 }
 .wpcf-fields-form .ui-draggable .wpcf-form-fieldset .wpcf-form-fieldset legend {
@@ -202,17 +210,17 @@ input.wpcf-form-error {
     margin: 0;
 }
 .wpcf-fields-form-validate-table thead tr {
-  background-color: #E8E8E8;
-  font-weight: bold;
+    background-color: #E8E8E8;
+    font-weight: bold;
 }
 .wpcf-fields-form-validate-table thead td {
-  border-bottom: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
 }
 .wpcf-fields-form-validate-table tbody tr:nth-child(odd) {
-  background-color: #F7F7F7;
+    background-color: #F7F7F7;
 }
 .wpcf-fields-form-validate-table tbody tr:nth-child(even) {
-  background-color: #EEEEEE;
+    background-color: #EEEEEE;
 }
 .wpcf-fields-form-validate-table td .textfield{
     width: 100%;
@@ -306,13 +314,10 @@ input.wpcf-form-error {
 .wpcf-error {
     background-color: #FFEBE8;
     border-color: #CC0000;
+    padding: 5px;
 }
 .wpcf-admin-fields-help {
-/*    position: absolute;
-    width: 400px;
-    margin-top: -15px;
-    z-index: 9;
-    text-align: right;*/
+    margin-bottom: 10px;
 }
 
 .wpcf-help-link {
@@ -324,12 +329,13 @@ input.wpcf-form-error {
     min-width:19px;
     padding-left:20px;
     padding-top:4px;
-    background:url(../../common/res/images/question.png) no-repeat 0 6px;
+    background:url('../../common/res/images/question.png') no-repeat 0 6px;
     text-decoration:none !important;
     position:relative;
     z-index:100;
-    color:#FFFFFF !important;
+    /*color:#FFFFFF !important;*/
     float:right;
+    margin: -20px 45px 0 0;
 }
 
 .wpcf-help-link:hover {
@@ -345,4 +351,69 @@ input.wpcf-form-error {
 .wpcf-form-options-header-value {
     position: absolute;
     margin: -18px 0 0 125px;
+}
+
+.wpcf-loading {
+    width: 20px;
+    height: 16px;
+    background: url('../images/wpspin.gif') no-repeat 2px 0;
+    display: inline-block;
+}
+.wpcf-hide {
+    display: none;
+}
+.wpcf-show {
+    /*display: block;*/
+}
+
+/* SETTINGS PAGE */
+.horlist {
+    margin-bottom: 12px;
+}
+.horlist li {
+    float: left;
+    line-height: 20px;
+    margin-right: 10px;
+}
+
+#wpcf-ajax * {
+    width: auto;
+}
+#wpcf-ajax #wpcontent {
+    margin: 0px;
+}
+#wpcf-ajax #wpbody-content{
+    padding: 20px;
+    width: 80%;
+}
+#wpcf-ajax #wpfooter {
+    clear: both;
+    display: none;
+}
+.wpcf-editor-popup-advanced-link {
+    display: block;
+    padding: 10px 0;
+    outline: 0 !important;
+    border: 0 !important;
+}
+.wpcf-editor-popup-advanced-link a:hover,
+.wpcf-editor-popup-advanced-link a:active,
+.wpcf-editor-popup-advanced-link a:focus {
+    outline: 0 !important;
+    border: 0 !important;
+}
+
+.modman-inline-table {
+    margin-top: 20px;
+}
+.wpcf-pagination-top {
+    margin-bottom: 10px;
+}
+
+.types-ajax #wpwrap {
+    margin-top: 20px;
+}
+.types-small-italic {
+    font-size: 0.9em;
+    font-style: italic;
 }
