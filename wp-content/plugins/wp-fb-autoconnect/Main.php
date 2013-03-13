@@ -2,7 +2,7 @@
 /* Plugin Name: WP-FB-AutoConnect
  * Description: A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible. Supports BuddyPress.
  * Author: Justin Klein
- * Version: 2.5.12
+ * Version: 3.0.1
  * Author URI: http://www.justin-klein.com/
  * Plugin URI: http://www.justin-klein.com/projects/wp-fb-autoconnect
  */
@@ -99,23 +99,23 @@ function jfb_output_facebook_btn()
     else if( $stream_perms )               $scope = 'publish_stream';
     else                                   $scope = '';
     $scope = apply_filters('wpfb_extended_permissions', $scope);
-    
-    //Output the button for the Premium version
-    if(defined('JFB_PREMIUM_VER'))
+
+    //Output the button for the Premium version.  NOTE: This will not work with pre-v30 Premium addons.
+    if(defined('JFB_PREMIUM_VER') && function_exists('jfb_output_facebook_btn_premium_30'))
     {
-        ?><span class="fbLoginButton"><script type="text/javascript">//<!--
-            <?php echo str_replace( "login-button ", "login-button scope=\"" . $scope . "\" ", jfb_output_facebook_btn_premium('')); ?>
-        //--></script></span><?php
+        jfb_output_facebook_btn_premium_30($scope);
     }
     
-    //Output the button for the free version
-    else
+    //Output the button for the free version.  NOTE that I explicitly check that this is the free version, vs an older 
+    //Premium version; it's not safe to allow logins with old Premium versions, as those depend on the PHP API which is no longer present.
+    //(Allowing out-of-date premium addons to login will crash in some circumstances - i.e. with autoregistration restrictions, etc.)
+    else if(!defined('JFB_PREMIUM_VER'))
     {
         ?><span class="fbLoginButton"><script type="text/javascript">//<!--
             document.write('<fb:login-button scope="<?php echo $scope ?>" v="2" size="small" onlogin="<?php echo $jfb_js_callbackfunc ?>();"><?php echo apply_filters('wpfb_button_text', 'Login with Facebook') ?></fb:login-button>');
         //--></script></span><?php
     }
- 
+
     //Run action
     do_action('wpfb_after_button');
 }
@@ -163,7 +163,7 @@ function jfb_output_facebook_init()
     global $jfb_name, $jfb_version, $opt_jfb_app_id, $opt_jfb_api_key, $opt_jfb_valid;
     if( !get_option($opt_jfb_valid) ) return;
     
-    $channelURL = plugins_url(dirname(plugin_basename(__FILE__))) . "/facebook-platform/channel.html";
+    $channelURL = plugins_url(dirname(plugin_basename(__FILE__))) . "/assets/channel.html";
     echo "\n<!-- $jfb_name Init v$jfb_version (NEW API) -->\n";
     ?>
     <div id="fb-root"></div>
