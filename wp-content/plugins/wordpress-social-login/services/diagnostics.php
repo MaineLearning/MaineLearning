@@ -1,18 +1,31 @@
-<?php   
-	if ( isset( $_REQUEST['xhrurl'] ) ) {
-		$testing = @ $_REQUEST['xhrurl'];
-		
-		if ( $testing == "http://www.example.com" ) {
-			echo "<b style='color:green;'>OK!</b><br />The rewrite rules on your server appear to be setup correctly for this plugin to work.";
-		}
-		else{ 
-			echo sprintf( '<b style="color:red;">FAIL!</b><br />Expected "http://www.example.com", received "%s".', $testing );
-		} 
-		
-		die();
-	} 
+<?php
+/*!
+* WordPress Social Login
+*
+* http://hybridauth.sourceforge.net/wsl/index.html | http://github.com/hybridauth/WordPress-Social-Login
+*    (c) 2011-2013 Mohamed Mrassi and contributors | http://wordpress.org/extend/plugins/wordpress-social-login/
+*/
 
-	session_start(); 
+/**
+* WordPress Social Login Requirements Test
+*/
+
+// --------------------------------------------------------------------
+
+if ( isset( $_REQUEST['xhrurl'] ) ) {
+	$testing = @ $_REQUEST['xhrurl'];
+	
+	if ( $testing == "http://www.example.com" ) {
+		echo "<b style='color:green;'>OK!</b><br />The rewrite rules on your server appear to be setup correctly for this plugin to work.";
+	}
+	else{ 
+		echo sprintf( '<b style="color:red;">FAIL!</b><br />Expected "http://www.example.com", received "%s".', $testing );
+	} 
+	
+	die();
+} 
+
+session_start(); 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 <head>

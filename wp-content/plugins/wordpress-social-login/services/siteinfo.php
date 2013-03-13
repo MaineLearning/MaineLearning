@@ -1,21 +1,32 @@
 <?php
-	// Site Info 
-	// borrowed from http://wordpress.org/extend/plugins/easy-digital-downloads/
+/*!
+* WordPress Social Login
+*
+* http://hybridauth.sourceforge.net/wsl/index.html | http://github.com/hybridauth/WordPress-Social-Login
+*    (c) 2011-2013 Mohamed Mrassi and contributors | http://wordpress.org/extend/plugins/wordpress-social-login/
+*/
 
-	// load wp-load.php
-	require_once( dirname( dirname( dirname( dirname( __FILE__ )))) . '/../wp-load.php' ); 
+/**
+* Site Info 
+* borrowed from http://wordpress.org/extend/plugins/easy-digital-downloads/
+*/
 
-	// only logged in users
-	if ( ! is_user_logged_in() ) {
-		wsl_render_notices_pages( 'You do not have sufficient permissions to access this page.' );
-	}
+// --------------------------------------------------------------------
 
-	// only display for admin
-	if ( ! current_user_can('manage_options') ) {
-		wsl_render_notices_pages( 'You do not have sufficient permissions to access this page.' );
-	}
+// load wp-load.php
+require_once( dirname( dirname( dirname( dirname( __FILE__ )))) . '/../wp-load.php' ); 
 
-	session_start();
+// only logged in users
+if ( ! is_user_logged_in() ) {
+	wsl_render_notices_pages( 'You do not have sufficient permissions to access this page.' );
+}
+
+// only display for admin
+if ( ! current_user_can('manage_options') ) {
+	wsl_render_notices_pages( 'You do not have sufficient permissions to access this page.' );
+}
+
+session_start();
 ?>
 <!DOCTYPE html>
 <head>
